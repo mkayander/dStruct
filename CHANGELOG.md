@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/mkayander/leetpal/compare/v1.0.0...v1.0.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* Fixed plugins order in config ([1b1b18b](https://github.com/mkayander/leetpal/commit/1b1b18b2c2ae884246c7af95c9f5fd2f2f14f211))
+
 # 1.0.0 (2022-07-17)
 
 
