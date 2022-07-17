@@ -2,8 +2,12 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
+import { trpc } from '@src/utils/trpc';
+import { Problem } from '@src/components';
 
 const Home: NextPage = () => {
+    const { data: problemsList, refetch } = trpc.useQuery(['problem.all']);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -13,6 +17,13 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
+                <div>
+                    {problemsList?.map((item) => (
+                        <Problem key={item.id} data={item} />
+                    ))}
+                </div>
+                <button onClick={() => refetch()}>Refetch</button>
+
                 <h1 className={styles.title}>
                     Welcome to <a href="https://nextjs.org">Next.js!</a>
                 </h1>
