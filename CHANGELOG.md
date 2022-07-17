@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/mkayander/leetpal/compare/v1.1.0...v1.1.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* Fixed tRPC api link in config ([d51ce3d](https://github.com/mkayander/leetpal/commit/d51ce3d7bf4d62fd6d37d26207010890c939a08a))
+
 # [1.1.0](https://github.com/mkayander/leetpal/compare/v1.0.1...v1.1.0) (2022-07-17)
 
 
