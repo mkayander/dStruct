@@ -9,13 +9,13 @@ module.exports = {
                 changelogFile: 'CHANGELOG.md',
             },
         ],
+        '@semantic-release/npm',
         [
             '@semantic-release/git',
             {
                 assets: ['CHANGELOG.md', 'package.json', 'yarn.lock'],
             },
         ],
-        '@semantic-release/npm',
         '@semantic-release/github',
     ],
 };
