@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/mkayander/leetpal/compare/v1.0.1...v1.1.0) (2022-07-17)
+
+
+### Bug Fixes
+
+* List prisma in dev packages ([d9b9028](https://github.com/mkayander/leetpal/commit/d9b90285572ac5008d6ac443b8b02d30c85ed14e))
+
+
+### Features
+
+* Introduced tRPC ([ee4fbc3](https://github.com/mkayander/leetpal/commit/ee4fbc3340b0326a8bc11dfb988ed31d9d64a05c))
+
 ## [1.0.1](https://github.com/mkayander/leetpal/compare/v1.0.0...v1.0.1) (2022-07-17)
 
 
