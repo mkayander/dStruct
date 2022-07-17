@@ -33,7 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 export default withTRPC<AppRouter>({
     config() {
         return {
-            url: getBaseUrl(),
+            url: `${getBaseUrl()}/api/trpc`,
             /**
              * @link https://trpc.io/docs/links
              */
