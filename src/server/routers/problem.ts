@@ -5,7 +5,7 @@ export const problemRouter = createRouter()
     // read
     .query('all', {
         async resolve({ ctx }) {
-            return await ctx.prisma.problemList.findMany();
+            return await ctx.prisma.problem.findMany();
         },
     })
     // create
@@ -14,7 +14,7 @@ export const problemRouter = createRouter()
             title: z.string(),
         }),
         async resolve({ input, ctx }) {
-            return await ctx.prisma.problemList.create({
+            return await ctx.prisma.problem.create({
                 data: { title: input.title },
             });
         },
@@ -29,7 +29,7 @@ export const problemRouter = createRouter()
         async resolve({ input, ctx }) {
             const { id, ...rest } = input;
 
-            return await ctx.prisma.problemList.update({
+            return await ctx.prisma.problem.update({
                 where: { id },
                 data: { ...rest },
             });
@@ -43,7 +43,7 @@ export const problemRouter = createRouter()
         async resolve({ input, ctx }) {
             const { id } = input;
 
-            return await ctx.prisma.problemList.delete({ where: { id } });
+            return await ctx.prisma.problem.delete({ where: { id } });
         },
     })
     // delete all
@@ -54,7 +54,7 @@ export const problemRouter = createRouter()
         async resolve({ input, ctx }) {
             const { ids } = input;
 
-            return await ctx.prisma.problemList.deleteMany({
+            return await ctx.prisma.problem.deleteMany({
                 where: {
                     id: { in: ids },
                 },

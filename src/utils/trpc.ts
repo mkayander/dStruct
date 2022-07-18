@@ -1,4 +1,5 @@
 import { createReactQueryHooks } from '@trpc/react';
+import { inferProcedureOutput } from '@trpc/server';
 // import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import { NextPageContext } from 'next';
 // ℹ️ Type-only import:
@@ -25,3 +26,7 @@ export interface SSRContext extends NextPageContext {
  * @link https://trpc.io/docs/react#3-create-trpc-hooks
  */
 export const trpc = createReactQueryHooks<AppRouter, SSRContext>();
+
+export type inferQueryResponse<TRouteKey extends keyof AppRouter['_def']['queries']> = inferProcedureOutput<
+    AppRouter['_def']['queries'][TRouteKey]
+>;

@@ -1,31 +1,32 @@
 // /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IncomingMessage } from 'http';
+import ws from 'ws';
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { PrismaClient } from '@prisma/client';
+import { NodeHTTPCreateContextFnOptions } from '@trpc/server/adapters/node-http';
+import { getSession } from 'next-auth/react';
 
-// // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface CreateContextOptions {
-    // session: Session | null
-}
-
-/**
- * Inner function for `createContext` where we create the context.
- * This is useful for testing when we don't want to mock Next.js' request/response
- */
-export async function createContextInner(_opts: CreateContextOptions) {
-    const prisma = new PrismaClient();
-
-    return { prisma };
-}
-
-export type Context = trpc.inferAsyncReturnType<typeof createContextInner>;
+const prisma = new PrismaClient({
+    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+});
 
 /**
  * Creates context for an incoming request
  * @link https://trpc.io/docs/context
  */
-export async function createContext(opts: trpcNext.CreateNextContextOptions): Promise<Context> {
-    // for API-response caching see https://trpc.io/docs/caching
+export const createContext = async ({
+    req,
+    res,
+}: trpcNext.CreateNextContextOptions | NodeHTTPCreateContextFnOptions<IncomingMessage, ws>) => {
+    const session = await getSession({ req });
+    console.log('createContext for', session?.user?.name ?? 'unknown user');
+    return {
+        req,
+        res,
+        prisma,
+        session,
+    };
+};
 
-    return await createContextInner({});
-}
+export type Context = trpc.inferAsyncReturnType<typeof createContext>;

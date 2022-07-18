@@ -15,10 +15,12 @@
         "@trpc/react": "^9.26.1",
         "@trpc/server": "^9.26.1",
         "next": "12.1.6",
+        "next-auth": "^4.10.0",
         "react": "18.1.0",
         "react-dom": "18.1.0",
         "react-query": "^3.39.2",
         "superjson": "^1.9.1",
+        "ws": "^8.8.1",
         "zod": "^3.17.3"
     },
     "devDependencies": {
@@ -27,6 +29,7 @@
         "@types/node": "17.0.41",
         "@types/react": "18.0.12",
         "@types/react-dom": "18.0.5",
+        "@types/ws": "^8.5.3",
         "eslint": "8.17.0",
         "eslint-config-next": "12.1.6",
         "prettier": "^2.6.2",

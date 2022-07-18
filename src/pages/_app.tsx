@@ -4,12 +4,17 @@ import { withTRPC } from '@trpc/next';
 // import { loggerLink } from '@trpc/client/src/links/loggerLink';
 // import { httpBatchLink } from '@trpc/client/src/links/httpBatchLink';
 import superjson from 'superjson';
+import { SessionProvider } from 'next-auth/react';
 import type { AppRouter } from '@src/server/routers/app';
 import { SSRContext } from '@src/utils/trpc';
 import { getBaseUrl } from '@src/utils';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-    return <Component {...pageProps} />;
+    return (
+        <SessionProvider session={pageProps.session}>
+            <Component {...pageProps} />
+        </SessionProvider>
+    );
 };
 
 export default withTRPC<AppRouter>({
