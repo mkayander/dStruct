@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/mkayander/leetpal/compare/v1.1.1...v1.2.0) (2022-07-18)
+
+
+### Features
+
+* Introduced NextAuth ([ddc760a](https://github.com/mkayander/leetpal/commit/ddc760ae919eeee8eb3c074a3b283886d48c01db))
+
 ## [1.1.1](https://github.com/mkayander/leetpal/compare/v1.1.0...v1.1.1) (2022-07-17)
 
 
