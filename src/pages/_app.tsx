@@ -6,25 +6,7 @@ import { withTRPC } from '@trpc/next';
 import superjson from 'superjson';
 import type { AppRouter } from '@src/server/routers/app';
 import { SSRContext } from '@src/utils/trpc';
-
-const getBaseUrl = () => {
-    if (typeof window !== 'undefined') {
-        return '';
-    }
-
-    // reference for vercel.com
-    if (process.env.VERCEL_URL) {
-        return `https://${process.env.VERCEL_URL}`;
-    }
-
-    // // reference for render.com
-    if (process.env.RENDER_INTERNAL_HOSTNAME) {
-        return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}`;
-    }
-
-    // assume localhost
-    return `http://localhost:${process.env.PORT ?? 3000}`;
-};
+import { getBaseUrl } from '@src/utils';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return <Component {...pageProps} />;
