@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/mkayander/leetpal/compare/v1.2.0...v1.3.0) (2022-07-19)
+
+
+### Features
+
+* Introduced Material UI ([e1cf028](https://github.com/mkayander/leetpal/commit/e1cf028ca7364af8c1bd57581b712e75826fa016))
+
 # [1.2.0](https://github.com/mkayander/leetpal/compare/v1.1.1...v1.2.0) (2022-07-18)
 
 
