@@ -2,10 +2,10 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
+    // noinspection HtmlRequiredTitleElement
     return (
         <Html>
             <Head>
-                <title>LeetPal - your pal in learning</title>
                 <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
