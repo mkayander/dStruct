@@ -1,3 +1,18 @@
+# [1.4.0](https://github.com/mkayander/leetpal/compare/v1.3.0...v1.4.0) (2022-08-14)
+
+
+### Bug Fixes
+
+* Move title tag to _app.tsx ([f6785c1](https://github.com/mkayander/leetpal/commit/f6785c1355e9db0a853c8ac0233757dc6fec31ab))
+
+
+### Features
+
+* Added main prisma scripts to package.json ([e4c3169](https://github.com/mkayander/leetpal/commit/e4c31697e43fec3506109534b6edab1eab3a20ca))
+* Added NextAuth api endpoint controller ([c52e44c](https://github.com/mkayander/leetpal/commit/c52e44c169b370193ee308d9f222434f56c5d0c6))
+* Updated Prisma package version ([7f39077](https://github.com/mkayander/leetpal/commit/7f39077847a7a810850a6019726b4390c2ce9adf))
+* Use a more specific DB URL env variable name ([c1f2e8b](https://github.com/mkayander/leetpal/commit/c1f2e8b3bcd83e9e99d97d6c194ebdb6d9072d44))
+
 # [1.3.0](https://github.com/mkayander/leetpal/compare/v1.2.0...v1.3.0) (2022-07-19)
 
 
