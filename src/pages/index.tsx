@@ -23,6 +23,7 @@ const Home: NextPage = () => {
                 <Link href="/" color="secondary">
                     Go to the about page
                 </Link>
+                <Link href="/api-example">Go to the api test page</Link>
                 {problemsList?.map((item) => (
                     <Problem key={item.id} data={item} />
                 ))}
