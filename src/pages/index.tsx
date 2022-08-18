@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { trpc } from '@src/utils/trpc';
-import { Problem } from '@src/components';
+import { Problem, SessionWidget } from '@src/components';
 import { Box, Button, Container, Link, Typography } from '@mui/material';
 
 const Home: NextPage = () => {
@@ -30,6 +30,10 @@ const Home: NextPage = () => {
                 <Button type="button" variant="contained" onClick={() => refetch()}>
                     Refetch
                 </Button>
+                <br />
+
+                <SessionWidget />
+
                 {/*<ProTip />*/}
                 {/*<Copyright />*/}
             </Box>
