@@ -9,14 +9,20 @@ import { SessionProvider } from 'next-auth/react';
 import type { AppRouter } from '@src/server/routers/app';
 import { SSRContext } from '@src/utils/trpc';
 import { getBaseUrl } from '@src/utils';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '@src/theme';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
-        <SessionProvider session={pageProps.session}>
-            <Head>
-                <title>LeetPal - your pal in learning</title>
-            </Head>
-            <Component {...pageProps} />
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
+            <ThemeProvider theme={theme}>
+                <Head>
+                    <title>LeetPal - your pal in learning</title>
+                </Head>
+                <CssBaseline />
+                <Component {...pageProps} />
+            </ThemeProvider>
         </SessionProvider>
     );
 };
