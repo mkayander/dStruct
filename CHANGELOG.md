@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/mkayander/leetpal/compare/v1.4.0...v1.5.0) (2022-08-18)
+
+
+### Features
+
+* Added api tests page ([feb2abf](https://github.com/mkayander/leetpal/commit/feb2abf88da0a70a327e931404541b73b7c510c7))
+* Added MUI theme setup ([44f68f8](https://github.com/mkayander/leetpal/commit/44f68f8550d421ff81de0ba159df623f6ca1c8f2))
+* Added session widget component ([06dafd0](https://github.com/mkayander/leetpal/commit/06dafd08cb0786fd9668db6eb9707afadf52285d))
+
 # [1.4.0](https://github.com/mkayander/leetpal/compare/v1.3.0...v1.4.0) (2022-08-14)
 
 
