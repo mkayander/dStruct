@@ -54,11 +54,11 @@ export const SessionWidget: React.FC<SessionWidgetProps> = () => {
                     <Typography variant="h5" gutterBottom>
                         You are signed in as:
                     </Typography>
-                    {session.user.image && <Image alt="user avatar" src={session.user.image} />}
+                    {session.user.image && <img alt="user avatar" src={session.user.image} />}
                     <Typography variant="body1">
-                        {session.user.name} \n
-                        {session.user.email} \n
-                        {session.user.image} \n
+                        {session.user.name} <br />
+                        {session.user.email} <br />
+                        {session.user.image} <br />
                     </Typography>
                 </>
             )}
