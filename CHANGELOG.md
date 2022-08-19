@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/mkayander/leetpal/compare/v1.5.0...v1.5.1) (2022-08-19)
+
+
+### Bug Fixes
+
+* Fixed session widget display ([a8a4080](https://github.com/mkayander/leetpal/commit/a8a4080a67b188cd5bde2ddfa76864076aa6783a))
+
 # [1.5.0](https://github.com/mkayander/leetpal/compare/v1.4.0...v1.5.0) (2022-08-18)
 
 
