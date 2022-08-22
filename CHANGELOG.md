@@ -1,3 +1,20 @@
+# [1.8.0](https://github.com/mkayander/leetpal/compare/v1.7.0...v1.8.0) (2022-08-22)
+
+
+### Bug Fixes
+
+* Code cleanup ([3a168f9](https://github.com/mkayander/leetpal/commit/3a168f9475cae3498d726fdb5a93f2807438a2b0))
+* Renamed a Problem card component ([47fb6c7](https://github.com/mkayander/leetpal/commit/47fb6c7ff0a56e66ba83e3e45597931ae1ac752e))
+* Specify meta head tags at _app instead of _document ([e3b4a48](https://github.com/mkayander/leetpal/commit/e3b4a48649df1ba92222d25f3998f3bbccb11167))
+
+
+### Features
+
+* Added nextAuth prisma adapter ([6a8c8e4](https://github.com/mkayander/leetpal/commit/6a8c8e42921922c60ef3ec7f00bbed5ba89ac958))
+* Added test protected route for authed users ([8d62786](https://github.com/mkayander/leetpal/commit/8d62786c69f22f69ca5fd15221e7ebc297939b39))
+* Implemented a sign-out button ([829672c](https://github.com/mkayander/leetpal/commit/829672c7e4f29b22be06b6a3ca87a1b594c857d2))
+* Specify user id in the session ([8f79984](https://github.com/mkayander/leetpal/commit/8f799845923f0e4ebc2a0e19ba7c1c6d4d924a74))
+
 # [1.7.0](https://github.com/mkayander/leetpal/compare/v1.6.0...v1.7.0) (2022-08-22)
 
 
