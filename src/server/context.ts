@@ -3,13 +3,9 @@ import { IncomingMessage } from 'http';
 import ws from 'ws';
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
-import { PrismaClient } from '@prisma/client';
 import { NodeHTTPCreateContextFnOptions } from '@trpc/server/adapters/node-http';
 import { getSession } from 'next-auth/react';
-
-const prisma = new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-});
+import prisma from '@src/server/prisma';
 
 /**
  * Creates context for an incoming request
