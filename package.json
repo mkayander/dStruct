@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "next lint",
         "db:generate": "prisma generate",
-        "db:migrate-dev": "prisma migrate dev"
+        "db:migrate-dev": "prisma migrate dev",
+        "db:migrate-status": "prisma migrate status"
     },
     "dependencies": {
         "@emotion/react": "^11.9.3",
