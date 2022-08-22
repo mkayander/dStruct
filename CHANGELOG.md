@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/mkayander/leetpal/compare/v1.5.1...v1.6.0) (2022-08-22)
+
+
+### Features
+
+* Added account model to prisma ([5b0d2d3](https://github.com/mkayander/leetpal/commit/5b0d2d3478f27fd1495b7a7ff416b71d0e957a5e))
+* Added migration status command ([8b1b472](https://github.com/mkayander/leetpal/commit/8b1b472372f41c843f8b40693f92b7c051f292f4))
+* Updated prisma client version ([490dc51](https://github.com/mkayander/leetpal/commit/490dc5109204feae2a41d2ed16808a52344b800d))
+
 ## [1.5.1](https://github.com/mkayander/leetpal/compare/v1.5.0...v1.5.1) (2022-08-19)
 
 
