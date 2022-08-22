@@ -14,7 +14,7 @@
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@mui/material": "^5.9.1",
-        "@prisma/client": "4.0.0",
+        "@prisma/client": "^4.2.1",
         "@trpc/client": "^9.26.1",
         "@trpc/next": "^9.26.1",
         "@trpc/react": "^9.26.1",
