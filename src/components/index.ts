@@ -1,2 +1,2 @@
-export { Problem } from './Problem';
+export { ProblemCard } from './Problem';
 export { SessionWidget } from './SessionWidget';

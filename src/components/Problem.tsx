@@ -1,11 +1,11 @@
 import React from 'react';
-import { ProblemList } from '@prisma/client';
+import { Problem } from '@prisma/client';
 
 export type ProblemProps = {
-    data: ProblemList;
+    data: Problem;
 };
 
-export const Problem: React.FC<ProblemProps> = ({ data }) => {
+export const ProblemCard: React.FC<ProblemProps> = ({ data }) => {
     return (
         <div>
             <h4>Problem</h4>
