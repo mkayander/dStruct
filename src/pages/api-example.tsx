@@ -1,6 +1,9 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
+import { trpc } from '@src/utils';
 
 export default function ApiExamplePage() {
+    const avatar = trpc.useQuery(['avatar']);
+
     return (
         <Container>
             <Box
@@ -23,6 +26,11 @@ export default function ApiExamplePage() {
                 <h2>Hello World</h2>
                 <p>/api/examples/hello</p>
                 <iframe src="/api/examples/hello" />
+
+                <h2>Protected Avatar</h2>
+                <p>TRPC</p>
+                {avatar.isError && JSON.stringify(avatar.error, null, 2)}
+                {!avatar.isLoading ? avatar.data : <CircularProgress variant="indeterminate" />}
             </Box>
         </Container>
     );

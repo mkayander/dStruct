@@ -5,6 +5,7 @@ import { createRouter } from '../createRouter';
 import superjson from 'superjson';
 import { problemRouter } from '@src/server/routers/problem';
 import { userRouter } from '@src/server/routers/user';
+import * as trpc from '@trpc/server';
 
 /**
  * Application's root router
@@ -18,11 +19,13 @@ export const appRouter = createRouter()
      * @link https://trpc.io/docs/data-transformers
      */
     .transformer(superjson)
+
     /**
      * Optionally do custom error (type safe!) formatting
      * @link https://trpc.io/docs/error-formatting
      */
     // .formatError(({ shape, error }) => { })
+
     /**
      * Add a health check endpoint to be called with `/api/trpc/healthz`
      */
@@ -31,10 +34,34 @@ export const appRouter = createRouter()
             return 'yay!';
         },
     })
+
     /**
      * Merge sub routers
      */
     .merge('user.', userRouter)
-    .merge('problem.', problemRouter);
+    .merge('problem.', problemRouter)
+
+    /**
+     * Make all route below this middleware auth-only
+     */
+    .middleware(({ ctx, next }) => {
+        if (!ctx.session) {
+            throw new trpc.TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        return next({
+            ctx: {
+                ...ctx,
+                // infers that `session` is non-nullable to downstream resolvers
+                session: ctx.session,
+            },
+        });
+    })
+
+    .query('avatar', {
+        async resolve({ ctx }) {
+            const user = await ctx.prisma.user.findUniqueOrThrow({ where: { id: ctx.session.user.id } });
+            return user.image;
+        },
+    });
 
 export type AppRouter = typeof appRouter;
