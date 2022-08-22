@@ -58,6 +58,10 @@ export const authOptions: NextAuthOptions = {
         colorScheme: 'dark',
     },
     callbacks: {
+        async session({ session, user }) {
+            session.user.id = user.id;
+            return session;
+        },
         async jwt({ token }) {
             token.userRole = 'admin';
             return token;
