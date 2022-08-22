@@ -19,6 +19,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <ThemeProvider theme={theme}>
                 <Head>
                     <title>LeetPal - your pal in learning</title>
+                    {/* PWA primary color */}
+                    <meta name="theme-color" content={theme.palette.primary.main} />
+                    <meta name="viewport" content="initial-scale=1, width=device-width" />
                 </Head>
                 <CssBaseline />
                 <Component {...pageProps} />
