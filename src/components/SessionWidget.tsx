@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 interface SessionWidgetProps {}
@@ -21,6 +21,11 @@ export const SessionWidget: React.FC<SessionWidgetProps> = () => {
         e.preventDefault();
         await signIn();
         console.log('Sign in function finished');
+    };
+
+    const handleSignOut: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        await signOut();
     };
 
     return (
@@ -60,6 +65,15 @@ export const SessionWidget: React.FC<SessionWidgetProps> = () => {
                         {session.user.email} <br />
                         {session.user.image} <br />
                     </Typography>
+                    <Button
+                        type="button"
+                        color="error"
+                        variant="outlined"
+                        href="/api/auth/signOut"
+                        onClick={handleSignOut}
+                    >
+                        Sign Out
+                    </Button>
                 </>
             )}
         </Box>
