@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/mkayander/leetpal/compare/v1.6.0...v1.7.0) (2022-08-22)
+
+
+### Features
+
+* Added .env example file with a list of required variables ([fb555e6](https://github.com/mkayander/leetpal/commit/fb555e6c39b49750826ddad1c0f89feeddbb01bb))
+
 # [1.6.0](https://github.com/mkayander/leetpal/compare/v1.5.1...v1.6.0) (2022-08-22)
 
 
