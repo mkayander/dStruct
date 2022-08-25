@@ -1,3 +1,12 @@
+# [1.9.0](https://github.com/mkayander/leetpal/compare/v1.8.0...v1.9.0) (2022-08-25)
+
+
+### Features
+
+* Added Google, Email, and a test Credentials provider ([9fe9884](https://github.com/mkayander/leetpal/commit/9fe988449f5b4dab090c482ee20d7b79bfd9a414))
+* Installed nodemailer ([a73a626](https://github.com/mkayander/leetpal/commit/a73a6268eb9a407770f3b4b811539362b7aab663))
+* Updated env variables template ([6b690fe](https://github.com/mkayander/leetpal/commit/6b690fed4b3791e5c02120b09154b8e0c5852489))
+
 # [1.8.0](https://github.com/mkayander/leetpal/compare/v1.7.0...v1.8.0) (2022-08-22)
 
 
