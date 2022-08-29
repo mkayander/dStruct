@@ -1,10 +1,23 @@
+import React, { ChangeEventHandler, useState } from 'react';
 import type { NextPage } from 'next';
 import { trpc } from '@src/utils/trpc';
-import { Problem, SessionWidget } from '@src/components';
-import { Box, Button, Container, Link, Typography } from '@mui/material';
+import { ProblemCard, SessionWidget } from '@src/components';
+import { Box, Button, CircularProgress, Container, Link, TextField, Typography } from '@mui/material';
+import { useUserProfile } from '@src/graphql/queries';
 
 const Home: NextPage = () => {
     const { data: problemsList, refetch } = trpc.useQuery(['problem.all']);
+
+    const [username, setUsername] = useState<string>('');
+
+    const handleUsernameChange: ChangeEventHandler<HTMLInputElement> = (e) => setUsername(e.target.value);
+
+    const { isFetching, data: userProfile, isError, refetch: refetchUserProfile } = useUserProfile(username);
+
+    const handleLaunchQuery = async () => {
+        const result = await refetchUserProfile();
+        console.log(result.data);
+    };
 
     return (
         <Container>
@@ -25,7 +38,7 @@ const Home: NextPage = () => {
                 </Link>
                 <Link href="/api-example">Go to the api test page</Link>
                 {problemsList?.map((item) => (
-                    <Problem key={item.id} data={item} />
+                    <ProblemCard key={item.id} data={item} />
                 ))}
                 <Button type="button" variant="contained" onClick={() => refetch()}>
                     Refetch
@@ -36,6 +49,18 @@ const Home: NextPage = () => {
 
                 {/*<ProTip />*/}
                 {/*<Copyright />*/}
+
+                <br />
+
+                <TextField variant="outlined" label="Username" onChange={handleUsernameChange} error={isError} />
+                <Button onClick={handleLaunchQuery}>Launch query</Button>
+                {isFetching ? (
+                    <CircularProgress />
+                ) : (
+                    <Typography>
+                        <pre>{JSON.stringify(userProfile, null, 4)}</pre>
+                    </Typography>
+                )}
             </Box>
         </Container>
     );
