@@ -1,3 +1,14 @@
+# [1.10.0](https://github.com/mkayander/leetpal/compare/v1.9.0...v1.10.0) (2022-08-29)
+
+
+### Features
+
+* Added getUserProfile graphql api query ([2b34b38](https://github.com/mkayander/leetpal/commit/2b34b385353fa27f60300785645ed71e0fbab2fd))
+* Added graphql api proxy endpoint ([f372a42](https://github.com/mkayander/leetpal/commit/f372a42904db0cafbac7b6f85813ed3bcc49dc3b))
+* Added react-query provider ([1abe2f3](https://github.com/mkayander/leetpal/commit/1abe2f3a4947410e9f8100709b8027521fd96891))
+* Added test graphql request usage ([c9c03b1](https://github.com/mkayander/leetpal/commit/c9c03b1dc725e6d3f92b91fc74b74a7b55097294))
+* Installed graphql-request, axios and react-query ([f6fc7a1](https://github.com/mkayander/leetpal/commit/f6fc7a166d4f5a02323aa1909bda75e29d647764))
+
 # [1.9.0](https://github.com/mkayander/leetpal/compare/v1.8.0...v1.9.0) (2022-08-25)
 
 
