@@ -57,9 +57,9 @@ const Home: NextPage = () => {
                 {isFetching ? (
                     <CircularProgress />
                 ) : (
-                    <Typography>
-                        <pre>{JSON.stringify(userProfile, null, 4)}</pre>
-                    </Typography>
+                    <div>
+                        <pre>{JSON.stringify(error || userProfile, null, 4)}</pre>
+                    </div>
                 )}
             </Box>
         </Container>
