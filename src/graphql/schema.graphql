@@ -1,0 +1,44 @@
+enum Difficulty {
+    All,
+    Easy,
+    Medium,
+    Hard
+}
+
+interface Stats {
+    difficulty: Difficulty!
+    count: Int!
+}
+
+type QuestionCount implements Stats {
+    difficulty: Difficulty!
+    count: Int!
+}
+
+type SubmissionNum implements Stats {
+    difficulty: Difficulty!
+    count: Int!
+    submissions: Int!
+}
+
+type SubmitStats {
+    acSubmissionNum: SubmissionNum!
+    totalSubmissionNum: SubmissionNum!
+}
+
+type Profile {
+    ranking: Int
+    reputation: Int
+    starRating: Int
+    userAvatar: String
+}
+
+type User {
+    profile: Profile!
+    submitStats: SubmitStats!
+}
+
+type Query {
+    allQuestionsCount: [QuestionCount]
+    matchedUser(username: String): User!
+}
