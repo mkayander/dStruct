@@ -12,11 +12,11 @@ const Home: NextPage = () => {
 
     const handleUsernameChange: ChangeEventHandler<HTMLInputElement> = (e) => setUsername(e.target.value);
 
-    const { isFetching, data: userProfile, isError, refetch: refetchUserProfile } = useUserProfile(username);
+    const { isFetching, data: userProfile, isError, error, refetch: refetchUserProfile } = useUserProfile(username);
 
     const handleLaunchQuery = async () => {
         const result = await refetchUserProfile();
-        console.log(result.data);
+        console.log(result);
     };
 
     return (
