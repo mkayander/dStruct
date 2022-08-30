@@ -59,7 +59,9 @@ export const SessionWidget: React.FC<SessionWidgetProps> = () => {
                     <Typography variant="h5" gutterBottom>
                         You are signed in as:
                     </Typography>
-                    {session.user.image && <img alt="user avatar" src={session.user.image} />}
+                    {session.user.image && (
+                        <img alt="user avatar" referrerPolicy="no-referrer" src={session.user.image} />
+                    )}
                     <Typography variant="body1">
                         {session.user.name} <br />
                         {session.user.email} <br />
