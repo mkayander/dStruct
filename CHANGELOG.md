@@ -1,3 +1,17 @@
+# [1.11.0](https://github.com/mkayander/leetpal/compare/v1.10.0...v1.11.0) (2022-08-30)
+
+
+### Bug Fixes
+
+* Display and log error request ([be89dac](https://github.com/mkayander/leetpal/commit/be89daca59e02956ecb1eea19aee177da393a850))
+* Fixed Google user image display ([920e502](https://github.com/mkayander/leetpal/commit/920e5026b86ba88d80909883ce09927a29e653cd))
+* Fixed wrong parent tag error ([a06771f](https://github.com/mkayander/leetpal/commit/a06771fb803c3e2663afa605be00e7d5c55a6634))
+
+
+### Features
+
+* Initial reverse-engineered GraphQL schema ([da30c6b](https://github.com/mkayander/leetpal/commit/da30c6b644c1841c1995d858ab626473993c37e4))
+
 # [1.10.0](https://github.com/mkayander/leetpal/compare/v1.9.0...v1.10.0) (2022-08-29)
 
 
