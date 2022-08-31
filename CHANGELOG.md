@@ -1,3 +1,19 @@
+# [1.12.0](https://github.com/mkayander/leetpal/compare/v1.11.0...v1.12.0) (2022-08-31)
+
+
+### Bug Fixes
+
+* Removed unused import ([8c17de2](https://github.com/mkayander/leetpal/commit/8c17de22d790ae2a3f47f68e96c07ab9cc23afb1))
+
+
+### Features
+
+* Added Apollo client and provider ([9c8de8e](https://github.com/mkayander/leetpal/commit/9c8de8e3ea8c8571a09a2d3c1c568b8d75d872df))
+* Added Apollo client usage ([7e28e7f](https://github.com/mkayander/leetpal/commit/7e28e7f6fdc16aa70bc2abb61e5db9a8f33dd91a))
+* Added codegen config ([d5b28d9](https://github.com/mkayander/leetpal/commit/d5b28d9df8afcbf907b2596c23fe12fc987cac95))
+* Installed Apollo client and GraphQL codegen packages ([28d1198](https://github.com/mkayander/leetpal/commit/28d11985994590ccbd906417055e16a0017f6df0))
+* Updated GraphQL source schema. Added query operation ([c4a8f1b](https://github.com/mkayander/leetpal/commit/c4a8f1bc3f60c623b248fb20a8392a88b2c35a7d))
+
 # [1.11.0](https://github.com/mkayander/leetpal/compare/v1.10.0...v1.11.0) (2022-08-30)
 
 
