@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-title-in-document-head */
 import { Html, Head, Main, NextScript } from 'next/document';
-import theme from '@src/theme';
 
 export default function Document() {
     // noinspection HtmlRequiredTitleElement
