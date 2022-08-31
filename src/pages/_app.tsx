@@ -7,30 +7,34 @@ import { withTRPC } from '@trpc/next';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ApolloProvider } from '@apollo/client';
 import type { AppRouter } from '@src/server/routers/app';
 import { SSRContext } from '@src/utils/trpc';
 import { getBaseUrl } from '@src/utils';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '@src/theme';
 import CssBaseline from '@mui/material/CssBaseline';
+import { client } from '@src/graphql/client';
 
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <SessionProvider session={pageProps.session} refetchInterval={0}>
-            <QueryClientProvider client={queryClient}>
-                <ThemeProvider theme={theme}>
-                    <Head>
-                        <title>LeetPal - your pal in learning</title>
-                        {/* PWA primary color */}
-                        <meta name="theme-color" content={theme.palette.primary.main} />
-                        <meta name="viewport" content="initial-scale=1, width=device-width" />
-                    </Head>
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </QueryClientProvider>
+            <ApolloProvider client={client}>
+                <QueryClientProvider client={queryClient}>
+                    <ThemeProvider theme={theme}>
+                        <Head>
+                            <title>LeetPal - your pal in learning</title>
+                            {/* PWA primary color */}
+                            <meta name="theme-color" content={theme.palette.primary.main} />
+                            <meta name="viewport" content="initial-scale=1, width=device-width" />
+                        </Head>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </QueryClientProvider>
+            </ApolloProvider>
         </SessionProvider>
     );
 };
