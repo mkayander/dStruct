@@ -3,6 +3,9 @@
 # sensitive env variables
 .env
 
+# generated from GraphQL schema
+/src/graphql/generated
+
 # dependencies
 /node_modules
 /.pnp
