@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { trpc } from '@src/utils/trpc';
 import { ProblemCard, SessionWidget } from '@src/components';
 import { Box, Button, CircularProgress, Container, Link, TextField, Typography } from '@mui/material';
-import { useUserProfile } from '@src/graphql/queries';
+import { useGetUserProfileLazyQuery } from '@src/graphql/generated';
 
 const Home: NextPage = () => {
     const { data: problemsList, refetch } = trpc.useQuery(['problem.all']);
@@ -12,10 +12,10 @@ const Home: NextPage = () => {
 
     const handleUsernameChange: ChangeEventHandler<HTMLInputElement> = (e) => setUsername(e.target.value);
 
-    const { isFetching, data: userProfile, isError, error, refetch: refetchUserProfile } = useUserProfile(username);
+    const [fetchUserProfile, { data: userProfile, loading, error }] = useGetUserProfileLazyQuery();
 
     const handleLaunchQuery = async () => {
-        const result = await refetchUserProfile();
+        const result = await fetchUserProfile({ variables: { username } });
         console.log(result);
     };
 
@@ -52,9 +52,9 @@ const Home: NextPage = () => {
 
                 <br />
 
-                <TextField variant="outlined" label="Username" onChange={handleUsernameChange} error={isError} />
+                <TextField variant="outlined" label="Username" onChange={handleUsernameChange} error={Boolean(error)} />
                 <Button onClick={handleLaunchQuery}>Launch query</Button>
-                {isFetching ? (
+                {loading ? (
                     <CircularProgress />
                 ) : (
                     <div>
