@@ -1,3 +1,17 @@
+# [1.13.0](https://github.com/mkayander/leetpal/compare/v1.12.0...v1.13.0) (2022-09-04)
+
+
+### Features
+
+* Added dashboard page stub ([449aa9d](https://github.com/mkayander/leetpal/commit/449aa9ddf2797bc84bb3327e36e99808bd7c4037))
+* Added leetcode user model schema ([b5848a9](https://github.com/mkayander/leetpal/commit/b5848a96162bbf80a560b557435bc8c9ed215901))
+* Added Main layout usage ([cd78ced](https://github.com/mkayander/leetpal/commit/cd78ced462bc9728043778ba3750f58fd3d2a8ec))
+* Added TRPc handler for the leetcode model ([0a9f51b](https://github.com/mkayander/leetpal/commit/0a9f51b8c3f076703cb04aa8cb3fa228170687d9))
+* Implemented a common main layout component ([502de06](https://github.com/mkayander/leetpal/commit/502de065f5edeea4e92fa8ae5dd53f8d2861b2b2))
+* Implemented an AppBar and footer components ([fd79314](https://github.com/mkayander/leetpal/commit/fd79314dbe7dbc4e85f3530c375198b1de90d726))
+* Installed Material icons package ([b490bd5](https://github.com/mkayander/leetpal/commit/b490bd5ce2d50d38951893db2e976fccabf3d44f))
+* Installed Prettier Prisma plugin package ([276069b](https://github.com/mkayander/leetpal/commit/276069b58904d519cfa3d20314d4cebc13653571))
+
 # [1.12.0](https://github.com/mkayander/leetpal/compare/v1.11.0...v1.12.0) (2022-08-31)
 
 
