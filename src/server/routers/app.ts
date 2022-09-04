@@ -5,6 +5,7 @@ import { createRouter } from '../createRouter';
 import superjson from 'superjson';
 import { problemRouter } from '@src/server/routers/problem';
 import { userRouter } from '@src/server/routers/user';
+import { leetcodeRouter } from '@src/server/routers/leetcode';
 import * as trpc from '@trpc/server';
 
 /**
@@ -62,6 +63,8 @@ export const appRouter = createRouter()
             const user = await ctx.prisma.user.findUniqueOrThrow({ where: { id: ctx.session.user.id } });
             return user.image;
         },
-    });
+    })
+
+    .merge('leetcode.', leetcodeRouter);
 
 export type AppRouter = typeof appRouter;
