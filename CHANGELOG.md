@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/mkayander/leetpal/compare/v1.13.0...v1.14.0) (2022-09-05)
+
+
+### Features
+
+* Introduced AWS S3 file upload test ([3cfbe73](https://github.com/mkayander/leetpal/commit/3cfbe7315a49d09ab510def6deaff0bdd71ed8b9))
+
 # [1.13.0](https://github.com/mkayander/leetpal/compare/v1.12.0...v1.13.0) (2022-09-04)
 
 
