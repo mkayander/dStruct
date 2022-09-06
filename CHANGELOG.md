@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/mkayander/leetpal/compare/v1.14.0...v1.15.0) (2022-09-06)
+
+
+### Features
+
+* Added bucket image field for user ([2ea8977](https://github.com/mkayander/leetpal/commit/2ea897786aa7f94473d482c7c489dd6d7ccd4b6e))
+
 # [1.14.0](https://github.com/mkayander/leetpal/compare/v1.13.0...v1.14.0) (2022-09-05)
 
 
