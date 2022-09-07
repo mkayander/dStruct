@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent } from 'react';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import {
     AppBar,
@@ -13,11 +13,15 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Link as MUILink,
     Button,
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useProfileImageUploader } from '@src/hooks';
+import { getImageUrl } from '@src/utils';
+import Image from 'next/image';
+
+const AVATAR_PLACEHOLDER = '/avatars/placeholder.png';
 
 type NavItem = {
     name: string;
@@ -48,6 +52,12 @@ export const MainAppBar: React.FC = () => {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const session = useSession();
+
+    useProfileImageUploader(session);
+
+    const handleSignIn = async () => {
+        await signIn();
+    };
 
     const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -130,24 +140,26 @@ export const MainAppBar: React.FC = () => {
                         </Menu>
                     </Box>
                     <CodeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LeetPal
-                    </Typography>
+                    <Link href="/">
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            LeetPal
+                        </Typography>
+                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -161,15 +173,25 @@ export const MainAppBar: React.FC = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    imgProps={{ referrerPolicy: 'no-referrer' }}
-                                    src={session.data?.user?.image}
-                                />
-                            </IconButton>
-                        </Tooltip>
+                        {session.data ? (
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar>
+                                        <Image
+                                            src={getImageUrl(session.data.user.bucketImage || AVATAR_PLACEHOLDER)}
+                                            alt={`${session.data.user.name} avatar`}
+                                            referrerPolicy="no-referrer"
+                                            layout="fill"
+                                        />
+                                    </Avatar>
+                                </IconButton>
+                            </Tooltip>
+                        ) : (
+                            <Button color="inherit" onClick={handleSignIn}>
+                                Sign In
+                            </Button>
+                        )}
+
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
