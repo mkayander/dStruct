@@ -1,9 +1,15 @@
+import React from 'react';
+import { MainLayout } from '@src/layouts';
+import { Container } from '@mui/material';
+
 export default function Upload() {
     return (
-        <>
-            <p>Upload a .png or .jpg image (max 1MB).</p>
-            <input onChange={uploadPhoto} type="file" accept="image/png, image/jpeg" />
-        </>
+        <MainLayout>
+            <Container>
+                <p>Upload a .png or .jpg image (max 1MB).</p>
+                <input onChange={uploadPhoto} type="file" accept="image/png, image/jpeg" />
+            </Container>
+        </MainLayout>
     );
 }
 
