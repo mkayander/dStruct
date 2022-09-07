@@ -17,4 +17,17 @@ export const userRouter = createRouter()
                 where: { id },
             });
         },
+    })
+    .mutation('setBucketImage', {
+        input: z.object({
+            imageName: z.string(),
+        }),
+        async resolve({ input: { imageName }, ctx }) {
+            return ctx.prisma.user.update({
+                where: { id: ctx.session?.user.id },
+                data: {
+                    bucketImage: imageName,
+                },
+            });
+        },
     });
