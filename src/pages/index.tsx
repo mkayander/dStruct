@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { trpc } from '@src/utils/trpc';
 import { Box, Button, CircularProgress, Container, Link, TextField, Typography } from '@mui/material';
 import { useGetUserProfileLazyQuery } from '@src/graphql/generated';
-import { ProblemCard, SessionWidget } from '@src/components';
+import { ProblemCard } from '@src/components';
 import { MainLayout } from '@src/layouts';
 
 const Home: NextPage = () => {
@@ -46,8 +46,6 @@ const Home: NextPage = () => {
                         Refetch
                     </Button>
                     <br />
-
-                    <SessionWidget />
 
                     {/*<ProTip />*/}
                     {/*<Copyright />*/}
