@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async session({ session, user }) {
-            session.user.id = user.id;
+            Object.assign(session.user, user);
             return session;
         },
         async jwt({ token }) {
