@@ -1,3 +1,25 @@
+# [1.16.0](https://github.com/mkayander/leetpal/compare/v1.15.0...v1.16.0) (2022-09-07)
+
+
+### Bug Fixes
+
+* Removed unused import. ([7c758a3](https://github.com/mkayander/leetpal/commit/7c758a35d3fa7e04ab52e29fe1cb20cc6f33f1fb))
+
+
+### Features
+
+* Added basic global context stub. ([f3c2134](https://github.com/mkayander/leetpal/commit/f3c213491be8533deadf75618ec1be611a04fabc))
+* Added bucket base url env variable ([3a3135c](https://github.com/mkayander/leetpal/commit/3a3135cfe9b2c8463731bbb2ad485483cb37211c))
+* Added getImageUrl util function to get an absolute image url from S3. ([13a32da](https://github.com/mkayander/leetpal/commit/13a32da85cc805bb8abd6f224dc5c01103ae0d6d))
+* Added hook for uploading user's avatar image to a S3 bucket. ([968790c](https://github.com/mkayander/leetpal/commit/968790cadc83f235fd5859035742f5f9d9f6f11e))
+* Added setBucketImage mutation operation to user sub router. ([9017219](https://github.com/mkayander/leetpal/commit/90172196752a3b66662cacafa93e9ac953d2af44))
+* Implement public runtime config type safety. ([9d94f12](https://github.com/mkayander/leetpal/commit/9d94f122513698ccaaf8e214db55d7a96b65e002))
+* Improved navBar. Added S3 images usage. ([0d16514](https://github.com/mkayander/leetpal/commit/0d16514e29c2a4aa931838dcb53f32c7058ac370))
+* Provide all user properties to a session instance. ([c390899](https://github.com/mkayander/leetpal/commit/c39089955f66f8df296bbd5bd4604c2acfc7cff0))
+* Provide bucket base url to public runtime config. ([779075a](https://github.com/mkayander/leetpal/commit/779075aed18097c5f511179caf4b229eba0df924))
+* Removed Session widget. ([b63418d](https://github.com/mkayander/leetpal/commit/b63418d061f97c2c2e57a2f573c55575b25c3002))
+* Use main layout. ([df3242a](https://github.com/mkayander/leetpal/commit/df3242a3cb2993979ea2721839129ca41f47e1ae))
+
 # [1.15.0](https://github.com/mkayander/leetpal/compare/v1.14.0...v1.15.0) (2022-09-06)
 
 
