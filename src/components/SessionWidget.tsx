@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
 
 interface SessionWidgetProps {}
 
