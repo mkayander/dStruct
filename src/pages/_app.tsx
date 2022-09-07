@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import '../../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -15,27 +16,33 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '@src/theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { client } from '@src/graphql/client';
+import { GlobalContext } from '@src/context';
+import { GlobalContextType } from '@src/context/GlobalContext';
 
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+    const globalContext = useMemo<GlobalContextType>(() => ({}), []);
+
     return (
-        <SessionProvider session={pageProps.session} refetchInterval={0}>
-            <ApolloProvider client={client}>
-                <QueryClientProvider client={queryClient}>
-                    <ThemeProvider theme={theme}>
-                        <Head>
-                            <title>LeetPal - your pal in learning</title>
-                            {/* PWA primary color */}
-                            <meta name="theme-color" content={theme.palette.primary.main} />
-                            <meta name="viewport" content="initial-scale=1, width=device-width" />
-                        </Head>
-                        <CssBaseline />
-                        <Component {...pageProps} />
-                    </ThemeProvider>
-                </QueryClientProvider>
-            </ApolloProvider>
-        </SessionProvider>
+        <GlobalContext.Provider value={globalContext}>
+            <SessionProvider session={pageProps.session} refetchInterval={0}>
+                <ApolloProvider client={client}>
+                    <QueryClientProvider client={queryClient}>
+                        <ThemeProvider theme={theme}>
+                            <Head>
+                                <title>LeetPal - your pal in learning</title>
+                                {/* PWA primary color */}
+                                <meta name="theme-color" content={theme.palette.primary.main} />
+                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                            </Head>
+                            <CssBaseline />
+                            <Component {...pageProps} />
+                        </ThemeProvider>
+                    </QueryClientProvider>
+                </ApolloProvider>
+            </SessionProvider>
+        </GlobalContext.Provider>
     );
 };
 
