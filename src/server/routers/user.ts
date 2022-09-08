@@ -10,7 +10,7 @@ export const userRouter = createRouter()
     })
     .query('getById', {
         input: z.object({
-            id: z.string(),
+            id: z.ostring(),
         }),
         async resolve({ input: { id }, ctx }) {
             return ctx.prisma.user.findFirstOrThrow({
