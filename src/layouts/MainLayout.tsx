@@ -1,16 +1,17 @@
 import React from 'react';
 import { Footer, MainAppBar } from '@src/components';
-import { Box } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 
 interface MainLayoutProps {
     children: React.ReactNode;
+    isLoading?: boolean;
 }
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout: React.FC<MainLayoutProps> = ({ children, isLoading }) => {
     return (
         <Box sx={{ minHeight: '100vh' }}>
             <MainAppBar />
-            <Box sx={{ minHeight: '85vh' }}>{children}</Box>
+            <Box sx={{ minHeight: '85vh' }}>{isLoading ? <LinearProgress variant="indeterminate" /> : children}</Box>
             <Footer />
         </Box>
     );
