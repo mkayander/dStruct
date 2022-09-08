@@ -8,10 +8,15 @@ export const leetcodeRouter = createRouter().mutation('linkUser', {
     }),
     async resolve({ input, ctx }) {
         const { username, userAvatar } = input;
-        return await ctx.prisma.leetCodeUser.create({
+        return await ctx.prisma.user.update({
+            where: { id: ctx.session?.user.id },
             data: {
-                username,
-                userAvatar,
+                leetCode: {
+                    create: {
+                        username,
+                        userAvatar,
+                    },
+                },
             },
         });
     },
