@@ -1,3 +1,17 @@
+# [1.17.0](https://github.com/mkayander/leetpal/compare/v1.16.0...v1.17.0) (2022-09-08)
+
+
+### Bug Fixes
+
+* Fixed account link-up logic ([4a78cbb](https://github.com/mkayander/leetpal/commit/4a78cbb09dc9e94c1c7cd73fce72088ac121da76))
+* Make input id optional ([7a38bda](https://github.com/mkayander/leetpal/commit/7a38bdaeef22028da4959452bacf4b4c19a72db1))
+
+
+### Features
+
+* Added loading state feature for the main layout ([8c58311](https://github.com/mkayander/leetpal/commit/8c5831130be5ffe0c9296a9fd07c8c6b53330301))
+* Implemented basic dashboard page with the ability to link the leetcode account ([14047b3](https://github.com/mkayander/leetpal/commit/14047b30e8191344f5419aeb1ab27e43b551e03d))
+
 # [1.16.0](https://github.com/mkayander/leetpal/compare/v1.15.0...v1.16.0) (2022-09-07)
 
 
