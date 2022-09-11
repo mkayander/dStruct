@@ -16,14 +16,17 @@ const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
 export const useProfileImageUploader = (session: SessionHook) => {
     const bucketImage = session.data?.user.bucketImage;
     const [status, setStatus] = useState<Status>(bucketImage ? 'done' : 'loading');
+    const [isLoading, setIsLoading] = useState(false);
 
     const mutation = trpc.useMutation(['user.setBucketImage']);
 
     useEffect(() => {
-        if (status === 'done') return;
+        if (status === 'done' || bucketImage || isLoading) return;
 
         (async () => {
             if (!session.data || !session.data.user.image) return;
+
+            setIsLoading(true);
 
             const { data: imageBlob } = await axios.get<Blob>(session.data.user.image, { responseType: 'blob' });
             const filename = getAvatarFileName(
@@ -51,8 +54,9 @@ export const useProfileImageUploader = (session: SessionHook) => {
             mutation.mutate({ imageName: filename });
 
             setStatus('done');
+            setIsLoading(false);
         })();
-    }, [session.data]);
+    }, [isLoading, session.data]);
 
     return status;
 };
