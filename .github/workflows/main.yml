@@ -26,4 +26,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run Semantic Release
-        run: pnpx run semantic-release
+        run: pnpm run semantic-release
