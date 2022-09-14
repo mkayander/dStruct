@@ -1,3 +1,17 @@
+# [1.19.0](https://github.com/mkayander/leetpal/compare/v1.18.0...v1.19.0) (2022-09-14)
+
+
+### Bug Fixes
+
+* Fixed syntax at main.yml ([6af6814](https://github.com/mkayander/leetpal/commit/6af6814be49314d1c74dd689ecd6eb06a8768a28))
+* Use "pnpx" command for semantic-release ([74b0e7d](https://github.com/mkayander/leetpal/commit/74b0e7d796c8808c569791c7abfc8f1d8cb9e0fd))
+
+
+### Features
+
+* Switched to using PNPM instead of Yarn ([41534ca](https://github.com/mkayander/leetpal/commit/41534cac2358c45bc044ea898e416bb43497233c))
+* Use package.json script for running semantic-release ([c581377](https://github.com/mkayander/leetpal/commit/c581377511a8f16634b5525467cb1e82364a4342))
+
 # [1.18.0](https://github.com/mkayander/leetpal/compare/v1.17.0...v1.18.0) (2022-09-11)
 
 
