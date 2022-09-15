@@ -1,3 +1,12 @@
+## [1.19.1](https://github.com/mkayander/leetpal/compare/v1.19.0...v1.19.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* Invalidate queries before trying to refetch to get consistent data updates ([2b5000f](https://github.com/mkayander/leetpal/commit/2b5000f8dd057dc18061868cd4e4e76bdce19516))
+* Use "SetNull" for the leetCodeUser onDelete action ([ba7288e](https://github.com/mkayander/leetpal/commit/ba7288e6ac06218526becb402e2069910347b690))
+* Use only one id string as input ([a71c045](https://github.com/mkayander/leetpal/commit/a71c045f649798a9decc1f395c6e6ae0f69f274e))
+
 # [1.19.0](https://github.com/mkayander/leetpal/compare/v1.18.0...v1.19.0) (2022-09-14)
 
 
