@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { trpc } from '@src/utils';
 import { MainLayout } from '@src/layouts';
 import { useSession } from 'next-auth/react';
@@ -18,9 +18,11 @@ export default function DashboardPage() {
         data: user,
         isLoading,
         refetch,
-    } = trpc.useQuery(['user.getById', { id: userId }], {
+    } = trpc.useQuery(['user.getById', userId], {
         enabled: Boolean(userId),
     });
+
+    const trpcUtils = trpc.useContext();
 
     const linkUser = trpc.useMutation(['leetcode.linkUser']);
     const unlinkUser = trpc.useMutation(['leetcode.unlinkUser']);
@@ -29,6 +31,7 @@ export default function DashboardPage() {
 
     const handleLinkedUserReset = async () => {
         await unlinkUser.mutate();
+        await trpcUtils.invalidateQueries(['user.getById', userId]);
         await refetch();
     };
 
@@ -86,6 +89,7 @@ export default function DashboardPage() {
                                     userAvatar: userAvatar || 'none',
                                 });
 
+                                await trpcUtils.invalidateQueries(['user.getById', userId]);
                                 await refetch();
                             }}
                         >
