@@ -64,7 +64,7 @@ model User {
     accounts         Account[]
     sessions         Session[]
     leetCodeUsername String?       @unique
-    leetCode         LeetCodeUser? @relation(fields: [leetCodeUsername], references: [username], onDelete: Cascade)
+    leetCode         LeetCodeUser? @relation(fields: [leetCodeUsername], references: [username], onDelete: SetNull)
 }
 
 model VerificationToken {
