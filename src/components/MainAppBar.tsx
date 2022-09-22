@@ -79,7 +79,7 @@ export const MainAppBar: React.FC = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" elevation={10}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <CodeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
