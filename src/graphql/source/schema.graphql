@@ -26,8 +26,8 @@ type SubmissionNum implements Stats {
 }
 
 type SubmitStats {
-    acSubmissionNum: [SubmissionNum!]
-    totalSubmissionNum: [SubmissionNum!]
+    acSubmissionNum: [SubmissionNum!]!
+    totalSubmissionNum: [SubmissionNum!]!
 }
 
 type Profile {
