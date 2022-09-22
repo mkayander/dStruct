@@ -1,3 +1,24 @@
+# [1.20.0](https://github.com/mkayander/leetpal/compare/v1.19.1...v1.20.0) (2022-09-22)
+
+
+### Bug Fixes
+
+* Fixed GraphQL schema array types ([3e89d42](https://github.com/mkayander/leetpal/commit/3e89d4216f17d4d8349525d123ff864515ae1dea))
+* Installed sass compiler ([7300914](https://github.com/mkayander/leetpal/commit/730091432c823eacc49f369fc6d3c25464a3bb41))
+* Make stats array non-nullable ([3bae2e8](https://github.com/mkayander/leetpal/commit/3bae2e892f78feb423afb3d86122ae3403502be5))
+
+
+### Features
+
+* Added app bar elevation ([453e262](https://github.com/mkayander/leetpal/commit/453e26274ac25d452b010fb11f730348f56554ba))
+* Added Data Section component ([b0c0e60](https://github.com/mkayander/leetpal/commit/b0c0e603469e122f6dd83e01ca2c92b4fa54ebf9))
+* Added section components ([27f6de0](https://github.com/mkayander/leetpal/commit/27f6de0f181871480044fb04e65282b56ccbb87e))
+* **devtools:** Added IDE meta file ([0bf142a](https://github.com/mkayander/leetpal/commit/0bf142ae26b63d12c6e8c58985920e4e6ff77a53))
+* Display leetcode user stats data ([8eb5b7d](https://github.com/mkayander/leetpal/commit/8eb5b7d965d7e2a199b485fa77dfe6da4e53e5a5))
+* Display section components ([70a777a](https://github.com/mkayander/leetpal/commit/70a777a19b30839c470dcb36092e675f51937420))
+* Parse submissions data to object ([6081a21](https://github.com/mkayander/leetpal/commit/6081a212237291e332a1bd7a4dcb9eaf8837c87f))
+* Updated Data Section styles ([b04f460](https://github.com/mkayander/leetpal/commit/b04f4602de7afd5fbcd4271d06d50077af484db4))
+
 ## [1.19.1](https://github.com/mkayander/leetpal/compare/v1.19.0...v1.19.1) (2022-09-15)
 
 
