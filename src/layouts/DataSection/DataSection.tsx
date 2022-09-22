@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper, SvgIcon, Typography } from '@mui/material';
+import { Box, Divider, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {
@@ -8,6 +8,8 @@ interface DataSectionProps extends React.PropsWithChildren {
 }
 
 export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon }) => {
+    const theme = useTheme();
+
     return (
         <Paper
             className={styles.root}
@@ -18,15 +20,19 @@ export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon 
             }}
         >
             <Box
+                marginBottom={1}
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                 }}
             >
-                <Typography variant="h5">{title}</Typography>
+                <Typography variant="h5" color={theme.palette.primary.light}>
+                    {title}
+                </Typography>
                 <Icon color="primary" fontSize={'large'} />
             </Box>
-            {children}
+            <Divider />
+            <Box marginTop={3}>{children}</Box>
         </Paper>
     );
 };
