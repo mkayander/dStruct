@@ -6,7 +6,7 @@ import { trpc } from '@src/utils';
 import { useSession } from 'next-auth/react';
 import { useGetUserProfileLazyQuery } from '@src/graphql/generated';
 import { ManageAccounts } from '@mui/icons-material';
-import { DataSection } from '@src/layouts';
+import { DataSection } from '@src/components';
 
 export const UserSettings: React.FC = () => {
     const session = useSession();

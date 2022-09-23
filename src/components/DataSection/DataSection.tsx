@@ -1,13 +1,14 @@
 import React from 'react';
-import { Box, Divider, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
+import { Box, Divider, LinearProgress, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {
     title: string;
     Icon: typeof SvgIcon;
+    isLoading?: boolean;
 }
 
-export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon }) => {
+export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon, isLoading }) => {
     const theme = useTheme();
 
     return (
@@ -32,7 +33,7 @@ export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon 
                 <Icon color="primary" fontSize={'large'} />
             </Box>
             <Divider />
-            <Box marginTop={3}>{children}</Box>
+            <Box marginTop={3}>{isLoading ? <LinearProgress variant="indeterminate" /> : children}</Box>
         </Paper>
     );
 };
