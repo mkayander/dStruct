@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
-import { DataSection } from '@src/layouts';
 import { Code } from '@mui/icons-material';
 import { Difficulty, GetUserProfileQueryResult, QuestionCount, SubmissionNum } from '@src/graphql/generated';
+import { DataSection } from '@src/components';
 
 type SubmissionsData = {
     allQuestionsCount: Record<keyof typeof Difficulty, QuestionCount>;

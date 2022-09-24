@@ -1,5 +1,5 @@
 import React from 'react';
-import { LeetCodeStats, MainLayout, UserSettings } from '@src/layouts';
+import { DailyProblem, LeetCodeStats, MainLayout, UserSettings } from '@src/layouts';
 import { Container } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useGetUserProfileQuery } from '@src/graphql/generated';
@@ -18,9 +18,10 @@ export default function DashboardPage() {
     return (
         <MainLayout>
             <Container>
-                <h1>Dashboard</h1>
+                <h1>{leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}</h1>
                 <UserSettings />
                 <LeetCodeStats userProfile={userProfileQueryResult} />
+                <DailyProblem />
             </Container>
         </MainLayout>
     );

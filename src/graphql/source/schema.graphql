@@ -38,11 +38,120 @@ type Profile {
 }
 
 type User {
+    username: String!
+    profileUrl: String
+    avatarUrl: String
     profile: Profile!
     submitStats: SubmitStats!
+}
+
+enum UserStatus {
+    NotStart
+}
+
+enum QuestionStatus {
+    ac
+}
+
+type TopicTag {
+    id: String!
+    name: String!
+    slug: String!
+    translatedName: String
+}
+
+enum ChallengeType {
+    DAILY
+}
+
+type ChallengeQuestion {
+    id: Int!
+    date: String!
+    type: ChallengeType!
+    incompleteChallengeCount: Int!
+    streakCount: Int!
+}
+
+enum JudgeType {
+    large
+}
+
+type Article {
+    id: Int!
+    paidOnly: Boolean!
+    paidOnlyVideo: Boolean!
+    canSeeDetail: Boolean!
+    hasVideoSolution: Boolean!
+}
+
+type CodeSnippet {
+    code: String!
+    lang: String!
+    langSlug: String!
+}
+
+type Question {
+    questionId: Int!
+    questionFrontendId: Int!
+    boundTopicId: Int
+    title: String!
+    titleSlug: String!
+    categoryTitle: String!
+    status: QuestionStatus
+    difficulty: Difficulty!
+    judgeType: JudgeType!
+    judgerAvailable: Boolean!
+
+    translatedTitle: String
+    translatedContent: String
+
+    adminUrl: String
+    libraryUrl: String
+
+    content: String!
+    envInfo: String!
+    exampleTestcases: String!
+    sampleTestCase: String!
+    metaData: String!
+    similarQuestions: String!
+    stats: String!
+
+    likes: Int!
+    dislikes: Int!
+    acRate: Float!
+    freqBar: Int
+
+    # Flags:
+    isLiked: Boolean
+    isFavor: Boolean!
+    isPaidOnly: Boolean!
+    hasVideoSolution: Boolean!
+    hasSolution: Boolean!
+    enableDebugger: Boolean!
+    enableRunCode: Boolean!
+    enableTestMode: Boolean!
+
+    challengeQuestion: ChallengeQuestion!
+    solution: Article!
+
+    contributors: [User!]!
+    mysqlSchemas: [String!]!
+    codeSnippets: [CodeSnippet!]!
+    hints: [String!]!
+    topicTags: [TopicTag!]!
+    companyTagStats: String
+}
+
+type ActiveDailyCodingChallengeQuestion {
+    date: String!
+    userStatus: UserStatus!
+    link: String!
+    question: Question!
 }
 
 type Query {
     allQuestionsCount: [QuestionCount!]!
     matchedUser(username: String): User!
+    activeDailyCodingChallengeQuestion: ActiveDailyCodingChallengeQuestion!
+    question(titleSlug: String): Question!
 }
