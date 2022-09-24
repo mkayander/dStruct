@@ -42,7 +42,44 @@ type User {
     submitStats: SubmitStats!
 }
 
+enum UserStatus {
+    NotStart
+}
+
+enum QuestionStatus {
+    ac
+}
+
+type TopicTag {
+    id: String!
+    name: String!
+    slug: String!
+}
+
+type Question {
+    acRate: Float!
+    difficulty: Difficulty!
+    freqBar: Int
+    questionFrontendId: Int!
+    isFavor: Boolean!
+    isPaidOnly: Boolean!
+    status: QuestionStatus
+    title: String!
+    titleSlug: String!
+    hasVideoSolution: Boolean!
+    hasSolution: Boolean!
+    topicTags: [TopicTag!]!
+}
+
+type ActiveDailyCodingChallengeQuestion {
+    date: String!
+    userStatus: UserStatus!
+    link: String!
+    question: Question!
+}
+
 type Query {
     allQuestionsCount: [QuestionCount!]!
     matchedUser(username: String): User!
+    activeDailyCodingChallengeQuestion: ActiveDailyCodingChallengeQuestion!
 }
