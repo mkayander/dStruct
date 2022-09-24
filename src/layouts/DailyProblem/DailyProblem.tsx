@@ -1,27 +1,51 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useMemo } from 'react';
+import sanitizeHtml from 'sanitize-html';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
-import { useQuestionOfTodayQuery } from '@src/graphql/generated';
-import { DataSection } from '@src/components';
-
-const q =
-    'query questionData($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    questionId\n    questionFrontendId\n    boundTopicId\n    title\n    titleSlug\n    content\n    translatedTitle\n    translatedContent\n    isPaidOnly\n    difficulty\n    likes\n    dislikes\n    isLiked\n    similarQuestions\n    exampleTestcases\n    categoryTitle\n    contributors {\n      username\n      profileUrl\n      avatarUrl\n      __typename\n    }\n    topicTags {\n      name\n      slug\n      translatedName\n      __typename\n    }\n    companyTagStats\n    codeSnippets {\n      lang\n      langSlug\n      code\n      __typename\n    }\n    stats\n    hints\n    solution {\n      id\n      canSeeDetail\n      paidOnly\n      hasVideoSolution\n      paidOnlyVideo\n      __typename\n    }\n    status\n    sampleTestCase\n    metaData\n    judgerAvailable\n    judgeType\n    mysqlSchemas\n    enableRunCode\n    enableTestMode\n    enableDebugger\n    envInfo\n    libraryUrl\n    adminUrl\n    challengeQuestion {\n      id\n      date\n      incompleteChallengeCount\n      streakCount\n      type\n      __typename\n    }\n    __typename\n  }\n}\n';
+import { useQuestionDataQuery, useQuestionOfTodayQuery } from '@src/graphql/generated';
+import { DataSection, TopicTag } from '@src/components';
+import styles from './DailyProblem.module.scss';
 
 export const DailyProblem: React.FC = () => {
-    const { data, loading, error } = useQuestionOfTodayQuery();
-    const { activeDailyCodingChallengeQuestion } = data ?? {};
-    const question = activeDailyCodingChallengeQuestion?.question;
+    const questionOfTodayQuery = useQuestionOfTodayQuery();
+    const { activeDailyCodingChallengeQuestion } = questionOfTodayQuery.data ?? {};
+    const titleSlug = activeDailyCodingChallengeQuestion?.question.titleSlug;
+    const questionDataQuery = useQuestionDataQuery({ variables: { titleSlug: titleSlug || '' }, skip: !titleSlug });
+
+    const question = questionDataQuery.data?.question;
+
+    const sanitizedContent = useMemo(() => question && sanitizeHtml(question.content), [question]);
+
+    const loading = questionOfTodayQuery.loading || questionDataQuery.loading;
+
+    if (question) console.info('Question of today:', question);
 
     return (
         <DataSection title="Daily Problem" Icon={EventIcon} isLoading={loading}>
             <Box>
                 {question && (
                     <div>
-                        <pre>{JSON.stringify(question, null, 2)}</pre>
+                        <Typography>{question.title}</Typography>
+                        <Typography>{question.titleSlug}</Typography>
+                        <Typography>{question.difficulty}</Typography>
+
+                        <Grid my={2} container columnSpacing={1}>
+                            {question.topicTags.map((topic) => (
+                                <Grid item key={topic.slug}>
+                                    <TopicTag topic={topic} />
+                                </Grid>
+                            ))}
+                        </Grid>
+
+                        <Divider />
+                        <Typography
+                            className={styles.content}
+                            component="div"
+                            dangerouslySetInnerHTML={{ __html: sanitizedContent ?? '' }}
+                        ></Typography>
+                        <Divider />
                     </div>
                 )}
-
-                <pre>{JSON.stringify(error, null, 2)}</pre>
             </Box>
         </DataSection>
     );
