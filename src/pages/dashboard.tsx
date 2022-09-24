@@ -18,7 +18,7 @@ export default function DashboardPage() {
     return (
         <MainLayout>
             <Container>
-                <h1>Dashboard</h1>
+                <h1>{leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}</h1>
                 <UserSettings />
                 <LeetCodeStats userProfile={userProfileQueryResult} />
                 <DailyProblem />
