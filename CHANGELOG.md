@@ -1,3 +1,21 @@
+# [1.21.0](https://github.com/mkayander/leetpal/compare/v1.20.0...v1.21.0) (2022-09-24)
+
+
+### Bug Fixes
+
+* Handle proxied GraphQL errors correctly ([48c61c1](https://github.com/mkayander/leetpal/commit/48c61c15c902386f14936090b363d7a7aea347ca))
+
+
+### Features
+
+* Added activeDailyCodingChallengeQuestion GraphQL types ([de4a0be](https://github.com/mkayander/leetpal/commit/de4a0be38c350a08ca2bdbcf23d607ab84a3e3c5))
+* Added Topic Tag component ([73a94ad](https://github.com/mkayander/leetpal/commit/73a94ad24d97aa6a6cd8dc242eb7908e02ac5666))
+* Display basic info about the question of the day ([5e7d3b4](https://github.com/mkayander/leetpal/commit/5e7d3b4034507ac2718264d6b98f13d9aa94d6aa))
+* Display Daily Problem section ([9bee39c](https://github.com/mkayander/leetpal/commit/9bee39c1e4cdfa0dc19f0aac5d80a032ee0ebbe2))
+* Display user's name at the page title ([15633dd](https://github.com/mkayander/leetpal/commit/15633dd662b4319f210e9fcccef9e7b41c91fea6))
+* Implemented a detailed GraphQL question data schema ([12aa89b](https://github.com/mkayander/leetpal/commit/12aa89b5a74174fbe3fe7870a9fb4c8bf43a1ab4))
+* Installed sanitize-html package ([2f409a1](https://github.com/mkayander/leetpal/commit/2f409a1b9fb7cc47532bb5aab605d2f7a9e4b8b7))
+
 # [1.20.0](https://github.com/mkayander/leetpal/compare/v1.19.1...v1.20.0) (2022-09-22)
 
 
