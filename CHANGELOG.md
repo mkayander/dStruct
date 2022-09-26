@@ -1,3 +1,21 @@
+# [1.22.0](https://github.com/mkayander/leetpal/compare/v1.21.0...v1.22.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* Added custom app props type ([56f6cda](https://github.com/mkayander/leetpal/commit/56f6cda1dd566c550ea14cf07b5ed7aed8a6567a))
+* Remove redundant global styles ([21cbce5](https://github.com/mkayander/leetpal/commit/21cbce5fcbc845636ce07022694f9b68019d8ec0))
+* Specify on-primary text color ([23b91b1](https://github.com/mkayander/leetpal/commit/23b91b12f7f7bcf8f67f51a748fb76b5c9d7f579))
+
+
+### Features
+
+* Added custom theme items ([efaab09](https://github.com/mkayander/leetpal/commit/efaab09b4f4c3ac96f2d4a4ca72f5beca8823c99))
+* Implemented a question summary card ([061ae31](https://github.com/mkayander/leetpal/commit/061ae3113edb325476b54c15dafc8aadb088d8b0))
+* Show dashboard as index route ([f4bb818](https://github.com/mkayander/leetpal/commit/f4bb818c3a4715ea15f2ff0b710fd1dbad5847a1))
+* Updated Data Section ([4839109](https://github.com/mkayander/leetpal/commit/48391091ab2e22366c137edc3e48c2568df6c110))
+* Use special tag background colors ([ef00e70](https://github.com/mkayander/leetpal/commit/ef00e703cbadd0a1f81fee09ff9ec29c94c350df))
+
 # [1.21.0](https://github.com/mkayander/leetpal/compare/v1.20.0...v1.21.0) (2022-09-24)
 
 
