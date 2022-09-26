@@ -91,6 +91,7 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => 
                             alignItems: 'center',
                             position: 'relative',
                             background: theme.palette.secondary.dark,
+                            color: theme.palette.secondary.contrastText,
                             height: '180px',
                             width: '180px',
                             borderRadius: '50%',
