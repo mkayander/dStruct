@@ -6,6 +6,7 @@ import { withTRPC } from '@trpc/next';
 // import { loggerLink } from '@trpc/client/src/links/loggerLink';
 // import { httpBatchLink } from '@trpc/client/src/links/httpBatchLink';
 import superjson from 'superjson';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ApolloProvider } from '@apollo/client';
@@ -21,7 +22,11 @@ import { GlobalContextType } from '@src/context/GlobalContext';
 
 const queryClient = new QueryClient();
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+interface MyAppProps {
+    session: Session;
+}
+
+const MyApp = ({ Component, pageProps }: AppProps<MyAppProps>) => {
     const globalContext = useMemo<GlobalContextType>(() => ({}), []);
 
     return (
