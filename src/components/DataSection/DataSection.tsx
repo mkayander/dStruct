@@ -1,14 +1,15 @@
 import React from 'react';
-import { Box, Divider, LinearProgress, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
+import { Box, Divider, lighten, LinearProgress, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {
     title: string;
-    Icon: typeof SvgIcon;
+    caption?: string | React.ReactNode;
+    Icon?: typeof SvgIcon;
     isLoading?: boolean;
 }
 
-export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon, isLoading }) => {
+export const DataSection: React.FC<DataSectionProps> = ({ children, title, caption, Icon, isLoading }) => {
     const theme = useTheme();
 
     return (
@@ -18,6 +19,7 @@ export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon,
             sx={{
                 my: 4,
                 p: 4,
+                borderRadius: theme.shape.borderRadius,
             }}
         >
             <Box
@@ -27,13 +29,16 @@ export const DataSection: React.FC<DataSectionProps> = ({ children, title, Icon,
                     justifyContent: 'space-between',
                 }}
             >
-                <Typography variant="h5" color={theme.palette.primary.light}>
-                    {title}
-                </Typography>
-                <Icon color="primary" fontSize={'large'} />
+                <Box>
+                    <Typography variant="h5" color={lighten(theme.palette.primary.light, 0.4)}>
+                        {title}
+                    </Typography>
+                    {typeof caption === 'string' ? <Typography variant="subtitle2">{caption}</Typography> : caption}
+                </Box>
+                {Icon && <Icon color="primary" fontSize={'large'} />}
             </Box>
             <Divider />
-            <Box marginTop={3}>{isLoading ? <LinearProgress variant="indeterminate" /> : children}</Box>
+            <Box marginTop={2}>{isLoading ? <LinearProgress variant="indeterminate" /> : children}</Box>
         </Paper>
     );
 };
