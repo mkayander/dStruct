@@ -49,6 +49,12 @@ theme.palette.question = {
 
     getTagColors(slug?: string) {
         switch (slug) {
+            case 'two-pointers':
+                return ['#009ab2', '#095abd'];
+            case 'union-find':
+                return ['#2a40a6', '#00d9ff'];
+            case 'string':
+                return ['#a35382', '#70ceac'];
             case 'queue':
                 return ['#509e26', '#b2eb50'];
             case 'design':
