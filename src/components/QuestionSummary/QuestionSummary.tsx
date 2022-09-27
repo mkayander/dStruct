@@ -1,10 +1,23 @@
 import React from 'react';
-import { alpha, Box, CircularProgress, darken, Grid, Paper, Typography, useTheme } from '@mui/material';
-import { QuestionDataQueryResult } from '@src/graphql/generated';
-import { TopicTag } from '@src/components';
+import { alpha, Box, CircularProgress, darken, Grid, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
+import { Difficulty, QuestionDataQueryResult } from '@src/graphql/generated';
+import { CircularPercentage, TopicTag } from '@src/components';
 import EventIcon from '@mui/icons-material/Event';
-import { HistoryToggleOff } from '@mui/icons-material';
+import {
+    EventRepeatTwoTone,
+    HistoryToggleOff,
+    SignalCellular0Bar,
+    SignalCellular2Bar,
+    SignalCellular4Bar,
+} from '@mui/icons-material';
 import { BoxProps } from '@mui/material/Box/Box';
+
+const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
+    All: SignalCellular0Bar,
+    Easy: SignalCellular0Bar,
+    Medium: SignalCellular2Bar,
+    Hard: SignalCellular4Bar,
+};
 
 interface QuestionSummaryProps extends Exclude<BoxProps, 'position' | 'zIndex'> {
     questionDataQuery: QuestionDataQueryResult;
@@ -16,6 +29,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
     const question = questionDataQuery.data?.question;
 
     const difficultyColor = question && theme.palette.question[question.difficulty].main;
+    const DifficultyIcon = question && DifficultyIconMap[question.difficulty];
     const shadowColor = darken(theme.palette.primary.dark, 0.5);
 
     return (
@@ -48,17 +62,57 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
             >
                 {questionDataQuery.loading && <CircularProgress />}
                 {question && (
-                    <>
-                        <Typography color={difficultyColor}>{question.difficulty}</Typography>
+                    <Box display="flex" justifyContent="space-between">
+                        <div>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                }}
+                            >
+                                <Typography variant="h4" lineHeight={0.8}>
+                                    {question.title}
+                                </Typography>
+                                <Box display="flex" sx={{ opacity: 0.9 }}>
+                                    <EventRepeatTwoTone sx={{ mx: 1 }} />
+                                    <Typography variant="subtitle1">Question Of Today</Typography>
+                                </Box>
+                            </Box>
+                            <Typography variant="subtitle1" sx={{ opacity: 0.8 }}>
+                                {question.categoryTitle}
+                            </Typography>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    my: 1,
+                                    color: difficultyColor,
+                                    svg: {
+                                        marginRight: 1,
+                                    },
+                                }}
+                            >
+                                {DifficultyIcon && <DifficultyIcon />}
+                                <Typography>{question.difficulty}</Typography>
+                            </Box>
 
-                        <Grid marginTop={2} container columnSpacing={1}>
-                            {question.topicTags.map((topic) => (
-                                <Grid item key={topic.slug}>
-                                    <TopicTag topic={topic} />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </>
+                            <Grid marginTop={2} container columnSpacing={1}>
+                                {question.topicTags.map((topic) => (
+                                    <Grid item key={topic.slug}>
+                                        <TopicTag topic={topic} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </div>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                position: 'relative',
+                            }}
+                        >
+                            <CircularPercentage value={55} />
+                        </Box>
+                    </Box>
                 )}
             </Paper>
 
