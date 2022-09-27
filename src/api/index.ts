@@ -1,0 +1,1 @@
+export { useDailyQuestionData } from './useDailyQuestionData';

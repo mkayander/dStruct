@@ -3,6 +3,8 @@ import { DailyProblem, LeetCodeStats, MainLayout, UserSettings } from '@src/layo
 import { Container } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useGetUserProfileQuery } from '@src/graphql/generated';
+import { useDailyQuestionData } from '@src/api';
+import { QuestionSummary } from '@src/components';
 
 export default function DashboardPage() {
     const session = useSession();
@@ -15,13 +17,16 @@ export default function DashboardPage() {
         skip: !leetCodeUsername,
     });
 
+    const questionDataQuery = useDailyQuestionData();
+
     return (
         <MainLayout>
             <Container>
                 <h1>{leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}</h1>
                 <UserSettings />
                 <LeetCodeStats userProfile={userProfileQueryResult} />
-                <DailyProblem />
+                <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
+                <DailyProblem questionDataQuery={questionDataQuery} />
             </Container>
         </MainLayout>
     );
