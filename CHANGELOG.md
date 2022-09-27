@@ -1,3 +1,13 @@
+# [1.23.0](https://github.com/mkayander/leetpal/compare/v1.22.0...v1.23.0) (2022-09-27)
+
+
+### Features
+
+* Implemented a circular progress component ([d36e13e](https://github.com/mkayander/leetpal/commit/d36e13eeca9925ed57c155caac26b7ff839547d9))
+* Moved daily question fetch to a separate api file ([ad0cbcb](https://github.com/mkayander/leetpal/commit/ad0cbcbe54ebef330d471d8bbd7693b1f0704d3b))
+* Updated Question Summary component ([ad78d9b](https://github.com/mkayander/leetpal/commit/ad78d9b63d9b95e224f9207cfb435ffc40539bbe))
+* Updated tag colors ([09adb82](https://github.com/mkayander/leetpal/commit/09adb82fa5426bd371b5deff2504ceab05c0fbb1))
+
 # [1.22.0](https://github.com/mkayander/leetpal/compare/v1.21.0...v1.22.0) (2022-09-26)
 
 
