@@ -3,6 +3,7 @@ import styles from './CircularPercentage.module.scss';
 import { useTheme } from '@mui/material';
 
 const SIZE = 44;
+const VIEW_BOX = `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`;
 
 interface CircularPercentageProps extends React.PropsWithChildren {
     value?: number;
@@ -37,11 +38,11 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                 width: sizePx,
             }}
         >
-            <svg viewBox="22 22 44 44">
+            <svg viewBox={VIEW_BOX}>
                 <circle
                     className={styles.bgCircle}
-                    cx="44"
-                    cy="44"
+                    cx={SIZE}
+                    cy={SIZE}
                     r={radius}
                     stroke={theme.palette.primary.dark}
                     strokeWidth={thickness}
@@ -52,8 +53,8 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                 />
                 <circle
                     className={styles.mainCircle}
-                    cx="44"
-                    cy="44"
+                    cx={SIZE}
+                    cy={SIZE}
                     r={radius}
                     stroke={theme.palette.info.dark}
                     strokeWidth={thickness}
@@ -61,7 +62,7 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                     style={circleStyle}
                 />
             </svg>
-            <div className={styles.content}>{children ? children : `${value}%`}</div>
+            <div className={styles.content}>{children ? children : `${value?.toFixed(2)}%`}</div>
         </div>
     );
 };
