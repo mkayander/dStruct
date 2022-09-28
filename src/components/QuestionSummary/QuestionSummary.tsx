@@ -1,6 +1,6 @@
 import React from 'react';
 import { alpha, Box, CircularProgress, darken, Grid, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
-import { Difficulty, QuestionDataQueryResult } from '@src/graphql/generated';
+import { Difficulty } from '@src/graphql/generated';
 import { CircularPercentage, TopicTag } from '@src/components';
 import EventIcon from '@mui/icons-material/Event';
 import {
@@ -11,6 +11,7 @@ import {
     SignalCellular4Bar,
 } from '@mui/icons-material';
 import { BoxProps } from '@mui/material/Box/Box';
+import { DailyQuestionDataQuery } from '@src/api/useDailyQuestionData';
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
     All: SignalCellular0Bar,
@@ -20,13 +21,14 @@ const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
 };
 
 interface QuestionSummaryProps extends Exclude<BoxProps, 'position' | 'zIndex'> {
-    questionDataQuery: QuestionDataQueryResult;
+    questionDataQuery: DailyQuestionDataQuery;
 }
 
 export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQuery, ...props }) => {
     const theme = useTheme();
 
-    const question = questionDataQuery.data?.question;
+    const question = questionDataQuery.query.data?.question;
+    console.log(questionDataQuery);
 
     const difficultyColor = question && theme.palette.question[question.difficulty].main;
     const DifficultyIcon = question && DifficultyIconMap[question.difficulty];
@@ -38,7 +40,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                 elevation={12}
                 sx={{
                     zIndex: theme.zIndex.mobileStepper,
-                    maxWidth: '800px',
+                    width: 'fit-content',
                     p: 2,
                     mx: 'auto',
                     marginBottom: 2,
@@ -60,7 +62,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                     borderRadius: theme.shape.borderRadius,
                 }}
             >
-                {questionDataQuery.loading && <CircularProgress />}
+                {questionDataQuery.query.loading && <CircularProgress />}
                 {question && (
                     <Box display="flex" justifyContent="space-between">
                         <div>
@@ -110,7 +112,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                                 position: 'relative',
                             }}
                         >
-                            <CircularPercentage value={55} />
+                            <CircularPercentage value={questionDataQuery.stats?.acRate} />
                         </Box>
                     </Box>
                 )}

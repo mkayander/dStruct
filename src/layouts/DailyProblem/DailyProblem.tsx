@@ -1,20 +1,20 @@
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { Box, Divider, Typography } from '@mui/material';
-import { QuestionDataQueryResult } from '@src/graphql/generated';
 import { DataSection, QuestionSummary } from '@src/components';
 import styles from './DailyProblem.module.scss';
+import { DailyQuestionDataQuery } from '@src/api/useDailyQuestionData';
 
 interface DailyProblemProps {
-    questionDataQuery: QuestionDataQueryResult;
+    questionDataQuery: DailyQuestionDataQuery;
 }
 
 export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery }) => {
-    const question = questionDataQuery.data?.question;
+    const question = questionDataQuery.query.data?.question;
 
     const sanitizedContent = useMemo(() => question && sanitizeHtml(question.content), [question]);
 
-    const loading = questionDataQuery.loading;
+    const loading = questionDataQuery.query.loading;
 
     if (question) console.info('Question of today:', question);
 
