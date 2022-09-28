@@ -1,3 +1,16 @@
+# [1.24.0](https://github.com/mkayander/leetpal/compare/v1.23.0...v1.24.0) (2022-09-28)
+
+
+### Bug Fixes
+
+* Calculated values that depend on size ([a2f97e7](https://github.com/mkayander/leetpal/commit/a2f97e764877a9470d1e8882dd6da122b476a59c))
+
+
+### Features
+
+* Parse JSON data from graphql query ([23725cf](https://github.com/mkayander/leetpal/commit/23725cffb1da11ce274fd67643131bd73b7c38a4))
+* Use new circular percentage component ([78fa483](https://github.com/mkayander/leetpal/commit/78fa483141165b00bfcad486aae1d4fb37b83943))
+
 # [1.23.0](https://github.com/mkayander/leetpal/compare/v1.22.0...v1.23.0) (2022-09-27)
 
 
