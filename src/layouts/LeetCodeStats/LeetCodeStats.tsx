@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { Box, Grid, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { Code } from '@mui/icons-material';
 import { Difficulty, GetUserProfileQueryResult, QuestionCount, SubmissionNum } from '@src/graphql/generated';
-import { DataSection } from '@src/components';
+import { CircularPercentage, DataSection } from '@src/components';
 
 type SubmissionsData = {
     allQuestionsCount: Record<keyof typeof Difficulty, QuestionCount>;
@@ -23,8 +23,6 @@ interface LeetCodeStatsProps {
 export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => {
     const matchedUser = userProfile?.data?.matchedUser;
 
-    const theme = useTheme();
-
     const submissionsData = useMemo<SubmissionsData | null>(() => {
         if (!userProfile.data) return null;
 
@@ -38,8 +36,6 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => 
 
         return obj;
     }, [userProfile.data]);
-
-    if (!matchedUser) return null;
 
     console.log(userProfile.data);
 
@@ -61,7 +57,7 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => 
                             <Typography>{matchedUser?.profile.ranking?.toLocaleString()}</Typography>
                         </Grid>
                     </Grid>
-                    {matchedUser.submitStats.acSubmissionNum?.map((item) => (
+                    {matchedUser?.submitStats.acSubmissionNum?.map((item) => (
                         <Grid key={item.difficulty} wrap="nowrap" className="row" container item spacing={1}>
                             <Grid item xs={5}>
                                 <Typography fontWeight="bold">{titlesMap[item.difficulty]}:</Typography>
@@ -84,33 +80,15 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => 
                         alignItems: 'center',
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            position: 'relative',
-                            background: theme.palette.secondary.dark,
-                            color: theme.palette.secondary.contrastText,
-                            height: '180px',
-                            width: '180px',
-                            borderRadius: '50%',
-                        }}
-                    >
-                        {submissionsData && (
-                            <div>
-                                <Typography textAlign="center">{submissionsData.acSubmissionNum.All.count}</Typography>
-                                <Typography>
-                                    {(
-                                        (submissionsData.acSubmissionNum.All.count /
-                                            submissionsData.allQuestionsCount.All.count) *
-                                        100
-                                    ).toFixed(2)}
-                                    %
-                                </Typography>
-                            </div>
-                        )}
-                    </Box>
+                    <CircularPercentage
+                        value={
+                            (submissionsData &&
+                                (submissionsData.acSubmissionNum.All.count /
+                                    submissionsData.allQuestionsCount.All.count) *
+                                    100) ||
+                            0
+                        }
+                    />
                 </Box>
             </Box>
         </DataSection>
