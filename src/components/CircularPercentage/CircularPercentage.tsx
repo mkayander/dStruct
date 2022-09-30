@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CircularPercentage.module.scss';
 import { useTheme } from '@mui/material';
 
@@ -10,22 +10,32 @@ interface CircularPercentageProps extends React.PropsWithChildren {
     size?: number;
     radius?: number;
     thickness?: number;
+
+    bgColor?: string;
+    mainColor?: string;
 }
 
 export const CircularPercentage: React.FC<CircularPercentageProps> = ({
     size = 128,
     thickness = 4.6,
     value = 0,
+    mainColor,
+    bgColor,
     children,
 }) => {
     const theme = useTheme();
+
+    const [displayedLevel, setDisplayedLevel] = useState(0);
+    useEffect(() => {
+        setDisplayedLevel(value);
+    }, [value]);
 
     const radius = (SIZE - thickness) / 2;
 
     const circleStyle: React.CSSProperties = {};
     const circumference = 2 * Math.PI * radius;
     circleStyle.strokeDasharray = circumference.toFixed(3);
-    circleStyle.strokeDashoffset = `${(((100 - value) / 100) * circumference).toFixed(3)}px`;
+    circleStyle.strokeDashoffset = `${(((100 - displayedLevel) / 100) * circumference).toFixed(3)}px`;
 
     const sizePx = `${size}px`;
 
@@ -44,7 +54,7 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                     cx={SIZE}
                     cy={SIZE}
                     r={radius}
-                    stroke={theme.palette.primary.dark}
+                    stroke={bgColor || theme.palette.primary.dark}
                     strokeWidth={thickness}
                     fill="none"
                     style={{
@@ -56,7 +66,7 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                     cx={SIZE}
                     cy={SIZE}
                     r={radius}
-                    stroke={theme.palette.info.dark}
+                    stroke={mainColor || theme.palette.info.dark}
                     strokeWidth={thickness}
                     fill="none"
                     style={circleStyle}
