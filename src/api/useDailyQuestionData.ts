@@ -34,7 +34,7 @@ export const useDailyQuestionData = (
     return useMemo(
         () => {
             const stats = query.data?.question.stats && JSON.parse(query.data?.question.stats);
-            stats.acRate &&= parseFloat(stats.acRate);
+            stats && (stats.acRate = parseFloat(stats.acRate));
 
             return {
                 query,
