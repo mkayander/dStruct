@@ -1,3 +1,10 @@
+## [1.25.1](https://github.com/mkayander/leetpal/compare/v1.25.0...v1.25.1) (2022-09-30)
+
+
+### Bug Fixes
+
+* Show loader when question data is absent ([fde09ee](https://github.com/mkayander/leetpal/commit/fde09ee7480fc8d99ac317b00766ba5291e09329))
+
 # [1.25.0](https://github.com/mkayander/leetpal/compare/v1.24.0...v1.25.0) (2022-09-30)
 
 
