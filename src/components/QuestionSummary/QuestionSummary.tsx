@@ -97,7 +97,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                                 <Typography>{question.difficulty}</Typography>
                             </Box>
 
-                            <Grid marginTop={2} container columnSpacing={1}>
+                            <Grid marginTop={2} container columnSpacing={1} rowSpacing={1}>
                                 {question.topicTags.map((topic) => (
                                     <Grid item key={topic.slug}>
                                         <TopicTag topic={topic} />
@@ -112,7 +112,14 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                                 position: 'relative',
                             }}
                         >
-                            <CircularPercentage value={questionDataQuery.stats?.acRate} />
+                            <CircularPercentage value={questionDataQuery.stats?.acRate} size={180}>
+                                <Typography variant="caption">Acceptance</Typography>
+                                <Typography fontWeight="bold">{questionDataQuery.stats?.acRate}%</Typography>
+                                <Typography variant="caption">
+                                    <span style={{ fontWeight: 'bold' }}>{questionDataQuery.stats?.totalAccepted}</span>{' '}
+                                    / {questionDataQuery.stats?.totalSubmission}
+                                </Typography>
+                            </CircularPercentage>
                         </Box>
                     </Box>
                 )}
