@@ -1,3 +1,17 @@
+# [1.25.0](https://github.com/mkayander/leetpal/compare/v1.24.0...v1.25.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* Prevent error when stats variable is undefined ([d294722](https://github.com/mkayander/leetpal/commit/d2947228d90913195a9c30352e6232bcae6c52c5))
+
+
+### Features
+
+* Return random color variables if slug is unknown ([507819a](https://github.com/mkayander/leetpal/commit/507819afe44c728733462bc902b1ac1d4f0bc7d1))
+* Updated Circular Percentage component ([e9b750e](https://github.com/mkayander/leetpal/commit/e9b750e7b5e08fba8cada0a86c31757e88244398))
+* Use custom percentage content ([569449b](https://github.com/mkayander/leetpal/commit/569449b0f80683cd40691adc733029e71ed2d451))
+
 # [1.24.0](https://github.com/mkayander/leetpal/compare/v1.23.0...v1.24.0) (2022-09-28)
 
 
