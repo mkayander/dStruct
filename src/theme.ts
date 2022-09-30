@@ -19,6 +19,19 @@ const theme = createTheme({
     },
 });
 
+const tagColors: Record<string, [string, string]> = {
+    'two-pointers': ['#009ab2', '#095abd'],
+    'union-find': ['#2a40a6', '#00d9ff'],
+    string: ['#a35382', '#70ceac'],
+    queue: ['#509e26', '#b2eb50'],
+    design: ['#395af9', '#aacafd'],
+    array: ['#095abd', '#009ab2'],
+    'dynamic-programming': ['#15b792', '#45e88c'],
+    graph: ['#abaeff', '#93b9bc'],
+    'linked-list': ['#feaa7b', '#abaeff'],
+    heap: ['#ec75b1', '#f7cae0'],
+};
+
 theme.palette.question = {
     All: theme.palette.augmentColor({
         name: 'All',
@@ -48,30 +61,14 @@ theme.palette.question = {
     }),
 
     getTagColors(slug?: string) {
-        switch (slug) {
-            case 'two-pointers':
-                return ['#009ab2', '#095abd'];
-            case 'union-find':
-                return ['#2a40a6', '#00d9ff'];
-            case 'string':
-                return ['#a35382', '#70ceac'];
-            case 'queue':
-                return ['#509e26', '#b2eb50'];
-            case 'design':
-                return ['#395af9', '#aacafd'];
-            case 'array':
-                return ['#095abd', '#009ab2'];
-            case 'dynamic-programming':
-                return ['#15b792', '#45e88c'];
-            case 'graph':
-                return ['#abaeff', '#93b9bc'];
-            case 'linked-list':
-                return ['#feaa7b', '#abaeff'];
-            case 'heap':
-                return ['#ec75b1', '#f7cae0'];
-            default:
-                return [theme.palette.secondary.dark, theme.palette.secondary.light];
+        if (slug && slug in tagColors) {
+            return tagColors[slug];
         }
+
+        const colors = Object.values(tagColors);
+        const randomIndex = Math.floor(Math.random() * colors.length);
+
+        return colors[randomIndex];
     },
 };
 
