@@ -62,8 +62,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                     borderRadius: theme.shape.borderRadius,
                 }}
             >
-                {questionDataQuery.query.loading && <CircularProgress />}
-                {question && (
+                {question ? (
                     <Box display="flex" justifyContent="space-between">
                         <div>
                             <Box
@@ -122,6 +121,8 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                             </CircularPercentage>
                         </Box>
                     </Box>
+                ) : (
+                    <CircularProgress />
                 )}
             </Paper>
 
