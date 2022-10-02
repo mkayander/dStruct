@@ -12,14 +12,12 @@ interface CircularPercentageProps extends React.PropsWithChildren {
     thickness?: number;
 
     bgColor?: string;
-    mainColor?: string;
 }
 
 export const CircularPercentage: React.FC<CircularPercentageProps> = ({
     size = 128,
     thickness = 4.6,
     value = 0,
-    mainColor,
     bgColor,
     children,
 }) => {
@@ -49,6 +47,14 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
             }}
         >
             <svg viewBox={VIEW_BOX}>
+                <defs>
+                    <linearGradient id="circle-gradient" x1="100%" y1="-30%" x2="0%" y2="0%">
+                        <stop offset="0%" stopColor={theme.palette.error.light} />
+                        <stop offset="20%" stopColor={theme.palette.info.dark} />
+                        <stop offset="50%" stopColor={theme.palette.info.light} />
+                        <stop offset="100%" stopColor={theme.palette.success.main} />
+                    </linearGradient>
+                </defs>
                 <circle
                     className={styles.bgCircle}
                     cx={SIZE}
@@ -66,7 +72,7 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                     cx={SIZE}
                     cy={SIZE}
                     r={radius}
-                    stroke={mainColor || theme.palette.info.dark}
+                    stroke="url(#circle-gradient)"
                     strokeWidth={thickness}
                     fill="none"
                     style={circleStyle}
