@@ -1,3 +1,12 @@
+# [1.26.0](https://github.com/mkayander/leetpal/compare/v1.25.1...v1.26.0) (2022-10-02)
+
+
+### Features
+
+* Added gradient colors to the percentage circle ([d763943](https://github.com/mkayander/leetpal/commit/d76394316a32a8923751a238b1e7958fdf2ff919))
+* Added Rating Buttons component ([05d2ad6](https://github.com/mkayander/leetpal/commit/05d2ad6d9da345e5930c858fc53a7c64894ef9ee))
+* Updated Question summary ([a273afa](https://github.com/mkayander/leetpal/commit/a273afa389af8b826e9cd7e6f922fe2e426078a9))
+
 ## [1.25.1](https://github.com/mkayander/leetpal/compare/v1.25.0...v1.25.1) (2022-09-30)
 
 
