@@ -1,10 +1,23 @@
 import React from 'react';
-import { alpha, Box, CircularProgress, darken, Grid, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
+import {
+    alpha,
+    Box,
+    Button,
+    CircularProgress,
+    darken,
+    Divider,
+    Grid,
+    Paper,
+    SvgIcon,
+    Typography,
+    useTheme,
+} from '@mui/material';
 import { Difficulty } from '@src/graphql/generated';
-import { CircularPercentage, TopicTag } from '@src/components';
+import { CircularPercentage, RatingButtons, TopicTag } from '@src/components';
 import EventIcon from '@mui/icons-material/Event';
 import {
     EventRepeatTwoTone,
+    FavoriteBorder,
     HistoryToggleOff,
     SignalCellular0Bar,
     SignalCellular2Bar,
@@ -71,44 +84,66 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                                     justifyContent: 'space-between',
                                 }}
                             >
-                                <Typography variant="h4" lineHeight={0.8}>
+                                <Typography variant="h4">
+                                    <span style={{ fontWeight: '300' }}>{question.questionFrontendId}.</span>{' '}
                                     {question.title}
                                 </Typography>
                                 <Box display="flex" sx={{ opacity: 0.9 }}>
                                     <EventRepeatTwoTone sx={{ mx: 1 }} />
-                                    <Typography variant="subtitle1">Question Of Today</Typography>
+                                    <Typography variant="subtitle1" lineHeight={1.1}>
+                                        Question Of Today
+                                    </Typography>
                                 </Box>
                             </Box>
-                            <Typography variant="subtitle1" sx={{ opacity: 0.8 }}>
-                                {question.categoryTitle}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    my: 1,
-                                    color: difficultyColor,
-                                    svg: {
-                                        marginRight: 1,
-                                    },
-                                }}
-                            >
-                                {DifficultyIcon && <DifficultyIcon />}
-                                <Typography>{question.difficulty}</Typography>
-                            </Box>
 
-                            <Grid marginTop={2} container columnSpacing={1} rowSpacing={1}>
+                            <Grid container my={1} spacing={1} sx={{ opacity: 0.9 }}>
+                                <Grid item display="flex" alignItems="center" justifyContent="center">
+                                    <Typography variant="subtitle1">{question.categoryTitle}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            height: '100%',
+                                            alignItems: 'center',
+                                            color: difficultyColor,
+                                            svg: {
+                                                marginRight: 1,
+                                            },
+                                        }}
+                                    >
+                                        {DifficultyIcon && <DifficultyIcon />}
+                                        <Typography>{question.difficulty}</Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item>
+                                    <RatingButtons question={question} />
+                                </Grid>
+                                <Grid item>
+                                    <Button startIcon={<FavoriteBorder />} color="inherit">
+                                        Favorite
+                                    </Button>
+                                </Grid>
+                            </Grid>
+
+                            <Divider />
+
+                            <Grid container spacing={1} marginTop={0} marginBottom={1}>
                                 {question.topicTags.map((topic) => (
                                     <Grid item key={topic.slug}>
                                         <TopicTag topic={topic} />
                                     </Grid>
                                 ))}
                             </Grid>
+
+                            <Divider />
                         </div>
                         <Box
                             sx={{
                                 display: 'flex',
                                 alignItems: 'center',
                                 position: 'relative',
+                                marginLeft: 2,
                             }}
                         >
                             <CircularPercentage value={questionDataQuery.stats?.acRate} size={180}>
