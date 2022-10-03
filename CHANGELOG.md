@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/mkayander/leetpal/compare/v1.26.0...v1.26.1) (2022-10-03)
+
+
+### Bug Fixes
+
+* Allow images when sanitizing HTML ([5aec653](https://github.com/mkayander/leetpal/commit/5aec6534f3979bb8d4e2d144198cca96ac9aa0f8))
+
 # [1.26.0](https://github.com/mkayander/leetpal/compare/v1.25.1...v1.26.0) (2022-10-02)
 
 
