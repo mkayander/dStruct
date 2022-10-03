@@ -12,7 +12,14 @@ interface DailyProblemProps {
 export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery }) => {
     const question = questionDataQuery.query.data?.question;
 
-    const sanitizedContent = useMemo(() => question && sanitizeHtml(question.content), [question]);
+    const sanitizedContent = useMemo(
+        () =>
+            question &&
+            sanitizeHtml(question.content, {
+                allowedTags: ['img', 'p', 'strong', 'ul', 'li', 'pre', 'code'],
+            }),
+        [question]
+    );
 
     const loading = questionDataQuery.query.loading;
 
