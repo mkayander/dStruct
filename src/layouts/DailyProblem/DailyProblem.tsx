@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { Box, Divider, Typography } from '@mui/material';
+import { alpha, Box, Divider } from '@mui/material';
 import { DataSection, QuestionSummary } from '@src/components';
 import styles from './DailyProblem.module.scss';
 import { DailyQuestionDataQuery } from '@src/api/useDailyQuestionData';
+import theme from '@src/theme';
 
 interface DailyProblemProps {
     questionDataQuery: DailyQuestionDataQuery;
@@ -31,11 +32,20 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery })
                 <Box>
                     <QuestionSummary questionDataQuery={questionDataQuery} marginBottom={10} />
                     <Divider />
-                    <Typography
+                    <Box
                         className={styles.content}
-                        component="div"
                         dangerouslySetInnerHTML={{ __html: sanitizedContent ?? '' }}
-                    ></Typography>
+                        sx={{
+                            img: {
+                                borderRadius: theme.shape.borderRadius,
+                            },
+                            pre: {
+                                my: 1,
+                                borderRadius: theme.shape.borderRadius,
+                                background: alpha(theme.palette.primary.dark, 0.1),
+                            },
+                        }}
+                    />
                     <Divider />
                 </Box>
             )}
