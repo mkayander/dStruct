@@ -1,3 +1,15 @@
+# [1.27.0](https://github.com/mkayander/leetpal/compare/v1.26.1...v1.27.0) (2022-10-04)
+
+
+### Bug Fixes
+
+* Improve question content styles ([d4f4efe](https://github.com/mkayander/leetpal/commit/d4f4efeb40e8b42d28bd36fa429a3c1694ca657a))
+
+
+### Features
+
+* Use grid layout for the data sections at the dashboard ([ee1f885](https://github.com/mkayander/leetpal/commit/ee1f885482c9ca1014be88aa802d943e386081ef))
+
 ## [1.26.1](https://github.com/mkayander/leetpal/compare/v1.26.0...v1.26.1) (2022-10-03)
 
 
