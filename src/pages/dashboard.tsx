@@ -1,6 +1,6 @@
 import React from 'react';
 import { DailyProblem, LeetCodeStats, MainLayout, UserSettings } from '@src/layouts';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useGetUserProfileQuery } from '@src/graphql/generated';
 import { useDailyQuestionData } from '@src/api';
@@ -23,10 +23,20 @@ export default function DashboardPage() {
         <MainLayout>
             <Container>
                 <h1>{leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}</h1>
-                <UserSettings />
-                <LeetCodeStats userProfile={userProfileQueryResult} />
-                <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
-                <DailyProblem questionDataQuery={questionDataQuery} />
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <UserSettings />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <LeetCodeStats userProfile={userProfileQueryResult} />
+                    </Grid>
+                    <Grid item>
+                        <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
+                    </Grid>
+                    <Grid item>
+                        <DailyProblem questionDataQuery={questionDataQuery} />
+                    </Grid>
+                </Grid>
             </Container>
         </MainLayout>
     );
