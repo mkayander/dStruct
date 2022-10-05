@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/mkayander/leetpal/compare/v1.27.0...v1.28.0) (2022-10-05)
+
+
+### Features
+
+* Added "postinstall" script ([0e7ef76](https://github.com/mkayander/leetpal/commit/0e7ef76b8a937acbbc74f197d122be14ff3044fe))
+
 # [1.27.0](https://github.com/mkayander/leetpal/compare/v1.26.1...v1.27.0) (2022-10-04)
 
 
