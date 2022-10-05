@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/mkayander/leetpal/compare/v1.28.0...v1.28.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* Fixed Type Error when building the project ([6588db4](https://github.com/mkayander/leetpal/commit/6588db4b0931643c09d2c696e39ba842eaacf141))
+
 # [1.28.0](https://github.com/mkayander/leetpal/compare/v1.27.0...v1.28.0) (2022-10-05)
 
 
