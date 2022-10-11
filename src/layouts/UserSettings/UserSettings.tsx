@@ -4,7 +4,7 @@ import { Field, Formik } from 'formik';
 import { TextField } from 'formik-mui';
 import { trpc } from '@src/utils';
 import { useSession } from 'next-auth/react';
-import { useGetUserProfileLazyQuery } from '@src/graphql/generated';
+import { useGetUserProfileLazyQuery, useGlobalDataQuery } from '@src/graphql/generated';
 import { ManageAccounts } from '@mui/icons-material';
 import { DataSection } from '@src/components';
 
@@ -12,6 +12,10 @@ export const UserSettings: React.FC = () => {
     const session = useSession();
 
     const [getUserProfile, { loading: gqlLoading, error }] = useGetUserProfileLazyQuery();
+
+    const { data } = useGlobalDataQuery();
+
+    console.log(data);
 
     const userId = session.data?.user.id;
 
