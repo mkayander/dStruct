@@ -1,3 +1,19 @@
+# [1.29.0](https://github.com/mkayander/leetpal/compare/v1.28.1...v1.29.0) (2022-10-11)
+
+
+### Bug Fixes
+
+* Use new scalar types correctly. Remove redundant JSON parsing. ([51729d3](https://github.com/mkayander/leetpal/commit/51729d34dd551bf71854227326d3976a3918b883))
+
+
+### Features
+
+* Added globalData operation ([57a18e8](https://github.com/mkayander/leetpal/commit/57a18e8a097e953227b84daafffa679324be1320))
+* Added GraphQL scalars and session cookie parsing ([d480732](https://github.com/mkayander/leetpal/commit/d480732d20c2acba4eff539e2b7863cd0a524240))
+* Added test global query to check session authentication ([e126188](https://github.com/mkayander/leetpal/commit/e126188d11c96338ee74d1b2fd352b823d8c1398))
+* Installed cookie and codegen "add" packages ([d00689b](https://github.com/mkayander/leetpal/commit/d00689b3e3b6d9e625df1194ed1cc52f43c717bb))
+* Proxy session cookie to the target server ([f57156a](https://github.com/mkayander/leetpal/commit/f57156a6958966d6f793b6cb132c6dfed464ed6e))
+
 ## [1.28.1](https://github.com/mkayander/leetpal/compare/v1.28.0...v1.28.1) (2022-10-05)
 
 
