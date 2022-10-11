@@ -7,3 +7,16 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
+      - add:
+          content: "import CustomScalars from '../scalars'"
+    config:
+      preResolveTypes: false
+      scalars:
+        QuestionStats: "CustomScalars.QuestionStats"
+        SimilarQuestions: "CustomScalars.SimilarQuestions"
+        EnvInfo: "CustomScalars.EnvInfo"
+        MetaData: "CustomScalars.MetaData"
+
+hooks:
+  afterAllFileWrite:
+    - npx prettier --write

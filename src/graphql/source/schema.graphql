@@ -90,6 +90,12 @@ type CodeSnippet {
     langSlug: String!
 }
 
+# Fields that are received as JSON strings, and parsed to objects at Apollo client type policies
+scalar SimilarQuestions
+scalar QuestionStats
+scalar EnvInfo
+scalar MetaData
+
 type Question {
     questionId: Int!
     questionFrontendId: Int!
@@ -109,12 +115,12 @@ type Question {
     libraryUrl: String
 
     content: String!
-    envInfo: String!
+    envInfo: EnvInfo!
     exampleTestcases: String!
     sampleTestCase: String!
-    metaData: String!
-    similarQuestions: String!
-    stats: String!
+    metaData: MetaData!
+    similarQuestions: [SimilarQuestions!]!
+    stats: QuestionStats!
 
     likes: Int!
     dislikes: Int!
@@ -149,9 +155,31 @@ type ActiveDailyCodingChallengeQuestion {
     question: Question!
 }
 
+type NotificationStatus {
+    lastModified: Int!
+    numUnread: Int!
+}
+
+type Me {
+    userId: Int
+    isSignedIn: Boolean
+    isMockUser: Boolean
+    isPremium: Boolean
+    isVerified: Boolean
+    isAdmin: Boolean
+    isSuperuser: Boolean
+    isTranslator: Boolean
+    username: String!
+    avatar: String
+    permissions: [String]!
+    activeSessionId: Int!
+    notificationStatus: NotificationStatus
+}
+
 type Query {
     allQuestionsCount: [QuestionCount!]!
     matchedUser(username: String): User!
     activeDailyCodingChallengeQuestion: ActiveDailyCodingChallengeQuestion!
     question(titleSlug: String): Question!
+    userStatus: Me!
 }
