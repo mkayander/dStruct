@@ -12,7 +12,7 @@ import {
     Typography,
     useTheme,
 } from '@mui/material';
-import { Difficulty } from '@src/graphql/generated';
+import { Difficulty, QuestionDataQueryResult } from '@src/graphql/generated';
 import { CircularPercentage, RatingButtons, TopicTag } from '@src/components';
 import EventIcon from '@mui/icons-material/Event';
 import {
@@ -24,7 +24,6 @@ import {
     SignalCellular4Bar,
 } from '@mui/icons-material';
 import { BoxProps } from '@mui/material/Box/Box';
-import { DailyQuestionDataQuery } from '@src/api/useDailyQuestionData';
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
     All: SignalCellular0Bar,
@@ -34,13 +33,13 @@ const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
 };
 
 interface QuestionSummaryProps extends Exclude<BoxProps, 'position' | 'zIndex'> {
-    questionDataQuery: DailyQuestionDataQuery;
+    questionDataQuery: QuestionDataQueryResult;
 }
 
 export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQuery, ...props }) => {
     const theme = useTheme();
 
-    const question = questionDataQuery.query.data?.question;
+    const question = questionDataQuery.data?.question;
     console.log(questionDataQuery);
 
     const difficultyColor = question && theme.palette.question[question.difficulty].main;
@@ -146,12 +145,12 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
                                 marginLeft: 2,
                             }}
                         >
-                            <CircularPercentage value={questionDataQuery.stats?.acRate} size={180}>
+                            <CircularPercentage value={question.stats.acRate} size={180}>
                                 <Typography variant="caption">Acceptance</Typography>
-                                <Typography fontWeight="bold">{questionDataQuery.stats?.acRate}%</Typography>
+                                <Typography fontWeight="bold">{question.stats.acRate}%</Typography>
                                 <Typography variant="caption">
-                                    <span style={{ fontWeight: 'bold' }}>{questionDataQuery.stats?.totalAccepted}</span>{' '}
-                                    / {questionDataQuery.stats?.totalSubmission}
+                                    <span style={{ fontWeight: 'bold' }}>{question.stats.totalAccepted}</span> /{' '}
+                                    {question.stats.totalSubmission}
                                 </Typography>
                             </CircularPercentage>
                         </Box>

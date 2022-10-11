@@ -3,15 +3,15 @@ import sanitizeHtml from 'sanitize-html';
 import { alpha, Box, Divider } from '@mui/material';
 import { DataSection, QuestionSummary } from '@src/components';
 import styles from './DailyProblem.module.scss';
-import { DailyQuestionDataQuery } from '@src/api/useDailyQuestionData';
 import theme from '@src/theme';
+import { QuestionDataQueryResult } from '@src/graphql/generated';
 
 interface DailyProblemProps {
-    questionDataQuery: DailyQuestionDataQuery;
+    questionDataQuery: QuestionDataQueryResult;
 }
 
 export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery }) => {
-    const question = questionDataQuery.query.data?.question;
+    const question = questionDataQuery.data?.question;
 
     const sanitizedContent = useMemo(
         () =>
@@ -22,7 +22,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery })
         [question]
     );
 
-    const loading = questionDataQuery.query.loading;
+    const loading = questionDataQuery.loading;
 
     if (question) console.info('Question of today:', question);
 
