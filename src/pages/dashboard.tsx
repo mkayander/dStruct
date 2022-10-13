@@ -30,7 +30,7 @@ export default function DashboardPage() {
                     <Grid item xs={6}>
                         <LeetCodeStats userProfile={userProfileQueryResult} />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
                     </Grid>
                     <Grid item>
