@@ -10,6 +10,7 @@
         "db:generate": "prisma generate",
         "db:migrate-dev": "prisma migrate dev",
         "db:migrate-status": "prisma migrate status",
+        "db:push": "prisma db push",
         "generate-graphql": "graphql-codegen --config codegen.yml",
         "postinstall": "npm run generate-graphql && npm run db:generate",
         "semantic-release": "semantic-release"
