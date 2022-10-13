@@ -29,7 +29,11 @@ const cache = new InMemoryCache({
         QuestionNode: {
             fields: {
                 stats: {
-                    read: jsonParseRead,
+                    read: (stats: string) => {
+                        const result = jsonParseRead(stats);
+                        result.acRate = parseFloat(result.acRate);
+                        return result;
+                    },
                 },
                 similarQuestions: {
                     read: jsonParseRead,
