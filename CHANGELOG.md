@@ -1,3 +1,18 @@
+# [1.30.0](https://github.com/mkayander/leetpal/compare/v1.29.0...v1.30.0) (2022-10-13)
+
+
+### Bug Fixes
+
+* Fixed acRate by parsing it to a float ([1d11aa0](https://github.com/mkayander/leetpal/commit/1d11aa06e1d46e2c85b81af235f3b1f74a0a002c))
+* Fixed pointer events at svg circle ([8d50cdb](https://github.com/mkayander/leetpal/commit/8d50cdbee432a61b957cbf8d21c77d37c1cb33b9))
+* Fixed question summary centering ([c9e0f3f](https://github.com/mkayander/leetpal/commit/c9e0f3fbb7caa1afb35ff5382265e1a73c53e71f))
+
+
+### Features
+
+* Added prisma db push script ([7d514f9](https://github.com/mkayander/leetpal/commit/7d514f9256095c3cfaa58d397866994e5287ae00))
+* Moved to MySql database provider ([17f77df](https://github.com/mkayander/leetpal/commit/17f77df1df1958f956ba14c4b6cc12416c54c4a2))
+
 # [1.29.0](https://github.com/mkayander/leetpal/compare/v1.28.1...v1.29.0) (2022-10-11)
 
 
