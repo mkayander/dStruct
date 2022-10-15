@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/mkayander/leetpal/compare/v1.30.0...v1.31.0) (2022-10-15)
+
+
+### Features
+
+* Added initial mysql migration for the local dev database ([23e4871](https://github.com/mkayander/leetpal/commit/23e48713bb10b62b07c085678bcbdb5328339da1))
+
 # [1.30.0](https://github.com/mkayander/leetpal/compare/v1.29.0...v1.30.0) (2022-10-13)
 
 
