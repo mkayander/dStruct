@@ -1,3 +1,15 @@
+# [1.32.0](https://github.com/mkayander/leetpal/compare/v1.31.0...v1.32.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* Disabled TRPC SSR to fix the very long startup issue ([17cde50](https://github.com/mkayander/leetpal/commit/17cde503b91d6de649c3986afc1c31d50dac75e6))
+
+
+### Features
+
+* Removed test AWS upload page ([35ada28](https://github.com/mkayander/leetpal/commit/35ada2813cb362fee80318d6f41a5b11061605c1))
+
 # [1.31.0](https://github.com/mkayander/leetpal/compare/v1.30.0...v1.31.0) (2022-10-15)
 
 
