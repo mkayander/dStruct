@@ -1,3 +1,17 @@
+# [1.33.0](https://github.com/mkayander/leetpal/compare/v1.32.0...v1.33.0) (2022-11-06)
+
+
+### Bug Fixes
+
+* Prevent hydration errors regarding the new link behavior ([47b5d58](https://github.com/mkayander/leetpal/commit/47b5d58e1ed28e03844a6e9964fa81eeaf1b0b46))
+* Remove excessive console logs ([1015096](https://github.com/mkayander/leetpal/commit/101509620559c0a5d5588e90bc49b0a5e5995c6e))
+* Removed deprecated image prop ([074a4cf](https://github.com/mkayander/leetpal/commit/074a4cf6219336b5d254443a599c6ca9800d71f0))
+
+
+### Features
+
+* Updated to NextJS 13 ([f077db0](https://github.com/mkayander/leetpal/commit/f077db04978146e0e31d96f2060d70622a46e595))
+
 # [1.32.0](https://github.com/mkayander/leetpal/compare/v1.31.0...v1.32.0) (2022-10-24)
 
 
