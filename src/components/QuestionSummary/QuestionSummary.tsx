@@ -40,7 +40,6 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({ questionDataQu
     const theme = useTheme();
 
     const question = questionDataQuery.data?.question;
-    console.log(questionDataQuery);
 
     const difficultyColor = question && theme.palette.question[question.difficulty].main;
     const DifficultyIcon = question && DifficultyIconMap[question.difficulty];

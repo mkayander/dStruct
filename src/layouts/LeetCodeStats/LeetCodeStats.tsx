@@ -37,8 +37,6 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ userProfile }) => 
         return obj;
     }, [userProfile.data]);
 
-    console.log(userProfile.data);
-
     return (
         <DataSection title={'LeetCode Stats'} Icon={Code}>
             <Box

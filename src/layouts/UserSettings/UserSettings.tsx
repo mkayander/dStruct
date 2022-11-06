@@ -15,8 +15,6 @@ export const UserSettings: React.FC = () => {
 
     const { data } = useGlobalDataQuery();
 
-    console.log(data);
-
     const userId = session.data?.user.id;
 
     const {
