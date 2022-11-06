@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/mkayander/leetpal/compare/v1.33.0...v1.33.1) (2022-11-06)
+
+
+### Bug Fixes
+
+* Fixed user id type ([cf8aed3](https://github.com/mkayander/leetpal/commit/cf8aed3341efa1d6e5892c15048c7e5bc9132493))
+
 # [1.33.0](https://github.com/mkayander/leetpal/compare/v1.32.0...v1.33.0) (2022-11-06)
 
 
