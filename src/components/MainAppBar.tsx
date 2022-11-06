@@ -182,7 +182,7 @@ export const MainAppBar: React.FC = () => {
                                             src={getImageUrl(session.data.user.bucketImage || AVATAR_PLACEHOLDER)}
                                             alt={`${session.data.user.name} avatar`}
                                             referrerPolicy="no-referrer"
-                                            layout="fill"
+                                            fill={true}
                                         />
                                     </Avatar>
                                 </IconButton>
