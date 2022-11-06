@@ -83,7 +83,8 @@ export const MainAppBar: React.FC = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <CodeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Link href="/">
+                    {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
+                    <Link href="/" legacyBehavior={true}>
                         <Typography
                             variant="h6"
                             noWrap
@@ -140,7 +141,7 @@ export const MainAppBar: React.FC = () => {
                         </Menu>
                     </Box>
                     <CodeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Link href="/">
+                    <Link href="/" legacyBehavior={true}>
                         <Typography
                             variant="h5"
                             noWrap
