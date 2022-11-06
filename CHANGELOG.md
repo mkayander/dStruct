@@ -1,3 +1,10 @@
+## [1.33.2](https://github.com/mkayander/leetpal/compare/v1.33.1...v1.33.2) (2022-11-06)
+
+
+### Bug Fixes
+
+* Fixed svg style prop ([ebe795e](https://github.com/mkayander/leetpal/commit/ebe795e23a1eede2ca1646e7177db1844226031b))
+
 ## [1.33.1](https://github.com/mkayander/leetpal/compare/v1.33.0...v1.33.1) (2022-11-06)
 
 
