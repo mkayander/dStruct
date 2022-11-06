@@ -30,10 +30,9 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
 
     const radius = (SIZE - thickness) / 2;
 
-    const circleStyle: React.CSSProperties = {};
     const circumference = 2 * Math.PI * radius;
-    circleStyle.strokeDasharray = circumference.toFixed(3);
-    circleStyle.strokeDashoffset = `${(((100 - displayedLevel) / 100) * circumference).toFixed(3)}px`;
+    const strokeDasharray = circumference.toFixed(3);
+    const strokeDashoffset = `${(((100 - displayedLevel) / 100) * circumference).toFixed(3)}px`;
 
     const sizePx = `${size}px`;
 
@@ -75,7 +74,10 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
                     stroke="url(#circle-gradient)"
                     strokeWidth={thickness}
                     fill="none"
-                    style={circleStyle}
+                    style={{
+                        strokeDasharray,
+                        strokeDashoffset,
+                    }}
                 />
             </svg>
             <div className={styles.content}>{children ? children : `${value?.toFixed(2)}%`}</div>
