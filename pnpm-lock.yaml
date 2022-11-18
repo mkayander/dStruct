@@ -17,6 +17,7 @@ specifiers:
   '@semantic-release/changelog': ^6.0.1
   '@semantic-release/git': ^10.0.1
   '@tanstack/react-query': ^4.16.1
+  '@top-tools/easyenv': ^1.4.2
   '@trpc/client': ^9.27.4
   '@trpc/next': ^9.27.4
   '@trpc/react': ^9.27.4
@@ -65,6 +66,7 @@ dependencies:
   '@next-auth/prisma-adapter': 1.0.5_2pl3b2nwmjya7el2zbe6cwkney
   '@prisma/client': 4.6.1_prisma@4.6.1
   '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
+  '@top-tools/easyenv': 1.4.2
   '@trpc/client': 9.27.4_@trpc+server@9.27.4
   '@trpc/next': 9.27.4_evaliy7u7lpzyn5acv2qvljeme
   '@trpc/react': 9.27.4_2g6rn7sj2da6xgohvi4oglgmnq
@@ -2198,6 +2200,11 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
     dev: true
+
+  /@top-tools/easyenv/1.4.2:
+    resolution: {integrity: sha512-bxCUwOy5HWaXdCW6/QHwCzoIbs5XPOruiSzPPcwHHr3DeF4yqQOULtV4NHrSaQ34/qu91oOxol+kGbk1QhSjvg==}
+    hasBin: true
+    dev: false
 
   /@trpc/client/9.27.4_@trpc+server@9.27.4:
     resolution: {integrity: sha512-NyS3J333xy8PJWGTSKO0egvj3x/s4SaSPx7XDWHf/i51W/i5Fla+sNxYpv+4z+SwE2xyJKszN2EZbvKIW2X/wA==}
