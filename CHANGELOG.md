@@ -1,3 +1,11 @@
+# [1.34.0](https://github.com/mkayander/leetpal/compare/v1.33.2...v1.34.0) (2022-11-18)
+
+
+### Features
+
+* Added "easyenv" lib usage ([47d2a5b](https://github.com/mkayander/leetpal/commit/47d2a5ba113b281394ea3f182942db2b193924c4))
+* Updated dependencies ([734b4a1](https://github.com/mkayander/leetpal/commit/734b4a14255fddd5591bf1173a8e437ec748dff1))
+
 ## [1.33.2](https://github.com/mkayander/leetpal/compare/v1.33.1...v1.33.2) (2022-11-06)
 
 
