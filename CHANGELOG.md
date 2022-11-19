@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/mkayander/leetpal/compare/v1.35.0...v1.36.0) (2022-11-19)
+
+
+### Features
+
+* Use '#' alias instead of '[@src](https://github.com/src)' ([75861f7](https://github.com/mkayander/leetpal/commit/75861f74b29da5b51336a1412418af1032d4dcc7))
+
 # [1.35.0](https://github.com/mkayander/leetpal/compare/v1.34.0...v1.35.0) (2022-11-19)
 
 
