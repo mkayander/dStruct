@@ -24,8 +24,6 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({ questionDataQuery })
 
     const loading = questionDataQuery.loading;
 
-    if (question) console.info('Question of today:', question);
-
     return (
         <DataSection title={question?.title || 'Daily Problem'} caption="📅 Question Of Today" isLoading={loading}>
             {question && (

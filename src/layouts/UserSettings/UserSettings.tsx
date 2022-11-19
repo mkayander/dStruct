@@ -21,20 +21,21 @@ export const UserSettings: React.FC = () => {
         data: user,
         isLoading,
         refetch,
-    } = trpc.useQuery(['user.getById', userId], {
+    } = trpc.user.getById.useQuery(userId, {
         enabled: Boolean(userId),
+        trpc: {},
     });
 
     const trpcUtils = trpc.useContext();
 
-    const linkUser = trpc.useMutation(['leetcode.linkUser']);
-    const unlinkUser = trpc.useMutation(['leetcode.unlinkUser']);
+    const linkUser = trpc.leetcode.linkUser.useMutation();
+    const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
 
     const loading = gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading;
 
     const handleLinkedUserReset = async () => {
         await unlinkUser.mutate();
-        await trpcUtils.invalidateQueries(['user.getById', userId]);
+        await trpcUtils.invalidate({ queryKey: ['user.getById', userId] });
         await refetch();
     };
 
@@ -80,7 +81,7 @@ export const UserSettings: React.FC = () => {
                             userAvatar: userAvatar || 'none',
                         });
 
-                        await trpcUtils.invalidateQueries(['user.getById', userId]);
+                        await trpcUtils.invalidate({ queryKey: ['user.getById', userId] });
                         await refetch();
                     }}
                 >

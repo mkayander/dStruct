@@ -18,7 +18,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
     const [status, setStatus] = useState<Status>(bucketImage ? 'done' : 'loading');
     const [isLoading, setIsLoading] = useState(false);
 
-    const mutation = trpc.useMutation(['user.setBucketImage']);
+    const mutation = trpc.user.setBucketImage.useMutation();
 
     useEffect(() => {
         if (status === 'done' || bucketImage || isLoading) return;

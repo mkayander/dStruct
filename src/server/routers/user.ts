@@ -1,31 +1,29 @@
-import { createRouter } from '../createRouter';
 import { z } from 'zod';
+import { publicProcedure, router } from '@src/server/trpc';
 
-export const userRouter = createRouter()
-    // read all
-    .query('all', {
-        async resolve({ ctx }) {
-            return ctx.prisma.user.findMany();
-        },
-    })
-    .query('getById', {
-        input: z.ostring(),
-        async resolve({ input: id, ctx }) {
-            return ctx.prisma.user.findFirstOrThrow({
-                where: { id },
-            });
-        },
-    })
-    .mutation('setBucketImage', {
-        input: z.object({
-            imageName: z.string(),
-        }),
-        async resolve({ input: { imageName }, ctx }) {
+export const userRouter = router({
+    all: publicProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.user.findMany();
+    }),
+
+    getById: publicProcedure.input(z.ostring()).query(async ({ input: id, ctx }) => {
+        return ctx.prisma.user.findFirstOrThrow({
+            where: { id },
+        });
+    }),
+
+    setBucketImage: publicProcedure
+        .input(
+            z.object({
+                imageName: z.string(),
+            })
+        )
+        .mutation(async ({ input: { imageName }, ctx }) => {
             return ctx.prisma.user.update({
                 where: { id: ctx.session?.user.id },
                 data: {
                     bucketImage: imageName,
                 },
             });
-        },
-    });
+        }),
+});

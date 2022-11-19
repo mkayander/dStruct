@@ -4,7 +4,7 @@ import { trpc } from '@src/utils';
 import { MainLayout } from '@src/layouts';
 
 const ApiExamplePage: NextPage = () => {
-    const avatar = trpc.useQuery(['avatar']);
+    const avatar = trpc.avatar.useQuery();
 
     return (
         <MainLayout>
