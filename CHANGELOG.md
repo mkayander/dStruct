@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/mkayander/leetpal/compare/v1.34.0...v1.35.0) (2022-11-19)
+
+
+### Features
+
+* Migrated to TRPC V10 ([ec6d571](https://github.com/mkayander/leetpal/commit/ec6d571393b5a69162fce3372d804270becda607))
+
 # [1.34.0](https://github.com/mkayander/leetpal/compare/v1.33.2...v1.34.0) (2022-11-18)
 
 
