@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '@src/server/trpc';
+import { publicProcedure, router } from '#/server/trpc';
 
 export const userRouter = router({
     all: publicProcedure.query(async ({ ctx }) => {

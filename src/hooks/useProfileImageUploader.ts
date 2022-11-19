@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { useSession } from 'next-auth/react';
 import axios from 'axios';
 import S3 from 'aws-sdk/clients/s3';
-import { trpc } from '@src/utils';
+import { trpc } from '#/utils';
 
 type SessionHook = ReturnType<typeof useSession>;
 type Status = 'loading' | 'done';

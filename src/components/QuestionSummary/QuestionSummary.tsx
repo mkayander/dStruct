@@ -12,8 +12,8 @@ import {
     Typography,
     useTheme,
 } from '@mui/material';
-import { Difficulty, QuestionDataQueryResult } from '@src/graphql/generated';
-import { CircularPercentage, RatingButtons, TopicTag } from '@src/components';
+import { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
+import { CircularPercentage, RatingButtons, TopicTag } from '#/components';
 import EventIcon from '@mui/icons-material/Event';
 import {
     EventRepeatTwoTone,

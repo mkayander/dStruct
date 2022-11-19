@@ -1,6 +1,6 @@
 import superjson from 'superjson';
 import { initTRPC } from '@trpc/server';
-import { Context } from '@src/server/context';
+import { Context } from '#/server/context';
 
 // Avoid exporting the entire t-object
 // since it's not very descriptive.

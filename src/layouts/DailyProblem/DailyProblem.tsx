@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { alpha, Box, Divider } from '@mui/material';
-import { DataSection, QuestionSummary } from '@src/components';
+import { DataSection, QuestionSummary } from '#/components';
+import theme from '#/theme';
+import { QuestionDataQueryResult } from '#/graphql/generated';
+
 import styles from './DailyProblem.module.scss';
-import theme from '@src/theme';
-import { QuestionDataQueryResult } from '@src/graphql/generated';
 
 interface DailyProblemProps {
     questionDataQuery: QuestionDataQueryResult;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Footer, MainAppBar } from '@src/components';
+import { Footer, MainAppBar } from '#/components';
 import { Box, LinearProgress } from '@mui/material';
 
 interface MainLayoutProps {

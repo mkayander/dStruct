@@ -3,8 +3,8 @@ import superjson from 'superjson';
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
-import type { AppRouter } from '@src/server/routers/app';
-import { getBaseUrl } from '@src/utils/getBaseUrl';
+import type { AppRouter } from '#/server/routers/app';
+import { getBaseUrl } from '#/utils/getBaseUrl';
 
 /**
  * Extend `NextPageContext` with metadata that can be picked up by `responseMeta()` when server-side rendering

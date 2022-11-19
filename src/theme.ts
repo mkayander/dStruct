@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import { PaletteColor } from '@mui/material';
-import { Difficulty } from '@src/graphql/generated';
+import { Difficulty } from '#/graphql/generated';
 
 // Create a theme instance.
 const theme = createTheme({

@@ -1,10 +1,10 @@
 /**
  * This file contains the root router of the tRPC-backend
  */
-import { router, publicProcedure } from '@src/server/trpc';
-import { problemRouter } from '@src/server/routers/problem';
-import { leetcodeRouter } from '@src/server/routers/leetcode';
-import { userRouter } from '@src/server/routers/user';
+import { router, publicProcedure } from '#/server/trpc';
+import { problemRouter } from '#/server/routers/problem';
+import { leetcodeRouter } from '#/server/routers/leetcode';
+import { userRouter } from '#/server/routers/user';
 
 export const appRouter = router({
     health: publicProcedure.query(() => {

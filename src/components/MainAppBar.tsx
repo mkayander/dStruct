@@ -17,8 +17,8 @@ import {
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useProfileImageUploader } from '@src/hooks';
-import { getImageUrl } from '@src/utils';
+import { useProfileImageUploader } from '#/hooks';
+import { getImageUrl } from '#/utils';
 import Image from 'next/image';
 
 const AVATAR_PLACEHOLDER = '/avatars/placeholder.png';

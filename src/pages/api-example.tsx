@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { Box, CircularProgress, Container, Typography } from '@mui/material';
-import { trpc } from '@src/utils';
-import { MainLayout } from '@src/layouts';
+import { trpc } from '#/utils';
+import { MainLayout } from '#/layouts';
 
 const ApiExamplePage: NextPage = () => {
     const avatar = trpc.avatar.useQuery();

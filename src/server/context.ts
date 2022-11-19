@@ -5,7 +5,7 @@ import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { NodeHTTPCreateContextFnOptions } from '@trpc/server/adapters/node-http';
 import { getSession } from 'next-auth/react';
-import prisma from '@src/server/prisma';
+import prisma from '#/server/prisma';
 
 /**
  * Creates context for an incoming request

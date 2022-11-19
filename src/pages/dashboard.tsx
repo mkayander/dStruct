@@ -1,10 +1,10 @@
 import React from 'react';
-import { DailyProblem, LeetCodeStats, MainLayout, UserSettings } from '@src/layouts';
+import { DailyProblem, LeetCodeStats, MainLayout, UserSettings } from '#/layouts';
 import { Container, Grid } from '@mui/material';
 import { useSession } from 'next-auth/react';
-import { useGetUserProfileQuery } from '@src/graphql/generated';
-import { useDailyQuestionData } from '@src/api';
-import { QuestionSummary } from '@src/components';
+import { useGetUserProfileQuery } from '#/graphql/generated';
+import { useDailyQuestionData } from '#/api';
+import { QuestionSummary } from '#/components';
 
 export default function DashboardPage() {
     const session = useSession();

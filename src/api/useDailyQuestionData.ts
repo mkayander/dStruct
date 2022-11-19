@@ -1,4 +1,4 @@
-import { useQuestionDataQuery, useQuestionOfTodayQuery } from '@src/graphql/generated';
+import { useQuestionDataQuery, useQuestionOfTodayQuery } from '#/graphql/generated';
 
 export const useDailyQuestionData = (
     options?: Exclude<Parameters<typeof useQuestionDataQuery>, 'variables' | 'skip'>

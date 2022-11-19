@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Field, Formik } from 'formik';
 import { TextField } from 'formik-mui';
-import { trpc } from '@src/utils';
+import { trpc } from '#/utils';
 import { useSession } from 'next-auth/react';
-import { useGetUserProfileLazyQuery, useGlobalDataQuery } from '@src/graphql/generated';
+import { useGetUserProfileLazyQuery, useGlobalDataQuery } from '#/graphql/generated';
 import { ManageAccounts } from '@mui/icons-material';
-import { DataSection } from '@src/components';
+import { DataSection } from '#/components';
 
 export const UserSettings: React.FC = () => {
     const session = useSession();

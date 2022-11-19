@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { router, publicProcedure } from '@src/server/trpc';
+import { router, publicProcedure } from '#/server/trpc';
 
 export const leetcodeRouter = router({
     linkUser: publicProcedure

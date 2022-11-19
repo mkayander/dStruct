@@ -6,14 +6,14 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ApolloProvider } from '@apollo/client';
-import { trpc } from '@src/utils';
+import { trpc } from '#/utils';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '@src/theme';
+import theme from '#/theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import { apolloClient } from '@src/graphql/apolloClient';
-import { GlobalContext } from '@src/context';
-import { GlobalContextType } from '@src/context/GlobalContext';
-import { reactQueryClient } from '@src/utils/reactQueryClient';
+import { apolloClient } from '#/graphql/apolloClient';
+import { GlobalContext } from '#/context';
+import { GlobalContextType } from '#/context/GlobalContext';
+import { reactQueryClient } from '#/utils/reactQueryClient';
 
 interface MyAppProps {
     session: Session;

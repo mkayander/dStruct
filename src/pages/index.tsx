@@ -1,3 +1,3 @@
-import DashboardPage from '@src/pages/dashboard';
+import DashboardPage from '#/pages/dashboard';
 
 export default DashboardPage;
