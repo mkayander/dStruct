@@ -49,7 +49,7 @@ const cache = new InMemoryCache({
     },
 });
 
-export const client = new ApolloClient({
+export const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink),
     cache,
 });
