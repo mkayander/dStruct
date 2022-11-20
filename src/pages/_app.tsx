@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
-import '../../styles/globals.css';
-import type { AppProps } from 'next/app';
+import type { AppType } from 'next/app';
 import Head from 'next/head';
 import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
+import { getSession, SessionProvider } from 'next-auth/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ApolloProvider } from '@apollo/client';
 import { trpc } from '#/utils';
@@ -15,16 +14,18 @@ import { GlobalContext } from '#/context';
 import { GlobalContextType } from '#/context/GlobalContext';
 import { reactQueryClient } from '#/utils/reactQueryClient';
 
+import '../../styles/globals.css';
+
 interface MyAppProps {
-    session: Session;
+    session: Session | null;
 }
 
-const MyApp = ({ Component, pageProps }: AppProps<MyAppProps>) => {
+const MyApp: AppType<MyAppProps> = ({ Component, pageProps }) => {
     const globalContext = useMemo<GlobalContextType>(() => ({}), []);
 
     return (
         <GlobalContext.Provider value={globalContext}>
-            <SessionProvider session={pageProps.session} refetchInterval={0}>
+            <SessionProvider session={pageProps.session}>
                 <ApolloProvider client={apolloClient}>
                     <QueryClientProvider client={reactQueryClient}>
                         <ThemeProvider theme={theme}>
@@ -42,6 +43,12 @@ const MyApp = ({ Component, pageProps }: AppProps<MyAppProps>) => {
             </SessionProvider>
         </GlobalContext.Provider>
     );
+};
+
+MyApp.getInitialProps = async ({ ctx }) => {
+    return {
+        session: await getSession(ctx),
+    };
 };
 
 export default trpc.withTRPC(MyApp);

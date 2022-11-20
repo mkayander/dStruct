@@ -1,5 +1,5 @@
 import superjson from 'superjson';
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 import { Context } from '#/server/context';
 
 // Avoid exporting the entire t-object
@@ -40,3 +40,25 @@ export const middleware = t.middleware;
  * @see https://trpc.io/docs/v10/merging-routers
  */
 export const mergeRouters = t.mergeRouters;
+
+const isAuthed = middleware(({ next, ctx }) => {
+    const user = ctx.session?.user;
+
+    if (!user?.name) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+
+    return next({
+        ctx: {
+            user: {
+                ...user,
+                name: user.name,
+            },
+        },
+    });
+});
+
+/**
+ * Protected base procedure
+ */
+export const authedProcedure = t.procedure.use(isAuthed);
