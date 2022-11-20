@@ -1,3 +1,10 @@
+## [1.36.2](https://github.com/mkayander/leetpal/compare/v1.36.1...v1.36.2) (2022-11-20)
+
+
+### Bug Fixes
+
+* Migrated to @easyenv/core ([9746a2b](https://github.com/mkayander/leetpal/commit/9746a2ba9add646d3f4a2983f73c697cb6d881e3))
+
 ## [1.36.1](https://github.com/mkayander/leetpal/compare/v1.36.0...v1.36.1) (2022-11-20)
 
 
