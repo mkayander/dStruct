@@ -1,3 +1,11 @@
+## [1.36.5](https://github.com/mkayander/leetpal/compare/v1.36.4...v1.36.5) (2022-11-20)
+
+
+### Bug Fixes
+
+* Updated next-auth ([0301169](https://github.com/mkayander/leetpal/commit/0301169b50d4f0590e8aa24584975f177f5a568e))
+* Use NodeJS version 16 ([1521afe](https://github.com/mkayander/leetpal/commit/1521afe1dab6158ce876b545b13d27884347812f))
+
 ## [1.36.4](https://github.com/mkayander/leetpal/compare/v1.36.3...v1.36.4) (2022-11-20)
 
 
