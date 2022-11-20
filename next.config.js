@@ -1,4 +1,4 @@
-const { createEnvObject } = require('@top-tools/easyenv');
+const { createEnvObject } = require('@easyenv/core');
 
 const env = createEnvObject();
 
