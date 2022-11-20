@@ -1,3 +1,11 @@
+## [1.36.4](https://github.com/mkayander/leetpal/compare/v1.36.3...v1.36.4) (2022-11-20)
+
+
+### Bug Fixes
+
+* Fixed long build time issue ([560dda0](https://github.com/mkayander/leetpal/commit/560dda0023253944a52c2ac248aae054a4c28c25))
+* tsconfig update by NextJS ([9bed5b2](https://github.com/mkayander/leetpal/commit/9bed5b29f183efad27a5a719a3f988be57db818a))
+
 ## [1.36.3](https://github.com/mkayander/leetpal/compare/v1.36.2...v1.36.3) (2022-11-20)
 
 
