@@ -1,3 +1,10 @@
+## [1.36.6](https://github.com/mkayander/leetpal/compare/v1.36.5...v1.36.6) (2022-11-20)
+
+
+### Bug Fixes
+
+* Updated lock file ([a8d3d5c](https://github.com/mkayander/leetpal/commit/a8d3d5caed6c9bd9a173ba73945008146b49ecc9))
+
 ## [1.36.5](https://github.com/mkayander/leetpal/compare/v1.36.4...v1.36.5) (2022-11-20)
 
 
