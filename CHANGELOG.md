@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/mkayander/leetpal/compare/v1.36.0...v1.36.1) (2022-11-20)
+
+
+### Bug Fixes
+
+* Updated easyenv ([4a01b97](https://github.com/mkayander/leetpal/commit/4a01b97da78373fe54588203b2168680400e13a8))
+
 # [1.36.0](https://github.com/mkayander/leetpal/compare/v1.35.0...v1.36.0) (2022-11-19)
 
 
