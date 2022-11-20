@@ -1,3 +1,11 @@
+## [1.36.3](https://github.com/mkayander/leetpal/compare/v1.36.2...v1.36.3) (2022-11-20)
+
+
+### Bug Fixes
+
+* Enable app dir ([a31777e](https://github.com/mkayander/leetpal/commit/a31777eae2dd945fa069b798a0e92ed1e3e0ae44))
+* Opt-out static compilation for the examples page ([753e338](https://github.com/mkayander/leetpal/commit/753e33812088f685ea9ff16da631f9099c7440e9))
+
 ## [1.36.2](https://github.com/mkayander/leetpal/compare/v1.36.1...v1.36.2) (2022-11-20)
 
 
