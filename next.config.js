@@ -11,6 +11,9 @@ const nextConfig = {
     images: {
         domains: [new URL(env.BUCKET_BASE_URL).hostname],
     },
+    experimental: {
+        appDir: true,
+    },
 };
 
 module.exports = nextConfig;
