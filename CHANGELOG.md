@@ -1,3 +1,10 @@
+## [1.36.7](https://github.com/mkayander/leetpal/compare/v1.36.6...v1.36.7) (2022-11-21)
+
+
+### Bug Fixes
+
+* Changed project core structure ([32ce434](https://github.com/mkayander/leetpal/commit/32ce4341bb92a555c6ab7e14c8c2ce2b36fc0b66))
+
 ## [1.36.6](https://github.com/mkayander/leetpal/compare/v1.36.5...v1.36.6) (2022-11-20)
 
 
