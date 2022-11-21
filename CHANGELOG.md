@@ -1,3 +1,10 @@
+## [1.36.8](https://github.com/mkayander/leetpal/compare/v1.36.7...v1.36.8) (2022-11-21)
+
+
+### Bug Fixes
+
+* Move Prisma to main deps ([fdaebf4](https://github.com/mkayander/leetpal/commit/fdaebf4d0d954e476f50b4ede462326f152410f6))
+
 ## [1.36.7](https://github.com/mkayander/leetpal/compare/v1.36.6...v1.36.7) (2022-11-21)
 
 
