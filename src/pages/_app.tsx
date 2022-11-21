@@ -3,7 +3,7 @@ import type { AppType } from 'next/app';
 import Head from 'next/head';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
-import { QueryClientProvider } from '@tanstack/react-query';
+// import { QueryClientProvider } from '@tanstack/react-query';
 import { ApolloProvider } from '@apollo/client';
 import { trpc } from '#/utils';
 import { ThemeProvider } from '@mui/material/styles';
@@ -12,7 +12,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { apolloClient } from '#/graphql/apolloClient';
 import { GlobalContext } from '#/context';
 import { GlobalContextType } from '#/context/GlobalContext';
-import { reactQueryClient } from '#/utils/reactQueryClient';
+// import { reactQueryClient } from '#/utils/reactQueryClient';
 
 import '../styles/globals.css';
 
@@ -27,18 +27,18 @@ const MyApp: AppType<MyAppProps> = ({ Component, pageProps }) => {
         <GlobalContext.Provider value={globalContext}>
             <SessionProvider session={pageProps.session}>
                 <ApolloProvider client={apolloClient}>
-                    <QueryClientProvider client={reactQueryClient}>
-                        <ThemeProvider theme={theme}>
-                            <Head>
-                                <title>LeetPal - your pal in learning</title>
-                                {/* PWA primary color */}
-                                <meta name="theme-color" content={theme.palette.primary.main} />
-                                <meta name="viewport" content="initial-scale=1, width=device-width" />
-                            </Head>
-                            <CssBaseline />
-                            <Component {...pageProps} />
-                        </ThemeProvider>
-                    </QueryClientProvider>
+                    {/*<QueryClientProvider client={reactQueryClient}>*/}
+                    <ThemeProvider theme={theme}>
+                        <Head>
+                            <title>LeetPal - your pal in learning</title>
+                            {/* PWA primary color */}
+                            <meta name="theme-color" content={theme.palette.primary.main} />
+                            <meta name="viewport" content="initial-scale=1, width=device-width" />
+                        </Head>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                    {/*</QueryClientProvider>*/}
                 </ApolloProvider>
             </SessionProvider>
         </GlobalContext.Provider>
