@@ -4,8 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "cross-env NODE_ENV=production && next build",
-        "start": "cross-env NODE_ENV=production && next start",
+        "build": "next build",
+        "start": "next start",
         "lint": "next lint",
         "db:generate": "prisma generate",
         "db:migrate-dev": "prisma migrate dev",
