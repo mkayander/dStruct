@@ -1,3 +1,10 @@
+## [1.36.9](https://github.com/mkayander/leetpal/compare/v1.36.8...v1.36.9) (2022-11-21)
+
+
+### Bug Fixes
+
+* Use cross-env ([c5d0257](https://github.com/mkayander/leetpal/commit/c5d025795c4c265d515b917d45f572cc9e64cc10))
+
 ## [1.36.8](https://github.com/mkayander/leetpal/compare/v1.36.7...v1.36.8) (2022-11-21)
 
 
