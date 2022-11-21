@@ -1,3 +1,11 @@
+## [1.36.10](https://github.com/mkayander/leetpal/compare/v1.36.9...v1.36.10) (2022-11-21)
+
+
+### Bug Fixes
+
+* Removed production envs ([63bc897](https://github.com/mkayander/leetpal/commit/63bc897dd34b1b885d8a4521debf902d60e29156))
+* Removed query client provider ([900e9f1](https://github.com/mkayander/leetpal/commit/900e9f184167247405f264853fcca12725103be9))
+
 ## [1.36.9](https://github.com/mkayander/leetpal/compare/v1.36.8...v1.36.9) (2022-11-21)
 
 
