@@ -35,7 +35,7 @@ export const UserSettings: React.FC = () => {
 
     const handleLinkedUserReset = async () => {
         await unlinkUser.mutate();
-        await trpcUtils.invalidate({ queryKey: ['user.getById', userId] });
+        await trpcUtils.user.getById.invalidate(userId);
         await refetch();
     };
 
@@ -81,7 +81,7 @@ export const UserSettings: React.FC = () => {
                             userAvatar: userAvatar || 'none',
                         });
 
-                        await trpcUtils.invalidate({ queryKey: ['user.getById', userId] });
+                        await trpcUtils.user.getById.invalidate(userId);
                         await refetch();
                     }}
                 >
