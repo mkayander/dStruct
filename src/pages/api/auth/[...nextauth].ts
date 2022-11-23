@@ -7,9 +7,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import { env } from '#/env/server.mjs';
 import { prisma } from '#/server/db/client';
-import { clientEnv } from '#/env/schema.mjs';
-
-console.log(clientEnv, env);
 
 export const authOptions: NextAuthOptions = {
     // Include user.id on session
@@ -33,7 +30,7 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: env.GOOGLE_CLIENT_ID,
             clientSecret: env.GOOGLE_CLIENT_SECRET,
-        })
+        }),
         // ...add more providers here
     ],
 };
