@@ -1,3 +1,14 @@
+## [1.36.11](https://github.com/mkayander/leetpal/compare/v1.36.10...v1.36.11) (2022-11-23)
+
+
+### Bug Fixes
+
+* Fixed project core setup ([fbb5206](https://github.com/mkayander/leetpal/commit/fbb5206bba1e808b615cbd1cac90d6af3af76277))
+* Make "avatar" a protected route ([c3ccf07](https://github.com/mkayander/leetpal/commit/c3ccf0728fdc40c241f2e0e612c11b5a98206d04))
+* Removed env console log ([7d00a58](https://github.com/mkayander/leetpal/commit/7d00a580e1dafbf0a2a0f888f2e3c70d14fcc3e2))
+* Removed unused routers folder ([ba8fb9f](https://github.com/mkayander/leetpal/commit/ba8fb9f5e9bd83b83f269f1944440caa09840726))
+* Returned semrel packages ([9d390cb](https://github.com/mkayander/leetpal/commit/9d390cb3b550d1e711b53330625b5e39ad8fe683))
+
 ## [1.36.10](https://github.com/mkayander/leetpal/compare/v1.36.9...v1.36.10) (2022-11-21)
 
 
