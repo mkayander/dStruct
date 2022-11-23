@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import { trpc } from '#/utils';
 import { MainLayout } from '#/layouts';
@@ -41,9 +41,3 @@ const ApiExamplePage: NextPage = () => {
 };
 
 export default ApiExamplePage;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    return {
-        props: {},
-    };
-};

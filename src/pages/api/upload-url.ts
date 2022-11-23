@@ -1,16 +1,17 @@
 import S3 from 'aws-sdk/clients/s3';
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { env } from '#/env/server.mjs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const s3 = new S3({
         apiVersion: '2006-03-01',
-        accessKeyId: process.env.ACCESS_KEY,
-        secretAccessKey: process.env.SECRET_KEY,
+        accessKeyId: env.ACCESS_KEY,
+        secretAccessKey: env.SECRET_KEY,
         region: 'eu-central-1',
     });
 
     const post = await s3.createPresignedPost({
-        Bucket: process.env.BUCKET_NAME,
+        Bucket: env.BUCKET_NAME,
         Fields: {
             key: req.query.file,
             'Content-Type': req.query.fileType,

@@ -2,9 +2,7 @@ import React from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-interface SessionWidgetProps {}
-
-export const SessionWidget: React.FC<SessionWidgetProps> = () => {
+export const SessionWidget: React.FC = () => {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
 

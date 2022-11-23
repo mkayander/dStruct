@@ -1,64 +1,39 @@
-import superjson from 'superjson';
-import { initTRPC, TRPCError } from '@trpc/server';
-import { Context } from '#/server/trpc/context';
+import { initTRPC, TRPCError } from "@trpc/server";
+import superjson from "superjson";
 
-// Avoid exporting the entire t-object
-// since it's not very descriptive.
-// For instance, the use of a t variable
-// is common in i18n libraries.
+import { type Context } from "./context";
+
 const t = initTRPC.context<Context>().create({
-    /**
-     * @see https://trpc.io/docs/v10/data-transformers
-     */
-    transformer: superjson,
-    /**
-     * @see https://trpc.io/docs/v10/error-formatting
-     */
-    errorFormatter({ shape }) {
-        return shape;
-    },
+  transformer: superjson,
+  errorFormatter({ shape }) {
+    return shape;
+  },
 });
 
-/**
- * Create a router
- * @see https://trpc.io/docs/v10/router
- */
 export const router = t.router;
 
 /**
- * Create an unprotected procedure
- * @see https://trpc.io/docs/v10/procedures
+ * Unprotected procedure
  **/
 export const publicProcedure = t.procedure;
 
 /**
- * @see https://trpc.io/docs/v10/middlewares
+ * Reusable middleware to ensure
+ * users are logged in
  */
-export const middleware = t.middleware;
-
-/**
- * @see https://trpc.io/docs/v10/merging-routers
- */
-export const mergeRouters = t.mergeRouters;
-
-const isAuthed = middleware(({ next, ctx }) => {
-    const user = ctx.session?.user;
-
-    if (!user?.name) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-
-    return next({
-        ctx: {
-            user: {
-                ...user,
-                name: user.name,
-            },
-        },
-    });
+const isAuthed = t.middleware(({ ctx, next }) => {
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
 });
 
 /**
- * Protected base procedure
- */
-export const authedProcedure = t.procedure.use(isAuthed);
+ * Protected procedure
+ **/
+export const protectedProcedure = t.procedure.use(isAuthed);

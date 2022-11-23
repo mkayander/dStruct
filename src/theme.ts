@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-import { PaletteColor } from '@mui/material';
-import { Difficulty } from '#/graphql/generated';
+import type { PaletteColor } from '@mui/material';
+import type { Difficulty } from '#/graphql/generated';
 
 // Create a theme instance.
 const theme = createTheme({
@@ -60,15 +60,15 @@ theme.palette.question = {
         },
     }),
 
-    getTagColors(slug?: string) {
+    getTagColors(slug?: string): [string, string] {
         if (slug && slug in tagColors) {
-            return tagColors[slug];
+            return tagColors[slug] as [string, string];
         }
 
         const colors = Object.values(tagColors);
         const randomIndex = Math.floor(Math.random() * colors.length);
 
-        return colors[randomIndex];
+        return colors[randomIndex] as [string, string];
     },
 };
 

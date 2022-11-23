@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
-const { publicRuntimeConfig } = getConfig();
+import { clientEnv as env } from '#/env/schema.mjs';
 
-export const getImageUrl = (relativePath: string) => `${publicRuntimeConfig.BUCKET_BASE_URL}${relativePath}`;
+export const getImageUrl = (relativePath: string) => `${env.NEXT_PUBLIC_BUCKET_BASE_URL}${relativePath}`;
