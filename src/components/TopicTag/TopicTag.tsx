@@ -1,5 +1,5 @@
 import React from 'react';
-import { TopicTag as Topic } from '#/graphql/generated';
+import type { TopicTag as Topic } from '#/graphql/generated';
 import { alpha, Chip, darken, useTheme } from '@mui/material';
 
 interface TopicTagProps {

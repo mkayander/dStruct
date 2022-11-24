@@ -1,4 +1,4 @@
-import { Question } from '@src/graphql/generated';
+import type { Question } from '@src/graphql/generated';
 
 namespace Scalars {
     export type QuestionStats = {

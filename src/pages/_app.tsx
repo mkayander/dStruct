@@ -10,21 +10,20 @@ import theme from '#/theme';
 
 import '#/styles/globals.css';
 
-const MyApp: AppType<{ session: Session | null }> = (
-    {
-        Component,
-        pageProps: { session, ...pageProps }
-    }) => {
-    return (
-        <SessionProvider session={session}>
-            <ApolloProvider client={apolloClient}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </ApolloProvider>
-        </SessionProvider>
-    );
+const MyApp: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
+  return (
+    <SessionProvider session={session}>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
+    </SessionProvider>
+  );
 };
 
 export default trpc.withTRPC(MyApp);

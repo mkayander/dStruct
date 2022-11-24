@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, lighten, LinearProgress, Paper, SvgIcon, Typography, useTheme } from '@mui/material';
+import { Box, Divider, lighten, LinearProgress, Paper, type SvgIcon, Typography, useTheme } from '@mui/material';
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {

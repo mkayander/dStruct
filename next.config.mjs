@@ -7,14 +7,14 @@
 
 /** @type {import('next').NextConfig} */
 const config = {
-    reactStrictMode: true,
-    swcMinify: true,
-    i18n: {
-        locales: ['en'],
-        defaultLocale: 'en',
-    },
-    images: {
-        domains: ['leetpal.s3.eu-central-1.amazonaws.com'],
-    },
+  reactStrictMode: true,
+  swcMinify: true,
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en'
+  },
+  images: {
+    domains: ['leetpal.s3.eu-central-1.amazonaws.com']
+  }
 };
 export default config;

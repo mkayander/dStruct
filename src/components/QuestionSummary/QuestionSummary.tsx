@@ -8,11 +8,11 @@ import {
     Divider,
     Grid,
     Paper,
-    SvgIcon,
+    type SvgIcon,
     Typography,
     useTheme,
 } from '@mui/material';
-import { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
+import type { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
 import { CircularPercentage, RatingButtons, TopicTag } from '#/components';
 import EventIcon from '@mui/icons-material/Event';
 import {
@@ -23,7 +23,7 @@ import {
     SignalCellular2Bar,
     SignalCellular4Bar,
 } from '@mui/icons-material';
-import { BoxProps } from '@mui/material/Box/Box';
+import type { BoxProps } from '@mui/material/Box/Box';
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
     All: SignalCellular0Bar,

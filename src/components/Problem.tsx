@@ -1,5 +1,5 @@
 import React from 'react';
-import { Problem } from '@prisma/client';
+import type { Problem } from '@prisma/client';
 
 export type ProblemProps = {
     data: Problem;

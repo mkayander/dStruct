@@ -3,7 +3,7 @@ import sanitizeHtml from 'sanitize-html';
 import { alpha, Box, Divider } from '@mui/material';
 import { DataSection, QuestionSummary } from '#/components';
 import theme from '#/theme';
-import { QuestionDataQueryResult } from '#/graphql/generated';
+import type { QuestionDataQueryResult } from '#/graphql/generated';
 
 import styles from './DailyProblem.module.scss';
 
