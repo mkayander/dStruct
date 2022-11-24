@@ -9,109 +9,113 @@ import { ManageAccounts } from '@mui/icons-material';
 import { DataSection } from '#/components';
 
 export const UserSettings: React.FC = () => {
-    const session = useSession();
+  const session = useSession();
 
-    const [getUserProfile, { loading: gqlLoading }] = useGetUserProfileLazyQuery();
+  const [getUserProfile, { loading: gqlLoading }] =
+    useGetUserProfileLazyQuery();
 
-    // const { data } = useGlobalDataQuery();
+  // const { data } = useGlobalDataQuery();
 
-    const userId = session.data?.user.id;
+  const userId = session.data?.user.id;
 
-    const {
-        data: user,
-        isLoading,
-        refetch,
-    } = trpc.user.getById.useQuery(userId, {
-        enabled: Boolean(userId),
-        trpc: {},
-    });
+  const {
+    data: user,
+    isLoading,
+    refetch,
+  } = trpc.user.getById.useQuery(userId, {
+    enabled: Boolean(userId),
+    trpc: {},
+  });
 
-    const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useContext();
 
-    const linkUser = trpc.leetcode.linkUser.useMutation();
-    const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
+  const linkUser = trpc.leetcode.linkUser.useMutation();
+  const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
 
-    const loading = gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading;
+  const loading =
+    gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading;
 
-    const handleLinkedUserReset = async () => {
-        await unlinkUser.mutate();
-        await trpcUtils.user.getById.invalidate(userId);
-        await refetch();
-    };
+  const handleLinkedUserReset = async () => {
+    await unlinkUser.mutate();
+    await trpcUtils.user.getById.invalidate(userId);
+    await refetch();
+  };
 
-    return (
-        <DataSection title="User Settings" Icon={ManageAccounts}>
-            {user?.leetCodeUsername ? (
-                <>
-                    <Typography>Your LeetCode account name:</Typography>
-                    <Typography>{user.leetCodeUsername}</Typography>
-                    <Button
-                        disabled={unlinkUser.isLoading}
-                        color="error"
-                        variant="outlined"
-                        onClick={handleLinkedUserReset}
-                    >
-                        Reset
-                    </Button>
-                </>
-            ) : (
-                <Formik
-                    initialValues={{
-                        username: '',
-                    }}
-                    validate={async (values) => {
-                        const errors: { username?: string } = {};
-                        if (!values.username) {
-                            errors.username = 'Required';
-                        } else {
-                        }
-                        return errors;
-                    }}
-                    onSubmit={async ({ username }, { setErrors }) => {
-                        const { data } = await getUserProfile({ variables: { username: username } });
-                        if (!data?.matchedUser) {
-                            setErrors({ username: 'No user with given username found!' });
-                            return;
-                        }
+  return (
+    <DataSection title="User Settings" Icon={ManageAccounts}>
+      {user?.leetCodeUsername ? (
+        <>
+          <Typography>Your LeetCode account name:</Typography>
+          <Typography>{user.leetCodeUsername}</Typography>
+          <Button
+            disabled={unlinkUser.isLoading}
+            color="error"
+            variant="outlined"
+            onClick={handleLinkedUserReset}
+          >
+            Reset
+          </Button>
+        </>
+      ) : (
+        <Formik
+          initialValues={{
+            username: '',
+          }}
+          validate={async (values) => {
+            const errors: { username?: string } = {};
+            if (!values.username) {
+              errors.username = 'Required';
+            } else {
+            }
+            return errors;
+          }}
+          onSubmit={async ({ username }, { setErrors }) => {
+            const { data } = await getUserProfile({
+              variables: { username: username },
+            });
+            if (!data?.matchedUser) {
+              setErrors({ username: 'No user with given username found!' });
+              return;
+            }
 
-                        const { userAvatar } = data.matchedUser.profile;
+            const { userAvatar } = data.matchedUser.profile;
 
-                        await linkUser.mutate({
-                            username,
-                            userAvatar: userAvatar || 'none',
-                        });
+            await linkUser.mutate({
+              username,
+              userAvatar: userAvatar || 'none',
+            });
 
-                        await trpcUtils.user.getById.invalidate(userId);
-                        await refetch();
-                    }}
-                >
-                    {({ submitForm, isSubmitting, touched, errors }) => (
-                        <Box>
-                            <Typography>Please enter your LeetCode account name:</Typography>
-                            <Field
-                                component={TextField}
-                                name="username"
-                                type="text"
-                                label="Username"
-                                required
-                                helperText="LeetCode Username"
-                                // error={errors['username']}
-                            />
+            await trpcUtils.user.getById.invalidate(userId);
+            await refetch();
+          }}
+        >
+          {({ submitForm, isSubmitting, touched, errors }) => (
+            <Box>
+              <Typography>Please enter your LeetCode account name:</Typography>
+              <Field
+                component={TextField}
+                name="username"
+                type="text"
+                label="Username"
+                required
+                helperText="LeetCode Username"
+                // error={errors['username']}
+              />
 
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                disabled={isSubmitting}
-                                onClick={submitForm}
-                                sx={{ display: 'block' }}
-                            >
-                                Submit!
-                            </Button>
-                            {loading && <CircularProgress variant="indeterminate" />}
-                        </Box>
-                    )}
-                </Formik>
-            )}
-        </DataSection>
-    );
+              <Button
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                onClick={submitForm}
+                sx={{ display: 'block' }}
+              >
+                Submit!
+              </Button>
+              {loading && <CircularProgress variant="indeterminate" />}
+            </Box>
+          )}
+        </Formik>
+      )}
+    </DataSection>
+  );
 };

@@ -1,26 +1,26 @@
 query getUserProfile($username: String!) {
-    allQuestionsCount {
+  allQuestionsCount {
+    difficulty
+    count
+  }
+  matchedUser(username: $username) {
+    submitStats {
+      acSubmissionNum {
         difficulty
         count
+        submissions
+      }
+      totalSubmissionNum {
+        difficulty
+        count
+        submissions
+      }
     }
-    matchedUser(username: $username) {
-        submitStats {
-            acSubmissionNum {
-                difficulty
-                count
-                submissions
-            }
-            totalSubmissionNum {
-                difficulty
-                count
-                submissions
-            }
-        }
-        profile {
-            ranking
-            reputation
-            starRating
-            userAvatar
-        }
+    profile {
+      ranking
+      reputation
+      starRating
+      userAvatar
     }
+  }
 }
