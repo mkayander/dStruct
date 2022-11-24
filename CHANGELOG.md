@@ -1,3 +1,11 @@
+## [1.36.12](https://github.com/mkayander/leetpal/compare/v1.36.11...v1.36.12) (2022-11-24)
+
+
+### Bug Fixes
+
+* Ensure graphql requests work ([fd24923](https://github.com/mkayander/leetpal/commit/fd249236d9529e0412c516d547b44701c14955cb))
+* Global code formatting ([47b52bc](https://github.com/mkayander/leetpal/commit/47b52bc9bbe0c38d98217297ed9398704841a400))
+
 ## [1.36.11](https://github.com/mkayander/leetpal/compare/v1.36.10...v1.36.11) (2022-11-23)
 
 
