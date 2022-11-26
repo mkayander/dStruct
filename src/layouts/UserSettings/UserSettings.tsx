@@ -8,6 +8,8 @@ import { useGetUserProfileLazyQuery } from '#/graphql/generated';
 import { ManageAccounts } from '@mui/icons-material';
 import { DataSection } from '#/components';
 
+import styles from './UserSettings.module.scss';
+
 export const UserSettings: React.FC = () => {
   const session = useSession();
 
@@ -33,7 +35,8 @@ export const UserSettings: React.FC = () => {
   const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
 
   const loading =
-    gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading;
+    userId &&
+    (gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading);
 
   const handleLinkedUserReset = async () => {
     await unlinkUser.mutate();
@@ -90,7 +93,7 @@ export const UserSettings: React.FC = () => {
           }}
         >
           {({ submitForm, isSubmitting, touched, errors }) => (
-            <Box>
+            <Box className={styles.form}>
               <Typography>Please enter your LeetCode account name:</Typography>
               <Field
                 component={TextField}
@@ -99,6 +102,16 @@ export const UserSettings: React.FC = () => {
                 label="Username"
                 required
                 helperText="LeetCode Username"
+                // error={errors['username']}
+              />
+
+              <Field
+                component={TextField}
+                name="token"
+                type="text"
+                label="Token"
+                required
+                helperText="LeetCode Token"
                 // error={errors['username']}
               />
 

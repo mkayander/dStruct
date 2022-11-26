@@ -11,7 +11,7 @@ import { useGetUserProfileQuery } from '#/graphql/generated';
 import { useDailyQuestionData } from '#/api';
 import { QuestionSummary } from '#/components';
 
-export default function DashboardPage() {
+const DashboardPage: React.FC = () => {
   const session = useSession();
   const leetCodeUsername = session.data?.user.leetCodeUsername;
 
@@ -31,10 +31,10 @@ export default function DashboardPage() {
           {leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}
         </h1>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <UserSettings />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <LeetCodeStats userProfile={userProfileQueryResult} />
           </Grid>
           <Grid item xs={12}>
@@ -47,4 +47,6 @@ export default function DashboardPage() {
       </Container>
     </MainLayout>
   );
-}
+};
+
+export default DashboardPage;

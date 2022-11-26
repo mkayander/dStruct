@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import {
   Box,
   Divider,
@@ -12,6 +13,7 @@ import {
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {
+  className?: string;
   title: string;
   caption?: string | React.ReactNode;
   Icon?: typeof SvgIcon;
@@ -19,6 +21,7 @@ interface DataSectionProps extends React.PropsWithChildren {
 }
 
 export const DataSection: React.FC<DataSectionProps> = ({
+  className,
   children,
   title,
   caption,
@@ -29,10 +32,9 @@ export const DataSection: React.FC<DataSectionProps> = ({
 
   return (
     <Paper
-      className={styles.root}
+      className={cn(styles.root, className)}
       elevation={2}
       sx={{
-        my: 4,
         p: 4,
         borderRadius: theme.shape.borderRadius,
       }}

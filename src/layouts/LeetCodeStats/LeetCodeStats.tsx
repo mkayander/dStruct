@@ -46,8 +46,6 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
       ),
     };
 
-    console.log('useMemo: ', obj);
-
     return obj;
   }, [userProfile.data]);
 
@@ -60,63 +58,74 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
           justifyContent: 'space-between',
         }}
       >
-        <Grid container spacing={1}>
-          <Grid className="row" container item spacing={1}>
-            <Grid item xs={5}>
-              <Typography fontWeight="bold">Ranking:</Typography>
-            </Grid>
-            <Grid item xs={7}>
-              <Typography>
-                {matchedUser?.profile.ranking?.toLocaleString()}
-              </Typography>
-            </Grid>
-          </Grid>
-          {matchedUser?.submitStats.acSubmissionNum?.map((item) => (
-            <Grid
-              key={item.difficulty}
-              wrap="nowrap"
-              className="row"
-              container
-              item
-              spacing={1}
-            >
-              <Grid item xs={5}>
-                <Typography fontWeight="bold">
-                  {titlesMap[item.difficulty]}:
-                </Typography>
-              </Grid>
-              <Grid item xs={7}>
-                <Typography>
-                  <span>{item.count}</span> /{' '}
-                  <Typography
-                    variant="body2"
-                    fontWeight="lighter"
-                    component="span"
-                  >
-                    {submissionsData?.allQuestionsCount[item.difficulty]?.count}
+        {matchedUser ? (
+          <>
+            <Grid container spacing={1}>
+              <Grid className="row" container item spacing={1}>
+                <Grid item xs={5}>
+                  <Typography fontWeight="bold">Ranking:</Typography>
+                </Grid>
+                <Grid item xs={7}>
+                  <Typography>
+                    {matchedUser?.profile.ranking?.toLocaleString()}
                   </Typography>
-                </Typography>
+                </Grid>
               </Grid>
+              {matchedUser?.submitStats.acSubmissionNum?.map((item) => (
+                <Grid
+                  key={item.difficulty}
+                  wrap="nowrap"
+                  className="row"
+                  container
+                  item
+                  spacing={1}
+                >
+                  <Grid item xs={5}>
+                    <Typography fontWeight="bold">
+                      {titlesMap[item.difficulty]}:
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <Typography>
+                      <span>{item.count}</span> /{' '}
+                      <Typography
+                        variant="body2"
+                        fontWeight="lighter"
+                        component="span"
+                      >
+                        {
+                          submissionsData?.allQuestionsCount[item.difficulty]
+                            ?.count
+                        }
+                      </Typography>
+                    </Typography>
+                  </Grid>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <CircularPercentage
-            value={
-              (submissionsData &&
-                (submissionsData.acSubmissionNum.All.count /
-                  submissionsData.allQuestionsCount.All.count) *
-                  100) ||
-              0
-            }
-          />
-        </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <CircularPercentage
+                value={
+                  (submissionsData &&
+                    (submissionsData.acSubmissionNum.All.count /
+                      submissionsData.allQuestionsCount.All.count) *
+                      100) ||
+                  0
+                }
+              />
+            </Box>
+          </>
+        ) : (
+          <Typography variant="h6" fontWeight="bold">
+            No LeetCode profile found!
+          </Typography>
+        )}
       </Box>
     </DataSection>
   );
