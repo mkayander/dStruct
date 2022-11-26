@@ -1,3 +1,10 @@
+## [1.36.13](https://github.com/mkayander/leetpal/compare/v1.36.12...v1.36.13) (2022-11-26)
+
+
+### Bug Fixes
+
+* Layout fixes ([03a0407](https://github.com/mkayander/leetpal/commit/03a040791b5baaec3a90d38301778533b2db9dff))
+
 ## [1.36.12](https://github.com/mkayander/leetpal/compare/v1.36.11...v1.36.12) (2022-11-24)
 
 
