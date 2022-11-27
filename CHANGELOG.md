@@ -1,3 +1,12 @@
+# [1.37.0](https://github.com/mkayander/leetpal/compare/v1.36.13...v1.37.0) (2022-11-27)
+
+
+### Features
+
+* Added account page stub ([b1cb961](https://github.com/mkayander/leetpal/commit/b1cb9615812a94dc11601863b5f9eb1d98a91793))
+* Added custom page layouts feature ([a9b84f2](https://github.com/mkayander/leetpal/commit/a9b84f22ab6dfdb6e3b335a3769aef57e7d92633))
+* Added Leetcode token encrypted field ([ae26e55](https://github.com/mkayander/leetpal/commit/ae26e550fa9cb577caae31cc072653662d8258d1))
+
 ## [1.36.13](https://github.com/mkayander/leetpal/compare/v1.36.12...v1.36.13) (2022-11-26)
 
 
