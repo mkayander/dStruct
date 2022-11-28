@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/mkayander/leetpal/compare/v1.37.0...v1.38.0) (2022-11-28)
+
+
+### Features
+
+* Added HTML title tag ([cfff3ac](https://github.com/mkayander/leetpal/commit/cfff3ac9ed341f5dd9e9740cb5c761fd8eafc921))
+
 # [1.37.0](https://github.com/mkayander/leetpal/compare/v1.36.13...v1.37.0) (2022-11-27)
 
 
