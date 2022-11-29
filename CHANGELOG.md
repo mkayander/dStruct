@@ -1,3 +1,12 @@
+# [1.39.0](https://github.com/mkayander/leetpal/compare/v1.38.0...v1.39.0) (2022-11-29)
+
+
+### Features
+
+* Added prettier imports sorting plugin config ([a251640](https://github.com/mkayander/leetpal/commit/a25164066216bcd17f8dbe766df10fb5cc745d40))
+* Run Prettier formatting to sort imports ([e90db93](https://github.com/mkayander/leetpal/commit/e90db93c6f302c47ab06ae5203e919a63da34083))
+* Updated dependencies ([c8d0a5b](https://github.com/mkayander/leetpal/commit/c8d0a5b609182c2bb35719180166b140526cc1a7))
+
 # [1.38.0](https://github.com/mkayander/leetpal/compare/v1.37.0...v1.38.0) (2022-11-28)
 
 
