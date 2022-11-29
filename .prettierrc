@@ -1,4 +1,16 @@
 {
   "semi": true,
-  "singleQuote": true
+  "singleQuote": true,
+
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^#/(api|components|context|env|graphql|hooks|layouts|pages|server|types|utils|theme)/?(.*)$",
+    "^#/theme/?(.*)$",
+    "^#/(.*)$",
+    "^[./]",
+    "^\\S+.(scss|css)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true
 }
