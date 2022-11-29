@@ -1,3 +1,16 @@
+## [1.39.1](https://github.com/mkayander/leetpal/compare/v1.39.0...v1.39.1) (2022-11-29)
+
+
+### Bug Fixes
+
+* Installed prettier plugin ([cacc9f2](https://github.com/mkayander/leetpal/commit/cacc9f2c780a606c6485a0dfcdbf614d0bc575d7))
+* Use title tag at _app instead of _document ([e620118](https://github.com/mkayander/leetpal/commit/e620118e94cdc81f78f27daf6fe1f0931a824a4a))
+
+
+### Reverts
+
+* Revert "feat: Updated dependencies" ([d936014](https://github.com/mkayander/leetpal/commit/d936014e12e01a265e138102e85ac4b3aa927d7a))
+
 # [1.39.0](https://github.com/mkayander/leetpal/compare/v1.38.0...v1.39.0) (2022-11-29)
 
 
