@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
+import Head from 'next/head';
 import type { ReactElement } from 'react';
 
 import { apolloClient } from '#/graphql/apolloClient';
@@ -25,6 +26,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
+          <Head>
+            <title>LeetPal</title>
+          </Head>
           <CssBaseline />
           {getLayout(<Component {...pageProps} />)}
         </ThemeProvider>
