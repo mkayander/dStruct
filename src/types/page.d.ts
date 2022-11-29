@@ -1,10 +1,10 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { NextPage } from 'next';
 import type {
   AppContextType,
   AppPropsType,
   NextComponentType,
 } from 'next/dist/shared/lib/utils';
-import type { NextPage } from 'next';
+import type { ReactElement, ReactNode } from 'react';
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,

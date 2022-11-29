@@ -1,11 +1,10 @@
-import React, { useState, type MouseEvent } from 'react';
-import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import CodeIcon from '@mui/icons-material/Code';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Avatar,
   Box,
+  Button,
   Container,
   IconButton,
   Menu,
@@ -13,13 +12,15 @@ import {
   Toolbar,
   Tooltip,
   Typography,
-  Button,
 } from '@mui/material';
-import CodeIcon from '@mui/icons-material/Code';
-import MenuIcon from '@mui/icons-material/Menu';
+import { signIn, useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { type MouseEvent, useState } from 'react';
+
 import { useProfileImageUploader } from '#/hooks';
 import { getImageUrl } from '#/utils';
-import Image from 'next/image';
 
 const AVATAR_PLACEHOLDER = '/avatars/placeholder.png';
 

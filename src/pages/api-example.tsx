@@ -1,5 +1,6 @@
-import type { NextPage } from 'next';
 import { Box, CircularProgress, Container, Typography } from '@mui/material';
+import type { NextPage } from 'next';
+
 import { trpc } from '#/utils';
 
 const ApiExamplePage: NextPage = () => {

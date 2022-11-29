@@ -1,14 +1,15 @@
-import type { ReactElement } from 'react';
-import { type Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import type { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import type { ReactElement } from 'react';
+
 import { apolloClient } from '#/graphql/apolloClient';
-import type { AppTypeWithLayout } from '#/types/page';
 import { MainLayout as DefaultLayout } from '#/layouts/MainLayout';
-import { trpc } from '#/utils';
 import theme from '#/theme';
+import type { AppTypeWithLayout } from '#/types/page';
+import { trpc } from '#/utils';
 
 import '#/styles/globals.css';
 

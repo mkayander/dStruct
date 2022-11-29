@@ -1,4 +1,12 @@
-import React from 'react';
+import {
+  EventRepeatTwoTone,
+  FavoriteBorder,
+  HistoryToggleOff,
+  SignalCellular0Bar,
+  SignalCellular2Bar,
+  SignalCellular4Bar,
+} from '@mui/icons-material';
+import EventIcon from '@mui/icons-material/Event';
 import {
   alpha,
   Box,
@@ -12,18 +20,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import type { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
-import { CircularPercentage, RatingButtons, TopicTag } from '#/components';
-import EventIcon from '@mui/icons-material/Event';
-import {
-  EventRepeatTwoTone,
-  FavoriteBorder,
-  HistoryToggleOff,
-  SignalCellular0Bar,
-  SignalCellular2Bar,
-  SignalCellular4Bar,
-} from '@mui/icons-material';
 import type { BoxProps } from '@mui/material/Box/Box';
+import React from 'react';
+
+import { CircularPercentage, RatingButtons, TopicTag } from '#/components';
+import type { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
   All: SignalCellular0Bar,

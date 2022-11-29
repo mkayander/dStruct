@@ -1,6 +1,7 @@
-import React from 'react';
-import type { TopicTag as Topic } from '#/graphql/generated';
 import { alpha, Chip, darken, useTheme } from '@mui/material';
+import React from 'react';
+
+import type { TopicTag as Topic } from '#/graphql/generated';
 
 interface TopicTagProps {
   topic: Partial<Topic>;

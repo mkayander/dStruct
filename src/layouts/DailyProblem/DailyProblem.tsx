@@ -1,9 +1,10 @@
+import { alpha, Box, Divider } from '@mui/material';
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { alpha, Box, Divider } from '@mui/material';
+
 import { DataSection, QuestionSummary } from '#/components';
-import theme from '#/theme';
 import type { QuestionDataQueryResult } from '#/graphql/generated';
+import theme from '#/theme';
 
 import styles from './DailyProblem.module.scss';
 

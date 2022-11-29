@@ -1,11 +1,12 @@
-import React, { useMemo } from 'react';
-import { Box, Button, ButtonGroup, useTheme } from '@mui/material';
 import {
   ThumbDown,
   ThumbDownOutlined,
   ThumbUp,
   ThumbUpOutlined,
 } from '@mui/icons-material';
+import { Box, Button, ButtonGroup, useTheme } from '@mui/material';
+import React, { useMemo } from 'react';
+
 import type { QuestionDataQuery } from '#/graphql/generated';
 
 interface RatingButtonsProps {

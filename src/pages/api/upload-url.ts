@@ -1,5 +1,6 @@
 import S3 from 'aws-sdk/clients/s3';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { env } from '#/env/server.mjs';
 
 export default async function handler(

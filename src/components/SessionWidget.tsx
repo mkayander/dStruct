@@ -1,6 +1,6 @@
-import React from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import React from 'react';
 
 export const SessionWidget: React.FC = () => {
   const { data: session, status } = useSession();

@@ -1,6 +1,7 @@
-import React from 'react';
-import { Footer, MainAppBar } from '#/components';
 import { Box, LinearProgress } from '@mui/material';
+import React from 'react';
+
+import { Footer, MainAppBar } from '#/components';
 
 interface MainLayoutProps {
   children: React.ReactNode;

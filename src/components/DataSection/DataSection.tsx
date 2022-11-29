@@ -1,5 +1,3 @@
-import React from 'react';
-import cn from 'classnames';
 import {
   Box,
   Divider,
@@ -10,6 +8,9 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import cn from 'classnames';
+import React from 'react';
+
 import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {

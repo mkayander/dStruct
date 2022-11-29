@@ -1,6 +1,6 @@
-import React from 'react';
-import { FieldValidator, GenericFieldHTMLAttributes } from 'formik/dist/types';
 import { FieldProps } from 'formik/dist/Field';
+import { FieldValidator, GenericFieldHTMLAttributes } from 'formik/dist/types';
+import React from 'react';
 
 declare module 'formik' {
   export interface FieldConfig<V = any> {

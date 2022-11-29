@@ -1,12 +1,13 @@
-import React from 'react';
+import { ManageAccounts } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Field, Formik } from 'formik';
 import { TextField } from 'formik-mui';
-import { trpc } from '#/utils';
 import { useSession } from 'next-auth/react';
-import { useGetUserProfileLazyQuery } from '#/graphql/generated';
-import { ManageAccounts } from '@mui/icons-material';
+import React from 'react';
+
 import { DataSection } from '#/components';
+import { useGetUserProfileLazyQuery } from '#/graphql/generated';
+import { trpc } from '#/utils';
 
 import styles from './UserSettings.module.scss';
 

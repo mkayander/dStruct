@@ -1,6 +1,7 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
 import type { PaletteColor } from '@mui/material';
+import { red } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles';
+
 import type { Difficulty } from '#/graphql/generated';
 
 // Create a theme instance.

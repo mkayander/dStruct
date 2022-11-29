@@ -1,10 +1,11 @@
-import React from 'react';
-import { useSession } from 'next-auth/react';
 import { Container, Grid } from '@mui/material';
-import { DailyProblem, LeetCodeStats, UserSettings } from '#/layouts';
-import { useGetUserProfileQuery } from '#/graphql/generated';
+import { useSession } from 'next-auth/react';
+import React from 'react';
+
 import { useDailyQuestionData } from '#/api';
 import { QuestionSummary } from '#/components';
+import { useGetUserProfileQuery } from '#/graphql/generated';
+import { DailyProblem, LeetCodeStats, UserSettings } from '#/layouts';
 
 const DashboardPage: React.FC = () => {
   const session = useSession();

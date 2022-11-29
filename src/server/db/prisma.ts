@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
+
 import { env } from '#/env/server.mjs';
 
 declare global {
