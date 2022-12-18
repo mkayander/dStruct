@@ -8,11 +8,12 @@ export const leetcodeRouter = router({
       z.object({
         username: z.string(),
         userAvatar: z.string(),
+        token: z.string(),
       })
     )
 
     .mutation(async ({ input, ctx }) => {
-      const { username, userAvatar } = input;
+      const { username, userAvatar, token } = input;
       return await ctx.prisma.user.update({
         where: { id: ctx.session?.user.id },
         data: {
@@ -20,6 +21,7 @@ export const leetcodeRouter = router({
             create: {
               username,
               userAvatar,
+              token,
             },
           },
         },
