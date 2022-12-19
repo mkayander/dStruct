@@ -90,7 +90,7 @@ export const UserSettings: React.FC = () => {
             console.log('globalData: ', globalData);
 
             if (!extUsername) {
-              setErrors({ username: 'Invalid token!' });
+              setErrors({ token: 'Invalid token!' });
               deleteCookie('LEETCODE_SESSION');
               return;
             }
