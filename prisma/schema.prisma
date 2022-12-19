@@ -87,7 +87,7 @@ model VerificationToken {
 
 model LeetCodeUser {
     username   String   @id
-    token      String?  @unique /// @encrypted
+    token      String?  @db.VarChar(1024) /// @encrypted
     createdAt  DateTime @unique @default(now())
     updatedAt  DateTime @unique @default(now())
     userAvatar String
