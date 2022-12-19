@@ -1,3 +1,11 @@
+# [1.40.0](https://github.com/mkayander/leetpal/compare/v1.39.1...v1.40.0) (2022-12-19)
+
+
+### Features
+
+* Implement token submit, check and save ([f366d62](https://github.com/mkayander/leetpal/commit/f366d621372c8a0628f0db7e7b52f47be3c17fc8))
+* Install and use next-cookie ([3c7cb76](https://github.com/mkayander/leetpal/commit/3c7cb76744e1fa9d03e0d97f8f769aa8f03e8e35))
+
 ## [1.39.1](https://github.com/mkayander/leetpal/compare/v1.39.0...v1.39.1) (2022-11-29)
 
 
