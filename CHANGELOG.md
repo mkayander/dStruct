@@ -1,3 +1,11 @@
+## [1.40.1](https://github.com/mkayander/leetpal/compare/v1.40.0...v1.40.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* Fix token column parameters ([cac4cb4](https://github.com/mkayander/leetpal/commit/cac4cb4e0d01f0c85c4bd748e68d8900ec6e4801))
+* Show error at token field ([4338282](https://github.com/mkayander/leetpal/commit/4338282468440865b9c52f1beae0afd0effaa9cd))
+
 # [1.40.0](https://github.com/mkayander/leetpal/compare/v1.39.1...v1.40.0) (2022-12-19)
 
 
