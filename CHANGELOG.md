@@ -1,3 +1,10 @@
+## [1.42.1](https://github.com/mkayander/leetpal/compare/v1.42.0...v1.42.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* Allow leetpal-prod S3 domain ([99587fe](https://github.com/mkayander/leetpal/commit/99587fe1d6d510cc3d1602dcf22ba0e240287bcf))
+
 # [1.42.0](https://github.com/mkayander/leetpal/compare/v1.41.0...v1.42.0) (2022-12-20)
 
 
