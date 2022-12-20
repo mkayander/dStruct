@@ -2,7 +2,7 @@ import { alpha, Box, Divider } from '@mui/material';
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
 
-import { DataSection, QuestionSummary } from '#/components';
+import { DataSection } from '#/components';
 import type { QuestionDataQueryResult } from '#/graphql/generated';
 import theme from '#/theme';
 
@@ -36,11 +36,6 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
     >
       {question && (
         <Box>
-          <QuestionSummary
-            questionDataQuery={questionDataQuery}
-            marginBottom={10}
-          />
-          <Divider />
           <Box
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: sanitizedContent ?? '' }}
