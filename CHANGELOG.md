@@ -1,3 +1,10 @@
+## [1.42.5](https://github.com/mkayander/leetpal/compare/v1.42.4...v1.42.5) (2022-12-20)
+
+
+### Bug Fixes
+
+* Insert slash between S3 base url and bucket path ([f14df8e](https://github.com/mkayander/leetpal/commit/f14df8ecbbe2562e96bba96da0e83bdec3c2c3ad))
+
 ## [1.42.4](https://github.com/mkayander/leetpal/compare/v1.42.3...v1.42.4) (2022-12-20)
 
 
