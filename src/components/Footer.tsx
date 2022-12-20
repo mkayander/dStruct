@@ -1,10 +1,12 @@
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
     <Container>
-      <Typography>© Max Kayander, 2022.</Typography>
+      <Box mt={4} mb={2}>
+        <Typography variant="caption">© Max Kayander, 2022.</Typography>
+      </Box>
     </Container>
   );
 };
