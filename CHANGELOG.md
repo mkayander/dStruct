@@ -1,3 +1,10 @@
+## [1.42.2](https://github.com/mkayander/leetpal/compare/v1.42.1...v1.42.2) (2022-12-20)
+
+
+### Bug Fixes
+
+* Implement S3 image reloading if it's not present in the bucket ([c6e838d](https://github.com/mkayander/leetpal/commit/c6e838d36f200909a2717d456107c7955654a9a6))
+
 ## [1.42.1](https://github.com/mkayander/leetpal/compare/v1.42.0...v1.42.1) (2022-12-20)
 
 
