@@ -14,7 +14,7 @@ const config = {
     defaultLocale: 'en'
   },
   images: {
-    domains: ['leetpal.s3.eu-central-1.amazonaws.com']
+    domains: ['leetpal.s3.eu-central-1.amazonaws.com', 'leetpal-prod.s3.eu-central-1.amazonaws.com']
   }
 };
 export default config;
