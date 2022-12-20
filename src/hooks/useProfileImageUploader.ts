@@ -11,7 +11,7 @@ type Status = 'loading' | 'done';
 const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
   const origin = new URL(url).hostname.replaceAll('.', '-');
 
-  return `/avatars/${username.replaceAll(' ', '_')}-avatar[${origin}].${
+  return `avatars/${username.replaceAll(' ', '_')}-avatar[${origin}].${
     imageBlob.type.split('/')[1]
   }`;
 };
