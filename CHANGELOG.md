@@ -1,3 +1,21 @@
+# [1.41.0](https://github.com/mkayander/leetpal/compare/v1.40.1...v1.41.0) (2022-12-20)
+
+
+### Bug Fixes
+
+* Add field encryption middleware for prisma ([f178720](https://github.com/mkayander/leetpal/commit/f178720b7ca2d38c87f112e80166aa37277ec403))
+* Don't show question summary at the description paper ([fde752c](https://github.com/mkayander/leetpal/commit/fde752c9565eaf5c97a9950170a5a8a0e5f83bf8))
+* Fix footer margins ([fb18192](https://github.com/mkayander/leetpal/commit/fb18192d43f2c8007f1ba77f0228a97a9d18de1a))
+* Make leetcode profile link routes protected ([b492e19](https://github.com/mkayander/leetpal/commit/b492e19dcb90c3493f1f97fd361359e46449ebeb))
+* Removed unused prisma client file ([f7e5977](https://github.com/mkayander/leetpal/commit/f7e597704a1ca20d336c0590d47dccb17e4bf3d3))
+* Use db.Text modificator instead of Varchar for the token field ([377701f](https://github.com/mkayander/leetpal/commit/377701fe6598c58732d78a8fe51ee1af4aa855f5))
+
+
+### Features
+
+* Add leetcode getProfile route ([bc71ea4](https://github.com/mkayander/leetpal/commit/bc71ea440cfca6eaaaf64d0bb92be9ee1f1a521b))
+* Show message instead of data cards when not signed in ([0fbe504](https://github.com/mkayander/leetpal/commit/0fbe504e1ba91b06ce340a0973b85bd58b2f351c))
+
 ## [1.40.1](https://github.com/mkayander/leetpal/compare/v1.40.0...v1.40.1) (2022-12-19)
 
 
