@@ -25,7 +25,7 @@ export const userRouter = router({
       return ctx.prisma.user.update({
         where: { id: ctx.session?.user.id },
         data: {
-          bucketImage: imageName,
+          bucketImage: imageName ?? null,
         },
       });
     }),
