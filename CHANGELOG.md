@@ -1,3 +1,10 @@
+## [1.42.3](https://github.com/mkayander/leetpal/compare/v1.42.2...v1.42.3) (2022-12-20)
+
+
+### Bug Fixes
+
+* Set bucket image to null if it's undefined ([70a1f18](https://github.com/mkayander/leetpal/commit/70a1f185b1cdab35f2d798a167e760a1a950c9a4))
+
 ## [1.42.2](https://github.com/mkayander/leetpal/compare/v1.42.1...v1.42.2) (2022-12-20)
 
 
