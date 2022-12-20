@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { publicProcedure, router } from '#/server/trpc/trpc';
+import { protectedProcedure, router } from '#/server/trpc/trpc';
 
 export const leetcodeRouter = router({
-  linkUser: publicProcedure
+  linkUser: protectedProcedure
     .input(
       z.object({
         username: z.string(),
@@ -15,7 +15,7 @@ export const leetcodeRouter = router({
     .mutation(async ({ input, ctx }) => {
       const { username, userAvatar, token } = input;
       return await ctx.prisma.user.update({
-        where: { id: ctx.session?.user.id },
+        where: { id: ctx.session.user.id },
         data: {
           leetCode: {
             create: {
@@ -28,9 +28,9 @@ export const leetcodeRouter = router({
       });
     }),
 
-  unlinkUser: publicProcedure.mutation(async ({ ctx }) => {
+  unlinkUser: protectedProcedure.mutation(async ({ ctx }) => {
     return await ctx.prisma.user.update({
-      where: { id: ctx.session?.user.id },
+      where: { id: ctx.session.user.id },
       data: {
         leetCode: {
           delete: true,
