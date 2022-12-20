@@ -18,7 +18,7 @@ export const userRouter = router({
   setBucketImage: publicProcedure
     .input(
       z.object({
-        imageName: z.string(),
+        imageName: z.ostring(),
       })
     )
     .mutation(async ({ input: { imageName }, ctx }) => {

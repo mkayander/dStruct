@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-import { trpc } from '#/utils';
+import { getImageUrl, trpc } from '#/utils';
 
 type SessionHook = ReturnType<typeof useSession>;
 type Status = 'loading' | 'done';
@@ -17,7 +17,7 @@ const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
 };
 
 export const useProfileImageUploader = (session: SessionHook) => {
-  const bucketImage = session.data?.user.bucketImage;
+  let bucketImage = session.data?.user.bucketImage;
   const [status, setStatus] = useState<Status>(
     bucketImage ? 'done' : 'loading'
   );
@@ -26,10 +26,22 @@ export const useProfileImageUploader = (session: SessionHook) => {
   const mutation = trpc.user.setBucketImage.useMutation();
 
   useEffect(() => {
-    if (status === 'done' || bucketImage || isLoading) return;
+    if (status === 'done' || isLoading) return;
 
     (async () => {
-      if (!session.data || !session.data.user.image) return;
+      if (bucketImage) {
+        try {
+          await axios.get(getImageUrl(bucketImage));
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response?.status === 404) {
+            await mutation.mutateAsync({ imageName: undefined });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            bucketImage = undefined;
+          }
+        }
+      }
+
+      if (!session.data?.user.image || bucketImage) return;
 
       setIsLoading(true);
 
@@ -61,7 +73,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       await axios.post(url, formData);
 
-      mutation.mutate({ imageName: filename });
+      await mutation.mutateAsync({ imageName: filename });
 
       setStatus('done');
       setIsLoading(false);
