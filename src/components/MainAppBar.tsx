@@ -32,12 +32,12 @@ type NavItem = {
 const pages = [
   {
     name: 'Dashboard',
-    href: '/dashboard',
-  },
-  {
-    name: 'Pricing',
     href: '/',
   },
+  // {
+  //   name: 'Pricing',
+  //   href: '/',
+  // },
   {
     name: 'API',
     href: '/api-example',
