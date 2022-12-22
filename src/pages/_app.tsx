@@ -5,11 +5,11 @@ import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import type { ReactElement } from 'react';
+import { type ReactElement, useMemo, useState } from 'react';
 
 import { apolloClient } from '#/graphql/apolloClient';
 import { MainLayout as DefaultLayout } from '#/layouts/MainLayout';
-import theme from '#/theme';
+import { themes } from '#/themes';
 import type { AppTypeWithLayout } from '#/types/page';
 import { trpc } from '#/utils';
 
@@ -21,9 +21,20 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const [darkMode, setDarkMode] = useState(true);
+
+  const theme = useMemo(
+    () => (darkMode ? themes.dark : themes.light),
+    [darkMode]
+  );
+
   const getLayout =
     Component.getLayout ??
-    ((page: ReactElement) => <DefaultLayout>{page}</DefaultLayout>);
+    ((page: ReactElement) => (
+      <DefaultLayout setDarkMode={setDarkMode}>{page}</DefaultLayout>
+    ));
 
   return (
     <SessionProvider session={session}>

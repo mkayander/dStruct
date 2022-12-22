@@ -1,10 +1,9 @@
-import { alpha, Box, Divider } from '@mui/material';
+import { alpha, Box, Divider, useTheme } from '@mui/material';
 import React, { useMemo } from 'react';
 import sanitizeHtml from 'sanitize-html';
 
 import { DataSection } from '#/components';
 import type { QuestionDataQueryResult } from '#/graphql/generated';
-import theme from '#/theme';
 
 import styles from './DailyProblem.module.scss';
 
@@ -15,6 +14,7 @@ interface DailyProblemProps {
 export const DailyProblem: React.FC<DailyProblemProps> = ({
   questionDataQuery,
 }) => {
+  const theme = useTheme();
   const question = questionDataQuery.data?.question;
 
   const sanitizedContent = useMemo(

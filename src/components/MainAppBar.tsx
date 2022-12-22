@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { type MouseEvent, useState } from 'react';
 
+import { ThemeSwitch } from '#/components/ThemeSwitch';
 import { useProfileImageUploader } from '#/hooks';
 import { getImageUrl } from '#/utils';
 
@@ -46,7 +47,11 @@ const pages = [
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export const MainAppBar: React.FC = () => {
+type MainAppBarProps = {
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const MainAppBar: React.FC<MainAppBarProps> = ({ setDarkMode }) => {
   const router = useRouter();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -178,6 +183,12 @@ export const MainAppBar: React.FC = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <ThemeSwitch
+              onChange={(_, checked) => {
+                setDarkMode(checked);
+              }}
+            />
+
             {session.data ? (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
