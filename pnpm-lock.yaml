@@ -39,6 +39,8 @@ specifiers:
   graphql: ^16.6.0
   next: 13.0.7
   next-auth: ^4.18.6
+  overlayscrollbars: ^2.0.1
+  overlayscrollbars-react: ^0.5.0
   prettier: ^2.7.1
   prisma: ^4.5.0
   prisma-field-encryption: ^1.4.0
@@ -73,6 +75,8 @@ dependencies:
   graphql: 16.6.0
   next: 13.0.7_m5sxuueb27gk6ddc5gums6vtgq
   next-auth: 4.18.6_gvvct4imq5upoiloat43sswrza
+  overlayscrollbars: 2.0.1
+  overlayscrollbars-react: 0.5.0_mwyyxktpzjzbljbc25pjt2gnlu
   prisma-field-encryption: 1.4.0_@prisma+client@4.6.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -6016,6 +6020,20 @@ packages:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /overlayscrollbars-react/0.5.0_mwyyxktpzjzbljbc25pjt2gnlu:
+    resolution: {integrity: sha512-uCNTnkfWW74veoiEv3kSwoLelKt4e8gTNv65D771X3il0x5g5Yo0fUbro7SpQzR9yNgi23cvB2mQHTTdQH96pA==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      react: '>=16.8.0'
+    dependencies:
+      overlayscrollbars: 2.0.1
+      react: 18.2.0
+    dev: false
+
+  /overlayscrollbars/2.0.1:
+    resolution: {integrity: sha512-tER9iKasFqcJiYdtspHbzlhJJg8kicyj/Oag/GRAK658rDouat2BGFfSFg3AgIw/Yc9CQ78AuX6ieHgg1wQw7Q==}
+    dev: false
 
   /p-each-series/2.2.0:
     resolution: {integrity: sha512-ycIL2+1V32th+8scbpTvyHNaHe02z0sjgh91XXjAk+ZeXoPN4Z46DVUnzdso0aX4KckKw0FNNFHdjZ2UsZvxiA==}
