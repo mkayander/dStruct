@@ -1,3 +1,12 @@
+# [1.43.0](https://github.com/mkayander/leetpal/compare/v1.42.5...v1.43.0) (2022-12-22)
+
+
+### Features
+
+* Added custom scrollbar ([8c05d8c](https://github.com/mkayander/leetpal/commit/8c05d8c60442377fe9212f961e0413456dd9ba7a))
+* Added theme switcher ([987b576](https://github.com/mkayander/leetpal/commit/987b576d9cd62f64ad84bd1ab713862053e40d1f))
+* Show dashboard as index page ([82a7f3a](https://github.com/mkayander/leetpal/commit/82a7f3adaeb93ac4c9ac9c1f722b1982e01ce602))
+
 ## [1.42.5](https://github.com/mkayander/leetpal/compare/v1.42.4...v1.42.5) (2022-12-20)
 
 
