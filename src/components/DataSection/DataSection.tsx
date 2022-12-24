@@ -15,6 +15,7 @@ import styles from './DataSection.module.scss';
 
 interface DataSectionProps extends React.PropsWithChildren {
   className?: string;
+  contentClassName?: string;
   title: string;
   caption?: string | React.ReactNode;
   Icon?: typeof SvgIcon;
@@ -23,6 +24,7 @@ interface DataSectionProps extends React.PropsWithChildren {
 
 export const DataSection: React.FC<DataSectionProps> = ({
   className,
+  contentClassName,
   children,
   title,
   caption,
@@ -63,7 +65,7 @@ export const DataSection: React.FC<DataSectionProps> = ({
         {Icon && <Icon color="primary" fontSize={'large'} />}
       </Box>
       <Divider />
-      <Box marginTop={2}>
+      <Box className={contentClassName} marginTop={2}>
         {isLoading ? <LinearProgress variant="indeterminate" /> : children}
       </Box>
     </Paper>

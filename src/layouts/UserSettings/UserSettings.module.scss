@@ -1,7 +1,10 @@
 .form {
   display: flex;
   flex-flow: column nowrap;
+}
 
+.form,
+.content {
   & > * {
     margin-top: 16px;
   }

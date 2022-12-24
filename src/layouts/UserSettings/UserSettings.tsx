@@ -52,7 +52,11 @@ export const UserSettings: React.FC = () => {
   const [getGlobalData] = useGlobalDataLazyQuery();
 
   return (
-    <DataSection title="User Settings" Icon={ManageAccounts}>
+    <DataSection
+      contentClassName={styles.content}
+      title="User Settings"
+      Icon={ManageAccounts}
+    >
       {user?.leetCodeUsername ? (
         <>
           <Typography>Your LeetCode account name:</Typography>
