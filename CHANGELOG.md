@@ -1,3 +1,11 @@
+## [1.43.2](https://github.com/mkayander/leetpal/compare/v1.43.1...v1.43.2) (2022-12-25)
+
+
+### Bug Fixes
+
+* Improved question summary card layout ([66a6353](https://github.com/mkayander/leetpal/commit/66a6353d5ac360cf5f100874ba8c2d42b4f80f02))
+* User dates do not need to be unique ([e46e220](https://github.com/mkayander/leetpal/commit/e46e2200e51882b1f101e461b72995878cbd4ccd))
+
 ## [1.43.1](https://github.com/mkayander/leetpal/compare/v1.43.0...v1.43.1) (2022-12-25)
 
 
