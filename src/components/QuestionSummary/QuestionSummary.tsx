@@ -83,13 +83,13 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
         }}
       >
         {question ? (
-          <Box display="flex" justifyContent="space-between">
-            <div>
+          <Box display="flex" justifyContent="center" flexWrap="wrap" gap={2}>
+            <Box flexBasis="512px" flexGrow={1}>
               <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
+                display="flex"
+                flexWrap="wrap"
+                justifyContent="space-between"
+                gap={1}
               >
                 <Typography variant="h4">
                   <span style={{ fontWeight: '300' }}>
@@ -98,25 +98,32 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                   {question.title}
                 </Typography>
                 <Box display="flex" sx={{ opacity: 0.9 }}>
-                  <EventRepeatTwoTone sx={{ mx: 1 }} />
+                  <EventRepeatTwoTone sx={{ mr: 1 }} />
                   <Typography variant="subtitle1" lineHeight={1.1}>
                     Question Of Today
                   </Typography>
                 </Box>
               </Box>
 
-              <Grid container my={1} spacing={1} sx={{ opacity: 0.9 }}>
-                <Grid
-                  item
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
+              <Box
+                my={1}
+                display="flex"
+                flexWrap="wrap"
+                gap={1}
+                sx={{
+                  opacity: 0.9,
+                  justifyContent: {
+                    xs: 'space-between',
+                    sm: 'flex-start',
+                  },
+                }}
+              >
+                <Box display="flex" alignItems="center" justifyContent="center">
                   <Typography variant="subtitle1">
                     {question.categoryTitle}
                   </Typography>
-                </Grid>
-                <Grid item>
+                </Box>
+                <div>
                   <Box
                     sx={{
                       display: 'flex',
@@ -131,7 +138,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                     {DifficultyIcon && <DifficultyIcon />}
                     <Typography>{question.difficulty}</Typography>
                   </Box>
-                </Grid>
+                </div>
                 <Grid item>
                   <RatingButtons question={question} />
                 </Grid>
@@ -140,7 +147,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                     Favorite
                   </Button>
                 </Grid>
-              </Grid>
+              </Box>
 
               <Divider />
 
@@ -153,13 +160,12 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
               </Grid>
 
               <Divider />
-            </div>
+            </Box>
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 position: 'relative',
-                marginLeft: 2,
               }}
             >
               <CircularPercentage value={question.stats.acRate} size={180}>
