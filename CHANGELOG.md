@@ -1,3 +1,10 @@
+## [1.43.1](https://github.com/mkayander/leetpal/compare/v1.43.0...v1.43.1) (2022-12-25)
+
+
+### Bug Fixes
+
+* Fixed user settings section layout ([dfcbe87](https://github.com/mkayander/leetpal/commit/dfcbe87cdbdd53da5c411da681d620fc2d1a57c5))
+
 # [1.43.0](https://github.com/mkayander/leetpal/compare/v1.42.5...v1.43.0) (2022-12-22)
 
 
