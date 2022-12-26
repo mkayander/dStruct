@@ -1,3 +1,11 @@
+# [1.44.0](https://github.com/mkayander/leetpal/compare/v1.43.2...v1.44.0) (2022-12-26)
+
+
+### Features
+
+* Added api endpoint for external use ([db407b1](https://github.com/mkayander/leetpal/commit/db407b18db70f5d09256c2374d73f9df7bb2af05))
+* Added spell check words ([a68d17e](https://github.com/mkayander/leetpal/commit/a68d17edc115b4f5453ca7f77fc059b5610e8715))
+
 ## [1.43.2](https://github.com/mkayander/leetpal/compare/v1.43.1...v1.43.2) (2022-12-25)
 
 
