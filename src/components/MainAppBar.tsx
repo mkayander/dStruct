@@ -40,6 +40,10 @@ const pages = [
   //   href: '/',
   // },
   {
+    name: 'Playground',
+    href: '/playground',
+  },
+  {
     name: 'API',
     href: '/api-example',
   },
