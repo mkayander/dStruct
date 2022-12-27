@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/mkayander/leetpal/compare/v1.44.0...v1.45.0) (2022-12-27)
+
+
+### Features
+
+* Added playground d3 tree example ([e556d18](https://github.com/mkayander/leetpal/commit/e556d18e7e13537375c01b3e0eef5902f65dbaf2))
+
 # [1.44.0](https://github.com/mkayander/leetpal/compare/v1.43.2...v1.44.0) (2022-12-26)
 
 
