@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/mkayander/leetpal/compare/v1.45.0...v1.46.0) (2022-12-28)
+
+
+### Features
+
+* Add reset to default input button ([624b7e7](https://github.com/mkayander/leetpal/commit/624b7e76785804f6343f7fa8c67ca200d1f2cf09))
+
 # [1.45.0](https://github.com/mkayander/leetpal/compare/v1.44.0...v1.45.0) (2022-12-27)
 
 
