@@ -1,7 +1,9 @@
+import { Refresh } from '@mui/icons-material';
 import {
   Box,
   Container,
   darken,
+  IconButton,
   TextField,
   Typography,
   useTheme,
@@ -9,6 +11,7 @@ import {
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useState } from 'react';
 import type { RawNodeDatum } from 'react-d3-tree/lib/types/types/common';
 
 const orgChart: RawNodeDatum = {
@@ -54,6 +57,8 @@ const PlaygroundPage: NextPage = () => {
     ssr: false,
   });
 
+  const [input, setInput] = useState<string>('');
+
   return (
     <>
       <Head>
@@ -62,9 +67,30 @@ const PlaygroundPage: NextPage = () => {
       <Container>
         <Typography variant="h3">Playground page</Typography>
 
-        <Box my={3}>
+        <Box
+          my={3}
+          sx={{
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            gap: 2,
+            maxWidth: '512px',
+          }}
+        >
           <Typography>Settings</Typography>
-          <TextField label="Input array" placeholder="e.g.: [1,2,3,null,5]" />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <TextField
+              label="Input array"
+              placeholder="e.g.: [1,2,3,null,5]"
+              value={input}
+              onChange={(ev) => setInput(ev.target.value)}
+            />
+            <IconButton
+              onClick={() => setInput('[1,2,3,null,5]')}
+              title="Reset input to default"
+            >
+              <Refresh />
+            </IconButton>
+          </Box>
         </Box>
 
         <Box
