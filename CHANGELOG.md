@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/mkayander/leetpal/compare/v1.46.0...v1.47.0) (2022-12-31)
+
+
+### Features
+
+* Happy new 2023 year 🎄 ([b8daee8](https://github.com/mkayander/leetpal/commit/b8daee86505dc99152ebbe42bfcb46c830a11d92))
+
 # [1.46.0](https://github.com/mkayander/leetpal/compare/v1.45.0...v1.46.0) (2022-12-28)
 
 
