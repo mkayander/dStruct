@@ -1,63 +1,35 @@
 import { Refresh } from '@mui/icons-material';
 import {
   Box,
+  CircularProgress,
   Container,
-  darken,
   IconButton,
   TextField,
   Typography,
-  useTheme,
 } from '@mui/material';
 import type { NextPage } from 'next';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { useState } from 'react';
-import type { RawNodeDatum } from 'react-d3-tree/lib/types/types/common';
+import { useMemo, useState } from 'react';
 
-const orgChart: RawNodeDatum = {
-  name: 'CEO',
-  children: [
-    {
-      name: 'Manager',
-      attributes: {
-        department: 'Production',
-      },
-      children: [
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Fabrication',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Assembly',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+import { BinaryNode } from '#/components';
+import { useBinaryTree, useDebounce } from '#/hooks';
+import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 
 const PlaygroundPage: NextPage = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
-  const Tree = dynamic(() => import('react-d3-tree'), {
-    ssr: false,
-  });
+  const [rawInput, setRawInput] = useState<string>('');
+  const { value: input, isPending } = useDebounce(rawInput, 500);
 
-  const [input, setInput] = useState<string>('');
+  const parsedInput = useMemo<BinaryTreeInput | undefined>(() => {
+    try {
+      return JSON.parse(input);
+    } catch (e) {
+      return undefined;
+    }
+  }, [input]);
+
+  const tree = useBinaryTree(parsedInput);
 
   return (
     <>
@@ -81,43 +53,29 @@ const PlaygroundPage: NextPage = () => {
             <TextField
               label="Input array"
               placeholder="e.g.: [1,2,3,null,5]"
-              value={input}
-              onChange={(ev) => setInput(ev.target.value)}
+              value={rawInput}
+              onChange={(ev) => setRawInput(ev.target.value)}
             />
             <IconButton
-              onClick={() => setInput('[1,2,3,null,5]')}
+              onClick={() => setRawInput('[1,2,3,null,5]')}
               title="Reset input to default"
             >
               <Refresh />
             </IconButton>
+            {isPending && <CircularProgress />}
           </Box>
         </Box>
 
         <Box
-          sx={{
-            position: 'relative',
-            width: '100%',
-            height: '512px',
-            backgroundColor: darken(theme.palette.action.hover, 0.7),
-            '.rd3t-label__title': {
-              fill: theme.palette.text.primary,
-            },
-            'rd3t-label__attributes': {
-              fill: theme.palette.text.secondary,
-            },
-            '.rd3t-link': {
-              stroke: theme.palette.text.primary,
-            },
-            '.rd3t-node': {
-              stroke: theme.palette.text.disabled,
-            },
-            '.rd3t-leaf-node': {
-              stroke: theme.palette.text.disabled,
-            },
-          }}
+          display="flex"
+          flexDirection="column"
+          rowGap={1}
+          p={3}
           boxShadow={6}
         >
-          <Tree data={orgChart} orientation="vertical" pathFunc="straight" />
+          <pre>{JSON.stringify(parsedInput)}</pre>
+          <pre>{JSON.stringify(tree, null, 2)}</pre>
+          {tree && <BinaryNode {...tree} />}
         </Box>
       </Container>
     </>
