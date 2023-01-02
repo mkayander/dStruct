@@ -1,3 +1,14 @@
+# [1.48.0](https://github.com/mkayander/leetpal/compare/v1.47.0...v1.48.0) (2023-01-02)
+
+
+### Features
+
+* Added a binary tree builder hook ([f32b07e](https://github.com/mkayander/leetpal/commit/f32b07ed61f2eb5c863882fe9459f10d965ee8ae))
+* Added a simple binary tree node ([199d088](https://github.com/mkayander/leetpal/commit/199d0880094a20ed7b7490fc116e402abe7df37c))
+* Added debounce hook ([7b281c1](https://github.com/mkayander/leetpal/commit/7b281c1dbf2ce93e237ccae81b48749cc82c4e5d))
+* Preserve old playground page ([096e7ac](https://github.com/mkayander/leetpal/commit/096e7acca326aff5cdc438f940922b89f0f4e154))
+* Updated playground to a React-based binary tree variant ([13736fa](https://github.com/mkayander/leetpal/commit/13736fa1b33586ed648a754129e6aa80f9355583))
+
 # [1.47.0](https://github.com/mkayander/leetpal/compare/v1.46.0...v1.47.0) (2022-12-31)
 
 
