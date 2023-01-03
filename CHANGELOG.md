@@ -1,3 +1,13 @@
+# [1.49.0](https://github.com/mkayander/leetpal/compare/v1.48.0...v1.49.0) (2023-01-03)
+
+
+### Features
+
+* Added isNumber util function ([a1b4701](https://github.com/mkayander/leetpal/commit/a1b4701bd3ec84bed1b6bb617265a2285d01a08c))
+* Updated binary tree build hook ([bb3de3e](https://github.com/mkayander/leetpal/commit/bb3de3ebaec35a3d1e7bde8eda34de5c07f54333))
+* Updated binary tree node component ([4860c81](https://github.com/mkayander/leetpal/commit/4860c8184ba31552c01619ed7b668b6d60a22e61))
+* Updated playground page ([c2ada99](https://github.com/mkayander/leetpal/commit/c2ada9991ed6ade777fdbd800b5fc5efdcab567b))
+
 # [1.48.0](https://github.com/mkayander/leetpal/compare/v1.47.0...v1.48.0) (2023-01-02)
 
 
