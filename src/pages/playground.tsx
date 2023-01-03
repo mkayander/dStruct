@@ -2,6 +2,7 @@ import { Refresh } from '@mui/icons-material';
 import {
   Box,
   CircularProgress,
+  Collapse,
   Container,
   IconButton,
   TextField,
@@ -10,6 +11,7 @@ import {
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useMemo, useState } from 'react';
+import * as util from 'util';
 
 import { BinaryNode } from '#/components';
 import { useBinaryTree, useDebounce } from '#/hooks';
@@ -74,7 +76,14 @@ const PlaygroundPage: NextPage = () => {
           boxShadow={6}
         >
           <pre>{JSON.stringify(parsedInput)}</pre>
-          <pre>{JSON.stringify(tree, null, 2)}</pre>
+          <Collapse in={true}>
+            <pre>
+              {util.inspect(tree, {
+                showHidden: true,
+                depth: null,
+              })}
+            </pre>
+          </Collapse>
           {tree && <BinaryNode {...tree} />}
         </Box>
       </Container>
