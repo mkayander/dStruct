@@ -1,3 +1,11 @@
+# [1.50.0](https://github.com/mkayander/leetpal/compare/v1.49.0...v1.50.0) (2023-01-03)
+
+
+### Features
+
+* Added id property for the nodes ([0953265](https://github.com/mkayander/leetpal/commit/09532659c5da33d6254835ad21c21ce77d7ce0a8))
+* Installed UUID4 packages ([03e5053](https://github.com/mkayander/leetpal/commit/03e5053354679199022627002bd13724e9387060))
+
 # [1.49.0](https://github.com/mkayander/leetpal/compare/v1.48.0...v1.49.0) (2023-01-03)
 
 
