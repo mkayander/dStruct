@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { isNumber } from '#/utils';
+import uuid4 from 'short-uuid';
 
 // [3,9,20,null,null,15,7]
 
@@ -9,6 +10,7 @@ import { isNumber } from '#/utils';
 export type BinaryTreeInput = (number | null)[];
 
 type NodeMeta = {
+  id: string;
   depth: number;
   isRoot?: boolean;
   maxDepth?: number;
@@ -22,16 +24,18 @@ export class BinaryTreeNode {
     readonly value: number,
     public left: BinaryTreeNode | null = null,
     public right: BinaryTreeNode | null = null,
-    meta: NodeMeta = { depth: 0 }
+    meta: NodeMeta
   ) {
     this.meta = meta;
   }
 }
 
-const createChildNode = (value: number | null | undefined, meta: NodeMeta) => {
+const createChildNode = (value: number | null | undefined, meta: Partial<NodeMeta>) => {
   if (!isNumber(value)) return null;
-  console.log('createChildNode', value, meta);
-  return new BinaryTreeNode(value, null, null, meta);
+
+  meta.id = uuid4.generate();
+
+  return new BinaryTreeNode(value, null, null, <NodeMeta>meta);
 };
 
 const buildBinaryTree = (input?: BinaryTreeInput): BinaryTreeNode | null => {
@@ -40,8 +44,9 @@ const buildBinaryTree = (input?: BinaryTreeInput): BinaryTreeNode | null => {
   const rootNum = input[0];
   if (!isNumber(rootNum)) return null;
   const root = new BinaryTreeNode(rootNum, null, null, {
+    id: uuid4.generate(),
     depth: 0,
-    isRoot: true,
+    isRoot: true
   });
   const queue: BinaryTreeNode[] = [root];
 
@@ -53,9 +58,9 @@ const buildBinaryTree = (input?: BinaryTreeInput): BinaryTreeNode | null => {
 
     const newDepth = current.meta.depth + 1;
 
-    const metaProps: NodeMeta = {
+    const metaProps: Partial<NodeMeta> = {
       depth: newDepth,
-      rootNode: root,
+      rootNode: root
     };
 
     root.meta.maxDepth = newDepth;
