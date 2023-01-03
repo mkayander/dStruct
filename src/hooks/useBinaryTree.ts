@@ -1,27 +1,48 @@
 import { useMemo } from 'react';
 
+import { isNumber } from '#/utils';
+
 // [3,9,20,null,null,15,7]
 
 // const input: BinaryTreeInput = [1, 2, 2, 3, 3, null, null, 4, 4];
 
 export type BinaryTreeInput = (number | null)[];
 
-export class BinaryTreeNode {
-  value: number;
-  left: BinaryTreeNode | null;
-  right: BinaryTreeNode | null;
+type NodeMeta = {
+  depth: number;
+  isRoot?: boolean;
+  maxDepth?: number;
+  rootNode?: BinaryTreeNode;
+};
 
-  constructor(value: number) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
+export class BinaryTreeNode {
+  meta: NodeMeta;
+
+  constructor(
+    readonly value: number,
+    public left: BinaryTreeNode | null = null,
+    public right: BinaryTreeNode | null = null,
+    meta: NodeMeta = { depth: 0 }
+  ) {
+    this.meta = meta;
   }
 }
 
-function buildBinaryTree(input?: BinaryTreeInput): BinaryTreeNode | null {
+const createChildNode = (value: number | null | undefined, meta: NodeMeta) => {
+  if (!isNumber(value)) return null;
+  console.log('createChildNode', value, meta);
+  return new BinaryTreeNode(value, null, null, meta);
+};
+
+const buildBinaryTree = (input?: BinaryTreeInput): BinaryTreeNode | null => {
   if (!input || input.length === 0) return null;
 
-  const root = new BinaryTreeNode(input[0]!);
+  const rootNum = input[0];
+  if (!isNumber(rootNum)) return null;
+  const root = new BinaryTreeNode(rootNum, null, null, {
+    depth: 0,
+    isRoot: true,
+  });
   const queue: BinaryTreeNode[] = [root];
 
   let i = 1;
@@ -30,21 +51,26 @@ function buildBinaryTree(input?: BinaryTreeInput): BinaryTreeNode | null {
     const current = queue.shift();
     if (!current) break;
 
-    const leftNum = input[i];
-    if (leftNum) {
-      current.left = new BinaryTreeNode(leftNum);
-      queue.push(current.left);
-    }
+    const newDepth = current.meta.depth + 1;
 
-    const rightNum = input[++i];
-    if (rightNum) {
-      current.right = new BinaryTreeNode(rightNum);
-      queue.push(current.right);
-    }
+    const metaProps: NodeMeta = {
+      depth: newDepth,
+      rootNode: root,
+    };
+
+    root.meta.maxDepth = newDepth;
+
+    current.left = createChildNode(input[i], metaProps);
+    current.left && queue.push(current.left);
+    i++;
+
+    current.right = createChildNode(input[i], metaProps);
+    current.right && queue.push(current.right);
     i++;
   }
+
   return root;
-}
+};
 
 export const useBinaryTree = (
   input?: BinaryTreeInput
