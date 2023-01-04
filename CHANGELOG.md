@@ -1,3 +1,17 @@
+# [1.51.0](https://github.com/mkayander/leetpal/compare/v1.50.0...v1.51.0) (2023-01-04)
+
+
+### Bug Fixes
+
+* Prevent duplicate node ids ([6307085](https://github.com/mkayander/leetpal/commit/63070852f4836beafd7012bf2e18b80489c6c590))
+
+
+### Features
+
+* Installed react-archer lib ([4403c91](https://github.com/mkayander/leetpal/commit/4403c915a1f9167665a806bfbbbe36057120e433))
+* Updated node styles. Use archer element. ([d73cd9d](https://github.com/mkayander/leetpal/commit/d73cd9d46b2f4ac32b06d75c7769f7af75638080))
+* Updated playground layout. Use archer container. ([32aa4de](https://github.com/mkayander/leetpal/commit/32aa4de1599304c9dc82131205656b55a7ee8861))
+
 # [1.50.0](https://github.com/mkayander/leetpal/compare/v1.49.0...v1.50.0) (2023-01-03)
 
 
