@@ -33,9 +33,8 @@ export class BinaryTreeNode {
 const createChildNode = (value: number | null | undefined, meta: Partial<NodeMeta>) => {
   if (!isNumber(value)) return null;
 
-  meta.id = uuid4.generate();
 
-  return new BinaryTreeNode(value, null, null, <NodeMeta>meta);
+  return new BinaryTreeNode(value, null, null, <NodeMeta>{ id: uuid4.generate(), ...meta });
 };
 
 const buildBinaryTree = (input?: BinaryTreeInput): BinaryTreeNode | null => {
