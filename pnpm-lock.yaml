@@ -48,6 +48,7 @@ specifiers:
   prisma: ^4.5.0
   prisma-field-encryption: ^1.4.0
   react: 18.2.0
+  react-archer: ^4.2.2
   react-d3-tree: ^3.4.2
   react-dom: 18.2.0
   sanitize-html: ^2.7.3
@@ -88,6 +89,7 @@ dependencies:
   overlayscrollbars-react: 0.5.0_mwyyxktpzjzbljbc25pjt2gnlu
   prisma-field-encryption: 1.4.0_@prisma+client@4.6.1
   react: 18.2.0
+  react-archer: 4.2.2_fan5qbzahqtxlm5dzefqlqx5ia
   react-d3-tree: 3.4.2_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   sanitize-html: 2.7.3
@@ -6905,6 +6907,19 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
+  /react-archer/4.2.2_fan5qbzahqtxlm5dzefqlqx5ia:
+    resolution: {integrity: sha512-THuOl1guFPYRx0QsZ69kV7bwr1Hapxwxad9BVQ9qyyGXW4E2zzI9QA9xYSMDRI6DnXhiAy2IEJWH0LqDpFV6qA==}
+    peerDependencies:
+      '@types/react': ^16.8.8 || ^17 || ^18
+      prop-types: ^15.6.2
+      react: ^16.9.0 || ^17 || ^18
+    dependencies:
+      '@types/react': 18.0.25
+      react: 18.2.0
+      react-fast-compare: 2.0.4
+      resize-observer-polyfill: 1.5.0
+    dev: false
+
   /react-d3-tree/3.4.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-qVqvSDwLPcKVTtZ6QxU8l/YmvTxa2zcOxi1SINOOVFz+VQ9IsIQdp21rbx1oXmjK+LBUaxnv+f5QSroPv+bWWg==}
     peerDependencies:
@@ -7092,6 +7107,10 @@ packages:
   /require-main-filename/2.0.0:
     resolution: {integrity: sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==}
     dev: true
+
+  /resize-observer-polyfill/1.5.0:
+    resolution: {integrity: sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
