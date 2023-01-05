@@ -1,3 +1,17 @@
+# [1.52.0](https://github.com/mkayander/leetpal/compare/v1.51.0...v1.52.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* Make node number text non-selectable ([a7e44c3](https://github.com/mkayander/leetpal/commit/a7e44c32d965d7d913d262179c061231869c7af1))
+
+
+### Features
+
+* Added monaco json view. Added scroll. ([808e98e](https://github.com/mkayander/leetpal/commit/808e98e8bdd23842e914e62838b24fc09f46b844))
+* Installed react-monaco & drag scroll ([bab8ff0](https://github.com/mkayander/leetpal/commit/bab8ff0e4b6b80818a22c1c8bb03a5d3250bb17a))
+* Update scrollbar hover & active colors ([37140df](https://github.com/mkayander/leetpal/commit/37140df25d536c6f7f770c00fff175f351686e95))
+
 # [1.51.0](https://github.com/mkayander/leetpal/compare/v1.50.0...v1.51.0) (2023-01-04)
 
 
