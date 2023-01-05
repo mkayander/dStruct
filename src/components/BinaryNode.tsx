@@ -71,6 +71,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
             background: alpha(theme.palette.primary.main, 0.3),
             border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
             backdropFilter: 'blur(4px)',
+            userSelect: 'none',
             boxShadow: `0px 0px 18px -2px ${alpha(
               theme.palette.primary.dark,
               0.5
