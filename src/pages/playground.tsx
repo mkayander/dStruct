@@ -19,14 +19,20 @@ import {
   useTheme,
 } from '@mui/material';
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ArcherContainer } from 'react-archer';
-import * as util from 'util';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { BinaryNode } from '#/components';
 import { useBinaryTree, useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
+
+const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
+  ssr: false,
+  loading: () => <CircularProgress />,
+});
 
 const PlaygroundPage: NextPage = () => {
   const theme = useTheme();
@@ -60,7 +66,15 @@ const PlaygroundPage: NextPage = () => {
 
   const [isJsonOpened, setIsJsonOpened] = useState<boolean>(false);
   const treeJson = useMemo<string>(
-    () => util.inspect(tree, { depth: null }),
+    () =>
+      JSON.stringify(
+        tree,
+        (key, value) => {
+          if (key === 'rootNode') return undefined;
+          return value;
+        },
+        2
+      ),
     [tree]
   );
 
@@ -119,25 +133,41 @@ const PlaygroundPage: NextPage = () => {
           {isJsonOpened ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={isJsonOpened}>
-          <pre>{treeJson}</pre>
+          <MonacoEditor
+            height="80vh"
+            theme="vs-dark"
+            language="json"
+            value={treeJson}
+            defaultValue="Loading..."
+            options={{
+              readOnly: true,
+              minimap: {
+                enabled: true,
+              },
+            }}
+          />
         </Collapse>
 
         <Box
           display="flex"
           flexDirection="column"
           rowGap={1}
-          p={3}
           my={1}
           boxShadow={6}
+          borderRadius={1}
         >
-          <ArcherContainer
-            lineStyle="straight"
-            strokeColor={alpha(theme.palette.primary.dark, 0.5)}
-            strokeWidth={4}
-            endMarker={false}
-          >
-            {tree && <BinaryNode {...tree} />}
-          </ArcherContainer>
+          <ScrollContainer>
+            <Box sx={{ m: 3 }}>
+              <ArcherContainer
+                lineStyle="straight"
+                strokeColor={alpha(theme.palette.primary.dark, 0.5)}
+                strokeWidth={4}
+                endMarker={false}
+              >
+                {tree && <BinaryNode {...tree} />}
+              </ArcherContainer>
+            </Box>
+          </ScrollContainer>
         </Box>
       </Container>
     </>
