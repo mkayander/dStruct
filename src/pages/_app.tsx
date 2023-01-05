@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
-import { Box, ThemeProvider } from '@mui/material';
+import { alpha, Box, ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
@@ -49,6 +49,12 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
               '.os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle':
                 {
                   background: theme.palette.action.hover,
+                  '&:hover': {
+                    backgroundColor: alpha(theme.palette.primary.light, 0.3),
+                  },
+                  '&:active': {
+                    backgroundColor: alpha(theme.palette.primary.dark, 0.6),
+                  },
                 },
             }}
           >
