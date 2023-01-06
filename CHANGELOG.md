@@ -1,3 +1,18 @@
+# [1.53.0](https://github.com/mkayander/leetpal/compare/v1.52.0...v1.53.0) (2023-01-06)
+
+
+### Bug Fixes
+
+* Rename 'value' to 'val' in a binary tree node ([97e916b](https://github.com/mkayander/leetpal/commit/97e916b55698d1badbd636459eabdc28ef9a1006))
+
+
+### Features
+
+* Added basic code editor component ([a7b996d](https://github.com/mkayander/leetpal/commit/a7b996dcc46a8c8f300a24a6e2f9577cfe04851d))
+* Installed mui-lab & raw-loader ([43d9ae0](https://github.com/mkayander/leetpal/commit/43d9ae036083561ec9febb62afbe43a0764b147e))
+* Updated playground page, added a working code runner ([8d44f12](https://github.com/mkayander/leetpal/commit/8d44f129bf0bfb9479d301a1225a4b0f42664561))
+* Use raw-loader for '.txt' files in webpack ([08e61e5](https://github.com/mkayander/leetpal/commit/08e61e518aebffc2b7fe311db6142b1143b4ffe5))
+
 # [1.52.0](https://github.com/mkayander/leetpal/compare/v1.51.0...v1.52.0) (2023-01-05)
 
 
