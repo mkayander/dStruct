@@ -18,7 +18,7 @@ const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: 'none' }} />;
 type BinaryNodeProps = BinaryTreeNode;
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
-  value,
+  val,
   left,
   right,
   meta,
@@ -84,7 +84,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
             },
           }}
         >
-          {value}
+          {val}
         </Box>
       </ArcherElement>
 

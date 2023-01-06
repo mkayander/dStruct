@@ -21,7 +21,7 @@ export class BinaryTreeNode {
   meta: NodeMeta;
 
   constructor(
-    readonly value: number,
+    readonly val: number,
     public left: BinaryTreeNode | null = null,
     public right: BinaryTreeNode | null = null,
     meta: NodeMeta
