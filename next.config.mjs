@@ -15,6 +15,20 @@ const config = {
   },
   images: {
     domains: ['leetpal.s3.eu-central-1.amazonaws.com', 'leetpal-prod.s3.eu-central-1.amazonaws.com']
+  },
+  webpack: (config) => {
+    return {
+      ...config,
+      module: {
+        ...config.module,
+        rules: config.module.rules.concat([
+          {
+            test: /\.txt$/,
+            loader: 'raw-loader'
+          }
+        ])
+      }
+    };
   }
 };
 export default config;

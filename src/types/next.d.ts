@@ -8,3 +8,8 @@ declare module 'next/config' {
   };
   export default getConfig;
 }
+
+declare module '*.txt' {
+  const content: string;
+  export default content;
+}
