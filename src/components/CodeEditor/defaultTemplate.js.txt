@@ -1,0 +1,18 @@
+/**
+ * @param {TreeNodeObject} head
+ */
+return function runBinaryTreeCode(head) {
+  // Your code goes here
+}
+
+/**
+ * Definitions for a binary tree node.
+ *
+ * @typedef {{val: number, left: TreeNodeObject, right: TreeNodeObject}} TreeNodeObject
+ *
+ * @callback TreeNode
+ * @param {number} val
+ * @param {(TreeNodeObject | null)?} left
+ * @param {(TreeNodeObject | null)?} right
+ * @returns {TreeNodeObject}
+ */
