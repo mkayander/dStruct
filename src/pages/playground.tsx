@@ -205,6 +205,7 @@ const PlaygroundPage: NextPage = () => {
                 strokeColor={alpha(theme.palette.primary.dark, 0.5)}
                 strokeWidth={4}
                 endMarker={false}
+                svgContainerStyle={{ overflow: 'visible' }}
               >
                 {tree && <BinaryNode {...tree} />}
               </ArcherContainer>
