@@ -1,3 +1,15 @@
+# [1.54.0](https://github.com/mkayander/leetpal/compare/v1.53.0...v1.54.0) (2023-01-07)
+
+
+### Bug Fixes
+
+* Fix svg lines overflow visibility ([9908128](https://github.com/mkayander/leetpal/commit/9908128af6a8f5a501d53f50fe0777537e3c1863))
+
+
+### Features
+
+* Move code runner to a separate component ([debda22](https://github.com/mkayander/leetpal/commit/debda220e46231004fbf24bd1497f94da5f70992))
+
 # [1.53.0](https://github.com/mkayander/leetpal/compare/v1.52.0...v1.53.0) (2023-01-06)
 
 
