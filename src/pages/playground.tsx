@@ -1,13 +1,9 @@
 import {
   AccountTree,
-  DeleteForever,
   ExpandLess,
   ExpandMore,
-  PlayArrow,
   Refresh,
-  Save,
 } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import {
   alpha,
   Box,
@@ -25,12 +21,11 @@ import {
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ArcherContainer } from 'react-archer';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
-import { BinaryNode, CodeEditor } from '#/components';
-import { defaultJsTemplate } from '#/components/CodeEditor/CodeEditor';
+import { BinaryNode, CodeRunner } from '#/components';
 import { useBinaryTree, useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 
@@ -82,43 +77,6 @@ const PlaygroundPage: NextPage = () => {
       ),
     [tree]
   );
-
-  useEffect(() => {
-    const savedCode = localStorage.getItem('code');
-    if (savedCode) setCodeInput(savedCode);
-  }, []);
-
-  const [codeInput, setCodeInput] = useState<string>(defaultJsTemplate);
-  const [codeResult, setCodeResult] = useState<string | null>(null);
-
-  const handleClearCode = () => {
-    setCodeInput(defaultJsTemplate);
-    localStorage.removeItem('code');
-  };
-
-  const handleSaveCode = () => {
-    localStorage.setItem('code', codeInput);
-    console.log('Saved code to localStorage:\n', codeInput);
-  };
-
-  const handleRunCode = () => {
-    console.log('Run code:\n', codeInput);
-
-    const getInputFunction = new Function(codeInput);
-
-    try {
-      const runFunction = getInputFunction();
-      console.log('Run function:\n', runFunction);
-
-      const result = runFunction(tree);
-
-      console.log('Result:\n', result);
-
-      setCodeResult(result);
-    } catch (e: any) {
-      console.error(e);
-    }
-  };
 
   return (
     <>
@@ -212,64 +170,7 @@ const PlaygroundPage: NextPage = () => {
             </Box>
           </ScrollContainer>
         </Box>
-        <Box display="flex" justifyContent="space-between" my={2}>
-          <Box display="flex" alignItems="center" columnGap={2}>
-            <Typography variant="h5">
-              Code Runner {'< '}
-              <Box
-                component="span"
-                fontWeight="bold"
-                color={theme.palette.warning.light}
-              >
-                JS
-              </Box>
-              {' />'}
-            </Typography>
-            <Typography variant="body1">Result: </Typography>
-            <Typography variant="body1" color="primary">
-              {String(codeResult)}
-            </Typography>
-          </Box>
-          <Box display="flex" columnGap={2}>
-            <LoadingButton
-              variant="outlined"
-              color="warning"
-              size="small"
-              endIcon={<DeleteForever />}
-              onClick={handleClearCode}
-            >
-              Clear
-            </LoadingButton>
-            <LoadingButton
-              variant="outlined"
-              color="info"
-              size="small"
-              endIcon={<Save />}
-              onClick={handleSaveCode}
-            >
-              Save
-            </LoadingButton>
-            <LoadingButton
-              loadingPosition="end"
-              variant="outlined"
-              color="success"
-              size="small"
-              endIcon={<PlayArrow />}
-              onClick={handleRunCode}
-            >
-              Run Code
-            </LoadingButton>
-          </Box>
-        </Box>
-        <Box boxShadow={8} borderRadius={1} overflow="hidden">
-          <CodeEditor
-            height="80vh"
-            theme="vs-dark"
-            language="javascript"
-            value={codeInput}
-            onChange={(value) => setCodeInput(value || '')}
-          />
-        </Box>
+        <CodeRunner tree={tree} />
       </Container>
     </>
   );
