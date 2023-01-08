@@ -1,3 +1,14 @@
+# [1.55.0](https://github.com/mkayander/leetpal/compare/v1.54.0...v1.55.0) (2023-01-08)
+
+
+### Features
+
+* Added basic Redux store ([3425043](https://github.com/mkayander/leetpal/commit/3425043e97a10de1e0c929f708b7b602c689a9c6))
+* Dispatch to store on tree build ([cdb4d63](https://github.com/mkayander/leetpal/commit/cdb4d63c23e3a83dd76763be079b7f89955896e2))
+* Initialized Redux store ([55b52a9](https://github.com/mkayander/leetpal/commit/55b52a9dea64e8b3ea54fcb2ecc406e33441503a))
+* Installed Redux ([88caf87](https://github.com/mkayander/leetpal/commit/88caf87aaecb30e1da3aa3e59dd130289010f926))
+* Updated binary node ([79eee28](https://github.com/mkayander/leetpal/commit/79eee28bcdbb89654f826c10d135c6ef7aa781ec))
+
 # [1.54.0](https://github.com/mkayander/leetpal/compare/v1.53.0...v1.54.0) (2023-01-07)
 
 
