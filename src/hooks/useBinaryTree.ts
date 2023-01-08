@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { isNumber } from '#/utils';
 import uuid4 from 'short-uuid';
 import { useDispatch } from 'react-redux';
-import { treeNodeSlice } from '#/store/reducers/treeNode';
+import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 // [3,9,20,null,null,15,7]
 
@@ -53,13 +53,14 @@ export const useBinaryTree = (
   return useMemo(() => {
     if (!input || input.length === 0) return null;
 
+    dispatch(treeNodeSlice.actions.clearAll());
+
     const rootNum = input[0];
     if (!isNumber(rootNum)) return null;
-    const root = new BinaryTreeNode(rootNum, null, null, {
-      id: uuid4.generate(),
-      depth: 0,
-      isRoot: true
-    });
+
+    const root = createChildNode(rootNum, { depth: 0, isRoot: true });
+    if (!root) return null;
+
     const queue: BinaryTreeNode[] = [root];
 
     let i = 1;
@@ -87,5 +88,5 @@ export const useBinaryTree = (
     }
 
     return root;
-  }, [createChildNode, input]);
+  }, [createChildNode, dispatch, input]);
 };
