@@ -1,5 +1,5 @@
 import { alpha, Box, type SxProps, type Theme, useTheme } from '@mui/material';
-import React from 'react';
+import React, { useRef } from 'react';
 import { ArcherElement } from 'react-archer';
 import type { RelationType } from 'react-archer/lib/types';
 
@@ -12,6 +12,11 @@ const nodeProps: SxProps<Theme> = {
   width: '42px',
   height: '42px',
 };
+
+const relationProps = {
+  targetAnchor: 'middle',
+  sourceAnchor: 'middle',
+} as const;
 
 const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: 'none' }} />;
 
@@ -30,29 +35,15 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
   const relations: RelationType[] = [];
 
-  if (left)
-    relations.push({
-      targetId: left.meta.id,
-      targetAnchor: 'middle',
-      sourceAnchor: 'middle',
-      style: {
-        endShape: {
-          circle: {
-            radius: 3,
-          },
-        },
-      },
-    });
+  if (left) relations.push({ ...relationProps, targetId: left.meta.id });
 
-  if (right)
-    relations.push({
-      targetId: right.meta.id,
-      targetAnchor: 'middle',
-      sourceAnchor: 'middle',
-    });
+  if (right) relations.push({ ...relationProps, targetId: right.meta.id });
+
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <Box
+      ref={ref}
       sx={{
         display: 'flex',
         position: 'relative',
