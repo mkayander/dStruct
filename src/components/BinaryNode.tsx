@@ -1,9 +1,12 @@
 import { alpha, Box, type SxProps, type Theme, useTheme } from '@mui/material';
-import React, { useRef } from 'react';
+import React from 'react';
 import { ArcherElement } from 'react-archer';
 import type { RelationType } from 'react-archer/lib/types';
 
 import type { BinaryTreeNode } from '#/hooks/useBinaryTree';
+
+import { useAppSelector } from '#/store/hooks';
+import { selectNodeDataById } from '#/store/reducers/treeNodeReducer';
 
 const nodeProps: SxProps<Theme> = {
   display: 'flex',
@@ -39,11 +42,10 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
   if (right) relations.push({ ...relationProps, targetId: right.meta.id });
 
-  const ref = useRef<HTMLDivElement>(null);
+  const nodeData = useAppSelector(selectNodeDataById(meta.id));
 
   return (
     <Box
-      ref={ref}
       sx={{
         display: 'flex',
         position: 'relative',
@@ -59,7 +61,10 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           sx={{
             ...nodeProps,
             borderRadius: '50%',
-            background: alpha(theme.palette.primary.main, 0.3),
+            background: alpha(
+              nodeData?.color || theme.palette.primary.main,
+              0.3
+            ),
             border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
             backdropFilter: 'blur(4px)',
             userSelect: 'none',

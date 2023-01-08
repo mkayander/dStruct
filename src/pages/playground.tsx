@@ -7,13 +7,18 @@ import {
 import {
   alpha,
   Box,
+  Button,
   CircularProgress,
   Collapse,
   Container,
+  FormControl,
   IconButton,
+  InputLabel,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
+  Select,
   TextField,
   Typography,
   useTheme,
@@ -24,10 +29,18 @@ import Head from 'next/head';
 import React, { useMemo, useState } from 'react';
 import { ArcherContainer } from 'react-archer';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { useSelector } from 'react-redux';
 
 import { BinaryNode, CodeRunner } from '#/components';
 import { useBinaryTree, useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
+
+import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import {
+  selectNodeDataById,
+  treeNodeDataSelector,
+  treeNodeSlice,
+} from '#/store/reducers/treeNodeReducer';
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
   ssr: false,
@@ -77,6 +90,28 @@ const PlaygroundPage: NextPage = () => {
       ),
     [tree]
   );
+
+  const dispatch = useAppDispatch();
+
+  const nodes = useAppSelector(treeNodeDataSelector.selectAll);
+
+  const [selectValue, setSelectValue] = useState<string>('');
+  const selectedNode = useSelector(selectNodeDataById(selectValue));
+
+  const [colorInput, setColorInput] = useState<string>('');
+
+  const handleSetColor = () => {
+    console.log('Set color:\n', colorInput);
+
+    if (!selectedNode) return;
+
+    dispatch(
+      treeNodeSlice.actions.update({
+        ...selectedNode,
+        color: colorInput,
+      })
+    );
+  };
 
   return (
     <>
@@ -169,6 +204,32 @@ const PlaygroundPage: NextPage = () => {
               </ArcherContainer>
             </Box>
           </ScrollContainer>
+        </Box>
+        <Box display="flex" flexDirection="row" flexWrap="wrap" gap={1} my={3}>
+          <FormControl sx={{ minWidth: 256 }}>
+            <InputLabel id="select-node-label">Select node</InputLabel>
+            <Select
+              labelId="select-node-label"
+              label="Select node"
+              value={selectValue}
+              onChange={(event) => setSelectValue(event.target.value)}
+            >
+              {nodes?.map((node) => (
+                <MenuItem key={node.id} value={node.id}>
+                  {node.id} {node.value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            label="Node color"
+            placeholder="Enter color"
+            value={colorInput}
+            onChange={(event) => setColorInput(event.target.value)}
+          />
+          <Button variant="text" onClick={handleSetColor}>
+            Set Color
+          </Button>
         </Box>
         <CodeRunner tree={tree} />
       </Container>
