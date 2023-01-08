@@ -1,3 +1,15 @@
+# [1.56.0](https://github.com/mkayander/leetpal/compare/v1.55.0...v1.56.0) (2023-01-08)
+
+
+### Bug Fixes
+
+* Fixed nodes storing ([d7f7e3f](https://github.com/mkayander/leetpal/commit/d7f7e3f9e56c4b11a4e0a7f19bf4cb05ba4ec481))
+
+
+### Features
+
+* Implemented simple nodes store usage ([b7697d4](https://github.com/mkayander/leetpal/commit/b7697d4a04d7a870e825bc5459c9414bc0df8672))
+
 # [1.55.0](https://github.com/mkayander/leetpal/compare/v1.54.0...v1.55.0) (2023-01-08)
 
 
