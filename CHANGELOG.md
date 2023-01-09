@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/mkayander/leetpal/compare/v1.56.0...v1.57.0) (2023-01-09)
+
+
+### Features
+
+* Binary nodes parsing rework ([3cc1cfc](https://github.com/mkayander/leetpal/commit/3cc1cfc0a6681f69cc58bb4b6238df635139c902))
+
 # [1.56.0](https://github.com/mkayander/leetpal/compare/v1.55.0...v1.56.0) (2023-01-08)
 
 
