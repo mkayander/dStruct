@@ -1,9 +1,15 @@
-import { useCallback, useMemo } from 'react';
+import type { Dictionary } from '@reduxjs/toolkit';
+import { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import uuid4 from 'short-uuid';
 
 import { isNumber } from '#/utils';
-import uuid4 from 'short-uuid';
-import { useDispatch } from 'react-redux';
-import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
+
+import {
+  type BinaryTreeNodeData,
+  type BinaryTreeNodeDataPayload,
+  treeNodeSlice,
+} from '#/store/reducers/treeNodeReducer';
 
 // [3,9,20,null,null,15,7]
 
@@ -15,6 +21,7 @@ type NodeMeta = {
   id: string;
   depth: number;
   isRoot?: boolean;
+  isLeaf?: boolean;
   maxDepth?: number;
   rootNode?: BinaryTreeNode;
 };
@@ -23,12 +30,40 @@ export class BinaryTreeNode {
   meta: NodeMeta;
 
   constructor(
-    readonly val: number,
+    readonly val: number | string,
     public left: BinaryTreeNode | null = null,
     public right: BinaryTreeNode | null = null,
     meta: NodeMeta
   ) {
     this.meta = meta;
+  }
+
+  static fromNodeData(
+    nodeData: BinaryTreeNodeData | undefined,
+    dataMap: Dictionary<BinaryTreeNodeData>,
+    meta?: Partial<NodeMeta>
+  ): BinaryTreeNode | null {
+    if (!nodeData) return null;
+
+    const { id, value, left, right } = nodeData;
+
+    const newMeta = {
+      ...meta,
+      depth: (meta?.depth ?? -1) + 1,
+    };
+
+    const leftNode = left
+      ? BinaryTreeNode.fromNodeData(dataMap[left], dataMap, newMeta)
+      : null;
+    const rightNode = right
+      ? BinaryTreeNode.fromNodeData(dataMap[right], dataMap, newMeta)
+      : null;
+
+    if (!leftNode && !rightNode) {
+      newMeta.isLeaf = true;
+    }
+
+    return new BinaryTreeNode(value, leftNode, rightNode, { ...newMeta, id });
   }
 }
 
@@ -37,31 +72,38 @@ export const useBinaryTree = (
 ): BinaryTreeNode | null => {
   const dispatch = useDispatch();
 
-  const createChildNode = useCallback((value: number | null | undefined, meta: Partial<NodeMeta>) => {
-    if (!isNumber(value)) return null;
-
-    const newNode = new BinaryTreeNode(value, null, null, <NodeMeta>{ id: uuid4.generate(), ...meta });
-
-    dispatch(treeNodeSlice.actions.add({
-      id: newNode.meta.id,
-      value: newNode.val
-    }));
-
-    return newNode;
-  }, [dispatch]);
-
   return useMemo(() => {
     if (!input || input.length === 0) return null;
+
+    const newDataNodes: Record<string, BinaryTreeNodeDataPayload> = {};
+
+    const createNodeData = (
+      value: number | undefined | null,
+      depth: number
+    ) => {
+      if (!isNumber(value)) return null;
+
+      const newId = uuid4.generate();
+      newDataNodes[newId] = {
+        id: newId,
+        value: value,
+        depth,
+      };
+
+      return newDataNodes[newId];
+    };
 
     dispatch(treeNodeSlice.actions.clearAll());
 
     const rootNum = input[0];
     if (!isNumber(rootNum)) return null;
 
-    const root = createChildNode(rootNum, { depth: 0, isRoot: true });
-    if (!root) return null;
+    const rootData = createNodeData(rootNum, 0);
+    if (!rootData) return null;
 
-    const queue: BinaryTreeNode[] = [root];
+    const queue: BinaryTreeNodeDataPayload[] = [rootData];
+
+    let maxDepth = 0;
 
     let i = 1;
 
@@ -69,24 +111,56 @@ export const useBinaryTree = (
       const current = queue.shift();
       if (!current) break;
 
-      const newDepth = current.meta.depth + 1;
+      const newDepth = current.depth + 1;
 
-      const metaProps: Partial<NodeMeta> = {
-        depth: newDepth,
-        rootNode: root
-      };
+      maxDepth = newDepth;
 
-      root.meta.maxDepth = newDepth;
-
-      current.left = createChildNode(input[i], metaProps);
-      current.left && queue.push(current.left);
+      const newLeft = createNodeData(input[i], newDepth);
+      if (newLeft) {
+        current.left = newLeft.id;
+        queue.push(newLeft);
+      }
       i++;
 
-      current.right = createChildNode(input[i], metaProps);
-      current.right && queue.push(current.right);
+      const newRight = createNodeData(input[i], newDepth);
+      if (newRight) {
+        current.right = newRight.id;
+        queue.push(newRight);
+      }
       i++;
     }
 
+    const root = BinaryTreeNode.fromNodeData(rootData, newDataNodes);
+    if (!root) return null;
+
+    root.meta.isRoot = true;
+
+    dispatch(
+      treeNodeSlice.actions.addMany({
+        maxDepth,
+        nodes: Object.values(newDataNodes),
+      })
+    );
+
     return root;
-  }, [createChildNode, dispatch, input]);
+  }, [dispatch, input]);
 };
+
+// export const useReduxBinaryTree = () => {
+//   const {
+//     rootId,
+//     nodes: { entities: nodesMap },
+//   } = useAppSelector(treeDataSelector);
+//   const rootNodeData = useAppSelector(selectNodeDataById(rootId || ''));
+//
+//   return useMemo(() => {
+//     if (!rootNodeData) return null;
+//
+//     const root = BinaryTreeNode.fromNodeData(rootNodeData, nodesMap);
+//     if (!root) return null;
+//
+//     root.meta.isRoot = true;
+//
+//     return root;
+//   }, [nodesMap, rootNodeData]);
+// };

@@ -37,8 +37,8 @@ import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
+  selectAllNodeData,
   selectNodeDataById,
-  treeNodeDataSelector,
   treeNodeSlice,
 } from '#/store/reducers/treeNodeReducer';
 
@@ -78,22 +78,11 @@ const PlaygroundPage: NextPage = () => {
   const tree = useBinaryTree(parsedInput);
 
   const [isJsonOpened, setIsJsonOpened] = useState<boolean>(false);
-  const treeJson = useMemo<string>(
-    () =>
-      JSON.stringify(
-        tree,
-        (key, value) => {
-          if (key === 'rootNode') return undefined;
-          return value;
-        },
-        2
-      ),
-    [tree]
-  );
+  const treeJson = useMemo<string>(() => JSON.stringify(tree, null, 2), [tree]);
 
   const dispatch = useAppDispatch();
 
-  const nodes = useAppSelector(treeNodeDataSelector.selectAll);
+  const nodes = useAppSelector(selectAllNodeData);
 
   const [selectValue, setSelectValue] = useState<string>('');
   const selectedNode = useSelector(selectNodeDataById(selectValue));

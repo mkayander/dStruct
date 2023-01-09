@@ -33,16 +33,15 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 }: BinaryNodeProps) => {
   const theme = useTheme();
 
-  const gapsActive =
-    (meta.rootNode?.meta.maxDepth ?? 0) - meta.depth >= 1 || null;
+  const nodeData = useAppSelector(selectNodeDataById(meta.id));
+
+  const gapsActive = !meta.isLeaf;
 
   const relations: RelationType[] = [];
 
   if (left) relations.push({ ...relationProps, targetId: left.meta.id });
 
   if (right) relations.push({ ...relationProps, targetId: right.meta.id });
-
-  const nodeData = useAppSelector(selectNodeDataById(meta.id));
 
   return (
     <Box
