@@ -1,3 +1,15 @@
+# [1.58.0](https://github.com/mkayander/leetpal/compare/v1.57.0...v1.58.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* Installed missing packages ([636ee31](https://github.com/mkayander/leetpal/commit/636ee3176f228c460adefad13e0bb713f759c093))
+
+
+### Features
+
+* Initial monaco editor runtime error display implementation ([c874be2](https://github.com/mkayander/leetpal/commit/c874be214d58e15058f916efeb5c20ebc4d85b79))
+
 # [1.57.0](https://github.com/mkayander/leetpal/compare/v1.56.0...v1.57.0) (2023-01-09)
 
 
