@@ -2,6 +2,7 @@ import type { EditorProps } from '@monaco-editor/react';
 import { DeleteForever, PlayArrow, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Box, CircularProgress, Typography, useTheme } from '@mui/material';
+import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 
@@ -33,6 +34,8 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 
   const [codeResult, setCodeResult] = useState<string | null>(null);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleClearCode = () => {
     setCodeInput(defaultJsTemplate);
     localStorage.removeItem('code');
@@ -55,12 +58,54 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       const result = runFunction(tree);
 
       console.log('Result:\n', result);
+      setError(null);
 
       setCodeResult(result);
     } catch (e: any) {
+      setError(e.message);
       console.error(e);
+      console.log(e);
     }
   };
+
+  const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
+    null
+  );
+  const [textModel, setTextModel] = useState<monaco.editor.ITextModel | null>();
+
+  useEffect(() => {
+    if (!monacoInstance || !textModel) return;
+    if (!error) {
+      monacoInstance.editor.setModelMarkers(
+        textModel,
+        'error',
+        [] // clear markers
+      );
+      return;
+    }
+
+    const errorLine = error.split(' ')[1];
+    if (!errorLine) return;
+    const errorLineNumber = parseInt(errorLine, 10) - 1;
+
+    console.log({ errorLine, errorLineNumber });
+
+    // const errorRange = textModel.getFullModelRange();
+    const errorPosition = textModel.getPositionAt(errorLineNumber);
+    const errorPositionRange = textModel.getWordAtPosition(errorPosition);
+
+    monacoInstance.editor.setModelMarkers(textModel, 'owner', [
+      {
+        severity: monacoInstance.MarkerSeverity.Error,
+        startLineNumber: 1,
+        startColumn: errorPositionRange?.startColumn || 1,
+        endLineNumber: 1,
+        endColumn: errorPositionRange?.endColumn || 1,
+        message: error,
+        source: 'source',
+      },
+    ]);
+  }, [error, monacoInstance, textModel]);
 
   return (
     <div>
@@ -127,6 +172,23 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           language="javascript"
           value={codeInput}
           onChange={(value) => setCodeInput(value || '')}
+          onValidate={(markers) => {
+            console.log('onValidate', markers);
+          }}
+          onMount={(editor, monaco) => {
+            console.log('onMount', editor);
+            console.log('monaco', monaco);
+
+            const model = editor.getModel();
+
+            if (!model) {
+              console.error('No model found');
+              return;
+            }
+
+            setMonacoInstance(monaco);
+            setTextModel(model);
+          }}
         />
       </Box>
     </div>
