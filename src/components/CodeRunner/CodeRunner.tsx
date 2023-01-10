@@ -34,7 +34,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 
   const [codeResult, setCodeResult] = useState<string | null>(null);
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const handleClearCode = () => {
     setCodeInput(defaultJsTemplate);
@@ -61,10 +61,12 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       setError(null);
 
       setCodeResult(result);
-    } catch (e: any) {
-      setError(e.message);
-      console.error(e);
-      console.log(e);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e);
+      } else {
+        console.error('Invalid error type: ', e);
+      }
     }
   };
 
@@ -78,31 +80,43 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
     if (!error) {
       monacoInstance.editor.setModelMarkers(
         textModel,
-        'error',
+        'javascript',
         [] // clear markers
       );
       return;
     }
 
-    const errorLine = error.split(' ')[1];
-    if (!errorLine) return;
-    const errorLineNumber = parseInt(errorLine, 10) - 1;
+    let startLineNumber = 3;
+    let endLineNumber = 9;
+    let startColumn = 1;
+    let endColumn = 10;
 
-    console.log({ errorLine, errorLineNumber });
+    const [, posLine] = error.stack?.split('\n') ?? [];
 
-    // const errorRange = textModel.getFullModelRange();
-    const errorPosition = textModel.getPositionAt(errorLineNumber);
-    const errorPositionRange = textModel.getWordAtPosition(errorPosition);
+    if (posLine) {
+      const [, line, column] = posLine.match(/(\d+):(\d+)/) ?? [];
 
-    monacoInstance.editor.setModelMarkers(textModel, 'owner', [
+      if (line && column) {
+        startLineNumber = Number(line) - 2;
+        endLineNumber = Number(line) - 2;
+        startColumn = Number(column);
+        endColumn = Number(column) + 10;
+      }
+    }
+
+    const markers = monacoInstance.editor.getModelMarkers({
+      owner: 'error',
+      resource: textModel.uri,
+    });
+    console.log({ markers });
+    monacoInstance.editor.setModelMarkers(textModel, 'javascript', [
       {
         severity: monacoInstance.MarkerSeverity.Error,
-        startLineNumber: 1,
-        startColumn: errorPositionRange?.startColumn || 1,
-        endLineNumber: 1,
-        endColumn: errorPositionRange?.endColumn || 1,
-        message: error,
-        source: 'source',
+        message: `${error.name}: ${error.message}`,
+        startLineNumber,
+        endLineNumber,
+        startColumn,
+        endColumn,
       },
     ]);
   }, [error, monacoInstance, textModel]);
