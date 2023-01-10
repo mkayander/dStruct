@@ -1,3 +1,10 @@
+## [1.58.1](https://github.com/mkayander/leetpal/compare/v1.58.0...v1.58.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* Display error markers correctly ([4e29e6d](https://github.com/mkayander/leetpal/commit/4e29e6dea172bea0ad938b8a2bbb85f7606d23f2))
+
 # [1.58.0](https://github.com/mkayander/leetpal/compare/v1.57.0...v1.58.0) (2023-01-10)
 
 
