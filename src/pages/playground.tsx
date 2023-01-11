@@ -36,7 +36,7 @@ import { useBinaryTree, useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
-import { callstackSelectors } from '#/store/reducers/callstackReducer';
+import { selectCallstack } from '#/store/reducers/callstackReducer';
 import {
   selectAllNodeData,
   selectNodeDataById,
@@ -105,12 +105,13 @@ const PlaygroundPage: NextPage = () => {
     );
   };
 
-  const callstack = useAppSelector(callstackSelectors.selectAll);
+  const { isReady: callstackIsReady, frames: callstack } =
+    useAppSelector(selectCallstack);
 
   useEffect(() => {
     console.log('Callstack:\n', callstack);
 
-    if (callstack.length === 0) return;
+    if (!callstackIsReady || callstack.length === 0) return;
 
     let i = 0;
 
@@ -135,7 +136,7 @@ const PlaygroundPage: NextPage = () => {
     }, 200);
 
     return () => clearInterval(interval);
-  }, [callstack, dispatch]);
+  }, [callstack, callstackIsReady, dispatch]);
 
   return (
     <>

@@ -90,6 +90,9 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       const result = runFunction(tree);
       console.timeEnd('Run code');
 
+      // Identify that the callstack is filled and can now be used
+      dispatch(callstackSlice.actions.setStatus({ isReady: true }));
+
       console.log('Result:\n', result);
       setError(null);
 

@@ -1,7 +1,9 @@
 import {
   createEntityAdapter,
+  createSelector,
   createSlice,
   type EntityState,
+  type PayloadAction,
 } from '@reduxjs/toolkit';
 
 import type { RootState } from '#/store/makeStore';
@@ -28,9 +30,15 @@ const callstackAdapter = createEntityAdapter<CallFrame>({
 /**
  * State
  */
-export type CallstackState = EntityState<CallFrame>;
+export type CallstackState = {
+  isReady: boolean;
+  frames: EntityState<CallFrame>;
+};
 
-const initialState: CallstackState = callstackAdapter.getInitialState();
+const initialState: CallstackState = {
+  isReady: false,
+  frames: callstackAdapter.getInitialState(),
+};
 
 /**
  * Slice
@@ -40,10 +48,31 @@ export const callstackSlice = createSlice({
   name: 'CALLSTACK',
   initialState,
   reducers: {
-    addOne: callstackAdapter.addOne,
-    addMany: callstackAdapter.addMany,
-    removeOne: callstackAdapter.removeOne,
-    removeAll: callstackAdapter.removeAll,
+    addOne: (state, action: PayloadAction<CallFrame>) => {
+      const { payload } = action;
+      callstackAdapter.addOne(state.frames, payload);
+    },
+    addMany: (state, action: PayloadAction<CallFrame[]>) => {
+      const { payload } = action;
+      callstackAdapter.addMany(state.frames, payload);
+    },
+    removeOne: (state, action: PayloadAction<number>) => {
+      const { payload } = action;
+      callstackAdapter.removeOne(state.frames, payload);
+    },
+    removeAll: (state) => {
+      state.isReady = false;
+      callstackAdapter.removeAll(state.frames);
+    },
+    setStatus: (
+      state,
+      action: PayloadAction<Pick<CallstackState, 'isReady'>>
+    ) => {
+      const {
+        payload: { isReady },
+      } = action;
+      state.isReady = isReady;
+    },
   },
 });
 
@@ -58,8 +87,18 @@ export const callstackReducer = callstackSlice.reducer;
 // export const { increment, decrement, calculate } = callstackSlice.actions;
 
 /**
- * Selector
+ * Selectors
  */
 export const callstackSelectors = callstackAdapter.getSelectors(
-  (state: RootState) => state.callstack
+  (state: RootState) => state.callstack.frames
+);
+
+const rootSelectors = callstackAdapter.getSelectors();
+
+export const selectCallstack = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack) => ({
+    isReady: callstack.isReady,
+    frames: rootSelectors.selectAll(callstack.frames),
+  })
 );
