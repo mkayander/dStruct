@@ -1,3 +1,10 @@
+## [1.60.1](https://github.com/mkayander/leetpal/compare/v1.60.0...v1.60.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* Fixed error pos regexp pattern ([8ad8ecc](https://github.com/mkayander/leetpal/commit/8ad8ecc924d476edbe5334eeb83a62a81323494f))
+
 # [1.60.0](https://github.com/mkayander/leetpal/compare/v1.59.0...v1.60.0) (2023-01-11)
 
 
