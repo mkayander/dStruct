@@ -1,3 +1,11 @@
+# [1.59.0](https://github.com/mkayander/leetpal/compare/v1.58.2...v1.59.0) (2023-01-11)
+
+
+### Features
+
+* Added Prettier formatting feature for the code editor ([5b926c6](https://github.com/mkayander/leetpal/commit/5b926c6240932c35518b0fb90d3ca36165a42023))
+* Installed Prettier typings ([5e3aa44](https://github.com/mkayander/leetpal/commit/5e3aa4485ab0a71be6a6a47c99f2e8a41f382e08))
+
 ## [1.58.2](https://github.com/mkayander/leetpal/compare/v1.58.1...v1.58.2) (2023-01-11)
 
 
