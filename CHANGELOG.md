@@ -1,3 +1,12 @@
+# [1.60.0](https://github.com/mkayander/leetpal/compare/v1.59.0...v1.60.0) (2023-01-11)
+
+
+### Features
+
+* Added a working tree traversal view implementation 🔥🎉 ([d524c53](https://github.com/mkayander/leetpal/commit/d524c536be080c85067c37428b554d1308600529))
+* Added Callstack reducer ([4a5df90](https://github.com/mkayander/leetpal/commit/4a5df906c96e9f5f06343e32f1796b6a5e1b2b56))
+* Improved tree node reducer ([cc45d97](https://github.com/mkayander/leetpal/commit/cc45d9782733465853bf94b602c3a2aea5fa50f0))
+
 # [1.59.0](https://github.com/mkayander/leetpal/compare/v1.58.2...v1.59.0) (2023-01-11)
 
 
