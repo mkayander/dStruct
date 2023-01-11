@@ -91,6 +91,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
     let startColumn = 1;
     let endColumn = 10;
 
+    console.error(error.stack);
     const [, posLine] = error.stack?.split('\n') ?? [];
 
     if (posLine) {
