@@ -4,6 +4,7 @@ import {
   createSlice,
   type EntityState,
   type PayloadAction,
+  type Update,
 } from '@reduxjs/toolkit';
 
 import type { RootState } from '#/store/makeStore';
@@ -84,16 +85,11 @@ export const treeNodeSlice = createSlice({
     },
     update: (
       state: TreeDataState,
-      action: PayloadAction<BinaryTreeNodeDataPayload>
+      action: PayloadAction<Update<BinaryTreeNodeDataPayload>>
     ) => {
-      const {
-        payload: { id, ...node },
-      } = action;
+      const { payload } = action;
 
-      treeNodeDataAdapter.updateOne(state.nodes, {
-        id,
-        changes: node,
-      });
+      treeNodeDataAdapter.updateOne(state.nodes, payload);
     },
     setRoot: (state: TreeDataState, action: PayloadAction<string>) => {
       state.rootId = action.payload;
@@ -109,6 +105,16 @@ export const treeNodeSlice = createSlice({
       return {
         ...initialState,
       };
+    },
+    resetAll: (state: TreeDataState) => {
+      for (const id of Object.keys(state.nodes.entities)) {
+        treeNodeDataAdapter.updateOne(state.nodes, {
+          id,
+          changes: {
+            color: undefined,
+          },
+        });
+      }
     },
   },
 });
