@@ -1,9 +1,23 @@
 import type { EditorProps } from '@monaco-editor/react';
-import { DeleteForever, PlayArrow, Save } from '@mui/icons-material';
+import {
+  AutoFixHigh,
+  DeleteForever,
+  PlayArrow,
+  Save,
+} from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
-import { Box, CircularProgress, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  IconButton,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import dynamic from 'next/dynamic';
+import parserBabel from 'prettier/parser-babel';
+import prettier from 'prettier/standalone';
 import React, { useEffect, useState } from 'react';
 
 import type { BinaryTreeNode } from '#/hooks/useBinaryTree';
@@ -35,6 +49,14 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   const [codeResult, setCodeResult] = useState<string | null>(null);
 
   const [error, setError] = useState<Error | null>(null);
+
+  const handleFormatCode = () => {
+    const formattedCode = prettier.format(codeInput, {
+      parser: 'babel',
+      plugins: [parserBabel],
+    });
+    setCodeInput(formattedCode);
+  };
 
   const handleClearCode = () => {
     setCodeInput(defaultJsTemplate);
@@ -149,6 +171,18 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           </Typography>
         </Box>
         <Box display="flex" columnGap={2}>
+          <Tooltip
+            title={
+              <span>
+                Format code with <b>Prettier</b> 🪄
+              </span>
+            }
+            arrow
+          >
+            <IconButton onClick={handleFormatCode} size="small">
+              <AutoFixHigh fontSize="small" />
+            </IconButton>
+          </Tooltip>
           <LoadingButton
             variant="outlined"
             color="warning"
