@@ -128,7 +128,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
     const [, posLine] = error.stack?.split('\n') ?? [];
 
     if (posLine) {
-      const [, line, column] = posLine.match(/(\d+):(\d+)/) ?? [];
+      const [, line, column] = posLine.match(/:(\d+):(\d+)\)$/) ?? [];
 
       if (line && column) {
         startLineNumber = Number(line) - 2;
