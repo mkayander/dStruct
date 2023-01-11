@@ -1,9 +1,10 @@
 import { alpha, Box, type SxProps, type Theme, useTheme } from '@mui/material';
+import * as muiColors from '@mui/material/colors';
 import React from 'react';
 import { ArcherElement } from 'react-archer';
 import type { RelationType } from 'react-archer/lib/types';
 
-import type { BinaryTreeNode } from '#/hooks/useBinaryTree';
+import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
 
 import { useAppSelector } from '#/store/hooks';
 import { selectNodeDataById } from '#/store/reducers/treeNodeReducer';
@@ -23,7 +24,7 @@ const relationProps = {
 
 const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: 'none' }} />;
 
-type BinaryNodeProps = BinaryTreeNode;
+type BinaryNodeProps = Pick<BinaryTreeNode, 'val' | 'left' | 'right' | 'meta'>;
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
   val,
@@ -43,6 +44,15 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
   if (right) relations.push({ ...relationProps, targetId: right.meta.id });
 
+  let nodeColor = theme.palette.primary.main;
+  type ColorName = keyof typeof muiColors;
+  if (nodeData?.color && nodeData.color in muiColors) {
+    const colorMap = muiColors[nodeData.color as ColorName];
+    if ('500' in colorMap) {
+      nodeColor = colorMap[500];
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -60,10 +70,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           sx={{
             ...nodeProps,
             borderRadius: '50%',
-            background: alpha(
-              nodeData?.color || theme.palette.primary.main,
-              0.3
-            ),
+            background: alpha(nodeColor, 0.3),
             border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
             backdropFilter: 'blur(4px)',
             userSelect: 'none',

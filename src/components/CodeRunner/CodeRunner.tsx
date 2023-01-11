@@ -20,7 +20,11 @@ import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
 import React, { useEffect, useState } from 'react';
 
-import type { BinaryTreeNode } from '#/hooks/useBinaryTree';
+import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
+
+import { useAppDispatch } from '#/store/hooks';
+import { callstackSlice } from '#/store/reducers/callstackReducer';
+import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 import defaultJsTemplate from './defaultTemplate.js.txt';
 
@@ -38,6 +42,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const savedCode = localStorage.getItem('code');
@@ -77,7 +82,13 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       const runFunction = getInputFunction();
       console.log('Run function:\n', runFunction);
 
+      // Before running the code, clear the callstack
+      dispatch(callstackSlice.actions.removeAll());
+      dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
+
+      console.time('Run code');
       const result = runFunction(tree);
+      console.timeEnd('Run code');
 
       console.log('Result:\n', result);
       setError(null);

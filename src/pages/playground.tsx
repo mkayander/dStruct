@@ -26,7 +26,7 @@ import {
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ArcherContainer } from 'react-archer';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useSelector } from 'react-redux';
@@ -36,6 +36,7 @@ import { useBinaryTree, useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { callstackSelectors } from '#/store/reducers/callstackReducer';
 import {
   selectAllNodeData,
   selectNodeDataById,
@@ -96,11 +97,45 @@ const PlaygroundPage: NextPage = () => {
 
     dispatch(
       treeNodeSlice.actions.update({
-        ...selectedNode,
-        color: colorInput,
+        id: selectedNode.id,
+        changes: {
+          color: colorInput,
+        },
       })
     );
   };
+
+  const callstack = useAppSelector(callstackSelectors.selectAll);
+
+  useEffect(() => {
+    console.log('Callstack:\n', callstack);
+
+    if (callstack.length === 0) return;
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+      const frame = callstack[i];
+
+      if (i >= callstack.length || !frame) {
+        clearInterval(interval);
+        return;
+      }
+
+      dispatch(
+        treeNodeSlice.actions.update({
+          id: frame.nodeId,
+          changes: {
+            color: frame.args[0] || undefined,
+          },
+        })
+      );
+
+      i++;
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [callstack, dispatch]);
 
   return (
     <>

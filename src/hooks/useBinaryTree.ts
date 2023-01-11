@@ -1,12 +1,12 @@
-import type { Dictionary } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import uuid4 from 'short-uuid';
 
+import { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
 import { isNumber } from '#/utils';
 
+import { useAppDispatch } from '#/store/hooks';
+import { callstackSlice } from '#/store/reducers/callstackReducer';
 import {
-  type BinaryTreeNodeData,
   type BinaryTreeNodeDataPayload,
   treeNodeSlice,
 } from '#/store/reducers/treeNodeReducer';
@@ -17,60 +17,10 @@ import {
 
 export type BinaryTreeInput = (number | null)[];
 
-type NodeMeta = {
-  id: string;
-  depth: number;
-  isRoot?: boolean;
-  isLeaf?: boolean;
-  maxDepth?: number;
-  rootNode?: BinaryTreeNode;
-};
-
-export class BinaryTreeNode {
-  meta: NodeMeta;
-
-  constructor(
-    readonly val: number | string,
-    public left: BinaryTreeNode | null = null,
-    public right: BinaryTreeNode | null = null,
-    meta: NodeMeta
-  ) {
-    this.meta = meta;
-  }
-
-  static fromNodeData(
-    nodeData: BinaryTreeNodeData | undefined,
-    dataMap: Dictionary<BinaryTreeNodeData>,
-    meta?: Partial<NodeMeta>
-  ): BinaryTreeNode | null {
-    if (!nodeData) return null;
-
-    const { id, value, left, right } = nodeData;
-
-    const newMeta = {
-      ...meta,
-      depth: (meta?.depth ?? -1) + 1,
-    };
-
-    const leftNode = left
-      ? BinaryTreeNode.fromNodeData(dataMap[left], dataMap, newMeta)
-      : null;
-    const rightNode = right
-      ? BinaryTreeNode.fromNodeData(dataMap[right], dataMap, newMeta)
-      : null;
-
-    if (!leftNode && !rightNode) {
-      newMeta.isLeaf = true;
-    }
-
-    return new BinaryTreeNode(value, leftNode, rightNode, { ...newMeta, id });
-  }
-}
-
 export const useBinaryTree = (
   input?: BinaryTreeInput
 ): BinaryTreeNode | null => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return useMemo(() => {
     if (!input || input.length === 0) return null;
@@ -130,7 +80,7 @@ export const useBinaryTree = (
       i++;
     }
 
-    const root = BinaryTreeNode.fromNodeData(rootData, newDataNodes);
+    const root = BinaryTreeNode.fromNodeData(rootData, newDataNodes, dispatch);
     if (!root) return null;
 
     root.meta.isRoot = true;
@@ -141,6 +91,8 @@ export const useBinaryTree = (
         nodes: Object.values(newDataNodes),
       })
     );
+
+    dispatch(callstackSlice.actions.removeAll());
 
     return root;
   }, [dispatch, input]);
