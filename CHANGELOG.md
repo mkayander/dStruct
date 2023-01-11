@@ -1,3 +1,10 @@
+## [1.58.2](https://github.com/mkayander/leetpal/compare/v1.58.1...v1.58.2) (2023-01-11)
+
+
+### Bug Fixes
+
+* Log runtime error ([02fc177](https://github.com/mkayander/leetpal/commit/02fc17746646b89d46ac386dbc7cbf93a3e21577))
+
 ## [1.58.1](https://github.com/mkayander/leetpal/compare/v1.58.0...v1.58.1) (2023-01-10)
 
 
