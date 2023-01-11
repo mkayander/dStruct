@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/mkayander/leetpal/compare/v1.60.1...v1.61.0) (2023-01-11)
+
+
+### Features
+
+* Add a 'callstack is ready' flag ([a23616a](https://github.com/mkayander/leetpal/commit/a23616a1fba4e486b92edeca391870b4f49979fc))
+
 ## [1.60.1](https://github.com/mkayander/leetpal/compare/v1.60.0...v1.60.1) (2023-01-11)
 
 
