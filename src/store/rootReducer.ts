@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { callstackReducer } from '#/store/reducers/callstackReducer';
 import { counterReducer } from '#/store/reducers/counterReducer';
 import { treeNodeReducer } from '#/store/reducers/treeNodeReducer';
 
@@ -10,4 +11,5 @@ import { treeNodeReducer } from '#/store/reducers/treeNodeReducer';
 export const rootReducer = combineReducers({
   counter: counterReducer,
   treeNode: treeNodeReducer,
+  callstack: callstackReducer,
 });
