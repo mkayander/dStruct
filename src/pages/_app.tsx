@@ -1,17 +1,16 @@
 import { ApolloProvider } from '@apollo/client';
-import { alpha, Box, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { type ReactElement, useMemo, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { apolloClient } from '#/graphql/apolloClient';
 import { MainLayout as DefaultLayout } from '#/layouts/MainLayout';
 import { themes } from '#/themes';
-import type { AppTypeWithLayout } from '#/types/page';
+import type { AppTypeWithLayout, GetLayout } from '#/types/page';
 import { trpc } from '#/utils';
 
 import { wrapper } from '#/store/makeStore';
