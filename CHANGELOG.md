@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/mkayander/leetpal/compare/v1.62.0...v1.63.0) (2023-01-12)
+
+
+### Features
+
+* Added panel shadows ([c27466f](https://github.com/mkayander/leetpal/commit/c27466f09994acca1542c568935a336cd09ec9a8))
+
 # [1.62.0](https://github.com/mkayander/leetpal/compare/v1.61.0...v1.62.0) (2023-01-12)
 
 
