@@ -33,9 +33,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
     [darkMode]
   );
 
-  const getLayout =
+  const getLayout: GetLayout =
     Component.getLayout ??
-    ((page: ReactElement) => (
+    ((page: ReactElement, setDarkMode) => (
       <DefaultLayout setDarkMode={setDarkMode}>{page}</DefaultLayout>
     ));
 

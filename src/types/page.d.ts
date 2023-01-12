@@ -5,12 +5,19 @@ import type {
   NextComponentType,
 } from 'next/dist/shared/lib/utils';
 import type { ReactElement, ReactNode } from 'react';
+import type React from 'react';
+
+export type GetLayout = (
+  page: ReactElement,
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>,
+  isLoading?: boolean
+) => ReactNode;
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
   TInitialProps = TProps
 > = NextPage<TProps, TInitialProps> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: GetLayout;
 };
 
 type MyAppContextType = Omit<AppContextType, 'Component'> & {
