@@ -2,6 +2,7 @@
   flex: 0 0 12px;
   position: relative;
   outline: none;
+  background: transparent;
 
   --background-color: transparent;
 
@@ -15,7 +16,7 @@
 }
 
 .ResizeHandleOuter[data-resize-handle-active] {
-  --background-color: lightblue;
+  --background-color: rgba(0, 255, 255, 0.7);
 }
 
 .ResizeHandleInner {

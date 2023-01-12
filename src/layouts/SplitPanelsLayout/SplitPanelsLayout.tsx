@@ -21,11 +21,15 @@ const PanelWrapper: React.FC<PropsWithChildren> = ({ children }) => (
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       overflow: 'hidden',
       p: 1,
+      boxShadow: 5,
+      zIndex: 5,
     }}
   >
     {children}
   </Box>
 );
+
+const style = { overflow: 'initial' };
 
 export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
   children,
@@ -42,28 +46,33 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
         overflow: 'hidden',
       }}
     >
-      <PanelGroup autoSaveId="example" direction="horizontal">
+      <PanelGroup autoSaveId="example" direction="horizontal" style={style}>
         <>
-          <Panel className={styles.Panel} defaultSize={20} order={1}>
-            <PanelGroup autoSaveId="example" direction="vertical">
-              <Panel className={styles.Panel} order={1}>
+          <Panel
+            className={styles.Panel}
+            defaultSize={20}
+            order={1}
+            style={style}
+          >
+            <PanelGroup autoSaveId="example" direction="vertical" style={style}>
+              <Panel className={styles.Panel} order={1} style={style}>
                 <PanelWrapper>{topLeft}</PanelWrapper>
               </Panel>
               <ResizeHandle />
-              <Panel className={styles.Panel} order={2}>
+              <Panel className={styles.Panel} order={2} style={style}>
                 <PanelWrapper>{bottomLeft}</PanelWrapper>
               </Panel>
             </PanelGroup>
           </Panel>
           <ResizeHandle />
         </>
-        <Panel className={styles.Panel} order={2}>
-          <PanelGroup autoSaveId="example" direction="vertical">
-            <Panel className={styles.Panel} order={1}>
+        <Panel className={styles.Panel} order={2} style={style}>
+          <PanelGroup autoSaveId="example" direction="vertical" style={style}>
+            <Panel className={styles.Panel} order={1} style={style}>
               <PanelWrapper>{topRight}</PanelWrapper>
             </Panel>
             <ResizeHandle />
-            <Panel className={styles.Panel} order={2}>
+            <Panel className={styles.Panel} order={2} style={style}>
               <PanelWrapper>{bottomRight}</PanelWrapper>
             </Panel>
           </PanelGroup>
