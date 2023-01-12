@@ -2,6 +2,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
+  type AppBarProps,
   Avatar,
   Box,
   Button,
@@ -10,6 +11,7 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  type ToolbarProps,
   Tooltip,
   Typography,
 } from '@mui/material';
@@ -53,9 +55,15 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 type MainAppBarProps = {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  appBarVariant?: AppBarProps['variant'];
+  toolbarVariant?: ToolbarProps['variant'];
 };
 
-export const MainAppBar: React.FC<MainAppBarProps> = ({ setDarkMode }) => {
+export const MainAppBar: React.FC<MainAppBarProps> = ({
+  setDarkMode,
+  appBarVariant = 'elevation',
+  toolbarVariant = 'dense',
+}) => {
   const router = useRouter();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -89,9 +97,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({ setDarkMode }) => {
   };
 
   return (
-    <AppBar position="static" elevation={10}>
+    <AppBar position="sticky" elevation={10} variant={appBarVariant}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters variant={toolbarVariant}>
           <CodeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
           <Link href="/" legacyBehavior={true}>
