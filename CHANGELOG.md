@@ -1,3 +1,22 @@
+# [1.62.0](https://github.com/mkayander/leetpal/compare/v1.61.0...v1.62.0) (2023-01-12)
+
+
+### Bug Fixes
+
+* Improved GetLayout function type ([9686a46](https://github.com/mkayander/leetpal/commit/9686a46efce7aaa5420a7a72f87b727b7021b1b5))
+* Prevent root html tag scrolling ([ed99904](https://github.com/mkayander/leetpal/commit/ed999047d9e434eed386ee212944a1ee475f9e46))
+* Update imports ([9f6eaec](https://github.com/mkayander/leetpal/commit/9f6eaeceee9a7a5f67b7fec199a978a3ccccc62c))
+* Use overlay scrollbars at the main layout ([b055096](https://github.com/mkayander/leetpal/commit/b05509678b546a2538f4635a30bd8c5fb4ba772c))
+
+
+### Features
+
+* Added resize handle component ([f178637](https://github.com/mkayander/leetpal/commit/f178637ac275eadb130a1d53c4e3215ecebf1ee9))
+* Added split panels layout component ([b4eb065](https://github.com/mkayander/leetpal/commit/b4eb065ff33319e355e94cd25b945dbd5e6de75b))
+* Added test playground panes page ([d31bb5d](https://github.com/mkayander/leetpal/commit/d31bb5d334b936b87ffb38e9957f1776438649cf))
+* Installed resizable panels lib ([2af5dd8](https://github.com/mkayander/leetpal/commit/2af5dd8d13ef283414ac61836e86e5fbd10019ec))
+* Pass app bar variant props ([467d88e](https://github.com/mkayander/leetpal/commit/467d88e589790d323684132d57e42e02b147194b))
+
 # [1.61.0](https://github.com/mkayander/leetpal/compare/v1.60.1...v1.61.0) (2023-01-11)
 
 
