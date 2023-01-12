@@ -53,6 +53,7 @@
     "react-dom": "18.2.0",
     "react-indiana-drag-scroll": "^2.2.0",
     "react-redux": "^8.0.5",
+    "react-resizable-panels": "^0.0.33",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "sanitize-html": "^2.7.3",
