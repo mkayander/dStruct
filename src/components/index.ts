@@ -8,5 +8,6 @@ export { QuestionSummary } from './QuestionSummary/QuestionSummary';
 export { CircularPercentage } from './CircularPercentage/CircularPercentage';
 export { RatingButtons } from './RatingButtons/RatingButtons';
 export { CodeRunner } from './CodeRunner/CodeRunner';
+export { ResizeHandle } from './ResizeHandle/ResizeHandle';
 export { ThemeSwitch } from './ThemeSwitch';
 export { BinaryNode } from './BinaryNode';

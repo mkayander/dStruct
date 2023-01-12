@@ -1,0 +1,43 @@
+.ResizeHandleOuter {
+  flex: 0 0 12px;
+  position: relative;
+  outline: none;
+
+  --background-color: transparent;
+
+  &:hover {
+    --background-color: rgba(255, 255, 255, 0.2);
+
+    .Icon {
+      //color: #ffffff;
+    }
+  }
+}
+
+.ResizeHandleOuter[data-resize-handle-active] {
+  --background-color: lightblue;
+}
+
+.ResizeHandleInner {
+  $gap: 2px;
+
+  position: absolute;
+  top: $gap;
+  bottom: $gap;
+  left: $gap;
+  right: $gap;
+  border-radius: 6px;
+  background-color: var(--background-color);
+  transition: background-color 0.2s linear;
+}
+
+.Icon {
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  font-size: 11px;
+  transition: color 0.2s;
+  color: transparent;
+  left: calc(50% - 11px);
+  top: calc(50% - 11px);
+}
