@@ -48,32 +48,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
               <title>LeetPal</title>
             </Head>
             <CssBaseline />
-            <Box
-              sx={{
-                '.os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle':
-                  {
-                    background: theme.palette.action.hover,
-                    '&:hover': {
-                      backgroundColor: alpha(theme.palette.primary.light, 0.3),
-                    },
-                    '&:active': {
-                      backgroundColor: alpha(theme.palette.primary.dark, 0.6),
-                    },
-                  },
-              }}
-            >
-              <OverlayScrollbarsComponent
-                defer
-                style={{ height: '100vh' }}
-                options={{
-                  scrollbars: {
-                    autoHide: 'scroll',
-                  },
-                }}
-              >
-                {getLayout(<Component {...props.pageProps} />)}
-              </OverlayScrollbarsComponent>
-            </Box>
+            {getLayout(<Component {...props.pageProps} />, setDarkMode)}
           </ThemeProvider>
         </ApolloProvider>
       </SessionProvider>
