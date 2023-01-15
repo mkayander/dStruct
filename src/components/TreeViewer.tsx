@@ -1,10 +1,14 @@
 import { alpha, Box, useTheme } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArcherContainer } from 'react-archer';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { BinaryNode } from '#/components/BinaryNode';
 import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
+
+import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { selectCallstack } from '#/store/reducers/callstackReducer';
+import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 export type TreeViewerProps = {
   tree: BinaryTreeNode | null;
@@ -12,6 +16,41 @@ export type TreeViewerProps = {
 
 export const TreeViewer: React.FC<TreeViewerProps> = ({ tree }) => {
   const theme = useTheme();
+
+  const dispatch = useAppDispatch();
+
+  const { isReady: callstackIsReady, frames: callstack } =
+    useAppSelector(selectCallstack);
+
+  useEffect(() => {
+    console.log('Callstack:\n', callstack);
+
+    if (!callstackIsReady || callstack.length === 0) return;
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+      const frame = callstack[i];
+
+      if (i >= callstack.length || !frame) {
+        clearInterval(interval);
+        return;
+      }
+
+      dispatch(
+        treeNodeSlice.actions.update({
+          id: frame.nodeId,
+          changes: {
+            color: frame.args[0] || undefined,
+          },
+        })
+      );
+
+      i++;
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [callstack, callstackIsReady, dispatch]);
 
   return (
     <Box
