@@ -11,3 +11,4 @@ export { CodeRunner } from './CodeRunner/CodeRunner';
 export { ResizeHandle } from './ResizeHandle/ResizeHandle';
 export { ThemeSwitch } from './ThemeSwitch';
 export { BinaryNode } from './BinaryNode';
+export { TreeViewer } from './TreeViewer';
