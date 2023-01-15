@@ -168,17 +168,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         gap={1}
       >
         <Box display="flex" alignItems="center" gap={2}>
-          <Typography variant="h5">
-            Code Runner {'< '}
-            <Box
-              component="span"
-              fontWeight="bold"
-              color={theme.palette.warning.light}
-            >
-              JS
-            </Box>
-            {' />'}
-          </Typography>
           <Typography variant="body1">Result: </Typography>
           <Typography variant="body1" color="primary">
             {String(codeResult)}
@@ -229,8 +218,11 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       </Box>
       <Box boxShadow={8} borderRadius={1} overflow="hidden">
         <MonacoEditor
-          height="80vh"
+          height="400px"
           theme={theme.palette.mode === 'dark' ? 'vs-dark' : 'vs-light'}
+          options={{
+            minimap: { enabled: false },
+          }}
           {...restProps}
           language="javascript"
           value={codeInput}
