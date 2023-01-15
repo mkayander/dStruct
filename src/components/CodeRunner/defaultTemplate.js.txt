@@ -1,14 +1,28 @@
 /**
  * @param {TreeNodeObject} head
  */
-return function runBinaryTreeCode(head) {
-  // Your code goes here
-}
+return function getSumOfNodes(head) {
+  if (head === null) return 0;
+
+  head.setColor("green");
+
+  const left = getSumOfNodes(head.left);
+  const right = getSumOfNodes(head.right);
+
+  head.setColor(null);
+
+  return head.val + left + right;
+};
 
 /**
  * Definitions for a binary tree node.
  *
- * @typedef {{val: number, left: TreeNodeObject, right: TreeNodeObject}} TreeNodeObject
+ * @typedef {{
+ *   val: number,
+ *   left: TreeNodeObject,
+ *   right: TreeNodeObject,
+ *   setColor(color: string): void }
+ * } TreeNodeObject
  *
  * @callback TreeNode
  * @param {number} val
