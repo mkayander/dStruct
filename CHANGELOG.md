@@ -1,3 +1,22 @@
+# [1.64.0](https://github.com/mkayander/leetpal/compare/v1.63.0...v1.64.0) (2023-01-15)
+
+
+### Bug Fixes
+
+* Fixed panels layout ([f7bdb1a](https://github.com/mkayander/leetpal/commit/f7bdb1a862bef6e454325f3c4d132772f42a9591))
+
+
+### Features
+
+* Added a separate Tree Viewer component ([fb7d99c](https://github.com/mkayander/leetpal/commit/fb7d99c516644173bb49709d7b8b3b8dcadc808d))
+* Added common panel content components ([be12183](https://github.com/mkayander/leetpal/commit/be121834382227a57757c2277dcebc179045acd4))
+* Added separate panel layouts components ([b078edd](https://github.com/mkayander/leetpal/commit/b078eddb4701656e2918565af6b7a5a1cc05a5a6))
+* Added tab props util function ([1bde676](https://github.com/mkayander/leetpal/commit/1bde6765ed61a0836b3dfdc0dcda5dcaf1c19369))
+* Updated Code Runner layout ([c8a92cb](https://github.com/mkayander/leetpal/commit/c8a92cbdeb928c8af821071dc5320e2b73d9aff4))
+* Use a get-sum example as a default template ([c43afd2](https://github.com/mkayander/leetpal/commit/c43afd2ddfb332266d4a363be63cb58a2c11cdf1))
+* Use panel layout components ([4612cad](https://github.com/mkayander/leetpal/commit/4612cad7857e6f750539e8bbe6e4429f7ebc3443))
+* Use split panels playground as a default ([cfcf9d4](https://github.com/mkayander/leetpal/commit/cfcf9d412905fcbe152dc0bb51c85d9c092f4d26))
+
 # [1.63.0](https://github.com/mkayander/leetpal/compare/v1.62.0...v1.63.0) (2023-01-12)
 
 
