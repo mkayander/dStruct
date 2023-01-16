@@ -4,11 +4,11 @@ import React from 'react';
 
 import { Footer, MainAppBar } from '#/components';
 
-interface MainLayoutProps {
+export type MainLayoutProps = {
   children: React.ReactNode;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading?: boolean;
-}
+};
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,

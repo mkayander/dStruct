@@ -4,13 +4,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
-import { type ReactElement, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { apolloClient } from '#/graphql/apolloClient';
-import { MainLayout as DefaultLayout } from '#/layouts/MainLayout';
+import {
+  MainLayout as DefaultLayout,
+  type MainLayoutProps,
+} from '#/layouts/MainLayout';
 import { themes } from '#/themes';
-import type { AppTypeWithLayout, GetLayout } from '#/types/page';
+import type { AppTypeWithLayout } from '#/types/page';
 import { trpc } from '#/utils';
 
 import { wrapper } from '#/store/makeStore';
@@ -32,22 +35,20 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
     [darkMode]
   );
 
-  const getLayout: GetLayout =
-    Component.getLayout ??
-    ((page: ReactElement, setDarkMode) => (
-      <DefaultLayout setDarkMode={setDarkMode}>{page}</DefaultLayout>
-    ));
+  const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
 
   return (
     <ReduxProvider store={store}>
-      <SessionProvider session={restProps.pageProps.session}>
+      <SessionProvider session={props.pageProps.session}>
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <Head>
               <title>LeetPal</title>
             </Head>
             <CssBaseline />
-            {getLayout(<Component {...props.pageProps} />, setDarkMode)}
+            <Layout setDarkMode={setDarkMode}>
+              <Component {...props.pageProps} />
+            </Layout>
           </ThemeProvider>
         </ApolloProvider>
       </SessionProvider>
