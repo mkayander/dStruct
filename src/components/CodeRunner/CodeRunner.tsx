@@ -16,17 +16,24 @@ import {
 } from '@mui/material';
 import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
 import React, { useEffect, useState } from 'react';
 
 import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
 
-import { useAppDispatch } from '#/store/hooks';
-import { callstackSlice } from '#/store/reducers/callstackReducer';
+import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import {
+  callstackSlice,
+  selectRuntimeData,
+} from '#/store/reducers/callstackReducer';
 import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
+import prettierIcon from './assets/prettierIcon.svg';
 import defaultJsTemplate from './defaultTemplate.js.txt';
+
+console.log(prettierIcon);
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
   ssr: false,
@@ -43,6 +50,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const { error } = useAppSelector(selectRuntimeData);
 
   useEffect(() => {
     const savedCode = localStorage.getItem('code');
@@ -50,10 +58,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   }, []);
 
   const [codeInput, setCodeInput] = useState<string>(defaultJsTemplate);
-
-  const [codeResult, setCodeResult] = useState<string | null>(null);
-
-  const [error, setError] = useState<Error | null>(null);
 
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
@@ -78,6 +82,8 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 
     const getInputFunction = new Function(codeInput);
 
+    let runtime = performance.now();
+
     try {
       const runFunction = getInputFunction();
       console.log('Run function:\n', runFunction);
@@ -86,20 +92,33 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       dispatch(callstackSlice.actions.removeAll());
       dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
 
-      console.time('Run code');
       const result = runFunction(tree);
-      console.timeEnd('Run code');
+      runtime = performance.now() - runtime;
+
+      console.log('Runtime: ', runtime);
 
       // Identify that the callstack is filled and can now be used
-      dispatch(callstackSlice.actions.setStatus({ isReady: true }));
+      dispatch(
+        callstackSlice.actions.setStatus({
+          isReady: true,
+          error: null,
+          result,
+          runtime,
+        })
+      );
 
       console.log('Result:\n', result);
-      setError(null);
-
-      setCodeResult(result);
     } catch (e: unknown) {
+      runtime = performance.now() - runtime;
       if (e instanceof Error) {
-        setError(e);
+        dispatch(
+          callstackSlice.actions.setStatus({
+            isReady: true,
+            error: e,
+            result: null,
+            runtime,
+          })
+        );
       } else {
         console.error('Invalid error type: ', e);
       }
@@ -163,22 +182,22 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       <Box
         display="flex"
         flexWrap="wrap"
-        justifyContent="space-between"
-        my={2}
+        justifyContent="flex-end"
+        mb={2}
         gap={1}
       >
-        <Box display="flex" alignItems="center" gap={2}>
-          <Typography variant="body1">Result: </Typography>
-          <Typography variant="body1" color="primary">
-            {String(codeResult)}
-          </Typography>
-        </Box>
         <Box display="flex" columnGap={2}>
           <Tooltip
             title={
-              <span>
-                Format code with <b>Prettier</b> 🪄
-              </span>
+              <Box display="flex" alignItems="center" gap="3px">
+                Format code with <b>Prettier</b>{' '}
+                <Image
+                  alt="'Prettier' formatting icon"
+                  {...prettierIcon}
+                  width={22}
+                  height={22}
+                />
+              </Box>
             }
             arrow
           >
