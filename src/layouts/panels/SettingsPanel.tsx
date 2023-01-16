@@ -70,42 +70,37 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             <Tab label="Settings" value="1" />
           </TabList>
         </TabListWrapper>
-        <Box
-          sx={{
-            p: 1,
-            mt: 1,
-          }}
-        >
-          <StyledTabPanel value="1">
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'start',
-                gap: 2,
-                'button.btn-refresh': { mt: 1 },
-              }}
+
+        <StyledTabPanel value="1">
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'start',
+              mt: 1,
+              gap: 2,
+              'button.btn-refresh': { mt: 1 },
+            }}
+          >
+            <TextField
+              label="Input array"
+              placeholder="e.g.: [1,2,3,null,5]"
+              value={rawInput}
+              onChange={(ev) => setRawInput(ev.target.value)}
+              error={!!inputError}
+              helperText={inputError || 'Must be a JSON array of numbers'}
+              fullWidth
+            />
+            <IconButton
+              className="btn-refresh"
+              onClick={() => setRawInput('[1,2,3,null,5]')}
+              title="Reset input to default"
+              disabled={isPending}
             >
-              <TextField
-                label="Input array"
-                placeholder="e.g.: [1,2,3,null,5]"
-                value={rawInput}
-                onChange={(ev) => setRawInput(ev.target.value)}
-                error={!!inputError}
-                helperText={inputError || 'Must be a JSON array of numbers'}
-                fullWidth
-              />
-              <IconButton
-                className="btn-refresh"
-                onClick={() => setRawInput('[1,2,3,null,5]')}
-                title="Reset input to default"
-                disabled={isPending}
-              >
-                <Refresh />
-              </IconButton>
-              {isPending && <CircularProgress />}
-            </Box>
-          </StyledTabPanel>
-        </Box>
+              <Refresh />
+            </IconButton>
+            {isPending && <CircularProgress />}
+          </Box>
+        </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
   );

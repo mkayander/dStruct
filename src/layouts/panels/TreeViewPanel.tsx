@@ -1,5 +1,5 @@
 import { TabContext, TabList } from '@mui/lab';
-import { Box, Tab } from '@mui/material';
+import { Tab } from '@mui/material';
 import React, { useState } from 'react';
 
 import { TreeViewer } from '#/components';
@@ -23,16 +23,9 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = (props) => {
             <Tab label="Tree Viewer" value="1" />
           </TabList>
         </TabListWrapper>
-        <Box
-          sx={{
-            p: 1,
-            mt: 1,
-          }}
-        >
-          <StyledTabPanel value="1">
-            <TreeViewer {...props} />
-          </StyledTabPanel>
-        </Box>
+        <StyledTabPanel value="1">
+          <TreeViewer {...props} />
+        </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
   );
