@@ -1,3 +1,16 @@
+# [1.65.0](https://github.com/mkayander/leetpal/compare/v1.64.0...v1.65.0) (2023-01-16)
+
+
+### Features
+
+* Extended callstack state ([53181f3](https://github.com/mkayander/leetpal/commit/53181f380c1b27e497f1a1e7c8327fe3592869dd))
+* Remove unnecessary useMemo ([ff63c68](https://github.com/mkayander/leetpal/commit/ff63c680b61329311bc573cd0e35f51e7265808d))
+* Show basic result data at Output panel ([549d59e](https://github.com/mkayander/leetpal/commit/549d59eb23d2d03a0c1fd7e8878e4227b6dd4c9c))
+* Update Code Runner ([6004ae8](https://github.com/mkayander/leetpal/commit/6004ae82e13c47d63b89f16d60c97afbe6fbff1a))
+* Update node shadow color from state ([6abca45](https://github.com/mkayander/leetpal/commit/6abca4511bf5cba5415f5413560919ad8ef6f22b))
+* Updated tab button styles ([a78394f](https://github.com/mkayander/leetpal/commit/a78394fa6360f3b599a344e56903d99d76017f83))
+* Use Layout as a second component ([c8ae669](https://github.com/mkayander/leetpal/commit/c8ae6692237f2e4d66903dff8ece45e9f8ee23aa))
+
 # [1.64.0](https://github.com/mkayander/leetpal/compare/v1.63.0...v1.64.0) (2023-01-15)
 
 
