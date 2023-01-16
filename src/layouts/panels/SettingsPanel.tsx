@@ -11,7 +11,6 @@ import React, {
   type Dispatch,
   type SetStateAction,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 
@@ -37,30 +36,26 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [inputError, setInputError] = useState<string | null>(null);
   const { value: input, isPending } = useDebounce(rawInput, 500);
 
-  const parsedInput = useMemo<BinaryTreeInput | undefined>(() => {
+  useEffect(() => {
     if (input === '') {
       setInputError(null);
-      return undefined;
+      setParsedInput(undefined);
     }
 
     try {
       const parsed = JSON.parse(input);
       if (Array.isArray(parsed)) {
         setInputError(null);
-        return parsed;
+        setParsedInput(parsed);
       } else {
         setInputError(`Input must be an array, but got ${typeof parsed}`);
-        return undefined;
+        setParsedInput(undefined);
       }
     } catch (e: any) {
       setInputError(e.message);
-      return undefined;
+      setParsedInput(undefined);
     }
-  }, [input]);
-
-  useEffect(() => {
-    setParsedInput(parsedInput);
-  }, [parsedInput, setParsedInput]);
+  }, [input, setParsedInput]);
 
   return (
     <PanelWrapper>
