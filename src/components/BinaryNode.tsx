@@ -45,11 +45,12 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   if (right) relations.push({ ...relationProps, targetId: right.meta.id });
 
   let nodeColor = theme.palette.primary.main;
+  let shadowColor = theme.palette.primary.dark;
   type ColorName = keyof typeof muiColors;
   if (nodeData?.color && nodeData.color in muiColors) {
     const colorMap = muiColors[nodeData.color as ColorName];
     if ('500' in colorMap) {
-      nodeColor = colorMap[500];
+      nodeColor = shadowColor = colorMap[500];
     }
   }
 
@@ -74,12 +75,9 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
             border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
             backdropFilter: 'blur(4px)',
             userSelect: 'none',
-            boxShadow: `0px 0px 18px -2px ${alpha(
-              theme.palette.primary.dark,
-              0.5
-            )}`,
+            boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
             color: theme.palette.primary.contrastText,
-            transition: 'background .2s',
+            transition: 'all .2s',
 
             '&:hover': {
               background: alpha(theme.palette.primary.light, 0.4),
