@@ -3,6 +3,7 @@
   "version": "1.65.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate && pnpm run generate-graphql",
@@ -12,7 +13,11 @@
     "generate-graphql": "graphql-codegen --config codegen.yml",
     "lint": "next lint",
     "start": "next start",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["eslint --quiet", "prettier --write"]
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
@@ -83,6 +88,8 @@
     "@typescript-eslint/parser": "^5.33.0",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.7.1",
     "prisma": "^4.5.0",
     "raw-loader": "^4.0.2",
