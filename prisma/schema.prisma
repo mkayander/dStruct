@@ -93,3 +93,36 @@ model LeetCodeUser {
     userAvatar String
     user       User?
 }
+
+enum ProjectCategory {
+  BINARY_TREE
+  BST
+  GRAPH
+  GRID
+  ARRAY
+}
+
+model PlaygroundProject {
+  id        String               @id @default(cuid())
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @default(now())
+  userId    String?
+  author    User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  title     String
+  category  ProjectCategory
+  input     String               @db.Text
+  solutions PlaygroundSolution[]
+  isExample Boolean              @default(false)
+  isPublic  Boolean              @default(false)
+}
+
+model PlaygroundSolution {
+  id        String            @id @default(cuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now())
+  projectId String
+  project   PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  code      String            @db.Text
+  order     Int               @default(0)
+}
