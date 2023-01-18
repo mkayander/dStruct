@@ -11,7 +11,6 @@ import {
   CircularProgress,
   IconButton,
   Tooltip,
-  Typography,
   useTheme,
 } from '@mui/material';
 import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
@@ -32,8 +31,6 @@ import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 import prettierIcon from './assets/prettierIcon.svg';
 import defaultJsTemplate from './defaultTemplate.js.txt';
-
-console.log(prettierIcon);
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
   ssr: false,
