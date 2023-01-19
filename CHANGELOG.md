@@ -1,3 +1,17 @@
+# [1.66.0](https://github.com/mkayander/leetpal/compare/v1.65.0...v1.66.0) (2023-01-19)
+
+
+### Features
+
+* Added phpstorm meta file ([aba0cdb](https://github.com/mkayander/leetpal/commit/aba0cdbe6c4dfbd6a6797cace705fcbdb49a7bca))
+* Added playground project Prisma models ([ad278f2](https://github.com/mkayander/leetpal/commit/ad278f2c14301d5d10c241ce2941ce820e0e176c))
+* Added project creation modal base ([9b87ca7](https://github.com/mkayander/leetpal/commit/9b87ca7b100a468377f335a820fb7f883963c2fe))
+* Added project select & modal button ([02798d5](https://github.com/mkayander/leetpal/commit/02798d5599146e2f022f8576f7e1a01d88bad2ba))
+* Added project TRPC router ([cf0c129](https://github.com/mkayander/leetpal/commit/cf0c129124a1d5fe27f30d42093efc0e08173d53))
+* Setup husky hooks ([45cf277](https://github.com/mkayander/leetpal/commit/45cf277b4ccea123c6a936250619c71701ea81d1))
+* Updated Prisma ([f71cd12](https://github.com/mkayander/leetpal/commit/f71cd12971c316e49ce1c8d3e568260bfd9235d8))
+* Updated TRPC ([442b668](https://github.com/mkayander/leetpal/commit/442b668ff1c5d4e4faac6d0721be0d0b8526ec14))
+
 # [1.65.0](https://github.com/mkayander/leetpal/compare/v1.64.0...v1.65.0) (2023-01-16)
 
 
