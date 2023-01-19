@@ -1,5 +1,6 @@
 import { leetcodeRouter } from '#/server/trpc/router/leetcode';
 import { problemRouter } from '#/server/trpc/router/problem';
+import { projectRouter } from '#/server/trpc/router/project';
 import { userRouter } from '#/server/trpc/router/user';
 
 import { protectedProcedure, publicProcedure, router } from '../trpc';
@@ -26,6 +27,7 @@ export const appRouter = router({
   user: userRouter,
   leetcode: leetcodeRouter,
   problem: problemRouter,
+  project: projectRouter,
 });
 
 // export type definition of API
