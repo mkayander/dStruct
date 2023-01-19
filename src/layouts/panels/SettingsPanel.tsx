@@ -1,11 +1,16 @@
-import { Refresh } from '@mui/icons-material';
+import { AddCircle, Refresh } from '@mui/icons-material';
 import { TabContext, TabList } from '@mui/lab';
 import {
   Box,
   CircularProgress,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Tab,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import React, {
   type Dispatch,
@@ -16,8 +21,10 @@ import React, {
 
 import { useDebounce } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
+import { CreateProjectModal } from '#/layouts/modals';
 import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
 import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
+import { trpc } from '#/utils';
 
 type SettingsPanelProps = {
   setParsedInput: Dispatch<SetStateAction<BinaryTreeInput | undefined>>;
@@ -57,8 +64,18 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     }
   }, [input, setParsedInput]);
 
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+
+  const { data: projects } = trpc.project.all.useQuery();
+  console.log('projects:\n', projects);
+
   return (
     <PanelWrapper>
+      <CreateProjectModal
+        open={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+      />
+
       <TabContext value={value}>
         <TabListWrapper>
           <TabList onChange={handleChange} aria-label="panel tabs">
@@ -67,6 +84,31 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         </TabListWrapper>
 
         <StyledTabPanel value="1">
+          <Box display="flex" flexDirection="row" alignItems="center" gap={2}>
+            <FormControl fullWidth>
+              <InputLabel id="project-select-label">Select project</InputLabel>
+              <Select
+                id="project-select"
+                labelId="project-select-label"
+                label="Select project"
+              >
+                {projects?.map((project) => (
+                  <MenuItem key={project.id} value={project.id}>
+                    {project.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Tooltip title="Create new project ➕" arrow>
+              <IconButton
+                title="Create new project"
+                onClick={() => setIsProjectModalOpen(true)}
+              >
+                <AddCircle />
+              </IconButton>
+            </Tooltip>
+          </Box>
+
           <Box
             sx={{
               display: 'flex',
@@ -83,7 +125,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               onChange={(ev) => setRawInput(ev.target.value)}
               error={!!inputError}
               helperText={inputError || 'Must be a JSON array of numbers'}
-              fullWidth
             />
             <IconButton
               className="btn-refresh"
