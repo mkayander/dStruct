@@ -2,6 +2,7 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -33,6 +34,12 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           Enter a name for your new project. And other data.
         </DialogContentText>
         <FormGroup sx={{ mt: 1, gap: 2 }}>
+          <TextField
+            id="new-proj-name"
+            label="Name"
+            helperText="Enter a name for your new project."
+            variant="outlined"
+          />
           <FormControl fullWidth>
             <InputLabel id="new-proj-select-category-label">
               Category
@@ -44,14 +51,8 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             >
               <MenuItem value={'Binary Tree'}>Binary Tree</MenuItem>
             </Select>
+            <FormHelperText>Select a data structure category.</FormHelperText>
           </FormControl>
-          <TextField
-            // autoFocus
-            id="proj_title"
-            label="Title"
-            fullWidth
-            variant="outlined"
-          />
           <FormControlLabel
             control={<Switch defaultChecked />}
             label="Public"
