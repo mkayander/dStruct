@@ -36,19 +36,19 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="project-name"
+            id="proj-name"
             label="Project Name"
-            type="email"
+            type="text"
             fullWidth
             variant="outlined"
           />
           <FormControl fullWidth>
-            <InputLabel id="new-project-select-category-label">
+            <InputLabel id="new-proj-select-category-label">
               Category
             </InputLabel>
             <Select
-              id="new-project-select-category"
-              labelId="new-project-select-category-label"
+              id="new-proj-select-category"
+              labelId="new-proj-select-category-label"
               label="Category"
             >
               <MenuItem value={'Binary Tree'}>Binary Tree</MenuItem>
