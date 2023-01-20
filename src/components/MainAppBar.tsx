@@ -100,7 +100,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     <AppBar position="sticky" elevation={10} variant={appBarVariant}>
       <Container maxWidth="xl">
         <Toolbar disableGutters variant={toolbarVariant}>
-          <CodeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <Image alt="dStruct Logo" src="/Icon.svg" width="32" height="32" />
+          </Box>
           {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
           <Link href="/" legacyBehavior={true}>
             <Typography
@@ -113,12 +115,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                letterSpacing: '.1rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
-              LeetPal
+              dStruct
             </Typography>
           </Link>
 
@@ -179,7 +181,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 textDecoration: 'none',
               }}
             >
-              LeetPal
+              dStruct
             </Typography>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
