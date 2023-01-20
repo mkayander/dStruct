@@ -1,3 +1,10 @@
+## [1.67.3](https://github.com/mkayander/leetpal/compare/v1.67.2...v1.67.3) (2023-01-20)
+
+
+### Bug Fixes
+
+* Fix form parameters ([0bd9a6a](https://github.com/mkayander/leetpal/commit/0bd9a6a18016185cfa160680a20f9b2e5892938b))
+
 ## [1.67.2](https://github.com/mkayander/leetpal/compare/v1.67.1...v1.67.2) (2023-01-20)
 
 
