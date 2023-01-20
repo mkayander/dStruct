@@ -43,7 +43,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <Head>
-              <title>LeetPal</title>
+              <title>dStruct</title>
             </Head>
             <CssBaseline />
             <Layout setDarkMode={setDarkMode}>

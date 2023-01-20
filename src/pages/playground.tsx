@@ -23,7 +23,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>LeetPal Playground</title>
+        <title>dStruct Playground</title>
       </Head>
       <SplitPanelsLayout>
         <SettingsPanel setParsedInput={setParsedInput} />
