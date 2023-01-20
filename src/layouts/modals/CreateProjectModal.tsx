@@ -33,15 +33,15 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           Enter a name for your new project. And other data.
         </DialogContentText>
         <FormGroup sx={{ mt: 1, gap: 2 }}>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="proj-name"
-            label="Project Name"
-            type="text"
-            fullWidth
-            variant="outlined"
-          />
+          {/*<TextField*/}
+          {/*  autoFocus*/}
+          {/*  margin="dense"*/}
+          {/*  id="proj-name"*/}
+          {/*  label="Project Name"*/}
+          {/*  type="text"*/}
+          {/*  fullWidth*/}
+          {/*  variant="outlined"*/}
+          {/*/>*/}
           <FormControl fullWidth>
             <InputLabel id="new-proj-select-category-label">
               Category
