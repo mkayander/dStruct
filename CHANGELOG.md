@@ -1,3 +1,12 @@
+# [1.67.0](https://github.com/mkayander/leetpal/compare/v1.66.0...v1.67.0) (2023-01-20)
+
+
+### Features
+
+* Added a custom favicon ([e1e7704](https://github.com/mkayander/leetpal/commit/e1e7704232eb50801095fce5fdaa5f03210a85d3))
+* Switch to a 'dStruct' name ([bb6c390](https://github.com/mkayander/leetpal/commit/bb6c39027d5f5ea955b439485b04f44859c8fd85))
+* Use a new logo and name ([62ee43b](https://github.com/mkayander/leetpal/commit/62ee43b5e1db467d0d236914d3ff4c0f2f5329ea))
+
 # [1.66.0](https://github.com/mkayander/leetpal/compare/v1.65.0...v1.66.0) (2023-01-19)
 
 
