@@ -91,6 +91,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 id="project-select"
                 labelId="project-select-label"
                 label="Select project"
+                defaultValue=""
               >
                 {projects?.map((project) => (
                   <MenuItem key={project.id} value={project.id}>
@@ -100,10 +101,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </Select>
             </FormControl>
             <Tooltip title="Create new project ➕" arrow>
-              <IconButton
-                title="Create new project"
-                onClick={() => setIsProjectModalOpen(true)}
-              >
+              <IconButton onClick={() => setIsProjectModalOpen(true)}>
                 <AddCircle />
               </IconButton>
             </Tooltip>
