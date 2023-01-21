@@ -63,7 +63,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
       isPublic: true,
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, formikHelpers) => {
       await submitProject.mutateAsync({
         title: values.projectName,
         category: values.projectCategory,
@@ -73,6 +73,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         variant: 'success',
       });
       await trpcUtils.project.all.invalidate();
+      formikHelpers.resetForm();
       onClose();
     },
   });
