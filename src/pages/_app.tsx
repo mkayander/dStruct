@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
+import { SnackbarProvider } from 'notistack';
 import React, { useMemo, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
@@ -42,13 +43,15 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
       <SessionProvider session={props.pageProps.session}>
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
-            <Head>
-              <title>dStruct</title>
-            </Head>
-            <CssBaseline />
-            <Layout setDarkMode={setDarkMode}>
-              <Component {...props.pageProps} />
-            </Layout>
+            <SnackbarProvider maxSnack={4}>
+              <Head>
+                <title>dStruct</title>
+              </Head>
+              <CssBaseline />
+              <Layout setDarkMode={setDarkMode}>
+                <Component {...props.pageProps} />
+              </Layout>
+            </SnackbarProvider>
           </ThemeProvider>
         </ApolloProvider>
       </SessionProvider>
