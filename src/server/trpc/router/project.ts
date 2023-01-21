@@ -45,15 +45,16 @@ export const projectRouter = router({
       z.object({
         title: z.string(),
         category: z.nativeEnum(ProjectCategory),
-        input: z.string(),
+        input: z.ostring(),
         isPublic: z.boolean(),
         isExample: z.oboolean(),
       })
     )
-    .mutation(async ({ input, ctx }) =>
+    .mutation(async ({ input: { input, ...data }, ctx }) =>
       ctx.prisma.playgroundProject.create({
         data: {
-          ...input,
+          input: input ?? '[]',
+          ...data,
           userId: ctx.session.user.id,
         },
       })
