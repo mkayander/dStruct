@@ -1,3 +1,20 @@
+# [1.68.0](https://github.com/mkayander/leetpal/compare/v1.67.4...v1.68.0) (2023-01-21)
+
+
+### Bug Fixes
+
+* Disabled pre-commit hook ([0b32354](https://github.com/mkayander/leetpal/commit/0b32354969204b0975f478e2d5cb3322c89b6d15))
+* Fixed console warnings ([1fb19fc](https://github.com/mkayander/leetpal/commit/1fb19fc44a24fb794ebc8a461e403f7f717874fb))
+* Update lint staged config ([da522ea](https://github.com/mkayander/leetpal/commit/da522ea397d14c959ccace34863e43a9f51a103d))
+
+
+### Features
+
+* Added a default value for 'input' ([d30df90](https://github.com/mkayander/leetpal/commit/d30df90056c3e2a52467ee4968233827bcbb41d9))
+* Added notistack snackbar provider ([6465ab6](https://github.com/mkayander/leetpal/commit/6465ab64066b2cc191078a9b59fce5b66dc3e1dc))
+* Added project creation functionality ([4d691b9](https://github.com/mkayander/leetpal/commit/4d691b923fab870c3dfbe1a59344b3e9c8460d5a))
+* Installed notistack & zod ([1cd59bf](https://github.com/mkayander/leetpal/commit/1cd59bff5cd3224eed9b6733614d5fad71755716))
+
 ## [1.67.4](https://github.com/mkayander/leetpal/compare/v1.67.3...v1.67.4) (2023-01-20)
 
 
