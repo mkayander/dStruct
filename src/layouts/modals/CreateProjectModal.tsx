@@ -38,7 +38,7 @@ const validationSchema = yup.object({
   projectName: yup
     .string()
     .min(3, 'Project name must be at least 3 characters')
-    .max(50, 'Project name must be at most 50 characters')
+    .max(190, 'Project name must be at most 190 characters')
     .required('Project name is required'),
   projectCategory: yup.string().required('Project category is required'),
 });
@@ -60,6 +60,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     initialValues: {
       projectName: '',
       projectCategory: '' as ProjectCategory,
+      projectDescription: '',
       isPublic: true,
     },
     validationSchema: validationSchema,
@@ -67,6 +68,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
       await submitProject.mutateAsync({
         title: values.projectName,
         category: values.projectCategory,
+        description: values.projectDescription,
         isPublic: values.isPublic,
       });
       enqueueSnackbar('Project created successfully', {
@@ -136,6 +138,27 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
               </Select>
               <FormHelperText>Select a data structure category.</FormHelperText>
             </FormControl>
+            <TextField
+              id="projectDescription"
+              name="projectDescription"
+              label="Description"
+              variant="outlined"
+              multiline
+              minRows={2}
+              maxRows={8}
+              disabled={formik.isSubmitting}
+              value={formik.values.projectDescription}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectDescription &&
+                Boolean(formik.errors.projectDescription)
+              }
+              helperText={
+                (formik.touched.projectDescription &&
+                  formik.errors.projectDescription) ||
+                'Optional project description.'
+              }
+            />
             <FormControlLabel
               control={
                 <Switch
