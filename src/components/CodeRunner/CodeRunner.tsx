@@ -30,7 +30,6 @@ import {
 import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 import prettierIcon from './assets/prettierIcon.svg';
-import defaultJsTemplate from './defaultTemplate.js.txt';
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
   ssr: false,
@@ -54,7 +53,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
     if (savedCode) setCodeInput(savedCode);
   }, []);
 
-  const [codeInput, setCodeInput] = useState<string>(defaultJsTemplate);
+  const [codeInput, setCodeInput] = useState<string>('');
 
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
@@ -65,7 +64,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   };
 
   const handleClearCode = () => {
-    setCodeInput(defaultJsTemplate);
+    setCodeInput('');
     localStorage.removeItem('code');
   };
 
