@@ -1,3 +1,13 @@
+# [1.69.0](https://github.com/mkayander/leetpal/compare/v1.68.1...v1.69.0) (2023-01-22)
+
+
+### Features
+
+* Added basic project fetching ([f57b028](https://github.com/mkayander/leetpal/commit/f57b02808d60b43b2a7aad9ac7a0b771ca0dfda2))
+* Added project description field ([c0842fe](https://github.com/mkayander/leetpal/commit/c0842fe71a2078050b3959a3089362f03c224036))
+* Move js template to a separate directory ([5037ecf](https://github.com/mkayander/leetpal/commit/5037ecf4c60d09cdd7fe7b9c511fe2825139431e))
+* Updated prisma schema. Move project input to a separate model ([8655a2a](https://github.com/mkayander/leetpal/commit/8655a2a30f55250f848407918d4114fed28bddcd))
+
 ## [1.68.1](https://github.com/mkayander/leetpal/compare/v1.68.0...v1.68.1) (2023-01-21)
 
 
