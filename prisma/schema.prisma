@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -103,17 +103,18 @@ enum ProjectCategory {
 }
 
 model PlaygroundProject {
-  id        String               @id @default(cuid())
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @default(now())
-  userId    String?
-  author    User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
-  title     String
-  category  ProjectCategory
-  input     String               @db.Text
-  solutions PlaygroundSolution[]
-  isExample Boolean              @default(false)
-  isPublic  Boolean              @default(false)
+  id          String               @id @default(cuid())
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @default(now())
+  userId      String?
+  author      User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  title       String
+  category    ProjectCategory
+  description String?              @db.Text
+  isExample   Boolean              @default(false)
+  isPublic    Boolean              @default(false)
+  solutions   PlaygroundSolution[]
+  cases       PlaygroundTestCase[]
 }
 
 model PlaygroundSolution {
@@ -125,4 +126,14 @@ model PlaygroundSolution {
   title     String
   code      String            @db.Text
   order     Int               @default(0)
+}
+
+model PlaygroundTestCase {
+  id        String            @id @default(cuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now())
+  projectId String
+  project   PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  input     String            @db.Text
 }
