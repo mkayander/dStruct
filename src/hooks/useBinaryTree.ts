@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import uuid4 from 'short-uuid';
 
-import { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
 import { isNumber } from '#/utils';
 
 import { useAppDispatch } from '#/store/hooks';
@@ -13,17 +12,13 @@ import {
 
 // [3,9,20,null,null,15,7]
 
-// const input: BinaryTreeInput = [1, 2, 2, 3, 3, null, null, 4, 4];
-
 export type BinaryTreeInput = (number | null)[];
 
-export const useBinaryTree = (
-  input?: BinaryTreeInput
-): BinaryTreeNode | null => {
+export const useBinaryTree = (input?: BinaryTreeInput) => {
   const dispatch = useAppDispatch();
 
-  return useMemo(() => {
-    if (!input || input.length === 0) return null;
+  useEffect(() => {
+    if (!input || input.length === 0) return;
 
     const newDataNodes: Record<string, BinaryTreeNodeDataPayload> = {};
 
@@ -31,7 +26,7 @@ export const useBinaryTree = (
       value: number | undefined | null,
       depth: number
     ) => {
-      if (!isNumber(value)) return null;
+      if (!isNumber(value)) return;
 
       const newId = uuid4.generate();
       newDataNodes[newId] = {
@@ -46,10 +41,10 @@ export const useBinaryTree = (
     dispatch(treeNodeSlice.actions.clearAll());
 
     const rootNum = input[0];
-    if (!isNumber(rootNum)) return null;
+    if (!isNumber(rootNum)) return;
 
     const rootData = createNodeData(rootNum, 0);
-    if (!rootData) return null;
+    if (!rootData) return;
 
     const queue: BinaryTreeNodeDataPayload[] = [rootData];
 
@@ -80,11 +75,6 @@ export const useBinaryTree = (
       i++;
     }
 
-    const root = BinaryTreeNode.fromNodeData(rootData, newDataNodes, dispatch);
-    if (!root) return null;
-
-    root.meta.isRoot = true;
-
     dispatch(
       treeNodeSlice.actions.addMany({
         maxDepth,
@@ -93,26 +83,5 @@ export const useBinaryTree = (
     );
 
     dispatch(callstackSlice.actions.removeAll());
-
-    return root;
   }, [dispatch, input]);
 };
-
-// export const useReduxBinaryTree = () => {
-//   const {
-//     rootId,
-//     nodes: { entities: nodesMap },
-//   } = useAppSelector(treeDataSelector);
-//   const rootNodeData = useAppSelector(selectNodeDataById(rootId || ''));
-//
-//   return useMemo(() => {
-//     if (!rootNodeData) return null;
-//
-//     const root = BinaryTreeNode.fromNodeData(rootNodeData, nodesMap);
-//     if (!root) return null;
-//
-//     root.meta.isRoot = true;
-//
-//     return root;
-//   }, [nodesMap, rootNodeData]);
-// };
