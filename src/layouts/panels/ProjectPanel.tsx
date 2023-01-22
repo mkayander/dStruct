@@ -1,4 +1,4 @@
-import { AddCircle, Refresh } from '@mui/icons-material';
+import { AddCircle } from '@mui/icons-material';
 import { TabContext, TabList } from '@mui/lab';
 import {
   Box,
@@ -12,38 +12,35 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useDebounce } from '#/hooks';
+import { useBinaryTree } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 import { CreateProjectModal } from '#/layouts/modals';
 import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
 import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
 import { trpc } from '#/utils';
 
-type SettingsPanelProps = {
-  setParsedInput: Dispatch<SetStateAction<BinaryTreeInput | undefined>>;
-};
+export const ProjectPanel: React.FC = () => {
+  const [tabValue, setTabValue] = useState('1');
+  const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
+  const [rawInput, setRawInput] = useState<string>('[]');
+  const [inputError, setInputError] = useState<string | null>(null);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
-export const SettingsPanel: React.FC<SettingsPanelProps> = ({
-  setParsedInput,
-}) => {
-  const [value, setValue] = useState('1');
+  // const { value: debouncedInput, isPending } = useDebounce(rawInput, 500);
+  const debouncedInput = rawInput;
+  const isPending = false;
 
   const { data: projects } = trpc.project.allBrief.useQuery();
-  console.log('projects:\n', projects);
 
   const [selectedProjectId, setSelectedProjectId] = useState<string>('');
   const selectedProject = trpc.project.getById.useQuery(
     selectedProjectId || '',
-    { enabled: Boolean(selectedProjectId) }
+    {
+      enabled: Boolean(selectedProjectId),
+    }
   );
-  console.log('selectedProject:\n', selectedProject.data);
 
   useEffect(() => {
     if (projects?.length && !selectedProjectId) {
@@ -51,14 +48,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
       firstProject && setSelectedProjectId(firstProject.id);
     }
   }, [projects, selectedProjectId]);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
-
-  const [rawInput, setRawInput] = useState<string>('[1,2,3,null,5]');
-  const [inputError, setInputError] = useState<string | null>(null);
-  const { value: input, isPending } = useDebounce(rawInput, 500);
 
   useEffect(() => {
     if (!selectedProject.data) return;
@@ -69,14 +58,13 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   }, [selectedProject.data]);
 
   useEffect(() => {
-    console.log('input:\n', input);
-    if (!input) {
+    if (!debouncedInput) {
       setInputError(null);
       setParsedInput(undefined);
     }
 
     try {
-      const parsed = JSON.parse(input);
+      const parsed = JSON.parse(debouncedInput);
       if (Array.isArray(parsed)) {
         setInputError(null);
         setParsedInput(parsed);
@@ -88,9 +76,13 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
       setInputError(e.message);
       setParsedInput(undefined);
     }
-  }, [input, setParsedInput]);
+  }, [debouncedInput, setParsedInput]);
 
-  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  useBinaryTree(parsedInput);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
+  };
 
   return (
     <PanelWrapper>
@@ -99,7 +91,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         onClose={() => setIsProjectModalOpen(false)}
       />
 
-      <TabContext value={value}>
+      <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleChange} aria-label="panel tabs">
             <Tab label="Project" value="1" />
@@ -152,14 +144,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               error={!!inputError}
               helperText={inputError || 'Must be a JSON array of numbers'}
             />
-            <IconButton
-              className="btn-refresh"
-              onClick={() => setRawInput('[1,2,3,null,5]')}
-              title="Reset input to default"
-              disabled={isPending}
-            >
-              <Refresh />
-            </IconButton>
             {isPending && <CircularProgress />}
           </Box>
         </StyledTabPanel>

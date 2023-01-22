@@ -76,7 +76,7 @@ export const OutputPanel: React.FC = () => {
             )}
           </Box>
         </StyledTabPanel>
-        <StyledTabPanel value="2"></StyledTabPanel>
+        {/*<StyledTabPanel value="2"></StyledTabPanel>*/}
       </TabContext>
     </PanelWrapper>
   );

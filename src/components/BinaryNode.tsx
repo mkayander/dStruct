@@ -4,7 +4,7 @@ import React from 'react';
 import { ArcherElement } from 'react-archer';
 import type { RelationType } from 'react-archer/lib/types';
 
-import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
+import type { BinaryTreeNode } from '#/hooks/dataStructures/binaryTreeNode';
 
 import { useAppSelector } from '#/store/hooks';
 import { selectNodeDataById } from '#/store/reducers/treeNodeReducer';

@@ -8,7 +8,7 @@ import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
 
 type TreeViewPanelProps = React.ComponentProps<typeof TreeViewer>;
 
-export const TreeViewPanel: React.FC<TreeViewPanelProps> = (props) => {
+export const TreeViewPanel: React.FC<TreeViewPanelProps> = () => {
   const [value, setValue] = useState('1');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -24,7 +24,7 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = (props) => {
           </TabList>
         </TabListWrapper>
         <StyledTabPanel value="1">
-          <TreeViewer {...props} />
+          <TreeViewer />
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>

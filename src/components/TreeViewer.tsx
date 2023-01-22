@@ -1,23 +1,21 @@
 import { alpha, Box, useTheme } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ArcherContainer } from 'react-archer';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { BinaryNode } from '#/components/BinaryNode';
-import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
+import { PlaygroundRuntimeContext } from '#/context';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import { selectCallstack } from '#/store/reducers/callstackReducer';
 import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
-export type TreeViewerProps = {
-  tree: BinaryTreeNode | null;
-};
-
-export const TreeViewer: React.FC<TreeViewerProps> = ({ tree }) => {
+export const TreeViewer: React.FC = () => {
   const theme = useTheme();
 
   const dispatch = useAppDispatch();
+
+  const { tree } = useContext(PlaygroundRuntimeContext);
 
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
@@ -51,6 +49,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({ tree }) => {
 
     return () => clearInterval(interval);
   }, [callstack, callstackIsReady, dispatch]);
+
+  console.log('tree:\n', tree);
 
   return (
     <Box

@@ -18,9 +18,9 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import type { BinaryTreeNode } from '#/hooks/dataTypes/binaryTreeNode';
+import { PlaygroundRuntimeContext } from '#/context';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
@@ -36,17 +36,14 @@ const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
   loading: () => <CircularProgress />,
 });
 
-type CodeRunnerProps = EditorProps & {
-  tree: BinaryTreeNode | null;
-};
+type CodeRunnerProps = EditorProps;
 
-export const CodeRunner: React.FC<CodeRunnerProps> = ({
-  tree,
-  ...restProps
-}) => {
+export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const { error } = useAppSelector(selectRuntimeData);
+
+  const { tree } = useContext(PlaygroundRuntimeContext);
 
   useEffect(() => {
     const savedCode = localStorage.getItem('code');
