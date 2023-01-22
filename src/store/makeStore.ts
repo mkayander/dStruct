@@ -2,6 +2,7 @@ import {
   type Action,
   type AnyAction,
   configureStore,
+  type Middleware,
   type ThunkAction,
 } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
@@ -26,6 +27,11 @@ const reducer = (
   }
 };
 
+const additionalMiddleware: Middleware[] = [];
+if (process.env.NODE_ENV !== 'production') {
+  additionalMiddleware.push(logger);
+}
+
 export const makeStore = () =>
   configureStore({
     reducer,
@@ -41,7 +47,7 @@ export const makeStore = () =>
         //   >
         // )
         // prepend and concat calls can be chained
-        .concat(logger),
+        .concat(additionalMiddleware),
   });
 
 type Store = ReturnType<typeof makeStore>;
