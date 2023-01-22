@@ -1,1 +1,1 @@
-export { GlobalContext } from './GlobalContext';
+export { PlaygroundRuntimeContext } from './PlaygroundRuntimeContext';
