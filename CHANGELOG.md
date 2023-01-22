@@ -1,3 +1,18 @@
+# [1.70.0](https://github.com/mkayander/leetpal/compare/v1.69.0...v1.70.0) (2023-01-22)
+
+
+### Bug Fixes
+
+* Do not use logger middleware in production ([21b87af](https://github.com/mkayander/leetpal/commit/21b87af84036c2cbe38585846c2efd8c03810b37))
+
+
+### Features
+
+* Added playground runtime context ([34b8700](https://github.com/mkayander/leetpal/commit/34b8700dd010ba80e513414a475d966dabdbea05))
+* Added project reducer base ([5b67fc4](https://github.com/mkayander/leetpal/commit/5b67fc4c168c4c7b6dc3fd388937bab2038943c7))
+* Move recursive tree creation into a separate hook ([3b080e7](https://github.com/mkayander/leetpal/commit/3b080e71aff99d0e836ffa92609cbe883860d3d2))
+* Use new playground context and hooks ([affae61](https://github.com/mkayander/leetpal/commit/affae6111d05898444eb89898b4b9ba4ca1f7a88))
+
 # [1.69.0](https://github.com/mkayander/leetpal/compare/v1.68.1...v1.69.0) (2023-01-22)
 
 
