@@ -1,3 +1,18 @@
+# [1.71.0](https://github.com/mkayander/leetpal/compare/v1.70.0...v1.71.0) (2023-01-23)
+
+
+### Bug Fixes
+
+* Clear binary tree data if input is empty ([bab57e3](https://github.com/mkayander/leetpal/commit/bab57e37823ed45e4ddfcc94f28a13184e077be9))
+* Use a rawInput argument ([fe264b3](https://github.com/mkayander/leetpal/commit/fe264b3f39e4c077e1c3d9c9a4b7aec03e3a7e61))
+
+
+### Features
+
+* Added test case select bar component ([a42d4df](https://github.com/mkayander/leetpal/commit/a42d4df8d8fad622c67cb95bfc98392937c0d024))
+* Updated project panel ([748b808](https://github.com/mkayander/leetpal/commit/748b808c987a7659e2f277f807928255700baa21))
+* Updated project reducer ([ee994fe](https://github.com/mkayander/leetpal/commit/ee994fe48808972920c2eaea0b02816779c1a501))
+
 # [1.70.0](https://github.com/mkayander/leetpal/compare/v1.69.0...v1.70.0) (2023-01-22)
 
 
