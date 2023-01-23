@@ -1,4 +1,4 @@
-import { AddCircle } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import { TabContext, TabList } from '@mui/lab';
 import {
   Box,
@@ -14,12 +14,16 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
+import { TestCaseSelectBar } from '#/components';
 import { useBinaryTree } from '#/hooks';
 import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
 import { CreateProjectModal } from '#/layouts/modals';
 import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
 import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
 import { trpc } from '#/utils';
+
+import { useAppSelector } from '#/store/hooks';
+import { selectCurrentCaseId } from '#/store/reducers/projectReducer';
 
 export const ProjectPanel: React.FC = () => {
   const [tabValue, setTabValue] = useState('1');
@@ -35,11 +39,11 @@ export const ProjectPanel: React.FC = () => {
   const { data: projects } = trpc.project.allBrief.useQuery();
 
   const [selectedProjectId, setSelectedProjectId] = useState<string>('');
-  const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || '',
-    {
-      enabled: Boolean(selectedProjectId),
-    }
+  const selectedCaseId = useAppSelector(selectCurrentCaseId);
+
+  const selectedCase = trpc.project.getCaseById.useQuery(
+    { projectId: selectedProjectId, caseId: selectedCaseId ?? '' },
+    { enabled: Boolean(selectedProjectId && selectedCaseId) }
   );
 
   useEffect(() => {
@@ -50,12 +54,10 @@ export const ProjectPanel: React.FC = () => {
   }, [projects, selectedProjectId]);
 
   useEffect(() => {
-    if (!selectedProject.data) return;
-
-    const firstCase = selectedProject.data.cases[0]?.input;
-
-    setRawInput(firstCase ?? '');
-  }, [selectedProject.data]);
+    if (selectedCase.data) {
+      setRawInput(selectedCase.data.input);
+    }
+  }, [selectedCase.data]);
 
   useEffect(() => {
     if (!debouncedInput) {
@@ -122,10 +124,12 @@ export const ProjectPanel: React.FC = () => {
             </FormControl>
             <Tooltip title="Create new project ➕" arrow>
               <IconButton onClick={() => setIsProjectModalOpen(true)}>
-                <AddCircle />
+                <Add />
               </IconButton>
             </Tooltip>
           </Box>
+
+          <TestCaseSelectBar selectedProjectId={selectedProjectId} />
 
           <Box
             sx={{
