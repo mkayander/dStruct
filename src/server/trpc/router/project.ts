@@ -10,8 +10,8 @@ import {
 
 import defaultJsTemplate from '#/codeTemplates/defaultTemplate.js.txt';
 
-const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, input, next }) => {
-  const projectId: string | undefined = typeof input === 'object' && (<any>input).projectId;
+const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
+  const projectId: string | undefined = typeof rawInput === 'object' && (<any>rawInput).projectId;
   if (!projectId) throw new TRPCError({ code: 'BAD_REQUEST', message: 'Missing projectId' });
 
   const project = await ctx.prisma.playgroundProject.findUniqueOrThrow({
@@ -40,7 +40,7 @@ export const projectRouter = router({
   all: publicProcedure
     .query(async ({ ctx }) => {
       const userId = ctx.session?.user.id;
-      return await ctx.prisma.playgroundProject.findMany({
+      return ctx.prisma.playgroundProject.findMany({
         where: {
           OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }]
         }
@@ -50,7 +50,7 @@ export const projectRouter = router({
   allBrief: publicProcedure
     .query(async ({ ctx }) => {
       const userId = ctx.session?.user.id;
-      return await ctx.prisma.playgroundProject.findMany({
+      return ctx.prisma.playgroundProject.findMany({
         where: {
           OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }]
         },
@@ -168,6 +168,21 @@ export const projectRouter = router({
       }
     })
   ),
+
+  getCaseById: projectOwnerProcedure
+    .input(
+      z.object({
+        projectId: z.string(),
+        caseId: z.string()
+      })
+    )
+    .query(async ({ input, ctx }) =>
+      ctx.prisma.playgroundTestCase.findUniqueOrThrow({
+        where: {
+          id: input.caseId
+        }
+      })
+    ),
 
   addCase: projectOwnerProcedure
     .input(
