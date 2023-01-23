@@ -12,3 +12,4 @@ export { ResizeHandle } from './ResizeHandle/ResizeHandle';
 export { ThemeSwitch } from './ThemeSwitch';
 export { BinaryNode } from './BinaryNode';
 export { TreeViewer } from './TreeViewer';
+export { TestCaseSelectBar } from './TestCaseSelectBar';
