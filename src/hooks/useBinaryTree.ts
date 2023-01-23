@@ -18,6 +18,8 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(treeNodeSlice.actions.clearAll());
+
     if (!input || input.length === 0) return;
 
     const newDataNodes: Record<string, BinaryTreeNodeDataPayload> = {};
@@ -37,8 +39,6 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
 
       return newDataNodes[newId];
     };
-
-    dispatch(treeNodeSlice.actions.clearAll());
 
     const rootNum = input[0];
     if (!isNumber(rootNum)) return;
