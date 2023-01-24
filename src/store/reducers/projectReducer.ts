@@ -1,8 +1,7 @@
+import type { PlaygroundTestCase } from '@prisma/client';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '#/store/makeStore';
-
-import type { PlaygroundTestCase } from '.prisma/client';
 
 type StringDates<T> = Omit<T, 'createdAt' | 'updatedAt'> & {
   createdAt: string;
