@@ -21,12 +21,17 @@ import prettier from 'prettier/standalone';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { PlaygroundRuntimeContext } from '#/context';
+import { trpc } from '#/utils';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
   callstackSlice,
   selectRuntimeData,
 } from '#/store/reducers/callstackReducer';
+import {
+  selectCurrentProjectId,
+  selectCurrentSolutionId,
+} from '#/store/reducers/projectReducer';
 import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
 
 import prettierIcon from './assets/prettierIcon.svg';
@@ -51,6 +56,23 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
   }, []);
 
   const [codeInput, setCodeInput] = useState<string>('');
+
+  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? '';
+  const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? '';
+
+  const currentSolution = trpc.project.getSolutionById.useQuery(
+    {
+      projectId: currentProjectId,
+      solutionId: currentSolutionId,
+    },
+    {
+      enabled: Boolean(currentProjectId && currentSolutionId),
+    }
+  );
+
+  useEffect(() => {
+    if (currentSolution.data?.code) setCodeInput(currentSolution.data.code);
+  }, [currentSolution.data]);
 
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
