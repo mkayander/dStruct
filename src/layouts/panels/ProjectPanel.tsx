@@ -22,10 +22,16 @@ import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
 import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
 import { trpc } from '#/utils';
 
-import { useAppSelector } from '#/store/hooks';
-import { selectCurrentCaseId } from '#/store/reducers/projectReducer';
+import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import {
+  projectSlice,
+  selectCurrentCaseId,
+  selectCurrentProjectId,
+} from '#/store/reducers/projectReducer';
 
 export const ProjectPanel: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [tabValue, setTabValue] = useState('1');
   const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
   const [rawInput, setRawInput] = useState<string>('[]');
@@ -38,8 +44,15 @@ export const ProjectPanel: React.FC = () => {
 
   const { data: projects } = trpc.project.allBrief.useQuery();
 
-  const [selectedProjectId, setSelectedProjectId] = useState<string>('');
+  const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? '';
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
+
+  const selectedProject = trpc.project.getById.useQuery(
+    selectedProjectId || '',
+    {
+      enabled: Boolean(selectedProjectId),
+    }
+  );
 
   const selectedCase = trpc.project.getCaseById.useQuery(
     { projectId: selectedProjectId, caseId: selectedCaseId ?? '' },
@@ -49,9 +62,12 @@ export const ProjectPanel: React.FC = () => {
   useEffect(() => {
     if (projects?.length && !selectedProjectId) {
       const firstProject = projects[0];
-      firstProject && setSelectedProjectId(firstProject.id);
+      firstProject &&
+        dispatch(
+          projectSlice.actions.update({ currentProjectId: firstProject.id })
+        );
     }
-  }, [projects, selectedProjectId]);
+  }, [dispatch, projects, selectedProjectId]);
 
   useEffect(() => {
     if (selectedCase.data) {
@@ -113,7 +129,13 @@ export const ProjectPanel: React.FC = () => {
                 label="Select project"
                 defaultValue=""
                 value={selectedProjectId}
-                onChange={(e) => setSelectedProjectId(e.target.value)}
+                onChange={(e) =>
+                  dispatch(
+                    projectSlice.actions.update({
+                      currentProjectId: e.target.value,
+                    })
+                  )
+                }
               >
                 {projects?.map((project) => (
                   <MenuItem key={project.id} value={project.id}>
@@ -129,7 +151,7 @@ export const ProjectPanel: React.FC = () => {
             </Tooltip>
           </Box>
 
-          <TestCaseSelectBar selectedProjectId={selectedProjectId} />
+          <TestCaseSelectBar selectedProject={selectedProject} />
 
           <Box
             sx={{

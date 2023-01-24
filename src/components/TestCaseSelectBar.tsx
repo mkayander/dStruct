@@ -1,8 +1,11 @@
 import { Add } from '@mui/icons-material';
 import { Box, Chip, CircularProgress, IconButton } from '@mui/material';
+import type { PlaygroundTestCase } from '@prisma/client';
+import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 
 import { trpc } from '#/utils';
+import type { RouterOutputs } from '#/utils/trpc';
 
 import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
@@ -10,22 +13,17 @@ import {
   selectCurrentCaseId,
 } from '#/store/reducers/projectReducer';
 
-import type { PlaygroundTestCase } from '.prisma/client';
+type TestCaseBrief = Pick<PlaygroundTestCase, 'id' | 'title'>;
 
 type TestCaseSelectBarProps = {
-  selectedProjectId: string;
+  selectedProject: UseQueryResult<RouterOutputs['project']['getById']>;
 };
 
 export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
-  selectedProjectId,
+  selectedProject,
 }) => {
-  const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || '',
-    {
-      enabled: Boolean(selectedProjectId),
-    }
-  );
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
+  const selectedProjectId = selectedProject.data?.id;
 
   const dispatch = useAppDispatch();
 
@@ -37,10 +35,18 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         projectId: variables.projectId,
         caseId: data.id,
       });
+      dispatch(projectSlice.actions.update({ currentCaseId: data.id }));
     },
   });
   const deleteCase = trpc.project.deleteCase.useMutation({
     onSuccess: async (data, variables) => {
+      if (selectedCaseId === data.id) {
+        const firstCaseId = selectedProject.data?.cases[0]?.id;
+        dispatch(
+          projectSlice.actions.update({ currentCaseId: firstCaseId || null })
+        );
+      }
+
       await trpcUtils.project.getById.invalidate(variables.projectId);
       await trpcUtils.project.getCaseById.invalidate({
         projectId: variables.projectId,
@@ -62,23 +68,20 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
       dispatch(projectSlice.actions.update({ currentCaseId: firstCaseId }));
   }, [selectedCaseId, selectedProject.data, dispatch]);
 
-  const handleCaseClick = (testCase: PlaygroundTestCase) => {
+  const handleCaseClick = (testCase: TestCaseBrief) => {
     dispatch(projectSlice.actions.update({ currentCaseId: testCase.id }));
     // dispatch(projectSlice.actions.setCurrentCase(testCase));
   };
 
-  const handleCaseDelete = (testCase: PlaygroundTestCase) => {
-    if (selectedCaseId === testCase.id) {
-      const firstCaseId = selectedProject.data?.cases[0]?.id;
-      dispatch(
-        projectSlice.actions.update({ currentCaseId: firstCaseId || null })
-      );
-    }
+  const handleCaseDelete = (testCase: TestCaseBrief) => {
+    if (!selectedProjectId) return;
 
     deleteCase.mutate({ projectId: selectedProjectId, caseId: testCase.id });
   };
 
   const handleAddCase = () => {
+    if (!selectedProjectId) return;
+
     addCase.mutate({
       projectId: selectedProjectId,
       title: `Case ${(cases?.length ?? 0) + 1}`,
