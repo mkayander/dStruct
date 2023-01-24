@@ -1,3 +1,13 @@
+# [1.72.0](https://github.com/mkayander/leetpal/compare/v1.71.0...v1.72.0) (2023-01-24)
+
+
+### Features
+
+* Added solution select bar ([b839308](https://github.com/mkayander/leetpal/commit/b8393086648b0063507d454eeb2ddafb83186516))
+* Added solution select usage ([e4602a1](https://github.com/mkayander/leetpal/commit/e4602a155cb50efb4cd0fc35da15d6a1ecdf143e))
+* Raise current project query state ([84444c0](https://github.com/mkayander/leetpal/commit/84444c08b6d93332e025f2a9821626d7deac85bd))
+* Updated project router ([c2a9d41](https://github.com/mkayander/leetpal/commit/c2a9d410d693fbf6f994162a9ba43d264ab03f33))
+
 # [1.71.0](https://github.com/mkayander/leetpal/compare/v1.70.0...v1.71.0) (2023-01-23)
 
 
