@@ -32,8 +32,8 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     onSuccess: async (data, variables) => {
       await trpcUtils.project.getById.invalidate(variables.projectId);
       await trpcUtils.project.getCaseById.invalidate({
+        id: data.id,
         projectId: variables.projectId,
-        caseId: data.id,
       });
       dispatch(projectSlice.actions.update({ currentCaseId: data.id }));
     },
@@ -49,8 +49,8 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
       await trpcUtils.project.getById.invalidate(variables.projectId);
       await trpcUtils.project.getCaseById.invalidate({
+        id: variables.caseId,
         projectId: variables.projectId,
-        caseId: variables.caseId,
       });
     },
   });

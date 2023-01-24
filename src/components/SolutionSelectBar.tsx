@@ -34,8 +34,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     onSuccess: async (data, variables) => {
       await trpcUtils.project.getById.invalidate(variables.projectId);
       await trpcUtils.project.getSolutionById.invalidate({
+        id: data.id,
         projectId: variables.projectId,
-        solutionId: data.id,
       });
       dispatch(projectSlice.actions.update({ currentSolutionId: data.id }));
     },
@@ -54,8 +54,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
       await trpcUtils.project.getById.invalidate(variables.projectId);
       await trpcUtils.project.getSolutionById.invalidate({
+        id: variables.solutionId,
         projectId: variables.projectId,
-        solutionId: variables.solutionId,
       });
     },
   });

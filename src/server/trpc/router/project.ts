@@ -183,14 +183,14 @@ export const projectRouter = router({
   getCaseById: projectOwnerProcedure
     .input(
       z.object({
-        projectId: z.string(),
-        caseId: z.string()
+        id: z.string(),
+        projectId: z.string()
       })
     )
     .query(async ({ input, ctx }) =>
       ctx.prisma.playgroundTestCase.findUniqueOrThrow({
         where: {
-          id: input.caseId
+          id: input.id
         }
       })
     ),
@@ -224,8 +224,8 @@ export const projectRouter = router({
     )
     .mutation(async ({ input: { caseId, ...data }, ctx }) =>
       ctx.prisma.playgroundTestCase.update({
-        data,
-        where: { id: caseId }
+        where: { id: caseId },
+        data
       })
     ),
 
@@ -245,14 +245,14 @@ export const projectRouter = router({
   getSolutionById: projectOwnerProcedure
     .input(
       z.object({
-        projectId: z.string(),
-        solutionId: z.string()
+        id: z.string(),
+        projectId: z.string()
       })
     )
     .query(async ({ input, ctx }) =>
       ctx.prisma.playgroundSolution.findUniqueOrThrow({
         where: {
-          id: input.solutionId
+          id: input.id
         }
       })
     ),
@@ -282,12 +282,12 @@ export const projectRouter = router({
         order: z.onumber()
       })
     )
-    .mutation(async ({ input, ctx }) =>
+    .mutation(async ({ input: { solutionId, ...data }, ctx }) =>
       ctx.prisma.playgroundSolution.update({
         where: {
-          id: input.solutionId
+          id: solutionId
         },
-        data: input
+        data
       })
     ),
 
