@@ -193,8 +193,14 @@ export const ProjectPanel: React.FC = () => {
               onChange={(ev) => setRawInput(ev.target.value)}
               error={!!inputError}
               helperText={inputError || 'Must be a JSON array of numbers'}
+              fullWidth
             />
-            {updateCase.isLoading && <CircularProgress />}
+            <CircularProgress
+              sx={{
+                transition: 'opacity .2s',
+                opacity: updateCase.isLoading ? 1 : 0,
+              }}
+            />
           </Box>
         </StyledTabPanel>
       </TabContext>
