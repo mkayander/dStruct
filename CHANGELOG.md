@@ -1,3 +1,15 @@
+# [1.73.0](https://github.com/mkayander/leetpal/compare/v1.72.0...v1.73.0) (2023-01-24)
+
+
+### Bug Fixes
+
+* Use natural id naming ([ebd08d7](https://github.com/mkayander/leetpal/commit/ebd08d7032d69661a24b663ad89cf637e1c7631c))
+
+
+### Features
+
+* Implement automatic input & solution cloud saving ([f56d990](https://github.com/mkayander/leetpal/commit/f56d990283ed602c55249890559b7adaeb77c3e0))
+
 # [1.72.0](https://github.com/mkayander/leetpal/compare/v1.71.0...v1.72.0) (2023-01-24)
 
 
