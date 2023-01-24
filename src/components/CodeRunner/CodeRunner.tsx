@@ -1,15 +1,11 @@
 import type { EditorProps } from '@monaco-editor/react';
-import {
-  AutoFixHigh,
-  DeleteForever,
-  PlayArrow,
-  Save,
-} from '@mui/icons-material';
+import { AutoFixHigh, PlayArrow } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import {
   Box,
   CircularProgress,
   IconButton,
+  LinearProgress,
   Tooltip,
   useTheme,
 } from '@mui/material';
@@ -60,19 +56,45 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
   const currentProjectId = useAppSelector(selectCurrentProjectId) ?? '';
   const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? '';
 
+  const trpcUtils = trpc.useContext();
+
   const currentSolution = trpc.project.getSolutionById.useQuery(
     {
+      id: currentSolutionId,
       projectId: currentProjectId,
-      solutionId: currentSolutionId,
     },
     {
       enabled: Boolean(currentProjectId && currentSolutionId),
     }
   );
 
+  const updateSolution = trpc.project.updateSolution.useMutation();
+
   useEffect(() => {
     if (currentSolution.data?.code) setCodeInput(currentSolution.data.code);
   }, [currentSolution.data]);
+
+  useEffect(() => {
+    if (error || !currentProjectId || !currentSolutionId) return;
+
+    const timeoutId = setTimeout(() => {
+      updateSolution.mutate(
+        {
+          projectId: currentProjectId,
+          solutionId: currentSolutionId,
+          code: codeInput,
+        },
+        {
+          onSuccess: (data) => {
+            trpcUtils.project.getSolutionById.setData(data, (input) => input);
+          },
+        }
+      );
+    }, 750);
+
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [codeInput, error]);
 
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
@@ -80,16 +102,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
       plugins: [parserBabel],
     });
     setCodeInput(formattedCode);
-  };
-
-  const handleClearCode = () => {
-    setCodeInput('');
-    localStorage.removeItem('code');
-  };
-
-  const handleSaveCode = () => {
-    localStorage.setItem('code', codeInput);
-    console.log('Saved code to localStorage:\n', codeInput);
   };
 
   const handleRunCode = () => {
@@ -221,24 +233,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
             </IconButton>
           </Tooltip>
           <LoadingButton
-            variant="outlined"
-            color="warning"
-            size="small"
-            endIcon={<DeleteForever />}
-            onClick={handleClearCode}
-          >
-            Clear
-          </LoadingButton>
-          <LoadingButton
-            variant="outlined"
-            color="info"
-            size="small"
-            endIcon={<Save />}
-            onClick={handleSaveCode}
-          >
-            Save
-          </LoadingButton>
-          <LoadingButton
             loadingPosition="end"
             variant="outlined"
             color="success"
@@ -250,7 +244,16 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
           </LoadingButton>
         </Box>
       </Box>
-      <Box boxShadow={8} borderRadius={1} overflow="hidden">
+      <Box position="relative" boxShadow={8} borderRadius={1} overflow="hidden">
+        <LinearProgress
+          sx={{
+            position: 'absolute',
+            width: '100%',
+            zIndex: 10,
+            transition: 'opacity .2s',
+            opacity: updateSolution.isLoading ? 1 : 0,
+          }}
+        />
         <MonacoEditor
           height="400px"
           theme={theme.palette.mode === 'dark' ? 'vs-dark' : 'vs-light'}
@@ -261,13 +264,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({ ...restProps }) => {
           language="javascript"
           value={codeInput}
           onChange={(value) => setCodeInput(value || '')}
-          onValidate={(markers) => {
-            console.log('onValidate', markers);
-          }}
           onMount={(editor, monaco) => {
-            console.log('onMount', editor);
-            console.log('monaco', monaco);
-
             const model = editor.getModel();
 
             if (!model) {

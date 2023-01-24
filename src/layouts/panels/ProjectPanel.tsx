@@ -39,8 +39,6 @@ export const ProjectPanel: React.FC = () => {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
   // const { value: debouncedInput, isPending } = useDebounce(rawInput, 500);
-  const debouncedInput = rawInput;
-  const isPending = false;
 
   const { data: projects } = trpc.project.allBrief.useQuery();
 
@@ -55,9 +53,11 @@ export const ProjectPanel: React.FC = () => {
   );
 
   const selectedCase = trpc.project.getCaseById.useQuery(
-    { projectId: selectedProjectId, caseId: selectedCaseId ?? '' },
+    { id: selectedCaseId ?? '', projectId: selectedProjectId },
     { enabled: Boolean(selectedProjectId && selectedCaseId) }
   );
+
+  const updateCase = trpc.project.updateCase.useMutation();
 
   useEffect(() => {
     if (projects?.length && !selectedProjectId) {
@@ -76,13 +76,13 @@ export const ProjectPanel: React.FC = () => {
   }, [selectedCase.data]);
 
   useEffect(() => {
-    if (!debouncedInput) {
+    if (!rawInput) {
       setInputError(null);
       setParsedInput(undefined);
     }
 
     try {
-      const parsed = JSON.parse(debouncedInput);
+      const parsed = JSON.parse(rawInput);
       if (Array.isArray(parsed)) {
         setInputError(null);
         setParsedInput(parsed);
@@ -94,7 +94,31 @@ export const ProjectPanel: React.FC = () => {
       setInputError(e.message);
       setParsedInput(undefined);
     }
-  }, [debouncedInput, setParsedInput]);
+  }, [rawInput, setParsedInput]);
+
+  const trpcUtils = trpc.useContext();
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (inputError || !parsedInput || !selectedCaseId) return;
+
+      updateCase.mutate(
+        {
+          caseId: selectedCaseId,
+          projectId: selectedProjectId,
+          input: rawInput,
+        },
+        {
+          onSuccess: (data) => {
+            trpcUtils.project.getCaseById.setData(data, (input) => input);
+          },
+        }
+      );
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputError, rawInput]);
 
   useBinaryTree(parsedInput);
 
@@ -170,7 +194,7 @@ export const ProjectPanel: React.FC = () => {
               error={!!inputError}
               helperText={inputError || 'Must be a JSON array of numbers'}
             />
-            {isPending && <CircularProgress />}
+            {updateCase.isLoading && <CircularProgress />}
           </Box>
         </StyledTabPanel>
       </TabContext>
