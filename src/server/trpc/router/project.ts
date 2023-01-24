@@ -89,8 +89,19 @@ export const projectRouter = router({
           id: input
         },
         include: {
-          cases: true,
-          solutions: true
+          cases: {
+            select: {
+              id: true,
+              title: true
+            }
+          },
+          solutions: {
+            select: {
+              id: true,
+              title: true,
+              order: true
+            }
+          }
         }
       })
     ),
@@ -231,25 +242,33 @@ export const projectRouter = router({
       })
     ),
 
+  getSolutionById: projectOwnerProcedure
+    .input(
+      z.object({
+        projectId: z.string(),
+        solutionId: z.string()
+      })
+    )
+    .query(async ({ input, ctx }) =>
+      ctx.prisma.playgroundSolution.findUniqueOrThrow({
+        where: {
+          id: input.solutionId
+        }
+      })
+    ),
+
   addSolution: projectOwnerProcedure
     .input(
       z.object({
         projectId: z.string(),
         title: z.string(),
-        code: z.string(),
+        code: z.ostring(),
         order: z.onumber()
       })
     )
     .mutation(async ({ input, ctx }) =>
-      ctx.prisma.playgroundProject.update({
-        where: {
-          id: input.projectId
-        },
-        data: {
-          solutions: {
-            create: input
-          }
-        }
+      ctx.prisma.playgroundSolution.create({
+        data: { code: defaultJsTemplate, ...input }
       })
     ),
 
