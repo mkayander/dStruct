@@ -1,3 +1,15 @@
+# [1.74.0](https://github.com/mkayander/leetpal/compare/v1.73.0...v1.74.0) (2023-01-24)
+
+
+### Bug Fixes
+
+* Fix prisma client import ([341f9e7](https://github.com/mkayander/leetpal/commit/341f9e74970bb0719b49e3a7340be9dafd621f62))
+
+
+### Features
+
+* Increase project case input width ([4bc00ff](https://github.com/mkayander/leetpal/commit/4bc00ff9a7b2be99bed2832ea804207ebbaa1cc3))
+
 # [1.73.0](https://github.com/mkayander/leetpal/compare/v1.72.0...v1.73.0) (2023-01-24)
 
 
