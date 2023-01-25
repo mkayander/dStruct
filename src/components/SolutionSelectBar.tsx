@@ -127,24 +127,9 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
             disabled={isLoading}
             onClick={() => handleCaseClick(solution)}
             onDelete={() => {
-              handleCaseDelete(solution);
-            }} // TODO: Make a separate delete icon
-            variant={isCurrent ? 'filled' : 'outlined'}
-            size="small"
-            sx={{
-              '.MuiChip-deleteIcon': {
-                transition: '0.2s',
-                opacity: 0,
-                position: 'absolute',
-                top: '-4px',
-                right: '-10px',
-                zIndex: 10,
-              },
-              '&:hover': {
-                '.MuiChip-deleteIcon': {
-                  opacity: 1,
-                },
-              },
+              confirm(
+                `Are you sure you want to delete the solution "${solution.title}"?`
+              ) && handleCaseDelete(solution); //TODO: use a modal instead of prompt
             }}
           />
         );

@@ -109,24 +109,9 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
             disabled={isLoading}
             onClick={() => handleCaseClick(testCase)}
             onDelete={() => {
-              handleCaseDelete(testCase);
-            }} // TODO: Make a separate delete icon
-            variant={isCurrent ? 'filled' : 'outlined'}
-            size="small"
-            sx={{
-              '.MuiChip-deleteIcon': {
-                transition: '0.2s',
-                opacity: 0,
-                position: 'absolute',
-                top: '-4px',
-                right: '-10px',
-                zIndex: 10,
-              },
-              '&:hover': {
-                '.MuiChip-deleteIcon': {
-                  opacity: 1,
-                },
-              },
+              confirm(
+                `Are you sure you want to delete "${testCase.title}"? This action cannot be undone.`
+              ) && handleCaseDelete(testCase); // TODO: use a modal instead of prompt
             }}
           />
         );
