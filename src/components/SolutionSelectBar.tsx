@@ -1,9 +1,10 @@
 import { Add } from '@mui/icons-material';
-import { Box, Chip, CircularProgress, IconButton } from '@mui/material';
+import { Box, CircularProgress, IconButton } from '@mui/material';
 import type { PlaygroundSolution } from '@prisma/client';
 import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 
+import { SelectBarChip } from '#/components/SelectBarChip';
 import { trpc } from '#/utils';
 import type { RouterOutputs } from '#/utils/trpc';
 
@@ -119,8 +120,9 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         const isCurrent = solution.id === selectedSolutionId;
 
         return (
-          <Chip
+          <SelectBarChip
             key={solution.id}
+            isCurrent={isCurrent}
             label={solution.title}
             disabled={isLoading}
             onClick={() => handleCaseClick(solution)}

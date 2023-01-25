@@ -1,9 +1,10 @@
 import { Add } from '@mui/icons-material';
-import { Box, Chip, CircularProgress, IconButton } from '@mui/material';
+import { Box, CircularProgress, IconButton } from '@mui/material';
 import type { PlaygroundTestCase } from '@prisma/client';
 import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 
+import { SelectBarChip } from '#/components/SelectBarChip';
 import { trpc } from '#/utils';
 import type { RouterOutputs } from '#/utils/trpc';
 
@@ -101,8 +102,9 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         const isCurrent = testCase.id === selectedCaseId;
 
         return (
-          <Chip
+          <SelectBarChip
             key={testCase.id}
+            isCurrent={isCurrent}
             label={testCase.title}
             disabled={isLoading}
             onClick={() => handleCaseClick(testCase)}
