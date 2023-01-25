@@ -9,7 +9,7 @@ import {
 import type { RootState } from '#/store/makeStore';
 
 export type CallFrame = {
-  // id: string;
+  id: string;
   nodeId: string;
   // order: number;
   name: string;
@@ -18,7 +18,7 @@ export type CallFrame = {
 };
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
-  selectId: (frame) => frame.timestamp,
+  selectId: (frame) => frame.id,
   sortComparer: (a, b) => a.timestamp - b.timestamp,
 });
 
