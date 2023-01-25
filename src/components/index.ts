@@ -14,3 +14,4 @@ export { BinaryNode } from './BinaryNode';
 export { TreeViewer } from './TreeViewer';
 export { TestCaseSelectBar } from './TestCaseSelectBar';
 export { SolutionSelectBar } from './SolutionSelectBar';
+export { SelectBarChip } from './SelectBarChip';
