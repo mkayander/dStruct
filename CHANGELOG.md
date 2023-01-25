@@ -1,3 +1,15 @@
+# [1.76.0](https://github.com/mkayander/leetpal/compare/v1.75.0...v1.76.0) (2023-01-25)
+
+
+### Bug Fixes
+
+* Generate a unique frame id instead of relying on timestamp ([c47bf5f](https://github.com/mkayander/leetpal/commit/c47bf5fc46577d825d3c249b83745247749ce12b))
+
+
+### Features
+
+* Updated solution delete message ([21f8661](https://github.com/mkayander/leetpal/commit/21f8661e474faa6f15d30ae45399c5bfc1cee010))
+
 # [1.75.0](https://github.com/mkayander/leetpal/compare/v1.74.0...v1.75.0) (2023-01-25)
 
 
