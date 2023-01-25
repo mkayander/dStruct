@@ -1,3 +1,12 @@
+# [1.75.0](https://github.com/mkayander/leetpal/compare/v1.74.0...v1.75.0) (2023-01-25)
+
+
+### Features
+
+* Added a reusable select bar chip with custom controls ([65956fa](https://github.com/mkayander/leetpal/commit/65956faf1a032b64f43cbfbeb11fc40dae9d129a))
+* Added custom chip usage ([59820f6](https://github.com/mkayander/leetpal/commit/59820f6ac195a1400b5e2d50b792d9a592c97027))
+* Update chips, add a browser confirm on delete ([c487b16](https://github.com/mkayander/leetpal/commit/c487b16f5f60b2615da06f9926c9718675ccb2f2))
+
 # [1.74.0](https://github.com/mkayander/leetpal/compare/v1.73.0...v1.74.0) (2023-01-24)
 
 
