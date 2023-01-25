@@ -128,7 +128,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
             onClick={() => handleCaseClick(solution)}
             onDelete={() => {
               confirm(
-                `Are you sure you want to delete the solution "${solution.title}"?`
+                `Are you sure you want to delete the "${solution.title}" solution?  This action cannot be undone.`
               ) && handleCaseDelete(solution); //TODO: use a modal instead of prompt
             }}
           />
