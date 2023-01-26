@@ -1,5 +1,12 @@
-import { Box } from '@mui/material';
+import {
+  Box,
+  Container,
+  Stack,
+  type Theme,
+  useMediaQuery,
+} from '@mui/material';
 import Head from 'next/head';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { useMemo } from 'react';
 
 import { MainAppBar } from '#/components';
@@ -13,7 +20,38 @@ import {
   ProjectPanel,
   TreeViewPanel,
 } from '#/layouts/panels';
+import type { SplitPanelsLayoutProps } from '#/layouts/SplitPanelsLayout/SplitPanelsLayout';
 import type { NextPageWithLayout } from '#/types/page';
+
+type WrapperProps = SplitPanelsLayoutProps;
+
+const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+  const isVertical = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down('sm')
+  );
+  console.log('isVertical', isVertical);
+
+  if (isVertical)
+    return (
+      <OverlayScrollbarsComponent
+        defer
+        style={{ height: '100vh' }}
+        options={{
+          scrollbars: {
+            autoHide: 'scroll',
+          },
+        }}
+      >
+        <Container sx={{ pb: 4 }}>
+          <Stack spacing={1} mt={1} pb={4}>
+            {children}
+          </Stack>
+        </Container>
+      </OverlayScrollbarsComponent>
+    );
+
+  return <SplitPanelsLayout>{children}</SplitPanelsLayout>;
+};
 
 const PlaygroundPage: NextPageWithLayout = () => {
   const tree = useRuntimeBinaryTree();
@@ -30,12 +68,12 @@ const PlaygroundPage: NextPageWithLayout = () => {
       <Head>
         <title>dStruct Playground</title>
       </Head>
-      <SplitPanelsLayout>
+      <Wrapper>
         <ProjectPanel />
         <TreeViewPanel />
         <CodePanel />
         <OutputPanel />
-      </SplitPanelsLayout>
+      </Wrapper>
     </PlaygroundRuntimeContext.Provider>
   );
 };
