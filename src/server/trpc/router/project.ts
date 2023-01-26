@@ -180,7 +180,7 @@ export const projectRouter = router({
     })
   ),
 
-  getCaseById: projectOwnerProcedure
+  getCaseById: publicProcedure
     .input(
       z.object({
         id: z.string(),
@@ -242,7 +242,7 @@ export const projectRouter = router({
       })
     ),
 
-  getSolutionById: projectOwnerProcedure
+  getSolutionById: publicProcedure
     .input(
       z.object({
         id: z.string(),
