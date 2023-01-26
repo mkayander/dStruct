@@ -3,8 +3,11 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const TabListWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'space-between',
   boxShadow: theme.shadows[3],
-  button: {
+  '.MuiTab-root': {
     color: 'white',
     textTransform: 'none',
     '&.Mui-selected': {
