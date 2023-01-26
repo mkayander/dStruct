@@ -1,3 +1,23 @@
+# [1.77.0](https://github.com/mkayander/leetpal/compare/v1.76.0...v1.77.0) (2023-01-26)
+
+
+### Bug Fixes
+
+* Export panels props type ([5a4e482](https://github.com/mkayander/leetpal/commit/5a4e4827fa4fc52d5434f55fbd533a9a14eb75ac))
+* Fixed next type imports ([37242db](https://github.com/mkayander/leetpal/commit/37242db6a0397d6cb6d104f9a1a1f6e11b31a900))
+* Remove redundant console log ([97d0b6e](https://github.com/mkayander/leetpal/commit/97d0b6e892b660e80878367cbb48e4682ced2046))
+
+
+### Features
+
+* Add app bar skeleton loading state ([55ab52d](https://github.com/mkayander/leetpal/commit/55ab52d4d42e3f661e747bc8cbda8f4e621ff363))
+* Added isEditable state flag ([1fabffe](https://github.com/mkayander/leetpal/commit/1fabffefd934025e0172371f69d12120b764aa7f))
+* Hide edit controls if project is not editable ([6fc0112](https://github.com/mkayander/leetpal/commit/6fc0112190bd4d7dd4fe936403ad3a6c3ba8b8d8))
+* Make a dynamic wrapper component to support vertical playground layout ([91145e6](https://github.com/mkayander/leetpal/commit/91145e664fd75cc61583870a051f48d81dfafc03))
+* Make geById procedures public ([688a268](https://github.com/mkayander/leetpal/commit/688a268c03bc0494a8f49948edb66783ca85b1c8))
+* Rework code editor panel ([434b020](https://github.com/mkayander/leetpal/commit/434b0208712a021f9880742bfc2464203963783f))
+* Use project resize handle styling instead of SCSS ([d52d706](https://github.com/mkayander/leetpal/commit/d52d70638210f56308a46f10118dd3b5d69d2372))
+
 # [1.76.0](https://github.com/mkayander/leetpal/compare/v1.75.0...v1.76.0) (2023-01-25)
 
 
