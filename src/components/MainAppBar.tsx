@@ -10,6 +10,8 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Skeleton,
+  Stack,
   Toolbar,
   type ToolbarProps,
   Tooltip,
@@ -97,7 +99,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   };
 
   return (
-    <AppBar position="sticky" elevation={10} variant={appBarVariant}>
+    <AppBar position="sticky" elevation={2} variant={appBarVariant}>
       <Container maxWidth="xl">
         <Toolbar disableGutters variant={toolbarVariant}>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
@@ -196,14 +198,21 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Stack direction="row" sx={{ flexGrow: 0 }}>
             <ThemeSwitch
               onChange={(_, checked) => {
                 setDarkMode(checked);
               }}
             />
 
-            {session.data ? (
+            {session.status === 'loading' ? (
+              <Skeleton
+                variant="circular"
+                animation="wave"
+                height={40}
+                width={40}
+              />
+            ) : session.data ? (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar>
@@ -246,7 +255,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>
