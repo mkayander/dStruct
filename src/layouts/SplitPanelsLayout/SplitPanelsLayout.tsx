@@ -6,7 +6,7 @@ import { ResizeHandle } from '#/components';
 
 type Panel = React.ReactNode | null | undefined;
 
-type SplitPanelsLayoutProps = {
+export type SplitPanelsLayoutProps = {
   children?: [Panel, Panel, Panel, Panel];
 };
 
