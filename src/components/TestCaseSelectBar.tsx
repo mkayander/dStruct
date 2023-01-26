@@ -1,5 +1,5 @@
 import { Add } from '@mui/icons-material';
-import { Box, CircularProgress, IconButton } from '@mui/material';
+import { CircularProgress, IconButton, Stack } from '@mui/material';
 import type { PlaygroundTestCase } from '@prisma/client';
 import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
   projectSlice,
   selectCurrentCaseId,
+  selectIsEditable,
 } from '#/store/reducers/projectReducer';
 
 type TestCaseBrief = Pick<PlaygroundTestCase, 'id' | 'title'>;
@@ -60,6 +61,8 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const isLoading =
     selectedProject.isLoading || addCase.isLoading || deleteCase.isLoading;
 
+  const isEditable = useAppSelector(selectIsEditable);
+
   useEffect(() => {
     if (selectedCaseId || !selectedProject.data) return;
 
@@ -91,13 +94,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      alignItems="center"
-      gap={1}
-    >
+    <Stack direction="row" flexWrap="wrap" gap={1}>
       {cases?.map((testCase) => {
         const isCurrent = testCase.id === selectedCaseId;
 
@@ -105,6 +102,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
           <SelectBarChip
             key={testCase.id}
             isCurrent={isCurrent}
+            isEditable={isEditable}
             label={testCase.title}
             disabled={isLoading}
             onClick={() => handleCaseClick(testCase)}
@@ -117,18 +115,20 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         );
       })}
 
-      <IconButton
-        title="Add new test case 🧪"
-        size="small"
-        onClick={handleAddCase}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <CircularProgress size="1.3rem" />
-        ) : (
-          <Add fontSize="small" />
-        )}
-      </IconButton>
-    </Box>
+      {isEditable && (
+        <IconButton
+          title="Add new test case 🧪"
+          size="small"
+          onClick={handleAddCase}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <CircularProgress size="1.3rem" />
+          ) : (
+            <Add fontSize="small" />
+          )}
+        </IconButton>
+      )}
+    </Stack>
   );
 };

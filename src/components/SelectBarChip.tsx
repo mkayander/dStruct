@@ -4,10 +4,12 @@ import React from 'react';
 
 type SelectBarChipProps = ChipProps & {
   isCurrent: boolean;
+  isEditable: boolean;
 };
 
 export const SelectBarChip: React.FC<SelectBarChipProps> = ({
   isCurrent,
+  isEditable,
   onDelete,
   ...restProps
 }) => {
@@ -40,33 +42,35 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
           },
         }}
       />
-      <IconButton
-        size="small"
-        title="Delete solution"
-        className="DeleteIcon"
-        sx={{
-          transition: 'opacity 0.3s',
-          position: 'absolute',
-          top: '-10px',
-          right: '-10px',
-          opacity: 0,
-          pointerEvents: 'none',
-          '&:hover': {
-            '& svg': {
-              opacity: 1,
-            },
-          },
-        }}
-        onClick={onDelete}
-      >
-        <Cancel
+      {isEditable && (
+        <IconButton
+          size="small"
+          title="Delete solution"
+          className="DeleteIcon"
           sx={{
             transition: 'opacity 0.3s',
-            opacity: 0.3,
-            fontSize: '1rem',
+            position: 'absolute',
+            top: '-10px',
+            right: '-10px',
+            opacity: 0,
+            pointerEvents: 'none',
+            '&:hover': {
+              '& svg': {
+                opacity: 1,
+              },
+            },
           }}
-        />
-      </IconButton>
+          onClick={onDelete}
+        >
+          <Cancel
+            sx={{
+              transition: 'opacity 0.3s',
+              opacity: 0.3,
+              fontSize: '1rem',
+            }}
+          />
+        </IconButton>
+      )}
     </Box>
   );
 };

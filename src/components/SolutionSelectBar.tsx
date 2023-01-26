@@ -1,5 +1,10 @@
 import { Add } from '@mui/icons-material';
-import { Box, CircularProgress, IconButton } from '@mui/material';
+import {
+  CircularProgress,
+  IconButton,
+  Stack,
+  type StackProps,
+} from '@mui/material';
 import type { PlaygroundSolution } from '@prisma/client';
 import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
@@ -12,16 +17,18 @@ import { useAppDispatch, useAppSelector } from '#/store/hooks';
 import {
   projectSlice,
   selectCurrentSolutionId,
+  selectIsEditable,
 } from '#/store/reducers/projectReducer';
 
 type SolutionBrief = Pick<PlaygroundSolution, 'id' | 'title' | 'order'>;
 
-type SolutionSelectBarProps = {
+type SolutionSelectBarProps = StackProps & {
   selectedProject: UseQueryResult<RouterOutputs['project']['getById']>;
 };
 
 export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   selectedProject,
+  ...restProps
 }) => {
   const selectedSolutionId = useAppSelector(selectCurrentSolutionId);
   const selectedProjectId = selectedProject.data?.id;
@@ -66,6 +73,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     addSolution.isLoading ||
     deleteSolution.isLoading;
 
+  const isEditable = useAppSelector(selectIsEditable);
+
   useEffect(() => {
     if (selectedSolutionId || !selectedProject.data) return;
 
@@ -109,13 +118,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      alignItems="center"
-      gap={1}
-    >
+    <Stack flexWrap="wrap" direction="row" gap={1} {...restProps}>
       {solutions?.map((solution) => {
         const isCurrent = solution.id === selectedSolutionId;
 
@@ -123,6 +126,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
           <SelectBarChip
             key={solution.id}
             isCurrent={isCurrent}
+            isEditable={isEditable}
             label={solution.title}
             disabled={isLoading}
             onClick={() => handleCaseClick(solution)}
@@ -135,18 +139,20 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         );
       })}
 
-      <IconButton
-        title="Add new solution 🚀"
-        size="small"
-        onClick={handleAddCase}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <CircularProgress size="1.3rem" />
-        ) : (
-          <Add fontSize="small" />
-        )}
-      </IconButton>
-    </Box>
+      {isEditable && (
+        <IconButton
+          title="Add new solution 🚀"
+          size="small"
+          onClick={handleAddCase}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <CircularProgress size="1.3rem" />
+          ) : (
+            <Add fontSize="small" />
+          )}
+        </IconButton>
+      )}
+    </Stack>
   );
 };

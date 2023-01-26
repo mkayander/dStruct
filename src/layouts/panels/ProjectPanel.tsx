@@ -12,6 +12,7 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 
 import { TestCaseSelectBar } from '#/components';
@@ -27,9 +28,11 @@ import {
   projectSlice,
   selectCurrentCaseId,
   selectCurrentProjectId,
+  selectIsEditable,
 } from '#/store/reducers/projectReducer';
 
 export const ProjectPanel: React.FC = () => {
+  const session = useSession();
   const dispatch = useAppDispatch();
 
   const [tabValue, setTabValue] = useState('1');
@@ -44,6 +47,7 @@ export const ProjectPanel: React.FC = () => {
 
   const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? '';
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
+  const isEditable = useAppSelector(selectIsEditable);
 
   const selectedProject = trpc.project.getById.useQuery(
     selectedProjectId || '',
@@ -58,6 +62,20 @@ export const ProjectPanel: React.FC = () => {
   );
 
   const updateCase = trpc.project.updateCase.useMutation();
+
+  useEffect(() => {
+    if (!selectedProject.data || !session.data) {
+      isEditable &&
+        dispatch(projectSlice.actions.update({ isEditable: false }));
+      return;
+    }
+
+    dispatch(
+      projectSlice.actions.update({
+        isEditable: selectedProject.data.userId === session.data.user.id,
+      })
+    );
+  }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
     if (projects?.length && !selectedProjectId) {
@@ -168,11 +186,13 @@ export const ProjectPanel: React.FC = () => {
                 ))}
               </Select>
             </FormControl>
-            <Tooltip title="Create new project ➕" arrow>
-              <IconButton onClick={() => setIsProjectModalOpen(true)}>
-                <Add />
-              </IconButton>
-            </Tooltip>
+            {isEditable && (
+              <Tooltip title="Create new project ➕" arrow>
+                <IconButton onClick={() => setIsProjectModalOpen(true)}>
+                  <Add />
+                </IconButton>
+              </Tooltip>
+            )}
           </Box>
 
           <TestCaseSelectBar selectedProject={selectedProject} />
