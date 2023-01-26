@@ -1,5 +1,5 @@
-import { User as PrismaUser } from '@prisma/client';
-import NextAuth, { DefaultSession } from 'next-auth';
+import type { User as PrismaUser } from '@prisma/client';
+import type { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
   // export interface User extends PrismaUser {}
