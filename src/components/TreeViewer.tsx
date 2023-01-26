@@ -50,8 +50,6 @@ export const TreeViewer: React.FC = () => {
     return () => clearInterval(interval);
   }, [callstack, callstackIsReady, dispatch]);
 
-  console.log('tree:\n', tree);
-
   return (
     <Box
       display="flex"
