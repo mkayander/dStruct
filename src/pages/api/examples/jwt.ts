@@ -1,6 +1,6 @@
 // This is an example of how to read a JSON Web Token from an API route
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getToken } from 'next-auth/jwt';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { getToken } from "next-auth/jwt";
 
 export default async function handler(
   req: NextApiRequest,

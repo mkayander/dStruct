@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import uuid4 from 'short-uuid';
+import { useEffect } from "react";
+import uuid4 from "short-uuid";
 
-import { isNumber } from '#/utils';
+import { isNumber } from "#/utils";
 
-import { useAppDispatch } from '#/store/hooks';
-import { callstackSlice } from '#/store/reducers/callstackReducer';
+import { useAppDispatch } from "#/store/hooks";
+import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
   type BinaryTreeNodeDataPayload,
   treeNodeSlice,
-} from '#/store/reducers/treeNodeReducer';
+} from "#/store/reducers/treeNodeReducer";
 
 // [3,9,20,null,null,15,7]
 

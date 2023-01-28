@@ -1,24 +1,24 @@
-import { Add } from '@mui/icons-material';
-import { CircularProgress, IconButton, Stack } from '@mui/material';
-import type { PlaygroundTestCase } from '@prisma/client';
-import type { UseQueryResult } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import { Add } from "@mui/icons-material";
+import { CircularProgress, IconButton, Stack } from "@mui/material";
+import type { PlaygroundTestCase } from "@prisma/client";
+import type { UseQueryResult } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 
-import { SelectBarChip } from '#/components/SelectBarChip';
-import { trpc } from '#/utils';
-import type { RouterOutputs } from '#/utils/trpc';
+import { SelectBarChip } from "#/components/SelectBarChip";
+import { trpc } from "#/utils";
+import type { RouterOutputs } from "#/utils/trpc";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,
   selectCurrentCaseId,
   selectIsEditable,
-} from '#/store/reducers/projectReducer';
+} from "#/store/reducers/projectReducer";
 
-type TestCaseBrief = Pick<PlaygroundTestCase, 'id' | 'title'>;
+type TestCaseBrief = Pick<PlaygroundTestCase, "id" | "title">;
 
 type TestCaseSelectBarProps = {
-  selectedProject: UseQueryResult<RouterOutputs['project']['getById']>;
+  selectedProject: UseQueryResult<RouterOutputs["project"]["getById"]>;
 };
 
 export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
@@ -89,7 +89,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     addCase.mutate({
       projectId: selectedProjectId,
       title: `Case ${(cases?.length ?? 0) + 1}`,
-      input: '[]',
+      input: "[]",
     });
   };
 

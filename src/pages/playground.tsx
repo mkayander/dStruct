@@ -4,41 +4,41 @@ import {
   Stack,
   type Theme,
   useMediaQuery,
-} from '@mui/material';
-import Head from 'next/head';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { useMemo } from 'react';
+} from "@mui/material";
+import Head from "next/head";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import React, { useMemo } from "react";
 
-import { MainAppBar } from '#/components';
-import { PlaygroundRuntimeContext } from '#/context';
-import { useRuntimeBinaryTree } from '#/hooks';
-import { SplitPanelsLayout } from '#/layouts';
-import type { MainLayoutProps } from '#/layouts/MainLayout';
+import { MainAppBar } from "#/components";
+import { PlaygroundRuntimeContext } from "#/context";
+import { useRuntimeBinaryTree } from "#/hooks";
+import { SplitPanelsLayout } from "#/layouts";
+import type { MainLayoutProps } from "#/layouts/MainLayout";
 import {
   CodePanel,
   OutputPanel,
   ProjectPanel,
   TreeViewPanel,
-} from '#/layouts/panels';
-import type { SplitPanelsLayoutProps } from '#/layouts/SplitPanelsLayout/SplitPanelsLayout';
-import type { NextPageWithLayout } from '#/types/page';
+} from "#/layouts/panels";
+import type { SplitPanelsLayoutProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
+import type { NextPageWithLayout } from "#/types/page";
 
 type WrapperProps = SplitPanelsLayoutProps;
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   const isVertical = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down('sm')
+    theme.breakpoints.down("sm")
   );
-  console.log('isVertical', isVertical);
+  console.log("isVertical", isVertical);
 
   if (isVertical)
     return (
       <OverlayScrollbarsComponent
         defer
-        style={{ height: '100vh' }}
+        style={{ height: "100vh" }}
         options={{
           scrollbars: {
-            autoHide: 'scroll',
+            autoHide: "scroll",
           },
         }}
       >
@@ -79,7 +79,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
 };
 
 const Layout: React.FC<MainLayoutProps> = ({ children, setDarkMode }) => (
-  <Box sx={{ minHeight: '100vh', overflow: 'hidden' }}>
+  <Box sx={{ minHeight: "100vh", overflow: "hidden" }}>
     <MainAppBar
       setDarkMode={setDarkMode}
       // appBarVariant="outlined"

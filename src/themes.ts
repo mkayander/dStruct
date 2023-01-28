@@ -1,8 +1,8 @@
-import type { PaletteColor, PaletteMode } from '@mui/material';
-import { red } from '@mui/material/colors';
-import { createTheme } from '@mui/material/styles';
+import type { PaletteColor, PaletteMode } from "@mui/material";
+import { red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
-import type { Difficulty } from '#/graphql/generated';
+import type { Difficulty } from "#/graphql/generated";
 
 const createCustomTheme = (mode: PaletteMode) => {
   // Create a theme instance.
@@ -10,10 +10,10 @@ const createCustomTheme = (mode: PaletteMode) => {
     palette: {
       mode,
       primary: {
-        main: '#556cd6',
+        main: "#556cd6",
       },
       secondary: {
-        main: '#19857b',
+        main: "#19857b",
       },
       error: {
         main: red.A400,
@@ -22,40 +22,40 @@ const createCustomTheme = (mode: PaletteMode) => {
   });
 
   const tagColors: Record<string, [string, string]> = {
-    'two-pointers': ['#009ab2', '#095abd'],
-    'union-find': ['#2a40a6', '#00d9ff'],
-    string: ['#a35382', '#70ceac'],
-    queue: ['#509e26', '#b2eb50'],
-    design: ['#395af9', '#aacafd'],
-    array: ['#095abd', '#009ab2'],
-    'dynamic-programming': ['#15b792', '#45e88c'],
-    graph: ['#abaeff', '#93b9bc'],
-    'linked-list': ['#feaa7b', '#abaeff'],
-    heap: ['#ec75b1', '#f7cae0'],
+    "two-pointers": ["#009ab2", "#095abd"],
+    "union-find": ["#2a40a6", "#00d9ff"],
+    string: ["#a35382", "#70ceac"],
+    queue: ["#509e26", "#b2eb50"],
+    design: ["#395af9", "#aacafd"],
+    array: ["#095abd", "#009ab2"],
+    "dynamic-programming": ["#15b792", "#45e88c"],
+    graph: ["#abaeff", "#93b9bc"],
+    "linked-list": ["#feaa7b", "#abaeff"],
+    heap: ["#ec75b1", "#f7cae0"],
   };
 
   theme.palette.question = {
     All: theme.palette.augmentColor({
-      name: 'All',
+      name: "All",
       color: {
         main: theme.palette.primary.light,
       },
     }),
     Easy: theme.palette.augmentColor({
-      name: 'Easy',
+      name: "Easy",
       color: {
-        main: '#4bffea',
+        main: "#4bffea",
       },
     }),
     Medium: theme.palette.augmentColor({
-      name: 'Medium',
+      name: "Medium",
       color: {
         // main: '#ffc52f',
         main: theme.palette.warning.main,
       },
     }),
     Hard: theme.palette.augmentColor({
-      name: 'Hard',
+      name: "Hard",
       color: {
         // main: '#ff4066',
         main: theme.palette.error.main,
@@ -77,7 +77,7 @@ const createCustomTheme = (mode: PaletteMode) => {
   return theme;
 };
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Palette {
     question: Record<Difficulty, PaletteColor> & {
       getTagColors(slug?: string): [string, string];
@@ -85,9 +85,9 @@ declare module '@mui/material/styles' {
   }
 }
 
-const dark = createCustomTheme('dark');
+const dark = createCustomTheme("dark");
 
-const light = createCustomTheme('light');
+const light = createCustomTheme("light");
 
 export const themes = {
   dark,

@@ -1,1 +1,1 @@
-export { useDailyQuestionData } from './useDailyQuestionData';
+export { useDailyQuestionData } from "./useDailyQuestionData";

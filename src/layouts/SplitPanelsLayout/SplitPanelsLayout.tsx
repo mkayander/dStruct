@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import React from 'react';
-import { Panel, PanelGroup } from 'react-resizable-panels';
+import { Box } from "@mui/material";
+import React from "react";
+import { Panel, PanelGroup } from "react-resizable-panels";
 
-import { ResizeHandle } from '#/components';
+import { ResizeHandle } from "#/components";
 
 type Panel = React.ReactNode | null | undefined;
 
@@ -21,10 +21,10 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
   return (
     <Box
       sx={{
-        height: 'calc(100vh - 69px)',
-        width: '100vw',
+        height: "calc(100vh - 69px)",
+        width: "100vw",
         p: 1,
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       <PanelGroup

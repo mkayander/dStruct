@@ -4,11 +4,11 @@ import {
   configureStore,
   type Middleware,
   type ThunkAction,
-} from '@reduxjs/toolkit';
-import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import logger from 'redux-logger';
+} from "@reduxjs/toolkit";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
+import logger from "redux-logger";
 
-import { rootReducer } from '#/store/rootReducer';
+import { rootReducer } from "#/store/rootReducer";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -28,7 +28,7 @@ const reducer = (
 };
 
 const additionalMiddleware: Middleware[] = [];
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   additionalMiddleware.push(logger);
 }
 
@@ -52,7 +52,7 @@ export const makeStore = () =>
 
 type Store = ReturnType<typeof makeStore>;
 
-export type AppDispatch = Store['dispatch'];
+export type AppDispatch = Store["dispatch"];
 // export type RootState = ReturnType<Store['getState']>;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -62,5 +62,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 export const wrapper = createWrapper(makeStore, {
-  debug: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== "production",
 });

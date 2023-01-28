@@ -4,9 +4,9 @@ import {
   createSlice,
   type EntityState,
   type PayloadAction,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 
-import type { RootState } from '#/store/makeStore';
+import type { RootState } from "#/store/makeStore";
 
 export type CallFrame = {
   id: string;
@@ -51,7 +51,7 @@ const initialState: CallstackState = {
  * @see https://redux-toolkit.js.org/api/createslice
  */
 export const callstackSlice = createSlice({
-  name: 'CALLSTACK',
+  name: "CALLSTACK",
   initialState,
   reducers: {
     addOne: (state, action: PayloadAction<CallFrame>) => {
@@ -76,7 +76,7 @@ export const callstackSlice = createSlice({
     setStatus: (
       state,
       action: PayloadAction<
-        Pick<CallstackState, 'isReady' | 'result' | 'runtime' | 'error'>
+        Pick<CallstackState, "isReady" | "result" | "runtime" | "error">
       >
     ) => {
       const { payload } = action;

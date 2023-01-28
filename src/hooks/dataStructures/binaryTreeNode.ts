@@ -1,9 +1,9 @@
-import type { Dictionary } from '@reduxjs/toolkit';
-import shortUUID from 'short-uuid';
+import type { Dictionary } from "@reduxjs/toolkit";
+import shortUUID from "short-uuid";
 
-import type { AppDispatch } from '#/store/makeStore';
-import { callstackSlice } from '#/store/reducers/callstackReducer';
-import type { BinaryTreeNodeData } from '#/store/reducers/treeNodeReducer';
+import type { AppDispatch } from "#/store/makeStore";
+import { callstackSlice } from "#/store/reducers/callstackReducer";
+import type { BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
 
 const uuid = shortUUID();
 
@@ -46,7 +46,7 @@ export class BinaryTreeNode {
       callstackSlice.actions.addOne({
         id: uuid.generate(),
         nodeId: this.meta.id,
-        name: 'setColor',
+        name: "setColor",
         args: [color],
         timestamp: performance.now(),
       })

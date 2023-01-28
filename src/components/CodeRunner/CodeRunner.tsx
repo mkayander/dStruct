@@ -1,10 +1,10 @@
-import type { EditorProps } from '@monaco-editor/react';
-import { Box, LinearProgress, Skeleton, useTheme } from '@mui/material';
-import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import dynamic from 'next/dynamic';
-import React from 'react';
+import type { EditorProps } from "@monaco-editor/react";
+import { Box, LinearProgress, Skeleton, useTheme } from "@mui/material";
+import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import dynamic from "next/dynamic";
+import React from "react";
 
-const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {
+const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
   loading: () => <Skeleton variant="rectangular" height="400px" />,
 });
@@ -29,16 +29,16 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
     <Box position="relative" boxShadow={8} borderRadius={1} overflow="hidden">
       <LinearProgress
         sx={{
-          position: 'absolute',
-          width: '100%',
+          position: "absolute",
+          width: "100%",
           zIndex: 10,
-          transition: 'opacity .2s',
+          transition: "opacity .2s",
           opacity: isUpdating ? 1 : 0,
         }}
       />
       <MonacoEditor
         height="400px"
-        theme={theme.palette.mode === 'dark' ? 'vs-dark' : 'vs-light'}
+        theme={theme.palette.mode === "dark" ? "vs-dark" : "vs-light"}
         options={{
           minimap: { enabled: false },
         }}
@@ -56,7 +56,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           const model = editor.getModel();
 
           if (!model) {
-            console.error('No model found');
+            console.error("No model found");
             return;
           }
 

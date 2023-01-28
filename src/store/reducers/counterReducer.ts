@@ -1,7 +1,7 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 // import { FeatureKey } from "../featureKey"
-import type { RootState } from '#/store/makeStore';
+import type { RootState } from "#/store/makeStore";
 
 /**
  * Payload
@@ -26,7 +26,7 @@ const initialState: CounterState = {
  * @see https://redux-toolkit.js.org/api/createslice
  */
 const slice = createSlice({
-  name: 'COUNTER',
+  name: "COUNTER",
   initialState,
   reducers: {
     increment: (state: CounterState): CounterState => {

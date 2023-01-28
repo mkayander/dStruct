@@ -1,29 +1,29 @@
-import { Add } from '@mui/icons-material';
+import { Add } from "@mui/icons-material";
 import {
   CircularProgress,
   IconButton,
   Stack,
   type StackProps,
-} from '@mui/material';
-import type { PlaygroundSolution } from '@prisma/client';
-import type { UseQueryResult } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+} from "@mui/material";
+import type { PlaygroundSolution } from "@prisma/client";
+import type { UseQueryResult } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 
-import { SelectBarChip } from '#/components/SelectBarChip';
-import { trpc } from '#/utils';
-import type { RouterOutputs } from '#/utils/trpc';
+import { SelectBarChip } from "#/components/SelectBarChip";
+import { trpc } from "#/utils";
+import type { RouterOutputs } from "#/utils/trpc";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,
   selectCurrentSolutionId,
   selectIsEditable,
-} from '#/store/reducers/projectReducer';
+} from "#/store/reducers/projectReducer";
 
-type SolutionBrief = Pick<PlaygroundSolution, 'id' | 'title' | 'order'>;
+type SolutionBrief = Pick<PlaygroundSolution, "id" | "title" | "order">;
 
 type SolutionSelectBarProps = StackProps & {
-  selectedProject: UseQueryResult<RouterOutputs['project']['getById']>;
+  selectedProject: UseQueryResult<RouterOutputs["project"]["getById"]>;
 };
 
 export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({

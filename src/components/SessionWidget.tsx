@@ -1,10 +1,10 @@
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import React from 'react';
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { signIn, signOut, useSession } from "next-auth/react";
+import React from "react";
 
 export const SessionWidget: React.FC = () => {
   const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  const loading = status === "loading";
 
   if (loading) {
     return (
@@ -19,7 +19,7 @@ export const SessionWidget: React.FC = () => {
   ) => {
     e.preventDefault();
     await signIn();
-    console.log('Sign in function finished');
+    console.log("Sign in function finished");
   };
 
   const handleSignOut: React.MouseEventHandler<HTMLButtonElement> = async (
@@ -32,12 +32,12 @@ export const SessionWidget: React.FC = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        minHeight: '90px',
-        flexFlow: 'column nowrap',
-        alignItems: 'center',
-        marginTop: '24px',
-        justifyContent: 'space-between',
+        display: "flex",
+        minHeight: "90px",
+        flexFlow: "column nowrap",
+        alignItems: "center",
+        marginTop: "24px",
+        justifyContent: "space-between",
       }}
     >
       {!session?.user ? (

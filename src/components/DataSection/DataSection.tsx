@@ -7,11 +7,11 @@ import {
   type SvgIcon,
   Typography,
   useTheme,
-} from '@mui/material';
-import cn from 'classnames';
-import React from 'react';
+} from "@mui/material";
+import cn from "classnames";
+import React from "react";
 
-import styles from './DataSection.module.scss';
+import styles from "./DataSection.module.scss";
 
 interface DataSectionProps extends React.PropsWithChildren {
   className?: string;
@@ -45,8 +45,8 @@ export const DataSection: React.FC<DataSectionProps> = ({
       <Box
         marginBottom={1}
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
+          display: "flex",
+          justifyContent: "space-between",
         }}
       >
         <Box>
@@ -56,13 +56,13 @@ export const DataSection: React.FC<DataSectionProps> = ({
           >
             {title}
           </Typography>
-          {typeof caption === 'string' ? (
+          {typeof caption === "string" ? (
             <Typography variant="subtitle2">{caption}</Typography>
           ) : (
             caption
           )}
         </Box>
-        {Icon && <Icon color="primary" fontSize={'large'} />}
+        {Icon && <Icon color="primary" fontSize={"large"} />}
       </Box>
       <Divider />
       <Box className={contentClassName} marginTop={2}>

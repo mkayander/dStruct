@@ -1,12 +1,12 @@
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
 import type {
   AppContextType,
   AppPropsType,
   NextComponentType,
-} from 'next/dist/shared/lib/utils';
-import type React from 'react';
+} from "next/dist/shared/lib/utils";
+import type React from "react";
 
-import type { MainLayoutProps } from '#/layouts/MainLayout';
+import type { MainLayoutProps } from "#/layouts/MainLayout";
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -15,11 +15,11 @@ export type NextPageWithLayout<
   Layout?: React.FC<MainLayoutProps>;
 };
 
-type MyAppContextType = Omit<AppContextType, 'Component'> & {
+type MyAppContextType = Omit<AppContextType, "Component"> & {
   Component: NextPageWithLayout;
 };
 
-type MyAppPropsType = Omit<AppPropsType, 'Component'> & {
+type MyAppPropsType = Omit<AppPropsType, "Component"> & {
   Component: NextPageWithLayout;
 };
 

@@ -1,11 +1,11 @@
-import { leetcodeRouter } from '#/server/trpc/router/leetcode';
-import { problemRouter } from '#/server/trpc/router/problem';
-import { projectRouter } from '#/server/trpc/router/project';
-import { userRouter } from '#/server/trpc/router/user';
+import { leetcodeRouter } from "#/server/trpc/router/leetcode";
+import { problemRouter } from "#/server/trpc/router/problem";
+import { projectRouter } from "#/server/trpc/router/project";
+import { userRouter } from "#/server/trpc/router/user";
 
-import { protectedProcedure, publicProcedure, router } from '../trpc';
-import { authRouter } from './auth';
-import { exampleRouter } from './example';
+import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { authRouter } from "./auth";
+import { exampleRouter } from "./example";
 
 export const appRouter = router({
   example: exampleRouter,

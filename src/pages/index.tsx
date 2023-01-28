@@ -4,14 +4,14 @@ import {
   Grid,
   Tooltip,
   Typography,
-} from '@mui/material';
-import { useSession } from 'next-auth/react';
-import React from 'react';
+} from "@mui/material";
+import { useSession } from "next-auth/react";
+import React from "react";
 
-import { useDailyQuestionData } from '#/api';
-import { QuestionSummary } from '#/components';
-import { useGetUserProfileQuery } from '#/graphql/generated';
-import { DailyProblem, LeetCodeStats, UserSettings } from '#/layouts';
+import { useDailyQuestionData } from "#/api";
+import { QuestionSummary } from "#/components";
+import { useGetUserProfileQuery } from "#/graphql/generated";
+import { DailyProblem, LeetCodeStats, UserSettings } from "#/layouts";
 
 const DashboardPage: React.FC = () => {
   const session = useSession();
@@ -19,7 +19,7 @@ const DashboardPage: React.FC = () => {
 
   const userProfileQueryResult = useGetUserProfileQuery({
     variables: {
-      username: leetCodeUsername || '',
+      username: leetCodeUsername || "",
     },
     skip: !leetCodeUsername,
   });
@@ -29,12 +29,12 @@ const DashboardPage: React.FC = () => {
   return (
     <Container>
       <Typography variant="h5" my={3}>
-        {leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : 'Dashboard'}
+        {leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : "Dashboard"}
       </Typography>
       <Grid container spacing={2}>
-        {session.status === 'loading' ? (
+        {session.status === "loading" ? (
           <CircularProgress />
-        ) : session.status === 'authenticated' ? (
+        ) : session.status === "authenticated" ? (
           <>
             <Grid item xs={12} md={6}>
               <UserSettings />
@@ -49,8 +49,8 @@ const DashboardPage: React.FC = () => {
               <Typography
                 variant="h4"
                 sx={{
-                  width: 'fit-content',
-                  margin: 'auto',
+                  width: "fit-content",
+                  margin: "auto",
                 }}
               >
                 Please sign in to start using the benefits! 🚀

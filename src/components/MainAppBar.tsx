@@ -1,5 +1,5 @@
-import CodeIcon from '@mui/icons-material/Code';
-import MenuIcon from '@mui/icons-material/Menu';
+import CodeIcon from "@mui/icons-material/Code";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   type AppBarProps,
@@ -16,18 +16,18 @@ import {
   type ToolbarProps,
   Tooltip,
   Typography,
-} from '@mui/material';
-import { signIn, useSession } from 'next-auth/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { type MouseEvent, useState } from 'react';
+} from "@mui/material";
+import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { type MouseEvent, useState } from "react";
 
-import { ThemeSwitch } from '#/components/ThemeSwitch';
-import { useProfileImageUploader } from '#/hooks';
-import { getImageUrl } from '#/utils';
+import { ThemeSwitch } from "#/components/ThemeSwitch";
+import { useProfileImageUploader } from "#/hooks";
+import { getImageUrl } from "#/utils";
 
-const AVATAR_PLACEHOLDER = '/avatars/placeholder.png';
+const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
 type NavItem = {
   name: string;
@@ -36,35 +36,35 @@ type NavItem = {
 
 const pages = [
   {
-    name: 'Dashboard',
-    href: '/',
+    name: "Dashboard",
+    href: "/",
   },
   // {
   //   name: 'Pricing',
   //   href: '/',
   // },
   {
-    name: 'Playground',
-    href: '/playground',
+    name: "Playground",
+    href: "/playground",
   },
   {
-    name: 'API',
-    href: '/api-example',
+    name: "API",
+    href: "/api-example",
   },
 ] as const;
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 type MainAppBarProps = {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-  appBarVariant?: AppBarProps['variant'];
-  toolbarVariant?: ToolbarProps['variant'];
+  appBarVariant?: AppBarProps["variant"];
+  toolbarVariant?: ToolbarProps["variant"];
 };
 
 export const MainAppBar: React.FC<MainAppBarProps> = ({
   setDarkMode,
-  appBarVariant = 'elevation',
-  toolbarVariant = 'dense',
+  appBarVariant = "elevation",
+  toolbarVariant = "dense",
 }) => {
   const router = useRouter();
 
@@ -102,7 +102,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     <AppBar position="sticky" elevation={2} variant={appBarVariant}>
       <Container maxWidth="xl">
         <Toolbar disableGutters variant={toolbarVariant}>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <Image alt="dStruct Logo" src="/Icon.svg" width="32" height="32" />
           </Box>
           {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
@@ -114,19 +114,19 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: '.1rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
               }}
             >
               dStruct
             </Typography>
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -141,18 +141,18 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
@@ -165,7 +165,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               ))}
             </Menu>
           </Box>
-          <CodeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <CodeIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Link href="/" legacyBehavior={true}>
             <Typography
               variant="h5"
@@ -174,24 +174,24 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: 'flex', md: 'none' },
+                display: { xs: "flex", md: "none" },
                 flexGrow: 1,
-                fontFamily: 'monospace',
+                fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
               }}
             >
               dStruct
             </Typography>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={() => handleNavItemClick(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page.name}
               </Button>
@@ -205,7 +205,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               }}
             />
 
-            {session.status === 'loading' ? (
+            {session.status === "loading" ? (
               <Skeleton
                 variant="circular"
                 animation="wave"
@@ -234,17 +234,17 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             )}
 
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}

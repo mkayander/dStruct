@@ -1,16 +1,16 @@
-import { TabContext, TabList } from '@mui/lab';
-import { alpha, Box, Tab, Typography, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import { TabContext, TabList } from "@mui/lab";
+import { alpha, Box, Tab, Typography, useTheme } from "@mui/material";
+import React, { useState } from "react";
 
-import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
-import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
+import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
+import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 
-import { useAppSelector } from '#/store/hooks';
+import { useAppSelector } from "#/store/hooks";
 
 export const OutputPanel: React.FC = () => {
   const theme = useTheme();
 
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState("1");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -54,7 +54,7 @@ export const OutputPanel: React.FC = () => {
                   Success
                 </Typography>
                 <Typography variant="caption">
-                  Returned:{' '}
+                  Returned:{" "}
                   <Box
                     component="span"
                     sx={{

@@ -1,5 +1,5 @@
-import { Add } from '@mui/icons-material';
-import { TabContext, TabList } from '@mui/lab';
+import { Add } from "@mui/icons-material";
+import { TabContext, TabList } from "@mui/lab";
 import {
   Box,
   CircularProgress,
@@ -11,33 +11,33 @@ import {
   Tab,
   TextField,
   Tooltip,
-} from '@mui/material';
-import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+} from "@mui/material";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 
-import { TestCaseSelectBar } from '#/components';
-import { useBinaryTree } from '#/hooks';
-import type { BinaryTreeInput } from '#/hooks/useBinaryTree';
-import { CreateProjectModal } from '#/layouts/modals';
-import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
-import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
-import { trpc } from '#/utils';
+import { TestCaseSelectBar } from "#/components";
+import { useBinaryTree } from "#/hooks";
+import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
+import { CreateProjectModal } from "#/layouts/modals";
+import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
+import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
+import { trpc } from "#/utils";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,
   selectCurrentCaseId,
   selectCurrentProjectId,
   selectIsEditable,
-} from '#/store/reducers/projectReducer';
+} from "#/store/reducers/projectReducer";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
 
-  const [tabValue, setTabValue] = useState('1');
+  const [tabValue, setTabValue] = useState("1");
   const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
-  const [rawInput, setRawInput] = useState<string>('[]');
+  const [rawInput, setRawInput] = useState<string>("[]");
   const [inputError, setInputError] = useState<string | null>(null);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
@@ -45,19 +45,19 @@ export const ProjectPanel: React.FC = () => {
 
   const { data: projects } = trpc.project.allBrief.useQuery();
 
-  const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? '';
+  const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? "";
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
   const isEditable = useAppSelector(selectIsEditable);
 
   const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || '',
+    selectedProjectId || "",
     {
       enabled: Boolean(selectedProjectId),
     }
   );
 
   const selectedCase = trpc.project.getCaseById.useQuery(
-    { id: selectedCaseId ?? '', projectId: selectedProjectId },
+    { id: selectedCaseId ?? "", projectId: selectedProjectId },
     { enabled: Boolean(selectedProjectId && selectedCaseId) }
   );
 
@@ -160,7 +160,7 @@ export const ProjectPanel: React.FC = () => {
 
         <StyledTabPanel
           value="1"
-          sx={{ display: 'flex', flexFlow: 'column nowrap', gap: 1 }}
+          sx={{ display: "flex", flexFlow: "column nowrap", gap: 1 }}
         >
           <Box display="flex" flexDirection="row" alignItems="center" gap={2}>
             <FormControl fullWidth>
@@ -199,11 +199,11 @@ export const ProjectPanel: React.FC = () => {
 
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'start',
+              display: "flex",
+              alignItems: "start",
               mt: 1,
               gap: 2,
-              'button.btn-refresh': { mt: 1 },
+              "button.btn-refresh": { mt: 1 },
             }}
           >
             <TextField
@@ -212,12 +212,12 @@ export const ProjectPanel: React.FC = () => {
               value={rawInput}
               onChange={(ev) => setRawInput(ev.target.value)}
               error={!!inputError}
-              helperText={inputError || 'Must be a JSON array of numbers'}
+              helperText={inputError || "Must be a JSON array of numbers"}
               fullWidth
             />
             <CircularProgress
               sx={{
-                transition: 'opacity .2s',
+                transition: "opacity .2s",
                 opacity: updateCase.isLoading ? 1 : 0,
               }}
             />

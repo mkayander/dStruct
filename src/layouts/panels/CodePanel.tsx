@@ -1,35 +1,35 @@
-import { AutoFixHigh, PlayArrow } from '@mui/icons-material';
-import { LoadingButton, TabContext, TabList } from '@mui/lab';
-import { Box, IconButton, Stack, Tab, Tooltip } from '@mui/material';
-import type * as monaco from 'monaco-editor';
-import Image from 'next/image';
-import parserBabel from 'prettier/parser-babel';
-import prettier from 'prettier/standalone';
-import React, { useContext, useEffect, useState } from 'react';
+import { AutoFixHigh, PlayArrow } from "@mui/icons-material";
+import { LoadingButton, TabContext, TabList } from "@mui/lab";
+import { Box, IconButton, Stack, Tab, Tooltip } from "@mui/material";
+import type * as monaco from "monaco-editor";
+import Image from "next/image";
+import parserBabel from "prettier/parser-babel";
+import prettier from "prettier/standalone";
+import React, { useContext, useEffect, useState } from "react";
 
-import { CodeRunner, SolutionSelectBar } from '#/components';
-import prettierIcon from '#/components/CodeRunner/assets/prettierIcon.svg';
-import { PlaygroundRuntimeContext } from '#/context';
-import { PanelWrapper } from '#/layouts/panels/common/PanelWrapper';
-import { StyledTabPanel, TabListWrapper } from '#/layouts/panels/common/styled';
-import { trpc } from '#/utils';
+import { CodeRunner, SolutionSelectBar } from "#/components";
+import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
+import { PlaygroundRuntimeContext } from "#/context";
+import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
+import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
+import { trpc } from "#/utils";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   callstackSlice,
   selectRuntimeData,
-} from '#/store/reducers/callstackReducer';
+} from "#/store/reducers/callstackReducer";
 import {
   selectCurrentProjectId,
   selectCurrentSolutionId,
-} from '#/store/reducers/projectReducer';
-import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
+} from "#/store/reducers/projectReducer";
+import { treeNodeSlice } from "#/store/reducers/treeNodeReducer";
 
 export const CodePanel: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const [value, setValue] = useState('1');
-  const [codeInput, setCodeInput] = useState<string>('');
+  const [value, setValue] = useState("1");
+  const [codeInput, setCodeInput] = useState<string>("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null
   );
@@ -38,14 +38,14 @@ export const CodePanel: React.FC = () => {
   );
 
   const selectedProjectId = useAppSelector(selectCurrentProjectId);
-  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? '';
-  const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? '';
+  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
+  const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? "";
   const { error } = useAppSelector(selectRuntimeData);
 
   const trpcUtils = trpc.useContext();
 
   const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || '',
+    selectedProjectId || "",
     {
       enabled: Boolean(selectedProjectId),
     }
@@ -99,7 +99,7 @@ export const CodePanel: React.FC = () => {
     if (!error) {
       monacoInstance.editor.setModelMarkers(
         textModel,
-        'javascript',
+        "javascript",
         [] // clear markers
       );
       return;
@@ -111,7 +111,7 @@ export const CodePanel: React.FC = () => {
     let endColumn = 10;
 
     console.error(error.stack);
-    const [, posLine] = error.stack?.split('\n') ?? [];
+    const [, posLine] = error.stack?.split("\n") ?? [];
 
     if (posLine) {
       const [, line, column] = posLine.match(/:(\d+):(\d+)\)$/) ?? [];
@@ -125,11 +125,11 @@ export const CodePanel: React.FC = () => {
     }
 
     const markers = monacoInstance.editor.getModelMarkers({
-      owner: 'error',
+      owner: "error",
       resource: textModel.uri,
     });
     console.log({ markers });
-    monacoInstance.editor.setModelMarkers(textModel, 'javascript', [
+    monacoInstance.editor.setModelMarkers(textModel, "javascript", [
       {
         severity: monacoInstance.MarkerSeverity.Error,
         message: `${error.name}: ${error.message}`,
@@ -142,7 +142,7 @@ export const CodePanel: React.FC = () => {
   }, [error, monacoInstance, textModel]);
 
   const handleRunCode = () => {
-    console.log('Run code:\n', codeInput);
+    console.log("Run code:\n", codeInput);
 
     const getInputFunction = new Function(codeInput);
 
@@ -150,7 +150,7 @@ export const CodePanel: React.FC = () => {
 
     try {
       const runFunction = getInputFunction();
-      console.log('Run function:\n', runFunction);
+      console.log("Run function:\n", runFunction);
 
       // Before running the code, clear the callstack
       dispatch(callstackSlice.actions.removeAll());
@@ -159,7 +159,7 @@ export const CodePanel: React.FC = () => {
       const result = runFunction(tree);
       runtime = performance.now() - runtime;
 
-      console.log('Runtime: ', runtime);
+      console.log("Runtime: ", runtime);
 
       // Identify that the callstack is filled and can now be used
       dispatch(
@@ -171,7 +171,7 @@ export const CodePanel: React.FC = () => {
         })
       );
 
-      console.log('Result:\n', result);
+      console.log("Result:\n", result);
     } catch (e: unknown) {
       runtime = performance.now() - runtime;
       if (e instanceof Error) {
@@ -184,14 +184,14 @@ export const CodePanel: React.FC = () => {
           })
         );
       } else {
-        console.error('Invalid error type: ', e);
+        console.error("Invalid error type: ", e);
       }
     }
   };
 
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
-      parser: 'babel',
+      parser: "babel",
       plugins: [parserBabel],
     });
     setCodeInput(formattedCode);
@@ -208,7 +208,7 @@ export const CodePanel: React.FC = () => {
             <Tooltip
               title={
                 <Box display="flex" alignItems="center" gap="3px">
-                  Format code with <b>Prettier</b>{' '}
+                  Format code with <b>Prettier</b>{" "}
                   <Image
                     alt="'Prettier' formatting icon"
                     {...prettierIcon}
@@ -229,7 +229,7 @@ export const CodePanel: React.FC = () => {
               endIcon={<PlayArrow />}
               loadingPosition="end"
               onClick={handleRunCode}
-              sx={{ height: '100%', borderRadius: 0 }}
+              sx={{ height: "100%", borderRadius: 0 }}
             >
               Run
             </LoadingButton>
@@ -239,7 +239,7 @@ export const CodePanel: React.FC = () => {
           <SolutionSelectBar selectedProject={selectedProject} mb={1} />
           <CodeRunner
             value={codeInput}
-            onChange={(value) => setCodeInput(value || '')}
+            onChange={(value) => setCodeInput(value || "")}
             isUpdating={updateSolution.isLoading}
             setMonacoInstance={setMonacoInstance}
             setTextModel={setTextModel}

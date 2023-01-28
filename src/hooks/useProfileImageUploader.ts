@@ -1,32 +1,32 @@
-import type S3 from 'aws-sdk/clients/s3';
-import axios from 'axios';
-import type { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import type S3 from "aws-sdk/clients/s3";
+import axios from "axios";
+import type { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-import { getImageUrl, trpc } from '#/utils';
+import { getImageUrl, trpc } from "#/utils";
 
 type SessionHook = ReturnType<typeof useSession>;
-type Status = 'loading' | 'done';
+type Status = "loading" | "done";
 
 const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
-  const origin = new URL(url).hostname.replaceAll('.', '-');
+  const origin = new URL(url).hostname.replaceAll(".", "-");
 
-  return `avatars/${username.replaceAll(' ', '_')}-avatar[${origin}].${
-    imageBlob.type.split('/')[1]
+  return `avatars/${username.replaceAll(" ", "_")}-avatar[${origin}].${
+    imageBlob.type.split("/")[1]
   }`;
 };
 
 export const useProfileImageUploader = (session: SessionHook) => {
   let bucketImage = session.data?.user.bucketImage;
   const [status, setStatus] = useState<Status>(
-    bucketImage ? 'done' : 'loading'
+    bucketImage ? "done" : "loading"
   );
   const [isLoading, setIsLoading] = useState(false);
 
   const mutation = trpc.user.setBucketImage.useMutation();
 
   useEffect(() => {
-    if (status === 'done' || isLoading) return;
+    if (status === "done" || isLoading) return;
 
     (async () => {
       if (bucketImage) {
@@ -47,7 +47,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       const { data: imageBlob } = await axios.get<Blob>(
         session.data.user.image,
-        { responseType: 'blob' }
+        { responseType: "blob" }
       );
       const filename = getAvatarFileName(
         session.data.user.name || session.data.user.id,
@@ -75,7 +75,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       await mutation.mutateAsync({ imageName: filename });
 
-      setStatus('done');
+      setStatus("done");
       setIsLoading(false);
     })();
   }, [isLoading, session.data]);

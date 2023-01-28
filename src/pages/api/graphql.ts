@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import axios, { AxiosError, type AxiosResponse } from 'axios';
-import { parse, serialize } from 'cookie';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import axios, { AxiosError, type AxiosResponse } from "axios";
+import { parse, serialize } from "cookie";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,15 +10,15 @@ export default async function handler(
   let response: AxiosResponse | undefined;
 
   const token =
-    req.headers.cookie && parse(req.headers.cookie)['LEETCODE_SESSION'];
+    req.headers.cookie && parse(req.headers.cookie)["LEETCODE_SESSION"];
 
   try {
     response = await axios({
       method: req.method,
-      url: 'https://leetcode.com/graphql/',
+      url: "https://leetcode.com/graphql/",
       // headers: req.headers,
       headers: {
-        cookie: (token && serialize('LEETCODE_SESSION', token)) || '',
+        cookie: (token && serialize("LEETCODE_SESSION", token)) || "",
       },
       data: req.body,
     });
@@ -29,7 +29,7 @@ export default async function handler(
   }
 
   if (!response) {
-    res.status(500).json({ message: 'Failed to get a response' });
+    res.status(500).json({ message: "Failed to get a response" });
     return;
   }
 

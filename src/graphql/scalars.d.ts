@@ -1,4 +1,4 @@
-import type { Question } from '@src/graphql/generated';
+import type { Question } from "@src/graphql/generated";
 
 namespace Scalars {
   export type QuestionStats = {
@@ -11,7 +11,7 @@ namespace Scalars {
 
   export type SimilarQuestions = Pick<
     Question,
-    'difficulty' | 'title' | 'titleSlug' | 'translatedTitle'
+    "difficulty" | "title" | "titleSlug" | "translatedTitle"
   >;
 
   export type EnvInfo = Record<string, [string, string]>;

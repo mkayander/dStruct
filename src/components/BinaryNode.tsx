@@ -1,30 +1,30 @@
-import { alpha, Box, type SxProps, type Theme, useTheme } from '@mui/material';
-import * as muiColors from '@mui/material/colors';
-import React from 'react';
-import { ArcherElement } from 'react-archer';
-import type { RelationType } from 'react-archer/lib/types';
+import { alpha, Box, type SxProps, type Theme, useTheme } from "@mui/material";
+import * as muiColors from "@mui/material/colors";
+import React from "react";
+import { ArcherElement } from "react-archer";
+import type { RelationType } from "react-archer/lib/types";
 
-import type { BinaryTreeNode } from '#/hooks/dataStructures/binaryTreeNode';
+import type { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 
-import { useAppSelector } from '#/store/hooks';
-import { selectNodeDataById } from '#/store/reducers/treeNodeReducer';
+import { useAppSelector } from "#/store/hooks";
+import { selectNodeDataById } from "#/store/reducers/treeNodeReducer";
 
 const nodeProps: SxProps<Theme> = {
-  display: 'flex',
-  justifyContent: 'center',
+  display: "flex",
+  justifyContent: "center",
   p: 1,
-  width: '42px',
-  height: '42px',
+  width: "42px",
+  height: "42px",
 };
 
 const relationProps = {
-  targetAnchor: 'middle',
-  sourceAnchor: 'middle',
+  targetAnchor: "middle",
+  sourceAnchor: "middle",
 } as const;
 
-const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: 'none' }} />;
+const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: "none" }} />;
 
-type BinaryNodeProps = Pick<BinaryTreeNode, 'val' | 'left' | 'right' | 'meta'>;
+type BinaryNodeProps = Pick<BinaryTreeNode, "val" | "left" | "right" | "meta">;
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
   val,
@@ -49,7 +49,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   type ColorName = keyof typeof muiColors;
   if (nodeData?.color && nodeData.color in muiColors) {
     const colorMap = muiColors[nodeData.color as ColorName];
-    if ('500' in colorMap) {
+    if ("500" in colorMap) {
       nodeColor = shadowColor = colorMap[500];
     }
   }
@@ -57,12 +57,12 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   return (
     <Box
       sx={{
-        display: 'flex',
-        position: 'relative',
+        display: "flex",
+        position: "relative",
         zIndex: 1,
-        flexFlow: 'column nowrap',
-        alignItems: 'center',
-        width: 'fit-content',
+        flexFlow: "column nowrap",
+        alignItems: "center",
+        width: "fit-content",
         gap: 2,
       }}
     >
@@ -70,16 +70,16 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
         <Box
           sx={{
             ...nodeProps,
-            borderRadius: '50%',
+            borderRadius: "50%",
             background: alpha(nodeColor, 0.3),
             border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
-            backdropFilter: 'blur(4px)',
-            userSelect: 'none',
+            backdropFilter: "blur(4px)",
+            userSelect: "none",
             boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
             color: theme.palette.primary.contrastText,
-            transition: 'all .2s',
+            transition: "all .2s",
 
-            '&:hover': {
+            "&:hover": {
               background: alpha(theme.palette.primary.light, 0.4),
             },
           }}
@@ -90,24 +90,24 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
       <Box
         sx={{
-          position: 'absolute',
+          position: "absolute",
           zIndex: -1,
-          top: '13px',
-          left: '50%',
-          transform: 'translate(-50%, 0)',
-          width: '18px',
-          height: '18px',
-          borderRadius: '50%',
+          top: "13px",
+          left: "50%",
+          transform: "translate(-50%, 0)",
+          width: "18px",
+          height: "18px",
+          borderRadius: "50%",
           background: theme.palette.primary.main,
         }}
       />
 
       <Box
         sx={{
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
+          display: "flex",
+          flexFlow: "row nowrap",
+          alignItems: "flex-start",
+          justifyContent: "center",
           gap: 4,
         }}
       >

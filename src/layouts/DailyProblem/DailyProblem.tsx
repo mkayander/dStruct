@@ -1,11 +1,11 @@
-import { alpha, Box, Divider, useTheme } from '@mui/material';
-import React, { useMemo } from 'react';
-import sanitizeHtml from 'sanitize-html';
+import { alpha, Box, Divider, useTheme } from "@mui/material";
+import React, { useMemo } from "react";
+import sanitizeHtml from "sanitize-html";
 
-import { DataSection } from '#/components';
-import type { QuestionDataQueryResult } from '#/graphql/generated';
+import { DataSection } from "#/components";
+import type { QuestionDataQueryResult } from "#/graphql/generated";
 
-import styles from './DailyProblem.module.scss';
+import styles from "./DailyProblem.module.scss";
 
 interface DailyProblemProps {
   questionDataQuery: QuestionDataQueryResult;
@@ -21,7 +21,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
     () =>
       question &&
       sanitizeHtml(question.content, {
-        allowedTags: ['img', 'p', 'strong', 'ul', 'li', 'pre', 'code'],
+        allowedTags: ["img", "p", "strong", "ul", "li", "pre", "code"],
       }),
     [question]
   );
@@ -30,7 +30,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
 
   return (
     <DataSection
-      title={question?.title || 'Daily Problem'}
+      title={question?.title || "Daily Problem"}
       caption="📅 Question Of Today"
       isLoading={loading}
     >
@@ -38,7 +38,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
         <Box>
           <Box
             className={styles.content}
-            dangerouslySetInnerHTML={{ __html: sanitizedContent ?? '' }}
+            dangerouslySetInnerHTML={{ __html: sanitizedContent ?? "" }}
             sx={{
               img: {
                 borderRadius: theme.shape.borderRadius,

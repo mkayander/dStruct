@@ -1,8 +1,8 @@
 // This is an example of to protect an API route
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth/next';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { unstable_getServerSession } from "next-auth/next";
 
-import { authOptions } from '../auth/[...nextauth]';
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,11 +13,11 @@ export default async function handler(
   if (session) {
     return res.send({
       content:
-        'This is protected content. You can access this content because you are signed in.',
+        "This is protected content. You can access this content because you are signed in.",
     });
   }
 
   res.send({
-    error: 'You must be signed in to view the protected content on this page.',
+    error: "You must be signed in to view the protected content on this page.",
   });
 }

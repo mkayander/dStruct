@@ -1,4 +1,4 @@
-import { LoadingButton } from '@mui/lab';
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   FormControl,
@@ -8,39 +8,39 @@ import {
   MenuItem,
   Select,
   Switch,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import type { DialogProps } from '@mui/material/Dialog/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField';
-import { ProjectCategory } from '@prisma/client';
-import { useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
-import React from 'react';
-import * as yup from 'yup';
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import type { DialogProps } from "@mui/material/Dialog/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
+import { ProjectCategory } from "@prisma/client";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import React from "react";
+import * as yup from "yup";
 
-import { trpc } from '#/utils';
+import { trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
 const categoryLabels: Record<ProjectCategory, string> = {
-  [ProjectCategory.BINARY_TREE]: 'Binary Tree',
-  [ProjectCategory.ARRAY]: 'Array',
-  [ProjectCategory.BST]: 'BST',
-  [ProjectCategory.GRAPH]: 'Graph',
-  [ProjectCategory.GRID]: 'Grid',
+  [ProjectCategory.BINARY_TREE]: "Binary Tree",
+  [ProjectCategory.ARRAY]: "Array",
+  [ProjectCategory.BST]: "BST",
+  [ProjectCategory.GRAPH]: "Graph",
+  [ProjectCategory.GRID]: "Grid",
 };
 
 const validationSchema = yup.object({
   projectName: yup
     .string()
-    .min(3, 'Project name must be at least 3 characters')
-    .max(190, 'Project name must be at most 190 characters')
-    .required('Project name is required'),
-  projectCategory: yup.string().required('Project category is required'),
+    .min(3, "Project name must be at least 3 characters")
+    .max(190, "Project name must be at most 190 characters")
+    .required("Project name is required"),
+  projectCategory: yup.string().required("Project category is required"),
 });
 
 type CreateProjectModalProps = DialogProps & {
@@ -58,9 +58,9 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 
   const formik = useFormik({
     initialValues: {
-      projectName: '',
-      projectCategory: '' as ProjectCategory,
-      projectDescription: '',
+      projectName: "",
+      projectCategory: "" as ProjectCategory,
+      projectDescription: "",
       isPublic: true,
     },
     validationSchema: validationSchema,
@@ -71,8 +71,8 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         description: values.projectDescription,
         isPublic: values.isPublic,
       });
-      enqueueSnackbar('Project created successfully', {
-        variant: 'success',
+      enqueueSnackbar("Project created successfully", {
+        variant: "success",
       });
       await trpcUtils.project.all.invalidate();
       formikHelpers.resetForm();
@@ -84,7 +84,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     <Dialog {...props} onClose={onClose}>
       <form
         onSubmit={(e) => {
-          console.log('submit');
+          console.log("submit");
           formik.handleSubmit(e);
         }}
       >
@@ -108,7 +108,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
               }
               helperText={
                 (formik.touched.projectName && formik.errors.projectName) ||
-                'Enter a name for your new project.'
+                "Enter a name for your new project."
               }
             />
             <FormControl fullWidth>
@@ -156,7 +156,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
               helperText={
                 (formik.touched.projectDescription &&
                   formik.errors.projectDescription) ||
-                'Optional project description.'
+                "Optional project description."
               }
             />
             <FormControlLabel

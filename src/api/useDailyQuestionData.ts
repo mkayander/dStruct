@@ -1,12 +1,12 @@
 import {
   useQuestionDataQuery,
   useQuestionOfTodayQuery,
-} from '#/graphql/generated';
+} from "#/graphql/generated";
 
 export const useDailyQuestionData = (
   options?: Exclude<
     Parameters<typeof useQuestionDataQuery>,
-    'variables' | 'skip'
+    "variables" | "skip"
   >
 ) => {
   const questionOfTodayQuery = useQuestionOfTodayQuery();
@@ -15,7 +15,7 @@ export const useDailyQuestionData = (
   const titleSlug = activeDailyCodingChallengeQuestion?.question.titleSlug;
 
   return useQuestionDataQuery({
-    variables: { titleSlug: titleSlug || '' },
+    variables: { titleSlug: titleSlug || "" },
     skip: !titleSlug,
     ...options,
   });

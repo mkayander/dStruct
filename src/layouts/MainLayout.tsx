@@ -1,8 +1,8 @@
-import { alpha, Box, LinearProgress, useTheme } from '@mui/material';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React from 'react';
+import { alpha, Box, LinearProgress, useTheme } from "@mui/material";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import React from "react";
 
-import { Footer, MainAppBar } from '#/components';
+import { Footer, MainAppBar } from "#/components";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
@@ -20,13 +20,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   return (
     <Box
       sx={{
-        '.os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle':
+        ".os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle":
           {
             background: theme.palette.action.hover,
-            '&:hover': {
+            "&:hover": {
               backgroundColor: alpha(theme.palette.primary.light, 0.3),
             },
-            '&:active': {
+            "&:active": {
               backgroundColor: alpha(theme.palette.primary.dark, 0.6),
             },
           },
@@ -34,16 +34,16 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     >
       <OverlayScrollbarsComponent
         defer
-        style={{ height: '100vh' }}
+        style={{ height: "100vh" }}
         options={{
           scrollbars: {
-            autoHide: 'scroll',
+            autoHide: "scroll",
           },
         }}
       >
-        <Box sx={{ minHeight: '100vh' }}>
+        <Box sx={{ minHeight: "100vh" }}>
           <MainAppBar setDarkMode={setDarkMode} />
-          <Box sx={{ minHeight: '85vh' }}>
+          <Box sx={{ minHeight: "85vh" }}>
             {isLoading ? <LinearProgress variant="indeterminate" /> : children}
           </Box>
           <Footer />

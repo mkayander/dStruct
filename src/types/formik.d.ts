@@ -1,8 +1,11 @@
-import { FieldProps } from 'formik/dist/Field';
-import { FieldValidator, GenericFieldHTMLAttributes } from 'formik/dist/types';
-import React from 'react';
+import type { FieldProps } from "formik/dist/Field";
+import type {
+  FieldValidator,
+  GenericFieldHTMLAttributes,
+} from "formik/dist/types";
+import type React from "react";
 
-declare module 'formik' {
+declare module "formik" {
   export interface FieldConfig<V = any> {
     // /**
     //  * Field component to render. Can either be a string like 'select' or a component.
@@ -16,7 +19,7 @@ declare module 'formik' {
      * Component to render. Can either be a string e.g. 'select', 'input', or 'textarea', or a component.
      */
     as?:
-      | React.ComponentType<FieldProps<V>['field']>
+      | React.ComponentType<FieldProps<V>["field"]>
       | string
       | React.ComponentType
       | React.ForwardRefExoticComponent<any>;

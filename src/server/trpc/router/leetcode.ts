@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { protectedProcedure, router } from '#/server/trpc/trpc';
+import { protectedProcedure, router } from "#/server/trpc/trpc";
 
 export const leetcodeRouter = router({
   linkUser: protectedProcedure

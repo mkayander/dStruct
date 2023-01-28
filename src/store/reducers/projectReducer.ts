@@ -1,7 +1,7 @@
-import type { PlaygroundTestCase } from '@prisma/client';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { PlaygroundTestCase } from "@prisma/client";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import type { RootState } from '#/store/makeStore';
+import type { RootState } from "#/store/makeStore";
 
 type ProjectState = {
   currentProjectId: string | null;
@@ -18,7 +18,7 @@ const initialState: ProjectState = {
 };
 
 export const projectSlice = createSlice({
-  name: 'PROJECT',
+  name: "PROJECT",
   initialState,
   reducers: {
     update: (state, action: PayloadAction<Partial<ProjectState>>) => {

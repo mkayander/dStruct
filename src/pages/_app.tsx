@@ -1,26 +1,26 @@
-import { ApolloProvider } from '@apollo/client';
-import { ThemeProvider } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import type { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
-import Head from 'next/head';
-import { SnackbarProvider } from 'notistack';
-import React, { useMemo, useState } from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
+import { ApolloProvider } from "@apollo/client";
+import { ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import type { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
+import { SnackbarProvider } from "notistack";
+import React, { useMemo, useState } from "react";
+import { Provider as ReduxProvider } from "react-redux";
 
-import { apolloClient } from '#/graphql/apolloClient';
+import { apolloClient } from "#/graphql/apolloClient";
 import {
   MainLayout as DefaultLayout,
   type MainLayoutProps,
-} from '#/layouts/MainLayout';
-import { themes } from '#/themes';
-import type { AppTypeWithLayout } from '#/types/page';
-import { trpc } from '#/utils';
+} from "#/layouts/MainLayout";
+import { themes } from "#/themes";
+import type { AppTypeWithLayout } from "#/types/page";
+import { trpc } from "#/utils";
 
-import { wrapper } from '#/store/makeStore';
-import '#/styles/globals.css';
+import { wrapper } from "#/store/makeStore";
+import "#/styles/globals.css";
 
-import 'overlayscrollbars/overlayscrollbars.css';
+import "overlayscrollbars/overlayscrollbars.css";
 
 const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
   Component,

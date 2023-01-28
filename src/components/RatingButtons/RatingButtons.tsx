@@ -3,14 +3,14 @@ import {
   ThumbDownOutlined,
   ThumbUp,
   ThumbUpOutlined,
-} from '@mui/icons-material';
-import { Box, Button, ButtonGroup, useTheme } from '@mui/material';
-import React, { useMemo } from 'react';
+} from "@mui/icons-material";
+import { Box, Button, ButtonGroup, useTheme } from "@mui/material";
+import React, { useMemo } from "react";
 
-import type { QuestionDataQuery } from '#/graphql/generated';
+import type { QuestionDataQuery } from "#/graphql/generated";
 
 interface RatingButtonsProps {
-  question: QuestionDataQuery['question'];
+  question: QuestionDataQuery["question"];
 }
 
 export const RatingButtons: React.FC<RatingButtonsProps> = ({ question }) => {
@@ -25,7 +25,7 @@ export const RatingButtons: React.FC<RatingButtonsProps> = ({ question }) => {
     <Box position="relative">
       <ButtonGroup
         variant="text"
-        color={likesPercentage > 50 ? 'success' : 'error'}
+        color={likesPercentage > 50 ? "success" : "error"}
       >
         <Button
           startIcon={question.isLiked ? <ThumbUp /> : <ThumbUpOutlined />}
@@ -44,18 +44,18 @@ export const RatingButtons: React.FC<RatingButtonsProps> = ({ question }) => {
       </ButtonGroup>
       <Box
         sx={{
-          height: '4px',
-          width: '100%',
-          marginTop: '1px',
+          height: "4px",
+          width: "100%",
+          marginTop: "1px",
           borderRadius: theme.shape.borderRadius,
           background: theme.palette.error.dark,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         <Box
           sx={{
-            height: '100%',
-            transition: '0.3s width',
+            height: "100%",
+            transition: "0.3s width",
             width: `${likesPercentage}%`,
             background: theme.palette.success.main,
           }}

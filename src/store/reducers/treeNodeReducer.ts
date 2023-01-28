@@ -5,9 +5,9 @@ import {
   type EntityState,
   type PayloadAction,
   type Update,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 
-import type { RootState } from '#/store/makeStore';
+import type { RootState } from "#/store/makeStore";
 
 /**
  * Payload
@@ -53,7 +53,7 @@ const initialState: TreeDataState = {
  * @see https://redux-toolkit.js.org/api/createslice
  */
 export const treeNodeSlice = createSlice({
-  name: 'BINARY_TREE_NODE',
+  name: "BINARY_TREE_NODE",
   initialState,
   reducers: {
     add: (
@@ -96,7 +96,7 @@ export const treeNodeSlice = createSlice({
     },
     remove: (
       state: TreeDataState,
-      action: PayloadAction<Pick<BinaryTreeNodeDataPayload, 'id'>>
+      action: PayloadAction<Pick<BinaryTreeNodeDataPayload, "id">>
     ) => {
       state.count--;
       treeNodeDataAdapter.removeOne(state.nodes, action.payload.id);
@@ -141,5 +141,5 @@ export const selectNodeDataById = (id: string) =>
   );
 
 export const selectRootNodeData = createSelector(treeDataSelector, (treeNode) =>
-  treeNodeDataSelector.selectById(treeNode.nodes, treeNode.rootId || '')
+  treeNodeDataSelector.selectById(treeNode.nodes, treeNode.rootId || "")
 );

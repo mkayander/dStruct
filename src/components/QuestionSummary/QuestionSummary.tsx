@@ -5,8 +5,8 @@ import {
   SignalCellular0Bar,
   SignalCellular2Bar,
   SignalCellular4Bar,
-} from '@mui/icons-material';
-import EventIcon from '@mui/icons-material/Event';
+} from "@mui/icons-material";
+import EventIcon from "@mui/icons-material/Event";
 import {
   alpha,
   Box,
@@ -19,12 +19,12 @@ import {
   type SvgIcon,
   Typography,
   useTheme,
-} from '@mui/material';
-import type { BoxProps } from '@mui/material/Box/Box';
-import React from 'react';
+} from "@mui/material";
+import type { BoxProps } from "@mui/material/Box/Box";
+import React from "react";
 
-import { CircularPercentage, RatingButtons, TopicTag } from '#/components';
-import type { Difficulty, QuestionDataQueryResult } from '#/graphql/generated';
+import { CircularPercentage, RatingButtons, TopicTag } from "#/components";
+import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
   All: SignalCellular0Bar,
@@ -34,7 +34,7 @@ const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
 };
 
 interface QuestionSummaryProps
-  extends Exclude<BoxProps, 'position' | 'zIndex'> {
+  extends Exclude<BoxProps, "position" | "zIndex"> {
   questionDataQuery: QuestionDataQueryResult;
 }
 
@@ -57,9 +57,9 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
         elevation={12}
         sx={{
           zIndex: theme.zIndex.mobileStepper,
-          width: 'fit-content',
+          width: "fit-content",
           p: 2,
-          mx: 'auto',
+          mx: "auto",
           marginBottom: 2,
           background: `linear-gradient(64deg, ${alpha(
             darken(theme.palette.primary.dark, 0.5),
@@ -68,8 +68,8 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
             theme.palette.primary.light,
             0.5
           )} 100%)`,
-          backdropFilter: 'blur( 14px )',
-          border: '1px solid rgba( 255, 255, 255, 0.18 )',
+          backdropFilter: "blur( 14px )",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
           // boxShadow: `0 8px 32px 0 ${alpha(theme.palette.primary.dark, 0.37)}`,
           // boxShadow: `0px 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 12%)`,
           boxShadow: `0px 7px 8px -4px ${alpha(
@@ -92,9 +92,9 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                 gap={1}
               >
                 <Typography variant="h4">
-                  <span style={{ fontWeight: '300' }}>
+                  <span style={{ fontWeight: "300" }}>
                     {question.questionFrontendId}.
-                  </span>{' '}
+                  </span>{" "}
                   {question.title}
                 </Typography>
                 <Box display="flex" sx={{ opacity: 0.9 }}>
@@ -113,8 +113,8 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                 sx={{
                   opacity: 0.9,
                   justifyContent: {
-                    xs: 'space-between',
-                    sm: 'flex-start',
+                    xs: "space-between",
+                    sm: "flex-start",
                   },
                 }}
               >
@@ -126,9 +126,9 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                 <div>
                   <Box
                     sx={{
-                      display: 'flex',
-                      height: '100%',
-                      alignItems: 'center',
+                      display: "flex",
+                      height: "100%",
+                      alignItems: "center",
                       color: difficultyColor,
                       svg: {
                         marginRight: 1,
@@ -163,9 +163,9 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
             </Box>
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative',
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
               }}
             >
               <CircularPercentage value={question.stats.acRate} size={180}>
@@ -174,9 +174,9 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                   {question.stats.acRate}%
                 </Typography>
                 <Typography variant="caption">
-                  <span style={{ fontWeight: 'bold' }}>
+                  <span style={{ fontWeight: "bold" }}>
                     {question.stats.totalAccepted}
-                  </span>{' '}
+                  </span>{" "}
                   / {question.stats.totalSubmission}
                 </Typography>
               </CircularPercentage>
@@ -189,26 +189,26 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
 
       <EventIcon
         sx={{
-          position: 'absolute',
+          position: "absolute",
           zIndex: -1,
-          fontSize: '1300%',
+          fontSize: "1300%",
           color: theme.palette.primary.light,
-          right: '2%',
+          right: "2%",
           top: 0,
-          transform: 'translateY(-40%) rotate(20deg)',
+          transform: "translateY(-40%) rotate(20deg)",
         }}
       />
 
       <HistoryToggleOff
         sx={{
-          position: 'absolute',
+          position: "absolute",
           zIndex: -1,
-          fontSize: '190px',
+          fontSize: "190px",
           // color: theme.palette.success.main,
           color: theme.palette.error.dark,
           left: 0,
           bottom: 0,
-          transform: 'translateY(40%) rotate(0deg)',
+          transform: "translateY(40%) rotate(0deg)",
         }}
       />
     </Box>

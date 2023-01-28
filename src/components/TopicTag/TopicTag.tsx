@@ -1,7 +1,7 @@
-import { alpha, Chip, darken, useTheme } from '@mui/material';
-import React from 'react';
+import { alpha, Chip, darken, useTheme } from "@mui/material";
+import React from "react";
 
-import type { TopicTag as Topic } from '#/graphql/generated';
+import type { TopicTag as Topic } from "#/graphql/generated";
 
 interface TopicTagProps {
   topic: Partial<Topic>;
@@ -26,9 +26,9 @@ export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
         background: `linear-gradient(55deg, ${darken(colors[0], 0.4)} 0%, ${
           colors[1]
         } 100%)`,
-        fontWeight: 'bold',
-        letterSpacing: '1px',
-        lineHeight: '2rem',
+        fontWeight: "bold",
+        letterSpacing: "1px",
+        lineHeight: "2rem",
       }}
     />
   );

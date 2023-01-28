@@ -1,14 +1,14 @@
-import { alpha, Box, useTheme } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
-import { ArcherContainer } from 'react-archer';
-import ScrollContainer from 'react-indiana-drag-scroll';
+import { alpha, Box, useTheme } from "@mui/material";
+import React, { useContext, useEffect } from "react";
+import { ArcherContainer } from "react-archer";
+import ScrollContainer from "react-indiana-drag-scroll";
 
-import { BinaryNode } from '#/components/BinaryNode';
-import { PlaygroundRuntimeContext } from '#/context';
+import { BinaryNode } from "#/components/BinaryNode";
+import { PlaygroundRuntimeContext } from "#/context";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
-import { selectCallstack } from '#/store/reducers/callstackReducer';
-import { treeNodeSlice } from '#/store/reducers/treeNodeReducer';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { selectCallstack } from "#/store/reducers/callstackReducer";
+import { treeNodeSlice } from "#/store/reducers/treeNodeReducer";
 
 export const TreeViewer: React.FC = () => {
   const theme = useTheme();
@@ -21,7 +21,7 @@ export const TreeViewer: React.FC = () => {
     useAppSelector(selectCallstack);
 
   useEffect(() => {
-    console.log('Callstack:\n', callstack);
+    console.log("Callstack:\n", callstack);
 
     if (!callstackIsReady || callstack.length === 0) return;
 
@@ -65,7 +65,7 @@ export const TreeViewer: React.FC = () => {
             strokeColor={alpha(theme.palette.primary.dark, 0.5)}
             strokeWidth={4}
             endMarker={false}
-            svgContainerStyle={{ overflow: 'visible' }}
+            svgContainerStyle={{ overflow: "visible" }}
           >
             {tree && <BinaryNode {...tree} />}
           </ArcherContainer>

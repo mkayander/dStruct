@@ -1,7 +1,7 @@
-import { useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-import styles from './CircularPercentage.module.scss';
+import styles from "./CircularPercentage.module.scss";
 
 const SIZE = 44;
 const VIEW_BOX = `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`;

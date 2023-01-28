@@ -1,14 +1,14 @@
-import { Code } from '@mui/icons-material';
-import { Box, Grid, Typography } from '@mui/material';
-import React, { useMemo } from 'react';
+import { Code } from "@mui/icons-material";
+import { Box, Grid, Typography } from "@mui/material";
+import React, { useMemo } from "react";
 
-import { CircularPercentage, DataSection } from '#/components';
+import { CircularPercentage, DataSection } from "#/components";
 import {
   Difficulty,
   GetUserProfileQueryResult,
   QuestionCount,
   SubmissionNum,
-} from '#/graphql/generated';
+} from "#/graphql/generated";
 
 type SubmissionsData = {
   allQuestionsCount: Record<keyof typeof Difficulty, QuestionCount>;
@@ -16,10 +16,10 @@ type SubmissionsData = {
 };
 
 const titlesMap: Record<keyof typeof Difficulty, string> = {
-  All: 'Total Questions Solved',
-  Easy: 'Easy Questions Solved',
-  Medium: 'Medium Questions Solved',
-  Hard: 'Hard Questions Solved',
+  All: "Total Questions Solved",
+  Easy: "Easy Questions Solved",
+  Medium: "Medium Questions Solved",
+  Hard: "Hard Questions Solved",
 };
 
 interface LeetCodeStatsProps {
@@ -51,12 +51,12 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
   }, [userProfile.data]);
 
   return (
-    <DataSection title={'LeetCode Stats'} Icon={Code}>
+    <DataSection title={"LeetCode Stats"} Icon={Code}>
       <Box
         sx={{
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          justifyContent: 'space-between',
+          display: "flex",
+          flexFlow: "row nowrap",
+          justifyContent: "space-between",
         }}
       >
         {matchedUser ? (
@@ -88,7 +88,7 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
                   </Grid>
                   <Grid item xs={7}>
                     <Typography>
-                      <span>{item.count}</span> /{' '}
+                      <span>{item.count}</span> /{" "}
                       <Typography
                         variant="body2"
                         fontWeight="lighter"
@@ -106,9 +106,9 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
             </Grid>
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <CircularPercentage

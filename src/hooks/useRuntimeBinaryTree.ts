@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { BinaryTreeNode } from '#/hooks/dataStructures/binaryTreeNode';
+import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 
-import { useAppDispatch, useAppSelector } from '#/store/hooks';
-import { treeDataSelector } from '#/store/reducers/treeNodeReducer';
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { treeDataSelector } from "#/store/reducers/treeNodeReducer";
 
 export const useRuntimeBinaryTree = () => {
   const dispatch = useAppDispatch();

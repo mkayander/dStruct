@@ -1,19 +1,19 @@
-import { ManageAccounts } from '@mui/icons-material';
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import { deleteCookie, setCookie } from 'cookies-next';
-import { Field, Formik } from 'formik';
-import { TextField } from 'formik-mui';
-import { useSession } from 'next-auth/react';
-import React from 'react';
+import { ManageAccounts } from "@mui/icons-material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { deleteCookie, setCookie } from "cookies-next";
+import { Field, Formik } from "formik";
+import { TextField } from "formik-mui";
+import { useSession } from "next-auth/react";
+import React from "react";
 
-import { DataSection } from '#/components';
+import { DataSection } from "#/components";
 import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
-} from '#/graphql/generated';
-import { trpc } from '#/utils';
+} from "#/graphql/generated";
+import { trpc } from "#/utils";
 
-import styles from './UserSettings.module.scss';
+import styles from "./UserSettings.module.scss";
 
 export const UserSettings: React.FC = () => {
   const session = useSession();
@@ -73,37 +73,37 @@ export const UserSettings: React.FC = () => {
       ) : (
         <Formik
           initialValues={{
-            username: '',
-            token: '',
+            username: "",
+            token: "",
           }}
           validate={async (values) => {
             const errors: { username?: string } = {};
             if (!values.username) {
-              errors.username = 'Required';
+              errors.username = "Required";
             } else {
             }
             return errors;
           }}
           onSubmit={async ({ username, token }, { setErrors }) => {
-            setCookie('LEETCODE_SESSION', token);
+            setCookie("LEETCODE_SESSION", token);
 
             const { data: globalData } = await getGlobalData();
 
             const extUsername = globalData?.userStatus.username;
 
-            console.log('globalData: ', globalData);
+            console.log("globalData: ", globalData);
 
             if (!extUsername) {
-              setErrors({ token: 'Invalid token!' });
-              deleteCookie('LEETCODE_SESSION');
+              setErrors({ token: "Invalid token!" });
+              deleteCookie("LEETCODE_SESSION");
               return;
             }
 
             if (extUsername !== username) {
               setErrors({
-                username: 'Username does not match the token!',
+                username: "Username does not match the token!",
               });
-              deleteCookie('LEETCODE_SESSION');
+              deleteCookie("LEETCODE_SESSION");
               return;
             }
 
@@ -112,7 +112,7 @@ export const UserSettings: React.FC = () => {
             });
 
             if (!data?.matchedUser) {
-              setErrors({ username: 'No user with given username found!' });
+              setErrors({ username: "No user with given username found!" });
               return;
             }
 
@@ -120,7 +120,7 @@ export const UserSettings: React.FC = () => {
 
             await linkUser.mutate({
               username,
-              userAvatar: userAvatar || 'none',
+              userAvatar: userAvatar || "none",
               token,
             });
 
@@ -156,7 +156,7 @@ export const UserSettings: React.FC = () => {
                 color="primary"
                 disabled={isSubmitting}
                 onClick={submitForm}
-                sx={{ display: 'block' }}
+                sx={{ display: "block" }}
               >
                 Submit!
               </Button>
