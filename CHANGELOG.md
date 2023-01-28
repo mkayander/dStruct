@@ -1,3 +1,10 @@
+## [1.77.1](https://github.com/mkayander/leetpal/compare/v1.77.0...v1.77.1) (2023-01-28)
+
+
+### Bug Fixes
+
+* Global formatting. Use double quotes. ([c6c3406](https://github.com/mkayander/leetpal/commit/c6c3406b11499d470c612ad3e9b310a2a00040c1))
+
 # [1.77.0](https://github.com/mkayander/leetpal/compare/v1.76.0...v1.77.0) (2023-01-26)
 
 
