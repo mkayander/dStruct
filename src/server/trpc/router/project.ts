@@ -8,7 +8,7 @@ import {
   router
 } from '#/server/trpc/trpc';
 
-import defaultJsTemplate from '#/codeTemplates/defaultTemplate.js.txt';
+import defaultJsTemplate from '#/assets/codeTemplates/defaultTemplate.js.txt';
 
 const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
   const projectId: string | undefined = typeof rawInput === 'object' && (<any>rawInput).projectId;
