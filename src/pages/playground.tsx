@@ -7,11 +7,9 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import React, { useMemo } from "react";
+import React from "react";
 
 import { MainAppBar } from "#/components";
-import { PlaygroundRuntimeContext } from "#/context";
-import { useRuntimeBinaryTree } from "#/hooks";
 import { SplitPanelsLayout } from "#/layouts";
 import type { MainLayoutProps } from "#/layouts/MainLayout";
 import {
@@ -54,17 +52,8 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 };
 
 const PlaygroundPage: NextPageWithLayout = () => {
-  const tree = useRuntimeBinaryTree();
-
-  const runtimeContext = useMemo(
-    () => ({
-      tree,
-    }),
-    [tree]
-  );
-
   return (
-    <PlaygroundRuntimeContext.Provider value={runtimeContext}>
+    <>
       <Head>
         <title>dStruct Playground</title>
       </Head>
@@ -74,7 +63,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
         <CodePanel />
         <OutputPanel />
       </Wrapper>
-    </PlaygroundRuntimeContext.Provider>
+    </>
   );
 };
 

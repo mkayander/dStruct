@@ -5,11 +5,11 @@ import type * as monaco from "monaco-editor";
 import Image from "next/image";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { CodeRunner, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
-import { PlaygroundRuntimeContext } from "#/context";
+import { useRuntimeBinaryTree } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { trpc } from "#/utils";
@@ -62,7 +62,7 @@ export const CodePanel: React.FC = () => {
 
   const updateSolution = trpc.project.updateSolution.useMutation();
 
-  const { tree } = useContext(PlaygroundRuntimeContext);
+  const tree = useRuntimeBinaryTree();
 
   useEffect(() => {
     if (currentSolution.data?.code) setCodeInput(currentSolution.data.code);
