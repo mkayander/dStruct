@@ -4,10 +4,11 @@ import React from "react";
 import { ArcherElement } from "react-archer";
 import type { RelationType } from "react-archer/lib/types";
 
-import type { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
-
 import { useAppSelector } from "#/store/hooks";
-import { selectNodeDataById } from "#/store/reducers/treeNodeReducer";
+import {
+  type BinaryTreeNodeData,
+  selectNodeDataById,
+} from "#/store/reducers/treeNodeReducer";
 
 const nodeProps: SxProps<Theme> = {
   display: "flex",
@@ -24,35 +25,54 @@ const relationProps = {
 
 const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: "none" }} />;
 
-type BinaryNodeProps = Pick<BinaryTreeNode, "val" | "left" | "right" | "meta">;
+type BinaryNodeProps = BinaryTreeNodeData;
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
-  val,
+  id,
+  value,
   left,
   right,
-  meta,
+  color,
 }: BinaryNodeProps) => {
   const theme = useTheme();
 
-  const nodeData = useAppSelector(selectNodeDataById(meta.id));
+  const isLeaf = !left && !right;
 
-  const gapsActive = !meta.isLeaf;
-
-  const relations: RelationType[] = [];
-
-  if (left) relations.push({ ...relationProps, targetId: left.meta.id });
-
-  if (right) relations.push({ ...relationProps, targetId: right.meta.id });
+  const leftNode = useAppSelector(selectNodeDataById(left ?? ""));
+  const rightNode = useAppSelector(selectNodeDataById(right ?? ""));
 
   let nodeColor = theme.palette.primary.main;
   let shadowColor = theme.palette.primary.dark;
   type ColorName = keyof typeof muiColors;
-  if (nodeData?.color && nodeData.color in muiColors) {
-    const colorMap = muiColors[nodeData.color as ColorName];
+  if (color && color in muiColors) {
+    const colorMap = muiColors[color as ColorName];
     if ("500" in colorMap) {
       nodeColor = shadowColor = colorMap[500];
     }
   }
+
+  const leftLinkColor =
+    leftNode?.color && color === leftNode.color
+      ? alpha(nodeColor, 0.5)
+      : undefined;
+  const rightLinkColor =
+    rightNode?.color && color === rightNode.color
+      ? alpha(nodeColor, 0.5)
+      : undefined;
+
+  const relations: RelationType[] = [];
+  if (leftNode)
+    relations.push({
+      ...relationProps,
+      targetId: leftNode.id,
+      style: { strokeColor: leftLinkColor },
+    });
+  if (rightNode)
+    relations.push({
+      ...relationProps,
+      targetId: rightNode.id,
+      style: { strokeColor: rightLinkColor },
+    });
 
   return (
     <Box
@@ -66,7 +86,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
         gap: 2,
       }}
     >
-      <ArcherElement id={meta.id} relations={relations}>
+      <ArcherElement id={id} relations={relations}>
         <Box
           sx={{
             ...nodeProps,
@@ -84,7 +104,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
             },
           }}
         >
-          {val}
+          {value}
         </Box>
       </ArcherElement>
 
@@ -111,8 +131,8 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           gap: 4,
         }}
       >
-        {left ? <BinaryNode {...left} /> : gapsActive && <GapElement />}
-        {right ? <BinaryNode {...right} /> : gapsActive && <GapElement />}
+        {leftNode ? <BinaryNode {...leftNode} /> : !isLeaf && <GapElement />}
+        {rightNode ? <BinaryNode {...rightNode} /> : !isLeaf && <GapElement />}
       </Box>
     </Box>
   );
