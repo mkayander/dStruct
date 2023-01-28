@@ -1,3 +1,17 @@
+# [1.78.0](https://github.com/mkayander/leetpal/compare/v1.77.1...v1.78.0) (2023-01-28)
+
+
+### Bug Fixes
+
+* Move template to a new assets folder ([f6d8e0a](https://github.com/mkayander/leetpal/commit/f6d8e0a88e5b4d9c32e44f5f36181e4f270318d7))
+* Update IDE code styles using Prettier ([91ca3f5](https://github.com/mkayander/leetpal/commit/91ca3f507b7f0780518221dff88783efb6b747c1))
+* Use runtime tree generate locally ([d703368](https://github.com/mkayander/leetpal/commit/d7033685e4e9e59bc4b12e11c72b71e15ef14498))
+
+
+### Features
+
+* Binary node update. Use Redux state only. ([09d4a05](https://github.com/mkayander/leetpal/commit/09d4a05882355c6b393b8d7d4b474ef0e4608268))
+
 ## [1.77.1](https://github.com/mkayander/leetpal/compare/v1.77.0...v1.77.1) (2023-01-28)
 
 
