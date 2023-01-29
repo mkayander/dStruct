@@ -9,7 +9,10 @@ import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
-import { SelectBarChip } from "#/components/SelectBarChip";
+import {
+  SelectBarChip,
+  SelectBarChipSkeleton,
+} from "#/components/SelectBarChip";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
@@ -119,6 +122,15 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
   return (
     <Stack flexWrap="wrap" direction="row" gap={1} {...restProps}>
+      {!selectedProject.data && (
+        <>
+          <SelectBarChipSkeleton width={112} />
+          <SelectBarChipSkeleton width={42} />
+          <SelectBarChipSkeleton />
+          <SelectBarChipSkeleton width={24} />
+        </>
+      )}
+
       {solutions?.map((solution) => {
         const isCurrent = solution.id === selectedSolutionId;
 

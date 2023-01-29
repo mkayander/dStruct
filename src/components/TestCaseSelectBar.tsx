@@ -4,7 +4,10 @@ import type { PlaygroundTestCase } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
-import { SelectBarChip } from "#/components/SelectBarChip";
+import {
+  SelectBarChip,
+  SelectBarChipSkeleton,
+} from "#/components/SelectBarChip";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
@@ -74,7 +77,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   const handleCaseClick = (testCase: TestCaseBrief) => {
     dispatch(projectSlice.actions.update({ currentCaseId: testCase.id }));
-    // dispatch(projectSlice.actions.setCurrentCase(testCase));
   };
 
   const handleCaseDelete = (testCase: TestCaseBrief) => {
@@ -95,6 +97,15 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   return (
     <Stack direction="row" flexWrap="wrap" gap={1}>
+      {!selectedProject.data && (
+        <>
+          <SelectBarChipSkeleton width={112} />
+          <SelectBarChipSkeleton width={42} />
+          <SelectBarChipSkeleton />
+          <SelectBarChipSkeleton width={24} />
+        </>
+      )}
+
       {cases?.map((testCase) => {
         const isCurrent = testCase.id === selectedCaseId;
 
