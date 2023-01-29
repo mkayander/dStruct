@@ -137,3 +137,8 @@ export const selectRuntimeData = createSelector(
     error: callstack.error,
   })
 );
+
+export const selectCallstackIsReady = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack: CallstackState) => callstack.isReady
+);
