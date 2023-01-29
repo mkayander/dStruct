@@ -41,6 +41,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         theme={theme.palette.mode === "dark" ? "vs-dark" : "vs-light"}
         options={{
           minimap: { enabled: false },
+          tabSize: 2,
         }}
         {...restProps}
         language="javascript"
