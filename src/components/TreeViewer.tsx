@@ -12,7 +12,15 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
-export const TreeViewer: React.FC = () => {
+type TreeViewerProps = {
+  playbackInterval: number;
+  replayCount: number;
+};
+
+export const TreeViewer: React.FC<TreeViewerProps> = ({
+  playbackInterval,
+  replayCount,
+}) => {
   const theme = useTheme();
 
   const dispatch = useAppDispatch();
@@ -24,15 +32,17 @@ export const TreeViewer: React.FC = () => {
   useEffect(() => {
     console.log("Callstack:\n", callstack);
 
+    let isStarted = false;
+
     if (!callstackIsReady || callstack.length === 0) return;
 
     let i = 0;
 
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
       const frame = callstack[i];
 
       if (i >= callstack.length || !frame) {
-        clearInterval(interval);
+        clearInterval(intervalId);
         return;
       }
 
@@ -60,11 +70,16 @@ export const TreeViewer: React.FC = () => {
           break;
       }
 
-      i++;
-    }, 200);
+      isStarted = true;
 
-    return () => clearInterval(interval);
-  }, [callstack, callstackIsReady, dispatch]);
+      i++;
+    }, playbackInterval);
+
+    return () => {
+      clearInterval(intervalId);
+      isStarted && dispatch(treeNodeSlice.actions.resetAll());
+    };
+  }, [callstack, callstackIsReady, dispatch, replayCount, playbackInterval]);
 
   return (
     <Box
