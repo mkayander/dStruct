@@ -1,3 +1,10 @@
+## [1.81.1](https://github.com/mkayander/leetpal/compare/v1.81.0...v1.81.1) (2023-01-29)
+
+
+### Bug Fixes
+
+* Fixed props errors ([686005f](https://github.com/mkayander/leetpal/commit/686005fddd68d19f8c2de1b4b604a8c0ba9fe279))
+
 # [1.81.0](https://github.com/mkayander/leetpal/compare/v1.80.0...v1.81.0) (2023-01-29)
 
 
