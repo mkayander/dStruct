@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  type SelectChangeEvent,
   Skeleton,
   Stack,
   Tab,
@@ -141,8 +142,12 @@ export const ProjectPanel: React.FC = () => {
 
   useBinaryTree(parsedInput);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
+  };
+
+  const handleSelectProject = (e: SelectChangeEvent) => {
+    dispatch(projectSlice.actions.setProject({ id: e.target.value }));
   };
 
   const handleCreateProject = () => {
@@ -183,7 +188,7 @@ export const ProjectPanel: React.FC = () => {
 
       <TabContext value={tabValue}>
         <TabListWrapper>
-          <TabList onChange={handleChange} aria-label="panel tabs">
+          <TabList onChange={handleTabChange} aria-label="panel tabs">
             <Tab label="Project" value="1" />
           </TabList>
         </TabListWrapper>
@@ -201,13 +206,7 @@ export const ProjectPanel: React.FC = () => {
                 label="Current Project"
                 defaultValue=""
                 value={selectedProjectId}
-                onChange={(e) =>
-                  dispatch(
-                    projectSlice.actions.update({
-                      currentProjectId: e.target.value,
-                    })
-                  )
-                }
+                onChange={handleSelectProject}
                 disabled={allBrief.isLoading}
               >
                 {allBrief.data?.map((project) => (

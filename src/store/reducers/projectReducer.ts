@@ -27,6 +27,19 @@ export const projectSlice = createSlice({
         ...payload,
       };
     },
+    setProject: (
+      state,
+      action: PayloadAction<{ id: string; isEditable?: boolean }>
+    ) => {
+      const {
+        payload: { id, isEditable = false },
+      } = action;
+      return {
+        ...initialState,
+        currentProjectId: id,
+        isEditable,
+      };
+    },
     clear: () => ({ ...initialState }),
   },
 });

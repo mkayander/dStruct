@@ -99,7 +99,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           successMessage = "New project was created successfully 🎉";
           newProject &&
             dispatch(
-              projectSlice.actions.update({ currentProjectId: newProject.id })
+              projectSlice.actions.setProject({
+                id: newProject.id,
+                isEditable: true,
+              })
             );
         }
 
@@ -152,7 +155,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     await deleteProject.mutateAsync({
       projectId: currentProject.id,
     });
-    dispatch(projectSlice.actions.update({ currentProjectId: null }));
+    dispatch(projectSlice.actions.clear());
     void trpcUtils.project.allBrief.invalidate();
     onClose();
     formik.resetForm();

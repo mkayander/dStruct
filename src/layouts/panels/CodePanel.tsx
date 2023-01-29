@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import { CodeRunner, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
-import { useRuntimeBinaryTree } from "#/hooks";
+import { createRuntimeTree } from "#/hooks/useRuntimeBinaryTree";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { trpc } from "#/utils";
@@ -23,7 +23,10 @@ import {
   selectCurrentProjectId,
   selectCurrentSolutionId,
 } from "#/store/reducers/projectReducer";
-import { treeNodeSlice } from "#/store/reducers/treeNodeReducer";
+import {
+  treeDataSelector,
+  treeNodeSlice,
+} from "#/store/reducers/treeNodeReducer";
 
 export const CodePanel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -143,6 +146,12 @@ export const CodePanel: React.FC = () => {
 
   const handleRunCode = () => {
     console.log("Run code:\n", codeInput);
+
+    const tree = createRuntimeTree(nodesData, dispatch);
+    if (!tree) {
+      console.error("No tree to run");
+      return;
+    }
 
     const getInputFunction = new Function(codeInput);
 
