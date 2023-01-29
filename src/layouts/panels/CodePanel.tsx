@@ -65,7 +65,7 @@ export const CodePanel: React.FC = () => {
 
   const updateSolution = trpc.project.updateSolution.useMutation();
 
-  const tree = useRuntimeBinaryTree();
+  const nodesData = useAppSelector(treeDataSelector);
 
   useEffect(() => {
     if (currentSolution.data?.code) setCodeInput(currentSolution.data.code);
