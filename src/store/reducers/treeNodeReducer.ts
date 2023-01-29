@@ -9,20 +9,9 @@ import {
 
 import type { RootState } from "#/store/makeStore";
 
-/**
- * Payload
- */
-export type BinaryTreeNodeDataPayload = {
-  id: string;
-  value: string | number;
-  depth: number;
-  color?: string;
-  left?: string;
-  right?: string;
-};
-
 export type BinaryTreeNodeData = {
   id: string;
+  originalValue: string | number;
   value: string | number;
   depth: number;
   color?: string;
@@ -30,7 +19,7 @@ export type BinaryTreeNodeData = {
   right?: string;
 };
 
-type TreeDataState = {
+export type TreeDataState = {
   count: number;
   maxDepth: number;
   rootId: string | null;
@@ -56,10 +45,7 @@ export const treeNodeSlice = createSlice({
   name: "BINARY_TREE_NODE",
   initialState,
   reducers: {
-    add: (
-      state: TreeDataState,
-      action: PayloadAction<BinaryTreeNodeDataPayload>
-    ) => {
+    add: (state: TreeDataState, action: PayloadAction<BinaryTreeNodeData>) => {
       const {
         payload: { id, ...node },
       } = action;
@@ -71,7 +57,7 @@ export const treeNodeSlice = createSlice({
       state: TreeDataState,
       action: PayloadAction<{
         maxDepth: number;
-        nodes: BinaryTreeNodeDataPayload[];
+        nodes: BinaryTreeNodeData[];
       }>
     ) => {
       const {
@@ -85,7 +71,7 @@ export const treeNodeSlice = createSlice({
     },
     update: (
       state: TreeDataState,
-      action: PayloadAction<Update<BinaryTreeNodeDataPayload>>
+      action: PayloadAction<Update<BinaryTreeNodeData>>
     ) => {
       const { payload } = action;
 
@@ -96,7 +82,7 @@ export const treeNodeSlice = createSlice({
     },
     remove: (
       state: TreeDataState,
-      action: PayloadAction<Pick<BinaryTreeNodeDataPayload, "id">>
+      action: PayloadAction<Pick<BinaryTreeNodeData, "id">>
     ) => {
       state.count--;
       treeNodeDataAdapter.removeOne(state.nodes, action.payload.id);
@@ -112,6 +98,7 @@ export const treeNodeSlice = createSlice({
           id,
           changes: {
             color: undefined,
+            value: state.nodes.entities[id]?.originalValue,
           },
         });
       }

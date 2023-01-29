@@ -17,7 +17,6 @@ export type NodeMeta = {
 };
 
 export class BinaryTreeNode {
-  private _val: number | string;
   meta: NodeMeta;
 
   constructor(
@@ -31,12 +30,10 @@ export class BinaryTreeNode {
     this.meta = meta;
   }
 
-  private getDispatchBase() {
-    return {
-      id: uuid.generate(),
-      nodeId: this.meta.id,
-      timestamp: performance.now(),
-    };
+  private _val: number | string;
+
+  public get val(): number | string {
+    return this._val;
   }
 
   public set val(value: number | string) {
@@ -50,21 +47,6 @@ export class BinaryTreeNode {
     );
   }
 
-  public get val(): number | string {
-    console.log("get val", this._val);
-    return this._val;
-  }
-
-  public setColor(color: string | null) {
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setColor",
-        args: [color],
-      })
-    );
-  }
-
   static fromNodeData(
     nodeData: BinaryTreeNodeData | undefined,
     dataMap: Dictionary<BinaryTreeNodeData>,
@@ -73,7 +55,7 @@ export class BinaryTreeNode {
   ): BinaryTreeNode | null {
     if (!nodeData) return null;
 
-    const { id, value, left, right } = nodeData;
+    const { id, originalValue, left, right } = nodeData;
 
     const newMeta = {
       ...meta,
@@ -92,11 +74,29 @@ export class BinaryTreeNode {
     }
 
     return new BinaryTreeNode(
-      value,
+      originalValue,
       leftNode,
       rightNode,
       { ...newMeta, id },
       dispatch
     );
+  }
+
+  public setColor(color: string | null) {
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "setColor",
+        args: [color],
+      })
+    );
+  }
+
+  private getDispatchBase() {
+    return {
+      id: uuid.generate(),
+      nodeId: this.meta.id,
+      timestamp: performance.now(),
+    };
   }
 }

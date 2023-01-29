@@ -6,7 +6,7 @@ import { isNumber } from "#/utils";
 import { useAppDispatch } from "#/store/hooks";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
-  type BinaryTreeNodeDataPayload,
+  type BinaryTreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
@@ -22,7 +22,7 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
 
     if (!input || input.length === 0) return;
 
-    const newDataNodes: Record<string, BinaryTreeNodeDataPayload> = {};
+    const newDataNodes: Record<string, BinaryTreeNodeData> = {};
 
     const createNodeData = (
       value: number | undefined | null,
@@ -34,6 +34,7 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
       newDataNodes[newId] = {
         id: newId,
         value: value,
+        originalValue: value,
         depth,
       };
 
@@ -46,7 +47,7 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
     const rootData = createNodeData(rootNum, 0);
     if (!rootData) return;
 
-    const queue: BinaryTreeNodeDataPayload[] = [rootData];
+    const queue: BinaryTreeNodeData[] = [rootData];
 
     let maxDepth = 0;
 
