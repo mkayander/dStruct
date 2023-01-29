@@ -1,18 +1,18 @@
-import { ProjectCategory } from '@prisma/client';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
+import { ProjectCategory } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 import {
   protectedProcedure,
   publicProcedure,
   router
-} from '#/server/trpc/trpc';
+} from "#/server/trpc/trpc";
 
-import defaultJsTemplate from '#/assets/codeTemplates/defaultTemplate.js.txt';
+import defaultJsTemplate from "#/assets/codeTemplates/defaultTemplate.js.txt";
 
 const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
-  const projectId: string | undefined = typeof rawInput === 'object' && (<any>rawInput).projectId;
-  if (!projectId) throw new TRPCError({ code: 'BAD_REQUEST', message: 'Missing projectId' });
+  const projectId: string | undefined = typeof rawInput === "object" && (<any>rawInput).projectId;
+  if (!projectId) throw new TRPCError({ code: "BAD_REQUEST", message: "Missing projectId" });
 
   const project = await ctx.prisma.playgroundProject.findUniqueOrThrow({
     where: {
@@ -22,9 +22,9 @@ const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, nex
 
   if (project.userId !== ctx.session.user.id) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: "UNAUTHORIZED",
       message:
-        'You must be the owner of this project to perform this operation.'
+        "You must be the owner of this project to perform this operation."
     });
   }
 
@@ -123,17 +123,24 @@ export const projectRouter = router({
           userId: ctx.session.user.id,
           cases: {
             create: {
-              title: 'Case 1',
-              input: '[]'
+              title: "Case 1",
+              input: "[]"
             }
           },
           solutions: {
             create: {
-              title: 'Solution 1',
+              title: "Solution 1",
               code: defaultJsTemplate
             }
           }
         }
+      }).catch((error) => {
+        if (error.code === "P2002") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "You already have a project with this name."
+          });
+        } else throw error;
       })
     ),
 
@@ -143,7 +150,7 @@ export const projectRouter = router({
         projectId: z.string(),
         title: z.ostring(),
         category: z.nativeEnum(ProjectCategory).optional(),
-        input: z.ostring(),
+        description: z.ostring(),
         isPublic: z.oboolean(),
         isExample: z.oboolean()
       })
@@ -154,6 +161,13 @@ export const projectRouter = router({
           id
         },
         data
+      }).catch((error) => {
+        if (error.code === "P2002") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "You already have a project with this name."
+          });
+        } else throw error;
       })
     ),
 
