@@ -1,12 +1,13 @@
+import { DeleteForever } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
-  Box,
   FormControl,
   FormControlLabel,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select,
+  Stack,
   Switch,
 } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -17,13 +18,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { ProjectCategory } from "@prisma/client";
+import { type PlaygroundProject, ProjectCategory } from "@prisma/client";
+import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import React from "react";
+import React, { useEffect } from "react";
 import * as yup from "yup";
 
 import { trpc } from "#/utils";
+
+import { useAppDispatch } from "#/store/hooks";
+import { projectSlice } from "#/store/reducers/projectReducer";
 
 const categoriesList = Object.values(ProjectCategory);
 const categoryLabels: Record<ProjectCategory, string> = {
@@ -43,17 +48,24 @@ const validationSchema = yup.object({
   projectCategory: yup.string().required("Project category is required"),
 });
 
-type CreateProjectModalProps = DialogProps & {
+type ProjectModalProps = DialogProps & {
   onClose: () => void;
+  currentProject?: PlaygroundProject;
+  isEditMode: boolean;
 };
 
-export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
+export const ProjectModal: React.FC<ProjectModalProps> = ({
   onClose,
+  isEditMode,
+  currentProject,
   ...props
 }) => {
+  const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const submitProject = trpc.project.create.useMutation();
+  const createProject = trpc.project.create.useMutation();
+  const editProject = trpc.project.update.useMutation();
+  const deleteProject = trpc.project.delete.useMutation();
   const trpcUtils = trpc.useContext();
 
   const formik = useFormik({
@@ -65,20 +77,93 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     },
     validationSchema: validationSchema,
     onSubmit: async (values, formikHelpers) => {
-      await submitProject.mutateAsync({
-        title: values.projectName,
-        category: values.projectCategory,
-        description: values.projectDescription,
-        isPublic: values.isPublic,
-      });
-      enqueueSnackbar("Project created successfully", {
-        variant: "success",
-      });
-      await trpcUtils.project.all.invalidate();
-      formikHelpers.resetForm();
-      onClose();
+      let successMessage = "";
+      try {
+        if (isEditMode && currentProject) {
+          await editProject.mutateAsync({
+            projectId: currentProject.id,
+            title: values.projectName,
+            category: values.projectCategory,
+            description: values.projectDescription,
+            isPublic: values.isPublic,
+          });
+          successMessage = `Project "${values.projectName}" was successfully updated 📝`;
+          void trpcUtils.project.getById.invalidate(currentProject.id);
+        } else {
+          const newProject = await createProject.mutateAsync({
+            title: values.projectName,
+            category: values.projectCategory,
+            description: values.projectDescription,
+            isPublic: values.isPublic,
+          });
+          successMessage = "New project was created successfully 🎉";
+          newProject &&
+            dispatch(
+              projectSlice.actions.update({ currentProjectId: newProject.id })
+            );
+        }
+
+        void trpcUtils.project.allBrief.invalidate();
+        onClose();
+        formikHelpers.resetForm();
+
+        if (successMessage) {
+          enqueueSnackbar(successMessage, {
+            variant: "success",
+          });
+        }
+      } catch (error: any) {
+        if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
+          formikHelpers.setErrors({
+            projectName: error.message,
+          });
+        } else {
+          enqueueSnackbar(error.message, {
+            variant: "error",
+          });
+        }
+      }
     },
   });
+
+  useEffect(() => {
+    if (isEditMode && currentProject) {
+      formik.setValues({
+        projectName: currentProject.title,
+        projectCategory: currentProject.category,
+        projectDescription: currentProject.description ?? "",
+        isPublic: currentProject.isPublic,
+      });
+    } else {
+      formik.resetForm();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditMode]);
+
+  const handleDeleteProject = async () => {
+    if (!currentProject) return;
+    if (
+      !confirm(
+        `Are you sure you want to delete the "${currentProject.title}" project? This action cannot be undone.`
+      ) // TODO: Replace with a custom modal
+    )
+      return;
+
+    await deleteProject.mutateAsync({
+      projectId: currentProject.id,
+    });
+    dispatch(projectSlice.actions.update({ currentProjectId: null }));
+    void trpcUtils.project.allBrief.invalidate();
+    onClose();
+    formik.resetForm();
+
+    enqueueSnackbar(
+      `Project "${currentProject.title}" was successfully deleted 🧹`,
+      {
+        variant: "success",
+      }
+    );
+  };
 
   return (
     <Dialog {...props} onClose={onClose}>
@@ -88,12 +173,14 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           formik.handleSubmit(e);
         }}
       >
-        <DialogTitle>👷‍♂️ Create New Project</DialogTitle>
+        <DialogTitle>
+          {isEditMode ? "📝 Edit Project" : "👷‍♂️ Create New Project"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter a name for your new project. And other data.
+            Edit the project details below according to your needs.
           </DialogContentText>
-          <Box display="flex" flexDirection="column" gap={1} mt={2}>
+          <Stack spacing={2} mt={2}>
             <TextField
               id="projectName"
               name="projectName"
@@ -164,20 +251,32 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                 <Switch
                   id="isPublic"
                   name="isPublic"
-                  defaultChecked
                   disabled={formik.isSubmitting}
-                  value={formik.values.isPublic}
+                  checked={formik.values.isPublic}
                   onChange={formik.handleChange}
                 />
               }
               label="Public"
             />
-          </Box>
+          </Stack>
         </DialogContent>
         <DialogActions>
+          {isEditMode && (
+            <LoadingButton
+              title="Delete this project"
+              color="error"
+              endIcon={<DeleteForever />}
+              loading={deleteProject.isLoading}
+              loadingPosition="end"
+              onClick={handleDeleteProject}
+              sx={{ mr: "auto" }}
+            >
+              Delete
+            </LoadingButton>
+          )}
           <Button onClick={onClose}>Cancel</Button>
           <LoadingButton type="submit" loading={formik.isSubmitting}>
-            Submit
+            {isEditMode ? "Update" : "Create"}
           </LoadingButton>
         </DialogActions>
       </form>

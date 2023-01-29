@@ -1,13 +1,14 @@
-import { Add } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
-  Box,
   CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
   MenuItem,
   Select,
+  Skeleton,
+  Stack,
   Tab,
   TextField,
   Tooltip,
@@ -18,7 +19,7 @@ import React, { useEffect, useState } from "react";
 import { TestCaseSelectBar } from "#/components";
 import { useBinaryTree } from "#/hooks";
 import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
-import { CreateProjectModal } from "#/layouts/modals";
+import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { trpc } from "#/utils";
@@ -40,10 +41,9 @@ export const ProjectPanel: React.FC = () => {
   const [rawInput, setRawInput] = useState<string>("[]");
   const [inputError, setInputError] = useState<string | null>(null);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const [isModalEditMode, setIsModalEditMode] = useState(false);
 
-  // const { value: debouncedInput, isPending } = useDebounce(rawInput, 500);
-
-  const { data: projects } = trpc.project.allBrief.useQuery();
+  const allBrief = trpc.project.allBrief.useQuery();
 
   const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? "";
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
@@ -78,14 +78,15 @@ export const ProjectPanel: React.FC = () => {
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
-    if (projects?.length && !selectedProjectId) {
-      const firstProject = projects[0];
+    console.log("selectedProjectId", selectedProjectId);
+    if (allBrief.data?.length && !selectedProjectId) {
+      const firstProject = allBrief.data[0];
       firstProject &&
         dispatch(
           projectSlice.actions.update({ currentProjectId: firstProject.id })
         );
     }
-  }, [dispatch, projects, selectedProjectId]);
+  }, [allBrief.data, dispatch, selectedProjectId]);
 
   useEffect(() => {
     if (selectedCase.data) {
@@ -144,12 +145,41 @@ export const ProjectPanel: React.FC = () => {
     setTabValue(newValue);
   };
 
+  const handleCreateProject = () => {
+    setIsModalEditMode(false);
+    setIsProjectModalOpen(true);
+  };
+
+  const handleEditProject = () => {
+    setIsModalEditMode(true);
+    setIsProjectModalOpen(true);
+  };
+
   return (
     <PanelWrapper>
-      <CreateProjectModal
+      <ProjectModal
         open={isProjectModalOpen}
         onClose={() => setIsProjectModalOpen(false)}
+        isEditMode={isModalEditMode}
+        currentProject={selectedProject.data}
       />
+
+      {allBrief.isLoading && (
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          sx={{
+            position: "absolute",
+            background: "transparent",
+            height: "100%",
+            width: "100%",
+            top: 0,
+            left: 0,
+            zIndex: 10,
+            cursor: "wait",
+          }}
+        />
+      )}
 
       <TabContext value={tabValue}>
         <TabListWrapper>
@@ -162,13 +192,13 @@ export const ProjectPanel: React.FC = () => {
           value="1"
           sx={{ display: "flex", flexFlow: "column nowrap", gap: 1 }}
         >
-          <Box display="flex" flexDirection="row" alignItems="center" gap={2}>
+          <Stack direction="row" alignItems="center" spacing={2}>
             <FormControl fullWidth>
-              <InputLabel id="project-select-label">Select project</InputLabel>
+              <InputLabel id="project-select-label">Current Project</InputLabel>
               <Select
                 id="project-select"
                 labelId="project-select-label"
-                label="Select project"
+                label="Current Project"
                 defaultValue=""
                 value={selectedProjectId}
                 onChange={(e) =>
@@ -178,31 +208,41 @@ export const ProjectPanel: React.FC = () => {
                     })
                   )
                 }
+                disabled={allBrief.isLoading}
               >
-                {projects?.map((project) => (
+                {allBrief.data?.map((project) => (
                   <MenuItem key={project.id} value={project.id}>
                     {project.title}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-            {isEditable && (
-              <Tooltip title="Create new project ➕" arrow>
-                <IconButton onClick={() => setIsProjectModalOpen(true)}>
-                  <Add />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Box>
+            <Stack direction="row" spacing={0.5}>
+              {isEditable && (
+                <Tooltip title="Edit selected project ✍" arrow>
+                  <IconButton onClick={handleEditProject}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {session.data && (
+                <Tooltip title="Create new project ➕" arrow>
+                  <IconButton onClick={handleCreateProject}>
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Stack>
+          </Stack>
 
           <TestCaseSelectBar selectedProject={selectedProject} />
 
-          <Box
+          <Stack
+            direction="row"
+            mt={1}
+            spacing={2}
+            alignItems="start"
             sx={{
-              display: "flex",
-              alignItems: "start",
-              mt: 1,
-              gap: 2,
               "button.btn-refresh": { mt: 1 },
             }}
           >
@@ -214,14 +254,17 @@ export const ProjectPanel: React.FC = () => {
               error={!!inputError}
               helperText={inputError || "Must be a JSON array of numbers"}
               fullWidth
+              disabled={selectedProject.isLoading}
             />
-            <CircularProgress
-              sx={{
-                transition: "opacity .2s",
-                opacity: updateCase.isLoading ? 1 : 0,
-              }}
-            />
-          </Box>
+            <div>
+              <CircularProgress
+                sx={{
+                  transition: "opacity .2s",
+                  opacity: updateCase.isLoading ? 1 : 0,
+                }}
+              />
+            </div>
+          </Stack>
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
