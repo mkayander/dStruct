@@ -1,3 +1,20 @@
+# [1.80.0](https://github.com/mkayander/leetpal/compare/v1.79.0...v1.80.0) (2023-01-29)
+
+
+### Bug Fixes
+
+* Fixed errors when output is an object ([6d2c018](https://github.com/mkayander/leetpal/commit/6d2c0188c2fd0060393ad849d082338cd8a8e7c0))
+* Improve project state management ([b7e383d](https://github.com/mkayander/leetpal/commit/b7e383dfe1458fab5a88f6599b671fe007acf01e))
+* Set current solution to null on delete ([0179697](https://github.com/mkayander/leetpal/commit/01796976a886d8aa83e572b5a56f232ca9eefd6d))
+* Set editor tab size to 2 ([d5c9d34](https://github.com/mkayander/leetpal/commit/d5c9d34091bfa39b122a360e59fc4317cc427d4b))
+* Use node data to create tree on each run ([c956f62](https://github.com/mkayander/leetpal/commit/c956f62b24637a82382d0d4d56ced72fa6da196c))
+
+
+### Features
+
+* Separate runtime tree creation into an exported function ([a7b76a9](https://github.com/mkayander/leetpal/commit/a7b76a9c3264db98fbbe8e86a96f7b7e583b3588))
+* Store original node value ([347afe2](https://github.com/mkayander/leetpal/commit/347afe26aa50128543a2c736964957fca1916aeb))
+
 # [1.79.0](https://github.com/mkayander/leetpal/compare/v1.78.0...v1.79.0) (2023-01-29)
 
 
