@@ -3,23 +3,35 @@ import { useMemo } from "react";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { treeDataSelector } from "#/store/reducers/treeNodeReducer";
+import type { AppDispatch } from "#/store/makeStore";
+import {
+  treeDataSelector,
+  type TreeDataState,
+} from "#/store/reducers/treeNodeReducer";
 
 export const useRuntimeBinaryTree = () => {
   const dispatch = useAppDispatch();
 
   const nodesData = useAppSelector(treeDataSelector);
 
-  return useMemo(() => {
-    const rootId = nodesData.rootId;
-    if (!rootId) return null;
+  return useMemo(
+    () => createRuntimeTree(nodesData, dispatch),
+    [nodesData, dispatch]
+  );
+};
 
-    const rootData = nodesData.nodes.entities[rootId];
+export const createRuntimeTree = (
+  nodesData: TreeDataState,
+  dispatch: AppDispatch
+) => {
+  const rootId = nodesData.rootId;
+  if (!rootId) return null;
 
-    return BinaryTreeNode.fromNodeData(
-      rootData,
-      nodesData.nodes.entities,
-      dispatch
-    );
-  }, [nodesData, dispatch]);
+  const rootData = nodesData.nodes.entities[rootId];
+
+  return BinaryTreeNode.fromNodeData(
+    rootData,
+    nodesData.nodes.entities,
+    dispatch
+  );
 };
