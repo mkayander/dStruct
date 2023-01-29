@@ -22,9 +22,7 @@ import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 
-type TreeViewPanelProps = React.ComponentProps<typeof TreeViewer>;
-
-export const TreeViewPanel: React.FC<TreeViewPanelProps> = () => {
+export const TreeViewPanel: React.FC = () => {
   const [tabValue, setTabValue] = useState("1");
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
