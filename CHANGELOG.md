@@ -1,3 +1,11 @@
+# [1.81.0](https://github.com/mkayander/leetpal/compare/v1.80.0...v1.81.0) (2023-01-29)
+
+
+### Features
+
+* Add "callstack is ready" selector ([ec698b5](https://github.com/mkayander/leetpal/commit/ec698b532c85c55a3c46ff39c26a2744f52701a4))
+* Added playback slider and trigger button ([874df14](https://github.com/mkayander/leetpal/commit/874df147285f9d768392c0422ee1726ae506c19e))
+
 # [1.80.0](https://github.com/mkayander/leetpal/compare/v1.79.0...v1.80.0) (2023-01-29)
 
 
