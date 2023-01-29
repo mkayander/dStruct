@@ -1,4 +1,3 @@
-import type { PlaygroundTestCase } from "@prisma/client";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
@@ -26,20 +25,6 @@ export const projectSlice = createSlice({
       return {
         ...state,
         ...payload,
-      };
-    },
-    setCurrentCase: (
-      state,
-      action: PayloadAction<PlaygroundTestCase | null>
-    ) => {
-      const { payload } = action;
-      return {
-        ...state,
-        currentCase: payload && {
-          ...payload,
-          createdAt: payload.createdAt.toISOString(),
-          updatedAt: payload.updatedAt.toISOString(),
-        },
       };
     },
     clear: () => ({ ...initialState }),
