@@ -8,14 +8,23 @@ import {
 
 import type { RootState } from "#/store/makeStore";
 
-export type CallFrame = {
+type CallFrameBase = {
   id: string;
   nodeId: string;
-  // order: number;
-  name: string;
-  args: any[];
   timestamp: number;
 };
+
+type SetColorFrame = CallFrameBase & {
+  name: "setColor";
+  args: [string | null];
+};
+
+type SetValFrame = CallFrameBase & {
+  name: "setVal";
+  args: [number | string | null];
+};
+
+export type CallFrame = SetColorFrame | SetValFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
   selectId: (frame) => frame.id,

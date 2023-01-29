@@ -17,38 +17,50 @@ export type NodeMeta = {
 };
 
 export class BinaryTreeNode {
-  // private _val: number | string;
+  private _val: number | string;
   meta: NodeMeta;
 
   constructor(
-    public val: number | string,
+    val: number | string,
     public left: BinaryTreeNode | null = null,
     public right: BinaryTreeNode | null = null,
     meta: NodeMeta,
     private dispatch: AppDispatch
   ) {
-    // this._val = val;
+    this._val = val;
     this.meta = meta;
   }
 
-  // public set val(value: number | string) {
-  //   console.log('set val', value);
-  //   this._val = value;
-  // }
-  //
-  // public get val(): number | string {
-  //   console.log('get val', this._val);
-  //   return this._val;
-  // }
+  private getDispatchBase() {
+    return {
+      id: uuid.generate(),
+      nodeId: this.meta.id,
+      timestamp: performance.now(),
+    };
+  }
+
+  public set val(value: number | string) {
+    this._val = value;
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "setVal",
+        args: [value],
+      })
+    );
+  }
+
+  public get val(): number | string {
+    console.log("get val", this._val);
+    return this._val;
+  }
 
   public setColor(color: string | null) {
     this.dispatch(
       callstackSlice.actions.addOne({
-        id: uuid.generate(),
-        nodeId: this.meta.id,
+        ...this.getDispatchBase(),
         name: "setColor",
         args: [color],
-        timestamp: performance.now(),
       })
     );
   }
