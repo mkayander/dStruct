@@ -56,14 +56,14 @@ export const OutputPanel: React.FC = () => {
                 <Typography variant="caption">
                   Returned:{" "}
                   <Box
-                    component="span"
+                    component="div"
                     sx={{
                       backgroundColor: alpha(theme.palette.success.dark, 0.2),
                       p: 1,
                       borderRadius: 2,
                     }}
                   >
-                    {result}
+                    <pre>{JSON.stringify(result, null, 2)}</pre>
                   </Box>
                 </Typography>
               </Box>
