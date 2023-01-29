@@ -1,5 +1,13 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, Chip, type ChipProps, IconButton, useTheme } from "@mui/material";
+import {
+  Box,
+  Chip,
+  type ChipProps,
+  IconButton,
+  Skeleton,
+  type SkeletonProps,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 
 type SelectBarChipProps = ChipProps & {
@@ -72,5 +80,20 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
         </IconButton>
       )}
     </Box>
+  );
+};
+
+export const SelectBarChipSkeleton: React.FC<SkeletonProps> = (props) => {
+  return (
+    <Skeleton
+      width={64}
+      height={24}
+      variant="rectangular"
+      sx={{
+        borderRadius: 4,
+        mt: "2px",
+      }}
+      {...props}
+    />
   );
 };
