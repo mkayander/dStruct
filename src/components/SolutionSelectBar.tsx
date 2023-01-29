@@ -55,10 +55,9 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const deleteSolution = trpc.project.deleteSolution.useMutation({
     onSuccess: async (data, variables) => {
       if (selectedSolutionId === data.id) {
-        const firstSolutionId = selectedProject.data?.solutions[0]?.id;
         dispatch(
           projectSlice.actions.update({
-            currentSolutionId: firstSolutionId || null,
+            currentSolutionId: null,
           })
         );
       }
