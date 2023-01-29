@@ -1,3 +1,21 @@
+# [1.79.0](https://github.com/mkayander/leetpal/compare/v1.78.0...v1.79.0) (2023-01-29)
+
+
+### Bug Fixes
+
+* Deleted unused action ([4b9fd6f](https://github.com/mkayander/leetpal/commit/4b9fd6fe2d37473422f705dfa1138ef0d6b4a6fe))
+
+
+### Features
+
+* Add title unique constraint ([b975c15](https://github.com/mkayander/leetpal/commit/b975c15376aa6ed8dea8decb32d0016649e4473c))
+* Added 'setValue' runtime call frame ([3856a4d](https://github.com/mkayander/leetpal/commit/3856a4d6ccd4939f5caf59b8fa9c1ad38e8c474e))
+* Added project edit & delete features ([173c2f7](https://github.com/mkayander/leetpal/commit/173c2f71d51e56859bf2c7daf4cb911fbdc9d1b2))
+* Added select chip skeleton component ([30a0422](https://github.com/mkayander/leetpal/commit/30a0422d760b5a8c5d380b26fd20e48064587129))
+* Push "setVal" runtime dispatches ([14cd0f2](https://github.com/mkayander/leetpal/commit/14cd0f21904ba8df620fdc96f50c57924885feba))
+* Send 400 error if client tries to add an existing project name ([c083f09](https://github.com/mkayander/leetpal/commit/c083f09a8e82f8180edf6cf4e9fdc85008969681))
+* Show chip skeletons when data is not loaded yet ([172023e](https://github.com/mkayander/leetpal/commit/172023e52199d1df7bf3f949a3b7f825cc3ea200))
+
 # [1.78.0](https://github.com/mkayander/leetpal/compare/v1.77.1...v1.78.0) (2023-01-28)
 
 
