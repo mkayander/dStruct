@@ -115,6 +115,8 @@ model PlaygroundProject {
   isPublic    Boolean              @default(false)
   solutions   PlaygroundSolution[]
   cases       PlaygroundTestCase[]
+
+  @@unique([title, userId])
 }
 
 model PlaygroundSolution {
