@@ -36,14 +36,29 @@ export const TreeViewer: React.FC = () => {
         return;
       }
 
-      dispatch(
-        treeNodeSlice.actions.update({
-          id: frame.nodeId,
-          changes: {
-            color: frame.args[0] || undefined,
-          },
-        })
-      );
+      switch (frame.name) {
+        case "setColor":
+          dispatch(
+            treeNodeSlice.actions.update({
+              id: frame.nodeId,
+              changes: {
+                color: frame.args[0] || undefined,
+              },
+            })
+          );
+          break;
+
+        case "setVal":
+          dispatch(
+            treeNodeSlice.actions.update({
+              id: frame.nodeId,
+              changes: {
+                value: frame.args[0] || undefined,
+              },
+            })
+          );
+          break;
+      }
 
       i++;
     }, 200);
