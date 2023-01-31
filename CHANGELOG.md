@@ -1,3 +1,13 @@
+# [1.82.0](https://github.com/mkayander/leetpal/compare/v1.81.1...v1.82.0) (2023-01-31)
+
+
+### Features
+
+* Added basic case modal ([546f1e4](https://github.com/mkayander/leetpal/commit/546f1e475b7a88b4326eaf45ef46bf4cd4258a32))
+* Added basic case modal usage ([f013a86](https://github.com/mkayander/leetpal/commit/f013a86e04d386d463e66ee19b1fa9a5227672f1))
+* Added test case description field ([d50ecc0](https://github.com/mkayander/leetpal/commit/d50ecc070ddc038d219c5279fd3e33e0f91f374d))
+* Added test case description field ([a8ed991](https://github.com/mkayander/leetpal/commit/a8ed99166cebd877a7485daac21776aced7d45a0))
+
 ## [1.81.1](https://github.com/mkayander/leetpal/compare/v1.81.0...v1.81.1) (2023-01-29)
 
 
