@@ -131,11 +131,12 @@ model PlaygroundSolution {
 }
 
 model PlaygroundTestCase {
-  id        String            @id @default(cuid())
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now())
-  projectId String
-  project   PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  title     String
-  input     String            @db.Text
+  id          String            @id @default(cuid())
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @default(now())
+  projectId   String
+  project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  input       String            @db.Text
+  description String?
 }
