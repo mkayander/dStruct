@@ -233,7 +233,8 @@ export const projectRouter = router({
         projectId: z.string(),
         caseId: z.string(),
         title: z.ostring(),
-        input: z.ostring()
+        input: z.ostring(),
+        description: z.ostring()
       })
     )
     .mutation(async ({ input: { caseId, ...data }, ctx }) =>
