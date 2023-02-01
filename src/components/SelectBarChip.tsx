@@ -1,4 +1,4 @@
-import { Cancel } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import {
   Box,
   Chip,
@@ -13,12 +13,13 @@ import React from "react";
 type SelectBarChipProps = ChipProps & {
   isCurrent: boolean;
   isEditable: boolean;
+  onEditClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const SelectBarChip: React.FC<SelectBarChipProps> = ({
   isCurrent,
   isEditable,
-  onDelete,
+  onEditClick,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -50,7 +51,7 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
           },
         }}
       />
-      {isEditable && (
+      {isEditable && onEditClick && (
         <IconButton
           size="small"
           title="Delete solution"
@@ -68,9 +69,9 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
               },
             },
           }}
-          onClick={onDelete}
+          onClick={onEditClick}
         >
-          <Cancel
+          <Edit
             sx={{
               transition: "opacity 0.3s",
               opacity: 0.3,
