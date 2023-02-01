@@ -2,6 +2,7 @@ import { Add } from "@mui/icons-material";
 import { CircularProgress, IconButton, Stack } from "@mui/material";
 import type { PlaygroundTestCase } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 
 import {
@@ -30,6 +31,8 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
@@ -44,6 +47,9 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         projectId: variables.projectId,
       });
       dispatch(projectSlice.actions.update({ currentCaseId: data.id }));
+      enqueueSnackbar(`🧪 Test case "${data.title}" created successfully! 🎉`, {
+        variant: "success",
+      });
     },
   });
   const deleteCase = trpc.project.deleteCase.useMutation({
@@ -82,10 +88,9 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     dispatch(projectSlice.actions.update({ currentCaseId: testCase.id }));
   };
 
-  const handleCaseDelete = (testCase: TestCaseBrief) => {
-    if (!selectedProjectId) return;
-
-    deleteCase.mutate({ projectId: selectedProjectId, caseId: testCase.id });
+  const handleCaseEdit = (testCase: TestCaseBrief) => {
+    handleCaseClick(testCase);
+    setIsModalOpen(true);
   };
 
   const handleAddCase = () => {
@@ -100,12 +105,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   return (
     <>
-      <CaseModal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onCaseUpdate={() => {}}
-        onCaseDelete={() => {}}
-      />
+      <CaseModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Stack direction="row" flexWrap="wrap" gap={1}>
         {!selectedProject.data && (
           <>
@@ -127,11 +127,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
               label={testCase.title}
               disabled={isLoading}
               onClick={() => handleCaseClick(testCase)}
-              onDelete={() => {
-                confirm(
-                  `Are you sure you want to delete "${testCase.title}"? This action cannot be undone.`
-                ) && handleCaseDelete(testCase); // TODO: use a modal instead of prompt
-              }}
+              onEditClick={() => handleCaseEdit(testCase)}
             />
           );
         })}

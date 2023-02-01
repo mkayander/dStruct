@@ -9,14 +9,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { type PlaygroundTestCase } from "@prisma/client";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
 import { trpc } from "#/utils";
+
+import { useAppSelector } from "#/store/hooks";
+import {
+  projectSlice,
+  selectCurrentCaseId,
+  selectCurrentProjectId,
+} from "#/store/reducers/projectReducer";
 
 const validationSchema = yup.object({
   caseName: yup
@@ -29,26 +36,41 @@ const validationSchema = yup.object({
     .max(190, "Case description must be at most 200 characters"),
 });
 
-type CaseModalProps = DialogProps & {
+export type CaseModalProps = DialogProps & {
   onClose: () => void;
-  currentCase?: PlaygroundTestCase;
-  onCaseUpdate: (
-    data: Pick<PlaygroundTestCase, "id" | "title" | "description">
-  ) => void;
-  onCaseDelete: (caseId: string) => void;
 };
 
-export const CaseModal: React.FC<CaseModalProps> = ({
-  onClose,
-  currentCase,
-  onCaseDelete,
-  ...props
-}) => {
-  const { enqueueSnackbar } = useSnackbar();
+export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
+  const dispatch = useDispatch();
 
+  const { enqueueSnackbar } = useSnackbar();
+  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
+  const currentCaseId = useAppSelector(selectCurrentCaseId) ?? "";
+
+  const currentCase = trpc.project.getCaseById.useQuery(
+    { id: currentCaseId, projectId: currentProjectId },
+    { enabled: Boolean(currentCaseId && currentProjectId) }
+  );
   const editCase = trpc.project.updateCase.useMutation();
-  const deleteCase = trpc.project.deleteCase.useMutation();
+  const deleteCase = trpc.project.deleteCase.useMutation({
+    onSuccess: (data) => {
+      dispatch(projectSlice.actions.update({ currentCaseId: null }));
+      invalidateQueries();
+
+      onClose();
+      enqueueSnackbar(
+        `🧪 Test case "${data.title}" was successfully deleted 🧹`,
+        {
+          variant: "success",
+        }
+      );
+    },
+  });
   const trpcUtils = trpc.useContext();
+
+  const invalidateQueries = () => {
+    void trpcUtils.project.getById.invalidate(currentProjectId);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -57,29 +79,23 @@ export const CaseModal: React.FC<CaseModalProps> = ({
     },
     validationSchema: validationSchema,
     onSubmit: async (values, formikHelpers) => {
-      if (!currentCase) return;
+      if (!currentCase.data) return;
+
       try {
         await editCase.mutateAsync({
-          projectId: currentCase.projectId,
-          caseId: currentCase.id,
+          projectId: currentProjectId,
+          caseId: currentCase.data.id,
           title: values.caseName,
           description: values.caseDescription,
         });
-
-        void trpcUtils.project.getById.invalidate(currentCase.projectId);
-        void trpcUtils.project.getCaseById.invalidate({
-          id: currentCase.id,
-          projectId: currentCase.projectId,
-        });
+        invalidateQueries();
 
         onClose();
         formikHelpers.resetForm();
 
         enqueueSnackbar(
-          `Test case "${values.caseName}" was successfully updated 📝`,
-          {
-            variant: "success",
-          }
+          `🧪 Test case "${currentCase.data.title}" was successfully updated 📝`,
+          { variant: "success" }
         );
       } catch (error: any) {
         if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
@@ -96,50 +112,34 @@ export const CaseModal: React.FC<CaseModalProps> = ({
   });
 
   useEffect(() => {
-    if (currentCase) {
+    if (currentCase.data) {
       formik.setValues({
-        caseName: currentCase.title,
-        caseDescription: currentCase.description ?? "",
+        caseName: currentCase.data.title,
+        caseDescription: currentCase.data.description ?? "",
       });
     } else {
       formik.resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCase]);
-
-  // const handleDeleteProject = async () => {
-  //   if (!currentCase) return;
-  //   if (
-  //     !confirm(
-  //       `Are you sure you want to delete the "${currentCase.title}" project? This action cannot be undone.`
-  //     ) // TODO: Replace with a custom modal
-  //   )
-  //     return;
-  //
-  //   await deleteCase.mutateAsync({
-  //     projectId: currentCase.projectId,
-  //     caseId: currentCase.id,
-  //   });
-  //   dispatch(projectSlice.actions.clear());
-  //   void trpcUtils.project.allBrief.invalidate();
-  //   onClose();
-  //   formik.resetForm();
-  //
-  //   enqueueSnackbar(
-  //     `Project "${currentCase.title}" was successfully deleted 🧹`,
-  //     {
-  //       variant: "success",
-  //     }
-  //   );
-  // };
+  }, [currentCase.data]);
 
   const handleCaseDelete = async () => {
-    if (!currentCase) return;
-    onCaseDelete(currentCase.id);
+    if (!currentCase.data) return;
+    if (
+      !confirm(
+        `Are you sure you want to delete the "${currentCase.data.title}" test case? This action cannot be undone.`
+      ) // TODO: Replace with a custom modal
+    )
+      return;
+
+    await deleteCase.mutateAsync({
+      projectId: currentProjectId,
+      caseId: currentCaseId,
+    });
   };
 
   return (
-    <Dialog {...props} onClose={onClose}>
+    <Dialog {...props} onClose={onClose} fullWidth>
       <form
         onSubmit={(e) => {
           console.log("submit");
