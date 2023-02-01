@@ -1,3 +1,16 @@
+# [1.83.0](https://github.com/mkayander/leetpal/compare/v1.82.0...v1.83.0) (2023-02-01)
+
+
+### Bug Fixes
+
+* Remove redundant console log ([f49d189](https://github.com/mkayander/leetpal/commit/f49d189d9f2285beb5b5e8202c85f2e1343caaa0))
+
+
+### Features
+
+* Finished test case modal ([0821d9f](https://github.com/mkayander/leetpal/commit/0821d9f6fdf83a750b6dc811cc775f5857c9a23f))
+* Use edit action on bar chips ([c155672](https://github.com/mkayander/leetpal/commit/c155672fdd602eaddd4483a850ce1ab8e234f63d))
+
 # [1.82.0](https://github.com/mkayander/leetpal/compare/v1.81.1...v1.82.0) (2023-01-31)
 
 
