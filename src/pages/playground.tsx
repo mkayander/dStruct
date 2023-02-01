@@ -27,7 +27,6 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   const isVertical = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-  console.log("isVertical", isVertical);
 
   if (isVertical)
     return (
