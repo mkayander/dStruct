@@ -293,6 +293,7 @@ export const projectRouter = router({
         projectId: z.string(),
         solutionId: z.string(),
         title: z.ostring(),
+        description: z.ostring(),
         code: z.ostring(),
         order: z.onumber()
       })
