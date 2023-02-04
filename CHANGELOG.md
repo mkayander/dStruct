@@ -1,3 +1,21 @@
+# [1.84.0](https://github.com/mkayander/leetpal/compare/v1.83.0...v1.84.0) (2023-02-04)
+
+
+### Bug Fixes
+
+* Always display edit button of the active chip on mobile ([52076ab](https://github.com/mkayander/leetpal/commit/52076abf0d47713e24f601fe2f6eed913441f92b))
+* Change solution modal emoji ([aeac125](https://github.com/mkayander/leetpal/commit/aeac125ee7ce4513c50709c0744a9a3ad8e8738f))
+* Don't attempt to update project data if it's not editable ([4e6946b](https://github.com/mkayander/leetpal/commit/4e6946b4b2beb6edca9aefcb9cdd034e37525052))
+* Pass solution description ([6ddc1eb](https://github.com/mkayander/leetpal/commit/6ddc1eb79236cb8bca5a30f27a2e67f6999ca528))
+
+
+### Features
+
+* Added solution description ([03d808e](https://github.com/mkayander/leetpal/commit/03d808ef0873252dff0634d61df025ed83c16f94))
+* Implement a new solution modal ([041aaf8](https://github.com/mkayander/leetpal/commit/041aaf8b832987c01b1ad2ea6683afe11c87a86f))
+* Implement a reusable edit form modal ([905669b](https://github.com/mkayander/leetpal/commit/905669b9ff305e81e1da7922f39d5ba7c7e91677))
+* Use a new modal wrapper ([ac8bd6e](https://github.com/mkayander/leetpal/commit/ac8bd6ee9b8916bffe6b5ff062fb7677052a0e47))
+
 # [1.83.0](https://github.com/mkayander/leetpal/compare/v1.82.0...v1.83.0) (2023-02-01)
 
 
