@@ -1,9 +1,11 @@
-import { Add } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
 import {
   CircularProgress,
   IconButton,
   Stack,
   type StackProps,
+  type Theme,
+  useMediaQuery,
 } from "@mui/material";
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
@@ -35,6 +37,10 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   ...restProps
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMobile = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   const selectedSolutionId = useAppSelector(selectCurrentSolutionId);
   const selectedProjectId = selectedProject.data?.id;
@@ -134,18 +140,30 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         })}
 
         {isEditable && (
-          <IconButton
-            title="Add new solution 🚀"
-            size="small"
-            onClick={handleAddCase}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <CircularProgress size="1.3rem" />
-            ) : (
-              <Add fontSize="small" />
+          <>
+            {isMobile && (
+              <IconButton
+                title="Edit selected test case 🧪"
+                size="small"
+                onClick={() => setIsModalOpen(true)}
+                disabled={isLoading}
+              >
+                <Edit fontSize="small" />
+              </IconButton>
             )}
-          </IconButton>
+            <IconButton
+              title="Add new test case 🧪"
+              size="small"
+              onClick={handleAddCase}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <CircularProgress size="1.3rem" />
+              ) : (
+                <Add fontSize="small" />
+              )}
+            </IconButton>
+          </>
         )}
       </Stack>
     </>
