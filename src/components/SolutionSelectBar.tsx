@@ -7,12 +7,13 @@ import {
 } from "@mui/material";
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBarChip";
+import { SolutionModal } from "#/layouts/modals";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
@@ -33,6 +34,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   selectedProject,
   ...restProps
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const selectedSolutionId = useAppSelector(selectCurrentSolutionId);
   const selectedProjectId = selectedProject.data?.id;
   const solutions = selectedProject.data?.solutions;
@@ -92,24 +95,6 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     dispatch(projectSlice.actions.update({ currentSolutionId: solution.id }));
   };
 
-  const handleCaseDelete = (solution: SolutionBrief) => {
-    if (!selectedProjectId) return;
-
-    if (selectedSolutionId === solution.id) {
-      const firstSolutionId = selectedProject.data?.solutions[0]?.id;
-      dispatch(
-        projectSlice.actions.update({
-          currentSolutionId: firstSolutionId || null,
-        })
-      );
-    }
-
-    deleteSolution.mutate({
-      projectId: selectedProjectId,
-      solutionId: solution.id,
-    });
-  };
-
   const handleAddCase = () => {
     if (!selectedProjectId) return;
 
@@ -120,50 +105,49 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   };
 
   return (
-    <Stack flexWrap="wrap" direction="row" gap={1} {...restProps}>
-      {!selectedProject.data && (
-        <>
-          <SelectBarChipSkeleton width={112} />
-          <SelectBarChipSkeleton width={42} />
-          <SelectBarChipSkeleton />
-          <SelectBarChipSkeleton width={24} />
-        </>
-      )}
+    <>
+      <SolutionModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Stack flexWrap="wrap" direction="row" gap={1} {...restProps}>
+        {!selectedProject.data && (
+          <>
+            <SelectBarChipSkeleton width={112} />
+            <SelectBarChipSkeleton width={42} />
+            <SelectBarChipSkeleton />
+            <SelectBarChipSkeleton width={24} />
+          </>
+        )}
 
-      {solutions?.map((solution) => {
-        const isCurrent = solution.id === selectedSolutionId;
+        {solutions?.map((solution) => {
+          const isCurrent = solution.id === selectedSolutionId;
 
-        return (
-          <SelectBarChip
-            key={solution.id}
-            isCurrent={isCurrent}
-            isEditable={isEditable}
-            label={solution.title}
+          return (
+            <SelectBarChip
+              key={solution.id}
+              isCurrent={isCurrent}
+              isEditable={isEditable}
+              label={solution.title}
+              disabled={isLoading}
+              onClick={() => handleCaseClick(solution)}
+              onEditClick={() => setIsModalOpen(true)}
+            />
+          );
+        })}
+
+        {isEditable && (
+          <IconButton
+            title="Add new solution 🚀"
+            size="small"
+            onClick={handleAddCase}
             disabled={isLoading}
-            onClick={() => handleCaseClick(solution)}
-            onDelete={() => {
-              confirm(
-                `Are you sure you want to delete the "${solution.title}" solution?  This action cannot be undone.`
-              ) && handleCaseDelete(solution); //TODO: use a modal instead of prompt
-            }}
-          />
-        );
-      })}
-
-      {isEditable && (
-        <IconButton
-          title="Add new solution 🚀"
-          size="small"
-          onClick={handleAddCase}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <CircularProgress size="1.3rem" />
-          ) : (
-            <Add fontSize="small" />
-          )}
-        </IconButton>
-      )}
-    </Stack>
+          >
+            {isLoading ? (
+              <CircularProgress size="1.3rem" />
+            ) : (
+              <Add fontSize="small" />
+            )}
+          </IconButton>
+        )}
+      </Stack>
+    </>
   );
 };
