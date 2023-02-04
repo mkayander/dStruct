@@ -1,3 +1,15 @@
+# [1.86.0](https://github.com/mkayander/leetpal/compare/v1.85.0...v1.86.0) (2023-02-04)
+
+
+### Bug Fixes
+
+* Set strict input width ([3464c08](https://github.com/mkayander/leetpal/commit/3464c08bcdacdd04ae1d153303c4634524597085))
+
+
+### Features
+
+* Implement overlay scrollbars for all panels ([bb11129](https://github.com/mkayander/leetpal/commit/bb111292edbf24b330cfc53415815204f9606ab6))
+
 # [1.85.0](https://github.com/mkayander/leetpal/compare/v1.84.0...v1.85.0) (2023-02-04)
 
 
