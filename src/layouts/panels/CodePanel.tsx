@@ -22,6 +22,7 @@ import {
 import {
   selectCurrentProjectId,
   selectCurrentSolutionId,
+  selectIsEditable,
 } from "#/store/reducers/projectReducer";
 import {
   treeDataSelector,
@@ -43,6 +44,7 @@ export const CodePanel: React.FC = () => {
   const selectedProjectId = useAppSelector(selectCurrentProjectId);
   const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
   const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? "";
+  const isEditable = useAppSelector(selectIsEditable);
   const { error } = useAppSelector(selectRuntimeData);
 
   const trpcUtils = trpc.useContext();
@@ -76,7 +78,7 @@ export const CodePanel: React.FC = () => {
   };
 
   useEffect(() => {
-    if (error || !currentProjectId || !currentSolutionId) return;
+    if (error || !currentProjectId || !currentSolutionId || !isEditable) return;
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate(

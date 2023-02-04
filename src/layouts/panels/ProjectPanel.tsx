@@ -120,7 +120,7 @@ export const ProjectPanel: React.FC = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (inputError || !parsedInput || !selectedCaseId) return;
+      if (inputError || !parsedInput || !selectedCaseId || !isEditable) return;
 
       updateCase.mutate(
         {
