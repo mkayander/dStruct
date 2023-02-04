@@ -141,7 +141,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   return (
     <EditFormModal
       formik={formik}
-      title="✔ Edit Solution"
+      title="🚀 Edit Solution"
       summary="Edit the details of your solution."
       isDeleting={deleteSolution.isLoading}
       onClose={onClose}
