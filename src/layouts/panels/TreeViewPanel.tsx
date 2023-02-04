@@ -122,6 +122,7 @@ export const TreeViewPanel: React.FC = () => {
                     type: "number",
                     "aria-labelledby": "input-slider",
                   }}
+                  sx={{ width: "64px" }}
                 />
               </Grid>
             </Grid>
