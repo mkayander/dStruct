@@ -1,13 +1,4 @@
-import { DeleteForever } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
-import { Stack } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
 import type { DialogProps } from "@mui/material/Dialog/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
@@ -16,6 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
+import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { trpc } from "#/utils";
 
 import { useAppSelector } from "#/store/hooks";
@@ -47,30 +39,16 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
   const currentCaseId = useAppSelector(selectCurrentCaseId) ?? "";
 
+  const invalidateQueries = () => {
+    void trpcUtils.project.getById.invalidate(currentProjectId);
+  };
+
   const currentCase = trpc.project.getCaseById.useQuery(
     { id: currentCaseId, projectId: currentProjectId },
     { enabled: Boolean(currentCaseId && currentProjectId) }
   );
-  const editCase = trpc.project.updateCase.useMutation();
-  const deleteCase = trpc.project.deleteCase.useMutation({
-    onSuccess: (data) => {
-      dispatch(projectSlice.actions.update({ currentCaseId: null }));
-      invalidateQueries();
 
-      onClose();
-      enqueueSnackbar(
-        `🧪 Test case "${data.title}" was successfully deleted 🧹`,
-        {
-          variant: "success",
-        }
-      );
-    },
-  });
   const trpcUtils = trpc.useContext();
-
-  const invalidateQueries = () => {
-    void trpcUtils.project.getById.invalidate(currentProjectId);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -88,15 +66,6 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
           title: values.caseName,
           description: values.caseDescription,
         });
-        invalidateQueries();
-
-        onClose();
-        formikHelpers.resetForm();
-
-        enqueueSnackbar(
-          `🧪 Test case "${currentCase.data.title}" was successfully updated 📝`,
-          { variant: "success" }
-        );
       } catch (error: any) {
         if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
           formikHelpers.setErrors({
@@ -108,6 +77,34 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
           });
         }
       }
+    },
+  });
+
+  const editCase = trpc.project.updateCase.useMutation({
+    onSuccess: (data) => {
+      invalidateQueries();
+
+      onClose();
+
+      enqueueSnackbar(
+        `🧪 Test case "${data.title}" was successfully updated 📝`,
+        { variant: "success" }
+      );
+    },
+  });
+  const deleteCase = trpc.project.deleteCase.useMutation({
+    onSuccess: (data) => {
+      dispatch(projectSlice.actions.update({ currentCaseId: null }));
+      invalidateQueries();
+
+      onClose();
+      formik.resetForm();
+      enqueueSnackbar(
+        `🧪 Test case "${data.title}" was successfully deleted 🧹`,
+        {
+          variant: "success",
+        }
+      );
     },
   });
 
@@ -139,75 +136,51 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   };
 
   return (
-    <Dialog {...props} onClose={onClose} fullWidth>
-      <form
-        onSubmit={(e) => {
-          console.log("submit");
-          formik.handleSubmit(e);
-        }}
-      >
-        <DialogTitle>🧪 Edit Test Case</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Edit the details of your test case.
-          </DialogContentText>
-          <Stack spacing={2} mt={2}>
-            <TextField
-              id="caseName"
-              name="caseName"
-              label="Name"
-              variant="outlined"
-              required
-              disabled={formik.isSubmitting}
-              value={formik.values.caseName}
-              onChange={formik.handleChange}
-              error={formik.touched.caseName && Boolean(formik.errors.caseName)}
-              helperText={
-                (formik.touched.caseName && formik.errors.caseName) ||
-                "The name of your test case."
-              }
-            />
-            <TextField
-              id="caseDescription"
-              name="caseDescription"
-              label="Description"
-              variant="outlined"
-              multiline
-              minRows={2}
-              maxRows={8}
-              disabled={formik.isSubmitting}
-              value={formik.values.caseDescription}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.caseDescription &&
-                Boolean(formik.errors.caseDescription)
-              }
-              helperText={
-                (formik.touched.caseDescription &&
-                  formik.errors.caseDescription) ||
-                "Optional test case description."
-              }
-            />
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <LoadingButton
-            title="Delete this project"
-            color="error"
-            endIcon={<DeleteForever />}
-            loading={deleteCase.isLoading}
-            loadingPosition="end"
-            onClick={handleCaseDelete}
-            sx={{ mr: "auto" }}
-          >
-            Delete
-          </LoadingButton>
-          <Button onClick={onClose}>Cancel</Button>
-          <LoadingButton type="submit" loading={formik.isSubmitting}>
-            Update
-          </LoadingButton>
-        </DialogActions>
-      </form>
-    </Dialog>
+    <EditFormModal
+      formik={formik}
+      title="🧪 Edit Test Case"
+      summary="Edit the details of your test case."
+      isDeleting={deleteCase.isLoading}
+      onClose={onClose}
+      onDelete={handleCaseDelete}
+      fullWidth
+      {...props}
+    >
+      <TextField
+        id="caseName"
+        name="caseName"
+        label="Name"
+        variant="outlined"
+        required
+        disabled={formik.isSubmitting}
+        value={formik.values.caseName}
+        onChange={formik.handleChange}
+        error={formik.touched.caseName && Boolean(formik.errors.caseName)}
+        helperText={
+          (formik.touched.caseName && formik.errors.caseName) ||
+          "The name of your test case."
+        }
+      />
+      <TextField
+        id="caseDescription"
+        name="caseDescription"
+        label="Description"
+        variant="outlined"
+        multiline
+        minRows={2}
+        maxRows={8}
+        disabled={formik.isSubmitting}
+        value={formik.values.caseDescription}
+        onChange={formik.handleChange}
+        error={
+          formik.touched.caseDescription &&
+          Boolean(formik.errors.caseDescription)
+        }
+        helperText={
+          (formik.touched.caseDescription && formik.errors.caseDescription) ||
+          "Optional test case description."
+        }
+      />
+    </EditFormModal>
   );
 };
