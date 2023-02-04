@@ -6,8 +6,6 @@ import {
   IconButton,
   Skeleton,
   type SkeletonProps,
-  type Theme,
-  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import React from "react";
@@ -25,10 +23,6 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
 
   return (
     <Box
@@ -67,7 +61,7 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
             position: "absolute",
             top: "-10px",
             right: "-10px",
-            opacity: isMobile && isCurrent ? 1 : 0,
+            opacity: 0,
             pointerEvents: "none",
             "&:hover": {
               "& svg": {
