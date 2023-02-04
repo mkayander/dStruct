@@ -1,3 +1,15 @@
+# [1.85.0](https://github.com/mkayander/leetpal/compare/v1.84.0...v1.85.0) (2023-02-04)
+
+
+### Features
+
+* Display a separate edit button on mobile ([10b4458](https://github.com/mkayander/leetpal/commit/10b4458971d389fb68fa06df58833a6764963952))
+
+
+### Reverts
+
+* Revert "fix: Always display edit button of the active chip on mobile" ([8b84eb6](https://github.com/mkayander/leetpal/commit/8b84eb64efa9d43c7bd811b7059436c2fb056db8))
+
 # [1.84.0](https://github.com/mkayander/leetpal/compare/v1.83.0...v1.84.0) (2023-02-04)
 
 
