@@ -128,6 +128,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
           return (
             <SelectBarChip
               key={solution.id}
+              editLabel="Edit solution"
               isCurrent={isCurrent}
               isEditable={isEditable}
               label={solution.title}

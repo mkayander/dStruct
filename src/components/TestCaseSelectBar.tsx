@@ -122,6 +122,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
           return (
             <SelectBarChip
               key={testCase.id}
+              editLabel="Edit test case"
               isCurrent={isCurrent}
               isEditable={isEditable}
               label={testCase.title}

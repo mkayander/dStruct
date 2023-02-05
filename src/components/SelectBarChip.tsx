@@ -14,12 +14,14 @@ type SelectBarChipProps = ChipProps & {
   isCurrent: boolean;
   isEditable: boolean;
   onEditClick?: React.MouseEventHandler<HTMLButtonElement>;
+  editLabel?: string;
 };
 
 export const SelectBarChip: React.FC<SelectBarChipProps> = ({
   isCurrent,
   isEditable,
   onEditClick,
+  editLabel,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -29,7 +31,7 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
       position="relative"
       sx={{
         "&:hover": {
-          ".DeleteIcon": {
+          ".EditIcon": {
             opacity: 1,
             pointerEvents: "all",
           },
@@ -54,8 +56,8 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
       {isEditable && onEditClick && (
         <IconButton
           size="small"
-          title="Delete solution"
-          className="DeleteIcon"
+          title={editLabel ?? "Edit"}
+          className="EditIcon"
           sx={{
             transition: "opacity 0.3s",
             position: "absolute",
