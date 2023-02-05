@@ -81,18 +81,11 @@ export const CodePanel: React.FC = () => {
     if (error || !currentProjectId || !currentSolutionId || !isEditable) return;
 
     const timeoutId = setTimeout(() => {
-      updateSolution.mutate(
-        {
-          projectId: currentProjectId,
-          solutionId: currentSolutionId,
-          code: codeInput,
-        },
-        {
-          onSuccess: (data) => {
-            trpcUtils.project.getSolutionById.setData(data, (input) => input);
-          },
-        }
-      );
+      updateSolution.mutate({
+        projectId: currentProjectId,
+        solutionId: currentSolutionId,
+        code: codeInput,
+      });
     }, 750);
 
     return () => clearTimeout(timeoutId);
