@@ -108,7 +108,6 @@ export const CodePanel: React.FC = () => {
     let startColumn = 1;
     let endColumn = 10;
 
-    console.error(error.stack);
     const [, posLine] = error.stack?.split("\n") ?? [];
 
     if (posLine) {
