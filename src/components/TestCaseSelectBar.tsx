@@ -1,11 +1,5 @@
-import { Add, Edit } from "@mui/icons-material";
-import {
-  CircularProgress,
-  IconButton,
-  Stack,
-  type Theme,
-  useMediaQuery,
-} from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { CircularProgress, IconButton, Stack } from "@mui/material";
 import type { PlaygroundTestCase } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
@@ -40,10 +34,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const { enqueueSnackbar } = useSnackbar();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
 
   const selectedCaseId = useAppSelector(selectCurrentCaseId);
   const selectedProjectId = selectedProject.data?.id;
@@ -143,30 +133,18 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         })}
 
         {isEditable && (
-          <>
-            {isMobile && (
-              <IconButton
-                title="Edit selected test case 🧪"
-                size="small"
-                onClick={() => setIsModalOpen(true)}
-                disabled={isLoading}
-              >
-                <Edit fontSize="small" />
-              </IconButton>
+          <IconButton
+            title="Add new test case 🧪"
+            size="small"
+            onClick={handleAddCase}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <CircularProgress size="1.3rem" />
+            ) : (
+              <Add fontSize="small" />
             )}
-            <IconButton
-              title="Add new test case 🧪"
-              size="small"
-              onClick={handleAddCase}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <CircularProgress size="1.3rem" />
-              ) : (
-                <Add fontSize="small" />
-              )}
-            </IconButton>
-          </>
+          </IconButton>
         )}
       </Stack>
     </>
