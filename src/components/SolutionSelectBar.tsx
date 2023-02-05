@@ -91,17 +91,22 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
       );
   }, [selectedSolutionId, selectedProject.data, dispatch]);
 
-  const handleCaseClick = (solution: SolutionBrief) => {
+  const handleSolutionClick = (solution: SolutionBrief) => {
     dispatch(projectSlice.actions.update({ currentSolutionId: solution.id }));
   };
 
-  const handleAddCase = () => {
+  const handleAddSolution = () => {
     if (!selectedProjectId) return;
 
     addSolution.mutate({
       projectId: selectedProjectId,
       title: `Solution ${(solutions?.length ?? 0) + 1}`,
     });
+  };
+
+  const handleSolutionEdit = (solution: SolutionBrief) => {
+    handleSolutionClick(solution);
+    setIsModalOpen(true);
   };
 
   return (
@@ -127,8 +132,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
               isEditable={isEditable}
               label={solution.title}
               disabled={isLoading}
-              onClick={() => handleCaseClick(solution)}
-              onEditClick={() => setIsModalOpen(true)}
+              onClick={() => handleSolutionClick(solution)}
+              onEditClick={() => handleSolutionEdit(solution)}
             />
           );
         })}
@@ -137,7 +142,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
           <IconButton
             title="Add new solution 🚀"
             size="small"
-            onClick={handleAddCase}
+            onClick={handleAddSolution}
             disabled={isLoading}
           >
             {isLoading ? (
