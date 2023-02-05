@@ -53,11 +53,11 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
   const leftLinkColor =
     leftNode?.color && color === leftNode.color
-      ? alpha(nodeColor, 0.5)
+      ? alpha(nodeColor, 0.4)
       : undefined;
   const rightLinkColor =
     rightNode?.color && color === rightNode.color
-      ? alpha(nodeColor, 0.5)
+      ? alpha(nodeColor, 0.4)
       : undefined;
 
   const relations: RelationType[] = [];
