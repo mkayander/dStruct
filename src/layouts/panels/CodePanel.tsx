@@ -181,7 +181,7 @@ export const CodePanel: React.FC = () => {
         dispatch(
           callstackSlice.actions.setStatus({
             isReady: true,
-            error: e,
+            error: { name: e.name, message: e.message, stack: e.stack },
             result: null,
             runtime,
           })
