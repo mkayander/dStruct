@@ -1,3 +1,10 @@
+## [1.86.2](https://github.com/mkayander/leetpal/compare/v1.86.1...v1.86.2) (2023-02-05)
+
+
+### Bug Fixes
+
+* Fix solution edit click handler ([bdcc9b4](https://github.com/mkayander/leetpal/commit/bdcc9b4c62abca983265fbf3c5dc26459d4ceb39))
+
 ## [1.86.1](https://github.com/mkayander/leetpal/compare/v1.86.0...v1.86.1) (2023-02-05)
 
 
