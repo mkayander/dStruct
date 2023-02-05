@@ -14,6 +14,10 @@ type CallFrameBase = {
   timestamp: number;
 };
 
+type RuntimeErrorFrame = CallFrameBase & {
+  name: "error";
+};
+
 type SetColorFrame = CallFrameBase & {
   name: "setColor";
   args: [string | null];
@@ -24,7 +28,16 @@ type SetValFrame = CallFrameBase & {
   args: [number | string | null];
 };
 
-export type CallFrame = SetColorFrame | SetValFrame;
+type BlinkFrame = CallFrameBase & {
+  name: "blink";
+  args: [];
+};
+
+export type CallFrame =
+  | RuntimeErrorFrame
+  | SetColorFrame
+  | SetValFrame
+  | BlinkFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
   selectId: (frame) => frame.id,

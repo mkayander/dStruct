@@ -92,6 +92,16 @@ export class BinaryTreeNode {
     );
   }
 
+  public blink() {
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "blink",
+        args: [],
+      })
+    );
+  }
+
   private getDispatchBase() {
     return {
       id: uuid.generate(),

@@ -15,6 +15,7 @@ export type BinaryTreeNodeData = {
   value: string | number;
   depth: number;
   color?: string;
+  animation?: "blink";
   left?: string;
   right?: string;
 };
@@ -98,6 +99,7 @@ export const treeNodeSlice = createSlice({
           id,
           changes: {
             color: undefined,
+            animation: undefined,
             value: state.nodes.entities[id]?.originalValue,
           },
         });

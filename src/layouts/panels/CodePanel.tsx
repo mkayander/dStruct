@@ -6,6 +6,7 @@ import Image from "next/image";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
+import shortUUID from "short-uuid";
 
 import { CodeRunner, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
@@ -29,6 +30,8 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
+const uuid = shortUUID();
+
 export const CodePanel: React.FC = () => {
   const dispatch = useAppDispatch();
 
@@ -46,8 +49,6 @@ export const CodePanel: React.FC = () => {
   const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? "";
   const isEditable = useAppSelector(selectIsEditable);
   const { error } = useAppSelector(selectRuntimeData);
-
-  const trpcUtils = trpc.useContext();
 
   const selectedProject = trpc.project.getById.useQuery(
     selectedProjectId || "",
@@ -178,6 +179,14 @@ export const CodePanel: React.FC = () => {
     } catch (e: unknown) {
       runtime = performance.now() - runtime;
       if (e instanceof Error) {
+        dispatch(
+          callstackSlice.actions.addOne({
+            id: uuid.generate(),
+            timestamp: performance.now(),
+            nodeId: "",
+            name: "error",
+          })
+        );
         dispatch(
           callstackSlice.actions.setStatus({
             isReady: true,

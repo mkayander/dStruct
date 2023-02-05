@@ -1,6 +1,7 @@
 import { alpha, Box, type SxProps, type Theme, useTheme } from "@mui/material";
 import * as muiColors from "@mui/material/colors";
-import React from "react";
+import { animated, useSpring } from "@react-spring/web";
+import React, { useEffect } from "react";
 import { ArcherElement } from "react-archer";
 import type { RelationType } from "react-archer/lib/types";
 
@@ -10,12 +11,14 @@ import {
   selectNodeDataById,
 } from "#/store/reducers/treeNodeReducer";
 
+const nodeSize = "42px";
+
 const nodeProps: SxProps<Theme> = {
   display: "flex",
   justifyContent: "center",
   p: 1,
-  width: "42px",
-  height: "42px",
+  width: nodeSize,
+  height: nodeSize,
 };
 
 const relationProps = {
@@ -33,8 +36,33 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   left,
   right,
   color,
+  animation,
 }: BinaryNodeProps) => {
   const theme = useTheme();
+  const [springs, api] = useSpring(() => ({
+    from: { scale: 1 },
+  }));
+  const [overlaySprings, overlayApi] = useSpring(() => ({
+    from: { opacity: 0 },
+  }));
+
+  const handleBlink = () => {
+    api.start({
+      from: { scale: 1.3 },
+      to: { scale: 1 },
+    });
+    overlayApi.start({
+      from: { opacity: 0.1 },
+      to: { opacity: 0 },
+    });
+  };
+
+  useEffect(() => {
+    if (animation === "blink") {
+      handleBlink();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animation]);
 
   const isLeaf = !left && !right;
 
@@ -86,27 +114,56 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
         gap: 2,
       }}
     >
-      <ArcherElement id={id} relations={relations}>
-        <Box
-          sx={{
-            ...nodeProps,
-            borderRadius: "50%",
-            background: alpha(nodeColor, 0.3),
-            border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
-            backdropFilter: "blur(4px)",
-            userSelect: "none",
-            boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
-            color: theme.palette.primary.contrastText,
-            transition: "all .2s",
+      <Box sx={{ position: "relative" }}>
+        <ArcherElement id={id} relations={relations}>
+          <animated.div style={springs}>
+            <Box
+              onClick={handleBlink}
+              sx={{
+                ...nodeProps,
+                borderRadius: "50%",
+                background: alpha(nodeColor, 0.3),
+                border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
+                backdropFilter: "blur(4px)",
+                userSelect: "none",
+                boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
+                color: theme.palette.primary.contrastText,
+                transition: "all .2s",
 
-            "&:hover": {
-              background: alpha(theme.palette.primary.light, 0.4),
-            },
+                "&:hover": {
+                  background: alpha(theme.palette.primary.light, 0.4),
+                },
+              }}
+            ></Box>
+          </animated.div>
+        </ArcherElement>
+        <Box
+          component="span"
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            pointerEvents: "none",
           }}
         >
           {value}
         </Box>
-      </ArcherElement>
+        <animated.div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            borderRadius: "50%",
+            background: "white",
+            pointerEvents: "none",
+            ...springs,
+            ...overlaySprings,
+          }}
+        />
+      </Box>
 
       <Box
         sx={{

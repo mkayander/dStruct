@@ -68,6 +68,16 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             })
           );
           break;
+
+        case "blink":
+          dispatch(
+            treeNodeSlice.actions.update({
+              id: frame.nodeId,
+              changes: {
+                animation: "blink",
+              },
+            })
+          );
       }
 
       isStarted = true;
