@@ -1,3 +1,10 @@
+## [1.87.1](https://github.com/mkayander/leetpal/compare/v1.87.0...v1.87.1) (2023-02-05)
+
+
+### Bug Fixes
+
+* Fixed chip edit icon button titles ([9dcb7c9](https://github.com/mkayander/leetpal/commit/9dcb7c9d0ab5c589cc504a2f92cdfb29d05c6ffc))
+
 # [1.87.0](https://github.com/mkayander/leetpal/compare/v1.86.2...v1.87.0) (2023-02-05)
 
 
