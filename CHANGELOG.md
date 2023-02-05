@@ -1,3 +1,20 @@
+# [1.87.0](https://github.com/mkayander/leetpal/compare/v1.86.2...v1.87.0) (2023-02-05)
+
+
+### Bug Fixes
+
+* Fixed solution not being uploaded if there's an error ([ec0bee2](https://github.com/mkayander/leetpal/commit/ec0bee26da2f03135348007cc7783846410031ef))
+* Make colored links more transparent ([cb96a6c](https://github.com/mkayander/leetpal/commit/cb96a6cc94e31ddd41d90ac38caaf6d847f6cc9b))
+* Map error object to a serializable instance ([6332f96](https://github.com/mkayander/leetpal/commit/6332f960ceb42232326ac1d019bbdaaedcda0a8e))
+* Remove redundant code cache update ([57529e3](https://github.com/mkayander/leetpal/commit/57529e37418319ccd8849a301bce26b3f472bbaf))
+* Remove redundant console log ([80234e0](https://github.com/mkayander/leetpal/commit/80234e07b5b9f927bde94ad302ec3502b3fbd8ec))
+
+
+### Features
+
+* Implemented a node blinking feature ([021abde](https://github.com/mkayander/leetpal/commit/021abde5287885b537b84190067efd1fc63d656b))
+* Installed react spring ([84ba3d0](https://github.com/mkayander/leetpal/commit/84ba3d0ddcc1b241ba3cabf14e6a477f9f16b856))
+
 ## [1.86.2](https://github.com/mkayander/leetpal/compare/v1.86.1...v1.86.2) (2023-02-05)
 
 
