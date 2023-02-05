@@ -1,3 +1,10 @@
+## [1.86.1](https://github.com/mkayander/leetpal/compare/v1.86.0...v1.86.1) (2023-02-05)
+
+
+### Reverts
+
+* Revert "feat: Display a separate edit button on mobile" ([f732b72](https://github.com/mkayander/leetpal/commit/f732b72cb7d74cc9c7a265965c75855e690abd24))
+
 # [1.86.0](https://github.com/mkayander/leetpal/compare/v1.85.0...v1.86.0) (2023-02-04)
 
 
