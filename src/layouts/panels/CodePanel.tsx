@@ -78,7 +78,7 @@ export const CodePanel: React.FC = () => {
   };
 
   useEffect(() => {
-    if (error || !currentProjectId || !currentSolutionId || !isEditable) return;
+    if (!currentProjectId || !currentSolutionId || !isEditable) return;
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate({
