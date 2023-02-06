@@ -1,3 +1,11 @@
+## [1.87.2](https://github.com/mkayander/leetpal/compare/v1.87.1...v1.87.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* Specify run button title ([a8b0bdb](https://github.com/mkayander/leetpal/commit/a8b0bdbda658f2a8041ca2872ae4a1dc5a3d42fb))
+* Updated node styles ([5b3b4fc](https://github.com/mkayander/leetpal/commit/5b3b4fc2416669351aaf83be375edd215955d942))
+
 ## [1.87.1](https://github.com/mkayander/leetpal/compare/v1.87.0...v1.87.1) (2023-02-05)
 
 
