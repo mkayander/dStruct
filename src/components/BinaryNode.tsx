@@ -1,4 +1,11 @@
-import { alpha, Box, type SxProps, type Theme, useTheme } from "@mui/material";
+import {
+  alpha,
+  Box,
+  type SxProps,
+  type Theme,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import * as muiColors from "@mui/material/colors";
 import { animated, useSpring } from "@react-spring/web";
 import React, { useEffect } from "react";
@@ -114,7 +121,16 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
         gap: 2,
       }}
     >
-      <Box sx={{ position: "relative" }}>
+      <Box
+        sx={{
+          position: "relative",
+          "&:hover": {
+            "& > .node-overlay": {
+              opacity: "0.1!important",
+            },
+          },
+        }}
+      >
         <ArcherElement id={id} relations={relations}>
           <animated.div style={springs}>
             <Box
@@ -129,16 +145,13 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
                 boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
                 color: theme.palette.primary.contrastText,
                 transition: "all .2s",
-
-                "&:hover": {
-                  background: alpha(theme.palette.primary.light, 0.4),
-                },
               }}
             ></Box>
           </animated.div>
         </ArcherElement>
-        <Box
+        <Typography
           component="span"
+          color="white"
           sx={{
             position: "absolute",
             top: "50%",
@@ -148,8 +161,9 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           }}
         >
           {value}
-        </Box>
+        </Typography>
         <animated.div
+          className="node-overlay"
           style={{
             position: "absolute",
             top: 0,
@@ -159,6 +173,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
             borderRadius: "50%",
             background: "white",
             pointerEvents: "none",
+            transition: "opacity .1s",
             ...springs,
             ...overlaySprings,
           }}
