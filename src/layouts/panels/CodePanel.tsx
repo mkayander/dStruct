@@ -238,6 +238,7 @@ export const CodePanel: React.FC = () => {
             <LoadingButton
               variant="text"
               color="success"
+              title="Run code"
               endIcon={<PlayArrow />}
               loadingPosition="end"
               onClick={handleRunCode}
