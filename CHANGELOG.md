@@ -1,3 +1,12 @@
+# [1.88.0](https://github.com/mkayander/leetpal/compare/v1.87.2...v1.88.0) (2023-02-07)
+
+
+### Features
+
+* Added new font for the logo ([bb326b0](https://github.com/mkayander/leetpal/commit/bb326b04b05af45850befaf73ac2e593e85f86db))
+* Display new logo and font in the app bar ([b9c4749](https://github.com/mkayander/leetpal/commit/b9c474928a1e7554f75be0607a982bf4820484cc))
+* Implemented a custom icon ([e4739b1](https://github.com/mkayander/leetpal/commit/e4739b120b4fad9d791295df1c5d7a1292713eef))
+
 ## [1.87.2](https://github.com/mkayander/leetpal/compare/v1.87.1...v1.87.2) (2023-02-06)
 
 
