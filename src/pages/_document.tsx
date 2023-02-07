@@ -27,10 +27,19 @@ export default function Document() {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         {/*<meta name="theme-color" content="#ffffff"/>*/}
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap"
+          rel="stylesheet"
+        />
+
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
