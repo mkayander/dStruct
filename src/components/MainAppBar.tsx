@@ -1,4 +1,3 @@
-import CodeIcon from "@mui/icons-material/Code";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -103,7 +102,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
       <Container maxWidth="xl">
         <Toolbar disableGutters variant={toolbarVariant}>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <Image alt="dStruct Logo" src="/Icon.svg" width="32" height="32" />
+            <Image
+              alt="dStruct Logo"
+              src="/android-chrome-192x192.png"
+              width="32"
+              height="32"
+            />
           </Box>
           {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
           <Link href="/" legacyBehavior={true}>
@@ -115,9 +119,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".1rem",
+                fontFamily: "'Share Tech', sans-serif",
                 color: "inherit",
                 textDecoration: "none",
               }}
@@ -165,7 +167,14 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               ))}
             </Menu>
           </Box>
-          <CodeIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <Image
+              alt="dStruct Logo"
+              src="/android-chrome-192x192.png"
+              width="32"
+              height="32"
+            />
+          </Box>
           <Link href="/" legacyBehavior={true}>
             <Typography
               variant="h5"
@@ -176,9 +185,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
+                fontFamily: "'Share Tech', sans-serif",
                 color: "inherit",
                 textDecoration: "none",
               }}
