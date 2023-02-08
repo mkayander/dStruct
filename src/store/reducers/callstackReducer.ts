@@ -116,11 +116,6 @@ export const callstackSlice = createSlice({
  */
 export const callstackReducer = callstackSlice.reducer;
 
-// /**
-//  * Action
-//  */
-// export const { increment, decrement, calculate } = callstackSlice.actions;
-
 /**
  * Selectors
  */

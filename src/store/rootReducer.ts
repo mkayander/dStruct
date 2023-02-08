@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
+import { appBarReducer } from "#/store/reducers/appBarReducer";
 import { callstackReducer } from "#/store/reducers/callstackReducer";
-import { counterReducer } from "#/store/reducers/counterReducer";
 import { projectReducer } from "#/store/reducers/projectReducer";
 import { treeNodeReducer } from "#/store/reducers/treeNodeReducer";
 
@@ -10,7 +10,7 @@ import { treeNodeReducer } from "#/store/reducers/treeNodeReducer";
  * @see https://redux-toolkit.js.org/usage/usage-with-typescript
  */
 export const rootReducer = combineReducers({
-  counter: counterReducer,
+  appBar: appBarReducer,
   treeNode: treeNodeReducer,
   callstack: callstackReducer,
   project: projectReducer,
