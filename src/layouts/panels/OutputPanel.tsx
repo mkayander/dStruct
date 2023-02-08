@@ -2,6 +2,7 @@ import { TabContext, TabList } from "@mui/lab";
 import { alpha, Box, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
+import { CallstackTable } from "#/components/CallstackTable";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 
@@ -76,7 +77,9 @@ export const OutputPanel: React.FC = () => {
             )}
           </Box>
         </StyledTabPanel>
-        {/*<StyledTabPanel value="2"></StyledTabPanel>*/}
+        <StyledTabPanel value="2">
+          <CallstackTable />
+        </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
   );

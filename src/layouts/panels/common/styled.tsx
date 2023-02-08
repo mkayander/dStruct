@@ -35,6 +35,6 @@ export const TabListWrapper = styled(Box)(({ theme }) => ({
 
 export const StyledTabPanel: React.FC<TabPanelProps> = (props) => (
   <StyledOverlayScrollbarsComponent defer>
-    <TabPanel {...props} />
+    <TabPanel sx={{ p: 2 }} {...props} />
   </StyledOverlayScrollbarsComponent>
 );
