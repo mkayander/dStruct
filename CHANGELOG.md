@@ -1,3 +1,18 @@
+# [1.90.0](https://github.com/mkayander/leetpal/compare/v1.89.0...v1.90.0) (2023-02-08)
+
+
+### Bug Fixes
+
+* Prevent unwanted scroll on desktop playground page ([7bc6d31](https://github.com/mkayander/leetpal/commit/7bc6d31cc8be0bfe6b05652d332d71e0bd5a81f7))
+* Recalculate tree view scroll state on data changes ([ecc4c57](https://github.com/mkayander/leetpal/commit/ecc4c5763d7224cb3a4e1e28135d5f1216e777b6))
+
+
+### Features
+
+* Added app bar reducer ([fd8a189](https://github.com/mkayander/leetpal/commit/fd8a189795e716ae4a271fe719c7ddf2de8b40a8))
+* Implemented a reusable & trackable page scroll component ([ae8fe7c](https://github.com/mkayander/leetpal/commit/ae8fe7cddeb3aeb69553044646358f95bbd86057))
+* Utilize isScrolled state to make app bar glassmorphed ([532eb51](https://github.com/mkayander/leetpal/commit/532eb5197b63c6f13c1d4105395423a0dca5ba9c))
+
 # [1.89.0](https://github.com/mkayander/leetpal/compare/v1.88.0...v1.89.0) (2023-02-08)
 
 
