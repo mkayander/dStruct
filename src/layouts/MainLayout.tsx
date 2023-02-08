@@ -1,8 +1,7 @@
 import { alpha, Box, LinearProgress, useTheme } from "@mui/material";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import React from "react";
 
-import { Footer, MainAppBar } from "#/components";
+import { Footer, MainAppBar, PageScrollContainer } from "#/components";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
@@ -32,15 +31,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
           },
       }}
     >
-      <OverlayScrollbarsComponent
-        defer
-        style={{ height: "100vh" }}
-        options={{
-          scrollbars: {
-            autoHide: "scroll",
-          },
-        }}
-      >
+      <PageScrollContainer>
         <Box sx={{ minHeight: "100vh" }}>
           <MainAppBar setDarkMode={setDarkMode} />
           <Box sx={{ minHeight: "85vh" }}>
@@ -48,7 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
           </Box>
           <Footer />
         </Box>
-      </OverlayScrollbarsComponent>
+      </PageScrollContainer>
     </Box>
   );
 };

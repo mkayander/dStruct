@@ -1,15 +1,8 @@
-import {
-  Box,
-  Container,
-  Stack,
-  type Theme,
-  useMediaQuery,
-} from "@mui/material";
+import { Container, Stack, type Theme, useMediaQuery } from "@mui/material";
 import Head from "next/head";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import React from "react";
 
-import { MainAppBar } from "#/components";
+import { MainAppBar, PageScrollContainer } from "#/components";
 import { SplitPanelsLayout } from "#/layouts";
 import type { MainLayoutProps } from "#/layouts/MainLayout";
 import {
@@ -30,21 +23,11 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 
   if (isVertical)
     return (
-      <OverlayScrollbarsComponent
-        defer
-        style={{ height: "100vh" }}
-        options={{
-          scrollbars: {
-            autoHide: "scroll",
-          },
-        }}
-      >
-        <Container sx={{ pb: 4 }}>
-          <Stack spacing={1} mt={1} pb={4}>
-            {children}
-          </Stack>
-        </Container>
-      </OverlayScrollbarsComponent>
+      <Container sx={{ pb: 4 }}>
+        <Stack spacing={1} mt={1} pb={4}>
+          {children}
+        </Stack>
+      </Container>
     );
 
   return <SplitPanelsLayout>{children}</SplitPanelsLayout>;
@@ -66,16 +49,14 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
-const Layout: React.FC<MainLayoutProps> = ({ children, setDarkMode }) => (
-  <Box sx={{ minHeight: "100vh", overflow: "hidden" }}>
-    <MainAppBar
-      setDarkMode={setDarkMode}
-      // appBarVariant="outlined"
-      toolbarVariant="dense"
-    />
-    {children}
-  </Box>
-);
+const Layout: React.FC<MainLayoutProps> = ({ children, setDarkMode }) => {
+  return (
+    <PageScrollContainer>
+      <MainAppBar setDarkMode={setDarkMode} toolbarVariant="dense" />
+      {children}
+    </PageScrollContainer>
+  );
+};
 
 PlaygroundPage.Layout = function PlaygroundLayout({ setDarkMode, children }) {
   return <Layout setDarkMode={setDarkMode}>{children}</Layout>;
