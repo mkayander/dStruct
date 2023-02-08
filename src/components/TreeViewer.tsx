@@ -1,5 +1,5 @@
 import { alpha, Box, useTheme } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
@@ -12,6 +12,17 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
+const overlayStyles = {
+  content: "''",
+  height: "100%",
+  width: "32px",
+  position: "absolute",
+  pointerEvents: "none",
+  top: 0,
+  zIndex: 10,
+  transition: "opacity .3s",
+};
+
 type TreeViewerProps = {
   playbackInterval: number;
   replayCount: number;
@@ -22,8 +33,11 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   replayCount,
 }) => {
   const theme = useTheme();
-
   const dispatch = useAppDispatch();
+
+  const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
+  const [scrolledStart, setScrolledStart] = useState(true);
+  const [scrolledEnd, setScrolledEnd] = useState(true);
 
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
@@ -91,15 +105,49 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     };
   }, [callstack, callstackIsReady, dispatch, replayCount, playbackInterval]);
 
+  const handleScroll = () => {
+    // TODO: The Ref types from the "indiana" library should be fixed
+    const current = (scrollRef as React.MutableRefObject<HTMLElement>).current;
+
+    setScrolledStart(current.scrollLeft === 0);
+    setScrolledEnd(
+      current.scrollLeft + current.offsetWidth >= current.scrollWidth
+    );
+  };
+
+  useEffect(() => {
+    const handler = () => {
+      handleScroll();
+    };
+    window.addEventListener("resize", handler);
+
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   return (
     <Box
       display="flex"
       flexDirection="column"
       rowGap={1}
-      my={1}
       borderRadius={1}
+      position="relative"
+      width="100%"
+      sx={{
+        "&:before": {
+          ...overlayStyles,
+          left: 0,
+          background: "linear-gradient(90deg, black, transparent)",
+          opacity: scrolledStart ? 0 : 0.2,
+        },
+        "&:after": {
+          ...overlayStyles,
+          right: 0,
+          background: "linear-gradient(-90deg, black, transparent)",
+          opacity: scrolledEnd ? 0 : 0.2,
+        },
+      }}
     >
-      <ScrollContainer>
+      <ScrollContainer innerRef={scrollRef} onScroll={handleScroll}>
         <Box
           sx={{
             m: 3,
