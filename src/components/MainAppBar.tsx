@@ -1,5 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import {
+  alpha,
   AppBar,
   type AppBarProps,
   Avatar,
@@ -15,6 +16,7 @@ import {
   type ToolbarProps,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -25,6 +27,9 @@ import React, { type MouseEvent, useState } from "react";
 import { ThemeSwitch } from "#/components/ThemeSwitch";
 import { useProfileImageUploader } from "#/hooks";
 import { getImageUrl } from "#/utils";
+
+import { useAppSelector } from "#/store/hooks";
+import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
@@ -62,9 +67,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   toolbarVariant = "dense",
 }) => {
   const router = useRouter();
+  const theme = useTheme();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
   const session = useSession();
 
@@ -94,7 +102,22 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   };
 
   return (
-    <AppBar position="sticky" elevation={2} variant={appBarVariant}>
+    <AppBar
+      position="sticky"
+      elevation={isScrolled ? 2 : 0}
+      variant={appBarVariant}
+      sx={{
+        transition: "background .1s, borderBottom .1s",
+        backdropFilter: "blur(10px)",
+        background: isScrolled
+          ? alpha(theme.palette.primary.main, 0.2)
+          : alpha(theme.palette.primary.main, 0),
+        borderBottom: `1px solid ${alpha(
+          theme.palette.common.white,
+          isScrolled ? 0.05 : 0
+        )}`,
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters variant={toolbarVariant}>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
