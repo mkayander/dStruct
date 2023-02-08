@@ -116,6 +116,10 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   };
 
   useEffect(() => {
+    handleScroll();
+  }, [rootNodeData]);
+
+  useEffect(() => {
     const handler = () => {
       handleScroll();
     };
