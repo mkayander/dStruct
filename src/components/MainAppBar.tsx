@@ -46,10 +46,6 @@ const pages = [
     name: "Playground",
     href: "/playground",
   },
-  {
-    name: "API",
-    href: "/api-example",
-  },
 ] as const;
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
