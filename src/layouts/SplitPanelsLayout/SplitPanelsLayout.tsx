@@ -21,7 +21,7 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
   return (
     <Box
       sx={{
-        height: "calc(100vh - 69px)",
+        height: "calc(100vh - 70px)",
         width: "100vw",
         p: 1,
         overflow: "hidden",
