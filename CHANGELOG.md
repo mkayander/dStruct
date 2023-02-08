@@ -1,3 +1,16 @@
+# [1.89.0](https://github.com/mkayander/leetpal/compare/v1.88.0...v1.89.0) (2023-02-08)
+
+
+### Bug Fixes
+
+* Removed an api test page link ([d3a967a](https://github.com/mkayander/leetpal/commit/d3a967a36f313a70699319ae56106b1872377946))
+
+
+### Features
+
+* Implemented a callstack table view ([2cc4ba4](https://github.com/mkayander/leetpal/commit/2cc4ba4d78a293919a7458bfa22955b608baa922))
+* Improved tree view scrolling layout ([e9d683a](https://github.com/mkayander/leetpal/commit/e9d683ae430f221c34672f20e06553da1cda06d0))
+
 # [1.88.0](https://github.com/mkayander/leetpal/compare/v1.87.2...v1.88.0) (2023-02-07)
 
 
