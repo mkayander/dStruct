@@ -108,10 +108,11 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const handleScroll = () => {
     // TODO: The Ref types from the "indiana" library should be fixed
     const current = (scrollRef as React.MutableRefObject<HTMLElement>).current;
+    const offset = 10;
 
-    setScrolledStart(current.scrollLeft === 0);
+    setScrolledStart(current.scrollLeft <= offset);
     setScrolledEnd(
-      current.scrollLeft + current.offsetWidth >= current.scrollWidth
+      current.scrollLeft + current.offsetWidth >= current.scrollWidth - offset
     );
   };
 
