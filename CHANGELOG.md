@@ -1,3 +1,10 @@
+## [1.90.1](https://github.com/mkayander/leetpal/compare/v1.90.0...v1.90.1) (2023-02-10)
+
+
+### Bug Fixes
+
+* Add a "dead zone" offset to the scroll ([f9b2f66](https://github.com/mkayander/leetpal/commit/f9b2f6685d2d8c2f7e48f3cf74905b4985777290))
+
 # [1.90.0](https://github.com/mkayander/leetpal/compare/v1.89.0...v1.90.0) (2023-02-08)
 
 
