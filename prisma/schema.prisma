@@ -110,6 +110,7 @@ model PlaygroundProject {
   author      User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   title       String
   category    ProjectCategory
+  slug        String?
   description String?              @db.Text
   isExample   Boolean              @default(false)
   isPublic    Boolean              @default(false)
@@ -126,6 +127,7 @@ model PlaygroundSolution {
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
+  slug        String?
   description String?
   code        String            @db.Text
   order       Int               @default(0)
@@ -138,6 +140,7 @@ model PlaygroundTestCase {
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
+  slug        String?
   input       String            @db.Text
   description String?
 }
