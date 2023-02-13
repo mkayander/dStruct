@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import uuid4 from "short-uuid";
 
-import { isNumber } from "#/utils";
-
 import { useAppDispatch } from "#/store/hooks";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
   type BinaryTreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
+import { isNumber } from "#/utils";
 
 // [3,9,20,null,null,15,7]
 

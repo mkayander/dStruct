@@ -4,7 +4,6 @@ import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { BinaryNode } from "#/components/BinaryNode";
-
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {

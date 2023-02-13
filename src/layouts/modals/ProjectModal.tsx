@@ -25,10 +25,9 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { trpc } from "#/utils";
-
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
+import { trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
 const categoryLabels: Record<ProjectCategory, string> = {

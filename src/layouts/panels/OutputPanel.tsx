@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { CallstackTable } from "#/components/CallstackTable";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-
 import { useAppSelector } from "#/store/hooks";
 
 export const OutputPanel: React.FC = () => {

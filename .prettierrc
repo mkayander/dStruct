@@ -4,7 +4,7 @@
 
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    "^#/(api|components|context|env|graphql|hooks|layouts|pages|server|types|utils|theme)/?(.*)$",
+    "^#/(api|components|context|env|graphql|hooks|layouts|pages|server|types|utils|theme|store)/?(.*)$",
     "^#/theme/?(.*)$",
     "^#/(.*)$",
     "^[./]",

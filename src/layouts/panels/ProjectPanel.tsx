@@ -24,13 +24,12 @@ import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-import { trpc } from "#/utils";
-
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,
   selectIsEditable,
 } from "#/store/reducers/projectReducer";
+import { trpc } from "#/utils";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();

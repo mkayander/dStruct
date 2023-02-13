@@ -13,11 +13,11 @@ import {
   MainLayout as DefaultLayout,
   type MainLayoutProps,
 } from "#/layouts/MainLayout";
+import { wrapper } from "#/store/makeStore";
 import { themes } from "#/themes";
 import type { AppTypeWithLayout } from "#/types/page";
 import { trpc } from "#/utils";
 
-import { wrapper } from "#/store/makeStore";
 import "#/styles/globals.css";
 
 import "overlayscrollbars/overlayscrollbars.css";

@@ -15,11 +15,10 @@ import {
 } from "#/components/SelectBarChip";
 import { usePlaygroundIds } from "#/hooks";
 import { SolutionModal } from "#/layouts/modals";
-import { trpc } from "#/utils";
-import type { RouterOutputs } from "#/utils/trpc";
-
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
+import { trpc } from "#/utils";
+import type { RouterOutputs } from "#/utils/trpc";
 
 type SolutionBrief = Pick<PlaygroundSolution, "id" | "title" | "order">;
 

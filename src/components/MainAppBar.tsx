@@ -26,10 +26,9 @@ import React, { type MouseEvent, useState } from "react";
 
 import { ThemeSwitch } from "#/components/ThemeSwitch";
 import { useProfileImageUploader } from "#/hooks";
-import { getImageUrl } from "#/utils";
-
 import { useAppSelector } from "#/store/hooks";
 import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
+import { getImageUrl } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 

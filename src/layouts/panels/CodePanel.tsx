@@ -14,8 +14,6 @@ import { usePlaygroundIds } from "#/hooks";
 import { createRuntimeTree } from "#/hooks/useRuntimeBinaryTree";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-import { trpc } from "#/utils";
-
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   callstackSlice,
@@ -26,6 +24,7 @@ import {
   treeDataSelector,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
+import { trpc } from "#/utils";
 
 const uuid = shortUUID();
 
