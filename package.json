@@ -68,6 +68,7 @@
     "redux-logger": "^3.0.6",
     "sanitize-html": "^2.7.3",
     "short-uuid": "^4.2.2",
+    "slugify": "^1.6.5",
     "superjson": "1.9.1",
     "uuid": "^9.0.0",
     "yup": "^0.32.11",
