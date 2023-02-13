@@ -1,3 +1,10 @@
+## [1.91.2](https://github.com/mkayander/leetpal/compare/v1.91.1...v1.91.2) (2023-02-13)
+
+
+### Bug Fixes
+
+* Fix imports sorting ([ced432c](https://github.com/mkayander/leetpal/commit/ced432cc0b5a8eac4285681222e8d573e17f9f14))
+
 ## [1.91.1](https://github.com/mkayander/leetpal/compare/v1.91.0...v1.91.1) (2023-02-13)
 
 
