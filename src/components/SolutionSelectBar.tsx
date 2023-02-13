@@ -13,16 +13,13 @@ import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBarChip";
+import { usePlaygroundIds } from "#/hooks";
 import { SolutionModal } from "#/layouts/modals";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import {
-  projectSlice,
-  selectCurrentSolutionId,
-  selectIsEditable,
-} from "#/store/reducers/projectReducer";
+import { selectIsEditable } from "#/store/reducers/projectReducer";
 
 type SolutionBrief = Pick<PlaygroundSolution, "id" | "title" | "order">;
 
@@ -36,8 +33,12 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const selectedSolutionId = useAppSelector(selectCurrentSolutionId);
-  const selectedProjectId = selectedProject.data?.id;
+  const {
+    projectId: selectedProjectId,
+    caseId,
+    solutionId: selectedSolutionId,
+    setSolution,
+  } = usePlaygroundIds();
   const solutions = selectedProject.data?.solutions;
 
   const dispatch = useAppDispatch();
@@ -51,18 +52,14 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         id: data.id,
         projectId: variables.projectId,
       });
-      dispatch(projectSlice.actions.update({ currentSolutionId: data.id }));
+      void setSolution(data.id);
     },
   });
 
   const deleteSolution = trpc.project.deleteSolution.useMutation({
     onSuccess: async (data, variables) => {
       if (selectedSolutionId === data.id) {
-        dispatch(
-          projectSlice.actions.update({
-            currentSolutionId: null,
-          })
-        );
+        void setSolution("");
       }
 
       await trpcUtils.project.getById.invalidate(variables.projectId);
@@ -81,18 +78,15 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
 
   useEffect(() => {
-    if (selectedSolutionId || !selectedProject.data) return;
+    if (selectedSolutionId || !selectedProject.data || !caseId) return;
 
     const firstSolutionId = selectedProject.data.solutions[0]?.id;
 
-    firstSolutionId &&
-      dispatch(
-        projectSlice.actions.update({ currentSolutionId: firstSolutionId })
-      );
-  }, [selectedSolutionId, selectedProject.data, dispatch]);
+    firstSolutionId && setSolution(firstSolutionId);
+  }, [selectedSolutionId, selectedProject.data, dispatch, setSolution, caseId]);
 
   const handleSolutionClick = (solution: SolutionBrief) => {
-    dispatch(projectSlice.actions.update({ currentSolutionId: solution.id }));
+    void setSolution(solution.id);
   };
 
   const handleAddSolution = () => {

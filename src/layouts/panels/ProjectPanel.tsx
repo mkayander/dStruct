@@ -15,10 +15,11 @@ import {
   Tooltip,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { TestCaseSelectBar } from "#/components";
-import { useBinaryTree } from "#/hooks";
+import { useBinaryTree, usePlaygroundIds } from "#/hooks";
 import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
@@ -28,14 +29,20 @@ import { trpc } from "#/utils";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,
-  selectCurrentCaseId,
-  selectCurrentProjectId,
   selectIsEditable,
 } from "#/store/reducers/projectReducer";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
+
+  const router = useRouter();
+  console.log(router.pathname, router.query);
+  const {
+    projectId: selectedProjectId = "",
+    caseId: selectedCaseId = "",
+    setProject,
+  } = usePlaygroundIds();
 
   const [tabValue, setTabValue] = useState("1");
   const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
@@ -46,19 +53,14 @@ export const ProjectPanel: React.FC = () => {
 
   const allBrief = trpc.project.allBrief.useQuery();
 
-  const selectedProjectId = useAppSelector(selectCurrentProjectId) ?? "";
-  const selectedCaseId = useAppSelector(selectCurrentCaseId);
   const isEditable = useAppSelector(selectIsEditable);
 
-  const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || "",
-    {
-      enabled: Boolean(selectedProjectId),
-    }
-  );
+  const selectedProject = trpc.project.getById.useQuery(selectedProjectId, {
+    enabled: Boolean(selectedProjectId),
+  });
 
   const selectedCase = trpc.project.getCaseById.useQuery(
-    { id: selectedCaseId ?? "", projectId: selectedProjectId },
+    { id: selectedCaseId, projectId: selectedProjectId },
     { enabled: Boolean(selectedProjectId && selectedCaseId) }
   );
 
@@ -79,15 +81,12 @@ export const ProjectPanel: React.FC = () => {
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
-    console.log("selectedProjectId", selectedProjectId);
-    if (allBrief.data?.length && !selectedProjectId) {
+    console.log("selectedProjectId:", selectedProjectId);
+    if (allBrief.data?.length && router.isReady && !selectedProjectId) {
       const firstProject = allBrief.data[0];
-      firstProject &&
-        dispatch(
-          projectSlice.actions.update({ currentProjectId: firstProject.id })
-        );
+      firstProject && setProject(firstProject.id);
     }
-  }, [allBrief.data, dispatch, selectedProjectId]);
+  }, [allBrief.data, dispatch, router.isReady, selectedProjectId, setProject]);
 
   useEffect(() => {
     if (selectedCase.data) {
@@ -147,7 +146,7 @@ export const ProjectPanel: React.FC = () => {
   };
 
   const handleSelectProject = (e: SelectChangeEvent) => {
-    dispatch(projectSlice.actions.setProject({ id: e.target.value }));
+    void setProject(e.target.value);
   };
 
   const handleCreateProject = () => {
@@ -205,7 +204,7 @@ export const ProjectPanel: React.FC = () => {
                 labelId="project-select-label"
                 label="Current Project"
                 defaultValue=""
-                value={selectedProjectId}
+                value={allBrief.isLoading ? "" : selectedProjectId}
                 onChange={handleSelectProject}
                 disabled={allBrief.isLoading}
               >

@@ -4,18 +4,11 @@ import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
+import { usePlaygroundIds } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { trpc } from "#/utils";
-
-import { useAppSelector } from "#/store/hooks";
-import {
-  projectSlice,
-  selectCurrentProjectId,
-  selectCurrentSolutionId,
-} from "#/store/reducers/projectReducer";
 
 const validationSchema = yup.object({
   solutionName: yup
@@ -36,11 +29,12 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   onClose,
   ...props
 }) => {
-  const dispatch = useDispatch();
-
   const { enqueueSnackbar } = useSnackbar();
-  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
-  const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? "";
+  const {
+    projectId: currentProjectId = "",
+    solutionId: currentSolutionId = "",
+    setSolution,
+  } = usePlaygroundIds();
 
   const invalidateQueries = () => {
     void trpcUtils.project.getById.invalidate(currentProjectId);
@@ -97,7 +91,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   });
   const deleteSolution = trpc.project.deleteSolution.useMutation({
     onSuccess: (data) => {
-      dispatch(projectSlice.actions.update({ currentSolutionId: null }));
+      void setSolution("");
       invalidateQueries();
 
       onClose();

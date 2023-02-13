@@ -9,16 +9,13 @@ import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBarChip";
+import { usePlaygroundIds } from "#/hooks";
 import { CaseModal } from "#/layouts/modals";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import {
-  projectSlice,
-  selectCurrentCaseId,
-  selectIsEditable,
-} from "#/store/reducers/projectReducer";
+import { selectIsEditable } from "#/store/reducers/projectReducer";
 
 type TestCaseBrief = Pick<PlaygroundTestCase, "id" | "title">;
 
@@ -35,8 +32,11 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const selectedCaseId = useAppSelector(selectCurrentCaseId);
-  const selectedProjectId = selectedProject.data?.id;
+  const {
+    projectId: selectedProjectId,
+    caseId: selectedCaseId,
+    setCase,
+  } = usePlaygroundIds();
 
   const trpcUtils = trpc.useContext();
   const addCase = trpc.project.addCase.useMutation({
@@ -46,7 +46,8 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         id: data.id,
         projectId: variables.projectId,
       });
-      dispatch(projectSlice.actions.update({ currentCaseId: data.id }));
+      void setCase(data.id);
+
       enqueueSnackbar(`🧪 Test case "${data.title}" created successfully! 🎉`, {
         variant: "success",
       });
@@ -56,9 +57,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     onSuccess: async (data, variables) => {
       if (selectedCaseId === data.id) {
         const firstCaseId = selectedProject.data?.cases[0]?.id;
-        dispatch(
-          projectSlice.actions.update({ currentCaseId: firstCaseId || null })
-        );
+        void setCase(firstCaseId || "");
       }
 
       await trpcUtils.project.getById.invalidate(variables.projectId);
@@ -76,16 +75,16 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
 
   useEffect(() => {
+    console.log(selectedCaseId, selectedProject.data);
     if (selectedCaseId || !selectedProject.data) return;
 
     const firstCaseId = selectedProject.data.cases[0]?.id;
 
-    firstCaseId &&
-      dispatch(projectSlice.actions.update({ currentCaseId: firstCaseId }));
-  }, [selectedCaseId, selectedProject.data, dispatch]);
+    firstCaseId && setCase(firstCaseId);
+  }, [selectedCaseId, selectedProject.data, dispatch, setCase]);
 
   const handleCaseClick = (testCase: TestCaseBrief) => {
-    dispatch(projectSlice.actions.update({ currentCaseId: testCase.id }));
+    void setCase(testCase.id);
   };
 
   const handleCaseEdit = (testCase: TestCaseBrief) => {

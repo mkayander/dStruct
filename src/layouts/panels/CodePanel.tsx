@@ -10,6 +10,7 @@ import shortUUID from "short-uuid";
 
 import { CodeRunner, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
+import { usePlaygroundIds } from "#/hooks";
 import { createRuntimeTree } from "#/hooks/useRuntimeBinaryTree";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
@@ -20,11 +21,7 @@ import {
   callstackSlice,
   selectRuntimeData,
 } from "#/store/reducers/callstackReducer";
-import {
-  selectCurrentProjectId,
-  selectCurrentSolutionId,
-  selectIsEditable,
-} from "#/store/reducers/projectReducer";
+import { selectIsEditable } from "#/store/reducers/projectReducer";
 import {
   treeDataSelector,
   treeNodeSlice,
@@ -44,9 +41,10 @@ export const CodePanel: React.FC = () => {
     null
   );
 
-  const selectedProjectId = useAppSelector(selectCurrentProjectId);
-  const currentProjectId = useAppSelector(selectCurrentProjectId) ?? "";
-  const currentSolutionId = useAppSelector(selectCurrentSolutionId) ?? "";
+  const {
+    projectId: selectedProjectId = "",
+    solutionId: selectedSolutionId = "",
+  } = usePlaygroundIds();
   const isEditable = useAppSelector(selectIsEditable);
   const { error } = useAppSelector(selectRuntimeData);
 
@@ -58,11 +56,11 @@ export const CodePanel: React.FC = () => {
   );
   const currentSolution = trpc.project.getSolutionById.useQuery(
     {
-      id: currentSolutionId,
-      projectId: currentProjectId,
+      id: selectedSolutionId,
+      projectId: selectedProjectId,
     },
     {
-      enabled: Boolean(currentProjectId && currentSolutionId),
+      enabled: Boolean(selectedProjectId && selectedSolutionId),
     }
   );
 
@@ -79,12 +77,12 @@ export const CodePanel: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!currentProjectId || !currentSolutionId || !isEditable) return;
+    if (!selectedProjectId || !selectedSolutionId || !isEditable) return;
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate({
-        projectId: currentProjectId,
-        solutionId: currentSolutionId,
+        projectId: selectedProjectId,
+        solutionId: selectedSolutionId,
         code: codeInput,
       });
     }, 750);
