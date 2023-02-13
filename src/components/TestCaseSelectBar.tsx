@@ -75,7 +75,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
 
   useEffect(() => {
-    console.log(selectedCaseId, selectedProject.data);
     if (selectedCaseId || !selectedProject.data) return;
 
     const firstCaseId = selectedProject.data.cases[0]?.id;
