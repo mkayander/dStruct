@@ -1,3 +1,11 @@
+# [1.92.0](https://github.com/mkayander/leetpal/compare/v1.91.2...v1.92.0) (2023-02-13)
+
+
+### Features
+
+* Added slug fields in the db ([e0b930d](https://github.com/mkayander/leetpal/commit/e0b930ddf52214d1d34f3fad469e769cfd7424f3))
+* Installed slugify ([e74f44f](https://github.com/mkayander/leetpal/commit/e74f44fa1fa52f2dd0ba6852fb327c58113bb8ee))
+
 ## [1.91.2](https://github.com/mkayander/leetpal/compare/v1.91.1...v1.91.2) (2023-02-13)
 
 
