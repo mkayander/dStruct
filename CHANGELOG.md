@@ -1,3 +1,10 @@
+## [1.91.1](https://github.com/mkayander/leetpal/compare/v1.91.0...v1.91.1) (2023-02-13)
+
+
+### Bug Fixes
+
+* Remove console log ([4f718a6](https://github.com/mkayander/leetpal/commit/4f718a645a305c762bc5d9ff5e0bddd8577fd6dd))
+
 # [1.91.0](https://github.com/mkayander/leetpal/compare/v1.90.1...v1.91.0) (2023-02-13)
 
 
