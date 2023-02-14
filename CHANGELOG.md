@@ -1,3 +1,10 @@
+## [1.92.3](https://github.com/mkayander/leetpal/compare/v1.92.2...v1.92.3) (2023-02-14)
+
+
+### Bug Fixes
+
+* Show grab cursor only when view is scrollable ([cb5b725](https://github.com/mkayander/leetpal/commit/cb5b7257ce9ce479df4d279648d776463feffacb))
+
 ## [1.92.2](https://github.com/mkayander/leetpal/compare/v1.92.1...v1.92.2) (2023-02-14)
 
 
