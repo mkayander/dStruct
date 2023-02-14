@@ -36,7 +36,6 @@ export const ProjectPanel: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
-  console.log(router.pathname, router.query);
   const {
     projectId: selectedProjectId = "",
     caseId: selectedCaseId = "",
@@ -80,7 +79,6 @@ export const ProjectPanel: React.FC = () => {
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
-    console.log("selectedProjectId:", selectedProjectId);
     if (allBrief.data?.length && router.isReady && !selectedProjectId) {
       const firstProject = allBrief.data[0];
       firstProject && setProject(firstProject.id);
