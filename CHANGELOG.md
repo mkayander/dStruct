@@ -1,3 +1,10 @@
+## [1.92.1](https://github.com/mkayander/leetpal/compare/v1.92.0...v1.92.1) (2023-02-14)
+
+
+### Bug Fixes
+
+* Remove console logs & unused parts ([d573a14](https://github.com/mkayander/leetpal/commit/d573a14abca6169eda1917c79d9cd2bdeb77cd37))
+
 # [1.92.0](https://github.com/mkayander/leetpal/compare/v1.91.2...v1.92.0) (2023-02-13)
 
 
