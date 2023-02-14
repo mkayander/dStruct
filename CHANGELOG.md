@@ -1,3 +1,10 @@
+## [1.92.2](https://github.com/mkayander/leetpal/compare/v1.92.1...v1.92.2) (2023-02-14)
+
+
+### Bug Fixes
+
+* Implement tree viewer grabbing cursor ([b1dfc6f](https://github.com/mkayander/leetpal/commit/b1dfc6f1b35daa761dae582399aeb1de9fa9d009))
+
 ## [1.92.1](https://github.com/mkayander/leetpal/compare/v1.92.0...v1.92.1) (2023-02-14)
 
 
