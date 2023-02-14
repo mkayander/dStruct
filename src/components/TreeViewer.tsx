@@ -149,6 +149,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           background: "linear-gradient(-90deg, black, transparent)",
           opacity: scrolledEnd ? 0 : 0.2,
         },
+        ".indiana-scroll-container": {
+          cursor: "grab",
+        },
+        ".indiana-scroll-container--dragging": {
+          cursor: "grabbing",
+        },
       }}
     >
       <ScrollContainer innerRef={scrollRef} onScroll={handleScroll}>

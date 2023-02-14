@@ -125,6 +125,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
         sx={{
           position: "relative",
           "&:hover": {
+            cursor: "pointer",
             "& > .node-overlay": {
               opacity: "0.1!important",
             },
