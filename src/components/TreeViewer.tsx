@@ -141,16 +141,16 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           ...overlayStyles,
           left: 0,
           background: "linear-gradient(90deg, black, transparent)",
-          opacity: scrolledStart ? 0 : 0.2,
+          opacity: scrolledStart ? 0 : 0.3,
         },
         "&:after": {
           ...overlayStyles,
           right: 0,
           background: "linear-gradient(-90deg, black, transparent)",
-          opacity: scrolledEnd ? 0 : 0.2,
+          opacity: scrolledEnd ? 0 : 0.3,
         },
         ".indiana-scroll-container": {
-          cursor: "grab",
+          cursor: !scrolledStart || !scrolledStart ? "grab" : "initial",
         },
         ".indiana-scroll-container--dragging": {
           cursor: "grabbing",
