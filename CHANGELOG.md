@@ -1,3 +1,12 @@
+# [1.93.0](https://github.com/mkayander/leetpal/compare/v1.92.3...v1.93.0) (2023-02-15)
+
+
+### Features
+
+* Add dark mode flag ([5c392e3](https://github.com/mkayander/leetpal/commit/5c392e38007f4fd008388162781421cc2df5dfde))
+* Implemented persistent dark mode state for both guests and authenticated users ([096aa98](https://github.com/mkayander/leetpal/commit/096aa989567293a35f8e401d342166259e9a8951))
+* Updated Prisma dependencies ([dd21ce2](https://github.com/mkayander/leetpal/commit/dd21ce25462aba643f24610020107afb462896b9))
+
 ## [1.92.3](https://github.com/mkayander/leetpal/compare/v1.92.2...v1.92.3) (2023-02-14)
 
 
