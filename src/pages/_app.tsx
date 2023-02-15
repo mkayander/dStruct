@@ -5,7 +5,7 @@ import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { SnackbarProvider } from "notistack";
-import React, { useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
@@ -29,11 +29,16 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
   const { store, props } = wrapper.useWrappedStore(restProps);
   // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [darkMode, setDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useLayoutEffect(() => {
+    const cachedDarkModeValue = localStorage.getItem("isDarkMode");
+    setIsDarkMode(Boolean(cachedDarkModeValue));
+  }, []);
 
   const theme = useMemo(
-    () => (darkMode ? themes.dark : themes.light),
-    [darkMode]
+    () => (isDarkMode ? themes.dark : themes.light),
+    [isDarkMode]
   );
 
   const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
@@ -48,7 +53,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <Layout setDarkMode={setDarkMode}>
+              <Layout setDarkMode={setIsDarkMode}>
                 <Component {...props.pageProps} />
               </Layout>
             </SnackbarProvider>

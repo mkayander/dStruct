@@ -22,13 +22,13 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { type MouseEvent, useState } from "react";
+import React, { type MouseEvent, useEffect, useState } from "react";
 
 import { ThemeSwitch } from "#/components/ThemeSwitch";
 import { useProfileImageUploader } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
-import { getImageUrl } from "#/utils";
+import { getImageUrl, trpc } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
@@ -98,6 +98,25 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const handleNavItemClick = (item: NavItem) => {
     void router.push(item.href);
+  };
+
+  useEffect(() => {
+    const isDarkMode = theme.palette.mode === "dark";
+    const databaseDarkModeValue = session.data?.user.usesDarkMode;
+
+    databaseDarkModeValue !== undefined &&
+      databaseDarkModeValue !== isDarkMode &&
+      setDarkMode(databaseDarkModeValue);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session.data?.user.usesDarkMode]);
+
+  const darkModeMutation = trpc.user.setDarkMode.useMutation();
+
+  const handleDarkModeSwitch = (value: boolean) => {
+    setDarkMode(value);
+    session.status === "authenticated" && darkModeMutation.mutate(value);
+    localStorage.setItem("isDarkMode", value ? "true" : "");
   };
 
   return (
@@ -226,7 +245,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           <Stack direction="row" sx={{ flexGrow: 0 }}>
             <ThemeSwitch
               onChange={(_, checked) => {
-                setDarkMode(checked);
+                handleDarkModeSwitch(checked);
               }}
             />
 
