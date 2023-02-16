@@ -114,13 +114,14 @@ model PlaygroundProject {
   author      User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   title       String
   category    ProjectCategory
-  slug        String?
+  slug        String               @default(cuid())
   description String?              @db.Text
   isExample   Boolean              @default(false)
   isPublic    Boolean              @default(false)
   solutions   PlaygroundSolution[]
   cases       PlaygroundTestCase[]
 
+  @@unique([slug])
   @@unique([title, userId])
   @@index([userId])
 }
@@ -132,11 +133,12 @@ model PlaygroundSolution {
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
-  slug        String?
+  slug        String            @default(cuid())
   description String?
   code        String            @db.Text
   order       Int               @default(0)
 
+  @@unique([slug])
   @@index([projectId])
 }
 
@@ -147,9 +149,10 @@ model PlaygroundTestCase {
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
-  slug        String?
+  slug        String            @default(cuid())
   input       String            @db.Text
   description String?
 
+  @@unique([slug])
   @@index([projectId])
 }
