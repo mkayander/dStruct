@@ -1,3 +1,11 @@
+## [1.93.2](https://github.com/mkayander/leetpal/compare/v1.93.1...v1.93.2) (2023-02-16)
+
+
+### Bug Fixes
+
+* Added foreign key db indexes ([2f72978](https://github.com/mkayander/leetpal/commit/2f7297871df4ea8c26a7cfafa148b8b471b6100b))
+* Fixed dark mode switching logic ([81ed5b5](https://github.com/mkayander/leetpal/commit/81ed5b51b0344e6590e59ad60ec4459be8658a91))
+
 ## [1.93.1](https://github.com/mkayander/leetpal/compare/v1.93.0...v1.93.1) (2023-02-16)
 
 
