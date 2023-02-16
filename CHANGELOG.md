@@ -1,3 +1,10 @@
+## [1.93.1](https://github.com/mkayander/leetpal/compare/v1.93.0...v1.93.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* Fixed grab cursor condition ([b558291](https://github.com/mkayander/leetpal/commit/b558291be3584cadb47a07c2df76ab4aeaf9e2cf))
+
 # [1.93.0](https://github.com/mkayander/leetpal/compare/v1.92.3...v1.93.0) (2023-02-15)
 
 
