@@ -1,3 +1,11 @@
+## [1.94.1](https://github.com/mkayander/leetpal/compare/v1.94.0...v1.94.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* Generate default slugs ([76853a8](https://github.com/mkayander/leetpal/commit/76853a8924112a3cb1fd1723a1f047913f4ff501))
+* Generate default slugs for batched items ([be17622](https://github.com/mkayander/leetpal/commit/be176222f3e263e8d25d21bbca9a36ac273e891f))
+
 # [1.94.0](https://github.com/mkayander/leetpal/compare/v1.93.2...v1.94.0) (2023-02-16)
 
 
