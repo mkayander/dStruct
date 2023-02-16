@@ -128,12 +128,14 @@ export const projectRouter = router({
           cases: {
             create: {
               title: "Case 1",
+              slug: `case-${uuid.generate()}`,
               input: "[]"
             }
           },
           solutions: {
             create: {
               title: "Solution 1",
+              slug: `solution-${uuid.generate()}`,
               code: defaultJsTemplate
             }
           }
