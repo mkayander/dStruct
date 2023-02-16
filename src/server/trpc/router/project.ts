@@ -9,6 +9,9 @@ import {
 } from "#/server/trpc/trpc";
 
 import defaultJsTemplate from "#/assets/codeTemplates/defaultTemplate.js.txt";
+import shortUUID from "short-uuid";
+
+const uuid = shortUUID();
 
 const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
   const projectId: string | undefined = typeof rawInput === "object" && (<any>rawInput).projectId;
@@ -121,6 +124,7 @@ export const projectRouter = router({
         data: {
           ...data,
           userId: ctx.session.user.id,
+          slug: `solution-${uuid.generate()}`,
           cases: {
             create: {
               title: "Case 1",
@@ -222,6 +226,7 @@ export const projectRouter = router({
         data: {
           projectId: ctx.project.id,
           title: input.title,
+          slug: `case-${uuid.generate()}`,
           input: input.input
         }
       })
@@ -283,7 +288,8 @@ export const projectRouter = router({
     )
     .mutation(async ({ input, ctx }) =>
       ctx.prisma.playgroundSolution.create({
-        data: { code: defaultJsTemplate, ...input }
+
+        data: { code: defaultJsTemplate, slug: `solution-${uuid.generate()}`, ...input }
       })
     ),
 
