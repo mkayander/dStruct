@@ -1,3 +1,13 @@
+# [1.94.0](https://github.com/mkayander/leetpal/compare/v1.93.2...v1.94.0) (2023-02-16)
+
+
+### Features
+
+* Implemented slug generation script ([101e739](https://github.com/mkayander/leetpal/commit/101e7398c2c172b4c9be0134554101356ad7d974))
+* Installed tsx ([b4cf445](https://github.com/mkayander/leetpal/commit/b4cf445f7117d565f073f6a79353862ecc26ebc3))
+* Make slugs unique & required ([87d323c](https://github.com/mkayander/leetpal/commit/87d323c75f936c56797cade7ffc67ea7c7e452cf))
+* Removed redundant default params ([522acf4](https://github.com/mkayander/leetpal/commit/522acf444746176cb943743a58b52d558ab04a5a))
+
 ## [1.93.2](https://github.com/mkayander/leetpal/compare/v1.93.1...v1.93.2) (2023-02-16)
 
 
