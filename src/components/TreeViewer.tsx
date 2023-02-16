@@ -150,7 +150,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           opacity: scrolledEnd ? 0 : 0.3,
         },
         ".indiana-scroll-container": {
-          cursor: !scrolledStart || !scrolledStart ? "grab" : "initial",
+          cursor: !scrolledStart || !scrolledEnd ? "grab" : "initial",
         },
         ".indiana-scroll-container--dragging": {
           cursor: "grabbing",
