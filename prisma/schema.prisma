@@ -47,6 +47,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -57,6 +58,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -119,6 +122,7 @@ model PlaygroundProject {
   cases       PlaygroundTestCase[]
 
   @@unique([title, userId])
+  @@index([userId])
 }
 
 model PlaygroundSolution {
@@ -132,6 +136,8 @@ model PlaygroundSolution {
   description String?
   code        String            @db.Text
   order       Int               @default(0)
+
+  @@index([projectId])
 }
 
 model PlaygroundTestCase {
@@ -144,4 +150,6 @@ model PlaygroundTestCase {
   slug        String?
   input       String            @db.Text
   description String?
+
+  @@index([projectId])
 }
