@@ -29,16 +29,16 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
   const { store, props } = wrapper.useWrappedStore(restProps);
   // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isLightMode, setIsLightMode] = useState(false);
 
   useLayoutEffect(() => {
-    const cachedDarkModeValue = localStorage.getItem("isDarkMode");
-    setIsDarkMode(Boolean(cachedDarkModeValue));
+    const cachedDarkModeValue = localStorage.getItem("isLightMode");
+    setIsLightMode(Boolean(cachedDarkModeValue));
   }, []);
 
   const theme = useMemo(
-    () => (isDarkMode ? themes.dark : themes.light),
-    [isDarkMode]
+    () => (isLightMode ? themes.light : themes.dark),
+    [isLightMode]
   );
 
   const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
@@ -53,7 +53,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <Layout setDarkMode={setIsDarkMode}>
+              <Layout setIsLightMode={setIsLightMode}>
                 <Component {...props.pageProps} />
               </Layout>
             </SnackbarProvider>

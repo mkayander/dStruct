@@ -55,13 +55,13 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 type MainAppBarProps = {
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLightMode: React.Dispatch<React.SetStateAction<boolean>>;
   appBarVariant?: AppBarProps["variant"];
   toolbarVariant?: ToolbarProps["variant"];
 };
 
 export const MainAppBar: React.FC<MainAppBarProps> = ({
-  setDarkMode,
+  setIsLightMode,
   appBarVariant = "elevation",
   toolbarVariant = "dense",
 }) => {
@@ -101,22 +101,22 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   };
 
   useEffect(() => {
-    const isDarkMode = theme.palette.mode === "dark";
-    const databaseDarkModeValue = session.data?.user.usesDarkMode;
+    const isLightMode = theme.palette.mode === "light";
+    const databaseLightModeValue = session.data?.user.usesLightMode;
 
-    databaseDarkModeValue !== undefined &&
-      databaseDarkModeValue !== isDarkMode &&
-      setDarkMode(databaseDarkModeValue);
+    databaseLightModeValue !== undefined &&
+      databaseLightModeValue !== isLightMode &&
+      setIsLightMode(databaseLightModeValue);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session.data?.user.usesDarkMode]);
+  }, [session.data?.user.usesLightMode]);
 
-  const darkModeMutation = trpc.user.setDarkMode.useMutation();
+  const lightModeMutation = trpc.user.setLightMode.useMutation();
 
-  const handleDarkModeSwitch = (value: boolean) => {
-    setDarkMode(value);
-    session.status === "authenticated" && darkModeMutation.mutate(value);
-    localStorage.setItem("isDarkMode", value ? "true" : "");
+  const handleLightModeSwitch = (value: boolean) => {
+    setIsLightMode(value);
+    session.status === "authenticated" && lightModeMutation.mutate(value);
+    localStorage.setItem("isLightMode", value ? "true" : "");
   };
 
   return (
@@ -245,7 +245,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           <Stack direction="row" sx={{ flexGrow: 0 }}>
             <ThemeSwitch
               onChange={(_, checked) => {
-                handleDarkModeSwitch(checked);
+                handleLightModeSwitch(!checked);
               }}
             />
 

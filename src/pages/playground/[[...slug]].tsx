@@ -49,17 +49,20 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
-const Layout: React.FC<MainLayoutProps> = ({ children, setDarkMode }) => {
+const Layout: React.FC<MainLayoutProps> = ({ children, setIsLightMode }) => {
   return (
     <PageScrollContainer>
-      <MainAppBar setDarkMode={setDarkMode} toolbarVariant="dense" />
+      <MainAppBar setIsLightMode={setIsLightMode} toolbarVariant="dense" />
       {children}
     </PageScrollContainer>
   );
 };
 
-PlaygroundPage.Layout = function PlaygroundLayout({ setDarkMode, children }) {
-  return <Layout setDarkMode={setDarkMode}>{children}</Layout>;
+PlaygroundPage.Layout = function PlaygroundLayout({
+  setIsLightMode,
+  children,
+}) {
+  return <Layout setIsLightMode={setIsLightMode}>{children}</Layout>;
 };
 
 export default PlaygroundPage;

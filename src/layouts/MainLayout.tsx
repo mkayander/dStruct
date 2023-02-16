@@ -5,14 +5,14 @@ import { Footer, MainAppBar, PageScrollContainer } from "#/components";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLightMode: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading?: boolean;
 };
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   isLoading,
-  setDarkMode,
+  setIsLightMode,
 }) => {
   const theme = useTheme();
 
@@ -33,7 +33,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     >
       <PageScrollContainer>
         <Box sx={{ minHeight: "100vh" }}>
-          <MainAppBar setDarkMode={setDarkMode} />
+          <MainAppBar setIsLightMode={setIsLightMode} />
           <Box sx={{ minHeight: "85vh" }}>
             {isLoading ? <LinearProgress variant="indeterminate" /> : children}
           </Box>

@@ -34,13 +34,13 @@ export const userRouter = router({
       });
     }),
 
-  setDarkMode: protectedProcedure
+  setLightMode: protectedProcedure
     .input(z.boolean())
     .mutation(({ input, ctx }) =>
       ctx.prisma.user.update({
         where: { id: ctx.session.user.id },
         data: {
-          usesDarkMode: input,
+          usesLightMode: input,
         },
       })
     ),
