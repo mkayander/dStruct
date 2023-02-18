@@ -51,7 +51,7 @@
     "graphql": "^16.6.0",
     "monaco-editor": "^0.34.1",
     "next": "13.0.7",
-    "next-auth": "^4.18.6",
+    "next-auth": "^4.19.2",
     "next-redux-wrapper": "^8.1.0",
     "notistack": "^2.0.8",
     "overlayscrollbars": "^2.0.1",
