@@ -1,3 +1,11 @@
+## [1.94.2](https://github.com/mkayander/leetpal/compare/v1.94.1...v1.94.2) (2023-02-18)
+
+
+### Bug Fixes
+
+* Avoid using useLayoutEffect ([b544d95](https://github.com/mkayander/leetpal/commit/b544d9551d8bb1eae304eca7e5644f136f085d65))
+* Update next-auth to fix provider icons ([ce60e00](https://github.com/mkayander/leetpal/commit/ce60e007a195ca02cd640a3abb9ab3c382340337))
+
 ## [1.94.1](https://github.com/mkayander/leetpal/compare/v1.94.0...v1.94.1) (2023-02-16)
 
 
