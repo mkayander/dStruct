@@ -25,6 +25,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
+import { usePlaygroundIds } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
@@ -67,6 +68,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const deleteProject = trpc.project.delete.useMutation();
   const trpcUtils = trpc.useContext();
 
+  const { setProject } = usePlaygroundIds();
+
   const formik = useFormik({
     initialValues: {
       projectName: "",
@@ -96,13 +99,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = "New project was created successfully 🎉";
-          newProject &&
-            dispatch(
-              projectSlice.actions.setProject({
-                id: newProject.id,
-                isEditable: true,
-              })
-            );
+          newProject && void setProject(newProject.id);
         }
 
         void trpcUtils.project.allBrief.invalidate();
