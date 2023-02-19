@@ -1,3 +1,11 @@
+# [1.97.0](https://github.com/mkayander/leetpal/compare/v1.96.0...v1.97.0) (2023-02-19)
+
+
+### Features
+
+* Implement entity slugs editing 👍 ([bcb135a](https://github.com/mkayander/leetpal/commit/bcb135a8e9937f4573564ef69a7a13d15684bfe2))
+* Make slugs unique constraints depend on project id ([f5ae558](https://github.com/mkayander/leetpal/commit/f5ae55844640ce09756fb5a9f2434c24a2216271))
+
 # [1.96.0](https://github.com/mkayander/leetpal/compare/v1.95.1...v1.96.0) (2023-02-19)
 
 
