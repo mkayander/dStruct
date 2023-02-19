@@ -1,3 +1,16 @@
+# [1.95.0](https://github.com/mkayander/leetpal/compare/v1.94.2...v1.95.0) (2023-02-19)
+
+
+### Bug Fixes
+
+* Removed invalid setProject action ([b1819cd](https://github.com/mkayander/leetpal/commit/b1819cd05f5254c7b4eea5999bec39142fcfce3c))
+
+
+### Features
+
+* Implemented editor state component ([4320c9d](https://github.com/mkayander/leetpal/commit/4320c9d1e52d81c11328f2e51290e482df373b15))
+* Updated code editor, implemented editor state status display ([156f887](https://github.com/mkayander/leetpal/commit/156f887e7ffad4336d3974ab731d307e26bbdbfe))
+
 ## [1.94.2](https://github.com/mkayander/leetpal/compare/v1.94.1...v1.94.2) (2023-02-18)
 
 
