@@ -1,3 +1,10 @@
+## [1.95.1](https://github.com/mkayander/leetpal/compare/v1.95.0...v1.95.1) (2023-02-19)
+
+
+### Bug Fixes
+
+* Optimized editor state display ([61963a9](https://github.com/mkayander/leetpal/commit/61963a9cb3005041da0f028fec235554473ed0ab))
+
 # [1.95.0](https://github.com/mkayander/leetpal/compare/v1.94.2...v1.95.0) (2023-02-19)
 
 
