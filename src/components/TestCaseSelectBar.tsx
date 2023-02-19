@@ -36,6 +36,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const invalidateQueries = async (slug?: string) => {
     await trpcUtils.project.getBySlug.invalidate(projectSlug);
     await trpcUtils.project.getCaseBySlug.invalidate({
+      projectId: selectedProject.data?.id || "",
       slug: slug || caseSlug,
     });
   };

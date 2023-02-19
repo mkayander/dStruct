@@ -8,6 +8,8 @@ import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
+import { useAppSelector } from "#/store/hooks";
+import { selectProjectId } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 
 const validationSchema = yup.object({
@@ -16,6 +18,11 @@ const validationSchema = yup.object({
     .min(3, "Solution name must be at least 3 characters")
     .max(190, "Solution name must be at most 50 characters")
     .required("Solution name is required"),
+  solutionSlug: yup
+    .string()
+    .min(3, "Slug must be at least 3 characters")
+    .max(100, "Slug must be at most 100 characters")
+    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
   solutionDescription: yup
     .string()
     .max(190, "Solution description must be at most 200 characters"),
@@ -36,13 +43,15 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     setSolution,
   } = usePlaygroundSlugs();
 
+  const currentProjectId = useAppSelector(selectProjectId) || "";
+
   const invalidateQueries = () => {
     void trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
   const currentSolution = trpc.project.getSolutionBySlug.useQuery(
-    { slug: solutionSlug },
-    { enabled: Boolean(solutionSlug && projectSlug) }
+    { projectId: currentProjectId, slug: solutionSlug },
+    { enabled: Boolean(currentProjectId && solutionSlug) }
   );
 
   const trpcUtils = trpc.useContext();
@@ -50,6 +59,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   const formik = useFormik({
     initialValues: {
       solutionName: "",
+      solutionSlug: "",
       solutionDescription: "",
     },
     validationSchema: validationSchema,
@@ -61,6 +71,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
           projectId: currentSolution.data.projectId,
           solutionId: currentSolution.data.id,
           title: values.solutionName,
+          slug: values.solutionSlug,
           description: values.solutionDescription,
         });
       } catch (error: any) {
@@ -80,6 +91,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   const editSolution = trpc.project.updateSolution.useMutation({
     onSuccess: (data) => {
       invalidateQueries();
+      void setSolution(data.slug);
 
       onClose();
 
@@ -109,6 +121,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     if (currentSolution.data) {
       formik.setValues({
         solutionName: currentSolution.data.title,
+        solutionSlug: currentSolution.data.slug,
         solutionDescription: currentSolution.data.description ?? "",
       });
     } else {
@@ -143,6 +156,22 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       fullWidth
       {...props}
     >
+      <TextField
+        id="solutionSlug"
+        name="solutionSlug"
+        label="Slug"
+        variant="outlined"
+        disabled={formik.isSubmitting}
+        value={formik.values.solutionSlug}
+        onChange={formik.handleChange}
+        error={
+          formik.touched.solutionSlug && Boolean(formik.errors.solutionSlug)
+        }
+        helperText={
+          (formik.touched.solutionSlug && formik.errors.solutionSlug) ||
+          "You can edit a slug that's used in the URL to this solution."
+        }
+      />
       <TextField
         id="solutionName"
         name="solutionName"

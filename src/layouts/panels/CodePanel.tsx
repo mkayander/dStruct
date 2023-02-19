@@ -55,10 +55,11 @@ export const CodePanel: React.FC = () => {
   });
   const currentSolution = trpc.project.getSolutionBySlug.useQuery(
     {
+      projectId: selectedProject.data?.id || "",
       slug: solutionSlug,
     },
     {
-      enabled: Boolean(projectSlug && solutionSlug),
+      enabled: Boolean(selectedProject.data?.id && solutionSlug),
     }
   );
 

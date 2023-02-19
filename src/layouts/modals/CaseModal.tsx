@@ -8,6 +8,8 @@ import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
+import { useAppSelector } from "#/store/hooks";
+import { selectProjectId } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 
 const validationSchema = yup.object({
@@ -16,6 +18,11 @@ const validationSchema = yup.object({
     .min(3, "Case name must be at least 3 characters")
     .max(190, "Case name must be at most 50 characters")
     .required("Case name is required"),
+  caseSlug: yup
+    .string()
+    .min(3, "Slug must be at least 3 characters")
+    .max(100, "Slug must be at most 100 characters")
+    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
   caseDescription: yup
     .string()
     .max(190, "Case description must be at most 200 characters"),
@@ -29,13 +36,15 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { projectSlug = "", caseSlug = "", setCase } = usePlaygroundSlugs();
 
-  const invalidateQueries = () => {
-    void trpcUtils.project.getBySlug.invalidate(projectSlug);
+  const currentProjectId = useAppSelector(selectProjectId) || "";
+
+  const invalidateQueries = async () => {
+    await trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
   const currentCase = trpc.project.getCaseBySlug.useQuery(
-    { slug: caseSlug },
-    { enabled: Boolean(caseSlug && projectSlug) }
+    { projectId: currentProjectId, slug: caseSlug },
+    { enabled: Boolean(currentProjectId && caseSlug) }
   );
 
   const trpcUtils = trpc.useContext();
@@ -43,6 +52,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
       caseName: "",
+      caseSlug: "",
       caseDescription: "",
     },
     validationSchema: validationSchema,
@@ -54,8 +64,10 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
           projectId: currentCase.data.projectId,
           caseId: currentCase.data.id,
           title: values.caseName,
+          slug: values.caseSlug,
           description: values.caseDescription,
         });
+        void setCase(values.caseSlug);
       } catch (error: any) {
         if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
           formikHelpers.setErrors({
@@ -83,9 +95,9 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     },
   });
   const deleteCase = trpc.project.deleteCase.useMutation({
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      await invalidateQueries();
       void setCase("");
-      invalidateQueries();
 
       onClose();
       formik.resetForm();
@@ -102,6 +114,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     if (currentCase.data) {
       formik.setValues({
         caseName: currentCase.data.title,
+        caseSlug: currentCase.data.slug,
         caseDescription: currentCase.data.description ?? "",
       });
     } else {
@@ -136,6 +149,20 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       fullWidth
       {...props}
     >
+      <TextField
+        id="caseSlug"
+        name="caseSlug"
+        label="Slug"
+        variant="outlined"
+        disabled={formik.isSubmitting}
+        value={formik.values.caseSlug}
+        onChange={formik.handleChange}
+        error={formik.touched.caseSlug && Boolean(formik.errors.caseSlug)}
+        helperText={
+          (formik.touched.caseSlug && formik.errors.caseSlug) ||
+          "You can edit a slug that's used in the URL to this test case."
+        }
+      />
       <TextField
         id="caseName"
         name="caseName"

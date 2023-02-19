@@ -45,6 +45,11 @@ const validationSchema = yup.object({
     .min(3, "Project name must be at least 3 characters")
     .max(190, "Project name must be at most 190 characters")
     .required("Project name is required"),
+  projectSlug: yup
+    .string()
+    .min(3, "Slug must be at least 3 characters")
+    .max(100, "Slug must be at most 100 characters")
+    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
   projectCategory: yup.string().required("Project category is required"),
 });
 
@@ -73,6 +78,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const formik = useFormik({
     initialValues: {
       projectName: "",
+      projectSlug: "",
       projectCategory: "" as ProjectCategory,
       projectDescription: "",
       isPublic: true,
@@ -85,15 +91,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           await editProject.mutateAsync({
             projectId: currentProject.id,
             title: values.projectName,
+            slug: values.projectSlug,
             category: values.projectCategory,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
           successMessage = `Project "${values.projectName}" was successfully updated 📝`;
-          void trpcUtils.project.getBySlug.invalidate(currentProject.slug);
+          await trpcUtils.project.getBySlug.invalidate(values.projectSlug);
         } else {
           const newProject = await createProject.mutateAsync({
             title: values.projectName,
+            slug: values.projectSlug,
             category: values.projectCategory,
             description: values.projectDescription,
             isPublic: values.isPublic,
@@ -102,7 +110,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           newProject && void setProject(newProject.slug);
         }
 
-        void trpcUtils.project.allBrief.invalidate();
+        await trpcUtils.project.allBrief.invalidate();
+        void setProject(values.projectSlug);
         onClose();
         formikHelpers.resetForm();
 
@@ -129,6 +138,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     if (isEditMode && currentProject) {
       formik.setValues({
         projectName: currentProject.title,
+        projectSlug: currentProject.slug,
         projectCategory: currentProject.category,
         projectDescription: currentProject.description ?? "",
         isPublic: currentProject.isPublic,
@@ -152,8 +162,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectId: currentProject.id,
     });
     dispatch(projectSlice.actions.clear());
+    await trpcUtils.project.allBrief.invalidate();
     void clearSlugs();
-    void trpcUtils.project.allBrief.invalidate();
     onClose();
     formik.resetForm();
 
@@ -180,6 +190,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             Edit the project details below according to your needs.
           </DialogContentText>
           <Stack spacing={2} mt={2}>
+            <TextField
+              id="projectSlug"
+              name="projectSlug"
+              label="Slug"
+              variant="outlined"
+              disabled={formik.isSubmitting}
+              value={formik.values.projectSlug}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectSlug && Boolean(formik.errors.projectSlug)
+              }
+              helperText={
+                (formik.touched.projectSlug && formik.errors.projectSlug) ||
+                "You can edit a slug that's used in the URL to this project."
+              }
+            />
             <TextField
               id="projectName"
               name="projectName"

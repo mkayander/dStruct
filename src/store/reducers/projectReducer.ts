@@ -4,9 +4,11 @@ import type { RootState } from "#/store/makeStore";
 
 type ProjectState = {
   isEditable: boolean;
+  projectId: string | null;
 };
 
 const initialState: ProjectState = {
+  projectId: null,
   isEditable: false,
 };
 
@@ -34,3 +36,4 @@ export const projectReducer = projectSlice.reducer;
  * Selectors
  */
 export const selectIsEditable = (state: RootState) => state.project.isEditable;
+export const selectProjectId = (state: RootState) => state.project.projectId;

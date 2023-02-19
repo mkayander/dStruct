@@ -54,11 +54,17 @@ export const ProjectPanel: React.FC = () => {
   });
 
   const selectedCase = trpc.project.getCaseBySlug.useQuery(
-    { slug: caseSlug },
-    { enabled: Boolean(projectSlug && caseSlug) }
+    { projectId: selectedProject.data?.id || "", slug: caseSlug },
+    { enabled: Boolean(selectedProject.data?.id && caseSlug) }
   );
 
   const updateCase = trpc.project.updateCase.useMutation();
+
+  useEffect(() => {
+    dispatch(
+      projectSlice.actions.update({ projectId: selectedProject.data?.id })
+    );
+  }, [dispatch, selectedProject.data?.id]);
 
   useEffect(() => {
     if (!selectedProject.data || !session.data) {

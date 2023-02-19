@@ -50,6 +50,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const invalidateQueries = async (slug?: string) => {
     await trpcUtils.project.getBySlug.invalidate(projectSlug);
     await trpcUtils.project.getSolutionBySlug.invalidate({
+      projectId: selectedProject.data?.id || "",
       slug: slug || solutionSlug,
     });
   };
