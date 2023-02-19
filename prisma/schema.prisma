@@ -138,7 +138,7 @@ model PlaygroundSolution {
   code        String            @db.Text
   order       Int               @default(0)
 
-  @@unique([slug])
+  @@unique([projectId, slug])
   @@index([projectId])
 }
 
@@ -153,6 +153,6 @@ model PlaygroundTestCase {
   input       String            @db.Text
   description String?
 
-  @@unique([slug])
+  @@unique([projectId, slug])
   @@index([projectId])
 }
