@@ -57,7 +57,7 @@ export const projectRouter = router({
         where: {
           OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }]
         },
-        select: { id: true, title: true, category: true }
+        select: { id: true, slug: true, title: true, category: true }
       });
     }),
 
@@ -84,23 +84,25 @@ export const projectRouter = router({
     ),
 
   // Select a single project
-  getById: publicProcedure
+  getBySlug: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input }) =>
       ctx.prisma.playgroundProject.findUniqueOrThrow({
         where: {
-          id: input
+          slug: input
         },
         include: {
           cases: {
             select: {
               id: true,
+              slug: true,
               title: true
             }
           },
           solutions: {
             select: {
               id: true,
+              slug: true,
               title: true,
               order: true
             }
@@ -124,7 +126,7 @@ export const projectRouter = router({
         data: {
           ...data,
           userId: ctx.session.user.id,
-          slug: `solution-${uuid.generate()}`,
+          slug: `project-${uuid.generate()}`,
           cases: {
             create: {
               title: "Case 1",
@@ -154,6 +156,7 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
+        slug: z.ostring(),
         title: z.ostring(),
         category: z.nativeEnum(ProjectCategory).optional(),
         description: z.ostring(),
@@ -200,17 +203,16 @@ export const projectRouter = router({
     })
   ),
 
-  getCaseById: publicProcedure
+  getCaseBySlug: publicProcedure
     .input(
       z.object({
-        id: z.string(),
-        projectId: z.string()
+        slug: z.string(),
       })
     )
     .query(async ({ input, ctx }) =>
       ctx.prisma.playgroundTestCase.findUniqueOrThrow({
         where: {
-          id: input.id
+          slug: input.slug
         }
       })
     ),
@@ -264,17 +266,16 @@ export const projectRouter = router({
       })
     ),
 
-  getSolutionById: publicProcedure
+  getSolutionBySlug: publicProcedure
     .input(
       z.object({
-        id: z.string(),
-        projectId: z.string()
+        slug: z.string()
       })
     )
     .query(async ({ input, ctx }) =>
       ctx.prisma.playgroundSolution.findUniqueOrThrow({
         where: {
-          id: input.id
+          slug: input.slug
         }
       })
     ),

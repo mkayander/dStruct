@@ -12,7 +12,7 @@ import shortUUID from "short-uuid";
 import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
 import { EditorState } from "#/components/EditorStateIcon";
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { createRuntimeTree } from "#/hooks/useRuntimeBinaryTree";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
@@ -34,7 +34,7 @@ export const CodePanel: React.FC = () => {
   const dispatch = useAppDispatch();
   const session = useSession();
 
-  const [value, setValue] = useState("1");
+  const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState<string>("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null
@@ -46,26 +46,19 @@ export const CodePanel: React.FC = () => {
   );
   const [editorState, setEditorState] = useState(EditorState.INITIAL);
 
-  const {
-    projectId: selectedProjectId = "",
-    solutionId: selectedSolutionId = "",
-  } = usePlaygroundIds();
+  const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
   const { error } = useAppSelector(selectRuntimeData);
 
-  const selectedProject = trpc.project.getById.useQuery(
-    selectedProjectId || "",
+  const selectedProject = trpc.project.getBySlug.useQuery(projectSlug || "", {
+    enabled: Boolean(projectSlug),
+  });
+  const currentSolution = trpc.project.getSolutionBySlug.useQuery(
     {
-      enabled: Boolean(selectedProjectId),
-    }
-  );
-  const currentSolution = trpc.project.getSolutionById.useQuery(
-    {
-      id: selectedSolutionId,
-      projectId: selectedProjectId,
+      slug: solutionSlug,
     },
     {
-      enabled: Boolean(selectedProjectId && selectedSolutionId),
+      enabled: Boolean(projectSlug && solutionSlug),
     }
   );
 
@@ -89,12 +82,13 @@ export const CodePanel: React.FC = () => {
 
   // Save code changes on server
   useEffect(() => {
-    if (editorState !== EditorState.PENDING_CHANGES) return;
+    if (!currentSolution.data || editorState !== EditorState.PENDING_CHANGES)
+      return;
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate({
-        projectId: selectedProjectId,
-        solutionId: selectedSolutionId,
+        projectId: currentSolution.data.projectId,
+        solutionId: currentSolution.data.id,
         code: codeInput,
       });
     }, 750);
@@ -102,9 +96,10 @@ export const CodePanel: React.FC = () => {
     return () => clearTimeout(timeoutId);
   }, [
     codeInput,
+    currentSolution.data,
     editorState,
-    selectedProjectId,
-    selectedSolutionId,
+    projectSlug,
+    solutionSlug,
     updateSolution,
   ]);
 
@@ -156,7 +151,7 @@ export const CodePanel: React.FC = () => {
   }, [error, monacoInstance, textModel]);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
 
   const handleRunCode = () => {
@@ -237,7 +232,7 @@ export const CodePanel: React.FC = () => {
       (ev.changes[0]?.rangeLength ?? 0) < 200
     ) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
-    } else if (selectedProjectId && selectedSolutionId && isEditable) {
+    } else if (projectSlug && solutionSlug && isEditable) {
       setEditorState(EditorState.PENDING_CHANGES);
     }
   };
@@ -257,7 +252,7 @@ export const CodePanel: React.FC = () => {
 
   return (
     <PanelWrapper>
-      <TabContext value={value}>
+      <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label="panel tabs">
             <Tab label="Code Runner" value="1" />

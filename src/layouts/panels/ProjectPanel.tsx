@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { TestCaseSelectBar } from "#/components";
-import { useBinaryTree, usePlaygroundIds } from "#/hooks";
+import { useBinaryTree, usePlaygroundSlugs } from "#/hooks";
 import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
@@ -36,11 +36,7 @@ export const ProjectPanel: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
-  const {
-    projectId: selectedProjectId = "",
-    caseId: selectedCaseId = "",
-    setProject,
-  } = usePlaygroundIds();
+  const { projectSlug = "", caseSlug = "", setProject } = usePlaygroundSlugs();
 
   const [tabValue, setTabValue] = useState("1");
   const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
@@ -53,13 +49,13 @@ export const ProjectPanel: React.FC = () => {
 
   const isEditable = useAppSelector(selectIsEditable);
 
-  const selectedProject = trpc.project.getById.useQuery(selectedProjectId, {
-    enabled: Boolean(selectedProjectId),
+  const selectedProject = trpc.project.getBySlug.useQuery(projectSlug, {
+    enabled: Boolean(projectSlug),
   });
 
-  const selectedCase = trpc.project.getCaseById.useQuery(
-    { id: selectedCaseId, projectId: selectedProjectId },
-    { enabled: Boolean(selectedProjectId && selectedCaseId) }
+  const selectedCase = trpc.project.getCaseBySlug.useQuery(
+    { slug: caseSlug },
+    { enabled: Boolean(projectSlug && caseSlug) }
   );
 
   const updateCase = trpc.project.updateCase.useMutation();
@@ -79,11 +75,11 @@ export const ProjectPanel: React.FC = () => {
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
-    if (allBrief.data?.length && router.isReady && !selectedProjectId) {
+    if (allBrief.data?.length && router.isReady && !projectSlug) {
       const firstProject = allBrief.data[0];
-      firstProject && setProject(firstProject.id);
+      firstProject && setProject(firstProject.slug);
     }
-  }, [allBrief.data, dispatch, router.isReady, selectedProjectId, setProject]);
+  }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
   useEffect(() => {
     if (selectedCase.data) {
@@ -116,17 +112,24 @@ export const ProjectPanel: React.FC = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (inputError || !parsedInput || !selectedCaseId || !isEditable) return;
+      if (
+        inputError ||
+        !parsedInput ||
+        !caseSlug ||
+        !isEditable ||
+        !selectedCase.data
+      )
+        return;
 
       updateCase.mutate(
         {
-          caseId: selectedCaseId,
-          projectId: selectedProjectId,
+          caseId: selectedCase.data.id,
+          projectId: selectedCase.data.projectId,
           input: rawInput,
         },
         {
           onSuccess: (data) => {
-            trpcUtils.project.getCaseById.setData(data, (input) => input);
+            trpcUtils.project.getCaseBySlug.setData(data, (input) => input);
           },
         }
       );
@@ -201,12 +204,12 @@ export const ProjectPanel: React.FC = () => {
                 labelId="project-select-label"
                 label="Current Project"
                 defaultValue=""
-                value={allBrief.isLoading ? "" : selectedProjectId}
+                value={allBrief.isLoading ? "" : projectSlug}
                 onChange={handleSelectProject}
                 disabled={allBrief.isLoading}
               >
                 {allBrief.data?.map((project) => (
-                  <MenuItem key={project.id} value={project.id}>
+                  <MenuItem key={project.id} value={project.slug}>
                     {project.title}
                   </MenuItem>
                 ))}

@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { trpc } from "#/utils";
 
@@ -27,19 +27,15 @@ export type CaseModalProps = DialogProps & {
 
 export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const {
-    projectId: currentProjectId = "",
-    caseId: currentCaseId = "",
-    setCase,
-  } = usePlaygroundIds();
+  const { projectSlug = "", caseSlug = "", setCase } = usePlaygroundSlugs();
 
   const invalidateQueries = () => {
-    void trpcUtils.project.getById.invalidate(currentProjectId);
+    void trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
-  const currentCase = trpc.project.getCaseById.useQuery(
-    { id: currentCaseId, projectId: currentProjectId },
-    { enabled: Boolean(currentCaseId && currentProjectId) }
+  const currentCase = trpc.project.getCaseBySlug.useQuery(
+    { slug: caseSlug },
+    { enabled: Boolean(caseSlug && projectSlug) }
   );
 
   const trpcUtils = trpc.useContext();
@@ -55,7 +51,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
 
       try {
         await editCase.mutateAsync({
-          projectId: currentProjectId,
+          projectId: currentCase.data.projectId,
           caseId: currentCase.data.id,
           title: values.caseName,
           description: values.caseDescription,
@@ -124,8 +120,8 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       return;
 
     await deleteCase.mutateAsync({
-      projectId: currentProjectId,
-      caseId: currentCaseId,
+      projectId: currentCase.data.projectId,
+      caseId: currentCase.data.id,
     });
   };
 

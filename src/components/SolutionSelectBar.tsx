@@ -13,17 +13,20 @@ import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBarChip";
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { SolutionModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
-type SolutionBrief = Pick<PlaygroundSolution, "id" | "title" | "order">;
+type SolutionBrief = Pick<
+  PlaygroundSolution,
+  "id" | "slug" | "title" | "order"
+>;
 
 type SolutionSelectBarProps = StackProps & {
-  selectedProject: UseQueryResult<RouterOutputs["project"]["getById"]>;
+  selectedProject: UseQueryResult<RouterOutputs["project"]["getBySlug"]>;
 };
 
 export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
@@ -33,39 +36,38 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    projectId: selectedProjectId,
-    caseId,
-    solutionId: selectedSolutionId,
+    projectSlug = "",
+    caseSlug = "",
+    solutionSlug = "",
     setSolution,
-  } = usePlaygroundIds();
+  } = usePlaygroundSlugs();
   const solutions = selectedProject.data?.solutions;
 
   const dispatch = useAppDispatch();
 
   const trpcUtils = trpc.useContext();
 
+  const invalidateQueries = async (slug?: string) => {
+    await trpcUtils.project.getBySlug.invalidate(projectSlug);
+    await trpcUtils.project.getSolutionBySlug.invalidate({
+      slug: slug || solutionSlug,
+    });
+  };
+
   const addSolution = trpc.project.addSolution.useMutation({
-    onSuccess: async (data, variables) => {
-      await trpcUtils.project.getById.invalidate(variables.projectId);
-      await trpcUtils.project.getSolutionById.invalidate({
-        id: data.id,
-        projectId: variables.projectId,
-      });
-      void setSolution(data.id);
+    onSuccess: async (data) => {
+      await invalidateQueries(data.slug);
+      void setSolution(data.slug);
     },
   });
 
   const deleteSolution = trpc.project.deleteSolution.useMutation({
-    onSuccess: async (data, variables) => {
-      if (selectedSolutionId === data.id) {
+    onSuccess: async (data) => {
+      await invalidateQueries();
+
+      if (solutionSlug === data.slug) {
         void setSolution("");
       }
-
-      await trpcUtils.project.getById.invalidate(variables.projectId);
-      await trpcUtils.project.getSolutionById.invalidate({
-        id: variables.solutionId,
-        projectId: variables.projectId,
-      });
     },
   });
 
@@ -77,22 +79,22 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
 
   useEffect(() => {
-    if (selectedSolutionId || !selectedProject.data || !caseId) return;
+    if (solutionSlug || !selectedProject.data || !caseSlug) return;
 
-    const firstSolutionId = selectedProject.data.solutions[0]?.id;
+    const firstSolutionSlug = selectedProject.data.solutions[0]?.slug;
 
-    firstSolutionId && setSolution(firstSolutionId);
-  }, [selectedSolutionId, selectedProject.data, dispatch, setSolution, caseId]);
+    firstSolutionSlug && setSolution(firstSolutionSlug);
+  }, [solutionSlug, selectedProject.data, dispatch, setSolution, caseSlug]);
 
   const handleSolutionClick = (solution: SolutionBrief) => {
-    void setSolution(solution.id);
+    void setSolution(solution.slug);
   };
 
   const handleAddSolution = () => {
-    if (!selectedProjectId) return;
+    if (!selectedProject.data) return;
 
     addSolution.mutate({
-      projectId: selectedProjectId,
+      projectId: selectedProject.data.id,
       title: `Solution ${(solutions?.length ?? 0) + 1}`,
     });
   };
@@ -116,7 +118,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         )}
 
         {solutions?.map((solution) => {
-          const isCurrent = solution.id === selectedSolutionId;
+          const isCurrent = solution.slug === solutionSlug;
 
           return (
             <SelectBarChip

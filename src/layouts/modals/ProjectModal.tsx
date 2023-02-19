@@ -25,7 +25,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
@@ -68,7 +68,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const deleteProject = trpc.project.delete.useMutation();
   const trpcUtils = trpc.useContext();
 
-  const { setProject } = usePlaygroundIds();
+  const { setProject, clearSlugs } = usePlaygroundSlugs();
 
   const formik = useFormik({
     initialValues: {
@@ -90,7 +90,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = `Project "${values.projectName}" was successfully updated 📝`;
-          void trpcUtils.project.getById.invalidate(currentProject.id);
+          void trpcUtils.project.getBySlug.invalidate(currentProject.slug);
         } else {
           const newProject = await createProject.mutateAsync({
             title: values.projectName,
@@ -99,7 +99,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = "New project was created successfully 🎉";
-          newProject && void setProject(newProject.id);
+          newProject && void setProject(newProject.slug);
         }
 
         void trpcUtils.project.allBrief.invalidate();
@@ -152,6 +152,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectId: currentProject.id,
     });
     dispatch(projectSlice.actions.clear());
+    void clearSlugs();
     void trpcUtils.project.allBrief.invalidate();
     onClose();
     formik.resetForm();

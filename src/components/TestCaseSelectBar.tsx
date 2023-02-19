@@ -9,17 +9,17 @@ import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBarChip";
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { CaseModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
-type TestCaseBrief = Pick<PlaygroundTestCase, "id" | "title">;
+type TestCaseBrief = Pick<PlaygroundTestCase, "id" | "slug" | "title">;
 
 type TestCaseSelectBarProps = {
-  selectedProject: UseQueryResult<RouterOutputs["project"]["getById"]>;
+  selectedProject: UseQueryResult<RouterOutputs["project"]["getBySlug"]>;
 };
 
 export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
@@ -31,21 +31,20 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {
-    projectId: selectedProjectId,
-    caseId: selectedCaseId,
-    setCase,
-  } = usePlaygroundIds();
+  const { projectSlug, caseSlug = "", setCase } = usePlaygroundSlugs();
+
+  const invalidateQueries = async (slug?: string) => {
+    await trpcUtils.project.getBySlug.invalidate(projectSlug);
+    await trpcUtils.project.getCaseBySlug.invalidate({
+      slug: slug || caseSlug,
+    });
+  };
 
   const trpcUtils = trpc.useContext();
   const addCase = trpc.project.addCase.useMutation({
-    onSuccess: async (data, variables) => {
-      await trpcUtils.project.getById.invalidate(variables.projectId);
-      await trpcUtils.project.getCaseById.invalidate({
-        id: data.id,
-        projectId: variables.projectId,
-      });
-      void setCase(data.id);
+    onSuccess: async (data) => {
+      await invalidateQueries(data.slug);
+      void setCase(data.slug);
 
       enqueueSnackbar(`🧪 Test case "${data.title}" created successfully! 🎉`, {
         variant: "success",
@@ -53,17 +52,12 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     },
   });
   const deleteCase = trpc.project.deleteCase.useMutation({
-    onSuccess: async (data, variables) => {
-      if (selectedCaseId === data.id) {
-        const firstCaseId = selectedProject.data?.cases[0]?.id;
-        void setCase(firstCaseId || "");
-      }
+    onSuccess: async (data) => {
+      await invalidateQueries(data.slug);
 
-      await trpcUtils.project.getById.invalidate(variables.projectId);
-      await trpcUtils.project.getCaseById.invalidate({
-        id: variables.caseId,
-        projectId: variables.projectId,
-      });
+      if (caseSlug === data.slug) {
+        void setCase("");
+      }
     },
   });
 
@@ -74,15 +68,15 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
 
   useEffect(() => {
-    if (selectedCaseId || !selectedProject.data) return;
+    if (caseSlug || !selectedProject.data) return;
 
-    const firstCaseId = selectedProject.data.cases[0]?.id;
+    const firstCaseSlug = selectedProject.data.cases[0]?.slug;
 
-    firstCaseId && setCase(firstCaseId);
-  }, [selectedCaseId, selectedProject.data, dispatch, setCase]);
+    firstCaseSlug && setCase(firstCaseSlug);
+  }, [caseSlug, selectedProject.data, dispatch, setCase]);
 
   const handleCaseClick = (testCase: TestCaseBrief) => {
-    void setCase(testCase.id);
+    void setCase(testCase.slug);
   };
 
   const handleCaseEdit = (testCase: TestCaseBrief) => {
@@ -91,10 +85,10 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   };
 
   const handleAddCase = () => {
-    if (!selectedProjectId) return;
+    if (!selectedProject.data) return;
 
     addCase.mutate({
-      projectId: selectedProjectId,
+      projectId: selectedProject.data.id,
       title: `Case ${(cases?.length ?? 0) + 1}`,
       input: "[]",
     });
@@ -114,7 +108,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         )}
 
         {cases?.map((testCase) => {
-          const isCurrent = testCase.id === selectedCaseId;
+          const isCurrent = testCase.slug === caseSlug;
 
           return (
             <SelectBarChip

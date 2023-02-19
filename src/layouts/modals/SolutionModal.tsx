@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { usePlaygroundIds } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { trpc } from "#/utils";
 
@@ -31,18 +31,18 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const {
-    projectId: currentProjectId = "",
-    solutionId: currentSolutionId = "",
+    projectSlug = "",
+    solutionSlug = "",
     setSolution,
-  } = usePlaygroundIds();
+  } = usePlaygroundSlugs();
 
   const invalidateQueries = () => {
-    void trpcUtils.project.getById.invalidate(currentProjectId);
+    void trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
-  const currentSolution = trpc.project.getSolutionById.useQuery(
-    { id: currentSolutionId, projectId: currentProjectId },
-    { enabled: Boolean(currentSolutionId && currentProjectId) }
+  const currentSolution = trpc.project.getSolutionBySlug.useQuery(
+    { slug: solutionSlug },
+    { enabled: Boolean(solutionSlug && projectSlug) }
   );
 
   const trpcUtils = trpc.useContext();
@@ -58,7 +58,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
 
       try {
         await editSolution.mutateAsync({
-          projectId: currentProjectId,
+          projectId: currentSolution.data.projectId,
           solutionId: currentSolution.data.id,
           title: values.solutionName,
           description: values.solutionDescription,
@@ -127,8 +127,8 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       return;
 
     await deleteSolution.mutateAsync({
-      projectId: currentProjectId,
-      solutionId: currentSolutionId,
+      projectId: currentSolution.data.projectId,
+      solutionId: currentSolution.data.id,
     });
   };
 
