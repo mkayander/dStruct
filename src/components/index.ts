@@ -16,3 +16,4 @@ export { TestCaseSelectBar } from "./TestCaseSelectBar";
 export { SolutionSelectBar } from "./SolutionSelectBar";
 export { SelectBarChip } from "./SelectBarChip";
 export { PageScrollContainer } from "./PageScrollContainer";
+export { EditorStateIcon } from "./EditorStateIcon";
