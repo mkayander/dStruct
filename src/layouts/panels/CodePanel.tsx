@@ -2,14 +2,16 @@ import { AutoFixHigh, PlayArrow } from "@mui/icons-material";
 import { LoadingButton, TabContext, TabList } from "@mui/lab";
 import { Box, IconButton, Stack, Tab, Tooltip } from "@mui/material";
 import type * as monaco from "monaco-editor";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
 import shortUUID from "short-uuid";
 
-import { CodeRunner, SolutionSelectBar } from "#/components";
+import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
+import { EditorState } from "#/components/EditorStateIcon";
 import { usePlaygroundIds } from "#/hooks";
 import { createRuntimeTree } from "#/hooks/useRuntimeBinaryTree";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
@@ -30,15 +32,19 @@ const uuid = shortUUID();
 
 export const CodePanel: React.FC = () => {
   const dispatch = useAppDispatch();
+  const session = useSession();
 
   const [value, setValue] = useState("1");
   const [codeInput, setCodeInput] = useState<string>("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null
   );
+  const [editorInstance, setEditorInstance] =
+    useState<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [textModel, setTextModel] = useState<monaco.editor.ITextModel | null>(
     null
   );
+  const [editorState, setEditorState] = useState(EditorState.INITIAL);
 
   const {
     projectId: selectedProjectId = "",
@@ -63,20 +69,29 @@ export const CodePanel: React.FC = () => {
     }
   );
 
-  const updateSolution = trpc.project.updateSolution.useMutation();
+  const updateSolution = trpc.project.updateSolution.useMutation({
+    onSuccess: () => {
+      setEditorState(EditorState.SAVED_ON_SERVER);
+    },
+  });
 
   const nodesData = useAppSelector(treeDataSelector);
 
+  // Update code on solution change
   useEffect(() => {
-    if (currentSolution.data?.code) setCodeInput(currentSolution.data.code);
+    if (!currentSolution.data?.code) return;
+
+    setEditorState(EditorState.INITIAL);
+    setCodeInput(currentSolution.data.code);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSolution.data]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
-
+  // Save code changes on server
   useEffect(() => {
     if (!selectedProjectId || !selectedSolutionId || !isEditable) return;
+
+    setEditorState(EditorState.PENDING_CHANGES);
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate({
@@ -90,6 +105,7 @@ export const CodePanel: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codeInput, error]);
 
+  // Handle code errors
   useEffect(() => {
     if (!monacoInstance || !textModel) return;
     if (!error) {
@@ -135,6 +151,10 @@ export const CodePanel: React.FC = () => {
       },
     ]);
   }, [error, monacoInstance, textModel]);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
   const handleRunCode = () => {
     console.log("Run code:\n", codeInput);
@@ -198,6 +218,25 @@ export const CodePanel: React.FC = () => {
     }
   };
 
+  const handleChangeCode = (
+    value: string | undefined,
+    ev: monaco.editor.IModelContentChangedEvent
+  ) => {
+    console.log(
+      "handleChangeCode: ",
+      { value, ev },
+      value?.length,
+      ev.changes[0]?.rangeLength
+    );
+    setCodeInput(value ?? "");
+    if (
+      session.status === "unauthenticated" &&
+      (ev.changes[0]?.rangeLength ?? 0) < 200
+    ) {
+      setEditorState(EditorState.FORKED_UNAUTHENTICATED);
+    }
+  };
+
   const handleFormatCode = () => {
     const formattedCode = prettier.format(codeInput, {
       parser: "babel",
@@ -206,11 +245,16 @@ export const CodePanel: React.FC = () => {
     setCodeInput(formattedCode);
   };
 
+  const isLoading =
+    selectedProject.isLoading ||
+    currentSolution.isLoading ||
+    updateSolution.isLoading;
+
   return (
     <PanelWrapper>
       <TabContext value={value}>
         <TabListWrapper>
-          <TabList onChange={handleChange} aria-label="panel tabs">
+          <TabList onChange={handleTabChange} aria-label="panel tabs">
             <Tab label="Code Runner" value="1" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
@@ -247,13 +291,31 @@ export const CodePanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel value="1">
           <SolutionSelectBar selectedProject={selectedProject} mb={1} />
-          <CodeRunner
-            value={codeInput}
-            onChange={(value) => setCodeInput(value || "")}
-            isUpdating={updateSolution.isLoading}
-            setMonacoInstance={setMonacoInstance}
-            setTextModel={setTextModel}
-          />
+          <Box
+            sx={{
+              position: "relative",
+            }}
+          >
+            <CodeRunner
+              value={codeInput}
+              onChange={handleChangeCode}
+              isUpdating={isLoading}
+              setMonacoInstance={setMonacoInstance}
+              setEditorInstance={setEditorInstance}
+              setTextModel={setTextModel}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                padding: 1,
+                opacity: 0.7,
+              }}
+            >
+              <EditorStateIcon state={editorState} isLoading={isLoading} />
+            </Box>
+          </Box>
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
