@@ -89,9 +89,7 @@ export const CodePanel: React.FC = () => {
 
   // Save code changes on server
   useEffect(() => {
-    if (!selectedProjectId || !selectedSolutionId || !isEditable) return;
-
-    setEditorState(EditorState.PENDING_CHANGES);
+    if (editorState !== EditorState.PENDING_CHANGES) return;
 
     const timeoutId = setTimeout(() => {
       updateSolution.mutate({
@@ -102,8 +100,13 @@ export const CodePanel: React.FC = () => {
     }, 750);
 
     return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [codeInput, error]);
+  }, [
+    codeInput,
+    editorState,
+    selectedProjectId,
+    selectedSolutionId,
+    updateSolution,
+  ]);
 
   // Handle code errors
   useEffect(() => {
@@ -234,6 +237,8 @@ export const CodePanel: React.FC = () => {
       (ev.changes[0]?.rangeLength ?? 0) < 200
     ) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
+    } else if (selectedProjectId && selectedSolutionId && isEditable) {
+      setEditorState(EditorState.PENDING_CHANGES);
     }
   };
 
@@ -307,13 +312,15 @@ export const CodePanel: React.FC = () => {
             <Box
               sx={{
                 position: "absolute",
-                top: 0,
-                right: 0,
-                padding: 1,
+                top: "6px",
+                right: "20px",
                 opacity: 0.7,
               }}
             >
-              <EditorStateIcon state={editorState} isLoading={isLoading} />
+              <EditorStateIcon
+                state={editorState}
+                isLoading={updateSolution.isLoading}
+              />
             </Box>
           </Box>
         </StyledTabPanel>
