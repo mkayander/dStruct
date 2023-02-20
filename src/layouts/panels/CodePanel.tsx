@@ -228,10 +228,8 @@ export const CodePanel: React.FC = () => {
       ev.changes[0]?.rangeLength
     );
     setCodeInput(value ?? "");
-    if (
-      session.status === "unauthenticated" &&
-      (ev.changes[0]?.rangeLength ?? 0) < 200
-    ) {
+    const range = ev.changes[0]?.rangeLength ?? 0;
+    if (session.status === "unauthenticated" && range > 0 && range < 200) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
     } else if (projectSlug && solutionSlug && isEditable) {
       setEditorState(EditorState.PENDING_CHANGES);
