@@ -1,3 +1,4 @@
+import { Settings } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   alpha,
@@ -18,7 +19,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,6 +32,7 @@ import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 import { getImageUrl, trpc } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
+const GITHUB_URL = "https://github.com/mkayander/leetpal";
 
 type NavItem = {
   name: string;
@@ -52,7 +54,19 @@ const pages = [
   },
 ] as const;
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+type SettingItem = {
+  name: string;
+  authedOnly?: boolean;
+  onClick?: () => void;
+};
+
+const settings: SettingItem[] = [
+  { name: "Profile", authedOnly: true },
+  { name: "Settings", authedOnly: true },
+  { name: "Feedback" },
+  { name: "GitHub", onClick: () => window.open(GITHUB_URL) },
+  { name: "Logout", authedOnly: true, onClick: signOut },
+];
 
 type MainAppBarProps = {
   setIsLightMode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -242,7 +256,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             ))}
           </Box>
 
-          <Stack direction="row" sx={{ flexGrow: 0 }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{ flexGrow: 0 }}
+          >
             <ThemeSwitch
               onChange={(_, checked) => {
                 handleLightModeSwitch(!checked);
@@ -256,25 +275,36 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 height={40}
                 width={40}
               />
-            ) : session.data ? (
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>
-                    <Image
-                      src={getImageUrl(
-                        session.data.user.bucketImage || AVATAR_PLACEHOLDER
-                      )}
-                      alt={`${session.data.user.name} avatar`}
-                      referrerPolicy="no-referrer"
-                      fill={true}
-                    />
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
             ) : (
-              <Button color="inherit" onClick={handleSignIn}>
-                Sign In
-              </Button>
+              <>
+                {session.status === "unauthenticated" ? (
+                  <Button
+                    title="Sign In"
+                    color="inherit"
+                    onClick={handleSignIn}
+                  >
+                    Sign In
+                  </Button>
+                ) : null}
+                <Tooltip title="Open options" arrow>
+                  <IconButton onClick={handleOpenUserMenu}>
+                    {session.data ? (
+                      <Avatar>
+                        <Image
+                          src={getImageUrl(
+                            session.data.user.bucketImage || AVATAR_PLACEHOLDER
+                          )}
+                          alt={`${session.data.user.name} avatar`}
+                          referrerPolicy="no-referrer"
+                          fill={true}
+                        />
+                      </Avatar>
+                    ) : (
+                      <Settings />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </>
             )}
 
             <Menu
@@ -293,11 +323,15 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {settings
+                .filter((value) =>
+                  value.authedOnly ? session.status === "authenticated" : true
+                )
+                .map(({ name, onClick }) => (
+                  <MenuItem key={name} onClick={onClick}>
+                    <Typography textAlign="center">{name}</Typography>
+                  </MenuItem>
+                ))}
             </Menu>
           </Stack>
         </Toolbar>
