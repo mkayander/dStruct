@@ -1,3 +1,11 @@
+## [1.97.1](https://github.com/mkayander/leetpal/compare/v1.97.0...v1.97.1) (2023-02-20)
+
+
+### Bug Fixes
+
+* Fixed range check ([9a05d16](https://github.com/mkayander/leetpal/commit/9a05d1698a87107790f4f35318ea2d0d6b119608))
+* Uninstalled d3 ([da77e03](https://github.com/mkayander/leetpal/commit/da77e03261965096914951ece9f87535f5a2c96b))
+
 # [1.97.0](https://github.com/mkayander/leetpal/compare/v1.96.0...v1.97.0) (2023-02-19)
 
 
