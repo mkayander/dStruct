@@ -1,3 +1,15 @@
+# [1.98.0](https://github.com/mkayander/leetpal/compare/v1.97.1...v1.98.0) (2023-02-20)
+
+
+### Bug Fixes
+
+* Fixed project modal data reset ([29c486a](https://github.com/mkayander/leetpal/commit/29c486a47bb343c61e35d69714de14dea0bacb0f))
+
+
+### Features
+
+* Implemented navbar option handlers ([92ba822](https://github.com/mkayander/leetpal/commit/92ba822c7e4ceea870aaa2f2240ffc1979a9efa4))
+
 ## [1.97.1](https://github.com/mkayander/leetpal/compare/v1.97.0...v1.97.1) (2023-02-20)
 
 
