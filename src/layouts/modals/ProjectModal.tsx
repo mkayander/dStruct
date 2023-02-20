@@ -97,9 +97,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = `Project "${values.projectName}" was successfully updated 📝`;
-          await trpcUtils.project.getBySlug.invalidate(values.projectSlug);
+          void trpcUtils.project.getBySlug.invalidate(values.projectSlug);
         } else {
-          const newProject = await createProject.mutateAsync({
+          await createProject.mutateAsync({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
@@ -107,7 +107,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = "New project was created successfully 🎉";
-          newProject && void setProject(newProject.slug);
         }
 
         await trpcUtils.project.allBrief.invalidate();
@@ -147,7 +146,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       formik.resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEditMode]);
+  }, [isEditMode, currentProject]);
 
   const handleDeleteProject = async () => {
     if (!currentProject) return;
