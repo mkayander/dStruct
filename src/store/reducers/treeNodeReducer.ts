@@ -16,6 +16,7 @@ export type BinaryTreeNodeData = {
   depth: number;
   color?: string;
   animation?: "blink";
+  isHighlighted?: boolean;
   left?: string;
   right?: string;
 };

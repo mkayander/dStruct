@@ -62,6 +62,7 @@ export type CallstackState = {
   isReady: boolean;
   result: string | number | null;
   runtime: number | null;
+  startTimestamp: number | null;
   error: Error | null;
   frames: EntityState<CallFrame>;
 };
@@ -70,6 +71,7 @@ const initialState: CallstackState = {
   isReady: false,
   result: null,
   runtime: null,
+  startTimestamp: null,
   error: null,
   frames: callstackAdapter.getInitialState(),
 };
@@ -98,13 +100,17 @@ export const callstackSlice = createSlice({
       state.isReady = false;
       state.result = null;
       state.runtime = null;
+      state.startTimestamp = null;
       state.error = null;
       callstackAdapter.removeAll(state.frames);
     },
     setStatus: (
       state,
       action: PayloadAction<
-        Pick<CallstackState, "isReady" | "result" | "runtime" | "error">
+        Pick<
+          CallstackState,
+          "isReady" | "result" | "runtime" | "startTimestamp" | "error"
+        >
       >
     ) => {
       const { payload } = action;
@@ -136,6 +142,7 @@ export const selectCallstack = createSelector(
   (callstack) => ({
     isReady: callstack.isReady,
     runtime: callstack.runtime,
+    startTimestamp: callstack.startTimestamp,
     result: callstack.result,
     error: callstack.error,
     frames: rootSelectors.selectAll(callstack.frames),

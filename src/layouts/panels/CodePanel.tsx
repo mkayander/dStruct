@@ -166,7 +166,7 @@ export const CodePanel: React.FC = () => {
 
     const getInputFunction = new Function(codeInput);
 
-    let runtime = performance.now();
+    const startTimestamp = performance.now();
 
     try {
       const runFunction = getInputFunction();
@@ -177,7 +177,7 @@ export const CodePanel: React.FC = () => {
       dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
 
       const result = runFunction(tree);
-      runtime = performance.now() - runtime;
+      const runtime = performance.now() - startTimestamp;
 
       console.log("Runtime: ", runtime);
 
@@ -188,12 +188,13 @@ export const CodePanel: React.FC = () => {
           error: null,
           result,
           runtime,
+          startTimestamp,
         })
       );
 
       console.log("Result:\n", result);
     } catch (e: unknown) {
-      runtime = performance.now() - runtime;
+      const runtime = performance.now() - startTimestamp;
       if (e instanceof Error) {
         dispatch(
           callstackSlice.actions.addOne({
@@ -209,6 +210,7 @@ export const CodePanel: React.FC = () => {
             error: { name: e.name, message: e.message, stack: e.stack },
             result: null,
             runtime,
+            startTimestamp,
           })
         );
       } else {
