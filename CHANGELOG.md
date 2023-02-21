@@ -1,3 +1,16 @@
+# [1.100.0](https://github.com/mkayander/leetpal/compare/v1.99.0...v1.100.0) (2023-02-21)
+
+
+### Bug Fixes
+
+* Improved arrow ids ([7045ad8](https://github.com/mkayander/leetpal/commit/7045ad86377e946b8a1c8c2c9ca2a57e5ff0221a))
+* Removed console log ([3b734e2](https://github.com/mkayander/leetpal/commit/3b734e2080c766133e1a4e7ba00b40995afa03d4))
+
+
+### Features
+
+* Improved callstack table ([13a3770](https://github.com/mkayander/leetpal/commit/13a3770e13df079fa62cfb80a52bcd44ae096975))
+
 # [1.99.0](https://github.com/mkayander/leetpal/compare/v1.98.0...v1.99.0) (2023-02-21)
 
 
