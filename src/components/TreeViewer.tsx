@@ -192,7 +192,9 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             endMarker={false}
             svgContainerStyle={{ overflow: "visible" }}
           >
-            {rootNodeData && <BinaryNode {...rootNodeData} />}
+            {rootNodeData && (
+              <BinaryNode parentId="tree-parent" {...rootNodeData} />
+            )}
           </ArcherContainer>
         </Box>
       </ScrollContainer>

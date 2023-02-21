@@ -35,15 +35,17 @@ const relationProps = {
 
 const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: "none" }} />;
 
-type BinaryNodeProps = BinaryTreeNodeData;
+type BinaryNodeProps = BinaryTreeNodeData & { parentId: string };
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
   id,
+  parentId,
   value,
   left,
   right,
   color,
   animation,
+  isHighlighted,
 }: BinaryNodeProps) => {
   const theme = useTheme();
   const [springs, api] = useSpring(() => ({
@@ -71,6 +73,10 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animation]);
 
+  useEffect(() => {
+    overlayApi.set({ opacity: isHighlighted ? 0.1 : 0 });
+  }, [isHighlighted, overlayApi]);
+
   const isLeaf = !left && !right;
 
   const leftNode = useAppSelector(selectNodeDataById(left ?? ""));
@@ -96,18 +102,20 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
       : undefined;
 
   const relations: RelationType[] = [];
-  if (leftNode)
+  if (left)
     relations.push({
       ...relationProps,
-      targetId: leftNode.id,
+      targetId: "left-" + left,
       style: { strokeColor: leftLinkColor },
     });
-  if (rightNode)
+  if (right)
     relations.push({
       ...relationProps,
-      targetId: rightNode.id,
+      targetId: "right-" + right,
       style: { strokeColor: rightLinkColor },
     });
+
+  const arrowId = parentId + id;
 
   return (
     <Box
@@ -132,7 +140,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           },
         }}
       >
-        <ArcherElement id={id} relations={relations}>
+        <ArcherElement id={arrowId} relations={relations}>
           <animated.div style={springs}>
             <Box
               onClick={handleBlink}
@@ -204,8 +212,16 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           gap: 4,
         }}
       >
-        {leftNode ? <BinaryNode {...leftNode} /> : !isLeaf && <GapElement />}
-        {rightNode ? <BinaryNode {...rightNode} /> : !isLeaf && <GapElement />}
+        {leftNode ? (
+          <BinaryNode parentId={"left-"} {...leftNode} />
+        ) : (
+          !isLeaf && <GapElement />
+        )}
+        {rightNode ? (
+          <BinaryNode parentId={"right-"} {...rightNode} />
+        ) : (
+          !isLeaf && <GapElement />
+        )}
       </Box>
     </Box>
   );
