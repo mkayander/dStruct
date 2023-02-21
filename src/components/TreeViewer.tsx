@@ -82,6 +82,27 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           );
           break;
 
+        case "setLeftChild":
+          dispatch(
+            treeNodeSlice.actions.update({
+              id: frame.nodeId,
+              changes: {
+                left: frame.args[0] || undefined,
+              },
+            })
+          );
+          break;
+        case "setRightChild":
+          dispatch(
+            treeNodeSlice.actions.update({
+              id: frame.nodeId,
+              changes: {
+                right: frame.args[0] || undefined,
+              },
+            })
+          );
+          break;
+
         case "blink":
           dispatch(
             treeNodeSlice.actions.update({

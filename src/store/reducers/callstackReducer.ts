@@ -28,6 +28,11 @@ type SetValFrame = CallFrameBase & {
   args: [number | string | null];
 };
 
+type SetChildFrame = CallFrameBase & {
+  name: "setLeftChild" | "setRightChild";
+  args: [string | null];
+};
+
 type BlinkFrame = CallFrameBase & {
   name: "blink";
   args: [];
@@ -37,6 +42,7 @@ export type CallFrame =
   | RuntimeErrorFrame
   | SetColorFrame
   | SetValFrame
+  | SetChildFrame
   | BlinkFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({

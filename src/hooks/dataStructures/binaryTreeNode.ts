@@ -18,15 +18,18 @@ export type NodeMeta = {
 
 export class BinaryTreeNode {
   meta: NodeMeta;
+  private _right: BinaryTreeNode | null;
 
   constructor(
     val: number | string,
-    public left: BinaryTreeNode | null = null,
-    public right: BinaryTreeNode | null = null,
+    left: BinaryTreeNode | null = null,
+    right: BinaryTreeNode | null = null,
     meta: NodeMeta,
     private dispatch: AppDispatch
   ) {
     this._val = val;
+    this._left = left;
+    this._right = right;
     this.meta = meta;
   }
 
@@ -43,6 +46,38 @@ export class BinaryTreeNode {
         ...this.getDispatchBase(),
         name: "setVal",
         args: [value],
+      })
+    );
+  }
+
+  private _left: BinaryTreeNode | null;
+
+  public get left() {
+    return this._left;
+  }
+
+  public set left(value: BinaryTreeNode | null) {
+    this._left = value;
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "setLeftChild",
+        args: [value?.meta.id ?? null],
+      })
+    );
+  }
+
+  public get right() {
+    return this._right;
+  }
+
+  public set right(value: BinaryTreeNode | null) {
+    this._right = value;
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "setRightChild",
+        args: [value?.meta.id ?? null],
       })
     );
   }
