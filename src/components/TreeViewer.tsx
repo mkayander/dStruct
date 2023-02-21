@@ -43,8 +43,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const rootNodeData = useAppSelector(selectRootNodeData);
 
   useEffect(() => {
-    console.log("Callstack:\n", callstack);
-
     let isStarted = false;
 
     if (!callstackIsReady || callstack.length === 0) return;
