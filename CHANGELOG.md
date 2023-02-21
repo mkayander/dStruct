@@ -1,3 +1,10 @@
+# [1.99.0](https://github.com/mkayander/leetpal/compare/v1.98.0...v1.99.0) (2023-02-21)
+
+
+### Features
+
+* Implemented "set child" frame event ([4b40bc7](https://github.com/mkayander/leetpal/commit/4b40bc7098b5ce03f792d6c32347f893999b68d7))
+
 # [1.98.0](https://github.com/mkayander/leetpal/compare/v1.97.1...v1.98.0) (2023-02-20)
 
 
