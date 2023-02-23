@@ -1,3 +1,11 @@
+# [1.102.0](https://github.com/mkayander/leetpal/compare/v1.101.1...v1.102.0) (2023-02-23)
+
+
+### Features
+
+* Added "usePrevious" hook ([6079e8e](https://github.com/mkayander/leetpal/commit/6079e8e851fe7ca65179990c88a25b46ec989059))
+* Reworked tree rendering system ([6ed3e98](https://github.com/mkayander/leetpal/commit/6ed3e98f159cb2c4fb1de8c3e9d8b69acf26601c))
+
 ## [1.101.1](https://github.com/mkayander/leetpal/compare/v1.101.0...v1.101.1) (2023-02-23)
 
 
