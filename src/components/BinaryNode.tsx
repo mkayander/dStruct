@@ -12,10 +12,12 @@ import React, { useEffect } from "react";
 import { ArcherElement } from "react-archer";
 import type { RelationType } from "react-archer/lib/types";
 
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type BinaryTreeNodeData,
   selectNodeDataById,
+  selectTreeMaxDepth,
+  treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
 const nodeSize = "42px";
@@ -33,27 +35,36 @@ const relationProps = {
   sourceAnchor: "middle",
 } as const;
 
-const GapElement = () => <Box sx={{ ...nodeProps, pointerEvents: "none" }} />;
-
-type BinaryNodeProps = BinaryTreeNodeData & { parentId: string };
+type BinaryNodeProps = BinaryTreeNodeData;
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
   id,
-  parentId,
   value,
   left,
   right,
   color,
   animation,
   isHighlighted,
+  depth,
+  x,
+  y,
 }: BinaryNodeProps) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   const [springs, api] = useSpring(() => ({
     from: { scale: 1 },
   }));
   const [overlaySprings, overlayApi] = useSpring(() => ({
     from: { opacity: 0 },
   }));
+  const [containerSprings, containerApi] = useSpring(() => ({
+    from: { left: x, top: y },
+    config: {
+      duration: 50,
+    },
+  }));
+
+  const maxDepth = useAppSelector(selectTreeMaxDepth);
 
   const handleBlink = () => {
     api.start({
@@ -67,6 +78,10 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   };
 
   useEffect(() => {
+    containerApi.start({ left: x, top: y });
+  }, [containerApi, x, y]);
+
+  useEffect(() => {
     if (animation === "blink") {
       handleBlink();
     }
@@ -76,8 +91,6 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   useEffect(() => {
     overlayApi.set({ opacity: isHighlighted ? 0.1 : 0 });
   }, [isHighlighted, overlayApi]);
-
-  const isLeaf = !left && !right;
 
   const leftNode = useAppSelector(selectNodeDataById(left ?? ""));
   const rightNode = useAppSelector(selectNodeDataById(right ?? ""));
@@ -105,28 +118,60 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   if (left)
     relations.push({
       ...relationProps,
-      targetId: "left-" + left,
+      targetId: left,
       style: { strokeColor: leftLinkColor },
     });
   if (right)
     relations.push({
       ...relationProps,
-      targetId: "right-" + right,
+      targetId: right,
       style: { strokeColor: rightLinkColor },
     });
 
-  const arrowId = parentId + id;
+  useEffect(() => {
+    if (depth === 0) {
+      dispatch(treeNodeSlice.actions.update({ id: id, changes: { x: 150 } }));
+    }
+  }, [depth, dispatch, id]);
+
+  useEffect(() => {
+    const verticalOffset = 50;
+    let horizontalOffset = 15 * (maxDepth < 2 ? 2 : maxDepth) ** 2;
+    horizontalOffset /= depth * 2 || 1;
+
+    if (leftNode) {
+      dispatch(
+        treeNodeSlice.actions.update({
+          id: leftNode.id,
+          changes: {
+            y: y + verticalOffset,
+            x: x - horizontalOffset,
+          },
+        })
+      );
+    }
+
+    if (rightNode) {
+      dispatch(
+        treeNodeSlice.actions.update({
+          id: rightNode.id,
+          changes: {
+            y: y + verticalOffset,
+            x: x + horizontalOffset,
+          },
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [left, right, x, y]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        position: "relative",
+    <animated.div
+      style={{
+        position: "absolute",
         zIndex: 1,
-        flexFlow: "column nowrap",
-        alignItems: "center",
         width: "fit-content",
-        gap: 2,
+        ...containerSprings,
       }}
     >
       <Box
@@ -140,7 +185,10 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           },
         }}
       >
-        <ArcherElement id={arrowId} relations={relations}>
+        <ArcherElement
+          id={id}
+          relations={relations.length > 0 ? relations : undefined}
+        >
           <animated.div style={springs}>
             <Box
               onClick={handleBlink}
@@ -202,27 +250,6 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
           background: theme.palette.primary.main,
         }}
       />
-
-      <Box
-        sx={{
-          display: "flex",
-          flexFlow: "row nowrap",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          gap: 4,
-        }}
-      >
-        {leftNode ? (
-          <BinaryNode parentId={"left-"} {...leftNode} />
-        ) : (
-          !isLeaf && <GapElement />
-        )}
-        {rightNode ? (
-          <BinaryNode parentId={"right-"} {...rightNode} />
-        ) : (
-          !isLeaf && <GapElement />
-        )}
-      </Box>
-    </Box>
+    </animated.div>
   );
 };

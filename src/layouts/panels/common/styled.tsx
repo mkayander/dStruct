@@ -1,23 +1,36 @@
 import { TabPanel, type TabPanelProps } from "@mui/lab";
-import { alpha, Box } from "@mui/material";
+import { alpha, Box, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import React from "react";
 
-const StyledOverlayScrollbarsComponent = styled(OverlayScrollbarsComponent)(
-  ({ theme }) => ({
-    ".os-scrollbar > .os-scrollbar-track > div.os-scrollbar-handle": {
-      transition: "background .2s",
-      background: alpha(theme.palette.divider, 0.1),
-      "&:hover": {
-        background: alpha(theme.palette.primary.light, 0.2),
-      },
-      "&:active": {
-        background: alpha(theme.palette.primary.light, 0.5),
-      },
-    },
-  })
-);
+const TabContentScrollContainer: React.FC<
+  React.ComponentProps<typeof OverlayScrollbarsComponent>
+> = ({ children, ...restProps }) => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      display="contents"
+      sx={{
+        ".os-scrollbar > .os-scrollbar-track > div.os-scrollbar-handle": {
+          transition: "background .2s",
+          background: alpha(theme.palette.divider, 0.1),
+          "&:hover": {
+            background: alpha(theme.palette.primary.light, 0.2),
+          },
+          "&:active": {
+            background: alpha(theme.palette.primary.light, 0.5),
+          },
+        },
+      }}
+    >
+      <OverlayScrollbarsComponent {...restProps}>
+        {children}
+      </OverlayScrollbarsComponent>
+    </Box>
+  );
+};
 
 export const TabListWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -33,8 +46,15 @@ export const TabListWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledTabPanel: React.FC<TabPanelProps> = (props) => (
-  <StyledOverlayScrollbarsComponent defer>
-    <TabPanel sx={{ p: 2 }} {...props} />
-  </StyledOverlayScrollbarsComponent>
+type StyledTabPanelProps = TabPanelProps & {
+  scrollContainerStyle?: React.CSSProperties;
+};
+
+export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
+  scrollContainerStyle,
+  ...restProps
+}) => (
+  <TabContentScrollContainer defer style={scrollContainerStyle}>
+    <TabPanel sx={{ p: 2 }} {...restProps} />
+  </TabContentScrollContainer>
 );

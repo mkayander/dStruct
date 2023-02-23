@@ -87,7 +87,11 @@ export const TreeViewPanel: React.FC = () => {
             </Tooltip>
           </Stack>
         </TabListWrapper>
-        <StyledTabPanel value="1" sx={{ p: 0, position: "relative" }}>
+        <StyledTabPanel
+          value="1"
+          scrollContainerStyle={{ height: "100%" }}
+          sx={{ height: "100%", p: 0, position: "relative" }}
+        >
           <Box sx={{ maxWidth: 600, p: 2 }}>
             <Typography id="input-slider" variant="caption" gutterBottom>
               Playback Interval

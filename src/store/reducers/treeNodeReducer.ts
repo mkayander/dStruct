@@ -19,6 +19,8 @@ export type BinaryTreeNodeData = {
   isHighlighted?: boolean;
   left?: string;
   right?: string;
+  x: number;
+  y: number;
 };
 
 export type TreeDataState = {
@@ -132,4 +134,9 @@ export const selectNodeDataById = (id: string) =>
 
 export const selectRootNodeData = createSelector(treeDataSelector, (treeNode) =>
   treeNodeDataSelector.selectById(treeNode.nodes, treeNode.rootId || "")
+);
+
+export const selectTreeMaxDepth = createSelector(
+  treeDataSelector,
+  (state) => state.maxDepth
 );

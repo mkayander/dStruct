@@ -3,10 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-import { BinaryNode } from "#/components/BinaryNode";
+import { NodesView } from "#/components/NodesView";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {
+  selectAllNodeData,
   selectRootNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
@@ -34,7 +35,17 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const theme = useTheme();
   const dispatch = useAppDispatch();
 
+  const nodes = useAppSelector(selectAllNodeData);
+
+  // Archer container forced re-render after animations hack
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setForceUpdate((prev) => !prev), 50);
+
+    return () => clearTimeout(timeoutId);
+  }, [nodes]);
+
   const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
+  const [, setForceUpdate] = useState(false);
   const [scrolledStart, setScrolledStart] = useState(true);
   const [scrolledEnd, setScrolledEnd] = useState(true);
 
@@ -155,6 +166,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       borderRadius={1}
       position="relative"
       width="100%"
+      height="100%"
       sx={{
         "&:before": {
           ...overlayStyles,
@@ -176,12 +188,17 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         },
       }}
     >
-      <ScrollContainer innerRef={scrollRef} onScroll={handleScroll}>
+      <ScrollContainer
+        innerRef={scrollRef}
+        onScroll={handleScroll}
+        style={{ height: "100%" }}
+      >
         <Box
           sx={{
+            height: "100%",
             m: 3,
             path: {
-              transition: "all 0.3s",
+              transition: "all 0.1s",
             },
           }}
         >
@@ -190,11 +207,15 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             strokeColor={alpha(theme.palette.primary.dark, 0.5)}
             strokeWidth={4}
             endMarker={false}
-            svgContainerStyle={{ overflow: "visible" }}
+            style={{
+              height: "100%",
+            }}
+            svgContainerStyle={{
+              overflow: "visible",
+              height: "100%",
+            }}
           >
-            {rootNodeData && (
-              <BinaryNode parentId="tree-parent" {...rootNodeData} />
-            )}
+            <NodesView />
           </ArcherContainer>
         </Box>
       </ScrollContainer>
