@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { alpha, Box, useTheme } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-import { SvgTree } from "#/components/SvgTree";
+import { BinaryNode } from "#/components/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {
@@ -30,6 +31,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   playbackInterval,
   replayCount,
 }) => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
@@ -183,18 +185,17 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             },
           }}
         >
-          {/*<ArcherContainer*/}
-          {/*  lineStyle="straight"*/}
-          {/*  strokeColor={alpha(theme.palette.primary.dark, 0.5)}*/}
-          {/*  strokeWidth={4}*/}
-          {/*  endMarker={false}*/}
-          {/*  svgContainerStyle={{ overflow: "visible" }}*/}
-          {/*>*/}
-          {/*  {rootNodeData && (*/}
-          {/*    <BinaryNode parentId="tree-parent" {...rootNodeData} />*/}
-          {/*  )}*/}
-          {/*</ArcherContainer>*/}
-          <SvgTree />
+          <ArcherContainer
+            lineStyle="straight"
+            strokeColor={alpha(theme.palette.primary.dark, 0.5)}
+            strokeWidth={4}
+            endMarker={false}
+            svgContainerStyle={{ overflow: "visible" }}
+          >
+            {rootNodeData && (
+              <BinaryNode parentId="tree-parent" {...rootNodeData} />
+            )}
+          </ArcherContainer>
         </Box>
       </ScrollContainer>
     </Box>
