@@ -1,3 +1,10 @@
+## [1.101.1](https://github.com/mkayander/leetpal/compare/v1.101.0...v1.101.1) (2023-02-23)
+
+
+### Reverts
+
+* Revert "feat: Initial svg tree experiments" ([2554c95](https://github.com/mkayander/leetpal/commit/2554c95e489788d7f94c3c7685213fbb48bbb358))
+
 # [1.101.0](https://github.com/mkayander/leetpal/compare/v1.100.0...v1.101.0) (2023-02-22)
 
 
