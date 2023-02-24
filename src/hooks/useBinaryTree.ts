@@ -33,7 +33,6 @@ export const useBinaryTree = (input?: BinaryTreeInput) => {
       newDataNodes[newId] = {
         id: newId,
         value: value,
-        originalValue: value,
         depth,
         x: 0,
         y: 0,

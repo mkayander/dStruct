@@ -26,11 +26,12 @@ export const createRuntimeTree = (
   const rootId = nodesData.rootId;
   if (!rootId) return null;
 
-  const rootData = nodesData.nodes.entities[rootId];
+  let dataMap = nodesData.nodes.entities;
+  if (nodesData.initialNodes.ids.length > 0) {
+    dataMap = nodesData.initialNodes.entities;
+  }
 
-  return BinaryTreeNode.fromNodeData(
-    rootData,
-    nodesData.nodes.entities,
-    dispatch
-  );
+  const rootData = dataMap[rootId];
+
+  return BinaryTreeNode.fromNodeData(rootData, dataMap, dispatch);
 };

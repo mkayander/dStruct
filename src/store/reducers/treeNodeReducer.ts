@@ -11,7 +11,6 @@ import type { RootState } from "#/store/makeStore";
 
 export type BinaryTreeNodeData = {
   id: string;
-  originalValue: string | number;
   value: string | number;
   depth: number;
   color?: string;
@@ -99,15 +98,17 @@ export const treeNodeSlice = createSlice({
       };
     },
     resetAll: (state: TreeDataState) => {
-      for (const id of Object.keys(state.nodes.entities)) {
-        treeNodeDataAdapter.updateOne(state.nodes, {
-          id,
-          changes: {
-            color: undefined,
-            animation: undefined,
-            value: state.nodes.entities[id]?.originalValue,
-          },
-        });
+      if (state.initialNodes.ids.length === 0) {
+        treeNodeDataAdapter.addMany(
+          state.initialNodes,
+          treeNodeDataSelector.selectAll(state.nodes)
+        );
+      } else {
+        treeNodeDataAdapter.removeAll(state.nodes);
+        treeNodeDataAdapter.addMany(
+          state.nodes,
+          treeNodeDataSelector.selectAll(state.initialNodes)
+        );
       }
     },
   },
