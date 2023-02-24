@@ -198,7 +198,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             height: "100%",
             m: 3,
             path: {
-              transition: "all 0.1s",
+              transition: "fill 0.3s",
             },
           }}
         >

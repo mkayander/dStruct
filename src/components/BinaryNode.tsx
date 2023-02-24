@@ -13,6 +13,7 @@ import { ArcherElement } from "react-archer";
 import type { RelationType } from "react-archer/lib/types";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import {
   type BinaryTreeNodeData,
   selectNodeDataById,
@@ -65,6 +66,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   }));
 
   const maxDepth = useAppSelector(selectTreeMaxDepth);
+  const isCallstackReady = useAppSelector(selectCallstackIsReady);
 
   const handleBlink = () => {
     api.start({
@@ -78,8 +80,12 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   };
 
   useEffect(() => {
-    containerApi.start({ left: x, top: y });
-  }, [containerApi, x, y]);
+    if (isCallstackReady) {
+      containerApi.start({ left: x, top: y });
+    } else {
+      containerApi.set({ left: x, top: y });
+    }
+  }, [containerApi, isCallstackReady, x, y]);
 
   useEffect(() => {
     if (animation === "blink") {
@@ -121,7 +127,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
       targetId: left,
       style: { strokeColor: leftLinkColor },
     });
-  if (right)
+  if (right && right !== left)
     relations.push({
       ...relationProps,
       targetId: right,
