@@ -110,7 +110,6 @@ export const ProjectPanel: React.FC = () => {
       }
     } catch (e: any) {
       setInputError(e.message);
-      setParsedInput(undefined);
     }
   }, [rawInput, setParsedInput]);
 
