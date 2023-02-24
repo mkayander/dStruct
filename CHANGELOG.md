@@ -1,3 +1,10 @@
+## [1.102.2](https://github.com/mkayander/leetpal/compare/v1.102.1...v1.102.2) (2023-02-24)
+
+
+### Bug Fixes
+
+* Implemented a backup node data for proper resets on subsequent runs ([8705f83](https://github.com/mkayander/leetpal/commit/8705f830d979856256102deeadfa465ded0837d1))
+
 ## [1.102.1](https://github.com/mkayander/leetpal/compare/v1.102.0...v1.102.1) (2023-02-24)
 
 
