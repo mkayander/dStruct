@@ -10,14 +10,12 @@ import * as muiColors from "@mui/material/colors";
 import { animated, useSpring } from "@react-spring/web";
 import React, { useEffect } from "react";
 import { ArcherElement } from "react-archer";
-import type { RelationType } from "react-archer/lib/types";
 
+import { useChildNodes } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import {
   type BinaryTreeNodeData,
-  selectNodeDataById,
-  selectTreeMaxDepth,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
@@ -30,11 +28,6 @@ const nodeProps: SxProps<Theme> = {
   width: nodeSize,
   height: nodeSize,
 };
-
-const relationProps = {
-  targetAnchor: "middle",
-  sourceAnchor: "middle",
-} as const;
 
 type BinaryNodeProps = BinaryTreeNodeData;
 
@@ -65,7 +58,6 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
     },
   }));
 
-  const maxDepth = useAppSelector(selectTreeMaxDepth);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
 
   const handleBlink = () => {
@@ -98,9 +90,6 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
     overlayApi.set({ opacity: isHighlighted ? 0.1 : 0 });
   }, [isHighlighted, overlayApi]);
 
-  const leftNode = useAppSelector(selectNodeDataById(left ?? ""));
-  const rightNode = useAppSelector(selectNodeDataById(right ?? ""));
-
   let nodeColor = theme.palette.primary.main;
   let shadowColor = theme.palette.primary.dark;
   type ColorName = keyof typeof muiColors;
@@ -111,65 +100,21 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
     }
   }
 
-  const leftLinkColor =
-    leftNode?.color && color === leftNode.color
-      ? alpha(nodeColor, 0.4)
-      : undefined;
-  const rightLinkColor =
-    rightNode?.color && color === rightNode.color
-      ? alpha(nodeColor, 0.4)
-      : undefined;
-
-  const relations: RelationType[] = [];
-  if (left)
-    relations.push({
-      ...relationProps,
-      targetId: left,
-      style: { strokeColor: leftLinkColor },
-    });
-  if (right && right !== left)
-    relations.push({
-      ...relationProps,
-      targetId: right,
-      style: { strokeColor: rightLinkColor },
-    });
+  const { relations } = useChildNodes(
+    left,
+    right,
+    color,
+    nodeColor,
+    x,
+    y,
+    depth
+  );
 
   useEffect(() => {
     if (depth === 0) {
       dispatch(treeNodeSlice.actions.update({ id: id, changes: { x: 150 } }));
     }
   }, [depth, dispatch, id]);
-
-  useEffect(() => {
-    const verticalOffset = 50;
-    let horizontalOffset = 15 * (maxDepth < 2 ? 2 : maxDepth) ** 2;
-    horizontalOffset /= depth * 2 || 1;
-
-    if (leftNode) {
-      dispatch(
-        treeNodeSlice.actions.update({
-          id: leftNode.id,
-          changes: {
-            y: y + verticalOffset,
-            x: x - horizontalOffset,
-          },
-        })
-      );
-    }
-
-    if (rightNode) {
-      dispatch(
-        treeNodeSlice.actions.update({
-          id: rightNode.id,
-          changes: {
-            y: y + verticalOffset,
-            x: x + horizontalOffset,
-          },
-        })
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [left, right, x, y]);
 
   return (
     <animated.div

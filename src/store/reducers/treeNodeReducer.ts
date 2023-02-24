@@ -27,6 +27,7 @@ export type TreeDataState = {
   count: number;
   maxDepth: number;
   rootId: string | null;
+  initialNodes: EntityState<BinaryTreeNodeData>;
   nodes: EntityState<BinaryTreeNodeData>;
 };
 
@@ -38,6 +39,7 @@ const initialState: TreeDataState = {
   count: 0,
   maxDepth: 0,
   rootId: null,
+  initialNodes: treeNodeDataAdapter.getInitialState(),
   nodes: treeNodeDataAdapter.getInitialState(),
 };
 
