@@ -1,3 +1,13 @@
+## [1.102.1](https://github.com/mkayander/leetpal/compare/v1.102.0...v1.102.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* Binary node logic refactoring ([03c2cd9](https://github.com/mkayander/leetpal/commit/03c2cd99852319fa9942b17e6ce2d507375ff267))
+* Do not reset tree on input errors ([5da6964](https://github.com/mkayander/leetpal/commit/5da6964982f2725b573bf106e0d80a09c7c2a3b8))
+* Fixed tree view display & animations ([2d68959](https://github.com/mkayander/leetpal/commit/2d68959b0d5493f2b9f7c5e2dbdfa79f42296581))
+* Improved root node position initialization ([01ebdac](https://github.com/mkayander/leetpal/commit/01ebdac2cc676d6b84861e8e2993cae85da153d5))
+
 # [1.102.0](https://github.com/mkayander/leetpal/compare/v1.101.1...v1.102.0) (2023-02-23)
 
 
