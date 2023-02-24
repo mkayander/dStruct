@@ -18,6 +18,7 @@ const relationProps = {
 export const useChildNodes = (
   leftId: string | undefined,
   rightId: string | undefined,
+  rootId: string,
   color: string | undefined,
   nodeColor: string,
   x: number,
@@ -49,12 +50,14 @@ export const useChildNodes = (
   processNode(leftData);
   processNode(rightData);
 
+  const treeSizeCoefficient = (maxDepth < 2 ? 2 : maxDepth) ** 2;
+
   const updateChildPosition = (data?: BinaryTreeNodeData, isLeft?: boolean) => {
     if (!data) return;
 
     const verticalOffset = 50;
-    let horizontalOffset = 15 * (maxDepth < 2 ? 2 : maxDepth) ** 2;
-    horizontalOffset /= depth * 2 || 1;
+    let horizontalOffset = 15 * treeSizeCoefficient;
+    horizontalOffset /= depth * 2.1 || 1;
 
     dispatch(
       treeNodeSlice.actions.update({
@@ -66,6 +69,17 @@ export const useChildNodes = (
       })
     );
   };
+
+  useEffect(() => {
+    if (depth === 0) {
+      dispatch(
+        treeNodeSlice.actions.update({
+          id: rootId,
+          changes: { x: 25 * treeSizeCoefficient + maxDepth ** 2.8 },
+        })
+      );
+    }
+  }, [depth, dispatch, maxDepth, rootId, treeSizeCoefficient]);
 
   useEffect(() => {
     updateChildPosition(leftData, true);

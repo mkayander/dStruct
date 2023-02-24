@@ -12,12 +12,9 @@ import React, { useEffect } from "react";
 import { ArcherElement } from "react-archer";
 
 import { useChildNodes } from "#/hooks";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import {
-  type BinaryTreeNodeData,
-  treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
 
 const nodeSize = "42px";
 
@@ -44,7 +41,6 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   y,
 }: BinaryNodeProps) => {
   const theme = useTheme();
-  const dispatch = useAppDispatch();
   const [springs, api] = useSpring(() => ({
     from: { scale: 1 },
   }));
@@ -103,18 +99,13 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   const { relations } = useChildNodes(
     left,
     right,
+    id,
     color,
     nodeColor,
     x,
     y,
     depth
   );
-
-  useEffect(() => {
-    if (depth === 0) {
-      dispatch(treeNodeSlice.actions.update({ id: id, changes: { x: 150 } }));
-    }
-  }, [depth, dispatch, id]);
 
   return (
     <animated.div
