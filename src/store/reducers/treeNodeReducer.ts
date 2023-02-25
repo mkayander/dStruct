@@ -97,19 +97,22 @@ export const treeNodeSlice = createSlice({
         ...initialState,
       };
     },
+    backupNodes: (state: TreeDataState) => {
+      if (state.initialNodes.ids.length > 0) return;
+
+      treeNodeDataAdapter.addMany(
+        state.initialNodes,
+        treeNodeDataSelector.selectAll(state.nodes)
+      );
+    },
     resetAll: (state: TreeDataState) => {
-      if (state.initialNodes.ids.length === 0) {
-        treeNodeDataAdapter.addMany(
-          state.initialNodes,
-          treeNodeDataSelector.selectAll(state.nodes)
-        );
-      } else {
-        treeNodeDataAdapter.removeAll(state.nodes);
-        treeNodeDataAdapter.addMany(
-          state.nodes,
-          treeNodeDataSelector.selectAll(state.initialNodes)
-        );
-      }
+      if (state.initialNodes.ids.length === 0) return;
+
+      treeNodeDataAdapter.removeAll(state.nodes);
+      treeNodeDataAdapter.addMany(
+        state.nodes,
+        treeNodeDataSelector.selectAll(state.initialNodes)
+      );
     },
   },
 });

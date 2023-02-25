@@ -174,6 +174,7 @@ export const CodePanel: React.FC = () => {
 
       // Before running the code, clear the callstack
       dispatch(callstackSlice.actions.removeAll());
+      dispatch(treeNodeSlice.actions.backupNodes());
       dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
 
       const result = runFunction(tree);
