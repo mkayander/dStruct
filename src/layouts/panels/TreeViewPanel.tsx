@@ -10,8 +10,10 @@ import {
   Slider,
   Stack,
   Tab,
+  type Theme,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
 
@@ -20,11 +22,17 @@ import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
+import { selectTreeMaxDepth } from "#/store/reducers/treeNodeReducer";
 
 export const TreeViewPanel: React.FC = () => {
   const [tabValue, setTabValue] = useState("1");
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
+
+  const maxDepth = useAppSelector(selectTreeMaxDepth);
+  const isVertical = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
 
@@ -53,7 +61,11 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   return (
-    <PanelWrapper>
+    <PanelWrapper
+      sx={{
+        height: isVertical ? maxDepth * 140 : "100%",
+      }}
+    >
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label="panel tabs">
@@ -90,6 +102,7 @@ export const TreeViewPanel: React.FC = () => {
         <StyledTabPanel
           value="1"
           scrollContainerStyle={{ height: "100%" }}
+          useScroll={!isVertical}
           sx={{ height: "100%", p: 0, position: "relative" }}
         >
           <Box sx={{ maxWidth: 600, p: 2 }}>

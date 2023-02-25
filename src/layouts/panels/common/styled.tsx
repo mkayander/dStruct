@@ -48,13 +48,23 @@ export const TabListWrapper = styled(Box)(({ theme }) => ({
 
 type StyledTabPanelProps = TabPanelProps & {
   scrollContainerStyle?: React.CSSProperties;
+  useScroll?: boolean;
 };
 
 export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
   scrollContainerStyle,
+  useScroll = true,
   ...restProps
-}) => (
-  <TabContentScrollContainer defer style={scrollContainerStyle}>
-    <TabPanel sx={{ p: 2 }} {...restProps} />
-  </TabContentScrollContainer>
-);
+}) => {
+  const panel = <TabPanel sx={{ p: 2 }} {...restProps} />;
+
+  if (useScroll) {
+    return (
+      <TabContentScrollContainer defer style={scrollContainerStyle}>
+        {panel}
+      </TabContentScrollContainer>
+    );
+  } else {
+    return panel;
+  }
+};
