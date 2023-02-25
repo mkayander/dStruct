@@ -223,12 +223,6 @@ export const CodePanel: React.FC = () => {
     value: string | undefined,
     ev: monaco.editor.IModelContentChangedEvent
   ) => {
-    console.log(
-      "handleChangeCode: ",
-      { value, ev },
-      value?.length,
-      ev.changes[0]?.rangeLength
-    );
     setCodeInput(value ?? "");
     const range = ev.changes[0]?.rangeLength ?? 0;
     if (session.status === "unauthenticated" && range > 0 && range < 200) {
