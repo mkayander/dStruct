@@ -5,6 +5,7 @@ import {
   LinearProgress,
   Paper,
   type SvgIcon,
+  type SxProps,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -20,6 +21,7 @@ interface DataSectionProps extends React.PropsWithChildren {
   caption?: string | React.ReactNode;
   Icon?: typeof SvgIcon;
   isLoading?: boolean;
+  sx?: SxProps;
 }
 
 export const DataSection: React.FC<DataSectionProps> = ({

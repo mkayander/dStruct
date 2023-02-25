@@ -1,5 +1,5 @@
 import { ManageAccounts } from "@mui/icons-material";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { deleteCookie, setCookie } from "cookies-next";
 import { Field, Formik } from "formik";
 import { TextField } from "formik-mui";
@@ -12,8 +12,6 @@ import {
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
 import { trpc } from "#/utils";
-
-import styles from "./UserSettings.module.scss";
 
 export const UserSettings: React.FC = () => {
   const session = useSession();
@@ -52,119 +50,119 @@ export const UserSettings: React.FC = () => {
   const [getGlobalData] = useGlobalDataLazyQuery();
 
   return (
-    <DataSection
-      contentClassName={styles.content}
-      title="User Settings"
-      Icon={ManageAccounts}
-    >
-      {user?.leetCodeUsername ? (
-        <>
-          <Typography>Your LeetCode account name:</Typography>
-          <Typography>{user.leetCodeUsername}</Typography>
-          <Button
-            disabled={unlinkUser.isLoading}
-            color="error"
-            variant="outlined"
-            onClick={handleLinkedUserReset}
-          >
-            Reset
-          </Button>
-        </>
-      ) : (
-        <Formik
-          initialValues={{
-            username: "",
-            token: "",
-          }}
-          validate={async (values) => {
-            const errors: { username?: string } = {};
-            if (!values.username) {
-              errors.username = "Required";
-            } else {
-            }
-            return errors;
-          }}
-          onSubmit={async ({ username, token }, { setErrors }) => {
-            setCookie("LEETCODE_SESSION", token);
+    <DataSection title="User Settings" Icon={ManageAccounts}>
+      <Stack spacing={2}>
+        {user?.leetCodeUsername ? (
+          <>
+            <Typography>Your LeetCode account name:</Typography>
+            <Typography>{user.leetCodeUsername}</Typography>
+            <Button
+              disabled={unlinkUser.isLoading}
+              color="error"
+              variant="outlined"
+              onClick={handleLinkedUserReset}
+            >
+              Reset
+            </Button>
+          </>
+        ) : (
+          <Formik
+            initialValues={{
+              username: "",
+              token: "",
+            }}
+            validate={async (values) => {
+              const errors: { username?: string } = {};
+              if (!values.username) {
+                errors.username = "Required";
+              } else {
+              }
+              return errors;
+            }}
+            onSubmit={async ({ username, token }, { setErrors }) => {
+              setCookie("LEETCODE_SESSION", token);
 
-            const { data: globalData } = await getGlobalData();
+              const { data: globalData } = await getGlobalData();
 
-            const extUsername = globalData?.userStatus.username;
+              const extUsername = globalData?.userStatus.username;
 
-            console.log("globalData: ", globalData);
+              console.log("globalData: ", globalData);
 
-            if (!extUsername) {
-              setErrors({ token: "Invalid token!" });
-              deleteCookie("LEETCODE_SESSION");
-              return;
-            }
+              if (!extUsername) {
+                setErrors({ token: "Invalid token!" });
+                deleteCookie("LEETCODE_SESSION");
+                return;
+              }
 
-            if (extUsername !== username) {
-              setErrors({
-                username: "Username does not match the token!",
+              if (extUsername !== username) {
+                setErrors({
+                  username: "Username does not match the token!",
+                });
+                deleteCookie("LEETCODE_SESSION");
+                return;
+              }
+
+              const { data } = await getUserProfile({
+                variables: { username: username },
               });
-              deleteCookie("LEETCODE_SESSION");
-              return;
-            }
 
-            const { data } = await getUserProfile({
-              variables: { username: username },
-            });
+              if (!data?.matchedUser) {
+                setErrors({ username: "No user with given username found!" });
+                return;
+              }
 
-            if (!data?.matchedUser) {
-              setErrors({ username: "No user with given username found!" });
-              return;
-            }
+              const { userAvatar } = data.matchedUser.profile;
 
-            const { userAvatar } = data.matchedUser.profile;
+              await linkUser.mutate({
+                username,
+                userAvatar: userAvatar || "none",
+                token,
+              });
 
-            await linkUser.mutate({
-              username,
-              userAvatar: userAvatar || "none",
-              token,
-            });
+              await trpcUtils.user.getById.invalidate(userId);
+              await refetch();
+            }}
+          >
+            {({ submitForm, isSubmitting }) => (
+              <Stack spacing={1}>
+                <Typography>
+                  Please enter your LeetCode account name:
+                </Typography>
+                <Field
+                  component={TextField}
+                  name="username"
+                  type="text"
+                  label="Username"
+                  required
+                  helperText="LeetCode Username"
+                  // error={errors['username']}
+                />
 
-            await trpcUtils.user.getById.invalidate(userId);
-            await refetch();
-          }}
-        >
-          {({ submitForm, isSubmitting, touched, errors }) => (
-            <Box className={styles.form}>
-              <Typography>Please enter your LeetCode account name:</Typography>
-              <Field
-                component={TextField}
-                name="username"
-                type="text"
-                label="Username"
-                required
-                helperText="LeetCode Username"
-                // error={errors['username']}
-              />
+                <Field
+                  component={TextField}
+                  name="token"
+                  type="text"
+                  label="Token"
+                  required
+                  helperText="LeetCode Token"
+                  // error={errors['username']}
+                />
 
-              <Field
-                component={TextField}
-                name="token"
-                type="text"
-                label="Token"
-                required
-                helperText="LeetCode Token"
-                // error={errors['username']}
-              />
-
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                onClick={submitForm}
-                sx={{ display: "block" }}
-              >
-                Submit!
-              </Button>
-              {loading && <CircularProgress variant="indeterminate" />}
-            </Box>
-          )}
-        </Formik>
-      )}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  onClick={submitForm}
+                  sx={{ display: "block" }}
+                >
+                  Submit!
+                </Button>
+                {loading && <CircularProgress variant="indeterminate" />}
+              </Stack>
+            )}
+          </Formik>
+        )}
+      </Stack>
     </DataSection>
   );
 };
