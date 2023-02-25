@@ -1,3 +1,12 @@
+## [1.102.3](https://github.com/mkayander/leetpal/compare/v1.102.2...v1.102.3) (2023-02-25)
+
+
+### Bug Fixes
+
+* Fixed tree nodes data reset logic ([882f3b1](https://github.com/mkayander/leetpal/commit/882f3b1a2617ed7c68f1e8599681a0ca622416b6))
+* Make setter callbacks optional ([2b99c43](https://github.com/mkayander/leetpal/commit/2b99c431cb5d216047be0a21fa14df65406f3b8d))
+* Removed console log ([dfec698](https://github.com/mkayander/leetpal/commit/dfec698c3c645e611bba5c391faca0a3df0022ad))
+
 ## [1.102.2](https://github.com/mkayander/leetpal/compare/v1.102.1...v1.102.2) (2023-02-24)
 
 
