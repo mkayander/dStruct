@@ -11,8 +11,10 @@ const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
 
 type CodeRunnerProps = EditorProps & {
   isUpdating?: boolean;
-  setMonacoInstance: React.Dispatch<React.SetStateAction<typeof monaco | null>>;
-  setEditorInstance: React.Dispatch<
+  setMonacoInstance?: React.Dispatch<
+    React.SetStateAction<typeof monaco | null>
+  >;
+  setEditorInstance?: React.Dispatch<
     React.SetStateAction<monaco.editor.IStandaloneCodeEditor | null>
   >;
   setTextModel: React.Dispatch<
@@ -65,8 +67,8 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
             return;
           }
 
-          setEditorInstance(editor);
-          setMonacoInstance(monaco);
+          setEditorInstance?.(editor);
+          setMonacoInstance?.(monaco);
           setTextModel(model);
         }}
       />
