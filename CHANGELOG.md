@@ -1,3 +1,10 @@
+## [1.102.5](https://github.com/mkayander/leetpal/compare/v1.102.4...v1.102.5) (2023-02-25)
+
+
+### Bug Fixes
+
+* Fixed user settings layout ([5f6ce13](https://github.com/mkayander/leetpal/commit/5f6ce13650b31f6e1e919c6c0510bdb5ff37ceaf))
+
 ## [1.102.4](https://github.com/mkayander/leetpal/compare/v1.102.3...v1.102.4) (2023-02-25)
 
 
