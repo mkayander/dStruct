@@ -11,11 +11,12 @@ import {
   alpha,
   Box,
   Button,
-  CircularProgress,
   darken,
   Divider,
   Grid,
   Paper,
+  Skeleton,
+  Stack,
   type SvgIcon,
   Typography,
   useTheme,
@@ -24,7 +25,45 @@ import type { BoxProps } from "@mui/material/Box/Box";
 import React from "react";
 
 import { CircularPercentage, RatingButtons, TopicTag } from "#/components";
+import { TopicTagSkeleton } from "#/components/TopicTag/TopicTag";
 import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
+
+const SummarySkeleton = () => (
+  <Stack
+    spacing={1}
+    sx={{
+      width: "70vw",
+      position: "relative",
+    }}
+  >
+    <Stack direction="row" width="100%" justifyContent="space-between">
+      <Skeleton width="40%" height="52px" />
+      <Skeleton width="30%" height="32px" />
+    </Stack>
+    <Stack direction="row" spacing={1}>
+      <Skeleton width="15%" height="36px" />
+      <Skeleton width="12%" height="36px" />
+      <Skeleton width="16%" height="36px" />
+      <Skeleton width="14%" height="36px" />
+    </Stack>
+    <Divider />
+    <Stack direction="row" spacing={1}>
+      <TopicTagSkeleton />
+      <TopicTagSkeleton width="30%" />
+      <TopicTagSkeleton width="18%" />
+    </Stack>
+    <Divider />
+    <Box display="flex" justifyContent="center">
+      <CircularPercentage size={180}>
+        <Stack alignItems="center" pb={1}>
+          <Skeleton width="80px" height="28px" />
+          <Skeleton width="60px" height="32px" />
+          <Skeleton width="100px" height="24px" />
+        </Stack>
+      </CircularPercentage>
+    </Box>
+  </Stack>
+);
 
 const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
   All: SignalCellular0Bar,
@@ -183,7 +222,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
             </Box>
           </Box>
         ) : (
-          <CircularProgress />
+          <SummarySkeleton />
         )}
       </Paper>
 

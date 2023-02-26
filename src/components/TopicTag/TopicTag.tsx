@@ -1,4 +1,11 @@
-import { alpha, Chip, darken, useTheme } from "@mui/material";
+import {
+  alpha,
+  Chip,
+  darken,
+  Skeleton,
+  type SkeletonProps,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 
 import type { TopicTag as Topic } from "#/graphql/generated";
@@ -30,6 +37,20 @@ export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
         letterSpacing: "1px",
         lineHeight: "2rem",
       }}
+    />
+  );
+};
+
+export const TopicTagSkeleton: React.FC<SkeletonProps> = (props) => {
+  return (
+    <Skeleton
+      height="28px"
+      width="12%"
+      variant="rectangular"
+      sx={{
+        borderRadius: 4,
+      }}
+      {...props}
     />
   );
 };
