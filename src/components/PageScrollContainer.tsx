@@ -37,6 +37,9 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
             );
           }
         },
+        destroyed: () => {
+          dispatch(appBarSlice.actions.setIsScrolled(false));
+        },
       }}
     >
       {children}
