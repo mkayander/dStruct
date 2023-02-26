@@ -1,6 +1,6 @@
 {
   "name": "leetpal",
-  "version": "1.102.5",
+  "version": "1.103.0",
   "private": true,
   "scripts": {
     "prepare": "husky install",

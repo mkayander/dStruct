@@ -1,3 +1,19 @@
+# [1.103.0](https://github.com/mkayander/leetpal/compare/v1.102.5...v1.103.0) (2023-02-26)
+
+
+### Bug Fixes
+
+* Disable scroll state when scrollbar container is destroyed ([320dfef](https://github.com/mkayander/leetpal/commit/320dfef98a652db56c3e4b8b0af6dee34fb6f7cf))
+* Fixed mobile tree viewer height calculation ([a5238c7](https://github.com/mkayander/leetpal/commit/a5238c7569e27a32363eda109cc54284082e1113))
+* Implemented a separate hook to determine mobile mode ([3057895](https://github.com/mkayander/leetpal/commit/3057895911b0bd894a96b134866e1f828e67c9f5))
+* Use HTML5 main layout tag names ([d671dcb](https://github.com/mkayander/leetpal/commit/d671dcb679d337e26950f369cce7cad4a6015aa7))
+
+
+### Features
+
+* Allow to combine color updates with animations ([de2e5c2](https://github.com/mkayander/leetpal/commit/de2e5c2c02b6429aba843075c5d2b36a893ac6b6))
+* Implemented a question summary skeleton ([9f1f7e0](https://github.com/mkayander/leetpal/commit/9f1f7e020c671df1ea11eac2bc0344043701eee9))
+
 ## [1.102.5](https://github.com/mkayander/leetpal/compare/v1.102.4...v1.102.5) (2023-02-25)
 
 
