@@ -11,6 +11,7 @@ import {
   selectRootNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
+import { validateAnimationName } from "#/utils";
 
 const overlayStyles = {
   content: "''",
@@ -75,6 +76,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               id: frame.nodeId,
               changes: {
                 color: frame.args[0] || undefined,
+                animation: validateAnimationName(frame.args[1]),
               },
             })
           );

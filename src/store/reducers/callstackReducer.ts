@@ -18,9 +18,10 @@ type RuntimeErrorFrame = CallFrameBase & {
   name: "error";
 };
 
+type SetColorFrameFn = (color: string | null, animation?: string) => void;
 type SetColorFrame = CallFrameBase & {
   name: "setColor";
-  args: [string | null];
+  args: Parameters<SetColorFrameFn>;
 };
 
 type SetValFrame = CallFrameBase & {

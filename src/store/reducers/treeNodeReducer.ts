@@ -9,12 +9,14 @@ import {
 
 import type { RootState } from "#/store/makeStore";
 
+export type AnimationName = "blink";
+
 export type BinaryTreeNodeData = {
   id: string;
   value: string | number;
   depth: number;
   color?: string;
-  animation?: "blink";
+  animation?: AnimationName;
   isHighlighted?: boolean;
   left?: string;
   right?: string;

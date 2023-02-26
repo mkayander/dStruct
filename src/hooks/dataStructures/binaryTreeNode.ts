@@ -117,12 +117,12 @@ export class BinaryTreeNode {
     );
   }
 
-  public setColor(color: string | null) {
+  public setColor(color: string | null, animation?: string) {
     this.dispatch(
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setColor",
-        args: [color],
+        args: [color, animation],
       })
     );
   }
