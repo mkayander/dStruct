@@ -1,8 +1,9 @@
-import { Container, Stack, type Theme, useMediaQuery } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
+import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { SplitPanelsLayout } from "#/layouts";
 import type { MainLayoutProps } from "#/layouts/MainLayout";
 import {
@@ -17,11 +18,9 @@ import type { NextPageWithLayout } from "#/types/page";
 type WrapperProps = SplitPanelsLayoutProps;
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
-  const isVertical = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const isMobile = useMobileLayout();
 
-  if (isVertical)
+  if (isMobile)
     return (
       <Container sx={{ pb: 4 }}>
         <Stack spacing={1} mt={1} pb={4}>
