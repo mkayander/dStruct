@@ -34,7 +34,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       <PageScrollContainer>
         <Box sx={{ minHeight: "100vh" }}>
           <MainAppBar setIsLightMode={setIsLightMode} />
-          <Box sx={{ minHeight: "85vh" }}>
+          <Box component="main" sx={{ minHeight: "85vh" }}>
             {isLoading ? <LinearProgress variant="indeterminate" /> : children}
           </Box>
           <Footer />
