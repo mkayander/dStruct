@@ -59,7 +59,7 @@ export const TreeViewPanel: React.FC = () => {
   return (
     <PanelWrapper
       sx={{
-        height: isMobile ? maxDepth * 140 : "100%",
+        height: isMobile ? 240 + maxDepth * 60 : "100%",
       }}
     >
       <TabContext value={tabValue}>
