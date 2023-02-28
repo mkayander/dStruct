@@ -19,14 +19,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { type PlaygroundProject, ProjectCategory } from "@prisma/client";
-import type { UseQueryResult } from "@tanstack/react-query";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { usePlaygroundSlugs, usePrevious } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
@@ -56,7 +55,7 @@ const validationSchema = yup.object({
 
 type ProjectModalProps = DialogProps & {
   onClose: () => void;
-  currentProject: UseQueryResult<PlaygroundProject>;
+  currentProject?: PlaygroundProject;
   isEditMode: boolean;
 };
 
@@ -68,8 +67,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
-  const previousProject = usePrevious(currentProject.data);
 
   const createProject = trpc.project.create.useMutation();
   const editProject = trpc.project.update.useMutation();
@@ -90,9 +87,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     onSubmit: async (values, formikHelpers) => {
       let successMessage = "";
       try {
-        if (isEditMode && currentProject.data) {
-          const newProject = await editProject.mutateAsync({
-            projectId: currentProject.data.id,
+        if (isEditMode && currentProject) {
+          await editProject.mutateAsync({
+            projectId: currentProject.id,
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
@@ -100,24 +97,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             isPublic: values.isPublic,
           });
           successMessage = `Project "${values.projectName}" was successfully updated 📝`;
-          void trpcUtils.project.getBySlug.invalidate(newProject.slug);
-          applyProjectValues(newProject);
+          void trpcUtils.project.getBySlug.invalidate(values.projectSlug);
         } else {
-          const newProject = await createProject.mutateAsync({
+          await createProject.mutateAsync({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
-          await trpcUtils.project.getBySlug.invalidate(newProject.slug);
           successMessage = "New project was created successfully 🎉";
-          formikHelpers.resetForm();
         }
 
         await trpcUtils.project.allBrief.invalidate();
         void setProject(values.projectSlug);
         onClose();
+        formikHelpers.resetForm();
 
         if (successMessage) {
           enqueueSnackbar(successMessage, {
@@ -138,69 +133,46 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     },
   });
 
-  const applyProjectValues = (project: PlaygroundProject) => {
-    formik.setValues({
-      projectName: project.title,
-      projectSlug: project.slug,
-      projectCategory: project.category,
-      projectDescription: project.description ?? "",
-      isPublic: project.isPublic,
-    });
-  };
-
-  // Fill in the form when the current project changes
   useEffect(() => {
-    if (
-      isEditMode &&
-      currentProject.data &&
-      previousProject?.id !== currentProject.data.id
-    ) {
-      applyProjectValues(currentProject.data);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentProject.data]);
-
-  // Clear/fill the form when switching between edit and create mode
-  useEffect(() => {
-    if (!isEditMode) {
-      formik.resetForm();
+    if (isEditMode && currentProject) {
+      formik.setValues({
+        projectName: currentProject.title,
+        projectSlug: currentProject.slug,
+        projectCategory: currentProject.category,
+        projectDescription: currentProject.description ?? "",
+        isPublic: currentProject.isPublic,
+      });
     } else {
-      currentProject.data && applyProjectValues(currentProject.data);
+      formik.resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEditMode, formik.resetForm]);
+  }, [isEditMode, currentProject]);
 
   const handleDeleteProject = async () => {
-    if (!currentProject.data) return;
+    if (!currentProject) return;
     if (
       !confirm(
-        `Are you sure you want to delete the "${currentProject.data.title}" project? This action cannot be undone.`
+        `Are you sure you want to delete the "${currentProject.title}" project? This action cannot be undone.`
       ) // TODO: Replace with a custom modal
     )
       return;
 
     await deleteProject.mutateAsync({
-      projectId: currentProject.data.id,
+      projectId: currentProject.id,
     });
     dispatch(projectSlice.actions.clear());
     await trpcUtils.project.allBrief.invalidate();
-    await clearSlugs();
-    void trpcUtils.project.getBySlug.invalidate(currentProject.data.slug);
+    void clearSlugs();
+    onClose();
     formik.resetForm();
 
     enqueueSnackbar(
-      `Project "${currentProject.data.title}" was successfully deleted 🧹`,
+      `Project "${currentProject.title}" was successfully deleted 🧹`,
       {
         variant: "success",
       }
     );
   };
-
-  const isLoading =
-    currentProject.isLoading ||
-    createProject.isLoading ||
-    editProject.isLoading ||
-    formik.isSubmitting;
 
   return (
     <Dialog {...props} onClose={onClose}>
@@ -222,7 +194,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               name="projectSlug"
               label="Slug"
               variant="outlined"
-              disabled={isLoading}
+              disabled={formik.isSubmitting}
               value={formik.values.projectSlug}
               onChange={formik.handleChange}
               error={
@@ -239,7 +211,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               label="Name"
               variant="outlined"
               required
-              disabled={isLoading}
+              disabled={formik.isSubmitting}
               value={formik.values.projectName}
               onChange={formik.handleChange}
               error={
@@ -260,7 +232,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 labelId="new-proj-select-category-label"
                 label="Category"
                 required
-                disabled={isLoading}
+                disabled={formik.isSubmitting}
                 value={formik.values.projectCategory}
                 // defaultValue="Binary Tree"
                 onChange={formik.handleChange}
@@ -285,7 +257,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               multiline
               minRows={2}
               maxRows={8}
-              disabled={isLoading}
+              disabled={formik.isSubmitting}
               value={formik.values.projectDescription}
               onChange={formik.handleChange}
               error={
@@ -303,7 +275,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <Switch
                   id="isPublic"
                   name="isPublic"
-                  disabled={isLoading}
+                  disabled={formik.isSubmitting}
                   checked={formik.values.isPublic}
                   onChange={formik.handleChange}
                 />
@@ -318,7 +290,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               title="Delete this project"
               color="error"
               endIcon={<DeleteForever />}
-              disabled={isLoading}
               loading={deleteProject.isLoading}
               loadingPosition="end"
               onClick={handleDeleteProject}
@@ -328,11 +299,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             </LoadingButton>
           )}
           <Button onClick={onClose}>Cancel</Button>
-          <LoadingButton
-            type="submit"
-            disabled={isLoading}
-            loading={formik.isSubmitting}
-          >
+          <LoadingButton type="submit" loading={formik.isSubmitting}>
             {isEditMode ? "Update" : "Create"}
           </LoadingButton>
         </DialogActions>
