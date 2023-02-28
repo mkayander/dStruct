@@ -1,3 +1,11 @@
+# [1.105.0](https://github.com/mkayander/leetpal/compare/v1.104.0...v1.105.0) (2023-02-28)
+
+
+### Features
+
+* Added experimental edge opengraph endpoint ([0027392](https://github.com/mkayander/leetpal/commit/0027392fbdde5bfe3ea89503ed61e1e81701900f))
+* Updated opengraph meta tags. Added twitter card tags. ([ae8daa8](https://github.com/mkayander/leetpal/commit/ae8daa88d55315300a2fffaa40182e9f08ec0f5e))
+
 # [1.104.0](https://github.com/mkayander/leetpal/compare/v1.103.0...v1.104.0) (2023-02-28)
 
 
