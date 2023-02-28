@@ -1,3 +1,10 @@
+## [1.105.2](https://github.com/mkayander/leetpal/compare/v1.105.1...v1.105.2) (2023-02-28)
+
+
+### Reverts
+
+* Revert "refactor: Updated prisma client" ([179deb6](https://github.com/mkayander/leetpal/commit/179deb65c806b8e4f2e6355299ac30c134b05c0f))
+
 ## [1.105.1](https://github.com/mkayander/leetpal/compare/v1.105.0...v1.105.1) (2023-02-28)
 
 
