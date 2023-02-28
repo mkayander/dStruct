@@ -1,3 +1,10 @@
+## [1.105.1](https://github.com/mkayander/leetpal/compare/v1.105.0...v1.105.1) (2023-02-28)
+
+
+### Bug Fixes
+
+* fixes [#17](https://github.com/mkayander/leetpal/issues/17) issue with project modal reset ([59071eb](https://github.com/mkayander/leetpal/commit/59071eb73f5a1db663be42d03abeaa64e041eb2c))
+
 # [1.105.0](https://github.com/mkayander/leetpal/compare/v1.104.0...v1.105.0) (2023-02-28)
 
 
