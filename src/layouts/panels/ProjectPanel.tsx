@@ -170,7 +170,7 @@ export const ProjectPanel: React.FC = () => {
         open={isProjectModalOpen}
         onClose={() => setIsProjectModalOpen(false)}
         isEditMode={isModalEditMode}
-        currentProject={selectedProject.data}
+        currentProject={selectedProject}
       />
 
       {allBrief.isLoading && (
