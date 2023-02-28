@@ -1,3 +1,10 @@
+## [1.105.3](https://github.com/mkayander/leetpal/compare/v1.105.2...v1.105.3) (2023-02-28)
+
+
+### Reverts
+
+* Revert "fix: fixes #17 issue with project modal reset" ([70e24b7](https://github.com/mkayander/leetpal/commit/70e24b7a2d382f4c8501353f03bd30d512a183f9)), closes [#17](https://github.com/mkayander/leetpal/issues/17)
+
 ## [1.105.2](https://github.com/mkayander/leetpal/compare/v1.105.1...v1.105.2) (2023-02-28)
 
 
