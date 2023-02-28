@@ -1,3 +1,10 @@
+# [1.104.0](https://github.com/mkayander/leetpal/compare/v1.103.0...v1.104.0) (2023-02-28)
+
+
+### Features
+
+* Added basic opengraph meta tags ([8a8a291](https://github.com/mkayander/leetpal/commit/8a8a291b606e587cd0600358ddc5fb29f9f95ea0))
+
 # [1.103.0](https://github.com/mkayander/leetpal/compare/v1.102.5...v1.103.0) (2023-02-26)
 
 
