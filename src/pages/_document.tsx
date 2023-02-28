@@ -44,6 +44,16 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
+
+        <meta property="og:title" content="dStruct" />
+        <meta
+          property="og:description"
+          content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
+        />
+        <meta
+          property="og:image"
+          content={`${process.env.VERCEL_URL}/static/screen2.png`}
+        />
       </Head>
       <body>
         <Main />
