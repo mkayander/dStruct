@@ -1,3 +1,11 @@
+## [1.105.4](https://github.com/mkayander/leetpal/compare/v1.105.3...v1.105.4) (2023-03-08)
+
+
+### Bug Fixes
+
+* Removed unused og endpoint ([e04f9af](https://github.com/mkayander/leetpal/commit/e04f9af241778d38464ec232a8592e3213e2cbb3))
+* Updated packages ([6c017e0](https://github.com/mkayander/leetpal/commit/6c017e011b251642176bf1fb23e63316d3ff6765))
+
 ## [1.105.3](https://github.com/mkayander/leetpal/compare/v1.105.2...v1.105.3) (2023-02-28)
 
 
