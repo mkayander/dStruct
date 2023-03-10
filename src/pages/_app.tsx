@@ -9,10 +9,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
-import {
-  MainLayout as DefaultLayout,
-  type MainLayoutProps,
-} from "#/layouts/MainLayout";
+// import {
+//   MainLayout as DefaultLayout,
+//   type MainLayoutProps,
+// } from "#/layouts/MainLayout";
 import { wrapper } from "#/store/makeStore";
 import { themes } from "#/themes";
 import type { AppTypeWithLayout } from "#/types/page";
@@ -40,7 +40,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
     [isLightMode]
   );
 
-  const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
+  // const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
 
   return (
     <ReduxProvider store={store}>
@@ -52,9 +52,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <Layout setIsLightMode={setIsLightMode}>
-                <Component {...props.pageProps} />
-              </Layout>
+              {/*<Layout setIsLightMode={setIsLightMode}>*/}
+              <Component {...props.pageProps} />
+              {/*</Layout>*/}
             </SnackbarProvider>
           </ThemeProvider>
         </ApolloProvider>
