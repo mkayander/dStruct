@@ -1,3 +1,10 @@
+## [1.105.6](https://github.com/mkayander/leetpal/compare/v1.105.5...v1.105.6) (2023-03-10)
+
+
+### Bug Fixes
+
+* Fixed skeleton width ([9135338](https://github.com/mkayander/leetpal/commit/913533830943fb0ef480c00061bd4910f8148abc))
+
 ## [1.105.5](https://github.com/mkayander/leetpal/compare/v1.105.4...v1.105.5) (2023-03-10)
 
 
