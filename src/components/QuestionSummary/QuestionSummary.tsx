@@ -32,7 +32,7 @@ const SummarySkeleton = () => (
   <Stack
     spacing={1}
     sx={{
-      width: "70vw",
+      width: "70%",
       position: "relative",
     }}
   >
