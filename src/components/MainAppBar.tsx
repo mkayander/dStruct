@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
 import { ThemeSwitch } from "#/components/ThemeSwitch";
-import { useProfileImageUploader } from "#/hooks";
+// import { useProfileImageUploader } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 import { getImageUrl, trpc } from "#/utils";
@@ -89,7 +89,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const session = useSession();
 
-  useProfileImageUploader(session);
+  // useProfileImageUploader(session);
 
   const handleSignIn = async () => {
     await signIn();
