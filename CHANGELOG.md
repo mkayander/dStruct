@@ -1,3 +1,10 @@
+## [1.105.8](https://github.com/mkayander/leetpal/compare/v1.105.7...v1.105.8) (2023-03-11)
+
+
+### Bug Fixes
+
+* Test without appbar ([9d0d203](https://github.com/mkayander/leetpal/commit/9d0d20362fcfc06a314b17cdd1aacb35b2e16637))
+
 ## [1.105.7](https://github.com/mkayander/leetpal/compare/v1.105.6...v1.105.7) (2023-03-11)
 
 
