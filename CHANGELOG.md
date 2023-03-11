@@ -1,3 +1,11 @@
+## [1.105.7](https://github.com/mkayander/leetpal/compare/v1.105.6...v1.105.7) (2023-03-11)
+
+
+### Bug Fixes
+
+* Fixed question summary layout ([31bf2aa](https://github.com/mkayander/leetpal/commit/31bf2aa7cbaa583d584c9ce3e54b0a322f7e26c7))
+* Test with static main layout ([00b6587](https://github.com/mkayander/leetpal/commit/00b658729b64e13b82c2df8e4605978d425bc521))
+
 ## [1.105.6](https://github.com/mkayander/leetpal/compare/v1.105.5...v1.105.6) (2023-03-10)
 
 
