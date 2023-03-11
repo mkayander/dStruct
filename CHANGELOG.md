@@ -1,3 +1,10 @@
+## [1.105.9](https://github.com/mkayander/leetpal/compare/v1.105.8...v1.105.9) (2023-03-11)
+
+
+### Bug Fixes
+
+* Test without AWS image uploading ([cb345d0](https://github.com/mkayander/leetpal/commit/cb345d02c2253866c399662be2a103fc57fb2c35))
+
 ## [1.105.8](https://github.com/mkayander/leetpal/compare/v1.105.7...v1.105.8) (2023-03-11)
 
 
