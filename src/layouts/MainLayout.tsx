@@ -1,7 +1,7 @@
 import { alpha, Box, LinearProgress, useTheme } from "@mui/material";
 import React from "react";
 
-import { Footer, MainAppBar, PageScrollContainer } from "#/components";
+import { Footer, PageScrollContainer } from "#/components";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
@@ -12,7 +12,6 @@ export type MainLayoutProps = {
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   isLoading,
-  setIsLightMode,
 }) => {
   const theme = useTheme();
 
@@ -33,7 +32,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     >
       <PageScrollContainer>
         <Box sx={{ minHeight: "100vh" }}>
-          <MainAppBar setIsLightMode={setIsLightMode} />
+          {/*<MainAppBar setIsLightMode={setIsLightMode} />*/}
           <Box component="main" sx={{ minHeight: "85vh" }}>
             {isLoading ? <LinearProgress variant="indeterminate" /> : children}
           </Box>
