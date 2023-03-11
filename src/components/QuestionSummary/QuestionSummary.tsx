@@ -32,7 +32,6 @@ const SummarySkeleton = () => (
   <Stack
     spacing={1}
     sx={{
-      width: "70%",
       position: "relative",
     }}
   >
@@ -96,7 +95,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
         elevation={12}
         sx={{
           zIndex: theme.zIndex.mobileStepper,
-          width: "fit-content",
+          width: question ? "fit-content" : "80%",
           p: 2,
           mx: "auto",
           marginBottom: 2,
