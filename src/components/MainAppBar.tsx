@@ -26,7 +26,6 @@ import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
 import { ThemeSwitch } from "#/components/ThemeSwitch";
-// import { useProfileImageUploader } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 import { getImageUrl, trpc } from "#/utils";
