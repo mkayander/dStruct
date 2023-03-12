@@ -1,5 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -9,9 +9,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
-import {
-  MainLayout, // type MainLayoutProps,
-} from "#/layouts/MainLayout";
+// import {
+//   MainLayout, // type MainLayoutProps,
+// } from "#/layouts/MainLayout";
 import { wrapper } from "#/store/makeStore";
 import { themes } from "#/themes";
 import type { AppTypeWithLayout } from "#/types/page";
@@ -51,19 +51,16 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <MainLayout setIsLightMode={setIsLightMode}>
-                <Component {...props.pageProps} />
-              </MainLayout>
-              {/*<Box sx={{ minHeight: "100vh" }}>*/}
-              {/*  /!*  <MainAppBar setIsLightMode={setIsLightMode} />*!/*/}
-              {/*  <Box component="main" sx={{ minHeight: "85vh" }}>*/}
-              {/*    <Component {...props.pageProps} />*/}
-              {/*  </Box>*/}
-              {/*  /!*  <Footer />*!/*/}
-              {/*  <Box>*/}
-              {/*    <span>Hello World</span>*/}
-              {/*  </Box>*/}
-              {/*</Box>*/}
+              <Box sx={{ minHeight: "100vh" }}>
+                {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
+                <Box component="main" sx={{ minHeight: "85vh" }}>
+                  <Component {...props.pageProps} />
+                </Box>
+                {/*  <Footer />*/}
+                <Box>
+                  <span>Hello World</span>
+                </Box>
+              </Box>
             </SnackbarProvider>
           </ThemeProvider>
         </ApolloProvider>

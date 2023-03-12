@@ -1,7 +1,7 @@
 import { alpha, Box, LinearProgress, useTheme } from "@mui/material";
 import React from "react";
 
-import { MainAppBar } from "#/components";
+import { Footer, MainAppBar } from "#/components";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
@@ -37,7 +37,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         <Box component="main" sx={{ minHeight: "85vh" }}>
           {isLoading ? <LinearProgress variant="indeterminate" /> : children}
         </Box>
-        {/*<Footer />*/}
+        <Footer />
       </Box>
       {/*</PageScrollContainer>*/}
     </Box>
