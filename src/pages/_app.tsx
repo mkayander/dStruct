@@ -52,13 +52,13 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              {/*<Box sx={{ minHeight: "100vh" }}>*/}
-              {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
-              {/*  <Box component="main" sx={{ minHeight: "85vh" }}>*/}
-              <Component {...props.pageProps} />
-              {/*  </Box>*/}
-              {/*  <Footer />*/}
-              {/*</Box>*/}
+              <Box sx={{ minHeight: "100vh" }}>
+                {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
+                {/*  <Box component="main" sx={{ minHeight: "85vh" }}>*/}
+                <Component {...props.pageProps} />
+                {/*  </Box>*/}
+                {/*  <Footer />*/}
+              </Box>
             </SnackbarProvider>
           </ThemeProvider>
         </ApolloProvider>
