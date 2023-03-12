@@ -1,3 +1,10 @@
+## [1.105.24](https://github.com/mkayander/leetpal/compare/v1.105.23...v1.105.24) (2023-03-12)
+
+
+### Bug Fixes
+
+* Test ([30761ef](https://github.com/mkayander/leetpal/commit/30761ef710b48407ac84f97dd014bac63ded5fbb))
+
 ## [1.105.23](https://github.com/mkayander/leetpal/compare/v1.105.22...v1.105.23) (2023-03-12)
 
 
