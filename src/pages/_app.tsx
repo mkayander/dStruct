@@ -8,7 +8,6 @@ import { SnackbarProvider } from "notistack";
 import React, { useEffect, useMemo, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
-import { Footer, MainAppBar } from "#/components";
 import { apolloClient } from "#/graphql/apolloClient";
 // import {
 //   MainLayout, // type MainLayoutProps,
@@ -54,9 +53,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
               <CssBaseline />
               <Box sx={{ minHeight: "100vh" }}>
                 {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
-                {/*  <Box component="main" sx={{ minHeight: "85vh" }}>*/}
-                <Component {...props.pageProps} />
-                {/*  </Box>*/}
+                <Box component="main" sx={{ minHeight: "85vh" }}>
+                  <Component {...props.pageProps} />
+                </Box>
                 {/*  <Footer />*/}
               </Box>
             </SnackbarProvider>
