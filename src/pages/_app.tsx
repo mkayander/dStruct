@@ -10,15 +10,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppSelector } from "#/store/hooks";
 // import {
 //   MainLayout, // type MainLayoutProps,
 // } from "#/layouts/MainLayout";
 import { wrapper } from "#/store/makeStore";
-import {
-  appBarSlice,
-  selectIsAppBarScrolled,
-} from "#/store/reducers/appBarReducer";
+import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 import { themes } from "#/themes";
 import type { AppTypeWithLayout } from "#/types/page";
 import { trpc } from "#/utils";
@@ -31,7 +28,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
   Component,
   ...restProps
 }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { store, props } = wrapper.useWrappedStore(restProps);
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
@@ -90,15 +87,15 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                         ev.target instanceof Element &&
                         ev.target.scrollTop > 0 !== isScrolled
                       ) {
-                        dispatch(
-                          appBarSlice.actions.setIsScrolled(
-                            ev.target.scrollTop > 0
-                          )
-                        );
+                        // dispatch(
+                        //   appBarSlice.actions.setIsScrolled(
+                        //     ev.target.scrollTop > 0
+                        //   )
+                        // );
                       }
                     },
                     destroyed: () => {
-                      dispatch(appBarSlice.actions.setIsScrolled(false));
+                      // dispatch(appBarSlice.actions.setIsScrolled(false));
                     },
                   }}
                 >
