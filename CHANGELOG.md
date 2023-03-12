@@ -1,3 +1,10 @@
+## [1.105.29](https://github.com/mkayander/leetpal/compare/v1.105.28...v1.105.29) (2023-03-12)
+
+
+### Bug Fixes
+
+* Extract theme state to Redux & separate components ([59b41b6](https://github.com/mkayander/leetpal/commit/59b41b613b2d38575edf9e74c9df6a4ce460e450))
+
 ## [1.105.28](https://github.com/mkayander/leetpal/compare/v1.105.27...v1.105.28) (2023-03-12)
 
 
