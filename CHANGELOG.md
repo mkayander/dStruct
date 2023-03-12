@@ -1,3 +1,10 @@
+## [1.105.28](https://github.com/mkayander/leetpal/compare/v1.105.27...v1.105.28) (2023-03-12)
+
+
+### Bug Fixes
+
+* Render playground layout directly ([95ecf77](https://github.com/mkayander/leetpal/commit/95ecf7779c3b81f621e3d853e54789a29cffa496))
+
 ## [1.105.27](https://github.com/mkayander/leetpal/compare/v1.105.26...v1.105.27) (2023-03-12)
 
 
