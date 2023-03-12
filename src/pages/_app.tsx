@@ -10,7 +10,7 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
 import {
-  MainLayout as DefaultLayout, // type MainLayoutProps,
+  MainLayout, // type MainLayoutProps,
 } from "#/layouts/MainLayout";
 import { wrapper } from "#/store/makeStore";
 import { themes } from "#/themes";
@@ -51,9 +51,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <DefaultLayout setIsLightMode={setIsLightMode}>
+              <MainLayout setIsLightMode={setIsLightMode}>
                 <Component {...props.pageProps} />
-              </DefaultLayout>
+              </MainLayout>
             </SnackbarProvider>
           </ThemeProvider>
         </ApolloProvider>
