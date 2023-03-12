@@ -26,8 +26,11 @@ import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
 import { ThemeSwitch } from "#/components/ThemeSwitch";
-import { useAppSelector } from "#/store/hooks";
-import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import {
+  appBarSlice,
+  selectIsAppBarScrolled,
+} from "#/store/reducers/appBarReducer";
 import { getImageUrl, trpc } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
@@ -68,16 +71,15 @@ const settings: SettingItem[] = [
 ];
 
 type MainAppBarProps = {
-  setIsLightMode: React.Dispatch<React.SetStateAction<boolean>>;
   appBarVariant?: AppBarProps["variant"];
   toolbarVariant?: ToolbarProps["variant"];
 };
 
 export const MainAppBar: React.FC<MainAppBarProps> = ({
-  setIsLightMode,
   appBarVariant = "elevation",
   toolbarVariant = "dense",
 }) => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const theme = useTheme();
 
@@ -114,12 +116,17 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   };
 
   useEffect(() => {
+    const cachedDarkModeValue = localStorage.getItem("isLightMode");
+    dispatch(appBarSlice.actions.setIsLightMode(Boolean(cachedDarkModeValue)));
+  }, [dispatch]);
+
+  useEffect(() => {
     const isLightMode = theme.palette.mode === "light";
     const databaseLightModeValue = session.data?.user.usesLightMode;
 
     databaseLightModeValue !== undefined &&
       databaseLightModeValue !== isLightMode &&
-      setIsLightMode(databaseLightModeValue);
+      dispatch(appBarSlice.actions.setIsLightMode(databaseLightModeValue));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.data?.user.usesLightMode]);
@@ -127,7 +134,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const lightModeMutation = trpc.user.setLightMode.useMutation();
 
   const handleLightModeSwitch = (value: boolean) => {
-    setIsLightMode(value);
+    dispatch(appBarSlice.actions.setIsLightMode(value));
     session.status === "authenticated" && lightModeMutation.mutate(value);
     localStorage.setItem("isLightMode", value ? "true" : "");
   };

@@ -33,7 +33,7 @@ const DashboardPage: React.FC = () => {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    <MainLayout setIsLightMode={() => {}}>
+    <MainLayout>
       <Container>
         <Typography variant="h5" my={3}>
           {leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : "Dashboard"}

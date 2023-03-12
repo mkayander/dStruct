@@ -14,10 +14,12 @@ export type AppBarPayload = {
  */
 export type AppBarState = {
   isScrolled: boolean;
+  isLightMode: boolean;
 };
 
 const initialState: AppBarState = {
   isScrolled: false,
+  isLightMode: false,
 };
 
 /**
@@ -32,6 +34,10 @@ export const appBarSlice = createSlice({
       ...state,
       isScrolled: action.payload,
     }),
+    setIsLightMode: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isLightMode: action.payload,
+    }),
   },
 });
 
@@ -45,3 +51,6 @@ export const appBarReducer = appBarSlice.reducer;
  */
 export const selectIsAppBarScrolled = (state: RootState): boolean =>
   state.appBar.isScrolled;
+
+export const selectIsLightMode = (state: RootState): boolean =>
+  state.appBar.isLightMode;

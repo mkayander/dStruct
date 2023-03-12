@@ -1,18 +1,18 @@
 import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import type { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { SnackbarProvider } from "notistack";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
-// import {
-//   MainLayout, // type MainLayoutProps,
-// } from "#/layouts/MainLayout";
+import { useAppSelector } from "#/store/hooks";
 import { wrapper } from "#/store/makeStore";
+import { selectIsLightMode } from "#/store/reducers/appBarReducer";
 import { themes } from "#/themes";
 import type { AppTypeWithLayout } from "#/types/page";
 import { trpc } from "#/utils";
@@ -21,31 +21,30 @@ import "#/styles/globals.css";
 
 import "overlayscrollbars/overlayscrollbars.css";
 
-const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
-  Component,
-  ...restProps
-}) => {
-  const { store, props } = wrapper.useWrappedStore(restProps);
-
-  const [isLightMode, setIsLightMode] = useState(false);
-
-  useEffect(() => {
-    const cachedDarkModeValue = localStorage.getItem("isLightMode");
-    setIsLightMode(Boolean(cachedDarkModeValue));
-  }, []);
+const StateThemeProvider: React.FC<Omit<ThemeProviderProps, "theme">> = (
+  props
+) => {
+  const isLightMode = useAppSelector(selectIsLightMode);
 
   const theme = useMemo(
     () => (isLightMode ? themes.light : themes.dark),
     [isLightMode]
   );
 
-  // const Layout: React.FC<MainLayoutProps> = Component.Layout ?? DefaultLayout;
+  return <ThemeProvider theme={theme} {...props} />;
+};
+
+const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
+  Component,
+  ...restProps
+}) => {
+  const { store, props } = wrapper.useWrappedStore(restProps);
 
   return (
     <ReduxProvider store={store}>
       <SessionProvider session={props.pageProps.session}>
         <ApolloProvider client={apolloClient}>
-          <ThemeProvider theme={theme}>
+          <StateThemeProvider>
             <SnackbarProvider maxSnack={4}>
               <Head>
                 <title>dStruct</title>
@@ -53,7 +52,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
               <CssBaseline />
               <Component {...props.pageProps} />
             </SnackbarProvider>
-          </ThemeProvider>
+          </StateThemeProvider>
         </ApolloProvider>
       </SessionProvider>
     </ReduxProvider>

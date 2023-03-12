@@ -5,7 +5,6 @@ import React from "react";
 import { MainAppBar, PageScrollContainer } from "#/components";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { SplitPanelsLayout } from "#/layouts";
-import type { MainLayoutProps } from "#/layouts/MainLayout";
 import {
   CodePanel,
   OutputPanel,
@@ -39,7 +38,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
         <title>dStruct Playground</title>
       </Head>
       {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
-      <MainAppBar setIsLightMode={() => {}} toolbarVariant="dense" />
+      <MainAppBar toolbarVariant="dense" />
       <Wrapper>
         <ProjectPanel />
         <TreeViewPanel />
@@ -48,22 +47,6 @@ const PlaygroundPage: NextPageWithLayout = () => {
       </Wrapper>
     </PageScrollContainer>
   );
-};
-
-const Layout: React.FC<MainLayoutProps> = ({ children, setIsLightMode }) => {
-  return (
-    <PageScrollContainer>
-      <MainAppBar setIsLightMode={setIsLightMode} toolbarVariant="dense" />
-      {children}
-    </PageScrollContainer>
-  );
-};
-
-PlaygroundPage.Layout = function PlaygroundLayout({
-  setIsLightMode,
-  children,
-}) {
-  return <Layout setIsLightMode={setIsLightMode}>{children}</Layout>;
 };
 
 export default PlaygroundPage;
