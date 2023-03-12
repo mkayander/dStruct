@@ -34,17 +34,19 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 
 const PlaygroundPage: NextPageWithLayout = () => {
   return (
-    <>
+    <PageScrollContainer>
       <Head>
         <title>dStruct Playground</title>
       </Head>
+      {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
+      <MainAppBar setIsLightMode={() => {}} toolbarVariant="dense" />
       <Wrapper>
         <ProjectPanel />
         <TreeViewPanel />
         <CodePanel />
         <OutputPanel />
       </Wrapper>
-    </>
+    </PageScrollContainer>
   );
 };
 
