@@ -1,5 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
-import { Box, ThemeProvider } from "@mui/material";
+import { alpha, Box, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -51,14 +51,28 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                 <title>dStruct</title>
               </Head>
               <CssBaseline />
-              <Box sx={{ minHeight: "100vh" }}>
-                {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
-                <Box component="main" sx={{ minHeight: "85vh" }}>
-                  <Component {...props.pageProps} />
-                </Box>
-                {/*  <Footer />*/}
-                <Box>
-                  <span>Hello World</span>
+              <Box
+                sx={{
+                  ".os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle":
+                    {
+                      background: theme.palette.action.hover,
+                      "&:hover": {
+                        backgroundColor: alpha(
+                          theme.palette.primary.light,
+                          0.3
+                        ),
+                      },
+                      "&:active": {
+                        backgroundColor: alpha(theme.palette.primary.dark, 0.6),
+                      },
+                    },
+                }}
+              >
+                <Box sx={{ minHeight: "100vh" }}>
+                  {/*  <MainAppBar setIsLightMode={setIsLightMode} />*/}
+                  <Box component="main" sx={{ minHeight: "85vh" }}>
+                    <Component {...props.pageProps} />
+                  </Box>
                 </Box>
               </Box>
             </SnackbarProvider>
