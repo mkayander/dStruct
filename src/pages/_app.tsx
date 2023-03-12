@@ -57,6 +57,9 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
                   <Component {...props.pageProps} />
                 </Box>
                 {/*  <Footer />*/}
+                <Box>
+                  <span>Hello World</span>
+                </Box>
               </Box>
             </SnackbarProvider>
           </ThemeProvider>
