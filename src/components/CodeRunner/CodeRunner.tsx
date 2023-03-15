@@ -32,12 +32,11 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   const theme = useTheme();
 
   return (
-    <Box position="relative" boxShadow={8} borderRadius={1} overflow="hidden">
+    <Box position="relative" boxShadow={4} borderRadius={1}>
       <LinearProgress
         sx={{
           position: "absolute",
           width: "100%",
-          zIndex: 10,
           transition: "opacity .2s",
           opacity: isUpdating ? 1 : 0,
         }}
@@ -48,6 +47,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         options={{
           minimap: { enabled: false },
           tabSize: 2,
+          fixedOverflowWidgets: true,
         }}
         {...restProps}
         language="javascript"

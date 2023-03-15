@@ -9,10 +9,12 @@ import {
 
 type PageScrollContainerProps = {
   children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
   children,
+  style,
 }) => {
   const dispatch = useAppDispatch();
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
@@ -20,7 +22,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
   return (
     <OverlayScrollbarsComponent
       defer
-      style={{ height: "100vh" }}
+      style={{ height: "100vh", ...style }}
       options={{
         scrollbars: {
           autoHide: "scroll",

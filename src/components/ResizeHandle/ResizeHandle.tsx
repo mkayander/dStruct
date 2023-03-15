@@ -54,7 +54,7 @@ export const ResizeHandle: React.FC<ResizeHandleProps> = ({ id }) => {
           left: 2,
           right: 2,
           borderRadius: "6px",
-          backgroundColor: "rgba(0,0,0,0.1)",
+          backgroundColor: "transparent",
           transition: "background-color 0.2s linear",
         }}
       >

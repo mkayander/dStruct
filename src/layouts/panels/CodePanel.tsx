@@ -285,8 +285,13 @@ export const CodePanel: React.FC = () => {
             </LoadingButton>
           </Stack>
         </TabListWrapper>
-        <StyledTabPanel value="1">
-          <SolutionSelectBar selectedProject={selectedProject} mb={1} />
+        <StyledTabPanel
+          value="1"
+          scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
+          scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
+          sx={{ p: 1, overflowY: "hidden" }}
+        >
+          <SolutionSelectBar selectedProject={selectedProject} mx={1} my={1} />
           <Box
             sx={{
               position: "relative",

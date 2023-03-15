@@ -4,15 +4,24 @@ import { styled } from "@mui/material/styles";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import React from "react";
 
-const TabContentScrollContainer: React.FC<
-  React.ComponentProps<typeof OverlayScrollbarsComponent>
-> = ({ children, ...restProps }) => {
+type TabContentScrollContainerProps = React.ComponentProps<
+  typeof OverlayScrollbarsComponent
+> & {
+  viewportStyle?: React.CSSProperties;
+};
+
+const TabContentScrollContainer: React.FC<TabContentScrollContainerProps> = ({
+  children,
+  viewportStyle = {},
+  ...restProps
+}) => {
   const theme = useTheme();
 
   return (
     <Box
       display="contents"
       sx={{
+        ".os-viewport": viewportStyle,
         ".os-scrollbar > .os-scrollbar-track > div.os-scrollbar-handle": {
           transition: "background .2s",
           background: alpha(theme.palette.divider, 0.1),
@@ -48,11 +57,13 @@ export const TabListWrapper = styled(Box)(({ theme }) => ({
 
 type StyledTabPanelProps = TabPanelProps & {
   scrollContainerStyle?: React.CSSProperties;
+  scrollViewportStyle?: React.CSSProperties;
   useScroll?: boolean;
 };
 
 export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
   scrollContainerStyle,
+  scrollViewportStyle,
   useScroll = true,
   ...restProps
 }) => {
@@ -60,7 +71,11 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
 
   if (useScroll) {
     return (
-      <TabContentScrollContainer defer style={scrollContainerStyle}>
+      <TabContentScrollContainer
+        defer
+        style={scrollContainerStyle}
+        viewportStyle={scrollViewportStyle}
+      >
         {panel}
       </TabContentScrollContainer>
     );
