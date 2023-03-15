@@ -291,7 +291,7 @@ export const CodePanel: React.FC = () => {
           scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
           sx={{ p: 1, overflowY: "hidden" }}
         >
-          <SolutionSelectBar selectedProject={selectedProject} mx={2} my={1} />
+          <SolutionSelectBar selectedProject={selectedProject} mx={1} my={1} />
           <Box
             sx={{
               position: "relative",
