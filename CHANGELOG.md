@@ -1,3 +1,14 @@
+## [1.105.30](https://github.com/mkayander/leetpal/compare/v1.105.29...v1.105.30) (2023-03-15)
+
+
+### Bug Fixes
+
+* [#24](https://github.com/mkayander/leetpal/issues/24) Fix and improve styles & colors ([6bb4cbd](https://github.com/mkayander/leetpal/commit/6bb4cbd79cfdb41f99c33ca483fb0468e5e25f3a))
+* [#24](https://github.com/mkayander/leetpal/issues/24) Fixed code editor & scroll z-indexing ([fd05690](https://github.com/mkayander/leetpal/commit/fd0569032c9c6a56012eccc9d24774ba41ec16fc))
+* [#24](https://github.com/mkayander/leetpal/issues/24) Fixed project panel padding ([109b2b9](https://github.com/mkayander/leetpal/commit/109b2b9b990155d6930e0d7e63abf108cf9f0f82))
+* [#24](https://github.com/mkayander/leetpal/issues/24) Fixed select bar margin ([f2ccd3f](https://github.com/mkayander/leetpal/commit/f2ccd3f9651e7cbe32b0d07c7498694cb79a539f))
+* [#24](https://github.com/mkayander/leetpal/issues/24) Make monaco editor horizontal margin a bit smaller ([bb2a3ef](https://github.com/mkayander/leetpal/commit/bb2a3ef3509e3aad30acdf3a06ecea27849c46b9))
+
 ## [1.105.29](https://github.com/mkayander/leetpal/compare/v1.105.28...v1.105.29) (2023-03-12)
 
 
