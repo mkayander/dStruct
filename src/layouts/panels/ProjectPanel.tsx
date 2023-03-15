@@ -199,7 +199,7 @@ export const ProjectPanel: React.FC = () => {
 
         <StyledTabPanel
           value="1"
-          sx={{ display: "flex", flexFlow: "column nowrap", gap: 1 }}
+          sx={{ display: "flex", flexFlow: "column nowrap", p: 2, gap: 1 }}
         >
           <Stack direction="row" alignItems="center" spacing={2}>
             <FormControl fullWidth>
