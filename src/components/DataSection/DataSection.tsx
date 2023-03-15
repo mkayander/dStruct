@@ -1,7 +1,6 @@
 import {
   Box,
   Divider,
-  lighten,
   LinearProgress,
   Paper,
   type SvgIcon,
@@ -52,10 +51,7 @@ export const DataSection: React.FC<DataSectionProps> = ({
         }}
       >
         <Box>
-          <Typography
-            variant="h5"
-            color={lighten(theme.palette.primary.light, 0.4)}
-          >
+          <Typography variant="h5" color={theme.palette.primary.light}>
             {title}
           </Typography>
           {typeof caption === "string" ? (

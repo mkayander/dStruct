@@ -20,7 +20,6 @@ const overlayStyles = {
   position: "absolute",
   pointerEvents: "none",
   top: 0,
-  zIndex: 10,
   transition: "opacity .3s",
 };
 

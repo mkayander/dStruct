@@ -154,6 +154,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           theme.palette.common.white,
           isScrolled ? 0.05 : 0
         )}`,
+        color: theme.palette.text.primary,
       }}
     >
       <Container maxWidth="xl">
@@ -177,7 +178,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "'Share Tech', sans-serif",
-                color: "inherit",
                 textDecoration: "none",
               }}
             >
@@ -255,7 +255,8 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               <Button
                 key={page.name}
                 onClick={() => handleNavItemClick(page)}
-                sx={{ my: 2, color: "white", display: "block" }}
+                color="inherit"
+                sx={{ my: 2, display: "block" }}
               >
                 {page.name}
               </Button>

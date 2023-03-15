@@ -1,4 +1,4 @@
-import { Container, Stack } from "@mui/material";
+import { Container, darken, Stack, useTheme } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 
@@ -32,8 +32,11 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 };
 
 const PlaygroundPage: NextPageWithLayout = () => {
+  const theme = useTheme();
   return (
-    <PageScrollContainer>
+    <PageScrollContainer
+      style={{ background: darken(theme.palette.background.default, 0.1) }}
+    >
       <Head>
         <title>dStruct Playground</title>
       </Head>
