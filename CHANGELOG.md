@@ -1,3 +1,10 @@
+## [1.106.3](https://github.com/mkayander/leetpal/compare/v1.106.2...v1.106.3) (2023-03-16)
+
+
+### Bug Fixes
+
+* Don't use a scrollable tab panel for the code runner ([86ad156](https://github.com/mkayander/leetpal/commit/86ad1565f284bfb8081f81aafcec37c65bc16fda))
+
 ## [1.106.2](https://github.com/mkayander/leetpal/compare/v1.106.1...v1.106.2) (2023-03-16)
 
 
