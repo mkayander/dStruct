@@ -1,3 +1,10 @@
+## [1.106.2](https://github.com/mkayander/leetpal/compare/v1.106.1...v1.106.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* Fixed label layout for narrow spaces ([6e160b4](https://github.com/mkayander/leetpal/commit/6e160b4ef462c615a97574514420c515db0bd100))
+
 ## [1.106.1](https://github.com/mkayander/leetpal/compare/v1.106.0...v1.106.1) (2023-03-16)
 
 
