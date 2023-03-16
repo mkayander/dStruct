@@ -1,3 +1,11 @@
+# [1.106.0](https://github.com/mkayander/leetpal/compare/v1.105.30...v1.106.0) (2023-03-16)
+
+
+### Features
+
+* Added project difficulty enum field ([39621c9](https://github.com/mkayander/leetpal/commit/39621c9f130d57ff2cbffd26c95f11c0fd1bdff7))
+* Implement avatar & category display in the projects list (closes [#19](https://github.com/mkayander/leetpal/issues/19)) ([7c6da78](https://github.com/mkayander/leetpal/commit/7c6da78907a01ff9c14cf57a52ead13d115e2efe))
+
 ## [1.105.30](https://github.com/mkayander/leetpal/compare/v1.105.29...v1.105.30) (2023-03-15)
 
 
