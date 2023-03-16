@@ -222,6 +222,7 @@ export const ProjectPanel: React.FC = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       width="100%"
+                      spacing={1}
                     >
                       <span>{project.title}</span>
                       <Stack direction="row" alignItems="center" spacing={1}>
