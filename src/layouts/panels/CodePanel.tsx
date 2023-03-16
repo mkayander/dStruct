@@ -287,6 +287,7 @@ export const CodePanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel
           value="1"
+          useScroll={false}
           scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
           scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
           sx={{ p: 1, overflowY: "hidden" }}
