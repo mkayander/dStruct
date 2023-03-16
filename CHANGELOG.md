@@ -1,3 +1,10 @@
+## [1.106.1](https://github.com/mkayander/leetpal/compare/v1.106.0...v1.106.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* Add project name minimum spacing ([c4106f4](https://github.com/mkayander/leetpal/commit/c4106f47f633727bae650824b65ec37684140ed9))
+
 # [1.106.0](https://github.com/mkayander/leetpal/compare/v1.105.30...v1.106.0) (2023-03-16)
 
 
