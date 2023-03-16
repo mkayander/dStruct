@@ -222,13 +222,22 @@ export const ProjectPanel: React.FC = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       width="100%"
+                      overflow="hidden"
                       spacing={1}
                     >
                       <span>{project.title}</span>
-                      <Stack direction="row" alignItems="center" spacing={1}>
+                      <Stack
+                        direction="row"
+                        alignItems="center"
+                        minWidth={10}
+                        overflow="hidden"
+                        spacing={1}
+                      >
                         <Typography
                           fontSize={12}
                           variant="subtitle1"
+                          textOverflow="ellipsis"
+                          overflow="hidden"
                           sx={{ opacity: 0.6 }}
                         >
                           {categoryLabels[project.category]}
