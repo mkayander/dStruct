@@ -106,6 +106,12 @@ enum ProjectCategory {
   ARRAY
 }
 
+enum ProjectDifficulty {
+  EASY
+  MEDIUM
+  ADVANCED
+}
+
 model PlaygroundProject {
   id          String               @id @default(cuid())
   createdAt   DateTime             @default(now())
@@ -114,6 +120,7 @@ model PlaygroundProject {
   author      User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   title       String
   category    ProjectCategory
+  difficulty  ProjectDifficulty?
   slug        String
   description String?              @db.Text
   isExample   Boolean              @default(false)
