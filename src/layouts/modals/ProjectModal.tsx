@@ -28,16 +28,9 @@ import * as yup from "yup";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import { trpc } from "#/utils";
+import { categoryLabels, trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
-const categoryLabels: Record<ProjectCategory, string> = {
-  [ProjectCategory.BINARY_TREE]: "Binary Tree",
-  [ProjectCategory.ARRAY]: "Array",
-  [ProjectCategory.BST]: "BST",
-  [ProjectCategory.GRAPH]: "Graph",
-  [ProjectCategory.GRID]: "Grid",
-};
 
 const validationSchema = yup.object({
   projectName: yup

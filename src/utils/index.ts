@@ -3,3 +3,4 @@ export { getImageUrl } from "./getImageUrl";
 export { isNumber } from "./isNumber";
 export { a11yProps } from "./a11yProps";
 export { validateAnimationName } from "./validateAnimationName";
+export { categoryLabels } from "./categoryLabels";

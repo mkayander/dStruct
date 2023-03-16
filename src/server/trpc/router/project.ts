@@ -57,7 +57,15 @@ export const projectRouter = router({
         where: {
           OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }]
         },
-        select: { id: true, slug: true, title: true, category: true }
+        select: {
+          id: true, slug: true, title: true, category: true, author: {
+            select: {
+              id: true,
+              name: true,
+              bucketImage: true
+            }
+          }
+        }
       });
     }),
 

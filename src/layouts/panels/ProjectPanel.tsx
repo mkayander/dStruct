@@ -1,6 +1,7 @@
 import { Add, Edit } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
+  Avatar,
   CircularProgress,
   FormControl,
   IconButton,
@@ -13,6 +14,7 @@ import {
   Tab,
   TextField,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -29,7 +31,7 @@ import {
   projectSlice,
   selectIsEditable,
 } from "#/store/reducers/projectReducer";
-import { trpc } from "#/utils";
+import { categoryLabels, getImageUrl, trpc } from "#/utils";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
@@ -215,7 +217,35 @@ export const ProjectPanel: React.FC = () => {
               >
                 {allBrief.data?.map((project) => (
                   <MenuItem key={project.id} value={project.slug}>
-                    {project.title}
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      width="100%"
+                    >
+                      <span>{project.title}</span>
+                      <Stack direction="row" alignItems="center" spacing={1}>
+                        <Typography
+                          fontSize={12}
+                          variant="subtitle1"
+                          sx={{ opacity: 0.6 }}
+                        >
+                          {categoryLabels[project.category]}
+                        </Typography>
+                        {project.author?.bucketImage && (
+                          <Tooltip
+                            title={`Author: ${project.author.name}`}
+                            arrow
+                          >
+                            <Avatar
+                              src={getImageUrl(project.author.bucketImage)}
+                              alt={`${project.author.name} avatar`}
+                              sx={{ height: 24, width: 24 }}
+                            />
+                          </Tooltip>
+                        )}
+                      </Stack>
+                    </Stack>
                   </MenuItem>
                 ))}
               </Select>
