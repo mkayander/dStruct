@@ -87,7 +87,7 @@ export const TreeViewPanel: React.FC = () => {
                   endIcon={<Replay />}
                   onClick={handleReplay}
                   disabled={!isCallstackReady}
-                  sx={{ height: "100%", borderRadius: 0 }}
+                  sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
                 >
                   Replay
                 </Button>

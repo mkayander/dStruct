@@ -279,7 +279,7 @@ export const CodePanel: React.FC = () => {
               endIcon={<PlayArrow />}
               loadingPosition="end"
               onClick={handleRunCode}
-              sx={{ height: "100%", borderRadius: 0 }}
+              sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
             >
               Run
             </LoadingButton>
