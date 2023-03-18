@@ -1,3 +1,10 @@
+## [1.106.4](https://github.com/mkayander/leetpal/compare/v1.106.3...v1.106.4) (2023-03-18)
+
+
+### Bug Fixes
+
+* Avoid blocking route history (fixes [#29](https://github.com/mkayander/leetpal/issues/29)) ([a1b36e9](https://github.com/mkayander/leetpal/commit/a1b36e9519469f76aeb49beb21e6660403454f0d))
+
 ## [1.106.3](https://github.com/mkayander/leetpal/compare/v1.106.2...v1.106.3) (2023-03-16)
 
 
