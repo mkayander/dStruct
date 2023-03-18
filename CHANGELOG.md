@@ -1,3 +1,10 @@
+# [1.107.0](https://github.com/mkayander/leetpal/compare/v1.106.5...v1.107.0) (2023-03-18)
+
+
+### Features
+
+* Added "sharp" image optimization library ([b1c42b3](https://github.com/mkayander/leetpal/commit/b1c42b3bc1a4ed8d72fd3222877ba63c32ebc2ab))
+
 ## [1.106.5](https://github.com/mkayander/leetpal/compare/v1.106.4...v1.106.5) (2023-03-18)
 
 
