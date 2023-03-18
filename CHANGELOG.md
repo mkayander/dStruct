@@ -1,3 +1,10 @@
+## [1.106.5](https://github.com/mkayander/leetpal/compare/v1.106.4...v1.106.5) (2023-03-18)
+
+
+### Bug Fixes
+
+* Fixed buttons corner radius ([9822b67](https://github.com/mkayander/leetpal/commit/9822b671668bae62f1fafaaaf0a614ff6d1f67c3))
+
 ## [1.106.4](https://github.com/mkayander/leetpal/compare/v1.106.3...v1.106.4) (2023-03-18)
 
 
