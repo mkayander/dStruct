@@ -93,9 +93,9 @@ export const useTreeParsing = () => {
           },
         })
       );
-
-      dispatch(callstackSlice.actions.removeAll());
     }
+
+    dispatch(callstackSlice.actions.removeAll());
 
     return () => {
       dispatch(treeNodeSlice.actions.clearAll());
