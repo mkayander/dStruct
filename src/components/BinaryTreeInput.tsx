@@ -16,8 +16,12 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
   ...restProps
 }) => {
   const dispatch = useAppDispatch();
-  const [rawInput, setRawInput] = useState<string>("[]");
+  const [rawInput, setRawInput] = useState<string>("");
   const [inputError, setInputError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRawInput(arg.input);
+  }, [arg.input]);
 
   useEffect(() => {
     if (!rawInput) {
@@ -43,7 +47,7 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (inputError) return;
+      if (inputError || arg.input === rawInput) return;
 
       dispatch(
         caseSlice.actions.updateArgument({
