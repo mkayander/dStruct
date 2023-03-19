@@ -2,7 +2,6 @@ import { Add, Edit } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
   Avatar,
-  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -12,7 +11,6 @@ import {
   Skeleton,
   Stack,
   Tab,
-  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -20,9 +18,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import { TestCaseSelectBar } from "#/components";
-import { useBinaryTree, usePlaygroundSlugs } from "#/hooks";
-import type { BinaryTreeInput } from "#/hooks/useBinaryTree";
+import { ArgsEditor, TestCaseSelectBar } from "#/components";
+import { usePlaygroundSlugs, useTreeParsing } from "#/hooks";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
@@ -41,9 +38,6 @@ export const ProjectPanel: React.FC = () => {
   const { projectSlug = "", caseSlug = "", setProject } = usePlaygroundSlugs();
 
   const [tabValue, setTabValue] = useState("1");
-  const [parsedInput, setParsedInput] = useState<BinaryTreeInput | undefined>();
-  const [rawInput, setRawInput] = useState<string>("[]");
-  const [inputError, setInputError] = useState<string | null>(null);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isModalEditMode, setIsModalEditMode] = useState(false);
 
@@ -60,7 +54,7 @@ export const ProjectPanel: React.FC = () => {
     { enabled: Boolean(selectedProject.data?.id && caseSlug) }
   );
 
-  const updateCase = trpc.project.updateCase.useMutation();
+  // const updateCase = trpc.project.updateCase.useMutation();
 
   useEffect(() => {
     dispatch(
@@ -89,64 +83,13 @@ export const ProjectPanel: React.FC = () => {
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
-  useEffect(() => {
-    if (selectedCase.data) {
-      setRawInput(selectedCase.data.input);
-    }
-  }, [selectedCase.data]);
+  // useEffect(() => {
+  //   if (selectedCase.data) {
+  //     setRawInput(selectedCase.data.input);
+  //   }
+  // }, [selectedCase.data]);
 
-  useEffect(() => {
-    if (!rawInput) {
-      setInputError(null);
-      setParsedInput(undefined);
-    }
-
-    try {
-      const parsed = JSON.parse(rawInput);
-      if (Array.isArray(parsed)) {
-        setInputError(null);
-        setParsedInput(parsed);
-      } else {
-        setInputError(`Input must be an array, but got ${typeof parsed}`);
-        setParsedInput(undefined);
-      }
-    } catch (e: any) {
-      setInputError(e.message);
-    }
-  }, [rawInput, setParsedInput]);
-
-  const trpcUtils = trpc.useContext();
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (
-        inputError ||
-        !parsedInput ||
-        !caseSlug ||
-        !isEditable ||
-        !selectedCase.data
-      )
-        return;
-
-      updateCase.mutate(
-        {
-          caseId: selectedCase.data.id,
-          projectId: selectedCase.data.projectId,
-          input: rawInput,
-        },
-        {
-          onSuccess: (data) => {
-            trpcUtils.project.getCaseBySlug.setData(data, (input) => input);
-          },
-        }
-      );
-    }, 500);
-
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputError, rawInput]);
-
-  useBinaryTree(parsedInput);
+  useTreeParsing();
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -280,34 +223,36 @@ export const ProjectPanel: React.FC = () => {
 
           <TestCaseSelectBar selectedProject={selectedProject} />
 
-          <Stack
-            direction="row"
-            mt={1}
-            spacing={2}
-            alignItems="start"
-            sx={{
-              "button.btn-refresh": { mt: 1 },
-            }}
-          >
-            <TextField
-              label="Input array"
-              placeholder="e.g.: [1,2,3,null,5]"
-              value={rawInput}
-              onChange={(ev) => setRawInput(ev.target.value)}
-              error={!!inputError}
-              helperText={inputError || "Must be a JSON array of numbers"}
-              fullWidth
-              disabled={selectedProject.isLoading}
-            />
-            <div>
-              <CircularProgress
-                sx={{
-                  transition: "opacity .2s",
-                  opacity: updateCase.isLoading ? 1 : 0,
-                }}
-              />
-            </div>
-          </Stack>
+          <ArgsEditor selectedCase={selectedCase} />
+
+          {/*<Stack*/}
+          {/*  direction="row"*/}
+          {/*  mt={1}*/}
+          {/*  spacing={2}*/}
+          {/*  alignItems="start"*/}
+          {/*  sx={{*/}
+          {/*    "button.btn-refresh": { mt: 1 },*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <TextField*/}
+          {/*    label="Input array"*/}
+          {/*    placeholder="e.g.: [1,2,3,null,5]"*/}
+          {/*    value={rawInput}*/}
+          {/*    onChange={(ev) => setRawInput(ev.target.value)}*/}
+          {/*    error={!!inputError}*/}
+          {/*    helperText={inputError || "Must be a JSON array of numbers"}*/}
+          {/*    fullWidth*/}
+          {/*    disabled={selectedProject.isLoading}*/}
+          {/*  />*/}
+          {/*  <div>*/}
+          {/*    <CircularProgress*/}
+          {/*      sx={{*/}
+          {/*        transition: "opacity .2s",*/}
+          {/*        opacity: updateCase.isLoading ? 1 : 0,*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*</Stack>*/}
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>

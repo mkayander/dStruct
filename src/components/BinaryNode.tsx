@@ -26,9 +26,12 @@ const nodeProps: SxProps<Theme> = {
   height: nodeSize,
 };
 
-type BinaryNodeProps = BinaryTreeNodeData;
+type BinaryNodeProps = BinaryTreeNodeData & {
+  treeName: string;
+};
 
 export const BinaryNode: React.FC<BinaryNodeProps> = ({
+  treeName,
   id,
   value,
   left,
@@ -97,6 +100,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   }
 
   const { relations } = useChildNodes(
+    treeName,
     left,
     right,
     id,

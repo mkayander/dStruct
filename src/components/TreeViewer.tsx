@@ -4,14 +4,8 @@ import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { NodesView } from "#/components/NodesView";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { selectCallstack } from "#/store/reducers/callstackReducer";
-import {
-  selectAllNodeData,
-  selectRootNodeData,
-  treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
-import { validateAnimationName } from "#/utils";
+import { useAppSelector } from "#/store/hooks";
+import { treeDataSelector } from "#/store/reducers/treeNodeReducer";
 
 const overlayStyles = {
   content: "''",
@@ -33,107 +27,20 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   replayCount,
 }) => {
   const theme = useTheme();
-  const dispatch = useAppDispatch();
 
-  const nodes = useAppSelector(selectAllNodeData);
+  const treeState = useAppSelector(treeDataSelector);
 
   // Archer container forced re-render after animations hack
   useEffect(() => {
     const timeoutId = setTimeout(() => setForceUpdate((prev) => !prev), 50);
 
     return () => clearTimeout(timeoutId);
-  }, [nodes]);
+  }, [treeState]);
 
   const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
   const [, setForceUpdate] = useState(false);
   const [scrolledStart, setScrolledStart] = useState(true);
   const [scrolledEnd, setScrolledEnd] = useState(true);
-
-  const { isReady: callstackIsReady, frames: callstack } =
-    useAppSelector(selectCallstack);
-  const rootNodeData = useAppSelector(selectRootNodeData);
-
-  useEffect(() => {
-    let isStarted = false;
-
-    if (!callstackIsReady || callstack.length === 0) return;
-
-    let i = 0;
-
-    const intervalId = setInterval(() => {
-      const frame = callstack[i];
-
-      if (i >= callstack.length || !frame) {
-        clearInterval(intervalId);
-        return;
-      }
-
-      switch (frame.name) {
-        case "setColor":
-          dispatch(
-            treeNodeSlice.actions.update({
-              id: frame.nodeId,
-              changes: {
-                color: frame.args[0] || undefined,
-                animation: validateAnimationName(frame.args[1]),
-              },
-            })
-          );
-          break;
-
-        case "setVal":
-          dispatch(
-            treeNodeSlice.actions.update({
-              id: frame.nodeId,
-              changes: {
-                value: frame.args[0] || undefined,
-              },
-            })
-          );
-          break;
-
-        case "setLeftChild":
-          dispatch(
-            treeNodeSlice.actions.update({
-              id: frame.nodeId,
-              changes: {
-                left: frame.args[0] || undefined,
-              },
-            })
-          );
-          break;
-        case "setRightChild":
-          dispatch(
-            treeNodeSlice.actions.update({
-              id: frame.nodeId,
-              changes: {
-                right: frame.args[0] || undefined,
-              },
-            })
-          );
-          break;
-
-        case "blink":
-          dispatch(
-            treeNodeSlice.actions.update({
-              id: frame.nodeId,
-              changes: {
-                animation: "blink",
-              },
-            })
-          );
-      }
-
-      isStarted = true;
-
-      i++;
-    }, playbackInterval);
-
-    return () => {
-      clearInterval(intervalId);
-      isStarted && dispatch(treeNodeSlice.actions.resetAll());
-    };
-  }, [callstack, callstackIsReady, dispatch, replayCount, playbackInterval]);
 
   const handleScroll = () => {
     // TODO: The Ref types from the "indiana" library should be fixed
@@ -148,7 +55,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   useEffect(() => {
     handleScroll();
-  }, [rootNodeData]);
+  }, [treeState]);
 
   useEffect(() => {
     const handler = () => {
@@ -216,7 +123,17 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               height: "100%",
             }}
           >
-            <NodesView />
+            <Box display="flex">
+              {Object.entries(treeState).map(([treeName, data]) => (
+                <NodesView
+                  key={treeName}
+                  treeName={treeName}
+                  nodes={data.nodes}
+                  playbackInterval={playbackInterval}
+                  replayCount={replayCount}
+                />
+              ))}
+            </Box>
           </ArcherContainer>
         </Box>
       </ScrollContainer>

@@ -3,7 +3,10 @@ import shortUUID from "short-uuid";
 
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
-import type { BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
+import type {
+  BinaryTreeNodeData,
+  TreeData,
+} from "#/store/reducers/treeNodeReducer";
 
 const uuid = shortUUID();
 
@@ -25,6 +28,7 @@ export class BinaryTreeNode {
     left: BinaryTreeNode | null = null,
     right: BinaryTreeNode | null = null,
     meta: NodeMeta,
+    private name: string,
     private dispatch: AppDispatch
   ) {
     this._val = val;
@@ -83,6 +87,7 @@ export class BinaryTreeNode {
   }
 
   static fromNodeData(
+    name: string,
     nodeData: BinaryTreeNodeData | undefined,
     dataMap: Dictionary<BinaryTreeNodeData>,
     dispatch: AppDispatch,
@@ -98,10 +103,22 @@ export class BinaryTreeNode {
     };
 
     const leftNode = left
-      ? BinaryTreeNode.fromNodeData(dataMap[left], dataMap, dispatch, newMeta)
+      ? BinaryTreeNode.fromNodeData(
+          name,
+          dataMap[left],
+          dataMap,
+          dispatch,
+          newMeta
+        )
       : null;
     const rightNode = right
-      ? BinaryTreeNode.fromNodeData(dataMap[right], dataMap, dispatch, newMeta)
+      ? BinaryTreeNode.fromNodeData(
+          name,
+          dataMap[right],
+          dataMap,
+          dispatch,
+          newMeta
+        )
       : null;
 
     if (!leftNode && !rightNode) {
@@ -113,6 +130,7 @@ export class BinaryTreeNode {
       leftNode,
       rightNode,
       { ...newMeta, id },
+      name,
       dispatch
     );
   }
@@ -140,8 +158,27 @@ export class BinaryTreeNode {
   private getDispatchBase() {
     return {
       id: uuid.generate(),
+      treeName: this.name,
       nodeId: this.meta.id,
       timestamp: performance.now(),
     };
   }
 }
+
+export const createRuntimeBinaryTree = (
+  nodesData: TreeData,
+  name: string,
+  dispatch: AppDispatch
+) => {
+  const rootId = nodesData.rootId;
+  if (!rootId) return null;
+
+  let dataMap = nodesData.nodes.entities;
+  if (nodesData.initialNodes.ids.length > 0) {
+    dataMap = nodesData.initialNodes.entities;
+  }
+
+  const rootData = dataMap[rootId];
+
+  return BinaryTreeNode.fromNodeData(name, rootData, dataMap, dispatch);
+};

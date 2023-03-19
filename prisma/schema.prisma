@@ -158,6 +158,7 @@ model PlaygroundTestCase {
   title       String
   slug        String
   input       String            @db.Text
+  args        Json?
   description String?
 
   @@unique([projectId, slug])

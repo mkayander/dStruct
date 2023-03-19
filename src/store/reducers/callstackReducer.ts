@@ -10,7 +10,6 @@ import type { RootState } from "#/store/makeStore";
 
 type CallFrameBase = {
   id: string;
-  nodeId: string;
   timestamp: number;
 };
 
@@ -18,23 +17,28 @@ type RuntimeErrorFrame = CallFrameBase & {
   name: "error";
 };
 
+type NodeFrameBase = CallFrameBase & {
+  treeName: string;
+  nodeId: string;
+};
+
 type SetColorFrameFn = (color: string | null, animation?: string) => void;
-type SetColorFrame = CallFrameBase & {
+type SetColorFrame = NodeFrameBase & {
   name: "setColor";
   args: Parameters<SetColorFrameFn>;
 };
 
-type SetValFrame = CallFrameBase & {
+type SetValFrame = NodeFrameBase & {
   name: "setVal";
   args: [number | string | null];
 };
 
-type SetChildFrame = CallFrameBase & {
+type SetChildFrame = NodeFrameBase & {
   name: "setLeftChild" | "setRightChild";
   args: [string | null];
 };
 
-type BlinkFrame = CallFrameBase & {
+type BlinkFrame = NodeFrameBase & {
   name: "blink";
   args: [];
 };

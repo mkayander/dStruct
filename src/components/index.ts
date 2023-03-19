@@ -18,3 +18,5 @@ export { SelectBarChip } from "./SelectBarChip";
 export { PageScrollContainer } from "./PageScrollContainer";
 export { EditorStateIcon } from "./EditorStateIcon";
 export { NodesView } from "./NodesView";
+export { BinaryTreeInput } from "./BinaryTreeInput";
+export { ArgsEditor } from "./ArgsEditor";
