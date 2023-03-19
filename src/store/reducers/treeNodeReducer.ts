@@ -43,14 +43,14 @@ const treeNodeDataAdapter = createEntityAdapter<BinaryTreeNodeData>({
   selectId: (node: BinaryTreeNodeData) => node.id,
 });
 
-const getTreeState = (state: TreeDataState, name: string) => {
+const getTreeState = (state: TreeDataState, name: string, caller?: string) => {
   const treeState = state[name];
   if (!treeState) {
-    console.error(
-      "getTreeState: Tree state not found: ",
-      { name, state },
-      getTreeState.caller
-    );
+    console.warn("getTreeState: Tree state not found: ", {
+      name,
+      state,
+      caller,
+    });
     return null;
   }
 
