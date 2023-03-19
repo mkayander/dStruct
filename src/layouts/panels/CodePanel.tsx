@@ -159,11 +159,7 @@ export const CodePanel: React.FC = () => {
   const handleRunCode = () => {
     console.log("Run code:\n", codeInput);
 
-    const tree = createCaseRuntimeArgs(dispatch, treeStore, caseArgs);
-    if (!tree) {
-      console.error("No tree to run");
-      return;
-    }
+    const args = createCaseRuntimeArgs(dispatch, treeStore, caseArgs);
 
     const getInputFunction = new Function(codeInput);
 
@@ -178,7 +174,7 @@ export const CodePanel: React.FC = () => {
       dispatch(treeNodeSlice.actions.backupAllNodes());
       dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
 
-      const result = runFunction(tree);
+      const result = runFunction(...args);
       const runtime = performance.now() - startTimestamp;
 
       console.log("Runtime: ", runtime);
