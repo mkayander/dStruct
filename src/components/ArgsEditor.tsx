@@ -7,7 +7,7 @@ import { BinaryTreeInput } from "#/components/BinaryTreeInput";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type ArgumentObject,
-  type ArgumentType,
+  ArgumentType,
   caseSlice,
   isArgumentObjectValid,
   selectCaseArguments,
