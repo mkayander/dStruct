@@ -1,5 +1,6 @@
 import { TextField, type TextFieldProps } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { z } from "zod";
 
 import { useAppDispatch } from "#/store/hooks";
 import { type ArgumentObject, caseSlice } from "#/store/reducers/caseReducer";
@@ -7,6 +8,8 @@ import { type ArgumentObject, caseSlice } from "#/store/reducers/caseReducer";
 type BinaryTreeInputProps = TextFieldProps & {
   arg: ArgumentObject;
 };
+
+const inputValidator = z.array(z.null().or(z.number()));
 
 export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
   arg,
@@ -24,6 +27,11 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
     try {
       const parsed = JSON.parse(rawInput);
       if (Array.isArray(parsed)) {
+        if (!inputValidator.safeParse(parsed).success) {
+          setInputError("Input must be an array of numbers or nulls");
+          return;
+        }
+
         setInputError(null);
       } else {
         setInputError(`Input must be an array, but got ${typeof parsed}`);
@@ -50,12 +58,12 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
 
   return (
     <TextField
-      label="Input array"
+      label="Binary Tree (input array)"
       placeholder="e.g.: [1,2,3,null,5]"
       value={rawInput}
       onChange={(ev) => setRawInput(ev.target.value)}
       error={!!inputError}
-      helperText={inputError || "Must be a JSON array of numbers"}
+      helperText={inputError}
       fullWidth
       {...restProps}
     />
