@@ -156,8 +156,9 @@ model PlaygroundTestCase {
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
+  order       Int               @default(0)
   slug        String
-  input       String            @db.Text
+  input       String?           @db.Text
   args        Json?
   description String?
 
