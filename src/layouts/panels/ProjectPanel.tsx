@@ -54,8 +54,6 @@ export const ProjectPanel: React.FC = () => {
     { enabled: Boolean(selectedProject.data?.id && caseSlug) }
   );
 
-  // const updateCase = trpc.project.updateCase.useMutation();
-
   useEffect(() => {
     dispatch(
       projectSlice.actions.update({ projectId: selectedProject.data?.id })
@@ -224,35 +222,6 @@ export const ProjectPanel: React.FC = () => {
           <TestCaseSelectBar selectedProject={selectedProject} />
 
           <ArgsEditor selectedCase={selectedCase} />
-
-          {/*<Stack*/}
-          {/*  direction="row"*/}
-          {/*  mt={1}*/}
-          {/*  spacing={2}*/}
-          {/*  alignItems="start"*/}
-          {/*  sx={{*/}
-          {/*    "button.btn-refresh": { mt: 1 },*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <TextField*/}
-          {/*    label="Input array"*/}
-          {/*    placeholder="e.g.: [1,2,3,null,5]"*/}
-          {/*    value={rawInput}*/}
-          {/*    onChange={(ev) => setRawInput(ev.target.value)}*/}
-          {/*    error={!!inputError}*/}
-          {/*    helperText={inputError || "Must be a JSON array of numbers"}*/}
-          {/*    fullWidth*/}
-          {/*    disabled={selectedProject.isLoading}*/}
-          {/*  />*/}
-          {/*  <div>*/}
-          {/*    <CircularProgress*/}
-          {/*      sx={{*/}
-          {/*        transition: "opacity .2s",*/}
-          {/*        opacity: updateCase.isLoading ? 1 : 0,*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</Stack>*/}
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
