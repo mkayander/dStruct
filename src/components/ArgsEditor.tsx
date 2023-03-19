@@ -61,7 +61,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   };
 
   return (
-    <Stack mt={1}>
+    <Stack mt={1} spacing={2}>
       {args.map((arg) => (
         <ArgInput key={arg.name} arg={arg} />
       ))}
