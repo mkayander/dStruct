@@ -23,7 +23,9 @@ export type ArgumentObject = {
   input: string;
 };
 
-const argumentObjectValidator = z.object({
+export type ArgumentObjectMap = Record<string, ArgumentObject>;
+
+export const argumentObjectValidator = z.object({
   name: z.string(),
   type: z.nativeEnum(ArgumentType),
   order: z.number(),
@@ -32,7 +34,7 @@ const argumentObjectValidator = z.object({
 
 export const isArgumentObjectValid = (
   args: unknown
-): args is Record<string, ArgumentObject> => {
+): args is ArgumentObjectMap => {
   if (typeof args !== "object" || args === null) {
     return false;
   }
@@ -56,10 +58,12 @@ const argumentAdapter = createEntityAdapter<ArgumentObject>({
 
 type CaseState = {
   args: EntityState<ArgumentObject>;
+  isEdited: boolean;
 };
 
 const initialState: CaseState = {
   args: argumentAdapter.getInitialState(),
+  isEdited: false,
 };
 
 export const caseSlice = createSlice({
@@ -67,12 +71,11 @@ export const caseSlice = createSlice({
   initialState,
   reducers: {
     addArgument: (state, action: PayloadAction<ArgumentObject>) => {
-      const { payload } = action;
-      argumentAdapter.addOne(state.args, payload);
+      argumentAdapter.addOne(state.args, action.payload);
+      state.isEdited = true;
     },
-    removeArgument: (state, action: PayloadAction<string>) => {
-      const { payload } = action;
-      argumentAdapter.removeOne(state.args, payload);
+    removeArgument: (state, action: PayloadAction<ArgumentObject>) => {
+      argumentAdapter.removeOne(state.args, action.payload.name);
     },
     updateArgument: (state, action: PayloadAction<ArgumentObject>) => {
       const { payload } = action;
@@ -80,10 +83,11 @@ export const caseSlice = createSlice({
         id: payload.name,
         changes: payload,
       });
+      state.isEdited = true;
     },
     setArguments: (state, action: PayloadAction<ArgumentObject[]>) => {
-      const { payload } = action;
-      argumentAdapter.setAll(state.args, payload);
+      argumentAdapter.setAll(state.args, action.payload);
+      state.isEdited = false;
     },
     clear: () => ({ ...initialState }),
   },
@@ -101,3 +105,5 @@ export const caseArgumentSelector = argumentAdapter.getSelectors();
 
 export const selectCaseArguments = (state: RootState) =>
   caseArgumentSelector.selectAll(state.testCase.args);
+
+export const selectCaseIsEdited = (state: RootState) => state.testCase.isEdited;
