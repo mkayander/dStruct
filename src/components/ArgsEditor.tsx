@@ -15,6 +15,7 @@ import {
   selectCaseArguments,
   selectCaseIsEdited,
 } from "#/store/reducers/caseReducer";
+import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { type RouterOutputs, trpc } from "#/utils/trpc";
 
 type ArgsEditorProps = {
@@ -37,7 +38,8 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const dispatch = useAppDispatch();
   const { caseSlug } = usePlaygroundSlugs();
   const args = useAppSelector(selectCaseArguments);
-  const isEdited = useAppSelector(selectCaseIsEdited);
+  const isEditable = useAppSelector(selectIsEditable);
+  const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
   const updateCase = trpc.project.updateCase.useMutation();
 
@@ -58,7 +60,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   }, [caseSlug, dispatch, selectedCase.data?.args]);
 
   useEffect(() => {
-    if (!selectedCase.data || !isEdited) return;
+    if (!selectedCase.data || !isCaseEdited) return;
 
     const timeoutId = setTimeout(async () => {
       await updateCase.mutateAsync({
@@ -117,7 +119,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           </IconButton>
         </Stack>
       ))}
-      {caseSlug && (
+      {isEditable && caseSlug && (
         <Box display="flex" justifyContent="center">
           <IconButton title="Add argument" onClick={handleAddArg}>
             <Add />
