@@ -85,13 +85,16 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     setIsModalOpen(true);
   };
 
-  const handleAddCase = () => {
+  const handleCaseAdd = () => {
     if (!selectedProject.data) return;
+
+    const order = cases?.length ?? 0;
 
     addCase.mutate({
       projectId: selectedProject.data.id,
-      title: `Case ${(cases?.length ?? 0) + 1}`,
-      input: "[]",
+      title: `Case ${order + 1}`,
+      order,
+      referenceCaseSlug: caseSlug,
     });
   };
 
@@ -129,7 +132,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
           <IconButton
             title="Add new test case 🧪"
             size="small"
-            onClick={handleAddCase}
+            onClick={handleCaseAdd}
             disabled={isLoading}
           >
             {isLoading ? (

@@ -2,14 +2,11 @@ import { Prisma, ProjectCategory } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import {
-  protectedProcedure,
-  publicProcedure,
-  router
-} from "#/server/trpc/trpc";
+import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc";
 
 import defaultJsTemplate from "#/assets/codeTemplates/defaultTemplate.js.txt";
 import shortUUID from "short-uuid";
+import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/store/reducers/caseReducer";
 
 const uuid = shortUUID();
 
@@ -101,9 +98,13 @@ export const projectRouter = router({
         },
         include: {
           cases: {
+            orderBy: {
+              order: "asc"
+            },
             select: {
               id: true,
               slug: true,
+              order: true,
               title: true
             }
           },
@@ -235,20 +236,50 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
+        referenceCaseSlug: z.ostring(),
         title: z.string(),
-        input: z.string()
+        order: z.number(),
       })
     )
-    .mutation(async ({ input, ctx }) =>
-      ctx.prisma.playgroundTestCase.create({
+    .mutation(async ({ input, ctx }) => {
+      const args: ArgumentObjectMap = {};
+      if (input.referenceCaseSlug) {
+        const referenceCase = await ctx.prisma.playgroundTestCase.findUnique({
+          where: {
+            projectId_slug: {
+              projectId: input.projectId,
+              slug: input.referenceCaseSlug
+            }
+          }
+        });
+        referenceCase?.args && Object.assign(args, referenceCase.args);
+      } else {
+        const project = await ctx.prisma.playgroundProject.findUnique({
+          where: {
+            id: input.projectId
+          }
+        });
+
+        if (project?.category === ProjectCategory.BINARY_TREE) {
+          args["head"] = {
+            name: "head",
+            order: 0,
+            type: ArgumentType.BINARY_TREE,
+            input: "[]"
+          };
+        }
+      }
+
+      return ctx.prisma.playgroundTestCase.create({
         data: {
           projectId: ctx.project.id,
           title: input.title,
           slug: `case-${uuid.generate()}`,
-          input: input.input
+          order: input.order,
+          args
         }
-      })
-    ),
+      });
+    }),
 
   updateCase: projectOwnerProcedure
     .input(
@@ -257,7 +288,7 @@ export const projectRouter = router({
         caseId: z.string(),
         title: z.ostring(),
         slug: z.ostring(),
-        input: z.ostring(),
+        args: z.record(argumentObjectValidator).optional(),
         description: z.ostring()
       })
     )

@@ -23,9 +23,12 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
-const NodeCell: React.FC<{ id: string }> = ({ id }) => {
+const NodeCell: React.FC<{ treeName: string; id: string }> = ({
+  treeName,
+  id,
+}) => {
   const theme = useTheme();
-  const nodeData = useAppSelector(selectNodeDataById(id));
+  const nodeData = useAppSelector(selectNodeDataById(treeName, id));
   const dispatcher = useAppDispatch();
 
   if (!nodeData) return <span>{id}</span>;
@@ -33,9 +36,12 @@ const NodeCell: React.FC<{ id: string }> = ({ id }) => {
   const handleMouseEnter: React.MouseEventHandler<HTMLSpanElement> = () => {
     dispatcher(
       treeNodeSlice.actions.update({
-        id: nodeData.id,
-        changes: {
-          isHighlighted: true,
+        name: treeName,
+        data: {
+          id: nodeData.id,
+          changes: {
+            isHighlighted: true,
+          },
         },
       })
     );
@@ -44,9 +50,12 @@ const NodeCell: React.FC<{ id: string }> = ({ id }) => {
   const handleMouseLeave: React.MouseEventHandler<HTMLSpanElement> = () => {
     dispatcher(
       treeNodeSlice.actions.update({
-        id: nodeData.id,
-        changes: {
-          isHighlighted: false,
+        name: treeName,
+        data: {
+          id: nodeData.id,
+          changes: {
+            isHighlighted: false,
+          },
         },
       })
     );
@@ -85,7 +94,7 @@ const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
     case "setLeftChild":
     case "setRightChild":
       return frame.args[0] ? (
-        <NodeCell id={frame.args[0]} />
+        <NodeCell treeName={frame.treeName} id={frame.args[0]} />
       ) : (
         <span>null</span>
       );
@@ -122,7 +131,9 @@ export const CallstackTable: React.FC = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <NodeCell id={frame.nodeId} />
+                  {"treeName" in frame && (
+                    <NodeCell treeName={frame.treeName} id={frame.nodeId} />
+                  )}
                 </TableCell>
                 <TableCell align="right">{frame.name}</TableCell>
                 <TableCell align="right">

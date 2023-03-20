@@ -16,6 +16,7 @@ const relationProps = {
 } as const;
 
 export const useChildNodes = (
+  treeName: string,
   leftId: string | undefined,
   rightId: string | undefined,
   rootId: string,
@@ -27,12 +28,12 @@ export const useChildNodes = (
 ) => {
   const dispatch = useAppDispatch();
   const maxDepth = useAppSelector(selectTreeMaxDepth);
-  const leftData = useAppSelector(selectNodeDataById(leftId ?? ""));
-  const rightData = useAppSelector(selectNodeDataById(rightId ?? ""));
+  const leftData = useAppSelector(selectNodeDataById(treeName, leftId ?? ""));
+  const rightData = useAppSelector(selectNodeDataById(treeName, rightId ?? ""));
 
   const relations: RelationType[] = [];
 
-  const processNode = (data?: BinaryTreeNodeData) => {
+  const processNode = (data?: BinaryTreeNodeData | null) => {
     if (!data) return;
 
     const linkColor =
@@ -52,7 +53,10 @@ export const useChildNodes = (
 
   const treeSizeCoefficient = (maxDepth < 2 ? 2 : maxDepth) ** 2;
 
-  const updateChildPosition = (data?: BinaryTreeNodeData, isLeft?: boolean) => {
+  const updateChildPosition = (
+    data?: BinaryTreeNodeData | null,
+    isLeft?: boolean
+  ) => {
     if (!data) return;
 
     const verticalOffset = 50;
@@ -61,10 +65,13 @@ export const useChildNodes = (
 
     dispatch(
       treeNodeSlice.actions.update({
-        id: data.id,
-        changes: {
-          y: y + verticalOffset,
-          x: isLeft ? x - horizontalOffset : x + horizontalOffset,
+        name: treeName,
+        data: {
+          id: data.id,
+          changes: {
+            y: y + verticalOffset,
+            x: isLeft ? x - horizontalOffset : x + horizontalOffset,
+          },
         },
       })
     );
@@ -74,12 +81,15 @@ export const useChildNodes = (
     if (depth === 0) {
       dispatch(
         treeNodeSlice.actions.update({
-          id: rootId,
-          changes: { x: 25 * treeSizeCoefficient + maxDepth ** 2.8 },
+          name: treeName,
+          data: {
+            id: rootId,
+            changes: { x: 25 * treeSizeCoefficient + maxDepth ** 2.8 },
+          },
         })
       );
     }
-  }, [depth, dispatch, maxDepth, rootId, treeSizeCoefficient]);
+  }, [depth, dispatch, maxDepth, rootId, treeName, treeSizeCoefficient]);
 
   useEffect(() => {
     updateChildPosition(leftData, true);
