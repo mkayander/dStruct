@@ -1,5 +1,5 @@
 import { Add, DeleteForever } from "@mui/icons-material";
-import { Box, IconButton, Stack } from "@mui/material";
+import { Box, IconButton, LinearProgress, Stack } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
@@ -41,9 +41,18 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
-  const updateCase = trpc.project.updateCase.useMutation();
-
   const trpcUtils = trpc.useContext();
+
+  const updateCase = trpc.project.updateCase.useMutation({
+    onSuccess: async (data) => {
+      if (!selectedCase.data) return;
+      const input = {
+        projectId: selectedCase.data.projectId,
+        slug: selectedCase.data.slug,
+      };
+      trpcUtils.project.getCaseBySlug.setData(input, data);
+    },
+  });
 
   useEffect(() => {
     if (
@@ -62,8 +71,8 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   useEffect(() => {
     if (!selectedCase.data || !isCaseEdited) return;
 
-    const timeoutId = setTimeout(async () => {
-      await updateCase.mutateAsync({
+    const timeoutId = setTimeout(() => {
+      updateCase.mutate({
         projectId: selectedCase.data.projectId,
         caseId: selectedCase.data.id,
         args: args.reduce<ArgumentObjectMap>((acc, arg) => {
@@ -71,16 +80,11 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           return acc;
         }, {}),
       });
-      await trpcUtils.project.getCaseBySlug.invalidate(
-        {
-          projectId: selectedCase.data.projectId,
-          slug: selectedCase.data.slug,
-        }
-        // { refetchType: "none" }
-      );
     }, 500);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [args]);
 
@@ -100,32 +104,41 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   };
 
   return (
-    <Stack mt={1} spacing={2}>
-      {args.map((arg) => (
-        <Stack
-          key={arg.name}
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={1}
-        >
-          <ArgInput arg={arg} />
-          <IconButton
-            title={`Delete ${arg.name} argument`}
-            onClick={() => handleDeleteArg(arg)}
-            size="small"
+    <Box>
+      <LinearProgress
+        sx={{
+          mb: 2,
+          opacity: selectedCase.isLoading || updateCase.isLoading ? 1 : 0,
+          transition: "opacity .2s",
+        }}
+      />
+      <Stack mt={1} spacing={2}>
+        {args.map((arg) => (
+          <Stack
+            key={arg.name}
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={1}
           >
-            <DeleteForever fontSize="small" />
-          </IconButton>
-        </Stack>
-      ))}
-      {isEditable && caseSlug && (
-        <Box display="flex" justifyContent="center">
-          <IconButton title="Add argument" onClick={handleAddArg}>
-            <Add />
-          </IconButton>
-        </Box>
-      )}
-    </Stack>
+            <ArgInput arg={arg} />
+            <IconButton
+              title={`Delete ${arg.name} argument`}
+              onClick={() => handleDeleteArg(arg)}
+              size="small"
+            >
+              <DeleteForever fontSize="small" />
+            </IconButton>
+          </Stack>
+        ))}
+        {isEditable && caseSlug && (
+          <Box display="flex" justifyContent="center">
+            <IconButton title="Add argument" onClick={handleAddArg}>
+              <Add />
+            </IconButton>
+          </Box>
+        )}
+      </Stack>
+    </Box>
   );
 };

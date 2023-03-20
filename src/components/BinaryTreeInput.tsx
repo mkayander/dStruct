@@ -1,4 +1,9 @@
-import { TextField, type TextFieldProps } from "@mui/material";
+import {
+  CircularProgress,
+  InputAdornment,
+  TextField,
+  type TextFieldProps,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { z } from "zod";
 
@@ -18,6 +23,7 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
   const dispatch = useAppDispatch();
   const [rawInput, setRawInput] = useState<string>("");
   const [inputError, setInputError] = useState<string | null>(null);
+  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
 
   useEffect(() => {
     setRawInput(arg.input);
@@ -47,6 +53,7 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
+      setHasPendingChanges(false);
       if (inputError || arg.input === rawInput) return;
 
       dispatch(
@@ -57,18 +64,32 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
       );
     }, 500);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [arg, dispatch, inputError, rawInput]);
+
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setRawInput(ev.target.value);
+    setHasPendingChanges(true);
+  };
 
   return (
     <TextField
       label="Binary Tree (input array)"
       placeholder="e.g.: [1,2,3,null,5]"
       value={rawInput}
-      onChange={(ev) => setRawInput(ev.target.value)}
+      onChange={handleChange}
       error={!!inputError}
       helperText={inputError}
       fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            {hasPendingChanges && <CircularProgress size={24} />}
+          </InputAdornment>
+        ),
+      }}
       {...restProps}
     />
   );
