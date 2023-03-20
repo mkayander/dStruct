@@ -81,12 +81,6 @@ export const ProjectPanel: React.FC = () => {
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
-  // useEffect(() => {
-  //   if (selectedCase.data) {
-  //     setRawInput(selectedCase.data.input);
-  //   }
-  // }, [selectedCase.data]);
-
   useTreeParsing();
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
