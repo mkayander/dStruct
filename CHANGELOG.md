@@ -1,3 +1,12 @@
+## [1.108.1](https://github.com/mkayander/leetpal/compare/v1.108.0...v1.108.1) (2023-03-21)
+
+
+### Bug Fixes
+
+* Fixed trees positioning ([4207f1b](https://github.com/mkayander/leetpal/commit/4207f1bc0175163cc896f24ebf24b0da38108e3c))
+* Set edited state to true when removing arguments ([ca4bb52](https://github.com/mkayander/leetpal/commit/ca4bb52b4d0676b5b41a4d8ef49cd31506b44ff7))
+* Use specific tree's maxDepth ([f68c74d](https://github.com/mkayander/leetpal/commit/f68c74ddafb5296be1b76ccfe688bd8249584b42))
+
 # [1.108.0](https://github.com/mkayander/leetpal/compare/v1.107.0...v1.108.0) (2023-03-20)
 
 
