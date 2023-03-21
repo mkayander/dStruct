@@ -5,8 +5,8 @@ import { type RelationType } from "react-archer/lib/types";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type BinaryTreeNodeData,
+  selectNamedTreeMaxDepth,
   selectNodeDataById,
-  selectTreeMaxDepth,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 
@@ -27,7 +27,7 @@ export const useChildNodes = (
   depth: number
 ) => {
   const dispatch = useAppDispatch();
-  const maxDepth = useAppSelector(selectTreeMaxDepth);
+  const maxDepth = useAppSelector(selectNamedTreeMaxDepth(treeName)) ?? 0;
   const leftData = useAppSelector(selectNodeDataById(treeName, leftId ?? ""));
   const rightData = useAppSelector(selectNodeDataById(treeName, rightId ?? ""));
 
