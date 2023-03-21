@@ -1,5 +1,12 @@
 import { Add, DeleteForever } from "@mui/icons-material";
-import { Box, IconButton, LinearProgress, Stack } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
@@ -69,7 +76,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   }, [caseSlug, dispatch, selectedCase.data?.args]);
 
   useEffect(() => {
-    if (!selectedCase.data || !isCaseEdited) return;
+    if (!isEditable || !selectedCase.data || !isCaseEdited) return;
 
     const timeoutId = setTimeout(() => {
       updateCase.mutate({
@@ -103,15 +110,15 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     dispatch(caseSlice.actions.removeArgument(arg));
   };
 
+  const isLoading = selectedCase.isLoading || updateCase.isLoading;
+
   return (
     <Box>
-      <LinearProgress
-        sx={{
-          mb: 2,
-          opacity: selectedCase.isLoading || updateCase.isLoading ? 1 : 0,
-          transition: "opacity .2s",
-        }}
-      />
+      <Stack direction="row" spacing={1} alignItems="center" mt={1} mb={2}>
+        <Typography variant="caption">Arguments</Typography>
+        {isLoading && <CircularProgress size={14} />}
+        <Divider sx={{ flexGrow: 1 }} />
+      </Stack>
       <Stack mt={1} spacing={2}>
         {args.map((arg) => (
           <Stack
@@ -122,13 +129,17 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
             spacing={1}
           >
             <ArgInput arg={arg} />
-            <IconButton
-              title={`Delete ${arg.name} argument`}
-              onClick={() => handleDeleteArg(arg)}
-              size="small"
-            >
-              <DeleteForever fontSize="small" />
-            </IconButton>
+            {isEditable && (
+              <Stack direction="row" spacing={1}>
+                <IconButton
+                  title={`Delete ${arg.name} argument`}
+                  onClick={() => handleDeleteArg(arg)}
+                  size="small"
+                >
+                  <DeleteForever fontSize="small" />
+                </IconButton>
+              </Stack>
+            )}
           </Stack>
         ))}
         {isEditable && caseSlug && (
