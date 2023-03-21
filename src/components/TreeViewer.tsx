@@ -1,11 +1,14 @@
 import { alpha, Box, useTheme } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { NodesView } from "#/components/NodesView";
 import { useAppSelector } from "#/store/hooks";
-import { treeDataSelector } from "#/store/reducers/treeNodeReducer";
+import {
+  type TreeData,
+  treeDataSelector,
+} from "#/store/reducers/treeNodeReducer";
 
 const overlayStyles = {
   content: "''",
@@ -66,6 +69,27 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     return () => window.removeEventListener("resize", handler);
   }, []);
 
+  const binaryTrees = useMemo(() => {
+    let prevTree: TreeData | null = null;
+    let leftPos = 0;
+    return Object.entries(treeState).map(([treeName, data]) => {
+      if (prevTree) {
+        leftPos += 200 + prevTree.maxDepth ** 5.3;
+      }
+      prevTree = data;
+      return (
+        <NodesView
+          key={treeName}
+          treeName={treeName}
+          nodes={data.nodes}
+          playbackInterval={playbackInterval}
+          replayCount={replayCount}
+          sx={{ left: leftPos }}
+        />
+      );
+    });
+  }, [playbackInterval, replayCount, treeState]);
+
   return (
     <Box
       display="flex"
@@ -123,17 +147,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               height: "100%",
             }}
           >
-            <Box display="flex">
-              {Object.entries(treeState).map(([treeName, data]) => (
-                <NodesView
-                  key={treeName}
-                  treeName={treeName}
-                  nodes={data.nodes}
-                  playbackInterval={playbackInterval}
-                  replayCount={replayCount}
-                />
-              ))}
-            </Box>
+            <Box height="100%">{binaryTrees}</Box>
           </ArcherContainer>
         </Box>
       </ScrollContainer>

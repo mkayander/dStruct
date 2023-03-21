@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, type SxProps } from "@mui/material";
 import type { EntityState } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 
@@ -16,6 +16,7 @@ type NodesViewProps = {
   nodes: EntityState<BinaryTreeNodeData>;
   playbackInterval: number;
   replayCount: number;
+  sx?: SxProps;
 };
 
 export const NodesView: React.FC<NodesViewProps> = ({
@@ -23,6 +24,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
   nodes,
   playbackInterval,
   replayCount,
+  sx,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -136,9 +138,10 @@ export const NodesView: React.FC<NodesViewProps> = ({
   return (
     <Box
       sx={{
-        position: "relative",
+        position: "absolute",
         width: "100%",
         height: "100%",
+        ...sx,
       }}
     >
       {Object.values(nodes.entities).map(
