@@ -5,24 +5,29 @@ import {
   Divider,
   IconButton,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import { ArgumentTypeSelect } from "#/components/ArgumentTypeSelect";
 import { BinaryTreeInput } from "#/components/BinaryTreeInput";
-import { usePlaygroundSlugs } from "#/hooks";
+import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
-  type ArgumentObject,
-  type ArgumentObjectMap,
-  ArgumentType,
   caseSlice,
-  isArgumentObjectValid,
   selectCaseArguments,
   selectCaseIsEdited,
 } from "#/store/reducers/caseReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
+import {
+  type ArgumentObject,
+  type ArgumentObjectMap,
+  ArgumentType,
+  argumentTypeLabels,
+  isArgumentObjectValid,
+} from "#/utils/argumentObject";
 import { type RouterOutputs, trpc } from "#/utils/trpc";
 
 type ArgsEditorProps = {
@@ -30,20 +35,61 @@ type ArgsEditorProps = {
 };
 
 const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
+  const dispatch = useAppDispatch();
+
+  const [input, setInput] = useState<string>("");
+  const [inputError, setInputError] = useState<string | null>(null);
+  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
+
+  useEffect(() => {
+    setInput(arg.input);
+  }, [arg.input]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setHasPendingChanges(false);
+      if (inputError || arg.input === input) return;
+
+      dispatch(
+        caseSlice.actions.updateArgument({
+          ...arg,
+          input,
+        })
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [arg, dispatch, inputError, input]);
+
   if (arg.type === ArgumentType.BINARY_TREE) {
-    return <BinaryTreeInput arg={arg} />;
+    return (
+      <BinaryTreeInput
+        value={input}
+        onChange={(event) => setInput(event.target.value)}
+        errorText={inputError}
+        setInputError={setInputError}
+        hasPendingChanges={hasPendingChanges}
+        setHasPendingChanges={setHasPendingChanges}
+      />
+    );
   }
 
   return (
-    <div>
-      {arg.name} {arg.type}
-    </div>
+    <TextField
+      label={argumentTypeLabels[arg.type]}
+      value={input}
+      fullWidth
+      onChange={(ev) => setInput(ev.target.value)}
+    />
   );
 };
 
 export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const dispatch = useAppDispatch();
   const { caseSlug } = usePlaygroundSlugs();
+  const prevCaseSlug = usePrevious(caseSlug);
   const args = useAppSelector(selectCaseArguments);
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
@@ -68,12 +114,15 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
       isArgumentObjectValid(selectedCase.data.args)
     ) {
       dispatch(
-        caseSlice.actions.setArguments(Object.values(selectedCase.data.args))
+        caseSlice.actions.setArguments({
+          data: Object.values(selectedCase.data.args),
+          resetInfoState: caseSlug !== prevCaseSlug,
+        })
       );
     } else {
       dispatch(caseSlice.actions.clear());
     }
-  }, [caseSlug, dispatch, selectedCase.data?.args]);
+  }, [prevCaseSlug, caseSlug, dispatch, selectedCase.data?.args]);
 
   useEffect(() => {
     if (!isEditable || !selectedCase.data || !isCaseEdited) return;
@@ -110,6 +159,10 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     dispatch(caseSlice.actions.removeArgument(arg));
   };
 
+  const handleArgTypeChange = (arg: ArgumentObject, type: ArgumentType) => {
+    dispatch(caseSlice.actions.updateArgument({ ...arg, type, input: "" }));
+  };
+
   const isLoading = selectedCase.isLoading || updateCase.isLoading;
 
   return (
@@ -125,16 +178,22 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
             key={arg.name}
             direction="row"
             justifyContent="space-between"
-            alignItems="center"
+            alignItems="start"
             spacing={1}
           >
             <ArgInput arg={arg} />
             {isEditable && (
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <ArgumentTypeSelect
+                  value={arg.type}
+                  onChange={(type) => handleArgTypeChange(arg, type)}
+                />
                 <IconButton
                   title={`Delete ${arg.name} argument`}
+                  disabled={isLoading}
                   onClick={() => handleDeleteArg(arg)}
                   size="small"
+                  sx={{ top: -2 }}
                 >
                   <DeleteForever fontSize="small" />
                 </IconButton>
@@ -144,7 +203,11 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         ))}
         {isEditable && caseSlug && (
           <Box display="flex" justifyContent="center">
-            <IconButton title="Add argument" onClick={handleAddArg}>
+            <IconButton
+              title="Add argument"
+              disabled={isLoading}
+              onClick={handleAddArg}
+            >
               <Add />
             </IconButton>
           </Box>
