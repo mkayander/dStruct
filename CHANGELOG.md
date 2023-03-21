@@ -1,3 +1,10 @@
+## [1.108.2](https://github.com/mkayander/leetpal/compare/v1.108.1...v1.108.2) (2023-03-21)
+
+
+### Bug Fixes
+
+* Removed console log ([f4ae8ad](https://github.com/mkayander/leetpal/commit/f4ae8ad6ac65279d522a35e9cb46d0579e3aee72))
+
 ## [1.108.1](https://github.com/mkayander/leetpal/compare/v1.108.0...v1.108.1) (2023-03-21)
 
 
