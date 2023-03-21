@@ -76,6 +76,7 @@ export const caseSlice = createSlice({
     },
     removeArgument: (state, action: PayloadAction<ArgumentObject>) => {
       argumentAdapter.removeOne(state.args, action.payload.name);
+      state.isEdited = true;
     },
     updateArgument: (state, action: PayloadAction<ArgumentObject>) => {
       const { payload } = action;
