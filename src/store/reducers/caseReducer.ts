@@ -4,65 +4,28 @@ import {
   type EntityState,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { z } from "zod";
 
 import type { RootState } from "#/store/makeStore";
-
-export enum ArgumentType {
-  "BINARY_TREE" = "binaryTree",
-  "ARRAY" = "array",
-  "STRING" = "string",
-  "NUMBER" = "number",
-  "BOOLEAN" = "boolean",
-}
-
-export type ArgumentObject = {
-  name: string;
-  type: ArgumentType;
-  order: number;
-  input: string;
-};
-
-export type ArgumentObjectMap = Record<string, ArgumentObject>;
-
-export const argumentObjectValidator = z.object({
-  name: z.string(),
-  type: z.nativeEnum(ArgumentType),
-  order: z.number(),
-  input: z.string(),
-});
-
-export const isArgumentObjectValid = (
-  args: unknown
-): args is ArgumentObjectMap => {
-  if (typeof args !== "object" || args === null) {
-    return false;
-  }
-
-  for (const arg of Object.values(args)) {
-    if (typeof arg !== "object" || arg === null) {
-      return false;
-    }
-    if (!argumentObjectValidator.safeParse(arg).success) {
-      return false;
-    }
-  }
-
-  return true;
-};
+import { type ArgumentObject } from "#/utils/argumentObject";
 
 const argumentAdapter = createEntityAdapter<ArgumentObject>({
   selectId: (arg) => arg.name,
   sortComparer: (a, b) => a.order - b.order,
 });
 
+type ArgumentInfo = {
+  isParsed: boolean;
+};
+
 type CaseState = {
   args: EntityState<ArgumentObject>;
+  info: Record<string, ArgumentInfo>;
   isEdited: boolean;
 };
 
 const initialState: CaseState = {
   args: argumentAdapter.getInitialState(),
+  info: {},
   isEdited: false,
 };
 
@@ -75,8 +38,10 @@ export const caseSlice = createSlice({
       state.isEdited = true;
     },
     removeArgument: (state, action: PayloadAction<ArgumentObject>) => {
-      argumentAdapter.removeOne(state.args, action.payload.name);
+      const { name } = action.payload;
+      argumentAdapter.removeOne(state.args, name);
       state.isEdited = true;
+      delete state.info[name];
     },
     updateArgument: (state, action: PayloadAction<ArgumentObject>) => {
       const { payload } = action;
@@ -85,10 +50,32 @@ export const caseSlice = createSlice({
         changes: payload,
       });
       state.isEdited = true;
+      state.info[payload.name] = {
+        isParsed: false,
+      };
     },
-    setArguments: (state, action: PayloadAction<ArgumentObject[]>) => {
-      argumentAdapter.setAll(state.args, action.payload);
+    setArguments: (
+      state,
+      action: PayloadAction<{
+        data: ArgumentObject[];
+        resetInfoState?: boolean;
+      }>
+    ) => {
+      const { data, resetInfoState } = action.payload;
+      argumentAdapter.setAll(state.args, data);
       state.isEdited = false;
+      if (resetInfoState) {
+        state.info = {};
+      }
+    },
+    setIsArgumentParsed: (
+      state,
+      action: PayloadAction<{ name: string; value: boolean }>
+    ) => {
+      const { name, value } = action.payload;
+      state.info[name] = {
+        isParsed: value,
+      };
     },
     clear: () => ({ ...initialState }),
   },
@@ -108,3 +95,6 @@ export const selectCaseArguments = (state: RootState) =>
   caseArgumentSelector.selectAll(state.testCase.args);
 
 export const selectCaseIsEdited = (state: RootState) => state.testCase.isEdited;
+
+export const selectCaseArgumentsInfo = (state: RootState) =>
+  state.testCase.info;

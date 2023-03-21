@@ -1,7 +1,7 @@
 import { createRuntimeBinaryTree } from "#/hooks/dataStructures/binaryTreeNode";
 import type { AppDispatch } from "#/store/makeStore";
-import type { ArgumentObject } from "#/store/reducers/caseReducer";
 import type { TreeDataState } from "#/store/reducers/treeNodeReducer";
+import { type ArgumentObject } from "#/utils/argumentObject";
 
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,

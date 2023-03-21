@@ -1,8 +1,5 @@
 import { prisma } from "#/server/db/client";
-import {
-  argumentObjectValidator,
-  ArgumentType,
-} from "#/store/reducers/caseReducer";
+import { argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
 
 (async () => {
   const cases = await prisma.playgroundTestCase.findMany();

@@ -6,7 +6,7 @@ import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc"
 
 import defaultJsTemplate from "#/assets/codeTemplates/defaultTemplate.js.txt";
 import shortUUID from "short-uuid";
-import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/store/reducers/caseReducer";
+import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 

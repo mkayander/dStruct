@@ -24,10 +24,16 @@ export type BinaryTreeNodeData = {
   y: number;
 };
 
-type TreePayload<T> = PayloadAction<{
-  name: string;
-  data: T;
-}>;
+type TreePayload<T = void> = PayloadAction<
+  T extends void
+    ? {
+        name: string;
+      }
+    : {
+        name: string;
+        data: T;
+      }
+>;
 
 export type TreeData = {
   count: number;
@@ -143,10 +149,9 @@ export const treeNodeSlice = createSlice({
         treeState.count--;
         treeNodeDataAdapter.removeOne(treeState.nodes, action.payload.data.id);
       }),
-    clear: (state, action: TreePayload<undefined>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) => {
-        treeNodeDataAdapter.removeAll(treeState.nodes);
-      }),
+    clear: (state, action: TreePayload) => {
+      delete state[action.payload.name];
+    },
     clearAll: (): TreeDataState => {
       return {
         ...initialState,
