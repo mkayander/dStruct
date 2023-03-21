@@ -67,11 +67,13 @@ export const ProjectPanel: React.FC = () => {
       return;
     }
 
-    dispatch(
-      projectSlice.actions.update({
-        isEditable: selectedProject.data.userId === session.data.user.id,
-      })
-    );
+    const newState = selectedProject.data.userId === session.data.user.id;
+    isEditable !== newState &&
+      dispatch(
+        projectSlice.actions.update({
+          isEditable: newState,
+        })
+      );
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 
   useEffect(() => {
