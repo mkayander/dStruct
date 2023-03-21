@@ -1,3 +1,17 @@
+# [1.110.0](https://github.com/mkayander/leetpal/compare/v1.109.0...v1.110.0) (2023-03-21)
+
+
+### Bug Fixes
+
+* Updated isEditable state only if it's changed ([03898c6](https://github.com/mkayander/leetpal/commit/03898c60153d6091c5324f458de9856b536f117e))
+
+
+### Features
+
+* Implemented argument type select component ([d964560](https://github.com/mkayander/leetpal/commit/d964560be80993e7e866d4fe69497ff7a9a83d66))
+* Improved args editor ([d30d51e](https://github.com/mkayander/leetpal/commit/d30d51e1ccea39839c6379aa51086380cd4c9b45))
+* Optimized tree parsing ([270bf63](https://github.com/mkayander/leetpal/commit/270bf632a00b51a8fe6aef504fe02cdf56241b4f))
+
 # [1.109.0](https://github.com/mkayander/leetpal/compare/v1.108.2...v1.109.0) (2023-03-21)
 
 
