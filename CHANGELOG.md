@@ -1,3 +1,10 @@
+# [1.109.0](https://github.com/mkayander/leetpal/compare/v1.108.2...v1.109.0) (2023-03-21)
+
+
+### Features
+
+* Updated args editor ([80bfcd6](https://github.com/mkayander/leetpal/commit/80bfcd6aaa09497c1400ecab3efe3cf271770561))
+
 ## [1.108.2](https://github.com/mkayander/leetpal/compare/v1.108.1...v1.108.2) (2023-03-21)
 
 
