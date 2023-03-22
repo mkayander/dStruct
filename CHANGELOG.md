@@ -1,3 +1,10 @@
+# [1.112.0](https://github.com/mkayander/leetpal/compare/v1.111.0...v1.112.0) (2023-03-22)
+
+
+### Features
+
+* Added project difficulty select ([1d6e52c](https://github.com/mkayander/leetpal/commit/1d6e52ce693c3e565e42d902366d2ad1f0277f34))
+
 # [1.111.0](https://github.com/mkayander/leetpal/compare/v1.110.0...v1.111.0) (2023-03-22)
 
 
