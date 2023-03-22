@@ -1,3 +1,11 @@
+# [1.113.0](https://github.com/mkayander/leetpal/compare/v1.112.0...v1.113.0) (2023-03-22)
+
+
+### Features
+
+* Made page container compatible with modals ([b162ef2](https://github.com/mkayander/leetpal/commit/b162ef29ea24e4dd0fd9a2d285599c3635f17489))
+* Use custom scroll container for the project modal ([064487f](https://github.com/mkayander/leetpal/commit/064487fc0a0e473df65996202ee98d85bac61be0))
+
 # [1.112.0](https://github.com/mkayander/leetpal/compare/v1.111.0...v1.112.0) (2023-03-22)
 
 
