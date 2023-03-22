@@ -5,14 +5,12 @@ import {
   Divider,
   IconButton,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { ArgumentTypeSelect } from "#/components/ArgumentTypeSelect";
-import { BinaryTreeInput } from "#/components/BinaryTreeInput";
+import { ArgInput, ArgumentTypeSelect } from "#/components";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
@@ -25,65 +23,12 @@ import {
   type ArgumentObject,
   type ArgumentObjectMap,
   ArgumentType,
-  argumentTypeLabels,
   isArgumentObjectValid,
 } from "#/utils/argumentObject";
 import { type RouterOutputs, trpc } from "#/utils/trpc";
 
 type ArgsEditorProps = {
   selectedCase: UseQueryResult<RouterOutputs["project"]["getCaseBySlug"]>;
-};
-
-const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
-  const dispatch = useAppDispatch();
-
-  const [input, setInput] = useState<string>("");
-  const [inputError, setInputError] = useState<string | null>(null);
-  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
-
-  useEffect(() => {
-    setInput(arg.input);
-  }, [arg.input]);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setHasPendingChanges(false);
-      if (inputError || arg.input === input) return;
-
-      dispatch(
-        caseSlice.actions.updateArgument({
-          ...arg,
-          input,
-        })
-      );
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [arg, dispatch, inputError, input]);
-
-  if (arg.type === ArgumentType.BINARY_TREE) {
-    return (
-      <BinaryTreeInput
-        value={input}
-        onChange={(event) => setInput(event.target.value)}
-        errorText={inputError}
-        setInputError={setInputError}
-        hasPendingChanges={hasPendingChanges}
-        setHasPendingChanges={setHasPendingChanges}
-      />
-    );
-  }
-
-  return (
-    <TextField
-      label={argumentTypeLabels[arg.type]}
-      value={input}
-      fullWidth
-      onChange={(ev) => setInput(ev.target.value)}
-    />
-  );
 };
 
 export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {

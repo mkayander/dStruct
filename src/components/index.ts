@@ -20,4 +20,5 @@ export { EditorStateIcon } from "./EditorStateIcon";
 export { NodesView } from "./NodesView";
 export { BinaryTreeInput } from "./BinaryTreeInput";
 export { ArgsEditor } from "./ArgsEditor";
+export { ArgInput } from "./ArgInput";
 export { ArgumentTypeSelect } from "./ArgumentTypeSelect";
