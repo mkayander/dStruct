@@ -13,7 +13,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   isLoading,
 }) => {
   return (
-    <PageScrollContainer isPage={true}>
+    <PageScrollContainer isPage={true} style={{ height: "100vh" }}>
       <Box sx={{ minHeight: "100vh" }}>
         <MainAppBar />
         <Box component="main" sx={{ minHeight: "85vh" }}>

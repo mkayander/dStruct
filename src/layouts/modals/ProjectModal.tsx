@@ -184,6 +184,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           onSubmit={(e) => {
             formik.handleSubmit(e);
           }}
+          style={{ height: "fit-content" }}
         >
           <DialogTitle>
             {isEditMode ? "📝 Edit Project" : "👷‍♂️ Create New Project"}

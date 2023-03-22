@@ -36,7 +36,10 @@ const PlaygroundPage: NextPageWithLayout = () => {
   return (
     <PageScrollContainer
       isPage={true}
-      style={{ background: darken(theme.palette.background.default, 0.1) }}
+      style={{
+        height: "100vh",
+        background: darken(theme.palette.background.default, 0.1),
+      }}
     >
       <Head>
         <title>dStruct Playground</title>
