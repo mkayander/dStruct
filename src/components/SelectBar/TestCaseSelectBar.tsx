@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import {
   SelectBarChip,
   SelectBarChipSkeleton,
-} from "#/components/SelectBarChip";
+} from "#/components/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
 import { CaseModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";

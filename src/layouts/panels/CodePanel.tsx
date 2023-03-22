@@ -11,7 +11,7 @@ import shortUUID from "short-uuid";
 
 import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
-import { EditorState } from "#/components/EditorStateIcon";
+import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
 import { usePlaygroundSlugs } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";

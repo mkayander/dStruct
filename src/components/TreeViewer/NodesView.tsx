@@ -2,7 +2,7 @@ import { Box, type SxProps } from "@mui/material";
 import type { EntityState } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 
-import { BinaryNode } from "#/components/BinaryNode";
+import { BinaryNode } from "#/components/TreeViewer/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {

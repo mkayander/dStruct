@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-import { NodesView } from "#/components/NodesView";
+import { NodesView } from "#/components/TreeViewer/NodesView";
 import { useAppSelector } from "#/store/hooks";
 import {
   type TreeData,

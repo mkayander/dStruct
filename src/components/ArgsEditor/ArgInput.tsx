@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { BinaryTreeInput } from "#/components/BinaryTreeInput";
+import { BinaryTreeInput } from "#/components/ArgsEditor/BinaryTreeInput";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
 import {

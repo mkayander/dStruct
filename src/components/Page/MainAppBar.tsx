@@ -25,7 +25,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
-import { ThemeSwitch } from "#/components/ThemeSwitch";
+import { ThemeSwitch } from "#/components/Page/ThemeSwitch";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   appBarSlice,
