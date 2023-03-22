@@ -1,3 +1,10 @@
+# [1.114.0](https://github.com/mkayander/leetpal/compare/v1.113.0...v1.114.0) (2023-03-22)
+
+
+### Features
+
+* Extract ArgInput component into a separate file ([ca967ac](https://github.com/mkayander/leetpal/commit/ca967acba9b05f6475bbecf31f5bb2ac51bf35fd))
+
 # [1.113.0](https://github.com/mkayander/leetpal/compare/v1.112.0...v1.113.0) (2023-03-22)
 
 
