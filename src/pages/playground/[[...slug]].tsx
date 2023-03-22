@@ -35,6 +35,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
   const theme = useTheme();
   return (
     <PageScrollContainer
+      isPage={true}
       style={{ background: darken(theme.palette.background.default, 0.1) }}
     >
       <Head>

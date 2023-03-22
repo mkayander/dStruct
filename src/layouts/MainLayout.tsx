@@ -1,4 +1,4 @@
-import { alpha, Box, LinearProgress, useTheme } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import React from "react";
 
 import { Footer, MainAppBar, PageScrollContainer } from "#/components";
@@ -12,32 +12,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   isLoading,
 }) => {
-  const theme = useTheme();
-
   return (
-    <Box
-      sx={{
-        ".os-theme-dark.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle":
-          {
-            background: theme.palette.action.hover,
-            "&:hover": {
-              backgroundColor: alpha(theme.palette.primary.light, 0.3),
-            },
-            "&:active": {
-              backgroundColor: alpha(theme.palette.primary.dark, 0.6),
-            },
-          },
-      }}
-    >
-      <PageScrollContainer>
-        <Box sx={{ minHeight: "100vh" }}>
-          <MainAppBar />
-          <Box component="main" sx={{ minHeight: "85vh" }}>
-            {isLoading ? <LinearProgress variant="indeterminate" /> : children}
-          </Box>
-          <Footer />
+    <PageScrollContainer isPage={true}>
+      <Box sx={{ minHeight: "100vh" }}>
+        <MainAppBar />
+        <Box component="main" sx={{ minHeight: "85vh" }}>
+          {isLoading ? <LinearProgress variant="indeterminate" /> : children}
         </Box>
-      </PageScrollContainer>
-    </Box>
+        <Footer />
+      </Box>
+    </PageScrollContainer>
   );
 };
