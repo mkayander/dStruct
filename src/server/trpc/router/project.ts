@@ -1,4 +1,4 @@
-import { Prisma, ProjectCategory, ProjectDifficulty } from "@prisma/client";
+import { Prisma, ProjectCategory } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
@@ -126,7 +126,6 @@ export const projectRouter = router({
         title: z.string(),
         slug: z.ostring(),
         category: z.nativeEnum(ProjectCategory),
-        difficulty: z.nativeEnum(ProjectDifficulty),
         description: z.ostring(),
         isPublic: z.boolean(),
         isExample: z.oboolean()
@@ -174,7 +173,6 @@ export const projectRouter = router({
         slug: z.ostring(),
         title: z.ostring(),
         category: z.nativeEnum(ProjectCategory).optional(),
-        difficulty: z.nativeEnum(ProjectDifficulty).optional(),
         description: z.ostring(),
         isPublic: z.oboolean(),
         isExample: z.oboolean()
@@ -381,5 +379,3 @@ export const projectRouter = router({
       })
     )
 });
-
-export type ProjectRouter = typeof projectRouter;

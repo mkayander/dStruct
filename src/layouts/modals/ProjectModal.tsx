@@ -18,25 +18,19 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import {
-  type PlaygroundProject,
-  ProjectCategory,
-  ProjectDifficulty,
-} from "@prisma/client";
+import { type PlaygroundProject, ProjectCategory } from "@prisma/client";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { PageScrollContainer } from "#/components";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import { categoryLabels, projectDifficultyLabels, trpc } from "#/utils";
+import { categoryLabels, trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
-const difficultiesList = Object.values(ProjectDifficulty);
 
 const validationSchema = yup.object({
   projectName: yup
@@ -79,7 +73,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectName: "",
       projectSlug: "",
       projectCategory: "" as ProjectCategory,
-      projectDifficulty: "" as ProjectDifficulty,
       projectDescription: "",
       isPublic: true,
     },
@@ -93,7 +86,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
-            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
@@ -104,7 +96,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
-            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
@@ -141,7 +132,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectName: currentProject.title,
         projectSlug: currentProject.slug,
         projectCategory: currentProject.category,
-        projectDifficulty: currentProject.difficulty ?? ProjectDifficulty.EASY,
         projectDescription: currentProject.description ?? "",
         isPublic: currentProject.isPublic,
       });
@@ -179,169 +169,134 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   return (
     <Dialog {...props} onClose={onClose}>
-      <PageScrollContainer options={{ scrollbars: { autoHide: "never" } }}>
-        <form
-          onSubmit={(e) => {
-            formik.handleSubmit(e);
-          }}
-          style={{ height: "fit-content" }}
-        >
-          <DialogTitle>
-            {isEditMode ? "📝 Edit Project" : "👷‍♂️ Create New Project"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Edit the project details below according to your needs.
-            </DialogContentText>
-            <Stack spacing={2} mt={2}>
-              <TextField
-                id="projectSlug"
-                name="projectSlug"
-                label="Slug"
-                variant="outlined"
-                disabled={formik.isSubmitting}
-                value={formik.values.projectSlug}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.projectSlug &&
-                  Boolean(formik.errors.projectSlug)
-                }
-                helperText={
-                  (formik.touched.projectSlug && formik.errors.projectSlug) ||
-                  "You can edit a slug that's used in the URL to this project."
-                }
-              />
-              <TextField
-                id="projectName"
-                name="projectName"
-                label="Name"
-                variant="outlined"
+      <form
+        onSubmit={(e) => {
+          formik.handleSubmit(e);
+        }}
+      >
+        <DialogTitle>
+          {isEditMode ? "📝 Edit Project" : "👷‍♂️ Create New Project"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Edit the project details below according to your needs.
+          </DialogContentText>
+          <Stack spacing={2} mt={2}>
+            <TextField
+              id="projectSlug"
+              name="projectSlug"
+              label="Slug"
+              variant="outlined"
+              disabled={formik.isSubmitting}
+              value={formik.values.projectSlug}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectSlug && Boolean(formik.errors.projectSlug)
+              }
+              helperText={
+                (formik.touched.projectSlug && formik.errors.projectSlug) ||
+                "You can edit a slug that's used in the URL to this project."
+              }
+            />
+            <TextField
+              id="projectName"
+              name="projectName"
+              label="Name"
+              variant="outlined"
+              required
+              disabled={formik.isSubmitting}
+              value={formik.values.projectName}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectName && Boolean(formik.errors.projectName)
+              }
+              helperText={
+                (formik.touched.projectName && formik.errors.projectName) ||
+                "Enter a name for your new project."
+              }
+            />
+            <FormControl fullWidth>
+              <InputLabel required id="new-proj-select-category-label">
+                Category
+              </InputLabel>
+              <Select
+                id="projectCategory"
+                name="projectCategory"
+                labelId="new-proj-select-category-label"
+                label="Category"
                 required
                 disabled={formik.isSubmitting}
-                value={formik.values.projectName}
+                value={formik.values.projectCategory}
+                // defaultValue="Binary Tree"
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.projectName &&
-                  Boolean(formik.errors.projectName)
+                  formik.touched.projectCategory &&
+                  Boolean(formik.errors.projectCategory)
                 }
-                helperText={
-                  (formik.touched.projectName && formik.errors.projectName) ||
-                  "Enter a name for your new project."
-                }
-              />
-              <FormControl fullWidth>
-                <InputLabel required id="new-proj-select-category-label">
-                  Category
-                </InputLabel>
-                <Select
-                  id="projectCategory"
-                  name="projectCategory"
-                  labelId="new-proj-select-category-label"
-                  label="Category"
-                  required
-                  disabled={formik.isSubmitting}
-                  value={formik.values.projectCategory}
-                  // defaultValue="Binary Tree"
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.projectCategory &&
-                    Boolean(formik.errors.projectCategory)
-                  }
-                >
-                  {categoriesList.map((category) => (
-                    <MenuItem key={category} value={category}>
-                      {categoryLabels[category]}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>
-                  Select a data structure category.
-                </FormHelperText>
-              </FormControl>
-              <FormControl fullWidth>
-                <InputLabel required id="new-proj-select-category-label">
-                  Difficulty
-                </InputLabel>
-                <Select
-                  id="projectDifficulty"
-                  name="projectDifficulty"
-                  labelId="new-proj-select-category-label"
-                  label="Category"
-                  required
-                  disabled={formik.isSubmitting}
-                  value={formik.values.projectDifficulty}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.projectDifficulty &&
-                    Boolean(formik.errors.projectDifficulty)
-                  }
-                >
-                  {difficultiesList.map((difficulty) => (
-                    <MenuItem key={difficulty} value={difficulty}>
-                      {projectDifficultyLabels[difficulty]}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>
-                  Select a data structure category.
-                </FormHelperText>
-              </FormControl>
-              <TextField
-                id="projectDescription"
-                name="projectDescription"
-                label="Description"
-                variant="outlined"
-                multiline
-                minRows={2}
-                maxRows={8}
-                disabled={formik.isSubmitting}
-                value={formik.values.projectDescription}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.projectDescription &&
-                  Boolean(formik.errors.projectDescription)
-                }
-                helperText={
-                  (formik.touched.projectDescription &&
-                    formik.errors.projectDescription) ||
-                  "Optional project description."
-                }
-              />
-              <FormControlLabel
-                control={
-                  <Switch
-                    id="isPublic"
-                    name="isPublic"
-                    disabled={formik.isSubmitting}
-                    checked={formik.values.isPublic}
-                    onChange={formik.handleChange}
-                  />
-                }
-                label="Public"
-              />
-            </Stack>
-          </DialogContent>
-          <DialogActions>
-            {isEditMode && (
-              <LoadingButton
-                title="Delete this project"
-                color="error"
-                endIcon={<DeleteForever />}
-                loading={deleteProject.isLoading}
-                loadingPosition="end"
-                onClick={handleDeleteProject}
-                sx={{ mr: "auto" }}
               >
-                Delete
-              </LoadingButton>
-            )}
-            <Button onClick={onClose}>Cancel</Button>
-            <LoadingButton type="submit" loading={formik.isSubmitting}>
-              {isEditMode ? "Update" : "Create"}
+                {categoriesList.map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {categoryLabels[category]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select a data structure category.</FormHelperText>
+            </FormControl>
+            <TextField
+              id="projectDescription"
+              name="projectDescription"
+              label="Description"
+              variant="outlined"
+              multiline
+              minRows={2}
+              maxRows={8}
+              disabled={formik.isSubmitting}
+              value={formik.values.projectDescription}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectDescription &&
+                Boolean(formik.errors.projectDescription)
+              }
+              helperText={
+                (formik.touched.projectDescription &&
+                  formik.errors.projectDescription) ||
+                "Optional project description."
+              }
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  id="isPublic"
+                  name="isPublic"
+                  disabled={formik.isSubmitting}
+                  checked={formik.values.isPublic}
+                  onChange={formik.handleChange}
+                />
+              }
+              label="Public"
+            />
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          {isEditMode && (
+            <LoadingButton
+              title="Delete this project"
+              color="error"
+              endIcon={<DeleteForever />}
+              loading={deleteProject.isLoading}
+              loadingPosition="end"
+              onClick={handleDeleteProject}
+              sx={{ mr: "auto" }}
+            >
+              Delete
             </LoadingButton>
-          </DialogActions>
-        </form>
-      </PageScrollContainer>
+          )}
+          <Button onClick={onClose}>Cancel</Button>
+          <LoadingButton type="submit" loading={formik.isSubmitting}>
+            {isEditMode ? "Update" : "Create"}
+          </LoadingButton>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

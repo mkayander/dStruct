@@ -2,6 +2,9 @@ import {
   EventRepeatTwoTone,
   FavoriteBorder,
   HistoryToggleOff,
+  SignalCellular0Bar,
+  SignalCellular2Bar,
+  SignalCellular4Bar,
 } from "@mui/icons-material";
 import EventIcon from "@mui/icons-material/Event";
 import {
@@ -14,6 +17,7 @@ import {
   Paper,
   Skeleton,
   Stack,
+  type SvgIcon,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -22,8 +26,7 @@ import React from "react";
 
 import { CircularPercentage, RatingButtons, TopicTag } from "#/components";
 import { TopicTagSkeleton } from "#/components/TopicTag/TopicTag";
-import type { QuestionDataQueryResult } from "#/graphql/generated";
-import { difficultyIconMap } from "#/utils";
+import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
 
 const SummarySkeleton = () => (
   <Stack
@@ -61,6 +64,13 @@ const SummarySkeleton = () => (
   </Stack>
 );
 
+const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
+  All: SignalCellular0Bar,
+  Easy: SignalCellular0Bar,
+  Medium: SignalCellular2Bar,
+  Hard: SignalCellular4Bar,
+};
+
 interface QuestionSummaryProps
   extends Exclude<BoxProps, "position" | "zIndex"> {
   questionDataQuery: QuestionDataQueryResult;
@@ -76,7 +86,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
 
   const difficultyColor =
     question && theme.palette.question[question.difficulty].main;
-  const DifficultyIcon = question && difficultyIconMap[question.difficulty];
+  const DifficultyIcon = question && DifficultyIconMap[question.difficulty];
   const shadowColor = darken(theme.palette.primary.dark, 0.5);
 
   return (
