@@ -1,3 +1,10 @@
+## [1.114.1](https://github.com/mkayander/leetpal/compare/v1.114.0...v1.114.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* Fixed scrollbar container height style setting ([52d555a](https://github.com/mkayander/leetpal/commit/52d555ab829f5922fb389d0a4aeb7fd98af23fad))
+
 # [1.114.0](https://github.com/mkayander/leetpal/compare/v1.113.0...v1.114.0) (2023-03-22)
 
 
