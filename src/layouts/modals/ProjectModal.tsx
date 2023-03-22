@@ -18,7 +18,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { type PlaygroundProject, ProjectCategory } from "@prisma/client";
+import {
+  type PlaygroundProject,
+  ProjectCategory,
+  ProjectDifficulty,
+} from "@prisma/client";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
@@ -28,9 +32,10 @@ import * as yup from "yup";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import { categoryLabels, trpc } from "#/utils";
+import { categoryLabels, projectDifficultyLabels, trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
+const difficultiesList = Object.values(ProjectDifficulty);
 
 const validationSchema = yup.object({
   projectName: yup
@@ -73,6 +78,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectName: "",
       projectSlug: "",
       projectCategory: "" as ProjectCategory,
+      projectDifficulty: "" as ProjectDifficulty,
       projectDescription: "",
       isPublic: true,
     },
@@ -86,6 +92,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
+            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
@@ -96,6 +103,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
+            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             isPublic: values.isPublic,
           });
@@ -132,6 +140,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectName: currentProject.title,
         projectSlug: currentProject.slug,
         projectCategory: currentProject.category,
+        projectDifficulty: currentProject.difficulty ?? ProjectDifficulty.EASY,
         projectDescription: currentProject.description ?? "",
         isPublic: currentProject.isPublic,
       });
@@ -237,6 +246,32 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {categoriesList.map((category) => (
                   <MenuItem key={category} value={category}>
                     {categoryLabels[category]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select a data structure category.</FormHelperText>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel required id="new-proj-select-category-label">
+                Difficulty
+              </InputLabel>
+              <Select
+                id="projectDifficulty"
+                name="projectDifficulty"
+                labelId="new-proj-select-category-label"
+                label="Category"
+                required
+                disabled={formik.isSubmitting}
+                value={formik.values.projectDifficulty}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.projectDifficulty &&
+                  Boolean(formik.errors.projectDifficulty)
+                }
+              >
+                {difficultiesList.map((difficulty) => (
+                  <MenuItem key={difficulty} value={difficulty}>
+                    {projectDifficultyLabels[difficulty]}
                   </MenuItem>
                 ))}
               </Select>
