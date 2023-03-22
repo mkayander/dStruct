@@ -1,3 +1,10 @@
+# [1.111.0](https://github.com/mkayander/leetpal/compare/v1.110.0...v1.111.0) (2023-03-22)
+
+
+### Features
+
+* Improved type select display ([8b96c85](https://github.com/mkayander/leetpal/commit/8b96c85b68f2e9d02593adc74dc97d66d2e62cba))
+
 # [1.110.0](https://github.com/mkayander/leetpal/compare/v1.109.0...v1.110.0) (2023-03-21)
 
 
