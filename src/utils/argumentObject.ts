@@ -3,6 +3,7 @@ import { z } from "zod";
 export enum ArgumentType {
   "BINARY_TREE" = "binaryTree",
   "ARRAY" = "array",
+  "MATRIX" = "matrix",
   "STRING" = "string",
   "NUMBER" = "number",
   "BOOLEAN" = "boolean",
@@ -46,6 +47,7 @@ export type ArgumentObjectMap = Record<string, ArgumentObject>;
 export const argumentTypeLabels: Record<ArgumentType, string> = {
   [ArgumentType.BINARY_TREE]: "Binary Tree",
   [ArgumentType.ARRAY]: "Array",
+  [ArgumentType.MATRIX]: "Matrix",
   [ArgumentType.STRING]: "String",
   [ArgumentType.NUMBER]: "Number",
   [ArgumentType.BOOLEAN]: "Boolean",

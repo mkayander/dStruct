@@ -1,6 +1,7 @@
 import {
   AccountTree,
   DataArray,
+  GridOn,
   LooksOne,
   RadioButtonChecked,
   TextFields,
@@ -30,9 +31,10 @@ const iconSxProps: SxProps = {
   mb: "2px",
 };
 
-const typeIconsMap = {
+const typeIconsMap: Record<ArgumentType, React.ReactElement> = {
   [ArgumentType.BINARY_TREE]: <AccountTree sx={iconSxProps} />,
   [ArgumentType.NUMBER]: <LooksOne sx={iconSxProps} />,
+  [ArgumentType.MATRIX]: <GridOn sx={iconSxProps} />,
   [ArgumentType.ARRAY]: <DataArray sx={iconSxProps} />,
   [ArgumentType.BOOLEAN]: <RadioButtonChecked sx={iconSxProps} />,
   [ArgumentType.STRING]: <TextFields sx={iconSxProps} />,
