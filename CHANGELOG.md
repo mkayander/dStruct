@@ -1,3 +1,12 @@
+# [1.115.0](https://github.com/mkayander/leetpal/compare/v1.114.1...v1.115.0) (2023-03-23)
+
+
+### Features
+
+* Added matrix argument type ([6d5a6d3](https://github.com/mkayander/leetpal/commit/6d5a6d36018943a7332f174aa1cdd73cb6c59420))
+* Implemented boolean toggle input ([f51dd1e](https://github.com/mkayander/leetpal/commit/f51dd1e775d8927eb4c60786b84d269e5b308d8e))
+* Improved arg input component ([9e8663a](https://github.com/mkayander/leetpal/commit/9e8663a51888e93b631fdd45b863fa655dabf644))
+
 ## [1.114.1](https://github.com/mkayander/leetpal/compare/v1.114.0...v1.114.1) (2023-03-22)
 
 
