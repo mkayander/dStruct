@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { BinaryTreeInput } from "#/components/ArgsEditor/BinaryTreeInput";
+import { BooleanToggleInput } from "#/components/ArgsEditor/BooleanToggleInput";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
 import {
@@ -13,43 +14,29 @@ import {
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
   const dispatch = useAppDispatch();
 
-  const [input, setInput] = useState<string>("");
-  const [inputError, setInputError] = useState<string | null>(null);
-  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
+  const [input, setInput] = useState<string>(arg.input);
 
   useEffect(() => {
     setInput(arg.input);
   }, [arg.input]);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setHasPendingChanges(false);
-      if (inputError || arg.input === input) return;
+    if (arg.input === input) return;
 
-      dispatch(
-        caseSlice.actions.updateArgument({
-          ...arg,
-          input,
-        })
-      );
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [arg, dispatch, inputError, input]);
+    dispatch(
+      caseSlice.actions.updateArgument({
+        ...arg,
+        input: input,
+      })
+    );
+  }, [arg, dispatch, input]);
 
   if (arg.type === ArgumentType.BINARY_TREE) {
-    return (
-      <BinaryTreeInput
-        value={input}
-        onChange={(event) => setInput(event.target.value)}
-        errorText={inputError}
-        setInputError={setInputError}
-        hasPendingChanges={hasPendingChanges}
-        setHasPendingChanges={setHasPendingChanges}
-      />
-    );
+    return <BinaryTreeInput value={input} onChange={setInput} />;
+  }
+
+  if (arg.type === ArgumentType.BOOLEAN) {
+    return <BooleanToggleInput value={input} onChange={setInput} />;
   }
 
   return (

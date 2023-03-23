@@ -4,15 +4,12 @@ import {
   TextField,
   type TextFieldProps,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 
-type BinaryTreeInputProps = TextFieldProps & {
+type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
-  errorText: string | null;
-  setInputError: React.Dispatch<React.SetStateAction<string | null>>;
-  hasPendingChanges?: boolean;
-  setHasPendingChanges: React.Dispatch<React.SetStateAction<boolean>>;
+  onChange: (value: string) => void;
 };
 
 const inputValidator = z.array(z.null().or(z.number()));
@@ -20,19 +17,23 @@ const inputValidator = z.array(z.null().or(z.number()));
 export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
   value,
   onChange,
-  errorText,
-  setInputError,
-  hasPendingChanges,
-  setHasPendingChanges,
   ...restProps
 }) => {
+  const [rawInput, setRawInput] = useState<string>(value);
+  const [inputError, setInputError] = useState<string | null>(null);
+  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
+
   useEffect(() => {
-    if (!value) {
+    setRawInput(value);
+  }, [value]);
+
+  useEffect(() => {
+    if (!rawInput) {
       setInputError(null);
     }
 
     try {
-      const parsed = JSON.parse(value);
+      const parsed = JSON.parse(rawInput);
       if (Array.isArray(parsed)) {
         if (!inputValidator.safeParse(parsed).success) {
           setInputError("Input must be an array of numbers or nulls");
@@ -46,10 +47,23 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
     } catch (e: any) {
       setInputError(e.message);
     }
-  }, [setInputError, value]);
+  }, [setInputError, rawInput]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setHasPendingChanges(false);
+      if (inputError || rawInput === value) return;
+
+      onChange(rawInput);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [inputError, onChange, rawInput, value]);
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(ev);
+    setRawInput(ev.target.value);
     setHasPendingChanges(true);
   };
 
@@ -57,10 +71,10 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
     <TextField
       label="Binary Tree (input array)"
       placeholder="e.g.: [1,2,3,null,5]"
-      value={value}
+      value={rawInput}
       onChange={handleChange}
-      error={!!errorText}
-      helperText={errorText}
+      error={!!inputError}
+      helperText={inputError}
       fullWidth
       InputProps={{
         endAdornment: (
