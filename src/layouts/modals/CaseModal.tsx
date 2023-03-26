@@ -68,15 +68,20 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
           description: values.caseDescription,
         });
         void setCase(values.caseSlug);
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
           formikHelpers.setErrors({
             caseName: error.message,
           });
-        } else {
+        } else if (error instanceof Error) {
           enqueueSnackbar(error.message, {
             variant: "error",
           });
+        } else {
+          enqueueSnackbar("Unknown error", {
+            variant: "error",
+          });
+          console.error(error);
         }
       }
     },

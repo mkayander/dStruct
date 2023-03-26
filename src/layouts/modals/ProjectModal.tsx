@@ -112,15 +112,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             variant: "success",
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error instanceof TRPCClientError && error.data.httpStatus === 400) {
           formikHelpers.setErrors({
             projectName: error.message,
           });
-        } else {
+        } else if (error instanceof Error) {
           enqueueSnackbar(error.message, {
             variant: "error",
           });
+        } else {
+          enqueueSnackbar("Something went wrong", {
+            variant: "error",
+          });
+          console.error(error);
         }
       }
     },

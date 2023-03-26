@@ -44,8 +44,13 @@ export const BinaryTreeInput: React.FC<BinaryTreeInputProps> = ({
       } else {
         setInputError(`Input must be an array, but got ${typeof parsed}`);
       }
-    } catch (e: any) {
-      setInputError(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setInputError(e.message);
+      } else {
+        setInputError("Unknown error");
+        console.error(e);
+      }
     }
   }, [setInputError, rawInput]);
 
