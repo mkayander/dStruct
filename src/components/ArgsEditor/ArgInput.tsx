@@ -1,8 +1,9 @@
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import * as yup from "yup";
 
-import { BinaryTreeInput } from "#/components/ArgsEditor/BinaryTreeInput";
 import { BooleanToggleInput } from "#/components/ArgsEditor/BooleanToggleInput";
+import { JsonInput } from "#/components/ArgsEditor/JsonInput";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
 import {
@@ -10,6 +11,27 @@ import {
   ArgumentType,
   argumentTypeLabels,
 } from "#/utils/argumentObject";
+
+const validationSchemaMap = {
+  [ArgumentType.ARRAY]: yup
+    .array()
+    .of(
+      yup
+        .number()
+        .typeError(
+          (params) =>
+            `${params.path} Array must only contain numbers, but got: '${params.originalValue}'`
+        )
+    ),
+  [ArgumentType.BINARY_TREE]: yup.array().of(yup.number().nullable()),
+  [ArgumentType.MATRIX]: yup.array().of(yup.array().of(yup.number())),
+} as const;
+
+const labelMap = {
+  [ArgumentType.ARRAY]: "Array",
+  [ArgumentType.BINARY_TREE]: "Binary Tree",
+  [ArgumentType.MATRIX]: "Matrix",
+} as const;
 
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
   const dispatch = useAppDispatch();
@@ -31,8 +53,18 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
     );
   }, [arg, dispatch, input]);
 
-  if (arg.type === ArgumentType.BINARY_TREE) {
-    return <BinaryTreeInput value={input} onChange={setInput} />;
+  switch (arg.type) {
+    case ArgumentType.ARRAY:
+    case ArgumentType.BINARY_TREE:
+    case ArgumentType.MATRIX:
+      return (
+        <JsonInput
+          label={labelMap[arg.type]}
+          value={input}
+          onChange={setInput}
+          validationSchema={validationSchemaMap[arg.type]}
+        />
+      );
   }
 
   if (arg.type === ArgumentType.BOOLEAN) {
@@ -43,6 +75,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
     <TextField
       label={argumentTypeLabels[arg.type]}
       value={input}
+      type={arg.type === ArgumentType.NUMBER ? "number" : "text"}
       fullWidth
       onChange={(ev) => setInput(ev.target.value)}
     />
