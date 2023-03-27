@@ -1,3 +1,10 @@
+# [1.116.0](https://github.com/mkayander/leetpal/compare/v1.115.1...v1.116.0) (2023-03-27)
+
+
+### Features
+
+* Improved arg inputs. Added yup validation for different types. ([bbffbca](https://github.com/mkayander/leetpal/commit/bbffbca7519e2fed9595a9d0804bc689dfe92bd4))
+
 ## [1.115.1](https://github.com/mkayander/leetpal/compare/v1.115.0...v1.115.1) (2023-03-27)
 
 
