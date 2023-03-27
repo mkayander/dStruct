@@ -1,3 +1,10 @@
+## [1.115.1](https://github.com/mkayander/leetpal/compare/v1.115.0...v1.115.1) (2023-03-27)
+
+
+### Bug Fixes
+
+* Use proper error types ([cc1573b](https://github.com/mkayander/leetpal/commit/cc1573b59d87a4a2c90a7a63e288faa068cd159f))
+
 # [1.115.0](https://github.com/mkayander/leetpal/compare/v1.114.1...v1.115.0) (2023-03-23)
 
 
