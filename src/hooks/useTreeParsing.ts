@@ -41,6 +41,7 @@ const parseBinaryTreeArgument = (rawInput: string) => {
       depth,
       x: 0,
       y: 0,
+      children: [],
     };
 
     return newDataNodes[newId];
@@ -68,14 +69,14 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
     const newLeft = createNodeData(input[i], newDepth);
     if (newLeft) {
-      current.left = newLeft.id;
+      current.children[0] = newLeft.id;
       queue.push(newLeft);
     }
     i++;
 
     const newRight = createNodeData(input[i], newDepth);
     if (newRight) {
-      current.right = newRight.id;
+      current.children[1] = newRight.id;
       queue.push(newRight);
     }
     i++;

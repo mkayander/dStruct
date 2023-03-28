@@ -17,8 +17,7 @@ const relationProps = {
 
 export const useChildNodes = (
   treeName: string,
-  leftId: string | undefined,
-  rightId: string | undefined,
+  children: string[],
   rootId: string,
   color: string | undefined,
   nodeColor: string,
@@ -26,6 +25,7 @@ export const useChildNodes = (
   y: number,
   depth: number
 ) => {
+  const { 0: leftId, 1: rightId } = children;
   const dispatch = useAppDispatch();
   const maxDepth = useAppSelector(selectNamedTreeMaxDepth(treeName)) ?? 0;
   const leftData = useAppSelector(selectNodeDataById(treeName, leftId ?? ""));

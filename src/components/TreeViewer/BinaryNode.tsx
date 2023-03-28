@@ -34,8 +34,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
   treeName,
   id,
   value,
-  left,
-  right,
+  children,
   color,
   animation,
   isHighlighted,
@@ -101,8 +100,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = ({
 
   const { relations } = useChildNodes(
     treeName,
-    left,
-    right,
+    children,
     id,
     color,
     nodeColor,
