@@ -17,13 +17,8 @@ const validationSchemaMap = {
     .array()
     .typeError((params) => `This must be an array, but got ${params.value}`),
   [ArgumentType.BINARY_TREE]: yup.array().of(yup.number().nullable()),
+  [ArgumentType.LINKED_LIST]: yup.array().of(yup.number()),
   [ArgumentType.MATRIX]: yup.array().of(yup.array().of(yup.number())),
-} as const;
-
-const labelMap = {
-  [ArgumentType.ARRAY]: "Array",
-  [ArgumentType.BINARY_TREE]: "Binary Tree",
-  [ArgumentType.MATRIX]: "Matrix",
 } as const;
 
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
@@ -52,7 +47,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
     case ArgumentType.MATRIX:
       return (
         <JsonInput
-          label={labelMap[arg.type]}
+          label={argumentTypeLabels[arg.type]}
           value={input}
           onChange={setInput}
           validationSchema={validationSchemaMap[arg.type]}

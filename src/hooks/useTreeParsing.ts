@@ -14,13 +14,32 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { isNumber } from "#/utils";
+import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
 
-// [3,9,20,null,null,15,7]
+export type TreeInput = (number | null)[];
 
-export type BinaryTreeInput = (number | null)[];
+const createNodeData = (
+  map: Record<string, BinaryTreeNodeData>,
+  value: number | undefined | null,
+  depth: number
+) => {
+  if (!isNumber(value)) return;
+
+  const newId = uuid4.generate();
+  map[newId] = {
+    id: newId,
+    value: value,
+    depth,
+    x: 0,
+    y: 0,
+    children: [],
+  };
+
+  return map[newId];
+};
 
 const parseBinaryTreeArgument = (rawInput: string) => {
-  let input: BinaryTreeInput | null = null;
+  let input: TreeInput | null = null;
   try {
     input = JSON.parse(rawInput);
   } catch (e) {
@@ -29,28 +48,12 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
   if (!input || input.length === 0) return;
 
-  const newDataNodes: Record<string, BinaryTreeNodeData> = {};
-
-  const createNodeData = (value: number | undefined | null, depth: number) => {
-    if (!isNumber(value)) return;
-
-    const newId = uuid4.generate();
-    newDataNodes[newId] = {
-      id: newId,
-      value: value,
-      depth,
-      x: 0,
-      y: 0,
-      children: [],
-    };
-
-    return newDataNodes[newId];
-  };
+  const nodesMap: Record<string, BinaryTreeNodeData> = {};
 
   const rootNum = input[0];
   if (!isNumber(rootNum)) return;
 
-  const rootData = createNodeData(rootNum, 0);
+  const rootData = createNodeData(nodesMap, rootNum, 0);
   if (!rootData) return;
 
   const queue: BinaryTreeNodeData[] = [rootData];
@@ -67,14 +70,14 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
     maxDepth = newDepth;
 
-    const newLeft = createNodeData(input[i], newDepth);
+    const newLeft = createNodeData(nodesMap, input[i], newDepth);
     if (newLeft) {
       current.children[0] = newLeft.id;
       queue.push(newLeft);
     }
     i++;
 
-    const newRight = createNodeData(input[i], newDepth);
+    const newRight = createNodeData(nodesMap, input[i], newDepth);
     if (newRight) {
       current.children[1] = newRight.id;
       queue.push(newRight);
@@ -82,7 +85,50 @@ const parseBinaryTreeArgument = (rawInput: string) => {
     i++;
   }
 
-  return { maxDepth, newDataNodes };
+  return { maxDepth, nodesMap };
+};
+
+const parseLinkedListArgument = (rawInput: string) => {
+  let input: TreeInput | null = null;
+  try {
+    input = JSON.parse(rawInput);
+  } catch (e) {
+    console.warn(e);
+  }
+
+  if (!input || input.length === 0) return;
+
+  const nodesMap: Record<string, BinaryTreeNodeData> = {};
+
+  let prevNode: BinaryTreeNodeData | null = null;
+  let maxDepth = 0;
+
+  for (const value of input) {
+    if (!isNumber(value)) continue;
+
+    const newNode = createNodeData(nodesMap, value, 0);
+    if (!newNode) continue;
+
+    if (prevNode) {
+      prevNode.children[0] = newNode.id;
+    }
+
+    prevNode = newNode;
+    maxDepth++;
+  }
+
+  return { maxDepth, nodesMap };
+};
+
+const parseArgument = (arg: ArgumentObject) => {
+  switch (arg.type) {
+    case ArgumentType.BINARY_TREE:
+      return parseBinaryTreeArgument(arg.input);
+    case ArgumentType.LINKED_LIST:
+      return parseLinkedListArgument(arg.input);
+    default:
+      return;
+  }
 };
 
 export const useTreeParsing = () => {
@@ -95,7 +141,14 @@ export const useTreeParsing = () => {
   useEffect(() => {
     const removedTrees = new Set<string>(Object.keys(treeData));
     for (const arg of args) {
-      if (arg.type !== "binaryTree") continue;
+      if (
+        !(
+          arg.type === ArgumentType.BINARY_TREE ||
+          arg.type === ArgumentType.LINKED_LIST
+        )
+      )
+        continue;
+
       removedTrees.delete(arg.name);
       if (argsInfo[arg.name]?.isParsed) continue;
 
@@ -105,7 +158,7 @@ export const useTreeParsing = () => {
         })
       );
 
-      const parsed = parseBinaryTreeArgument(arg.input);
+      const parsed = parseArgument(arg);
       if (!parsed) continue;
 
       dispatch(treeNodeSlice.actions.init({ name: arg.name }));
@@ -114,7 +167,7 @@ export const useTreeParsing = () => {
           name: arg.name,
           data: {
             maxDepth: parsed.maxDepth,
-            nodes: Object.values(parsed.newDataNodes),
+            nodes: Object.values(parsed.nodesMap),
           },
         })
       );
