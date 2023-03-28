@@ -17,7 +17,7 @@ const relationProps = {
 
 export const useChildNodes = (
   treeName: string,
-  children: string[],
+  children: (string | undefined)[],
   rootId: string,
   color: string | undefined,
   nodeColor: string,

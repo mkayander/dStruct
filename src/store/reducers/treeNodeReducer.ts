@@ -18,7 +18,7 @@ export type BinaryTreeNodeData = {
   color?: string;
   animation?: AnimationName;
   isHighlighted?: boolean;
-  children: string[];
+  children: (string | undefined)[];
   x: number;
   y: number;
 };

@@ -83,7 +83,10 @@ export const NodesView: React.FC<NodesViewProps> = ({
               data: {
                 id: frame.nodeId,
                 changes: {
-                  left: frame.args[0] || undefined,
+                  children: [
+                    frame.args[0] || undefined,
+                    nodes.entities[frame.nodeId]?.children[1],
+                  ],
                 },
               },
             })
@@ -96,7 +99,10 @@ export const NodesView: React.FC<NodesViewProps> = ({
               data: {
                 id: frame.nodeId,
                 changes: {
-                  right: frame.args[0] || undefined,
+                  children: [
+                    nodes.entities[frame.nodeId]?.children[0],
+                    frame.args[0] || undefined,
+                  ],
                 },
               },
             })
@@ -133,6 +139,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
     replayCount,
     playbackInterval,
     treeName,
+    nodes.entities,
   ]);
 
   return (
