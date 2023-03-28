@@ -1,3 +1,17 @@
+# [1.117.0](https://github.com/mkayander/leetpal/compare/v1.116.0...v1.117.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* Fixed binary tree set children action ([bdc9620](https://github.com/mkayander/leetpal/commit/bdc96201b4499473d52128677ae596f39a0abb3e))
+
+
+### Features
+
+* Allow array items to be of any type ([bc51dd2](https://github.com/mkayander/leetpal/commit/bc51dd2c69cec59257f5380a5f588eb6eb70d60f))
+* Implemented linked list arg type & basic parsing ([2ca42e8](https://github.com/mkayander/leetpal/commit/2ca42e85304462a2009f7026eb57eeff65bc7e00))
+* Store node children as generic ids array ([92aa31e](https://github.com/mkayander/leetpal/commit/92aa31ed1a70ad02567e24f33652eea951c7912f))
+
 # [1.116.0](https://github.com/mkayander/leetpal/compare/v1.115.1...v1.116.0) (2023-03-27)
 
 
