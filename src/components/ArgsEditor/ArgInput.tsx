@@ -15,14 +15,7 @@ import {
 const validationSchemaMap = {
   [ArgumentType.ARRAY]: yup
     .array()
-    .of(
-      yup
-        .number()
-        .typeError(
-          (params) =>
-            `${params.path} Array must only contain numbers, but got: '${params.originalValue}'`
-        )
-    ),
+    .typeError((params) => `This must be an array, but got ${params.value}`),
   [ArgumentType.BINARY_TREE]: yup.array().of(yup.number().nullable()),
   [ArgumentType.MATRIX]: yup.array().of(yup.array().of(yup.number())),
 } as const;
