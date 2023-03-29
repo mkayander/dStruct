@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NodeBase } from "#/components/TreeViewer/NodeBase";
-import { useChildNodes, useNodeColors } from "#/hooks";
+import { useLinkedListChildNode, useNodeColors } from "#/hooks";
 import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
@@ -10,12 +10,12 @@ export type LinkedListProps = BinaryTreeNodeData & {
   type: ArgumentTreeType;
 };
 
-export const LinkedList: React.FC<LinkedListProps> = (props) => {
+export const LinkedListNode: React.FC<LinkedListProps> = (props) => {
   const { color } = props;
 
   const { nodeColor, shadowColor } = useNodeColors(color);
 
-  const { relations } = useChildNodes(props, nodeColor);
+  const { relations } = useLinkedListChildNode(props, nodeColor);
 
   return (
     <NodeBase

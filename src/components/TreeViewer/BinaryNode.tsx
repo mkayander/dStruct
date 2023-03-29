@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NodeBase } from "#/components/TreeViewer/NodeBase";
-import { useChildNodes, useNodeColors } from "#/hooks";
+import { useBinaryChildNodes, useNodeColors } from "#/hooks";
 import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
@@ -15,7 +15,7 @@ export const BinaryNode: React.FC<BinaryNodeProps> = (props) => {
 
   const { nodeColor, shadowColor } = useNodeColors(color);
 
-  const { relations } = useChildNodes(props, nodeColor);
+  const { relations } = useBinaryChildNodes(props, nodeColor);
 
   return (
     <NodeBase

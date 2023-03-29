@@ -1,4 +1,4 @@
-import { alpha, Box, useTheme } from "@mui/material";
+import { alpha, Box, type SxProps, useTheme } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -9,6 +9,7 @@ import {
   type TreeData,
   treeDataSelector,
 } from "#/store/reducers/treeNodeReducer";
+import { ArgumentType } from "#/utils/argumentObject";
 
 const overlayStyles = {
   content: "''",
@@ -71,24 +72,36 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   const binaryTrees = useMemo(() => {
     let prevTree: TreeData | null = null;
-    let leftPos = 0;
-    return Object.entries(treeState).map(([treeName, data]) => {
-      if (prevTree) {
-        leftPos += 200 + prevTree.maxDepth ** 5.3;
-      }
-      prevTree = data;
-      return (
-        <NodesView
-          key={treeName}
-          treeName={treeName}
-          type={data.type}
-          nodes={data.nodes}
-          playbackInterval={playbackInterval}
-          replayCount={replayCount}
-          sx={{ left: leftPos }}
-        />
-      );
-    });
+    let leftOffset = 0;
+    let verticalCount = 0;
+    return Object.entries(treeState)
+      .sort(([, { order: a }], [, { order: b }]) => a - b)
+      .map(([treeName, data]) => {
+        const sx: SxProps = { left: 0 };
+        if (data.type === ArgumentType.BINARY_TREE) {
+          if (prevTree?.type === ArgumentType.BINARY_TREE) {
+            leftOffset += 200 + prevTree.maxDepth ** 5.3;
+          }
+          sx.left = leftOffset;
+          sx.top = verticalCount * 72;
+        } else {
+          sx.top = verticalCount * 72;
+          verticalCount++;
+          leftOffset = 0;
+        }
+        prevTree = data;
+        return (
+          <NodesView
+            key={treeName}
+            treeName={treeName}
+            type={data.type}
+            nodes={data.nodes}
+            playbackInterval={playbackInterval}
+            replayCount={replayCount}
+            sx={sx}
+          />
+        );
+      });
   }, [playbackInterval, replayCount, treeState]);
 
   return (

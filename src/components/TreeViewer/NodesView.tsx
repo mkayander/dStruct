@@ -3,6 +3,7 @@ import type { EntityState } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 
 import { BinaryNode } from "#/components/TreeViewer/BinaryNode";
+import { LinkedListNode } from "#/components/TreeViewer/LinkedListNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {
@@ -10,7 +11,7 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { validateAnimationName } from "#/utils";
-import { type ArgumentTreeType } from "#/utils/argumentObject";
+import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
 
 type NodesViewProps = {
   treeName: string;
@@ -136,6 +137,8 @@ export const NodesView: React.FC<NodesViewProps> = ({
     treeName,
   ]);
 
+  const Node = type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
+
   return (
     <Box
       sx={{
@@ -148,12 +151,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
       {Object.values(nodes.entities).map(
         (node) =>
           node && (
-            <BinaryNode
-              key={node.id}
-              treeName={treeName}
-              type={type}
-              {...node}
-            />
+            <Node key={node.id} treeName={treeName} type={type} {...node} />
           )
       )}
     </Box>
