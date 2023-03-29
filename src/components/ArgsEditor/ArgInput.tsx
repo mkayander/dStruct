@@ -19,6 +19,7 @@ const validationSchemaMap = {
   [ArgumentType.BINARY_TREE]: yup.array().of(yup.number().nullable()),
   [ArgumentType.LINKED_LIST]: yup.array().of(yup.number()),
   [ArgumentType.MATRIX]: yup.array().of(yup.array().of(yup.number())),
+  [ArgumentType.GRAPH]: yup.array().of(yup.array().of(yup.number())),
 } as const;
 
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
@@ -44,7 +45,9 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
   switch (arg.type) {
     case ArgumentType.ARRAY:
     case ArgumentType.BINARY_TREE:
+    case ArgumentType.LINKED_LIST:
     case ArgumentType.MATRIX:
+    case ArgumentType.GRAPH:
       return (
         <JsonInput
           label={argumentTypeLabels[arg.type]}
