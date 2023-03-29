@@ -5,12 +5,12 @@ import { useChildNodes, useNodeColors } from "#/hooks";
 import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
-export type BinaryNodeProps = BinaryTreeNodeData & {
+export type LinkedListProps = BinaryTreeNodeData & {
   treeName: string;
   type: ArgumentTreeType;
 };
 
-export const BinaryNode: React.FC<BinaryNodeProps> = (props) => {
+export const LinkedList: React.FC<LinkedListProps> = (props) => {
   const { color } = props;
 
   const { nodeColor, shadowColor } = useNodeColors(color);

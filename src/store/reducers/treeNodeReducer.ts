@@ -19,7 +19,7 @@ export type BinaryTreeNodeData = {
   color?: string;
   animation?: AnimationName;
   isHighlighted?: boolean;
-  children: (string | undefined)[];
+  childrenIds: (string | undefined)[];
   x: number;
   y: number;
 };
@@ -160,11 +160,11 @@ export const treeNodeSlice = createSlice({
         const node = treeNodeDataSelector.selectById(treeState.nodes, id);
         if (!node) return;
 
-        const children = [...node.children];
-        children[index] = childId;
+        const childrenIds = [...node.childrenIds];
+        childrenIds[index] = childId;
         treeNodeDataAdapter.updateOne(treeState.nodes, {
           id,
-          changes: { children },
+          changes: { childrenIds },
         });
       }),
     setRoot: (state, action: TreePayload<string>) =>

@@ -4,3 +4,4 @@ export { useTreeParsing } from "./useTreeParsing";
 export { usePlaygroundSlugs } from "./usePlaygroundSlugs";
 export { usePrevious } from "./usePrevious";
 export { useChildNodes } from "./useChildNodes";
+export { useNodeColors } from "./useNodeColors";

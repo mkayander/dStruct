@@ -14,7 +14,11 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { isNumber } from "#/utils";
-import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
+import {
+  type ArgumentObject,
+  ArgumentType,
+  isArgumentTreeType,
+} from "#/utils/argumentObject";
 
 export type TreeInput = (number | null)[];
 
@@ -32,7 +36,7 @@ const createNodeData = (
     depth,
     x: 0,
     y: 0,
-    children: [],
+    childrenIds: [],
   };
 
   return map[newId];
@@ -72,14 +76,14 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
     const newLeft = createNodeData(nodesMap, input[i], newDepth);
     if (newLeft) {
-      current.children[0] = newLeft.id;
+      current.childrenIds[0] = newLeft.id;
       queue.push(newLeft);
     }
     i++;
 
     const newRight = createNodeData(nodesMap, input[i], newDepth);
     if (newRight) {
-      current.children[1] = newRight.id;
+      current.childrenIds[1] = newRight.id;
       queue.push(newRight);
     }
     i++;
@@ -110,7 +114,7 @@ const parseLinkedListArgument = (rawInput: string) => {
     if (!newNode) continue;
 
     if (prevNode) {
-      prevNode.children[0] = newNode.id;
+      prevNode.childrenIds[0] = newNode.id;
     }
 
     prevNode = newNode;
@@ -141,13 +145,7 @@ export const useTreeParsing = () => {
   useEffect(() => {
     const removedTrees = new Set<string>(Object.keys(treeData));
     for (const arg of args) {
-      if (
-        !(
-          arg.type === ArgumentType.BINARY_TREE ||
-          arg.type === ArgumentType.LINKED_LIST
-        )
-      )
-        continue;
+      if (!isArgumentTreeType(arg.type)) continue;
 
       removedTrees.delete(arg.name);
       if (argsInfo[arg.name]?.isParsed) continue;
@@ -161,7 +159,7 @@ export const useTreeParsing = () => {
       const parsed = parseArgument(arg);
       if (!parsed) continue;
 
-      dispatch(treeNodeSlice.actions.init({ name: arg.name }));
+      dispatch(treeNodeSlice.actions.init({ name: arg.name, type: arg.type }));
       dispatch(
         treeNodeSlice.actions.addMany({
           name: arg.name,

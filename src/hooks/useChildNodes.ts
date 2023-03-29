@@ -1,7 +1,7 @@
-import { alpha } from "@mui/material";
 import { useEffect } from "react";
 import { type RelationType } from "react-archer/lib/types";
 
+import { type BinaryNodeProps } from "#/components/TreeViewer/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type BinaryTreeNodeData,
@@ -9,23 +9,11 @@ import {
   selectNodeDataById,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
+import { processNodeRelation } from "#/utils";
 
-const relationProps = {
-  targetAnchor: "middle",
-  sourceAnchor: "middle",
-} as const;
-
-export const useChildNodes = (
-  treeName: string,
-  children: (string | undefined)[],
-  rootId: string,
-  color: string | undefined,
-  nodeColor: string,
-  x: number,
-  y: number,
-  depth: number
-) => {
-  const { 0: leftId, 1: rightId } = children;
+export const useChildNodes = (props: BinaryNodeProps, nodeColor: string) => {
+  const { id, treeName, color, childrenIds, depth, y, x } = props;
+  const { 0: leftId, 1: rightId } = childrenIds;
   const dispatch = useAppDispatch();
   const maxDepth = useAppSelector(selectNamedTreeMaxDepth(treeName)) ?? 0;
   const leftData = useAppSelector(selectNodeDataById(treeName, leftId ?? ""));
@@ -33,23 +21,8 @@ export const useChildNodes = (
 
   const relations: RelationType[] = [];
 
-  const processNode = (data?: BinaryTreeNodeData | null) => {
-    if (!data) return;
-
-    const linkColor =
-      data?.color && color === data.color ? alpha(nodeColor, 0.4) : undefined;
-
-    if (data.id && relations[0]?.targetId !== data.id) {
-      relations.push({
-        ...relationProps,
-        targetId: data.id,
-        style: { strokeColor: linkColor },
-      });
-    }
-  };
-
-  processNode(leftData);
-  processNode(rightData);
+  processNodeRelation(relations, nodeColor, color, leftData);
+  processNodeRelation(relations, nodeColor, color, rightData);
 
   const treeSizeCoefficient = (maxDepth < 2 ? 2 : maxDepth) ** 2;
 
@@ -83,13 +56,13 @@ export const useChildNodes = (
         treeNodeSlice.actions.update({
           name: treeName,
           data: {
-            id: rootId,
+            id,
             changes: { x: 25 * treeSizeCoefficient + maxDepth ** 2.8 },
           },
         })
       );
     }
-  }, [depth, dispatch, maxDepth, rootId, treeName, treeSizeCoefficient]);
+  }, [depth, dispatch, maxDepth, id, treeName, treeSizeCoefficient]);
 
   useEffect(() => {
     updateChildPosition(leftData, true);
