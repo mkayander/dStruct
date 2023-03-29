@@ -10,9 +10,11 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { validateAnimationName } from "#/utils";
+import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 type NodesViewProps = {
   treeName: string;
+  type: ArgumentTreeType;
   nodes: EntityState<BinaryTreeNodeData>;
   playbackInterval: number;
   replayCount: number;
@@ -21,6 +23,7 @@ type NodesViewProps = {
 
 export const NodesView: React.FC<NodesViewProps> = ({
   treeName,
+  type,
   nodes,
   playbackInterval,
   replayCount,
@@ -144,7 +147,14 @@ export const NodesView: React.FC<NodesViewProps> = ({
     >
       {Object.values(nodes.entities).map(
         (node) =>
-          node && <BinaryNode key={node.id} treeName={treeName} {...node} />
+          node && (
+            <BinaryNode
+              key={node.id}
+              treeName={treeName}
+              type={type}
+              {...node}
+            />
+          )
       )}
     </Box>
   );

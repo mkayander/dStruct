@@ -81,6 +81,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         <NodesView
           key={treeName}
           treeName={treeName}
+          type={data.type}
           nodes={data.nodes}
           playbackInterval={playbackInterval}
           replayCount={replayCount}
