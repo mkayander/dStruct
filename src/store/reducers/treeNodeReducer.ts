@@ -139,6 +139,27 @@ export const treeNodeSlice = createSlice({
       runNamedTreeAction(state, action.payload.name, (treeState) =>
         treeNodeDataAdapter.updateOne(treeState.nodes, action.payload.data)
       ),
+    setChildId: (
+      state,
+      action: TreePayload<{ id: string; index: number; childId?: string }>
+    ) =>
+      runNamedTreeAction(state, action.payload.name, (treeState) => {
+        const {
+          payload: {
+            data: { id, index, childId },
+          },
+        } = action;
+
+        const node = treeNodeDataSelector.selectById(treeState.nodes, id);
+        if (!node) return;
+
+        const children = [...node.children];
+        children[index] = childId;
+        treeNodeDataAdapter.updateOne(treeState.nodes, {
+          id,
+          changes: { children },
+        });
+      }),
     setRoot: (state, action: TreePayload<string>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) => {
         treeState.rootId = action.payload.data;

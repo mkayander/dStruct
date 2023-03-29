@@ -78,32 +78,24 @@ export const NodesView: React.FC<NodesViewProps> = ({
 
         case "setLeftChild":
           dispatch(
-            treeNodeSlice.actions.update({
+            treeNodeSlice.actions.setChildId({
               name: treeName,
               data: {
                 id: frame.nodeId,
-                changes: {
-                  children: [
-                    frame.args[0] || undefined,
-                    nodes.entities[frame.nodeId]?.children[1],
-                  ],
-                },
+                index: 0,
+                childId: frame.args[0] || undefined,
               },
             })
           );
           break;
         case "setRightChild":
           dispatch(
-            treeNodeSlice.actions.update({
+            treeNodeSlice.actions.setChildId({
               name: treeName,
               data: {
                 id: frame.nodeId,
-                changes: {
-                  children: [
-                    nodes.entities[frame.nodeId]?.children[0],
-                    frame.args[0] || undefined,
-                  ],
-                },
+                index: 1,
+                childId: frame.args[0] || undefined,
               },
             })
           );
@@ -139,7 +131,6 @@ export const NodesView: React.FC<NodesViewProps> = ({
     replayCount,
     playbackInterval,
     treeName,
-    nodes.entities,
   ]);
 
   return (
