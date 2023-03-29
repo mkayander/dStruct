@@ -8,6 +8,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
+import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";
 
@@ -35,6 +36,7 @@ type TreePayload<T = void> = PayloadAction<
 >;
 
 export type TreeData = {
+  type: ArgumentTreeType;
   count: number;
   maxDepth: number;
   rootId: string | null;
@@ -83,7 +85,8 @@ const resetTree = (treeState: TreeData) => {
   );
 };
 
-const getInitialData = (): TreeData => ({
+const getInitialData = (type: ArgumentTreeType): TreeData => ({
+  type,
   count: 0,
   maxDepth: 0,
   rootId: null,
@@ -100,8 +103,12 @@ export const treeNodeSlice = createSlice({
   name: "BINARY_TREE_NODE",
   initialState,
   reducers: {
-    init: (state, action: PayloadAction<{ name: string }>) => {
-      state[action.payload.name] = getInitialData();
+    init: (
+      state,
+      action: PayloadAction<{ name: string; type: ArgumentTreeType }>
+    ) => {
+      const { name, type } = action.payload;
+      state[name] = getInitialData(type);
     },
     add: (state, action: TreePayload<BinaryTreeNodeData>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) => {
