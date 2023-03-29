@@ -6,6 +6,7 @@ import {
   LooksOne,
   RadioButtonChecked,
   TextFields,
+  Timeline,
 } from "@mui/icons-material";
 import {
   FormControl,
@@ -35,6 +36,7 @@ const iconSxProps: SxProps = {
 const typeIconsMap: Record<ArgumentType, React.ReactElement> = {
   [ArgumentType.BINARY_TREE]: <AccountTree sx={iconSxProps} />,
   [ArgumentType.LINKED_LIST]: <Link sx={iconSxProps} />,
+  [ArgumentType.GRAPH]: <Timeline sx={iconSxProps} />,
   [ArgumentType.NUMBER]: <LooksOne sx={iconSxProps} />,
   [ArgumentType.MATRIX]: <GridOn sx={iconSxProps} />,
   [ArgumentType.ARRAY]: <DataArray sx={iconSxProps} />,
