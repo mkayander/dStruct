@@ -37,6 +37,7 @@ type TreePayload<T = void> = PayloadAction<
 
 export type TreeData = {
   type: ArgumentTreeType;
+  order: number;
   count: number;
   maxDepth: number;
   rootId: string | null;
@@ -85,8 +86,9 @@ const resetTree = (treeState: TreeData) => {
   );
 };
 
-const getInitialData = (type: ArgumentTreeType): TreeData => ({
+const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   type,
+  order,
   count: 0,
   maxDepth: 0,
   rootId: null,
@@ -105,10 +107,14 @@ export const treeNodeSlice = createSlice({
   reducers: {
     init: (
       state,
-      action: PayloadAction<{ name: string; type: ArgumentTreeType }>
+      action: PayloadAction<{
+        name: string;
+        type: ArgumentTreeType;
+        order: number;
+      }>
     ) => {
-      const { name, type } = action.payload;
-      state[name] = getInitialData(type);
+      const { name, type, order } = action.payload;
+      state[name] = getInitialData(type, order);
     },
     add: (state, action: TreePayload<BinaryTreeNodeData>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) => {

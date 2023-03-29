@@ -159,7 +159,13 @@ export const useTreeParsing = () => {
       const parsed = parseArgument(arg);
       if (!parsed) continue;
 
-      dispatch(treeNodeSlice.actions.init({ name: arg.name, type: arg.type }));
+      dispatch(
+        treeNodeSlice.actions.init({
+          name: arg.name,
+          type: arg.type,
+          order: arg.order,
+        })
+      );
       dispatch(
         treeNodeSlice.actions.addMany({
           name: arg.name,
