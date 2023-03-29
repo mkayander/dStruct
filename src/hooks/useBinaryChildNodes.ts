@@ -11,7 +11,10 @@ import {
 } from "#/store/reducers/treeNodeReducer";
 import { processNodeRelation } from "#/utils";
 
-export const useChildNodes = (props: BinaryNodeProps, nodeColor: string) => {
+export const useBinaryChildNodes = (
+  props: BinaryNodeProps,
+  nodeColor: string
+) => {
   const { id, treeName, color, childrenIds, depth, y, x } = props;
   const { 0: leftId, 1: rightId } = childrenIds;
   const dispatch = useAppDispatch();
