@@ -1,3 +1,22 @@
+# [1.118.0](https://github.com/mkayander/leetpal/compare/v1.117.1...v1.118.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* Use json input for linked list & graph args ([4d1b405](https://github.com/mkayander/leetpal/commit/4d1b405dd0634abf15722abeacd3bafc5e023dfb))
+
+
+### Features
+
+* Added tree data type property ([3c3429c](https://github.com/mkayander/leetpal/commit/3c3429cc304be26b3bdf0ba64a7d1276694dd8f8))
+* Added tree data type property ([1158f2c](https://github.com/mkayander/leetpal/commit/1158f2c0837237b711bea98111dec219aab44497))
+* Extracted node relation util function ([653420b](https://github.com/mkayander/leetpal/commit/653420b9f530ace11cfe3bee8ebe0fbe68f0286b))
+* Implemented linked list display ([7b58b26](https://github.com/mkayander/leetpal/commit/7b58b267af9fa4144417c251a234bd179ff0b0df))
+* Implemented linked list positioning hook ([2619ef4](https://github.com/mkayander/leetpal/commit/2619ef49f43fa099f9c624758ccb6549bf1490cf))
+* Updated tree argument types ([6a2584b](https://github.com/mkayander/leetpal/commit/6a2584b84afbf523c737ebf587f81327a0667a16))
+* Updated tree parsing, made base node logic abstract ([453f860](https://github.com/mkayander/leetpal/commit/453f860f3d814176698cdabf5ee1663372cbafda))
+* Use arg order to determine tree render order ([efe4352](https://github.com/mkayander/leetpal/commit/efe435217bda7bff7912a6c5bb4f7e9cb150a86e))
+
 ## [1.117.1](https://github.com/mkayander/leetpal/compare/v1.117.0...v1.117.1) (2023-03-29)
 
 
