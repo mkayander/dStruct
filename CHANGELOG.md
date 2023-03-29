@@ -1,3 +1,10 @@
+## [1.118.1](https://github.com/mkayander/leetpal/compare/v1.118.0...v1.118.1) (2023-03-29)
+
+
+### Bug Fixes
+
+* Add graph type icon ([b05f98d](https://github.com/mkayander/leetpal/commit/b05f98d18f7cab8de6ad16960ddf1e5c09f97bbd))
+
 # [1.118.0](https://github.com/mkayander/leetpal/compare/v1.117.1...v1.118.0) (2023-03-29)
 
 
