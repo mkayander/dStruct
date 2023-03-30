@@ -135,11 +135,6 @@ export const CodePanel: React.FC = () => {
       }
     }
 
-    const markers = monacoInstance.editor.getModelMarkers({
-      owner: "error",
-      resource: textModel.uri,
-    });
-    console.log({ markers });
     monacoInstance.editor.setModelMarkers(textModel, "javascript", [
       {
         severity: monacoInstance.MarkerSeverity.Error,
@@ -157,8 +152,6 @@ export const CodePanel: React.FC = () => {
   };
 
   const handleRunCode = () => {
-    console.log("Run code:\n", codeInput);
-
     const args = createCaseRuntimeArgs(dispatch, treeStore, caseArgs);
 
     const getInputFunction = new Function(codeInput);
@@ -167,7 +160,6 @@ export const CodePanel: React.FC = () => {
 
     try {
       const runFunction = getInputFunction();
-      console.log("Run function:\n", runFunction);
 
       // Before running the code, clear the callstack
       dispatch(callstackSlice.actions.removeAll());
@@ -176,8 +168,6 @@ export const CodePanel: React.FC = () => {
 
       const result = runFunction(...args);
       const runtime = performance.now() - startTimestamp;
-
-      console.log("Runtime: ", runtime);
 
       // Identify that the callstack is filled and can now be used
       dispatch(
@@ -189,8 +179,6 @@ export const CodePanel: React.FC = () => {
           startTimestamp,
         })
       );
-
-      console.log("Result:\n", result);
     } catch (e: unknown) {
       const runtime = performance.now() - startTimestamp;
       if (e instanceof Error) {
