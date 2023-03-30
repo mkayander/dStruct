@@ -1,7 +1,7 @@
 import { alpha } from "@mui/material";
 import type { RelationType } from "react-archer/lib/types";
 
-import type { BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
+import type { TreeNodeData } from "#/store/reducers/treeNodeReducer";
 
 const relationProps = {
   targetAnchor: "middle",
@@ -12,7 +12,7 @@ export const processNodeRelation = (
   relations: RelationType[],
   nodeColor: string,
   color?: string,
-  data?: BinaryTreeNodeData | null
+  data?: TreeNodeData | null
 ) => {
   if (!data) return;
 

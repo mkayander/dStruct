@@ -13,7 +13,7 @@ import { type RelationType } from "react-archer/lib/types";
 
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
+import { type TreeNodeData } from "#/store/reducers/treeNodeReducer";
 
 const nodeSize = "42px";
 
@@ -25,7 +25,7 @@ const nodeProps: SxProps<Theme> = {
   height: nodeSize,
 };
 
-export type NodeBaseProps = BinaryTreeNodeData & {
+export type NodeBaseProps = TreeNodeData & {
   nodeColor: string;
   shadowColor: string;
   relations: RelationType[];

@@ -4,8 +4,8 @@ import { type RelationType } from "react-archer/lib/types";
 import { type BinaryNodeProps } from "#/components/TreeViewer/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
-  type BinaryTreeNodeData,
   selectNodeDataById,
+  type TreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { processNodeRelation } from "#/utils";
@@ -24,7 +24,7 @@ export const useLinkedListChildNode = (
   const relations: RelationType[] = [];
   processNodeRelation(relations, nodeColor, color, nextNodeData);
 
-  const updateChildPosition = (data?: BinaryTreeNodeData | null) => {
+  const updateChildPosition = (data?: TreeNodeData | null) => {
     if (!data) return;
 
     const horizontalOffset = 64;

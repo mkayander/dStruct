@@ -12,7 +12,7 @@ import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";
 
-export type BinaryTreeNodeData = {
+export type TreeNodeData = {
   id: string;
   value: string | number;
   depth: number;
@@ -41,14 +41,14 @@ export type TreeData = {
   count: number;
   maxDepth: number;
   rootId: string | null;
-  initialNodes: EntityState<BinaryTreeNodeData>;
-  nodes: EntityState<BinaryTreeNodeData>;
+  initialNodes: EntityState<TreeNodeData>;
+  nodes: EntityState<TreeNodeData>;
 };
 
 export type TreeDataState = Record<string, TreeData>;
 
-const treeNodeDataAdapter = createEntityAdapter<BinaryTreeNodeData>({
-  selectId: (node: BinaryTreeNodeData) => node.id,
+const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>({
+  selectId: (node: TreeNodeData) => node.id,
 });
 
 const getTreeState = (state: TreeDataState, name: string) => {
@@ -116,7 +116,7 @@ export const treeNodeSlice = createSlice({
       const { name, type, order } = action.payload;
       state[name] = getInitialData(type, order);
     },
-    add: (state, action: TreePayload<BinaryTreeNodeData>) =>
+    add: (state, action: TreePayload<TreeNodeData>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) => {
         const {
           payload: {
@@ -131,7 +131,7 @@ export const treeNodeSlice = createSlice({
       state,
       action: TreePayload<{
         maxDepth: number;
-        nodes: BinaryTreeNodeData[];
+        nodes: TreeNodeData[];
       }>
     ) => {
       const {
@@ -148,7 +148,7 @@ export const treeNodeSlice = createSlice({
       treeState.maxDepth = maxDepth;
       treeNodeDataAdapter.addMany(treeState.nodes, nodes);
     },
-    update: (state, action: TreePayload<Update<BinaryTreeNodeData>>) =>
+    update: (state, action: TreePayload<Update<TreeNodeData>>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) =>
         treeNodeDataAdapter.updateOne(treeState.nodes, action.payload.data)
       ),
@@ -177,7 +177,7 @@ export const treeNodeSlice = createSlice({
       runNamedTreeAction(state, action.payload.name, (treeState) => {
         treeState.rootId = action.payload.data;
       }),
-    remove: (state, action: TreePayload<Pick<BinaryTreeNodeData, "id">>) =>
+    remove: (state, action: TreePayload<Pick<TreeNodeData, "id">>) =>
       runNamedTreeAction(state, action.payload.name, (treeState) => {
         treeState.count--;
         treeNodeDataAdapter.removeOne(treeState.nodes, action.payload.data.id);

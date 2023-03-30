@@ -2,10 +2,10 @@ import React from "react";
 
 import { NodeBase } from "#/components/TreeViewer/NodeBase";
 import { useLinkedListChildNode, useNodeColors } from "#/hooks";
-import { type BinaryTreeNodeData } from "#/store/reducers/treeNodeReducer";
+import { type TreeNodeData } from "#/store/reducers/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
-export type LinkedListProps = BinaryTreeNodeData & {
+export type LinkedListProps = TreeNodeData & {
   treeName: string;
   type: ArgumentTreeType;
 };

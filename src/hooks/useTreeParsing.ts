@@ -9,8 +9,8 @@ import {
   selectCaseArgumentsInfo,
 } from "#/store/reducers/caseReducer";
 import {
-  type BinaryTreeNodeData,
   treeDataSelector,
+  type TreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { isNumber } from "#/utils";
@@ -23,7 +23,7 @@ import {
 export type TreeInput = (number | null)[];
 
 const createNodeData = (
-  map: Record<string, BinaryTreeNodeData>,
+  map: Record<string, TreeNodeData>,
   value: number | undefined | null,
   depth: number
 ) => {
@@ -52,7 +52,7 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
   if (!input || input.length === 0) return;
 
-  const nodesMap: Record<string, BinaryTreeNodeData> = {};
+  const nodesMap: Record<string, TreeNodeData> = {};
 
   const rootNum = input[0];
   if (!isNumber(rootNum)) return;
@@ -60,7 +60,7 @@ const parseBinaryTreeArgument = (rawInput: string) => {
   const rootData = createNodeData(nodesMap, rootNum, 0);
   if (!rootData) return;
 
-  const queue: BinaryTreeNodeData[] = [rootData];
+  const queue: TreeNodeData[] = [rootData];
 
   let maxDepth = 0;
 
@@ -102,9 +102,9 @@ const parseLinkedListArgument = (rawInput: string) => {
 
   if (!input || input.length === 0) return;
 
-  const nodesMap: Record<string, BinaryTreeNodeData> = {};
+  const nodesMap: Record<string, TreeNodeData> = {};
 
-  let prevNode: BinaryTreeNodeData | null = null;
+  let prevNode: TreeNodeData | null = null;
   let maxDepth = 0;
 
   for (const value of input) {

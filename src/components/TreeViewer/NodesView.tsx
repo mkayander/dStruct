@@ -7,7 +7,7 @@ import { LinkedListNode } from "#/components/TreeViewer/LinkedListNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {
-  type BinaryTreeNodeData,
+  type TreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/treeNodeReducer";
 import { validateAnimationName } from "#/utils";
@@ -16,7 +16,7 @@ import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
 type NodesViewProps = {
   treeName: string;
   type: ArgumentTreeType;
-  nodes: EntityState<BinaryTreeNodeData>;
+  nodes: EntityState<TreeNodeData>;
   playbackInterval: number;
   replayCount: number;
   sx?: SxProps;
