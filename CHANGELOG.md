@@ -1,3 +1,10 @@
+## [1.119.1](https://github.com/mkayander/leetpal/compare/v1.119.0...v1.119.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* Disable tree traversal auto-display for now ([d80839f](https://github.com/mkayander/leetpal/commit/d80839fbeec48ece38fcc78e0dc560e663ce60cc))
+
 # [1.119.0](https://github.com/mkayander/leetpal/compare/v1.118.1...v1.119.0) (2023-03-30)
 
 
