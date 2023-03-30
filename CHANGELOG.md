@@ -1,3 +1,16 @@
+# [1.119.0](https://github.com/mkayander/leetpal/compare/v1.118.1...v1.119.0) (2023-03-30)
+
+
+### Bug Fixes
+
+* Removed console logs ([d165e54](https://github.com/mkayander/leetpal/commit/d165e5410c049f1fc526a68e473dd42e18bbfd0a))
+
+
+### Features
+
+* Added linked list project category ([7f2f287](https://github.com/mkayander/leetpal/commit/7f2f2875ea6f7ac71cc94b4df9febb22083256dc))
+* Implement linked list realtime parsing. Move common parts into an abstract class. ([662c908](https://github.com/mkayander/leetpal/commit/662c908ed246135216f0e16a306bcef59288b650))
+
 ## [1.118.1](https://github.com/mkayander/leetpal/compare/v1.118.0...v1.118.1) (2023-03-29)
 
 
