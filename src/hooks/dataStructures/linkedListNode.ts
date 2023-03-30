@@ -51,7 +51,7 @@ export class LinkedListNode extends NodeBase {
       childrenIds: [nextId],
     } = nodeData;
 
-    const newMeta = { ...meta, id, displayTraversal: true };
+    const newMeta = { ...meta, id };
 
     const newNode = new LinkedListNode(value, null, newMeta, name, dispatch);
 

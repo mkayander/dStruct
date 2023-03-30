@@ -81,7 +81,6 @@ export class BinaryTreeNode extends NodeBase {
     const newMeta = {
       ...meta,
       depth: (meta?.depth ?? -1) + 1,
-      displayTraversal: true,
     };
 
     const leftNode = left
