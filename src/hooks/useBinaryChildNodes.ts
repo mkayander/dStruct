@@ -16,7 +16,7 @@ export const useBinaryChildNodes = (
   nodeColor: string
 ) => {
   const { id, treeName, color, childrenIds, depth, y, x } = props;
-  const { 0: leftId, 1: rightId } = childrenIds;
+  const [leftId, rightId] = childrenIds;
   const dispatch = useAppDispatch();
   const maxDepth = useAppSelector(selectNamedTreeMaxDepth(treeName)) ?? 0;
   const leftData = useAppSelector(selectNodeDataById(treeName, leftId ?? ""));

@@ -98,7 +98,7 @@ export class BinaryTreeNode {
     const {
       id,
       value,
-      childrenIds: { 0: left, 1: right },
+      childrenIds: [left, right],
     } = nodeData;
 
     const newMeta = {

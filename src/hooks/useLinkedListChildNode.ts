@@ -15,7 +15,7 @@ export const useLinkedListChildNode = (
   nodeColor: string
 ) => {
   const { treeName, color, childrenIds, y, x } = props;
-  const { 0: nextId } = childrenIds;
+  const [nextId] = childrenIds;
   const dispatch = useAppDispatch();
   const nextNodeData = useAppSelector(
     selectNodeDataById(treeName, nextId ?? "")
