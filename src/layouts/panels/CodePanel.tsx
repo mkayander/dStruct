@@ -39,8 +39,6 @@ export const CodePanel: React.FC = () => {
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null
   );
-  // const [editorInstance, setEditorInstance] =
-  //   useState<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [textModel, setTextModel] = useState<monaco.editor.ITextModel | null>(
     null
   );
