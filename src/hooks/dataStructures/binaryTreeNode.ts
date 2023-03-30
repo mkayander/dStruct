@@ -1,62 +1,36 @@
 import type { Dictionary } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
+import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
-import type {
-  BinaryTreeNodeData,
-  TreeData,
-} from "#/store/reducers/treeNodeReducer";
+import type { TreeNodeData } from "#/store/reducers/treeNodeReducer";
 
-const uuid = shortUUID();
-
-export type NodeMeta = {
-  id: string;
+export interface BinaryNodeMeta extends NodeMeta {
   depth: number;
   isRoot?: boolean;
   isLeaf?: boolean;
   maxDepth?: number;
   rootNode?: BinaryTreeNode;
-};
+}
 
-export class BinaryTreeNode {
-  meta: NodeMeta;
-  private _right: BinaryTreeNode | null;
-
+export class BinaryTreeNode extends NodeBase {
   constructor(
     val: number | string,
     left: BinaryTreeNode | null = null,
     right: BinaryTreeNode | null = null,
-    meta: NodeMeta,
-    private name: string,
-    private dispatch: AppDispatch
+    meta: BinaryNodeMeta,
+    name: string,
+    dispatch: AppDispatch
   ) {
-    this._val = val;
+    super(val, meta, name, dispatch);
     this._left = left;
     this._right = right;
-    this.meta = meta;
-  }
-
-  private _val: number | string;
-
-  public get val(): number | string {
-    return this._val;
-  }
-
-  public set val(value: number | string) {
-    this._val = value;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setVal",
-        args: [value],
-      })
-    );
   }
 
   private _left: BinaryTreeNode | null;
 
   public get left() {
+    this.meta.displayTraversal && this.setColor("cyan", "blink");
     return this._left;
   }
 
@@ -71,7 +45,10 @@ export class BinaryTreeNode {
     );
   }
 
+  private _right: BinaryTreeNode | null;
+
   public get right() {
+    this.meta.displayTraversal && this.setColor("cyan", "blink");
     return this._right;
   }
 
@@ -88,10 +65,10 @@ export class BinaryTreeNode {
 
   static fromNodeData(
     name: string,
-    nodeData: BinaryTreeNodeData | undefined,
-    dataMap: Dictionary<BinaryTreeNodeData>,
+    nodeData: TreeNodeData | undefined,
+    dataMap: Dictionary<TreeNodeData>,
     dispatch: AppDispatch,
-    meta?: Partial<NodeMeta>
+    meta?: Partial<BinaryNodeMeta>
   ): BinaryTreeNode | null {
     if (!nodeData) return null;
 
@@ -104,6 +81,7 @@ export class BinaryTreeNode {
     const newMeta = {
       ...meta,
       depth: (meta?.depth ?? -1) + 1,
+      displayTraversal: true,
     };
 
     const leftNode = left
@@ -138,51 +116,4 @@ export class BinaryTreeNode {
       dispatch
     );
   }
-
-  public setColor(color: string | null, animation?: string) {
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setColor",
-        args: [color, animation],
-      })
-    );
-  }
-
-  public blink() {
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "blink",
-        args: [],
-      })
-    );
-  }
-
-  private getDispatchBase() {
-    return {
-      id: uuid.generate(),
-      treeName: this.name,
-      nodeId: this.meta.id,
-      timestamp: performance.now(),
-    };
-  }
 }
-
-export const createRuntimeBinaryTree = (
-  nodesData: TreeData,
-  name: string,
-  dispatch: AppDispatch
-) => {
-  const rootId = nodesData.rootId;
-  if (!rootId) return null;
-
-  let dataMap = nodesData.nodes.entities;
-  if (nodesData.initialNodes.ids.length > 0) {
-    dataMap = nodesData.initialNodes.entities;
-  }
-
-  const rootData = dataMap[rootId];
-
-  return BinaryTreeNode.fromNodeData(name, rootData, dataMap, dispatch);
-};

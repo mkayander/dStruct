@@ -34,7 +34,7 @@ type SetValFrame = NodeFrameBase & {
 };
 
 type SetChildFrame = NodeFrameBase & {
-  name: "setLeftChild" | "setRightChild";
+  name: "setLeftChild" | "setRightChild" | "setNextNode";
   args: [string | null];
 };
 

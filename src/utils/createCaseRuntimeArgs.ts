@@ -1,7 +1,7 @@
-import { createRuntimeBinaryTree } from "#/hooks/dataStructures/binaryTreeNode";
 import type { AppDispatch } from "#/store/makeStore";
 import type { TreeDataState } from "#/store/reducers/treeNodeReducer";
-import { type ArgumentObject } from "#/utils/argumentObject";
+import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
+import { createRuntimeTree } from "#/utils/createRuntimeTree";
 
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
@@ -10,25 +10,29 @@ export const createCaseRuntimeArgs = (
 ) => {
   return args.map((arg) => {
     switch (arg.type) {
-      case "binaryTree":
+      case ArgumentType.LINKED_LIST:
+      case ArgumentType.BINARY_TREE:
         const nodesData = treeStore[arg.name];
         if (!nodesData) {
           console.error("No nodes data found for binary tree", arg.name);
           return null;
         }
-        return createRuntimeBinaryTree(nodesData, arg.name, dispatch);
+        return createRuntimeTree(nodesData, arg.name, dispatch);
 
-      case "number":
+      case ArgumentType.NUMBER:
         return Number(arg.input);
 
-      case "string":
+      case ArgumentType.STRING:
         return arg.input;
 
-      case "boolean":
+      case ArgumentType.BOOLEAN:
         return arg.input === "true";
 
-      case "array":
+      case ArgumentType.ARRAY:
         return JSON.parse(arg.input) as number[];
+
+      case ArgumentType.MATRIX:
+        return JSON.parse(arg.input) as number[][];
     }
   });
 };
