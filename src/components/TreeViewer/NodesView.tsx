@@ -80,6 +80,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
           );
           break;
 
+        case "setNextNode":
         case "setLeftChild":
           dispatch(
             treeNodeSlice.actions.setChildId({
