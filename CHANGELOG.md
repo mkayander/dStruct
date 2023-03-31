@@ -1,3 +1,12 @@
+# [1.120.0](https://github.com/mkayander/leetpal/compare/v1.119.1...v1.120.0) (2023-03-31)
+
+
+### Features
+
+* Handle next node updates ([b10f355](https://github.com/mkayander/leetpal/commit/b10f355976e7db05f29d106d3c363dbe4a82c28a))
+* Updated pnpm version & lockfile ([193ff6e](https://github.com/mkayander/leetpal/commit/193ff6e6dcffa0fbd3130d4b9543ea5ccd37739c))
+* Updated prisma ([6ddbef8](https://github.com/mkayander/leetpal/commit/6ddbef8e1c426f47ee8dfe0682093e832f67a9b4))
+
 ## [1.119.1](https://github.com/mkayander/leetpal/compare/v1.119.0...v1.119.1) (2023-03-30)
 
 
