@@ -1,3 +1,17 @@
+# [1.122.0](https://github.com/mkayander/leetpal/compare/v1.121.0...v1.122.0) (2023-04-01)
+
+
+### Bug Fixes
+
+* Generate normal uuid argument ids ([5155b15](https://github.com/mkayander/leetpal/commit/5155b158bc90861ae157cdb30ebe39edda117361))
+* Update types ([07120f7](https://github.com/mkayander/leetpal/commit/07120f742797c7bdbb96286226cc5544c27f3767))
+
+
+### Features
+
+* Implemented new array data structure reducer. Extract common parts into generics. ([7fbed94](https://github.com/mkayander/leetpal/commit/7fbed94e49c2d09315b26ada4ece1477dcce252b))
+* Make parsing hook universal for all argument types ([39e4ae6](https://github.com/mkayander/leetpal/commit/39e4ae6e2e0a6eac0ace1123d2b2e70a3b3b9f5d))
+
 # [1.121.0](https://github.com/mkayander/leetpal/compare/v1.120.0...v1.121.0) (2023-04-01)
 
 
