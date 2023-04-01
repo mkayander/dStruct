@@ -3,6 +3,10 @@ import type { TreeDataState } from "#/store/reducers/treeNodeReducer";
 import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
 import { createRuntimeTree } from "#/utils/createRuntimeTree";
 
+import { Prisma } from ".prisma/client";
+
+import JsonArray = Prisma.JsonArray;
+
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
   treeStore: TreeDataState,
@@ -29,7 +33,7 @@ export const createCaseRuntimeArgs = (
         return arg.input === "true";
 
       case ArgumentType.ARRAY:
-        return JSON.parse(arg.input) as number[];
+        return JSON.parse(arg.input) as JsonArray;
 
       case ArgumentType.MATRIX:
         return JSON.parse(arg.input) as number[][];
