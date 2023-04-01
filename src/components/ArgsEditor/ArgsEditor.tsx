@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
+import shortUUID from "short-uuid";
 
 import { ArgInput, ArgumentTypeSelect } from "#/components";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
@@ -26,6 +27,8 @@ import {
   isArgumentObjectValid,
 } from "#/utils/argumentObject";
 import { type RouterOutputs, trpc } from "#/utils/trpc";
+
+const uuid = shortUUID();
 
 type ArgsEditorProps = {
   selectedCase: UseQueryResult<RouterOutputs["project"]["getCaseBySlug"]>;
@@ -92,7 +95,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const handleAddArg = () => {
     dispatch(
       caseSlice.actions.addArgument({
-        name: `binary-tree-${Math.floor(Math.random() * 1000)}`,
+        name: uuid.generate(),
         type: ArgumentType.BINARY_TREE,
         order: args.length,
         input: "[]",
