@@ -2,89 +2,43 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
-  type EntityState,
   type PayloadAction,
-  type Update,
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
+import {
+  type BaseStructureItem,
+  type BaseStructureState,
+  getBaseStructureReducers,
+  getStateByName,
+  type NamedPayload,
+  runStateActionByName,
+  type StructureNode,
+} from "#/store/reducers/structureUtils";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";
 
-export type TreeNodeData = {
-  id: string;
-  value: string | number;
+export type TreeNodeData = StructureNode & {
   depth: number;
-  color?: string;
-  animation?: AnimationName;
-  isHighlighted?: boolean;
   childrenIds: (string | undefined)[];
   x: number;
   y: number;
 };
 
-type TreePayload<T = void> = PayloadAction<
-  T extends void
-    ? {
-        name: string;
-      }
-    : {
-        name: string;
-        data: T;
-      }
->;
-
-export type TreeData = {
+export type TreeData = BaseStructureItem<TreeNodeData> & {
   type: ArgumentTreeType;
   order: number;
   count: number;
   maxDepth: number;
   rootId: string | null;
-  initialNodes: EntityState<TreeNodeData>;
-  nodes: EntityState<TreeNodeData>;
 };
 
-export type TreeDataState = Record<string, TreeData>;
+export type TreeDataState = BaseStructureState<TreeData>;
 
 const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>({
   selectId: (node: TreeNodeData) => node.id,
 });
-
-const getTreeState = (state: TreeDataState, name: string) => {
-  const treeState = state[name];
-  if (!treeState) {
-    // console.warn("getTreeState: Tree state not found: ", {
-    //   name,
-    //   state,
-    //   caller,
-    // });
-    return null;
-  }
-
-  return treeState;
-};
-
-const runNamedTreeAction = (
-  state: TreeDataState,
-  name: string,
-  action: (treeState: TreeData) => void
-) => {
-  const treeState = getTreeState(state, name);
-  if (!treeState) return;
-
-  action(treeState);
-};
-
-const resetTree = (treeState: TreeData) => {
-  if (treeState.initialNodes.ids.length === 0) return;
-
-  treeNodeDataAdapter.removeAll(treeState.nodes);
-  treeNodeDataAdapter.addMany(
-    treeState.nodes,
-    treeNodeDataSelector.selectAll(treeState.initialNodes)
-  );
-};
 
 const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   type,
@@ -105,6 +59,7 @@ export const treeNodeSlice = createSlice({
   name: "BINARY_TREE_NODE",
   initialState,
   reducers: {
+    ...getBaseStructureReducers(treeNodeDataAdapter),
     init: (
       state,
       action: PayloadAction<{
@@ -116,8 +71,8 @@ export const treeNodeSlice = createSlice({
       const { name, type, order } = action.payload;
       state[name] = getInitialData(type, order);
     },
-    add: (state, action: TreePayload<TreeNodeData>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) => {
+    add: (state, action: NamedPayload<TreeNodeData>) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
             data: { id, ...node },
@@ -129,34 +84,28 @@ export const treeNodeSlice = createSlice({
       }),
     addMany: (
       state,
-      action: TreePayload<{
+      action: NamedPayload<{
         maxDepth: number;
         nodes: TreeNodeData[];
       }>
-    ) => {
-      const {
-        payload: {
-          data: { maxDepth, nodes },
-        },
-      } = action;
+    ) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const {
+          payload: {
+            data: { maxDepth, nodes },
+          },
+        } = action;
 
-      const treeState = state[action.payload.name];
-      if (!treeState) return;
-
-      treeState.rootId = nodes[0]?.id || null;
-      treeState.count += nodes.length;
-      treeState.maxDepth = maxDepth;
-      treeNodeDataAdapter.addMany(treeState.nodes, nodes);
-    },
-    update: (state, action: TreePayload<Update<TreeNodeData>>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) =>
-        treeNodeDataAdapter.updateOne(treeState.nodes, action.payload.data)
-      ),
+        treeState.rootId = nodes[0]?.id || null;
+        treeState.count += nodes.length;
+        treeState.maxDepth = maxDepth;
+        treeNodeDataAdapter.addMany(treeState.nodes, nodes);
+      }),
     setChildId: (
       state,
-      action: TreePayload<{ id: string; index: number; childId?: string }>
+      action: NamedPayload<{ id: string; index: number; childId?: string }>
     ) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) => {
+      runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
             data: { id, index, childId },
@@ -173,44 +122,15 @@ export const treeNodeSlice = createSlice({
           changes: { childrenIds },
         });
       }),
-    setRoot: (state, action: TreePayload<string>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) => {
+    setRoot: (state, action: NamedPayload<string>) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
         treeState.rootId = action.payload.data;
       }),
-    remove: (state, action: TreePayload<Pick<TreeNodeData, "id">>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) => {
+    remove: (state, action: NamedPayload<Pick<TreeNodeData, "id">>) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
         treeState.count--;
         treeNodeDataAdapter.removeOne(treeState.nodes, action.payload.data.id);
       }),
-    clear: (state, action: TreePayload) => {
-      delete state[action.payload.name];
-    },
-    clearAll: (): TreeDataState => {
-      return {
-        ...initialState,
-      };
-    },
-    backupAllNodes: (state: TreeDataState) => {
-      for (const name in state) {
-        runNamedTreeAction(state, name, (treeState) => {
-          if (treeState.initialNodes.ids.length > 0) return;
-
-          treeNodeDataAdapter.addMany(
-            treeState.initialNodes,
-            treeNodeDataSelector.selectAll(treeState.nodes)
-          );
-        });
-      }
-    },
-    reset: (state: TreeDataState, action: TreePayload<undefined>) =>
-      runNamedTreeAction(state, action.payload.name, (treeState) =>
-        resetTree(treeState)
-      ),
-    resetAll: (state: TreeDataState) => {
-      for (const name in state) {
-        runNamedTreeAction(state, name, (treeState) => resetTree(treeState));
-      }
-    },
   },
 });
 
@@ -239,7 +159,7 @@ export const selectAllNodeData = (name: string) =>
 
 export const selectNodeDataById = (name: string, id: string) =>
   createSelector(treeDataSelector, (state) => {
-    const treeState = getTreeState(state, name);
+    const treeState = getStateByName(state, name);
     if (!treeState) return null;
 
     return treeNodeDataSelector.selectById(treeState.nodes, id);
@@ -247,7 +167,7 @@ export const selectNodeDataById = (name: string, id: string) =>
 
 export const selectRootNodeData = (name: string) =>
   createSelector(treeDataSelector, (state) => {
-    const treeState = getTreeState(state, name);
+    const treeState = getStateByName(state, name);
     if (!treeState) return null;
 
     treeNodeDataSelector.selectById(treeState.nodes, treeState.rootId || "");
@@ -255,7 +175,7 @@ export const selectRootNodeData = (name: string) =>
 
 export const selectNamedTreeMaxDepth = (name: string) =>
   createSelector(treeDataSelector, (state) => {
-    const treeState = getTreeState(state, name);
+    const treeState = getStateByName(state, name);
     if (!treeState) return null;
 
     return treeState.maxDepth;

@@ -13,7 +13,7 @@ const argumentAdapter = createEntityAdapter<ArgumentObject>({
   sortComparer: (a, b) => a.order - b.order,
 });
 
-type ArgumentInfo = {
+export type ArgumentInfo = {
   isParsed: boolean;
 };
 
