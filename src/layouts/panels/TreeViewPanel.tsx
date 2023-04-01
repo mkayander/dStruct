@@ -21,7 +21,7 @@ import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { selectTreeMaxDepth } from "#/store/reducers/treeNodeReducer";
+import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
 
 export const TreeViewPanel: React.FC = () => {
   const [tabValue, setTabValue] = useState("1");

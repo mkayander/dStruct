@@ -4,7 +4,7 @@ import { type BinaryNodeMeta } from "#/hooks/dataStructures/binaryTreeNode";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
-import { type TreeNodeData } from "#/store/reducers/treeNodeReducer";
+import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
 export class LinkedListNode extends NodeBase {
   constructor(

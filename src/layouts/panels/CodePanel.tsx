@@ -25,7 +25,7 @@ import { selectIsEditable } from "#/store/reducers/projectReducer";
 import {
   treeDataSelector,
   treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 import { createCaseRuntimeArgs, trpc } from "#/utils";
 
 const uuid = shortUUID();

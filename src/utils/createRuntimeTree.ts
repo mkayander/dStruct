@@ -1,7 +1,7 @@
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { type AppDispatch } from "#/store/makeStore";
-import { type TreeData } from "#/store/reducers/treeNodeReducer";
+import { type TreeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
 export const createRuntimeTree = (

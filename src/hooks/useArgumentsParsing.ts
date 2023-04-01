@@ -14,7 +14,7 @@ import {
   treeDataSelector,
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 import { isNumber } from "#/utils";
 import {
   type ArgumentObject,

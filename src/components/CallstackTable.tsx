@@ -21,7 +21,7 @@ import {
 import {
   selectNodeDataById,
   treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,

@@ -8,7 +8,7 @@ import { useAppSelector } from "#/store/hooks";
 import {
   type TreeData,
   treeDataSelector,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
 const overlayStyles = {

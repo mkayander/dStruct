@@ -14,7 +14,7 @@ import {
   type NamedPayload,
   runStateActionByName,
   type StructureNode,
-} from "#/store/reducers/structureUtils";
+} from "#/store/reducers/structures/structureUtils";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";

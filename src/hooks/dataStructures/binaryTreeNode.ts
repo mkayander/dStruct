@@ -3,7 +3,7 @@ import type { Dictionary } from "@reduxjs/toolkit";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
-import type { TreeNodeData } from "#/store/reducers/treeNodeReducer";
+import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
 export interface BinaryNodeMeta extends NodeMeta {
   depth: number;

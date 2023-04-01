@@ -12,7 +12,7 @@ import {
   getBaseStructureReducers,
   getStateByName,
   type StructureNode,
-} from "#/store/reducers/structureUtils";
+} from "#/store/reducers/structures/structureUtils";
 
 export type ArrayItemData = StructureNode & {
   index: number;

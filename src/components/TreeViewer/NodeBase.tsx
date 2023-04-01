@@ -13,7 +13,7 @@ import { type RelationType } from "react-archer/lib/types";
 
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { type TreeNodeData } from "#/store/reducers/treeNodeReducer";
+import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
 const nodeSize = "42px";
 

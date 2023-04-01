@@ -7,7 +7,7 @@ import {
   selectNodeDataById,
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 import { processNodeRelation } from "#/utils";
 
 export const useLinkedListChildNode = (

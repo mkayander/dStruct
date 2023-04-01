@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import { appBarReducer } from "#/store/reducers/appBarReducer";
-import { arrayStructureReducer } from "#/store/reducers/arrayReducer";
 import { callstackReducer } from "#/store/reducers/callstackReducer";
 import { caseReducer } from "#/store/reducers/caseReducer";
 import { projectReducer } from "#/store/reducers/projectReducer";
-import { treeNodeReducer } from "#/store/reducers/treeNodeReducer";
+import { arrayStructureReducer } from "#/store/reducers/structures/arrayReducer";
+import { treeNodeReducer } from "#/store/reducers/structures/treeNodeReducer";
 
 /**
  * Combine reducers

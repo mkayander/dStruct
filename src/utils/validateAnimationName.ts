@@ -1,4 +1,4 @@
-import type { AnimationName } from "#/store/reducers/treeNodeReducer";
+import type { AnimationName } from "#/store/reducers/structures/treeNodeReducer";
 
 export const validateAnimationName = (
   name?: string

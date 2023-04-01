@@ -1,5 +1,5 @@
 import type { AppDispatch } from "#/store/makeStore";
-import type { TreeDataState } from "#/store/reducers/treeNodeReducer";
+import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
 import { createRuntimeTree } from "#/utils/createRuntimeTree";
 

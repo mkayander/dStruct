@@ -9,7 +9,7 @@ import { selectCallstack } from "#/store/reducers/callstackReducer";
 import {
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/treeNodeReducer";
+} from "#/store/reducers/structures/treeNodeReducer";
 import { validateAnimationName } from "#/utils";
 import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
 
