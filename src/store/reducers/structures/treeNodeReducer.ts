@@ -59,7 +59,7 @@ export const treeNodeSlice = createSlice({
   name: "BINARY_TREE_NODE",
   initialState,
   reducers: {
-    ...getBaseStructureReducers(treeNodeDataAdapter),
+    ...getBaseStructureReducers<TreeNodeData>(treeNodeDataAdapter),
     init: (
       state,
       action: PayloadAction<{
