@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
-import { usePlaygroundSlugs, useTreeParsing } from "#/hooks";
+import { useArgumentsParsing, usePlaygroundSlugs } from "#/hooks";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
@@ -83,7 +83,7 @@ export const ProjectPanel: React.FC = () => {
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
-  useTreeParsing();
+  useArgumentsParsing();
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);

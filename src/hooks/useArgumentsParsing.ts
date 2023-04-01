@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import uuid4 from "short-uuid";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
+  type ArgumentInfo,
   caseSlice,
   selectCaseArguments,
   selectCaseArgumentsInfo,
@@ -16,6 +18,7 @@ import {
 import { isNumber } from "#/utils";
 import {
   type ArgumentObject,
+  type ArgumentTreeType,
   ArgumentType,
   isArgumentTreeType,
 } from "#/utils/argumentObject";
@@ -135,7 +138,44 @@ const parseArgument = (arg: ArgumentObject) => {
   }
 };
 
-export const useTreeParsing = () => {
+const parseTreeArgument = (
+  arg: ArgumentObject<ArgumentTreeType>,
+  argsInfo: Record<string, ArgumentInfo>,
+  dispatch: AppDispatch
+) => {
+  if (argsInfo[arg.name]?.isParsed) return;
+
+  dispatch(
+    treeNodeSlice.actions.clear({
+      name: arg.name,
+    })
+  );
+
+  const parsed = parseArgument(arg);
+  if (!parsed) return;
+
+  dispatch(
+    treeNodeSlice.actions.init({
+      name: arg.name,
+      type: arg.type,
+      order: arg.order,
+    })
+  );
+  dispatch(
+    treeNodeSlice.actions.addMany({
+      name: arg.name,
+      data: {
+        maxDepth: parsed.maxDepth,
+        nodes: Object.values(parsed.nodesMap),
+      },
+    })
+  );
+  dispatch(
+    caseSlice.actions.setIsArgumentParsed({ name: arg.name, value: true })
+  );
+};
+
+export const useArgumentsParsing = () => {
   const dispatch = useAppDispatch();
 
   const args = useAppSelector(selectCaseArguments);
@@ -143,46 +183,15 @@ export const useTreeParsing = () => {
   const treeData = useAppSelector(treeDataSelector);
 
   useEffect(() => {
-    const removedTrees = new Set<string>(Object.keys(treeData));
+    const removedTreeNames = new Set<string>(Object.keys(treeData));
     for (const arg of args) {
-      if (!isArgumentTreeType(arg.type)) continue;
-
-      removedTrees.delete(arg.name);
-      if (argsInfo[arg.name]?.isParsed) continue;
-
-      dispatch(
-        treeNodeSlice.actions.clear({
-          name: arg.name,
-        })
-      );
-
-      const parsed = parseArgument(arg);
-      if (!parsed) continue;
-
-      dispatch(
-        treeNodeSlice.actions.init({
-          name: arg.name,
-          type: arg.type,
-          order: arg.order,
-        })
-      );
-      dispatch(
-        treeNodeSlice.actions.addMany({
-          name: arg.name,
-          data: {
-            maxDepth: parsed.maxDepth,
-            nodes: Object.values(parsed.nodesMap),
-          },
-        })
-      );
-      dispatch(
-        caseSlice.actions.setIsArgumentParsed({ name: arg.name, value: true })
-      );
+      if (isArgumentTreeType(arg)) {
+        parseTreeArgument(arg, argsInfo, dispatch);
+        removedTreeNames.delete(arg.name);
+      }
     }
 
-    for (const name of removedTrees) {
-      dispatch(treeNodeSlice.actions.clear({ name }));
-    }
+    dispatch(treeNodeSlice.actions.clearMany([...removedTreeNames]));
 
     dispatch(callstackSlice.actions.removeAll());
     // eslint-disable-next-line react-hooks/exhaustive-deps

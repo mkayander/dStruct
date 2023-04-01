@@ -23,12 +23,13 @@ export const argumentTreeTypeValues = new Set([
 ]);
 
 export const isArgumentTreeType = (
-  type: ArgumentType
-): type is ArgumentTreeType => argumentTreeTypeValues.has(type);
+  arg: ArgumentObject
+): arg is ArgumentObject<ArgumentTreeType> =>
+  argumentTreeTypeValues.has(arg.type);
 
-export type ArgumentObject = {
+export type ArgumentObject<T extends ArgumentType = ArgumentType> = {
   name: string;
-  type: ArgumentType;
+  type: T;
   order: number;
   input: string;
 };
