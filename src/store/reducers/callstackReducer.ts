@@ -38,17 +38,28 @@ type SetChildFrame = NodeFrameBase & {
   args: [string | null];
 };
 
+type ShowPointerFrame = NodeFrameBase & {
+  name: "showPointer";
+};
+
 type BlinkFrame = NodeFrameBase & {
   name: "blink";
   args: [];
 };
 
+type AddNodeFrame = NodeFrameBase & {
+  name: "addNode";
+  args: [number | string];
+};
+
 export type CallFrame =
   | RuntimeErrorFrame
+  | AddNodeFrame
   | SetColorFrame
   | SetValFrame
   | SetChildFrame
-  | BlinkFrame;
+  | BlinkFrame
+  | ShowPointerFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
   selectId: (frame) => frame.id,
