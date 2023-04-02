@@ -1,9 +1,9 @@
+import { Prisma } from "@prisma/client";
+
 import type { AppDispatch } from "#/store/makeStore";
 import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
 import { createRuntimeTree } from "#/utils/createRuntimeTree";
-
-import { Prisma } from ".prisma/client";
 
 import JsonArray = Prisma.JsonArray;
 
