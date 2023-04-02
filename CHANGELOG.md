@@ -1,3 +1,15 @@
+# [1.123.0](https://github.com/mkayander/leetpal/compare/v1.122.0...v1.123.0) (2023-04-02)
+
+
+### Bug Fixes
+
+* Fixed tree reducer node types ([ab32da4](https://github.com/mkayander/leetpal/commit/ab32da4a4ac4d598837def4c13fddfd83191a40f))
+
+
+### Features
+
+* Updated react-query & eslint packages ([578f432](https://github.com/mkayander/leetpal/commit/578f432df46ab2baf767a987818dda7551c0ac5f))
+
 # [1.122.0](https://github.com/mkayander/leetpal/compare/v1.121.0...v1.122.0) (2023-04-01)
 
 
