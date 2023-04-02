@@ -1,3 +1,12 @@
+# [1.124.0](https://github.com/mkayander/leetpal/compare/v1.123.1...v1.124.0) (2023-04-02)
+
+
+### Features
+
+* Added new callstack frames ([c29ff46](https://github.com/mkayander/leetpal/commit/c29ff46b3ca0dc2703cfe81b6303788a2a63962b))
+* Implemented array runtime parsing ([8a22d2d](https://github.com/mkayander/leetpal/commit/8a22d2ddc39348ddfa02437d588a2843989d93e3))
+* Implemented basic array data structure display ([cd5fc0a](https://github.com/mkayander/leetpal/commit/cd5fc0a50762cdf354835c1f659fa10133952a56))
+
 ## [1.123.1](https://github.com/mkayander/leetpal/compare/v1.123.0...v1.123.1) (2023-04-02)
 
 
