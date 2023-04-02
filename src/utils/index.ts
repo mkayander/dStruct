@@ -5,4 +5,6 @@ export { a11yProps } from "./a11yProps";
 export { validateAnimationName } from "./validateAnimationName";
 export { categoryLabels } from "./categoryLabels";
 export { createCaseRuntimeArgs } from "./createCaseRuntimeArgs";
+export { createRuntimeTree } from "./createRuntimeTree";
+export { createRuntimeArray } from "./createRuntimeArray";
 export { processNodeRelation } from "./processNodeRelation";

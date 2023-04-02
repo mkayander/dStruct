@@ -1,27 +1,20 @@
-import { Prisma } from "@prisma/client";
-
 import type { AppDispatch } from "#/store/makeStore";
+import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
 import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
+import { createRuntimeArray, createRuntimeTree } from "#/utils";
 import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
-import { createRuntimeTree } from "#/utils/createRuntimeTree";
-
-import JsonArray = Prisma.JsonArray;
 
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
   treeStore: TreeDataState,
+  arrayStore: ArrayDataState,
   args: ArgumentObject[]
 ) => {
   return args.map((arg) => {
     switch (arg.type) {
       case ArgumentType.LINKED_LIST:
       case ArgumentType.BINARY_TREE:
-        const nodesData = treeStore[arg.name];
-        if (!nodesData) {
-          console.error("No nodes data found for binary tree", arg.name);
-          return null;
-        }
-        return createRuntimeTree(nodesData, arg.name, dispatch);
+        return createRuntimeTree(treeStore[arg.name], arg, dispatch);
 
       case ArgumentType.NUMBER:
         return Number(arg.input);
@@ -33,7 +26,7 @@ export const createCaseRuntimeArgs = (
         return arg.input === "true";
 
       case ArgumentType.ARRAY:
-        return JSON.parse(arg.input) as JsonArray;
+        return createRuntimeArray(arrayStore[arg.name], arg, dispatch);
 
       case ArgumentType.MATRIX:
         return JSON.parse(arg.input) as number[][];

@@ -22,6 +22,7 @@ import {
 } from "#/store/reducers/callstackReducer";
 import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
+import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   treeDataSelector,
   treeNodeSlice,
@@ -68,6 +69,7 @@ export const CodePanel: React.FC = () => {
   });
 
   const treeStore = useAppSelector(treeDataSelector);
+  const arrayStore = useAppSelector(arrayDataSelector);
   const caseArgs = useAppSelector(selectCaseArguments);
 
   // Update code on solution change
@@ -150,7 +152,12 @@ export const CodePanel: React.FC = () => {
   };
 
   const handleRunCode = () => {
-    const args = createCaseRuntimeArgs(dispatch, treeStore, caseArgs);
+    const args = createCaseRuntimeArgs(
+      dispatch,
+      treeStore,
+      arrayStore,
+      caseArgs
+    );
 
     const getInputFunction = new Function(codeInput);
 
