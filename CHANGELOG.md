@@ -1,3 +1,10 @@
+## [1.123.1](https://github.com/mkayander/leetpal/compare/v1.123.0...v1.123.1) (2023-04-02)
+
+
+### Bug Fixes
+
+* Fixed prisma type import ([7380e10](https://github.com/mkayander/leetpal/commit/7380e1036e02606b9e11482be848284fd63795fe))
+
 # [1.123.0](https://github.com/mkayander/leetpal/compare/v1.122.0...v1.123.0) (2023-04-02)
 
 
