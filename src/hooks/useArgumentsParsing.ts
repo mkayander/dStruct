@@ -11,6 +11,10 @@ import {
   selectCaseArgumentsInfo,
 } from "#/store/reducers/caseReducer";
 import {
+  type ArrayItemData,
+  arrayStructureSlice,
+} from "#/store/reducers/structures/arrayReducer";
+import {
   treeDataSelector,
   type TreeNodeData,
   treeNodeSlice,
@@ -127,17 +131,6 @@ const parseLinkedListArgument = (rawInput: string) => {
   return { maxDepth, nodesMap };
 };
 
-const parseArgument = (arg: ArgumentObject) => {
-  switch (arg.type) {
-    case ArgumentType.BINARY_TREE:
-      return parseBinaryTreeArgument(arg.input);
-    case ArgumentType.LINKED_LIST:
-      return parseLinkedListArgument(arg.input);
-    default:
-      return;
-  }
-};
-
 const parseTreeArgument = (
   arg: ArgumentObject<ArgumentTreeType>,
   argsInfo: Record<string, ArgumentInfo>,
@@ -151,7 +144,14 @@ const parseTreeArgument = (
     })
   );
 
-  const parsed = parseArgument(arg);
+  let parsed = null;
+  switch (arg.type) {
+    case ArgumentType.BINARY_TREE:
+      parsed = parseBinaryTreeArgument(arg.input);
+      break;
+    case ArgumentType.LINKED_LIST:
+      parsed = parseLinkedListArgument(arg.input);
+  }
   if (!parsed) return;
 
   dispatch(
@@ -175,6 +175,55 @@ const parseTreeArgument = (
   );
 };
 
+const parseArrayArgument = (
+  arg: ArgumentObject,
+  argsInfo: Record<string, ArgumentInfo>,
+  dispatch: AppDispatch
+) => {
+  if (argsInfo[arg.name]?.isParsed) return;
+
+  dispatch(
+    arrayStructureSlice.actions.clear({
+      name: arg.name,
+    })
+  );
+
+  let parsed: Array<number | string> | null = null;
+  try {
+    parsed = JSON.parse(arg.input);
+  } catch (e) {
+    console.warn(e);
+  }
+  if (!parsed) return;
+
+  const newItems: ArrayItemData[] = [];
+
+  for (let i = 0; i < parsed.length; i++) {
+    const value = parsed[i];
+    if (value === undefined) continue;
+    const newId = uuid4.generate();
+    newItems[i] = {
+      id: newId,
+      value,
+      index: i,
+    };
+  }
+
+  dispatch(
+    arrayStructureSlice.actions.init({ name: arg.name, order: arg.order })
+  );
+  dispatch(
+    arrayStructureSlice.actions.addMany({
+      name: arg.name,
+      data: newItems,
+    })
+  );
+
+  dispatch(
+    caseSlice.actions.setIsArgumentParsed({ name: arg.name, value: true })
+  );
+};
+
 export const useArgumentsParsing = () => {
   const dispatch = useAppDispatch();
 
@@ -188,6 +237,8 @@ export const useArgumentsParsing = () => {
       if (isArgumentTreeType(arg)) {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
+      } else if (arg.type === ArgumentType.ARRAY) {
+        parseArrayArgument(arg, argsInfo, dispatch);
       }
     }
 

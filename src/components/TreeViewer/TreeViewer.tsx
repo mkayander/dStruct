@@ -1,10 +1,12 @@
-import { alpha, Box, type SxProps, useTheme } from "@mui/material";
+import { alpha, Box, Stack, type SxProps, useTheme } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
+import { ArrayStructureView } from "#/components/TreeViewer/ArrayStructureView";
 import { NodesView } from "#/components/TreeViewer/NodesView";
 import { useAppSelector } from "#/store/hooks";
+import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   type TreeData,
   treeDataSelector,
@@ -33,6 +35,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const theme = useTheme();
 
   const treeState = useAppSelector(treeDataSelector);
+  const arrayState = useAppSelector(arrayDataSelector);
 
   // Archer container forced re-render after animations hack
   useEffect(() => {
@@ -104,6 +107,22 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       });
   }, [playbackInterval, replayCount, treeState]);
 
+  const arrayStructures = useMemo(() => {
+    if (!arrayState) return null;
+
+    return Object.entries(arrayState)
+      .sort(([, { order: a }], [, { order: b }]) => a - b)
+      .map(([arrayName, data]) => (
+        <ArrayStructureView
+          key={arrayName}
+          arrayName={arrayName}
+          entityState={data.nodes}
+          playbackInterval={playbackInterval}
+          replayCount={replayCount}
+        />
+      ));
+  }, [arrayState, playbackInterval, replayCount]);
+
   return (
     <Box
       display="flex"
@@ -161,6 +180,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               height: "100%",
             }}
           >
+            <Stack spacing={2}>{arrayStructures}</Stack>
             <Box height="100%">{binaryTrees}</Box>
           </ArcherContainer>
         </Box>
