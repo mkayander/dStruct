@@ -110,6 +110,7 @@ export class ControlledArray extends Array {
       callstackSlice.actions.addOne({
         ...base,
         name: "showPointer",
+        args: [],
       })
     );
   }
