@@ -1,3 +1,10 @@
+## [1.124.1](https://github.com/mkayander/leetpal/compare/v1.124.0...v1.124.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* Frame argument property is required ([e1b727d](https://github.com/mkayander/leetpal/commit/e1b727d7ccfbb8686b5b4fd58f4afb4da418c587))
+
 # [1.124.0](https://github.com/mkayander/leetpal/compare/v1.123.1...v1.124.0) (2023-04-02)
 
 
