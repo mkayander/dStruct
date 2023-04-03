@@ -1,3 +1,10 @@
+## [1.124.2](https://github.com/mkayander/leetpal/compare/v1.124.1...v1.124.2) (2023-04-03)
+
+
+### Bug Fixes
+
+* Fixed "show pointer" call ([bb5861e](https://github.com/mkayander/leetpal/commit/bb5861e957b032ee87bf0366cc083a4cd4aa05f7))
+
 ## [1.124.1](https://github.com/mkayander/leetpal/compare/v1.124.0...v1.124.1) (2023-04-03)
 
 
