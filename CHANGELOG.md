@@ -1,3 +1,10 @@
+# [1.125.0](https://github.com/mkayander/leetpal/compare/v1.124.2...v1.125.0) (2023-04-03)
+
+
+### Features
+
+* Implemented initial array data structure component visuals ([d41e0d8](https://github.com/mkayander/leetpal/commit/d41e0d86e875ceb40383baecd0085882d34ed545))
+
 ## [1.124.2](https://github.com/mkayander/leetpal/compare/v1.124.1...v1.124.2) (2023-04-03)
 
 
