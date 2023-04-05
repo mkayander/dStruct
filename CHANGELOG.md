@@ -1,3 +1,10 @@
+## [1.126.1](https://github.com/mkayander/leetpal/compare/v1.126.0...v1.126.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* Use empty string colors as default ([88d9809](https://github.com/mkayander/leetpal/commit/88d98090293d2262924db44cd010f135961c8538))
+
 # [1.126.0](https://github.com/mkayander/leetpal/compare/v1.125.0...v1.126.0) (2023-04-05)
 
 
