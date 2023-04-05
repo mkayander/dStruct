@@ -23,11 +23,8 @@ import {
 import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
-import {
-  treeDataSelector,
-  treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
-import { createCaseRuntimeArgs, trpc } from "#/utils";
+import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
+import { createCaseRuntimeArgs, resetStructuresState, trpc } from "#/utils";
 
 const uuid = shortUUID();
 
@@ -168,8 +165,7 @@ export const CodePanel: React.FC = () => {
 
       // Before running the code, clear the callstack
       dispatch(callstackSlice.actions.removeAll());
-      dispatch(treeNodeSlice.actions.backupAllNodes());
-      dispatch(treeNodeSlice.actions.resetAll()); // Reset all nodes to default
+      resetStructuresState(dispatch);
 
       const result = runFunction(...args);
       const runtime = performance.now() - startTimestamp;

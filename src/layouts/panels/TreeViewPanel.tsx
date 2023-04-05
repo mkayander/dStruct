@@ -19,11 +19,14 @@ import { TreeViewer } from "#/components";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
+import { resetStructuresState } from "#/utils";
 
 export const TreeViewPanel: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [tabValue, setTabValue] = useState("1");
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
@@ -42,6 +45,10 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(Number(event.target.value));
+  };
+
+  const handleReset = () => {
+    resetStructuresState(dispatch);
   };
 
   const handleReplay = () => {
@@ -71,6 +78,14 @@ export const TreeViewPanel: React.FC = () => {
             <IconButton>
               <Settings fontSize="small" />
             </IconButton>
+            <Button
+              title="Reset data structures to initial states"
+              color="inherit"
+              onClick={handleReset}
+              sx={{ height: "100%" }}
+            >
+              Reset
+            </Button>
             <Tooltip
               title={
                 isCallstackReady
@@ -82,7 +97,6 @@ export const TreeViewPanel: React.FC = () => {
             >
               <span style={{ height: "100%" }}>
                 <Button
-                  variant="text"
                   color="info"
                   endIcon={<Replay />}
                   onClick={handleReplay}

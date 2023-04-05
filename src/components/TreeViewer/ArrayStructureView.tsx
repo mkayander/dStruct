@@ -1,10 +1,13 @@
-import { Box, Stack, type SxProps, Typography, useTheme } from "@mui/material";
+import { Box, Stack, type SxProps, useTheme } from "@mui/material";
 import { type EntityState } from "@reduxjs/toolkit";
 import React, { useMemo } from "react";
 
+import { ArrayItem } from "#/components/TreeViewer/ArrayItem";
+import { useNodesRuntimeUpdates } from "#/hooks";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
+  arrayStructureSlice,
 } from "#/store/reducers/structures/arrayReducer";
 
 type ArrayBracketProps = {
@@ -46,8 +49,18 @@ type ArrayStructureViewProps = {
 };
 
 export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
+  arrayName,
   entityState,
+  playbackInterval,
+  replayCount,
 }) => {
+  useNodesRuntimeUpdates(
+    arrayName,
+    arrayStructureSlice,
+    playbackInterval,
+    replayCount
+  );
+
   const items = useMemo(() => {
     return arrayDataItemSelectors.selectAll(entityState);
   }, [entityState]);
@@ -71,53 +84,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
       <ArrayBracket />
       <Stack direction="row">
         {items.map((item) => (
-          <Box
-            key={item.id}
-            className="array-item"
-            sx={{
-              position: "relative",
-              width: 42,
-              height: 42,
-              marginLeft: "1px",
-              backgroundColor: item.color,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-
-              "&::after": {
-                content: '""',
-                position: "absolute",
-                zIndex: 15,
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                background: "rgba(255, 255, 255, 0.1)",
-                opacity: 0,
-                transition: "opacity 0.1s",
-                mixBlendMode: "difference",
-                backdropFilter: "blur(2px)",
-              },
-
-              "&:hover::after": {
-                opacity: 0.3,
-              },
-
-              "&:not(:last-child)": {
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  right: -1,
-                  width: "1px",
-                  height: 32,
-                  backgroundColor: "primary.light",
-                  opacity: 0.6,
-                },
-              },
-            }}
-          >
-            <Typography sx={{ pt: 0.32 }}>{item.value}</Typography>
-          </Box>
+          <ArrayItem key={item.id} {...item} />
         ))}
       </Stack>
       <ArrayBracket side="right" />
