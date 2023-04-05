@@ -6,3 +6,4 @@ export { usePrevious } from "./usePrevious";
 export { useBinaryChildNodes } from "./useBinaryChildNodes";
 export { useLinkedListChildNode } from "./useLinkedListChildNode";
 export { useNodeColors } from "./useNodeColors";
+export { useNodesRuntimeUpdates } from "./useNodesRuntimeUpdates";
