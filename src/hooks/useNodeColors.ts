@@ -4,8 +4,8 @@ import * as muiColors from "@mui/material/colors";
 export const useNodeColors = (color?: string, useDefaultPrimary = true) => {
   const theme = useTheme();
 
-  let nodeColor: string | undefined = undefined;
-  let shadowColor: string | undefined = undefined;
+  let nodeColor = "";
+  let shadowColor = "";
   if (useDefaultPrimary) {
     nodeColor = theme.palette.primary.main;
     shadowColor = theme.palette.primary.dark;
