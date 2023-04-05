@@ -1,3 +1,18 @@
+# [1.126.0](https://github.com/mkayander/leetpal/compare/v1.125.0...v1.126.0) (2023-04-05)
+
+
+### Bug Fixes
+
+* Prevent wrong warnings ([d466569](https://github.com/mkayander/leetpal/commit/d46656964d749457f9d1cb58d9ad7c4faaf66a80))
+
+
+### Features
+
+* Added new util function to reset structure states ([89e2406](https://github.com/mkayander/leetpal/commit/89e2406baec20bbb84cfcf2ced1220f981dc47bc))
+* Moved structures runtime updates logic into a separate hook ([c7dba36](https://github.com/mkayander/leetpal/commit/c7dba363efb8f56c02da73084432c7997ace6c5c))
+* Updated array structure view ([84f70d6](https://github.com/mkayander/leetpal/commit/84f70d6137069efb9b1328c3dfa84e067cb3d53d))
+* Updated node colors hook ([71085f8](https://github.com/mkayander/leetpal/commit/71085f8662d8608f4eab403a49fd86081fd89d6b))
+
 # [1.125.0](https://github.com/mkayander/leetpal/compare/v1.124.2...v1.125.0) (2023-04-03)
 
 
