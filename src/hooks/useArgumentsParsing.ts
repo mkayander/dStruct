@@ -11,6 +11,7 @@ import {
   selectCaseArgumentsInfo,
 } from "#/store/reducers/caseReducer";
 import {
+  arrayDataSelector,
   type ArrayItemData,
   arrayStructureSlice,
 } from "#/store/reducers/structures/arrayReducer";
@@ -230,19 +231,25 @@ export const useArgumentsParsing = () => {
   const args = useAppSelector(selectCaseArguments);
   const argsInfo = useAppSelector(selectCaseArgumentsInfo);
   const treeData = useAppSelector(treeDataSelector);
+  const arrayData = useAppSelector(arrayDataSelector);
 
   useEffect(() => {
-    const removedTreeNames = new Set<string>(Object.keys(treeData));
+    const removedTreeNames = new Set(Object.keys(treeData));
+    const removedArrayNames = new Set(Object.keys(arrayData));
     for (const arg of args) {
       if (isArgumentTreeType(arg)) {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
       } else if (arg.type === ArgumentType.ARRAY) {
         parseArrayArgument(arg, argsInfo, dispatch);
+        removedArrayNames.delete(arg.name);
       }
     }
 
-    dispatch(treeNodeSlice.actions.clearMany([...removedTreeNames]));
+    removedTreeNames.size > 0 &&
+      dispatch(treeNodeSlice.actions.clearMany([...removedTreeNames]));
+    removedArrayNames.size > 0 &&
+      dispatch(arrayStructureSlice.actions.clearMany([...removedArrayNames]));
 
     dispatch(callstackSlice.actions.removeAll());
     // eslint-disable-next-line react-hooks/exhaustive-deps
