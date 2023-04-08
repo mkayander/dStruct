@@ -1,3 +1,11 @@
+## [1.126.2](https://github.com/mkayander/leetpal/compare/v1.126.1...v1.126.2) (2023-04-08)
+
+
+### Bug Fixes
+
+* Remove array structures that are not present in args anymore ([fc0b586](https://github.com/mkayander/leetpal/commit/fc0b5869a2b4f8eed11c2995148075add4cdd792))
+* Removed console log ([1b8aaf5](https://github.com/mkayander/leetpal/commit/1b8aaf5659abae81d53eb288a8b9c9c5e7bf960a))
+
 ## [1.126.1](https://github.com/mkayander/leetpal/compare/v1.126.0...v1.126.1) (2023-04-05)
 
 
