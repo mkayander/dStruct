@@ -9,8 +9,6 @@ type ArrayItemProps = ArrayItemData;
 export const ArrayItem: React.FC<ArrayItemProps> = ({ color, value }) => {
   const { nodeColor } = useNodeColors(color, false);
 
-  console.log("ArrayItem", { color, value, nodeColor });
-
   return (
     <Box
       className="array-item"
