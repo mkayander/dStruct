@@ -131,7 +131,7 @@ export const CallstackTable: React.FC = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {"treeName" in frame && (
+                  {"treeName" in frame && "nodeId" in frame && (
                     <NodeCell treeName={frame.treeName} id={frame.nodeId} />
                   )}
                 </TableCell>
