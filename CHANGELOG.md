@@ -1,3 +1,10 @@
+## [1.127.1](https://github.com/mkayander/leetpal/compare/v1.127.0...v1.127.1) (2023-04-09)
+
+
+### Bug Fixes
+
+* Fixed node cell condition ([9f9e5eb](https://github.com/mkayander/leetpal/commit/9f9e5eb9c988f6854e1ce7a59a23816ef15bf7d7))
+
 # [1.127.0](https://github.com/mkayander/leetpal/compare/v1.126.2...v1.127.0) (2023-04-09)
 
 
