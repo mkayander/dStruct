@@ -68,15 +68,18 @@ export class ControlledArray extends Array {
     return this.itemsMeta[index];
   }
 
-  protected getDispatchBase(index: number) {
-    const meta = this.getNodeMeta(index);
-    if (!meta) return null;
-    return {
+  protected getDispatchBase(index?: number) {
+    const data = {
       id: uuid.generate(),
+      nodeId: "-1",
       treeName: this.name,
-      nodeId: meta.id,
       timestamp: performance.now(),
     };
+    if (index !== undefined) {
+      const meta = this.getNodeMeta(index);
+      meta && (data.nodeId = meta.id);
+    }
+    return data;
   }
 
   public blink(index: number) {
@@ -111,6 +114,18 @@ export class ControlledArray extends Array {
         ...base,
         name: "showPointer",
         args: [],
+      })
+    );
+  }
+
+  public setColorMap(map: Record<number | string, string>) {
+    const base = this.getDispatchBase();
+    if (!base) return;
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...base,
+        name: "setColorMap",
+        args: [map],
       })
     );
   }

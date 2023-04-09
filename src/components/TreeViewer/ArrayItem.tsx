@@ -4,10 +4,17 @@ import React from "react";
 import { useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
-type ArrayItemProps = ArrayItemData;
+type ArrayItemProps = ArrayItemData & {
+  colorMap: Record<number | string, string>;
+};
 
-export const ArrayItem: React.FC<ArrayItemProps> = ({ color, value }) => {
-  const { nodeColor } = useNodeColors(color, false);
+export const ArrayItem: React.FC<ArrayItemProps> = ({
+  value,
+  color,
+  colorMap,
+}) => {
+  const valueColor = colorMap[value];
+  const { nodeColor } = useNodeColors(valueColor || color, false);
 
   return (
     <Box

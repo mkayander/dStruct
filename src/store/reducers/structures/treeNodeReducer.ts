@@ -10,6 +10,7 @@ import {
   type BaseStructureItem,
   type BaseStructureState,
   getBaseStructureReducers,
+  getInitialDataBase,
   getStateByName,
   type NamedPayload,
   runStateActionByName,
@@ -41,13 +42,12 @@ const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>({
 });
 
 const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
+  ...getInitialDataBase(treeNodeDataAdapter),
   type,
   order,
   count: 0,
   maxDepth: 0,
   rootId: null,
-  initialNodes: treeNodeDataAdapter.getInitialState(),
-  nodes: treeNodeDataAdapter.getInitialState(),
 });
 const initialState: TreeDataState = {};
 

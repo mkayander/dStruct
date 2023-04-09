@@ -18,7 +18,16 @@ export type StructureNode = {
 export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   nodes: EntityState<N>;
   initialNodes: EntityState<N>;
+  colorMap: Record<string | number, string>;
 };
+
+export const getInitialDataBase = <N extends StructureNode>(
+  adapter: EntityAdapter<N>
+): BaseStructureItem<N> => ({
+  nodes: adapter.getInitialState(),
+  initialNodes: adapter.getInitialState(),
+  colorMap: {},
+});
 
 export type BaseStructureState<
   T extends BaseStructureItem = BaseStructureItem
@@ -76,6 +85,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
 
     adapter.removeAll(state.nodes);
     adapter.addMany(state.nodes, selectors.selectAll(state.initialNodes));
+    state.colorMap = {};
   };
 
   return {
@@ -128,6 +138,18 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     clearAll: () => {
       return {};
     },
+    setColorMap: <T extends BaseStructureState>(
+      state: T,
+      action: NamedPayload<Pick<BaseStructureItem, "colorMap"> | null>
+    ) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        if (action.payload.data === null) {
+          treeState.colorMap = {};
+          return;
+        }
+
+        treeState.colorMap = action.payload.data.colorMap;
+      }),
     backupAllNodes: <T extends BaseStructureState>(state: T) => {
       for (const name in state) {
         runStateActionByName(state, name, (treeState) => {

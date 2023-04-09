@@ -10,6 +10,7 @@ import {
   type BaseStructureItem,
   type BaseStructureState,
   getBaseStructureReducers,
+  getInitialDataBase,
   getStateByName,
   type StructureNode,
 } from "#/store/reducers/structures/structureUtils";
@@ -30,9 +31,8 @@ const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
 });
 
 const getInitialData = (order: number): ArrayData => ({
+  ...getInitialDataBase(arrayDataAdapter),
   order,
-  initialNodes: arrayDataAdapter.getInitialState(),
-  nodes: arrayDataAdapter.getInitialState(),
 });
 const initialState: ArrayDataState = {};
 

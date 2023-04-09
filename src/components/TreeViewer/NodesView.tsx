@@ -1,20 +1,18 @@
 import { Box, type SxProps } from "@mui/material";
-import type { EntityState } from "@reduxjs/toolkit";
 import React from "react";
 
 import { BinaryNode } from "#/components/TreeViewer/BinaryNode";
 import { LinkedListNode } from "#/components/TreeViewer/LinkedListNode";
 import { useNodesRuntimeUpdates } from "#/hooks";
 import {
-  type TreeNodeData,
+  type TreeData,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
+import { ArgumentType } from "#/utils/argumentObject";
 
 type NodesViewProps = {
   treeName: string;
-  type: ArgumentTreeType;
-  nodes: EntityState<TreeNodeData>;
+  data: TreeData;
   playbackInterval: number;
   replayCount: number;
   sx?: SxProps;
@@ -22,8 +20,7 @@ type NodesViewProps = {
 
 export const NodesView: React.FC<NodesViewProps> = ({
   treeName,
-  type,
-  nodes,
+  data,
   playbackInterval,
   replayCount,
   sx,
@@ -35,7 +32,8 @@ export const NodesView: React.FC<NodesViewProps> = ({
     replayCount
   );
 
-  const Node = type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
+  const Node =
+    data.type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
 
   return (
     <Box
@@ -46,10 +44,15 @@ export const NodesView: React.FC<NodesViewProps> = ({
         ...sx,
       }}
     >
-      {Object.values(nodes.entities).map(
+      {Object.values(data.nodes.entities).map(
         (node) =>
           node && (
-            <Node key={node.id} treeName={treeName} type={type} {...node} />
+            <Node
+              key={node.id}
+              treeName={treeName}
+              type={data.type}
+              {...node}
+            />
           )
       )}
     </Box>

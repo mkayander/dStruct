@@ -1,12 +1,11 @@
 import { Box, Stack, type SxProps, useTheme } from "@mui/material";
-import { type EntityState } from "@reduxjs/toolkit";
 import React, { useMemo } from "react";
 
 import { ArrayItem } from "#/components/TreeViewer/ArrayItem";
 import { useNodesRuntimeUpdates } from "#/hooks";
 import {
+  type ArrayData,
   arrayDataItemSelectors,
-  type ArrayItemData,
   arrayStructureSlice,
 } from "#/store/reducers/structures/arrayReducer";
 
@@ -42,7 +41,7 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({ side = "left" }) => {
 
 type ArrayStructureViewProps = {
   arrayName: string;
-  entityState: EntityState<ArrayItemData>;
+  data: ArrayData;
   playbackInterval: number;
   replayCount: number;
   sx?: SxProps;
@@ -50,7 +49,7 @@ type ArrayStructureViewProps = {
 
 export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
   arrayName,
-  entityState,
+  data,
   playbackInterval,
   replayCount,
 }) => {
@@ -62,8 +61,8 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
   );
 
   const items = useMemo(() => {
-    return arrayDataItemSelectors.selectAll(entityState);
-  }, [entityState]);
+    return arrayDataItemSelectors.selectAll(data.nodes);
+  }, [data.nodes]);
 
   return (
     <Stack
@@ -84,7 +83,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
       <ArrayBracket />
       <Stack direction="row">
         {items.map((item) => (
-          <ArrayItem key={item.id} {...item} />
+          <ArrayItem key={item.id} colorMap={data.colorMap} {...item} />
         ))}
       </Stack>
       <ArrayBracket side="right" />

@@ -48,6 +48,18 @@ export abstract class NodeBase {
     );
   }
 
+  public setColorMap(map: Record<number | string, string>) {
+    const base = this.getDispatchBase();
+    if (!base) return;
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...base,
+        name: "setColorMap",
+        args: [map],
+      })
+    );
+  }
+
   public blink() {
     this.dispatch(
       callstackSlice.actions.addOne({

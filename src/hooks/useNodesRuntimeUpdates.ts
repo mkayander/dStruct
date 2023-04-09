@@ -33,7 +33,7 @@ export const useNodesRuntimeUpdates = (
       }
 
       switch (frame.name) {
-        case "setColor": {
+        case "setColor":
           dispatch(
             slice.actions.update({
               name: treeName,
@@ -47,7 +47,17 @@ export const useNodesRuntimeUpdates = (
             })
           );
           break;
-        }
+
+        case "setColorMap":
+          dispatch(
+            slice.actions.setColorMap({
+              name: treeName,
+              data: {
+                colorMap: frame.args[0],
+              },
+            })
+          );
+          break;
 
         case "setVal":
           dispatch(
@@ -103,6 +113,10 @@ export const useNodesRuntimeUpdates = (
               },
             })
           );
+          break;
+
+        default:
+          console.error("Unknown frame name: ", frame.name);
       }
 
       isStarted = true;
