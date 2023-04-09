@@ -1,3 +1,10 @@
+# [1.127.0](https://github.com/mkayander/leetpal/compare/v1.126.2...v1.127.0) (2023-04-09)
+
+
+### Features
+
+* Implemented 'setColorMap' runtime feature ([88f1d99](https://github.com/mkayander/leetpal/commit/88f1d99cc44a284a2fed246a9f3dad811a2c6cd3))
+
 ## [1.126.2](https://github.com/mkayander/leetpal/compare/v1.126.1...v1.126.2) (2023-04-08)
 
 
