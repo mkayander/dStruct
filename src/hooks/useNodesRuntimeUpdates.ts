@@ -2,13 +2,11 @@ import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstack } from "#/store/reducers/callstackReducer";
-import { type arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
-import { type treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
-import { validateAnimationName } from "#/utils";
+import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
+import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
+import { resetStructuresState, validateAnimationName } from "#/utils";
 
 export const useNodesRuntimeUpdates = (
-  treeName: string,
-  slice: typeof treeNodeSlice | typeof arrayStructureSlice,
   playbackInterval: number,
   replayCount: number
 ) => {
@@ -31,6 +29,10 @@ export const useNodesRuntimeUpdates = (
         clearInterval(intervalId);
         return;
       }
+
+      const treeName = frame.treeName;
+      const slice =
+        frame.structureType === "array" ? arrayStructureSlice : treeNodeSlice;
 
       switch (frame.name) {
         case "setColor":
@@ -126,15 +128,7 @@ export const useNodesRuntimeUpdates = (
 
     return () => {
       clearInterval(intervalId);
-      isStarted && dispatch(slice.actions.resetAll());
+      isStarted && resetStructuresState(dispatch);
     };
-  }, [
-    callstack,
-    callstackIsReady,
-    dispatch,
-    playbackInterval,
-    slice.actions,
-    treeName,
-    replayCount,
-  ]);
+  }, [callstack, callstackIsReady, dispatch, playbackInterval, replayCount]);
 };

@@ -8,10 +8,11 @@ import {
 
 import type { RootState } from "#/store/makeStore";
 
-type CallFrameBase = {
+export type CallFrameBase = {
   id: string;
   timestamp: number;
   treeName: string;
+  structureType: "treeNode" | "array";
 };
 
 type RuntimeErrorFrame = CallFrameBase & {

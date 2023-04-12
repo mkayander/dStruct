@@ -74,8 +74,9 @@ export abstract class NodeBase {
     return {
       id: uuid.generate(),
       treeName: this.name,
+      structureType: "treeNode",
       nodeId: this.meta.id,
       timestamp: performance.now(),
-    };
+    } as const;
   }
 }

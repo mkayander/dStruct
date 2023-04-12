@@ -2,10 +2,10 @@ import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
 import type { AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import { type CallFrameBase, callstackSlice } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
-  type ArrayItemData,
+  type ArrayItemData
 } from "#/store/reducers/structures/arrayReducer";
 
 const uuid = shortUUID();
@@ -38,10 +38,11 @@ export class ControlledArray extends Array {
             callstackSlice.actions.addOne({
               id: uuid.generate(),
               treeName: this.name,
+              structureType: "array",
               nodeId: uuid.generate(),
               timestamp: performance.now(),
               name: "addNode",
-              args: [value],
+              args: [value]
             })
           );
           return true;
@@ -56,11 +57,11 @@ export class ControlledArray extends Array {
           callstackSlice.actions.addOne({
             ...base,
             name: "setVal",
-            args: [value],
+            args: [value]
           })
         );
         return true;
-      },
+      }
     });
   }
 
@@ -73,8 +74,9 @@ export class ControlledArray extends Array {
       id: uuid.generate(),
       nodeId: "-1",
       treeName: this.name,
-      timestamp: performance.now(),
-    };
+      structureType: "array",
+      timestamp: performance.now()
+    } satisfies CallFrameBase & { nodeId: string };
     if (index !== undefined) {
       const meta = this.getNodeMeta(index);
       meta && (data.nodeId = meta.id);
@@ -89,7 +91,7 @@ export class ControlledArray extends Array {
       callstackSlice.actions.addOne({
         ...base,
         name: "blink",
-        args: [],
+        args: []
       })
     );
   }
@@ -101,7 +103,7 @@ export class ControlledArray extends Array {
       callstackSlice.actions.addOne({
         ...base,
         name: "setColor",
-        args: [color, animation],
+        args: [color, animation]
       })
     );
   }
@@ -113,7 +115,7 @@ export class ControlledArray extends Array {
       callstackSlice.actions.addOne({
         ...base,
         name: "showPointer",
-        args: [],
+        args: []
       })
     );
   }
@@ -125,7 +127,7 @@ export class ControlledArray extends Array {
       callstackSlice.actions.addOne({
         ...base,
         name: "setColorMap",
-        args: [map],
+        args: [map]
       })
     );
   }

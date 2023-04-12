@@ -5,6 +5,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 
 import { ArrayStructureView } from "#/components/TreeViewer/ArrayStructureView";
 import { NodesView } from "#/components/TreeViewer/NodesView";
+import { useNodesRuntimeUpdates } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
@@ -43,6 +44,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     return () => clearTimeout(timeoutId);
   }, [treeState]);
+
+  useNodesRuntimeUpdates(playbackInterval, replayCount);
 
   const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
   const [, setForceUpdate] = useState(false);
@@ -94,17 +97,10 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         }
         prevTree = data;
         return (
-          <NodesView
-            key={treeName}
-            treeName={treeName}
-            data={data}
-            playbackInterval={playbackInterval}
-            replayCount={replayCount}
-            sx={sx}
-          />
+          <NodesView key={treeName} treeName={treeName} data={data} sx={sx} />
         );
       });
-  }, [playbackInterval, replayCount, treeState]);
+  }, [treeState]);
 
   const arrayStructures = useMemo(() => {
     if (!arrayState) return null;
@@ -112,15 +108,9 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     return Object.entries(arrayState)
       .sort(([, { order: a }], [, { order: b }]) => a - b)
       .map(([arrayName, data]) => (
-        <ArrayStructureView
-          key={arrayName}
-          arrayName={arrayName}
-          data={data}
-          playbackInterval={playbackInterval}
-          replayCount={replayCount}
-        />
+        <ArrayStructureView key={arrayName} data={data} />
       ));
-  }, [arrayState, playbackInterval, replayCount]);
+  }, [arrayState]);
 
   return (
     <Box

@@ -2,11 +2,9 @@ import { Box, Stack, type SxProps, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { ArrayItem } from "#/components/TreeViewer/ArrayItem";
-import { useNodesRuntimeUpdates } from "#/hooks";
 import {
   type ArrayData,
   arrayDataItemSelectors,
-  arrayStructureSlice,
 } from "#/store/reducers/structures/arrayReducer";
 
 type ArrayBracketProps = {
@@ -40,26 +38,13 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({ side = "left" }) => {
 };
 
 type ArrayStructureViewProps = {
-  arrayName: string;
   data: ArrayData;
-  playbackInterval: number;
-  replayCount: number;
   sx?: SxProps;
 };
 
 export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
-  arrayName,
   data,
-  playbackInterval,
-  replayCount,
 }) => {
-  useNodesRuntimeUpdates(
-    arrayName,
-    arrayStructureSlice,
-    playbackInterval,
-    replayCount
-  );
-
   const items = useMemo(() => {
     return arrayDataItemSelectors.selectAll(data.nodes);
   }, [data.nodes]);
