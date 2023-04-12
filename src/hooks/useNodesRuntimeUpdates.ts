@@ -30,6 +30,8 @@ export const useNodesRuntimeUpdates = (
         return;
       }
 
+      if (frame.name === "error") return;
+
       const treeName = frame.treeName;
       const slice =
         frame.structureType === "array" ? arrayStructureSlice : treeNodeSlice;
