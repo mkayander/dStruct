@@ -15,7 +15,9 @@ export type CallFrameBase = {
   structureType: "treeNode" | "array";
 };
 
-type RuntimeErrorFrame = CallFrameBase & {
+type RuntimeErrorFrame = {
+  id: string;
+  timestamp: number;
   name: "error";
 };
 
