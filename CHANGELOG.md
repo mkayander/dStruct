@@ -1,3 +1,16 @@
+# [1.128.0](https://github.com/mkayander/leetpal/compare/v1.127.1...v1.128.0) (2023-04-12)
+
+
+### Bug Fixes
+
+* Fixed runtime error frame type ([d4e659a](https://github.com/mkayander/leetpal/commit/d4e659a7bfb7d5e4c472d386cbc0ed57deb2b0ce))
+* Fixed runtime updates with multiple structures ([b8f9984](https://github.com/mkayander/leetpal/commit/b8f99849c565a7829175cc4a8056a9ffbf234e33))
+
+
+### Features
+
+* Implemented node removal action & array popping ([3f1058e](https://github.com/mkayander/leetpal/commit/3f1058eb5f2d28916a723f18b8a1767027cbf5ec))
+
 ## [1.127.1](https://github.com/mkayander/leetpal/compare/v1.127.0...v1.127.1) (2023-04-09)
 
 
