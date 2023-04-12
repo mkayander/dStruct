@@ -1,3 +1,11 @@
+## [1.128.1](https://github.com/mkayander/leetpal/compare/v1.128.0...v1.128.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* Do not try to update any nodes from a runtime error call-frame ([9ffbefb](https://github.com/mkayander/leetpal/commit/9ffbefbc4eef67e2228e6a09bd458eb4e4db6ecf))
+* Run test typescript compilation on lint command ([a9f2534](https://github.com/mkayander/leetpal/commit/a9f25349787681c365c0ab3acc5ff1c659d4f181))
+
 # [1.128.0](https://github.com/mkayander/leetpal/compare/v1.127.1...v1.128.0) (2023-04-12)
 
 
