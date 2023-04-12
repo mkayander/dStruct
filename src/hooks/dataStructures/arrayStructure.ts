@@ -84,6 +84,19 @@ export class ControlledArray extends Array {
     return data;
   }
 
+  override pop() {
+    const base = this.getDispatchBase(this.length - 1);
+    const value = super.pop();
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...base,
+        name: "deleteNode",
+        args: []
+      })
+    );
+    return value;
+  }
+
   public blink(index: number) {
     const base = this.getDispatchBase(index);
     if (!base) return;

@@ -75,6 +75,33 @@ export const useNodesRuntimeUpdates = (
           );
           break;
 
+        case "addNode":
+          dispatch(
+            slice.actions.add({
+              name: treeName,
+              data: {
+                id: frame.nodeId,
+                value: frame.args[0],
+                depth: 0,
+                y: 0,
+                x: 0,
+                childrenIds: [],
+              },
+            })
+          );
+          break;
+
+        case "deleteNode":
+          dispatch(
+            slice.actions.remove({
+              name: treeName,
+              data: {
+                id: frame.nodeId,
+              },
+            })
+          );
+          break;
+
         case "setNextNode":
         case "setLeftChild":
           "setChildId" in slice.actions &&
