@@ -11,7 +11,7 @@
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "generate-graphql": "graphql-codegen --config codegen.yml",
-    "lint": "next lint",
+    "lint": "next lint && tsc --noEmit",
     "start": "next start",
     "semantic-release": "semantic-release",
     "lint-staged": "lint-staged"
