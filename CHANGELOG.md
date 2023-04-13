@@ -1,3 +1,15 @@
+# [1.129.0](https://github.com/mkayander/leetpal/compare/v1.128.1...v1.129.0) (2023-04-13)
+
+
+### Bug Fixes
+
+* Improved array structure display ([52eeef6](https://github.com/mkayander/leetpal/commit/52eeef66cd93ab53a7db4befd8211def689f688b))
+
+
+### Features
+
+* Improved array runtime updates ([1c173ef](https://github.com/mkayander/leetpal/commit/1c173efe0bc58e1d40f7074757a70ed672326c27))
+
 ## [1.128.1](https://github.com/mkayander/leetpal/compare/v1.128.0...v1.128.1) (2023-04-12)
 
 
