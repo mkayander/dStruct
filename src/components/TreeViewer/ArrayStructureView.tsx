@@ -21,8 +21,8 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({ side = "left" }) => {
       sx={{
         width: 12,
         height: 42,
-        marginRight: "-12px",
-        marginLeft: "-12px",
+        marginRight: side === "left" ? "-12px" : 0,
+        marginLeft: side === "left" ? 0 : "-12px",
         borderRadius: "2px 0 0 2px",
         borderLeft: borderStyle,
         borderTop: borderStyle,
@@ -67,9 +67,18 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
     >
       <ArrayBracket />
       <Stack direction="row">
-        {items.map((item) => (
-          <ArrayItem key={item.id} colorMap={data.colorMap} {...item} />
-        ))}
+        {items.length > 0 ? (
+          items.map((item) => (
+            <ArrayItem key={item.id} colorMap={data.colorMap} {...item} />
+          ))
+        ) : (
+          <Box
+            sx={{
+              width: 32,
+              height: 12,
+            }}
+          />
+        )}
       </Stack>
       <ArrayBracket side="right" />
     </Stack>
