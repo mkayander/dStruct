@@ -17,7 +17,7 @@ export const createRuntimeTree = (
   if (!rootId) return null;
 
   let dataMap = nodesData.nodes.entities;
-  if (nodesData.initialNodes.ids.length > 0) {
+  if (nodesData.initialNodes !== null) {
     dataMap = nodesData.initialNodes.entities;
   }
 

@@ -12,9 +12,11 @@ export const createRuntimeArray = (
   const array = JSON.parse(arg.input) as Array<number | string>;
 
   let arrayDataState = nodesData.nodes;
-  if (nodesData.initialNodes.ids.length > 0) {
+  if (nodesData.initialNodes !== null) {
     arrayDataState = nodesData.initialNodes;
   }
+
+  arrayDataState = structuredClone(arrayDataState);
 
   return new ControlledArray(array, arg.name, arrayDataState, dispatch);
 };

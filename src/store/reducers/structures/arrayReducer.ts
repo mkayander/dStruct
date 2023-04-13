@@ -13,7 +13,7 @@ import {
   getInitialDataBase,
   getStateByName,
   type StructureNode,
-} from "#/store/reducers/structures/structureUtils";
+} from "#/store/reducers/structures/baseStructureReducer";
 
 export type ArrayItemData = StructureNode & {
   index: number;
@@ -36,6 +36,9 @@ const getInitialData = (order: number): ArrayData => ({
 });
 const initialState: ArrayDataState = {};
 
+const baseStructureReducers =
+  getBaseStructureReducers<ArrayItemData>(arrayDataAdapter);
+
 /**
  * Slice
  * @see https://redux-toolkit.js.org/api/createslice
@@ -44,7 +47,7 @@ export const arrayStructureSlice = createSlice({
   name: "ARRAY_STRUCTURE",
   initialState,
   reducers: {
-    ...getBaseStructureReducers(arrayDataAdapter),
+    ...baseStructureReducers,
     init: (
       state,
       action: PayloadAction<{

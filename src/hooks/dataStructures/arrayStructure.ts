@@ -34,17 +34,24 @@ export class ControlledArray extends Array {
 
         const prevData = this.itemsMeta[index];
         if (!prevData) {
+          const newItem = {
+            id: uuid.generate(),
+            index,
+            value,
+            children: []
+          };
           dispatch(
             callstackSlice.actions.addOne({
               id: uuid.generate(),
               treeName: this.name,
               structureType: "array",
-              nodeId: uuid.generate(),
+              nodeId: newItem.id,
               timestamp: performance.now(),
-              name: "addNode",
-              args: [value]
+              name: "addArrayItem",
+              args: [value, index]
             })
           );
+          this.itemsMeta[index] = newItem;
           return true;
         }
 
@@ -94,6 +101,7 @@ export class ControlledArray extends Array {
         args: []
       })
     );
+    this.itemsMeta.pop();
     return value;
   }
 

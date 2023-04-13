@@ -78,19 +78,34 @@ export const useNodesRuntimeUpdates = (
           break;
 
         case "addNode":
-          dispatch(
-            slice.actions.add({
-              name: treeName,
-              data: {
-                id: frame.nodeId,
-                value: frame.args[0],
-                depth: 0,
-                y: 0,
-                x: 0,
-                childrenIds: [],
-              },
-            })
-          );
+          "setChildId" in slice.actions &&
+            dispatch(
+              slice.actions.add({
+                name: treeName,
+                data: {
+                  id: frame.nodeId,
+                  value: frame.args[0],
+                  depth: 0,
+                  y: 0,
+                  x: 0,
+                  childrenIds: [],
+                },
+              })
+            );
+          break;
+
+        case "addArrayItem":
+          !("setChildId" in slice.actions) &&
+            dispatch(
+              slice.actions.add({
+                name: treeName,
+                data: {
+                  id: frame.nodeId,
+                  value: frame.args[0],
+                  index: frame.args[1],
+                },
+              })
+            );
           break;
 
         case "deleteNode":
@@ -157,7 +172,7 @@ export const useNodesRuntimeUpdates = (
 
     return () => {
       clearInterval(intervalId);
-      isStarted && resetStructuresState(dispatch);
+      isStarted && resetStructuresState(dispatch, false);
     };
   }, [callstack, callstackIsReady, dispatch, playbackInterval, replayCount]);
 };

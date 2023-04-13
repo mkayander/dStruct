@@ -61,6 +61,11 @@ type AddNodeFrame = NodeFrameBase & {
   args: [number | string];
 };
 
+type AddArrayItemFrame = NodeFrameBase & {
+  name: "addArrayItem";
+  args: [number | string, number];
+};
+
 type DeleteNodeFrame = NodeFrameBase & {
   name: "deleteNode";
   args: [];
@@ -69,6 +74,7 @@ type DeleteNodeFrame = NodeFrameBase & {
 export type CallFrame =
   | RuntimeErrorFrame
   | AddNodeFrame
+  | AddArrayItemFrame
   | DeleteNodeFrame
   | SetColorFrame
   | SetColorMapFrame
