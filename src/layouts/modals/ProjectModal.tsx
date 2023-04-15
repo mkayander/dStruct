@@ -23,6 +23,7 @@ import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
+import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
@@ -174,6 +175,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     );
   };
 
+  const handleGenerateSlug = (value?: string) => {
+    formik.setFieldValue(
+      "projectSlug",
+      slugify(value ?? formik.values.projectName, {
+        lower: true,
+        strict: true,
+      })
+    );
+  };
+
   return (
     <Dialog {...props} onClose={onClose}>
       <form
@@ -189,39 +200,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             Edit the project details below according to your needs.
           </DialogContentText>
           <Stack spacing={2} mt={2}>
-            <TextField
-              id="projectSlug"
-              name="projectSlug"
-              label="Slug"
-              variant="outlined"
-              disabled={formik.isSubmitting}
-              value={formik.values.projectSlug}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.projectSlug && Boolean(formik.errors.projectSlug)
-              }
-              helperText={
-                (formik.touched.projectSlug && formik.errors.projectSlug) ||
-                "You can edit a slug that's used in the URL to this project."
-              }
-            />
-            <TextField
-              id="projectName"
-              name="projectName"
-              label="Name"
-              variant="outlined"
-              required
-              disabled={formik.isSubmitting}
-              value={formik.values.projectName}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.projectName && Boolean(formik.errors.projectName)
-              }
-              helperText={
-                (formik.touched.projectName && formik.errors.projectName) ||
-                "Enter a name for your new project."
-              }
-            />
             <FormControl fullWidth>
               <InputLabel required id="new-proj-select-category-label">
                 Category
@@ -249,6 +227,44 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </Select>
               <FormHelperText>Select a data structure category.</FormHelperText>
             </FormControl>
+            <TextField
+              id="projectName"
+              name="projectName"
+              label="Name"
+              variant="outlined"
+              required
+              disabled={formik.isSubmitting}
+              value={formik.values.projectName}
+              onChange={(ev) => {
+                formik.handleChange(ev);
+                if (!formik.touched.projectSlug) {
+                  handleGenerateSlug(ev.target.value);
+                }
+              }}
+              error={
+                formik.touched.projectName && Boolean(formik.errors.projectName)
+              }
+              helperText={
+                (formik.touched.projectName && formik.errors.projectName) ||
+                "Enter a name for your new project."
+              }
+            />
+            <TextField
+              id="projectSlug"
+              name="projectSlug"
+              label="Slug"
+              variant="outlined"
+              disabled={formik.isSubmitting}
+              value={formik.values.projectSlug}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectSlug && Boolean(formik.errors.projectSlug)
+              }
+              helperText={
+                (formik.touched.projectSlug && formik.errors.projectSlug) ||
+                "You can edit a slug that's used in the URL to this project."
+              }
+            />
             <TextField
               id="projectDescription"
               name="projectDescription"
