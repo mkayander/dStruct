@@ -1,3 +1,19 @@
+# [1.130.0](https://github.com/mkayander/leetpal/compare/v1.129.0...v1.130.0) (2023-04-15)
+
+
+### Bug Fixes
+
+* Fixed project modal reset on window blur ([8650128](https://github.com/mkayander/leetpal/commit/86501285fd4fab9617c319381432cdb81fd5ad31))
+* Prevent errors about non-serializable data in Redux store ([c2cb423](https://github.com/mkayander/leetpal/commit/c2cb4232d4788647a9da35ac0269c1072a153ce8))
+
+
+### Features
+
+* Added new code templates ([0c05b36](https://github.com/mkayander/leetpal/commit/0c05b36eb34deee504085a8fdb9318afcf93527b))
+* Improved project modal. Auto-generate slug. ([859a9f4](https://github.com/mkayander/leetpal/commit/859a9f4106207a84ba8f64999b0cd9e02b940c6d))
+* Installed slugify. Updated Prettier. ([847b423](https://github.com/mkayander/leetpal/commit/847b423c33ea7b52160b212cc57d07a819ed557c))
+* Use new code templates on project creation depending on project category ([889b920](https://github.com/mkayander/leetpal/commit/889b9205c204a61d38e29498aec25ba73395163e))
+
 # [1.129.0](https://github.com/mkayander/leetpal/compare/v1.128.1...v1.129.0) (2023-04-13)
 
 
