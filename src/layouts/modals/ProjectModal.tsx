@@ -25,7 +25,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import * as yup from "yup";
 
-import { usePlaygroundSlugs } from "#/hooks";
+import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
 import { categoryLabels, trpc } from "#/utils";
@@ -60,6 +60,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
+
+  const prevEditMode = usePrevious(isEditMode);
 
   const createProject = trpc.project.create.useMutation();
   const editProject = trpc.project.update.useMutation();
@@ -140,7 +142,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectDescription: currentProject.description ?? "",
         isPublic: currentProject.isPublic,
       });
-    } else {
+    } else if (prevEditMode && !isEditMode) {
       formik.resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
