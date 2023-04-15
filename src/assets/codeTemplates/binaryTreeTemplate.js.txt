@@ -21,8 +21,9 @@ return function getSumOfNodes(head) {
  *   val: number,
  *   left: TreeNodeObject,
  *   right: TreeNodeObject,
- *   setColor(color: string): void }
- * } TreeNodeObject
+ *   setColor(color: string, animation: "blink"): void
+ *   blink(): void
+ * }} TreeNodeObject
  *
  * @callback TreeNode
  * @param {number} val

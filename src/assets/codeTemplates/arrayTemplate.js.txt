@@ -1,0 +1,11 @@
+/**
+ * @param {number[]} array
+ */
+return function getArraySum(array) {
+  let sum = 0;
+  for (var i = 0; i < array.length; i++) {
+      sum += array[i];
+      array.setColor(i, "green");
+  }
+  return sum;
+};

@@ -1,0 +1,34 @@
+/**
+ * @param {LinkedListObject} array
+ */
+return function getMiddleNode(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast && fast.next) {
+    slow.setColor("cyan");
+    slow = slow.next;
+    fast.blink();
+    fast = fast.next.next;
+  }
+
+  slow.setColor("green");
+
+  return slow;
+};
+
+/**
+ * Definitions for a binary tree node.
+ *
+ * @typedef {{
+ *   val: number,
+ *   next: LinkedListObject,
+ *   setColor(color: string, animation: "blink"): void
+ *   blink(): void
+ * }} LinkedListObject
+ *
+ * @callback LinkedList
+ * @param {number} val
+ * @param {(LinkedListObject | null)?} next
+ * @returns {LinkedListObject}
+ */
