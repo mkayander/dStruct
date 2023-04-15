@@ -1,14 +1,64 @@
+// noinspection TypeScriptValidateJSTypes
+
 import { Prisma, ProjectCategory } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
+import shortUUID from "short-uuid";
 import { z } from "zod";
 
+import defaultBinaryTreeTemplate from "#/assets/codeTemplates/binaryTreeTemplate.js.txt";
+import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
+import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt";
 import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc";
-
-import defaultJsTemplate from "#/assets/codeTemplates/defaultTemplate.js.txt";
-import shortUUID from "short-uuid";
 import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
+
+const templatesMap: Partial<Record<ProjectCategory, string>> = {
+  [ProjectCategory.ARRAY]: defaultArrayTemplate,
+  [ProjectCategory.BINARY_TREE]: defaultBinaryTreeTemplate,
+  [ProjectCategory.LINKED_LIST]: linkedListTemplate
+};
+
+const getTemplate = (category: ProjectCategory): string => {
+  return templatesMap[category] || defaultBinaryTreeTemplate;
+};
+
+const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
+  switch (category) {
+    case ProjectCategory.ARRAY:
+      return {
+        array: {
+          name: "array",
+          order: 0,
+          type: ArgumentType.ARRAY,
+          input: "[1,2,3]"
+        }
+      };
+
+    case ProjectCategory.BINARY_TREE:
+      return {
+        head: {
+          name: "head",
+          order: 0,
+          type: ArgumentType.BINARY_TREE,
+          input: "[1,2,3]"
+        }
+      };
+
+    case ProjectCategory.LINKED_LIST:
+      return {
+        head: {
+          name: "head",
+          order: 0,
+          type: ArgumentType.LINKED_LIST,
+          input: "[1,2,3]"
+        }
+      };
+
+    default:
+      return {};
+  }
+};
 
 const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
   const projectId: string | undefined = typeof rawInput === "object" && (<any>rawInput).projectId;
@@ -141,14 +191,14 @@ export const projectRouter = router({
             create: {
               title: "Case 1",
               slug: `case-${uuid.generate()}`,
-              input: "[]"
+              args: getDefaultArguments(data.category)
             }
           },
           solutions: {
             create: {
               title: "Solution 1",
               slug: `solution-${uuid.generate()}`,
-              code: defaultJsTemplate
+              code: getTemplate(data.category)
             }
           }
         }
@@ -238,7 +288,7 @@ export const projectRouter = router({
         projectId: z.string(),
         referenceCaseSlug: z.ostring(),
         title: z.string(),
-        order: z.number(),
+        order: z.number()
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -338,8 +388,7 @@ export const projectRouter = router({
     )
     .mutation(async ({ input, ctx }) =>
       ctx.prisma.playgroundSolution.create({
-
-        data: { code: defaultJsTemplate, slug: `solution-${uuid.generate()}`, ...input }
+        data: { code: getTemplate(ctx.project.category), slug: `solution-${uuid.generate()}`, ...input }
       })
     ),
 
