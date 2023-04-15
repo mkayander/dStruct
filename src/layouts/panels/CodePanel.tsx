@@ -170,12 +170,17 @@ export const CodePanel: React.FC = () => {
       const result = runFunction(...args);
       const runtime = performance.now() - startTimestamp;
 
+      const serializedResult =
+        typeof result === "object"
+          ? JSON.parse(JSON.stringify(result))
+          : result;
+
       // Identify that the callstack is filled and can now be used
       dispatch(
         callstackSlice.actions.setStatus({
           isReady: true,
           error: null,
-          result,
+          result: serializedResult,
           runtime,
           startTimestamp,
         })
