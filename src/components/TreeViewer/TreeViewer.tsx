@@ -83,21 +83,26 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     return Object.entries(treeState)
       .sort(([, { order: a }], [, { order: b }]) => a - b)
       .map(([treeName, data]) => {
-        const sx: SxProps = { left: 0 };
+        const style: React.CSSProperties = { left: 0 };
         if (data.type === ArgumentType.BINARY_TREE) {
           if (prevTree?.type === ArgumentType.BINARY_TREE) {
             leftOffset += 200 + prevTree.maxDepth ** 5.3;
           }
-          sx.left = leftOffset;
-          sx.top = verticalCount * 72;
+          style.left = leftOffset;
+          style.top = verticalCount * 72;
         } else {
-          sx.top = verticalCount * 72;
+          style.top = verticalCount * 72;
           verticalCount++;
           leftOffset = 0;
         }
         prevTree = data;
         return (
-          <NodesView key={treeName} treeName={treeName} data={data} sx={sx} />
+          <NodesView
+            key={treeName}
+            treeName={treeName}
+            data={data}
+            style={style}
+          />
         );
       });
   }, [treeState]);
