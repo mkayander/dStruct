@@ -1,3 +1,17 @@
+# [1.131.0](https://github.com/mkayander/leetpal/compare/v1.130.0...v1.131.0) (2023-04-16)
+
+
+### Bug Fixes
+
+* Removed unused import ([093a988](https://github.com/mkayander/leetpal/commit/093a98830cabf7c847af6201cfb515224100a305))
+
+
+### Features
+
+* Add selector to calculate minimum X offset ([0ddd70e](https://github.com/mkayander/leetpal/commit/0ddd70ed09b607688676d9434b5dce00c8553ceb))
+* Added project list sorting ([76228d2](https://github.com/mkayander/leetpal/commit/76228d242fc1da10fdc96b38f3bddd610bee1719))
+* Adjust X offset for linked lists ([771b1cd](https://github.com/mkayander/leetpal/commit/771b1cd7af6cc9798ad7c87126f4195e8b1c2699))
+
 # [1.130.0](https://github.com/mkayander/leetpal/compare/v1.129.0...v1.130.0) (2023-04-15)
 
 
