@@ -1,4 +1,4 @@
-import { alpha, Box, Stack, type SxProps, useTheme } from "@mui/material";
+import { alpha, Box, Stack, useTheme } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
