@@ -112,7 +112,15 @@ export const projectRouter = router({
               bucketImage: true
             }
           }
-        }
+        },
+        orderBy: [
+          {
+            category: "asc",
+          },
+          {
+            title: "asc",
+          }
+        ]
       });
     }),
 
