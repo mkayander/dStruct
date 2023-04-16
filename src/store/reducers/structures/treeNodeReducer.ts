@@ -184,3 +184,17 @@ export const selectNamedTreeMaxDepth = (name: string) =>
 export const selectTreeMaxDepth = createSelector(treeDataSelector, (state) =>
   Math.max(...Object.values(state).map((treeState) => treeState.maxDepth))
 );
+
+/**
+ * TODO: Implement a more efficient way to get the min x offset
+ */
+export const selectMinXOffset = (name: string, isEnabled = true) =>
+  isEnabled
+    ? createSelector(treeDataSelector, (state) => {
+        const treeState = getStateByName(state, name);
+        if (!treeState) return null;
+
+        const nodes = treeNodeDataSelector.selectAll(treeState.nodes);
+        return Math.min(...nodes.map((node) => node.x));
+      })
+    : () => 0;
