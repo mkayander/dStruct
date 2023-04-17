@@ -161,6 +161,15 @@ export const CodePanel: React.FC = () => {
     const startTimestamp = performance.now();
 
     try {
+      const context = {
+        TreeNode() {
+          console.log("TreeNode is not available in this context");
+          // this.name = "TreeNode";
+        },
+      };
+
+      Object.assign(window, context);
+
       const runFunction = getInputFunction();
 
       // Before running the code, clear the callstack
