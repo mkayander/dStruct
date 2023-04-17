@@ -33,7 +33,8 @@ export type TreeInput = (number | null)[];
 const createNodeData = (
   map: Record<string, TreeNodeData>,
   value: number | undefined | null,
-  depth: number
+  depth: number,
+  argType: ArgumentTreeType
 ) => {
   if (!isNumber(value)) return;
 
@@ -41,6 +42,7 @@ const createNodeData = (
   map[newId] = {
     id: newId,
     value: value,
+    argType,
     depth,
     x: 0,
     y: 0,
@@ -51,6 +53,7 @@ const createNodeData = (
 };
 
 const parseBinaryTreeArgument = (rawInput: string) => {
+  const type = ArgumentType.BINARY_TREE;
   let input: TreeInput | null = null;
   try {
     input = JSON.parse(rawInput);
@@ -65,7 +68,7 @@ const parseBinaryTreeArgument = (rawInput: string) => {
   const rootNum = input[0];
   if (!isNumber(rootNum)) return;
 
-  const rootData = createNodeData(nodesMap, rootNum, 0);
+  const rootData = createNodeData(nodesMap, rootNum, 0, type);
   if (!rootData) return;
 
   const queue: TreeNodeData[] = [rootData];
@@ -82,14 +85,14 @@ const parseBinaryTreeArgument = (rawInput: string) => {
 
     maxDepth = newDepth;
 
-    const newLeft = createNodeData(nodesMap, input[i], newDepth);
+    const newLeft = createNodeData(nodesMap, input[i], newDepth, type);
     if (newLeft) {
       current.childrenIds[0] = newLeft.id;
       queue.push(newLeft);
     }
     i++;
 
-    const newRight = createNodeData(nodesMap, input[i], newDepth);
+    const newRight = createNodeData(nodesMap, input[i], newDepth, type);
     if (newRight) {
       current.childrenIds[1] = newRight.id;
       queue.push(newRight);
@@ -118,7 +121,12 @@ const parseLinkedListArgument = (rawInput: string) => {
   for (const value of input) {
     if (!isNumber(value)) continue;
 
-    const newNode = createNodeData(nodesMap, value, 0);
+    const newNode = createNodeData(
+      nodesMap,
+      value,
+      0,
+      ArgumentType.LINKED_LIST
+    );
     if (!newNode) continue;
 
     if (prevNode) {

@@ -5,6 +5,7 @@ import { selectCallstack } from "#/store/reducers/callstackReducer";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
+import { ArgumentType } from "#/utils/argumentObject";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,
@@ -78,13 +79,19 @@ export const useNodesRuntimeUpdates = (
           break;
 
         case "addNode":
-          "setChildId" in slice.actions &&
+          if (
+            "setChildId" in slice.actions &&
+            (frame.argType === ArgumentType.BINARY_TREE ||
+              frame.argType === ArgumentType.LINKED_LIST)
+          ) {
+            const [value] = frame.args;
             dispatch(
               slice.actions.add({
                 name: treeName,
                 data: {
                   id: frame.nodeId,
-                  value: frame.args[0],
+                  argType: frame.argType,
+                  value,
                   depth: 0,
                   y: 0,
                   x: 0,
@@ -92,6 +99,8 @@ export const useNodesRuntimeUpdates = (
                 },
               })
             );
+            console.log("added node", frame.nodeId);
+          }
           break;
 
         case "addArrayItem":
@@ -121,30 +130,36 @@ export const useNodesRuntimeUpdates = (
 
         case "setNextNode":
         case "setLeftChild":
-          "setChildId" in slice.actions &&
+          if ("setChildId" in slice.actions) {
+            const [childId, childTreeName] = frame.args;
             dispatch(
               slice.actions.setChildId({
                 name: treeName,
                 data: {
                   id: frame.nodeId,
                   index: 0,
-                  childId: frame.args[0] ?? undefined,
+                  childId: childId ?? undefined,
+                  childTreeName,
                 },
               })
             );
+          }
           break;
         case "setRightChild":
-          "setChildId" in slice.actions &&
+          if ("setChildId" in slice.actions) {
+            const [childId, childTreeName] = frame.args;
             dispatch(
               slice.actions.setChildId({
                 name: treeName,
                 data: {
                   id: frame.nodeId,
                   index: 1,
-                  childId: frame.args[0] ?? undefined,
+                  childId: childId ?? undefined,
+                  childTreeName,
                 },
               })
             );
+          }
           break;
 
         case "blink":

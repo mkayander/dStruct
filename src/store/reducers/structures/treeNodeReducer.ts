@@ -21,6 +21,7 @@ import { type ArgumentTreeType } from "#/utils/argumentObject";
 export type AnimationName = "blink";
 
 export type TreeNodeData = StructureNode & {
+  argType: ArgumentTreeType;
   depth: number;
   childrenIds: (string | undefined)[];
   x: number;
@@ -71,17 +72,21 @@ export const treeNodeSlice = createSlice({
       const { name, type, order } = action.payload;
       state[name] = getInitialData(type, order);
     },
-    add: (state, action: NamedPayload<TreeNodeData>) =>
-      runStateActionByName(state, action.payload.name, (treeState) => {
-        const {
-          payload: {
-            data: { id, ...node },
-          },
-        } = action;
+    add: (state, action: NamedPayload<TreeNodeData>) => {
+      const {
+        name,
+        data: { argType },
+      } = action.payload;
+      let treeState = getStateByName(state, name);
+      if (!treeState) {
+        treeState = { ...getInitialData(argType, 999), isRuntime: true };
+      }
 
-        treeState.count++;
-        treeNodeDataAdapter.addOne(treeState.nodes, { id, ...node });
-      }),
+      treeState.count++;
+      treeNodeDataAdapter.addOne(treeState.nodes, action.payload.data);
+
+      state[name] = treeState;
+    },
     addMany: (
       state,
       action: NamedPayload<{
@@ -103,8 +108,30 @@ export const treeNodeSlice = createSlice({
       }),
     setChildId: (
       state,
-      action: NamedPayload<{ id: string; index: number; childId?: string }>
-    ) =>
+      action: NamedPayload<{
+        id: string;
+        index: number;
+        childId?: string;
+        childTreeName?: string;
+      }>
+    ) => {
+      const { childId, childTreeName } = action.payload.data;
+      if (childId && childTreeName && childTreeName !== action.payload.name) {
+        let childData: TreeNodeData | undefined = undefined;
+        runStateActionByName(state, childTreeName, (treeState) => {
+          childData = treeState.nodes.entities[childId];
+          if (!childData) return;
+
+          treeNodeDataAdapter.removeOne(treeState.nodes, childId);
+        });
+        runStateActionByName(
+          state,
+          action.payload.name,
+          (treeState) =>
+            childData && treeNodeDataAdapter.addOne(treeState.nodes, childData)
+        );
+      }
+
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
@@ -121,7 +148,8 @@ export const treeNodeSlice = createSlice({
           id,
           changes: { childrenIds },
         });
-      }),
+      });
+    },
     setRoot: (state, action: NamedPayload<string>) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         treeState.rootId = action.payload.data;
@@ -195,6 +223,7 @@ export const selectMinXOffset = (name: string, isEnabled = true) =>
         if (!treeState) return null;
 
         const nodes = treeNodeDataSelector.selectAll(treeState.nodes);
+        if (!nodes.length) return 0;
         return Math.min(...nodes.map((node) => node.x));
       })
     : () => 0;

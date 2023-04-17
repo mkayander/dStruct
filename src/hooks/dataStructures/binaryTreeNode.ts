@@ -4,6 +4,7 @@ import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
+import { ArgumentType } from "#/utils/argumentObject";
 
 export interface BinaryNodeMeta extends NodeMeta {
   depth: number;
@@ -34,13 +35,13 @@ export class BinaryTreeNode extends NodeBase {
     return this._left;
   }
 
-  public set left(value: BinaryTreeNode | null) {
-    this._left = value;
+  public set left(node: BinaryTreeNode | null) {
+    this._left = node;
     this.dispatch(
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setLeftChild",
-        args: [value?.meta.id ?? null],
+        args: [node?.meta.id ?? null, node?.name],
       })
     );
   }
@@ -52,13 +53,13 @@ export class BinaryTreeNode extends NodeBase {
     return this._right;
   }
 
-  public set right(value: BinaryTreeNode | null) {
-    this._right = value;
+  public set right(node: BinaryTreeNode | null) {
+    this._right = node;
     this.dispatch(
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setRightChild",
-        args: [value?.meta.id ?? null],
+        args: [node?.meta.id ?? null, node?.name],
       })
     );
   }
@@ -110,7 +111,7 @@ export class BinaryTreeNode extends NodeBase {
       value,
       leftNode,
       rightNode,
-      { ...newMeta, id },
+      { ...newMeta, id, type: ArgumentType.BINARY_TREE },
       name,
       dispatch
     );

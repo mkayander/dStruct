@@ -7,12 +7,14 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
+import { type ArgumentType } from "#/utils/argumentObject";
 
 export type CallFrameBase = {
   id: string;
   timestamp: number;
   treeName: string;
   structureType: "treeNode" | "array";
+  argType: ArgumentType;
 };
 
 type RuntimeErrorFrame = {
@@ -43,7 +45,7 @@ type SetValFrame = NodeFrameBase & {
 
 type SetChildFrame = NodeFrameBase & {
   name: "setLeftChild" | "setRightChild" | "setNextNode";
-  args: [string | null];
+  args: [string | null, string | undefined];
 };
 
 type ShowPointerFrame = NodeFrameBase & {

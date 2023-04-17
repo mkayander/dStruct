@@ -18,6 +18,7 @@ export type StructureNode = {
 export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   nodes: EntityState<N>;
   initialNodes: EntityState<N> | null;
+  isRuntime: boolean;
   colorMap: Record<string | number, string>;
 };
 
@@ -26,6 +27,7 @@ export const getInitialDataBase = <N extends StructureNode>(
 ): BaseStructureItem<N> => ({
   nodes: adapter.getInitialState(),
   initialNodes: null,
+  isRuntime: false,
   colorMap: {},
 });
 
@@ -81,6 +83,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
   const selectors = adapter.getSelectors();
 
   const resetNodes = <T extends BaseStructureState>(state: T[string]) => {
+    if (state.isRuntime) adapter.removeAll(state.nodes);
     if (state.initialNodes === null) return;
 
     adapter.removeAll(state.nodes);
@@ -153,7 +156,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     backupAllNodes: <T extends BaseStructureState>(state: T) => {
       for (const name in state) {
         runStateActionByName(state, name, (treeState) => {
-          if (treeState.initialNodes !== null) return;
+          if (treeState.isRuntime || treeState.initialNodes !== null) return;
 
           treeState.initialNodes = {
             ...treeState.nodes,

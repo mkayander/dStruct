@@ -13,6 +13,8 @@ import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
 import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
 import { usePlaygroundSlugs } from "#/hooks";
+import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
+import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -25,6 +27,7 @@ import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
 import { createCaseRuntimeArgs, resetStructuresState, trpc } from "#/utils";
+import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
@@ -160,12 +163,47 @@ export const CodePanel: React.FC = () => {
 
     const startTimestamp = performance.now();
 
+    class BinaryTree extends BinaryTreeNode {
+      constructor(
+        val: number,
+        left: BinaryTreeNode | null = null,
+        right: BinaryTreeNode | null = null
+      ) {
+        super(
+          val,
+          left,
+          right,
+          {
+            id: uuid.generate(),
+            type: ArgumentType.BINARY_TREE,
+            depth: 0,
+          },
+          "candidate",
+          dispatch
+        );
+      }
+    }
+
+    class LinkedList extends LinkedListNode {
+      constructor(val: number, next: LinkedListNode | null = null) {
+        super(
+          val,
+          next,
+          {
+            id: uuid.generate(),
+            type: ArgumentType.LINKED_LIST,
+          },
+          "candidate",
+          dispatch,
+          true
+        );
+      }
+    }
+
     try {
       const context = {
-        TreeNode() {
-          console.log("TreeNode is not available in this context");
-          // this.name = "TreeNode";
-        },
+        BinaryTree,
+        LinkedList,
       };
 
       Object.assign(window, context);

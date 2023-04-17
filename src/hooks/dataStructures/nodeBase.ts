@@ -2,11 +2,13 @@ import shortUUID from "short-uuid";
 
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
+import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
 export interface NodeMeta {
   id: string;
+  type: ArgumentTreeType;
   displayTraversal?: boolean;
 }
 
@@ -73,6 +75,7 @@ export abstract class NodeBase {
   protected getDispatchBase() {
     return {
       id: uuid.generate(),
+      argType: this.meta.type,
       treeName: this.name,
       structureType: "treeNode",
       nodeId: this.meta.id,
