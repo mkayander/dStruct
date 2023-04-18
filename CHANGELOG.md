@@ -1,3 +1,16 @@
+# [1.133.0](https://github.com/mkayander/leetpal/compare/v1.132.0...v1.133.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* Adapt theme switch track color ([e1021b8](https://github.com/mkayander/leetpal/commit/e1021b82b8663213d89000b89cc1bf83a5efd5df))
+
+
+### Features
+
+* Implemented landing page heading section ([274a727](https://github.com/mkayander/leetpal/commit/274a7277cbd80c9fc9cdc658a6181535c88ab8d3))
+* Updated guest message ([16b674a](https://github.com/mkayander/leetpal/commit/16b674aa0013f6a42a31ae91d9315d6657803e54))
+
 # [1.132.0](https://github.com/mkayander/leetpal/compare/v1.131.1...v1.132.0) (2023-04-17)
 
 
