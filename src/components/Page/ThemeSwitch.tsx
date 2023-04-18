@@ -6,6 +6,8 @@ const StyledThemeSwitch = styled(Switch)(({ theme }) => ({
   padding: 8,
   "& .MuiSwitch-track": {
     borderRadius: 22 / 2,
+    backgroundColor: "#111 !important",
+    opacity: "0.3 !important",
     "&:before, &:after": {
       content: '""',
       position: "absolute",
