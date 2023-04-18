@@ -98,7 +98,7 @@ const DashboardPage: React.FC = () => {
                     margin: "auto",
                   }}
                 >
-                  Please sign in to start using the benefits! 🚀
+                  Sign in to keep track of your progress and more! 🔑
                 </Typography>
               </Tooltip>
             </Grid>
