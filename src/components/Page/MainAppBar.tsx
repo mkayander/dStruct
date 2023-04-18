@@ -146,7 +146,11 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
       variant={appBarVariant}
       sx={{
         transition: "background .1s, borderBottom .1s",
-        backdropFilter: "blur(10px)",
+        backdropFilter: "blur(12px)",
+        boxShadow: `0 0 12px 0 ${alpha(
+          theme.palette.primary.main,
+          isScrolled ? 0.2 : 0
+        )}`,
         background: isScrolled
           ? alpha(theme.palette.primary.main, 0.2)
           : alpha(theme.palette.primary.main, 0),
