@@ -18,7 +18,7 @@ return function getMiddleNode(head) {
 };
 
 /**
- * Definitions for a binary tree node.
+ * Definitions for a linked list node.
  *
  * @typedef {{
  *   val: number,
