@@ -124,12 +124,13 @@ export const treeNodeSlice = createSlice({
 
           treeNodeDataAdapter.removeOne(treeState.nodes, childId);
         });
-        runStateActionByName(
-          state,
-          action.payload.name,
-          (treeState) =>
-            childData && treeNodeDataAdapter.addOne(treeState.nodes, childData)
-        );
+
+        runStateActionByName(state, action.payload.name, (treeState) => {
+          if (!childData) return;
+
+          childData.childrenIds = []; // TODO: Allow to keep track of relations to different trees
+          treeNodeDataAdapter.addOne(treeState.nodes, childData);
+        });
       }
 
       runStateActionByName(state, action.payload.name, (treeState) => {
