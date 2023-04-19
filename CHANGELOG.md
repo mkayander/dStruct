@@ -1,3 +1,11 @@
+## [1.134.1](https://github.com/mkayander/leetpal/compare/v1.134.0...v1.134.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* Clean child ids when migrating a node from one tree to another ([6b2f5dd](https://github.com/mkayander/leetpal/commit/6b2f5dddf6c2bfd6959151fda83d4962f53f80c2))
+* Fixed template comment text ([3b2d84f](https://github.com/mkayander/leetpal/commit/3b2d84f0234e3ffa0dfdbf7acfa9bf79b838f862))
+
 # [1.134.0](https://github.com/mkayander/leetpal/compare/v1.133.0...v1.134.0) (2023-04-19)
 
 
