@@ -1,3 +1,10 @@
+# [1.134.0](https://github.com/mkayander/leetpal/compare/v1.133.0...v1.134.0) (2023-04-19)
+
+
+### Features
+
+* Rework output panel. Convert linked list to a readable string. ([dd638ce](https://github.com/mkayander/leetpal/commit/dd638cef45530cbf7c7db61d48015ce8329ab9c7))
+
 # [1.133.0](https://github.com/mkayander/leetpal/compare/v1.132.0...v1.133.0) (2023-04-18)
 
 
