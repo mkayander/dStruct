@@ -13,11 +13,11 @@ export interface NodeMeta {
 }
 
 export abstract class NodeBase {
-  private _val: number | string;
+  _val: number | string;
 
   protected constructor(
     val: number | string,
-    protected meta: NodeMeta,
+    readonly meta: NodeMeta,
     protected name: string,
     protected dispatch: AppDispatch
   ) {

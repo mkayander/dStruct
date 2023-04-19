@@ -31,7 +31,7 @@ export class LinkedListNode extends NodeBase {
     }
   }
 
-  private _next: LinkedListNode | null;
+  _next: LinkedListNode | null;
 
   public get next() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
