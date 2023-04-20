@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
+    "@datastructures-js/queue": "4.2.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@monaco-editor/react": "^4.4.6",

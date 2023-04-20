@@ -4,6 +4,9 @@ dependencies:
   '@apollo/client':
     specifier: ^3.7.1
     version: 3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+  '@datastructures-js/queue':
+    specifier: 4.2.1
+    version: 4.2.1
   '@emotion/react':
     specifier: ^11.10.6
     version: 11.10.6(@types/react@18.0.31)(react@18.2.0)
@@ -932,6 +935,10 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+
+  /@datastructures-js/queue@4.2.1:
+    resolution: {integrity: sha512-j23SNg1EyUzPhKeW37inqil/+YHwL/IIuaDftrrpqv0OKLJ6N5hhuYtGe33WCm5QppmIvbk5/dMwJ4UW+MzJPw==}
+    dev: false
 
   /@emotion/babel-plugin@11.10.6:
     resolution: {integrity: sha512-p2dAqtVrkhSa7xz1u/m9eHYdLi+en8NowrmXeF/dKtJpU8lCWli8RUAati7NcSl0afsBott48pdnANuD0wh9QQ==}
