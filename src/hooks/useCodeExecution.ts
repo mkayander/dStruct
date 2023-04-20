@@ -8,9 +8,10 @@ import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
 import {
-  assignGlobalRuntimeContext,
   createCaseRuntimeArgs,
   resetStructuresState,
+  setGlobalRuntimeContext,
+  stringifySolutionResult,
 } from "#/utils";
 
 const uuid = shortUUID();
@@ -23,7 +24,7 @@ export const useCodeExecution = (codeInput: string) => {
   const caseArgs = useAppSelector(selectCaseArguments);
 
   useEffect(() => {
-    assignGlobalRuntimeContext(dispatch);
+    setGlobalRuntimeContext(dispatch);
   }, [dispatch]);
 
   const runCode = () => {
@@ -48,10 +49,7 @@ export const useCodeExecution = (codeInput: string) => {
       const result = runFunction(...args);
       const runtime = performance.now() - startTimestamp;
 
-      const serializedResult =
-        typeof result === "object"
-          ? JSON.parse(JSON.stringify(result))
-          : result;
+      const serializedResult = stringifySolutionResult(result);
 
       // Identify that the callstack is filled and can now be used
       dispatch(

@@ -1,39 +1,16 @@
 import { TabContext, TabList } from "@mui/lab";
 import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 
 import { CallstackTable } from "#/components/CallstackTable";
-import { type LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
-import { ArgumentType } from "#/utils/argumentObject";
 
 const ResultData: React.FC<{
-  result: string | number | LinkedListNode | null;
+  result: string | number | null;
 }> = ({ result }) => {
   const theme = useTheme();
-
-  const resultString = useMemo(() => {
-    if (
-      result &&
-      typeof result === "object" &&
-      "meta" in result &&
-      result.meta?.type === ArgumentType.LINKED_LIST
-    ) {
-      let current = result as LinkedListNode | null;
-      const output = [];
-
-      while (current) {
-        output.push(current._val);
-        current = current._next;
-      }
-
-      return output.join(" -> ");
-    }
-
-    return JSON.stringify(result, null, 2);
-  }, [result]);
 
   return (
     <Typography variant="caption">
@@ -46,7 +23,7 @@ const ResultData: React.FC<{
           borderRadius: 2,
         }}
       >
-        <pre>{resultString}</pre>
+        <pre>{result}</pre>
       </Box>
     </Typography>
   );

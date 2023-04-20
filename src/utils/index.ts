@@ -9,4 +9,5 @@ export { createRuntimeTree } from "./createRuntimeTree";
 export { createRuntimeArray } from "./createRuntimeArray";
 export { processNodeRelation } from "./processNodeRelation";
 export { resetStructuresState } from "./resetStructuresState";
-export { assignGlobalRuntimeContext } from "./assignGlobalRuntimeContext";
+export { setGlobalRuntimeContext } from "./setGlobalRuntimeContext";
+export { stringifySolutionResult } from "./stringifySolutionResult";
