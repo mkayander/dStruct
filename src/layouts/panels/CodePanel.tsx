@@ -7,32 +7,19 @@ import Image from "next/image";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
-import shortUUID from "short-uuid";
 
 import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
 import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
-import { usePlaygroundSlugs } from "#/hooks";
-import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
-import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
+import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import {
-  callstackSlice,
-  selectRuntimeData,
-} from "#/store/reducers/callstackReducer";
-import { selectCaseArguments } from "#/store/reducers/caseReducer";
+import { useAppSelector } from "#/store/hooks";
+import { selectRuntimeData } from "#/store/reducers/callstackReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
-import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
-import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
-import { createCaseRuntimeArgs, resetStructuresState, trpc } from "#/utils";
-import { ArgumentType } from "#/utils/argumentObject";
-
-const uuid = shortUUID();
+import { trpc } from "#/utils";
 
 export const CodePanel: React.FC = () => {
-  const dispatch = useAppDispatch();
   const session = useSession();
 
   const [tabValue, setTabValue] = useState("1");
@@ -68,9 +55,7 @@ export const CodePanel: React.FC = () => {
     },
   });
 
-  const treeStore = useAppSelector(treeDataSelector);
-  const arrayStore = useAppSelector(arrayDataSelector);
-  const caseArgs = useAppSelector(selectCaseArguments);
+  const { runCode } = useCodeExecution(codeInput);
 
   // Update code on solution change
   useEffect(() => {
@@ -152,109 +137,7 @@ export const CodePanel: React.FC = () => {
   };
 
   const handleRunCode = () => {
-    const args = createCaseRuntimeArgs(
-      dispatch,
-      treeStore,
-      arrayStore,
-      caseArgs
-    );
-
-    const getInputFunction = new Function(codeInput);
-
-    const startTimestamp = performance.now();
-
-    class BinaryTree extends BinaryTreeNode {
-      constructor(
-        val: number,
-        left: BinaryTreeNode | null = null,
-        right: BinaryTreeNode | null = null
-      ) {
-        super(
-          val,
-          left,
-          right,
-          {
-            id: uuid.generate(),
-            type: ArgumentType.BINARY_TREE,
-            depth: 0,
-          },
-          "candidate",
-          dispatch
-        );
-      }
-    }
-
-    class LinkedList extends LinkedListNode {
-      constructor(val: number, next: LinkedListNode | null = null) {
-        super(
-          val,
-          next,
-          {
-            id: uuid.generate(),
-            type: ArgumentType.LINKED_LIST,
-          },
-          "candidate",
-          dispatch,
-          true
-        );
-      }
-    }
-
-    try {
-      const context = {
-        BinaryTree,
-        LinkedList,
-      };
-
-      Object.assign(window, context);
-
-      const runFunction = getInputFunction();
-
-      // Before running the code, clear the callstack
-      dispatch(callstackSlice.actions.removeAll());
-      resetStructuresState(dispatch);
-
-      const result = runFunction(...args);
-      const runtime = performance.now() - startTimestamp;
-
-      const serializedResult =
-        typeof result === "object"
-          ? JSON.parse(JSON.stringify(result))
-          : result;
-
-      // Identify that the callstack is filled and can now be used
-      dispatch(
-        callstackSlice.actions.setStatus({
-          isReady: true,
-          error: null,
-          result: serializedResult,
-          runtime,
-          startTimestamp,
-        })
-      );
-    } catch (e: unknown) {
-      const runtime = performance.now() - startTimestamp;
-      if (e instanceof Error) {
-        dispatch(
-          callstackSlice.actions.addOne({
-            id: uuid.generate(),
-            timestamp: performance.now(),
-            name: "error",
-          })
-        );
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: { name: e.name, message: e.message, stack: e.stack },
-            result: null,
-            runtime,
-            startTimestamp,
-          })
-        );
-      } else {
-        console.error("Invalid error type: ", e);
-      }
-    }
+    runCode();
   };
 
   const handleChangeCode = (
