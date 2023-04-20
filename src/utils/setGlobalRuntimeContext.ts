@@ -1,3 +1,4 @@
+import { Queue } from "@datastructures-js/queue";
 import shortUUID from "short-uuid";
 
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
@@ -7,7 +8,7 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
-export const assignGlobalRuntimeContext = (dispatch: AppDispatch) => {
+export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
   class BinaryTree extends BinaryTreeNode {
     constructor(
       val: number,
@@ -46,6 +47,7 @@ export const assignGlobalRuntimeContext = (dispatch: AppDispatch) => {
   }
 
   const context = {
+    Queue,
     BinaryTree,
     LinkedList,
   };
