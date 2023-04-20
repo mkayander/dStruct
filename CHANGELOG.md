@@ -1,3 +1,12 @@
+# [1.135.0](https://github.com/mkayander/leetpal/compare/v1.134.1...v1.135.0) (2023-04-20)
+
+
+### Features
+
+* Improve solution result serialization ([c08cfd0](https://github.com/mkayander/leetpal/commit/c08cfd0c1a601206de6b1bd39a3d2b63d46d0f6c))
+* Installed queue data structure that's used on LeetCode ([5200adf](https://github.com/mkayander/leetpal/commit/5200adf06de78561f4baf1552595d3ffbd84d967))
+* Set Queue data structure to global context ([970ba97](https://github.com/mkayander/leetpal/commit/970ba97f3ebda84581cfc60755a524a4eade573e))
+
 ## [1.134.1](https://github.com/mkayander/leetpal/compare/v1.134.0...v1.134.1) (2023-04-19)
 
 
