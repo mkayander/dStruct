@@ -52,11 +52,6 @@ export const getStateByName = <T extends BaseStructureState, K extends keyof T>(
 ): T[K] | null => {
   const treeState = state[name];
   if (!treeState) {
-    // console.warn("getTreeState: Tree state not found: ", {
-    //   name,
-    //   state,
-    //   caller,
-    // });
     return null;
   }
 
