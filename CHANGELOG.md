@@ -1,3 +1,19 @@
+# [1.136.0](https://github.com/mkayander/leetpal/compare/v1.135.0...v1.136.0) (2023-04-21)
+
+
+### Bug Fixes
+
+* Removed commented-out code ([8fc2a37](https://github.com/mkayander/leetpal/commit/8fc2a379816845c6b62d9f5dc5b23a8f31ab823e))
+* Removed console log ([a3595c7](https://github.com/mkayander/leetpal/commit/a3595c705744ca177f93146ba5208134bdae685c))
+
+
+### Features
+
+* Added array proxy template definitions ([469d36b](https://github.com/mkayander/leetpal/commit/469d36b1f11092728f3cff8aed4f8eb6d94b9409))
+* Implemented ArrayProxy runtime interface for solutions ([6958e8e](https://github.com/mkayander/leetpal/commit/6958e8e1ff845cb8b2e475c7143594528c467a81))
+* Implemented runtime array creation ([0e6d6e0](https://github.com/mkayander/leetpal/commit/0e6d6e035af9053c4c5af7b314e6b71fd54ee1a2))
+* Improved solution result stringification ([01b62aa](https://github.com/mkayander/leetpal/commit/01b62aa30893d68f5ef11cdc35ebe0b4927b77be))
+
 # [1.135.0](https://github.com/mkayander/leetpal/compare/v1.134.1...v1.135.0) (2023-04-20)
 
 
