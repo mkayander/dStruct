@@ -2,8 +2,10 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  type EntityState,
   type PayloadAction,
 } from "@reduxjs/toolkit";
+import shortUUID from "short-uuid";
 
 import type { RootState } from "#/store/makeStore";
 import {
@@ -12,8 +14,11 @@ import {
   getBaseStructureReducers,
   getInitialDataBase,
   getStateByName,
+  type NamedPayload,
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
+
+const uuid = shortUUID();
 
 export type ArrayItemData = StructureNode & {
   index: number;
@@ -25,7 +30,7 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
 
 export type ArrayDataState = BaseStructureState<ArrayData>;
 
-const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
+export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
   selectId: (node: ArrayItemData) => node.id,
   sortComparer: (a, b) => a.index - b.index,
 });
@@ -58,8 +63,45 @@ export const arrayStructureSlice = createSlice({
       const { name, order } = action.payload;
       state[name] = getInitialData(order);
     },
+    create: (state, action: NamedPayload<EntityState<ArrayItemData>>) => {
+      const {
+        payload: { name, data },
+      } = action;
+      const treeState = { ...getInitialData(999), isRuntime: true };
+
+      treeState.nodes = data;
+
+      state[name] = treeState;
+    },
   },
 });
+
+export const generateArrayData = (array: Array<number | string>) => {
+  const data = arrayDataAdapter.getInitialState();
+
+  for (const [index, value] of array.entries()) {
+    const id = uuid.generate();
+    data.ids.push(id);
+    data.entities[id] = {
+      id,
+      index,
+      value,
+    };
+  }
+
+  // arrayDataAdapter.addMany(
+  //   data,
+  //   array.map((value, index) => ({
+  //     id: uuid.generate(),
+  //     index,
+  //     value,
+  //   }))
+  // );
+
+  console.log("generateArrayData", { data });
+
+  return data;
+};
 
 /**
  * Reducer

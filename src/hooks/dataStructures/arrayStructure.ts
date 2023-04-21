@@ -14,17 +14,28 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
-export class ControlledArray extends Array {
+export class ControlledArray<T extends number | string> extends Array<T> {
   private readonly itemsMeta: ArrayItemData[];
 
   constructor(
-    array: Array<number | string>,
+    array: Array<T>,
     private name: string,
     arrayData: EntityState<ArrayItemData>,
-    private dispatch: AppDispatch
+    private dispatch: AppDispatch,
+    addToCallstack?: boolean
   ) {
     super();
     this.push(...array);
+
+    if (addToCallstack) {
+      this.dispatch(
+        callstackSlice.actions.addOne({
+          ...this.getDispatchBase(),
+          name: "addArray",
+          args: [arrayData],
+        })
+      );
+    }
 
     this.itemsMeta = arrayDataItemSelectors.selectAll(arrayData);
 
@@ -77,26 +88,6 @@ export class ControlledArray extends Array {
     });
   }
 
-  private getNodeMeta(index: number) {
-    return this.itemsMeta[index];
-  }
-
-  protected getDispatchBase(index?: number) {
-    const data = {
-      id: uuid.generate(),
-      argType: ArgumentType.ARRAY,
-      nodeId: "-1",
-      treeName: this.name,
-      structureType: "array",
-      timestamp: performance.now(),
-    } satisfies CallFrameBase & { nodeId: string };
-    if (index !== undefined) {
-      const meta = this.getNodeMeta(index);
-      meta && (data.nodeId = meta.id);
-    }
-    return data;
-  }
-
   override pop() {
     const base = this.getDispatchBase(this.length - 1);
     const value = super.pop();
@@ -147,7 +138,7 @@ export class ControlledArray extends Array {
     );
   }
 
-  public setColorMap(map: Record<number | string, string>) {
+  public setColorMap(map: Record<T, string>) {
     const base = this.getDispatchBase();
     if (!base) return;
     this.dispatch(
@@ -157,5 +148,25 @@ export class ControlledArray extends Array {
         args: [map],
       })
     );
+  }
+
+  protected getDispatchBase(index?: number) {
+    const data = {
+      id: uuid.generate(),
+      argType: ArgumentType.ARRAY,
+      nodeId: "-1",
+      treeName: this.name,
+      structureType: "array",
+      timestamp: performance.now(),
+    } satisfies CallFrameBase & { nodeId: string };
+    if (index !== undefined) {
+      const meta = this.getNodeMeta(index);
+      meta && (data.nodeId = meta.id);
+    }
+    return data;
+  }
+
+  private getNodeMeta(index: number) {
+    return this.itemsMeta[index];
   }
 }

@@ -117,6 +117,16 @@ export const useNodesRuntimeUpdates = (
             );
           break;
 
+        case "addArray":
+          "create" in slice.actions &&
+            dispatch(
+              slice.actions.create({
+                name: treeName,
+                data: frame.args[0],
+              })
+            );
+          break;
+
         case "deleteNode":
           dispatch(
             slice.actions.remove({

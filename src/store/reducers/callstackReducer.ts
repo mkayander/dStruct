@@ -7,6 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
+import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { type ArgumentType } from "#/utils/argumentObject";
 
 export type CallFrameBase = {
@@ -68,6 +69,11 @@ type AddArrayItemFrame = NodeFrameBase & {
   args: [number | string, number];
 };
 
+type AddArrayFrame = CallFrameBase & {
+  name: "addArray";
+  args: [EntityState<ArrayItemData>];
+};
+
 type DeleteNodeFrame = NodeFrameBase & {
   name: "deleteNode";
   args: [];
@@ -77,6 +83,7 @@ export type CallFrame =
   | RuntimeErrorFrame
   | AddNodeFrame
   | AddArrayItemFrame
+  | AddArrayFrame
   | DeleteNodeFrame
   | SetColorFrame
   | SetColorMapFrame

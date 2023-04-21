@@ -170,6 +170,10 @@ export const getBaseStructureReducers = <N extends StructureNode>(
       ),
     resetAll: <T extends BaseStructureState>(state: T) => {
       for (const name in state) {
+        if (state[name]?.isRuntime) {
+          delete state[name];
+          continue;
+        }
         runStateActionByName(state, name, (treeState) => resetNodes(treeState));
       }
     },
