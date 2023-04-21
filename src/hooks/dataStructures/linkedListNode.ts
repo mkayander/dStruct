@@ -27,7 +27,6 @@ export class LinkedListNode extends NodeBase {
           args: [val],
         })
       );
-      console.log("added to callstack", this);
     }
   }
 
