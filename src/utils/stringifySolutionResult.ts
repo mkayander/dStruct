@@ -2,7 +2,20 @@ import { type LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ArgumentType } from "#/utils/argumentObject";
 
 const safeStringify = (val: unknown) =>
-  JSON.stringify(val, (_, v) => (typeof v === "bigint" ? `${v}n` : v), 2);
+  JSON.stringify(
+    val,
+    (_, value) => {
+      if (typeof value === "bigint") {
+        return `${value}n`;
+      }
+      if (Array.isArray(value)) {
+        return `[${value.join(", ")}]`;
+      }
+
+      return value;
+    },
+    2
+  );
 
 export const stringifySolutionResult = (
   result: string | number | bigint | LinkedListNode | null
@@ -28,5 +41,10 @@ export const stringifySolutionResult = (
     return output.join(" -> ");
   }
 
-  return safeStringify(result);
+  const output = safeStringify(result);
+  if (output[0] === '"' && output.at(-1) === '"') {
+    return output.slice(1, -1);
+  }
+
+  return output;
 };
