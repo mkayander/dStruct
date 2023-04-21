@@ -1,5 +1,5 @@
 /**
- * @param {number[]} array
+ * @param {ArrayProxyObject} array
  */
 return function getArraySum(array) {
   let sum = 0;
@@ -9,3 +9,11 @@ return function getArraySum(array) {
   }
   return sum;
 };
+
+/**
+ * Definitions for ArrayProxy.
+ *
+ * @typedef {number[] & {
+ *   setColor(index: number, color: string): void
+ * }} ArrayProxyObject
+ */
