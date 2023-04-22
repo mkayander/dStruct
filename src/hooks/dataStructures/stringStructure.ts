@@ -78,7 +78,7 @@ export class ControlledString extends String {
   protected getDispatchBase(index?: number) {
     const data = {
       id: uuid.generate(),
-      argType: ArgumentType.ARRAY,
+      argType: ArgumentType.STRING,
       nodeId: "-1",
       treeName: this.name,
       structureType: "array",
