@@ -1,11 +1,8 @@
-import {
-  CircularProgress,
-  InputAdornment,
-  TextField,
-  type TextFieldProps,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { type TextFieldProps } from "@mui/material";
+import React, { useState } from "react";
 import type * as yup from "yup";
+
+import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
 
 type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
@@ -14,26 +11,21 @@ type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
 };
 
 export const JsonInput: React.FC<BinaryTreeInputProps> = ({
-  value,
   onChange,
   validationSchema,
   ...restProps
 }) => {
-  const [rawInput, setRawInput] = useState<string>(value);
   const [inputError, setInputError] = useState<string | null>(null);
-  const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
 
-  useEffect(() => {
-    setRawInput(value);
-  }, [value]);
+  const handleChange = (value: string) => {
+    onChange(value);
 
-  useEffect(() => {
-    if (!rawInput) {
+    if (!value) {
       setInputError(null);
     }
 
     try {
-      const parsed = JSON.parse(rawInput);
+      const parsed = JSON.parse(value);
       validationSchema.validateSync(parsed, {
         strict: true,
       });
@@ -46,42 +38,16 @@ export const JsonInput: React.FC<BinaryTreeInputProps> = ({
         console.error(e);
       }
     }
-  }, [setInputError, rawInput, validationSchema]);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setHasPendingChanges(false);
-      if (inputError || rawInput === value) return;
-
-      onChange(rawInput);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [inputError, onChange, rawInput, value]);
-
-  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setRawInput(ev.target.value);
-    setHasPendingChanges(true);
   };
 
   return (
-    <TextField
+    <DebouncedInput
       label="Input"
       placeholder="e.g.: [1,2,3,null,5]"
-      value={rawInput}
       onChange={handleChange}
       error={!!inputError}
       helperText={inputError}
       fullWidth
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            {hasPendingChanges && <CircularProgress size={24} />}
-          </InputAdornment>
-        ),
-      }}
       {...restProps}
     />
   );

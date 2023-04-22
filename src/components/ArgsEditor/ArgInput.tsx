@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 
 import { BooleanToggleInput } from "#/components/ArgsEditor/BooleanToggleInput";
+import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
 import { JsonInput } from "#/components/ArgsEditor/JsonInput";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
@@ -56,10 +57,12 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
           validationSchema={validationSchemaMap[arg.type]}
         />
       );
-  }
 
-  if (arg.type === ArgumentType.BOOLEAN) {
-    return <BooleanToggleInput value={input} onChange={setInput} />;
+    case ArgumentType.STRING:
+      return <DebouncedInput fullWidth onChange={setInput} value={input} />;
+
+    case ArgumentType.BOOLEAN:
+      return <BooleanToggleInput value={input} onChange={setInput} />;
   }
 
   return (
