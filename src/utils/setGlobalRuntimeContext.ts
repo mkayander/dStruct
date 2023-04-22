@@ -56,7 +56,11 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
         items = new Array(arrayLength);
       }
 
-      if (typeof items[0] !== "number" && typeof items[0] !== "string") {
+      if (
+        items[0] &&
+        typeof items[0] !== "number" &&
+        typeof items[0] !== "string"
+      ) {
         throw new Error("ArrayProxy can only contain numbers or strings");
       }
 
