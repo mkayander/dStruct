@@ -16,16 +16,45 @@ export type ArgumentTreeType =
   | ArgumentType.GRAPH
   | ArgumentType.LINKED_LIST;
 
+export type ArgumentArrayType = ArgumentType.ARRAY | ArgumentType.STRING;
+
 export const argumentTreeTypeValues = new Set([
   ArgumentType.BINARY_TREE,
   ArgumentType.GRAPH,
   ArgumentType.LINKED_LIST,
 ]);
 
-export const isArgumentTreeType = (
+export function isArgumentTreeType(
+  type: ArgumentType
+): type is ArgumentTreeType;
+export function isArgumentTreeType(
   arg: ArgumentObject
-): arg is ArgumentObject<ArgumentTreeType> =>
-  argumentTreeTypeValues.has(arg.type);
+): arg is ArgumentObject<ArgumentTreeType>;
+export function isArgumentTreeType(
+  arg: ArgumentObject | ArgumentType
+): arg is ArgumentObject<ArgumentTreeType> {
+  if (typeof arg === "object") {
+    return isArgumentTreeType(arg.type);
+  }
+
+  return argumentTreeTypeValues.has(arg);
+}
+
+export function isArgumentArrayType(
+  type: ArgumentType
+): type is ArgumentArrayType;
+export function isArgumentArrayType(
+  arg: ArgumentObject
+): arg is ArgumentObject<ArgumentArrayType>;
+export function isArgumentArrayType(
+  arg: ArgumentObject | ArgumentType
+): arg is ArgumentObject<ArgumentArrayType> {
+  if (typeof arg === "object") {
+    return isArgumentArrayType(arg.type);
+  }
+
+  return arg === ArgumentType.ARRAY || arg === ArgumentType.STRING;
+}
 
 export type ArgumentObject<T extends ArgumentType = ArgumentType> = {
   name: string;
