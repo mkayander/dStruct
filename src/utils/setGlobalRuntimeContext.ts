@@ -69,7 +69,20 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       super(items, uuid.generate(), data, dispatch, true);
     }
 
-    static override from(array: Array<number | string>) {
+    static override from(
+      array: Array<number | string>,
+      mapFn?: (
+        item: number | string | undefined,
+        index: number
+      ) => number | string
+    ) {
+      if (mapFn) {
+        const N = array.length;
+        array = [];
+        for (let i = 0; i < N; i++) {
+          array[i] = mapFn(array[i], i);
+        }
+      }
       const data = generateArrayData(array);
       return new ControlledArray(array, uuid.generate(), data, dispatch, true);
     }
