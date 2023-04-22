@@ -57,7 +57,7 @@ const initialState: TreeDataState = {};
  * @see https://redux-toolkit.js.org/api/createslice
  */
 export const treeNodeSlice = createSlice({
-  name: "BINARY_TREE_NODE",
+  name: "TREE_STRUCTURE",
   initialState,
   reducers: {
     ...getBaseStructureReducers<TreeNodeData>(treeNodeDataAdapter),
