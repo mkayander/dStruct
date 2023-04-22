@@ -22,9 +22,11 @@ import {
 } from "#/store/reducers/structures/treeNodeReducer";
 import { isNumber } from "#/utils";
 import {
+  type ArgumentArrayType,
   type ArgumentObject,
   type ArgumentTreeType,
   ArgumentType,
+  isArgumentArrayType,
   isArgumentTreeType,
 } from "#/utils/argumentObject";
 
@@ -185,7 +187,7 @@ const parseTreeArgument = (
 };
 
 const parseArrayArgument = (
-  arg: ArgumentObject,
+  arg: ArgumentObject<ArgumentArrayType>,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch
 ) => {
@@ -197,18 +199,24 @@ const parseArrayArgument = (
     })
   );
 
-  let parsed: Array<number | string> | null = null;
-  try {
-    parsed = JSON.parse(arg.input);
-  } catch (e) {
-    console.warn(e);
+  let array: Array<number | string> | null = null;
+
+  if (arg.type === ArgumentType.ARRAY) {
+    try {
+      array = JSON.parse(arg.input);
+    } catch (e) {
+      console.warn(e);
+    }
+  } else if (arg.type === ArgumentType.STRING) {
+    array = arg.input.split("");
   }
-  if (!parsed) return;
+
+  if (!array) return;
 
   const newItems: ArrayItemData[] = [];
 
-  for (let i = 0; i < parsed.length; i++) {
-    const value = parsed[i];
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i];
     if (value === undefined) continue;
     const newId = uuid4.generate();
     newItems[i] = {
@@ -219,7 +227,11 @@ const parseArrayArgument = (
   }
 
   dispatch(
-    arrayStructureSlice.actions.init({ name: arg.name, order: arg.order })
+    arrayStructureSlice.actions.init({
+      name: arg.name,
+      order: arg.order,
+      argType: arg.type,
+    })
   );
   dispatch(
     arrayStructureSlice.actions.addMany({
@@ -248,7 +260,7 @@ export const useArgumentsParsing = () => {
       if (isArgumentTreeType(arg)) {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
-      } else if (arg.type === ArgumentType.ARRAY) {
+      } else if (isArgumentArrayType(arg)) {
         parseArrayArgument(arg, argsInfo, dispatch);
         removedArrayNames.delete(arg.name);
       }

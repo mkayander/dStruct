@@ -17,6 +17,7 @@ import {
   type NamedPayload,
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
+import { type ArgumentArrayType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
@@ -26,6 +27,7 @@ export type ArrayItemData = StructureNode & {
 
 export type ArrayData = BaseStructureItem<ArrayItemData> & {
   order: number;
+  argType: ArgumentArrayType;
 };
 
 export type ArrayDataState = BaseStructureState<ArrayData>;
@@ -35,10 +37,15 @@ export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
   sortComparer: (a, b) => a.index - b.index,
 });
 
-const getInitialData = (order: number): ArrayData => ({
+const getInitialData = (
+  order: number,
+  argType: ArgumentArrayType
+): ArrayData => ({
   ...getInitialDataBase(arrayDataAdapter),
   order,
+  argType,
 });
+
 const initialState: ArrayDataState = {};
 
 const baseStructureReducers =
@@ -58,18 +65,28 @@ export const arrayStructureSlice = createSlice({
       action: PayloadAction<{
         name: string;
         order: number;
+        argType: ArgumentArrayType;
       }>
     ) => {
-      const { name, order } = action.payload;
-      state[name] = getInitialData(order);
+      const { name, order, argType } = action.payload;
+      state[name] = getInitialData(order, argType);
     },
-    create: (state, action: NamedPayload<EntityState<ArrayItemData>>) => {
+    create: (
+      state,
+      action: NamedPayload<{
+        argType: ArgumentArrayType;
+        nodes: EntityState<ArrayItemData>;
+      }>
+    ) => {
       const {
-        payload: { name, data },
+        payload: {
+          name,
+          data: { argType, nodes },
+        },
       } = action;
-      const treeState = { ...getInitialData(999), isRuntime: true };
+      const treeState = { ...getInitialData(999, argType), isRuntime: true };
 
-      treeState.nodes = data;
+      treeState.nodes = nodes;
 
       state[name] = treeState;
     },

@@ -5,7 +5,7 @@ import { selectCallstack } from "#/store/reducers/callstackReducer";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
-import { ArgumentType } from "#/utils/argumentObject";
+import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,
@@ -119,10 +119,14 @@ export const useNodesRuntimeUpdates = (
 
         case "addArray":
           "create" in slice.actions &&
+            isArgumentArrayType(frame.argType) &&
             dispatch(
               slice.actions.create({
                 name: treeName,
-                data: frame.args[0],
+                data: {
+                  nodes: frame.args[0],
+                  argType: frame.argType,
+                },
               })
             );
           break;

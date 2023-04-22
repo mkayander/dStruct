@@ -1,8 +1,67 @@
+import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
+import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
+import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
+import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import type { AppDispatch } from "#/store/makeStore";
-import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
-import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
-import { createRuntimeArray, createRuntimeTree } from "#/utils";
+import type {
+  ArrayData,
+  ArrayDataState,
+} from "#/store/reducers/structures/arrayReducer";
+import type {
+  TreeData,
+  TreeDataState,
+} from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
+
+const createRuntimeTree = (
+  nodesData: TreeData | undefined,
+  arg: ArgumentObject,
+  dispatch: AppDispatch
+) => {
+  if (!nodesData) {
+    console.error("No nodes data found for binary tree");
+    return null;
+  }
+  const rootId = nodesData.rootId;
+  if (!rootId) return null;
+
+  let dataMap = nodesData.nodes.entities;
+  if (nodesData.initialNodes !== null) {
+    dataMap = nodesData.initialNodes.entities;
+  }
+
+  const rootData = dataMap[rootId];
+
+  switch (nodesData.type) {
+    case ArgumentType.BINARY_TREE:
+      return BinaryTreeNode.fromNodeData(arg.name, rootData, dataMap, dispatch);
+
+    case ArgumentType.LINKED_LIST:
+      return LinkedListNode.fromNodeData(arg.name, rootData, dataMap, dispatch);
+  }
+};
+
+const createRuntimeArray = (
+  nodesData: ArrayData | undefined,
+  arg: ArgumentObject,
+  dispatch: AppDispatch
+) => {
+  if (!nodesData) return null;
+
+  let arrayDataState = nodesData.nodes;
+  if (nodesData.initialNodes !== null) {
+    arrayDataState = nodesData.initialNodes;
+  }
+
+  arrayDataState = structuredClone(arrayDataState);
+
+  if (nodesData.argType === ArgumentType.STRING) {
+    return new ControlledString(arg.input, arg.name, arrayDataState, dispatch);
+  }
+
+  const array = JSON.parse(arg.input) as Array<number | string>;
+  return new ControlledArray(array, arg.name, arrayDataState, dispatch);
+};
 
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
@@ -19,12 +78,10 @@ export const createCaseRuntimeArgs = (
       case ArgumentType.NUMBER:
         return Number(arg.input);
 
-      case ArgumentType.STRING:
-        return arg.input;
-
       case ArgumentType.BOOLEAN:
         return arg.input === "true";
 
+      case ArgumentType.STRING:
       case ArgumentType.ARRAY:
         return createRuntimeArray(arrayStore[arg.name], arg, dispatch);
 
