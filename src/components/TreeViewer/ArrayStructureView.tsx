@@ -1,4 +1,4 @@
-import { Box, Stack, type SxProps, useTheme } from "@mui/material";
+import { Box, Stack, type SxProps, Typography, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { ArrayItem } from "#/components/TreeViewer/ArrayItem";
@@ -6,6 +6,7 @@ import {
   type ArrayData,
   arrayDataItemSelectors,
 } from "#/store/reducers/structures/arrayReducer";
+import { ArgumentType } from "#/utils/argumentObject";
 
 type ArrayBracketProps = {
   side?: "left" | "right";
@@ -49,6 +50,8 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
     return arrayDataItemSelectors.selectAll(data.nodes);
   }, [data.nodes]);
 
+  const isArray = data.argType === ArgumentType.ARRAY;
+
   return (
     <Stack
       direction="row"
@@ -65,7 +68,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
         },
       }}
     >
-      <ArrayBracket />
+      {isArray ? <ArrayBracket /> : <Typography>&quot;</Typography>}
       <Stack direction="row">
         {items.length > 0 ? (
           items.map((item) => (
@@ -80,7 +83,11 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
           />
         )}
       </Stack>
-      <ArrayBracket side="right" />
+      {isArray ? (
+        <ArrayBracket side="right" />
+      ) : (
+        <Typography>&quot;</Typography>
+      )}
     </Stack>
   );
 };
