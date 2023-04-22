@@ -1,3 +1,23 @@
+# [1.137.0](https://github.com/mkayander/leetpal/compare/v1.136.0...v1.137.0) (2023-04-22)
+
+
+### Bug Fixes
+
+* Allow to create empty array proxy ([1db9aa3](https://github.com/mkayander/leetpal/commit/1db9aa39ead25e8c95f8a1aa8cf13dc7bc46b09d))
+* Mark new string proxy arg types as String ([c57e8b4](https://github.com/mkayander/leetpal/commit/c57e8b4fa2f9449496d9f60e894f6dd0381a7d2a))
+* Support a mapping function for Array.from() ([4bfe2d9](https://github.com/mkayander/leetpal/commit/4bfe2d90cc33a6059834113509289a007e9a23f7))
+
+
+### Features
+
+* Display quotes instead of brackets for string structures display ([85178bd](https://github.com/mkayander/leetpal/commit/85178bd811a96b631e35be18dd12690eeaa37d31))
+* Implement a separate debounce input. Improve string input. ([12667da](https://github.com/mkayander/leetpal/commit/12667daf1590cb5ef9b44eca597a5b160ae574b4))
+* Implement String structure display & runtime interface ([3cb9aed](https://github.com/mkayander/leetpal/commit/3cb9aed3021dbba8e3921e2a6ed14b8c6dc2a060))
+* Implement StringProxy for runtime string structure creations ([304915b](https://github.com/mkayander/leetpal/commit/304915b7b542e9897dc0ccff2d27d29e1dc67120))
+* Improved argument type guard functions ([9bb9f4f](https://github.com/mkayander/leetpal/commit/9bb9f4fa9714ee15d7c61db5c5e5ec9610459db3))
+* Update tree structure reducer name ([5c71da7](https://github.com/mkayander/leetpal/commit/5c71da78cd9fdd28ef239a0599b4cbfecbe0bf0c))
+* Use "at" method to get node meta ([9c43104](https://github.com/mkayander/leetpal/commit/9c431048847ebe81398a635c95c2ec8ee6998f45))
+
 # [1.136.0](https://github.com/mkayander/leetpal/compare/v1.135.0...v1.136.0) (2023-04-21)
 
 
