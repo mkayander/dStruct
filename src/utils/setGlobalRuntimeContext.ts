@@ -4,6 +4,7 @@ import shortUUID from "short-uuid";
 import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
+import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { type AppDispatch } from "#/store/makeStore";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
@@ -88,8 +89,18 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     }
   }
 
+  class StringProxy extends ControlledString {
+    constructor(input?: unknown) {
+      let string = String(input);
+      if (input === undefined) string = "";
+      const data = generateArrayData(string.split(""));
+      super(string, uuid.generate(), data, dispatch, true);
+    }
+  }
+
   const context = {
     ArrayProxy,
+    StringProxy,
     Queue,
     BinaryTree,
     LinkedList,
