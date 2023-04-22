@@ -167,6 +167,6 @@ export class ControlledArray<T extends number | string> extends Array<T> {
   }
 
   private getNodeMeta(index: number) {
-    return this.itemsMeta[index];
+    return this.itemsMeta.at(index);
   }
 }
