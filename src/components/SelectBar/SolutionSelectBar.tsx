@@ -94,9 +94,13 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   const handleAddSolution = () => {
     if (!selectedProject.data) return;
 
+    const order = solutions?.length ?? 0;
+
     addSolution.mutate({
       projectId: selectedProject.data.id,
-      title: `Solution ${(solutions?.length ?? 0) + 1}`,
+      title: `Solution ${order + 1}`,
+      order,
+      referenceSolutionSlug: solutionSlug,
     });
   };
 
