@@ -59,7 +59,14 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
       );
 
     case ArgumentType.STRING:
-      return <DebouncedInput fullWidth onChange={setInput} value={input} />;
+      return (
+        <DebouncedInput
+          label={argumentTypeLabels.string}
+          fullWidth
+          onChange={setInput}
+          value={input}
+        />
+      );
 
     case ArgumentType.BOOLEAN:
       return <BooleanToggleInput value={input} onChange={setInput} />;
