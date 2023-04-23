@@ -106,17 +106,6 @@ export const generateArrayData = (array: Array<number | string>) => {
     };
   }
 
-  // arrayDataAdapter.addMany(
-  //   data,
-  //   array.map((value, index) => ({
-  //     id: uuid.generate(),
-  //     index,
-  //     value,
-  //   }))
-  // );
-
-  console.log("generateArrayData", { data });
-
   return data;
 };
 
