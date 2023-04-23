@@ -1,3 +1,10 @@
+## [1.137.1](https://github.com/mkayander/leetpal/compare/v1.137.0...v1.137.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* Display string input label ([a836ee7](https://github.com/mkayander/leetpal/commit/a836ee7c8c3f00fed485b2b62fb1ab7b9a0ebae6))
+
 # [1.137.0](https://github.com/mkayander/leetpal/compare/v1.136.0...v1.137.0) (2023-04-22)
 
 
