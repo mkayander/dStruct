@@ -1,3 +1,15 @@
+# [1.138.0](https://github.com/mkayander/leetpal/compare/v1.137.1...v1.138.0) (2023-04-23)
+
+
+### Bug Fixes
+
+* Calculate new solution order correctly ([3aa7dd9](https://github.com/mkayander/leetpal/commit/3aa7dd9539a3ade2bfef2ca76425bec0f3a2d5a0))
+
+
+### Features
+
+* Allow to duplicate solutions ([ca273ef](https://github.com/mkayander/leetpal/commit/ca273efa97ba490ab2a072c864bd022d5c8ea0fb))
+
 ## [1.137.1](https://github.com/mkayander/leetpal/compare/v1.137.0...v1.137.1) (2023-04-23)
 
 
