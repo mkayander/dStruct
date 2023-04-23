@@ -62,7 +62,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         },
       }}
     >
-      <Typography sx={{ pt: 0.32 }}>{value}</Typography>
+      <Typography sx={{ pt: 0.32 }}>{String(value)}</Typography>
     </Box>
   );
 };
