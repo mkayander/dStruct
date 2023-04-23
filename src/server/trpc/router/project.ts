@@ -167,6 +167,9 @@ export const projectRouter = router({
             }
           },
           solutions: {
+            orderBy: {
+              order: "asc"
+            },
             select: {
               id: true,
               slug: true,
