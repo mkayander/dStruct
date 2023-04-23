@@ -389,15 +389,33 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
+        referenceSolutionSlug: z.ostring(),
         title: z.string(),
         code: z.ostring(),
         order: z.onumber()
       })
     )
-    .mutation(async ({ input, ctx }) =>
-      ctx.prisma.playgroundSolution.create({
-        data: { code: getTemplate(ctx.project.category), slug: `solution-${uuid.generate()}`, ...input }
-      })
+    .mutation(async ({ input, ctx }) => {
+        const { referenceSolutionSlug, code, ...restData } = input;
+        let content = code;
+        if (referenceSolutionSlug) {
+          const referenceSolution = await ctx.prisma.playgroundSolution.findUnique({
+            where: {
+              projectId_slug: {
+                projectId: input.projectId,
+                slug: referenceSolutionSlug
+              }
+            }
+          });
+          if (referenceSolution) {
+            content = referenceSolution.code;
+          }
+        }
+
+        return ctx.prisma.playgroundSolution.create({
+          data: { code: content || getTemplate(ctx.project.category), slug: `solution-${uuid.generate()}`, ...restData }
+        });
+      }
     ),
 
   updateSolution: projectOwnerProcedure
