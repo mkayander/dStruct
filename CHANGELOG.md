@@ -1,3 +1,11 @@
+# [1.139.0](https://github.com/mkayander/leetpal/compare/v1.138.2...v1.139.0) (2023-04-23)
+
+
+### Features
+
+* Insert current project name into the page title tag ([2aa4090](https://github.com/mkayander/leetpal/commit/2aa4090574f84ed44c448b15df6781f57ad8acbe))
+* Integrate Vercel analytics package ([e0dd5cc](https://github.com/mkayander/leetpal/commit/e0dd5cca88799148b3a0951b359636a896dd6ba4))
+
 ## [1.138.2](https://github.com/mkayander/leetpal/compare/v1.138.1...v1.138.2) (2023-04-23)
 
 
