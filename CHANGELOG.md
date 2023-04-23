@@ -1,3 +1,10 @@
+## [1.138.1](https://github.com/mkayander/leetpal/compare/v1.138.0...v1.138.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* Order solutions when fetching ([63f03a9](https://github.com/mkayander/leetpal/commit/63f03a9c9935a0ce177d24ab91b3d682ea3f97db))
+
 # [1.138.0](https://github.com/mkayander/leetpal/compare/v1.137.1...v1.138.0) (2023-04-23)
 
 
