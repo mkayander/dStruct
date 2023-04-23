@@ -2,6 +2,7 @@ import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
+import { Analytics } from "@vercel/analytics/react";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
@@ -51,6 +52,7 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
               </Head>
               <CssBaseline />
               <Component {...props.pageProps} />
+              <Analytics />
             </SnackbarProvider>
           </StateThemeProvider>
         </ApolloProvider>
