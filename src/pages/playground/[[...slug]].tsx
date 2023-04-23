@@ -1,5 +1,4 @@
 import { Container, darken, Stack, useTheme } from "@mui/material";
-import Head from "next/head";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
@@ -41,10 +40,6 @@ const PlaygroundPage: NextPageWithLayout = () => {
         background: darken(theme.palette.background.default, 0.1),
       }}
     >
-      <Head>
-        <title>dStruct Playground</title>
-      </Head>
-      {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
       <MainAppBar toolbarVariant="dense" />
       <Wrapper>
         <ProjectPanel />

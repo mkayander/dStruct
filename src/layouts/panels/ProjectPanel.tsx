@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -105,6 +106,12 @@ export const ProjectPanel: React.FC = () => {
 
   return (
     <PanelWrapper>
+      <Head>
+        <title>
+          {selectedProject.data ? `${selectedProject.data?.title} - ` : ""}
+          dStruct Playground
+        </title>
+      </Head>
       <ProjectModal
         open={isProjectModalOpen}
         onClose={() => setIsProjectModalOpen(false)}
