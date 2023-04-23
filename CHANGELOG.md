@@ -1,3 +1,11 @@
+## [1.138.2](https://github.com/mkayander/leetpal/compare/v1.138.1...v1.138.2) (2023-04-23)
+
+
+### Bug Fixes
+
+* Convert all array values to strings ([3d80ed9](https://github.com/mkayander/leetpal/commit/3d80ed90f178511bc79891ae00f0a12af0759a04))
+* Removed console log ([f38463c](https://github.com/mkayander/leetpal/commit/f38463c4fbafaa2cdf17e3972ec473f0a2ea7064))
+
 ## [1.138.1](https://github.com/mkayander/leetpal/compare/v1.138.0...v1.138.1) (2023-04-23)
 
 
