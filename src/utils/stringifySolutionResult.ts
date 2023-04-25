@@ -18,8 +18,11 @@ const safeStringify = (val: unknown) =>
   );
 
 export const stringifySolutionResult = (
-  result: string | number | bigint | LinkedListNode | null
+  result?: string | number | bigint | LinkedListNode | null
 ) => {
+  if (result === null) return "null";
+  if (result === undefined) return "undefined";
+
   if (typeof result === "bigint") {
     return `${result}n`;
   }
