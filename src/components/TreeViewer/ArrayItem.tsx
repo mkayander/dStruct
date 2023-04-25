@@ -21,7 +21,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
       className="array-item"
       sx={{
         position: "relative",
-        width: 42,
+        minWidth: 42,
         height: 42,
         marginLeft: "1px",
         backgroundColor: nodeColor && alpha(nodeColor, 0.1),
@@ -62,7 +62,11 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         },
       }}
     >
-      <Typography sx={{ pt: 0.32 }}>{String(value)}</Typography>
+      <Typography
+        sx={{ textAlign: "center", wordWrap: "none", pt: 0.32, mx: 1 }}
+      >
+        {value !== undefined ? String(value) : ""}
+      </Typography>
     </Box>
   );
 };
