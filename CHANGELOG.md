@@ -1,3 +1,12 @@
+## [1.139.1](https://github.com/mkayander/leetpal/compare/v1.139.0...v1.139.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* Fix array item display issues with undefined/long values ([388e1f6](https://github.com/mkayander/leetpal/commit/388e1f63df12ac61670114fe26c9468fb2d2b0fd))
+* Handle null/undefined edge cases of solution results ([0f79765](https://github.com/mkayander/leetpal/commit/0f7976568bd98996f2812a3e53be2c9277dd8358))
+* Render structure containers only when needed ([4f237c0](https://github.com/mkayander/leetpal/commit/4f237c0b83d709c6a417746fe20c9b2c5caaaf64))
+
 # [1.139.0](https://github.com/mkayander/leetpal/compare/v1.138.2...v1.139.0) (2023-04-23)
 
 
