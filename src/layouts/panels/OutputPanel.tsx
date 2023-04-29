@@ -6,6 +6,39 @@ import { CallstackTable } from "#/components/CallstackTable";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
+import { selectConsoleLogs } from "#/store/reducers/callstackReducer";
+
+const ConsoleOutput: React.FC = () => {
+  const theme = useTheme();
+
+  const logs = useAppSelector(selectConsoleLogs);
+
+  if (!logs.length) return null;
+
+  const firstTimestamp = logs[0]?.timestamp ?? 0;
+
+  console.log(firstTimestamp);
+
+  return (
+    <Typography variant="caption">
+      Console Output:{" "}
+      <Box
+        component="div"
+        sx={{
+          backgroundColor: alpha(theme.palette.info.dark, 0.08),
+          p: 1,
+          borderRadius: 2,
+        }}
+      >
+        <pre>
+          {logs.map((log) => (
+            <div key={log.id}>{log.args.join("\n\t")}</div>
+          ))}
+        </pre>
+      </Box>
+    </Typography>
+  );
+};
 
 const ResultData: React.FC<{
   result: string | number | null;
@@ -80,6 +113,7 @@ export const OutputPanel: React.FC = () => {
                     </Typography>
                   )}
                 </Stack>
+                <ConsoleOutput />
                 <ResultData result={result} />
               </Stack>
             )}
