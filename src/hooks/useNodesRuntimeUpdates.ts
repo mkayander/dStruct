@@ -31,7 +31,7 @@ export const useNodesRuntimeUpdates = (
         return;
       }
 
-      if (frame.name === "error") return;
+      if (!("treeName" in frame)) return;
 
       const treeName = frame.treeName;
       const slice =

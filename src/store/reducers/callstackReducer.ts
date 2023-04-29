@@ -79,8 +79,16 @@ type DeleteNodeFrame = NodeFrameBase & {
   args: [];
 };
 
+type ConsoleLogFrame = {
+  id: string;
+  timestamp: number;
+  name: "consoleLog";
+  args: string[];
+};
+
 export type CallFrame =
   | RuntimeErrorFrame
+  | ConsoleLogFrame
   | AddNodeFrame
   | AddArrayItemFrame
   | AddArrayFrame
@@ -209,4 +217,12 @@ export const selectRuntimeData = createSelector(
 export const selectCallstackIsReady = createSelector(
   (state: RootState) => state.callstack,
   (callstack: CallstackState) => callstack.isReady
+);
+
+export const selectConsoleLogs = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack) =>
+    rootSelectors
+      .selectAll(callstack.frames)
+      .filter((frame) => frame.name === "consoleLog") as ConsoleLogFrame[]
 );

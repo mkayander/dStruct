@@ -6,6 +6,7 @@ import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { type AppDispatch } from "#/store/makeStore";
+import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
@@ -104,6 +105,23 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     Queue,
     BinaryTree,
     LinkedList,
+    log: (...args: unknown[]) => {
+      dispatch(
+        callstackSlice.actions.addOne({
+          id: uuid.generate(),
+          timestamp: Date.now(),
+          name: "consoleLog",
+          args: args.map((arg) => {
+            if (typeof arg === "object") {
+              return JSON.stringify(arg);
+            }
+            return String(arg);
+          }),
+        })
+      );
+
+      console.log(...args);
+    },
   };
 
   Object.assign(window, context);
