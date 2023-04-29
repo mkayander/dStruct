@@ -1,3 +1,11 @@
+# [1.140.0](https://github.com/mkayander/leetpal/compare/v1.139.1...v1.140.0) (2023-04-29)
+
+
+### Features
+
+* Display solution logs at output panel ([7c386e2](https://github.com/mkayander/leetpal/commit/7c386e2ca5bc832913174b8198cd2531471d9ade))
+* Implemented runtime solution logging ([a24801c](https://github.com/mkayander/leetpal/commit/a24801c5400c5f90e2b09aea780900e88049def1))
+
 ## [1.139.1](https://github.com/mkayander/leetpal/compare/v1.139.0...v1.139.1) (2023-04-25)
 
 
