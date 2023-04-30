@@ -14,12 +14,13 @@ import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
 import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
+import { type PanelContentProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
 import { useAppSelector } from "#/store/hooks";
 import { selectRuntimeData } from "#/store/reducers/callstackReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 
-export const CodePanel: React.FC = () => {
+export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
 
   const [tabValue, setTabValue] = useState("1");
@@ -166,6 +167,11 @@ export const CodePanel: React.FC = () => {
     currentSolution.isLoading ||
     updateSolution.isLoading;
 
+  let editorHeight = 500;
+  if (verticalSize) {
+    editorHeight = verticalSize * 8.6 - 110;
+  }
+
   return (
     <PanelWrapper>
       <TabContext value={tabValue}>
@@ -219,6 +225,7 @@ export const CodePanel: React.FC = () => {
             }}
           >
             <CodeRunner
+              height={editorHeight}
               value={codeInput}
               onChange={handleChangeCode}
               isUpdating={isLoading}
