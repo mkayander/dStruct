@@ -1,3 +1,10 @@
+# [1.142.0](https://github.com/mkayander/leetpal/compare/v1.141.0...v1.142.0) (2023-04-30)
+
+
+### Features
+
+* Reduce code editor line number column width ([be85ee9](https://github.com/mkayander/leetpal/commit/be85ee9db97abc57ae8a4de08a00cb35928a698c))
+
 # [1.141.0](https://github.com/mkayander/leetpal/compare/v1.140.0...v1.141.0) (2023-04-30)
 
 
