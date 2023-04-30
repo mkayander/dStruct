@@ -5,6 +5,7 @@ import {
   FormControl,
   IconButton,
   InputLabel,
+  ListSubheader,
   MenuItem,
   Select,
   type SelectChangeEvent,
@@ -17,7 +18,7 @@ import {
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
 import { useArgumentsParsing, usePlaygroundSlugs } from "#/hooks";
@@ -104,6 +105,64 @@ export const ProjectPanel: React.FC = () => {
     setIsProjectModalOpen(true);
   };
 
+  const projectSelectItems = useMemo(() => {
+    let lastCategory = "";
+    const elements: JSX.Element[] = [];
+    for (const project of allBrief.data ?? []) {
+      if (lastCategory !== project.category) {
+        lastCategory = project.category;
+        elements.push(
+          <ListSubheader key={project.category} disableSticky>
+            {categoryLabels[project.category]}
+          </ListSubheader>
+        );
+      }
+
+      elements.push(
+        <MenuItem key={project.id} value={project.slug}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
+            overflow="hidden"
+            spacing={1}
+          >
+            <span>{project.title}</span>
+            <Stack
+              direction="row"
+              alignItems="center"
+              minWidth={10}
+              overflow="hidden"
+              spacing={1}
+            >
+              <Typography
+                fontSize={12}
+                variant="subtitle1"
+                textOverflow="ellipsis"
+                overflow="hidden"
+                sx={{ opacity: 0.6 }}
+              >
+                {categoryLabels[project.category]}
+              </Typography>
+              {project.author?.bucketImage && (
+                <Tooltip title={`Author: ${project.author.name}`} arrow>
+                  <Avatar
+                    src={getImageUrl(project.author.bucketImage)}
+                    alt={`${project.author.name} avatar`}
+                    sx={{ height: 24, width: 24 }}
+                  />
+                </Tooltip>
+              )}
+            </Stack>
+          </Stack>
+        </MenuItem>
+      );
+    }
+
+    return elements;
+  }, [allBrief.data]);
+
   return (
     <PanelWrapper>
       <Head>
@@ -159,49 +218,7 @@ export const ProjectPanel: React.FC = () => {
                 onChange={handleSelectProject}
                 disabled={allBrief.isLoading}
               >
-                {allBrief.data?.map((project) => (
-                  <MenuItem key={project.id} value={project.slug}>
-                    <Stack
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      width="100%"
-                      overflow="hidden"
-                      spacing={1}
-                    >
-                      <span>{project.title}</span>
-                      <Stack
-                        direction="row"
-                        alignItems="center"
-                        minWidth={10}
-                        overflow="hidden"
-                        spacing={1}
-                      >
-                        <Typography
-                          fontSize={12}
-                          variant="subtitle1"
-                          textOverflow="ellipsis"
-                          overflow="hidden"
-                          sx={{ opacity: 0.6 }}
-                        >
-                          {categoryLabels[project.category]}
-                        </Typography>
-                        {project.author?.bucketImage && (
-                          <Tooltip
-                            title={`Author: ${project.author.name}`}
-                            arrow
-                          >
-                            <Avatar
-                              src={getImageUrl(project.author.bucketImage)}
-                              alt={`${project.author.name} avatar`}
-                              sx={{ height: 24, width: 24 }}
-                            />
-                          </Tooltip>
-                        )}
-                      </Stack>
-                    </Stack>
-                  </MenuItem>
-                ))}
+                {projectSelectItems}
               </Select>
             </FormControl>
             <Stack direction="row" spacing={0.5}>
