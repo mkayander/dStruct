@@ -4,6 +4,8 @@ import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import dynamic from "next/dynamic";
 import React from "react";
 
+import { useMobileLayout } from "#/hooks/useMobileLayout";
+
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
   loading: () => <Skeleton variant="rectangular" height="400px" />,
@@ -30,6 +32,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
+  const isMobile = useMobileLayout();
 
   return (
     <Box position="relative" boxShadow={4} borderRadius={1}>
@@ -42,12 +45,14 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         }}
       />
       <MonacoEditor
-        height="400px"
         theme={theme.palette.mode === "dark" ? "vs-dark" : "vs-light"}
         options={{
           minimap: { enabled: false },
           tabSize: 2,
           fixedOverflowWidgets: true,
+          lineNumbersMinChars: 3,
+          lineDecorationsWidth: 6,
+          folding: !isMobile,
         }}
         {...restProps}
         language="javascript"
