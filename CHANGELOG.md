@@ -1,3 +1,11 @@
+# [1.141.0](https://github.com/mkayander/leetpal/compare/v1.140.0...v1.141.0) (2023-04-30)
+
+
+### Features
+
+* Resize code editor on panel resize ([a065eca](https://github.com/mkayander/leetpal/commit/a065eca93f154ee244bcf75a13d9f0a606912d57))
+* Reworked split panels structure. Pass panel vertical size. ([0dfb17e](https://github.com/mkayander/leetpal/commit/0dfb17e0f3275345027a86103e035824a3015398))
+
 # [1.140.0](https://github.com/mkayander/leetpal/compare/v1.139.1...v1.140.0) (2023-04-29)
 
 
