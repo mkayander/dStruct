@@ -41,7 +41,8 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           position: "absolute",
           width: "100%",
           transition: "opacity .2s",
-          opacity: isUpdating ? 1 : 0,
+          zIndex: 1,
+          opacity: isUpdating ? 0.8 : 0,
         }}
       />
       <MonacoEditor
