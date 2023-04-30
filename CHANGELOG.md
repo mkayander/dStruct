@@ -1,3 +1,10 @@
+# [1.143.0](https://github.com/mkayander/leetpal/compare/v1.142.1...v1.143.0) (2023-04-30)
+
+
+### Features
+
+* Implemented project selector categories grouping ([4312cfd](https://github.com/mkayander/leetpal/commit/4312cfd9390700b52d0ee0e2483816e0b7bf6a34))
+
 ## [1.142.1](https://github.com/mkayander/leetpal/compare/v1.142.0...v1.142.1) (2023-04-30)
 
 
