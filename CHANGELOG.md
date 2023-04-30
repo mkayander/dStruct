@@ -1,3 +1,10 @@
+## [1.142.1](https://github.com/mkayander/leetpal/compare/v1.142.0...v1.142.1) (2023-04-30)
+
+
+### Bug Fixes
+
+* Fixed code editor progress bar z-index ([2fe6622](https://github.com/mkayander/leetpal/commit/2fe6622e5b705d4cb4badd215c3900ef5d03a19d))
+
 # [1.142.0](https://github.com/mkayander/leetpal/compare/v1.141.0...v1.142.0) (2023-04-30)
 
 
