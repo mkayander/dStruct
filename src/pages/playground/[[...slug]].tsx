@@ -15,19 +15,34 @@ import type { NextPageWithLayout } from "#/types/page";
 
 type WrapperProps = SplitPanelsLayoutProps;
 
-const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+const Wrapper: React.FC<WrapperProps> = ({
+  TopLeft,
+  BottomLeft,
+  TopRight,
+  BottomRight,
+}) => {
   const isMobile = useMobileLayout();
 
   if (isMobile)
     return (
       <Container sx={{ pb: 4 }}>
         <Stack spacing={1} mt={1} pb={4}>
-          {children}
+          <TopLeft />
+          <TopRight />
+          <BottomLeft />
+          <BottomRight />
         </Stack>
       </Container>
     );
 
-  return <SplitPanelsLayout>{children}</SplitPanelsLayout>;
+  return (
+    <SplitPanelsLayout
+      TopLeft={TopLeft}
+      BottomLeft={BottomLeft}
+      TopRight={TopRight}
+      BottomRight={BottomRight}
+    />
+  );
 };
 
 const PlaygroundPage: NextPageWithLayout = () => {
@@ -41,12 +56,12 @@ const PlaygroundPage: NextPageWithLayout = () => {
       }}
     >
       <MainAppBar toolbarVariant="dense" />
-      <Wrapper>
-        <ProjectPanel />
-        <TreeViewPanel />
-        <CodePanel />
-        <OutputPanel />
-      </Wrapper>
+      <Wrapper
+        TopLeft={ProjectPanel}
+        BottomLeft={CodePanel}
+        TopRight={TreeViewPanel}
+        BottomRight={OutputPanel}
+      />
     </PageScrollContainer>
   );
 };

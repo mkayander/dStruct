@@ -1,23 +1,53 @@
 import { Box } from "@mui/material";
-import React from "react";
-import { Panel, PanelGroup } from "react-resizable-panels";
+import React, { useState } from "react";
+import { Panel, PanelGroup, type PanelProps } from "react-resizable-panels";
 
 import { ResizeHandle } from "#/components";
 
-type Panel = React.ReactNode | null | undefined;
-
 export type SplitPanelsLayoutProps = {
-  children?: [Panel, Panel, Panel, Panel];
+  TopLeft: PanelContent;
+  TopRight: PanelContent;
+  BottomLeft: PanelContent;
+  BottomRight: PanelContent;
 };
 
 const style = {};
 
-export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
-  children,
-}) => {
-  const [topLeft, topRight, bottomLeft, bottomRight] =
-    React.Children.toArray(children);
+export type PanelContentProps = {
+  verticalSize?: number;
+};
+type PanelContent = React.FC<PanelContentProps>;
 
+type ControlledPanelProps = PanelProps & {
+  Child: PanelContent;
+};
+
+const ControlledPanel: React.FC<ControlledPanelProps> = ({
+  Child,
+  ...restProps
+}) => {
+  const [size, setSize] = useState(0);
+
+  return (
+    <Panel
+      style={style}
+      onResize={(size) => {
+        console.log("panel size: ", size);
+        setSize(size);
+      }}
+      {...restProps}
+    >
+      {<Child verticalSize={size} />}
+    </Panel>
+  );
+};
+
+export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
+  TopLeft,
+  TopRight,
+  BottomLeft,
+  BottomRight,
+}) => {
   return (
     <Box
       sx={{
@@ -38,13 +68,9 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
             direction="vertical"
             style={style}
           >
-            <Panel defaultSize={30} order={1} style={style}>
-              {topLeft}
-            </Panel>
+            <ControlledPanel defaultSize={30} order={1} Child={TopLeft} />
             <ResizeHandle />
-            <Panel order={2} style={style}>
-              {bottomLeft}
-            </Panel>
+            <ControlledPanel order={2} Child={BottomLeft} />
           </PanelGroup>
         </Panel>
         <ResizeHandle />
@@ -54,13 +80,9 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
             direction="vertical"
             style={style}
           >
-            <Panel order={1} defaultSize={80} style={style}>
-              {topRight}
-            </Panel>
+            <ControlledPanel order={1} defaultSize={80} Child={TopRight} />
             <ResizeHandle />
-            <Panel order={2} style={style}>
-              {bottomRight}
-            </Panel>
+            <ControlledPanel order={2} Child={BottomRight} />
           </PanelGroup>
         </Panel>
       </PanelGroup>
