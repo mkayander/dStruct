@@ -32,7 +32,6 @@ const ControlledPanel: React.FC<ControlledPanelProps> = ({
     <Panel
       style={style}
       onResize={(size) => {
-        console.log("panel size: ", size);
         setSize(size);
       }}
       {...restProps}
