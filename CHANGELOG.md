@@ -1,3 +1,17 @@
+# [1.146.0](https://github.com/mkayander/leetpal/compare/v1.145.0...v1.146.0) (2023-05-06)
+
+
+### Bug Fixes
+
+* Improved console logs text rendering ([5678abd](https://github.com/mkayander/leetpal/commit/5678abda4f39ad06869d574e64988b72e529e13a))
+* Removed unused code ([fd8dc96](https://github.com/mkayander/leetpal/commit/fd8dc96e24e8625d24301d94be4f89a38271854a))
+* Render arrays on a different z-index from binary trees ([16c8360](https://github.com/mkayander/leetpal/commit/16c8360ad1cc99775a95ce6f7f725bc07e02850f))
+
+
+### Features
+
+* Implement initial navigation to the previously viewed playground path ([7cde444](https://github.com/mkayander/leetpal/commit/7cde444df949d165eb9fbe40b2403c346c9abec1))
+
 # [1.145.0](https://github.com/mkayander/leetpal/compare/v1.144.0...v1.145.0) (2023-05-06)
 
 
