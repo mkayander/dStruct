@@ -28,7 +28,7 @@ const ConsoleOutput: React.FC = () => {
       >
         <pre>
           {logs.map((log) => (
-            <div key={log.id}>{log.args.join("\n\t")}</div>
+            <div key={log.id}>{log.args.join(" ")}</div>
           ))}
         </pre>
       </Box>
