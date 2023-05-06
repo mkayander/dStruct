@@ -81,7 +81,7 @@ export const ProjectPanel: React.FC = () => {
   useEffect(() => {
     if (allBrief.data?.length && router.isReady && !projectSlug) {
       const firstProject = allBrief.data[0];
-      firstProject && setProject(firstProject.slug);
+      firstProject && setProject(firstProject.slug, true);
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 

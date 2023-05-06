@@ -1,10 +1,18 @@
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const BASE_PATH = "/playground";
 
 export const usePlaygroundSlugs = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const currentPath = router.asPath;
+    const projectSlug = currentPath.split("/")[2];
+    if (!projectSlug) return;
+
+    localStorage.setItem("lastPlaygroundPath", currentPath);
+  }, [router.asPath]);
 
   return useMemo(() => {
     const [projectSlug, caseSlug, solutionSlug] = Array.isArray(
@@ -13,7 +21,16 @@ export const usePlaygroundSlugs = () => {
       ? router.query.slug
       : [];
 
-    const setProject = (slug: string) => router.replace(`${BASE_PATH}/${slug}`);
+    const setProject = (slug: string, isInitial?: boolean) => {
+      const lastPath = localStorage.getItem("lastPlaygroundPath");
+      const lastProjectSlug = lastPath?.split("/")[2];
+
+      if (lastProjectSlug && isInitial) {
+        return router.replace(lastPath);
+      }
+
+      return router.replace(`${BASE_PATH}/${slug}`);
+    };
     const setCase = (slug: string) => {
       if (!projectSlug) throw new Error("Project id must be set first");
 
