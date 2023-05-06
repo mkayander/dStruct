@@ -15,10 +15,6 @@ const ConsoleOutput: React.FC = () => {
 
   if (!logs.length) return null;
 
-  const firstTimestamp = logs[0]?.timestamp ?? 0;
-
-  console.log(firstTimestamp);
-
   return (
     <Typography variant="caption">
       Console Output:{" "}
