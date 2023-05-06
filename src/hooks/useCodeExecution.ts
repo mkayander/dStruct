@@ -16,6 +16,12 @@ import {
 
 const uuid = shortUUID();
 
+const globalDefinitionsPrefix = `
+  const console = {...window.console, log: window.log, error: window.error, warn: window.warn, info: window.info};
+  const Array = window.ArrayProxy;
+  const String = window.StringProxy;
+`.trim();
+
 export const useCodeExecution = (codeInput: string) => {
   const dispatch = useDispatch();
 
@@ -35,11 +41,12 @@ export const useCodeExecution = (codeInput: string) => {
       caseArgs
     );
 
-    const getInputFunction = new Function(codeInput);
+    const prefixedCode = `${globalDefinitionsPrefix}\n${codeInput}`;
 
     const startTimestamp = performance.now();
 
     try {
+      const getInputFunction = new Function(prefixedCode);
       const runFunction = getInputFunction();
 
       // Before running the code, clear the callstack
