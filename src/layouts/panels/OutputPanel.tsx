@@ -17,7 +17,7 @@ const ConsoleOutput: React.FC = () => {
 
   return (
     <Typography variant="caption">
-      Console Output:{" "}
+      Console Output:
       <Box
         component="div"
         sx={{
