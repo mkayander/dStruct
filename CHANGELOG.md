@@ -1,3 +1,10 @@
+## [1.146.1](https://github.com/mkayander/leetpal/compare/v1.146.0...v1.146.1) (2023-05-13)
+
+
+### Bug Fixes
+
+* Removed redundant space ([3384d0c](https://github.com/mkayander/leetpal/commit/3384d0c0372f550cd1106627f18f53bdf9c83aac))
+
 # [1.146.0](https://github.com/mkayander/leetpal/compare/v1.145.0...v1.146.0) (2023-05-06)
 
 
