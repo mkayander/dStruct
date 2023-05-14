@@ -1,3 +1,12 @@
+# [1.149.0](https://github.com/mkayander/leetpal/compare/v1.148.0...v1.149.0) (2023-05-14)
+
+
+### Features
+
+* Internationalize main app bar ([22d8c6d](https://github.com/mkayander/leetpal/commit/22d8c6d098f3c13c7714839b868ec5c9579f8e39))
+* Load i18n dictionary on playground page ([cdfbecd](https://github.com/mkayander/leetpal/commit/cdfbecdb9ac5a024db1507cd8c9fc32d3faf51fd))
+* Update i18n plugin config ([a07a9da](https://github.com/mkayander/leetpal/commit/a07a9da3b8903549631eacdc4907ae725b885523))
+
 # [1.148.0](https://github.com/mkayander/leetpal/compare/v1.147.0...v1.148.0) (2023-05-14)
 
 
