@@ -15,7 +15,8 @@
     "lint": "next lint && npm run tsc",
     "start": "next start",
     "semantic-release": "semantic-release",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "typesafe-i18n": "typesafe-i18n"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -70,6 +71,7 @@
     "short-uuid": "^4.2.2",
     "slugify": "^1.6.6",
     "superjson": "1.9.1",
+    "typesafe-i18n": "^5.24.3",
     "yup": "^0.32.11",
     "zod": "^3.21.4"
   },

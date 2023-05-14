@@ -139,6 +139,9 @@ dependencies:
   superjson:
     specifier: 1.9.1
     version: 1.9.1
+  typesafe-i18n:
+    specifier: ^5.24.3
+    version: 5.24.3(typescript@5.0.3)
   yup:
     specifier: ^0.32.11
     version: 0.32.11
@@ -8757,11 +8760,19 @@ packages:
       is-typed-array: 1.1.10
     dev: true
 
+  /typesafe-i18n@5.24.3(typescript@5.0.3):
+    resolution: {integrity: sha512-VqjGbIydOqtQjO81mGo++TjuqeC8YoxxgYrO1/ikXIS/l/Q6mAcz4yrt5AvqjdFHMt3gRm7oGbVI/yLyV+VTOg==}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=3.5.1'
+    dependencies:
+      typescript: 5.0.3
+    dev: false
+
   /typescript@5.0.3:
     resolution: {integrity: sha512-xv8mOEDnigb/tN9PSMTwSEqAnUvkoXMQlicOb0IUVDBSQCgBSaAAROUZYy2IcUy5qU6XajK5jjjO7TMWqBTKZA==}
     engines: {node: '>=12.20'}
     hasBin: true
-    dev: true
 
   /ua-parser-js@0.7.35:
     resolution: {integrity: sha512-veRf7dawaj9xaWEu9HoTVn5Pggtc/qj+kqTOFvNiN1l0YdxwC1kvel57UCjThjGa3BHBihE8/UJAHI+uQHmd/g==}
