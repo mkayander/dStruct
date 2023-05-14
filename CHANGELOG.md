@@ -1,3 +1,15 @@
+# [1.147.0](https://github.com/mkayander/leetpal/compare/v1.146.1...v1.147.0) (2023-05-14)
+
+
+### Features
+
+* Added new locales ([24bcdfd](https://github.com/mkayander/leetpal/commit/24bcdfdc412eec2288cfca231eeb3f59b53d9c23))
+* Initial i18n usage ([0fcf7dc](https://github.com/mkayander/leetpal/commit/0fcf7dc7e3a7503d0729e25935a50de51bdc823a))
+* Initialize typesafe i18n ([49a7678](https://github.com/mkayander/leetpal/commit/49a767853fba0de46daa97a9f6ad59c7eb72aaba))
+* Installed typesafe-i18n ([7f1d640](https://github.com/mkayander/leetpal/commit/7f1d640d55cd2c9ad4848b00481e2942ccd53c84))
+* Updated IDE configs ([564b3cb](https://github.com/mkayander/leetpal/commit/564b3cbd7047f88c0f178bd15a6a51d0a9eba5f3))
+* Updated prettier config ([dee10d8](https://github.com/mkayander/leetpal/commit/dee10d8bf48766ead8cdfd9890d43a60871af72f))
+
 ## [1.146.1](https://github.com/mkayander/leetpal/compare/v1.146.0...v1.146.1) (2023-05-13)
 
 
