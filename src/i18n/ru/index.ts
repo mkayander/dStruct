@@ -11,6 +11,7 @@ const ru: Translation = {
     "Войдите с помощью GitHub или Google в правом верхнем углу",
   SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE:
     "Войдите, чтобы отслеживать свой прогресс и многое другое!",
+  OPEN_OPTIONS: "Открыть опции",
 
   CHOOSE_LOCALE: "Выберите язык...",
   HI: "Привет {name}!",

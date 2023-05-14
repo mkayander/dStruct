@@ -11,6 +11,7 @@ const en: BaseTranslation = {
     "Sign in with GitHub or Google in the top right corner",
   SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE:
     "Sign in to keep track of your progress and more!",
+  OPEN_OPTIONS: "Open options",
 
   CHOOSE_LOCALE: "Choose locale...",
   HI: "Hello {name:string}!",

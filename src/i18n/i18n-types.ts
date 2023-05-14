@@ -45,6 +45,10 @@ type RootTranslation = {
 	 */
 	SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE: string
 	/**
+	 * O​p​e​n​ ​o​p​t​i​o​n​s
+	 */
+	OPEN_OPTIONS: string
+	/**
 	 * C​h​o​o​s​e​ ​l​o​c​a​l​e​.​.​.
 	 */
 	CHOOSE_LOCALE: string
@@ -101,6 +105,10 @@ export type TranslationFunctions = {
 	 * Sign in to keep track of your progress and more!
 	 */
 	SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE: () => LocalizedString
+	/**
+	 * Open options
+	 */
+	OPEN_OPTIONS: () => LocalizedString
 	/**
 	 * Choose locale...
 	 */

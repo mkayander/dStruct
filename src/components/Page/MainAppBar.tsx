@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
 import { ThemeSwitch } from "#/components/Page/ThemeSwitch";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   appBarSlice,
@@ -82,6 +83,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const dispatch = useAppDispatch();
   const router = useRouter();
   const theme = useTheme();
+  const { LL } = useI18nContext();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -290,14 +292,14 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               <>
                 {session.status === "unauthenticated" ? (
                   <Button
-                    title="Sign In"
+                    title={LL.SIGN_IN()}
                     color="inherit"
                     onClick={handleSignIn}
                   >
-                    Sign In
+                    {LL.SIGN_IN()}
                   </Button>
                 ) : null}
-                <Tooltip title="Open options" arrow>
+                <Tooltip title={LL.OPEN_OPTIONS()} arrow>
                   <IconButton onClick={handleOpenUserMenu}>
                     {session.data ? (
                       <Avatar>
