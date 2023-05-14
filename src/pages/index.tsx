@@ -10,6 +10,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
@@ -18,6 +19,8 @@ import { useDailyQuestionData } from "#/api";
 import { QuestionSummary } from "#/components";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { useI18nContext } from "#/i18n/i18n-react";
+import type { Locales, Translations } from "#/i18n/i18n-types";
 import {
   DailyProblem,
   LeetCodeStats,
@@ -25,7 +28,13 @@ import {
   UserSettings,
 } from "#/layouts";
 
-const DashboardPage: React.FC = () => {
+const DashboardPage: NextPage<{
+  i18n: {
+    locale: Locales;
+    dictionary: Translations;
+  };
+}> = () => {
+  const { LL } = useI18nContext();
   const session = useSession();
   const leetCodeUsername = session.data?.user.leetCodeUsername;
   const theme = useTheme();
@@ -60,21 +69,23 @@ const DashboardPage: React.FC = () => {
           pt={12}
           px={3}
         >
-          <Typography variant="h2">Data Structures Simplified</Typography>
+          <Typography variant="h2">
+            {LL.DATA_STRUCTURES_SIMPLIFIED()}
+          </Typography>
           <Typography variant="subtitle1">
-            Visualize your LeetCode problems just form your code 👩‍💻
+            {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()} 👩‍💻
           </Typography>
           <br />
           <Link href={"/playground"}>
             <Button variant="outlined" color="inherit" size="large">
-              Try it out now 🚀
+              {LL.TRY_IT_OUT_NOW()} 🚀
             </Button>
           </Link>
         </Stack>
       </Box>
       <Container>
         <Typography variant="h5" my={3}>
-          {leetCodeUsername ? `${leetCodeUsername}'s Dashboard` : "Dashboard"}
+          {LL.USER_DASHBOARD({ name: leetCodeUsername || "User" })}
         </Typography>
         <Grid container spacing={2}>
           {session.status === "loading" ? (
@@ -90,7 +101,9 @@ const DashboardPage: React.FC = () => {
             </>
           ) : (
             <Grid item xs={12}>
-              <Tooltip title="Sign in with GitHub or Google at the top right corner">
+              <Tooltip
+                title={LL.SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT()}
+              >
                 <Typography
                   variant="h4"
                   sx={{
@@ -98,7 +111,7 @@ const DashboardPage: React.FC = () => {
                     margin: "auto",
                   }}
                 >
-                  Sign in to keep track of your progress and more! 🔑
+                  {LL.SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE()} 🔑
                 </Typography>
               </Tooltip>
             </Grid>
@@ -114,5 +127,7 @@ const DashboardPage: React.FC = () => {
     </MainLayout>
   );
 };
+
+export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
 
 export default DashboardPage;
