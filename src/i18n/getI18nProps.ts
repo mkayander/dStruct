@@ -8,8 +8,6 @@ export const getI18nProps: GetStaticProps = async (context) => {
   const locale = (context.locale as Locales) || "en";
   await loadLocaleAsync(locale);
 
-  console.log("getI18nProps: ", locale, loadedLocales[locale]);
-
   return {
     props: {
       i18n: {
