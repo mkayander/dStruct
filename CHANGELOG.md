@@ -1,3 +1,10 @@
+## [1.149.1](https://github.com/mkayander/leetpal/compare/v1.149.0...v1.149.1) (2023-05-14)
+
+
+### Bug Fixes
+
+* Add "getStaticPaths" for the playground page ([77419da](https://github.com/mkayander/leetpal/commit/77419da1fa9a61358d8d31cce375bff932e8687c))
+
 # [1.149.0](https://github.com/mkayander/leetpal/compare/v1.148.0...v1.149.0) (2023-05-14)
 
 
