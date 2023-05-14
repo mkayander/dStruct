@@ -66,6 +66,13 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+}
+
 export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
 
 export default PlaygroundPage;
