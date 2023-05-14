@@ -66,4 +66,6 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
+export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
+
 export default PlaygroundPage;
