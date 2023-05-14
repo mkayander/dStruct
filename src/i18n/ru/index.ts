@@ -18,7 +18,7 @@ const ru: Translation = {
     "Редактируйте <code>pages/index.tsx</code> и сохраните, чтобы перезагрузить.",
   YOUR_NAME: "Ваше имя:",
   SELECTED_LOCALE: "Выбранный язык:",
-  // TODAY: "Сегодня {date|weekday}",
+  TODAY: "Сегодня {date|weekday}",
 };
 
 export default ru;

@@ -17,7 +17,7 @@ const en: BaseTranslation = {
   EDIT_AND_SAVE: "Edit <code>pages/index.tsx</code> and save to reload.",
   YOUR_NAME: "Your name:",
   SELECTED_LOCALE: "Selected locale:",
-  // TODAY: "Today is {date:Date|weekday}",
+  TODAY: "Today is {date:Date|weekday}",
 };
 
 export default en;

@@ -65,6 +65,11 @@ type RootTranslation = {
 	 * S​e​l​e​c​t​e​d​ ​l​o​c​a​l​e​:
 	 */
 	SELECTED_LOCALE: string
+	/**
+	 * T​o​d​a​y​ ​i​s​ ​{​d​a​t​e​|​w​e​e​k​d​a​y​}
+	 * @param {Date} date
+	 */
+	TODAY: RequiredParams<'date|weekday'>
 }
 
 export type TranslationFunctions = {
@@ -116,6 +121,12 @@ export type TranslationFunctions = {
 	 * Selected locale:
 	 */
 	SELECTED_LOCALE: () => LocalizedString
+	/**
+	 * Today is {date|weekday}
+	 */
+	TODAY: (arg: { date: Date }) => LocalizedString
 }
 
-export type Formatters = {}
+export type Formatters = {
+	weekday: (value: Date) => unknown
+}
