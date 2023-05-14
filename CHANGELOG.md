@@ -1,3 +1,15 @@
+# [1.148.0](https://github.com/mkayander/leetpal/compare/v1.147.0...v1.148.0) (2023-05-14)
+
+
+### Bug Fixes
+
+* Removed i18n console log ([9edbb67](https://github.com/mkayander/leetpal/commit/9edbb67256000a2baed821e53ff65f4a818c320c))
+
+
+### Features
+
+* Added custom i18n formatter ([8d3444e](https://github.com/mkayander/leetpal/commit/8d3444ea7e98af0635b36893257df960ee061090))
+
 # [1.147.0](https://github.com/mkayander/leetpal/compare/v1.146.1...v1.147.0) (2023-05-14)
 
 
