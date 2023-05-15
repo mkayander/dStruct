@@ -1,3 +1,12 @@
+## [1.150.1](https://github.com/mkayander/leetpal/compare/v1.150.0...v1.150.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* Don't use prettier for translation files ([9eda4da](https://github.com/mkayander/leetpal/commit/9eda4da9296961610c25d889ebb510b0a002fa8a))
+* Sort translation keys ([3050527](https://github.com/mkayander/leetpal/commit/30505276cf5c02a4c66bfbfcb126f7c1695da32d))
+* Update i18n types ([776a91c](https://github.com/mkayander/leetpal/commit/776a91cb970d8c54f1c459ca30d90b83706bb6cc))
+
 # [1.150.0](https://github.com/mkayander/leetpal/compare/v1.149.7...v1.150.0) (2023-05-15)
 
 
