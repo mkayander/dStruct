@@ -10,7 +10,7 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
-    locales: ["en", "ru", "de"],
+    locales: ["en", "ru", "de", "es", "sr", "uk"],
     defaultLocale: "en",
   },
   images: {

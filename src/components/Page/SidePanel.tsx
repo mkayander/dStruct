@@ -32,6 +32,9 @@ const localeLabels = {
   en: "English",
   ru: "Русский",
   de: "Deutsch",
+  es: "Español",
+  sr: "Srpski",
+  uk: "Українська",
 };
 
 const GITHUB_URL = "https://github.com/mkayander/leetpal";
