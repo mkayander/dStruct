@@ -5,7 +5,6 @@ import type { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import Head from "next/head";
 import { SnackbarProvider } from "notistack";
 import React, { useMemo } from "react";
 import { Provider as ReduxProvider } from "react-redux";
@@ -61,9 +60,6 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
           <StateThemeProvider>
             <SnackbarProvider maxSnack={4}>
               <TypesafeI18n locale={locale}>
-                <Head>
-                  <title>dStruct</title>
-                </Head>
                 <CssBaseline />
                 <Component {...props.pageProps} />
                 <Analytics />

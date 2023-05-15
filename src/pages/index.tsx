@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
@@ -53,6 +54,9 @@ const DashboardPage: NextPage<{
   return (
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     <MainLayout>
+      <Head>
+        <title>dStruct</title>
+      </Head>
       <Box
         sx={{
           background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
