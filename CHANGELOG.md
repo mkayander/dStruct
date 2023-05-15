@@ -1,3 +1,10 @@
+# [1.150.0](https://github.com/mkayander/leetpal/compare/v1.149.7...v1.150.0) (2023-05-15)
+
+
+### Features
+
+* Implement a side panel with language selection ([b432abc](https://github.com/mkayander/leetpal/commit/b432abcad5d4001fc39709ebe5bca422a649ebc4))
+
 ## [1.149.7](https://github.com/mkayander/leetpal/compare/v1.149.6...v1.149.7) (2023-05-15)
 
 
