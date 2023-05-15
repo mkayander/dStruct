@@ -1,3 +1,10 @@
+# [1.151.0](https://github.com/mkayander/leetpal/compare/v1.150.1...v1.151.0) (2023-05-15)
+
+
+### Features
+
+* Added more languages ([8e3abef](https://github.com/mkayander/leetpal/commit/8e3abefc59baddd041ece107c84c863183991d85))
+
 ## [1.150.1](https://github.com/mkayander/leetpal/compare/v1.150.0...v1.150.1) (2023-05-15)
 
 
