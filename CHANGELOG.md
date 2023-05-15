@@ -1,3 +1,10 @@
+## [1.149.4](https://github.com/mkayander/leetpal/compare/v1.149.3...v1.149.4) (2023-05-15)
+
+
+### Bug Fixes
+
+* Use getServerSideProps ([4c81c6e](https://github.com/mkayander/leetpal/commit/4c81c6efd0fc81ba480f4e708340d863d1244f5a))
+
 ## [1.149.3](https://github.com/mkayander/leetpal/compare/v1.149.2...v1.149.3) (2023-05-15)
 
 
