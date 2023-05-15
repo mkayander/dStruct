@@ -1,5 +1,4 @@
 import { Container, darken, Stack, useTheme } from "@mui/material";
-import type { GetStaticPaths } from "next/types";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
@@ -67,13 +66,6 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return {
-    paths: [{ params: { slug: [] } }],
-    fallback: true,
-  };
-};
-
-export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
+export { getI18nProps as getServerSideProps } from "#/i18n/getI18nProps";
 
 export default PlaygroundPage;
