@@ -70,7 +70,7 @@ const PlaygroundPage: NextPageWithLayout = () => {
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [{ params: { slug: [] } }],
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
