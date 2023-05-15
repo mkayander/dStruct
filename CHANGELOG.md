@@ -1,3 +1,10 @@
+## [1.149.7](https://github.com/mkayander/leetpal/compare/v1.149.6...v1.149.7) (2023-05-15)
+
+
+### Bug Fixes
+
+* Load i18n for playground page on client ([4bb38c9](https://github.com/mkayander/leetpal/commit/4bb38c948b5771816fa0e97967e22ef08a14c45f))
+
 ## [1.149.6](https://github.com/mkayander/leetpal/compare/v1.149.5...v1.149.6) (2023-05-15)
 
 
