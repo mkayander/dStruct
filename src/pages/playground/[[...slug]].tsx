@@ -1,7 +1,9 @@
 import { Container, darken, Stack, useTheme } from "@mui/material";
+import type { NextPage } from "next";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
+import { useI18nLoader } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { SplitPanelsLayout } from "#/layouts";
 import {
@@ -11,7 +13,6 @@ import {
   TreeViewPanel,
 } from "#/layouts/panels";
 import type { SplitPanelsLayoutProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
-import type { NextPageWithLayout } from "#/types/page";
 
 type WrapperProps = SplitPanelsLayoutProps;
 
@@ -45,8 +46,10 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 };
 
-const PlaygroundPage: NextPageWithLayout = () => {
+const PlaygroundPage: NextPage = () => {
   const theme = useTheme();
+  useI18nLoader();
+
   return (
     <PageScrollContainer
       isPage={true}
