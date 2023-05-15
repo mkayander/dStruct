@@ -25,7 +25,7 @@ export const usePlaygroundSlugs = () => {
       const lastPath = localStorage.getItem("lastPlaygroundPath");
       const lastProjectSlug = lastPath?.split("/")[2];
 
-      if (lastProjectSlug && isInitial) {
+      if (lastProjectSlug && isInitial && !lastProjectSlug.startsWith("[[")) {
         return router.replace(lastPath);
       }
 
