@@ -1,3 +1,10 @@
+## [1.149.6](https://github.com/mkayander/leetpal/compare/v1.149.5...v1.149.6) (2023-05-15)
+
+
+### Bug Fixes
+
+* Fixed initial project slug setup ([f72220f](https://github.com/mkayander/leetpal/commit/f72220fd1c749296e93b795942f308df6d78145e))
+
 ## [1.149.5](https://github.com/mkayander/leetpal/compare/v1.149.4...v1.149.5) (2023-05-15)
 
 
