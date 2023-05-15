@@ -19,12 +19,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
+import { SidePanel } from "#/components/Page/SidePanel";
 import { ThemeSwitch } from "#/components/Page/ThemeSwitch";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -35,7 +36,6 @@ import {
 import { getImageUrl, trpc } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
-const GITHUB_URL = "https://github.com/mkayander/leetpal";
 
 type NavItem = {
   name: string;
@@ -47,29 +47,11 @@ const pages = [
     name: "Dashboard",
     href: "/",
   },
-  // {
-  //   name: 'Pricing',
-  //   href: '/',
-  // },
   {
     name: "Playground",
     href: "/playground",
   },
 ] as const;
-
-type SettingItem = {
-  name: string;
-  authedOnly?: boolean;
-  onClick?: () => void;
-};
-
-const settings: SettingItem[] = [
-  { name: "Profile", authedOnly: true },
-  { name: "Settings", authedOnly: true },
-  { name: "Feedback" },
-  { name: "GitHub", onClick: () => window.open(GITHUB_URL) },
-  { name: "Logout", authedOnly: true, onClick: signOut },
-];
 
 type MainAppBarProps = {
   appBarVariant?: AppBarProps["variant"];
@@ -85,8 +67,8 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const theme = useTheme();
   const { LL } = useI18nContext();
 
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
@@ -101,16 +83,13 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleOpenUserMenu = () => {
+    setIsSidePanelOpen(true);
   };
 
   const handleNavItemClick = (item: NavItem) => {
@@ -167,7 +146,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
         <Toolbar disableGutters variant={toolbarVariant}>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <Image
-              alt="dStruct Logo"
+              alt={LL.DSTRUCT_LOGO()}
               src="/android-chrome-192x192.png"
               width="32"
               height="32"
@@ -194,7 +173,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label={LL.CURRENT_USER_ACCOUNT()}
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -232,7 +211,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
             <Image
-              alt="dStruct Logo"
+              alt={LL.DSTRUCT_LOGO()}
               src="/android-chrome-192x192.png"
               width="32"
               height="32"
@@ -320,32 +299,10 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               </>
             )}
 
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings
-                .filter((value) =>
-                  value.authedOnly ? session.status === "authenticated" : true
-                )
-                .map(({ name, onClick }) => (
-                  <MenuItem key={name} onClick={onClick}>
-                    <Typography textAlign="center">{name}</Typography>
-                  </MenuItem>
-                ))}
-            </Menu>
+            <SidePanel
+              isOpen={isSidePanelOpen}
+              setIsOpen={setIsSidePanelOpen}
+            />
           </Stack>
         </Toolbar>
       </Container>

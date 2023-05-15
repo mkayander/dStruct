@@ -12,6 +12,15 @@ const en: BaseTranslation = {
   SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE:
     "Sign in to keep track of your progress and more!",
   OPEN_OPTIONS: "Open options",
+  PROFILE: "Profile",
+  FEEDBACK: "Feedback",
+  LOGOUT: "Logout",
+  DSTRUCT_LOGO: "DStruct Logo",
+  LANGUAGE: "Language",
+  MAIN_MENU: "Main Menu",
+  SETTINGS: "Settings",
+  DARK_MODE: "Dark Mode",
+  CURRENT_USER_ACCOUNT: "Current user account",
 
   CHOOSE_LOCALE: "Choose locale...",
   HI: "Hello {name:string}!",

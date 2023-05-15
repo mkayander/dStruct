@@ -49,6 +49,42 @@ type RootTranslation = {
 	 */
 	OPEN_OPTIONS: string
 	/**
+	 * P​r​o​f​i​l​e
+	 */
+	PROFILE: string
+	/**
+	 * F​e​e​d​b​a​c​k
+	 */
+	FEEDBACK: string
+	/**
+	 * L​o​g​o​u​t
+	 */
+	LOGOUT: string
+	/**
+	 * D​S​t​r​u​c​t​ ​L​o​g​o
+	 */
+	DSTRUCT_LOGO: string
+	/**
+	 * L​a​n​g​u​a​g​e
+	 */
+	LANGUAGE: string
+	/**
+	 * M​a​i​n​ ​M​e​n​u
+	 */
+	MAIN_MENU: string
+	/**
+	 * S​e​t​t​i​n​g​s
+	 */
+	SETTINGS: string
+	/**
+	 * D​a​r​k​ ​M​o​d​e
+	 */
+	DARK_MODE: string
+	/**
+	 * C​u​r​r​e​n​t​ ​u​s​e​r​ ​a​c​c​o​u​n​t
+	 */
+	CURRENT_USER_ACCOUNT: string
+	/**
 	 * C​h​o​o​s​e​ ​l​o​c​a​l​e​.​.​.
 	 */
 	CHOOSE_LOCALE: string
@@ -109,6 +145,42 @@ export type TranslationFunctions = {
 	 * Open options
 	 */
 	OPEN_OPTIONS: () => LocalizedString
+	/**
+	 * Profile
+	 */
+	PROFILE: () => LocalizedString
+	/**
+	 * Feedback
+	 */
+	FEEDBACK: () => LocalizedString
+	/**
+	 * Logout
+	 */
+	LOGOUT: () => LocalizedString
+	/**
+	 * DStruct Logo
+	 */
+	DSTRUCT_LOGO: () => LocalizedString
+	/**
+	 * Language
+	 */
+	LANGUAGE: () => LocalizedString
+	/**
+	 * Main Menu
+	 */
+	MAIN_MENU: () => LocalizedString
+	/**
+	 * Settings
+	 */
+	SETTINGS: () => LocalizedString
+	/**
+	 * Dark Mode
+	 */
+	DARK_MODE: () => LocalizedString
+	/**
+	 * Current user account
+	 */
+	CURRENT_USER_ACCOUNT: () => LocalizedString
 	/**
 	 * Choose locale...
 	 */

@@ -12,6 +12,15 @@ const ru: Translation = {
   SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE:
     "Войдите, чтобы отслеживать свой прогресс и многое другое!",
   OPEN_OPTIONS: "Открыть опции",
+  PROFILE: "Профиль",
+  FEEDBACK: "Обратная связь",
+  LOGOUT: "Выйти",
+  DSTRUCT_LOGO: "Логотип DStruct",
+  LANGUAGE: "Язык",
+  MAIN_MENU: "Главное меню",
+  SETTINGS: "Настройки",
+  DARK_MODE: "Тёмный режим",
+  CURRENT_USER_ACCOUNT: "Текущая учетная запись пользователя",
 
   CHOOSE_LOCALE: "Выберите язык...",
   HI: "Привет {name}!",
