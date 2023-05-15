@@ -167,8 +167,9 @@ export const ProjectPanel: React.FC = () => {
     <PanelWrapper>
       <Head>
         <title>
-          {selectedProject.data ? `${selectedProject.data?.title} - ` : ""}
-          dStruct Playground
+          {selectedProject.data
+            ? `${selectedProject.data?.title} - dStruct Playground`
+            : "dStruct Playground"}
         </title>
       </Head>
       <ProjectModal
