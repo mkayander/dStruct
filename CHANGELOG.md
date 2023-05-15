@@ -1,3 +1,12 @@
+## [1.149.2](https://github.com/mkayander/leetpal/compare/v1.149.1...v1.149.2) (2023-05-15)
+
+
+### Bug Fixes
+
+* Fix head title warning ([f5e6253](https://github.com/mkayander/leetpal/commit/f5e6253d9701127deb4030c44e07d8b74cd45170))
+* Move head title ([c9d719d](https://github.com/mkayander/leetpal/commit/c9d719d7ac81681f89596a0683d0aba996b4831f))
+* Specify correct static paths parameter ([c5c25af](https://github.com/mkayander/leetpal/commit/c5c25afff4e13384a4b7a1af125e20d6e549703b))
+
 ## [1.149.1](https://github.com/mkayander/leetpal/compare/v1.149.0...v1.149.1) (2023-05-14)
 
 
