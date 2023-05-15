@@ -1,3 +1,10 @@
+## [1.149.3](https://github.com/mkayander/leetpal/compare/v1.149.2...v1.149.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* Set fallback to true ([010e6a7](https://github.com/mkayander/leetpal/commit/010e6a7297d3208547f5938955db2d600c090fd6))
+
 ## [1.149.2](https://github.com/mkayander/leetpal/compare/v1.149.1...v1.149.2) (2023-05-15)
 
 
