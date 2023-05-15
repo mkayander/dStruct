@@ -1,4 +1,5 @@
 import { Container, darken, Stack, useTheme } from "@mui/material";
+import type { GetStaticPaths } from "next/types";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
@@ -66,12 +67,12 @@ const PlaygroundPage: NextPageWithLayout = () => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = () => {
   return {
-    paths: [],
+    paths: [{ params: { slug: [] } }],
     fallback: "blocking",
   };
-}
+};
 
 export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
 
