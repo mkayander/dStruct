@@ -1,3 +1,10 @@
+# [1.152.0](https://github.com/mkayander/leetpal/compare/v1.151.1...v1.152.0) (2023-05-16)
+
+
+### Features
+
+* Add "ListNode" context alias ([85c327f](https://github.com/mkayander/leetpal/commit/85c327f54d5f92961825848cb3f03bb26f0b07a2))
+
 ## [1.151.1](https://github.com/mkayander/leetpal/compare/v1.151.0...v1.151.1) (2023-05-16)
 
 
