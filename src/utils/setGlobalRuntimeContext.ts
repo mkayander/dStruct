@@ -105,6 +105,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     Queue,
     BinaryTree,
     LinkedList,
+    ListNode: LinkedList,
     log: (...args: unknown[]) => {
       dispatch(
         callstackSlice.actions.addOne({
