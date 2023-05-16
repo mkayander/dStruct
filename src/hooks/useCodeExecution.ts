@@ -22,6 +22,8 @@ const globalDefinitionsPrefix = `
   const String = window.StringProxy;
 `.trim();
 
+export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;
+
 export const useCodeExecution = (codeInput: string) => {
   const dispatch = useDispatch();
 

@@ -12,6 +12,7 @@ import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
 import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
 import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
 import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
+import { codePrefixLinesCount } from "#/hooks/useCodeExecution";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { type PanelContentProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
@@ -114,8 +115,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       const [, line, column] = posLine.match(/:(\d+):(\d+)\)$/) ?? [];
 
       if (line && column) {
-        startLineNumber = Number(line) - 2;
-        endLineNumber = Number(line) - 2;
+        startLineNumber = Number(line) - 2 - codePrefixLinesCount;
+        endLineNumber = startLineNumber;
         startColumn = Number(column);
         endColumn = Number(column) + 10;
       }
