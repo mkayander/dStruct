@@ -19,9 +19,29 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * A​r​g​u​m​e​n​t​s
+	 */
+	ARGUMENTS: string
+	/**
+	 * C​a​l​l​s​t​a​c​k
+	 */
+	CALLSTACK: string
+	/**
 	 * C​h​o​o​s​e​ ​l​o​c​a​l​e​.​.​.
 	 */
 	CHOOSE_LOCALE: string
+	/**
+	 * C​o​d​e​ ​R​u​n​n​e​r
+	 */
+	CODE_RUNNER: string
+	/**
+	 * C​o​n​s​o​l​e​ ​o​u​t​p​u​t
+	 */
+	CONSOLE_OUTPUT: string
+	/**
+	 * C​u​r​r​e​n​t​ ​p​r​o​j​e​c​t
+	 */
+	CURRENT_PROJECT: string
 	/**
 	 * C​u​r​r​e​n​t​ ​u​s​e​r​ ​a​c​c​o​u​n​t
 	 */
@@ -30,6 +50,10 @@ type RootTranslation = {
 	 * D​a​r​k​ ​M​o​d​e
 	 */
 	DARK_MODE: string
+	/**
+	 * D​a​s​h​b​o​a​r​d
+	 */
+	DASHBOARD: string
 	/**
 	 * D​a​t​a​ ​S​t​r​u​c​t​u​r​e​s​ ​S​i​m​p​l​i​f​i​e​d
 	 */
@@ -46,6 +70,14 @@ type RootTranslation = {
 	 * F​e​e​d​b​a​c​k
 	 */
 	FEEDBACK: string
+	/**
+	 * F​o​r​m​a​t​t​i​n​g​ ​i​c​o​n
+	 */
+	FORMATTING_ICON: string
+	/**
+	 * F​o​r​m​a​t​ ​c​o​d​e​ ​w​i​t​h
+	 */
+	FORMAT_CODE_WITH: string
 	/**
 	 * H​e​l​l​o​ ​{​n​a​m​e​}​!
 	 * @param {string} name
@@ -64,13 +96,65 @@ type RootTranslation = {
 	 */
 	MAIN_MENU: string
 	/**
+	 * m​s
+	 */
+	MS: string
+	/**
+	 * N​o​ ​d​a​t​a
+	 */
+	NO_DATA: string
+	/**
 	 * O​p​e​n​ ​o​p​t​i​o​n​s
 	 */
 	OPEN_OPTIONS: string
 	/**
+	 * O​u​t​p​u​t
+	 */
+	OUTPUT: string
+	/**
+	 * P​a​n​e​l​ ​t​a​b​s
+	 */
+	PANEL_TABS: string
+	/**
+	 * P​l​a​y​b​a​c​k​ ​i​n​t​e​r​v​a​l
+	 */
+	PLAYBACK_INTERVAL: string
+	/**
+	 * P​l​a​y​g​r​o​u​n​d
+	 */
+	PLAYGROUND: string
+	/**
 	 * P​r​o​f​i​l​e
 	 */
 	PROFILE: string
+	/**
+	 * P​r​o​j​e​c​t
+	 */
+	PROJECT: string
+	/**
+	 * R​e​p​l​a​y
+	 */
+	REPLAY: string
+	/**
+	 * R​e​s​e​t
+	 */
+	RESET: string
+	/**
+	 * R​e​t​u​r​n​e​d
+	 */
+	RETURNED: string
+	/**
+	 * R​u​n
+	 */
+	RUN: string
+	/**
+	 * R​u​n​t​i​m​e
+	 */
+	RUNTIME: string
+	/**
+	 * R​u​n​ ​c​o​d​e
+	 */
+	RUN_CODE: string
 	/**
 	 * S​e​l​e​c​t​e​d​ ​l​o​c​a​l​e​:
 	 */
@@ -92,14 +176,26 @@ type RootTranslation = {
 	 */
 	SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT: string
 	/**
+	 * S​u​c​c​e​s​s
+	 */
+	SUCCESS: string
+	/**
 	 * T​o​d​a​y​ ​i​s​ ​{​d​a​t​e​|​w​e​e​k​d​a​y​}
 	 * @param {Date} date
 	 */
 	TODAY: RequiredParams<'date|weekday'>
 	/**
+	 * T​r​e​e​ ​V​i​e​w​e​r
+	 */
+	TREE_VIEWER: string
+	/**
 	 * T​r​y​ ​i​t​ ​o​u​t​ ​n​o​w
 	 */
 	TRY_IT_OUT_NOW: string
+	/**
+	 * T​y​p​e
+	 */
+	TYPE: string
 	/**
 	 * {​n​a​m​e​}​'​s​ ​D​a​s​h​b​o​a​r​d
 	 * @param {string} name
@@ -113,13 +209,37 @@ type RootTranslation = {
 	 * Y​o​u​r​ ​n​a​m​e​:
 	 */
 	YOUR_NAME: string
+	/**
+	 * Y​o​u​ ​n​e​e​d​ ​t​o​ ​r​u​n​ ​t​h​e​ ​c​o​d​e​ ​f​i​r​s​t
+	 */
+	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
 }
 
 export type TranslationFunctions = {
 	/**
+	 * Arguments
+	 */
+	ARGUMENTS: () => LocalizedString
+	/**
+	 * Callstack
+	 */
+	CALLSTACK: () => LocalizedString
+	/**
 	 * Choose locale...
 	 */
 	CHOOSE_LOCALE: () => LocalizedString
+	/**
+	 * Code Runner
+	 */
+	CODE_RUNNER: () => LocalizedString
+	/**
+	 * Console output
+	 */
+	CONSOLE_OUTPUT: () => LocalizedString
+	/**
+	 * Current project
+	 */
+	CURRENT_PROJECT: () => LocalizedString
 	/**
 	 * Current user account
 	 */
@@ -128,6 +248,10 @@ export type TranslationFunctions = {
 	 * Dark Mode
 	 */
 	DARK_MODE: () => LocalizedString
+	/**
+	 * Dashboard
+	 */
+	DASHBOARD: () => LocalizedString
 	/**
 	 * Data Structures Simplified
 	 */
@@ -145,6 +269,14 @@ export type TranslationFunctions = {
 	 */
 	FEEDBACK: () => LocalizedString
 	/**
+	 * Formatting icon
+	 */
+	FORMATTING_ICON: () => LocalizedString
+	/**
+	 * Format code with
+	 */
+	FORMAT_CODE_WITH: () => LocalizedString
+	/**
 	 * Hello {name}!
 	 */
 	HI: (arg: { name: string }) => LocalizedString
@@ -161,13 +293,65 @@ export type TranslationFunctions = {
 	 */
 	MAIN_MENU: () => LocalizedString
 	/**
+	 * ms
+	 */
+	MS: () => LocalizedString
+	/**
+	 * No data
+	 */
+	NO_DATA: () => LocalizedString
+	/**
 	 * Open options
 	 */
 	OPEN_OPTIONS: () => LocalizedString
 	/**
+	 * Output
+	 */
+	OUTPUT: () => LocalizedString
+	/**
+	 * Panel tabs
+	 */
+	PANEL_TABS: () => LocalizedString
+	/**
+	 * Playback interval
+	 */
+	PLAYBACK_INTERVAL: () => LocalizedString
+	/**
+	 * Playground
+	 */
+	PLAYGROUND: () => LocalizedString
+	/**
 	 * Profile
 	 */
 	PROFILE: () => LocalizedString
+	/**
+	 * Project
+	 */
+	PROJECT: () => LocalizedString
+	/**
+	 * Replay
+	 */
+	REPLAY: () => LocalizedString
+	/**
+	 * Reset
+	 */
+	RESET: () => LocalizedString
+	/**
+	 * Returned
+	 */
+	RETURNED: () => LocalizedString
+	/**
+	 * Run
+	 */
+	RUN: () => LocalizedString
+	/**
+	 * Runtime
+	 */
+	RUNTIME: () => LocalizedString
+	/**
+	 * Run code
+	 */
+	RUN_CODE: () => LocalizedString
 	/**
 	 * Selected locale:
 	 */
@@ -189,13 +373,25 @@ export type TranslationFunctions = {
 	 */
 	SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT: () => LocalizedString
 	/**
+	 * Success
+	 */
+	SUCCESS: () => LocalizedString
+	/**
 	 * Today is {date|weekday}
 	 */
 	TODAY: (arg: { date: Date }) => LocalizedString
 	/**
+	 * Tree Viewer
+	 */
+	TREE_VIEWER: () => LocalizedString
+	/**
 	 * Try it out now
 	 */
 	TRY_IT_OUT_NOW: () => LocalizedString
+	/**
+	 * Type
+	 */
+	TYPE: () => LocalizedString
 	/**
 	 * {name}'s Dashboard
 	 */
@@ -208,6 +404,10 @@ export type TranslationFunctions = {
 	 * Your name:
 	 */
 	YOUR_NAME: () => LocalizedString
+	/**
+	 * You need to run the code first
+	 */
+	YOU_NEED_TO_RUN_THE_CODE_FIRST: () => LocalizedString
 }
 
 export type Formatters = {

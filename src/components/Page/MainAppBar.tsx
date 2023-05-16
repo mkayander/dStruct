@@ -42,17 +42,6 @@ type NavItem = {
   href: string;
 };
 
-const pages = [
-  {
-    name: "Dashboard",
-    href: "/",
-  },
-  {
-    name: "Playground",
-    href: "/playground",
-  },
-] as const;
-
 type MainAppBarProps = {
   appBarVariant?: AppBarProps["variant"];
   toolbarVariant?: ToolbarProps["variant"];
@@ -73,6 +62,17 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
   const session = useSession();
+
+  const pages = [
+    {
+      name: LL.DASHBOARD(),
+      href: "/",
+    },
+    {
+      name: LL.PLAYGROUND(),
+      href: "/playground",
+    },
+  ] as const;
 
   // useProfileImageUploader(session);
 

@@ -17,6 +17,7 @@ import React, { useState } from "react";
 
 import { TreeViewer } from "#/components";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -26,6 +27,8 @@ import { resetStructuresState } from "#/utils";
 
 export const TreeViewPanel: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const { LL } = useI18nContext();
 
   const [tabValue, setTabValue] = useState("1");
   const [sliderValue, setSliderValue] = useState(100);
@@ -71,8 +74,8 @@ export const TreeViewPanel: React.FC = () => {
     >
       <TabContext value={tabValue}>
         <TabListWrapper>
-          <TabList onChange={handleTabChange} aria-label="panel tabs">
-            <Tab label="Tree Viewer" value="1" />
+          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+            <Tab label={LL.TREE_VIEWER()} value="1" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconButton>
@@ -84,7 +87,7 @@ export const TreeViewPanel: React.FC = () => {
               onClick={handleReset}
               sx={{ height: "100%" }}
             >
-              Reset
+              {LL.RESET()}
             </Button>
             <Tooltip
               title={
@@ -103,7 +106,7 @@ export const TreeViewPanel: React.FC = () => {
                   disabled={!isCallstackReady}
                   sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
                 >
-                  Replay
+                  {LL.REPLAY()}
                 </Button>
               </span>
             </Tooltip>
@@ -117,7 +120,7 @@ export const TreeViewPanel: React.FC = () => {
         >
           <Box sx={{ maxWidth: 600, p: 2 }}>
             <Typography id="input-slider" variant="caption" gutterBottom>
-              Playback Interval
+              {LL.PLAYBACK_INTERVAL()}
             </Typography>
             <Grid container spacing={2} alignItems="center">
               <Grid item>
@@ -139,7 +142,7 @@ export const TreeViewPanel: React.FC = () => {
                   onChange={handleInputChange}
                   onBlur={handleBlur}
                   renderSuffix={() => (
-                    <Typography variant="caption">ms</Typography>
+                    <Typography variant="caption">{LL.MS()}</Typography>
                   )}
                   inputProps={{
                     step: 5,

@@ -3,6 +3,7 @@ import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
 import { CallstackTable } from "#/components/CallstackTable";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
@@ -11,13 +12,15 @@ import { selectConsoleLogs } from "#/store/reducers/callstackReducer";
 const ConsoleOutput: React.FC = () => {
   const theme = useTheme();
 
+  const { LL } = useI18nContext();
+
   const logs = useAppSelector(selectConsoleLogs);
 
   if (!logs.length) return null;
 
   return (
     <Typography variant="caption">
-      Console Output:
+      {LL.CONSOLE_OUTPUT()}:
       <Box
         component="div"
         sx={{
@@ -41,9 +44,11 @@ const ResultData: React.FC<{
 }> = ({ result }) => {
   const theme = useTheme();
 
+  const { LL } = useI18nContext();
+
   return (
     <Typography variant="caption">
-      Returned:{" "}
+      {LL.RETURNED()}:
       <Box
         component="div"
         sx={{
@@ -61,6 +66,8 @@ const ResultData: React.FC<{
 export const OutputPanel: React.FC = () => {
   const [value, setValue] = useState("1");
 
+  const { LL } = useI18nContext();
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
@@ -73,9 +80,9 @@ export const OutputPanel: React.FC = () => {
     <PanelWrapper>
       <TabContext value={value}>
         <TabListWrapper>
-          <TabList onChange={handleChange} aria-label="panel tabs">
-            <Tab label="Output" value="1" />
-            <Tab label="Callstack" value="2" />
+          <TabList onChange={handleChange} aria-label={LL.PANEL_TABS()}>
+            <Tab label={LL.OUTPUT()} value="1" />
+            <Tab label={LL.CALLSTACK()} value="2" />
           </TabList>
         </TabListWrapper>
 
@@ -83,9 +90,9 @@ export const OutputPanel: React.FC = () => {
           <Stack spacing={2}>
             {!isReady ? (
               <Box display="box">
-                <Typography variant="h5">No data</Typography>
+                <Typography variant="h5">{LL.NO_DATA()}</Typography>
                 <Typography variant="caption">
-                  You need to run the code first
+                  {LL.YOU_NEED_TO_RUN_THE_CODE_FIRST()}
                 </Typography>
               </Box>
             ) : error ? (
@@ -101,11 +108,11 @@ export const OutputPanel: React.FC = () => {
               <Stack spacing={1}>
                 <Stack direction="row" spacing={1}>
                   <Typography variant="h5" color="success.main">
-                    Success
+                    {LL.SUCCESS()}
                   </Typography>
                   {runtime && (
                     <Typography variant="caption" color="text.disabled" mt={1}>
-                      Runtime: {runtime.toFixed(2)} ms
+                      {LL.RUNTIME()}: {runtime.toFixed(2)} {LL.MS()}
                     </Typography>
                   )}
                 </Stack>

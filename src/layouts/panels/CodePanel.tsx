@@ -13,6 +13,7 @@ import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
 import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
 import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
 import { codePrefixLinesCount } from "#/hooks/useCodeExecution";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { type PanelContentProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
@@ -23,6 +24,8 @@ import { trpc } from "#/utils";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
+
+  const { LL } = useI18nContext();
 
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState<string>("");
@@ -177,16 +180,16 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     <PanelWrapper>
       <TabContext value={tabValue}>
         <TabListWrapper>
-          <TabList onChange={handleTabChange} aria-label="panel tabs">
-            <Tab label="Code Runner" value="1" />
+          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+            <Tab label={LL.CODE_RUNNER()} value="1" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
             <Tooltip
               title={
                 <Box display="flex" alignItems="center" gap="3px">
-                  Format code with <b>Prettier</b>{" "}
+                  {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
                   <Image
-                    alt="'Prettier' formatting icon"
+                    alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
                     {...prettierIcon}
                     width={22}
                     height={22}
@@ -202,13 +205,13 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
             <LoadingButton
               variant="text"
               color="success"
-              title="Run code"
+              title={LL.RUN_CODE()}
               endIcon={<PlayArrow />}
               loadingPosition="end"
               onClick={handleRunCode}
               sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
             >
-              Run
+              {LL.RUN()}
             </LoadingButton>
           </Stack>
         </TabListWrapper>

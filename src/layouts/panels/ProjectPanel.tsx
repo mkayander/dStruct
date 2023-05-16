@@ -22,6 +22,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
 import { useArgumentsParsing, usePlaygroundSlugs } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
@@ -35,6 +36,8 @@ import { categoryLabels, getImageUrl, trpc } from "#/utils";
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
+
+  const { LL } = useI18nContext();
 
   const router = useRouter();
   const { projectSlug = "", caseSlug = "", setProject } = usePlaygroundSlugs();
@@ -198,8 +201,8 @@ export const ProjectPanel: React.FC = () => {
 
       <TabContext value={tabValue}>
         <TabListWrapper>
-          <TabList onChange={handleTabChange} aria-label="panel tabs">
-            <Tab label="Project" value="1" />
+          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+            <Tab label={LL.PROJECT()} value="1" />
           </TabList>
         </TabListWrapper>
 
@@ -209,11 +212,13 @@ export const ProjectPanel: React.FC = () => {
         >
           <Stack direction="row" alignItems="center" spacing={2}>
             <FormControl fullWidth>
-              <InputLabel id="project-select-label">Current Project</InputLabel>
+              <InputLabel id="project-select-label">
+                {LL.CURRENT_PROJECT()}
+              </InputLabel>
               <Select
                 id="project-select"
                 labelId="project-select-label"
-                label="Current Project"
+                label={LL.CURRENT_PROJECT()}
                 defaultValue=""
                 value={allBrief.isLoading ? "" : projectSlug}
                 onChange={handleSelectProject}
