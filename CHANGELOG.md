@@ -1,3 +1,11 @@
+## [1.151.1](https://github.com/mkayander/leetpal/compare/v1.151.0...v1.151.1) (2023-05-16)
+
+
+### Bug Fixes
+
+* Added translation tokens ([bdfe844](https://github.com/mkayander/leetpal/commit/bdfe8449e2fb3c89499ebb01e31c734aa85d7cb8))
+* Correct error line number depending on code prefix size ([a05b2f2](https://github.com/mkayander/leetpal/commit/a05b2f2f38183b63bff8dd1cd9bb97db20eb8f69))
+
 # [1.151.0](https://github.com/mkayander/leetpal/compare/v1.150.1...v1.151.0) (2023-05-15)
 
 
