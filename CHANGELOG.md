@@ -1,3 +1,10 @@
+# [1.153.0](https://github.com/mkayander/leetpal/compare/v1.152.0...v1.153.0) (2023-05-18)
+
+
+### Features
+
+* Implement theme switch logic at the side panel ([9aff1f5](https://github.com/mkayander/leetpal/commit/9aff1f5f28ef8f07342e38e2c3e3dc8de69ea13d))
+
 # [1.152.0](https://github.com/mkayander/leetpal/compare/v1.151.1...v1.152.0) (2023-05-16)
 
 
