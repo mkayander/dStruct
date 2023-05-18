@@ -16,10 +16,11 @@ import {
   type SelectChangeEvent,
   SwipeableDrawer,
   Switch,
+  type SwitchProps,
   Typography,
   useTheme,
 } from "@mui/material";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -27,6 +28,9 @@ import { useI18nContext } from "#/i18n/i18n-react";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
+import { useAppDispatch } from "#/store/hooks";
+import { appBarSlice } from "#/store/reducers/appBarReducer";
+import { trpc } from "#/utils";
 
 const localeLabels = {
   en: "English",
@@ -53,6 +57,27 @@ const NavItem: React.FC<NavItemProps> = ({ title, onClick, href }) => {
         <ListItemText primary={title} />
       </ListItemButton>
     </ListItem>
+  );
+};
+
+const ThemeSwitch: React.FC<SwitchProps> = (props) => {
+  const dispatch = useAppDispatch();
+  const session = useSession();
+  const theme = useTheme();
+
+  const lightModeMutation = trpc.user.setLightMode.useMutation();
+
+  const handleLightModeSwitch: SwitchProps["onChange"] = (event, checked) => {
+    const newValue = !checked;
+    dispatch(appBarSlice.actions.setIsLightMode(newValue));
+    session.status === "authenticated" && lightModeMutation.mutate(newValue);
+    localStorage.setItem("isLightMode", newValue ? "true" : "");
+  };
+
+  const isDark = theme.palette.mode === "dark";
+
+  return (
+    <Switch {...props} onChange={handleLightModeSwitch} checked={isDark} />
   );
 };
 
@@ -120,7 +145,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               id="side-menu-dark-mode-switch"
               primary={LL.DARK_MODE()}
             />
-            <Switch
+            <ThemeSwitch
               edge="end"
               inputProps={{
                 "aria-labelledby": "side-menu-dark-mode-switch",
