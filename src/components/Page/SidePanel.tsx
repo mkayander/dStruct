@@ -28,18 +28,10 @@ import { useI18nContext } from "#/i18n/i18n-react";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
+import { localeLabels } from "#/i18n/labels";
 import { useAppDispatch } from "#/store/hooks";
 import { appBarSlice } from "#/store/reducers/appBarReducer";
 import { trpc } from "#/utils";
-
-const localeLabels = {
-  en: "English",
-  ru: "Русский",
-  de: "Deutsch",
-  es: "Español",
-  sr: "Srpski",
-  uk: "Українська",
-};
 
 const GITHUB_URL = "https://github.com/mkayander/leetpal";
 
