@@ -77,6 +77,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectSlug: "",
       projectCategory: "" as ProjectCategory,
       projectDescription: "",
+      projectLcLink: "",
       isPublic: true,
     },
     validationSchema: validationSchema,
@@ -90,6 +91,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             slug: values.projectSlug,
             category: values.projectCategory,
             description: values.projectDescription,
+            lcLink: values.projectLcLink,
             isPublic: values.isPublic,
           });
           successMessage = `Project "${values.projectName}" was successfully updated 📝`;
@@ -100,6 +102,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             slug: values.projectSlug,
             category: values.projectCategory,
             description: values.projectDescription,
+            lcLink: values.projectLcLink,
             isPublic: values.isPublic,
           });
           successMessage = "New project was created successfully 🎉";
@@ -141,6 +144,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectSlug: currentProject.slug,
         projectCategory: currentProject.category,
         projectDescription: currentProject.description ?? "",
+        projectLcLink: currentProject.lcLink ?? "",
         isPublic: currentProject.isPublic,
       });
     } else if (prevEditMode && !isEditMode) {
@@ -284,6 +288,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 (formik.touched.projectDescription &&
                   formik.errors.projectDescription) ||
                 "Optional project description."
+              }
+            />
+            <TextField
+              id="projectLcLink"
+              name="projectLcLink"
+              label="Problem Link"
+              variant="outlined"
+              disabled={formik.isSubmitting}
+              value={formik.values.projectLcLink}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.projectLcLink &&
+                Boolean(formik.errors.projectLcLink)
+              }
+              helperText={
+                (formik.touched.projectLcLink && formik.errors.projectLcLink) ||
+                "Where you found this problem. For example, LeetCode."
               }
             />
             <FormControlLabel

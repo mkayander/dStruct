@@ -188,6 +188,7 @@ export const projectRouter = router({
         slug: z.ostring(),
         category: z.nativeEnum(ProjectCategory),
         description: z.ostring(),
+        lcLink: z.ostring(),
         isPublic: z.boolean(),
         isExample: z.oboolean()
       })
@@ -235,6 +236,7 @@ export const projectRouter = router({
         title: z.ostring(),
         category: z.nativeEnum(ProjectCategory).optional(),
         description: z.ostring(),
+        lcLink: z.ostring(),
         isPublic: z.oboolean(),
         isExample: z.oboolean()
       })
