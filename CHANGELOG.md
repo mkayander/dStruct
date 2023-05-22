@@ -1,3 +1,16 @@
+# [1.155.0](https://github.com/mkayander/leetpal/compare/v1.154.0...v1.155.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* Improved project modal form validations ([4a6c7b8](https://github.com/mkayander/leetpal/commit/4a6c7b8b357d3e4ec9ed82aebf9e9f1836d256e7))
+
+
+### Features
+
+* Added problem link field at the project modal ([52169ad](https://github.com/mkayander/leetpal/commit/52169add9cf4d279801b3df8bec2f943fff06f03))
+* Implement name auto-slugification for case and solution modals ([701c60b](https://github.com/mkayander/leetpal/commit/701c60b6cc5381408ad03764ba96eaa0556e9c32))
+
 # [1.154.0](https://github.com/mkayander/leetpal/compare/v1.153.0...v1.154.0) (2023-05-22)
 
 
