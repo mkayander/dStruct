@@ -4,6 +4,7 @@ import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
+import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
@@ -143,6 +144,16 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     });
   };
 
+  const handleGenerateSlug = (value?: string) => {
+    formik.setFieldValue(
+      "caseSlug",
+      slugify(value ?? formik.values.caseName, {
+        lower: true,
+        strict: true,
+      })
+    );
+  };
+
   return (
     <EditFormModal
       formik={formik}
@@ -155,6 +166,26 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       {...props}
     >
       <TextField
+        id="caseName"
+        name="caseName"
+        label="Name"
+        variant="outlined"
+        required
+        disabled={formik.isSubmitting}
+        value={formik.values.caseName}
+        onChange={(ev) => {
+          formik.handleChange(ev);
+          if (!formik.touched.caseSlug) {
+            handleGenerateSlug(ev.target.value);
+          }
+        }}
+        error={formik.touched.caseName && Boolean(formik.errors.caseName)}
+        helperText={
+          (formik.touched.caseName && formik.errors.caseName) ||
+          "The name of your test case."
+        }
+      />
+      <TextField
         id="caseSlug"
         name="caseSlug"
         label="Slug"
@@ -166,21 +197,6 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
         helperText={
           (formik.touched.caseSlug && formik.errors.caseSlug) ||
           "You can edit a slug that's used in the URL to this test case."
-        }
-      />
-      <TextField
-        id="caseName"
-        name="caseName"
-        label="Name"
-        variant="outlined"
-        required
-        disabled={formik.isSubmitting}
-        value={formik.values.caseName}
-        onChange={formik.handleChange}
-        error={formik.touched.caseName && Boolean(formik.errors.caseName)}
-        helperText={
-          (formik.touched.caseName && formik.errors.caseName) ||
-          "The name of your test case."
         }
       />
       <TextField

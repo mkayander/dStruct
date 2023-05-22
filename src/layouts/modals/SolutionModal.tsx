@@ -4,6 +4,7 @@ import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
+import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
@@ -150,6 +151,16 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     });
   };
 
+  const handleGenerateSlug = (value?: string) => {
+    formik.setFieldValue(
+      "solutionSlug",
+      slugify(value ?? formik.values.solutionName, {
+        lower: true,
+        strict: true,
+      })
+    );
+  };
+
   return (
     <EditFormModal
       formik={formik}
@@ -161,6 +172,28 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       fullWidth
       {...props}
     >
+      <TextField
+        id="solutionName"
+        name="solutionName"
+        label="Name"
+        variant="outlined"
+        required
+        disabled={formik.isSubmitting}
+        value={formik.values.solutionName}
+        onChange={(ev) => {
+          formik.handleChange(ev);
+          if (!formik.touched.solutionSlug) {
+            handleGenerateSlug(ev.target.value);
+          }
+        }}
+        error={
+          formik.touched.solutionName && Boolean(formik.errors.solutionName)
+        }
+        helperText={
+          (formik.touched.solutionName && formik.errors.solutionName) ||
+          "The name of your solution."
+        }
+      />
       <TextField
         id="solutionSlug"
         name="solutionSlug"
@@ -175,23 +208,6 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         helperText={
           (formik.touched.solutionSlug && formik.errors.solutionSlug) ||
           "You can edit a slug that's used in the URL to this solution."
-        }
-      />
-      <TextField
-        id="solutionName"
-        name="solutionName"
-        label="Name"
-        variant="outlined"
-        required
-        disabled={formik.isSubmitting}
-        value={formik.values.solutionName}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.solutionName && Boolean(formik.errors.solutionName)
-        }
-        helperText={
-          (formik.touched.solutionName && formik.errors.solutionName) ||
-          "The name of your solution."
         }
       />
       <TextField
