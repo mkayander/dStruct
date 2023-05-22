@@ -122,6 +122,7 @@ model PlaygroundProject {
   title       String
   category    ProjectCategory
   difficulty  ProjectDifficulty?
+  lcLink      String?
   slug        String
   description String?              @db.Text
   isExample   Boolean              @default(false)
@@ -142,6 +143,7 @@ model PlaygroundSolution {
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
   slug        String
+  complexity  String?
   description String?
   code        String            @db.Text
   order       Int               @default(0)
