@@ -36,15 +36,21 @@ const categoriesList = Object.values(ProjectCategory);
 const validationSchema = yup.object({
   projectName: yup
     .string()
+    .trim()
     .min(3, "Project name must be at least 3 characters")
     .max(190, "Project name must be at most 190 characters")
     .required("Project name is required"),
   projectSlug: yup
     .string()
+    .trim()
     .min(3, "Slug must be at least 3 characters")
-    .max(100, "Slug must be at most 100 characters")
-    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
+    .max(190, "Slug must be at most 190 characters")
+    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URI slug"),
   projectCategory: yup.string().required("Project category is required"),
+  projectDescription: yup
+    .string()
+    .max(500, "Description must be at most 500 characters"),
+  projectLcLink: yup.string().url("Must be a valid URL"),
 });
 
 type ProjectModalProps = DialogProps & {
