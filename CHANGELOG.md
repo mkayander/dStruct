@@ -1,3 +1,11 @@
+# [1.154.0](https://github.com/mkayander/leetpal/compare/v1.153.0...v1.154.0) (2023-05-22)
+
+
+### Features
+
+* Added new project fields ([f54d91d](https://github.com/mkayander/leetpal/commit/f54d91d4af7953b978f105cdb8d9732d2fb26fdb))
+* Updated prisma ([961bce4](https://github.com/mkayander/leetpal/commit/961bce43b4742508d39d1b6967badb01065063b7))
+
 # [1.153.0](https://github.com/mkayander/leetpal/compare/v1.152.0...v1.153.0) (2023-05-18)
 
 
