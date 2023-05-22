@@ -1,3 +1,10 @@
+## [1.155.1](https://github.com/mkayander/leetpal/compare/v1.155.0...v1.155.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* Enable image uploader hook ([43366a1](https://github.com/mkayander/leetpal/commit/43366a1ddcbb19c05c1f3198d009b8f88932eb2c))
+
 # [1.155.0](https://github.com/mkayander/leetpal/compare/v1.154.0...v1.155.0) (2023-05-22)
 
 
