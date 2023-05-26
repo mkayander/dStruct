@@ -19,7 +19,6 @@ export const SessionWidget: React.FC = () => {
   ) => {
     e.preventDefault();
     await signIn();
-    console.log("Sign in function finished");
   };
 
   const handleSignOut: React.MouseEventHandler<HTMLButtonElement> = async (
