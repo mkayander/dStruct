@@ -1,3 +1,10 @@
+## [1.155.2](https://github.com/mkayander/leetpal/compare/v1.155.1...v1.155.2) (2023-05-27)
+
+
+### Bug Fixes
+
+* Removed console log ([102a53d](https://github.com/mkayander/leetpal/commit/102a53d23db9534164fdec407002450d6fd0d8c4))
+
 ## [1.155.1](https://github.com/mkayander/leetpal/compare/v1.155.0...v1.155.1) (2023-05-22)
 
 
