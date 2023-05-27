@@ -1,3 +1,11 @@
+# [1.156.0](https://github.com/mkayander/leetpal/compare/v1.155.2...v1.156.0) (2023-05-27)
+
+
+### Features
+
+* Added test KV endpoint ([dcc87ed](https://github.com/mkayander/leetpal/commit/dcc87ed7ed09bf794c66599bd16d2b9424dc7bc8))
+* Installed Vercel KV ([0a01208](https://github.com/mkayander/leetpal/commit/0a012083a3bce3e61a088a1a959ea9f0d19dbb27))
+
 ## [1.155.2](https://github.com/mkayander/leetpal/compare/v1.155.1...v1.155.2) (2023-05-27)
 
 
