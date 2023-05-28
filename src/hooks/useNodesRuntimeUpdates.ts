@@ -99,7 +99,6 @@ export const useNodesRuntimeUpdates = (
                 },
               })
             );
-            console.log("added node", frame.nodeId);
           }
           break;
 
