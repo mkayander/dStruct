@@ -1,3 +1,10 @@
+## [1.156.2](https://github.com/mkayander/leetpal/compare/v1.156.1...v1.156.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* Updated IDE config ([33c6dc3](https://github.com/mkayander/leetpal/commit/33c6dc3445d83626e13c9928c267d968b1f4b225))
+
 ## [1.156.1](https://github.com/mkayander/leetpal/compare/v1.156.0...v1.156.1) (2023-05-28)
 
 
