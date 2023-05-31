@@ -1,3 +1,10 @@
+# [1.158.0](https://github.com/mkayander/leetpal/compare/v1.157.0...v1.158.0) (2023-05-31)
+
+
+### Features
+
+* Clear project entities data on project deletion ([7672b85](https://github.com/mkayander/leetpal/commit/7672b85612b73a10df3fc10ce292d4d34e3adf11))
+
 # [1.157.0](https://github.com/mkayander/leetpal/compare/v1.156.2...v1.157.0) (2023-05-31)
 
 
