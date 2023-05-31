@@ -1,3 +1,10 @@
+## [1.159.1](https://github.com/mkayander/leetpal/compare/v1.159.0...v1.159.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* Skip non-unique project slugs ([cbe71cf](https://github.com/mkayander/leetpal/commit/cbe71cf4a90ed988a64b718275b8497419fd21fc))
+
 # [1.159.0](https://github.com/mkayander/leetpal/compare/v1.158.0...v1.159.0) (2023-05-31)
 
 
