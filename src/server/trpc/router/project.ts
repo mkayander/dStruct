@@ -10,7 +10,7 @@ import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
 import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt";
 import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc";
 import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
-import { getEntitySlug, getNextEntityIndex, setLastEntityIndex } from "#/utils";
+import { clearProjectEntities, getEntitySlug, getNextEntityIndex, setLastEntityIndex } from "#/utils";
 
 const uuid = shortUUID();
 
@@ -264,12 +264,14 @@ export const projectRouter = router({
         projectId: z.string()
       })
     )
-    .mutation(async ({ input, ctx }) =>
-      ctx.prisma.playgroundProject.delete({
-        where: {
-          id: input.projectId
-        }
-      })
+    .mutation(async ({ input: { projectId }, ctx }) => {
+        void clearProjectEntities(projectId);
+        return ctx.prisma.playgroundProject.delete({
+          where: {
+            id: projectId
+          }
+        });
+      }
     ),
 
   // Delete all personal projects
@@ -334,7 +336,7 @@ export const projectRouter = router({
         }
       }
 
-      let caseIndex = await getNextEntityIndex("case", ctx.project.id);
+      let caseIndex = await getNextEntityIndex(ctx.project.id, "case");
       let caseSlug = getEntitySlug("case", caseIndex);
       let didSkip = false;
 
@@ -350,7 +352,7 @@ export const projectRouter = router({
       }
 
       if (didSkip) {
-        void setLastEntityIndex("case", ctx.project.id, caseIndex);
+        void setLastEntityIndex(ctx.project.id, "case", caseIndex);
       }
 
       return ctx.prisma.playgroundTestCase.create({
@@ -437,7 +439,7 @@ export const projectRouter = router({
           }
         }
 
-        let solutionIndex = await getNextEntityIndex("solution", ctx.project.id);
+        let solutionIndex = await getNextEntityIndex(ctx.project.id, "solution");
         let solutionSlug = getEntitySlug("solution", solutionIndex);
         let didSkip = false;
 
@@ -453,7 +455,7 @@ export const projectRouter = router({
         }
 
         if (didSkip) {
-          void setLastEntityIndex("solution", ctx.project.id, solutionIndex);
+          void setLastEntityIndex(ctx.project.id, "solution", solutionIndex);
         }
 
         return ctx.prisma.playgroundSolution.create({

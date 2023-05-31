@@ -8,7 +8,7 @@ const dataSchema = z.object({
 type EntityType = "case" | "solution";
 type EntityData = z.infer<typeof dataSchema>;
 
-const getEntityKey = (type: EntityType, projectId: string) =>
+const getEntityKey = (projectId: string, type: EntityType) =>
   `${projectId}-${type}`;
 
 export const getEntitySlug = (type: EntityType, index: number) =>
@@ -25,10 +25,10 @@ const fetchEntityData = async (key: string) => {
 };
 
 export const getNextEntityIndex = async (
-  type: EntityType,
-  projectId: string
+  projectId: string,
+  type: EntityType
 ) => {
-  const key = getEntityKey(type, projectId);
+  const key = getEntityKey(projectId, type);
   const data = await fetchEntityData(key);
   data.lastIndex++;
 
@@ -38,13 +38,24 @@ export const getNextEntityIndex = async (
 };
 
 export const setLastEntityIndex = async (
-  type: EntityType,
   projectId: string,
+  type: EntityType,
   index: number
 ) => {
-  const key = getEntityKey(type, projectId);
+  const key = getEntityKey(projectId, type);
   const data = await fetchEntityData(key);
   data.lastIndex = index;
 
   return kv.set<EntityData>(key, data);
+};
+
+export const clearEntityData = async (projectId: string, type: EntityType) => {
+  const key = getEntityKey(projectId, type);
+
+  return kv.del(key);
+};
+
+export const clearProjectEntities = async (projectId: string) => {
+  await clearEntityData(projectId, "case");
+  await clearEntityData(projectId, "solution");
 };

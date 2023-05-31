@@ -13,4 +13,6 @@ export {
   getNextEntityIndex,
   setLastEntityIndex,
   getEntitySlug,
+  clearEntityData,
+  clearProjectEntities,
 } from "./entityData";
