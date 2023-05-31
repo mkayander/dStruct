@@ -10,6 +10,7 @@ import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
 import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt";
 import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc";
 import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
+import { getEntitySlug, getNextEntityIndex, setLastEntityIndex } from "#/utils";
 
 const uuid = shortUUID();
 
@@ -115,10 +116,10 @@ export const projectRouter = router({
         },
         orderBy: [
           {
-            category: "asc",
+            category: "asc"
           },
           {
-            title: "asc",
+            title: "asc"
           }
         ]
       });
@@ -300,7 +301,7 @@ export const projectRouter = router({
       z.object({
         projectId: z.string(),
         referenceCaseSlug: z.ostring(),
-        title: z.string(),
+        title: z.ostring(),
         order: z.number()
       })
     )
@@ -333,11 +334,30 @@ export const projectRouter = router({
         }
       }
 
+      let caseIndex = await getNextEntityIndex("case", ctx.project.id);
+      let caseSlug = getEntitySlug("case", caseIndex);
+      let didSkip = false;
+
+      while (await ctx.prisma.playgroundTestCase.findFirst({
+        where: {
+          projectId: ctx.project.id,
+          slug: caseSlug
+        }
+      })) {
+        caseIndex++;
+        caseSlug = getEntitySlug("case", caseIndex);
+        didSkip = true;
+      }
+
+      if (didSkip) {
+        void setLastEntityIndex("case", ctx.project.id, caseIndex);
+      }
+
       return ctx.prisma.playgroundTestCase.create({
         data: {
           projectId: ctx.project.id,
-          title: input.title,
-          slug: `case-${uuid.generate()}`,
+          title: input.title || `Case ${caseIndex}`,
+          slug: caseSlug,
           order: input.order,
           args
         }
@@ -395,7 +415,7 @@ export const projectRouter = router({
       z.object({
         projectId: z.string(),
         referenceSolutionSlug: z.ostring(),
-        title: z.string(),
+        title: z.ostring(),
         code: z.ostring(),
         order: z.onumber()
       })
@@ -417,8 +437,32 @@ export const projectRouter = router({
           }
         }
 
+        let solutionIndex = await getNextEntityIndex("solution", ctx.project.id);
+        let solutionSlug = getEntitySlug("solution", solutionIndex);
+        let didSkip = false;
+
+        while (await ctx.prisma.playgroundSolution.findFirst({
+          where: {
+            projectId: ctx.project.id,
+            slug: solutionSlug
+          }
+        })) {
+          solutionIndex++;
+          solutionSlug = getEntitySlug("solution", solutionIndex);
+          didSkip = true;
+        }
+
+        if (didSkip) {
+          void setLastEntityIndex("solution", ctx.project.id, solutionIndex);
+        }
+
         return ctx.prisma.playgroundSolution.create({
-          data: { code: content || getTemplate(ctx.project.category), slug: `solution-${uuid.generate()}`, ...restData }
+          data: {
+            title: input.title || `Solution ${solutionIndex}`,
+            code: content || getTemplate(ctx.project.category),
+            slug: solutionSlug,
+            ...restData
+          }
         });
       }
     ),

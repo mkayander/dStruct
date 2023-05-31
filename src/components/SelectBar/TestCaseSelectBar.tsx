@@ -92,7 +92,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
     addCase.mutate({
       projectId: selectedProject.data.id,
-      title: `Case ${order + 1}`,
       order,
       referenceCaseSlug: caseSlug,
     });
