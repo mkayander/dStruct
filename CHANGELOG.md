@@ -1,3 +1,11 @@
+# [1.157.0](https://github.com/mkayander/leetpal/compare/v1.156.2...v1.157.0) (2023-05-31)
+
+
+### Features
+
+* Added util functions to calculate entity indexes with KV store ([7e2093e](https://github.com/mkayander/leetpal/commit/7e2093e35093d02936ffc2636a5c79840c989d90))
+* Automatically generate readable entity names & slugs with KV indexes ([0b4cfa0](https://github.com/mkayander/leetpal/commit/0b4cfa0e0564cb37d67affea141de3eda910c4a4))
+
 ## [1.156.2](https://github.com/mkayander/leetpal/compare/v1.156.1...v1.156.2) (2023-05-30)
 
 
