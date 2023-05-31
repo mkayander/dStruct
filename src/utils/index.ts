@@ -9,3 +9,8 @@ export { processNodeRelation } from "./processNodeRelation";
 export { resetStructuresState } from "./resetStructuresState";
 export { setGlobalRuntimeContext } from "./setGlobalRuntimeContext";
 export { stringifySolutionResult } from "./stringifySolutionResult";
+export {
+  getNextEntityIndex,
+  setLastEntityIndex,
+  getEntitySlug,
+} from "./entityData";
