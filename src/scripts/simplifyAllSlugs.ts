@@ -8,10 +8,14 @@ import { prisma } from "#/server/db/client";
     console.log(project.slug);
     if (project.slug.startsWith("project-")) {
       const slug = slugify(project.title, { lower: true, strict: true });
-      await prisma.playgroundProject.update({
-        where: { id: project.id },
-        data: { slug },
-      });
+      try {
+        await prisma.playgroundProject.update({
+          where: { id: project.id },
+          data: { slug },
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 
