@@ -340,10 +340,12 @@ export const projectRouter = router({
       let caseSlug = getEntitySlug("case", caseIndex);
       let didSkip = false;
 
-      while (await ctx.prisma.playgroundTestCase.findFirst({
+      while (await ctx.prisma.playgroundTestCase.findUnique({
         where: {
-          projectId: ctx.project.id,
-          slug: caseSlug
+          projectId_slug: {
+            projectId: ctx.project.id,
+            slug: caseSlug
+          }
         }
       })) {
         caseIndex++;
@@ -443,10 +445,12 @@ export const projectRouter = router({
         let solutionSlug = getEntitySlug("solution", solutionIndex);
         let didSkip = false;
 
-        while (await ctx.prisma.playgroundSolution.findFirst({
+        while (await ctx.prisma.playgroundSolution.findUnique({
           where: {
-            projectId: ctx.project.id,
-            slug: solutionSlug
+            projectId_slug: {
+              projectId: ctx.project.id,
+              slug: solutionSlug
+            }
           }
         })) {
           solutionIndex++;
