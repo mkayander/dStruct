@@ -1,3 +1,16 @@
+# [1.159.0](https://github.com/mkayander/leetpal/compare/v1.158.0...v1.159.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* Optimize unique check query ([dcf3aa3](https://github.com/mkayander/leetpal/commit/dcf3aa3cf1ff6a055b38b86e7513d4b115fb7ceb))
+
+
+### Features
+
+* Added data dump script ([811340b](https://github.com/mkayander/leetpal/commit/811340b97301a89d6cc84f1d238c5e8ee65f7f73))
+* Added slug simplification script ([dcc6f26](https://github.com/mkayander/leetpal/commit/dcc6f263fb61802bfb590c85d445dee7371e0ae4))
+
 # [1.158.0](https://github.com/mkayander/leetpal/compare/v1.157.0...v1.158.0) (2023-05-31)
 
 
