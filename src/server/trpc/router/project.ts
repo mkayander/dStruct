@@ -1,6 +1,6 @@
 // noinspection TypeScriptValidateJSTypes
 
-import { Prisma, ProjectCategory } from "@prisma/client";
+import { Prisma, type PrismaClient, ProjectCategory } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import shortUUID from "short-uuid";
 import { z } from "zod";
@@ -59,6 +59,56 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
     default:
       return {};
   }
+};
+
+const getCaseIndex = async (projectId: string, prisma: PrismaClient) => {
+  let caseIndex = await getNextEntityIndex(projectId, "case");
+  let caseSlug = getEntitySlug("case", caseIndex);
+  let didSkip = false;
+
+  while (await prisma.playgroundTestCase.findUnique({
+    where: {
+      projectId_slug: {
+        projectId,
+        slug: caseSlug
+      }
+    }
+  })) {
+    caseIndex++;
+    caseSlug = getEntitySlug("case", caseIndex);
+    didSkip = true;
+  }
+
+  if (didSkip) {
+    void setLastEntityIndex(projectId, "case", caseIndex);
+  }
+
+  return { caseIndex, caseSlug };
+};
+
+const getSolutionIndex = async (projectId: string, prisma: PrismaClient) => {
+  let solutionIndex = await getNextEntityIndex(projectId, "solution");
+  let solutionSlug = getEntitySlug("solution", solutionIndex);
+  let didSkip = false;
+
+  while (await prisma.playgroundSolution.findUnique({
+    where: {
+      projectId_slug: {
+        projectId,
+        slug: solutionSlug
+      }
+    }
+  })) {
+    solutionIndex++;
+    solutionSlug = getEntitySlug("solution", solutionIndex);
+    didSkip = true;
+  }
+
+  if (didSkip) {
+    void setLastEntityIndex(projectId, "solution", solutionIndex);
+  }
+
+  return { solutionIndex, solutionSlug };
 };
 
 const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, next }) => {
@@ -336,26 +386,7 @@ export const projectRouter = router({
         }
       }
 
-      let caseIndex = await getNextEntityIndex(ctx.project.id, "case");
-      let caseSlug = getEntitySlug("case", caseIndex);
-      let didSkip = false;
-
-      while (await ctx.prisma.playgroundTestCase.findUnique({
-        where: {
-          projectId_slug: {
-            projectId: ctx.project.id,
-            slug: caseSlug
-          }
-        }
-      })) {
-        caseIndex++;
-        caseSlug = getEntitySlug("case", caseIndex);
-        didSkip = true;
-      }
-
-      if (didSkip) {
-        void setLastEntityIndex(ctx.project.id, "case", caseIndex);
-      }
+      const { caseIndex, caseSlug } = await getCaseIndex(input.projectId, ctx.prisma);
 
       return ctx.prisma.playgroundTestCase.create({
         data: {
@@ -441,26 +472,7 @@ export const projectRouter = router({
           }
         }
 
-        let solutionIndex = await getNextEntityIndex(ctx.project.id, "solution");
-        let solutionSlug = getEntitySlug("solution", solutionIndex);
-        let didSkip = false;
-
-        while (await ctx.prisma.playgroundSolution.findUnique({
-          where: {
-            projectId_slug: {
-              projectId: ctx.project.id,
-              slug: solutionSlug
-            }
-          }
-        })) {
-          solutionIndex++;
-          solutionSlug = getEntitySlug("solution", solutionIndex);
-          didSkip = true;
-        }
-
-        if (didSkip) {
-          void setLastEntityIndex(ctx.project.id, "solution", solutionIndex);
-        }
+        const { solutionIndex, solutionSlug } = await getSolutionIndex(input.projectId, ctx.prisma);
 
         return ctx.prisma.playgroundSolution.create({
           data: {
