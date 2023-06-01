@@ -253,14 +253,16 @@ export const projectRouter = router({
           cases: {
             create: {
               title: "Case 1",
-              slug: `case-${uuid.generate()}`,
+              slug: "case-1",
+              order: 0,
               args: getDefaultArguments(data.category)
             }
           },
           solutions: {
             create: {
               title: "Solution 1",
-              slug: `solution-${uuid.generate()}`,
+              slug: "solution-1",
+              order: 0,
               code: getTemplate(data.category)
             }
           }
