@@ -23,6 +23,9 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
     scrollbars: {
       autoHide: "scroll",
     },
+    overflow: {
+      x: "hidden",
+    },
   },
   style,
 }) => {
