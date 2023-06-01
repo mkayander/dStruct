@@ -123,7 +123,7 @@ const DashboardPage: NextPage<{
           <Grid item xs={12}>
             <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <DailyProblem questionDataQuery={questionDataQuery} />
           </Grid>
         </Grid>

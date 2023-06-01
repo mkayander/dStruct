@@ -42,6 +42,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
             sx={{
               img: {
                 borderRadius: theme.shape.borderRadius,
+                maxWidth: "100%",
               },
               pre: {
                 my: 1,
