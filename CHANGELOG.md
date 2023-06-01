@@ -1,3 +1,12 @@
+## [1.159.2](https://github.com/mkayander/leetpal/compare/v1.159.1...v1.159.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* Create project with correct child entities ([71d43d5](https://github.com/mkayander/leetpal/commit/71d43d5963dc961075f12ed20ac97fe63351c39e))
+* Disable horizontal scroll by default ([077fb65](https://github.com/mkayander/leetpal/commit/077fb65487d663eecbc8c07a6d6afd2486b66ff8))
+* Fixed big images display ([5291dfe](https://github.com/mkayander/leetpal/commit/5291dfe27ed24aec00d8e19c4a958eff4ad5bad3))
+
 ## [1.159.1](https://github.com/mkayander/leetpal/compare/v1.159.0...v1.159.1) (2023-05-31)
 
 
