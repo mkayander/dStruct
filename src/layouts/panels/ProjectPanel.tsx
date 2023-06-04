@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
+import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
 import { useArgumentsParsing, usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { ProjectModal } from "#/layouts/modals";
@@ -89,6 +90,8 @@ export const ProjectPanel: React.FC = () => {
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
   useArgumentsParsing();
+
+  const problemLink = selectedProject.data?.lcLink;
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -204,6 +207,9 @@ export const ProjectPanel: React.FC = () => {
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
             <Tab label={LL.PROJECT()} value="1" />
           </TabList>
+          <Stack direction="row" spacing={1} alignItems="center" pr={1}>
+            {problemLink && <ProblemLinkButton problemLink={problemLink} />}
+          </Stack>
         </TabListWrapper>
 
         <StyledTabPanel
