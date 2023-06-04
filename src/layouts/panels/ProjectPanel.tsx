@@ -235,14 +235,14 @@ export const ProjectPanel: React.FC = () => {
             </FormControl>
             <Stack direction="row" spacing={0.5}>
               {isEditable && (
-                <Tooltip title="Edit selected project ✍" arrow>
+                <Tooltip title={`${LL.EDIT_SELECTED_PROJECT()} ✍`} arrow>
                   <IconButton onClick={handleEditProject}>
                     <Edit />
                   </IconButton>
                 </Tooltip>
               )}
               {session.data && (
-                <Tooltip title="Create new project ➕" arrow>
+                <Tooltip title={`${LL.CREATE_NEW_PROJECT()} ➕`} arrow>
                   <IconButton onClick={handleCreateProject}>
                     <Add />
                   </IconButton>

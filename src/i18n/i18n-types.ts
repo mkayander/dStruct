@@ -43,6 +43,10 @@ type RootTranslation = {
 	 */
 	CONSOLE_OUTPUT: string
 	/**
+	 * C​r​e​a​t​e​ ​n​e​w​ ​p​r​o​j​e​c​t
+	 */
+	CREATE_NEW_PROJECT: string
+	/**
 	 * C​u​r​r​e​n​t​ ​p​r​o​j​e​c​t
 	 */
 	CURRENT_PROJECT: string
@@ -82,6 +86,10 @@ type RootTranslation = {
 	 * E​d​i​t​ ​<​c​o​d​e​>​p​a​g​e​s​/​i​n​d​e​x​.​t​s​x​<​/​c​o​d​e​>​ ​a​n​d​ ​s​a​v​e​ ​t​o​ ​r​e​l​o​a​d​.
 	 */
 	EDIT_AND_SAVE: string
+	/**
+	 * E​d​i​t​ ​s​e​l​e​c​t​e​d​ ​p​r​o​j​e​c​t
+	 */
+	EDIT_SELECTED_PROJECT: string
 	/**
 	 * E​d​i​t​ ​t​e​s​t​ ​c​a​s​e
 	 */
@@ -289,6 +297,10 @@ export type TranslationFunctions = {
 	 */
 	CONSOLE_OUTPUT: () => LocalizedString
 	/**
+	 * Create new project
+	 */
+	CREATE_NEW_PROJECT: () => LocalizedString
+	/**
 	 * Current project
 	 */
 	CURRENT_PROJECT: () => LocalizedString
@@ -328,6 +340,10 @@ export type TranslationFunctions = {
 	 * Edit <code>pages/index.tsx</code> and save to reload.
 	 */
 	EDIT_AND_SAVE: () => LocalizedString
+	/**
+	 * Edit selected project
+	 */
+	EDIT_SELECTED_PROJECT: () => LocalizedString
 	/**
 	 * Edit test case
 	 */
