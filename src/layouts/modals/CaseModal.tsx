@@ -8,6 +8,7 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 import { selectProjectId } from "#/store/reducers/projectReducer";
@@ -34,6 +35,7 @@ export type CaseModalProps = DialogProps & {
 };
 
 export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
+  const { LL } = useI18nContext();
   const { enqueueSnackbar } = useSnackbar();
   const { projectSlug = "", caseSlug = "", setCase } = usePlaygroundSlugs();
 
@@ -90,7 +92,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
 
   const editCase = trpc.project.updateCase.useMutation({
     onSuccess: (data) => {
-      invalidateQueries();
+      void invalidateQueries();
 
       onClose();
 
@@ -157,8 +159,8 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
   return (
     <EditFormModal
       formik={formik}
-      title="🧪 Edit Test Case"
-      summary="Edit the details of your test case."
+      title={`🧪 ${LL.EDIT_TEST_CASE()}`}
+      summary={LL.EDIT_TEST_CASE_SUMMARY()}
       isDeleting={deleteCase.isLoading}
       onClose={onClose}
       onDelete={handleCaseDelete}
@@ -168,7 +170,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       <TextField
         id="caseName"
         name="caseName"
-        label="Name"
+        label={LL.NAME()}
         variant="outlined"
         required
         disabled={formik.isSubmitting}
@@ -182,13 +184,13 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
         error={formik.touched.caseName && Boolean(formik.errors.caseName)}
         helperText={
           (formik.touched.caseName && formik.errors.caseName) ||
-          "The name of your test case."
+          LL.TEST_CASE_NAME_HELPER_TEXT()
         }
       />
       <TextField
         id="caseSlug"
         name="caseSlug"
-        label="Slug"
+        label={LL.SLUG()}
         variant="outlined"
         disabled={formik.isSubmitting}
         value={formik.values.caseSlug}
@@ -196,13 +198,14 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
         error={formik.touched.caseSlug && Boolean(formik.errors.caseSlug)}
         helperText={
           (formik.touched.caseSlug && formik.errors.caseSlug) ||
-          "You can edit a slug that's used in the URL to this test case."
+          // "You can edit a slug that's used in the URL to this test case."
+          LL.TEST_CASE_SLUG_HELPER_TEXT()
         }
       />
       <TextField
         id="caseDescription"
         name="caseDescription"
-        label="Description"
+        label={LL.DESCRIPTION()}
         variant="outlined"
         multiline
         minRows={2}
@@ -216,7 +219,8 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
         }
         helperText={
           (formik.touched.caseDescription && formik.errors.caseDescription) ||
-          "Optional test case description."
+          // "Optional test case description."
+          LL.TEST_CASE_DESCRIPTION_HELPER_TEXT()
         }
       />
     </EditFormModal>

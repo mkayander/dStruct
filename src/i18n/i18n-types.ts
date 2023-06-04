@@ -27,6 +27,10 @@ type RootTranslation = {
 	 */
 	CALLSTACK: string
 	/**
+	 * C​a​n​c​e​l
+	 */
+	CANCEL: string
+	/**
 	 * C​h​o​o​s​e​ ​l​o​c​a​l​e​.​.​.
 	 */
 	CHOOSE_LOCALE: string
@@ -59,6 +63,18 @@ type RootTranslation = {
 	 */
 	DATA_STRUCTURES_SIMPLIFIED: string
 	/**
+	 * D​e​l​e​t​e
+	 */
+	DELETE: string
+	/**
+	 * D​e​l​e​t​e​ ​t​h​i​s​ ​p​r​o​j​e​c​t
+	 */
+	DELETE_THIS_PROJECT: string
+	/**
+	 * D​e​s​c​r​i​p​t​i​o​n
+	 */
+	DESCRIPTION: string
+	/**
 	 * D​S​t​r​u​c​t​ ​L​o​g​o
 	 */
 	DSTRUCT_LOGO: string
@@ -66,6 +82,14 @@ type RootTranslation = {
 	 * E​d​i​t​ ​<​c​o​d​e​>​p​a​g​e​s​/​i​n​d​e​x​.​t​s​x​<​/​c​o​d​e​>​ ​a​n​d​ ​s​a​v​e​ ​t​o​ ​r​e​l​o​a​d​.
 	 */
 	EDIT_AND_SAVE: string
+	/**
+	 * E​d​i​t​ ​t​e​s​t​ ​c​a​s​e
+	 */
+	EDIT_TEST_CASE: string
+	/**
+	 * E​d​i​t​ ​t​h​e​ ​d​e​t​a​i​l​s​ ​o​f​ ​y​o​u​r​ ​t​e​s​t​ ​c​a​s​e​.
+	 */
+	EDIT_TEST_CASE_SUMMARY: string
 	/**
 	 * F​e​e​d​b​a​c​k
 	 */
@@ -99,6 +123,10 @@ type RootTranslation = {
 	 * m​s
 	 */
 	MS: string
+	/**
+	 * N​a​m​e
+	 */
+	NAME: string
 	/**
 	 * N​o​ ​d​a​t​a
 	 */
@@ -176,9 +204,25 @@ type RootTranslation = {
 	 */
 	SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT: string
 	/**
+	 * S​l​u​g
+	 */
+	SLUG: string
+	/**
 	 * S​u​c​c​e​s​s
 	 */
 	SUCCESS: string
+	/**
+	 * O​p​t​i​o​n​a​l​ ​t​e​s​t​ ​c​a​s​e​ ​d​e​s​c​r​i​p​t​i​o​n
+	 */
+	TEST_CASE_DESCRIPTION_HELPER_TEXT: string
+	/**
+	 * A​ ​s​h​o​r​t​ ​n​a​m​e​ ​f​o​r​ ​y​o​u​r​ ​t​e​s​t​ ​c​a​s​e
+	 */
+	TEST_CASE_NAME_HELPER_TEXT: string
+	/**
+	 * Y​o​u​ ​c​a​n​ ​e​d​i​t​ ​a​ ​s​l​u​g​ ​t​h​a​t​'​s​ ​u​s​e​d​ ​i​n​ ​t​h​e​ ​U​R​L​ ​t​o​ ​t​h​i​s​ ​t​e​s​t​ ​c​a​s​e
+	 */
+	TEST_CASE_SLUG_HELPER_TEXT: string
 	/**
 	 * T​o​d​a​y​ ​i​s​ ​{​d​a​t​e​|​w​e​e​k​d​a​y​}
 	 * @param {Date} date
@@ -196,6 +240,10 @@ type RootTranslation = {
 	 * T​y​p​e
 	 */
 	TYPE: string
+	/**
+	 * U​p​d​a​t​e
+	 */
+	UPDATE: string
 	/**
 	 * {​n​a​m​e​}​'​s​ ​D​a​s​h​b​o​a​r​d
 	 * @param {string} name
@@ -224,6 +272,10 @@ export type TranslationFunctions = {
 	 * Callstack
 	 */
 	CALLSTACK: () => LocalizedString
+	/**
+	 * Cancel
+	 */
+	CANCEL: () => LocalizedString
 	/**
 	 * Choose locale...
 	 */
@@ -257,6 +309,18 @@ export type TranslationFunctions = {
 	 */
 	DATA_STRUCTURES_SIMPLIFIED: () => LocalizedString
 	/**
+	 * Delete
+	 */
+	DELETE: () => LocalizedString
+	/**
+	 * Delete this project
+	 */
+	DELETE_THIS_PROJECT: () => LocalizedString
+	/**
+	 * Description
+	 */
+	DESCRIPTION: () => LocalizedString
+	/**
 	 * DStruct Logo
 	 */
 	DSTRUCT_LOGO: () => LocalizedString
@@ -264,6 +328,14 @@ export type TranslationFunctions = {
 	 * Edit <code>pages/index.tsx</code> and save to reload.
 	 */
 	EDIT_AND_SAVE: () => LocalizedString
+	/**
+	 * Edit test case
+	 */
+	EDIT_TEST_CASE: () => LocalizedString
+	/**
+	 * Edit the details of your test case.
+	 */
+	EDIT_TEST_CASE_SUMMARY: () => LocalizedString
 	/**
 	 * Feedback
 	 */
@@ -296,6 +368,10 @@ export type TranslationFunctions = {
 	 * ms
 	 */
 	MS: () => LocalizedString
+	/**
+	 * Name
+	 */
+	NAME: () => LocalizedString
 	/**
 	 * No data
 	 */
@@ -373,9 +449,25 @@ export type TranslationFunctions = {
 	 */
 	SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT: () => LocalizedString
 	/**
+	 * Slug
+	 */
+	SLUG: () => LocalizedString
+	/**
 	 * Success
 	 */
 	SUCCESS: () => LocalizedString
+	/**
+	 * Optional test case description
+	 */
+	TEST_CASE_DESCRIPTION_HELPER_TEXT: () => LocalizedString
+	/**
+	 * A short name for your test case
+	 */
+	TEST_CASE_NAME_HELPER_TEXT: () => LocalizedString
+	/**
+	 * You can edit a slug that's used in the URL to this test case
+	 */
+	TEST_CASE_SLUG_HELPER_TEXT: () => LocalizedString
 	/**
 	 * Today is {date|weekday}
 	 */
@@ -392,6 +484,10 @@ export type TranslationFunctions = {
 	 * Type
 	 */
 	TYPE: () => LocalizedString
+	/**
+	 * Update
+	 */
+	UPDATE: () => LocalizedString
 	/**
 	 * {name}'s Dashboard
 	 */

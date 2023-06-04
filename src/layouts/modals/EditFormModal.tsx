@@ -11,6 +11,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import type { useFormik } from "formik";
 import React from "react";
 
+import { useI18nContext } from "#/i18n/i18n-react";
+
 export type EditModalProps = DialogProps & {
   title: string;
   summary: string;
@@ -31,10 +33,12 @@ export const EditFormModal: React.FC<EditModalProps> = ({
   children,
   ...props
 }) => {
+  const { LL } = useI18nContext();
+
   return (
     <Dialog {...props} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle sx={{ textTransform: "capitalize" }}>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{summary}</DialogContentText>
           <Stack spacing={2} mt={2}>
@@ -43,7 +47,7 @@ export const EditFormModal: React.FC<EditModalProps> = ({
         </DialogContent>
         <DialogActions>
           <LoadingButton
-            title="Delete this project"
+            title={LL.DELETE_THIS_PROJECT()}
             color="error"
             endIcon={<DeleteForever />}
             loading={isDeleting}
@@ -51,11 +55,11 @@ export const EditFormModal: React.FC<EditModalProps> = ({
             onClick={onDelete}
             sx={{ mr: "auto" }}
           >
-            Delete
+            {LL.DELETE()}
           </LoadingButton>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>{LL.CANCEL()}</Button>
           <LoadingButton type="submit" loading={formik.isSubmitting}>
-            Update
+            {LL.UPDATE()}
           </LoadingButton>
         </DialogActions>
       </form>
