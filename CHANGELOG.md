@@ -1,3 +1,13 @@
+# [1.160.0](https://github.com/mkayander/leetpal/compare/v1.159.2...v1.160.0) (2023-06-04)
+
+
+### Features
+
+* Display problem link button ([f1c76bb](https://github.com/mkayander/leetpal/commit/f1c76bb965e5ee6dffaa71e1d11eef5b958f9d48))
+* Implemented problem link icon button component ([06c22cf](https://github.com/mkayander/leetpal/commit/06c22cf4d94219a8ec5d87a6e76b34fd1458df82))
+* Updated case modal internationalization ([b2eaf14](https://github.com/mkayander/leetpal/commit/b2eaf14e7e502cefb60b8f88735509cda890064b))
+* Updated i18n ([2fe9d0d](https://github.com/mkayander/leetpal/commit/2fe9d0d5c487a9f6611c4caab443c0ad2c6a0dfc))
+
 ## [1.159.2](https://github.com/mkayander/leetpal/compare/v1.159.1...v1.159.2) (2023-06-01)
 
 
