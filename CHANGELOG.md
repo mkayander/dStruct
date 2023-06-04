@@ -1,3 +1,10 @@
+## [1.160.1](https://github.com/mkayander/leetpal/compare/v1.160.0...v1.160.1) (2023-06-04)
+
+
+### Bug Fixes
+
+* Improved locale import type ([4efc115](https://github.com/mkayander/leetpal/commit/4efc11580688f2019554624c7eaf21820f3635e3))
+
 # [1.160.0](https://github.com/mkayander/leetpal/compare/v1.159.2...v1.160.0) (2023-06-04)
 
 
