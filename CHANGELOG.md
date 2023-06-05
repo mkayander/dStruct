@@ -1,3 +1,10 @@
+## [1.160.2](https://github.com/mkayander/leetpal/compare/v1.160.1...v1.160.2) (2023-06-05)
+
+
+### Bug Fixes
+
+* Improved solution modal i18n ([f0d453b](https://github.com/mkayander/leetpal/commit/f0d453b5da6524437dd0021966405f2a96bc9eff))
+
 ## [1.160.1](https://github.com/mkayander/leetpal/compare/v1.160.0...v1.160.1) (2023-06-04)
 
 
