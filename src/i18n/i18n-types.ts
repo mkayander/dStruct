@@ -91,6 +91,10 @@ type RootTranslation = {
 	 */
 	EDIT_SELECTED_PROJECT: string
 	/**
+	 * E​d​i​t​ ​s​o​l​u​t​i​o​n
+	 */
+	EDIT_SOLUTION: string
+	/**
 	 * E​d​i​t​ ​t​e​s​t​ ​c​a​s​e
 	 */
 	EDIT_TEST_CASE: string
@@ -344,6 +348,10 @@ export type TranslationFunctions = {
 	 * Edit selected project
 	 */
 	EDIT_SELECTED_PROJECT: () => LocalizedString
+	/**
+	 * Edit solution
+	 */
+	EDIT_SOLUTION: () => LocalizedString
 	/**
 	 * Edit test case
 	 */

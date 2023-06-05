@@ -19,6 +19,7 @@ const ru: Translation = {
   DSTRUCT_LOGO: "Логотип DStruct",
   EDIT_AND_SAVE: "Редактируйте <code>pages/index.tsx</code> и сохраните, чтобы перезагрузить.",
   EDIT_SELECTED_PROJECT: "Редактировать выбранный проект",
+  EDIT_SOLUTION: "Редактировать решение",
   EDIT_TEST_CASE: "Редактировать тестовый пример",
   EDIT_TEST_CASE_SUMMARY: "Измените детали вашего тестового примера.",
   FEEDBACK: "Обратная связь",

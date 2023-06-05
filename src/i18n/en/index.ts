@@ -19,6 +19,7 @@ const en: BaseTranslation = {
   DSTRUCT_LOGO: "DStruct Logo",
   EDIT_AND_SAVE: "Edit <code>pages/index.tsx</code> and save to reload.",
   EDIT_SELECTED_PROJECT: "Edit selected project",
+  EDIT_SOLUTION: "Edit solution",
   EDIT_TEST_CASE: "Edit test case",
   EDIT_TEST_CASE_SUMMARY: "Edit the details of your test case.",
   FEEDBACK: "Feedback",

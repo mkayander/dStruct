@@ -8,6 +8,7 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 import { selectProjectId } from "#/store/reducers/projectReducer";
@@ -37,6 +38,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   onClose,
   ...props
 }) => {
+  const { LL } = useI18nContext();
   const { enqueueSnackbar } = useSnackbar();
   const {
     projectSlug = "",
@@ -164,7 +166,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   return (
     <EditFormModal
       formik={formik}
-      title="🚀 Edit Solution"
+      title={`🚀 ${LL.EDIT_SOLUTION()}`}
       summary="Edit the details of your solution."
       isDeleting={deleteSolution.isLoading}
       onClose={onClose}
@@ -175,7 +177,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       <TextField
         id="solutionName"
         name="solutionName"
-        label="Name"
+        label={LL.NAME()}
         variant="outlined"
         required
         disabled={formik.isSubmitting}
@@ -197,7 +199,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       <TextField
         id="solutionSlug"
         name="solutionSlug"
-        label="Slug"
+        label={LL.SLUG()}
         variant="outlined"
         disabled={formik.isSubmitting}
         value={formik.values.solutionSlug}
@@ -213,7 +215,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       <TextField
         id="solutionDescription"
         name="solutionDescription"
-        label="Description"
+        label={LL.DESCRIPTION()}
         variant="outlined"
         multiline
         minRows={2}
