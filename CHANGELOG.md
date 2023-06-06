@@ -1,3 +1,12 @@
+## [1.160.3](https://github.com/mkayander/leetpal/compare/v1.160.2...v1.160.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* Improved code format handling ([2a0561b](https://github.com/mkayander/leetpal/commit/2a0561bb829042f67d931df8892eeac26b2e1ee2))
+* Improved editor height calculation ([b318864](https://github.com/mkayander/leetpal/commit/b31886431ea9eb237641d70e6a3866e812244650))
+* Improved icon position ([a833253](https://github.com/mkayander/leetpal/commit/a833253782064a27d0e3ac1e4a51923c87549d20))
+
 ## [1.160.2](https://github.com/mkayander/leetpal/compare/v1.160.1...v1.160.2) (2023-06-05)
 
 
