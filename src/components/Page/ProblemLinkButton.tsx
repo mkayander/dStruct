@@ -28,6 +28,7 @@ const getSiteFromUrl = (url: string): SiteData => {
           alt="LeetCode Logo"
           height={ICON_SIZE}
           width={ICON_SIZE}
+          style={{ marginTop: "1px" }}
         />
       );
       break;
