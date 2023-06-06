@@ -36,6 +36,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     null
   );
   const [editorState, setEditorState] = useState(EditorState.INITIAL);
+  const [isFormattingAvailable, setIsFormattingAvailable] = useState(true);
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
@@ -65,6 +66,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   // Update code on solution change
   useEffect(() => {
     if (!currentSolution.data?.code) return;
+    if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
     setEditorState(EditorState.INITIAL);
     setCodeInput(currentSolution.data.code);
@@ -150,6 +152,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     ev: monaco.editor.IModelContentChangedEvent
   ) => {
     setCodeInput(value ?? "");
+    if (!isFormattingAvailable) setIsFormattingAvailable(true);
     const range = ev.changes[0]?.rangeLength ?? 0;
     if (session.status === "unauthenticated" && range > 0 && range < 200) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
@@ -163,7 +166,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       parser: "babel",
       plugins: [parserBabel],
     });
-    setCodeInput(formattedCode);
+    textModel?.setValue(formattedCode);
+    setIsFormattingAvailable(false);
   };
 
   const isLoading =
@@ -198,9 +202,14 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               }
               arrow
             >
-              <IconButton onClick={handleFormatCode}>
-                <AutoFixHigh fontSize="small" />
-              </IconButton>
+              <span>
+                <IconButton
+                  disabled={!isFormattingAvailable}
+                  onClick={handleFormatCode}
+                >
+                  <AutoFixHigh fontSize="small" />
+                </IconButton>
+              </span>
             </Tooltip>
             <LoadingButton
               variant="text"
