@@ -1,3 +1,10 @@
+## [1.160.4](https://github.com/mkayander/leetpal/compare/v1.160.3...v1.160.4) (2023-06-06)
+
+
+### Bug Fixes
+
+* Improved editor height calculation ([7238c40](https://github.com/mkayander/leetpal/commit/7238c40e3e7b0c2ee7f04cc055f50ba849df8812))
+
 ## [1.160.3](https://github.com/mkayander/leetpal/compare/v1.160.2...v1.160.3) (2023-06-06)
 
 
