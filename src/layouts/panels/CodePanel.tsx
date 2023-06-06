@@ -177,7 +177,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   let editorHeight = 500;
   if (verticalSize) {
-    editorHeight = verticalSize * 8.6 - 110;
+    editorHeight = (verticalSize * 8.6 - 110) * (window.innerHeight / 1060);
   }
 
   return (
