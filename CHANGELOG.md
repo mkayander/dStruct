@@ -1,3 +1,10 @@
+## [1.160.5](https://github.com/mkayander/leetpal/compare/v1.160.4...v1.160.5) (2023-06-12)
+
+
+### Bug Fixes
+
+* Removed unused style attribute ([8736a1d](https://github.com/mkayander/leetpal/commit/8736a1da178bb438c37cfd4babd836597ae8fb67))
+
 ## [1.160.4](https://github.com/mkayander/leetpal/compare/v1.160.3...v1.160.4) (2023-06-06)
 
 
