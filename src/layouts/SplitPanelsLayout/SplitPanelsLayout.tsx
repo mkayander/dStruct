@@ -11,8 +11,6 @@ export type SplitPanelsLayoutProps = {
   BottomRight: PanelContent;
 };
 
-const style = {};
-
 export type PanelContentProps = {
   verticalSize?: number;
 };
@@ -30,7 +28,6 @@ const ControlledPanel: React.FC<ControlledPanelProps> = ({
 
   return (
     <Panel
-      style={style}
       onResize={(size) => {
         setSize(size);
       }}
@@ -56,29 +53,17 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
         overflow: "hidden",
       }}
     >
-      <PanelGroup
-        autoSaveId="main-horizontal"
-        direction="horizontal"
-        style={style}
-      >
-        <Panel defaultSize={60} order={1} style={style}>
-          <PanelGroup
-            autoSaveId="main-vertical-left"
-            direction="vertical"
-            style={style}
-          >
+      <PanelGroup autoSaveId="main-horizontal" direction="horizontal">
+        <Panel defaultSize={60} order={1}>
+          <PanelGroup autoSaveId="main-vertical-left" direction="vertical">
             <ControlledPanel defaultSize={30} order={1} Child={TopLeft} />
             <ResizeHandle />
             <ControlledPanel order={2} Child={BottomLeft} />
           </PanelGroup>
         </Panel>
         <ResizeHandle />
-        <Panel order={2} style={style}>
-          <PanelGroup
-            autoSaveId="main-vertical-right"
-            direction="vertical"
-            style={style}
-          >
+        <Panel order={2}>
+          <PanelGroup autoSaveId="main-vertical-right" direction="vertical">
             <ControlledPanel order={1} defaultSize={80} Child={TopRight} />
             <ResizeHandle />
             <ControlledPanel order={2} Child={BottomRight} />
