@@ -1,3 +1,18 @@
+# [1.161.0](https://github.com/mkayander/leetpal/compare/v1.160.5...v1.161.0) (2023-06-17)
+
+
+### Bug Fixes
+
+* Fixed theme provider styles ([8294710](https://github.com/mkayander/leetpal/commit/8294710944a59311b025b1579fb914b6a95da208))
+* Updated pnpm version on CI ([6b58a7f](https://github.com/mkayander/leetpal/commit/6b58a7f7a97f7a27fda2f656c72b1b504c926322))
+
+
+### Features
+
+* Installed React Three Fiber ([d51a6b3](https://github.com/mkayander/leetpal/commit/d51a6b3dbf75a0a5c61d1e6a24f7cad72f2564e2))
+* Specify client component directives ([e7933cb](https://github.com/mkayander/leetpal/commit/e7933cb731774f068ccbd4837d32c33eaf334035))
+* Updated dependencies ([6f230d4](https://github.com/mkayander/leetpal/commit/6f230d475e05646bee5a2fd5931e2aff7b706c37))
+
 ## [1.160.5](https://github.com/mkayander/leetpal/compare/v1.160.4...v1.160.5) (2023-06-12)
 
 
