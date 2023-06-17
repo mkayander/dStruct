@@ -1,3 +1,5 @@
+"use client";
+
 export { ProblemCard } from "./Problem";
 export { SessionWidget } from "./SessionWidget";
 export { MainAppBar } from "./Page/MainAppBar";
@@ -22,3 +24,5 @@ export { JsonInput } from "./ArgsEditor/JsonInput";
 export { ArgsEditor } from "./ArgsEditor/ArgsEditor";
 export { ArgInput } from "./ArgsEditor/ArgInput";
 export { ArgumentTypeSelect } from "./ArgsEditor/ArgumentTypeSelect";
+export { ClientSnackbarProvider } from "./ClientSnackbarProvider";
+export { StateThemeProvider } from "./StateThemeProvider";

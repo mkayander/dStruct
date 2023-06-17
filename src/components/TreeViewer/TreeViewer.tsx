@@ -1,3 +1,5 @@
+"use client";
+
 import { alpha, Box, Stack, useTheme } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { Panel, PanelGroup, type PanelProps } from "react-resizable-panels";

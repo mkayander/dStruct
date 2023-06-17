@@ -1,3 +1,5 @@
+"use client";
+
 import { Add } from "@mui/icons-material";
 import { CircularProgress, IconButton, Stack } from "@mui/material";
 import type { PlaygroundTestCase } from "@prisma/client";

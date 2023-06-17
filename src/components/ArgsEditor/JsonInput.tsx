@@ -1,3 +1,5 @@
+"use client";
+
 import { type TextFieldProps } from "@mui/material";
 import React, { useState } from "react";
 import type * as yup from "yup";

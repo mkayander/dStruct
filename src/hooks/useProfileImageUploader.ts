@@ -1,3 +1,5 @@
+"use client";
+
 import type S3 from "aws-sdk/clients/s3";
 import axios from "axios";
 import type { useSession } from "next-auth/react";

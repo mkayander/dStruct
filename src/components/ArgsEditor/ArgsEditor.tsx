@@ -1,3 +1,5 @@
+"use client";
+
 import { Add, DeleteForever } from "@mui/icons-material";
 import {
   Box,

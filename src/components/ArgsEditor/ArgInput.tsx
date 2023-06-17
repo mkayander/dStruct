@@ -1,3 +1,5 @@
+"use client";
+
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
