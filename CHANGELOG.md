@@ -1,3 +1,10 @@
+# [1.162.0](https://github.com/mkayander/leetpal/compare/v1.161.0...v1.162.0) (2023-06-17)
+
+
+### Features
+
+* Updated main CI ([cbc857f](https://github.com/mkayander/leetpal/commit/cbc857f8c17ac30c42bcf222e0bd98d3ad31fbf6))
+
 # [1.161.0](https://github.com/mkayander/leetpal/compare/v1.160.5...v1.161.0) (2023-06-17)
 
 
