@@ -1,5 +1,4 @@
 import { ApolloProvider } from "@apollo/client";
-import CssBaseline from "@mui/material/CssBaseline";
 import { Analytics } from "@vercel/analytics/react";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -43,7 +42,6 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
           <StateThemeProvider>
             <SnackbarProvider maxSnack={4}>
               <TypesafeI18n locale={locale}>
-                <CssBaseline />
                 <Component {...props.pageProps} />
                 <Analytics />
               </TypesafeI18n>

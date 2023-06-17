@@ -9,9 +9,9 @@ import { useAppSelector } from "#/store/hooks";
 import { selectIsLightMode } from "#/store/reducers/appBarReducer";
 import { themes } from "#/themes";
 
-export const StateThemeProvider: React.FC<Omit<ThemeProviderProps, "theme">> = (
-  props
-) => {
+export const StateThemeProvider: React.FC<
+  Omit<ThemeProviderProps, "theme">
+> = ({ children, ...props }) => {
   const isLightMode = useAppSelector(selectIsLightMode);
 
   const theme = useMemo(
@@ -20,9 +20,9 @@ export const StateThemeProvider: React.FC<Omit<ThemeProviderProps, "theme">> = (
   );
 
   return (
-    <>
+    <ThemeProvider theme={theme} {...props}>
       <CssBaseline />
-      <ThemeProvider theme={theme} {...props} />
-    </>
+      {children}
+    </ThemeProvider>
   );
 };
