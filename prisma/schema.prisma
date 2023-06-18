@@ -110,7 +110,7 @@ enum ProjectCategory {
 enum ProjectDifficulty {
   EASY
   MEDIUM
-  ADVANCED
+  HARD
 }
 
 model PlaygroundProject {
