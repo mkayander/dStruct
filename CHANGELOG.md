@@ -1,3 +1,14 @@
+# [1.164.0](https://github.com/mkayander/leetpal/compare/v1.163.0...v1.164.0) (2023-06-18)
+
+
+### Features
+
+* Accept project difficulty property ([b66e799](https://github.com/mkayander/leetpal/commit/b66e799787ad733530640393c43d79a25d5f7647))
+* Added node location transition ([043ec57](https://github.com/mkayander/leetpal/commit/043ec57ede5ed4441616432363314113f5711a05))
+* Added project difficulty selection ([033fd9c](https://github.com/mkayander/leetpal/commit/033fd9c3dd455c80f70e4cb8f840540ca3af85bc))
+* Display project difficulty labels ([e374ca1](https://github.com/mkayander/leetpal/commit/e374ca1516e9c343d465200d81d0b529c4fc6aab))
+* Renamed "advanced" to "hard" ([0a2ce91](https://github.com/mkayander/leetpal/commit/0a2ce91a62d8b76430bd94f75a579fd16d14153b))
+
 # [1.163.0](https://github.com/mkayander/leetpal/compare/v1.162.0...v1.163.0) (2023-06-18)
 
 
