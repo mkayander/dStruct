@@ -1,3 +1,12 @@
+## [1.164.1](https://github.com/mkayander/leetpal/compare/v1.164.0...v1.164.1) (2023-06-18)
+
+
+### Bug Fixes
+
+* Fixed dependency array ([75750cb](https://github.com/mkayander/leetpal/commit/75750cb54e5e6ae901fae44d764a2e4171cf57f0))
+* Fixed header issues ([e85c31f](https://github.com/mkayander/leetpal/commit/e85c31f18771b0eb4e20956729ff2c94813e6124))
+* Use "first-of-type" instead of "first-child" ([f2a0719](https://github.com/mkayander/leetpal/commit/f2a071910f7b54a9b20301293adaac4133570f77))
+
 # [1.164.0](https://github.com/mkayander/leetpal/compare/v1.163.0...v1.164.0) (2023-06-18)
 
 
