@@ -77,6 +77,9 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
+  clsx:
+    specifier: ^1.2.1
+    version: 1.2.1
   cookies-next:
     specifier: ^2.1.2
     version: 2.1.2

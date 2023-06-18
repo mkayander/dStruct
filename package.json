@@ -49,6 +49,7 @@
     "aws-sdk": "^2.1399.0",
     "axios": "1.4.0",
     "classnames": "^2.3.2",
+    "clsx": "^1.2.1",
     "cookies-next": "^2.1.2",
     "formik": "^2.4.2",
     "formik-mui": "5.0.0-alpha.0",
