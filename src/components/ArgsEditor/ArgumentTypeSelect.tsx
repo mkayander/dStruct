@@ -16,6 +16,7 @@ import {
   Select,
   type SelectProps,
   type SxProps,
+  useTheme,
 } from "@mui/material";
 import React from "react";
 
@@ -49,6 +50,8 @@ export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
   onChange,
   ...restProps
 }) => {
+  const theme = useTheme();
+
   return (
     <FormControl>
       <InputLabel>Type</InputLabel>
@@ -62,7 +65,7 @@ export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
             color: "transparent",
             "& > svg": {
               ml: 0.5,
-              color: "white",
+              color: theme.palette.text.primary,
             },
           },
         }}
