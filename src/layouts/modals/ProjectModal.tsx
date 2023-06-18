@@ -18,7 +18,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { type PlaygroundProject, ProjectCategory } from "@prisma/client";
+import {
+  type PlaygroundProject,
+  ProjectCategory,
+  ProjectDifficulty,
+} from "@prisma/client";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
@@ -29,9 +33,10 @@ import * as yup from "yup";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import { categoryLabels, trpc } from "#/utils";
+import { categoryLabels, difficultyLabels, trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
+const difficultiesList = Object.values(ProjectDifficulty);
 
 const validationSchema = yup.object({
   projectName: yup
@@ -82,6 +87,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       projectName: "",
       projectSlug: "",
       projectCategory: "" as ProjectCategory,
+      projectDifficulty: "" as ProjectDifficulty | undefined,
       projectDescription: "",
       projectLcLink: "",
       isPublic: true,
@@ -96,6 +102,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
+            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             lcLink: values.projectLcLink,
             isPublic: values.isPublic,
@@ -107,6 +114,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title: values.projectName,
             slug: values.projectSlug,
             category: values.projectCategory,
+            difficulty: values.projectDifficulty,
             description: values.projectDescription,
             lcLink: values.projectLcLink,
             isPublic: values.isPublic,
@@ -150,6 +158,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectSlug: currentProject.slug,
         projectCategory: currentProject.category,
         projectDescription: currentProject.description ?? "",
+        projectDifficulty: currentProject.difficulty || undefined,
         projectLcLink: currentProject.lcLink ?? "",
         isPublic: currentProject.isPublic,
       });
@@ -222,7 +231,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 required
                 disabled={formik.isSubmitting}
                 value={formik.values.projectCategory}
-                // defaultValue="Binary Tree"
                 onChange={formik.handleChange}
                 error={
                   formik.touched.projectCategory &&
@@ -275,6 +283,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 "You can edit a slug that's used in the URL to this project."
               }
             />
+            <FormControl fullWidth>
+              <InputLabel id="new-proj-select-difficulty-label">
+                Difficulty
+              </InputLabel>
+              <Select
+                id="projectDifficulty"
+                name="projectDifficulty"
+                labelId="new-proj-select-difficulty-label"
+                label="Difficulty"
+                disabled={formik.isSubmitting}
+                value={formik.values.projectDifficulty ?? ""}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.projectDifficulty &&
+                  Boolean(formik.errors.projectDifficulty)
+                }
+              >
+                {difficultiesList.map((difficulty) => (
+                  <MenuItem key={difficulty} value={difficulty}>
+                    {difficultyLabels[difficulty]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select a data structure category.</FormHelperText>
+            </FormControl>
             <TextField
               id="projectDescription"
               name="projectDescription"
