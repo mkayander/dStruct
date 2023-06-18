@@ -189,7 +189,7 @@ export const ProjectPanel: React.FC = () => {
     }
 
     return elements;
-  }, [allBrief.data]);
+  }, [allBrief.data, theme]);
 
   return (
     <PanelWrapper>
