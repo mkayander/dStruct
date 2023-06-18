@@ -1,6 +1,6 @@
 // noinspection TypeScriptValidateJSTypes
 
-import { Prisma, type PrismaClient, ProjectCategory } from "@prisma/client";
+import { Prisma, type PrismaClient, ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import shortUUID from "short-uuid";
 import { z } from "zod";
@@ -238,6 +238,7 @@ export const projectRouter = router({
         title: z.string(),
         slug: z.ostring(),
         category: z.nativeEnum(ProjectCategory),
+        difficulty: z.nativeEnum(ProjectDifficulty).optional(),
         description: z.ostring(),
         lcLink: z.ostring(),
         isPublic: z.boolean(),
@@ -288,6 +289,7 @@ export const projectRouter = router({
         slug: z.ostring(),
         title: z.ostring(),
         category: z.nativeEnum(ProjectCategory).optional(),
+        difficulty: z.nativeEnum(ProjectDifficulty).optional(),
         description: z.ostring(),
         lcLink: z.ostring(),
         isPublic: z.oboolean(),
