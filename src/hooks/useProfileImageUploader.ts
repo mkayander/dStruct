@@ -33,7 +33,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
     (async () => {
       if (bucketImage) {
         try {
-          await axios.get(getImageUrl(bucketImage));
+          await axios.head(getImageUrl(bucketImage) + "?no-cache");
         } catch (error) {
           if (axios.isAxiosError(error) && error.response?.status === 404) {
             await mutation.mutateAsync({ imageName: undefined });

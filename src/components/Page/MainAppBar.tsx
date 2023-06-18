@@ -204,7 +204,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             >
               {pages.map((page) => (
                 <MenuItem
-                  key={page.name}
+                  key={page.href}
                   onClick={() => handleNavItemClick(page)}
                 >
                   <Typography textAlign="center">{page.name}</Typography>
@@ -241,7 +241,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page.name}
+                key={page.href}
                 onClick={() => handleNavItemClick(page)}
                 color="inherit"
                 sx={{ my: 2, display: "block" }}
@@ -291,6 +291,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                           )}
                           alt={`${session.data.user.name} avatar`}
                           referrerPolicy="no-referrer"
+                          crossOrigin="anonymous"
                           fill={true}
                         />
                       </Avatar>
