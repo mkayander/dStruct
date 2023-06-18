@@ -3,18 +3,17 @@
 import {
   alpha,
   Box,
+  keyframes,
   type SxProps,
   type Theme,
   Typography,
   useTheme,
 } from "@mui/material";
-import { animated, useSpring } from "@react-spring/web";
-import React, { useEffect } from "react";
+import clsx from "clsx";
+import React from "react";
 import { ArcherElement } from "react-archer";
 import { type RelationType } from "react-archer/lib/types";
 
-import { useAppSelector } from "#/store/hooks";
-import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
 const nodeSize = "42px";
@@ -25,6 +24,26 @@ const nodeProps: SxProps<Theme> = {
   p: 1,
   width: nodeSize,
   height: nodeSize,
+};
+
+const blinkKeyframes = keyframes`
+  0% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const animationSx = {
+  "&.blink": {
+    animation: `${blinkKeyframes} 0.24s ease-out`,
+  },
 };
 
 export type NodeBaseProps = TreeNodeData & {
@@ -45,58 +64,19 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   relations,
 }: NodeBaseProps) => {
   const theme = useTheme();
-  const [springs, api] = useSpring(() => ({
-    from: { scale: 1 },
-  }));
-  const [overlaySprings, overlayApi] = useSpring(() => ({
-    from: { opacity: 0 },
-  }));
-  const [containerSprings, containerApi] = useSpring(() => ({
-    from: { left: x, top: y },
-    config: {
-      duration: 50,
-    },
-  }));
-
-  const isCallstackReady = useAppSelector(selectCallstackIsReady);
 
   const handleBlink = () => {
-    api.start({
-      from: { scale: 1.3 },
-      to: { scale: 1 },
-    });
-    overlayApi.start({
-      from: { opacity: 0.1 },
-      to: { opacity: 0 },
-    });
+    // api.start({
   };
 
-  useEffect(() => {
-    if (isCallstackReady) {
-      containerApi.start({ left: x, top: y });
-    } else {
-      containerApi.set({ left: x, top: y });
-    }
-  }, [containerApi, isCallstackReady, x, y]);
-
-  useEffect(() => {
-    if (animation === "blink") {
-      handleBlink();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animation]);
-
-  useEffect(() => {
-    overlayApi.set({ opacity: isHighlighted ? 0.1 : 0 });
-  }, [isHighlighted, overlayApi]);
-
   return (
-    <animated.div
-      style={{
+    <Box
+      sx={{
         position: "absolute",
         zIndex: 1,
         width: "fit-content",
-        ...containerSprings,
+        left: x,
+        top: y,
       }}
     >
       <Box
@@ -114,22 +94,22 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           id={id}
           relations={relations.length > 0 ? relations : undefined}
         >
-          <animated.div style={springs}>
-            <Box
-              onClick={handleBlink}
-              sx={{
-                ...nodeProps,
-                borderRadius: "50%",
-                background: alpha(nodeColor, 0.3),
-                border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
-                backdropFilter: "blur(4px)",
-                userSelect: "none",
-                boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
-                color: theme.palette.primary.contrastText,
-                transition: "all .2s",
-              }}
-            ></Box>
-          </animated.div>
+          <Box
+            className={animation}
+            onClick={handleBlink}
+            sx={{
+              ...nodeProps,
+              ...animationSx,
+              borderRadius: "50%",
+              background: alpha(nodeColor, 0.3),
+              border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
+              backdropFilter: "blur(4px)",
+              userSelect: "none",
+              boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
+              color: theme.palette.primary.contrastText,
+              transition: "all .2s",
+            }}
+          />
         </ArcherElement>
         <Typography
           component="span"
@@ -144,9 +124,10 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         >
           {value}
         </Typography>
-        <animated.div
-          className="node-overlay"
-          style={{
+        <Box
+          className={clsx("node-overlay", animation)}
+          sx={{
+            ...animationSx,
             position: "absolute",
             top: 0,
             left: 0,
@@ -156,8 +137,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
             background: "white",
             pointerEvents: "none",
             transition: "opacity .1s",
-            ...springs,
-            ...overlaySprings,
+            opacity: isHighlighted ? 0.1 : 0,
           }}
         />
       </Box>
@@ -175,6 +155,6 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           background: theme.palette.primary.main,
         }}
       />
-    </animated.div>
+    </Box>
   );
 };
