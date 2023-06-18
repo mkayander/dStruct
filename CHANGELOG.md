@@ -1,3 +1,16 @@
+# [1.163.0](https://github.com/mkayander/leetpal/compare/v1.162.0...v1.163.0) (2023-06-18)
+
+
+### Bug Fixes
+
+* Fixed arg type icon color ([5c8c755](https://github.com/mkayander/leetpal/commit/5c8c7555fe8630f02ea941425921870a753b42b0))
+
+
+### Features
+
+* Improved node animation performance ([d1500c1](https://github.com/mkayander/leetpal/commit/d1500c15ba2924f0f5e7a29610f4e2b092dfbec7))
+* Installed clsx ([7107aeb](https://github.com/mkayander/leetpal/commit/7107aeb31bdff300971b7d01528d3e4dfbffc871))
+
 # [1.162.0](https://github.com/mkayander/leetpal/compare/v1.161.0...v1.162.0) (2023-06-17)
 
 
