@@ -133,7 +133,7 @@ export const ProjectPanel: React.FC = () => {
             sx={{
               backgroundColor: "transparent",
               backdropFilter: "blur(8px)",
-              "&:not(:first-child)": {
+              "&:not(:first-of-type)": {
                 borderTop: `1px solid ${theme.palette.divider}`,
               },
             }}
