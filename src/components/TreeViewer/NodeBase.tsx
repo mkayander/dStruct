@@ -14,6 +14,8 @@ import React from "react";
 import { ArcherElement } from "react-archer";
 import { type RelationType } from "react-archer/lib/types";
 
+import { useAppSelector } from "#/store/hooks";
+import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
 const nodeSize = "42px";
@@ -65,6 +67,8 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
 }: NodeBaseProps) => {
   const theme = useTheme();
 
+  const isCallstackReady = useAppSelector(selectCallstackIsReady);
+
   const handleBlink = () => {
     // api.start({
   };
@@ -75,6 +79,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         position: "absolute",
         zIndex: 1,
         width: "fit-content",
+        transition: isCallstackReady ? "all .05s" : "none",
+      }}
+      style={{
         left: x,
         top: y,
       }}
