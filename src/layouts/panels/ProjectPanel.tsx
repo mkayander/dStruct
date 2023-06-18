@@ -14,6 +14,7 @@ import {
   Tab,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -32,11 +33,18 @@ import {
   projectSlice,
   selectIsEditable,
 } from "#/store/reducers/projectReducer";
-import { categoryLabels, getImageUrl, trpc } from "#/utils";
+import {
+  categoryLabels,
+  difficultyLabels,
+  getDifficultyColor,
+  getImageUrl,
+  trpc,
+} from "#/utils";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
+  const theme = useTheme();
 
   const { LL } = useI18nContext();
 
@@ -114,11 +122,22 @@ export const ProjectPanel: React.FC = () => {
   const projectSelectItems = useMemo(() => {
     let lastCategory = "";
     const elements: JSX.Element[] = [];
-    for (const project of allBrief.data ?? []) {
+    if (!allBrief.data) return elements;
+
+    for (const project of allBrief.data) {
       if (lastCategory !== project.category) {
         lastCategory = project.category;
         elements.push(
-          <ListSubheader key={project.category} disableSticky>
+          <ListSubheader
+            key={project.category}
+            sx={{
+              backgroundColor: "transparent",
+              backdropFilter: "blur(8px)",
+              "&:not(:first-child)": {
+                borderTop: `1px solid ${theme.palette.divider}`,
+              },
+            }}
+          >
             {categoryLabels[project.category]}
           </ListSubheader>
         );
@@ -147,9 +166,12 @@ export const ProjectPanel: React.FC = () => {
                 variant="subtitle1"
                 textOverflow="ellipsis"
                 overflow="hidden"
-                sx={{ opacity: 0.6 }}
+                sx={{
+                  opacity: 0.6,
+                  color: getDifficultyColor(theme, project.difficulty),
+                }}
               >
-                {categoryLabels[project.category]}
+                {project.difficulty && difficultyLabels[project.difficulty]}
               </Typography>
               {project.author?.bucketImage && (
                 <Tooltip title={`Author: ${project.author.name}`} arrow>

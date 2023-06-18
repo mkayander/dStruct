@@ -156,7 +156,7 @@ export const projectRouter = router({
           OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }]
         },
         select: {
-          id: true, slug: true, title: true, category: true, author: {
+          id: true, slug: true, title: true, category: true, difficulty: true, author: {
             select: {
               id: true,
               name: true,

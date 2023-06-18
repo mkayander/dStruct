@@ -4,7 +4,7 @@ export { isNumber } from "./isNumber";
 export { a11yProps } from "./a11yProps";
 export { validateAnimationName } from "./validateAnimationName";
 export { categoryLabels } from "./categoryLabels";
-export { difficultyLabels } from "./difficultyLabels";
+export { difficultyLabels, getDifficultyColor } from "./difficultyLabels";
 export { createCaseRuntimeArgs } from "./createCaseRuntimeArgs";
 export { processNodeRelation } from "./processNodeRelation";
 export { resetStructuresState } from "./resetStructuresState";
