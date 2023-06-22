@@ -50,13 +50,9 @@ export const ProblemLinkButton: React.FC<ProblemLinkButtonProps> = ({
 }) => {
   const site = getSiteFromUrl(problemLink);
 
-  const handleClick = () => {
-    window.open(problemLink, "_blank");
-  };
-
   return (
     <Tooltip title={site.title} arrow>
-      <IconButton onClick={handleClick} size="small">
+      <IconButton component="a" href={problemLink} target="_blank" size="small">
         {site.icon}
       </IconButton>
     </Tooltip>
