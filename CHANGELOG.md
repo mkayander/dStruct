@@ -1,3 +1,10 @@
+## [1.164.2](https://github.com/mkayander/leetpal/compare/v1.164.1...v1.164.2) (2023-06-22)
+
+
+### Bug Fixes
+
+* Use anchor element for the problem link button ([dead1e7](https://github.com/mkayander/leetpal/commit/dead1e73c227eb3db77246a839ed7912c7f9e3c7))
+
 ## [1.164.1](https://github.com/mkayander/leetpal/compare/v1.164.0...v1.164.1) (2023-06-18)
 
 
