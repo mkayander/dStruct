@@ -1,3 +1,4 @@
+import { PriorityQueue } from "@datastructures-js/priority-queue";
 import { Queue } from "@datastructures-js/queue";
 import shortUUID from "short-uuid";
 
@@ -103,6 +104,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     ArrayProxy,
     StringProxy,
     Queue,
+    PriorityQueue,
     BinaryTree,
     LinkedList,
     ListNode: LinkedList,

@@ -8,6 +8,9 @@ dependencies:
   '@apollo/client':
     specifier: ^3.7.15
     version: 3.7.15(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+  '@datastructures-js/priority-queue':
+    specifier: 5.3.0
+    version: 5.3.0
   '@datastructures-js/queue':
     specifier: 4.2.1
     version: 4.2.1
@@ -987,6 +990,16 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+
+  /@datastructures-js/heap@3.2.0:
+    resolution: {integrity: sha512-FcU5ZAyb+VIOZz1HABsJUsbJi2ZyUDO7aoe97hq4d3tK3z8nMgwdxf5bO0gafR0ExFi18YTspntqHLzt4XOgnA==}
+    dev: false
+
+  /@datastructures-js/priority-queue@5.3.0:
+    resolution: {integrity: sha512-0Dl0UooE9Uzz85qBP46HTjQHS5GN7NMNluN5/nMfxQAndG/1eNBJpBntLGT5QJarvMO3poLNBJzA3S4GPajp+w==}
+    dependencies:
+      '@datastructures-js/heap': 3.2.0
+    dev: false
 
   /@datastructures-js/queue@4.2.1:
     resolution: {integrity: sha512-j23SNg1EyUzPhKeW37inqil/+YHwL/IIuaDftrrpqv0OKLJ6N5hhuYtGe33WCm5QppmIvbk5/dMwJ4UW+MzJPw==}
