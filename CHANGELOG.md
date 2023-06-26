@@ -1,3 +1,10 @@
+# [1.165.0](https://github.com/mkayander/leetpal/compare/v1.164.2...v1.165.0) (2023-06-26)
+
+
+### Features
+
+* Provide PriorityQueue implementation for the solutions ([47945e8](https://github.com/mkayander/leetpal/commit/47945e83421f43733abc22ee593c5f5ae1f26957))
+
 ## [1.164.2](https://github.com/mkayander/leetpal/compare/v1.164.1...v1.164.2) (2023-06-22)
 
 
