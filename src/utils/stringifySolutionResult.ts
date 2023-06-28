@@ -1,7 +1,7 @@
 import { type LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ArgumentType } from "#/utils/argumentObject";
 
-const safeStringify = (val: unknown) =>
+export const safeStringify = (val: unknown) =>
   JSON.stringify(
     val,
     (_, value) => {
@@ -11,14 +11,35 @@ const safeStringify = (val: unknown) =>
       if (Array.isArray(value)) {
         return `[${value.join(", ")}]`;
       }
+      if (value instanceof Set) {
+        return `Set (${value.size}) {${[...value].join(", ")}}`;
+      }
+      if (value instanceof Map) {
+        return `Map {${[...value].join(", ")}}`;
+      }
 
       return value;
     },
     2
   );
 
+export const stripQuotes = (val: string) => {
+  if (val[0] === '"' && val.at(-1) === '"') {
+    return val.slice(1, -1);
+  }
+
+  return val;
+};
+
 export const stringifySolutionResult = (
-  result?: string | number | bigint | LinkedListNode | null
+  result?:
+    | string
+    | number
+    | bigint
+    | Set<unknown>
+    | Map<unknown, unknown>
+    | LinkedListNode
+    | null
 ) => {
   if (result === null) return "null";
   if (result === undefined) return "undefined";
@@ -44,10 +65,5 @@ export const stringifySolutionResult = (
     return output.join(" -> ");
   }
 
-  const output = safeStringify(result);
-  if (output[0] === '"' && output.at(-1) === '"') {
-    return output.slice(1, -1);
-  }
-
-  return output;
+  return stripQuotes(safeStringify(result));
 };

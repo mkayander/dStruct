@@ -10,6 +10,7 @@ import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
+import { safeStringify, stripQuotes } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 
@@ -116,7 +117,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
           name: "consoleLog",
           args: args.map((arg) => {
             if (typeof arg === "object") {
-              return JSON.stringify(arg);
+              return stripQuotes(safeStringify(arg));
             }
             return String(arg);
           }),
