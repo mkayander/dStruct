@@ -1,5 +1,6 @@
 import { ProjectDifficulty } from "@prisma/client";
 
+import { Difficulty } from "#/graphql/generated";
 import type { themes } from "#/themes";
 
 export const difficultyLabels: Record<ProjectDifficulty, string> = {
@@ -22,5 +23,19 @@ export const getDifficultyColor = (
 
     default:
       return theme.palette.question.All.main;
+  }
+};
+
+export const getDifficultyValue = (
+  difficulty: Difficulty | undefined | null
+): ProjectDifficulty => {
+  switch (difficulty) {
+    default:
+    case Difficulty.Easy:
+      return ProjectDifficulty.EASY;
+    case Difficulty.Medium:
+      return ProjectDifficulty.MEDIUM;
+    case Difficulty.Hard:
+      return ProjectDifficulty.HARD;
   }
 };
