@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import { DeleteForever } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
@@ -9,6 +10,7 @@ import {
   Select,
   Stack,
   Switch,
+  Tooltip,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -30,10 +32,16 @@ import React, { useEffect } from "react";
 import slugify from "slugify";
 import * as yup from "yup";
 
+import { useQuestionDataLazyQuery } from "#/graphql/generated";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import { categoryLabels, difficultyLabels, trpc } from "#/utils";
+import {
+  categoryLabels,
+  difficultyLabels,
+  getDifficultyValue,
+  trpc,
+} from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
 const difficultiesList = Object.values(ProjectDifficulty);
@@ -50,7 +58,7 @@ const validationSchema = yup.object({
     .trim()
     .min(3, "Slug must be at least 3 characters")
     .max(190, "Slug must be at most 190 characters")
-    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URI slug"),
+    .matches(/^[a-zA-Z0-9](-?[a-zA-Z0-9])*$/, "Must be a valid URI slug"),
   projectCategory: yup.string().required("Project category is required"),
   projectDescription: yup
     .string()
@@ -72,6 +80,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [getQuestionData, { loading: isQuestionLoading, error }] =
+    useQuestionDataLazyQuery({
+      returnPartialData: true,
+      query: gql`
+        query GetQuestionData($titleSlug: String!) {
+          question(titleSlug: $titleSlug) {
+            title
+            titleSlug
+            difficulty
+          }
+        }
+      `,
+    });
 
   const prevEditMode = usePrevious(isEditMode);
 
@@ -204,6 +226,32 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     );
   };
 
+  const handleFetchQuestionData = async () => {
+    try {
+      const url = new URL(formik.values.projectLcLink);
+      console.log(url.hostname);
+      if (url.hostname !== "leetcode.com") return;
+      const titleSlug = url.pathname.split("/")[2];
+      if (!titleSlug) return;
+
+      const { data } = await getQuestionData({
+        variables: {
+          titleSlug,
+        },
+      });
+      if (!data) return;
+
+      void formik.setValues({
+        ...formik.values,
+        projectName: data.question.title,
+        projectSlug: data.question.titleSlug,
+        projectDifficulty: getDifficultyValue(data.question.difficulty),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Dialog {...props} onClose={onClose}>
       <form
@@ -329,23 +377,42 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 "Optional project description."
               }
             />
-            <TextField
-              id="projectLcLink"
-              name="projectLcLink"
-              label="Problem Link"
-              variant="outlined"
-              disabled={formik.isSubmitting}
-              value={formik.values.projectLcLink}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.projectLcLink &&
-                Boolean(formik.errors.projectLcLink)
-              }
-              helperText={
-                (formik.touched.projectLcLink && formik.errors.projectLcLink) ||
-                "Where you found this problem. For example, LeetCode."
-              }
-            />
+            <Stack>
+              <TextField
+                id="projectLcLink"
+                name="projectLcLink"
+                label="Problem Link"
+                variant="outlined"
+                disabled={formik.isSubmitting}
+                value={formik.values.projectLcLink}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.projectLcLink &&
+                  Boolean(formik.errors.projectLcLink)
+                }
+                helperText={
+                  (formik.touched.projectLcLink &&
+                    formik.errors.projectLcLink) ||
+                  "Where you found this problem. For example, LeetCode."
+                }
+              />
+              <Stack direction="row">
+                <Tooltip title="Fetch project data from LeetCode" arrow>
+                  <span>
+                    <LoadingButton
+                      loading={isQuestionLoading}
+                      disabled={Boolean(
+                        !formik.values.projectLcLink ||
+                          formik.errors.projectLcLink
+                      )}
+                      onClick={handleFetchQuestionData}
+                    >
+                      Fetch Data
+                    </LoadingButton>
+                  </span>
+                </Tooltip>
+              </Stack>
+            </Stack>
             <FormControlLabel
               control={
                 <Switch
