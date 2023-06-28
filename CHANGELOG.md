@@ -1,3 +1,10 @@
+# [1.167.0](https://github.com/mkayander/leetpal/compare/v1.166.0...v1.167.0) (2023-06-28)
+
+
+### Features
+
+* Improved custom stringify logic ([f851f22](https://github.com/mkayander/leetpal/commit/f851f225d285a8e6f85994af87ea5a8316deb2ee))
+
 # [1.166.0](https://github.com/mkayander/leetpal/compare/v1.165.0...v1.166.0) (2023-06-28)
 
 
