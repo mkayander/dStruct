@@ -27,6 +27,9 @@ const ConsoleOutput: React.FC = () => {
           backgroundColor: alpha(theme.palette.info.dark, 0.08),
           p: 1,
           borderRadius: 2,
+          div: {
+            "white-space": "pre-wrap",
+          },
         }}
       >
         <pre>
