@@ -1,3 +1,17 @@
+# [1.166.0](https://github.com/mkayander/leetpal/compare/v1.165.0...v1.166.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* Removed unused variable ([a61177a](https://github.com/mkayander/leetpal/commit/a61177aa29242520e743452ad57b5f00d7a73dc5))
+
+
+### Features
+
+* Added difficulty value getter helper ([bec30c1](https://github.com/mkayander/leetpal/commit/bec30c14faaf720f60e2867e15849416323ec0d9))
+* Display problem fetch status ([f5171c2](https://github.com/mkayander/leetpal/commit/f5171c2bced2578f87365e5c8a1b513ba1303a04))
+* Implemented problem data fetching feature ([300ee89](https://github.com/mkayander/leetpal/commit/300ee8969f7b578461f64d46ad3add17f437d539))
+
 # [1.165.0](https://github.com/mkayander/leetpal/compare/v1.164.2...v1.165.0) (2023-06-26)
 
 
