@@ -1,3 +1,10 @@
+## [1.167.1](https://github.com/mkayander/leetpal/compare/v1.167.0...v1.167.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* Wrap console output ([a481f87](https://github.com/mkayander/leetpal/commit/a481f872d6fea01d665793d5f41db230040040e3))
+
 # [1.167.0](https://github.com/mkayander/leetpal/compare/v1.166.0...v1.167.0) (2023-06-28)
 
 
