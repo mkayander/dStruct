@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { DeleteForever } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
+  Alert,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -28,7 +29,7 @@ import {
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import slugify from "slugify";
 import * as yup from "yup";
 
@@ -66,6 +67,13 @@ const validationSchema = yup.object({
   projectLcLink: yup.string().url("Must be a valid URL"),
 });
 
+enum ProblemFetchStatus {
+  IDLE,
+  SUCCESS,
+  ERROR,
+  INVALID_URL,
+}
+
 type ProjectModalProps = DialogProps & {
   onClose: () => void;
   currentProject?: PlaygroundProject;
@@ -81,7 +89,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const [getQuestionData, { loading: isQuestionLoading, error }] =
+  const [problemFetchStatus, setProblemFetchStatus] = useState(
+    ProblemFetchStatus.IDLE
+  );
+  const [getProblemData, { loading: isQuestionLoading, error }] =
     useQuestionDataLazyQuery({
       returnPartialData: true,
       query: gql`
@@ -187,6 +198,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     } else if (prevEditMode && !isEditMode) {
       formik.resetForm();
     }
+    setProblemFetchStatus(ProblemFetchStatus.IDLE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditMode, currentProject]);
 
@@ -226,15 +238,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     );
   };
 
-  const handleFetchQuestionData = async () => {
+  const handleFetchProblemData = async () => {
+    setProblemFetchStatus(ProblemFetchStatus.IDLE);
     try {
       const url = new URL(formik.values.projectLcLink);
-      console.log(url.hostname);
-      if (url.hostname !== "leetcode.com") return;
-      const titleSlug = url.pathname.split("/")[2];
-      if (!titleSlug) return;
+      const pathItems = url.pathname.split("/");
+      const titleSlug = pathItems[2];
+      if (
+        url.hostname !== "leetcode.com" ||
+        pathItems[1] !== "problems" ||
+        !titleSlug
+      ) {
+        setProblemFetchStatus(ProblemFetchStatus.INVALID_URL);
+        enqueueSnackbar("Invalid LeetCode URL", {
+          variant: "error",
+        });
+        return;
+      }
 
-      const { data } = await getQuestionData({
+      const { data } = await getProblemData({
         variables: {
           titleSlug,
         },
@@ -247,8 +269,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         projectSlug: data.question.titleSlug,
         projectDifficulty: getDifficultyValue(data.question.difficulty),
       });
+      setProblemFetchStatus(ProblemFetchStatus.SUCCESS);
+      enqueueSnackbar("Problem data was successfully fetched 🎉", {
+        variant: "success",
+      });
     } catch (error) {
       console.error(error);
+      setProblemFetchStatus(ProblemFetchStatus.ERROR);
+      enqueueSnackbar("Failed to fetch problem data!", {
+        variant: "error",
+      });
     }
   };
 
@@ -396,8 +426,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   "Where you found this problem. For example, LeetCode."
                 }
               />
-              <Stack direction="row">
-                <Tooltip title="Fetch project data from LeetCode" arrow>
+              <Stack direction="row" spacing={2} mt={1} alignItems="center">
+                <Tooltip
+                  title="Fetch and apply problem data from LeetCode"
+                  arrow
+                >
                   <span>
                     <LoadingButton
                       loading={isQuestionLoading}
@@ -405,12 +438,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         !formik.values.projectLcLink ||
                           formik.errors.projectLcLink
                       )}
-                      onClick={handleFetchQuestionData}
+                      onClick={handleFetchProblemData}
                     >
                       Fetch Data
                     </LoadingButton>
                   </span>
                 </Tooltip>
+                <Alert
+                  variant="outlined"
+                  severity="success"
+                  sx={{
+                    transition: "opacity 0.5s",
+                    opacity:
+                      problemFetchStatus === ProblemFetchStatus.SUCCESS ? 1 : 0,
+                  }}
+                >
+                  Problem data applied successfully!
+                </Alert>
               </Stack>
             </Stack>
             <FormControlLabel
