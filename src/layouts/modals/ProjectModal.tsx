@@ -92,7 +92,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const [problemFetchStatus, setProblemFetchStatus] = useState(
     ProblemFetchStatus.IDLE
   );
-  const [getProblemData, { loading: isQuestionLoading, error }] =
+  const [getProblemData, { loading: isQuestionLoading }] =
     useQuestionDataLazyQuery({
       returnPartialData: true,
       query: gql`
