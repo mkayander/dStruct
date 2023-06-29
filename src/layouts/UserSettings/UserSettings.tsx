@@ -11,9 +11,11 @@ import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { trpc } from "#/utils";
 
 export const UserSettings: React.FC = () => {
+  const { LL } = useI18nContext();
   const session = useSession();
 
   const [getUserProfile, { loading: gqlLoading }] =
@@ -50,11 +52,11 @@ export const UserSettings: React.FC = () => {
   const [getGlobalData] = useGlobalDataLazyQuery();
 
   return (
-    <DataSection title="User Settings" Icon={ManageAccounts}>
+    <DataSection title={LL.USER_SETTINGS()} Icon={ManageAccounts}>
       <Stack spacing={2}>
         {user?.leetCodeUsername ? (
           <>
-            <Typography>Your LeetCode account name:</Typography>
+            <Typography>{LL.YOUR_LEETCODE_ACCOUNT_NAME()}</Typography>
             <Typography>{user.leetCodeUsername}</Typography>
             <Button
               disabled={unlinkUser.isLoading}
@@ -62,7 +64,7 @@ export const UserSettings: React.FC = () => {
               variant="outlined"
               onClick={handleLinkedUserReset}
             >
-              Reset
+              {LL.RESET()}
             </Button>
           </>
         ) : (
@@ -126,13 +128,13 @@ export const UserSettings: React.FC = () => {
             {({ submitForm, isSubmitting }) => (
               <Stack spacing={1}>
                 <Typography>
-                  Please enter your LeetCode account name:
+                  {LL.PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME()}
                 </Typography>
                 <Field
                   component={TextField}
                   name="username"
                   type="text"
-                  label="Username"
+                  label={LL.USERNAME()}
                   required
                   helperText="LeetCode Username"
                   // error={errors['username']}
@@ -142,7 +144,7 @@ export const UserSettings: React.FC = () => {
                   component={TextField}
                   name="token"
                   type="text"
-                  label="Token"
+                  label={LL.TOKEN()}
                   required
                   helperText="LeetCode Token"
                   // error={errors['username']}
@@ -155,7 +157,7 @@ export const UserSettings: React.FC = () => {
                   onClick={submitForm}
                   sx={{ display: "block" }}
                 >
-                  Submit!
+                  {LL.SUBMIT()}
                 </Button>
                 {loading && <CircularProgress variant="indeterminate" />}
               </Stack>

@@ -37,6 +37,7 @@ const ru: Translation = {
   PANEL_TABS: "Вкладки панели",
   PLAYBACK_INTERVAL: "Интервал воспроизведения",
   PLAYGROUND: "Редактор",
+  PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: "Пожалуйста, введите имя вашей учетной записи LeetCode",
   PROFILE: "Профиль",
   PROJECT: "Проект",
   REPLAY: "Повтор",
@@ -51,19 +52,24 @@ const ru: Translation = {
   SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE: "Войдите, чтобы отслеживать свой прогресс и многое другое!",
   SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT: "Войдите с помощью GitHub или Google в правом верхнем углу",
   SLUG: "Слаг",
+  SUBMIT: "Отправить",
   SUCCESS: "Успех",
   TEST_CASE_DESCRIPTION_HELPER_TEXT: "Описание тестового примера (необязательно)",
   TEST_CASE_NAME_HELPER_TEXT: "Короткое название вашего тестового примера",
   TEST_CASE_SLUG_HELPER_TEXT: "Вы можете отредактировать слаг, который используется в URL-адресе для этого тестового примера",
   TODAY: "Сегодня {date|weekday}",
+  TOKEN: "Токен",
   TREE_VIEWER: "Просмотр",
   TRY_IT_OUT_NOW: "Попробуйте сейчас",
   TYPE: "Тип",
   UPDATE: "Обновить",
+  USERNAME: "Имя пользователя",
   USER_DASHBOARD: "Панель управления {name} ",
+  USER_SETTINGS: "Настройки пользователя",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Визуализируй свои проблемы LeetCode просто из своего кода",
+  YOUR_LEETCODE_ACCOUNT_NAME: "Ваше имя учетной записи LeetCode",
   YOUR_NAME: "Ваше имя:",
-  YOU_NEED_TO_RUN_THE_CODE_FIRST: "Сначала нужно запустить код"
+  YOU_NEED_TO_RUN_THE_CODE_FIRST: "Сначала нужно запустить код",
 };
 
 export default ru;

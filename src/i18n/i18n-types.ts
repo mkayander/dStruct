@@ -164,6 +164,10 @@ type RootTranslation = {
 	 */
 	PLAYGROUND: string
 	/**
+	 * P​l​e​a​s​e​ ​e​n​t​e​r​ ​y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​a​c​c​o​u​n​t​ ​n​a​m​e​:
+	 */
+	PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: string
+	/**
 	 * P​r​o​f​i​l​e
 	 */
 	PROFILE: string
@@ -220,6 +224,10 @@ type RootTranslation = {
 	 */
 	SLUG: string
 	/**
+	 * S​u​b​m​i​t
+	 */
+	SUBMIT: string
+	/**
 	 * S​u​c​c​e​s​s
 	 */
 	SUCCESS: string
@@ -241,6 +249,10 @@ type RootTranslation = {
 	 */
 	TODAY: RequiredParams<'date|weekday'>
 	/**
+	 * T​o​k​e​n
+	 */
+	TOKEN: string
+	/**
 	 * T​r​e​e​ ​V​i​e​w​e​r
 	 */
 	TREE_VIEWER: string
@@ -257,14 +269,26 @@ type RootTranslation = {
 	 */
 	UPDATE: string
 	/**
+	 * U​s​e​r​n​a​m​e
+	 */
+	USERNAME: string
+	/**
 	 * {​n​a​m​e​}​'​s​ ​D​a​s​h​b​o​a​r​d
 	 * @param {string} name
 	 */
 	USER_DASHBOARD: RequiredParams<'name'>
 	/**
+	 * U​s​e​r​ ​S​e​t​t​i​n​g​s
+	 */
+	USER_SETTINGS: string
+	/**
 	 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​p​r​o​b​l​e​m​s​ ​j​u​s​t​ ​f​o​r​m​ ​y​o​u​r​ ​c​o​d​e
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: string
+	/**
+	 * Y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​a​c​c​o​u​n​t​ ​n​a​m​e​:
+	 */
+	YOUR_LEETCODE_ACCOUNT_NAME: string
 	/**
 	 * Y​o​u​r​ ​n​a​m​e​:
 	 */
@@ -421,6 +445,10 @@ export type TranslationFunctions = {
 	 */
 	PLAYGROUND: () => LocalizedString
 	/**
+	 * Please enter your LeetCode account name:
+	 */
+	PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: () => LocalizedString
+	/**
 	 * Profile
 	 */
 	PROFILE: () => LocalizedString
@@ -477,6 +505,10 @@ export type TranslationFunctions = {
 	 */
 	SLUG: () => LocalizedString
 	/**
+	 * Submit
+	 */
+	SUBMIT: () => LocalizedString
+	/**
 	 * Success
 	 */
 	SUCCESS: () => LocalizedString
@@ -497,6 +529,10 @@ export type TranslationFunctions = {
 	 */
 	TODAY: (arg: { date: Date }) => LocalizedString
 	/**
+	 * Token
+	 */
+	TOKEN: () => LocalizedString
+	/**
 	 * Tree Viewer
 	 */
 	TREE_VIEWER: () => LocalizedString
@@ -513,13 +549,25 @@ export type TranslationFunctions = {
 	 */
 	UPDATE: () => LocalizedString
 	/**
+	 * Username
+	 */
+	USERNAME: () => LocalizedString
+	/**
 	 * {name}'s Dashboard
 	 */
 	USER_DASHBOARD: (arg: { name: string }) => LocalizedString
 	/**
+	 * User Settings
+	 */
+	USER_SETTINGS: () => LocalizedString
+	/**
 	 * Visualize your LeetCode problems just form your code
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: () => LocalizedString
+	/**
+	 * Your LeetCode account name:
+	 */
+	YOUR_LEETCODE_ACCOUNT_NAME: () => LocalizedString
 	/**
 	 * Your name:
 	 */
