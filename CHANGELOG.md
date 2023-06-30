@@ -1,3 +1,11 @@
+# [1.168.0](https://github.com/mkayander/leetpal/compare/v1.167.1...v1.168.0) (2023-06-30)
+
+
+### Features
+
+* Added translation tokens ([46c24a7](https://github.com/mkayander/leetpal/commit/46c24a725eda87360dad070dbc9def416595e5f2))
+* Updated Spanish translations ([769f7ba](https://github.com/mkayander/leetpal/commit/769f7ba2c62bb38eceb375b01750fdb08206752e))
+
 ## [1.167.1](https://github.com/mkayander/leetpal/compare/v1.167.0...v1.167.1) (2023-06-28)
 
 
