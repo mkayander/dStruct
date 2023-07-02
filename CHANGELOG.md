@@ -1,3 +1,10 @@
+# [1.169.0](https://github.com/mkayander/leetpal/compare/v1.168.0...v1.169.0) (2023-07-02)
+
+
+### Features
+
+* Added public projects dump ([6326874](https://github.com/mkayander/leetpal/commit/6326874153cdb47078615333eb74700b667b5142))
+
 # [1.168.0](https://github.com/mkayander/leetpal/compare/v1.167.1...v1.168.0) (2023-06-30)
 
 
