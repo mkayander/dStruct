@@ -17,17 +17,18 @@ type SelectBarChipProps = ChipProps & {
   editLabel?: string;
 };
 
-export const SelectBarChip: React.FC<SelectBarChipProps> = ({
-  isCurrent,
-  isEditable,
-  onEditClick,
-  editLabel,
-  ...restProps
-}) => {
+export const SelectBarChip = React.forwardRef<
+  HTMLDivElement,
+  SelectBarChipProps
+>(function SelectBarChip(
+  { isCurrent, isEditable, onEditClick, editLabel, sx, ...restProps },
+  ref
+) {
   const theme = useTheme();
 
   return (
     <Box
+      ref={ref}
       position="relative"
       sx={{
         "&:hover": {
@@ -43,7 +44,6 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
         variant="filled"
         size="small"
         sx={{
-          transition: "all 0.3s",
           border: `1px solid ${
             isCurrent ? "transparent" : theme.palette.divider
           }`,
@@ -51,6 +51,8 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
           "&:hover": {
             background: isCurrent ? "primary.main" : "rgba(245,245,245,0.1)",
           },
+          cursor: "pointer !important",
+          ...sx,
         }}
       />
       {isEditable && onEditClick && (
@@ -84,7 +86,7 @@ export const SelectBarChip: React.FC<SelectBarChipProps> = ({
       )}
     </Box>
   );
-};
+});
 
 export const SelectBarChipSkeleton: React.FC<SkeletonProps> = (props) => {
   return (
