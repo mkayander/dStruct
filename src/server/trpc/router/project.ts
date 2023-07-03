@@ -434,6 +434,27 @@ export const projectRouter = router({
       })
     ),
 
+  reorderCases: projectOwnerProcedure
+    .input(
+      z.object({
+        projectId: z.string(),
+        caseIds: z.array(z.string())
+      })
+    )
+    .mutation(async ({ input, ctx }) =>
+      ctx.prisma.$transaction(input.caseIds.map((id, index) =>
+          ctx.prisma.playgroundTestCase.update({
+            where: {
+              id
+            },
+            data: {
+              order: index + 1
+            }
+          })
+        )
+      )
+    ),
+
   getSolutionBySlug: publicProcedure
     .input(
       z.object({

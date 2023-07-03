@@ -1,16 +1,14 @@
 "use client";
 
-import { Add } from "@mui/icons-material";
-import { CircularProgress, IconButton, Stack } from "@mui/material";
+import { type StackProps } from "@mui/material";
 import type { PlaygroundTestCase } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { type OnDragEndResponder } from "react-beautiful-dnd";
 
-import {
-  SelectBarChip,
-  SelectBarChipSkeleton,
-} from "#/components/SelectBar/SelectBarChip";
+import { DraggableSelectBarList } from "#/components/SelectBar/DraggableSelectBarList";
+import { DraggableSelectBarChip } from "#/components/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
 import { CaseModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -18,14 +16,18 @@ import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import type { RouterOutputs } from "#/utils/trpc";
 
-type TestCaseBrief = Pick<PlaygroundTestCase, "id" | "slug" | "title">;
+type TestCaseBrief = Pick<
+  PlaygroundTestCase,
+  "id" | "order" | "slug" | "title"
+>;
 
-type TestCaseSelectBarProps = {
+type TestCaseSelectBarProps = StackProps & {
   selectedProject: UseQueryResult<RouterOutputs["project"]["getBySlug"]>;
 };
 
 export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   selectedProject,
+  ...restProps
 }) => {
   const dispatch = useAppDispatch();
 
@@ -33,7 +35,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { projectSlug, caseSlug = "", setCase } = usePlaygroundSlugs();
+  const { projectSlug = "", caseSlug = "", setCase } = usePlaygroundSlugs();
 
   const invalidateQueries = async (slug?: string) => {
     await trpcUtils.project.getBySlug.invalidate(projectSlug);
@@ -44,6 +46,18 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   };
 
   const trpcUtils = trpc.useContext();
+
+  const updateCasesCache = (cases: TestCaseBrief[]) => {
+    trpcUtils.project.getBySlug.setData(projectSlug, (prevData) => {
+      if (!prevData) return prevData;
+
+      return {
+        ...prevData,
+        cases,
+      };
+    });
+  };
+
   const addCase = trpc.project.addCase.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
@@ -54,6 +68,13 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
       });
     },
   });
+
+  const reorderCases = trpc.project.reorderCases.useMutation({
+    onSuccess: async (data) => {
+      updateCasesCache(data);
+    },
+  });
+
   const deleteCase = trpc.project.deleteCase.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
@@ -65,6 +86,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   });
 
   const cases = selectedProject.data?.cases;
+
   const isLoading =
     selectedProject.isLoading || addCase.isLoading || deleteCase.isLoading;
 
@@ -87,7 +109,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     setIsModalOpen(true);
   };
 
-  const handleCaseAdd = () => {
+  const handleAddCase = () => {
     if (!selectedProject.data) return;
 
     const order = cases?.length ?? 0;
@@ -99,51 +121,61 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     });
   };
 
+  const onItemDragEnd: OnDragEndResponder = (result) => {
+    if (
+      !result.destination ||
+      result.destination.index === result.source.index ||
+      !cases ||
+      !selectedProject.data
+    ) {
+      return;
+    }
+
+    const { source, destination } = result;
+
+    const newList: TestCaseBrief[] = Array.from(cases);
+    const removed = newList.splice(source.index, 1);
+    newList.splice(destination.index, 0, ...removed);
+
+    updateCasesCache(newList);
+
+    reorderCases.mutate({
+      projectId: selectedProject.data.id,
+      caseIds: newList.map((solution) => solution.id),
+    });
+  };
+
   return (
     <>
       <CaseModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Stack direction="row" flexWrap="wrap" gap={1}>
-        {!selectedProject.data && (
-          <>
-            <SelectBarChipSkeleton width={112} />
-            <SelectBarChipSkeleton width={42} />
-            <SelectBarChipSkeleton />
-            <SelectBarChipSkeleton width={24} />
-          </>
-        )}
-
-        {cases?.map((testCase) => {
-          const isCurrent = testCase.slug === caseSlug;
-
-          return (
-            <SelectBarChip
+      <DraggableSelectBarList
+        droppableId="droppable-solutions"
+        isLoading={isLoading}
+        isEmpty={!selectedProject.data}
+        onItemDragEnd={onItemDragEnd}
+        addItemTitle="Add new test case 🧪"
+        handleAddItem={handleAddCase}
+        isEditable={isEditable}
+        {...restProps}
+      >
+        {(provided, droppableSnapshot) =>
+          cases?.map((testCase, index) => (
+            <DraggableSelectBarChip
+              id={testCase.id}
               key={testCase.id}
+              index={index}
+              droppableSnapshot={droppableSnapshot}
               editLabel="Edit test case"
-              isCurrent={isCurrent}
+              isCurrent={testCase.slug === caseSlug}
               isEditable={isEditable}
               label={testCase.title}
               disabled={isLoading}
               onClick={() => handleCaseClick(testCase)}
               onEditClick={() => handleCaseEdit(testCase)}
             />
-          );
-        })}
-
-        {isEditable && (
-          <IconButton
-            title="Add new test case 🧪"
-            size="small"
-            onClick={handleCaseAdd}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <CircularProgress size="1.3rem" />
-            ) : (
-              <Add fontSize="small" />
-            )}
-          </IconButton>
-        )}
-      </Stack>
+          ))
+        }
+      </DraggableSelectBarList>
     </>
   );
 };
