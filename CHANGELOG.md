@@ -1,3 +1,18 @@
+# [1.170.0](https://github.com/mkayander/leetpal/compare/v1.169.0...v1.170.0) (2023-07-03)
+
+
+### Features
+
+* Added solution select bar translation ([b67a4c3](https://github.com/mkayander/leetpal/commit/b67a4c35e24e59788a48cb1f0d9edaa1fecbde86))
+* Added strict mode droppable component ([ec87eea](https://github.com/mkayander/leetpal/commit/ec87eeae1a141186f0cf60262073d38c96c8a675))
+* Extracted draggable chip list to a separate component ([642f1cb](https://github.com/mkayander/leetpal/commit/642f1cba8c2154f5d334309b26c24fa2866c8ae3))
+* Extracted draggable chip variant ([9316ffe](https://github.com/mkayander/leetpal/commit/9316ffe9d26858c727264de1e36f96f6b4772b71))
+* Implemented "reorder solutions" TRPC procedure ([7df6d03](https://github.com/mkayander/leetpal/commit/7df6d039a70ba46f58570d5336f9507b462aea75))
+* Implemented solution list reordering ([dcf4454](https://github.com/mkayander/leetpal/commit/dcf4454c1f263900470f37ece0b9e3ba2396dce4))
+* Implemented test cases reordering feature ([84dbc6f](https://github.com/mkayander/leetpal/commit/84dbc6f41a9ff089e4458a7a8a6b74e17e9a273c))
+* Installed React Beautiful DND ([52aa016](https://github.com/mkayander/leetpal/commit/52aa016d93f5015e038f43b19d8b8141d943c346))
+* Updated select bar chip component to support DND ([b4e1439](https://github.com/mkayander/leetpal/commit/b4e14398c8e61129fdf244e44062ddf6df391756))
+
 # [1.169.0](https://github.com/mkayander/leetpal/compare/v1.168.0...v1.169.0) (2023-07-02)
 
 
