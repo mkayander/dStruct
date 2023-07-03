@@ -10,14 +10,10 @@ import {
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  type Responders,
-} from "react-beautiful-dnd";
+import { DragDropContext, type Responders } from "react-beautiful-dnd";
 
 import {
-  SelectBarChip,
+  DraggableSelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBar/SelectBarChip";
 import { StrictModeDroppable } from "#/components/SelectBar/StrictModeDroppable";
@@ -143,8 +139,6 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
       return;
     }
 
-    console.log(result);
-
     const { source, destination } = result;
 
     const newList: SolutionBrief[] = Array.from(solutions);
@@ -186,33 +180,19 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
               )}
 
               {solutions?.map((solution, index) => (
-                <Draggable
+                <DraggableSelectBarChip
+                  id={solution.id}
                   key={solution.id}
-                  draggableId={solution.id}
                   index={index}
-                >
-                  {(provided, snapshot) => (
-                    <SelectBarChip
-                      ref={provided.innerRef}
-                      key={solution.id}
-                      editLabel="Edit solution"
-                      isCurrent={solution.slug === solutionSlug}
-                      isEditable={
-                        droppableSnapshot.isDraggingOver ? false : isEditable
-                      }
-                      label={solution.title}
-                      disabled={isLoading}
-                      onClick={() => handleSolutionClick(solution)}
-                      onEditClick={() => handleSolutionEdit(solution)}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      sx={{
-                        boxShadow: snapshot.isDragging ? 4 : 0,
-                        backdropFilter: snapshot.isDragging ? "blur(6px)" : "",
-                      }}
-                    />
-                  )}
-                </Draggable>
+                  droppableSnapshot={droppableSnapshot}
+                  editLabel="Edit solution"
+                  isCurrent={solution.slug === solutionSlug}
+                  isEditable={isEditable}
+                  label={solution.title}
+                  disabled={isLoading}
+                  onClick={() => handleSolutionClick(solution)}
+                  onEditClick={() => handleSolutionEdit(solution)}
+                />
               ))}
               {provided.placeholder}
 

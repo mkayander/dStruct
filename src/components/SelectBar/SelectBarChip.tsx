@@ -9,10 +9,12 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
+import { Draggable, type DroppableStateSnapshot } from "react-beautiful-dnd";
 
 type SelectBarChipProps = ChipProps & {
   isCurrent: boolean;
   isEditable: boolean;
+  isDragging?: boolean;
   onEditClick?: React.MouseEventHandler<HTMLButtonElement>;
   editLabel?: string;
 };
@@ -21,7 +23,15 @@ export const SelectBarChip = React.forwardRef<
   HTMLDivElement,
   SelectBarChipProps
 >(function SelectBarChip(
-  { isCurrent, isEditable, onEditClick, editLabel, sx, ...restProps },
+  {
+    isCurrent,
+    isEditable,
+    isDragging,
+    onEditClick,
+    editLabel,
+    sx,
+    ...restProps
+  },
   ref
 ) {
   const theme = useTheme();
@@ -52,6 +62,8 @@ export const SelectBarChip = React.forwardRef<
             background: isCurrent ? "primary.main" : "rgba(245,245,245,0.1)",
           },
           cursor: "pointer !important",
+          boxShadow: isDragging ? 4 : 0,
+          backdropFilter: isDragging ? "blur(6px)" : "",
           ...sx,
         }}
       />
@@ -87,6 +99,36 @@ export const SelectBarChip = React.forwardRef<
     </Box>
   );
 });
+
+type DraggableSelectBarChipProps = SelectBarChipProps & {
+  id: string;
+  index: number;
+  droppableSnapshot: DroppableStateSnapshot;
+};
+
+export const DraggableSelectBarChip: React.FC<DraggableSelectBarChipProps> = ({
+  id,
+  index,
+  droppableSnapshot,
+  isEditable,
+  ...restProps
+}) => {
+  return (
+    <Draggable draggableId={id} index={index}>
+      {(provided, snapshot) => (
+        <SelectBarChip
+          ref={provided.innerRef}
+          editLabel="Edit solution"
+          isEditable={droppableSnapshot.isDraggingOver ? false : isEditable}
+          isDragging={snapshot.isDragging}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          {...restProps}
+        />
+      )}
+    </Draggable>
+  );
+};
 
 export const SelectBarChipSkeleton: React.FC<SkeletonProps> = (props) => {
   return (
