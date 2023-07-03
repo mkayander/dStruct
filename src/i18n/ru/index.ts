@@ -1,6 +1,7 @@
 import type { Translation } from "../i18n-types";
 
 const ru: Translation = {
+  ADD_NEW_SOLUTION: "Добавить новое решение",
   ARGUMENTS: "Аргументы",
   CALLSTACK: "Стек вызовов",
   CANCEL: "Отмена",

@@ -19,6 +19,10 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * A​d​d​ ​n​e​w​ ​s​o​l​u​t​i​o​n
+	 */
+	ADD_NEW_SOLUTION: string
+	/**
 	 * A​r​g​u​m​e​n​t​s
 	 */
 	ARGUMENTS: string
@@ -300,6 +304,10 @@ type RootTranslation = {
 }
 
 export type TranslationFunctions = {
+	/**
+	 * Add new solution
+	 */
+	ADD_NEW_SOLUTION: () => LocalizedString
 	/**
 	 * Arguments
 	 */

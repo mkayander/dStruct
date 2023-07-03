@@ -1,6 +1,7 @@
 import type { BaseTranslation } from "../i18n-types";
 
 const en: BaseTranslation = {
+  ADD_NEW_SOLUTION: "Add new solution",
   ARGUMENTS: "Arguments",
   CALLSTACK: "Callstack",
   CANCEL: "Cancel",

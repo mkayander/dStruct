@@ -18,6 +18,7 @@ import {
 } from "#/components/SelectBar/SelectBarChip";
 import { StrictModeDroppable } from "#/components/SelectBar/StrictModeDroppable";
 import { usePlaygroundSlugs } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { SolutionModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
@@ -37,6 +38,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   selectedProject,
   ...restProps
 }) => {
+  const { LL } = useI18nContext();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
@@ -198,7 +201,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
               {isEditable && (
                 <IconButton
-                  title="Add new solution 🚀"
+                  title={`${LL.ADD_NEW_SOLUTION()} 🚀`}
                   size="small"
                   onClick={handleAddSolution}
                   disabled={isLoading}
