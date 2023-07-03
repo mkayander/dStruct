@@ -1,22 +1,13 @@
 "use client";
 
-import { Add } from "@mui/icons-material";
-import {
-  CircularProgress,
-  IconButton,
-  Stack,
-  type StackProps,
-} from "@mui/material";
+import { type StackProps } from "@mui/material";
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { DragDropContext, type Responders } from "react-beautiful-dnd";
+import { type OnDragEndResponder } from "react-beautiful-dnd";
 
-import {
-  DraggableSelectBarChip,
-  SelectBarChipSkeleton,
-} from "#/components/SelectBar/SelectBarChip";
-import { StrictModeDroppable } from "#/components/SelectBar/StrictModeDroppable";
+import { DraggableSelectBarList } from "#/components/SelectBar/DraggableSelectBarList";
+import { DraggableSelectBarChip } from "#/components/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { SolutionModal } from "#/layouts/modals";
@@ -132,7 +123,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     setIsModalOpen(true);
   };
 
-  const onDragEnd: Responders["onDragEnd"] = (result) => {
+  const onItemDragEnd: OnDragEndResponder = (result) => {
     if (
       !result.destination ||
       result.destination.index === result.source.index ||
@@ -159,64 +150,34 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
   return (
     <>
       <SolutionModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <StrictModeDroppable
-          droppableId="droppable-solution"
-          direction="horizontal"
-        >
-          {(provided, droppableSnapshot) => (
-            <Stack
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              flexWrap="wrap"
-              direction="row"
-              gap={1}
-              {...restProps}
-            >
-              {!selectedProject.data && (
-                <>
-                  <SelectBarChipSkeleton width={112} />
-                  <SelectBarChipSkeleton width={42} />
-                  <SelectBarChipSkeleton />
-                  <SelectBarChipSkeleton width={24} />
-                </>
-              )}
-
-              {solutions?.map((solution, index) => (
-                <DraggableSelectBarChip
-                  id={solution.id}
-                  key={solution.id}
-                  index={index}
-                  droppableSnapshot={droppableSnapshot}
-                  editLabel="Edit solution"
-                  isCurrent={solution.slug === solutionSlug}
-                  isEditable={isEditable}
-                  label={solution.title}
-                  disabled={isLoading}
-                  onClick={() => handleSolutionClick(solution)}
-                  onEditClick={() => handleSolutionEdit(solution)}
-                />
-              ))}
-              {provided.placeholder}
-
-              {isEditable && (
-                <IconButton
-                  title={`${LL.ADD_NEW_SOLUTION()} 🚀`}
-                  size="small"
-                  onClick={handleAddSolution}
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <CircularProgress size="1.3rem" />
-                  ) : (
-                    <Add fontSize="small" />
-                  )}
-                </IconButton>
-              )}
-            </Stack>
-          )}
-        </StrictModeDroppable>
-      </DragDropContext>
+      <DraggableSelectBarList
+        droppableId="droppable-solutions"
+        isLoading={isLoading}
+        isEmpty={!selectedProject.data}
+        onItemDragEnd={onItemDragEnd}
+        addItemTitle={LL.ADD_NEW_SOLUTION()}
+        handleAddItem={handleAddSolution}
+        isEditable={isEditable}
+        {...restProps}
+      >
+        {(provided, droppableSnapshot) =>
+          solutions?.map((solution, index) => (
+            <DraggableSelectBarChip
+              id={solution.id}
+              key={solution.id}
+              index={index}
+              droppableSnapshot={droppableSnapshot}
+              editLabel="Edit solution"
+              isCurrent={solution.slug === solutionSlug}
+              isEditable={isEditable}
+              label={solution.title}
+              disabled={isLoading}
+              onClick={() => handleSolutionClick(solution)}
+              onEditClick={() => handleSolutionEdit(solution)}
+            />
+          ))
+        }
+      </DraggableSelectBarList>
     </>
   );
 };
