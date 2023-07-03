@@ -523,5 +523,26 @@ export const projectRouter = router({
           id: input.solutionId
         }
       })
+    ),
+
+  reorderSolutions: projectOwnerProcedure
+    .input(
+      z.object({
+        projectId: z.string(),
+        solutionIds: z.array(z.string())
+      })
+    )
+    .mutation(async ({ input, ctx }) =>
+      ctx.prisma.$transaction(input.solutionIds.map((id, index) =>
+          ctx.prisma.playgroundSolution.update({
+            where: {
+              id
+            },
+            data: {
+              order: index + 1
+            }
+          })
+        )
+      )
     )
 });
