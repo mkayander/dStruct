@@ -10,11 +10,17 @@ import {
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
+import {
+  DragDropContext,
+  Draggable,
+  type Responders,
+} from "react-beautiful-dnd";
 
 import {
   SelectBarChip,
   SelectBarChipSkeleton,
 } from "#/components/SelectBar/SelectBarChip";
+import { StrictModeDroppable } from "#/components/SelectBar/StrictModeDroppable";
 import { usePlaygroundSlugs } from "#/hooks";
 import { SolutionModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -49,6 +55,17 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
   const trpcUtils = trpc.useContext();
 
+  const updateSolutionsCache = (solutions: SolutionBrief[]) => {
+    trpcUtils.project.getBySlug.setData(projectSlug, (prevData) => {
+      if (!prevData) return prevData;
+
+      return {
+        ...prevData,
+        solutions,
+      };
+    });
+  };
+
   const invalidateQueries = async (slug?: string) => {
     await trpcUtils.project.getBySlug.invalidate(projectSlug);
     await trpcUtils.project.getSolutionBySlug.invalidate({
@@ -61,6 +78,12 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
       void setSolution(data.slug);
+    },
+  });
+
+  const reorderSolutions = trpc.project.reorderSolutions.useMutation({
+    onSuccess: async (newList) => {
+      updateSolutionsCache(newList);
     },
   });
 
@@ -110,51 +133,107 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     setIsModalOpen(true);
   };
 
+  const onDragEnd: Responders["onDragEnd"] = (result) => {
+    if (
+      !result.destination ||
+      result.destination.index === result.source.index ||
+      !solutions ||
+      !selectedProject.data
+    ) {
+      return;
+    }
+
+    console.log(result);
+
+    const { source, destination } = result;
+
+    const newList: SolutionBrief[] = Array.from(solutions);
+    const removed = newList.splice(source.index, 1);
+    newList.splice(destination.index, 0, ...removed);
+
+    updateSolutionsCache(newList);
+
+    reorderSolutions.mutate({
+      projectId: selectedProject.data.id,
+      solutionIds: newList.map((solution) => solution.id),
+    });
+  };
+
   return (
     <>
       <SolutionModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Stack flexWrap="wrap" direction="row" gap={1} {...restProps}>
-        {!selectedProject.data && (
-          <>
-            <SelectBarChipSkeleton width={112} />
-            <SelectBarChipSkeleton width={42} />
-            <SelectBarChipSkeleton />
-            <SelectBarChipSkeleton width={24} />
-          </>
-        )}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <StrictModeDroppable
+          droppableId="droppable-solution"
+          direction="horizontal"
+        >
+          {(provided, droppableSnapshot) => (
+            <Stack
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              flexWrap="wrap"
+              direction="row"
+              gap={1}
+              {...restProps}
+            >
+              {!selectedProject.data && (
+                <>
+                  <SelectBarChipSkeleton width={112} />
+                  <SelectBarChipSkeleton width={42} />
+                  <SelectBarChipSkeleton />
+                  <SelectBarChipSkeleton width={24} />
+                </>
+              )}
 
-        {solutions?.map((solution) => {
-          const isCurrent = solution.slug === solutionSlug;
+              {solutions?.map((solution, index) => (
+                <Draggable
+                  key={solution.id}
+                  draggableId={solution.id}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <SelectBarChip
+                      ref={provided.innerRef}
+                      key={solution.id}
+                      editLabel="Edit solution"
+                      isCurrent={solution.slug === solutionSlug}
+                      isEditable={
+                        droppableSnapshot.isDraggingOver ? false : isEditable
+                      }
+                      label={solution.title}
+                      disabled={isLoading}
+                      onClick={() => handleSolutionClick(solution)}
+                      onEditClick={() => handleSolutionEdit(solution)}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      sx={{
+                        boxShadow: snapshot.isDragging ? 4 : 0,
+                        backdropFilter: snapshot.isDragging ? "blur(6px)" : "",
+                      }}
+                    />
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
 
-          return (
-            <SelectBarChip
-              key={solution.id}
-              editLabel="Edit solution"
-              isCurrent={isCurrent}
-              isEditable={isEditable}
-              label={solution.title}
-              disabled={isLoading}
-              onClick={() => handleSolutionClick(solution)}
-              onEditClick={() => handleSolutionEdit(solution)}
-            />
-          );
-        })}
-
-        {isEditable && (
-          <IconButton
-            title="Add new solution 🚀"
-            size="small"
-            onClick={handleAddSolution}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <CircularProgress size="1.3rem" />
-            ) : (
-              <Add fontSize="small" />
-            )}
-          </IconButton>
-        )}
-      </Stack>
+              {isEditable && (
+                <IconButton
+                  title="Add new solution 🚀"
+                  size="small"
+                  onClick={handleAddSolution}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <CircularProgress size="1.3rem" />
+                  ) : (
+                    <Add fontSize="small" />
+                  )}
+                </IconButton>
+              )}
+            </Stack>
+          )}
+        </StrictModeDroppable>
+      </DragDropContext>
     </>
   );
 };
