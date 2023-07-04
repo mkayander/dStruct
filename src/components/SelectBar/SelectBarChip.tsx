@@ -114,7 +114,7 @@ export const DraggableSelectBarChip: React.FC<DraggableSelectBarChipProps> = ({
   ...restProps
 }) => {
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable draggableId={id} index={index} isDragDisabled={!isEditable}>
       {(provided, snapshot) => (
         <SelectBarChip
           ref={provided.innerRef}

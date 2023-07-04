@@ -46,7 +46,11 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
 }) => {
   return (
     <DragDropContext onDragEnd={onItemDragEnd}>
-      <StrictModeDroppable droppableId={droppableId} direction="horizontal">
+      <StrictModeDroppable
+        droppableId={droppableId}
+        direction="horizontal"
+        isDropDisabled={!isEditable}
+      >
         {(provided, droppableSnapshot) => (
           <Stack
             {...provided.droppableProps}
