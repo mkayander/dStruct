@@ -57,16 +57,15 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
             ref={provided.innerRef}
             flexWrap="wrap"
             direction="row"
-            gap={1}
             {...restProps}
           >
             {isEmpty && (
-              <>
+              <Stack direction="row" gap={1}>
                 <SelectBarChipSkeleton width={112} />
                 <SelectBarChipSkeleton width={42} />
                 <SelectBarChipSkeleton />
                 <SelectBarChipSkeleton width={24} />
-              </>
+              </Stack>
             )}
 
             {children(provided, droppableSnapshot)}
