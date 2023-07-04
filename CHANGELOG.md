@@ -1,3 +1,11 @@
+## [1.170.1](https://github.com/mkayander/leetpal/compare/v1.170.0...v1.170.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* Disable drag when items are not editable ([586403f](https://github.com/mkayander/leetpal/commit/586403f7885f24137ee7f340a51d90f259d47a2a))
+* Improved draggable items layout ([2fd3da4](https://github.com/mkayander/leetpal/commit/2fd3da478be80bf31616ade7c05510d3001fa493))
+
 # [1.170.0](https://github.com/mkayander/leetpal/compare/v1.169.0...v1.170.0) (2023-07-03)
 
 
