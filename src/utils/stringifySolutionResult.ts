@@ -15,7 +15,9 @@ export const safeStringify = (val: unknown) =>
         return `Set (${value.size}) {${[...value].join(", ")}}`;
       }
       if (value instanceof Map) {
-        return `Map {${[...value].join(", ")}}`;
+        return `Map (${value.size}) {${[...value]
+          .map(([key, val]) => `${key} => ${val}`)
+          .join(", ")}}`;
       }
 
       return value;
