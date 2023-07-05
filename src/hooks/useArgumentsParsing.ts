@@ -286,9 +286,9 @@ export const useArgumentsParsing = () => {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
       } else if (isArgumentArrayType(arg)) {
-        const childIds = parseArrayArgument(arg, argsInfo, dispatch);
-        if (childIds)
-          childIds.forEach((name) => removedArrayNames.delete(name));
+        const childNames = parseArrayArgument(arg, argsInfo, dispatch);
+        if (childNames)
+          childNames.forEach((name) => removedArrayNames.delete(name));
         removedArrayNames.delete(arg.name);
       }
     }
