@@ -1,3 +1,15 @@
+# [1.172.0](https://github.com/mkayander/leetpal/compare/v1.171.0...v1.172.0) (2023-07-05)
+
+
+### Bug Fixes
+
+* Fixed css property name ([a03e56b](https://github.com/mkayander/leetpal/commit/a03e56bfe029acac3866d3cfa6bde1ffb2295f2b))
+
+
+### Features
+
+* Implemented matrix input parsing ([b728525](https://github.com/mkayander/leetpal/commit/b728525044e2cfefc0b7b0b98e93a7f4cac47172))
+
 # [1.171.0](https://github.com/mkayander/leetpal/compare/v1.170.1...v1.171.0) (2023-07-05)
 
 
