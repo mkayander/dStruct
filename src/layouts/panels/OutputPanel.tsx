@@ -28,7 +28,7 @@ const ConsoleOutput: React.FC = () => {
           p: 1,
           borderRadius: 2,
           div: {
-            "white-space": "pre-wrap",
+            whiteSpace: "pre-wrap",
           },
         }}
       >
