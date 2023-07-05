@@ -1,8 +1,8 @@
 "use client";
 
 import { TextField } from "@mui/material";
+import Joi from "joi";
 import React, { useEffect, useState } from "react";
-import * as yup from "yup";
 
 import { BooleanToggleInput } from "#/components/ArgsEditor/BooleanToggleInput";
 import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
@@ -16,13 +16,20 @@ import {
 } from "#/utils/argumentObject";
 
 const validationSchemaMap = {
-  [ArgumentType.ARRAY]: yup
-    .array()
-    .typeError((params) => `This must be an array, but got ${params.value}`),
-  [ArgumentType.BINARY_TREE]: yup.array().of(yup.number().nullable()),
-  [ArgumentType.LINKED_LIST]: yup.array().of(yup.number()),
-  [ArgumentType.MATRIX]: yup.array().of(yup.array().of(yup.number())),
-  [ArgumentType.GRAPH]: yup.array().of(yup.array().of(yup.number())),
+  [ArgumentType.ARRAY]: Joi.array(),
+  [ArgumentType.BINARY_TREE]: Joi.array().items(
+    Joi.number().strict().allow(null)
+  ),
+  [ArgumentType.LINKED_LIST]: Joi.array().items(Joi.number()),
+  [ArgumentType.MATRIX]: Joi.array().items(
+    Joi.array().items(Joi.number().strict(), Joi.string()).messages({
+      "array.includes":
+        "Array item at {{#label}} must be either a number or a string",
+    })
+  ),
+  [ArgumentType.GRAPH]: Joi.array().items(
+    Joi.array().items(Joi.number().strict())
+  ),
 } as const;
 
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {

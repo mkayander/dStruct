@@ -1,15 +1,15 @@
 "use client";
 
 import { type TextFieldProps } from "@mui/material";
+import Joi from "joi";
 import React, { useState } from "react";
-import type * as yup from "yup";
 
 import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
 
 type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
   onChange: (value: string) => void;
-  validationSchema: yup.BaseSchema;
+  validationSchema: Joi.Schema;
 };
 
 export const JsonInput: React.FC<BinaryTreeInputProps> = ({
@@ -28,9 +28,7 @@ export const JsonInput: React.FC<BinaryTreeInputProps> = ({
 
     try {
       const parsed = JSON.parse(value);
-      validationSchema.validateSync(parsed, {
-        strict: true,
-      });
+      Joi.assert(parsed, validationSchema);
       setInputError(null);
     } catch (e: unknown) {
       if (e instanceof Error) {
