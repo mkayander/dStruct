@@ -192,7 +192,7 @@ const parseArrayArgument = (
   arg: ArgumentObject<ArgumentArrayType>,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch
-) => {
+): string[] | void => {
   if (argsInfo[arg.name]?.isParsed) return;
 
   dispatch(
@@ -203,6 +203,29 @@ const parseArrayArgument = (
 
   let array: Array<number | string> | null = null;
 
+  if (arg.type === ArgumentType.MATRIX) {
+    try {
+      const parsed = JSON.parse(arg.input);
+      const childNames = [];
+      for (let i = 0; i < parsed.length; i++) {
+        const name = `${arg.name}-[${i}]`;
+        childNames.push(name);
+        parseArrayArgument(
+          {
+            name,
+            type: ArgumentType.ARRAY,
+            input: JSON.stringify(parsed[i]),
+            order: arg.order + i,
+          },
+          argsInfo,
+          dispatch
+        );
+      }
+      return childNames;
+    } catch (e) {
+      console.warn(e);
+    }
+  }
   if (arg.type === ArgumentType.ARRAY) {
     try {
       array = JSON.parse(arg.input);
@@ -263,7 +286,9 @@ export const useArgumentsParsing = () => {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
       } else if (isArgumentArrayType(arg)) {
-        parseArrayArgument(arg, argsInfo, dispatch);
+        const childIds = parseArrayArgument(arg, argsInfo, dispatch);
+        if (childIds)
+          childIds.forEach((name) => removedArrayNames.delete(name));
         removedArrayNames.delete(arg.name);
       }
     }

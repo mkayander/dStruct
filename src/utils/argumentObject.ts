@@ -16,7 +16,10 @@ export type ArgumentTreeType =
   | ArgumentType.GRAPH
   | ArgumentType.LINKED_LIST;
 
-export type ArgumentArrayType = ArgumentType.ARRAY | ArgumentType.STRING;
+export type ArgumentArrayType =
+  | ArgumentType.ARRAY
+  | ArgumentType.MATRIX
+  | ArgumentType.STRING;
 
 export const argumentTreeTypeValues = new Set([
   ArgumentType.BINARY_TREE,
@@ -53,7 +56,11 @@ export function isArgumentArrayType(
     return isArgumentArrayType(arg.type);
   }
 
-  return arg === ArgumentType.ARRAY || arg === ArgumentType.STRING;
+  return (
+    arg === ArgumentType.ARRAY ||
+    arg === ArgumentType.MATRIX ||
+    arg === ArgumentType.STRING
+  );
 }
 
 export type ArgumentObject<T extends ArgumentType = ArgumentType> = {
