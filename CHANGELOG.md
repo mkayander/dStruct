@@ -1,3 +1,12 @@
+# [1.171.0](https://github.com/mkayander/leetpal/compare/v1.170.1...v1.171.0) (2023-07-05)
+
+
+### Features
+
+* Installed Joi ([03d8466](https://github.com/mkayander/leetpal/commit/03d846608e9df5b035562b4ca38cf9d6abecf3a2))
+* Updated Next types ([4153fad](https://github.com/mkayander/leetpal/commit/4153fad0ff7873083896e85f8cc63e871f6cea5c))
+* Validate arg input with Joi ([bcaeae5](https://github.com/mkayander/leetpal/commit/bcaeae5803be391a80503903e37deef9e85b7c06))
+
 ## [1.170.1](https://github.com/mkayander/leetpal/compare/v1.170.0...v1.170.1) (2023-07-04)
 
 
