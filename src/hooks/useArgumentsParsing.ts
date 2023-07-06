@@ -188,11 +188,38 @@ const parseTreeArgument = (
   );
 };
 
+export const getChildArrayName = (arg: ArgumentObject, index: number) =>
+  `${arg.name}-[${index}]`;
+
+type ArrayArg = ArgumentObject<ArgumentArrayType>;
+
+export const getMatrixChildArrayArgs = (
+  arg: ArrayArg,
+  onParsed?: (arg: ArrayArg, index: number) => void
+): ArrayArg[] => {
+  const input = JSON.parse(arg.input) as Array<number | string>[];
+  const childArgs: ArrayArg[] = [];
+
+  for (let i = 0; i < input.length; i++) {
+    const name = getChildArrayName(arg, i);
+    const newArg: ArrayArg = {
+      name,
+      type: ArgumentType.ARRAY,
+      input: JSON.stringify(input[i]),
+      order: arg.order + i,
+    };
+    childArgs.push(newArg);
+    onParsed?.(newArg, i);
+  }
+
+  return childArgs;
+};
+
 const parseArrayArgument = (
-  arg: ArgumentObject<ArgumentArrayType>,
+  arg: ArrayArg,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch
-): string[] | void => {
+): ArrayArg[] | void => {
   if (argsInfo[arg.name]?.isParsed) return;
 
   dispatch(
@@ -205,23 +232,9 @@ const parseArrayArgument = (
 
   if (arg.type === ArgumentType.MATRIX) {
     try {
-      const parsed = JSON.parse(arg.input);
-      const childNames = [];
-      for (let i = 0; i < parsed.length; i++) {
-        const name = `${arg.name}-[${i}]`;
-        childNames.push(name);
-        parseArrayArgument(
-          {
-            name,
-            type: ArgumentType.ARRAY,
-            input: JSON.stringify(parsed[i]),
-            order: arg.order + i,
-          },
-          argsInfo,
-          dispatch
-        );
-      }
-      return childNames;
+      return getMatrixChildArrayArgs(arg, (childArg) =>
+        parseArrayArgument(childArg, argsInfo, dispatch)
+      );
     } catch (e) {
       console.warn(e);
     }
@@ -288,7 +301,7 @@ export const useArgumentsParsing = () => {
       } else if (isArgumentArrayType(arg)) {
         const childNames = parseArrayArgument(arg, argsInfo, dispatch);
         if (childNames)
-          childNames.forEach((name) => removedArrayNames.delete(name));
+          childNames.forEach(({ name }) => removedArrayNames.delete(name));
         removedArrayNames.delete(arg.name);
       }
     }

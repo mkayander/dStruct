@@ -2,6 +2,7 @@ import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
+import { getMatrixChildArrayArgs } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
 import type {
   ArrayData,
@@ -11,7 +12,11 @@ import type {
   TreeData,
   TreeDataState,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { type ArgumentObject, ArgumentType } from "#/utils/argumentObject";
+import {
+  type ArgumentObject,
+  ArgumentType,
+  isArgumentArrayType,
+} from "#/utils/argumentObject";
 
 const createRuntimeTree = (
   nodesData: TreeData | undefined,
@@ -63,6 +68,29 @@ const createRuntimeArray = (
   return new ControlledArray(array, arg.name, arrayDataState, dispatch);
 };
 
+const createRuntimeMatrix = (
+  arrayStore: ArrayDataState,
+  arg: ArgumentObject,
+  dispatch: AppDispatch
+) => {
+  if (!isArgumentArrayType(arg)) return null;
+
+  const input = JSON.parse(arg.input) as (number | string)[][];
+  const matrix: ReturnType<typeof createRuntimeArray>[] = new Array(
+    input.length
+  );
+
+  getMatrixChildArrayArgs(arg, (childArg, index) => {
+    matrix[index] = createRuntimeArray(
+      arrayStore[childArg.name],
+      childArg,
+      dispatch
+    );
+  });
+
+  return matrix;
+};
+
 export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
   treeStore: TreeDataState,
@@ -86,7 +114,7 @@ export const createCaseRuntimeArgs = (
         return createRuntimeArray(arrayStore[arg.name], arg, dispatch);
 
       case ArgumentType.MATRIX:
-        return JSON.parse(arg.input) as number[][];
+        return createRuntimeMatrix(arrayStore, arg, dispatch);
     }
   });
 };
