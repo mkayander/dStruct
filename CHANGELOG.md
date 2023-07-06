@@ -1,3 +1,10 @@
+# [1.173.0](https://github.com/mkayander/leetpal/compare/v1.172.1...v1.173.0) (2023-07-06)
+
+
+### Features
+
+* Implemented matrix runtime args parsing with Proxy arrays ([25e19d9](https://github.com/mkayander/leetpal/commit/25e19d94b1504c51046fff259a2ab19af73a5b4c))
+
 ## [1.172.1](https://github.com/mkayander/leetpal/compare/v1.172.0...v1.172.1) (2023-07-06)
 
 
