@@ -1,3 +1,10 @@
+## [1.172.1](https://github.com/mkayander/leetpal/compare/v1.172.0...v1.172.1) (2023-07-06)
+
+
+### Bug Fixes
+
+* Improved Map stringify logic ([bc53085](https://github.com/mkayander/leetpal/commit/bc53085649980b665c94f65726b2d280bc275b1e))
+
 # [1.172.0](https://github.com/mkayander/leetpal/compare/v1.171.0...v1.172.0) (2023-07-05)
 
 
