@@ -20,6 +20,7 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
   return (
     <Stack
       sx={{
+        width: "fit-content",
         "& > *:not(:last-of-type)": {
           borderBottom: `1px solid ${alpha(theme.palette.primary.light, 0.3)}}`,
         },
