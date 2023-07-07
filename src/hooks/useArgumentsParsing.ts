@@ -200,16 +200,17 @@ export const getMatrixChildArrayArgs = (
   arg: ArrayArg,
   onParsed?: (arg: ArrayArg, index: number) => void
 ): ArrayArg[] => {
-  const input = JSON.parse(arg.input) as Array<number | string>[];
+  const input = JSON.parse(arg.input) as (Array<number | string> | string)[];
   const childArgs: ArrayArg[] = [];
 
   for (let i = 0; i < input.length; i++) {
     const name = getChildArrayName(arg, i);
+    const item = input[i];
     const newArg: ArrayArg = {
       name,
       parentName: arg.name,
-      type: ArgumentType.ARRAY,
-      input: JSON.stringify(input[i]),
+      type: Array.isArray(item) ? ArgumentType.ARRAY : ArgumentType.STRING,
+      input: JSON.stringify(item),
       order: arg.order + i + 1,
     };
     childArgs.push(newArg);
