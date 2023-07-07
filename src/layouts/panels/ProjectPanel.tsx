@@ -23,7 +23,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
 import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
-import { useArgumentsParsing, usePlaygroundSlugs } from "#/hooks";
+import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
