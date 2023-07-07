@@ -40,11 +40,13 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({ side = "left" }) => {
 
 type ArrayStructureViewProps = {
   data: ArrayData;
+  isGrid?: boolean;
   sx?: SxProps;
 };
 
 export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
   data,
+  isGrid,
 }) => {
   const items = useMemo(() => {
     return arrayDataItemSelectors.selectAll(data.nodes);
@@ -73,7 +75,12 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
       <Stack direction="row">
         {items.length > 0 ? (
           items.map((item) => (
-            <ArrayItem key={item.id} colorMap={data.colorMap} {...item} />
+            <ArrayItem
+              key={item.id}
+              colorMap={data.colorMap}
+              isGrid={isGrid}
+              {...item}
+            />
           ))
         ) : (
           <Box

@@ -6,19 +6,21 @@ import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 type ArrayItemProps = ArrayItemData & {
   colorMap: Record<number | string, string>;
+  isGrid?: boolean;
 };
 
 export const ArrayItem: React.FC<ArrayItemProps> = ({
   value,
   color,
   colorMap,
+  isGrid,
 }) => {
   const valueColor = colorMap[value];
   const { nodeColor } = useNodeColors(valueColor || color, false);
 
   return (
     <Box
-      className="array-item"
+      className={`array-item ${isGrid ? "grid-item" : ""}`}
       sx={{
         position: "relative",
         minWidth: 42,
@@ -58,6 +60,13 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
             height: 32,
             backgroundColor: "primary.light",
             opacity: 0.6,
+          },
+
+          "&.grid-item": {
+            "&::before": {
+              height: "100%",
+              opacity: 0.3,
+            },
           },
         },
       }}
