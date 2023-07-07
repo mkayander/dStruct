@@ -6,6 +6,7 @@ import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { ArrayStructureView } from "#/components/TreeViewer/ArrayStructureView";
+import { MatrixStructureView } from "#/components/TreeViewer/MatrixStructureView";
 import { NodesView } from "#/components/TreeViewer/NodesView";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
@@ -114,11 +115,26 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const arrayStructures = useMemo(() => {
     if (!arrayState) return null;
 
-    return Object.entries(arrayState)
-      .sort(([, { order: a }], [, { order: b }]) => a - b)
-      .map(([arrayName, data]) => (
-        <ArrayStructureView key={arrayName} data={data} />
-      ));
+    const sorted = Object.entries(arrayState).sort(
+      ([, { order: a }], [, { order: b }]) => a - b
+    );
+    const arrayNodes = [];
+
+    for (const [arrayName, data] of sorted) {
+      if (data.argType === ArgumentType.MATRIX) {
+        arrayNodes.push(
+          <MatrixStructureView
+            key={arrayName}
+            data={data}
+            arrayState={arrayState}
+          />
+        );
+      } else if (!data.parentName) {
+        arrayNodes.push(<ArrayStructureView key={arrayName} data={data} />);
+      }
+    }
+
+    return arrayNodes;
   }, [arrayState]);
 
   return (
