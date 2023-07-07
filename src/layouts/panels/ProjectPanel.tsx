@@ -97,8 +97,6 @@ export const ProjectPanel: React.FC = () => {
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
-  useArgumentsParsing();
-
   const problemLink = selectedProject.data?.lcLink;
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {

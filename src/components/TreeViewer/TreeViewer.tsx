@@ -7,7 +7,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 
 import { ArrayStructureView } from "#/components/TreeViewer/ArrayStructureView";
 import { NodesView } from "#/components/TreeViewer/NodesView";
-import { useNodesRuntimeUpdates } from "#/hooks";
+import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
@@ -46,6 +46,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     return () => clearTimeout(timeoutId);
   }, [treeState]);
+
+  useArgumentsParsing();
 
   useNodesRuntimeUpdates(playbackInterval, replayCount);
 
