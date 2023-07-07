@@ -25,7 +25,8 @@ const validationSchemaMap = {
     Joi.array().items(Joi.number().strict(), Joi.string()).messages({
       "array.includes":
         "Array item at {{#label}} must be either a number or a string",
-    })
+    }),
+    Joi.string()
   ),
   [ArgumentType.GRAPH]: Joi.array().items(
     Joi.array().items(Joi.number().strict())
