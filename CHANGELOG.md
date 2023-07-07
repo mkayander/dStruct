@@ -1,3 +1,21 @@
+# [1.174.0](https://github.com/mkayander/leetpal/compare/v1.173.0...v1.174.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* Make "isParsed" optional ([1d25552](https://github.com/mkayander/leetpal/commit/1d255526ec5ca8196b7211a14fe44f9e75032d4e))
+* Removed unused import ([bd6a872](https://github.com/mkayander/leetpal/commit/bd6a8725710d6953c1605660bf238fb81de9f3fb))
+
+
+### Features
+
+* Added array data fields ([887c314](https://github.com/mkayander/leetpal/commit/887c314654d8cf18cb0c8fca0e21982f5bdbf9f6))
+* Implemented Matrix structure view component ([1948f1e](https://github.com/mkayander/leetpal/commit/1948f1e86e6b5840dd8d2761be0e33f668d42bb9))
+* Prevent project panel re-renders on viewer item updates ([a541269](https://github.com/mkayander/leetpal/commit/a54126938a6717ee4c25b843895c8110f0c9e054))
+* Updated array item appearance in matrix ([21f1f28](https://github.com/mkayander/leetpal/commit/21f1f28ca70db718e0c853aeac5a22366483a4c8))
+* Updated matrix structure parsing ([b9b9388](https://github.com/mkayander/leetpal/commit/b9b938851bdd38e722aa3465b95bfc75f29b92d0))
+* Use matrix structure view ([3e80a2c](https://github.com/mkayander/leetpal/commit/3e80a2c997b8192367fa70ab6fa6dbccc3d62abb))
+
 # [1.173.0](https://github.com/mkayander/leetpal/compare/v1.172.1...v1.173.0) (2023-07-06)
 
 
