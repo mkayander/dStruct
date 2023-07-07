@@ -73,6 +73,7 @@ export const caseSlice = createSlice({
       action: PayloadAction<{ name: string; data: ArgumentInfo }>
     ) => {
       const { name, data } = action.payload;
+      if (!state.args.entities[name]) return;
       Object.assign((state.info[name] ??= {}), data);
     },
     clear: () => ({ ...initialState }),
