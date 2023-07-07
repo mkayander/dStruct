@@ -184,7 +184,10 @@ const parseTreeArgument = (
     })
   );
   dispatch(
-    caseSlice.actions.setIsArgumentParsed({ name: arg.name, value: true })
+    caseSlice.actions.updateArgumentInfo({
+      name: arg.name,
+      data: { isParsed: true },
+    })
   );
 };
 
@@ -279,7 +282,10 @@ const parseArrayArgument = (
   );
 
   dispatch(
-    caseSlice.actions.setIsArgumentParsed({ name: arg.name, value: true })
+    caseSlice.actions.updateArgumentInfo({
+      name: arg.name,
+      data: { isParsed: true },
+    })
   );
 };
 

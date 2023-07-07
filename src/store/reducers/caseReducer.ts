@@ -68,14 +68,12 @@ export const caseSlice = createSlice({
         state.info = {};
       }
     },
-    setIsArgumentParsed: (
+    updateArgumentInfo: (
       state,
-      action: PayloadAction<{ name: string; value: boolean }>
+      action: PayloadAction<{ name: string; data: ArgumentInfo }>
     ) => {
-      const { name, value } = action.payload;
-      state.info[name] = {
-        isParsed: value,
-      };
+      const { name, data } = action.payload;
+      Object.assign((state.info[name] ??= {}), data);
     },
     clear: () => ({ ...initialState }),
   },
