@@ -14,7 +14,7 @@ const argumentAdapter = createEntityAdapter<ArgumentObject>({
 });
 
 export type ArgumentInfo = {
-  isParsed: boolean;
+  isParsed?: boolean;
 };
 
 type CaseState = {
