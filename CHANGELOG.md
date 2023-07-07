@@ -1,3 +1,10 @@
+## [1.174.2](https://github.com/mkayander/leetpal/compare/v1.174.1...v1.174.2) (2023-07-07)
+
+
+### Bug Fixes
+
+* Fixed matrix layout ([3bda366](https://github.com/mkayander/leetpal/commit/3bda366b70b574281cfd7a2ee50d3a8095091b21))
+
 ## [1.174.1](https://github.com/mkayander/leetpal/compare/v1.174.0...v1.174.1) (2023-07-07)
 
 
