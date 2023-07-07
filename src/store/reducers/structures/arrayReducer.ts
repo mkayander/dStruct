@@ -28,6 +28,8 @@ export type ArrayItemData = StructureNode & {
 export type ArrayData = BaseStructureItem<ArrayItemData> & {
   order: number;
   argType: ArgumentArrayType;
+  parentName?: string;
+  childNames?: string[];
 };
 
 export type ArrayDataState = BaseStructureState<ArrayData>;
@@ -39,11 +41,15 @@ export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
 
 const getInitialData = (
   order: number,
-  argType: ArgumentArrayType
+  argType: ArgumentArrayType,
+  parentName?: string,
+  childNames?: string[]
 ): ArrayData => ({
   ...getInitialDataBase(arrayDataAdapter),
   order,
   argType,
+  parentName,
+  childNames,
 });
 
 const initialState: ArrayDataState = {};
@@ -64,12 +70,14 @@ export const arrayStructureSlice = createSlice({
       state,
       action: PayloadAction<{
         name: string;
+        parentName?: string;
+        childNames?: string[];
         order: number;
         argType: ArgumentArrayType;
       }>
     ) => {
-      const { name, order, argType } = action.payload;
-      state[name] = getInitialData(order, argType);
+      const { name, order, argType, parentName, childNames } = action.payload;
+      state[name] = getInitialData(order, argType, parentName, childNames);
     },
     create: (
       state,

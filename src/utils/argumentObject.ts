@@ -65,6 +65,7 @@ export function isArgumentArrayType(
 
 export type ArgumentObject<T extends ArgumentType = ArgumentType> = {
   name: string;
+  parentName?: string;
   type: T;
   order: number;
   input: string;
