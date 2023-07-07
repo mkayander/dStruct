@@ -1,3 +1,10 @@
+## [1.174.1](https://github.com/mkayander/leetpal/compare/v1.174.0...v1.174.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* Don't set arg info for unknown arguments ([ef72862](https://github.com/mkayander/leetpal/commit/ef72862f2a62b0c7259d4ec60a027a308d4e500e))
+
 # [1.174.0](https://github.com/mkayander/leetpal/compare/v1.173.0...v1.174.0) (2023-07-07)
 
 
