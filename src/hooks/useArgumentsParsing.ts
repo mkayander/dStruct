@@ -207,9 +207,10 @@ export const getMatrixChildArrayArgs = (
     const name = getChildArrayName(arg, i);
     const newArg: ArrayArg = {
       name,
+      parentName: arg.name,
       type: ArgumentType.ARRAY,
       input: JSON.stringify(input[i]),
-      order: arg.order + i,
+      order: arg.order + i + 1,
     };
     childArgs.push(newArg);
     onParsed?.(newArg, i);
@@ -222,7 +223,7 @@ const parseArrayArgument = (
   arg: ArrayArg,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch
-): ArrayArg[] | void => {
+): ArrayArg[] | undefined => {
   if (argsInfo[arg.name]?.isParsed) return;
 
   dispatch(
@@ -233,9 +234,10 @@ const parseArrayArgument = (
 
   let array: Array<number | string> | null = null;
 
+  let childArgs: ArrayArg[] | undefined;
   if (arg.type === ArgumentType.MATRIX) {
     try {
-      return getMatrixChildArrayArgs(arg, (childArg) =>
+      childArgs = getMatrixChildArrayArgs(arg, (childArg) =>
         parseArrayArgument(childArg, argsInfo, dispatch)
       );
     } catch (e) {
@@ -252,34 +254,37 @@ const parseArrayArgument = (
     array = arg.input.split("");
   }
 
-  if (!array) return;
-
-  const newItems: ArrayItemData[] = [];
-
-  for (let i = 0; i < array.length; i++) {
-    const value = array[i];
-    if (value === undefined) continue;
-    const newId = uuid4.generate();
-    newItems[i] = {
-      id: newId,
-      value,
-      index: i,
-    };
+  let newItems: ArrayItemData[] | null = null;
+  if (array) {
+    newItems = [];
+    for (let i = 0; i < array.length; i++) {
+      const value = array[i];
+      if (value === undefined) continue;
+      const newId = uuid4.generate();
+      newItems[i] = {
+        id: newId,
+        value,
+        index: i,
+      };
+    }
   }
 
   dispatch(
     arrayStructureSlice.actions.init({
       name: arg.name,
+      parentName: arg.parentName,
+      childNames: childArgs?.map((arg) => arg.name),
       order: arg.order,
       argType: arg.type,
     })
   );
-  dispatch(
-    arrayStructureSlice.actions.addMany({
-      name: arg.name,
-      data: newItems,
-    })
-  );
+  newItems &&
+    dispatch(
+      arrayStructureSlice.actions.addMany({
+        name: arg.name,
+        data: newItems,
+      })
+    );
 
   dispatch(
     caseSlice.actions.updateArgumentInfo({
@@ -287,6 +292,8 @@ const parseArrayArgument = (
       data: { isParsed: true },
     })
   );
+
+  return childArgs;
 };
 
 export const useArgumentsParsing = () => {
@@ -305,9 +312,15 @@ export const useArgumentsParsing = () => {
         parseTreeArgument(arg, argsInfo, dispatch);
         removedTreeNames.delete(arg.name);
       } else if (isArgumentArrayType(arg)) {
-        const childNames = parseArrayArgument(arg, argsInfo, dispatch);
-        if (childNames)
-          childNames.forEach(({ name }) => removedArrayNames.delete(name));
+        const childNames =
+          parseArrayArgument(arg, argsInfo, dispatch) ??
+          arrayData[arg.name]?.childNames;
+
+        childNames?.forEach((value) => {
+          const name = typeof value === "string" ? value : value.name;
+          removedArrayNames.delete(name);
+        });
+
         removedArrayNames.delete(arg.name);
       }
     }
