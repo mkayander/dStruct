@@ -1,3 +1,10 @@
+## [1.174.3](https://github.com/mkayander/leetpal/compare/v1.174.2...v1.174.3) (2023-07-07)
+
+
+### Bug Fixes
+
+* Prioritize node color above structure color map ([1603e48](https://github.com/mkayander/leetpal/commit/1603e4808f2c4d5e690f8cc6f8e32d456a58936d))
+
 ## [1.174.2](https://github.com/mkayander/leetpal/compare/v1.174.1...v1.174.2) (2023-07-07)
 
 
