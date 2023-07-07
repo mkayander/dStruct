@@ -1,3 +1,11 @@
+## [1.174.4](https://github.com/mkayander/leetpal/compare/v1.174.3...v1.174.4) (2023-07-07)
+
+
+### Bug Fixes
+
+* Allow strings items in matrix input ([fc01914](https://github.com/mkayander/leetpal/commit/fc01914333a24d7291f71cd48a7cd65c2042ad46))
+* Specify correct matrix item arg type ([60db659](https://github.com/mkayander/leetpal/commit/60db659db7ebb858d97e46059113959c3f6f2779))
+
 ## [1.174.3](https://github.com/mkayander/leetpal/compare/v1.174.2...v1.174.3) (2023-07-07)
 
 
