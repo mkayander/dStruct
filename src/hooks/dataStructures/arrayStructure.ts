@@ -14,17 +14,38 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
+export type ControlledArrayRuntimeOptions = {
+  parentName?: string;
+  index?: number;
+  length?: number;
+  matrixName?: string;
+};
+
 export class ControlledArray<T extends number | string> extends Array<T> {
   private readonly itemsMeta: ArrayItemData[];
+  private readonly _argType: ArgumentType.ARRAY | ArgumentType.MATRIX;
 
   constructor(
     array: Array<T>,
-    private name: string,
+    private readonly name: string,
     arrayData: EntityState<ArrayItemData>,
     private dispatch: AppDispatch,
-    addToCallstack?: boolean
+    addToCallstack?: boolean,
+    options?: ControlledArrayRuntimeOptions
   ) {
     super();
+
+    let actionArrayData: EntityState<ArrayItemData> | undefined = undefined;
+    this._argType = ArgumentType.ARRAY;
+
+    if (options?.matrixName) {
+      this.name = options.matrixName;
+      this._argType = ArgumentType.MATRIX;
+      options.length = array.length;
+    } else {
+      actionArrayData = arrayData;
+    }
+
     this.push(...array);
 
     if (addToCallstack) {
@@ -32,7 +53,7 @@ export class ControlledArray<T extends number | string> extends Array<T> {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [arrayData],
+          args: [actionArrayData, options],
         })
       );
     }
@@ -153,7 +174,7 @@ export class ControlledArray<T extends number | string> extends Array<T> {
   protected getDispatchBase(index?: number) {
     const data = {
       id: uuid.generate(),
-      argType: ArgumentType.ARRAY,
+      argType: this._argType,
       nodeId: "-1",
       treeName: this.name,
       structureType: "array",

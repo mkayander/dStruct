@@ -2,10 +2,14 @@ import { PriorityQueue } from "@datastructures-js/priority-queue";
 import { Queue } from "@datastructures-js/queue";
 import shortUUID from "short-uuid";
 
-import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
+import {
+  ControlledArray,
+  type ControlledArrayRuntimeOptions,
+} from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
+import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
@@ -78,17 +82,34 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       mapFn?: (
         item: number | string | undefined,
         index: number
-      ) => number | string
+      ) => number | string,
+      thisArg?: unknown,
+      options?: ControlledArrayRuntimeOptions
     ) {
+      const newArray = [];
       if (mapFn) {
         const N = array.length;
-        array = [];
         for (let i = 0; i < N; i++) {
-          array[i] = mapFn(array[i], i);
+          newArray[i] = mapFn(array[i], i);
         }
+      } else {
+        newArray.push(...array);
       }
-      const data = generateArrayData(array);
-      return new ControlledArray(array, uuid.generate(), data, dispatch, true);
+      const data = generateArrayData(newArray);
+      let newId: string;
+      if (options?.parentName && options.index !== undefined) {
+        newId = getChildArrayName(options.parentName, options.index);
+      } else {
+        newId = uuid.generate();
+      }
+      return new ControlledArray(
+        newArray,
+        newId,
+        data,
+        dispatch,
+        true,
+        options
+      );
     }
   }
 

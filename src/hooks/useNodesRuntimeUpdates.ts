@@ -127,6 +127,7 @@ export const useNodesRuntimeUpdates = (
                 data: {
                   nodes: frame.args[0],
                   argType: frame.argType,
+                  options: frame.args[1],
                 },
               })
             );

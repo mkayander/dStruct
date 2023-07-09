@@ -191,8 +191,8 @@ const parseTreeArgument = (
   );
 };
 
-export const getChildArrayName = (arg: ArgumentObject, index: number) =>
-  `${arg.name}-[${index}]`;
+export const getChildArrayName = (name: string, index: number) =>
+  `${name}-[${index}]`;
 
 type ArrayArg = ArgumentObject<ArgumentArrayType>;
 
@@ -204,7 +204,7 @@ export const getMatrixChildArrayArgs = (
   const childArgs: ArrayArg[] = [];
 
   for (let i = 0; i < input.length; i++) {
-    const name = getChildArrayName(arg, i);
+    const name = getChildArrayName(arg.name, i);
     const item = input[i];
     const newArg: ArrayArg = {
       name,

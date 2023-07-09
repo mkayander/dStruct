@@ -31,7 +31,7 @@ export class ControlledString extends String {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [arrayData],
+          args: [arrayData, undefined],
         })
       );
     }

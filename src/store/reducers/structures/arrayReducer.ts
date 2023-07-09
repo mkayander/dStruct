@@ -7,6 +7,8 @@ import {
 } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
+import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
+import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { RootState } from "#/store/makeStore";
 import {
   type BaseStructureItem,
@@ -83,18 +85,28 @@ export const arrayStructureSlice = createSlice({
       state,
       action: NamedPayload<{
         argType: ArgumentArrayType;
-        nodes: EntityState<ArrayItemData>;
+        nodes?: EntityState<ArrayItemData>;
+        options?: ControlledArrayRuntimeOptions;
       }>
     ) => {
       const {
         payload: {
           name,
-          data: { argType, nodes },
+          data: { argType, nodes, options },
         },
       } = action;
-      const treeState = { ...getInitialData(999, argType), isRuntime: true };
-
-      treeState.nodes = nodes;
+      const { parentName, matrixName, length } = options ?? {};
+      const treeState = {
+        ...getInitialData(999, argType, parentName),
+        isRuntime: true,
+      };
+      if (matrixName && length) {
+        treeState.childNames = Array.from({ length }, (_, i) =>
+          getChildArrayName(matrixName, i)
+        );
+      } else if (nodes) {
+        treeState.nodes = nodes;
+      }
 
       state[name] = treeState;
     },
