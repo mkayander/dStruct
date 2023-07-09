@@ -1,3 +1,10 @@
+## [1.174.5](https://github.com/mkayander/leetpal/compare/v1.174.4...v1.174.5) (2023-07-09)
+
+
+### Bug Fixes
+
+* Print runtime errors to console ([2021fa5](https://github.com/mkayander/leetpal/commit/2021fa565262e78d49f65de801f6ece7ef2f5efa))
+
 ## [1.174.4](https://github.com/mkayander/leetpal/compare/v1.174.3...v1.174.4) (2023-07-07)
 
 
