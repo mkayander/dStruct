@@ -91,6 +91,7 @@ export const useCodeExecution = (codeInput: string) => {
             startTimestamp,
           })
         );
+        console.warn(e);
       } else {
         console.error("Invalid error type: ", e);
       }
