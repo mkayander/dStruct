@@ -126,14 +126,14 @@ export class ControlledArray<T extends number | string> extends Array<T> {
     );
   }
 
-  public showPointer(index: number) {
+  public showPointer(index: number, name: string) {
     const base = this.getDispatchBase(index);
     if (!base) return;
     this.dispatch(
       callstackSlice.actions.addOne({
         ...base,
         name: "showPointer",
-        args: [],
+        args: [name],
       })
     );
   }

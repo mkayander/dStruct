@@ -51,7 +51,7 @@ type SetChildFrame = NodeFrameBase & {
 
 type ShowPointerFrame = NodeFrameBase & {
   name: "showPointer";
-  args: [];
+  args: [string];
 };
 
 type BlinkFrame = NodeFrameBase & {
