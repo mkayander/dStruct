@@ -19,6 +19,7 @@ export type ControlledArrayRuntimeOptions = {
   index?: number;
   length?: number;
   matrixName?: string;
+  colorMap?: Record<string, string>;
 };
 
 export class ControlledArray<T extends number | string> extends Array<T> {

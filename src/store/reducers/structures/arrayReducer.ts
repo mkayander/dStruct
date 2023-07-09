@@ -95,7 +95,7 @@ export const arrayStructureSlice = createSlice({
           data: { argType, nodes, options },
         },
       } = action;
-      const { parentName, matrixName, length } = options ?? {};
+      const { parentName, matrixName, length, colorMap } = options ?? {};
       const treeState = {
         ...getInitialData(999, argType, parentName),
         isRuntime: true,
@@ -106,6 +106,10 @@ export const arrayStructureSlice = createSlice({
         );
       } else if (nodes) {
         treeState.nodes = nodes;
+      }
+
+      if (colorMap) {
+        treeState.colorMap = colorMap;
       }
 
       state[name] = treeState;
