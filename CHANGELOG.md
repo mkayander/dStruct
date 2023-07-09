@@ -1,3 +1,10 @@
+# [1.176.0](https://github.com/mkayander/leetpal/compare/v1.175.0...v1.176.0) (2023-07-09)
+
+
+### Features
+
+* Allow to pass color map on array creation ([7f7108b](https://github.com/mkayander/leetpal/commit/7f7108bcdfdae5ebcadf3f254f71fc61f76e7a11))
+
 # [1.175.0](https://github.com/mkayander/leetpal/compare/v1.174.5...v1.175.0) (2023-07-09)
 
 
