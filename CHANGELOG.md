@@ -1,3 +1,10 @@
+# [1.177.0](https://github.com/mkayander/leetpal/compare/v1.176.1...v1.177.0) (2023-07-10)
+
+
+### Features
+
+* Implemented runtime controlled array mapping into new instance ([eb6d650](https://github.com/mkayander/leetpal/commit/eb6d650780a0d836079b069124b7f840e2a017c4))
+
 ## [1.176.1](https://github.com/mkayander/leetpal/compare/v1.176.0...v1.176.1) (2023-07-10)
 
 
