@@ -1,3 +1,10 @@
+## [1.176.1](https://github.com/mkayander/leetpal/compare/v1.176.0...v1.176.1) (2023-07-10)
+
+
+### Bug Fixes
+
+* Use "performance.now" for correct time delta calculations ([d9aa169](https://github.com/mkayander/leetpal/commit/d9aa16921916d2db18893dc477f199320e809746))
+
 # [1.176.0](https://github.com/mkayander/leetpal/compare/v1.175.0...v1.176.0) (2023-07-09)
 
 
