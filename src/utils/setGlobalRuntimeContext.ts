@@ -134,7 +134,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       dispatch(
         callstackSlice.actions.addOne({
           id: uuid.generate(),
-          timestamp: Date.now(),
+          timestamp: performance.now(),
           name: "consoleLog",
           args: args.map((arg) => {
             if (typeof arg === "object") {
