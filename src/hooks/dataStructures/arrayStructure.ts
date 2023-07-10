@@ -1,6 +1,7 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
+import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
 import {
   type CallFrameBase,
@@ -9,6 +10,7 @@ import {
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
+  generateArrayData,
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
@@ -22,7 +24,7 @@ export type ControlledArrayRuntimeOptions = {
   colorMap?: Record<string, string>;
 };
 
-export class ControlledArray<T extends number | string> extends Array<T> {
+export class ControlledArray<T> extends Array<T> {
   private readonly itemsMeta: ArrayItemData[];
   private readonly _argType: ArgumentType.ARRAY | ArgumentType.MATRIX;
 
@@ -110,6 +112,54 @@ export class ControlledArray<T extends number | string> extends Array<T> {
     });
   }
 
+  static _from(
+    dispatch: AppDispatch,
+    inputArray: Array<number | string>,
+    mapFn?: (
+      item: number | string | undefined,
+      index: number
+    ) => number | string,
+    thisArg?: unknown,
+    options?: ControlledArrayRuntimeOptions
+  ) {
+    const { id, array, data } = this._mapArrayData(
+      inputArray,
+      mapFn,
+      thisArg,
+      options
+    );
+    return new ControlledArray(array, id, data, dispatch, true, options);
+  }
+
+  static _mapArrayData<T, U>(
+    inputArray: T[],
+    mapFn?: (item: T, index: number, array: T[]) => U,
+    thisArg?: unknown,
+    options?: ControlledArrayRuntimeOptions
+  ) {
+    const array = [];
+    if (mapFn) {
+      for (let i = 0; i < inputArray.length; i++) {
+        array[i] = mapFn(inputArray[i] as T, i, inputArray);
+      }
+    } else {
+      array.push(...inputArray);
+    }
+    const data = generateArrayData(array);
+    let id: string;
+    if (options?.parentName && options.index !== undefined) {
+      id = getChildArrayName(options.parentName, options.index);
+    } else {
+      id = uuid.generate();
+    }
+
+    return {
+      id,
+      array,
+      data,
+    };
+  }
+
   override pop() {
     const base = this.getDispatchBase(this.length - 1);
     const value = super.pop();
@@ -122,6 +172,27 @@ export class ControlledArray<T extends number | string> extends Array<T> {
     );
     this.itemsMeta.pop();
     return value;
+  }
+
+  override map<U>(
+    callback: (value: T, index: number, array: T[]) => U,
+    thisArg?: unknown,
+    options?: ControlledArrayRuntimeOptions
+  ): ControlledArray<U> {
+    const { id, array, data } = ControlledArray._mapArrayData(
+      this,
+      callback,
+      thisArg,
+      options
+    );
+    return new ControlledArray(
+      array as U[],
+      id,
+      data,
+      this.dispatch,
+      true,
+      options
+    );
   }
 
   public blink(index: number) {
@@ -160,7 +231,7 @@ export class ControlledArray<T extends number | string> extends Array<T> {
     );
   }
 
-  public setColorMap(map: Record<T, string>) {
+  public setColorMap(map: Record<string, string>) {
     const base = this.getDispatchBase();
     if (!base) return;
     this.dispatch(

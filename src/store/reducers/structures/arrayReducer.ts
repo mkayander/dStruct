@@ -117,7 +117,7 @@ export const arrayStructureSlice = createSlice({
   },
 });
 
-export const generateArrayData = (array: Array<number | string>) => {
+export const generateArrayData = (array: Array<any>) => {
   const data = arrayDataAdapter.getInitialState();
 
   for (const [index, value] of array.entries()) {

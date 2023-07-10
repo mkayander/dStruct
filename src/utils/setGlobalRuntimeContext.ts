@@ -9,7 +9,6 @@ import {
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
-import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
@@ -86,30 +85,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       thisArg?: unknown,
       options?: ControlledArrayRuntimeOptions
     ) {
-      const newArray = [];
-      if (mapFn) {
-        const N = array.length;
-        for (let i = 0; i < N; i++) {
-          newArray[i] = mapFn(array[i], i);
-        }
-      } else {
-        newArray.push(...array);
-      }
-      const data = generateArrayData(newArray);
-      let newId: string;
-      if (options?.parentName && options.index !== undefined) {
-        newId = getChildArrayName(options.parentName, options.index);
-      } else {
-        newId = uuid.generate();
-      }
-      return new ControlledArray(
-        newArray,
-        newId,
-        data,
-        dispatch,
-        true,
-        options
-      );
+      return ControlledArray._from(dispatch, array, mapFn, thisArg, options);
     }
   }
 
