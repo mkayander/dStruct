@@ -1,3 +1,10 @@
+## [1.177.1](https://github.com/mkayander/leetpal/compare/v1.177.0...v1.177.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* Improved select bar chips layout ([19d816b](https://github.com/mkayander/leetpal/commit/19d816b7a8ab366ebd63f90cbc69956550289ccc))
+
 # [1.177.0](https://github.com/mkayander/leetpal/compare/v1.176.1...v1.177.0) (2023-07-10)
 
 
