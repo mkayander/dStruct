@@ -56,6 +56,7 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
             flexWrap="wrap"
+            alignItems="center"
             direction="row"
             {...restProps}
           >
@@ -77,6 +78,9 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
                 size="small"
                 onClick={handleAddItem}
                 disabled={isLoading}
+                sx={{
+                  mt: 0.15,
+                }}
               >
                 {isLoading ? (
                   <CircularProgress size="1.3rem" />

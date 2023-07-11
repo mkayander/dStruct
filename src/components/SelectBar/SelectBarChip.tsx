@@ -76,7 +76,7 @@ export const SelectBarChip = React.forwardRef<
             transition: "opacity 0.3s",
             position: "absolute",
             top: "-10px",
-            right: "-10px",
+            right: "-2px",
             opacity: 0,
             pointerEvents: "none",
             "&:hover": {
