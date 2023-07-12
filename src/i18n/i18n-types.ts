@@ -19,6 +19,10 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * A​d​d​ ​a​r​g​u​m​e​n​t
+	 */
+	ADD_ARGUMENT: string
+	/**
 	 * A​d​d​ ​n​e​w​ ​s​o​l​u​t​i​o​n
 	 */
 	ADD_NEW_SOLUTION: string
@@ -79,6 +83,11 @@ type RootTranslation = {
 	 */
 	DELETE_THIS_PROJECT: string
 	/**
+	 * D​e​l​e​t​e​ ​{​n​a​m​e​}​ ​a​r​g​u​m​e​n​t
+	 * @param {string} name
+	 */
+	DELETE_X_ARGUMENT: RequiredParams<'name'>
+	/**
 	 * D​e​s​c​r​i​p​t​i​o​n
 	 */
 	DESCRIPTION: string
@@ -124,6 +133,10 @@ type RootTranslation = {
 	 */
 	HI: RequiredParams<'name'>
 	/**
+	 * I​n​p​u​t
+	 */
+	INPUT: string
+	/**
 	 * L​a​n​g​u​a​g​e
 	 */
 	LANGUAGE: string
@@ -159,6 +172,10 @@ type RootTranslation = {
 	 * P​a​n​e​l​ ​t​a​b​s
 	 */
 	PANEL_TABS: string
+	/**
+	 * P​e​n​d​i​n​g​ ​c​h​a​n​g​e​s
+	 */
+	PENDING_CHANGES: string
 	/**
 	 * P​l​a​y​b​a​c​k​ ​i​n​t​e​r​v​a​l
 	 */
@@ -204,6 +221,10 @@ type RootTranslation = {
 	 */
 	RUN_CODE: string
 	/**
+	 * S​a​v​e​d​ ​i​n​ ​t​h​e​ ​c​l​o​u​d
+	 */
+	SAVED_IN_THE_CLOUD: string
+	/**
 	 * S​e​l​e​c​t​e​d​ ​l​o​c​a​l​e​:
 	 */
 	SELECTED_LOCALE: string
@@ -235,6 +256,10 @@ type RootTranslation = {
 	 * S​u​c​c​e​s​s
 	 */
 	SUCCESS: string
+	/**
+	 * S​y​n​c​i​n​g​ ​w​i​t​h​ ​s​e​r​v​e​r
+	 */
+	SYNCING_WITH_SERVER: string
 	/**
 	 * O​p​t​i​o​n​a​l​ ​t​e​s​t​ ​c​a​s​e​ ​d​e​s​c​r​i​p​t​i​o​n
 	 */
@@ -290,6 +315,10 @@ type RootTranslation = {
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: string
 	/**
+	 * Y​o​u​r​ ​c​h​a​n​g​e​s​ ​w​i​l​l​ ​b​e​ ​l​o​s​t
+	 */
+	YOUR_CHANGES_WILL_BE_LOST: string
+	/**
 	 * Y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​a​c​c​o​u​n​t​ ​n​a​m​e​:
 	 */
 	YOUR_LEETCODE_ACCOUNT_NAME: string
@@ -298,12 +327,24 @@ type RootTranslation = {
 	 */
 	YOUR_NAME: string
 	/**
+	 * Y​o​u​ ​d​o​n​'​t​ ​o​w​n​ ​t​h​i​s​ ​p​r​o​j​e​c​t
+	 */
+	YOU_DONT_OWN_THIS_PROJECT: string
+	/**
+	 * Y​o​u​ ​n​e​e​d​ ​t​o​ ​b​e​ ​a​u​t​h​e​d​ ​t​o​ ​s​a​v​e​ ​c​o​d​e
+	 */
+	YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: string
+	/**
 	 * Y​o​u​ ​n​e​e​d​ ​t​o​ ​r​u​n​ ​t​h​e​ ​c​o​d​e​ ​f​i​r​s​t
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
 }
 
 export type TranslationFunctions = {
+	/**
+	 * Add argument
+	 */
+	ADD_ARGUMENT: () => LocalizedString
 	/**
 	 * Add new solution
 	 */
@@ -365,6 +406,10 @@ export type TranslationFunctions = {
 	 */
 	DELETE_THIS_PROJECT: () => LocalizedString
 	/**
+	 * Delete {name} argument
+	 */
+	DELETE_X_ARGUMENT: (arg: { name: string }) => LocalizedString
+	/**
 	 * Description
 	 */
 	DESCRIPTION: () => LocalizedString
@@ -409,6 +454,10 @@ export type TranslationFunctions = {
 	 */
 	HI: (arg: { name: string }) => LocalizedString
 	/**
+	 * Input
+	 */
+	INPUT: () => LocalizedString
+	/**
 	 * Language
 	 */
 	LANGUAGE: () => LocalizedString
@@ -444,6 +493,10 @@ export type TranslationFunctions = {
 	 * Panel tabs
 	 */
 	PANEL_TABS: () => LocalizedString
+	/**
+	 * Pending changes
+	 */
+	PENDING_CHANGES: () => LocalizedString
 	/**
 	 * Playback interval
 	 */
@@ -489,6 +542,10 @@ export type TranslationFunctions = {
 	 */
 	RUN_CODE: () => LocalizedString
 	/**
+	 * Saved in the cloud
+	 */
+	SAVED_IN_THE_CLOUD: () => LocalizedString
+	/**
 	 * Selected locale:
 	 */
 	SELECTED_LOCALE: () => LocalizedString
@@ -520,6 +577,10 @@ export type TranslationFunctions = {
 	 * Success
 	 */
 	SUCCESS: () => LocalizedString
+	/**
+	 * Syncing with server
+	 */
+	SYNCING_WITH_SERVER: () => LocalizedString
 	/**
 	 * Optional test case description
 	 */
@@ -573,6 +634,10 @@ export type TranslationFunctions = {
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: () => LocalizedString
 	/**
+	 * Your changes will be lost
+	 */
+	YOUR_CHANGES_WILL_BE_LOST: () => LocalizedString
+	/**
 	 * Your LeetCode account name:
 	 */
 	YOUR_LEETCODE_ACCOUNT_NAME: () => LocalizedString
@@ -580,6 +645,14 @@ export type TranslationFunctions = {
 	 * Your name:
 	 */
 	YOUR_NAME: () => LocalizedString
+	/**
+	 * You don't own this project
+	 */
+	YOU_DONT_OWN_THIS_PROJECT: () => LocalizedString
+	/**
+	 * You need to be authed to save code
+	 */
+	YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: () => LocalizedString
 	/**
 	 * You need to run the code first
 	 */

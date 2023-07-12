@@ -10,6 +10,7 @@ import { type OnDragEndResponder } from "react-beautiful-dnd";
 import { DraggableSelectBarList } from "#/components/SelectBar/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/components/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { CaseModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
@@ -29,6 +30,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   selectedProject,
   ...restProps
 }) => {
+  const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -165,7 +167,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
               key={testCase.id}
               index={index}
               droppableSnapshot={droppableSnapshot}
-              editLabel="Edit test case"
+              editLabel={LL.EDIT_TEST_CASE()}
               isCurrent={testCase.slug === caseSlug}
               isEditable={isEditable}
               label={testCase.title}

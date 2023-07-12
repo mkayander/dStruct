@@ -5,6 +5,7 @@ import Joi from "joi";
 import React, { useState } from "react";
 
 import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
+import { useI18nContext } from "#/i18n/i18n-react";
 
 type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
@@ -17,6 +18,7 @@ export const JsonInput: React.FC<BinaryTreeInputProps> = ({
   validationSchema,
   ...restProps
 }) => {
+  const { LL } = useI18nContext();
   const [inputError, setInputError] = useState<string | null>(null);
 
   const handleChange = (value: string) => {
@@ -42,7 +44,7 @@ export const JsonInput: React.FC<BinaryTreeInputProps> = ({
 
   return (
     <DebouncedInput
-      label="Input"
+      label={LL.INPUT()}
       placeholder="e.g.: [1,2,3,null,5]"
       onChange={handleChange}
       error={!!inputError}

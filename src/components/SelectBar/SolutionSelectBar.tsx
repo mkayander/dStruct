@@ -167,7 +167,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
               key={solution.id}
               index={index}
               droppableSnapshot={droppableSnapshot}
-              editLabel="Edit solution"
+              editLabel={LL.EDIT_SOLUTION()}
               isCurrent={solution.slug === solutionSlug}
               isEditable={isEditable}
               label={solution.title}

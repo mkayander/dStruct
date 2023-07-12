@@ -1,6 +1,7 @@
 import type { BaseTranslation } from "../i18n-types";
 
 const en: BaseTranslation = {
+  ADD_ARGUMENT: "Add argument",
   ADD_NEW_SOLUTION: "Add new solution",
   ARGUMENTS: "Arguments",
   CALLSTACK: "Callstack",
@@ -16,6 +17,7 @@ const en: BaseTranslation = {
   DATA_STRUCTURES_SIMPLIFIED: "Data Structures Simplified",
   DELETE: "Delete",
   DELETE_THIS_PROJECT: "Delete this project",
+  DELETE_X_ARGUMENT: "Delete {name:string} argument",
   DESCRIPTION: "Description",
   DSTRUCT_LOGO: "DStruct Logo",
   EDIT_AND_SAVE: "Edit <code>pages/index.tsx</code> and save to reload.",
@@ -27,6 +29,7 @@ const en: BaseTranslation = {
   FORMATTING_ICON: "Formatting icon",
   FORMAT_CODE_WITH: "Format code with",
   HI: "Hello {name:string}!",
+  INPUT: "Input",
   LANGUAGE: "Language",
   LOGOUT: "Logout",
   MAIN_MENU: "Main Menu",
@@ -36,6 +39,7 @@ const en: BaseTranslation = {
   OPEN_OPTIONS: "Open options",
   OUTPUT: "Output",
   PANEL_TABS: "Panel tabs",
+  PENDING_CHANGES: "Pending changes",
   PLAYBACK_INTERVAL: "Playback interval",
   PLAYGROUND: "Playground",
   PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: "Please enter your LeetCode account name:",
@@ -47,6 +51,7 @@ const en: BaseTranslation = {
   RUN: "Run",
   RUNTIME: "Runtime",
   RUN_CODE: "Run code",
+  SAVED_IN_THE_CLOUD: "Saved in the cloud",
   SELECTED_LOCALE: "Selected locale:",
   SETTINGS: "Settings",
   SIGN_IN: "Sign in",
@@ -55,6 +60,7 @@ const en: BaseTranslation = {
   SLUG: "Slug",
   SUBMIT: "Submit",
   SUCCESS: "Success",
+  SYNCING_WITH_SERVER: "Syncing with server",
   TEST_CASE_DESCRIPTION_HELPER_TEXT: "Optional test case description",
   TEST_CASE_NAME_HELPER_TEXT: "A short name for your test case",
   TEST_CASE_SLUG_HELPER_TEXT: "You can edit a slug that's used in the URL to this test case",
@@ -68,8 +74,11 @@ const en: BaseTranslation = {
   USER_DASHBOARD: "{name:string}'s Dashboard",
   USER_SETTINGS: "User Settings",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Visualize your LeetCode problems just form your code",
+  YOUR_CHANGES_WILL_BE_LOST: "Your changes will be lost",
   YOUR_LEETCODE_ACCOUNT_NAME: "Your LeetCode account name:",
   YOUR_NAME: "Your name:",
+  YOU_DONT_OWN_THIS_PROJECT: "You don't own this project",
+  YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "You need to be authed to save code",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "You need to run the code first",
 };
 

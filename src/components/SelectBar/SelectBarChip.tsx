@@ -118,7 +118,6 @@ export const DraggableSelectBarChip: React.FC<DraggableSelectBarChipProps> = ({
       {(provided, snapshot) => (
         <SelectBarChip
           ref={provided.innerRef}
-          editLabel="Edit solution"
           isEditable={droppableSnapshot.isDraggingOver ? false : isEditable}
           isDragging={snapshot.isDragging}
           {...provided.draggableProps}

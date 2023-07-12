@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { useI18nContext } from "#/i18n/i18n-react";
 import { ArgumentType, argumentTypeLabels } from "#/utils/argumentObject";
 
 type ArgumentTypeSelectProps = Omit<SelectProps, "value" | "onChange"> & {
@@ -50,15 +51,16 @@ export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
   onChange,
   ...restProps
 }) => {
+  const { LL } = useI18nContext();
   const theme = useTheme();
 
   return (
     <FormControl>
-      <InputLabel>Type</InputLabel>
+      <InputLabel>{LL.TYPE()}</InputLabel>
       <Select
         value={value}
         onChange={(event) => onChange(event.target.value as ArgumentType)}
-        label="Type"
+        label={LL.TYPE()}
         sx={{
           width: "70px",
           "& [role=button]": {

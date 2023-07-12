@@ -15,6 +15,7 @@ import shortUUID from "short-uuid";
 
 import { ArgInput, ArgumentTypeSelect } from "#/components";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
+import { useI18nContext } from "#/i18n/i18n-react";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   caseSlice,
@@ -37,6 +38,7 @@ type ArgsEditorProps = {
 };
 
 export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
+  const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
   const { caseSlug } = usePlaygroundSlugs();
   const prevCaseSlug = usePrevious(caseSlug);
@@ -118,7 +120,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   return (
     <Box>
       <Stack direction="row" spacing={1} alignItems="center" mt={1} mb={2}>
-        <Typography variant="caption">Arguments</Typography>
+        <Typography variant="caption">{LL.ARGUMENTS()}</Typography>
         {isLoading && <CircularProgress size={14} />}
         <Divider sx={{ flexGrow: 1 }} />
       </Stack>
@@ -139,7 +141,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                   onChange={(type) => handleArgTypeChange(arg, type)}
                 />
                 <IconButton
-                  title={`Delete ${arg.name} argument`}
+                  title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
                   disabled={isLoading}
                   onClick={() => handleDeleteArg(arg)}
                   size="small"
@@ -154,7 +156,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         {isEditable && caseSlug && (
           <Box display="flex" justifyContent="center">
             <IconButton
-              title="Add argument"
+              title={LL.ADD_ARGUMENT()}
               disabled={isLoading}
               onClick={handleAddArg}
             >

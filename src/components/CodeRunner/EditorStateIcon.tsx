@@ -7,6 +7,8 @@ import {
 import { Tooltip } from "@mui/material";
 import React from "react";
 
+import { useI18nContext } from "#/i18n/i18n-react";
+
 export enum EditorState {
   INITIAL,
   PENDING_CHANGES,
@@ -24,34 +26,34 @@ export const EditorStateIcon: React.FC<EditorStateIconProps> = ({
   state,
   isLoading,
 }) => {
+  const { LL } = useI18nContext();
   let icon: React.ReactElement;
   let text: string;
 
   if (isLoading) {
     icon = <CloudSync />;
-    text = "Syncing with server...";
+    text = `${LL.SYNCING_WITH_SERVER()}...`;
   } else {
     switch (state) {
       default:
       case EditorState.SAVED_ON_SERVER:
         icon = <CloudDone />;
-        text = "Saved in the cloud ✅";
+        text = `${LL.SAVED_IN_THE_CLOUD()} ✅`;
         break;
 
       case EditorState.PENDING_CHANGES:
         icon = <CloudQueue />;
-        text = "Pending changes...";
+        text = `${LL.PENDING_CHANGES()}...`;
         break;
 
       case EditorState.FORKED_UNAUTHENTICATED:
         icon = <SdCardAlert color="warning" />;
-        text =
-          "You need to be authed to save code! \nYour changes will be lost! 😱";
+        text = `${LL.YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE()}! \n${LL.YOUR_CHANGES_WILL_BE_LOST()}! 😱`;
         break;
 
       case EditorState.FORKED_UNOWNED:
         icon = <SdCardAlert color="warning" />;
-        text = "You don't own this project! \nYour changes will be lost! 😱";
+        text = `${LL.YOU_DONT_OWN_THIS_PROJECT()}! \n${LL.YOUR_CHANGES_WILL_BE_LOST()}! 😱`;
     }
   }
 
