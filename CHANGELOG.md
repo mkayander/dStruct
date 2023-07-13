@@ -1,3 +1,10 @@
+# [1.178.0](https://github.com/mkayander/leetpal/compare/v1.177.1...v1.178.0) (2023-07-13)
+
+
+### Features
+
+* Added more translation tokens ([fcc7907](https://github.com/mkayander/leetpal/commit/fcc79078bf7bb0c10382bb9bb5edec62e338b656))
+
 ## [1.177.1](https://github.com/mkayander/leetpal/compare/v1.177.0...v1.177.1) (2023-07-11)
 
 
