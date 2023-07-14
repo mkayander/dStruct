@@ -25,15 +25,26 @@ export const useNodesRuntimeUpdates = (
 
     let i = 0;
 
+    const getNextValidFrame = () => {
+      let frame = callstack[i];
+
+      while (frame && i < callstack.length && !("treeName" in frame)) {
+        i++;
+        frame = callstack[i];
+      }
+
+      if (!frame || !("treeName" in frame)) return null;
+
+      return frame;
+    };
+
     const intervalId = setInterval(() => {
-      const frame = callstack[i];
+      const frame = getNextValidFrame();
 
       if (i >= callstack.length || !frame) {
         clearInterval(intervalId);
         return;
       }
-
-      if (!("treeName" in frame)) return;
 
       const treeName = frame.treeName;
       const slice =
