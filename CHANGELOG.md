@@ -1,3 +1,10 @@
+## [1.178.1](https://github.com/mkayander/leetpal/compare/v1.178.0...v1.178.1) (2023-07-15)
+
+
+### Bug Fixes
+
+* Skip console log frames ([a72975c](https://github.com/mkayander/leetpal/commit/a72975cb5dcb97b976cc24d48681f9f9ae951752))
+
 # [1.178.0](https://github.com/mkayander/leetpal/compare/v1.177.1...v1.178.0) (2023-07-13)
 
 
