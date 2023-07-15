@@ -1,3 +1,10 @@
+# [1.179.0](https://github.com/mkayander/leetpal/compare/v1.178.1...v1.179.0) (2023-07-15)
+
+
+### Features
+
+* Implemented controlled frame index state ([046bf15](https://github.com/mkayander/leetpal/commit/046bf15b930542a0c6443826110e2ece91313919))
+
 ## [1.178.1](https://github.com/mkayander/leetpal/compare/v1.178.0...v1.178.1) (2023-07-15)
 
 
