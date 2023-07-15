@@ -28,11 +28,13 @@ const overlayStyles = {
 };
 
 type TreeViewerProps = {
+  frameState: [number, React.Dispatch<React.SetStateAction<number>>];
   playbackInterval: number;
   replayCount: number;
 };
 
 export const TreeViewer: React.FC<TreeViewerProps> = ({
+  frameState,
   playbackInterval,
   replayCount,
 }) => {
@@ -50,7 +52,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   useArgumentsParsing();
 
-  useNodesRuntimeUpdates(playbackInterval, replayCount);
+  useNodesRuntimeUpdates(frameState, playbackInterval, replayCount);
 
   const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
   const [, setForceUpdate] = useState(false);

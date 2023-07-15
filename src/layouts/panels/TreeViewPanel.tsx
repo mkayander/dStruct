@@ -31,6 +31,7 @@ export const TreeViewPanel: React.FC = () => {
   const { LL } = useI18nContext();
 
   const [tabValue, setTabValue] = useState("1");
+  const [frameIndex, setFrameIndex] = useState(0);
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
 
@@ -118,46 +119,52 @@ export const TreeViewPanel: React.FC = () => {
           useScroll={!isMobile}
           sx={{ height: "100%", p: 0, position: "relative" }}
         >
-          <Box sx={{ maxWidth: 600, p: 2 }}>
-            <Typography id="input-slider" variant="caption" gutterBottom>
-              {LL.PLAYBACK_INTERVAL()}
+          <Stack p={2} direction="row" alignItems="center" spacing={2}>
+            <Box sx={{ maxWidth: 600, flexGrow: 1 }}>
+              <Typography id="input-slider" variant="caption" gutterBottom>
+                {LL.PLAYBACK_INTERVAL()}
+              </Typography>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item>
+                  <Speed />
+                </Grid>
+                <Grid item xs>
+                  <Slider
+                    value={sliderValue}
+                    min={5}
+                    max={700}
+                    onChange={handleSliderChange}
+                    aria-labelledby="input-slider"
+                  />
+                </Grid>
+                <Grid item>
+                  <Input
+                    value={sliderValue}
+                    size="small"
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    renderSuffix={() => (
+                      <Typography variant="caption">{LL.MS()}</Typography>
+                    )}
+                    inputProps={{
+                      step: 5,
+                      min: 5,
+                      max: 700,
+                      type: "number",
+                      "aria-labelledby": "input-slider",
+                    }}
+                    sx={{ width: "64px" }}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+            <Typography variant="caption" minWidth="3ch">
+              {frameIndex}
             </Typography>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item>
-                <Speed />
-              </Grid>
-              <Grid item xs>
-                <Slider
-                  value={sliderValue}
-                  min={5}
-                  max={700}
-                  onChange={handleSliderChange}
-                  aria-labelledby="input-slider"
-                />
-              </Grid>
-              <Grid item>
-                <Input
-                  value={sliderValue}
-                  size="small"
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  renderSuffix={() => (
-                    <Typography variant="caption">{LL.MS()}</Typography>
-                  )}
-                  inputProps={{
-                    step: 5,
-                    min: 5,
-                    max: 700,
-                    type: "number",
-                    "aria-labelledby": "input-slider",
-                  }}
-                  sx={{ width: "64px" }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
+          </Stack>
           <Divider sx={{ mt: 1 }} />
           <TreeViewer
+            frameState={[frameIndex, setFrameIndex]}
             replayCount={replayCount}
             playbackInterval={sliderValue}
           />

@@ -1,50 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { selectCallstack } from "#/store/reducers/callstackReducer";
+import {
+  type CallFrame,
+  selectCallstack,
+} from "#/store/reducers/callstackReducer";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
 import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 
 export const useNodesRuntimeUpdates = (
+  [frameIndex, setFrameIndex]: [
+    number,
+    React.Dispatch<React.SetStateAction<number>>
+  ],
   playbackInterval: number,
   replayCount: number
 ) => {
   const dispatch = useAppDispatch();
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
 
-  useEffect(() => {
-    let isStarted = false;
-
-    if (!callstackIsReady || callstack.length === 0) return;
-
-    let i = 0;
-
-    const getNextValidFrame = () => {
-      let frame = callstack[i];
-
-      while (frame && i < callstack.length && !("treeName" in frame)) {
-        i++;
-        frame = callstack[i];
-      }
-
-      if (!frame || !("treeName" in frame)) return null;
-
-      return frame;
-    };
-
-    const intervalId = setInterval(() => {
-      const frame = getNextValidFrame();
-
-      if (i >= callstack.length || !frame) {
-        clearInterval(intervalId);
-        return;
-      }
+  const applyFrame = useCallback(
+    (frame: CallFrame) => {
+      console.log("treeName" in frame);
+      if (!("treeName" in frame)) return;
+      console.log(frame);
 
       const treeName = frame.treeName;
       const slice =
@@ -206,15 +193,60 @@ export const useNodesRuntimeUpdates = (
         default:
           console.error("Unknown frame name: ", frame.name);
       }
+    },
+    [dispatch]
+  );
 
-      isStarted = true;
+  useEffect(() => {
+    console.log("apply effect: ", {
+      callstackIsReady,
+      frameIndex,
+      playbackInterval,
+    });
+    if (!callstackIsReady || callstack.length === 0) return;
 
-      i++;
+    const currentFrame = callstack[frameIndex];
+    currentFrame && applyFrame(currentFrame);
+
+    const getNextValidIndex = () => {
+      let nextIndex = frameIndex + 1;
+      let frame = callstack[nextIndex];
+
+      while (frame && !("treeName" in frame)) {
+        nextIndex++;
+        frame = callstack[nextIndex];
+      }
+
+      return nextIndex;
+    };
+
+    const timeoutId = setTimeout(() => {
+      const nextIndex = getNextValidIndex();
+
+      if (nextIndex < callstack.length) {
+        setIsPlaying(true);
+        setFrameIndex(nextIndex);
+      }
     }, playbackInterval);
 
     return () => {
-      clearInterval(intervalId);
-      isStarted && resetStructuresState(dispatch, false);
+      clearTimeout(timeoutId);
     };
-  }, [callstack, callstackIsReady, dispatch, playbackInterval, replayCount]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [applyFrame, callstack, callstackIsReady, frameIndex, playbackInterval]);
+
+  useEffect(() => {
+    console.log("reset effect: ", {
+      isPlaying,
+      replayCount,
+      playbackInterval,
+      callstackIsReady,
+    });
+    if (isPlaying) {
+      resetStructuresState(dispatch, false);
+      setFrameIndex(0);
+      setIsPlaying(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, replayCount, playbackInterval, callstack, callstackIsReady]);
 };
