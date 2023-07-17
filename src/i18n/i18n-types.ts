@@ -201,9 +201,17 @@ type RootTranslation = {
 	 */
 	REPLAY: string
 	/**
+	 * R​e​p​l​a​y​ ​p​r​e​v​i​o​u​s​ ​c​o​d​e​ ​r​e​s​u​l​t​ ​v​i​s​u​a​l​i​z​a​t​i​o​n
+	 */
+	REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION: string
+	/**
 	 * R​e​s​e​t
 	 */
 	RESET: string
+	/**
+	 * R​e​s​e​t​ ​d​a​t​a​ ​s​t​r​u​c​t​u​r​e​s​ ​t​o​ ​i​n​i​t​i​a​l​ ​s​t​a​t​e​s
+	 */
+	RESET_DATA_STRUCTURES: string
 	/**
 	 * R​e​t​u​r​n​e​d
 	 */
@@ -522,9 +530,17 @@ export type TranslationFunctions = {
 	 */
 	REPLAY: () => LocalizedString
 	/**
+	 * Replay previous code result visualization
+	 */
+	REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION: () => LocalizedString
+	/**
 	 * Reset
 	 */
 	RESET: () => LocalizedString
+	/**
+	 * Reset data structures to initial states
+	 */
+	RESET_DATA_STRUCTURES: () => LocalizedString
 	/**
 	 * Returned
 	 */
