@@ -83,7 +83,8 @@ export const TreeViewPanel: React.FC = () => {
               <Settings fontSize="small" />
             </IconButton>
             <Button
-              title="Reset data structures to initial states"
+              // title="Reset data structures to initial states"
+              title={LL.RESET_DATA_STRUCTURES()}
               color="inherit"
               onClick={handleReset}
               sx={{ height: "100%" }}
@@ -93,8 +94,8 @@ export const TreeViewPanel: React.FC = () => {
             <Tooltip
               title={
                 isCallstackReady
-                  ? "Replay previous code result visualisation"
-                  : "You need to run the code first"
+                  ? LL.REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION()
+                  : LL.YOU_NEED_TO_RUN_THE_CODE_FIRST()
               }
               disableInteractive={false}
               arrow
