@@ -81,7 +81,9 @@ export const ProjectPanel: React.FC = () => {
       return;
     }
 
-    const newState = selectedProject.data.userId === session.data.user.id;
+    const user = session.data.user;
+
+    const newState = user.isAdmin || selectedProject.data.userId === user.id;
     isEditable !== newState &&
       dispatch(
         projectSlice.actions.update({

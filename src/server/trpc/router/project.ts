@@ -121,7 +121,8 @@ const projectOwnerProcedure = protectedProcedure.use(async ({ ctx, rawInput, nex
     }
   });
 
-  if (project.userId !== ctx.session.user.id) {
+  const user = ctx.session.user;
+  if (!user.isAdmin && project.userId !== user.id) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message:
