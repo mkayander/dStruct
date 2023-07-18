@@ -1,3 +1,10 @@
+# [1.184.0](https://github.com/mkayander/leetpal/compare/v1.183.0...v1.184.0) (2023-07-18)
+
+
+### Features
+
+* Allow admins to edit any project entity ([963f386](https://github.com/mkayander/leetpal/commit/963f3862e64aad9c2ca96ba6744db9c3c8e00ad0))
+
 # [1.183.0](https://github.com/mkayander/leetpal/compare/v1.182.0...v1.183.0) (2023-07-18)
 
 
