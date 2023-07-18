@@ -1,3 +1,10 @@
+# [1.182.0](https://github.com/mkayander/leetpal/compare/v1.181.0...v1.182.0) (2023-07-18)
+
+
+### Features
+
+* Added main projects dump ([bc4284b](https://github.com/mkayander/leetpal/commit/bc4284bb7a514fd3cd381bfa7a44ed0b3869f184))
+
 # [1.181.0](https://github.com/mkayander/leetpal/compare/v1.180.0...v1.181.0) (2023-07-17)
 
 
