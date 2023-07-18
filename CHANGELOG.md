@@ -1,3 +1,11 @@
+# [1.183.0](https://github.com/mkayander/leetpal/compare/v1.182.0...v1.183.0) (2023-07-18)
+
+
+### Features
+
+* Added "isAdmin" field to user model ([2024502](https://github.com/mkayander/leetpal/commit/2024502745b9590bc85ba7e33b241df781a34902))
+* Implemented "load projects from json dump" script ([8df12d9](https://github.com/mkayander/leetpal/commit/8df12d985c01d2f53f60d1565a39b51888f9076a))
+
 # [1.182.0](https://github.com/mkayander/leetpal/compare/v1.181.0...v1.182.0) (2023-07-18)
 
 
