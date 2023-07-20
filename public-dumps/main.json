@@ -1147,6 +1147,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clkbf2hka0001ml084bofnkt1": {
+      "id": "clkbf2hka0001ml084bofnkt1",
+      "createdAt": "2023-07-20T17:18:50.986Z",
+      "updatedAt": "2023-07-20T17:18:50.986Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Asteroid Collision",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/asteroid-collision/",
+      "slug": "asteroid-collision",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -5696,6 +5710,120 @@
         }
       },
       "description": null
+    },
+    "clkbf2hka0002ml081slouxwv": {
+      "id": "clkbf2hka0002ml081slouxwv",
+      "createdAt": "2023-07-20T17:18:50.986Z",
+      "updatedAt": "2023-07-20T17:18:50.986Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,10,-5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbf6tg10001mc088qz4n9bn": {
+      "id": "clkbf6tg10001mc088qz4n9bn",
+      "createdAt": "2023-07-20T17:22:13.009Z",
+      "updatedAt": "2023-07-20T17:22:13.009Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[10,2,-5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbf7ao30003mc08x5bvqbn1": {
+      "id": "clkbf7ao30003mc08x5bvqbn1",
+      "createdAt": "2023-07-20T17:22:35.332Z",
+      "updatedAt": "2023-07-20T17:22:35.332Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[-2,-1,1,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbf7jb00005mc08bvpxwb6m": {
+      "id": "clkbf7jb00005mc08bvpxwb6m",
+      "createdAt": "2023-07-20T17:22:46.524Z",
+      "updatedAt": "2023-07-20T17:22:46.524Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,10,1,9,5,4,-12,-5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbf84k80007mc08u6c1f7lu": {
+      "id": "clkbf84k80007mc08u6c1f7lu",
+      "createdAt": "2023-07-20T17:23:14.073Z",
+      "updatedAt": "2023-07-20T17:23:14.073Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,10,1,-5,13,9,5,4,-12,4,-5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbfar610009mc084l0f5bwm": {
+      "id": "clkbfar610009mc084l0f5bwm",
+      "createdAt": "2023-07-20T17:25:16.681Z",
+      "updatedAt": "2023-07-20T17:25:16.681Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Case 6",
+      "order": 5,
+      "slug": "case-6",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,10,1,-5,13,9,5,4,13,-12,4,-5,-30]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -7162,6 +7290,18 @@
       "description": null,
       "code": "/**\n * @param {number} target\n * @param {number[]} position\n * @param {number[]} speed\n * @return {number}\n */\nvar carFleet = function (target, position, speed) {\n  const n = position.length;\n  const cars = position.map((val, i) => [val, speed[i]]);\n  cars.sort((a, b) => a[0] - b[0]);\n\n  let lastHour = null;\n  let count = 0;\n\n  for (let i = n - 1; i >= 0; i--) {\n    cars.setColor(i, \"green\");\n    const [pos, speed] = cars[i];\n\n    const hours = (target - pos) / speed;\n    console.log({hours, lastHour});\n    if (!lastHour || hours > lastHour) {\n      lastHour = hours;\n      count++;\n    }\n  }\n\n  return count;\n};\n\nreturn carFleet;\n",
       "order": 1
+    },
+    "clkbf2hka0004ml08kxglf247": {
+      "id": "clkbf2hka0004ml08kxglf247",
+      "createdAt": "2023-07-20T17:18:50.986Z",
+      "updatedAt": "2023-07-20T17:18:50.986Z",
+      "projectId": "clkbf2hka0001ml084bofnkt1",
+      "title": "Stack",
+      "slug": "stack",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} asteroids\n * @return {number[]}\n */\nvar asteroidCollision = function (asteroids) {\n  const stack = new Array();\n\n  for (let i = 0; i < asteroids.length; i++) {\n    asteroids.setColor(i, \"green\");\n    const asteroid = asteroids[i];\n    const size = Math.abs(asteroid);\n    const isRight = asteroid > 0;\n\n    if (isRight) {\n      stack.push(asteroid);\n      continue;\n    }\n\n    let didExplode = false;\n    while (stack.length && !didExplode) {\n      const prev = stack.at(-1);\n      const prevSize = Math.abs(prev);\n      const isPrevRight = prev > 0;\n      if (!isPrevRight) break;\n\n      if (prevSize <= size) {\n        stack.pop();\n      }\n      if (prevSize >= size) didExplode = true;\n    }\n\n    if (!didExplode) stack.push(asteroid);\n  }\n\n  return stack;\n};\n\nreturn asteroidCollision;\n",
+      "order": 0
     }
   }
 }
