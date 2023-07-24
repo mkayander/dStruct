@@ -19,10 +19,11 @@ import {
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { ArgsEditor, TestCaseSelectBar } from "#/components";
 import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
+import { ConfigContext } from "#/context";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { ProjectModal } from "#/layouts/modals";
@@ -45,6 +46,8 @@ export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
   const theme = useTheme();
+
+  const { newProjectMarginMs } = useContext(ConfigContext);
 
   const { LL } = useI18nContext();
 
@@ -143,6 +146,10 @@ export const ProjectPanel: React.FC = () => {
         );
       }
 
+      const isProjectNew =
+        newProjectMarginMs &&
+        project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
+
       elements.push(
         <MenuItem key={project.id} value={project.slug}>
           <Stack
@@ -150,10 +157,36 @@ export const ProjectPanel: React.FC = () => {
             justifyContent="space-between"
             alignItems="center"
             width="100%"
-            overflow="hidden"
             spacing={1}
           >
-            <span>{project.title}</span>
+            <Stack direction="row" spacing={1}>
+              <span>{project.title}</span>
+              {isProjectNew && (
+                <Tooltip
+                  title={`Created at ${project.createdAt.toLocaleString()}`}
+                  arrow
+                >
+                  <Typography
+                    display="inline-block"
+                    fontSize={12}
+                    px={0.5}
+                    pt={0.1}
+                    variant="caption"
+                    height="1.2rem"
+                    // textTransform="uppercase"
+                    sx={{
+                      opacity: 0.9,
+                      color: "white",
+                      background: theme.palette.success.main,
+                      borderRadius: 2,
+                      boxShadow: 4,
+                    }}
+                  >
+                    {LL.NEW()}
+                  </Typography>
+                </Tooltip>
+              )}
+            </Stack>
             <Stack
               direction="row"
               alignItems="center"
