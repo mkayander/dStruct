@@ -1161,6 +1161,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clkcmfi0u0001js08j7nc4xb2": {
+      "id": "clkcmfi0u0001js08j7nc4xb2",
+      "createdAt": "2023-07-21T13:32:41.598Z",
+      "updatedAt": "2023-07-21T13:32:41.598Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Longest Increasing Subsequence",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/",
+      "slug": "number-of-longest-increasing-subsequence",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clkh8n5w90001l308d9gxt7xe": {
+      "id": "clkh8n5w90001l308d9gxt7xe",
+      "createdAt": "2023-07-24T19:05:35.385Z",
+      "updatedAt": "2023-07-24T19:05:35.385Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Ternary Expression Parser",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/ternary-expression-parser/description/",
+      "slug": "ternary-expression-parser",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -5824,6 +5852,139 @@
         }
       },
       "description": null
+    },
+    "clkbj36vz0001lb08t73lu9qh": {
+      "id": "clkbj36vz0001lb08t73lu9qh",
+      "createdAt": "2023-07-20T19:11:22.271Z",
+      "updatedAt": "2023-07-20T19:11:22.271Z",
+      "projectId": "clk8nnu7m0001l908ng9fok09",
+      "title": "Case 3",
+      "order": 1,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbj5y240003lb08v0kp82pe": {
+      "id": "clkbj5y240003lb08v0kp82pe",
+      "createdAt": "2023-07-20T19:13:30.797Z",
+      "updatedAt": "2023-07-20T19:13:30.797Z",
+      "projectId": "clk8nnu7m0001l908ng9fok09",
+      "title": "Case 4",
+      "order": 2,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkbjarpb0001le08sarweto7": {
+      "id": "clkbjarpb0001le08sarweto7",
+      "createdAt": "2023-07-20T19:17:15.839Z",
+      "updatedAt": "2023-07-20T19:17:15.839Z",
+      "projectId": "clk8nnu7m0001l908ng9fok09",
+      "title": "Case 5",
+      "order": 3,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "6",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkcmfi0u0002js08r5lck02o": {
+      "id": "clkcmfi0u0002js08r5lck02o",
+      "createdAt": "2023-07-21T13:32:41.598Z",
+      "updatedAt": "2023-07-21T13:32:41.598Z",
+      "projectId": "clkcmfi0u0001js08j7nc4xb2",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkh8n5w90002l3085awx6hez": {
+      "id": "clkh8n5w90002l3085awx6hez",
+      "createdAt": "2023-07-24T19:05:35.385Z",
+      "updatedAt": "2023-07-24T19:05:35.385Z",
+      "projectId": "clkh8n5w90001l308d9gxt7xe",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "T?2:3",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkh8offk0007l308agru2iw0": {
+      "id": "clkh8offk0007l308agru2iw0",
+      "createdAt": "2023-07-24T19:06:34.400Z",
+      "updatedAt": "2023-07-24T19:06:34.400Z",
+      "projectId": "clkh8n5w90001l308d9gxt7xe",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "F?1:T?4:5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkh8op0s0009l308v1cm35ks": {
+      "id": "clkh8op0s0009l308v1cm35ks",
+      "createdAt": "2023-07-24T19:06:46.828Z",
+      "updatedAt": "2023-07-24T19:06:46.828Z",
+      "projectId": "clkh8n5w90001l308d9gxt7xe",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "T?T?F:5:3",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -7260,12 +7421,12 @@
       "createdAt": "2023-07-18T18:56:05.555Z",
       "updatedAt": "2023-07-18T18:56:05.555Z",
       "projectId": "clk8nnu7m0001l908ng9fok09",
-      "title": "Solution 1",
-      "slug": "solution-1",
+      "title": "Backtracking + Strings",
+      "slug": "backtracking-strings",
       "complexity": null,
-      "description": null,
-      "code": "/**\n * @param {number} n\n * @return {string[]}\n */\nvar generateParenthesis = function (n) {\n  const result = new Array();\n\n  const generate = (curr, left, right) => {\n    if (curr.length === 2 * n) {\n      result.push(curr);\n      return;\n    }\n\n    console.log({curr, left, right});\n\n    if (left > 0) {\n      generate(curr + \"(\", left - 1, right);\n    }\n\n    if (right > 0 && right > left) {\n      generate(curr + \")\", left, right - 1);\n    }\n  };\n\n  generate(\"\", n, n);\n\n  return result;\n};\n\nreturn generateParenthesis;\n",
-      "order": 0
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {string[]}\n */\nvar generateParenthesis = function (n) {\n  const result = new Array();\n\n  const backtrack = (str, open, closed) => {\n    if (open === n && closed === n) {\n      result.push(str);\n      return;\n    }\n\n    if (open < n) {\n      backtrack(str + \"(\", open + 1, closed);\n    }\n    if (closed < n && closed < open) {\n      backtrack(str + \")\", open, closed + 1);\n    }\n  };\n\n  backtrack(\"\", 0, 0);\n\n  return result;\n};\n\nreturn generateParenthesis;\n",
+      "order": 2
     },
     "clka3m8f70004mm09yjgr8py9": {
       "id": "clka3m8f70004mm09yjgr8py9",
@@ -7301,6 +7462,42 @@
       "complexity": null,
       "description": "",
       "code": "/**\n * @param {number[]} asteroids\n * @return {number[]}\n */\nvar asteroidCollision = function (asteroids) {\n  const stack = new Array();\n\n  for (let i = 0; i < asteroids.length; i++) {\n    asteroids.setColor(i, \"green\");\n    const asteroid = asteroids[i];\n    const size = Math.abs(asteroid);\n    const isRight = asteroid > 0;\n\n    if (isRight) {\n      stack.push(asteroid);\n      continue;\n    }\n\n    let didExplode = false;\n    while (stack.length && !didExplode) {\n      const prev = stack.at(-1);\n      const prevSize = Math.abs(prev);\n      const isPrevRight = prev > 0;\n      if (!isPrevRight) break;\n\n      if (prevSize <= size) {\n        stack.pop();\n      }\n      if (prevSize >= size) didExplode = true;\n    }\n\n    if (!didExplode) stack.push(asteroid);\n  }\n\n  return stack;\n};\n\nreturn asteroidCollision;\n",
+      "order": 0
+    },
+    "clkbiwfd10001l408zb9dp0un": {
+      "id": "clkbiwfd10001l408zb9dp0un",
+      "createdAt": "2023-07-20T19:06:06.661Z",
+      "updatedAt": "2023-07-20T19:06:06.661Z",
+      "projectId": "clk8nnu7m0001l908ng9fok09",
+      "title": "Backtracking + Stack",
+      "slug": "backtracking-stack",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {string[]}\n */\nvar generateParenthesis = function (n) {\n  const result = new Array();\n  const stack = new Array();\n  stack.setColorMap({\n    \"(\": \"green\",\n    \")\": \"cyan\",\n  });\n\n  const backtrack = (open, closed) => {\n    if (open === n && closed === n) {\n      const str = stack.join(\"\");\n      console.log(str);\n      result.push(str);\n      return;\n    }\n\n    if (open < n) {\n      stack.push(\"(\");\n      backtrack(open + 1, closed);\n      stack.pop();\n    }\n    if (closed < n && closed < open) {\n      stack.push(\")\");\n      backtrack(open, closed + 1);\n      stack.pop();\n    }\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn generateParenthesis;\n",
+      "order": 1
+    },
+    "clkcmfi0u0004js08cpyak7sg": {
+      "id": "clkcmfi0u0004js08cpyak7sg",
+      "createdAt": "2023-07-21T13:32:41.598Z",
+      "updatedAt": "2023-07-21T13:32:41.598Z",
+      "projectId": "clkcmfi0u0001js08j7nc4xb2",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar findNumberOfLIS = function (nums) {\n  const n = nums.length;\n  const length = new Array(n).fill(0);\n  const count = new Array(n).fill(0);\n  let maxLength = 0;\n  let result = 0;\n\n  const calculateDP = (i) => {\n    if (length[i] !== 0) return;\n\n    length[i] = 1;\n    count[i] = 1;\n\n    for (let j = 0; j < i; j++) {\n      if (nums[j] < nums[i]) {\n        calculateDP(j);\n        if (length[j] + 1 > length[i]) {\n          length[i] = length[j] + 1;\n          count[i] = 0;\n        }\n        if (length[j] + 1 === length[i]) {\n          count[i] += count[j];\n        }\n      }\n    }\n  };\n\n  for (let i = 0; i < n; i++) {\n    calculateDP(i);\n    maxLength = Math.max(maxLength, length[i]);\n  }\n\n  for (let i = 0; i < n; i++) {\n    if (length[i] === maxLength) {\n      result += count[i];\n    }\n  }\n\n  return result;\n};\n\nreturn findNumberOfLIS;\n",
+      "order": 0
+    },
+    "clkh8n5w90004l308rpjkw419": {
+      "id": "clkh8n5w90004l308rpjkw419",
+      "createdAt": "2023-07-24T19:05:35.385Z",
+      "updatedAt": "2023-07-24T19:05:35.385Z",
+      "projectId": "clkh8n5w90001l308d9gxt7xe",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} expression\n * @return {string}\n */\nvar parseTernary = function (expression) {\n  if (!isNaN(expression) || expression === \"T\" || expression === \"F\")\n    return expression;\n\n  let condition = expression[0];\n\n  let qMarks = 0;\n\n  let i = 2;\n  for (i; i < expression.length; i++) {\n    const char = expression[i];\n    if (char === \"?\") {\n      qMarks++;\n      continue;\n    } else if (char === \"T\" || char === \"F\") {\n      continue;\n    } else if (char === \":\") {\n      if (qMarks === 0) break;\n      qMarks--;\n      continue;\n    }\n  }\n\n  if (condition === \"T\") return parseTernary(expression.slice(2, i));\n\n  return parseTernary(expression.slice(i + 1));\n};\n\nreturn parseTernary;\n",
       "order": 0
     }
   }
