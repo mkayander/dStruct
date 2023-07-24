@@ -3,7 +3,8 @@ import type { NextPage } from "next";
 import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
-import { useI18nLoader } from "#/hooks";
+import { ConfigContext } from "#/context";
+import { useAppConfig, useI18nLoader } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { SplitPanelsLayout } from "#/layouts";
 import {
@@ -50,22 +51,26 @@ const PlaygroundPage: NextPage = () => {
   const theme = useTheme();
   useI18nLoader();
 
+  const { data = {} } = useAppConfig();
+
   return (
-    <PageScrollContainer
-      isPage={true}
-      style={{
-        height: "100vh",
-        background: darken(theme.palette.background.default, 0.1),
-      }}
-    >
-      <MainAppBar toolbarVariant="dense" />
-      <Wrapper
-        TopLeft={ProjectPanel}
-        BottomLeft={CodePanel}
-        TopRight={TreeViewPanel}
-        BottomRight={OutputPanel}
-      />
-    </PageScrollContainer>
+    <ConfigContext.Provider value={data}>
+      <PageScrollContainer
+        isPage={true}
+        style={{
+          height: "100vh",
+          background: darken(theme.palette.background.default, 0.1),
+        }}
+      >
+        <MainAppBar toolbarVariant="dense" />
+        <Wrapper
+          TopLeft={ProjectPanel}
+          BottomLeft={CodePanel}
+          TopRight={TreeViewPanel}
+          BottomRight={OutputPanel}
+        />
+      </PageScrollContainer>
+    </ConfigContext.Provider>
   );
 };
 
