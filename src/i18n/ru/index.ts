@@ -36,6 +36,7 @@ const ru: Record<keyof Translation, string> = {
   MS: "мс",
   NAME: "Имя",
   NO_DATA: "Нет данных",
+  NEW: "Новый",
   OPEN_OPTIONS: "Открыть опции",
   OUTPUT: "Вывод",
   PANEL_TABS: "Вкладки панели",

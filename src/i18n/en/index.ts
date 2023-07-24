@@ -36,6 +36,7 @@ const en: BaseTranslation = {
   MS: "ms",
   NAME: "Name",
   NO_DATA: "No data",
+  NEW: "New",
   OPEN_OPTIONS: "Open options",
   OUTPUT: "Output",
   PANEL_TABS: "Panel tabs",

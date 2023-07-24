@@ -161,6 +161,10 @@ type RootTranslation = {
 	 */
 	NO_DATA: string
 	/**
+	 * N​e​w
+	 */
+	NEW: string
+	/**
 	 * O​p​e​n​ ​o​p​t​i​o​n​s
 	 */
 	OPEN_OPTIONS: string
@@ -489,6 +493,10 @@ export type TranslationFunctions = {
 	 * No data
 	 */
 	NO_DATA: () => LocalizedString
+	/**
+	 * New
+	 */
+	NEW: () => LocalizedString
 	/**
 	 * Open options
 	 */
