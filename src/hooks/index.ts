@@ -9,3 +9,4 @@ export { useNodeColors } from "./useNodeColors";
 export { useNodesRuntimeUpdates } from "./useNodesRuntimeUpdates";
 export { useCodeExecution } from "./useCodeExecution";
 export { useI18nLoader } from "./useI18nLoader";
+export { useAppConfig } from "./useAppConfig";
