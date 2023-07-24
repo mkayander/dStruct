@@ -1,3 +1,22 @@
+# [1.187.0](https://github.com/mkayander/leetpal/compare/v1.186.0...v1.187.0) (2023-07-24)
+
+
+### Bug Fixes
+
+* Optimized imports ([4050643](https://github.com/mkayander/leetpal/commit/4050643c03ed4be0aa01ffe08b01b6cb84363959))
+
+
+### Features
+
+* Added config getter middleware ([2470c49](https://github.com/mkayander/leetpal/commit/2470c498f25c322138595efb6e0636627e7e620a))
+* Added translation token ([fc28b88](https://github.com/mkayander/leetpal/commit/fc28b886e882d0ff6a7f8d3ee61504d61a0fa824))
+* Added two new projects ([f009ed0](https://github.com/mkayander/leetpal/commit/f009ed07cfc0cfe78a69e56bc30fbdb90947e0a9))
+* Added useAppConfig hook ([ae405c7](https://github.com/mkayander/leetpal/commit/ae405c76758b9a73160f44aeb3952d8e5e0030c5))
+* Fetch and provide config context ([1ceb411](https://github.com/mkayander/leetpal/commit/1ceb4113d5885e6324a91e62faf4b7a7966fd60d))
+* Implemented "new" project label ([7a4331f](https://github.com/mkayander/leetpal/commit/7a4331ff01eafaf874d21287a825bce22d9ac384))
+* Implemented config context ([21d54f3](https://github.com/mkayander/leetpal/commit/21d54f333fc4b11d686d88d079eedce6dc6e32a4))
+* Installed edge config package ([7127331](https://github.com/mkayander/leetpal/commit/712733137f75ec4ac68e694a7f4b956172888a1c))
+
 # [1.186.0](https://github.com/mkayander/leetpal/compare/v1.185.0...v1.186.0) (2023-07-20)
 
 
