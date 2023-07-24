@@ -1,1 +1,1 @@
-export { PlaygroundRuntimeContext } from "./PlaygroundRuntimeContext";
+export { ConfigContext } from "./ConfigContext";
