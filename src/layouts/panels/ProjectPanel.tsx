@@ -1,29 +1,13 @@
 import { Add, Edit } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
-import {
-  Avatar,
-  FormControl,
-  IconButton,
-  InputLabel,
-  ListSubheader,
-  MenuItem,
-  Select,
-  type SelectChangeEvent,
-  Skeleton,
-  Stack,
-  Tab,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { IconButton, Skeleton, Stack, Tab, Tooltip } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { ArgsEditor, TestCaseSelectBar } from "#/components";
+import { ArgsEditor, ProjectSelect, TestCaseSelectBar } from "#/components";
 import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
-import { ConfigContext } from "#/context";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/i18n/i18n-react";
 import { ProjectModal } from "#/layouts/modals";
@@ -34,20 +18,11 @@ import {
   projectSlice,
   selectIsEditable,
 } from "#/store/reducers/projectReducer";
-import {
-  categoryLabels,
-  difficultyLabels,
-  getDifficultyColor,
-  getImageUrl,
-  trpc,
-} from "#/utils";
+import { trpc } from "#/utils";
 
 export const ProjectPanel: React.FC = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
-  const theme = useTheme();
-
-  const { newProjectMarginMs } = useContext(ConfigContext);
 
   const { LL } = useI18nContext();
 
@@ -108,10 +83,6 @@ export const ProjectPanel: React.FC = () => {
     setTabValue(newValue);
   };
 
-  const handleSelectProject = (e: SelectChangeEvent) => {
-    void setProject(e.target.value);
-  };
-
   const handleCreateProject = () => {
     setIsModalEditMode(false);
     setIsProjectModalOpen(true);
@@ -121,108 +92,6 @@ export const ProjectPanel: React.FC = () => {
     setIsModalEditMode(true);
     setIsProjectModalOpen(true);
   };
-
-  const projectSelectItems = useMemo(() => {
-    let lastCategory = "";
-    const elements: JSX.Element[] = [];
-    if (!allBrief.data) return elements;
-
-    for (const project of allBrief.data) {
-      if (lastCategory !== project.category) {
-        lastCategory = project.category;
-        elements.push(
-          <ListSubheader
-            key={project.category}
-            sx={{
-              backgroundColor: "transparent",
-              backdropFilter: "blur(8px)",
-              "&:not(:first-of-type)": {
-                borderTop: `1px solid ${theme.palette.divider}`,
-              },
-            }}
-          >
-            {categoryLabels[project.category]}
-          </ListSubheader>
-        );
-      }
-
-      const isProjectNew =
-        newProjectMarginMs &&
-        project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
-
-      elements.push(
-        <MenuItem key={project.id} value={project.slug}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            width="100%"
-            spacing={1}
-          >
-            <Stack direction="row" spacing={1}>
-              <span>{project.title}</span>
-              {isProjectNew && (
-                <Tooltip
-                  title={`Created at ${project.createdAt.toLocaleString()}`}
-                  arrow
-                >
-                  <Typography
-                    display="inline-block"
-                    fontSize={12}
-                    px={0.5}
-                    pt={0.1}
-                    variant="caption"
-                    height="1.2rem"
-                    // textTransform="uppercase"
-                    sx={{
-                      opacity: 0.9,
-                      color: "white",
-                      background: theme.palette.success.main,
-                      borderRadius: 2,
-                      boxShadow: 4,
-                    }}
-                  >
-                    {LL.NEW()}
-                  </Typography>
-                </Tooltip>
-              )}
-            </Stack>
-            <Stack
-              direction="row"
-              alignItems="center"
-              minWidth={10}
-              overflow="hidden"
-              spacing={1}
-            >
-              <Typography
-                fontSize={12}
-                variant="subtitle1"
-                textOverflow="ellipsis"
-                overflow="hidden"
-                sx={{
-                  opacity: 0.6,
-                  color: getDifficultyColor(theme, project.difficulty),
-                }}
-              >
-                {project.difficulty && difficultyLabels[project.difficulty]}
-              </Typography>
-              {project.author?.bucketImage && (
-                <Tooltip title={`Author: ${project.author.name}`} arrow>
-                  <Avatar
-                    src={getImageUrl(project.author.bucketImage)}
-                    alt={`${project.author.name} avatar`}
-                    sx={{ height: 24, width: 24 }}
-                  />
-                </Tooltip>
-              )}
-            </Stack>
-          </Stack>
-        </MenuItem>
-      );
-    }
-
-    return elements;
-  }, [allBrief.data, theme]);
 
   return (
     <PanelWrapper>
@@ -272,22 +141,7 @@ export const ProjectPanel: React.FC = () => {
           sx={{ display: "flex", flexFlow: "column nowrap", p: 2, gap: 1 }}
         >
           <Stack direction="row" alignItems="center" spacing={2}>
-            <FormControl fullWidth>
-              <InputLabel id="project-select-label">
-                {LL.CURRENT_PROJECT()}
-              </InputLabel>
-              <Select
-                id="project-select"
-                labelId="project-select-label"
-                label={LL.CURRENT_PROJECT()}
-                defaultValue=""
-                value={allBrief.isLoading ? "" : projectSlug}
-                onChange={handleSelectProject}
-                disabled={allBrief.isLoading}
-              >
-                {projectSelectItems}
-              </Select>
-            </FormControl>
+            <ProjectSelect allBrief={allBrief} />
             <Stack direction="row" spacing={0.5}>
               {isEditable && (
                 <Tooltip title={`${LL.EDIT_SELECTED_PROJECT()} ✍`} arrow>

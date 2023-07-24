@@ -26,3 +26,5 @@ export { ArgInput } from "./ArgsEditor/ArgInput";
 export { ArgumentTypeSelect } from "./ArgsEditor/ArgumentTypeSelect";
 export { ClientSnackbarProvider } from "./ClientSnackbarProvider";
 export { StateThemeProvider } from "./StateThemeProvider";
+export { NewLabel } from "./NewLabel";
+export { ProjectSelect } from "./ProjectSelect";
