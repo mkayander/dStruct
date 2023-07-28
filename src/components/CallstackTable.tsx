@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { useI18nContext } from "#/i18n/i18n-react";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type CallFrame,
@@ -108,6 +109,7 @@ const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
 };
 
 export const CallstackTable: React.FC = () => {
+  const { LL } = useI18nContext();
   const callstack = useAppSelector(selectCallstack);
 
   const startTimestamp = callstack.startTimestamp ?? 0;
@@ -118,10 +120,10 @@ export const CallstackTable: React.FC = () => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Node</TableCell>
-              <TableCell align="right">Action</TableCell>
-              <TableCell align="right">Timestamp</TableCell>
-              <TableCell align="right">Arguments</TableCell>
+              <TableCell>{LL.NODE()}</TableCell>
+              <TableCell align="right">{LL.ACTION()}</TableCell>
+              <TableCell align="right">{LL.TIMESTAMP()}</TableCell>
+              <TableCell align="right">{LL.ARGUMENTS()}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

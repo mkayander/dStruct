@@ -1,6 +1,7 @@
 import type { Translation } from "../i18n-types";
 
 const ru: Record<keyof Translation, string> = {
+  ACTION: "Действие",
   ADD_ARGUMENT: "Добавить аргумент",
   ADD_NEW_SOLUTION: "Добавить новое решение",
   ARGUMENTS: "Аргументы",
@@ -35,8 +36,9 @@ const ru: Record<keyof Translation, string> = {
   MAIN_MENU: "Главное меню",
   MS: "мс",
   NAME: "Имя",
-  NO_DATA: "Нет данных",
   NEW: "Новый",
+  NODE: "Узел",
+  NO_DATA: "Нет данных",
   OPEN_OPTIONS: "Открыть опции",
   OUTPUT: "Вывод",
   PANEL_TABS: "Вкладки панели",
@@ -67,6 +69,7 @@ const ru: Record<keyof Translation, string> = {
   TEST_CASE_DESCRIPTION_HELPER_TEXT: "Описание тестового примера (необязательно)",
   TEST_CASE_NAME_HELPER_TEXT: "Короткое название вашего тестового примера",
   TEST_CASE_SLUG_HELPER_TEXT: "Вы можете отредактировать слаг, который используется в URL-адресе для этого тестового примера",
+  TIMESTAMP: "Отметка времени",
   TODAY: "Сегодня {date|weekday}",
   TOKEN: "Токен",
   TREE_VIEWER: "Просмотр",
@@ -76,8 +79,8 @@ const ru: Record<keyof Translation, string> = {
   USERNAME: "Имя пользователя",
   USER_DASHBOARD: "Панель управления {name} ",
   USER_SETTINGS: "Настройки пользователя",
-  YOUR_CHANGES_WILL_BE_LOST: "Ваши изменения будут потеряны",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Визуализируй свои проблемы LeetCode просто из своего кода",
+  YOUR_CHANGES_WILL_BE_LOST: "Ваши изменения будут потеряны",
   YOUR_LEETCODE_ACCOUNT_NAME: "Ваше имя учетной записи LeetCode",
   YOUR_NAME: "Ваше имя:",
   YOU_DONT_OWN_THIS_PROJECT: "Вы не владеете этим проектом",

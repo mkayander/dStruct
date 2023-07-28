@@ -19,6 +19,10 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * A​c​t​i​o​n
+	 */
+	ACTION: string
+	/**
 	 * A​d​d​ ​a​r​g​u​m​e​n​t
 	 */
 	ADD_ARGUMENT: string
@@ -157,13 +161,17 @@ type RootTranslation = {
 	 */
 	NAME: string
 	/**
-	 * N​o​ ​d​a​t​a
-	 */
-	NO_DATA: string
-	/**
 	 * N​e​w
 	 */
 	NEW: string
+	/**
+	 * N​o​d​e
+	 */
+	NODE: string
+	/**
+	 * N​o​ ​d​a​t​a
+	 */
+	NO_DATA: string
 	/**
 	 * O​p​e​n​ ​o​p​t​i​o​n​s
 	 */
@@ -285,6 +293,10 @@ type RootTranslation = {
 	 */
 	TEST_CASE_SLUG_HELPER_TEXT: string
 	/**
+	 * T​i​m​e​s​t​a​m​p
+	 */
+	TIMESTAMP: string
+	/**
 	 * T​o​d​a​y​ ​i​s​ ​{​d​a​t​e​|​w​e​e​k​d​a​y​}
 	 * @param {Date} date
 	 */
@@ -353,6 +365,10 @@ type RootTranslation = {
 }
 
 export type TranslationFunctions = {
+	/**
+	 * Action
+	 */
+	ACTION: () => LocalizedString
 	/**
 	 * Add argument
 	 */
@@ -490,13 +506,17 @@ export type TranslationFunctions = {
 	 */
 	NAME: () => LocalizedString
 	/**
-	 * No data
-	 */
-	NO_DATA: () => LocalizedString
-	/**
 	 * New
 	 */
 	NEW: () => LocalizedString
+	/**
+	 * Node
+	 */
+	NODE: () => LocalizedString
+	/**
+	 * No data
+	 */
+	NO_DATA: () => LocalizedString
 	/**
 	 * Open options
 	 */
@@ -617,6 +637,10 @@ export type TranslationFunctions = {
 	 * You can edit a slug that's used in the URL to this test case
 	 */
 	TEST_CASE_SLUG_HELPER_TEXT: () => LocalizedString
+	/**
+	 * Timestamp
+	 */
+	TIMESTAMP: () => LocalizedString
 	/**
 	 * Today is {date|weekday}
 	 */

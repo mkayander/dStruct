@@ -1,6 +1,7 @@
 import type { BaseTranslation } from "../i18n-types";
 
 const en: BaseTranslation = {
+  ACTION: "Action",
   ADD_ARGUMENT: "Add argument",
   ADD_NEW_SOLUTION: "Add new solution",
   ARGUMENTS: "Arguments",
@@ -35,8 +36,9 @@ const en: BaseTranslation = {
   MAIN_MENU: "Main Menu",
   MS: "ms",
   NAME: "Name",
-  NO_DATA: "No data",
   NEW: "New",
+  NODE: "Node",
+  NO_DATA: "No data",
   OPEN_OPTIONS: "Open options",
   OUTPUT: "Output",
   PANEL_TABS: "Panel tabs",
@@ -67,6 +69,7 @@ const en: BaseTranslation = {
   TEST_CASE_DESCRIPTION_HELPER_TEXT: "Optional test case description",
   TEST_CASE_NAME_HELPER_TEXT: "A short name for your test case",
   TEST_CASE_SLUG_HELPER_TEXT: "You can edit a slug that's used in the URL to this test case",
+  TIMESTAMP: "Timestamp",
   TODAY: "Today is {date:Date|weekday}",
   TOKEN: "Token",
   TREE_VIEWER: "Tree Viewer",
