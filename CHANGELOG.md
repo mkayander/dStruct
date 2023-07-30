@@ -1,3 +1,12 @@
+# [1.188.0](https://github.com/mkayander/leetpal/compare/v1.187.0...v1.188.0) (2023-07-30)
+
+
+### Features
+
+* Added translation tokens ([0e8f494](https://github.com/mkayander/leetpal/commit/0e8f494f822a0e8e39c005a826bb8c7d22adf4dd))
+* Updated dependencies ([e48620d](https://github.com/mkayander/leetpal/commit/e48620da60905872383d334e4f78ec005b43b5b4))
+* Updated Next, TRPC, TS packages ([47ff711](https://github.com/mkayander/leetpal/commit/47ff71142f819d8180e8b334d796232fd20aa7ac))
+
 # [1.187.0](https://github.com/mkayander/leetpal/compare/v1.186.0...v1.187.0) (2023-07-24)
 
 
