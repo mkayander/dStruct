@@ -2,38 +2,29 @@ import { ApolloProvider } from "@apollo/client";
 import { Analytics } from "@vercel/analytics/react";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { type AppProps } from "next/app";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { StateThemeProvider } from "#/components";
+import { I18nProvider } from "#/components/I18nProvider";
 import { apolloClient } from "#/graphql/apolloClient";
-import TypesafeI18n from "#/i18n/i18n-react";
-import type { Locales } from "#/i18n/i18n-types";
-import { loadedLocales } from "#/i18n/i18n-util";
-import { loadFormatters } from "#/i18n/i18n-util.sync";
+import { type I18nProps } from "#/i18n/getI18nProps";
 import { wrapper } from "#/store/makeStore";
-import type { AppTypeWithLayout } from "#/types/page";
 import { trpc } from "#/utils";
 
 import "#/styles/globals.css";
 
 import "overlayscrollbars/overlayscrollbars.css";
 
-const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
-  Component,
-  ...restProps
-}) => {
-  const { store, props } = wrapper.useWrappedStore(restProps);
+type MyAppProps = {
+  session: Session | null;
+  i18n?: I18nProps;
+};
 
-  props.pageProps.i18n ??= {
-    locale: "en",
-    dictionary: {},
-    isStub: true,
-  };
-  const locale: Locales = props.pageProps.i18n.locale;
-  loadedLocales[locale] = props.pageProps.i18n.dictionary;
-  loadFormatters(locale);
+const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, ...restProps }) => {
+  const { store, props } = wrapper.useWrappedStore(restProps);
 
   return (
     <ReduxProvider store={store}>
@@ -41,10 +32,10 @@ const MyApp: AppTypeWithLayout<{ session: Session | null }> = ({
         <ApolloProvider client={apolloClient}>
           <StateThemeProvider>
             <SnackbarProvider maxSnack={4}>
-              <TypesafeI18n locale={locale}>
+              <I18nProvider i18n={props.pageProps.i18n}>
                 <Component {...props.pageProps} />
                 <Analytics />
-              </TypesafeI18n>
+              </I18nProvider>
             </SnackbarProvider>
           </StateThemeProvider>
         </ApolloProvider>
