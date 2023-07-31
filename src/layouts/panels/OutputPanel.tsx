@@ -3,7 +3,7 @@ import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
 import { CallstackTable } from "#/components/CallstackTable";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";

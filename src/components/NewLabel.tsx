@@ -1,7 +1,7 @@
 import { Tooltip, Typography } from "@mui/material";
 import React from "react";
 
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 
 type NewLabelProps = {
   createdAt: Date;

@@ -30,7 +30,7 @@ import React, { type MouseEvent, useEffect, useState } from "react";
 import { SidePanel } from "#/components/Page/SidePanel";
 import { ThemeSwitch } from "#/components/Page/ThemeSwitch";
 import { useProfileImageUploader } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   appBarSlice,

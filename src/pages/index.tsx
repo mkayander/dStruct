@@ -19,8 +19,8 @@ import React from "react";
 import { useDailyQuestionData } from "#/api";
 import { QuestionSummary } from "#/components";
 import { useGetUserProfileQuery } from "#/graphql/generated";
+import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
-import { useI18nContext } from "#/i18n/i18n-react";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import {
   DailyProblem,

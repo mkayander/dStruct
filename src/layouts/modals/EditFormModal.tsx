@@ -11,7 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import type { useFormik } from "formik";
 import React from "react";
 
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 
 export type EditModalProps = DialogProps & {
   title: string;

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { ArgsEditor, ProjectSelect, TestCaseSelectBar } from "#/components";
 import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
 import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { ProjectModal } from "#/layouts/modals";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";

@@ -16,8 +16,8 @@ import {
 import React, { useState } from "react";
 
 import { TreeViewer } from "#/components";
+import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
-import { useI18nContext } from "#/i18n/i18n-react";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";

@@ -8,7 +8,7 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { EditFormModal } from "#/layouts/modals/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 import { selectProjectId } from "#/store/reducers/projectReducer";

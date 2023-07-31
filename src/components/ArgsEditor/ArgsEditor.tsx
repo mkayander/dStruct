@@ -15,7 +15,7 @@ import shortUUID from "short-uuid";
 
 import { ArgInput, ArgumentTypeSelect } from "#/components";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   caseSlice,

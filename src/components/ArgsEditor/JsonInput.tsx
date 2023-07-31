@@ -5,7 +5,7 @@ import Joi from "joi";
 import React, { useState } from "react";
 
 import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 
 type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;

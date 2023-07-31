@@ -24,7 +24,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
@@ -80,16 +80,15 @@ type SidePanelProps = {
 
 export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const router = useRouter();
-  const { LL, locale, setLocale } = useI18nContext();
+  const { LL } = useI18nContext();
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
 
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
     const newLocale = event.target.value as Locales;
-    if (newLocale !== locale) {
+    if (newLocale !== router.locale) {
       localStorage.setItem("locale", newLocale);
       await loadLocaleAsync(newLocale);
-      setLocale(newLocale);
       void router.push(router.asPath, undefined, { locale: newLocale });
     }
   };
@@ -155,7 +154,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               <Select
                 labelId="side-panel-language-label"
                 label={LL.LANGUAGE()}
-                value={locale}
+                value={router.locale as Locales}
                 onChange={handleChangeLocale}
               >
                 {locales.map((locale) => (

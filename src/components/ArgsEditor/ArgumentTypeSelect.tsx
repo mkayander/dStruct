@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { ArgumentType, argumentTypeLabels } from "#/utils/argumentObject";
 
 type ArgumentTypeSelectProps = Omit<SelectProps, "value" | "onChange"> & {

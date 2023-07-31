@@ -17,7 +17,7 @@ import React, { useContext, useMemo } from "react";
 import { NewLabel } from "#/components/NewLabel";
 import { ConfigContext } from "#/context";
 import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import {
   categoryLabels,
   difficultyLabels,

@@ -11,7 +11,7 @@ import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { trpc } from "#/utils";
 
 export const UserSettings: React.FC = () => {

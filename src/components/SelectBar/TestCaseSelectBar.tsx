@@ -10,7 +10,7 @@ import { type OnDragEndResponder } from "react-beautiful-dnd";
 import { DraggableSelectBarList } from "#/components/SelectBar/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/components/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/i18n/i18n-react";
+import { useI18nContext } from "#/hooks";
 import { CaseModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
