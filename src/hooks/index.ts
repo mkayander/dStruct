@@ -8,5 +8,5 @@ export { useLinkedListChildNode } from "./useLinkedListChildNode";
 export { useNodeColors } from "./useNodeColors";
 export { useNodesRuntimeUpdates } from "./useNodesRuntimeUpdates";
 export { useCodeExecution } from "./useCodeExecution";
-export { useI18nLoader } from "./useI18nLoader";
+export { useI18nContext } from "./useI18nContext";
 export { useAppConfig } from "./useAppConfig";
