@@ -4,7 +4,7 @@ import React from "react";
 
 import { MainAppBar, PageScrollContainer } from "#/components";
 import { ConfigContext } from "#/context";
-import { useAppConfig, useI18nLoader } from "#/hooks";
+import { useAppConfig } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { SplitPanelsLayout } from "#/layouts";
 import {
@@ -49,7 +49,6 @@ const Wrapper: React.FC<WrapperProps> = ({
 
 const PlaygroundPage: NextPage = () => {
   const theme = useTheme();
-  useI18nLoader();
 
   const { data = {} } = useAppConfig();
 
