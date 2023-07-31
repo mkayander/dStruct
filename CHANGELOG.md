@@ -1,3 +1,19 @@
+# [1.191.0](https://github.com/mkayander/leetpal/compare/v1.190.0...v1.191.0) (2023-07-31)
+
+
+### Bug Fixes
+
+* Removed deprecated hook usage ([960ab26](https://github.com/mkayander/leetpal/commit/960ab2674ceea4db3ce85b2dd7bcac611731e0b7))
+
+
+### Features
+
+* Added custom i18n provider component usage ([fbd7984](https://github.com/mkayander/leetpal/commit/fbd7984efbe9af1d19f79c79ded73f9ed4b912a5))
+* Implemented custom i18n context ([f0c956d](https://github.com/mkayander/leetpal/commit/f0c956d06b5e6a9d7f055949808870642b12f7fd))
+* Implemented custom i18n context hook ([9027089](https://github.com/mkayander/leetpal/commit/9027089b2132f8eb6bc18d319288ec2d75247ed9))
+* Implemented custom i18n provider component ([515e156](https://github.com/mkayander/leetpal/commit/515e1564eb15ad52f029ae31879d43091c989672))
+* Use custom i18n context hook ([62badd0](https://github.com/mkayander/leetpal/commit/62badd0babd05d53dbc1fe080edae8bc5895dcd1))
+
 # [1.190.0](https://github.com/mkayander/leetpal/compare/v1.189.0...v1.190.0) (2023-07-30)
 
 
