@@ -21,11 +21,22 @@ export class BinaryTreeNode extends NodeBase {
     right: BinaryTreeNode | null = null,
     meta: BinaryNodeMeta,
     name: string,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
+    addToCallstack?: boolean
   ) {
     super(val, meta, name, dispatch);
     this._left = left;
     this._right = right;
+
+    if (addToCallstack) {
+      this.dispatch(
+        callstackSlice.actions.addOne({
+          ...this.getDispatchBase(),
+          name: "addNode",
+          args: [val],
+        })
+      );
+    }
   }
 
   private _left: BinaryTreeNode | null;

@@ -34,7 +34,8 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
           depth: 0,
         },
         uuid.generate(),
-        dispatch
+        dispatch,
+        true
       );
     }
   }

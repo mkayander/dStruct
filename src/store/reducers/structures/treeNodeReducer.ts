@@ -83,7 +83,8 @@ export const treeNodeSlice = createSlice({
       }
 
       treeState.count++;
-      treeNodeDataAdapter.addOne(treeState.nodes, action.payload.data);
+      treeState.nodes.ids.push(action.payload.name);
+      treeState.nodes.entities[action.payload.name] = action.payload.data;
 
       state[name] = treeState;
     },
