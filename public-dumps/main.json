@@ -1189,6 +1189,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clksiw1k50001jl08f1b4e558": {
+      "id": "clksiw1k50001jl08f1b4e558",
+      "createdAt": "2023-08-01T16:37:53.765Z",
+      "updatedAt": "2023-08-01T16:37:53.765Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Combinations",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/combinations/",
+      "slug": "combinations",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clku4r9d70001l9087zlb1dfn": {
+      "id": "clku4r9d70001l9087zlb1dfn",
+      "createdAt": "2023-08-02T19:37:48.331Z",
+      "updatedAt": "2023-08-02T19:37:48.331Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Permutations",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/permutations/",
+      "slug": "permutations",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clkvjsm1n0001me08aobgik28": {
+      "id": "clkvjsm1n0001me08aobgik28",
+      "createdAt": "2023-08-03T19:26:31.835Z",
+      "updatedAt": "2023-08-03T19:26:31.835Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Letter Combinations of a Phone Number",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+      "slug": "letter-combinations-of-a-phone-number",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clkzqax3o0001ml08i3jsk2cg": {
+      "id": "clkzqax3o0001ml08i3jsk2cg",
+      "createdAt": "2023-08-06T17:39:48.372Z",
+      "updatedAt": "2023-08-06T17:39:48.372Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Unique Binary Search Trees II",
+      "category": "BST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
+      "slug": "unique-binary-search-trees-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -5985,6 +6041,195 @@
         }
       },
       "description": null
+    },
+    "clksiw1k50002jl08twwyq667": {
+      "id": "clksiw1k50002jl08twwyq667",
+      "createdAt": "2023-08-01T16:37:53.765Z",
+      "updatedAt": "2023-08-01T16:37:53.765Z",
+      "projectId": "clksiw1k50001jl08f1b4e558",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "nnhrQMVeS751F6dJFcuz5h": {
+          "name": "nnhrQMVeS751F6dJFcuz5h",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clksixkw80001mh08vjfs1n31": {
+      "id": "clksixkw80001mh08vjfs1n31",
+      "createdAt": "2023-08-01T16:39:05.481Z",
+      "updatedAt": "2023-08-01T16:39:05.481Z",
+      "projectId": "clksiw1k50001jl08f1b4e558",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "6",
+          "order": 0
+        },
+        "nnhrQMVeS751F6dJFcuz5h": {
+          "name": "nnhrQMVeS751F6dJFcuz5h",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clksizaq00005jl08kqzt50hq": {
+      "id": "clksizaq00005jl08kqzt50hq",
+      "createdAt": "2023-08-01T16:40:25.609Z",
+      "updatedAt": "2023-08-01T16:40:25.609Z",
+      "projectId": "clksiw1k50001jl08f1b4e558",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "nnhrQMVeS751F6dJFcuz5h": {
+          "name": "nnhrQMVeS751F6dJFcuz5h",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clku4r9d70002l908uftfi6ny": {
+      "id": "clku4r9d70002l908uftfi6ny",
+      "createdAt": "2023-08-02T19:37:48.331Z",
+      "updatedAt": "2023-08-02T19:37:48.331Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clku4rsyt0005l908ug3h1fa8": {
+      "id": "clku4rsyt0005l908ug3h1fa8",
+      "createdAt": "2023-08-02T19:38:13.733Z",
+      "updatedAt": "2023-08-02T19:38:13.733Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkvjsm1n0002me084u10wb11": {
+      "id": "clkvjsm1n0002me084u10wb11",
+      "createdAt": "2023-08-03T19:26:31.835Z",
+      "updatedAt": "2023-08-03T19:26:31.835Z",
+      "projectId": "clkvjsm1n0001me08aobgik28",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "23",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkvjyqt10005me08cqgic2sx": {
+      "id": "clkvjyqt10005me08cqgic2sx",
+      "createdAt": "2023-08-03T19:31:17.941Z",
+      "updatedAt": "2023-08-03T19:31:17.941Z",
+      "projectId": "clkvjsm1n0001me08aobgik28",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkvjysyk0007me08fbswqqo5": {
+      "id": "clkvjysyk0007me08fbswqqo5",
+      "createdAt": "2023-08-03T19:31:20.732Z",
+      "updatedAt": "2023-08-03T19:31:20.732Z",
+      "projectId": "clkvjsm1n0001me08aobgik28",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "79",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clkzqax3o0002ml080bd55j9t": {
+      "id": "clkzqax3o0002ml080bd55j9t",
+      "createdAt": "2023-08-06T17:39:48.372Z",
+      "updatedAt": "2023-08-06T17:39:48.372Z",
+      "projectId": "clkzqax3o0001ml08i3jsk2cg",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "9QfxNpkeCGZ6s2hvb6Cu15": {
+          "name": "9QfxNpkeCGZ6s2hvb6Cu15",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -7498,6 +7743,54 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} expression\n * @return {string}\n */\nvar parseTernary = function (expression) {\n  if (!isNaN(expression) || expression === \"T\" || expression === \"F\")\n    return expression;\n\n  let condition = expression[0];\n\n  let qMarks = 0;\n\n  let i = 2;\n  for (i; i < expression.length; i++) {\n    const char = expression[i];\n    if (char === \"?\") {\n      qMarks++;\n      continue;\n    } else if (char === \"T\" || char === \"F\") {\n      continue;\n    } else if (char === \":\") {\n      if (qMarks === 0) break;\n      qMarks--;\n      continue;\n    }\n  }\n\n  if (condition === \"T\") return parseTernary(expression.slice(2, i));\n\n  return parseTernary(expression.slice(i + 1));\n};\n\nreturn parseTernary;\n",
+      "order": 0
+    },
+    "clksiw1k50003jl08dnhrtom0": {
+      "id": "clksiw1k50003jl08dnhrtom0",
+      "createdAt": "2023-08-01T16:37:53.765Z",
+      "updatedAt": "2023-08-01T16:37:53.765Z",
+      "projectId": "clksiw1k50001jl08f1b4e558",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number} k\n * @return {number[][]}\n */\nvar combine = function (n, k) {\n  const result = new Array();\n  const current = new Array();\n\n  const backtrack = (i, size = 0) => {\n    if (size === k) {\n      result.push([...current]);\n      return;\n    }\n\n    for (let j = i + 1; j <= n; j++) {\n      current.push(j);\n      backtrack(j, size + 1);\n      current.pop();\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn combine;\n",
+      "order": 0
+    },
+    "clku4r9d70003l908cey42p2r": {
+      "id": "clku4r9d70003l908cey42p2r",
+      "createdAt": "2023-08-02T19:37:48.331Z",
+      "updatedAt": "2023-08-02T19:37:48.331Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "var permute = function (nums) {\n  const res = new Array();\n  const track = new Array();\n  const used = new Array(nums.length).fill(false);\n  used.setColorMap({\n    true: \"cyan\",\n  });\n\n  const backtrack = (size = 0) => {\n    if (size === nums.length) {\n      res.push([...track]);\n      console.log(track);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (used[i]) {\n        continue;\n      }\n\n      track.push(nums[i]);\n      used[i] = true;\n\n      nums.setColor(i, \"green\");\n      backtrack(size + 1);\n      nums.setColor(i, null);\n\n      track.pop();\n      used[i] = false;\n    }\n  };\n\n  backtrack();\n\n  return res;\n};\n\nreturn permute;\n",
+      "order": 0
+    },
+    "clkvjsm1n0003me08m4kl0u03": {
+      "id": "clkvjsm1n0003me08m4kl0u03",
+      "createdAt": "2023-08-03T19:26:31.835Z",
+      "updatedAt": "2023-08-03T19:26:31.835Z",
+      "projectId": "clkvjsm1n0001me08aobgik28",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} digits\n * @return {string[]}\n */\nvar letterCombinations = function (digits) {\n  if (!digits) return [];\n\n  const n = digits.length;\n  const map = {\n    2: \"abc\",\n    3: \"def\",\n    4: \"ghi\",\n    5: \"jkl\",\n    6: \"mno\",\n    7: \"pqrs\",\n    8: \"tuv\",\n    9: \"wxyz\",\n  };\n\n  const result = [];\n  const current = []; // stack\n\n  const backtrack = (i = 0) => {\n    if (i === n) {\n      result.push(current.join(\"\"));\n      return;\n    }\n\n    const digit = digits[i];\n    const chars = map[digit];\n\n    for (const char of chars) {\n      current.push(char);\n      backtrack(i + 1);\n      current.pop();\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn letterCombinations;\n",
+      "order": 0
+    },
+    "clkzqax3o0003ml08bm4jltrj": {
+      "id": "clkzqax3o0003ml08bm4jltrj",
+      "createdAt": "2023-08-06T17:39:48.372Z",
+      "updatedAt": "2023-08-06T17:39:48.372Z",
+      "projectId": "clkzqax3o0001ml08i3jsk2cg",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number} n\n * @return {TreeNode[]}\n */\nvar generateTrees = function (n) {\n  const memo = new Map();\n  const getKey = (min, max) => `${min}-${max}`;\n\n  const generate = (min = 1, max = n) => {\n    if (min < 1 || max > n || min > max) return [null];\n    const key = getKey(min, max);\n    if (memo.has(key)) return memo.get(key);\n    const list = [];\n\n    for (let j = min; j <= max; j++) {\n      const leftSubtrees = generate(min, j - 1);\n      const rightSubtrees = generate(j + 1, max);\n      for (const left of leftSubtrees) {\n        for (const right of rightSubtrees) {\n          const root = new BinaryTree(j, left, right);\n          list.push(root);\n        }\n      }\n    }\n\n    memo.set(key, list);\n\n    return list;\n  };\n\n  return generate();\n};\n\nreturn generateTrees;\n",
       "order": 0
     }
   }
