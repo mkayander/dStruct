@@ -1,3 +1,11 @@
+# [1.193.0](https://github.com/mkayander/leetpal/compare/v1.192.0...v1.193.0) (2023-08-06)
+
+
+### Features
+
+* Updated Prisma ([2e0a1f4](https://github.com/mkayander/leetpal/commit/2e0a1f406105c9b01ee295ef7b097b097c734cfa))
+* Updated projects data dump ([4e640b1](https://github.com/mkayander/leetpal/commit/4e640b160570e2c4f23b82e656a4df260f1cff3f))
+
 # [1.192.0](https://github.com/mkayander/leetpal/compare/v1.191.0...v1.192.0) (2023-08-06)
 
 
