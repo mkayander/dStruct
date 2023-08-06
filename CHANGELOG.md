@@ -1,3 +1,10 @@
+# [1.192.0](https://github.com/mkayander/leetpal/compare/v1.191.0...v1.192.0) (2023-08-06)
+
+
+### Features
+
+* Allow binary tree runtime creation ([03c177d](https://github.com/mkayander/leetpal/commit/03c177d4b2d444b6c59b4ac34b2cf60f3a698817))
+
 # [1.191.0](https://github.com/mkayander/leetpal/compare/v1.190.0...v1.191.0) (2023-07-31)
 
 
