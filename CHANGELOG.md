@@ -1,3 +1,12 @@
+# [1.194.0](https://github.com/mkayander/leetpal/compare/v1.193.0...v1.194.0) (2023-08-08)
+
+
+### Features
+
+* Added more project categories ([6e0d4b0](https://github.com/mkayander/leetpal/commit/6e0d4b076bd71d6353bb8af995b542e5b132309a))
+* Deleted unused types file ([08bea89](https://github.com/mkayander/leetpal/commit/08bea89647fdcfb39587590f5ea1c664907855a1))
+* Re-enable lint-staged for formatting only ([fc3fc77](https://github.com/mkayander/leetpal/commit/fc3fc77ea86b8aa8877b32fda0bb33322fd001bf))
+
 # [1.193.0](https://github.com/mkayander/leetpal/compare/v1.192.0...v1.193.0) (2023-08-06)
 
 
