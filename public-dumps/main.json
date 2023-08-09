@@ -272,9 +272,9 @@
       "updatedAt": "2023-04-13T13:14:32.861Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Validate Stack Sequences",
-      "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/validate-stack-sequences/",
       "slug": "validate-stack-sequences",
       "description": "",
       "isExample": false,
@@ -371,8 +371,8 @@
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Move Zeroes",
       "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/move-zeroes/",
       "slug": "move-zeroes",
       "description": "",
       "isExample": false,
@@ -427,8 +427,8 @@
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Kids With the Greatest Number of Candies",
       "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/",
       "slug": "kids-with-the-greatest-number-of-candies",
       "description": "",
       "isExample": false,
@@ -804,7 +804,7 @@
       "updatedAt": "2023-06-01T14:39:22.790Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Trapping Rain Water",
-      "category": "ARRAY",
+      "category": "TWO_POINTERS",
       "difficulty": "HARD",
       "lcLink": "https://leetcode.com/problems/trapping-rain-water/description/",
       "slug": "trapping-rain-water",
@@ -1000,7 +1000,7 @@
       "updatedAt": "2023-07-06T11:16:08.454Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Minimum Size Subarray Sum",
-      "category": "ARRAY",
+      "category": "SLIDING_WINDOW",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/minimum-size-subarray-sum/description/",
       "slug": "minimum-size-subarray-sum",
@@ -1042,7 +1042,7 @@
       "updatedAt": "2023-07-10T20:21:43.835Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Daily Temperatures",
-      "category": "ARRAY",
+      "category": "STACK",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/daily-temperatures/description/",
       "slug": "daily-temperatures",
@@ -1084,7 +1084,7 @@
       "updatedAt": "2023-07-15T17:46:49.112Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Container With Most Water",
-      "category": "ARRAY",
+      "category": "TWO_POINTERS",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/container-with-most-water/description/",
       "slug": "container-with-most-water",
@@ -1098,7 +1098,7 @@
       "updatedAt": "2023-07-15T18:30:12.720Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Evaluate Reverse Polish Notation",
-      "category": "ARRAY",
+      "category": "STACK",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/",
       "slug": "evaluate-reverse-polish-notation",
@@ -1126,7 +1126,7 @@
       "updatedAt": "2023-07-18T18:56:05.555Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Generate Parentheses",
-      "category": "ARRAY",
+      "category": "BACKTRACKING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/generate-parentheses/description/",
       "slug": "generate-parentheses",
@@ -1154,7 +1154,7 @@
       "updatedAt": "2023-07-20T17:18:50.986Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Asteroid Collision",
-      "category": "ARRAY",
+      "category": "STACK",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/asteroid-collision/",
       "slug": "asteroid-collision",
@@ -1196,7 +1196,7 @@
       "updatedAt": "2023-08-01T16:37:53.765Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Combinations",
-      "category": "ARRAY",
+      "category": "BACKTRACKING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/combinations/",
       "slug": "combinations",
@@ -1210,7 +1210,7 @@
       "updatedAt": "2023-08-02T19:37:48.331Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Permutations",
-      "category": "ARRAY",
+      "category": "BACKTRACKING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/permutations/",
       "slug": "permutations",
@@ -1224,7 +1224,7 @@
       "updatedAt": "2023-08-03T19:26:31.835Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Letter Combinations of a Phone Number",
-      "category": "ARRAY",
+      "category": "BACKTRACKING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
       "slug": "letter-combinations-of-a-phone-number",
@@ -1242,6 +1242,34 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
       "slug": "unique-binary-search-trees-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cll2cagwi0001lb08s90zr6x1": {
+      "id": "cll2cagwi0001lb08s90zr6x1",
+      "createdAt": "2023-08-08T13:30:51.282Z",
+      "updatedAt": "2023-08-08T13:30:51.282Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Search in Rotated Sorted Array",
+      "category": "BINARY_SEARCH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "slug": "search-in-rotated-sorted-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cll3x9qkm0001mc08h31swm3e": {
+      "id": "cll3x9qkm0001mc08h31swm3e",
+      "createdAt": "2023-08-09T16:05:55.271Z",
+      "updatedAt": "2023-08-09T16:05:55.271Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimize the Maximum Difference of Pairs",
+      "category": "BINARY_SEARCH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/",
+      "slug": "minimize-the-maximum-difference-of-pairs",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -6230,6 +6258,106 @@
         }
       },
       "description": null
+    },
+    "cll2cagwi0002lb08lqyabhpf": {
+      "id": "cll2cagwi0002lb08lqyabhpf",
+      "createdAt": "2023-08-08T13:30:51.282Z",
+      "updatedAt": "2023-08-08T13:30:51.282Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[4,5,6,7,0,1,2]",
+          "order": 0
+        },
+        "2iVYjA1dSnrNbo9xKtMizQ": {
+          "name": "2iVYjA1dSnrNbo9xKtMizQ",
+          "type": "number",
+          "input": "0",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cll2ccyv80001kz080bqyxs0s": {
+      "id": "cll2ccyv80001kz080bqyxs0s",
+      "createdAt": "2023-08-08T13:32:47.876Z",
+      "updatedAt": "2023-08-08T13:32:47.876Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[4,5,6,7,8,1,2,3]",
+          "order": 0
+        },
+        "2iVYjA1dSnrNbo9xKtMizQ": {
+          "name": "2iVYjA1dSnrNbo9xKtMizQ",
+          "type": "number",
+          "input": "8",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cll2cfu100003kz08g95w2zem": {
+      "id": "cll2cfu100003kz08g95w2zem",
+      "createdAt": "2023-08-08T13:35:01.572Z",
+      "updatedAt": "2023-08-08T13:35:01.572Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,1,2,3,4]",
+          "order": 0
+        },
+        "2iVYjA1dSnrNbo9xKtMizQ": {
+          "name": "2iVYjA1dSnrNbo9xKtMizQ",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cll3x9qkm0002mc08jr466a4v": {
+      "id": "cll3x9qkm0002mc08jr466a4v",
+      "createdAt": "2023-08-09T16:05:55.271Z",
+      "updatedAt": "2023-08-09T16:05:55.271Z",
+      "projectId": "cll3x9qkm0001mc08h31swm3e",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1kTGLTeRqqXyHXU9HWMSEe": {
+          "name": "1kTGLTeRqqXyHXU9HWMSEe",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        },
+        "cWqmFh7TKr9Fqdxe9Q6U56": {
+          "name": "cWqmFh7TKr9Fqdxe9Q6U56",
+          "type": "array",
+          "input": "[10,1,2,7,1,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -6710,7 +6838,7 @@
       "slug": "solution-2",
       "complexity": null,
       "description": null,
-      "code": "/**\r\n * @param {ArrayProxyObject} nums\r\n */\r\nreturn function moveZeroes(nums) {\r\n  let j = 0;\r\n\r\n  for (let i = 0; i < nums.length; i++) {\r\n    nums.setColor(i, \"green\");\r\n    nums.setColor(j, \"cyan\");\r\n\r\n    if (nums[i] !== 0) {\r\n      if (j !== i) {\r\n        const tmp = nums[j];\r\n        nums[j] = nums[i];\r\n        nums[i] = tmp;\r\n      }\r\n      j++;\r\n    }\r\n  }\r\n\r\n  return nums;\r\n};\r\n\r\n/**\r\n * Definitions for ArrayProxy.\r\n *\r\n * @typedef {number[] & {\r\n *   setColor(index: number, color: string): void\r\n * }} ArrayProxyObject\r\n */\r\n",
+      "code": "/**\n * @param {ArrayProxyObject} nums\n */\nreturn function moveZeroes(nums) {\n  let j = 0;\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n\n    if (nums[i] !== 0) {\n      if (j !== i) {\n        nums.setColor(j, \"cyan\");\n        [nums[i], nums[j]] = [nums[j], nums[i]];\n      }\n      j++;\n    }\n  }\n\n  return nums;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
       "order": 0
     },
     "clgs9hrkw0004ld08hk5ml3bi": {
@@ -7778,7 +7906,7 @@
       "slug": "solution-1",
       "complexity": null,
       "description": null,
-      "code": "/**\n * @param {string} digits\n * @return {string[]}\n */\nvar letterCombinations = function (digits) {\n  if (!digits) return [];\n\n  const n = digits.length;\n  const map = {\n    2: \"abc\",\n    3: \"def\",\n    4: \"ghi\",\n    5: \"jkl\",\n    6: \"mno\",\n    7: \"pqrs\",\n    8: \"tuv\",\n    9: \"wxyz\",\n  };\n\n  const result = [];\n  const current = []; // stack\n\n  const backtrack = (i = 0) => {\n    if (i === n) {\n      result.push(current.join(\"\"));\n      return;\n    }\n\n    const digit = digits[i];\n    const chars = map[digit];\n\n    for (const char of chars) {\n      current.push(char);\n      backtrack(i + 1);\n      current.pop();\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn letterCombinations;\n",
+      "code": "/**\n * @param {string} digits\n * @return {string[]}\n */\nvar letterCombinations = function (digits) {\n  if (!digits) return [];\n\n  const n = digits.length;\n  const map = {\n    2: \"abc\",\n    3: \"def\",\n    4: \"ghi\",\n    5: \"jkl\",\n    6: \"mno\",\n    7: \"pqrs\",\n    8: \"tuv\",\n    9: \"wxyz\",\n  };\n\n  const result = new Array();\n  const current = new Array(); // stack\n\n  const backtrack = (i = 0) => {\n    if (i === n) {\n      result.push(current.join(\"\"));\n      return;\n    }\n\n    const digit = digits[i];\n    const chars = map[digit];\n\n    for (const char of chars) {\n      current.push(char);\n      backtrack(i + 1);\n      current.pop();\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn letterCombinations;\n",
       "order": 0
     },
     "clkzqax3o0003ml08bm4jltrj": {
@@ -7791,6 +7919,42 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number} n\n * @return {TreeNode[]}\n */\nvar generateTrees = function (n) {\n  const memo = new Map();\n  const getKey = (min, max) => `${min}-${max}`;\n\n  const generate = (min = 1, max = n) => {\n    if (min < 1 || max > n || min > max) return [null];\n    const key = getKey(min, max);\n    if (memo.has(key)) return memo.get(key);\n    const list = [];\n\n    for (let j = min; j <= max; j++) {\n      const leftSubtrees = generate(min, j - 1);\n      const rightSubtrees = generate(j + 1, max);\n      for (const left of leftSubtrees) {\n        for (const right of rightSubtrees) {\n          const root = new BinaryTree(j, left, right);\n          list.push(root);\n        }\n      }\n    }\n\n    memo.set(key, list);\n\n    return list;\n  };\n\n  return generate();\n};\n\nreturn generateTrees;\n",
+      "order": 0
+    },
+    "cll2cagwi0003lb08hwk3ig1b": {
+      "id": "cll2cagwi0003lb08hwk3ig1b",
+      "createdAt": "2023-08-08T13:30:51.282Z",
+      "updatedAt": "2023-08-08T13:30:51.282Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "One Binary Search",
+      "slug": "one-binary-search",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar search = function (nums, target) {\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left <= right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(middle, \"green\");\n    if (nums[middle] === target) return middle;\n    nums.setColor(middle, null);\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    console.log({ left, middle, right });\n\n    if (nums[middle] < target) {\n      // check if current subarray is rotated\n      if (nums[middle] < nums[left] && nums[right] < target) {\n        right = middle - 1;\n      } else {\n        // normal binary search\n        left = middle + 1;\n      }\n    } else {\n      // check if current subarray is rotated\n      if (nums[middle] > nums[right] && nums[right] >= target) {\n        left = middle + 1;\n      } else {\n        // normal binary search\n        right = middle - 1;\n      }\n    }\n  }\n\n  return -1;\n};\n\nreturn search;\n",
+      "order": 0
+    },
+    "cll3emc8w0001mk093rhhb3ed": {
+      "id": "cll3emc8w0001mk093rhhb3ed",
+      "createdAt": "2023-08-09T07:23:50.528Z",
+      "updatedAt": "2023-08-09T07:23:50.528Z",
+      "projectId": "clgs0nftl0001l208lsk8elph",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {ArrayProxyObject} nums\n */\nreturn function moveZeroes(nums) {\n  let lastNonZeroFoundAt = 0;\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n\n    if (nums[i] !== 0) {\n      nums.setColor(lastNonZeroFoundAt, \"cyan\");\n      [nums[i], nums[lastNonZeroFoundAt]] = [nums[lastNonZeroFoundAt], nums[i]];\n      lastNonZeroFoundAt++;\n    }\n  }\n\n  return nums;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
+      "order": 2
+    },
+    "cll3x9qkm0003mc08anm6l9e7": {
+      "id": "cll3x9qkm0003mc08anm6l9e7",
+      "createdAt": "2023-08-09T16:05:55.271Z",
+      "updatedAt": "2023-08-09T16:05:55.271Z",
+      "projectId": "cll3x9qkm0001mc08h31swm3e",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} p\n * @return {number}\n */\nvar minimizeMax = function (nums, p) {\n  if (p === 0) return 0;\n\n  nums.sort((a, b) => a - b);\n\n  const findWithDiff = (diff) => {\n    let count = 0;\n    for (let i = 0; i < nums.length - 1; i++) {\n      if (nums[i + 1] - nums[i] <= diff) {\n        count++;\n        i++;\n      }\n    }\n\n    return count;\n  };\n\n  let left = 0;\n  let right = nums.at(-1) - nums[0]; // max difference\n\n  while (left < right) {\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    nums.setColor(middle, \"green\");\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    const validPairs = findWithDiff(middle);\n\n    if (validPairs < p) {\n      left = middle + 1;\n    } else {\n      right = middle;\n    }\n  }\n\n  return left;\n};\n\nreturn minimizeMax;\n",
       "order": 0
     }
   }
