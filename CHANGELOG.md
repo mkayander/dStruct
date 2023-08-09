@@ -1,3 +1,10 @@
+# [1.195.0](https://github.com/mkayander/leetpal/compare/v1.194.0...v1.195.0) (2023-08-09)
+
+
+### Features
+
+* Updated main projects data backup ([e4b0655](https://github.com/mkayander/leetpal/commit/e4b065544777ba02e72c5ee8e688ee17c7e417b3))
+
 # [1.194.0](https://github.com/mkayander/leetpal/compare/v1.193.0...v1.194.0) (2023-08-08)
 
 
