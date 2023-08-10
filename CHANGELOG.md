@@ -1,3 +1,10 @@
+# [1.196.0](https://github.com/mkayander/leetpal/compare/v1.195.0...v1.196.0) (2023-08-10)
+
+
+### Features
+
+* Added new projects ([06e90f4](https://github.com/mkayander/leetpal/commit/06e90f4c04a7e330f61f3f355bc522430a1fd00b))
+
 # [1.195.0](https://github.com/mkayander/leetpal/compare/v1.194.0...v1.195.0) (2023-08-09)
 
 
