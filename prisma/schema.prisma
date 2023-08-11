@@ -111,6 +111,7 @@ enum ProjectCategory {
   BINARY_SEARCH
   SLIDING_WINDOW
   BACKTRACKING
+  DYNAMIC_PROGRAMMING
 }
 
 enum ProjectDifficulty {

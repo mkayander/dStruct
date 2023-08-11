@@ -12,4 +12,5 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   [ProjectCategory.BST]: "BST",
   [ProjectCategory.GRAPH]: "Graph",
   [ProjectCategory.GRID]: "Grid",
+  [ProjectCategory.DYNAMIC_PROGRAMMING]: "Dynamic Programming",
 };
