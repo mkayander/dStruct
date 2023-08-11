@@ -1,3 +1,10 @@
+# [1.198.0](https://github.com/mkayander/leetpal/compare/v1.197.0...v1.198.0) (2023-08-11)
+
+
+### Features
+
+* Added "Dynamic Programming" project category ([cf2790b](https://github.com/mkayander/leetpal/commit/cf2790b78de1867ce85c7b1b6ffa6f15605d3d45))
+
 # [1.197.0](https://github.com/mkayander/leetpal/compare/v1.196.0...v1.197.0) (2023-08-11)
 
 
