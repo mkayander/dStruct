@@ -384,9 +384,9 @@
       "updatedAt": "2023-04-22T17:36:01.760Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Minimum Insertion Steps to Make a String Palindrome",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "minimum-insertion-steps-to-make-a-string-palindrome",
       "description": "",
       "isExample": false,
@@ -398,9 +398,9 @@
       "updatedAt": "2023-04-23T17:01:38.345Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Restore The Array",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "restore-the-array",
       "description": "",
       "isExample": false,
@@ -524,9 +524,9 @@
       "updatedAt": "2023-04-30T20:36:36.713Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Min Cost Climbing Stairs",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "min-cost-climbing-stairs",
       "description": "",
       "isExample": false,
@@ -636,9 +636,9 @@
       "updatedAt": "2023-05-12T13:08:23.448Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Solving Questions With Brainpower",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "solving-questions-with-brainpower",
       "description": "",
       "isExample": false,
@@ -650,9 +650,9 @@
       "updatedAt": "2023-05-13T16:27:04.710Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Count Ways To Build Good Strings",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "count-ways-to-build-good-strings",
       "description": "",
       "isExample": false,
@@ -1070,7 +1070,7 @@
       "updatedAt": "2023-07-14T15:25:02.012Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Longest Arithmetic Subsequence of Given Difference",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/description/",
       "slug": "longest-arithmetic-subsequence-of-given-difference",
@@ -1308,10 +1308,52 @@
       "updatedAt": "2023-08-11T10:27:51.955Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Coin Change II",
-      "category": "ARRAY",
+      "category": "DYNAMIC_PROGRAMMING",
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/coin-change-ii/description/",
       "slug": "coin-change-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllb3ap4n0001jw086qg9f5jn": {
+      "id": "cllb3ap4n0001jw086qg9f5jn",
+      "createdAt": "2023-08-14T16:29:00.984Z",
+      "updatedAt": "2023-08-14T16:29:00.984Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Kth Largest Element in an Array",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+      "slug": "kth-largest-element-in-an-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllcdzkt20001l8084lrmarnb": {
+      "id": "cllcdzkt20001l8084lrmarnb",
+      "createdAt": "2023-08-15T14:16:04.119Z",
+      "updatedAt": "2023-08-15T14:16:04.119Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Partition List",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/partition-list/",
+      "slug": "partition-list",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clle0pfdy0001jo08fbicsvta": {
+      "id": "clle0pfdy0001jo08fbicsvta",
+      "createdAt": "2023-08-16T17:39:47.878Z",
+      "updatedAt": "2023-08-16T17:39:47.878Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Binary Tree Maximum Path Sum",
+      "category": "BINARY_TREE",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+      "slug": "binary-tree-maximum-path-sum",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -6557,6 +6599,163 @@
         }
       },
       "description": null
+    },
+    "cllb3ap4n0002jw08f45iu3sd": {
+      "id": "cllb3ap4n0002jw08f45iu3sd",
+      "createdAt": "2023-08-14T16:29:00.984Z",
+      "updatedAt": "2023-08-14T16:29:00.984Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,2,1,5,6,4]",
+          "order": 0
+        },
+        "1t897YC7ahSS11QByzy4Fm": {
+          "name": "1t897YC7ahSS11QByzy4Fm",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllb3b3fu0001la08ciadwy2r": {
+      "id": "cllb3b3fu0001la08ciadwy2r",
+      "createdAt": "2023-08-14T16:29:19.530Z",
+      "updatedAt": "2023-08-14T16:29:19.530Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,2,3,1,2,4,5,5,6]",
+          "order": 0
+        },
+        "1t897YC7ahSS11QByzy4Fm": {
+          "name": "1t897YC7ahSS11QByzy4Fm",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllcdzkt30002l808l8l4mwgw": {
+      "id": "cllcdzkt30002l808l8l4mwgw",
+      "createdAt": "2023-08-15T14:16:04.119Z",
+      "updatedAt": "2023-08-15T14:16:04.119Z",
+      "projectId": "cllcdzkt20001l8084lrmarnb",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,4,3,2,5,2]",
+          "order": 0
+        },
+        "s9z7ARPaLtvxZPTiucDUAe": {
+          "name": "s9z7ARPaLtvxZPTiucDUAe",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllce1e0o0005l8088g627itf": {
+      "id": "cllce1e0o0005l8088g627itf",
+      "createdAt": "2023-08-15T14:17:28.632Z",
+      "updatedAt": "2023-08-15T14:17:28.632Z",
+      "projectId": "cllcdzkt20001l8084lrmarnb",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,4,3,2,5,2]",
+          "order": 0
+        },
+        "s9z7ARPaLtvxZPTiucDUAe": {
+          "name": "s9z7ARPaLtvxZPTiucDUAe",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clle0pfdy0002jo085be4c94n": {
+      "id": "clle0pfdy0002jo085be4c94n",
+      "createdAt": "2023-08-16T17:39:47.878Z",
+      "updatedAt": "2023-08-16T17:39:47.878Z",
+      "projectId": "clle0pfdy0001jo08fbicsvta",
+      "title": "Case 1",
+      "order": 1,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clle0qwt00001md08p28uh1gb": {
+      "id": "clle0qwt00001md08p28uh1gb",
+      "createdAt": "2023-08-16T17:40:57.108Z",
+      "updatedAt": "2023-08-16T17:40:57.108Z",
+      "projectId": "clle0pfdy0001jo08fbicsvta",
+      "title": "Case 2",
+      "order": 2,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[-10,9,20,null,null,15,7]",
+          "order": 0
+        }
+      },
+      "description": ""
+    },
+    "clle0sxut0005jo08pnhlmlvb": {
+      "id": "clle0sxut0005jo08pnhlmlvb",
+      "createdAt": "2023-08-16T17:42:31.782Z",
+      "updatedAt": "2023-08-16T17:42:31.782Z",
+      "projectId": "clle0pfdy0001jo08fbicsvta",
+      "title": "Case 3",
+      "order": 3,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[9,6,-3,null,null,-6,2,null,null,2,null,-6,-6,-6]",
+          "order": 0
+        }
+      },
+      "description": ""
     }
   },
   "solutions": {
@@ -8226,6 +8425,66 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n  const dp = new Array(amount + 1).fill(0);\n  dp[0] = 1;\n\n  for (let i = n - 1; i >= 0; i--) {\n    coins.setColor(i, \"green\");\n    for (let j = coins[i]; j <= amount; j++) {\n      dp.setColor(j, \"cyan\");\n      dp[j] += dp[j - coins[i]];\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[amount];\n};\n\nreturn change;\n",
+      "order": 0
+    },
+    "cllb3ap4n0003jw08dbqfuswr": {
+      "id": "cllb3ap4n0003jw08dbqfuswr",
+      "createdAt": "2023-08-14T16:29:00.984Z",
+      "updatedAt": "2023-08-14T16:29:00.984Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Priority Queue",
+      "slug": "priority-queue",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const pq = new PriorityQueue({\n    compare: (a, b) => a - b,\n  });\n\n  for (const num of nums) {\n    pq.enqueue(num);\n    if (pq.size() > k) {\n      pq.dequeue();\n    }\n  }\n\n  console.log(pq, pq.front());\n\n  return pq.front();\n};\n\nreturn findKthLargest;\n",
+      "order": 1
+    },
+    "cllb3evic0005jw08hjbj2nvw": {
+      "id": "cllb3evic0005jw08hjbj2nvw",
+      "createdAt": "2023-08-14T16:32:15.876Z",
+      "updatedAt": "2023-08-14T16:32:15.876Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect",
+      "slug": "quickselect",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const partition = (left, right, pivotIndex) => {\n    const pivot = nums[pivotIndex];\n    [nums[pivotIndex], nums[right]] = [nums[right], nums[pivotIndex]];\n    let storedIndex = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] < pivot) {\n        [nums[storedIndex], nums[i]] = [nums[i], nums[storedIndex]];\n        storedIndex++;\n      }\n    }\n    [nums[right], nums[storedIndex]] = [nums[storedIndex], nums[right]];\n    return storedIndex;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (true) {\n    const pivotIndex = left + Math.floor(Math.random() * (right - left + 1));\n    const newPivotIndex = partition(left, right, pivotIndex);\n    if (newPivotIndex === nums.length - k) {\n      return nums[newPivotIndex];\n    } else if (newPivotIndex > nums.length - k) {\n      right = newPivotIndex - 1;\n    } else {\n      left = newPivotIndex + 1;\n    }\n  }\n};\n\nreturn findKthLargest;\n",
+      "order": 3
+    },
+    "cllb3yckr0001l508g9d0dsb9": {
+      "id": "cllb3yckr0001l508g9d0dsb9",
+      "createdAt": "2023-08-14T16:47:24.459Z",
+      "updatedAt": "2023-08-14T16:47:24.459Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Counting Sort",
+      "slug": "counting-sort",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  let min = Infinity;\n  let max = -Infinity;\n\n  const map = new Map();\n\n  for (const num of nums) {\n    map.set(num, (map.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  console.log({map, min, max});\n\n  let count = 0;\n  for (let i = max; i >= min; i--) {\n    if (!map.has(i)) continue;\n\n    for (let j = 0; j < map.get(i) && count < k; j++) count++;\n\n    if (count === k) return i;\n  }\n\n  return -1;\n};\n\nreturn findKthLargest;\n",
+      "order": 2
+    },
+    "cllcdzkt30003l8083b9g6omk": {
+      "id": "cllcdzkt30003l8083b9g6omk",
+      "createdAt": "2023-08-15T14:16:04.119Z",
+      "updatedAt": "2023-08-15T14:16:04.119Z",
+      "projectId": "cllcdzkt20001l8084lrmarnb",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} x\n * @return {ListNode}\n */\nvar partition = function (head, x) {\n  const firstDummy = new ListNode(-1);\n  const secondDummy = new ListNode(-1);\n  let first = firstDummy;\n  let second = secondDummy;\n\n  let current = head;\n\n  while (current) {\n    if (current.val >= x) {\n      second.next = current;\n      second = second.next;\n    } else {\n      first.next = current;\n      first = first.next;\n    }\n\n    const tmp = current.next;\n    current.next = null;\n    current = tmp;\n  }\n\n  first && (first.next = secondDummy.next);\n\n  return firstDummy.next ?? secondDummy.next;\n};\n\nreturn partition;\n",
+      "order": 0
+    },
+    "clle0pfdy0003jo08drkxnndl": {
+      "id": "clle0pfdy0003jo08drkxnndl",
+      "createdAt": "2023-08-16T17:39:47.878Z",
+      "updatedAt": "2023-08-16T17:39:47.878Z",
+      "projectId": "clle0pfdy0001jo08fbicsvta",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maxPathSum = function (root) {\n  let max = -Infinity;\n\n  const dfs = (node) => {\n    node.setColor(\"cyan\", \"blink\");\n    const left = node.left ? dfs(node.left) : 0;\n    const right = node.right ? dfs(node.right) : 0;\n\n    const current = Math.max(node.val, node.val + left, node.val + right);\n\n    max = Math.max(max, current, left + node.val + right);\n\n    console.log(node.val, {current, max});\n\n    return current;\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn maxPathSum;\n",
       "order": 0
     }
   }
