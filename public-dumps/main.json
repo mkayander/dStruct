@@ -1357,6 +1357,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clle3n8hq0001l5082f99xgrr": {
+      "id": "clle3n8hq0001l5082f99xgrr",
+      "createdAt": "2023-08-16T19:02:04.478Z",
+      "updatedAt": "2023-08-16T19:02:04.478Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sliding Window Maximum",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/sliding-window-maximum/",
+      "slug": "sliding-window-maximum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllfcxny50001l908h79caf6d": {
+      "id": "cllfcxny50001l908h79caf6d",
+      "createdAt": "2023-08-17T16:09:53.790Z",
+      "updatedAt": "2023-08-17T16:09:53.790Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "01 Matrix",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/01-matrix/",
+      "slug": "01-matrix",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -6756,6 +6784,88 @@
         }
       },
       "description": ""
+    },
+    "clle3n8hq0002l5080sw1qwnp": {
+      "id": "clle3n8hq0002l5080sw1qwnp",
+      "createdAt": "2023-08-16T19:02:04.478Z",
+      "updatedAt": "2023-08-16T19:02:04.478Z",
+      "projectId": "clle3n8hq0001l5082f99xgrr",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "array",
+          "input": "[1,3,-1,-3,5,3,6,7]",
+          "order": 0
+        },
+        "vpsNZxpe9c8ZZ5ZCcDCrqM": {
+          "name": "vpsNZxpe9c8ZZ5ZCcDCrqM",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllfcxny50002l908hewrx0wy": {
+      "id": "cllfcxny50002l908hewrx0wy",
+      "createdAt": "2023-08-17T16:09:53.790Z",
+      "updatedAt": "2023-08-17T16:09:53.790Z",
+      "projectId": "cllfcxny50001l908h79caf6d",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "mE7HNRRmTQXykjY82ooy5k": {
+          "name": "mE7HNRRmTQXykjY82ooy5k",
+          "type": "matrix",
+          "input": "[[0,0,0],[0,1,0],[0,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllfcyz890001ky08swmtlx11": {
+      "id": "cllfcyz890001ky08swmtlx11",
+      "createdAt": "2023-08-17T16:10:55.066Z",
+      "updatedAt": "2023-08-17T16:10:55.066Z",
+      "projectId": "cllfcxny50001l908h79caf6d",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "mE7HNRRmTQXykjY82ooy5k": {
+          "name": "mE7HNRRmTQXykjY82ooy5k",
+          "type": "matrix",
+          "input": "[[0,0,0],[0,1,0],[1,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllfcz28k0003ky08asm06of3": {
+      "id": "cllfcz28k0003ky08asm06of3",
+      "createdAt": "2023-08-17T16:10:58.965Z",
+      "updatedAt": "2023-08-17T16:10:58.965Z",
+      "projectId": "cllfcxny50001l908h79caf6d",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "mE7HNRRmTQXykjY82ooy5k": {
+          "name": "mE7HNRRmTQXykjY82ooy5k",
+          "type": "matrix",
+          "input": "[[0,0,0,0],[0,1,1,0],[1,1,1,1],[1,1,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -8485,6 +8595,30 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maxPathSum = function (root) {\n  let max = -Infinity;\n\n  const dfs = (node) => {\n    node.setColor(\"cyan\", \"blink\");\n    const left = node.left ? dfs(node.left) : 0;\n    const right = node.right ? dfs(node.right) : 0;\n\n    const current = Math.max(node.val, node.val + left, node.val + right);\n\n    max = Math.max(max, current, left + node.val + right);\n\n    console.log(node.val, {current, max});\n\n    return current;\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn maxPathSum;\n",
+      "order": 0
+    },
+    "clle3n8hq0003l508fj2fwz3u": {
+      "id": "clle3n8hq0003l508fj2fwz3u",
+      "createdAt": "2023-08-16T19:02:04.478Z",
+      "updatedAt": "2023-08-16T19:02:04.478Z",
+      "projectId": "clle3n8hq0001l5082f99xgrr",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < k; i++) {\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n  }\n\n  result.push(nums[queue.tail.val]);\n\n  for (let i = k; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val >= k) {\n      queue.removeTail();\n    }\n\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    result.push(nums[queue.tail?.val]);\n  }\n\n  return result;\n};\n\nclass MaxQueue {\n  constructor(size) {\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;",
+      "order": 0
+    },
+    "cllfcxny50003l908j2phigjv": {
+      "id": "cllfcxny50003l908j2phigjv",
+      "createdAt": "2023-08-17T16:09:53.790Z",
+      "updatedAt": "2023-08-17T16:09:53.790Z",
+      "projectId": "cllfcxny50001l908h79caf6d",
+      "title": "Dynamic Programming",
+      "slug": "dynamic-programming",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  const matrixName = \"dp\";\n\n  const dp = Array.from(\n    mat,\n    (row, index) =>\n      Array.from(row, (val) => val, null, {\n        index,\n        parentName: matrixName,\n      }),\n    null,\n    { matrixName }\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);\n      }\n\n      if (col > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);\n      }\n\n      dp[row][col] = minNeighbor + 1;\n    }\n  }\n\n  for (let row = m - 1; row >= 0; row--) {\n    for (let col = n - 1; col >= 0; col--) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row < m - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);\n      }\n\n      if (col < n - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);\n      }\n\n      dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);\n    }\n  }\n\n  return dp;\n};\n\nreturn updateMatrix;\n",
       "order": 0
     }
   }
