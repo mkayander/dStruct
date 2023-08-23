@@ -1385,6 +1385,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cllmgp8ea0001l60897rrm668": {
+      "id": "cllmgp8ea0001l60897rrm668",
+      "createdAt": "2023-08-22T15:29:42.083Z",
+      "updatedAt": "2023-08-22T15:29:42.083Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Excel Sheet Column Title",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/excel-sheet-column-title/",
+      "slug": "excel-sheet-column-title",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllo7cwul0001kr08f1eokxm3": {
+      "id": "cllo7cwul0001kr08f1eokxm3",
+      "createdAt": "2023-08-23T20:43:43.054Z",
+      "updatedAt": "2023-08-23T20:43:43.054Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reorganize String",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/reorganize-string/",
+      "slug": "reorganize-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -6866,6 +6894,120 @@
         }
       },
       "description": null
+    },
+    "cllmgp8eb0002l60894z6h2qz": {
+      "id": "cllmgp8eb0002l60894z6h2qz",
+      "createdAt": "2023-08-22T15:29:42.083Z",
+      "updatedAt": "2023-08-22T15:29:42.083Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "32",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllmgq82w0001l608oacrsl5s": {
+      "id": "cllmgq82w0001l608oacrsl5s",
+      "createdAt": "2023-08-22T15:30:28.329Z",
+      "updatedAt": "2023-08-22T15:30:28.329Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "1726",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllmgsb290007l608js96wujh": {
+      "id": "cllmgsb290007l608js96wujh",
+      "createdAt": "2023-08-22T15:32:05.506Z",
+      "updatedAt": "2023-08-22T15:32:05.506Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "999999999999999",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllo7cwul0002kr08mn676ub7": {
+      "id": "cllo7cwul0002kr08mn676ub7",
+      "createdAt": "2023-08-23T20:43:43.054Z",
+      "updatedAt": "2023-08-23T20:43:43.054Z",
+      "projectId": "cllo7cwul0001kr08f1eokxm3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "aab",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllo7e4rw0005kr08qjuixotu": {
+      "id": "cllo7e4rw0005kr08qjuixotu",
+      "createdAt": "2023-08-23T20:44:39.980Z",
+      "updatedAt": "2023-08-23T20:44:39.980Z",
+      "projectId": "cllo7cwul0001kr08f1eokxm3",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "aaab",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllo7eepp0007kr08gz6nqdbj": {
+      "id": "cllo7eepp0007kr08gz6nqdbj",
+      "createdAt": "2023-08-23T20:44:52.861Z",
+      "updatedAt": "2023-08-23T20:44:52.861Z",
+      "projectId": "cllo7cwul0001kr08f1eokxm3",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "aaabbbcc",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -8619,6 +8761,42 @@
       "complexity": null,
       "description": "",
       "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  const matrixName = \"dp\";\n\n  const dp = Array.from(\n    mat,\n    (row, index) =>\n      Array.from(row, (val) => val, null, {\n        index,\n        parentName: matrixName,\n      }),\n    null,\n    { matrixName }\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);\n      }\n\n      if (col > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);\n      }\n\n      dp[row][col] = minNeighbor + 1;\n    }\n  }\n\n  for (let row = m - 1; row >= 0; row--) {\n    for (let col = n - 1; col >= 0; col--) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row < m - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);\n      }\n\n      if (col < n - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);\n      }\n\n      dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);\n    }\n  }\n\n  return dp;\n};\n\nreturn updateMatrix;\n",
+      "order": 0
+    },
+    "cllmgp8eb0003l608c7ahu0uk": {
+      "id": "cllmgp8eb0003l608c7ahu0uk",
+      "createdAt": "2023-08-22T15:29:42.083Z",
+      "updatedAt": "2023-08-22T15:29:42.083Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "String Concatenation",
+      "slug": "string-concatenation",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} columnNumber\n * @return {string}\n */\nvar convertToTitle = function (n) {\n  const offset = \"A\".charCodeAt(0);\n\n  const getChar = (num) => String.fromCharCode(offset + num);\n\n  let result = new String();\n\n  while (n > 0) {\n    n--;\n    const code = n % 26;\n\n    result = new String(getChar(code) + result);\n    n = (n - code) / 26;\n  }\n\n  return result;\n};\n\nreturn convertToTitle;\n",
+      "order": 2
+    },
+    "cllmgrac20005l608010f7mb8": {
+      "id": "cllmgrac20005l608010f7mb8",
+      "createdAt": "2023-08-22T15:31:17.907Z",
+      "updatedAt": "2023-08-22T15:31:17.907Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "Reverse Array",
+      "slug": "reverse-array",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} columnNumber\n * @return {string}\n */\nvar convertToTitle = function (columnNumber) {\n  const offset = \"A\".charCodeAt(0);\n\n  const result = new Array();\n\n  while (columnNumber > 0) {\n    columnNumber--;\n\n    const code = columnNumber % 26;\n\n    result.push(String.fromCharCode(offset + code));\n\n    columnNumber = Math.floor(columnNumber / 26);\n  }\n\n  return result.reverse().join(\"\");\n};\n\nreturn convertToTitle;\n",
+      "order": 1
+    },
+    "cllo7cwul0003kr082dny40ao": {
+      "id": "cllo7cwul0003kr082dny40ao",
+      "createdAt": "2023-08-23T20:43:43.054Z",
+      "updatedAt": "2023-08-23T20:43:43.054Z",
+      "projectId": "cllo7cwul0001kr08f1eokxm3",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar reorganizeString = function (s) {\n  const freqMap = new Map();\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n  }\n\n  const maxHeap = new PriorityQueue({ compare: (a, b) => b[1] - a[1] });\n  for (const entry of freqMap) maxHeap.enqueue(entry);\n\n  console.log({freqMap}, maxHeap.toArray());\n\n  let result = \"\";\n  while (maxHeap.size() >= 2) {\n    const prev = maxHeap.dequeue();\n    const current = maxHeap.dequeue();\n\n    console.log({prev, current});\n\n    result += prev[0];\n    result += current[0];\n\n    prev[1]--;\n    current[1]--;\n\n    if (prev[1] > 0) maxHeap.enqueue(prev);\n    if (current[1] > 0) maxHeap.enqueue(current);\n  }\n\n  if (!maxHeap.isEmpty()) {\n    const last = maxHeap.dequeue();\n    if (last[1] > 1) return \"\";\n    result += last[0];\n  }\n\n  return result;\n};\n\nreturn reorganizeString;\n",
       "order": 0
     }
   }
