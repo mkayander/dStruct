@@ -17,17 +17,17 @@ import { trpc } from "#/utils";
 const validationSchema = yup.object({
   solutionName: yup
     .string()
-    .min(3, "Solution name must be at least 3 characters")
-    .max(190, "Solution name must be at most 50 characters")
+    .min(2, "Solution name must be at least 2 characters")
+    .max(100, "Solution name must be at most 100 characters")
     .required("Solution name is required"),
   solutionSlug: yup
     .string()
-    .min(3, "Slug must be at least 3 characters")
+    .min(2, "Slug must be at least 2 characters")
     .max(100, "Slug must be at most 100 characters")
     .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
   solutionDescription: yup
     .string()
-    .max(190, "Solution description must be at most 200 characters"),
+    .max(200, "Solution description must be at most 200 characters"),
 });
 
 export type SolutionModalProps = DialogProps & {
