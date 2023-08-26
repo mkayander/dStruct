@@ -1,3 +1,11 @@
+## [1.201.1](https://github.com/mkayander/leetpal/compare/v1.201.0...v1.201.1) (2023-08-26)
+
+
+### Bug Fixes
+
+* Added new project ([50bd09a](https://github.com/mkayander/leetpal/commit/50bd09a2ea42ba694dafcb05f80c05c55fd6ecec))
+* Fixed solution name schema ([c3b1ec3](https://github.com/mkayander/leetpal/commit/c3b1ec31734bd73c448e2ac3e4201a256cdd5753))
+
 # [1.201.0](https://github.com/mkayander/leetpal/compare/v1.200.0...v1.201.0) (2023-08-23)
 
 
