@@ -1413,6 +1413,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clls4ecw90001jz08ro77rcvk": {
+      "id": "clls4ecw90001jz08ro77rcvk",
+      "createdAt": "2023-08-26T14:31:56.362Z",
+      "updatedAt": "2023-08-26T14:31:56.362Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Interleaving String",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/interleaving-string/",
+      "slug": "interleaving-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7008,6 +7022,37 @@
         }
       },
       "description": null
+    },
+    "clls4ecw90002jz082v711ypw": {
+      "id": "clls4ecw90002jz082v711ypw",
+      "createdAt": "2023-08-26T14:31:56.362Z",
+      "updatedAt": "2023-08-26T14:31:56.362Z",
+      "projectId": "clls4ecw90001jz08ro77rcvk",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3qSmfEqeWGLuWeF8C8graA": {
+          "name": "3qSmfEqeWGLuWeF8C8graA",
+          "type": "string",
+          "input": "aadbbcbcac",
+          "order": 2
+        },
+        "8cKGTWY4yN9kcJJbYSsFko": {
+          "name": "8cKGTWY4yN9kcJJbYSsFko",
+          "type": "string",
+          "input": "aabcc",
+          "order": 0
+        },
+        "ufbQZ1RuWcyb8pgH2m6GQf": {
+          "name": "ufbQZ1RuWcyb8pgH2m6GQf",
+          "type": "string",
+          "input": "dbbca",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -8797,6 +8842,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar reorganizeString = function (s) {\n  const freqMap = new Map();\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n  }\n\n  const maxHeap = new PriorityQueue({ compare: (a, b) => b[1] - a[1] });\n  for (const entry of freqMap) maxHeap.enqueue(entry);\n\n  console.log({freqMap}, maxHeap.toArray());\n\n  let result = \"\";\n  while (maxHeap.size() >= 2) {\n    const prev = maxHeap.dequeue();\n    const current = maxHeap.dequeue();\n\n    console.log({prev, current});\n\n    result += prev[0];\n    result += current[0];\n\n    prev[1]--;\n    current[1]--;\n\n    if (prev[1] > 0) maxHeap.enqueue(prev);\n    if (current[1] > 0) maxHeap.enqueue(current);\n  }\n\n  if (!maxHeap.isEmpty()) {\n    const last = maxHeap.dequeue();\n    if (last[1] > 1) return \"\";\n    result += last[0];\n  }\n\n  return result;\n};\n\nreturn reorganizeString;\n",
+      "order": 0
+    },
+    "clls4ecw90003jz08wk6znpig": {
+      "id": "clls4ecw90003jz08wk6znpig",
+      "createdAt": "2023-08-26T14:31:56.362Z",
+      "updatedAt": "2023-08-26T14:31:56.362Z",
+      "projectId": "clls4ecw90001jz08ro77rcvk",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @param {string} s3\n * @return {boolean}\n */\nvar isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  const l = s3.length;\n\n  if (m + n !== l) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let j = 1; j <= n; j++) {\n    dp.setColor(j, \"cyan\");\n    dp[j] = dp[j - 1] && s2[j - 1] === s3[j - 1];\n  }\n\n  for (let i = 1; i <= m; i++) {\n    dp[0] = dp[0] && s1[i - 1] === s3[i - 1];\n    for (let j = 1; j <= n; ++j) {\n      dp.setColor(j, \"green\");\n      dp[j] =\n        (dp[j] && s1[i - 1] === s3[i + j - 1]) ||\n        (dp[j - 1] && s2[j - 1] === s3[i + j - 1]);\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
       "order": 0
     }
   }
