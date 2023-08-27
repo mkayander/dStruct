@@ -1,3 +1,18 @@
+# [1.202.0](https://github.com/mkayander/leetpal/compare/v1.201.1...v1.202.0) (2023-08-27)
+
+
+### Bug Fixes
+
+* Fixed next auth types ([7e180dd](https://github.com/mkayander/leetpal/commit/7e180dd9344763deb58fcd263cdcbbb490e75c34))
+* Fixed types ([fb06fff](https://github.com/mkayander/leetpal/commit/fb06fff8eb4b050e3b0ba08de4fd0def77796a4a))
+* Only write logs if an env variable is true ([7a27558](https://github.com/mkayander/leetpal/commit/7a27558d80e43bef96a8b988f90188684cc96f38))
+
+
+### Features
+
+* Integrate Prisma Accelerate extensions ([1c0fba3](https://github.com/mkayander/leetpal/commit/1c0fba3bf217979772800ab0bf5ce9543f2bc647))
+* Updated Prisma ([20ccf36](https://github.com/mkayander/leetpal/commit/20ccf3632f266bb93f5e5e3d913c38bf8270ca47))
+
 ## [1.201.1](https://github.com/mkayander/leetpal/compare/v1.201.0...v1.201.1) (2023-08-26)
 
 
