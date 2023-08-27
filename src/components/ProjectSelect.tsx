@@ -148,6 +148,9 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
           sx={{ backgroundColor: panelBgColor }}
         />
         {projectSelectItems}
+        {!allBrief.isLoading && projectSelectItems.length === 0 && (
+          <MenuItem disabled>No projects found</MenuItem>
+        )}
       </Select>
     </FormControl>
   );
