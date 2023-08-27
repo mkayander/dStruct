@@ -19,6 +19,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     ev.stopPropagation();
   };
 
+  const handleChange = (value: string) => {
+    setSearchValue(value.trim());
+  };
+
   const handleClear: React.MouseEventHandler<HTMLButtonElement> = (ev) => {
     handlePropagation(ev);
     setSearchValue("");
@@ -46,10 +50,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         size="small"
         fullWidth
         value={searchValue}
-        onChange={setSearchValue}
+        onChange={handleChange}
         onClick={handlePropagation}
         onKeyDown={handlePropagation}
         sx={{ pointerEvents: "auto" }}
+        timeout={200}
       />
       <span>
         <IconButton
