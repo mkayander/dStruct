@@ -29,9 +29,7 @@ export const useNodesRuntimeUpdates = (
 
   const applyFrame = useCallback(
     (frame: CallFrame) => {
-      console.log("treeName" in frame);
       if (!("treeName" in frame)) return;
-      console.log(frame);
 
       const treeName = frame.treeName;
       const slice =
@@ -198,11 +196,6 @@ export const useNodesRuntimeUpdates = (
   );
 
   useEffect(() => {
-    console.log("apply effect: ", {
-      callstackIsReady,
-      frameIndex,
-      playbackInterval,
-    });
     if (!callstackIsReady || callstack.length === 0) return;
 
     const currentFrame = callstack[frameIndex];
@@ -236,12 +229,6 @@ export const useNodesRuntimeUpdates = (
   }, [applyFrame, callstack, callstackIsReady, frameIndex, playbackInterval]);
 
   useEffect(() => {
-    console.log("reset effect: ", {
-      isPlaying,
-      replayCount,
-      playbackInterval,
-      callstackIsReady,
-    });
     if (isPlaying) {
       resetStructuresState(dispatch, false);
       setFrameIndex(0);

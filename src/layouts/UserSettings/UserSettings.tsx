@@ -88,8 +88,6 @@ export const UserSettings: React.FC = () => {
 
               const extUsername = globalData?.userStatus.username;
 
-              console.log("globalData: ", globalData);
-
               if (!extUsername) {
                 setErrors({ token: "Invalid token!" });
                 deleteCookie("LEETCODE_SESSION");
