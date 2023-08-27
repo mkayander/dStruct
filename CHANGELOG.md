@@ -1,3 +1,20 @@
+# [1.204.0](https://github.com/mkayander/leetpal/compare/v1.203.0...v1.204.0) (2023-08-27)
+
+
+### Bug Fixes
+
+* Don't display any end adornment if there's nothing to show ([91fe45f](https://github.com/mkayander/leetpal/commit/91fe45fe580aa2a70926b2f2389b42b60c37ddf2))
+* Fixed undefined slug case ([5bec2b0](https://github.com/mkayander/leetpal/commit/5bec2b0f01a50433dbc3f40d4f357155086f0807))
+* Improve searching experience ([8662b3b](https://github.com/mkayander/leetpal/commit/8662b3bfd2547f6731d7e0d88e86e96bb0ba43de))
+* Removed deprecated type ([cb2d77e](https://github.com/mkayander/leetpal/commit/cb2d77e7b0ad1a73c714010b878c3ddb29703504))
+
+
+### Features
+
+* Display a messages if no projects have been found ([d29510e](https://github.com/mkayander/leetpal/commit/d29510e12e40d46c6cab6041f3132857c6fa8979))
+* Implemented search input component ([8684096](https://github.com/mkayander/leetpal/commit/8684096300980f1eb7a7d71a17e0eda24646942b))
+* Implemented simple frontend projects filtering with a debounced search input ([74f3f3a](https://github.com/mkayander/leetpal/commit/74f3f3a97f2b6279bf27578eaaf044f56e6b5941))
+
 # [1.203.0](https://github.com/mkayander/leetpal/compare/v1.202.1...v1.203.0) (2023-08-27)
 
 
