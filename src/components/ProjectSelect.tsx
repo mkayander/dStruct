@@ -43,7 +43,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
 
   const projectSelectItems = useMemo(() => {
     let lastCategory = "";
-    const elements: JSX.Element[] = [];
+    const elements: React.ReactElement[] = [];
     if (!allBrief.data) return elements;
 
     for (const project of allBrief.data) {
