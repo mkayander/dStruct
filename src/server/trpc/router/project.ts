@@ -1,6 +1,6 @@
 // noinspection TypeScriptValidateJSTypes
 
-import { Prisma, type PrismaClient, ProjectCategory, ProjectDifficulty } from "@prisma/client";
+import { Prisma, ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import shortUUID from "short-uuid";
 import { z } from "zod";
@@ -11,6 +11,7 @@ import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt
 import { protectedProcedure, publicProcedure, router } from "#/server/trpc/trpc";
 import { type ArgumentObjectMap, argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
 import { clearProjectEntities, getEntitySlug, getNextEntityIndex, setLastEntityIndex } from "#/utils";
+import { type AppPrismaClient } from "#/server/db/client";
 
 const uuid = shortUUID();
 
@@ -61,7 +62,7 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   }
 };
 
-const getCaseIndex = async (projectId: string, prisma: PrismaClient) => {
+const getCaseIndex = async (projectId: string, prisma: AppPrismaClient) => {
   let caseIndex = await getNextEntityIndex(projectId, "case");
   let caseSlug = getEntitySlug("case", caseIndex);
   let didSkip = false;
@@ -86,7 +87,7 @@ const getCaseIndex = async (projectId: string, prisma: PrismaClient) => {
   return { caseIndex, caseSlug };
 };
 
-const getSolutionIndex = async (projectId: string, prisma: PrismaClient) => {
+const getSolutionIndex = async (projectId: string, prisma: AppPrismaClient) => {
   let solutionIndex = await getNextEntityIndex(projectId, "solution");
   let solutionSlug = getEntitySlug("solution", solutionIndex);
   let didSkip = false;

@@ -6,10 +6,10 @@ import { env } from "#/env/server.mjs";
 
 const isProduction = env.NODE_ENV === "production";
 
-// declare global {
-// eslint-disable-next-line no-var
-// var prisma: PrismaClient | undefined;
-// }
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
+}
 
 const prismaBase =
   // global.prisma ||
@@ -26,3 +26,5 @@ const prisma = prismaBase.$extends(withAccelerate());
 // }
 
 export { prisma };
+
+export type AppPrismaClient = typeof prisma;
