@@ -12,9 +12,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 
 import { NewLabel } from "#/components/NewLabel";
+import { SearchInput } from "#/components/SearchInput";
 import { ConfigContext } from "#/context";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
@@ -34,8 +35,11 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
   const { newProjectMarginMs } = useContext(ConfigContext);
+  const [searchValue, setSearchValue] = useState("");
 
   const { projectSlug = "", setProject } = usePlaygroundSlugs();
+
+  const panelBgColor = theme.palette.mode === "dark" ? "#2f2f2f" : "#fff";
 
   const handleSelectProject = (e: SelectChangeEvent) => {
     void setProject(e.target.value);
@@ -47,17 +51,24 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
     if (!allBrief.data) return elements;
 
     for (const project of allBrief.data) {
+      if (
+        searchValue &&
+        !project.title.toLowerCase().includes(searchValue.toLowerCase())
+      ) {
+        continue;
+      }
       if (lastCategory !== project.category) {
         lastCategory = project.category;
         elements.push(
           <ListSubheader
             key={project.category}
             sx={{
-              backgroundColor: "transparent",
-              backdropFilter: "blur(8px)",
+              backgroundColor: panelBgColor,
               "&:not(:first-of-type)": {
                 borderTop: `1px solid ${theme.palette.divider}`,
               },
+              top: 56,
+              zIndex: 1,
             }}
           >
             {categoryLabels[project.category]}
@@ -117,7 +128,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
     }
 
     return elements;
-  }, [allBrief.data, newProjectMarginMs, theme]);
+  }, [allBrief.data, newProjectMarginMs, panelBgColor, searchValue, theme]);
 
   return (
     <FormControl fullWidth>
@@ -131,6 +142,11 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
         disabled={allBrief.isLoading}
         onChange={handleSelectProject}
       >
+        <SearchInput
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          sx={{ backgroundColor: panelBgColor }}
+        />
         {projectSelectItems}
       </Select>
     </FormControl>
