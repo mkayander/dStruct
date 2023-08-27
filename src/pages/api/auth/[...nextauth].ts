@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma as any), // TODO: Remove `as any` when @next-auth/prisma-adapter fixes types
   providers: [
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
