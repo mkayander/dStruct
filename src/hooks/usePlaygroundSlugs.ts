@@ -23,7 +23,9 @@ export const usePlaygroundSlugs = () => {
       ? router.query.slug
       : [];
 
-    const setProject = (slug: string, isInitial?: boolean) => {
+    const setProject = (slug?: string, isInitial?: boolean) => {
+      if (!slug) return router.replace(BASE_PATH);
+
       const lastPath = localStorage.getItem("lastPlaygroundPath");
       const lastProjectSlug = lastPath?.split("/")[2];
 
