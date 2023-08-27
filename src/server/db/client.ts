@@ -1,24 +1,28 @@
 import { PrismaClient } from "@prisma/client";
+import { withAccelerate } from "@prisma/extension-accelerate";
 import { fieldEncryptionMiddleware } from "prisma-field-encryption";
 
-import { env } from "../../env/server.mjs";
+import { env } from "#/env/server.mjs";
 
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
-}
+const isProduction = env.NODE_ENV === "production";
 
-const prisma =
-  global.prisma ||
+// declare global {
+// eslint-disable-next-line no-var
+// var prisma: PrismaClient | undefined;
+// }
+
+const prismaBase =
+  // global.prisma ||
   new PrismaClient({
-    log:
-      env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    log: isProduction ? ["error"] : ["query", "error", "warn"],
   });
 
-prisma.$use(fieldEncryptionMiddleware());
+prismaBase.$use(fieldEncryptionMiddleware());
 
-if (env.NODE_ENV !== "production") {
-  global.prisma = prisma;
-}
+const prisma = prismaBase.$extends(withAccelerate());
+
+// if (env.NODE_ENV !== "production") {
+//   global.prisma = prisma;
+// }
 
 export { prisma };

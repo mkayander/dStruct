@@ -38,6 +38,9 @@ dependencies:
   '@prisma/client':
     specifier: 5.2.0
     version: 5.2.0(prisma@5.2.0)
+  '@prisma/extension-accelerate':
+    specifier: ^0.6.0
+    version: 0.6.0(@prisma/client@5.2.0)
   '@react-spring/web':
     specifier: ^9.7.3
     version: 9.7.3(react-dom@18.2.0)(react@18.2.0)
@@ -2621,6 +2624,15 @@ packages:
   /@prisma/engines@5.2.0:
     resolution: {integrity: sha512-dT7FOLUCdZmq+AunLqB1Iz+ZH/IIS1Fz2THmKZQ6aFONrQD/BQ5ecJ7g2wGS2OgyUFf4OaLam6/bxmgdOBDqig==}
     requiresBuild: true
+
+  /@prisma/extension-accelerate@0.6.0(@prisma/client@5.2.0):
+    resolution: {integrity: sha512-oCIltZ7x1EhKic1LZWUbbyHO2LiawXjI9OC5HvlJbuISjSNAwU6nhQK5W5i/HOzQScgXgaszwTF0H7P9gVYoKA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@prisma/client': '>=4.16.1'
+    dependencies:
+      '@prisma/client': 5.2.0(prisma@5.2.0)
+    dev: false
 
   /@prisma/generator-helper@5.0.0:
     resolution: {integrity: sha512-pufQ1mhoH6WzKNtzL79HZDoW4Ql3Lf8QEKVmBoW8e3Tdb50bxpYBYue5LBqp9vNW1xd1pgZO53cNiRfLX2d4Zg==}
