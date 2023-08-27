@@ -8,13 +8,13 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {
+type DebouncedInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
   onChange: (value: string) => void;
   timeout?: number;
 };
 
-export const DebouncedInput: React.FC<BinaryTreeInputProps> = ({
+export const DebouncedInput: React.FC<DebouncedInputProps> = ({
   value,
   onChange,
   timeout,
@@ -50,11 +50,11 @@ export const DebouncedInput: React.FC<BinaryTreeInputProps> = ({
       value={rawInput}
       onChange={handleChange}
       InputProps={{
-        endAdornment: (
+        endAdornment: hasPendingChanges ? (
           <InputAdornment position="end">
-            {hasPendingChanges && <CircularProgress size={24} />}
+            <CircularProgress size={24} />
           </InputAdornment>
-        ),
+        ) : null,
       }}
       {...restProps}
     />
