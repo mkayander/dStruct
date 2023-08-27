@@ -1,3 +1,10 @@
+## [1.202.1](https://github.com/mkayander/leetpal/compare/v1.202.0...v1.202.1) (2023-08-27)
+
+
+### Bug Fixes
+
+* Removed old console logs ([83f0cec](https://github.com/mkayander/leetpal/commit/83f0cec8e14fab3c9db5b35742dad720e34a1be7))
+
 # [1.202.0](https://github.com/mkayander/leetpal/compare/v1.201.1...v1.202.0) (2023-08-27)
 
 
