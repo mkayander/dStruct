@@ -1,3 +1,16 @@
+# [1.205.0](https://github.com/mkayander/leetpal/compare/v1.204.0...v1.205.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* Make loader more opaque ([78d6e0f](https://github.com/mkayander/leetpal/commit/78d6e0f00dd54e49eb3f765aaddead7328a8d0c6))
+
+
+### Features
+
+* Improved code editor height calculation ([2fa96ba](https://github.com/mkayander/leetpal/commit/2fa96ba719d62eb679969d54031a4741fed75820))
+* Make code editor background transparent ([bd2a776](https://github.com/mkayander/leetpal/commit/bd2a776bace5909841acf89aa65fa5f32331cf33))
+
 # [1.204.0](https://github.com/mkayander/leetpal/compare/v1.203.0...v1.204.0) (2023-08-27)
 
 
