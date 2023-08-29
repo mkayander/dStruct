@@ -29,6 +29,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   setMonacoInstance,
   setEditorInstance,
   setTextModel,
+  height,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -56,6 +57,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           folding: !isMobile,
         }}
         {...restProps}
+        height={`calc(${height}px - 6vh)`}
         language="javascript"
         loading={
           <Skeleton
