@@ -35,7 +35,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   const isMobile = useMobileLayout();
 
   return (
-    <Box position="relative" boxShadow={4} borderRadius={1}>
+    <Box position="relative">
       <LinearProgress
         sx={{
           position: "absolute",
@@ -46,7 +46,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         }}
       />
       <MonacoEditor
-        theme={theme.palette.mode === "dark" ? "vs-dark" : "vs-light"}
+        theme={theme.palette.mode === "dark" ? "app-dark" : "vs-light"}
         options={{
           minimap: { enabled: false },
           tabSize: 2,
@@ -76,6 +76,18 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           setEditorInstance?.(editor);
           setMonacoInstance?.(monaco);
           setTextModel(model);
+
+          monaco.editor.defineTheme("app-dark", {
+            base: "vs-dark",
+            inherit: true,
+            rules: [],
+            colors: {
+              "editor.background": "#00000000",
+            },
+          });
+
+          // set app-dark theme
+          monaco.editor.setTheme("app-dark");
         }}
       />
     </Box>

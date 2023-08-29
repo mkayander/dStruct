@@ -229,9 +229,9 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
           useScroll={false}
           scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
           scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
-          sx={{ p: 1, overflowY: "hidden" }}
+          sx={{ p: 0, overflowY: "hidden" }}
         >
-          <SolutionSelectBar selectedProject={selectedProject} mx={1} my={1} />
+          <SolutionSelectBar selectedProject={selectedProject} mx={2} my={1} />
           <Box
             sx={{
               position: "relative",
