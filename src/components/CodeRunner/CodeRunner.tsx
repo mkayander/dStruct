@@ -59,14 +59,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         {...restProps}
         height={`calc(${height}px - 6vh)`}
         language="javascript"
-        loading={
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            height={400}
-            width="100%"
-          />
-        }
         onMount={(editor, monaco) => {
           const model = editor.getModel();
 
