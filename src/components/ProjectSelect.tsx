@@ -145,7 +145,14 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
         <SearchInput
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          sx={{ backgroundColor: panelBgColor }}
+          sx={{
+            position: "sticky",
+            backgroundColor: panelBgColor,
+            mt: -1,
+            top: 0,
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
         />
         {projectSelectItems}
         {!allBrief.isLoading && projectSelectItems.length === 0 && (

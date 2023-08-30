@@ -35,11 +35,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       alignItems="center"
       onClick={handlePropagation}
       sx={{
-        position: "sticky",
         p: 1,
-        top: 0,
-        zIndex: 1,
-        pointerEvents: "none",
         ...sx,
       }}
     >
