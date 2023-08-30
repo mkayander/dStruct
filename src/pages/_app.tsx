@@ -9,6 +9,7 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { StateThemeProvider } from "#/components";
 import { I18nProvider } from "#/components/I18nProvider";
+import { SnackbarCloseButton } from "#/components/SnackbarCloseButton";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { wrapper } from "#/store/makeStore";
@@ -31,7 +32,12 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, ...restProps }) => {
       <SessionProvider session={props.pageProps.session}>
         <ApolloProvider client={apolloClient}>
           <StateThemeProvider>
-            <SnackbarProvider maxSnack={4}>
+            <SnackbarProvider
+              maxSnack={4}
+              action={(snackbarKey) => (
+                <SnackbarCloseButton snackbarKey={snackbarKey} />
+              )}
+            >
               <I18nProvider i18n={props.pageProps.i18n}>
                 <Component {...props.pageProps} />
                 <Analytics />
