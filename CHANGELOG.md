@@ -1,3 +1,19 @@
+# [1.206.0](https://github.com/mkayander/leetpal/compare/v1.205.0...v1.206.0) (2023-08-30)
+
+
+### Bug Fixes
+
+* Fixed project list top padding ([73993e1](https://github.com/mkayander/leetpal/commit/73993e1b8eb32848a0e060a24a852425f00941f2))
+* Improved editor loading state ([5302ebb](https://github.com/mkayander/leetpal/commit/5302ebb7e09bc5cb58f9098323a127321e216cfe))
+
+
+### Features
+
+* Added a copy code button ([af22dbf](https://github.com/mkayander/leetpal/commit/af22dbf765e2da892a12665e8a61893d6a8af7e0))
+* Added new projects ([cbb24af](https://github.com/mkayander/leetpal/commit/cbb24af9760630f865fd226c659213216bef56ce))
+* Changed input clear icon ([2c086ea](https://github.com/mkayander/leetpal/commit/2c086ea551581c039a9518acbf3660d0570dee4d))
+* Implemented a snackbar close button ([791345c](https://github.com/mkayander/leetpal/commit/791345c886fd87627ef0fa2e2984b92ffc7208c0))
+
 # [1.205.0](https://github.com/mkayander/leetpal/compare/v1.204.0...v1.205.0) (2023-08-29)
 
 
