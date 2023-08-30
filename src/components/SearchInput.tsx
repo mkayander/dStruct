@@ -1,4 +1,4 @@
-import { Clear } from "@mui/icons-material";
+import { Backspace } from "@mui/icons-material";
 import { IconButton, Stack, type SxProps } from "@mui/material";
 import React from "react";
 
@@ -63,7 +63,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           onClick={handleClear}
           sx={{ pointerEvents: "auto" }}
         >
-          <Clear fontSize="small" />
+          <Backspace fontSize="small" />
         </IconButton>
       </span>
     </Stack>
