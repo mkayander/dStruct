@@ -63,6 +63,7 @@ export const EditorStateIcon: React.FC<EditorStateIconProps> = ({
         <div key={str}>{str}</div>
       ))}
       arrow
+      placement="left"
     >
       {icon}
     </Tooltip>

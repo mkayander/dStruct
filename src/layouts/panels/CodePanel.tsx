@@ -1,9 +1,10 @@
-import { AutoFixHigh, PlayArrow } from "@mui/icons-material";
+import { AutoFixHigh, ContentCopy, PlayArrow } from "@mui/icons-material";
 import { LoadingButton, TabContext, TabList } from "@mui/lab";
 import { Box, IconButton, Stack, Tab, Tooltip } from "@mui/material";
 import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useSnackbar } from "notistack";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
@@ -60,6 +61,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       setEditorState(EditorState.SAVED_ON_SERVER);
     },
   });
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const { runCode } = useCodeExecution(codeInput);
 
@@ -170,6 +173,13 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setIsFormattingAvailable(false);
   };
 
+  const copyCode = () => {
+    void navigator.clipboard.writeText(codeInput);
+    enqueueSnackbar(`${LL.CODE_COPIED_TO_CLIPBOARD()} 🧑‍💻`, {
+      variant: "success",
+    });
+  };
+
   const isLoading =
     selectedProject.isLoading ||
     currentSolution.isLoading ||
@@ -245,19 +255,30 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               setMonacoInstance={setMonacoInstance}
               setTextModel={setTextModel}
             />
-            <Box
+            <Stack
+              spacing={1}
               sx={{
                 position: "absolute",
                 top: "6px",
                 right: "20px",
                 opacity: 0.7,
+                alignItems: "center",
               }}
             >
               <EditorStateIcon
                 state={editorState}
                 isLoading={updateSolution.isLoading}
               />
-            </Box>
+              <Tooltip
+                title={LL.COPY_CODE_TO_CLIPBOARD()}
+                arrow
+                placement="left"
+              >
+                <IconButton onClick={copyCode}>
+                  <ContentCopy fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
           </Box>
         </StyledTabPanel>
       </TabContext>

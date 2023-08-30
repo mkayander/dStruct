@@ -47,6 +47,10 @@ type RootTranslation = {
 	 */
 	CHOOSE_LOCALE: string
 	/**
+	 * C​o​p​i​e​d​ ​c​o​d​e​ ​t​o​ ​c​l​i​p​b​o​a​r​d
+	 */
+	CODE_COPIED_TO_CLIPBOARD: string
+	/**
 	 * C​o​d​e​ ​R​u​n​n​e​r
 	 */
 	CODE_RUNNER: string
@@ -54,6 +58,18 @@ type RootTranslation = {
 	 * C​o​n​s​o​l​e​ ​o​u​t​p​u​t
 	 */
 	CONSOLE_OUTPUT: string
+	/**
+	 * C​o​n​t​i​n​u​e
+	 */
+	CONTINUE: string
+	/**
+	 * C​o​p​y
+	 */
+	COPY: string
+	/**
+	 * C​o​p​y​ ​c​o​d​e​ ​t​o​ ​c​l​i​p​b​o​a​r​d
+	 */
+	COPY_CODE_TO_CLIPBOARD: string
 	/**
 	 * C​r​e​a​t​e​ ​n​e​w​ ​p​r​o​j​e​c​t
 	 */
@@ -394,6 +410,10 @@ export type TranslationFunctions = {
 	 */
 	CHOOSE_LOCALE: () => LocalizedString
 	/**
+	 * Copied code to clipboard
+	 */
+	CODE_COPIED_TO_CLIPBOARD: () => LocalizedString
+	/**
 	 * Code Runner
 	 */
 	CODE_RUNNER: () => LocalizedString
@@ -401,6 +421,18 @@ export type TranslationFunctions = {
 	 * Console output
 	 */
 	CONSOLE_OUTPUT: () => LocalizedString
+	/**
+	 * Continue
+	 */
+	CONTINUE: () => LocalizedString
+	/**
+	 * Copy
+	 */
+	COPY: () => LocalizedString
+	/**
+	 * Copy code to clipboard
+	 */
+	COPY_CODE_TO_CLIPBOARD: () => LocalizedString
 	/**
 	 * Create new project
 	 */
