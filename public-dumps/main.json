@@ -1427,6 +1427,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clls81vp20001kx093zsbsm2c": {
+      "id": "clls81vp20001kx093zsbsm2c",
+      "createdAt": "2023-08-26T16:14:12.662Z",
+      "updatedAt": "2023-08-26T16:14:12.662Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Length of Pair Chain",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/maximum-length-of-pair-chain/",
+      "slug": "maximum-length-of-pair-chain",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clltlyslp0001l608kvv9dq5t": {
+      "id": "clltlyslp0001l608kvv9dq5t",
+      "createdAt": "2023-08-27T15:31:29.485Z",
+      "updatedAt": "2023-08-27T15:31:29.485Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Frog Jump",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/frog-jump/",
+      "slug": "frog-jump",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllw85wuq0001pc0g73kzu3ix": {
+      "id": "cllw85wuq0001pc0g73kzu3ix",
+      "createdAt": "2023-08-29T11:28:25.491Z",
+      "updatedAt": "2023-08-29T11:28:25.491Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Penalty for a Shop",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-penalty-for-a-shop/",
+      "slug": "minimum-penalty-for-a-shop",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllwd3vn40001um0femlklcgb": {
+      "id": "cllwd3vn40001um0femlklcgb",
+      "createdAt": "2023-08-29T13:46:48.688Z",
+      "updatedAt": "2023-08-29T13:46:48.688Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "LRU Cache",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/lru-cache/",
+      "slug": "lru-cache",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7053,6 +7109,164 @@
         }
       },
       "description": null
+    },
+    "clls81vp20002kx09tspcvaoy": {
+      "id": "clls81vp20002kx09tspcvaoy",
+      "createdAt": "2023-08-26T16:14:12.662Z",
+      "updatedAt": "2023-08-26T16:14:12.662Z",
+      "projectId": "clls81vp20001kx093zsbsm2c",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "atPV6Lkb4hkVcwMXsKxjXf": {
+          "name": "atPV6Lkb4hkVcwMXsKxjXf",
+          "type": "array",
+          "input": "[[1,2],[2,3],[3,4]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clls82phf0001jt08gkiudte2": {
+      "id": "clls82phf0001jt08gkiudte2",
+      "createdAt": "2023-08-26T16:14:51.268Z",
+      "updatedAt": "2023-08-26T16:14:51.268Z",
+      "projectId": "clls81vp20001kx093zsbsm2c",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "atPV6Lkb4hkVcwMXsKxjXf": {
+          "name": "atPV6Lkb4hkVcwMXsKxjXf",
+          "type": "array",
+          "input": "[[1,2],[7,8],[4,5]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clltlyslp0002l608tqobe7rl": {
+      "id": "clltlyslp0002l608tqobe7rl",
+      "createdAt": "2023-08-27T15:31:29.485Z",
+      "updatedAt": "2023-08-27T15:31:29.485Z",
+      "projectId": "clltlyslp0001l608kvv9dq5t",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "uRoq13LvtQ3Kiq3LR81pcu": {
+          "name": "uRoq13LvtQ3Kiq3LR81pcu",
+          "type": "array",
+          "input": "[0,1,3,5,6,8,12,17]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clltm3kfm0005l608v0lb01wo": {
+      "id": "clltm3kfm0005l608v0lb01wo",
+      "createdAt": "2023-08-27T15:35:12.179Z",
+      "updatedAt": "2023-08-27T15:35:12.179Z",
+      "projectId": "clltlyslp0001l608kvv9dq5t",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "uRoq13LvtQ3Kiq3LR81pcu": {
+          "name": "uRoq13LvtQ3Kiq3LR81pcu",
+          "type": "array",
+          "input": "[0,1,2,3,4,8,9,11]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllw85wur0002pc0gd486c7go": {
+      "id": "cllw85wur0002pc0gd486c7go",
+      "createdAt": "2023-08-29T11:28:25.491Z",
+      "updatedAt": "2023-08-29T11:28:25.491Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "YYNY",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllw8a1or0009pc0gh0thiw3w": {
+      "id": "cllw8a1or0009pc0gh0thiw3w",
+      "createdAt": "2023-08-29T11:31:38.379Z",
+      "updatedAt": "2023-08-29T11:31:38.379Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "NNNNN",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllw8a7g7000bpc0gazajlowv": {
+      "id": "cllw8a7g7000bpc0gazajlowv",
+      "createdAt": "2023-08-29T11:31:45.847Z",
+      "updatedAt": "2023-08-29T11:31:45.847Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "YYNYYNNNYYYYYNYNYNYNYYNYY",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cllwd3vn40002um0fnb5cnbpe": {
+      "id": "cllwd3vn40002um0fnb5cnbpe",
+      "createdAt": "2023-08-29T13:46:48.688Z",
+      "updatedAt": "2023-08-29T13:46:48.688Z",
+      "projectId": "cllwd3vn40001um0femlklcgb",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "array",
+          "input": "[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"]",
+          "order": 0
+        },
+        "fXaeQMwqrzDGxMvtqXTX34": {
+          "name": "fXaeQMwqrzDGxMvtqXTX34",
+          "type": "array",
+          "input": "[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -8854,6 +9068,78 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @param {string} s3\n * @return {boolean}\n */\nvar isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  const l = s3.length;\n\n  if (m + n !== l) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let j = 1; j <= n; j++) {\n    dp.setColor(j, \"cyan\");\n    dp[j] = dp[j - 1] && s2[j - 1] === s3[j - 1];\n  }\n\n  for (let i = 1; i <= m; i++) {\n    dp[0] = dp[0] && s1[i - 1] === s3[i - 1];\n    for (let j = 1; j <= n; ++j) {\n      dp.setColor(j, \"green\");\n      dp[j] =\n        (dp[j] && s1[i - 1] === s3[i + j - 1]) ||\n        (dp[j - 1] && s2[j - 1] === s3[i + j - 1]);\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
+      "order": 0
+    },
+    "clls81vp20003kx09m4v3g2zr": {
+      "id": "clls81vp20003kx09m4v3g2zr",
+      "createdAt": "2023-08-26T16:14:12.662Z",
+      "updatedAt": "2023-08-26T16:14:12.662Z",
+      "projectId": "clls81vp20001kx093zsbsm2c",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} pairs\n * @return {number}\n */\nvar findLongestChain = function (pairs) {\n  pairs.sort((a, b) => a[1] - b[1]);\n\n  let cur = -Infinity;\n  let ans = 0;\n\n  for (const [start, end] of pairs) {\n    if (cur < start) {\n      cur = end;\n      ans++;\n    }\n  }\n\n  return ans;\n};\n\nreturn findLongestChain;\n",
+      "order": 0
+    },
+    "clltlyslp0003l608vewqn3un": {
+      "id": "clltlyslp0003l608vewqn3un",
+      "createdAt": "2023-08-27T15:31:29.485Z",
+      "updatedAt": "2023-08-27T15:31:29.485Z",
+      "projectId": "clltlyslp0001l608kvv9dq5t",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {number[]} stones\r\n * @return {boolean}\r\n */\r\nvar canCross = function (stones) {\r\n  const n = stones.length;\r\n  const mark = new Map();\r\n  const dp = [];\r\n\r\n  const solve = (i, prevJump) => {\r\n    if (i === n - 1) return true;\r\n\r\n    dp[i] ??= new Array();\r\n    if (dp[i][prevJump] !== undefined) {\r\n      return dp[i][prevJump] === 1;\r\n    }\r\n\r\n    let result = false;\r\n    // Iterate over the three possibilities {k - 1, k, k + 1}\r\n    for (let nextJump = prevJump - 1; nextJump <= prevJump + 1; nextJump++) {\r\n      if (nextJump <= 0) continue;\r\n      const nextStone = stones[i] + nextJump;\r\n      if (!mark.has(nextStone)) continue;\r\n\r\n      result ||= solve(mark.get(nextStone), nextJump);\r\n    }\r\n\r\n    // Store the result to fetch later.\r\n    dp[i][prevJump] = +result;\r\n    return result;\r\n  };\r\n\r\n  // Mark stones in the map to identify if such stone exists or not.\r\n  for (let i = 0; i < n; i++) {\r\n    mark.set(stones[i], i);\r\n  }\r\n\r\n  console.log(dp);\r\n\r\n  const result = solve(0, 0);\r\n\r\n  return result;\r\n};\r\n\r\nreturn canCross;\r\n",
+      "order": 0
+    },
+    "cllw85wur0003pc0g48j0rkfr": {
+      "id": "cllw85wur0003pc0g48j0rkfr",
+      "createdAt": "2023-08-29T11:28:25.491Z",
+      "updatedAt": "2023-08-29T11:28:25.491Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Single Pass",
+      "slug": "single-pass",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} customers\n * @return {number}\n */\nvar bestClosingTime = function (customers) {\n  const n = customers.length;\n\n  let currentPenalty = 0;\n\n  let minPenalty = Infinity;\n  let result = -1;\n\n  for (let i = 0; i <= n; i++) {\n    customers.setColor(i, \"green\");\n    console.log({i, currentPenalty});\n    if (currentPenalty < minPenalty) {\n      minPenalty = currentPenalty;\n      result = i;\n    }\n    if (customers[i] === \"Y\") {\n      currentPenalty--;\n    } else {\n      currentPenalty++;\n    }\n  }\n\n  return result;\n};\n\nreturn bestClosingTime;\n",
+      "order": 0
+    },
+    "cllw87ysx0005pc0g9kvikhh8": {
+      "id": "cllw87ysx0005pc0g9kvikhh8",
+      "createdAt": "2023-08-29T11:30:01.328Z",
+      "updatedAt": "2023-08-29T11:30:01.328Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Double Pass",
+      "slug": "double-pass",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} customers\n * @return {number}\n */\nvar bestClosingTime = function (customers) {\n  const n = customers.length;\n\n  let currentPenalty = 0;\n  for (let i = 0; i < n; i++) {\n    customers.setColor(i, \"cyan\");\n    if (customers[i] === \"Y\") currentPenalty++;\n  }\n\n  let minPenalty = Infinity;\n  let result = -1;\n\n  for (let i = 0; i <= n; i++) {\n    customers.setColor(i, \"green\");\n    console.log({currentPenalty});\n    if (currentPenalty < minPenalty) {\n      minPenalty = currentPenalty;\n      result = i;\n    }\n    if (customers[i] === \"Y\") {\n      currentPenalty--;\n    } else {\n      currentPenalty++;\n    }\n  }\n\n  return result;\n};\n\nreturn bestClosingTime;\n",
+      "order": 1
+    },
+    "cllw88s8l0007pc0ge2fp9hm5": {
+      "id": "cllw88s8l0007pc0ge2fp9hm5",
+      "createdAt": "2023-08-29T11:30:39.478Z",
+      "updatedAt": "2023-08-29T11:30:39.478Z",
+      "projectId": "cllw85wuq0001pc0g73kzu3ix",
+      "title": "Prefix Sum",
+      "slug": "prefix-sum",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} customers\n * @return {number}\n */\nvar bestClosingTime = function (customers) {\n  const n = customers.length;\n\n  const openPenalties = new Array(n + 1).fill(0);\n  const closedPenalties = new Array(n + 1).fill(0);\n\n  for (let i = 1; i < openPenalties.length; i++) {\n    openPenalties[i] = openPenalties[i - 1];\n    if (customers[i - 1] === \"N\") openPenalties[i]++;\n  }\n\n  for (let i = closedPenalties.length - 2; i >= 0; i--) {\n    closedPenalties[i] = closedPenalties[i + 1];\n    if (customers[i] === \"Y\") closedPenalties[i]++;\n  }\n\n  let minPenalty = Infinity;\n  let result = -1;\n\n  for (let i = 0; i <= n; i++) {\n    openPenalties.setColor(i, \"green\");\n    closedPenalties.setColor(i, \"red\");\n    const current = openPenalties[i] + closedPenalties[i];\n    if (current < minPenalty) {\n      minPenalty = current;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nreturn bestClosingTime;\n",
+      "order": 2
+    },
+    "cllwd3vn40003um0fvr2576rp": {
+      "id": "cllwd3vn40003um0fvr2576rp",
+      "createdAt": "2023-08-29T13:46:48.688Z",
+      "updatedAt": "2023-08-29T13:46:48.688Z",
+      "projectId": "cllwd3vn40001um0femlklcgb",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} capacity\n */\nvar LRUCache = function (capacity) {\n  this.capacity = capacity;\n  this.map = new Map();\n  this.list = new DoublyLinkedList();\n};\n\n/**\n * @param {number} key\n * @return {number}\n */\nLRUCache.prototype.get = function (key) {\n  if (!this.map.has(key)) return -1;\n\n  const node = this.map.get(key);\n  this.list.moveNodeToHead(node);\n\n  node.setColor(\"green\");\n  return node.val;\n};\n\n/**\n * @param {number} key\n * @param {number} value\n * @return {void}\n */\nLRUCache.prototype.put = function (key, value) {\n  if (!this.map.has(key)) {\n    const newNode = new Node(key, value);\n    this.list.setHead(newNode);\n    this.map.set(key, newNode);\n\n    if (this.map.size > this.capacity) {\n      const evictedNode = this.list.removeTail();\n      if (evictedNode) {\n        this.map.delete(evictedNode.key);\n      }\n    }\n  } else {\n    const node = this.map.get(key);\n    node.val = value;\n    this.list.moveNodeToHead(node);\n  }\n};\n\nclass Node extends ListNode {\n  constructor(key, val, next = null, prev = null) {\n    super(val);\n    this.key = key;\n  }\n}\n\nclass DoublyLinkedList {\n  constructor() {\n    this.head = null;\n    this.tail = null;\n  }\n\n  setHead(node) {\n    if (!this.head) {\n      this.head = this.tail = node;\n    } else {\n      node.next = this.head;\n      this.head.prev = node;\n      this.head = node;\n    }\n  }\n\n  setTail(node) {\n    if (!this.tail) {\n      this.head = this.tail = node;\n    } else {\n      this.tail.next = node;\n      node.prev = this.tail;\n      this.tail = node;\n    }\n  }\n\n  removeNode(node) {\n    if (node === this.head) {\n      this.head = node.next;\n    }\n    if (node === this.tail) {\n      this.tail = node.prev;\n    }\n    if (node.next) {\n      node.next.prev = node.prev;\n    }\n    if (node.prev) {\n      node.prev.next = node.next;\n    }\n    node.next = node.prev = null;\n  }\n\n  removeTail() {\n    if (!this.tail) return null;\n\n    const node = this.tail;\n    this.removeNode(node);\n\n    return node;\n  }\n\n  moveNodeToHead(node) {\n    if (node === this.head) return;\n\n    this.removeNode(node);\n    this.setHead(node);\n  }\n}\n\n/**\n * Your LRUCache object will be instantiated and called as such:\n * var obj = new LRUCache(capacity)\n * var param_1 = obj.get(key)\n * obj.put(key,value)\n */\n\nfunction handler(commands, arguments) {\n  let instance = null;\n\n  for (let i = 0; i < commands.length; i++) {\n    commands.setColor(i, \"green\");\n    arguments.setColor(i, \"cyan\");\n    const command = commands[i];\n    const args = arguments[i];\n\n    switch (command) {\n      case \"LRUCache\":\n        instance = new LRUCache(...args);\n        break;\n\n      case \"put\":\n        instance.put(...args);\n        break;\n\n      case \"get\":\n        const result = instance.get(...args);\n        console.log(`get(${args.join(\", \")}): `, result);\n    }\n  }\n}\n\nreturn handler;\n",
       "order": 0
     }
   }
