@@ -1483,6 +1483,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cllyzb31d0001ol0hy2t6jsml": {
+      "id": "cllyzb31d0001ol0hy2t6jsml",
+      "createdAt": "2023-08-31T09:43:48.770Z",
+      "updatedAt": "2023-08-31T09:43:48.770Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Word Ladder",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/word-ladder/",
+      "slug": "word-ladder",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllyzy4ya0005ol0h95ej0d6s": {
+      "id": "cllyzy4ya0005ol0h95ej0d6s",
+      "createdAt": "2023-08-31T10:01:44.339Z",
+      "updatedAt": "2023-08-31T10:01:44.339Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Number of Taps to Open to Water a Garden",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/",
+      "slug": "minimum-number-of-taps-to-open-to-water-a-garden",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllzchyp40001vy0hfv69zeue": {
+      "id": "cllzchyp40001vy0hfv69zeue",
+      "createdAt": "2023-08-31T15:53:04.745Z",
+      "updatedAt": "2023-08-31T15:53:04.745Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Merge k Sorted Lists",
+      "category": "LINKED_LIST",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/merge-k-sorted-lists",
+      "slug": "merge-k-sorted-lists",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7267,6 +7309,93 @@
         }
       },
       "description": null
+    },
+    "cllyzb31d0002ol0hu5jlsksz": {
+      "id": "cllyzb31d0002ol0hu5jlsksz",
+      "createdAt": "2023-08-31T09:43:48.770Z",
+      "updatedAt": "2023-08-31T09:43:48.770Z",
+      "projectId": "cllyzb31d0001ol0hy2t6jsml",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "sxDC8wU9i2Lrr29NiQiQLN": {
+          "name": "sxDC8wU9i2Lrr29NiQiQLN",
+          "type": "string",
+          "input": "hit",
+          "order": 0
+        },
+        "vGKZVbMHWCbAip5YvCx2XQ": {
+          "name": "vGKZVbMHWCbAip5YvCx2XQ",
+          "type": "string",
+          "input": "cog",
+          "order": 1
+        },
+        "weNQRo3V88N8zfTfrMjDvL": {
+          "name": "weNQRo3V88N8zfTfrMjDvL",
+          "type": "array",
+          "input": "[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+          "order": 2
+        }
+      },
+      "description": null
+    },
+    "cllyzy4yb0006ol0hdihth9k4": {
+      "id": "cllyzy4yb0006ol0hdihth9k4",
+      "createdAt": "2023-08-31T10:01:44.339Z",
+      "updatedAt": "2023-08-31T10:01:44.339Z",
+      "projectId": "cllyzy4ya0005ol0h95ej0d6s",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "kNnS2qVC7XRafvcLBKNP6L": {
+          "name": "kNnS2qVC7XRafvcLBKNP6L",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "vhG1exafGHTzAZu2R9YXVH": {
+          "name": "vhG1exafGHTzAZu2R9YXVH",
+          "type": "array",
+          "input": "[3,4,1,1,0,0]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllzchyp40002vy0hr1g5e1ak": {
+      "id": "cllzchyp40002vy0hr1g5e1ak",
+      "createdAt": "2023-08-31T15:53:04.745Z",
+      "updatedAt": "2023-08-31T15:53:04.745Z",
+      "projectId": "cllzchyp40001vy0hfv69zeue",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,4,5]",
+          "order": 0
+        },
+        "eVrEta1CVBfEr23tEDi7GN": {
+          "name": "eVrEta1CVBfEr23tEDi7GN",
+          "type": "linkedList",
+          "input": "[2,5]",
+          "order": 2
+        },
+        "n8Vd55HWRodnmyxJ3NYCKF": {
+          "name": "n8Vd55HWRodnmyxJ3NYCKF",
+          "type": "linkedList",
+          "input": "[1,3,4]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9141,6 +9270,66 @@
       "description": null,
       "code": "/**\n * @param {number} capacity\n */\nvar LRUCache = function (capacity) {\n  this.capacity = capacity;\n  this.map = new Map();\n  this.list = new DoublyLinkedList();\n};\n\n/**\n * @param {number} key\n * @return {number}\n */\nLRUCache.prototype.get = function (key) {\n  if (!this.map.has(key)) return -1;\n\n  const node = this.map.get(key);\n  this.list.moveNodeToHead(node);\n\n  node.setColor(\"green\");\n  return node.val;\n};\n\n/**\n * @param {number} key\n * @param {number} value\n * @return {void}\n */\nLRUCache.prototype.put = function (key, value) {\n  if (!this.map.has(key)) {\n    const newNode = new Node(key, value);\n    this.list.setHead(newNode);\n    this.map.set(key, newNode);\n\n    if (this.map.size > this.capacity) {\n      const evictedNode = this.list.removeTail();\n      if (evictedNode) {\n        this.map.delete(evictedNode.key);\n      }\n    }\n  } else {\n    const node = this.map.get(key);\n    node.val = value;\n    this.list.moveNodeToHead(node);\n  }\n};\n\nclass Node extends ListNode {\n  constructor(key, val, next = null, prev = null) {\n    super(val);\n    this.key = key;\n  }\n}\n\nclass DoublyLinkedList {\n  constructor() {\n    this.head = null;\n    this.tail = null;\n  }\n\n  setHead(node) {\n    if (!this.head) {\n      this.head = this.tail = node;\n    } else {\n      node.next = this.head;\n      this.head.prev = node;\n      this.head = node;\n    }\n  }\n\n  setTail(node) {\n    if (!this.tail) {\n      this.head = this.tail = node;\n    } else {\n      this.tail.next = node;\n      node.prev = this.tail;\n      this.tail = node;\n    }\n  }\n\n  removeNode(node) {\n    if (node === this.head) {\n      this.head = node.next;\n    }\n    if (node === this.tail) {\n      this.tail = node.prev;\n    }\n    if (node.next) {\n      node.next.prev = node.prev;\n    }\n    if (node.prev) {\n      node.prev.next = node.next;\n    }\n    node.next = node.prev = null;\n  }\n\n  removeTail() {\n    if (!this.tail) return null;\n\n    const node = this.tail;\n    this.removeNode(node);\n\n    return node;\n  }\n\n  moveNodeToHead(node) {\n    if (node === this.head) return;\n\n    this.removeNode(node);\n    this.setHead(node);\n  }\n}\n\n/**\n * Your LRUCache object will be instantiated and called as such:\n * var obj = new LRUCache(capacity)\n * var param_1 = obj.get(key)\n * obj.put(key,value)\n */\n\nfunction handler(commands, arguments) {\n  let instance = null;\n\n  for (let i = 0; i < commands.length; i++) {\n    commands.setColor(i, \"green\");\n    arguments.setColor(i, \"cyan\");\n    const command = commands[i];\n    const args = arguments[i];\n\n    switch (command) {\n      case \"LRUCache\":\n        instance = new LRUCache(...args);\n        break;\n\n      case \"put\":\n        instance.put(...args);\n        break;\n\n      case \"get\":\n        const result = instance.get(...args);\n        console.log(`get(${args.join(\", \")}): `, result);\n    }\n  }\n}\n\nreturn handler;\n",
       "order": 0
+    },
+    "cllyzb31d0003ol0h19ps67ih": {
+      "id": "cllyzb31d0003ol0h19ps67ih",
+      "createdAt": "2023-08-31T09:43:48.770Z",
+      "updatedAt": "2023-08-31T09:43:48.770Z",
+      "projectId": "cllyzb31d0001ol0hy2t6jsml",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "var ladderLength = function (beginWord, endWord, wordList) {\n  // all words length is the same\n  const L = beginWord.length;\n  const allComboDict = new Map();\n\n  wordList.forEach((word) => {\n    for (let i = 0; i < L; i++) {\n      const newWord = word.slice(0, i) + \"*\" + word.slice(i + 1, L);\n      const transformations = allComboDict.get(newWord) ?? [];\n      transformations.push(word);\n      allComboDict.set(newWord, transformations);\n    }\n  });\n\n  console.log(allComboDict);\n\n  const beginQueue = new Queue();\n  beginQueue.enqueue({ word: beginWord, level: 1 });\n  const endQueue = new Queue();\n  endQueue.enqueue({ word: endWord, level: 1 });\n\n  const visitedBegin = new Map();\n  const visitedEnd = new Map();\n  visitedBegin.set(beginWord, 1);\n  visitedEnd.set(endWord, 1);\n\n  let result = -1;\n\n  while (!beginQueue.isEmpty() && !endQueue.isEmpty()) {\n    if (beginQueue.size() <= endQueue.size()) {\n      result = visitWordNode(\n        beginQueue,\n        visitedBegin,\n        visitedEnd,\n        allComboDict\n      );\n    } else {\n      result = visitWordNode(endQueue, visitedEnd, visitedBegin, allComboDict);\n    }\n\n    if (result > -1) {\n      return result;\n    }\n  }\n\n  return 0;\n};\n\nfunction visitWordNode(queue, visited, othersVisited, allComboDict) {\n  const size = queue.size();\n\n  for (let j = 0; j < size; j++) {\n    const { word, level } = queue.dequeue();\n\n    for (let i = 0; i < word.length; i++) {\n      const newWord =\n        word.substring(0, i) + \"*\" + word.substring(i + 1, word.length);\n\n      const adjacentWords = allComboDict.get(newWord) || [];\n      for (const adjacentWord of adjacentWords) {\n        if (othersVisited.has(adjacentWord)) {\n          return level + othersVisited.get(adjacentWord);\n        }\n\n        if (!visited.has(adjacentWord)) {\n          visited.set(adjacentWord, level + 1);\n          queue.enqueue({ word: adjacentWord, level: level + 1 });\n        }\n      }\n    }\n  }\n\n  return -1;\n}\n\nreturn ladderLength;\n",
+      "order": 0
+    },
+    "cllyzy4yb0007ol0hfvaa1zyy": {
+      "id": "cllyzy4yb0007ol0hfvaa1zyy",
+      "createdAt": "2023-08-31T10:01:44.339Z",
+      "updatedAt": "2023-08-31T10:01:44.339Z",
+      "projectId": "cllyzy4ya0005ol0h95ej0d6s",
+      "title": "Greedy",
+      "slug": "greedy",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[]} ranges\n * @return {number}\n */\nvar minTaps = function (n, ranges) {\n  // Create an array to track the maximum reach for each position\n  const maxReach = new Array(n + 1);\n  maxReach.fill(0);\n\n  // Calculate the maximum reach for each tap\n  for (let i = 0; i < ranges.length; i++) {\n    ranges.setColor(i, \"cyan\");\n    // Calculate the leftmost position the tap can reach\n    const start = Math.max(0, i - ranges[i]);\n    // Calculate the rightmost position the tap can reach\n    const end = Math.min(n, i + ranges[i]);\n\n    // Update the maximum reach for the leftmost position\n    maxReach[start] = Math.max(maxReach[start], end);\n  }\n\n  console.log(maxReach);\n\n  // Number of taps used\n  let taps = 0;\n  // Current rightmost position reached\n  let currEnd = 0;\n  // Next rightmost position that can be reached\n  let nextEnd = 0;\n\n  // Iterate through the garden\n  for (let i = 0; i <= n; i++) {\n    // Current position cannot be reached\n    if (i > nextEnd) return -1;\n\n    // Increment taps when moving to a new tap\n    if (i > currEnd) {\n      taps++;\n      // Move to the rightmost position that can be reached\n      currEnd = nextEnd;\n    }\n\n    // Update the next rightmost position that can be reached\n    nextEnd = Math.max(nextEnd, maxReach[i]);\n    maxReach.setColor(i, \"green\");\n  }\n\n  // Return the minimum number of taps used\n  return taps;\n};\n\nreturn minTaps;\n",
+      "order": 0
+    },
+    "cllzchyp50003vy0h1z7i53bt": {
+      "id": "cllzchyp50003vy0h1z7i53bt",
+      "createdAt": "2023-08-31T15:53:04.745Z",
+      "updatedAt": "2023-08-31T15:53:04.745Z",
+      "projectId": "cllzchyp40001vy0hfv69zeue",
+      "title": "Divide & Conquer",
+      "slug": "divide-and-conquer",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nvar mergeKLists = function (...lists) {\n  const k = lists.length;\n  if (!k) return null;\n  let interval = 1;\n\n  while (interval < k) {\n    for (let i = 0; i < k - interval; i += interval * 2) {\n      lists[i] = merge2Lists(lists[i], lists[i + interval]);\n    }\n    interval *= 2;\n  }\n\n  return lists[0];\n};\n\nfunction merge2Lists(l1, l2) {\n  const dummy = new ListNode();\n  let current = dummy;\n\n  while (l1 && l2) {\n    if (l1.val < l2.val) {\n      current.next = l1;\n      l1 = l1.next;\n    } else {\n      current.next = l2;\n      l2 = l2.next;\n    }\n\n    current = current.next;\n  }\n\n  if (l1) {\n    current.next = l1;\n  } else if (l2) {\n    current.next = l2;\n  }\n\n  return dummy.next;\n}\n\nreturn mergeKLists;\n",
+      "order": 1
+    },
+    "cllzclweo0005vy0hcjvmgiq6": {
+      "id": "cllzclweo0005vy0hcjvmgiq6",
+      "createdAt": "2023-08-31T15:56:08.400Z",
+      "updatedAt": "2023-08-31T15:56:08.400Z",
+      "projectId": "cllzchyp40001vy0hfv69zeue",
+      "title": "Simple Comparison",
+      "slug": "simple-comparison",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nvar mergeKLists = function (...lists) {\n  const k = lists.length;\n\n  const dummy = new ListNode(-1);\n  let current = dummy;\n\n  while (current) {\n    let minIndex = -1;\n    let nodesLeft = 0;\n    for (let i = 0; i < lists.length; i++) {\n      if (!lists[i]) continue;\n      nodesLeft++;\n      if (minIndex === -1 || lists[i].val < lists[minIndex].val) minIndex = i;\n    }\n    if (!lists[minIndex]) break;\n    current.next = lists[minIndex];\n    current = current.next;\n    lists[minIndex] = lists[minIndex]?.next;\n    if (nodesLeft === 1) break;\n  }\n\n  return dummy.next;\n};\n\nreturn mergeKLists;\n",
+      "order": 3
+    },
+    "cllzcqmzl0007vy0hvx5lvhpu": {
+      "id": "cllzcqmzl0007vy0hvx5lvhpu",
+      "createdAt": "2023-08-31T15:59:49.474Z",
+      "updatedAt": "2023-08-31T15:59:49.474Z",
+      "projectId": "cllzchyp40001vy0hfv69zeue",
+      "title": "Priority Queue",
+      "slug": "priority-queue",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nvar mergeKLists = function (...lists) {\n  const k = lists.length;\n\n  const dummy = new ListNode(-1);\n  let current = dummy;\n\n  const pq = new PriorityQueue({\n    compare: (a, b) => a.val - b.val,\n  });\n\n  for (let i = 0; i < k; i++) {\n    if (!lists[i]) continue;\n    pq.enqueue(lists[i]);\n  }\n\n  while (!pq.isEmpty()) {\n    const node = pq.dequeue();\n    current.next = node;\n    current = current.next;\n    if (pq.isEmpty()) break;\n    if (node.next) {\n      pq.enqueue(node.next);\n    }\n  }\n\n  return dummy.next;\n};\n\nreturn mergeKLists;\n",
+      "order": 2
     }
   }
 }
