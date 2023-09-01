@@ -1525,6 +1525,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clm0n044s0001o60fxjbzxxn1": {
+      "id": "clm0n044s0001o60fxjbzxxn1",
+      "createdAt": "2023-09-01T13:34:53.932Z",
+      "updatedAt": "2023-09-01T13:34:53.932Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Counting Bits",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/counting-bits",
+      "slug": "counting-bits",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7396,6 +7410,44 @@
         }
       },
       "description": null
+    },
+    "clm0n044s0002o60f71fs3wq2": {
+      "id": "clm0n044s0002o60f71fs3wq2",
+      "createdAt": "2023-09-01T13:34:53.932Z",
+      "updatedAt": "2023-09-01T13:34:53.932Z",
+      "projectId": "clm0n044s0001o60fxjbzxxn1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "hsnQghaqDWC98qnCxzvTt2": {
+          "name": "hsnQghaqDWC98qnCxzvTt2",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clm0n33js0005o60f5fenml4e": {
+      "id": "clm0n33js0005o60f5fenml4e",
+      "createdAt": "2023-09-01T13:37:13.144Z",
+      "updatedAt": "2023-09-01T13:37:13.144Z",
+      "projectId": "clm0n044s0001o60fxjbzxxn1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "hsnQghaqDWC98qnCxzvTt2": {
+          "name": "hsnQghaqDWC98qnCxzvTt2",
+          "type": "number",
+          "input": "64",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9330,6 +9382,18 @@
       "description": "",
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nvar mergeKLists = function (...lists) {\n  const k = lists.length;\n\n  const dummy = new ListNode(-1);\n  let current = dummy;\n\n  const pq = new PriorityQueue({\n    compare: (a, b) => a.val - b.val,\n  });\n\n  for (let i = 0; i < k; i++) {\n    if (!lists[i]) continue;\n    pq.enqueue(lists[i]);\n  }\n\n  while (!pq.isEmpty()) {\n    const node = pq.dequeue();\n    current.next = node;\n    current = current.next;\n    if (pq.isEmpty()) break;\n    if (node.next) {\n      pq.enqueue(node.next);\n    }\n  }\n\n  return dummy.next;\n};\n\nreturn mergeKLists;\n",
       "order": 2
+    },
+    "clm0n044s0003o60fl7bbg0uy": {
+      "id": "clm0n044s0003o60fl7bbg0uy",
+      "createdAt": "2023-09-01T13:34:53.932Z",
+      "updatedAt": "2023-09-01T13:34:53.932Z",
+      "projectId": "clm0n044s0001o60fxjbzxxn1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {number[]}\n */\nvar countBits = function (n) {\n  if (n === 0) return [0];\n\n  const result = new Array(0, 1);\n  for (let i = 2; i <= n; i++) {\n    result.push(result[i >> 1] + (i & 1));\n  }\n\n  return result;\n};\n\nreturn countBits;\n",
+      "order": 0
     }
   }
 }
