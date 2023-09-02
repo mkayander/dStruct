@@ -1539,6 +1539,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clm1xmeyr0001ms0goigqs7h3": {
+      "id": "clm1xmeyr0001ms0goigqs7h3",
+      "createdAt": "2023-09-02T11:19:56.740Z",
+      "updatedAt": "2023-09-02T11:19:56.740Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Extra Characters in a String",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/extra-characters-in-a-string",
+      "slug": "extra-characters-in-a-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7448,6 +7462,31 @@
         }
       },
       "description": null
+    },
+    "clm1xmeyr0002ms0g1izi4nd5": {
+      "id": "clm1xmeyr0002ms0g1izi4nd5",
+      "createdAt": "2023-09-02T11:19:56.740Z",
+      "updatedAt": "2023-09-02T11:19:56.740Z",
+      "projectId": "clm1xmeyr0001ms0goigqs7h3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "b1cPdZL8CbUY6SDiFByBKA": {
+          "name": "b1cPdZL8CbUY6SDiFByBKA",
+          "type": "array",
+          "input": "[\"leet\",\"code\",\"leetcode\"]",
+          "order": 1
+        },
+        "x3CCusuokBqxMCP8wVeB89": {
+          "name": "x3CCusuokBqxMCP8wVeB89",
+          "type": "string",
+          "input": "leetscode",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9393,6 +9432,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @return {number[]}\n */\nvar countBits = function (n) {\n  if (n === 0) return [0];\n\n  const result = new Array(0, 1);\n  for (let i = 2; i <= n; i++) {\n    result.push(result[i >> 1] + (i & 1));\n  }\n\n  return result;\n};\n\nreturn countBits;\n",
+      "order": 0
+    },
+    "clm1xmeyr0003ms0gjgjwsd19": {
+      "id": "clm1xmeyr0003ms0gjgjwsd19",
+      "createdAt": "2023-09-02T11:19:56.740Z",
+      "updatedAt": "2023-09-02T11:19:56.740Z",
+      "projectId": "clm1xmeyr0001ms0goigqs7h3",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "const END_CHAR = \"*\";\n\n/**\n * @param {string} s\n * @param {string[]} dictionary\n * @return {number}\n */\nvar minExtraChar = function (s, dictionary) {\n  const n = s.length;\n  const trie = {};\n\n  const addWordToTrie = (word) => {\n    let current = trie;\n    for (const char of word) {\n      current[char] ??= {};\n      current = current[char];\n    }\n    current[END_CHAR] = true;\n  };\n\n  for (let i = 0; i < dictionary.length; i++) {\n    dictionary.setColor(i, \"cyan\");\n    addWordToTrie(dictionary[i]);\n  }\n\n  console.log(trie)\n\n  const dp = new Array(n + 1);\n  dp[n] = 0;\n\n  for (let start = n - 1; start >= 0; start--) {\n    dp[start] = dp[start + 1] + 1;\n    let node = trie;\n    for (let end = start; end < n; end++) {\n      s.setColor(end, \"green\");\n      const char = s[end];\n      if (!(char in node)) break;\n      node = node[char];\n      if (END_CHAR in node) {\n          dp[start] = Math.min(dp[start], dp[end + 1]);\n      }\n      s.setColor(end, null);\n    }\n  }\n\n  return dp[0];\n};\n\nreturn minExtraChar;\n",
       "order": 0
     }
   }
