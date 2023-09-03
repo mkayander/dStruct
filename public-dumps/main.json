@@ -1553,6 +1553,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clm3thk030001mn0hxvjpcpct": {
+      "id": "clm3thk030001mn0hxvjpcpct",
+      "createdAt": "2023-09-03T18:59:43.875Z",
+      "updatedAt": "2023-09-03T18:59:43.875Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Unique Paths",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/unique-paths",
+      "slug": "unique-paths",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7487,6 +7501,56 @@
         }
       },
       "description": null
+    },
+    "clm3thk030002mn0h360mloz5": {
+      "id": "clm3thk030002mn0h360mloz5",
+      "createdAt": "2023-09-03T18:59:43.875Z",
+      "updatedAt": "2023-09-03T18:59:43.875Z",
+      "projectId": "clm3thk030001mn0hxvjpcpct",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4MY1H3bUWgB3XWHvWuqQjB": {
+          "name": "4MY1H3bUWgB3XWHvWuqQjB",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        },
+        "k7JgmjSZ85kua6HQTxLFg6": {
+          "name": "k7JgmjSZ85kua6HQTxLFg6",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clm3uxhl00007mn0hd8xamlqu": {
+      "id": "clm3uxhl00007mn0hd8xamlqu",
+      "createdAt": "2023-09-03T19:40:06.852Z",
+      "updatedAt": "2023-09-03T19:40:06.852Z",
+      "projectId": "clm3thk030001mn0hxvjpcpct",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "4MY1H3bUWgB3XWHvWuqQjB": {
+          "name": "4MY1H3bUWgB3XWHvWuqQjB",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "k7JgmjSZ85kua6HQTxLFg6": {
+          "name": "k7JgmjSZ85kua6HQTxLFg6",
+          "type": "number",
+          "input": "8",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9445,6 +9509,30 @@
       "description": null,
       "code": "const END_CHAR = \"*\";\n\n/**\n * @param {string} s\n * @param {string[]} dictionary\n * @return {number}\n */\nvar minExtraChar = function (s, dictionary) {\n  const n = s.length;\n  const trie = {};\n\n  const addWordToTrie = (word) => {\n    let current = trie;\n    for (const char of word) {\n      current[char] ??= {};\n      current = current[char];\n    }\n    current[END_CHAR] = true;\n  };\n\n  for (let i = 0; i < dictionary.length; i++) {\n    dictionary.setColor(i, \"cyan\");\n    addWordToTrie(dictionary[i]);\n  }\n\n  console.log(trie)\n\n  const dp = new Array(n + 1);\n  dp[n] = 0;\n\n  for (let start = n - 1; start >= 0; start--) {\n    dp[start] = dp[start + 1] + 1;\n    let node = trie;\n    for (let end = start; end < n; end++) {\n      s.setColor(end, \"green\");\n      const char = s[end];\n      if (!(char in node)) break;\n      node = node[char];\n      if (END_CHAR in node) {\n          dp[start] = Math.min(dp[start], dp[end + 1]);\n      }\n      s.setColor(end, null);\n    }\n  }\n\n  return dp[0];\n};\n\nreturn minExtraChar;\n",
       "order": 0
+    },
+    "clm3thk030003mn0hpdu0vw0m": {
+      "id": "clm3thk030003mn0hpdu0vw0m",
+      "createdAt": "2023-09-03T18:59:43.875Z",
+      "updatedAt": "2023-09-03T18:59:43.875Z",
+      "projectId": "clm3thk030001mn0hxvjpcpct",
+      "title": "1D DP",
+      "slug": "dp-1d",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = new Array(n).fill(1);\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[col] += dp[col - 1];\n    }\n  }\n\n  return dp.at(-1);\n};\n\nreturn uniquePaths;",
+      "order": 0
+    },
+    "clm3usyeq0005mn0h06osoy1n": {
+      "id": "clm3usyeq0005mn0h06osoy1n",
+      "createdAt": "2023-09-03T19:36:35.378Z",
+      "updatedAt": "2023-09-03T19:36:35.378Z",
+      "projectId": "clm3thk030001mn0hxvjpcpct",
+      "title": "2D DP",
+      "slug": "dp-2d",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = Array.from(\n    { length: m },\n    (_, index) =>\n      Array.from({ length: n }, () => 1, null, {\n        index,\n        parentName: \"dp\",\n      }),\n    null,\n    { matrixName: \"dp\" }\n  );\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[row][col] = dp[row - 1][col] + dp[row][col - 1];\n    }\n  }\n\n  return dp[m - 1][n - 1];\n};\n\nreturn uniquePaths;\n",
+      "order": 1
     }
   }
 }
