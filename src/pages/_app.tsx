@@ -7,9 +7,9 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
-import { StateThemeProvider } from "#/components";
-import { I18nProvider } from "#/components/I18nProvider";
-import { SnackbarCloseButton } from "#/components/SnackbarCloseButton";
+import { SnackbarCloseButton } from "#/components/atoms/SnackbarCloseButton";
+import { I18nProvider } from "#/components/providers/I18nProvider";
+import { StateThemeProvider } from "#/components/providers/StateThemeProvider";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { wrapper } from "#/store/makeStore";

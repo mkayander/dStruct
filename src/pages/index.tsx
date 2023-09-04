@@ -17,7 +17,7 @@ import Link from "next/link";
 import React from "react";
 
 import { useDailyQuestionData } from "#/api";
-import { QuestionSummary } from "#/components";
+import { QuestionSummary } from "#/components/molecules/QuestionSummary";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";

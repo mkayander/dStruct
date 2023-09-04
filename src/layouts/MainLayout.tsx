@@ -1,7 +1,9 @@
 import { Box, LinearProgress } from "@mui/material";
 import React from "react";
 
-import { Footer, MainAppBar, PageScrollContainer } from "#/components";
+import { Footer } from "#/components/organisms/Footer";
+import { MainAppBar } from "#/components/organisms/MainAppBar";
+import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
 
 export type MainLayoutProps = {
   children: React.ReactNode;

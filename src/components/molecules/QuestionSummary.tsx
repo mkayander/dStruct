@@ -24,8 +24,9 @@ import {
 import type { BoxProps } from "@mui/material/Box/Box";
 import React from "react";
 
-import { CircularPercentage, RatingButtons, TopicTag } from "#/components";
-import { TopicTagSkeleton } from "#/components/TopicTag/TopicTag";
+import { CircularPercentage } from "#/components/atoms/CircularPercentage/CircularPercentage";
+import { RatingButtons } from "#/components/atoms/RatingButtons";
+import { TopicTag, TopicTagSkeleton } from "#/components/atoms/TopicTag";
 import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
 
 const SummarySkeleton = () => (

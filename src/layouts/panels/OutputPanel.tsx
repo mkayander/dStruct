@@ -2,7 +2,7 @@ import { TabContext, TabList } from "@mui/lab";
 import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
-import { CallstackTable } from "#/components/CallstackTable";
+import { CallstackTable } from "#/components/molecules/CallstackTable";
 import { useI18nContext } from "#/hooks";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
 import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";

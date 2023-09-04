@@ -5,9 +5,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-import { ArrayStructureView } from "#/components/TreeViewer/ArrayStructureView";
-import { MatrixStructureView } from "#/components/TreeViewer/MatrixStructureView";
-import { NodesView } from "#/components/TreeViewer/NodesView";
+import { ArrayStructureView } from "#/components/organisms/TreeViewer/ArrayStructureView";
+import { MatrixStructureView } from "#/components/organisms/TreeViewer/MatrixStructureView";
+import { NodesView } from "#/components/organisms/TreeViewer/NodesView";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";

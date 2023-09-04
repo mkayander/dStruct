@@ -2,7 +2,8 @@ import { Container, darken, Stack, useTheme } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
 
-import { MainAppBar, PageScrollContainer } from "#/components";
+import { MainAppBar } from "#/components/organisms/MainAppBar";
+import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
 import { ConfigContext } from "#/context";
 import { useAppConfig } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";

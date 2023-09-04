@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NodeBase } from "#/components/TreeViewer/NodeBase";
+import { NodeBase } from "#/components/organisms/TreeViewer/NodeBase";
 import { useBinaryChildNodes, useNodeColors } from "#/hooks";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";

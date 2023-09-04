@@ -9,9 +9,13 @@ import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
 
-import { CodeRunner, EditorStateIcon, SolutionSelectBar } from "#/components";
-import prettierIcon from "#/components/CodeRunner/assets/prettierIcon.svg";
-import { EditorState } from "#/components/CodeRunner/EditorStateIcon";
+import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
+import { CodeRunner } from "#/components/molecules/CodeRunner/CodeRunner";
+import {
+  EditorState,
+  EditorStateIcon,
+} from "#/components/molecules/CodeRunner/EditorStateIcon";
+import { SolutionSelectBar } from "#/components/molecules/SelectBar/SolutionSelectBar";
 import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { codePrefixLinesCount } from "#/hooks/useCodeExecution";

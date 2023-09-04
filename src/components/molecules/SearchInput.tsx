@@ -2,7 +2,7 @@ import { Backspace } from "@mui/icons-material";
 import { IconButton, Stack, type SxProps } from "@mui/material";
 import React from "react";
 
-import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
+import { DebouncedInput } from "#/components/molecules/ArgsEditor/DebouncedInput";
 
 type SearchInputProps = {
   searchValue: string;

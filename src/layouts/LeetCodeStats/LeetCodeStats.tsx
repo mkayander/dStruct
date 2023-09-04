@@ -2,7 +2,8 @@ import { Code } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useMemo } from "react";
 
-import { CircularPercentage, DataSection } from "#/components";
+import { CircularPercentage } from "#/components/atoms/CircularPercentage/CircularPercentage";
+import { DataSection } from "#/components/DataSection/DataSection";
 import {
   Difficulty,
   GetUserProfileQueryResult,

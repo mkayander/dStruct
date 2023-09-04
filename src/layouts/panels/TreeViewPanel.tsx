@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-import { TreeViewer } from "#/components";
+import { TreeViewer } from "#/components/organisms/TreeViewer/TreeViewer";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";

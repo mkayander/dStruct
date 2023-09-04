@@ -13,8 +13,8 @@ import {
   type OnDragEndResponder,
 } from "react-beautiful-dnd";
 
-import { SelectBarChipSkeleton } from "#/components/SelectBar/SelectBarChip";
-import { StrictModeDroppable } from "#/components/SelectBar/StrictModeDroppable";
+import { SelectBarChipSkeleton } from "#/components/molecules/SelectBar/SelectBarChip";
+import { StrictModeDroppable } from "#/components/molecules/SelectBar/StrictModeDroppable";
 
 type DraggableSelectBarListProps = Omit<
   StackProps,

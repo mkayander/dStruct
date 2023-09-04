@@ -6,8 +6,8 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { type OnDragEndResponder } from "react-beautiful-dnd";
 
-import { DraggableSelectBarList } from "#/components/SelectBar/DraggableSelectBarList";
-import { DraggableSelectBarChip } from "#/components/SelectBar/SelectBarChip";
+import { DraggableSelectBarList } from "#/components/molecules/SelectBar/DraggableSelectBarList";
+import { DraggableSelectBarChip } from "#/components/molecules/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { SolutionModal } from "#/layouts/modals";

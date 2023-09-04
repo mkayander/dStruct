@@ -14,8 +14,8 @@ import {
 import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useContext, useMemo, useState } from "react";
 
-import { NewLabel } from "#/components/NewLabel";
-import { SearchInput } from "#/components/SearchInput";
+import { NewLabel } from "#/components/atoms/NewLabel";
+import { SearchInput } from "#/components/molecules/SearchInput";
 import { ConfigContext } from "#/context";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";

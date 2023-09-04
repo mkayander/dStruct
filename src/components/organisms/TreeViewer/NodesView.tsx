@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-import { BinaryNode } from "#/components/TreeViewer/BinaryNode";
-import { LinkedListNode } from "#/components/TreeViewer/LinkedListNode";
+import { BinaryNode } from "#/components/organisms/TreeViewer/BinaryNode";
+import { LinkedListNode } from "#/components/organisms/TreeViewer/LinkedListNode";
 import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,

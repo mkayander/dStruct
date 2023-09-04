@@ -4,7 +4,7 @@ import { type TextFieldProps } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
 
-import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
+import { DebouncedInput } from "#/components/molecules/ArgsEditor/DebouncedInput";
 import { useI18nContext } from "#/hooks";
 
 type BinaryTreeInputProps = Omit<TextFieldProps, "onChange"> & {

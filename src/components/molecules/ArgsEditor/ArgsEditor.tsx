@@ -13,7 +13,8 @@ import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import shortUUID from "short-uuid";
 
-import { ArgInput, ArgumentTypeSelect } from "#/components";
+import { ArgInput } from "#/components/molecules/ArgsEditor/ArgInput";
+import { ArgumentTypeSelect } from "#/components/molecules/ArgsEditor/ArgumentTypeSelect";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";

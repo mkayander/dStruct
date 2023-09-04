@@ -2,7 +2,7 @@ import { type GetStaticProps } from "next";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { importLocaleAsync } from "#/i18n/i18n-util.async";
-import { type TranslationDictionary } from "#/components/I18nProvider";
+import { type TranslationDictionary } from "#/components/providers/I18nProvider";
 
 export type I18nProps = {
   translations: TranslationDictionary;

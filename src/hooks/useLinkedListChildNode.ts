@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { type RelationType } from "react-archer/lib/types";
 
-import { type BinaryNodeProps } from "#/components/TreeViewer/BinaryNode";
+import { type BinaryNodeProps } from "#/components/organisms/TreeViewer/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   selectNodeDataById,

@@ -27,8 +27,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { type MouseEvent, useEffect, useState } from "react";
 
-import { SidePanel } from "#/components/Page/SidePanel";
-import { ThemeSwitch } from "#/components/Page/ThemeSwitch";
+import { ThemeSwitch } from "#/components/atoms/ThemeSwitch";
+import { SidePanel } from "#/components/organisms/SidePanel";
 import { useProfileImageUploader } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";

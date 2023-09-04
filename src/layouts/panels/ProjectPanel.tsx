@@ -6,8 +6,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import { ArgsEditor, ProjectSelect, TestCaseSelectBar } from "#/components";
-import { ProblemLinkButton } from "#/components/Page/ProblemLinkButton";
+import { ProblemLinkButton } from "#/components/atoms/ProblemLinkButton";
+import { ArgsEditor } from "#/components/molecules/ArgsEditor/ArgsEditor";
+import { ProjectSelect } from "#/components/molecules/ProjectSelect";
+import { TestCaseSelectBar } from "#/components/molecules/SelectBar/TestCaseSelectBar";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { ProjectModal } from "#/layouts/modals";

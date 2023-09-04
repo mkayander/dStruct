@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { Panel, PanelGroup, type PanelProps } from "react-resizable-panels";
 
-import { ResizeHandle } from "#/components";
+import { ResizeHandle } from "#/components/atoms/ResizeHandle";
 
 export type SplitPanelsLayoutProps = {
   TopLeft: PanelContent;

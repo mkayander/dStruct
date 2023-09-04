@@ -4,9 +4,9 @@ import { TextField } from "@mui/material";
 import Joi from "joi";
 import React, { useEffect, useState } from "react";
 
-import { BooleanToggleInput } from "#/components/ArgsEditor/BooleanToggleInput";
-import { DebouncedInput } from "#/components/ArgsEditor/DebouncedInput";
-import { JsonInput } from "#/components/ArgsEditor/JsonInput";
+import { BooleanToggleInput } from "#/components/molecules/ArgsEditor/BooleanToggleInput";
+import { DebouncedInput } from "#/components/molecules/ArgsEditor/DebouncedInput";
+import { JsonInput } from "#/components/molecules/ArgsEditor/JsonInput";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
 import {
