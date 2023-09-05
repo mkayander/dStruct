@@ -18,16 +18,14 @@ import React from "react";
 
 import { useDailyQuestionData } from "#/api";
 import { QuestionSummary } from "#/components/molecules/QuestionSummary";
+import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
+import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
+import { UserSettings } from "#/components/organisms/UserSettings";
+import { MainLayout } from "#/components/templates/MainLayout";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
-import {
-  DailyProblem,
-  LeetCodeStats,
-  MainLayout,
-  UserSettings,
-} from "#/layouts";
 
 const DashboardPage: NextPage<{
   i18n: {
@@ -52,7 +50,7 @@ const DashboardPage: NextPage<{
   const isMobile = useMobileLayout();
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // eslint-disable-next-line @typescript-eslint/no-empty-function,react/jsx-no-undef
     <MainLayout>
       <Head>
         <title>dStruct</title>

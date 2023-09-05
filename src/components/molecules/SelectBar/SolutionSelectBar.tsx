@@ -5,12 +5,12 @@ import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { type OnDragEndResponder } from "react-beautiful-dnd";
+import { SolutionModal } from "src/components/organisms/modals";
 
 import { DraggableSelectBarList } from "#/components/molecules/SelectBar/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/components/molecules/SelectBar/SelectBarChip";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
-import { SolutionModal } from "#/layouts/modals";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";

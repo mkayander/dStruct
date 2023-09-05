@@ -6,7 +6,7 @@ import { TextField } from "formik-mui";
 import { useSession } from "next-auth/react";
 import React from "react";
 
-import { DataSection } from "#/components/DataSection/DataSection";
+import { DataSection } from "#/components/templates/DataSection";
 import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,

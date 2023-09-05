@@ -3,9 +3,12 @@ import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
 import { CallstackTable } from "#/components/molecules/CallstackTable";
+import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
+import {
+  StyledTabPanel,
+  TabListWrapper,
+} from "#/components/organisms/panels/common/styled";
 import { useI18nContext } from "#/hooks";
-import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
-import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppSelector } from "#/store/hooks";
 import { selectConsoleLogs } from "#/store/reducers/callstackReducer";
 

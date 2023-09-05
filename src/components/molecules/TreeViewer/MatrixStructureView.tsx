@@ -1,6 +1,6 @@
 import { alpha, Stack, useTheme } from "@mui/material";
 
-import { ArrayStructureView } from "#/components/organisms/TreeViewer/ArrayStructureView";
+import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
 import {
   type ArrayData,
   type ArrayDataState,

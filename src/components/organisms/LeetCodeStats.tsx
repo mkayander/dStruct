@@ -3,7 +3,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { CircularPercentage } from "#/components/atoms/CircularPercentage/CircularPercentage";
-import { DataSection } from "#/components/DataSection/DataSection";
+import { DataSection } from "#/components/templates/DataSection";
 import {
   Difficulty,
   GetUserProfileQueryResult,

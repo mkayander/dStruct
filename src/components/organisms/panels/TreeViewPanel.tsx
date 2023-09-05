@@ -15,11 +15,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-import { TreeViewer } from "#/components/organisms/TreeViewer/TreeViewer";
+import { TreeViewer } from "#/components/molecules/TreeViewer/TreeViewer";
+import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
+import {
+  StyledTabPanel,
+  TabListWrapper,
+} from "#/components/organisms/panels/common/styled";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
-import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
-import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";

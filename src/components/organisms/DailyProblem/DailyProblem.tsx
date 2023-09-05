@@ -2,7 +2,7 @@ import { alpha, Box, Divider, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 import sanitizeHtml from "sanitize-html";
 
-import { DataSection } from "#/components/DataSection/DataSection";
+import { DataSection } from "#/components/templates/DataSection";
 import type { QuestionDataQueryResult } from "#/graphql/generated";
 
 import styles from "./DailyProblem.module.scss";

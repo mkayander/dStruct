@@ -16,12 +16,15 @@ import {
   EditorStateIcon,
 } from "#/components/molecules/CodeRunner/EditorStateIcon";
 import { SolutionSelectBar } from "#/components/molecules/SelectBar/SolutionSelectBar";
+import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
+import {
+  StyledTabPanel,
+  TabListWrapper,
+} from "#/components/organisms/panels/common/styled";
+import { type PanelContentProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { codePrefixLinesCount } from "#/hooks/useCodeExecution";
-import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
-import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
-import { type PanelContentProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
 import { useAppSelector } from "#/store/hooks";
 import { selectRuntimeData } from "#/store/reducers/callstackReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";

@@ -1,7 +1,7 @@
 import { Box, Stack, type SxProps, Typography, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
-import { ArrayItem } from "#/components/organisms/TreeViewer/ArrayItem";
+import { ArrayItem } from "#/components/molecules/TreeViewer/ArrayItem";
 import {
   type ArrayData,
   arrayDataItemSelectors,

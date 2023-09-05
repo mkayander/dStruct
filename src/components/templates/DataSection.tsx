@@ -8,10 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import cn from "classnames";
 import React from "react";
-
-import styles from "./DataSection.module.scss";
 
 interface DataSectionProps extends React.PropsWithChildren {
   className?: string;
@@ -36,7 +33,7 @@ export const DataSection: React.FC<DataSectionProps> = ({
 
   return (
     <Paper
-      className={cn(styles.root, className)}
+      className={className}
       elevation={2}
       sx={{
         p: 4,

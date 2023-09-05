@@ -10,11 +10,14 @@ import { ProblemLinkButton } from "#/components/atoms/ProblemLinkButton";
 import { ArgsEditor } from "#/components/molecules/ArgsEditor/ArgsEditor";
 import { ProjectSelect } from "#/components/molecules/ProjectSelect";
 import { TestCaseSelectBar } from "#/components/molecules/SelectBar/TestCaseSelectBar";
+import { ProjectModal } from "#/components/organisms/modals";
+import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
+import {
+  StyledTabPanel,
+  TabListWrapper,
+} from "#/components/organisms/panels/common/styled";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
-import { ProjectModal } from "#/layouts/modals";
-import { PanelWrapper } from "#/layouts/panels/common/PanelWrapper";
-import { StyledTabPanel, TabListWrapper } from "#/layouts/panels/common/styled";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   projectSlice,

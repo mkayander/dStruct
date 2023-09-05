@@ -3,18 +3,18 @@ import type { NextPage } from "next";
 import React from "react";
 
 import { MainAppBar } from "#/components/organisms/MainAppBar";
-import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
-import { ConfigContext } from "#/context";
-import { useAppConfig } from "#/hooks";
-import { useMobileLayout } from "#/hooks/useMobileLayout";
-import { SplitPanelsLayout } from "#/layouts";
 import {
   CodePanel,
   OutputPanel,
   ProjectPanel,
   TreeViewPanel,
-} from "#/layouts/panels";
-import type { SplitPanelsLayoutProps } from "#/layouts/SplitPanelsLayout/SplitPanelsLayout";
+} from "#/components/organisms/panels";
+import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
+import type { SplitPanelsLayoutProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { SplitPanelsLayout } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { ConfigContext } from "#/context";
+import { useAppConfig } from "#/hooks";
+import { useMobileLayout } from "#/hooks/useMobileLayout";
 
 type WrapperProps = SplitPanelsLayoutProps;
 
