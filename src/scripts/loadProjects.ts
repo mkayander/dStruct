@@ -46,10 +46,16 @@ if (!dumpPath) {
     }
 
     try {
-      await prisma.playgroundProject.create({
-        data: {
+      await prisma.playgroundProject.upsert({
+        where: {
+          id: project.id,
+        },
+        create: {
           ...project,
           userId: attachUser ? userId : undefined,
+        },
+        update: {
+          ...project,
         },
       });
     } catch (e) {
@@ -66,8 +72,12 @@ if (!dumpPath) {
   for (const testCase of Object.values(data.testCases)) {
     console.log(testCase.id, testCase.title);
     try {
-      await prisma.playgroundTestCase.create({
-        data: testCase,
+      await prisma.playgroundTestCase.upsert({
+        where: {
+          id: testCase.id,
+        },
+        create: testCase,
+        update: testCase,
       });
     } catch (e) {
       if (!isDebug) continue;
@@ -83,8 +93,12 @@ if (!dumpPath) {
   for (const solution of Object.values(data.solutions)) {
     console.log(solution.id, solution.title);
     try {
-      await prisma.playgroundSolution.create({
-        data: solution,
+      await prisma.playgroundSolution.upsert({
+        where: {
+          id: solution.id,
+        },
+        create: solution,
+        update: solution,
       });
     } catch (e) {
       if (!isDebug) continue;
