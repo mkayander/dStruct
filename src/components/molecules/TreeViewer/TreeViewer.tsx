@@ -147,8 +147,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       borderRadius={1}
       position="relative"
       width="100%"
-      height="100%"
       sx={{
+        flexGrow: 1,
         "&:before": {
           ...overlayStyles,
           left: 0,
