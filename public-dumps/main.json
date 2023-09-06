@@ -258,9 +258,9 @@
       "updatedAt": "2023-04-10T21:24:18.657Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Longest Substring Without Repeating Characters",
-      "category": "ARRAY",
+      "category": "SLIDING_WINDOW",
       "difficulty": null,
-      "lcLink": null,
+      "lcLink": "",
       "slug": "longest-substring-without-repeating-characters",
       "description": "",
       "isExample": false,
@@ -1567,6 +1567,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clm80nkrh0001nd0hufs6lgrd": {
+      "id": "clm80nkrh0001nd0hufs6lgrd",
+      "createdAt": "2023-09-06T17:31:26.814Z",
+      "updatedAt": "2023-09-06T17:31:26.814Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Split Linked List in Parts",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/split-linked-list-in-parts",
+      "slug": "split-linked-list-in-parts",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -2765,12 +2779,6 @@
       "slug": "case-1",
       "input": "[]",
       "args": {
-        "ivmzVLcwCjpJmbx2jyj2Ri": {
-          "name": "ivmzVLcwCjpJmbx2jyj2Ri",
-          "type": "array",
-          "input": "[\"a\", \"b\", \"c\", \"a\", \"b\", \"c\", \"b\", \"b\"]",
-          "order": 0
-        },
         "jXDrfscPvDQg8d9zGhgWdi": {
           "name": "jXDrfscPvDQg8d9zGhgWdi",
           "type": "string",
@@ -7551,6 +7559,31 @@
         }
       },
       "description": null
+    },
+    "clm80nkrh0002nd0h67i482m5": {
+      "id": "clm80nkrh0002nd0h67i482m5",
+      "createdAt": "2023-09-06T17:31:26.814Z",
+      "updatedAt": "2023-09-06T17:31:26.814Z",
+      "projectId": "clm80nkrh0001nd0hufs6lgrd",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5,6,7,8,9,10]",
+          "order": 0
+        },
+        "qXFjAD9bSpxGQZcnxFeQ9P": {
+          "name": "qXFjAD9bSpxGQZcnxFeQ9P",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -7907,10 +7940,10 @@
       "createdAt": "2023-04-10T21:24:18.657Z",
       "updatedAt": "2023-04-10T21:24:18.657Z",
       "projectId": "clgbcd4690001mr08wkv5xvpg",
-      "title": "Solution 1",
-      "slug": "solution-1",
+      "title": "Optimized",
+      "slug": "optimized",
       "complexity": null,
-      "description": null,
+      "description": "",
       "code": "/**\n * @param {string[]} s\n */\nreturn function lengthOfLongestSubstring(s) {\n  const seen = new Map();\n  let start = 0;\n  let maxLen = 0;\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"cyan\", \"blink\");\n    if (seen.has(s[i])) {\n      start = Math.max(start, seen.get(s[i]) + 1);\n      s.setColor(start, \"green\");\n    }\n\n    seen.set(s[i], i);\n    maxLen = Math.max(maxLen, i - start + 1);\n  }\n\n  return maxLen;\n};\n",
       "order": 0
     },
@@ -9519,7 +9552,7 @@
       "slug": "dp-1d",
       "complexity": null,
       "description": "",
-      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = new Array(n).fill(1);\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[col] += dp[col - 1];\n    }\n  }\n\n  return dp.at(-1);\n};\n\nreturn uniquePaths;",
+      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = new Array(n).fill(1);\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[col] += dp[col - 1];\n    }\n  }\n\n  return dp.at(-1);\n};\n\nreturn uniquePaths;\n",
       "order": 0
     },
     "clm3usyeq0005mn0h06osoy1n": {
@@ -9533,6 +9566,42 @@
       "description": "",
       "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = Array.from(\n    { length: m },\n    (_, index) =>\n      Array.from({ length: n }, () => 1, null, {\n        index,\n        parentName: \"dp\",\n      }),\n    null,\n    { matrixName: \"dp\" }\n  );\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[row][col] = dp[row - 1][col] + dp[row][col - 1];\n    }\n  }\n\n  return dp[m - 1][n - 1];\n};\n\nreturn uniquePaths;\n",
       "order": 1
+    },
+    "clm6r8o4d0005mp0ht4w7b5a2": {
+      "id": "clm6r8o4d0005mp0ht4w7b5a2",
+      "createdAt": "2023-09-05T20:20:08.605Z",
+      "updatedAt": "2023-09-05T20:20:08.605Z",
+      "projectId": "clgbcd4690001mr08wkv5xvpg",
+      "title": "Charset",
+      "slug": "charset",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar lengthOfLongestSubstring = function (s) {\n  const n = s.length;\n  let result = 0;\n\n  const chars = new Array(26);\n  const offset = \"a\".charCodeAt(0);\n\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"cyan\");\n    const char = s[right];\n    const code = char.charCodeAt(0) - offset;\n    if (chars[code] !== undefined && chars[code] >= left) {\n      left = chars[code] + 1;\n      s.setColor(left, \"green\");\n    }\n\n    chars[code] = right;\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn lengthOfLongestSubstring;\n",
+      "order": 1
+    },
+    "clm6rd8u70007mp0hfb1cnoa0": {
+      "id": "clm6rd8u70007mp0hfb1cnoa0",
+      "createdAt": "2023-09-05T20:23:42.079Z",
+      "updatedAt": "2023-09-05T20:23:42.079Z",
+      "projectId": "clgbcd4690001mr08wkv5xvpg",
+      "title": "Set",
+      "slug": "set",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar lengthOfLongestSubstring = function (s) {\n  const n = s.length;\n  let result = 0;\n\n  const set = new Set();\n\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"cyan\");\n    const char = s[right];\n    while (set.has(char)) {\n      set.delete(s[left++]);\n      s.setColor(left, \"green\");\n    }\n    set.add(char);\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn lengthOfLongestSubstring;\n",
+      "order": 2
+    },
+    "clm80nkri0003nd0hjnruozo4": {
+      "id": "clm80nkri0003nd0hjnruozo4",
+      "createdAt": "2023-09-06T17:31:26.814Z",
+      "updatedAt": "2023-09-06T17:31:26.814Z",
+      "projectId": "clm80nkrh0001nd0hufs6lgrd",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode[]}\n */\nvar splitListToParts = function (head, k) {\n  if (!head) return new Array(k).fill(null);\n  let length = 0;\n\n  let current = head;\n  while (current) {\n    current.setColor(\"cyan\");\n    length++;\n    current = current.next;\n  }\n\n  let partSize = Math.floor(length / k) || 1;\n  let extraNodes = length % k;\n  if (k < length && extraNodes) partSize++;\n  else extraNodes = -1;\n\n  current = head;\n  const result = [current];\n\n  // console.log({length, partSize, extraNodes});\n\n  let size = 0;\n  while (current) {\n    size++;\n    if (size >= partSize && current.next) {\n      const next = current.next;\n      current.next = null;\n      result.push(next);\n      current = next;\n      size = 0;\n      extraNodes--;\n      if (extraNodes === 0) {\n        partSize--;\n        extraNodes = -1;\n      }\n\n      continue;\n    }\n\n    current = current.next;\n  }\n\n  while (result.length < k) result.push(null);\n\n  return result;\n};\n\nreturn splitListToParts;\n",
+      "order": 0
     }
   }
 }
