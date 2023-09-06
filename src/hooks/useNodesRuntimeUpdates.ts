@@ -5,7 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type CallFrame,
+  callstackSlice,
   selectCallstack,
+  selectCallstackIsPlaying,
 } from "#/store/reducers/callstackReducer";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
@@ -22,8 +24,9 @@ export const useNodesRuntimeUpdates = (
 ) => {
   const dispatch = useAppDispatch();
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
+  const callstackIsPlaying = useAppSelector(selectCallstackIsPlaying);
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
 
@@ -201,6 +204,8 @@ export const useNodesRuntimeUpdates = (
     const currentFrame = callstack[frameIndex];
     currentFrame && applyFrame(currentFrame);
 
+    if (!callstackIsPlaying) return;
+
     const getNextValidIndex = () => {
       let nextIndex = frameIndex + 1;
       let frame = callstack[nextIndex];
@@ -217,8 +222,10 @@ export const useNodesRuntimeUpdates = (
       const nextIndex = getNextValidIndex();
 
       if (nextIndex < callstack.length) {
-        setIsPlaying(true);
+        setIsActive(true);
         setFrameIndex(nextIndex);
+      } else {
+        dispatch(callstackSlice.actions.setIsPlaying(false));
       }
     }, playbackInterval);
 
@@ -226,13 +233,20 @@ export const useNodesRuntimeUpdates = (
       clearTimeout(timeoutId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [applyFrame, callstack, callstackIsReady, frameIndex, playbackInterval]);
+  }, [
+    applyFrame,
+    callstack,
+    callstackIsReady,
+    callstackIsPlaying,
+    frameIndex,
+    playbackInterval,
+  ]);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isActive) {
       resetStructuresState(dispatch, false);
-      setFrameIndex(0);
-      setIsPlaying(false);
+      setFrameIndex(-1);
+      setIsActive(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, replayCount, playbackInterval, callstack, callstackIsReady]);

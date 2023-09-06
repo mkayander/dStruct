@@ -72,6 +72,8 @@ export const useCodeExecution = (codeInput: string) => {
           startTimestamp,
         })
       );
+      // Automatically play the callstack
+      dispatch(callstackSlice.actions.setIsPlaying(true));
     } catch (e: unknown) {
       const runtime = performance.now() - startTimestamp;
       if (e instanceof Error) {

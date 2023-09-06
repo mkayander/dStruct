@@ -119,6 +119,7 @@ const callstackAdapter = createEntityAdapter<CallFrame>({
  */
 export type CallstackState = {
   isReady: boolean;
+  isPlaying: boolean;
   result: string | number | null;
   runtime: number | null;
   startTimestamp: number | null;
@@ -128,6 +129,7 @@ export type CallstackState = {
 
 const initialState: CallstackState = {
   isReady: false,
+  isPlaying: false,
   result: null,
   runtime: null,
   startTimestamp: null,
@@ -179,6 +181,9 @@ export const callstackSlice = createSlice({
         ...payload,
       };
     },
+    setIsPlaying: (state, action: PayloadAction<boolean>) => {
+      state.isPlaying = action.payload;
+    },
   },
 });
 
@@ -221,6 +226,16 @@ export const selectRuntimeData = createSelector(
 export const selectCallstackIsReady = createSelector(
   (state: RootState) => state.callstack,
   (callstack: CallstackState) => callstack.isReady
+);
+
+export const selectCallstackIsPlaying = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack: CallstackState) => callstack.isPlaying
+);
+
+export const selectCallstackLength = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack: CallstackState) => callstack.frames.ids.length
 );
 
 export const selectConsoleLogs = createSelector(

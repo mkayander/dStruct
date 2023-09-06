@@ -1,4 +1,12 @@
-import { Replay, Settings, Speed } from "@mui/icons-material";
+import {
+  FirstPage,
+  LastPage,
+  Pause,
+  PlayArrow,
+  Replay,
+  Settings,
+  Speed,
+} from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
   Box,
@@ -24,7 +32,12 @@ import {
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
+import {
+  callstackSlice,
+  selectCallstackIsPlaying,
+  selectCallstackIsReady,
+  selectCallstackLength,
+} from "#/store/reducers/callstackReducer";
 import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState } from "#/utils";
 
@@ -34,11 +47,13 @@ export const TreeViewPanel: React.FC = () => {
   const { LL } = useI18nContext();
 
   const [tabValue, setTabValue] = useState("1");
-  const [frameIndex, setFrameIndex] = useState(0);
+  const [frameIndex, setFrameIndex] = useState(-1);
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
+  const callstackLength = useAppSelector(selectCallstackLength);
+  const isPlaying = useAppSelector(selectCallstackIsPlaying);
   const maxDepth = useAppSelector(selectTreeMaxDepth);
   const isMobile = useMobileLayout();
 
@@ -56,10 +71,24 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleReset = () => {
     resetStructuresState(dispatch);
+    setFrameIndex(-1);
+    dispatch(callstackSlice.actions.setIsPlaying(false));
   };
 
   const handleReplay = () => {
     setReplayCount(replayCount + 1);
+  };
+
+  const handleStepBack = () => {
+    setFrameIndex(frameIndex - 1);
+  };
+
+  const handlePlay = () => {
+    dispatch(callstackSlice.actions.setIsPlaying(!isPlaying));
+  };
+
+  const handleStepForward = () => {
+    setFrameIndex(frameIndex + 1);
   };
 
   const handleBlur = () => {
@@ -86,7 +115,6 @@ export const TreeViewPanel: React.FC = () => {
               <Settings fontSize="small" />
             </IconButton>
             <Button
-              // title="Reset data structures to initial states"
               title={LL.RESET_DATA_STRUCTURES()}
               color="inherit"
               onClick={handleReset}
@@ -165,6 +193,31 @@ export const TreeViewPanel: React.FC = () => {
             <Typography variant="caption" minWidth="3ch">
               {frameIndex}
             </Typography>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <IconButton
+                title="Step back"
+                disabled={!callstackLength || frameIndex === -1}
+                onClick={handleStepBack}
+              >
+                <FirstPage />
+              </IconButton>
+              <IconButton
+                title={isPlaying ? "Pause" : "Play"}
+                disabled={!callstackLength}
+                onClick={handlePlay}
+              >
+                {isPlaying ? <Pause /> : <PlayArrow />}
+              </IconButton>
+              <IconButton
+                title="Step forward"
+                disabled={
+                  !callstackLength || frameIndex === callstackLength - 1
+                }
+                onClick={handleStepForward}
+              >
+                <LastPage />
+              </IconButton>
+            </Stack>
           </Stack>
           <Divider sx={{ mt: 1 }} />
           <TreeViewer
