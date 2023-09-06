@@ -1,3 +1,11 @@
+# [1.209.0](https://github.com/mkayander/leetpal/compare/v1.208.0...v1.209.0) (2023-09-06)
+
+
+### Features
+
+* Improved tree viewer layout ([8fb49ff](https://github.com/mkayander/leetpal/commit/8fb49ffa2397eb74ef5ecdd47d50a3694c0fd724))
+* Initial frame-by-frame control implementation ([21cc989](https://github.com/mkayander/leetpal/commit/21cc989ed4c448aa6b6891eb7278aaeedcac7fd1))
+
 # [1.208.0](https://github.com/mkayander/leetpal/compare/v1.207.0...v1.208.0) (2023-09-06)
 
 
