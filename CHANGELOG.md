@@ -1,3 +1,10 @@
+# [1.208.0](https://github.com/mkayander/leetpal/compare/v1.207.0...v1.208.0) (2023-09-06)
+
+
+### Features
+
+* Improved result stringification ([138276d](https://github.com/mkayander/leetpal/commit/138276de0d128dfd1f7fa05b35d5d1c3073b571a))
+
 # [1.207.0](https://github.com/mkayander/leetpal/compare/v1.206.0...v1.207.0) (2023-08-31)
 
 
