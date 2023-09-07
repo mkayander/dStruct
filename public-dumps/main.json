@@ -1581,6 +1581,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clm86mnq80001pl0hy3x95jyo": {
+      "id": "clm86mnq80001pl0hy3x95jyo",
+      "createdAt": "2023-09-06T20:18:41.695Z",
+      "updatedAt": "2023-09-06T20:18:41.695Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest Repeating Character Replacement",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-repeating-character-replacement",
+      "slug": "longest-repeating-character-replacement",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clm924lhe0001o40i76pehnl6": {
+      "id": "clm924lhe0001o40i76pehnl6",
+      "createdAt": "2023-09-07T11:00:26.690Z",
+      "updatedAt": "2023-09-07T11:00:26.690Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reverse Linked List II",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/reverse-linked-list-ii",
+      "slug": "reverse-linked-list-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7584,6 +7612,162 @@
         }
       },
       "description": null
+    },
+    "clm86mnq80002pl0hofrk3zo6": {
+      "id": "clm86mnq80002pl0hofrk3zo6",
+      "createdAt": "2023-09-06T20:18:41.695Z",
+      "updatedAt": "2023-09-06T20:18:41.695Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "pdeDgqwFUpTy2boZsPbSKd": {
+          "name": "pdeDgqwFUpTy2boZsPbSKd",
+          "type": "string",
+          "input": "AABABBA",
+          "order": 0
+        },
+        "vzmsg8dEz4cKfsCHjC1kFd": {
+          "name": "vzmsg8dEz4cKfsCHjC1kFd",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clm86nfgp0005pl0hmjnylzl9": {
+      "id": "clm86nfgp0005pl0hmjnylzl9",
+      "createdAt": "2023-09-06T20:19:17.641Z",
+      "updatedAt": "2023-09-06T20:19:17.641Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "pdeDgqwFUpTy2boZsPbSKd": {
+          "name": "pdeDgqwFUpTy2boZsPbSKd",
+          "type": "string",
+          "input": "ABAB",
+          "order": 0
+        },
+        "vzmsg8dEz4cKfsCHjC1kFd": {
+          "name": "vzmsg8dEz4cKfsCHjC1kFd",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clm86nwqk0007pl0h500uotiq": {
+      "id": "clm86nwqk0007pl0h500uotiq",
+      "createdAt": "2023-09-06T20:19:40.028Z",
+      "updatedAt": "2023-09-06T20:19:40.028Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "pdeDgqwFUpTy2boZsPbSKd": {
+          "name": "pdeDgqwFUpTy2boZsPbSKd",
+          "type": "string",
+          "input": "BAAA",
+          "order": 0
+        },
+        "vzmsg8dEz4cKfsCHjC1kFd": {
+          "name": "vzmsg8dEz4cKfsCHjC1kFd",
+          "type": "number",
+          "input": "0",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clm924lhe0002o40im31ca14e": {
+      "id": "clm924lhe0002o40im31ca14e",
+      "createdAt": "2023-09-07T11:00:26.690Z",
+      "updatedAt": "2023-09-07T11:00:26.690Z",
+      "projectId": "clm924lhe0001o40i76pehnl6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "8dE9wp9V85CQKYAhxgv5hs": {
+          "name": "8dE9wp9V85CQKYAhxgv5hs",
+          "type": "number",
+          "input": "4",
+          "order": 2
+        },
+        "oLhZ2kNh9yoAoQHYd6T7WS": {
+          "name": "oLhZ2kNh9yoAoQHYd6T7WS",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clm9268jz0005o40i4ykes4i7": {
+      "id": "clm9268jz0005o40i4ykes4i7",
+      "createdAt": "2023-09-07T11:01:43.247Z",
+      "updatedAt": "2023-09-07T11:01:43.247Z",
+      "projectId": "clm924lhe0001o40i76pehnl6",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clm92b91i0007o40i5nmz9q2t": {
+      "id": "clm92b91i0007o40i5nmz9q2t",
+      "createdAt": "2023-09-07T11:05:37.159Z",
+      "updatedAt": "2023-09-07T11:05:37.159Z",
+      "projectId": "clm924lhe0001o40i76pehnl6",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5,6,7,8,9,10,11,12]",
+          "order": 0
+        },
+        "8dE9wp9V85CQKYAhxgv5hs": {
+          "name": "8dE9wp9V85CQKYAhxgv5hs",
+          "type": "number",
+          "input": "8",
+          "order": 2
+        },
+        "oLhZ2kNh9yoAoQHYd6T7WS": {
+          "name": "oLhZ2kNh9yoAoQHYd6T7WS",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9601,6 +9785,54 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode[]}\n */\nvar splitListToParts = function (head, k) {\n  if (!head) return new Array(k).fill(null);\n  let length = 0;\n\n  let current = head;\n  while (current) {\n    current.setColor(\"cyan\");\n    length++;\n    current = current.next;\n  }\n\n  let partSize = Math.floor(length / k) || 1;\n  let extraNodes = length % k;\n  if (k < length && extraNodes) partSize++;\n  else extraNodes = -1;\n\n  current = head;\n  const result = [current];\n\n  // console.log({length, partSize, extraNodes});\n\n  let size = 0;\n  while (current) {\n    size++;\n    if (size >= partSize && current.next) {\n      const next = current.next;\n      current.next = null;\n      result.push(next);\n      current = next;\n      size = 0;\n      extraNodes--;\n      if (extraNodes === 0) {\n        partSize--;\n        extraNodes = -1;\n      }\n\n      continue;\n    }\n\n    current = current.next;\n  }\n\n  while (result.length < k) result.push(null);\n\n  return result;\n};\n\nreturn splitListToParts;\n",
+      "order": 0
+    },
+    "clm86mnq80003pl0h8rkhwdqo": {
+      "id": "clm86mnq80003pl0h8rkhwdqo",
+      "createdAt": "2023-09-06T20:18:41.695Z",
+      "updatedAt": "2023-09-06T20:18:41.695Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Sliding Window w/ Map",
+      "slug": "sliding-window-w-map",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar characterReplacement = function (s, k) {\n  const n = s.length;\n\n  const freqMap = new Map();\n  let maxFrequency = 0;\n\n  let result = 0;\n\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"cyan\");\n    const char = s[right];\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n    maxFrequency = Math.max(maxFrequency, freqMap.get(char));\n\n    const currentSize = right - left + 1;\n    if (currentSize - maxFrequency > k) {\n      freqMap.set(s[left], Math.max(0, freqMap.get(s[left]) - 1));\n      left++;\n    }\n\n    s.setColor(left, \"green\");\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn characterReplacement;\n",
+      "order": 1
+    },
+    "clm86ogxm0009pl0h7otqtxuq": {
+      "id": "clm86ogxm0009pl0h7otqtxuq",
+      "createdAt": "2023-09-06T20:20:06.202Z",
+      "updatedAt": "2023-09-06T20:20:06.202Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Slow Sliding Window",
+      "slug": "slow-sliding-window",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar characterReplacement = function (s, k) {\n  const n = s.length;\n\n  let result = 0;\n\n  for (const char of new Set(s)) {\n    const letter = char;\n    let left = 0;\n    let skipped = 0;\n    for (let right = 0; right < n; right++) {\n      if (s[right] !== letter) {\n        if (skipped < k) {\n          skipped++;\n        } else {\n          while (s[left] === letter) left++;\n          left++;\n        }\n      }\n      console.log({skipped, left, right});\n\n      result = Math.max(result, right - left + 1);\n    }\n  }\n\n  return result;\n};\n\nreturn characterReplacement;\n",
+      "order": 3
+    },
+    "clm86v6uk000bpl0hl9ueemai": {
+      "id": "clm86v6uk000bpl0hl9ueemai",
+      "createdAt": "2023-09-06T20:25:19.724Z",
+      "updatedAt": "2023-09-06T20:25:19.724Z",
+      "projectId": "clm86mnq80001pl0hy3x95jyo",
+      "title": "Sliding Window w/ Charset",
+      "slug": "sliding-window-w-charset",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar characterReplacement = function (s, k) {\n  const n = s.length;\n\n  const freqMap = new Array(26).fill(0);\n  const offset = \"A\".charCodeAt(0);\n  let maxFrequency = 0;\n\n  let result = 0;\n\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"cyan\");\n    const code = s[right].charCodeAt(0) - offset;\n    freqMap[code]++;\n    maxFrequency = Math.max(maxFrequency, freqMap[code]);\n\n    const currentSize = right - left + 1;\n    if (currentSize - maxFrequency > k) {\n      const leftCode = s[left].charCodeAt(0) - offset;\n      freqMap[leftCode]--;\n      left++;\n    }\n\n    s.setColor(left, \"green\");\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn characterReplacement;\n",
+      "order": 2
+    },
+    "clm924lhe0003o40ie9466wra": {
+      "id": "clm924lhe0003o40ie9466wra",
+      "createdAt": "2023-09-07T11:00:26.690Z",
+      "updatedAt": "2023-09-07T11:00:26.690Z",
+      "projectId": "clm924lhe0001o40i76pehnl6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} left\n * @param {number} right\n * @return {ListNode}\n */\nvar reverseBetween = function (head, left, right) {\n  if (!head) return null;\n  if (left === right) return head;\n\n  const dummy = new ListNode(-1, head);\n\n  let current = dummy;\n  let offset = 1;\n  while (current && offset < left) {\n    current.setColor(\"cyan\");\n    current = current.next;\n    offset++;\n  }\n\n  current.next = reverseList(current.next, right - left + 1);\n\n  return dummy.next;\n};\n\nfunction reverseList(head, length) {\n  let newHead = null;\n  let current = head;\n  let next = null;\n\n  while (current && length > 0) {\n    next = current.next;\n    current.next = newHead;\n    newHead = current;\n    current = next;\n    length--;\n  }\n\n  head.next = next;\n\n  return newHead;\n}\n\nreturn reverseBetween;\n",
       "order": 0
     }
   }
