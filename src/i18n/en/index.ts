@@ -60,7 +60,7 @@ const en: BaseTranslation = {
   RUN: "Run",
   RUNTIME: "Runtime",
   RUN_CODE: "Run code",
-  SAVED_IN_THE_CLOUD: "Saved in the cloud",
+  SAVED_IN_THE_CLOUD: "Saved to cloud",
   SELECTED_LOCALE: "Selected locale:",
   SETTINGS: "Settings",
   SIGN_IN: "Sign in",
