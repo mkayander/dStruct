@@ -1,3 +1,11 @@
+## [1.209.1](https://github.com/mkayander/leetpal/compare/v1.209.0...v1.209.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* Improved a phrase ([7ebeced](https://github.com/mkayander/leetpal/commit/7ebeced47369e306109f2d005c9a654366042f52))
+* Prevent creating new array proxy representations when stringifying a result ([1c990c0](https://github.com/mkayander/leetpal/commit/1c990c0a9461619f1cdb8d4bb4d040d2791c0c30))
+
 # [1.209.0](https://github.com/mkayander/leetpal/compare/v1.208.0...v1.209.0) (2023-09-06)
 
 
