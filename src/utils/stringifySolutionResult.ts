@@ -11,9 +11,11 @@ export const stripQuotes = (val: string) => {
 
 export const safeStringify = (val: unknown): string => {
   if (Array.isArray(val)) {
-    return `[${val
-      .map((item) => stripQuotes(safeStringify(item)))
-      .join(", ")}]`;
+    const items = [];
+    for (const item of val) {
+      items.push(safeStringify(item));
+    }
+    return `[${items.join(", ")}]`;
   }
 
   return JSON.stringify(
