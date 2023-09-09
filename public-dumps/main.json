@@ -1609,6 +1609,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmau5u2j0001mn0fawrkm7pi": {
+      "id": "clmau5u2j0001mn0fawrkm7pi",
+      "createdAt": "2023-09-08T16:52:59.899Z",
+      "updatedAt": "2023-09-08T16:52:59.899Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Pascal's Triangle",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/pascals-triangle",
+      "slug": "pascals-triangle",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmbzodwo0001qy0hi0hj5jpx": {
+      "id": "clmbzodwo0001qy0hi0hj5jpx",
+      "createdAt": "2023-09-09T12:15:09.672Z",
+      "updatedAt": "2023-09-09T12:15:09.672Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Combination Sum IV",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/combination-sum-iv",
+      "slug": "combination-sum-iv",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7734,6 +7762,18 @@
           "type": "linkedList",
           "input": "[5]",
           "order": 0
+        },
+        "2AbQu2jKP1FNsDmdim3K9s": {
+          "name": "2AbQu2jKP1FNsDmdim3K9s",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        },
+        "wfv27HBBZ8YYKyZGk73SRi": {
+          "name": "wfv27HBBZ8YYKyZGk73SRi",
+          "type": "number",
+          "input": "1",
+          "order": 1
         }
       },
       "description": null
@@ -7764,6 +7804,125 @@
           "name": "oLhZ2kNh9yoAoQHYd6T7WS",
           "type": "number",
           "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmau5u2j0002mn0ftabpltwl": {
+      "id": "clmau5u2j0002mn0ftabpltwl",
+      "createdAt": "2023-09-08T16:52:59.899Z",
+      "updatedAt": "2023-09-08T16:52:59.899Z",
+      "projectId": "clmau5u2j0001mn0fawrkm7pi",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "odgUCV6ToBdt66yANm36SU": {
+          "name": "odgUCV6ToBdt66yANm36SU",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmbzodwo0002qy0h26cvzi8b": {
+      "id": "clmbzodwo0002qy0h26cvzi8b",
+      "createdAt": "2023-09-09T12:15:09.672Z",
+      "updatedAt": "2023-09-09T12:15:09.672Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3m2BgKvYsTrUDkB1r2qN6b": {
+          "name": "3m2BgKvYsTrUDkB1r2qN6b",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        },
+        "uB78hPAt5RZxGECG6KfEUf": {
+          "name": "uB78hPAt5RZxGECG6KfEUf",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmbzzecf0005qy0hs28n5wjz": {
+      "id": "clmbzzecf0005qy0hs28n5wjz",
+      "createdAt": "2023-09-09T12:23:43.455Z",
+      "updatedAt": "2023-09-09T12:23:43.455Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3m2BgKvYsTrUDkB1r2qN6b": {
+          "name": "3m2BgKvYsTrUDkB1r2qN6b",
+          "type": "array",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "uB78hPAt5RZxGECG6KfEUf": {
+          "name": "uB78hPAt5RZxGECG6KfEUf",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmc007f70007qy0hqw6ng84o": {
+      "id": "clmc007f70007qy0hqw6ng84o",
+      "createdAt": "2023-09-09T12:24:21.139Z",
+      "updatedAt": "2023-09-09T12:24:21.139Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "3m2BgKvYsTrUDkB1r2qN6b": {
+          "name": "3m2BgKvYsTrUDkB1r2qN6b",
+          "type": "array",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "uB78hPAt5RZxGECG6KfEUf": {
+          "name": "uB78hPAt5RZxGECG6KfEUf",
+          "type": "number",
+          "input": "40",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmc04r8t0009qy0hw9qxcu2d": {
+      "id": "clmc04r8t0009qy0hw9qxcu2d",
+      "createdAt": "2023-09-09T12:27:53.453Z",
+      "updatedAt": "2023-09-09T12:27:53.453Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "3m2BgKvYsTrUDkB1r2qN6b": {
+          "name": "3m2BgKvYsTrUDkB1r2qN6b",
+          "type": "array",
+          "input": "[1,2,3,4,5,6,7,8,9,10]",
+          "order": 0
+        },
+        "uB78hPAt5RZxGECG6KfEUf": {
+          "name": "uB78hPAt5RZxGECG6KfEUf",
+          "type": "number",
+          "input": "10",
           "order": 1
         }
       },
@@ -9833,6 +9992,30 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} left\n * @param {number} right\n * @return {ListNode}\n */\nvar reverseBetween = function (head, left, right) {\n  if (!head) return null;\n  if (left === right) return head;\n\n  const dummy = new ListNode(-1, head);\n\n  let current = dummy;\n  let offset = 1;\n  while (current && offset < left) {\n    current.setColor(\"cyan\");\n    current = current.next;\n    offset++;\n  }\n\n  current.next = reverseList(current.next, right - left + 1);\n\n  return dummy.next;\n};\n\nfunction reverseList(head, length) {\n  let newHead = null;\n  let current = head;\n  let next = null;\n\n  while (current && length > 0) {\n    next = current.next;\n    current.next = newHead;\n    newHead = current;\n    current = next;\n    length--;\n  }\n\n  head.next = next;\n\n  return newHead;\n}\n\nreturn reverseBetween;\n",
+      "order": 0
+    },
+    "clmau5u2j0003mn0fpqu0z3mt": {
+      "id": "clmau5u2j0003mn0fpqu0z3mt",
+      "createdAt": "2023-09-08T16:52:59.899Z",
+      "updatedAt": "2023-09-08T16:52:59.899Z",
+      "projectId": "clmau5u2j0001mn0fawrkm7pi",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {number} numRows\r\n * @return {number[][]}\r\n */\r\nvar generate = function (numRows) {\r\n  const result = [];\r\n  result.push([1]);\r\n\r\n  for (let i = 1; i < numRows; i++) {\r\n    const current = new Array();\r\n    for (let j = 0; j <= i; j++) {\r\n      current[j] = (result[i - 1][j - 1] ?? 0) + (result[i - 1][j] ?? 0);\r\n    }\r\n    result.push(current);\r\n  }\r\n\r\n  return result;\r\n};\r\n\r\nreturn generate;\r\n",
+      "order": 0
+    },
+    "clmbzodwo0003qy0ha7q23xxu": {
+      "id": "clmbzodwo0003qy0ha7q23xxu",
+      "createdAt": "2023-09-09T12:15:09.672Z",
+      "updatedAt": "2023-09-09T12:15:09.672Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Backtracking + Memo",
+      "slug": "backtracking-memo",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar combinationSum4 = function (nums, target) {\n  const n = nums.length;\n\n  const memo = [];\n\n  const backtrack = (i, sum) => {\n    nums.setColor(i, \"cyan\");\n    memo[i] ??= new Array();\n    if (memo[i][sum] !== undefined) return memo[i][sum];\n    if (i === n) return 0;\n    if (sum === target) return 1;\n    if (sum > target) return 0;\n\n    let count = 0;\n\n    for (let j = 0; j < n; j++) {\n      nums.setColor(i, \"green\");\n      count += backtrack(j, sum + nums[j]);\n      nums.setColor(i, null);\n    }\n\n    memo[i][sum] = count;\n\n    nums.setColor(i, null);\n    return count;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn combinationSum4;\n",
       "order": 0
     }
   }
