@@ -1637,6 +1637,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmd7u1xk0001nr0hj7na8djt": {
+      "id": "clmd7u1xk0001nr0hj7na8djt",
+      "createdAt": "2023-09-10T08:51:17.192Z",
+      "updatedAt": "2023-09-10T08:51:17.192Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count All Valid Pickup and Delivery Options",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options",
+      "slug": "count-all-valid-pickup-and-delivery-options",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7927,6 +7941,63 @@
         }
       },
       "description": null
+    },
+    "clmd7u1xk0002nr0hrk5aupyg": {
+      "id": "clmd7u1xk0002nr0hrk5aupyg",
+      "createdAt": "2023-09-10T08:51:17.192Z",
+      "updatedAt": "2023-09-10T08:51:17.192Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "sRtdLY53ieD4WRHtTmLJyc": {
+          "name": "sRtdLY53ieD4WRHtTmLJyc",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmd8f4kj000bnr0h5myg8ys6": {
+      "id": "clmd8f4kj000bnr0h5myg8ys6",
+      "createdAt": "2023-09-10T09:07:40.388Z",
+      "updatedAt": "2023-09-10T09:07:40.388Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "sRtdLY53ieD4WRHtTmLJyc": {
+          "name": "sRtdLY53ieD4WRHtTmLJyc",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmd8fgc7000dnr0hx1shx8v7": {
+      "id": "clmd8fgc7000dnr0hx1shx8v7",
+      "createdAt": "2023-09-10T09:07:55.639Z",
+      "updatedAt": "2023-09-10T09:07:55.639Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "sRtdLY53ieD4WRHtTmLJyc": {
+          "name": "sRtdLY53ieD4WRHtTmLJyc",
+          "type": "number",
+          "input": "16",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10016,7 +10087,79 @@
       "complexity": null,
       "description": "",
       "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar combinationSum4 = function (nums, target) {\n  const n = nums.length;\n\n  const memo = [];\n\n  const backtrack = (i, sum) => {\n    nums.setColor(i, \"cyan\");\n    memo[i] ??= new Array();\n    if (memo[i][sum] !== undefined) return memo[i][sum];\n    if (i === n) return 0;\n    if (sum === target) return 1;\n    if (sum > target) return 0;\n\n    let count = 0;\n\n    for (let j = 0; j < n; j++) {\n      nums.setColor(i, \"green\");\n      count += backtrack(j, sum + nums[j]);\n      nums.setColor(i, null);\n    }\n\n    memo[i][sum] = count;\n\n    nums.setColor(i, null);\n    return count;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn combinationSum4;\n",
-      "order": 0
+      "order": 3
+    },
+    "clmceve4s0001mm0h82ibwg1h": {
+      "id": "clmceve4s0001mm0h82ibwg1h",
+      "createdAt": "2023-09-09T19:20:30.797Z",
+      "updatedAt": "2023-09-09T19:20:30.797Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar combinationSum4 = function (nums, target) {\n  const n = nums.length;\n\n  const dp = new Array(target + 1).fill(0);\n  dp[0] = 1;\n\n  for (let combSum = 1; combSum < target + 1; combSum++) {\n    for (let i = 0; i < n; i++) {\n      nums.setColor(i, \"green\");\n      const num = nums[i];\n      if (combSum - num >= 0) {\n        dp[combSum] += dp[combSum - num];\n      }\n      nums.setColor(i, null);\n    }\n  }\n\n  return dp[target];\n};\n\nreturn combinationSum4;\n",
+      "order": 1
+    },
+    "clmcf168q0003mm0hsl1phnbl": {
+      "id": "clmcf168q0003mm0hsl1phnbl",
+      "createdAt": "2023-09-09T19:25:00.507Z",
+      "updatedAt": "2023-09-09T19:25:00.507Z",
+      "projectId": "clmbzodwo0001qy0hi0hj5jpx",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar combinationSum4 = function (nums, target) {\n  const n = nums.length;\n  const memo = new Map();\n\n  const topDown = (sum) => {\n    console.log({sum, memo});\n    if (sum === 0) return 1;\n    if (sum < 0) return 0;\n    if (memo.has(sum)) return memo.get(sum);\n\n    let count = 0;\n\n    for (let i = 0; i < n; i++) {\n      nums.setColor(i, \"green\");\n      const num = nums[i];\n      if (num <= sum) {\n        const amountLeft = sum - num;\n        count += topDown(amountLeft);\n      }\n      nums.setColor(i, null);\n    }\n\n    memo.set(sum, count);\n    return count;\n  };\n\n  return topDown(target);\n};\n\nreturn combinationSum4;\n",
+      "order": 2
+    },
+    "clmd7u1xk0003nr0h3uqdvdj6": {
+      "id": "clmd7u1xk0003nr0h3uqdvdj6",
+      "createdAt": "2023-09-10T08:51:17.192Z",
+      "updatedAt": "2023-09-10T08:51:17.192Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "DP",
+      "slug": "dp",
+      "complexity": null,
+      "description": "",
+      "code": "var countOrders = function (n) {\n  const dp = new Array(n + 1).fill(1);\n  const MOD = 1e9 + 7;\n\n  for (var i = 2; i <= n; i++) {\n    dp[i] = (dp[i - 1] * i * (2 * i - 1)) % MOD;\n  }\n\n  return dp[n];\n};\n\nreturn countOrders;",
+      "order": 2
+    },
+    "clmd8ap9j0005nr0hehmah0oh": {
+      "id": "clmd8ap9j0005nr0hehmah0oh",
+      "createdAt": "2023-09-10T09:04:13.927Z",
+      "updatedAt": "2023-09-10T09:04:13.927Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Maths",
+      "slug": "maths",
+      "complexity": null,
+      "description": "",
+      "code": "var countOrders = function (n) {\n  let ans = 1;\n  const MOD = 1e9 + 7;\n  const total = n * 2;\n\n  for (let i = 1; i <= total; i++) {\n    ans *= i;\n\n    if (i % 2 === 0) {\n      ans /= 2;\n    }\n    ans %= MOD;\n  }\n\n  return ans;\n};\n\nreturn countOrders;\n",
+      "order": 1
+    },
+    "clmd8b3p20007nr0hsmpi6gek": {
+      "id": "clmd8b3p20007nr0hsmpi6gek",
+      "createdAt": "2023-09-10T09:04:32.630Z",
+      "updatedAt": "2023-09-10T09:04:32.630Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Maths Recursion",
+      "slug": "maths-recursion",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar countOrders = function (n) {\n  n = BigInt(n);\n  const mod = BigInt(1e9 + 7);\n\n  const totalAmount = factorialize(n * 2n);\n  const amountOfInvalid = 2n ** n;\n  const result = totalAmount / amountOfInvalid;\n\n  return result % mod;\n};\n\nfunction factorialize(num) {\n  // If the number is less than 0, reject it.\n  if (num < 0n) return -1n;\n  // If the number is 0, its factorial is 1.\n  else if (num === 0n) return 1n;\n  // Otherwise, call the recursive procedure again\n  else {\n    return num * factorialize(num - 1n);\n  }\n}\n\nreturn countOrders;",
+      "order": 3
+    },
+    "clmd8jxrv000fnr0hmw7b944p": {
+      "id": "clmd8jxrv000fnr0hmw7b944p",
+      "createdAt": "2023-09-10T09:11:24.859Z",
+      "updatedAt": "2023-09-10T09:11:24.859Z",
+      "projectId": "clmd7u1xk0001nr0hj7na8djt",
+      "title": "Solution 5",
+      "slug": "solution-5",
+      "complexity": null,
+      "description": null,
+      "code": "var countOrders = function (n) {\n  let ans = 1;\n  const MOD = 1e9 + 7;\n  const total = n * 2;\n\n  for (let i = 1; i <= n; ++i) {\n    // Pickups\n    ans = ans * i;\n    // Deliveries\n    ans = ans * (2 * i - 1);\n    ans %= MOD;\n  }\n\n  return ans;\n};\n\nreturn countOrders;\n",
+      "order": 3
     }
   }
 }
