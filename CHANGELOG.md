@@ -1,3 +1,15 @@
+# [1.210.0](https://github.com/mkayander/leetpal/compare/v1.209.1...v1.210.0) (2023-09-11)
+
+
+### Features
+
+* Improved createAt & updatedAt fields in schemas ([6dac122](https://github.com/mkayander/leetpal/commit/6dac122f815581454d92b6c3673d611a0f725181))
+* Removed "auth" router ([d10dc9b](https://github.com/mkayander/leetpal/commit/d10dc9b9197473be6a7243075946fc144fc6b974))
+* Removed a test API handler ([c1e522a](https://github.com/mkayander/leetpal/commit/c1e522a6b28606f8b929609db457529d1ccff838))
+* Removed example model ([a074ebf](https://github.com/mkayander/leetpal/commit/a074ebf0dbff8786f3826ba692f8b4d629c3c9c2))
+* Removed the example page ([21c225d](https://github.com/mkayander/leetpal/commit/21c225d6934b67d6fbf5a856c54db2a7a799c36c))
+* Removed unused TRPC routers ([756ca50](https://github.com/mkayander/leetpal/commit/756ca503d960491944b4ababefdcd15884637761))
+
 ## [1.209.1](https://github.com/mkayander/leetpal/compare/v1.209.0...v1.209.1) (2023-09-08)
 
 
