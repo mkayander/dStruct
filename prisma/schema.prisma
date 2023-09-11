@@ -19,14 +19,14 @@ model Problem {
 
   // To return `Date`s intact through the API we need to add data transformers
   // https://trpc.io/docs/data-transformers
-  createdAt DateTime @unique @default(now())
-  updatedAt DateTime @unique @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Account {
   id                String   @id @default(cuid())
-  createdAt         DateTime @unique @default(now())
-  updatedAt         DateTime @unique @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
   userId            String
   type              String
   provider          String
@@ -47,8 +47,8 @@ model Account {
 
 model Session {
   id           String   @id @default(cuid())
-  createdAt    DateTime @unique @default(now())
-  updatedAt    DateTime @unique @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -60,7 +60,7 @@ model Session {
 model User {
   id               String              @id @default(cuid())
   createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
   name             String?
   email            String?             @unique
   emailVerified    DateTime?
@@ -76,8 +76,8 @@ model User {
 }
 
 model VerificationToken {
-  createdAt  DateTime @unique @default(now())
-  updatedAt  DateTime @unique @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   identifier String
   token      String   @unique
   expires    DateTime
@@ -88,8 +88,8 @@ model VerificationToken {
 model LeetCodeUser {
   username   String   @id
   token      String?  @db.Text /// @encrypted
-  createdAt  DateTime @unique @default(now())
-  updatedAt  DateTime @unique @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   userAvatar String
   user       User?
 }
@@ -118,7 +118,7 @@ enum ProjectDifficulty {
 model PlaygroundProject {
   id          String               @id @default(cuid())
   createdAt   DateTime             @default(now())
-  updatedAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
   userId      String?
   author      User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   title       String
@@ -140,7 +140,7 @@ model PlaygroundProject {
 model PlaygroundSolution {
   id          String            @id @default(cuid())
   createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
@@ -157,7 +157,7 @@ model PlaygroundSolution {
 model PlaygroundTestCase {
   id          String            @id @default(cuid())
   createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
   projectId   String
   project     PlaygroundProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
