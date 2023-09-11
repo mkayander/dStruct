@@ -1651,6 +1651,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmeqp9bx0001lu0h2fta3yi2": {
+      "id": "clmeqp9bx0001lu0h2fta3yi2",
+      "createdAt": "2023-09-11T10:27:12.381Z",
+      "updatedAt": "2023-09-11T10:27:12.381Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Group the People Given the Group Size They Belong To",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to",
+      "slug": "group-the-people-given-the-group-size-they-belong-to",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -7998,6 +8012,44 @@
         }
       },
       "description": null
+    },
+    "clmeqp9bx0002lu0hgpv4jdt1": {
+      "id": "clmeqp9bx0002lu0hgpv4jdt1",
+      "createdAt": "2023-09-11T10:27:12.381Z",
+      "updatedAt": "2023-09-11T10:27:12.381Z",
+      "projectId": "clmeqp9bx0001lu0h2fta3yi2",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,3,3,3,3,1,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmeqs61i0005lu0hcfovecjb": {
+      "id": "clmeqs61i0005lu0hcfovecjb",
+      "createdAt": "2023-09-11T10:29:28.086Z",
+      "updatedAt": "2023-09-11T10:29:28.086Z",
+      "projectId": "clmeqp9bx0001lu0h2fta3yi2",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[2,1,3,3,3,2]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10160,6 +10212,30 @@
       "description": null,
       "code": "var countOrders = function (n) {\n  let ans = 1;\n  const MOD = 1e9 + 7;\n  const total = n * 2;\n\n  for (let i = 1; i <= n; ++i) {\n    // Pickups\n    ans = ans * i;\n    // Deliveries\n    ans = ans * (2 * i - 1);\n    ans %= MOD;\n  }\n\n  return ans;\n};\n\nreturn countOrders;\n",
       "order": 3
+    },
+    "clmeqp9bx0003lu0hp21hin2b": {
+      "id": "clmeqp9bx0003lu0hp21hin2b",
+      "createdAt": "2023-09-11T10:27:12.381Z",
+      "updatedAt": "2023-09-11T10:27:12.381Z",
+      "projectId": "clmeqp9bx0001lu0h2fta3yi2",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} groupSizes\n * @return {number[][]}\n */\nvar groupThePeople = function (groupSizes) {\n  const groups = new Map();\n\n  const result = [];\n\n  for (let i = 0; i < groupSizes.length; i++) {\n    groupSizes.setColor(i, \"green\");\n    const size = groupSizes[i];\n    if (!groups.has(size)) groups.set(size, []);\n\n    const group = groups.get(size);\n    group.push(i);\n\n    if (group.length === size) {\n      result.push(group);\n      groups.set(size, []);\n      console.log(group);\n    }\n  }\n\n  return result;\n};\n\nreturn groupThePeople;\n",
+      "order": 0
+    },
+    "clmeqv3h50009lu0ht8c679hu": {
+      "id": "clmeqv3h50009lu0ht8c679hu",
+      "createdAt": "2023-09-11T10:31:44.729Z",
+      "updatedAt": "2023-09-11T10:31:44.729Z",
+      "projectId": "clmeqp9bx0001lu0h2fta3yi2",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} groupSizes\n * @return {number[][]}\n */\nvar groupThePeople = function (groupSizes) {\n  const groups = [];\n\n  for (let i = 0; i < groupSizes.length; i++) {\n    groupSizes.setColor(i, \"green\");\n    const size = groupSizes[i];\n\n    groups[size] ??= [new Array()];\n    let group = groups[size].at(-1);\n\n    if (group.length === size) {\n      group = [];\n      groups[size].push(group);\n    }\n\n    group.push(i);\n  }\n\n  console.log(groups);\n\n  return groups.flat(1);\n};\n\nreturn groupThePeople;\n",
+      "order": 1
     }
   }
 }
