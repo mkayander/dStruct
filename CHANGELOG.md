@@ -1,3 +1,10 @@
+## [1.210.1](https://github.com/mkayander/leetpal/compare/v1.210.0...v1.210.1) (2023-09-11)
+
+
+### Bug Fixes
+
+* Update NextJS env file ([54d940c](https://github.com/mkayander/leetpal/commit/54d940c5fd784b6c3603393f4abb2b26751bdd03))
+
 # [1.210.0](https://github.com/mkayander/leetpal/compare/v1.209.1...v1.210.0) (2023-09-11)
 
 
