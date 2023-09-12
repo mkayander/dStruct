@@ -1665,6 +1665,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmg97mk40001mf0h0dpjrgaf": {
+      "id": "clmg97mk40001mf0h0dpjrgaf",
+      "createdAt": "2023-09-12T11:53:08.597Z",
+      "updatedAt": "2023-09-12T11:53:08.597Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Construct Quad Tree",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/construct-quad-tree",
+      "slug": "construct-quad-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmggsmiw0001p90hlngzmjcs": {
+      "id": "clmggsmiw0001p90hlngzmjcs",
+      "createdAt": "2023-09-12T15:25:25.640Z",
+      "updatedAt": "2023-09-12T15:25:25.640Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Deletions to Make Character Frequencies Unique",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique",
+      "slug": "minimum-deletions-to-make-character-frequencies-unique",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8050,6 +8078,101 @@
         }
       },
       "description": null
+    },
+    "clmg97mk40002mf0hujs055v8": {
+      "id": "clmg97mk40002mf0hujs055v8",
+      "createdAt": "2023-09-12T11:53:08.597Z",
+      "updatedAt": "2023-09-12T11:53:46.415Z",
+      "projectId": "clmg97mk40001mf0h0dpjrgaf",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8VEh2ZfgtqiUt3XqmLqaRW": {
+          "name": "8VEh2ZfgtqiUt3XqmLqaRW",
+          "type": "matrix",
+          "input": "[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmg9emdo0005mf0hgjb09jk8": {
+      "id": "clmg9emdo0005mf0hgjb09jk8",
+      "createdAt": "2023-09-12T11:58:34.956Z",
+      "updatedAt": "2023-09-12T11:58:38.923Z",
+      "projectId": "clmg97mk40001mf0h0dpjrgaf",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "8VEh2ZfgtqiUt3XqmLqaRW": {
+          "name": "8VEh2ZfgtqiUt3XqmLqaRW",
+          "type": "matrix",
+          "input": "[[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0],[1,1,1,1,1,1,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[0,0,0,0,1,1,1,1],[0,0,0,0,1,1,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmg9f2b90007mf0h1kwfm7fh": {
+      "id": "clmg9f2b90007mf0h1kwfm7fh",
+      "createdAt": "2023-09-12T11:58:55.605Z",
+      "updatedAt": "2023-09-12T11:58:59.427Z",
+      "projectId": "clmg97mk40001mf0h0dpjrgaf",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "8VEh2ZfgtqiUt3XqmLqaRW": {
+          "name": "8VEh2ZfgtqiUt3XqmLqaRW",
+          "type": "matrix",
+          "input": "[[0,1],[1,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmggsmiw0002p90hzye6gdt1": {
+      "id": "clmggsmiw0002p90hzye6gdt1",
+      "createdAt": "2023-09-12T15:25:25.640Z",
+      "updatedAt": "2023-09-12T15:25:45.507Z",
+      "projectId": "clmggsmiw0001p90hlngzmjcs",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "aaabbbcc",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmggu56l0005p90hcc016w34": {
+      "id": "clmggu56l0005p90hcc016w34",
+      "createdAt": "2023-09-12T15:26:36.477Z",
+      "updatedAt": "2023-09-12T15:26:40.324Z",
+      "projectId": "clmggsmiw0001p90hlngzmjcs",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "bbcebab",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10228,7 +10351,7 @@
     "clmeqv3h50009lu0ht8c679hu": {
       "id": "clmeqv3h50009lu0ht8c679hu",
       "createdAt": "2023-09-11T10:31:44.729Z",
-      "updatedAt": "2023-09-11T10:31:44.729Z",
+      "updatedAt": "2023-09-11T11:05:22.535Z",
       "projectId": "clmeqp9bx0001lu0h2fta3yi2",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -10236,6 +10359,30 @@
       "description": null,
       "code": "/**\n * @param {number[]} groupSizes\n * @return {number[][]}\n */\nvar groupThePeople = function (groupSizes) {\n  const groups = [];\n\n  for (let i = 0; i < groupSizes.length; i++) {\n    groupSizes.setColor(i, \"green\");\n    const size = groupSizes[i];\n\n    groups[size] ??= [new Array()];\n    let group = groups[size].at(-1);\n\n    if (group.length === size) {\n      group = [];\n      groups[size].push(group);\n    }\n\n    group.push(i);\n  }\n\n  console.log(groups);\n\n  return groups.flat(1);\n};\n\nreturn groupThePeople;\n",
       "order": 1
+    },
+    "clmg97mk40003mf0h6yonzu2o": {
+      "id": "clmg97mk40003mf0h6yonzu2o",
+      "createdAt": "2023-09-12T11:53:08.597Z",
+      "updatedAt": "2023-09-12T15:24:19.528Z",
+      "projectId": "clmg97mk40001mf0h0dpjrgaf",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * // Definition for a QuadTree node.\n * function Node(val,isLeaf,topLeft,topRight,bottomLeft,bottomRight) {\n *    this.val = val;\n *    this.isLeaf = isLeaf;\n *    this.topLeft = topLeft;\n *    this.topRight = topRight;\n *    this.bottomLeft = bottomLeft;\n *    this.bottomRight = bottomRight;\n * };\n */\n\nclass Node {\n  constructor(val, isLeaf, topLeft, topRight, bottomLeft, bottomRight) {\n    this.val = val;\n    this.isLeaf = isLeaf;\n    this.topLeft = topLeft;\n    this.topRight = topRight;\n    this.bottomLeft = bottomLeft;\n    this.bottomRight = bottomRight;\n  }\n}\n\n/**\n * @param {number[][]} grid\n * @return {Node}\n */\nvar construct = function (grid) {\n  const n = grid.length;\n\n  const dfs = (row, col, length) => {\n    const newNode = new Node();\n\n    if (length === 1) {\n      grid[row].setColor(col, \"green\");\n      newNode.val = grid[row][col];\n      newNode.isLeaf = true;\n    } else {\n      const mid = length >> 1;\n\n      grid[row].setColor(col, \"cyan\");\n      grid[row].setColor(col + mid, \"cyan\");\n      grid[row + mid].setColor(col, \"cyan\");\n      grid[row + mid].setColor(col + mid, \"cyan\");\n\n      newNode.topLeft = dfs(row, col, mid);\n      newNode.topRight = dfs(row, col + mid, mid);\n      newNode.bottomLeft = dfs(row + mid, col, mid);\n      newNode.bottomRight = dfs(row + mid, col + mid, mid);\n\n      newNode.val = newNode.topLeft.val;\n      if (\n        [\n          newNode.topLeft,\n          newNode.topRight,\n          newNode.bottomLeft,\n          newNode.bottomRight,\n        ].every((node) => node.isLeaf && node.val === newNode.val)\n      ) {\n        newNode.isLeaf = true;\n        newNode.topLeft =\n          newNode.topRight =\n          newNode.bottomLeft =\n          newNode.bottomRight =\n            null;\n      }\n    }\n\n    return newNode;\n  };\n\n  return dfs(0, 0, n);\n};\n\nreturn construct;\n",
+      "order": 0
+    },
+    "clmggsmiw0003p90hiiacq0mw": {
+      "id": "clmggsmiw0003p90hiiacq0mw",
+      "createdAt": "2023-09-12T15:25:25.640Z",
+      "updatedAt": "2023-09-12T15:27:42.557Z",
+      "projectId": "clmggsmiw0001p90hlngzmjcs",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar minDeletions = function (s) {\n  const freqMap = new Array(26).fill(0);\n  const offset = \"a\".charCodeAt(0);\n\n  for (const char of s) {\n    const code = char.charCodeAt(0) - offset;\n    freqMap[code]++;\n  }\n\n  console.log(freqMap);\n\n  freqMap.sort((a, b) => b - a);\n\n  let result = 0;\n  let maxAllowed = Infinity;\n\n  for (const count of freqMap) {\n    if (count === 0) break;\n    if (count > maxAllowed) {\n      result += count - maxAllowed;\n      if (maxAllowed) maxAllowed--;\n    } else {\n      maxAllowed = count - 1;\n    }\n  }\n\n  return result;\n};\n\nreturn minDeletions;\n",
+      "order": 0
     }
   }
 }
