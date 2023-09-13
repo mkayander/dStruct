@@ -1693,6 +1693,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmi23u2d0001o80fgeaokmaj": {
+      "id": "clmi23u2d0001o80fgeaokmaj",
+      "createdAt": "2023-09-13T18:09:46.741Z",
+      "updatedAt": "2023-09-13T18:09:46.741Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Candy",
+      "category": "ARRAY",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/candy",
+      "slug": "candy",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8173,6 +8187,44 @@
         }
       },
       "description": null
+    },
+    "clmi23u2d0002o80fox5tcntw": {
+      "id": "clmi23u2d0002o80fox5tcntw",
+      "createdAt": "2023-09-13T18:09:46.741Z",
+      "updatedAt": "2023-09-13T18:10:15.383Z",
+      "projectId": "clmi23u2d0001o80fgeaokmaj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,0,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmi250p70005o80fqj66xyyw": {
+      "id": "clmi250p70005o80fqj66xyyw",
+      "createdAt": "2023-09-13T18:10:41.996Z",
+      "updatedAt": "2023-09-13T18:11:21.550Z",
+      "projectId": "clmi23u2d0001o80fgeaokmaj",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,0,2,1,2,6,5,4,0]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10382,6 +10434,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar minDeletions = function (s) {\n  const freqMap = new Array(26).fill(0);\n  const offset = \"a\".charCodeAt(0);\n\n  for (const char of s) {\n    const code = char.charCodeAt(0) - offset;\n    freqMap[code]++;\n  }\n\n  console.log(freqMap);\n\n  freqMap.sort((a, b) => b - a);\n\n  let result = 0;\n  let maxAllowed = Infinity;\n\n  for (const count of freqMap) {\n    if (count === 0) break;\n    if (count > maxAllowed) {\n      result += count - maxAllowed;\n      if (maxAllowed) maxAllowed--;\n    } else {\n      maxAllowed = count - 1;\n    }\n  }\n\n  return result;\n};\n\nreturn minDeletions;\n",
+      "order": 0
+    },
+    "clmi23u2d0003o80fk459faex": {
+      "id": "clmi23u2d0003o80fk459faex",
+      "createdAt": "2023-09-13T18:09:46.741Z",
+      "updatedAt": "2023-09-13T18:10:27.636Z",
+      "projectId": "clmi23u2d0001o80fgeaokmaj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} ratings\n * @return {number}\n */\nvar candy = function (ratings) {\n  const n = ratings.length;\n  const candies = new Array(n).fill(1);\n\n  for (let i = 1; i < n; i++) {\n    if (ratings[i] > ratings[i - 1]) {\n      candies[i] = candies[i - 1] + 1;\n    }\n  }\n\n  for (let i = n - 2; i >= 0; i--) {\n    if (ratings[i] > ratings[i + 1]) {\n      candies[i] = Math.max(candies[i], candies[i + 1] + 1);\n    }\n  }\n\n  return candies.reduce((a, b) => a + b, 0);\n};\n\nreturn candy;",
       "order": 0
     }
   }
