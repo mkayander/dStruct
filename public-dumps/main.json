@@ -1707,6 +1707,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmjhpa820001qc0fzt48t50z": {
+      "id": "clmjhpa820001qc0fzt48t50z",
+      "createdAt": "2023-09-14T18:14:07.874Z",
+      "updatedAt": "2023-09-14T18:14:07.874Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reconstruct Itinerary",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/reconstruct-itinerary",
+      "slug": "reconstruct-itinerary",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8225,6 +8239,25 @@
         }
       },
       "description": null
+    },
+    "clmjhpa820002qc0fo793y0y4": {
+      "id": "clmjhpa820002qc0fo793y0y4",
+      "createdAt": "2023-09-14T18:14:07.874Z",
+      "updatedAt": "2023-09-14T18:14:31.705Z",
+      "projectId": "clmjhpa820001qc0fzt48t50z",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "7bxT3EVxHvXVrqfjRGVaiX": {
+          "name": "7bxT3EVxHvXVrqfjRGVaiX",
+          "type": "array",
+          "input": "[[\"JFK\",\"SFO\"],[\"JFK\",\"ATL\"],[\"SFO\",\"ATL\"],[\"ATL\",\"JFK\"],[\"ATL\",\"SFO\"]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10446,6 +10479,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} ratings\n * @return {number}\n */\nvar candy = function (ratings) {\n  const n = ratings.length;\n  const candies = new Array(n).fill(1);\n\n  for (let i = 1; i < n; i++) {\n    if (ratings[i] > ratings[i - 1]) {\n      candies[i] = candies[i - 1] + 1;\n    }\n  }\n\n  for (let i = n - 2; i >= 0; i--) {\n    if (ratings[i] > ratings[i + 1]) {\n      candies[i] = Math.max(candies[i], candies[i + 1] + 1);\n    }\n  }\n\n  return candies.reduce((a, b) => a + b, 0);\n};\n\nreturn candy;",
+      "order": 0
+    },
+    "clmjhpa820003qc0fj73qv1m4": {
+      "id": "clmjhpa820003qc0fj73qv1m4",
+      "createdAt": "2023-09-14T18:14:07.874Z",
+      "updatedAt": "2023-09-14T18:19:07.989Z",
+      "projectId": "clmjhpa820001qc0fzt48t50z",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[][]} tickets\n * @return {string[]}\n */\nvar findItinerary = function (tickets) {\n  const graph = {};\n\n  for (const [src, dst] of tickets) {\n    (graph[src] ??= new Array()).push(dst);\n  }\n\n  for (const key in graph) {\n    graph[key].sort().reverse();\n  }\n\n  const itinerary = new Array();\n\n  console.log(graph);\n\n  const dfs = (airport) => {\n    while (graph[airport]?.length > 0) {\n      dfs(graph[airport].pop());\n    }\n    itinerary.push(airport);\n  }\n\n  dfs(\"JFK\");\n\n  return itinerary.reverse();\n};\n\nreturn findItinerary;\n",
       "order": 0
     }
   }
