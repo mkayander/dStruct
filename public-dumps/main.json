@@ -1721,6 +1721,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmkrrtyq0001pb0hfd15m7d0": {
+      "id": "clmkrrtyq0001pb0hfd15m7d0",
+      "createdAt": "2023-09-15T15:43:49.106Z",
+      "updatedAt": "2023-09-15T15:43:49.106Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Min Cost to Connect All Points",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/min-cost-to-connect-all-points",
+      "slug": "min-cost-to-connect-all-points",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8258,6 +8272,25 @@
         }
       },
       "description": null
+    },
+    "clmkrrtyq0002pb0hz1fvgic8": {
+      "id": "clmkrrtyq0002pb0hz1fvgic8",
+      "createdAt": "2023-09-15T15:43:49.106Z",
+      "updatedAt": "2023-09-15T15:44:14.259Z",
+      "projectId": "clmkrrtyq0001pb0hfd15m7d0",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "jtsfQjGXCamdL3MSNtRvPL": {
+          "name": "jtsfQjGXCamdL3MSNtRvPL",
+          "type": "array",
+          "input": "[[0,0],[2,2],[3,10],[5,2],[7,0]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10491,6 +10524,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string[][]} tickets\n * @return {string[]}\n */\nvar findItinerary = function (tickets) {\n  const graph = {};\n\n  for (const [src, dst] of tickets) {\n    (graph[src] ??= new Array()).push(dst);\n  }\n\n  for (const key in graph) {\n    graph[key].sort().reverse();\n  }\n\n  const itinerary = new Array();\n\n  console.log(graph);\n\n  const dfs = (airport) => {\n    while (graph[airport]?.length > 0) {\n      dfs(graph[airport].pop());\n    }\n    itinerary.push(airport);\n  }\n\n  dfs(\"JFK\");\n\n  return itinerary.reverse();\n};\n\nreturn findItinerary;\n",
+      "order": 0
+    },
+    "clmkrrtyq0003pb0h5d8690zg": {
+      "id": "clmkrrtyq0003pb0h5d8690zg",
+      "createdAt": "2023-09-15T15:43:49.106Z",
+      "updatedAt": "2023-09-15T15:51:35.258Z",
+      "projectId": "clmkrrtyq0001pb0hfd15m7d0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} points\n * @return {number}\n */\nvar minCostConnectPoints = function (points) {\n  const n = points.length;\n  let mstCost = 0;\n  let edgesUsed = 0;\n\n  const visited = new Array(n).fill(false);\n  visited.setColorMap({true: \"cyan\"});\n\n  const minDist = new Array(n).fill(Infinity);\n  minDist[0] = 0;\n\n  const getDistance = (p1, p2) => {\n    return Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);\n  };\n\n  while (edgesUsed < n) {\n    let currMinEdge = Infinity;\n    let currNode = -1;\n\n    // Pick lest weight node which is not in MST\n    for (let node = 0; node < n; node++) {\n      if (visited[node]) continue;\n\n      if (currMinEdge > minDist[node]) {\n        currMinEdge = minDist[node];\n        currNode = node;\n      }\n    }\n    points.setColor(currNode, \"green\");\n\n    mstCost += currMinEdge;\n    edgesUsed++;\n    visited[currNode] = true;\n    console.log({mstCost, edgesUsed, visited});\n\n    // Update adjacent nodes of current node.\n    for (let nextNode = 0; nextNode < n; nextNode++) {\n      if (visited[nextNode]) continue;\n\n      const distance = getDistance(points[currNode], points[nextNode]);\n      if (minDist[nextNode] > distance) {\n        minDist[nextNode] = distance;\n      }\n    }\n  }\n\n  return mstCost;\n};\n\nreturn minCostConnectPoints;\n",
       "order": 0
     }
   }
