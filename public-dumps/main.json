@@ -1735,6 +1735,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmnbl22t0001lc0h5unud36e": {
+      "id": "clmnbl22t0001lc0h5unud36e",
+      "createdAt": "2023-09-17T10:33:57.701Z",
+      "updatedAt": "2023-09-17T10:33:57.701Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Shortest Path Visiting All Nodes",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/shortest-path-visiting-all-nodes",
+      "slug": "shortest-path-visiting-all-nodes",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8291,6 +8305,25 @@
         }
       },
       "description": null
+    },
+    "clmnbl22t0002lc0hh3500cma": {
+      "id": "clmnbl22t0002lc0hh3500cma",
+      "createdAt": "2023-09-17T10:33:57.701Z",
+      "updatedAt": "2023-09-17T10:34:47.682Z",
+      "projectId": "clmnbl22t0001lc0h5unud36e",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5b2j4qxoW4pShPsGoaz5ue": {
+          "name": "5b2j4qxoW4pShPsGoaz5ue",
+          "type": "array",
+          "input": "[[1,2,3],[0],[0],[0]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10537,6 +10570,30 @@
       "description": null,
       "code": "/**\n * @param {number[][]} points\n * @return {number}\n */\nvar minCostConnectPoints = function (points) {\n  const n = points.length;\n  let mstCost = 0;\n  let edgesUsed = 0;\n\n  const visited = new Array(n).fill(false);\n  visited.setColorMap({true: \"cyan\"});\n\n  const minDist = new Array(n).fill(Infinity);\n  minDist[0] = 0;\n\n  const getDistance = (p1, p2) => {\n    return Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);\n  };\n\n  while (edgesUsed < n) {\n    let currMinEdge = Infinity;\n    let currNode = -1;\n\n    // Pick lest weight node which is not in MST\n    for (let node = 0; node < n; node++) {\n      if (visited[node]) continue;\n\n      if (currMinEdge > minDist[node]) {\n        currMinEdge = minDist[node];\n        currNode = node;\n      }\n    }\n    points.setColor(currNode, \"green\");\n\n    mstCost += currMinEdge;\n    edgesUsed++;\n    visited[currNode] = true;\n    console.log({mstCost, edgesUsed, visited});\n\n    // Update adjacent nodes of current node.\n    for (let nextNode = 0; nextNode < n; nextNode++) {\n      if (visited[nextNode]) continue;\n\n      const distance = getDistance(points[currNode], points[nextNode]);\n      if (minDist[nextNode] > distance) {\n        minDist[nextNode] = distance;\n      }\n    }\n  }\n\n  return mstCost;\n};\n\nreturn minCostConnectPoints;\n",
       "order": 0
+    },
+    "clmnbl22t0003lc0hw8tk7ewe": {
+      "id": "clmnbl22t0003lc0hw8tk7ewe",
+      "createdAt": "2023-09-17T10:33:57.701Z",
+      "updatedAt": "2023-09-17T10:49:06.152Z",
+      "projectId": "clmnbl22t0001lc0h5unud36e",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} graph\n * @return {number}\n */\nvar shortestPathLength = function (graph) {\n  const n = graph.length;\n  const all = (1 << n) - 1;\n  const visited = new Set();\n  const queue = new Queue();\n\n  const getKey = (node, mask) => `${node}-${mask}`;\n\n  class Node {\n    constructor(node, mask, cost) {\n      this.node = node;\n      this.mask = mask;\n      this.cost = cost;\n    }\n  }\n\n  for (let i = 0; i < n; i++) {\n    const maskValue = 1 << i;\n    const currNode = new Node(i, maskValue, 1);\n    queue.enqueue(currNode);\n    visited.add(getKey(i, maskValue));\n  }\n\n  while (!queue.isEmpty()) {\n    const curr = queue.dequeue();\n\n    if (curr.mask === all) {\n      return curr.cost - 1;\n    }\n\n    for (const neighbor of graph[curr.node]) {\n      const bothVisitedMask = curr.mask | (1 << neighbor);\n      const key = getKey(neighbor, bothVisitedMask);\n      if (visited.has(key)) continue;\n      visited.add(key);\n\n      const newNode = new Node(neighbor, bothVisitedMask, curr.cost + 1);\n      queue.enqueue(newNode);\n    }\n  }\n\n  return -1;\n};\n\nreturn shortestPathLength;\n",
+      "order": 2
+    },
+    "clmnbykrp0005lc0h2389bula": {
+      "id": "clmnbykrp0005lc0h2389bula",
+      "createdAt": "2023-09-17T10:44:28.453Z",
+      "updatedAt": "2023-09-17T10:49:06.152Z",
+      "projectId": "clmnbl22t0001lc0h5unud36e",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} graph\n * @return {number}\n */\nvar shortestPathLength = function (graph) {\n  const n = graph.length;\n  const allVis = (1 << n) - 1;\n\n  const visited = window.Array.from({ length: n }, () =>\n    new Array(allVis + 1).fill(0)\n  );\n\n  const queue = new Queue();\n\n  for (let i = 0; i < n; i++) {\n    queue.enqueue([i, 1 << i, 0]);\n    visited[i][1 << i] = 1;\n  }\n\n  while (!queue.isEmpty()) {\n    const [node, pathbm, cost] = queue.dequeue();\n    if (allVis === pathbm) return cost;\n\n    for (const neighbor of graph[node]) {\n      const bothVisitedMask = pathbm | (1 << neighbor);\n      if (visited[neighbor][bothVisitedMask]) continue;\n\n      queue.enqueue([neighbor, bothVisitedMask, cost + 1]);\n      visited[neighbor][bothVisitedMask] = 1;\n    }\n  }\n};\n\nreturn shortestPathLength;\n",
+      "order": 1
     }
   }
 }
