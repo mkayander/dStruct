@@ -1749,6 +1749,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmp9bbo30001qq0hj5r98g9y": {
+      "id": "clmp9bbo30001qq0hj5r98g9y",
+      "createdAt": "2023-09-18T19:05:56.690Z",
+      "updatedAt": "2023-09-18T19:05:56.690Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "The K Weakest Rows in a Matrix",
+      "category": "BINARY_SEARCH",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix",
+      "slug": "the-k-weakest-rows-in-a-matrix",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8324,6 +8338,31 @@
         }
       },
       "description": null
+    },
+    "clmp9bbo30002qq0hzfygghi7": {
+      "id": "clmp9bbo30002qq0hzfygghi7",
+      "createdAt": "2023-09-18T19:05:56.690Z",
+      "updatedAt": "2023-09-18T19:09:01.011Z",
+      "projectId": "clmp9bbo30001qq0hj5r98g9y",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "ppcG3Ho6oJg8MJAp7CqjKK": {
+          "name": "ppcG3Ho6oJg8MJAp7CqjKK",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        },
+        "vxdYuwKBozNwkvV8rYpQzC": {
+          "name": "vxdYuwKBozNwkvV8rYpQzC",
+          "type": "matrix",
+          "input": "[[1,1,0,0,0], [1,1,1,1,0], [1,0,0,0,0], [1,1,0,0,0], [1,1,1,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10594,6 +10633,18 @@
       "description": null,
       "code": "/**\n * @param {number[][]} graph\n * @return {number}\n */\nvar shortestPathLength = function (graph) {\n  const n = graph.length;\n  const allVis = (1 << n) - 1;\n\n  const visited = window.Array.from({ length: n }, () =>\n    new Array(allVis + 1).fill(0)\n  );\n\n  const queue = new Queue();\n\n  for (let i = 0; i < n; i++) {\n    queue.enqueue([i, 1 << i, 0]);\n    visited[i][1 << i] = 1;\n  }\n\n  while (!queue.isEmpty()) {\n    const [node, pathbm, cost] = queue.dequeue();\n    if (allVis === pathbm) return cost;\n\n    for (const neighbor of graph[node]) {\n      const bothVisitedMask = pathbm | (1 << neighbor);\n      if (visited[neighbor][bothVisitedMask]) continue;\n\n      queue.enqueue([neighbor, bothVisitedMask, cost + 1]);\n      visited[neighbor][bothVisitedMask] = 1;\n    }\n  }\n};\n\nreturn shortestPathLength;\n",
       "order": 1
+    },
+    "clmp9bbo30003qq0h62z1qg7e": {
+      "id": "clmp9bbo30003qq0h62z1qg7e",
+      "createdAt": "2023-09-18T19:05:56.690Z",
+      "updatedAt": "2023-09-18T19:09:56.039Z",
+      "projectId": "clmp9bbo30001qq0hj5r98g9y",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} mat\n * @param {number} k\n * @return {number[]}\n */\nvar kWeakestRows = function (mat, k) {\n  const getSum = (row) => {\n    let left = 0;\n    let right = row.length;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n      row.setColor(left, \"cyan\");\n      row.setColor(right, \"cyan\");\n      row.setColor(mid, \"green\");\n      if (row[mid] === 1) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return left;\n\n    // return row.reduce((acc, curr) => acc + curr, 0);\n  };\n\n  const computed = mat.map((row, i) => [getSum(row), i]);\n  computed.sort((a, b) => a[0] - b[0]);\n\n  return computed.map((row) => row[1]).slice(0, k);\n\n  // const pq = new PriorityQueue({compare: (a, b) => b[0] - a[0]});\n\n  // console.log(computed);\n\n  // for (const row of computed) {\n  //     pq.enqueue(row);\n  //     if (pq.size() > k) pq.dequeue();\n  // }\n\n  // console.log(pq.toArray());\n\n  // return pq.toArray().map(row => row[1]).reverse();\n};\n\nreturn kWeakestRows;\n",
+      "order": 0
     }
   }
 }
