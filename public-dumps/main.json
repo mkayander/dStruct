@@ -1777,6 +1777,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmt1xwdg0001s40hdbc47fj2": {
+      "id": "clmt1xwdg0001s40hdbc47fj2",
+      "createdAt": "2023-09-21T10:50:37.733Z",
+      "updatedAt": "2023-09-21T10:50:37.733Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Median of Two Sorted Arrays",
+      "category": "BINARY_SEARCH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/median-of-two-sorted-arrays",
+      "slug": "median-of-two-sorted-arrays",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmt3czb30001n90htcfcue0g": {
+      "id": "clmt3czb30001n90htcfcue0g",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2023-09-21T11:30:20.992Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Parallel Courses",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/parallel-courses",
+      "slug": "parallel-courses",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8427,6 +8455,81 @@
         }
       },
       "description": null
+    },
+    "clmt1xwdg0002s40h5my60lwk": {
+      "id": "clmt1xwdg0002s40h5my60lwk",
+      "createdAt": "2023-09-21T10:50:37.733Z",
+      "updatedAt": "2023-09-21T10:52:03.854Z",
+      "projectId": "clmt1xwdg0001s40hdbc47fj2",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "f7UkanSjpcw352TjhVXQwa": {
+          "name": "f7UkanSjpcw352TjhVXQwa",
+          "type": "array",
+          "input": "[1,2]",
+          "order": 0
+        },
+        "m391DDVYo54TCpaLSAPp5i": {
+          "name": "m391DDVYo54TCpaLSAPp5i",
+          "type": "array",
+          "input": "[3,4]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmt240hc0005s40hkzkeq5b8": {
+      "id": "clmt240hc0005s40hkzkeq5b8",
+      "createdAt": "2023-09-21T10:55:22.992Z",
+      "updatedAt": "2023-09-21T10:55:30.871Z",
+      "projectId": "clmt1xwdg0001s40hdbc47fj2",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "f7UkanSjpcw352TjhVXQwa": {
+          "name": "f7UkanSjpcw352TjhVXQwa",
+          "type": "array",
+          "input": "[1,3]",
+          "order": 0
+        },
+        "m391DDVYo54TCpaLSAPp5i": {
+          "name": "m391DDVYo54TCpaLSAPp5i",
+          "type": "array",
+          "input": "[2]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmt3czb30002n90hiczuyugb": {
+      "id": "clmt3czb30002n90hiczuyugb",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2023-09-21T11:37:20.843Z",
+      "projectId": "clmt3czb30001n90htcfcue0g",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "fzEdb2okGjoXdJQXCiiaaw": {
+          "name": "fzEdb2okGjoXdJQXCiiaaw",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        },
+        "v9ALvgfTWyXRVvasiGtgnY": {
+          "name": "v9ALvgfTWyXRVvasiGtgnY",
+          "type": "array",
+          "input": "[[1,3],[2,3]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10720,6 +10823,30 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @param {number} x\n * @return {number}\n */\nvar minOperations = function (nums, x) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  const target = total - x;\n  let left = 0;\n  let right = 0;\n  let current = 0;\n  let max = -Infinity;\n\n  for (right; right < n; right++) {\n    nums.setColor(right, \"green\");\n    current += nums[right];\n    while (current > target && left <= right) {\n      nums.setColor(left, null);\n      current -= nums[left++];\n    }\n    if (current === target) {\n      max = Math.max(max, right - left + 1);\n    }\n  }\n\n  if (!Number.isFinite(max)) return -1;\n\n  return n - max;\n};\n\nreturn minOperations;\n",
+      "order": 0
+    },
+    "clmt1xwdg0003s40hb07kf1ti": {
+      "id": "clmt1xwdg0003s40hb07kf1ti",
+      "createdAt": "2023-09-21T10:50:37.733Z",
+      "updatedAt": "2023-09-21T10:57:36.939Z",
+      "projectId": "clmt1xwdg0001s40hdbc47fj2",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @return {number}\n */\nvar findMedianSortedArrays = function (nums1, nums2) {\n  if (nums1.length > nums2.length) {\n    [nums1, nums2] = [nums2, nums1];\n  }\n\n  const m = nums1.length;\n  const n = nums2.length;\n  const total = m + n;\n  const isEven = total % 2 === 0;\n\n  let left = 0;\n  let right = m;\n\n  while (left <= right) {\n    const partitionA = (left + right) >> 1;\n    const partitionB = ((total + 1) >> 1) - partitionA;\n\n    const maxLeftA = partitionA ? nums1[partitionA - 1] : -Infinity;\n    const minRightA = partitionA < m ? nums1[partitionA] : Infinity;\n    const maxLeftB = partitionB ? nums2[partitionB - 1] : -Infinity;\n    const minRightB = partitionB < n ? nums2[partitionB] : Infinity;\n\n    console.log({\n      partitionA,\n      partitionB,\n      maxLeftA,\n      minRightA,\n      maxLeftB,\n      minRightB,\n    });\n\n    if (maxLeftA <= minRightB && maxLeftB <= minRightA) {\n      if (isEven) {\n        return (\n          (Math.max(maxLeftA, maxLeftB) + Math.min(minRightA, minRightB)) / 2\n        );\n      } else {\n        return Math.max(maxLeftA, maxLeftB);\n      }\n    } else if (maxLeftA > minRightB) {\n      right = partitionA - 1;\n    } else {\n      left = partitionA + 1;\n    }\n  }\n\n  return 0;\n};\n\nreturn findMedianSortedArrays;\n",
+      "order": 0
+    },
+    "clmt3czb30003n90hr0zl2wmj": {
+      "id": "clmt3czb30003n90hr0zl2wmj",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2023-09-21T11:38:13.926Z",
+      "projectId": "clmt3czb30001n90htcfcue0g",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} relations\n * @return {number}\n */\nvar minimumSemesters = function (n, relations) {\n  const indegrees = new Array(n).fill(0);\n\n  const adjList = {};\n  for (const [from, to] of relations) {\n    (adjList[from - 1] ??= []).push(to - 1);\n    indegrees[to - 1]++;\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 0) queue.enqueue(i);\n  }\n  if (queue.isEmpty()) {\n    return -1;\n  }\n\n  console.log(adjList);\n  console.log(indegrees);\n\n  let steps = 0;\n  let visitedCount = 0;\n\n  while (!queue.isEmpty()) {\n    steps++;\n    const size = queue.size();\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      visitedCount++;\n      if (!adjList[node]) continue;\n\n      for (const neighbor of adjList[node]) {\n        if (indegrees[neighbor] > 0) {\n          indegrees[neighbor]--;\n          if (indegrees[neighbor] === 0) queue.enqueue(neighbor);\n        }\n      }\n    }\n  }\n\n  if (visitedCount < n) return -1;\n\n  return steps;\n};\n\nreturn minimumSemesters;\n",
       "order": 0
     }
   }
