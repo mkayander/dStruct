@@ -1805,6 +1805,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmuzuot40003pp0fi89e3ekk": {
+      "id": "clmuzuot40003pp0fi89e3ekk",
+      "createdAt": "2023-09-22T19:27:41.080Z",
+      "updatedAt": "2023-09-22T19:27:41.080Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Is Subsequence",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/is-subsequence",
+      "slug": "is-subsequence",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8530,6 +8544,31 @@
         }
       },
       "description": null
+    },
+    "clmuzuot40004pp0fznksdlfq": {
+      "id": "clmuzuot40004pp0fznksdlfq",
+      "createdAt": "2023-09-22T19:27:41.080Z",
+      "updatedAt": "2023-09-22T19:30:18.322Z",
+      "projectId": "clmuzuot40003pp0fi89e3ekk",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "abc",
+          "order": 0
+        },
+        "eeFv2ZcVEsP1p2e73KtykT": {
+          "name": "eeFv2ZcVEsP1p2e73KtykT",
+          "type": "string",
+          "input": "ahbgdc",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10847,6 +10886,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} relations\n * @return {number}\n */\nvar minimumSemesters = function (n, relations) {\n  const indegrees = new Array(n).fill(0);\n\n  const adjList = {};\n  for (const [from, to] of relations) {\n    (adjList[from - 1] ??= []).push(to - 1);\n    indegrees[to - 1]++;\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 0) queue.enqueue(i);\n  }\n  if (queue.isEmpty()) {\n    return -1;\n  }\n\n  console.log(adjList);\n  console.log(indegrees);\n\n  let steps = 0;\n  let visitedCount = 0;\n\n  while (!queue.isEmpty()) {\n    steps++;\n    const size = queue.size();\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      visitedCount++;\n      if (!adjList[node]) continue;\n\n      for (const neighbor of adjList[node]) {\n        if (indegrees[neighbor] > 0) {\n          indegrees[neighbor]--;\n          if (indegrees[neighbor] === 0) queue.enqueue(neighbor);\n        }\n      }\n    }\n  }\n\n  if (visitedCount < n) return -1;\n\n  return steps;\n};\n\nreturn minimumSemesters;\n",
+      "order": 0
+    },
+    "clmuzuot40005pp0f2xmizkf2": {
+      "id": "clmuzuot40005pp0f2xmizkf2",
+      "createdAt": "2023-09-22T19:27:41.080Z",
+      "updatedAt": "2023-09-22T19:31:34.353Z",
+      "projectId": "clmuzuot40003pp0fi89e3ekk",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nvar isSubsequence = function (s, t) {\n  if (!s) return true;\n\n  let p1 = 0;\n  let p2 = 0;\n\n  for (p2; p2 < t.length; p2++) {\n    t.setColor(p2, \"cyan\");\n    if (s[p1] === t[p2]) {\n      s.setColor(p1, \"green\");\n      p1++;\n      if (p1 === s.length) return true;\n    }\n  }\n\n  return false;\n};\n\nreturn isSubsequence;\n",
       "order": 0
     }
   }
