@@ -1819,6 +1819,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmw8rxet0001ov0hhtofpsh1": {
+      "id": "clmw8rxet0001ov0hhtofpsh1",
+      "createdAt": "2023-09-23T16:25:14.981Z",
+      "updatedAt": "2023-09-23T16:25:14.981Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest String Chain",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-string-chain",
+      "slug": "longest-string-chain",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8569,6 +8583,44 @@
         }
       },
       "description": null
+    },
+    "clmw8rxet0002ov0h9q5bgnp8": {
+      "id": "clmw8rxet0002ov0h9q5bgnp8",
+      "createdAt": "2023-09-23T16:25:14.981Z",
+      "updatedAt": "2023-09-23T16:26:02.658Z",
+      "projectId": "clmw8rxet0001ov0hhtofpsh1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "w7nmhWrjB3UmM95kxpuiGk": {
+          "name": "w7nmhWrjB3UmM95kxpuiGk",
+          "type": "array",
+          "input": "[\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clmw8tc3p0005ov0hxz2im8jq": {
+      "id": "clmw8tc3p0005ov0hxz2im8jq",
+      "createdAt": "2023-09-23T16:26:20.677Z",
+      "updatedAt": "2023-09-23T16:26:24.395Z",
+      "projectId": "clmw8rxet0001ov0hhtofpsh1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "w7nmhWrjB3UmM95kxpuiGk": {
+          "name": "w7nmhWrjB3UmM95kxpuiGk",
+          "type": "array",
+          "input": "[\"xbc\",\"pcxbcf\",\"xb\",\"cxbc\",\"pcxbc\"]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10898,6 +10950,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nvar isSubsequence = function (s, t) {\n  if (!s) return true;\n\n  let p1 = 0;\n  let p2 = 0;\n\n  for (p2; p2 < t.length; p2++) {\n    t.setColor(p2, \"cyan\");\n    if (s[p1] === t[p2]) {\n      s.setColor(p1, \"green\");\n      p1++;\n      if (p1 === s.length) return true;\n    }\n  }\n\n  return false;\n};\n\nreturn isSubsequence;\n",
+      "order": 0
+    },
+    "clmw8rxet0003ov0hqsp6n6q2": {
+      "id": "clmw8rxet0003ov0hqsp6n6q2",
+      "createdAt": "2023-09-23T16:25:14.981Z",
+      "updatedAt": "2023-09-23T16:25:31.290Z",
+      "projectId": "clmw8rxet0001ov0hhtofpsh1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} words\n * @return {number}\n */\nvar longestStrChain = function (words) {\n  const dp = {};\n\n  words.sort((a, b) => a.length - b.length);\n\n  let longestSequenceLength = 1;\n\n  for (const word of words) {\n    let presentLength = 1;\n\n    for (let i = 0; i < word.length; i++) {\n      const predecessor = word.slice(0, i) + word.slice(i + 1);\n      const prevLength = dp[predecessor] ?? 0;\n      presentLength = Math.max(presentLength, prevLength + 1);\n    }\n    dp[word] = presentLength;\n    longestSequenceLength = Math.max(longestSequenceLength, presentLength);\n  }\n\n  return longestSequenceLength;\n};\n\nreturn longestStrChain;\n",
       "order": 0
     }
   }
