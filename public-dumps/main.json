@@ -1833,6 +1833,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmxdpaho0001ob0gu2p4pi6b": {
+      "id": "clmxdpaho0001ob0gu2p4pi6b",
+      "createdAt": "2023-09-24T11:30:56.220Z",
+      "updatedAt": "2023-09-24T11:30:56.220Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Champagne Tower",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/champagne-tower",
+      "slug": "champagne-tower",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8621,6 +8635,99 @@
         }
       },
       "description": null
+    },
+    "clmxdpaho0002ob0gruo3c1x8": {
+      "id": "clmxdpaho0002ob0gruo3c1x8",
+      "createdAt": "2023-09-24T11:30:56.220Z",
+      "updatedAt": "2023-09-24T11:35:43.949Z",
+      "projectId": "clmxdpaho0001ob0gu2p4pi6b",
+      "title": "Case 1",
+      "order": 1,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4VZMYSaWem8UtCbixDoyst": {
+          "name": "4VZMYSaWem8UtCbixDoyst",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        },
+        "5bfDKmf1DSQP8ejJJTmk1w": {
+          "name": "5bfDKmf1DSQP8ejJJTmk1w",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        },
+        "jNTvVUMtyGVkK5o539sm9u": {
+          "name": "jNTvVUMtyGVkK5o539sm9u",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clmxdsq4p0005ob0gygcw40r4": {
+      "id": "clmxdsq4p0005ob0gygcw40r4",
+      "createdAt": "2023-09-24T11:33:36.457Z",
+      "updatedAt": "2023-09-24T11:35:43.949Z",
+      "projectId": "clmxdpaho0001ob0gu2p4pi6b",
+      "title": "Huge",
+      "order": 3,
+      "slug": "huge",
+      "input": null,
+      "args": {
+        "4VZMYSaWem8UtCbixDoyst": {
+          "name": "4VZMYSaWem8UtCbixDoyst",
+          "type": "number",
+          "input": "17",
+          "order": 2
+        },
+        "5bfDKmf1DSQP8ejJJTmk1w": {
+          "name": "5bfDKmf1DSQP8ejJJTmk1w",
+          "type": "number",
+          "input": "100000009",
+          "order": 0
+        },
+        "jNTvVUMtyGVkK5o539sm9u": {
+          "name": "jNTvVUMtyGVkK5o539sm9u",
+          "type": "number",
+          "input": "33",
+          "order": 1
+        }
+      },
+      "description": ""
+    },
+    "clmxdve2x0007ob0glgygciqt": {
+      "id": "clmxdve2x0007ob0glgygciqt",
+      "createdAt": "2023-09-24T11:35:40.809Z",
+      "updatedAt": "2023-09-24T11:37:29.161Z",
+      "projectId": "clmxdpaho0001ob0gu2p4pi6b",
+      "title": "Case 2",
+      "order": 2,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "4VZMYSaWem8UtCbixDoyst": {
+          "name": "4VZMYSaWem8UtCbixDoyst",
+          "type": "number",
+          "input": "4",
+          "order": 2
+        },
+        "5bfDKmf1DSQP8ejJJTmk1w": {
+          "name": "5bfDKmf1DSQP8ejJJTmk1w",
+          "type": "number",
+          "input": "25",
+          "order": 0
+        },
+        "jNTvVUMtyGVkK5o539sm9u": {
+          "name": "jNTvVUMtyGVkK5o539sm9u",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        }
+      },
+      "description": ""
     }
   },
   "solutions": {
@@ -10962,6 +11069,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string[]} words\n * @return {number}\n */\nvar longestStrChain = function (words) {\n  const dp = {};\n\n  words.sort((a, b) => a.length - b.length);\n\n  let longestSequenceLength = 1;\n\n  for (const word of words) {\n    let presentLength = 1;\n\n    for (let i = 0; i < word.length; i++) {\n      const predecessor = word.slice(0, i) + word.slice(i + 1);\n      const prevLength = dp[predecessor] ?? 0;\n      presentLength = Math.max(presentLength, prevLength + 1);\n    }\n    dp[word] = presentLength;\n    longestSequenceLength = Math.max(longestSequenceLength, presentLength);\n  }\n\n  return longestSequenceLength;\n};\n\nreturn longestStrChain;\n",
+      "order": 0
+    },
+    "clmxdpaho0003ob0goayn51c9": {
+      "id": "clmxdpaho0003ob0goayn51c9",
+      "createdAt": "2023-09-24T11:30:56.220Z",
+      "updatedAt": "2023-09-24T11:33:30.300Z",
+      "projectId": "clmxdpaho0001ob0gu2p4pi6b",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} poured\n * @param {number} query_row\n * @param {number} query_glass\n * @return {number}\n */\nvar champagneTower = function (poured, query_row, query_glass) {\n  let prevRow = new Array(1);\n  prevRow[0] = poured;\n\n  for (let i = 1; i <= query_row; i++) {\n    const currRow = new Array(i + 1).fill(0);\n    for (let j = 0; j < prevRow.length; j++) {\n      if (prevRow[j] <= 1) continue;\n      const excess = (prevRow[j] - 1) / 2;\n      prevRow[j] = 1;\n\n      currRow[j] = currRow[j] + excess;\n      currRow[j + 1] = currRow[j + 1] + excess;\n    }\n\n    prevRow = currRow;\n  }\n\n  return Math.min(prevRow[query_glass], 1);\n};\n\nreturn champagneTower;\n",
       "order": 0
     }
   }
