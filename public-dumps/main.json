@@ -1847,6 +1847,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clmz95u7b0001o60hnq81ctrx": {
+      "id": "clmz95u7b0001o60hnq81ctrx",
+      "createdAt": "2023-09-25T18:59:22.535Z",
+      "updatedAt": "2023-09-25T18:59:22.535Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find the Difference",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/find-the-difference",
+      "slug": "find-the-difference",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8701,7 +8715,7 @@
     "clmxdve2x0007ob0glgygciqt": {
       "id": "clmxdve2x0007ob0glgygciqt",
       "createdAt": "2023-09-24T11:35:40.809Z",
-      "updatedAt": "2023-09-24T11:37:29.161Z",
+      "updatedAt": "2023-09-24T11:39:46.695Z",
       "projectId": "clmxdpaho0001ob0gu2p4pi6b",
       "title": "Case 2",
       "order": 2,
@@ -8711,7 +8725,7 @@
         "4VZMYSaWem8UtCbixDoyst": {
           "name": "4VZMYSaWem8UtCbixDoyst",
           "type": "number",
-          "input": "4",
+          "input": "5",
           "order": 2
         },
         "5bfDKmf1DSQP8ejJJTmk1w": {
@@ -8723,11 +8737,36 @@
         "jNTvVUMtyGVkK5o539sm9u": {
           "name": "jNTvVUMtyGVkK5o539sm9u",
           "type": "number",
-          "input": "5",
+          "input": "6",
           "order": 1
         }
       },
       "description": ""
+    },
+    "clmz95u7b0002o60hddnvtutu": {
+      "id": "clmz95u7b0002o60hddnvtutu",
+      "createdAt": "2023-09-25T18:59:22.535Z",
+      "updatedAt": "2023-09-25T18:59:57.763Z",
+      "projectId": "clmz95u7b0001o60hnq81ctrx",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "abcd",
+          "order": 0
+        },
+        "c29iyyrV95GP9pgRujbqw1": {
+          "name": "c29iyyrV95GP9pgRujbqw1",
+          "type": "string",
+          "input": "abcde",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11081,6 +11120,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number} poured\n * @param {number} query_row\n * @param {number} query_glass\n * @return {number}\n */\nvar champagneTower = function (poured, query_row, query_glass) {\n  let prevRow = new Array(1);\n  prevRow[0] = poured;\n\n  for (let i = 1; i <= query_row; i++) {\n    const currRow = new Array(i + 1).fill(0);\n    for (let j = 0; j < prevRow.length; j++) {\n      if (prevRow[j] <= 1) continue;\n      const excess = (prevRow[j] - 1) / 2;\n      prevRow[j] = 1;\n\n      currRow[j] = currRow[j] + excess;\n      currRow[j + 1] = currRow[j + 1] + excess;\n    }\n\n    prevRow = currRow;\n  }\n\n  return Math.min(prevRow[query_glass], 1);\n};\n\nreturn champagneTower;\n",
+      "order": 0
+    },
+    "clmz95u7b0003o60hk9nkfb1f": {
+      "id": "clmz95u7b0003o60hk9nkfb1f",
+      "createdAt": "2023-09-25T18:59:22.535Z",
+      "updatedAt": "2023-09-25T19:00:05.714Z",
+      "projectId": "clmz95u7b0001o60hnq81ctrx",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {character}\n */\nvar findTheDifference = function (s, t) {\n  const freqMap = new Map();\n\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n  }\n\n  for (const char of t) {\n    if (!freqMap.has(char) || freqMap.get(char) === 0) return char;\n\n    freqMap.set(char, freqMap.get(char) - 1);\n  }\n};\n\nreturn findTheDifference;",
       "order": 0
     }
   }
