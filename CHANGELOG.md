@@ -1,3 +1,12 @@
+# [1.212.0](https://github.com/mkayander/leetpal/compare/v1.211.0...v1.212.0) (2023-09-26)
+
+
+### Features
+
+* Implemented an "Enumerable" decorator ([f6e71af](https://github.com/mkayander/leetpal/commit/f6e71af31508abe71647061d87d356d5b93a7066))
+* Make custom data structure properties non-enumerable ([6e674eb](https://github.com/mkayander/leetpal/commit/6e674eb606cb3c521675ede8b584dda93fb702a3))
+* Updated Next.JS ([205fab0](https://github.com/mkayander/leetpal/commit/205fab048deebc03c38eb32574758cdd62532ead))
+
 # [1.211.0](https://github.com/mkayander/leetpal/compare/v1.210.1...v1.211.0) (2023-09-26)
 
 
