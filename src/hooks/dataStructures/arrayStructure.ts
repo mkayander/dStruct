@@ -25,29 +25,50 @@ export type ControlledArrayRuntimeOptions = {
 };
 
 export class ControlledArray<T> extends Array<T> {
-  private readonly itemsMeta: ArrayItemData[];
-  private readonly _argType: ArgumentType.ARRAY | ArgumentType.MATRIX;
+  private readonly name!: string;
+  private readonly itemsMeta!: ArrayItemData[];
+  private readonly _argType!: ArgumentType.ARRAY | ArgumentType.MATRIX;
+  private readonly dispatch!: AppDispatch;
 
   constructor(
     array: Array<T>,
-    private readonly name: string,
+    name: string,
     arrayData: EntityState<ArrayItemData>,
-    private dispatch: AppDispatch,
+    dispatch: AppDispatch,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions
   ) {
     super();
 
     let actionArrayData: EntityState<ArrayItemData> | undefined = undefined;
-    this._argType = ArgumentType.ARRAY;
+    let _argType: ArgumentType.ARRAY | ArgumentType.MATRIX = ArgumentType.ARRAY;
 
     if (options?.matrixName) {
-      this.name = options.matrixName;
-      this._argType = ArgumentType.MATRIX;
+      name = options.matrixName;
+      _argType = ArgumentType.MATRIX;
       options.length = array.length;
     } else {
       actionArrayData = arrayData;
     }
+
+    Object.defineProperties(this, {
+      name: {
+        value: name,
+        enumerable: false,
+      },
+      itemsMeta: {
+        value: arrayDataItemSelectors.selectAll(arrayData),
+        enumerable: false,
+      },
+      _argType: {
+        value: _argType,
+        enumerable: false,
+      },
+      dispatch: {
+        value: dispatch,
+        enumerable: false,
+      },
+    });
 
     this.push(...array);
 
@@ -60,8 +81,6 @@ export class ControlledArray<T> extends Array<T> {
         })
       );
     }
-
-    this.itemsMeta = arrayDataItemSelectors.selectAll(arrayData);
 
     return new Proxy(this, {
       set: (target, prop, value) => {

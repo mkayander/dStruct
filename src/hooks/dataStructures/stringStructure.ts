@@ -15,16 +15,32 @@ import { ArgumentType } from "#/utils/argumentObject";
 const uuid = shortUUID();
 
 export class ControlledString extends String {
-  private readonly itemsMeta: ArrayItemData[];
+  private readonly name!: string;
+  private readonly itemsMeta!: ArrayItemData[];
+  private readonly dispatch!: AppDispatch;
 
   constructor(
     value: unknown,
-    private name: string,
+    name: string,
     arrayData: EntityState<ArrayItemData>,
-    private dispatch: AppDispatch,
+    dispatch: AppDispatch,
     addToCallstack?: boolean
   ) {
     super(value);
+    Object.defineProperties(this, {
+      name: {
+        value: name,
+        enumerable: false,
+      },
+      itemsMeta: {
+        value: arrayDataItemSelectors.selectAll(arrayData),
+        enumerable: false,
+      },
+      dispatch: {
+        value: dispatch,
+        enumerable: false,
+      },
+    });
 
     if (addToCallstack) {
       this.dispatch(
@@ -35,8 +51,6 @@ export class ControlledString extends String {
         })
       );
     }
-
-    this.itemsMeta = arrayDataItemSelectors.selectAll(arrayData);
   }
 
   public setColor(index: number, color: string | null, animation?: string) {
