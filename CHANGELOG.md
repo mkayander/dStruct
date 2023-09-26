@@ -1,3 +1,10 @@
+# [1.211.0](https://github.com/mkayander/leetpal/compare/v1.210.1...v1.211.0) (2023-09-26)
+
+
+### Features
+
+* Removed test API endpoints ([c0105a6](https://github.com/mkayander/leetpal/commit/c0105a62a62232e15c30f4f67378c46d51ec03dc))
+
 ## [1.210.1](https://github.com/mkayander/leetpal/compare/v1.210.0...v1.210.1) (2023-09-11)
 
 
