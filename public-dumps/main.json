@@ -1861,6 +1861,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cln0igalv0001p60hr0ds55ch": {
+      "id": "cln0igalv0001p60hr0ds55ch",
+      "createdAt": "2023-09-26T16:07:13.075Z",
+      "updatedAt": "2023-09-26T16:07:13.075Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Duplicate Letters",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/remove-duplicate-letters",
+      "slug": "remove-duplicate-letters",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cln23ccb00001mh0hpdpi0c63": {
+      "id": "cln23ccb00001mh0hpdpi0c63",
+      "createdAt": "2023-09-27T18:39:46.764Z",
+      "updatedAt": "2023-09-27T18:39:46.764Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Decoded String at Index",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/decoded-string-at-index",
+      "slug": "decoded-string-at-index",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8767,6 +8795,119 @@
         }
       },
       "description": null
+    },
+    "cln0igalv0002p60h44c8krv4": {
+      "id": "cln0igalv0002p60h44c8krv4",
+      "createdAt": "2023-09-26T16:07:13.075Z",
+      "updatedAt": "2023-09-26T16:07:32.605Z",
+      "projectId": "cln0igalv0001p60hr0ds55ch",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2RnHFTuyFHqDGgzLYpDrc7": {
+          "name": "2RnHFTuyFHqDGgzLYpDrc7",
+          "type": "string",
+          "input": "bcabc",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cln0ih1t60005p60h9whv5xo5": {
+      "id": "cln0ih1t60005p60h9whv5xo5",
+      "createdAt": "2023-09-26T16:07:48.331Z",
+      "updatedAt": "2023-09-26T16:07:53.405Z",
+      "projectId": "cln0igalv0001p60hr0ds55ch",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "2RnHFTuyFHqDGgzLYpDrc7": {
+          "name": "2RnHFTuyFHqDGgzLYpDrc7",
+          "type": "string",
+          "input": "cbacdcbc",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cln23ccb00002mh0h3okq9jp1": {
+      "id": "cln23ccb00002mh0h3okq9jp1",
+      "createdAt": "2023-09-27T18:39:46.764Z",
+      "updatedAt": "2023-09-27T18:41:06.612Z",
+      "projectId": "cln23ccb00001mh0hpdpi0c63",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "a2b3c4d5e6f7g8h9",
+          "order": 0
+        },
+        "x7NjWa43zTic3WtFCAozu9": {
+          "name": "x7NjWa43zTic3WtFCAozu9",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cln23fkvo0005mh0hnin8zqh7": {
+      "id": "cln23fkvo0005mh0hnin8zqh7",
+      "createdAt": "2023-09-27T18:42:17.844Z",
+      "updatedAt": "2023-09-27T18:42:23.714Z",
+      "projectId": "cln23ccb00001mh0hpdpi0c63",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "leet2code3",
+          "order": 0
+        },
+        "x7NjWa43zTic3WtFCAozu9": {
+          "name": "x7NjWa43zTic3WtFCAozu9",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cln23url20009mh0hre84706o": {
+      "id": "cln23url20009mh0hre84706o",
+      "createdAt": "2023-09-27T18:54:06.374Z",
+      "updatedAt": "2023-09-27T18:56:05.153Z",
+      "projectId": "cln23ccb00001mh0hpdpi0c63",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "a2b2c4d5e6f7g8h9",
+          "order": 0
+        },
+        "x7NjWa43zTic3WtFCAozu9": {
+          "name": "x7NjWa43zTic3WtFCAozu9",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11133,6 +11274,42 @@
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {character}\n */\nvar findTheDifference = function (s, t) {\n  const freqMap = new Map();\n\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n  }\n\n  for (const char of t) {\n    if (!freqMap.has(char) || freqMap.get(char) === 0) return char;\n\n    freqMap.set(char, freqMap.get(char) - 1);\n  }\n};\n\nreturn findTheDifference;",
       "order": 0
+    },
+    "cln0igalv0003p60hfltddxkh": {
+      "id": "cln0igalv0003p60hfltddxkh",
+      "createdAt": "2023-09-26T16:07:13.075Z",
+      "updatedAt": "2023-09-26T18:23:44.333Z",
+      "projectId": "cln0igalv0001p60hr0ds55ch",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar removeDuplicateLetters = function (s) {\n  const stack = new Array();\n  const seen = new Set();\n\n  const lastOccurrence = {};\n\n  for (let i = 0; i < s.length; i++) {\n    lastOccurrence[s[i]] = i;\n  }\n\n  console.log(lastOccurrence);\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"green\");\n    const char = s[i];\n    if (seen.has(char)) continue;\n\n    while (stack.at(-1) > char && i < lastOccurrence[stack.at(-1)]) {\n      seen.delete(stack.pop());\n    }\n    seen.add(char);\n    stack.push(char);\n  }\n\n  return stack.join(\"\");\n};\n\nreturn removeDuplicateLetters;\n",
+      "order": 0
+    },
+    "cln23ccb00003mh0hmxzafyhf": {
+      "id": "cln23ccb00003mh0hmxzafyhf",
+      "createdAt": "2023-09-27T18:39:46.764Z",
+      "updatedAt": "2023-09-27T18:53:32.336Z",
+      "projectId": "cln23ccb00001mh0hpdpi0c63",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {string}\n */\nvar decodeAtIndex = function (s, k) {\n  k = BigInt(k);\n  const n = s.length;\n  let size = 0n;\n\n  // const isNum = (char) => char >= \"1\" && char <= \"9\";\n\n  for (let i = 0; i < n; i++) {\n    s.setColor(i, \"cyan\");\n    const char = s[i];\n    if (!isNaN(char)) {\n      size *= BigInt(char);\n    } else {\n      size++;\n    }\n  }\n\n  for (let i = n - 1; i >= 0; i--) {\n    s.setColor(i, \"green\");\n    const char = s[i];\n    k %= size;\n\n    console.log({ size, k });\n\n    if (k === 0n && isNaN(char)) {\n      return char;\n    }\n\n    if (!isNaN(char)) {\n      size /= BigInt(char);\n    } else {\n      size--;\n    }\n  }\n\n  return null;\n};\n\nreturn decodeAtIndex;\n",
+      "order": 0
+    },
+    "cln23it6b0007mh0h4chxa46n": {
+      "id": "cln23it6b0007mh0h4chxa46n",
+      "createdAt": "2023-09-27T18:44:48.563Z",
+      "updatedAt": "2023-09-27T18:49:28.989Z",
+      "projectId": "cln23ccb00001mh0hpdpi0c63",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {string}\n */\nvar decodeAtIndex = function (s, k) {\n  k = BigInt(k);\n  let size = 0n;\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"cyan\");\n    const char = s[i];\n    if (isNaN(char)) {\n      size++;\n    } else {\n      size *= BigInt(char);\n    }\n  }\n\n  for (let i = s.length - 1; i >= 0; i--) {\n    s.setColor(i, \"green\");\n    const char = s[i];\n    const isNumber = !isNaN(char);\n\n    k %= size;\n    console.log({size, k});\n    if (k === 0n && !isNumber) return char;\n\n    if (isNumber) {\n      size /= BigInt(char);\n    } else {\n      size--;\n    }\n  }\n\n  return \"\";\n};\n\nreturn decodeAtIndex;\n",
+      "order": 1
     }
   }
 }
