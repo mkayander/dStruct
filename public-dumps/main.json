@@ -1889,6 +1889,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cln2x34e00001pm0h473z8mup": {
+      "id": "cln2x34e00001pm0h473z8mup",
+      "createdAt": "2023-09-28T08:32:25.081Z",
+      "updatedAt": "2023-09-28T08:32:25.081Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sort Array By Parity",
+      "category": "TWO_POINTERS",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/sort-array-by-parity",
+      "slug": "sort-array-by-parity",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8908,6 +8922,44 @@
         }
       },
       "description": null
+    },
+    "cln2x34e00002pm0hg78vasbm": {
+      "id": "cln2x34e00002pm0hg78vasbm",
+      "createdAt": "2023-09-28T08:32:25.081Z",
+      "updatedAt": "2023-09-28T08:34:06.123Z",
+      "projectId": "cln2x34e00001pm0h473z8mup",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5CWfHWq3ECAQ4CCeHCEFbT": {
+          "name": "5CWfHWq3ECAQ4CCeHCEFbT",
+          "type": "array",
+          "input": "[3,1,2,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cln2x8h7g0005pm0h77ycvv9b": {
+      "id": "cln2x8h7g0005pm0h77ycvv9b",
+      "createdAt": "2023-09-28T08:36:34.972Z",
+      "updatedAt": "2023-09-28T08:36:42.376Z",
+      "projectId": "cln2x34e00001pm0h473z8mup",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "5CWfHWq3ECAQ4CCeHCEFbT": {
+          "name": "5CWfHWq3ECAQ4CCeHCEFbT",
+          "type": "array",
+          "input": "[0,1,2]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11309,6 +11361,30 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {string}\n */\nvar decodeAtIndex = function (s, k) {\n  k = BigInt(k);\n  let size = 0n;\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"cyan\");\n    const char = s[i];\n    if (isNaN(char)) {\n      size++;\n    } else {\n      size *= BigInt(char);\n    }\n  }\n\n  for (let i = s.length - 1; i >= 0; i--) {\n    s.setColor(i, \"green\");\n    const char = s[i];\n    const isNumber = !isNaN(char);\n\n    k %= size;\n    console.log({size, k});\n    if (k === 0n && !isNumber) return char;\n\n    if (isNumber) {\n      size /= BigInt(char);\n    } else {\n      size--;\n    }\n  }\n\n  return \"\";\n};\n\nreturn decodeAtIndex;\n",
+      "order": 1
+    },
+    "cln2x34e00003pm0hhr4mfb0r": {
+      "id": "cln2x34e00003pm0hhr4mfb0r",
+      "createdAt": "2023-09-28T08:32:25.081Z",
+      "updatedAt": "2023-09-28T08:41:14.643Z",
+      "projectId": "cln2x34e00001pm0h473z8mup",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar sortArrayByParity = function (nums) {\n  let left = 0;\n\n  while (nums[left] % 2 === 0) {\n    nums.setColor(left, \"cyan\");\n    left++;\n  }\n\n  for (let right = left + 1; right < nums.length; right++) {\n    nums.setColor(right, \"green\");\n    if (nums[right] % 2 === 0) {\n      nums.setColor(left, \"cyan\");\n      [nums[left], nums[right]] = [nums[right], nums[left]];\n      left++;\n    }\n  }\n\n  return nums;\n};\n\nreturn sortArrayByParity;\n",
+      "order": 0
+    },
+    "cln2x9f7g0007pm0hnca7378l": {
+      "id": "cln2x9f7g0007pm0hnca7378l",
+      "createdAt": "2023-09-28T08:37:19.036Z",
+      "updatedAt": "2023-09-28T08:39:49.081Z",
+      "projectId": "cln2x34e00001pm0h473z8mup",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar sortArrayByParity = function (nums) {\n  const length = nums.length;\n  let left = 0;\n  let right = length - 1;\n  if (length <= 1) return nums;\n\n  while (left < right) {\n    if (nums[right] % 2 === 0) {\n      nums.setColor(left, \"cyan\");\n      [nums[left], nums[right]] = [nums[right], nums[left]];\n      left++;\n    } else {\n      nums.setColor(right, \"green\");\n      right--;\n    }\n  }\n  return nums;\n};\n\nreturn sortArrayByParity;\n",
       "order": 1
     }
   }
