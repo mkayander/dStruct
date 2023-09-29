@@ -1903,6 +1903,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cln3ih4kh0001o80f5yru6c2i": {
+      "id": "cln3ih4kh0001o80f5yru6c2i",
+      "createdAt": "2023-09-28T18:31:10.433Z",
+      "updatedAt": "2023-09-28T18:31:10.433Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reverse Nodes in k-Group",
+      "category": "LINKED_LIST",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/reverse-nodes-in-k-group",
+      "slug": "reverse-nodes-in-k-group",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -8960,6 +8974,81 @@
         }
       },
       "description": null
+    },
+    "cln3ih4kh0002o80f2sxqx2aj": {
+      "id": "cln3ih4kh0002o80f2sxqx2aj",
+      "createdAt": "2023-09-28T18:31:10.433Z",
+      "updatedAt": "2023-09-28T18:32:09.906Z",
+      "projectId": "cln3ih4kh0001o80f5yru6c2i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "wLizDpMnmnmFQ71nqYd11g": {
+          "name": "wLizDpMnmnmFQ71nqYd11g",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cln3iigm00005o80f44ycfb18": {
+      "id": "cln3iigm00005o80f44ycfb18",
+      "createdAt": "2023-09-28T18:32:12.697Z",
+      "updatedAt": "2023-09-28T18:32:29.319Z",
+      "projectId": "cln3ih4kh0001o80f5yru6c2i",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "wLizDpMnmnmFQ71nqYd11g": {
+          "name": "wLizDpMnmnmFQ71nqYd11g",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cln3iivcu0007o80f81kbmpmx": {
+      "id": "cln3iivcu0007o80f81kbmpmx",
+      "createdAt": "2023-09-28T18:32:31.806Z",
+      "updatedAt": "2023-09-28T18:32:41.998Z",
+      "projectId": "cln3ih4kh0001o80f5yru6c2i",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5,6,7,8,9,10]",
+          "order": 0
+        },
+        "wLizDpMnmnmFQ71nqYd11g": {
+          "name": "wLizDpMnmnmFQ71nqYd11g",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11386,6 +11475,18 @@
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar sortArrayByParity = function (nums) {\n  const length = nums.length;\n  let left = 0;\n  let right = length - 1;\n  if (length <= 1) return nums;\n\n  while (left < right) {\n    if (nums[right] % 2 === 0) {\n      nums.setColor(left, \"cyan\");\n      [nums[left], nums[right]] = [nums[right], nums[left]];\n      left++;\n    } else {\n      nums.setColor(right, \"green\");\n      right--;\n    }\n  }\n  return nums;\n};\n\nreturn sortArrayByParity;\n",
       "order": 1
+    },
+    "cln3ih4kh0003o80f8gu6amu3": {
+      "id": "cln3ih4kh0003o80f8gu6amu3",
+      "createdAt": "2023-09-28T18:31:10.433Z",
+      "updatedAt": "2023-09-28T18:31:34.859Z",
+      "projectId": "cln3ih4kh0001o80f5yru6c2i",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode}\n */\nvar reverseKGroup = function (head, k) {\n  if (k === 1) return head;\n\n  const dummy = new ListNode();\n  dummy.next = head;\n\n  let left = dummy;\n  let current = dummy;\n\n  let size = 0;\n  while (current) {\n    if (size === k) {\n      const tmp = left.next;\n      current = current.next;\n      left.next = reverseInRange(left.next, k);\n      left = tmp;\n      left.next = current;\n\n      size = 1;\n    } else {\n      current = current.next;\n      size++;\n    }\n  }\n\n  return dummy.next;\n};\n\nfunction reverseInRange(head, size) {\n  let newHead = null;\n\n  while (head && size) {\n    const tmp = head.next;\n    head.next = newHead;\n    last = newHead;\n    newHead = head;\n    head = tmp;\n    size--;\n  }\n\n  return newHead;\n}\n\nreturn reverseKGroup;\n",
+      "order": 0
     }
   }
 }
