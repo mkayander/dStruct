@@ -1,3 +1,11 @@
+# [1.214.0](https://github.com/mkayander/leetpal/compare/v1.213.0...v1.214.0) (2023-09-30)
+
+
+### Features
+
+* Don't run prettier on save ([e87454f](https://github.com/mkayander/leetpal/commit/e87454f16108fc0cf455ee73436e5006d99089d9))
+* Run global formatting with the new Prettier version ([4d796fc](https://github.com/mkayander/leetpal/commit/4d796fc94ebdd848c731144b1cf15c7f12e6239a))
+
 # [1.213.0](https://github.com/mkayander/leetpal/compare/v1.212.0...v1.213.0) (2023-09-30)
 
 
