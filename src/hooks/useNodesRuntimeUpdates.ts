@@ -17,10 +17,10 @@ import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 export const useNodesRuntimeUpdates = (
   [frameIndex, setFrameIndex]: [
     number,
-    React.Dispatch<React.SetStateAction<number>>
+    React.Dispatch<React.SetStateAction<number>>,
   ],
   playbackInterval: number,
-  replayCount: number
+  replayCount: number,
 ) => {
   const dispatch = useAppDispatch();
 
@@ -50,7 +50,7 @@ export const useNodesRuntimeUpdates = (
                   animation: validateAnimationName(frame.args[1]),
                 },
               },
-            })
+            }),
           );
           break;
 
@@ -61,7 +61,7 @@ export const useNodesRuntimeUpdates = (
               data: {
                 colorMap: frame.args[0],
               },
-            })
+            }),
           );
           break;
 
@@ -75,7 +75,7 @@ export const useNodesRuntimeUpdates = (
                   value: frame.args[0] ?? undefined,
                 },
               },
-            })
+            }),
           );
           break;
 
@@ -98,7 +98,7 @@ export const useNodesRuntimeUpdates = (
                   x: 0,
                   childrenIds: [],
                 },
-              })
+              }),
             );
           }
           break;
@@ -113,7 +113,7 @@ export const useNodesRuntimeUpdates = (
                   value: frame.args[0],
                   index: frame.args[1],
                 },
-              })
+              }),
             );
           break;
 
@@ -128,7 +128,7 @@ export const useNodesRuntimeUpdates = (
                   argType: frame.argType,
                   options: frame.args[1],
                 },
-              })
+              }),
             );
           break;
 
@@ -139,7 +139,7 @@ export const useNodesRuntimeUpdates = (
               data: {
                 id: frame.nodeId,
               },
-            })
+            }),
           );
           break;
 
@@ -156,7 +156,7 @@ export const useNodesRuntimeUpdates = (
                   childId: childId ?? undefined,
                   childTreeName,
                 },
-              })
+              }),
             );
           }
           break;
@@ -172,7 +172,7 @@ export const useNodesRuntimeUpdates = (
                   childId: childId ?? undefined,
                   childTreeName,
                 },
-              })
+              }),
             );
           }
           break;
@@ -187,7 +187,7 @@ export const useNodesRuntimeUpdates = (
                   animation: "blink",
                 },
               },
-            })
+            }),
           );
           break;
 
@@ -195,7 +195,7 @@ export const useNodesRuntimeUpdates = (
           console.error("Unknown frame name: ", frame.name);
       }
     },
-    [dispatch]
+    [dispatch],
   );
 
   useEffect(() => {

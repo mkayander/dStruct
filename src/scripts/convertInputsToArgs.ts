@@ -17,7 +17,7 @@ import { argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
             }),
           },
         },
-      })
-    )
+      }),
+    ),
   );
 })();

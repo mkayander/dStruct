@@ -7,7 +7,7 @@ export const useDailyQuestionData = (
   options?: Exclude<
     Parameters<typeof useQuestionDataQuery>,
     "variables" | "skip"
-  >
+  >,
 ) => {
   const questionOfTodayQuery = useQuestionOfTodayQuery();
   const { activeDailyCodingChallengeQuestion } =

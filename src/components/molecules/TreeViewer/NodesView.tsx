@@ -51,7 +51,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
               type={data.type}
               {...node}
             />
-          )
+          ),
       )}
     </Box>
   );

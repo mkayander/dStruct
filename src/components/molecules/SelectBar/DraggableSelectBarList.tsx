@@ -29,7 +29,7 @@ type DraggableSelectBarListProps = Omit<
   addItemTitle?: string;
   children(
     provided: DroppableProvided,
-    snapshot: DroppableStateSnapshot
+    snapshot: DroppableStateSnapshot,
   ): React.ReactNode | undefined;
 };
 

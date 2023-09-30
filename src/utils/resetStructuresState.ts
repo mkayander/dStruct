@@ -4,7 +4,7 @@ import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 
 export const resetStructuresState = (
   dispatch: AppDispatch,
-  performBackup = true
+  performBackup = true,
 ) => {
   [treeNodeSlice, arrayStructureSlice].forEach((slice) => {
     performBackup && dispatch(slice.actions.backupAllNodes());

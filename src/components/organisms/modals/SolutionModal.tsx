@@ -54,7 +54,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
 
   const currentSolution = trpc.project.getSolutionBySlug.useQuery(
     { projectId: currentProjectId, slug: solutionSlug },
-    { enabled: Boolean(currentProjectId && solutionSlug) }
+    { enabled: Boolean(currentProjectId && solutionSlug) },
   );
 
   const trpcUtils = trpc.useContext();
@@ -105,7 +105,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
 
       enqueueSnackbar(
         `🚀 Solution "${data.title}" was successfully updated 📝`,
-        { variant: "success" }
+        { variant: "success" },
       );
     },
   });
@@ -120,7 +120,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         `🚀 Solution "${data.title}" was successfully deleted 🧹`,
         {
           variant: "success",
-        }
+        },
       );
     },
   });
@@ -142,7 +142,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     if (!currentSolution.data) return;
     if (
       !confirm(
-        `Are you sure you want to delete the "${currentSolution.data.title}" test case? This action cannot be undone.`
+        `Are you sure you want to delete the "${currentSolution.data.title}" test case? This action cannot be undone.`,
       ) // TODO: Replace with a custom modal
     )
       return;
@@ -159,7 +159,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       slugify(value ?? formik.values.solutionName, {
         lower: true,
         strict: true,
-      })
+      }),
     );
   };
 

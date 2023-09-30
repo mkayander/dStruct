@@ -45,7 +45,7 @@ const getInitialData = (
   order: number,
   argType: ArgumentArrayType,
   parentName?: string,
-  childNames?: string[]
+  childNames?: string[],
 ): ArrayData => ({
   ...getInitialDataBase(arrayDataAdapter),
   order,
@@ -76,7 +76,7 @@ export const arrayStructureSlice = createSlice({
         childNames?: string[];
         order: number;
         argType: ArgumentArrayType;
-      }>
+      }>,
     ) => {
       const { name, order, argType, parentName, childNames } = action.payload;
       state[name] = getInitialData(order, argType, parentName, childNames);
@@ -87,7 +87,7 @@ export const arrayStructureSlice = createSlice({
         argType: ArgumentArrayType;
         nodes?: EntityState<ArrayItemData>;
         options?: ControlledArrayRuntimeOptions;
-      }>
+      }>,
     ) => {
       const {
         payload: {
@@ -102,7 +102,7 @@ export const arrayStructureSlice = createSlice({
       };
       if (matrixName && length) {
         treeState.childNames = Array.from({ length }, (_, i) =>
-          getChildArrayName(matrixName, i)
+          getChildArrayName(matrixName, i),
         );
       } else if (nodes) {
         treeState.nodes = nodes;

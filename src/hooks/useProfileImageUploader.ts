@@ -21,7 +21,7 @@ const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
 export const useProfileImageUploader = (session: SessionHook) => {
   let bucketImage = session.data?.user.bucketImage;
   const [status, setStatus] = useState<Status>(
-    bucketImage ? "done" : "loading"
+    bucketImage ? "done" : "loading",
   );
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,12 +49,12 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       const { data: imageBlob } = await axios.get<Blob>(
         session.data.user.image,
-        { responseType: "blob" }
+        { responseType: "blob" },
       );
       const filename = getAvatarFileName(
         session.data.user.name || session.data.user.id,
         session.data.user.image,
-        imageBlob
+        imageBlob,
       );
       const fileType = encodeURIComponent(imageBlob.type);
 
@@ -62,8 +62,8 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       const awsResponse = await axios.get<S3.PresignedPost>(
         `/api/upload-url?file=${encodeURIComponent(
-          filename
-        )}&fileType=${fileType}`
+          filename,
+        )}&fileType=${fileType}`,
       );
       const { url, fields } = awsResponse.data;
 

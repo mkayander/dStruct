@@ -19,7 +19,7 @@ export abstract class NodeBase {
     val: number | string,
     readonly meta: NodeMeta,
     protected name: string,
-    protected dispatch: AppDispatch
+    protected dispatch: AppDispatch,
   ) {
     this._val = val;
     this.meta = meta;
@@ -36,7 +36,7 @@ export abstract class NodeBase {
         ...this.getDispatchBase(),
         name: "setVal",
         args: [value],
-      })
+      }),
     );
   }
 
@@ -46,7 +46,7 @@ export abstract class NodeBase {
         ...this.getDispatchBase(),
         name: "setColor",
         args: [color, animation],
-      })
+      }),
     );
   }
 
@@ -58,7 +58,7 @@ export abstract class NodeBase {
         ...base,
         name: "setColorMap",
         args: [map],
-      })
+      }),
     );
   }
 
@@ -68,7 +68,7 @@ export abstract class NodeBase {
         ...this.getDispatchBase(),
         name: "blink",
         args: [],
-      })
+      }),
     );
   }
 

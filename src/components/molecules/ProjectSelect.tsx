@@ -72,7 +72,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
             }}
           >
             {categoryLabels[project.category]}
-          </ListSubheader>
+          </ListSubheader>,
         );
       }
 
@@ -123,7 +123,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
               )}
             </Stack>
           </Stack>
-        </MenuItem>
+        </MenuItem>,
       );
     }
 

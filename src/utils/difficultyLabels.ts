@@ -10,8 +10,8 @@ export const difficultyLabels: Record<ProjectDifficulty, string> = {
 };
 
 export const getDifficultyColor = (
-  theme: typeof themes["dark"],
-  difficulty?: ProjectDifficulty | null
+  theme: (typeof themes)["dark"],
+  difficulty?: ProjectDifficulty | null,
 ) => {
   switch (difficulty) {
     case ProjectDifficulty.EASY:
@@ -27,7 +27,7 @@ export const getDifficultyColor = (
 };
 
 export const getDifficultyValue = (
-  difficulty: Difficulty | undefined | null
+  difficulty: Difficulty | undefined | null,
 ): ProjectDifficulty => {
   switch (difficulty) {
     default:

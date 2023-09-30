@@ -26,7 +26,7 @@ const fetchEntityData = async (key: string) => {
 
 export const getNextEntityIndex = async (
   projectId: string,
-  type: EntityType
+  type: EntityType,
 ) => {
   const key = getEntityKey(projectId, type);
   const data = await fetchEntityData(key);
@@ -40,7 +40,7 @@ export const getNextEntityIndex = async (
 export const setLastEntityIndex = async (
   projectId: string,
   type: EntityType,
-  index: number
+  index: number,
 ) => {
   const key = getEntityKey(projectId, type);
   const data = await fetchEntityData(key);

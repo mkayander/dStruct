@@ -41,10 +41,10 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
     ];
     const obj = {
       allQuestionsCount: Object.fromEntries(
-        userProfile.data.allQuestionsCount.map(mapItems)
+        userProfile.data.allQuestionsCount.map(mapItems),
       ),
       acSubmissionNum: Object.fromEntries(
-        userProfile.data.matchedUser.submitStats.acSubmissionNum.map(mapItems)
+        userProfile.data.matchedUser.submitStats.acSubmissionNum.map(mapItems),
       ),
     };
 

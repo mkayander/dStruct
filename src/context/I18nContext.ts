@@ -16,7 +16,7 @@ export const fallbackProxy = new Proxy(
 
       return () => key;
     },
-  }
+  },
 ) as I18nContextType["LL"];
 
 export const I18nContext = createContext<I18nContextType>({

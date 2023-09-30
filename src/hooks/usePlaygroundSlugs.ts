@@ -18,7 +18,7 @@ export const usePlaygroundSlugs = () => {
 
   return useMemo(() => {
     const [projectSlug, caseSlug, solutionSlug] = Array.isArray(
-      router.query.slug
+      router.query.slug,
     )
       ? router.query.slug
       : [];
@@ -41,7 +41,7 @@ export const usePlaygroundSlugs = () => {
       if (!slug) return setProject(projectSlug);
 
       return router[caseSlug ? "push" : "replace"](
-        `${BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`
+        `${BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
       );
     };
     const setSolution = (slug: string) => {
@@ -49,7 +49,7 @@ export const usePlaygroundSlugs = () => {
         throw new Error("Project and case ids must be set first");
 
       return router[solutionSlug ? "push" : "replace"](
-        `${BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`
+        `${BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
       );
     };
 

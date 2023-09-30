@@ -36,7 +36,7 @@ export class ControlledArray<T> extends Array<T> {
     arrayData: EntityState<ArrayItemData>,
     dispatch: AppDispatch,
     addToCallstack?: boolean,
-    options?: ControlledArrayRuntimeOptions
+    options?: ControlledArrayRuntimeOptions,
   ) {
     super();
 
@@ -78,7 +78,7 @@ export class ControlledArray<T> extends Array<T> {
           ...this.getDispatchBase(),
           name: "addArray",
           args: [actionArrayData, options],
-        })
+        }),
       );
     }
 
@@ -108,7 +108,7 @@ export class ControlledArray<T> extends Array<T> {
               timestamp: performance.now(),
               name: "addArrayItem",
               args: [value, index],
-            })
+            }),
           );
           this.itemsMeta[index] = newItem;
           return true;
@@ -124,7 +124,7 @@ export class ControlledArray<T> extends Array<T> {
             ...base,
             name: "setVal",
             args: [value],
-          })
+          }),
         );
         return true;
       },
@@ -136,16 +136,16 @@ export class ControlledArray<T> extends Array<T> {
     inputArray: Array<number | string>,
     mapFn?: (
       item: number | string | undefined,
-      index: number
+      index: number,
     ) => number | string,
     thisArg?: unknown,
-    options?: ControlledArrayRuntimeOptions
+    options?: ControlledArrayRuntimeOptions,
   ) {
     const { id, array, data } = this._mapArrayData(
       inputArray,
       mapFn,
       thisArg,
-      options
+      options,
     );
     return new ControlledArray(array, id, data, dispatch, true, options);
   }
@@ -154,7 +154,7 @@ export class ControlledArray<T> extends Array<T> {
     inputArray: T[],
     mapFn?: (item: T, index: number, array: T[]) => U,
     thisArg?: unknown,
-    options?: ControlledArrayRuntimeOptions
+    options?: ControlledArrayRuntimeOptions,
   ) {
     const array = [];
     if (mapFn) {
@@ -187,7 +187,7 @@ export class ControlledArray<T> extends Array<T> {
         ...base,
         name: "deleteNode",
         args: [],
-      })
+      }),
     );
     this.itemsMeta.pop();
     return value;
@@ -196,13 +196,13 @@ export class ControlledArray<T> extends Array<T> {
   override map<U>(
     callback: (value: T, index: number, array: T[]) => U,
     thisArg?: unknown,
-    options?: ControlledArrayRuntimeOptions
+    options?: ControlledArrayRuntimeOptions,
   ): ControlledArray<U> {
     const { id, array, data } = ControlledArray._mapArrayData(
       this,
       callback,
       thisArg,
-      options
+      options,
     );
     return new ControlledArray(
       array as U[],
@@ -210,7 +210,7 @@ export class ControlledArray<T> extends Array<T> {
       data,
       this.dispatch,
       true,
-      options
+      options,
     );
   }
 
@@ -222,7 +222,7 @@ export class ControlledArray<T> extends Array<T> {
         ...base,
         name: "blink",
         args: [],
-      })
+      }),
     );
   }
 
@@ -234,7 +234,7 @@ export class ControlledArray<T> extends Array<T> {
         ...base,
         name: "setColor",
         args: [color, animation],
-      })
+      }),
     );
   }
 
@@ -246,7 +246,7 @@ export class ControlledArray<T> extends Array<T> {
         ...base,
         name: "showPointer",
         args: [name],
-      })
+      }),
     );
   }
 
@@ -258,7 +258,7 @@ export class ControlledArray<T> extends Array<T> {
         ...base,
         name: "setColorMap",
         args: [map],
-      })
+      }),
     );
   }
 

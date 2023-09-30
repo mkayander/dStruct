@@ -25,6 +25,6 @@ export const useDebounce = <T>(value: T, delay: number): DebounceResult<T> => {
 
   return useMemo(
     () => ({ value: debouncedValue, isPending }),
-    [debouncedValue, isPending]
+    [debouncedValue, isPending],
   );
 };

@@ -24,7 +24,7 @@ export class ControlledString extends String {
     name: string,
     arrayData: EntityState<ArrayItemData>,
     dispatch: AppDispatch,
-    addToCallstack?: boolean
+    addToCallstack?: boolean,
   ) {
     super(value);
     Object.defineProperties(this, {
@@ -48,7 +48,7 @@ export class ControlledString extends String {
           ...this.getDispatchBase(),
           name: "addArray",
           args: [arrayData, undefined],
-        })
+        }),
       );
     }
   }
@@ -61,7 +61,7 @@ export class ControlledString extends String {
         ...base,
         name: "setColor",
         args: [color, animation],
-      })
+      }),
     );
   }
 
@@ -73,7 +73,7 @@ export class ControlledString extends String {
         ...base,
         name: "showPointer",
         args: [name],
-      })
+      }),
     );
   }
 
@@ -85,7 +85,7 @@ export class ControlledString extends String {
         ...base,
         name: "setColorMap",
         args: [map],
-      })
+      }),
     );
   }
 

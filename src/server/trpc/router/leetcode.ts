@@ -9,7 +9,7 @@ export const leetcodeRouter = router({
         username: z.string(),
         userAvatar: z.string(),
         token: z.string(),
-      })
+      }),
     )
 
     .mutation(async ({ input, ctx }) => {

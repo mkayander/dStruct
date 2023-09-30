@@ -23,7 +23,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
       sanitizeHtml(question.content, {
         allowedTags: ["img", "p", "strong", "ul", "li", "pre", "code"],
       }),
-    [question]
+    [question],
   );
 
   const loading = questionDataQuery.loading;

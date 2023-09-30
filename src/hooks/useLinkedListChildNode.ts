@@ -14,13 +14,13 @@ import { processNodeRelation } from "#/utils";
 
 export const useLinkedListChildNode = (
   props: BinaryNodeProps,
-  nodeColor: string
+  nodeColor: string,
 ) => {
   const { treeName, color, childrenIds, y, x } = props;
   const [nextId] = childrenIds;
   const dispatch = useAppDispatch();
   const nextNodeData = useAppSelector(
-    selectNodeDataById(treeName, nextId ?? "")
+    selectNodeDataById(treeName, nextId ?? ""),
   );
 
   const relations: RelationType[] = [];
@@ -41,7 +41,7 @@ export const useLinkedListChildNode = (
             x: x + horizontalOffset,
           },
         },
-      })
+      }),
     );
   };
 

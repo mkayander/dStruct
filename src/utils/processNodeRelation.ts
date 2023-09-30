@@ -12,7 +12,7 @@ export const processNodeRelation = (
   relations: RelationType[],
   nodeColor: string,
   color?: string,
-  data?: TreeNodeData | null
+  data?: TreeNodeData | null,
 ) => {
   if (!data) return;
 

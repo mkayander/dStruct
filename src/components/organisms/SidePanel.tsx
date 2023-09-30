@@ -103,7 +103,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
         sx: {
           background: alpha(
             theme.palette.background.paper,
-            isDarkMode ? 0.2 : 0.6
+            isDarkMode ? 0.2 : 0.6,
           ),
           backdropFilter: "blur(18px)",
         },

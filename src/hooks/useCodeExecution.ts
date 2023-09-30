@@ -42,7 +42,7 @@ export const useCodeExecution = (codeInput: string) => {
       dispatch,
       treeStore,
       arrayStore,
-      caseArgs
+      caseArgs,
     );
 
     const prefixedCode = `${globalDefinitionsPrefix}\n${codeInput}`;
@@ -70,7 +70,7 @@ export const useCodeExecution = (codeInput: string) => {
           result: serializedResult,
           runtime,
           startTimestamp,
-        })
+        }),
       );
       // Automatically play the callstack
       dispatch(callstackSlice.actions.setIsPlaying(true));
@@ -82,7 +82,7 @@ export const useCodeExecution = (codeInput: string) => {
             id: uuid.generate(),
             timestamp: performance.now(),
             name: "error",
-          })
+          }),
         );
         dispatch(
           callstackSlice.actions.setStatus({
@@ -91,7 +91,7 @@ export const useCodeExecution = (codeInput: string) => {
             result: null,
             runtime,
             startTimestamp,
-          })
+          }),
         );
         console.warn(e);
       } else {

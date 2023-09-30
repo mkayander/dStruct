@@ -14,7 +14,7 @@ export class LinkedListNode extends NodeBase {
     meta: NodeMeta,
     name: string,
     dispatch: AppDispatch,
-    addToCallstack?: boolean
+    addToCallstack?: boolean,
   ) {
     super(val, meta, name, dispatch);
     this._next = next;
@@ -25,7 +25,7 @@ export class LinkedListNode extends NodeBase {
           ...this.getDispatchBase(),
           name: "addNode",
           args: [val],
-        })
+        }),
       );
     }
   }
@@ -44,7 +44,7 @@ export class LinkedListNode extends NodeBase {
         ...this.getDispatchBase(),
         name: "setNextNode",
         args: [node?.meta.id ?? null, node?.name],
-      })
+      }),
     );
     if (node) {
       node.name = this.name;
@@ -56,7 +56,7 @@ export class LinkedListNode extends NodeBase {
     nodeData: TreeNodeData | undefined,
     dataMap: Dictionary<TreeNodeData>,
     dispatch: AppDispatch,
-    meta?: Partial<BinaryNodeMeta>
+    meta?: Partial<BinaryNodeMeta>,
   ): LinkedListNode | null {
     if (!nodeData) return null;
 
@@ -80,7 +80,7 @@ export class LinkedListNode extends NodeBase {
         dataMap[nextId],
         dataMap,
         dispatch,
-        meta
+        meta,
       );
     }
 

@@ -59,7 +59,7 @@ export const caseSlice = createSlice({
       action: PayloadAction<{
         data: ArgumentObject[];
         resetInfoState?: boolean;
-      }>
+      }>,
     ) => {
       const { data, resetInfoState } = action.payload;
       argumentAdapter.setAll(state.args, data);
@@ -70,7 +70,7 @@ export const caseSlice = createSlice({
     },
     updateArgumentInfo: (
       state,
-      action: PayloadAction<{ name: string; data: ArgumentInfo }>
+      action: PayloadAction<{ name: string; data: ArgumentInfo }>,
     ) => {
       const { name, data } = action.payload;
       if (!state.args.entities[name]) return;

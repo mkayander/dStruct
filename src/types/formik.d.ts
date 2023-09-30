@@ -50,7 +50,7 @@ declare module "formik" {
 
   export declare type FieldAttributes<
     T,
-    C extends React.ComponentType
+    C extends React.ComponentType,
   > = GenericFieldHTMLAttributes &
     FieldConfig<T> & {
       component?: C;

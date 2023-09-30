@@ -28,13 +28,13 @@ export const argumentTreeTypeValues = new Set([
 ]);
 
 export function isArgumentTreeType(
-  type: ArgumentType
+  type: ArgumentType,
 ): type is ArgumentTreeType;
 export function isArgumentTreeType(
-  arg: ArgumentObject
+  arg: ArgumentObject,
 ): arg is ArgumentObject<ArgumentTreeType>;
 export function isArgumentTreeType(
-  arg: ArgumentObject | ArgumentType
+  arg: ArgumentObject | ArgumentType,
 ): arg is ArgumentObject<ArgumentTreeType> {
   if (typeof arg === "object") {
     return isArgumentTreeType(arg.type);
@@ -44,13 +44,13 @@ export function isArgumentTreeType(
 }
 
 export function isArgumentArrayType(
-  type: ArgumentType
+  type: ArgumentType,
 ): type is ArgumentArrayType;
 export function isArgumentArrayType(
-  arg: ArgumentObject
+  arg: ArgumentObject,
 ): arg is ArgumentObject<ArgumentArrayType>;
 export function isArgumentArrayType(
-  arg: ArgumentObject | ArgumentType
+  arg: ArgumentObject | ArgumentType,
 ): arg is ArgumentObject<ArgumentArrayType> {
   if (typeof arg === "object") {
     return isArgumentArrayType(arg.type);
@@ -79,7 +79,7 @@ export const argumentObjectValidator = z.object({
 });
 
 export const isArgumentObjectValid = (
-  args: unknown
+  args: unknown,
 ): args is ArgumentObjectMap => {
   if (typeof args !== "object" || args === null) {
     return false;

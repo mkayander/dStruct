@@ -24,7 +24,7 @@ export const I18nProvider: React.FC<I18nProviderProps> = (props) => {
   const locale = (router.locale as Locales) || "en";
 
   const [translations, setTranslations] = useState<TranslationDictionary>(
-    props.i18n?.translations ?? {}
+    props.i18n?.translations ?? {},
   );
   const [formatters, setFormatters] = useState<FormattersDictionary>({
     [locale]: initFormatters(locale),
@@ -59,10 +59,10 @@ export const I18nProvider: React.FC<I18nProviderProps> = (props) => {
         : i18nObject(
             locale,
             translations[locale] ?? {},
-            formatters[locale] ?? {}
+            formatters[locale] ?? {},
           ),
     }),
-    [locale, translations, formatters]
+    [locale, translations, formatters],
   );
 
   return (

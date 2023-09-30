@@ -2,7 +2,7 @@ export function Enumerable(value: boolean) {
   return function (
     target: any,
     propertyKey: string,
-    descriptor?: PropertyDescriptor
+    descriptor?: PropertyDescriptor,
   ) {
     if (descriptor) {
       descriptor.enumerable = value;

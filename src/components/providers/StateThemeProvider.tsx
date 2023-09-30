@@ -16,7 +16,7 @@ export const StateThemeProvider: React.FC<
 
   const theme = useMemo(
     () => (isLightMode ? themes.light : themes.dark),
-    [isLightMode]
+    [isLightMode],
   );
 
   return (

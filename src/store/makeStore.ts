@@ -14,7 +14,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const reducer = (
   state: RootState | undefined,
-  action: AnyAction
+  action: AnyAction,
 ): RootState => {
   if (action.type === HYDRATE) {
     // Attention! This will overwrite client state! Real apps should use proper reconciliation.

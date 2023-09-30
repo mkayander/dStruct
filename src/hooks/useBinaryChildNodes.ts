@@ -15,7 +15,7 @@ import { processNodeRelation } from "#/utils";
 
 export const useBinaryChildNodes = (
   props: BinaryNodeProps,
-  nodeColor: string
+  nodeColor: string,
 ) => {
   const { id, treeName, color, childrenIds, depth, y, x } = props;
   const [leftId, rightId] = childrenIds;
@@ -33,7 +33,7 @@ export const useBinaryChildNodes = (
 
   const updateChildPosition = (
     data?: TreeNodeData | null,
-    isLeft?: boolean
+    isLeft?: boolean,
   ) => {
     if (!data) return;
 
@@ -51,7 +51,7 @@ export const useBinaryChildNodes = (
             x: isLeft ? x - horizontalOffset : x + horizontalOffset,
           },
         },
-      })
+      }),
     );
   };
 
@@ -64,7 +64,7 @@ export const useBinaryChildNodes = (
             id,
             changes: { x: 25 * treeSizeCoefficient + maxDepth ** 2.8 },
           },
-        })
+        }),
       );
     }
   }, [depth, dispatch, maxDepth, id, treeName, treeSizeCoefficient]);

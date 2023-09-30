@@ -133,14 +133,14 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
         backdropFilter: "blur(12px)",
         boxShadow: `0 0 12px 0 ${alpha(
           theme.palette.primary.main,
-          isScrolled ? 0.2 : 0
+          isScrolled ? 0.2 : 0,
         )}`,
         background: isScrolled
           ? alpha(theme.palette.primary.main, 0.2)
           : alpha(theme.palette.primary.main, 0),
         borderBottom: `1px solid ${alpha(
           theme.palette.common.white,
-          isScrolled ? 0.05 : 0
+          isScrolled ? 0.05 : 0,
         )}`,
         color: theme.palette.text.primary,
       }}
@@ -287,7 +287,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                       <Avatar>
                         <Image
                           src={getImageUrl(
-                            session.data.user.bucketImage || AVATAR_PLACEHOLDER
+                            session.data.user.bucketImage || AVATAR_PLACEHOLDER,
                           )}
                           alt={`${session.data.user.name} avatar`}
                           referrerPolicy="no-referrer"

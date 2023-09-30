@@ -5,7 +5,7 @@ import { env } from "#/env/server.mjs";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const s3 = new S3({
     apiVersion: "2006-03-01",

@@ -23,7 +23,7 @@ export type BaseStructureItem<N extends StructureNode = StructureNode> = {
 };
 
 export const getInitialDataBase = <N extends StructureNode>(
-  adapter: EntityAdapter<N>
+  adapter: EntityAdapter<N>,
 ): BaseStructureItem<N> => ({
   nodes: adapter.getInitialState(),
   initialNodes: null,
@@ -32,7 +32,7 @@ export const getInitialDataBase = <N extends StructureNode>(
 });
 
 export type BaseStructureState<
-  T extends BaseStructureItem = BaseStructureItem
+  T extends BaseStructureItem = BaseStructureItem,
 > = Record<string, T>;
 
 export type NamedPayload<T = void> = PayloadAction<
@@ -48,7 +48,7 @@ export type NamedPayload<T = void> = PayloadAction<
 
 export const getStateByName = <T extends BaseStructureState, K extends keyof T>(
   state: T,
-  name: K
+  name: K,
 ): T[K] | null => {
   const treeState = state[name];
   if (!treeState) {
@@ -60,11 +60,11 @@ export const getStateByName = <T extends BaseStructureState, K extends keyof T>(
 
 export const runStateActionByName = <
   T extends BaseStructureState,
-  K extends keyof T
+  K extends keyof T,
 >(
   state: T,
   name: K,
-  action: (treeState: T[K]) => void
+  action: (treeState: T[K]) => void,
 ) => {
   const treeState = getStateByName(state, name);
   if (!treeState) return;
@@ -73,7 +73,7 @@ export const runStateActionByName = <
 };
 
 export const getBaseStructureReducers = <N extends StructureNode>(
-  adapter: EntityAdapter<any>
+  adapter: EntityAdapter<any>,
 ) => {
   const selectors = adapter.getSelectors();
 
@@ -99,7 +99,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
       }),
     addMany: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<N[]>
+      action: NamedPayload<N[]>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
@@ -110,14 +110,14 @@ export const getBaseStructureReducers = <N extends StructureNode>(
       }),
     update: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<Update<N>>
+      action: NamedPayload<Update<N>>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) =>
-        adapter.updateOne(treeState.nodes, action.payload.data)
+        adapter.updateOne(treeState.nodes, action.payload.data),
       ),
     remove: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<Pick<N, "id">>
+      action: NamedPayload<Pick<N, "id">>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         adapter.removeOne(treeState.nodes, action.payload.data.id);
@@ -127,7 +127,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     },
     clearMany: <T extends BaseStructureState>(
       state: T,
-      action: PayloadAction<string[]>
+      action: PayloadAction<string[]>,
     ) => {
       for (const name of action.payload) {
         delete state[name];
@@ -138,7 +138,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     },
     setColorMap: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<Pick<BaseStructureItem, "colorMap"> | null>
+      action: NamedPayload<Pick<BaseStructureItem, "colorMap"> | null>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         if (action.payload.data === null) {
@@ -163,10 +163,10 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     },
     reset: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<undefined>
+      action: NamedPayload<undefined>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) =>
-        resetNodes(treeState)
+        resetNodes(treeState),
       ),
     resetAll: <T extends BaseStructureState>(state: T) => {
       for (const name in state) {

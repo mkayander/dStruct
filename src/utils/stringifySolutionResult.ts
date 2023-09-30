@@ -51,7 +51,7 @@ export const safeStringify = (val: unknown): string => {
 
       return value;
     },
-    2
+    2,
   );
 };
 
@@ -63,7 +63,7 @@ export const stringifySolutionResult = (
     | Set<unknown>
     | Map<unknown, unknown>
     | LinkedListNode
-    | null
+    | null,
 ) => {
   if (result === null) return "null";
   if (result === undefined) return "undefined";

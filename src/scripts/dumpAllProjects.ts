@@ -36,6 +36,6 @@ import { prisma } from "#/server/db/client";
   const date = new Date();
   await fs.writeFile(
     `dumps/data-${slugify(date.toLocaleString(), { strict: true })}.json`,
-    JSON.stringify(data, null, 2)
+    JSON.stringify(data, null, 2),
   );
 })();

@@ -32,7 +32,7 @@ export const SelectBarChip = React.forwardRef<
     sx,
     ...restProps
   },
-  ref
+  ref,
 ) {
   const theme = useTheme();
 

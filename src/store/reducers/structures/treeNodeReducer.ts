@@ -67,7 +67,7 @@ export const treeNodeSlice = createSlice({
         name: string;
         type: ArgumentTreeType;
         order: number;
-      }>
+      }>,
     ) => {
       const { name, type, order } = action.payload;
       state[name] = getInitialData(type, order);
@@ -93,7 +93,7 @@ export const treeNodeSlice = createSlice({
       action: NamedPayload<{
         maxDepth: number;
         nodes: TreeNodeData[];
-      }>
+      }>,
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
@@ -114,7 +114,7 @@ export const treeNodeSlice = createSlice({
         index: number;
         childId?: string;
         childTreeName?: string;
-      }>
+      }>,
     ) => {
       const { childId, childTreeName } = action.payload.data;
       if (childId && childTreeName && childTreeName !== action.payload.name) {
@@ -212,7 +212,7 @@ export const selectNamedTreeMaxDepth = (name: string) =>
   });
 
 export const selectTreeMaxDepth = createSelector(treeDataSelector, (state) =>
-  Math.max(...Object.values(state).map((treeState) => treeState.maxDepth))
+  Math.max(...Object.values(state).map((treeState) => treeState.maxDepth)),
 );
 
 /**

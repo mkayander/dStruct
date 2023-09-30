@@ -23,7 +23,7 @@ export const userRouter = router({
     .input(
       z.object({
         imageName: z.ostring(),
-      })
+      }),
     )
     .mutation(async ({ input: { imageName }, ctx }) => {
       return ctx.prisma.user.update({
@@ -42,6 +42,6 @@ export const userRouter = router({
         data: {
           usesLightMode: input,
         },
-      })
+      }),
     ),
 });

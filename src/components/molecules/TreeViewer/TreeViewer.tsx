@@ -66,7 +66,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     setScrolledStart(current.scrollLeft <= offset);
     setScrolledEnd(
-      current.scrollLeft + current.offsetWidth >= current.scrollWidth - offset
+      current.scrollLeft + current.offsetWidth >= current.scrollWidth - offset,
     );
   };
 
@@ -118,7 +118,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     if (!arrayState) return null;
 
     const sorted = Object.entries(arrayState).sort(
-      ([, { order: a }], [, { order: b }]) => a - b
+      ([, { order: a }], [, { order: b }]) => a - b,
     );
     const arrayNodes = [];
 
@@ -129,7 +129,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             key={arrayName}
             data={data}
             arrayState={arrayState}
-          />
+          />,
         );
       } else if (!data.parentName) {
         arrayNodes.push(<ArrayStructureView key={arrayName} data={data} />);

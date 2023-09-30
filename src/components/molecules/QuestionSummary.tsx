@@ -102,10 +102,10 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
           marginBottom: 2,
           background: `linear-gradient(64deg, ${alpha(
             darken(theme.palette.primary.dark, 0.5),
-            0.1
+            0.1,
           )} 0%, ${alpha(theme.palette.primary.dark, 0.2)} 35%, ${alpha(
             theme.palette.primary.light,
-            0.5
+            0.5,
           )} 100%)`,
           backdropFilter: "blur( 14px )",
           border: "1px solid rgba( 255, 255, 255, 0.18 )",
@@ -113,10 +113,10 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
           // boxShadow: `0px 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 12%)`,
           boxShadow: `0px 7px 8px -4px ${alpha(
             shadowColor,
-            0.2
+            0.2,
           )}, 0px 12px 17px 2px ${alpha(
             shadowColor,
-            0.14
+            0.14,
           )}, 0px 5px 22px 4px ${alpha(shadowColor, 0.12)}`,
           borderRadius: theme.shape.borderRadius,
         }}

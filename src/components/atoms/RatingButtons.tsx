@@ -18,7 +18,7 @@ export const RatingButtons: React.FC<RatingButtonsProps> = ({ question }) => {
 
   const likesPercentage = useMemo(
     () => (question.likes / (question.likes + question.dislikes)) * 100,
-    [question.dislikes, question.likes]
+    [question.dislikes, question.likes],
   );
 
   return (

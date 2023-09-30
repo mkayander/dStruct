@@ -21,7 +21,7 @@ import {
 const createRuntimeTree = (
   nodesData: TreeData | undefined,
   arg: ArgumentObject,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
 ) => {
   if (!nodesData) {
     console.error("No nodes data found for binary tree");
@@ -49,7 +49,7 @@ const createRuntimeTree = (
 const createRuntimeArray = (
   nodesData: ArrayData | undefined,
   arg: ArgumentObject,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
 ) => {
   if (!nodesData) return null;
 
@@ -71,20 +71,20 @@ const createRuntimeArray = (
 const createRuntimeMatrix = (
   arrayStore: ArrayDataState,
   arg: ArgumentObject,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
 ) => {
   if (!isArgumentArrayType(arg)) return null;
 
   const input = JSON.parse(arg.input) as (number | string)[][];
   const matrix: ReturnType<typeof createRuntimeArray>[] = new Array(
-    input.length
+    input.length,
   );
 
   getMatrixChildArrayArgs(arg, (childArg, index) => {
     matrix[index] = createRuntimeArray(
       arrayStore[childArg.name],
       childArg,
-      dispatch
+      dispatch,
     );
   });
 
@@ -95,7 +95,7 @@ export const createCaseRuntimeArgs = (
   dispatch: AppDispatch,
   treeStore: TreeDataState,
   arrayStore: ArrayDataState,
-  args: ArgumentObject[]
+  args: ArgumentObject[],
 ) => {
   return args.map((arg) => {
     switch (arg.type) {

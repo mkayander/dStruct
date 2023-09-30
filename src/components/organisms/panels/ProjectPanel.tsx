@@ -48,12 +48,12 @@ export const ProjectPanel: React.FC = () => {
 
   const selectedCase = trpc.project.getCaseBySlug.useQuery(
     { projectId: selectedProject.data?.id || "", slug: caseSlug },
-    { enabled: Boolean(selectedProject.data?.id && caseSlug) }
+    { enabled: Boolean(selectedProject.data?.id && caseSlug) },
   );
 
   useEffect(() => {
     dispatch(
-      projectSlice.actions.update({ projectId: selectedProject.data?.id })
+      projectSlice.actions.update({ projectId: selectedProject.data?.id }),
     );
   }, [dispatch, selectedProject.data?.id]);
 
@@ -71,7 +71,7 @@ export const ProjectPanel: React.FC = () => {
       dispatch(
         projectSlice.actions.update({
           isEditable: newState,
-        })
+        }),
       );
   }, [dispatch, isEditable, selectedProject.data, session.data]);
 

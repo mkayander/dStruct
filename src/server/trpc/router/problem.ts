@@ -13,7 +13,7 @@ export const problemRouter = router({
         id: z.number(),
         title: z.string(),
         checked: z.boolean(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const { id, ...rest } = input;
@@ -30,7 +30,7 @@ export const problemRouter = router({
         id: z.number(),
         title: z.string(),
         checked: z.boolean(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const { id, ...rest } = input;
@@ -45,7 +45,7 @@ export const problemRouter = router({
     .input(
       z.object({
         id: z.number(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const { id } = input;
@@ -57,7 +57,7 @@ export const problemRouter = router({
     .input(
       z.object({
         ids: z.number().array(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const { ids } = input;

@@ -79,7 +79,7 @@ export const OutputPanel: React.FC = () => {
   };
 
   const { isReady, runtime, result, error } = useAppSelector(
-    (state) => state.callstack
+    (state) => state.callstack,
   );
 
   return (

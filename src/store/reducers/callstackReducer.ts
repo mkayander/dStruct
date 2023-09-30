@@ -74,7 +74,7 @@ type AddArrayFrame = CallFrameBase & {
   name: "addArray";
   args: [
     EntityState<ArrayItemData> | undefined,
-    ControlledArrayRuntimeOptions | undefined
+    ControlledArrayRuntimeOptions | undefined,
   ];
 };
 
@@ -172,7 +172,7 @@ export const callstackSlice = createSlice({
           CallstackState,
           "isReady" | "result" | "runtime" | "startTimestamp" | "error"
         >
-      >
+      >,
     ) => {
       const { payload } = action;
 
@@ -196,7 +196,7 @@ export const callstackReducer = callstackSlice.reducer;
  * Selectors
  */
 export const callstackSelectors = callstackAdapter.getSelectors(
-  (state: RootState) => state.callstack.frames
+  (state: RootState) => state.callstack.frames,
 );
 
 const rootSelectors = callstackAdapter.getSelectors();
@@ -210,7 +210,7 @@ export const selectCallstack = createSelector(
     result: callstack.result,
     error: callstack.error,
     frames: rootSelectors.selectAll(callstack.frames),
-  })
+  }),
 );
 
 export const selectRuntimeData = createSelector(
@@ -220,22 +220,22 @@ export const selectRuntimeData = createSelector(
     runtime: callstack.runtime,
     result: callstack.result,
     error: callstack.error,
-  })
+  }),
 );
 
 export const selectCallstackIsReady = createSelector(
   (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.isReady
+  (callstack: CallstackState) => callstack.isReady,
 );
 
 export const selectCallstackIsPlaying = createSelector(
   (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.isPlaying
+  (callstack: CallstackState) => callstack.isPlaying,
 );
 
 export const selectCallstackLength = createSelector(
   (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.frames.ids.length
+  (callstack: CallstackState) => callstack.frames.ids.length,
 );
 
 export const selectConsoleLogs = createSelector(
@@ -243,5 +243,5 @@ export const selectConsoleLogs = createSelector(
   (callstack) =>
     rootSelectors
       .selectAll(callstack.frames)
-      .filter((frame) => frame.name === "consoleLog") as ConsoleLogFrame[]
+      .filter((frame) => frame.name === "consoleLog") as ConsoleLogFrame[],
 );

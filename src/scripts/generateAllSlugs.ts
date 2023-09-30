@@ -13,8 +13,8 @@ const uuid = shortUUID();
         data: {
           slug: `project-${uuid.generate()}`,
         },
-      })
-    )
+      }),
+    ),
   );
 
   const cases = await prisma.playgroundTestCase.findMany();
@@ -25,8 +25,8 @@ const uuid = shortUUID();
         data: {
           slug: `case-${uuid.generate()}`,
         },
-      })
-    )
+      }),
+    ),
   );
 
   const solutions = await prisma.playgroundSolution.findMany();
@@ -37,7 +37,7 @@ const uuid = shortUUID();
         data: {
           slug: `solution-${uuid.generate()}`,
         },
-      })
-    )
+      }),
+    ),
   );
 })();

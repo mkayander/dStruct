@@ -22,7 +22,7 @@ export class BinaryTreeNode extends NodeBase {
     meta: BinaryNodeMeta,
     name: string,
     dispatch: AppDispatch,
-    addToCallstack?: boolean
+    addToCallstack?: boolean,
   ) {
     super(val, meta, name, dispatch);
     this._left = left;
@@ -34,7 +34,7 @@ export class BinaryTreeNode extends NodeBase {
           ...this.getDispatchBase(),
           name: "addNode",
           args: [val],
-        })
+        }),
       );
     }
   }
@@ -53,7 +53,7 @@ export class BinaryTreeNode extends NodeBase {
         ...this.getDispatchBase(),
         name: "setLeftChild",
         args: [node?.meta.id ?? null, node?.name],
-      })
+      }),
     );
   }
 
@@ -71,7 +71,7 @@ export class BinaryTreeNode extends NodeBase {
         ...this.getDispatchBase(),
         name: "setRightChild",
         args: [node?.meta.id ?? null, node?.name],
-      })
+      }),
     );
   }
 
@@ -80,7 +80,7 @@ export class BinaryTreeNode extends NodeBase {
     nodeData: TreeNodeData | undefined,
     dataMap: Dictionary<TreeNodeData>,
     dispatch: AppDispatch,
-    meta?: Partial<BinaryNodeMeta>
+    meta?: Partial<BinaryNodeMeta>,
   ): BinaryTreeNode | null {
     if (!nodeData) return null;
 
@@ -101,7 +101,7 @@ export class BinaryTreeNode extends NodeBase {
           dataMap[left],
           dataMap,
           dispatch,
-          newMeta
+          newMeta,
         )
       : null;
     const rightNode = right
@@ -110,7 +110,7 @@ export class BinaryTreeNode extends NodeBase {
           dataMap[right],
           dataMap,
           dispatch,
-          newMeta
+          newMeta,
         )
       : null;
 
@@ -124,7 +124,7 @@ export class BinaryTreeNode extends NodeBase {
       rightNode,
       { ...newMeta, id, type: ArgumentType.BINARY_TREE },
       name,
-      dispatch
+      dispatch,
     );
   }
 }

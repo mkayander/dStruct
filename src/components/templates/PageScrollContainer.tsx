@@ -62,7 +62,9 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
                     ev.target.scrollTop > 0 !== isScrolled
                   ) {
                     dispatch(
-                      appBarSlice.actions.setIsScrolled(ev.target.scrollTop > 0)
+                      appBarSlice.actions.setIsScrolled(
+                        ev.target.scrollTop > 0,
+                      ),
                     );
                   }
                 },

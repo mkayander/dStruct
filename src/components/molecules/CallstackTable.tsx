@@ -44,7 +44,7 @@ const NodeCell: React.FC<{ treeName: string; id: string }> = ({
             isHighlighted: true,
           },
         },
-      })
+      }),
     );
   };
 
@@ -58,7 +58,7 @@ const NodeCell: React.FC<{ treeName: string; id: string }> = ({
             isHighlighted: false,
           },
         },
-      })
+      }),
     );
   };
 

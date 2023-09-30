@@ -22,7 +22,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     constructor(
       val: number,
       left: BinaryTreeNode | null = null,
-      right: BinaryTreeNode | null = null
+      right: BinaryTreeNode | null = null,
     ) {
       super(
         val,
@@ -35,7 +35,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
         },
         uuid.generate(),
         dispatch,
-        true
+        true,
       );
     }
   }
@@ -51,7 +51,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
         },
         uuid.generate(),
         dispatch,
-        true
+        true,
       );
     }
   }
@@ -81,10 +81,10 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       array: Array<number | string>,
       mapFn?: (
         item: number | string | undefined,
-        index: number
+        index: number,
       ) => number | string,
       thisArg?: unknown,
-      options?: ControlledArrayRuntimeOptions
+      options?: ControlledArrayRuntimeOptions,
     ) {
       return ControlledArray._from(dispatch, array, mapFn, thisArg, options);
     }
@@ -119,7 +119,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
             }
             return String(arg);
           }),
-        })
+        }),
       );
 
       console.log(...args);

@@ -47,7 +47,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
 
   const currentCase = trpc.project.getCaseBySlug.useQuery(
     { projectId: currentProjectId, slug: caseSlug },
-    { enabled: Boolean(currentProjectId && caseSlug) }
+    { enabled: Boolean(currentProjectId && caseSlug) },
   );
 
   const trpcUtils = trpc.useContext();
@@ -98,7 +98,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
 
       enqueueSnackbar(
         `🧪 Test case "${data.title}" was successfully updated 📝`,
-        { variant: "success" }
+        { variant: "success" },
       );
     },
   });
@@ -113,7 +113,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
         `🧪 Test case "${data.title}" was successfully deleted 🧹`,
         {
           variant: "success",
-        }
+        },
       );
     },
   });
@@ -135,7 +135,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     if (!currentCase.data) return;
     if (
       !confirm(
-        `Are you sure you want to delete the "${currentCase.data.title}" test case? This action cannot be undone.`
+        `Are you sure you want to delete the "${currentCase.data.title}" test case? This action cannot be undone.`,
       ) // TODO: Replace with a custom modal
     )
       return;
@@ -152,7 +152,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       slugify(value ?? formik.values.caseName, {
         lower: true,
         strict: true,
-      })
+      }),
     );
   };
 
