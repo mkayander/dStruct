@@ -1,4 +1,3 @@
-import { gql } from "@apollo/client";
 import { DeleteForever } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
@@ -33,7 +32,7 @@ import React, { useEffect, useState } from "react";
 import slugify from "slugify";
 import * as yup from "yup";
 
-import { useQuestionDataLazyQuery } from "#/graphql/generated";
+import { useGetMinimalQuestionDataLazyQuery } from "#/graphql/generated";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
@@ -90,20 +89,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const { enqueueSnackbar } = useSnackbar();
 
   const [problemFetchStatus, setProblemFetchStatus] = useState(
-    ProblemFetchStatus.IDLE
+    ProblemFetchStatus.IDLE,
   );
   const [getProblemData, { loading: isQuestionLoading }] =
-    useQuestionDataLazyQuery({
+    useGetMinimalQuestionDataLazyQuery({
       returnPartialData: true,
-      query: gql`
-        query GetQuestionData($titleSlug: String!) {
-          question(titleSlug: $titleSlug) {
-            title
-            titleSlug
-            difficulty
-          }
-        }
-      `,
     });
 
   const prevEditMode = usePrevious(isEditMode);
@@ -206,7 +196,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     if (!currentProject) return;
     if (
       !confirm(
-        `Are you sure you want to delete the "${currentProject.title}" project? This action cannot be undone.`
+        `Are you sure you want to delete the "${currentProject.title}" project? This action cannot be undone.`,
       ) // TODO: Replace with a custom modal
     )
       return;
@@ -224,7 +214,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       `Project "${currentProject.title}" was successfully deleted 🧹`,
       {
         variant: "success",
-      }
+      },
     );
   };
 
@@ -234,7 +224,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       slugify(value ?? formik.values.projectName, {
         lower: true,
         strict: true,
-      })
+      }),
     );
   };
 
@@ -436,7 +426,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       loading={isQuestionLoading}
                       disabled={Boolean(
                         !formik.values.projectLcLink ||
-                          formik.errors.projectLcLink
+                          formik.errors.projectLcLink,
                       )}
                       onClick={handleFetchProblemData}
                     >

@@ -1,0 +1,7 @@
+query GetMinimalQuestionData($titleSlug: String!) {
+  question(titleSlug: $titleSlug) {
+    title
+    titleSlug
+    difficulty
+  }
+}
