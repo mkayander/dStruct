@@ -5,7 +5,8 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import parserBabel from "prettier/parser-babel";
+import parserBabel from "prettier/plugins/babel";
+import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
 
@@ -38,10 +39,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState<string>("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
-    null
+    null,
   );
   const [textModel, setTextModel] = useState<monaco.editor.ITextModel | null>(
-    null
+    null,
   );
   const [editorState, setEditorState] = useState(EditorState.INITIAL);
   const [isFormattingAvailable, setIsFormattingAvailable] = useState(true);
@@ -60,7 +61,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     },
     {
       enabled: Boolean(selectedProject.data?.id && solutionSlug),
-    }
+    },
   );
 
   const updateSolution = trpc.project.updateSolution.useMutation({
@@ -114,7 +115,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       monacoInstance.editor.setModelMarkers(
         textModel,
         "javascript",
-        [] // clear markers
+        [], // clear markers
       );
       return;
     }
@@ -159,7 +160,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const handleChangeCode = (
     value: string | undefined,
-    ev: monaco.editor.IModelContentChangedEvent
+    ev: monaco.editor.IModelContentChangedEvent,
   ) => {
     setCodeInput(value ?? "");
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
@@ -171,10 +172,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     }
   };
 
-  const handleFormatCode = () => {
-    const formattedCode = prettier.format(codeInput, {
+  const handleFormatCode = async () => {
+    const formattedCode = await prettier.format(codeInput, {
       parser: "babel",
-      plugins: [parserBabel],
+      plugins: [parserBabel, prettierPluginEstree],
     });
     textModel?.setValue(formattedCode);
     setIsFormattingAvailable(false);
