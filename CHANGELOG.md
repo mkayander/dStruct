@@ -1,3 +1,18 @@
+# [1.213.0](https://github.com/mkayander/leetpal/compare/v1.212.0...v1.213.0) (2023-09-30)
+
+
+### Bug Fixes
+
+* Removed unnecessary Prettier types package ([c924476](https://github.com/mkayander/leetpal/commit/c9244766e53bec3026924d1f2b7c0277cc0a0573))
+
+
+### Features
+
+* Extract custom query to a separate operation file ([aff40ac](https://github.com/mkayander/leetpal/commit/aff40ac6651476c2f62e7d11068ecc17d4bf1b8a))
+* Implemented new Prettier async API usage ([0414c8a](https://github.com/mkayander/leetpal/commit/0414c8af647ab2ac9c0560b5ba68f5f3932d0c72))
+* Make arg inputs more compact ([cc81a3c](https://github.com/mkayander/leetpal/commit/cc81a3c155af0a3848b6d91db19cc2e87072187a))
+* Updated dependencies ([fb5df73](https://github.com/mkayander/leetpal/commit/fb5df733e599a48bc4e64903bce4596cdb40af67))
+
 # [1.212.0](https://github.com/mkayander/leetpal/compare/v1.211.0...v1.212.0) (2023-09-26)
 
 
