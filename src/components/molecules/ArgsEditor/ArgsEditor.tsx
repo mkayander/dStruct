@@ -70,7 +70,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         caseSlice.actions.setArguments({
           data: Object.values(selectedCase.data.args),
           resetInfoState: caseSlug !== prevCaseSlug,
-        })
+        }),
       );
     } else {
       dispatch(caseSlice.actions.clear());
@@ -104,7 +104,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         type: ArgumentType.BINARY_TREE,
         order: args.length,
         input: "[]",
-      })
+      }),
     );
   };
 
@@ -125,7 +125,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         {isLoading && <CircularProgress size={14} />}
         <Divider sx={{ flexGrow: 1 }} />
       </Stack>
-      <Stack mt={1} spacing={2}>
+      <Stack mt={1} spacing={1}>
         {args.map((arg) => (
           <Stack
             key={arg.name}

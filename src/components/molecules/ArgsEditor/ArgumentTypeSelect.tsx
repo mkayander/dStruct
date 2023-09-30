@@ -61,6 +61,7 @@ export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
         value={value}
         onChange={(event) => onChange(event.target.value as ArgumentType)}
         label={LL.TYPE()}
+        size="small"
         sx={{
           width: "70px",
           "& [role=button]": {

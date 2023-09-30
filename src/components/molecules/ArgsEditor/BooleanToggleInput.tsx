@@ -23,6 +23,7 @@ export const BooleanToggleInput: React.FC<BooleanToggleInputProps> = ({
         <Switch
           checked={value === "true"}
           onChange={handleChange}
+          size="small"
           {...restProps}
         />
       }

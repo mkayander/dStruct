@@ -18,7 +18,7 @@ import {
 const validationSchemaMap = {
   [ArgumentType.ARRAY]: Joi.array(),
   [ArgumentType.BINARY_TREE]: Joi.array().items(
-    Joi.number().strict().allow(null)
+    Joi.number().strict().allow(null),
   ),
   [ArgumentType.LINKED_LIST]: Joi.array().items(Joi.number()),
   [ArgumentType.MATRIX]: Joi.array().items(
@@ -26,10 +26,10 @@ const validationSchemaMap = {
       "array.includes":
         "Array item at {{#label}} must be either a number or a string",
     }),
-    Joi.string()
+    Joi.string(),
   ),
   [ArgumentType.GRAPH]: Joi.array().items(
-    Joi.array().items(Joi.number().strict())
+    Joi.array().items(Joi.number().strict()),
   ),
 } as const;
 
@@ -49,7 +49,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
       caseSlice.actions.updateArgument({
         ...arg,
         input: input,
-      })
+      }),
     );
   }, [arg, dispatch, input]);
 
@@ -65,6 +65,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
           value={input}
           onChange={setInput}
           validationSchema={validationSchemaMap[arg.type]}
+          size="small"
         />
       );
 
@@ -73,6 +74,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
         <DebouncedInput
           label={argumentTypeLabels.string}
           fullWidth
+          size="small"
           onChange={setInput}
           value={input}
         />
@@ -88,6 +90,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
       value={input}
       type={arg.type === ArgumentType.NUMBER ? "number" : "text"}
       fullWidth
+      size="small"
       onChange={(ev) => setInput(ev.target.value)}
     />
   );
