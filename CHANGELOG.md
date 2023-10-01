@@ -1,3 +1,11 @@
+# [1.218.0](https://github.com/mkayander/leetpal/compare/v1.217.0...v1.218.0) (2023-10-01)
+
+
+### Features
+
+* Mock env variables for testing ([594e64b](https://github.com/mkayander/leetpal/commit/594e64bebf7aa0b156c1fa2cf7ba45f5113672fc))
+* Run unit tests on CI ([073983a](https://github.com/mkayander/leetpal/commit/073983a0ab068387dfa0f07800356d8636fe2785))
+
 # [1.217.0](https://github.com/mkayander/leetpal/compare/v1.216.0...v1.217.0) (2023-10-01)
 
 
