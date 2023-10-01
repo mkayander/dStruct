@@ -78,7 +78,7 @@ const DashboardPage: NextPage<{
             {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()} 👩‍💻
           </Typography>
           <br />
-          <Link href={"/playground"}>
+          <Link data-testid="cta-to-playground" href={"/playground"}>
             <Button variant="outlined" color="inherit" size="large">
               {LL.TRY_IT_OUT_NOW()} 🚀
             </Button>
