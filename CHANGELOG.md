@@ -1,3 +1,18 @@
+# [1.217.0](https://github.com/mkayander/leetpal/compare/v1.216.0...v1.217.0) (2023-10-01)
+
+
+### Bug Fixes
+
+* Use client process env directly ([e664769](https://github.com/mkayander/leetpal/commit/e66476934ea811783675c23600d8d881c7834bf7))
+
+
+### Features
+
+* Added test id attribute for the CTA button ([00b2efb](https://github.com/mkayander/leetpal/commit/00b2efba314408f581aaa1ea5a5d9267938a48d7))
+* Added TRPC wrapper for Jest testing environment ([e542afc](https://github.com/mkayander/leetpal/commit/e542afc8da7d57ed65d007754948773a576c814c))
+* Implemented initial home page test suite with Jest ([3470ee9](https://github.com/mkayander/leetpal/commit/3470ee98d37473f3393c57ec0b63e58b81e2400c))
+* Setup Jest testing environment ([e152345](https://github.com/mkayander/leetpal/commit/e152345344f3b51746a4de2101ec11ea408acbb6))
+
 # [1.216.0](https://github.com/mkayander/leetpal/compare/v1.215.1...v1.216.0) (2023-10-01)
 
 
