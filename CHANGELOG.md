@@ -1,3 +1,10 @@
+## [1.215.1](https://github.com/mkayander/leetpal/compare/v1.215.0...v1.215.1) (2023-10-01)
+
+
+### Bug Fixes
+
+* Fix layout bottom padding ([e445b8d](https://github.com/mkayander/leetpal/commit/e445b8d702e728fb4fe09f57c6415e206334bf7f))
+
 # [1.215.0](https://github.com/mkayander/leetpal/compare/v1.214.0...v1.215.0) (2023-10-01)
 
 
