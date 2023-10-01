@@ -53,5 +53,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Run tests
+        run: pnpm run test:ci
+
       - name: Run Semantic Release
         run: npx semantic-release
