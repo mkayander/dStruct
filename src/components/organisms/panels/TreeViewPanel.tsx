@@ -77,6 +77,8 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleReplay = () => {
     setReplayCount(replayCount + 1);
+    setFrameIndex(-1);
+    dispatch(callstackSlice.actions.setIsPlaying(true));
   };
 
   const handleStepBack = () => {
