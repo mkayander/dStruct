@@ -28,7 +28,7 @@ const Wrapper: React.FC<WrapperProps> = ({
 
   if (isMobile)
     return (
-      <Container sx={{ pb: 4 }}>
+      <Container component="main" sx={{ pb: 4 }}>
         <Stack spacing={1} mt={1} pb={4}>
           <TopLeft />
           <TopRight />
@@ -40,6 +40,7 @@ const Wrapper: React.FC<WrapperProps> = ({
 
   return (
     <SplitPanelsLayout
+      component="main"
       TopLeft={TopLeft}
       BottomLeft={BottomLeft}
       TopRight={TopRight}
