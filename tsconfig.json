@@ -22,6 +22,7 @@
     "noUncheckedIndexedAccess": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "paths": {
       "#/*": [
         "src/*"
