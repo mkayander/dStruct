@@ -1,3 +1,11 @@
+# [1.215.0](https://github.com/mkayander/leetpal/compare/v1.214.0...v1.215.0) (2023-10-01)
+
+
+### Features
+
+* Allow to pass a container component prop ([70f4048](https://github.com/mkayander/leetpal/commit/70f4048bb058888d0492a629fb6528644ea187da))
+* Represent panel layout root element as "main" ([fdcb429](https://github.com/mkayander/leetpal/commit/fdcb429d2676e19a1960a0a3503a88f6478d5881))
+
 # [1.214.0](https://github.com/mkayander/leetpal/compare/v1.213.0...v1.214.0) (2023-09-30)
 
 
