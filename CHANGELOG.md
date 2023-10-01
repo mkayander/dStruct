@@ -1,3 +1,16 @@
+# [1.216.0](https://github.com/mkayander/leetpal/compare/v1.215.1...v1.216.0) (2023-10-01)
+
+
+### Bug Fixes
+
+* Fixed replay button handler ([f238463](https://github.com/mkayander/leetpal/commit/f238463230b0efc02bf142b5863934fa74ddd8b7))
+
+
+### Features
+
+* Improved app bar layout ([3c087f3](https://github.com/mkayander/leetpal/commit/3c087f3e9343ad28a5cfef8a00bdc799e49a31ad))
+* Updated panels layout height ([b4af54a](https://github.com/mkayander/leetpal/commit/b4af54ac992d4b5b45bc69ac8c5905250d7daeac))
+
 ## [1.215.1](https://github.com/mkayander/leetpal/compare/v1.215.0...v1.215.1) (2023-10-01)
 
 
