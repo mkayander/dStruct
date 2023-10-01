@@ -52,7 +52,7 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
     <Box
       component={component}
       sx={{
-        height: "calc(100vh - 70px)",
+        height: "calc(100vh - 57px)",
         width: "100vw",
         px: 1,
         pb: 1,
