@@ -55,6 +55,7 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
         height: "calc(100vh - 70px)",
         width: "100vw",
         px: 1,
+        pb: 1,
         overflow: "hidden",
       }}
     >
