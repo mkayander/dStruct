@@ -7,6 +7,7 @@ import { Panel, PanelGroup, type PanelProps } from "react-resizable-panels";
 import { ResizeHandle } from "#/components/atoms/ResizeHandle";
 
 export type SplitPanelsLayoutProps = {
+  component?: React.ElementType;
   TopLeft: PanelContent;
   TopRight: PanelContent;
   BottomLeft: PanelContent;
@@ -41,6 +42,7 @@ const ControlledPanel: React.FC<ControlledPanelProps> = ({
 };
 
 export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
+  component,
   TopLeft,
   TopRight,
   BottomLeft,
@@ -48,10 +50,11 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
 }) => {
   return (
     <Box
+      component={component}
       sx={{
         height: "calc(100vh - 70px)",
         width: "100vw",
-        p: 1,
+        px: 1,
         overflow: "hidden",
       }}
     >
