@@ -1,3 +1,11 @@
+## [1.218.1](https://github.com/mkayander/leetpal/compare/v1.218.0...v1.218.1) (2023-10-02)
+
+
+### Bug Fixes
+
+* Fixed tab layout component ([89278a1](https://github.com/mkayander/leetpal/commit/89278a1facc77eed2c26bd95faf2d44739226086))
+* Fixed tab layout styles ([d048195](https://github.com/mkayander/leetpal/commit/d048195209f85e430f15b349a05d84b637e59d0c))
+
 # [1.218.0](https://github.com/mkayander/leetpal/compare/v1.217.0...v1.218.0) (2023-10-01)
 
 
