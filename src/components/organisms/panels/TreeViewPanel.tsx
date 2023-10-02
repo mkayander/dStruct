@@ -149,7 +149,6 @@ export const TreeViewPanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel
           value="1"
-          scrollContainerStyle={{ height: "100%" }}
           useScroll={!isMobile}
           sx={{ height: "100%", p: 0, position: "relative" }}
         >
