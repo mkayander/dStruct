@@ -1,3 +1,10 @@
+## [1.218.2](https://github.com/mkayander/leetpal/compare/v1.218.1...v1.218.2) (2023-10-02)
+
+
+### Bug Fixes
+
+* Allow for all slugs to start with a number ([ee10b2a](https://github.com/mkayander/leetpal/commit/ee10b2a3f6f3ccaacfdcc3982e37db0eb9181825))
+
 ## [1.218.1](https://github.com/mkayander/leetpal/compare/v1.218.0...v1.218.1) (2023-10-02)
 
 
