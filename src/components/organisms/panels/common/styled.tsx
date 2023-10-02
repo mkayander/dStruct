@@ -66,26 +66,33 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
   scrollViewportStyle,
   useScroll = true,
   sx,
+  children,
   ...restProps
 }) => {
-  const panel = (
-    <TabPanel
-      sx={{ p: 2, display: "flex", flexDirection: "column", ...sx }}
-      {...restProps}
-    />
-  );
+  const sxProps: StyledTabPanelProps["sx"] = {
+    p: 2,
+    display: "flex",
+    flexDirection: "column",
+    ...sx,
+  };
 
   if (useScroll) {
     return (
-      <TabContentScrollContainer
-        defer
-        style={scrollContainerStyle}
-        viewportStyle={scrollViewportStyle}
-      >
-        {panel}
-      </TabContentScrollContainer>
+      <TabPanel sx={{ p: 0, display: "contents" }} {...restProps}>
+        <TabContentScrollContainer
+          defer
+          style={scrollContainerStyle}
+          viewportStyle={scrollViewportStyle}
+        >
+          <Box sx={sxProps}>{children}</Box>
+        </TabContentScrollContainer>
+      </TabPanel>
     );
-  } else {
-    return panel;
   }
+
+  return (
+    <TabPanel sx={sxProps} {...restProps}>
+      {children}
+    </TabPanel>
+  );
 };
