@@ -24,7 +24,7 @@ const validationSchema = yup.object({
     .string()
     .min(2, "Slug must be at least 2 characters")
     .max(100, "Slug must be at most 100 characters")
-    .matches(/^[a-zA-Z](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
+    .matches(/^[a-zA-Z0-9](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
   solutionDescription: yup
     .string()
     .max(200, "Solution description must be at most 200 characters"),
