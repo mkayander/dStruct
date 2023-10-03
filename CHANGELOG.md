@@ -1,3 +1,10 @@
+# [1.219.0](https://github.com/mkayander/leetpal/compare/v1.218.2...v1.219.0) (2023-10-03)
+
+
+### Features
+
+* Added initial util function tests ([8372bde](https://github.com/mkayander/leetpal/commit/8372bde81322ff5ec421d457e74d873217fa6474))
+
 ## [1.218.2](https://github.com/mkayander/leetpal/compare/v1.218.1...v1.218.2) (2023-10-02)
 
 
