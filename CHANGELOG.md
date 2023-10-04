@@ -1,3 +1,10 @@
+## [1.219.1](https://github.com/mkayander/leetpal/compare/v1.219.0...v1.219.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* Fixed viewer container for binary trees ([3139540](https://github.com/mkayander/leetpal/commit/3139540cc2d52fdd9e579736b78ba8c9e154e8d8))
+
 # [1.219.0](https://github.com/mkayander/leetpal/compare/v1.218.2...v1.219.0) (2023-10-03)
 
 
