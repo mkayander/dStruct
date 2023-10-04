@@ -78,7 +78,7 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
 
   if (useScroll) {
     return (
-      <TabPanel sx={{ p: 0, minHeight: 10 }} {...restProps}>
+      <TabPanel sx={{ p: 0, minHeight: 10, flexGrow: 1 }} {...restProps}>
         <TabContentScrollContainer
           defer
           style={{ height: "100%", ...scrollContainerStyle }}
