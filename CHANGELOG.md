@@ -1,3 +1,10 @@
+# [1.220.0](https://github.com/mkayander/leetpal/compare/v1.219.1...v1.220.0) (2023-10-06)
+
+
+### Features
+
+* Disable automatic locale detection ([3cb01a1](https://github.com/mkayander/leetpal/commit/3cb01a1861906153f06cdfeb70214c224abad96e))
+
 ## [1.219.1](https://github.com/mkayander/leetpal/compare/v1.219.0...v1.219.1) (2023-10-04)
 
 
