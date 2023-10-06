@@ -12,6 +12,7 @@ const config = {
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
     defaultLocale: "en",
+    localeDetection: false,
   },
   images: {
     domains: [
