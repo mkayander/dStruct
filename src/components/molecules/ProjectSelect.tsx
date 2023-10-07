@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useContext, useMemo, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 import { NewLabel } from "#/components/atoms/NewLabel";
 import { SearchInput } from "#/components/molecules/SearchInput";
@@ -42,7 +43,12 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
   const panelBgColor = theme.palette.mode === "dark" ? "#2f2f2f" : "#fff";
 
   const handleSelectProject = (e: SelectChangeEvent) => {
-    void setProject(e.target.value);
+    void setProject(
+      sanitizeHtml(e.target.value, {
+        allowedTags: [],
+        allowedAttributes: {},
+      }),
+    );
   };
 
   const projectSelectItems = useMemo(() => {
