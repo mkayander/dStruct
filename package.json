@@ -87,7 +87,7 @@
     "three": "^0.153.0",
     "typesafe-i18n": "^5.26.2",
     "yup": "^0.32.11",
-    "zod": "^3.22.3"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
