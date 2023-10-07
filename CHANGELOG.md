@@ -1,3 +1,15 @@
+# [1.221.0](https://github.com/mkayander/leetpal/compare/v1.220.0...v1.221.0) (2023-10-07)
+
+
+### Bug Fixes
+
+* Fix code XSS security warning ([5caa74e](https://github.com/mkayander/leetpal/commit/5caa74e7392df15bf745f6b6c3a0178e447f7625))
+
+
+### Features
+
+* Updated zod package ([9c07983](https://github.com/mkayander/leetpal/commit/9c07983e10dea1dde9a3f3c878d27fba756d489a))
+
 # [1.220.0](https://github.com/mkayander/leetpal/compare/v1.219.1...v1.220.0) (2023-10-06)
 
 
