@@ -6,7 +6,7 @@
     "prepare": "husky install",
     "build": "next build",
     "dev": "next dev",
-    "postinstall": "npm run prisma:generate-accelerate && pnpm run generate-graphql",
+    "postinstall": "node prepare.mjs",
     "prisma:generate": "prisma generate",
     "prisma:generate-accelerate": "prisma generate --accelerate",
     "prisma:push": "prisma db push",
