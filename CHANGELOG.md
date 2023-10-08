@@ -1,3 +1,11 @@
+# [1.222.0](https://github.com/mkayander/leetpal/compare/v1.221.0...v1.222.0) (2023-10-08)
+
+
+### Features
+
+* Make a special "postinstall" Node.JS script to handle correct prisma commands execution ([a4191d6](https://github.com/mkayander/leetpal/commit/a4191d62dad3f84179d445263721479f2d44e89f))
+* Updated Prisma packages ([46d77fe](https://github.com/mkayander/leetpal/commit/46d77fe9980e2f4b84e6dade87a819392055d790))
+
 # [1.221.0](https://github.com/mkayander/leetpal/compare/v1.220.0...v1.221.0) (2023-10-07)
 
 
