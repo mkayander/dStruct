@@ -1,3 +1,10 @@
+# [1.224.0](https://github.com/mkayander/leetpal/compare/v1.223.0...v1.224.0) (2023-10-10)
+
+
+### Features
+
+* Updated monaco editor dependencies ([3e96e61](https://github.com/mkayander/leetpal/commit/3e96e61465f3fdce20c9cb2415673b553e7edac4))
+
 # [1.223.0](https://github.com/mkayander/leetpal/compare/v1.222.0...v1.223.0) (2023-10-09)
 
 
