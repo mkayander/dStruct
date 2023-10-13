@@ -1,3 +1,10 @@
+## [1.224.1](https://github.com/mkayander/leetpal/compare/v1.224.0...v1.224.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* Renamed script, added runtime log ([6b2b2cd](https://github.com/mkayander/leetpal/commit/6b2b2cdad87db261e1914df3a0f1f8aa7e3cdca4))
+
 # [1.224.0](https://github.com/mkayander/leetpal/compare/v1.223.0...v1.224.0) (2023-10-10)
 
 
