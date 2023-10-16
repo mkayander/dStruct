@@ -1,3 +1,10 @@
+## [1.225.1](https://github.com/mkayander/leetpal/compare/v1.225.0...v1.225.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* Fixed dropdown text selector ([6ef2427](https://github.com/mkayander/leetpal/commit/6ef2427d3d3296b24a6e259d63c8353dc073abbf))
+
 # [1.225.0](https://github.com/mkayander/leetpal/compare/v1.224.1...v1.225.0) (2023-10-15)
 
 
