@@ -64,7 +64,7 @@ export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
         size="small"
         sx={{
           width: "70px",
-          "& [role=button]": {
+          "& [role=combobox]": {
             color: "transparent",
             "& > svg": {
               ml: 0.5,
