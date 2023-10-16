@@ -1945,6 +1945,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clntcuc5x0003pd0fdvfs54q4": {
+      "id": "clntcuc5x0003pd0fdvfs54q4",
+      "createdAt": "2023-10-16T20:35:29.686Z",
+      "updatedAt": "2023-10-16T20:35:29.686Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Pascal's Triangle II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/pascals-triangle-ii",
+      "slug": "pascals-triangle-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9172,6 +9186,25 @@
         }
       },
       "description": null
+    },
+    "clntcuc5y0004pd0frp7vm0sq": {
+      "id": "clntcuc5y0004pd0frp7vm0sq",
+      "createdAt": "2023-10-16T20:35:29.686Z",
+      "updatedAt": "2023-10-16T20:36:00.239Z",
+      "projectId": "clntcuc5x0003pd0fdvfs54q4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "oZ2uZgQYhFnJyPNpCee14a": {
+          "name": "oZ2uZgQYhFnJyPNpCee14a",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11670,6 +11703,18 @@
       "description": "",
       "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar predictTheWinner = function (nums) {\n  const n = nums.length;\n  const dp = Array.from(nums);\n\n  for (let diff = 1; diff < n; diff++) {\n    for (let left = 0; left < n - diff; left++) {\n      const right = left + diff;\n      nums.setColor(left, \"cyan\");\n      nums.setColor(right, \"green\");\n      nums.setColor(left, null);\n      nums.setColor(right, null);\n\n      dp[left] = Math.max(nums[left] - dp[left + 1], nums[right] - dp[left]);\n    }\n  }\n\n  return dp[0] >= 0;\n};\n\nreturn predictTheWinner;\n",
       "order": 1
+    },
+    "clntcuc5y0005pd0focqch2w5": {
+      "id": "clntcuc5y0005pd0focqch2w5",
+      "createdAt": "2023-10-16T20:35:29.686Z",
+      "updatedAt": "2023-10-16T20:36:39.695Z",
+      "projectId": "clntcuc5x0003pd0fdvfs54q4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} rowIndex\n * @return {number[]}\n */\nvar getRow = function (rowIndex) {\n  let row = new Array();\n  row.push(1);\n\n  for (let i = 0; i < rowIndex; i++) {\n    const newRow = new Array();\n    newRow.push(1);\n    for (let j = 1; j < row.length; j++) {\n      newRow[j] = row[j - 1] + row[j];\n    }\n    newRow.push(1);\n    row = newRow;\n  }\n\n  return row;\n};\n\nreturn getRow;\n",
+      "order": 0
     }
   }
 }
