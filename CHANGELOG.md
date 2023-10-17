@@ -1,3 +1,10 @@
+## [1.225.2](https://github.com/mkayander/leetpal/compare/v1.225.1...v1.225.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* Fixed text typo ([67d54cf](https://github.com/mkayander/leetpal/commit/67d54cfcfc8661a66c71c7e90297e1c770921e3b))
+
 ## [1.225.1](https://github.com/mkayander/leetpal/compare/v1.225.0...v1.225.1) (2023-10-16)
 
 
