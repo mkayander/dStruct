@@ -83,7 +83,7 @@ const en: BaseTranslation = {
   USERNAME: "Username",
   USER_DASHBOARD: "{name:string}'s Dashboard",
   USER_SETTINGS: "User Settings",
-  VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Visualize your LeetCode problems just form your code",
+  VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Visualize your LeetCode problems just from your code",
   YOUR_CHANGES_WILL_BE_LOST: "Your changes will be lost",
   YOUR_LEETCODE_ACCOUNT_NAME: "Your LeetCode account name:",
   YOUR_NAME: "Your name:",
