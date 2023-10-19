@@ -1,3 +1,10 @@
+# [1.226.0](https://github.com/mkayander/leetpal/compare/v1.225.2...v1.226.0) (2023-10-19)
+
+
+### Features
+
+* Updated Next.js ([9fbf63e](https://github.com/mkayander/leetpal/commit/9fbf63e945e58251b5534c1a333956e73ea8035d))
+
 ## [1.225.2](https://github.com/mkayander/leetpal/compare/v1.225.1...v1.225.2) (2023-10-17)
 
 
