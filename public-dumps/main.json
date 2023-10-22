@@ -1959,6 +1959,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clntdgle60007pd0feli3sdf8": {
+      "id": "clntdgle60007pd0feli3sdf8",
+      "createdAt": "2023-10-16T20:52:48.078Z",
+      "updatedAt": "2023-10-16T20:52:48.078Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Max Consecutive Ones II",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/max-consecutive-ones-ii/",
+      "slug": "max-consecutive-ones-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clnwvl9xm0001p60f2mvhwf4w": {
+      "id": "clnwvl9xm0001p60f2mvhwf4w",
+      "createdAt": "2023-10-19T07:43:38.122Z",
+      "updatedAt": "2023-10-19T07:43:38.122Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Parallel Courses III",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/parallel-courses-iii",
+      "slug": "parallel-courses-iii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clnyql2kl0001mx0gzwpzmqu7": {
+      "id": "clnyql2kl0001mx0gzwpzmqu7",
+      "createdAt": "2023-10-20T14:59:02.853Z",
+      "updatedAt": "2023-10-20T14:59:02.853Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sort the Matrix Diagonally",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/sort-the-matrix-diagonally",
+      "slug": "sort-the-matrix-diagonally",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9205,6 +9247,94 @@
         }
       },
       "description": null
+    },
+    "clntdgle60008pd0fo8vxwbjw": {
+      "id": "clntdgle60008pd0fo8vxwbjw",
+      "createdAt": "2023-10-16T20:52:48.078Z",
+      "updatedAt": "2023-10-16T20:53:33.588Z",
+      "projectId": "clntdgle60007pd0feli3sdf8",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8hL9SzJVK9tqqwnXLe7Phq": {
+          "name": "8hL9SzJVK9tqqwnXLe7Phq",
+          "type": "array",
+          "input": "[1,0,1,1,0,1,1,1,1,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clnwvl9xm0002p60fue2rlaqe": {
+      "id": "clnwvl9xm0002p60fue2rlaqe",
+      "createdAt": "2023-10-19T07:43:38.122Z",
+      "updatedAt": "2023-10-19T07:44:35.888Z",
+      "projectId": "clnwvl9xm0001p60f2mvhwf4w",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2uuWa17T73sEQh5P5NCDxs": {
+          "name": "2uuWa17T73sEQh5P5NCDxs",
+          "type": "array",
+          "input": "[1,2,3,4,5]",
+          "order": 2
+        },
+        "rtqx7Tb9WVGMqn1ozeq9BV": {
+          "name": "rtqx7Tb9WVGMqn1ozeq9BV",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "uRWg2egiuWXFQbC8roqspB": {
+          "name": "uRWg2egiuWXFQbC8roqspB",
+          "type": "array",
+          "input": "[[1,5],[2,5],[3,5],[3,4],[4,5]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clnyql2kl0002mx0gtbwiffka": {
+      "id": "clnyql2kl0002mx0gtbwiffka",
+      "createdAt": "2023-10-20T14:59:02.853Z",
+      "updatedAt": "2023-10-20T14:59:18.381Z",
+      "projectId": "clnyql2kl0001mx0gzwpzmqu7",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5L9NUjowvR41e5xwqSJpFR": {
+          "name": "5L9NUjowvR41e5xwqSJpFR",
+          "type": "matrix",
+          "input": "[[3,3,1,1],[2,2,1,2],[1,1,1,2]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clnyqt0650005mx0grobj8lb2": {
+      "id": "clnyqt0650005mx0grobj8lb2",
+      "createdAt": "2023-10-20T15:05:12.989Z",
+      "updatedAt": "2023-10-20T15:05:16.961Z",
+      "projectId": "clnyql2kl0001mx0gzwpzmqu7",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "5L9NUjowvR41e5xwqSJpFR": {
+          "name": "5L9NUjowvR41e5xwqSJpFR",
+          "type": "matrix",
+          "input": "[[11,25,66,1,69,7],[23,55,17,45,15,52],[75,31,36,44,58,8],[22,27,33,25,68,4],[84,28,14,11,5,50]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11714,6 +11844,42 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number} rowIndex\n * @return {number[]}\n */\nvar getRow = function (rowIndex) {\n  let row = new Array();\n  row.push(1);\n\n  for (let i = 0; i < rowIndex; i++) {\n    const newRow = new Array();\n    newRow.push(1);\n    for (let j = 1; j < row.length; j++) {\n      newRow[j] = row[j - 1] + row[j];\n    }\n    newRow.push(1);\n    row = newRow;\n  }\n\n  return row;\n};\n\nreturn getRow;\n",
+      "order": 0
+    },
+    "clntdgle60009pd0fcq243oob": {
+      "id": "clntdgle60009pd0fcq243oob",
+      "createdAt": "2023-10-16T20:52:48.078Z",
+      "updatedAt": "2023-10-16T20:54:14.675Z",
+      "projectId": "clntdgle60007pd0feli3sdf8",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar findMaxConsecutiveOnes = function (nums) {\n  if (!nums.length) return 0;\n\n  let prev = 0;\n  let current = 0;\n  let result = 1;\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n\n    if (num === 1) {\n      current++;\n      result = Math.max(result, current + prev);\n    } else {\n      prev = current + 1;\n      current = 0;\n      result = Math.max(result, prev);\n    }\n\n    console.log({prev, current, result});\n  }\n\n  return result;\n};\n\nreturn findMaxConsecutiveOnes;\n",
+      "order": 0
+    },
+    "clnwvl9xm0003p60f1ojk3jdm": {
+      "id": "clnwvl9xm0003p60f1ojk3jdm",
+      "createdAt": "2023-10-19T07:43:38.122Z",
+      "updatedAt": "2023-10-19T07:45:26.759Z",
+      "projectId": "clnwvl9xm0001p60f2mvhwf4w",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} relations\n * @param {number[]} time\n * @return {number}\n */\nvar minimumTime = function (n, relations, time) {\n  const indegrees = new Uint32Array(n);\n  const maxTimes = new Uint32Array(n);\n  const adjList = {};\n\n  for (let [from, to] of relations) {\n    from--;\n    to--;\n    indegrees[to]++;\n    (adjList[from] ??= []).push(to);\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 0) {\n      queue.enqueue(i);\n    }\n  }\n  if (queue.size() === 0) return -1;\n\n  console.log(indegrees, adjList, queue.toArray());\n\n  let result = 0;\n\n  while (!queue.isEmpty()) {\n    const size = queue.size();\n\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      maxTimes[node] += time[node];\n      if (maxTimes[node] > result) {\n        result = maxTimes[node];\n      }\n\n      if (!adjList[node]) continue;\n      for (const neighbor of adjList[node]) {\n        indegrees[neighbor]--;\n        if (indegrees[neighbor] === 0) {\n          queue.enqueue(neighbor);\n        }\n        maxTimes[neighbor] = Math.max(maxTimes[neighbor], maxTimes[node]);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn minimumTime;\n",
+      "order": 0
+    },
+    "clnyql2kl0003mx0g7eknx4w5": {
+      "id": "clnyql2kl0003mx0g7eknx4w5",
+      "createdAt": "2023-10-20T14:59:02.853Z",
+      "updatedAt": "2023-10-20T15:05:40.786Z",
+      "projectId": "clnyql2kl0001mx0gzwpzmqu7",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar diagonalSort = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  for (let i = 0; i < n - 1; i++) {\n    const freqMap = new Array(101);\n    let min = Infinity;\n    for (let j = 0; j < m && i + j < n; j++) {\n      mat[j].setColor(i + j, \"cyan\");\n      const num = mat[j][i + j];\n      freqMap[num] ??= 0;\n      freqMap[num]++;\n      min = Math.min(min, num);\n    }\n    let index = min;\n    for (let j = 0; j < m && i + j < n; j++) {\n      mat[j].setColor(i + j, \"green\");\n      while (!freqMap[index]) index++;\n      mat[j][i + j] = index;\n      freqMap[index]--;\n    }\n  }\n\n  for (let row = 1; row < m - 1; row++) {\n    const freqMap = new Array(101);\n    let min = Infinity;\n    for (let col = 0; col < n && row + col < m; col++) {\n      mat[row + col].setColor(col, \"cyan\");\n      const num = mat[row + col][col];\n      freqMap[num] ??= 0;\n      freqMap[num]++;\n      min = Math.min(min, num);\n    }\n    let index = min;\n    for (let col = 0; col < n && row + col < m; col++) {\n      mat[row + col].setColor(col, \"green\");\n      while (!freqMap[index]) index++;\n      mat[row + col][col] = index;\n      freqMap[index]--;\n    }\n  }\n\n  return mat;\n};\n\nreturn diagonalSort;\n",
       "order": 0
     }
   }
