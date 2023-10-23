@@ -2001,6 +2001,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clo31vtz80001p60fbs96o22e": {
+      "id": "clo31vtz80001p60fbs96o22e",
+      "createdAt": "2023-10-23T15:26:25.413Z",
+      "updatedAt": "2023-10-23T15:26:25.413Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Subarray Sum Equals K",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/subarray-sum-equals-k",
+      "slug": "subarray-sum-equals-k",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9335,6 +9349,81 @@
         }
       },
       "description": null
+    },
+    "clo31vtz90002p60fh3xl0tp8": {
+      "id": "clo31vtz90002p60fh3xl0tp8",
+      "createdAt": "2023-10-23T15:26:25.413Z",
+      "updatedAt": "2023-10-23T15:26:45.074Z",
+      "projectId": "clo31vtz80001p60fbs96o22e",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        },
+        "m1fwPWsejx9pHck9R3yTjS": {
+          "name": "m1fwPWsejx9pHck9R3yTjS",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clo31wamr0005p60fpowa1t6a": {
+      "id": "clo31wamr0005p60fpowa1t6a",
+      "createdAt": "2023-10-23T15:26:46.995Z",
+      "updatedAt": "2023-10-23T15:26:54.252Z",
+      "projectId": "clo31vtz80001p60fbs96o22e",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,1,1]",
+          "order": 0
+        },
+        "m1fwPWsejx9pHck9R3yTjS": {
+          "name": "m1fwPWsejx9pHck9R3yTjS",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clo3265820007p60f9hgew194": {
+      "id": "clo3265820007p60f9hgew194",
+      "createdAt": "2023-10-23T15:34:26.546Z",
+      "updatedAt": "2023-10-23T15:35:06.750Z",
+      "projectId": "clo31vtz80001p60fbs96o22e",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3,4,3,2,1,0,-1,-2,-3,-4]",
+          "order": 0
+        },
+        "m1fwPWsejx9pHck9R3yTjS": {
+          "name": "m1fwPWsejx9pHck9R3yTjS",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11880,6 +11969,18 @@
       "complexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar diagonalSort = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  for (let i = 0; i < n - 1; i++) {\n    const freqMap = new Array(101);\n    let min = Infinity;\n    for (let j = 0; j < m && i + j < n; j++) {\n      mat[j].setColor(i + j, \"cyan\");\n      const num = mat[j][i + j];\n      freqMap[num] ??= 0;\n      freqMap[num]++;\n      min = Math.min(min, num);\n    }\n    let index = min;\n    for (let j = 0; j < m && i + j < n; j++) {\n      mat[j].setColor(i + j, \"green\");\n      while (!freqMap[index]) index++;\n      mat[j][i + j] = index;\n      freqMap[index]--;\n    }\n  }\n\n  for (let row = 1; row < m - 1; row++) {\n    const freqMap = new Array(101);\n    let min = Infinity;\n    for (let col = 0; col < n && row + col < m; col++) {\n      mat[row + col].setColor(col, \"cyan\");\n      const num = mat[row + col][col];\n      freqMap[num] ??= 0;\n      freqMap[num]++;\n      min = Math.min(min, num);\n    }\n    let index = min;\n    for (let col = 0; col < n && row + col < m; col++) {\n      mat[row + col].setColor(col, \"green\");\n      while (!freqMap[index]) index++;\n      mat[row + col][col] = index;\n      freqMap[index]--;\n    }\n  }\n\n  return mat;\n};\n\nreturn diagonalSort;\n",
+      "order": 0
+    },
+    "clo31vtz90003p60frn27taic": {
+      "id": "clo31vtz90003p60frn27taic",
+      "createdAt": "2023-10-23T15:26:25.413Z",
+      "updatedAt": "2023-10-23T15:45:03.049Z",
+      "projectId": "clo31vtz80001p60fbs96o22e",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar subarraySum = function (nums, k) {\n  let count = 0;\n  let sum = 0;\n\n\n  // sum(i,j) = sum(0,j) - sum(0,i)\n  const map = new Map();\n  map.set(0, 1);\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    sum += nums[i];\n    if (map.has(sum - k)) {\n      count += map.get(sum - k);\n    }\n    map.set(sum, (map.get(sum) ?? 0) + 1);\n    console.log(sum, count, map);\n  }\n\n  return count;\n};\n\nreturn subarraySum;\n",
       "order": 0
     }
   }
