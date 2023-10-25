@@ -2015,6 +2015,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clo65gz600001o30gc9s36l6q": {
+      "id": "clo65gz600001o30gc9s36l6q",
+      "createdAt": "2023-10-25T19:30:09.286Z",
+      "updatedAt": "2023-10-25T19:30:09.286Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "K-th Symbol in Grammar",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/k-th-symbol-in-grammar",
+      "slug": "k-th-symbol-in-grammar",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9424,6 +9438,81 @@
         }
       },
       "description": null
+    },
+    "clo65gz600002o30g025lygsc": {
+      "id": "clo65gz600002o30g025lygsc",
+      "createdAt": "2023-10-25T19:30:09.286Z",
+      "updatedAt": "2023-10-25T19:35:22.562Z",
+      "projectId": "clo65gz600001o30gc9s36l6q",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        },
+        "23vAY9qtLVk6sNDnWVnFc8": {
+          "name": "23vAY9qtLVk6sNDnWVnFc8",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clo65qeql0005o30gegzl8dzs": {
+      "id": "clo65qeql0005o30gegzl8dzs",
+      "createdAt": "2023-10-25T19:37:29.374Z",
+      "updatedAt": "2023-10-25T19:37:34.148Z",
+      "projectId": "clo65gz600001o30gc9s36l6q",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        },
+        "23vAY9qtLVk6sNDnWVnFc8": {
+          "name": "23vAY9qtLVk6sNDnWVnFc8",
+          "type": "number",
+          "input": "300",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clo65t0z60009o30gwxrw3gra": {
+      "id": "clo65t0z60009o30gwxrw3gra",
+      "createdAt": "2023-10-25T19:39:31.507Z",
+      "updatedAt": "2023-10-25T19:39:45.595Z",
+      "projectId": "clo65gz600001o30gc9s36l6q",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "23vAY9qtLVk6sNDnWVnFc8": {
+          "name": "23vAY9qtLVk6sNDnWVnFc8",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -11982,6 +12071,30 @@
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar subarraySum = function (nums, k) {\n  let count = 0;\n  let sum = 0;\n\n\n  // sum(i,j) = sum(0,j) - sum(0,i)\n  const map = new Map();\n  map.set(0, 1);\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    sum += nums[i];\n    if (map.has(sum - k)) {\n      count += map.get(sum - k);\n    }\n    map.set(sum, (map.get(sum) ?? 0) + 1);\n    console.log(sum, count, map);\n  }\n\n  return count;\n};\n\nreturn subarraySum;\n",
       "order": 0
+    },
+    "clo65gz600003o30gwm0snvey": {
+      "id": "clo65gz600003o30gwm0snvey",
+      "createdAt": "2023-10-25T19:30:09.286Z",
+      "updatedAt": "2023-10-25T19:36:58.232Z",
+      "projectId": "clo65gz600001o30gc9s36l6q",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nvar kthGrammar = function (n, k) {\n  if (k === 1) return 0;\n\n  const dfs = (row, pos, rootVal) => {\n    if (row === 1) return rootVal;\n\n    const length = 2 ** (row - 1);\n    const half = Math.floor(length / 2);\n\n    console.log({ row, pos, rootVal, length, half });\n\n    const left = rootVal === 0 ? 0 : 1;\n    const right = rootVal === 0 ? 1 : 0;\n\n    if (pos <= half) {\n      return dfs(row - 1, pos, left);\n    } else {\n      const nextPosition = pos - (length >> 1);\n      return dfs(row - 1, nextPosition, right);\n    }\n  };\n\n  return dfs(n, k, 0);\n};\n\nreturn kthGrammar;\n\n/**\n\n  0\n  01\n  0110\n  01101001\n  0110100110010110\n  01101001100101101001011001101001\n  0110100110010110100101100110100110010110011010010110100110010110\n\n */\n",
+      "order": 0
+    },
+    "clo65r5480007o30gq5gv7bzr": {
+      "id": "clo65r5480007o30gq5gv7bzr",
+      "createdAt": "2023-10-25T19:38:03.561Z",
+      "updatedAt": "2023-10-25T19:40:13.273Z",
+      "projectId": "clo65gz600001o30gc9s36l6q",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nvar kthGrammar = function (n, k) {\n  if (k === 1 || n === 1) return 0;\n\n  let row = Array.from([0]);\n\n  for (let i = 1; i < n; i++) {\n    const nextRow = new Array();\n    for (let j = 0; j < row.length; j++) {\n      if (row[j] === 0) {\n        nextRow.push(0, 1);\n      } else {\n        nextRow.push(1, 0);\n      }\n    }\n    row = nextRow;\n  }\n\n  row.setColor(k - 1, \"green\");\n  return row[k - 1];\n};\n\nreturn kthGrammar;\n",
+      "order": 1
     }
   }
 }
