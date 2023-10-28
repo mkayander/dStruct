@@ -360,6 +360,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 name="projectDifficulty"
                 labelId="new-proj-select-difficulty-label"
                 label="Difficulty"
+                required
                 disabled={formik.isSubmitting}
                 value={formik.values.projectDifficulty ?? ""}
                 onChange={formik.handleChange}
