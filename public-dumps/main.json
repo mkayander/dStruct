@@ -2043,6 +2043,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cloa6xyat0001o70gfdbjfgin": {
+      "id": "cloa6xyat0001o70gfdbjfgin",
+      "createdAt": "2023-10-28T15:22:25.636Z",
+      "updatedAt": "2023-10-28T15:22:25.636Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count Vowels Permutation",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/count-vowels-permutation",
+      "slug": "count-vowels-permutation",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9546,6 +9560,25 @@
         }
       },
       "description": null
+    },
+    "cloa6xyat0002o70gotbl5wmz": {
+      "id": "cloa6xyat0002o70gotbl5wmz",
+      "createdAt": "2023-10-28T15:22:25.636Z",
+      "updatedAt": "2023-10-28T15:22:49.408Z",
+      "projectId": "cloa6xyat0001o70gfdbjfgin",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "v64G18BQ3aM6AcDKNGiymu": {
+          "name": "v64G18BQ3aM6AcDKNGiymu",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -12152,6 +12185,18 @@
       "description": "",
       "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar longestPalindrome = function (s) {\n  // Step 1: Preprocess the input string\n  const processedStr = Array.from([\"^\", \"#\"]);\n  for (let i = 0; i < s.length; i++) {\n    processedStr.push(s[i], \"#\");\n  }\n  processedStr.push(\"$\");\n  const modifiedString = processedStr.join(\"\");\n\n  // Step 2: Initialize variables for the algorithm\n  const strLength = modifiedString.length;\n  const palindromeLengths = new Array(strLength).fill(0);\n  let center = 0; // Current center of the palindrome\n  let rightEdge = 0; // Rightmost edge of the palindrome\n\n  // Step 3: Loop through the modified string to find palindromes\n  for (let i = 1; i < strLength - 1; i++) {\n    if (rightEdge > i) {\n      palindromeLengths[i] = Math.min(\n        rightEdge - i,\n        palindromeLengths[2 * center - i],\n      );\n    }\n\n    // Expand the palindrome around the current character\n    while (\n      modifiedString[i + 1 + palindromeLengths[i]] ===\n      modifiedString[i - 1 - palindromeLengths[i]]\n    ) {\n      palindromeLengths[i]++;\n    }\n\n    // Update the rightmost edge and center if necessary\n    if (i + palindromeLengths[i] > rightEdge) {\n      center = i;\n      rightEdge = i + palindromeLengths[i];\n    }\n  }\n\n  // Step 4: Find the longest palindrome and its center\n  let maxLength = 0;\n  let maxCenter = 0;\n  for (let i = 0; i < strLength; i++) {\n    if (palindromeLengths[i] > maxLength) {\n      maxLength = palindromeLengths[i];\n      maxCenter = i;\n    }\n  }\n\n  // Step 5: Extract the longest palindrome from the modified string\n  const start = (maxCenter - maxLength) / 2;\n  const end = start + maxLength;\n\n  // Return the longest palindrome in the original string\n  return s.slice(start, end);\n};\n\nreturn longestPalindrome;\n",
       "order": 1
+    },
+    "cloa6xyat0003o70g8lrcvh24": {
+      "id": "cloa6xyat0003o70g8lrcvh24",
+      "createdAt": "2023-10-28T15:22:25.636Z",
+      "updatedAt": "2023-10-28T15:22:42.548Z",
+      "projectId": "cloa6xyat0001o70gfdbjfgin",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "var countVowelPermutation = function (n) {\n  const MOD = 1e9 + 7;\n\n  let a = 1,\n    e = 1,\n    i = 1,\n    o = 1,\n    u = 1;\n\n  for (let j = 1; j < n; j++) {\n    let a_next = e;\n    let e_next = (a + i) % MOD;\n    let i_next = (a + e + o + u) % MOD;\n    let o_next = (i + u) % MOD;\n    let u_next = a;\n\n    (a = a_next), (e = e_next), (i = i_next), (o = o_next), (u = u_next);\n  }\n\n  return (a + e + i + o + u) % MOD;\n};\n\nreturn countVowelPermutation;\n",
+      "order": 0
     }
   }
 }
