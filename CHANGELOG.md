@@ -1,3 +1,10 @@
+## [1.227.1](https://github.com/mkayander/leetpal/compare/v1.227.0...v1.227.1) (2023-10-28)
+
+
+### Bug Fixes
+
+* Make the difficulty field required ([4048a9a](https://github.com/mkayander/leetpal/commit/4048a9a3742bd79d90bd4497e13a54f5a391b6ac))
+
 # [1.227.0](https://github.com/mkayander/leetpal/compare/v1.226.0...v1.227.0) (2023-10-19)
 
 
