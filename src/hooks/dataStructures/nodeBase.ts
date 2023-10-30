@@ -14,7 +14,7 @@ export interface NodeMeta {
 
 export abstract class NodeBase {
   _val!: number | string;
-  protected readonly name!: string;
+  protected name!: string;
   readonly meta!: NodeMeta;
   protected readonly dispatch!: AppDispatch;
 
