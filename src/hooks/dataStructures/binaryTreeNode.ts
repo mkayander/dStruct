@@ -1,3 +1,4 @@
+import { Queue } from "@datastructures-js/queue";
 import type { Dictionary } from "@reduxjs/toolkit";
 
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
@@ -81,6 +82,27 @@ export class BinaryTreeNode extends NodeBase {
         args: [node?.meta.id ?? null, node?.name],
       }),
     );
+  }
+
+  public toString(): string {
+    const result = [];
+    const queue: Queue<BinaryTreeNode | null> = new Queue();
+    queue.enqueue(this);
+
+    while (!queue.isEmpty()) {
+      const node = queue.dequeue();
+
+      result.push(node?.val ?? "null");
+
+      if (node) {
+        queue.enqueue(node.left);
+        queue.enqueue(node.right);
+      }
+    }
+
+    while (result.at(-1) === "null") result.pop();
+
+    return `Binary Tree [${String(result)}]`;
   }
 
   static fromNodeData(

@@ -17,6 +17,9 @@ export const safeStringify = (val: unknown): string => {
     }
     return `[${items.join(", ")}]`;
   }
+  if (val && typeof val === "object" && "toString" in val) {
+    return val.toString();
+  }
 
   return JSON.stringify(
     val,
