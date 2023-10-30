@@ -30,10 +30,12 @@ export class BinaryTreeNode extends NodeBase {
       _left: {
         value: left,
         enumerable: false,
+        writable: true,
       },
       _right: {
         value: right,
         enumerable: false,
+        writable: true,
       },
     });
 

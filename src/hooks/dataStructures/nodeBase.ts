@@ -28,6 +28,7 @@ export abstract class NodeBase {
       _val: {
         value: val,
         enumerable: false,
+        writable: true,
       },
       meta: {
         value: meta,
