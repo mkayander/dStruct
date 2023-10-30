@@ -1,3 +1,17 @@
+# [1.228.0](https://github.com/mkayander/leetpal/compare/v1.227.1...v1.228.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* Make node base "name" property editable ([e200cdb](https://github.com/mkayander/leetpal/commit/e200cdb88aa31928eeea6a4ffe5a07131bb3e75b))
+
+
+### Features
+
+* Implement a basic binary tree stringification ([643a32f](https://github.com/mkayander/leetpal/commit/643a32f5710fa717d73edd2b2ebfa42d1835de68))
+* Make technical binary tree fields non-enumerable for the end user ([51a8055](https://github.com/mkayander/leetpal/commit/51a80557c57858c431a0206efdef64675ffde75c))
+* Updated dependencies ([6d53c31](https://github.com/mkayander/leetpal/commit/6d53c3110de3e504fc8e59a9635ac9e938bdacbc))
+
 ## [1.227.1](https://github.com/mkayander/leetpal/compare/v1.227.0...v1.227.1) (2023-10-28)
 
 
