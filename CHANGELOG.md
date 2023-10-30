@@ -1,3 +1,10 @@
+## [1.228.1](https://github.com/mkayander/leetpal/compare/v1.228.0...v1.228.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* Make tree private properties writable ([6adecbc](https://github.com/mkayander/leetpal/commit/6adecbcbe90dfddfe86792b141ec38d5c9f4a62c))
+
 # [1.228.0](https://github.com/mkayander/leetpal/compare/v1.227.1...v1.228.0) (2023-10-30)
 
 
