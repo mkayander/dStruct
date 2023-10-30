@@ -13,16 +13,35 @@ export interface NodeMeta {
 }
 
 export abstract class NodeBase {
-  _val: number | string;
+  _val!: number | string;
+  protected readonly name!: string;
+  readonly meta!: NodeMeta;
+  protected readonly dispatch!: AppDispatch;
 
   protected constructor(
     val: number | string,
-    readonly meta: NodeMeta,
-    protected name: string,
-    protected dispatch: AppDispatch,
+    meta: NodeMeta,
+    name: string,
+    dispatch: AppDispatch,
   ) {
-    this._val = val;
-    this.meta = meta;
+    Object.defineProperties(this, {
+      _val: {
+        value: val,
+        enumerable: false,
+      },
+      meta: {
+        value: meta,
+        enumerable: false,
+      },
+      name: {
+        value: name,
+        enumerable: false,
+      },
+      dispatch: {
+        value: dispatch,
+        enumerable: false,
+      },
+    });
   }
 
   public get val(): number | string {

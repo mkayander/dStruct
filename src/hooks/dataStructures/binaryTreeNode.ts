@@ -25,8 +25,16 @@ export class BinaryTreeNode extends NodeBase {
     addToCallstack?: boolean,
   ) {
     super(val, meta, name, dispatch);
-    this._left = left;
-    this._right = right;
+    Object.defineProperties(this, {
+      _left: {
+        value: left,
+        enumerable: false,
+      },
+      _right: {
+        value: right,
+        enumerable: false,
+      },
+    });
 
     if (addToCallstack) {
       this.dispatch(
@@ -39,7 +47,7 @@ export class BinaryTreeNode extends NodeBase {
     }
   }
 
-  private _left: BinaryTreeNode | null;
+  private _left!: BinaryTreeNode | null;
 
   public get left() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
@@ -57,7 +65,7 @@ export class BinaryTreeNode extends NodeBase {
     );
   }
 
-  private _right: BinaryTreeNode | null;
+  private _right!: BinaryTreeNode | null;
 
   public get right() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
