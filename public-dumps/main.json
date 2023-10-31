@@ -171,12 +171,12 @@
     "clg2o9e950001me086y6injwj": {
       "id": "clg2o9e950001me086y6injwj",
       "createdAt": "2023-04-04T19:47:24.906Z",
-      "updatedAt": "2023-04-04T19:47:24.906Z",
+      "updatedAt": "2023-10-30T19:19:37.547Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Kth Smallest Element in a BST",
       "category": "BST",
-      "difficulty": null,
-      "lcLink": null,
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
       "slug": "kth-smallest-element-in-a-bst",
       "description": "",
       "isExample": false,
@@ -2082,6 +2082,20 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
       "slug": "binary-tree-level-order-traversal",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clodb0yli0005pk0g7wegabyv": {
+      "id": "clodb0yli0005pk0g7wegabyv",
+      "createdAt": "2023-10-30T19:40:02.982Z",
+      "updatedAt": "2023-10-30T19:40:02.982Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal",
+      "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -9720,6 +9734,31 @@
         }
       },
       "description": null
+    },
+    "clodb0yli0006pk0g4eu9z2mu": {
+      "id": "clodb0yli0006pk0g4eu9z2mu",
+      "createdAt": "2023-10-30T19:40:02.982Z",
+      "updatedAt": "2023-10-30T19:40:49.435Z",
+      "projectId": "clodb0yli0005pk0g7wegabyv",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "array",
+          "input": "[3,9,20,15,7]",
+          "order": 0
+        },
+        "6wcPYAHk2wF3D13MZ9jttt": {
+          "name": "6wcPYAHk2wF3D13MZ9jttt",
+          "type": "array",
+          "input": "[9,3,15,20,7]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -9954,38 +9993,38 @@
     "clg2o9e960004me08dbyywfjk": {
       "id": "clg2o9e960004me08dbyywfjk",
       "createdAt": "2023-04-04T19:47:24.906Z",
-      "updatedAt": "2023-04-04T19:47:24.906Z",
+      "updatedAt": "2023-10-30T19:21:14.090Z",
       "projectId": "clg2o9e950001me086y6injwj",
       "title": "Recursive DFS",
       "slug": "recursive-dfs",
       "complexity": null,
       "description": "",
-      "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function getSmallestVal(head, k) {\r\n  const data = { val: null, count: 0 };\r\n  dfs(head, data, k);\r\n  return data.val;\r\n};\r\n\r\nfunction dfs(node, data, k) {\r\n  if (!node) return;\r\n  node.setColor(\"cyan\");\r\n  dfs(node.left, data, k);\r\n  if (data.count >= k) return;\r\n  data.val = node.val;\r\n  data.count++;\r\n  node.setColor(\"green\", \"blink\");\r\n  dfs(node.right, data, k);\r\n}\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
-      "order": 0
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getSmallestVal(head, k) {\n  const data = { val: null, count: 0 };\n  dfs(head, data, k);\n  return data.val;\n};\n\nfunction dfs(node, data, k) {\n  if (!node) return;\n  node.setColor(\"cyan\");\n  dfs(node.left, data, k);\n  if (data.count >= k) return;\n  data.val = node.val;\n  data.count++;\n  node.setColor(\"green\", \"blink\");\n  dfs(node.right, data, k);\n}\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "order": 3
     },
     "clg2ok1zt0009me086gxekzul": {
       "id": "clg2ok1zt0009me086gxekzul",
       "createdAt": "2023-04-04T19:55:42.234Z",
-      "updatedAt": "2023-04-04T19:55:42.234Z",
+      "updatedAt": "2023-10-30T19:21:14.090Z",
       "projectId": "clg2o9e950001me086y6injwj",
       "title": "Controlled Recursion (Iterative DFS)",
       "slug": "controlled-recursion",
       "complexity": null,
       "description": "",
       "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function getSmallestVal(head, k) {\r\n  const stack = [];\r\n  let count = 0;\r\n  let current = head;\r\n\r\n  while (true) {\r\n    while (current !== null) {\r\n      current.setColor(\"cyan\");\r\n      stack.push(current);\r\n      current = current.left;\r\n    }\r\n\r\n    current = stack.pop();\r\n    current.setColor(\"green\", \"blink\");\r\n    count++;\r\n    if (count >= k) return current.val;\r\n    current = current.right;\r\n  }\r\n};\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
-      "order": 0
+      "order": 1
     },
     "clg2q8orv0001l408gew3mket": {
       "id": "clg2q8orv0001l408gew3mket",
       "createdAt": "2023-04-04T20:42:51.116Z",
-      "updatedAt": "2023-04-04T20:42:51.116Z",
+      "updatedAt": "2023-10-30T19:21:14.090Z",
       "projectId": "clg2o9e950001me086y6injwj",
       "title": "BST Iterator Class",
       "slug": "bst-iterator",
       "complexity": null,
       "description": "",
       "code": "/**\n * @param {TreeNodeObject} head\n */\nfunction getSmallestVal(head, k) {\n  let count = 0;\n  const bstIterator = new BSTIterator(head);\n  let result = null;\n\n  while (bstIterator.hasNext() && count < k) {\n    result = bstIterator.next();\n    count++;\n  }\n\n  return result;\n}\n\nclass BSTIterator {\n  stack = [];\n  current = null;\n  constructor(root) {\n    this.current = root;\n  }\n\n  next() {\n    while (this.current) {\n      this.current.setColor(\"cyan\");\n      this.stack.push(this.current);\n      this.current = this.current.left;\n    }\n    \n    this.current = this.stack.pop();\n    this.current.setColor(\"green\", \"blink\");\n\n    const result = this.current;\n    this.current = this.current.right;\n\n    return result.val;\n  }\n\n  hasNext() {\n    return !!this.current || this.stack.length > 0;\n  }\n}\n\nreturn getSmallestVal;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
-      "order": 0
+      "order": 2
     },
     "clg3xrkcv0004jx09xp7pt7r4": {
       "id": "clg3xrkcv0004jx09xp7pt7r4",
@@ -12373,6 +12412,30 @@
       "complexity": null,
       "description": "",
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nvar levelOrder = function (root) {\n  const result = [];\n  if (!root) return result;\n\n  const traverse = (node, level) => {\n    node.setColor(\"green\");\n    (result[level] ??= new Array()).push(node.val);\n\n    node.left && traverse(node.left, level + 1);\n    node.right && traverse(node.right, level + 1);\n  };\n\n  traverse(root, 0);\n\n  return result;\n};\n\nreturn levelOrder;\n",
+      "order": 1
+    },
+    "clodb0yli0007pk0gazog988s": {
+      "id": "clodb0yli0007pk0gazog988s",
+      "createdAt": "2023-10-30T19:40:02.982Z",
+      "updatedAt": "2023-10-30T20:45:59.051Z",
+      "projectId": "clodb0yli0005pk0g7wegabyv",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @param {number[]} inorder\n * @return {TreeNode}\n */\nvar buildTree = function (preorder, inorder) {\n  const inorderIndexMap = new Map();\n  for (let i = 0; i < inorder.length; i++) {\n    inorderIndexMap.set(inorder[i], i);\n  }\n  let preorderIndex = 0;\n\n  const dfs = (left, right) => {\n    if (left > right) return null;\n    preorder.setColor(preorderIndex, \"green\");\n    inorder.setColor(left, \"cyan\");\n    inorder.setColor(right, \"cyan\");\n\n    const rootVal = preorder[preorderIndex++];\n    const root = new BinaryTree(rootVal);\n    const midIndex = inorderIndexMap.get(rootVal);\n    inorder.setColor(midIndex, \"green\");\n\n    root.left = dfs(left, midIndex - 1);\n    root.right = dfs(midIndex + 1, right);\n\n    return root;\n  };\n\n  return dfs(0, preorder.length - 1);\n};\n\nreturn buildTree;\n",
+      "order": 0
+    },
+    "clodcxws70009pk0gid8z5qsi": {
+      "id": "clodcxws70009pk0gid8z5qsi",
+      "createdAt": "2023-10-30T20:33:39.895Z",
+      "updatedAt": "2023-10-30T20:34:46.660Z",
+      "projectId": "clodb0yli0005pk0g7wegabyv",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @param {number[]} inorder\n * @return {TreeNode}\n */\nvar buildTree = function (preorder, inorder) {\n  if (!preorder.length || !inorder.length) return null;\n\n  const root = new TreeNode(preorder[0]);\n  const mid = inorder.indexOf(preorder[0]);\n\n  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));\n  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));\n\n  return root;\n};\n",
       "order": 1
     }
   }
