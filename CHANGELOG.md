@@ -1,3 +1,16 @@
+# [1.229.0](https://github.com/mkayander/leetpal/compare/v1.228.1...v1.229.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* Make node name property writable ([6bbe774](https://github.com/mkayander/leetpal/commit/6bbe7742e9ac6b474800ade22fd310385e13364a))
+
+
+### Features
+
+* Improved values stringification ([88675fe](https://github.com/mkayander/leetpal/commit/88675fe754c47e8b2b7267c6a4eff3c0bc5ded55))
+* Updated next env type declaration ([85f38bc](https://github.com/mkayander/leetpal/commit/85f38bc938571c6a1a6c1a59d56aff20c0e230fb))
+
 ## [1.228.1](https://github.com/mkayander/leetpal/compare/v1.228.0...v1.228.1) (2023-10-30)
 
 
