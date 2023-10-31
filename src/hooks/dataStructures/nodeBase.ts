@@ -37,6 +37,7 @@ export abstract class NodeBase {
       name: {
         value: name,
         enumerable: false,
+        writable: true,
       },
       dispatch: {
         value: dispatch,
