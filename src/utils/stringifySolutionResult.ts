@@ -17,44 +17,45 @@ export const safeStringify = (val: unknown): string => {
     }
     return `[${items.join(", ")}]`;
   }
-  if (val && typeof val === "object" && "toString" in val) {
-    return val.toString();
-  }
 
-  return JSON.stringify(
-    val,
-    (_, value) => {
-      if (typeof value === "bigint") {
-        return `${value}n`;
-      }
-      if (
-        value &&
-        typeof value === "object" &&
-        "meta" in value &&
-        value.meta?.type === ArgumentType.LINKED_LIST
-      ) {
-        let current = value as LinkedListNode | null;
-        const output = [];
+  return stripQuotes(
+    JSON.stringify(
+      val,
+      (_, value) => {
+        if (typeof value === "bigint") {
+          return `${value}n`;
+        }
+        if (value && typeof value === "object" && "meta" in value) {
+          console.log("stringify: ", value, value.meta?.type);
+          switch (value.meta?.type) {
+            case ArgumentType.LINKED_LIST:
+              let current = value as LinkedListNode | null;
+              const output = [];
 
-        while (current) {
-          output.push(current._val);
-          current = current._next;
+              while (current) {
+                output.push(current._val);
+                current = current._next;
+              }
+
+              return `[${output.join(" -> ")}]`;
+
+            case ArgumentType.BINARY_TREE:
+              return value.toString();
+          }
+        }
+        if (value instanceof Set) {
+          return `Set (${value.size}) {${[...value].join(", ")}}`;
+        }
+        if (value instanceof Map) {
+          return `Map (${value.size}) {${[...value]
+            .map(([key, val]) => `${key} => ${safeStringify(val)}`)
+            .join(", ")}}`;
         }
 
-        return `[${output.join(" -> ")}]`;
-      }
-      if (value instanceof Set) {
-        return `Set (${value.size}) {${[...value].join(", ")}}`;
-      }
-      if (value instanceof Map) {
-        return `Map (${value.size}) {${[...value]
-          .map(([key, val]) => `${key} => ${val}`)
-          .join(", ")}}`;
-      }
-
-      return value;
-    },
-    2,
+        return value;
+      },
+      2,
+    ),
   );
 };
 
@@ -71,5 +72,5 @@ export const stringifySolutionResult = (
   if (result === null) return "null";
   if (result === undefined) return "undefined";
 
-  return stripQuotes(safeStringify(result));
+  return safeStringify(result);
 };
