@@ -2099,6 +2099,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cloelwix20001pb0fwbpz8ahd": {
+      "id": "cloelwix20001pb0fwbpz8ahd",
+      "createdAt": "2023-10-31T17:32:17.989Z",
+      "updatedAt": "2023-10-31T17:32:17.989Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "3Sum",
+      "category": "TWO_POINTERS",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/3sum",
+      "slug": "3sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cloem5ttz0005pb0fg0x2ibl7": {
+      "id": "cloem5ttz0005pb0fg0x2ibl7",
+      "createdAt": "2023-10-31T17:39:32.039Z",
+      "updatedAt": "2023-10-31T17:39:32.039Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Two Sum",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/two-sum",
+      "slug": "two-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cloh6ured0001vk0g825qld3n": {
+      "id": "cloh6ured0001vk0g825qld3n",
+      "createdAt": "2023-11-02T12:54:19.958Z",
+      "updatedAt": "2023-11-02T12:54:19.958Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Campus Bikes",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/campus-bikes",
+      "slug": "campus-bikes",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9759,6 +9801,100 @@
         }
       },
       "description": null
+    },
+    "cloelwix20002pb0fqmgol9xx": {
+      "id": "cloelwix20002pb0fqmgol9xx",
+      "createdAt": "2023-10-31T17:32:17.989Z",
+      "updatedAt": "2023-10-31T17:32:57.913Z",
+      "projectId": "cloelwix20001pb0fwbpz8ahd",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "6pYBs8hSnygYgrwFe2K9Nr": {
+          "name": "6pYBs8hSnygYgrwFe2K9Nr",
+          "type": "array",
+          "input": "[-1,0,1,2,-1,-4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cloem5ttz0006pb0f55l43g1n": {
+      "id": "cloem5ttz0006pb0f55l43g1n",
+      "createdAt": "2023-10-31T17:39:32.039Z",
+      "updatedAt": "2023-10-31T17:40:07.134Z",
+      "projectId": "cloem5ttz0005pb0fg0x2ibl7",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[2,7,11,15]",
+          "order": 0
+        },
+        "2dn4rPTf5b6QnDqgzSWPBT": {
+          "name": "2dn4rPTf5b6QnDqgzSWPBT",
+          "type": "number",
+          "input": "9",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cloh6ured0002vk0g3c7a06gx": {
+      "id": "cloh6ured0002vk0g3c7a06gx",
+      "createdAt": "2023-11-02T12:54:19.958Z",
+      "updatedAt": "2023-11-02T12:55:26.315Z",
+      "projectId": "cloh6ured0001vk0g825qld3n",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[0,0],[1,1],[2,0]]",
+          "order": 0
+        },
+        "mPjYAyTUnMKPnftchQ9bXC": {
+          "name": "mPjYAyTUnMKPnftchQ9bXC",
+          "type": "array",
+          "input": "[[1,0],[2,2],[2,1]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cloh6xkjl0005vk0geghdro4e": {
+      "id": "cloh6xkjl0005vk0geghdro4e",
+      "createdAt": "2023-11-02T12:56:31.041Z",
+      "updatedAt": "2023-11-02T12:56:42.594Z",
+      "projectId": "cloh6ured0001vk0g825qld3n",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[240,446],[745,948],[345,136],[341,68],[990,165],[165,580],[133,454],[113,527]]",
+          "order": 0
+        },
+        "mPjYAyTUnMKPnftchQ9bXC": {
+          "name": "mPjYAyTUnMKPnftchQ9bXC",
+          "type": "array",
+          "input": "[[696,140],[95,393],[935,185],[767,205],[387,767],[214,960],[804,710],[956,307]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -12437,6 +12573,42 @@
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @param {number[]} inorder\n * @return {TreeNode}\n */\nvar buildTree = function (preorder, inorder) {\n  if (!preorder.length || !inorder.length) return null;\n\n  const root = new TreeNode(preorder[0]);\n  const mid = inorder.indexOf(preorder[0]);\n\n  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));\n  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));\n\n  return root;\n};\n",
       "order": 1
+    },
+    "cloelwix20003pb0fkeillglc": {
+      "id": "cloelwix20003pb0fkeillglc",
+      "createdAt": "2023-10-31T17:32:17.989Z",
+      "updatedAt": "2023-10-31T17:36:37.507Z",
+      "projectId": "cloelwix20001pb0fwbpz8ahd",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar threeSum = function (nums) {\n  const n = nums.length;\n\n  nums.sort((a, b) => a - b);\n\n  const result = new Array();\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    if (num === nums[i - 1]) continue;\n\n    let left = i + 1;\n    let right = n - 1;\n\n    while (left < right) {\n      const sum = num + nums[left] + nums[right];\n      if (sum === 0) {\n        result.push([num, nums[left++], nums[right--]]);\n        while (nums[left] === nums[left - 1]) left++;\n        while (nums[right] === nums[right + 1]) right--;\n      } else if (sum > 0) {\n        right--;\n      } else {\n        left++;\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn threeSum;\n",
+      "order": 0
+    },
+    "cloem5ttz0007pb0fvge6m4u9": {
+      "id": "cloem5ttz0007pb0fvge6m4u9",
+      "createdAt": "2023-10-31T17:39:32.039Z",
+      "updatedAt": "2023-10-31T17:43:09.120Z",
+      "projectId": "cloem5ttz0005pb0fg0x2ibl7",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function (nums, target) {\n  const validPairs = new Map();\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    const val = nums[i];\n    const diff = target - val;\n    if (validPairs.has(diff)) {\n      return [validPairs.get(diff), i];\n    }\n\n    validPairs.set(val, i);\n    console.log(validPairs);\n  }\n};\n\nreturn twoSum;\n",
+      "order": 0
+    },
+    "cloh6ured0003vk0gaea3el3z": {
+      "id": "cloh6ured0003vk0gaea3el3z",
+      "createdAt": "2023-11-02T12:54:19.958Z",
+      "updatedAt": "2023-11-02T13:07:52.203Z",
+      "projectId": "cloh6ured0001vk0g825qld3n",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number[]}\n */\nvar assignBikes = function (workers, bikes) {\n  const result = new Array(workers.length);\n\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const pairs = new Array();\n  for (let i = 0; i < bikes.length; i++) {\n    for (let j = 0; j < workers.length; j++) {\n      pairs.push([i, j, getDistance(bikes[i], workers[j])]);\n    }\n  }\n\n  pairs.sort((a, b) => a[2] - b[2] || a[0] - b[0] || a[1] - b[1]);\n  console.log(pairs);\n\n  const occupiedBikes = new Set();\n  for (let i = 0; i < pairs.length; i++) {\n    pairs.setColor(i, \"green\");\n    const [bIndex, wIndex] = pairs[i];\n    if (result[wIndex] !== undefined) continue;\n    if (occupiedBikes.has(bIndex)) continue;\n    occupiedBikes.add(bIndex);\n\n    result[wIndex] = bIndex;\n\n    if (occupiedBikes.size === bikes.length) break;\n  }\n\n  return result;\n};\n\nreturn assignBikes;\n",
+      "order": 0
     }
   }
 }
