@@ -12601,14 +12601,26 @@
     "cloh6ured0003vk0gaea3el3z": {
       "id": "cloh6ured0003vk0gaea3el3z",
       "createdAt": "2023-11-02T12:54:19.958Z",
-      "updatedAt": "2023-11-02T13:07:52.203Z",
+      "updatedAt": "2023-11-03T09:09:53.423Z",
       "projectId": "cloh6ured0001vk0g825qld3n",
-      "title": "Solution 1",
-      "slug": "solution-1",
+      "title": "Sorting",
+      "slug": "sorting",
       "complexity": null,
-      "description": null,
+      "description": "",
       "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number[]}\n */\nvar assignBikes = function (workers, bikes) {\n  const result = new Array(workers.length);\n\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const pairs = new Array();\n  for (let i = 0; i < bikes.length; i++) {\n    for (let j = 0; j < workers.length; j++) {\n      pairs.push([i, j, getDistance(bikes[i], workers[j])]);\n    }\n  }\n\n  pairs.sort((a, b) => a[2] - b[2] || a[0] - b[0] || a[1] - b[1]);\n  console.log(pairs);\n\n  const occupiedBikes = new Set();\n  for (let i = 0; i < pairs.length; i++) {\n    pairs.setColor(i, \"green\");\n    const [bIndex, wIndex] = pairs[i];\n    if (result[wIndex] !== undefined) continue;\n    if (occupiedBikes.has(bIndex)) continue;\n    occupiedBikes.add(bIndex);\n\n    result[wIndex] = bIndex;\n\n    if (occupiedBikes.size === bikes.length) break;\n  }\n\n  return result;\n};\n\nreturn assignBikes;\n",
-      "order": 0
+      "order": 2
+    },
+    "cloie9rn60001po0fv3cqdjcx": {
+      "id": "cloie9rn60001po0fv3cqdjcx",
+      "createdAt": "2023-11-03T09:09:43.601Z",
+      "updatedAt": "2023-11-03T09:15:44.150Z",
+      "projectId": "cloh6ured0001vk0g825qld3n",
+      "title": "Bucket Sort",
+      "slug": "bucket-sort",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number[]}\n */\nvar assignBikes = function (workers, bikes) {\n  const result = new Array(workers.length);\n\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const buckets = new Array(2000);\n\n  for (let i = 0; i < bikes.length; i++) {\n    for (let j = 0; j < workers.length; j++) {\n      const distance = getDistance(bikes[i], workers[j]);\n      (buckets[distance] ??= new Array()).push([i, j]);\n    }\n  }\n\n  const occupiedBikes = new Set();\n  for (let i = 0; i < buckets.length; i++) {\n    if (!buckets[i]) continue;\n    for (let j = 0; j < buckets[i].length; j++) {\n      const [bIndex, wIndex] = buckets[i][j];\n      if (result[wIndex] !== undefined) continue;\n      if (occupiedBikes.has(bIndex)) continue;\n      occupiedBikes.add(bIndex);\n\n      result[wIndex] = bIndex;\n\n      if (occupiedBikes.size === bikes.length) break;\n    }\n  }\n\n  return result;\n};\n\nreturn assignBikes;\n",
+      "order": 1
     }
   }
 }
