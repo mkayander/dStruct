@@ -1,3 +1,10 @@
+## [1.229.1](https://github.com/mkayander/leetpal/compare/v1.229.0...v1.229.1) (2023-11-04)
+
+
+### Bug Fixes
+
+* Make difficulty input label required ([a7b7d0e](https://github.com/mkayander/leetpal/commit/a7b7d0ea22b130b128ce2de77435e8fba666d5de))
+
 # [1.229.0](https://github.com/mkayander/leetpal/compare/v1.228.1...v1.229.0) (2023-10-31)
 
 
