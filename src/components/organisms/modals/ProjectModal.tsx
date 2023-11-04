@@ -352,7 +352,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               }
             />
             <FormControl fullWidth>
-              <InputLabel id="new-proj-select-difficulty-label">
+              <InputLabel required id="new-proj-select-difficulty-label">
                 Difficulty
               </InputLabel>
               <Select
