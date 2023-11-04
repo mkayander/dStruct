@@ -2141,6 +2141,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clok08vkh0001pi0f2c6the54": {
+      "id": "clok08vkh0001pi0f2c6the54",
+      "createdAt": "2023-11-04T12:12:39.760Z",
+      "updatedAt": "2023-11-04T12:12:39.760Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Subsets",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/subsets",
+      "slug": "subsets",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clok0ax5l0005pi0fqz5ybawy": {
+      "id": "clok0ax5l0005pi0fqz5ybawy",
+      "createdAt": "2023-11-04T12:14:15.129Z",
+      "updatedAt": "2023-11-04T12:14:15.129Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Combination Sum",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/combination-sum",
+      "slug": "combination-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -9895,6 +9923,69 @@
         }
       },
       "description": null
+    },
+    "clok08vkh0002pi0f5qhjof6a": {
+      "id": "clok08vkh0002pi0f5qhjof6a",
+      "createdAt": "2023-11-04T12:12:39.760Z",
+      "updatedAt": "2023-11-04T12:19:47.949Z",
+      "projectId": "clok08vkh0001pi0f2c6the54",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "hAVinhJnLC9ivS5sf4Viaw": {
+          "name": "hAVinhJnLC9ivS5sf4Viaw",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clok0ax5l0006pi0fig72xxdr": {
+      "id": "clok0ax5l0006pi0fig72xxdr",
+      "createdAt": "2023-11-04T12:14:15.129Z",
+      "updatedAt": "2023-11-04T12:15:13.921Z",
+      "projectId": "clok0ax5l0005pi0fqz5ybawy",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "87c8PvwXyfSsoeYarFPx11": {
+          "name": "87c8PvwXyfSsoeYarFPx11",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        },
+        "hxGNVbWTnf1imQMPXjgfB9": {
+          "name": "hxGNVbWTnf1imQMPXjgfB9",
+          "type": "array",
+          "input": "[2,3,6,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clok0hrvh0009pi0f0wgodh8x": {
+      "id": "clok0hrvh0009pi0f0wgodh8x",
+      "createdAt": "2023-11-04T12:19:34.877Z",
+      "updatedAt": "2023-11-04T12:19:39.723Z",
+      "projectId": "clok08vkh0001pi0f2c6the54",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "hAVinhJnLC9ivS5sf4Viaw": {
+          "name": "hAVinhJnLC9ivS5sf4Viaw",
+          "type": "array",
+          "input": "[1,2,3,4]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -12621,6 +12712,30 @@
       "description": "",
       "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number[]}\n */\nvar assignBikes = function (workers, bikes) {\n  const result = new Array(workers.length);\n\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const buckets = new Array(2000);\n\n  for (let i = 0; i < bikes.length; i++) {\n    for (let j = 0; j < workers.length; j++) {\n      const distance = getDistance(bikes[i], workers[j]);\n      (buckets[distance] ??= new Array()).push([i, j]);\n    }\n  }\n\n  const occupiedBikes = new Set();\n  for (let i = 0; i < buckets.length; i++) {\n    if (!buckets[i]) continue;\n    for (let j = 0; j < buckets[i].length; j++) {\n      const [bIndex, wIndex] = buckets[i][j];\n      if (result[wIndex] !== undefined) continue;\n      if (occupiedBikes.has(bIndex)) continue;\n      occupiedBikes.add(bIndex);\n\n      result[wIndex] = bIndex;\n\n      if (occupiedBikes.size === bikes.length) break;\n    }\n  }\n\n  return result;\n};\n\nreturn assignBikes;\n",
       "order": 1
+    },
+    "clok08vkh0003pi0f521vw57v": {
+      "id": "clok08vkh0003pi0f521vw57v",
+      "createdAt": "2023-11-04T12:12:39.760Z",
+      "updatedAt": "2023-11-04T12:18:52.251Z",
+      "projectId": "clok08vkh0001pi0f2c6the54",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsets = function (nums) {\n  const result = new Array();\n  result.push([]);\n  const stack = new Array();\n\n  const backtrack = (start) => {\n    nums.setColor(start, \"green\");\n    if (start === nums.length) {\n      if (stack.length > 0) {\n        result.push([...stack]);\n      }\n      return;\n    }\n\n    stack.push(nums[start]);\n    backtrack(start + 1);\n    stack.pop();\n\n    nums.setColor(start, null);\n\n    backtrack(start + 1);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsets;\n",
+      "order": 0
+    },
+    "clok0ax5l0007pi0fbdiu4nyd": {
+      "id": "clok0ax5l0007pi0fbdiu4nyd",
+      "createdAt": "2023-11-04T12:14:15.129Z",
+      "updatedAt": "2023-11-04T12:18:09.168Z",
+      "projectId": "clok0ax5l0005pi0fqz5ybawy",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} candidates\n * @param {number} target\n * @return {number[][]}\n */\nvar combinationSum = function (candidates, target) {\n  const result = new Array();\n\n  const stack = new Array();\n  const backtrack = (start, sum) => {\n    candidates.setColor(start, \"green\");\n    if (sum === target) {\n      result.push([...stack]);\n      return;\n    }\n    if (start >= candidates.length || sum > target) {\n      return;\n    }\n\n    stack.push(candidates[start]);\n    backtrack(start, sum + candidates[start]);\n    stack.pop();\n\n    backtrack(start + 1, sum);\n\n    candidates.setColor(start, null);\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn combinationSum;\n",
+      "order": 0
     }
   }
 }
