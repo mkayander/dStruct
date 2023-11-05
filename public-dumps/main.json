@@ -731,12 +731,12 @@
     "clhxdsola0001la08kxu4n2i7": {
       "id": "clhxdsola0001la08kxu4n2i7",
       "createdAt": "2023-05-21T12:15:02.782Z",
-      "updatedAt": "2023-05-21T12:15:02.782Z",
+      "updatedAt": "2023-11-04T14:28:43.273Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Optimal Partition of String",
       "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/optimal-partition-of-string",
       "slug": "optimal-partition-of-string",
       "description": "",
       "isExample": false,
@@ -2166,6 +2166,34 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/combination-sum",
       "slug": "combination-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clokavrer0001lk0fcha1ga3r": {
+      "id": "clokavrer0001lk0fcha1ga3r",
+      "createdAt": "2023-11-04T17:10:23.617Z",
+      "updatedAt": "2023-11-04T17:10:23.617Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Subsets II",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/subsets-ii",
+      "slug": "subsets-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clokc261g0009lk0fozln85vj": {
+      "id": "clokc261g0009lk0fozln85vj",
+      "createdAt": "2023-11-04T17:43:22.133Z",
+      "updatedAt": "2023-11-04T17:43:22.133Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Combination Sum II",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/combination-sum-ii",
+      "slug": "combination-sum-ii",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -9986,6 +10014,94 @@
         }
       },
       "description": null
+    },
+    "clok0oh1e000bpi0fauqc1ftl": {
+      "id": "clok0oh1e000bpi0fauqc1ftl",
+      "createdAt": "2023-11-04T12:24:47.426Z",
+      "updatedAt": "2023-11-04T12:24:53.484Z",
+      "projectId": "clok0ax5l0005pi0fqz5ybawy",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "87c8PvwXyfSsoeYarFPx11": {
+          "name": "87c8PvwXyfSsoeYarFPx11",
+          "type": "number",
+          "input": "8",
+          "order": 1
+        },
+        "hxGNVbWTnf1imQMPXjgfB9": {
+          "name": "hxGNVbWTnf1imQMPXjgfB9",
+          "type": "array",
+          "input": "[2,3,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clokavrer0002lk0f2y9nlqb5": {
+      "id": "clokavrer0002lk0f2y9nlqb5",
+      "createdAt": "2023-11-04T17:10:23.617Z",
+      "updatedAt": "2023-11-04T17:11:20.618Z",
+      "projectId": "clokavrer0001lk0fcha1ga3r",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "c6KdGwik4DjxoxvC1wKf9P": {
+          "name": "c6KdGwik4DjxoxvC1wKf9P",
+          "type": "array",
+          "input": "[4,4,4,1,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clokaw5r20005lk0fxxf8u67m": {
+      "id": "clokaw5r20005lk0fxxf8u67m",
+      "createdAt": "2023-11-04T17:10:42.206Z",
+      "updatedAt": "2023-11-04T17:10:50.274Z",
+      "projectId": "clokavrer0001lk0fcha1ga3r",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "c6KdGwik4DjxoxvC1wKf9P": {
+          "name": "c6KdGwik4DjxoxvC1wKf9P",
+          "type": "array",
+          "input": "[1,2,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clokc261h000alk0f3w3c50ji": {
+      "id": "clokc261h000alk0f3w3c50ji",
+      "createdAt": "2023-11-04T17:43:22.133Z",
+      "updatedAt": "2023-11-04T17:44:23.179Z",
+      "projectId": "clokc261g0009lk0fozln85vj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "htK4JnPVSRg925DcdAGn2d": {
+          "name": "htK4JnPVSRg925DcdAGn2d",
+          "type": "array",
+          "input": "[10,1,2,7,6,1,5]",
+          "order": 0
+        },
+        "iDgcKcq5hcSAdoNayppQ3u": {
+          "name": "iDgcKcq5hcSAdoNayppQ3u",
+          "type": "number",
+          "input": "8",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -10916,14 +11032,14 @@
     "clhxdsola0004la08ibrll121": {
       "id": "clhxdsola0004la08ibrll121",
       "createdAt": "2023-05-21T12:15:02.782Z",
-      "updatedAt": "2023-05-21T12:15:02.782Z",
+      "updatedAt": "2023-11-04T14:29:15.940Z",
       "projectId": "clhxdsola0001la08kxu4n2i7",
       "title": "Solution 1",
       "slug": "solution-1",
       "complexity": null,
       "description": null,
       "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function partitionString(s) {\r\n  let count = 1;\r\n  const lastSeen = new Array(26);\r\n  const offset = \"a\".charCodeAt(0);\r\n\r\n  let substringStart = 0;\r\n  for (let i = 0; i < s.length; i++) {\r\n    s.setColor(i, \"cyan\");\r\n    const code = s.charCodeAt(i) - offset;\r\n    if (i > lastSeen[code] && lastSeen[code] >= substringStart) {\r\n      substringStart = i;\r\n      s.setColor(substringStart, \"green\");\r\n      count++;\r\n    }\r\n\r\n    lastSeen[code] = i;\r\n  }\r\n\r\n  return count;\r\n};\r\n\r\n/**\r\n * Definitions for ArrayProxy.\r\n *\r\n * @typedef {number[] & {\r\n *   setColor(index: number, color: string): void\r\n * }} ArrayProxyObject\r\n */\r\n",
-      "order": 0
+      "order": 2
     },
     "clhxeo0lv0004la08pzluqvip": {
       "id": "clhxeo0lv0004la08pzluqvip",
@@ -11516,14 +11632,14 @@
     "clku4r9d70003l908cey42p2r": {
       "id": "clku4r9d70003l908cey42p2r",
       "createdAt": "2023-08-02T19:37:48.331Z",
-      "updatedAt": "2023-08-02T19:37:48.331Z",
+      "updatedAt": "2023-11-04T15:16:14.931Z",
       "projectId": "clku4r9d70001l9087zlb1dfn",
       "title": "Solution 1",
       "slug": "solution-1",
       "complexity": null,
       "description": null,
       "code": "var permute = function (nums) {\n  const res = new Array();\n  const track = new Array();\n  const used = new Array(nums.length).fill(false);\n  used.setColorMap({\n    true: \"cyan\",\n  });\n\n  const backtrack = (size = 0) => {\n    if (size === nums.length) {\n      res.push([...track]);\n      console.log(track);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (used[i]) {\n        continue;\n      }\n\n      track.push(nums[i]);\n      used[i] = true;\n\n      nums.setColor(i, \"green\");\n      backtrack(size + 1);\n      nums.setColor(i, null);\n\n      track.pop();\n      used[i] = false;\n    }\n  };\n\n  backtrack();\n\n  return res;\n};\n\nreturn permute;\n",
-      "order": 0
+      "order": 2
     },
     "clkvjsm1n0003me08m4kl0u03": {
       "id": "clkvjsm1n0003me08m4kl0u03",
@@ -12716,26 +12832,110 @@
     "clok08vkh0003pi0f521vw57v": {
       "id": "clok08vkh0003pi0f521vw57v",
       "createdAt": "2023-11-04T12:12:39.760Z",
-      "updatedAt": "2023-11-04T12:18:52.251Z",
+      "updatedAt": "2023-11-04T18:07:27.690Z",
       "projectId": "clok08vkh0001pi0f2c6the54",
       "title": "Solution 1",
       "slug": "solution-1",
       "complexity": null,
       "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsets = function (nums) {\n  const result = new Array();\n  result.push([]);\n  const stack = new Array();\n\n  const backtrack = (start) => {\n    nums.setColor(start, \"green\");\n    if (start === nums.length) {\n      if (stack.length > 0) {\n        result.push([...stack]);\n      }\n      return;\n    }\n\n    stack.push(nums[start]);\n    backtrack(start + 1);\n    stack.pop();\n\n    nums.setColor(start, null);\n\n    backtrack(start + 1);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsets;\n",
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsets = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (start) => {\n    nums.setColor(start, \"green\");\n    if (start === nums.length) {\n      result.push([...stack]);\n      return;\n    }\n\n    stack.push(nums[start]);\n    backtrack(start + 1);\n    stack.pop();\n\n    nums.setColor(start, null);\n\n    backtrack(start + 1);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsets;\n",
       "order": 0
     },
     "clok0ax5l0007pi0fbdiu4nyd": {
       "id": "clok0ax5l0007pi0fbdiu4nyd",
       "createdAt": "2023-11-04T12:14:15.129Z",
-      "updatedAt": "2023-11-04T12:18:09.168Z",
+      "updatedAt": "2023-11-04T12:23:56.620Z",
       "projectId": "clok0ax5l0005pi0fqz5ybawy",
       "title": "Solution 1",
       "slug": "solution-1",
       "complexity": null,
       "description": null,
-      "code": "/**\n * @param {number[]} candidates\n * @param {number} target\n * @return {number[][]}\n */\nvar combinationSum = function (candidates, target) {\n  const result = new Array();\n\n  const stack = new Array();\n  const backtrack = (start, sum) => {\n    candidates.setColor(start, \"green\");\n    if (sum === target) {\n      result.push([...stack]);\n      return;\n    }\n    if (start >= candidates.length || sum > target) {\n      return;\n    }\n\n    stack.push(candidates[start]);\n    backtrack(start, sum + candidates[start]);\n    stack.pop();\n\n    backtrack(start + 1, sum);\n\n    candidates.setColor(start, null);\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn combinationSum;\n",
+      "code": "/**\n * @param {number[]} candidates\n * @param {number} target\n * @return {number[][]}\n */\nvar combinationSum = function (candidates, target) {\n  const result = new Array();\n\n  const stack = new Array();\n  const backtrack = (start, sum) => {\n    candidates.setColor(start, \"green\");\n    if (sum === target) {\n      result.push([...stack]);\n      return;\n    }\n    if (start >= candidates.length || sum > target) {\n      return;\n    }\n\n    stack.push(candidates[start]);\n    backtrack(start, sum + candidates[start]);\n    stack.pop();\n\n    candidates.setColor(start, \"cyan\");\n\n    backtrack(start + 1, sum);\n\n    candidates.setColor(start, null);\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn combinationSum;\n",
       "order": 0
+    },
+    "clok545n10005pb0g3d8jj3xw": {
+      "id": "clok545n10005pb0g3d8jj3xw",
+      "createdAt": "2023-11-04T14:28:57.613Z",
+      "updatedAt": "2023-11-04T14:30:50.720Z",
+      "projectId": "clhxdsola0001la08kxu4n2i7",
+      "title": "Map",
+      "slug": "map",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar partitionString = function (s) {\n  const lastSeen = new Map();\n\n  let count = 1;\n  let left = 0;\n  for (let right = 0; right < s.length; right++) {\n    s.setColor(right, \"green\");\n    if (lastSeen.has(s[right]) && lastSeen.get(s[right]) >= left) {\n      count++;\n      left = right;\n      s.setColor(left -, \"cyan\");\n    }\n\n    lastSeen.set(s[right], right);\n  }\n\n  return count;\n};\n\nreturn partitionString;\n",
+      "order": 1
+    },
+    "clok66z0m0007pb0gc9lhdcyb": {
+      "id": "clok66z0m0007pb0gc9lhdcyb",
+      "createdAt": "2023-11-04T14:59:08.614Z",
+      "updatedAt": "2023-11-04T15:45:58.561Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "In Place",
+      "slug": "in-place",
+      "complexity": null,
+      "description": "Set used val to \"null\" in the input array",
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar permute = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = () => {\n    if (stack.length === nums.length) {\n      result.push([...stack]);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (nums[i] === null) continue;\n      const num = nums[i];\n      nums[i] = null;\n\n      stack.push(num);\n      backtrack();\n      stack.pop();\n\n      nums[i] = num;\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn permute;\n",
+      "order": 1
+    },
+    "clok6q20b0009pb0g2eshm7g4": {
+      "id": "clok6q20b0009pb0g2eshm7g4",
+      "createdAt": "2023-11-04T15:13:58.956Z",
+      "updatedAt": "2023-11-04T15:16:14.931Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "Includes",
+      "slug": "includes",
+      "complexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar permute = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = () => {\n    if (stack.length === nums.length) {\n      result.push([...stack]);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (!stack.includes(nums[i])) {\n        stack.push(nums[i]);\n        backtrack(stack);\n        stack.pop();\n      }\n    }\n  };\n\n  backtrack();\n  return result;\n};\n\nreturn ",
+      "order": 3
+    },
+    "clokavrer0003lk0fkdjw3u3g": {
+      "id": "clokavrer0003lk0fkdjw3u3g",
+      "createdAt": "2023-11-04T17:10:23.617Z",
+      "updatedAt": "2023-11-04T17:12:38.600Z",
+      "projectId": "clokavrer0001lk0fcha1ga3r",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsetsWithDup = function (nums) {\n  nums.sort((a, b) => a - b);\n\n  const result = new Array();\n  result.push([]);\n  const stack = new Array();\n\n  const backtrack = (i) => {\n    nums.setColor(i, \"green\");\n    if (i === nums.length) {\n      if (stack.length > 0) {\n        result.push([...stack]);\n      }\n      return;\n    }\n\n    stack.push(nums[i]);\n    backtrack(i + 1);\n    stack.pop();\n\n    nums.setColor(i, \"cyan\");\n\n    let skippedIndex = i;\n    while (nums[i] === nums[skippedIndex]) skippedIndex++;\n    backtrack(skippedIndex);\n\n    nums.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsetsWithDup;\n",
+      "order": 0
+    },
+    "clokc261h000blk0feik547kg": {
+      "id": "clokc261h000blk0feik547kg",
+      "createdAt": "2023-11-04T17:43:22.133Z",
+      "updatedAt": "2023-11-04T17:51:11.939Z",
+      "projectId": "clokc261g0009lk0fozln85vj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} candidates\n * @param {number} target\n * @return {number[][]}\n */\nvar combinationSum2 = function (candidates, target) {\n  candidates.sort((a, b) => a - b);\n\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (start, sum) => {\n    if (sum === target) {\n      result.push([...stack]);\n    }\n    if (start >= candidates.length || sum >= target) return;\n\n    let prev = -1;\n    for (let i = start; i < candidates.length; i++) {\n      if (candidates[i] === prev) continue;\n      candidates.setColor(start, \"green\");\n\n      stack.push(candidates[i]);\n      backtrack(i + 1, sum + candidates[i]);\n      stack.pop();\n\n      prev = candidates[i];\n      candidates.setColor(start, \"cyan\");\n    }\n\n    candidates.setColor(start, null);\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn combinationSum2;\n",
+      "order": 0
+    },
+    "clokcbciv000dlk0fh7o5rmws": {
+      "id": "clokcbciv000dlk0fh7o5rmws",
+      "createdAt": "2023-11-04T17:50:30.439Z",
+      "updatedAt": "2023-11-04T17:52:20.122Z",
+      "projectId": "clokc261g0009lk0fozln85vj",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} candidates\n * @param {number} target\n * @return {number[][]}\n */\nvar combinationSum2 = function (candidates, target) {\n  candidates.sort((a, b) => a - b);\n\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (i, sum) => {\n    candidates.setColor(i, \"green\");\n    if (sum === target) {\n      result.push([...stack]);\n    }\n    if (i >= candidates.length || sum >= target) return;\n\n    stack.push(candidates[i]);\n    backtrack(i + 1, sum + candidates[i]);\n    stack.pop();\n\n    let nextIndex = i;\n    while (candidates[i] === candidates[nextIndex]) nextIndex++;\n\n    candidates.setColor(i, \"cyan\");\n\n    backtrack(nextIndex, sum);\n\n    candidates.setColor(i, null);\n  };\n\n  backtrack(0, 0);\n\n  return result;\n};\n\nreturn combinationSum2;\n",
+      "order": 1
+    },
+    "clokcw7m7000flk0fxg0yu71y": {
+      "id": "clokcw7m7000flk0fxg0yu71y",
+      "createdAt": "2023-11-04T18:06:43.855Z",
+      "updatedAt": "2023-11-04T18:09:29.817Z",
+      "projectId": "clok08vkh0001pi0f2c6the54",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "complexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsets = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (start) => {\n    result.push([...stack]);\n\n    for (let i = start; i < nums.length; i++) {\n      nums.setColor(i, \"green\");\n\n      stack.push(nums[i]);\n      backtrack(i + 1);\n      stack.pop();\n\n      nums.setColor(i, null);\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsets;\n",
+      "order": 1
     }
   }
 }
