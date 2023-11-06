@@ -1,3 +1,20 @@
+# [1.230.0](https://github.com/mkayander/leetpal/compare/v1.229.1...v1.230.0) (2023-11-06)
+
+
+### Bug Fixes
+
+* Added missing text tokens ([0ce54d6](https://github.com/mkayander/leetpal/commit/0ce54d6d7448044f0246550fc21414691b696c10))
+
+
+### Features
+
+* Added "timeComplexity" & "spaceComplexity" schema columns ([161ff8b](https://github.com/mkayander/leetpal/commit/161ff8bed740f1b6c2b39494ee41cd928012590f))
+* Added complexity input fields handling ([b182198](https://github.com/mkayander/leetpal/commit/b182198704ec2cec50e4b8849963e687f272c9df))
+* Added new text tokens ([b6c5378](https://github.com/mkayander/leetpal/commit/b6c53783aa31d9542ac2fcde5470f8538f7f5ed2))
+* Display current solution complexity ([bc001ee](https://github.com/mkayander/leetpal/commit/bc001ee86ab6a94c7727cd4e42a20886e1c82ace))
+* Implemented solution complexity label component ([2fc7103](https://github.com/mkayander/leetpal/commit/2fc7103d49bf9c346965bf7e6ee365da5fa528fe))
+* Updated Prisma ([293f2da](https://github.com/mkayander/leetpal/commit/293f2dad03008a34c63323de2c009fd183b1bff9))
+
 ## [1.229.1](https://github.com/mkayander/leetpal/compare/v1.229.0...v1.229.1) (2023-11-04)
 
 
