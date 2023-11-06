@@ -10,6 +10,7 @@ import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
 import React, { useEffect, useState } from "react";
 
+import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
 import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
 import { CodeRunner } from "#/components/molecules/CodeRunner/CodeRunner";
 import {
@@ -249,7 +250,17 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
           scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
           sx={{ p: 0, overflowY: "hidden" }}
         >
-          <SolutionSelectBar selectedProject={selectedProject} mx={2} my={1} />
+          <Box
+            mx={2}
+            my={1}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <SolutionSelectBar selectedProject={selectedProject} />
+
+            <SolutionComplexityLabel solution={currentSolution} />
+          </Box>
           <Box
             sx={{
               position: "relative",
