@@ -257,7 +257,7 @@ type RootTranslation = {
 	 */
 	RUN_CODE: string
 	/**
-	 * S​a​v​e​d​ ​i​n​ ​t​h​e​ ​c​l​o​u​d
+	 * S​a​v​e​d​ ​t​o​ ​c​l​o​u​d
 	 */
 	SAVED_IN_THE_CLOUD: string
 	/**
@@ -284,6 +284,10 @@ type RootTranslation = {
 	 * S​l​u​g
 	 */
 	SLUG: string
+	/**
+	 * S​p​a​c​e​ ​C​o​m​p​l​e​x​i​t​y
+	 */
+	SPACE_COMPLEXITY: string
 	/**
 	 * S​u​b​m​i​t
 	 */
@@ -312,6 +316,10 @@ type RootTranslation = {
 	 * T​i​m​e​s​t​a​m​p
 	 */
 	TIMESTAMP: string
+	/**
+	 * T​i​m​e​ ​C​o​m​p​l​e​x​i​t​y
+	 */
+	TIME_COMPLEXITY: string
 	/**
 	 * T​o​d​a​y​ ​i​s​ ​{​d​a​t​e​|​w​e​e​k​d​a​y​}
 	 * @param {Date} date
@@ -351,7 +359,7 @@ type RootTranslation = {
 	 */
 	USER_SETTINGS: string
 	/**
-	 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​p​r​o​b​l​e​m​s​ ​j​u​s​t​ ​f​o​r​m​ ​y​o​u​r​ ​c​o​d​e
+	 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​L​e​e​t​C​o​d​e​ ​p​r​o​b​l​e​m​s​ ​j​u​s​t​ ​f​r​o​m​ ​y​o​u​r​ ​c​o​d​e
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: string
 	/**
@@ -618,7 +626,7 @@ export type TranslationFunctions = {
 	 */
 	RUN_CODE: () => LocalizedString
 	/**
-	 * Saved in the cloud
+	 * Saved to cloud
 	 */
 	SAVED_IN_THE_CLOUD: () => LocalizedString
 	/**
@@ -645,6 +653,10 @@ export type TranslationFunctions = {
 	 * Slug
 	 */
 	SLUG: () => LocalizedString
+	/**
+	 * Space Complexity
+	 */
+	SPACE_COMPLEXITY: () => LocalizedString
 	/**
 	 * Submit
 	 */
@@ -673,6 +685,10 @@ export type TranslationFunctions = {
 	 * Timestamp
 	 */
 	TIMESTAMP: () => LocalizedString
+	/**
+	 * Time Complexity
+	 */
+	TIME_COMPLEXITY: () => LocalizedString
 	/**
 	 * Today is {date|weekday}
 	 */
@@ -710,7 +726,7 @@ export type TranslationFunctions = {
 	 */
 	USER_SETTINGS: () => LocalizedString
 	/**
-	 * Visualize your LeetCode problems just form your code
+	 * Visualize your LeetCode problems just from your code
 	 */
 	VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: () => LocalizedString
 	/**
