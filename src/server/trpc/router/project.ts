@@ -478,13 +478,15 @@ export const projectRouter = router({
         projectId: z.string(),
         referenceSolutionSlug: z.ostring(),
         title: z.ostring(),
+        description: z.ostring().nullable(),
+        timeComplexity: z.ostring().nullable(),
+        spaceComplexity: z.ostring().nullable(),
         code: z.ostring(),
         order: z.onumber()
       })
     )
     .mutation(async ({ input, ctx }) => {
-        const { referenceSolutionSlug, code, ...restData } = input;
-        let content = code;
+        const { referenceSolutionSlug, ...data } = input;
         if (referenceSolutionSlug) {
           const referenceSolution = await ctx.prisma.playgroundSolution.findUnique({
             where: {
@@ -495,7 +497,10 @@ export const projectRouter = router({
             }
           });
           if (referenceSolution) {
-            content = referenceSolution.code;
+            data.code = referenceSolution.code;
+            data.description = referenceSolution.description;
+            data.timeComplexity = referenceSolution.timeComplexity;
+            data.spaceComplexity = referenceSolution.spaceComplexity;
           }
         }
 
@@ -504,9 +509,9 @@ export const projectRouter = router({
         return ctx.prisma.playgroundSolution.create({
           data: {
             title: input.title || `Solution ${solutionIndex}`,
-            code: content || getTemplate(ctx.project.category),
+            code: data.code || getTemplate(ctx.project.category),
             slug: solutionSlug,
-            ...restData
+            ...data
           }
         });
       }
@@ -520,6 +525,8 @@ export const projectRouter = router({
         title: z.ostring(),
         slug: z.ostring(),
         description: z.ostring(),
+        timeComplexity: z.ostring(),
+        spaceComplexity: z.ostring(),
         code: z.ostring(),
         order: z.onumber()
       })

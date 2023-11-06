@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import type { DialogProps } from "@mui/material/Dialog/Dialog";
 import TextField from "@mui/material/TextField";
 import { TRPCClientError } from "@trpc/client";
@@ -10,9 +11,12 @@ import * as yup from "yup";
 import { EditFormModal } from "#/components/organisms/modals/EditFormModal";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
+import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppSelector } from "#/store/hooks";
 import { selectProjectId } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
+
+const complexityRegExp = /^O\([\w\s*+\-/^(),!]+\)$/;
 
 const validationSchema = yup.object({
   solutionName: yup
@@ -25,6 +29,20 @@ const validationSchema = yup.object({
     .min(2, "Slug must be at least 2 characters")
     .max(100, "Slug must be at most 100 characters")
     .matches(/^[a-zA-Z0-9](-?[a-zA-Z0-9])*$/, "Must be a valid URL slug"),
+  solutionTimeComplexity: yup
+    .string()
+    .max(20, "Time complexity must be at most 20 characters")
+    .matches(
+      complexityRegExp,
+      "Must be a in the form of O(n), O(n^2), O(n+m), etc.",
+    ),
+  solutionSpaceComplexity: yup
+    .string()
+    .max(20, "Space complexity must be at most 20 characters")
+    .matches(
+      complexityRegExp,
+      "Must be a in the form of O(n), O(n^2), O(n+m), etc.",
+    ),
   solutionDescription: yup
     .string()
     .max(200, "Solution description must be at most 200 characters"),
@@ -45,6 +63,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     solutionSlug = "",
     setSolution,
   } = usePlaygroundSlugs();
+  const isMobile = useMobileLayout();
 
   const currentProjectId = useAppSelector(selectProjectId) || "";
 
@@ -63,6 +82,8 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     initialValues: {
       solutionName: "",
       solutionSlug: "",
+      solutionTimeComplexity: "",
+      solutionSpaceComplexity: "",
       solutionDescription: "",
     },
     validationSchema: validationSchema,
@@ -75,6 +96,8 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
           solutionId: currentSolution.data.id,
           title: values.solutionName,
           slug: values.solutionSlug,
+          timeComplexity: values.solutionTimeComplexity,
+          spaceComplexity: values.solutionSpaceComplexity,
           description: values.solutionDescription,
         });
       } catch (error: unknown) {
@@ -100,6 +123,10 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     onSuccess: (data) => {
       invalidateQueries();
       void setSolution(data.slug);
+      trpcUtils.project.getSolutionBySlug.setData(
+        { slug: data.slug, projectId: data.projectId },
+        data,
+      );
 
       onClose();
 
@@ -130,6 +157,8 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       formik.setValues({
         solutionName: currentSolution.data.title,
         solutionSlug: currentSolution.data.slug,
+        solutionTimeComplexity: currentSolution.data.timeComplexity ?? "",
+        solutionSpaceComplexity: currentSolution.data.spaceComplexity ?? "",
         solutionDescription: currentSolution.data.description ?? "",
       });
     } else {
@@ -167,7 +196,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     <EditFormModal
       formik={formik}
       title={`🚀 ${LL.EDIT_SOLUTION()}`}
-      summary="Edit the details of your solution."
+      summary="Edit the details of your solution"
       isDeleting={deleteSolution.isLoading}
       onClose={onClose}
       onDelete={handleSolutionDelete}
@@ -193,7 +222,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         }
         helperText={
           (formik.touched.solutionName && formik.errors.solutionName) ||
-          "The name of your solution."
+          "The name of your solution"
         }
       />
       <TextField
@@ -209,9 +238,51 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         }
         helperText={
           (formik.touched.solutionSlug && formik.errors.solutionSlug) ||
-          "You can edit a slug that's used in the URL to this solution."
+          "You can edit a slug that's used in the URL to this solution"
         }
       />
+      <Stack direction={isMobile ? "column" : "row"} spacing={1}>
+        <TextField
+          id="solutionTimeComplexity"
+          name="solutionTimeComplexity"
+          label={LL.TIME_COMPLEXITY()}
+          variant="outlined"
+          disabled={formik.isSubmitting}
+          value={formik.values.solutionTimeComplexity}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.solutionTimeComplexity &&
+            Boolean(formik.errors.solutionTimeComplexity)
+          }
+          helperText={
+            (formik.touched.solutionTimeComplexity &&
+              formik.errors.solutionTimeComplexity) ||
+            "How input size affects the running time"
+          }
+          placeholder="E.g. O(n), O(n^2), O(n+m), etc."
+          sx={{ minWidth: 200, flexGrow: 1 }}
+        />
+        <TextField
+          id="solutionSpaceComplexity"
+          name="solutionSpaceComplexity"
+          label={LL.SPACE_COMPLEXITY()}
+          variant="outlined"
+          disabled={formik.isSubmitting}
+          value={formik.values.solutionSpaceComplexity}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.solutionSpaceComplexity &&
+            Boolean(formik.errors.solutionSpaceComplexity)
+          }
+          helperText={
+            (formik.touched.solutionSpaceComplexity &&
+              formik.errors.solutionSpaceComplexity) ||
+            "How input size affects the memory usage"
+          }
+          placeholder="E.g. O(n), O(n^2), O(n+m), etc."
+          sx={{ minWidth: 200, flexGrow: 1 }}
+        />
+      </Stack>
       <TextField
         id="solutionDescription"
         name="solutionDescription"
@@ -230,7 +301,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         helperText={
           (formik.touched.solutionDescription &&
             formik.errors.solutionDescription) ||
-          "Optional solution description."
+          "Optional solution description"
         }
       />
     </EditFormModal>
