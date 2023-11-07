@@ -12,7 +12,6 @@ export const SolutionComplexityLabel: React.FC<
   SolutionComplexityLabelProps
 > = ({ solution }) => {
   if (!solution.data) return null;
-  console.log(solution.data);
 
   return (
     <Stack
