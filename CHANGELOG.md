@@ -1,3 +1,10 @@
+# [1.231.0](https://github.com/mkayander/leetpal/compare/v1.230.1...v1.231.0) (2023-11-08)
+
+
+### Features
+
+* Added a "Heap" project category ([b0a416b](https://github.com/mkayander/leetpal/commit/b0a416b1d330eea2a1ed1fe845952babb387a7cc))
+
 ## [1.230.1](https://github.com/mkayander/leetpal/compare/v1.230.0...v1.230.1) (2023-11-07)
 
 
