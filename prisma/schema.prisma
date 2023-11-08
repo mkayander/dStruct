@@ -101,6 +101,7 @@ enum ProjectCategory {
   GRAPH
   GRID
   ARRAY
+  HEAP
   STACK
   TWO_POINTERS
   BINARY_SEARCH

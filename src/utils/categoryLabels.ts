@@ -4,6 +4,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   [ProjectCategory.BINARY_TREE]: "Binary Tree",
   [ProjectCategory.LINKED_LIST]: "Linked List",
   [ProjectCategory.ARRAY]: "Array",
+  [ProjectCategory.HEAP]: "Heap (Priority Queue)",
   [ProjectCategory.STACK]: "Stack",
   [ProjectCategory.TWO_POINTERS]: "Two Pointers",
   [ProjectCategory.SLIDING_WINDOW]: "Sliding Window",
