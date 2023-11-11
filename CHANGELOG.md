@@ -1,3 +1,10 @@
+## [1.232.1](https://github.com/mkayander/leetpal/compare/v1.232.0...v1.232.1) (2023-11-11)
+
+
+### Bug Fixes
+
+* Fixed array item left margin ([dd52834](https://github.com/mkayander/leetpal/commit/dd52834ae60f3afad20971c9e4aea4da93416e1b))
+
 # [1.232.0](https://github.com/mkayander/leetpal/compare/v1.231.0...v1.232.0) (2023-11-11)
 
 
