@@ -53,7 +53,7 @@
     "@vercel/edge-config": "^0.2.1",
     "@vercel/kv": "^0.2.3",
     "aws-sdk": "^2.1484.0",
-    "axios": "1.4.0",
+    "axios": "1.6.0",
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "cookies-next": "^2.1.2",
