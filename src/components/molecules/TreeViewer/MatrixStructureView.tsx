@@ -1,6 +1,7 @@
-import { alpha, Stack, useTheme } from "@mui/material";
+import { alpha, Box, useTheme } from "@mui/material";
+import React from "react";
 
-import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
+import { MatrixRow } from "#/components/molecules/TreeViewer/MatrixRow";
 import {
   type ArrayData,
   type ArrayDataState,
@@ -16,22 +17,28 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
   arrayState,
 }) => {
   const theme = useTheme();
+  const borderColor = `1px solid ${alpha(theme.palette.primary.light, 0.3)}`;
 
   return (
-    <Stack
+    <Box
+      component="table"
       sx={{
         width: "fit-content",
-        "& > *:not(:last-of-type)": {
-          borderBottom: `1px solid ${alpha(theme.palette.primary.light, 0.3)}}`,
+        borderCollapse: "collapse",
+        border: borderColor,
+        td: {
+          border: borderColor,
         },
       }}
     >
-      {data.childNames?.map((name) => {
-        const data = arrayState[name];
-        if (!data) return null;
+      <tbody>
+        {data.childNames?.map((name) => {
+          const data = arrayState[name];
+          if (!data) return null;
 
-        return <ArrayStructureView key={name} data={data} isGrid={true} />;
-      })}
-    </Stack>
+          return <MatrixRow key={name} data={data} />;
+        })}
+      </tbody>
+    </Box>
   );
 };
