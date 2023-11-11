@@ -25,7 +25,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         position: "relative",
         minWidth: 42,
         height: 42,
-        marginLeft: isGrid ? 0 : 1,
+        marginLeft: isGrid ? 0 : "1px",
         backgroundColor: nodeColor && alpha(nodeColor, 0.1),
         display: "flex",
         justifyContent: "center",
