@@ -1,3 +1,11 @@
+# [1.232.0](https://github.com/mkayander/leetpal/compare/v1.231.0...v1.232.0) (2023-11-11)
+
+
+### Features
+
+* Display matrix as a table ([2f19b7e](https://github.com/mkayander/leetpal/commit/2f19b7ea1dfc93e9c646cf132db441425cd153a2))
+* Implemented a matrix row component ([9f52473](https://github.com/mkayander/leetpal/commit/9f52473c27a2f1a1b085906aafacd4083146285e))
+
 # [1.231.0](https://github.com/mkayander/leetpal/compare/v1.230.1...v1.231.0) (2023-11-08)
 
 
