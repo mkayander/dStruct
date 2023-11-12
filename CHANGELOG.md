@@ -1,3 +1,11 @@
+# [1.233.0](https://github.com/mkayander/leetpal/compare/v1.232.1...v1.233.0) (2023-11-12)
+
+
+### Features
+
+* Implemented "rewrite main" option for a data dump script ([4ac675b](https://github.com/mkayander/leetpal/commit/4ac675bfebf74bf66cee30ebfa4126cf3991f21e))
+* Installed minimist ([018fe00](https://github.com/mkayander/leetpal/commit/018fe00c03be2ec0bb523793124fa8202c4ff8ff))
+
 ## [1.232.1](https://github.com/mkayander/leetpal/compare/v1.232.0...v1.232.1) (2023-11-11)
 
 
