@@ -223,6 +223,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.6
     version: 29.5.6
+  '@types/minimist':
+    specifier: ^1.2.5
+    version: 1.2.5
   '@types/node':
     specifier: ^18.18.7
     version: 18.18.7
@@ -274,6 +277,9 @@ devDependencies:
   lint-staged:
     specifier: ^14.0.1
     version: 14.0.1
+  minimist:
+    specifier: ^1.2.8
+    version: 1.2.8
   next-router-mock:
     specifier: ^0.9.10
     version: 0.9.10(next@13.5.6)(react@18.2.0)
@@ -3634,8 +3640,8 @@ packages:
     resolution: {integrity: sha512-YI/M/4HRImtNf3pJgbF+W6FrXovqj+T+/HpENLTooK9PnkacBsDpeP3IpHab40CClUfhNmdM2WTNP2sa2dni5Q==}
     dev: false
 
-  /@types/minimist@1.2.4:
-    resolution: {integrity: sha512-Kfe/D3hxHTusnPNRbycJE1N77WHDsdS4AjUYIzlDzhDrS47NrwuL3YW4VITxwR7KCVpzwgy4Rbj829KSSQmwXQ==}
+  /@types/minimist@1.2.5:
+    resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
     dev: true
 
   /@types/ms@0.7.33:
@@ -8352,7 +8358,7 @@ packages:
     resolution: {integrity: sha512-r85E3NdZ+mpYk1C6RjPFEMSE+s1iZMuHtsHAqY0DT3jZczl0diWUZ8g6oU7h0M9cD2EL+PzaYghhCLzR0ZNn5Q==}
     engines: {node: '>=10'}
     dependencies:
-      '@types/minimist': 1.2.4
+      '@types/minimist': 1.2.5
       camelcase-keys: 6.2.2
       decamelize-keys: 1.1.1
       hard-rejection: 2.1.0
