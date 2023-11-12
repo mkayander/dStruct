@@ -20,7 +20,7 @@
     "semantic-release": "semantic-release",
     "lint-staged": "lint-staged",
     "typesafe-i18n": "typesafe-i18n",
-    "dumpAllProjects": "tsx src/scripts/dumpAllProjects.ts",
+    "dumpAllProjects": "tsx src/scripts/dumpAllProjects.ts --rewrite",
     "loadMainDump": "tsx src/scripts/loadProjects.ts public-dumps/main.json"
   },
   "lint-staged": {

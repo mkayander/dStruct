@@ -4,9 +4,13 @@ import type {
   PlaygroundTestCase,
 } from "@prisma/client";
 import { promises as fs } from "fs";
+import minimist from "minimist";
 import slugify from "slugify";
 
 import { prisma } from "#/server/db/client";
+
+type Args = { rewrite?: boolean };
+const argv = minimist<Args>(process.argv.slice(2));
 
 (async () => {
   const projectsList = await prisma.playgroundProject.findMany();
@@ -34,8 +38,14 @@ import { prisma } from "#/server/db/client";
   };
 
   const date = new Date();
-  await fs.writeFile(
-    `dumps/data-${slugify(date.toLocaleString(), { strict: true })}.json`,
-    JSON.stringify(data, null, 2),
-  );
+  const text = JSON.stringify(data, null, 2);
+
+  if (argv.rewrite) {
+    await fs.writeFile("public-dumps/main.json", text);
+  } else {
+    await fs.writeFile(
+      `dumps/data-${slugify(date.toLocaleString(), { strict: true })}.json`,
+      text,
+    );
+  }
 })();
