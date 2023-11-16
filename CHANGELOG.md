@@ -1,3 +1,10 @@
+## [1.233.1](https://github.com/mkayander/leetpal/compare/v1.233.0...v1.233.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* Use "gap" for the select bar container ([a105409](https://github.com/mkayander/leetpal/commit/a105409248fb6a5dbe994d1a6e6f391efd383a71))
+
 # [1.233.0](https://github.com/mkayander/leetpal/compare/v1.232.1...v1.233.0) (2023-11-12)
 
 
