@@ -174,9 +174,6 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
               disabled={isLoading}
               onClick={() => handleSolutionClick(solution)}
               onEditClick={() => handleSolutionEdit(solution)}
-              sx={{
-                mr: 1,
-              }}
             />
           ))
         }

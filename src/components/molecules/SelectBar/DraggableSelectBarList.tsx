@@ -58,6 +58,7 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
             flexWrap="wrap"
             alignItems="center"
             direction="row"
+            gap={1}
             {...restProps}
           >
             {isEmpty && (
