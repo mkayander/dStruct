@@ -2239,6 +2239,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clou4balt0001pg0ftysm3b7s": {
+      "id": "clou4balt0001pg0ftysm3b7s",
+      "createdAt": "2023-11-11T14:04:12.785Z",
+      "updatedAt": "2023-11-11T14:04:12.785Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Design Graph With Shortest Path Calculator",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/design-graph-with-shortest-path-calculator",
+      "slug": "design-graph-with-shortest-path-calculator",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clowwwyhp0001nj0fy384e92h": {
+      "id": "clowwwyhp0001nj0fy384e92h",
+      "createdAt": "2023-11-13T13:00:25.115Z",
+      "updatedAt": "2023-11-13T13:00:25.115Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sort Vowels in a String",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/sort-vowels-in-a-string",
+      "slug": "sort-vowels-in-a-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clozhzgpi0001o50fydb9ptc0": {
+      "id": "clozhzgpi0001o50fydb9ptc0",
+      "createdAt": "2023-11-15T08:25:46.325Z",
+      "updatedAt": "2023-11-15T08:25:46.325Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Squirrel Simulation",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/squirrel-simulation",
+      "slug": "squirrel-simulation",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clozkt5de0001o80fhzarnqap": {
+      "id": "clozkt5de0001o80fhzarnqap",
+      "createdAt": "2023-11-15T09:44:50.545Z",
+      "updatedAt": "2023-11-15T09:44:50.545Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Unique Length-3 Palindromic Subsequences",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/unique-length-3-palindromic-subsequences",
+      "slug": "unique-length-3-palindromic-subsequences",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -10277,6 +10333,237 @@
         }
       },
       "description": null
+    },
+    "clou4balt0002pg0f4tbhdivc": {
+      "id": "clou4balt0002pg0f4tbhdivc",
+      "createdAt": "2023-11-11T14:04:12.785Z",
+      "updatedAt": "2023-11-11T14:06:28.818Z",
+      "projectId": "clou4balt0001pg0ftysm3b7s",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "g2SYpKdWeTSWXjHjFKEPyQ": {
+          "name": "g2SYpKdWeTSWXjHjFKEPyQ",
+          "type": "array",
+          "input": "[[4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]], [3, 2], [0, 3], [[1, 3, 4]], [0, 3]]",
+          "order": 1
+        },
+        "s5DXbTK7J4e61shjdSPScH": {
+          "name": "s5DXbTK7J4e61shjdSPScH",
+          "type": "array",
+          "input": "[\"Graph\", \"shortestPath\", \"shortestPath\", \"addEdge\", \"shortestPath\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clou9pqb70003mv0g9ec9emrg": {
+      "id": "clou9pqb70003mv0g9ec9emrg",
+      "createdAt": "2023-11-11T16:35:24.403Z",
+      "updatedAt": "2023-11-11T16:35:42.460Z",
+      "projectId": "clou4balt0001pg0ftysm3b7s",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "g2SYpKdWeTSWXjHjFKEPyQ": {
+          "name": "g2SYpKdWeTSWXjHjFKEPyQ",
+          "type": "array",
+          "input": "[[13,[[11,6,84715],[7,9,764823],[6,0,315591],[1,4,909432],[6,5,514907],[9,6,105610],[3,10,471042],[7,10,348752],[5,11,715628],[6,1,973999],[8,7,593929],[7,6,64688],[6,4,741734],[10,1,894247],[9,7,81181],[2,11,75418],[12,2,85431],[7,2,260306],[11,9,640614],[2,3,648804],[4,12,568023],[0,8,730096],[9,11,633474],[3,6,390214],[1,10,117955],[9,8,222602],[10,7,689294]]],[[1,2,36450]],[[8,0,709628]],[[2,4,30185]],[[12,1,21696]],[[1,8,2553]],[8,9],[1,11],[3,4],[[4,6,2182]],[[7,5,206]],[[5,7,140]],[12,5],[[12,6,365184]],[[3,2,5]],[4,8],[7,10],[0,5],[[0,11,5]],[[1,7,5]],[0,8],[11,11],[7,4],[0,12],[[3,9,858944]],[[0,9,4]],[3,5],[4,5],[12,9],[9,8],[3,5],[[12,9,629052]],[3,8],[[4,0,545201]],[11,8],[4,11],[9,6],[[12,7,4]],[7,10],[2,5],[6,11],[12,2],[9,7],[[4,3,879736]],[1,3],[1,0],[4,6]]",
+          "order": 1
+        },
+        "s5DXbTK7J4e61shjdSPScH": {
+          "name": "s5DXbTK7J4e61shjdSPScH",
+          "type": "array",
+          "input": "[\"Graph\",\"addEdge\",\"addEdge\",\"addEdge\",\"addEdge\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"addEdge\",\"addEdge\",\"shortestPath\",\"addEdge\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"shortestPath\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"shortestPath\",\"addEdge\",\"shortestPath\",\"shortestPath\",\"shortestPath\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clowwwyhp0002nj0f4hh9s4rw": {
+      "id": "clowwwyhp0002nj0f4hh9s4rw",
+      "createdAt": "2023-11-13T13:00:25.115Z",
+      "updatedAt": "2023-11-13T13:03:37.608Z",
+      "projectId": "clowwwyhp0001nj0fy384e92h",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "lEetcOde",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clozhzgpi0002o50f1489ao2o": {
+      "id": "clozhzgpi0002o50f1489ao2o",
+      "createdAt": "2023-11-15T08:25:46.325Z",
+      "updatedAt": "2023-11-15T08:26:58.622Z",
+      "projectId": "clozhzgpi0001o50fydb9ptc0",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "3kyEFVn9Mchq5eEY2eWaXi": {
+          "name": "3kyEFVn9Mchq5eEY2eWaXi",
+          "type": "array",
+          "input": "[4,4]",
+          "order": 3
+        },
+        "fHqUYRfyZPvUoFCVzRRDKD": {
+          "name": "fHqUYRfyZPvUoFCVzRRDKD",
+          "type": "array",
+          "input": "[2,2]",
+          "order": 2
+        },
+        "vDBvxku9xjcQjPxVo9vXwZ": {
+          "name": "vDBvxku9xjcQjPxVo9vXwZ",
+          "type": "array",
+          "input": "[[3,0], [2,5]]",
+          "order": 4
+        },
+        "wrWMHtWioH7vPKz43SjGSa": {
+          "name": "wrWMHtWioH7vPKz43SjGSa",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clozi4vmq0005o50f239ia7zi": {
+      "id": "clozi4vmq0005o50f239ia7zi",
+      "createdAt": "2023-11-15T08:29:58.946Z",
+      "updatedAt": "2023-11-15T08:56:43.508Z",
+      "projectId": "clozhzgpi0001o50fydb9ptc0",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "3kyEFVn9Mchq5eEY2eWaXi": {
+          "name": "3kyEFVn9Mchq5eEY2eWaXi",
+          "type": "array",
+          "input": "[0,1]",
+          "order": 3
+        },
+        "fHqUYRfyZPvUoFCVzRRDKD": {
+          "name": "fHqUYRfyZPvUoFCVzRRDKD",
+          "type": "array",
+          "input": "[3,2]",
+          "order": 2
+        },
+        "vDBvxku9xjcQjPxVo9vXwZ": {
+          "name": "vDBvxku9xjcQjPxVo9vXwZ",
+          "type": "array",
+          "input": "[[2,0],[4,1],[0,4],[1,3],[1,0],[3,4],[3,0],[2,3],[0,2],[0,0],[2,2],[4,2],[3,3],[4,4],[4,0],[4,3],[3,1],[2,1],[1,4],[2,4]]",
+          "order": 4
+        },
+        "wrWMHtWioH7vPKz43SjGSa": {
+          "name": "wrWMHtWioH7vPKz43SjGSa",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clozkt5de0002o80fhd6rf30e": {
+      "id": "clozkt5de0002o80fhd6rf30e",
+      "createdAt": "2023-11-15T09:44:50.545Z",
+      "updatedAt": "2023-11-15T09:45:18.034Z",
+      "projectId": "clozkt5de0001o80fhzarnqap",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "bbcbaba",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clozkzzmw0005o80f2u9sohl7": {
+      "id": "clozkzzmw0005o80f2u9sohl7",
+      "createdAt": "2023-11-15T09:50:09.704Z",
+      "updatedAt": "2023-11-15T09:50:14.179Z",
+      "projectId": "clozkt5de0001o80fhzarnqap",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "ckafnafqo",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clozl0aho0007o80f7hc5fpmx": {
+      "id": "clozl0aho0007o80f7hc5fpmx",
+      "createdAt": "2023-11-15T09:50:23.772Z",
+      "updatedAt": "2023-11-15T09:50:27.154Z",
+      "projectId": "clozkt5de0001o80fhzarnqap",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "tlpjzdmtwderpkpmgoyrcxttiheassztncqvnfjeyxxp",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clozl2bzf0009o80f74ra2dqe": {
+      "id": "clozl2bzf0009o80f74ra2dqe",
+      "createdAt": "2023-11-15T09:51:59.019Z",
+      "updatedAt": "2023-11-15T09:52:02.385Z",
+      "projectId": "clozkt5de0001o80fhzarnqap",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "uuuuu",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -13390,14 +13677,14 @@
     "clorfygvj0003qn0f5e977mdk": {
       "id": "clorfygvj0003qn0f5e977mdk",
       "createdAt": "2023-11-09T17:06:51.247Z",
-      "updatedAt": "2023-11-09T17:24:26.409Z",
+      "updatedAt": "2023-11-11T16:46:31.489Z",
       "projectId": "clorfygvj0001qn0f50g8o9xz",
       "title": "DFS",
       "slug": "dfs",
       "timeComplexity": "O(M * N)",
       "spaceComplexity": "O(M * N)",
       "description": "",
-      "code": "/**\n * @param {number[][]} heights\n * @return {number[][]}\n */\nvar pacificAtlantic = function (heights) {\n  const m = heights.length;\n  const n = heights[0].length;\n\n  const DIRECTIONS = [\n    [-1, 0],\n    [0, 1],\n    [1, 0],\n    [0, -1],\n  ];\n\n  const result = [];\n\n  const matrixName = \"visited\";\n  const visited = Array.from(\n    { length: m },\n    (_, index) =>\n      Array.from({ length: n }, () => 0, null, {\n        index,\n        parentName: matrixName,\n        colorMap: {\n          1: \"blue\",\n          2: \"cyan\",\n          3: \"green\",\n        },\n      }),\n    null,\n    { matrixName },\n  );\n\n  const traverse = (row, col, type) => {\n    if (visited[row][col] & type) return;\n    visited[row][col] |= type;\n\n    if (visited[row][col] === 3) result.push([row, col]);\n\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n      if (heights[nRow][nCol] < heights[row][col]) continue;\n\n      traverse(nRow, nCol, type);\n    }\n  };\n\n  for (let row = 0; row < m; row++) {\n    traverse(row, 0, 1);\n    traverse(row, n - 1, 2);\n  }\n\n  for (let col = 0; col < n; col++) {\n    traverse(0, col, 1);\n    traverse(m - 1, col, 2);\n  }\n\n  return result;\n};\n\n// 0000\n// 0001 - 1\n// 0010 - 2\n// 0011 - 3\n\nreturn pacificAtlantic;\n",
+      "code": "/**\r\n * @param {number[][]} heights\r\n * @return {number[][]}\r\n */\r\nvar pacificAtlantic = function (heights) {\r\n  const m = heights.length;\r\n  const n = heights[0].length;\r\n\r\n  const DIRECTIONS = [\r\n    [-1, 0],\r\n    [0, 1],\r\n    [1, 0],\r\n    [0, -1],\r\n  ];\r\n\r\n  const result = [];\r\n\r\n  const matrixName = \"visited\";\r\n  const visited = Array.from(\r\n    { length: m },\r\n    (_, index) =>\r\n      Array.from({ length: n }, () => 0, null, {\r\n        index,\r\n        parentName: matrixName,\r\n        colorMap: {\r\n          1: \"blue\",\r\n          2: \"cyan\",\r\n          3: \"green\",\r\n        },\r\n      }),\r\n    null,\r\n    { matrixName },\r\n  );\r\n\r\n  const traverse = (row, col, type) => {\r\n    if (visited[row][col] & type) return;\r\n    visited[row][col] |= type;\r\n    heights[row].setColor(col, type === 1 ? \"blue\" : \"cyan\");\r\n\r\n    if (visited[row][col] === 3) result.push([row, col]);\r\n\r\n    for (const [dRow, dCol] of DIRECTIONS) {\r\n      const nRow = row + dRow,\r\n        nCol = col + dCol;\r\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\r\n      if (heights[nRow][nCol] < heights[row][col]) continue;\r\n\r\n      traverse(nRow, nCol, type);\r\n    }\r\n  };\r\n\r\n  for (let row = 0; row < m; row++) {\r\n    traverse(row, 0, 1);\r\n    traverse(row, n - 1, 2);\r\n  }\r\n\r\n  for (let col = 0; col < n; col++) {\r\n    traverse(0, col, 1);\r\n    traverse(m - 1, col, 2);\r\n  }\r\n\r\n  return result;\r\n};\r\n\r\n// 0000\r\n// 0001 - 1\r\n// 0010 - 2\r\n// 0011 - 3\r\n\r\nreturn pacificAtlantic;\r\n",
       "order": 0
     },
     "clorg9wlq0005qn0f3ydguziz": {
@@ -13412,6 +13699,84 @@
       "description": "",
       "code": "/**\n * @param {number[][]} heights\n * @return {number[][]}\n */\nvar pacificAtlantic = function (heights) {\n  const m = heights.length;\n  const n = heights[0].length;\n\n  const DIRECTIONS = [\n    [-1, 0],\n    [0, 1],\n    [1, 0],\n    [0, -1],\n  ];\n\n  const result = [];\n\n  const matrixName = \"visited\";\n  const visited = Array.from(\n    { length: m },\n    (_, index) =>\n      Array.from({ length: n }, () => 0, null, {\n        index,\n        parentName: matrixName,\n        colorMap: {\n          1: \"blue\",\n          2: \"cyan\",\n          3: \"green\",\n        },\n      }),\n    null,\n    { matrixName },\n  );\n\n  const traverse = (sRow, sCol, type) => {\n    const queue = new Queue();\n    queue.enqueue([sRow, sCol]);\n    visited[sRow][sCol] |= type;\n\n    while (!queue.isEmpty()) {\n      const [row, col] = queue.dequeue();\n      heights[row].setColor(col, type === 1 ? \"blue\" : \"cyan\");\n\n      for (const [dRow, dCol] of DIRECTIONS) {\n        const nRow = row + dRow,\n          nCol = col + dCol;\n        if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n        if (heights[row][col] > heights[nRow][nCol]) continue;\n        if (visited[nRow][nCol] & type) continue;\n\n        visited[nRow][nCol] |= type;\n        if (visited[nRow][nCol] === 3) result.push([nRow, nCol]);\n\n        queue.enqueue([nRow, nCol]);\n      }\n    }\n  };\n\n  for (let row = 0; row < m; row++) {\n    traverse(row, 0, 1);\n    traverse(row, n - 1, 2);\n  }\n\n  for (let col = 0; col < n; col++) {\n    traverse(0, col, 1);\n    traverse(m - 1, col, 2);\n  }\n\n  return result;\n};\n\n// 0000\n// 0001 - 1\n// 0010 - 2\n// 0011 - 3\n\nreturn pacificAtlantic;\n",
       "order": 1
+    },
+    "clou4balt0003pg0f174ku985": {
+      "id": "clou4balt0003pg0f174ku985",
+      "createdAt": "2023-11-11T14:04:12.785Z",
+      "updatedAt": "2023-11-11T16:34:08.037Z",
+      "projectId": "clou4balt0001pg0ftysm3b7s",
+      "title": "Floyd–Warshall",
+      "slug": "floyd-warshall",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n */\nvar Graph = function (n, edges) {\n  this.n = n;\n  this.adjMatrix = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: n }, () => Infinity, null, {\n        parentName: \"adj\",\n        index,\n        colorMap: {\n          0: \"cyan\",\n          \"Infinity\": \"grey\"\n        }\n      }),\n    null,\n    { matrixName: \"adj\" },\n  );\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to, cost] = edges[i];\n    this.adjMatrix[from][to] = cost;\n  }\n\n  for (let i = 0; i < n; i++) {\n    this.adjMatrix[i][i] = 0;\n  }\n\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      for (let k = 0; k < n; k++) {\n        this.adjMatrix[j][k] = Math.min(\n          this.adjMatrix[j][k],\n          this.adjMatrix[j][i] + this.adjMatrix[i][k],\n        );\n      }\n    }\n  }\n};\n\n/**\n * @param {number[]} edge\n * @return {void}\n */\nGraph.prototype.addEdge = function ([from, to, cost]) {\n  for (let i = 0; i < this.n; i++) {\n    for (let j = 0; j < this.n; j++) {\n      this.adjMatrix[i][j] = Math.min(\n        this.adjMatrix[i][j],\n        this.adjMatrix[i][from] + this.adjMatrix[to][j] + cost,\n      );\n    }\n  }\n};\n\n/**\n * @param {number} node1\n * @param {number} node2\n * @return {number}\n */\nGraph.prototype.shortestPath = function (node1, node2) {\n  const distance = this.adjMatrix[node1][node2];\n\n  if (Number.isFinite(distance)) {\n    return distance;\n  } else {\n    return -1;\n  }\n};\n\n/**\n * Your Graph object will be instantiated and called as such:\n * var obj = new Graph(n, edges)\n * obj.addEdge(edge)\n * var param_2 = obj.shortestPath(node1,node2)\n */\n\nreturn function run(names, args) {\n  const instance = new Graph(...args[0]);\n\n  const output = [];\n\n  for (let i = 1; i < names.length; i++) {\n    output.push(instance[names[i]](...args[i]));\n  }\n\n  return \"\";\n};\n",
+      "order": 0
+    },
+    "clou967840001mv0g6agvwquk": {
+      "id": "clou967840001mv0g6agvwquk",
+      "createdAt": "2023-11-11T16:20:13.204Z",
+      "updatedAt": "2023-11-11T16:35:04.492Z",
+      "projectId": "clou4balt0001pg0ftysm3b7s",
+      "title": "Dijkstra's",
+      "slug": "dijkstras",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n */\nvar Graph = function (n, edges) {\n  this.n = n;\n  this.adjList = [];\n  this.distances = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: n }, () => Infinity, null, {\n        parentName: \"d\",\n        index,\n        colorMap: {\n          0: \"cyan\",\n          Infinity: \"grey\",\n        },\n      }),\n    null,\n    { matrixName: \"d\" },\n  );\n\n  for (const [from, to, weight] of edges) {\n    (this.adjList[from] ??= new Array()).push([to, weight]);\n  }\n};\n\n/**\n * @param {number[]} edge\n * @return {void}\n */\nGraph.prototype.addEdge = function ([from, to, weight]) {\n  (this.adjList[from] ??= new Array()).push([to, weight]);\n};\n\n/**\n * @param {number} node1\n * @param {number} node2\n * @return {number}\n */\nGraph.prototype.shortestPath = function (node1, node2) {\n  if (!this.distances[node1]) {\n    this.distances[node1] = new Array(this.n).fill(Infinity);\n  }\n  const distances = this.distances[node1];\n  distances[node1] = 0;\n\n  const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  queue.enqueue([node1, 0]);\n\n  while (!queue.isEmpty()) {\n    const [node, curDistance] = queue.dequeue();\n\n    if (!this.adjList[node]) continue;\n    for (const [neighbor, weight] of this.adjList[node]) {\n      const newDistance = curDistance + weight;\n      if (newDistance <= distances[neighbor]) {\n        distances[neighbor] = newDistance;\n        queue.enqueue([neighbor, newDistance]);\n      }\n    }\n  }\n\n  if (!Number.isFinite(distances[node2])) return -1;\n\n  return distances[node2];\n};\n\n/**\n * Your Graph object will be instantiated and called as such:\n * var obj = new Graph(n, edges)\n * obj.addEdge(edge)\n * var param_2 = obj.shortestPath(node1,node2)\n */\n\nreturn function run(names, args) {\n  const instance = new Graph(...args[0]);\n\n  const output = [];\n\n  for (let i = 1; i < names.length; i++) {\n    output.push(instance[names[i]](...args[i]));\n  }\n\n  return \"\";\n};\n",
+      "order": 1
+    },
+    "clowwwyhp0003nj0flwnv6qmr": {
+      "id": "clowwwyhp0003nj0flwnv6qmr",
+      "createdAt": "2023-11-13T13:00:25.115Z",
+      "updatedAt": "2023-11-13T13:07:53.577Z",
+      "projectId": "clowwwyhp0001nj0fy384e92h",
+      "title": "Counting Sort",
+      "slug": "counting-sort",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)",
+      "description": "Vowels length (10) is considered constant",
+      "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar sortVowels = function (s) {\n  const chars = Array.from(new Uint32Array(10));\n  const charMap = Array.from([\"A\", \"E\", \"I\", \"O\", \"U\", \"a\", \"e\", \"i\", \"o\", \"u\"]);\n  const indexMap = charMap.reduce((acc, curr, i) => {\n    acc[curr] = i;\n    return acc;\n  }, {});\n  let totalCount = 0;\n\n  for (let i = 0; i < s.length; i++) {\n    if (s[i] in indexMap) {\n      chars[indexMap[s[i]]]++;\n      totalCount++;\n    }\n  }\n\n  console.log({totalCount, indexMap, chars});\n\n  if (totalCount === 0) return s;\n\n  const result = new Array();\n\n  let p1 = 0;\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"green\");\n    if (s[i] in indexMap) {\n      while (chars[p1] === 0) p1++;\n      chars.setColor(p1, \"cyan\");\n      result.push(charMap[p1]);\n      chars[p1]--;\n    } else {\n      result.push(s[i]);\n    }\n  }\n\n  return result.join(\"\");\n};\n\nreturn sortVowels;\n",
+      "order": 0
+    },
+    "clowx6n050005nj0fkpg5o1fa": {
+      "id": "clowx6n050005nj0fkpg5o1fa",
+      "createdAt": "2023-11-13T13:07:56.789Z",
+      "updatedAt": "2023-11-13T13:10:03.901Z",
+      "projectId": "clowwwyhp0001nj0fy384e92h",
+      "title": "Sorting",
+      "slug": "solution-1",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar sortVowels = function (s) {\n  const VOWELS = new Set([\"a\", \"e\", \"i\", \"o\", \"u\"]);\n  const chars = new Array();\n\n  for (let i = 0; i < s.length; i++) {\n    if (VOWELS.has(s[i].toLowerCase())) {\n      chars.push(s[i]);\n    }\n  }\n\n  if (chars.length === 0) return s;\n\n  chars.sort();\n\n  const result = new Array();\n\n  let p1 = 0;\n  for (let i = 0; i < s.length; i++) {\n    if (VOWELS.has(s[i].toLowerCase())) {\n      result.push(chars[p1++]);\n    } else {\n      result.push(s[i]);\n    }\n  }\n\n  return result.join(\"\");\n};\n\nreturn sortVowels;\n",
+      "order": 1
+    },
+    "clozhzgpi0003o50fp1kq4hyl": {
+      "id": "clozhzgpi0003o50fp1kq4hyl",
+      "createdAt": "2023-11-15T08:25:46.325Z",
+      "updatedAt": "2023-11-15T09:30:58.711Z",
+      "projectId": "clozhzgpi0001o50fydb9ptc0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} height\n * @param {number} width\n * @param {number[]} tree\n * @param {number[]} squirrel\n * @param {number[][]} nuts\n * @return {number}\n */\nvar minDistance = function (height, width, tree, squirrel, nuts) {\n  const distance = ([row, col], [row2, col2]) =>\n    Math.abs(row - row2) + Math.abs(col - col2);\n\n  let total = 0;\n  let diff = -Infinity;\n\n  for (let i = 0; i < nuts.length; i++) {\n    nuts.setColor(i, \"green\");\n    const nut = nuts[i];\n    total += distance(nut, tree) * 2;\n    diff = Math.max(diff, distance(nut, tree) - distance(nut, squirrel));\n  }\n\n  return total - diff;\n};\n\nreturn minDistance;\n",
+      "order": 0
+    },
+    "clozkt5de0003o80f92xlzpe6": {
+      "id": "clozkt5de0003o80f92xlzpe6",
+      "createdAt": "2023-11-15T09:44:50.545Z",
+      "updatedAt": "2023-11-15T09:53:47.982Z",
+      "projectId": "clozkt5de0001o80fhzarnqap",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar countPalindromicSubsequence = function (s) {\n  const first = Array.from(new Int32Array(26).fill(-1));\n  first.setColorMap({\n    \"-1\": \"black\",\n  });\n  const last = Array.from(new Uint32Array(26));\n  last.setColorMap({\n    0: \"black\",\n  });\n  const offset = \"a\".charCodeAt(0);\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"blue\");\n    const curr = s[i].charCodeAt(0) - offset;\n    if (first[curr] === -1) {\n      first[curr] = i;\n    }\n\n    last[curr] = i;\n  }\n\n  let count = 0;\n  for (let i = 0; i < 26; i++) {\n    first.setColor(i, \"cyan\");\n    if (first[i] === -1) continue;\n    last.setColor(i, \"green\");\n\n    const between = new Set();\n    for (let j = first[i] + 1; j < last[i]; j++) {\n      between.add(s[j]);\n    }\n    console.log(i, between);\n\n    count += between.size;\n  }\n\n  return count;\n};\n\nreturn countPalindromicSubsequence;\n",
+      "order": 0
     }
   }
 }
