@@ -1,3 +1,10 @@
+## [1.233.2](https://github.com/mkayander/leetpal/compare/v1.233.1...v1.233.2) (2023-11-18)
+
+
+### Bug Fixes
+
+* Removed unwanted right margin ([c8716f8](https://github.com/mkayander/leetpal/commit/c8716f899c2d185d290ff70c87be45051b5ffa42))
+
 ## [1.233.1](https://github.com/mkayander/leetpal/compare/v1.233.0...v1.233.1) (2023-11-16)
 
 
