@@ -174,9 +174,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
               disabled={isLoading}
               onClick={() => handleCaseClick(testCase)}
               onEditClick={() => handleCaseEdit(testCase)}
-              sx={{
-                mr: 1,
-              }}
             />
           ))
         }
