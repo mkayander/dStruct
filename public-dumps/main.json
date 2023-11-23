@@ -2295,6 +2295,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clp2i7l560001oe0fyeujhe9b": {
+      "id": "clp2i7l560001oe0fyeujhe9b",
+      "createdAt": "2023-11-17T10:55:23.850Z",
+      "updatedAt": "2023-11-17T10:55:23.850Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimize Maximum Pair Sum in Array",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimize-maximum-pair-sum-in-array",
+      "slug": "minimize-maximum-pair-sum-in-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clp4bzxcg0001qe0gx1r7dpwx": {
+      "id": "clp4bzxcg0001qe0gx1r7dpwx",
+      "createdAt": "2023-11-18T17:37:01.071Z",
+      "updatedAt": "2023-11-18T17:37:01.071Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Frequency of the Most Frequent Element",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/frequency-of-the-most-frequent-element",
+      "slug": "frequency-of-the-most-frequent-element",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clp5rkovh0001pi0fguiifafo": {
+      "id": "clp5rkovh0001pi0fguiifafo",
+      "createdAt": "2023-11-19T17:40:50.285Z",
+      "updatedAt": "2023-11-19T17:40:50.285Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Redundant Connection",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/redundant-connection",
+      "slug": "redundant-connection",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -10564,6 +10606,182 @@
         }
       },
       "description": null
+    },
+    "clp1hbzdz0009mi0grc06t27y": {
+      "id": "clp1hbzdz0009mi0grc06t27y",
+      "createdAt": "2023-11-16T17:43:03.143Z",
+      "updatedAt": "2023-11-16T17:44:09.295Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[7,4,3,5,2,8,3,2,1]",
+          "order": 0
+        },
+        "1t897YC7ahSS11QByzy4Fm": {
+          "name": "1t897YC7ahSS11QByzy4Fm",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clp1hdt3p000bmi0gdakm9f5n": {
+      "id": "clp1hdt3p000bmi0gdakm9f5n",
+      "createdAt": "2023-11-16T17:44:28.309Z",
+      "updatedAt": "2023-11-16T17:44:59.349Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[7,4,3,5,2,8,3,2,1]",
+          "order": 0
+        },
+        "1t897YC7ahSS11QByzy4Fm": {
+          "name": "1t897YC7ahSS11QByzy4Fm",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clp2i7l560002oe0fuam5dyrd": {
+      "id": "clp2i7l560002oe0fuam5dyrd",
+      "createdAt": "2023-11-17T10:55:23.850Z",
+      "updatedAt": "2023-11-17T10:56:04.481Z",
+      "projectId": "clp2i7l560001oe0fyeujhe9b",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,5,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clp2i8k3p0005oe0fcudd3c9z": {
+      "id": "clp2i8k3p0005oe0fcudd3c9z",
+      "createdAt": "2023-11-17T10:56:09.158Z",
+      "updatedAt": "2023-11-17T10:56:12.996Z",
+      "projectId": "clp2i7l560001oe0fyeujhe9b",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,5,4,2,4,6]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clp4bzxcg0002qe0gmtggcrr4": {
+      "id": "clp4bzxcg0002qe0gmtggcrr4",
+      "createdAt": "2023-11-18T17:37:01.071Z",
+      "updatedAt": "2023-11-18T17:42:06.163Z",
+      "projectId": "clp4bzxcg0001qe0gx1r7dpwx",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3oaMmQdgT98XbK42FP8K4x": {
+          "name": "3oaMmQdgT98XbK42FP8K4x",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        },
+        "g4xNr6GEAoTzpPrt8Gqnnj": {
+          "name": "g4xNr6GEAoTzpPrt8Gqnnj",
+          "type": "array",
+          "input": "[1,8,4,13]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clp4c1ir40005qe0g74q1ly19": {
+      "id": "clp4c1ir40005qe0g74q1ly19",
+      "createdAt": "2023-11-18T17:38:15.472Z",
+      "updatedAt": "2023-11-18T17:38:23.881Z",
+      "projectId": "clp4bzxcg0001qe0gx1r7dpwx",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3oaMmQdgT98XbK42FP8K4x": {
+          "name": "3oaMmQdgT98XbK42FP8K4x",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        },
+        "g4xNr6GEAoTzpPrt8Gqnnj": {
+          "name": "g4xNr6GEAoTzpPrt8Gqnnj",
+          "type": "array",
+          "input": "[1,2,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clp5rkovh0002pi0fqfzmhsjd": {
+      "id": "clp5rkovh0002pi0fqfzmhsjd",
+      "createdAt": "2023-11-19T17:40:50.285Z",
+      "updatedAt": "2023-11-19T17:41:40.214Z",
+      "projectId": "clp5rkovh0001pi0fguiifafo",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "eNaCFCG6gs3vMe3GsjfVxF": {
+          "name": "eNaCFCG6gs3vMe3GsjfVxF",
+          "type": "array",
+          "input": "[[1,2],[1,3],[2,3]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clp5rlejk0005pi0fsx8k401l": {
+      "id": "clp5rlejk0005pi0fsx8k401l",
+      "createdAt": "2023-11-19T17:41:23.552Z",
+      "updatedAt": "2023-11-19T17:41:48.473Z",
+      "projectId": "clp5rkovh0001pi0fguiifafo",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "eNaCFCG6gs3vMe3GsjfVxF": {
+          "name": "eNaCFCG6gs3vMe3GsjfVxF",
+          "type": "array",
+          "input": "[[1,2],[2,3],[3,4],[1,4],[1,5]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -12377,38 +12595,38 @@
     "cllb3ap4n0003jw08dbqfuswr": {
       "id": "cllb3ap4n0003jw08dbqfuswr",
       "createdAt": "2023-08-14T16:29:00.984Z",
-      "updatedAt": "2023-08-14T16:29:00.984Z",
+      "updatedAt": "2023-11-17T08:27:55.452Z",
       "projectId": "cllb3ap4n0001jw086qg9f5jn",
       "title": "Priority Queue",
       "slug": "priority-queue",
-      "timeComplexity": null,
-      "spaceComplexity": null,
+      "timeComplexity": "O(n logk)",
+      "spaceComplexity": "O(k)",
       "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const pq = new PriorityQueue({\n    compare: (a, b) => a - b,\n  });\n\n  for (const num of nums) {\n    pq.enqueue(num);\n    if (pq.size() > k) {\n      pq.dequeue();\n    }\n  }\n\n  console.log(pq, pq.front());\n\n  return pq.front();\n};\n\nreturn findKthLargest;\n",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const pq = new PriorityQueue({\n    compare: (a, b) => a - b,\n  });\n\n  for (const num of nums) {\n    pq.enqueue(num);\n    if (pq.size() > k) {\n      pq.dequeue();\n    }\n  }\n\n  console.log(pq, pq.front());\n\n  return pq.d();\n};\n\nreturn findKthLargest;\n",
       "order": 1
     },
     "cllb3evic0005jw08hjbj2nvw": {
       "id": "cllb3evic0005jw08hjbj2nvw",
       "createdAt": "2023-08-14T16:32:15.876Z",
-      "updatedAt": "2023-08-14T16:32:15.876Z",
+      "updatedAt": "2023-11-16T17:41:11.399Z",
       "projectId": "cllb3ap4n0001jw086qg9f5jn",
-      "title": "Quickselect",
-      "slug": "quickselect",
-      "timeComplexity": null,
-      "spaceComplexity": null,
+      "title": "Quickselect /w Random",
+      "slug": "quickselect-w-random",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
       "description": "",
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const partition = (left, right, pivotIndex) => {\n    const pivot = nums[pivotIndex];\n    [nums[pivotIndex], nums[right]] = [nums[right], nums[pivotIndex]];\n    let storedIndex = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] < pivot) {\n        [nums[storedIndex], nums[i]] = [nums[i], nums[storedIndex]];\n        storedIndex++;\n      }\n    }\n    [nums[right], nums[storedIndex]] = [nums[storedIndex], nums[right]];\n    return storedIndex;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (true) {\n    const pivotIndex = left + Math.floor(Math.random() * (right - left + 1));\n    const newPivotIndex = partition(left, right, pivotIndex);\n    if (newPivotIndex === nums.length - k) {\n      return nums[newPivotIndex];\n    } else if (newPivotIndex > nums.length - k) {\n      right = newPivotIndex - 1;\n    } else {\n      left = newPivotIndex + 1;\n    }\n  }\n};\n\nreturn findKthLargest;\n",
-      "order": 3
+      "order": 4
     },
     "cllb3yckr0001l508g9d0dsb9": {
       "id": "cllb3yckr0001l508g9d0dsb9",
       "createdAt": "2023-08-14T16:47:24.459Z",
-      "updatedAt": "2023-08-14T16:47:24.459Z",
+      "updatedAt": "2023-11-16T17:41:11.399Z",
       "projectId": "cllb3ap4n0001jw086qg9f5jn",
       "title": "Counting Sort",
       "slug": "counting-sort",
-      "timeComplexity": null,
-      "spaceComplexity": null,
+      "timeComplexity": "O(n + r)",
+      "spaceComplexity": "O(r)",
       "description": "",
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  let min = Infinity;\n  let max = -Infinity;\n\n  const map = new Map();\n\n  for (const num of nums) {\n    map.set(num, (map.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  console.log({map, min, max});\n\n  let count = 0;\n  for (let i = max; i >= min; i--) {\n    if (!map.has(i)) continue;\n\n    for (let j = 0; j < map.get(i) && count < k; j++) count++;\n\n    if (count === k) return i;\n  }\n\n  return -1;\n};\n\nreturn findKthLargest;\n",
       "order": 2
@@ -13776,6 +13994,97 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar countPalindromicSubsequence = function (s) {\n  const first = Array.from(new Int32Array(26).fill(-1));\n  first.setColorMap({\n    \"-1\": \"black\",\n  });\n  const last = Array.from(new Uint32Array(26));\n  last.setColorMap({\n    0: \"black\",\n  });\n  const offset = \"a\".charCodeAt(0);\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"blue\");\n    const curr = s[i].charCodeAt(0) - offset;\n    if (first[curr] === -1) {\n      first[curr] = i;\n    }\n\n    last[curr] = i;\n  }\n\n  let count = 0;\n  for (let i = 0; i < 26; i++) {\n    first.setColor(i, \"cyan\");\n    if (first[i] === -1) continue;\n    last.setColor(i, \"green\");\n\n    const between = new Set();\n    for (let j = first[i] + 1; j < last[i]; j++) {\n      between.add(s[j]);\n    }\n    console.log(i, between);\n\n    count += between.size;\n  }\n\n  return count;\n};\n\nreturn countPalindromicSubsequence;\n",
+      "order": 0
+    },
+    "clp1gbsh20005mi0gshxaiduh": {
+      "id": "clp1gbsh20005mi0gshxaiduh",
+      "createdAt": "2023-11-16T17:14:54.566Z",
+      "updatedAt": "2023-11-16T17:41:11.399Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect /w Recursion",
+      "slug": "solution-3",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const quickSelect = (left, right) => {\n    let p = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= nums[right]) {\n        [nums[p], nums[i]] = [nums[i], nums[p]];\n        p++;\n      }\n    }\n    [nums[p], nums[right]] = [nums[right], nums[p]];\n\n    if (p > target) {\n      return quickSelect(left, p - 1);\n    } else if (p < target) {\n      return quickSelect(p + 1, right);\n    } else {\n      return nums[p];\n    }\n  };\n\n  return quickSelect(0, nums.length - 1);\n};\n\nreturn findKthLargest;\n",
+      "order": 5
+    },
+    "clp1gttty0007mi0ghmle4aat": {
+      "id": "clp1gttty0007mi0ghmle4aat",
+      "createdAt": "2023-11-16T17:28:56.134Z",
+      "updatedAt": "2023-11-16T17:42:33.471Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect",
+      "slug": "quickselect",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const partition = (left, right) => {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const pivot = nums[right];\n    let fill = left;\n\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= pivot) {\n        [nums[fill], nums[i]] = [nums[i], nums[fill]];\n        fill++;\n      }\n    }\n\n    [nums[fill], nums[right]] = [nums[right], nums[fill]];\n\n    return fill;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left < right) {\n    const pivot = partition(left, right);\n\n    if (pivot < target) {\n      left = pivot + 1;\n    } else if (pivot > target) {\n      right = pivot - 1;\n    } else {\n      break;\n    }\n  }\n\n  nums.setColor(target, \"green\");\n  return nums[target];\n};\n\nreturn findKthLargest;\n",
+      "order": 3
+    },
+    "clp2i7l560003oe0fiomfpk1t": {
+      "id": "clp2i7l560003oe0fiomfpk1t",
+      "createdAt": "2023-11-17T10:55:23.850Z",
+      "updatedAt": "2023-11-17T11:04:22.460Z",
+      "projectId": "clp2i7l560001oe0fyeujhe9b",
+      "title": "Counting Sort",
+      "slug": "counting-sort",
+      "timeComplexity": "O(n + r)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minPairSum = function (nums) {\n  const freqMap = new Map();\n\n  let min = Infinity;\n  let max = -Infinity;\n\n  for (let i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    freqMap.set(num, (freqMap.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  let left = min;\n  let right = max;\n\n  console.log({min, max, freqMap});\n\n  let result = -Infinity;\n  while (left <= right) {\n    let leftCount = freqMap.get(left);\n    let rightCount = freqMap.get(right);\n\n    const sum = left + right;\n    result = Math.max(result, sum);\n    leftCount--;\n    rightCount--;\n\n    console.log({left, leftCount, rightCount, sum, result});\n\n    freqMap.set(left, leftCount);\n    freqMap.set(right, rightCount);\n\n    if (leftCount === 0) {\n      left++;\n      while (left <= right && !freqMap.has(left)) left++;\n    }\n    if (rightCount === 0) {\n      right--;\n      while (left <= right && !freqMap.has(right)) right--;\n    }\n  }\n\n  return result;\n};\n\nreturn minPairSum;\n",
+      "order": 0
+    },
+    "clp2idt2m0007oe0f098glm79": {
+      "id": "clp2idt2m0007oe0f098glm79",
+      "createdAt": "2023-11-17T11:00:14.062Z",
+      "updatedAt": "2023-11-17T11:02:50.166Z",
+      "projectId": "clp2i7l560001oe0fyeujhe9b",
+      "title": "Sorting",
+      "slug": "sorting",
+      "timeComplexity": "O(n * logn)",
+      "spaceComplexity": "O(logn)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minPairSum = function (nums) {\n  nums.sort((a, b) => a - b);\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  let max = -Infinity;\n\n  while (left < right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"green\");\n    const cur = nums[left] + nums[right];\n    max = Math.max(max, cur);\n    left++;\n    right--;\n  }\n\n  return max;\n};\n\nreturn minPairSum;\n",
+      "order": 1
+    },
+    "clp4bzxcg0003qe0gh3eu7ggb": {
+      "id": "clp4bzxcg0003qe0gh3eu7ggb",
+      "createdAt": "2023-11-18T17:37:01.071Z",
+      "updatedAt": "2023-11-18T17:39:25.938Z",
+      "projectId": "clp4bzxcg0001qe0gx1r7dpwx",
+      "title": "Counting Sort + Sliding Window",
+      "slug": "counting-sort-sliding-window",
+      "timeComplexity": "O(n + r)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar maxFrequency = function (nums, k) {\n  const freqMap = new Map();\n  let min = Infinity;\n  let max = -Infinity;\n  for (let i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n    freqMap.set(num, (freqMap.get(num) ?? 0) + 1);\n  }\n\n  function* traverse() {\n    for (let i = min; i <= max; i++) {\n      if (!freqMap.has(i)) continue;\n      const count = freqMap.get(i);\n      for (let j = 0; j < count; j++) {\n        yield i;\n      }\n    }\n  }\n\n  let index = 0;\n  for (const num of traverse()) {\n    nums[index++] = num;\n  }\n\n  console.log(freqMap, nums);\n\n  let sum = 0;\n  let left = 0;\n\n  for (let right = 0; right < nums.length; right++) {\n    const target = nums[right];\n    sum += target;\n\n    if (target * (right - left + 1) - sum > k) {\n      sum -= nums[left++];\n    }\n  }\n\n  return nums.length - left;\n};\n\nreturn maxFrequency;\n",
+      "order": 2
+    },
+    "clp4c2gjz0007qe0gowxxa6f4": {
+      "id": "clp4c2gjz0007qe0gowxxa6f4",
+      "createdAt": "2023-11-18T17:38:59.279Z",
+      "updatedAt": "2023-11-18T17:41:11.864Z",
+      "projectId": "clp4bzxcg0001qe0gx1r7dpwx",
+      "title": "Sort + Sliding Window",
+      "slug": "sort-sliding-window",
+      "timeComplexity": "O(n * logn)",
+      "spaceComplexity": "O(logn)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar maxFrequency = function (nums, k) {\n  nums.sort((a, b) => a - b);\n\n  let sum = 0;\n  let left = 0;\n\n  for (let right = 0; right < nums.length; right++) {\n    const target = nums[right];\n    sum += target;\n\n    if ((right - left + 1) * target - sum > k && left < right) {\n      sum -= nums[left++];\n    }\n  }\n\n  return nums.length - left;\n};\n\nreturn maxFrequency;\n",
+      "order": 1
+    },
+    "clp5rkovh0003pi0fl3xurg1e": {
+      "id": "clp5rkovh0003pi0fl3xurg1e",
+      "createdAt": "2023-11-19T17:40:50.285Z",
+      "updatedAt": "2023-11-19T17:41:05.057Z",
+      "projectId": "clp5rkovh0001pi0fguiifafo",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findRedundantConnection = function (edges) {\n  const par = Array.from({ length: edges.length + 1 }, (_, i) => i);\n  const ranks = new Array(edges.length + 1).fill(1);\n\n  const find = (node) => {\n    let parent = par[node];\n\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n\n    return parent;\n  };\n\n  // returns false if already merged\n  const union = (node1, node2) => {\n    const parent1 = find(node1);\n    const parent2 = find(node2);\n\n    if (parent1 === parent2) return false;\n\n    if (ranks[parent1] > ranks[parent2]) {\n      par[parent2] = parent1;\n      ranks[parent1] += ranks[parent2];\n    } else {\n      par[parent1] = parent2;\n      ranks[parent2] += ranks[parent1];\n    }\n\n    return true;\n  };\n\n  for (const [from, to] of edges) {\n    if (!union(from, to)) {\n      return [from, to];\n    }\n  }\n};\n\nreturn findRedundantConnection;\n",
       "order": 0
     }
   }
