@@ -1,3 +1,10 @@
+# [1.235.0](https://github.com/mkayander/leetpal/compare/v1.234.0...v1.235.0) (2023-11-24)
+
+
+### Features
+
+* Implement a controlled array slice operation ([dfbfa79](https://github.com/mkayander/leetpal/commit/dfbfa79f518c18dec40cacfe86721076ec8fabc1))
+
 # [1.234.0](https://github.com/mkayander/leetpal/compare/v1.233.2...v1.234.0) (2023-11-22)
 
 
