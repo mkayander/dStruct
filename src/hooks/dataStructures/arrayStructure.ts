@@ -1,5 +1,6 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
+import { number } from "yup";
 
 import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
@@ -212,6 +213,12 @@ export class ControlledArray<T> extends Array<T> {
       true,
       options,
     );
+  }
+
+  override slice(start?: number, end?: number): T[] {
+    const sliceArray = super.slice(start, end);
+    const { id, array, data } = ControlledArray._mapArrayData(sliceArray);
+    return new ControlledArray(array as T[], id, data, this.dispatch, true);
   }
 
   public blink(index: number) {
