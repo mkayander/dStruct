@@ -2365,6 +2365,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clpfpilpf0001muuvzk46ekho": {
+      "id": "clpfpilpf0001muuvzk46ekho",
+      "createdAt": "2023-11-26T16:40:55.392Z",
+      "updatedAt": "2023-11-26T16:40:55.392Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Connected Components in an Undirected Graph",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph",
+      "slug": "number-of-connected-components-in-an-undirected-graph",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -10917,6 +10931,56 @@
         }
       },
       "description": null
+    },
+    "clpfpilpf0002muuvw02ihsra": {
+      "id": "clpfpilpf0002muuvw02ihsra",
+      "createdAt": "2023-11-26T16:40:55.392Z",
+      "updatedAt": "2023-11-26T16:44:10.875Z",
+      "projectId": "clpfpilpf0001muuvzk46ekho",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2PdSWiZV7mLV22eMxiw4cu": {
+          "name": "2PdSWiZV7mLV22eMxiw4cu",
+          "type": "array",
+          "input": "[[0,1],[1,2],[3,4]]",
+          "order": 1
+        },
+        "3uuxuWf5QENtKX2QPyguvr": {
+          "name": "3uuxuWf5QENtKX2QPyguvr",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpfpjk410005muuv95gb39ol": {
+      "id": "clpfpjk410005muuv95gb39ol",
+      "createdAt": "2023-11-26T16:41:39.985Z",
+      "updatedAt": "2023-11-26T16:44:23.497Z",
+      "projectId": "clpfpilpf0001muuvzk46ekho",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3uuxuWf5QENtKX2QPyguvr": {
+          "name": "3uuxuWf5QENtKX2QPyguvr",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "uXRR5ejwbkRK2cZeBJNKSu": {
+          "name": "uXRR5ejwbkRK2cZeBJNKSu",
+          "type": "array",
+          "input": "[[0,1],[1,2],[2,3],[3,4]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -12665,14 +12729,14 @@
     "cll5dl7hm0005mj08yskx8km2": {
       "id": "cll5dl7hm0005mj08yskx8km2",
       "createdAt": "2023-08-10T16:30:30.442Z",
-      "updatedAt": "2023-08-10T16:30:30.442Z",
+      "updatedAt": "2023-11-26T17:25:33.159Z",
       "projectId": "cll5d2kdz0001mj088t4zkcj2",
       "title": "Index Stack",
       "slug": "index-stack",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": "",
-      "code": "/**\n * @param {number[]} heights\n * @return {number}\n */\nvar largestRectangleArea = function (heights) {\n  const n = heights.length;\n  const stack = new Array();\n\n  let maxArea = 0;\n\n  for (let i = 0; i < n; i++) {\n    heights.setColor(i, \"green\");\n    while (stack.length && heights[stack.at(-1)] > heights[i]) {\n      const lastIndex = stack.pop();\n      const last = heights[lastIndex];\n      const currentWidth = i - (stack.at(-1) ?? -1) - 1;\n      maxArea = Math.max(maxArea, last * currentWidth);\n    }\n\n    stack.push(i);\n  }\n\n  console.log(stack)\n\n  while (stack.length) {\n    const index = stack.pop();\n    heights.setColor(index, \"cyan\");\n    const height = heights[index];\n    const width = n - (stack.at(-1) ?? -1) - 1;\n    maxArea = Math.max(maxArea, height * width);\n  }\n\n  return maxArea;\n};\n\nreturn largestRectangleArea;\n",
+      "code": "/**\n * @param {number[]} heights\n * @return {number}\n */\nvar largestRectangleArea = function (heights) {\n  const n = heights.length;\n  const stack = new Array();\n  let maxArea = 0;\n\n  for (let i = 0; i <= n; i++) {\n    heights.setColor(i, \"cyan\");\n    while (stack.length && (i === n || heights[i] < heights[stack.at(-1)])) {\n      const height = heights[stack.pop()];\n      const width = stack.length === 0 ? i : i - stack.at(-1) - 1;\n      maxArea = Math.max(maxArea, height * width);\n    }\n\n    stack.push(i);\n  }\n\n  return maxArea;\n};\n\nreturn largestRectangleArea;\n",
       "order": 1
     },
     "cll5ducto0007mj08gj8j6zdr": {
@@ -14259,6 +14323,19 @@
       "spaceComplexity": "O(n)",
       "description": "",
       "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar minimumMoves = function (grid) {\n  const zeroes = new Array();\n  const extras = new Array();\n\n  for (let row = 0; row < 3; row++) {\n    for (let col = 0; col < 3; col++) {\n      if (grid[row][col] === 0) {\n        zeroes.push([row, col]);\n      } else if (grid[row][col] > 1) {\n        extras.push([row, col]);\n      }\n    }\n  }\n\n  const getDistance = (row1, col1, row2, col2) =>\n    Math.abs(row1 - row2) + Math.abs(col1 - col2);\n\n  const backtrack = (i) => {\n    if (i === zeroes.length) {\n      return 0;\n    }\n    zeroes.setColor(i, \"green\");\n\n    let min = Infinity;\n    const [zRow, zCol] = zeroes[i];\n    for (let j = 0; j < extras.length; j++) {\n      const [row, col] = extras[j];\n      if (grid[row][col] <= 1) continue;\n      extras.setColor(j, \"cyan\");\n      grid[row][col]--;\n      const next = backtrack(i + 1);\n      grid[row][col]++;\n\n      const distance = getDistance(zRow, zCol, row, col);\n      min = Math.min(min, distance + next);\n      extras.setColor(j, null);\n    }\n\n    console.log(i, min);\n    zeroes.setColor(i, null);\n    return min;\n  };\n\n  return backtrack(0);\n};\n\nreturn minimumMoves;\n",
+      "order": 0
+    },
+    "clpfpilpf0003muuvt4frcre5": {
+      "id": "clpfpilpf0003muuvt4frcre5",
+      "createdAt": "2023-11-26T16:40:55.392Z",
+      "updatedAt": "2023-11-26T16:44:29.429Z",
+      "projectId": "clpfpilpf0001muuvzk46ekho",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number}\n */\nvar countComponents = function (n, edges) {\n  const par = new Array(n);\n  const rank = new Array(n);\n  for (let i = 0; i < n; i++) {\n    par[i] = i;\n    rank[i] = 1;\n  }\n\n  let count = n;\n\n  const find = (node) => {\n    let parent = par[node];\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n    return parent;\n  };\n\n  const union = (from, to) => {\n    let child = find(from);\n    let target = find(to);\n    if (child === target) return;\n\n    if (rank[child] > rank[target]) {\n      [child, target] = [target, child];\n    }\n\n    par[child] = target;\n    rank[target] += rank[child];\n    rank[child] = 0;\n    count--;\n  };\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n    union(from, to);\n  }\n\n  return count;\n};\n\nreturn countComponents;\n",
       "order": 0
     }
   }
