@@ -1,3 +1,10 @@
+## [1.235.1](https://github.com/mkayander/leetpal/compare/v1.235.0...v1.235.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* Remove unused import ([4a888ae](https://github.com/mkayander/leetpal/commit/4a888aeadbc3294c6ecbdd7c39a8d787a381d3b2))
+
 # [1.235.0](https://github.com/mkayander/leetpal/compare/v1.234.0...v1.235.0) (2023-11-24)
 
 
