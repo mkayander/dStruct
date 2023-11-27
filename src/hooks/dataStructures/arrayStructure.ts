@@ -1,6 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
-import { number } from "yup";
 
 import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
