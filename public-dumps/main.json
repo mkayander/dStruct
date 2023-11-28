@@ -2379,6 +2379,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clpfrpyq60001fgeuowu19bv4": {
+      "id": "clpfrpyq60001fgeuowu19bv4",
+      "createdAt": "2023-11-26T17:42:38.093Z",
+      "updatedAt": "2023-11-26T17:42:38.093Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Largest Submatrix With Rearrangements",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/largest-submatrix-with-rearrangements",
+      "slug": "largest-submatrix-with-rearrangements",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clpgy1k8n0001tmqe6s8kukex": {
+      "id": "clpgy1k8n0001tmqe6s8kukex",
+      "createdAt": "2023-11-27T13:27:23.063Z",
+      "updatedAt": "2023-11-27T13:27:23.063Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Knight Dialer",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/knight-dialer",
+      "slug": "knight-dialer",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clpi4m5im0001xuonpciyftk0": {
+      "id": "clpi4m5im0001xuonpciyftk0",
+      "createdAt": "2023-11-28T09:19:07.631Z",
+      "updatedAt": "2023-11-28T09:19:07.631Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find Leaves of Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-leaves-of-binary-tree",
+      "slug": "find-leaves-of-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -10981,6 +11023,158 @@
         }
       },
       "description": null
+    },
+    "clpfrpyq60002fgeuyrpswrqj": {
+      "id": "clpfrpyq60002fgeuyrpswrqj",
+      "createdAt": "2023-11-26T17:42:38.093Z",
+      "updatedAt": "2023-11-26T17:42:57.648Z",
+      "projectId": "clpfrpyq60001fgeuowu19bv4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "v22HNWULGKbCc9aKE9erGx": {
+          "name": "v22HNWULGKbCc9aKE9erGx",
+          "type": "matrix",
+          "input": "[[0,0,1],[1,1,1],[1,0,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpfrr3h00005fgeun1nyj3o8": {
+      "id": "clpfrr3h00005fgeun1nyj3o8",
+      "createdAt": "2023-11-26T17:43:30.900Z",
+      "updatedAt": "2023-11-26T17:43:34.208Z",
+      "projectId": "clpfrpyq60001fgeuowu19bv4",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "v22HNWULGKbCc9aKE9erGx": {
+          "name": "v22HNWULGKbCc9aKE9erGx",
+          "type": "matrix",
+          "input": "[[1,1,0],[1,0,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpfrr8ak0007fgeul8rf6w84": {
+      "id": "clpfrr8ak0007fgeul8rf6w84",
+      "createdAt": "2023-11-26T17:43:37.148Z",
+      "updatedAt": "2023-11-26T17:49:23.786Z",
+      "projectId": "clpfrpyq60001fgeuowu19bv4",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "v22HNWULGKbCc9aKE9erGx": {
+          "name": "v22HNWULGKbCc9aKE9erGx",
+          "type": "matrix",
+          "input": "[[1,0,1,1],[1,1,0,1],[1,0,1,1],[0,1,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpgy1k8n0002tmqed8padz5q": {
+      "id": "clpgy1k8n0002tmqed8padz5q",
+      "createdAt": "2023-11-27T13:27:23.063Z",
+      "updatedAt": "2023-11-27T13:28:19.093Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "g4DqZm6ZDqihd17Vki5swy": {
+          "name": "g4DqZm6ZDqihd17Vki5swy",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpgyawke0005tmqea5zry50x": {
+      "id": "clpgyawke0005tmqea5zry50x",
+      "createdAt": "2023-11-27T13:34:38.942Z",
+      "updatedAt": "2023-11-27T13:37:11.259Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "g4DqZm6ZDqihd17Vki5swy": {
+          "name": "g4DqZm6ZDqihd17Vki5swy",
+          "type": "number",
+          "input": "24",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpgyfboh0007tmqefvkh0uk7": {
+      "id": "clpgyfboh0007tmqefvkh0uk7",
+      "createdAt": "2023-11-27T13:38:05.153Z",
+      "updatedAt": "2023-11-27T13:38:18.854Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "g4DqZm6ZDqihd17Vki5swy": {
+          "name": "g4DqZm6ZDqihd17Vki5swy",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpi4m5im0002xuon0pv5mgve": {
+      "id": "clpi4m5im0002xuon0pv5mgve",
+      "createdAt": "2023-11-28T09:19:07.631Z",
+      "updatedAt": "2023-11-28T09:19:27.283Z",
+      "projectId": "clpi4m5im0001xuonpciyftk0",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpi4py4x0005xuonj2cxu4p9": {
+      "id": "clpi4py4x0005xuonj2cxu4p9",
+      "createdAt": "2023-11-28T09:22:04.690Z",
+      "updatedAt": "2023-11-28T09:22:26.791Z",
+      "projectId": "clpi4m5im0001xuonpciyftk0",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3,4,5,6,7,8,null,null,9]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14336,6 +14530,71 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number}\n */\nvar countComponents = function (n, edges) {\n  const par = new Array(n);\n  const rank = new Array(n);\n  for (let i = 0; i < n; i++) {\n    par[i] = i;\n    rank[i] = 1;\n  }\n\n  let count = n;\n\n  const find = (node) => {\n    let parent = par[node];\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n    return parent;\n  };\n\n  const union = (from, to) => {\n    let child = find(from);\n    let target = find(to);\n    if (child === target) return;\n\n    if (rank[child] > rank[target]) {\n      [child, target] = [target, child];\n    }\n\n    par[child] = target;\n    rank[target] += rank[child];\n    rank[child] = 0;\n    count--;\n  };\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n    union(from, to);\n  }\n\n  return count;\n};\n\nreturn countComponents;\n",
+      "order": 0
+    },
+    "clpfrpyq60003fgeu297twvgl": {
+      "id": "clpfrpyq60003fgeu297twvgl",
+      "createdAt": "2023-11-26T17:42:38.093Z",
+      "updatedAt": "2023-11-26T17:48:16.628Z",
+      "projectId": "clpfrpyq60001fgeuowu19bv4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nvar largestSubmatrix = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n  let result = 0;\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (matrix[row][col] === 1 && row > 0) {\n        matrix[row][col] += matrix[row - 1][col];\n      }\n    }\n\n    const currRow = Array.from(matrix[row]);\n    currRow.sort((a, b) => b - a);\n    for (let i = 0; i < n; i++) {\n      currRow.setColor(i, \"cyan\");\n      result = Math.max(result, currRow[i] * (i + 1));\n    }\n  }\n\n  return result;\n};\n\nreturn largestSubmatrix;\n",
+      "order": 0
+    },
+    "clpgy1k8n0003tmqeecburce4": {
+      "id": "clpgy1k8n0003tmqeecburce4",
+      "createdAt": "2023-11-27T13:27:23.063Z",
+      "updatedAt": "2023-11-27T15:58:45.483Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Top-Down Recursion",
+      "slug": "top-down-recursion",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr, index) =>\n      Array.from(arr, undefined, null, {\n        parentName: \"map\",\n        index,\n      }),\n    null,\n    {\n      matrixName: \"map\",\n    },\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from(\n    { length: 10 },\n    (_, index) =>\n      Array.from({ length }, () => 0, null, {\n        parentName: \"dp\",\n        index,\n        colorMap: {\n          0: \"black\",\n        },\n      }),\n    null,\n    {\n      matrixName: \"dp\",\n    },\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "order": 0
+    },
+    "clph3fihs000110vh8v49am5e": {
+      "id": "clph3fihs000110vh8v49am5e",
+      "createdAt": "2023-11-27T15:58:12.064Z",
+      "updatedAt": "2023-11-27T16:00:50.819Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Bottom-Up Iteration",
+      "slug": "bottom-up-iteration",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = [\n    [4, 6],\n    [6, 8],\n    [7, 9],\n    [4, 8],\n    [3, 9, 0],\n    [],\n    [1, 7, 0],\n    [2, 6],\n    [1, 3],\n    [2, 4],\n  ];\n\n  const dp = Array.from(\n    { length },\n    (_, index) =>\n      Array.from({ length: 10 }, () => 0, null, { parentName: \"dp\", index }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  for (let cell = 0; cell < 10; cell++) {\n    dp[0][cell] = 1;\n  }\n\n  for (let remain = 1; remain < length; remain++) {\n    for (let cell = 0; cell < 10; cell++) {\n      let sum = 0;\n      for (const next of map[cell]) {\n        sum = (sum + dp[remain - 1][next]) % mod;\n      }\n      dp[remain][cell] = sum;\n    }\n  }\n\n  let total = 0;\n  for (let cell = 0; cell < 10; cell++) {\n    total = (total + dp[length - 1][cell]) % mod;\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "order": 1
+    },
+    "clph3rt15000310vhn8f9pz60": {
+      "id": "clph3rt15000310vhn8f9pz60",
+      "createdAt": "2023-11-27T16:07:45.593Z",
+      "updatedAt": "2023-11-27T16:09:37.815Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Bottom-Up Optimized",
+      "slug": "bottom-up-optimized",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "1D DP\n\nRow size is always 10, so space complexity is constant",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = [\n    [4, 6],\n    [6, 8],\n    [7, 9],\n    [4, 8],\n    [3, 9, 0],\n    [],\n    [1, 7, 0],\n    [2, 6],\n    [1, 3],\n    [2, 4],\n  ];\n\n  let dp = new Array(10).fill(1);\n\n  for (let remain = 1; remain < length; remain++) {\n    let nextRow = new Array(10);\n    for (let cell = 0; cell < 10; cell++) {\n      let sum = 0;\n      for (const next of map[cell]) {\n        sum = (sum + dp[next]) % mod;\n      }\n      nextRow[cell] = sum;\n    }\n    dp = nextRow;\n  }\n\n  let total = 0;\n  for (let cell = 0; cell < 10; cell++) {\n    total = (total + dp[cell]) % mod;\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "order": 2
+    },
+    "clpi4m5in0003xuon29w5wbye": {
+      "id": "clpi4m5in0003xuon29w5wbye",
+      "createdAt": "2023-11-28T09:19:07.631Z",
+      "updatedAt": "2023-11-28T09:20:44.140Z",
+      "projectId": "clpi4m5im0001xuonpciyftk0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nvar findLeaves = function (root) {\n  const result = [];\n\n  const dfs = (node) => {\n    if (!node) return 0;\n    node.setColor(\"cyan\");\n\n    const left = dfs(node.left);\n    const right = dfs(node.right);\n\n    node.setColor(\"green\");\n    const height = Math.max(left, right);\n    node.left = node.right = null;\n    (result[height] ??= new Array()).push(node.val);\n\n    return height + 1;\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn findLeaves;\n",
       "order": 0
     }
   }
