@@ -1,3 +1,10 @@
+# [1.236.0](https://github.com/mkayander/leetpal/compare/v1.235.1...v1.236.0) (2023-11-29)
+
+
+### Features
+
+* Added new project category ([19e8d68](https://github.com/mkayander/leetpal/commit/19e8d68fa1a0121b38276b6695aa92ffad956e02))
+
 ## [1.235.1](https://github.com/mkayander/leetpal/compare/v1.235.0...v1.235.1) (2023-11-27)
 
 
