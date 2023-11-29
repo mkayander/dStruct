@@ -108,6 +108,7 @@ enum ProjectCategory {
   SLIDING_WINDOW
   BACKTRACKING
   DYNAMIC_PROGRAMMING
+  BIT_MANIPULATION
 }
 
 enum ProjectDifficulty {
