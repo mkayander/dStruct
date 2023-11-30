@@ -2421,6 +2421,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clplnus5d00012qydrpz0x5ci": {
+      "id": "clplnus5d00012qydrpz0x5ci",
+      "createdAt": "2023-11-30T20:41:01.441Z",
+      "updatedAt": "2023-11-30T20:41:01.441Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Graph Valid Tree",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/graph-valid-tree",
+      "slug": "graph-valid-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11175,6 +11189,56 @@
         }
       },
       "description": null
+    },
+    "clplnus5d00022qydy28fjos1": {
+      "id": "clplnus5d00022qydy28fjos1",
+      "createdAt": "2023-11-30T20:41:01.441Z",
+      "updatedAt": "2023-11-30T20:42:31.734Z",
+      "projectId": "clplnus5d00012qydrpz0x5ci",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "eVqQXMLyGNJMvX1Cgdugcz": {
+          "name": "eVqQXMLyGNJMvX1Cgdugcz",
+          "type": "array",
+          "input": "[[0,1],[0,2],[0,3],[1,4]]",
+          "order": 1
+        },
+        "n1yJnda6L3Vj4qzgsBbFwv": {
+          "name": "n1yJnda6L3Vj4qzgsBbFwv",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clplnvkbw00052qydysi2qngy": {
+      "id": "clplnvkbw00052qydysi2qngy",
+      "createdAt": "2023-11-30T20:41:37.964Z",
+      "updatedAt": "2023-11-30T20:42:46.985Z",
+      "projectId": "clplnus5d00012qydrpz0x5ci",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "hVxUHzeLECDUcbwrb8Xmdx": {
+          "name": "hVxUHzeLECDUcbwrb8Xmdx",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "tD53irLa44iZ9JQ6sQvxF7": {
+          "name": "tD53irLa44iZ9JQ6sQvxF7",
+          "type": "array",
+          "input": "[[0,1],[1,2],[2,3],[1,3],[1,4]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14595,6 +14659,19 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nvar findLeaves = function (root) {\n  const result = [];\n\n  const dfs = (node) => {\n    if (!node) return 0;\n    node.setColor(\"cyan\");\n\n    const left = dfs(node.left);\n    const right = dfs(node.right);\n\n    node.setColor(\"green\");\n    const height = Math.max(left, right);\n    node.left = node.right = null;\n    (result[height] ??= new Array()).push(node.val);\n\n    return height + 1;\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn findLeaves;\n",
+      "order": 0
+    },
+    "clplnus5d00032qydhkabf9s5": {
+      "id": "clplnus5d00032qydhkabf9s5",
+      "createdAt": "2023-11-30T20:41:01.441Z",
+      "updatedAt": "2023-11-30T20:43:41.186Z",
+      "projectId": "clplnus5d00012qydrpz0x5ci",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {boolean}\n */\nvar validTree = function (n, edges) {\n  if (edges.length >= n) return false;\n\n  const par = new Array(n);\n  const rank = new Array(n);\n  for (let i = 0; i < n; i++) {\n    par[i] = i;\n    rank[i] = 1;\n  }\n\n  const find = (node) => {\n    let parent = par[node];\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n    return parent;\n  };\n\n  let count = n;\n\n  const union = (a, b) => {\n    let child = find(a);\n    let target = find(b);\n    if (child === target) return false;\n    if (rank[child] > rank[target]) {\n      [child, target] = [target, child];\n    }\n\n    par[child] = target;\n    rank[target] += rank[child];\n    rank[child] = 0;\n    count--;\n\n    return true;\n  };\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n\n    if (!union(from, to)) return false;\n  }\n\n  return count === 1;\n};\n\nreturn validTree;\n",
       "order": 0
     }
   }
