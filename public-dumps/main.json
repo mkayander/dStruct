@@ -2435,6 +2435,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clpoanhf100013js65yynr8e8": {
+      "id": "clpoanhf100013js65yynr8e8",
+      "createdAt": "2023-12-02T16:54:44.461Z",
+      "updatedAt": "2023-12-02T16:54:44.461Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find Median from Data Stream",
+      "category": "HEAP",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/find-median-from-data-stream",
+      "slug": "find-median-from-data-stream",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11239,6 +11253,31 @@
         }
       },
       "description": null
+    },
+    "clpoanhf100023js6tbqbq4mg": {
+      "id": "clpoanhf100023js6tbqbq4mg",
+      "createdAt": "2023-12-02T16:54:44.461Z",
+      "updatedAt": "2023-12-02T16:59:03.688Z",
+      "projectId": "clpoanhf100013js65yynr8e8",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5TfpTPZrvydDEXzreHZPrR": {
+          "name": "5TfpTPZrvydDEXzreHZPrR",
+          "type": "array",
+          "input": "[\"MedianFinder\", \"addNum\", \"addNum\", \"findMedian\", \"addNum\", \"findMedian\"]",
+          "order": 0
+        },
+        "dt9UrTy9TZaZ2p5yEWhvZc": {
+          "name": "dt9UrTy9TZaZ2p5yEWhvZc",
+          "type": "array",
+          "input": "[[], [1], [2], [], [3], []]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14672,6 +14711,19 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {boolean}\n */\nvar validTree = function (n, edges) {\n  if (edges.length >= n) return false;\n\n  const par = new Array(n);\n  const rank = new Array(n);\n  for (let i = 0; i < n; i++) {\n    par[i] = i;\n    rank[i] = 1;\n  }\n\n  const find = (node) => {\n    let parent = par[node];\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n    return parent;\n  };\n\n  let count = n;\n\n  const union = (a, b) => {\n    let child = find(a);\n    let target = find(b);\n    if (child === target) return false;\n    if (rank[child] > rank[target]) {\n      [child, target] = [target, child];\n    }\n\n    par[child] = target;\n    rank[target] += rank[child];\n    rank[child] = 0;\n    count--;\n\n    return true;\n  };\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n\n    if (!union(from, to)) return false;\n  }\n\n  return count === 1;\n};\n\nreturn validTree;\n",
+      "order": 0
+    },
+    "clpoanhf100033js6ishdhrel": {
+      "id": "clpoanhf100033js6ishdhrel",
+      "createdAt": "2023-12-02T16:54:44.461Z",
+      "updatedAt": "2023-12-02T17:01:55.649Z",
+      "projectId": "clpoanhf100013js65yynr8e8",
+      "title": "Two Heaps",
+      "slug": "heaps",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "var MedianFinder = function () {\n  this.minHeap = new PriorityQueue({compare: (a, b) => a - b});\n  this.maxHeap = new PriorityQueue({compare: (a, b) => b - a});\n};\n\n/**\n * @param {number} num\n * @return {void}\n */\nMedianFinder.prototype.addNum = function (num) {\n  this.maxHeap.enqueue(num);\n  this.minHeap.enqueue(this.maxHeap.dequeue());\n\n  if (this.maxHeap.size() < this.minHeap.size()) {\n    this.maxHeap.enqueue(this.minHeap.dequeue());\n  }\n};\n\n/**\n * @return {number}\n */\nMedianFinder.prototype.findMedian = function () {\n  const size = this.maxHeap.size() + this.minHeap.size();\n  const left = this.maxHeap.front();\n  const right = this.minHeap.front();\n\n  if (size % 2 === 0) {\n    return (left + right) / 2;\n  } else {\n    return left;\n  }\n};\n\n/**\n * Your MedianFinder object will be instantiated and called as such:\n * var obj = new MedianFinder()\n * obj.addNum(num)\n * var param_2 = obj.findMedian()\n */\n\nfunction handler(commands, args) {\n  const result = [null];\n  const instance = new MedianFinder();\n  for (let i = 1; i < commands.length; i++) {\n    result.push(instance[commands[i]](...args[i]));\n  }\n\n  // return result;\n}\n\nreturn handler;\n",
       "order": 0
     }
   }
