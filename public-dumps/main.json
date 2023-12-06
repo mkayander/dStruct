@@ -2449,6 +2449,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clppsrtpo000113qn45ayt2dy": {
+      "id": "clppsrtpo000113qn45ayt2dy",
+      "createdAt": "2023-12-03T18:09:46.284Z",
+      "updatedAt": "2023-12-03T18:09:46.284Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Product Subarray",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/maximum-product-subarray",
+      "slug": "maximum-product-subarray",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11278,6 +11292,25 @@
         }
       },
       "description": null
+    },
+    "clppsrtpo000213qnp9lr0ihj": {
+      "id": "clppsrtpo000213qnp9lr0ihj",
+      "createdAt": "2023-12-03T18:09:46.284Z",
+      "updatedAt": "2023-12-03T18:10:00.073Z",
+      "projectId": "clppsrtpo000113qn45ayt2dy",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "43wTpzzG5b7d8HC8KHhWkw": {
+          "name": "43wTpzzG5b7d8HC8KHhWkw",
+          "type": "array",
+          "input": "[2,3,-2,4]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14724,6 +14757,19 @@
       "spaceComplexity": "",
       "description": "",
       "code": "var MedianFinder = function () {\n  this.minHeap = new PriorityQueue({compare: (a, b) => a - b});\n  this.maxHeap = new PriorityQueue({compare: (a, b) => b - a});\n};\n\n/**\n * @param {number} num\n * @return {void}\n */\nMedianFinder.prototype.addNum = function (num) {\n  this.maxHeap.enqueue(num);\n  this.minHeap.enqueue(this.maxHeap.dequeue());\n\n  if (this.maxHeap.size() < this.minHeap.size()) {\n    this.maxHeap.enqueue(this.minHeap.dequeue());\n  }\n};\n\n/**\n * @return {number}\n */\nMedianFinder.prototype.findMedian = function () {\n  const size = this.maxHeap.size() + this.minHeap.size();\n  const left = this.maxHeap.front();\n  const right = this.minHeap.front();\n\n  if (size % 2 === 0) {\n    return (left + right) / 2;\n  } else {\n    return left;\n  }\n};\n\n/**\n * Your MedianFinder object will be instantiated and called as such:\n * var obj = new MedianFinder()\n * obj.addNum(num)\n * var param_2 = obj.findMedian()\n */\n\nfunction handler(commands, args) {\n  const result = [null];\n  const instance = new MedianFinder();\n  for (let i = 1; i < commands.length; i++) {\n    result.push(instance[commands[i]](...args[i]));\n  }\n\n  // return result;\n}\n\nreturn handler;\n",
+      "order": 0
+    },
+    "clppsrtpo000313qnk237usje": {
+      "id": "clppsrtpo000313qnk237usje",
+      "createdAt": "2023-12-03T18:09:46.284Z",
+      "updatedAt": "2023-12-03T18:10:10.615Z",
+      "projectId": "clppsrtpo000113qn45ayt2dy",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxProduct = function (nums) {\n  let max = nums[0];\n\n  let curr = nums[0];\n  let currMin = nums[0];\n\n  for (let i = 1; i < nums.length; i++) {\n    const num = nums[i];\n    const mult = curr * num;\n    const minMult = currMin * num;\n    curr = Math.max(num, mult, minMult);\n    currMin = Math.min(num, mult, minMult);\n\n    max = Math.max(max, curr);\n  }\n\n  return max;\n};\n\nreturn maxProduct;\n",
       "order": 0
     }
   }
