@@ -2463,6 +2463,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clpvh04o50001ylavuoq04z1c": {
+      "id": "clpvh04o50001ylavuoq04z1c",
+      "createdAt": "2023-12-07T17:26:55.398Z",
+      "updatedAt": "2023-12-07T17:26:55.398Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Largest Odd Number in String",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/largest-odd-number-in-string",
+      "slug": "largest-odd-number-in-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11311,6 +11325,63 @@
         }
       },
       "description": null
+    },
+    "clpvh04o50002ylavy9ffzp9o": {
+      "id": "clpvh04o50002ylavy9ffzp9o",
+      "createdAt": "2023-12-07T17:26:55.398Z",
+      "updatedAt": "2023-12-07T17:27:22.487Z",
+      "projectId": "clpvh04o50001ylavuoq04z1c",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "52",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpvh0rmc0005ylavtxbwmbo2": {
+      "id": "clpvh0rmc0005ylavtxbwmbo2",
+      "createdAt": "2023-12-07T17:27:25.140Z",
+      "updatedAt": "2023-12-07T17:27:28.536Z",
+      "projectId": "clpvh04o50001ylavuoq04z1c",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "35427",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clpvh1it60007ylav3r9a2ehh": {
+      "id": "clpvh1it60007ylav3r9a2ehh",
+      "createdAt": "2023-12-07T17:28:00.378Z",
+      "updatedAt": "2023-12-07T17:28:03.801Z",
+      "projectId": "clpvh04o50001ylavuoq04z1c",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "4206",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14770,6 +14841,19 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxProduct = function (nums) {\n  let max = nums[0];\n\n  let curr = nums[0];\n  let currMin = nums[0];\n\n  for (let i = 1; i < nums.length; i++) {\n    const num = nums[i];\n    const mult = curr * num;\n    const minMult = currMin * num;\n    curr = Math.max(num, mult, minMult);\n    currMin = Math.min(num, mult, minMult);\n\n    max = Math.max(max, curr);\n  }\n\n  return max;\n};\n\nreturn maxProduct;\n",
+      "order": 0
+    },
+    "clpvh04o60003ylav0kfcasd1": {
+      "id": "clpvh04o60003ylav0kfcasd1",
+      "createdAt": "2023-12-07T17:26:55.398Z",
+      "updatedAt": "2023-12-07T17:27:45.378Z",
+      "projectId": "clpvh04o50001ylavuoq04z1c",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} num\n * @return {string}\n */\nvar largestOddNumber = function (num) {\n  let end = -1;\n\n  for (let i = num.length - 1; i >= 0; i--) {\n    num.setColor(i, \"green\");\n    if (num[i] % 2 === 1) {\n      end = i;\n      break;\n    }\n  }\n\n  if (end === num.length - 1) return num;\n\n  return num.slice(0, end + 1);\n};\n\nreturn largestOddNumber;\n",
       "order": 0
     }
   }
