@@ -1,3 +1,12 @@
+# [1.237.0](https://github.com/mkayander/leetpal/compare/v1.236.0...v1.237.0) (2023-12-08)
+
+
+### Features
+
+* Disable global "refetchOnWindowFocus" ([7425e91](https://github.com/mkayander/leetpal/commit/7425e91d60c7ea1b0e266ce1043041d3501b2f30))
+* Improved code update handling ([4d29957](https://github.com/mkayander/leetpal/commit/4d29957bc36fe91643c4393521db5e33964b15a7))
+* Removed code runner linear progress ([6363fd9](https://github.com/mkayander/leetpal/commit/6363fd9c5a44573aa57259dbe76d19011e68e1c0))
+
 # [1.236.0](https://github.com/mkayander/leetpal/compare/v1.235.1...v1.236.0) (2023-11-29)
 
 
