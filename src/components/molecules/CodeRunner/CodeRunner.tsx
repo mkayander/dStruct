@@ -1,5 +1,5 @@
 import type { EditorProps } from "@monaco-editor/react";
-import { Box, LinearProgress, Skeleton, useTheme } from "@mui/material";
+import { Box, Skeleton, useTheme } from "@mui/material";
 import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -37,15 +37,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 
   return (
     <Box position="relative">
-      <LinearProgress
-        sx={{
-          position: "absolute",
-          width: "100%",
-          transition: "opacity .2s",
-          zIndex: 1,
-          opacity: isUpdating ? 0.2 : 0,
-        }}
-      />
       <MonacoEditor
         theme={theme.palette.mode === "dark" ? "app-dark" : "vs-light"}
         options={{
