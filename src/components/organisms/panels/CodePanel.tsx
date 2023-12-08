@@ -8,7 +8,7 @@ import { useSnackbar } from "notistack";
 import parserBabel from "prettier/plugins/babel";
 import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
 import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
@@ -34,6 +34,8 @@ import { trpc } from "#/utils";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
+  const trpcUtils = trpc.useContext();
+  const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>();
 
   const { LL } = useI18nContext();
 
@@ -65,11 +67,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     },
   );
 
-  const updateSolution = trpc.project.updateSolution.useMutation({
-    onSuccess: () => {
-      setEditorState(EditorState.SAVED_ON_SERVER);
-    },
-  });
+  const updateSolution = trpc.project.updateSolution.useMutation();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -84,30 +82,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setCodeInput(currentSolution.data.code);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSolution.data]);
-
-  // Save code changes on server
-  useEffect(() => {
-    if (!currentSolution.data || editorState !== EditorState.PENDING_CHANGES)
-      return;
-
-    const timeoutId = setTimeout(() => {
-      updateSolution.mutate({
-        projectId: currentSolution.data.projectId,
-        solutionId: currentSolution.data.id,
-        code: codeInput,
-      });
-    }, 750);
-
-    return () => clearTimeout(timeoutId);
-  }, [
-    codeInput,
-    currentSolution.data,
-    editorState,
-    projectSlug,
-    solutionSlug,
-    updateSolution,
-  ]);
+  }, [currentSolution.data?.slug]);
 
   // Handle code errors
   useEffect(() => {
@@ -168,8 +143,32 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     const range = ev.changes[0]?.rangeLength ?? 0;
     if (session.status === "unauthenticated" && range > 0 && range < 200) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
-    } else if (projectSlug && solutionSlug && isEditable) {
+    } else if (
+      projectSlug &&
+      solutionSlug &&
+      isEditable &&
+      currentSolution.data
+    ) {
       setEditorState(EditorState.PENDING_CHANGES);
+
+      clearTimeout(changeTimeoutId.current);
+      const newTimeout = (changeTimeoutId.current = setTimeout(async () => {
+        const data = await updateSolution.mutateAsync({
+          projectId: currentSolution.data.projectId,
+          solutionId: currentSolution.data.id,
+          code: value,
+        });
+        if (newTimeout === changeTimeoutId.current) {
+          trpcUtils.project.getSolutionBySlug.setData(
+            {
+              projectId: data.projectId,
+              slug: data.slug,
+            },
+            data,
+          );
+          setEditorState(EditorState.SAVED_ON_SERVER);
+        }
+      }, 750));
     }
   };
 
