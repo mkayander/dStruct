@@ -54,14 +54,14 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   useNodesRuntimeUpdates(frameState, playbackInterval, replayCount);
 
-  const scrollRef = useRef<HTMLElement>() as React.Ref<HTMLElement>;
+  const scrollRef = useRef<HTMLElement>(null);
   const [, setForceUpdate] = useState(false);
   const [scrolledStart, setScrolledStart] = useState(true);
   const [scrolledEnd, setScrolledEnd] = useState(true);
 
   const handleScroll = () => {
-    // TODO: The Ref types from the "indiana" library should be fixed
-    const current = (scrollRef as React.MutableRefObject<HTMLElement>).current;
+    const current = scrollRef.current;
+    if (!current) return;
     const offset = 10;
 
     setScrolledStart(current.scrollLeft <= offset);
