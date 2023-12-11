@@ -196,12 +196,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               height: "100%",
             }}
           >
-            {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
             {arrayStructures && (
               <Stack width="fit-content" spacing={2}>
                 {arrayStructures}
               </Stack>
             )}
+            {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
           </ArcherContainer>
         </Box>
       </ScrollContainer>
