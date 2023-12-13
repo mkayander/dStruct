@@ -1,3 +1,10 @@
+# [1.239.0](https://github.com/mkayander/leetpal/compare/v1.238.1...v1.239.0) (2023-12-13)
+
+
+### Features
+
+* Improved args update handling ([aaa685a](https://github.com/mkayander/leetpal/commit/aaa685a654855489fb9ccd4aebcda7852790deac))
+
 ## [1.238.1](https://github.com/mkayander/leetpal/compare/v1.238.0...v1.238.1) (2023-12-11)
 
 
