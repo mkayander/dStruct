@@ -49,16 +49,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
 
   const trpcUtils = trpc.useContext();
 
-  const updateCase = trpc.project.updateCase.useMutation({
-    onSuccess: async (data) => {
-      if (!selectedCase.data) return;
-      const input = {
-        projectId: selectedCase.data.projectId,
-        slug: selectedCase.data.slug,
-      };
-      trpcUtils.project.getCaseBySlug.setData(input, data);
-    },
-  });
+  const updateCase = trpc.project.updateCase.useMutation();
 
   useEffect(() => {
     if (
@@ -80,8 +71,9 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   useEffect(() => {
     if (!isEditable || !selectedCase.data || !isCaseEdited) return;
 
-    const timeoutId = setTimeout(() => {
-      updateCase.mutate({
+    let isCancelled = false;
+    const timeoutId = setTimeout(async () => {
+      const data = await updateCase.mutateAsync({
         projectId: selectedCase.data.projectId,
         caseId: selectedCase.data.id,
         args: args.reduce<ArgumentObjectMap>((acc, arg) => {
@@ -89,10 +81,16 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           return acc;
         }, {}),
       });
+      !isCancelled &&
+        trpcUtils.project.getCaseBySlug.setData(
+          { projectId: data.projectId, slug: data.slug },
+          data,
+        );
     }, 500);
 
     return () => {
       clearTimeout(timeoutId);
+      isCancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [args]);
@@ -143,7 +141,6 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                 />
                 <IconButton
                   title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
-                  disabled={isLoading}
                   onClick={() => handleDeleteArg(arg)}
                   size="small"
                   sx={{ top: -2 }}
@@ -156,11 +153,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         ))}
         {isEditable && caseSlug && (
           <Box display="flex" justifyContent="center">
-            <IconButton
-              title={LL.ADD_ARGUMENT()}
-              disabled={isLoading}
-              onClick={handleAddArg}
-            >
+            <IconButton title={LL.ADD_ARGUMENT()} onClick={handleAddArg}>
               <Add />
             </IconButton>
           </Box>
