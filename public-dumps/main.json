@@ -2505,6 +2505,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clq17756x00013dswo7uji4zt": {
+      "id": "clq17756x00013dswo7uji4zt",
+      "createdAt": "2023-12-11T17:39:03.561Z",
+      "updatedAt": "2023-12-11T17:39:03.561Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Element Appearing More Than 25% In Sorted Array",
+      "category": "BINARY_SEARCH",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array",
+      "slug": "element-appearing-more-than-25-in-sorted-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clq2e6rlm00039czk35i9fm6h": {
+      "id": "clq2e6rlm00039czk35i9fm6h",
+      "createdAt": "2023-12-12T13:42:29.434Z",
+      "updatedAt": "2023-12-12T13:42:29.434Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Average Subtree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/maximum-average-subtree",
+      "slug": "maximum-average-subtree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clq3u7w2h0001z3kydkudsuhw": {
+      "id": "clq3u7w2h0001z3kydkudsuhw",
+      "createdAt": "2023-12-13T13:59:01.913Z",
+      "updatedAt": "2023-12-13T13:59:01.913Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "N-Queens",
+      "category": "BACKTRACKING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/n-queens",
+      "slug": "n-queens",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clq3xbz3800012j0cf0vypvrl": {
+      "id": "clq3xbz3800012j0cf0vypvrl",
+      "createdAt": "2023-12-13T15:26:11.301Z",
+      "updatedAt": "2023-12-13T15:26:11.301Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Task Scheduler",
+      "category": "HEAP",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/task-scheduler",
+      "slug": "task-scheduler",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11452,7 +11508,7 @@
     "clpxtmy2p0002wwc2ba2laire": {
       "id": "clpxtmy2p0002wwc2ba2laire",
       "createdAt": "2023-12-09T08:56:07.682Z",
-      "updatedAt": "2023-12-09T08:56:36.615Z",
+      "updatedAt": "2023-12-13T17:39:13.093Z",
       "projectId": "clpxtmy2p0001wwc2wz9fsuww",
       "title": "Case 1",
       "order": 0,
@@ -11539,6 +11595,202 @@
           "name": "head",
           "type": "binaryTree",
           "input": "[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq17756x00023dswqwp62sip": {
+      "id": "clq17756x00023dswqwp62sip",
+      "createdAt": "2023-12-11T17:39:03.561Z",
+      "updatedAt": "2023-12-11T17:39:42.283Z",
+      "projectId": "clq17756x00013dswo7uji4zt",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "ndaa3gywKRqLJjHxtNUPd2": {
+          "name": "ndaa3gywKRqLJjHxtNUPd2",
+          "type": "array",
+          "input": "[1,2,2,6,6,6,6,7,10]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq2e6rlm00049czkm4oxd8uq": {
+      "id": "clq2e6rlm00049czkm4oxd8uq",
+      "createdAt": "2023-12-12T13:42:29.434Z",
+      "updatedAt": "2023-12-12T13:43:10.291Z",
+      "projectId": "clq2e6rlm00039czk35i9fm6h",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[5,6,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq2e7nrx00079czk481w7xow": {
+      "id": "clq2e7nrx00079czk481w7xow",
+      "createdAt": "2023-12-12T13:43:11.133Z",
+      "updatedAt": "2023-12-12T13:43:31.807Z",
+      "projectId": "clq2e6rlm00039czk35i9fm6h",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[5,6,4,2,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq2e8i5w00099czkqdvhetyk": {
+      "id": "clq2e8i5w00099czkqdvhetyk",
+      "createdAt": "2023-12-12T13:43:50.516Z",
+      "updatedAt": "2023-12-12T13:43:54.031Z",
+      "projectId": "clq2e6rlm00039czk35i9fm6h",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[0,null,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq2e8wsi000b9czk65sclyjh": {
+      "id": "clq2e8wsi000b9czk65sclyjh",
+      "createdAt": "2023-12-12T13:44:09.474Z",
+      "updatedAt": "2023-12-12T13:44:27.377Z",
+      "projectId": "clq2e6rlm00039czk35i9fm6h",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[10,9,8,7,6,5,4,3,2,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq3u7w2h0002z3ky89b9iu7m": {
+      "id": "clq3u7w2h0002z3ky89b9iu7m",
+      "createdAt": "2023-12-13T13:59:01.913Z",
+      "updatedAt": "2023-12-13T14:00:22.285Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq3uf5aj0005z3kyi4c6bhvm": {
+      "id": "clq3uf5aj0005z3kyi4c6bhvm",
+      "createdAt": "2023-12-13T14:04:40.460Z",
+      "updatedAt": "2023-12-13T14:07:11.579Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "6",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq3umlqf0007z3kys4hvelai": {
+      "id": "clq3umlqf0007z3kys4hvelai",
+      "createdAt": "2023-12-13T14:10:28.359Z",
+      "updatedAt": "2023-12-13T14:10:33.118Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "1",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq3un0h90009z3kyeckg6ymv": {
+      "id": "clq3un0h90009z3kyeckg6ymv",
+      "createdAt": "2023-12-13T14:10:47.470Z",
+      "updatedAt": "2023-12-13T14:10:50.338Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clq3xbz3800022j0c5paqjbwy": {
+      "id": "clq3xbz3800022j0c5paqjbwy",
+      "createdAt": "2023-12-13T15:26:11.301Z",
+      "updatedAt": "2023-12-13T15:28:01.291Z",
+      "projectId": "clq3xbz3800012j0cf0vypvrl",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "mKvyK4LCmfarTZW4AvyBTu": {
+          "name": "mKvyK4LCmfarTZW4AvyBTu",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        },
+        "uhdWuALWDVFPh6YN11Ynqg": {
+          "name": "uhdWuALWDVFPh6YN11Ynqg",
+          "type": "array",
+          "input": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]",
           "order": 0
         }
       },
@@ -13434,12 +13686,12 @@
     "cllfcxny50003l908j2phigjv": {
       "id": "cllfcxny50003l908j2phigjv",
       "createdAt": "2023-08-17T16:09:53.790Z",
-      "updatedAt": "2023-08-17T16:09:53.790Z",
+      "updatedAt": "2023-12-13T12:06:46.945Z",
       "projectId": "cllfcxny50001l908h79caf6d",
       "title": "Dynamic Programming",
       "slug": "dynamic-programming",
-      "timeComplexity": null,
-      "spaceComplexity": null,
+      "timeComplexity": "O(m*n)",
+      "spaceComplexity": "O(m*n)",
       "description": "",
       "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  const matrixName = \"dp\";\n\n  const dp = Array.from(\n    mat,\n    (row, index) =>\n      Array.from(row, (val) => val, null, {\n        index,\n        parentName: matrixName,\n      }),\n    null,\n    { matrixName }\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);\n      }\n\n      if (col > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);\n      }\n\n      dp[row][col] = minNeighbor + 1;\n    }\n  }\n\n  for (let row = m - 1; row >= 0; row--) {\n    for (let col = n - 1; col >= 0; col--) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row < m - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);\n      }\n\n      if (col < n - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);\n      }\n\n      dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);\n    }\n  }\n\n  return dp;\n};\n\nreturn updateMatrix;\n",
       "order": 0
@@ -15068,6 +15320,97 @@
       "description": "",
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar inorderTraversal = function (root) {\n  if (!root) return arr;\n  const arr = new Array();\n\n  let current = root;\n  const stack = new Array();\n\n  while (current || stack.length) {\n    while (current) {\n      current.setColor(\"cyan\", \"blink\");\n      stack.push(current);\n      current = current.left;\n    }\n\n    current = stack.pop();\n    current.setColor(\"green\");\n    arr.push(current.val);\n\n    current = current.right;\n  }\n\n  return arr;\n};\n\nreturn inorderTraversal;\n",
       "order": 2
+    },
+    "clq17756x00033dsw75szj0se": {
+      "id": "clq17756x00033dsw75szj0se",
+      "createdAt": "2023-12-11T17:39:03.561Z",
+      "updatedAt": "2023-12-11T17:40:00.982Z",
+      "projectId": "clq17756x00013dswo7uji4zt",
+      "title": "Binary Search",
+      "slug": "binary-search",
+      "timeComplexity": "O(log n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[]} arr\n * @return {number}\n */\nvar findSpecialInteger = function (arr) {\n  const n = arr.length;\n  const step = Math.floor(n / 4);\n  const candidates = [arr[step], arr[step * 2], arr[Math.floor((3 * n) / 4)]];\n\n  for (let i = 0; i < candidates.length; i++) {\n    const candidate = candidates[i];\n    const count = bisectRight(arr, candidate) - bisectLeft(arr, candidate);\n    if (count > step) return candidate;\n  }\n\n  return -1;\n};\n\nfunction bisectLeft(arr, target) {\n  let left = 0;\n  let right = arr.length;\n\n  while (left < right) {\n    const mid = left + ((right - left) >> 1);\n\n    if (arr[mid] < target) {\n      left = mid + 1;\n    } else {\n      right = mid;\n    }\n  }\n\n  return left;\n}\n\nfunction bisectRight(arr, target) {\n  let left = 0;\n  let right = arr.length;\n\n  while (left < right) {\n    const mid = left + ((right - left) >> 1);\n\n    if (arr[mid] <= target) {\n      left = mid + 1;\n    } else {\n      right = mid;\n    }\n  }\n\n  return left;\n}\n\nreturn findSpecialInteger;\n",
+      "order": 0
+    },
+    "clq26aww10001k086w7r3tpjt": {
+      "id": "clq26aww10001k086w7r3tpjt",
+      "createdAt": "2023-12-12T10:01:45.986Z",
+      "updatedAt": "2023-12-12T13:13:26.327Z",
+      "projectId": "clq17756x00013dswo7uji4zt",
+      "title": "Sliding Window",
+      "slug": "sliding-window",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[]} arr\n * @return {number}\n */\nvar findSpecialInteger = function (arr) {\n  const n = arr.length;\n  const threshold = Math.floor(n / 4);\n\n  let left = 0;\n  for (let i = 0; i <= n; i++) {\n    arr.setColor(i, \"cyan\");\n    if (arr[i] !== arr[left]) {\n      arr.setColor(left, \"green\");\n      const count = i - left;\n      if (count > threshold) return arr[left];\n      left = i;\n    }\n  }\n\n  return -1;\n};\n\nreturn findSpecialInteger;\n",
+      "order": 1
+    },
+    "clq2e3ybk00019czkfbg17iu5": {
+      "id": "clq2e3ybk00019czkfbg17iu5",
+      "createdAt": "2023-12-12T13:40:18.176Z",
+      "updatedAt": "2023-12-12T13:40:52.750Z",
+      "projectId": "clq17756x00013dswo7uji4zt",
+      "title": "Single Scan",
+      "slug": "single-scan",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "O(3*n / 4)",
+      "code": "/**\n * @param {number[]} arr\n * @return {number}\n */\nvar findSpecialInteger = function (arr) {\n  const n = arr.length;\n  const step = Math.floor(n / 4);\n\n  for (let i = 0; i < n - step; i++) {\n    if (arr[i] === arr[i + step]) {\n      return arr[i];\n    }\n  }\n\n  return -1;\n};\n\nreturn findSpecialInteger;\n",
+      "order": 2
+    },
+    "clq2e6rlm00059czkpk38cbs4": {
+      "id": "clq2e6rlm00059czkpk38cbs4",
+      "createdAt": "2023-12-12T13:42:29.434Z",
+      "updatedAt": "2023-12-12T13:47:03.115Z",
+      "projectId": "clq2e6rlm00039czk35i9fm6h",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maximumAverageSubtree = function (root) {\n  let result = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, 0];\n    node.setColor(\"cyan\");\n\n    const [leftSum, leftCount] = dfs(node.left);\n    const [rightSum, rightCount] = dfs(node.right);\n\n    const sum = leftSum + node.val + rightSum;\n    const count = leftCount + 1 + rightCount;\n    const average = sum / count;\n\n    if (average > result) {\n      result = average;\n      node.setColor(\"green\");\n    }\n\n    return [sum, count];\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn maximumAverageSubtree;\n",
+      "order": 0
+    },
+    "clq3q7lm10001pnwc6q5ue3k6": {
+      "id": "clq3q7lm10001pnwc6q5ue3k6",
+      "createdAt": "2023-12-13T12:06:49.897Z",
+      "updatedAt": "2023-12-13T12:39:19.052Z",
+      "projectId": "cllfcxny50001l908h79caf6d",
+      "title": "BFS",
+      "slug": "bfs",
+      "timeComplexity": "O(m*n)",
+      "spaceComplexity": "O(m*n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  function* getAdjacentCells(row, col) {\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const [nRow, nCol] = [row + dRow, col + dCol];\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n      yield [nRow, nCol];\n    }\n  }\n\n  const result = Array.from(\n    mat,\n    (row, index) =>\n      Array.from(row, () => undefined, null, {\n        index,\n        parentName: \"res\",\n      }),\n    null,\n    { matrixName: \"res\" },\n  );\n\n  const ones = new Queue();\n\n  const traverseZeroes = (sRow, sCol) => {\n    const queue = new Queue();\n    queue.enqueue([sRow, sCol]);\n    mat[sRow].setColor(sCol, \"cyan\");\n    result[sRow][sCol] = 0;\n\n    while (!queue.isEmpty()) {\n      const [row, col] = queue.dequeue();\n      mat[row].setColor(col, \"cyan\");\n\n      for (const [nRow, nCol] of getAdjacentCells(row, col)) {\n        if (result[nRow][nCol] !== undefined) continue;\n\n        const val = mat[nRow][nCol];\n        if (val === 1) {\n          result[nRow][nCol] = 1;\n          ones.enqueue([nRow, nCol]);\n        } else if (val === 0) {\n          result[nRow][nCol] = 0;\n          queue.enqueue([nRow, nCol]);\n        }\n      }\n    }\n  };\n\n  mat.forEach((arr, row) => {\n    arr.forEach((val, col) => {\n      if (val === 0 && result[row][col] === undefined) {\n        traverseZeroes(row, col);\n      }\n    });\n  });\n\n  while (!ones.isEmpty()) {\n    const [row, col] = ones.dequeue();\n\n    for (const [nRow, nCol] of getAdjacentCells(row, col)) {\n      if (result[nRow][nCol] !== undefined) continue;\n\n      if (mat[nRow][nCol] === 1) {\n        result[nRow].setColor(nCol, \"green\");\n        result[nRow][nCol] = result[row][col] + 1;\n        ones.enqueue([nRow, nCol]);\n      }\n    }\n  }\n\n  return result;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nreturn updateMatrix;\n",
+      "order": 1
+    },
+    "clq3u7w2h0003z3ky6etgghrl": {
+      "id": "clq3u7w2h0003z3ky6etgghrl",
+      "createdAt": "2023-12-13T13:59:01.913Z",
+      "updatedAt": "2023-12-13T14:08:47.138Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {string[][]}\n */\nvar solveNQueens = function (n) {\n  const grid = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: n }, () => \".\", null, {\n        parentName: \"grid\",\n        index,\n        colorMap: { Q: \"cyan\" },\n      }),\n    null,\n    { matrixName: \"grid\" },\n  );\n\n  const cols = new Array(n);\n  const offset = n - 1;\n  const posDiag = new Array(n + offset);\n  const negDiag = new Array(n + offset);\n  [cols, posDiag, negDiag].forEach((arr) => arr.setColorMap({ 1: \"green\" }));\n\n  const makeResult = () => grid.map((row) => row.join(\"\"));\n\n  const result = [];\n\n  const backtrack = (row) => {\n    if (row === n) {\n      result.push(makeResult());\n      return;\n    }\n\n    for (let col = 0; col < n; col++) {\n      const pdIndex = row + col;\n      const ndIndex = row - col + offset;\n      if (cols[col] || posDiag[pdIndex] || negDiag[ndIndex]) continue;\n\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 1;\n      grid[row][col] = \"Q\";\n      backtrack(row + 1);\n      grid[row][col] = \".\";\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 0;\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn solveNQueens;\n",
+      "order": 0
+    },
+    "clq3xbz3900032j0cumjg5zsy": {
+      "id": "clq3xbz3900032j0cumjg5zsy",
+      "createdAt": "2023-12-13T15:26:11.301Z",
+      "updatedAt": "2023-12-13T15:29:55.046Z",
+      "projectId": "clq3xbz3800012j0cf0vypvrl",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {character[]} tasks\n * @param {number} n\n * @return {number}\n */\nvar leastInterval = function (tasks, n) {\n  const count = tasks.length;\n  if (n === 0) return count;\n\n  const freqMap = new Array(26).fill(0);\n  const offset = \"A\".charCodeAt(0);\n\n  for (let i = 0; i < tasks.length; i++) {\n    const code = tasks[i].charCodeAt(0) - offset;\n    freqMap[code]++;\n  }\n\n  freqMap.sort((a, b) => b - a);\n\n  const maxFreq = freqMap[0];\n  const gaps = maxFreq - 1;\n  let idleTime = gaps * n;\n  console.log({ maxFreq, gaps, idleTime });\n\n  for (let i = 1; i < 26 && idleTime > 0; i++) {\n    if (freqMap[i] === 0) break;\n\n    idleTime -= Math.min(freqMap[i], gaps);\n  }\n  idleTime = Math.max(0, idleTime);\n\n  return idleTime + count;\n};\n\nreturn leastInterval;\n",
+      "order": 0
     }
   }
 }
