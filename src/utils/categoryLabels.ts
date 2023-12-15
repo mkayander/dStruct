@@ -12,7 +12,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   [ProjectCategory.BACKTRACKING]: "Backtracking",
   [ProjectCategory.BST]: "BST",
   [ProjectCategory.GRAPH]: "Graph",
-  [ProjectCategory.GRID]: "Grid",
+  [ProjectCategory.GRID]: "Matrix",
   [ProjectCategory.DYNAMIC_PROGRAMMING]: "Dynamic Programming",
   [ProjectCategory.BIT_MANIPULATION]: "Bit Manipulation",
 };
