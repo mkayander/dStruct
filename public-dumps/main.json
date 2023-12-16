@@ -2561,6 +2561,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clq6qfei300014i7g34w3ayuy": {
+      "id": "clq6qfei300014i7g34w3ayuy",
+      "createdAt": "2023-12-15T14:36:12.459Z",
+      "updatedAt": "2023-12-15T14:36:12.459Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Difference Between Ones and Zeros in Row and Column",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column",
+      "slug": "difference-between-ones-and-zeros-in-row-and-column",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11795,6 +11809,25 @@
         }
       },
       "description": null
+    },
+    "clq6qfei300024i7ghebgo48v": {
+      "id": "clq6qfei300024i7ghebgo48v",
+      "createdAt": "2023-12-15T14:36:12.459Z",
+      "updatedAt": "2023-12-15T14:36:31.680Z",
+      "projectId": "clq6qfei300014i7g34w3ayuy",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2pAYkcYmUeVuVXVqbZrfNy": {
+          "name": "2pAYkcYmUeVuVXVqbZrfNy",
+          "type": "matrix",
+          "input": "[[0,1,1],[1,0,1],[0,0,1]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15410,6 +15443,19 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {character[]} tasks\n * @param {number} n\n * @return {number}\n */\nvar leastInterval = function (tasks, n) {\n  const count = tasks.length;\n  if (n === 0) return count;\n\n  const freqMap = new Array(26).fill(0);\n  const offset = \"A\".charCodeAt(0);\n\n  for (let i = 0; i < tasks.length; i++) {\n    const code = tasks[i].charCodeAt(0) - offset;\n    freqMap[code]++;\n  }\n\n  freqMap.sort((a, b) => b - a);\n\n  const maxFreq = freqMap[0];\n  const gaps = maxFreq - 1;\n  let idleTime = gaps * n;\n  console.log({ maxFreq, gaps, idleTime });\n\n  for (let i = 1; i < 26 && idleTime > 0; i++) {\n    if (freqMap[i] === 0) break;\n\n    idleTime -= Math.min(freqMap[i], gaps);\n  }\n  idleTime = Math.max(0, idleTime);\n\n  return idleTime + count;\n};\n\nreturn leastInterval;\n",
+      "order": 0
+    },
+    "clq6qfei300034i7g0fnxhzwv": {
+      "id": "clq6qfei300034i7g0fnxhzwv",
+      "createdAt": "2023-12-15T14:36:12.459Z",
+      "updatedAt": "2023-12-15T14:41:55.331Z",
+      "projectId": "clq6qfei300014i7g34w3ayuy",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number[][]}\n */\nvar onesMinusZeros = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const rows = new Array(m).fill(0);\n  const cols = new Array(n).fill(0);\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (!grid[row][col]) continue;\n\n      rows[row]++;\n      cols[col]++;\n    }\n  }\n\n  const result = grid.map((row, i) =>\n    row.map((val, j) => {\n      const onesRow = rows[i];\n      const onesCol = cols[j];\n      const zeroesRow = m - onesRow;\n      const zeroesCol = n - onesCol;\n\n      return onesRow + onesCol - zeroesRow - zeroesCol;\n    }),\n  );\n\n  return result;\n};\n\nreturn onesMinusZeros;\n",
       "order": 0
     }
   }
