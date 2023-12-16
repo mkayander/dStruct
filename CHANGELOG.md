@@ -1,3 +1,10 @@
+# [1.240.0](https://github.com/mkayander/leetpal/compare/v1.239.0...v1.240.0) (2023-12-16)
+
+
+### Features
+
+* Renamed category ([9874c3a](https://github.com/mkayander/leetpal/commit/9874c3ab4964ecb90f32962a8e813c982caf0e56))
+
 # [1.239.0](https://github.com/mkayander/leetpal/compare/v1.238.1...v1.239.0) (2023-12-13)
 
 
