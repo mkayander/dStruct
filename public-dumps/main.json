@@ -2575,6 +2575,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clq9v5czm00011i8jf4t9v3p4": {
+      "id": "clq9v5czm00011i8jf4t9v3p4",
+      "createdAt": "2023-12-17T19:11:40.546Z",
+      "updatedAt": "2023-12-17T19:11:40.546Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Design a Food Rating System",
+      "category": "HEAP",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/design-a-food-rating-system",
+      "slug": "design-a-food-rating-system",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11828,6 +11842,31 @@
         }
       },
       "description": null
+    },
+    "clq9v5czm00021i8jscks8v1s": {
+      "id": "clq9v5czm00021i8jscks8v1s",
+      "createdAt": "2023-12-17T19:11:40.546Z",
+      "updatedAt": "2023-12-17T19:12:54.084Z",
+      "projectId": "clq9v5czm00011i8jf4t9v3p4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "dWzZVUW4VK37mxHLXgFaRs": {
+          "name": "dWzZVUW4VK37mxHLXgFaRs",
+          "type": "array",
+          "input": "[[[\"kimchi\", \"miso\", \"sushi\", \"moussaka\", \"ramen\", \"bulgogi\"], [\"korean\", \"japanese\", \"japanese\", \"greek\", \"japanese\", \"korean\"], [9, 12, 8, 15, 14, 7]], [\"korean\"], [\"japanese\"], [\"sushi\", 16], [\"japanese\"], [\"ramen\", 16], [\"japanese\"]]",
+          "order": 1
+        },
+        "wqSRHvYDGGWB84JYXTxqJV": {
+          "name": "wqSRHvYDGGWB84JYXTxqJV",
+          "type": "array",
+          "input": "[\"FoodRatings\", \"highestRated\", \"highestRated\", \"changeRating\", \"highestRated\", \"changeRating\", \"highestRated\"]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15456,6 +15495,19 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} grid\n * @return {number[][]}\n */\nvar onesMinusZeros = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const rows = new Array(m).fill(0);\n  const cols = new Array(n).fill(0);\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (!grid[row][col]) continue;\n\n      rows[row]++;\n      cols[col]++;\n    }\n  }\n\n  const result = grid.map((row, i) =>\n    row.map((val, j) => {\n      const onesRow = rows[i];\n      const onesCol = cols[j];\n      const zeroesRow = m - onesRow;\n      const zeroesCol = n - onesCol;\n\n      return onesRow + onesCol - zeroesRow - zeroesCol;\n    }),\n  );\n\n  return result;\n};\n\nreturn onesMinusZeros;\n",
+      "order": 0
+    },
+    "clq9v5czm00031i8jhio7uft5": {
+      "id": "clq9v5czm00031i8jhio7uft5",
+      "createdAt": "2023-12-17T19:11:40.546Z",
+      "updatedAt": "2023-12-17T19:19:20.342Z",
+      "projectId": "clq9v5czm00011i8jf4t9v3p4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} foods\n * @param {string[]} cuisines\n * @param {number[]} ratings\n */\nvar FoodRatings = function (foods, cuisines, ratings) {\n  this.foodMap = new Map();\n  this.cuisineMap = new Map();\n\n  for (let i = 0; i < foods.length; i++) {\n    const food = foods[i];\n    const cuisine = cuisines[i];\n    const rating = ratings[i];\n\n    this.foodMap.set(food, [cuisine, rating]);\n\n    if (!this.cuisineMap.has(cuisine)) {\n      this.cuisineMap.set(\n        cuisine,\n        new PriorityQueue({\n          compare: (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),\n        }),\n      );\n    }\n    this.cuisineMap.get(cuisine).enqueue([food, rating]);\n  }\n\n  console.log(this.foodMap);\n  console.log(this.cuisineMap);\n};\n\n/**\n * @param {string} food\n * @param {number} newRating\n * @return {void}\n */\nFoodRatings.prototype.changeRating = function (food, newRating) {\n  const data = this.foodMap.get(food);\n  data[1] = newRating;\n  const cuisine = data[0];\n\n  const pq = this.cuisineMap.get(cuisine);\n  pq.enqueue([food, newRating]);\n};\n\n/**\n * @param {string} cuisine\n * @return {string}\n */\nFoodRatings.prototype.highestRated = function (cuisine) {\n  const pq = this.cuisineMap.get(cuisine);\n  while (pq.front()[1] !== this.foodMap.get(pq.front()[0])[1]) {\n    const invalidEntry = pq.dequeue();\n    console.log(\"Popped invalid entry: \", invalidEntry);\n  }\n\n  return pq.front()[0];\n};\n\n/**\n * Your FoodRatings object will be instantiated and called as such:\n * var obj = new FoodRatings(foods, cuisines, ratings)\n * obj.changeRating(food,newRating)\n * var param_2 = obj.highestRated(cuisine)\n */\n\nfunction handle(names, args) {\n  const instance = new FoodRatings(...args[0]);\n  const result = [];\n\n  for (let i = 1; i < names.length; i++) {\n    const name = names[i];\n    console.log(name, ...args[i], instance[name](...args[i]));\n  }\n\n  // return result;\n}\n\nreturn handle;\n",
       "order": 0
     }
   }
