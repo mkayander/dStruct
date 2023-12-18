@@ -1,3 +1,10 @@
+# [1.241.0](https://github.com/mkayander/leetpal/compare/v1.240.0...v1.241.0) (2023-12-18)
+
+
+### Features
+
+* Updated dependencies ([b5d94c5](https://github.com/mkayander/leetpal/commit/b5d94c5ea1491dbb3828bb20b2df89f7a33b0f83))
+
 # [1.240.0](https://github.com/mkayander/leetpal/compare/v1.239.0...v1.240.0) (2023-12-16)
 
 
