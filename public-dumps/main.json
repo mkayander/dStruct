@@ -2589,6 +2589,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqcpyzlr0001dknrxtn8yrx6": {
+      "id": "clqcpyzlr0001dknrxtn8yrx6",
+      "createdAt": "2023-12-19T19:10:03.711Z",
+      "updatedAt": "2023-12-19T19:10:03.711Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Image Smoother",
+      "category": "GRID",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/image-smoother",
+      "slug": "image-smoother",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11867,6 +11881,44 @@
         }
       },
       "description": null
+    },
+    "clqcpyzlr0002dknrobv6i828": {
+      "id": "clqcpyzlr0002dknrobv6i828",
+      "createdAt": "2023-12-19T19:10:03.711Z",
+      "updatedAt": "2023-12-19T19:10:16.886Z",
+      "projectId": "clqcpyzlr0001dknrxtn8yrx6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "cK1g2PjNRCnGei1bkCodFT": {
+          "name": "cK1g2PjNRCnGei1bkCodFT",
+          "type": "matrix",
+          "input": "[[100,200,100],[200,50,200],[100,200,100]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqcq4ehu0005dknr8zsbo7w8": {
+      "id": "clqcq4ehu0005dknr8zsbo7w8",
+      "createdAt": "2023-12-19T19:14:16.290Z",
+      "updatedAt": "2023-12-19T19:16:49.538Z",
+      "projectId": "clqcpyzlr0001dknrxtn8yrx6",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "cK1g2PjNRCnGei1bkCodFT": {
+          "name": "cK1g2PjNRCnGei1bkCodFT",
+          "type": "matrix",
+          "input": "[[100,200,100,200,100,250],[200,50,200,50,5,25],[100,210,105,164,250,100],[100,200,100,64,50,10],[5,2,1,254,0,100],[10,211,222,111,255,33]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15509,6 +15561,32 @@
       "description": null,
       "code": "/**\n * @param {string[]} foods\n * @param {string[]} cuisines\n * @param {number[]} ratings\n */\nvar FoodRatings = function (foods, cuisines, ratings) {\n  this.foodMap = new Map();\n  this.cuisineMap = new Map();\n\n  for (let i = 0; i < foods.length; i++) {\n    const food = foods[i];\n    const cuisine = cuisines[i];\n    const rating = ratings[i];\n\n    this.foodMap.set(food, [cuisine, rating]);\n\n    if (!this.cuisineMap.has(cuisine)) {\n      this.cuisineMap.set(\n        cuisine,\n        new PriorityQueue({\n          compare: (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),\n        }),\n      );\n    }\n    this.cuisineMap.get(cuisine).enqueue([food, rating]);\n  }\n\n  console.log(this.foodMap);\n  console.log(this.cuisineMap);\n};\n\n/**\n * @param {string} food\n * @param {number} newRating\n * @return {void}\n */\nFoodRatings.prototype.changeRating = function (food, newRating) {\n  const data = this.foodMap.get(food);\n  data[1] = newRating;\n  const cuisine = data[0];\n\n  const pq = this.cuisineMap.get(cuisine);\n  pq.enqueue([food, newRating]);\n};\n\n/**\n * @param {string} cuisine\n * @return {string}\n */\nFoodRatings.prototype.highestRated = function (cuisine) {\n  const pq = this.cuisineMap.get(cuisine);\n  while (pq.front()[1] !== this.foodMap.get(pq.front()[0])[1]) {\n    const invalidEntry = pq.dequeue();\n    console.log(\"Popped invalid entry: \", invalidEntry);\n  }\n\n  return pq.front()[0];\n};\n\n/**\n * Your FoodRatings object will be instantiated and called as such:\n * var obj = new FoodRatings(foods, cuisines, ratings)\n * obj.changeRating(food,newRating)\n * var param_2 = obj.highestRated(cuisine)\n */\n\nfunction handle(names, args) {\n  const instance = new FoodRatings(...args[0]);\n  const result = [];\n\n  for (let i = 1; i < names.length; i++) {\n    const name = names[i];\n    console.log(name, ...args[i], instance[name](...args[i]));\n  }\n\n  // return result;\n}\n\nreturn handle;\n",
       "order": 0
+    },
+    "clqcpyzlr0003dknrjihjoh5v": {
+      "id": "clqcpyzlr0003dknrjihjoh5v",
+      "createdAt": "2023-12-19T19:10:03.711Z",
+      "updatedAt": "2023-12-19T19:13:47.872Z",
+      "projectId": "clqcpyzlr0001dknrxtn8yrx6",
+      "title": "Bit Manipulation",
+      "slug": "bit-manipulation",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  const MASK = 255;\n  const BITS = 8;\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n\n      if (col > 0) {\n        sum += img[row][col - 1] & MASK;\n        count++;\n      }\n\n      if (col < n - 1) {\n        sum += img[row][col + 1];\n        count++;\n      }\n\n      if (row > 0) {\n        sum += img[row - 1][col] & MASK;\n        count++;\n        if (col > 0) {\n          sum += img[row - 1][col - 1] & MASK;\n          img[row - 1][col - 1] >>= BITS;\n          img[row - 1].setColor(col - 1, \"green\");\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row - 1][col + 1] & MASK;\n          count++;\n        }\n\n        if (col === n - 1) {\n          img[row - 1][col] >>= BITS;\n          img[row - 1].setColor(col, \"green\");\n        }\n      }\n\n      if (row < m - 1) {\n        sum += img[row + 1][col];\n        count++;\n        if (col > 0) {\n          sum += img[row + 1][col - 1];\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row + 1][col + 1];\n          count++;\n        }\n      }\n\n      const avg = Math.floor(sum / count);\n      img[row][col] |= avg << BITS;\n    }\n  }\n\n  for (let col = 0; col < n; col++) {\n    img.at(-1)[col] >>= BITS;\n    img.at(-1).setColor(col, \"green\");\n  }\n\n  return img;\n};\n\nreturn imageSmoother;\n",
+      "order": 0
+    },
+    "clqcq8goi0007dknrmuhl9az5": {
+      "id": "clqcq8goi0007dknrmuhl9az5",
+      "createdAt": "2023-12-19T19:17:25.746Z",
+      "updatedAt": "2023-12-19T19:23:08.070Z",
+      "projectId": "clqcpyzlr0001dknrxtn8yrx6",
+      "title": "New Image",
+      "slug": "new-image",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(m * n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  const result = Array.from(\n    img,\n    (row, index) =>\n      Array.from(row, () => 0, null, { parentName: \"res\", index }),\n    null,\n    { matrixName: \"res\" },\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n      for (const [dRow, dCol] of DIRECTIONS) {\n        const nRow = row + dRow,\n          nCol = col + dCol;\n        if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n\n        img[nRow].setColor(nCol, \"orange\");\n        sum += img[nRow][nCol];\n        count++;\n        img[nRow].setColor(nCol, null);\n      }\n\n      const avg = Math.floor(sum / count);\n      result[row][col] = avg;\n      result[row].setColor(col, \"green\");\n      img[row].setColor(col, null);\n    }\n  }\n\n  return result;\n};\n\nconst DIRECTIONS = [\n  [-1, 0], // up\n  [-1, 1], // up right\n  [0, 1], // right\n  [1, 1], // down right\n  [1, 0], // down\n  [1, -1], // down left\n  [0, -1], // left\n  [-1, -1], // up left\n];\n\nreturn imageSmoother;\n",
+      "order": 1
     }
   }
 }
