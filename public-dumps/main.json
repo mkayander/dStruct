@@ -15565,7 +15565,7 @@
     "clqcpyzlr0003dknrjihjoh5v": {
       "id": "clqcpyzlr0003dknrjihjoh5v",
       "createdAt": "2023-12-19T19:10:03.711Z",
-      "updatedAt": "2023-12-19T19:13:47.872Z",
+      "updatedAt": "2023-12-19T19:31:27.159Z",
       "projectId": "clqcpyzlr0001dknrxtn8yrx6",
       "title": "Bit Manipulation",
       "slug": "bit-manipulation",
@@ -15573,12 +15573,12 @@
       "spaceComplexity": "O(1)",
       "description": "",
       "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  const MASK = 255;\n  const BITS = 8;\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n\n      if (col > 0) {\n        sum += img[row][col - 1] & MASK;\n        count++;\n      }\n\n      if (col < n - 1) {\n        sum += img[row][col + 1];\n        count++;\n      }\n\n      if (row > 0) {\n        sum += img[row - 1][col] & MASK;\n        count++;\n        if (col > 0) {\n          sum += img[row - 1][col - 1] & MASK;\n          img[row - 1][col - 1] >>= BITS;\n          img[row - 1].setColor(col - 1, \"green\");\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row - 1][col + 1] & MASK;\n          count++;\n        }\n\n        if (col === n - 1) {\n          img[row - 1][col] >>= BITS;\n          img[row - 1].setColor(col, \"green\");\n        }\n      }\n\n      if (row < m - 1) {\n        sum += img[row + 1][col];\n        count++;\n        if (col > 0) {\n          sum += img[row + 1][col - 1];\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row + 1][col + 1];\n          count++;\n        }\n      }\n\n      const avg = Math.floor(sum / count);\n      img[row][col] |= avg << BITS;\n    }\n  }\n\n  for (let col = 0; col < n; col++) {\n    img.at(-1)[col] >>= BITS;\n    img.at(-1).setColor(col, \"green\");\n  }\n\n  return img;\n};\n\nreturn imageSmoother;\n",
-      "order": 0
+      "order": 3
     },
     "clqcq8goi0007dknrmuhl9az5": {
       "id": "clqcq8goi0007dknrmuhl9az5",
       "createdAt": "2023-12-19T19:17:25.746Z",
-      "updatedAt": "2023-12-19T19:23:08.070Z",
+      "updatedAt": "2023-12-19T19:31:27.159Z",
       "projectId": "clqcpyzlr0001dknrxtn8yrx6",
       "title": "New Image",
       "slug": "new-image",
@@ -15587,6 +15587,19 @@
       "description": "",
       "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  const result = Array.from(\n    img,\n    (row, index) =>\n      Array.from(row, () => 0, null, { parentName: \"res\", index }),\n    null,\n    { matrixName: \"res\" },\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n      for (const [dRow, dCol] of DIRECTIONS) {\n        const nRow = row + dRow,\n          nCol = col + dCol;\n        if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n\n        img[nRow].setColor(nCol, \"orange\");\n        sum += img[nRow][nCol];\n        count++;\n        img[nRow].setColor(nCol, null);\n      }\n\n      const avg = Math.floor(sum / count);\n      result[row][col] = avg;\n      result[row].setColor(col, \"green\");\n      img[row].setColor(col, null);\n    }\n  }\n\n  return result;\n};\n\nconst DIRECTIONS = [\n  [-1, 0], // up\n  [-1, 1], // up right\n  [0, 1], // right\n  [1, 1], // down right\n  [1, 0], // down\n  [1, -1], // down left\n  [0, -1], // left\n  [-1, -1], // up left\n];\n\nreturn imageSmoother;\n",
       "order": 1
+    },
+    "clqcqlacp0009dknrrg9xmqq6": {
+      "id": "clqcqlacp0009dknrrg9xmqq6",
+      "createdAt": "2023-12-19T19:27:24.074Z",
+      "updatedAt": "2023-12-19T19:31:44.264Z",
+      "projectId": "clqcpyzlr0001dknrxtn8yrx6",
+      "title": "In Place",
+      "slug": "in-place",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  let prevRow = null;\n  let prev = 0;\n\n  for (let row = 0; row < m; row++) {\n    const nextRow = new Array(n);\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n\n      if (col > 0) {\n        sum += prev;\n        count++;\n      }\n\n      if (col < n - 1) {\n        sum += img[row][col + 1];\n        count++;\n      }\n\n      if (row > 0) {\n        sum += prevRow[col];\n        prevRow.setColor(col, \"cyan\");\n        prevRow.setColor(col, null);\n        count++;\n        if (col > 0) {\n          sum += prevRow[col - 1];\n          prevRow.setColor(col - 1, \"cyan\");\n          prevRow.setColor(col - 1, null);\n          count++;\n        }\n        if (col < n - 1) {\n          sum += prevRow[col + 1];\n          prevRow.setColor(col + 1, \"cyan\");\n          prevRow.setColor(col + 1, null);\n          count++;\n        }\n      }\n\n      if (row < m - 1) {\n        sum += img[row + 1][col];\n        count++;\n        if (col > 0) {\n          sum += img[row + 1][col - 1];\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row + 1][col + 1];\n          count++;\n        }\n      }\n\n      prev = nextRow[col] = img[row][col];\n      const avg = Math.floor(sum / count);\n      img[row][col] = avg;\n      img[row].setColor(col, \"green\");\n    }\n\n    prevRow = nextRow;\n    prev = 0;\n  }\n\n  return img;\n};\n\nreturn imageSmoother;\n",
+      "order": 2
     }
   }
 }
