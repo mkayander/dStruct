@@ -2603,6 +2603,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqgy2cpt0001oyqwz32km034": {
+      "id": "clqgy2cpt0001oyqwz32km034",
+      "createdAt": "2023-12-22T18:07:42.306Z",
+      "updatedAt": "2023-12-22T18:07:42.306Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Score After Splitting a String",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/maximum-score-after-splitting-a-string",
+      "slug": "maximum-score-after-splitting-a-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11919,6 +11933,25 @@
         }
       },
       "description": null
+    },
+    "clqgy2cpt0002oyqwhe6d4mlr": {
+      "id": "clqgy2cpt0002oyqwhe6d4mlr",
+      "createdAt": "2023-12-22T18:07:42.306Z",
+      "updatedAt": "2023-12-22T18:12:32.212Z",
+      "projectId": "clqgy2cpt0001oyqwz32km034",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "00111",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15600,6 +15633,19 @@
       "description": "",
       "code": "/**\n * @param {number[][]} img\n * @return {number[][]}\n */\nvar imageSmoother = function (img) {\n  const m = img.length;\n  const n = img[0].length;\n\n  let prevRow = null;\n  let prev = 0;\n\n  for (let row = 0; row < m; row++) {\n    const nextRow = new Array(n);\n    for (let col = 0; col < n; col++) {\n      img[row].setColor(col, \"cyan\");\n      let sum = img[row][col];\n      let count = 1;\n\n      if (col > 0) {\n        sum += prev;\n        count++;\n      }\n\n      if (col < n - 1) {\n        sum += img[row][col + 1];\n        count++;\n      }\n\n      if (row > 0) {\n        sum += prevRow[col];\n        prevRow.setColor(col, \"cyan\");\n        prevRow.setColor(col, null);\n        count++;\n        if (col > 0) {\n          sum += prevRow[col - 1];\n          prevRow.setColor(col - 1, \"cyan\");\n          prevRow.setColor(col - 1, null);\n          count++;\n        }\n        if (col < n - 1) {\n          sum += prevRow[col + 1];\n          prevRow.setColor(col + 1, \"cyan\");\n          prevRow.setColor(col + 1, null);\n          count++;\n        }\n      }\n\n      if (row < m - 1) {\n        sum += img[row + 1][col];\n        count++;\n        if (col > 0) {\n          sum += img[row + 1][col - 1];\n          count++;\n        }\n        if (col < n - 1) {\n          sum += img[row + 1][col + 1];\n          count++;\n        }\n      }\n\n      prev = nextRow[col] = img[row][col];\n      const avg = Math.floor(sum / count);\n      img[row][col] = avg;\n      img[row].setColor(col, \"green\");\n    }\n\n    prevRow = nextRow;\n    prev = 0;\n  }\n\n  return img;\n};\n\nreturn imageSmoother;\n",
       "order": 2
+    },
+    "clqgy2cpt0003oyqwevuvteya": {
+      "id": "clqgy2cpt0003oyqwevuvteya",
+      "createdAt": "2023-12-22T18:07:42.306Z",
+      "updatedAt": "2023-12-22T18:10:27.977Z",
+      "projectId": "clqgy2cpt0001oyqwz32km034",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar maxScore = function (s) {\n  let zeros = 0;\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"cyan\");\n    if (s[i] === \"0\") zeros++;\n  }\n\n  console.log(zeros);\n\n  let ones = 0;\n  let max = 0;\n\n  for (let i = s.length - 1; i > 0; i--) {\n    s.setColor(i, \"green\");\n    if (s[i] === \"1\") ones++;\n    else zeros--;\n    const score = zeros + ones;\n    if (score > max) {\n      max = score;\n    }\n  }\n\n  console.log(ones);\n\n  return max;\n};\n\nreturn maxScore;\n",
+      "order": 0
     }
   }
 }
