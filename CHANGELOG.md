@@ -1,3 +1,11 @@
+# [1.242.0](https://github.com/mkayander/leetpal/compare/v1.241.0...v1.242.0) (2023-12-23)
+
+
+### Features
+
+* Highlight active navigation button ([c19023b](https://github.com/mkayander/leetpal/commit/c19023b23d8278892e573345a5b4fbb336efd686))
+* Renamed navigation item ([020b920](https://github.com/mkayander/leetpal/commit/020b920d3660f6ad47c7957480d9a01e235bef9a))
+
 # [1.241.0](https://github.com/mkayander/leetpal/compare/v1.240.0...v1.241.0) (2023-12-18)
 
 
