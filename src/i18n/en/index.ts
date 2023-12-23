@@ -5,6 +5,7 @@ const en: BaseTranslation = {
   ADD_ARGUMENT: "Add argument",
   ADD_NEW_SOLUTION: "Add new solution",
   ARGUMENTS: "Arguments",
+  BROWSE: "Browse",
   CALLSTACK: "Callstack",
   CANCEL: "Cancel",
   CHOOSE_LOCALE: "Choose locale...",

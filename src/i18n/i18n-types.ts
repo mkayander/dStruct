@@ -35,6 +35,10 @@ type RootTranslation = {
 	 */
 	ARGUMENTS: string
 	/**
+	 * B​r​o​w​s​e
+	 */
+	BROWSE: string
+	/**
 	 * C​a​l​l​s​t​a​c​k
 	 */
 	CALLSTACK: string
@@ -405,6 +409,10 @@ export type TranslationFunctions = {
 	 * Arguments
 	 */
 	ARGUMENTS: () => LocalizedString
+	/**
+	 * Browse
+	 */
+	BROWSE: () => LocalizedString
 	/**
 	 * Callstack
 	 */

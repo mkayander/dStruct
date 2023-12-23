@@ -68,7 +68,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const pages = [
     {
-      name: LL.DASHBOARD(),
+      name: LL.BROWSE(),
       href: "/",
     },
     {

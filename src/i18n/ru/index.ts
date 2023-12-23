@@ -5,6 +5,7 @@ const ru: Record<keyof Translation, string> = {
   ADD_ARGUMENT: "Добавить аргумент",
   ADD_NEW_SOLUTION: "Добавить новое решение",
   ARGUMENTS: "Аргументы",
+  BROWSE: "Обзор",
   CALLSTACK: "Стек вызовов",
   CANCEL: "Отмена",
   CHOOSE_LOCALE: "Выберите язык...",
