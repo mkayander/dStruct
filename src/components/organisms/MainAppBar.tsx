@@ -56,6 +56,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const currentPath = router.pathname;
   const theme = useTheme();
   const { LL } = useI18nContext();
 
@@ -69,7 +70,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const pages = [
     {
       name: LL.BROWSE(),
-      href: "/",
+      href: "",
     },
     {
       name: LL.PLAYGROUND(),
@@ -248,6 +249,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   key={page.href}
                   onClick={() => handleNavItemClick(page)}
                   color="inherit"
+                  sx={{
+                    backgroundColor:
+                      page.href && currentPath.startsWith(page.href)
+                        ? alpha("#fff", 0.1)
+                        : "",
+                  }}
                 >
                   {page.name}
                 </Button>
