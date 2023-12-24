@@ -2617,6 +2617,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqh3xuuw0001614qhi2v3m1f": {
+      "id": "clqh3xuuw0001614qhi2v3m1f",
+      "createdAt": "2023-12-22T20:52:10.233Z",
+      "updatedAt": "2023-12-22T20:52:10.233Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Best Meeting Point",
+      "category": "GRID",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/best-meeting-point",
+      "slug": "best-meeting-point",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -11937,7 +11951,7 @@
     "clqgy2cpt0002oyqwhe6d4mlr": {
       "id": "clqgy2cpt0002oyqwhe6d4mlr",
       "createdAt": "2023-12-22T18:07:42.306Z",
-      "updatedAt": "2023-12-22T18:12:32.212Z",
+      "updatedAt": "2023-12-22T18:14:34.189Z",
       "projectId": "clqgy2cpt0001oyqwz32km034",
       "title": "Case 1",
       "order": 0,
@@ -11947,10 +11961,60 @@
         "array": {
           "name": "array",
           "type": "string",
+          "input": "011101",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqgyay970005oyqwefelb399": {
+      "id": "clqgyay970005oyqwefelb399",
+      "createdAt": "2023-12-22T18:14:23.467Z",
+      "updatedAt": "2023-12-22T18:14:23.467Z",
+      "projectId": "clqgy2cpt0001oyqwz32km034",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
           "input": "00111",
           "order": 0
         }
       },
+      "description": null
+    },
+    "clqgybebw0007oyqwrt9nyzrz": {
+      "id": "clqgybebw0007oyqwrt9nyzrz",
+      "createdAt": "2023-12-22T18:14:44.300Z",
+      "updatedAt": "2023-12-22T18:14:51.092Z",
+      "projectId": "clqgy2cpt0001oyqwz32km034",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "1111",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqh3xuuw0002614qwj5vu56y": {
+      "id": "clqh3xuuw0002614qwj5vu56y",
+      "createdAt": "2023-12-22T20:52:10.233Z",
+      "updatedAt": "2023-12-22T20:52:10.233Z",
+      "projectId": "clqh3xuuw0001614qhi2v3m1f",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {},
       "description": null
     }
   },
@@ -15645,6 +15709,32 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar maxScore = function (s) {\n  let zeros = 0;\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"cyan\");\n    if (s[i] === \"0\") zeros++;\n  }\n\n  console.log(zeros);\n\n  let ones = 0;\n  let max = 0;\n\n  for (let i = s.length - 1; i > 0; i--) {\n    s.setColor(i, \"green\");\n    if (s[i] === \"1\") ones++;\n    else zeros--;\n    const score = zeros + ones;\n    if (score > max) {\n      max = score;\n    }\n  }\n\n  console.log(ones);\n\n  return max;\n};\n\nreturn maxScore;\n",
+      "order": 0
+    },
+    "clqgycaqs0009oyqwo8pel1ty": {
+      "id": "clqgycaqs0009oyqwo8pel1ty",
+      "createdAt": "2023-12-22T18:15:26.308Z",
+      "updatedAt": "2023-12-22T18:16:12.004Z",
+      "projectId": "clqgy2cpt0001oyqwz32km034",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar maxScore = function (s) {\n  let ones = 0;\n  let zeros = 0;\n  let best = -Infinity;\n\n  for (let i = 0; i < s.length - 1; i++) {\n    s.setColor(i, \"green\");\n    if (s[i] === \"1\") {\n      ones++;\n    } else {\n      zeros++;\n    }\n\n    best = Math.max(best, zeros - ones);\n  }\n\n  if (s.at(-1) === \"1\") {\n    s.setColor(-1, \"cyan\");\n    ones++;\n  }\n\n  return best + ones;\n};\n\nreturn maxScore;\n",
+      "order": 1
+    },
+    "clqh3xuuw0003614qou5pzax9": {
+      "id": "clqh3xuuw0003614qou5pzax9",
+      "createdAt": "2023-12-22T20:52:10.233Z",
+      "updatedAt": "2023-12-22T20:52:10.233Z",
+      "projectId": "clqh3xuuw0001614qhi2v3m1f",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getSumOfNodes(head) {\n  if (head === null) return 0;\n\n  head.setColor(\"green\");\n\n  const left = getSumOfNodes(head.left);\n  const right = getSumOfNodes(head.right);\n\n  head.setColor(null);\n\n  return head.val + left + right;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "order": 0
     }
   }
