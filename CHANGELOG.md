@@ -1,3 +1,11 @@
+# [1.243.0](https://github.com/mkayander/leetpal/compare/v1.242.0...v1.243.0) (2023-12-25)
+
+
+### Features
+
+* Updated dependencies ([d6980b3](https://github.com/mkayander/leetpal/commit/d6980b33d83821c65407eea3f5e627f259eb916f))
+* Updated prisma packages ([271e2e6](https://github.com/mkayander/leetpal/commit/271e2e6390d0642f398fafff4f247188fd200085))
+
 # [1.242.0](https://github.com/mkayander/leetpal/compare/v1.241.0...v1.242.0) (2023-12-23)
 
 
