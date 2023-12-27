@@ -2631,6 +2631,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqkt8hwg0001f8gt3cg1c0ue": {
+      "id": "clqkt8hwg0001f8gt3cg1c0ue",
+      "createdAt": "2023-12-25T11:03:35.584Z",
+      "updatedAt": "2023-12-25T11:03:35.584Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Decode Ways",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/decode-ways",
+      "slug": "decode-ways",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clqme7r4k0001fc9gwawy4936": {
+      "id": "clqme7r4k0001fc9gwawy4936",
+      "createdAt": "2023-12-26T13:38:38.996Z",
+      "updatedAt": "2023-12-26T13:38:38.996Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Dice Rolls With Target Sum",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-dice-rolls-with-target-sum",
+      "slug": "number-of-dice-rolls-with-target-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12016,6 +12044,175 @@
       "input": null,
       "args": {},
       "description": null
+    },
+    "clqkt8hwg0002f8gt72qacst9": {
+      "id": "clqkt8hwg0002f8gt72qacst9",
+      "createdAt": "2023-12-25T11:03:35.584Z",
+      "updatedAt": "2023-12-25T11:04:54.216Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aUjaBBLXSsv4E69iqMQNuW": {
+          "name": "aUjaBBLXSsv4E69iqMQNuW",
+          "type": "string",
+          "input": "12",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqkt9br90005f8gtwupd5j7p": {
+      "id": "clqkt9br90005f8gtwupd5j7p",
+      "createdAt": "2023-12-25T11:04:14.277Z",
+      "updatedAt": "2023-12-25T11:04:58.954Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "aUjaBBLXSsv4E69iqMQNuW": {
+          "name": "aUjaBBLXSsv4E69iqMQNuW",
+          "type": "string",
+          "input": "226",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqkt9g8m0007f8gtqb93l1h7": {
+      "id": "clqkt9g8m0007f8gtqb93l1h7",
+      "createdAt": "2023-12-25T11:04:20.086Z",
+      "updatedAt": "2023-12-25T11:05:02.600Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "aUjaBBLXSsv4E69iqMQNuW": {
+          "name": "aUjaBBLXSsv4E69iqMQNuW",
+          "type": "string",
+          "input": "06",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqkuabla000bf8gtg4m5dsld": {
+      "id": "clqkuabla000bf8gtg4m5dsld",
+      "createdAt": "2023-12-25T11:33:00.335Z",
+      "updatedAt": "2023-12-25T11:33:05.683Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "aUjaBBLXSsv4E69iqMQNuW": {
+          "name": "aUjaBBLXSsv4E69iqMQNuW",
+          "type": "string",
+          "input": "11106",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqme7r4k0002fc9gv3pittbk": {
+      "id": "clqme7r4k0002fc9gv3pittbk",
+      "createdAt": "2023-12-26T13:38:38.996Z",
+      "updatedAt": "2023-12-26T13:39:18.596Z",
+      "projectId": "clqme7r4k0001fc9gwawy4936",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "nTGYmyo4MFeF3PzDCr5cQB": {
+          "name": "nTGYmyo4MFeF3PzDCr5cQB",
+          "type": "number",
+          "input": "1",
+          "order": 0
+        },
+        "p43HwF9HWSsm9CUqbH79oF": {
+          "name": "p43HwF9HWSsm9CUqbH79oF",
+          "type": "number",
+          "input": "3",
+          "order": 2
+        },
+        "uHXpnb3Qxvwm7sjNYUVC1A": {
+          "name": "uHXpnb3Qxvwm7sjNYUVC1A",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clqmeekh90005fc9g6gj7nib9": {
+      "id": "clqmeekh90005fc9g6gj7nib9",
+      "createdAt": "2023-12-26T13:43:56.973Z",
+      "updatedAt": "2023-12-26T13:44:11.676Z",
+      "projectId": "clqme7r4k0001fc9gwawy4936",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "nTGYmyo4MFeF3PzDCr5cQB": {
+          "name": "nTGYmyo4MFeF3PzDCr5cQB",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        },
+        "p43HwF9HWSsm9CUqbH79oF": {
+          "name": "p43HwF9HWSsm9CUqbH79oF",
+          "type": "number",
+          "input": "7",
+          "order": 2
+        },
+        "uHXpnb3Qxvwm7sjNYUVC1A": {
+          "name": "uHXpnb3Qxvwm7sjNYUVC1A",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clqmeexjm0007fc9g7dakwtox": {
+      "id": "clqmeexjm0007fc9g7dakwtox",
+      "createdAt": "2023-12-26T13:44:13.906Z",
+      "updatedAt": "2023-12-26T13:56:03.199Z",
+      "projectId": "clqme7r4k0001fc9gwawy4936",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "nTGYmyo4MFeF3PzDCr5cQB": {
+          "name": "nTGYmyo4MFeF3PzDCr5cQB",
+          "type": "number",
+          "input": "12",
+          "order": 0
+        },
+        "p43HwF9HWSsm9CUqbH79oF": {
+          "name": "p43HwF9HWSsm9CUqbH79oF",
+          "type": "number",
+          "input": "24",
+          "order": 2
+        },
+        "uHXpnb3Qxvwm7sjNYUVC1A": {
+          "name": "uHXpnb3Qxvwm7sjNYUVC1A",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15736,6 +15933,58 @@
       "description": null,
       "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getSumOfNodes(head) {\n  if (head === null) return 0;\n\n  head.setColor(\"green\");\n\n  const left = getSumOfNodes(head.left);\n  const right = getSumOfNodes(head.right);\n\n  head.setColor(null);\n\n  return head.val + left + right;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "order": 0
+    },
+    "clqkt8hwg0003f8gtdr6qe3gp": {
+      "id": "clqkt8hwg0003f8gtdr6qe3gp",
+      "createdAt": "2023-12-25T11:03:35.584Z",
+      "updatedAt": "2023-12-25T11:36:29.468Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "1D DP",
+      "slug": "1d-dp",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numDecodings = function (s) {\n  const dp = new Array(s.length + 1).fill(0);\n  dp[0] = 1;\n\n  s.setColor(0, \"cyan\");\n  dp[1] = Number(s[0] !== \"0\");\n  dp.setColor(1, \"cyan\");\n\n  for (let i = 2; i < dp.length; i++) {\n    s.setColor(i - 1, \"green\");\n    dp.setColor(i, \"blue\");\n\n    if (s[i - 1] !== \"0\") {\n      dp[i] = dp[i - 1];\n    } else if (s[i - 2] === \"0\") return 0;\n\n    const twoDigit = Number(s.slice(i - 2, i));\n    if (twoDigit >= 10 && twoDigit <= 26) {\n      dp[i] += dp[i - 2];\n    }\n  }\n\n  return dp[s.length];\n};\n\nreturn numDecodings;\n",
+      "order": 0
+    },
+    "clqku99s20009f8gtxzkqhn34": {
+      "id": "clqku99s20009f8gtxzkqhn34",
+      "createdAt": "2023-12-25T11:32:11.330Z",
+      "updatedAt": "2023-12-25T11:34:23.997Z",
+      "projectId": "clqkt8hwg0001f8gt3cg1c0ue",
+      "title": "DP",
+      "slug": "dp",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numDecodings = function (s) {\n  if (!s.length) return 1;\n\n  let prev2 = 1;\n  let prev = Number(s[0] !== \"0\");\n  s.setColor(0, \"cyan\");\n\n  for (let i = 1; i < s.length; i++) {\n    s.setColor(i, \"green\");\n    let curr = 0;\n    if (s[i] !== \"0\") {\n      curr = prev;\n    } else if (s[i - 1] === \"0\") return 0;\n\n    const twoDigit = Number(s.slice(i - 1, i + 1));\n    if (twoDigit >= 10 && twoDigit <= 26) {\n      curr += prev2;\n    }\n\n    prev2 = prev;\n    prev = curr;\n  }\n\n  return prev;\n};\n\nreturn numDecodings;\n",
+      "order": 1
+    },
+    "clqme7r4k0003fc9gk0nel9o2": {
+      "id": "clqme7r4k0003fc9gk0nel9o2",
+      "createdAt": "2023-12-26T13:38:38.996Z",
+      "updatedAt": "2023-12-26T14:00:43.992Z",
+      "projectId": "clqme7r4k0001fc9gwawy4936",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "timeComplexity": "O(n * t * k)",
+      "spaceComplexity": "O(n * t)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number} k\n * @param {number} target\n * @return {number}\n */\nvar numRollsToTarget = function (n, k, target) {\n  const MOD = 1e9 + 7;\n  const memo = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: target + 1 }, () => undefined, null, {\n        parentName: \"memo\",\n        index,\n        colorMap: {\n          undefined: \"black\",\n        },\n      }),\n    null,\n    { matrixName: \"memo\" },\n  );\n\n  const backtrack = (i, trg) => {\n    if (trg < 0) return 0;\n    if (i < 0) {\n      return Number(trg === 0);\n    }\n    if (memo[i][trg] !== undefined) {\n      memo[i].setColor(trg, \"cyan\");\n      memo[i].setColor(trg, null);\n      return memo[i][trg];\n    }\n    memo[i].setColor(trg, \"green\");\n\n    let count = 0;\n\n    for (let j = 1; j <= k; j++) {\n      count = (count + backtrack(i - 1, trg - j)) % MOD;\n    }\n\n    memo[i][trg] = count;\n    memo[i].setColor(trg, null);\n    return count;\n  };\n\n  const result = backtrack(n - 1, target);\n\n  return result;\n};\n\nreturn numRollsToTarget;\n",
+      "order": 0
+    },
+    "clqmfex380009fc9gyu1qa4f3": {
+      "id": "clqmfex380009fc9gyu1qa4f3",
+      "createdAt": "2023-12-26T14:12:12.932Z",
+      "updatedAt": "2023-12-26T14:20:47.957Z",
+      "projectId": "clqme7r4k0001fc9gwawy4936",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(n * t * k)",
+      "spaceComplexity": "O(n * t)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number} k\n * @param {number} target\n * @return {number}\n */\nvar numRollsToTarget = function (n, k, target) {\n  const MOD = 1e9 + 7;\n\n  const dp = Array.from({ length: n }, (_, index) =>\n    Array.from({ length: target + 1 }, () => 0, null, {\n      parentName: \"dp\",\n      index,\n      colorMap: {\n        0: \"black\"\n      }\n    }),\n    null,\n    {matrixName: \"dp\"}\n  );\n  for (let i = 1; i <= k && i <= target; i++) {\n    dp[0][i] = 1;\n  }\n\n  for (let i = 1; i < n; i++) {\n    for (let trg = i + 1; trg <= target; trg++) {\n      dp[i].setColor(trg, \"green\");\n      for (let j = trg - 1; j >= 0 && j >= trg - k; j--) {\n        dp[i - 1].setColor(j, \"cyan\");\n        dp[i - 1].setColor(j, null);\n        dp[i][trg] = (dp[i][trg] + dp[i - 1][j]) % MOD;\n      }\n    }\n  }\n\n  return dp[n - 1][target];\n};\n\nreturn numRollsToTarget;\n",
+      "order": 1
     }
   }
 }
