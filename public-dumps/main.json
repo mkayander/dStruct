@@ -2659,6 +2659,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqnr9ufv0001117f8mtfowrm": {
+      "id": "clqnr9ufv0001117f8mtfowrm",
+      "createdAt": "2023-12-27T12:31:57.787Z",
+      "updatedAt": "2023-12-27T12:31:57.787Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Coin Change",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/coin-change",
+      "slug": "coin-change",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clqp9hf6q0001iod8v9qh6bby": {
+      "id": "clqp9hf6q0001iod8v9qh6bby",
+      "createdAt": "2023-12-28T13:49:30.530Z",
+      "updatedAt": "2023-12-28T13:49:30.530Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "String Compression",
+      "category": "TWO_POINTERS",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/string-compression",
+      "slug": "string-compression",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clqpf4pwd0001ke5e8fopfdeh": {
+      "id": "clqpf4pwd0001ke5e8fopfdeh",
+      "createdAt": "2023-12-28T16:27:35.581Z",
+      "updatedAt": "2023-12-28T16:27:35.581Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "String Compression II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/string-compression-ii",
+      "slug": "string-compression-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12213,6 +12255,94 @@
         }
       },
       "description": null
+    },
+    "clqnr9ufv0002117fm6eel9jl": {
+      "id": "clqnr9ufv0002117fm6eel9jl",
+      "createdAt": "2023-12-27T12:31:57.787Z",
+      "updatedAt": "2023-12-27T12:32:28.451Z",
+      "projectId": "clqnr9ufv0001117f8mtfowrm",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1SZT5YZK8XTAKa6APBoB71": {
+          "name": "1SZT5YZK8XTAKa6APBoB71",
+          "type": "array",
+          "input": "[1,2,5]",
+          "order": 0
+        },
+        "5NLjTjEgN9qDK3ZXTbkFjf": {
+          "name": "5NLjTjEgN9qDK3ZXTbkFjf",
+          "type": "number",
+          "input": "11",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clqp9hf6q0002iod8rq5dcw0m": {
+      "id": "clqp9hf6q0002iod8rq5dcw0m",
+      "createdAt": "2023-12-28T13:49:30.530Z",
+      "updatedAt": "2023-12-28T13:50:31.645Z",
+      "projectId": "clqp9hf6q0001iod8v9qh6bby",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "6uU232QrgAgxpftwesZyE2": {
+          "name": "6uU232QrgAgxpftwesZyE2",
+          "type": "array",
+          "input": "[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqp9iwpq0005iod8gb8hj3v7": {
+      "id": "clqp9iwpq0005iod8gb8hj3v7",
+      "createdAt": "2023-12-28T13:50:39.902Z",
+      "updatedAt": "2023-12-28T13:50:50.016Z",
+      "projectId": "clqp9hf6q0001iod8v9qh6bby",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "6uU232QrgAgxpftwesZyE2": {
+          "name": "6uU232QrgAgxpftwesZyE2",
+          "type": "array",
+          "input": "[\"a\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqpf4pwe0002ke5e93s2fqyf": {
+      "id": "clqpf4pwe0002ke5e93s2fqyf",
+      "createdAt": "2023-12-28T16:27:35.581Z",
+      "updatedAt": "2023-12-28T16:37:30.079Z",
+      "projectId": "clqpf4pwd0001ke5e8fopfdeh",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "cPiUpVjBmoTDK6uQNgU8Hp": {
+          "name": "cPiUpVjBmoTDK6uQNgU8Hp",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        },
+        "v7FpUH9LeVMVyrXi49tgWs": {
+          "name": "v7FpUH9LeVMVyrXi49tgWs",
+          "type": "string",
+          "input": "aaabcccd",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15985,6 +16115,45 @@
       "description": "",
       "code": "/**\n * @param {number} n\n * @param {number} k\n * @param {number} target\n * @return {number}\n */\nvar numRollsToTarget = function (n, k, target) {\n  const MOD = 1e9 + 7;\n\n  const dp = Array.from({ length: n }, (_, index) =>\n    Array.from({ length: target + 1 }, () => 0, null, {\n      parentName: \"dp\",\n      index,\n      colorMap: {\n        0: \"black\"\n      }\n    }),\n    null,\n    {matrixName: \"dp\"}\n  );\n  for (let i = 1; i <= k && i <= target; i++) {\n    dp[0][i] = 1;\n  }\n\n  for (let i = 1; i < n; i++) {\n    for (let trg = i + 1; trg <= target; trg++) {\n      dp[i].setColor(trg, \"green\");\n      for (let j = trg - 1; j >= 0 && j >= trg - k; j--) {\n        dp[i - 1].setColor(j, \"cyan\");\n        dp[i - 1].setColor(j, null);\n        dp[i][trg] = (dp[i][trg] + dp[i - 1][j]) % MOD;\n      }\n    }\n  }\n\n  return dp[n - 1][target];\n};\n\nreturn numRollsToTarget;\n",
       "order": 1
+    },
+    "clqnr9ufv0003117ffpv5ipk9": {
+      "id": "clqnr9ufv0003117ffpv5ipk9",
+      "createdAt": "2023-12-27T12:31:57.787Z",
+      "updatedAt": "2023-12-27T12:36:33.521Z",
+      "projectId": "clqnr9ufv0001117f8mtfowrm",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nvar coinChange = function (coins, amount) {\n  if (amount === 0) return 0;\n\n  const dp = new Array(amount + 1).fill(Infinity);\n  dp[0] = 0;\n\n  for (let i = 1; i <= amount; i++) {\n    for (let j = 0; j < coins.length; j++) {\n      dp.setColor(i, \"green\");\n      if (coins[j] <= i) {\n        dp.setColor(i - coins[j], \"cyan\");\n        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);\n        dp.setColor(i - coins[j], null);\n      }\n    }\n  }\n\n  if (!Number.isFinite(dp[amount])) return -1;\n\n  return dp[amount];\n};\n\nreturn coinChange;\n",
+      "order": 0
+    },
+    "clqp9hf6q0003iod8idal3xq8": {
+      "id": "clqp9hf6q0003iod8idal3xq8",
+      "createdAt": "2023-12-28T13:49:30.530Z",
+      "updatedAt": "2023-12-28T13:52:46.956Z",
+      "projectId": "clqp9hf6q0001iod8v9qh6bby",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {character[]} chars\n * @return {number}\n */\nvar compress = function (chars) {\n  let left = 0;\n  let mid = 0;\n  const len = chars.length;\n  for (let right = 0; right <= len; right++) {\n    chars.setColor(right, \"cyan\");\n    if (chars[right] !== chars[mid]) {\n      chars[left++] = chars[mid];\n      const length = right - mid;\n      if (length > 1) {\n        const str = new String(length);\n        for (let i = 0; i < str.length; i++) {\n          chars.setColor(left, \"green\");\n          chars[left++] = str[i];\n        }\n      }\n\n      mid = right;\n    }\n  }\n\n  return left;\n};\n\nreturn compress;\n",
+      "order": 0
+    },
+    "clqpf4pwe0003ke5e2jsoekwh": {
+      "id": "clqpf4pwe0003ke5e2jsoekwh",
+      "createdAt": "2023-12-28T16:27:35.581Z",
+      "updatedAt": "2023-12-28T16:47:44.280Z",
+      "projectId": "clqpf4pwd0001ke5e8fopfdeh",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar getLengthOfOptimalCompression = function (s, k) {\n  const memo = new Map();\n  const getKey = (i, k, prev, prevCount) => `${i},${k},${prev},${prevCount}`;\n\n  const EDGE_VALS = new Set([1, 9, 99]);\n\n  /**\n        @param {number} i Current string index\n        @param {number} k Amount of deletions left\n        @param {string} prev Previous character\n        @param {number} prevCount Previous character count\n    */\n  const dfs = (i, k, prev, prevCount) => {\n    const key = getKey(i, k, prev, prevCount);\n    if (memo.has(key)) return memo.get(key);\n    s.setColor(i, \"green\");\n\n    if (k < 0) return Infinity;\n    if (i === s.length) return 0;\n\n    let result;\n\n    if (s[i] === prev) {\n      result = dfs(i + 1, k, prev, prevCount + 1);\n      if (EDGE_VALS.has(prevCount)) result++;\n    } else {\n      result = Math.min(\n        // Delete/skip current character\n        dfs(i + 1, k - 1, prev, prevCount),\n        // Don't delete\n        1 + dfs(i + 1, k, s[i], 1),\n      );\n    }\n\n    memo.set(key, result);\n    s.setColor(i, null);\n    return result;\n  };\n\n  return dfs(0, k, \"\", 0);\n};\n\nreturn getLengthOfOptimalCompression;\n",
+      "order": 0
     }
   }
 }
