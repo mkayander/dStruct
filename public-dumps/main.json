@@ -2701,6 +2701,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqqm25t60001h6rcraw06iae": {
+      "id": "clqqm25t60001h6rcraw06iae",
+      "createdAt": "2023-12-29T12:29:19.722Z",
+      "updatedAt": "2023-12-29T12:29:19.722Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Valid Palindrome III",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/valid-palindrome-iii",
+      "slug": "valid-palindrome-iii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12343,6 +12357,31 @@
         }
       },
       "description": null
+    },
+    "clqqm25t60002h6rchrlxqdlt": {
+      "id": "clqqm25t60002h6rchrlxqdlt",
+      "createdAt": "2023-12-29T12:29:19.722Z",
+      "updatedAt": "2023-12-29T12:34:11.777Z",
+      "projectId": "clqqm25t60001h6rcraw06iae",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "g7Lb7C7bPV5kxaxVP7dSTW": {
+          "name": "g7Lb7C7bPV5kxaxVP7dSTW",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        },
+        "xAybQ93APVuHNPnJ46EvJn": {
+          "name": "xAybQ93APVuHNPnJ46EvJn",
+          "type": "string",
+          "input": "abcdeca",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -16154,6 +16193,32 @@
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar getLengthOfOptimalCompression = function (s, k) {\n  const memo = new Map();\n  const getKey = (i, k, prev, prevCount) => `${i},${k},${prev},${prevCount}`;\n\n  const EDGE_VALS = new Set([1, 9, 99]);\n\n  /**\n        @param {number} i Current string index\n        @param {number} k Amount of deletions left\n        @param {string} prev Previous character\n        @param {number} prevCount Previous character count\n    */\n  const dfs = (i, k, prev, prevCount) => {\n    const key = getKey(i, k, prev, prevCount);\n    if (memo.has(key)) return memo.get(key);\n    s.setColor(i, \"green\");\n\n    if (k < 0) return Infinity;\n    if (i === s.length) return 0;\n\n    let result;\n\n    if (s[i] === prev) {\n      result = dfs(i + 1, k, prev, prevCount + 1);\n      if (EDGE_VALS.has(prevCount)) result++;\n    } else {\n      result = Math.min(\n        // Delete/skip current character\n        dfs(i + 1, k - 1, prev, prevCount),\n        // Don't delete\n        1 + dfs(i + 1, k, s[i], 1),\n      );\n    }\n\n    memo.set(key, result);\n    s.setColor(i, null);\n    return result;\n  };\n\n  return dfs(0, k, \"\", 0);\n};\n\nreturn getLengthOfOptimalCompression;\n",
       "order": 0
+    },
+    "clqqm25t60003h6rcmbxktakm": {
+      "id": "clqqm25t60003h6rcmbxktakm",
+      "createdAt": "2023-12-29T12:29:19.722Z",
+      "updatedAt": "2023-12-29T12:37:25.606Z",
+      "projectId": "clqqm25t60001h6rcraw06iae",
+      "title": "2D DP",
+      "slug": "2d-dp",
+      "timeComplexity": "O(n ^ 2)",
+      "spaceComplexity": "O(n ^ 2)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {boolean}\n */\nvar isValidPalindrome = function (s, k) {\n  const memo = Array.from(\n    { length: s.length },\n    (_, index) =>\n      Array.from({ length: s.length }, () => 0, null, {\n        parentName: \"memo\",\n        index,\n        colorMap: {\n          0: \"black\"\n        }\n      }),\n    null,\n    { matrixName: \"memo\" },\n  );\n\n  for (let i = s.length - 2; i >= 0; i--) {\n    s.setColor(i, \"blue\");\n    for (let j = i + 1; j < s.length; j++) {\n      if (s[i] === s[j]) {\n        s.setColor(j, \"green\");\n        memo[i][j] = memo[i + 1][j - 1];\n      } else {\n        s.setColor(j, \"cyan\");\n        memo[i][j] = 1 + Math.min(memo[i + 1][j], memo[i][j - 1]);\n      }\n      s.setColor(j, null);\n    }\n    s.setColor(i, null);\n  }\n\n  return memo[0][s.length - 1] <= k;\n};\n\nreturn isValidPalindrome;\n",
+      "order": 0
+    },
+    "clqqmesh70005h6rc0sxcja5s": {
+      "id": "clqqmesh70005h6rc0sxcja5s",
+      "createdAt": "2023-12-29T12:39:08.971Z",
+      "updatedAt": "2023-12-29T12:44:19.022Z",
+      "projectId": "clqqm25t60001h6rcraw06iae",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "timeComplexity": "O(n ^ 2)",
+      "spaceComplexity": "O(n ^ 2)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {boolean}\n */\nvar isValidPalindrome = function (s, k) {\n  const memo = Array.from(\n    { length: s.length },\n    (_, index) =>\n      Array.from({ length: s.length }, () => undefined, null, {\n        parentName: \"memo\",\n        index,\n        colorMap: {\n          undefined: \"black\",\n        },\n      }),\n    null,\n    { matrixName: \"memo\" },\n  );\n\n  const dfs = (i, j) => {\n    s.setColor(i, \"green\");\n    s.setColor(j, \"cyan\");\n    s.setColor(i, null);\n    s.setColor(j, null);\n    // 1 letter remaining\n    if (i === j) {\n      return 0;\n    }\n\n    // 2 letters remaining\n    if (i === j - 1) {\n      return s[i] !== s[j] ? 1 : 0;\n    }\n\n    if (memo[i][j] !== undefined) {\n      return memo[i][j];\n    }\n\n    if (s[i] === s[j]) {\n      return (memo[i][j] = dfs(i + 1, j - 1));\n    } else {\n      return (memo[i][j] = 1 + Math.min(dfs(i + 1, j), dfs(i, j - 1)));\n    }\n  };\n\n  return dfs(0, s.length - 1) <= k;\n};\n\nreturn isValidPalindrome;\n",
+      "order": 1
     }
   }
 }
