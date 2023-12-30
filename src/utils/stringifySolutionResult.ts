@@ -26,7 +26,6 @@ export const safeStringify = (val: unknown): string => {
           return `${value}n`;
         }
         if (value && typeof value === "object" && "meta" in value) {
-          console.log("stringify: ", value, value.meta?.type);
           switch (value.meta?.type) {
             case ArgumentType.LINKED_LIST:
               let current = value as LinkedListNode | null;
