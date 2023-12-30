@@ -1,5 +1,4 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
-import { Queue } from "@datastructures-js/queue";
 import shortUUID from "short-uuid";
 
 import {
@@ -96,6 +95,63 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       if (input === undefined) string = "";
       const data = generateArrayData(string.split(""));
       super(string, uuid.generate(), data, dispatch, true);
+    }
+  }
+
+  class Queue<T extends number | string> {
+    private head: LinkedList<T> | null = null;
+    private tail: LinkedList<T> | null = null;
+    private _size = 0;
+
+    constructor(elements?: T[]) {
+      if (elements) {
+        for (const element of elements) {
+          this.enqueue(element);
+        }
+      }
+    }
+
+    enqueue(element: T): Queue<T> {
+      const node = new LinkedList(element);
+      if (!this.head) {
+        this.head = this.tail = node;
+      } else if (this.tail) {
+        this.tail.next = node;
+        this.tail = this.tail.next;
+      }
+      this._size++;
+      return this;
+    }
+
+    dequeue(): T | null {
+      if (!this.head) return null;
+
+      const node = this.head;
+      if (node === this.tail) {
+        this.tail = this.head = null;
+      } else {
+        this.head = this.head.next;
+      }
+
+      this._size--;
+      node.delete();
+      return node.val;
+    }
+
+    front(): T | null {
+      return this.head?.val ?? null;
+    }
+
+    back(): T | null {
+      return this.tail?.val ?? null;
+    }
+
+    isEmpty(): boolean {
+      return !this.head;
+    }
+
+    size(): number {
+      return this._size;
     }
   }
 
