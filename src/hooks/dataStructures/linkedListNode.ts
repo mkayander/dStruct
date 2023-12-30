@@ -52,6 +52,16 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
     }
   }
 
+  public delete() {
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "deleteNode",
+        args: [],
+      }),
+    );
+  }
+
   static fromNodeData(
     name: string,
     nodeData: TreeNodeData | undefined,
