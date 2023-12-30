@@ -6,6 +6,7 @@ import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
+import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   constructor(
@@ -24,7 +25,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addNode",
-          args: [val],
+          args: [safeStringify(val)],
         }),
       );
     }
