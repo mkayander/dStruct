@@ -1,3 +1,25 @@
+# [1.244.0](https://github.com/mkayander/leetpal/compare/v1.243.0...v1.244.0) (2023-12-30)
+
+
+### Bug Fixes
+
+* Fixed TS errors ([08ce310](https://github.com/mkayander/leetpal/commit/08ce310f95b14c8e7337bc8f83937d5f45a98477))
+* Import React type explicitly ([6c49dc1](https://github.com/mkayander/leetpal/commit/6c49dc1e5eec295d98f20f7735f8b196dcacfa9d))
+* Remove console log ([75e730a](https://github.com/mkayander/leetpal/commit/75e730a51df5d0612da073f7a7eb1cc6c44ce258))
+
+
+### Features
+
+* Add left offset transition ([5e14cb0](https://github.com/mkayander/leetpal/commit/5e14cb0825c7fdd1ff596ceffc9f6038a8ddcce0))
+* Implement a custom Queue runtime data structure proxy ([7e2ca5c](https://github.com/mkayander/leetpal/commit/7e2ca5c66fe2d191e65a7fb71ee6a7124d5b2d00))
+* Implement a linked list node 'delete' method ([2f356fd](https://github.com/mkayander/leetpal/commit/2f356fdacf867ed71a106f3010749913717d8fc9))
+* Implement a reusable 'delete node' function ([f03ab49](https://github.com/mkayander/leetpal/commit/f03ab49fb12a9c97732361e411467c4a89256ce4))
+* Improve stringification ([7e1a3d1](https://github.com/mkayander/leetpal/commit/7e1a3d17e9b168c4ca467786eecf7a8351d41ab9))
+* Improve tree node reducer logic ([03dcd20](https://github.com/mkayander/leetpal/commit/03dcd20c18a44a1e378f70063d41d84b834063a5))
+* Improve trees positioning ([bfc3fe8](https://github.com/mkayander/leetpal/commit/bfc3fe814423aa3ae103dd9f6a7fb5456144edd0))
+* Make linked list val type generic ([5df3d13](https://github.com/mkayander/leetpal/commit/5df3d131f5a6f46614ec15b839b3c5e5c4aaa97d))
+* Stringify linked list value in dispatch ([bb2fc3e](https://github.com/mkayander/leetpal/commit/bb2fc3ef78b19f746b48d37e171c9b4104554353))
+
 # [1.243.0](https://github.com/mkayander/leetpal/compare/v1.242.0...v1.243.0) (2023-12-25)
 
 
