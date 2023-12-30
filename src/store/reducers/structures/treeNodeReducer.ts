@@ -52,6 +52,22 @@ const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
 });
 const initialState: TreeDataState = {};
 
+const deleteTreeNode = (
+  state: TreeDataState,
+  treeName: string,
+  treeState: TreeData,
+  id: string,
+) => {
+  if (!(id in treeState.nodes.entities)) return;
+
+  const count = treeState.nodes.ids.length;
+  if (count === 1) {
+    delete state[treeName];
+  } else {
+    treeNodeDataAdapter.removeOne(treeState.nodes, id);
+  }
+};
+
 /**
  * Slice
  * @see https://redux-toolkit.js.org/api/createslice
