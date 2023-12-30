@@ -7,20 +7,23 @@ import { callstackSlice } from "#/store/reducers/callstackReducer";
 import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
-export interface BinaryNodeMeta extends NodeMeta {
+export interface BinaryNodeMeta<T extends number | string = number | string>
+  extends NodeMeta {
   depth: number;
   isRoot?: boolean;
   isLeaf?: boolean;
   maxDepth?: number;
-  rootNode?: BinaryTreeNode;
+  rootNode?: BinaryTreeNode<T>;
 }
 
-export class BinaryTreeNode extends NodeBase {
+export class BinaryTreeNode<
+  T extends number | string = number | string,
+> extends NodeBase<T> {
   constructor(
-    val: number | string,
-    left: BinaryTreeNode | null = null,
-    right: BinaryTreeNode | null = null,
-    meta: BinaryNodeMeta,
+    val: T,
+    left: BinaryTreeNode<T> | null = null,
+    right: BinaryTreeNode<T> | null = null,
+    meta: BinaryNodeMeta<T>,
     name: string,
     dispatch: AppDispatch,
     addToCallstack?: boolean,
@@ -50,14 +53,14 @@ export class BinaryTreeNode extends NodeBase {
     }
   }
 
-  private _left!: BinaryTreeNode | null;
+  private _left!: BinaryTreeNode<T> | null;
 
   public get left() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
     return this._left;
   }
 
-  public set left(node: BinaryTreeNode | null) {
+  public set left(node: BinaryTreeNode<T> | null) {
     this._left = node;
     this.dispatch(
       callstackSlice.actions.addOne({
@@ -68,14 +71,14 @@ export class BinaryTreeNode extends NodeBase {
     );
   }
 
-  private _right!: BinaryTreeNode | null;
+  private _right!: BinaryTreeNode<T> | null;
 
   public get right() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
     return this._right;
   }
 
-  public set right(node: BinaryTreeNode | null) {
+  public set right(node: BinaryTreeNode<T> | null) {
     this._right = node;
     this.dispatch(
       callstackSlice.actions.addOne({
@@ -84,27 +87,6 @@ export class BinaryTreeNode extends NodeBase {
         args: [node?.meta.id ?? null, node?.name],
       }),
     );
-  }
-
-  public toString(): string {
-    const result = [];
-    const queue: Queue<BinaryTreeNode | null> = new Queue();
-    queue.enqueue(this);
-
-    while (!queue.isEmpty()) {
-      const node = queue.dequeue();
-
-      result.push(node?.val ?? "null");
-
-      if (node) {
-        queue.enqueue(node.left);
-        queue.enqueue(node.right);
-      }
-    }
-
-    while (result.at(-1) === "null") result.pop();
-
-    return `Binary Tree [${String(result)}]`;
   }
 
   static fromNodeData(
@@ -158,5 +140,26 @@ export class BinaryTreeNode extends NodeBase {
       name,
       dispatch,
     );
+  }
+
+  public toString(): string {
+    const result = [];
+    const queue: Queue<BinaryTreeNode<T> | null> = new Queue();
+    queue.enqueue(this);
+
+    while (!queue.isEmpty()) {
+      const node = queue.dequeue();
+
+      result.push(node?.val ?? "null");
+
+      if (node) {
+        queue.enqueue(node.left);
+        queue.enqueue(node.right);
+      }
+    }
+
+    while (result.at(-1) === "null") result.pop();
+
+    return `Binary Tree [${String(result)}]`;
   }
 }
