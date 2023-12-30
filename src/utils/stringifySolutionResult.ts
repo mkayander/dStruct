@@ -1,12 +1,12 @@
 import { type LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ArgumentType } from "#/utils/argumentObject";
 
-export const stripQuotes = (val: string) => {
-  if (val[0] === '"' && val.at(-1) === '"') {
+export const stripQuotes = (val?: string) => {
+  if (val?.[0] === '"' && val.at(-1) === '"') {
     return val.slice(1, -1);
   }
 
-  return val;
+  return String(val);
 };
 
 export const safeStringify = (val: unknown): string => {
@@ -18,44 +18,44 @@ export const safeStringify = (val: unknown): string => {
     return `[${items.join(", ")}]`;
   }
 
-  return stripQuotes(
-    JSON.stringify(
-      val,
-      (_, value) => {
-        if (typeof value === "bigint") {
-          return `${value}n`;
-        }
-        if (value && typeof value === "object" && "meta" in value) {
-          switch (value.meta?.type) {
-            case ArgumentType.LINKED_LIST:
-              let current = value as LinkedListNode<any> | null;
-              const output = [];
+  const jsonString = JSON.stringify(
+    val,
+    (_, value) => {
+      if (typeof value === "bigint") {
+        return `${value}n`;
+      }
+      if (value && typeof value === "object" && "meta" in value) {
+        switch (value.meta?.type) {
+          case ArgumentType.LINKED_LIST:
+            let current = value as LinkedListNode<any> | null;
+            const output = [];
 
-              while (current) {
-                output.push(current._val);
-                current = current._next;
-              }
+            while (current) {
+              output.push(current._val);
+              current = current._next;
+            }
 
-              return `[${output.join(" -> ")}]`;
+            return `[${output.join(" -> ")}]`;
 
-            case ArgumentType.BINARY_TREE:
-              return value.toString();
-          }
+          case ArgumentType.BINARY_TREE:
+            return value.toString();
         }
-        if (value instanceof Set) {
-          return `Set (${value.size}) {${[...value].join(", ")}}`;
-        }
-        if (value instanceof Map) {
-          return `Map (${value.size}) {${[...value]
-            .map(([key, val]) => `${key} => ${safeStringify(val)}`)
-            .join(", ")}}`;
-        }
+      }
+      if (value instanceof Set) {
+        return `Set (${value.size}) {${[...value].join(", ")}}`;
+      }
+      if (value instanceof Map) {
+        return `Map (${value.size}) {${[...value]
+          .map(([key, val]) => `${key} => ${safeStringify(val)}`)
+          .join(", ")}}`;
+      }
 
-        return value;
-      },
-      2,
-    ),
+      return value;
+    },
+    2,
   );
+
+  return stripQuotes(jsonString);
 };
 
 export const stringifySolutionResult = (
