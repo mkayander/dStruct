@@ -40,6 +40,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
       style={{
         ...style,
         left,
+        transition: "left 0.05s ease-in-out",
       }}
     >
       {Object.values(data.nodes.entities).map(
