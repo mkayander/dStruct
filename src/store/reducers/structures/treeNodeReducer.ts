@@ -31,7 +31,6 @@ export type TreeNodeData = StructureNode & {
 export type TreeData = BaseStructureItem<TreeNodeData> & {
   type: ArgumentTreeType;
   order: number;
-  count: number;
   maxDepth: number;
   rootId: string | null;
 };
@@ -46,7 +45,6 @@ const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   ...getInitialDataBase(treeNodeDataAdapter),
   type,
   order,
-  count: 0,
   maxDepth: 0,
   rootId: null,
 });
@@ -98,9 +96,9 @@ export const treeNodeSlice = createSlice({
         treeState = { ...getInitialData(argType, 999), isRuntime: true };
       }
 
-      treeState.count++;
-      treeState.nodes.ids.push(action.payload.name);
-      treeState.nodes.entities[action.payload.name] = action.payload.data;
+      const nodeId = action.payload.data.id;
+      treeState.nodes.ids.push(nodeId);
+      treeState.nodes.entities[nodeId] = action.payload.data;
 
       state[name] = treeState;
     },
@@ -119,7 +117,6 @@ export const treeNodeSlice = createSlice({
         } = action;
 
         treeState.rootId = nodes[0]?.id || null;
-        treeState.count += nodes.length;
         treeState.maxDepth = maxDepth;
         treeNodeDataAdapter.addMany(treeState.nodes, nodes);
       }),
@@ -133,13 +130,15 @@ export const treeNodeSlice = createSlice({
       }>,
     ) => {
       const { childId, childTreeName } = action.payload.data;
+
+      // If child is from another tree, remove it from the old tree and add it to the new one
       if (childId && childTreeName && childTreeName !== action.payload.name) {
         let childData: TreeNodeData | undefined = undefined;
-        runStateActionByName(state, childTreeName, (treeState) => {
-          childData = treeState.nodes.entities[childId];
+        runStateActionByName(state, childTreeName, (childTreeState) => {
+          childData = childTreeState.nodes.entities[childId];
           if (!childData) return;
 
-          treeNodeDataAdapter.removeOne(treeState.nodes, childId);
+          deleteTreeNode(state, childTreeName, childTreeState, childId);
         });
 
         runStateActionByName(state, action.payload.name, (treeState) => {
@@ -150,6 +149,7 @@ export const treeNodeSlice = createSlice({
         });
       }
 
+      // Normal child id update
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
@@ -174,8 +174,12 @@ export const treeNodeSlice = createSlice({
       }),
     remove: (state, action: NamedPayload<Pick<TreeNodeData, "id">>) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
-        treeState.count--;
-        treeNodeDataAdapter.removeOne(treeState.nodes, action.payload.data.id);
+        const {
+          name,
+          data: { id },
+        } = action.payload;
+
+        deleteTreeNode(state, name, treeState, id);
       }),
   },
 });
