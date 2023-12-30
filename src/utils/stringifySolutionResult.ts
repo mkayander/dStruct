@@ -28,7 +28,7 @@ export const safeStringify = (val: unknown): string => {
         if (value && typeof value === "object" && "meta" in value) {
           switch (value.meta?.type) {
             case ArgumentType.LINKED_LIST:
-              let current = value as LinkedListNode | null;
+              let current = value as LinkedListNode<any> | null;
               const output = [];
 
               while (current) {
@@ -65,7 +65,7 @@ export const stringifySolutionResult = (
     | bigint
     | Set<unknown>
     | Map<unknown, unknown>
-    | LinkedListNode
+    | LinkedListNode<any>
     | null,
 ) => {
   if (result === null) return "null";

@@ -40,8 +40,8 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     }
   }
 
-  class LinkedList extends LinkedListNode {
-    constructor(val: number, next: LinkedListNode | null = null) {
+  class LinkedList<T extends number | string> extends LinkedListNode<T> {
+    constructor(val: T, next: LinkedListNode<T> | null = null) {
       super(
         val,
         next,

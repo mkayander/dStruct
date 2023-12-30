@@ -7,10 +7,10 @@ import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
-export class LinkedListNode extends NodeBase {
+export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   constructor(
-    val: number | string,
-    next: LinkedListNode | null = null,
+    val: T,
+    next: LinkedListNode<T> | null = null,
     meta: NodeMeta,
     name: string,
     dispatch: AppDispatch,
@@ -30,14 +30,14 @@ export class LinkedListNode extends NodeBase {
     }
   }
 
-  _next: LinkedListNode | null;
+  _next: LinkedListNode<T> | null;
 
   public get next() {
     this.meta.displayTraversal && this.setColor("cyan", "blink");
     return this._next;
   }
 
-  public set next(node: LinkedListNode | null) {
+  public set next(node: LinkedListNode<T> | null) {
     this._next = node;
     this.dispatch(
       callstackSlice.actions.addOne({
@@ -57,7 +57,7 @@ export class LinkedListNode extends NodeBase {
     dataMap: Dictionary<TreeNodeData>,
     dispatch: AppDispatch,
     meta?: Partial<BinaryNodeMeta>,
-  ): LinkedListNode | null {
+  ): LinkedListNode<number | string> | null {
     if (!nodeData) return null;
 
     const {

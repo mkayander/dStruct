@@ -12,14 +12,14 @@ export interface NodeMeta {
   displayTraversal?: boolean;
 }
 
-export abstract class NodeBase {
-  _val!: number | string;
+export abstract class NodeBase<T extends number | string> {
+  _val!: T;
   protected name!: string;
   readonly meta!: NodeMeta;
   protected readonly dispatch!: AppDispatch;
 
   protected constructor(
-    val: number | string,
+    val: T,
     meta: NodeMeta,
     name: string,
     dispatch: AppDispatch,
@@ -46,11 +46,11 @@ export abstract class NodeBase {
     });
   }
 
-  public get val(): number | string {
+  public get val(): T {
     return this._val;
   }
 
-  public set val(value: number | string) {
+  public set val(value: T) {
     this._val = value;
     this.dispatch(
       callstackSlice.actions.addOne({
@@ -71,7 +71,7 @@ export abstract class NodeBase {
     );
   }
 
-  public setColorMap(map: Record<number | string, string>) {
+  public setColorMap(map: Record<T, string>) {
     const base = this.getDispatchBase();
     if (!base) return;
     this.dispatch(
