@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
   return (
     <Container component="footer">
       <Box mt={4} mb={2}>
-        <Typography variant="caption">© Max Kayander, 2023.</Typography>
+        <Typography variant="caption">© Max Kayander, 2024.</Typography>
       </Box>
     </Container>
   );
