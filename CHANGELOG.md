@@ -1,3 +1,10 @@
+# [1.245.0](https://github.com/mkayander/leetpal/compare/v1.244.0...v1.245.0) (2023-12-31)
+
+
+### Features
+
+* Happy new 2024 year 🎄 ([df2f1ff](https://github.com/mkayander/leetpal/commit/df2f1ff1b842d82f94aab4618c5cba51a10a613c))
+
 # [1.244.0](https://github.com/mkayander/leetpal/compare/v1.243.0...v1.244.0) (2023-12-30)
 
 
