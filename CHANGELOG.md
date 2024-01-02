@@ -1,3 +1,15 @@
+# [1.246.0](https://github.com/mkayander/leetpal/compare/v1.245.0...v1.246.0) (2024-01-02)
+
+
+### Features
+
+* Added a structure base class factory ([73c202b](https://github.com/mkayander/leetpal/commit/73c202b9ba875ddcbab6082c70219b9f8621f88f))
+* Added type helpers ([509b53e](https://github.com/mkayander/leetpal/commit/509b53e72c89e039d7c90da0367b159b68b010c9))
+* Extend array structure from a base class ([8a3f7e4](https://github.com/mkayander/leetpal/commit/8a3f7e41f4a4516dabe87d13cb7bbc5c25ca527a))
+* Extend string structure from a base class ([47ac194](https://github.com/mkayander/leetpal/commit/47ac194cf707124d5f03c00071f704a5669146d0))
+* Extracted string literal type ([4c72c31](https://github.com/mkayander/leetpal/commit/4c72c31df29d27b9d926853f451c80cabae74e73))
+* Renamed class ([67bb5d8](https://github.com/mkayander/leetpal/commit/67bb5d85296d008efc2d2a25977c0386788e162e))
+
 # [1.245.0](https://github.com/mkayander/leetpal/compare/v1.244.0...v1.245.0) (2023-12-31)
 
 
