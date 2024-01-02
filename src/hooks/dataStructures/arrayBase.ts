@@ -11,7 +11,7 @@ import type { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
-export function makeBaseStructureClass<TBase extends Constructor>(Base: TBase) {
+export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
   class BaseStructure extends Base {
     protected readonly name!: string;
     protected readonly itemsMeta!: ArrayItemData[];

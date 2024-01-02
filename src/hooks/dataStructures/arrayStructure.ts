@@ -1,7 +1,7 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
-import { makeBaseStructureClass } from "#/hooks/dataStructures/baseStructure";
+import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
@@ -14,7 +14,7 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
-const BaseStructure = makeBaseStructureClass(Array);
+const ArrayBase = makeArrayBaseClass(Array);
 
 export type ControlledArrayRuntimeOptions = {
   parentName?: string;
@@ -24,7 +24,7 @@ export type ControlledArrayRuntimeOptions = {
   colorMap?: Record<string, string>;
 };
 
-export class ControlledArray<T> extends BaseStructure<T> {
+export class ControlledArray<T> extends ArrayBase<T> {
   constructor(
     array: Array<T>,
     name: string,

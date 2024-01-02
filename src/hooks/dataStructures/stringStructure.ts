@@ -1,6 +1,6 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
-import { makeBaseStructureClass } from "#/hooks/dataStructures/baseStructure";
+import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
@@ -9,9 +9,9 @@ import {
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
-const BaseStructure = makeBaseStructureClass(String);
+const ArrayBase = makeArrayBaseClass(String);
 
-export class ControlledString extends BaseStructure {
+export class ControlledString extends ArrayBase {
   constructor(
     value: unknown,
     name: string,
