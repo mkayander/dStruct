@@ -11,11 +11,13 @@ import type { RootState } from "#/store/makeStore";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { type ArgumentType } from "#/utils/argumentObject";
 
+export type StructureTypeName = "treeNode" | "array";
+
 export type CallFrameBase = {
   id: string;
   timestamp: number;
   treeName: string;
-  structureType: "treeNode" | "array";
+  structureType: StructureTypeName;
   argType: ArgumentType;
 };
 
