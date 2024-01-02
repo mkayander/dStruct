@@ -1,24 +1,17 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
+import { makeBaseStructureClass } from "#/hooks/dataStructures/baseStructure";
 import type { AppDispatch } from "#/store/makeStore";
-import {
-  type CallFrameBase,
-  callstackSlice,
-} from "#/store/reducers/callstackReducer";
+import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
-const uuid = shortUUID();
+const BaseStructure = makeBaseStructureClass(String);
 
-export class ControlledString extends String {
-  private readonly name!: string;
-  private readonly itemsMeta!: ArrayItemData[];
-  private readonly dispatch!: AppDispatch;
-
+export class ControlledString extends BaseStructure {
   constructor(
     value: unknown,
     name: string,
@@ -36,6 +29,10 @@ export class ControlledString extends String {
         value: arrayDataItemSelectors.selectAll(arrayData),
         enumerable: false,
       },
+      argType: {
+        value: ArgumentType.STRING,
+        enumerable: false,
+      },
       dispatch: {
         value: dispatch,
         enumerable: false,
@@ -51,61 +48,5 @@ export class ControlledString extends String {
         }),
       );
     }
-  }
-
-  public setColor(index: number, color: string | null, animation?: string) {
-    const base = this.getDispatchBase(index);
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "setColor",
-        args: [color, animation],
-      }),
-    );
-  }
-
-  public showPointer(index: number, name: string) {
-    const base = this.getDispatchBase(index);
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "showPointer",
-        args: [name],
-      }),
-    );
-  }
-
-  public setColorMap(map: Record<string, string>) {
-    const base = this.getDispatchBase();
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "setColorMap",
-        args: [map],
-      }),
-    );
-  }
-
-  protected getDispatchBase(index?: number) {
-    const data = {
-      id: uuid.generate(),
-      argType: ArgumentType.STRING,
-      nodeId: "-1",
-      treeName: this.name,
-      structureType: "array",
-      timestamp: performance.now(),
-    } satisfies CallFrameBase & { nodeId: string };
-    if (index !== undefined) {
-      const meta = this.getNodeMeta(index);
-      meta && (data.nodeId = meta.id);
-    }
-    return data;
-  }
-
-  private getNodeMeta(index: number) {
-    return this.itemsMeta.at(index);
   }
 }
