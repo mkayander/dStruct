@@ -1,12 +1,10 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
+import { makeBaseStructureClass } from "#/hooks/dataStructures/baseStructure";
 import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
-import {
-  type CallFrameBase,
-  callstackSlice,
-} from "#/store/reducers/callstackReducer";
+import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
@@ -16,6 +14,8 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
+const BaseStructure = makeBaseStructureClass(Array);
+
 export type ControlledArrayRuntimeOptions = {
   parentName?: string;
   index?: number;
@@ -24,12 +24,7 @@ export type ControlledArrayRuntimeOptions = {
   colorMap?: Record<string, string>;
 };
 
-export class ControlledArray<T> extends Array<T> {
-  private readonly name!: string;
-  private readonly itemsMeta!: ArrayItemData[];
-  private readonly _argType!: ArgumentType.ARRAY | ArgumentType.MATRIX;
-  private readonly dispatch!: AppDispatch;
-
+export class ControlledArray<T> extends BaseStructure<T> {
   constructor(
     array: Array<T>,
     name: string,
@@ -41,11 +36,11 @@ export class ControlledArray<T> extends Array<T> {
     super();
 
     let actionArrayData: EntityState<ArrayItemData> | undefined = undefined;
-    let _argType: ArgumentType.ARRAY | ArgumentType.MATRIX = ArgumentType.ARRAY;
+    let argType: ArgumentType.ARRAY | ArgumentType.MATRIX = ArgumentType.ARRAY;
 
     if (options?.matrixName) {
       name = options.matrixName;
-      _argType = ArgumentType.MATRIX;
+      argType = ArgumentType.MATRIX;
       options.length = array.length;
     } else {
       actionArrayData = arrayData;
@@ -60,8 +55,8 @@ export class ControlledArray<T> extends Array<T> {
         value: arrayDataItemSelectors.selectAll(arrayData),
         enumerable: false,
       },
-      _argType: {
-        value: _argType,
+      argType: {
+        value: argType,
         enumerable: false,
       },
       dispatch: {
@@ -215,76 +210,8 @@ export class ControlledArray<T> extends Array<T> {
   }
 
   override slice(start?: number, end?: number): T[] {
-    const sliceArray = super.slice(start, end);
-    const { id, array, data } = ControlledArray._mapArrayData(sliceArray);
+    const slicedArray = Array.from(this).slice(start, end);
+    const { id, array, data } = ControlledArray._mapArrayData(slicedArray);
     return new ControlledArray(array as T[], id, data, this.dispatch, true);
-  }
-
-  public blink(index: number) {
-    const base = this.getDispatchBase(index);
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "blink",
-        args: [],
-      }),
-    );
-  }
-
-  public setColor(index: number, color: string | null, animation?: string) {
-    const base = this.getDispatchBase(index);
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "setColor",
-        args: [color, animation],
-      }),
-    );
-  }
-
-  public showPointer(index: number, name: string) {
-    const base = this.getDispatchBase(index);
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "showPointer",
-        args: [name],
-      }),
-    );
-  }
-
-  public setColorMap(map: Record<string, string>) {
-    const base = this.getDispatchBase();
-    if (!base) return;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "setColorMap",
-        args: [map],
-      }),
-    );
-  }
-
-  protected getDispatchBase(index?: number) {
-    const data = {
-      id: uuid.generate(),
-      argType: this._argType,
-      nodeId: "-1",
-      treeName: this.name,
-      structureType: "array",
-      timestamp: performance.now(),
-    } satisfies CallFrameBase & { nodeId: string };
-    if (index !== undefined) {
-      const meta = this.getNodeMeta(index);
-      meta && (data.nodeId = meta.id);
-    }
-    return data;
-  }
-
-  private getNodeMeta(index: number) {
-    return this.itemsMeta.at(index);
   }
 }
