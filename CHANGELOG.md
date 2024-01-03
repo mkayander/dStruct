@@ -1,3 +1,15 @@
+# [1.247.0](https://github.com/mkayander/leetpal/compare/v1.246.0...v1.247.0) (2024-01-03)
+
+
+### Features
+
+* Added new arg icons ([b053762](https://github.com/mkayander/leetpal/commit/b05376291f2ee91029f06022d15d9bb63e006784))
+* Implemented a controlled map class ([4232dde](https://github.com/mkayander/leetpal/commit/4232dde831f99df3ccc79f76b08c83d14a1bad1b))
+* Implemented a controlled set class ([ee92bf0](https://github.com/mkayander/leetpal/commit/ee92bf0a07c517b626a4cfb58f36326103e293df))
+* Process map and set proxies at runtime ([b0df2b0](https://github.com/mkayander/leetpal/commit/b0df2b08a89f5f796b49b2f3d0677fc4b672fb86))
+* Updated arg object types ([7b4fc42](https://github.com/mkayander/leetpal/commit/7b4fc42a30fb58e8e55b56c69b822de7aec26e86))
+* Updated array base class signature ([149acff](https://github.com/mkayander/leetpal/commit/149acff614e4043214ed89068818a484ca7501dc))
+
 # [1.246.0](https://github.com/mkayander/leetpal/compare/v1.245.0...v1.246.0) (2024-01-02)
 
 
