@@ -25,6 +25,8 @@ export type ControlledArrayRuntimeOptions = {
 };
 
 export class ControlledArray<T> extends ArrayBase<T> {
+  private readonly itemsMeta!: ArrayItemData[];
+
   constructor(
     array: Array<T>,
     name: string,
@@ -91,18 +93,17 @@ export class ControlledArray<T> extends ArrayBase<T> {
             id: uuid.generate(),
             index,
             value,
-            children: [],
           };
           dispatch(
             callstackSlice.actions.addOne({
               id: uuid.generate(),
-              argType: ArgumentType.ARRAY,
+              argType: this.argType,
               treeName: this.name,
               structureType: "array",
               nodeId: newItem.id,
               timestamp: performance.now(),
               name: "addArrayItem",
-              args: [value, index],
+              args: [value, index, undefined],
             }),
           );
           this.itemsMeta[index] = newItem;
@@ -213,5 +214,9 @@ export class ControlledArray<T> extends ArrayBase<T> {
     const slicedArray = Array.from(this).slice(start, end);
     const { id, array, data } = ControlledArray._mapArrayData(slicedArray);
     return new ControlledArray(array as T[], id, data, this.dispatch, true);
+  }
+
+  protected getNodeMeta(key: number): ArrayItemData | undefined {
+    return this.itemsMeta.at(key);
   }
 }

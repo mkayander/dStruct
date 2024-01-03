@@ -7,19 +7,20 @@ import {
 } from "#/store/reducers/callstackReducer";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import type { Constructor } from "#/types/helpers";
-import type { ArgumentType } from "#/utils/argumentObject";
+import type { ArgumentArrayType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 
 export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
-  class BaseStructure extends Base {
+  abstract class BaseStructure extends Base {
     protected readonly name!: string;
-    protected readonly itemsMeta!: ArrayItemData[];
-    protected readonly argType!:
-      | ArgumentType.ARRAY
-      | ArgumentType.MATRIX
-      | ArgumentType.STRING;
+    protected readonly argType!: ArgumentArrayType;
+
     protected readonly dispatch!: AppDispatch;
+
+    protected constructor(...args: any[]) {
+      super(...args);
+    }
 
     public blink(index: number) {
       const base = this.getDispatchBase(index);
@@ -69,7 +70,9 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       );
     }
 
-    protected getDispatchBase(index?: number) {
+    protected abstract getNodeMeta(key: any): ArrayItemData | undefined;
+
+    protected getDispatchBase(key?: any) {
       const data = {
         id: uuid.generate(),
         argType: this.argType,
@@ -78,15 +81,11 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         structureType: "array",
         timestamp: performance.now(),
       } satisfies CallFrameBase & { nodeId: string };
-      if (index !== undefined) {
-        const meta = this.getNodeMeta(index);
+      if (key !== undefined) {
+        const meta = this.getNodeMeta(key);
         meta && (data.nodeId = meta.id);
       }
       return data;
-    }
-
-    private getNodeMeta(index: number) {
-      return this.itemsMeta.at(index);
     }
   }
 

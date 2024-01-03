@@ -12,6 +12,8 @@ import { ArgumentType } from "#/utils/argumentObject";
 const ArrayBase = makeArrayBaseClass(String);
 
 export class ControlledString extends ArrayBase {
+  private readonly itemsMeta!: ArrayItemData[];
+
   constructor(
     value: unknown,
     name: string,
@@ -48,5 +50,9 @@ export class ControlledString extends ArrayBase {
         }),
       );
     }
+  }
+
+  protected getNodeMeta(key: number): ArrayItemData | undefined {
+    return this.itemsMeta.at(key);
   }
 }
