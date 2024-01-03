@@ -25,6 +25,7 @@ const uuid = shortUUID();
 
 export type ArrayItemData = StructureNode & {
   index: number;
+  key?: string | number;
 };
 
 export type ArrayData = BaseStructureItem<ArrayItemData> & {

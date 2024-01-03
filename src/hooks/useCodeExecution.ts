@@ -22,6 +22,8 @@ const globalDefinitionsPrefix = `
   const console = {...window.console, log: window.log, error: window.error, warn: window.warn, info: window.info};
   const Array = window.ArrayProxy;
   const String = window.StringProxy;
+  const Set = window.SetProxy;
+  const Map = window.MapProxy;
 `.trim();
 
 export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;

@@ -113,6 +113,7 @@ export const useNodesRuntimeUpdates = (
                   id: frame.nodeId,
                   value: frame.args[0],
                   index: frame.args[1],
+                  key: frame.args[2],
                 },
               }),
             );

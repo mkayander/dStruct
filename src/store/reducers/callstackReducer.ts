@@ -69,7 +69,7 @@ type AddNodeFrame = NodeFrameBase & {
 
 type AddArrayItemFrame = NodeFrameBase & {
   name: "addArrayItem";
-  args: [number | string, number];
+  args: [number | string, number, number | string | undefined];
 };
 
 type AddArrayFrame = CallFrameBase & {

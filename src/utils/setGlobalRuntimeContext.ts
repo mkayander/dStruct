@@ -7,6 +7,8 @@ import {
 } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
+import { ControlledMap } from "#/hooks/dataStructures/mapStructure";
+import { ControlledSet } from "#/hooks/dataStructures/setStructure";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
@@ -98,6 +100,22 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     }
   }
 
+  class SetProxy extends ControlledSet {
+    constructor(input?: any[] | null) {
+      const set = new Set(input);
+      const data = generateArrayData(Array.from(set));
+      super(Array.from(set), uuid.generate(), data, dispatch, true);
+    }
+  }
+
+  class MapProxy extends ControlledMap {
+    constructor(input?: any[] | null) {
+      const map = new Map(input);
+      const data = generateArrayData(Array.from(map));
+      super(Array.from(map), uuid.generate(), data, dispatch, true);
+    }
+  }
+
   class Queue<T extends number | string> {
     private head: LinkedList<T> | null = null;
     private tail: LinkedList<T> | null = null;
@@ -158,6 +176,8 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
   const context = {
     ArrayProxy,
     StringProxy,
+    SetProxy,
+    MapProxy,
     Queue,
     PriorityQueue,
     BinaryTree,
