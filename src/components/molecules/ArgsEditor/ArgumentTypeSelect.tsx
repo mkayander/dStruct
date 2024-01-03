@@ -3,8 +3,10 @@ import {
   DataArray,
   GridOn,
   Link,
+  ListAlt,
   LooksOne,
   RadioButtonChecked,
+  SettingsEthernet,
   TextFields,
   Timeline,
 } from "@mui/icons-material";
@@ -44,6 +46,8 @@ const typeIconsMap: Record<ArgumentType, React.ReactElement> = {
   [ArgumentType.ARRAY]: <DataArray sx={iconSxProps} />,
   [ArgumentType.BOOLEAN]: <RadioButtonChecked sx={iconSxProps} />,
   [ArgumentType.STRING]: <TextFields sx={iconSxProps} />,
+  [ArgumentType.SET]: <SettingsEthernet sx={iconSxProps} />,
+  [ArgumentType.MAP]: <ListAlt sx={iconSxProps} />,
 };
 
 export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
