@@ -2715,6 +2715,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clqtganu10001uqm3nzb73utq": {
+      "id": "clqtganu10001uqm3nzb73utq",
+      "createdAt": "2023-12-31T12:11:17.161Z",
+      "updatedAt": "2023-12-31T12:11:17.161Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Largest Substring Between Two Equal Characters",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/largest-substring-between-two-equal-characters",
+      "slug": "largest-substring-between-two-equal-characters",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clqwlkudl000111j799sbedge": {
+      "id": "clqwlkudl000111j799sbedge",
+      "createdAt": "2024-01-02T17:02:28.809Z",
+      "updatedAt": "2024-01-02T17:02:28.809Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Convert an Array Into a 2D Array With Conditions",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions",
+      "slug": "convert-an-array-into-a-2d-array-with-conditions",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clqz9cvv50001idfhtmtq0re4": {
+      "id": "clqz9cvv50001idfhtmtq0re4",
+      "createdAt": "2024-01-04T13:43:40.625Z",
+      "updatedAt": "2024-01-04T13:43:40.625Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Campus Bikes II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/campus-bikes-ii",
+      "slug": "campus-bikes-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12382,6 +12424,126 @@
         }
       },
       "description": null
+    },
+    "clqtganu10002uqm3mtjp2ga4": {
+      "id": "clqtganu10002uqm3mtjp2ga4",
+      "createdAt": "2023-12-31T12:11:17.161Z",
+      "updatedAt": "2023-12-31T12:11:17.161Z",
+      "projectId": "clqtganu10001uqm3nzb73utq",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqwlkudl000211j7vmfm8lyq": {
+      "id": "clqwlkudl000211j7vmfm8lyq",
+      "createdAt": "2024-01-02T17:02:28.809Z",
+      "updatedAt": "2024-01-02T17:02:40.684Z",
+      "projectId": "clqwlkudl000111j799sbedge",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,3,4,1,2,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqwlmi9t000511j7ifenfq8s": {
+      "id": "clqwlmi9t000511j7ifenfq8s",
+      "createdAt": "2024-01-02T17:03:46.433Z",
+      "updatedAt": "2024-01-02T17:03:49.653Z",
+      "projectId": "clqwlkudl000111j799sbedge",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[2,1,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqwlmrms000711j7pls2ody0": {
+      "id": "clqwlmrms000711j7pls2ody0",
+      "createdAt": "2024-01-02T17:03:58.565Z",
+      "updatedAt": "2024-01-02T17:04:02.063Z",
+      "projectId": "clqwlkudl000111j799sbedge",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqwlmzmz000911j7ptq2i4e1": {
+      "id": "clqwlmzmz000911j7ptq2i4e1",
+      "createdAt": "2024-01-02T17:04:08.939Z",
+      "updatedAt": "2024-01-02T17:04:54.945Z",
+      "projectId": "clqwlkudl000111j799sbedge",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,3,4,1,2,3,1,1,5,4,3,2,4,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clqz9cvv50002idfho2m47x1f": {
+      "id": "clqz9cvv50002idfho2m47x1f",
+      "createdAt": "2024-01-04T13:43:40.625Z",
+      "updatedAt": "2024-01-04T13:44:39.639Z",
+      "projectId": "clqz9cvv50001idfhtmtq0re4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "iq1xzwM2jzijxsWxkMbp4p": {
+          "name": "iq1xzwM2jzijxsWxkMbp4p",
+          "type": "array",
+          "input": "[[1,2],[3,3]]",
+          "order": 1
+        },
+        "pD3dAvhzuLjHqWd4VCCBBB": {
+          "name": "pD3dAvhzuLjHqWd4VCCBBB",
+          "type": "array",
+          "input": "[[0,0],[2,1]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -16219,6 +16381,45 @@
       "description": "",
       "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {boolean}\n */\nvar isValidPalindrome = function (s, k) {\n  const memo = Array.from(\n    { length: s.length },\n    (_, index) =>\n      Array.from({ length: s.length }, () => undefined, null, {\n        parentName: \"memo\",\n        index,\n        colorMap: {\n          undefined: \"black\",\n        },\n      }),\n    null,\n    { matrixName: \"memo\" },\n  );\n\n  const dfs = (i, j) => {\n    s.setColor(i, \"green\");\n    s.setColor(j, \"cyan\");\n    s.setColor(i, null);\n    s.setColor(j, null);\n    // 1 letter remaining\n    if (i === j) {\n      return 0;\n    }\n\n    // 2 letters remaining\n    if (i === j - 1) {\n      return s[i] !== s[j] ? 1 : 0;\n    }\n\n    if (memo[i][j] !== undefined) {\n      return memo[i][j];\n    }\n\n    if (s[i] === s[j]) {\n      return (memo[i][j] = dfs(i + 1, j - 1));\n    } else {\n      return (memo[i][j] = 1 + Math.min(dfs(i + 1, j), dfs(i, j - 1)));\n    }\n  };\n\n  return dfs(0, s.length - 1) <= k;\n};\n\nreturn isValidPalindrome;\n",
       "order": 1
+    },
+    "clqtganu20003uqm37vpu9dkz": {
+      "id": "clqtganu20003uqm37vpu9dkz",
+      "createdAt": "2023-12-31T12:11:17.161Z",
+      "updatedAt": "2023-12-31T12:11:17.161Z",
+      "projectId": "clqtganu10001uqm3nzb73utq",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function getArraySum(array) {\n  let sum = 0;\n  for (var i = 0; i < array.length; i++) {\n      sum += array[i];\n      array.setColor(i, \"green\");\n  }\n  return sum;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
+      "order": 0
+    },
+    "clqwlkudl000311j74k1oyz4u": {
+      "id": "clqwlkudl000311j74k1oyz4u",
+      "createdAt": "2024-01-02T17:02:28.809Z",
+      "updatedAt": "2024-01-02T17:06:43.617Z",
+      "projectId": "clqwlkudl000111j799sbedge",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar findMatrix = function (nums) {\n  const freqMap = new Uint8Array(201);\n  const result = [];\n\n  for (let i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    freqMap[num]++;\n\n    (result[freqMap[num] - 1] ??= new Array()).push(num);\n  }\n\n  return result;\n};\n\nreturn findMatrix;\n",
+      "order": 0
+    },
+    "clqz9cvv50003idfhotk1s8m8": {
+      "id": "clqz9cvv50003idfhotk1s8m8",
+      "createdAt": "2024-01-04T13:43:40.625Z",
+      "updatedAt": "2024-01-04T13:53:33.148Z",
+      "projectId": "clqz9cvv50001idfhtmtq0re4",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "timeComplexity": "O(m * 2 ^ n)",
+      "spaceComplexity": "O(2 ^ m)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number}\n */\nvar assignBikes = function (workers, bikes) {\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const memo = new Array();\n\n  const backtrack = (worker, mask) => {\n    if (worker >= workers.length) {\n      return 0;\n    }\n    if (memo[mask] !== undefined) return memo[mask];\n\n    let min = Infinity;\n\n    const workerCoord = workers[worker];\n    for (let bike = 0; bike < bikes.length; bike++) {\n      const bit = 1 << bike;\n      if (bit & mask) continue;\n\n      const bikeCoord = bikes[bike];\n      const distance = getDistance(workerCoord, bikeCoord);\n      min = Math.min(min, distance + backtrack(worker + 1, mask | bit));\n    }\n\n    if (min === Infinity) min = 0;\n    memo[mask] = min;\n    return min;\n  };\n\n  const result = backtrack(0, 0, 0);\n\n  return result;\n};\n\nreturn assignBikes;\n",
+      "order": 0
     }
   }
 }
