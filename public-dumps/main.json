@@ -2757,6 +2757,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clr2fepji0001kf7zqyaw73ao": {
+      "id": "clr2fepji0001kf7zqyaw73ao",
+      "createdAt": "2024-01-06T18:56:21.966Z",
+      "updatedAt": "2024-01-06T18:56:21.966Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Profit in Job Scheduling",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/submissions",
+      "slug": "maximum-profit-in-job-scheduling",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clr2fl0hl0007kf7zj0wnf3s3": {
+      "id": "clr2fl0hl0007kf7zj0wnf3s3",
+      "createdAt": "2024-01-06T19:01:16.090Z",
+      "updatedAt": "2024-01-06T19:01:16.090Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Number of Events That Can Be Attended II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/",
+      "slug": "maximum-number-of-events-that-can-be-attended-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12544,6 +12572,93 @@
         }
       },
       "description": null
+    },
+    "clr2fepji0002kf7zrwi2lx1k": {
+      "id": "clr2fepji0002kf7zrwi2lx1k",
+      "createdAt": "2024-01-06T18:56:21.966Z",
+      "updatedAt": "2024-01-06T18:57:07.220Z",
+      "projectId": "clr2fepji0001kf7zqyaw73ao",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3cUnoDv6Q4biQHuAgp6pwp": {
+          "name": "3cUnoDv6Q4biQHuAgp6pwp",
+          "type": "array",
+          "input": "[3,4,5,6]",
+          "order": 1
+        },
+        "kiGsj7nUPqKeXv9nhVy66w": {
+          "name": "kiGsj7nUPqKeXv9nhVy66w",
+          "type": "array",
+          "input": "[1,2,3,3]",
+          "order": 0
+        },
+        "vefD87r9pASTWukWEqsaPD": {
+          "name": "vefD87r9pASTWukWEqsaPD",
+          "type": "array",
+          "input": "[50,10,40,70]",
+          "order": 2
+        }
+      },
+      "description": null
+    },
+    "clr2fjdhq0005kf7zaciiwgk8": {
+      "id": "clr2fjdhq0005kf7zaciiwgk8",
+      "createdAt": "2024-01-06T18:59:59.630Z",
+      "updatedAt": "2024-01-06T19:00:12.851Z",
+      "projectId": "clr2fepji0001kf7zqyaw73ao",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3cUnoDv6Q4biQHuAgp6pwp": {
+          "name": "3cUnoDv6Q4biQHuAgp6pwp",
+          "type": "array",
+          "input": "[3,5,10,6,9]",
+          "order": 1
+        },
+        "kiGsj7nUPqKeXv9nhVy66w": {
+          "name": "kiGsj7nUPqKeXv9nhVy66w",
+          "type": "array",
+          "input": "[1,2,3,4,6]",
+          "order": 0
+        },
+        "vefD87r9pASTWukWEqsaPD": {
+          "name": "vefD87r9pASTWukWEqsaPD",
+          "type": "array",
+          "input": "[20,20,100,70,60]",
+          "order": 2
+        }
+      },
+      "description": null
+    },
+    "clr2fl0hl0008kf7zz248z325": {
+      "id": "clr2fl0hl0008kf7zz248z325",
+      "createdAt": "2024-01-06T19:01:16.090Z",
+      "updatedAt": "2024-01-06T19:02:02.712Z",
+      "projectId": "clr2fl0hl0007kf7zj0wnf3s3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5uAFzdyjffMbxZD8AC6euL": {
+          "name": "5uAFzdyjffMbxZD8AC6euL",
+          "type": "array",
+          "input": "[[1,2,4],[3,4,3],[2,3,1]]",
+          "order": 0
+        },
+        "aZKxMQyQMXgLW9qoXuGdTE": {
+          "name": "aZKxMQyQMXgLW9qoXuGdTE",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -16420,6 +16535,58 @@
       "description": "",
       "code": "/**\n * @param {number[][]} workers\n * @param {number[][]} bikes\n * @return {number}\n */\nvar assignBikes = function (workers, bikes) {\n  const getDistance = ([x1, y1], [x2, y2]) =>\n    Math.abs(x1 - x2) + Math.abs(y1 - y2);\n\n  const memo = new Array();\n\n  const backtrack = (worker, mask) => {\n    if (worker >= workers.length) {\n      return 0;\n    }\n    if (memo[mask] !== undefined) return memo[mask];\n\n    let min = Infinity;\n\n    const workerCoord = workers[worker];\n    for (let bike = 0; bike < bikes.length; bike++) {\n      const bit = 1 << bike;\n      if (bit & mask) continue;\n\n      const bikeCoord = bikes[bike];\n      const distance = getDistance(workerCoord, bikeCoord);\n      min = Math.min(min, distance + backtrack(worker + 1, mask | bit));\n    }\n\n    if (min === Infinity) min = 0;\n    memo[mask] = min;\n    return min;\n  };\n\n  const result = backtrack(0, 0, 0);\n\n  return result;\n};\n\nreturn assignBikes;\n",
       "order": 0
+    },
+    "clr2fepji0003kf7zq0mb9bd0": {
+      "id": "clr2fepji0003kf7zq0mb9bd0",
+      "createdAt": "2024-01-06T18:56:21.966Z",
+      "updatedAt": "2024-01-06T18:58:42.829Z",
+      "projectId": "clr2fepji0001kf7zqyaw73ao",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} startTime\n * @param {number[]} endTime\n * @param {number[]} profit\n * @return {number}\n */\nvar jobScheduling = function (startTime, endTime, profit) {\n  const jobs = startTime.map((val, i) => [val, endTime[i], profit[i]]);\n  jobs.sort((a, b) => a[0] - b[0]);\n  const n = jobs.length;\n\n  const findNext = (left, end) => {\n    let right = n;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n\n      if (jobs[mid][0] < end) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return right;\n  };\n\n  const dp = new Array(n + 1).fill(0);\n\n  for (let i = n - 1; i >= 0; i--) {\n    const [, end, value] = jobs[i];\n    const nextIndex = findNext(i, end);\n    dp.setColor(i, \"cyan\");\n    dp.setColor(nextIndex, \"green\");\n    dp[i] = Math.max(value + dp[nextIndex], dp[i + 1]);\n  }\n\n  return dp[0];\n};\n\nreturn jobScheduling;\n",
+      "order": 0
+    },
+    "clr2fl0hl0009kf7z3h33qubu": {
+      "id": "clr2fl0hl0009kf7z3h33qubu",
+      "createdAt": "2024-01-06T19:01:16.090Z",
+      "updatedAt": "2024-01-06T19:21:03.755Z",
+      "projectId": "clr2fl0hl0007kf7zj0wnf3s3",
+      "title": "Time-Optimized DP",
+      "slug": "time-optimized-dp",
+      "timeComplexity": "O(n * (k + logn))",
+      "spaceComplexity": "O(n * k)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} events\n * @param {number} k\n * @return {number}\n */\nvar maxValue = function (events, k) {\n  const n = events.length;\n  events.sort((a, b) => a[0] - b[0]);\n\n  const findNext = (left, end) => {\n    let right = events.length;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n\n      if (events[mid][0] <= end) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return left;\n  };\n\n  const dp = Array.from(\n    { length: k + 1 },\n    (_, index) =>\n      Array.from({ length: n + 1 }, () => 0, null, {\n        parentName: \"dp\",\n        index,\n      }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  for (let i = n - 1; i >= 0; i--) {\n    const [, end, value] = events[i];\n    const nextIndex = findNext(i, end);\n\n    for (let count = 1; count <= k; count++) {\n      dp[count][i] = Math.max(\n        value,\n        value + dp[count - 1][nextIndex],\n        dp[count][i + 1],\n        dp[count - 1][i],\n      );\n    }\n  }\n\n  return dp[k][0];\n};\n\nreturn maxValue;\n",
+      "order": 0
+    },
+    "clr2foaoa000bkf7zymtptact": {
+      "id": "clr2foaoa000bkf7zymtptact",
+      "createdAt": "2024-01-06T19:03:49.258Z",
+      "updatedAt": "2024-01-06T19:22:00.119Z",
+      "projectId": "clr2fl0hl0007kf7zj0wnf3s3",
+      "title": "Space-Optimised DP",
+      "slug": "space-optimised-dp",
+      "timeComplexity": "O(n * k * logn)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} events\n * @param {number} k\n * @return {number}\n */\nvar maxValue = function (events, k) {\n  const n = events.length;\n  events.sort((a, b) => a[0] - b[0]);\n\n  const findNext = (left, end) => {\n    let right = events.length;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n\n      if (events[mid][0] <= end) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return left;\n  };\n\n  // prev count\n  let dp2 = new Array(n).fill(0);\n\n  for (let count = 1; count <= k; count++) {\n    const dp = new Array(n);\n    dp[n - 1] = events[n - 1][2];\n\n    for (let i = events.length - 2; i >= 0; i--) {\n      const [, end, value] = events[i];\n      let max = -Infinity;\n      const nextIndex = findNext(i + 1, end);\n      if (nextIndex < n) {\n        max = value + dp2[nextIndex];\n      }\n      max = Math.max(max, value, dp[i + 1]);\n      dp[i] = max;\n    }\n\n    dp2 = dp;\n  }\n\n  return dp2[0];\n};\n\nreturn maxValue;\n",
+      "order": 1
+    },
+    "clr2fq7n7000dkf7zkngrdmis": {
+      "id": "clr2fq7n7000dkf7zkngrdmis",
+      "createdAt": "2024-01-06T19:05:18.643Z",
+      "updatedAt": "2024-01-06T19:10:45.260Z",
+      "projectId": "clr2fl0hl0007kf7zj0wnf3s3",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(k * n * logn)",
+      "spaceComplexity": "O(k * n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} events\n * @param {number} k\n * @return {number}\n */\nvar maxValue = function (events, k) {\n  events.sort((a, b) => a[0] - b[0]);\n\n  const findNext = (left, end) => {\n    let right = events.length;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n\n      if (events[mid][0] <= end) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return left;\n  };\n\n  const dp = Array.from(\n    { length: events.length },\n    (_, index) =>\n      Array.from({ length: k + 1 }, () => 0, null, { parentName: \"dp\", index }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  for (let count = 1; count <= k; count++) {\n    for (let i = events.length - 1; i >= 0; i--) {\n      const [start, end, value] = events[i];\n      if (i === events.length - 1) {\n        dp[i][count] = value;\n      } else {\n        let max = -Infinity;\n        const nextIndex = findNext(i + 1, end);\n        if (nextIndex < events.length) {\n          max = value + dp[nextIndex][count - 1];\n        }\n        max = Math.max(max, value, dp[i + 1][count]);\n        dp[i][count] = max;\n      }\n    }\n  }\n\n  return dp[0][k];\n};\n\nreturn maxValue;\n",
+      "order": 2
     }
   }
 }
