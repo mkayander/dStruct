@@ -1,3 +1,10 @@
+# [1.248.0](https://github.com/mkayander/leetpal/compare/v1.247.0...v1.248.0) (2024-01-08)
+
+
+### Features
+
+* Added map structure view component ([29d1ede](https://github.com/mkayander/leetpal/commit/29d1edeb70c5e0cfcb4cb4db5a5235288f51dad7))
+
 # [1.247.0](https://github.com/mkayander/leetpal/compare/v1.246.0...v1.247.0) (2024-01-03)
 
 
