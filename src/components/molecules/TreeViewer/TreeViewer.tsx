@@ -6,6 +6,7 @@ import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
+import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructureView";
 import { MatrixStructureView } from "#/components/molecules/TreeViewer/MatrixStructureView";
 import { NodesView } from "#/components/molecules/TreeViewer/NodesView";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
@@ -126,7 +127,9 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     const arrayNodes = [];
 
     for (const [arrayName, data] of sorted) {
-      if (data.argType === ArgumentType.MATRIX) {
+      if (data.argType === ArgumentType.MAP) {
+        arrayNodes.push(<MapStructureView data={data} />);
+      } else if (data.argType === ArgumentType.MATRIX) {
         arrayNodes.push(
           <MatrixStructureView
             key={arrayName}

@@ -1,23 +1,23 @@
 import { alpha, Box, useTheme } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
-import { MatrixRow } from "#/components/molecules/TreeViewer/MatrixRow";
+import { MapItem } from "#/components/molecules/TreeViewer/MapItem";
 import {
   type ArrayData,
-  type ArrayDataState,
+  arrayDataItemSelectors,
 } from "#/store/reducers/structures/arrayReducer";
 
-type MatrixStructureViewProps = {
+type MapStructureViewProps = {
   data: ArrayData;
-  arrayState: ArrayDataState;
 };
 
-export const MapStructureView: React.FC<MatrixStructureViewProps> = ({
-  data,
-  arrayState,
-}) => {
+export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
   const theme = useTheme();
-  const borderColor = `1px solid ${alpha(theme.palette.primary.light, 0.3)}`;
+  const border = `1px solid ${alpha(theme.palette.primary.light, 0.3)}`;
+  const items = useMemo(
+    () => arrayDataItemSelectors.selectAll(data.nodes),
+    [data.nodes],
+  );
 
   return (
     <Box
@@ -25,19 +25,24 @@ export const MapStructureView: React.FC<MatrixStructureViewProps> = ({
       sx={{
         width: "fit-content",
         borderCollapse: "collapse",
-        border: borderColor,
+        border,
         td: {
-          border: borderColor,
+          // border,
         },
       }}
     >
       <tbody>
-        {data.childNames?.map((name) => {
-          const data = arrayState[name];
-          if (!data) return null;
-
-          return <MatrixRow key={name} data={data} />;
-        })}
+        {items.map((item) => (
+          <MapItem key={item.id} item={item} colorMap={data.colorMap} />
+        ))}
+        {items.length === 0 && (
+          <Box
+            sx={{
+              width: 101,
+              height: 44,
+            }}
+          />
+        )}
       </tbody>
     </Box>
   );
