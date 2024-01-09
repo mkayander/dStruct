@@ -1,3 +1,12 @@
+# [1.249.0](https://github.com/mkayander/leetpal/compare/v1.248.0...v1.249.0) (2024-01-09)
+
+
+### Features
+
+* Implement map item component ([b5a1563](https://github.com/mkayander/leetpal/commit/b5a1563b0310bb1ea5b64a9ed26c46bd0f838671))
+* Implement map structure view rendering ([8c237f9](https://github.com/mkayander/leetpal/commit/8c237f9b79d902859e6f06c96a4b17d350424c37))
+* Stringify value ([d68d812](https://github.com/mkayander/leetpal/commit/d68d8124c932dddf8e30f52edfdb53537844f017))
+
 # [1.248.0](https://github.com/mkayander/leetpal/compare/v1.247.0...v1.248.0) (2024-01-08)
 
 
