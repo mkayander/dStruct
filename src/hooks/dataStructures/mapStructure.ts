@@ -9,6 +9,7 @@ import {
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
+import { safeStringify } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 
@@ -72,6 +73,7 @@ export class ControlledMap extends ArrayBase {
     if (this.itemsMeta.has(key)) {
       const base = this.getDispatchBase(key);
       const prevData = this.itemsMeta.get(key)!;
+      value = safeStringify(value);
       this.itemsMeta.set(key, {
         ...prevData,
         value,
