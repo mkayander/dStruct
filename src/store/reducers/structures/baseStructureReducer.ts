@@ -11,6 +11,7 @@ export type StructureNode = {
   id: string;
   value: string | number;
   color?: string;
+  info?: Record<string, any>;
   animation?: AnimationName;
   isHighlighted?: boolean;
 };
