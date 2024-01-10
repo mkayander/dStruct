@@ -1,3 +1,15 @@
+# [1.250.0](https://github.com/mkayander/leetpal/compare/v1.249.0...v1.250.0) (2024-01-10)
+
+
+### Bug Fixes
+
+* Update callstack value display ([9890059](https://github.com/mkayander/leetpal/commit/989005958446a8b1b03cdb93b300b4da04105632))
+
+
+### Features
+
+* Add info node property ([4fb3c2e](https://github.com/mkayander/leetpal/commit/4fb3c2eda0681e6f7389488aaa7ed71422bd5b18))
+
 # [1.249.0](https://github.com/mkayander/leetpal/compare/v1.248.0...v1.249.0) (2024-01-09)
 
 
