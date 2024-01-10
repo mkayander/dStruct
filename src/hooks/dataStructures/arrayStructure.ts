@@ -74,7 +74,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [actionArrayData, options],
+          args: { arrayData: actionArrayData, options },
         }),
       );
     }
@@ -103,7 +103,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
               nodeId: newItem.id,
               timestamp: performance.now(),
               name: "addArrayItem",
-              args: [value, index, undefined],
+              args: { value, index },
             }),
           );
           this.itemsMeta[index] = newItem;
@@ -119,7 +119,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
           callstackSlice.actions.addOne({
             ...base,
             name: "setVal",
-            args: [value],
+            args: { value },
           }),
         );
         return true;
@@ -182,7 +182,6 @@ export class ControlledArray<T> extends ArrayBase<T> {
       callstackSlice.actions.addOne({
         ...base,
         name: "deleteNode",
-        args: [],
       }),
     );
     this.itemsMeta.pop();

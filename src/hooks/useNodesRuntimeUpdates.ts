@@ -47,8 +47,8 @@ export const useNodesRuntimeUpdates = (
               data: {
                 id: frame.nodeId,
                 changes: {
-                  color: frame.args[0] ?? undefined,
-                  animation: validateAnimationName(frame.args[1]),
+                  color: frame.args.color ?? undefined,
+                  animation: validateAnimationName(frame.args.animation),
                 },
               },
             }),
@@ -60,7 +60,21 @@ export const useNodesRuntimeUpdates = (
             slice.actions.setColorMap({
               name: treeName,
               data: {
-                colorMap: frame.args[0],
+                colorMap: frame.args.colorMap,
+              },
+            }),
+          );
+          break;
+
+        case "setInfo":
+          dispatch(
+            slice.actions.update({
+              name: treeName,
+              data: {
+                id: frame.nodeId,
+                changes: {
+                  info: frame.args.info,
+                },
               },
             }),
           );
@@ -73,7 +87,7 @@ export const useNodesRuntimeUpdates = (
               data: {
                 id: frame.nodeId,
                 changes: {
-                  value: frame.args[0] ?? undefined,
+                  value: frame.args.value ?? undefined,
                 },
               },
             }),
@@ -86,14 +100,13 @@ export const useNodesRuntimeUpdates = (
             (frame.argType === ArgumentType.BINARY_TREE ||
               frame.argType === ArgumentType.LINKED_LIST)
           ) {
-            const [value] = frame.args;
             dispatch(
               slice.actions.add({
                 name: treeName,
                 data: {
                   id: frame.nodeId,
                   argType: frame.argType,
-                  value,
+                  value: frame.args.value,
                   depth: 0,
                   y: 0,
                   x: 0,
@@ -111,9 +124,7 @@ export const useNodesRuntimeUpdates = (
                 name: treeName,
                 data: {
                   id: frame.nodeId,
-                  value: frame.args[0],
-                  index: frame.args[1],
-                  key: frame.args[2],
+                  ...frame.args,
                 },
               }),
             );
@@ -126,9 +137,9 @@ export const useNodesRuntimeUpdates = (
               slice.actions.create({
                 name: treeName,
                 data: {
-                  nodes: frame.args[0],
+                  nodes: frame.args.arrayData,
                   argType: frame.argType,
-                  options: frame.args[1],
+                  options: frame.args.options,
                 },
               }),
             );
@@ -148,7 +159,7 @@ export const useNodesRuntimeUpdates = (
         case "setNextNode":
         case "setLeftChild":
           if ("setChildId" in slice.actions) {
-            const [childId, childTreeName] = frame.args;
+            const { childId, childTreeName } = frame.args;
             dispatch(
               slice.actions.setChildId({
                 name: treeName,
@@ -164,7 +175,7 @@ export const useNodesRuntimeUpdates = (
           break;
         case "setRightChild":
           if ("setChildId" in slice.actions) {
-            const [childId, childTreeName] = frame.args;
+            const { childId, childTreeName } = frame.args;
             dispatch(
               slice.actions.setChildId({
                 name: treeName,

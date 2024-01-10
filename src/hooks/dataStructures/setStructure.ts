@@ -59,7 +59,7 @@ export class ControlledSet extends ArrayBase {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [arrayData, undefined],
+          args: { arrayData },
         }),
       );
     }
@@ -84,7 +84,7 @@ export class ControlledSet extends ArrayBase {
         nodeId: newItem.id,
         timestamp: performance.now(),
         name: "addArrayItem",
-        args: [value, index, undefined],
+        args: { value, index },
       }),
     );
     this.itemsMeta.set(value, newItem);
@@ -100,7 +100,6 @@ export class ControlledSet extends ArrayBase {
       callstackSlice.actions.addOne({
         ...base,
         name: "deleteNode",
-        args: [],
       }),
     );
 

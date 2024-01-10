@@ -62,7 +62,7 @@ export class ControlledMap extends ArrayBase {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [arrayData, undefined],
+          args: { arrayData },
         }),
       );
     }
@@ -82,7 +82,7 @@ export class ControlledMap extends ArrayBase {
         callstackSlice.actions.addOne({
           ...base,
           name: "setVal",
-          args: [value],
+          args: { value },
         }),
       );
     } else {
@@ -102,7 +102,7 @@ export class ControlledMap extends ArrayBase {
           nodeId: newItem.id,
           timestamp: performance.now(),
           name: "addArrayItem",
-          args: [value, index, key],
+          args: { value, index, key },
         }),
       );
     }
@@ -119,7 +119,6 @@ export class ControlledMap extends ArrayBase {
       callstackSlice.actions.addOne({
         ...base,
         name: "deleteNode",
-        args: [],
       }),
     );
 

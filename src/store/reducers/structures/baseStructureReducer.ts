@@ -20,7 +20,7 @@ export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   nodes: EntityState<N>;
   initialNodes: EntityState<N> | null;
   isRuntime: boolean;
-  colorMap: Record<string | number, string>;
+  colorMap?: Record<string | number, string>;
 };
 
 export const getInitialDataBase = <N extends StructureNode>(
@@ -29,7 +29,6 @@ export const getInitialDataBase = <N extends StructureNode>(
   nodes: adapter.getInitialState(),
   initialNodes: null,
   isRuntime: false,
-  colorMap: {},
 });
 
 export type BaseStructureState<

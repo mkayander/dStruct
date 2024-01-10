@@ -46,7 +46,7 @@ export class ControlledString extends ArrayBase {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: [arrayData, undefined],
+          args: { arrayData },
         }),
       );
     }

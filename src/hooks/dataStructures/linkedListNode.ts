@@ -25,7 +25,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addNode",
-          args: [safeStringify(val)],
+          args: { value: safeStringify(val) },
         }),
       );
     }
@@ -44,22 +44,12 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setNextNode",
-        args: [node?.meta.id ?? null, node?.name],
+        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
       }),
     );
     if (node) {
       node.name = this.name;
     }
-  }
-
-  public delete() {
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "deleteNode",
-        args: [],
-      }),
-    );
   }
 
   static fromNodeData(
@@ -96,5 +86,14 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
     }
 
     return newNode;
+  }
+
+  public delete() {
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "deleteNode",
+      }),
+    );
   }
 }

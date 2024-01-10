@@ -20,7 +20,7 @@ export class BinaryTreeNode<
   T extends number | string = number | string,
 > extends NodeBase<T> {
   constructor(
-    val: T,
+    value: T,
     left: BinaryTreeNode<T> | null = null,
     right: BinaryTreeNode<T> | null = null,
     meta: BinaryNodeMeta<T>,
@@ -28,7 +28,7 @@ export class BinaryTreeNode<
     dispatch: AppDispatch,
     addToCallstack?: boolean,
   ) {
-    super(val, meta, name, dispatch);
+    super(value, meta, name, dispatch);
     Object.defineProperties(this, {
       _left: {
         value: left,
@@ -47,7 +47,7 @@ export class BinaryTreeNode<
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addNode",
-          args: [val],
+          args: { value },
         }),
       );
     }
@@ -66,7 +66,7 @@ export class BinaryTreeNode<
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setLeftChild",
-        args: [node?.meta.id ?? null, node?.name],
+        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
       }),
     );
   }
@@ -84,7 +84,7 @@ export class BinaryTreeNode<
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setRightChild",
-        args: [node?.meta.id ?? null, node?.name],
+        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
       }),
     );
   }

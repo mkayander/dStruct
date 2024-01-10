@@ -31,58 +31,60 @@ type NodeFrameBase = CallFrameBase & {
   nodeId: string;
 };
 
-type SetColorFrameFn = (color: string | null, animation?: string) => void;
 type SetColorFrame = NodeFrameBase & {
   name: "setColor";
-  args: Parameters<SetColorFrameFn>;
+  args: { color: string | null; animation?: string };
 };
 
 type SetColorMapFrame = CallFrameBase & {
   name: "setColorMap";
-  args: [Record<number | string, string>];
+  args: { colorMap: Record<number | string, string> };
+};
+
+type SetInfoFrame = NodeFrameBase & {
+  name: "setInfo";
+  args: { info: Record<string, any> };
 };
 
 type SetValFrame = NodeFrameBase & {
   name: "setVal";
-  args: [number | string | null];
+  args: { value: number | string | null };
 };
 
 type SetChildFrame = NodeFrameBase & {
   name: "setLeftChild" | "setRightChild" | "setNextNode";
-  args: [string | null, string | undefined];
+  args: { childId: string | null; childTreeName?: string };
 };
 
 type ShowPointerFrame = NodeFrameBase & {
   name: "showPointer";
-  args: [string];
+  args: { name: string };
 };
 
 type BlinkFrame = NodeFrameBase & {
   name: "blink";
-  args: [];
 };
 
 type AddNodeFrame = NodeFrameBase & {
   name: "addNode";
-  args: [number | string];
+  args: { value: number | string };
 };
 
 type AddArrayItemFrame = NodeFrameBase & {
   name: "addArrayItem";
-  args: [number | string, number, number | string | undefined];
+  args: { value: number | string; index: number; key?: number | string };
 };
 
 type AddArrayFrame = CallFrameBase & {
   name: "addArray";
-  args: [
-    EntityState<ArrayItemData> | undefined,
-    ControlledArrayRuntimeOptions | undefined,
-  ];
+  args: {
+    arrayData?: EntityState<ArrayItemData>;
+    options?: ControlledArrayRuntimeOptions;
+  };
 };
 
 type DeleteNodeFrame = NodeFrameBase & {
   name: "deleteNode";
-  args: [];
 };
 
 type ConsoleLogFrame = {
@@ -101,6 +103,7 @@ export type CallFrame =
   | DeleteNodeFrame
   | SetColorFrame
   | SetColorMapFrame
+  | SetInfoFrame
   | SetValFrame
   | SetChildFrame
   | BlinkFrame

@@ -29,7 +29,6 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         callstackSlice.actions.addOne({
           ...base,
           name: "blink",
-          args: [],
         }),
       );
     }
@@ -41,7 +40,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         callstackSlice.actions.addOne({
           ...base,
           name: "setColor",
-          args: [color, animation],
+          args: { color, animation },
         }),
       );
     }
@@ -53,19 +52,19 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         callstackSlice.actions.addOne({
           ...base,
           name: "showPointer",
-          args: [name],
+          args: { name },
         }),
       );
     }
 
-    public setColorMap(map: Record<string, string>) {
+    public setColorMap(colorMap: Record<string, string>) {
       const base = this.getDispatchBase();
       if (!base) return;
       this.dispatch(
         callstackSlice.actions.addOne({
           ...base,
           name: "setColorMap",
-          args: [map],
+          args: { colorMap },
         }),
       );
     }

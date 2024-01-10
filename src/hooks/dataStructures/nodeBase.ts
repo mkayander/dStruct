@@ -13,9 +13,8 @@ export interface NodeMeta {
 }
 
 export abstract class NodeBase<T extends number | string> {
-  _val!: T;
-  protected name!: string;
   readonly meta!: NodeMeta;
+  protected name!: string;
   protected readonly dispatch!: AppDispatch;
 
   protected constructor(
@@ -46,6 +45,8 @@ export abstract class NodeBase<T extends number | string> {
     });
   }
 
+  _val!: T;
+
   public get val(): T {
     return this._val;
   }
@@ -56,7 +57,7 @@ export abstract class NodeBase<T extends number | string> {
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setVal",
-        args: [value],
+        args: { value },
       }),
     );
   }
@@ -66,19 +67,19 @@ export abstract class NodeBase<T extends number | string> {
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "setColor",
-        args: [color, animation],
+        args: { color, animation },
       }),
     );
   }
 
-  public setColorMap(map: Record<T, string>) {
+  public setColorMap(colorMap: Record<T, string>) {
     const base = this.getDispatchBase();
     if (!base) return;
     this.dispatch(
       callstackSlice.actions.addOne({
         ...base,
         name: "setColorMap",
-        args: [map],
+        args: { colorMap },
       }),
     );
   }
@@ -88,7 +89,16 @@ export abstract class NodeBase<T extends number | string> {
       callstackSlice.actions.addOne({
         ...this.getDispatchBase(),
         name: "blink",
-        args: [],
+      }),
+    );
+  }
+
+  public setInfo(info: Record<string, any>) {
+    this.dispatch(
+      callstackSlice.actions.addOne({
+        ...this.getDispatchBase(),
+        name: "setInfo",
+        args: { info },
       }),
     );
   }

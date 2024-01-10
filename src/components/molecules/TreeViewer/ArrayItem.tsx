@@ -5,7 +5,7 @@ import { useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 type ArrayItemProps = ArrayItemData & {
-  colorMap: Record<number | string, string>;
+  colorMap?: Record<number | string, string>;
   isGrid?: boolean;
 };
 
@@ -15,7 +15,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
   colorMap,
   isGrid,
 }) => {
-  const valueColor = colorMap[value];
+  const valueColor = colorMap?.[value];
   const { nodeColor } = useNodeColors(color ?? valueColor, false);
 
   return (
