@@ -1,3 +1,10 @@
+## [1.250.1](https://github.com/mkayander/leetpal/compare/v1.250.0...v1.250.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* Improve brackets logic ([c4a2d82](https://github.com/mkayander/leetpal/commit/c4a2d82fdfec7c4184ecab3ba0259351e5ecc64d))
+
 # [1.250.0](https://github.com/mkayander/leetpal/compare/v1.249.0...v1.250.0) (2024-01-10)
 
 
