@@ -23,6 +23,7 @@ import {
   selectNodeDataById,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
+import { safeStringify } from "#/utils/stringifySolutionResult";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,
@@ -91,20 +92,21 @@ const NodeCell: React.FC<{ treeName: string; id: string }> = ({
 };
 
 const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
+  if (!("args" in frame)) {
+    return <span>---</span>;
+  }
+
   switch (frame.name) {
     case "setLeftChild":
     case "setRightChild":
-      return frame.args[0] ? (
-        <NodeCell treeName={frame.treeName} id={frame.args[0]} />
+      return frame.args.childId ? (
+        <NodeCell treeName={frame.treeName} id={frame.args.childId} />
       ) : (
         <span>null</span>
       );
 
-    case "error":
-      return <span>---</span>;
-
     default:
-      return <span>{frame.args.toString()}</span>;
+      return <pre>{safeStringify(frame.args)}</pre>;
   }
 };
 
@@ -123,7 +125,7 @@ export const CallstackTable: React.FC = () => {
               <TableCell>{LL.NODE()}</TableCell>
               <TableCell align="right">{LL.ACTION()}</TableCell>
               <TableCell align="right">{LL.TIMESTAMP()}</TableCell>
-              <TableCell align="right">{LL.ARGUMENTS()}</TableCell>
+              <TableCell align="left">{LL.ARGUMENTS()}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -141,7 +143,7 @@ export const CallstackTable: React.FC = () => {
                 <TableCell align="right">
                   {`+${(frame.timestamp - startTimestamp).toFixed(2)} ms`}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="left">
                   <ArgumentsCell frame={frame} />
                 </TableCell>
               </TableRow>
