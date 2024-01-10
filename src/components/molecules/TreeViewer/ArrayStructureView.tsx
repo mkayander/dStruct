@@ -9,11 +9,19 @@ import {
 import { ArgumentType } from "#/utils/argumentObject";
 
 type ArrayBracketProps = {
+  argType: ArgumentType;
   side?: "left" | "right";
 };
 
-const ArrayBracket: React.FC<ArrayBracketProps> = ({ side = "left" }) => {
+const ArrayBracket: React.FC<ArrayBracketProps> = ({
+  argType,
+  side = "left",
+}) => {
   const theme = useTheme();
+  if (argType === ArgumentType.STRING) {
+    return '"';
+  }
+
   const borderStyle = `2px solid ${theme.palette.primary.light}`;
 
   return (
@@ -50,6 +58,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
     return arrayDataItemSelectors.selectAll(data.nodes);
   }, [data.nodes]);
 
+  const { argType } = data;
   const isArray = data.argType === ArgumentType.ARRAY;
 
   return (
@@ -69,7 +78,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
         },
       }}
     >
-      {isArray ? <ArrayBracket /> : <Typography>&quot;</Typography>}
+      <ArrayBracket argType={argType} />
       <Stack direction="row">
         {items.length > 0 ? (
           items.map((item) => (
@@ -85,7 +94,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
         )}
       </Stack>
       {isArray ? (
-        <ArrayBracket side="right" />
+        <ArrayBracket argType={argType} side="right" />
       ) : (
         <Typography>&quot;</Typography>
       )}
