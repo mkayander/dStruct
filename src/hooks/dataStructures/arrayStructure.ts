@@ -87,7 +87,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
           return true;
         }
 
-        const prevData = this.itemsMeta[index];
+        const prevData = this.getNodeMeta(index);
         if (!prevData) {
           const newItem = {
             id: uuid.generate(),
