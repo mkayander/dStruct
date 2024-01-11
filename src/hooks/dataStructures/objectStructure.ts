@@ -68,7 +68,7 @@ export class ControlledObject extends ArrayBase {
         target[key as any] = value;
 
         let childName: string | undefined = undefined;
-        if (value instanceof ControlledObject) {
+        if (value.argType && value.name) {
           childName = value.name;
           value = null;
         }
