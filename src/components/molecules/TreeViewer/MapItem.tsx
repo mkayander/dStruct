@@ -26,7 +26,7 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
         backgroundColor: nodeColor && alpha(nodeColor, 0.1),
         td: {
           minWidth: 44,
-          padding: "0 8px",
+          padding: "0 4px",
           "&.arrow": {
             opacity: 0.7,
             minWidth: "initial",
@@ -54,7 +54,7 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
         },
       }}
     >
-      <td>{safeStringify(key)}</td>
+      <td style={{ textAlign: "center" }}>{safeStringify(key)}</td>
       <td className="arrow">&rArr;</td>
       <td style={{ position: "relative", zIndex: 20 }}>
         {isValueNested ? <NestedStructure item={item} /> : safeStringify(value)}

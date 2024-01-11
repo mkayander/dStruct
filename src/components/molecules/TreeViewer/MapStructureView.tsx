@@ -26,9 +26,6 @@ export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
         width: "fit-content",
         borderCollapse: "collapse",
         border,
-        td: {
-          // border,
-        },
       }}
     >
       <tbody>

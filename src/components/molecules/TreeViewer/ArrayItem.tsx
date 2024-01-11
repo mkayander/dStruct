@@ -15,7 +15,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
   colorMap,
   isGrid,
 }) => {
-  const valueColor = colorMap?.[value];
+  const valueColor = colorMap?.[String(value)];
   const { nodeColor } = useNodeColors(color ?? valueColor, false);
 
   return (
