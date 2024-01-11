@@ -146,18 +146,18 @@ export const arrayDataSelector = (state: RootState) => state.arrayStructure;
 
 export const arrayDataItemSelectors = arrayDataAdapter.getSelectors();
 
-export const selectAllArrayData = (name: string) =>
-  createSelector(arrayDataSelector, (state) => {
-    const treeState = getStateByName(state, name);
-    if (!treeState) return [];
-
-    return arrayDataItemSelectors.selectAll(treeState.nodes);
-  });
-
 export const selectArrayItemDataById = (name: string, id: string) =>
   createSelector(arrayDataSelector, (state) => {
     const treeState = getStateByName(state, name);
     if (!treeState) return null;
 
     return arrayDataItemSelectors.selectById(treeState.nodes, id);
+  });
+
+export const selectArrayStateByName = (name: string) =>
+  createSelector(arrayDataSelector, (state) => {
+    const treeState = getStateByName(state, name);
+    if (!treeState) return null;
+
+    return treeState;
   });
