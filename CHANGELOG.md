@@ -1,3 +1,24 @@
+# [1.252.0](https://github.com/mkayander/leetpal/compare/v1.251.0...v1.252.0) (2024-01-11)
+
+
+### Bug Fixes
+
+* Fix TS error ([bd82d6f](https://github.com/mkayander/leetpal/commit/bd82d6fb119850a469dbf4fa6ba144b2fea459f9))
+* Fix TS error ([93f52a8](https://github.com/mkayander/leetpal/commit/93f52a838d55985e6efbf936f4f66be7b8a2169c))
+
+
+### Features
+
+* Added controlled object handling ([4c52c70](https://github.com/mkayander/leetpal/commit/4c52c708755ddfda01e50286fc74e6dcf7aac26e))
+* Added new array data selector ([b304c1b](https://github.com/mkayander/leetpal/commit/b304c1b89f025ca77e15320f4fdd13b5f60f49d4))
+* Added Object arg type ([e6af4f6](https://github.com/mkayander/leetpal/commit/e6af4f61757c5a783832dff25a4385d06078e4c9))
+* Added toArray method for the Queue structure ([0101647](https://github.com/mkayander/leetpal/commit/0101647ce1c2c1e0ecacab43e8da49334e811975))
+* Apply a controlled Object proxy ([76fca0f](https://github.com/mkayander/leetpal/commit/76fca0f82b97ad41e98f9f6d6a51d5003145fd6a))
+* Check for argType and name ([1ad69a7](https://github.com/mkayander/leetpal/commit/1ad69a7ffe958ded165fdf1dfef036147ccd3e31))
+* Implemented a nested structure component ([0380285](https://github.com/mkayander/leetpal/commit/038028533b6c3371f6809d94e693515593084e2d))
+* Implemented controlled object structure ([0dfffc7](https://github.com/mkayander/leetpal/commit/0dfffc79b05ebd8b4b6db91f05c7be18f0491bca))
+* Improved nested component rendering ([83aaf5b](https://github.com/mkayander/leetpal/commit/83aaf5b33da136c177744b942c85161df28edf87))
+
 # [1.251.0](https://github.com/mkayander/leetpal/compare/v1.250.1...v1.251.0) (2024-01-11)
 
 
