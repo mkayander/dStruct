@@ -73,7 +73,13 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
       type: ArgumentType.LINKED_LIST,
     } satisfies NodeMeta;
 
-    const newNode = new LinkedListNode(value, null, newMeta, name, dispatch);
+    const newNode = new LinkedListNode(
+      value ?? "",
+      null,
+      newMeta,
+      name,
+      dispatch,
+    );
 
     if (nextId) {
       newNode.next = LinkedListNode.fromNodeData(
