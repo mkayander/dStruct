@@ -7,6 +7,7 @@ export enum ArgumentType {
   "ARRAY" = "array",
   "SET" = "set",
   "MAP" = "map",
+  "OBJECT" = "object",
   "MATRIX" = "matrix",
   "STRING" = "string",
   "NUMBER" = "number",
@@ -23,7 +24,8 @@ export type ArgumentArrayType =
   | ArgumentType.MATRIX
   | ArgumentType.STRING
   | ArgumentType.SET
-  | ArgumentType.MAP;
+  | ArgumentType.MAP
+  | ArgumentType.OBJECT;
 
 export const argumentTreeTypeValues = new Set([
   ArgumentType.BINARY_TREE,
@@ -65,7 +67,8 @@ export function isArgumentArrayType(
     arg === ArgumentType.MATRIX ||
     arg === ArgumentType.STRING ||
     arg === ArgumentType.SET ||
-    arg === ArgumentType.MAP
+    arg === ArgumentType.MAP ||
+    arg === ArgumentType.OBJECT
   );
 }
 
@@ -114,6 +117,7 @@ export const argumentTypeLabels: Record<ArgumentType, string> = {
   [ArgumentType.STRING]: "String",
   [ArgumentType.SET]: "Set",
   [ArgumentType.MAP]: "Map",
+  [ArgumentType.OBJECT]: "Object",
   [ArgumentType.NUMBER]: "Number",
   [ArgumentType.BOOLEAN]: "Boolean",
 };

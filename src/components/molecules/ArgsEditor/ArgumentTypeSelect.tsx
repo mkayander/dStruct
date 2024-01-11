@@ -1,6 +1,7 @@
 import {
   AccountTree,
   DataArray,
+  DataObject,
   GridOn,
   Link,
   ListAlt,
@@ -48,6 +49,7 @@ const typeIconsMap: Record<ArgumentType, React.ReactElement> = {
   [ArgumentType.STRING]: <TextFields sx={iconSxProps} />,
   [ArgumentType.SET]: <SettingsEthernet sx={iconSxProps} />,
   [ArgumentType.MAP]: <ListAlt sx={iconSxProps} />,
+  [ArgumentType.OBJECT]: <DataObject sx={iconSxProps} />,
 };
 
 export const ArgumentTypeSelect: React.FC<ArgumentTypeSelectProps> = ({
