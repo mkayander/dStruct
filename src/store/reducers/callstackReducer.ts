@@ -48,7 +48,7 @@ type SetInfoFrame = NodeFrameBase & {
 
 type SetValFrame = NodeFrameBase & {
   name: "setVal";
-  args: { value: number | string | null };
+  args: { value: number | string | null; childName?: string };
 };
 
 type SetChildFrame = NodeFrameBase & {
@@ -72,7 +72,12 @@ type AddNodeFrame = NodeFrameBase & {
 
 type AddArrayItemFrame = NodeFrameBase & {
   name: "addArrayItem";
-  args: { value: number | string; index: number; key?: number | string };
+  args: {
+    value?: number | string;
+    childName?: string;
+    index: number;
+    key?: number | string;
+  };
 };
 
 type AddArrayFrame = CallFrameBase & {

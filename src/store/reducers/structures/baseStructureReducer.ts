@@ -9,7 +9,8 @@ export type AnimationName = "blink";
 
 export type StructureNode = {
   id: string;
-  value: string | number;
+  value?: string | number;
+  childName?: string;
   color?: string;
   info?: Record<string, any>;
   animation?: AnimationName;
@@ -20,6 +21,7 @@ export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   nodes: EntityState<N>;
   initialNodes: EntityState<N> | null;
   isRuntime: boolean;
+  isNested?: boolean;
   colorMap?: Record<string | number, string>;
 };
 
@@ -87,7 +89,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
   };
 
   return {
-    add: <T extends BaseStructureState>(state: T, action: NamedPayload<N>) =>
+    add: <T extends BaseStructureState>(state: T, action: NamedPayload<N>) => {
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
@@ -96,7 +98,15 @@ export const getBaseStructureReducers = <N extends StructureNode>(
         } = action;
 
         adapter.addOne(treeState.nodes, { id, ...node });
-      }),
+      });
+
+      const childName = action.payload.data.childName;
+      if (childName) {
+        runStateActionByName(state, childName, (treeState) => {
+          treeState.isNested = true;
+        });
+      }
+    },
     addMany: <T extends BaseStructureState>(
       state: T,
       action: NamedPayload<N[]>,

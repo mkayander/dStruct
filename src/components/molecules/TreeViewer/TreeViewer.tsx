@@ -121,13 +121,16 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const arrayStructures = useMemo(() => {
     if (!arrayState) return null;
 
-    const sorted = Object.entries(arrayState).sort(
-      ([, { order: a }], [, { order: b }]) => a - b,
-    );
+    const sorted = Object.entries(arrayState)
+      .filter(([, item]) => !item.isNested)
+      .sort(([, { order: a }], [, { order: b }]) => a - b);
     const arrayNodes = [];
 
     for (const [arrayName, data] of sorted) {
-      if (data.argType === ArgumentType.MAP) {
+      if (
+        data.argType === ArgumentType.MAP ||
+        data.argType === ArgumentType.OBJECT
+      ) {
         arrayNodes.push(<MapStructureView data={data} />);
       } else if (data.argType === ArgumentType.MATRIX) {
         arrayNodes.push(

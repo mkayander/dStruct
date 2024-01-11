@@ -1,8 +1,9 @@
 import { alpha, Box } from "@mui/material";
 import React from "react";
 
+import { NestedStructure } from "#/components/molecules/TreeViewer/NestedStructure";
 import { useNodeColors } from "#/hooks";
-import type { ArrayItemData } from "#/store/reducers/structures/arrayReducer";
+import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { safeStringify } from "#/utils/stringifySolutionResult";
 
 type MapItemProps = {
@@ -10,12 +11,11 @@ type MapItemProps = {
   colorMap?: Record<number | string, string>;
 };
 
-export const MapItem: React.FC<MapItemProps> = ({
-  item: { key, value, color },
-  colorMap,
-}) => {
-  const valueColor = colorMap?.[value];
+export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
+  const { key, value, childName, color } = item;
+  const valueColor = colorMap?.[String(value)];
   const { nodeColor } = useNodeColors(color ?? valueColor, false);
+  const isValueNested = Boolean(childName);
 
   return (
     <Box
@@ -56,7 +56,9 @@ export const MapItem: React.FC<MapItemProps> = ({
     >
       <td>{safeStringify(key)}</td>
       <td className="arrow">&rArr;</td>
-      <td>{safeStringify(value)}</td>
+      <td style={{ position: "relative", zIndex: 20 }}>
+        {isValueNested ? <NestedStructure item={item} /> : safeStringify(value)}
+      </td>
     </Box>
   );
 };
