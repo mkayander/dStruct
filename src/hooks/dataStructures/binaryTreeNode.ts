@@ -133,7 +133,7 @@ export class BinaryTreeNode<
     }
 
     return new BinaryTreeNode(
-      value,
+      value ?? "",
       leftNode,
       rightNode,
       { ...newMeta, id, type: ArgumentType.BINARY_TREE },
