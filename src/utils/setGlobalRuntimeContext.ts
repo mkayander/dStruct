@@ -8,6 +8,7 @@ import {
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledMap } from "#/hooks/dataStructures/mapStructure";
+import { ControlledObject } from "#/hooks/dataStructures/objectStructure";
 import { ControlledSet } from "#/hooks/dataStructures/setStructure";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { type AppDispatch } from "#/store/makeStore";
@@ -116,6 +117,13 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     }
   }
 
+  class ObjectProxy extends ControlledObject {
+    constructor(input?: any) {
+      const data = generateArrayData([]);
+      super(input, uuid.generate(), data, dispatch, true);
+    }
+  }
+
   class Queue<T extends number | string> {
     private head: LinkedList<T> | null = null;
     private tail: LinkedList<T> | null = null;
@@ -178,6 +186,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     StringProxy,
     SetProxy,
     MapProxy,
+    ObjectProxy,
     Queue,
     PriorityQueue,
     BinaryTree,

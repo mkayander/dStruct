@@ -24,6 +24,7 @@ const globalDefinitionsPrefix = `
   const String = window.StringProxy;
   const Set = window.SetProxy;
   const Map = window.MapProxy;
+  const Object = window.ObjectProxy;
 `.trim();
 
 export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;
