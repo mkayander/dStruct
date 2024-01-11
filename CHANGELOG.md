@@ -1,3 +1,10 @@
+# [1.251.0](https://github.com/mkayander/leetpal/compare/v1.250.1...v1.251.0) (2024-01-11)
+
+
+### Features
+
+* Added "Trie" project category ([d6a7332](https://github.com/mkayander/leetpal/commit/d6a73328b80e7576165c0caea49afc948da9f349))
+
 ## [1.250.1](https://github.com/mkayander/leetpal/compare/v1.250.0...v1.250.1) (2024-01-10)
 
 
