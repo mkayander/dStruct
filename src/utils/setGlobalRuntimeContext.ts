@@ -179,6 +179,17 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     size(): number {
       return this._size;
     }
+
+    toArray(): T[] {
+      const arr: T[] = [];
+      let current = this.head;
+      while (current) {
+        arr.push(current.val);
+        current = current.next;
+      }
+
+      return arr;
+    }
   }
 
   const context = {
