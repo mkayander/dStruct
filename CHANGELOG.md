@@ -1,3 +1,16 @@
+# [1.254.0](https://github.com/mkayander/leetpal/compare/v1.253.1...v1.254.0) (2024-01-12)
+
+
+### Bug Fixes
+
+* Removed unused imports & props ([e8b3a6b](https://github.com/mkayander/leetpal/commit/e8b3a6b86afb82e34d5c6977525dffa2f46bb711))
+
+
+### Features
+
+* Updated dependencies ([242cf21](https://github.com/mkayander/leetpal/commit/242cf21f88c388a8ac502260583296adeebcc554))
+* Updated ESLint config ([24630a0](https://github.com/mkayander/leetpal/commit/24630a0332d7daa64ed90ce8510b87cd5d53e5a0))
+
 ## [1.253.1](https://github.com/mkayander/leetpal/compare/v1.253.0...v1.253.1) (2024-01-12)
 
 
