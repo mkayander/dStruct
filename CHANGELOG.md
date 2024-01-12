@@ -1,3 +1,16 @@
+# [1.255.0](https://github.com/mkayander/leetpal/compare/v1.254.0...v1.255.0) (2024-01-12)
+
+
+### Bug Fixes
+
+* Fixed TS errors ([7871912](https://github.com/mkayander/leetpal/commit/7871912928f6d286412e68417792c5d8902ba9cf))
+* Fixed TS errors ([50c6f43](https://github.com/mkayander/leetpal/commit/50c6f430ca57a53dc74e651c07c9a4ce81ec9fd4))
+
+
+### Features
+
+* Improved matrix arrays handling ([b8f0a3a](https://github.com/mkayander/leetpal/commit/b8f0a3aee620693ca70bd999efaea68eec032f97))
+
 # [1.254.0](https://github.com/mkayander/leetpal/compare/v1.253.1...v1.254.0) (2024-01-12)
 
 
