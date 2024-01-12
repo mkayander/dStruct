@@ -9,12 +9,14 @@ import { NestedStructure } from "./NestedStructure";
 type ArrayItemProps = {
   item: ArrayItemData;
   colorMap?: Record<number | string, string>;
+  size?: number;
   isGrid?: boolean;
 };
 
 export const ArrayItem: React.FC<ArrayItemProps> = ({
   item,
   colorMap,
+  size = 42,
   isGrid,
 }) => {
   const valueColor = colorMap?.[String(item.value)];
@@ -26,8 +28,8 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
       className={`array-item ${isGrid ? "grid-item" : ""}`}
       sx={{
         position: "relative",
-        minWidth: 42,
-        height: 42,
+        minWidth: size,
+        height: size,
         marginLeft: isGrid ? 0 : "1px",
         backgroundColor: nodeColor && alpha(nodeColor, 0.1),
         display: "flex",
