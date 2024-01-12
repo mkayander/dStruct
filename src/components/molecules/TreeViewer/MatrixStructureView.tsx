@@ -24,50 +24,13 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
       component="table"
       sx={{
         width: "fit-content",
-        borderCollapse: "separate",
+        borderCollapse: "collapse",
         borderSpacing: 0,
         border: borderColor,
         borderRadius: "4px",
         td: {
-          "&:not(:last-child)": {
-            borderRight: borderColor,
-          },
-        },
-        tr: {
-          "&:not(:last-child)": {
-            td: {
-              borderBottom: borderColor,
-            },
-          },
-        },
-
-        "& tr:first-child": {
-          "& > td:first-child": {
-            borderTopLeftRadius: "4px",
-            ".array-item::after": {
-              borderRadius: "4px 0 0 0",
-            },
-          },
-          "& > td:last-child": {
-            borderTopRightRadius: "4px",
-            ".array-item::after": {
-              borderRadius: "0 4px 0 0",
-            },
-          },
-        },
-        "& tr:last-child": {
-          "& > td:first-child": {
-            borderBottomLeftRadius: "4px",
-            ".array-item::after": {
-              borderRadius: "0 0 0 4px",
-            },
-          },
-          "& > td:last-child": {
-            borderBottomRightRadius: "4px",
-            ".array-item::after": {
-              borderRadius: "0 0 4px 0",
-            },
-          },
+          padding: 0,
+          border: borderColor,
         },
       }}
     >
