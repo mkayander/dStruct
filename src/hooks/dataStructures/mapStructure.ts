@@ -1,5 +1,4 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import type { AppDispatch } from "#/store/makeStore";
@@ -9,9 +8,6 @@ import {
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
-import { safeStringify } from "#/utils/stringifySolutionResult";
-
-const uuid = shortUUID();
 
 const ArrayBase = makeArrayBaseClass(Map);
 
@@ -93,5 +89,9 @@ export class ControlledMap extends ArrayBase {
 
   protected getNodeMeta(key: any): ArrayItemData | undefined {
     return this.itemsMeta.get(key);
+  }
+
+  protected setNodeMeta(key: any, data: ArrayItemData): void {
+    this.itemsMeta.set(key, data);
   }
 }
