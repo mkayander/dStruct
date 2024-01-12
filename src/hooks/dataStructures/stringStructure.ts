@@ -55,4 +55,8 @@ export class ControlledString extends ArrayBase {
   protected getNodeMeta(key: number): ArrayItemData | undefined {
     return this.itemsMeta.at(key);
   }
+
+  protected setNodeMeta(key: number, meta: ArrayItemData): void {
+    this.itemsMeta[key] = meta;
+  }
 }
