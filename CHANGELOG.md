@@ -1,3 +1,11 @@
+# [1.256.0](https://github.com/mkayander/leetpal/compare/v1.255.1...v1.256.0) (2024-01-12)
+
+
+### Features
+
+* Allow to set array item size ([448726b](https://github.com/mkayander/leetpal/commit/448726b8ac19fcf0f83dd46afe55f46746d2da29))
+* Improved matrix structure appearance ([76d7ce9](https://github.com/mkayander/leetpal/commit/76d7ce9bc6d67ebf8eb7575ad49f5823ecda8e4a))
+
 ## [1.255.1](https://github.com/mkayander/leetpal/compare/v1.255.0...v1.255.1) (2024-01-12)
 
 
