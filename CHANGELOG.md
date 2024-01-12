@@ -1,3 +1,16 @@
+# [1.253.0](https://github.com/mkayander/leetpal/compare/v1.252.0...v1.253.0) (2024-01-12)
+
+
+### Bug Fixes
+
+* Provide component keys for map structures ([3642902](https://github.com/mkayander/leetpal/commit/3642902e752ca75146bc53f9efe1de4b415dce6b))
+
+
+### Features
+
+* Improved Map/Object structure appearance ([6fbd57a](https://github.com/mkayander/leetpal/commit/6fbd57ab24eaa8b17400f1c55a88fd3496ad5e8a))
+* Updated next types ([9b1c862](https://github.com/mkayander/leetpal/commit/9b1c862e63f663915e65629171c460258e83cb6b))
+
 # [1.252.0](https://github.com/mkayander/leetpal/compare/v1.251.0...v1.252.0) (2024-01-11)
 
 
