@@ -33,11 +33,7 @@ export const NestedStructure: React.FC<NestedStructureProps> = ({
   }
 
   if (Component) {
-    return (
-      <Box sx={{ padding: "4px 0" }}>
-        <Component data={data} />
-      </Box>
-    );
+    return <Component data={data} />;
   }
 
   return null;

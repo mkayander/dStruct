@@ -25,8 +25,8 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
         height: 44,
         backgroundColor: nodeColor && alpha(nodeColor, 0.1),
         td: {
-          minWidth: 44,
-          padding: "0 4px",
+          minWidth: 22,
+          padding: "4px",
           "&.arrow": {
             opacity: 0.7,
             minWidth: "initial",
@@ -42,6 +42,7 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
           left: 0,
           width: "100%",
           height: "100%",
+          // borderRadius: "4px",
           background: "rgba(255, 255, 255, 0.1)",
           opacity: 0,
           transition: "opacity 0.1s",
