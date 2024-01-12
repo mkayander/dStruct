@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import React from "react";
 
 import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";

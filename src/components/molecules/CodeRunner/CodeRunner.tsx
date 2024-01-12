@@ -25,7 +25,6 @@ type CodeRunnerProps = EditorProps & {
 };
 
 export const CodeRunner: React.FC<CodeRunnerProps> = ({
-  isUpdating,
   setMonacoInstance,
   setEditorInstance,
   setTextModel,
