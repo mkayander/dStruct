@@ -1,3 +1,11 @@
+## [1.256.1](https://github.com/mkayander/leetpal/compare/v1.256.0...v1.256.1) (2024-01-12)
+
+
+### Bug Fixes
+
+* Removed unused array mapping logic ([869dd30](https://github.com/mkayander/leetpal/commit/869dd308e01bf7a6a48ebfd52083612432ea9fc3))
+* Revert matrix appearance ([c7f8735](https://github.com/mkayander/leetpal/commit/c7f87354a68e6807df94f213e6de16fb6ef997ef))
+
 # [1.256.0](https://github.com/mkayander/leetpal/compare/v1.255.1...v1.256.0) (2024-01-12)
 
 
