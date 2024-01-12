@@ -1,3 +1,10 @@
+## [1.253.1](https://github.com/mkayander/leetpal/compare/v1.253.0...v1.253.1) (2024-01-12)
+
+
+### Bug Fixes
+
+* Renamed a hook file ([aa959ff](https://github.com/mkayander/leetpal/commit/aa959ffb654a48555f7bd80e452c8f4bdb418e4e))
+
 # [1.253.0](https://github.com/mkayander/leetpal/compare/v1.252.0...v1.253.0) (2024-01-12)
 
 
