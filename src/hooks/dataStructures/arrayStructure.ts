@@ -2,7 +2,6 @@ import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
 import {
@@ -17,10 +16,7 @@ const uuid = shortUUID();
 const ArrayBase = makeArrayBaseClass(Array);
 
 export type ControlledArrayRuntimeOptions = {
-  parentName?: string;
-  index?: number;
   length?: number;
-  matrixName?: string;
   colorMap?: Record<string, string>;
 };
 
@@ -37,17 +33,6 @@ export class ControlledArray<T> extends ArrayBase<T> {
   ) {
     super();
 
-    let actionArrayData: EntityState<ArrayItemData> | undefined = undefined;
-    let argType: ArgumentType.ARRAY | ArgumentType.MATRIX = ArgumentType.ARRAY;
-
-    if (options?.matrixName) {
-      name = options.matrixName;
-      argType = ArgumentType.MATRIX;
-      options.length = array.length;
-    } else {
-      actionArrayData = arrayData;
-    }
-
     Object.defineProperties(this, {
       name: {
         value: name,
@@ -58,7 +43,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
         enumerable: false,
       },
       argType: {
-        value: argType,
+        value: ArgumentType.ARRAY,
         enumerable: false,
       },
       dispatch: {
@@ -74,7 +59,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
         callstackSlice.actions.addOne({
           ...this.getDispatchBase(),
           name: "addArray",
-          args: { arrayData: actionArrayData, options },
+          args: { arrayData, options },
         }),
       );
     }
@@ -106,9 +91,6 @@ export class ControlledArray<T> extends ArrayBase<T> {
   ) {
     const { id, array, data } = ControlledArray._mapArrayData(
       new Array(inputArray.length),
-      undefined,
-      thisArg,
-      options,
     );
     const newArray = new ControlledArray(
       array,
@@ -129,8 +111,6 @@ export class ControlledArray<T> extends ArrayBase<T> {
   static _mapArrayData<T, U>(
     inputArray: T[],
     mapFn?: (item: T, index: number, array: T[]) => U,
-    thisArg?: unknown,
-    options?: ControlledArrayRuntimeOptions,
   ) {
     const array = [];
     if (mapFn) {
@@ -141,12 +121,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
       array.push(...inputArray);
     }
     const data = generateArrayData(array);
-    let id: string;
-    if (options?.parentName && options.index !== undefined) {
-      id = getChildArrayName(options.parentName, options.index);
-    } else {
-      id = uuid.generate();
-    }
+    const id = uuid.generate();
 
     return {
       id,
@@ -176,8 +151,6 @@ export class ControlledArray<T> extends ArrayBase<T> {
     const { id, array, data } = ControlledArray._mapArrayData(
       new Array(this.length),
       undefined,
-      thisArg,
-      options,
     );
     const newArray = new ControlledArray(
       array as U[],

@@ -8,7 +8,6 @@ import {
 import shortUUID from "short-uuid";
 
 import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
-import { getChildArrayName } from "#/hooks/useArgumentsParsing";
 import type { RootState } from "#/store/makeStore";
 import {
   type BaseStructureItem,
@@ -96,16 +95,12 @@ export const arrayStructureSlice = createSlice({
           data: { argType, nodes, options },
         },
       } = action;
-      const { parentName, matrixName, length, colorMap } = options ?? {};
+      const { colorMap } = options ?? {};
       const treeState = {
-        ...getInitialData(999, argType, parentName),
+        ...getInitialData(999, argType),
         isRuntime: true,
       };
-      if (matrixName && length) {
-        treeState.childNames = Array.from({ length }, (_, i) =>
-          getChildArrayName(matrixName, i),
-        );
-      } else if (nodes) {
+      if (nodes) {
         treeState.nodes = nodes;
       }
 

@@ -143,7 +143,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             arrayState={arrayState}
           />,
         );
-      } else if (!data.parentName) {
+      } else {
         arrayNodes.push(<ArrayStructureView key={arrayName} data={data} />);
       }
     }
