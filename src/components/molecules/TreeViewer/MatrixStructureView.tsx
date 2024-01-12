@@ -32,11 +32,12 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
       }}
     >
       <tbody>
-        {data.childNames?.map((name) => {
-          const data = arrayState[name];
-          if (!data) return null;
+        {data.nodes.ids.map((id) => {
+          const name = data.nodes.entities[id]?.childName ?? "";
+          const nodeData = arrayState[name];
+          if (!nodeData) return null;
 
-          return <MatrixRow key={name} data={data} />;
+          return <MatrixRow key={name} data={nodeData} />;
         })}
       </tbody>
     </Box>

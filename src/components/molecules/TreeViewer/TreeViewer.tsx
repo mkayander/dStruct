@@ -132,7 +132,10 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         data.argType === ArgumentType.OBJECT
       ) {
         arrayNodes.push(<MapStructureView key={arrayName} data={data} />);
-      } else if (data.argType === ArgumentType.MATRIX) {
+      } else if (
+        data.argType === ArgumentType.MATRIX ||
+        (data.argType === ArgumentType.ARRAY && data.hasNested)
+      ) {
         arrayNodes.push(
           <MatrixStructureView
             key={arrayName}

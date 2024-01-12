@@ -16,7 +16,7 @@ export const MatrixRow: React.FC<ArrayStructureViewProps> = ({ data }) => {
       {items.length > 0 ? (
         items.map((item) => (
           <td key={item.id}>
-            <ArrayItem colorMap={data.colorMap} isGrid={true} {...item} />
+            <ArrayItem colorMap={data.colorMap} isGrid={true} item={item} />
           </td>
         ))
       ) : (

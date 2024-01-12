@@ -22,6 +22,7 @@ export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   initialNodes: EntityState<N> | null;
   isRuntime: boolean;
   isNested?: boolean;
+  hasNested?: boolean;
   colorMap?: Record<string | number, string>;
 };
 
@@ -90,6 +91,8 @@ export const getBaseStructureReducers = <N extends StructureNode>(
 
   return {
     add: <T extends BaseStructureState>(state: T, action: NamedPayload<N>) => {
+      const childName = action.payload.data.childName;
+
       runStateActionByName(state, action.payload.name, (treeState) => {
         const {
           payload: {
@@ -98,9 +101,11 @@ export const getBaseStructureReducers = <N extends StructureNode>(
         } = action;
 
         adapter.addOne(treeState.nodes, { id, ...node });
+        if (childName) {
+          treeState.hasNested = true;
+        }
       });
 
-      const childName = action.payload.data.childName;
       if (childName) {
         runStateActionByName(state, childName, (treeState) => {
           treeState.isNested = true;
@@ -121,10 +126,22 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     update: <T extends BaseStructureState>(
       state: T,
       action: NamedPayload<Update<N>>,
-    ) =>
-      runStateActionByName(state, action.payload.name, (treeState) =>
-        adapter.updateOne(treeState.nodes, action.payload.data),
-      ),
+    ) => {
+      const childName = action.payload.data.changes.childName;
+
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        adapter.updateOne(treeState.nodes, action.payload.data);
+        if (childName) {
+          treeState.hasNested = true;
+        }
+      });
+
+      if (childName) {
+        runStateActionByName(state, childName, (treeState) => {
+          treeState.isNested = true;
+        });
+      }
+    },
     remove: <T extends BaseStructureState>(
       state: T,
       action: NamedPayload<Pick<N, "id">>,

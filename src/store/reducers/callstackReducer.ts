@@ -70,7 +70,7 @@ type AddNodeFrame = NodeFrameBase & {
   args: { value: number | string };
 };
 
-type AddArrayItemFrame = NodeFrameBase & {
+export type AddArrayItemFrame = NodeFrameBase & {
   name: "addArrayItem";
   args: {
     value?: number | string;

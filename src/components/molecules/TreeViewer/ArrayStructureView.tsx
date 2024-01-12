@@ -82,7 +82,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
       <Stack direction="row">
         {items.length > 0 ? (
           items.map((item) => (
-            <ArrayItem key={item.id} colorMap={data.colorMap} {...item} />
+            <ArrayItem key={item.id} colorMap={data.colorMap} item={item} />
           ))
         ) : (
           <Box

@@ -88,6 +88,7 @@ export const useNodesRuntimeUpdates = (
                 id: frame.nodeId,
                 changes: {
                   value: frame.args.value ?? undefined,
+                  childName: frame.args.childName,
                 },
               },
             }),

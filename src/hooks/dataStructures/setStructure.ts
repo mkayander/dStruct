@@ -1,5 +1,4 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import type { AppDispatch } from "#/store/makeStore";
@@ -9,8 +8,6 @@ import {
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
-
-const uuid = shortUUID();
 
 const ArrayBase = makeArrayBaseClass(Set);
 
@@ -69,25 +66,9 @@ export class ControlledSet extends ArrayBase {
     if (super.has(value)) return this;
 
     super.add(value);
-    const index = this.nextIndex++;
-    const newItem = {
-      id: uuid.generate(),
-      index,
-      value,
-    };
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        id: uuid.generate(),
-        argType: this.argType,
-        treeName: this.name,
-        structureType: "array",
-        nodeId: newItem.id,
-        timestamp: performance.now(),
-        name: "addArrayItem",
-        args: { value, index },
-      }),
-    );
-    this.itemsMeta.set(value, newItem);
+
+    this.updateItem(value, this.nextIndex++, value);
+
     return this;
   }
 
@@ -108,5 +89,9 @@ export class ControlledSet extends ArrayBase {
 
   protected getNodeMeta(key: any): ArrayItemData | undefined {
     return this.itemsMeta.get(key);
+  }
+
+  protected setNodeMeta(key: any, data: ArrayItemData): void {
+    this.itemsMeta.set(key, data);
   }
 }

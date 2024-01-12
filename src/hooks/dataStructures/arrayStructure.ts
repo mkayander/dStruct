@@ -87,41 +87,8 @@ export class ControlledArray<T> extends ArrayBase<T> {
           return true;
         }
 
-        const prevData = this.getNodeMeta(index);
-        if (!prevData) {
-          const newItem = {
-            id: uuid.generate(),
-            index,
-            value,
-          };
-          dispatch(
-            callstackSlice.actions.addOne({
-              id: uuid.generate(),
-              argType: this.argType,
-              treeName: this.name,
-              structureType: "array",
-              nodeId: newItem.id,
-              timestamp: performance.now(),
-              name: "addArrayItem",
-              args: { value, index },
-            }),
-          );
-          this.itemsMeta[index] = newItem;
-          return true;
-        }
+        this.updateItem(value, index);
 
-        const base = this.getDispatchBase(index);
-        if (!base) return true;
-
-        this.itemsMeta[index] = { ...prevData, value };
-
-        dispatch(
-          callstackSlice.actions.addOne({
-            ...base,
-            name: "setVal",
-            args: { value },
-          }),
-        );
         return true;
       },
     });
@@ -137,13 +104,26 @@ export class ControlledArray<T> extends ArrayBase<T> {
     thisArg?: unknown,
     options?: ControlledArrayRuntimeOptions,
   ) {
-    const { id, array, data } = this._mapArrayData(
-      inputArray,
-      mapFn,
+    const { id, array, data } = ControlledArray._mapArrayData(
+      new Array(inputArray.length),
+      undefined,
       thisArg,
       options,
     );
-    return new ControlledArray(array, id, data, dispatch, true, options);
+    const newArray = new ControlledArray(
+      array,
+      id,
+      data,
+      dispatch,
+      true,
+      options,
+    );
+
+    for (let i = 0; i < inputArray.length; i++) {
+      newArray[i] = mapFn ? mapFn(inputArray[i], i) : inputArray[i];
+    }
+
+    return newArray;
   }
 
   static _mapArrayData<T, U>(
@@ -194,12 +174,12 @@ export class ControlledArray<T> extends ArrayBase<T> {
     options?: ControlledArrayRuntimeOptions,
   ): ControlledArray<U> {
     const { id, array, data } = ControlledArray._mapArrayData(
-      this,
-      callback,
+      new Array(this.length),
+      undefined,
       thisArg,
       options,
     );
-    return new ControlledArray(
+    const newArray = new ControlledArray(
       array as U[],
       id,
       data,
@@ -207,6 +187,10 @@ export class ControlledArray<T> extends ArrayBase<T> {
       true,
       options,
     );
+    for (let i = 0; i < this.length; i++) {
+      newArray[i] = callback(this[i]!, i, this);
+    }
+    return newArray;
   }
 
   override slice(start?: number, end?: number): T[] {
@@ -217,5 +201,9 @@ export class ControlledArray<T> extends ArrayBase<T> {
 
   protected getNodeMeta(key: number): ArrayItemData | undefined {
     return this.itemsMeta.at(key);
+  }
+
+  protected setNodeMeta(key: any, data: ArrayItemData): void {
+    this.itemsMeta[key] = data;
   }
 }

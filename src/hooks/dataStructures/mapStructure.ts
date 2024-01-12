@@ -70,42 +70,8 @@ export class ControlledMap extends ArrayBase {
 
   override set(key: any, value: any) {
     super.set(key, value);
-    if (this.itemsMeta.has(key)) {
-      const base = this.getDispatchBase(key);
-      const prevData = this.itemsMeta.get(key)!;
-      value = safeStringify(value);
-      this.itemsMeta.set(key, {
-        ...prevData,
-        value,
-      });
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...base,
-          name: "setVal",
-          args: { value },
-        }),
-      );
-    } else {
-      const index = this.nextIndex++;
-      const newItem = {
-        id: uuid.generate(),
-        index,
-        value,
-      };
-      this.itemsMeta.set(key, newItem);
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          id: uuid.generate(),
-          argType: this.argType,
-          treeName: this.name,
-          structureType: "array",
-          nodeId: newItem.id,
-          timestamp: performance.now(),
-          name: "addArrayItem",
-          args: { value, index, key },
-        }),
-      );
-    }
+
+    this.updateItem(value, this.nextIndex++, key);
 
     return this;
   }

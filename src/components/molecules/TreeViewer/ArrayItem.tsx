@@ -4,19 +4,22 @@ import React from "react";
 import { useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
-type ArrayItemProps = ArrayItemData & {
+import { NestedStructure } from "./NestedStructure";
+
+type ArrayItemProps = {
+  item: ArrayItemData;
   colorMap?: Record<number | string, string>;
   isGrid?: boolean;
 };
 
 export const ArrayItem: React.FC<ArrayItemProps> = ({
-  value,
-  color,
+  item,
   colorMap,
   isGrid,
 }) => {
-  const valueColor = colorMap?.[String(value)];
-  const { nodeColor } = useNodeColors(color ?? valueColor, false);
+  const valueColor = colorMap?.[String(item.value)];
+  const { nodeColor } = useNodeColors(item.color ?? valueColor, false);
+  const isChildNested = Boolean(item.childName);
 
   return (
     <Box
@@ -74,7 +77,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
       <Typography
         sx={{ textAlign: "center", wordWrap: "none", pt: 0.32, mx: 1 }}
       >
-        {value !== undefined ? String(value) : ""}
+        {isChildNested ? <NestedStructure item={item} /> : item.value}
       </Typography>
     </Box>
   );
