@@ -1,3 +1,10 @@
+## [1.255.1](https://github.com/mkayander/leetpal/compare/v1.255.0...v1.255.1) (2024-01-12)
+
+
+### Bug Fixes
+
+* Fixed matrix argument parsing ([3e48623](https://github.com/mkayander/leetpal/commit/3e48623f53d8838b783eebd35939735551cc4e08))
+
 # [1.255.0](https://github.com/mkayander/leetpal/compare/v1.254.0...v1.255.0) (2024-01-12)
 
 
