@@ -241,10 +241,12 @@ const parseArrayArgument = (
       childArgs = getMatrixChildArrayArgs(arg, (childArg) =>
         parseArrayArgument(childArg, argsInfo, dispatch),
       );
+      array = new Array(childArgs.length);
     } catch (e) {
       console.warn(e);
     }
   }
+  const childNames = childArgs?.map((arg) => arg.name);
   if (arg.type === ArgumentType.ARRAY) {
     try {
       array = JSON.parse(arg.input);
@@ -259,13 +261,17 @@ const parseArrayArgument = (
   if (array) {
     newItems = [];
     for (let i = 0; i < array.length; i++) {
-      const value = array[i];
-      if (value === undefined) continue;
+      let value = array[i];
+      const childName = childNames?.[i];
+      if (childName) {
+        value = undefined;
+      }
       const newId = uuid4.generate();
       newItems[i] = {
         id: newId,
-        value,
         index: i,
+        value,
+        childName,
       };
     }
   }
