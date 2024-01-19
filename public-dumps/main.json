@@ -2785,6 +2785,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clr6in73g00013dn9i82o28tb": {
+      "id": "clr6in73g00013dn9i82o28tb",
+      "createdAt": "2024-01-09T15:38:01.516Z",
+      "updatedAt": "2024-01-09T15:38:01.516Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Leaf-Similar Trees",
+      "category": "BINARY_TREE",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/leaf-similar-trees",
+      "slug": "leaf-similar-trees",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clr7rmznm0001pii1zxhjioao": {
+      "id": "clr7rmznm0001pii1zxhjioao",
+      "createdAt": "2024-01-10T12:37:34.594Z",
+      "updatedAt": "2024-01-10T12:37:34.594Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Amount of Time for Binary Tree to Be Infected",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected",
+      "slug": "amount-of-time-for-binary-tree-to-be-infected",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clr7ymsll0001uxww7ezoqehc": {
+      "id": "clr7ymsll0001uxww7ezoqehc",
+      "createdAt": "2024-01-10T15:53:22.762Z",
+      "updatedAt": "2024-01-10T15:53:22.762Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Word Break",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/word-break",
+      "slug": "word-break",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clrknj03y000114ddcujedwey": {
+      "id": "clrknj03y000114ddcujedwey",
+      "createdAt": "2024-01-19T13:03:30.382Z",
+      "updatedAt": "2024-01-19T13:03:30.382Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Falling Path Sum",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-falling-path-sum",
+      "slug": "minimum-falling-path-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12659,6 +12715,244 @@
         }
       },
       "description": null
+    },
+    "clr6in73g00023dn98lektkyz": {
+      "id": "clr6in73g00023dn98lektkyz",
+      "createdAt": "2024-01-09T15:38:01.516Z",
+      "updatedAt": "2024-01-09T15:46:21.561Z",
+      "projectId": "clr6in73g00013dn9i82o28tb",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[3,5,1,6,2,9,8,null,null,7,4]",
+          "order": 0
+        },
+        "4X5uV9oMbhnvjTZZPXo3fj": {
+          "name": "4X5uV9oMbhnvjTZZPXo3fj",
+          "type": "binaryTree",
+          "input": "[3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr6iy1ma00053dn94xe2iyty": {
+      "id": "clr6iy1ma00053dn94xe2iyty",
+      "createdAt": "2024-01-09T15:46:27.634Z",
+      "updatedAt": "2024-01-09T15:46:37.795Z",
+      "projectId": "clr6in73g00013dn9i82o28tb",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3]",
+          "order": 0
+        },
+        "4X5uV9oMbhnvjTZZPXo3fj": {
+          "name": "4X5uV9oMbhnvjTZZPXo3fj",
+          "type": "binaryTree",
+          "input": "[1,3,2]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7rmznm0002pii1agvq0ewb": {
+      "id": "clr7rmznm0002pii1agvq0ewb",
+      "createdAt": "2024-01-10T12:37:34.594Z",
+      "updatedAt": "2024-01-10T12:37:59.770Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,5,3,null,4,10,6,9,2]",
+          "order": 0
+        },
+        "7LNbJJ4cVuSDLbcRyU7Sni": {
+          "name": "7LNbJJ4cVuSDLbcRyU7Sni",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7rpu1a0005pii1sm0zv4dt": {
+      "id": "clr7rpu1a0005pii1sm0zv4dt",
+      "createdAt": "2024-01-10T12:39:47.278Z",
+      "updatedAt": "2024-01-10T12:39:51.776Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,null,3,null,4,null,5]",
+          "order": 0
+        },
+        "7LNbJJ4cVuSDLbcRyU7Sni": {
+          "name": "7LNbJJ4cVuSDLbcRyU7Sni",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7rq1lf0007pii10cct2sdm": {
+      "id": "clr7rq1lf0007pii10cct2sdm",
+      "createdAt": "2024-01-10T12:39:57.075Z",
+      "updatedAt": "2024-01-10T12:40:01.283Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,null,3,null,4,null,5]",
+          "order": 0
+        },
+        "7LNbJJ4cVuSDLbcRyU7Sni": {
+          "name": "7LNbJJ4cVuSDLbcRyU7Sni",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7rqeg10009pii1fx3cvfme": {
+      "id": "clr7rqeg10009pii1fx3cvfme",
+      "createdAt": "2024-01-10T12:40:13.729Z",
+      "updatedAt": "2024-01-10T12:40:23.127Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,5,3,null,4,10,6,9,2]",
+          "order": 0
+        },
+        "7LNbJJ4cVuSDLbcRyU7Sni": {
+          "name": "7LNbJJ4cVuSDLbcRyU7Sni",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7ymsll0002uxww9k9t0iaj": {
+      "id": "clr7ymsll0002uxww9k9t0iaj",
+      "createdAt": "2024-01-10T15:53:22.762Z",
+      "updatedAt": "2024-01-10T15:55:11.012Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "87cwzY98k2y9w9wWDDitV8": {
+          "name": "87cwzY98k2y9w9wWDDitV8",
+          "type": "string",
+          "input": "leetcode",
+          "order": 0
+        },
+        "a3yxGT4CYsmvjNG4r4bo1H": {
+          "name": "a3yxGT4CYsmvjNG4r4bo1H",
+          "type": "array",
+          "input": "[\"leet\",\"code\"]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clr7ypf2n0005uxwwn8y7rf04": {
+      "id": "clr7ypf2n0005uxwwn8y7rf04",
+      "createdAt": "2024-01-10T15:55:25.199Z",
+      "updatedAt": "2024-01-10T15:55:37.471Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "87cwzY98k2y9w9wWDDitV8": {
+          "name": "87cwzY98k2y9w9wWDDitV8",
+          "type": "string",
+          "input": "catsandog",
+          "order": 0
+        },
+        "a3yxGT4CYsmvjNG4r4bo1H": {
+          "name": "a3yxGT4CYsmvjNG4r4bo1H",
+          "type": "array",
+          "input": "[\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clrknj03y000214ddo0gdp4z3": {
+      "id": "clrknj03y000214ddo0gdp4z3",
+      "createdAt": "2024-01-19T13:03:30.382Z",
+      "updatedAt": "2024-01-19T13:04:29.510Z",
+      "projectId": "clrknj03y000114ddcujedwey",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "hrLAE3yCc5g6j8k2FDWyQ4": {
+          "name": "hrLAE3yCc5g6j8k2FDWyQ4",
+          "type": "matrix",
+          "input": "[[2,1,3],[6,5,4],[7,8,9]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrknkiiy000514ddwl1lvano": {
+      "id": "clrknkiiy000514ddwl1lvano",
+      "createdAt": "2024-01-19T13:04:40.906Z",
+      "updatedAt": "2024-01-19T13:04:44.620Z",
+      "projectId": "clrknj03y000114ddcujedwey",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "hrLAE3yCc5g6j8k2FDWyQ4": {
+          "name": "hrLAE3yCc5g6j8k2FDWyQ4",
+          "type": "matrix",
+          "input": "[[-19,57],[-40,-5]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14550,14 +14844,14 @@
     "cllfcxny50003l908j2phigjv": {
       "id": "cllfcxny50003l908j2phigjv",
       "createdAt": "2023-08-17T16:09:53.790Z",
-      "updatedAt": "2023-12-13T12:06:46.945Z",
+      "updatedAt": "2024-01-12T16:40:15.799Z",
       "projectId": "cllfcxny50001l908h79caf6d",
       "title": "Dynamic Programming",
       "slug": "dynamic-programming",
       "timeComplexity": "O(m*n)",
       "spaceComplexity": "O(m*n)",
       "description": "",
-      "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  const matrixName = \"dp\";\n\n  const dp = Array.from(\n    mat,\n    (row, index) =>\n      Array.from(row, (val) => val, null, {\n        index,\n        parentName: matrixName,\n      }),\n    null,\n    { matrixName }\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);\n      }\n\n      if (col > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);\n      }\n\n      dp[row][col] = minNeighbor + 1;\n    }\n  }\n\n  for (let row = m - 1; row >= 0; row--) {\n    for (let col = n - 1; col >= 0; col--) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row < m - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);\n      }\n\n      if (col < n - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);\n      }\n\n      dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);\n    }\n  }\n\n  return dp;\n};\n\nreturn updateMatrix;\n",
+      "code": "/**\n * @param {number[][]} mat\n * @return {number[][]}\n */\nvar updateMatrix = function (mat) {\n  const m = mat.length;\n  const n = mat[0].length;\n\n  const dp = Array.from(\n    mat,\n    (row) =>\n      Array.from(row, (val) => val),\n  );\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);\n      }\n\n      if (col > 0) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);\n      }\n\n      dp[row][col] = minNeighbor + 1;\n    }\n  }\n\n  for (let row = m - 1; row >= 0; row--) {\n    for (let col = n - 1; col >= 0; col--) {\n      if (dp[row][col] === 0) continue;\n\n      let minNeighbor = Infinity;\n      if (row < m - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);\n      }\n\n      if (col < n - 1) {\n        minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);\n      }\n\n      dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);\n    }\n  }\n\n  return dp;\n};\n\nreturn updateMatrix;\n",
       "order": 0
     },
     "cllmgp8eb0003l608c7ahu0uk": {
@@ -16032,14 +16326,14 @@
     "clpgy1k8n0003tmqeecburce4": {
       "id": "clpgy1k8n0003tmqeecburce4",
       "createdAt": "2023-11-27T13:27:23.063Z",
-      "updatedAt": "2023-11-27T15:58:45.483Z",
+      "updatedAt": "2024-01-12T16:37:57.344Z",
       "projectId": "clpgy1k8n0001tmqe6s8kukex",
       "title": "Top-Down Recursion",
       "slug": "top-down-recursion",
       "timeComplexity": "O(n)",
       "spaceComplexity": "O(n)",
       "description": "",
-      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr, index) =>\n      Array.from(arr, undefined, null, {\n        parentName: \"map\",\n        index,\n      }),\n    null,\n    {\n      matrixName: \"map\",\n    },\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from(\n    { length: 10 },\n    (_, index) =>\n      Array.from({ length }, () => 0, null, {\n        parentName: \"dp\",\n        index,\n        colorMap: {\n          0: \"black\",\n        },\n      }),\n    null,\n    {\n      matrixName: \"dp\",\n    },\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr) => Array.from(arr),\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from({ length: 10 }, () =>\n    Array.from({ length }, () => 0, null, {\n      colorMap: {\n        0: \"black\",\n      },\n    }),\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
       "order": 0
     },
     "clph3fihs000110vh8v49am5e": {
@@ -16587,6 +16881,84 @@
       "description": "",
       "code": "/**\n * @param {number[][]} events\n * @param {number} k\n * @return {number}\n */\nvar maxValue = function (events, k) {\n  events.sort((a, b) => a[0] - b[0]);\n\n  const findNext = (left, end) => {\n    let right = events.length;\n\n    while (left < right) {\n      const mid = Math.floor((left + right) / 2);\n\n      if (events[mid][0] <= end) {\n        left = mid + 1;\n      } else {\n        right = mid;\n      }\n    }\n\n    return left;\n  };\n\n  const dp = Array.from(\n    { length: events.length },\n    (_, index) =>\n      Array.from({ length: k + 1 }, () => 0, null, { parentName: \"dp\", index }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  for (let count = 1; count <= k; count++) {\n    for (let i = events.length - 1; i >= 0; i--) {\n      const [start, end, value] = events[i];\n      if (i === events.length - 1) {\n        dp[i][count] = value;\n      } else {\n        let max = -Infinity;\n        const nextIndex = findNext(i + 1, end);\n        if (nextIndex < events.length) {\n          max = value + dp[nextIndex][count - 1];\n        }\n        max = Math.max(max, value, dp[i + 1][count]);\n        dp[i][count] = max;\n      }\n    }\n  }\n\n  return dp[0][k];\n};\n\nreturn maxValue;\n",
       "order": 2
+    },
+    "clr6in73g00033dn9sl4vomsm": {
+      "id": "clr6in73g00033dn9sl4vomsm",
+      "createdAt": "2024-01-09T15:38:01.516Z",
+      "updatedAt": "2024-01-09T15:53:14.123Z",
+      "projectId": "clr6in73g00013dn9i82o28tb",
+      "title": "Recursive Generator",
+      "slug": "recursive-generator",
+      "timeComplexity": "O(n + m)",
+      "spaceComplexity": "O(n + m)",
+      "description": "",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root1\n * @param {TreeNode} root2\n * @return {boolean}\n */\nvar leafSimilar = function (root1, root2) {\n  const iter1 = inOrderTraverse(root1);\n  const iter2 = inOrderTraverse(root2);\n\n  let cur1 = iter1.next();\n  let cur2 = iter2.next();\n\n  while (!cur1.done || !cur2.done) {\n    if (cur1.value !== cur2.value) return false;\n\n    cur1 = iter1.next();\n    cur2 = iter2.next();\n  }\n\n  return true;\n};\n\nfunction* inOrderTraverse(root) {\n  if (!root) return;\n  root.setColor(\"cyan\");\n\n  yield* inOrderTraverse(root.left);\n  if (!root.left && !root.right) {\n    root.setColor(\"green\", \"blink\");\n    yield root.val;\n    return;\n  }\n  yield* inOrderTraverse(root.right);\n}\n\nreturn leafSimilar;\n",
+      "order": 0
+    },
+    "clr6iz4un00073dn9d7syhb47": {
+      "id": "clr6iz4un00073dn9d7syhb47",
+      "createdAt": "2024-01-09T15:47:18.479Z",
+      "updatedAt": "2024-01-09T15:55:13.595Z",
+      "projectId": "clr6in73g00013dn9i82o28tb",
+      "title": "Iterative Generator",
+      "slug": "iterative-generator",
+      "timeComplexity": "O(n + m)",
+      "spaceComplexity": "O(n + m)",
+      "description": "",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root1\n * @param {TreeNode} root2\n * @return {boolean}\n */\nvar leafSimilar = function (root1, root2) {\n  const iter1 = inOrderTraverse(root1);\n  const iter2 = inOrderTraverse(root2);\n\n  let cur1 = iter1.next();\n  let cur2 = iter2.next();\n\n  while (!cur1.done || !cur2.done) {\n    if (cur1.value !== cur2.value) return false;\n\n    cur1 = iter1.next();\n    cur2 = iter2.next();\n  }\n\n  return true;\n};\n\nfunction* inOrderTraverse(root) {\n  const stack = new Array();\n  let current = root;\n\n  while (current || stack.length) {\n    while (current) {\n      current.setColor(\"cyan\");\n      stack.push(current);\n      current = current.left;\n    }\n\n    current = stack.pop();\n    if (!current.left && !current.right) {\n      current.setColor(\"green\", \"blink\");\n      yield current.val;\n    }\n\n    current = current.right;\n  }\n}\n\nreturn leafSimilar;\n",
+      "order": 1
+    },
+    "clr7rmznn0003pii1fs5h6i89": {
+      "id": "clr7rmznn0003pii1fs5h6i89",
+      "createdAt": "2024-01-10T12:37:34.594Z",
+      "updatedAt": "2024-01-10T12:39:26.625Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} start\n * @return {number}\n */\nvar amountOfTime = function (root, start) {\n  let max = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, -1];\n    node.blink();\n\n    const [leftHeight, leftStart] = dfs(node.left);\n    const [rightHeight, rightStart] = dfs(node.right);\n    const height = Math.max(leftHeight, rightHeight);\n    let startDist = -1;\n\n    if (leftStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, leftStart, leftStart + rightHeight);\n      startDist = leftStart + 1;\n    } else if (rightStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, rightStart, leftHeight + rightStart);\n      startDist = rightStart + 1;\n    } else if (node.val === start) {\n      node.setColor(\"red\");\n      startDist = 1;\n      max = height;\n    }\n\n    return [height + 1, startDist];\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn amountOfTime;\n",
+      "order": 0
+    },
+    "clr7ymsll0003uxwwwbs1ueqc": {
+      "id": "clr7ymsll0003uxwwwbs1ueqc",
+      "createdAt": "2024-01-10T15:53:22.762Z",
+      "updatedAt": "2024-01-10T15:54:10.023Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(n * m * k)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nvar wordBreak = function (s, wordDict) {\n  const dp = new Array(s.length);\n\n  for (let i = 0; i < s.length; i++) {\n    for (const word of wordDict) {\n      if (i < word.length - 1) continue;\n\n      if (i === word.length - 1 || dp[i - word.length]) {\n        if (s.slice(i - word.length + 1, i + 1) === word) {\n          dp[i] = true;\n          break;\n        }\n      }\n    }\n  }\n\n  return dp.at(-1) ?? false;\n};\n\nreturn wordBreak;\n",
+      "order": 0
+    },
+    "clr937q2m000111ifzwnao9uh": {
+      "id": "clr937q2m000111ifzwnao9uh",
+      "createdAt": "2024-01-11T10:49:23.901Z",
+      "updatedAt": "2024-01-11T19:46:34.448Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Trie + DP",
+      "slug": "trie-dp",
+      "timeComplexity": "O(n^2 + m * k)",
+      "spaceComplexity": "O(n + m * k)",
+      "description": "",
+      "code": "const END_CHAR = \"*\";\r\n\r\n/**\r\n * @param {string} s\r\n * @param {string[]} wordDict\r\n * @return {boolean}\r\n */\r\nvar wordBreak = function(s, wordDict) {\r\n    const trie = buildTrie(wordDict);\r\n    console.log(trie);\r\n    \r\n    const dp = new Array(s.length);\r\n\r\n    for (let i = 0; i < s.length; i++) {\r\n        if (i === 0 || dp[i - 1]) {\r\n            let curr = trie;\r\n            for (let j = i; j < s.length; j++) {\r\n                const char = s[j];\r\n                if (!(char in curr)) {\r\n                    break;\r\n                }\r\n\r\n                curr = curr[char];\r\n                if (END_CHAR in curr) {\r\n                    dp[j] = true;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    return dp.at(-1) ?? false;\r\n};\r\n\r\nfunction buildTrie(words) {\r\n    const root = new Object();\r\n    for (const word of words) {\r\n        let current = root;\r\n        for (const char of word) {\r\n            current[char] ??= new Object();\r\n            current = current[char];\r\n        }\r\n        current[END_CHAR] = true;\r\n    }\r\n\r\n    return root;\r\n}\r\n\r\nreturn wordBreak;\r\n",
+      "order": 1
+    },
+    "clrknj03y000314dd5zgn37jz": {
+      "id": "clrknj03y000314dd5zgn37jz",
+      "createdAt": "2024-01-19T13:03:30.382Z",
+      "updatedAt": "2024-01-19T13:05:08.369Z",
+      "projectId": "clrknj03y000114ddcujedwey",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nvar minFallingPathSum = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n  let prevRow = Array.from(matrix[0]);\n  let result = Math.min(...prevRow);\n\n  for (let row = 1; row < m; row++) {\n    let newRow = new Array(n);\n    let min = Infinity;\n    for (let col = 0; col < n; col++) {\n      let minPrev = Infinity;\n      for (let j = Math.max(0, col - 1); j < Math.min(n, col + 2); j++) {\n        minPrev = Math.min(minPrev, prevRow[j]);\n      }\n\n      newRow[col] = minPrev + matrix[row][col];\n      min = Math.min(min, newRow[col]);\n    }\n\n    prevRow = newRow;\n    result = min;\n  }\n\n  return result;\n};\n\nreturn minFallingPathSum;\n",
+      "order": 0
     }
   }
 }
