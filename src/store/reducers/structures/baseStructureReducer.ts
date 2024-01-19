@@ -121,6 +121,16 @@ export const getBaseStructureReducers = <N extends StructureNode>(
           payload: { data: nodes },
         } = action;
 
+        for (const node of nodes) {
+          const childName = node.childName;
+          if (!childName) continue;
+
+          treeState.hasNested = true;
+          runStateActionByName(state, childName, (childTreeState) => {
+            childTreeState.isNested = true;
+          });
+        }
+
         adapter.addMany(treeState.nodes, nodes);
       }),
     update: <T extends BaseStructureState>(
