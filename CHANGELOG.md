@@ -1,3 +1,10 @@
+# [1.257.0](https://github.com/mkayander/leetpal/compare/v1.256.2...v1.257.0) (2024-01-19)
+
+
+### Features
+
+* Added test workers exec files ([fefbcb9](https://github.com/mkayander/leetpal/commit/fefbcb9e0e370c1f1e3f88ae76b46eba54ede872))
+
 ## [1.256.2](https://github.com/mkayander/leetpal/compare/v1.256.1...v1.256.2) (2024-01-19)
 
 
