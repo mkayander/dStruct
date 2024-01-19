@@ -1,3 +1,10 @@
+## [1.256.2](https://github.com/mkayander/leetpal/compare/v1.256.1...v1.256.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* Write nested states on "addMany" action ([c2155d6](https://github.com/mkayander/leetpal/commit/c2155d646c0c088737040873b09b4fc64adf6cd8))
+
 ## [1.256.1](https://github.com/mkayander/leetpal/compare/v1.256.0...v1.256.1) (2024-01-12)
 
 
