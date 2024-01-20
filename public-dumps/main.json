@@ -2841,6 +2841,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clrl68iq3000310duno6w62u3": {
+      "id": "clrl68iq3000310duno6w62u3",
+      "createdAt": "2024-01-19T21:47:13.995Z",
+      "updatedAt": "2024-01-19T21:47:13.995Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Leftmost Column with at Least a One",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/leftmost-column-with-at-least-a-one",
+      "slug": "leftmost-column-with-at-least-a-one",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clrm4d3b20001nhmggettevmy": {
+      "id": "clrm4d3b20001nhmggettevmy",
+      "createdAt": "2024-01-20T13:42:34.239Z",
+      "updatedAt": "2024-01-20T13:42:34.239Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sum of Subarray Minimums",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/sum-of-subarray-minimums",
+      "slug": "sum-of-subarray-minimums",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -12953,6 +12981,63 @@
         }
       },
       "description": null
+    },
+    "clrl68iq3000410duyv7vw047": {
+      "id": "clrl68iq3000410duyv7vw047",
+      "createdAt": "2024-01-19T21:47:13.995Z",
+      "updatedAt": "2024-01-19T21:51:12.125Z",
+      "projectId": "clrl68iq3000310duno6w62u3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "pMDyGsqCVGgikC2weDxiVP": {
+          "name": "pMDyGsqCVGgikC2weDxiVP",
+          "type": "matrix",
+          "input": "[[0,0,0,0,0,0,1,1,1,1],[0,0,0,0,0,0,0,1,1,1],[0,0,0,0,0,1,1,1,1,1],[0,0,0,1,1,1,1,1,1,1],[0,0,0,0,0,0,1,1,1,1],[0,0,0,0,0,0,0,0,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrm4d3b20002nhmg6ytzj8w7": {
+      "id": "clrm4d3b20002nhmg6ytzj8w7",
+      "createdAt": "2024-01-20T13:42:34.239Z",
+      "updatedAt": "2024-01-20T13:44:05.435Z",
+      "projectId": "clrm4d3b20001nhmggettevmy",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "7cQgNmYvjgbvonCHYA6n83": {
+          "name": "7cQgNmYvjgbvonCHYA6n83",
+          "type": "array",
+          "input": "[3,1,2,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrm4f2gv0005nhmgvdmwrz0x": {
+      "id": "clrm4f2gv0005nhmgvdmwrz0x",
+      "createdAt": "2024-01-20T13:44:06.463Z",
+      "updatedAt": "2024-01-20T13:44:09.818Z",
+      "projectId": "clrm4d3b20001nhmggettevmy",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "7cQgNmYvjgbvonCHYA6n83": {
+          "name": "7cQgNmYvjgbvonCHYA6n83",
+          "type": "array",
+          "input": "[11,81,94,43,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -16950,14 +17035,53 @@
     "clrknj03y000314dd5zgn37jz": {
       "id": "clrknj03y000314dd5zgn37jz",
       "createdAt": "2024-01-19T13:03:30.382Z",
-      "updatedAt": "2024-01-19T13:05:08.369Z",
+      "updatedAt": "2024-01-19T13:13:16.583Z",
       "projectId": "clrknj03y000114ddcujedwey",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(n ^ 2)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nvar minFallingPathSum = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n  let prevRow = Array.from(matrix[0]);\n  let result = Math.min(...prevRow);\n\n  for (let row = 1; row < m; row++) {\n    let newRow = new Array(n);\n    let min = Infinity;\n    for (let col = 0; col < n; col++) {\n      let minPrev = Infinity;\n      for (let j = Math.max(0, col - 1); j < Math.min(n, col + 2); j++) {\n        minPrev = Math.min(minPrev, prevRow[j]);\n      }\n\n      newRow[col] = minPrev + matrix[row][col];\n      min = Math.min(min, newRow[col]);\n    }\n\n    prevRow = newRow;\n    result = min;\n  }\n\n  return result;\n};\n\nreturn minFallingPathSum;\n",
+      "order": 0
+    },
+    "clrknto9z000714ddtdahm83w": {
+      "id": "clrknto9z000714ddtdahm83w",
+      "createdAt": "2024-01-19T13:11:48.263Z",
+      "updatedAt": "2024-01-19T13:12:47.060Z",
+      "projectId": "clrknj03y000114ddcujedwey",
+      "title": "In Place",
+      "slug": "in-place",
+      "timeComplexity": "O(n ^ 2)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nvar minFallingPathSum = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n  let result = Math.min(...matrix[0]);\n\n  for (let row = 1; row < m; row++) {\n    let min = Infinity;\n    for (let col = 0; col < n; col++) {\n      let minPrev = Infinity;\n      for (let j = Math.max(0, col - 1); j < Math.min(n, col + 2); j++) {\n        minPrev = Math.min(minPrev, matrix[row - 1][j]);\n      }\n\n      matrix[row][col] += minPrev;\n      min = Math.min(min, matrix[row][col]);\n    }\n    result = min;\n  }\n\n  return result;\n};\n\nreturn minFallingPathSum;\n",
+      "order": 1
+    },
+    "clrl68iq3000510du0h0rbu4v": {
+      "id": "clrl68iq3000510du0h0rbu4v",
+      "createdAt": "2024-01-19T21:47:13.995Z",
+      "updatedAt": "2024-01-19T21:52:24.807Z",
+      "projectId": "clrl68iq3000310duno6w62u3",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nvar minFallingPathSum = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n  let prevRow = Array.from(matrix[0]);\n  let result = Math.min(...prevRow);\n\n  for (let row = 1; row < m; row++) {\n    let newRow = new Array(n);\n    let min = Infinity;\n    for (let col = 0; col < n; col++) {\n      let minPrev = Infinity;\n      for (let j = Math.max(0, col - 1); j < Math.min(n, col + 2); j++) {\n        minPrev = Math.min(minPrev, prevRow[j]);\n      }\n\n      newRow[col] = minPrev + matrix[row][col];\n      min = Math.min(min, newRow[col]);\n    }\n\n    prevRow = newRow;\n    result = min;\n  }\n\n  return result;\n};\n\nreturn minFallingPathSum;\n",
+      "code": "/**\n * // This is the BinaryMatrix's API interface.\n * // You should not implement it, or speculate about its implementation\n * function BinaryMatrix() {\n *     @param {integer} row, col\n *     @return {integer}\n *     this.get = function(row, col) {\n *         ...\n *     };\n *\n *     @return {[integer, integer]}\n *     this.dimensions = function() {\n *         ...\n *     };\n * };\n */\n\n/**\n * @param {BinaryMatrix} binaryMatrix\n * @return {number}\n */\nvar leftMostColumnWithOne = function (binaryMatrix) {\n  const rows = binaryMatrix.length;\n  const cols = binaryMatrix[0].length;\n  let currentRow = 0;\n  let currentCol = cols - 1;\n\n  while (currentRow < rows && currentCol >= 0) {\n    binaryMatrix[currentRow].setColor(currentCol, \"blue\");\n    const val = binaryMatrix[currentRow][currentCol];\n    if (val === 1) {\n      currentCol--;\n    } else {\n      currentRow++;\n    }\n  }\n\n  return currentCol === cols - 1 ? -1 : currentCol + 1;\n};\n\nreturn leftMostColumnWithOne;\n",
+      "order": 0
+    },
+    "clrm4d3b20003nhmgcdux2i70": {
+      "id": "clrm4d3b20003nhmgcdux2i70",
+      "createdAt": "2024-01-20T13:42:34.239Z",
+      "updatedAt": "2024-01-20T13:44:52.724Z",
+      "projectId": "clrm4d3b20001nhmggettevmy",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {number[]} arr\r\n * @return {number}\r\n */\r\nvar sumSubarrayMins = function (arr) {\r\n  const MOD = 1e9 + 7;\r\n  let result = 0;\r\n\r\n  const stack = new Array();\r\n\r\n  for (let i = 0; i <= arr.length; i++) {\r\n    arr.setColor(i, \"cyan\");\r\n    const num = arr[i] ?? -Infinity;\r\n    while (stack.length && num < arr[stack.at(-1)]) {\r\n      const mid = stack.pop();\r\n      const last = arr[mid];\r\n      let count = mid - (stack.at(-1) ?? -1);\r\n      count *= i - mid;\r\n      console.log({i, mid, last, count});\r\n      result += last * count;\r\n    }\r\n    stack.push(i);\r\n  }\r\n\r\n  return result % MOD;\r\n};\r\n\r\nreturn sumSubarrayMins;\r\n",
       "order": 0
     }
   }
