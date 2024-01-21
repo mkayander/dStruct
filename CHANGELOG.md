@@ -1,3 +1,10 @@
+# [1.258.0](https://github.com/mkayander/leetpal/compare/v1.257.0...v1.258.0) (2024-01-21)
+
+
+### Features
+
+* Run worker server ([1b8a2e2](https://github.com/mkayander/leetpal/commit/1b8a2e26744cbab14002c263b6e6bba83b4fa355))
+
 # [1.257.0](https://github.com/mkayander/leetpal/compare/v1.256.2...v1.257.0) (2024-01-19)
 
 
