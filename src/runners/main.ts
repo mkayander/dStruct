@@ -3,9 +3,9 @@ import express from "express";
 import { spawn } from "node:child_process";
 import path from "path";
 
-async function execPython(codeInput) {
+async function execPython(codeInput: string) {
   const child = spawn(`python`, [
-    path.join(process.cwd(), "workers", "exec.py"),
+    path.join(process.cwd(), "src", "runners", "exec.py"),
     codeInput,
   ]);
   let result = "";
@@ -44,7 +44,7 @@ app.post("/python", async (req, res) => {
     res.json({
       result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       error: error.message,
     });
