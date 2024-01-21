@@ -1,53 +1,56 @@
-import http from "http";
+import cors from "cors";
+import express from "express";
 import { spawn } from "node:child_process";
 import path from "path";
 
-const PORT = 8333;
+async function execPython(codeInput) {
+  const child = spawn(`python`, [
+    path.join(process.cwd(), "workers", "exec.py"),
+    codeInput,
+  ]);
+  let result = "";
+  for await (const chunk of child.stdout) {
+    result += chunk.toString();
+  }
+  let error = "";
+  for await (const chunk of child.stderr) {
+    error += chunk.toString();
+  }
+  const exitCode = await new Promise((resolve) => {
+    child.on("exit", resolve);
+  });
+  if (exitCode !== 0) {
+    throw new Error(error);
+  }
+  return result;
+}
 
-http
-  .createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    console.log(req.headers);
-    console.log(req.method);
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk;
+const PORT = 8085;
+const app = express();
+
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  }),
+);
+app.use(express.json());
+
+app.post("/python", async (req, res) => {
+  const data = req.body;
+
+  try {
+    const result = await execPython(data.code);
+    res.json({
+      result,
     });
-    req.on("end", () => {
-      console.log(body);
-      const data = JSON.parse(body);
-      console.log(data);
-
-      const child = spawn(`python`, [
-        path.join(process.cwd(), "workers", "exec.py"),
-        data.code,
-      ]);
-      child.stdout.setEncoding("utf-8");
-
-      let result = "";
-      child.stdout.on("data", (data) => {
-        const chunk = data.toString();
-        result += chunk;
-        console.log("stdout: ", chunk);
-      });
-
-      child.on("error", (...args) => {
-        console.error("Proc Error: ", ...args);
-        res.end();
-      });
-      child.on("exit", (...args) => {
-        console.log("Exit: ", ...args);
-        res.write(
-          JSON.stringify({
-            result,
-            url: req.url,
-            data,
-          }),
-        );
-        res.end();
-      });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
     });
-  })
-  .listen(PORT);
+  }
+});
 
-console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
