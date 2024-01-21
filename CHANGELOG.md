@@ -1,3 +1,12 @@
+# [1.259.0](https://github.com/mkayander/leetpal/compare/v1.258.0...v1.259.0) (2024-01-21)
+
+
+### Features
+
+* Installed ESBuild. Added runners build scripts. ([052d166](https://github.com/mkayander/leetpal/commit/052d166b9c36f9dd29375b059d77af870a6c8d23))
+* Installed express & cors ([e35b5f7](https://github.com/mkayander/leetpal/commit/e35b5f78247e09f6662b56b151b22fbc6a55643c))
+* Rewrite with express ([8bd8b3d](https://github.com/mkayander/leetpal/commit/8bd8b3dc0e5eb7ecc6d582bab65e378ba57dc10c))
+
 # [1.258.0](https://github.com/mkayander/leetpal/compare/v1.257.0...v1.258.0) (2024-01-21)
 
 
