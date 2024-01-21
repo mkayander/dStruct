@@ -57,6 +57,8 @@
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "cookies-next": "^2.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "formik": "^2.4.5",
     "formik-mui": "5.0.0-alpha.0",
     "graphql": "16.8.1",
