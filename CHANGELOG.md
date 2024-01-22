@@ -1,3 +1,10 @@
+# [1.260.0](https://github.com/mkayander/leetpal/compare/v1.259.0...v1.260.0) (2024-01-22)
+
+
+### Features
+
+* Added a code language property ([7c23d20](https://github.com/mkayander/leetpal/commit/7c23d2079a7b2dd69339b337d56f645f08ee7768))
+
 # [1.259.0](https://github.com/mkayander/leetpal/compare/v1.258.0...v1.259.0) (2024-01-21)
 
 
