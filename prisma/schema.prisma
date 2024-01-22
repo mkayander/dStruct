@@ -140,6 +140,11 @@ model PlaygroundProject {
   @@index([userId])
 }
 
+enum CodeLanguage {
+  JavaScript
+  Python
+}
+
 model PlaygroundSolution {
   id              String            @id @default(cuid())
   createdAt       DateTime          @default(now())
@@ -151,6 +156,7 @@ model PlaygroundSolution {
   timeComplexity  String?
   spaceComplexity String?
   description     String?
+  language        CodeLanguage      @default(JavaScript)
   code            String            @db.Text
   order           Int               @default(0)
 
