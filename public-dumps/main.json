@@ -2869,6 +2869,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clrnifdep000113dl1guufl5v": {
+      "id": "clrnifdep000113dl1guufl5v",
+      "createdAt": "2024-01-21T13:04:01.441Z",
+      "updatedAt": "2024-01-21T13:04:01.441Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "House Robber",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/house-robber",
+      "slug": "house-robber",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clrnj2p5y000913dl55f2zijd": {
+      "id": "clrnj2p5y000913dl55f2zijd",
+      "createdAt": "2024-01-21T13:22:09.766Z",
+      "updatedAt": "2024-01-21T13:22:09.766Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "House Robber II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/house-robber-ii",
+      "slug": "house-robber-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clrp29uva0003z4gbne72711h": {
+      "id": "clrp29uva0003z4gbne72711h",
+      "createdAt": "2024-01-22T15:07:22.630Z",
+      "updatedAt": "2024-01-22T15:07:22.630Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Set Mismatch",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/set-mismatch",
+      "slug": "set-mismatch",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -13038,6 +13080,101 @@
         }
       },
       "description": null
+    },
+    "clrnifdep000213dl9wrzuppl": {
+      "id": "clrnifdep000213dl9wrzuppl",
+      "createdAt": "2024-01-21T13:04:01.441Z",
+      "updatedAt": "2024-01-21T13:04:51.670Z",
+      "projectId": "clrnifdep000113dl1guufl5v",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3x2D8nSaKVMWidE6KGFbZJ": {
+          "name": "3x2D8nSaKVMWidE6KGFbZJ",
+          "type": "array",
+          "input": "[1,2,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrnigikl000513dl1k1ffown": {
+      "id": "clrnigikl000513dl1k1ffown",
+      "createdAt": "2024-01-21T13:04:54.789Z",
+      "updatedAt": "2024-01-21T13:04:58.319Z",
+      "projectId": "clrnifdep000113dl1guufl5v",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3x2D8nSaKVMWidE6KGFbZJ": {
+          "name": "3x2D8nSaKVMWidE6KGFbZJ",
+          "type": "array",
+          "input": "[2,7,9,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrnj2p5y000a13dla0s4oa9z": {
+      "id": "clrnj2p5y000a13dla0s4oa9z",
+      "createdAt": "2024-01-21T13:22:09.766Z",
+      "updatedAt": "2024-01-21T13:22:45.093Z",
+      "projectId": "clrnj2p5y000913dl55f2zijd",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "jCUYNMzF5ZteSB1nM36jon": {
+          "name": "jCUYNMzF5ZteSB1nM36jon",
+          "type": "array",
+          "input": "[1,2,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrnj3n9g000d13dlyh5o7pb3": {
+      "id": "clrnj3n9g000d13dlyh5o7pb3",
+      "createdAt": "2024-01-21T13:22:53.956Z",
+      "updatedAt": "2024-01-21T13:22:57.699Z",
+      "projectId": "clrnj2p5y000913dl55f2zijd",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "jCUYNMzF5ZteSB1nM36jon": {
+          "name": "jCUYNMzF5ZteSB1nM36jon",
+          "type": "array",
+          "input": "[2,3,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrp29uva0004z4gbh1t9niuq": {
+      "id": "clrp29uva0004z4gbh1t9niuq",
+      "createdAt": "2024-01-22T15:07:22.630Z",
+      "updatedAt": "2024-01-22T15:08:01.631Z",
+      "projectId": "clrp29uva0003z4gbne72711h",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -17082,6 +17219,58 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\r\n * @param {number[]} arr\r\n * @return {number}\r\n */\r\nvar sumSubarrayMins = function (arr) {\r\n  const MOD = 1e9 + 7;\r\n  let result = 0;\r\n\r\n  const stack = new Array();\r\n\r\n  for (let i = 0; i <= arr.length; i++) {\r\n    arr.setColor(i, \"cyan\");\r\n    const num = arr[i] ?? -Infinity;\r\n    while (stack.length && num < arr[stack.at(-1)]) {\r\n      const mid = stack.pop();\r\n      const last = arr[mid];\r\n      let count = mid - (stack.at(-1) ?? -1);\r\n      count *= i - mid;\r\n      console.log({i, mid, last, count});\r\n      result += last * count;\r\n    }\r\n    stack.push(i);\r\n  }\r\n\r\n  return result % MOD;\r\n};\r\n\r\nreturn sumSubarrayMins;\r\n",
+      "order": 0
+    },
+    "clrnifdep000313dlnck9r1iw": {
+      "id": "clrnifdep000313dlnck9r1iw",
+      "createdAt": "2024-01-21T13:04:01.441Z",
+      "updatedAt": "2024-01-21T13:07:27.440Z",
+      "projectId": "clrnifdep000113dl1guufl5v",
+      "title": "Optimized DP",
+      "slug": "optimized-dp",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar rob = function (nums) {\n  if (nums.length <= 1) return nums[0];\n\n  let prev2 = nums[0];\n  let prev = Math.max(prev2, nums[1]);\n\n  for (let i = 2; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    const tmp = prev;\n    prev = Math.max(prev, prev2 + num);\n    prev2 = tmp;\n  }\n\n  return Math.max(prev, prev2);\n};\n\nreturn rob;\n",
+      "order": 0
+    },
+    "clrnihgyw000713dle9tqi806": {
+      "id": "clrnihgyw000713dle9tqi806",
+      "createdAt": "2024-01-21T13:05:39.369Z",
+      "updatedAt": "2024-01-21T13:06:58.743Z",
+      "projectId": "clrnifdep000113dl1guufl5v",
+      "title": "DP Array",
+      "slug": "dp-array",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar rob = function (nums) {\n  if (nums.length <= 1) return nums[0];\n\n  const dp = new Array(nums.length);\n  dp[0] = nums[0];\n  dp[1] = Math.max(dp[0], nums[1]);\n\n  for (let i = 2; i < nums.length; i++) {\n    dp.setColor(i, \"green\");\n    const num = nums[i];\n    dp[i] = Math.max(dp[i - 1], dp[i - 2] + num);\n  }\n\n  return Math.max(dp.at(-1), dp.at(-2));\n};\n\nreturn rob;\n",
+      "order": 1
+    },
+    "clrnj2p5y000b13dlfdbfwy83": {
+      "id": "clrnj2p5y000b13dlfdbfwy83",
+      "createdAt": "2024-01-21T13:22:09.766Z",
+      "updatedAt": "2024-01-21T13:24:55.451Z",
+      "projectId": "clrnj2p5y000913dl55f2zijd",
+      "title": "Single Pass DP",
+      "slug": "single-pass-dp",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar rob = function (nums) {\n  if (nums.length <= 1) return nums[0];\n\n  let even1 = nums[0];\n  let even2 = Math.max(nums[0], nums[1]);\n  let odd1 = 0;\n  let odd2 = nums[1];\n\n  for (let i = 2; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    if (i < nums.length - 1) {\n      const tmp = even2;\n      even2 = Math.max(even2, even1 + num);\n      even1 = tmp;\n    }\n\n    const tmp = odd2;\n    odd2 = Math.max(odd2, odd1 + num);\n    odd1 = tmp;\n  }\n\n  return Math.max(even1, even2, odd1, odd2);\n};\n\nreturn rob;\n",
+      "order": 0
+    },
+    "clrp29uva0005z4gbdinvb6fm": {
+      "id": "clrp29uva0005z4gbdinvb6fm",
+      "createdAt": "2024-01-22T15:07:22.630Z",
+      "updatedAt": "2024-01-22T15:07:49.566Z",
+      "projectId": "clrp29uva0003z4gbne72711h",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar findErrorNums = function (nums) {\n  const n = nums.length;\n  let miss = null;\n  let twice = null;\n\n  let sum = 0;\n\n  for (let i = 0; i < n; i++) {\n    const num = Math.abs(nums[i]);\n    const j = num - 1;\n\n    if (nums[j] < 0) {\n      twice = num;\n    } else {\n      nums[j] = -nums[j];\n      sum += num;\n    }\n  }\n\n  const target = (n * (n + 1)) / 2;\n  miss = target - sum;\n\n  return [twice, miss];\n};\n\nreturn findErrorNums;\n",
       "order": 0
     }
   }
