@@ -1,6 +1,8 @@
 # dStruct - LeetCode Problem Visualization Web App
 
-### [dstruct.app](https://dstruct.app/)
+#### [dstruct.app](https://dstruct.app/)
+
+![Vercel Deploy](https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge) ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
 ## Overview
 
