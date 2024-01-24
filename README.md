@@ -2,13 +2,24 @@
 
 #### [dstruct.app](https://dstruct.app/)
 
-![Vercel Deploy](https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge) ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+<p align="center">
+  <a href="https://dstruct.app">
+    <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
+  </a>
+  <a href="/LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="MIT License" />
+  </a>
+</p>
 
 ## Overview
 
 dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in code editor where users can write and visualize their solutions.
 
-![2023-12-23_17-45-52 1.png](https://i.imgur.com/Q1FRwaK.png)
+<p align="center">
+  <a href="https://dstruct.app">
+    <img src="https://i.imgur.com/Q1FRwaK.png" alt="dStruct Web App" />
+  </a>
+</p>
 
 ## Features
 
