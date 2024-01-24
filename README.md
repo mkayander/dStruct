@@ -1,26 +1,126 @@
-# Create T3 App
+# dStruct - LeetCode Problem Visualization Web App
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+### [dstruct.app](https://dstruct.app/)
 
-## What's next? How do I make an app with this?
+## Overview
 
-We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
+dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in code editor where users can write and visualize their solutions.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+![2023-12-23_17-45-52 1.png](..%2F..%2FDownloads%2F2023-12-23_17-45-52%201.png)
 
-- [Next-Auth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [tRPC](https://trpc.io)
+## Features
 
-We also [roll our own docs](https://create.t3.gg) with some summary information and links to the respective documentation.
+- **Integrated Code Editor**: Write and visualize LeetCode solutions within the app using the built-in code editor powered by Monaco Editor.
+- **Graphical Visualization**: Gain insights into data structures and algorithms through graphical representations, making it easier to understand and debug code.
+- **Authentication with NextAuth**: Secure user authentication with NextAuth for a personalized experience.
+- **Prisma ORM for Database Operations**: Utilizes Prisma ORM for efficient database operations, enhancing data handling and storage capabilities.
+- **GraphQL Integration**: Incorporates GraphQL for efficient query execution and improved API interactions.
+- **State Management with Redux Toolkit**: Manages application state seamlessly with the help of Redux Toolkit for predictable state changes.
+- **Internationalization (i18n) Support**: Implements Typesafe i18n for easy translation and localization.
+- **Interactive UI with Material-UI and Emotion**: Enhances user interface with the help of Material-UI components and Emotion for styling.
+- **Code Quality and Testing**: Maintains code quality through linting with ESLint, Prettier, and testing with Jest.
 
-Also checkout these awesome tutorials on `create-t3-app`.
+## Tech Stack
 
-- [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
-- [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
-- [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
-- [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
+- **Frontend**:
+    - React
+    - Next.js
+    - Redux Toolkit
+    - Material-UI
+    - Emotion
+    - Monaco Editor
+    - Apollo Client
 
-## How do I deploy this?
+- **Backend**:
+    - Node.js
+    - Express
+    - Prisma
+    - GraphQL
+    - NextAuth
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Database**:
+    - Prisma ORM
+    - SQLite (or your preferred database)
+
+- **Other Tools**:
+    - Typesafe i18n
+    - Axios
+    - Husky (Git Hooks)
+    - Semantic Release
+    - Jest Testing Framework
+
+## Getting Started
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/dStruct.git
+```
+
+2. Install dependencies using pnpm:
+
+```
+pnpm install
+```
+
+3. Run the development server:
+
+```
+pnpm run dev
+```
+
+Visit http://localhost:3000 to access the application.
+
+## Environment Variables
+
+Create a .env file in the root directory based on the .env.example file. Fill in the necessary values for the following variables:
+
+```
+NODE_ENV=development
+
+# Prisma
+# DEV
+DATABASE_URL='mysql://your_dev_database_url'
+DIRECT_DATABASE_URL='mysql://your_dev_direct_database_url'
+
+# PROD
+#DATABASE_URL='mysql://your_prod_database_url'
+# DIRECT_DATABASE_URL='mysql://your_prod_direct_database_url'
+
+PRISMA_FIELD_ENCRYPTION_KEY=k1.aesgcm256.your_encryption_key
+
+# Next Auth
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+
+# AWS
+ACCESS_KEY=your_aws_access_key
+SECRET_KEY=your_aws_secret_key
+BUCKET_NAME=your_s3_bucket_name
+NEXT_PUBLIC_BUCKET_BASE_URL=your_s3_bucket_base_url
+
+# Verifiable Credentials (VC) REST API
+KV_REST_API_READ_ONLY_TOKEN=your_kv_rest_api_read_only_token
+KV_REST_API_TOKEN=your_kv_rest_api_token
+KV_REST_API_URL=your_kv_rest_api_url
+KV_URL=your_kv_url
+```
+
+When adding additional env variables, update the schema in /env/schema.mjs accordingly.
+
+## Scripts
+
+- pnpm build: Build the Next.js application.
+- pnpm start: Start the production server.
+- pnpm test: Run Jest tests.
+- pnpm lint: Lint the code using ESLint.
+- pnpm prisma:generate: Generate Prisma client.
+- pnpm generate-graphql: Generate GraphQL types.
+
+## Contribution Guidelines
+
+Contributions to the project are welcome. Please follow the guidelines outlined in the CONTRIBUTING.md file.
+
+## License
+
+This project is licensed under the MIT License.
