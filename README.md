@@ -16,7 +16,7 @@
 dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in code editor where users can write and visualize their solutions.
 
 <p align="center">
-  <a href="https://dstruct.app">
+  <a href="https://dstruct.app/playground">
     <img src="https://i.imgur.com/Q1FRwaK.png" alt="dStruct Web App" />
   </a>
 </p>
