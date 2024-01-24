@@ -54,7 +54,7 @@ dStruct is a web app designed to assist users in understanding and visualizing L
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/dStruct.git
+git clone https://github.com/mkayander/dStruct.git
 ```
 
 2. Install dependencies using pnpm:
