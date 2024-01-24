@@ -6,7 +6,7 @@
   <a href="https://dstruct.app">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
   </a>
-  <a href="/LICENSE.md">
+  <a href="/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="MIT License" />
   </a>
 </p>
