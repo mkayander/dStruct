@@ -8,22 +8,24 @@ const isProduction = env.NODE_ENV === "production";
 
 declare global {
   // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
+  var prisma: ReturnType<typeof makeClient> | undefined;
 }
 
-const prismaBase =
-  // global.prisma ||
-  new PrismaClient({
+const makeClient = () => {
+  const client = new PrismaClient({
     log: isProduction ? ["error"] : ["query", "error", "warn"],
   });
 
-prismaBase.$use(fieldEncryptionMiddleware());
+  client.$use(fieldEncryptionMiddleware());
 
-const prisma = prismaBase.$extends(withAccelerate());
+  return client.$extends(withAccelerate());
+};
 
-// if (env.NODE_ENV !== "production") {
-//   global.prisma = prisma;
-// }
+const prisma = global.prisma || makeClient();
+
+if (!isProduction) {
+  global.prisma = prisma;
+}
 
 export { prisma };
 
