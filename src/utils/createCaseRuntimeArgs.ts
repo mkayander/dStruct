@@ -118,3 +118,25 @@ export const createCaseRuntimeArgs = (
     }
   });
 };
+
+export const createRawRuntimeArgs = (args: ArgumentObject[]) =>
+  args.map((arg) => {
+    switch (arg.type) {
+      case ArgumentType.LINKED_LIST:
+      case ArgumentType.BINARY_TREE:
+        return arg.input;
+
+      case ArgumentType.NUMBER:
+        return Number(arg.input);
+
+      case ArgumentType.BOOLEAN:
+        return arg.input === "true";
+
+      case ArgumentType.STRING:
+        return arg.input;
+
+      case ArgumentType.ARRAY:
+      case ArgumentType.MATRIX:
+        return JSON.parse(arg.input);
+    }
+  });
