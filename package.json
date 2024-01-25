@@ -1,6 +1,6 @@
 {
   "name": "dstruct",
-  "version": "1.260.0",
+  "version": "1.261.0",
   "private": true,
   "scripts": {
     "prepare": "husky install",

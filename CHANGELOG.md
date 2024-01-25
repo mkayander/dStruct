@@ -1,3 +1,10 @@
+# [1.261.0](https://github.com/mkayander/dStruct/compare/v1.260.0...v1.261.0) (2024-01-25)
+
+
+### Features
+
+* Renamed project ([3801a2e](https://github.com/mkayander/dStruct/commit/3801a2e020edc2dc70ba6b6232289ad9cf7f9ce3))
+
 # [1.260.0](https://github.com/mkayander/leetpal/compare/v1.259.0...v1.260.0) (2024-01-22)
 
 
