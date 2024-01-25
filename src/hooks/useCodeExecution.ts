@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import shortUUID from "short-uuid";
 
@@ -15,6 +15,14 @@ import {
   setGlobalRuntimeContext,
   stringifySolutionResult,
 } from "#/utils";
+import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
+
+import type {
+  CodeBenchmarkRequest,
+  ExecWorkerInterface,
+  WorkerRequestType,
+  WorkerResponse,
+} from "#/workers/codeExec.worker";
 
 const uuid = shortUUID();
 
@@ -29,8 +37,70 @@ const globalDefinitionsPrefix = `
 
 export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;
 
+const getWorkerResponse = <T extends WorkerRequestType>(
+  worker: Worker,
+  type: T,
+  timeLimit = 60000,
+): Promise<ExecWorkerInterface[T]["response"]> =>
+  new Promise((resolve, reject) => {
+    const listener = (event: MessageEvent<WorkerResponse>) => {
+      if (event.data?.type !== type) return;
+
+      worker.removeEventListener("message", listener);
+      resolve(event.data);
+    };
+    worker.addEventListener("message", listener);
+
+    setTimeout(() => {
+      worker.removeEventListener("message", listener);
+      reject(
+        new Error(
+          `Worker request time limit expired! No response in ${timeLimit}ms`,
+        ),
+      );
+    }, timeLimit);
+  });
+
 export const useCodeExecution = (codeInput: string) => {
   const dispatch = useDispatch();
+
+  const [worker, setWorker] = useState<Worker | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const worker = new Worker(
+      new URL("src/workers/codeExec.worker.ts", import.meta.url),
+    );
+    setWorker(worker);
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
+
+  const runBenchmark = async () => {
+    if (!worker) return;
+
+    setIsProcessing(true);
+    const args = createRawRuntimeArgs(caseArgs);
+    worker.postMessage({
+      type: "benchmark",
+      code: codeInput,
+      input: args,
+      count: 128,
+    } satisfies CodeBenchmarkRequest);
+
+    try {
+      const result = await getWorkerResponse(worker, "benchmark");
+      setError(null);
+      return result;
+    } catch (e: any) {
+      setError(e);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const treeStore = useAppSelector(treeDataSelector);
   const arrayStore = useAppSelector(arrayDataSelector);
@@ -103,5 +173,5 @@ export const useCodeExecution = (codeInput: string) => {
     }
   };
 
-  return { runCode };
+  return { worker, isProcessing, error, runBenchmark, runCode };
 };
