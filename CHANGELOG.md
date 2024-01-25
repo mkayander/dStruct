@@ -1,3 +1,18 @@
+# [1.262.0](https://github.com/mkayander/dStruct/compare/v1.261.0...v1.262.0) (2024-01-25)
+
+
+### Bug Fixes
+
+* Fixed Prisma client handling ([5abd5f5](https://github.com/mkayander/dStruct/commit/5abd5f5747c5cca7bfeee0163c5d9004c3adab44))
+
+
+### Features
+
+* Added worker benchmark logic ([9eafca1](https://github.com/mkayander/dStruct/commit/9eafca12128a5cd1f69c79766ff45c0c82402c81))
+* Implemented a "createRawRuntimeArgs" function ([fbf103f](https://github.com/mkayander/dStruct/commit/fbf103f001fb50aca13331ee670106f8f21716c3))
+* Implemented a code execution Web Worker ([23ba20b](https://github.com/mkayander/dStruct/commit/23ba20bad65417fc22843b672cf8efc3188c84f1))
+* Run code benchmark with lCtrl held ([a372dd8](https://github.com/mkayander/dStruct/commit/a372dd84ce8ceb6677d4fe30f55b199d332c1eb6))
+
 # [1.261.0](https://github.com/mkayander/dStruct/compare/v1.260.0...v1.261.0) (2024-01-25)
 
 
