@@ -8,7 +8,12 @@ import { useSnackbar } from "notistack";
 import parserBabel from "prettier/plugins/babel";
 import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  type MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
 import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
@@ -34,7 +39,7 @@ import { trpc } from "#/utils";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useUtils();
   const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>();
 
   const { LL } = useI18nContext();
@@ -71,7 +76,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { runCode } = useCodeExecution(codeInput);
+  const { runCode, runBenchmark } = useCodeExecution(codeInput);
 
   // Update code on solution change
   useEffect(() => {
@@ -130,8 +135,13 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setTabValue(newValue);
   };
 
-  const handleRunCode = () => {
-    runCode();
+  const handleRunCode: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    if (event.ctrlKey) {
+      const result = await runBenchmark();
+      console.log("Worker: bench result: ", result);
+    } else {
+      runCode();
+    }
   };
 
   const handleChangeCode = (
