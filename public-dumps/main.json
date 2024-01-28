@@ -745,12 +745,12 @@
     "clhxeo0lv0001la0892tsbt2u": {
       "id": "clhxeo0lv0001la0892tsbt2u",
       "createdAt": "2023-05-21T12:39:24.691Z",
-      "updatedAt": "2023-05-21T12:39:24.691Z",
+      "updatedAt": "2024-01-25T18:35:45.557Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Longest Common Subsequence",
-      "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-common-subsequence",
       "slug": "longest-common-subsequence",
       "description": "",
       "isExample": false,
@@ -2922,6 +2922,20 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters",
       "slug": "maximum-length-of-a-concatenated-string-with-unique-characters",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clrs5lham0001iisuk8yrkaq4": {
+      "id": "clrs5lham0001iisuk8yrkaq4",
+      "createdAt": "2024-01-24T19:03:42.286Z",
+      "updatedAt": "2024-01-24T19:03:42.286Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Pseudo-Palindromic Paths in a Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree",
+      "slug": "pseudo-palindromic-paths-in-a-binary-tree",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -13265,6 +13279,44 @@
         }
       },
       "description": null
+    },
+    "clrs5lham0002iisu00uz2kqu": {
+      "id": "clrs5lham0002iisu00uz2kqu",
+      "createdAt": "2024-01-24T19:03:42.286Z",
+      "updatedAt": "2024-01-24T19:03:53.698Z",
+      "projectId": "clrs5lham0001iisuk8yrkaq4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[2,3,1,3,1,null,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clrs5ls3e0005iisujcoy3r2b": {
+      "id": "clrs5ls3e0005iisujcoy3r2b",
+      "createdAt": "2024-01-24T19:03:56.283Z",
+      "updatedAt": "2024-01-24T19:03:59.574Z",
+      "projectId": "clrs5lham0001iisuk8yrkaq4",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[2,1,1,1,3,null,null,null,null,null,1]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14377,7 +14429,7 @@
     "clhxeuvqq0007la08413i4o3u": {
       "id": "clhxeuvqq0007la08413i4o3u",
       "createdAt": "2023-05-21T12:44:44.979Z",
-      "updatedAt": "2023-05-21T12:44:44.979Z",
+      "updatedAt": "2024-01-25T18:36:11.095Z",
       "projectId": "clhxeo0lv0001la0892tsbt2u",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -14385,7 +14437,7 @@
       "spaceComplexity": null,
       "description": null,
       "language": "JavaScript",
-      "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function longestCommonSubsequence(text1, text2) {\r\n  const dpGrid = window.Array.from({ length: text1.length + 1 }, () =>\r\n    Array.from({ length: text2.length + 1 }, () => 0)\r\n  );\r\n\r\n  // Iterate through each column, starting from the last one.\r\n  for (let col = text2.length - 1; col >= 0; col--) {\r\n    for (let row = text1.length - 1; row >= 0; row--) {\r\n      dpGrid[row].setColor(col, \"green\");\r\n\r\n      if (text1[row] === text2[col]) {\r\n        dpGrid[row][col] = 1 + dpGrid[row + 1][col + 1];\r\n\r\n        text1.setColor(row, \"green\");\r\n        text2.setColor(col, \"green\");\r\n        dpGrid[row + 1].setColor(col + 1, \"orange\");\r\n      } else {\r\n        dpGrid[row][col] = Math.max(dpGrid[row + 1][col], dpGrid[row][col + 1]);\r\n\r\n        text1.setColor(row, \"blue\");\r\n        text2.setColor(col, \"blue\");\r\n        dpGrid[row + 1].setColor(col, \"cyan\");\r\n        dpGrid[row].setColor(col + 1, \"cyan\");\r\n        dpGrid[row + 1].setColor(col, \"white\");\r\n        dpGrid[row].setColor(col + 1, \"white\");\r\n      }\r\n\r\n      dpGrid[row].setColor(col, \"white\");\r\n      text1.setColor(row, \"white\");\r\n      text2.setColor(col, \"white\");\r\n    }\r\n  }\r\n\r\n  return dpGrid[0][0];\r\n};\r\n",
+      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function longestCommonSubsequence(text1, text2) {\n  const dpGrid = Array.from({ length: text1.length + 1 }, () =>\n    Array.from({ length: text2.length + 1 }, () => 0),\n  );\n\n  // Iterate through each column, starting from the last one.\n  for (let col = text2.length - 1; col >= 0; col--) {\n    for (let row = text1.length - 1; row >= 0; row--) {\n      dpGrid[row].setColor(col, \"green\");\n\n      if (text1[row] === text2[col]) {\n        dpGrid[row][col] = 1 + dpGrid[row + 1][col + 1];\n\n        text1.setColor(row, \"green\");\n        text2.setColor(col, \"green\");\n        dpGrid[row + 1].setColor(col + 1, \"orange\");\n      } else {\n        dpGrid[row][col] = Math.max(dpGrid[row + 1][col], dpGrid[row][col + 1]);\n\n        text1.setColor(row, \"blue\");\n        text2.setColor(col, \"blue\");\n        dpGrid[row + 1].setColor(col, \"cyan\");\n        dpGrid[row].setColor(col + 1, \"cyan\");\n        dpGrid[row + 1].setColor(col, \"white\");\n        dpGrid[row].setColor(col + 1, \"white\");\n      }\n\n      dpGrid[row].setColor(col, \"white\");\n      text1.setColor(row, \"white\");\n      text2.setColor(col, \"white\");\n    }\n  }\n\n  return dpGrid[0][0];\n};\n",
       "order": 1
     },
     "clhyn4djx0004kx08p1ivvtzs": {
@@ -17705,6 +17757,62 @@
       "language": "JavaScript",
       "code": "/**\n * @param {string[]} arr\n * @return {number}\n */\nvar maxLength = function (arr) {\n  const offset = \"a\".charCodeAt(0);\n  const getState = (str) => {\n    let state = 0;\n    for (let i = 0; i < str.length; i++) {\n      const bit = 1 << (str.charCodeAt(i) - offset);\n      if (bit & state) return null;\n      state |= bit;\n    }\n    return state;\n  };\n\n  const backtrack = (i, state) => {\n    if (i === arr.length) {\n      return 0;\n    }\n    arr.setColor(i, \"green\");\n    let length = 0;\n\n    const str = arr[i];\n    const mask = getState(str);\n    if (mask && (state & mask) === 0) {\n      length = arr[i].length + backtrack(i + 1, state | mask);\n    }\n\n    length = Math.max(length, backtrack(i + 1, state));\n\n    arr.setColor(i, null);\n    return length;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn maxLength;\n",
       "order": 1
+    },
+    "clrs5lham0003iisu76k130nn": {
+      "id": "clrs5lham0003iisu76k130nn",
+      "createdAt": "2024-01-24T19:03:42.286Z",
+      "updatedAt": "2024-01-24T19:07:26.710Z",
+      "projectId": "clrs5lham0001iisuk8yrkaq4",
+      "title": "Bit Manipulation",
+      "slug": "bit-manipulation",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "language": "JavaScript",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar pseudoPalindromicPaths = function (root) {\n  let result = 0;\n\n  const isSingleBit = (num) => (num & (num - 1)) === 0;\n\n  const dfs = (node, state) => {\n    if (!node) return;\n    console.log(node.val, state.toString(2).padStart(8, \"0\"));\n    node.setColor(\"green\", \"blink\");\n\n    state ^= 1 << node.val;\n    if (!node.left && !node.right && isSingleBit(state)) {\n      result++;\n    }\n\n    dfs(node.left, state);\n    dfs(node.right, state);\n  };\n\n  dfs(root, 0);\n\n  return result;\n};\n\nreturn pseudoPalindromicPaths;\n",
+      "order": 0
+    },
+    "clrs5qqj10007iisuted4igd9": {
+      "id": "clrs5qqj10007iisuted4igd9",
+      "createdAt": "2024-01-24T19:07:47.533Z",
+      "updatedAt": "2024-01-24T19:09:22.367Z",
+      "projectId": "clrs5lham0001iisuk8yrkaq4",
+      "title": "Freq Map",
+      "slug": "freq-map",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "language": "JavaScript",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar pseudoPalindromicPaths = function (root) {\n  let result = 0;\n  const freqMap = new Array(10).fill(0);\n\n  const isPalindrome = () => {\n    let foundSingle = false;\n\n    for (let i = 1; i <= 9; i++) {\n      const count = freqMap[i];\n      if (!count) continue;\n\n      if (count === 1 || count % 2 > 0) {\n        if (foundSingle) return false;\n        foundSingle = true;\n      }\n    }\n\n    return true;\n  };\n\n  const dfs = (node) => {\n    if (!node) return;\n    node.setColor(\"green\");\n    freqMap[node.val]++;\n\n    dfs(node.left);\n    if (!node.left && !node.right && isPalindrome()) {\n      result++;\n    }\n    dfs(node.right);\n\n    freqMap[node.val]--;\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn pseudoPalindromicPaths;\n",
+      "order": 1
+    },
+    "clrtk2lq6000116ms72ioqnh1": {
+      "id": "clrtk2lq6000116ms72ioqnh1",
+      "createdAt": "2024-01-25T18:36:41.983Z",
+      "updatedAt": "2024-01-25T18:40:56.503Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "language": "JavaScript",
+      "code": "/**\n * @param {string} text1\n * @param {string} text2\n * @return {number}\n */\nvar longestCommonSubsequence = function (text1, text2) {\n  const n = text1.length;\n  const m = text2.length;\n\n  const dp = Array.from({ length: n }, () => new Array(m).fill(0));\n\n  for (let i = 0; i < n; i++) {\n    text1.setColor(i, \"cyan\");\n    for (let j = 0; j < m; j++) {\n      text2.setColor(j, \"cyan\");\n      if (text1[i] === text2[j]) {\n        text1.setColor(i, \"green\");\n        text2.setColor(j, \"green\");\n        dp[i][j] = (dp[i - 1]?.[j - 1] ?? 0) + 1;\n        dp[i - 1]?.setColor(j - 1, \"green\");\n      } else {\n        dp[i][j] = Math.max(dp[i - 1]?.[j] ?? 0, dp[i][j - 1] ?? 0);\n        dp[i - 1]?.setColor(j, \"cyan\");\n        dp[i].setColor(j - 1, \"cyan\");\n      }\n      text2.setColor(j, null);\n    }\n  }\n\n  return dp.at(-1).at(-1);\n};\n\nreturn longestCommonSubsequence;\n",
+      "order": 2
+    },
+    "clrtkd79q000316ms0fdd4a21": {
+      "id": "clrtkd79q000316ms0fdd4a21",
+      "createdAt": "2024-01-25T18:44:56.463Z",
+      "updatedAt": "2024-01-25T18:46:02.876Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 4",
+      "slug": "solution-4",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "language": "JavaScript",
+      "code": "/**\n * @param {string} text1\n * @param {string} text2\n * @return {number}\n */\nvar longestCommonSubsequence = function (text1, text2) {\n  const n = text1.length;\n  const m = text2.length;\n\n  let prevRow = new Array(m).fill(0);\n\n  for (let i = 0; i < n; i++) {\n    text1.setColor(i, \"cyan\");\n    const newRow = new Array(m);\n    for (let j = 0; j < m; j++) {\n      text2.setColor(j, \"cyan\");\n      if (text1[i] === text2[j]) {\n        text1.setColor(i, \"green\");\n        text2.setColor(j, \"green\");\n        newRow[j] = (prevRow[j - 1] ?? 0) + 1;\n      } else {\n        newRow[j] = Math.max(prevRow[j] ?? 0, newRow[j - 1] ?? 0);\n      }\n      text2.setColor(j, null);\n    }\n    prevRow = newRow;\n  }\n\n  return prevRow.at(-1);\n};\n\nreturn longestCommonSubsequence;\n",
+      "order": 3
     }
   }
 }
