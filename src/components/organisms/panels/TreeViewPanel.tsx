@@ -29,7 +29,7 @@ import {
   StyledTabPanel,
   TabListWrapper,
 } from "#/components/organisms/panels/common/styled";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext, useSearchParam } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
@@ -41,12 +41,20 @@ import {
 import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState } from "#/utils";
 
+type TabName = "structure" | "benchmark";
+const TabNames = new Set<TabName>(["structure", "benchmark"]);
+const isValidTabName = (name: unknown): name is TabName =>
+  TabNames.has(name as TabName);
+
 export const TreeViewPanel: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { LL } = useI18nContext();
 
-  const [tabValue, setTabValue] = useState("1");
+  const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
+    defaultValue: "structure",
+    validate: isValidTabName,
+  });
   const [frameIndex, setFrameIndex] = useState(-1);
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
@@ -110,7 +118,8 @@ export const TreeViewPanel: React.FC = () => {
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
-            <Tab label={LL.TREE_VIEWER()} value="1" />
+            <Tab label={"Structure Viewer"} value="structure" />
+            <Tab label={"Benchmark"} value="benchmark" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconButton>
@@ -148,7 +157,7 @@ export const TreeViewPanel: React.FC = () => {
           </Stack>
         </TabListWrapper>
         <StyledTabPanel
-          value="1"
+          value="structure"
           useScroll={!isMobile}
           sx={{ height: "100%", p: 0, position: "relative" }}
         >
@@ -226,6 +235,9 @@ export const TreeViewPanel: React.FC = () => {
             replayCount={replayCount}
             playbackInterval={sliderValue}
           />
+        </StyledTabPanel>
+        <StyledTabPanel value="benchmark">
+          <Typography>Benchmark</Typography>
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>
