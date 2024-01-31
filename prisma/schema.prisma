@@ -157,7 +157,8 @@ model PlaygroundSolution {
   spaceComplexity String?
   description     String?
   language        CodeLanguage      @default(JavaScript)
-  code            String            @db.Text
+  code            String?           @db.Text // JS
+  pythonCode      String?           @db.Text
   order           Int               @default(0)
 
   @@unique([projectId, slug])
