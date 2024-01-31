@@ -29,7 +29,7 @@ import {
   TabListWrapper,
 } from "#/components/organisms/panels/common/styled";
 import { type PanelContentProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
-import { useCodeExecution, usePlaygroundSlugs } from "#/hooks";
+import { useCodeExecution, usePlaygroundSlugs, useSearchParam } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { codePrefixLinesCount } from "#/hooks/useCodeExecution";
 import { useAppSelector } from "#/store/hooks";
@@ -44,6 +44,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { LL } = useI18nContext();
 
+  const [runMode] = useSearchParam("mode");
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState<string>("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
@@ -135,8 +136,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setTabValue(newValue);
   };
 
-  const handleRunCode: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    if (event.ctrlKey) {
+  const handleRunCode: MouseEventHandler<HTMLButtonElement> = async () => {
+    if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
     } else {
