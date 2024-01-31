@@ -1,3 +1,10 @@
+## [1.263.1](https://github.com/mkayander/dStruct/compare/v1.263.0...v1.263.1) (2024-01-31)
+
+
+### Bug Fixes
+
+* Specify a new domain name ([9b0e239](https://github.com/mkayander/dStruct/commit/9b0e239ed870bbbc43cb93bc88dc7aad5a3acca1))
+
 # [1.263.0](https://github.com/mkayander/dStruct/compare/v1.262.0...v1.263.0) (2024-01-30)
 
 
