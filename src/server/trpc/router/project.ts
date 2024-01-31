@@ -481,7 +481,7 @@ export const projectRouter = router({
         description: z.ostring().nullable(),
         timeComplexity: z.ostring().nullable(),
         spaceComplexity: z.ostring().nullable(),
-        code: z.ostring(),
+        code: z.ostring().nullable(),
         order: z.onumber()
       })
     )
