@@ -1,3 +1,20 @@
+# [1.265.0](https://github.com/mkayander/dStruct/compare/v1.264.0...v1.265.0) (2024-01-31)
+
+
+### Bug Fixes
+
+* Fix TS error ([e231de2](https://github.com/mkayander/dStruct/commit/e231de27edda9ccab21f4a54e6899612a1caeebd))
+* Update React state instantly ([ed0e0df](https://github.com/mkayander/dStruct/commit/ed0e0df2723f5c987cb55d308351064ac9214592))
+
+
+### Features
+
+* Add new column for Python code ([8d816df](https://github.com/mkayander/dStruct/commit/8d816dffd6b04ab4c83d9145fcc31c446755e4d7))
+* Implemented a "useSearchParam" hook ([ba227ad](https://github.com/mkayander/dStruct/commit/ba227adbb35ae6f2a1810d3d547b49689b85d310))
+* Run benchmark depending on current view tab ([8fa0e09](https://github.com/mkayander/dStruct/commit/8fa0e09b25784ece861140d4b969ff89f740cba4))
+* Sync viewer tab with a search param ([4f756b0](https://github.com/mkayander/dStruct/commit/4f756b092e55372d3a76c3a4d88c0c7e29ae6ce4))
+* Updated Prisma packages ([b5a0d45](https://github.com/mkayander/dStruct/commit/b5a0d454793d0a87e864da0d58e869a4b61013e3))
+
 # [1.264.0](https://github.com/mkayander/dStruct/compare/v1.263.1...v1.264.0) (2024-01-31)
 
 
