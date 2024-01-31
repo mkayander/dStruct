@@ -44,6 +44,7 @@ export const useSearchParam = <T extends string = string>(
     (value: unknown) => {
       if (!validate(value)) return;
 
+      setState(value);
       const { pathname, query } = router;
       const newQuery = { ...query, [param]: value };
       void router.push({ pathname, query: newQuery }, undefined, {
