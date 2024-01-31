@@ -1,3 +1,10 @@
+# [1.264.0](https://github.com/mkayander/dStruct/compare/v1.263.1...v1.264.0) (2024-01-31)
+
+
+### Features
+
+* Update license ([a8bd5bb](https://github.com/mkayander/dStruct/commit/a8bd5bb573ad5fbe621057079181feb7156e0bb5))
+
 ## [1.263.1](https://github.com/mkayander/dStruct/compare/v1.263.0...v1.263.1) (2024-01-31)
 
 
