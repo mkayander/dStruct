@@ -2,10 +2,7 @@ import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import {
-  type CallstackHelper,
-  callstackSlice,
-} from "#/store/reducers/callstackReducer";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
@@ -133,7 +130,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
   override pop() {
     const base = this.getDispatchBase(this.length - 1);
     const value = super.pop();
-    callstackSlice.actions.addOne({
+    this.callstack.addOne({
       ...base,
       name: "deleteNode",
     });
