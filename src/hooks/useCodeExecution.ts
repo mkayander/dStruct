@@ -9,7 +9,7 @@ import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
-import { resetStructuresState, stringifySolutionResult } from "#/utils";
+import { resetStructuresState } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
 import type {
