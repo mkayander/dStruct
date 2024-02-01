@@ -1,7 +1,11 @@
 import { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
 import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
-import { createCaseRuntimeArgs, setGlobalRuntimeContext } from "#/utils";
+import {
+  createCaseRuntimeArgs,
+  setGlobalRuntimeContext,
+  stringifySolutionResult,
+} from "#/utils";
 import type { ArgumentObject } from "#/utils/argumentObject";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
@@ -81,7 +85,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const response: WorkerResponse = {
           type: "run",
           runtime: performance.now() - startTime,
-          output: result,
+          output: stringifySolutionResult(result),
           callstack: callstack.frames,
         };
         self.postMessage(response);

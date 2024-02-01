@@ -116,14 +116,12 @@ export const useCodeExecution = (codeInput: string) => {
       if (error) throw error;
       setError(null);
 
-      const serializedResult = stringifySolutionResult(output);
-
       // Identify that the callstack is filled and can now be used
       dispatch(
         callstackSlice.actions.setStatus({
           isReady: true,
           error: null,
-          result: serializedResult,
+          result: String(output),
           frames: callstack,
           runtime,
           startTimestamp,
