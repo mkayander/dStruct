@@ -21,6 +21,7 @@ export const MatrixRow: React.FC<ArrayStructureViewProps> = ({ data }) => {
         ))
       ) : (
         <Box
+          component="td"
           sx={{
             width: 44,
             height: 44,
