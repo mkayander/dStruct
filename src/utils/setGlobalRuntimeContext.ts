@@ -11,15 +11,14 @@ import { ControlledMap } from "#/hooks/dataStructures/mapStructure";
 import { ControlledObject } from "#/hooks/dataStructures/objectStructure";
 import { ControlledSet } from "#/hooks/dataStructures/setStructure";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
-import { type AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 import { safeStringify, stripQuotes } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 
-export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
+export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
   class BinaryTree extends BinaryTreeNode {
     constructor(
       val: number,
@@ -36,7 +35,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
           depth: 0,
         },
         uuid.generate(),
-        dispatch,
+        callstack,
         true,
       );
     }
@@ -52,7 +51,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
           type: ArgumentType.LINKED_LIST,
         },
         uuid.generate(),
-        dispatch,
+        callstack,
         true,
       );
     }
@@ -76,7 +75,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
 
       const data = generateArrayData(items);
 
-      super(items, uuid.generate(), data, dispatch, true);
+      super(items, uuid.generate(), data, callstack, true);
     }
 
     static override from(
@@ -88,7 +87,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       thisArg?: unknown,
       options?: ControlledArrayRuntimeOptions,
     ) {
-      return ControlledArray._from(dispatch, array, mapFn, thisArg, options);
+      return ControlledArray._from(callstack, array, mapFn, thisArg, options);
     }
   }
 
@@ -97,7 +96,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
       let string = String(input);
       if (input === undefined) string = "";
       const data = generateArrayData(string.split(""));
-      super(string, uuid.generate(), data, dispatch, true);
+      super(string, uuid.generate(), data, callstack, true);
     }
   }
 
@@ -105,7 +104,7 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     constructor(input?: any[] | null) {
       const set = new Set(input);
       const data = generateArrayData(Array.from(set));
-      super(Array.from(set), uuid.generate(), data, dispatch, true);
+      super(Array.from(set), uuid.generate(), data, callstack, true);
     }
   }
 
@@ -113,14 +112,14 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     constructor(input?: any[] | null) {
       const map = new Map(input);
       const data = generateArrayData(Array.from(map));
-      super(Array.from(map), uuid.generate(), data, dispatch, true);
+      super(Array.from(map), uuid.generate(), data, callstack, true);
     }
   }
 
   class ObjectProxy extends ControlledObject {
     constructor(input?: any) {
       const data = generateArrayData([]);
-      super(input, uuid.generate(), data, dispatch, true);
+      super(input, uuid.generate(), data, callstack, true);
     }
   }
 
@@ -204,25 +203,23 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
     LinkedList,
     ListNode: LinkedList,
     log: (...args: unknown[]) => {
-      dispatch(
-        callstackSlice.actions.addOne({
-          id: uuid.generate(),
-          timestamp: performance.now(),
-          name: "consoleLog",
-          args: args.map((arg) => {
-            if (typeof arg === "object") {
-              return stripQuotes(safeStringify(arg));
-            }
-            return String(arg);
-          }),
+      callstack.addOne({
+        id: uuid.generate(),
+        timestamp: performance.now(),
+        name: "consoleLog",
+        args: args.map((arg) => {
+          if (typeof arg === "object") {
+            return stripQuotes(safeStringify(arg));
+          }
+          return String(arg);
         }),
-      );
+      });
 
       console.log(...args);
     },
   };
 
-  Object.assign(window, context);
+  Object.assign(self, context);
 };
 
 export const globalDefinitionsPrefix = `

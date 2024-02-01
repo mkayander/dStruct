@@ -2,8 +2,7 @@ import { type Dictionary } from "@reduxjs/toolkit";
 
 import { type BinaryNodeMeta } from "#/hooks/dataStructures/binaryTreeNode";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
-import type { AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 import { safeStringify } from "#/utils/stringifySolutionResult";
@@ -14,20 +13,18 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
     next: LinkedListNode<T> | null = null,
     meta: NodeMeta,
     name: string,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {
-    super(val, meta, name, dispatch);
+    super(val, meta, name, callstack);
     this._next = next;
 
     if (addToCallstack) {
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...this.getDispatchBase(),
-          name: "addNode",
-          args: { value: safeStringify(val) },
-        }),
-      );
+      this.callstack.addOne({
+        ...this.getDispatchBase(),
+        name: "addNode",
+        args: { value: safeStringify(val) },
+      });
     }
   }
 
@@ -40,13 +37,11 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
 
   public set next(node: LinkedListNode<T> | null) {
     this._next = node;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setNextNode",
-        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
-      }),
-    );
+    this.callstack.addOne({
+      ...this.getDispatchBase(),
+      name: "setNextNode",
+      args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+    });
     if (node) {
       node.name = this.name;
     }
@@ -56,7 +51,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
     name: string,
     nodeData: TreeNodeData | undefined,
     dataMap: Dictionary<TreeNodeData>,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     meta?: Partial<BinaryNodeMeta>,
   ): LinkedListNode<number | string> | null {
     if (!nodeData) return null;
@@ -78,7 +73,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
       null,
       newMeta,
       name,
-      dispatch,
+      callstack,
     );
 
     if (nextId) {
@@ -86,7 +81,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
         name,
         dataMap[nextId],
         dataMap,
-        dispatch,
+        callstack,
         meta,
       );
     }
@@ -95,11 +90,9 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   }
 
   public delete() {
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "deleteNode",
-      }),
-    );
+    this.callstack.addOne({
+      ...this.getDispatchBase(),
+      name: "deleteNode",
+    });
   }
 }

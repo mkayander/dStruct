@@ -1,10 +1,9 @@
 import shortUUID from "short-uuid";
 
-import type { AppDispatch } from "#/store/makeStore";
-import {
-  type AddArrayItemFrame,
-  type CallFrameBase,
-  callstackSlice,
+import type {
+  AddArrayItemFrame,
+  CallFrameBase,
+  CallstackHelper,
 } from "#/store/reducers/callstackReducer";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import type { Constructor } from "#/types/helpers";
@@ -17,8 +16,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
   abstract class BaseStructure extends Base {
     protected readonly name!: string;
     protected readonly argType!: ArgumentArrayType;
-
-    protected readonly dispatch!: AppDispatch;
+    protected readonly callstack!: CallstackHelper;
 
     protected constructor(...args: any[]) {
       super(...args);
@@ -27,51 +25,44 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
     public blink(index: number) {
       const base = this.getDispatchBase(index);
       if (!base) return;
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...base,
-          name: "blink",
-        }),
-      );
+      this.callstack.addOne({
+        ...base,
+        name: "blink",
+      });
     }
 
     public setColor(index: number, color: string | null, animation?: string) {
       const base = this.getDispatchBase(index);
       if (!base) return;
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...base,
-          name: "setColor",
-          args: { color, animation },
-        }),
-      );
+      this.callstack.addOne({
+        ...base,
+        name: "setColor",
+        args: { color, animation },
+      });
     }
 
     public showPointer(index: number, name: string) {
       const base = this.getDispatchBase(index);
       if (!base) return;
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...base,
-          name: "showPointer",
-          args: { name },
-        }),
-      );
+      this.callstack.addOne({
+        ...base,
+        name: "showPointer",
+        args: { name },
+      });
     }
 
     public setColorMap(colorMap: Record<string, string>) {
       const base = this.getDispatchBase();
       if (!base) return;
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...base,
-          name: "setColorMap",
-          args: { colorMap },
-        }),
-      );
+      this.callstack.addOne({
+        ...base,
+        name: "setColorMap",
+        args: { colorMap },
+      });
     }
 
     protected abstract getNodeMeta(key: any): ArrayItemData | undefined;
+
     protected abstract setNodeMeta(key: any, data: ArrayItemData): void;
 
     protected getDispatchBase(key?: any) {
@@ -108,13 +99,11 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
           value,
           childName,
         });
-        this.dispatch(
-          callstackSlice.actions.addOne({
-            ...base,
-            name: "setVal",
-            args: { value, childName },
-          }),
-        );
+        this.callstack.addOne({
+          ...base,
+          name: "setVal",
+          args: { value, childName },
+        });
       } else {
         const newItem = {
           id: uuid.generate(),
@@ -127,18 +116,16 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         if (typeof propKey === "string") {
           args.key = propKey;
         }
-        this.dispatch(
-          callstackSlice.actions.addOne({
-            id: uuid.generate(),
-            name: "addArrayItem",
-            argType: this.argType,
-            treeName: this.name,
-            structureType: "array",
-            nodeId: newItem.id,
-            timestamp: performance.now(),
-            args,
-          }),
-        );
+        this.callstack.addOne({
+          id: uuid.generate(),
+          name: "addArrayItem",
+          argType: this.argType,
+          treeName: this.name,
+          structureType: "array",
+          nodeId: newItem.id,
+          timestamp: performance.now(),
+          args,
+        });
       }
     }
   }

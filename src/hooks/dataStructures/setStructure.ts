@@ -1,8 +1,7 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import type { AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
@@ -19,7 +18,7 @@ export class ControlledSet extends ArrayBase {
     value: any[] | null | undefined,
     name: string,
     arrayData: EntityState<ArrayItemData>,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {
     super(value);
@@ -45,20 +44,18 @@ export class ControlledSet extends ArrayBase {
         value: ArgumentType.SET,
         enumerable: false,
       },
-      dispatch: {
-        value: dispatch,
+      callstack: {
+        value: callstack,
         enumerable: false,
       },
     });
 
     if (addToCallstack) {
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...this.getDispatchBase(),
-          name: "addArray",
-          args: { arrayData },
-        }),
-      );
+      this.callstack.addOne({
+        ...this.getDispatchBase(),
+        name: "addArray",
+        args: { arrayData },
+      });
     }
   }
 
@@ -77,12 +74,10 @@ export class ControlledSet extends ArrayBase {
 
     const base = this.getDispatchBase(value);
     super.delete(value);
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "deleteNode",
-      }),
-    );
+    this.callstack.addOne({
+      ...base,
+      name: "deleteNode",
+    });
 
     return true;
   }

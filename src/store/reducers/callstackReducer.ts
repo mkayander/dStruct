@@ -181,15 +181,22 @@ export const callstackSlice = createSlice({
         Pick<
           CallstackState,
           "isReady" | "result" | "runtime" | "startTimestamp" | "error"
-        >
+        > & { frames?: CallFrame[] }
       >,
     ) => {
-      const { payload } = action;
+      const {
+        payload: { frames, isReady, result, runtime, startTimestamp, error },
+      } = action;
 
-      return {
-        ...state,
-        ...payload,
-      };
+      if (frames) {
+        callstackAdapter.setAll(state.frames, frames);
+      }
+
+      state.isReady = isReady;
+      state.result = result;
+      state.runtime = runtime;
+      state.startTimestamp = startTimestamp;
+      state.error = error;
     },
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;

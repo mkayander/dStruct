@@ -3,7 +3,7 @@ import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { getMatrixChildArrayArgs } from "#/hooks/useArgumentsParsing";
-import type { AppDispatch } from "#/store/makeStore";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type {
   ArrayData,
   ArrayDataState,
@@ -21,7 +21,7 @@ import {
 const createRuntimeTree = (
   nodesData: TreeData | undefined,
   arg: ArgumentObject,
-  dispatch: AppDispatch,
+  callstack: CallstackHelper,
 ) => {
   if (!nodesData) {
     console.error("No nodes data found for binary tree");
@@ -39,17 +39,27 @@ const createRuntimeTree = (
 
   switch (nodesData.type) {
     case ArgumentType.BINARY_TREE:
-      return BinaryTreeNode.fromNodeData(arg.name, rootData, dataMap, dispatch);
+      return BinaryTreeNode.fromNodeData(
+        arg.name,
+        rootData,
+        dataMap,
+        callstack,
+      );
 
     case ArgumentType.LINKED_LIST:
-      return LinkedListNode.fromNodeData(arg.name, rootData, dataMap, dispatch);
+      return LinkedListNode.fromNodeData(
+        arg.name,
+        rootData,
+        dataMap,
+        callstack,
+      );
   }
 };
 
 const createRuntimeArray = (
   nodesData: ArrayData | undefined,
   arg: ArgumentObject,
-  dispatch: AppDispatch,
+  callstack: CallstackHelper,
 ) => {
   if (!nodesData) return null;
 
@@ -61,17 +71,17 @@ const createRuntimeArray = (
   arrayDataState = structuredClone(arrayDataState);
 
   if (nodesData.argType === ArgumentType.STRING) {
-    return new ControlledString(arg.input, arg.name, arrayDataState, dispatch);
+    return new ControlledString(arg.input, arg.name, arrayDataState, callstack);
   }
 
   const array = JSON.parse(arg.input) as Array<number | string>;
-  return new ControlledArray(array, arg.name, arrayDataState, dispatch);
+  return new ControlledArray(array, arg.name, arrayDataState, callstack);
 };
 
 const createRuntimeMatrix = (
   arrayStore: ArrayDataState,
   arg: ArgumentObject,
-  dispatch: AppDispatch,
+  callstack: CallstackHelper,
 ) => {
   if (!isArgumentArrayType(arg)) return null;
 
@@ -84,7 +94,7 @@ const createRuntimeMatrix = (
     matrix[index] = createRuntimeArray(
       arrayStore[childArg.name],
       childArg,
-      dispatch,
+      callstack,
     );
   });
 
@@ -92,7 +102,7 @@ const createRuntimeMatrix = (
 };
 
 export const createCaseRuntimeArgs = (
-  dispatch: AppDispatch,
+  callstack: CallstackHelper,
   treeStore: TreeDataState,
   arrayStore: ArrayDataState,
   args: ArgumentObject[],
@@ -101,7 +111,7 @@ export const createCaseRuntimeArgs = (
     switch (arg.type) {
       case ArgumentType.LINKED_LIST:
       case ArgumentType.BINARY_TREE:
-        return createRuntimeTree(treeStore[arg.name], arg, dispatch);
+        return createRuntimeTree(treeStore[arg.name], arg, callstack);
 
       case ArgumentType.NUMBER:
         return Number(arg.input);
@@ -111,10 +121,10 @@ export const createCaseRuntimeArgs = (
 
       case ArgumentType.STRING:
       case ArgumentType.ARRAY:
-        return createRuntimeArray(arrayStore[arg.name], arg, dispatch);
+        return createRuntimeArray(arrayStore[arg.name], arg, callstack);
 
       case ArgumentType.MATRIX:
-        return createRuntimeMatrix(arrayStore, arg, dispatch);
+        return createRuntimeMatrix(arrayStore, arg, callstack);
     }
   });
 };

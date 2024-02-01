@@ -2,8 +2,7 @@ import { Queue } from "@datastructures-js/queue";
 import type { Dictionary } from "@reduxjs/toolkit";
 
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
-import type { AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
@@ -25,10 +24,10 @@ export class BinaryTreeNode<
     right: BinaryTreeNode<T> | null = null,
     meta: BinaryNodeMeta<T>,
     name: string,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {
-    super(value, meta, name, dispatch);
+    super(value, meta, name, callstack);
     Object.defineProperties(this, {
       _left: {
         value: left,
@@ -43,13 +42,11 @@ export class BinaryTreeNode<
     });
 
     if (addToCallstack) {
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...this.getDispatchBase(),
-          name: "addNode",
-          args: { value },
-        }),
-      );
+      this.callstack.addOne({
+        ...this.getDispatchBase(),
+        name: "addNode",
+        args: { value },
+      });
     }
   }
 
@@ -62,13 +59,11 @@ export class BinaryTreeNode<
 
   public set left(node: BinaryTreeNode<T> | null) {
     this._left = node;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setLeftChild",
-        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
-      }),
-    );
+    this.callstack.addOne({
+      ...this.getDispatchBase(),
+      name: "setLeftChild",
+      args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+    });
   }
 
   private _right!: BinaryTreeNode<T> | null;
@@ -80,20 +75,18 @@ export class BinaryTreeNode<
 
   public set right(node: BinaryTreeNode<T> | null) {
     this._right = node;
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...this.getDispatchBase(),
-        name: "setRightChild",
-        args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
-      }),
-    );
+    this.callstack.addOne({
+      ...this.getDispatchBase(),
+      name: "setRightChild",
+      args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+    });
   }
 
   static fromNodeData(
     name: string,
     nodeData: TreeNodeData | undefined,
     dataMap: Dictionary<TreeNodeData>,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     meta?: Partial<BinaryNodeMeta>,
   ): BinaryTreeNode | null {
     if (!nodeData) return null;
@@ -114,7 +107,7 @@ export class BinaryTreeNode<
           name,
           dataMap[left],
           dataMap,
-          dispatch,
+          callstack,
           newMeta,
         )
       : null;
@@ -123,7 +116,7 @@ export class BinaryTreeNode<
           name,
           dataMap[right],
           dataMap,
-          dispatch,
+          callstack,
           newMeta,
         )
       : null;
@@ -138,7 +131,7 @@ export class BinaryTreeNode<
       rightNode,
       { ...newMeta, id, type: ArgumentType.BINARY_TREE },
       name,
-      dispatch,
+      callstack,
     );
   }
 

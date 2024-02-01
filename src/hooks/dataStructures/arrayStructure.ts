@@ -2,8 +2,10 @@ import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import type { AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
+import {
+  type CallstackHelper,
+  callstackSlice,
+} from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
@@ -27,7 +29,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
     array: Array<T>,
     name: string,
     arrayData: EntityState<ArrayItemData>,
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
   ) {
@@ -46,8 +48,8 @@ export class ControlledArray<T> extends ArrayBase<T> {
         value: ArgumentType.ARRAY,
         enumerable: false,
       },
-      dispatch: {
-        value: dispatch,
+      callstack: {
+        value: callstack,
         enumerable: false,
       },
     });
@@ -55,13 +57,11 @@ export class ControlledArray<T> extends ArrayBase<T> {
     this.push(...array);
 
     if (addToCallstack) {
-      this.dispatch(
-        callstackSlice.actions.addOne({
-          ...this.getDispatchBase(),
-          name: "addArray",
-          args: { arrayData, options },
-        }),
-      );
+      this.callstack.addOne({
+        ...this.getDispatchBase(),
+        name: "addArray",
+        args: { arrayData, options },
+      });
     }
 
     return new Proxy(this, {
@@ -80,7 +80,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
   }
 
   static _from(
-    dispatch: AppDispatch,
+    callstack: CallstackHelper,
     inputArray: Array<number | string>,
     mapFn?: (
       item: number | string | undefined,
@@ -96,7 +96,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
       array,
       id,
       data,
-      dispatch,
+      callstack,
       true,
       options,
     );
@@ -133,12 +133,10 @@ export class ControlledArray<T> extends ArrayBase<T> {
   override pop() {
     const base = this.getDispatchBase(this.length - 1);
     const value = super.pop();
-    this.dispatch(
-      callstackSlice.actions.addOne({
-        ...base,
-        name: "deleteNode",
-      }),
-    );
+    callstackSlice.actions.addOne({
+      ...base,
+      name: "deleteNode",
+    });
     this.itemsMeta.pop();
     return value;
   }
@@ -156,7 +154,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
       array as U[],
       id,
       data,
-      this.dispatch,
+      this.callstack,
       true,
       options,
     );
@@ -169,7 +167,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
   override slice(start?: number, end?: number): T[] {
     const slicedArray = Array.from(this).slice(start, end);
     const { id, array, data } = ControlledArray._mapArrayData(slicedArray);
-    return new ControlledArray(array as T[], id, data, this.dispatch, true);
+    return new ControlledArray(array as T[], id, data, this.callstack, true);
   }
 
   protected getNodeMeta(key: number): ArrayItemData | undefined {

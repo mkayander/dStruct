@@ -9,12 +9,7 @@ import { callstackSlice } from "#/store/reducers/callstackReducer";
 import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
-import {
-  createCaseRuntimeArgs,
-  resetStructuresState,
-  setGlobalRuntimeContext,
-  stringifySolutionResult,
-} from "#/utils";
+import { resetStructuresState, stringifySolutionResult } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
 import type {
@@ -26,17 +21,6 @@ import type {
 
 const uuid = shortUUID();
 
-const globalDefinitionsPrefix = `
-  const console = {...window.console, log: window.log, error: window.error, warn: window.warn, info: window.info};
-  const Array = window.ArrayProxy;
-  const String = window.StringProxy;
-  const Set = window.SetProxy;
-  const Map = window.MapProxy;
-  const Object = window.ObjectProxy;
-`.trim();
-
-export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;
-
 const getWorkerResponse = <T extends WorkerRequestType>(
   worker: Worker,
   type: T,
@@ -46,10 +30,10 @@ const getWorkerResponse = <T extends WorkerRequestType>(
     const listener = (event: MessageEvent<WorkerResponse>) => {
       if (event.data?.type !== type) return;
 
-      worker.removeEventListener("message", listener);
+      console.log("Worker response:", event.data);
       resolve(event.data);
     };
-    worker.addEventListener("message", listener);
+    worker.addEventListener("message", listener, { once: true });
 
     setTimeout(() => {
       worker.removeEventListener("message", listener);
@@ -106,34 +90,33 @@ export const useCodeExecution = (codeInput: string) => {
   const arrayStore = useAppSelector(arrayDataSelector);
   const caseArgs = useAppSelector(selectCaseArguments);
 
-  useEffect(() => {
-    setGlobalRuntimeContext(dispatch);
-  }, [dispatch]);
+  const runCode = async () => {
+    if (!worker) return;
 
-  const runCode = () => {
-    const args = createCaseRuntimeArgs(
-      dispatch,
-      treeStore,
-      arrayStore,
+    setIsProcessing(true);
+
+    // Before running the code, clear the callstack
+    dispatch(callstackSlice.actions.removeAll());
+    resetStructuresState(dispatch);
+    worker.postMessage({
+      type: "run",
+      code: codeInput,
       caseArgs,
-    );
-
-    const prefixedCode = `${globalDefinitionsPrefix}\n${codeInput}`;
+      arrayStore,
+      treeStore,
+    } satisfies ExecWorkerInterface["run"]["request"]);
 
     const startTimestamp = performance.now();
 
     try {
-      const getInputFunction = new Function(prefixedCode);
-      const runFunction = getInputFunction();
+      const { runtime, output, error, callstack } = await getWorkerResponse(
+        worker,
+        "run",
+      );
+      if (error) throw error;
+      setError(null);
 
-      // Before running the code, clear the callstack
-      dispatch(callstackSlice.actions.removeAll());
-      resetStructuresState(dispatch);
-
-      const result = runFunction(...args);
-      const runtime = performance.now() - startTimestamp;
-
-      const serializedResult = stringifySolutionResult(result);
+      const serializedResult = stringifySolutionResult(output);
 
       // Identify that the callstack is filled and can now be used
       dispatch(
@@ -141,6 +124,7 @@ export const useCodeExecution = (codeInput: string) => {
           isReady: true,
           error: null,
           result: serializedResult,
+          frames: callstack,
           runtime,
           startTimestamp,
         }),
