@@ -154,6 +154,8 @@ export const useCodeExecution = (codeInput: string) => {
       } else {
         console.error("Invalid error type: ", e);
       }
+    } finally {
+      setIsProcessing(false);
     }
   };
 
