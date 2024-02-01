@@ -31,11 +31,11 @@ import {
 import { type PanelContentProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { useCodeExecution, usePlaygroundSlugs, useSearchParam } from "#/hooks";
 import { useI18nContext } from "#/hooks";
-import { codePrefixLinesCount } from "#/hooks/useCodeExecution";
 import { useAppSelector } from "#/store/hooks";
 import { selectRuntimeData } from "#/store/reducers/callstackReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
+import { codePrefixLinesCount } from "#/utils/setGlobalRuntimeContext";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();

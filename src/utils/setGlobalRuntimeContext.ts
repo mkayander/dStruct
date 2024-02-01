@@ -224,3 +224,13 @@ export const setGlobalRuntimeContext = (dispatch: AppDispatch) => {
 
   Object.assign(window, context);
 };
+
+export const globalDefinitionsPrefix = `
+  const console = {...self.console, log: self.log, error: self.error, warn: self.warn, info: self.info};
+  const Array = self.ArrayProxy;
+  const String = self.StringProxy;
+  const Set = self.SetProxy;
+  const Map = self.MapProxy;
+  const Object = self.ObjectProxy;
+`.trim();
+export const codePrefixLinesCount = globalDefinitionsPrefix.split("\n").length;
