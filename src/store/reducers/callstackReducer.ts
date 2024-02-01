@@ -255,3 +255,15 @@ export const selectConsoleLogs = createSelector(
       .selectAll(callstack.frames)
       .filter((frame) => frame.name === "consoleLog") as ConsoleLogFrame[],
 );
+
+export class CallstackHelper {
+  frames: CallFrame[] = [];
+
+  addOne(frame: CallFrame) {
+    this.frames.push(frame);
+  }
+
+  clear() {
+    this.frames = [];
+  }
+}
