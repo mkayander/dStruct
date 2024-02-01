@@ -1,3 +1,17 @@
+# [1.266.0](https://github.com/mkayander/dStruct/compare/v1.265.0...v1.266.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* Div cannot be a child of tr ([607b007](https://github.com/mkayander/dStruct/commit/607b007b2958e6810fa9dfa0cbf96814d48b1469))
+
+
+### Features
+
+* Implement a callstack helper ([fd6e374](https://github.com/mkayander/dStruct/commit/fd6e374d65e2dca6c61367202beb284ead0f667e))
+* Support live structure execution inside a Web Worker ([1c47a6f](https://github.com/mkayander/dStruct/commit/1c47a6fb7b80ab9a27fbb7657ce1724e46ccf71d))
+* Switch dispatch to a callstack helper and execute all code inside a worker ([724dd07](https://github.com/mkayander/dStruct/commit/724dd076205625d2fc686c4ce9252c2ce9dc7fe6))
+
 # [1.265.0](https://github.com/mkayander/dStruct/compare/v1.264.0...v1.265.0) (2024-01-31)
 
 
