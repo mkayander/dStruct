@@ -1,3 +1,13 @@
+## [1.266.1](https://github.com/mkayander/dStruct/compare/v1.266.0...v1.266.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* Remove unused import ([3121d0b](https://github.com/mkayander/dStruct/commit/3121d0b1543f3752373d9d28b7807997d6e53b22))
+* Serialize result inside the worker ([fb127b7](https://github.com/mkayander/dStruct/commit/fb127b7fe2ad8cdce128bba096954914ad2b5e8e))
+* Update processing state when finished ([2948e3b](https://github.com/mkayander/dStruct/commit/2948e3bc9e9a118c9b0136b996af3b7d10a83ad2))
+* Use new callstack helper ([71b9a0e](https://github.com/mkayander/dStruct/commit/71b9a0e0b87ac007c840ca39079c71f284141603))
+
 # [1.266.0](https://github.com/mkayander/dStruct/compare/v1.265.0...v1.266.0) (2024-02-01)
 
 
