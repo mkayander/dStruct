@@ -1,11 +1,9 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
+import { initControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
-import {
-  arrayDataItemSelectors,
-  type ArrayItemData,
-} from "#/store/reducers/structures/arrayReducer";
+import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
 const ArrayBase = makeArrayBaseClass(String);
@@ -21,32 +19,16 @@ export class ControlledString extends ArrayBase {
     addToCallstack?: boolean,
   ) {
     super(value);
-    Object.defineProperties(this, {
-      name: {
-        value: name,
-        enumerable: false,
-      },
-      itemsMeta: {
-        value: arrayDataItemSelectors.selectAll(arrayData),
-        enumerable: false,
-      },
-      argType: {
-        value: ArgumentType.STRING,
-        enumerable: false,
-      },
-      callstack: {
-        value: callstack,
-        enumerable: false,
-      },
-    });
 
-    if (addToCallstack) {
-      this.callstack.addOne({
-        ...this.getDispatchBase(),
-        name: "addArray",
-        args: { arrayData },
-      });
-    }
+    initControlledArray(
+      this,
+      arrayData,
+      name,
+      callstack,
+      addToCallstack,
+      undefined,
+      ArgumentType.STRING,
+    );
   }
 
   protected getNodeMeta(key: number): ArrayItemData | undefined {

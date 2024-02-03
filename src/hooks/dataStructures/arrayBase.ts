@@ -14,9 +14,9 @@ const uuid = shortUUID();
 
 export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
   abstract class BaseStructure extends Base {
+    readonly callstack!: CallstackHelper;
     protected readonly name!: string;
     protected readonly argType!: ArgumentArrayType;
-    protected readonly callstack!: CallstackHelper;
 
     protected constructor(...args: any[]) {
       super(...args);
@@ -61,11 +61,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       });
     }
 
-    protected abstract getNodeMeta(key: any): ArrayItemData | undefined;
-
-    protected abstract setNodeMeta(key: any, data: ArrayItemData): void;
-
-    protected getDispatchBase(key?: any) {
+    getDispatchBase(key?: any) {
       const data = {
         id: uuid.generate(),
         argType: this.argType,
@@ -81,7 +77,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       return data;
     }
 
-    protected updateItem(value: any, index: number, propKey?: any) {
+    updateItem(value: any, index: number, propKey?: any) {
       let childName: string | undefined = undefined;
       if (value?.argType && value.name) {
         childName = value.name;
@@ -128,7 +124,14 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         });
       }
     }
+
+    protected abstract getNodeMeta(key: any): ArrayItemData | undefined;
+
+    protected abstract setNodeMeta(key: any, data: ArrayItemData): void;
   }
 
   return BaseStructure;
 }
+
+const base = makeArrayBaseClass(Object);
+export type ArrayBaseType = InstanceType<typeof base>;

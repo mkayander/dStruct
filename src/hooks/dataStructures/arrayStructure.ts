@@ -1,7 +1,10 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
-import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
+import {
+  type ArrayBaseType,
+  makeArrayBaseClass,
+} from "#/hooks/dataStructures/arrayBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
@@ -19,6 +22,58 @@ export type ControlledArrayRuntimeOptions = {
   colorMap?: Record<string, string>;
 };
 
+export function initControlledArray<T extends ArrayBaseType>(
+  array: T,
+  arrayData: EntityState<ArrayItemData>,
+  name: string,
+  callstack: CallstackHelper,
+  addToCallstack?: boolean,
+  options?: ControlledArrayRuntimeOptions,
+  argType: ArgumentType = ArgumentType.ARRAY,
+) {
+  Object.defineProperties(array, {
+    name: {
+      value: name,
+      enumerable: false,
+    },
+    itemsMeta: {
+      value: arrayDataItemSelectors.selectAll(arrayData),
+      enumerable: false,
+    },
+    argType: {
+      value: argType,
+      enumerable: false,
+    },
+    callstack: {
+      value: callstack,
+      enumerable: false,
+    },
+  });
+
+  if (addToCallstack) {
+    array.callstack.addOne({
+      ...array.getDispatchBase(),
+      name: "addArray",
+      args: { arrayData, options },
+    });
+  }
+
+  return new Proxy(array, {
+    set: (target, prop, value) => {
+      const index = Number(prop);
+      // @ts-expect-error - TS can't infer a type for target[prop]
+      target[prop] = value;
+      if (Number.isNaN(index)) {
+        return true;
+      }
+
+      array.updateItem(value, index);
+
+      return true;
+    },
+  });
+}
+
 export class ControlledArray<T> extends ArrayBase<T> {
   private readonly itemsMeta!: ArrayItemData[];
 
@@ -31,49 +86,16 @@ export class ControlledArray<T> extends ArrayBase<T> {
     options?: ControlledArrayRuntimeOptions,
   ) {
     super();
-
-    Object.defineProperties(this, {
-      name: {
-        value: name,
-        enumerable: false,
-      },
-      itemsMeta: {
-        value: arrayDataItemSelectors.selectAll(arrayData),
-        enumerable: false,
-      },
-      argType: {
-        value: ArgumentType.ARRAY,
-        enumerable: false,
-      },
-      callstack: {
-        value: callstack,
-        enumerable: false,
-      },
-    });
-
     this.push(...array);
 
-    if (addToCallstack) {
-      this.callstack.addOne({
-        ...this.getDispatchBase(),
-        name: "addArray",
-        args: { arrayData, options },
-      });
-    }
-
-    return new Proxy(this, {
-      set: (target, prop, value) => {
-        const index = Number(prop);
-        target[prop as any] = value;
-        if (Number.isNaN(index)) {
-          return true;
-        }
-
-        this.updateItem(value, index);
-
-        return true;
-      },
-    });
+    return initControlledArray(
+      this,
+      arrayData,
+      name,
+      callstack,
+      addToCallstack,
+      options,
+    );
   }
 
   static _from(
