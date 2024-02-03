@@ -13,7 +13,8 @@
 
 ## Overview
 
-dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in code editor where users can write and visualize their solutions.
+dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in
+code editor where users can write and visualize their solutions.
 
 <p align="center">
   <a href="https://dstruct.app/playground">
@@ -23,44 +24,62 @@ dStruct is a web app designed to assist users in understanding and visualizing L
 
 ## Features
 
-- **Integrated Code Editor**: Write and visualize LeetCode solutions within the app using the built-in code editor powered by Monaco Editor.
-- **Graphical Visualization**: Gain insights into data structures and algorithms through graphical representations, making it easier to understand and debug code.
+- **Integrated Code Editor**: Write and visualize LeetCode solutions within the app using the built-in code editor
+  powered by Monaco Editor.
+- **Graphical Visualization**: Gain insights into data structures and algorithms through graphical representations,
+  making it easier to understand and debug code.
 - **Authentication with NextAuth**: Secure user authentication with NextAuth for a personalized experience.
-- **Prisma ORM for Database Operations**: Utilizes Prisma ORM for efficient database operations, enhancing data handling and storage capabilities.
+- **Prisma ORM for Database Operations**: Utilizes Prisma ORM for efficient database operations, enhancing data handling
+  and storage capabilities.
 - **GraphQL Integration**: Incorporates GraphQL for efficient query execution and improved API interactions.
-- **State Management with Redux Toolkit**: Manages application state seamlessly with the help of Redux Toolkit for predictable state changes.
+- **State Management with Redux Toolkit**: Manages application state seamlessly with the help of Redux Toolkit for
+  predictable state changes.
 - **Internationalization (i18n) Support**: Implements Typesafe i18n for easy translation and localization.
-- **Interactive UI with Material-UI and Emotion**: Enhances user interface with the help of Material-UI components and Emotion for styling.
+- **Interactive UI with Material-UI and Emotion**: Enhances user interface with the help of Material-UI components and
+  Emotion for styling.
 - **Code Quality and Testing**: Maintains code quality through linting with ESLint, Prettier, and testing with Jest.
 
 ## Tech Stack
 
 - **Frontend**:
-    - React
-    - Next.js
-    - Redux Toolkit
-    - Material-UI
-    - Emotion
-    - Monaco Editor
-    - Apollo Client
+
+  - React
+  - Next.js
+  - Redux Toolkit
+  - Material-UI
+  - Emotion
+  - Monaco Editor
+  - Apollo Client
 
 - **Backend**:
-    - Node.js
-    - Express
-    - Prisma
-    - GraphQL
-    - NextAuth
+
+  - Node.js
+  - Express
+  - Prisma
+  - GraphQL
+  - NextAuth
 
 - **Database**:
-    - Prisma ORM
-    - SQLite (or your preferred database)
+
+  - Prisma ORM
+  - SQLite (or your preferred database)
 
 - **Other Tools**:
-    - Typesafe i18n
-    - Axios
-    - Husky (Git Hooks)
-    - Semantic Release
-    - Jest Testing Framework
+  - Typesafe i18n
+  - Axios
+  - Husky (Git Hooks)
+  - Semantic Release
+  - Jest Testing Framework
+
+## 3D Visualization
+
+This project has a "blender" folder which contains the 3D models used for visualization. The 3D models are created using
+Blender and exported as .glb files.
+To convert a `.glb` file to a React component, use the `gltffsx` package, for example:
+
+```bash
+pnpm exec gltfjsx blender/logotype/binary_tree.glb -o src/3d-models/BinaryTree.tsx -TtD
+```
 
 ## Getting Started
 
@@ -86,7 +105,8 @@ Visit http://localhost:3000 to access the application.
 
 ## Environment Variables
 
-Create a .env file in the root directory based on the .env.example file. Fill in the necessary values for the following variables:
+Create a .env file in the root directory based on the .env.example file. Fill in the necessary values for the following
+variables:
 
 ```
 NODE_ENV=development
