@@ -83,7 +83,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
 
     protected updateItem(value: any, index: number, propKey?: any) {
       let childName: string | undefined = undefined;
-      if (value.argType && value.name) {
+      if (value?.argType && value.name) {
         childName = value.name;
         value = null;
       } else {
