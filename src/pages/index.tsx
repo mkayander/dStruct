@@ -29,7 +29,7 @@ import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 
-import { BinaryTreeModel } from "#/3d-models/BinaryTree";
+import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 const DashboardPage: NextPage<{
   i18n: {
