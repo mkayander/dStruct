@@ -1,3 +1,17 @@
+# [1.267.0](https://github.com/mkayander/dStruct/compare/v1.266.1...v1.267.0) (2024-02-03)
+
+
+### Bug Fixes
+
+* Fix undefined read error ([239e4de](https://github.com/mkayander/dStruct/commit/239e4dec105a80138f483b98d0913fa40ca4beae))
+
+
+### Features
+
+* Apply controlled typed arrays ([8be7944](https://github.com/mkayander/dStruct/commit/8be794419deb99d66fcb5be9dbdf6f31f60b3f9e))
+* Implement a initControlledArray reusable functions ([7c65e23](https://github.com/mkayander/dStruct/commit/7c65e239866098df3320453c8a4c87ece508a83e))
+* Implement controlled typed arrays ([f3bcb00](https://github.com/mkayander/dStruct/commit/f3bcb009f8944a50d32e5f9a77bb3fb49a9d447f))
+
 ## [1.266.1](https://github.com/mkayander/dStruct/compare/v1.266.0...v1.266.1) (2024-02-01)
 
 
