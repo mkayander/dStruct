@@ -10,6 +10,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -26,6 +28,8 @@ import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
+
+import { BinaryTreeModel } from "#/3d-models/BinaryTree";
 
 const DashboardPage: NextPage<{
   i18n: {
@@ -57,21 +61,75 @@ const DashboardPage: NextPage<{
       </Head>
       <Box
         sx={{
+          position: "relative",
           background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
           boxShadow: `0 0 32px 0 ${alpha(theme.palette.primary.main, 0.5)}`,
           pb: isMobile ? 4 : 10,
           marginTop: -8.7,
           borderRadius: isMobile ? "0 0 50% 2%" : "0 0 80% 2%",
           color: theme.palette.primary.contrastText,
+          overflow: "hidden",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 3,
+            width: "100%",
+            height: "100%",
+            background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, #00000000 100%)`,
+            opacity: 0.5,
+            pointerEvents: "none",
+          },
         }}
       >
+        <Box position="absolute" height={300} width="100%" top="30px">
+          <Canvas>
+            <ambientLight intensity={0.5} />
+            <pointLight
+              intensity={4}
+              decay={2}
+              color="#bce4ff"
+              position={[3.592, 5.939, 3.134]}
+              rotation={[-1.839, 0.602, 1.932]}
+            />
+            <pointLight
+              intensity={1}
+              decay={2}
+              position={[-6.44, -5.881, 2.343]}
+              rotation={[-1.839, 0.602, 1.932]}
+            />
+            <BinaryTreeModel />
+            <OrbitControls
+              minAzimuthAngle={Math.PI / -2.2}
+              maxAzimuthAngle={Math.PI / 2.2}
+              minPolarAngle={Math.PI / 10}
+              maxPolarAngle={Math.PI / 1.1}
+              minDistance={10}
+              maxDistance={15}
+            />
+          </Canvas>
+        </Box>
         <Stack
+          position="relative"
           spacing={2}
           alignItems={isMobile ? "flex-start" : "center"}
-          pt={12}
+          pt={32}
           px={3}
+          sx={{
+            pointerEvents: "none",
+            "& > *": {
+              pointerEvents: "initial",
+              zIndex: 5,
+            },
+          }}
         >
-          <Typography variant="h2">
+          <Typography
+            variant="h2"
+            sx={{
+              userSelect: "none",
+            }}
+          >
             {LL.DATA_STRUCTURES_SIMPLIFIED()}
           </Typography>
           <Typography variant="subtitle1">
