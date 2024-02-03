@@ -11,12 +11,27 @@ import { ControlledMap } from "#/hooks/dataStructures/mapStructure";
 import { ControlledObject } from "#/hooks/dataStructures/objectStructure";
 import { ControlledSet } from "#/hooks/dataStructures/setStructure";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
+import {
+  ControlledBigInt64Array,
+  ControlledBigUint64Array,
+  ControlledFloat32Array,
+  ControlledFloat64Array,
+  ControlledInt16Array,
+  ControlledInt32Array,
+  ControlledUint8Array,
+  ControlledUint8ClampedArray,
+  ControlledUint16Array,
+  ControlledUint32Array,
+} from "#/hooks/dataStructures/typedArrayStructure";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 import { safeStringify, stripQuotes } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
+
+const generateTypedArrayData = (size: number) =>
+  generateArrayData(new Array(size).fill(0));
 
 export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
   class BinaryTree extends BinaryTreeNode {
@@ -88,6 +103,121 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
       options?: ControlledArrayRuntimeOptions,
     ) {
       return ControlledArray._from(callstack, array, mapFn, thisArg, options);
+    }
+  }
+
+  class Uint32ArrayProxy extends ControlledUint32Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Int32ArrayProxy extends ControlledInt32Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Uint16ArrayProxy extends ControlledUint16Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Int16ArrayProxy extends ControlledInt16Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Uint8ArrayProxy extends ControlledUint8Array {
+    constructor(size: number) {
+      const data = generateArrayData(new Array(size).fill(0));
+      super(size, uuid.generate(), data, callstack, true);
+    }
+  }
+
+  class Uint8ClampedArrayProxy extends ControlledUint8ClampedArray {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Float32ArrayProxy extends ControlledFloat32Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class Float64ArrayProxy extends ControlledFloat64Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class BigInt64ArrayProxy extends ControlledBigInt64Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
+    }
+  }
+
+  class BigUint64ArrayProxy extends ControlledBigUint64Array {
+    constructor(size: number) {
+      super(
+        size,
+        uuid.generate(),
+        generateTypedArrayData(size),
+        callstack,
+        true,
+      );
     }
   }
 
@@ -193,6 +323,16 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 
   const context = {
     ArrayProxy,
+    Uint32ArrayProxy,
+    Int32ArrayProxy,
+    Uint16ArrayProxy,
+    Int16ArrayProxy,
+    Uint8ArrayProxy,
+    Uint8ClampedArrayProxy,
+    Float32ArrayProxy,
+    Float64ArrayProxy,
+    BigInt64ArrayProxy,
+    BigUint64ArrayProxy,
     StringProxy,
     SetProxy,
     MapProxy,
@@ -225,6 +365,16 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 export const globalDefinitionsPrefix = `
   const console = {...self.console, log: self.log, error: self.error, warn: self.warn, info: self.info};
   const Array = self.ArrayProxy;
+  const Uint32Array = self.Uint32ArrayProxy;
+  const Int32Array = self.Int32ArrayProxy;
+  const Uint16Array = self.Uint16ArrayProxy;
+  const Int16Array = self.Int16ArrayProxy;
+  const Uint8Array = self.Uint8ArrayProxy;
+  const Uint8ClampedArray = self.Uint8ClampedArrayProxy;
+  const Float32Array = self.Float32ArrayProxy;
+  const Float64Array = self.Float64ArrayProxy;
+  const BigInt64Array = self.BigInt64ArrayProxy;
+  const BigUint64Array = self.BigUint64ArrayProxy;
   const String = self.StringProxy;
   const Set = self.SetProxy;
   const Map = self.MapProxy;
