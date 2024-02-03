@@ -1,3 +1,10 @@
+# [1.268.0](https://github.com/mkayander/dStruct/compare/v1.267.0...v1.268.0) (2024-02-03)
+
+
+### Features
+
+* Added a blender 3D model ([cb90698](https://github.com/mkayander/dStruct/commit/cb90698c244643e04ddd80ca11afdaf4846bc227))
+
 # [1.267.0](https://github.com/mkayander/dStruct/compare/v1.266.1...v1.267.0) (2024-02-03)
 
 
