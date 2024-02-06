@@ -41,7 +41,7 @@ type NavItemProps = {
   href?: string;
 };
 const NavItem: React.FC<NavItemProps> = ({ title, onClick, href }) => {
-  const component = href ? "a" : "button";
+  const component: any = href ? "a" : "button";
 
   return (
     <ListItem disablePadding>

@@ -13,6 +13,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Link as MuiLink,
   Skeleton,
   Stack,
   Toolbar,
@@ -160,10 +161,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             </Box>
             {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
             <Link href="/" legacyBehavior={true}>
-              <Typography
+              <MuiLink
                 variant="h6"
                 noWrap
-                component="a"
                 href="/"
                 sx={{
                   mr: 2,
@@ -173,7 +173,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 }}
               >
                 dStruct
-              </Typography>
+              </MuiLink>
             </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -224,10 +224,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               />
             </Box>
             <Link href="/" legacyBehavior={true}>
-              <Typography
+              <MuiLink
                 variant="h5"
                 noWrap
-                component="a"
                 href="/"
                 sx={{
                   mr: 2,
@@ -239,7 +238,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 }}
               >
                 dStruct
-              </Typography>
+              </MuiLink>
             </Link>
             <Box
               sx={{ flexGrow: 1, gap: 1, display: { xs: "none", md: "flex" } }}

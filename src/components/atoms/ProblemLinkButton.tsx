@@ -52,7 +52,7 @@ export const ProblemLinkButton: React.FC<ProblemLinkButtonProps> = ({
 
   return (
     <Tooltip title={site.title} arrow>
-      <IconButton component="a" href={problemLink} target="_blank" size="small">
+      <IconButton href={problemLink} target="_blank" size="small">
         {site.icon}
       </IconButton>
     </Tooltip>
