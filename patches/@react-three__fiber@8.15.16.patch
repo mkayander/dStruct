@@ -1,0 +1,22 @@
+diff --git a/dist/declarations/src/three-types.d.ts b/dist/declarations/src/three-types.d.ts
+index 61771e680eadc321a3ecdfb36fe46d31df51bf8c..88c3bcca4b82b2113bd4460de25fe723c9c8dd1f 100644
+--- a/dist/declarations/src/three-types.d.ts
++++ b/dist/declarations/src/three-types.d.ts
+@@ -50,6 +50,8 @@ export declare type Object3DNode<T, P> = Overwrite<Node<T, P>, {
+     dispose?: (() => void) | null;
+ }> & EventHandlers;
+ export declare type BufferGeometryNode<T extends THREE.BufferGeometry, P> = Node<T, P>;
++
++
+ export declare type MaterialNode<T extends THREE.Material, P> = Node<T, P>;
+ export declare type LightNode<T extends THREE.Light, P> = Object3DNode<T, P>;
+ export declare type Object3DProps = Object3DNode<THREE.Object3D, typeof THREE.Object3D>;
+@@ -385,7 +387,7 @@ export interface ThreeElements {
+ }
+ declare global {
+     namespace JSX {
+-        interface IntrinsicElements extends ThreeElements {
++        interface IntrinsicElements extends Pick<ThreeElements, 'ambientLight' | 'pointLight' | 'group' | 'mesh'> {
+         }
+     }
+ }
