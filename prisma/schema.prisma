@@ -156,7 +156,6 @@ model PlaygroundSolution {
   timeComplexity  String?
   spaceComplexity String?
   description     String?
-  language        CodeLanguage      @default(JavaScript)
   code            String?           @db.Text // JS
   pythonCode      String?           @db.Text
   order           Int               @default(0)
