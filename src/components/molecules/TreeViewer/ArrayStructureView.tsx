@@ -31,7 +31,6 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({
           display: "inline-block",
           height: 37,
           opacity: 0.6,
-          // verticalAlign: "middle",
           transform: "scale(0.8, 2)",
         }}
       >
