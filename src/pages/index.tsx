@@ -78,24 +78,25 @@ const DashboardPage: NextPage<{
             width: "100%",
             height: "100%",
             background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, #00000000 100%)`,
-            opacity: 0.5,
+            opacity: 0.3,
             pointerEvents: "none",
           },
         }}
       >
-        <Box position="absolute" height={300} width="100%" top="30px">
+        <Box position="absolute" height={600} width="100%" top="30px">
           <Canvas>
             <ambientLight intensity={0.5} />
             <pointLight
-              intensity={4}
+              intensity={2}
               decay={2}
-              color="#bce4ff"
+              color={theme.palette.secondary.main}
               position={[3.592, 5.939, 3.134]}
               rotation={[-1.839, 0.602, 1.932]}
             />
             <pointLight
-              intensity={1}
+              intensity={2}
               decay={2}
+              color={theme.palette.primary.light}
               position={[-6.44, -5.881, 2.343]}
               rotation={[-1.839, 0.602, 1.932]}
             />
@@ -107,6 +108,8 @@ const DashboardPage: NextPage<{
               maxPolarAngle={Math.PI / 1.1}
               minDistance={10}
               maxDistance={15}
+              enableRotate={true}
+              enableZoom={false}
             />
           </Canvas>
         </Box>
