@@ -109,7 +109,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         };
         this.setNodeMeta(key, newItem);
         const args: AddArrayItemFrame["args"] = { value, childName, index };
-        if (typeof propKey === "string") {
+        if (propKey !== undefined) {
           args.key = propKey;
         }
         this.callstack.addOne({
