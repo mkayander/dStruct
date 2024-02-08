@@ -31,8 +31,8 @@ export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
           border: `1px solid ${alpha(theme.palette.primary.light, 0.8)}`,
         },
 
-        "& tr:first-child": {
-          "& > td:first-child": {
+        "& tr:first-of-type": {
+          "& > td:first-of-type": {
             borderTopLeftRadius: "4px",
           },
           "& > td:last-child": {
@@ -43,7 +43,7 @@ export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
           },
         },
         "& tr:last-child": {
-          "& > td:first-child": {
+          "& > td:first-of-type": {
             borderBottomLeftRadius: "4px",
           },
           "& > td:last-child": {
