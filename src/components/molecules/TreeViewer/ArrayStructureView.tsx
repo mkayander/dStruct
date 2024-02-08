@@ -79,7 +79,6 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
   }, [data.nodes]);
 
   const { argType } = data;
-  const isArray = data.argType === ArgumentType.ARRAY;
 
   return (
     <Stack
