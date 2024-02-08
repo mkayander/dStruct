@@ -18,8 +18,29 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({
   side = "left",
 }) => {
   const theme = useTheme();
+  if (argType === ArgumentType.SET) {
+    const char = side === "left" ? "<" : ">";
+    return (
+      <Typography
+        component="span"
+        className="array-bracket"
+        color="primary.light"
+        fontSize={26}
+        fontWeight={200}
+        sx={{
+          display: "inline-block",
+          height: 37,
+          opacity: 0.6,
+          // verticalAlign: "middle",
+          transform: "scale(0.8, 2)",
+        }}
+      >
+        {char}
+      </Typography>
+    );
+  }
   if (argType === ArgumentType.STRING) {
-    return '"';
+    return <Typography>&quot;</Typography>;
   }
 
   const borderStyle = `2px solid ${theme.palette.primary.light}`;
@@ -93,11 +114,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
           />
         )}
       </Stack>
-      {isArray ? (
-        <ArrayBracket argType={argType} side="right" />
-      ) : (
-        <Typography>&quot;</Typography>
-      )}
+      <ArrayBracket argType={argType} side="right" />
     </Stack>
   );
 };
