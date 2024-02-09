@@ -12,10 +12,8 @@ import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet].forEach((proto) => {
   // @ts-expect-error These custom methods are not needed for benchmarks
-  proto.prototype.setColor =
-    proto.prototype.blink =
-    proto.prototype.setInfo =
-      dummy;
+  // prettier-ignore
+  proto.prototype.setColor = proto.prototype.blink = proto.prototype.setInfo = dummy;
 });
 
 export interface ExecWorkerInterface {
@@ -26,6 +24,7 @@ export interface ExecWorkerInterface {
       input: unknown[];
       count: number;
     };
+    error?: string;
     response: {
       type: "benchmark";
       results?: number[];
@@ -86,7 +85,6 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
       const startTime = performance.now();
       try {
         const result = runFunction(...args);
-        console.log("Worker: result: ", result);
         const response: WorkerResponse = {
           type: "run",
           runtime: performance.now() - startTime,
@@ -115,8 +113,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
       for (let i = 0; i < count; i++) {
         const start = performance.now();
-        const result = runFunction(...input);
-        console.log("Worker: result: ", result);
+        runFunction(...input);
         timeData.push(performance.now() - start);
       }
 
@@ -128,7 +125,6 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
       const p90Time = timeData[Math.floor(count * 0.9)];
       const p99Time = timeData[Math.floor(count * 0.99)];
 
-      console.log("Worker results arr: ", timeData);
       const response: CodeBenchmarkResponse = {
         type: "benchmark",
         averageTime,
@@ -138,6 +134,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         p99Time,
       };
       self.postMessage(response);
+      break;
     }
 
     default:
