@@ -12,38 +12,9 @@ import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
-import type {
-  CodeBenchmarkRequest,
-  ExecWorkerInterface,
-  WorkerRequestType,
-  WorkerResponse,
-} from "#/workers/codeExec.worker";
+import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
 
 const uuid = shortUUID();
-
-const getWorkerResponse = <T extends WorkerRequestType>(
-  worker: Worker,
-  type: T,
-  timeLimit = 60000,
-): Promise<ExecWorkerInterface[T]["response"]> =>
-  new Promise((resolve, reject) => {
-    const listener = (event: MessageEvent<WorkerResponse>) => {
-      if (event.data?.type !== type) return;
-
-      console.log("Worker response:", event.data);
-      resolve(event.data);
-    };
-    worker.addEventListener("message", listener, { once: true });
-
-    setTimeout(() => {
-      worker.removeEventListener("message", listener);
-      reject(
-        new Error(
-          `Worker request time limit expired! No response in ${timeLimit}ms`,
-        ),
-      );
-    }, timeLimit);
-  });
 
 export const useCodeExecution = (codeInput: string) => {
   const dispatch = useDispatch();
@@ -68,15 +39,14 @@ export const useCodeExecution = (codeInput: string) => {
 
     setIsProcessing(true);
     const args = createRawRuntimeArgs(caseArgs);
-    worker.postMessage({
-      type: "benchmark",
-      code: codeInput,
-      input: args,
-      count: 128,
-    } satisfies CodeBenchmarkRequest);
 
     try {
-      const result = await getWorkerResponse(worker, "benchmark");
+      const result = await requestWorkerAction(worker, "benchmark", {
+        type: "benchmark",
+        code: codeInput,
+        input: args,
+        count: 128,
+      });
       setError(null);
       return result;
     } catch (e: any) {
@@ -98,20 +68,20 @@ export const useCodeExecution = (codeInput: string) => {
     // Before running the code, clear the callstack
     dispatch(callstackSlice.actions.removeAll());
     resetStructuresState(dispatch);
-    worker.postMessage({
-      type: "run",
-      code: codeInput,
-      caseArgs,
-      arrayStore,
-      treeStore,
-    } satisfies ExecWorkerInterface["run"]["request"]);
 
     const startTimestamp = performance.now();
 
     try {
-      const { runtime, output, error, callstack } = await getWorkerResponse(
+      const { runtime, output, error, callstack } = await requestWorkerAction(
         worker,
         "run",
+        {
+          type: "run",
+          code: codeInput,
+          caseArgs,
+          arrayStore,
+          treeStore,
+        },
       );
       if (error) throw error;
       setError(null);
