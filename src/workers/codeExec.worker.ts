@@ -10,8 +10,13 @@ import type { ArgumentObject } from "#/utils/argumentObject";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
 const dummy = () => {};
-// @ts-expect-error This method is not needed for benchmarks
-Array.prototype.setColor = String.prototype.setColor = dummy;
+[Array, String, Map, Set, WeakMap, WeakSet].forEach((proto) => {
+  // @ts-expect-error These custom methods are not needed for benchmarks
+  proto.prototype.setColor =
+    proto.prototype.blink =
+    proto.prototype.setInfo =
+      dummy;
+});
 
 export interface ExecWorkerInterface {
   benchmark: {
