@@ -154,7 +154,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               <Select
                 labelId="side-panel-language-label"
                 label={LL.LANGUAGE()}
-                value={router.locale as Locales}
+                value={(router.locale as Locales) ?? "en"}
                 onChange={handleChangeLocale}
               >
                 {locales.map((locale) => (
