@@ -1,3 +1,47 @@
+# [1.269.0](https://github.com/mkayander/dStruct/compare/v1.268.0...v1.269.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* Add a missing property ([1e911d6](https://github.com/mkayander/dStruct/commit/1e911d6aa74896c08006f356f21bc6e749124ae9))
+* Fix css selector warnings ([52866cf](https://github.com/mkayander/dStruct/commit/52866cfe66eaa2ded43559af07c608412a7cbba4))
+* Fix import ([c54dae1](https://github.com/mkayander/dStruct/commit/c54dae1e132e880cddc183ae58e8ffc85263128e))
+* Fix Jest tests by providing missing mocks ([6cba6a4](https://github.com/mkayander/dStruct/commit/6cba6a4abac60d57b81b8e289e91ff74de01471a))
+* Fix prop key condition ([6fbdaab](https://github.com/mkayander/dStruct/commit/6fbdaab8ce0a4705f08a6148965f19db86f157f1))
+* Fixed MUI TS errors ([17aaff6](https://github.com/mkayander/dStruct/commit/17aaff6c9d5e4fbbb468b43746969372cd8a1c19))
+* Fixed worker logic ([6939409](https://github.com/mkayander/dStruct/commit/693940990f7113170c375acbb2f5e0ac189e1bc2))
+* Ignore compiled worker files ([7210277](https://github.com/mkayander/dStruct/commit/7210277bebe1c9aa8681934bf6be7f49185fcb9d))
+* Provide default select value ([b804196](https://github.com/mkayander/dStruct/commit/b804196cbb5f29689885c24a71d9ad6a4efaf404))
+* Removed an unused variable ([7d04d28](https://github.com/mkayander/dStruct/commit/7d04d28853cc50d12dd5ec2b26ea47a625a0b10e))
+* Removed commented line ([abdc1fc](https://github.com/mkayander/dStruct/commit/abdc1fc4861c9e82803d30e3182fe5b868287201))
+* Uninstall patch-package ([95c84c2](https://github.com/mkayander/dStruct/commit/95c84c2c1680cdc67bf1655dea55a9660b2db3c2))
+
+
+### Features
+
+* Added a new util function ([c1aeecb](https://github.com/mkayander/dStruct/commit/c1aeecbd1ad088741b1fd0b7d674e91d734eb018))
+* Converted .glb to a React component ([b7d8ef0](https://github.com/mkayander/dStruct/commit/b7d8ef067c3b394603c68750fc683c3d5980d46a))
+* Implemented code execution unit tests ([a5f036e](https://github.com/mkayander/dStruct/commit/a5f036ec130a4f8fff32ed2bca902d6f37685227))
+* Implemented separate worker interface functions ([016dc27](https://github.com/mkayander/dStruct/commit/016dc27049abc5be848a0ae01117da81063e00a8))
+* Improve set structure display ([21a8862](https://github.com/mkayander/dStruct/commit/21a88621df96262b11cd548cc79249e2faad28a5))
+* Improved 3d model display ([dc8e30c](https://github.com/mkayander/dStruct/commit/dc8e30c8f49f535c73e66ddf41e9ac026da9cee8))
+* Installed & updated 3d packages ([f8f70ca](https://github.com/mkayander/dStruct/commit/f8f70caf57f284c3ea8355c4dc986216d9aec92a))
+* Installed Jest mock packages ([c289f00](https://github.com/mkayander/dStruct/commit/c289f00fb8b1ba99928a15857bcfb6f0f7e5db43))
+* Installed jsdom-worker ([069b904](https://github.com/mkayander/dStruct/commit/069b904d95e537fe80b9a75447b6d496503edba5))
+* Mock more custom methods in a worker ([43f0ec1](https://github.com/mkayander/dStruct/commit/43f0ec19345abd127d39b25f2d7c62ccd3147b35))
+* Reinstalled deps ([de214c9](https://github.com/mkayander/dStruct/commit/de214c9b143e0d163eb566ba9343160b59d6adac))
+* Removed a language column ([40649f9](https://github.com/mkayander/dStruct/commit/40649f98bf57740be4628b81462160fa783b7f65))
+* Render a logo 3d model on the home page ([609e23a](https://github.com/mkayander/dStruct/commit/609e23aeb84f725ea4ef30842579bd1e77d80282))
+* Setup jsdom-worker ([cd439ce](https://github.com/mkayander/dStruct/commit/cd439cef78f864d7f886d0dac0268f0c254cd3dc))
+* Updated a 3d model ([f1c6015](https://github.com/mkayander/dStruct/commit/f1c6015a75a6582fe2f79fc3364844f98e3d0287))
+* Updated a 3d model ([568b857](https://github.com/mkayander/dStruct/commit/568b8574646e4c4e3e39a89b2fbf84ed395339a0))
+* Updated a transformed model ([f27c6cb](https://github.com/mkayander/dStruct/commit/f27c6cb892dbf54b9bb6a8e256b73da356315ba3))
+* Updated MUI packages. Added a @react-three/fiber patch. ([bafc6dd](https://github.com/mkayander/dStruct/commit/bafc6dd177508f7a2ac7f7a941639a10d832f93f))
+* Updated Prisma ([e87593a](https://github.com/mkayander/dStruct/commit/e87593a17447ae5676790b737e163cad4ca964c1))
+* Updated README ([af8a955](https://github.com/mkayander/dStruct/commit/af8a9550bd065f3d7f82f333efdce03c2dccf5d1))
+* Updated the model, exported to .glb ([dff326b](https://github.com/mkayander/dStruct/commit/dff326bd9a1119be1625e25d66fddbf28685d6a5))
+* Use new worker interface functions ([a936458](https://github.com/mkayander/dStruct/commit/a936458c68527349326e1533bd2711b56702a242))
+
 # [1.268.0](https://github.com/mkayander/dStruct/compare/v1.267.0...v1.268.0) (2024-02-03)
 
 
