@@ -28,6 +28,7 @@ export interface ExecWorkerInterface {
     response: {
       type: "benchmark";
       results?: number[];
+      error?: string;
       averageTime: number;
       medianTime?: number;
       p75Time?: number;
