@@ -1,6 +1,7 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 import "jest-canvas-mock";
+import "jsdom-worker";
 import ResizeObserver from "resize-observer-polyfill";
 import { TextDecoder, TextEncoder } from "util";
 
