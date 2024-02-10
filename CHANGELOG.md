@@ -1,3 +1,15 @@
+# [1.270.0](https://github.com/mkayander/dStruct/compare/v1.269.0...v1.270.0) (2024-02-10)
+
+
+### Bug Fixes
+
+* Accept Python code on backend ([206c35d](https://github.com/mkayander/dStruct/commit/206c35dbb77789ce0443b49932221ecd0bac6a9a))
+
+
+### Features
+
+* Implemented a programming language select ([12e7cfc](https://github.com/mkayander/dStruct/commit/12e7cfcf5542a48ca6207caa04f4e02f167adb02))
+
 # [1.269.0](https://github.com/mkayander/dStruct/compare/v1.268.0...v1.269.0) (2024-02-09)
 
 
