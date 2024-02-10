@@ -1,6 +1,21 @@
-import { AutoFixHigh, ContentCopy, PlayArrow } from "@mui/icons-material";
+import {
+  AutoFixHigh,
+  ContentCopy,
+  DynamicForm,
+  Javascript,
+  PlayArrow,
+} from "@mui/icons-material";
 import { LoadingButton, TabContext, TabList } from "@mui/lab";
-import { Box, IconButton, Stack, Tab, Tooltip } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  MenuItem,
+  Select,
+  type SelectChangeEvent,
+  Stack,
+  Tab,
+  Tooltip,
+} from "@mui/material";
 import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -37,6 +52,19 @@ import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import { codePrefixLinesCount } from "#/utils/setGlobalRuntimeContext";
 
+type ProgrammingLangauge = "javascript" | "python";
+const isLanguageValid = (value: unknown): value is ProgrammingLangauge =>
+  ["javascript", "python"].includes(String(value));
+
+const getCodeKey = (language: ProgrammingLangauge) => {
+  switch (language) {
+    case "javascript":
+      return "code";
+    case "python":
+      return "pythonCode";
+  }
+};
+
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
   const trpcUtils = trpc.useUtils();
@@ -45,8 +73,15 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const { LL } = useI18nContext();
 
   const [runMode] = useSearchParam("mode");
+  const [language, setLanguage] = useSearchParam<ProgrammingLangauge>(
+    "language",
+    {
+      defaultValue: "javascript",
+      validate: isLanguageValid,
+    },
+  );
   const [tabValue, setTabValue] = useState("1");
-  const [codeInput, setCodeInput] = useState<string>("");
+  const [codeInput, setCodeInput] = useState("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null,
   );
@@ -81,14 +116,16 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   // Update code on solution change
   useEffect(() => {
-    if (!currentSolution.data?.code) return;
+    if (!currentSolution.data) return;
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
+    const key = getCodeKey(language);
+
     setEditorState(EditorState.INITIAL);
-    setCodeInput(currentSolution.data.code);
+    setCodeInput(currentSolution.data[key] ?? "");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSolution.data?.slug]);
+  }, [currentSolution.data?.slug, language]);
 
   // Handle code errors
   useEffect(() => {
@@ -136,12 +173,16 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setTabValue(newValue);
   };
 
+  const handleLanguageChange = (event: SelectChangeEvent) => {
+    setLanguage(event.target.value);
+  };
+
   const handleRunCode: MouseEventHandler<HTMLButtonElement> = async () => {
     if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
     } else {
-      runCode();
+      void runCode();
     }
   };
 
@@ -162,12 +203,14 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     ) {
       setEditorState(EditorState.PENDING_CHANGES);
 
+      const key = getCodeKey(language);
+
       clearTimeout(changeTimeoutId.current);
       const newTimeout = (changeTimeoutId.current = setTimeout(async () => {
         const data = await updateSolution.mutateAsync({
           projectId: currentSolution.data.projectId,
           solutionId: currentSolution.data.id,
-          code: value,
+          [key]: value,
         });
         if (newTimeout === changeTimeoutId.current) {
           trpcUtils.project.getSolutionBySlug.setData(
@@ -277,6 +320,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
             }}
           >
             <CodeRunner
+              language={language}
               height={editorHeight}
               value={codeInput}
               onChange={handleChangeCode}
@@ -291,9 +335,39 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
                 top: "6px",
                 right: "20px",
                 opacity: 0.7,
-                alignItems: "center",
+                alignItems: "end",
               }}
             >
+              <Tooltip title="Programming Language" arrow placement="left">
+                <Select
+                  size="small"
+                  value={language}
+                  onChange={handleLanguageChange}
+                  sx={{
+                    height: 32,
+                    width: 48,
+                    overflow: "hidden",
+                    fontSize: "8px",
+                    "& [data-testid=ArrowDropDownIcon]": {
+                      marginRight: "-6px",
+                    },
+                    "& [role=combobox]": {
+                      padding: "4px",
+                      color: "transparent",
+                      "& > svg": {
+                        color: "text.primary",
+                      },
+                    },
+                  }}
+                >
+                  <MenuItem value="javascript">
+                    <Javascript /> &nbsp; JavaScript
+                  </MenuItem>
+                  <MenuItem value="python">
+                    <DynamicForm /> &nbsp; Python
+                  </MenuItem>
+                </Select>
+              </Tooltip>
               <EditorStateIcon
                 state={editorState}
                 isLoading={updateSolution.isLoading}
@@ -303,7 +377,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
                 arrow
                 placement="left"
               >
-                <IconButton onClick={copyCode}>
+                <IconButton
+                  onClick={copyCode}
+                  style={{ marginRight: "-6px", marginTop: "2px" }}
+                >
                   <ContentCopy fontSize="small" />
                 </IconButton>
               </Tooltip>

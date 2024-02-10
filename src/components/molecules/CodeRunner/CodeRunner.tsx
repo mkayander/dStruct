@@ -48,7 +48,6 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         }}
         {...restProps}
         height={`calc(${height}px - 6vh)`}
-        language="javascript"
         onMount={(editor, monaco) => {
           const model = editor.getModel();
 
