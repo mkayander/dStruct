@@ -528,6 +528,7 @@ export const projectRouter = router({
         timeComplexity: z.ostring(),
         spaceComplexity: z.ostring(),
         code: z.ostring(),
+        pythonCode: z.ostring(),
         order: z.onumber()
       })
     )
