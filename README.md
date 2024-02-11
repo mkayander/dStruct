@@ -7,7 +7,7 @@
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
   </a>
   <a href="/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="MIT License" />
+    <img src="https://img.shields.io/badge/license-AGPL-blue?style=for-the-badge" alt="AGPL License" />
   </a>
 </p>
 
