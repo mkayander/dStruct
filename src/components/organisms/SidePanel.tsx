@@ -33,7 +33,7 @@ import { useAppDispatch } from "#/store/hooks";
 import { appBarSlice } from "#/store/reducers/appBarReducer";
 import { trpc } from "#/utils";
 
-const GITHUB_URL = "https://github.com/mkayander/dStruct";
+import { GITHUB_URL } from "#/constants";
 
 type NavItemProps = {
   title: string;
