@@ -22,10 +22,10 @@ type GLTFResult = GLTF & {
 
 // type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh']>>
 
+const assetPath = "/assets/binary_tree-transformed.glb";
+
 export function BinaryTreeModel(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(
-    "/assets/binary_tree-transformed.glb",
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF(assetPath) as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={5.875}>
@@ -39,4 +39,4 @@ export function BinaryTreeModel(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/assets/binary_tree-transformed.glb");
+useGLTF.preload(assetPath);
