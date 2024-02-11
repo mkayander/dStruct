@@ -10,8 +10,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -19,6 +17,7 @@ import Link from "next/link";
 import React from "react";
 
 import { useDailyQuestionData } from "#/api";
+import { LogoModelView } from "#/components/molecules/LogoModelView";
 import { QuestionSummary } from "#/components/molecules/QuestionSummary";
 import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
 import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
@@ -28,8 +27,6 @@ import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
-
-import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 const DashboardPage: NextPage<{
   i18n: {
@@ -84,34 +81,7 @@ const DashboardPage: NextPage<{
         }}
       >
         <Box position="absolute" height={600} width="100%" top="30px">
-          <Canvas>
-            <ambientLight intensity={0.5} />
-            <pointLight
-              intensity={2}
-              decay={2}
-              color={theme.palette.secondary.main}
-              position={[3.592, 5.939, 3.134]}
-              rotation={[-1.839, 0.602, 1.932]}
-            />
-            <pointLight
-              intensity={2}
-              decay={2}
-              color={theme.palette.primary.light}
-              position={[-6.44, -5.881, 2.343]}
-              rotation={[-1.839, 0.602, 1.932]}
-            />
-            <BinaryTreeModel />
-            <OrbitControls
-              minAzimuthAngle={Math.PI / -2.2}
-              maxAzimuthAngle={Math.PI / 2.2}
-              minPolarAngle={Math.PI / 10}
-              maxPolarAngle={Math.PI / 1.1}
-              minDistance={10}
-              maxDistance={15}
-              enableRotate={true}
-              enableZoom={false}
-            />
-          </Canvas>
+          <LogoModelView />
         </Box>
         <Stack
           position="relative"
