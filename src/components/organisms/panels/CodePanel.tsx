@@ -266,7 +266,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     <PanelWrapper>
       <PythonSupportModal
         open={modalName === PYTHON_SUPPORT_MODAL_ID}
-        onClose={() => setModalName(null)}
+        onClose={() => setModalName("")}
       />
       <TabContext value={tabValue}>
         <TabListWrapper>

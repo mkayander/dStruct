@@ -19,8 +19,9 @@ export type ProgrammingLanguage = "javascript" | "python";
 export const isLanguageValid = (value: unknown): value is ProgrammingLanguage =>
   ["javascript", "python"].includes(String(value));
 
-export const getCodeKey = (language: ProgrammingLanguage) => {
+export const getCodeKey = (language: ProgrammingLanguage | "") => {
   switch (language) {
+    default:
     case "javascript":
       return "code";
     case "python":
