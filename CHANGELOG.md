@@ -1,3 +1,10 @@
+# [1.271.0](https://github.com/mkayander/dStruct/compare/v1.270.0...v1.271.0) (2024-02-11)
+
+
+### Features
+
+* Created a Python 3D logo ([57cb703](https://github.com/mkayander/dStruct/commit/57cb70341435f45a7a8d557a9c4d06be4d0d8fe6))
+
 # [1.270.0](https://github.com/mkayander/dStruct/compare/v1.269.0...v1.270.0) (2024-02-10)
 
 
