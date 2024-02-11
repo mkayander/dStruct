@@ -27,16 +27,31 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
   onClose,
   ...props
 }) => {
+  const [azimuthalAngle, setAzimuthalAngle] = React.useState<number>(0);
+  const [polarAngle, setPolarAngle] = React.useState<number>(0);
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    const azimuthalAngle =
+      ((window.innerWidth - event.clientX) / window.innerWidth) * Math.PI -
+      Math.PI / 2;
+    setAzimuthalAngle(azimuthalAngle);
+
+    const polarAngle =
+      ((window.innerHeight - event.clientY) / window.innerHeight) * Math.PI;
+    setPolarAngle(polarAngle);
+  };
+
   return (
     <Dialog
       maxWidth="lg"
-      {...props}
       onClose={onClose}
       PaperProps={{
         sx: {
           overflow: "visible",
         },
       }}
+      onMouseMove={handleMouseMove}
+      {...props}
     >
       <Box
         sx={{
@@ -70,7 +85,10 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             animation: "fade-in 0.5s ease-in-out",
           }}
         />
-        <PythonLogoView />
+        <PythonLogoView
+          azimuthalAngle={azimuthalAngle}
+          polarAngle={polarAngle}
+        />
       </Box>
       <DialogTitle>Python Support</DialogTitle>
       <IconButton
