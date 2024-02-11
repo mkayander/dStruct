@@ -1,10 +1,18 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import React from "react";
+import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
-export const LogoModelView = () => {
+type LogoModelViewProps = {
+  controlsRef: React.MutableRefObject<ThreeOrbitControls | null>;
+};
+
+export const LogoModelView: React.FC<LogoModelViewProps> = ({
+  controlsRef,
+}) => {
   const theme = useTheme();
 
   return (
@@ -26,6 +34,7 @@ export const LogoModelView = () => {
       />
       <BinaryTreeModel />
       <OrbitControls
+        ref={controlsRef}
         minAzimuthAngle={Math.PI / -2.2}
         maxAzimuthAngle={Math.PI / 2.2}
         minPolarAngle={Math.PI / 10}

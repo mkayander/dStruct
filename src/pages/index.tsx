@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useDailyQuestionData } from "#/api";
 import { LogoModelView } from "#/components/molecules/LogoModelView";
@@ -38,6 +39,30 @@ const DashboardPage: NextPage<{
   const session = useSession();
   const leetCodeUsername = session.data?.user.leetCodeUsername;
   const theme = useTheme();
+  const controlsRef = React.useRef<ThreeOrbitControls>(null);
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    const azimuthalAngle =
+      ((window.innerWidth - event.clientX) / window.innerWidth) * Math.PI -
+      Math.PI / 2;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const polarAngle =
+      ((rect.height - event.clientY) / rect.height) * (Math.PI * 2) -
+      Math.PI / 4;
+
+    if (controlsRef.current) {
+      controlsRef.current.setAzimuthalAngle(azimuthalAngle);
+      controlsRef.current.setPolarAngle(polarAngle);
+    }
+  };
+
+  const resetAngles = () => {
+    if (controlsRef.current) {
+      controlsRef.current.setAzimuthalAngle(0);
+      controlsRef.current.setPolarAngle(Math.PI / 2);
+    }
+  };
 
   const userProfileQueryResult = useGetUserProfileQuery({
     variables: {
@@ -57,6 +82,8 @@ const DashboardPage: NextPage<{
         <title>dStruct</title>
       </Head>
       <Box
+        onMouseMove={handleMouseMove}
+        onMouseLeave={resetAngles}
         sx={{
           position: "relative",
           background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
@@ -81,7 +108,7 @@ const DashboardPage: NextPage<{
         }}
       >
         <Box position="absolute" height={600} width="100%" top="30px">
-          <LogoModelView />
+          <LogoModelView controlsRef={controlsRef} />
         </Box>
         <Stack
           position="relative"
