@@ -13,12 +13,12 @@ export const PythonLogoView = () => {
       <pointLight
         intensity={2}
         decay={2}
-        color={theme.palette.secondary.main}
+        color={theme.palette.primary.main}
         position={[3.592, 5.939, 3.134]}
         rotation={[-1.839, 0.602, 1.932]}
       />
       <pointLight
-        intensity={2}
+        intensity={1}
         decay={2}
         color={theme.palette.primary.light}
         position={[-6.44, -5.881, 2.343]}
