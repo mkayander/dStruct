@@ -38,7 +38,10 @@ import {
   EditorStateIcon,
 } from "#/components/molecules/CodeRunner/EditorStateIcon";
 import { SolutionSelectBar } from "#/components/molecules/SelectBar/SolutionSelectBar";
-import { PythonSupportModal } from "#/components/organisms/modals/PythonSupportModal";
+import {
+  PYTHON_SUPPORT_MODAL_ID,
+  PythonSupportModal,
+} from "#/components/organisms/modals/PythonSupportModal";
 import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
 import {
   StyledTabPanel,
@@ -73,7 +76,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       validate: isLanguageValid,
     },
   );
-  const [isPythonModalOpened, setIsPythonModalOpened] = useState(false);
+  const [modalName, setModalName] = useSearchParam("modal");
+
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
@@ -163,6 +167,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     ]);
   }, [error, monacoInstance, textModel]);
 
+  const openPythonSupportModal = () => {
+    setModalName(PYTHON_SUPPORT_MODAL_ID);
+  };
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
@@ -173,7 +181,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const handleRunCode: MouseEventHandler<HTMLButtonElement> = async () => {
     if (language === "python") {
-      setIsPythonModalOpened(true);
+      openPythonSupportModal();
       return;
     }
     if (runMode === "benchmark") {
@@ -226,7 +234,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const handleFormatCode = async () => {
     if (language === "python") {
-      setIsPythonModalOpened(true);
+      openPythonSupportModal();
       return;
     }
     const formattedCode = await prettier.format(codeInput, {
@@ -257,8 +265,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   return (
     <PanelWrapper>
       <PythonSupportModal
-        open={isPythonModalOpened}
-        onClose={() => setIsPythonModalOpened(false)}
+        open={modalName === PYTHON_SUPPORT_MODAL_ID}
+        onClose={() => setModalName(null)}
       />
       <TabContext value={tabValue}>
         <TabListWrapper>

@@ -17,6 +17,8 @@ import { PythonLogoView } from "#/components/molecules/PythonLogoView";
 
 import { GITHUB_URL } from "#/constants";
 
+export const PYTHON_SUPPORT_MODAL_ID = "python-support";
+
 export type PythonSupportModalProps = DialogProps & {
   onClose: () => void;
 };
@@ -52,7 +54,9 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             width: "100%",
             height: "100%",
             transform: "translate(-70px, -50px)",
-            background: `radial-gradient(circle, rgba(100,100,255,0.2) 0%, transparent 60%)`,
+            background:
+              "radial-gradient(circle, #3675A955 0%, transparent 60%)",
+            animation: "fade-in 0.5s ease-in-out",
           }}
         />
         <Box
@@ -62,7 +66,9 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             width: "100%",
             height: "100%",
             transform: "translate(70px, 50px)",
-            background: `radial-gradient(circle, rgba(255,255,0,0.1) 0%, transparent 60%)`,
+            background:
+              "radial-gradient(circle, #FFD54F22 0%, transparent 60%)",
+            animation: "fade-in 0.5s ease-in-out",
           }}
         />
         <PythonLogoView />
