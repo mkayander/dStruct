@@ -22,7 +22,7 @@ export const useSearchParam = <T extends string = string>(
 ) => {
   const { defaultValue, validate } = options;
   const router = useRouter();
-  const [state, setState] = useState<T>(defaultValue);
+  const [state, setState] = useState<T | null>(defaultValue);
 
   useEffect(() => {
     const { query } = router;
@@ -42,11 +42,17 @@ export const useSearchParam = <T extends string = string>(
 
   const updateParam = useCallback(
     (value: unknown) => {
-      if (!validate(value)) return;
+      if (value !== null && !validate(value)) return;
 
       setState(value);
       const { pathname, query } = router;
-      const newQuery = { ...query, [param]: value };
+      const newQuery = { ...query };
+      if (value === null) {
+        delete newQuery[param];
+      } else {
+        newQuery[param] = value;
+      }
+      console.log("newQuery", newQuery);
       void router.push({ pathname, query: newQuery }, undefined, {
         shallow: true,
       });
