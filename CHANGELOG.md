@@ -1,3 +1,28 @@
+# [1.272.0](https://github.com/mkayander/dStruct/compare/v1.271.0...v1.272.0) (2024-02-11)
+
+
+### Bug Fixes
+
+* Fixed TS errors ([391e248](https://github.com/mkayander/dStruct/commit/391e2487460587f75a8b5309ce76592b2a948729))
+
+
+### Features
+
+* Added a global "fade-in" animation ([369611e](https://github.com/mkayander/dStruct/commit/369611e289eac1c8ee81a17d31f2e7a5f6e91201))
+* Added a GLTF export variant ([ba355bc](https://github.com/mkayander/dStruct/commit/ba355bcc62f74767965627659333a00cd9169599))
+* Added a Python logo component ([9418e2d](https://github.com/mkayander/dStruct/commit/9418e2d4e4db2034864bd2071c1c9f3df8919d5f))
+* Delete a search param if passed value is null ([c6114f6](https://github.com/mkayander/dStruct/commit/c6114f624f5ad26e5a3c8b5976214de9723a8f32))
+* Display a Python support modal ([58c71a7](https://github.com/mkayander/dStruct/commit/58c71a784b762c8d161c6b16804938445c3b9c72))
+* Extract GitHub URL to a separate constants file ([b570996](https://github.com/mkayander/dStruct/commit/b5709969e2cb61d22d5039376587e18d09eb77a3))
+* Extract logo model view to a separate component ([b004bc5](https://github.com/mkayander/dStruct/commit/b004bc5ddeb7b46327dbd689663e32e24dec1783))
+* Implemented a Python support modal with a 3D model ([4b25794](https://github.com/mkayander/dStruct/commit/4b25794452b18d3a0673b0af099accb24e2baf2d))
+* Rotate 3D model on mouse move ([c0ea504](https://github.com/mkayander/dStruct/commit/c0ea50478dd0c4c8af8311d324c66b3ad60389d0))
+* Rotate home page 3D model on mouse move ([2891ece](https://github.com/mkayander/dStruct/commit/2891ecedc18253bf6e6216641a58fb81a1e4046e))
+* Support basic Box props ([c0bc8ec](https://github.com/mkayander/dStruct/commit/c0bc8ec0c3fcef9236782d1941df7ae30432f8f3))
+* Update Python support modal ([146b8b0](https://github.com/mkayander/dStruct/commit/146b8b059388ada26885b56566f2c893479d7d08))
+* Updated modal text ([5ca45d4](https://github.com/mkayander/dStruct/commit/5ca45d4144757117b2453ad9dc7801329a63b14f))
+* Updated point lights ([a9e741f](https://github.com/mkayander/dStruct/commit/a9e741fca0ca95f4b558d59d8de69be48175c37c))
+
 # [1.271.0](https://github.com/mkayander/dStruct/compare/v1.270.0...v1.271.0) (2024-02-11)
 
 
