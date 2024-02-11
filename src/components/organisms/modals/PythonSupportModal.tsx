@@ -29,7 +29,6 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
 }) => {
   return (
     <Dialog
-      fullWidth
       maxWidth="lg"
       {...props}
       onClose={onClose}
@@ -97,22 +96,27 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             border: `1px solid #ffffff10`,
           }}
         >
-          <Typography variant="h5" textAlign="center" gutterBottom>
-            Install and run dStruct worker to run Python code
+          <Typography variant="h4" textAlign="center" gutterBottom>
+            Install and run dStruct worker to run Python code!
           </Typography>
           <Typography gutterBottom>
-            One of the key differences of dStruct is that it runs code locally.
-            There is no competitive aspect, so no reason to judge your solutions
-            in a single place. Therefore, you are free to run any code you want
-            with a full power of your machine. It results in the fastest code
-            execution experience possible.
+            🚀 One of the key differences of dStruct is that it runs code
+            locally. There is no competitive aspect, so no reason to judge your
+            solutions in a single place. Therefore, you are free to run any code
+            you want with a full power of your machine. It results in the
+            fastest code execution experience possible.
           </Typography>
           <Typography gutterBottom>
-            We run JavaScript code in a Web Worker, but for Python code you need
-            to install and run the dStruct worker. Make sure you have NodeJS and
-            Python3 installed on your machine as well.
+            🐍 We run JavaScript code in a Web Worker, but for Python code you
+            need to install and run the dStruct standalone worker. Make sure you
+            have NodeJS and Python3 installed on your machine as well.
           </Typography>
-          <Typography gutterBottom>
+          <Typography gutterBottom fontWeight={600}>
+            🚧 Currently this standalone worker is under development and not
+            published to NPM yet. You can contribute to the development of the
+            worker by visiting the GitHub repository.
+          </Typography>
+          {/* <Typography gutterBottom>
             It is easy to install and run the dStruct worker. Just follow the
             instructions below:
           </Typography>
@@ -130,7 +134,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
               </li>
               <li>You can now run Python code on dStruct.</li>
             </ol>
-          </Typography>
+          </Typography> */}
         </Box>
       </DialogContent>
       <DialogActions>
