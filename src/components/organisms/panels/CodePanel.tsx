@@ -38,6 +38,7 @@ import {
   EditorStateIcon,
 } from "#/components/molecules/CodeRunner/EditorStateIcon";
 import { SolutionSelectBar } from "#/components/molecules/SelectBar/SolutionSelectBar";
+import { PythonSupportModal } from "#/components/organisms/modals/PythonSupportModal";
 import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
 import {
   StyledTabPanel,
@@ -46,24 +47,16 @@ import {
 import { type PanelContentProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { useCodeExecution, usePlaygroundSlugs, useSearchParam } from "#/hooks";
 import { useI18nContext } from "#/hooks";
+import {
+  getCodeKey,
+  isLanguageValid,
+  type ProgrammingLanguage,
+} from "#/hooks/useCodeExecution";
 import { useAppSelector } from "#/store/hooks";
 import { selectRuntimeData } from "#/store/reducers/callstackReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import { codePrefixLinesCount } from "#/utils/setGlobalRuntimeContext";
-
-type ProgrammingLangauge = "javascript" | "python";
-const isLanguageValid = (value: unknown): value is ProgrammingLangauge =>
-  ["javascript", "python"].includes(String(value));
-
-const getCodeKey = (language: ProgrammingLangauge) => {
-  switch (language) {
-    case "javascript":
-      return "code";
-    case "python":
-      return "pythonCode";
-  }
-};
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const session = useSession();
@@ -73,13 +66,14 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const { LL } = useI18nContext();
 
   const [runMode] = useSearchParam("mode");
-  const [language, setLanguage] = useSearchParam<ProgrammingLangauge>(
+  const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(
     "language",
     {
       defaultValue: "javascript",
       validate: isLanguageValid,
     },
   );
+  const [isPythonModalOpened, setIsPythonModalOpened] = useState(false);
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
@@ -178,6 +172,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   };
 
   const handleRunCode: MouseEventHandler<HTMLButtonElement> = async () => {
+    if (language === "python") {
+      setIsPythonModalOpened(true);
+      return;
+    }
     if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
@@ -227,6 +225,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   };
 
   const handleFormatCode = async () => {
+    if (language === "python") {
+      setIsPythonModalOpened(true);
+      return;
+    }
     const formattedCode = await prettier.format(codeInput, {
       parser: "babel",
       plugins: [parserBabel, prettierPluginEstree],
@@ -254,6 +256,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   return (
     <PanelWrapper>
+      <PythonSupportModal
+        open={isPythonModalOpened}
+        onClose={() => setIsPythonModalOpened(false)}
+      />
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>

@@ -14,6 +14,20 @@ import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
 import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
 
+export type ProgrammingLanguage = "javascript" | "python";
+
+export const isLanguageValid = (value: unknown): value is ProgrammingLanguage =>
+  ["javascript", "python"].includes(String(value));
+
+export const getCodeKey = (language: ProgrammingLanguage) => {
+  switch (language) {
+    case "javascript":
+      return "code";
+    case "python":
+      return "pythonCode";
+  }
+};
+
 const uuid = shortUUID();
 
 export const useCodeExecution = (codeInput: string) => {
