@@ -3065,6 +3065,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clsdi52t90001y91vmiokd3kl": {
+      "id": "clsdi52t90001y91vmiokd3kl",
+      "createdAt": "2024-02-08T17:38:01.725Z",
+      "updatedAt": "2024-02-08T17:38:01.725Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Perfect Squares",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/perfect-squares",
+      "slug": "perfect-squares",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsg5wnhj0001yl252fss1tds": {
+      "id": "clsg5wnhj0001yl252fss1tds",
+      "createdAt": "2024-02-10T14:18:51.751Z",
+      "updatedAt": "2024-02-10T14:18:51.751Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Palindromic Substrings",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/palindromic-substrings",
+      "slug": "palindromic-substrings",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsj2rzzk0001coykc4fwz52h": {
+      "id": "clsj2rzzk0001coykc4fwz52h",
+      "createdAt": "2024-02-12T15:14:34.352Z",
+      "updatedAt": "2024-02-12T15:14:34.352Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Majority Element",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/majority-element",
+      "slug": "majority-element",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -13757,6 +13799,63 @@
         }
       },
       "description": null
+    },
+    "clsdi52t90002y91vrlzjugc7": {
+      "id": "clsdi52t90002y91vrlzjugc7",
+      "createdAt": "2024-02-08T17:38:01.725Z",
+      "updatedAt": "2024-02-08T17:42:19.523Z",
+      "projectId": "clsdi52t90001y91vmiokd3kl",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8hzQ9XJTd6S7TT7ygBAjuh": {
+          "name": "8hzQ9XJTd6S7TT7ygBAjuh",
+          "type": "number",
+          "input": "12",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsg5wnhj0002yl257mvlx9zl": {
+      "id": "clsg5wnhj0002yl257mvlx9zl",
+      "createdAt": "2024-02-10T14:18:51.751Z",
+      "updatedAt": "2024-02-10T14:19:33.513Z",
+      "projectId": "clsg5wnhj0001yl252fss1tds",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2xRAG3Lfa9HWaf1vRYL9k3": {
+          "name": "2xRAG3Lfa9HWaf1vRYL9k3",
+          "type": "string",
+          "input": "aaa",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsj2rzzk0002coykdrn71kko": {
+      "id": "clsj2rzzk0002coykdrn71kko",
+      "createdAt": "2024-02-12T15:14:34.352Z",
+      "updatedAt": "2024-02-12T15:14:34.352Z",
+      "projectId": "clsj2rzzk0001coykc4fwz52h",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18461,6 +18560,48 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\r\n * @param {string} s\r\n * @return {string}\r\n */\r\nvar frequencySort = function (s) {\r\n  const freqMap = new Map();\r\n\r\n  for (let i = 0; i < s.length; i++) {\r\n    const char = s[i];\r\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\r\n  }\r\n\r\n  const buckets = new Array(s.length + 1);\r\n  for (const [char, count] of freqMap) {\r\n    (buckets[count] ??= new Array()).push(char);\r\n  }\r\n\r\n  const result = [];\r\n  for (let count = s.length; count >= 0; count--) {\r\n    if (!buckets[count]) continue;\r\n\r\n    for (let j = 0; j < buckets[count].length; j++) {\r\n      const char = buckets[count][j];\r\n      result.push(char.repeat(count));\r\n    }\r\n  }\r\n\r\n  return result.join(\"\");\r\n};\r\n\r\nreturn frequencySort;\r\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsdi52t90003y91v161edeim": {
+      "id": "clsdi52t90003y91v161edeim",
+      "createdAt": "2024-02-08T17:38:01.725Z",
+      "updatedAt": "2024-02-08T17:41:05.913Z",
+      "projectId": "clsdi52t90001y91vmiokd3kl",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar numSquares = function (n) {\n  const perfNums = new Set();\n  const memo = new Map();\n  const isPerfect = (num) => {\n    if (memo.has(num)) return memo.get(num);\n    const result = Number.isInteger(Math.sqrt(num));\n    if (result) perfNums.add(num);\n    memo.set(num, result);\n    return result;\n  };\n\n  if (isPerfect(n)) return 1;\n\n  const dp = new Array(n + 1);\n  dp[0] = 0;\n\n  for (let num = 1; num <= n; num++) {\n    if (isPerfect(num)) {\n      dp[num] = 1;\n      continue;\n    }\n\n    let min = Infinity;\n    for (const perf of perfNums) {\n      const prev = num - perf;\n      if (prev < 0) continue;\n\n      min = Math.min(min, dp[prev] + 1);\n    }\n\n    dp[num] = min;\n  }\n\n  return dp[n];\n};\n\nreturn numSquares;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsg5wnhj0003yl25nlnmhr09": {
+      "id": "clsg5wnhj0003yl25nlnmhr09",
+      "createdAt": "2024-02-10T14:18:51.751Z",
+      "updatedAt": "2024-02-11T14:30:10.338Z",
+      "projectId": "clsg5wnhj0001yl252fss1tds",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar countSubstrings = function (s) {\n  let result = 0;\n\n  const countFromCenter = (i, j) => {\n    let count = 0;\n\n    while (i >= 0 && j < s.length) {\n      if (s[i] !== s[j]) break;\n\n      i--;\n      j++;\n      count++;\n    }\n\n    return count;\n  };\n\n  for (let i = 0; i < s.length; i++) {\n    result += countFromCenter(i, i);\n    result += countFromCenter(i, i + 1);\n  }\n\n  return result;\n};\n\nreturn countSubstrings;\n",
+      "pythonCode": "class Soulution:\r\n  def main():\r\n    print(1 + 2)\r\n",
+      "order": 0
+    },
+    "clsj2rzzk0003coyk5e290e9y": {
+      "id": "clsj2rzzk0003coyk5e290e9y",
+      "createdAt": "2024-02-12T15:14:34.352Z",
+      "updatedAt": "2024-02-12T15:14:34.352Z",
+      "projectId": "clsj2rzzk0001coykc4fwz52h",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function getArraySum(array) {\n  let sum = 0;\n  for (var i = 0; i < array.length; i++) {\n      sum += array[i];\n      array.setColor(i, \"green\");\n  }\n  return sum;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
       "pythonCode": null,
       "order": 0
     }
