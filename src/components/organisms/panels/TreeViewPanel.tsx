@@ -34,6 +34,7 @@ import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   callstackSlice,
+  selectCallstackFrameIndex,
   selectCallstackIsPlaying,
   selectCallstackIsReady,
   selectCallstackLength,
@@ -55,13 +56,13 @@ export const TreeViewPanel: React.FC = () => {
     defaultValue: "structure",
     validate: isValidTabName,
   });
-  const [frameIndex, setFrameIndex] = useState(-1);
   const [sliderValue, setSliderValue] = useState(100);
   const [replayCount, setReplayCount] = useState(0);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const callstackLength = useAppSelector(selectCallstackLength);
   const isPlaying = useAppSelector(selectCallstackIsPlaying);
+  const frameIndex = useAppSelector(selectCallstackFrameIndex);
   const maxDepth = useAppSelector(selectTreeMaxDepth);
   const isMobile = useMobileLayout();
 
@@ -79,18 +80,18 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleReset = () => {
     resetStructuresState(dispatch);
-    setFrameIndex(-1);
+    dispatch(callstackSlice.actions.setFrameIndex(-1));
     dispatch(callstackSlice.actions.setIsPlaying(false));
   };
 
   const handleReplay = () => {
     setReplayCount(replayCount + 1);
-    setFrameIndex(-1);
+    dispatch(callstackSlice.actions.setFrameIndex(-1));
     dispatch(callstackSlice.actions.setIsPlaying(true));
   };
 
   const handleStepBack = () => {
-    setFrameIndex(frameIndex - 1);
+    dispatch(callstackSlice.actions.setFrameIndex(frameIndex - 1));
   };
 
   const handlePlay = () => {
@@ -98,7 +99,7 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const handleStepForward = () => {
-    setFrameIndex(frameIndex + 1);
+    dispatch(callstackSlice.actions.setFrameIndex(frameIndex + 1));
   };
 
   const handleBlur = () => {
@@ -231,7 +232,6 @@ export const TreeViewPanel: React.FC = () => {
           </Stack>
           <Divider sx={{ mt: 1 }} />
           <TreeViewer
-            frameState={[frameIndex, setFrameIndex]}
             replayCount={replayCount}
             playbackInterval={sliderValue}
           />

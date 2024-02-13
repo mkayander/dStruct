@@ -11,7 +11,7 @@ import {
   Tooltip,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useI18nContext } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -112,9 +112,22 @@ const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
 
 export const CallstackTable: React.FC = () => {
   const { LL } = useI18nContext();
+  const theme = useTheme();
   const callstack = useAppSelector(selectCallstack);
+  const containerRef = useRef<HTMLTableSectionElement>(null);
 
   const startTimestamp = callstack.startTimestamp ?? 0;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const rowElement = containerRef.current.children[
+        callstack.frameIndex
+      ] as HTMLTableRowElement;
+      if (rowElement) {
+        rowElement.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+    }
+  }, [callstack.frameIndex]);
 
   return (
     <Stack spacing={2}>
@@ -128,11 +141,17 @@ export const CallstackTable: React.FC = () => {
               <TableCell align="left">{LL.ARGUMENTS()}</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {callstack.frames.map((frame) => (
+          <TableBody ref={containerRef}>
+            {callstack.frames.map((frame, index) => (
               <TableRow
                 key={frame.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  backgroundColor:
+                    index === callstack.frameIndex
+                      ? alpha(theme.palette.primary.light, 0.1)
+                      : "transparent",
+                }}
               >
                 <TableCell component="th" scope="row">
                   {"treeName" in frame && "nodeId" in frame && (

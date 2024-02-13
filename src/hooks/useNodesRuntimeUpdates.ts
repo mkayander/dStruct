@@ -1,6 +1,5 @@
 "use client";
 
-import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -8,6 +7,7 @@ import {
   type CallFrame,
   callstackSlice,
   selectCallstack,
+  selectCallstackFrameIndex,
   selectCallstackIsPlaying,
 } from "#/store/reducers/callstackReducer";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
@@ -16,10 +16,6 @@ import { resetStructuresState, validateAnimationName } from "#/utils";
 import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 
 export const useNodesRuntimeUpdates = (
-  [frameIndex, setFrameIndex]: [
-    number,
-    React.Dispatch<React.SetStateAction<number>>,
-  ],
   playbackInterval: number,
   replayCount: number,
 ) => {
@@ -28,6 +24,7 @@ export const useNodesRuntimeUpdates = (
   const [isActive, setIsActive] = useState(false);
 
   const callstackIsPlaying = useAppSelector(selectCallstackIsPlaying);
+  const frameIndex = useAppSelector(selectCallstackFrameIndex);
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
 
@@ -237,7 +234,7 @@ export const useNodesRuntimeUpdates = (
 
       if (nextIndex < callstack.length) {
         setIsActive(true);
-        setFrameIndex(nextIndex);
+        dispatch(callstackSlice.actions.setFrameIndex(nextIndex));
       } else {
         dispatch(callstackSlice.actions.setIsPlaying(false));
       }
@@ -259,7 +256,7 @@ export const useNodesRuntimeUpdates = (
   useEffect(() => {
     if (isActive) {
       resetStructuresState(dispatch, false);
-      setFrameIndex(-1);
+      dispatch(callstackSlice.actions.setFrameIndex(-1));
       setIsActive(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
