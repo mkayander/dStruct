@@ -1,3 +1,15 @@
+# [1.273.0](https://github.com/mkayander/dStruct/compare/v1.272.0...v1.273.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* Fixed runtime display ([8ae2a66](https://github.com/mkayander/dStruct/commit/8ae2a660730f0ae1b957e069ab43b5721eacd0d3))
+
+
+### Features
+
+* Display code processing state on a button ([81b34e5](https://github.com/mkayander/dStruct/commit/81b34e54a1b19e0a91586ecd07b74194a7419ece))
+
 # [1.272.0](https://github.com/mkayander/dStruct/compare/v1.271.0...v1.272.0) (2024-02-11)
 
 
