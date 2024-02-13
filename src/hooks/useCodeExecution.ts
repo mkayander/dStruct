@@ -84,20 +84,18 @@ export const useCodeExecution = (codeInput: string) => {
     dispatch(callstackSlice.actions.removeAll());
     resetStructuresState(dispatch);
 
-    const startTimestamp = performance.now();
+    let startTimestamp = performance.now();
 
     try {
-      const { runtime, output, error, callstack } = await requestWorkerAction(
-        worker,
-        "run",
-        {
+      const { runtime, output, error, callstack, workStartTime } =
+        await requestWorkerAction(worker, "run", {
           type: "run",
           code: codeInput,
           caseArgs,
           arrayStore,
           treeStore,
-        },
-      );
+        });
+      startTimestamp = workStartTime;
       if (error) throw error;
       setError(null);
 

@@ -27,6 +27,7 @@ export interface ExecWorkerInterface {
     error?: string;
     response: {
       type: "benchmark";
+      workStartTime: number;
       results?: number[];
       error?: string;
       averageTime: number;
@@ -46,6 +47,7 @@ export interface ExecWorkerInterface {
     };
     response: {
       type: "run";
+      workStartTime: number;
       runtime: number;
       output?: string;
       error?: string;
@@ -83,12 +85,13 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
       const getInputFunction = new Function(prefixedCode);
       const runFunction = getInputFunction();
       callstack.clear();
-      const startTime = performance.now();
+      const startTimestamp = performance.now();
       try {
         const result = runFunction(...args);
         const response: WorkerResponse = {
           type: "run",
-          runtime: performance.now() - startTime,
+          workStartTime: startTimestamp,
+          runtime: performance.now() - startTimestamp,
           output: stringifySolutionResult(result),
           callstack: callstack.frames,
         };
@@ -97,7 +100,8 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         console.log("Worker: error: ", error);
         const response: WorkerResponse = {
           type: "run",
-          runtime: performance.now() - startTime,
+          workStartTime: startTimestamp,
+          runtime: performance.now() - startTimestamp,
           error: error.message,
         };
         self.postMessage(response);
@@ -110,7 +114,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
       const getInputFunction = new Function(code);
       const runFunction = getInputFunction();
       const timeData: number[] = [];
-      const totalStart = performance.now();
+      const startTimestamp = performance.now();
 
       for (let i = 0; i < count; i++) {
         const start = performance.now();
@@ -118,7 +122,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         timeData.push(performance.now() - start);
       }
 
-      const totalTime = performance.now() - totalStart;
+      const totalTime = performance.now() - startTimestamp;
       const averageTime = totalTime / count;
       timeData.sort((a, b) => a - b);
       const medianTime = timeData[Math.floor(count / 2)];
@@ -128,6 +132,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
       const response: CodeBenchmarkResponse = {
         type: "benchmark",
+        workStartTime: startTimestamp,
         averageTime,
         medianTime,
         p75Time,
