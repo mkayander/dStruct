@@ -1,3 +1,10 @@
+## [1.274.1](https://github.com/mkayander/dStruct/compare/v1.274.0...v1.274.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* Fix callstack timestamps display ([c46afe9](https://github.com/mkayander/dStruct/commit/c46afe9e8a8209a034163cbae4d93874e5b50112))
+
 # [1.274.0](https://github.com/mkayander/dStruct/compare/v1.273.0...v1.274.0) (2024-02-13)
 
 
