@@ -3,6 +3,7 @@ import React from "react";
 
 import { BinaryNode } from "#/components/molecules/TreeViewer/BinaryNode";
 import { LinkedListNode } from "#/components/molecules/TreeViewer/LinkedListNode";
+import { useBinaryTreePositioning } from "#/hooks/useBinaryTreePositioning";
 import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,
@@ -23,6 +24,8 @@ export const NodesView: React.FC<NodesViewProps> = ({
 }) => {
   const adjustXOffset = data.type === ArgumentType.LINKED_LIST;
   const offset = useAppSelector(selectMinXOffset(treeName, adjustXOffset)) ?? 0;
+
+  useBinaryTreePositioning(treeName, data);
 
   const Node =
     data.type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
