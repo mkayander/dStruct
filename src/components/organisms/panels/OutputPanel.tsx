@@ -116,7 +116,7 @@ export const OutputPanel: React.FC = () => {
                   <Typography variant="h5" color="success.main">
                     {LL.SUCCESS()}
                   </Typography>
-                  {runtime && (
+                  {typeof runtime === "number" && (
                     <Typography variant="caption" color="text.disabled" mt={1}>
                       {LL.RUNTIME()}: {runtime.toFixed(2)} {LL.MS()}
                     </Typography>
