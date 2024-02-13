@@ -196,6 +196,9 @@ export const treeDataSelector = (state: RootState) => state.treeNode;
 
 export const treeNodeDataSelector = treeNodeDataAdapter.getSelectors();
 
+export const selectTreeData = (name: string) =>
+  createSelector(treeDataSelector, (state) => getStateByName(state, name));
+
 export const selectAllNodeData = (name: string) =>
   createSelector(treeDataSelector, (state) => {
     const treeState = state[name];

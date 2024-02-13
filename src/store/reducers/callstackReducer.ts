@@ -135,6 +135,7 @@ export type CallstackState = {
   startTimestamp: number | null;
   error: Error | null;
   frames: EntityState<CallFrame>;
+  frameIndex: number;
 };
 
 const initialState: CallstackState = {
@@ -145,6 +146,7 @@ const initialState: CallstackState = {
   startTimestamp: null,
   error: null,
   frames: callstackAdapter.getInitialState(),
+  frameIndex: -1,
 };
 
 /**
@@ -201,6 +203,9 @@ export const callstackSlice = createSlice({
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
     },
+    setFrameIndex: (state, action: PayloadAction<number>) => {
+      state.frameIndex = action.payload;
+    },
   },
 });
 
@@ -227,6 +232,7 @@ export const selectCallstack = createSelector(
     result: callstack.result,
     error: callstack.error,
     frames: rootSelectors.selectAll(callstack.frames),
+    frameIndex: callstack.frameIndex,
   }),
 );
 
@@ -253,6 +259,11 @@ export const selectCallstackIsPlaying = createSelector(
 export const selectCallstackLength = createSelector(
   (state: RootState) => state.callstack,
   (callstack: CallstackState) => callstack.frames.ids.length,
+);
+
+export const selectCallstackFrameIndex = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack: CallstackState) => callstack.frameIndex,
 );
 
 export const selectConsoleLogs = createSelector(
