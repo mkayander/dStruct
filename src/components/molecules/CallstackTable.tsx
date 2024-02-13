@@ -106,7 +106,7 @@ const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
       );
 
     default:
-      return <pre>{safeStringify(frame.args)}</pre>;
+      return <span>{safeStringify(frame.args)}</span>;
   }
 };
 
