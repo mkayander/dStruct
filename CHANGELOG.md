@@ -1,3 +1,18 @@
+# [1.274.0](https://github.com/mkayander/dStruct/compare/v1.273.0...v1.274.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* Render frame args in a single line ([bb2fb68](https://github.com/mkayander/dStruct/commit/bb2fb68c1ba26f22ba552c57e97ca31842b2890c))
+
+
+### Features
+
+* Added new store items ([d4c6cdf](https://github.com/mkayander/dStruct/commit/d4c6cdfeecd5601f020484d97ac243966fe158c2))
+* Implemented a central tree node positioning hook ([b9a5693](https://github.com/mkayander/dStruct/commit/b9a56934dc570692febf18ce536b5bb97caebe10))
+* Use the new positioning hook ([087e02f](https://github.com/mkayander/dStruct/commit/087e02f3535a52d9882f39967ea23bff7b19506c))
+* Write current callstack frame index at Redux store ([90442cc](https://github.com/mkayander/dStruct/commit/90442ccb22a2bd3d4bf2468521c83f27f105704d))
+
 # [1.273.0](https://github.com/mkayander/dStruct/compare/v1.272.0...v1.273.0) (2024-02-13)
 
 
