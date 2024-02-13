@@ -110,7 +110,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { runCode, runBenchmark } = useCodeExecution(codeInput);
+  const { isProcessing, runCode, runBenchmark } = useCodeExecution(codeInput);
 
   // Update code on solution change
   useEffect(() => {
@@ -302,6 +302,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               color="success"
               title={LL.RUN_CODE()}
               endIcon={<PlayArrow />}
+              loading={isProcessing}
               loadingPosition="end"
               onClick={handleRunCode}
               sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
