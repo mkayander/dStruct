@@ -1,3 +1,10 @@
+## [1.275.1](https://github.com/mkayander/dStruct/compare/v1.275.0...v1.275.1) (2024-02-15)
+
+
+### Bug Fixes
+
+* Updated eslint ignore ([17ec755](https://github.com/mkayander/dStruct/commit/17ec75594f5c83888b1a41167f090270b5f65dbc))
+
 # [1.275.0](https://github.com/mkayander/dStruct/compare/v1.274.1...v1.275.0) (2024-02-15)
 
 
