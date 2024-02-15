@@ -22,9 +22,9 @@
     "typesafe-i18n": "typesafe-i18n",
     "dumpAllProjects": "tsx src/scripts/dumpAllProjects.ts --rewrite",
     "loadMainDump": "tsx src/scripts/loadProjects.ts public-dumps/main.json",
-    "runners:build": "esbuild src/runners/main.ts --bundle --platform=node --target=node12 --minify --outfile=dist/runners.js",
-    "runners:watch": "esbuild src/runners/main.ts --bundle --platform=node --target=node12 --sourcemap --outfile=dist/runners.js --watch",
-    "runners:run": "node --watch dist/runners.js"
+    "runners:build": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --minify --outfile=src/packages/dstruct-runner/dist/main.js",
+    "runners:watch": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --sourcemap --outfile=src/packages/dstruct-runner/dist/main.js --watch",
+    "runners:run": "node --watch src/packages/dstruct-runner/dist/main.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
