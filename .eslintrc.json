@@ -20,5 +20,5 @@
       "extends": ["plugin:testing-library/react"]
     }
   ],
-  "ignorePatterns": [".eslintrc.js", "jest.config.js", "jest.setup.js", "*.worker.js"]
+  "ignorePatterns": [".eslintrc.js", "jest.config.js", "jest.setup.js", "*.worker.js", "**/dist/**"]
 }
