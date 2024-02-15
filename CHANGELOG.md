@@ -1,3 +1,10 @@
+# [1.275.0](https://github.com/mkayander/dStruct/compare/v1.274.1...v1.275.0) (2024-02-15)
+
+
+### Features
+
+* Moved runner files ([47695c2](https://github.com/mkayander/dStruct/commit/47695c2083f566bf2a6b2dc367e8bcad900dae82))
+
 ## [1.274.1](https://github.com/mkayander/dStruct/compare/v1.274.0...v1.274.1) (2024-02-13)
 
 
