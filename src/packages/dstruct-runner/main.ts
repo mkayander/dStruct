@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import cors from "cors";
 import express from "express";
 import { spawn } from "node:child_process";
