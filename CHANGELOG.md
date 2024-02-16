@@ -1,3 +1,12 @@
+# [1.276.0](https://github.com/mkayander/dStruct/compare/v1.275.1...v1.276.0) (2024-02-16)
+
+
+### Features
+
+* Added bin string ([0013d23](https://github.com/mkayander/dStruct/commit/0013d2319d104767efb04a5bfadee38e88550135))
+* Moved py exec file ([e7af919](https://github.com/mkayander/dStruct/commit/e7af919aad6a590a56ebbcf636e22230e66c6af0))
+* Updated sub project info ([4b814a8](https://github.com/mkayander/dStruct/commit/4b814a836ecdd027d668a577983ecf7a37828569))
+
 ## [1.275.1](https://github.com/mkayander/dStruct/compare/v1.275.0...v1.275.1) (2024-02-15)
 
 
