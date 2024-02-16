@@ -5,7 +5,7 @@ import path from "path";
 
 async function execPython(codeInput: string) {
   const child = spawn(`python`, [
-    path.join(process.cwd(), "src", "runners", "exec.py"),
+    path.join(process.cwd(), "python", "exec.py"),
     codeInput,
   ]);
   let result = "";
