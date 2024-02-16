@@ -1,14 +1,16 @@
 {
   "name": "@dstruct/runner",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
+  "bin": {
+    "dstruct-runner": "dist/main.js"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": ["dstruct", "runner"],
+  "author": "Maksim Kaiander",
+  "license": "GNU"
 }
