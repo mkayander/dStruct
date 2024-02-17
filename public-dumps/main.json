@@ -3121,6 +3121,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clsne4nxr000114i03opxhh4y": {
+      "id": "clsne4nxr000114i03opxhh4y",
+      "createdAt": "2024-02-15T15:43:25.743Z",
+      "updatedAt": "2024-02-15T15:43:25.743Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find Polygon With the Largest Perimeter",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter",
+      "slug": "find-polygon-with-the-largest-perimeter",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsq3jrtg00017lkx38uclo79": {
+      "id": "clsq3jrtg00017lkx38uclo79",
+      "createdAt": "2024-02-17T13:10:33.365Z",
+      "updatedAt": "2024-02-17T13:10:33.365Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Furthest Building You Can Reach",
+      "category": "HEAP",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/furthest-building-you-can-reach",
+      "slug": "furthest-building-you-can-reach",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -13889,6 +13917,62 @@
         }
       },
       "description": null
+    },
+    "clsne4nxr000214i0pprp65gm": {
+      "id": "clsne4nxr000214i0pprp65gm",
+      "createdAt": "2024-02-15T15:43:25.743Z",
+      "updatedAt": "2024-02-16T14:22:19.709Z",
+      "projectId": "clsne4nxr000114i03opxhh4y",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[4,3,1,1,3,3,2]",
+          "order": 0
+        },
+        "irWpPxPc4U9EDWVeK6rgr8": {
+          "name": "irWpPxPc4U9EDWVeK6rgr8",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsq3jrtg00027lkxcs9m3csq": {
+      "id": "clsq3jrtg00027lkxcs9m3csq",
+      "createdAt": "2024-02-17T13:10:33.365Z",
+      "updatedAt": "2024-02-17T13:11:30.746Z",
+      "projectId": "clsq3jrtg00017lkx38uclo79",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aXTnGLDKd8Ay2LQeYZTsvr": {
+          "name": "aXTnGLDKd8Ay2LQeYZTsvr",
+          "type": "number",
+          "input": "5",
+          "order": 1
+        },
+        "u4quFFAjYhpfPQpSr4nRLS": {
+          "name": "u4quFFAjYhpfPQpSr4nRLS",
+          "type": "array",
+          "input": "[4,2,7,6,9,14,12]",
+          "order": 0
+        },
+        "uWnhNHkGfmGFrm6NTBXLBi": {
+          "name": "uWnhNHkGfmGFrm6NTBXLBi",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18663,6 +18747,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar rearrangeArray = function (nums) {\n  const n = nums.length;\n\n  const result = new Array(n).fill(0);\n\n  let posIndex = 0;\n  let negIndex = 1;\n  result.setColor(posIndex, \"green\");\n  result.setColor(negIndex, \"blue\");\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"green\");\n    if (nums[i] > 0) {\n      result[posIndex] = nums[i];\n      posIndex += 2;\n      result.setColor(posIndex, \"green\");\n    } else {\n      result[negIndex] = nums[i];\n      negIndex += 2;\n      result.setColor(negIndex, \"blue\");\n    }\n  }\n\n  return result;\n};\n\nreturn rearrangeArray;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsne4nxr000314i07ijznyzh": {
+      "id": "clsne4nxr000314i07ijznyzh",
+      "createdAt": "2024-02-15T15:43:25.743Z",
+      "updatedAt": "2024-02-16T14:23:46.036Z",
+      "projectId": "clsne4nxr000114i03opxhh4y",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} arr\n * @param {number} k\n * @return {number}\n */\nvar findLeastNumOfUniqueInts = function (arr, k) {\n  const freqMap = new Map();\n  for (let i = 0; i < arr.length; i++) {\n    arr.setColor(i, \"cyan\");\n    const num = arr[i];\n    freqMap.set(num, (freqMap.get(num) ?? 0) + 1);\n  }\n\n  const buckets = new Array(arr.length + 1);\n  for (const [num, count] of freqMap) {\n    (buckets[count] ??= new Array()).push(num);\n  }\n\n  let result = freqMap.size;\n  let curr = k;\n  for (let count = 1; count <= arr.length; count++) {\n    if (!buckets[count]) continue;\n    for (let i = 0; i < buckets[count].length; i++) {\n      if (curr < count) return result;\n      curr -= count;\n      result--;\n    }\n  }\n\n  return result;\n};\n\nreturn findLeastNumOfUniqueInts;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsq3jrtg00037lkxwrjqesr6": {
+      "id": "clsq3jrtg00037lkxwrjqesr6",
+      "createdAt": "2024-02-17T13:10:33.365Z",
+      "updatedAt": "2024-02-17T13:12:43.727Z",
+      "projectId": "clsq3jrtg00017lkx38uclo79",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {number[]} heights\r\n * @param {number} bricks\r\n * @param {number} ladders\r\n * @return {number}\r\n */\r\nvar furthestBuilding = function (heights, bricks, ladders) {\r\n  const highest = new PriorityQueue({ compare: (a, b) => b - a });\r\n\r\n  let i = 0;\r\n  for (i; i < heights.length - 1; i++) {\r\n    const curr = heights[i];\r\n    const next = heights[i + 1];\r\n    if (curr >= next) {\r\n      heights.setColor(i, \"green\");\r\n      continue;\r\n    }\r\n    heights.setColor(i, \"cyan\");\r\n\r\n    const diff = next - curr;\r\n    highest.enqueue(diff);\r\n    if (bricks >= diff) {\r\n      bricks -= diff;\r\n    } else if (ladders) {\r\n      console.log(highest);\r\n      const prevHighest = highest.front();\r\n      if (prevHighest >= diff) {\r\n        bricks += highest.dequeue() - diff;\r\n      }\r\n      ladders--;\r\n    } else {\r\n      break;\r\n    }\r\n  }\r\n\r\n  return i;\r\n};\r\n\r\nreturn furthestBuilding;\r\n",
       "pythonCode": null,
       "order": 0
     }
