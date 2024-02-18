@@ -9,11 +9,12 @@ import {
   selectIsAppBarScrolled,
 } from "#/store/reducers/appBarReducer";
 
-type PageScrollContainerProps = {
+export type PageScrollContainerProps = {
   children: React.ReactNode;
   isPage?: boolean;
   options?: OverlayScrollbarsComponentProps["options"];
   style?: React.CSSProperties;
+  onScroll?: (event: Event) => void;
 };
 
 export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
@@ -28,6 +29,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
     },
   },
   style,
+  onScroll,
 }) => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
@@ -67,6 +69,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
                       ),
                     );
                   }
+                  onScroll?.(ev);
                 },
                 destroyed: () => {
                   dispatch(appBarSlice.actions.setIsScrolled(false));

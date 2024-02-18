@@ -24,6 +24,7 @@ import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
 import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
 import { UserSettings } from "#/components/organisms/UserSettings";
 import { MainLayout } from "#/components/templates/MainLayout";
+import type { PageScrollContainerProps } from "#/components/templates/PageScrollContainer";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
@@ -57,6 +58,21 @@ const DashboardPage: NextPage<{
     }
   };
 
+  const handleScroll: PageScrollContainerProps["onScroll"] = (event) => {
+    if (!isMobile) return;
+
+    if (event.target instanceof Element) {
+      const { scrollTop } = event.target;
+      const polarAngle =
+        Math.PI / 2.5 -
+        ((scrollTop / window.innerHeight) * Math.PI - Math.PI / 4);
+      if (controlsRef.current) {
+        controlsRef.current.setAzimuthalAngle(Math.PI / 4);
+        controlsRef.current.setPolarAngle(polarAngle);
+      }
+    }
+  };
+
   const resetAngles = () => {
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(0);
@@ -77,7 +93,7 @@ const DashboardPage: NextPage<{
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-empty-function,react/jsx-no-undef
-    <MainLayout>
+    <MainLayout onScroll={handleScroll}>
       <Head>
         <title>dStruct</title>
       </Head>
@@ -107,7 +123,12 @@ const DashboardPage: NextPage<{
           },
         }}
       >
-        <Box position="absolute" height={600} width="100%" top="30px">
+        <Box
+          position="absolute"
+          height={isMobile ? 700 : 600}
+          width="100%"
+          top="30px"
+        >
           <LogoModelView controlsRef={controlsRef} />
         </Box>
         <Stack
