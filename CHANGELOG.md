@@ -1,3 +1,13 @@
+# [1.277.0](https://github.com/mkayander/dStruct/compare/v1.276.0...v1.277.0) (2024-02-18)
+
+
+### Features
+
+* Adapt home page 3D view for mobile ([e7818ed](https://github.com/mkayander/dStruct/commit/e7818ed8bb52cda070e3a2608b7defaa2590640c))
+* Improved Python logo display ([c63f05f](https://github.com/mkayander/dStruct/commit/c63f05fad13857b0b3871a98a8079f75f5b657b3))
+* Rotate 3D view on page scroll ([1e58c33](https://github.com/mkayander/dStruct/commit/1e58c3334d55d8629aef55feeb64a6663817ac42))
+* Updated d.ts file ([df8cc08](https://github.com/mkayander/dStruct/commit/df8cc08ee17a6363d73702e7e4bdb767b4f0a4fe))
+
 # [1.276.0](https://github.com/mkayander/dStruct/compare/v1.275.1...v1.276.0) (2024-02-16)
 
 
