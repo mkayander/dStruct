@@ -3,20 +3,29 @@ import React from "react";
 
 import { Footer } from "#/components/organisms/Footer";
 import { MainAppBar } from "#/components/organisms/MainAppBar";
-import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
+import {
+  PageScrollContainer,
+  type PageScrollContainerProps,
+} from "#/components/templates/PageScrollContainer";
 
-export type MainLayoutProps = BoxProps & {
+export type MainLayoutProps = Omit<BoxProps, "onScroll"> & {
   children: React.ReactNode;
   isLoading?: boolean;
+  onScroll: PageScrollContainerProps["onScroll"];
 };
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   isLoading,
+  onScroll,
   ...restProps
 }) => {
   return (
-    <PageScrollContainer isPage={true} style={{ height: "100vh" }}>
+    <PageScrollContainer
+      isPage={true}
+      style={{ height: "100vh" }}
+      onScroll={onScroll}
+    >
       <Box sx={{ minHeight: "100vh" }} {...restProps}>
         <MainAppBar />
         <Box component="main" sx={{ minHeight: "85vh" }}>
