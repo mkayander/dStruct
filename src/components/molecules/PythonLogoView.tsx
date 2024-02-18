@@ -1,34 +1,18 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { PythonLogoModel } from "#/3d-models/PythonLogoModel";
 
 type PythonLogoViewProps = {
-  azimuthalAngle?: number;
-  polarAngle?: number;
+  controlsRef: React.MutableRefObject<ThreeOrbitControls | null>;
 };
 
 export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
-  azimuthalAngle,
-  polarAngle,
+  controlsRef,
 }) => {
   const theme = useTheme();
-
-  const ref = useRef<ThreeOrbitControls | null>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    if (azimuthalAngle !== undefined) {
-      ref.current.setAzimuthalAngle(azimuthalAngle);
-    }
-    if (polarAngle !== undefined) {
-      ref.current.setPolarAngle(polarAngle);
-    }
-  }, [azimuthalAngle, polarAngle]);
 
   return (
     <Canvas>
@@ -49,7 +33,7 @@ export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
       />
       <PythonLogoModel />
       <OrbitControls
-        ref={ref}
+        ref={controlsRef}
         minAzimuthAngle={Math.PI / -2.2}
         maxAzimuthAngle={Math.PI / 2.2}
         minPolarAngle={Math.PI / 10}

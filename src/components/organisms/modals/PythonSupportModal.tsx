@@ -11,9 +11,11 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { PythonLogoView } from "#/components/molecules/PythonLogoView";
+import { useMobileLayout } from "#/hooks/useMobileLayout";
 
 import { GITHUB_URL } from "#/constants";
 
@@ -27,19 +29,29 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
   onClose,
   ...props
 }) => {
-  const [azimuthalAngle, setAzimuthalAngle] = React.useState<number>(0);
-  const [polarAngle, setPolarAngle] = React.useState<number>(0);
+  const isMobile = useMobileLayout();
+  const controlsRef = React.useRef<ThreeOrbitControls>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     const azimuthalAngle =
       ((window.innerWidth - event.clientX) / window.innerWidth) * Math.PI -
       Math.PI / 2;
-    setAzimuthalAngle(azimuthalAngle);
 
     const polarAngle =
       ((window.innerHeight - event.clientY) / window.innerHeight) * Math.PI;
-    setPolarAngle(polarAngle);
+
+    if (controlsRef.current) {
+      controlsRef.current.setAzimuthalAngle(azimuthalAngle);
+      controlsRef.current.setPolarAngle(polarAngle);
+    }
   };
+
+  useEffect(() => {
+    if (!controlsRef.current || isMobile) return;
+
+    controlsRef.current.setAzimuthalAngle(Math.PI / 7);
+    controlsRef.current.setPolarAngle(Math.PI / 1.5);
+  }, [controlsRef.current]);
 
   return (
     <Dialog
@@ -48,6 +60,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
       PaperProps={{
         sx: {
           overflow: "visible",
+          alignSelf: "end",
         },
       }}
       onMouseMove={handleMouseMove}
@@ -55,10 +68,11 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
     >
       <Box
         sx={{
-          position: "absolute",
-          top: "-32vh",
+          position: "fixed",
+          top: isMobile ? "-32px" : "-6%",
+          left: 0,
           width: "100%",
-          height: 700,
+          height: isMobile ? 470 : "70%",
         }}
       >
         <Box
@@ -85,10 +99,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             animation: "fade-in 0.5s ease-in-out",
           }}
         />
-        <PythonLogoView
-          azimuthalAngle={azimuthalAngle}
-          polarAngle={polarAngle}
-        />
+        <PythonLogoView controlsRef={controlsRef} />
       </Box>
       <DialogTitle>Python Support</DialogTitle>
       <IconButton
@@ -103,10 +114,17 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
       >
         <Close />
       </IconButton>
-      <DialogContent dividers>
+      <DialogContent
+        dividers
+        sx={{
+          "&::-webkit-scrollbar": {
+            zIndex: 10,
+          },
+        }}
+      >
         <Box
           sx={{
-            mt: 8,
+            mt: isMobile ? 34 : 8,
             p: 2,
             backgroundColor: (theme) => alpha(theme.palette.primary.light, 0.1),
             backdropFilter: "blur(10px)",
