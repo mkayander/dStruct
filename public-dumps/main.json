@@ -3149,6 +3149,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clsrtbjv7000310pe8zjq24ve": {
+      "id": "clsrtbjv7000310pe8zjq24ve",
+      "createdAt": "2024-02-18T17:59:46.004Z",
+      "updatedAt": "2024-02-18T17:59:46.004Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Meeting Rooms III",
+      "category": "ARRAY",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/meeting-rooms-iii",
+      "slug": "meeting-rooms-iii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsso7vn600015nuaa6ghm8nk": {
+      "id": "clsso7vn600015nuaa6ghm8nk",
+      "createdAt": "2024-02-19T08:24:42.738Z",
+      "updatedAt": "2024-02-19T08:24:42.738Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Power of Two",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/power-of-two",
+      "slug": "power-of-two",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsunin4e0001gdbkqfa83lu2": {
+      "id": "clsunin4e0001gdbkqfa83lu2",
+      "createdAt": "2024-02-20T17:40:37.647Z",
+      "updatedAt": "2024-02-20T17:40:37.647Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Missing Number",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/missing-number",
+      "slug": "missing-number",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -13973,6 +14015,113 @@
         }
       },
       "description": null
+    },
+    "clsrtbjv7000410perzkwr8zp": {
+      "id": "clsrtbjv7000410perzkwr8zp",
+      "createdAt": "2024-02-18T17:59:46.004Z",
+      "updatedAt": "2024-02-18T18:06:56.941Z",
+      "projectId": "clsrtbjv7000310pe8zjq24ve",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        },
+        "wmPf4utQjfevdyUw8iH3HW": {
+          "name": "wmPf4utQjfevdyUw8iH3HW",
+          "type": "array",
+          "input": "[[0,10],[1,5],[2,7],[3,4]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsrtm2fi000710pedh3ib5nw": {
+      "id": "clsrtm2fi000710pedh3ib5nw",
+      "createdAt": "2024-02-18T18:07:56.622Z",
+      "updatedAt": "2024-02-18T18:08:01.600Z",
+      "projectId": "clsrtbjv7000310pe8zjq24ve",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        },
+        "wmPf4utQjfevdyUw8iH3HW": {
+          "name": "wmPf4utQjfevdyUw8iH3HW",
+          "type": "array",
+          "input": "[[1,20],[2,10],[3,5],[4,9],[6,8]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsso7vn600025nuaxymh1mgb": {
+      "id": "clsso7vn600025nuaxymh1mgb",
+      "createdAt": "2024-02-19T08:24:42.738Z",
+      "updatedAt": "2024-02-19T08:25:03.647Z",
+      "projectId": "clsso7vn600015nuaa6ghm8nk",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3tAKjMNJ4hBJVs71jbYzKy": {
+          "name": "3tAKjMNJ4hBJVs71jbYzKy",
+          "type": "number",
+          "input": "16",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clssoe4mq00055nuahi1evz3t": {
+      "id": "clssoe4mq00055nuahi1evz3t",
+      "createdAt": "2024-02-19T08:29:34.322Z",
+      "updatedAt": "2024-02-19T08:29:50.909Z",
+      "projectId": "clsso7vn600015nuaa6ghm8nk",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "3tAKjMNJ4hBJVs71jbYzKy": {
+          "name": "3tAKjMNJ4hBJVs71jbYzKy",
+          "type": "number",
+          "input": "4192",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsunin4f0002gdbk0s7o2nwn": {
+      "id": "clsunin4f0002gdbk0s7o2nwn",
+      "createdAt": "2024-02-20T17:40:37.647Z",
+      "updatedAt": "2024-02-20T17:43:24.669Z",
+      "projectId": "clsunin4e0001gdbkqfa83lu2",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aBHN8haXoUeATusvm5dZcW": {
+          "name": "aBHN8haXoUeATusvm5dZcW",
+          "type": "array",
+          "input": "[9,6,4,2,3,5,7,0,1]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18777,6 +18926,62 @@
       "code": "/**\r\n * @param {number[]} heights\r\n * @param {number} bricks\r\n * @param {number} ladders\r\n * @return {number}\r\n */\r\nvar furthestBuilding = function (heights, bricks, ladders) {\r\n  const highest = new PriorityQueue({ compare: (a, b) => b - a });\r\n\r\n  let i = 0;\r\n  for (i; i < heights.length - 1; i++) {\r\n    const curr = heights[i];\r\n    const next = heights[i + 1];\r\n    if (curr >= next) {\r\n      heights.setColor(i, \"green\");\r\n      continue;\r\n    }\r\n    heights.setColor(i, \"cyan\");\r\n\r\n    const diff = next - curr;\r\n    highest.enqueue(diff);\r\n    if (bricks >= diff) {\r\n      bricks -= diff;\r\n    } else if (ladders) {\r\n      console.log(highest);\r\n      const prevHighest = highest.front();\r\n      if (prevHighest >= diff) {\r\n        bricks += highest.dequeue() - diff;\r\n      }\r\n      ladders--;\r\n    } else {\r\n      break;\r\n    }\r\n  }\r\n\r\n  return i;\r\n};\r\n\r\nreturn furthestBuilding;\r\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clsrtbjv7000510pekhsa8t4t": {
+      "id": "clsrtbjv7000510pekhsa8t4t",
+      "createdAt": "2024-02-18T17:59:46.004Z",
+      "updatedAt": "2024-02-18T18:08:30.219Z",
+      "projectId": "clsrtbjv7000310pe8zjq24ve",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} meetings\n * @return {number}\n */\nvar mostBooked = function (n, meetings) {\n  const roomsMeetingCount = new Uint32Array(n);\n  const roomsSchedule = new Uint32Array(n);\n\n  meetings.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n\n  for (let i = 0; i < meetings.length; i++) {\n    meetings.setColor(i, \"green\");\n    const [start, end] = meetings[i];\n    let earliestRoom = -1;\n    let earliestTime = Infinity;\n    let freeRoomFound = false;\n\n    for (let i = 0; i < n; i++) {\n      if (roomsSchedule[i] <= start) {\n        roomsMeetingCount[i]++;\n        roomsSchedule[i] = end;\n        freeRoomFound = true;\n        break;\n      }\n\n      if (roomsSchedule[i] < earliestTime) {\n        earliestTime = roomsSchedule[i];\n        earliestRoom = i;\n      }\n    }\n\n    if (freeRoomFound === false) {\n      roomsMeetingCount[earliestRoom]++;\n      roomsSchedule[earliestRoom] += end - start;\n    }\n  }\n\n  let roomNum = 0;\n  let max = -1;\n  for (let i = 0; i < n; i++) {\n    if (roomsMeetingCount[i] > max) {\n      max = roomsMeetingCount[i];\n      roomNum = i;\n    }\n  }\n\n  return roomNum;\n};\n\nreturn mostBooked;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsso7vn600035nua705vmzt9": {
+      "id": "clsso7vn600035nua705vmzt9",
+      "createdAt": "2024-02-19T08:24:42.738Z",
+      "updatedAt": "2024-02-19T08:30:33.095Z",
+      "projectId": "clsso7vn600015nuaa6ghm8nk",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {boolean}\n */\nvar isPowerOfTwo = function (n) {\n  console.log(displayBinary(n));\n  if (n <= 0) return false;\n\n  const minusLeastSignificant = n - 1;\n  console.log(displayBinary(minusLeastSignificant));\n  const mask = n & minusLeastSignificant;\n  console.log(displayBinary(mask));\n\n  return mask === 0;\n};\n\nconst displayBinary = (n) => n.toString(2).padStart(32, \"0\");\n\nreturn isPowerOfTwo;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsunin4f0003gdbk3j7grf5u": {
+      "id": "clsunin4f0003gdbk3j7grf5u",
+      "createdAt": "2024-02-20T17:40:37.647Z",
+      "updatedAt": "2024-02-20T17:43:37.381Z",
+      "projectId": "clsunin4e0001gdbkqfa83lu2",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar missingNumber = function (nums) {\n  const n = nums.length;\n\n  let missing = n;\n  for (let i = 0; i < n; i++) {\n    missing ^= i ^ nums[i];\n  }\n\n  return missing;\n};\n\nreturn missingNumber;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsunoorn0005gdbkeykmqptg": {
+      "id": "clsunoorn0005gdbkeykmqptg",
+      "createdAt": "2024-02-20T17:45:19.715Z",
+      "updatedAt": "2024-02-20T17:45:43.905Z",
+      "projectId": "clsunin4e0001gdbkqfa83lu2",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar missingNumber = function (nums) {\n  const n = nums.length;\n  const targetSum = (n * (n + 1)) / 2;\n\n  const sum = nums.reduce((acc, num) => acc + num, 0);\n\n  return targetSum - sum;\n};\n\nreturn missingNumber;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
