@@ -1,3 +1,10 @@
+# [1.279.0](https://github.com/mkayander/dStruct/compare/v1.278.1...v1.279.0) (2024-02-21)
+
+
+### Features
+
+* Improved mobile display ([7f507dc](https://github.com/mkayander/dStruct/commit/7f507dc2cc41d2c2bc94df032dd2d20b5d9a2917))
+
 ## [1.278.1](https://github.com/mkayander/dStruct/compare/v1.278.0...v1.278.1) (2024-02-21)
 
 
