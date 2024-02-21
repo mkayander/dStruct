@@ -1,16 +1,8 @@
-import {
-  AutoFixHigh,
-  ContentCopy,
-  DynamicForm,
-  Javascript,
-  PlayArrow,
-} from "@mui/icons-material";
+import { AutoFixHigh, ContentCopy, PlayArrow } from "@mui/icons-material";
 import { LoadingButton, TabContext, TabList } from "@mui/lab";
 import {
   Box,
   IconButton,
-  MenuItem,
-  Select,
   type SelectChangeEvent,
   Stack,
   Tab,
@@ -33,6 +25,7 @@ import React, {
 import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
 import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
 import { CodeRunner } from "#/components/molecules/CodeRunner/CodeRunner";
+import { EditorLanguageSelect } from "#/components/molecules/CodeRunner/EditorLanguageSelect";
 import {
   EditorState,
   EditorStateIcon,
@@ -354,34 +347,12 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               }}
             >
               <Tooltip title="Programming Language" arrow placement="left">
-                <Select
-                  size="small"
-                  value={language}
-                  onChange={handleLanguageChange}
-                  sx={{
-                    height: 32,
-                    width: 48,
-                    overflow: "hidden",
-                    fontSize: "8px",
-                    "& [data-testid=ArrowDropDownIcon]": {
-                      marginRight: "-6px",
-                    },
-                    "& [role=combobox]": {
-                      padding: "4px",
-                      color: "transparent",
-                      "& > svg": {
-                        color: "text.primary",
-                      },
-                    },
-                  }}
-                >
-                  <MenuItem value="javascript">
-                    <Javascript /> &nbsp; JavaScript
-                  </MenuItem>
-                  <MenuItem value="python">
-                    <DynamicForm /> &nbsp; Python
-                  </MenuItem>
-                </Select>
+                <Box>
+                  <EditorLanguageSelect
+                    language={language}
+                    handleLanguageChange={handleLanguageChange}
+                  />
+                </Box>
               </Tooltip>
               <EditorStateIcon
                 state={editorState}
