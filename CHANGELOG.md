@@ -1,3 +1,10 @@
+## [1.278.1](https://github.com/mkayander/dStruct/compare/v1.278.0...v1.278.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* Fixed imported icon usage ([5bb4e01](https://github.com/mkayander/dStruct/commit/5bb4e013758ff00c76075f7d7e773c1a92926a15))
+
 # [1.278.0](https://github.com/mkayander/dStruct/compare/v1.277.0...v1.278.0) (2024-02-21)
 
 
