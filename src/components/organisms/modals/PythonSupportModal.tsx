@@ -126,16 +126,20 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
       >
         <Box
           sx={{
-            mt: isMobile ? 34 : 8,
+            mt: isMobile ? 32 : 8,
             p: 2,
             backgroundColor: (theme) => alpha(theme.palette.primary.light, 0.1),
             backdropFilter: "blur(10px)",
             borderRadius: 2,
             border: `1px solid #ffffff10`,
+            maxHeight: "45vh",
+            overflowY: "auto",
           }}
         >
           <Typography variant="h4" textAlign="center" gutterBottom>
-            Install and run dStruct worker to run Python code!
+            {isMobile
+              ? "Open this page on desktop to run Python code!"
+              : "Install and run dStruct worker to run Python code!"}
           </Typography>
           <Typography gutterBottom>
             🚀 One of the key differences of dStruct is that it runs code
@@ -154,6 +158,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
             published to NPM yet. You can contribute to the development of the
             worker by visiting the GitHub repository.
           </Typography>
+
           {/* <Typography gutterBottom>
             It is easy to install and run the dStruct worker. Just follow the
             instructions below:
