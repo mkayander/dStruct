@@ -1,3 +1,15 @@
+# [1.278.0](https://github.com/mkayander/dStruct/compare/v1.277.0...v1.278.0) (2024-02-21)
+
+
+### Bug Fixes
+
+* FIxed 3d models display ([0e162a5](https://github.com/mkayander/dStruct/commit/0e162a5ef50b691075871c504aaeaf09144a0630))
+
+
+### Features
+
+* Improved programming language select ([2d9dd32](https://github.com/mkayander/dStruct/commit/2d9dd32f8f2567e97e7c8c65ad601175bf600329))
+
 # [1.277.0](https://github.com/mkayander/dStruct/compare/v1.276.0...v1.277.0) (2024-02-18)
 
 
