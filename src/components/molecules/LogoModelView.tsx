@@ -46,6 +46,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         maxDistance={15}
         enableRotate={true}
         enableZoom={false}
+        enablePan={false}
       />
     </Canvas>
   );

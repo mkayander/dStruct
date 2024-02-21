@@ -60,7 +60,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
       PaperProps={{
         sx: {
           overflow: "visible",
-          alignSelf: "end",
+          marginTop: isMobile ? 0 : "15vh",
         },
       }}
       onMouseMove={handleMouseMove}
@@ -78,10 +78,11 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
         <Box
           sx={{
             position: "absolute",
-            top: 0,
-            width: "100%",
+            top: "50%",
+            left: "50%",
             height: "100%",
-            transform: "translate(-70px, -50px)",
+            aspectRatio: "1/1",
+            transform: "translate(-50%, -50%) translate(-70px, -50px)",
             background:
               "radial-gradient(circle, #3675A955 0%, transparent 60%)",
             animation: "fade-in 0.5s ease-in-out",
@@ -90,10 +91,11 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
         <Box
           sx={{
             position: "absolute",
-            top: 0,
-            width: "100%",
+            top: "50%",
+            left: "50%",
             height: "100%",
-            transform: "translate(70px, 50px)",
+            aspectRatio: "1/1",
+            transform: "translate(-50%, -50%) translate(70px, 50px)",
             background:
               "radial-gradient(circle, #FFD54F22 0%, transparent 60%)",
             animation: "fade-in 0.5s ease-in-out",

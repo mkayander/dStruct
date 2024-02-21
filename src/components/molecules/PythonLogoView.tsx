@@ -40,8 +40,9 @@ export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
         maxPolarAngle={Math.PI / 1.1}
         minDistance={6}
         maxDistance={15}
-        enableRotate={false}
+        enableRotate={true}
         enableZoom={false}
+        enablePan={false}
       />
     </Canvas>
   );
