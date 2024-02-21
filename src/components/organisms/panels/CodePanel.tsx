@@ -272,8 +272,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
                 <Box display="flex" alignItems="center" gap="3px">
                   {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
                   <Image
+                    src={prettierIcon}
                     alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
-                    {...prettierIcon}
                     width={22}
                     height={22}
                   />

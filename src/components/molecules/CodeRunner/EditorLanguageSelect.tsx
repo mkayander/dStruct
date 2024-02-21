@@ -1,8 +1,8 @@
 import { MenuItem, Select, type SelectChangeEvent } from "@mui/material";
 import Image from "next/image";
 
-import JavaScriptLogo from "#/components/molecules/CodeRunner/assets/javaScriptLogo.svg";
-import PythonLogo from "#/components/molecules/CodeRunner/assets/pythonLogo.svg";
+import javaScriptLogo from "#/components/molecules/CodeRunner/assets/javaScriptLogo.svg";
+import pythonLogo from "#/components/molecules/CodeRunner/assets/pythonLogo.svg";
 import type { ProgrammingLanguage } from "#/hooks/useCodeExecution";
 
 export type EditorLanguageSelectProps = {
@@ -38,7 +38,7 @@ export const EditorLanguageSelect: React.FC<EditorLanguageSelectProps> = ({
     >
       <MenuItem value="javascript">
         <Image
-          src={JavaScriptLogo}
+          src={javaScriptLogo}
           alt="JavaScript Logo"
           width={16}
           height={16}
@@ -46,7 +46,7 @@ export const EditorLanguageSelect: React.FC<EditorLanguageSelectProps> = ({
         &nbsp; JavaScript
       </MenuItem>
       <MenuItem value="python">
-        <Image src={PythonLogo} alt="Python Logo" width={16} height={16} />
+        <Image src={pythonLogo} alt="Python Logo" width={16} height={16} />
         &nbsp; Python
       </MenuItem>
     </Select>
