@@ -1,3 +1,12 @@
+# [1.280.0](https://github.com/mkayander/dStruct/compare/v1.279.0...v1.280.0) (2024-02-22)
+
+
+### Features
+
+* Added project initialized state ([bb9718d](https://github.com/mkayander/dStruct/commit/bb9718dd064c3e90795180708110167b53c2eeac))
+* Display loading skeleton on panels ([06829ef](https://github.com/mkayander/dStruct/commit/06829ef7ecead2ff1dc4a066bd795c7754d5f046))
+* Implemented a loading skeleton overlay component ([c643445](https://github.com/mkayander/dStruct/commit/c6434456fa26c6cdfffd152352f22cd2c9b32868))
+
 # [1.279.0](https://github.com/mkayander/dStruct/compare/v1.278.1...v1.279.0) (2024-02-21)
 
 
