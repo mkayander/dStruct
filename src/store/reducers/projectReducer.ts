@@ -3,12 +3,14 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "#/store/makeStore";
 
 type ProjectState = {
-  isEditable: boolean;
   projectId: string | null;
+  isInitialized: boolean;
+  isEditable: boolean;
 };
 
 const initialState: ProjectState = {
   projectId: null,
+  isInitialized: false,
   isEditable: false,
 };
 
@@ -35,5 +37,7 @@ export const projectReducer = projectSlice.reducer;
 /**
  * Selectors
  */
+export const selectIsInitialized = (state: RootState) =>
+  state.project.isInitialized;
 export const selectIsEditable = (state: RootState) => state.project.isEditable;
 export const selectProjectId = (state: RootState) => state.project.projectId;

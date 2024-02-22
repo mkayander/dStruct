@@ -3,9 +3,13 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 
+import { useAppDispatch } from "#/store/hooks";
+import { projectSlice } from "#/store/reducers/projectReducer";
+
 const BASE_PATH = "/playground";
 
 export const usePlaygroundSlugs = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +28,11 @@ export const usePlaygroundSlugs = () => {
       : [];
 
     const setProject = (slug?: string, isInitial?: boolean) => {
+      dispatch(
+        projectSlice.actions.update({
+          isInitialized: false,
+        }),
+      );
       if (!slug) return router.replace(BASE_PATH);
 
       const lastPath = localStorage.getItem("lastPlaygroundPath");
@@ -54,6 +63,7 @@ export const usePlaygroundSlugs = () => {
     };
 
     const clearSlugs = () => {
+      localStorage.removeItem("lastPlaygroundPath");
       return router.push(BASE_PATH);
     };
 
