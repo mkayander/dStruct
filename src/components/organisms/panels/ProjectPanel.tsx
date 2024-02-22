@@ -1,11 +1,13 @@
 import { Add, Edit } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
-import { IconButton, Skeleton, Stack, Tab, Tooltip } from "@mui/material";
+import { IconButton, Stack, Tab, Tooltip } from "@mui/material";
+import { TRPCClientError } from "@trpc/client";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
 import { ProblemLinkButton } from "#/components/atoms/ProblemLinkButton";
 import { ArgsEditor } from "#/components/molecules/ArgsEditor/ArgsEditor";
 import { ProjectSelect } from "#/components/molecules/ProjectSelect";
@@ -32,7 +34,12 @@ export const ProjectPanel: React.FC = () => {
   const { LL } = useI18nContext();
 
   const router = useRouter();
-  const { projectSlug = "", caseSlug = "", setProject } = usePlaygroundSlugs();
+  const {
+    projectSlug = "",
+    caseSlug = "",
+    setProject,
+    clearSlugs,
+  } = usePlaygroundSlugs();
 
   const [tabValue, setTabValue] = useState("1");
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
@@ -44,6 +51,13 @@ export const ProjectPanel: React.FC = () => {
 
   const selectedProject = trpc.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
+    retry(failureCount, error) {
+      if (error instanceof TRPCClientError && error.data.code === "NOT_FOUND") {
+        return false;
+      }
+
+      return failureCount < 4;
+    },
   });
 
   const selectedCase = trpc.project.getCaseBySlug.useQuery(
@@ -58,6 +72,11 @@ export const ProjectPanel: React.FC = () => {
   }, [dispatch, selectedProject.data?.id]);
 
   useEffect(() => {
+    if (selectedProject.error) {
+      console.log("selectedProject.error2: ", selectedProject.error);
+      clearSlugs();
+      return;
+    }
     if (!selectedProject.data || !session.data) {
       isEditable &&
         dispatch(projectSlice.actions.update({ isEditable: false }));
@@ -73,7 +92,14 @@ export const ProjectPanel: React.FC = () => {
           isEditable: newState,
         }),
       );
-  }, [dispatch, isEditable, selectedProject.data, session.data]);
+  }, [
+    clearSlugs,
+    dispatch,
+    isEditable,
+    selectedProject.data,
+    selectedProject.error,
+    session.data,
+  ]);
 
   useEffect(() => {
     if (allBrief.data?.length && router.isReady && !projectSlug) {
@@ -114,22 +140,7 @@ export const ProjectPanel: React.FC = () => {
         currentProject={selectedProject.data}
       />
 
-      {allBrief.isLoading && (
-        <Skeleton
-          animation="wave"
-          variant="rectangular"
-          sx={{
-            position: "absolute",
-            background: "transparent",
-            height: "100%",
-            width: "100%",
-            top: 0,
-            left: 0,
-            zIndex: 10,
-            cursor: "wait",
-          }}
-        />
-      )}
+      <LoadingSkeletonOverlay />
 
       <TabContext value={tabValue}>
         <TabListWrapper>

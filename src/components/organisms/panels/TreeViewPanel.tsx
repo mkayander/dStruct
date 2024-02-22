@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
+import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
 import { TreeViewer } from "#/components/molecules/TreeViewer/TreeViewer";
 import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
 import {
@@ -116,6 +117,8 @@ export const TreeViewPanel: React.FC = () => {
         height: isMobile ? 240 + maxDepth * 60 : "100%",
       }}
     >
+      <LoadingSkeletonOverlay />
+
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>

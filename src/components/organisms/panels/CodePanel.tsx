@@ -22,6 +22,7 @@ import React, {
   useState,
 } from "react";
 
+import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
 import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
 import { CodeRunner } from "#/components/molecules/CodeRunner/CodeRunner";
@@ -48,13 +49,17 @@ import {
   isLanguageValid,
   type ProgrammingLanguage,
 } from "#/hooks/useCodeExecution";
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectRuntimeData } from "#/store/reducers/callstackReducer";
-import { selectIsEditable } from "#/store/reducers/projectReducer";
+import {
+  projectSlice,
+  selectIsEditable,
+} from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils";
 import { codePrefixLinesCount } from "#/utils/setGlobalRuntimeContext";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
+  const dispatch = useAppDispatch();
   const session = useSession();
   const trpcUtils = trpc.useUtils();
   const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>();
@@ -109,6 +114,12 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   useEffect(() => {
     if (!currentSolution.data) return;
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
+
+    dispatch(
+      projectSlice.actions.update({
+        isInitialized: true,
+      }),
+    );
 
     const key = getCodeKey(language);
 
@@ -261,6 +272,9 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
         open={modalName === PYTHON_SUPPORT_MODAL_ID}
         onClose={() => setModalName("")}
       />
+
+      <LoadingSkeletonOverlay />
+
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>

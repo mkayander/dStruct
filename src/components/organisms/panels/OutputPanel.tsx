@@ -2,6 +2,7 @@ import { TabContext, TabList } from "@mui/lab";
 import { alpha, Box, Stack, Tab, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
+import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
 import { CallstackTable } from "#/components/molecules/CallstackTable";
 import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
 import {
@@ -84,6 +85,8 @@ export const OutputPanel: React.FC = () => {
 
   return (
     <PanelWrapper>
+      <LoadingSkeletonOverlay />
+
       <TabContext value={value}>
         <TabListWrapper>
           <TabList onChange={handleChange} aria-label={LL.PANEL_TABS()}>
