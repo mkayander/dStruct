@@ -232,6 +232,14 @@ export const projectRouter = router({
           }
         }
       })
+      .catch((e) => {
+        if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2025") {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: `Project "${input}" not found.`
+          });
+        } else throw e;
+      })
     ),
 
   create: protectedProcedure
