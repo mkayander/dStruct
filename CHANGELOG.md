@@ -1,3 +1,19 @@
+# [1.281.0](https://github.com/mkayander/dStruct/compare/v1.280.0...v1.281.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* Fixed args value parsing ([997a673](https://github.com/mkayander/dStruct/commit/997a67318ae7e902a9d2354c91d44f4e9e70389d))
+* Fixed error handling ([4280f05](https://github.com/mkayander/dStruct/commit/4280f052308c61d375017ce60045bce7a17add52))
+* Improved linked lists display ([f54064c](https://github.com/mkayander/dStruct/commit/f54064c73e7da3fb5486f32ea51ccc8d3c4dbb44))
+
+
+### Features
+
+* Added global selector ([fbcae63](https://github.com/mkayander/dStruct/commit/fbcae637c433f725b1431418ae5362f43895a83f))
+* Env d.ts file ([3722b63](https://github.com/mkayander/dStruct/commit/3722b6346b1a65cc2b0a1c520523388dc88ab066))
+* Improved matrix display ([33b0dd1](https://github.com/mkayander/dStruct/commit/33b0dd1fbfe982e30a82e9cb48b9422baa9e3871))
+
 # [1.280.0](https://github.com/mkayander/dStruct/compare/v1.279.0...v1.280.0) (2024-02-22)
 
 
