@@ -81,6 +81,8 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
     null,
   );
+  const [editorInstance, setEditorInstance] =
+    useState<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [textModel, setTextModel] = useState<monaco.editor.ITextModel | null>(
     null,
   );
@@ -149,13 +151,21 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     const [, posLine] = error.stack?.split("\n") ?? [];
 
     if (posLine) {
-      const [, line, column] = posLine.match(/:(\d+):(\d+)\)$/) ?? [];
+      const [, strLine, strColumn] = posLine.match(/:(\d+):(\d+)\)$/) ?? [];
+      const line = Number(strLine) - 2 - codePrefixLinesCount;
+      const column = Number(strColumn);
 
       if (line && column) {
-        startLineNumber = Number(line) - 2 - codePrefixLinesCount;
+        startLineNumber = line;
         endLineNumber = startLineNumber;
-        startColumn = Number(column);
-        endColumn = Number(column) + 10;
+        startColumn = column;
+        endColumn = column + 32;
+
+        // set cursor position
+        if (editorInstance) {
+          editorInstance.setPosition({ lineNumber: line, column });
+          editorInstance.revealLineInCenterIfOutsideViewport(line);
+        }
       }
     }
 
@@ -169,7 +179,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
         endColumn,
       },
     ]);
-  }, [error, monacoInstance, textModel]);
+  }, [editorInstance, error, monacoInstance, textModel]);
 
   const openPythonSupportModal = () => {
     setModalName(PYTHON_SUPPORT_MODAL_ID);
@@ -348,6 +358,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               onChange={handleChangeCode}
               isUpdating={isLoading}
               setMonacoInstance={setMonacoInstance}
+              setEditorInstance={setEditorInstance}
               setTextModel={setTextModel}
             />
             <Stack

@@ -55,6 +55,8 @@ export const useCodeExecution = (codeInput: string) => {
     setIsProcessing(true);
     const args = createRawRuntimeArgs(caseArgs);
 
+    let startTimestamp = performance.now();
+
     try {
       const result = await requestWorkerAction(worker, "benchmark", {
         type: "benchmark",
@@ -62,10 +64,41 @@ export const useCodeExecution = (codeInput: string) => {
         input: args,
         count: 128,
       });
+      startTimestamp = result.workStartTime;
+      if (result.error) throw result.error;
       setError(null);
+      dispatch(
+        callstackSlice.actions.setStatus({
+          isReady: true,
+          error: null,
+          result: String(result.output),
+          runtime: result.runtime,
+          startTimestamp,
+        }),
+      );
       return result;
-    } catch (e: any) {
-      setError(e);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        dispatch(
+          callstackSlice.actions.addOne({
+            id: uuid.generate(),
+            timestamp: performance.now(),
+            name: "error",
+          }),
+        );
+        dispatch(
+          callstackSlice.actions.setStatus({
+            isReady: true,
+            error: { name: e.name, message: e.message, stack: e.stack },
+            result: null,
+            runtime: performance.now() - startTimestamp,
+            startTimestamp,
+          }),
+        );
+        console.warn(e);
+      } else {
+        console.error("Invalid error type: ", e);
+      }
     } finally {
       setIsProcessing(false);
     }

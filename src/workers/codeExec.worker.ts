@@ -10,11 +10,17 @@ import type { ArgumentObject } from "#/utils/argumentObject";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
 const dummy = () => {};
-[Array, String, Map, Set, WeakMap, WeakSet].forEach((proto) => {
-  // @ts-expect-error These custom methods are not needed for benchmarks
+[Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
   // prettier-ignore
-  proto.prototype.setColor = proto.prototype.blink = proto.prototype.setInfo = dummy;
-});
+  ["setColor", "blink", "setInfo"].forEach((method) => 
+    Object.defineProperty(proto.prototype, method, {
+      value: dummy,
+      writable: false,
+      enumerable: false,
+      configurable: false,
+    })
+  ),
+);
 
 export interface ExecWorkerInterface {
   benchmark: {
@@ -24,13 +30,14 @@ export interface ExecWorkerInterface {
       input: unknown[];
       count: number;
     };
-    error?: string;
     response: {
       type: "benchmark";
       workStartTime: number;
+      runtime: number;
       results?: number[];
-      error?: string;
-      averageTime: number;
+      output?: string;
+      error?: Error;
+      averageTime?: number;
       medianTime?: number;
       p75Time?: number;
       p90Time?: number;
@@ -50,7 +57,7 @@ export interface ExecWorkerInterface {
       workStartTime: number;
       runtime: number;
       output?: string;
-      error?: string;
+      error?: Error;
       callstack?: CallstackHelper["frames"];
     };
   };
@@ -82,11 +89,11 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         caseArgs,
       );
       const prefixedCode = `${globalDefinitionsPrefix}\n${code}`;
-      const getInputFunction = new Function(prefixedCode);
-      const runFunction = getInputFunction();
-      callstack.clear();
       const startTimestamp = performance.now();
       try {
+        const getInputFunction = new Function(prefixedCode);
+        const runFunction = getInputFunction();
+        callstack.clear();
         const result = runFunction(...args);
         const response: WorkerResponse = {
           type: "run",
@@ -98,48 +105,63 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         self.postMessage(response);
       } catch (error: any) {
         console.log("Worker: error: ", error);
-        const response: WorkerResponse = {
+        const errorResponse: WorkerResponse = {
           type: "run",
           workStartTime: startTimestamp,
           runtime: performance.now() - startTimestamp,
-          error: error.message,
+          error,
         };
-        self.postMessage(response);
+        self.postMessage(errorResponse);
       }
       break;
     }
 
     case "benchmark": {
       const { code, input, count } = data;
-      const getInputFunction = new Function(code);
-      const runFunction = getInputFunction();
-      const timeData: number[] = [];
       const startTimestamp = performance.now();
+      try {
+        const getInputFunction = new Function(code);
+        const runFunction = getInputFunction();
+        const timeData: number[] = [];
+        let output: any;
 
-      for (let i = 0; i < count; i++) {
-        const start = performance.now();
-        runFunction(...input);
-        timeData.push(performance.now() - start);
+        for (let i = 0; i < count; i++) {
+          const start = performance.now();
+          output = runFunction(...input);
+          timeData.push(performance.now() - start);
+        }
+
+        const totalTime = performance.now() - startTimestamp;
+        const averageTime = totalTime / count;
+        timeData.sort((a, b) => a - b);
+        const medianTime = timeData[Math.floor(count / 2)];
+        const p75Time = timeData[Math.floor(count * 0.75)];
+        const p90Time = timeData[Math.floor(count * 0.9)];
+        const p99Time = timeData[Math.floor(count * 0.99)];
+
+        const response: CodeBenchmarkResponse = {
+          type: "benchmark",
+          workStartTime: startTimestamp,
+          runtime: totalTime,
+          results: timeData,
+          output: stringifySolutionResult(output),
+          averageTime,
+          medianTime,
+          p75Time,
+          p90Time,
+          p99Time,
+        };
+        self.postMessage(response);
+      } catch (error: any) {
+        console.log("Worker: error: ", error);
+        const errorResponse: WorkerResponse = {
+          type: "benchmark",
+          workStartTime: performance.now(),
+          runtime: performance.now() - startTimestamp,
+          error,
+        };
+        self.postMessage(errorResponse);
       }
-
-      const totalTime = performance.now() - startTimestamp;
-      const averageTime = totalTime / count;
-      timeData.sort((a, b) => a - b);
-      const medianTime = timeData[Math.floor(count / 2)];
-      const p75Time = timeData[Math.floor(count * 0.75)];
-      const p90Time = timeData[Math.floor(count * 0.9)];
-      const p99Time = timeData[Math.floor(count * 0.99)];
-
-      const response: CodeBenchmarkResponse = {
-        type: "benchmark",
-        workStartTime: startTimestamp,
-        averageTime,
-        medianTime,
-        p75Time,
-        p90Time,
-        p99Time,
-      };
-      self.postMessage(response);
       break;
     }
 
