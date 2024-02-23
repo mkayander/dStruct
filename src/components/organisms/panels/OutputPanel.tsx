@@ -11,7 +11,10 @@ import {
 } from "#/components/organisms/panels/common/styled";
 import { useI18nContext } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
-import { selectConsoleLogs } from "#/store/reducers/callstackReducer";
+import {
+  selectConsoleLogs,
+  selectRawCallstack,
+} from "#/store/reducers/callstackReducer";
 
 const ConsoleOutput: React.FC = () => {
   const theme = useTheme();
@@ -79,9 +82,8 @@ export const OutputPanel: React.FC = () => {
     setValue(newValue);
   };
 
-  const { isReady, runtime, result, error } = useAppSelector(
-    (state) => state.callstack,
-  );
+  const { isReady, runtime, result, error } =
+    useAppSelector(selectRawCallstack);
 
   return (
     <PanelWrapper>

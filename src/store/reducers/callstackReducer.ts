@@ -223,6 +223,8 @@ export const callstackSelectors = callstackAdapter.getSelectors(
 
 const rootSelectors = callstackAdapter.getSelectors();
 
+export const selectRawCallstack = (state: RootState) => state.callstack;
+
 export const selectCallstack = createSelector(
   (state: RootState) => state.callstack,
   (callstack) => ({
