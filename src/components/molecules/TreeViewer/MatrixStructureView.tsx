@@ -2,9 +2,10 @@ import { alpha, Box, useTheme } from "@mui/material";
 import React from "react";
 
 import { MatrixRow } from "#/components/molecules/TreeViewer/MatrixRow";
-import {
-  type ArrayData,
-  type ArrayDataState,
+import type {
+  ArrayData,
+  ArrayDataState,
+  ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 
 type MatrixStructureViewProps = {
@@ -18,6 +19,16 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
 }) => {
   const theme = useTheme();
   const borderColor = `1px solid ${alpha(theme.palette.primary.light, 0.3)}`;
+  const lastNode = data.nodes.entities[String(data.nodes.ids.at(-1))];
+  const lastIndex = lastNode?.index ?? 0;
+
+  const dataArray = data.nodes.ids.map((id) => data.nodes.entities[id]);
+  const items = new Array<ArrayItemData | undefined>(lastIndex + 1);
+  dataArray.forEach((node) => {
+    if (node) {
+      items[node.index] = node;
+    }
+  });
 
   return (
     <Box
@@ -35,12 +46,16 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
       }}
     >
       <tbody>
-        {data.nodes.ids.map((id) => {
-          const name = data.nodes.entities[id]?.childName ?? "";
-          const nodeData = arrayState[name];
-          if (!nodeData) return null;
+        {items.map((node, index) => {
+          if (!node) return null;
 
-          return <MatrixRow key={name} data={nodeData} />;
+          const name = node.childName ?? "";
+          const nodeData = arrayState[name];
+          if (nodeData) {
+            return <MatrixRow key={name} data={nodeData} />;
+          }
+
+          return <Box key={index} component="tr" height={44} />;
         })}
       </tbody>
     </Box>
