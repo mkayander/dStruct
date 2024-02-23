@@ -31,6 +31,7 @@ import {
   isArgumentArrayType,
   isArgumentTreeType,
 } from "#/utils/argumentObject";
+import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export type TreeInput = (number | null)[];
 
@@ -261,7 +262,7 @@ const parseArrayArgument = (
   if (array) {
     newItems = [];
     for (let i = 0; i < array.length; i++) {
-      let value = array[i];
+      let value: string | undefined = safeStringify(array[i]);
       const childName = childNames?.[i];
       if (childName) {
         value = undefined;
