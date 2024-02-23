@@ -85,13 +85,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const binaryTrees = useMemo(() => {
     let prevTree: TreeData | null = null;
     let topOffset = 0;
-    let leftOffset = 0;
     return Object.entries(treeState)
       .sort(([, { order: a }], [, { order: b }]) => a - b)
       .map(([treeName, data]) => {
         const style: React.CSSProperties = {
           top: topOffset,
-          left: leftOffset,
+          left: 0,
         };
         if (data.type === ArgumentType.BINARY_TREE) {
           style.top = 0;
@@ -101,8 +100,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           }
           topOffset += data.maxDepth * 72;
         } else {
-          leftOffset = 0;
-          topOffset += 72;
+          return null;
         }
         prevTree = data;
         return (
@@ -148,6 +146,24 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     return arrayNodes;
   }, [arrayState]);
+
+  const linkedLists = useMemo(() => {
+    const linkedListData = Object.entries(treeState).filter(
+      ([, { type }]) => type === ArgumentType.LINKED_LIST,
+    );
+
+    return linkedListData.map(([treeName, data]) => (
+      <NodesView
+        key={treeName}
+        treeName={treeName}
+        data={data}
+        sx={{
+          position: "relative",
+          height: "42px",
+        }}
+      />
+    ));
+  }, [treeState]);
 
   return (
     <Box
@@ -207,8 +223,10 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             }}
           >
             {arrayStructures && (
-              <Stack width="fit-content" spacing={2}>
+              <Stack width="fit-content" minWidth="100%" spacing={2}>
                 {arrayStructures}
+                <br />
+                {linkedLists}
               </Stack>
             )}
             {binaryTrees && <Box height="100%">{binaryTrees}</Box>}

@@ -15,12 +15,14 @@ type NodesViewProps = {
   treeName: string;
   data: TreeData;
   style?: React.CSSProperties;
+  sx?: React.CSSProperties;
 };
 
 export const NodesView: React.FC<NodesViewProps> = ({
   treeName,
   data,
   style,
+  sx,
 }) => {
   const adjustXOffset = data.type === ArgumentType.LINKED_LIST;
   const offset = useAppSelector(selectMinXOffset(treeName, adjustXOffset)) ?? 0;
@@ -39,6 +41,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
         position: "absolute",
         width: "100%",
         height: "100%",
+        ...sx,
       }}
       style={{
         ...style,
