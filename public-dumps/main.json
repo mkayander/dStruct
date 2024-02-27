@@ -143,12 +143,12 @@
     "clfhdxlj20001mm08aflnuklo": {
       "id": "clfhdxlj20001mm08aflnuklo",
       "createdAt": "2023-03-20T22:15:08.607Z",
-      "updatedAt": "2023-03-20T22:15:08.607Z",
+      "updatedAt": "2024-02-26T16:09:55.907Z",
       "userId": "clamcsslr0000oj2rm8884xyg",
       "title": "Same Tree",
       "category": "BINARY_TREE",
-      "difficulty": null,
-      "lcLink": null,
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/same-tree",
       "slug": "same-tree",
       "description": "",
       "isExample": false,
@@ -3188,6 +3188,118 @@
       "difficulty": "EASY",
       "lcLink": "https://leetcode.com/problems/missing-number",
       "slug": "missing-number",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsw3f1z70001p8wd41xd37tj": {
+      "id": "clsw3f1z70001p8wd41xd37tj",
+      "createdAt": "2024-02-21T17:53:30.308Z",
+      "updatedAt": "2024-02-21T17:53:30.308Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Implement Magic Dictionary",
+      "category": "TRIE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/implement-magic-dictionary",
+      "slug": "implement-magic-dictionary",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsw84w5v00012ubeadxw33lp": {
+      "id": "clsw84w5v00012ubeadxw33lp",
+      "createdAt": "2024-02-21T20:05:34.291Z",
+      "updatedAt": "2024-02-21T20:05:34.291Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Interval",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/remove-interval",
+      "slug": "remove-interval",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsx71ttd00013pph59igxnip": {
+      "id": "clsx71ttd00013pph59igxnip",
+      "createdAt": "2024-02-22T12:22:57.842Z",
+      "updatedAt": "2024-02-22T12:22:57.842Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Bitwise AND of Numbers Range",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/bitwise-and-of-numbers-range",
+      "slug": "bitwise-and-of-numbers-range",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsxizgq70001nl6r4h9hi9eq": {
+      "id": "clsxizgq70001nl6r4h9hi9eq",
+      "createdAt": "2024-02-22T17:57:02.960Z",
+      "updatedAt": "2024-02-22T17:57:02.960Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Tree Diameter",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/tree-diameter",
+      "slug": "tree-diameter",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clsyiyjl80001ad9jtz7pzsws": {
+      "id": "clsyiyjl80001ad9jtz7pzsws",
+      "createdAt": "2024-02-23T10:44:06.189Z",
+      "updatedAt": "2024-02-23T10:44:06.189Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Cheapest Flights Within K Stops",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/cheapest-flights-within-k-stops",
+      "slug": "cheapest-flights-within-k-stops",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clt1umhyz000186hwrds8ty8m": {
+      "id": "clt1umhyz000186hwrds8ty8m",
+      "createdAt": "2024-02-25T18:33:58.139Z",
+      "updatedAt": "2024-02-25T18:33:58.139Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Greatest Common Divisor Traversal",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/greatest-common-divisor-traversal",
+      "slug": "greatest-common-divisor-traversal",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clt43u30x0001o5ivv0zy0rqt": {
+      "id": "clt43u30x0001o5ivv0zy0rqt",
+      "createdAt": "2024-02-27T08:27:20.914Z",
+      "updatedAt": "2024-02-27T08:27:20.914Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Diameter of Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/diameter-of-binary-tree",
+      "slug": "diameter-of-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clt4cgs220001lonn9huvign3": {
+      "id": "clt4cgs220001lonn9huvign3",
+      "createdAt": "2024-02-27T12:28:56.714Z",
+      "updatedAt": "2024-02-27T12:28:56.714Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Diameter of N-Ary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/diameter-of-n-ary-tree",
+      "slug": "diameter-of-n-ary-tree",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -14122,6 +14234,337 @@
         }
       },
       "description": null
+    },
+    "clsw3f1z70002p8wd8r9fxhki": {
+      "id": "clsw3f1z70002p8wd8r9fxhki",
+      "createdAt": "2024-02-21T17:53:30.308Z",
+      "updatedAt": "2024-02-21T17:56:17.607Z",
+      "projectId": "clsw3f1z70001p8wd41xd37tj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "taVoS1rzJJ5ktcPDUC7agW": {
+          "name": "taVoS1rzJJ5ktcPDUC7agW",
+          "type": "array",
+          "input": "[[], [[\"hello\", \"leetcode\"]], [\"hello\"], [\"hhllo\"], [\"hell\"], [\"leetcoded\"]]",
+          "order": 1
+        },
+        "uxoqbca1egJDMxRn7yQvdM": {
+          "name": "uxoqbca1egJDMxRn7yQvdM",
+          "type": "array",
+          "input": "[\"MagicDictionary\", \"buildDict\", \"search\", \"search\", \"search\", \"search\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsw84w5v00022ube6tn19csd": {
+      "id": "clsw84w5v00022ube6tn19csd",
+      "createdAt": "2024-02-21T20:05:34.291Z",
+      "updatedAt": "2024-02-21T20:06:32.932Z",
+      "projectId": "clsw84w5v00012ubeadxw33lp",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[0,2],[3,4],[5,7]]",
+          "order": 0
+        },
+        "n98P9GXEQk1R5CDhCN8uye": {
+          "name": "n98P9GXEQk1R5CDhCN8uye",
+          "type": "array",
+          "input": "[1,6]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsw8764b00052ubewqpeugh8": {
+      "id": "clsw8764b00052ubewqpeugh8",
+      "createdAt": "2024-02-21T20:07:20.507Z",
+      "updatedAt": "2024-02-21T20:07:20.507Z",
+      "projectId": "clsw84w5v00012ubeadxw33lp",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[0,2],[3,4],[5,7]]",
+          "order": 0
+        },
+        "n98P9GXEQk1R5CDhCN8uye": {
+          "name": "n98P9GXEQk1R5CDhCN8uye",
+          "type": "array",
+          "input": "[1,6]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsx71ttd00023pph6fibdnbf": {
+      "id": "clsx71ttd00023pph6fibdnbf",
+      "createdAt": "2024-02-22T12:22:57.842Z",
+      "updatedAt": "2024-02-22T12:26:29.399Z",
+      "projectId": "clsx71ttd00013pph59igxnip",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8jV5tbiLPMUxHTDBzCKnQ9": {
+          "name": "8jV5tbiLPMUxHTDBzCKnQ9",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "h6ZMDc6k9f3FP1HJuRzoBb": {
+          "name": "h6ZMDc6k9f3FP1HJuRzoBb",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsx76e2s00053pphr6qi4mtc": {
+      "id": "clsx76e2s00053pphr6qi4mtc",
+      "createdAt": "2024-02-22T12:26:30.725Z",
+      "updatedAt": "2024-02-22T12:26:39.086Z",
+      "projectId": "clsx71ttd00013pph59igxnip",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "8jV5tbiLPMUxHTDBzCKnQ9": {
+          "name": "8jV5tbiLPMUxHTDBzCKnQ9",
+          "type": "number",
+          "input": "1",
+          "order": 0
+        },
+        "h6ZMDc6k9f3FP1HJuRzoBb": {
+          "name": "h6ZMDc6k9f3FP1HJuRzoBb",
+          "type": "number",
+          "input": "2147483647",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsx78xk400073pphmkyqxulo": {
+      "id": "clsx78xk400073pphmkyqxulo",
+      "createdAt": "2024-02-22T12:28:29.284Z",
+      "updatedAt": "2024-02-22T12:30:16.255Z",
+      "projectId": "clsx71ttd00013pph59igxnip",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "8jV5tbiLPMUxHTDBzCKnQ9": {
+          "name": "8jV5tbiLPMUxHTDBzCKnQ9",
+          "type": "number",
+          "input": "121212",
+          "order": 0
+        },
+        "h6ZMDc6k9f3FP1HJuRzoBb": {
+          "name": "h6ZMDc6k9f3FP1HJuRzoBb",
+          "type": "number",
+          "input": "123123",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clsxizgq70002nl6r5nu6jlbb": {
+      "id": "clsxizgq70002nl6r5nu6jlbb",
+      "createdAt": "2024-02-22T17:57:02.960Z",
+      "updatedAt": "2024-02-22T17:57:54.116Z",
+      "projectId": "clsxizgq70001nl6r4h9hi9eq",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "7xffxQ5mjE1hDy78Sj8T4g": {
+          "name": "7xffxQ5mjE1hDy78Sj8T4g",
+          "type": "array",
+          "input": "[[0,1],[1,2],[2,3],[1,4],[4,5]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsyiyjl80002ad9jovrh1f3a": {
+      "id": "clsyiyjl80002ad9jovrh1f3a",
+      "createdAt": "2024-02-23T10:44:06.189Z",
+      "updatedAt": "2024-02-23T10:45:04.672Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4j9EF1afq7XKKpCXMcbj6j": {
+          "name": "4j9EF1afq7XKKpCXMcbj6j",
+          "type": "number",
+          "input": "0",
+          "order": 2
+        },
+        "5QY4niqsELA6woGiFSHZHA": {
+          "name": "5QY4niqsELA6woGiFSHZHA",
+          "type": "array",
+          "input": "[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]",
+          "order": 1
+        },
+        "jqN54ShkZNE4u4UnsaUpVP": {
+          "name": "jqN54ShkZNE4u4UnsaUpVP",
+          "type": "number",
+          "input": "1",
+          "order": 4
+        },
+        "tRN2zhzE36iFyAP7eS2D1Y": {
+          "name": "tRN2zhzE36iFyAP7eS2D1Y",
+          "type": "number",
+          "input": "3",
+          "order": 3
+        },
+        "vzEQm2zx8QJK8Y6gwbNC39": {
+          "name": "vzEQm2zx8QJK8Y6gwbNC39",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsyj06pz0005ad9jfpqofov8": {
+      "id": "clsyj06pz0005ad9jfpqofov8",
+      "createdAt": "2024-02-23T10:45:22.823Z",
+      "updatedAt": "2024-02-23T10:45:36.150Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "4j9EF1afq7XKKpCXMcbj6j": {
+          "name": "4j9EF1afq7XKKpCXMcbj6j",
+          "type": "number",
+          "input": "0",
+          "order": 2
+        },
+        "5QY4niqsELA6woGiFSHZHA": {
+          "name": "5QY4niqsELA6woGiFSHZHA",
+          "type": "array",
+          "input": "[[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]]",
+          "order": 1
+        },
+        "jqN54ShkZNE4u4UnsaUpVP": {
+          "name": "jqN54ShkZNE4u4UnsaUpVP",
+          "type": "number",
+          "input": "2",
+          "order": 4
+        },
+        "tRN2zhzE36iFyAP7eS2D1Y": {
+          "name": "tRN2zhzE36iFyAP7eS2D1Y",
+          "type": "number",
+          "input": "2",
+          "order": 3
+        },
+        "vzEQm2zx8QJK8Y6gwbNC39": {
+          "name": "vzEQm2zx8QJK8Y6gwbNC39",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt1umhyz000286hwbr7ovws2": {
+      "id": "clt1umhyz000286hwbr7ovws2",
+      "createdAt": "2024-02-25T18:33:58.139Z",
+      "updatedAt": "2024-02-25T18:35:45.767Z",
+      "projectId": "clt1umhyz000186hwrds8ty8m",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1QpdWApKxN9VtPCBHA8upE": {
+          "name": "1QpdWApKxN9VtPCBHA8upE",
+          "type": "array",
+          "input": "[2,3,6]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt1up1rv000586hwxi252mnp": {
+      "id": "clt1up1rv000586hwxi252mnp",
+      "createdAt": "2024-02-25T18:35:57.115Z",
+      "updatedAt": "2024-02-25T18:36:00.262Z",
+      "projectId": "clt1umhyz000186hwrds8ty8m",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "1QpdWApKxN9VtPCBHA8upE": {
+          "name": "1QpdWApKxN9VtPCBHA8upE",
+          "type": "array",
+          "input": "[4,3,12,8]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt43u30y0002o5ivpw5f5pyr": {
+      "id": "clt43u30y0002o5ivpw5f5pyr",
+      "createdAt": "2024-02-27T08:27:20.914Z",
+      "updatedAt": "2024-02-27T08:28:11.320Z",
+      "projectId": "clt43u30x0001o5ivv0zy0rqt",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt4cgs220002lonnb54oe9sn": {
+      "id": "clt4cgs220002lonnb54oe9sn",
+      "createdAt": "2024-02-27T12:28:56.714Z",
+      "updatedAt": "2024-02-27T12:28:56.714Z",
+      "projectId": "clt4cgs220001lonn9huvign3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -14366,14 +14809,14 @@
     "clfhdxlj20004mm08v8bck74m": {
       "id": "clfhdxlj20004mm08v8bck74m",
       "createdAt": "2023-03-20T22:15:08.607Z",
-      "updatedAt": "2023-03-20T22:15:08.607Z",
+      "updatedAt": "2024-02-26T16:10:48.923Z",
       "projectId": "clfhdxlj20001mm08aflnuklo",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": "",
-      "code": "/**\r\n * @param {TreeNodeObject} head1\r\n * @param {TreeNodeObject} head2\r\n */\r\nreturn function isSameTree(head1, head2) {\r\n  const queue = [[head1, head2]];\r\n\r\n  while (queue.length > 0) {\r\n    const [a, b] = queue.pop();\r\n\r\n    a?.setColor(\"green\", \"blink\");\r\n    b?.setColor(\"green\", \"blink\");\r\n\r\n    if (a && b) {\r\n      if (a.val !== b.val) {\r\n        a.setColor(\"red\");\r\n        b.setColor(\"red\");\r\n        return false;\r\n      }\r\n\r\n      queue.unshift([a.right, b.right], [a.left, b.left]);\r\n    } else if ((!a && b) || (a && !b)) {\r\n      return false;\r\n    }\r\n  }\r\n\r\n  return true;\r\n};\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
+      "code": "/**\n * @param {TreeNodeObject} head1\n * @param {TreeNodeObject} head2\n */\nreturn function isSameTree(head1, head2) {\n  const queue = Array.from([[head1, head2]]);\n\n  while (queue.length > 0) {\n    const [a, b] = queue.pop();\n\n    a?.setColor(\"green\", \"blink\");\n    b?.setColor(\"green\", \"blink\");\n\n    if (a && b) {\n      if (a.val !== b.val) {\n        a.setColor(\"red\");\n        b.setColor(\"red\");\n        return false;\n      }\n\n      queue.unshift([a.right, b.right], [a.left, b.left]);\n    } else if ((!a && b) || (a && !b)) {\n      return false;\n    }\n  }\n\n  return true;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 0
     },
@@ -18944,14 +19387,14 @@
     "clsso7vn600035nua705vmzt9": {
       "id": "clsso7vn600035nua705vmzt9",
       "createdAt": "2024-02-19T08:24:42.738Z",
-      "updatedAt": "2024-02-19T08:30:33.095Z",
+      "updatedAt": "2024-02-23T10:42:08.660Z",
       "projectId": "clsso7vn600015nuaa6ghm8nk",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number} n\n * @return {boolean}\n */\nvar isPowerOfTwo = function (n) {\n  console.log(displayBinary(n));\n  if (n <= 0) return false;\n\n  const minusLeastSignificant = n - 1;\n  console.log(displayBinary(minusLeastSignificant));\n  const mask = n & minusLeastSignificant;\n  console.log(displayBinary(mask));\n\n  return mask === 0;\n};\n\nconst displayBinary = (n) => n.toString(2).padStart(32, \"0\");\n\nreturn isPowerOfTwo;\n",
+      "code": "/**\n * @param {number} n\n * @return {boolean}\n */\nvar isPowerOfTwo = function (n) {\n  console.log(displayBinary(n));\n  if (n <= 0) return false;\n\n  const minusLeastSignificant = n - 1;\n  console.log(displayBinary(minusLeastSignificant));\n  const mask = n & minusLeastSignificant;\n  console.log(displayBinary(mask));\n\n  return mask === 0;\n};\n\nconst displayBinary = (n) => {\n  const str = new String(n.toString(2).padStart(32, \"0\"));\n  str.setColorMap({ 1: \"green\" });\n  return str;\n};\n\nreturn isPowerOfTwo;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -18982,6 +19425,174 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar missingNumber = function (nums) {\n  const n = nums.length;\n  const targetSum = (n * (n + 1)) / 2;\n\n  const sum = nums.reduce((acc, num) => acc + num, 0);\n\n  return targetSum - sum;\n};\n\nreturn missingNumber;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clsw3f1z70003p8wd3u5n59dr": {
+      "id": "clsw3f1z70003p8wd3u5n59dr",
+      "createdAt": "2024-02-21T17:53:30.308Z",
+      "updatedAt": "2024-02-21T17:58:20.736Z",
+      "projectId": "clsw3f1z70001p8wd41xd37tj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "class MagicDictionary {\n  arr = [];\n\n  buildDict(dictionary) {\n    this.arr = Array.from(dictionary);\n  }\n\n  search(searchWord) {\n    for (const word of this.arr) {\n      if (this.isOneDistance(searchWord, word)) return true;\n    }\n\n    return false;\n  }\n\n  isOneDistance(a, b) {\n    if (a.length !== b.length) return false;\n\n    let foundDiff = false;\n    for (let i = 0; i < a.length; i++) {\n      if (a[i] !== b[i]) {\n        if (foundDiff) return false;\n        foundDiff = true;\n      }\n    }\n\n    return foundDiff;\n  }\n}\n\n/**\n * Your MagicDictionary object will be instantiated and called as such:\n * var obj = new MagicDictionary()\n * obj.buildDict(dictionary)\n * var param_2 = obj.search(searchWord)\n */\n\nreturn run = (names, args) => {\n  const instance = new MagicDictionary();\n  const result = [];\n  for (let i = 1; i < names.length; i++) {\n    result.push(instance[names[i]](...args[i]));\n  }\n\n  return result;\n}\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsw3lmvy0005p8wdy3pvl6eo": {
+      "id": "clsw3lmvy0005p8wdy3pvl6eo",
+      "createdAt": "2024-02-21T17:58:37.342Z",
+      "updatedAt": "2024-02-21T18:54:30.641Z",
+      "projectId": "clsw3f1z70001p8wd41xd37tj",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "class MagicDictionary {\n  trie = {};\n\n  buildDict(dictionary) {\n    this.trie = new Object();\n    for (let i = 0; i < dictionary.length; i++) {\n      const word = dictionary[i];\n      let current = this.trie;\n      for (let j = 0; j < word.length; j++) {\n        const char = word[j];\n        current[char] ??= new Object();\n        current = current[char];\n      }\n      current.isEnd = true;\n    }\n  }\n\n  helper(node, word, index) {\n    for (let i = index; i < word.length; i++) {\n      const char = word[i];\n      if (!node[char]) return false;\n      node = node[char];\n    }\n\n    return node.isEnd;\n  }\n\n  search(searchWord) {\n    let node = this.trie;\n\n    for (let i = 0; i < searchWord.length; i++) {\n      const char = searchWord[i];\n      for (const key in node) {\n        if (key.length > 1) continue;\n        if (key === char || !node[key]) continue;\n        if (this.helper(node[key], searchWord, i + 1)) return true;\n      }\n\n      if (!node[char]) return false;\n      node = node[char];\n    }\n\n    return false;\n  }\n}\n\n/**\n * Your MagicDictionary object will be instantiated and called as such:\n * var obj = new MagicDictionary()\n * obj.buildDict(dictionary)\n * var param_2 = obj.search(searchWord)\n */\n\nreturn (run = (names, args) => {\n  const instance = new MagicDictionary();\n  const result = [];\n  for (let i = 1; i < names.length; i++) {\n    result.push(instance[names[i]](...args[i]));\n  }\n\n  return result;\n});\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clsw84w5v00032ubesronx2h5": {
+      "id": "clsw84w5v00032ubesronx2h5",
+      "createdAt": "2024-02-21T20:05:34.291Z",
+      "updatedAt": "2024-02-21T20:07:14.849Z",
+      "projectId": "clsw84w5v00012ubeadxw33lp",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} intervals\n * @param {number[]} toBeRemoved\n * @return {number[][]}\n */\nvar removeInterval = function (intervals, toBeRemoved) {\n  const [rStart, rEnd] = toBeRemoved;\n  const result = new Array();\n\n  for (let i = 0; i < intervals.length; i++) {\n    let [start, end] = intervals[i];\n\n    if (start >= rStart && end <= rEnd) continue;\n\n    if (rStart > start && rStart < end) {\n      result.push([start, rStart]);\n      if (rEnd < end) {\n        result.push([rEnd, end]);\n      }\n    } else if (rEnd > start && rEnd < end) {\n      result.push([rEnd, end]);\n    } else {\n      result.push([start, end]);\n    }\n  }\n\n  return result;\n};\n\nreturn removeInterval;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsw8eibj00072ubeo9tsd75b": {
+      "id": "clsw8eibj00072ubeo9tsd75b",
+      "createdAt": "2024-02-21T20:13:02.912Z",
+      "updatedAt": "2024-02-21T20:13:28.700Z",
+      "projectId": "clsw84w5v00012ubeadxw33lp",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} intervals\n * @param {number[]} toBeRemoved\n * @return {number[][]}\n */\nvar removeInterval = function (intervals, toBeRemoved) {\n  const [rStart, rEnd] = toBeRemoved;\n  const result = new Array();\n\n  for (let i = 0; i < intervals.length; i++) {\n    let [start, end] = intervals[i];\n\n    const newEnd = Math.min(end, rStart);\n    if (newEnd > start) {\n      result.push([start, newEnd]);\n    }\n\n    const newStart = Math.max(start, rEnd);\n    if (newStart < end) {\n      result.push([newStart, end]);\n    }\n  }\n\n  return result;\n};\n\nreturn removeInterval;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clsx71ttd00033pph6by5x0dl": {
+      "id": "clsx71ttd00033pph6by5x0dl",
+      "createdAt": "2024-02-22T12:22:57.842Z",
+      "updatedAt": "2024-02-22T12:33:39.992Z",
+      "projectId": "clsx71ttd00013pph59igxnip",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} left\n * @param {number} right\n * @return {number}\n */\nvar rangeBitwiseAnd = function (left, right) {\n  let result = left;\n  console.log(new String(toBinaryString(result)));\n\n  while (right > left) {\n    result &= right;\n\n    right &= right - 1;\n\n    console.log(new String(\"V\"));\n    console.log(toBinaryString(result));\n    console.log(toBinaryString(right));\n  }\n\n  return result;\n};\n\nconst toBinaryString = (num) => {\n  const str = new String(num.toString(2).padStart(32, \"0\"));\n  str.setColorMap({\n    1: \"green\",\n  });\n  return str;\n};\n\nreturn rangeBitwiseAnd;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsxizgq70003nl6rcjz0veg1": {
+      "id": "clsxizgq70003nl6rcjz0veg1",
+      "createdAt": "2024-02-22T17:57:02.960Z",
+      "updatedAt": "2024-02-22T18:07:03.034Z",
+      "projectId": "clsxizgq70001nl6r4h9hi9eq",
+      "title": "Double DFS",
+      "slug": "double-dfs",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} edges\n * @return {number}\n */\nvar treeDiameter = function (edges) {\n  const n = edges.length + 1;\n  const adjList = new Array(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Array()).push(to);\n    (adjList[to] ??= new Array()).push(from);\n  }\n\n  const dfs = (node, prev) => {\n    let max = [0, node];\n    const neighbors = adjList[node] ?? [];\n    for (let i = 0; i < neighbors.length; i++) {\n      const neighbor = neighbors[i];\n      if (neighbor === prev) continue;\n      neighbors.setColor(i, \"green\");\n      const next = dfs(neighbor, node);\n      neighbors.setColor(i, null);\n      if (next[0] > max[0]) {\n        max = next;\n      }\n    }\n\n    max[0]++;\n\n    return max;\n  };\n\n  const a = dfs(0, -1);\n  const b = dfs(a[1], -1);\n\n  return b[0] - 1;\n};\n\nreturn treeDiameter;\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "clsxjc1ty0005nl6rqr3gxmxz": {
+      "id": "clsxjc1ty0005nl6rqr3gxmxz",
+      "createdAt": "2024-02-22T18:06:50.182Z",
+      "updatedAt": "2024-02-22T18:08:53.405Z",
+      "projectId": "clsxizgq70001nl6r4h9hi9eq",
+      "title": "DFS",
+      "slug": "dfs",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[][]} edges\n * @return {number}\n */\nvar treeDiameter = function (edges) {\n  const n = edges.length + 1;\n  const adjList = new Array(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Array()).push(to);\n    (adjList[to] ??= new Array()).push(from);\n  }\n\n  let diameter = 0;\n\n  const dfs = (node, prev) => {\n    let firstMax = 0;\n    let secondMax = 0;\n    const neighbors = adjList[node] ?? [];\n    for (let i = 0; i < neighbors.length; i++) {\n      const neighbor = neighbors[i];\n      if (neighbor === prev) continue;\n\n      neighbors.setColor(i, \"green\");\n      const next = dfs(neighbor, node);\n      neighbors.setColor(i, null);\n      if (next > firstMax) {\n        secondMax = firstMax;\n        firstMax = next;\n      } else if (next > secondMax) {\n        secondMax = next;\n      }\n    }\n\n    diameter = Math.max(diameter, firstMax + secondMax);\n\n    return firstMax + 1;\n  };\n\n  dfs(0, -1);\n\n  return diameter;\n};\n\nreturn treeDiameter;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clsyiyjl80003ad9jrgxu0aqv": {
+      "id": "clsyiyjl80003ad9jrgxu0aqv",
+      "createdAt": "2024-02-23T10:44:06.189Z",
+      "updatedAt": "2024-02-23T11:20:03.397Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "BFS",
+      "slug": "bfs",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} flights\n * @param {number} src\n * @param {number} dst\n * @param {number} k\n * @return {number}\n */\nvar findCheapestPrice = function (n, flights, src, dst, k) {\n  const adjList = new Array(n);\n\n  for (let i = 0; i < flights.length; i++) {\n    flights.setColor(i, \"green\");\n    const [from, to, cost] = flights[i];\n    (adjList[from] ??= new Array()).push([to, cost]);\n  }\n\n  const stops = new Array(n);\n  stops[src] = 0;\n  const pq = new Queue();\n  pq.enqueue([src, 0, 0]);\n\n  while (!pq.isEmpty()) {\n    const [stop, currCost, steps] = pq.dequeue();\n    if (!adjList[stop]) continue;\n\n    stops.setColor(stop, \"cyan\");\n    for (let i = 0; i < adjList[stop].length; i++) {\n      adjList[stop].setColor(i, \"blue\");\n      const [next, cost] = adjList[stop][i];\n      const nextCost = currCost + cost;\n      if ((stops[next] ?? Infinity) > nextCost) {\n        stops[next] = nextCost;\n        if (steps < k) {\n          pq.enqueue([next, nextCost, steps + 1]);\n        }\n      }\n      adjList[stop].setColor(i, null);\n    }\n\n    stops.setColor(stop, \"green\");\n  }\n\n  if (!stops[dst]) return -1;\n\n  return stops[dst];\n};\n\nreturn findCheapestPrice;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt1umhyz000386hwn8wcddnd": {
+      "id": "clt1umhyz000386hwn8wcddnd",
+      "createdAt": "2024-02-25T18:33:58.139Z",
+      "updatedAt": "2024-02-25T18:40:45.913Z",
+      "projectId": "clt1umhyz000186hwrds8ty8m",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canTraverseAllPairs = function (nums) {\n  if (nums.length === 1) return true;\n  const maxElement = Math.max(...nums);\n  if (Math.min(...nums) === 1) return false;\n  const factorArray = factorsCalculator(maxElement);\n  console.log(\"factorArray: \", factorArray);\n\n  const parent = Array.from({length: nums.length + 1}, (_, i) => i);\n  const rank = new Array(maxElement + 1).fill(1);\n\n  for (let i = 0; i < nums.length; i++) {\n    let x = nums[i];\n    while (x > 1) {\n      const p = factorArray[x];\n      Union(parent, rank, p, nums[i]);\n      while (x % p === 0) {\n        x = x / p;\n      }\n    }\n  }\n\n  const p = Find(parent, nums[0]);\n  for (let i = 1; i < nums.length; i++) {\n    if (Find(parent, nums[i]) !== p) return false;\n  }\n\n  return true;\n};\n\nfunction factorsCalculator(n) {\n  const dp = Array.from({length: n + 2}, (_, i) => i);\n  for (let i = 2; i <= n; i++) {\n    if (dp[i] === i) {\n      for (let j = i * 2; j <= n; j += i) {\n        if (dp[j] === j) dp[j] = i;\n      }\n    }\n  }\n  return dp;\n}\n\nfunction Find(parent, a) {\n  return (parent[a] = parent[a] === a ? a : Find(parent, parent[a]));\n}\n\nfunction Union(parent, rank, a, b) {\n  a = Find(parent, a);\n  b = Find(parent, b);\n  if (a === b) return;\n  if (rank[a] < rank[b]) {\n    [a, b] = [b, a];\n  }\n  parent[b] = a;\n  rank[a] += rank[b];\n}\n\nreturn canTraverseAllPairs;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt34xnbh0001mmjq2guiqapx": {
+      "id": "clt34xnbh0001mmjq2guiqapx",
+      "createdAt": "2024-02-26T16:10:20.621Z",
+      "updatedAt": "2024-02-26T16:11:46.756Z",
+      "projectId": "clfhdxlj20001mm08aflnuklo",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {TreeNodeObject} head1\n * @param {TreeNodeObject} head2\n */\nreturn function isSameTree(head1, head2) {\n  const queue = new Queue();\n  queue.enqueue([head1, head2]);\n\n  while (queue.length > 0) {\n    const [a, b] = queue.dequeue();\n\n    a?.setColor(\"green\", \"blink\");\n    b?.setColor(\"green\", \"blink\");\n\n    if (a && b) {\n      if (a.val !== b.val) {\n        a.setColor(\"red\");\n        b.setColor(\"red\");\n        return false;\n      }\n\n      queue.enqueue([a.right, b.right]);\n      queue.enqueue([a.left, b.left]);\n    } else if ((!a && b) || (a && !b)) {\n      return false;\n    }\n  }\n\n  return true;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clt43u30y0003o5ivws6gwm33": {
+      "id": "clt43u30y0003o5ivws6gwm33",
+      "createdAt": "2024-02-27T08:27:20.914Z",
+      "updatedAt": "2024-02-27T12:27:38.455Z",
+      "projectId": "clt43u30x0001o5ivv0zy0rqt",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar diameterOfBinaryTree = function (root) {\n  return dfs(root)[1];\n};\n\nfunction dfs(node) {\n  if (!node) return [0, 0];\n  node.setColor(\"green\", \"blink\");\n\n  const [leftPath, leftMax] = dfs(node.left);\n  const [rightPath, rightMax] = dfs(node.right);\n\n  const diameter = leftPath + rightPath;\n  const currMax = Math.max(diameter, leftMax, rightMax);\n  const maxPath = Math.max(leftPath, rightPath) + 1;\n\n  node.setInfo({currMax, maxPath});\n\n  return [maxPath, currMax];\n}\n\nreturn diameterOfBinaryTree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt4cgs220003lonnydkwzlyw": {
+      "id": "clt4cgs220003lonnydkwzlyw",
+      "createdAt": "2024-02-27T12:28:56.714Z",
+      "updatedAt": "2024-02-27T12:29:08.563Z",
+      "projectId": "clt4cgs220001lonn9huvign3",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * // Definition for a Node.\n * function Node(val, children) {\n *    this.val = val === undefined ? 0 : val;\n *    this.children = children === undefined ? [] : children;\n * };\n */\n\n/**\n * @param {Node} root\n * @return {number}\n */\nvar diameter = function (root) {\n  const dfs = (node) => {\n    if (!node) return [0, 0];\n\n    let firstMax = 0;\n    let secondMax = 0;\n    let maxDiameter = 0;\n\n    for (let i = 0; i < node.children.length; i++) {\n      const child = node.children[i];\n      const [maxPath, nextDiameter] = dfs(child);\n      maxDiameter = Math.max(maxDiameter, nextDiameter);\n      if (maxPath > firstMax) {\n        secondMax = firstMax;\n        firstMax = maxPath;\n      } else if (maxPath > secondMax) {\n        secondMax = maxPath;\n      }\n    }\n\n    const curMaxPath = Math.max(firstMax, secondMax) + 1;\n    const curDiameter = firstMax + secondMax;\n    maxDiameter = Math.max(maxDiameter, curDiameter);\n\n    return [curMaxPath, maxDiameter];\n  };\n\n  return dfs(root)[1];\n};\n\nreturn diameter;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
