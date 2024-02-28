@@ -41,11 +41,6 @@ import { getImageUrl, trpc } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
-type NavItem = {
-  name: string;
-  href: string;
-};
-
 type MainAppBarProps = {
   appBarVariant?: AppBarProps["variant"];
   toolbarVariant?: ToolbarProps["variant"];
@@ -95,10 +90,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const handleOpenUserMenu = () => {
     setIsSidePanelOpen(true);
-  };
-
-  const handleNavItemClick = (item: NavItem) => {
-    void router.push(item.href);
   };
 
   useEffect(() => {
@@ -160,7 +151,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               />
             </Box>
             {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
-            <Link href="/" legacyBehavior={true}>
+            <Link href="/" legacyBehavior={true} passHref>
               <MuiLink
                 variant="h6"
                 noWrap
@@ -170,6 +161,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   display: { xs: "none", md: "flex" },
                   fontFamily: "'Share Tech', sans-serif",
                   textDecoration: "none",
+                  color: "inherit",
                 }}
               >
                 dStruct
@@ -206,11 +198,10 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem
-                    key={page.href}
-                    onClick={() => handleNavItemClick(page)}
-                  >
-                    <Typography textAlign="center">{page.name}</Typography>
+                  <MenuItem key={page.href}>
+                    <Link href={page.href}>
+                      <Typography textAlign="center">{page.name}</Typography>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -223,7 +214,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 height="32"
               />
             </Box>
-            <Link href="/" legacyBehavior={true}>
+            <Link href="/" legacyBehavior={true} passHref>
               <MuiLink
                 variant="h5"
                 noWrap
@@ -244,19 +235,20 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               sx={{ flexGrow: 1, gap: 1, display: { xs: "none", md: "flex" } }}
             >
               {pages.map((page) => (
-                <Button
-                  key={page.href}
-                  onClick={() => handleNavItemClick(page)}
-                  color="inherit"
-                  sx={{
-                    backgroundColor:
-                      page.href && currentPath.startsWith(page.href)
-                        ? alpha("#fff", 0.1)
-                        : "",
-                  }}
-                >
-                  {page.name}
-                </Button>
+                <Link key={page.href} href={page.href}>
+                  <Button
+                    key={page.href}
+                    color="inherit"
+                    sx={{
+                      backgroundColor:
+                        page.href && currentPath.startsWith(page.href)
+                          ? alpha("#fff", 0.1)
+                          : "",
+                    }}
+                  >
+                    {page.name}
+                  </Button>
+                </Link>
               ))}
             </Box>
 
