@@ -3303,6 +3303,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clt60zbae0001w9jiigzh14n9": {
+      "id": "clt60zbae0001w9jiigzh14n9",
+      "createdAt": "2024-02-28T16:42:58.406Z",
+      "updatedAt": "2024-02-28T16:42:58.406Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find Bottom Left Tree Value",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-bottom-left-tree-value",
+      "slug": "find-bottom-left-tree-value",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -14565,6 +14579,25 @@
         }
       },
       "description": null
+    },
+    "clt60zbae0002w9jia93eqqc9": {
+      "id": "clt60zbae0002w9jia93eqqc9",
+      "createdAt": "2024-02-28T16:42:58.406Z",
+      "updatedAt": "2024-02-28T16:42:58.406Z",
+      "projectId": "clt60zbae0001w9jiigzh14n9",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -19591,6 +19624,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * // Definition for a Node.\n * function Node(val, children) {\n *    this.val = val === undefined ? 0 : val;\n *    this.children = children === undefined ? [] : children;\n * };\n */\n\n/**\n * @param {Node} root\n * @return {number}\n */\nvar diameter = function (root) {\n  const dfs = (node) => {\n    if (!node) return [0, 0];\n\n    let firstMax = 0;\n    let secondMax = 0;\n    let maxDiameter = 0;\n\n    for (let i = 0; i < node.children.length; i++) {\n      const child = node.children[i];\n      const [maxPath, nextDiameter] = dfs(child);\n      maxDiameter = Math.max(maxDiameter, nextDiameter);\n      if (maxPath > firstMax) {\n        secondMax = firstMax;\n        firstMax = maxPath;\n      } else if (maxPath > secondMax) {\n        secondMax = maxPath;\n      }\n    }\n\n    const curMaxPath = Math.max(firstMax, secondMax) + 1;\n    const curDiameter = firstMax + secondMax;\n    maxDiameter = Math.max(maxDiameter, curDiameter);\n\n    return [curMaxPath, maxDiameter];\n  };\n\n  return dfs(root)[1];\n};\n\nreturn diameter;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt60zbae0003w9jiv5ugiv0f": {
+      "id": "clt60zbae0003w9jiv5ugiv0f",
+      "createdAt": "2024-02-28T16:42:58.406Z",
+      "updatedAt": "2024-02-28T17:33:58.241Z",
+      "projectId": "clt60zbae0001w9jiigzh14n9",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar findBottomLeftValue = function (root) {\n  const queue = new Queue();\n  queue.enqueue(root);\n\n  let result = null;\n  while (!queue.isEmpty()) {\n    const length = queue.size();\n    result = queue.front().val;\n    for (let i = 0; i < length; i++) {\n      const node = queue.dequeue();\n      node.setColor(\"green\");\n\n      node.left && queue.enqueue(node.left);\n      node.right && queue.enqueue(node.right);\n    }\n  }\n\n  return result;\n};\n\nreturn findBottomLeftValue;\n",
       "pythonCode": null,
       "order": 0
     }
