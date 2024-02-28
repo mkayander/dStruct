@@ -1,3 +1,10 @@
+## [1.281.1](https://github.com/mkayander/dStruct/compare/v1.281.0...v1.281.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* Fixed app bar links ([b16753f](https://github.com/mkayander/dStruct/commit/b16753f344bc79e197c6d393fee4fd90ede1dec1))
+
 # [1.281.0](https://github.com/mkayander/dStruct/compare/v1.280.0...v1.281.0) (2024-02-23)
 
 
