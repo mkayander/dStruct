@@ -3317,6 +3317,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clt7irauh00015y4sknveux9g": {
+      "id": "clt7irauh00015y4sknveux9g",
+      "createdAt": "2024-02-29T17:48:23.849Z",
+      "updatedAt": "2024-02-29T17:48:23.849Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Even Odd Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/even-odd-tree",
+      "slug": "even-odd-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clt7j1n7j00095y4s599itbuu": {
+      "id": "clt7j1n7j00095y4s599itbuu",
+      "createdAt": "2024-02-29T17:56:26.431Z",
+      "updatedAt": "2024-02-29T17:56:26.431Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count Nodes Equal to Sum of Descendants",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/count-nodes-equal-to-sum-of-descendants",
+      "slug": "count-nodes-equal-to-sum-of-descendants",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -14598,6 +14626,120 @@
         }
       },
       "description": null
+    },
+    "clt7irauh00025y4s1ushakzv": {
+      "id": "clt7irauh00025y4s1ushakzv",
+      "createdAt": "2024-02-29T17:48:23.849Z",
+      "updatedAt": "2024-02-29T17:49:43.451Z",
+      "projectId": "clt7irauh00015y4sknveux9g",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,10,4,3,null,7,9,12,8,6,null,null,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt7iuvf100055y4s4fiyhubz": {
+      "id": "clt7iuvf100055y4s4fiyhubz",
+      "createdAt": "2024-02-29T17:51:10.477Z",
+      "updatedAt": "2024-02-29T17:51:17.046Z",
+      "projectId": "clt7irauh00015y4sknveux9g",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[5,4,2,3,3,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt7iv3cv00075y4syw03x318": {
+      "id": "clt7iv3cv00075y4syw03x318",
+      "createdAt": "2024-02-29T17:51:20.767Z",
+      "updatedAt": "2024-02-29T17:51:23.907Z",
+      "projectId": "clt7irauh00015y4sknveux9g",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[5,9,1,3,5,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt7j1n7j000a5y4snvhlubxs": {
+      "id": "clt7j1n7j000a5y4snvhlubxs",
+      "createdAt": "2024-02-29T17:56:26.431Z",
+      "updatedAt": "2024-02-29T17:56:53.134Z",
+      "projectId": "clt7j1n7j00095y4s599itbuu",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[10,3,4,2,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt7j2bjk000d5y4sxtsj4pls": {
+      "id": "clt7j2bjk000d5y4sxtsj4pls",
+      "createdAt": "2024-02-29T17:56:57.968Z",
+      "updatedAt": "2024-02-29T17:58:28.245Z",
+      "projectId": "clt7j1n7j00095y4s599itbuu",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[2,3,null,2,null]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clt7j62mz000f5y4sgmpxjh5m": {
+      "id": "clt7j62mz000f5y4sgmpxjh5m",
+      "createdAt": "2024-02-29T17:59:53.051Z",
+      "updatedAt": "2024-02-29T18:03:03.027Z",
+      "projectId": "clt7j1n7j00095y4s599itbuu",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[10,24,4,9,3,7,4,6,3,1,2,2,5,5]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -19638,6 +19780,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar findBottomLeftValue = function (root) {\n  const queue = new Queue();\n  queue.enqueue(root);\n\n  let result = null;\n  while (!queue.isEmpty()) {\n    const length = queue.size();\n    result = queue.front().val;\n    for (let i = 0; i < length; i++) {\n      const node = queue.dequeue();\n      node.setColor(\"green\");\n\n      node.left && queue.enqueue(node.left);\n      node.right && queue.enqueue(node.right);\n    }\n  }\n\n  return result;\n};\n\nreturn findBottomLeftValue;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt7irauh00035y4sr1xphi4l": {
+      "id": "clt7irauh00035y4sr1xphi4l",
+      "createdAt": "2024-02-29T17:48:23.849Z",
+      "updatedAt": "2024-02-29T17:59:33.770Z",
+      "projectId": "clt7irauh00015y4sknveux9g",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nvar isEvenOddTree = function (root) {\n  const queue = new Queue();\n  queue.enqueue(root);\n\n  let level = -1;\n  while (!queue.isEmpty()) {\n    level++;\n    const isEven = level % 2 === 0;\n    let prevVal = null;\n    const length = queue.size();\n    for (let i = 0; i < length; i++) {\n      const node = queue.dequeue();\n      node.setColor(isEven ? \"green\" : \"orange\", \"blink\");\n      if ((node.val % 2 === 0) === isEven) return false;\n\n      if (prevVal !== null) {\n        const diff = node.val - prevVal;\n        if (!diff) return false;\n        if (diff > 0 !== isEven) return false;\n      }\n      prevVal = node.val;\n\n      node.left && queue.enqueue(node.left);\n      node.right && queue.enqueue(node.right);\n    }\n  }\n\n  return true;\n};\n\nreturn isEvenOddTree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clt7j1n7j000b5y4srm2r7hf4": {
+      "id": "clt7j1n7j000b5y4srm2r7hf4",
+      "createdAt": "2024-02-29T17:56:26.431Z",
+      "updatedAt": "2024-02-29T17:59:04.430Z",
+      "projectId": "clt7j1n7j00095y4s599itbuu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar equalToDescendants = function (root) {\n  let count = 0;\n\n  const dfs = (node) => {\n    if (!node) return 0;\n    node.setColor(\"cyan\", \"blink\");\n\n    const left = dfs(node.left);\n    const right = dfs(node.right);\n\n    if (left + right === node.val) {\n      node.setColor(\"green\");\n      count++;\n    } else {\n      node.setColor(\"grey\");\n    }\n\n    return left + node.val + right;\n  };\n\n  dfs(root);\n\n  return count;\n};\n\nreturn equalToDescendants;\n",
       "pythonCode": null,
       "order": 0
     }
