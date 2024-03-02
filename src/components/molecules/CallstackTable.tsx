@@ -118,6 +118,17 @@ export const CallstackTable: React.FC = () => {
 
   const startTimestamp = callstack.startTimestamp ?? 0;
 
+  const getBackgroundColor = (index: number) => {
+    let backgroundColor = "transparent";
+    if (index === callstack.frameIndex) {
+      backgroundColor = alpha(theme.palette.primary.light, 0.1);
+    } else if (index < callstack.frameIndex) {
+      backgroundColor = alpha(theme.palette.primary.light, 0.25);
+    }
+
+    return backgroundColor;
+  };
+
   useEffect(() => {
     if (containerRef.current) {
       const rowElement = containerRef.current.children[
@@ -147,10 +158,7 @@ export const CallstackTable: React.FC = () => {
                 key={frame.id}
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
-                  backgroundColor:
-                    index === callstack.frameIndex
-                      ? alpha(theme.palette.primary.light, 0.1)
-                      : "transparent",
+                  backgroundColor: getBackgroundColor(index),
                 }}
               >
                 <TableCell component="th" scope="row">
