@@ -1,3 +1,10 @@
+# [1.283.0](https://github.com/mkayander/dStruct/compare/v1.282.1...v1.283.0) (2024-03-02)
+
+
+### Features
+
+* Added color transition ([bc6fb13](https://github.com/mkayander/dStruct/commit/bc6fb1334df8875d541394a208d72711ebadbe3c))
+
 ## [1.282.1](https://github.com/mkayander/dStruct/compare/v1.282.0...v1.282.1) (2024-03-02)
 
 
