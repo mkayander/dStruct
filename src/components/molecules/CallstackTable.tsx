@@ -158,6 +158,7 @@ export const CallstackTable: React.FC = () => {
                 key={frame.id}
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
+                  transition: "background-color .2s",
                   backgroundColor: getBackgroundColor(index),
                 }}
               >
