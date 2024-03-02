@@ -1,3 +1,10 @@
+## [1.282.1](https://github.com/mkayander/dStruct/compare/v1.282.0...v1.282.1) (2024-03-02)
+
+
+### Bug Fixes
+
+* Fix background color opacity ([4132091](https://github.com/mkayander/dStruct/commit/4132091057baac7b1c9dbacfc53377890495cbc4))
+
 # [1.282.0](https://github.com/mkayander/dStruct/compare/v1.281.1...v1.282.0) (2024-03-02)
 
 
