@@ -1,5 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
@@ -41,6 +42,7 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, ...restProps }) => {
               <I18nProvider i18n={props.pageProps.i18n}>
                 <Component {...props.pageProps} />
                 <Analytics />
+                <SpeedInsights />
               </I18nProvider>
             </SnackbarProvider>
           </StateThemeProvider>
