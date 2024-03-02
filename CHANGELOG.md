@@ -1,3 +1,11 @@
+# [1.282.0](https://github.com/mkayander/dStruct/compare/v1.281.1...v1.282.0) (2024-03-02)
+
+
+### Features
+
+* Colorize processed callstack entries ([513850a](https://github.com/mkayander/dStruct/commit/513850aa99ba9c265db069246a302fac6b290968))
+* Use the new Speed Insights component ([cf13613](https://github.com/mkayander/dStruct/commit/cf136139bf72177998e745696e30de0ee65b1575))
+
 ## [1.281.1](https://github.com/mkayander/dStruct/compare/v1.281.0...v1.281.1) (2024-02-28)
 
 
