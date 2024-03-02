@@ -123,7 +123,7 @@ export const CallstackTable: React.FC = () => {
     if (index === callstack.frameIndex) {
       backgroundColor = alpha(theme.palette.primary.light, 0.1);
     } else if (index < callstack.frameIndex) {
-      backgroundColor = alpha(theme.palette.primary.light, 0.25);
+      backgroundColor = alpha(theme.palette.primary.light, 0.032);
     }
 
     return backgroundColor;
