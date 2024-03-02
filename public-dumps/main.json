@@ -3359,6 +3359,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clta43y4j00018eufpeq7c6ry": {
+      "id": "clta43y4j00018eufpeq7c6ry",
+      "createdAt": "2024-03-02T13:21:38.180Z",
+      "updatedAt": "2024-03-02T13:21:38.180Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Winner of the Linked List Game",
+      "category": "LINKED_LIST",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/winner-of-the-linked-list-game",
+      "slug": "winner-of-the-linked-list-game",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clta66fmp00058eufzc20nzq1": {
+      "id": "clta66fmp00058eufzc20nzq1",
+      "createdAt": "2024-03-02T14:19:33.409Z",
+      "updatedAt": "2024-03-02T14:19:33.409Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Squares of a Sorted Array",
+      "category": "TWO_POINTERS",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/squares-of-a-sorted-array",
+      "slug": "squares-of-a-sorted-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clta6q2ht00098eufh7cthun4": {
+      "id": "clta6q2ht00098eufh7cthun4",
+      "createdAt": "2024-03-02T14:34:49.505Z",
+      "updatedAt": "2024-03-02T14:34:49.505Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Duplicates from Sorted Array",
+      "category": "TWO_POINTERS",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/remove-duplicates-from-sorted-array",
+      "slug": "remove-duplicates-from-sorted-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -14811,6 +14853,82 @@
         }
       },
       "description": null
+    },
+    "clta43y4k00028eufw77nrx7h": {
+      "id": "clta43y4k00028eufw77nrx7h",
+      "createdAt": "2024-03-02T13:21:38.180Z",
+      "updatedAt": "2024-03-02T13:21:57.727Z",
+      "projectId": "clta43y4j00018eufpeq7c6ry",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[2,5,4,7,20,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clta66fmp00068eufbyywxs9f": {
+      "id": "clta66fmp00068eufbyywxs9f",
+      "createdAt": "2024-03-02T14:19:33.409Z",
+      "updatedAt": "2024-03-02T14:22:28.431Z",
+      "projectId": "clta66fmp00058eufzc20nzq1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "egMECKaqUgi5UpJLPjhTWg": {
+          "name": "egMECKaqUgi5UpJLPjhTWg",
+          "type": "array",
+          "input": "[-4,-1,0,3,10]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clta6q2ht000a8eufyu7krfkk": {
+      "id": "clta6q2ht000a8eufyu7krfkk",
+      "createdAt": "2024-03-02T14:34:49.505Z",
+      "updatedAt": "2024-03-02T14:35:15.479Z",
+      "projectId": "clta6q2ht00098eufh7cthun4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "p3yiqLQ9snKF85yk7pYucr": {
+          "name": "p3yiqLQ9snKF85yk7pYucr",
+          "type": "array",
+          "input": "[0,0,1,1,1,2,2,3,3,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clta6sjcw000d8eufahzi6o44": {
+      "id": "clta6sjcw000d8eufahzi6o44",
+      "createdAt": "2024-03-02T14:36:44.672Z",
+      "updatedAt": "2024-03-02T14:36:48.412Z",
+      "projectId": "clta6q2ht00098eufh7cthun4",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "p3yiqLQ9snKF85yk7pYucr": {
+          "name": "p3yiqLQ9snKF85yk7pYucr",
+          "type": "array",
+          "input": "[1,1,2]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -19893,6 +20011,48 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar maximumOddBinaryNumber = function (s) {\n  const n = s.length;\n  const result = Array.from(s);\n\n  let left = 0;\n  let right = n - 1;\n\n  const swap = (i, j) => {\n    [result[i], result[j]] = [result[j], result[i]];\n  };\n\n  while (left < right) {\n    result.setColor(left, \"green\");\n    result.setColor(right, \"cyan\");\n\n    if (result[left] === \"1\") {\n      left++;\n      continue;\n    }\n\n    if (result[right] === \"0\") {\n      right--;\n      continue;\n    }\n\n    swap(left, right);\n  }\n\n  if (result[n - 1] === \"0\") {\n    swap(left - 1, n - 1);\n  }\n\n  return result.join(\"\");\n};\n\nreturn maximumOddBinaryNumber;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clta43y4k00038eufvgrnz7xg": {
+      "id": "clta43y4k00038eufvgrnz7xg",
+      "createdAt": "2024-03-02T13:21:38.180Z",
+      "updatedAt": "2024-03-02T13:23:07.188Z",
+      "projectId": "clta43y4j00018eufpeq7c6ry",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {string}\n */\nvar gameResult = function (head) {\n  let evenScore = 0;\n  let oddScore = 0;\n\n  let current = head;\n  while (current) {\n    current.setColor(\"green\");\n    current.next.setColor(\"blue\");\n    const val = current.val;\n    const nextVal = current.next.val;\n    if (nextVal > val) {\n      oddScore++;\n    } else if (nextVal < val) {\n      evenScore++;\n    }\n\n    current = current.next.next;\n  }\n\n  if (evenScore === oddScore) {\n    return \"Tie\";\n  } else if (evenScore > oddScore) {\n    return \"Even\";\n  } else {\n    return \"Odd\";\n  }\n};\n\nreturn gameResult;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clta66fmp00078eufxzpxedvh": {
+      "id": "clta66fmp00078eufxzpxedvh",
+      "createdAt": "2024-03-02T14:19:33.409Z",
+      "updatedAt": "2024-03-02T14:23:57.526Z",
+      "projectId": "clta66fmp00058eufzc20nzq1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar sortedSquares = function (nums) {\n  if (nums[0] >= 0) {\n    return nums.map((num) => num ** 2);\n  }\n  const n = nums.length;\n  const result = new Array(n);\n\n  let i = n - 1;\n  let left = 0;\n  let right = n - 1;\n  while (left <= right) {\n    const leftNum = nums[left];\n    const rightNum = nums[right];\n    if (Math.abs(leftNum) > rightNum) {\n      nums.setColor(left, \"green\");\n      result[i] = leftNum ** 2;\n      left++;\n    } else {\n      nums.setColor(right, \"cyan\");\n      result[i] = rightNum ** 2;\n      right--;\n    }\n    i--;\n  }\n\n  return result;\n};\n\nreturn sortedSquares;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clta6q2ht000b8eufh81cbgcw": {
+      "id": "clta6q2ht000b8eufh81cbgcw",
+      "createdAt": "2024-03-02T14:34:49.505Z",
+      "updatedAt": "2024-03-02T14:36:26.741Z",
+      "projectId": "clta6q2ht00098eufh7cthun4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function (nums) {\n  let left = 1;\n  let right = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"cyan\");\n    if (nums[right - 1] < nums[right]) {\n      nums.setColor(left, \"green\");\n      nums[left++] = nums[right];\n    }\n  }\n\n  return left;\n};\n\nreturn removeDuplicates;\n",
       "pythonCode": null,
       "order": 0
     }
