@@ -32,32 +32,89 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
 
   return (
     <Box
-      component="table"
       sx={{
-        width: "fit-content",
-        borderCollapse: "collapse",
-        borderSpacing: 0,
-        border: borderColor,
-        borderRadius: "4px",
-        td: {
-          padding: 0,
-          border: borderColor,
-        },
+        overflow: "hidden",
       }}
     >
-      <tbody>
-        {items.map((node, index) => {
-          if (!node) return null;
+      <Box
+        component="table"
+        sx={{
+          width: "fit-content",
+          borderCollapse: "collapse",
+          borderSpacing: 0,
+          border: borderColor,
+          borderRadius: "4px",
+          boxSizing: "border-box",
+          th: {
+            padding: 1,
+            textAlign: "center",
+            borderBottom: borderColor,
+            borderRight: borderColor,
+            fontWeight: "light",
+            fontSize: "12px",
+            lineHeight: "12px",
+            color: theme.palette.text.secondary,
+            backgroundColor: alpha(theme.palette.action.active, 0.01),
 
-          const name = node.childName ?? "";
-          const nodeData = arrayState[name];
-          if (nodeData) {
-            return <MatrixRow key={name} data={nodeData} />;
-          }
+            "&[scope='row']": {
+              borderRightWidth: 2,
+            },
+            "&[scope='col']": {
+              borderBottomWidth: 2,
 
-          return <Box key={index} component="tr" height={44} />;
-        })}
-      </tbody>
+              "&:first-child": {
+                borderRightWidth: 2,
+              },
+            },
+          },
+          td: {
+            position: "relative",
+            padding: 0,
+            border: borderColor,
+
+            "&:hover::after": {
+              content: '""',
+              position: "absolute",
+              top: "-5000px",
+              left: 0,
+              width: "100%",
+              height: "10000px",
+              backgroundColor: alpha(theme.palette.primary.light, 0.032),
+            },
+          },
+        }}
+      >
+        <thead>
+          {data.colHeaders ? (
+            <>
+              <th scope="col" />
+              {data.colHeaders.map((value, index) => (
+                <th key={index} scope="col">
+                  {value}
+                </th>
+              ))}
+            </>
+          ) : null}
+        </thead>
+        <tbody>
+          {items.map((node, index) => {
+            if (!node) return null;
+
+            const name = node.childName ?? "";
+            const nodeData = arrayState[name];
+            const header = data.rowHeaders?.[node.index];
+            if (nodeData) {
+              return <MatrixRow key={name} header={header} data={nodeData} />;
+            }
+
+            return (
+              <Box key={index} component="tr" height={43}>
+                {header ? <th scope="row">{header}</th> : null}
+              </Box>
+            );
+          })}
+        </tbody>
+      </Box>
     </Box>
   );
 };
