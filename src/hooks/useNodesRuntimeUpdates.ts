@@ -77,6 +77,20 @@ export const useNodesRuntimeUpdates = (
           );
           break;
 
+        case "setHeaders":
+          if ("setHeaders" in slice.actions) {
+            dispatch(
+              slice.actions.setHeaders({
+                name: treeName,
+                data: {
+                  colHeaders: frame.args.colHeaders,
+                  rowHeaders: frame.args.rowHeaders,
+                },
+              }),
+            );
+          }
+          break;
+
         case "setVal":
           dispatch(
             slice.actions.update({

@@ -196,4 +196,37 @@ export class ControlledArray<T> extends ArrayBase<T> {
   protected setNodeMeta(key: any, data: ArrayItemData): void {
     this.itemsMeta[key] = data;
   }
+
+  public setHeaders(rowHeaders: string[], colHeaders: string[]) {
+    this.callstack.addOne({
+      ...this.getDispatchBase(),
+      name: "setHeaders",
+      args: { rowHeaders, colHeaders },
+    });
+  }
+
+  public setHeaderRanges({
+    rowStart,
+    rowEnd,
+    colStart,
+    colEnd,
+  }: {
+    rowStart: number;
+    rowEnd: number;
+    colStart: number;
+    colEnd: number;
+  }) {
+    const rowHeaders = Array.from({ length: rowEnd - rowStart + 1 }, (_, i) =>
+      String(i + rowStart),
+    );
+    const colHeaders = Array.from({ length: colEnd - colStart + 1 }, (_, i) =>
+      String(i + colStart),
+    );
+
+    this.setHeaders(rowHeaders, colHeaders);
+  }
+
+  public showIndexes(m: number, n: number) {
+    this.setHeaderRanges({ rowStart: 0, rowEnd: m, colStart: 0, colEnd: n });
+  }
 }

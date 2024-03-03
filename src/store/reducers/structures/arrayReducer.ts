@@ -32,6 +32,8 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
   argType: ArgumentArrayType;
   parentName?: string;
   childNames?: string[];
+  colHeaders?: string[];
+  rowHeaders?: string[];
 };
 
 export type ArrayDataState = BaseStructureState<ArrayData>;
@@ -109,6 +111,22 @@ export const arrayStructureSlice = createSlice({
       }
 
       state[name] = treeState;
+    },
+    setHeaders: (
+      state,
+      action: NamedPayload<{
+        colHeaders?: string[];
+        rowHeaders?: string[];
+      }>,
+    ) => {
+      const {
+        payload: { name, data },
+      } = action;
+      const treeState = getStateByName(state, name);
+      if (!treeState) return;
+
+      treeState.colHeaders = data.colHeaders;
+      treeState.rowHeaders = data.rowHeaders;
     },
   },
 });

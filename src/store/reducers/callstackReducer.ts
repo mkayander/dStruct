@@ -46,6 +46,11 @@ type SetInfoFrame = NodeFrameBase & {
   args: { info: Record<string, any> };
 };
 
+type SetHeadersFrame = CallFrameBase & {
+  name: "setHeaders";
+  args: { colHeaders?: string[]; rowHeaders?: string[] };
+};
+
 type SetValFrame = NodeFrameBase & {
   name: "setVal";
   args: { value: number | string | null; childName?: string };
@@ -109,6 +114,7 @@ export type CallFrame =
   | SetColorFrame
   | SetColorMapFrame
   | SetInfoFrame
+  | SetHeadersFrame
   | SetValFrame
   | SetChildFrame
   | BlinkFrame
