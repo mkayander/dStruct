@@ -1,3 +1,11 @@
+# [1.284.0](https://github.com/mkayander/dStruct/compare/v1.283.0...v1.284.0) (2024-03-03)
+
+
+### Features
+
+* Added matrix headers support ([55aecfe](https://github.com/mkayander/dStruct/commit/55aecfe129dc0002f820d02cf083fa79961b95c9))
+* Display matrix headers ([cdd75bf](https://github.com/mkayander/dStruct/commit/cdd75bfd9594f89aaff0398df379781dfa8cc283))
+
 # [1.283.0](https://github.com/mkayander/dStruct/compare/v1.282.1...v1.283.0) (2024-03-02)
 
 
