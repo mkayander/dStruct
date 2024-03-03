@@ -3401,6 +3401,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cltbhm8st0001knytykazxts0": {
+      "id": "cltbhm8st0001knytykazxts0",
+      "createdAt": "2024-03-03T12:27:33.005Z",
+      "updatedAt": "2024-03-03T12:27:33.005Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Nth Node From End of List",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/remove-nth-node-from-end-of-list",
+      "slug": "remove-nth-node-from-end-of-list",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cltbtjc6m0001arczl3ferffh": {
+      "id": "cltbtjc6m0001arczl3ferffh",
+      "createdAt": "2024-03-03T18:01:12.814Z",
+      "updatedAt": "2024-03-03T18:01:12.814Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Partition to K Equal Sum Subsets",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets",
+      "slug": "partition-to-k-equal-sum-subsets",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -14929,6 +14957,56 @@
         }
       },
       "description": null
+    },
+    "cltbhm8st0002knytaufyhhyt": {
+      "id": "cltbhm8st0002knytaufyhhyt",
+      "createdAt": "2024-03-03T12:27:33.005Z",
+      "updatedAt": "2024-03-03T12:28:04.528Z",
+      "projectId": "cltbhm8st0001knytykazxts0",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "ey3LkCkrgM3it8PcHJ2zWz": {
+          "name": "ey3LkCkrgM3it8PcHJ2zWz",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cltbtjc6m0002arcz2nj7nn40": {
+      "id": "cltbtjc6m0002arcz2nj7nn40",
+      "createdAt": "2024-03-03T18:01:12.814Z",
+      "updatedAt": "2024-03-03T18:01:51.390Z",
+      "projectId": "cltbtjc6m0001arczl3ferffh",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "gg6bPxUHXqqNT2rdbEggTA": {
+          "name": "gg6bPxUHXqqNT2rdbEggTA",
+          "type": "array",
+          "input": "[4,3,2,3,5,2,1]",
+          "order": 0
+        },
+        "p7pJDgQSeGEqmck2L4ohf2": {
+          "name": "p7pJDgQSeGEqmck2L4ohf2",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -20055,6 +20133,48 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function (nums) {\n  let left = 1;\n  let right = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"cyan\");\n    if (nums[right - 1] < nums[right]) {\n      nums.setColor(left, \"green\");\n      nums[left++] = nums[right];\n    }\n  }\n\n  return left;\n};\n\nreturn removeDuplicates;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "cltbhm8st0003knytrvbvembq": {
+      "id": "cltbhm8st0003knytrvbvembq",
+      "createdAt": "2024-03-03T12:27:33.005Z",
+      "updatedAt": "2024-03-03T12:28:38.095Z",
+      "projectId": "cltbhm8st0001knytykazxts0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} n\n * @return {ListNode}\n */\nvar removeNthFromEnd = function (head, n) {\n  const dummy = new ListNode(-1, head);\n  let left = dummy;\n  let right = dummy;\n\n  while (right.next) {\n    right.setColor(\"green\");\n    right = right.next;\n    if (n > 0) {\n      n--;\n      continue;\n    }\n\n    left.setColor(\"cyan\");\n    left = left.next;\n  }\n\n  left.next = left.next.next;\n\n  return dummy.next;\n};\n\nreturn removeNthFromEnd;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cltbtjc6m0003arczx60nmfta": {
+      "id": "cltbtjc6m0003arczx60nmfta",
+      "createdAt": "2024-03-03T18:01:12.814Z",
+      "updatedAt": "2024-03-03T18:04:59.157Z",
+      "projectId": "cltbtjc6m0001arczl3ferffh",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {boolean}\n */\nvar canPartitionKSubsets = function (nums, k) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr);\n  const partSum = sum / k;\n  if (!Number.isInteger(partSum)) return false;\n  console.log(partSum);\n\n  const memo = new Map();\n  let mask = 0;\n\n  const backtrack = (i, count, sum) => {\n    if (count === k - 1) return true;\n    if (sum > partSum) return false;\n\n    if (memo.has(mask)) {\n      return memo.get(mask);\n    }\n\n    if (sum === partSum) {\n      memo.set(mask, backtrack(0, count + 1, 0));\n      return memo.get(mask);\n    }\n\n    for (let j = i; j < n; j++) {\n      if ((1 << j) & mask) continue;\n      mask |= 1 << j;\n\n      if (backtrack(j + 1, count, sum + nums[j])) return true;\n\n      mask ^= 1 << j;\n    }\n\n    memo.set(mask, false);\n    return false;\n  };\n\n  const result = backtrack(0, 0, 0);\n\n  return result;\n};\n\nreturn canPartitionKSubsets;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cltbtnrbp0005arczk496m1yp": {
+      "id": "cltbtnrbp0005arczk496m1yp",
+      "createdAt": "2024-03-03T18:04:39.062Z",
+      "updatedAt": "2024-03-03T18:08:27.411Z",
+      "projectId": "cltbtjc6m0001arczl3ferffh",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {boolean}\n */\nvar canPartitionKSubsets = function (nums, k) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr);\n  const partSum = sum / k;\n  if (!Number.isInteger(partSum)) return false;\n  console.log(partSum);\n\n  const memo = new Map();\n  let mask = 0;\n\n  const backtrack = (i, count, sum) => {\n    if (count === k - 1) return true;\n    if (sum < 0) return false;\n\n    if (memo.has(mask)) {\n      return memo.get(mask);\n    }\n\n    if (sum === 0) {\n      memo.set(mask, backtrack(0, count + 1, partSum));\n      return memo.get(mask);\n    }\n\n    for (let j = i; j < n; j++) {\n      if ((1 << j) & mask) continue;\n      nums.setColor(j, \"cyan\");\n      mask |= 1 << j;\n\n      if (backtrack(j + 1, count, sum - nums[j])) {\n        nums.setColor(j, null);\n        return true;\n      }\n\n      mask ^= 1 << j;\n    }\n\n    memo.set(mask, false);\n    return false;\n  };\n\n  const result = backtrack(0, 0, partSum);\n\n  return result;\n};\n\nreturn canPartitionKSubsets;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
