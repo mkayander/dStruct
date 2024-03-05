@@ -1,3 +1,11 @@
+## [1.284.1](https://github.com/mkayander/dStruct/compare/v1.284.0...v1.284.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* Fixed editor history state updates ([c817aa4](https://github.com/mkayander/dStruct/commit/c817aa4f3184094462fdd2aef1dbd81386a2dd84))
+* Fixed form touched states reset ([e67ac77](https://github.com/mkayander/dStruct/commit/e67ac77bb510f6179eff5b1395f20f8a701927bb))
+
 # [1.284.0](https://github.com/mkayander/dStruct/compare/v1.283.0...v1.284.0) (2024-03-03)
 
 
