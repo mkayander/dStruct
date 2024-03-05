@@ -124,9 +124,12 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     );
 
     const key = getCodeKey(language);
+    const newCode = currentSolution.data[key] ?? "";
 
     setEditorState(EditorState.INITIAL);
-    setCodeInput(currentSolution.data[key] ?? "");
+    if (textModel) {
+      textModel.setValue(newCode);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSolution.data?.slug, language]);
@@ -255,7 +258,17 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       parser: "babel",
       plugins: [parserBabel, prettierPluginEstree],
     });
-    textModel?.setValue(formattedCode);
+    if (textModel) {
+      const edit = {
+        range: textModel.getFullModelRange(),
+        text: formattedCode,
+      };
+      textModel.pushEditOperations(
+        [],
+        [edit],
+        () => null, // no undo stop
+      );
+    }
     setIsFormattingAvailable(false);
   };
 
