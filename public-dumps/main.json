@@ -3429,6 +3429,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cltbu4bv40007arczoibiugbl": {
+      "id": "cltbu4bv40007arczoibiugbl",
+      "createdAt": "2024-03-03T18:17:32.176Z",
+      "updatedAt": "2024-03-03T18:17:32.176Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Partition Equal Subset Sum",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/partition-equal-subset-sum",
+      "slug": "partition-equal-subset-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cltcsxcmt0001wilubbwwwm1y": {
+      "id": "cltcsxcmt0001wilubbwwwm1y",
+      "createdAt": "2024-03-04T10:31:53.141Z",
+      "updatedAt": "2024-03-04T10:31:53.141Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Bag of Tokens",
+      "category": "TWO_POINTERS",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/bag-of-tokens",
+      "slug": "bag-of-tokens",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -15007,6 +15035,126 @@
         }
       },
       "description": null
+    },
+    "cltbu4bv40008arczdytld1tg": {
+      "id": "cltbu4bv40008arczdytld1tg",
+      "createdAt": "2024-03-03T18:17:32.176Z",
+      "updatedAt": "2024-03-03T18:17:56.132Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "q6RmXyEWahQesgGT8zARis": {
+          "name": "q6RmXyEWahQesgGT8zARis",
+          "type": "array",
+          "input": "[1,5,11,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltbudske000barczgokjceva": {
+      "id": "cltbudske000barczgokjceva",
+      "createdAt": "2024-03-03T18:24:53.726Z",
+      "updatedAt": "2024-03-03T18:27:19.498Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "q6RmXyEWahQesgGT8zARis": {
+          "name": "q6RmXyEWahQesgGT8zARis",
+          "type": "array",
+          "input": "[2,2,2,2,1,1,3,3,3,4,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltbup6bs000darcz74u8efhn": {
+      "id": "cltbup6bs000darcz74u8efhn",
+      "createdAt": "2024-03-03T18:33:44.776Z",
+      "updatedAt": "2024-03-03T18:34:38.636Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "q6RmXyEWahQesgGT8zARis": {
+          "name": "q6RmXyEWahQesgGT8zARis",
+          "type": "array",
+          "input": "[2,2,5,1,1,1,1,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltburftc000farczwce0r8hw": {
+      "id": "cltburftc000farczwce0r8hw",
+      "createdAt": "2024-03-03T18:35:30.384Z",
+      "updatedAt": "2024-03-03T18:35:33.812Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "q6RmXyEWahQesgGT8zARis": {
+          "name": "q6RmXyEWahQesgGT8zARis",
+          "type": "array",
+          "input": "[2,2,3,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltbuz1rd000harczaua9u76p": {
+      "id": "cltbuz1rd000harczaua9u76p",
+      "createdAt": "2024-03-03T18:41:25.417Z",
+      "updatedAt": "2024-03-03T18:41:32.207Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "q6RmXyEWahQesgGT8zARis": {
+          "name": "q6RmXyEWahQesgGT8zARis",
+          "type": "array",
+          "input": "[2,2,2,2,2,2,2,3,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltcsxcmt0002wiluad99p2fy": {
+      "id": "cltcsxcmt0002wiluad99p2fy",
+      "createdAt": "2024-03-04T10:31:53.141Z",
+      "updatedAt": "2024-03-04T10:33:33.938Z",
+      "projectId": "cltcsxcmt0001wilubbwwwm1y",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "37PpnDCzKYS5wccoWn3bYr": {
+          "name": "37PpnDCzKYS5wccoWn3bYr",
+          "type": "array",
+          "input": "[400,300,200,100]",
+          "order": 0
+        },
+        "ep4kjrYkCQr6BcZ15C2MHu": {
+          "name": "ep4kjrYkCQr6BcZ15C2MHu",
+          "type": "number",
+          "input": "200",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -20175,6 +20323,34 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {boolean}\n */\nvar canPartitionKSubsets = function (nums, k) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr);\n  const partSum = sum / k;\n  if (!Number.isInteger(partSum)) return false;\n  console.log(partSum);\n\n  const memo = new Map();\n  let mask = 0;\n\n  const backtrack = (i, count, sum) => {\n    if (count === k - 1) return true;\n    if (sum < 0) return false;\n\n    if (memo.has(mask)) {\n      return memo.get(mask);\n    }\n\n    if (sum === 0) {\n      memo.set(mask, backtrack(0, count + 1, partSum));\n      return memo.get(mask);\n    }\n\n    for (let j = i; j < n; j++) {\n      if ((1 << j) & mask) continue;\n      nums.setColor(j, \"cyan\");\n      mask |= 1 << j;\n\n      if (backtrack(j + 1, count, sum - nums[j])) {\n        nums.setColor(j, null);\n        return true;\n      }\n\n      mask ^= 1 << j;\n    }\n\n    memo.set(mask, false);\n    return false;\n  };\n\n  const result = backtrack(0, 0, partSum);\n\n  return result;\n};\n\nreturn canPartitionKSubsets;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "cltbu4bv40009arczpjaf74hx": {
+      "id": "cltbu4bv40009arczpjaf74hx",
+      "createdAt": "2024-03-03T18:17:32.176Z",
+      "updatedAt": "2024-03-03T18:38:16.527Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canPartition = function (nums) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\n  const half = sum / 2;\n  if (!Number.isInteger(half)) return false;\n  console.log(half);\n\n  const dp = new Array(n);\n  const dfs = (i, sum) => {\n    console.log({ i, sum });\n    if (sum === 0) return true;\n    if (i < 0 || sum < 0) return false;\n\n    dp[i] ??= new Array(half + 1);\n    if (dp[i][sum] !== undefined) {\n      nums.setColor(i, null);\n      dp[i].setColor(sum, \"green\");\n      return dp[i][sum];\n    } else {\n      dp[i].setColor(sum, \"cyan\");\n    }\n\n    nums.setColor(i, \"green\");\n    let result = dfs(i - 1, sum - nums[i]);\n\n    nums.setColor(i, \"cyan\");\n    result ||= dfs(i - 1, sum);\n    nums.setColor(i, \"null\");\n\n    dp[i][sum] = result;\n    return result;\n  };\n\n  return dfs(n - 1, half);\n};\n\nreturn canPartition;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cltcsxcmt0003wilusow4mhid": {
+      "id": "cltcsxcmt0003wilusow4mhid",
+      "createdAt": "2024-03-04T10:31:53.141Z",
+      "updatedAt": "2024-03-04T10:35:01.141Z",
+      "projectId": "cltcsxcmt0001wilubbwwwm1y",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} tokens\n * @param {number} power\n * @return {number}\n */\nvar bagOfTokensScore = function (tokens, power) {\n  tokens.sort((a, b) => a - b);\n  let low = 0;\n  let high = tokens.length - 1;\n  let score = 0;\n\n  while (low <= high) {\n    if (power >= tokens[low]) {\n      tokens.setColor(low, \"green\");\n      power -= tokens[low++];\n      score++;\n    } else if (low < high && score > 0) {\n      tokens.setColor(high, \"cyan\");\n      power += tokens[high--];\n      score--;\n    } else {\n      return score;\n    }\n    console.log({score, power});\n  }\n\n  return score;\n};\n\nreturn bagOfTokensScore;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
