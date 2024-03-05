@@ -153,6 +153,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   });
 
   useEffect(() => {
+    formik.resetForm();
     if (currentSolution.data) {
       formik.setValues({
         solutionName: currentSolution.data.title,
@@ -161,8 +162,6 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         solutionSpaceComplexity: currentSolution.data.spaceComplexity ?? "",
         solutionDescription: currentSolution.data.description ?? "",
       });
-    } else {
-      formik.resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSolution.data]);
