@@ -51,7 +51,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
 
     controlsRef.current.setAzimuthalAngle(Math.PI / 7);
     controlsRef.current.setPolarAngle(Math.PI / 1.5);
-  }, [controlsRef.current]);
+  }, [isMobile]);
 
   return (
     <Dialog
