@@ -1,3 +1,10 @@
+## [1.284.2](https://github.com/mkayander/dStruct/compare/v1.284.1...v1.284.2) (2024-03-06)
+
+
+### Bug Fixes
+
+* Fixed effect dependencies ([8fac590](https://github.com/mkayander/dStruct/commit/8fac59040fcd54ea614b29eb473625d6e5e4a93c))
+
 ## [1.284.1](https://github.com/mkayander/dStruct/compare/v1.284.0...v1.284.1) (2024-03-05)
 
 
