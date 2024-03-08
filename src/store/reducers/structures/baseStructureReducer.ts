@@ -18,8 +18,8 @@ export type StructureNode = {
 };
 
 export type BaseStructureItem<N extends StructureNode = StructureNode> = {
-  nodes: EntityState<N>;
-  initialNodes: EntityState<N> | null;
+  nodes: EntityState<N, string>;
+  initialNodes: EntityState<N, string> | null;
   isRuntime: boolean;
   isNested?: boolean;
   hasNested?: boolean;
@@ -27,7 +27,7 @@ export type BaseStructureItem<N extends StructureNode = StructureNode> = {
 };
 
 export const getInitialDataBase = <N extends StructureNode>(
-  adapter: EntityAdapter<N>,
+  adapter: EntityAdapter<N, string>,
 ): BaseStructureItem<N> => ({
   nodes: adapter.getInitialState(),
   initialNodes: null,
@@ -76,7 +76,7 @@ export const runStateActionByName = <
 };
 
 export const getBaseStructureReducers = <N extends StructureNode>(
-  adapter: EntityAdapter<any>,
+  adapter: EntityAdapter<any, string>,
 ) => {
   const selectors = adapter.getSelectors();
 
@@ -135,7 +135,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
       }),
     update: <T extends BaseStructureState>(
       state: T,
-      action: NamedPayload<Update<N>>,
+      action: NamedPayload<Update<N, string>>,
     ) => {
       const childName = action.payload.data.changes.childName;
 

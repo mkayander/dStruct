@@ -88,7 +88,7 @@ export type AddArrayItemFrame = NodeFrameBase & {
 type AddArrayFrame = CallFrameBase & {
   name: "addArray";
   args: {
-    arrayData?: EntityState<ArrayItemData>;
+    arrayData?: EntityState<ArrayItemData, string>;
     options?: ControlledArrayRuntimeOptions;
   };
 };
@@ -121,7 +121,6 @@ export type CallFrame =
   | ShowPointerFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
-  selectId: (frame) => frame.id,
   sortComparer: (a, b) => a.timestamp - b.timestamp,
 });
 
@@ -140,7 +139,7 @@ export type CallstackState = {
   runtime: number | null;
   startTimestamp: number | null;
   error: Error | null;
-  frames: EntityState<CallFrame>;
+  frames: EntityState<CallFrame, string>;
   frameIndex: number;
 };
 
@@ -171,7 +170,7 @@ export const callstackSlice = createSlice({
       const { payload } = action;
       callstackAdapter.addMany(state.frames, payload);
     },
-    removeOne: (state, action: PayloadAction<number>) => {
+    removeOne: (state, action: PayloadAction<string>) => {
       const { payload } = action;
       callstackAdapter.removeOne(state.frames, payload);
     },

@@ -50,7 +50,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     { enabled: Boolean(currentProjectId && caseSlug) },
   );
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useUtils();
 
   const formik = useFormik({
     initialValues: {

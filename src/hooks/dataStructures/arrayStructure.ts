@@ -24,7 +24,7 @@ export type ControlledArrayRuntimeOptions = {
 
 export function initControlledArray<T extends ArrayBaseType>(
   array: T,
-  arrayData: EntityState<ArrayItemData>,
+  arrayData: EntityState<ArrayItemData, string>,
   name: string,
   callstack: CallstackHelper,
   addToCallstack?: boolean,
@@ -80,7 +80,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
   constructor(
     array: Array<T>,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,

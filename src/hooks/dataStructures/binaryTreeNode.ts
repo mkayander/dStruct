@@ -1,5 +1,4 @@
 import { Queue } from "@datastructures-js/queue";
-import type { Dictionary } from "@reduxjs/toolkit";
 
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
@@ -85,7 +84,7 @@ export class BinaryTreeNode<
   static fromNodeData(
     name: string,
     nodeData: TreeNodeData | undefined,
-    dataMap: Dictionary<TreeNodeData>,
+    dataMap: Record<string, TreeNodeData>,
     callstack: CallstackHelper,
     meta?: Partial<BinaryNodeMeta>,
   ): BinaryTreeNode | null {

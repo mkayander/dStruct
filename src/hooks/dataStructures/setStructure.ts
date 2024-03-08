@@ -17,7 +17,7 @@ export class ControlledSet extends ArrayBase {
   constructor(
     value: any[] | null | undefined,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {

@@ -17,7 +17,7 @@ export class ControlledMap extends ArrayBase {
   constructor(
     entries: any[] | null | undefined,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {

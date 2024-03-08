@@ -16,7 +16,7 @@ export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
 
   return (
     <Canvas>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={2.25} />
       <pointLight
         intensity={2}
         decay={2}

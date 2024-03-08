@@ -14,7 +14,7 @@ export class ControlledString extends ArrayBase {
   constructor(
     value: unknown,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {

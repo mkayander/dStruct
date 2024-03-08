@@ -37,9 +37,7 @@ export type TreeData = BaseStructureItem<TreeNodeData> & {
 
 export type TreeDataState = BaseStructureState<TreeData>;
 
-const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>({
-  selectId: (node: TreeNodeData) => node.id,
-});
+const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>();
 
 const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   ...getInitialDataBase(treeNodeDataAdapter),

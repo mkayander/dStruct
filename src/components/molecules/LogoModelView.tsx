@@ -20,7 +20,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
 
   return (
     <Canvas>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={2.5} />
       <pointLight
         intensity={2}
         decay={2}

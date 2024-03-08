@@ -31,10 +31,9 @@ export const UserSettings: React.FC = () => {
     refetch,
   } = trpc.user.getById.useQuery(userId, {
     enabled: Boolean(userId),
-    trpc: {},
   });
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useUtils();
 
   const linkUser = trpc.leetcode.linkUser.useMutation();
   const unlinkUser = trpc.leetcode.unlinkUser.useMutation();

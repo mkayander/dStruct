@@ -1,5 +1,3 @@
-import { type Dictionary } from "@reduxjs/toolkit";
-
 import { type BinaryNodeMeta } from "#/hooks/dataStructures/binaryTreeNode";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
@@ -50,7 +48,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   static fromNodeData(
     name: string,
     nodeData: TreeNodeData | undefined,
-    dataMap: Dictionary<TreeNodeData>,
+    dataMap: Record<string, TreeNodeData>,
     callstack: CallstackHelper,
     meta?: Partial<BinaryNodeMeta>,
   ): LinkedListNode<number | string> | null {

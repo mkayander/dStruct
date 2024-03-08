@@ -16,7 +16,7 @@ export class ControlledObject extends ArrayBase {
   constructor(
     value: any,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {

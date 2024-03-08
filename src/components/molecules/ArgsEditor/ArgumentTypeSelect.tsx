@@ -26,7 +26,10 @@ import React from "react";
 import { useI18nContext } from "#/hooks";
 import { ArgumentType, argumentTypeLabels } from "#/utils/argumentObject";
 
-type ArgumentTypeSelectProps = Omit<SelectProps, "value" | "onChange"> & {
+type ArgumentTypeSelectProps = Omit<
+  SelectProps,
+  "value" | "onChange" | "variant"
+> & {
   value: ArgumentType;
   onChange: (value: ArgumentType) => void;
 };

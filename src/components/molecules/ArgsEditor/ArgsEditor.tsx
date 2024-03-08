@@ -47,7 +47,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useUtils();
 
   const updateCase = trpc.project.updateCase.useMutation();
 

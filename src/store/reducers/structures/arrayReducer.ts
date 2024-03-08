@@ -39,7 +39,7 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
 export type ArrayDataState = BaseStructureState<ArrayData>;
 
 export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
-  selectId: (node: ArrayItemData) => node.id,
+  // selectId: (node: ArrayItemData) => node.id,
   sortComparer: (a, b) => a.index - b.index,
 });
 
@@ -87,7 +87,7 @@ export const arrayStructureSlice = createSlice({
       state,
       action: NamedPayload<{
         argType: ArgumentArrayType;
-        nodes?: EntityState<ArrayItemData>;
+        nodes?: EntityState<ArrayItemData, string>;
         options?: ControlledArrayRuntimeOptions;
       }>,
     ) => {

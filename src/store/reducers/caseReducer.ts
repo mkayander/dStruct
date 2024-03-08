@@ -8,7 +8,7 @@ import {
 import type { RootState } from "#/store/makeStore";
 import { type ArgumentObject } from "#/utils/argumentObject";
 
-const argumentAdapter = createEntityAdapter<ArgumentObject>({
+const argumentAdapter = createEntityAdapter<ArgumentObject, string>({
   selectId: (arg) => arg.name,
   sortComparer: (a, b) => a.order - b.order,
 });
@@ -18,7 +18,7 @@ export type ArgumentInfo = {
 };
 
 type CaseState = {
-  args: EntityState<ArgumentObject>;
+  args: EntityState<ArgumentObject, string>;
   info: Record<string, ArgumentInfo>;
   isEdited: boolean;
 };

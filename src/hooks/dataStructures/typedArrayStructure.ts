@@ -27,7 +27,7 @@ export class ControlledUint32Array extends makeTypedArrayClass(Uint32Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -49,7 +49,7 @@ export class ControlledInt32Array extends makeTypedArrayClass(Int32Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -71,7 +71,7 @@ export class ControlledUint16Array extends makeTypedArrayClass(Uint16Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -93,7 +93,7 @@ export class ControlledInt16Array extends makeTypedArrayClass(Int16Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -115,7 +115,7 @@ export class ControlledUint8Array extends makeTypedArrayClass(Uint8Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -137,7 +137,7 @@ export class ControlledInt8Array extends makeTypedArrayClass(Int8Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -161,7 +161,7 @@ export class ControlledUint8ClampedArray extends makeTypedArrayClass(
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -183,7 +183,7 @@ export class ControlledFloat32Array extends makeTypedArrayClass(Float32Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -205,7 +205,7 @@ export class ControlledFloat64Array extends makeTypedArrayClass(Float64Array) {
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -229,7 +229,7 @@ export class ControlledBigInt64Array extends makeTypedArrayClass(
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
@@ -253,7 +253,7 @@ export class ControlledBigUint64Array extends makeTypedArrayClass(
   constructor(
     size: number,
     name: string,
-    arrayData: EntityState<ArrayItemData>,
+    arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
     options?: ControlledArrayRuntimeOptions,
