@@ -12,7 +12,7 @@ import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
   // prettier-ignore
-  ["setColor", "blink", "setInfo"].forEach((method) => 
+  ["setColor", "blink", "setInfo", "showIndexes"].forEach((method) => 
     Object.defineProperty(proto.prototype, method, {
       value: dummy,
       writable: false,
