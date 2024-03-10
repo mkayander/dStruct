@@ -9,6 +9,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
+  transpilePackages: ["@mui/x-charts"],
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
     defaultLocale: "en",
