@@ -73,6 +73,7 @@ export const useCodeExecution = (codeInput: string) => {
           error: null,
           result: String(result.output),
           runtime: result.runtime,
+          benchmarkResults: result,
           startTimestamp,
         }),
       );

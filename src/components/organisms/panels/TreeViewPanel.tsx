@@ -24,6 +24,7 @@ import {
 import React, { useState } from "react";
 
 import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
+import { BenchmarkChart } from "#/components/molecules/BenchmarkChart";
 import { TreeViewer } from "#/components/molecules/TreeViewer/TreeViewer";
 import { PanelWrapper } from "#/components/organisms/panels/common/PanelWrapper";
 import {
@@ -39,6 +40,7 @@ import {
   selectCallstackIsPlaying,
   selectCallstackIsReady,
   selectCallstackLength,
+  selectRuntimeData,
 } from "#/store/reducers/callstackReducer";
 import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState } from "#/utils";
@@ -62,6 +64,7 @@ export const TreeViewPanel: React.FC = () => {
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const callstackLength = useAppSelector(selectCallstackLength);
+  const runtimeData = useAppSelector(selectRuntimeData);
   const isPlaying = useAppSelector(selectCallstackIsPlaying);
   const frameIndex = useAppSelector(selectCallstackFrameIndex);
   const maxDepth = useAppSelector(selectTreeMaxDepth);
@@ -240,7 +243,29 @@ export const TreeViewPanel: React.FC = () => {
           />
         </StyledTabPanel>
         <StyledTabPanel value="benchmark">
-          <Typography>Benchmark</Typography>
+          <Stack direction="row" flexWrap="wrap" gap={1}>
+            <Typography variant="body2">
+              <strong>Average: </strong>
+              {runtimeData.benchmarkResults?.averageTime} ms
+            </Typography>
+            <Typography variant="body2">
+              <strong>Median: </strong>
+              {runtimeData.benchmarkResults?.medianTime} ms
+            </Typography>
+            <Typography variant="body2">
+              <strong>P75: </strong>
+              {runtimeData.benchmarkResults?.p75Time} ms
+            </Typography>
+            <Typography variant="body2">
+              <strong>P90: </strong>
+              {runtimeData.benchmarkResults?.p90Time} ms
+            </Typography>
+            <Typography variant="body2">
+              <strong>P99: </strong>
+              {runtimeData.benchmarkResults?.p99Time} ms
+            </Typography>
+          </Stack>
+          <BenchmarkChart />
         </StyledTabPanel>
       </TabContext>
     </PanelWrapper>

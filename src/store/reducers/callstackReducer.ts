@@ -11,6 +11,8 @@ import type { RootState } from "#/store/makeStore";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { type ArgumentType } from "#/utils/argumentObject";
 
+import type { ExecWorkerInterface } from "#/workers/codeExec.worker";
+
 export type StructureTypeName = "treeNode" | "array";
 
 export type CallFrameBase = {
@@ -141,6 +143,7 @@ export type CallstackState = {
   error: Error | null;
   frames: EntityState<CallFrame, string>;
   frameIndex: number;
+  benchmarkResults?: ExecWorkerInterface["benchmark"]["response"];
 };
 
 const initialState: CallstackState = {
@@ -185,14 +188,21 @@ export const callstackSlice = createSlice({
     setStatus: (
       state,
       action: PayloadAction<
-        Pick<
-          CallstackState,
-          "isReady" | "result" | "runtime" | "startTimestamp" | "error"
-        > & { frames?: CallFrame[] }
+        Omit<CallstackState, "isPlaying" | "frames" | "frameIndex"> & {
+          frames?: CallFrame[];
+        }
       >,
     ) => {
       const {
-        payload: { frames, isReady, result, runtime, startTimestamp, error },
+        payload: {
+          frames,
+          isReady,
+          result,
+          runtime,
+          benchmarkResults,
+          startTimestamp,
+          error,
+        },
       } = action;
 
       if (frames) {
@@ -202,6 +212,7 @@ export const callstackSlice = createSlice({
       state.isReady = isReady;
       state.result = result;
       state.runtime = runtime;
+      state.benchmarkResults = benchmarkResults;
       state.startTimestamp = startTimestamp;
       state.error = error;
     },
@@ -235,6 +246,7 @@ export const selectCallstack = createSelector(
   (callstack) => ({
     isReady: callstack.isReady,
     runtime: callstack.runtime,
+    benchmarkResults: callstack.benchmarkResults,
     startTimestamp: callstack.startTimestamp,
     result: callstack.result,
     error: callstack.error,
@@ -248,6 +260,7 @@ export const selectRuntimeData = createSelector(
   (callstack) => ({
     isReady: callstack.isReady,
     runtime: callstack.runtime,
+    benchmarkResults: callstack.benchmarkResults,
     result: callstack.result,
     error: callstack.error,
   }),

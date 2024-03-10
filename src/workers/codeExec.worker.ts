@@ -133,11 +133,11 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
         const totalTime = performance.now() - startTimestamp;
         const averageTime = totalTime / count;
-        timeData.sort((a, b) => a - b);
-        const medianTime = timeData[Math.floor(count / 2)];
-        const p75Time = timeData[Math.floor(count * 0.75)];
-        const p90Time = timeData[Math.floor(count * 0.9)];
-        const p99Time = timeData[Math.floor(count * 0.99)];
+        const sortedTimeData = timeData.toSorted((a, b) => a - b);
+        const medianTime = sortedTimeData[Math.floor(count / 2)];
+        const p75Time = sortedTimeData[Math.floor(count * 0.75)];
+        const p90Time = sortedTimeData[Math.floor(count * 0.9)];
+        const p99Time = sortedTimeData[Math.floor(count * 0.99)];
 
         const response: CodeBenchmarkResponse = {
           type: "benchmark",
