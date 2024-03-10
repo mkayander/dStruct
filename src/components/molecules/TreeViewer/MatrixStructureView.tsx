@@ -62,7 +62,7 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
             "&[scope='col']": {
               borderBottomWidth: 2,
 
-              "&:first-child": {
+              "&:first-of-type": {
                 borderRightWidth: 2,
               },
             },
