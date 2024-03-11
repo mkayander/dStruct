@@ -32,7 +32,7 @@ import React, { useEffect, useState } from "react";
 import slugify from "slugify";
 import * as yup from "yup";
 
-import { useGetMinimalQuestionDataLazyQuery } from "#/graphql/generated";
+import { useQuestionTitleLazyQuery } from "#/graphql/generated";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
@@ -91,8 +91,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const [problemFetchStatus, setProblemFetchStatus] = useState(
     ProblemFetchStatus.IDLE,
   );
-  const [getProblemData, { loading: isQuestionLoading }] =
-    useGetMinimalQuestionDataLazyQuery({
+  const [getQuestionTitle, { loading: isQuestionLoading }] =
+    useQuestionTitleLazyQuery({
       returnPartialData: true,
     });
 
@@ -246,7 +246,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         return;
       }
 
-      const { data } = await getProblemData({
+      const { data } = await getQuestionTitle({
         variables: {
           titleSlug,
         },
