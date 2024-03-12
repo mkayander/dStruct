@@ -1,3 +1,22 @@
+# [1.285.0](https://github.com/mkayander/dStruct/compare/v1.284.2...v1.285.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* Fixed ignore patterns ([20c5224](https://github.com/mkayander/dStruct/commit/20c522467bbbfced8f86a71f4471c8bb489041cd))
+* Fixed runtime error ([f4433bf](https://github.com/mkayander/dStruct/commit/f4433bf1ea28d10249efc594ba01730978db2a80))
+* Fixed selector ([29dfe54](https://github.com/mkayander/dStruct/commit/29dfe546806da7283be59497b560dcc827140ca2))
+* Rollback superjson version to fix jest issues ([b03975a](https://github.com/mkayander/dStruct/commit/b03975a582f314ad3f6faca46a6eb5a424827241))
+
+
+### Features
+
+* Display benchmark results ([59eef07](https://github.com/mkayander/dStruct/commit/59eef0779b93c22ba2a4b46efc1826ef3c9b3467))
+* Implemented a benchmark char component ([0e3fa22](https://github.com/mkayander/dStruct/commit/0e3fa220406cccd03eccd35bcb4e04a905df063e))
+* Installed MUI X Charts. Updated dependencies. ([8a70216](https://github.com/mkayander/dStruct/commit/8a70216f10627f74fb025c739164a5ed7bd03826))
+* Update question info request ([60f36bc](https://github.com/mkayander/dStruct/commit/60f36bcfb4e86d49a5496c2c119a86c792081523))
+* Updated ESLint packages ([282f91a](https://github.com/mkayander/dStruct/commit/282f91ab5b22e513236de53b84030d931b7b7cde))
+
 ## [1.284.2](https://github.com/mkayander/dStruct/compare/v1.284.1...v1.284.2) (2024-03-06)
 
 
