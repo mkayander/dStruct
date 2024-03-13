@@ -110,6 +110,7 @@ enum ProjectCategory {
   DYNAMIC_PROGRAMMING
   TRIE
   BIT_MANIPULATION
+  MATH
 }
 
 enum ProjectDifficulty {
