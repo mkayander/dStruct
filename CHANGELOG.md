@@ -1,3 +1,10 @@
+# [1.286.0](https://github.com/mkayander/dStruct/compare/v1.285.0...v1.286.0) (2024-03-13)
+
+
+### Features
+
+* Added Math project category ([27860bd](https://github.com/mkayander/dStruct/commit/27860bd545b0dbd074ca0a7eced38a9441045649))
+
 # [1.285.0](https://github.com/mkayander/dStruct/compare/v1.284.2...v1.285.0) (2024-03-12)
 
 
