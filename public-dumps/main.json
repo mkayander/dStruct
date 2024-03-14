@@ -3457,6 +3457,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cltom5s0k0001b2oztab77kr6": {
+      "id": "cltom5s0k0001b2oztab77kr6",
+      "createdAt": "2024-03-12T16:55:43.125Z",
+      "updatedAt": "2024-03-12T16:55:43.125Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Zero Sum Consecutive Nodes from Linked List",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list",
+      "slug": "remove-zero-sum-consecutive-nodes-from-linked-list",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -15155,6 +15169,120 @@
         }
       },
       "description": null
+    },
+    "cltmqb13o0001c8v0e4z8jd7q": {
+      "id": "cltmqb13o0001c8v0e4z8jd7q",
+      "createdAt": "2024-03-11T09:16:14.292Z",
+      "updatedAt": "2024-03-11T09:16:19.449Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 6",
+      "order": 4,
+      "slug": "case-6",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltmqbud30003c8v0hz6eptxk": {
+      "id": "cltmqbud30003c8v0hz6eptxk",
+      "createdAt": "2024-03-11T09:16:52.215Z",
+      "updatedAt": "2024-03-11T09:17:25.422Z",
+      "projectId": "clq3u7w2h0001z3kydkudsuhw",
+      "title": "Case 7",
+      "order": 5,
+      "slug": "case-7",
+      "input": null,
+      "args": {
+        "qEFyBpcJYJ4rWXuQyuyszQ": {
+          "name": "qEFyBpcJYJ4rWXuQyuyszQ",
+          "type": "number",
+          "input": "11",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltom5s0k0002b2oz4mc8wfjh": {
+      "id": "cltom5s0k0002b2oz4mc8wfjh",
+      "createdAt": "2024-03-12T16:55:43.125Z",
+      "updatedAt": "2024-03-12T16:55:56.319Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,0,2,-3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltom66oc0005b2ozv1bg8i3w": {
+      "id": "cltom66oc0005b2ozv1bg8i3w",
+      "createdAt": "2024-03-12T16:56:02.125Z",
+      "updatedAt": "2024-03-12T16:56:06.924Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[5,-3,-4,1,6,-2,-5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltom6djm0007b2ozu04qdl66": {
+      "id": "cltom6djm0007b2ozu04qdl66",
+      "createdAt": "2024-03-12T16:56:11.027Z",
+      "updatedAt": "2024-03-12T16:56:15.061Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,-3,3,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cltom6pkr0009b2ozsav9kdiv": {
+      "id": "cltom6pkr0009b2ozsav9kdiv",
+      "createdAt": "2024-03-12T16:56:26.619Z",
+      "updatedAt": "2024-03-12T16:56:30.610Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,-3,-2]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18129,7 +18257,7 @@
     "clo31vtz90003p60frn27taic": {
       "id": "clo31vtz90003p60frn27taic",
       "createdAt": "2023-10-23T15:26:25.413Z",
-      "updatedAt": "2023-10-23T15:45:03.049Z",
+      "updatedAt": "2024-03-12T16:55:05.621Z",
       "projectId": "clo31vtz80001p60fbs96o22e",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -18283,7 +18411,7 @@
     "cloelwix20003pb0fkeillglc": {
       "id": "cloelwix20003pb0fkeillglc",
       "createdAt": "2023-10-31T17:32:17.989Z",
-      "updatedAt": "2023-10-31T17:36:37.507Z",
+      "updatedAt": "2024-03-12T20:51:40.261Z",
       "projectId": "cloelwix20001pb0fwbpz8ahd",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -19025,14 +19153,14 @@
     "clq3u7w2h0003z3ky6etgghrl": {
       "id": "clq3u7w2h0003z3ky6etgghrl",
       "createdAt": "2023-12-13T13:59:01.913Z",
-      "updatedAt": "2023-12-13T14:08:47.138Z",
+      "updatedAt": "2024-03-12T15:59:16.605Z",
       "projectId": "clq3u7w2h0001z3kydkudsuhw",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number} n\n * @return {string[][]}\n */\nvar solveNQueens = function (n) {\n  const grid = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: n }, () => \".\", null, {\n        parentName: \"grid\",\n        index,\n        colorMap: { Q: \"cyan\" },\n      }),\n    null,\n    { matrixName: \"grid\" },\n  );\n\n  const cols = new Array(n);\n  const offset = n - 1;\n  const posDiag = new Array(n + offset);\n  const negDiag = new Array(n + offset);\n  [cols, posDiag, negDiag].forEach((arr) => arr.setColorMap({ 1: \"green\" }));\n\n  const makeResult = () => grid.map((row) => row.join(\"\"));\n\n  const result = [];\n\n  const backtrack = (row) => {\n    if (row === n) {\n      result.push(makeResult());\n      return;\n    }\n\n    for (let col = 0; col < n; col++) {\n      const pdIndex = row + col;\n      const ndIndex = row - col + offset;\n      if (cols[col] || posDiag[pdIndex] || negDiag[ndIndex]) continue;\n\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 1;\n      grid[row][col] = \"Q\";\n      backtrack(row + 1);\n      grid[row][col] = \".\";\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 0;\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn solveNQueens;\n",
+      "code": "/**\n * @param {number} n\n * @return {string[][]}\n */\nvar solveNQueens = function (n) {\n  const grid = Array.from(\n    { length: n },\n    (_, index) =>\n      Array.from({ length: n }, () => \".\", null, {\n        parentName: \"grid\",\n        index,\n        colorMap: { Q: \"cyan\" },\n      }),\n    null,\n    { matrixName: \"grid\" },\n  );\n  grid.showIndexes(n - 1, n - 1);\n\n  const cols = new Array(n);\n  const offset = n - 1;\n  const posDiag = new Array(n + offset);\n  const negDiag = new Array(n + offset);\n  // [cols, posDiag, negDiag].forEach((arr) => arr.setColorMap({ 1: \"green\" }));\n\n  const makeResult = () => grid.map((row) => row.join(\"\"));\n\n  const result = [];\n\n  const backtrack = (row) => {\n    if (row === n) {\n      result.push(makeResult());\n      return;\n    }\n\n    for (let col = 0; col < n; col++) {\n      const pdIndex = row + col;\n      const ndIndex = row - col + offset;\n      if (cols[col] || posDiag[pdIndex] || negDiag[ndIndex]) continue;\n\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 1;\n      grid[row][col] = \"Q\";\n      backtrack(row + 1);\n      grid[row][col] = \".\";\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 0;\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn solveNQueens;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -20229,7 +20357,7 @@
     "clt8q1sxi00034ts3axs7im1n": {
       "id": "clt8q1sxi00034ts3axs7im1n",
       "createdAt": "2024-03-01T14:00:17.334Z",
-      "updatedAt": "2024-03-01T14:02:09.137Z",
+      "updatedAt": "2024-03-11T09:14:01.989Z",
       "projectId": "clt8q1sxh00014ts3eauv70df",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -20327,14 +20455,14 @@
     "cltbu4bv40009arczpjaf74hx": {
       "id": "cltbu4bv40009arczpjaf74hx",
       "createdAt": "2024-03-03T18:17:32.176Z",
-      "updatedAt": "2024-03-03T18:38:16.527Z",
+      "updatedAt": "2024-03-05T20:30:51.645Z",
       "projectId": "cltbu4bv40007arczoibiugbl",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canPartition = function (nums) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\n  const half = sum / 2;\n  if (!Number.isInteger(half)) return false;\n  console.log(half);\n\n  const dp = new Array(n);\n  const dfs = (i, sum) => {\n    console.log({ i, sum });\n    if (sum === 0) return true;\n    if (i < 0 || sum < 0) return false;\n\n    dp[i] ??= new Array(half + 1);\n    if (dp[i][sum] !== undefined) {\n      nums.setColor(i, null);\n      dp[i].setColor(sum, \"green\");\n      return dp[i][sum];\n    } else {\n      dp[i].setColor(sum, \"cyan\");\n    }\n\n    nums.setColor(i, \"green\");\n    let result = dfs(i - 1, sum - nums[i]);\n\n    nums.setColor(i, \"cyan\");\n    result ||= dfs(i - 1, sum);\n    nums.setColor(i, \"null\");\n\n    dp[i][sum] = result;\n    return result;\n  };\n\n  return dfs(n - 1, half);\n};\n\nreturn canPartition;\n",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(m * n)",
+      "description": "",
+      "code": "/**\r\n * @param {number[]} nums\r\n * @return {boolean}\r\n */\r\nvar canPartition = function (nums) {\r\n  const n = nums.length;\r\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\r\n  const half = sum / 2;\r\n  if (!Number.isInteger(half)) return false;\r\n  console.log(half);\r\n\r\n  const dp = new Array(n);\r\n  dp.showIndexes(n, half);\r\n  const dfs = (i, sum) => {\r\n    console.log({ i, sum });\r\n    if (sum === 0) return true;\r\n    if (i < 0 || sum < 0) return false;\r\n\r\n    dp[i] ??= new Array(half + 1);\r\n    if (dp[i][sum] !== undefined) {\r\n      nums.setColor(i, null);\r\n      dp[i].setColor(sum, \"green\");\r\n      return dp[i][sum];\r\n    } else {\r\n      dp[i].setColor(sum, \"cyan\");\r\n    }\r\n\r\n    nums.setColor(i, \"green\");\r\n    let result = dfs(i - 1, sum - nums[i]);\r\n\r\n    nums.setColor(i, \"cyan\");\r\n    result ||= dfs(i - 1, sum);\r\n    nums.setColor(i, \"null\");\r\n\r\n    dp[i][sum] = result;\r\n    return result;\r\n  };\r\n\r\n  return dfs(n - 1, half);\r\n};\r\n\r\nreturn canPartition;\r\n",
       "pythonCode": null,
       "order": 0
     },
@@ -20351,6 +20479,62 @@
       "code": "/**\n * @param {number[]} tokens\n * @param {number} power\n * @return {number}\n */\nvar bagOfTokensScore = function (tokens, power) {\n  tokens.sort((a, b) => a - b);\n  let low = 0;\n  let high = tokens.length - 1;\n  let score = 0;\n\n  while (low <= high) {\n    if (power >= tokens[low]) {\n      tokens.setColor(low, \"green\");\n      power -= tokens[low++];\n      score++;\n    } else if (low < high && score > 0) {\n      tokens.setColor(high, \"cyan\");\n      power += tokens[high--];\n      score--;\n    } else {\n      return score;\n    }\n    console.log({score, power});\n  }\n\n  return score;\n};\n\nreturn bagOfTokensScore;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "cltes6uqo00016q4hpaeyzrvv": {
+      "id": "cltes6uqo00016q4hpaeyzrvv",
+      "createdAt": "2024-03-05T19:46:49.248Z",
+      "updatedAt": "2024-03-05T20:32:25.260Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Bottom-Up 2D DP",
+      "slug": "bottom-up-2d-dp",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(m * n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canPartition = function (nums) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\n  const half = sum / 2;\n  if (!Number.isInteger(half)) return false;\n\n  const dp = Array.from({ length: n }, () => {\n    const arr = new Array(half + 1);\n    arr.setColorMap?.({ true: \"green\", false: \"cyan\" });\n    return arr;\n  });\n  dp.showIndexes?.(n, half);\n  dp[0][0] = true;\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"green\");\n    for (let sum = 1; sum <= half; sum++) {\n      dp[i][sum] = nums[i] === sum ||\n        dp[i - 1]?.[sum - nums[i]] ||\n        dp[i - 1]?.[sum] || false;\n    }\n  }\n\n  return dp[n - 1][half];\n};\n\nreturn canPartition;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cltetqf5x00036q4h9ptvifrq": {
+      "id": "cltetqf5x00036q4h9ptvifrq",
+      "createdAt": "2024-03-05T20:30:01.797Z",
+      "updatedAt": "2024-03-07T18:47:08.194Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Bottom-Up 1D DP",
+      "slug": "bottom-up-1d-dp",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(m)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canPartition = function (nums) {\n  const n = nums.length;\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\n  const half = sum / 2;\n  if (!Number.isInteger(half)) return false;\n\n  let dp = new Array(half + 1);\n  dp[0] = true;\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const nextRow = new Array(half + 1);\n    nextRow.setColorMap({ true: \"green\" });\n    for (let sum = 1; sum <= half; sum++) {\n      nextRow[sum] = nums[i] === sum || dp[sum - nums[i]] || dp[sum] || false;\n    }\n    dp = nextRow;\n  }\n\n  return dp[half];\n};\n\nreturn canPartition;\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "cltom5s0l0003b2ozqcmezl8g": {
+      "id": "cltom5s0l0003b2ozqcmezl8g",
+      "createdAt": "2024-03-12T16:55:43.125Z",
+      "updatedAt": "2024-03-12T20:51:53.701Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nvar removeZeroSumSublists = function (head) {\n  const sumMap = new Map();\n\n  const dummy = new ListNode(-1);\n  dummy.next = head;\n\n  let prefixSum = 0;\n  let current = dummy;\n  while (current) {\n    prefixSum += current.val;\n    sumMap.set(prefixSum, current);\n    current = current.next;\n  }\n\n  prefixSum = 0;\n  current = dummy;\n  while (current) {\n    prefixSum += current.val;\n    current.next = sumMap.get(prefixSum).next;\n    current = current.next;\n  }\n\n  return dummy.next;\n};\n\nreturn removeZeroSumSublists;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cltom9s2i000bb2oznz94cmom": {
+      "id": "cltom9s2i000bb2oznz94cmom",
+      "createdAt": "2024-03-12T16:58:49.819Z",
+      "updatedAt": "2024-03-13T13:39:59.788Z",
+      "projectId": "cltom5s0k0001b2oztab77kr6",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nvar removeZeroSumSublists = function (head) {\n  const dummy = new ListNode(-1);\n  dummy.next = head;\n\n  let found = true;\n  while (found) {\n    found = false;\n    const map = new Map();\n    let sum = 0;\n    map.set(0, dummy);\n    let current = dummy;\n    while (current.next) {\n      const val = current.next.val;\n      sum += val;\n\n      if (map.has(sum)) {\n        removeInRange(map.get(sum), current.next?.next);\n        found = true;\n        break;\n      }\n\n      map.set(sum, current.next);\n      current = current.next;\n    }\n  }\n\n  return dummy.next;\n};\n\nfunction removeInRange(left, right) {\n  while (left.next !== right) {\n    left.next = left.next.next;\n  }\n}\n\nreturn removeZeroSumSublists;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
