@@ -3471,6 +3471,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clttx3dgf0001tv0pdiwx2p67": {
+      "id": "clttx3dgf0001tv0pdiwx2p67",
+      "createdAt": "2024-03-16T10:00:37.599Z",
+      "updatedAt": "2024-03-16T10:00:37.599Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Contiguous Array",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/contiguous-array",
+      "slug": "contiguous-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -15283,6 +15297,63 @@
         }
       },
       "description": null
+    },
+    "clttx3dgf0002tv0prxhbqgh6": {
+      "id": "clttx3dgf0002tv0prxhbqgh6",
+      "createdAt": "2024-03-16T10:00:37.599Z",
+      "updatedAt": "2024-03-16T10:01:03.050Z",
+      "projectId": "clttx3dgf0001tv0pdiwx2p67",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,0,1,0,0,0,1,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clttx45hi0005tv0p7o6xrxke": {
+      "id": "clttx45hi0005tv0p7o6xrxke",
+      "createdAt": "2024-03-16T10:01:13.926Z",
+      "updatedAt": "2024-03-16T10:01:20.593Z",
+      "projectId": "clttx3dgf0001tv0pdiwx2p67",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,0,0,1,1,1,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clttx4gjn0007tv0pptg2gbcx": {
+      "id": "clttx4gjn0007tv0pptg2gbcx",
+      "createdAt": "2024-03-16T10:01:28.259Z",
+      "updatedAt": "2024-03-16T10:01:32.128Z",
+      "projectId": "clttx3dgf0001tv0pdiwx2p67",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,1,0]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -20511,7 +20582,7 @@
     "cltom5s0l0003b2ozqcmezl8g": {
       "id": "cltom5s0l0003b2ozqcmezl8g",
       "createdAt": "2024-03-12T16:55:43.125Z",
-      "updatedAt": "2024-03-12T20:51:53.701Z",
+      "updatedAt": "2024-03-16T08:22:54.095Z",
       "projectId": "cltom5s0k0001b2oztab77kr6",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -20525,7 +20596,7 @@
     "cltom9s2i000bb2oznz94cmom": {
       "id": "cltom9s2i000bb2oznz94cmom",
       "createdAt": "2024-03-12T16:58:49.819Z",
-      "updatedAt": "2024-03-13T13:39:59.788Z",
+      "updatedAt": "2024-03-15T13:57:33.373Z",
       "projectId": "cltom5s0k0001b2oztab77kr6",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -20535,6 +20606,20 @@
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nvar removeZeroSumSublists = function (head) {\n  const dummy = new ListNode(-1);\n  dummy.next = head;\n\n  let found = true;\n  while (found) {\n    found = false;\n    const map = new Map();\n    let sum = 0;\n    map.set(0, dummy);\n    let current = dummy;\n    while (current.next) {\n      const val = current.next.val;\n      sum += val;\n\n      if (map.has(sum)) {\n        removeInRange(map.get(sum), current.next?.next);\n        found = true;\n        break;\n      }\n\n      map.set(sum, current.next);\n      current = current.next;\n    }\n  }\n\n  return dummy.next;\n};\n\nfunction removeInRange(left, right) {\n  while (left.next !== right) {\n    left.next = left.next.next;\n  }\n}\n\nreturn removeZeroSumSublists;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clttx3dgf0003tv0p7zk7rwu0": {
+      "id": "clttx3dgf0003tv0p7zk7rwu0",
+      "createdAt": "2024-03-16T10:00:37.599Z",
+      "updatedAt": "2024-03-16T10:03:22.690Z",
+      "projectId": "clttx3dgf0001tv0pdiwx2p67",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar findMaxLength = function (nums) {\n  const map = new Map();\n  let sum = 0;\n  let result = 0;\n\n  map.set(0, -1);\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    sum += nums[i] ? 1 : -1;\n    console.log(sum);\n\n    if (map.has(sum)) {\n      map.setColor(sum, \"green\");\n      const length = i - map.get(sum);\n      if (length % 2 === 0) {\n        result = Math.max(result, length);\n      }\n    } else {\n      map.set(sum, i);\n    }\n  }\n\n  return result;\n};\n\nreturn findMaxLength;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
