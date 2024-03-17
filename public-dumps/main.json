@@ -3485,6 +3485,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cltv9y6i50001q742csxyvo0t": {
+      "id": "cltv9y6i50001q742csxyvo0t",
+      "createdAt": "2024-03-17T08:48:16.493Z",
+      "updatedAt": "2024-03-17T08:48:16.493Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Insert Interval",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/insert-interval",
+      "slug": "insert-interval",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -15354,6 +15368,31 @@
         }
       },
       "description": null
+    },
+    "cltv9y6i50002q742lkvgnmpi": {
+      "id": "cltv9y6i50002q742lkvgnmpi",
+      "createdAt": "2024-03-17T08:48:16.493Z",
+      "updatedAt": "2024-03-17T08:49:51.930Z",
+      "projectId": "cltv9y6i50001q742csxyvo0t",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[1,2],[3,5],[6,7],[8,10],[12,16]]",
+          "order": 0
+        },
+        "1SG4WveVMHQa6WenLEYmVB": {
+          "name": "1SG4WveVMHQa6WenLEYmVB",
+          "type": "array",
+          "input": "[4,8]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -20610,7 +20649,7 @@
     "clttx3dgf0003tv0p7zk7rwu0": {
       "id": "clttx3dgf0003tv0p7zk7rwu0",
       "createdAt": "2024-03-16T10:00:37.599Z",
-      "updatedAt": "2024-03-16T10:03:22.690Z",
+      "updatedAt": "2024-03-17T08:47:56.714Z",
       "projectId": "clttx3dgf0001tv0pdiwx2p67",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -20618,6 +20657,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar findMaxLength = function (nums) {\n  const map = new Map();\n  let sum = 0;\n  let result = 0;\n\n  map.set(0, -1);\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n    sum += nums[i] ? 1 : -1;\n    console.log(sum);\n\n    if (map.has(sum)) {\n      map.setColor(sum, \"green\");\n      const length = i - map.get(sum);\n      if (length % 2 === 0) {\n        result = Math.max(result, length);\n      }\n    } else {\n      map.set(sum, i);\n    }\n  }\n\n  return result;\n};\n\nreturn findMaxLength;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cltv9y6i50003q742zgvigq29": {
+      "id": "cltv9y6i50003q742zgvigq29",
+      "createdAt": "2024-03-17T08:48:16.493Z",
+      "updatedAt": "2024-03-17T08:51:21.168Z",
+      "projectId": "cltv9y6i50001q742csxyvo0t",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} intervals\n * @param {number[]} newInterval\n * @return {number[][]}\n */\nvar insert = function (intervals, newInterval) {\n  const result = new Array();\n\n  let current = newInterval;\n  for (let i = 0; i < intervals.length; i++) {\n    intervals.setColor(i, \"green\");\n    if (!current) {\n      result.push(intervals[i]);\n      continue;\n    }\n\n    const [start, end] = intervals[i];\n    const [newStart, newEnd] = current;\n\n    if (\n      (newStart >= start && newStart <= end) ||\n      (start >= newStart && start <= newEnd)\n    ) {\n      current[0] = Math.min(start, newStart);\n      current[1] = Math.max(end, newEnd);\n    } else {\n      if (current[1] < start) {\n        result.push([...current]);\n        current = null;\n      }\n\n      result.push([start, end]);\n    }\n  }\n\n  if (current) result.push([...current]);\n\n  return result;\n};\n\nreturn insert;\n",
       "pythonCode": null,
       "order": 0
     }
