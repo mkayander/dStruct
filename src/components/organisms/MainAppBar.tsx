@@ -65,10 +65,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const pages = [
     {
-      name: LL.BROWSE(),
-      href: "",
-    },
-    {
       name: LL.PLAYGROUND(),
       href: "/playground",
     },
