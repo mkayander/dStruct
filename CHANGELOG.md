@@ -1,3 +1,10 @@
+## [1.286.1](https://github.com/mkayander/dStruct/compare/v1.286.0...v1.286.1) (2024-03-20)
+
+
+### Bug Fixes
+
+* Removed the Browse nav button ([3455bd9](https://github.com/mkayander/dStruct/commit/3455bd91bc8ceb1691fa72a911ad5e1093c608b0))
+
 # [1.286.0](https://github.com/mkayander/dStruct/compare/v1.285.0...v1.286.0) (2024-03-13)
 
 
