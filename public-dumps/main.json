@@ -3555,6 +3555,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clu3x5h9n00015puo8gv0w41z": {
+      "id": "clu3x5h9n00015puo8gv0w41z",
+      "createdAt": "2024-03-23T09:59:57.611Z",
+      "updatedAt": "2024-03-23T09:59:57.611Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reorder List",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/reorder-list",
+      "slug": "reorder-list",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -15562,6 +15576,44 @@
         }
       },
       "description": null
+    },
+    "clu3x5h9n00025puoibvaumic": {
+      "id": "clu3x5h9n00025puoibvaumic",
+      "createdAt": "2024-03-23T09:59:57.611Z",
+      "updatedAt": "2024-03-23T10:01:10.270Z",
+      "projectId": "clu3x5h9n00015puo8gv0w41z",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clu3x74fv00055puoub4foicd": {
+      "id": "clu3x74fv00055puoub4foicd",
+      "createdAt": "2024-03-23T10:01:14.299Z",
+      "updatedAt": "2024-03-23T10:01:17.740Z",
+      "projectId": "clu3x5h9n00015puo8gv0w41z",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[1,2,3,4]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -20916,7 +20968,7 @@
     "clu07qsil000312x5zbeug118": {
       "id": "clu07qsil000312x5zbeug118",
       "createdAt": "2024-03-20T19:45:23.421Z",
-      "updatedAt": "2024-03-20T19:47:24.069Z",
+      "updatedAt": "2024-03-23T09:59:21.246Z",
       "projectId": "clu07qsil000112x5uasgc9uv",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -20938,6 +20990,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {boolean}\n */\nvar isPalindrome = function (head) {\n  if (!head.next) return true;\n\n  let left = head;\n  let right = head.next;\n\n  while (right?.next) {\n    left.setColor(\"blue\");\n    right.setColor(\"blue\");\n    left = left.next;\n    right = right.next.next;\n  }\n\n  left.next = reverse(left.next);\n  right = left.next;\n  left = head;\n\n  while (right) {\n    if (left.val !== right.val) return false;\n    left.setColor(\"green\");\n    right.setColor(\"green\");\n    left = left.next;\n    right = right.next;\n  }\n\n  return true;\n};\n\nfunction reverse(head) {\n  let newHead = null;\n  let current = head;\n\n  while (current) {\n    current.setColor(\"cyan\");\n    const tmp = current.next;\n    current.next = newHead;\n    newHead = current;\n    current = tmp;\n  }\n\n  return newHead;\n}\n\nreturn isPalindrome;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu3x5h9n00035puofpdq8d4q": {
+      "id": "clu3x5h9n00035puofpdq8d4q",
+      "createdAt": "2024-03-23T09:59:57.611Z",
+      "updatedAt": "2024-03-23T10:03:13.455Z",
+      "projectId": "clu3x5h9n00015puo8gv0w41z",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {void} Do not return anything, modify head in-place instead.\n */\nvar reorderList = function (head) {\n  if (!head.next) return head;\n\n  let left = head;\n  let right = head.next;\n\n  while (right?.next) {\n    left = left.next;\n    right = right.next.next;\n  }\n\n  left.next = reverse(left.next);\n\n  right = left.next;\n  left.next = null;\n  left = head;\n\n  while (right) {\n    left.setColor(\"cyan\");\n    const tmp = left.next;\n    left.next = right;\n    const tmp2 = right.next;\n    right.next = tmp;\n\n    left = tmp;\n    right = tmp2;\n  }\n};\n\nfunction reverse(head) {\n  let newHead = null;\n  let current = head;\n\n  while (current) {\n    current.setColor(\"orange\");\n    const tmp = current.next;\n    current.next = newHead;\n    newHead = current;\n    current = tmp;\n  }\n\n  return newHead;\n}\n\nreturn reorderList;\n",
       "pythonCode": null,
       "order": 0
     }
