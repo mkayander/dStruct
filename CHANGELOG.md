@@ -1,3 +1,10 @@
+# [1.287.0](https://github.com/mkayander/dStruct/compare/v1.286.1...v1.287.0) (2024-03-25)
+
+
+### Features
+
+* Migrate to PostgreSQL ([4779d72](https://github.com/mkayander/dStruct/commit/4779d729884d30a1b4d41905f601608f423462f4))
+
 ## [1.286.1](https://github.com/mkayander/dStruct/compare/v1.286.0...v1.286.1) (2024-03-20)
 
 
