@@ -1,3 +1,10 @@
+## [1.288.1](https://github.com/mkayander/dStruct/compare/v1.288.0...v1.288.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* Stringify numbers directly ([708152a](https://github.com/mkayander/dStruct/commit/708152aa3251efe0fc62e26db9cbf000dfb93b7e))
+
 # [1.288.0](https://github.com/mkayander/dStruct/compare/v1.287.0...v1.288.0) (2024-03-25)
 
 
