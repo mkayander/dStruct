@@ -1,3 +1,10 @@
+## [1.288.2](https://github.com/mkayander/dStruct/compare/v1.288.1...v1.288.2) (2024-03-27)
+
+
+### Reverts
+
+* Revert "fix: Stringify numbers directly" ([c52eea8](https://github.com/mkayander/dStruct/commit/c52eea8f143303894381781d681acfadcf0d04a9))
+
 ## [1.288.1](https://github.com/mkayander/dStruct/compare/v1.288.0...v1.288.1) (2024-03-26)
 
 
