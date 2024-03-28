@@ -20,8 +20,6 @@ type GLTFResult = GLTF & {
   // animations: GLTFAction[];
 };
 
-// type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh']>>
-
 const assetPath = "/assets/binary_tree-transformed.glb";
 
 export function BinaryTreeModel(props: JSX.IntrinsicElements["group"]) {
