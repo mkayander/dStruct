@@ -17,7 +17,6 @@ type GLTFResult = GLTF & {
     ["Main-LR"]: THREE.MeshStandardMaterial;
     Emit: THREE.MeshStandardMaterial;
   };
-  // animations: GLTFAction[];
 };
 
 const assetPath = "/assets/binary_tree-transformed.glb";
