@@ -3569,6 +3569,160 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clu5gmq220001qprasxkwfpr3": {
+      "id": "clu5gmq220001qprasxkwfpr3",
+      "createdAt": "2024-03-24T11:53:01.035Z",
+      "updatedAt": "2024-03-24T11:53:01.035Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find the Duplicate Number",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-the-duplicate-number",
+      "slug": "find-the-duplicate-number",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu7amagb0005cu3325bjzw2g": {
+      "id": "clu7amagb0005cu3325bjzw2g",
+      "createdAt": "2024-03-25T18:40:15.468Z",
+      "updatedAt": "2024-03-25T18:40:15.468Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sum of Two Integers",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/sum-of-two-integers",
+      "slug": "sum-of-two-integers",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu7dz3av00018ex2nghqljtc": {
+      "id": "clu7dz3av00018ex2nghqljtc",
+      "createdAt": "2024-03-25T20:14:11.575Z",
+      "updatedAt": "2024-03-25T20:14:11.575Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Root of Number",
+      "category": "BINARY_SEARCH",
+      "difficulty": "MEDIUM",
+      "lcLink": "",
+      "slug": "root-of-number",
+      "description": "Calculate n-th root of a number with 0.001 precision.",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu8cu2rl00015kqd3ryzhi7s": {
+      "id": "clu8cu2rl00015kqd3ryzhi7s",
+      "createdAt": "2024-03-26T12:30:04.161Z",
+      "updatedAt": "2024-03-26T12:30:04.161Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "First Missing Positive",
+      "category": "ARRAY",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/first-missing-positive",
+      "slug": "first-missing-positive",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu8mfap4000186znkefqvjqr": {
+      "id": "clu8mfap4000186znkefqvjqr",
+      "createdAt": "2024-03-26T16:58:30.744Z",
+      "updatedAt": "2024-03-26T16:58:30.744Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Prison Cells After N Days",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/prison-cells-after-n-days",
+      "slug": "prison-cells-after-n-days",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu8ot1ng0001g2aojqo88ik6": {
+      "id": "clu8ot1ng0001g2aojqo88ik6",
+      "createdAt": "2024-03-26T18:05:11.452Z",
+      "updatedAt": "2024-03-26T18:05:11.452Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Length of the Longest Valid Substring",
+      "category": "TRIE",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/length-of-the-longest-valid-substring",
+      "slug": "length-of-the-longest-valid-substring",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clu9m75yo0001oh0otndfyp5b": {
+      "id": "clu9m75yo0001oh0otndfyp5b",
+      "createdAt": "2024-03-27T09:39:57.552Z",
+      "updatedAt": "2024-03-27T09:39:57.552Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Subarray Product Less Than K",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/subarray-product-less-than-k",
+      "slug": "subarray-product-less-than-k",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clua1v09e0001xbqcjqm9mphz": {
+      "id": "clua1v09e0001xbqcjqm9mphz",
+      "createdAt": "2024-03-27T16:58:24.134Z",
+      "updatedAt": "2024-03-27T16:58:24.134Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Detect Squares",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/detect-squares",
+      "slug": "detect-squares",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluazzgro0001exgvjtl1fnw1": {
+      "id": "cluazzgro0001exgvjtl1fnw1",
+      "createdAt": "2024-03-28T08:53:39.108Z",
+      "updatedAt": "2024-03-28T08:53:39.108Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Network Delay Time",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/network-delay-time",
+      "slug": "network-delay-time",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluct8h5h0001p872p8g1pqvh": {
+      "id": "cluct8h5h0001p872p8g1pqvh",
+      "createdAt": "2024-03-29T15:20:14.549Z",
+      "updatedAt": "2024-03-29T15:20:14.549Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Critical Connections in a Network",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/critical-connections-in-a-network",
+      "slug": "critical-connections-in-a-network",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clud7d5r90001mz5fyrh92wek": {
+      "id": "clud7d5r90001mz5fyrh92wek",
+      "createdAt": "2024-03-29T21:55:47.685Z",
+      "updatedAt": "2024-03-29T21:55:47.685Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Spiral Matrix II",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/spiral-matrix-ii",
+      "slug": "spiral-matrix-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -4582,6 +4736,25 @@
           "type": "number",
           "input": "8",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "cllmgq82w0001l608oacrsl5s": {
+      "id": "cllmgq82w0001l608oacrsl5s",
+      "createdAt": "2023-08-22T15:30:28.329Z",
+      "updatedAt": "2023-08-22T15:30:28.329Z",
+      "projectId": "cllmgp8ea0001l60897rrm668",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "1726",
+          "order": 0
         }
       },
       "description": null
@@ -9064,25 +9237,6 @@
       },
       "description": null
     },
-    "cllmgq82w0001l608oacrsl5s": {
-      "id": "cllmgq82w0001l608oacrsl5s",
-      "createdAt": "2023-08-22T15:30:28.329Z",
-      "updatedAt": "2023-08-22T15:30:28.329Z",
-      "projectId": "cllmgp8ea0001l60897rrm668",
-      "title": "Case 2",
-      "order": 1,
-      "slug": "case-2",
-      "input": null,
-      "args": {
-        "array": {
-          "name": "array",
-          "type": "number",
-          "input": "1726",
-          "order": 0
-        }
-      },
-      "description": null
-    },
     "cllmgsb290007l608js96wujh": {
       "id": "cllmgsb290007l608js96wujh",
       "createdAt": "2023-08-22T15:32:05.506Z",
@@ -10652,6 +10806,25 @@
       },
       "description": null
     },
+    "clsdi52t90002y91vrlzjugc7": {
+      "id": "clsdi52t90002y91vrlzjugc7",
+      "createdAt": "2024-02-08T17:38:01.725Z",
+      "updatedAt": "2024-02-08T17:42:19.523Z",
+      "projectId": "clsdi52t90001y91vmiokd3kl",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8hzQ9XJTd6S7TT7ygBAjuh": {
+          "name": "8hzQ9XJTd6S7TT7ygBAjuh",
+          "type": "number",
+          "input": "12",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cln3iigm00005o80f44ycfb18": {
       "id": "cln3iigm00005o80f44ycfb18",
       "createdAt": "2023-09-28T18:32:12.697Z",
@@ -11628,6 +11801,88 @@
           "name": "s5DXbTK7J4e61shjdSPScH",
           "type": "array",
           "input": "[\"Graph\", \"shortestPath\", \"shortestPath\", \"addEdge\", \"shortestPath\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cls8o3auq0002fd8ubspghhii": {
+      "id": "cls8o3auq0002fd8ubspghhii",
+      "createdAt": "2024-02-05T08:25:45.650Z",
+      "updatedAt": "2024-02-05T08:26:25.372Z",
+      "projectId": "cls8o3auq0001fd8uuosn0juk",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5RvAiZNsQdTE1dTyzaWcwR": {
+          "name": "5RvAiZNsQdTE1dTyzaWcwR",
+          "type": "string",
+          "input": "ABC",
+          "order": 1
+        },
+        "c8QTAGut9irVkwTLDXXQ3T": {
+          "name": "c8QTAGut9irVkwTLDXXQ3T",
+          "type": "string",
+          "input": "ADOBECODEBANC",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cls92rw7g00027svysba6i5bh": {
+      "id": "cls92rw7g00027svysba6i5bh",
+      "createdAt": "2024-02-05T15:16:47.693Z",
+      "updatedAt": "2024-02-05T15:17:56.217Z",
+      "projectId": "cls92rw7g00017svyo2nr98p9",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "loveleetcode",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsak996x0002m2kh602k1k88": {
+      "id": "clsak996x0002m2kh602k1k88",
+      "createdAt": "2024-02-06T16:13:57.322Z",
+      "updatedAt": "2024-02-06T16:15:32.375Z",
+      "projectId": "clsak996x0001m2khrg8s5a5o",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsc30z9w00021ucyjcm1xbxa": {
+      "id": "clsc30z9w00021ucyjcm1xbxa",
+      "createdAt": "2024-02-07T17:47:10.100Z",
+      "updatedAt": "2024-02-07T18:31:51.537Z",
+      "projectId": "clsc30z9w00011ucyela5zc6t",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "tree",
           "order": 0
         }
       },
@@ -13124,6 +13379,25 @@
       },
       "description": null
     },
+    "clsc4mgzf00051ucyi9wx0545": {
+      "id": "clsc4mgzf00051ucyi9wx0545",
+      "createdAt": "2024-02-07T18:31:52.443Z",
+      "updatedAt": "2024-02-07T18:31:57.859Z",
+      "projectId": "clsc30z9w00011ucyela5zc6t",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "cccaaa",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clqnr9ufv0002117fm6eel9jl": {
       "id": "clqnr9ufv0002117fm6eel9jl",
       "createdAt": "2023-12-27T12:31:57.787Z",
@@ -14156,126 +14430,6 @@
           "name": "bfZouLVFzcyinvBCkmjNCh",
           "type": "array",
           "input": "[1,4,1,5,7,3,6,1,9,9,3]",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "cls8o3auq0002fd8ubspghhii": {
-      "id": "cls8o3auq0002fd8ubspghhii",
-      "createdAt": "2024-02-05T08:25:45.650Z",
-      "updatedAt": "2024-02-05T08:26:25.372Z",
-      "projectId": "cls8o3auq0001fd8uuosn0juk",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "5RvAiZNsQdTE1dTyzaWcwR": {
-          "name": "5RvAiZNsQdTE1dTyzaWcwR",
-          "type": "string",
-          "input": "ABC",
-          "order": 1
-        },
-        "c8QTAGut9irVkwTLDXXQ3T": {
-          "name": "c8QTAGut9irVkwTLDXXQ3T",
-          "type": "string",
-          "input": "ADOBECODEBANC",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "cls92rw7g00027svysba6i5bh": {
-      "id": "cls92rw7g00027svysba6i5bh",
-      "createdAt": "2024-02-05T15:16:47.693Z",
-      "updatedAt": "2024-02-05T15:17:56.217Z",
-      "projectId": "cls92rw7g00017svyo2nr98p9",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "array": {
-          "name": "array",
-          "type": "string",
-          "input": "loveleetcode",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "clsak996x0002m2kh602k1k88": {
-      "id": "clsak996x0002m2kh602k1k88",
-      "createdAt": "2024-02-06T16:13:57.322Z",
-      "updatedAt": "2024-02-06T16:15:32.375Z",
-      "projectId": "clsak996x0001m2khrg8s5a5o",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "array": {
-          "name": "array",
-          "type": "array",
-          "input": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "clsc30z9w00021ucyjcm1xbxa": {
-      "id": "clsc30z9w00021ucyjcm1xbxa",
-      "createdAt": "2024-02-07T17:47:10.100Z",
-      "updatedAt": "2024-02-07T18:31:51.537Z",
-      "projectId": "clsc30z9w00011ucyela5zc6t",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "array": {
-          "name": "array",
-          "type": "string",
-          "input": "tree",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "clsc4mgzf00051ucyi9wx0545": {
-      "id": "clsc4mgzf00051ucyi9wx0545",
-      "createdAt": "2024-02-07T18:31:52.443Z",
-      "updatedAt": "2024-02-07T18:31:57.859Z",
-      "projectId": "clsc30z9w00011ucyela5zc6t",
-      "title": "Case 2",
-      "order": 1,
-      "slug": "case-2",
-      "input": null,
-      "args": {
-        "array": {
-          "name": "array",
-          "type": "string",
-          "input": "cccaaa",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "clsdi52t90002y91vrlzjugc7": {
-      "id": "clsdi52t90002y91vrlzjugc7",
-      "createdAt": "2024-02-08T17:38:01.725Z",
-      "updatedAt": "2024-02-08T17:42:19.523Z",
-      "projectId": "clsdi52t90001y91vmiokd3kl",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "8hzQ9XJTd6S7TT7ygBAjuh": {
-          "name": "8hzQ9XJTd6S7TT7ygBAjuh",
-          "type": "number",
-          "input": "12",
           "order": 0
         }
       },
@@ -15614,6 +15768,489 @@
         }
       },
       "description": null
+    },
+    "clu5gmq220002qprardky5gg5": {
+      "id": "clu5gmq220002qprardky5gg5",
+      "createdAt": "2024-03-24T11:53:01.035Z",
+      "updatedAt": "2024-03-24T11:53:54.711Z",
+      "projectId": "clu5gmq220001qprasxkwfpr3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "array",
+          "input": "[1,3,4,2,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clu7amagb0006cu332rciu34t": {
+      "id": "clu7amagb0006cu332rciu34t",
+      "createdAt": "2024-03-25T18:40:15.468Z",
+      "updatedAt": "2024-03-25T18:46:27.622Z",
+      "projectId": "clu7amagb0005cu3325bjzw2g",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8ypv8mRWXDiAiGdkpXqrUQ": {
+          "name": "8ypv8mRWXDiAiGdkpXqrUQ",
+          "type": "binaryTree",
+          "input": "[]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluct9g0t0005p872g7lvzcdp": {
+      "id": "cluct9g0t0005p872g7lvzcdp",
+      "createdAt": "2024-03-29T15:20:59.741Z",
+      "updatedAt": "2024-03-29T15:21:09.204Z",
+      "projectId": "cluct8h5h0001p872p8g1pqvh",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "1nRBmFA34C8MpSK8N1skLq": {
+          "name": "1nRBmFA34C8MpSK8N1skLq",
+          "type": "array",
+          "input": "[[0,1],[0,2],[1,2],[3,4],[3,5],[4,5],[1,3]]",
+          "order": 1
+        },
+        "m8Jocrv2HCf59Muk3NTJuu": {
+          "name": "m8Jocrv2HCf59Muk3NTJuu",
+          "type": "number",
+          "input": "7",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clua5ktpo0005otcj4tdonmot": {
+      "id": "clua5ktpo0005otcj4tdonmot",
+      "createdAt": "2024-03-27T18:42:27.565Z",
+      "updatedAt": "2024-03-27T18:42:56.418Z",
+      "projectId": "cloa9pbmt0001oy0fiv73izx4",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[3,4,5,1,2,3,4,5,6,7,8,9]",
+          "order": 0
+        },
+        "sdPNLB3VNcjvRVoEimzF2c": {
+          "name": "sdPNLB3VNcjvRVoEimzF2c",
+          "type": "binaryTree",
+          "input": "[2,7,8]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clua5lwia000113n6abfpoer9": {
+      "id": "clua5lwia000113n6abfpoer9",
+      "createdAt": "2024-03-27T18:43:17.841Z",
+      "updatedAt": "2024-03-27T18:43:24.202Z",
+      "projectId": "cloa9pbmt0001oy0fiv73izx4",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[3,4,5,1,2,3,4,5,6,7,8,9]",
+          "order": 0
+        },
+        "sdPNLB3VNcjvRVoEimzF2c": {
+          "name": "sdPNLB3VNcjvRVoEimzF2c",
+          "type": "binaryTree",
+          "input": "[1,5,6]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu7dz3av00028ex2zooakno8": {
+      "id": "clu7dz3av00028ex2zooakno8",
+      "createdAt": "2024-03-25T20:14:11.575Z",
+      "updatedAt": "2024-03-25T20:23:34.581Z",
+      "projectId": "clu7dz3av00018ex2nghqljtc",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2GMnzw3PFvG9VJZCnnWc54": {
+          "name": "2GMnzw3PFvG9VJZCnnWc54",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "ti66Ky2yUAcUzGEvrDbLRN": {
+          "name": "ti66Ky2yUAcUzGEvrDbLRN",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu8ot1ni0002g2aonoyp2i6r": {
+      "id": "clu8ot1ni0002g2aonoyp2i6r",
+      "createdAt": "2024-03-26T18:05:11.452Z",
+      "updatedAt": "2024-03-26T18:05:42.586Z",
+      "projectId": "clu8ot1ng0001g2aojqo88ik6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "oGJYSYA4PK6MHxbNkfyBSh": {
+          "name": "oGJYSYA4PK6MHxbNkfyBSh",
+          "type": "string",
+          "input": "cbaaaabc",
+          "order": 0
+        },
+        "tHpCbkf1XgDteHbwD9Lvx8": {
+          "name": "tHpCbkf1XgDteHbwD9Lvx8",
+          "type": "array",
+          "input": "[\"aaa\",\"cb\"]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu7eb9ap00058ex22f7s3on4": {
+      "id": "clu7eb9ap00058ex22f7s3on4",
+      "createdAt": "2024-03-25T20:23:39.217Z",
+      "updatedAt": "2024-03-25T20:23:43.816Z",
+      "projectId": "clu7dz3av00018ex2nghqljtc",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "2GMnzw3PFvG9VJZCnnWc54": {
+          "name": "2GMnzw3PFvG9VJZCnnWc54",
+          "type": "number",
+          "input": "160",
+          "order": 0
+        },
+        "ti66Ky2yUAcUzGEvrDbLRN": {
+          "name": "ti66Ky2yUAcUzGEvrDbLRN",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu8cu2rl00025kqdmx73y2b7": {
+      "id": "clu8cu2rl00025kqdmx73y2b7",
+      "createdAt": "2024-03-26T12:30:04.161Z",
+      "updatedAt": "2024-03-26T12:30:21.379Z",
+      "projectId": "clu8cu2rl00015kqd3ryzhi7s",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,4,-1,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clu9me8v70005oh0o4r7y3wem": {
+      "id": "clu9me8v70005oh0o4r7y3wem",
+      "createdAt": "2024-03-27T09:45:27.908Z",
+      "updatedAt": "2024-03-27T09:46:41.808Z",
+      "projectId": "clu9m75yo0001oh0otndfyp5b",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "ip9TKk5zahtBkoUB6MmqhZ": {
+          "name": "ip9TKk5zahtBkoUB6MmqhZ",
+          "type": "number",
+          "input": "100",
+          "order": 1
+        },
+        "jec86vsWiLmupKZPXCpq1w": {
+          "name": "jec86vsWiLmupKZPXCpq1w",
+          "type": "array",
+          "input": "[10,5,2,6,1,10,50,30,3,2,10,1,1,300,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clu8mfap4000286zn45032gy4": {
+      "id": "clu8mfap4000286zn45032gy4",
+      "createdAt": "2024-03-26T16:58:30.744Z",
+      "updatedAt": "2024-03-26T16:59:07.389Z",
+      "projectId": "clu8mfap4000186znkefqvjqr",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,0,0,1,0,0,1,0]",
+          "order": 0
+        },
+        "e8zJcWR6MymDyEmNo2JeBf": {
+          "name": "e8zJcWR6MymDyEmNo2JeBf",
+          "type": "number",
+          "input": "7",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu8mg3rz0001o4539hmu1o75": {
+      "id": "clu8mg3rz0001o4539hmu1o75",
+      "createdAt": "2024-03-26T16:59:08.445Z",
+      "updatedAt": "2024-03-26T16:59:13.784Z",
+      "projectId": "clu8mfap4000186znkefqvjqr",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,0,0,1,0,0,1,0]",
+          "order": 0
+        },
+        "e8zJcWR6MymDyEmNo2JeBf": {
+          "name": "e8zJcWR6MymDyEmNo2JeBf",
+          "type": "number",
+          "input": "1000000000",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clu8mg9hf0003o453uy54fo0z": {
+      "id": "clu8mg9hf0003o453uy54fo0z",
+      "createdAt": "2024-03-26T16:59:15.843Z",
+      "updatedAt": "2024-03-26T16:59:48.235Z",
+      "projectId": "clu8mfap4000186znkefqvjqr",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,0,0,1,0,0,1,0]",
+          "order": 0
+        },
+        "e8zJcWR6MymDyEmNo2JeBf": {
+          "name": "e8zJcWR6MymDyEmNo2JeBf",
+          "type": "number",
+          "input": "17377374",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clua1v09e0002xbqcpi0bt6wt": {
+      "id": "clua1v09e0002xbqcpi0bt6wt",
+      "createdAt": "2024-03-27T16:58:24.134Z",
+      "updatedAt": "2024-03-27T16:58:28.428Z",
+      "projectId": "clua1v09e0001xbqcjqm9mphz",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "btnM1tzycrjidY5G1CDmhY": {
+          "name": "btnM1tzycrjidY5G1CDmhY",
+          "type": "binaryTree",
+          "input": "[]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clu9m75yo0002oh0odhhxcyq2": {
+      "id": "clu9m75yo0002oh0odhhxcyq2",
+      "createdAt": "2024-03-27T09:39:57.552Z",
+      "updatedAt": "2024-03-27T09:40:36.243Z",
+      "projectId": "clu9m75yo0001oh0otndfyp5b",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "ip9TKk5zahtBkoUB6MmqhZ": {
+          "name": "ip9TKk5zahtBkoUB6MmqhZ",
+          "type": "number",
+          "input": "100",
+          "order": 1
+        },
+        "jec86vsWiLmupKZPXCpq1w": {
+          "name": "jec86vsWiLmupKZPXCpq1w",
+          "type": "array",
+          "input": "[10,5,2,6]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clud7ea7z0001pwwb5jjqnmc6": {
+      "id": "clud7ea7z0001pwwb5jjqnmc6",
+      "createdAt": "2024-03-29T21:56:40.126Z",
+      "updatedAt": "2024-03-29T21:56:42.512Z",
+      "projectId": "clud7d5r90001mz5fyrh92wek",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "rPX5ZpEe3Bf9oHF7USyPxP": {
+          "name": "rPX5ZpEe3Bf9oHF7USyPxP",
+          "type": "number",
+          "input": "6",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluazzgro0002exgvvfmdrqjn": {
+      "id": "cluazzgro0002exgvvfmdrqjn",
+      "createdAt": "2024-03-28T08:53:39.108Z",
+      "updatedAt": "2024-03-28T08:55:32.013Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "21KPeG4f4F3xDQXf1Hx5sd": {
+          "name": "21KPeG4f4F3xDQXf1Hx5sd",
+          "type": "number",
+          "input": "2",
+          "order": 2
+        },
+        "31dPaHPgtnRZ4bz193ngo2": {
+          "name": "31dPaHPgtnRZ4bz193ngo2",
+          "type": "number",
+          "input": "4",
+          "order": 1
+        },
+        "7wySHV7Apd17FumQ6PE7BJ": {
+          "name": "7wySHV7Apd17FumQ6PE7BJ",
+          "type": "array",
+          "input": "[[2,1,1],[2,3,1],[3,4,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluct8h5h0002p8725r7nq8sx": {
+      "id": "cluct8h5h0002p8725r7nq8sx",
+      "createdAt": "2024-03-29T15:20:14.549Z",
+      "updatedAt": "2024-03-29T15:20:46.019Z",
+      "projectId": "cluct8h5h0001p872p8g1pqvh",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1nRBmFA34C8MpSK8N1skLq": {
+          "name": "1nRBmFA34C8MpSK8N1skLq",
+          "type": "array",
+          "input": "[[0,1],[1,2],[2,0],[1,3]]",
+          "order": 1
+        },
+        "m8Jocrv2HCf59Muk3NTJuu": {
+          "name": "m8Jocrv2HCf59Muk3NTJuu",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clud7d5ra0002mz5fzdrtlnjh": {
+      "id": "clud7d5ra0002mz5fzdrtlnjh",
+      "createdAt": "2024-03-29T21:55:47.685Z",
+      "updatedAt": "2024-03-29T21:56:18.814Z",
+      "projectId": "clud7d5r90001mz5fyrh92wek",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "rPX5ZpEe3Bf9oHF7USyPxP": {
+          "name": "rPX5ZpEe3Bf9oHF7USyPxP",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clud7eof80003pwwb4uyu07zq": {
+      "id": "clud7eof80003pwwb4uyu07zq",
+      "createdAt": "2024-03-29T21:56:58.532Z",
+      "updatedAt": "2024-03-29T21:57:03.007Z",
+      "projectId": "clud7d5r90001mz5fyrh92wek",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "rPX5ZpEe3Bf9oHF7USyPxP": {
+          "name": "rPX5ZpEe3Bf9oHF7USyPxP",
+          "type": "number",
+          "input": "12",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clud7f68x0005pwwbmw6r2xjy": {
+      "id": "clud7f68x0005pwwbmw6r2xjy",
+      "createdAt": "2024-03-29T21:57:21.633Z",
+      "updatedAt": "2024-03-29T21:57:25.387Z",
+      "projectId": "clud7d5r90001mz5fyrh92wek",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "rPX5ZpEe3Bf9oHF7USyPxP": {
+          "name": "rPX5ZpEe3Bf9oHF7USyPxP",
+          "type": "number",
+          "input": "20",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -15698,6 +16335,20 @@
       "spaceComplexity": null,
       "description": "",
       "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function traverseTree(head) {\r\n  const inOrder = inOrderTraversal(head, []);\r\n  const preOrder = preOrderTraversal(head, []);\r\n  const postOrder = postOrderTraversal(head, []);\r\n\r\n  return {\r\n    inOrder,\r\n    preOrder,\r\n    postOrder\r\n  }\r\n};\r\n\r\nfunction inOrderTraversal(node, array) {\r\n  node.left && inOrderTraversal(node.left, array);\r\n\r\n  array.push(node.val);\r\n  node.setColor(\"green\", \"blink\");\r\n\r\n  node.right && inOrderTraversal(node.right, array);\r\n\r\n  return array;\r\n}\r\n\r\nfunction preOrderTraversal(node, array) {\r\n  array.push(node.val);\r\n  node.setColor(\"orange\");\r\n\r\n  node.left && preOrderTraversal(node.left, array);\r\n  node.right && preOrderTraversal(node.right, array);\r\n\r\n  return array;\r\n}\r\n\r\nfunction postOrderTraversal(node, array) {\r\n  node.left && postOrderTraversal(node.left, array);\r\n  node.right && postOrderTraversal(node.right, array);\r\n\r\n  array.push(node.val);\r\n  node.setColor(\"cyan\", \"blink\");\r\n\r\n  return array;\r\n}\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clhkkqm8o0004l6084trsv9bu": {
+      "id": "clhkkqm8o0004l6084trsv9bu",
+      "createdAt": "2023-05-12T13:08:23.448Z",
+      "updatedAt": "2023-05-12T13:08:23.448Z",
+      "projectId": "clhkkqm8o0001l608pvvukeqo",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function mostPoints(questions) {\n  const N = questions.length;\n  const dp = Array.from({ length: N }, () => 0);\n  dp[N - 1] = questions[N - 1][0];\n\n  for (let i = N - 2; i >= 0; i--) {\n    questions.setColor(i, \"cyan\");\n    dp[i] = questions[i][0];\n    const skip = questions[i][1];\n    if (i + skip + 1 < N) {\n      dp.setColor(i + skip + 1, \"green\")\n      dp[i] += dp[i + skip + 1];\n    }\n\n    // dp[i] = max(solve it, skip it)\n    dp[i] = Math.max(dp[i], dp[i + 1]);\n  }\n\n  return dp[0];\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
       "pythonCode": null,
       "order": 0
     },
@@ -16555,20 +17206,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clhkkqm8o0004l6084trsv9bu": {
-      "id": "clhkkqm8o0004l6084trsv9bu",
-      "createdAt": "2023-05-12T13:08:23.448Z",
-      "updatedAt": "2023-05-12T13:08:23.448Z",
-      "projectId": "clhkkqm8o0001l608pvvukeqo",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function mostPoints(questions) {\n  const N = questions.length;\n  const dp = Array.from({ length: N }, () => 0);\n  dp[N - 1] = questions[N - 1][0];\n\n  for (let i = N - 2; i >= 0; i--) {\n    questions.setColor(i, \"cyan\");\n    dp[i] = questions[i][0];\n    const skip = questions[i][1];\n    if (i + skip + 1 < N) {\n      dp.setColor(i + skip + 1, \"green\")\n      dp[i] += dp[i + skip + 1];\n    }\n\n    // dp[i] = max(solve it, skip it)\n    dp[i] = Math.max(dp[i], dp[i + 1]);\n  }\n\n  return dp[0];\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clhm79zeu0004lh083l9x4blc": {
       "id": "clhm79zeu0004lh083l9x4blc",
       "createdAt": "2023-05-13T16:27:04.710Z",
@@ -16835,24 +17472,24 @@
       "pythonCode": null,
       "order": 0
     },
-    "cliykar910004l408e6gvqw7p": {
-      "id": "cliykar910004l408e6gvqw7p",
-      "createdAt": "2023-06-16T12:44:32.245Z",
-      "updatedAt": "2023-06-16T12:44:32.245Z",
-      "projectId": "cliykar910001l408hby6mzcq",
-      "title": "Big Int",
-      "slug": "big-int",
+    "cll3x9qkm0003mc08anm6l9e7": {
+      "id": "cll3x9qkm0003mc08anm6l9e7",
+      "createdAt": "2023-08-09T16:05:55.271Z",
+      "updatedAt": "2023-08-09T16:05:55.271Z",
+      "projectId": "cll3x9qkm0001mc08h31swm3e",
+      "title": "Solution 1",
+      "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar numOfWays = function (nums) {\n  const m = nums.length;\n  const mod = BigInt(1e9 + 7);\n\n  // Table of Pascal's triangle\n  const table = window.Array.from({ length: m }, () =>\n    Array.from({ length: m }, () => 0n)\n  );\n  for (let i = 0; i < m; i++) {\n    table[i][0] = table[i][i] = 1n;\n  }\n  for (let i = 2; i < m; i++) {\n    for (let j = 1; j < i; j++) {\n      table[i][j] = (table[i - 1][j - 1] + table[i - 1][j]) % mod;\n    }\n  }\n\n  const dfs = (nums) => {\n    const m = nums.length;\n    if (m < 3) return 1n;\n\n    const rootNum = nums[0];\n    const leftNodes = [];\n    const rightNodes = [];\n    for (let i = 1; i < m; i++) {\n      if (nums[i] < rootNum) {\n        leftNodes.push(nums[i]);\n      } else {\n        rightNodes.push(nums[i]);\n      }\n    }\n    const leftWays = dfs(leftNodes) % mod;\n    const rightWays = dfs(rightNodes) % mod;\n\n    return (\n      (((leftWays * rightWays) % mod) * table[m - 1][leftNodes.length]) % mod\n    );\n  };\n\n  return (dfs(nums.map((num) => BigInt(num))) - 1n) % mod;\n};\n\nreturn numOfWays;\n",
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} p\n * @return {number}\n */\nvar minimizeMax = function (nums, p) {\n  if (p === 0) return 0;\n\n  nums.sort((a, b) => a - b);\n\n  const findWithDiff = (diff) => {\n    let count = 0;\n    for (let i = 0; i < nums.length - 1; i++) {\n      if (nums[i + 1] - nums[i] <= diff) {\n        count++;\n        i++;\n      }\n    }\n\n    return count;\n  };\n\n  let left = 0;\n  let right = nums.at(-1) - nums[0]; // max difference\n\n  while (left < right) {\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    nums.setColor(middle, \"green\");\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    const validPairs = findWithDiff(middle);\n\n    if (validPairs < p) {\n      left = middle + 1;\n    } else {\n      right = middle;\n    }\n  }\n\n  return left;\n};\n\nreturn minimizeMax;\n",
       "pythonCode": null,
       "order": 0
     },
     "cliyky6kj0001ju09i1ag24ln": {
       "id": "cliyky6kj0001ju09i1ag24ln",
       "createdAt": "2023-06-16T13:02:45.187Z",
-      "updatedAt": "2023-06-16T13:02:45.187Z",
+      "updatedAt": "2024-03-29T19:39:53.161Z",
       "projectId": "cliykar910001l408hby6mzcq",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -17465,20 +18102,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "cll3x9qkm0003mc08anm6l9e7": {
-      "id": "cll3x9qkm0003mc08anm6l9e7",
-      "createdAt": "2023-08-09T16:05:55.271Z",
-      "updatedAt": "2023-08-09T16:05:55.271Z",
-      "projectId": "cll3x9qkm0001mc08h31swm3e",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} p\n * @return {number}\n */\nvar minimizeMax = function (nums, p) {\n  if (p === 0) return 0;\n\n  nums.sort((a, b) => a - b);\n\n  const findWithDiff = (diff) => {\n    let count = 0;\n    for (let i = 0; i < nums.length - 1; i++) {\n      if (nums[i + 1] - nums[i] <= diff) {\n        count++;\n        i++;\n      }\n    }\n\n    return count;\n  };\n\n  let left = 0;\n  let right = nums.at(-1) - nums[0]; // max difference\n\n  while (left < right) {\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    nums.setColor(middle, \"green\");\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    const validPairs = findWithDiff(middle);\n\n    if (validPairs < p) {\n      left = middle + 1;\n    } else {\n      right = middle;\n    }\n  }\n\n  return left;\n};\n\nreturn minimizeMax;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cll5d2kdz0003mj08d6gp9r7o": {
       "id": "cll5d2kdz0003mj08d6gp9r7o",
       "createdAt": "2023-08-10T16:16:00.695Z",
@@ -17700,6 +18323,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar reorganizeString = function (s) {\n  const freqMap = new Map();\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n  }\n\n  const maxHeap = new PriorityQueue({ compare: (a, b) => b[1] - a[1] });\n  for (const entry of freqMap) maxHeap.enqueue(entry);\n\n  console.log({freqMap}, maxHeap.toArray());\n\n  let result = \"\";\n  while (maxHeap.size() >= 2) {\n    const prev = maxHeap.dequeue();\n    const current = maxHeap.dequeue();\n\n    console.log({prev, current});\n\n    result += prev[0];\n    result += current[0];\n\n    prev[1]--;\n    current[1]--;\n\n    if (prev[1] > 0) maxHeap.enqueue(prev);\n    if (current[1] > 0) maxHeap.enqueue(current);\n  }\n\n  if (!maxHeap.isEmpty()) {\n    const last = maxHeap.dequeue();\n    if (last[1] > 1) return \"\";\n    result += last[0];\n  }\n\n  return result;\n};\n\nreturn reorganizeString;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu7amagb0007cu33qt0ey2n6": {
+      "id": "clu7amagb0007cu33qt0ey2n6",
+      "createdAt": "2024-03-25T18:40:15.468Z",
+      "updatedAt": "2024-03-25T20:12:00.774Z",
+      "projectId": "clu7amagb0005cu3325bjzw2g",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} a\n * @param {number} b\n * @return {number}\n */\nvar getSum = function (a, b) {\n  while (a & b) {\n    const xor = a ^ b;\n    a = (a & b) << 1;\n    b = xor;\n  }\n\n  return a | b;\n};\n\nreturn getSum;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -18666,20 +19303,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "var countVowelPermutation = function (n) {\n  const MOD = 1e9 + 7;\n\n  let a = 1,\n    e = 1,\n    i = 1,\n    o = 1,\n    u = 1;\n\n  for (let j = 1; j < n; j++) {\n    let a_next = e;\n    let e_next = (a + i) % MOD;\n    let i_next = (a + e + o + u) % MOD;\n    let o_next = (i + u) % MOD;\n    let u_next = a;\n\n    (a = a_next), (e = e_next), (i = i_next), (o = o_next), (u = u_next);\n  }\n\n  return (a + e + i + o + u) % MOD;\n};\n\nreturn countVowelPermutation;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "cloa9pbmt0003oy0fmn6pqibh": {
-      "id": "cloa9pbmt0003oy0fmn6pqibh",
-      "createdAt": "2023-10-28T16:39:41.859Z",
-      "updatedAt": "2023-10-28T16:41:37.548Z",
-      "projectId": "cloa9pbmt0001oy0fiv73izx4",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {TreeNode} subRoot\n * @return {boolean}\n */\nvar isSubtree = function (root, subRoot) {\n  if (!!root !== !!subRoot) return false;\n  root.setColor(\"cyan\");\n  subRoot.setColor(\"cyan\");\n\n  if (sameTree(root, subRoot)) return true;\n\n  if (isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot))\n    return true;\n\n  return false;\n};\n\nfunction sameTree(source, target) {\n  const stack = [[source, target]];\n  while (stack.length > 0) {\n    const [a, b] = stack.pop();\n    if (a?.val !== b?.val) return false;\n    if (!a && !b) continue;\n    a.setColor(\"green\");\n    b.setColor(\"green\");\n\n    stack.push([a.right, b.right]);\n    stack.push([a.left, b.left]);\n  }\n\n  return true;\n}\n\nreturn isSubtree;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -20996,7 +21619,7 @@
     "clu3x5h9n00035puofpdq8d4q": {
       "id": "clu3x5h9n00035puofpdq8d4q",
       "createdAt": "2024-03-23T09:59:57.611Z",
-      "updatedAt": "2024-03-23T10:03:13.455Z",
+      "updatedAt": "2024-03-24T11:42:07.357Z",
       "projectId": "clu3x5h9n00015puo8gv0w41z",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -21004,6 +21627,230 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {void} Do not return anything, modify head in-place instead.\n */\nvar reorderList = function (head) {\n  if (!head.next) return head;\n\n  let left = head;\n  let right = head.next;\n\n  while (right?.next) {\n    left = left.next;\n    right = right.next.next;\n  }\n\n  left.next = reverse(left.next);\n\n  right = left.next;\n  left.next = null;\n  left = head;\n\n  while (right) {\n    left.setColor(\"cyan\");\n    const tmp = left.next;\n    left.next = right;\n    const tmp2 = right.next;\n    right.next = tmp;\n\n    left = tmp;\n    right = tmp2;\n  }\n};\n\nfunction reverse(head) {\n  let newHead = null;\n  let current = head;\n\n  while (current) {\n    current.setColor(\"orange\");\n    const tmp = current.next;\n    current.next = newHead;\n    newHead = current;\n    current = tmp;\n  }\n\n  return newHead;\n}\n\nreturn reorderList;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu5gmq230003qpraohy9baw3": {
+      "id": "clu5gmq230003qpraohy9baw3",
+      "createdAt": "2024-03-24T11:53:01.035Z",
+      "updatedAt": "2024-03-25T18:39:52.252Z",
+      "projectId": "clu5gmq220001qprasxkwfpr3",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar findDuplicate = function (nums) {\n  let slow = 0;\n  let fast = 0;\n\n  do {\n    slow = nums[slow];\n    fast = nums[nums[fast]];\n  } while (slow !== fast);\n\n  slow = 0;\n  while (slow !== fast) {\n    slow = nums[slow];\n    fast = nums[fast];\n  }\n\n  return slow;\n};\n\nreturn findDuplicate;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu7dz3av00038ex2y6f2ylbm": {
+      "id": "clu7dz3av00038ex2y6f2ylbm",
+      "createdAt": "2024-03-25T20:14:11.575Z",
+      "updatedAt": "2024-03-29T19:39:10.576Z",
+      "projectId": "clu7dz3av00018ex2nghqljtc",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "function root(x, n) {\n  if (x === 0) return 0;\n\n  let min = 1;\n  let max = x;\n\n  let avg = 1;\n\n  while (max - min >= 0.0001) {\n    avg = (min + max) / 2;\n    const num = Math.pow(avg, n);\n    if (num === x) return avg;\n    if (num < x) {\n      min = avg;\n    } else {\n      max = avg;\n    }\n  }\n\n  return Math.round(avg * 1000) / 1000;\n}\n\nreturn root;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu8ms2wq000586zndq42zubm": {
+      "id": "clu8ms2wq000586zndq42zubm",
+      "createdAt": "2024-03-26T17:08:27.194Z",
+      "updatedAt": "2024-03-26T17:10:21.106Z",
+      "projectId": "clu8mfap4000186znkefqvjqr",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} cells\n * @param {number} n\n * @return {number[]}\n */\nvar prisonAfterNDays = function (cells, n) {\n  const seen = new Map();\n  const getKey = (row) => row.join(\",\");\n  let isFastForwarded = false;\n\n  while (n > 0) {\n    if (!isFastForwarded) {\n      const key = getKey(cells);\n      if (seen.has(key)) {\n        const cycleLength = seen.get(key) - n;\n        n %= cycleLength;\n        console.log({cycleLength, n});\n        isFastForwarded = true;\n        if (!n) break;\n      } else {\n        seen.set(key, n);\n      }\n    }\n\n    cells = getNextDay(cells);\n    n--;\n  }\n\n  return cells;\n};\n\nfunction getNextDay(row) {\n  const nextRow = new Array(8);\n  for (let i = 0; i < 8; i++) {\n    nextRow[i] = row[i - 1] === row[i + 1] ? 1 : 0;\n  }\n\n  return nextRow;\n}\n\nreturn prisonAfterNDays;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clu8cu2rl00035kqdnpwyxrmo": {
+      "id": "clu8cu2rl00035kqdnpwyxrmo",
+      "createdAt": "2024-03-26T12:30:04.161Z",
+      "updatedAt": "2024-03-26T12:32:17.857Z",
+      "projectId": "clu8cu2rl00015kqd3ryzhi7s",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function (nums) {\n  const n = nums.length;\n\n  for (let i = 0; i < nums.length; i++) {\n    if (nums[i] < 0) nums[i] = 0;\n  }\n\n  for (let i = 0; i < nums.length; i++) {\n    const index = Math.abs(nums[i]) - 1;\n    if (!Number.isFinite(index)) continue;\n\n    if (nums[index] > 0) {\n      nums[index] *= -1;\n    } else if (nums[index] === 0) {\n      nums[index] = -Infinity;\n    }\n  }\n\n  for (let i = 0; i < nums.length; i++) {\n    if (nums[i] >= 0) return i + 1;\n  }\n\n  return n + 1;\n};\n\nreturn firstMissingPositive;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu8mfap4000386zntclfzjw0": {
+      "id": "clu8mfap4000386zntclfzjw0",
+      "createdAt": "2024-03-26T16:58:30.744Z",
+      "updatedAt": "2024-03-26T17:08:23.825Z",
+      "projectId": "clu8mfap4000186znkefqvjqr",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} cells\n * @param {number} n\n * @return {number[]}\n */\nvar prisonAfterNDays = function (cells, n) {\n  n = n % 14 || 14;\n  let row = cells;\n\n  for (let day = 0; day < n; day++) {\n    const nextRow = new Array(8);\n    for (let i = 0; i < 8; i++) {\n      nextRow[i] = row[i - 1] === row[i + 1] ? 1 : 0;\n    }\n    row = nextRow;\n  }\n\n  return row;\n};\n\nreturn prisonAfterNDays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu8eknac0001h9mfjcotap5g": {
+      "id": "clu8eknac0001h9mfjcotap5g",
+      "createdAt": "2024-03-26T13:18:43.414Z",
+      "updatedAt": "2024-03-26T16:57:51.058Z",
+      "projectId": "clu8cu2rl00015kqd3ryzhi7s",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function (nums) {\n  const n = nums.length;\n\n  let i = 0;\n  while (i < n) {\n    const num = nums[i];\n    const index = nums[i] - 1;\n    if (num > 0 && num <= n && nums[index] !== num) {\n      [nums[index], nums[i]] = [nums[i], nums[index]];\n    } else {\n      i++;\n    }\n  }\n\n  for (i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    if (num !== i + 1) return i + 1;\n  }\n\n  return n + 1;\n};\n\nreturn firstMissingPositive;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clu8ot1ni0003g2aoc7imymfu": {
+      "id": "clu8ot1ni0003g2aoc7imymfu",
+      "createdAt": "2024-03-26T18:05:11.452Z",
+      "updatedAt": "2024-03-26T18:12:18.296Z",
+      "projectId": "clu8ot1ng0001g2aojqo88ik6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} word\n * @param {string[]} forbidden\n * @return {number}\n */\nvar longestValidSubstring = function (word, forbidden) {\n  const n = word.length;\n  let result = 0;\n  let left = n - 1;\n  let right = n - 1;\n\n  const trie = buildTrie(forbidden);\n\n  const findWord = () => {\n    if (right < left) return false;\n    let current = trie;\n    for (let i = left; i <= right; i++) {\n      const char = word[i];\n      if (!current.children[char]) return false;\n      current.children.setColor(char, \"cyan\");\n      current.children.setColor(char, null);\n\n      current = current.children[char];\n      if (current.isEnd) return true;\n    }\n\n    return false;\n  };\n\n  for (left; left >= 0; left--) {\n    word.setColor(left, \"green\");\n    while (findWord()) {\n      word.setColor(right, null);\n      right--;\n    }\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nclass Node extends Object {\n  constructor() {\n    super();\n    this.children = new Object();\n  }\n}\n\nfunction buildTrie(words) {\n  const root = new Node();\n\n  for (const word of words) {\n    let current = root;\n    for (const char of word) {\n      current.children[char] ??= new Node();\n      current = current.children[char];\n    }\n    current.isEnd = true;\n  }\n\n  return root;\n}\n\nreturn longestValidSubstring;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clua1v09e0003xbqc07n5qimq": {
+      "id": "clua1v09e0003xbqc07n5qimq",
+      "createdAt": "2024-03-27T16:58:24.134Z",
+      "updatedAt": "2024-03-27T18:33:44.148Z",
+      "projectId": "clua1v09e0001xbqcjqm9mphz",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getSumOfNodes(head) {\n  if (head === null) return 0;\n\n  head.setColor(\"green\");\n\n  const left = getSumOfNodes(head.left);\n  const right = getSumOfNodes(head.right);\n\n  head.setColor(null);\n\n  return head.val + left + right;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu8plozh00015c0ev44inaaj": {
+      "id": "clu8plozh00015c0ev44inaaj",
+      "createdAt": "2024-03-26T18:27:28.047Z",
+      "updatedAt": "2024-03-27T09:39:34.040Z",
+      "projectId": "clu8ot1ng0001g2aojqo88ik6",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} word\n * @param {string[]} forbidden\n * @return {number}\n */\nvar longestValidSubstring = function (word, forbidden) {\n  const n = word.length;\n  const set = new Set();\n  forbidden.forEach((str) => set.add(str));\n  let result = 0;\n\n  let left = n - 1;\n  let right = n - 1;\n  for (left; left >= 0; left--) {\n    word.setColor(left, \"green\");\n    for (let j = left; j <= Math.min(right, left + 9); j++) {\n      word.setColor(j, \"cyan\");\n      word.setColor(j, null);\n      const substring = word.slice(left, j + 1);\n      if (set.has(substring)) {\n        right = j - 1;\n        word.setColor(right, \"blue\");\n        set.setColor(substring, \"red\");\n        set.setColor(substring, null);\n        break;\n      }\n    }\n\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn longestValidSubstring;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cloa9pbmt0003oy0fmn6pqibh": {
+      "id": "cloa9pbmt0003oy0fmn6pqibh",
+      "createdAt": "2023-10-28T16:39:41.859Z",
+      "updatedAt": "2024-03-27T18:34:16.129Z",
+      "projectId": "cloa9pbmt0001oy0fiv73izx4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {TreeNode} subRoot\n * @return {boolean}\n */\nvar isSubtree = function (root, subRoot) {\n  if (!!root !== !!subRoot) return false;\n  root.setColor(\"cyan\");\n  subRoot.setColor(\"cyan\");\n\n  if (sameTree(root, subRoot)) return true;\n\n  if (isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot))\n    return true;\n\n  return false;\n};\n\nfunction sameTree(source, target) {\n  const stack = [[source, target]];\n  while (stack.length > 0) {\n    const [a, b] = stack.pop();\n    if (a?.val !== b?.val) return false;\n    if (!a && !b) continue;\n    a.setColor(\"green\");\n    b.setColor(\"green\");\n\n    stack.push([a.right, b.right]);\n    stack.push([a.left, b.left]);\n  }\n\n  return true;\n}\n\nreturn isSubtree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clu9m75yo0003oh0oj0lrjvpb": {
+      "id": "clu9m75yo0003oh0oj0lrjvpb",
+      "createdAt": "2024-03-27T09:39:57.552Z",
+      "updatedAt": "2024-03-27T16:57:36.328Z",
+      "projectId": "clu9m75yo0001oh0otndfyp5b",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar numSubarrayProductLessThanK = function (nums, k) {\n  let result = 0;\n  let left = 0;\n  let right = 0;\n\n  const v = new Object();\n  v.current = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"green\");\n    v.current *= nums[right];\n    while (v.current >= k && left < right) {\n      nums.setColor(left, null);\n      v.current /= nums[left++];\n    }\n    if (v.current < k) {\n      const length = right - left + 1;\n      result += length;\n    }\n  }\n\n  return result;\n};\n\nreturn numSubarrayProductLessThanK;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clua5afoi00018rn4n9rfsl71": {
+      "id": "clua5afoi00018rn4n9rfsl71",
+      "createdAt": "2024-03-27T18:34:22.805Z",
+      "updatedAt": "2024-03-28T08:53:24.287Z",
+      "projectId": "cloa9pbmt0001oy0fiv73izx4",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {TreeNode} subRoot\n * @return {boolean}\n */\nvar isSubtree = function (root, subRoot) {\n  const targetHash = getTreeHash(subRoot);\n  console.log({targetHash});\n\n  const findMatch = (node) => {\n    if (!node) return [false, getHash(node)];\n    node.setColor(\"cyan\");\n\n    const left = findMatch(node.left);\n    if (left[0]) return left;\n\n    const right = findMatch(node.right);\n    if (right[0]) return right;\n\n    const hashpair = getHash(node, left[1], right[1]);\n    const isFound = hashpair.every((hash, i) => hash === targetHash[i]);\n    if (isFound) {\n      console.log(hashpair);\n      node.setColor(\"green\");\n    }\n\n    return [isFound, hashpair];\n  };\n\n  return findMatch(root)[0];\n};\n\nconst MOD_1 = 1e7 + 7;\nconst MOD_2 = 1e7 + 13;\n\nfunction getHash(node, left, right) {\n  if (!node) return [3, 7];\n\n  const left1 = (left[0] << 5) % MOD_1;\n  const right1 = (right[0] << 1) % MOD_1;\n  const left2 = (left[1] << 7) % MOD_2;\n  const right2 = (right[1] << 1) % MOD_2;\n\n  const hashPair = [\n    (left1 + right1 + node.val) % MOD_1,\n    (left2 + right2 + node.val) % MOD_2,\n  ];\n\n  return hashPair;\n}\n\nfunction getTreeHash(node) {\n  if (!node) return getHash(node);\n  node.setColor(\"blue\");\n\n  const left = getTreeHash(node.left);\n  const right = getTreeHash(node.right);\n\n  const hashpair = getHash(node, left, right);\n\n  return hashpair;\n}\n\nreturn isSubtree;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cluazzgro0003exgvrsveg4ru": {
+      "id": "cluazzgro0003exgvrsveg4ru",
+      "createdAt": "2024-03-28T08:53:39.108Z",
+      "updatedAt": "2024-03-28T08:58:25.969Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} times\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nvar networkDelayTime = function (times, n, k) {\n  const adjList = new Array(n + 1);\n  for (let i = 0; i < times.length; i++) {\n    times.setColor(i, \"cyan\");\n    const [from, to, delay] = times[i];\n    (adjList[from] ??= new Array()).push([to, delay]);\n  }\n\n  const delays = new Array(n + 1).fill(Infinity);\n  delays[k] = 0;\n\n  const pq = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  pq.enqueue([k, 0]);\n\n  while (!pq.isEmpty()) {\n    const [node, delay] = pq.dequeue();\n    if (!adjList[node] || delay > delays[node]) continue;\n\n    for (const [next, cost] of adjList[node]) {\n      const newDelay = delay + cost;\n      if (newDelay >= delays[next]) continue;\n\n      delays[next] = newDelay;\n      pq.enqueue([next, newDelay]);\n    }\n  }\n\n  let result = 0;\n  for (let i = 1; i <= n; i++) {\n    if (!Number.isFinite(delays[i])) return -1;\n\n    result = Math.max(result, delays[i]);\n  }\n\n  return result;\n};\n\nclass PriorityQueue {\n  constructor({ compare }) {\n    this.comparator = compare;\n    this.arr = new Array();\n  }\n\n  enqueue(item) {\n    this.arr.push(item);\n    this.arr.sort(this.comparator);\n  }\n\n  dequeue() {\n    return this.arr.shift();\n  }\n\n  isEmpty() {\n    return this.arr.length === 0;\n  }\n}\n\nreturn networkDelayTime;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluct8h5h0003p8729ic2o585": {
+      "id": "cluct8h5h0003p8729ic2o585",
+      "createdAt": "2024-03-29T15:20:14.549Z",
+      "updatedAt": "2024-03-29T15:23:43.666Z",
+      "projectId": "cluct8h5h0001p872p8g1pqvh",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} connections\n * @return {number[][]}\n */\nvar criticalConnections = function (n, connections) {\n  const adjList = new Array(n);\n  for (const [from, to] of connections) {\n    (adjList[from] ??= new Array()).push(to);\n    (adjList[to] ??= new Array()).push(from);\n  }\n\n  const mins = new Array(n).fill(Infinity);\n  const result = [];\n\n  const dfs = (node, rank, parent) => {\n    if (Number.isFinite(mins[node])) return mins[node];\n    mins[node] = rank;\n\n    if (adjList[node]) {\n      for (const next of adjList[node]) {\n        if (next === parent) continue;\n        adjList[node].setColor(next, \"green\");\n\n        const nextMinRank = dfs(next, rank + 1, node);\n\n        if (nextMinRank > rank) {\n          result.push([node, next]);\n        }\n\n        mins[node] = Math.min(mins[node], nextMinRank);\n\n        adjList[node].setColor(next, null);\n      }\n    }\n\n    return mins[node];\n  };\n\n  dfs(0, 0, -1);\n\n  return result;\n};\n\nreturn criticalConnections;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cliykar910004l408e6gvqw7p": {
+      "id": "cliykar910004l408e6gvqw7p",
+      "createdAt": "2023-06-16T12:44:32.245Z",
+      "updatedAt": "2024-03-29T19:39:51.928Z",
+      "projectId": "cliykar910001l408hby6mzcq",
+      "title": "Big Int",
+      "slug": "big-int",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar numOfWays = function (nums) {\n  const m = nums.length;\n  const mod = BigInt(1e9 + 7);\n\n  // Table of Pascal's triangle\n  const table = window.Array.from({ length: m }, () =>\n    Array.from({ length: m }, () => 0n)\n  );\n  for (let i = 0; i < m; i++) {\n    table[i][0] = table[i][i] = 1n;\n  }\n  for (let i = 2; i < m; i++) {\n    for (let j = 1; j < i; j++) {\n      table[i][j] = (table[i - 1][j - 1] + table[i - 1][j]) % mod;\n    }\n  }\n\n  const dfs = (nums) => {\n    const m = nums.length;\n    if (m < 3) return 1n;\n\n    const rootNum = nums[0];\n    const leftNodes = [];\n    const rightNodes = [];\n    for (let i = 1; i < m; i++) {\n      if (nums[i] < rootNum) {\n        leftNodes.push(nums[i]);\n      } else {\n        rightNodes.push(nums[i]);\n      }\n    }\n    const leftWays = dfs(leftNodes) % mod;\n    const rightWays = dfs(rightNodes) % mod;\n\n    return (\n      (((leftWays * rightWays) % mod) * table[m - 1][leftNodes.length]) % mod\n    );\n  };\n\n  return (dfs(nums.map((num) => BigInt(num))) - 1n) % mod;\n};\n\nreturn numOfWays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clud7d5rb0003mz5fl1rq8i0r": {
+      "id": "clud7d5rb0003mz5fl1rq8i0r",
+      "createdAt": "2024-03-29T21:55:47.685Z",
+      "updatedAt": "2024-03-31T19:04:04.327Z",
+      "projectId": "clud7d5r90001mz5fyrh92wek",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {number[][]}\n */\nvar generateMatrix = function (n) {\n  const matrix = Array.from({ length: n }, () => new Uint16Array(n));\n  const max = n * n;\n  let m = n;\n\n  let dir = 1;\n  let row = 0;\n  let col = -1;\n  let current = 1;\n  while (current <= max) {\n    for (let i = 0; i < n; i++) {\n      col += dir;\n      matrix[row][col] = current++;\n    }\n    m--;\n\n    for (let i = 0; i < m; i++) {\n      row += dir;\n      matrix[row][col] = current++;\n    }\n    n--;\n\n    dir *= -1;\n  }\n\n  return matrix;\n};\n\nreturn generateMatrix;\n",
       "pythonCode": null,
       "order": 0
     }
