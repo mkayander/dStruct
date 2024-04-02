@@ -17346,20 +17346,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "clhxeo0lv0004la08pzluqvip": {
-      "id": "clhxeo0lv0004la08pzluqvip",
-      "createdAt": "2023-05-21T12:39:24.691Z",
-      "updatedAt": "2023-05-21T12:39:24.691Z",
-      "projectId": "clhxeo0lv0001la0892tsbt2u",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function longestCommonSubsequence(text1, text2) {\r\n  if (text1.length > text2.length) {\r\n    [text1, text2] = [text2, text1];\r\n  }\r\n\r\n  const N = text1.length;\r\n\r\n  let previous = Array.from({length: N + 1}, () => 0);\r\n  let current = Array.from({length: N + 1}, () => 0);\r\n\r\n  // Iterate through each column, starting from the last one.\r\n  for (let col = text2.length - 1; col >= 0; col--) {\r\n    for (let row = text1.length - 1; row >= 0; row--) {\r\n      if (text1[row] === text2[col]) {\r\n        current[row] = 1 + previous[row + 1];\r\n      } else {\r\n        current[row] = Math.max(previous[row], current[row + 1]);\r\n      }\r\n    }\r\n\r\n    // The current column becomes the previous one, and vice versa\r\n    [previous, current] = [current, previous];\r\n  }\r\n\r\n  return previous[0];\r\n};\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clhxeuvqq0007la08413i4o3u": {
       "id": "clhxeuvqq0007la08413i4o3u",
       "createdAt": "2023-05-21T12:44:44.979Z",
@@ -18533,20 +18519,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "const END_CHAR = \"*\";\n\n/**\n * @param {string} s\n * @param {string[]} dictionary\n * @return {number}\n */\nvar minExtraChar = function (s, dictionary) {\n  const n = s.length;\n  const trie = {};\n\n  const addWordToTrie = (word) => {\n    let current = trie;\n    for (const char of word) {\n      current[char] ??= {};\n      current = current[char];\n    }\n    current[END_CHAR] = true;\n  };\n\n  for (let i = 0; i < dictionary.length; i++) {\n    dictionary.setColor(i, \"cyan\");\n    addWordToTrie(dictionary[i]);\n  }\n\n  console.log(trie)\n\n  const dp = new Array(n + 1);\n  dp[n] = 0;\n\n  for (let start = n - 1; start >= 0; start--) {\n    dp[start] = dp[start + 1] + 1;\n    let node = trie;\n    for (let end = start; end < n; end++) {\n      s.setColor(end, \"green\");\n      const char = s[end];\n      if (!(char in node)) break;\n      node = node[char];\n      if (END_CHAR in node) {\n          dp[start] = Math.min(dp[start], dp[end + 1]);\n      }\n      s.setColor(end, null);\n    }\n  }\n\n  return dp[0];\n};\n\nreturn minExtraChar;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clm3thk030003mn0hpdu0vw0m": {
-      "id": "clm3thk030003mn0hpdu0vw0m",
-      "createdAt": "2023-09-03T18:59:43.875Z",
-      "updatedAt": "2023-09-03T18:59:43.875Z",
-      "projectId": "clm3thk030001mn0hxvjpcpct",
-      "title": "1D DP",
-      "slug": "dp-1d",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = new Array(n).fill(1);\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[col] += dp[col - 1];\n    }\n  }\n\n  return dp.at(-1);\n};\n\nreturn uniquePaths;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -19781,20 +19753,6 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar maxFrequency = function (nums, k) {\n  nums.sort((a, b) => a - b);\n\n  let sum = 0;\n  let left = 0;\n\n  for (let right = 0; right < nums.length; right++) {\n    const target = nums[right];\n    sum += target;\n\n    if ((right - left + 1) * target - sum > k && left < right) {\n      sum -= nums[left++];\n    }\n  }\n\n  return nums.length - left;\n};\n\nreturn maxFrequency;\n",
       "pythonCode": null,
       "order": 1
-    },
-    "clp5rkovh0003pi0fl3xurg1e": {
-      "id": "clp5rkovh0003pi0fl3xurg1e",
-      "createdAt": "2023-11-19T17:40:50.285Z",
-      "updatedAt": "2023-11-19T17:41:05.057Z",
-      "projectId": "clp5rkovh0001pi0fguiifafo",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findRedundantConnection = function (edges) {\n  const par = Array.from({ length: edges.length + 1 }, (_, i) => i);\n  const ranks = new Array(edges.length + 1).fill(1);\n\n  const find = (node) => {\n    let parent = par[node];\n\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n\n    return parent;\n  };\n\n  // returns false if already merged\n  const union = (node1, node2) => {\n    const parent1 = find(node1);\n    const parent2 = find(node2);\n\n    if (parent1 === parent2) return false;\n\n    if (ranks[parent1] > ranks[parent2]) {\n      par[parent2] = parent1;\n      ranks[parent1] += ranks[parent2];\n    } else {\n      par[parent1] = parent2;\n      ranks[parent2] += ranks[parent1];\n    }\n\n    return true;\n  };\n\n  for (const [from, to] of edges) {\n    if (!union(from, to)) {\n      return [from, to];\n    }\n  }\n};\n\nreturn findRedundantConnection;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clpctzhuy000312p9jhq5wkd7": {
       "id": "clpctzhuy000312p9jhq5wkd7",
@@ -21042,20 +21000,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clsrtbjv7000510pekhsa8t4t": {
-      "id": "clsrtbjv7000510pekhsa8t4t",
-      "createdAt": "2024-02-18T17:59:46.004Z",
-      "updatedAt": "2024-02-18T18:08:30.219Z",
-      "projectId": "clsrtbjv7000310pe8zjq24ve",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number} n\n * @param {number[][]} meetings\n * @return {number}\n */\nvar mostBooked = function (n, meetings) {\n  const roomsMeetingCount = new Uint32Array(n);\n  const roomsSchedule = new Uint32Array(n);\n\n  meetings.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n\n  for (let i = 0; i < meetings.length; i++) {\n    meetings.setColor(i, \"green\");\n    const [start, end] = meetings[i];\n    let earliestRoom = -1;\n    let earliestTime = Infinity;\n    let freeRoomFound = false;\n\n    for (let i = 0; i < n; i++) {\n      if (roomsSchedule[i] <= start) {\n        roomsMeetingCount[i]++;\n        roomsSchedule[i] = end;\n        freeRoomFound = true;\n        break;\n      }\n\n      if (roomsSchedule[i] < earliestTime) {\n        earliestTime = roomsSchedule[i];\n        earliestRoom = i;\n      }\n    }\n\n    if (freeRoomFound === false) {\n      roomsMeetingCount[earliestRoom]++;\n      roomsSchedule[earliestRoom] += end - start;\n    }\n  }\n\n  let roomNum = 0;\n  let max = -1;\n  for (let i = 0; i < n; i++) {\n    if (roomsMeetingCount[i] > max) {\n      max = roomsMeetingCount[i];\n      roomNum = i;\n    }\n  }\n\n  return roomNum;\n};\n\nreturn mostBooked;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clsso7vn600035nua705vmzt9": {
       "id": "clsso7vn600035nua705vmzt9",
       "createdAt": "2024-02-19T08:24:42.738Z",
@@ -21815,7 +21759,7 @@
     "cluct8h5h0003p8729ic2o585": {
       "id": "cluct8h5h0003p8729ic2o585",
       "createdAt": "2024-03-29T15:20:14.549Z",
-      "updatedAt": "2024-03-29T15:23:43.666Z",
+      "updatedAt": "2024-04-02T18:04:06.385Z",
       "projectId": "cluct8h5h0001p872p8g1pqvh",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -21851,6 +21795,62 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @return {number[][]}\n */\nvar generateMatrix = function (n) {\n  const matrix = Array.from({ length: n }, () => new Uint16Array(n));\n  const max = n * n;\n  let m = n;\n\n  let dir = 1;\n  let row = 0;\n  let col = -1;\n  let current = 1;\n  while (current <= max) {\n    for (let i = 0; i < n; i++) {\n      col += dir;\n      matrix[row][col] = current++;\n    }\n    m--;\n\n    for (let i = 0; i < m; i++) {\n      row += dir;\n      matrix[row][col] = current++;\n    }\n    n--;\n\n    dir *= -1;\n  }\n\n  return matrix;\n};\n\nreturn generateMatrix;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clhxeo0lv0004la08pzluqvip": {
+      "id": "clhxeo0lv0004la08pzluqvip",
+      "createdAt": "2023-05-21T12:39:24.691Z",
+      "updatedAt": "2024-04-02T09:12:58.186Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function longestCommonSubsequence(text1, text2) {\r\n  if (text1.length > text2.length) {\r\n    [text1, text2] = [text2, text1];\r\n  }\r\n\r\n  const N = text1.length;\r\n\r\n  let previous = Array.from({length: N + 1}, () => 0);\r\n  let current = Array.from({length: N + 1}, () => 0);\r\n\r\n  // Iterate through each column, starting from the last one.\r\n  for (let col = text2.length - 1; col >= 0; col--) {\r\n    for (let row = text1.length - 1; row >= 0; row--) {\r\n      if (text1[row] === text2[col]) {\r\n        current[row] = 1 + previous[row + 1];\r\n      } else {\r\n        current[row] = Math.max(previous[row], current[row + 1]);\r\n      }\r\n    }\r\n\r\n    // The current column becomes the previous one, and vice versa\r\n    [previous, current] = [current, previous];\r\n  }\r\n\r\n  return previous[0];\r\n};\r\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clm3thk030003mn0hpdu0vw0m": {
+      "id": "clm3thk030003mn0hpdu0vw0m",
+      "createdAt": "2023-09-03T18:59:43.875Z",
+      "updatedAt": "2024-04-02T09:22:24.753Z",
+      "projectId": "clm3thk030001mn0hxvjpcpct",
+      "title": "1D DP",
+      "slug": "dp-1d",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nvar uniquePaths = function (m, n) {\n  const dp = new Array(n).fill(1);\n\n  for (let row = 1; row < m; row++) {\n    for (let col = 1; col < n; col++) {\n      dp[col] += dp[col - 1];\n    }\n  }\n\n  return dp.at(-1);\n};\n\nreturn uniquePaths;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsrtbjv7000510pekhsa8t4t": {
+      "id": "clsrtbjv7000510pekhsa8t4t",
+      "createdAt": "2024-02-18T17:59:46.004Z",
+      "updatedAt": "2024-04-02T18:03:14.314Z",
+      "projectId": "clsrtbjv7000310pe8zjq24ve",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} meetings\n * @return {number}\n */\nvar mostBooked = function (n, meetings) {\n  const roomsMeetingCount = new Uint32Array(n);\n  const roomsSchedule = new Uint32Array(n);\n\n  meetings.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n\n  for (let i = 0; i < meetings.length; i++) {\n    meetings.setColor(i, \"green\");\n    const [start, end] = meetings[i];\n    let earliestRoom = -1;\n    let earliestTime = Infinity;\n    let freeRoomFound = false;\n\n    for (let i = 0; i < n; i++) {\n      if (roomsSchedule[i] <= start) {\n        roomsMeetingCount[i]++;\n        roomsSchedule[i] = end;\n        freeRoomFound = true;\n        break;\n      }\n\n      if (roomsSchedule[i] < earliestTime) {\n        earliestTime = roomsSchedule[i];\n        earliestRoom = i;\n      }\n    }\n\n    if (freeRoomFound === false) {\n      roomsMeetingCount[earliestRoom]++;\n      roomsSchedule[earliestRoom] += end - start;\n    }\n  }\n\n  let roomNum = 0;\n  let max = -1;\n  for (let i = 0; i < n; i++) {\n    if (roomsMeetingCount[i] > max) {\n      max = roomsMeetingCount[i];\n      roomNum = i;\n    }\n  }\n\n  return roomNum;\n};\n\nreturn mostBooked;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clp5rkovh0003pi0fl3xurg1e": {
+      "id": "clp5rkovh0003pi0fl3xurg1e",
+      "createdAt": "2023-11-19T17:40:50.285Z",
+      "updatedAt": "2024-04-02T18:03:28.493Z",
+      "projectId": "clp5rkovh0001pi0fguiifafo",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findRedundantConnection = function (edges) {\n  const par = Array.from({ length: edges.length + 1 }, (_, i) => i);\n  const ranks = new Array(edges.length + 1).fill(1);\n\n  const find = (node) => {\n    let parent = par[node];\n\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n\n    return parent;\n  };\n\n  // returns false if already merged\n  const union = (node1, node2) => {\n    const parent1 = find(node1);\n    const parent2 = find(node2);\n\n    if (parent1 === parent2) return false;\n\n    if (ranks[parent1] > ranks[parent2]) {\n      par[parent2] = parent1;\n      ranks[parent1] += ranks[parent2];\n    } else {\n      par[parent1] = parent2;\n      ranks[parent2] += ranks[parent1];\n    }\n\n    return true;\n  };\n\n  for (const [from, to] of edges) {\n    if (!union(from, to)) {\n      return [from, to];\n    }\n  }\n};\n\nreturn findRedundantConnection;\n",
       "pythonCode": null,
       "order": 0
     }
