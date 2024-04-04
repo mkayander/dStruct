@@ -3723,6 +3723,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cluk6zr170001ell2moeo1k46": {
+      "id": "cluk6zr170001ell2moeo1k46",
+      "createdAt": "2024-04-03T19:19:45.307Z",
+      "updatedAt": "2024-04-03T19:19:45.307Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Pow(x, n)",
+      "category": "MATH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/powx-n",
+      "slug": "powx-n",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluk89kej0001nlibqjlrjauf": {
+      "id": "cluk89kej0001nlibqjlrjauf",
+      "createdAt": "2024-04-03T19:55:22.878Z",
+      "updatedAt": "2024-04-03T19:55:22.878Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Multiply Strings",
+      "category": "MATH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/multiply-strings",
+      "slug": "multiply-strings",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clukaa7g80001ntbw3qt5j3na": {
+      "id": "clukaa7g80001ntbw3qt5j3na",
+      "createdAt": "2024-04-03T20:51:51.992Z",
+      "updatedAt": "2024-04-03T20:51:51.992Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Design an Expression Tree With Evaluate Function",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function",
+      "slug": "design-an-expression-tree-with-evaluate-function",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -16251,6 +16293,150 @@
         }
       },
       "description": null
+    },
+    "cluk6zr180002ell2jov5tdk2": {
+      "id": "cluk6zr180002ell2jov5tdk2",
+      "createdAt": "2024-04-03T19:19:45.307Z",
+      "updatedAt": "2024-04-03T19:20:56.913Z",
+      "projectId": "cluk6zr170001ell2moeo1k46",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3M3k4k5ngpSPwnqqQWLXik": {
+          "name": "3M3k4k5ngpSPwnqqQWLXik",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        },
+        "c3cCLzfRijztzVNfsM2Cs2": {
+          "name": "c3cCLzfRijztzVNfsM2Cs2",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluk89kel0002nlib3joeyw7i": {
+      "id": "cluk89kel0002nlib3joeyw7i",
+      "createdAt": "2024-04-03T19:55:22.878Z",
+      "updatedAt": "2024-04-03T20:01:54.757Z",
+      "projectId": "cluk89kej0001nlibqjlrjauf",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8kPGryCrc8bbp3yDA3ub5K": {
+          "name": "8kPGryCrc8bbp3yDA3ub5K",
+          "type": "string",
+          "input": "123",
+          "order": 0
+        },
+        "sygYVQSmKp52vJdrFK9vBK": {
+          "name": "sygYVQSmKp52vJdrFK9vBK",
+          "type": "string",
+          "input": "456",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluk8iqvw0005nlibfqydgokq": {
+      "id": "cluk8iqvw0005nlibfqydgokq",
+      "createdAt": "2024-04-03T20:02:31.196Z",
+      "updatedAt": "2024-04-03T20:02:40.915Z",
+      "projectId": "cluk89kej0001nlibqjlrjauf",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "8kPGryCrc8bbp3yDA3ub5K": {
+          "name": "8kPGryCrc8bbp3yDA3ub5K",
+          "type": "string",
+          "input": "9133",
+          "order": 0
+        },
+        "sygYVQSmKp52vJdrFK9vBK": {
+          "name": "sygYVQSmKp52vJdrFK9vBK",
+          "type": "string",
+          "input": "9133",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluk8jb3b0007nlib6z3m4sjn": {
+      "id": "cluk8jb3b0007nlib6z3m4sjn",
+      "createdAt": "2024-04-03T20:02:57.383Z",
+      "updatedAt": "2024-04-03T20:03:31.980Z",
+      "projectId": "cluk89kej0001nlibqjlrjauf",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "8kPGryCrc8bbp3yDA3ub5K": {
+          "name": "8kPGryCrc8bbp3yDA3ub5K",
+          "type": "string",
+          "input": "123123123123",
+          "order": 0
+        },
+        "sygYVQSmKp52vJdrFK9vBK": {
+          "name": "sygYVQSmKp52vJdrFK9vBK",
+          "type": "string",
+          "input": "321321321321",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clukaa7ga0002ntbwirnqiu6j": {
+      "id": "clukaa7ga0002ntbwirnqiu6j",
+      "createdAt": "2024-04-03T20:51:51.992Z",
+      "updatedAt": "2024-04-03T20:53:38.252Z",
+      "projectId": "clukaa7g80001ntbw3qt5j3na",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "gbaXvG2kc95oG4PgF9CgY6": {
+          "name": "gbaXvG2kc95oG4PgF9CgY6",
+          "type": "array",
+          "input": "[\"3\",\"4\",\"+\",\"2\",\"*\",\"7\",\"/\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clulbmqry0001dk5ewhoz3enw": {
+      "id": "clulbmqry0001dk5ewhoz3enw",
+      "createdAt": "2024-04-04T14:17:22.701Z",
+      "updatedAt": "2024-04-04T14:17:26.902Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,1]",
+          "order": 0
+        },
+        "2iVYjA1dSnrNbo9xKtMizQ": {
+          "name": "2iVYjA1dSnrNbo9xKtMizQ",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18057,20 +18243,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number} n\n * @return {TreeNode[]}\n */\nvar generateTrees = function (n) {\n  const memo = new Map();\n  const getKey = (min, max) => `${min}-${max}`;\n\n  const generate = (min = 1, max = n) => {\n    if (min < 1 || max > n || min > max) return [null];\n    const key = getKey(min, max);\n    if (memo.has(key)) return memo.get(key);\n    const list = [];\n\n    for (let j = min; j <= max; j++) {\n      const leftSubtrees = generate(min, j - 1);\n      const rightSubtrees = generate(j + 1, max);\n      for (const left of leftSubtrees) {\n        for (const right of rightSubtrees) {\n          const root = new BinaryTree(j, left, right);\n          list.push(root);\n        }\n      }\n    }\n\n    memo.set(key, list);\n\n    return list;\n  };\n\n  return generate();\n};\n\nreturn generateTrees;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "cll2cagwi0003lb08hwk3ig1b": {
-      "id": "cll2cagwi0003lb08hwk3ig1b",
-      "createdAt": "2023-08-08T13:30:51.282Z",
-      "updatedAt": "2023-08-08T13:30:51.282Z",
-      "projectId": "cll2cagwi0001lb08s90zr6x1",
-      "title": "One Binary Search",
-      "slug": "one-binary-search",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar search = function (nums, target) {\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left <= right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(middle, \"green\");\n    if (nums[middle] === target) return middle;\n    nums.setColor(middle, null);\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    console.log({ left, middle, right });\n\n    if (nums[middle] < target) {\n      // check if current subarray is rotated\n      if (nums[middle] < nums[left] && nums[right] < target) {\n        right = middle - 1;\n      } else {\n        // normal binary search\n        left = middle + 1;\n      }\n    } else {\n      // check if current subarray is rotated\n      if (nums[middle] > nums[right] && nums[right] >= target) {\n        left = middle + 1;\n      } else {\n        // normal binary search\n        right = middle - 1;\n      }\n    }\n  }\n\n  return -1;\n};\n\nreturn search;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -20468,20 +20640,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clr7ymsll0003uxwwwbs1ueqc": {
-      "id": "clr7ymsll0003uxwwwbs1ueqc",
-      "createdAt": "2024-01-10T15:53:22.762Z",
-      "updatedAt": "2024-01-10T15:54:10.023Z",
-      "projectId": "clr7ymsll0001uxww7ezoqehc",
-      "title": "Bottom-Up DP",
-      "slug": "bottom-up-dp",
-      "timeComplexity": "O(n * m * k)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nvar wordBreak = function (s, wordDict) {\n  const dp = new Array(s.length);\n\n  for (let i = 0; i < s.length; i++) {\n    for (const word of wordDict) {\n      if (i < word.length - 1) continue;\n\n      if (i === word.length - 1 || dp[i - word.length]) {\n        if (s.slice(i - word.length + 1, i + 1) === word) {\n          dp[i] = true;\n          break;\n        }\n      }\n    }\n  }\n\n  return dp.at(-1) ?? false;\n};\n\nreturn wordBreak;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clr937q2m000111ifzwnao9uh": {
       "id": "clr937q2m000111ifzwnao9uh",
       "createdAt": "2024-01-11T10:49:23.901Z",
@@ -21742,6 +21900,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "clukaa7ga0003ntbww08ugbl5": {
+      "id": "clukaa7ga0003ntbww08ugbl5",
+      "createdAt": "2024-04-03T20:51:51.992Z",
+      "updatedAt": "2024-04-04T14:09:42.541Z",
+      "projectId": "clukaa7g80001ntbw3qt5j3na",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * This is the interface for the expression tree Node.\n * You should not remove it, and you can define some classes to implement it.\n */\n\n// var Node = function (val) {\n//   this.val = val;\n//   this.result = Number(val);\n//   this.left = this.right = null;\n// };\n\n// Node.prototype.evaluate = function () {\n//   return this.result;\n// };\n\nclass Node extends BinaryTree {\n  constructor(val, ...rest) {\n    super(val, ...rest);\n    this.result = Number(val);\n  }\n}\n\nconst methodMap = {\n  \"+\": (a, b) => a + b,\n  \"-\": (a, b) => a - b,\n  \"*\": (a, b) => a * b,\n  \"/\": (a, b) => a / b,\n};\n\n/**\n * This is the TreeBuilder class.\n * You can treat it as the driver code that takes the postinfix input\n * and returns the expression tree representing it as a Node.\n */\n\nclass TreeBuilder {\n  /**\n   * @param {string[]} s\n   * @return {Node}\n   */\n  buildTree(postfix) {\n    const stack = [];\n    for (let i = 0; i < postfix.length; i++) {\n      const char = postfix[i];\n      if (!isNaN(char)) {\n        stack.push(new Node(char));\n      } else {\n        const b = stack.pop();\n        const a = stack.pop();\n\n        const newNode = new Node(char);\n        newNode.left = a;\n        newNode.right = b;\n        newNode.result = methodMap[char](a.result, b.result);\n\n        stack.push(newNode);\n      }\n    }\n\n    return stack.pop();\n  }\n}\n\nfunction run(postfix) {\n  const instance = new TreeBuilder();\n  const root = instance.buildTree(postfix);\n\n  console.log(root);\n\n  return root.result;\n}\n\nreturn run;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluazzgro0003exgvrsveg4ru": {
       "id": "cluazzgro0003exgvrsveg4ru",
       "createdAt": "2024-03-28T08:53:39.108Z",
@@ -21759,7 +21931,7 @@
     "cluct8h5h0003p8729ic2o585": {
       "id": "cluct8h5h0003p8729ic2o585",
       "createdAt": "2024-03-29T15:20:14.549Z",
-      "updatedAt": "2024-04-02T18:04:06.385Z",
+      "updatedAt": "2024-04-03T13:59:40.645Z",
       "projectId": "cluct8h5h0001p872p8g1pqvh",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -21851,6 +22023,62 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findRedundantConnection = function (edges) {\n  const par = Array.from({ length: edges.length + 1 }, (_, i) => i);\n  const ranks = new Array(edges.length + 1).fill(1);\n\n  const find = (node) => {\n    let parent = par[node];\n\n    while (parent !== par[parent]) {\n      par[parent] = par[par[parent]];\n      parent = par[parent];\n    }\n\n    return parent;\n  };\n\n  // returns false if already merged\n  const union = (node1, node2) => {\n    const parent1 = find(node1);\n    const parent2 = find(node2);\n\n    if (parent1 === parent2) return false;\n\n    if (ranks[parent1] > ranks[parent2]) {\n      par[parent2] = parent1;\n      ranks[parent1] += ranks[parent2];\n    } else {\n      par[parent1] = parent2;\n      ranks[parent2] += ranks[parent1];\n    }\n\n    return true;\n  };\n\n  for (const [from, to] of edges) {\n    if (!union(from, to)) {\n      return [from, to];\n    }\n  }\n};\n\nreturn findRedundantConnection;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clr7ymsll0003uxwwwbs1ueqc": {
+      "id": "clr7ymsll0003uxwwwbs1ueqc",
+      "createdAt": "2024-01-10T15:53:22.762Z",
+      "updatedAt": "2024-04-03T14:04:45.468Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(n * m * k)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nvar wordBreak = function (s, wordDict) {\n  const dp = new Array(s.length);\n\n  for (let i = 0; i < s.length; i++) {\n    for (const word of wordDict) {\n      if (i < word.length - 1) continue;\n\n      if (i === word.length - 1 || dp[i - word.length]) {\n        if (s.slice(i - word.length + 1, i + 1) === word) {\n          dp[i] = true;\n          break;\n        }\n      }\n    }\n  }\n\n  return dp.at(-1) ?? false;\n};\n\nreturn wordBreak;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cll2cagwi0003lb08hwk3ig1b": {
+      "id": "cll2cagwi0003lb08hwk3ig1b",
+      "createdAt": "2023-08-08T13:30:51.282Z",
+      "updatedAt": "2024-04-04T14:11:21.405Z",
+      "projectId": "cll2cagwi0001lb08s90zr6x1",
+      "title": "One Binary Search",
+      "slug": "one-binary-search",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar search = function (nums, target) {\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left <= right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(middle, \"green\");\n    if (nums[middle] === target) return middle;\n\n    nums.setColor(middle, null);\n    nums.setColor(left, null);\n    nums.setColor(right, null);\n\n    console.log({ left, middle, right });\n\n    if (nums[middle] < target) {\n      // check if current subarray is rotated\n      if (nums[middle] < nums[left] && nums[right] < target) {\n        right = middle - 1;\n      } else {\n        // normal binary search\n        left = middle + 1;\n      }\n    } else {\n      // check if current subarray is rotated\n      if (nums[middle] > nums[right] && nums[right] >= target) {\n        left = middle + 1;\n      } else {\n        // normal binary search\n        right = middle - 1;\n      }\n    }\n  }\n\n  return -1;\n};\n\nreturn search;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluk6zr180003ell283at4eti": {
+      "id": "cluk6zr180003ell283at4eti",
+      "createdAt": "2024-04-03T19:19:45.307Z",
+      "updatedAt": "2024-04-03T19:23:26.091Z",
+      "projectId": "cluk6zr170001ell2moeo1k46",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} x\n * @param {number} n\n * @return {number}\n */\nvar myPow = function (x, n) {\n  const v = new Object();\n  v.n = n;\n  v.x = x;\n\n  if (n < 0) {\n    v.x = 1 / x;\n    v.n *= -1;\n  }\n\n  v.curr = 1;\n  v.max = n;\n\n  while (v.max > 0) {\n    if (v.max % 2 === 1) {\n      v.max--;\n      v.curr *= v.x;\n    }\n\n    v.max /= 2;\n    v.x *= v.x;\n  }\n\n  return v.curr;\n};\n\nreturn myPow;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluk89kel0003nlibql9518de": {
+      "id": "cluk89kel0003nlibql9518de",
+      "createdAt": "2024-04-03T19:55:22.878Z",
+      "updatedAt": "2024-04-03T20:02:23.975Z",
+      "projectId": "cluk89kej0001nlibqjlrjauf",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} num1\n * @param {string} num2\n * @return {string}\n */\nvar multiply = function (num1, num2) {\n  if (num1.length < num2.length) {\n    [num1, num2] = [num2, num1];\n  }\n  if (num2 === \"0\") return \"0\";\n\n  let result = null;\n\n  for (let j = num2.length - 1; j >= 0; j--) {\n    const multiplier = +num2[j];\n    const current = new Array(num2.length - 1 - j).fill(0);\n    let add = 0;\n    for (let i = num1.length - 1; i >= 0; i--) {\n      const num = +num1[i];\n      let product = multiplier * num + add;\n      add = 0;\n      if (product >= 10) {\n        add = Math.floor(product / 10);\n        product %= 10;\n      }\n      current.push(product);\n    }\n    if (add) {\n      current.push(add);\n    }\n\n    if (!result) {\n      result = current;\n    } else {\n      sumStrings(result, current);\n    }\n  }\n\n  result.reverse();\n  return result.join(\"\");\n};\n\nfunction sumStrings(arr1, arr2) {\n  let i = 0;\n  let add = 0;\n  while (i < arr1.length || i < arr2.length) {\n    let sum = (arr1[i] ?? 0) + (arr2[i] ?? 0) + add;\n    add = 0;\n    if (sum >= 10) {\n      add = 1;\n      sum %= 10;\n    }\n    arr1[i] = sum;\n\n    i++;\n  }\n  if (add) {\n    arr1.push(1);\n  }\n}\n\nreturn multiply;\n",
       "pythonCode": null,
       "order": 0
     }
