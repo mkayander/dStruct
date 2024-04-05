@@ -3765,6 +3765,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clulncj4q0001nde2fxl3owv3": {
+      "id": "clulncj4q0001nde2fxl3owv3",
+      "createdAt": "2024-04-04T19:45:21.626Z",
+      "updatedAt": "2024-04-04T19:45:21.626Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count Number of Teams",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/count-number-of-teams",
+      "slug": "count-number-of-teams",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clulqjly90001o3ofc926hnsj": {
+      "id": "clulqjly90001o3ofc926hnsj",
+      "createdAt": "2024-04-04T21:14:50.721Z",
+      "updatedAt": "2024-04-04T21:15:02.836Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Construct Binary Search Tree from Preorder Traversal",
+      "category": "BST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal",
+      "slug": "construct-binary-search-tree-from-preorder-traversal",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -16437,6 +16465,63 @@
         }
       },
       "description": null
+    },
+    "clulncj4r0002nde25othxpm0": {
+      "id": "clulncj4r0002nde25othxpm0",
+      "createdAt": "2024-04-04T19:45:21.626Z",
+      "updatedAt": "2024-04-04T19:46:00.420Z",
+      "projectId": "clulncj4q0001nde2fxl3owv3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5YcX4Wc4mzFNeXPzK7ajcf": {
+          "name": "5YcX4Wc4mzFNeXPzK7ajcf",
+          "type": "array",
+          "input": "[2,5,3,4,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clulndj800005nde2375f9vf1": {
+      "id": "clulndj800005nde2375f9vf1",
+      "createdAt": "2024-04-04T19:46:08.401Z",
+      "updatedAt": "2024-04-04T19:46:11.142Z",
+      "projectId": "clulncj4q0001nde2fxl3owv3",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "5YcX4Wc4mzFNeXPzK7ajcf": {
+          "name": "5YcX4Wc4mzFNeXPzK7ajcf",
+          "type": "array",
+          "input": "[1,2,3,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clulqjlya0002o3ofn5kmalds": {
+      "id": "clulqjlya0002o3ofn5kmalds",
+      "createdAt": "2024-04-04T21:14:50.721Z",
+      "updatedAt": "2024-04-04T21:15:50.573Z",
+      "projectId": "clulqjly90001o3ofc926hnsj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "array",
+          "input": "[8,5,1,7,10,12]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -18988,20 +19073,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clmjhpa820003qc0fj73qv1m4": {
-      "id": "clmjhpa820003qc0fj73qv1m4",
-      "createdAt": "2023-09-14T18:14:07.874Z",
-      "updatedAt": "2023-09-14T18:19:07.989Z",
-      "projectId": "clmjhpa820001qc0fzt48t50z",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string[][]} tickets\n * @return {string[]}\n */\nvar findItinerary = function (tickets) {\n  const graph = {};\n\n  for (const [src, dst] of tickets) {\n    (graph[src] ??= new Array()).push(dst);\n  }\n\n  for (const key in graph) {\n    graph[key].sort().reverse();\n  }\n\n  const itinerary = new Array();\n\n  console.log(graph);\n\n  const dfs = (airport) => {\n    while (graph[airport]?.length > 0) {\n      dfs(graph[airport].pop());\n    }\n    itinerary.push(airport);\n  }\n\n  dfs(\"JFK\");\n\n  return itinerary.reverse();\n};\n\nreturn findItinerary;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clmkrrtyq0003pb0h5d8690zg": {
       "id": "clmkrrtyq0003pb0h5d8690zg",
       "createdAt": "2023-09-15T15:43:49.106Z",
@@ -21452,20 +21523,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clta6q2ht000b8eufh81cbgcw": {
-      "id": "clta6q2ht000b8eufh81cbgcw",
-      "createdAt": "2024-03-02T14:34:49.505Z",
-      "updatedAt": "2024-03-02T14:36:26.741Z",
-      "projectId": "clta6q2ht00098eufh7cthun4",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function (nums) {\n  let left = 1;\n  let right = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"cyan\");\n    if (nums[right - 1] < nums[right]) {\n      nums.setColor(left, \"green\");\n      nums[left++] = nums[right];\n    }\n  }\n\n  return left;\n};\n\nreturn removeDuplicates;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cltbhm8st0003knytrvbvembq": {
       "id": "cltbhm8st0003knytrvbvembq",
       "createdAt": "2024-03-03T12:27:33.005Z",
@@ -22068,6 +22125,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clta6q2ht000b8eufh81cbgcw": {
+      "id": "clta6q2ht000b8eufh81cbgcw",
+      "createdAt": "2024-03-02T14:34:49.505Z",
+      "updatedAt": "2024-04-04T19:45:04.180Z",
+      "projectId": "clta6q2ht00098eufh7cthun4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function (nums) {\n  let left = 1;\n  let right = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"cyan\");\n    if (nums[right - 1] < nums[right]) {\n      nums.setColor(left, \"green\");\n      nums[left++] = nums[right];\n    }\n  }\n\n  return left;\n};\n\nreturn removeDuplicates;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluk89kel0003nlibql9518de": {
       "id": "cluk89kel0003nlibql9518de",
       "createdAt": "2024-04-03T19:55:22.878Z",
@@ -22079,6 +22150,48 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} num1\n * @param {string} num2\n * @return {string}\n */\nvar multiply = function (num1, num2) {\n  if (num1.length < num2.length) {\n    [num1, num2] = [num2, num1];\n  }\n  if (num2 === \"0\") return \"0\";\n\n  let result = null;\n\n  for (let j = num2.length - 1; j >= 0; j--) {\n    const multiplier = +num2[j];\n    const current = new Array(num2.length - 1 - j).fill(0);\n    let add = 0;\n    for (let i = num1.length - 1; i >= 0; i--) {\n      const num = +num1[i];\n      let product = multiplier * num + add;\n      add = 0;\n      if (product >= 10) {\n        add = Math.floor(product / 10);\n        product %= 10;\n      }\n      current.push(product);\n    }\n    if (add) {\n      current.push(add);\n    }\n\n    if (!result) {\n      result = current;\n    } else {\n      sumStrings(result, current);\n    }\n  }\n\n  result.reverse();\n  return result.join(\"\");\n};\n\nfunction sumStrings(arr1, arr2) {\n  let i = 0;\n  let add = 0;\n  while (i < arr1.length || i < arr2.length) {\n    let sum = (arr1[i] ?? 0) + (arr2[i] ?? 0) + add;\n    add = 0;\n    if (sum >= 10) {\n      add = 1;\n      sum %= 10;\n    }\n    arr1[i] = sum;\n\n    i++;\n  }\n  if (add) {\n    arr1.push(1);\n  }\n}\n\nreturn multiply;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clulncj4r0003nde2359i33tp": {
+      "id": "clulncj4r0003nde2359i33tp",
+      "createdAt": "2024-04-04T19:45:21.626Z",
+      "updatedAt": "2024-04-04T19:51:05.947Z",
+      "projectId": "clulncj4q0001nde2fxl3owv3",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} rating\n * @return {number}\n */\nvar numTeams = function (ratings) {\n  const n = ratings.length;\n  let count = 0;\n\n  const smallerLeft = new Uint32Array(n);\n  const largerLeft = new Uint32Array(n);\n  for (let i = 1; i < n; i++) {\n    ratings.setColor(i, \"blue\");\n    smallerLeft.setColor(i, \"blue\");\n    largerLeft.setColor(i, \"blue\");\n\n    for (let j = 0; j < i; j++) {\n      if (ratings[j] < ratings[i]) {\n        smallerLeft.setColor(j, \"green\");\n        smallerLeft[i]++;\n        count += smallerLeft[j];\n        smallerLeft.setColor(j, null);\n      }\n      if (ratings[j] > ratings[i]) {\n        largerLeft.setColor(j, \"green\");\n        largerLeft[i]++;\n        count += largerLeft[j];\n        largerLeft.setColor(j, null);\n      }\n    }\n\n    ratings.setColor(i, null);\n    smallerLeft.setColor(i, null);\n    largerLeft.setColor(i, null);\n  }\n\n  return count;\n};\n\nreturn numTeams;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clmjhpa820003qc0fj73qv1m4": {
+      "id": "clmjhpa820003qc0fj73qv1m4",
+      "createdAt": "2023-09-14T18:14:07.874Z",
+      "updatedAt": "2024-04-04T20:25:33.344Z",
+      "projectId": "clmjhpa820001qc0fzt48t50z",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[][]} tickets\n * @return {string[]}\n */\nvar findItinerary = function (tickets) {\n  const graph = new Object();\n\n  for (const [src, dst] of tickets) {\n    (graph[src] ??= new Array()).push(dst);\n  }\n\n  for (const key in graph) {\n    graph[key].sort((a, b) => b.localeCompare(a));\n  }\n\n  const itinerary = new Array();\n\n  const dfs = (airport) => {\n    if (graph[airport]) {\n      while (graph[airport].length) {\n        dfs(graph[airport].pop());\n      }\n    }\n    itinerary.push(airport);\n  };\n\n  dfs(\"JFK\");\n\n  return itinerary.reverse();\n};\n\nreturn findItinerary;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clulqjlya0003o3ofen5cct2r": {
+      "id": "clulqjlya0003o3ofen5cct2r",
+      "createdAt": "2024-04-04T21:14:50.721Z",
+      "updatedAt": "2024-04-04T21:16:35.280Z",
+      "projectId": "clulqjly90001o3ofc926hnsj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @return {TreeNode}\n */\nvar bstFromPreorder = function (preorder) {\n  const n = preorder.length;\n\n  const dfs = (i, j) => {\n    if (i >= j || i >= n) return null;\n\n    const val = preorder[i];\n    const node = new BinaryTree(val);\n\n    let index = i + 1;\n    while (index < j && preorder[index] < val) {\n      index++;\n    }\n\n    node.left = dfs(i + 1, index);\n\n    node.right = dfs(index, j);\n\n    return node;\n  };\n\n  const root = dfs(0, n);\n\n  return root;\n};\n\nreturn bstFromPreorder;\n",
       "pythonCode": null,
       "order": 0
     }
