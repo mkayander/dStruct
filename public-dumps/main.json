@@ -3793,6 +3793,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clumq8xdn0001b8ggrraj2hoj": {
+      "id": "clumq8xdn0001b8ggrraj2hoj",
+      "createdAt": "2024-04-05T13:54:18.491Z",
+      "updatedAt": "2024-04-05T13:54:18.491Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Boundary of Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/boundary-of-binary-tree",
+      "slug": "boundary-of-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluo4h2tv0001rsrnabdepr1q": {
+      "id": "cluo4h2tv0001rsrnabdepr1q",
+      "createdAt": "2024-04-06T13:20:19.603Z",
+      "updatedAt": "2024-04-06T13:20:19.603Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Edit Distance",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/edit-distance",
+      "slug": "edit-distance",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluo8gjzw0001olh3a68qt7ok": {
+      "id": "cluo8gjzw0001olh3a68qt7ok",
+      "createdAt": "2024-04-06T15:11:53.660Z",
+      "updatedAt": "2024-04-06T15:11:53.660Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Plates Between Candles",
+      "category": "BINARY_SEARCH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/plates-between-candles",
+      "slug": "plates-between-candles",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -16466,6 +16508,31 @@
       },
       "description": null
     },
+    "cluo4h2tx0002rsrngn57k1bv": {
+      "id": "cluo4h2tx0002rsrngn57k1bv",
+      "createdAt": "2024-04-06T13:20:19.603Z",
+      "updatedAt": "2024-04-06T13:34:41.817Z",
+      "projectId": "cluo4h2tv0001rsrnabdepr1q",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "r838fG55277YmNM4G5YCWw": {
+          "name": "r838fG55277YmNM4G5YCWw",
+          "type": "string",
+          "input": "horse",
+          "order": 0
+        },
+        "sdGqJsY5fP7bgNGfGnaMCZ": {
+          "name": "sdGqJsY5fP7bgNGfGnaMCZ",
+          "type": "string",
+          "input": "ros",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "clulncj4r0002nde25othxpm0": {
       "id": "clulncj4r0002nde25othxpm0",
       "createdAt": "2024-04-04T19:45:21.626Z",
@@ -16518,6 +16585,94 @@
           "name": "head",
           "type": "array",
           "input": "[8,5,1,7,10,12]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clumq8xdn0002b8ggrguhtdkn": {
+      "id": "clumq8xdn0002b8ggrguhtdkn",
+      "createdAt": "2024-04-05T13:54:18.491Z",
+      "updatedAt": "2024-04-05T13:54:51.442Z",
+      "projectId": "clumq8xdn0001b8ggrraj2hoj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3,4,5,6,null,null,null,7,8,9,10]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluo8lqw10005olh3s0nbeigr": {
+      "id": "cluo8lqw10005olh3s0nbeigr",
+      "createdAt": "2024-04-06T15:15:55.873Z",
+      "updatedAt": "2024-04-06T15:16:24.853Z",
+      "projectId": "cluo8gjzw0001olh3a68qt7ok",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "5ZQzsttU8yvWR6kPVjhrNM": {
+          "name": "5ZQzsttU8yvWR6kPVjhrNM",
+          "type": "array",
+          "input": "[[2,5],[5,9]]",
+          "order": 1
+        },
+        "siKFAXEBr2fin1rr6Maf5r": {
+          "name": "siKFAXEBr2fin1rr6Maf5r",
+          "type": "string",
+          "input": "**|**|***|",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clumqcwtl0005b8gg43nca6zv": {
+      "id": "clumqcwtl0005b8gg43nca6zv",
+      "createdAt": "2024-04-05T13:57:24.394Z",
+      "updatedAt": "2024-04-05T13:58:18.617Z",
+      "projectId": "clumq8xdn0001b8ggrraj2hoj",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,8,3,6,null,7,4,null,null,null,null,null,5]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluo8gjzx0002olh3n93on8ki": {
+      "id": "cluo8gjzx0002olh3n93on8ki",
+      "createdAt": "2024-04-06T15:11:53.660Z",
+      "updatedAt": "2024-04-06T15:14:58.011Z",
+      "projectId": "cluo8gjzw0001olh3a68qt7ok",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "5ZQzsttU8yvWR6kPVjhrNM": {
+          "name": "5ZQzsttU8yvWR6kPVjhrNM",
+          "type": "array",
+          "input": "[[1,17],[4,5],[14,17],[5,11],[15,16]]",
+          "order": 1
+        },
+        "siKFAXEBr2fin1rr6Maf5r": {
+          "name": "siKFAXEBr2fin1rr6Maf5r",
+          "type": "string",
+          "input": "***|**|*****|**||**|*",
           "order": 0
         }
       },
@@ -17617,20 +17772,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "clhxeuvqq0007la08413i4o3u": {
-      "id": "clhxeuvqq0007la08413i4o3u",
-      "createdAt": "2023-05-21T12:44:44.979Z",
-      "updatedAt": "2024-01-25T18:36:11.095Z",
-      "projectId": "clhxeo0lv0001la0892tsbt2u",
-      "title": "Solution 2",
-      "slug": "solution-2",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function longestCommonSubsequence(text1, text2) {\n  const dpGrid = Array.from({ length: text1.length + 1 }, () =>\n    Array.from({ length: text2.length + 1 }, () => 0),\n  );\n\n  // Iterate through each column, starting from the last one.\n  for (let col = text2.length - 1; col >= 0; col--) {\n    for (let row = text1.length - 1; row >= 0; row--) {\n      dpGrid[row].setColor(col, \"green\");\n\n      if (text1[row] === text2[col]) {\n        dpGrid[row][col] = 1 + dpGrid[row + 1][col + 1];\n\n        text1.setColor(row, \"green\");\n        text2.setColor(col, \"green\");\n        dpGrid[row + 1].setColor(col + 1, \"orange\");\n      } else {\n        dpGrid[row][col] = Math.max(dpGrid[row + 1][col], dpGrid[row][col + 1]);\n\n        text1.setColor(row, \"blue\");\n        text2.setColor(col, \"blue\");\n        dpGrid[row + 1].setColor(col, \"cyan\");\n        dpGrid[row].setColor(col + 1, \"cyan\");\n        dpGrid[row + 1].setColor(col, \"white\");\n        dpGrid[row].setColor(col + 1, \"white\");\n      }\n\n      dpGrid[row].setColor(col, \"white\");\n      text1.setColor(row, \"white\");\n      text2.setColor(col, \"white\");\n    }\n  }\n\n  return dpGrid[0][0];\n};\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "clhyn4djx0004kx08p1ivvtzs": {
       "id": "clhyn4djx0004kx08p1ivvtzs",
       "createdAt": "2023-05-22T09:23:51.070Z",
@@ -17672,6 +17813,20 @@
       "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getSumOfNodes(head) {\n  if (head === null) return 0;\n\n  head.setColor(\"green\");\n\n  const left = getSumOfNodes(head.left);\n  const right = getSumOfNodes(head.right);\n\n  head.setColor(null);\n\n  return head.val + left + right;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clhxeuvqq0007la08413i4o3u": {
+      "id": "clhxeuvqq0007la08413i4o3u",
+      "createdAt": "2023-05-21T12:44:44.979Z",
+      "updatedAt": "2024-04-06T12:47:17.546Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function longestCommonSubsequence(text1, text2) {\n  const dpGrid = Array.from({ length: text1.length + 1 }, () =>\n    Array.from({ length: text2.length + 1 }, () => 0),\n  );\n\n  // Iterate through each column, starting from the last one.\n  for (let col = text2.length - 1; col >= 0; col--) {\n    for (let row = text1.length - 1; row >= 0; row--) {\n      dpGrid[row].setColor(col, \"green\");\n\n      if (text1[row] === text2[col]) {\n        dpGrid[row][col] = 1 + dpGrid[row + 1][col + 1];\n\n        text1.setColor(row, \"green\");\n        text2.setColor(col, \"green\");\n        dpGrid[row + 1].setColor(col + 1, \"orange\");\n      } else {\n        dpGrid[row][col] = Math.max(dpGrid[row + 1][col], dpGrid[row][col + 1]);\n\n        text1.setColor(row, \"blue\");\n        text2.setColor(col, \"blue\");\n        dpGrid[row + 1].setColor(col, \"cyan\");\n        dpGrid[row].setColor(col + 1, \"cyan\");\n        dpGrid[row + 1].setColor(col, \"white\");\n        dpGrid[row].setColor(col + 1, \"white\");\n      }\n\n      dpGrid[row].setColor(col, \"white\");\n      text1.setColor(row, \"white\");\n      text2.setColor(col, \"white\");\n    }\n  }\n\n  return dpGrid[0][0];\n};\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clid8trdy0003lj08p4p78v70": {
       "id": "clid8trdy0003lj08p4p78v70",
@@ -20893,20 +21048,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "clrtk2lq6000116ms72ioqnh1": {
-      "id": "clrtk2lq6000116ms72ioqnh1",
-      "createdAt": "2024-01-25T18:36:41.983Z",
-      "updatedAt": "2024-01-25T18:40:56.503Z",
-      "projectId": "clhxeo0lv0001la0892tsbt2u",
-      "title": "Solution 3",
-      "slug": "solution-3",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string} text1\n * @param {string} text2\n * @return {number}\n */\nvar longestCommonSubsequence = function (text1, text2) {\n  const n = text1.length;\n  const m = text2.length;\n\n  const dp = Array.from({ length: n }, () => new Array(m).fill(0));\n\n  for (let i = 0; i < n; i++) {\n    text1.setColor(i, \"cyan\");\n    for (let j = 0; j < m; j++) {\n      text2.setColor(j, \"cyan\");\n      if (text1[i] === text2[j]) {\n        text1.setColor(i, \"green\");\n        text2.setColor(j, \"green\");\n        dp[i][j] = (dp[i - 1]?.[j - 1] ?? 0) + 1;\n        dp[i - 1]?.setColor(j - 1, \"green\");\n      } else {\n        dp[i][j] = Math.max(dp[i - 1]?.[j] ?? 0, dp[i][j - 1] ?? 0);\n        dp[i - 1]?.setColor(j, \"cyan\");\n        dp[i].setColor(j - 1, \"cyan\");\n      }\n      text2.setColor(j, null);\n    }\n  }\n\n  return dp.at(-1).at(-1);\n};\n\nreturn longestCommonSubsequence;\n",
-      "pythonCode": null,
-      "order": 2
-    },
     "clrtkd79q000316ms0fdd4a21": {
       "id": "clrtkd79q000316ms0fdd4a21",
       "createdAt": "2024-01-25T18:44:56.463Z",
@@ -21985,6 +22126,34 @@
       "pythonCode": null,
       "order": 0
     },
+    "clumq8xdn0003b8gg7pkw6tpi": {
+      "id": "clumq8xdn0003b8gg7pkw6tpi",
+      "createdAt": "2024-04-05T13:54:18.491Z",
+      "updatedAt": "2024-04-05T13:57:14.393Z",
+      "projectId": "clumq8xdn0001b8ggrraj2hoj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar boundaryOfBinaryTree = function (root) {\n  if (!root) return [];\n\n  const result = [root.val];\n  if (!root.left && !root.right) return result;\n\n  const isLeaf = (node) => !node.left && !node.right;\n\n  const dfsLeft = (node) => {\n    if (!node || isLeaf(node)) return;\n    node.setColor(\"cyan\", \"blink\");\n\n    result.push(node.val);\n\n    if (node.left) {\n      dfsLeft(node.left);\n    } else {\n      dfsLeft(node.right);\n    }\n  };\n  dfsLeft(root.left);\n\n  const dfsLeaves = (node) => {\n    if (!node) return;\n    node.blink();\n\n    if (isLeaf(node)) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n    } else {\n      dfsLeaves(node.left);\n      dfsLeaves(node.right);\n    }\n  };\n  dfsLeaves(root);\n\n  const dfsRight = (node) => {\n    if (!node || isLeaf(node)) return;\n\n    if (node.right) {\n      dfsRight(node.right);\n    } else {\n      dfsRight(node.left);\n    }\n\n    node.setColor(\"orange\", \"blink\");\n    result.push(node.val);\n  };\n  dfsRight(root.right);\n\n  return result;\n};\n\nreturn boundaryOfBinaryTree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluo8gjzx0003olh3ty7fvqnz": {
+      "id": "cluo8gjzx0003olh3ty7fvqnz",
+      "createdAt": "2024-04-06T15:11:53.660Z",
+      "updatedAt": "2024-04-06T15:17:44.331Z",
+      "projectId": "cluo8gjzw0001olh3a68qt7ok",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {number[][]} queries\n * @return {number[]}\n */\nvar platesBetweenCandles = function (s, queries) {\n  const n = s.length;\n  const bars = new Array();\n\n  for (let i = 0; i < n; i++) {\n    const char = s[i];\n    if (char === \"|\") {\n      s.setColor(i, \"green\");\n      bars.push(i);\n    } else {\n      s.setColor(i, \"cyan\");\n    }\n  }\n\n  if (bars.length < 2) {\n    return queries.map(() => 0);\n  }\n\n  const result = new Array();\n  for (let i = 0; i < queries.length; i++) {\n    queries.setColor(i, \"cyan\");\n    const [from, to] = queries[i];\n    const [, leftIndex] = bisect(bars, 0, from);\n    const [rightIndex] = bisect(bars, leftIndex, to);\n    const left = bars[leftIndex];\n    const right = bars[rightIndex];\n\n    if (left >= right) {\n      result.push(0);\n      continue;\n    }\n\n    const candlesInRange = rightIndex - leftIndex - 1;\n    const size = right - left - 1;\n\n    result.push(size - candlesInRange);\n  }\n\n  return result;\n};\n\nfunction bisect(arr, start, target) {\n  let left = start || 0;\n  let right = arr.length - 1;\n\n  while (left <= right) {\n    const mid = left + ((right - left) >> 1);\n    arr.setColor(mid, \"green\");\n    arr.setColor(mid, null);\n\n    if (arr[mid] === target) return [mid, mid];\n    if (arr[mid] > target) {\n      right = mid - 1;\n    } else {\n      left = mid + 1;\n    }\n  }\n\n  return [Math.max(0, right), Math.min(left, arr.length - 1)];\n}\n\nreturn platesBetweenCandles;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluct8h5h0003p8729ic2o585": {
       "id": "cluct8h5h0003p8729ic2o585",
       "createdAt": "2024-03-29T15:20:14.549Z",
@@ -22024,20 +22193,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @return {number[][]}\n */\nvar generateMatrix = function (n) {\n  const matrix = Array.from({ length: n }, () => new Uint16Array(n));\n  const max = n * n;\n  let m = n;\n\n  let dir = 1;\n  let row = 0;\n  let col = -1;\n  let current = 1;\n  while (current <= max) {\n    for (let i = 0; i < n; i++) {\n      col += dir;\n      matrix[row][col] = current++;\n    }\n    m--;\n\n    for (let i = 0; i < m; i++) {\n      row += dir;\n      matrix[row][col] = current++;\n    }\n    n--;\n\n    dir *= -1;\n  }\n\n  return matrix;\n};\n\nreturn generateMatrix;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clhxeo0lv0004la08pzluqvip": {
-      "id": "clhxeo0lv0004la08pzluqvip",
-      "createdAt": "2023-05-21T12:39:24.691Z",
-      "updatedAt": "2024-04-02T09:12:58.186Z",
-      "projectId": "clhxeo0lv0001la0892tsbt2u",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function longestCommonSubsequence(text1, text2) {\r\n  if (text1.length > text2.length) {\r\n    [text1, text2] = [text2, text1];\r\n  }\r\n\r\n  const N = text1.length;\r\n\r\n  let previous = Array.from({length: N + 1}, () => 0);\r\n  let current = Array.from({length: N + 1}, () => 0);\r\n\r\n  // Iterate through each column, starting from the last one.\r\n  for (let col = text2.length - 1; col >= 0; col--) {\r\n    for (let row = text1.length - 1; row >= 0; row--) {\r\n      if (text1[row] === text2[col]) {\r\n        current[row] = 1 + previous[row + 1];\r\n      } else {\r\n        current[row] = Math.max(previous[row], current[row + 1]);\r\n      }\r\n    }\r\n\r\n    // The current column becomes the previous one, and vice versa\r\n    [previous, current] = [current, previous];\r\n  }\r\n\r\n  return previous[0];\r\n};\r\n",
       "pythonCode": null,
       "order": 0
     },
@@ -22097,10 +22252,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "clhxeo0lv0004la08pzluqvip": {
+      "id": "clhxeo0lv0004la08pzluqvip",
+      "createdAt": "2023-05-21T12:39:24.691Z",
+      "updatedAt": "2024-04-06T12:46:45.117Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\r\n * @param {ArrayProxyObject} array\r\n */\r\nreturn function longestCommonSubsequence(text1, text2) {\r\n  if (text1.length > text2.length) {\r\n    [text1, text2] = [text2, text1];\r\n  }\r\n\r\n  const N = text1.length;\r\n\r\n  let previous = Array.from({length: N + 1}, () => 0);\r\n  let current = Array.from({length: N + 1}, () => 0);\r\n\r\n  // Iterate through each column, starting from the last one.\r\n  for (let col = text2.length - 1; col >= 0; col--) {\r\n    for (let row = text1.length - 1; row >= 0; row--) {\r\n      if (text1[row] === text2[col]) {\r\n        current[row] = 1 + previous[row + 1];\r\n      } else {\r\n        current[row] = Math.max(previous[row], current[row + 1]);\r\n      }\r\n    }\r\n\r\n    // The current column becomes the previous one, and vice versa\r\n    [previous, current] = [current, previous];\r\n  }\r\n\r\n  return previous[0];\r\n};\r\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cll2cagwi0003lb08hwk3ig1b": {
       "id": "cll2cagwi0003lb08hwk3ig1b",
       "createdAt": "2023-08-08T13:30:51.282Z",
-      "updatedAt": "2024-04-04T14:11:21.405Z",
+      "updatedAt": "2024-04-05T13:54:10.049Z",
       "projectId": "cll2cagwi0001lb08s90zr6x1",
       "title": "One Binary Search",
       "slug": "one-binary-search",
@@ -22167,6 +22336,34 @@
       "pythonCode": null,
       "order": 0
     },
+    "clrtk2lq6000116ms72ioqnh1": {
+      "id": "clrtk2lq6000116ms72ioqnh1",
+      "createdAt": "2024-01-25T18:36:41.983Z",
+      "updatedAt": "2024-04-06T12:47:24.181Z",
+      "projectId": "clhxeo0lv0001la0892tsbt2u",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} text1\n * @param {string} text2\n * @return {number}\n */\nvar longestCommonSubsequence = function (text1, text2) {\n  const n = text1.length;\n  const m = text2.length;\n\n  const dp = Array.from({ length: n }, () => new Array(m).fill(0));\n\n  for (let i = 0; i < n; i++) {\n    text1.setColor(i, \"cyan\");\n    for (let j = 0; j < m; j++) {\n      text2.setColor(j, \"cyan\");\n      if (text1[i] === text2[j]) {\n        text1.setColor(i, \"green\");\n        text2.setColor(j, \"green\");\n        dp[i][j] = (dp[i - 1]?.[j - 1] ?? 0) + 1;\n        dp[i - 1]?.setColor(j - 1, \"green\");\n      } else {\n        dp[i][j] = Math.max(dp[i - 1]?.[j] ?? 0, dp[i][j - 1] ?? 0);\n        dp[i - 1]?.setColor(j, \"cyan\");\n        dp[i].setColor(j - 1, \"cyan\");\n      }\n      text2.setColor(j, null);\n    }\n  }\n\n  return dp.at(-1).at(-1);\n};\n\nreturn longestCommonSubsequence;\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "clulqjlya0003o3ofen5cct2r": {
+      "id": "clulqjlya0003o3ofen5cct2r",
+      "createdAt": "2024-04-04T21:14:50.721Z",
+      "updatedAt": "2024-04-06T12:46:11.268Z",
+      "projectId": "clulqjly90001o3ofc926hnsj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @return {TreeNode}\n */\nvar bstFromPreorder = function (preorder) {\n  const n = preorder.length;\n\n  const dfs = (i, j) => {\n    if (i >= j || i >= n) return null;\n\n    const val = preorder[i];\n    const node = new BinaryTree(val);\n\n    let index = i + 1;\n    while (index < j && preorder[index] < val) {\n      index++;\n    }\n\n    node.left = dfs(i + 1, index);\n\n    node.right = dfs(index, j);\n\n    return node;\n  };\n\n  const root = dfs(0, n);\n\n  return root;\n};\n\nreturn bstFromPreorder;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clmjhpa820003qc0fj73qv1m4": {
       "id": "clmjhpa820003qc0fj73qv1m4",
       "createdAt": "2023-09-14T18:14:07.874Z",
@@ -22181,17 +22378,17 @@
       "pythonCode": null,
       "order": 0
     },
-    "clulqjlya0003o3ofen5cct2r": {
-      "id": "clulqjlya0003o3ofen5cct2r",
-      "createdAt": "2024-04-04T21:14:50.721Z",
-      "updatedAt": "2024-04-04T21:16:35.280Z",
-      "projectId": "clulqjly90001o3ofc926hnsj",
+    "cluo4h2tx0003rsrn39bmji6i": {
+      "id": "cluo4h2tx0003rsrn39bmji6i",
+      "createdAt": "2024-04-06T13:20:19.603Z",
+      "updatedAt": "2024-04-06T13:40:37.532Z",
+      "projectId": "cluo4h2tv0001rsrnabdepr1q",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @return {TreeNode}\n */\nvar bstFromPreorder = function (preorder) {\n  const n = preorder.length;\n\n  const dfs = (i, j) => {\n    if (i >= j || i >= n) return null;\n\n    const val = preorder[i];\n    const node = new BinaryTree(val);\n\n    let index = i + 1;\n    while (index < j && preorder[index] < val) {\n      index++;\n    }\n\n    node.left = dfs(i + 1, index);\n\n    node.right = dfs(index, j);\n\n    return node;\n  };\n\n  const root = dfs(0, n);\n\n  return root;\n};\n\nreturn bstFromPreorder;\n",
+      "code": "/**\n * @param {string} word1\n * @param {string} word2\n * @return {number}\n */\nvar minDistance = function (word1, word2) {\n  if (word1.length > word2.length) {\n    [word1, word2] = [word2, word1];\n  }\n  const m = word1.length;\n  const n = word2.length;\n\n  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1));\n\n  for (let i = 0; i <= m; i++) {\n    dp[i][0] = i;\n  }\n  for (let j = 0; j <= n; j++) {\n    dp[0][j] = j;\n  }\n\n  for (let i = 1; i <= m; i++) {\n    for (let j = 1; j <= n; j++) {\n      word1.setColor(i - 1, \"green\");\n      word2.setColor(j - 1, \"green\");\n      if (word1[i - 1] === word2[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1];\n      } else {\n        dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);\n      }\n      word1.setColor(i - 1, null);\n      word2.setColor(j - 1, null);\n    }\n  }\n\n  const dist = dp[m][n];\n\n  return dist;\n};\n\nreturn minDistance;\n",
       "pythonCode": null,
       "order": 0
     }
