@@ -3835,6 +3835,132 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clupdnqua0001gfiepqgbcchu": {
+      "id": "clupdnqua0001gfiepqgbcchu",
+      "createdAt": "2024-04-07T10:25:13.379Z",
+      "updatedAt": "2024-04-07T10:25:13.379Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Alien Dictionary",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/alien-dictionary",
+      "slug": "alien-dictionary",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluplqzf80001smnq2v439mu0": {
+      "id": "cluplqzf80001smnq2v439mu0",
+      "createdAt": "2024-04-07T14:11:41.396Z",
+      "updatedAt": "2024-04-07T14:11:41.396Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Valid Subarrays",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/number-of-valid-subarrays",
+      "slug": "number-of-valid-subarrays",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clupqavar0001woa4fpbf77n6": {
+      "id": "clupqavar0001woa4fpbf77n6",
+      "createdAt": "2024-04-07T16:19:07.635Z",
+      "updatedAt": "2024-04-07T16:19:07.635Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sum of Total Strength of Wizards",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/sum-of-total-strength-of-wizards",
+      "slug": "sum-of-total-strength-of-wizards",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clupzlce0000112nxdeh45der": {
+      "id": "clupzlce0000112nxdeh45der",
+      "createdAt": "2024-04-07T20:39:12.888Z",
+      "updatedAt": "2024-04-07T20:39:12.888Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Palindrome Permutation II",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/palindrome-permutation-ii",
+      "slug": "palindrome-permutation-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clupzx42j000b12nx4cv3ni4w": {
+      "id": "clupzx42j000b12nx4cv3ni4w",
+      "createdAt": "2024-04-07T20:48:21.979Z",
+      "updatedAt": "2024-04-07T20:48:21.979Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Palindrome Permutation",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/palindrome-permutation",
+      "slug": "palindrome-permutation",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluqunvzy0001l3qex5envcms": {
+      "id": "cluqunvzy0001l3qex5envcms",
+      "createdAt": "2024-04-08T11:08:59.710Z",
+      "updatedAt": "2024-04-08T11:08:59.710Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Target Sum",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/target-sum",
+      "slug": "target-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clur6iona0001btsimzatdxhs": {
+      "id": "clur6iona0001btsimzatdxhs",
+      "createdAt": "2024-04-08T16:40:52.295Z",
+      "updatedAt": "2024-04-08T16:40:52.295Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Best Time to Buy and Sell Stock with Cooldown",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown",
+      "slug": "best-time-to-buy-and-sell-stock-with-cooldown",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clur9q39v0001jtldkn0qb80z": {
+      "id": "clur9q39v0001jtldkn0qb80z",
+      "createdAt": "2024-04-08T18:10:36.691Z",
+      "updatedAt": "2024-04-08T18:10:36.691Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Concatenated Words",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/concatenated-words",
+      "slug": "concatenated-words",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clurayvb20001uhcbmrkuqc3x": {
+      "id": "clurayvb20001uhcbmrkuqc3x",
+      "createdAt": "2024-04-08T18:45:25.886Z",
+      "updatedAt": "2024-04-08T18:45:25.886Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Word Break II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/word-break-ii",
+      "slug": "word-break-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -16464,6 +16590,25 @@
       },
       "description": null
     },
+    "cluplqzf90002smnq7c4cuvww": {
+      "id": "cluplqzf90002smnq7c4cuvww",
+      "createdAt": "2024-04-07T14:11:41.396Z",
+      "updatedAt": "2024-04-07T14:12:03.734Z",
+      "projectId": "cluplqzf80001smnq2v439mu0",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "xdMV2xMRu5R7wy94MjH1TC": {
+          "name": "xdMV2xMRu5R7wy94MjH1TC",
+          "type": "array",
+          "input": "[1,4,2,5,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clukaa7ga0002ntbwirnqiu6j": {
       "id": "clukaa7ga0002ntbwirnqiu6j",
       "createdAt": "2024-04-03T20:51:51.992Z",
@@ -16653,6 +16798,63 @@
       },
       "description": null
     },
+    "cluplrmxw0005smnqmxy0dhlm": {
+      "id": "cluplrmxw0005smnqmxy0dhlm",
+      "createdAt": "2024-04-07T14:12:11.876Z",
+      "updatedAt": "2024-04-07T14:12:14.469Z",
+      "projectId": "cluplqzf80001smnq2v439mu0",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "xdMV2xMRu5R7wy94MjH1TC": {
+          "name": "xdMV2xMRu5R7wy94MjH1TC",
+          "type": "array",
+          "input": "[2,2,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupdnquc0002gfieoyvcpvm3": {
+      "id": "clupdnquc0002gfieoyvcpvm3",
+      "createdAt": "2024-04-07T10:25:13.379Z",
+      "updatedAt": "2024-04-07T10:25:27.010Z",
+      "projectId": "clupdnqua0001gfiepqgbcchu",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "u5qM6JSSkEc2wpk3ivRC8y": {
+          "name": "u5qM6JSSkEc2wpk3ivRC8y",
+          "type": "array",
+          "input": "[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupdp52x0005gfie0snjt717": {
+      "id": "clupdp52x0005gfie0snjt717",
+      "createdAt": "2024-04-07T10:26:18.489Z",
+      "updatedAt": "2024-04-07T10:26:22.031Z",
+      "projectId": "clupdnqua0001gfiepqgbcchu",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "u5qM6JSSkEc2wpk3ivRC8y": {
+          "name": "u5qM6JSSkEc2wpk3ivRC8y",
+          "type": "array",
+          "input": "[\"ac\",\"ab\",\"zc\",\"zb\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cluo8gjzx0002olh3n93on8ki": {
       "id": "cluo8gjzx0002olh3n93on8ki",
       "createdAt": "2024-04-06T15:11:53.660Z",
@@ -16674,6 +16876,353 @@
           "type": "string",
           "input": "***|**|*****|**||**|*",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupdpgj80007gfiespg0e7mx": {
+      "id": "clupdpgj80007gfiespg0e7mx",
+      "createdAt": "2024-04-07T10:26:33.333Z",
+      "updatedAt": "2024-04-07T10:26:35.368Z",
+      "projectId": "clupdnqua0001gfiepqgbcchu",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "u5qM6JSSkEc2wpk3ivRC8y": {
+          "name": "u5qM6JSSkEc2wpk3ivRC8y",
+          "type": "array",
+          "input": "[\"abc\",\"ab\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupzm5v3000712nxti3v5amf": {
+      "id": "clupzm5v3000712nxti3v5amf",
+      "createdAt": "2024-04-07T20:39:51.087Z",
+      "updatedAt": "2024-04-07T20:39:56.636Z",
+      "projectId": "clupzlce0000112nxdeh45der",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "ajf35NmYPQtCu39NXwubEw": {
+          "name": "ajf35NmYPQtCu39NXwubEw",
+          "type": "string",
+          "input": "abc",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupqavar0002woa4k4jil4hl": {
+      "id": "clupqavar0002woa4k4jil4hl",
+      "createdAt": "2024-04-07T16:19:07.635Z",
+      "updatedAt": "2024-04-07T16:19:22.975Z",
+      "projectId": "clupqavar0001woa4fpbf77n6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "bY7GPcY7RR3QRwnXPVHdAz": {
+          "name": "bY7GPcY7RR3QRwnXPVHdAz",
+          "type": "array",
+          "input": "[1,3,1,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupqlgti0005woa47jfvdas3": {
+      "id": "clupqlgti0005woa47jfvdas3",
+      "createdAt": "2024-04-07T16:27:22.087Z",
+      "updatedAt": "2024-04-07T16:28:41.976Z",
+      "projectId": "clupqavar0001woa4fpbf77n6",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "bY7GPcY7RR3QRwnXPVHdAz": {
+          "name": "bY7GPcY7RR3QRwnXPVHdAz",
+          "type": "array",
+          "input": "[5,3,1,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupqnd8l00014psab0e2xhtu": {
+      "id": "clupqnd8l00014psab0e2xhtu",
+      "createdAt": "2024-04-07T16:28:50.757Z",
+      "updatedAt": "2024-04-07T16:28:52.877Z",
+      "projectId": "clupqavar0001woa4fpbf77n6",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "bY7GPcY7RR3QRwnXPVHdAz": {
+          "name": "bY7GPcY7RR3QRwnXPVHdAz",
+          "type": "array",
+          "input": "[5,4,6]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupzlce3000212nxikz2xycb": {
+      "id": "clupzlce3000212nxikz2xycb",
+      "createdAt": "2024-04-07T20:39:12.888Z",
+      "updatedAt": "2024-04-07T20:39:46.791Z",
+      "projectId": "clupzlce0000112nxdeh45der",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "ajf35NmYPQtCu39NXwubEw": {
+          "name": "ajf35NmYPQtCu39NXwubEw",
+          "type": "string",
+          "input": "\"aabb",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluqunvzy0002l3qej1rdife3": {
+      "id": "cluqunvzy0002l3qej1rdife3",
+      "createdAt": "2024-04-08T11:08:59.710Z",
+      "updatedAt": "2024-04-08T11:09:36.802Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "mAaFmwv1PAikx83QFmfPo5": {
+          "name": "mAaFmwv1PAikx83QFmfPo5",
+          "type": "array",
+          "input": "[1,1,1,1,1]",
+          "order": 0
+        },
+        "taQn5Qe5xof1Gs39aEkMaA": {
+          "name": "taQn5Qe5xof1Gs39aEkMaA",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clupzlzst000512nx8uj81skw": {
+      "id": "clupzlzst000512nx8uj81skw",
+      "createdAt": "2024-04-07T20:39:43.230Z",
+      "updatedAt": "2024-04-07T20:39:50.807Z",
+      "projectId": "clupzlce0000112nxdeh45der",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "ajf35NmYPQtCu39NXwubEw": {
+          "name": "ajf35NmYPQtCu39NXwubEw",
+          "type": "string",
+          "input": "aabbc",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupznloh000912nxsakf4dcy": {
+      "id": "clupznloh000912nxsakf4dcy",
+      "createdAt": "2024-04-07T20:40:58.242Z",
+      "updatedAt": "2024-04-07T20:41:11.635Z",
+      "projectId": "clupzlce0000112nxdeh45der",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "ajf35NmYPQtCu39NXwubEw": {
+          "name": "ajf35NmYPQtCu39NXwubEw",
+          "type": "string",
+          "input": "aabbccvvbbnnxxxxx",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluqur1p10001ehci9cv05g3m": {
+      "id": "cluqur1p10001ehci9cv05g3m",
+      "createdAt": "2024-04-08T11:11:27.060Z",
+      "updatedAt": "2024-04-08T11:44:24.606Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "mAaFmwv1PAikx83QFmfPo5": {
+          "name": "mAaFmwv1PAikx83QFmfPo5",
+          "type": "array",
+          "input": "[1,1,2,5,1,5,1,1,2,3]",
+          "order": 0
+        },
+        "taQn5Qe5xof1Gs39aEkMaA": {
+          "name": "taQn5Qe5xof1Gs39aEkMaA",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clur6ionc0002btsi14z4sa5i": {
+      "id": "clur6ionc0002btsi14z4sa5i",
+      "createdAt": "2024-04-08T16:40:52.295Z",
+      "updatedAt": "2024-04-08T16:43:08.726Z",
+      "projectId": "clur6iona0001btsimzatdxhs",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2MKcqABvB2djmmNC69LMfw": {
+          "name": "2MKcqABvB2djmmNC69LMfw",
+          "type": "array",
+          "input": "[1,2,3,0,2]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupzxy9d000f12nxfb8w7a6v": {
+      "id": "clupzxy9d000f12nxfb8w7a6v",
+      "createdAt": "2024-04-07T20:49:01.106Z",
+      "updatedAt": "2024-04-07T20:49:07.663Z",
+      "projectId": "clupzx42j000b12nx4cv3ni4w",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "code",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupzx42j000c12nxyrgz366p": {
+      "id": "clupzx42j000c12nxyrgz366p",
+      "createdAt": "2024-04-07T20:48:21.979Z",
+      "updatedAt": "2024-04-07T20:49:23.442Z",
+      "projectId": "clupzx42j000b12nx4cv3ni4w",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "caraaerac",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clupzy5rh000h12nxo2cjmvkb": {
+      "id": "clupzy5rh000h12nxo2cjmvkb",
+      "createdAt": "2024-04-07T20:49:10.829Z",
+      "updatedAt": "2024-04-07T20:49:38.671Z",
+      "projectId": "clupzx42j000b12nx4cv3ni4w",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "aab",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clur9q39x0002jtldtrlgc32i": {
+      "id": "clur9q39x0002jtldtrlgc32i",
+      "createdAt": "2024-04-08T18:10:36.691Z",
+      "updatedAt": "2024-04-08T18:11:18.933Z",
+      "projectId": "clur9q39v0001jtldkn0qb80z",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "kH3Qqj4agyFwJFbLKSabyy": {
+          "name": "kH3Qqj4agyFwJFbLKSabyy",
+          "type": "array",
+          "input": "[\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"dogcatsdog\",\"hippopotamuses\",\"rat\",\"ratcatdogcat\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clurayvb30002uhcbbts4jrzs": {
+      "id": "clurayvb30002uhcbbts4jrzs",
+      "createdAt": "2024-04-08T18:45:25.886Z",
+      "updatedAt": "2024-04-08T18:46:05.717Z",
+      "projectId": "clurayvb20001uhcbmrkuqc3x",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aiSv9WUwz6qg4H78F5uCji": {
+          "name": "aiSv9WUwz6qg4H78F5uCji",
+          "type": "string",
+          "input": "pineapplepenapple",
+          "order": 0
+        },
+        "uKq7F71hC4mMpMugCsX7gp": {
+          "name": "uKq7F71hC4mMpMugCsX7gp",
+          "type": "array",
+          "input": "[\"apple\",\"pen\",\"applepen\",\"pine\",\"pineapple\"]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clurb26v10005uhcbkjk2bo5l": {
+      "id": "clurb26v10005uhcbkjk2bo5l",
+      "createdAt": "2024-04-08T18:48:00.829Z",
+      "updatedAt": "2024-04-08T18:48:13.464Z",
+      "projectId": "clurayvb20001uhcbmrkuqc3x",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "aiSv9WUwz6qg4H78F5uCji": {
+          "name": "aiSv9WUwz6qg4H78F5uCji",
+          "type": "string",
+          "input": "catsanddog",
+          "order": 0
+        },
+        "uKq7F71hC4mMpMugCsX7gp": {
+          "name": "uKq7F71hC4mMpMugCsX7gp",
+          "type": "array",
+          "input": "[\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]",
+          "order": 1
         }
       },
       "description": null
@@ -17828,20 +18377,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "clid8trdy0003lj08p4p78v70": {
-      "id": "clid8trdy0003lj08p4p78v70",
-      "createdAt": "2023-06-01T14:40:13.799Z",
-      "updatedAt": "2023-06-01T14:40:13.799Z",
-      "projectId": "clid8so120001jn08i292ieah",
-      "title": "Two Pointers",
-      "slug": "two-pointers",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {ArrayProxyObject} height\n */\nreturn function getArraySum(height) {\n  const N = height.length;\n  let left = 0;\n  let right = N - 1;\n  let total = 0;\n\n  let leftMax = height[left];\n  let rightMax = height[right];\n\n  while (left < right) {\n    height.setColor(left, \"green\");\n    height.setColor(right, \"cyan\");\n    if (leftMax < rightMax) {\n      left++;\n      leftMax = Math.max(leftMax, height[left]);\n      total += leftMax - height[left];\n    } else {\n      right--;\n      rightMax = Math.max(rightMax, height[right]);\n      total += rightMax - height[right];\n    }\n  }\n\n  return total;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "clid8xvaa0007jn08og948mdx": {
       "id": "clid8xvaa0007jn08og948mdx",
       "createdAt": "2023-06-01T14:43:25.474Z",
@@ -17909,6 +18444,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar numOfWays = function (nums) {\n  const m = nums.length;\n  const mod = 1e9 + 7;\n\n  // Table of Pascal's triangle\n  const table = window.Array.from({ length: m }, () =>\n    Array.from({ length: m }, () => 0)\n  );\n  for (let i = 0; i < m; i++) {\n    table[i][0] = table[i][i] = 1;\n  }\n  for (let i = 2; i < m; i++) {\n    for (let j = 1; j < i; j++) {\n      table[i][j] = (table[i - 1][j - 1] + table[i - 1][j]) % mod;\n    }\n  }\n\n  const dfs = (nums) => {\n    const m = nums.length;\n    if (m < 3) return 1;\n\n    const rootNum = nums[0];\n    const leftNodes = new Array();\n    const rightNodes = new Array();\n    for (let i = 1; i < m; i++) {\n      if (nums[i] < rootNum) {\n        leftNodes.push(nums[i]);\n      } else {\n        rightNodes.push(nums[i]);\n      }\n    }\n    const leftWays = dfs(leftNodes) % mod;\n    const rightWays = dfs(rightNodes) % mod;\n\n    return (\n      (((leftWays * rightWays) % mod) * table[m - 1][leftNodes.length]) % mod\n    );\n  };\n\n  return (dfs(nums) - 1) % mod;\n};\n\nreturn numOfWays;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clid8trdy0003lj08p4p78v70": {
+      "id": "clid8trdy0003lj08p4p78v70",
+      "createdAt": "2023-06-01T14:40:13.799Z",
+      "updatedAt": "2024-04-08T18:24:07.757Z",
+      "projectId": "clid8so120001jn08i292ieah",
+      "title": "Two Pointers",
+      "slug": "two-pointers",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {ArrayProxyObject} height\n */\nreturn function getArraySum(height) {\n  const N = height.length;\n  let left = 0;\n  let right = N - 1;\n  let total = 0;\n\n  let leftMax = height[left];\n  let rightMax = height[right];\n\n  while (left < right) {\n    height.setColor(left, \"green\");\n    height.setColor(right, \"cyan\");\n    if (leftMax < rightMax) {\n      left++;\n      leftMax = Math.max(leftMax, height[left]);\n      total += leftMax - height[left];\n    } else {\n      right--;\n      rightMax = Math.max(rightMax, height[right]);\n      total += rightMax - height[right];\n    }\n  }\n\n  return total;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
       "pythonCode": null,
       "order": 1
     },
@@ -18290,20 +18839,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clk4bqg2m0001mf087me67lhn": {
-      "id": "clk4bqg2m0001mf087me67lhn",
-      "createdAt": "2023-07-15T18:11:07.102Z",
-      "updatedAt": "2023-07-15T18:11:07.102Z",
-      "projectId": "clid8so120001jn08i292ieah",
-      "title": "Two Pointers 2",
-      "slug": "two-pointers-2",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {ArrayProxyObject} height\n * @return {number}\n */\nvar trap = function (height) {\n  const n = height.length;\n\n  let left = 0;\n  let right = n - 1;\n\n  let maxLeft = -Infinity;\n  let maxRight = -Infinity;\n\n  let count = 0;\n\n  const countIn = (val) => {\n    if (maxLeft > val && val < maxRight) {\n      count += Math.min(maxLeft, maxRight) - val;\n    }\n  };\n\n  while (left < right) {\n    height.setColor(left, \"green\");\n    height.setColor(right, \"cyan\");\n\n    maxLeft = Math.max(maxLeft, height[left]);\n    maxRight = Math.max(maxRight, height[right]);\n\n    if (height[left] < height[right]) {\n      countIn(height[left]);\n      left++;\n    } else {\n      countIn(height[right]);\n      right--;\n    }\n  }\n\n  return count;\n};\n\nreturn trap;\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
-      "pythonCode": null,
-      "order": 2
-    },
     "clk4cf01c0004jw08bpw6qyg2": {
       "id": "clk4cf01c0004jw08bpw6qyg2",
       "createdAt": "2023-07-15T18:30:12.720Z",
@@ -18444,20 +18979,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clku4r9d70003l908cey42p2r": {
-      "id": "clku4r9d70003l908cey42p2r",
-      "createdAt": "2023-08-02T19:37:48.331Z",
-      "updatedAt": "2023-11-04T15:16:14.931Z",
-      "projectId": "clku4r9d70001l9087zlb1dfn",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "var permute = function (nums) {\n  const res = new Array();\n  const track = new Array();\n  const used = new Array(nums.length).fill(false);\n  used.setColorMap({\n    true: \"cyan\",\n  });\n\n  const backtrack = (size = 0) => {\n    if (size === nums.length) {\n      res.push([...track]);\n      console.log(track);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (used[i]) {\n        continue;\n      }\n\n      track.push(nums[i]);\n      used[i] = true;\n\n      nums.setColor(i, \"green\");\n      backtrack(size + 1);\n      nums.setColor(i, null);\n\n      track.pop();\n      used[i] = false;\n    }\n  };\n\n  backtrack();\n\n  return res;\n};\n\nreturn permute;\n",
-      "pythonCode": null,
-      "order": 2
-    },
     "clkvjsm1n0003me08m4kl0u03": {
       "id": "clkvjsm1n0003me08m4kl0u03",
       "createdAt": "2023-08-03T19:26:31.835Z",
@@ -18497,6 +19018,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {ArrayProxyObject} nums\n */\nreturn function moveZeroes(nums) {\n  let lastNonZeroFoundAt = 0;\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"green\");\n\n    if (nums[i] !== 0) {\n      nums.setColor(lastNonZeroFoundAt, \"cyan\");\n      [nums[i], nums[lastNonZeroFoundAt]] = [nums[lastNonZeroFoundAt], nums[i]];\n      lastNonZeroFoundAt++;\n    }\n  }\n\n  return nums;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "clku4r9d70003l908cey42p2r": {
+      "id": "clku4r9d70003l908cey42p2r",
+      "createdAt": "2023-08-02T19:37:48.331Z",
+      "updatedAt": "2024-04-07T20:08:09.817Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var permute = function (nums) {\n  const res = new Array();\n  const track = new Array();\n  const used = new Array(nums.length).fill(false);\n  used.setColorMap({\n    true: \"cyan\",\n  });\n\n  const backtrack = (size = 0) => {\n    if (size === nums.length) {\n      res.push([...track]);\n      console.log(track);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (used[i]) {\n        continue;\n      }\n\n      track.push(nums[i]);\n      used[i] = true;\n\n      nums.setColor(i, \"green\");\n      backtrack(size + 1);\n      nums.setColor(i, null);\n\n      track.pop();\n      used[i] = false;\n    }\n  };\n\n  backtrack();\n\n  return res;\n};\n\nreturn permute;\n",
       "pythonCode": null,
       "order": 2
     },
@@ -18569,20 +19104,6 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar search = function (nums, target) {\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left <= right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const middle = left + ((right - left) >> 1);\n    nums.setColor(middle, \"green\");\n    if (nums[middle] === target) return middle;\n    nums.setColor(middle, null);\n\n    // Case 2: subarray on mid's left is sorted\n    if (nums[middle] >= nums[left]) {\n      if (target >= nums[left] && target < nums[middle]) {\n        right = middle - 1;\n      } else {\n        left = middle + 1;\n      }\n    } else {\n      // Case 3: subarray on middle's right is sorted\n      if (target <= nums[right] && target > nums[middle]) {\n        left = middle + 1;\n      } else {\n        right = middle - 1;\n      }\n    }\n  }\n\n  return -1;\n};\n\nreturn search;\n",
       "pythonCode": null,
       "order": 1
-    },
-    "cll6g2p760003mi08gqsl87n6": {
-      "id": "cll6g2p760003mi08gqsl87n6",
-      "createdAt": "2023-08-11T10:27:51.955Z",
-      "updatedAt": "2023-08-11T10:27:51.955Z",
-      "projectId": "cll6g2p760001mi08lntkwn5p",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n  const dp = new Array(amount + 1).fill(0);\n  dp[0] = 1;\n\n  for (let i = n - 1; i >= 0; i--) {\n    coins.setColor(i, \"green\");\n    for (let j = coins[i]; j <= amount; j++) {\n      dp.setColor(j, \"cyan\");\n      dp[j] += dp[j - coins[i]];\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[amount];\n};\n\nreturn change;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "cllb3ap4n0003jw08dbqfuswr": {
       "id": "cllb3ap4n0003jw08dbqfuswr",
@@ -19830,20 +20351,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "clok66z0m0007pb0gc9lhdcyb": {
-      "id": "clok66z0m0007pb0gc9lhdcyb",
-      "createdAt": "2023-11-04T14:59:08.614Z",
-      "updatedAt": "2023-11-04T15:45:58.561Z",
-      "projectId": "clku4r9d70001l9087zlb1dfn",
-      "title": "In Place",
-      "slug": "in-place",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "Set used val to \"null\" in the input array",
-      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar permute = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = () => {\n    if (stack.length === nums.length) {\n      result.push([...stack]);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (nums[i] === null) continue;\n      const num = nums[i];\n      nums[i] = null;\n\n      stack.push(num);\n      backtrack();\n      stack.pop();\n\n      nums[i] = num;\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn permute;\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "clok6q20b0009pb0g2eshm7g4": {
       "id": "clok6q20b0009pb0g2eshm7g4",
       "createdAt": "2023-11-04T15:13:58.956Z",
@@ -20865,20 +21372,6 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} start\n * @return {number}\n */\nvar amountOfTime = function (root, start) {\n  let max = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, -1];\n    node.blink();\n\n    const [leftHeight, leftStart] = dfs(node.left);\n    const [rightHeight, rightStart] = dfs(node.right);\n    const height = Math.max(leftHeight, rightHeight);\n    let startDist = -1;\n\n    if (leftStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, leftStart, leftStart + rightHeight);\n      startDist = leftStart + 1;\n    } else if (rightStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, rightStart, leftHeight + rightStart);\n      startDist = rightStart + 1;\n    } else if (node.val === start) {\n      node.setColor(\"red\");\n      startDist = 1;\n      max = height;\n    }\n\n    return [height + 1, startDist];\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn amountOfTime;\n",
       "pythonCode": null,
       "order": 0
-    },
-    "clr937q2m000111ifzwnao9uh": {
-      "id": "clr937q2m000111ifzwnao9uh",
-      "createdAt": "2024-01-11T10:49:23.901Z",
-      "updatedAt": "2024-01-11T19:46:34.448Z",
-      "projectId": "clr7ymsll0001uxww7ezoqehc",
-      "title": "Trie + DP",
-      "slug": "trie-dp",
-      "timeComplexity": "O(n^2 + m * k)",
-      "spaceComplexity": "O(n + m * k)",
-      "description": "",
-      "code": "const END_CHAR = \"*\";\r\n\r\n/**\r\n * @param {string} s\r\n * @param {string[]} wordDict\r\n * @return {boolean}\r\n */\r\nvar wordBreak = function(s, wordDict) {\r\n    const trie = buildTrie(wordDict);\r\n    console.log(trie);\r\n    \r\n    const dp = new Array(s.length);\r\n\r\n    for (let i = 0; i < s.length; i++) {\r\n        if (i === 0 || dp[i - 1]) {\r\n            let curr = trie;\r\n            for (let j = i; j < s.length; j++) {\r\n                const char = s[j];\r\n                if (!(char in curr)) {\r\n                    break;\r\n                }\r\n\r\n                curr = curr[char];\r\n                if (END_CHAR in curr) {\r\n                    dp[j] = true;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    return dp.at(-1) ?? false;\r\n};\r\n\r\nfunction buildTrie(words) {\r\n    const root = new Object();\r\n    for (const word of words) {\r\n        let current = root;\r\n        for (const char of word) {\r\n            current[char] ??= new Object();\r\n            current = current[char];\r\n        }\r\n        current[END_CHAR] = true;\r\n    }\r\n\r\n    return root;\r\n}\r\n\r\nreturn wordBreak;\r\n",
-      "pythonCode": null,
-      "order": 1
     },
     "clrknj03y000314dd5zgn37jz": {
       "id": "clrknj03y000314dd5zgn37jz",
@@ -21958,6 +22451,34 @@
       "pythonCode": null,
       "order": 0
     },
+    "cluqut5mx0003ehcif0ejkfch": {
+      "id": "cluqut5mx0003ehcif0ejkfch",
+      "createdAt": "2024-04-08T11:13:05.481Z",
+      "updatedAt": "2024-04-08T12:12:15.419Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n\n  const len = totalSum * 2 + 1;\n  const dp = Array.from({ length: n }, () => new Array(len));\n  dp.showIndexes(n, len - 1);\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n\n    const index = sum + totalSum;\n    if (dp[i][index] !== undefined) {\n      dp[i].setColor(index, \"green\");\n      dp[i].setColor(index, null);\n      return dp[i][index];\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    dp[i][index] = count;\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cluqvugkp0001100tji27ozce": {
+      "id": "cluqvugkp0001100tji27ozce",
+      "createdAt": "2024-04-08T11:42:05.928Z",
+      "updatedAt": "2024-04-08T12:14:28.572Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n\n  const len = totalSum * 2 + 1;\n  const dp = Array.from({ length: n }, () => new Array(len));\n  dp.showIndexes(n, len - 1);\n\n  const backtrack = (i, sum) => {\n    if (i === -1) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n\n    const index = sum + totalSum;\n    if (dp[i][index] !== undefined) {\n      dp[i].setColor(index, \"green\");\n      dp[i].setColor(index, null);\n      return dp[i][index];\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i - 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i - 1, sum - num);\n    nums.setColor(i, null);\n\n    dp[i][index] = count;\n    return count;\n  };\n\n  const result = backtrack(n - 1, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 2
+    },
     "clu8ms2wq000586zndq42zubm": {
       "id": "clu8ms2wq000586zndq42zubm",
       "createdAt": "2024-03-26T17:08:27.194Z",
@@ -22013,6 +22534,76 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function (nums) {\n  const n = nums.length;\n\n  let i = 0;\n  while (i < n) {\n    const num = nums[i];\n    const index = nums[i] - 1;\n    if (num > 0 && num <= n && nums[index] !== num) {\n      [nums[index], nums[i]] = [nums[i], nums[index]];\n    } else {\n      i++;\n    }\n  }\n\n  for (i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    if (num !== i + 1) return i + 1;\n  }\n\n  return n + 1;\n};\n\nreturn firstMissingPositive;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clur14frc0001cob26yxytwjf": {
+      "id": "clur14frc0001cob26yxytwjf",
+      "createdAt": "2024-04-08T14:09:49.510Z",
+      "updatedAt": "2024-04-08T14:14:49.175Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 4",
+      "slug": "solution-4",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  const dp = Array.from({ length: n }, () => {\n    const row = new Array(len).fill(0);\n    row.setColorMap({ 0: \"black\" });\n    return row;\n  });\n  dp.showIndexes(n, len - 1);\n  dp[0][nums[0] + total] += 1;\n  dp[0][-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[i - 1][sumIndex] > 0) {\n        dp[i][sumIndex + num] += dp[i - 1][sumIndex];\n        dp[i][sumIndex - num] += dp[i - 1][sumIndex];\n      }\n    }\n  }\n\n  return dp[n - 1][target + total];\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 3
+    },
+    "clurb6rb20007uhcblvmofw85": {
+      "id": "clurb6rb20007uhcblvmofw85",
+      "createdAt": "2024-04-08T18:51:33.951Z",
+      "updatedAt": "2024-04-08T18:52:54.055Z",
+      "projectId": "clurayvb20001uhcbmrkuqc3x",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {string[]}\n */\nfunction wordBreak(s, wordDict) {\n  const wordSet = new Set();\n  wordDict.forEach((word) => wordSet.add(word));\n  const results = new Array();\n\n  const path = new Array();\n  function backtrack(start) {\n    if (start === s.length) {\n      results.push(path.join(\" \"));\n      return;\n    }\n    s.setColor(start, \"green\");\n\n    for (let end = start + 1; end <= s.length; end++) {\n      const word = s.slice(start, end);\n      if (wordSet.has(word)) {\n        path.push(word);\n        backtrack(end);\n        path.pop();\n      }\n    }\n\n    s.setColor(start, null);\n  }\n\n  backtrack(0);\n  return results;\n}\n\nreturn wordBreak;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clur1gb790001e5nineitqvvo": {
+      "id": "clur1gb790001e5nineitqvvo",
+      "createdAt": "2024-04-08T14:19:03.476Z",
+      "updatedAt": "2024-04-08T14:24:01.140Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 5",
+      "slug": "solution-5",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  let dp = new Array(len).fill(0);\n  // row.setColorMap({ 0: \"black\" });\n\n  dp[nums[0] + total] += 1;\n  dp[-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const nextRow = new Array(len).fill(0);\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[sumIndex] > 0) {\n        nextRow[sumIndex + num] += dp[sumIndex];\n        nextRow[sumIndex - num] += dp[sumIndex];\n      }\n    }\n\n    dp = nextRow;\n  }\n\n  return dp[target + total];\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 4
+    },
+    "clurayvb30003uhcbqq17yc67": {
+      "id": "clurayvb30003uhcbqq17yc67",
+      "createdAt": "2024-04-08T18:45:25.886Z",
+      "updatedAt": "2024-04-08T18:47:43.504Z",
+      "projectId": "clurayvb20001uhcbmrkuqc3x",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {string[]}\n */\nvar wordBreak = function (s, wordDict) {\n  const n = s.length;\n\n  const dp = new Array(n + 1);\n  dp.showIndexes(n + 1, 5);\n  for (let i = 1; i <= s.length; i++) {\n    for (const word of wordDict) {\n      const length = word.length;\n      if (i < length) continue;\n\n      if (i === length || dp[i - length]) {\n        const sub = s.slice(i - length, i);\n        if (sub === word) {\n          (dp[i] ??= new Array()).push(word);\n        }\n      }\n    }\n  }\n\n  if (!dp[n]) return [];\n\n  const result = new Array();\n\n  const current = new Array();\n  const dfs = (i) => {\n    if (i === 0) {\n      result.push(current.toReversed().join(\" \"));\n      return;\n    }\n    if (i < 0 || !dp[i]) return;\n\n    const words = dp[i];\n    for (const word of words) {\n      const length = word.length;\n      current.push(word);\n      dfs(i - length);\n      current.pop();\n    }\n  };\n\n  // console.log(dp.join(\", \"));\n\n  dfs(n);\n\n  return result;\n};\n\nreturn wordBreak;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cll6g2p760003mi08gqsl87n6": {
+      "id": "cll6g2p760003mi08gqsl87n6",
+      "createdAt": "2023-08-11T10:27:51.955Z",
+      "updatedAt": "2024-04-08T15:44:16.225Z",
+      "projectId": "cll6g2p760001mi08lntkwn5p",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n  const dp = new Array(amount + 1).fill(0);\n  dp[0] = 1;\n\n  for (let i = n - 1; i >= 0; i--) {\n    coins.setColor(i, \"green\");\n    for (let j = coins[i]; j <= amount; j++) {\n      dp.setColor(j, \"cyan\");\n      dp[j] += dp[j - coins[i]];\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[amount];\n};\n\nreturn change;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clu8ot1ni0003g2aoc7imymfu": {
       "id": "clu8ot1ni0003g2aoc7imymfu",
@@ -22126,20 +22717,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clumq8xdn0003b8gg7pkw6tpi": {
-      "id": "clumq8xdn0003b8gg7pkw6tpi",
-      "createdAt": "2024-04-05T13:54:18.491Z",
-      "updatedAt": "2024-04-05T13:57:14.393Z",
-      "projectId": "clumq8xdn0001b8ggrraj2hoj",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar boundaryOfBinaryTree = function (root) {\n  if (!root) return [];\n\n  const result = [root.val];\n  if (!root.left && !root.right) return result;\n\n  const isLeaf = (node) => !node.left && !node.right;\n\n  const dfsLeft = (node) => {\n    if (!node || isLeaf(node)) return;\n    node.setColor(\"cyan\", \"blink\");\n\n    result.push(node.val);\n\n    if (node.left) {\n      dfsLeft(node.left);\n    } else {\n      dfsLeft(node.right);\n    }\n  };\n  dfsLeft(root.left);\n\n  const dfsLeaves = (node) => {\n    if (!node) return;\n    node.blink();\n\n    if (isLeaf(node)) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n    } else {\n      dfsLeaves(node.left);\n      dfsLeaves(node.right);\n    }\n  };\n  dfsLeaves(root);\n\n  const dfsRight = (node) => {\n    if (!node || isLeaf(node)) return;\n\n    if (node.right) {\n      dfsRight(node.right);\n    } else {\n      dfsRight(node.left);\n    }\n\n    node.setColor(\"orange\", \"blink\");\n    result.push(node.val);\n  };\n  dfsRight(root.right);\n\n  return result;\n};\n\nreturn boundaryOfBinaryTree;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cluo8gjzx0003olh3ty7fvqnz": {
       "id": "cluo8gjzx0003olh3ty7fvqnz",
       "createdAt": "2024-04-06T15:11:53.660Z",
@@ -22151,6 +22728,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {number[][]} queries\n * @return {number[]}\n */\nvar platesBetweenCandles = function (s, queries) {\n  const n = s.length;\n  const bars = new Array();\n\n  for (let i = 0; i < n; i++) {\n    const char = s[i];\n    if (char === \"|\") {\n      s.setColor(i, \"green\");\n      bars.push(i);\n    } else {\n      s.setColor(i, \"cyan\");\n    }\n  }\n\n  if (bars.length < 2) {\n    return queries.map(() => 0);\n  }\n\n  const result = new Array();\n  for (let i = 0; i < queries.length; i++) {\n    queries.setColor(i, \"cyan\");\n    const [from, to] = queries[i];\n    const [, leftIndex] = bisect(bars, 0, from);\n    const [rightIndex] = bisect(bars, leftIndex, to);\n    const left = bars[leftIndex];\n    const right = bars[rightIndex];\n\n    if (left >= right) {\n      result.push(0);\n      continue;\n    }\n\n    const candlesInRange = rightIndex - leftIndex - 1;\n    const size = right - left - 1;\n\n    result.push(size - candlesInRange);\n  }\n\n  return result;\n};\n\nfunction bisect(arr, start, target) {\n  let left = start || 0;\n  let right = arr.length - 1;\n\n  while (left <= right) {\n    const mid = left + ((right - left) >> 1);\n    arr.setColor(mid, \"green\");\n    arr.setColor(mid, null);\n\n    if (arr[mid] === target) return [mid, mid];\n    if (arr[mid] > target) {\n      right = mid - 1;\n    } else {\n      left = mid + 1;\n    }\n  }\n\n  return [Math.max(0, right), Math.min(left, arr.length - 1)];\n}\n\nreturn platesBetweenCandles;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clumq8xdn0003b8gg7pkw6tpi": {
+      "id": "clumq8xdn0003b8gg7pkw6tpi",
+      "createdAt": "2024-04-05T13:54:18.491Z",
+      "updatedAt": "2024-04-08T11:08:41.663Z",
+      "projectId": "clumq8xdn0001b8ggrraj2hoj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar boundaryOfBinaryTree = function (root) {\n  if (!root) return [];\n\n  const result = [root.val];\n  if (!root.left && !root.right) return result;\n\n  const isLeaf = (node) => !node.left && !node.right;\n\n  const dfsLeft = (node) => {\n    if (!node || isLeaf(node)) return;\n    node.setColor(\"cyan\", \"blink\");\n\n    result.push(node.val);\n\n    if (node.left) {\n      dfsLeft(node.left);\n    } else {\n      dfsLeft(node.right);\n    }\n  };\n  dfsLeft(root.left);\n\n  const dfsLeaves = (node) => {\n    if (!node) return;\n    node.blink();\n\n    if (isLeaf(node)) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n    } else {\n      dfsLeaves(node.left);\n      dfsLeaves(node.right);\n    }\n  };\n  dfsLeaves(root);\n\n  const dfsRight = (node) => {\n    if (!node || isLeaf(node)) return;\n\n    if (node.right) {\n      dfsRight(node.right);\n    } else {\n      dfsRight(node.left);\n    }\n\n    node.setColor(\"orange\", \"blink\");\n    result.push(node.val);\n  };\n  dfsRight(root.right);\n\n  return result;\n};\n\nreturn boundaryOfBinaryTree;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -22185,7 +22776,7 @@
     "clud7d5rb0003mz5fl1rq8i0r": {
       "id": "clud7d5rb0003mz5fl1rq8i0r",
       "createdAt": "2024-03-29T21:55:47.685Z",
-      "updatedAt": "2024-03-31T19:04:04.327Z",
+      "updatedAt": "2024-04-07T10:25:02.663Z",
       "projectId": "clud7d5r90001mz5fyrh92wek",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -22238,20 +22829,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clr7ymsll0003uxwwwbs1ueqc": {
-      "id": "clr7ymsll0003uxwwwbs1ueqc",
-      "createdAt": "2024-01-10T15:53:22.762Z",
-      "updatedAt": "2024-04-03T14:04:45.468Z",
-      "projectId": "clr7ymsll0001uxww7ezoqehc",
-      "title": "Bottom-Up DP",
-      "slug": "bottom-up-dp",
-      "timeComplexity": "O(n * m * k)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nvar wordBreak = function (s, wordDict) {\n  const dp = new Array(s.length);\n\n  for (let i = 0; i < s.length; i++) {\n    for (const word of wordDict) {\n      if (i < word.length - 1) continue;\n\n      if (i === word.length - 1 || dp[i - word.length]) {\n        if (s.slice(i - word.length + 1, i + 1) === word) {\n          dp[i] = true;\n          break;\n        }\n      }\n    }\n  }\n\n  return dp.at(-1) ?? false;\n};\n\nreturn wordBreak;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clhxeo0lv0004la08pzluqvip": {
       "id": "clhxeo0lv0004la08pzluqvip",
       "createdAt": "2023-05-21T12:39:24.691Z",
@@ -22291,6 +22868,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} x\n * @param {number} n\n * @return {number}\n */\nvar myPow = function (x, n) {\n  const v = new Object();\n  v.n = n;\n  v.x = x;\n\n  if (n < 0) {\n    v.x = 1 / x;\n    v.n *= -1;\n  }\n\n  v.curr = 1;\n  v.max = n;\n\n  while (v.max > 0) {\n    if (v.max % 2 === 1) {\n      v.max--;\n      v.curr *= v.x;\n    }\n\n    v.max /= 2;\n    v.x *= v.x;\n  }\n\n  return v.curr;\n};\n\nreturn myPow;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clr7ymsll0003uxwwwbs1ueqc": {
+      "id": "clr7ymsll0003uxwwwbs1ueqc",
+      "createdAt": "2024-01-10T15:53:22.762Z",
+      "updatedAt": "2024-04-08T18:23:15.580Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Bottom-Up DP",
+      "slug": "bottom-up-dp",
+      "timeComplexity": "O(n * m * k)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nvar wordBreak = function (s, wordDict) {\n  const dp = new Array(s.length);\n\n  for (let i = 0; i < s.length; i++) {\n    for (const word of wordDict) {\n      if (i < word.length - 1) continue;\n\n      if (i === word.length - 1 || dp[i - word.length]) {\n        if (s.slice(i - word.length + 1, i + 1) === word) {\n          dp[i] = true;\n          break;\n        }\n      }\n    }\n  }\n\n  return dp.at(-1) ?? false;\n};\n\nreturn wordBreak;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -22350,6 +22941,20 @@
       "pythonCode": null,
       "order": 2
     },
+    "clupdnquc0003gfiexgq4lzm5": {
+      "id": "clupdnquc0003gfiexgq4lzm5",
+      "createdAt": "2024-04-07T10:25:13.379Z",
+      "updatedAt": "2024-04-07T10:27:34.117Z",
+      "projectId": "clupdnqua0001gfiepqgbcchu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} words\n * @return {string}\n */\nvar alienOrder = function (words) {\n  const n = words.length;\n\n  const indegrees = new Map();\n  const adjList = new Object();\n  for (const word of words) {\n    for (const char of word) {\n      adjList[char] ??= new Array();\n      if (!indegrees.has(char)) {\n        indegrees.set(char, 0);\n      }\n    }\n  }\n\n  for (let i = 0; i < n - 1; i++) {\n    const word = words[i];\n    const nextWord = words[i + 1];\n\n    if (word.length > nextWord.length && word.startsWith(nextWord)) {\n      return \"\";\n    }\n\n    for (let j = 0; j < word.length && j < nextWord.length; j++) {\n      const from = word[j];\n      const to = nextWord[j];\n      if (from === to) continue;\n\n      adjList[from].push(to);\n      indegrees.set(to, indegrees.get(to) + 1);\n      break;\n    }\n  }\n\n  console.log({ adjList, indegrees });\n\n  const result = [];\n  const queue = new Queue();\n  for (const [char, count] of indegrees) {\n    if (count !== 0) continue;\n\n    queue.enqueue(char);\n  }\n\n  while (!queue.isEmpty()) {\n    const curr = queue.dequeue();\n    result.push(curr);\n\n    for (const next of adjList[curr]) {\n      const nextCount = indegrees.get(next) - 1;\n      indegrees.set(next, nextCount);\n      if (nextCount < 0) continue;\n\n      if (nextCount === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  if (result.length < indegrees.size) return \"\";\n\n  return result.join(\"\");\n};\n\nreturn alienOrder;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clulqjlya0003o3ofen5cct2r": {
       "id": "clulqjlya0003o3ofen5cct2r",
       "createdAt": "2024-04-04T21:14:50.721Z",
@@ -22378,6 +22983,34 @@
       "pythonCode": null,
       "order": 0
     },
+    "clok66z0m0007pb0gc9lhdcyb": {
+      "id": "clok66z0m0007pb0gc9lhdcyb",
+      "createdAt": "2023-11-04T14:59:08.614Z",
+      "updatedAt": "2024-04-07T20:08:13.235Z",
+      "projectId": "clku4r9d70001l9087zlb1dfn",
+      "title": "In Place",
+      "slug": "in-place",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "Set used val to \"null\" in the input array",
+      "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar permute = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = () => {\n    if (stack.length === nums.length) {\n      result.push([...stack]);\n      return;\n    }\n\n    for (let i = 0; i < nums.length; i++) {\n      if (nums[i] === null) continue;\n      const num = nums[i];\n      nums[i] = null;\n\n      stack.push(num);\n      backtrack();\n      stack.pop();\n\n      nums[i] = num;\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn permute;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cluplqzf90003smnq3f075kno": {
+      "id": "cluplqzf90003smnq3f075kno",
+      "createdAt": "2024-04-07T14:11:41.396Z",
+      "updatedAt": "2024-04-07T16:19:00.314Z",
+      "projectId": "cluplqzf80001smnq2v439mu0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar validSubarrays = function (nums) {\n  const n = nums.length;\n  const stack = new Array();\n\n  let result = 0;\n\n  for (let i = 0; i <= n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i] ?? -Infinity;\n\n    while (stack.length && nums[stack.at(-1)] > num) {\n      stack.pop();\n      result += stack.length;\n    }\n    stack.push(i);\n\n    console.log(stack);\n  }\n\n  result += nums.length;\n\n  return result;\n};\n\nreturn validSubarrays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluo4h2tx0003rsrn39bmji6i": {
       "id": "cluo4h2tx0003rsrn39bmji6i",
       "createdAt": "2024-04-06T13:20:19.603Z",
@@ -22390,6 +23023,174 @@
       "description": null,
       "code": "/**\n * @param {string} word1\n * @param {string} word2\n * @return {number}\n */\nvar minDistance = function (word1, word2) {\n  if (word1.length > word2.length) {\n    [word1, word2] = [word2, word1];\n  }\n  const m = word1.length;\n  const n = word2.length;\n\n  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1));\n\n  for (let i = 0; i <= m; i++) {\n    dp[i][0] = i;\n  }\n  for (let j = 0; j <= n; j++) {\n    dp[0][j] = j;\n  }\n\n  for (let i = 1; i <= m; i++) {\n    for (let j = 1; j <= n; j++) {\n      word1.setColor(i - 1, \"green\");\n      word2.setColor(j - 1, \"green\");\n      if (word1[i - 1] === word2[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1];\n      } else {\n        dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);\n      }\n      word1.setColor(i - 1, null);\n      word2.setColor(j - 1, null);\n    }\n  }\n\n  const dist = dp[m][n];\n\n  return dist;\n};\n\nreturn minDistance;\n",
       "pythonCode": null,
+      "order": 0
+    },
+    "clur48l820001nffdweld7wr2": {
+      "id": "clur48l820001nffdweld7wr2",
+      "createdAt": "2024-04-08T15:37:02.066Z",
+      "updatedAt": "2024-04-08T15:43:11.940Z",
+      "projectId": "cll6g2p760001mi08lntkwn5p",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n\n  const dp = Array.from({ length: n }, () => new Array(amount + 1));\n  dp.showIndexes(n, amount);\n\n  const backtrack = (i, sum) => {\n    if (sum === amount) {\n      return 1;\n    }\n    if (i === n || sum > amount) {\n      return 0;\n    }\n    if (dp[i][sum] !== undefined) {\n      dp[i].setColor(sum, \"green\");\n      dp[i].setColor(sum, null);\n      return dp[i][sum];\n    }\n\n    let count = 0;\n    for (let j = i; j < n; j++) {\n      coins.setColor(j, \"green\");\n      count += backtrack(j, sum + coins[j]);\n      coins.setColor(j, null);\n    }\n\n    dp[i][sum] = count;\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn change;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clupzlce3000312nxa3kwahwj": {
+      "id": "clupzlce3000312nxa3kwahwj",
+      "createdAt": "2024-04-07T20:39:12.888Z",
+      "updatedAt": "2024-04-07T20:43:21.461Z",
+      "projectId": "clupzlce0000112nxdeh45der",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {string[]}\n */\nvar generatePalindromes = function (s) {\n  const freqMap = new Map();\n  const half = s.length >> 1;\n  const isEven = s.length % 2 === 0;\n\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n    const newCount = freqMap.get(char);\n  }\n\n  let singleChar = null;\n  for (const [char, count] of freqMap) {\n    if (count % 2 === 1) {\n      if (singleChar || isEven) return [];\n      singleChar = char;\n    }\n  }\n\n  console.log({singleChar});\n\n  const result = new Array();\n  const current = new Array();\n\n  const backtrack = () => {\n    if (current.length === half) {\n      const copy = [...current];\n      const rev = copy.toReversed();\n      if (singleChar) copy.push(singleChar);\n      copy.push(...rev);\n      result.push(copy.join(\"\"));\n      return;\n    }\n\n    for (const [char, count] of freqMap) {\n      if (count < 2) continue;\n      freqMap.set(char, count - 2);\n      current.push(char);\n      backtrack();\n      current.pop();\n      freqMap.set(char, count);\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn generatePalindromes;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clur6ionc0003btsifp1y0pvw": {
+      "id": "clur6ionc0003btsifp1y0pvw",
+      "createdAt": "2024-04-08T16:40:52.295Z",
+      "updatedAt": "2024-04-08T16:44:51.375Z",
+      "projectId": "clur6iona0001btsimzatdxhs",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} prices\n * @return {number}\n */\nvar maxProfit = function (prices) {\n  const n = prices.length;\n\n  const dp = Array.from({ length: n }, () => new Array(5));\n\n  const dfs = (i, buying) => {\n    if (i >= n) {\n      return 0;\n    }\n    if (dp[i][buying] !== undefined) {\n      return dp[i][buying];\n    }\n\n    prices.setColor(i, \"green\");\n    const price = prices[i];\n    let max = 0;\n\n    if (buying > 0) {\n      const profit = price - buying + 1;\n      max = profit + dfs(i + 2, 0);\n    } else {\n      max = dfs(i + 1, price + 1);\n    }\n\n    max = Math.max(max, dfs(i + 1, buying));\n\n    prices.setColor(i, null);\n    dp[i][buying] = max;\n    return max;\n  };\n\n  const result = dfs(0, 0);\n\n  return result;\n};\n\nreturn maxProfit;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clur6pn2m0005btsiit196tjt": {
+      "id": "clur6pn2m0005btsiit196tjt",
+      "createdAt": "2024-04-08T16:46:16.846Z",
+      "updatedAt": "2024-04-08T16:46:18.246Z",
+      "projectId": "clur6iona0001btsimzatdxhs",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} prices\n * @return {number}\n */\nvar maxProfit = function (prices) {\n  const n = prices.length;\n\n  const dp = Array.from({ length: n }, () => new Array(5));\n\n  const dfs = (i, buying) => {\n    if (i >= n) {\n      return 0;\n    }\n    if (dp[i][buying] !== undefined) {\n      return dp[i][buying];\n    }\n\n    prices.setColor(i, \"green\");\n    const price = prices[i];\n    let max = 0;\n\n    if (buying > 0) {\n      const profit = price - buying + 1;\n      max = profit + dfs(i + 2, 0);\n    } else {\n      max = dfs(i + 1, price + 1);\n    }\n\n    max = Math.max(max, dfs(i + 1, buying));\n\n    prices.setColor(i, null);\n    dp[i][buying] = max;\n    return max;\n  };\n\n  const result = dfs(0, 0);\n\n  return result;\n};\n\nreturn maxProfit;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clupzx42j000d12nxzyx1yfxw": {
+      "id": "clupzx42j000d12nxzyx1yfxw",
+      "createdAt": "2024-04-07T20:48:21.979Z",
+      "updatedAt": "2024-04-07T20:48:56.899Z",
+      "projectId": "clupzx42j000b12nx4cv3ni4w",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {boolean}\n */\nvar canPermutePalindrome = function (s) {\n  const set = new Set();\n\n  for (let i = 0; i < s.length; i++) {\n    if (set.has(s[i])) {\n      set.delete(s[i]);\n    } else {\n      set.add(s[i]);\n    }\n  }\n\n  return set.size <= 1;\n};\n\nreturn canPermutePalindrome;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clr937q2m000111ifzwnao9uh": {
+      "id": "clr937q2m000111ifzwnao9uh",
+      "createdAt": "2024-01-11T10:49:23.901Z",
+      "updatedAt": "2024-04-08T18:23:14.390Z",
+      "projectId": "clr7ymsll0001uxww7ezoqehc",
+      "title": "Trie + DP",
+      "slug": "trie-dp",
+      "timeComplexity": "O(n^2 + m * k)",
+      "spaceComplexity": "O(n + m * k)",
+      "description": "",
+      "code": "const END_CHAR = \"*\";\r\n\r\n/**\r\n * @param {string} s\r\n * @param {string[]} wordDict\r\n * @return {boolean}\r\n */\r\nvar wordBreak = function (s, wordDict) {\r\n  const trie = buildTrie(wordDict);\r\n  console.log(trie);\r\n\r\n  const dp = new Array(s.length);\r\n\r\n  for (let i = 0; i < s.length; i++) {\r\n    if (i === 0 || dp[i - 1]) {\r\n      let curr = trie;\r\n      for (let j = i; j < s.length; j++) {\r\n        const char = s[j];\r\n        if (!(char in curr)) {\r\n          break;\r\n        }\r\n\r\n        curr = curr[char];\r\n        if (END_CHAR in curr) {\r\n          dp[j] = true;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  return dp.at(-1) ?? false;\r\n};\r\n\r\nfunction buildTrie(words) {\r\n  const root = new Object();\r\n  for (const word of words) {\r\n    let current = root;\r\n    for (const char of word) {\r\n      current[char] ??= new Object();\r\n      current = current[char];\r\n    }\r\n    current[END_CHAR] = true;\r\n  }\r\n\r\n  return root;\r\n}\r\n\r\nreturn wordBreak;\r\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clk4bqg2m0001mf087me67lhn": {
+      "id": "clk4bqg2m0001mf087me67lhn",
+      "createdAt": "2023-07-15T18:11:07.102Z",
+      "updatedAt": "2024-04-08T18:24:06.880Z",
+      "projectId": "clid8so120001jn08i292ieah",
+      "title": "Two Pointers 2",
+      "slug": "two-pointers-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {ArrayProxyObject} height\n * @return {number}\n */\nvar trap = function (height) {\n  const n = height.length;\n\n  let left = 0;\n  let right = n - 1;\n\n  let maxLeft = -Infinity;\n  let maxRight = -Infinity;\n\n  let count = 0;\n\n  const countIn = (val) => {\n    if (maxLeft > val && val < maxRight) {\n      count += Math.min(maxLeft, maxRight) - val;\n    }\n  };\n\n  while (left < right) {\n    height.setColor(left, \"green\");\n    height.setColor(right, \"cyan\");\n\n    maxLeft = Math.max(maxLeft, height[left]);\n    maxRight = Math.max(maxRight, height[right]);\n\n    if (height[left] < height[right]) {\n      countIn(height[left]);\n      left++;\n    } else {\n      countIn(height[right]);\n      right--;\n    }\n  }\n\n  return count;\n};\n\nreturn trap;\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "clur9q39x0003jtldsvyaogwd": {
+      "id": "clur9q39x0003jtldsvyaogwd",
+      "createdAt": "2024-04-08T18:10:36.691Z",
+      "updatedAt": "2024-04-08T18:17:06.124Z",
+      "projectId": "clur9q39v0001jtldkn0qb80z",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} words\n * @return {string[]}\n */\nvar findAllConcatenatedWordsInADict = function (words) {\n  const dictionary = new Set();\n  words.forEach((word) => dictionary.add(word));\n  const answer = new Array();\n\n  for (const word of words) {\n    const length = word.length;\n    const dp = new Array(length + 1);\n    dp[0] = true;\n\n    for (let i = 1; i <= length; i++) {\n      for (let j = 0; j < i; j++) {\n        if (i === length && j === 0) continue;\n        if (dp[i]) continue;\n\n        dp[i] = dp[j] && dictionary.has(word.slice(j, i));\n      }\n    }\n\n    if (dp[length]) {\n      answer.push(word);\n    }\n  }\n\n  return answer;\n};\n\nreturn findAllConcatenatedWordsInADict;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluqunvzy0003l3qesdky3tsf": {
+      "id": "cluqunvzy0003l3qesdky3tsf",
+      "createdAt": "2024-04-08T11:08:59.710Z",
+      "updatedAt": "2024-04-08T11:44:11.357Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const memo = new Map();\n  const getKey = (i, sum) => `${i},${sum}`;\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n    const key = getKey(i, sum);\n    if (memo.has(key)) {\n      memo.setColor(key, \"green\");\n      memo.setColor(key, null);\n      return memo.get(key);\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    memo.set(key, count);\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clur4ckct0003nffdnkx3oqu3": {
+      "id": "clur4ckct0003nffdnkx3oqu3",
+      "createdAt": "2024-04-08T15:40:07.565Z",
+      "updatedAt": "2024-04-08T15:54:42.880Z",
+      "projectId": "cll6g2p760001mi08lntkwn5p",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n\n  const dp = Array.from({ length: n }, () => new Array(amount + 1));\n  dp.showIndexes(n, amount);\n\n  const backtrack = (i, sum) => {\n    if (sum === 0) {\n      return 1;\n    }\n    if (i < 0 || sum < 0) {\n      return 0;\n    }\n    if (dp[i][sum] !== undefined) return dp[i][sum];\n\n    let count = 0;\n    for (let j = i; j >= 0; j--) {\n      coins.setColor(j, \"green\");\n      count += backtrack(j, sum - coins[j]);\n      coins.setColor(j, null);\n    }\n\n    dp[i][sum] = count;\n    return count;\n  };\n\n  const result = backtrack(n - 1, amount);\n\n  return result;\n};\n\nreturn change;\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "clur4v64d0001a9hy9uunv84x": {
+      "id": "clur4v64d0001a9hy9uunv84x",
+      "createdAt": "2024-04-08T15:54:35.580Z",
+      "updatedAt": "2024-04-08T15:55:07.351Z",
+      "projectId": "cll6g2p760001mi08lntkwn5p",
+      "title": "Solution 4",
+      "slug": "solution-4",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n\n  const dp = Array.from({ length: n }, () => new Array(amount + 1).fill(0));\n  dp.showIndexes(n, amount);\n  for (let i = 0; i < n; i++) {\n    dp[i][0] = 1;\n  }\n\n  for (let i = 0; i < n; i++) {\n    const num = coins[i];\n    for (let sum = 1; sum <= amount; sum++) {\n      if (i > 0) {\n        dp[i][sum] += dp[i - 1][sum];\n      }\n\n      if (sum - num >= 0) {\n        dp[i][sum] += dp[i][sum - num];\n      }\n    }\n  }\n\n  return dp[n - 1][amount];\n};\n\nreturn change;\n",
+      "pythonCode": null,
+      "order": 3
+    },
+    "clupqavar0003woa4zqizrtlr": {
+      "id": "clupqavar0003woa4zqizrtlr",
+      "createdAt": "2024-04-07T16:19:07.635Z",
+      "updatedAt": "2024-04-07T20:07:34.763Z",
+      "projectId": "clupqavar0001woa4fpbf77n6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} strength\n * @return {number}\n */\nvar totalStrength = function (strength) {\n  const n = strength.length;\n  const MOD = 1e9 + 7;\n\n  let stack = new Array();\n  const rightIndex = new Array(n);\n  for (let i = 0; i <= n; i++) {\n    strength.setColor(i, \"cyan\");\n    const num = strength[i] ?? -Infinity;\n    while (stack.length && strength[stack.at(-1)] >= num) {\n      rightIndex[stack.pop()] = i;\n    }\n    stack.push(i);\n  }\n\n  stack = new Array();\n  const leftIndex = new Array(n);\n  for (let i = n - 1; i >= -1; i--) {\n    strength.setColor(i, \"blue\");\n    const num = strength[i] ?? -Infinity;\n    while (stack.length && strength[stack.at(-1)] > num) {\n      leftIndex[stack.pop()] = i;\n    }\n    stack.push(i);\n  }\n\n  const presumOfPresum = getPresum(Array.from([0, ...getPresum(strength)]));\n\n  const v = new Object();\n  v.result = 0;\n  for (let i = 0; i < n; i++) {\n    strength.setColor(i, \"green\");\n    const leftBound = leftIndex[i];\n    const rightBound = rightIndex[i];\n\n    const leftCount = i - leftBound;\n    const rightCount = rightBound - i;\n\n    const leftPresum = presumOfPresum[i] - presumOfPresum[Math.max(0, leftBound)];\n    const rightPresum = presumOfPresum[rightBound] - presumOfPresum[i];\n\n    v.result =\n      (v.result +\n        strength[i] * (rightPresum * leftCount - leftPresum * rightCount)) %\n      MOD;\n  }\n\n  return v.result;\n};\n\nfunction getPresum(arr) {\n  let acc = 0;\n  return arr.map((num) => (acc += num));\n}\n\nreturn totalStrength;\n",
+      "pythonCode": "class Solution:\r\n    def totalStrength(self, A):\r\n        mod = 10**9 + 7\r\n        n = len(A)\r\n\r\n        # next small on the right\r\n        right = [n] * n\r\n        stack = []\r\n        for i in range(n):\r\n            while stack and A[stack[-1]] > A[i]:\r\n                right[stack.pop()] = i\r\n            stack.append(i)\r\n\r\n        # next small on the left\r\n        left = [-1] * n\r\n        stack = []\r\n        for i in range(n - 1, -1, -1):\r\n            while stack and A[stack[-1]] >= A[i]:\r\n                left[stack.pop()] = i\r\n            stack.append(i)\r\n\r\n        # for each A[i] as minimum, calculate sum\r\n        result = 0\r\n        acc = list(accumulate(accumulate(A), initial = 0))\r\n        for i in range(n):\r\n            leftBound = left[i]\r\n            rightBound = right[i]\r\n            leftCount = i - leftBound\r\n            rightCount = rightBound - i\r\n\r\n            leftPresum = acc[i] - acc[max(0, leftBound)]\r\n            rightPresum = acc[rightBound] - acc[i]\r\n\r\n            result = (result + A[i] * (rightPresum * leftCount - leftPresum * rightCount)) % mod\r\n\r\n        return result\r\n",
       "order": 0
     }
   }
