@@ -1,3 +1,10 @@
+# [1.289.0](https://github.com/mkayander/dStruct/compare/v1.288.2...v1.289.0) (2024-04-14)
+
+
+### Features
+
+* Updated prisma ([1f91c3d](https://github.com/mkayander/dStruct/commit/1f91c3d7f60cdc5d3ab88c54378688c16a1639e4))
+
 ## [1.288.2](https://github.com/mkayander/dStruct/compare/v1.288.1...v1.288.2) (2024-03-27)
 
 
