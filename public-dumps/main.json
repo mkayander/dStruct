@@ -4031,6 +4031,118 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cluza62js0001blgudhljc6xq": {
+      "id": "cluza62js0001blgudhljc6xq",
+      "createdAt": "2024-04-14T08:45:11.656Z",
+      "updatedAt": "2024-04-14T08:45:11.656Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "K Repetetiveness",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "",
+      "slug": "k-repetetiveness",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluzpw4rd00013iiy1wcgewyg": {
+      "id": "cluzpw4rd00013iiy1wcgewyg",
+      "createdAt": "2024-04-14T16:05:21.817Z",
+      "updatedAt": "2024-04-14T16:05:21.817Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest Substring with At Least K Repeating Characters",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters",
+      "slug": "longest-substring-with-at-least-k-repeating-characters",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluzqur7e0001l6c6i54ssz7w": {
+      "id": "cluzqur7e0001l6c6i54ssz7w",
+      "createdAt": "2024-04-14T16:32:17.211Z",
+      "updatedAt": "2024-04-14T16:32:17.211Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count Subarrays Where Max Element Appears at Least K Times",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times",
+      "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluzt0a980001gt0wim4swye1": {
+      "id": "cluzt0a980001gt0wim4swye1",
+      "createdAt": "2024-04-14T17:32:34.412Z",
+      "updatedAt": "2024-04-14T17:32:34.412Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Shortest Subarray with Sum at Least K",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k",
+      "slug": "shortest-subarray-with-sum-at-least-k",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cluzteu0m000111c1roha5p5i": {
+      "id": "cluzteu0m000111c1roha5p5i",
+      "createdAt": "2024-04-14T17:43:53.206Z",
+      "updatedAt": "2024-04-14T17:43:53.206Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Design Blackjack Game",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "",
+      "slug": "design-blackjack-game",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clv0sxknb0001tkscq8fk185k": {
+      "id": "clv0sxknb0001tkscq8fk185k",
+      "createdAt": "2024-04-15T10:18:14.086Z",
+      "updatedAt": "2024-04-15T10:18:14.086Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Non-overlapping Intervals",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/non-overlapping-intervals",
+      "slug": "non-overlapping-intervals",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clv19zgim0001orul82jtji6u": {
+      "id": "clv19zgim0001orul82jtji6u",
+      "createdAt": "2024-04-15T18:15:35.516Z",
+      "updatedAt": "2024-04-15T18:15:35.516Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Burst Balloons",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/burst-balloons",
+      "slug": "burst-balloons",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clv9lszau0001car5gi8m9q9u": {
+      "id": "clv9lszau0001car5gi8m9q9u",
+      "createdAt": "2024-04-21T14:08:38.068Z",
+      "updatedAt": "2024-04-21T14:08:38.068Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find if Path Exists in Graph",
+      "category": "GRAPH",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/find-if-path-exists-in-graph",
+      "slug": "find-if-path-exists-in-graph",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17441,6 +17553,31 @@
       },
       "description": null
     },
+    "cluzpw4rf00023iiyx7n2jtsk": {
+      "id": "cluzpw4rf00023iiyx7n2jtsk",
+      "createdAt": "2024-04-14T16:05:21.817Z",
+      "updatedAt": "2024-04-14T16:05:40.665Z",
+      "projectId": "cluzpw4rd00013iiy1wcgewyg",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "maqaZzmKJKVLUEJNYzCJiE": {
+          "name": "maqaZzmKJKVLUEJNYzCJiE",
+          "type": "string",
+          "input": "aaabb",
+          "order": 0
+        },
+        "qWDtDjx1rUhnXnqr7i1mgE": {
+          "name": "qWDtDjx1rUhnXnqr7i1mgE",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cluy09omi0002wsej2gdf1ctb": {
       "id": "cluy09omi0002wsej2gdf1ctb",
       "createdAt": "2024-04-13T11:20:17.898Z",
@@ -17485,6 +17622,31 @@
       },
       "description": null
     },
+    "cluza62js0002blgu73n2c74q": {
+      "id": "cluza62js0002blgu73n2c74q",
+      "createdAt": "2024-04-14T08:45:11.656Z",
+      "updatedAt": "2024-04-14T08:45:50.657Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1vEThwahyLx3rJV11TV2zT": {
+          "name": "1vEThwahyLx3rJV11TV2zT",
+          "type": "string",
+          "input": "bbabaaxc",
+          "order": 0
+        },
+        "jEg5hYeYEubNLUrxeqQ7t5": {
+          "name": "jEg5hYeYEubNLUrxeqQ7t5",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cluvkx9170002uozgsz5rtv16": {
       "id": "cluvkx9170002uozgsz5rtv16",
       "createdAt": "2024-04-11T18:35:11.227Z",
@@ -17510,6 +17672,56 @@
       },
       "description": null
     },
+    "cluzjyrqj000112g7gl6p3wpy": {
+      "id": "cluzjyrqj000112g7gl6p3wpy",
+      "createdAt": "2024-04-14T13:19:27.209Z",
+      "updatedAt": "2024-04-14T13:19:43.127Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "1vEThwahyLx3rJV11TV2zT": {
+          "name": "1vEThwahyLx3rJV11TV2zT",
+          "type": "string",
+          "input": "cbabbaaxc",
+          "order": 0
+        },
+        "jEg5hYeYEubNLUrxeqQ7t5": {
+          "name": "jEg5hYeYEubNLUrxeqQ7t5",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluzjmkbz00012bnvkvb01xfx": {
+      "id": "cluzjmkbz00012bnvkvb01xfx",
+      "createdAt": "2024-04-14T13:09:57.742Z",
+      "updatedAt": "2024-04-14T13:10:34.020Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "1vEThwahyLx3rJV11TV2zT": {
+          "name": "1vEThwahyLx3rJV11TV2zT",
+          "type": "string",
+          "input": "xexxxa",
+          "order": 0
+        },
+        "jEg5hYeYEubNLUrxeqQ7t5": {
+          "name": "jEg5hYeYEubNLUrxeqQ7t5",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cluvnzc7800034c71054zjsj1": {
       "id": "cluvnzc7800034c71054zjsj1",
       "createdAt": "2024-04-11T20:00:47.491Z",
@@ -17525,6 +17737,238 @@
           "type": "array",
           "input": "[1,2,3,8,4,3,7,8,9]",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluzk43ay000312g73cjcvn81": {
+      "id": "cluzk43ay000312g73cjcvn81",
+      "createdAt": "2024-04-14T13:23:35.483Z",
+      "updatedAt": "2024-04-14T13:24:18.553Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "1vEThwahyLx3rJV11TV2zT": {
+          "name": "1vEThwahyLx3rJV11TV2zT",
+          "type": "string",
+          "input": "ogood",
+          "order": 0
+        },
+        "jEg5hYeYEubNLUrxeqQ7t5": {
+          "name": "jEg5hYeYEubNLUrxeqQ7t5",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluzqur7g0002l6c69e157f5j": {
+      "id": "cluzqur7g0002l6c69e157f5j",
+      "createdAt": "2024-04-14T16:32:17.211Z",
+      "updatedAt": "2024-04-14T16:33:00.086Z",
+      "projectId": "cluzqur7e0001l6c6i54ssz7w",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "q7MtT7Px3tXRnTfHB1CdZp": {
+          "name": "q7MtT7Px3tXRnTfHB1CdZp",
+          "type": "array",
+          "input": "[1,3,2,3,3]",
+          "order": 0
+        },
+        "v7ow9qohLt5wPNMRMnEkM5": {
+          "name": "v7ow9qohLt5wPNMRMnEkM5",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluzt0a9b0002gt0w058texk4": {
+      "id": "cluzt0a9b0002gt0w058texk4",
+      "createdAt": "2024-04-14T17:32:34.412Z",
+      "updatedAt": "2024-04-14T17:33:01.925Z",
+      "projectId": "cluzt0a980001gt0wim4swye1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "noQQkUyyBenNQ7ZmkGXZ8E": {
+          "name": "noQQkUyyBenNQ7ZmkGXZ8E",
+          "type": "array",
+          "input": "[2,-1,2]",
+          "order": 0
+        },
+        "wcrXGDWD7k7Z5fy1uLez1v": {
+          "name": "wcrXGDWD7k7Z5fy1uLez1v",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cluzteu0o000211c1l2f2cn83": {
+      "id": "cluzteu0o000211c1l2f2cn83",
+      "createdAt": "2024-04-14T17:43:53.206Z",
+      "updatedAt": "2024-04-14T17:43:53.206Z",
+      "projectId": "cluzteu0m000111c1roha5p5i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[1,2,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cluzub6za0003xegihdlodivr": {
+      "id": "cluzub6za0003xegihdlodivr",
+      "createdAt": "2024-04-14T18:09:02.998Z",
+      "updatedAt": "2024-04-14T18:11:45.942Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[7,4,3,5,2,8,3,2,1,2,23,23,23,2533,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,12,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,12,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,7,4,3,5,2,8,3,2,1,7,4,3,5,2,8,3,2,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,2,23,23,23,2533,12,124,12,125,23,34,34,2,12,1,1,2,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1,2,5,234,2,2,5,1,1,2,5,6,7,9,9,2,4312,412,41,41,412,412,412,4,124,124,1]",
+          "order": 0
+        },
+        "1t897YC7ahSS11QByzy4Fm": {
+          "name": "1t897YC7ahSS11QByzy4Fm",
+          "type": "number",
+          "input": "20",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clv0sxknb0002tkscu68djvu8": {
+      "id": "clv0sxknb0002tkscu68djvu8",
+      "createdAt": "2024-04-15T10:18:14.086Z",
+      "updatedAt": "2024-04-15T10:22:27.472Z",
+      "projectId": "clv0sxknb0001tkscq8fk185k",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[1,2],[2,3],[3,4],[1,3]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clv0t5a9j0005tksc4j9tgyvq": {
+      "id": "clv0t5a9j0005tksc4j9tgyvq",
+      "createdAt": "2024-04-15T10:24:13.879Z",
+      "updatedAt": "2024-04-15T10:24:16.244Z",
+      "projectId": "clv0sxknb0001tkscq8fk185k",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[1,2],[1,2],[1,2]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clv0t5k020009tkscp2y344do": {
+      "id": "clv0t5k020009tkscp2y344do",
+      "createdAt": "2024-04-15T10:24:26.498Z",
+      "updatedAt": "2024-04-15T10:24:42.741Z",
+      "projectId": "clv0sxknb0001tkscq8fk185k",
+      "title": "Case 4",
+      "order": 2,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[[1,2],[2,3],[3,4],[1,3],[2,3],[3,4],[1,3],[2,3],[3,4],[1,3],[2,3],[3,4],[1,3]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clv19zgim0002orul4gkqaxz7": {
+      "id": "clv19zgim0002orul4gkqaxz7",
+      "createdAt": "2024-04-15T18:15:35.516Z",
+      "updatedAt": "2024-04-15T18:15:59.300Z",
+      "projectId": "clv19zgim0001orul82jtji6u",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "wyDqUREBfkRLr6hxD9FWum": {
+          "name": "wyDqUREBfkRLr6hxD9FWum",
+          "type": "array",
+          "input": "[3,1,5,8]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clv9lszau0002car5qefxoa8g": {
+      "id": "clv9lszau0002car5qefxoa8g",
+      "createdAt": "2024-04-21T14:08:38.068Z",
+      "updatedAt": "2024-04-21T14:09:55.069Z",
+      "projectId": "clv9lszau0001car5gi8m9q9u",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4cXk84XoAxmxqEkQ5khawy": {
+          "name": "4cXk84XoAxmxqEkQ5khawy",
+          "type": "array",
+          "input": "[[0,1],[0,2],[3,5],[5,4],[4,3]]",
+          "order": 1
+        },
+        "79BWAWd1Fw8X6BiVLZPFhR": {
+          "name": "79BWAWd1Fw8X6BiVLZPFhR",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "bdvVszZznv7bSv93Y5yQFU": {
+          "name": "bdvVszZznv7bSv93Y5yQFU",
+          "type": "number",
+          "input": "0",
+          "order": 2
+        },
+        "nhoFxzbNcCn99x3nXvSZFH": {
+          "name": "nhoFxzbNcCn99x3nXvSZFH",
+          "type": "number",
+          "input": "5",
+          "order": 3
         }
       },
       "description": null
@@ -19351,24 +19795,10 @@
       "pythonCode": null,
       "order": 1
     },
-    "cllb3ap4n0003jw08dbqfuswr": {
-      "id": "cllb3ap4n0003jw08dbqfuswr",
-      "createdAt": "2023-08-14T16:29:00.984Z",
-      "updatedAt": "2023-11-17T08:27:55.452Z",
-      "projectId": "cllb3ap4n0001jw086qg9f5jn",
-      "title": "Priority Queue",
-      "slug": "priority-queue",
-      "timeComplexity": "O(n logk)",
-      "spaceComplexity": "O(k)",
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const pq = new PriorityQueue({\n    compare: (a, b) => a - b,\n  });\n\n  for (const num of nums) {\n    pq.enqueue(num);\n    if (pq.size() > k) {\n      pq.dequeue();\n    }\n  }\n\n  console.log(pq, pq.front());\n\n  return pq.d();\n};\n\nreturn findKthLargest;\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "cllb3evic0005jw08hjbj2nvw": {
       "id": "cllb3evic0005jw08hjbj2nvw",
       "createdAt": "2023-08-14T16:32:15.876Z",
-      "updatedAt": "2023-11-16T17:41:11.399Z",
+      "updatedAt": "2024-04-14T18:11:05.501Z",
       "projectId": "cllb3ap4n0001jw086qg9f5jn",
       "title": "Quickselect /w Random",
       "slug": "quickselect-w-random",
@@ -19378,20 +19808,6 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const partition = (left, right, pivotIndex) => {\n    const pivot = nums[pivotIndex];\n    [nums[pivotIndex], nums[right]] = [nums[right], nums[pivotIndex]];\n    let storedIndex = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] < pivot) {\n        [nums[storedIndex], nums[i]] = [nums[i], nums[storedIndex]];\n        storedIndex++;\n      }\n    }\n    [nums[right], nums[storedIndex]] = [nums[storedIndex], nums[right]];\n    return storedIndex;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (true) {\n    const pivotIndex = left + Math.floor(Math.random() * (right - left + 1));\n    const newPivotIndex = partition(left, right, pivotIndex);\n    if (newPivotIndex === nums.length - k) {\n      return nums[newPivotIndex];\n    } else if (newPivotIndex > nums.length - k) {\n      right = newPivotIndex - 1;\n    } else {\n      left = newPivotIndex + 1;\n    }\n  }\n};\n\nreturn findKthLargest;\n",
       "pythonCode": null,
       "order": 4
-    },
-    "cllb3yckr0001l508g9d0dsb9": {
-      "id": "cllb3yckr0001l508g9d0dsb9",
-      "createdAt": "2023-08-14T16:47:24.459Z",
-      "updatedAt": "2023-11-16T17:41:11.399Z",
-      "projectId": "cllb3ap4n0001jw086qg9f5jn",
-      "title": "Counting Sort",
-      "slug": "counting-sort",
-      "timeComplexity": "O(n + r)",
-      "spaceComplexity": "O(r)",
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  let min = Infinity;\n  let max = -Infinity;\n\n  const map = new Map();\n\n  for (const num of nums) {\n    map.set(num, (map.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  console.log({map, min, max});\n\n  let count = 0;\n  for (let i = max; i >= min; i--) {\n    if (!map.has(i)) continue;\n\n    for (let j = 0; j < map.get(i) && count < k; j++) count++;\n\n    if (count === k) return i;\n  }\n\n  return -1;\n};\n\nreturn findKthLargest;\n",
-      "pythonCode": null,
-      "order": 2
     },
     "cll5dl7hm0005mj08yskx8km2": {
       "id": "cll5dl7hm0005mj08yskx8km2",
@@ -19406,6 +19822,34 @@
       "code": "/**\n * @param {number[]} heights\n * @return {number}\n */\nvar largestRectangleArea = function (heights) {\n  const n = heights.length;\n  const stack = new Array();\n  let maxArea = 0;\n\n  for (let i = 0; i <= n; i++) {\n    heights.setColor(i, \"cyan\");\n    while (stack.length && (i === n || heights[i] < heights[stack.at(-1)])) {\n      const height = heights[stack.pop()];\n      const width = stack.length === 0 ? i : i - stack.at(-1) - 1;\n      maxArea = Math.max(maxArea, height * width);\n    }\n\n    stack.push(i);\n  }\n\n  return maxArea;\n};\n\nreturn largestRectangleArea;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "cllb3ap4n0003jw08dbqfuswr": {
+      "id": "cllb3ap4n0003jw08dbqfuswr",
+      "createdAt": "2023-08-14T16:29:00.984Z",
+      "updatedAt": "2024-04-14T18:10:43.300Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Priority Queue",
+      "slug": "priority-queue",
+      "timeComplexity": "O(n logk)",
+      "spaceComplexity": "O(k)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const pq = new PriorityQueue({\n    compare: (a, b) => a - b,\n  });\n\n  for (const num of nums) {\n    pq.enqueue(num);\n    if (pq.size() > k) {\n      pq.dequeue();\n    }\n  }\n\n  console.log(pq, pq.front());\n\n  return pq.dequeue();\n};\n\nreturn findKthLargest;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cllb3yckr0001l508g9d0dsb9": {
+      "id": "cllb3yckr0001l508g9d0dsb9",
+      "createdAt": "2023-08-14T16:47:24.459Z",
+      "updatedAt": "2024-04-14T18:10:53.608Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Counting Sort",
+      "slug": "counting-sort",
+      "timeComplexity": "O(n + r)",
+      "spaceComplexity": "O(r)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  let min = Infinity;\n  let max = -Infinity;\n\n  const map = new Map();\n\n  for (const num of nums) {\n    map.set(num, (map.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  console.log({map, min, max});\n\n  let count = 0;\n  for (let i = max; i >= min; i--) {\n    if (!map.has(i)) continue;\n\n    for (let j = 0; j < map.get(i) && count < k; j++) count++;\n\n    if (count === k) return i;\n  }\n\n  return -1;\n};\n\nreturn findKthLargest;\n",
+      "pythonCode": null,
+      "order": 2
     },
     "cllcdzkt30003l8083b9g6omk": {
       "id": "cllcdzkt30003l8083b9g6omk",
@@ -19516,20 +19960,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} a\n * @param {number} b\n * @return {number}\n */\nvar getSum = function (a, b) {\n  while (a & b) {\n    const xor = a ^ b;\n    a = (a & b) << 1;\n    b = xor;\n  }\n\n  return a | b;\n};\n\nreturn getSum;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clls4ecw90003jz08wk6znpig": {
-      "id": "clls4ecw90003jz08wk6znpig",
-      "createdAt": "2023-08-26T14:31:56.362Z",
-      "updatedAt": "2023-08-26T14:31:56.362Z",
-      "projectId": "clls4ecw90001jz08ro77rcvk",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @param {string} s3\n * @return {boolean}\n */\nvar isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  const l = s3.length;\n\n  if (m + n !== l) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let j = 1; j <= n; j++) {\n    dp.setColor(j, \"cyan\");\n    dp[j] = dp[j - 1] && s2[j - 1] === s3[j - 1];\n  }\n\n  for (let i = 1; i <= m; i++) {\n    dp[0] = dp[0] && s1[i - 1] === s3[i - 1];\n    for (let j = 1; j <= n; ++j) {\n      dp.setColor(j, \"green\");\n      dp[j] =\n        (dp[j] && s1[i - 1] === s3[i + j - 1]) ||\n        (dp[j - 1] && s2[j - 1] === s3[i + j - 1]);\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -20821,34 +21251,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clp1gbsh20005mi0gshxaiduh": {
-      "id": "clp1gbsh20005mi0gshxaiduh",
-      "createdAt": "2023-11-16T17:14:54.566Z",
-      "updatedAt": "2023-11-16T17:41:11.399Z",
-      "projectId": "cllb3ap4n0001jw086qg9f5jn",
-      "title": "Quickselect /w Recursion",
-      "slug": "solution-3",
-      "timeComplexity": "O(n)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const quickSelect = (left, right) => {\n    let p = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= nums[right]) {\n        [nums[p], nums[i]] = [nums[i], nums[p]];\n        p++;\n      }\n    }\n    [nums[p], nums[right]] = [nums[right], nums[p]];\n\n    if (p > target) {\n      return quickSelect(left, p - 1);\n    } else if (p < target) {\n      return quickSelect(p + 1, right);\n    } else {\n      return nums[p];\n    }\n  };\n\n  return quickSelect(0, nums.length - 1);\n};\n\nreturn findKthLargest;\n",
-      "pythonCode": null,
-      "order": 5
-    },
-    "clp1gttty0007mi0ghmle4aat": {
-      "id": "clp1gttty0007mi0ghmle4aat",
-      "createdAt": "2023-11-16T17:28:56.134Z",
-      "updatedAt": "2023-11-16T17:42:33.471Z",
-      "projectId": "cllb3ap4n0001jw086qg9f5jn",
-      "title": "Quickselect",
-      "slug": "quickselect",
-      "timeComplexity": "O(n)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const partition = (left, right) => {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const pivot = nums[right];\n    let fill = left;\n\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= pivot) {\n        [nums[fill], nums[i]] = [nums[i], nums[fill]];\n        fill++;\n      }\n    }\n\n    [nums[fill], nums[right]] = [nums[right], nums[fill]];\n\n    return fill;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left < right) {\n    const pivot = partition(left, right);\n\n    if (pivot < target) {\n      left = pivot + 1;\n    } else if (pivot > target) {\n      right = pivot - 1;\n    } else {\n      break;\n    }\n  }\n\n  nums.setColor(target, \"green\");\n  return nums[target];\n};\n\nreturn findKthLargest;\n",
-      "pythonCode": null,
-      "order": 3
-    },
     "clp2i7l560003oe0fiomfpk1t": {
       "id": "clp2i7l560003oe0fiomfpk1t",
       "createdAt": "2023-11-17T10:55:23.850Z",
@@ -20862,6 +21264,20 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minPairSum = function (nums) {\n  const freqMap = new Map();\n\n  let min = Infinity;\n  let max = -Infinity;\n\n  for (let i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    freqMap.set(num, (freqMap.get(num) ?? 0) + 1);\n    min = Math.min(min, num);\n    max = Math.max(max, num);\n  }\n\n  let left = min;\n  let right = max;\n\n  console.log({min, max, freqMap});\n\n  let result = -Infinity;\n  while (left <= right) {\n    let leftCount = freqMap.get(left);\n    let rightCount = freqMap.get(right);\n\n    const sum = left + right;\n    result = Math.max(result, sum);\n    leftCount--;\n    rightCount--;\n\n    console.log({left, leftCount, rightCount, sum, result});\n\n    freqMap.set(left, leftCount);\n    freqMap.set(right, rightCount);\n\n    if (leftCount === 0) {\n      left++;\n      while (left <= right && !freqMap.has(left)) left++;\n    }\n    if (rightCount === 0) {\n      right--;\n      while (left <= right && !freqMap.has(right)) right--;\n    }\n  }\n\n  return result;\n};\n\nreturn minPairSum;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clp1gbsh20005mi0gshxaiduh": {
+      "id": "clp1gbsh20005mi0gshxaiduh",
+      "createdAt": "2023-11-16T17:14:54.566Z",
+      "updatedAt": "2024-04-14T18:11:10.657Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect /w Recursion",
+      "slug": "solution-3",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const quickSelect = (left, right) => {\n    let p = left;\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= nums[right]) {\n        [nums[p], nums[i]] = [nums[i], nums[p]];\n        p++;\n      }\n    }\n    [nums[p], nums[right]] = [nums[right], nums[p]];\n\n    if (p > target) {\n      return quickSelect(left, p - 1);\n    } else if (p < target) {\n      return quickSelect(p + 1, right);\n    } else {\n      return nums[p];\n    }\n  };\n\n  return quickSelect(0, nums.length - 1);\n};\n\nreturn findKthLargest;\n",
+      "pythonCode": null,
+      "order": 5
     },
     "clp2idt2m0007oe0f098glm79": {
       "id": "clp2idt2m0007oe0f098glm79",
@@ -20975,34 +21391,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clpgy1k8n0003tmqeecburce4": {
-      "id": "clpgy1k8n0003tmqeecburce4",
-      "createdAt": "2023-11-27T13:27:23.063Z",
-      "updatedAt": "2024-01-12T16:37:57.344Z",
-      "projectId": "clpgy1k8n0001tmqe6s8kukex",
-      "title": "Top-Down Recursion",
-      "slug": "top-down-recursion",
-      "timeComplexity": "O(n)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr) => Array.from(arr),\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from({ length: 10 }, () =>\n    Array.from({ length }, () => 0, null, {\n      colorMap: {\n        0: \"black\",\n      },\n    }),\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clph3fihs000110vh8v49am5e": {
-      "id": "clph3fihs000110vh8v49am5e",
-      "createdAt": "2023-11-27T15:58:12.064Z",
-      "updatedAt": "2023-11-27T16:00:50.819Z",
-      "projectId": "clpgy1k8n0001tmqe6s8kukex",
-      "title": "Bottom-Up Iteration",
-      "slug": "bottom-up-iteration",
-      "timeComplexity": "O(n)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = [\n    [4, 6],\n    [6, 8],\n    [7, 9],\n    [4, 8],\n    [3, 9, 0],\n    [],\n    [1, 7, 0],\n    [2, 6],\n    [1, 3],\n    [2, 4],\n  ];\n\n  const dp = Array.from(\n    { length },\n    (_, index) =>\n      Array.from({ length: 10 }, () => 0, null, { parentName: \"dp\", index }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  for (let cell = 0; cell < 10; cell++) {\n    dp[0][cell] = 1;\n  }\n\n  for (let remain = 1; remain < length; remain++) {\n    for (let cell = 0; cell < 10; cell++) {\n      let sum = 0;\n      for (const next of map[cell]) {\n        sum = (sum + dp[remain - 1][next]) % mod;\n      }\n      dp[remain][cell] = sum;\n    }\n  }\n\n  let total = 0;\n  for (let cell = 0; cell < 10; cell++) {\n    total = (total + dp[length - 1][cell]) % mod;\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "clph3rt15000310vhn8f9pz60": {
       "id": "clph3rt15000310vhn8f9pz60",
       "createdAt": "2023-11-27T16:07:45.593Z",
@@ -21072,6 +21460,20 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxProduct = function (nums) {\n  let max = nums[0];\n\n  let curr = nums[0];\n  let currMin = nums[0];\n\n  for (let i = 1; i < nums.length; i++) {\n    const num = nums[i];\n    const mult = curr * num;\n    const minMult = currMin * num;\n    curr = Math.max(num, mult, minMult);\n    currMin = Math.min(num, mult, minMult);\n\n    max = Math.max(max, curr);\n  }\n\n  return max;\n};\n\nreturn maxProduct;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clph3fihs000110vh8v49am5e": {
+      "id": "clph3fihs000110vh8v49am5e",
+      "createdAt": "2023-11-27T15:58:12.064Z",
+      "updatedAt": "2024-04-14T08:44:34.784Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Bottom-Up Iteration",
+      "slug": "bottom-up-iteration",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr) => Array.from(arr),\n  );\n\n  const dp = Array.from({ length }, () => Array.from({ length: 10 }, () => 0));\n\n  for (let cell = 0; cell < 10; cell++) {\n    dp[0][cell] = 1;\n  }\n\n  for (let remain = 1; remain < length; remain++) {\n    for (let cell = 0; cell < 10; cell++) {\n      let sum = 0;\n      for (const next of map[cell]) {\n        sum = (sum + dp[remain - 1][next]) % mod;\n      }\n      dp[remain][cell] = sum;\n    }\n  }\n\n  let total = 0;\n  for (let cell = 0; cell < 10; cell++) {\n    total = (total + dp[length - 1][cell]) % mod;\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clpvh04o60003ylav0kfcasd1": {
       "id": "clpvh04o60003ylav0kfcasd1",
@@ -22865,6 +23267,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cluvfx6xb0003q79pi8kuil8r": {
+      "id": "cluvfx6xb0003q79pi8kuil8r",
+      "createdAt": "2024-04-11T16:15:10.415Z",
+      "updatedAt": "2024-04-15T10:17:13.482Z",
+      "projectId": "cluvfx6xb0001q79puz60ifap",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} number\n * @param {character} digit\n * @return {string}\n */\nvar removeDigit = function (number, digit) {\n  const n = number.length;\n\n  let last = -1;\n\n  for (let i = 0; i < n - 1; i++) {\n    number.setColor(i, \"cyan\");\n    const num = number[i];\n    if (num != digit) continue;\n    number.setColor(i, \"blue\");\n    last = i;\n    const next = number[i + 1];\n    if (next <= num) continue;\n    number.setColor(i, \"green\");\n\n    return number.slice(0, i) + number.slice(i + 1);\n  }\n\n  if (number.at(-1) === digit) {\n    last = n - 1;\n  }\n\n  return number.slice(0, last) + number.slice(last + 1);\n};\n\nreturn removeDigit;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clusmos5100037xbegfnlgegj": {
       "id": "clusmos5100037xbegfnlgegj",
       "createdAt": "2024-04-09T17:01:16.787Z",
@@ -22876,20 +23292,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} preorder\n * @return {boolean}\n */\nvar verifyPreorder = function (preorder) {\n  let min = -Infinity;\n  const stack = new Array();\n\n  for (let i = 0; i < preorder.length; i++) {\n    preorder.setColor(i, \"green\");\n    const num = preorder[i];\n    while (stack.length && stack.at(-1) < num) {\n      min = stack.pop();\n    }\n\n    if (num <= min) {\n      return false;\n    }\n\n    stack.push(num);\n  }\n\n  return true;\n};\n\nreturn verifyPreorder;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "cluvfx6xb0003q79pi8kuil8r": {
-      "id": "cluvfx6xb0003q79pi8kuil8r",
-      "createdAt": "2024-04-11T16:15:10.415Z",
-      "updatedAt": "2024-04-11T16:21:17.530Z",
-      "projectId": "cluvfx6xb0001q79puz60ifap",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string} number\n * @param {character} digit\n * @return {string}\n */\nvar removeDigit = function (number, digit) {\n  const n = number.length;\n\n  let last = -1;\n\n  for (let i = 0; i < n - 1; i++) {\n    number.setColor(i, \"cyan\");\n    const num = number[i];\n    if (num != digit) continue;\n    number.setColor(i, \"blue\");\n    last = i;\n    const next = number[i + 1];\n    if (next <= num) continue;\n    number.setColor(i, \"green\");\n\n    return number.slice(0, i) + number.slice(i + 1);\n  }\n\n  if (number.at(-1) === digit) {\n    last = n - 1;\n  }\n\n  return number.slice(0, last) + number.slice(last + 1);\n};\n\nreturn removeDigit;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -22907,6 +23309,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cluza62jt0003blgu0y6eley3": {
+      "id": "cluza62jt0003blgu0y6eley3",
+      "createdAt": "2024-04-14T08:45:11.656Z",
+      "updatedAt": "2024-04-14T13:33:49.122Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n */\nreturn function getCount(s, k) {\n  const n = s.length;\n  const map = new Map();\n\n  for (let i = 0; i < s.length; i++) {\n    const char = s[i];\n    if (!map.has(char)) {\n      map.set(char, new Array());\n    }\n\n    map.get(char).push(i);\n  }\n\n  const v = new Object();\n  v.result = 0;\n\n  for (const [char, indexes] of map) {\n    const count = indexes.length;\n    if (count < k) continue;\n\n    for (let j = k - 1; j < count; j++) {\n      indexes.setColor(j, \"green\");\n      indexes.setColor(j - k + 1, \"cyan\");\n      const right = indexes[j];\n      const left = indexes[j - k + 1];\n      s.setColor(right, \"green\");\n      s.setColor(left, \"cyan\");\n\n      v.result += left + (n - right);\n\n      indexes.setColor(j, null);\n      indexes.setColor(j - k + 1, null);\n      s.setColor(right, null);\n      s.setColor(left, null);\n    }\n  }\n\n  return v.result;\n};\n\nreturn getCount;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluvkx9170003uozgzg669cgg": {
       "id": "cluvkx9170003uozgzg669cgg",
       "createdAt": "2024-04-11T18:35:11.227Z",
@@ -22918,6 +23334,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} num\n * @param {number} k\n * @return {string}\n */\nvar removeKdigits = function (num, k) {\n  if (num.length === k) return \"0\";\n\n  const n = num.length;\n  const stack = new Array();\n\n  for (let i = 0; i < n; i++) {\n    while (k && stack.length && stack.at(-1) > num[i]) {\n      stack.pop();\n      k--;\n    }\n    if (num[i] === \"0\" && !stack.length) continue;\n\n    stack.push(num[i]);\n  }\n\n  while (k) {\n    stack.pop();\n    k--;\n  }\n\n  return stack.join(\"\") || \"0\";\n};\n\nreturn removeKdigits;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluzk9wxe000512g7juhn0uph": {
+      "id": "cluzk9wxe000512g7juhn0uph",
+      "createdAt": "2024-04-14T13:28:07.155Z",
+      "updatedAt": "2024-04-14T14:10:22.698Z",
+      "projectId": "cluza62js0001blgudhljc6xq",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n */\nreturn function getCount(s, k) {\n  const n = s.length;\n  const freqMap = new Uint32Array(26);\n  const offset = \"a\".charCodeAt(0);\n  const getIndex = (char) => char.charCodeAt(0) - offset;\n\n  const v = new Object();\n  v.result = 0;\n\n  let left = 0;\n  let right = 0;\n  for (right; right < n; right++) {\n    s.setColor(right, \"green\");\n    const rightIndex = getIndex(s[right]);\n    freqMap[rightIndex]++;\n\n    while (freqMap[rightIndex] === k && left < right) {\n      s.setColor(left, \"cyan\");\n      freqMap[getIndex(s[left++])]--;\n    }\n\n    v.result += left;\n  }\n\n  return v.result;\n};\n\nreturn getCount;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cluzt0a9b0003gt0wct5aij78": {
+      "id": "cluzt0a9b0003gt0wct5aij78",
+      "createdAt": "2024-04-14T17:32:34.412Z",
+      "updatedAt": "2024-04-14T17:35:03.198Z",
+      "projectId": "cluzt0a980001gt0wim4swye1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar shortestSubarray = function (nums, k) {\n  const n = nums.length;\n\n  const preSums = new Array(n + 1);\n  preSums[0] = 0;\n  for (let i = 1; i <= n; i++) {\n    nums.setColor(i - 1, \"cyan\");\n    preSums[i] = preSums[i - 1] + nums[i - 1];\n  }\n\n  let result = n + 1;\n  const monoq = new Array();\n\n  for (let i = 0; i < preSums.length; i++) {\n    preSums.setColor(i, \"green\");\n    const sum = preSums[i];\n    while (monoq.length && sum <= preSums[monoq.at(-1)]) {\n      monoq.pop();\n    }\n\n    while (monoq.length && sum - preSums[monoq[0]] >= k) {\n      const len = i - monoq.shift();\n      result = Math.min(result, len);\n    }\n\n    monoq.push(i);\n  }\n\n  if (result >= n + 1) return -1;\n\n  return result;\n};\n\nreturn shortestSubarray;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -22935,6 +23379,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cluzqur7g0003l6c6o2b6r46f": {
+      "id": "cluzqur7g0003l6c6o2b6r46f",
+      "createdAt": "2024-04-14T16:32:17.211Z",
+      "updatedAt": "2024-04-14T16:34:26.018Z",
+      "projectId": "cluzqur7e0001l6c6i54ssz7w",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar countSubarrays = function (nums, k) {\n  const n = nums.length;\n  const maxVal = Math.max(...nums);\n\n  const v = new Object();\n  v.count = 0;\n  v.result = 0;\n\n  let left = 0;\n  let right = 0;\n  for (right; right < n; right++) {\n    nums.setColor(right, \"green\");\n    if (nums[right] === maxVal) {\n      v.count++;\n    }\n\n    while (v.count == k) {\n      nums.setColor(left, \"cyan\");\n      if (nums[left++] === maxVal) v.count--;\n    }\n    v.result += left;\n  }\n\n  return v.result;\n};\n\nreturn countSubarrays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cln6hcmh70003n10hrcf18n0n": {
       "id": "cln6hcmh70003n10hrcf18n0n",
       "createdAt": "2023-09-30T20:22:59.275Z",
@@ -22946,6 +23404,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar find132pattern = function (nums) {\n  const stack = new Array();\n  const v = new Object();\n  v.middle = -Infinity;\n\n  for (let i = nums.length - 1; i >= 0; i--) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    if (num < v.middle) {\n      return true;\n    }\n    while (stack.at(-1) < num) {\n      v.middle = stack.pop();\n    }\n    stack.push(num);\n  }\n\n  return false;\n};\n\nreturn find132pattern;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluzteu0o000311c130z2vqu3": {
+      "id": "cluzteu0o000311c130z2vqu3",
+      "createdAt": "2024-04-14T17:43:53.206Z",
+      "updatedAt": "2024-04-14T17:44:42.769Z",
+      "projectId": "cluzteu0m000111c1roha5p5i",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n *  Card: one single card\n    Deck: a deck of cards\n    Player: abstract class representing players\n    BlackjackPlayer: specific player\n    Dealer: other kind of player\n    Move: a move made by one of the players\n    BlackjackGame: embeds game logic\n */\n\nclass Card {\n  \n}\n\nfunction run() {\n\n}\n\nreturn run;",
       "pythonCode": null,
       "order": 0
     },
@@ -23019,6 +23491,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cluzu5tpf0001xegi8f9qfnl4": {
+      "id": "cluzu5tpf0001xegi8f9qfnl4",
+      "createdAt": "2024-04-14T18:04:52.514Z",
+      "updatedAt": "2024-04-17T19:23:34.792Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect /w 3 parts",
+      "slug": "quickselect-w-3-parts",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const quickSelect = (arr, k) => {\n    const pivotIndex = Math.floor(Math.random() * arr.length);\n    arr.setColor(pivotIndex, \"green\");\n    const pivot = arr[pivotIndex];\n    const left = new Array();\n    const mid = new Array();\n    const right = new Array();\n\n    for (let i = 0; i < arr.length; i++) {\n      const num = arr[i];\n      if (num > pivot) {\n        left.push(num);\n      } else if (num < pivot) {\n        right.push(num);\n      } else {\n        mid.push(num);\n      }\n    }\n\n    console.log({k, pivot, left, mid, right});\n\n    if (k <= left.length) {\n      return quickSelect(left, k);\n    }\n\n    if (left.length + mid.length < k) {\n      return quickSelect(right, k - left.length - mid.length);\n    }\n\n    return pivot;\n  };\n\n  const result = quickSelect(nums, k);\n\n  return result;\n};\n\nreturn findKthLargest;\n",
+      "pythonCode": null,
+      "order": 5
+    },
     "clua5afoi00018rn4n9rfsl71": {
       "id": "clua5afoi00018rn4n9rfsl71",
       "createdAt": "2024-03-27T18:34:22.805Z",
@@ -23036,7 +23522,7 @@
     "cluy09omi0003wsejpm3ialc4": {
       "id": "cluy09omi0003wsejpm3ialc4",
       "createdAt": "2024-04-13T11:20:17.898Z",
-      "updatedAt": "2024-04-13T11:23:52.373Z",
+      "updatedAt": "2024-04-13T18:34:00.847Z",
       "projectId": "cluy09omi0001wsejc84hhdvx",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -23046,6 +23532,20 @@
       "code": "/**\n * @param {character[][]} matrix\n * @return {number}\n */\nvar maximalRectangle = function (matrix) {\n  const m = matrix.length;\n  const n = matrix[0].length;\n\n  const v = new Object();\n  v.max = 0;\n  const dp = new Array(n).fill(0);\n\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      matrix[i].setColor(j, \"green\");\n      const char = matrix[i][j];\n      dp[j] = char === \"0\" ? 0 : dp[j] + 1;\n    }\n\n    v.max = Math.max(v.max, maxInHistogram(dp));\n  }\n\n  return v.max;\n};\n\nfunction maxInHistogram(row) {\n  const n = row.length;\n  const stack = new Array();\n\n  let max = 0;\n\n  for (let i = 0; i <= n; i++) {\n    row.setColor(i, \"cyan\");\n    const curr = row[i] ?? -Infinity;\n    while (stack.length && row[stack.at(-1)] > curr) {\n      const height = row[stack.pop()];\n      const start = stack.at(-1) ?? -1;\n      const width = i - start - 1;\n      max = Math.max(max, height * width);\n    }\n\n    stack.push(i);\n    row.setColor(i, null);\n  }\n\n  return max;\n}\n\nreturn maximalRectangle;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clp1gttty0007mi0ghmle4aat": {
+      "id": "clp1gttty0007mi0ghmle4aat",
+      "createdAt": "2023-11-16T17:28:56.134Z",
+      "updatedAt": "2024-04-14T18:11:00.923Z",
+      "projectId": "cllb3ap4n0001jw086qg9f5jn",
+      "title": "Quickselect",
+      "slug": "quickselect",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar findKthLargest = function (nums, k) {\n  const target = nums.length - k;\n\n  const partition = (left, right) => {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(right, \"cyan\");\n    const pivot = nums[right];\n    let fill = left;\n\n    for (let i = left; i < right; i++) {\n      if (nums[i] <= pivot) {\n        [nums[fill], nums[i]] = [nums[i], nums[fill]];\n        fill++;\n      }\n    }\n\n    [nums[fill], nums[right]] = [nums[right], nums[fill]];\n\n    return fill;\n  };\n\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left < right) {\n    const pivot = partition(left, right);\n\n    if (pivot < target) {\n      left = pivot + 1;\n    } else if (pivot > target) {\n      right = pivot - 1;\n    } else {\n      break;\n    }\n  }\n\n  nums.setColor(target, \"green\");\n  return nums[target];\n};\n\nreturn findKthLargest;\n",
+      "pythonCode": null,
+      "order": 3
     },
     "clukaa7ga0003ntbww08ugbl5": {
       "id": "clukaa7ga0003ntbww08ugbl5",
@@ -23078,7 +23578,7 @@
     "cluo8gjzx0003olh3ty7fvqnz": {
       "id": "cluo8gjzx0003olh3ty7fvqnz",
       "createdAt": "2024-04-06T15:11:53.660Z",
-      "updatedAt": "2024-04-06T15:17:44.331Z",
+      "updatedAt": "2024-04-21T14:07:42.705Z",
       "projectId": "cluo8gjzw0001olh3a68qt7ok",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -23134,7 +23634,7 @@
     "clud7d5rb0003mz5fl1rq8i0r": {
       "id": "clud7d5rb0003mz5fl1rq8i0r",
       "createdAt": "2024-03-29T21:55:47.685Z",
-      "updatedAt": "2024-04-07T10:25:02.663Z",
+      "updatedAt": "2024-04-14T18:04:05.977Z",
       "projectId": "clud7d5r90001mz5fyrh92wek",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -23229,6 +23729,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clv0sxknb0003tksc7h9q20zy": {
+      "id": "clv0sxknb0003tksc7h9q20zy",
+      "createdAt": "2024-04-15T10:18:14.086Z",
+      "updatedAt": "2024-04-15T15:46:14.273Z",
+      "projectId": "clv0sxknb0001tkscq8fk185k",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} intervals\n * @return {number}\n */\nvar eraseOverlapIntervals = function (intervals) {\n  intervals.sort((a, b) => a[1] - b[1]);\n\n  let result = 0;\n  let prev = 0;\n\n  for (let i = 1; i < intervals.length; i++) {\n    intervals.setColor(prev, \"cyan\");\n    intervals.setColor(i, \"green\");\n    const [, prevEnd] = intervals[prev];\n    const [start] = intervals[i];\n\n    // console.log({i, start, end, prevStart, prevEnd, result});\n\n    if (start < prevEnd) {\n      result++;\n    } else {\n      prev = i;\n    }\n  }\n\n  return result;\n};\n\nreturn eraseOverlapIntervals;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clr7ymsll0003uxwwwbs1ueqc": {
       "id": "clr7ymsll0003uxwwwbs1ueqc",
       "createdAt": "2024-01-10T15:53:22.762Z",
@@ -23254,6 +23768,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function (nums) {\n  let left = 1;\n  let right = 1;\n  for (right; right < nums.length; right++) {\n    nums.setColor(right, \"cyan\");\n    if (nums[right - 1] < nums[right]) {\n      nums.setColor(left, \"green\");\n      nums[left++] = nums[right];\n    }\n  }\n\n  return left;\n};\n\nreturn removeDuplicates;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clv19zgim0003oruls7scrz4k": {
+      "id": "clv19zgim0003oruls7scrz4k",
+      "createdAt": "2024-04-15T18:15:35.516Z",
+      "updatedAt": "2024-04-15T18:24:03.664Z",
+      "projectId": "clv19zgim0001orul82jtji6u",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxCoins = function (nums) {\n  const baloons = [1, ...nums, 1];\n  const dp = Array.from({ length: baloons.length }, () =>\n    Array(baloons.length).fill(0),\n  );\n\n  for (let l = nums.length; l >= 1; l--) {\n    for (let r = l; r <= nums.length; r++) {\n      let max = 0;\n      for (let i = l; i <= r; i++) {\n        max = Math.max(\n          max,\n          baloons[l - 1] * baloons[i] * baloons[r + 1] +\n            dp[l][i - 1] +\n            dp[i + 1][r],\n        );\n      }\n\n      dp[l][r] = max;\n    }\n  }\n\n  return dp[1][nums.length];\n\n  // let dp = Array.from(Array(nums.length + 1), () => Array(nums.length + 1).fill(-1));\n\n  // const calculate = (i, j) => {\n  //     if (i > j) {\n  //         return 0;\n  //     }\n\n  //     if (dp[i][j] !== -1) {\n  //         return dp[i][j]\n  //     }\n\n  //     let max = 0;\n  //     for (let index = i; index <= j; index += 1) {\n  //         max = Math.max(max,\n  //             baloons[i - 1] * baloons[index] * baloons[j + 1] +\n  //             calculate(i, index - 1) +\n  //             calculate(index + 1, j)\n  //         )\n  //     }\n  //     dp[i][j] = max\n  //     return max;\n  // }\n\n  // return calculate(1, nums.length)\n};\n\nreturn maxCoins;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -23312,6 +23840,34 @@
       "code": "/**\n * @param {string[]} words\n * @return {string}\n */\nvar alienOrder = function (words) {\n  const n = words.length;\n\n  const indegrees = new Map();\n  const adjList = new Object();\n  for (const word of words) {\n    for (const char of word) {\n      adjList[char] ??= new Array();\n      if (!indegrees.has(char)) {\n        indegrees.set(char, 0);\n      }\n    }\n  }\n\n  for (let i = 0; i < n - 1; i++) {\n    const word = words[i];\n    const nextWord = words[i + 1];\n\n    if (word.length > nextWord.length && word.startsWith(nextWord)) {\n      return \"\";\n    }\n\n    for (let j = 0; j < word.length && j < nextWord.length; j++) {\n      const from = word[j];\n      const to = nextWord[j];\n      if (from === to) continue;\n\n      adjList[from].push(to);\n      indegrees.set(to, indegrees.get(to) + 1);\n      break;\n    }\n  }\n\n  console.log({ adjList, indegrees });\n\n  const result = [];\n  const queue = new Queue();\n  for (const [char, count] of indegrees) {\n    if (count !== 0) continue;\n\n    queue.enqueue(char);\n  }\n\n  while (!queue.isEmpty()) {\n    const curr = queue.dequeue();\n    result.push(curr);\n\n    for (const next of adjList[curr]) {\n      const nextCount = indegrees.get(next) - 1;\n      indegrees.set(next, nextCount);\n      if (nextCount < 0) continue;\n\n      if (nextCount === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  if (result.length < indegrees.size) return \"\";\n\n  return result.join(\"\");\n};\n\nreturn alienOrder;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clls4ecw90003jz08wk6znpig": {
+      "id": "clls4ecw90003jz08wk6znpig",
+      "createdAt": "2023-08-26T14:31:56.362Z",
+      "updatedAt": "2024-04-15T15:47:43.619Z",
+      "projectId": "clls4ecw90001jz08ro77rcvk",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @param {string} s3\n * @return {boolean}\n */\nvar isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  const l = s3.length;\n\n  if (m + n !== l) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let j = 1; j <= n; j++) {\n    dp.setColor(j, \"cyan\");\n    dp[j] = dp[j - 1] && s2[j - 1] === s3[j - 1];\n  }\n\n  for (let i = 1; i <= m; i++) {\n    dp[0] = dp[0] && s1[i - 1] === s3[i - 1];\n    for (let j = 1; j <= n; ++j) {\n      dp.setColor(j, \"green\");\n      dp[j] =\n        (dp[j] && s1[i - 1] === s3[i + j - 1]) ||\n        (dp[j - 1] && s2[j - 1] === s3[i + j - 1]);\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clv14phdf0005nzeu282ycjdf": {
+      "id": "clv14phdf0005nzeu282ycjdf",
+      "createdAt": "2024-04-15T15:47:51.987Z",
+      "updatedAt": "2024-04-15T18:15:06.838Z",
+      "projectId": "clls4ecw90001jz08ro77rcvk",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  if (m + n !== s3.length) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let i = 0; i <= m; i++) {\n    for (let j = 0; j <= n; j++) {\n      const k = j + i - 1;\n      const up = dp[j] && s1[i - 1] === s3[k];\n      const left = j > 0 && dp[j - 1] && s2[j - 1] === s3[k];\n      dp[j] = up || left;\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clulqjlya0003o3ofen5cct2r": {
       "id": "clulqjlya0003o3ofen5cct2r",
@@ -23563,6 +24119,62 @@
       "description": "",
       "code": "/**\n * @param {TreeNodeObject} root\n * @param {number} target\n * @param {number} k\n */\nvar distanceK = function (root, target, k) {\n  if (!root) return [];\n\n  const result = [];\n\n  const findAtDistance = (node, depth, prevVal) => {\n    if (depth === k) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n      return;\n    } else if (depth > k) return;\n    node.setColor(\"orange\");\n\n    const nextDepth = depth + 1;\n    if (node.left && node.left.val !== prevVal) {\n      findAtDistance(node.left, nextDepth, node.val);\n    }\n    if (node.right && node.right.val !== prevVal) {\n      findAtDistance(node.right, nextDepth, node.val);\n    }\n  };\n\n  const traverse = (node) => {\n    node.setColor(\"cyan\");\n    if (node.val === target) {\n      findAtDistance(node, 0, null);\n      return 1;\n    }\n    if (node.left) {\n      const distance = traverse(node.left);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.left.val);\n        return distance + 1;\n      }\n    }\n    if (node.right) {\n      const distance = traverse(node.right);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.right.val);\n        return distance + 1;\n      }\n    }\n\n    return -1;\n  };\n\n  traverse(root);\n\n  return result;\n};\n\nreturn distanceK;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": "",
+      "order": 0
+    },
+    "clpgy1k8n0003tmqeecburce4": {
+      "id": "clpgy1k8n0003tmqeecburce4",
+      "createdAt": "2023-11-27T13:27:23.063Z",
+      "updatedAt": "2024-04-13T18:36:05.940Z",
+      "projectId": "clpgy1k8n0001tmqe6s8kukex",
+      "title": "Top-Down Recursion",
+      "slug": "top-down-recursion",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr) => Array.from(arr),\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from({ length: 10 }, () =>\n    Array.from({ length }, () => 0, null, {\n      colorMap: {\n        0: \"black\",\n      },\n    }),\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cluzpw4rf00033iiyhhepe72h": {
+      "id": "cluzpw4rf00033iiyhhepe72h",
+      "createdAt": "2024-04-14T16:05:21.817Z",
+      "updatedAt": "2024-04-14T16:25:00.936Z",
+      "projectId": "cluzpw4rd00013iiy1wcgewyg",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @param {number} k\n * @return {number}\n */\nvar longestSubstring = function (s, k) {\n  const n = s.length;\n\n  let maxLength = 0;\n  const charMap = new Array(26);\n  const offset = \"a\".charCodeAt(0);\n  const getIndex = (char) => char.charCodeAt(0) - offset;\n\n  const set = new Set();\n  for (const char of s) set.add(char);\n  const uniqueCount = set.size;\n  for (let currCount = 1; currCount <= uniqueCount; currCount++) {\n    charMap.fill(0);\n    let unique = 0;\n    let atLeastK = 0;\n    let left = 0;\n\n    for (let right = 0; right < n; right++) {\n      const rightIndex = getIndex(s[right]);\n      charMap[rightIndex]++;\n      if (charMap[rightIndex] === 1) {\n        unique++;\n      }\n      if (charMap[rightIndex] === k) atLeastK++;\n\n      while (unique > currCount) {\n        const leftIndex = getIndex(s[left]);\n        charMap[leftIndex]--;\n        if (charMap[leftIndex] === 0) {\n          unique--;\n        }\n        if (charMap[leftIndex] === k - 1) atLeastK--;\n        left++;\n      }\n\n      if (unique === currCount && atLeastK === unique) {\n        const length = right - left + 1;\n        if (length > maxLength) {\n          maxLength = length;\n        }\n      }\n    }\n  }\n\n  return maxLength;\n};\n\nreturn longestSubstring;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clv1aa6380005orula2ii8ntz": {
+      "id": "clv1aa6380005orula2ii8ntz",
+      "createdAt": "2024-04-15T18:23:55.220Z",
+      "updatedAt": "2024-04-19T15:47:51.338Z",
+      "projectId": "clv19zgim0001orul82jtji6u",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxCoins = function (nums) {\n  const baloons = Array.from([1, ...nums, 1]);\n  const dp = Array.from(\n    { length: nums.length + 1 },\n    () => new Array(nums.length + 1),\n  );\n\n  const calculate = (i, j) => {\n    if (i > j) {\n      return 0;\n    }\n\n    if (dp[i][j] !== undefined) {\n      return dp[i][j];\n    }\n\n    let max = 0;\n    for (let index = i; index <= j; index += 1) {\n      max = Math.max(\n        max,\n        baloons[i - 1] * baloons[index] * baloons[j + 1] +\n          calculate(i, index - 1) +\n          calculate(index + 1, j),\n      );\n    }\n\n    dp[i][j] = max;\n    return max;\n  };\n\n  return calculate(1, nums.length);\n};\n\nreturn maxCoins;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clv9lszau0003car5uorhw1i6": {
+      "id": "clv9lszau0003car5uorhw1i6",
+      "createdAt": "2024-04-21T14:08:38.068Z",
+      "updatedAt": "2024-04-21T14:18:40.548Z",
+      "projectId": "clv9lszau0001car5gi8m9q9u",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} source\n * @param {number} destination\n * @return {boolean}\n */\nvar validPath = function (n, edges, source, destination) {\n  const graph = new UnionFind(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    graph.union(from, to);\n  }\n\n  return graph.find(source) === graph.find(destination);\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.ranks = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let current = this.pars[node];\n    while (current !== this.pars[current]) {\n      current = this.pars[this.pars[current]];\n    }\n\n    return current;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return true;\n\n    if (this.ranks[child] > this.ranks[parent]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn validPath;\n",
+      "pythonCode": null,
       "order": 0
     }
   }
