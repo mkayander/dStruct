@@ -4143,6 +4143,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvaydx1p0001pyt5qglu7jhz": {
+      "id": "clvaydx1p0001pyt5qglu7jhz",
+      "createdAt": "2024-04-22T12:48:36.493Z",
+      "updatedAt": "2024-04-22T12:48:36.493Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Islands II",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/number-of-islands-ii",
+      "slug": "number-of-islands-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clvb7mdoz0001ckw4ie56u23i": {
+      "id": "clvb7mdoz0001ckw4ie56u23i",
+      "createdAt": "2024-04-22T17:07:07.857Z",
+      "updatedAt": "2024-04-22T17:07:07.857Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Open the Lock",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/open-the-lock",
+      "slug": "open-the-lock",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clvcfmqy10001148mas7ihgw6": {
+      "id": "clvcfmqy10001148mas7ihgw6",
+      "createdAt": "2024-04-23T13:39:08.136Z",
+      "updatedAt": "2024-04-23T13:39:08.136Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Height Trees",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-height-trees",
+      "slug": "minimum-height-trees",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17972,6 +18014,112 @@
         }
       },
       "description": null
+    },
+    "clvcfmqy30002148mv7zs6icz": {
+      "id": "clvcfmqy30002148mv7zs6icz",
+      "createdAt": "2024-04-23T13:39:08.136Z",
+      "updatedAt": "2024-04-23T13:39:57.611Z",
+      "projectId": "clvcfmqy10001148mas7ihgw6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "d1k72Cr3VYAUT4npWWK2Go": {
+          "name": "d1k72Cr3VYAUT4npWWK2Go",
+          "type": "number",
+          "input": "6",
+          "order": 0
+        },
+        "f5Cb3VVnGqEL86REqGvJEk": {
+          "name": "f5Cb3VVnGqEL86REqGvJEk",
+          "type": "array",
+          "input": "[[3,0],[3,1],[3,2],[3,4],[5,4]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clvb7mdoz0002ckw4y93qhbz5": {
+      "id": "clvb7mdoz0002ckw4y93qhbz5",
+      "createdAt": "2024-04-22T17:07:07.857Z",
+      "updatedAt": "2024-04-22T17:08:57.625Z",
+      "projectId": "clvb7mdoz0001ckw4ie56u23i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2RDTnzWbvPay8kNceET5Zo": {
+          "name": "2RDTnzWbvPay8kNceET5Zo",
+          "type": "string",
+          "input": "0202",
+          "order": 1
+        },
+        "b1aD4eMohiSMMdm4k9brkf": {
+          "name": "b1aD4eMohiSMMdm4k9brkf",
+          "type": "array",
+          "input": "[\"0201\",\"0101\",\"0102\",\"1212\",\"2002\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvaydx1p0002pyt5l195ug76": {
+      "id": "clvaydx1p0002pyt5l195ug76",
+      "createdAt": "2024-04-22T12:48:36.493Z",
+      "updatedAt": "2024-04-22T12:49:49.757Z",
+      "projectId": "clvaydx1p0001pyt5qglu7jhz",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2oGvJm7nsHoC1LPb6T92G8": {
+          "name": "2oGvJm7nsHoC1LPb6T92G8",
+          "type": "array",
+          "input": "[[0,0],[0,1],[1,2],[2,1]]",
+          "order": 2
+        },
+        "bqmqdwn13f4nrbLLKvHhYC": {
+          "name": "bqmqdwn13f4nrbLLKvHhYC",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        },
+        "crvwaDAAtKoC4Un6Hx7exY": {
+          "name": "crvwaDAAtKoC4Un6Hx7exY",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvb7oh300005ckw4m25j8wue": {
+      "id": "clvb7oh300005ckw4m25j8wue",
+      "createdAt": "2024-04-22T17:08:45.564Z",
+      "updatedAt": "2024-04-22T17:28:26.447Z",
+      "projectId": "clvb7mdoz0001ckw4ie56u23i",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "31zK1RixzyYKGMbvghVW2J": {
+          "name": "31zK1RixzyYKGMbvghVW2J",
+          "type": "string",
+          "input": "0009",
+          "order": 1
+        },
+        "b1aD4eMohiSMMdm4k9brkf": {
+          "name": "b1aD4eMohiSMMdm4k9brkf",
+          "type": "array",
+          "input": "[\"8888\"]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -23925,6 +24073,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clvaydx1p0003pyt59yjuw3cb": {
+      "id": "clvaydx1p0003pyt59yjuw3cb",
+      "createdAt": "2024-04-22T12:48:36.493Z",
+      "updatedAt": "2024-04-22T17:06:47.090Z",
+      "projectId": "clvaydx1p0001pyt5qglu7jhz",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} m\n * @param {number} n\n * @param {number[][]} positions\n * @return {number[]}\n */\nvar numIslands2 = function (m, n, positions) {\n  const result = new Array();\n  const graph = new UnionFind(m, n);\n\n  for (let i = 0; i < positions.length; i++) {\n    positions.setColor(i, \"green\");\n    const [row, col] = positions[i];\n    const currIndex = graph.getIndex(row, col);\n    graph.initCell(currIndex);\n\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n\n      const nextIndex = graph.getIndex(nRow, nCol);\n      if (graph.isPresent(nextIndex)) {\n        graph.union(currIndex, nextIndex);\n      }\n    }\n\n    result.push(graph.count);\n  }\n\n  return result;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nclass UnionFind extends Object {\n  constructor(rows, cols) {\n    super();\n    this.rows = rows;\n    this.cols = cols;\n    this.size = cols * rows;\n    this.ranks = new Int32Array(this.size);\n    this.pars = new Int32Array(this.size);\n    for (let i = 0; i < this.size; i++) {\n      this.pars[i] = -1;\n    }\n\n    this.count = 0;\n  }\n\n  getIndex(row, col) {\n    return this.cols * row + col;\n  }\n\n  initCell(index) {\n    if (this.isPresent(index)) return false;\n\n    this.ranks[index] = 1;\n    this.pars[index] = index;\n    this.count++;\n\n    return true;\n  }\n\n  isPresent(index) {\n    return this.pars[index] !== -1;\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent ?? -1;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n    if (parent === -1 || child === -1) return false;\n\n    if (this.ranks[child] > this.ranks[parent]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n    this.count--;\n\n    return true;\n  }\n}\n\nreturn numIslands2;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluo4h2tx0003rsrn39bmji6i": {
       "id": "cluo4h2tx0003rsrn39bmji6i",
       "createdAt": "2024-04-06T13:20:19.603Z",
@@ -23964,6 +24126,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {string[]}\n */\nvar generatePalindromes = function (s) {\n  const freqMap = new Map();\n  const half = s.length >> 1;\n  const isEven = s.length % 2 === 0;\n\n  for (const char of s) {\n    freqMap.set(char, (freqMap.get(char) ?? 0) + 1);\n    const newCount = freqMap.get(char);\n  }\n\n  let singleChar = null;\n  for (const [char, count] of freqMap) {\n    if (count % 2 === 1) {\n      if (singleChar || isEven) return [];\n      singleChar = char;\n    }\n  }\n\n  console.log({singleChar});\n\n  const result = new Array();\n  const current = new Array();\n\n  const backtrack = () => {\n    if (current.length === half) {\n      const copy = [...current];\n      const rev = copy.toReversed();\n      if (singleChar) copy.push(singleChar);\n      copy.push(...rev);\n      result.push(copy.join(\"\"));\n      return;\n    }\n\n    for (const [char, count] of freqMap) {\n      if (count < 2) continue;\n      freqMap.set(char, count - 2);\n      current.push(char);\n      backtrack();\n      current.pop();\n      freqMap.set(char, count);\n    }\n  };\n\n  backtrack();\n\n  return result;\n};\n\nreturn generatePalindromes;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvcfmqy30003148msldtazrf": {
+      "id": "clvcfmqy30003148msldtazrf",
+      "createdAt": "2024-04-23T13:39:08.136Z",
+      "updatedAt": "2024-04-23T13:40:17.724Z",
+      "projectId": "clvcfmqy10001148mas7ihgw6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findMinHeightTrees = function (n, edges) {\n  if (n === 1) return [0];\n\n  const adjList = new Array(n);\n  const indegrees = new Uint32Array(n);\n  let count = n;\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Array()).push(to);\n    (adjList[to] ??= new Array()).push(from);\n\n    indegrees[from]++;\n    indegrees[to]++;\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 1) {\n      queue.enqueue(i);\n    }\n  }\n\n  while (!queue.isEmpty()) {\n    const size = queue.size();\n    if (count <= 2) break;\n\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      if (!adjList[node]) continue;\n\n      for (const next of adjList[node]) {\n        if (indegrees[next] === 0) continue;\n        if (indegrees[node] === 1) {\n          count--;\n        }\n        indegrees[node]--;\n        indegrees[next]--;\n        if (indegrees[next] === 1) {\n          queue.enqueue(next);\n        }\n      }\n    }\n  }\n\n  return queue.toArray();\n};\n\nreturn findMinHeightTrees;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -24152,7 +24328,7 @@
     "clv1aa6380005orula2ii8ntz": {
       "id": "clv1aa6380005orula2ii8ntz",
       "createdAt": "2024-04-15T18:23:55.220Z",
-      "updatedAt": "2024-04-19T15:47:51.338Z",
+      "updatedAt": "2024-04-22T12:48:20.035Z",
       "projectId": "clv19zgim0001orul82jtji6u",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -24176,6 +24352,34 @@
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} source\n * @param {number} destination\n * @return {boolean}\n */\nvar validPath = function (n, edges, source, destination) {\n  const graph = new UnionFind(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    graph.union(from, to);\n  }\n\n  return graph.find(source) === graph.find(destination);\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.ranks = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let current = this.pars[node];\n    while (current !== this.pars[current]) {\n      current = this.pars[this.pars[current]];\n    }\n\n    return current;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return true;\n\n    if (this.ranks[child] > this.ranks[parent]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn validPath;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clvb7mdoz0003ckw45jwcgvvx": {
+      "id": "clvb7mdoz0003ckw45jwcgvvx",
+      "createdAt": "2024-04-22T17:07:07.857Z",
+      "updatedAt": "2024-04-22T17:40:35.202Z",
+      "projectId": "clvb7mdoz0001ckw4ie56u23i",
+      "title": "BFS",
+      "slug": "bfs",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {string[]} deadends\n * @param {string} target\n * @return {number}\n */\nvar openLock = function (deadends, target) {\n  if (target === \"0000\") return 0;\n\n  const deadEndsSet = new Set();\n  deadends.forEach((state) => deadEndsSet.add(state));\n  if (deadEndsSet.has(\"0000\")) return -1;\n\n  const queue = new Queue();\n  queue.enqueue(\"0000\");\n  const visited = new Set();\n  visited.add(\"0000\");\n\n  let steps = 0;\n  while (!queue.isEmpty()) {\n    steps++;\n    const size = queue.size();\n    for (let i = 0; i < size; i++) {\n      const state = queue.dequeue();\n\n      for (let i = 0; i < 4; i++) {\n        const slot = state[i];\n        for (const nextSlot of getAdjacentSlots(slot)) {\n          const nextState = state.slice(0, i) + nextSlot + state.slice(i + 1);\n          if (nextState == target) return steps;\n          if (deadEndsSet.has(nextState)) {\n            deadEndsSet.setColor(nextState, \"red\");\n            continue;\n          }\n          if (visited.has(nextState)) {\n            visited.setColor(nextState, \"red\");\n            continue;\n          }\n          visited.add(nextState);\n\n          queue.enqueue(nextState);\n        }\n      }\n    }\n  }\n\n  return -1;\n};\n\nfunction getNextSlot(slot) {\n  let num = Number(slot);\n  num++;\n  if (num === 10) num = 0;\n\n  return num.toString();\n}\n\nfunction getPrevSlot(slot) {\n  let num = Number(slot);\n  num--;\n  if (num === -1) num = 9;\n\n  return num.toString();\n}\n\nfunction getAdjacentSlots(slot) {\n  return [getNextSlot(slot), getPrevSlot(slot)];\n}\n\nreturn openLock;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvb8szpn0001jnq9f720euxn": {
+      "id": "clvb8szpn0001jnq9f720euxn",
+      "createdAt": "2024-04-22T17:40:15.945Z",
+      "updatedAt": "2024-04-23T13:13:41.795Z",
+      "projectId": "clvb7mdoz0001ckw4ie56u23i",
+      "title": "Double BFS",
+      "slug": "double-bfs",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {string[]} deadends\n * @param {string} target\n * @return {number}\n */\nvar openLock = function (deadends, target) {\n  if (target === \"0000\") return 0;\n\n  const deadEndsSet = new Set();\n  deadends.forEach((end) => deadEndsSet.add(end));\n  if (deadEndsSet.has(\"0000\")) return -1;\n\n  const queue = new Queue();\n  queue.enqueue(\"0000\");\n  const visited = new Set();\n  visited.add(\"0000\");\n\n  const endQueue = new Queue();\n  endQueue.enqueue(target);\n  const endVisited = new Set();\n  endVisited.add(target.toString());\n\n  let steps = 0;\n  while (!queue.isEmpty()) {\n    steps++;\n    if (processQueue(queue, visited, endVisited, deadEndsSet)) return steps;\n    steps++;\n    if (processQueue(endQueue, endVisited, visited, deadEndsSet)) return steps;\n  }\n\n  return -1;\n};\n\nfunction processQueue(queue, visited, endVisited, deadEndsSet) {\n  const size = queue.size();\n  for (let i = 0; i < size; i++) {\n    const state = queue.dequeue();\n\n    for (let i = 0; i < 4; i++) {\n      const slot = state[i];\n      for (const nextSlot of getAdjacentSlots(slot)) {\n        const nextState = state.slice(0, i) + nextSlot + state.slice(i + 1);\n        if (endVisited.has(nextState)) return true;\n        if (deadEndsSet.has(nextState) || visited.has(nextState)) continue;\n        visited.add(nextState);\n\n        queue.enqueue(nextState);\n      }\n    }\n  }\n\n  return false;\n}\n\nfunction getNextSlot(slot) {\n  let num = Number(slot);\n  num++;\n  if (num === 10) num = 0;\n\n  return num.toString();\n}\n\nfunction getPrevSlot(slot) {\n  let num = Number(slot);\n  num--;\n  if (num === -1) num = 9;\n\n  return num.toString();\n}\n\nfunction getAdjacentSlots(slot) {\n  return [getNextSlot(slot), getPrevSlot(slot)];\n}\n\nreturn openLock;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
