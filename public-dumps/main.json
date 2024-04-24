@@ -4185,6 +4185,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvdz6gi800018p2u7ahl6rzp": {
+      "id": "clvdz6gi800018p2u7ahl6rzp",
+      "createdAt": "2024-04-24T15:34:06.606Z",
+      "updatedAt": "2024-04-24T15:34:06.606Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Interval to Include Each Query",
+      "category": "HEAP",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-interval-to-include-each-query",
+      "slug": "minimum-interval-to-include-each-query",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clve4oegl00017o140efb5jut": {
+      "id": "clve4oegl00017o140efb5jut",
+      "createdAt": "2024-04-24T18:08:01.844Z",
+      "updatedAt": "2024-04-24T18:08:01.844Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "The Skyline Problem",
+      "category": "HEAP",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/the-skyline-problem",
+      "slug": "the-skyline-problem",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18015,6 +18043,31 @@
       },
       "description": null
     },
+    "clvdz6gi800028p2uxb0yrf71": {
+      "id": "clvdz6gi800028p2uxb0yrf71",
+      "createdAt": "2024-04-24T15:34:06.606Z",
+      "updatedAt": "2024-04-24T15:34:41.182Z",
+      "projectId": "clvdz6gi800018p2u7ahl6rzp",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "9RwheBofF2h8b4zi5Cve3h": {
+          "name": "9RwheBofF2h8b4zi5Cve3h",
+          "type": "array",
+          "input": "[2,3,4,5]",
+          "order": 1
+        },
+        "fCLNfNPh77Uz351ZVhq9f9": {
+          "name": "fCLNfNPh77Uz351ZVhq9f9",
+          "type": "array",
+          "input": "[[1,4],[2,4],[3,6],[4,4]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvcfmqy30002148mv7zs6icz": {
       "id": "clvcfmqy30002148mv7zs6icz",
       "createdAt": "2024-04-23T13:39:08.136Z",
@@ -18035,6 +18088,31 @@
           "name": "f5Cb3VVnGqEL86REqGvJEk",
           "type": "array",
           "input": "[[3,0],[3,1],[3,2],[3,4],[5,4]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clvcn3hf80003plt67j0tv3qp": {
+      "id": "clvcn3hf80003plt67j0tv3qp",
+      "createdAt": "2024-04-23T17:08:06.261Z",
+      "updatedAt": "2024-04-23T17:08:34.466Z",
+      "projectId": "clvcfmqy10001148mas7ihgw6",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "d1k72Cr3VYAUT4npWWK2Go": {
+          "name": "d1k72Cr3VYAUT4npWWK2Go",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "f5Cb3VVnGqEL86REqGvJEk": {
+          "name": "f5Cb3VVnGqEL86REqGvJEk",
+          "type": "array",
+          "input": "[[1,0],[1,2],[1,3]]",
           "order": 1
         }
       },
@@ -18091,6 +18169,25 @@
           "name": "crvwaDAAtKoC4Un6Hx7exY",
           "type": "number",
           "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clve4oeh200027o14d8hoepp1": {
+      "id": "clve4oeh200027o14d8hoepp1",
+      "createdAt": "2024-04-24T18:08:01.844Z",
+      "updatedAt": "2024-04-24T18:08:30.364Z",
+      "projectId": "clve4oegl00017o140efb5jut",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "6orJwTszpPDM7AkTuy4Ga9": {
+          "name": "6orJwTszpPDM7AkTuy4Ga9",
+          "type": "array",
+          "input": "[[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]",
           "order": 0
         }
       },
@@ -24143,6 +24240,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clvdz6gi800038p2u822vxykz": {
+      "id": "clvdz6gi800038p2u822vxykz",
+      "createdAt": "2024-04-24T15:34:06.606Z",
+      "updatedAt": "2024-04-24T15:34:20.181Z",
+      "projectId": "clvdz6gi800018p2u7ahl6rzp",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} intervals\n * @param {number[]} queries\n * @return {number[]}\n */\nvar minInterval = function (intervals, queries) {\n  const queryIdxs = queries\n    .map((_, i) => i)\n    .sort((a, b) => queries[a] - queries[b]);\n  intervals.sort((a, b) => a[0] - b[0]);\n  const pq = new PriorityQueue({\n    compare: (a, b) => a[0] - b[0],\n  });\n\n  const result = new Array(queries.length);\n  let i = 0;\n  for (const qIdx of queryIdxs) {\n    const query = queries[qIdx];\n\n    for (i; i < intervals.length && intervals[i][0] <= query; i++) {\n      const [left, right] = intervals[i];\n      if (right < query) continue;\n\n      const size = right - left + 1;\n      pq.enqueue([size, right]);\n    }\n\n    while (!pq.isEmpty() && pq.front()[1] < query) {\n      pq.dequeue();\n    }\n\n    if (!pq.isEmpty()) {\n      const [size] = pq.front();\n      result[qIdx] = size;\n    } else {\n      result[qIdx] = -1;\n    }\n  }\n\n  return result;\n};\n\nreturn minInterval;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clur6ionc0003btsifp1y0pvw": {
       "id": "clur6ionc0003btsifp1y0pvw",
       "createdAt": "2024-04-08T16:40:52.295Z",
@@ -24269,6 +24380,20 @@
       "pythonCode": null,
       "order": 3
     },
+    "clve4oeh200037o141btk8wvk": {
+      "id": "clve4oeh200037o141btk8wvk",
+      "createdAt": "2024-04-24T18:08:01.844Z",
+      "updatedAt": "2024-04-24T18:10:26.263Z",
+      "projectId": "clve4oegl00017o140efb5jut",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} buildings\n * @return {number[][]}\n */\nvar getSkyline = function (buildings) {\n  const edgeSet = new Set();\n  for (let i = 0; i < buildings.length; i++) {\n    const [from, to] = buildings[i];\n    edgeSet.add(from);\n    edgeSet.add(to);\n  }\n\n  const positions = new Array();\n  edgeSet.forEach((pos) => positions.push(pos));\n  positions.sort((a, b) => a - b);\n\n  const pq = new PriorityQueue({ compare: (a, b) => b[2] - a[2] });\n\n  const result = new Array();\n\n  let j = 0;\n  for (let i = 0; i < positions.length; i++) {\n    const position = positions[i];\n\n    for (j; j < buildings.length && buildings[j][0] <= position; j++) {\n      pq.enqueue(buildings[j]);\n    }\n\n    while (!pq.isEmpty() && pq.front()[1] <= position) {\n      pq.dequeue();\n    }\n\n    const maxHeight = pq.front()?.[2] ?? 0;\n\n    if (!result.length || result.at(-1)[1] !== maxHeight) {\n      result.push([position, maxHeight]);\n    }\n  }\n\n  return result;\n};\n\nreturn getSkyline;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clupqavar0003woa4zqizrtlr": {
       "id": "clupqavar0003woa4zqizrtlr",
       "createdAt": "2024-04-07T16:19:07.635Z",
@@ -24378,6 +24503,20 @@
       "spaceComplexity": "",
       "description": "",
       "code": "/**\n * @param {string[]} deadends\n * @param {string} target\n * @return {number}\n */\nvar openLock = function (deadends, target) {\n  if (target === \"0000\") return 0;\n\n  const deadEndsSet = new Set();\n  deadends.forEach((end) => deadEndsSet.add(end));\n  if (deadEndsSet.has(\"0000\")) return -1;\n\n  const queue = new Queue();\n  queue.enqueue(\"0000\");\n  const visited = new Set();\n  visited.add(\"0000\");\n\n  const endQueue = new Queue();\n  endQueue.enqueue(target);\n  const endVisited = new Set();\n  endVisited.add(target.toString());\n\n  let steps = 0;\n  while (!queue.isEmpty()) {\n    steps++;\n    if (processQueue(queue, visited, endVisited, deadEndsSet)) return steps;\n    steps++;\n    if (processQueue(endQueue, endVisited, visited, deadEndsSet)) return steps;\n  }\n\n  return -1;\n};\n\nfunction processQueue(queue, visited, endVisited, deadEndsSet) {\n  const size = queue.size();\n  for (let i = 0; i < size; i++) {\n    const state = queue.dequeue();\n\n    for (let i = 0; i < 4; i++) {\n      const slot = state[i];\n      for (const nextSlot of getAdjacentSlots(slot)) {\n        const nextState = state.slice(0, i) + nextSlot + state.slice(i + 1);\n        if (endVisited.has(nextState)) return true;\n        if (deadEndsSet.has(nextState) || visited.has(nextState)) continue;\n        visited.add(nextState);\n\n        queue.enqueue(nextState);\n      }\n    }\n  }\n\n  return false;\n}\n\nfunction getNextSlot(slot) {\n  let num = Number(slot);\n  num++;\n  if (num === 10) num = 0;\n\n  return num.toString();\n}\n\nfunction getPrevSlot(slot) {\n  let num = Number(slot);\n  num--;\n  if (num === -1) num = 9;\n\n  return num.toString();\n}\n\nfunction getAdjacentSlots(slot) {\n  return [getNextSlot(slot), getPrevSlot(slot)];\n}\n\nreturn openLock;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clvcn22wv0001plt6omv8witg": {
+      "id": "clvcn22wv0001plt6omv8witg",
+      "createdAt": "2024-04-23T17:07:00.773Z",
+      "updatedAt": "2024-04-24T15:33:01.340Z",
+      "projectId": "clvcfmqy10001148mas7ihgw6",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findMinHeightTrees = function (n, edges) {\n  if (n <= 2) return Array.from({ length: n }, (_, i) => i);\n\n  const adjList = new Array(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Set()).add(to);\n    (adjList[to] ??= new Set()).add(from);\n  }\n\n  let leaves = new Array();\n  for (let i = 0; i < n; i++) {\n    if (adjList[i].size === 1) {\n      leaves.push(i);\n    }\n  }\n\n  let nodeCount = n;\n  while (nodeCount > 2) {\n    nodeCount -= leaves.length;\n    let nextLeaves = new Array();\n\n    for (let i = 0; i < leaves.length; i++) {\n      const node = leaves[i];\n      if (!adjList[node]) continue;\n\n      for (const next of adjList[node]) {\n        adjList[node].delete(next);\n        adjList[next].delete(node);\n        if (adjList[next].size === 1) {\n          nextLeaves.push(next);\n        }\n      }\n    }\n\n    leaves = nextLeaves;\n  }\n\n  return leaves;\n};\n\nreturn findMinHeightTrees;\n",
       "pythonCode": null,
       "order": 1
     }
