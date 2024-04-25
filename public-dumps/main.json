@@ -4213,6 +4213,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvfjlge2000187tlm9o83uep": {
+      "id": "clvfjlge2000187tlm9o83uep",
+      "createdAt": "2024-04-25T17:53:24.793Z",
+      "updatedAt": "2024-04-25T17:53:24.793Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum of Minimum Values in All Subarrays",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/maximum-of-minimum-values-in-all-subarrays",
+      "slug": "maximum-of-minimum-values-in-all-subarrays",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17987,6 +18001,25 @@
       },
       "description": null
     },
+    "clvfjm1vt000587tl1ztftkvh": {
+      "id": "clvfjm1vt000587tl1ztftkvh",
+      "createdAt": "2024-04-25T17:53:52.650Z",
+      "updatedAt": "2024-04-25T17:53:55.853Z",
+      "projectId": "clvfjlge2000187tlm9o83uep",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "u2jwANMWuK3LgRDfUhc5D2": {
+          "name": "u2jwANMWuK3LgRDfUhc5D2",
+          "type": "array",
+          "input": "[10,20,50,10]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clv19zgim0002orul4gkqaxz7": {
       "id": "clv19zgim0002orul4gkqaxz7",
       "createdAt": "2024-04-15T18:15:35.516Z",
@@ -18213,6 +18246,25 @@
           "name": "b1aD4eMohiSMMdm4k9brkf",
           "type": "array",
           "input": "[\"8888\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvfjlge2000287tl5q2szxjh": {
+      "id": "clvfjlge2000287tl5q2szxjh",
+      "createdAt": "2024-04-25T17:53:24.793Z",
+      "updatedAt": "2024-04-25T17:53:47.565Z",
+      "projectId": "clvfjlge2000187tlm9o83uep",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "u2jwANMWuK3LgRDfUhc5D2": {
+          "name": "u2jwANMWuK3LgRDfUhc5D2",
+          "type": "array",
+          "input": "[0,1,2,4]",
           "order": 0
         }
       },
@@ -24366,6 +24418,20 @@
       "pythonCode": null,
       "order": 2
     },
+    "clve4oeh200037o141btk8wvk": {
+      "id": "clve4oeh200037o141btk8wvk",
+      "createdAt": "2024-04-24T18:08:01.844Z",
+      "updatedAt": "2024-04-25T17:53:09.046Z",
+      "projectId": "clve4oegl00017o140efb5jut",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} buildings\n * @return {number[][]}\n */\nvar getSkyline = function (buildings) {\n  const edgeSet = new Set();\n  for (let i = 0; i < buildings.length; i++) {\n    const [from, to] = buildings[i];\n    edgeSet.add(from);\n    edgeSet.add(to);\n  }\n\n  const positions = new Array();\n  edgeSet.forEach((pos) => positions.push(pos));\n  positions.sort((a, b) => a - b);\n\n  const pq = new PriorityQueue({ compare: (a, b) => b[2] - a[2] });\n\n  const result = new Array();\n\n  let j = 0;\n  for (let i = 0; i < positions.length; i++) {\n    const position = positions[i];\n\n    for (j; j < buildings.length && buildings[j][0] <= position; j++) {\n      pq.enqueue(buildings[j]);\n    }\n\n    while (!pq.isEmpty() && pq.front()[1] <= position) {\n      pq.dequeue();\n    }\n\n    const maxHeight = pq.front()?.[2] ?? 0;\n\n    if (!result.length || result.at(-1)[1] !== maxHeight) {\n      result.push([position, maxHeight]);\n    }\n  }\n\n  return result;\n};\n\nreturn getSkyline;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clur4v64d0001a9hy9uunv84x": {
       "id": "clur4v64d0001a9hy9uunv84x",
       "createdAt": "2024-04-08T15:54:35.580Z",
@@ -24379,20 +24445,6 @@
       "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n\n  const dp = Array.from({ length: n }, () => new Array(amount + 1).fill(0));\n  dp.showIndexes(n, amount);\n  for (let i = 0; i < n; i++) {\n    dp[i][0] = 1;\n  }\n\n  for (let i = 0; i < n; i++) {\n    const num = coins[i];\n    for (let sum = 1; sum <= amount; sum++) {\n      if (i > 0) {\n        dp[i][sum] += dp[i - 1][sum];\n      }\n\n      if (sum - num >= 0) {\n        dp[i][sum] += dp[i][sum - num];\n      }\n    }\n  }\n\n  return dp[n - 1][amount];\n};\n\nreturn change;\n",
       "pythonCode": null,
       "order": 3
-    },
-    "clve4oeh200037o141btk8wvk": {
-      "id": "clve4oeh200037o141btk8wvk",
-      "createdAt": "2024-04-24T18:08:01.844Z",
-      "updatedAt": "2024-04-24T18:10:26.263Z",
-      "projectId": "clve4oegl00017o140efb5jut",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[][]} buildings\n * @return {number[][]}\n */\nvar getSkyline = function (buildings) {\n  const edgeSet = new Set();\n  for (let i = 0; i < buildings.length; i++) {\n    const [from, to] = buildings[i];\n    edgeSet.add(from);\n    edgeSet.add(to);\n  }\n\n  const positions = new Array();\n  edgeSet.forEach((pos) => positions.push(pos));\n  positions.sort((a, b) => a - b);\n\n  const pq = new PriorityQueue({ compare: (a, b) => b[2] - a[2] });\n\n  const result = new Array();\n\n  let j = 0;\n  for (let i = 0; i < positions.length; i++) {\n    const position = positions[i];\n\n    for (j; j < buildings.length && buildings[j][0] <= position; j++) {\n      pq.enqueue(buildings[j]);\n    }\n\n    while (!pq.isEmpty() && pq.front()[1] <= position) {\n      pq.dequeue();\n    }\n\n    const maxHeight = pq.front()?.[2] ?? 0;\n\n    if (!result.length || result.at(-1)[1] !== maxHeight) {\n      result.push([position, maxHeight]);\n    }\n  }\n\n  return result;\n};\n\nreturn getSkyline;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clupqavar0003woa4zqizrtlr": {
       "id": "clupqavar0003woa4zqizrtlr",
@@ -24433,6 +24485,34 @@
       "spaceComplexity": "O(n)",
       "description": "",
       "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar knightDialer = function (length) {\n  const mod = 1e9 + 7;\n\n  const map = Array.from(\n    [\n      [4, 6],\n      [6, 8],\n      [7, 9],\n      [4, 8],\n      [3, 9, 0],\n      [],\n      [1, 7, 0],\n      [2, 6],\n      [1, 3],\n      [2, 4],\n    ],\n    (arr) => Array.from(arr),\n  );\n  const keys = Array.from(Object.keys(map));\n\n  const dp = Array.from({ length: 10 }, () =>\n    Array.from({ length }, () => 0, null, {\n      colorMap: {\n        0: \"black\",\n      },\n    }),\n  );\n\n  const dfs = (num, len) => {\n    if (len === 0) return 1;\n    dp[num] ??= new Array();\n    if (dp[num][len]) return dp[num][len];\n\n    let sum = 0;\n    for (let i = 0; i < map[num].length; i++) {\n      map[num].setColor(i, \"cyan\");\n      const next = map[num][i];\n      sum = (sum + dfs(next, len - 1)) % mod;\n      map[num].setColor(i, null);\n    }\n\n    return (dp[num][len] = sum);\n  };\n\n  let total = 0;\n  for (let i = 0; i < keys.length; i++) {\n    keys.setColor(i, \"green\");\n    const num = keys[i];\n    const sum = dfs(num, length - 1);\n    total = (total + sum) % mod;\n    keys.setColor(i, null);\n  }\n\n  return total;\n};\n\nreturn knightDialer;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvfkecp00001pfmr1rlzrszw": {
+      "id": "clvfkecp00001pfmr1rlzrszw",
+      "createdAt": "2024-04-25T18:15:53.014Z",
+      "updatedAt": "2024-04-25T18:18:07.621Z",
+      "projectId": "clvfjlge2000187tlm9o83uep",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar findMaximums = function (nums) {\n  const n = nums.length;\n  const prevSmaller = new Array(n).fill(-1);\n  const nextSmaller = new Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i <= n; i++) {\n    const num = nums[i] ?? -Infinity;\n    while (stack.length && nums[stack.at(-1)] > num) {\n      nextSmaller[stack.pop()] = i;\n    }\n    if (i < n && stack.length) {\n      const prev = stack.at(-1);\n      prevSmaller[i] = prev;\n    }\n\n    stack.push(i);\n  }\n  stack.pop();\n\n  const result = new Array(n).fill(0);\n  for (let i = 0; i < n; i++) {\n    const size = nextSmaller[i] - prevSmaller[i] - 2;\n    console.log({i, size});\n\n    result[size] = Math.max(result[size], nums[i]);\n  }\n\n  for (let i = n - 2; i >= 0; i--) {\n    result[i] = Math.max(result[i], result[i + 1]);\n  }\n\n  return result;\n};\n\nreturn findMaximums;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clvfjlge2000387tlhsfjbw9j": {
+      "id": "clvfjlge2000387tlhsfjbw9j",
+      "createdAt": "2024-04-25T17:53:24.793Z",
+      "updatedAt": "2024-04-25T18:18:04.378Z",
+      "projectId": "clvfjlge2000187tlm9o83uep",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar findMaximums = function (nums) {\n  const n = nums.length;\n  const result = new Array(n).fill(0);\n\n  const stack = new Array();\n  for (let i = 0; i <= n; i++) {\n    const num = nums[i] ?? -Infinity;\n    while (stack.length && nums[stack.at(-1)] >= num) {\n      const j = stack.pop();\n      let k = i - 1;\n      if (stack.length) {\n        k -= stack.at(-1) + 1;\n      }\n      result[k] = Math.max(result[k], nums[j]);\n    }\n\n    stack.push(i);\n  }\n\n  for (let i = n - 1; i > 0; i--) {\n    result[i - 1] = Math.max(result[i - 1], result[i]);\n  }\n\n  return result;\n};\n\nreturn findMaximums;\n",
       "pythonCode": null,
       "order": 0
     },
