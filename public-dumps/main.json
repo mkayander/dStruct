@@ -4227,6 +4227,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvgki86g0001q2hgow2ikwaf": {
+      "id": "clvgki86g0001q2hgow2ikwaf",
+      "createdAt": "2024-04-26T11:06:39.976Z",
+      "updatedAt": "2024-04-26T11:06:39.976Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Falling Path Sum II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-falling-path-sum-ii",
+      "slug": "minimum-falling-path-sum-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18251,6 +18265,25 @@
       },
       "description": null
     },
+    "clvgki86g0002q2hg52hrgetx": {
+      "id": "clvgki86g0002q2hg52hrgetx",
+      "createdAt": "2024-04-26T11:06:39.976Z",
+      "updatedAt": "2024-04-26T11:07:07.565Z",
+      "projectId": "clvgki86g0001q2hgow2ikwaf",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "m1Xv34eJAT338ivDGosFr6": {
+          "name": "m1Xv34eJAT338ivDGosFr6",
+          "type": "array",
+          "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvfjlge2000287tl5q2szxjh": {
       "id": "clvfjlge2000287tl5q2szxjh",
       "createdAt": "2024-04-25T17:53:24.793Z",
@@ -24491,7 +24524,7 @@
     "clvfkecp00001pfmr1rlzrszw": {
       "id": "clvfkecp00001pfmr1rlzrszw",
       "createdAt": "2024-04-25T18:15:53.014Z",
-      "updatedAt": "2024-04-25T18:18:07.621Z",
+      "updatedAt": "2024-04-26T11:06:23.621Z",
       "projectId": "clvfjlge2000187tlm9o83uep",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -24501,6 +24534,20 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar findMaximums = function (nums) {\n  const n = nums.length;\n  const prevSmaller = new Array(n).fill(-1);\n  const nextSmaller = new Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i <= n; i++) {\n    const num = nums[i] ?? -Infinity;\n    while (stack.length && nums[stack.at(-1)] > num) {\n      nextSmaller[stack.pop()] = i;\n    }\n    if (i < n && stack.length) {\n      const prev = stack.at(-1);\n      prevSmaller[i] = prev;\n    }\n\n    stack.push(i);\n  }\n  stack.pop();\n\n  const result = new Array(n).fill(0);\n  for (let i = 0; i < n; i++) {\n    const size = nextSmaller[i] - prevSmaller[i] - 2;\n    console.log({i, size});\n\n    result[size] = Math.max(result[size], nums[i]);\n  }\n\n  for (let i = n - 2; i >= 0; i--) {\n    result[i] = Math.max(result[i], result[i + 1]);\n  }\n\n  return result;\n};\n\nreturn findMaximums;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clvgki86g0003q2hgs74vrcd9": {
+      "id": "clvgki86g0003q2hgs74vrcd9",
+      "createdAt": "2024-04-26T11:06:39.976Z",
+      "updatedAt": "2024-04-26T11:07:22.666Z",
+      "projectId": "clvgki86g0001q2hgow2ikwaf",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar minFallingPathSum = function (grid) {\n  const n = grid.length;\n\n  let dp = null;\n  let firstMin = null;\n  let secondMin = null;\n\n  for (let row = 0; row < n; row++) {\n    const nextRow = new Array(n);\n    let nextFirstMin = null;\n    let nextSecondMin = null;\n\n    for (let col = 0; col < n; col++) {\n      if (row === 0) {\n        nextRow[col] = 0;\n      } else {\n        if (col !== firstMin) {\n          nextRow[col] = dp[firstMin];\n        } else {\n          nextRow[col] = dp[secondMin];\n        }\n      }\n\n      nextRow[col] += grid[row][col];\n\n      if (nextFirstMin === null || nextRow[col] < nextRow[nextFirstMin]) {\n        nextSecondMin = nextFirstMin;\n        nextFirstMin = col;\n      } else if (\n        nextSecondMin === null ||\n        nextRow[col] < nextRow[nextSecondMin]\n      ) {\n        nextSecondMin = col;\n      }\n    }\n\n    firstMin = nextFirstMin;\n    secondMin = nextSecondMin;\n    dp = nextRow;\n  }\n\n  return dp[firstMin];\n};\n\nreturn minFallingPathSum;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clvfjlge2000387tlhsfjbw9j": {
       "id": "clvfjlge2000387tlhsfjbw9j",
