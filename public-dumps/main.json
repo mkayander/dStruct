@@ -4241,6 +4241,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvi2r8hl00013tfwzx1e4aza": {
+      "id": "clvi2r8hl00013tfwzx1e4aza",
+      "createdAt": "2024-04-27T12:25:19.544Z",
+      "updatedAt": "2024-04-27T12:25:19.544Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Freedom Trail",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/freedom-trail",
+      "slug": "freedom-trail",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18265,6 +18279,31 @@
       },
       "description": null
     },
+    "clvi2r8hl00023tfwy8hn6ftm": {
+      "id": "clvi2r8hl00023tfwy8hn6ftm",
+      "createdAt": "2024-04-27T12:25:19.544Z",
+      "updatedAt": "2024-04-27T12:26:00.399Z",
+      "projectId": "clvi2r8hl00013tfwzx1e4aza",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "58JxM5cHCptbjr4q6ysF8w": {
+          "name": "58JxM5cHCptbjr4q6ysF8w",
+          "type": "string",
+          "input": "gd",
+          "order": 1
+        },
+        "jsf1rMpZM4XM4TTDQpyFri": {
+          "name": "jsf1rMpZM4XM4TTDQpyFri",
+          "type": "string",
+          "input": "godding",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvgki86g0002q2hg52hrgetx": {
       "id": "clvgki86g0002q2hg52hrgetx",
       "createdAt": "2024-04-26T11:06:39.976Z",
@@ -18298,6 +18337,31 @@
           "name": "u2jwANMWuK3LgRDfUhc5D2",
           "type": "array",
           "input": "[0,1,2,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvi2s8z000053tfw8k1fl2xn": {
+      "id": "clvi2s8z000053tfw8k1fl2xn",
+      "createdAt": "2024-04-27T12:26:06.829Z",
+      "updatedAt": "2024-04-27T12:26:23.150Z",
+      "projectId": "clvi2r8hl00013tfwzx1e4aza",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "58JxM5cHCptbjr4q6ysF8w": {
+          "name": "58JxM5cHCptbjr4q6ysF8w",
+          "type": "string",
+          "input": "cpqwx",
+          "order": 1
+        },
+        "jsf1rMpZM4XM4TTDQpyFri": {
+          "name": "jsf1rMpZM4XM4TTDQpyFri",
+          "type": "string",
+          "input": "pqwcx",
           "order": 0
         }
       },
@@ -24479,6 +24543,20 @@
       "pythonCode": null,
       "order": 3
     },
+    "cljyq5r920004mf089avdcfj0": {
+      "id": "cljyq5r920004mf089avdcfj0",
+      "createdAt": "2023-07-11T20:08:18.999Z",
+      "updatedAt": "2024-04-27T12:24:55.981Z",
+      "projectId": "cljyq5r920001mf08to6vn3bx",
+      "title": "Double DFS",
+      "slug": "double-dfs",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {TreeNodeObject} root\n * @param {number} target\n * @param {number} k\n */\nvar distanceK = function (root, target, k) {\n  if (!root) return [];\n\n  const result = [];\n\n  const findAtDistance = (node, depth, prevVal) => {\n    if (depth === k) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n      return;\n    } else if (depth > k) return;\n    node.setColor(\"orange\");\n\n    const nextDepth = depth + 1;\n    if (node.left && node.left.val !== prevVal) {\n      findAtDistance(node.left, nextDepth, node.val);\n    }\n    if (node.right && node.right.val !== prevVal) {\n      findAtDistance(node.right, nextDepth, node.val);\n    }\n  };\n\n  const traverse = (node) => {\n    node.setColor(\"cyan\");\n    if (node.val === target) {\n      findAtDistance(node, 0, null);\n      return 1;\n    }\n    if (node.left) {\n      const distance = traverse(node.left);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.left.val);\n        return distance + 1;\n      }\n    }\n    if (node.right) {\n      const distance = traverse(node.right);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.right.val);\n        return distance + 1;\n      }\n    }\n\n    return -1;\n  };\n\n  traverse(root);\n\n  return result;\n};\n\nreturn distanceK;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "pythonCode": "",
+      "order": 0
+    },
     "clupqavar0003woa4zqizrtlr": {
       "id": "clupqavar0003woa4zqizrtlr",
       "createdAt": "2024-04-07T16:19:07.635Z",
@@ -24491,20 +24569,6 @@
       "description": null,
       "code": "/**\n * @param {number[]} strength\n * @return {number}\n */\nvar totalStrength = function (strength) {\n  const n = strength.length;\n  const MOD = 1e9 + 7;\n\n  let stack = new Array();\n  const rightIndex = new Array(n);\n  for (let i = 0; i <= n; i++) {\n    strength.setColor(i, \"cyan\");\n    const num = strength[i] ?? -Infinity;\n    while (stack.length && strength[stack.at(-1)] >= num) {\n      rightIndex[stack.pop()] = i;\n    }\n    stack.push(i);\n  }\n\n  stack = new Array();\n  const leftIndex = new Array(n);\n  for (let i = n - 1; i >= -1; i--) {\n    strength.setColor(i, \"blue\");\n    const num = strength[i] ?? -Infinity;\n    while (stack.length && strength[stack.at(-1)] > num) {\n      leftIndex[stack.pop()] = i;\n    }\n    stack.push(i);\n  }\n\n  const presumOfPresum = getPresum(Array.from([0, ...getPresum(strength)]));\n\n  const v = new Object();\n  v.result = 0;\n  for (let i = 0; i < n; i++) {\n    strength.setColor(i, \"green\");\n    const leftBound = leftIndex[i];\n    const rightBound = rightIndex[i];\n\n    const leftCount = i - leftBound;\n    const rightCount = rightBound - i;\n\n    const leftPresum = presumOfPresum[i] - presumOfPresum[Math.max(0, leftBound)];\n    const rightPresum = presumOfPresum[rightBound] - presumOfPresum[i];\n\n    v.result =\n      (v.result +\n        strength[i] * (rightPresum * leftCount - leftPresum * rightCount)) %\n      MOD;\n  }\n\n  return v.result;\n};\n\nfunction getPresum(arr) {\n  let acc = 0;\n  return arr.map((num) => (acc += num));\n}\n\nreturn totalStrength;\n",
       "pythonCode": "class Solution:\r\n    def totalStrength(self, A):\r\n        mod = 10**9 + 7\r\n        n = len(A)\r\n\r\n        # next small on the right\r\n        right = [n] * n\r\n        stack = []\r\n        for i in range(n):\r\n            while stack and A[stack[-1]] > A[i]:\r\n                right[stack.pop()] = i\r\n            stack.append(i)\r\n\r\n        # next small on the left\r\n        left = [-1] * n\r\n        stack = []\r\n        for i in range(n - 1, -1, -1):\r\n            while stack and A[stack[-1]] >= A[i]:\r\n                left[stack.pop()] = i\r\n            stack.append(i)\r\n\r\n        # for each A[i] as minimum, calculate sum\r\n        result = 0\r\n        acc = list(accumulate(accumulate(A), initial = 0))\r\n        for i in range(n):\r\n            leftBound = left[i]\r\n            rightBound = right[i]\r\n            leftCount = i - leftBound\r\n            rightCount = rightBound - i\r\n\r\n            leftPresum = acc[i] - acc[max(0, leftBound)]\r\n            rightPresum = acc[rightBound] - acc[i]\r\n\r\n            result = (result + A[i] * (rightPresum * leftCount - leftPresum * rightCount)) % mod\r\n\r\n        return result\r\n",
-      "order": 0
-    },
-    "cljyq5r920004mf089avdcfj0": {
-      "id": "cljyq5r920004mf089avdcfj0",
-      "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-04-11T16:15:00.538Z",
-      "projectId": "cljyq5r920001mf08to6vn3bx",
-      "title": "Double DFS",
-      "slug": "double-dfs",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {TreeNodeObject} root\n * @param {number} target\n * @param {number} k\n */\nvar distanceK = function (root, target, k) {\n  if (!root) return [];\n\n  const result = [];\n\n  const findAtDistance = (node, depth, prevVal) => {\n    if (depth === k) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n      return;\n    } else if (depth > k) return;\n    node.setColor(\"orange\");\n\n    const nextDepth = depth + 1;\n    if (node.left && node.left.val !== prevVal) {\n      findAtDistance(node.left, nextDepth, node.val);\n    }\n    if (node.right && node.right.val !== prevVal) {\n      findAtDistance(node.right, nextDepth, node.val);\n    }\n  };\n\n  const traverse = (node) => {\n    node.setColor(\"cyan\");\n    if (node.val === target) {\n      findAtDistance(node, 0, null);\n      return 1;\n    }\n    if (node.left) {\n      const distance = traverse(node.left);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.left.val);\n        return distance + 1;\n      }\n    }\n    if (node.right) {\n      const distance = traverse(node.right);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.right.val);\n        return distance + 1;\n      }\n    }\n\n    return -1;\n  };\n\n  traverse(root);\n\n  return result;\n};\n\nreturn distanceK;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
-      "pythonCode": "",
       "order": 0
     },
     "clpgy1k8n0003tmqeecburce4": {
@@ -24590,6 +24654,20 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxCoins = function (nums) {\n  const baloons = Array.from([1, ...nums, 1]);\n  const dp = Array.from(\n    { length: nums.length + 1 },\n    () => new Array(nums.length + 1),\n  );\n\n  const calculate = (i, j) => {\n    if (i > j) {\n      return 0;\n    }\n\n    if (dp[i][j] !== undefined) {\n      return dp[i][j];\n    }\n\n    let max = 0;\n    for (let index = i; index <= j; index += 1) {\n      max = Math.max(\n        max,\n        baloons[i - 1] * baloons[index] * baloons[j + 1] +\n          calculate(i, index - 1) +\n          calculate(index + 1, j),\n      );\n    }\n\n    dp[i][j] = max;\n    return max;\n  };\n\n  return calculate(1, nums.length);\n};\n\nreturn maxCoins;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clvi2r8hl00033tfw35rdtwkf": {
+      "id": "clvi2r8hl00033tfw35rdtwkf",
+      "createdAt": "2024-04-27T12:25:19.544Z",
+      "updatedAt": "2024-04-27T12:29:40.218Z",
+      "projectId": "clvi2r8hl00013tfwzx1e4aza",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} ring\n * @param {string} key\n * @return {number}\n */\nvar findRotateSteps = function (ring, key) {\n  const n = ring.length;\n  const m = key.length;\n\n  const map = new Object();\n  for (let i = 0; i < n; i++) {\n    (map[ring[i]] ??= new Array()).push(i);\n  }\n\n  const getDist = (from, to) => {\n    const between = Math.abs(from - to);\n    const around = n - between;\n    return Math.min(between, around);\n  };\n\n  const dp = Array.from({ length: n }, () => new Array(m));\n\n  const dfs = (pos, j) => {\n    if (j === key.length) {\n      return 0;\n    }\n    if (dp[pos][j] !== undefined) return dp[pos][j];\n    ring.setColor(pos, \"green\");\n    key.setColor(j, \"green\");\n\n    let minSteps = Infinity;\n    const char = key[j];\n    for (const index of map[char]) {\n      const dist = getDist(pos, index);\n      minSteps = Math.min(minSteps, dist + 1 + dfs(index, j + 1));\n    }\n\n    ring.setColor(pos, null);\n    key.setColor(j, null);\n\n    dp[pos][j] = minSteps;\n    return minSteps;\n  };\n\n  const steps = dfs(0, 0);\n\n  return steps;\n};\n\nreturn findRotateSteps;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clv9lszau0003car5uorhw1i6": {
       "id": "clv9lszau0003car5uorhw1i6",
