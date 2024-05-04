@@ -4255,6 +4255,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvm3vghd000110rivjil6hlx": {
+      "id": "clvm3vghd000110rivjil6hlx",
+      "createdAt": "2024-04-30T08:07:40.834Z",
+      "updatedAt": "2024-04-30T08:07:40.834Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Wonderful Substrings",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-wonderful-substrings",
+      "slug": "number-of-wonderful-substrings",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clvpgsujh000111ls9u4z9k37": {
+      "id": "clvpgsujh000111ls9u4z9k37",
+      "createdAt": "2024-05-02T16:32:52.636Z",
+      "updatedAt": "2024-05-02T16:32:52.636Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Allocate Mailboxes",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/allocate-mailboxes",
+      "slug": "allocate-mailboxes",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clvsemc7k00015w0y4xozpv4i": {
+      "id": "clvsemc7k00015w0y4xozpv4i",
+      "createdAt": "2024-05-04T17:55:08.239Z",
+      "updatedAt": "2024-05-04T17:55:08.239Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Window Subsequence",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-window-subsequence",
+      "slug": "minimum-window-subsequence",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18342,6 +18384,31 @@
       },
       "description": null
     },
+    "clvpgsujh000211lsa89om8h0": {
+      "id": "clvpgsujh000211lsa89om8h0",
+      "createdAt": "2024-05-02T16:32:52.636Z",
+      "updatedAt": "2024-05-02T16:33:22.973Z",
+      "projectId": "clvpgsujh000111ls9u4z9k37",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aPR1oHbuz3Kaf5cgdQYLgP": {
+          "name": "aPR1oHbuz3Kaf5cgdQYLgP",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        },
+        "twXZmtqD3B5HVYKxnAVMr9": {
+          "name": "twXZmtqD3B5HVYKxnAVMr9",
+          "type": "array",
+          "input": "[1,4,8,10,20]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvi2s8z000053tfw8k1fl2xn": {
       "id": "clvi2s8z000053tfw8k1fl2xn",
       "createdAt": "2024-04-27T12:26:06.829Z",
@@ -18363,6 +18430,100 @@
           "type": "string",
           "input": "pqwcx",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvm3vghe000210rix0la0dwo": {
+      "id": "clvm3vghe000210rix0la0dwo",
+      "createdAt": "2024-04-30T08:07:40.834Z",
+      "updatedAt": "2024-04-30T08:08:23.352Z",
+      "projectId": "clvm3vghd000110rivjil6hlx",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "ddWHBzL8gxgLZz4TafG3g3": {
+          "name": "ddWHBzL8gxgLZz4TafG3g3",
+          "type": "string",
+          "input": "aabb",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvs9rpyi0003v57t6nifzs26": {
+      "id": "clvs9rpyi0003v57t6nifzs26",
+      "createdAt": "2024-05-04T15:39:21.259Z",
+      "updatedAt": "2024-05-04T15:39:29.313Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "mAaFmwv1PAikx83QFmfPo5": {
+          "name": "mAaFmwv1PAikx83QFmfPo5",
+          "type": "array",
+          "input": "[1,2,3,4,5]",
+          "order": 0
+        },
+        "taQn5Qe5xof1Gs39aEkMaA": {
+          "name": "taQn5Qe5xof1Gs39aEkMaA",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clvsemc7k00025w0ypia7gr74": {
+      "id": "clvsemc7k00025w0ypia7gr74",
+      "createdAt": "2024-05-04T17:55:08.239Z",
+      "updatedAt": "2024-05-04T17:55:39.073Z",
+      "projectId": "clvsemc7k00015w0y4xozpv4i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "dcZCL9GtXWgZgPxLj5hXiH": {
+          "name": "dcZCL9GtXWgZgPxLj5hXiH",
+          "type": "string",
+          "input": "abcdebdde",
+          "order": 0
+        },
+        "xcW3NsBCsKUGePRQD2jQju": {
+          "name": "xcW3NsBCsKUGePRQD2jQju",
+          "type": "string",
+          "input": "bde",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clvseuci200055w0yz45egjka": {
+      "id": "clvseuci200055w0yz45egjka",
+      "createdAt": "2024-05-04T18:01:21.867Z",
+      "updatedAt": "2024-05-04T18:01:38.589Z",
+      "projectId": "clvsemc7k00015w0y4xozpv4i",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "dcZCL9GtXWgZgPxLj5hXiH": {
+          "name": "dcZCL9GtXWgZgPxLj5hXiH",
+          "type": "string",
+          "input": "jmeqksfrsdcmsiwvaovztaqenprpvnbstl",
+          "order": 0
+        },
+        "xcW3NsBCsKUGePRQD2jQju": {
+          "name": "xcW3NsBCsKUGePRQD2jQju",
+          "type": "string",
+          "input": "watq",
+          "order": 1
         }
       },
       "description": null
@@ -23493,24 +23654,10 @@
       "pythonCode": null,
       "order": 0
     },
-    "cluqut5mx0003ehcif0ejkfch": {
-      "id": "cluqut5mx0003ehcif0ejkfch",
-      "createdAt": "2024-04-08T11:13:05.481Z",
-      "updatedAt": "2024-04-08T12:12:15.419Z",
-      "projectId": "cluqunvzy0001l3qex5envcms",
-      "title": "Solution 2",
-      "slug": "solution-2",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n\n  const len = totalSum * 2 + 1;\n  const dp = Array.from({ length: n }, () => new Array(len));\n  dp.showIndexes(n, len - 1);\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n\n    const index = sum + totalSum;\n    if (dp[i][index] !== undefined) {\n      dp[i].setColor(index, \"green\");\n      dp[i].setColor(index, null);\n      return dp[i][index];\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    dp[i][index] = count;\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
-      "pythonCode": null,
-      "order": 1
-    },
     "cluqvugkp0001100tji27ozce": {
       "id": "cluqvugkp0001100tji27ozce",
       "createdAt": "2024-04-08T11:42:05.928Z",
-      "updatedAt": "2024-04-08T12:14:28.572Z",
+      "updatedAt": "2024-05-04T15:36:31.339Z",
       "projectId": "cluqunvzy0001l3qex5envcms",
       "title": "Solution 3",
       "slug": "solution-3",
@@ -23520,6 +23667,20 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n\n  const len = totalSum * 2 + 1;\n  const dp = Array.from({ length: n }, () => new Array(len));\n  dp.showIndexes(n, len - 1);\n\n  const backtrack = (i, sum) => {\n    if (i === -1) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n\n    const index = sum + totalSum;\n    if (dp[i][index] !== undefined) {\n      dp[i].setColor(index, \"green\");\n      dp[i].setColor(index, null);\n      return dp[i][index];\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i - 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i - 1, sum - num);\n    nums.setColor(i, null);\n\n    dp[i][index] = count;\n    return count;\n  };\n\n  const result = backtrack(n - 1, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
       "pythonCode": null,
       "order": 2
+    },
+    "cluqut5mx0003ehcif0ejkfch": {
+      "id": "cluqut5mx0003ehcif0ejkfch",
+      "createdAt": "2024-04-08T11:13:05.481Z",
+      "updatedAt": "2024-05-04T15:36:29.809Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n\n  const len = totalSum * 2 + 1;\n  const dp = Array.from({ length: n }, () => new Array(len));\n  dp.showIndexes(n, len - 1);\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n\n    const index = sum + totalSum;\n    if (dp[i][index] !== undefined) {\n      dp[i].setColor(index, \"green\");\n      dp[i].setColor(index, null);\n      return dp[i][index];\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    dp[i][index] = count;\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clu8ms2wq000586zndq42zubm": {
       "id": "clu8ms2wq000586zndq42zubm",
@@ -23580,7 +23741,7 @@
     "clur14frc0001cob26yxytwjf": {
       "id": "clur14frc0001cob26yxytwjf",
       "createdAt": "2024-04-08T14:09:49.510Z",
-      "updatedAt": "2024-04-08T14:14:49.175Z",
+      "updatedAt": "2024-05-04T15:36:23.987Z",
       "projectId": "cluqunvzy0001l3qex5envcms",
       "title": "Solution 4",
       "slug": "solution-4",
@@ -23590,20 +23751,6 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  const dp = Array.from({ length: n }, () => {\n    const row = new Array(len).fill(0);\n    row.setColorMap({ 0: \"black\" });\n    return row;\n  });\n  dp.showIndexes(n, len - 1);\n  dp[0][nums[0] + total] += 1;\n  dp[0][-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[i - 1][sumIndex] > 0) {\n        dp[i][sumIndex + num] += dp[i - 1][sumIndex];\n        dp[i][sumIndex - num] += dp[i - 1][sumIndex];\n      }\n    }\n  }\n\n  return dp[n - 1][target + total];\n};\n\nreturn findTargetSumWays;\n",
       "pythonCode": null,
       "order": 3
-    },
-    "clur1gb790001e5nineitqvvo": {
-      "id": "clur1gb790001e5nineitqvvo",
-      "createdAt": "2024-04-08T14:19:03.476Z",
-      "updatedAt": "2024-04-08T14:24:01.140Z",
-      "projectId": "cluqunvzy0001l3qex5envcms",
-      "title": "Solution 5",
-      "slug": "solution-5",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  let dp = new Array(len).fill(0);\n  // row.setColorMap({ 0: \"black\" });\n\n  dp[nums[0] + total] += 1;\n  dp[-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const nextRow = new Array(len).fill(0);\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[sumIndex] > 0) {\n        nextRow[sumIndex + num] += dp[sumIndex];\n        nextRow[sumIndex - num] += dp[sumIndex];\n      }\n    }\n\n    dp = nextRow;\n  }\n\n  return dp[target + total];\n};\n\nreturn findTargetSumWays;\n",
-      "pythonCode": null,
-      "order": 4
     },
     "clurayvb30003uhcbqq17yc67": {
       "id": "clurayvb30003uhcbqq17yc67",
@@ -23888,7 +24035,7 @@
     "cluzu5tpf0001xegi8f9qfnl4": {
       "id": "cluzu5tpf0001xegi8f9qfnl4",
       "createdAt": "2024-04-14T18:04:52.514Z",
-      "updatedAt": "2024-04-17T19:23:34.792Z",
+      "updatedAt": "2024-05-02T16:32:42.088Z",
       "projectId": "cllb3ap4n0001jw086qg9f5jn",
       "title": "Quickselect /w 3 parts",
       "slug": "quickselect-w-3-parts",
@@ -23912,6 +24059,20 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {TreeNode} subRoot\n * @return {boolean}\n */\nvar isSubtree = function (root, subRoot) {\n  const targetHash = getTreeHash(subRoot);\n  console.log({targetHash});\n\n  const findMatch = (node) => {\n    if (!node) return [false, getHash(node)];\n    node.setColor(\"cyan\");\n\n    const left = findMatch(node.left);\n    if (left[0]) return left;\n\n    const right = findMatch(node.right);\n    if (right[0]) return right;\n\n    const hashpair = getHash(node, left[1], right[1]);\n    const isFound = hashpair.every((hash, i) => hash === targetHash[i]);\n    if (isFound) {\n      console.log(hashpair);\n      node.setColor(\"green\");\n    }\n\n    return [isFound, hashpair];\n  };\n\n  return findMatch(root)[0];\n};\n\nconst MOD_1 = 1e7 + 7;\nconst MOD_2 = 1e7 + 13;\n\nfunction getHash(node, left, right) {\n  if (!node) return [3, 7];\n\n  const left1 = (left[0] << 5) % MOD_1;\n  const right1 = (right[0] << 1) % MOD_1;\n  const left2 = (left[1] << 7) % MOD_2;\n  const right2 = (right[1] << 1) % MOD_2;\n\n  const hashPair = [\n    (left1 + right1 + node.val) % MOD_1,\n    (left2 + right2 + node.val) % MOD_2,\n  ];\n\n  return hashPair;\n}\n\nfunction getTreeHash(node) {\n  if (!node) return getHash(node);\n  node.setColor(\"blue\");\n\n  const left = getTreeHash(node.left);\n  const right = getTreeHash(node.right);\n\n  const hashpair = getHash(node, left, right);\n\n  return hashpair;\n}\n\nreturn isSubtree;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clur1gb790001e5nineitqvvo": {
+      "id": "clur1gb790001e5nineitqvvo",
+      "createdAt": "2024-04-08T14:19:03.476Z",
+      "updatedAt": "2024-05-04T15:36:34.330Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 5",
+      "slug": "solution-5",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  let dp = new Array(len).fill(0);\n  // row.setColorMap({ 0: \"black\" });\n\n  dp[nums[0] + total] += 1;\n  dp[-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const nextRow = new Array(len).fill(0);\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[sumIndex] > 0) {\n        nextRow[sumIndex + num] += dp[sumIndex];\n        nextRow[sumIndex - num] += dp[sumIndex];\n      }\n    }\n\n    dp = nextRow;\n  }\n\n  return dp[target + total];\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 4
     },
     "cluy09omi0003wsejpm3ialc4": {
       "id": "cluy09omi0003wsejpm3ialc4",
@@ -24487,20 +24648,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "cluqunvzy0003l3qesdky3tsf": {
-      "id": "cluqunvzy0003l3qesdky3tsf",
-      "createdAt": "2024-04-08T11:08:59.710Z",
-      "updatedAt": "2024-04-08T11:44:11.357Z",
-      "projectId": "cluqunvzy0001l3qex5envcms",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const memo = new Map();\n  const getKey = (i, sum) => `${i},${sum}`;\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n    const key = getKey(i, sum);\n    if (memo.has(key)) {\n      memo.setColor(key, \"green\");\n      memo.setColor(key, null);\n      return memo.get(key);\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    memo.set(key, count);\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clur4ckct0003nffdnkx3oqu3": {
       "id": "clur4ckct0003nffdnkx3oqu3",
       "createdAt": "2024-04-08T15:40:07.565Z",
@@ -24526,6 +24673,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} buildings\n * @return {number[][]}\n */\nvar getSkyline = function (buildings) {\n  const edgeSet = new Set();\n  for (let i = 0; i < buildings.length; i++) {\n    const [from, to] = buildings[i];\n    edgeSet.add(from);\n    edgeSet.add(to);\n  }\n\n  const positions = new Array();\n  edgeSet.forEach((pos) => positions.push(pos));\n  positions.sort((a, b) => a - b);\n\n  const pq = new PriorityQueue({ compare: (a, b) => b[2] - a[2] });\n\n  const result = new Array();\n\n  let j = 0;\n  for (let i = 0; i < positions.length; i++) {\n    const position = positions[i];\n\n    for (j; j < buildings.length && buildings[j][0] <= position; j++) {\n      pq.enqueue(buildings[j]);\n    }\n\n    while (!pq.isEmpty() && pq.front()[1] <= position) {\n      pq.dequeue();\n    }\n\n    const maxHeight = pq.front()?.[2] ?? 0;\n\n    if (!result.length || result.at(-1)[1] !== maxHeight) {\n      result.push([position, maxHeight]);\n    }\n  }\n\n  return result;\n};\n\nreturn getSkyline;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvs9o5d30001v57t25awb92b": {
+      "id": "clvs9o5d30001v57t25awb92b",
+      "createdAt": "2024-05-04T15:36:34.583Z",
+      "updatedAt": "2024-05-04T17:54:59.954Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 6",
+      "slug": "solution-6",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const totalSum = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > totalSum) return 0;\n\n  const size = totalSum * 2 + 1;\n\n  const getIndex = (sum) => sum + totalSum;\n\n  const dp = Array.from({ length: n + 1 }, () => new Uint32Array(size));\n  dp[0][totalSum] = 1;\n\n  for (let i = 1; i <= n; i++) {\n    nums.setColor(i - 1, \"green\");\n    const num = nums[i - 1];\n    for (let sum = -totalSum; sum <= totalSum; sum++) {\n      const idx = getIndex(sum);\n      dp[i].setColor(idx, \"cyan\");\n      dp[i][idx] += dp[i - 1][idx - num] ?? 0;\n      dp[i][idx] += dp[i - 1][idx + num] ?? 0;\n    }\n  }\n\n  return dp[n][getIndex(target)] ?? 0;\n};\n\nreturn findTargetSumWays;\n",
+      "pythonCode": null,
+      "order": 5
+    },
+    "cluqunvzy0003l3qesdky3tsf": {
+      "id": "cluqunvzy0003l3qesdky3tsf",
+      "createdAt": "2024-04-08T11:08:59.710Z",
+      "updatedAt": "2024-05-04T15:36:32.425Z",
+      "projectId": "cluqunvzy0001l3qex5envcms",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const memo = new Map();\n  const getKey = (i, sum) => `${i},${sum}`;\n\n  const backtrack = (i, sum) => {\n    if (i === n) {\n      if (sum === target) {\n        return 1;\n      }\n      return 0;\n    }\n    const key = getKey(i, sum);\n    if (memo.has(key)) {\n      memo.setColor(key, \"green\");\n      memo.setColor(key, null);\n      return memo.get(key);\n    }\n\n    nums.setColor(i, \"cyan\");\n    const num = nums[i];\n    let count = backtrack(i + 1, sum + num);\n    nums.setColor(i, null);\n\n    nums.setColor(i, \"green\");\n    count += backtrack(i + 1, sum - num);\n    nums.setColor(i, null);\n\n    memo.set(key, count);\n    return count;\n  };\n\n  const result = backtrack(0, 0);\n\n  return result;\n};\n\nreturn findTargetSumWays;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -24627,6 +24802,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clvsemc7k00035w0yswkbvfh9": {
+      "id": "clvsemc7k00035w0yswkbvfh9",
+      "createdAt": "2024-05-04T17:55:08.239Z",
+      "updatedAt": "2024-05-04T17:59:38.615Z",
+      "projectId": "clvsemc7k00015w0y4xozpv4i",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @return {string}\n */\nvar minWindow = function (s1, s2) {\n  const n = s1.length;\n  const m = s2.length;\n\n  if (s2.length === 1) {\n    return s1.includes(s2) ? s2 : \"\";\n  }\n\n  const dp = Array.from({ length: m + 1 }, () => new Uint32Array(n + 1));\n  dp.showIndexes(m, n);\n  for (let j = 0; j <= n; j++) {\n    dp[0][j] = j;\n  }\n\n  for (let i = 1; i <= m; i++) {\n    for (let j = 1; j <= n; j++) {\n      if (s1[j - 1] === s2[i - 1]) {\n        dp[i].setColor(j, \"green\");\n        dp[i][j] = dp[i - 1][j - 1];\n      } else {\n        dp[i].setColor(j, \"cyan\");\n        dp[i][j] = dp[i][j - 1];\n      }\n    }\n  }\n\n  let start = 0;\n  let len = n;\n\n  for (let j = 1; j <= n; j++) {\n    if (dp[m][j] !== 0) {\n      const nextLen = j - dp[m][j];\n      if (nextLen < len) {\n        len = nextLen;\n        start = dp[m][j];\n      }\n    }\n  }\n\n  if (len === n) {\n    return \"\";\n  }\n\n  return s1.slice(start, start + len);\n};\n\nreturn minWindow;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluzpw4rf00033iiyhhepe72h": {
       "id": "cluzpw4rf00033iiyhhepe72h",
       "createdAt": "2024-04-14T16:05:21.817Z",
@@ -24658,7 +24847,7 @@
     "clvi2r8hl00033tfw35rdtwkf": {
       "id": "clvi2r8hl00033tfw35rdtwkf",
       "createdAt": "2024-04-27T12:25:19.544Z",
-      "updatedAt": "2024-04-27T12:29:40.218Z",
+      "updatedAt": "2024-04-30T08:07:14.382Z",
       "projectId": "clvi2r8hl00013tfwzx1e4aza",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -24680,6 +24869,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} source\n * @param {number} destination\n * @return {boolean}\n */\nvar validPath = function (n, edges, source, destination) {\n  const graph = new UnionFind(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    graph.union(from, to);\n  }\n\n  return graph.find(source) === graph.find(destination);\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.ranks = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let current = this.pars[node];\n    while (current !== this.pars[current]) {\n      current = this.pars[this.pars[current]];\n    }\n\n    return current;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return true;\n\n    if (this.ranks[child] > this.ranks[parent]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn validPath;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvm3vghe000310rijqiq84gt": {
+      "id": "clvm3vghe000310rijqiq84gt",
+      "createdAt": "2024-04-30T08:07:40.834Z",
+      "updatedAt": "2024-04-30T08:08:32.769Z",
+      "projectId": "clvm3vghd000110rivjil6hlx",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} word\n * @return {number}\n */\nvar wonderfulSubstrings = function (word) {\n  let count = 0;\n  const n = word.length;\n  const freq = new Uint32Array(1024);\n  freq[0] = 1; // Initialize with an empty string\n  let bitmask = 0;\n  const offset = \"a\".charCodeAt(0);\n\n  for (let i = 0; i < n; i++) {\n    const charIndex = word.charCodeAt(i) - offset; // Convert character to index (0 to 9)\n    bitmask ^= 1 << charIndex; // Toggle the bit at charIndex position\n\n    // Check if the current substring satisfies the condition\n    count += freq[bitmask];\n\n    // Iterate over all possible toggled bitmasks and update the frequency array\n    for (let j = 0; j < 10; j++) {\n      count += freq[bitmask ^ (1 << j)];\n    }\n    freq[bitmask]++;\n  }\n\n  return count;\n};\n\nreturn wonderfulSubstrings;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -24724,6 +24927,48 @@
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[]}\n */\nvar findMinHeightTrees = function (n, edges) {\n  if (n <= 2) return Array.from({ length: n }, (_, i) => i);\n\n  const adjList = new Array(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Set()).add(to);\n    (adjList[to] ??= new Set()).add(from);\n  }\n\n  let leaves = new Array();\n  for (let i = 0; i < n; i++) {\n    if (adjList[i].size === 1) {\n      leaves.push(i);\n    }\n  }\n\n  let nodeCount = n;\n  while (nodeCount > 2) {\n    nodeCount -= leaves.length;\n    let nextLeaves = new Array();\n\n    for (let i = 0; i < leaves.length; i++) {\n      const node = leaves[i];\n      if (!adjList[node]) continue;\n\n      for (const next of adjList[node]) {\n        adjList[node].delete(next);\n        adjList[next].delete(node);\n        if (adjList[next].size === 1) {\n          nextLeaves.push(next);\n        }\n      }\n    }\n\n    leaves = nextLeaves;\n  }\n\n  return leaves;\n};\n\nreturn findMinHeightTrees;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clvpjcm6t0001aqji0l3uu0oj": {
+      "id": "clvpjcm6t0001aqji0l3uu0oj",
+      "createdAt": "2024-05-02T17:44:14.151Z",
+      "updatedAt": "2024-05-02T17:49:56.209Z",
+      "projectId": "clvpgsujh000111ls9u4z9k37",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} houses\n * @param {number} k\n * @return {number}\n */\nvar minDistance = function (houses, k) {\n  const n = houses.length;\n  houses.sort((a, b) => a - b);\n\n  const costs = Array.from({ length: n }, () => new Uint32Array(n));\n  costs.showIndexes(n, n - 1);\n  for (let i = n - 1; i >= 0; i--) {\n    houses.setColor(i, \"cyan\");\n    for (let j = i + 1; j < n; j++) {\n      houses.setColor(j, \"green\");\n      costs[i][j] = houses[j] - houses[i] + costs[i + 1][j - 1];\n      houses.setColor(j, null);\n    }\n  }\n\n  const dp = Array.from({ length: k + 1 }, () => new Array(n));\n  dp.showIndexes(k + 1, n - 1);\n\n  const dfs = (i, k) => {\n    if (i < 0 && k === 0) return 0;\n    if (i < 0 || k === 0) return Infinity;\n\n    if (dp[k][i] !== undefined) {\n      dp[k].setColor(i, \"green\");\n      return dp[k][i];\n    }\n\n    let minCost = Infinity;\n\n    for (let j = i; j >= 0; j--) {\n      costs[j].setColor(i, \"green\");\n      const cost = costs[j][i];\n      minCost = Math.min(minCost, cost + dfs(j - 1, k - 1));\n      costs[j].setColor(i, \"blue\");\n    }\n\n    dp[k][i] = minCost;\n    return minCost;\n  };\n\n  return dfs(n - 1, k);\n};\n\nreturn minDistance;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clvpgsujh000311ls3feupop9": {
+      "id": "clvpgsujh000311ls3feupop9",
+      "createdAt": "2024-05-02T16:32:52.636Z",
+      "updatedAt": "2024-05-02T17:49:50.140Z",
+      "projectId": "clvpgsujh000111ls9u4z9k37",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} houses\n * @param {number} k\n * @return {number}\n */\nvar minDistance = function (houses, k) {\n  const n = houses.length;\n  houses.sort((a, b) => a - b);\n\n  const costs = Array.from({ length: n }, () => new Uint32Array(n));\n  costs.showIndexes(n, n - 1);\n  for (let i = n - 1; i >= 0; i--) {\n    houses.setColor(i, \"cyan\");\n    for (let j = i + 1; j < n; j++) {\n      houses.setColor(j, \"green\");\n      costs[i][j] = houses[j] - houses[i] + costs[i + 1][j - 1];\n      houses.setColor(j, null);\n    }\n  }\n\n  const dp = Array.from({ length: k + 1 }, () => new Array(n));\n  dp.showIndexes(k + 1, n - 1);\n\n  const dfs = (i, k) => {\n    if (i === n && k === 0) return 0;\n    if (i === n || k === 0) return Infinity;\n\n    if (dp[k][i] !== undefined) {\n      dp[k].setColor(i, \"green\");\n      return dp[k][i];\n    }\n\n    let minCost = Infinity;\n\n    for (let j = i; j < n; j++) {\n      costs[i].setColor(j, \"green\");\n      const cost = costs[i][j];\n      minCost = Math.min(minCost, cost + dfs(j + 1, k - 1));\n      costs[i].setColor(j, \"blue\");\n    }\n\n    dp[k][i] = minCost;\n    return minCost;\n  };\n\n  return dfs(0, k);\n};\n\nreturn minDistance;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvpjh7x40003aqjielde11ry": {
+      "id": "clvpjh7x40003aqjielde11ry",
+      "createdAt": "2024-05-02T17:47:48.953Z",
+      "updatedAt": "2024-05-04T15:16:45.569Z",
+      "projectId": "clvpgsujh000111ls9u4z9k37",
+      "title": "Solution 3",
+      "slug": "solution-3",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} houses\n * @param {number} k\n * @return {number}\n */\nvar minDistance = function (houses, k) {\n  const n = houses.length;\n  houses.sort((a, b) => a - b);\n\n  const costs = Array.from({ length: n }, () => new Uint32Array(n));\n  costs.showIndexes(n, n - 1);\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      houses.setColor(j, \"cyan\");\n      const medianPos = houses[(i + j) >> 1];\n      for (let m = i; m <= j; m++) {\n        houses.setColor(m, \"green\");\n        costs[i][j] += Math.abs(medianPos - houses[m]);\n        houses.setColor(m, null);\n      }\n      houses.setColor(j, null);\n    }\n  }\n\n  const dp = Array.from({ length: k + 1 }, () => new Array(n));\n  dp.showIndexes(k + 1, n - 1);\n\n  const dfs = (i, k) => {\n    if (i === n && k === 0) return 0;\n    if (i === n || k === 0) return Infinity;\n\n    if (dp[k][i] !== undefined) {\n      dp[k].setColor(i, \"green\");\n      return dp[k][i];\n    }\n\n    let minCost = Infinity;\n\n    for (let j = i; j < n; j++) {\n      costs[i].setColor(j, \"green\");\n      const cost = costs[i][j];\n      minCost = Math.min(minCost, cost + dfs(j + 1, k - 1));\n      costs[i].setColor(j, \"blue\");\n    }\n\n    dp[k][i] = minCost;\n    return minCost;\n  };\n\n  return dfs(0, k);\n};\n\nreturn minDistance;\n",
+      "pythonCode": null,
+      "order": 2
     }
   }
 }
