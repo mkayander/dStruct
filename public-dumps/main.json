@@ -4297,6 +4297,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clvsh8wcr0001ii4un0e8v4nd": {
+      "id": "clvsh8wcr0001ii4un0e8v4nd",
+      "createdAt": "2024-05-04T19:08:40.010Z",
+      "updatedAt": "2024-05-04T19:08:40.010Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Build Binary Expression Tree From Infix Expression",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/build-binary-expression-tree-from-infix-expression",
+      "slug": "build-binary-expression-tree-from-infix-expression",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clvshtgy10007ii4ulv932h0l": {
+      "id": "clvshtgy10007ii4ulv932h0l",
+      "createdAt": "2024-05-04T19:24:39.818Z",
+      "updatedAt": "2024-05-04T19:24:39.818Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Number of Books You Can Take",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/maximum-number-of-books-you-can-take",
+      "slug": "maximum-number-of-books-you-can-take",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18527,6 +18555,82 @@
         }
       },
       "description": null
+    },
+    "clvsh8wcs0002ii4u33yxd9ca": {
+      "id": "clvsh8wcs0002ii4u33yxd9ca",
+      "createdAt": "2024-05-04T19:08:40.010Z",
+      "updatedAt": "2024-05-04T19:09:04.718Z",
+      "projectId": "clvsh8wcr0001ii4un0e8v4nd",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "iAkkdwyEKK25Q3BVTmJ7sn": {
+          "name": "iAkkdwyEKK25Q3BVTmJ7sn",
+          "type": "string",
+          "input": "3*4-2*5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvsh9nq90005ii4u99u6hd9f": {
+      "id": "clvsh9nq90005ii4u99u6hd9f",
+      "createdAt": "2024-05-04T19:09:15.489Z",
+      "updatedAt": "2024-05-04T19:09:17.926Z",
+      "projectId": "clvsh8wcr0001ii4un0e8v4nd",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "iAkkdwyEKK25Q3BVTmJ7sn": {
+          "name": "iAkkdwyEKK25Q3BVTmJ7sn",
+          "type": "string",
+          "input": "2-3/(5*2)+1",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvshtgy10008ii4u76aqsa22": {
+      "id": "clvshtgy10008ii4u76aqsa22",
+      "createdAt": "2024-05-04T19:24:39.818Z",
+      "updatedAt": "2024-05-04T19:25:08.945Z",
+      "projectId": "clvshtgy10007ii4ulv932h0l",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "igWj1MUHY9ZhpYRHi2Jk8y": {
+          "name": "igWj1MUHY9ZhpYRHi2Jk8y",
+          "type": "array",
+          "input": "[8,5,2,7,9]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clvsi3c0t000bii4ui3on9dzj": {
+      "id": "clvsi3c0t000bii4ui3on9dzj",
+      "createdAt": "2024-05-04T19:32:19.997Z",
+      "updatedAt": "2024-05-04T19:32:22.055Z",
+      "projectId": "clvshtgy10007ii4ulv932h0l",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "igWj1MUHY9ZhpYRHi2Jk8y": {
+          "name": "igWj1MUHY9ZhpYRHi2Jk8y",
+          "type": "array",
+          "input": "[8,2,3,7,3,4,0,1,4,3]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -24872,6 +24976,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clvshtgy10009ii4u3uhp196q": {
+      "id": "clvshtgy10009ii4u3uhp196q",
+      "createdAt": "2024-05-04T19:24:39.818Z",
+      "updatedAt": "2024-05-05T11:35:54.331Z",
+      "projectId": "clvshtgy10007ii4ulv932h0l",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} books\n * @return {number}\n */\nvar maximumBooks = function (books) {\n  const n = books.length;\n\n  const calculateSum = (left, right) => {\n    const size = right - left + 1;\n    const count = Math.min(books[right], size);\n\n    return Math.floor(((2 * books[right] - (count - 1)) * count) / 2);\n  };\n\n  const stack = new Array();\n  const dp = new Array(n).fill(0);\n\n  for (let i = 0; i < n; i++) {\n    books.setColor(i, \"green\");\n    const rank = books[i] - i;\n    console.log({i, rank});\n    while (stack.length && books[stack.at(-1)] - stack.at(-1) >= rank) {\n      stack.pop();\n    }\n\n    dp.setColor(i, \"cyan\");\n    if (!stack.length) {\n      dp[i] = calculateSum(0, i);\n    } else {\n      const j = stack.at(-1);\n      dp.setColor(j, \"green\");\n      dp[i] = dp[j] + calculateSum(j + 1, i);\n    }\n\n    stack.push(i);\n  }\n\n  return Math.max(...dp);\n};\n\nreturn maximumBooks;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clvm3vghe000310rijqiq84gt": {
       "id": "clvm3vghe000310rijqiq84gt",
       "createdAt": "2024-04-30T08:07:40.834Z",
@@ -24969,6 +25087,20 @@
       "code": "/**\n * @param {number[]} houses\n * @param {number} k\n * @return {number}\n */\nvar minDistance = function (houses, k) {\n  const n = houses.length;\n  houses.sort((a, b) => a - b);\n\n  const costs = Array.from({ length: n }, () => new Uint32Array(n));\n  costs.showIndexes(n, n - 1);\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      houses.setColor(j, \"cyan\");\n      const medianPos = houses[(i + j) >> 1];\n      for (let m = i; m <= j; m++) {\n        houses.setColor(m, \"green\");\n        costs[i][j] += Math.abs(medianPos - houses[m]);\n        houses.setColor(m, null);\n      }\n      houses.setColor(j, null);\n    }\n  }\n\n  const dp = Array.from({ length: k + 1 }, () => new Array(n));\n  dp.showIndexes(k + 1, n - 1);\n\n  const dfs = (i, k) => {\n    if (i === n && k === 0) return 0;\n    if (i === n || k === 0) return Infinity;\n\n    if (dp[k][i] !== undefined) {\n      dp[k].setColor(i, \"green\");\n      return dp[k][i];\n    }\n\n    let minCost = Infinity;\n\n    for (let j = i; j < n; j++) {\n      costs[i].setColor(j, \"green\");\n      const cost = costs[i][j];\n      minCost = Math.min(minCost, cost + dfs(j + 1, k - 1));\n      costs[i].setColor(j, \"blue\");\n    }\n\n    dp[k][i] = minCost;\n    return minCost;\n  };\n\n  return dfs(0, k);\n};\n\nreturn minDistance;\n",
       "pythonCode": null,
       "order": 2
+    },
+    "clvsh8wcs0003ii4u6rgnlqr5": {
+      "id": "clvsh8wcs0003ii4u6rgnlqr5",
+      "createdAt": "2024-05-04T19:08:40.010Z",
+      "updatedAt": "2024-05-04T19:17:04.095Z",
+      "projectId": "clvsh8wcr0001ii4un0e8v4nd",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function Node(val, left, right) {\n *     this.val = (val===undefined ? \" \" : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} s\n * @return {Node}\n */\nvar expTree = function (s) {\n  const postfix = infixToPostfix(s);\n\n  const stack = new Array();\n  for (let i = 0; i < postfix.length; i++) {\n    postfix.setColor(i, \"green\");\n    const char = postfix[i];\n\n    if (isDigit(char)) {\n      stack.push(new BinaryTree(char));\n      continue;\n    }\n\n    const b = stack.pop();\n    const a = stack.pop();\n\n    stack.push(new BinaryTree(char, a, b));\n  }\n\n  return stack.pop();\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nfunction prec(c) {\n  if (c === \"/\" || c === \"*\") return 2;\n  else if (c === \"+\" || c === \"-\") return 1;\n  else return -1;\n}\n\nfunction infixToPostfix(s) {\n  const stack = new Array();\n  const result = new Array();\n\n  for (let i = 0; i < s.length; i++) {\n    s.setColor(i, \"green\");\n    const char = s[i];\n\n    if (isDigit(char)) {\n      result.push(char);\n    } else if (char === \"(\") {\n      stack.push(\"(\");\n    } else if (char === \")\") {\n      while (stack.length && stack.at(-1) !== \"(\") {\n        result.push(stack.pop());\n      }\n      stack.pop();\n    } else {\n      const charPrec = prec(char);\n      while (stack.length && charPrec <= prec(stack.at(-1))) {\n        result.push(stack.pop());\n      }\n      stack.push(char);\n    }\n  }\n\n  while (stack.length) {\n    result.push(stack.pop());\n  }\n\n  return result;\n}\n\nreturn expTree;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
