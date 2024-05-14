@@ -4367,6 +4367,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clw6kx1ba0001vyx0001eh0gm": {
+      "id": "clw6kx1ba0001vyx0001eh0gm",
+      "createdAt": "2024-05-14T16:00:11.491Z",
+      "updatedAt": "2024-05-14T16:00:11.491Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Path with Maximum Gold",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/path-with-maximum-gold",
+      "slug": "path-with-maximum-gold",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18756,6 +18770,25 @@
       },
       "description": null
     },
+    "clw6kx1ba0002vyx0qpgusncr": {
+      "id": "clw6kx1ba0002vyx0qpgusncr",
+      "createdAt": "2024-05-14T16:00:11.491Z",
+      "updatedAt": "2024-05-14T16:00:26.301Z",
+      "projectId": "clw6kx1ba0001vyx0001eh0gm",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "oP44udLVXtCWstQd87rAUQ": {
+          "name": "oP44udLVXtCWstQd87rAUQ",
+          "type": "matrix",
+          "input": "[[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvwuctsr0002z6ohx7p1ju85": {
       "id": "clvwuctsr0002z6ohx7p1ju85",
       "createdAt": "2024-05-07T20:26:43.034Z",
@@ -25086,7 +25119,7 @@
     "clw53dnjt0003ixd7u6v86y9v": {
       "id": "clw53dnjt0003ixd7u6v86y9v",
       "createdAt": "2024-05-13T15:01:27.544Z",
-      "updatedAt": "2024-05-13T15:02:33.663Z",
+      "updatedAt": "2024-05-14T16:00:00.507Z",
       "projectId": "clw53dnjt0001ixd7a4btuaiw",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -25094,6 +25127,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar matrixScore = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const rows = new Array(m);\n  const cols = new Array(n);\n\n  for (let col = 0; col < n; col++) {\n    let count = 0;\n    for (let row = 0; row < m; row++) {\n      if (col === 0 && grid[row][col] === 0) {\n        rows[row] = true;\n      }\n\n      if (rows[row]) {\n        count += !grid[row][col];\n      } else {\n        count += grid[row][col];\n      }\n    }\n\n    if (count <= Math.floor(m / 2)) {\n      cols[col] = true;\n    }\n  }\n\n  let result = 0;\n\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (rows[row] !== cols[col]) {\n        grid[row][col] ^= 1;\n      }\n    }\n\n    result += parseInt(grid[row].join(\"\"), 2);\n  }\n\n  return result;\n};\n\nreturn matrixScore;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clw6kx1ba0003vyx0divalnsp": {
+      "id": "clw6kx1ba0003vyx0divalnsp",
+      "createdAt": "2024-05-14T16:00:11.491Z",
+      "updatedAt": "2024-05-14T16:01:08.976Z",
+      "projectId": "clw6kx1ba0001vyx0001eh0gm",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar getMaximumGold = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const backtrack = (i, j) => {\n    if (grid[i][j] === 0) return 0;\n\n    const val = grid[i][j];\n    grid[i].setColor(j, \"green\");\n    grid[i][j] = 0;\n    let amount = 0;\n\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const nRow = i + dRow,\n        nCol = j + dCol;\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n\n      amount = Math.max(amount, val + backtrack(nRow, nCol));\n    }\n\n    grid[i][j] = val;\n    grid[i].setColor(j, null);\n\n    return amount;\n  };\n\n  let maxAmount = 0;\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      maxAmount = Math.max(maxAmount, backtrack(i, j));\n    }\n  }\n\n  return maxAmount;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nreturn getMaximumGold;\n",
       "pythonCode": null,
       "order": 0
     },
