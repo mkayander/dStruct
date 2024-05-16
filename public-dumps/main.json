@@ -4381,6 +4381,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clw8wflvi000111a8aoq7aw7m": {
+      "id": "clw8wflvi000111a8aoq7aw7m",
+      "createdAt": "2024-05-16T06:58:06.077Z",
+      "updatedAt": "2024-05-16T06:58:06.077Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find the Safest Path in a Grid",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-the-safest-path-in-a-grid",
+      "slug": "find-the-safest-path-in-a-grid",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18675,6 +18689,25 @@
       },
       "description": null
     },
+    "clw7knjme0003ckyipawkllfa": {
+      "id": "clw7knjme0003ckyipawkllfa",
+      "createdAt": "2024-05-15T08:40:34.839Z",
+      "updatedAt": "2024-05-15T08:41:29.728Z",
+      "projectId": "clw6kx1ba0001vyx0001eh0gm",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "oP44udLVXtCWstQd87rAUQ": {
+          "name": "oP44udLVXtCWstQd87rAUQ",
+          "type": "matrix",
+          "input": "[[0,0,1,0,0],[0,0,2,0,0],[1,2,3,4,5],[0,0,4,0,0],[0,0,5,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clvshtgy10008ii4u76aqsa22": {
       "id": "clvshtgy10008ii4u76aqsa22",
       "createdAt": "2024-05-04T19:24:39.818Z",
@@ -18770,6 +18803,25 @@
       },
       "description": null
     },
+    "clw8wjwo7000511a8j9s72q4w": {
+      "id": "clw8wjwo7000511a8j9s72q4w",
+      "createdAt": "2024-05-16T07:01:26.695Z",
+      "updatedAt": "2024-05-16T07:01:29.479Z",
+      "projectId": "clw8wflvi000111a8aoq7aw7m",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "2AtmEu5krLvh7vSwMvwEJD": {
+          "name": "2AtmEu5krLvh7vSwMvwEJD",
+          "type": "matrix",
+          "input": "[[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clw6kx1ba0002vyx0qpgusncr": {
       "id": "clw6kx1ba0002vyx0qpgusncr",
       "createdAt": "2024-05-14T16:00:11.491Z",
@@ -18784,6 +18836,25 @@
           "name": "oP44udLVXtCWstQd87rAUQ",
           "type": "matrix",
           "input": "[[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clw7klzc50001ckyi67awzt5h": {
+      "id": "clw7klzc50001ckyi67awzt5h",
+      "createdAt": "2024-05-15T08:39:21.890Z",
+      "updatedAt": "2024-05-15T08:40:20.540Z",
+      "projectId": "clw6kx1ba0001vyx0001eh0gm",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "oP44udLVXtCWstQd87rAUQ": {
+          "name": "oP44udLVXtCWstQd87rAUQ",
+          "type": "matrix",
+          "input": "[[0,6,0,0],[5,8,7,0],[0,9,0,0],[0,9,3,4]]",
           "order": 0
         }
       },
@@ -18810,6 +18881,44 @@
           "type": "number",
           "input": "1",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "clw7l2yur0001ilrhkcv03hg1": {
+      "id": "clw7l2yur0001ilrhkcv03hg1",
+      "createdAt": "2024-05-15T08:52:34.406Z",
+      "updatedAt": "2024-05-15T08:53:07.540Z",
+      "projectId": "clw6kx1ba0001vyx0001eh0gm",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "oP44udLVXtCWstQd87rAUQ": {
+          "name": "oP44udLVXtCWstQd87rAUQ",
+          "type": "matrix",
+          "input": "[[1,3,7],[2,0,6],[3,4,5],[4,0,5],[9,10,20]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clw8wflvi000211a861azuzbn": {
+      "id": "clw8wflvi000211a861azuzbn",
+      "createdAt": "2024-05-16T06:58:06.077Z",
+      "updatedAt": "2024-05-16T06:59:09.025Z",
+      "projectId": "clw8wflvi000111a8aoq7aw7m",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2AtmEu5krLvh7vSwMvwEJD": {
+          "name": "2AtmEu5krLvh7vSwMvwEJD",
+          "type": "matrix",
+          "input": "[[0,0,1],[0,0,0],[0,0,0]]",
+          "order": 0
         }
       },
       "description": null
@@ -25133,7 +25242,7 @@
     "clw6kx1ba0003vyx0divalnsp": {
       "id": "clw6kx1ba0003vyx0divalnsp",
       "createdAt": "2024-05-14T16:00:11.491Z",
-      "updatedAt": "2024-05-14T16:01:08.976Z",
+      "updatedAt": "2024-05-16T06:57:32.514Z",
       "projectId": "clw6kx1ba0001vyx0001eh0gm",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -25325,6 +25434,20 @@
       "code": "/**\n * @param {number[]} strength\n * @return {number}\n */\nvar totalStrength = function (strength) {\n  const n = BigInt(strength.length);\n  strength = strength.map((val) => BigInt(val));\n  const mod = BigInt(1e9 + 7);\n  let result = 0n;\n\n  const pps = getPresum(Array.from([0n, ...getPresum(strength, mod)]), mod);\n\n  const stack = new Array();\n  for (let right = 0n; right <= n; right++) {\n    strength.setColor(Number(right), \"green\");\n    while (\n      stack.length &&\n      (right === n || strength[stack.at(-1)] >= strength[right])\n    ) {\n      const mid = stack.pop();\n      const left = stack.length ? stack.at(-1) : -1n;\n\n      const leftSize = mid - left;\n      const rightSize = right - mid;\n      const rightSum = pps[right] - pps[mid];\n      const leftSum = pps[mid] - pps[left > -1n ? left : 0];\n      const sum =\n        mod + ((rightSum * leftSize) % mod) - ((leftSum * rightSize) % mod);\n\n      console.log({left, mid, right, leftSize, rightSize, leftSum, rightSum, sum});\n\n      result = (result + ((sum * strength[mid]) % mod)) % mod;\n    }\n\n    stack.push(right);\n  }\n\n  return result;\n};\n\nfunction getPresum(arr, mod) {\n  let sum = 0n;\n  return arr.map((num) => {\n    sum = (sum + num) % mod;\n    return sum;\n  });\n}\nreturn totalStrength;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clw8wflvi000311a8elh78kzj": {
+      "id": "clw8wflvi000311a8elh78kzj",
+      "createdAt": "2024-05-16T06:58:06.077Z",
+      "updatedAt": "2024-05-16T13:17:34.452Z",
+      "projectId": "clw8wflvi000111a8aoq7aw7m",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar maximumSafenessFactor = function (grid) {\n  const n = grid.length;\n  if (grid[n - 1][n - 1] === 1 || grid[0][0] === 1) return 0;\n\n  const dist = computeDistanceGrid(grid);\n  const pq = new PriorityQueue({ compare: (a, b) => b[0] - a[0] });\n  const vis = Array.from({ length: n }, () => new Array(n).fill(false));\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  pq.enqueue([dist[0][0], 0, 0]);\n  vis[0][0] = true;\n\n  while (!pq.isEmpty()) {\n    const [ds, i, j] = pq.dequeue();\n    grid[i].setColor(j, \"green\");\n\n    if (i === n - 1 && j === n - 1) return ds;\n\n    for (const [dRow, dCol] of directions) {\n      const newRow = i + dRow;\n      const newCol = j + dCol;\n      if (\n        isValid(newRow, newCol, n) &&\n        grid[newRow][newCol] !== 1 &&\n        !vis[newRow][newCol]\n      ) {\n        vis[newRow][newCol] = true;\n        const nextDs = dist[newRow][newCol];\n        pq.enqueue([Math.min(ds, nextDs), newRow, newCol]);\n      }\n    }\n  }\n\n  return 0;\n};\n\nfunction isValid(x, y, n) {\n  return x >= 0 && x < n && y >= 0 && y < n;\n}\n\nfunction computeDistanceGrid(grid) {\n  const n = grid.length;\n  const distGrid = Array.from({ length: n }, () => new Array(n).fill(Infinity));\n  const queue = new Queue();\n\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      if (grid[i][j] === 1) {\n        queue.enqueue([i, j]);\n        distGrid[i][j] = 0;\n      }\n    }\n  }\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  while (!queue.isEmpty()) {\n    const [row, col] = queue.dequeue();\n    distGrid[row].setColor(col, \"cyan\");\n    for (const [dRow, dCol] of directions) {\n      const newRow = row + dRow;\n      const newCol = col + dCol;\n      if (isValid(newRow, newCol, n) && distGrid[newRow][newCol] === Infinity) {\n        distGrid[newRow][newCol] = distGrid[row][col] + 1;\n        queue.enqueue([newRow, newCol]);\n      }\n    }\n  }\n\n  return distGrid;\n}\n\nreturn maximumSafenessFactor;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clvtxjmse0003ceiyvpklahiu": {
       "id": "clvtxjmse0003ceiyvpklahiu",
