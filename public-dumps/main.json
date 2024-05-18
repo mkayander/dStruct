@@ -4395,6 +4395,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwc7i8ez0001pcived96eb6b": {
+      "id": "clwc7i8ez0001pcived96eb6b",
+      "createdAt": "2024-05-18T14:31:22.906Z",
+      "updatedAt": "2024-05-18T14:31:22.906Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Distribute Coins in Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/distribute-coins-in-binary-tree",
+      "slug": "distribute-coins-in-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18885,6 +18899,44 @@
       },
       "description": null
     },
+    "clwc7jhv70005pcivje9mnjxn": {
+      "id": "clwc7jhv70005pcivje9mnjxn",
+      "createdAt": "2024-05-18T14:32:21.812Z",
+      "updatedAt": "2024-05-18T14:32:24.172Z",
+      "projectId": "clwc7i8ez0001pcived96eb6b",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[0,3,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwc7i8ez0002pciv25hzcm3a": {
+      "id": "clwc7i8ez0002pciv25hzcm3a",
+      "createdAt": "2024-05-18T14:31:22.906Z",
+      "updatedAt": "2024-05-18T14:32:31.351Z",
+      "projectId": "clwc7i8ez0001pcived96eb6b",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[3,0,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clw7l2yur0001ilrhkcv03hg1": {
       "id": "clw7l2yur0001ilrhkcv03hg1",
       "createdAt": "2024-05-15T08:52:34.406Z",
@@ -25183,20 +25235,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clvwuctsr0003z6oh8snh2neb": {
-      "id": "clvwuctsr0003z6oh8snh2neb",
-      "createdAt": "2024-05-07T20:26:43.034Z",
-      "updatedAt": "2024-05-07T20:29:29.913Z",
-      "projectId": "clvwuctsr0001z6ohadlijqbx",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar countTheNumOfKFreeSubsets = function (nums, k) {\n  const n = nums.length;\n  const map = new Map();\n  let maxChain = 0;\n  nums.sort((a, b) => a - b);\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    const prev = num - k;\n    let count = 1;\n    if (map.has(prev)) {\n      count += map.get(prev);\n      map.delete(prev);\n    }\n    map.set(num, count);\n    maxChain = Math.max(maxChain, count);\n  }\n\n  const dp = new Array(maxChain + 1);\n  dp[0] = 1;\n  dp[1] = 2;\n\n  for (let i = 2; i <= maxChain; i++) {\n    dp[i] = dp[i - 1] + dp[i - 2];\n  }\n\n  const v = new Object();\n  v.res = 1;\n  for (const size of map.values()) {\n    dp.setColor(size, \"green\");\n    v.res = v.res * dp[size];\n    dp.setColor(size, null);\n  }\n\n  return v.res;\n};\n\nreturn countTheNumOfKFreeSubsets;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clvsemc7k00035w0yswkbvfh9": {
       "id": "clvsemc7k00035w0yswkbvfh9",
       "createdAt": "2024-05-04T17:55:08.239Z",
@@ -25208,6 +25246,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @return {string}\n */\nvar minWindow = function (s1, s2) {\n  const n = s1.length;\n  const m = s2.length;\n\n  if (s2.length === 1) {\n    return s1.includes(s2) ? s2 : \"\";\n  }\n\n  const dp = Array.from({ length: m + 1 }, () => new Uint32Array(n + 1));\n  dp.showIndexes(m, n);\n  for (let j = 0; j <= n; j++) {\n    dp[0][j] = j;\n  }\n\n  for (let i = 1; i <= m; i++) {\n    for (let j = 1; j <= n; j++) {\n      if (s1[j - 1] === s2[i - 1]) {\n        dp[i].setColor(j, \"green\");\n        dp[i][j] = dp[i - 1][j - 1];\n      } else {\n        dp[i].setColor(j, \"cyan\");\n        dp[i][j] = dp[i][j - 1];\n      }\n    }\n  }\n\n  let start = 0;\n  let len = n;\n\n  for (let j = 1; j <= n; j++) {\n    if (dp[m][j] !== 0) {\n      const nextLen = j - dp[m][j];\n      if (nextLen < len) {\n        len = nextLen;\n        start = dp[m][j];\n      }\n    }\n  }\n\n  if (len === n) {\n    return \"\";\n  }\n\n  return s1.slice(start, start + len);\n};\n\nreturn minWindow;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvwuctsr0003z6oh8snh2neb": {
+      "id": "clvwuctsr0003z6oh8snh2neb",
+      "createdAt": "2024-05-07T20:26:43.034Z",
+      "updatedAt": "2024-05-18T14:31:04.741Z",
+      "projectId": "clvwuctsr0001z6ohadlijqbx",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar countTheNumOfKFreeSubsets = function (nums, k) {\n  const n = nums.length;\n  const map = new Map();\n  let maxChain = 0;\n  nums.sort((a, b) => a - b);\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    const prev = num - k;\n    let count = 1;\n    if (map.has(prev)) {\n      count += map.get(prev);\n      map.delete(prev);\n    }\n    map.set(num, count);\n    maxChain = Math.max(maxChain, count);\n  }\n\n  const dp = new Array(maxChain + 1);\n  dp[0] = 1;\n  dp[1] = 2;\n\n  for (let i = 2; i <= maxChain; i++) {\n    dp[i] = dp[i - 1] + dp[i - 2];\n  }\n\n  const v = new Object();\n  v.res = 1;\n  for (const size of map.values()) {\n    dp.setColor(size, \"green\");\n    v.res = v.res * dp[size];\n    dp.setColor(size, null);\n  }\n\n  return v.res;\n};\n\nreturn countTheNumOfKFreeSubsets;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -25460,6 +25512,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} events\n * @return {number}\n */\nvar maxEvents = function (events) {\n  const n = events.length;\n  events.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n\n  const pq = new PriorityQueue({ compare: (a, b) => a - b });\n\n  let result = 0;\n  let d = 0;\n\n  let i = 0;\n  while (!pq.isEmpty() || i < n) {\n    if (pq.isEmpty()) {\n      d = events[i][0];\n    }\n\n    while (i < n && events[i][0] <= d) {\n      pq.enqueue(events[i++][1]);\n    }\n    pq.dequeue();\n    result++;\n    d++;\n\n    while (!pq.isEmpty() && pq.front() < d) {\n      pq.dequeue();\n    }\n  }\n\n  return result;\n};\n\nreturn maxEvents;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clwc7i8ez0003pcive4bl8tcc": {
+      "id": "clwc7i8ez0003pcive4bl8tcc",
+      "createdAt": "2024-05-18T14:31:22.906Z",
+      "updatedAt": "2024-05-18T14:32:10.774Z",
+      "projectId": "clwc7i8ez0001pcived96eb6b",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar distributeCoins = function (root) {\n  let moves = 0;\n\n  const dfs = (node) => {\n    if (!node) return 0;\n\n    node.setColor(\"cyan\");\n\n    let left = dfs(node.left);\n    let right = dfs(node.right);\n\n    const balance = left + right + node.val - 1;\n    node.setColor(\"green\");\n\n    moves += Math.abs(balance);\n\n    return left + right + node.val - 1;\n  };\n\n  dfs(root);\n\n  return moves;\n};\n\nreturn distributeCoins;\n",
       "pythonCode": null,
       "order": 0
     },
