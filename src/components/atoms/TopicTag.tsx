@@ -20,7 +20,7 @@ export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
   const colors = theme.palette.question.getTagColors(topic.slug);
 
   const handleClick = () => {
-    console.log(topic.slug);
+    // console.log(topic.slug);
   };
 
   return (
