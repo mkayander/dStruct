@@ -132,7 +132,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSolution.data?.slug, language]);
+  }, [currentSolution.data?.slug, language, textModel]);
 
   // Handle code errors
   useEffect(() => {
