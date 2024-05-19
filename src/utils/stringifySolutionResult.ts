@@ -24,6 +24,13 @@ export const safeStringify = (val: unknown): string => {
       if (typeof value === "bigint") {
         return `${value}n`;
       }
+      if (typeof value === "number" && !Number.isFinite(value)) {
+        if (value > 0) {
+          return "Inf";
+        } else {
+          return "-Inf";
+        }
+      }
       if (value && typeof value === "object" && "meta" in value) {
         switch (value.meta?.type) {
           case ArgumentType.LINKED_LIST:
