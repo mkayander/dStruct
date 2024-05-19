@@ -1,3 +1,19 @@
+# [1.291.0](https://github.com/mkayander/dStruct/compare/v1.290.0...v1.291.0) (2024-05-19)
+
+
+### Bug Fixes
+
+* Make onScroll optional ([32f4436](https://github.com/mkayander/dStruct/commit/32f4436a456c74057a8176921b7bd27aafaba2c2))
+* Removed console log ([ef10c37](https://github.com/mkayander/dStruct/commit/ef10c3718511180ed68ff2ca8d858e6b788d01ed))
+
+
+### Features
+
+* Added a profile link from side panel ([8fb1b91](https://github.com/mkayander/dStruct/commit/8fb1b9170cb9d8e11df6b923d7fd239a1dd4b843))
+* Added a profile page ([bc00285](https://github.com/mkayander/dStruct/commit/bc0028591c1d5df17be26bbdf29263786f3ed73a))
+* Added links to LeetCode ([8a04e54](https://github.com/mkayander/dStruct/commit/8a04e5451a1d6f5cf099787bbf8685981d65eb3b))
+* Remove profile content from home page ([1beb3eb](https://github.com/mkayander/dStruct/commit/1beb3ebc8a5e4a6329a20b6f43b5a0182dc18417))
+
 # [1.290.0](https://github.com/mkayander/dStruct/compare/v1.289.0...v1.290.0) (2024-05-19)
 
 
