@@ -21,6 +21,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -83,6 +84,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
+  const session = useSession();
 
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
     const newLocale = event.target.value as Locales;
@@ -115,7 +117,9 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
             <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>
           }
         >
-          <NavItem title={LL.PROFILE()} />
+          <Link href={`/profile/${session.data?.user.id ?? ""}`}>
+            <NavItem title={LL.PROFILE()} />
+          </Link>
           <NavItem title="GitHub" href={GITHUB_URL} />
           <NavItem title={LL.FEEDBACK()} href={`${GITHUB_URL}/issues`} />
           <NavItem title={LL.LOGOUT()} onClick={() => signOut()} />
