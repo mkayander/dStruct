@@ -1,3 +1,17 @@
+# [1.290.0](https://github.com/mkayander/dStruct/compare/v1.289.0...v1.290.0) (2024-05-19)
+
+
+### Bug Fixes
+
+* Env file update ([ca86f16](https://github.com/mkayander/dStruct/commit/ca86f16fa9ab905cc06211b2eac49c68327cbd9c))
+
+
+### Features
+
+* Rename unstable_getServerSession ([f023765](https://github.com/mkayander/dStruct/commit/f02376556c7af18788f2e16b692d5d2e61c0aa50))
+* Updated Prisma packages ([b4408ae](https://github.com/mkayander/dStruct/commit/b4408ae17199b8cd170ca2917757cbbb063a1897))
+* Use the new remote images config pattern ([f21303b](https://github.com/mkayander/dStruct/commit/f21303bbc100e3389348232c7eb1e5f555e8495d))
+
 # [1.289.0](https://github.com/mkayander/dStruct/compare/v1.288.2...v1.289.0) (2024-04-14)
 
 
