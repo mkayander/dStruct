@@ -21,11 +21,8 @@ import { useDailyQuestionData } from "#/api";
 import { LogoModelView } from "#/components/molecules/LogoModelView";
 import { QuestionSummary } from "#/components/molecules/QuestionSummary";
 import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
-import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
-import { UserSettings } from "#/components/organisms/UserSettings";
 import { MainLayout } from "#/components/templates/MainLayout";
 import type { PageScrollContainerProps } from "#/components/templates/PageScrollContainer";
-import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
@@ -38,7 +35,6 @@ const DashboardPage: NextPage<{
 }> = () => {
   const { LL } = useI18nContext();
   const session = useSession();
-  const leetCodeUsername = session.data?.user.leetCodeUsername;
   const theme = useTheme();
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
 
@@ -49,8 +45,8 @@ const DashboardPage: NextPage<{
 
     const rect = event.currentTarget.getBoundingClientRect();
     const polarAngle =
-      ((rect.height - event.clientY) / rect.height) * (Math.PI * 2) -
-      Math.PI / 4;
+      ((rect.height - event.clientY) / rect.height) * (Math.PI * 1) +
+      Math.PI / 22;
 
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(azimuthalAngle);
@@ -79,13 +75,6 @@ const DashboardPage: NextPage<{
       controlsRef.current.setPolarAngle(Math.PI / 2);
     }
   };
-
-  const userProfileQueryResult = useGetUserProfileQuery({
-    variables: {
-      username: leetCodeUsername || "",
-    },
-    skip: !leetCodeUsername,
-  });
 
   const questionDataQuery = useDailyQuestionData();
 
@@ -165,21 +154,15 @@ const DashboardPage: NextPage<{
         </Stack>
       </Box>
       <Container>
-        <Typography variant="h5" my={3}>
-          {LL.USER_DASHBOARD({ name: leetCodeUsername || "User" })}
-        </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mt={4}>
           {session.status === "loading" ? (
             <CircularProgress />
           ) : session.status === "authenticated" ? (
-            <>
-              <Grid item xs={12} md={6}>
-                <UserSettings />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <LeetCodeStats userProfile={userProfileQueryResult} />
-              </Grid>
-            </>
+            <Grid item xs={12} display="flex" justifyContent="center">
+              <Link href={`/profile/${session.data.user.id}`}>
+                <Button variant="contained">Open Profile</Button>
+              </Link>
+            </Grid>
           ) : (
             <Grid item xs={12}>
               <Tooltip
@@ -198,7 +181,25 @@ const DashboardPage: NextPage<{
             </Grid>
           )}
           <Grid item xs={12}>
-            <QuestionSummary questionDataQuery={questionDataQuery} my={24} />
+            <Typography
+              variant="h5"
+              mt={6}
+              display="block"
+              position="relative"
+              zIndex={100}
+              sx={{
+                fontWeight: "bold",
+                textShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              Don&apos;t know what to solve today? Here is a daily problem from
+              LeetCode!
+            </Typography>
+            <QuestionSummary
+              questionDataQuery={questionDataQuery}
+              mt={4}
+              mb={12}
+            />
           </Grid>
           <Grid item xs={12}>
             <DailyProblem questionDataQuery={questionDataQuery} />
