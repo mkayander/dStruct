@@ -5,6 +5,7 @@ import {
   CircularProgress,
   Container,
   Grid,
+  Link as MuiLink,
   Stack,
   Tooltip,
   Typography,
@@ -184,7 +185,7 @@ const DashboardPage: NextPage<{
             <Typography
               variant="h5"
               mt={6}
-              display="block"
+              display="inline-block"
               position="relative"
               zIndex={100}
               sx={{
@@ -192,8 +193,17 @@ const DashboardPage: NextPage<{
                 textShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
               }}
             >
-              Don&apos;t know what to solve today? Here is a daily problem from
-              LeetCode!
+              Don&apos;t know what to solve today? Here is a daily problem from{" "}
+              {""}
+              <MuiLink
+                href={"https://leetcode.com/"}
+                color="inherit"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LeetCode
+              </MuiLink>
+              !
             </Typography>
             <QuestionSummary
               questionDataQuery={questionDataQuery}

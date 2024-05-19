@@ -14,6 +14,7 @@ import {
   darken,
   Divider,
   Grid,
+  Link as MuiLink,
   Paper,
   Skeleton,
   Stack,
@@ -109,8 +110,6 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
           )} 100%)`,
           backdropFilter: "blur( 14px )",
           border: "1px solid rgba( 255, 255, 255, 0.18 )",
-          // boxShadow: `0 8px 32px 0 ${alpha(theme.palette.primary.dark, 0.37)}`,
-          // boxShadow: `0px 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 12%)`,
           boxShadow: `0px 7px 8px -4px ${alpha(
             shadowColor,
             0.2,
@@ -134,7 +133,14 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                   <span style={{ fontWeight: "300" }}>
                     {question.questionFrontendId}.
                   </span>{" "}
-                  {question.title}
+                  <MuiLink
+                    href={`https://leetcode.com/problems/${question.titleSlug || ""}`}
+                    color="inherit"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {question.title}
+                  </MuiLink>
                 </Typography>
                 <Box display="flex" sx={{ opacity: 0.9 }}>
                   <EventRepeatTwoTone sx={{ mr: 1 }} />
