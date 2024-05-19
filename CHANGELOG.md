@@ -1,3 +1,15 @@
+# [1.292.0](https://github.com/mkayander/dStruct/compare/v1.291.1...v1.292.0) (2024-05-19)
+
+
+### Bug Fixes
+
+* Avoid updating a disposed text model ([0aacbde](https://github.com/mkayander/dStruct/commit/0aacbde3532e031ef53b1b36f8187e1687073f30))
+
+
+### Features
+
+* Catch lCtrl + S key event in editor ([d3b7fa5](https://github.com/mkayander/dStruct/commit/d3b7fa5ef65bdb0f77bc52ae95ef6f6494612979))
+
 ## [1.291.1](https://github.com/mkayander/dStruct/compare/v1.291.0...v1.291.1) (2024-05-19)
 
 
