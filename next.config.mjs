@@ -16,10 +16,16 @@ const config = {
     localeDetection: false,
   },
   images: {
-    domains: [
-      "leetpal.s3.eu-central-1.amazonaws.com",
-      "leetpal-prod.s3.eu-central-1.amazonaws.com",
-    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "leetpal.s3.eu-central-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "leetpal-prod.s3.eu-central-1.amazonaws.com",
+      },
+    ]
   },
   webpack: (config) => {
     return {
