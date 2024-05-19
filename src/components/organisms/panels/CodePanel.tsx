@@ -15,12 +15,7 @@ import { useSnackbar } from "notistack";
 import parserBabel from "prettier/plugins/babel";
 import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
-import React, {
-  type MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { LoadingSkeletonOverlay } from "#/components/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/components/atoms/SolutionComplexityLabel";
@@ -196,7 +191,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setLanguage(event.target.value);
   };
 
-  const handleRunCode: MouseEventHandler<HTMLButtonElement> = async () => {
+  const handleRunCode = async () => {
     if (language === "python") {
       openPythonSupportModal();
       return;
@@ -300,7 +295,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
       <div
         onKeyDown={(ev) => {
-          console.log(ev);
+          if (ev.code === "KeyS" && ev.ctrlKey) {
+            ev.preventDefault();
+            handleRunCode();
+          }
         }}
       >
         <TabContext value={tabValue}>
