@@ -11,7 +11,7 @@ import {
 export type MainLayoutProps = Omit<BoxProps, "onScroll"> & {
   children: React.ReactNode;
   isLoading?: boolean;
-  onScroll: PageScrollContainerProps["onScroll"];
+  onScroll?: PageScrollContainerProps["onScroll"];
 };
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
