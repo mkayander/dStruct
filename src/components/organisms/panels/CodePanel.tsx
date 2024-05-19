@@ -127,7 +127,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     const newCode = currentSolution.data[key] ?? "";
 
     setEditorState(EditorState.INITIAL);
-    if (textModel) {
+    if (textModel && !textModel.isDisposed()) {
       textModel.setValue(newCode);
     }
 
@@ -298,120 +298,126 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
       <LoadingSkeletonOverlay />
 
-      <TabContext value={tabValue}>
-        <TabListWrapper>
-          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
-            <Tab label={LL.CODE_RUNNER()} value="1" />
-          </TabList>
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <Tooltip
-              title={
-                <Box display="flex" alignItems="center" gap="3px">
-                  {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
-                  <Image
-                    src={prettierIcon}
-                    alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
-                    width={22}
-                    height={22}
-                  />
-                </Box>
-              }
-              arrow
-            >
-              <span>
-                <IconButton
-                  disabled={!isFormattingAvailable}
-                  onClick={handleFormatCode}
-                >
-                  <AutoFixHigh fontSize="small" />
-                </IconButton>
-              </span>
-            </Tooltip>
-            <LoadingButton
-              variant="text"
-              color="success"
-              title={LL.RUN_CODE()}
-              endIcon={<PlayArrow />}
-              loading={isProcessing}
-              loadingPosition="end"
-              onClick={handleRunCode}
-              sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
-            >
-              {LL.RUN()}
-            </LoadingButton>
-          </Stack>
-        </TabListWrapper>
-        <StyledTabPanel
-          value="1"
-          useScroll={false}
-          scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
-          scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
-          sx={{ p: 0, overflowY: "hidden" }}
-        >
-          <Box
-            mx={2}
-            my={1}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+      <div
+        onKeyDown={(ev) => {
+          console.log(ev);
+        }}
+      >
+        <TabContext value={tabValue}>
+          <TabListWrapper>
+            <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+              <Tab label={LL.CODE_RUNNER()} value="1" />
+            </TabList>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Tooltip
+                title={
+                  <Box display="flex" alignItems="center" gap="3px">
+                    {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
+                    <Image
+                      src={prettierIcon}
+                      alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
+                      width={22}
+                      height={22}
+                    />
+                  </Box>
+                }
+                arrow
+              >
+                <span>
+                  <IconButton
+                    disabled={!isFormattingAvailable}
+                    onClick={handleFormatCode}
+                  >
+                    <AutoFixHigh fontSize="small" />
+                  </IconButton>
+                </span>
+              </Tooltip>
+              <LoadingButton
+                variant="text"
+                color="success"
+                title={LL.RUN_CODE()}
+                endIcon={<PlayArrow />}
+                loading={isProcessing}
+                loadingPosition="end"
+                onClick={handleRunCode}
+                sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
+              >
+                {LL.RUN()}
+              </LoadingButton>
+            </Stack>
+          </TabListWrapper>
+          <StyledTabPanel
+            value="1"
+            useScroll={false}
+            scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
+            scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
+            sx={{ p: 0, overflowY: "hidden" }}
           >
-            <SolutionSelectBar selectedProject={selectedProject} />
+            <Box
+              mx={2}
+              my={1}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <SolutionSelectBar selectedProject={selectedProject} />
 
-            <SolutionComplexityLabel solution={currentSolution} />
-          </Box>
-          <Box
-            sx={{
-              position: "relative",
-            }}
-          >
-            <CodeRunner
-              language={language}
-              height={editorHeight}
-              value={codeInput}
-              onChange={handleChangeCode}
-              isUpdating={isLoading}
-              setMonacoInstance={setMonacoInstance}
-              setEditorInstance={setEditorInstance}
-              setTextModel={setTextModel}
-            />
-            <Stack
-              spacing={1}
+              <SolutionComplexityLabel solution={currentSolution} />
+            </Box>
+            <Box
               sx={{
-                position: "absolute",
-                top: "6px",
-                right: "20px",
-                opacity: 0.7,
-                alignItems: "end",
+                position: "relative",
               }}
             >
-              <Tooltip title="Programming Language" arrow placement="left">
-                <Box>
-                  <EditorLanguageSelect
-                    language={language}
-                    handleLanguageChange={handleLanguageChange}
-                  />
-                </Box>
-              </Tooltip>
-              <EditorStateIcon
-                state={editorState}
-                isLoading={updateSolution.isLoading}
+              <CodeRunner
+                language={language}
+                height={editorHeight}
+                value={codeInput}
+                onChange={handleChangeCode}
+                isUpdating={isLoading}
+                setMonacoInstance={setMonacoInstance}
+                setEditorInstance={setEditorInstance}
+                setTextModel={setTextModel}
               />
-              <Tooltip
-                title={LL.COPY_CODE_TO_CLIPBOARD()}
-                arrow
-                placement="left"
+              <Stack
+                spacing={1}
+                sx={{
+                  position: "absolute",
+                  top: "6px",
+                  right: "20px",
+                  opacity: 0.7,
+                  alignItems: "end",
+                }}
               >
-                <IconButton
-                  onClick={copyCode}
-                  style={{ marginRight: "-6px", marginTop: "2px" }}
+                <Tooltip title="Programming Language" arrow placement="left">
+                  <Box>
+                    <EditorLanguageSelect
+                      language={language}
+                      handleLanguageChange={handleLanguageChange}
+                    />
+                  </Box>
+                </Tooltip>
+                <EditorStateIcon
+                  state={editorState}
+                  isLoading={updateSolution.isLoading}
+                />
+                <Tooltip
+                  title={LL.COPY_CODE_TO_CLIPBOARD()}
+                  arrow
+                  placement="left"
                 >
-                  <ContentCopy fontSize="small" />
-                </IconButton>
-              </Tooltip>
-            </Stack>
-          </Box>
-        </StyledTabPanel>
-      </TabContext>
+                  <IconButton
+                    onClick={copyCode}
+                    style={{ marginRight: "-6px", marginTop: "2px" }}
+                  >
+                    <ContentCopy fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+            </Box>
+          </StyledTabPanel>
+        </TabContext>
+      </div>
     </PanelWrapper>
   );
 };
