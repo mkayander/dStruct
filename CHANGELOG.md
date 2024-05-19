@@ -1,3 +1,11 @@
+## [1.291.1](https://github.com/mkayander/dStruct/compare/v1.291.0...v1.291.1) (2024-05-19)
+
+
+### Bug Fixes
+
+* Fix code state update issues ([35bf352](https://github.com/mkayander/dStruct/commit/35bf3528051f0a16634f621d7a849d53e2393da3))
+* Fix Infinity stringification display ([f408fbf](https://github.com/mkayander/dStruct/commit/f408fbf7d51859475ec81d10f056b57517020d3b))
+
 # [1.291.0](https://github.com/mkayander/dStruct/compare/v1.290.0...v1.291.0) (2024-05-19)
 
 
