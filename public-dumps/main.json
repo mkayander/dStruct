@@ -25587,7 +25587,7 @@
     "clwf74a530001q5kk0cm5lvme": {
       "id": "clwf74a530001q5kk0cm5lvme",
       "createdAt": "2024-05-20T16:43:50.470Z",
-      "updatedAt": "2024-05-20T16:45:50.989Z",
+      "updatedAt": "2024-05-20T17:01:46.397Z",
       "projectId": "clwf6ixmr0001wl8rdq1ltd8h",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -25639,6 +25639,20 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar distributeCoins = function (root) {\n  let moves = 0;\n\n  const dfs = (node) => {\n    if (!node) return 0;\n\n    node.setColor(\"cyan\");\n\n    let left = dfs(node.left);\n    let right = dfs(node.right);\n\n    const balance = left + right + node.val - 1;\n    node.setColor(\"green\");\n\n    moves += Math.abs(balance);\n\n    return left + right + node.val - 1;\n  };\n\n  dfs(root);\n\n  return moves;\n};\n\nreturn distributeCoins;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clwf7rewc0001zmyljea4o1o1": {
+      "id": "clwf7rewc0001zmyljea4o1o1",
+      "createdAt": "2024-05-20T17:01:49.738Z",
+      "updatedAt": "2024-05-20T17:04:04.878Z",
+      "projectId": "clwf6ixmr0001wl8rdq1ltd8h",
+      "title": "Solution 4",
+      "slug": "solution-4",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar subsetXORSum = function (nums) {\n  const n = nums.length;\n\n  const subsets = new Array();\n  const current = new Array();\n  const backtrack = (i) => {\n    subsets.push([...current]);\n    nums.setColor(i, \"cyan\");\n\n    for (let j = i; j < n; j++) {\n        nums.setColor(j, \"green\");\n        current.push(nums[j]);\n        backtrack(j + 1);\n        current.pop();\n        nums.setColor(j, \"cyan\");\n    }\n\n    nums.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  let result = 0;\n  for (const subset of subsets) {\n    let xorTotal = 0;\n    for (const num of subset) {\n      xorTotal ^= num;\n    }\n    result += xorTotal;\n  }\n\n  return result;\n};\n\nreturn subsetXORSum;\n",
+      "pythonCode": null,
+      "order": 3
     },
     "clwd9ur5t0003sm1wlzognkk2": {
       "id": "clwd9ur5t0003sm1wlzognkk2",
