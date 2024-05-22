@@ -107,8 +107,8 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const handleBlur = () => {
-    if (sliderValue < 5) {
-      setSliderValue(5);
+    if (sliderValue < 1) {
+      setSliderValue(1);
     } else if (sliderValue > 700) {
       setSliderValue(700);
     }
@@ -198,7 +198,7 @@ export const TreeViewPanel: React.FC = () => {
                 <Grid item xs>
                   <Slider
                     value={sliderValue}
-                    min={5}
+                    min={1}
                     max={700}
                     onChange={handleSliderChange}
                     aria-labelledby="input-slider"
@@ -215,7 +215,7 @@ export const TreeViewPanel: React.FC = () => {
                     )}
                     inputProps={{
                       step: 5,
-                      min: 5,
+                      min: 1,
                       max: 700,
                       type: "number",
                       "aria-labelledby": "input-slider",
