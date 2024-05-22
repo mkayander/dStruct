@@ -1,3 +1,17 @@
+# [1.293.0](https://github.com/mkayander/dStruct/compare/v1.292.1...v1.293.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* Updated env file ([b43ebeb](https://github.com/mkayander/dStruct/commit/b43ebeb07bf33c77a38166ec7f65e794802f8822))
+
+
+### Features
+
+* Display panel focus-within state ([6e78382](https://github.com/mkayander/dStruct/commit/6e783824a02548da5a73417fe058343f15509a2c))
+* Implemented tree view key handlers ([ed63db0](https://github.com/mkayander/dStruct/commit/ed63db0d5eb6cab6b5e7282dcb55314af97256ce))
+* Move key down handler up ([84667af](https://github.com/mkayander/dStruct/commit/84667afaf0a0ebd8bb98ad7856cfd58987b4c13a))
+
 ## [1.292.1](https://github.com/mkayander/dStruct/compare/v1.292.0...v1.292.1) (2024-05-20)
 
 
