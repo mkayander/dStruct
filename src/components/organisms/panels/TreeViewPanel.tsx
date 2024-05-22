@@ -95,14 +95,20 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const handleStepBack = () => {
+    if (frameIndex === -1) return;
+
     dispatch(callstackSlice.actions.setFrameIndex(frameIndex - 1));
   };
 
   const handlePlay = () => {
+    if (frameIndex === callstackLength - 1) return;
+
     dispatch(callstackSlice.actions.setIsPlaying(!isPlaying));
   };
 
   const handleStepForward = () => {
+    if (frameIndex === callstackLength - 1) return;
+
     dispatch(callstackSlice.actions.setFrameIndex(frameIndex + 1));
   };
 
