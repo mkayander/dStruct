@@ -1,3 +1,10 @@
+# [1.294.0](https://github.com/mkayander/dStruct/compare/v1.293.0...v1.294.0) (2024-05-22)
+
+
+### Features
+
+* Set min interval value to 1ms ([ca08953](https://github.com/mkayander/dStruct/commit/ca08953e81834be7e87d41826aad5eee044153ce))
+
 # [1.293.0](https://github.com/mkayander/dStruct/compare/v1.292.1...v1.293.0) (2024-05-22)
 
 
