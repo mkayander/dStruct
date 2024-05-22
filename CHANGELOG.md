@@ -1,3 +1,10 @@
+# [1.295.0](https://github.com/mkayander/dStruct/compare/v1.294.1...v1.295.0) (2024-05-22)
+
+
+### Features
+
+* Updated Typescript Eslint plugin ([010928c](https://github.com/mkayander/dStruct/commit/010928c3d896b5f7674da3ee4d7dd98dcd0e0bfa))
+
 ## [1.294.1](https://github.com/mkayander/dStruct/compare/v1.294.0...v1.294.1) (2024-05-22)
 
 
