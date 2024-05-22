@@ -1,3 +1,10 @@
+## [1.294.1](https://github.com/mkayander/dStruct/compare/v1.294.0...v1.294.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* Set frame index control boundaries ([c62b2d5](https://github.com/mkayander/dStruct/commit/c62b2d5a8373b43e39473a05215f2a2db829e851))
+
 # [1.294.0](https://github.com/mkayander/dStruct/compare/v1.293.0...v1.294.0) (2024-05-22)
 
 
