@@ -119,6 +119,24 @@ export const TreeViewPanel: React.FC = () => {
       sx={{
         height: isMobile ? 240 + maxDepth * 60 : "100%",
       }}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft") {
+          handleStepBack();
+        } else if (event.key === "ArrowRight") {
+          handleStepForward();
+        } else if (event.key === " ") {
+          if (
+            event.target instanceof HTMLInputElement ||
+            event.target instanceof HTMLButtonElement
+          )
+            return;
+          handlePlay();
+        } else if (event.key === "r") {
+          handleReplay();
+        } else if (event.key === "Escape") {
+          handleReset();
+        }
+      }}
     >
       <LoadingSkeletonOverlay />
 
