@@ -4437,6 +4437,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwi0xab70001oxn5xwgieuwi": {
+      "id": "clwi0xab70001oxn5xwgieuwi",
+      "createdAt": "2024-05-22T16:13:44.947Z",
+      "updatedAt": "2024-05-22T16:13:44.947Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Word Pattern II",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/word-pattern-ii",
+      "slug": "word-pattern-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clwi5aw5a0001py1byqlgs7sa": {
+      "id": "clwi5aw5a0001py1byqlgs7sa",
+      "createdAt": "2024-05-22T18:16:18.238Z",
+      "updatedAt": "2024-05-22T18:16:18.238Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Valid Word Abbreviation",
+      "category": "TWO_POINTERS",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/valid-word-abbreviation",
+      "slug": "valid-word-abbreviation",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18984,6 +19012,31 @@
       },
       "description": null
     },
+    "clwi0xab70002oxn5l081m0eo": {
+      "id": "clwi0xab70002oxn5l081m0eo",
+      "createdAt": "2024-05-22T16:13:44.947Z",
+      "updatedAt": "2024-05-22T16:14:23.887Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "bupGmVSQfQ862biudQootV": {
+          "name": "bupGmVSQfQ862biudQootV",
+          "type": "string",
+          "input": "redblueredblue",
+          "order": 1
+        },
+        "kE4N9sLyrWRuMZYiyM6tbF": {
+          "name": "kE4N9sLyrWRuMZYiyM6tbF",
+          "type": "string",
+          "input": "abab",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clw8wflvi000211a861azuzbn": {
       "id": "clw8wflvi000211a861azuzbn",
       "createdAt": "2024-05-16T06:58:06.077Z",
@@ -19067,6 +19120,131 @@
           "name": "unDNWZ8mEmHmNHWLbGU5j4",
           "type": "array",
           "input": "[3,4,5,6,7,8]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwi116gk0005oxn5klboowem": {
+      "id": "clwi116gk0005oxn5klboowem",
+      "createdAt": "2024-05-22T16:16:46.581Z",
+      "updatedAt": "2024-05-22T16:16:54.662Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "bupGmVSQfQ862biudQootV": {
+          "name": "bupGmVSQfQ862biudQootV",
+          "type": "string",
+          "input": "asdasdasdasd",
+          "order": 1
+        },
+        "kE4N9sLyrWRuMZYiyM6tbF": {
+          "name": "kE4N9sLyrWRuMZYiyM6tbF",
+          "type": "string",
+          "input": "aaaa",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwi1252f0007oxn59fn65iu2": {
+      "id": "clwi1252f0007oxn59fn65iu2",
+      "createdAt": "2024-05-22T16:17:31.432Z",
+      "updatedAt": "2024-05-22T16:17:38.547Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "bupGmVSQfQ862biudQootV": {
+          "name": "bupGmVSQfQ862biudQootV",
+          "type": "string",
+          "input": "xyzabcxzyabc",
+          "order": 1
+        },
+        "kE4N9sLyrWRuMZYiyM6tbF": {
+          "name": "kE4N9sLyrWRuMZYiyM6tbF",
+          "type": "string",
+          "input": "aabb",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwi12p2e0009oxn5xyb1phsi": {
+      "id": "clwi12p2e0009oxn5xyb1phsi",
+      "createdAt": "2024-05-22T16:17:57.351Z",
+      "updatedAt": "2024-05-22T16:18:03.178Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "bupGmVSQfQ862biudQootV": {
+          "name": "bupGmVSQfQ862biudQootV",
+          "type": "string",
+          "input": "ataaa",
+          "order": 1
+        },
+        "kE4N9sLyrWRuMZYiyM6tbF": {
+          "name": "kE4N9sLyrWRuMZYiyM6tbF",
+          "type": "string",
+          "input": "ats",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwi13b2j000boxn5jonjkvnk": {
+      "id": "clwi13b2j000boxn5jonjkvnk",
+      "createdAt": "2024-05-22T16:18:25.867Z",
+      "updatedAt": "2024-05-22T16:18:33.417Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "bupGmVSQfQ862biudQootV": {
+          "name": "bupGmVSQfQ862biudQootV",
+          "type": "string",
+          "input": "teezmmmmteez",
+          "order": 1
+        },
+        "kE4N9sLyrWRuMZYiyM6tbF": {
+          "name": "kE4N9sLyrWRuMZYiyM6tbF",
+          "type": "string",
+          "input": "sucks",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwi5aw5a0002py1b8o2clmi9": {
+      "id": "clwi5aw5a0002py1b8o2clmi9",
+      "createdAt": "2024-05-22T18:16:18.238Z",
+      "updatedAt": "2024-05-22T18:17:29.248Z",
+      "projectId": "clwi5aw5a0001py1byqlgs7sa",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "bvfej6gTUQqqsMRwFz2Skv": {
+          "name": "bvfej6gTUQqqsMRwFz2Skv",
+          "type": "string",
+          "input": "i12iz4n",
+          "order": 1
+        },
+        "mg17TkjUxWWmU7PKmBpY5d": {
+          "name": "mg17TkjUxWWmU7PKmBpY5d",
+          "type": "string",
+          "input": "internationalization",
           "order": 0
         }
       },
@@ -22179,34 +22357,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar subsets = function (nums) {\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (start) => {\n    result.push([...stack]);\n\n    for (let i = start; i < nums.length; i++) {\n      nums.setColor(i, \"green\");\n\n      stack.push(nums[i]);\n      backtrack(i + 1);\n      stack.pop();\n\n      nums.setColor(i, null);\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn subsets;\n",
-      "pythonCode": null,
-      "order": 1
-    },
-    "clomy9zqo0003o40fmdnaeuhg": {
-      "id": "clomy9zqo0003o40fmdnaeuhg",
-      "createdAt": "2023-11-06T13:40:51.118Z",
-      "updatedAt": "2023-11-06T16:48:46.184Z",
-      "projectId": "clomy9zqo0001o40frkuluvsu",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": "O(N * N^2)",
-      "spaceComplexity": "O(N)",
-      "description": "",
-      "code": "/**\n * @param {string} s\n * @return {string[][]}\n */\nvar partition = function (s) {\n  const isPalindrome = (left, right) => {\n    while (left < right) {\n      if (s[left++] !== s[right--]) return false;\n    }\n\n    return true;\n  };\n\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (i) => {\n    if (i === s.length) {\n      result.push([...stack]);\n      return;\n    }\n    s.setColor(i, \"green\");\n\n    for (let j = i; j < s.length; j++) {\n      if (isPalindrome(i, j)) {\n        s.setColor(j, \"cyan\");\n        stack.push(s.slice(i, j + 1));\n        backtrack(j + 1);\n        stack.pop();\n        s.setColor(j, null);\n      }\n    }\n\n    s.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn partition;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clon81vmi0001mp0g7t3envq8": {
-      "id": "clon81vmi0001mp0g7t3envq8",
-      "createdAt": "2023-11-06T18:14:28.696Z",
-      "updatedAt": "2023-11-06T18:19:41.806Z",
-      "projectId": "clomy9zqo0001o40frkuluvsu",
-      "title": "Solution 2",
-      "slug": "solution-2",
-      "timeComplexity": "O(N * N^2)",
-      "spaceComplexity": "O(N)",
-      "description": "",
-      "code": "/**\n * @param {string} s\n * @return {string[][]}\n */\nvar partition = function (s) {\n  const result = new Array();\n  const stack = new Array();\n  const dp = Array.from(\n    { length: s.length },\n    (_, index) =>\n      Array.from({ length: s.length }, () => undefined, null, {\n        parentName: \"dp\",\n        index,\n        colorMap: {\n          true: \"green\",\n        },\n      }),\n    null,\n    { matrixName: \"dp\" },\n  );\n\n  const backtrack = (i) => {\n    if (i === s.length) {\n      result.push([...stack]);\n      return;\n    }\n    s.setColor(i, \"green\");\n\n    for (let j = i; j < s.length; j++) {\n      if (s[i] === s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {\n        dp[i][j] = true;\n        s.setColor(j, \"cyan\");\n        stack.push(s.slice(i, j + 1));\n        backtrack(j + 1);\n        stack.pop();\n        s.setColor(j, null);\n      }\n    }\n\n    s.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn partition;\n",
       "pythonCode": null,
       "order": 1
     },
@@ -25346,6 +25496,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clon81vmi0001mp0g7t3envq8": {
+      "id": "clon81vmi0001mp0g7t3envq8",
+      "createdAt": "2023-11-06T18:14:28.696Z",
+      "updatedAt": "2024-05-22T16:12:51.221Z",
+      "projectId": "clomy9zqo0001o40frkuluvsu",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": "O(N * N^2)",
+      "spaceComplexity": "O(N)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {string[][]}\n */\nvar partition = function (s) {\n  const n = s.length;\n  const result = new Array();\n  const stack = new Array();\n\n  const dp = Array.from({ length: n }, () => {\n    const arr = new Array(n);\n    arr.setColorMap({ true: \"green\" });\n    return arr;\n  });\n\n  const backtrack = (i) => {\n    if (i === s.length) {\n      result.push([...stack]);\n      return;\n    }\n    s.setColor(i, \"green\");\n\n    for (let j = i; j < s.length; j++) {\n      if (s[i] === s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {\n        dp[i][j] = true;\n        s.setColor(j, \"cyan\");\n        stack.push(s.slice(i, j + 1));\n        backtrack(j + 1);\n        stack.pop();\n        s.setColor(j, null);\n      }\n    }\n\n    s.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn partition;\n",
+      "pythonCode": null,
+      "order": 1
+    },
     "cluzpw4rf00033iiyhhepe72h": {
       "id": "cluzpw4rf00033iiyhhepe72h",
       "createdAt": "2024-04-14T16:05:21.817Z",
@@ -25668,20 +25832,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clqnr9ufv0003117ffpv5ipk9": {
-      "id": "clqnr9ufv0003117ffpv5ipk9",
-      "createdAt": "2023-12-27T12:31:57.787Z",
-      "updatedAt": "2024-05-19T16:44:31.293Z",
-      "projectId": "clqnr9ufv0001117f8mtfowrm",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nvar coinChange = function (coins, amount) {\n  if (amount === 0) return 0;\n\n  const dp = new Array(amount + 1).fill(Infinity);\n  dp[0] = 0;\n\n  for (let i = 1; i <= amount; i++) {\n    for (let j = 0; j < coins.length; j++) {\n      dp.setColor(i, \"green\");\n      if (coins[j] <= i) {\n        dp.setColor(i - coins[j], \"cyan\");\n        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);\n        dp.setColor(i - coins[j], null);\n      }\n    }\n  }\n\n  if (!Number.isFinite(dp[amount])) return -1;\n\n  return dp[amount];\n};\n\nreturn coinChange;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clwf7azip0001vwvsnimiqvgv": {
       "id": "clwf7azip0001vwvsnimiqvgv",
       "createdAt": "2024-05-20T16:49:03.291Z",
@@ -25695,6 +25845,34 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar subsetXORSum = function (nums) {\n  const n = nums.length;\n\n  const backtrack = (i, currXor) => {\n    if (i === n) {\n      return currXor;\n    }\n\n    nums.setColor(i, \"green\");\n    const withNum = backtrack(i + 1, currXor ^ nums[i]);\n    nums.setColor(i, \"cyan\");\n\n    const withoutNum = backtrack(i + 1, currXor);\n    nums.setColor(i, null);\n\n    return withNum + withoutNum;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn subsetXORSum;\n",
       "pythonCode": null,
       "order": 2
+    },
+    "clqnr9ufv0003117ffpv5ipk9": {
+      "id": "clqnr9ufv0003117ffpv5ipk9",
+      "createdAt": "2023-12-27T12:31:57.787Z",
+      "updatedAt": "2024-05-22T09:18:43.654Z",
+      "projectId": "clqnr9ufv0001117f8mtfowrm",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nvar coinChange = function (coins, amount) {\n  if (amount === 0) return 0;\n\n  const dp = new Array(amount + 1).fill(Infinity);\n  dp[0] = 0;\n\n  for (let i = 1; i <= amount; i++) {\n    for (let j = 0; j < coins.length; j++) {\n      dp.setColor(i, \"green\");\n      if (coins[j] <= i) {\n        dp.setColor(i - coins[j], \"cyan\");\n        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);\n        dp.setColor(i - coins[j], null);\n      }\n    }\n  }\n\n  if (!Number.isFinite(dp[amount])) return -1;\n\n  return dp[amount];\n};\n\nreturn coinChange;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clomy9zqo0003o40fmdnaeuhg": {
+      "id": "clomy9zqo0003o40fmdnaeuhg",
+      "createdAt": "2023-11-06T13:40:51.118Z",
+      "updatedAt": "2024-05-22T09:22:56.024Z",
+      "projectId": "clomy9zqo0001o40frkuluvsu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": "O(N * N^2)",
+      "spaceComplexity": "O(N)",
+      "description": "",
+      "code": "/**\n * @param {string} s\n * @return {string[][]}\n */\nvar partition = function (s) {\n  const isPalindrome = (left, right) => {\n    while (left < right) {\n      if (s[left++] !== s[right--]) return false;\n    }\n\n    return true;\n  };\n\n  const result = new Array();\n  const stack = new Array();\n\n  const backtrack = (i) => {\n    if (i === s.length) {\n      result.push([...stack]);\n      return;\n    }\n    s.setColor(i, \"green\");\n\n    for (let j = i; j < s.length; j++) {\n      if (isPalindrome(i, j)) {\n        s.setColor(j, \"cyan\");\n        stack.push(s.slice(i, j + 1));\n        backtrack(j + 1);\n        stack.pop();\n        s.setColor(j, null);\n      }\n    }\n\n    s.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn partition;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clle3n8hq0003l508fj2fwz3u": {
       "id": "clle3n8hq0003l508fj2fwz3u",
@@ -25724,6 +25902,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clwi5aw5a0003py1b5n2s28gl": {
+      "id": "clwi5aw5a0003py1b5n2s28gl",
+      "createdAt": "2024-05-22T18:16:18.238Z",
+      "updatedAt": "2024-05-22T18:18:26.715Z",
+      "projectId": "clwi5aw5a0001py1byqlgs7sa",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} word\n * @param {string} abbr\n * @return {boolean}\n */\nvar validWordAbbreviation = function (word, abbr) {\n  let i = 0;\n  let j = 0;\n\n  let len = 0;\n  for (j; j < abbr.length && i < word.length; j++) {\n    abbr.setColor(j, \"green\");\n    if (isDigit(abbr[j])) {\n      if (!len && abbr[j] === \"0\") return false;\n\n      len *= 10;\n      len += +abbr[j];\n    } else {\n      if (len) {\n        i += len;\n        len = 0;\n      }\n      if (word[i] !== abbr[j]) return false;\n      word.setColor(i, \"green\");\n      i++;\n    }\n  }\n\n  if (i + len !== word.length || j !== abbr.length) return false;\n\n  return true;\n};\n\nconst isDigit = (char) => char >= \"0\" && char <= \"9\";\n\nreturn validWordAbbreviation;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clvuvgn160001j4tq7iikkyd0": {
       "id": "clvuvgn160001j4tq7iikkyd0",
       "createdAt": "2024-05-06T11:22:08.140Z",
@@ -25737,6 +25929,20 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val === k) {\n      queue.removeTail();\n    }\n\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    if (i >= k - 1) {\n      result.push(nums[queue.tail.val]);\n    }\n  }\n\n  return result;\n};\n\nclass MaxQueue extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clwi0xab70003oxn509ylbkry": {
+      "id": "clwi0xab70003oxn509ylbkry",
+      "createdAt": "2024-05-22T16:13:44.947Z",
+      "updatedAt": "2024-05-22T18:15:45.283Z",
+      "projectId": "clwi0xab70001oxn5xwgieuwi",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} pattern\n * @param {string} s\n * @return {boolean}\n */\nvar wordPatternMatch = function (pattern, s) {\n  const n = pattern.length;\n  const map = new Map();\n  const used = new Set();\n\n  const isMatching = (str, start) => {\n    for (let i = 0; i < str.length; i++) {\n      if (str[i] !== s[start + i]) return false;\n    }\n\n    return true;\n  };\n\n  const backtrack = (i, j) => {\n    if (i === n && j === s.length) return true;\n    if (i >= n || j >= s.length) return false;\n\n    pattern.setColor(i, \"green\");\n    s.setColor(j, \"green\");\n    const src = pattern[i];\n    if (map.has(src)) {\n      const mapped = map.get(src);\n      if (isMatching(mapped, j)) {\n        return backtrack(i + 1, j + mapped.length);\n      }\n    } else {\n      for (let k = j; k < s.length - (n - 1 - i); k++) {\n        const mapped = s.slice(j, k + 1);\n        if (used.has(mapped)) continue;\n        used.add(mapped);\n        map.set(src, mapped);\n        if (backtrack(i + 1, j + mapped.length)) return true;\n        map.delete(src, mapped);\n        used.delete(mapped);\n      }\n    }\n\n    pattern.setColor(i, null);\n    s.setColor(j, null);\n    return false;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn wordPatternMatch;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
