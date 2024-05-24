@@ -4465,6 +4465,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwkpbgx9000199bedn88tkm9": {
+      "id": "clwkpbgx9000199bedn88tkm9",
+      "createdAt": "2024-05-24T13:12:09.838Z",
+      "updatedAt": "2024-05-24T13:12:09.838Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Score Words Formed by Letters",
+      "category": "BACKTRACKING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/maximum-score-words-formed-by-letters",
+      "slug": "maximum-score-words-formed-by-letters",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19249,6 +19263,37 @@
         }
       },
       "description": null
+    },
+    "clwkpbgx9000299be4qbm5ync": {
+      "id": "clwkpbgx9000299be4qbm5ync",
+      "createdAt": "2024-05-24T13:12:09.838Z",
+      "updatedAt": "2024-05-24T13:13:12.618Z",
+      "projectId": "clwkpbgx9000199bedn88tkm9",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "7dNGtX7jvWd1xg4Eu9KeZo": {
+          "name": "7dNGtX7jvWd1xg4Eu9KeZo",
+          "type": "array",
+          "input": "[\"dog\",\"cat\",\"dad\",\"good\"]",
+          "order": 0
+        },
+        "kDQCentGtCcgnyJGqwuTfC": {
+          "name": "kDQCentGtCcgnyJGqwuTfC",
+          "type": "array",
+          "input": "[1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]",
+          "order": 2
+        },
+        "ofMQ4x4KNLYb2DHc3CD7By": {
+          "name": "ofMQ4x4KNLYb2DHc3CD7By",
+          "type": "array",
+          "input": "[\"a\",\"a\",\"c\",\"d\",\"d\",\"d\",\"g\",\"o\",\"o\"]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -25804,20 +25849,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clwf7rewc0001zmyljea4o1o1": {
-      "id": "clwf7rewc0001zmyljea4o1o1",
-      "createdAt": "2024-05-20T17:01:49.738Z",
-      "updatedAt": "2024-05-20T17:04:04.878Z",
-      "projectId": "clwf6ixmr0001wl8rdq1ltd8h",
-      "title": "Solution 4",
-      "slug": "solution-4",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar subsetXORSum = function (nums) {\n  const n = nums.length;\n\n  const subsets = new Array();\n  const current = new Array();\n  const backtrack = (i) => {\n    subsets.push([...current]);\n    nums.setColor(i, \"cyan\");\n\n    for (let j = i; j < n; j++) {\n        nums.setColor(j, \"green\");\n        current.push(nums[j]);\n        backtrack(j + 1);\n        current.pop();\n        nums.setColor(j, \"cyan\");\n    }\n\n    nums.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  let result = 0;\n  for (const subset of subsets) {\n    let xorTotal = 0;\n    for (const num of subset) {\n      xorTotal ^= num;\n    }\n    result += xorTotal;\n  }\n\n  return result;\n};\n\nreturn subsetXORSum;\n",
-      "pythonCode": null,
-      "order": 3
-    },
     "clwd9ur5t0003sm1wlzognkk2": {
       "id": "clwd9ur5t0003sm1wlzognkk2",
       "createdAt": "2024-05-19T08:24:52.481Z",
@@ -25859,6 +25890,20 @@
       "code": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nvar coinChange = function (coins, amount) {\n  if (amount === 0) return 0;\n\n  const dp = new Array(amount + 1).fill(Infinity);\n  dp[0] = 0;\n\n  for (let i = 1; i <= amount; i++) {\n    for (let j = 0; j < coins.length; j++) {\n      dp.setColor(i, \"green\");\n      if (coins[j] <= i) {\n        dp.setColor(i - coins[j], \"cyan\");\n        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);\n        dp.setColor(i - coins[j], null);\n      }\n    }\n  }\n\n  if (!Number.isFinite(dp[amount])) return -1;\n\n  return dp[amount];\n};\n\nreturn coinChange;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clwf7rewc0001zmyljea4o1o1": {
+      "id": "clwf7rewc0001zmyljea4o1o1",
+      "createdAt": "2024-05-20T17:01:49.738Z",
+      "updatedAt": "2024-05-24T13:08:45.651Z",
+      "projectId": "clwf6ixmr0001wl8rdq1ltd8h",
+      "title": "Solution 4",
+      "slug": "solution-4",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar subsetXORSum = function (nums) {\n  const n = nums.length;\n\n  const subsets = new Array();\n  const current = new Array();\n  const backtrack = (i) => {\n    subsets.push([...current]);\n    nums.setColor(i, \"cyan\");\n\n    for (let j = i; j < n; j++) {\n        nums.setColor(j, \"green\");\n        current.push(nums[j]);\n        backtrack(j + 1);\n        current.pop();\n        nums.setColor(j, \"cyan\");\n    }\n\n    nums.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  let result = 0;\n  for (const subset of subsets) {\n    let xorTotal = 0;\n    for (const num of subset) {\n      xorTotal ^= num;\n    }\n    result += xorTotal;\n  }\n\n  return result;\n};\n\nreturn subsetXORSum;\n",
+      "pythonCode": null,
+      "order": 3
     },
     "clomy9zqo0003o40fmdnaeuhg": {
       "id": "clomy9zqo0003o40fmdnaeuhg",
@@ -25941,6 +25986,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} pattern\n * @param {string} s\n * @return {boolean}\n */\nvar wordPatternMatch = function (pattern, s) {\n  const n = pattern.length;\n  const map = new Map();\n  const used = new Set();\n\n  const isMatching = (str, start) => {\n    for (let i = 0; i < str.length; i++) {\n      if (str[i] !== s[start + i]) return false;\n    }\n\n    return true;\n  };\n\n  const backtrack = (i, j) => {\n    if (i === n && j === s.length) return true;\n    if (i >= n || j >= s.length) return false;\n\n    pattern.setColor(i, \"green\");\n    s.setColor(j, \"green\");\n    const src = pattern[i];\n    if (map.has(src)) {\n      const mapped = map.get(src);\n      if (isMatching(mapped, j)) {\n        return backtrack(i + 1, j + mapped.length);\n      }\n    } else {\n      for (let k = j; k < s.length - (n - 1 - i); k++) {\n        const mapped = s.slice(j, k + 1);\n        if (used.has(mapped)) continue;\n        used.add(mapped);\n        map.set(src, mapped);\n        if (backtrack(i + 1, j + mapped.length)) return true;\n        map.delete(src, mapped);\n        used.delete(mapped);\n      }\n    }\n\n    pattern.setColor(i, null);\n    s.setColor(j, null);\n    return false;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn wordPatternMatch;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clwkpbgxa000399beunjgnz6r": {
+      "id": "clwkpbgxa000399beunjgnz6r",
+      "createdAt": "2024-05-24T13:12:09.838Z",
+      "updatedAt": "2024-05-24T13:37:02.822Z",
+      "projectId": "clwkpbgx9000199bedn88tkm9",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} words\n * @param {character[]} letters\n * @param {number[]} score\n * @return {number}\n */\nvar maxScoreWords = function (words, letters, score) {\n  const n = words.length;\n  const offset = \"a\".charCodeAt(0);\n\n  const charSets = [];\n  for (let i = 0; i < words.length; i++) {\n    const word = words[i];\n    charSets[i] = new Map();\n\n    for (let j = 0; j < word.length; j++) {\n      const code = word.charCodeAt(j) - offset;\n      charSets[i].set(code, (charSets[i].get(code) ?? 0) + 1);\n    }\n  }\n\n  const letterCounts = new Uint32Array(26);\n  for (const letter of letters) {\n    const code = letter.charCodeAt(0) - offset;\n    letterCounts[code]++;\n  }\n\n  // console.log(\"initial: \", {letterCounts, charSets});\n\n  const dfs = (i) => {\n    if (i === n) {\n      return 0;\n    }\n    words.setColor(i, \"green\");\n\n    const word = words[i];\n    const freqMap = charSets[i];\n\n    const took = new globalThis.Uint32Array(26);\n    let curScore = 0;\n    let isAble = true;\n    for (const [code, count] of freqMap) {\n      if (letterCounts[code] < count) {\n        isAble = false;\n        break;\n      }\n\n      const charScore = score[code];\n      curScore += charScore * count;\n      letterCounts[code] -= count;\n      took[code] = count;\n    }\n\n    if (isAble) {\n      // console.log(word, \" score is \", curScore);\n      curScore += dfs(i + 1);\n    } else {\n      // console.log(word, \"is not buildable\");\n      curScore = 0;\n    }\n\n    // backtrack\n    for (let i = 0; i < 26; i++) {\n      letterCounts[i] += took[i];\n    }\n    // console.log(word, \" restored: \", {took, letterCounts});\n\n    words.setColor(i, null);\n\n    curScore = Math.max(curScore, dfs(i + 1));\n\n    return curScore;\n  };\n\n  return dfs(0);\n};\n\nreturn maxScoreWords;\n",
       "pythonCode": null,
       "order": 0
     }
