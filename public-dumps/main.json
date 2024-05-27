@@ -4479,6 +4479,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwngl41o00012cxhvc6fsl0i": {
+      "id": "clwngl41o00012cxhvc6fsl0i",
+      "createdAt": "2024-05-26T11:31:01.692Z",
+      "updatedAt": "2024-05-26T11:31:01.692Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Student Attendance Record II",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/student-attendance-record-ii",
+      "slug": "student-attendance-record-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clwnknuqf0001yfs5rgclhue4": {
+      "id": "clwnknuqf0001yfs5rgclhue4",
+      "createdAt": "2024-05-26T13:25:08.054Z",
+      "updatedAt": "2024-05-26T13:25:08.054Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list",
+      "slug": "convert-binary-search-tree-to-sorted-doubly-linked-list",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clwp1upny0001wdoc8fp9zyme": {
+      "id": "clwp1upny0001wdoc8fp9zyme",
+      "createdAt": "2024-05-27T14:14:07.725Z",
+      "updatedAt": "2024-05-27T14:14:07.725Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Special Array With X Elements Greater Than or Equal X",
+      "category": "BINARY_SEARCH",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x",
+      "slug": "special-array-with-x-elements-greater-than-or-equal-x",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19239,6 +19281,25 @@
       },
       "description": null
     },
+    "clwngm9wk00052cxhaef8lele": {
+      "id": "clwngm9wk00052cxhaef8lele",
+      "createdAt": "2024-05-26T11:31:55.940Z",
+      "updatedAt": "2024-05-26T11:34:00.248Z",
+      "projectId": "clwngl41o00012cxhvc6fsl0i",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "cYA7ghUsiHtB3fDW51HTLT": {
+          "name": "cYA7ghUsiHtB3fDW51HTLT",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clwi5aw5a0002py1b8o2clmi9": {
       "id": "clwi5aw5a0002py1b8o2clmi9",
       "createdAt": "2024-05-22T18:16:18.238Z",
@@ -19259,6 +19320,44 @@
           "name": "mg17TkjUxWWmU7PKmBpY5d",
           "type": "string",
           "input": "internationalization",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwnknuqi0002yfs5gipuy30x": {
+      "id": "clwnknuqi0002yfs5gipuy30x",
+      "createdAt": "2024-05-26T13:25:08.054Z",
+      "updatedAt": "2024-05-26T13:25:39.252Z",
+      "projectId": "clwnknuqf0001yfs5rgclhue4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[4,2,5,1,3]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clwp1upo10002wdoclewr2g1f": {
+      "id": "clwp1upo10002wdoclewr2g1f",
+      "createdAt": "2024-05-27T14:14:07.725Z",
+      "updatedAt": "2024-05-27T14:14:31.810Z",
+      "projectId": "clwp1upny0001wdoc8fp9zyme",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "kVjQyKMUzHuz2ZBjrRPxFL": {
+          "name": "kVjQyKMUzHuz2ZBjrRPxFL",
+          "type": "array",
+          "input": "[0,4,3,0,4]",
           "order": 0
         }
       },
@@ -19291,6 +19390,25 @@
           "type": "array",
           "input": "[\"a\",\"a\",\"c\",\"d\",\"d\",\"d\",\"g\",\"o\",\"o\"]",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "clwngl41o00022cxhh42y779h": {
+      "id": "clwngl41o00022cxhh42y779h",
+      "createdAt": "2024-05-26T11:31:01.692Z",
+      "updatedAt": "2024-05-26T11:31:54.492Z",
+      "projectId": "clwngl41o00012cxhvc6fsl0i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "cYA7ghUsiHtB3fDW51HTLT": {
+          "name": "cYA7ghUsiHtB3fDW51HTLT",
+          "type": "number",
+          "input": "2",
+          "order": 0
         }
       },
       "description": null
@@ -25950,7 +26068,7 @@
     "clwi5aw5a0003py1b5n2s28gl": {
       "id": "clwi5aw5a0003py1b5n2s28gl",
       "createdAt": "2024-05-22T18:16:18.238Z",
-      "updatedAt": "2024-05-22T18:18:26.715Z",
+      "updatedAt": "2024-05-26T11:30:49.078Z",
       "projectId": "clwi5aw5a0001py1byqlgs7sa",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -25958,6 +26076,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} word\n * @param {string} abbr\n * @return {boolean}\n */\nvar validWordAbbreviation = function (word, abbr) {\n  let i = 0;\n  let j = 0;\n\n  let len = 0;\n  for (j; j < abbr.length && i < word.length; j++) {\n    abbr.setColor(j, \"green\");\n    if (isDigit(abbr[j])) {\n      if (!len && abbr[j] === \"0\") return false;\n\n      len *= 10;\n      len += +abbr[j];\n    } else {\n      if (len) {\n        i += len;\n        len = 0;\n      }\n      if (word[i] !== abbr[j]) return false;\n      word.setColor(i, \"green\");\n      i++;\n    }\n  }\n\n  if (i + len !== word.length || j !== abbr.length) return false;\n\n  return true;\n};\n\nconst isDigit = (char) => char >= \"0\" && char <= \"9\";\n\nreturn validWordAbbreviation;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clwngl41o00032cxhhaaktzvl": {
+      "id": "clwngl41o00032cxhhaaktzvl",
+      "createdAt": "2024-05-26T11:31:01.692Z",
+      "updatedAt": "2024-05-26T11:42:29.152Z",
+      "projectId": "clwngl41o00012cxhvc6fsl0i",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {number}\n */\nvar checkRecord = function (n) {\n  const MOD = 1e9 + 7;\n\n  const memo = Array.from({ length: n + 1 }, () =>\n    Array.from({ length: 2 }, () => new Array(3).fill(-1)),\n  );\n\n  const dfs = (i, absences, consecutiveLates) => {\n    if (absences > 1 || consecutiveLates > 2) {\n      return 0;\n    }\n    if (i === n) {\n      return 1;\n    }\n    if (memo[i][absences][consecutiveLates] !== -1) {\n      memo[i][absences].setColor(consecutiveLates, \"green\");\n      return memo[i][absences][consecutiveLates];\n    }\n\n    let count = 0;\n    // Present\n    count = dfs(i + 1, absences, 0);\n\n    // Absent\n    count = (count + dfs(i + 1, absences + 1, 0)) % MOD;\n\n    // Late\n    count = (count + dfs(i + 1, absences, consecutiveLates + 1)) % MOD;\n\n    memo[i][absences][consecutiveLates] = count;\n    return count;\n  };\n\n  return dfs(0, 0, 0);\n};\n\nreturn checkRecord;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clwnknuqi0003yfs5h1ez87xa": {
+      "id": "clwnknuqi0003yfs5h1ez87xa",
+      "createdAt": "2024-05-26T13:25:08.054Z",
+      "updatedAt": "2024-05-26T14:53:03.487Z",
+      "projectId": "clwnknuqf0001yfs5rgclhue4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * // Definition for a Node.\n * function Node(val, left, right) {\n *      this.val = val;\n *      this.left = left;\n *      this.right = right;\n *  };\n */\n\n/**\n * @param {Node} root\n * @return {Node}\n */\nvar treeToDoublyList = function (root) {\n  if (!root) return null;\n\n  const arr = [];\n\n  const dfs = (node) => {\n    if (!node) return;\n\n    dfs(node.left);\n    arr.push(node);\n    dfs(node.right);\n  };\n  dfs(root);\n\n  const count = arr.length;\n  let head = arr[0];\n  head.left = null;\n\n  for (let i = 0; i < count; i++) {\n    const node = arr[i];\n    const nextNode = i < count - 1 ? arr[i + 1] : head;\n    node.right = nextNode;\n    nextNode.left = node;\n  }\n\n  return head;\n};\n\nreturn treeToDoublyList;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -25975,6 +26121,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "clwp1upo10003wdocl045qmgs": {
+      "id": "clwp1upo10003wdocl045qmgs",
+      "createdAt": "2024-05-27T14:14:07.725Z",
+      "updatedAt": "2024-05-27T14:15:39.802Z",
+      "projectId": "clwp1upny0001wdoc8fp9zyme",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar specialArray = function (nums) {\n  const n = nums.length;\n  nums.sort((a, b) => a - b);\n\n  if (nums[0] >= n) return n;\n\n  let left = 0;\n  let right = n;\n  while (left <= right) {\n    const mid = left + ((right - left) >> 1);\n    console.log(mid);\n\n    const leftBound = bisectLeft(nums, mid);\n    const count = n - leftBound;\n\n    if (mid > 0 && leftBound < n && mid === count) return mid;\n\n    if (mid < count) {\n      left = mid + 1;\n    } else {\n      right = mid - 1;\n    }\n  }\n\n  return -1;\n};\n\nfunction bisectLeft(arr, target) {\n  let left = 0;\n  let right = arr.length;\n\n  while (left < right) {\n    const mid = left + ((right - left) >> 1);\n    arr.setColor(mid, \"green\");\n\n    if (arr[mid] >= target) {\n      right = mid;\n    } else {\n      left = mid + 1;\n    }\n\n    arr.setColor(mid, null);\n  }\n\n  return right;\n}\n\nreturn specialArray;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clwi0xab70003oxn509ylbkry": {
       "id": "clwi0xab70003oxn509ylbkry",
       "createdAt": "2024-05-22T16:13:44.947Z",
@@ -25989,10 +26149,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "clwp221s10005wdocmevj0nsy": {
+      "id": "clwp221s10005wdocmevj0nsy",
+      "createdAt": "2024-05-27T14:19:50.018Z",
+      "updatedAt": "2024-05-27T14:21:26.990Z",
+      "projectId": "clwp1upny0001wdoc8fp9zyme",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar specialArray = function (nums) {\n  const n = nums.length;\n  const freqMap = new Uint32Array(n + 1);\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"cyan\");\n    freqMap[Math.min(n, nums[i])]++;\n  }\n\n  let countAtRight = 0;\n  for (let i = n; i >= 1; i--) {\n    freqMap.setColor(i, \"green\");\n    countAtRight += freqMap[i];\n\n    if (i === countAtRight) return i;\n  }\n\n  return -1;\n};\n\nreturn specialArray;\n",
+      "pythonCode": null,
+      "order": 1
+    },
     "clwkpbgxa000399beunjgnz6r": {
       "id": "clwkpbgxa000399beunjgnz6r",
       "createdAt": "2024-05-24T13:12:09.838Z",
-      "updatedAt": "2024-05-24T13:37:02.822Z",
+      "updatedAt": "2024-05-27T07:44:34.523Z",
       "projectId": "clwkpbgx9000199bedn88tkm9",
       "title": "Solution 1",
       "slug": "solution-1",
