@@ -4535,6 +4535,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwrm7dap0001bhkzylyf4c6m": {
+      "id": "clwrm7dap0001bhkzylyf4c6m",
+      "createdAt": "2024-05-29T09:19:22.897Z",
+      "updatedAt": "2024-05-29T09:19:22.897Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Steps to Reduce a Number in Binary Representation to One",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one",
+      "slug": "number-of-steps-to-reduce-a-number-in-binary-representation-to-one",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19470,6 +19484,25 @@
       },
       "description": null
     },
+    "clwrm7dap0002bhkz8xouyt0u": {
+      "id": "clwrm7dap0002bhkz8xouyt0u",
+      "createdAt": "2024-05-29T09:19:22.897Z",
+      "updatedAt": "2024-05-29T09:21:55.263Z",
+      "projectId": "clwrm7dap0001bhkzylyf4c6m",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "tpwbbNeZFfTUdaJ6QTMaoW": {
+          "name": "tpwbbNeZFfTUdaJ6QTMaoW",
+          "type": "string",
+          "input": "1101",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clwngl41o00022cxhh42y779h": {
       "id": "clwngl41o00022cxhh42y779h",
       "createdAt": "2024-05-26T11:31:01.692Z",
@@ -24811,6 +24844,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "clwrm7dap0003bhkzljehus9t": {
+      "id": "clwrm7dap0003bhkzljehus9t",
+      "createdAt": "2024-05-29T09:19:22.897Z",
+      "updatedAt": "2024-05-29T09:23:56.244Z",
+      "projectId": "clwrm7dap0001bhkzylyf4c6m",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numSteps = function (s) {\n  let steps = 0;\n  const arr = new Array(s.length);\n  for (let i = s.length - 1; i >= 0; i--) {\n    arr[s.length - 1 - i] = +s[i];\n  }\n\n  for (let i = 0; i < arr.length - 1; i++) {\n    if (arr[i] === 0) {\n      steps++;\n    } else {\n      let add = 1;\n      for (let j = i; j < arr.length && add; j++) {\n        let next = arr[j] + add;\n        add = 0;\n        if (next > 1) {\n          add = 1;\n          next = 0;\n        }\n        arr[j] = next;\n      }\n      if (add) {\n        arr.push(1);\n      }\n\n      steps += 2;\n    }\n  }\n\n  // console.log({arr});\n\n  return steps;\n};\n\nreturn numSteps;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluzt0a9b0003gt0wct5aij78": {
       "id": "cluzt0a9b0003gt0wct5aij78",
       "createdAt": "2024-04-14T17:32:34.412Z",
@@ -24866,6 +24913,20 @@
       "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar find132pattern = function (nums) {\n  const stack = new Array();\n  const v = new Object();\n  v.middle = -Infinity;\n\n  for (let i = nums.length - 1; i >= 0; i--) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    if (num < v.middle) {\n      return true;\n    }\n    while (stack.at(-1) < num) {\n      v.middle = stack.pop();\n    }\n    stack.push(num);\n  }\n\n  return false;\n};\n\nreturn find132pattern;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clwrmx2dr000110f4qma3yka3": {
+      "id": "clwrmx2dr000110f4qma3yka3",
+      "createdAt": "2024-05-29T09:39:21.789Z",
+      "updatedAt": "2024-05-29T09:40:03.769Z",
+      "projectId": "clwrm7dap0001bhkzylyf4c6m",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numSteps = function (s) {\n  const n = s.length;\n\n  const v = new Object();\n  v.steps = 0;\n\n  v.carry = 0;\n  for (let i = n - 1; i > 0; i--) {\n    s.setColor(i, \"green\");\n    v.steps++;\n    if ((+s[i] + v.carry) % 2) {\n      v.steps++;\n      v.carry = 1;\n    }\n  }\n\n  return v.steps + v.carry;\n};\n\nreturn numSteps;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "cluzteu0o000311c130z2vqu3": {
       "id": "cluzteu0o000311c130z2vqu3",
@@ -26242,7 +26303,7 @@
     "clwp221s10005wdocmevj0nsy": {
       "id": "clwp221s10005wdocmevj0nsy",
       "createdAt": "2024-05-27T14:19:50.018Z",
-      "updatedAt": "2024-05-27T14:21:26.990Z",
+      "updatedAt": "2024-05-29T09:19:02.505Z",
       "projectId": "clwp1upny0001wdoc8fp9zyme",
       "title": "Solution 2",
       "slug": "solution-2",
