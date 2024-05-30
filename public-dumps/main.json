@@ -4549,6 +4549,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clwtb9htf0001y0da9aavti5z": {
+      "id": "clwtb9htf0001y0da9aavti5z",
+      "createdAt": "2024-05-30T13:48:38.643Z",
+      "updatedAt": "2024-05-30T13:48:38.643Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Add to Make Parentheses Valid",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid",
+      "slug": "minimum-add-to-make-parentheses-valid",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19521,6 +19535,25 @@
         }
       },
       "description": null
+    },
+    "clwtb9htf0002y0da8tjdghev": {
+      "id": "clwtb9htf0002y0da8tjdghev",
+      "createdAt": "2024-05-30T13:48:38.643Z",
+      "updatedAt": "2024-05-30T13:51:07.461Z",
+      "projectId": "clwtb9htf0001y0da9aavti5z",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "()))((",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -24914,19 +24947,19 @@
       "pythonCode": null,
       "order": 0
     },
-    "clwrmx2dr000110f4qma3yka3": {
-      "id": "clwrmx2dr000110f4qma3yka3",
-      "createdAt": "2024-05-29T09:39:21.789Z",
-      "updatedAt": "2024-05-29T09:40:03.769Z",
-      "projectId": "clwrm7dap0001bhkzylyf4c6m",
-      "title": "Solution 2",
-      "slug": "solution-2",
+    "clwtb9htf0003y0da84ywea75": {
+      "id": "clwtb9htf0003y0da84ywea75",
+      "createdAt": "2024-05-30T13:48:38.643Z",
+      "updatedAt": "2024-05-30T13:51:55.135Z",
+      "projectId": "clwtb9htf0001y0da9aavti5z",
+      "title": "Solution 1",
+      "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numSteps = function (s) {\n  const n = s.length;\n\n  const v = new Object();\n  v.steps = 0;\n\n  v.carry = 0;\n  for (let i = n - 1; i > 0; i--) {\n    s.setColor(i, \"green\");\n    v.steps++;\n    if ((+s[i] + v.carry) % 2) {\n      v.steps++;\n      v.carry = 1;\n    }\n  }\n\n  return v.steps + v.carry;\n};\n\nreturn numSteps;\n",
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar minAddToMakeValid = function (s) {\n  const n = s.length;\n\n  const v = new Object();\n  v.balance = 0;\n  v.fails = 0;\n\n  for (let i = 0; i < n; i++) {\n    s.setColor(i, \"green\");\n    if (s[i] === \"(\") {\n      v.balance++;\n    } else {\n      v.balance--;\n      if (v.balance < 0) {\n        v.fails++;\n        v.balance = 0;\n      }\n    }\n  }\n\n  return v.fails + v.balance;\n};\n\nreturn minAddToMakeValid;\n",
       "pythonCode": null,
-      "order": 1
+      "order": 0
     },
     "cluzteu0o000311c130z2vqu3": {
       "id": "cluzteu0o000311c130z2vqu3",
@@ -24941,6 +24974,20 @@
       "code": "/**\n *  Card: one single card\n    Deck: a deck of cards\n    Player: abstract class representing players\n    BlackjackPlayer: specific player\n    Dealer: other kind of player\n    Move: a move made by one of the players\n    BlackjackGame: embeds game logic\n */\n\nclass Card {\n  \n}\n\nfunction run() {\n\n}\n\nreturn run;",
       "pythonCode": null,
       "order": 0
+    },
+    "clwrmx2dr000110f4qma3yka3": {
+      "id": "clwrmx2dr000110f4qma3yka3",
+      "createdAt": "2024-05-29T09:39:21.789Z",
+      "updatedAt": "2024-05-30T13:47:38.916Z",
+      "projectId": "clwrm7dap0001bhkzylyf4c6m",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numSteps = function (s) {\n  const n = s.length;\n\n  const v = new Object();\n  v.steps = 0;\n\n  v.carry = 0;\n  for (let i = n - 1; i > 0; i--) {\n    s.setColor(i, \"green\");\n    v.steps++;\n    if ((+s[i] + v.carry) % 2) {\n      v.steps++;\n      v.carry = 1;\n    }\n  }\n\n  return v.steps + v.carry;\n};\n\nreturn numSteps;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clua1v09e0003xbqc07n5qimq": {
       "id": "clua1v09e0003xbqc07n5qimq",
