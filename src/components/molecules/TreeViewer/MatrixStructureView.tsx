@@ -85,16 +85,18 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
         }}
       >
         <thead>
-          {data.colHeaders ? (
-            <>
-              <th scope="col" />
-              {data.colHeaders.map((value, index) => (
-                <th key={index} scope="col">
-                  {value}
-                </th>
-              ))}
-            </>
-          ) : null}
+          <tr>
+            {data.colHeaders ? (
+              <>
+                <th scope="col" />
+                {data.colHeaders.map((value, index) => (
+                  <th key={index} scope="col">
+                    {value}
+                  </th>
+                ))}
+              </>
+            ) : null}
+          </tr>
         </thead>
         <tbody>
           {items.map((node, index) => {
