@@ -1,3 +1,10 @@
+## [1.295.2](https://github.com/mkayander/dStruct/compare/v1.295.1...v1.295.2) (2024-06-02)
+
+
+### Bug Fixes
+
+* Fix controlled Set initialization process ([bf2aa60](https://github.com/mkayander/dStruct/commit/bf2aa608e9c6e9ac262391d6e7f0aaf2e1b568f0))
+
 ## [1.295.1](https://github.com/mkayander/dStruct/compare/v1.295.0...v1.295.1) (2024-05-24)
 
 
