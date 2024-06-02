@@ -13,6 +13,7 @@ const ArrayBase = makeArrayBaseClass(Set);
 export class ControlledSet extends ArrayBase {
   private nextIndex!: number;
   private itemsMeta!: Map<any, ArrayItemData>;
+  private isInitialized?: boolean;
 
   constructor(
     value: any[] | null | undefined,
@@ -48,6 +49,10 @@ export class ControlledSet extends ArrayBase {
         value: callstack,
         enumerable: false,
       },
+      isInitialized: {
+        value: true,
+        enumerable: false,
+      },
     });
 
     if (addToCallstack) {
@@ -64,7 +69,9 @@ export class ControlledSet extends ArrayBase {
 
     super.add(value);
 
-    this.updateItem(value, this.nextIndex++, value);
+    if (this.isInitialized) {
+      this.updateItem(value, this.nextIndex++, value);
+    }
 
     return this;
   }
