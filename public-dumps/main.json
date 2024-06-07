@@ -4633,6 +4633,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clx4rjiep0001vyvmnm5js7se": {
+      "id": "clx4rjiep0001vyvmnm5js7se",
+      "createdAt": "2024-06-07T14:09:47.761Z",
+      "updatedAt": "2024-06-07T14:09:47.761Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Replace Words",
+      "category": "TRIE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/replace-words",
+      "slug": "replace-words",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19893,6 +19907,31 @@
         }
       },
       "description": null
+    },
+    "clx4rjiep0002vyvm6v5wx4mq": {
+      "id": "clx4rjiep0002vyvm6v5wx4mq",
+      "createdAt": "2024-06-07T14:09:47.761Z",
+      "updatedAt": "2024-06-07T14:16:11.051Z",
+      "projectId": "clx4rjiep0001vyvmnm5js7se",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "iu5UMdwTqUTs74MFre29SA": {
+          "name": "iu5UMdwTqUTs74MFre29SA",
+          "type": "array",
+          "input": "[\"cat\",\"bat\",\"rat\"]",
+          "order": 0
+        },
+        "m3nSL9gfMDmWHYhsR2Hr2U": {
+          "name": "m3nSL9gfMDmWHYhsR2Hr2U",
+          "type": "string",
+          "input": "the cattle was rattled by the battery",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -26213,7 +26252,7 @@
     "clwyzpfen0003o1c7hya6eq9t": {
       "id": "clwyzpfen0003o1c7hya6eq9t",
       "createdAt": "2024-06-03T13:11:43.679Z",
-      "updatedAt": "2024-06-03T13:57:51.268Z",
+      "updatedAt": "2024-06-07T14:04:26.188Z",
       "projectId": "clwyzpfen0001o1c7d1zv8f0z",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -26739,6 +26778,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} pattern\n * @param {string} s\n * @return {boolean}\n */\nvar wordPatternMatch = function (pattern, s) {\n  const n = pattern.length;\n  const map = new Map();\n  const used = new Set();\n\n  const isMatching = (str, start) => {\n    for (let i = 0; i < str.length; i++) {\n      if (str[i] !== s[start + i]) return false;\n    }\n\n    return true;\n  };\n\n  const backtrack = (i, j) => {\n    if (i === n && j === s.length) return true;\n    if (i >= n || j >= s.length) return false;\n\n    pattern.setColor(i, \"green\");\n    s.setColor(j, \"green\");\n    const src = pattern[i];\n    if (map.has(src)) {\n      const mapped = map.get(src);\n      if (isMatching(mapped, j)) {\n        return backtrack(i + 1, j + mapped.length);\n      }\n    } else {\n      for (let k = j; k < s.length - (n - 1 - i); k++) {\n        const mapped = s.slice(j, k + 1);\n        if (used.has(mapped)) continue;\n        used.add(mapped);\n        map.set(src, mapped);\n        if (backtrack(i + 1, j + mapped.length)) return true;\n        map.delete(src, mapped);\n        used.delete(mapped);\n      }\n    }\n\n    pattern.setColor(i, null);\n    s.setColor(j, null);\n    return false;\n  };\n\n  return backtrack(0, 0);\n};\n\nreturn wordPatternMatch;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clx4rjiep0003vyvmccw0argk": {
+      "id": "clx4rjiep0003vyvmccw0argk",
+      "createdAt": "2024-06-07T14:09:47.761Z",
+      "updatedAt": "2024-06-07T14:18:57.310Z",
+      "projectId": "clx4rjiep0001vyvmnm5js7se",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} dictionary\n * @param {string} sentence\n * @return {string}\n */\nvar replaceWords = function (dictionary, sentence) {\n  const words = Array.from(sentence.split(\" \"));\n  const trie = buildTrie(dictionary);\n\n  for (let i = 0; i < words.length; i++) {\n    words.setColor(i, \"cyan\");\n    const word = words[i];\n\n    let current = trie;\n    for (const char of word) {\n      if (!current[char]) break;\n      current = current[char];\n\n      if (\"index\" in current) {\n        words.setColor(i, \"green\");\n        words[i] = dictionary[current.index];\n        break;\n      }\n    }\n  }\n\n  return words.join(\" \");\n};\n\nfunction buildTrie(words) {\n  const root = new Object();\n  for (let i = 0; i < words.length; i++) {\n    words.setColor(i, \"cyan\");\n    let current = root;\n    for (const char of words[i]) {\n      current[char] ??= new Object();\n      current = current[char];\n    }\n\n    // Object.defineProperty(current, \"dIndex\", {\n    //   enumerable: false,\n    //   writable: false,\n    //   value: i,\n    // });\n    current.index = i;\n  }\n\n  return root;\n}\n\nreturn replaceWords;\n",
       "pythonCode": null,
       "order": 0
     },
