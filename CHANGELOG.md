@@ -1,3 +1,10 @@
+## [1.295.3](https://github.com/mkayander/dStruct/compare/v1.295.2...v1.295.3) (2024-06-08)
+
+
+### Bug Fixes
+
+* Wrap thead children with a <tr> tag ([a450bfb](https://github.com/mkayander/dStruct/commit/a450bfbda2dda341ce43afe514ea35c7420823c9))
+
 ## [1.295.2](https://github.com/mkayander/dStruct/compare/v1.295.1...v1.295.2) (2024-06-02)
 
 
