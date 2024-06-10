@@ -1,3 +1,10 @@
+## [1.295.4](https://github.com/mkayander/dStruct/compare/v1.295.3...v1.295.4) (2024-06-10)
+
+
+### Bug Fixes
+
+* Env types ([61d71cd](https://github.com/mkayander/dStruct/commit/61d71cd63408b4555fc3c41c446a67c5f5174553))
+
 ## [1.295.3](https://github.com/mkayander/dStruct/compare/v1.295.2...v1.295.3) (2024-06-08)
 
 
