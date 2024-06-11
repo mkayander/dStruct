@@ -4647,6 +4647,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clx6hw0xw000113tczavhvqmp": {
+      "id": "clx6hw0xw000113tczavhvqmp",
+      "createdAt": "2024-06-08T19:15:07.845Z",
+      "updatedAt": "2024-06-08T19:15:07.845Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Continuous Subarray Sum",
+      "category": "MATH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/continuous-subarray-sum",
+      "slug": "continuous-subarray-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -19932,6 +19946,81 @@
         }
       },
       "description": null
+    },
+    "clx6hw0xx000213tcngjx3dam": {
+      "id": "clx6hw0xx000213tcngjx3dam",
+      "createdAt": "2024-06-08T19:15:07.845Z",
+      "updatedAt": "2024-06-08T19:15:29.070Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "oBTg1YLUCrbFqpRF6SPK7Z": {
+          "name": "oBTg1YLUCrbFqpRF6SPK7Z",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        },
+        "u1UMGnLXZyvdJWAyzU3vMv": {
+          "name": "u1UMGnLXZyvdJWAyzU3vMv",
+          "type": "array",
+          "input": "[23,2,4,6,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clx6hz9wj000513tce8fs58s7": {
+      "id": "clx6hz9wj000513tce8fs58s7",
+      "createdAt": "2024-06-08T19:17:39.427Z",
+      "updatedAt": "2024-06-08T19:17:42.332Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "oBTg1YLUCrbFqpRF6SPK7Z": {
+          "name": "oBTg1YLUCrbFqpRF6SPK7Z",
+          "type": "number",
+          "input": "6",
+          "order": 1
+        },
+        "u1UMGnLXZyvdJWAyzU3vMv": {
+          "name": "u1UMGnLXZyvdJWAyzU3vMv",
+          "type": "array",
+          "input": "[23,2,6,4,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clx6hzlsm000713tcdjr5r9oa": {
+      "id": "clx6hzlsm000713tcdjr5r9oa",
+      "createdAt": "2024-06-08T19:17:54.838Z",
+      "updatedAt": "2024-06-08T19:17:58.681Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "oBTg1YLUCrbFqpRF6SPK7Z": {
+          "name": "oBTg1YLUCrbFqpRF6SPK7Z",
+          "type": "number",
+          "input": "13",
+          "order": 1
+        },
+        "u1UMGnLXZyvdJWAyzU3vMv": {
+          "name": "u1UMGnLXZyvdJWAyzU3vMv",
+          "type": "array",
+          "input": "[23,2,6,4,7]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -26081,6 +26170,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clwxtxdkh0003asuwc0krv439": {
+      "id": "clwxtxdkh0003asuwc0krv439",
+      "createdAt": "2024-06-02T17:42:10.673Z",
+      "updatedAt": "2024-06-08T19:14:52.187Z",
+      "projectId": "clwxtxdkh0001asuwfniogbr0",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * // Definition for a Node.\n * function Node(val, next) {\n *     this.val = val;\n *     this.next = next;\n * };\n */\n\n/**\n * @param {Node} head\n * @param {number} insertVal\n * @return {Node}\n */\nvar insert = function (head, insertVal) {\n  if (head === null) {\n    const newNode = new Node(insertVal);\n    newNode.next = newNode;\n    return newNode;\n  }\n\n  let current = head;\n  while (current.next !== head) {\n    if (current.val <= current.next?.val) {\n      current.setColor(\"green\");\n      if (insertVal >= current.val && insertVal <= current.next.val) {\n        break;\n      }\n    } else {\n      current.setColor(\"cyan\");\n      if (insertVal >= current.val || insertVal <= current.next.val) {\n        break;\n      }\n    }\n\n    current = current.next;\n  }\n\n  const next = current.next;\n  current.next = new Node(insertVal, next);\n\n  return head;\n};\n\nconst Node = LinkedList;\n\nreturn insert;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clur4ckct0003nffdnkx3oqu3": {
       "id": "clur4ckct0003nffdnkx3oqu3",
       "createdAt": "2024-04-08T15:40:07.565Z",
@@ -26150,20 +26253,6 @@
       "code": "/**\n * @param {number} amount\n * @param {number[]} coins\n * @return {number}\n */\nvar change = function (amount, coins) {\n  const n = coins.length;\n\n  const dp = Array.from({ length: n }, () => new Array(amount + 1).fill(0));\n  dp.showIndexes(n, amount);\n  for (let i = 0; i < n; i++) {\n    dp[i][0] = 1;\n  }\n\n  for (let i = 0; i < n; i++) {\n    const num = coins[i];\n    for (let sum = 1; sum <= amount; sum++) {\n      if (i > 0) {\n        dp[i][sum] += dp[i - 1][sum];\n      }\n\n      if (sum - num >= 0) {\n        dp[i][sum] += dp[i][sum - num];\n      }\n    }\n  }\n\n  return dp[n - 1][amount];\n};\n\nreturn change;\n",
       "pythonCode": null,
       "order": 3
-    },
-    "clwxtxdkh0003asuwc0krv439": {
-      "id": "clwxtxdkh0003asuwc0krv439",
-      "createdAt": "2024-06-02T17:42:10.673Z",
-      "updatedAt": "2024-06-02T17:47:58.715Z",
-      "projectId": "clwxtxdkh0001asuwfniogbr0",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * // Definition for a Node.\n * function Node(val, next) {\n *     this.val = val;\n *     this.next = next;\n * };\n */\n\n/**\n * @param {Node} head\n * @param {number} insertVal\n * @return {Node}\n */\nvar insert = function (head, insertVal) {\n  if (head === null) {\n    const newNode = new Node(insertVal);\n    newNode.next = newNode;\n    return newNode;\n  }\n\n  let current = head;\n  while (current.next !== head) {\n    if (current.val <= current.next?.val) {\n      current.setColor(\"green\");\n      if (insertVal >= current.val && insertVal <= current.next.val) {\n        break;\n      }\n    } else {\n      current.setColor(\"cyan\");\n      if (insertVal >= current.val || insertVal <= current.next.val) {\n        break;\n      }\n    }\n\n    current = current.next;\n  }\n\n  const next = current.next;\n  current.next = new Node(insertVal, next);\n\n  return head;\n};\n\nconst Node = LinkedList;\n\nreturn insert;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
@@ -26784,7 +26873,7 @@
     "clx4rjiep0003vyvmccw0argk": {
       "id": "clx4rjiep0003vyvmccw0argk",
       "createdAt": "2024-06-07T14:09:47.761Z",
-      "updatedAt": "2024-06-07T14:18:57.310Z",
+      "updatedAt": "2024-06-11T13:01:37.375Z",
       "projectId": "clx4rjiep0001vyvmnm5js7se",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -26834,6 +26923,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string[]} stickers\n * @param {string} target\n * @return {number}\n */\nconst getFreqMap = (word) => {\n  return word.split(\"\").reduce((acc, ch) => {\n    acc.set(ch, (acc.get(ch) ?? 0) + 1);\n    return acc;\n  }, new Map());\n};\n\n/**\n * item = Map\n * set = Set\n * helper fn to remove all keys from item that are not in the set\n */\nconst cleanupFreq = (item, set) => {\n  for (const key of item.keys()) {\n    if (!set.has(key)) {\n      item.delete(key);\n    }\n  }\n};\n\nconst getNext = (t_map, sticker) => {\n  let next = \"\";\n  for (const [key, value] of t_map) {\n    const len = value - (sticker.get(key) ?? 0);\n    for (let j = 0; j < len; j++) {\n      next += key;\n    }\n  }\n\n  return next;\n};\n\nvar minStickers = function (stickers, target) {\n  const filterSet = new Set(target);\n  // generate freq maps for all stickers\n  const s_freqs = stickers.map((sticker) => {\n    const freq = getFreqMap(sticker);\n    // we don't care about any characters that are not target\n    cleanupFreq(freq, filterSet);\n    return freq;\n  });\n\n  const memo = new Map();\n  // base case\n  memo.set(\"\", 0);\n\n  const dfs = (currentTarget) => {\n    // we found it done\n    if (memo.has(currentTarget)) {\n      return memo.get(currentTarget);\n    }\n\n    // get freq map for target\n    const t_map = getFreqMap(currentTarget);\n\n    let res = Infinity;\n\n    for (const sticker of s_freqs) {\n      // can we use this sticker??\n      if (!sticker.has(currentTarget[0])) {\n        // skip if it doesn't have first char\n        continue;\n      }\n\n      // generate next string\n      const nextTarget = getNext(t_map, sticker);\n      res = Math.min(res, 1 + dfs(nextTarget));\n    }\n\n    memo.set(currentTarget, res);\n    return res;\n  };\n\n  const res = dfs(target);\n\n  return res === Infinity ? -1 : res;\n};\n\nreturn minStickers;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clx6i0pyo000913tcr68v6v1t": {
+      "id": "clx6i0pyo000913tcr68v6v1t",
+      "createdAt": "2024-06-08T19:18:46.897Z",
+      "updatedAt": "2024-06-08T19:23:23.968Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {boolean}\n */\nvar checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.prefixMod = 0;\n\n  const modSeen = new Map();\n  modSeen.set(0, -1);\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.prefixMod = (v.prefixMod + nums[i]) % k;\n\n    if (modSeen.has(v.prefixMod)) {\n      if (i - modSeen.get(v.prefixMod) > 1) {\n        modSeen.setColor(v.prefixMod, \"green\");\n        nums.setColor(i, \"green\");\n        return true;\n      }\n    } else {\n      modSeen.set(v.prefixMod, i);\n    }\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clx6hw0xx000313tc8s0indw6": {
+      "id": "clx6hw0xx000313tc8s0indw6",
+      "createdAt": "2024-06-08T19:15:07.845Z",
+      "updatedAt": "2024-06-08T19:24:16.019Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.sum = 0;\n  v.prefix = 0;\n\n  const hash = new Set();\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.sum += nums[i];\n\n    if (k != 0) v.sum %= k;\n\n    console.log(v.sum);\n\n    if (hash.has(v.sum)) {\n      nums.setColor(i, \"green\");\n      return true;\n    }\n\n    hash.add(v.prefix);\n    v.prefix = v.sum;\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
       "pythonCode": null,
       "order": 0
     }
