@@ -238,20 +238,6 @@
       "isExample": false,
       "isPublic": true
     },
-    "clg8ecl900001l708uy6npwbe": {
-      "id": "clg8ecl900001l708uy6npwbe",
-      "createdAt": "2023-04-08T19:56:34.836Z",
-      "updatedAt": "2023-04-08T19:56:34.836Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Sort Colors in Array",
-      "category": "ARRAY",
-      "difficulty": null,
-      "lcLink": null,
-      "slug": "sort-colors-in-array",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
     "clgbcd4690001mr08wkv5xvpg": {
       "id": "clgbcd4690001mr08wkv5xvpg",
       "createdAt": "2023-04-10T21:24:18.657Z",
@@ -4658,6 +4644,48 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/continuous-subarray-sum",
       "slug": "continuous-subarray-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxamsxha00018hzybg5d7uw4": {
+      "id": "clxamsxha00018hzybg5d7uw4",
+      "createdAt": "2024-06-11T16:43:46.174Z",
+      "updatedAt": "2024-06-11T16:43:46.174Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Exclusive Time of Functions",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/exclusive-time-of-functions",
+      "slug": "exclusive-time-of-functions",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxaor1sg0001aveni64ywcse": {
+      "id": "clxaor1sg0001aveni64ywcse",
+      "createdAt": "2024-06-11T17:38:17.679Z",
+      "updatedAt": "2024-06-11T17:38:17.679Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Accounts Merge",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/accounts-merge",
+      "slug": "accounts-merge",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clg8ecl900001l708uy6npwbe": {
+      "id": "clg8ecl900001l708uy6npwbe",
+      "createdAt": "2023-04-08T19:56:34.836Z",
+      "updatedAt": "2024-06-12T09:20:40.364Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sort Colors",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/sort-colors",
+      "slug": "sort-colors",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -19922,6 +19950,31 @@
       },
       "description": null
     },
+    "clxamsxha00028hzyrbqk4qvg": {
+      "id": "clxamsxha00028hzyrbqk4qvg",
+      "createdAt": "2024-06-11T16:43:46.174Z",
+      "updatedAt": "2024-06-11T16:44:34.654Z",
+      "projectId": "clxamsxha00018hzybg5d7uw4",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "b49x7GRG9n2qV61VRGr9GU": {
+          "name": "b49x7GRG9n2qV61VRGr9GU",
+          "type": "array",
+          "input": "[\"0:start:0\",\"1:start:2\",\"1:end:5\",\"0:end:6\"]",
+          "order": 1
+        },
+        "veDojycEizTK2v2u6ygjs6": {
+          "name": "veDojycEizTK2v2u6ygjs6",
+          "type": "number",
+          "input": "2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clx4rjiep0002vyvm6v5wx4mq": {
       "id": "clx4rjiep0002vyvm6v5wx4mq",
       "createdAt": "2024-06-07T14:09:47.761Z",
@@ -19943,6 +19996,25 @@
           "type": "string",
           "input": "the cattle was rattled by the battery",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "clxaor1si0002aven4l8n48kt": {
+      "id": "clxaor1si0002aven4l8n48kt",
+      "createdAt": "2024-06-11T17:38:17.679Z",
+      "updatedAt": "2024-06-11T17:38:47.050Z",
+      "projectId": "clxaor1sg0001aveni64ywcse",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2UXNnpk6kqVLr7tFfcCESc": {
+          "name": "2UXNnpk6kqVLr7tFfcCESc",
+          "type": "array",
+          "input": "[[\"John\",\"johnsmith@mail.com\",\"john_newyork@mail.com\"],[\"John\",\"johnsmith@mail.com\",\"john00@mail.com\"],[\"Mary\",\"mary@mail.com\"],[\"John\",\"johnnybravo@mail.com\"]]",
+          "order": 0
         }
       },
       "description": null
@@ -20427,20 +20499,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\r\n * @param {Array<number>} nums\r\n */\r\nreturn function bubbleSort(nums) {\r\n  for (var i = 0; i < nums.length; i++) {\r\n    nums.setColor(nums.length - i - 1, \"green\");\r\n    // Last i elements are already in place\r\n    for (var j = 0; j < nums.length - i - 1; j++) {\r\n      // Checking if the item at present iteration\r\n      // is greater than the next iteration\r\n      if (nums[j] > nums[j + 1]) {\r\n        // If the condition is true\r\n        // then swap them\r\n        var temp = nums[j];\r\n        nums[j] = nums[j + 1];\r\n        nums[j + 1] = temp;\r\n      }\r\n    }\r\n\r\n    nums.setColor(nums.length - i - 1, null);\r\n  }\r\n\r\n  return nums;\r\n};\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "clg8ecl900004l708fgs2lkzr": {
-      "id": "clg8ecl900004l708fgs2lkzr",
-      "createdAt": "2023-04-08T19:56:34.836Z",
-      "updatedAt": "2023-04-08T19:56:34.836Z",
-      "projectId": "clg8ecl900001l708uy6npwbe",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "return function sortColors(nums) {\n  nums.setColorMap({\n    0: \"red\",\n    1: \"white\",\n    2: \"blue\"\n  });\n  // for all idx < i : nums[idx < i] = 0\n  // j is an index of element under consideration\n  let p0 = 0;\n  let curr = 0;\n\n  // for all idx > k : nums[idx > k] = 2\n  let p2 = nums.length - 1;\n\n  let tmp;\n  while (curr <= p2) {\n    if (nums[curr] == 0) {\n      // swap p0-th and curr-th elements\n      // i++ and j++\n      tmp = nums[p0];\n      nums[p0++] = nums[curr];\n      nums[curr++] = tmp;\n    } else if (nums[curr] == 2) {\n      // swap k-th and curr-th elements\n      // p2--\n      tmp = nums[curr];\n      nums[curr] = nums[p2];\n      nums[p2--] = tmp;\n    } else curr++;\n  }\n};\n",
       "pythonCode": null,
       "order": 0
     },
@@ -26338,6 +26396,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clxamsxha00038hzyms2mjpjs": {
+      "id": "clxamsxha00038hzyms2mjpjs",
+      "createdAt": "2024-06-11T16:43:46.174Z",
+      "updatedAt": "2024-06-11T16:49:20.777Z",
+      "projectId": "clxamsxha00018hzybg5d7uw4",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {string[]} logs\n * @return {number[]}\n */\nvar exclusiveTime = function (n, logs) {\n  const sums = new Uint32Array(n);\n  const stack = new Array();\n  const v = new Object();\n  v.prevTime = 0;\n\n  for (let i = 0; i < logs.length; i++) {\n    logs.setColor(i, \"green\");\n    const log = logs[i];\n    const details = log.split(\":\");\n    const id = +details[0];\n    const point = details[1];\n    const time = +details[2];\n\n    if (point === \"start\") {\n      if (stack.length > 0) {\n        const prevFn = stack.at(-1);\n        sums[prevFn] += time - v.prevTime;\n      }\n      stack.push(id); // Push this function onto the stack\n      v.prevTime = time; // Set the previous start time to the time now\n    } else {\n      const last = stack.pop(); // Get the last function to start from the top of the stack\n      sums[last] += time - v.prevTime + 1; // Increment the sum from start to end, inclusive\n      v.prevTime = time + 1; // Set the previous start time to be one after this function ended\n    }\n  }\n\n  return sums;\n};\n\nreturn exclusiveTime;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clwyzpfen0003o1c7hya6eq9t": {
       "id": "clwyzpfen0003o1c7hya6eq9t",
       "createdAt": "2024-06-03T13:11:43.679Z",
@@ -26393,6 +26465,20 @@
       "code": "/**\n * @param {string} s\n * @return {string[][]}\n */\nvar partition = function (s) {\n  const n = s.length;\n  const result = new Array();\n  const stack = new Array();\n\n  const dp = Array.from({ length: n }, () => {\n    const arr = new Array(n);\n    arr.setColorMap({ true: \"green\" });\n    return arr;\n  });\n\n  const backtrack = (i) => {\n    if (i === s.length) {\n      result.push([...stack]);\n      return;\n    }\n    s.setColor(i, \"green\");\n\n    for (let j = i; j < s.length; j++) {\n      if (s[i] === s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {\n        dp[i][j] = true;\n        s.setColor(j, \"cyan\");\n        stack.push(s.slice(i, j + 1));\n        backtrack(j + 1);\n        stack.pop();\n        s.setColor(j, null);\n      }\n    }\n\n    s.setColor(i, null);\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn partition;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clxaor1si0003avenu93utrgt": {
+      "id": "clxaor1si0003avenu93utrgt",
+      "createdAt": "2024-06-11T17:38:17.679Z",
+      "updatedAt": "2024-06-11T18:07:07.983Z",
+      "projectId": "clxaor1sg0001aveni64ywcse",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var accountsMerge = function (accounts) {\n  const parents = new Object();\n  const email2name = new Object();\n\n  const find = (x) => {\n    let parent = parents[x];\n    while (parent !== parents[parent]) {\n      parent = parents[parents[parent]];\n    }\n\n    return parent;\n  };\n\n  const union = (x, y) => {\n    parents[find(x)] = find(y);\n  };\n\n  for (const [name, ...emails] of accounts) {\n    for (const email of emails) {\n      if (!parents[email]) {\n        parents[email] = email;\n      }\n\n      email2name[email] = name;\n      union(email, emails[0]);\n    }\n  }\n\n  const emails = new Object();\n  for (const email of Object.keys(parents)) {\n    const parent = find(email);\n    if (parent in emails) {\n      emails[parent].push(email);\n    } else {\n      emails[parent] = Array.from([email]);\n    }\n  }\n\n  return Object.entries(emails).map(([email, x]) => [\n    email2name[email],\n    ...x.sort(),\n  ]);\n};\n\nreturn accountsMerge;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "cluzpw4rf00033iiyhhepe72h": {
       "id": "cluzpw4rf00033iiyhhepe72h",
@@ -26873,7 +26959,7 @@
     "clx4rjiep0003vyvmccw0argk": {
       "id": "clx4rjiep0003vyvmccw0argk",
       "createdAt": "2024-06-07T14:09:47.761Z",
-      "updatedAt": "2024-06-11T13:01:37.375Z",
+      "updatedAt": "2024-06-11T16:43:20.879Z",
       "projectId": "clx4rjiep0001vyvmnm5js7se",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -26926,6 +27012,34 @@
       "pythonCode": null,
       "order": 0
     },
+    "clg8ecl900004l708fgs2lkzr": {
+      "id": "clg8ecl900004l708fgs2lkzr",
+      "createdAt": "2023-04-08T19:56:34.836Z",
+      "updatedAt": "2024-06-12T09:20:42.178Z",
+      "projectId": "clg8ecl900001l708uy6npwbe",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "return function sortColors(nums) {\n  nums.setColorMap({\n    0: \"red\",\n    1: \"white\",\n    2: \"blue\"\n  });\n  // for all idx < i : nums[idx < i] = 0\n  // j is an index of element under consideration\n  let p0 = 0;\n  let curr = 0;\n\n  // for all idx > k : nums[idx > k] = 2\n  let p2 = nums.length - 1;\n\n  let tmp;\n  while (curr <= p2) {\n    if (nums[curr] == 0) {\n      // swap p0-th and curr-th elements\n      // i++ and j++\n      tmp = nums[p0];\n      nums[p0++] = nums[curr];\n      nums[curr++] = tmp;\n    } else if (nums[curr] == 2) {\n      // swap k-th and curr-th elements\n      // p2--\n      tmp = nums[curr];\n      nums[curr] = nums[p2];\n      nums[p2--] = tmp;\n    } else curr++;\n  }\n};\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxbmf7q80001uo2l44a53l99": {
+      "id": "clxbmf7q80001uo2l44a53l99",
+      "createdAt": "2024-06-12T09:20:52.442Z",
+      "updatedAt": "2024-06-12T09:23:35.143Z",
+      "projectId": "clg8ecl900001l708uy6npwbe",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {void} Do not return anything, modify nums in-place instead.\n */\nvar sortColors = function (nums) {\n  let left = 0;\n  let right = nums.length - 1;\n  let curr = 0;\n\n  while (curr <= right) {\n    nums.setColor(left, \"cyan\");\n    nums.setColor(curr, \"green\");\n    nums.setColor(right, \"orange\");\n    if (nums[curr] === 0) {\n      swap(nums, left, curr);\n      left++;\n      curr++;\n    } else if (nums[curr] === 2) {\n      swap(nums, curr, right);\n      right--;\n    } else {\n      curr++;\n    }\n  }\n};\n\nfunction swap(arr, i, j) {\n  [arr[i], arr[j]] = [arr[j], arr[i]];\n}\n\nreturn sortColors;\n",
+      "pythonCode": null,
+      "order": 1
+    },
     "clx6i0pyo000913tcr68v6v1t": {
       "id": "clx6i0pyo000913tcr68v6v1t",
       "createdAt": "2024-06-08T19:18:46.897Z",
@@ -26953,6 +27067,20 @@
       "code": "var checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.sum = 0;\n  v.prefix = 0;\n\n  const hash = new Set();\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.sum += nums[i];\n\n    if (k != 0) v.sum %= k;\n\n    console.log(v.sum);\n\n    if (hash.has(v.sum)) {\n      nums.setColor(i, \"green\");\n      return true;\n    }\n\n    hash.add(v.prefix);\n    v.prefix = v.sum;\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clxaqvsp30001t494xgpsblux": {
+      "id": "clxaqvsp30001t494xgpsblux",
+      "createdAt": "2024-06-11T18:37:58.404Z",
+      "updatedAt": "2024-06-11T18:39:41.589Z",
+      "projectId": "clxaor1sg0001aveni64ywcse",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[][]} accounts\n * @return {string[][]}\n */\nvar accountsMerge = function (accounts) {\n  const n = accounts.length;\n  const emailToName = new Object();\n  const uf = new UnionFind(accounts);\n\n  for (let i = 0; i < n; i++) {\n    accounts.setColor(i, \"green\");\n    const [name, ...emails] = accounts[i];\n\n    for (const email of emails) {\n      uf.initEmail(email);\n\n      uf.union(emails[0], email);\n      emailToName[email] = name;\n    }\n  }\n\n  const emails = new Object();\n  for (const email in uf.pars) {\n    const key = uf.find(email);\n    (emails[key] ??= new Array()).push(email);\n  }\n\n  const result = new Array();\n  for (const key in emails) {\n    result.push([emailToName[key], ...emails[key].sort()]);\n  }\n\n  return result;\n};\n\nclass UnionFind extends Object {\n  constructor() {\n    super();\n    this.ranks = new Object();\n    this.pars = new Object();\n  }\n\n  initEmail(email) {\n    if (email in this.pars) return;\n\n    this.pars[email] = email;\n    this.ranks[email] = 1;\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n\n    if (this.ranks[parent] < this.ranks[child]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn accountsMerge;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
