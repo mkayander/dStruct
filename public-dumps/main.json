@@ -4689,6 +4689,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clxht2wuy0001aosf3hzv7dcd": {
+      "id": "clxht2wuy0001aosf3hzv7dcd",
+      "createdAt": "2024-06-16T17:13:52.858Z",
+      "updatedAt": "2024-06-16T17:13:52.858Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Construct Binary Tree from String",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/construct-binary-tree-from-string",
+      "slug": "construct-binary-tree-from-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20019,6 +20033,25 @@
       },
       "description": null
     },
+    "clxht2wuy0002aosfa192thhk": {
+      "id": "clxht2wuy0002aosfa192thhk",
+      "createdAt": "2024-06-16T17:13:52.858Z",
+      "updatedAt": "2024-06-16T17:15:01.808Z",
+      "projectId": "clxht2wuy0001aosf3hzv7dcd",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "string",
+          "input": "4(2(3)(1))(6(5))",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clx6hw0xx000213tcngjx3dam": {
       "id": "clx6hw0xx000213tcngjx3dam",
       "createdAt": "2024-06-08T19:15:07.845Z",
@@ -26970,6 +27003,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clxht2wuy0003aosfp9sv61xx": {
+      "id": "clxht2wuy0003aosfp9sv61xx",
+      "createdAt": "2024-06-16T17:13:52.858Z",
+      "updatedAt": "2024-06-16T17:15:10.508Z",
+      "projectId": "clxht2wuy0001aosf3hzv7dcd",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} s\n * @return {TreeNode}\n */\nvar str2tree = function (s) {\n  const n = s.length;\n\n  const findPivot = (left, right) => {\n    let balance = 0;\n    for (let i = left; i <= right; i++) {\n      if (s[i] === \"(\") {\n        balance++;\n      } else if (s[i] === \")\") {\n        balance--;\n        if (balance === 0) return i;\n      }\n    }\n\n    return right;\n  };\n\n  const dfs = (left, right) => {\n    if (left > right) return null;\n\n    isNeg = s[left] === \"-\";\n    if (isNeg) left++;\n\n    let numFound = false;\n    let num = 0;\n    while (isNumber(s[left])) {\n      num *= 10;\n      num += +s[left++];\n      numFound = true;\n    }\n    if (!numFound) return null;\n    if (isNeg) num *= -1;\n\n    const root = new BinaryTree(num);\n    if (right - left <= 1) return root;\n\n    const pivot = findPivot(left, right);\n\n    root.left = dfs(left + 1, pivot);\n    root.right = dfs(pivot + 2, right);\n\n    return root;\n  };\n\n  return dfs(0, n - 1);\n};\n\nfunction isNumber(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn str2tree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clwp221s10005wdocmevj0nsy": {
       "id": "clwp221s10005wdocmevj0nsy",
       "createdAt": "2024-05-27T14:19:50.018Z",
@@ -27040,6 +27087,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "clx6hw0xx000313tc8s0indw6": {
+      "id": "clx6hw0xx000313tc8s0indw6",
+      "createdAt": "2024-06-08T19:15:07.845Z",
+      "updatedAt": "2024-06-16T17:13:44.647Z",
+      "projectId": "clx6hw0xw000113tczavhvqmp",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.sum = 0;\n  v.prefix = 0;\n\n  const hash = new Set();\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.sum += nums[i];\n\n    if (k != 0) v.sum %= k;\n\n    console.log(v.sum);\n\n    if (hash.has(v.sum)) {\n      nums.setColor(i, \"green\");\n      return true;\n    }\n\n    hash.add(v.prefix);\n    v.prefix = v.sum;\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clx6i0pyo000913tcr68v6v1t": {
       "id": "clx6i0pyo000913tcr68v6v1t",
       "createdAt": "2024-06-08T19:18:46.897Z",
@@ -27053,20 +27114,6 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {boolean}\n */\nvar checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.prefixMod = 0;\n\n  const modSeen = new Map();\n  modSeen.set(0, -1);\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.prefixMod = (v.prefixMod + nums[i]) % k;\n\n    if (modSeen.has(v.prefixMod)) {\n      if (i - modSeen.get(v.prefixMod) > 1) {\n        modSeen.setColor(v.prefixMod, \"green\");\n        nums.setColor(i, \"green\");\n        return true;\n      }\n    } else {\n      modSeen.set(v.prefixMod, i);\n    }\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
       "pythonCode": null,
       "order": 1
-    },
-    "clx6hw0xx000313tc8s0indw6": {
-      "id": "clx6hw0xx000313tc8s0indw6",
-      "createdAt": "2024-06-08T19:15:07.845Z",
-      "updatedAt": "2024-06-08T19:24:16.019Z",
-      "projectId": "clx6hw0xw000113tczavhvqmp",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "var checkSubarraySum = function (nums, k) {\n  const v = new Object();\n  v.sum = 0;\n  v.prefix = 0;\n\n  const hash = new Set();\n\n  for (let i = 0; i < nums.length; i++) {\n    nums.setColor(i, \"cyan\");\n    v.sum += nums[i];\n\n    if (k != 0) v.sum %= k;\n\n    console.log(v.sum);\n\n    if (hash.has(v.sum)) {\n      nums.setColor(i, \"green\");\n      return true;\n    }\n\n    hash.add(v.prefix);\n    v.prefix = v.sum;\n  }\n\n  return false;\n};\n\nreturn checkSubarraySum;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clxaqvsp30001t494xgpsblux": {
       "id": "clxaqvsp30001t494xgpsblux",
