@@ -4703,6 +4703,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clxk5mk0s000113d7vpgr3z43": {
+      "id": "clxk5mk0s000113d7vpgr3z43",
+      "createdAt": "2024-06-18T08:40:37.084Z",
+      "updatedAt": "2024-06-18T08:40:37.084Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Most Profit Assigning Work",
+      "category": "TWO_POINTERS",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/most-profit-assigning-work",
+      "slug": "most-profit-assigning-work",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxkbwx6m0001o5x9lors7pai": {
+      "id": "clxkbwx6m0001o5x9lors7pai",
+      "createdAt": "2024-06-18T11:36:38.397Z",
+      "updatedAt": "2024-06-18T11:36:38.397Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Friends Of Appropriate Ages",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/friends-of-appropriate-ages",
+      "slug": "friends-of-appropriate-ages",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20102,6 +20130,37 @@
       },
       "description": null
     },
+    "clxk5mk0s000213d7csdymo7m": {
+      "id": "clxk5mk0s000213d7csdymo7m",
+      "createdAt": "2024-06-18T08:40:37.084Z",
+      "updatedAt": "2024-06-18T08:41:24.220Z",
+      "projectId": "clxk5mk0s000113d7vpgr3z43",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "icYBdy9HxBdHtUYstRpWXR": {
+          "name": "icYBdy9HxBdHtUYstRpWXR",
+          "type": "array",
+          "input": "[92,10,85,84,82]",
+          "order": 2
+        },
+        "mTwqXsjcGBLssLBw6dps2y": {
+          "name": "mTwqXsjcGBLssLBw6dps2y",
+          "type": "array",
+          "input": "[67,17,1,81,3]",
+          "order": 1
+        },
+        "wiAykcBbT2CwNQUgnd7PrF": {
+          "name": "wiAykcBbT2CwNQUgnd7PrF",
+          "type": "array",
+          "input": "[68,35,52,47,86]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clx6hzlsm000713tcdjr5r9oa": {
       "id": "clx6hzlsm000713tcdjr5r9oa",
       "createdAt": "2024-06-08T19:17:54.838Z",
@@ -20122,6 +20181,44 @@
           "name": "u1UMGnLXZyvdJWAyzU3vMv",
           "type": "array",
           "input": "[23,2,6,4,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxkbwx6o0002o5x9bbplygwr": {
+      "id": "clxkbwx6o0002o5x9bbplygwr",
+      "createdAt": "2024-06-18T11:36:38.397Z",
+      "updatedAt": "2024-06-18T11:38:03.820Z",
+      "projectId": "clxkbwx6m0001o5x9lors7pai",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[16,17,18]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxiqpdgz0003130x5wf6qzq0": {
+      "id": "clxiqpdgz0003130x5wf6qzq0",
+      "createdAt": "2024-06-17T08:55:08.148Z",
+      "updatedAt": "2024-06-17T08:55:23.657Z",
+      "projectId": "clxht2wuy0001aosf3hzv7dcd",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "string",
+          "input": "14(32(13)(15))(16(25))",
           "order": 0
         }
       },
@@ -27006,13 +27103,13 @@
     "clxht2wuy0003aosfp9sv61xx": {
       "id": "clxht2wuy0003aosfp9sv61xx",
       "createdAt": "2024-06-16T17:13:52.858Z",
-      "updatedAt": "2024-06-16T17:15:10.508Z",
+      "updatedAt": "2024-06-17T08:53:35.471Z",
       "projectId": "clxht2wuy0001aosf3hzv7dcd",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
+      "title": "Recursion",
+      "slug": "recursion",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} s\n * @return {TreeNode}\n */\nvar str2tree = function (s) {\n  const n = s.length;\n\n  const findPivot = (left, right) => {\n    let balance = 0;\n    for (let i = left; i <= right; i++) {\n      if (s[i] === \"(\") {\n        balance++;\n      } else if (s[i] === \")\") {\n        balance--;\n        if (balance === 0) return i;\n      }\n    }\n\n    return right;\n  };\n\n  const dfs = (left, right) => {\n    if (left > right) return null;\n\n    isNeg = s[left] === \"-\";\n    if (isNeg) left++;\n\n    let numFound = false;\n    let num = 0;\n    while (isNumber(s[left])) {\n      num *= 10;\n      num += +s[left++];\n      numFound = true;\n    }\n    if (!numFound) return null;\n    if (isNeg) num *= -1;\n\n    const root = new BinaryTree(num);\n    if (right - left <= 1) return root;\n\n    const pivot = findPivot(left, right);\n\n    root.left = dfs(left + 1, pivot);\n    root.right = dfs(pivot + 2, right);\n\n    return root;\n  };\n\n  return dfs(0, n - 1);\n};\n\nfunction isNumber(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn str2tree;\n",
       "pythonCode": null,
       "order": 0
@@ -27076,7 +27173,7 @@
     "clxbmf7q80001uo2l44a53l99": {
       "id": "clxbmf7q80001uo2l44a53l99",
       "createdAt": "2024-06-12T09:20:52.442Z",
-      "updatedAt": "2024-06-12T09:23:35.143Z",
+      "updatedAt": "2024-06-17T08:53:00.014Z",
       "projectId": "clg8ecl900001l708uy6npwbe",
       "title": "Solution 2",
       "slug": "solution-2",
@@ -27115,6 +27212,34 @@
       "pythonCode": null,
       "order": 1
     },
+    "clxk5mk0s000313d7o2j7ixm8": {
+      "id": "clxk5mk0s000313d7o2j7ixm8",
+      "createdAt": "2024-06-18T08:40:37.084Z",
+      "updatedAt": "2024-06-18T08:50:25.328Z",
+      "projectId": "clxk5mk0s000113d7vpgr3z43",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} difficulty\n * @param {number[]} profit\n * @param {number[]} worker\n * @return {number}\n */\nvar maxProfitAssignment = function (difficulty, profit, worker) {\n  const jobs = difficulty.map((val, i) => [val, profit[i]]);\n  jobs.sort((a, b) => b[1] - a[1]);\n  worker.sort((a, b) => b - a);\n\n  // console.log({jobs, worker});\n  let result = 0;\n  let jobIndex = 0;\n  for (let i = 0; i < worker.length; i++) {\n    worker.setColor(i, \"green\");\n    while (jobIndex < jobs.length && jobs[jobIndex][0] > worker[i]) {\n      jobs.setColor(jobIndex, \"green\");\n      jobIndex++;\n    }\n    if (jobIndex >= jobs.length) break;\n    result += jobs[jobIndex][1];\n  }\n\n  return result;\n};\n\nreturn maxProfitAssignment;\n\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxkbwx6p0003o5x97o629ix3": {
+      "id": "clxkbwx6p0003o5x97o629ix3",
+      "createdAt": "2024-06-18T11:36:38.397Z",
+      "updatedAt": "2024-06-18T11:37:28.922Z",
+      "projectId": "clxkbwx6m0001o5x9lors7pai",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "function numFriendRequests(ages) {\n  const buckets = new Uint32Array(121);\n  for (let i = 0; i < ages.length; i++) {\n    ages.setColor(i, \"green\");\n    buckets[ages[i]]++;\n  }\n\n  const prefixSum = new Uint32Array(121);\n  for (let i = 1; i <= 120; i++) {\n    prefixSum[i] = buckets[i] + prefixSum[i - 1];\n  }\n\n  let result = 0;\n  for (let i = 15; i <= 120; i++) {\n    if (!buckets[i]) continue;\n\n    const minAge = Math.floor(i / 2) + 7;\n    const count = prefixSum[i] - prefixSum[minAge] - 1;\n    result += count * buckets[i];\n  }\n\n  return result;\n}\n\nreturn numFriendRequests;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clxaqvsp30001t494xgpsblux": {
       "id": "clxaqvsp30001t494xgpsblux",
       "createdAt": "2024-06-11T18:37:58.404Z",
@@ -27126,6 +27251,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string[][]} accounts\n * @return {string[][]}\n */\nvar accountsMerge = function (accounts) {\n  const n = accounts.length;\n  const emailToName = new Object();\n  const uf = new UnionFind(accounts);\n\n  for (let i = 0; i < n; i++) {\n    accounts.setColor(i, \"green\");\n    const [name, ...emails] = accounts[i];\n\n    for (const email of emails) {\n      uf.initEmail(email);\n\n      uf.union(emails[0], email);\n      emailToName[email] = name;\n    }\n  }\n\n  const emails = new Object();\n  for (const email in uf.pars) {\n    const key = uf.find(email);\n    (emails[key] ??= new Array()).push(email);\n  }\n\n  const result = new Array();\n  for (const key in emails) {\n    result.push([emailToName[key], ...emails[key].sort()]);\n  }\n\n  return result;\n};\n\nclass UnionFind extends Object {\n  constructor() {\n    super();\n    this.ranks = new Object();\n    this.pars = new Object();\n  }\n\n  initEmail(email) {\n    if (email in this.pars) return;\n\n    this.pars[email] = email;\n    this.ranks[email] = 1;\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n\n    if (this.ranks[parent] < this.ranks[child]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.ranks[parent] += this.ranks[child];\n    this.ranks[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn accountsMerge;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clxiqmzld0001130xxit04fwd": {
+      "id": "clxiqmzld0001130xxit04fwd",
+      "createdAt": "2024-06-17T08:53:16.849Z",
+      "updatedAt": "2024-06-18T08:40:04.073Z",
+      "projectId": "clxht2wuy0001aosf3hzv7dcd",
+      "title": "Stack",
+      "slug": "stack",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} s\n * @return {TreeNode}\n */\nvar str2tree = function (s) {\n  if (!s) return null;\n  const n = s.length;\n\n  const root = new BinaryTree();\n  const stack = new Array();\n  stack.push(root);\n\n  let index = 0;\n  while (index < n) {\n    const node = stack.pop();\n\n    const isNegative = s[index] === \"-\";\n    if (isDigit(s[index]) || isNegative) {\n      if (isNegative) index++;\n      let val = 0;\n\n      while (isDigit(s[index])) {\n        s.setColor(index, \"green\");\n        val *= 10;\n        val += +s[index++];\n      }\n      if (isNegative) val *= -1;\n\n      node.val = val;\n\n      if (s[index] === \"(\") {\n        stack.push(node);\n\n        node.left = new BinaryTree();\n        stack.push(node.left);\n      }\n    } else if (node.left && s[index] === \"(\") {\n      stack.push(node);\n\n      node.right = new BinaryTree();\n      stack.push(node.right);\n    }\n\n    index++;\n  }\n\n  if (stack.length) return stack.pop();\n  return root;\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn str2tree;\n",
       "pythonCode": null,
       "order": 1
     }
