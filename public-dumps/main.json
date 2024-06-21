@@ -4731,6 +4731,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clxkotivl0001esnu7ul9t7o6": {
+      "id": "clxkotivl0001esnu7ul9t7o6",
+      "createdAt": "2024-06-18T17:37:54.897Z",
+      "updatedAt": "2024-06-18T17:37:54.897Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Shortest Path in a Hidden Grid",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/shortest-path-in-a-hidden-grid",
+      "slug": "shortest-path-in-a-hidden-grid",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxm8vi8h0001qy07haidvdyg": {
+      "id": "clxm8vi8h0001qy07haidvdyg",
+      "createdAt": "2024-06-19T19:47:05.874Z",
+      "updatedAt": "2024-06-19T19:47:05.874Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Number of Days to Make m Bouquets",
+      "category": "BINARY_SEARCH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets",
+      "slug": "minimum-number-of-days-to-make-m-bouquets",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxox3hfa00012jlb6g1de6bi": {
+      "id": "clxox3hfa00012jlb6g1de6bi",
+      "createdAt": "2024-06-21T16:40:41.205Z",
+      "updatedAt": "2024-06-21T16:40:41.205Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Grumpy Bookstore Owner",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/grumpy-bookstore-owner",
+      "slug": "grumpy-bookstore-owner",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20017,6 +20059,68 @@
       },
       "description": null
     },
+    "clxox3hfc00022jlbu196shui": {
+      "id": "clxox3hfc00022jlbu196shui",
+      "createdAt": "2024-06-21T16:40:41.205Z",
+      "updatedAt": "2024-06-21T16:41:15.307Z",
+      "projectId": "clxox3hfa00012jlb6g1de6bi",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "fueiRJPXsHGbrC1qakN1K9": {
+          "name": "fueiRJPXsHGbrC1qakN1K9",
+          "type": "array",
+          "input": "[0,1,0,1,0,1,0,1]",
+          "order": 1
+        },
+        "rdRTC6173Q8U8vTWHvmAgh": {
+          "name": "rdRTC6173Q8U8vTWHvmAgh",
+          "type": "array",
+          "input": "[1,0,1,2,1,1,7,5]",
+          "order": 0
+        },
+        "vxQiAjWoqJgXwVwxzqXeGJ": {
+          "name": "vxQiAjWoqJgXwVwxzqXeGJ",
+          "type": "number",
+          "input": "3",
+          "order": 2
+        }
+      },
+      "description": null
+    },
+    "clxm8vi8h0002qy078zingkp4": {
+      "id": "clxm8vi8h0002qy078zingkp4",
+      "createdAt": "2024-06-19T19:47:05.874Z",
+      "updatedAt": "2024-06-19T19:51:26.455Z",
+      "projectId": "clxm8vi8h0001qy07haidvdyg",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "dAPEWVEZH8UNeZuRvuGTMa": {
+          "name": "dAPEWVEZH8UNeZuRvuGTMa",
+          "type": "array",
+          "input": "[7,7,7,7,12,7,7]",
+          "order": 0
+        },
+        "mJ7zb4fpv9rQ86N8zhQ8FS": {
+          "name": "mJ7zb4fpv9rQ86N8zhQ8FS",
+          "type": "number",
+          "input": "3",
+          "order": 2
+        },
+        "vKhFSyxycbCkRN7HQsK9S3": {
+          "name": "vKhFSyxycbCkRN7HQsK9S3",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "clx4rjiep0002vyvm6v5wx4mq": {
       "id": "clx4rjiep0002vyvm6v5wx4mq",
       "createdAt": "2024-06-07T14:09:47.761Z",
@@ -20219,6 +20323,25 @@
           "name": "head",
           "type": "string",
           "input": "14(32(13)(15))(16(25))",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxkotivl0002esnur5ipftbe": {
+      "id": "clxkotivl0002esnur5ipftbe",
+      "createdAt": "2024-06-18T17:37:54.897Z",
+      "updatedAt": "2024-06-18T17:38:07.324Z",
+      "projectId": "clxkotivl0001esnu7ul9t7o6",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "6zPqCFmhEuedLw6KM5doaP": {
+          "name": "6zPqCFmhEuedLw6KM5doaP",
+          "type": "matrix",
+          "input": "[[1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1],[1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,-1,1,1],[1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1,1],[1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,0]]",
           "order": 0
         }
       },
@@ -26445,7 +26568,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-04-27T12:24:55.981Z",
+      "updatedAt": "2024-06-18T17:37:35.571Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -26537,6 +26660,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {string[]} logs\n * @return {number[]}\n */\nvar exclusiveTime = function (n, logs) {\n  const sums = new Uint32Array(n);\n  const stack = new Array();\n  const v = new Object();\n  v.prevTime = 0;\n\n  for (let i = 0; i < logs.length; i++) {\n    logs.setColor(i, \"green\");\n    const log = logs[i];\n    const details = log.split(\":\");\n    const id = +details[0];\n    const point = details[1];\n    const time = +details[2];\n\n    if (point === \"start\") {\n      if (stack.length > 0) {\n        const prevFn = stack.at(-1);\n        sums[prevFn] += time - v.prevTime;\n      }\n      stack.push(id); // Push this function onto the stack\n      v.prevTime = time; // Set the previous start time to the time now\n    } else {\n      const last = stack.pop(); // Get the last function to start from the top of the stack\n      sums[last] += time - v.prevTime + 1; // Increment the sum from start to end, inclusive\n      v.prevTime = time + 1; // Set the previous start time to be one after this function ended\n    }\n  }\n\n  return sums;\n};\n\nreturn exclusiveTime;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxkotivl0003esnuxibl24r4": {
+      "id": "clxkotivl0003esnuxibl24r4",
+      "createdAt": "2024-06-18T17:37:54.897Z",
+      "updatedAt": "2024-06-19T19:45:08.100Z",
+      "projectId": "clxkotivl0001esnu7ul9t7o6",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * // This is the GridMaster's API interface.\n * // You should not implement it, or speculate about its implementation\n * function GridMaster() {\n *\n *     @param {character} direction\n *     @return {boolean}\n *     this.canMove = function(direction) {\n *         ...\n *     };\n *     @param {character} direction\n *     @return {void}\n *     this.move = function(direction) {\n *         ...\n *     };\n *     @return {boolean}\n *     this.isTarget = function() {\n *         ...\n *     };\n * };\n */\n\n/**\n * @param {GridMaster} master\n * @return {integer}\n */\nvar findShortestPath = function (master) {\n  const UNEXPLORED = 0;\n  const BLOCKED = 1;\n  const EMPTY = 2;\n  const TARGET = 4;\n\n  const m = 500;\n  const n = 500;\n  const grid = Array.from(\n    { length: m * 2 + 1 },\n    () => new Uint32Array(n * 2 + 1),\n  );\n\n  const dfs = (row, col) => {\n    if (grid[row][col] !== UNEXPLORED) return;\n\n    if (master.isTarget()) {\n      grid[row][col] = TARGET;\n      return true;\n    }\n    grid[row][col] = EMPTY;\n\n    let isFound = false;\n\n    for (let i = 0; i < 4; i++) {\n      const [dRow, dCol] = DIRECTIONS[i];\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      const dir = DIR_LABELS[i];\n\n      if (master.canMove(dir)) {\n        master.move(dir);\n        const res = dfs(nRow, nCol);\n        isFound ||= res;\n        master.move(OPPS[dir]);\n      } else {\n        grid[nRow][nCol] = BLOCKED;\n      }\n    }\n\n    return isFound;\n  };\n\n  const isReachable = dfs(m, n);\n  if (!isReachable) return -1;\n\n  let queue = [[m, n]];\n  grid[m][n] = BLOCKED;\n  let steps = 0;\n  while (queue.length) {\n    steps++;\n    const nextLevel = [];\n    for (const [row, col] of queue) {\n      for (const [dRow, dCol] of DIRECTIONS) {\n        const nRow = row + dRow,\n          nCol = col + dCol;\n\n        if (grid[nRow][nCol] === TARGET) return steps;\n        if (grid[nRow][nCol] !== EMPTY) continue;\n        grid[nRow][nCol] = BLOCKED;\n\n        nextLevel.push([nRow, nCol]);\n      }\n    }\n\n    queue = nextLevel;\n  }\n\n  return -1;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nconst DIR_LABELS = [\"U\", \"R\", \"D\", \"L\"];\n\nconst OPPS = {\n  U: \"D\",\n  D: \"U\",\n  L: \"R\",\n  R: \"L\",\n};\n\nreturn findShortestPath;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -27237,6 +27374,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "function numFriendRequests(ages) {\n  const buckets = new Uint32Array(121);\n  for (let i = 0; i < ages.length; i++) {\n    ages.setColor(i, \"green\");\n    buckets[ages[i]]++;\n  }\n\n  const prefixSum = new Uint32Array(121);\n  for (let i = 1; i <= 120; i++) {\n    prefixSum[i] = buckets[i] + prefixSum[i - 1];\n  }\n\n  let result = 0;\n  for (let i = 15; i <= 120; i++) {\n    if (!buckets[i]) continue;\n\n    const minAge = Math.floor(i / 2) + 7;\n    const count = prefixSum[i] - prefixSum[minAge] - 1;\n    result += count * buckets[i];\n  }\n\n  return result;\n}\n\nreturn numFriendRequests;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxm8vi8i0003qy07b2fvvs6p": {
+      "id": "clxm8vi8i0003qy07b2fvvs6p",
+      "createdAt": "2024-06-19T19:47:05.874Z",
+      "updatedAt": "2024-06-21T15:18:45.203Z",
+      "projectId": "clxm8vi8h0001qy07haidvdyg",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} bloomDay\n * @param {number} m\n * @param {number} k\n * @return {number}\n */\nvar minDays = function (bloomDay, m, k) {\n  let start = 1;\n  let end = Math.max(...bloomDay) + 1;\n  let isFound = false;\n\n  while (start < end) {\n    const mid = start + ((end - start) >> 1);\n\n    const count = countBouquets(bloomDay, k, mid);\n    console.log({start, mid, end, count});\n    if (count >= m) {\n      end = mid;\n      isFound = true;\n    } else {\n      start = mid + 1;\n    }\n  }\n\n  if (!isFound) return -1;\n\n  return start;\n};\n\nfunction countBouquets(arr, k, day) {\n  let count = 0;\n  let left = 0;\n  for (let right = 0; right < arr.length; right++) {\n    const val = arr[right];\n    if (val > day) {\n      left = right + 1;\n    } else {\n      const len = right - left + 1;\n      if (len === k) {\n        count++;\n        left = right + 1;\n      }\n    }\n  }\n\n  return count;\n}\n\nreturn minDays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxox3hfc00032jlb4k6xnzbo": {
+      "id": "clxox3hfc00032jlb4k6xnzbo",
+      "createdAt": "2024-06-21T16:40:41.205Z",
+      "updatedAt": "2024-06-21T16:42:07.530Z",
+      "projectId": "clxox3hfa00012jlb6g1de6bi",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} customers\n * @param {number[]} grumpy\n * @param {number} minutes\n * @return {number}\n */\nvar maxSatisfied = function (customers, grumpy, minutes) {\n  const n = customers.length;\n\n  let total = 0;\n  let saved = 0;\n  let maxSaved = 0;\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    customers.setColor(right, \"green\");\n    const count = customers[right];\n    if (grumpy[right]) {\n      saved += count;\n    } else {\n      total += count;\n    }\n\n    if (right - left + 1 < minutes) continue;\n\n    maxSaved = Math.max(maxSaved, saved);\n\n    const leftCount = customers[left];\n    if (grumpy[left]) {\n      saved -= leftCount;\n    }\n    customers.setColor(left, null);\n    left++;\n  }\n\n  return total + maxSaved;\n};\n\nreturn maxSatisfied;\n",
       "pythonCode": null,
       "order": 0
     },
