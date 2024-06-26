@@ -4773,6 +4773,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clxq0cc070001uqsmelwsh0eu": {
+      "id": "clxq0cc070001uqsmelwsh0eu",
+      "createdAt": "2024-06-22T10:59:19.110Z",
+      "updatedAt": "2024-06-22T10:59:19.110Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count Number of Nice Subarrays",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/count-number-of-nice-subarrays",
+      "slug": "count-number-of-nice-subarrays",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxsx50o20001igiuqaaajuwf": {
+      "id": "clxsx50o20001igiuqaaajuwf",
+      "createdAt": "2024-06-24T11:52:57.506Z",
+      "updatedAt": "2024-06-24T11:52:57.506Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Number of K Consecutive Bit Flips",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips",
+      "slug": "minimum-number-of-k-consecutive-bit-flips",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxt9w8jp0001n8qbhln6py5e": {
+      "id": "clxt9w8jp0001n8qbhln6py5e",
+      "createdAt": "2024-06-24T17:50:02.821Z",
+      "updatedAt": "2024-06-24T17:50:02.821Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Sliding Window Median",
+      "category": "HEAP",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/sliding-window-median",
+      "slug": "sliding-window-median",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxw2fsou0001lfwuwimf3u3v": {
+      "id": "clxw2fsou0001lfwuwimf3u3v",
+      "createdAt": "2024-06-26T16:44:36.990Z",
+      "updatedAt": "2024-06-26T16:44:36.990Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Number of Accepted Invitations",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/maximum-number-of-accepted-invitations",
+      "slug": "maximum-number-of-accepted-invitations",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20309,6 +20365,31 @@
       },
       "description": null
     },
+    "clxq0cc090002uqsmif0spoja": {
+      "id": "clxq0cc090002uqsmif0spoja",
+      "createdAt": "2024-06-22T10:59:19.110Z",
+      "updatedAt": "2024-06-22T10:59:44.216Z",
+      "projectId": "clxq0cc070001uqsmelwsh0eu",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "2HA2HPPwbssrCjiSTxEL9q": {
+          "name": "2HA2HPPwbssrCjiSTxEL9q",
+          "type": "array",
+          "input": "[2,2,2,1,2,2,1,2,2,2]",
+          "order": 0
+        },
+        "tpV1FSCJqwMBVJKptZ6tBP": {
+          "name": "tpV1FSCJqwMBVJKptZ6tBP",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "clxiqpdgz0003130x5wf6qzq0": {
       "id": "clxiqpdgz0003130x5wf6qzq0",
       "createdAt": "2024-06-17T08:55:08.148Z",
@@ -20342,6 +20423,75 @@
           "name": "6zPqCFmhEuedLw6KM5doaP",
           "type": "matrix",
           "input": "[[1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1],[1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,-1,1,1],[1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1,1],[1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,0]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxsx50o20002igiujbyjfon7": {
+      "id": "clxsx50o20002igiujbyjfon7",
+      "createdAt": "2024-06-24T11:52:57.506Z",
+      "updatedAt": "2024-06-24T11:55:43.902Z",
+      "projectId": "clxsx50o20001igiuqaaajuwf",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "mZRbV9gVfH7WXCCVL5vhRp": {
+          "name": "mZRbV9gVfH7WXCCVL5vhRp",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        },
+        "uw5gtW9iHLsMmghLrYiCGM": {
+          "name": "uw5gtW9iHLsMmghLrYiCGM",
+          "type": "array",
+          "input": "[0,0,0,1,0,1,1,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxt9w8jp0002n8qb2oq9zvii": {
+      "id": "clxt9w8jp0002n8qb2oq9zvii",
+      "createdAt": "2024-06-24T17:50:02.821Z",
+      "updatedAt": "2024-06-24T17:50:41.913Z",
+      "projectId": "clxt9w8jp0001n8qbhln6py5e",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8XjsmwMnBq4XCqYbrRYD1D": {
+          "name": "8XjsmwMnBq4XCqYbrRYD1D",
+          "type": "number",
+          "input": "3",
+          "order": 1
+        },
+        "gibQAXLAfimrPeQuaFohMk": {
+          "name": "gibQAXLAfimrPeQuaFohMk",
+          "type": "array",
+          "input": "[1,3,-1,-3,5,3,6,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxw2fsou0002lfwuziet8g7q": {
+      "id": "clxw2fsou0002lfwuziet8g7q",
+      "createdAt": "2024-06-26T16:44:36.990Z",
+      "updatedAt": "2024-06-26T16:45:27.307Z",
+      "projectId": "clxw2fsou0001lfwuwimf3u3v",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "13HArK2XbsxwC9zwwD6iEu": {
+          "name": "13HArK2XbsxwC9zwwD6iEu",
+          "type": "matrix",
+          "input": "[[1,0,1,0], [1,0,0,0], [0,0,1,0], [1,1,1,0]]",
           "order": 0
         }
       },
@@ -27111,20 +27261,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clle3n8hq0003l508fj2fwz3u": {
-      "id": "clle3n8hq0003l508fj2fwz3u",
-      "createdAt": "2023-08-16T19:02:04.478Z",
-      "updatedAt": "2024-05-06T11:21:40.761Z",
-      "projectId": "clle3n8hq0001l5082f99xgrr",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < k; i++) {\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n  }\n\n  result.push(nums[queue.tail.val]);\n\n  for (let i = k; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val >= k) {\n      queue.removeTail();\n    }\n\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    result.push(nums[queue.tail?.val]);\n  }\n\n  return result;\n};\n\nclass MaxQueue {\n  constructor(size) {\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;",
-      "pythonCode": null,
-      "order": 0
-    },
     "clvsh8wcs0003ii4u6rgnlqr5": {
       "id": "clvsh8wcs0003ii4u6rgnlqr5",
       "createdAt": "2024-05-04T19:08:40.010Z",
@@ -27180,20 +27316,6 @@
       "code": "/**\n * // Definition for a Node.\n * function Node(val, left, right) {\n *      this.val = val;\n *      this.left = left;\n *      this.right = right;\n *  };\n */\n\n/**\n * @param {Node} root\n * @return {Node}\n */\nvar treeToDoublyList = function (root) {\n  if (!root) return null;\n\n  const arr = [];\n\n  const dfs = (node) => {\n    if (!node) return;\n\n    dfs(node.left);\n    arr.push(node);\n    dfs(node.right);\n  };\n  dfs(root);\n\n  const count = arr.length;\n  let head = arr[0];\n  head.left = null;\n\n  for (let i = 0; i < count; i++) {\n    const node = arr[i];\n    const nextNode = i < count - 1 ? arr[i + 1] : head;\n    node.right = nextNode;\n    nextNode.left = node;\n  }\n\n  return head;\n};\n\nreturn treeToDoublyList;\n",
       "pythonCode": null,
       "order": 0
-    },
-    "clvuvgn160001j4tq7iikkyd0": {
-      "id": "clvuvgn160001j4tq7iikkyd0",
-      "createdAt": "2024-05-06T11:22:08.140Z",
-      "updatedAt": "2024-05-07T20:26:28.323Z",
-      "projectId": "clle3n8hq0001l5082f99xgrr",
-      "title": "Solution 2",
-      "slug": "solution-2",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val === k) {\n      queue.removeTail();\n    }\n\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    if (i >= k - 1) {\n      result.push(nums[queue.tail.val]);\n    }\n  }\n\n  return result;\n};\n\nclass MaxQueue extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;\n",
-      "pythonCode": null,
-      "order": 1
     },
     "clwp1upo10003wdocl045qmgs": {
       "id": "clwp1upo10003wdocl045qmgs",
@@ -27366,7 +27488,7 @@
     "clxkbwx6p0003o5x97o629ix3": {
       "id": "clxkbwx6p0003o5x97o629ix3",
       "createdAt": "2024-06-18T11:36:38.397Z",
-      "updatedAt": "2024-06-18T11:37:28.922Z",
+      "updatedAt": "2024-06-24T11:49:53.006Z",
       "projectId": "clxkbwx6m0001o5x9lors7pai",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -27394,7 +27516,7 @@
     "clxox3hfc00032jlb4k6xnzbo": {
       "id": "clxox3hfc00032jlb4k6xnzbo",
       "createdAt": "2024-06-21T16:40:41.205Z",
-      "updatedAt": "2024-06-21T16:42:07.530Z",
+      "updatedAt": "2024-06-22T10:25:51.060Z",
       "projectId": "clxox3hfa00012jlb6g1de6bi",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -27419,6 +27541,48 @@
       "pythonCode": null,
       "order": 1
     },
+    "clxq0cc090003uqsmycwgjlc3": {
+      "id": "clxq0cc090003uqsmycwgjlc3",
+      "createdAt": "2024-06-22T10:59:19.110Z",
+      "updatedAt": "2024-06-22T17:46:39.698Z",
+      "projectId": "clxq0cc070001uqsmelwsh0eu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar numberOfSubarrays = function (nums, k) {\n  const n = nums.length;\n\n  let result = 0;\n  let prefixSize = 0;\n  let curCount = 0;\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    nums.setColor(right, \"green\");\n    const num = nums[right];\n    if (num % 2) {\n      curCount++;\n    }\n\n    while (left < right && (curCount > k || !(nums[left] % 2))) {\n      nums.setColor(left, null);\n      if (nums[left] % 2) {\n        curCount--;\n        prefixSize = 0;\n      } else {\n        prefixSize++;\n      }\n      left++;\n    }\n\n    if (curCount === k) {\n      result += prefixSize + 1;\n    }\n  }\n\n  return result;\n};\n\nreturn numberOfSubarrays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxsx50o20003igiumj2b2u0d": {
+      "id": "clxsx50o20003igiumj2b2u0d",
+      "createdAt": "2024-06-24T11:52:57.506Z",
+      "updatedAt": "2024-06-24T17:49:50.139Z",
+      "projectId": "clxsx50o20001igiuqaaajuwf",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar minKBitFlips = function (nums, k) {\n  const v = new Object();\n  v.flips = 0;\n  v.totalFlips = 0;\n\n  let left = 0;\n  for (let right = 0; right < nums.length; right++) {\n    nums.setColor(right, \"green\");\n    if (right >= k && nums[left] === 2) {\n      v.flips--;\n    }\n\n    if (v.flips % 2 === nums[right]) {\n      if (right + k > nums.length) {\n        return -1;\n      }\n\n      nums[right] = 2;\n      v.flips++;\n      v.totalFlips++;\n    }\n\n    if (right - left === k) {\n      nums.setColor(left, null);\n      left++; \n    }\n  }\n\n  return v.totalFlips;\n};\n\nreturn minKBitFlips;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxw2fsou0003lfwu5y08qqcx": {
+      "id": "clxw2fsou0003lfwu5y08qqcx",
+      "createdAt": "2024-06-26T16:44:36.990Z",
+      "updatedAt": "2024-06-26T16:46:28.957Z",
+      "projectId": "clxw2fsou0001lfwuwimf3u3v",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar maximumInvitations = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const matches = new Map();\n\n  const dfs = (boy, visited) => {\n    for (let girl = 0; girl < n; girl++) {\n      grid[boy].setColor(girl, \"green\");\n      if (grid[boy][girl] && !visited[girl]) {\n        visited[girl] = 1;\n\n        if (!matches.has(girl) || dfs(matches.get(girl), visited)) {\n          matches.set(girl, boy);\n          return true;\n        }\n      }\n      grid[boy].setColor(girl, null);\n    }\n\n    return false;\n  };\n\n  for (let boy = 0; boy < m; boy++) {\n    const visited = new Uint8Array(n);\n    dfs(boy, visited);\n  }\n\n  return matches.size;\n};\n\nreturn maximumInvitations;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clxiqmzld0001130xxit04fwd": {
       "id": "clxiqmzld0001130xxit04fwd",
       "createdAt": "2024-06-17T08:53:16.849Z",
@@ -27432,6 +27596,48 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} s\n * @return {TreeNode}\n */\nvar str2tree = function (s) {\n  if (!s) return null;\n  const n = s.length;\n\n  const root = new BinaryTree();\n  const stack = new Array();\n  stack.push(root);\n\n  let index = 0;\n  while (index < n) {\n    const node = stack.pop();\n\n    const isNegative = s[index] === \"-\";\n    if (isDigit(s[index]) || isNegative) {\n      if (isNegative) index++;\n      let val = 0;\n\n      while (isDigit(s[index])) {\n        s.setColor(index, \"green\");\n        val *= 10;\n        val += +s[index++];\n      }\n      if (isNegative) val *= -1;\n\n      node.val = val;\n\n      if (s[index] === \"(\") {\n        stack.push(node);\n\n        node.left = new BinaryTree();\n        stack.push(node.left);\n      }\n    } else if (node.left && s[index] === \"(\") {\n      stack.push(node);\n\n      node.right = new BinaryTree();\n      stack.push(node.right);\n    }\n\n    index++;\n  }\n\n  if (stack.length) return stack.pop();\n  return root;\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn str2tree;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clle3n8hq0003l508fj2fwz3u": {
+      "id": "clle3n8hq0003l508fj2fwz3u",
+      "createdAt": "2023-08-16T19:02:04.478Z",
+      "updatedAt": "2024-06-22T10:26:33.963Z",
+      "projectId": "clle3n8hq0001l5082f99xgrr",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < k; i++) {\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n  }\n\n  result.push(nums[queue.tail.val]);\n\n  for (let i = k; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val >= k) {\n      queue.removeTail();\n    }\n\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    result.push(nums[queue.tail?.val]);\n  }\n\n  return result;\n};\n\nclass MaxQueue {\n  constructor(size) {\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clvuvgn160001j4tq7iikkyd0": {
+      "id": "clvuvgn160001j4tq7iikkyd0",
+      "createdAt": "2024-05-06T11:22:08.140Z",
+      "updatedAt": "2024-06-22T10:27:44.649Z",
+      "projectId": "clle3n8hq0001l5082f99xgrr",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar maxSlidingWindow = function (nums, k) {\n  const result = new Array();\n\n  const queue = new MaxQueue(k);\n\n  for (let i = 0; i < nums.length; i++) {\n    if (queue.tail && i - queue.tail.val === k) {\n      nums.setColor(queue.tail.val, null);\n      queue.removeTail();\n    }\n\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    while (queue.head && num >= nums[queue.head.val]) {\n      nums.setColor(queue.head.val, null);\n      queue.removeHead();\n    }\n    queue.setHead(i);\n\n    if (i >= k - 1) {\n      result.push(nums[queue.tail.val]);\n    }\n  }\n\n  return result;\n};\n\nclass MaxQueue extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.tail = null;\n    this.head = null;\n  }\n\n  setTail(val) {\n    const newNode = new ListNode(val);\n    if (!this.tail) {\n      this.tail = newNode;\n      this.head = newNode;\n    } else {\n      newNode.prev = this.tail;\n      this.tail.next = newNode;\n      this.tail = this.tail.next;\n    }\n  }\n\n  setHead(val) {\n    const newNode = new ListNode(val);\n\n    if (!this.head) {\n      this.head = newNode;\n      this.tail = newNode;\n    } else {\n      newNode.next = this.head;\n      this.head.prev = newNode;\n      this.head = newNode;\n    }\n  }\n\n  removeHead() {\n    if (!this.head) return;\n\n    const tmp = this.head.next;\n    this.head.next = null;\n    tmp && (tmp.prev = null);\n    if (this.head === this.tail) this.tail = null;\n    this.head = tmp;\n  }\n\n  removeTail() {\n    if (!this.tail) return;\n\n    const tmp = this.tail.prev;\n    this.tail.prev = null;\n    tmp && (tmp.next = null);\n    if (this.tail === this.head) this.head = null;\n    this.tail = tmp;\n  }\n}\n\nreturn maxSlidingWindow;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "clxt9w8jp0003n8qbcj8ppn9p": {
+      "id": "clxt9w8jp0003n8qbcj8ppn9p",
+      "createdAt": "2024-06-24T17:50:02.821Z",
+      "updatedAt": "2024-06-26T16:44:14.786Z",
+      "projectId": "clxt9w8jp0001n8qbhln6py5e",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar medianSlidingWindow = function (nums, k) {\n  const isEven = k % 2 === 0;\n  const smallList = new PriorityQueue({ compare: (a, b) => b - a }); // <- MaxHeap\n  const largeList = new PriorityQueue({ compare: (a, b) => a - b });\n  const staleNumsMap = new Map();\n  const result = new Array();\n\n  for (let i = 0; i < k; i++) {\n    smallList.enqueue(nums[i]);\n  }\n\n  for (let i = 0; i < Math.floor(k / 2); i++) {\n    largeList.enqueue(smallList.dequeue());\n  }\n\n  for (let i = k; i <= nums.length; i++) {\n    if (isEven) {\n      result.push((smallList.front() + largeList.front()) / 2);\n    } else {\n      result.push(smallList.front());\n    }\n\n    if (i >= nums.length) break;\n\n    const outGoingNum = nums[i - k];\n    const inNum = nums[i];\n\n    let balance = 0;\n    if (outGoingNum <= smallList.front()) {\n      balance--;\n    } else {\n      balance++;\n    }\n\n    staleNumsMap.set(outGoingNum, (staleNumsMap.get(outGoingNum) ?? 0) + 1);\n\n    if (inNum <= smallList.front()) {\n      balance++;\n      smallList.enqueue(inNum);\n    } else {\n      balance--;\n      largeList.enqueue(inNum);\n    }\n\n    // rebalance\n    if (balance < 0) {\n      smallList.enqueue(largeList.dequeue());\n    } else if (balance > 0) {\n      largeList.enqueue(smallList.dequeue());\n    }\n\n    // remove stale nums (trim)\n    while (staleNumsMap.get(smallList.front()) > 0) {\n      const num = smallList.dequeue();\n      staleNumsMap.set(num, staleNumsMap.get(num) - 1);\n    }\n\n    while (largeList.size() > 0 && staleNumsMap.get(largeList.front()) > 0) {\n      const num = largeList.dequeue();\n      staleNumsMap.set(num, staleNumsMap.get(num) - 1);\n    }\n  }\n\n  return result;\n};\n\nreturn medianSlidingWindow;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
