@@ -4829,6 +4829,62 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clxwznxfj0001bnokq20wopnp": {
+      "id": "clxwznxfj0001bnokq20wopnp",
+      "createdAt": "2024-06-27T08:14:43.711Z",
+      "updatedAt": "2024-06-27T08:14:43.711Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Print Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/print-binary-tree",
+      "slug": "print-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxxk9pm100019bvsso6ot0pz": {
+      "id": "clxxk9pm100019bvsso6ot0pz",
+      "createdAt": "2024-06-27T17:51:32.328Z",
+      "updatedAt": "2024-06-27T17:51:32.328Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest Absolute File Path",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-absolute-file-path",
+      "slug": "longest-absolute-file-path",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clxyf7j9y00017ai3z7fhpkyz": {
+      "id": "clxyf7j9y00017ai3z7fhpkyz",
+      "createdAt": "2024-06-28T08:17:38.886Z",
+      "updatedAt": "2024-06-28T08:17:38.886Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find All Possible Recipes from Given Supplies",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies",
+      "slug": "find-all-possible-recipes-from-given-supplies",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly09u6bd00019ie39i745qha": {
+      "id": "cly09u6bd00019ie39i745qha",
+      "createdAt": "2024-06-29T15:22:49.850Z",
+      "updatedAt": "2024-06-29T15:22:49.850Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "All Ancestors of a Node in a Directed Acyclic Graph",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph",
+      "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20496,6 +20552,100 @@
         }
       },
       "description": null
+    },
+    "clxwznxfj0002bnokqr6spv04": {
+      "id": "clxwznxfj0002bnokqr6spv04",
+      "createdAt": "2024-06-27T08:14:43.711Z",
+      "updatedAt": "2024-06-27T08:15:56.249Z",
+      "projectId": "clxwznxfj0001bnokq20wopnp",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[1,2,3,null,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxxk9pm400029bvs8eef45qs": {
+      "id": "clxxk9pm400029bvs8eef45qs",
+      "createdAt": "2024-06-27T17:51:32.328Z",
+      "updatedAt": "2024-06-27T17:52:05.298Z",
+      "projectId": "clxxk9pm100019bvsso6ot0pz",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4iHvP8LmSiTh8HBUm2m9uS": {
+          "name": "4iHvP8LmSiTh8HBUm2m9uS",
+          "type": "string",
+          "input": "dir\\n\\tsubdir1\\n\\t\\tfile1.ext\\n\\t\\tsubsubdir1\\n\\tsubdir2\\n\\t\\tsubsubdir2\\n\\t\\t\\tfile2.ext",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clxyf7j9y00027ai3ijo0ttat": {
+      "id": "clxyf7j9y00027ai3ijo0ttat",
+      "createdAt": "2024-06-28T08:17:38.886Z",
+      "updatedAt": "2024-06-28T08:23:51.940Z",
+      "projectId": "clxyf7j9y00017ai3z7fhpkyz",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1YKY7bo8HCWCuzKeAWABvX": {
+          "name": "1YKY7bo8HCWCuzKeAWABvX",
+          "type": "array",
+          "input": "[\"yeast\",\"flour\",\"meat\"]",
+          "order": 2
+        },
+        "rgpiKLVXDhQdfKoV1aQEz2": {
+          "name": "rgpiKLVXDhQdfKoV1aQEz2",
+          "type": "array",
+          "input": "[[\"yeast\",\"flour\"],[\"bread\",\"meat\"],[\"sandwich\",\"meat\",\"bread\"]]",
+          "order": 1
+        },
+        "vuMLfZby6gfZ3vFT5ssp2J": {
+          "name": "vuMLfZby6gfZ3vFT5ssp2J",
+          "type": "array",
+          "input": "[\"bread\",\"sandwich\",\"burger\"]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly09u6bd00029ie35fupd5vp": {
+      "id": "cly09u6bd00029ie35fupd5vp",
+      "createdAt": "2024-06-29T15:22:49.850Z",
+      "updatedAt": "2024-06-29T15:23:07.289Z",
+      "projectId": "cly09u6bd00019ie39i745qha",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "j3xmkVoZ2JHDjJhgEtc9zh": {
+          "name": "j3xmkVoZ2JHDjJhgEtc9zh",
+          "type": "number",
+          "input": "8",
+          "order": 0
+        },
+        "ojRhuDPueA8i7bovauvKH7": {
+          "name": "ojRhuDPueA8i7bovauvKH7",
+          "type": "array",
+          "input": "[[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]]",
+          "order": 1
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -26813,6 +26963,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clxyf7j9y00037ai3ovd6qf6r": {
+      "id": "clxyf7j9y00037ai3ovd6qf6r",
+      "createdAt": "2024-06-28T08:17:38.886Z",
+      "updatedAt": "2024-06-28T08:24:14.127Z",
+      "projectId": "clxyf7j9y00017ai3z7fhpkyz",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} recipes\n * @param {string[][]} ingredients\n * @param {string[]} supplies\n * @return {string[]}\n */\nvar findAllRecipes = function (recipes, ingredients, supplies) {\n  const n = recipes.length;\n  const graph = new Object();\n  const sup = new Set(supplies);\n  const indegrees = new Object();\n  for (const name of recipes) indegrees[name] = 0;\n\n  for (let i = 0; i < n; i++) {\n    const recipe = recipes[i];\n    for (let j = 0; j < ingredients[i].length; j++) {\n      const ingredient = ingredients[i][j];\n      if (!sup.has(ingredient)) {\n        (graph[ingredient] ??= new Array()).push(recipe);\n        indegrees[recipe]++;\n      }\n    }\n  }\n\n  const queue = new Queue();\n  for (const name in indegrees) {\n    if (indegrees[name] === 0) {\n      queue.enqueue(name);\n    }\n  }\n\n  const result = new Array();\n  while (!queue.isEmpty()) {\n    const name = queue.dequeue();\n    result.push(name);\n\n    if (!graph[name]) continue;\n    for (const next of graph[name]) {\n      indegrees[next]--;\n      if (indegrees[next] === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn findAllRecipes;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clxkotivl0003esnuxibl24r4": {
       "id": "clxkotivl0003esnuxibl24r4",
       "createdAt": "2024-06-18T17:37:54.897Z",
@@ -27541,20 +27705,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "clxq0cc090003uqsmycwgjlc3": {
-      "id": "clxq0cc090003uqsmycwgjlc3",
-      "createdAt": "2024-06-22T10:59:19.110Z",
-      "updatedAt": "2024-06-22T17:46:39.698Z",
-      "projectId": "clxq0cc070001uqsmelwsh0eu",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar numberOfSubarrays = function (nums, k) {\n  const n = nums.length;\n\n  let result = 0;\n  let prefixSize = 0;\n  let curCount = 0;\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    nums.setColor(right, \"green\");\n    const num = nums[right];\n    if (num % 2) {\n      curCount++;\n    }\n\n    while (left < right && (curCount > k || !(nums[left] % 2))) {\n      nums.setColor(left, null);\n      if (nums[left] % 2) {\n        curCount--;\n        prefixSize = 0;\n      } else {\n        prefixSize++;\n      }\n      left++;\n    }\n\n    if (curCount === k) {\n      result += prefixSize + 1;\n    }\n  }\n\n  return result;\n};\n\nreturn numberOfSubarrays;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clxsx50o20003igiumj2b2u0d": {
       "id": "clxsx50o20003igiumj2b2u0d",
       "createdAt": "2024-06-24T11:52:57.506Z",
@@ -27569,10 +27719,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "clxq0cc090003uqsmycwgjlc3": {
+      "id": "clxq0cc090003uqsmycwgjlc3",
+      "createdAt": "2024-06-22T10:59:19.110Z",
+      "updatedAt": "2024-06-29T15:22:36.140Z",
+      "projectId": "clxq0cc070001uqsmelwsh0eu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nvar numberOfSubarrays = function (nums, k) {\n  const n = nums.length;\n\n  let result = 0;\n  let prefixSize = 0;\n  let curCount = 0;\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    nums.setColor(right, \"green\");\n    const num = nums[right];\n    if (num % 2) {\n      curCount++;\n    }\n\n    while (left < right && (curCount > k || !(nums[left] % 2))) {\n      nums.setColor(left, null);\n      if (nums[left] % 2) {\n        curCount--;\n        prefixSize = 0;\n      } else {\n        prefixSize++;\n      }\n      left++;\n    }\n\n    if (curCount === k) {\n      result += prefixSize + 1;\n    }\n  }\n\n  return result;\n};\n\nreturn numberOfSubarrays;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clxw2fsou0003lfwu5y08qqcx": {
       "id": "clxw2fsou0003lfwu5y08qqcx",
       "createdAt": "2024-06-26T16:44:36.990Z",
-      "updatedAt": "2024-06-26T16:46:28.957Z",
+      "updatedAt": "2024-06-27T08:14:33.792Z",
       "projectId": "clxw2fsou0001lfwuwimf3u3v",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -27580,6 +27744,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar maximumInvitations = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const matches = new Map();\n\n  const dfs = (boy, visited) => {\n    for (let girl = 0; girl < n; girl++) {\n      grid[boy].setColor(girl, \"green\");\n      if (grid[boy][girl] && !visited[girl]) {\n        visited[girl] = 1;\n\n        if (!matches.has(girl) || dfs(matches.get(girl), visited)) {\n          matches.set(girl, boy);\n          return true;\n        }\n      }\n      grid[boy].setColor(girl, null);\n    }\n\n    return false;\n  };\n\n  for (let boy = 0; boy < m; boy++) {\n    const visited = new Uint8Array(n);\n    dfs(boy, visited);\n  }\n\n  return matches.size;\n};\n\nreturn maximumInvitations;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxwznxfj0003bnok3ezeq5ai": {
+      "id": "clxwznxfj0003bnok3ezeq5ai",
+      "createdAt": "2024-06-27T08:14:43.711Z",
+      "updatedAt": "2024-06-27T08:17:24.333Z",
+      "projectId": "clxwznxfj0001bnokq20wopnp",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {string[][]}\n */\nvar printTree = function (root) {\n  const getHeight = (node) => {\n    if (!node) return 0;\n\n    const left = getHeight(node.left);\n    const right = getHeight(node.right);\n\n    return 1 + Math.max(left, right);\n  };\n\n  const height = getHeight(root) - 1;\n  const cols = 2 ** (height + 1) - 1;\n\n  const result = Array.from({ length: height + 1 }, () =>\n    new Array(cols).fill(\"\"),\n  );\n\n  const dfs = (node, row, col) => {\n    if (!node) return;\n\n    result[row][col] = node.val.toString();\n\n    const nRow = row + 1;\n    const diff = 2 ** (height - nRow);\n\n    dfs(node.left, nRow, col - diff);\n    dfs(node.right, nRow, col + diff);\n  };\n\n  dfs(root, 0, Math.floor(cols / 2));\n\n  return result;\n};\n\nreturn printTree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxxk9pm400039bvsdvpw2vqo": {
+      "id": "clxxk9pm400039bvsdvpw2vqo",
+      "createdAt": "2024-06-27T17:51:32.328Z",
+      "updatedAt": "2024-06-28T08:16:50.243Z",
+      "projectId": "clxxk9pm100019bvsso6ot0pz",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} input\n * @return {number}\n */\nvar lengthLongestPath = function (input) {\n  let result = 0;\n  const sizes = [0];\n\n  const lines = input.split(\"\\n\");\n  for (const line of lines) {\n    let tabs = 0;\n    while (line[tabs] === \"\\t\") tabs++;\n\n    const prevSize = sizes[tabs];\n    const len = prevSize + line.length - tabs + 1;\n    sizes[tabs + 1] = len;\n\n    if (line.includes(\".\")) {\n      result = Math.max(result, len - 1);\n    }\n  }\n\n  return result;\n};\n\nreturn lengthLongestPath;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -27636,6 +27828,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nvar medianSlidingWindow = function (nums, k) {\n  const isEven = k % 2 === 0;\n  const smallList = new PriorityQueue({ compare: (a, b) => b - a }); // <- MaxHeap\n  const largeList = new PriorityQueue({ compare: (a, b) => a - b });\n  const staleNumsMap = new Map();\n  const result = new Array();\n\n  for (let i = 0; i < k; i++) {\n    smallList.enqueue(nums[i]);\n  }\n\n  for (let i = 0; i < Math.floor(k / 2); i++) {\n    largeList.enqueue(smallList.dequeue());\n  }\n\n  for (let i = k; i <= nums.length; i++) {\n    if (isEven) {\n      result.push((smallList.front() + largeList.front()) / 2);\n    } else {\n      result.push(smallList.front());\n    }\n\n    if (i >= nums.length) break;\n\n    const outGoingNum = nums[i - k];\n    const inNum = nums[i];\n\n    let balance = 0;\n    if (outGoingNum <= smallList.front()) {\n      balance--;\n    } else {\n      balance++;\n    }\n\n    staleNumsMap.set(outGoingNum, (staleNumsMap.get(outGoingNum) ?? 0) + 1);\n\n    if (inNum <= smallList.front()) {\n      balance++;\n      smallList.enqueue(inNum);\n    } else {\n      balance--;\n      largeList.enqueue(inNum);\n    }\n\n    // rebalance\n    if (balance < 0) {\n      smallList.enqueue(largeList.dequeue());\n    } else if (balance > 0) {\n      largeList.enqueue(smallList.dequeue());\n    }\n\n    // remove stale nums (trim)\n    while (staleNumsMap.get(smallList.front()) > 0) {\n      const num = smallList.dequeue();\n      staleNumsMap.set(num, staleNumsMap.get(num) - 1);\n    }\n\n    while (largeList.size() > 0 && staleNumsMap.get(largeList.front()) > 0) {\n      const num = largeList.dequeue();\n      staleNumsMap.set(num, staleNumsMap.get(num) - 1);\n    }\n  }\n\n  return result;\n};\n\nreturn medianSlidingWindow;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly09u6be00039ie3gax3a4ai": {
+      "id": "cly09u6be00039ie3gax3a4ai",
+      "createdAt": "2024-06-29T15:22:49.850Z",
+      "updatedAt": "2024-06-29T15:24:17.029Z",
+      "projectId": "cly09u6bd00019ie39i745qha",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[][]}\n */\nvar getAncestors = function (n, edges) {\n  const adjList = new Object();\n  for (const [from, to] of edges) {\n    (adjList[from] ??= new Array()).push(to);\n  }\n\n  const result = Array.from({ length: n }, () => new Array());\n\n  const dfs = (ancestor, node) => {\n    if (adjList[node]) {\n      for (const next of adjList[node]) {\n        if (result[next].at(-1) !== ancestor) {\n          result[next].push(ancestor);\n          dfs(ancestor, next);\n        }\n      }\n    }\n  };\n\n  for (let i = 0; i < n; i++) {\n    dfs(i, i);\n  }\n\n  return result;\n};\n\nreturn getAncestors;\n",
       "pythonCode": null,
       "order": 0
     }
