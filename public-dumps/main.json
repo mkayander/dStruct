@@ -4885,6 +4885,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cly3080q6000113n61uji87ne": {
+      "id": "cly3080q6000113n61uji87ne",
+      "createdAt": "2024-07-01T13:16:58.158Z",
+      "updatedAt": "2024-07-01T13:16:58.158Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Battleships in a Board",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/battleships-in-a-board",
+      "slug": "battleships-in-a-board",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20646,6 +20660,25 @@
         }
       },
       "description": null
+    },
+    "cly3080q6000213n6fysstrt7": {
+      "id": "cly3080q6000213n6fysstrt7",
+      "createdAt": "2024-07-01T13:16:58.158Z",
+      "updatedAt": "2024-07-01T13:17:27.160Z",
+      "projectId": "cly3080q6000113n61uji87ne",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "3Kbo9w8BmKs6SknjDRHDSW": {
+          "name": "3Kbo9w8BmKs6SknjDRHDSW",
+          "type": "matrix",
+          "input": "[[\"X\",\".\",\".\",\"X\"],[\".\",\".\",\".\",\"X\"],[\".\",\".\",\".\",\"X\"]]",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -26865,6 +26898,20 @@
       "pythonCode": null,
       "order": 3
     },
+    "cly3080q6000313n68oiplgu8": {
+      "id": "cly3080q6000313n68oiplgu8",
+      "createdAt": "2024-07-01T13:16:58.158Z",
+      "updatedAt": "2024-07-01T13:22:12.971Z",
+      "projectId": "cly3080q6000113n61uji87ne",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {character[][]} board\n * @return {number}\n */\nvar countBattleships = function (board) {\n  const m = board.length;\n  const n = board[0].length;\n\n  let count = 0;\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (board[row][col] !== \"X\") continue;\n      board[row].setColor(col, \"green\");\n\n      if (col === n - 1 || board[row][col + 1] === \".\") {\n        if (board[row - 1]?.[col] !== \"X\" && board[row + 1]?.[col] !== \"X\") {\n          count++;\n        }\n      }\n\n      if (row === m - 1 || board[row + 1][col] === \".\") {\n        if (board[row - 1]?.[col] === \"X\") {\n          count++;\n        }\n      }\n    }\n  }\n\n  return count;\n};\n\nreturn countBattleships;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
@@ -26963,20 +27010,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clxyf7j9y00037ai3ovd6qf6r": {
-      "id": "clxyf7j9y00037ai3ovd6qf6r",
-      "createdAt": "2024-06-28T08:17:38.886Z",
-      "updatedAt": "2024-06-28T08:24:14.127Z",
-      "projectId": "clxyf7j9y00017ai3z7fhpkyz",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string[]} recipes\n * @param {string[][]} ingredients\n * @param {string[]} supplies\n * @return {string[]}\n */\nvar findAllRecipes = function (recipes, ingredients, supplies) {\n  const n = recipes.length;\n  const graph = new Object();\n  const sup = new Set(supplies);\n  const indegrees = new Object();\n  for (const name of recipes) indegrees[name] = 0;\n\n  for (let i = 0; i < n; i++) {\n    const recipe = recipes[i];\n    for (let j = 0; j < ingredients[i].length; j++) {\n      const ingredient = ingredients[i][j];\n      if (!sup.has(ingredient)) {\n        (graph[ingredient] ??= new Array()).push(recipe);\n        indegrees[recipe]++;\n      }\n    }\n  }\n\n  const queue = new Queue();\n  for (const name in indegrees) {\n    if (indegrees[name] === 0) {\n      queue.enqueue(name);\n    }\n  }\n\n  const result = new Array();\n  while (!queue.isEmpty()) {\n    const name = queue.dequeue();\n    result.push(name);\n\n    if (!graph[name]) continue;\n    for (const next of graph[name]) {\n      indegrees[next]--;\n      if (indegrees[next] === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn findAllRecipes;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clxkotivl0003esnuxibl24r4": {
       "id": "clxkotivl0003esnuxibl24r4",
       "createdAt": "2024-06-18T17:37:54.897Z",
@@ -26988,6 +27021,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * // This is the GridMaster's API interface.\n * // You should not implement it, or speculate about its implementation\n * function GridMaster() {\n *\n *     @param {character} direction\n *     @return {boolean}\n *     this.canMove = function(direction) {\n *         ...\n *     };\n *     @param {character} direction\n *     @return {void}\n *     this.move = function(direction) {\n *         ...\n *     };\n *     @return {boolean}\n *     this.isTarget = function() {\n *         ...\n *     };\n * };\n */\n\n/**\n * @param {GridMaster} master\n * @return {integer}\n */\nvar findShortestPath = function (master) {\n  const UNEXPLORED = 0;\n  const BLOCKED = 1;\n  const EMPTY = 2;\n  const TARGET = 4;\n\n  const m = 500;\n  const n = 500;\n  const grid = Array.from(\n    { length: m * 2 + 1 },\n    () => new Uint32Array(n * 2 + 1),\n  );\n\n  const dfs = (row, col) => {\n    if (grid[row][col] !== UNEXPLORED) return;\n\n    if (master.isTarget()) {\n      grid[row][col] = TARGET;\n      return true;\n    }\n    grid[row][col] = EMPTY;\n\n    let isFound = false;\n\n    for (let i = 0; i < 4; i++) {\n      const [dRow, dCol] = DIRECTIONS[i];\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      const dir = DIR_LABELS[i];\n\n      if (master.canMove(dir)) {\n        master.move(dir);\n        const res = dfs(nRow, nCol);\n        isFound ||= res;\n        master.move(OPPS[dir]);\n      } else {\n        grid[nRow][nCol] = BLOCKED;\n      }\n    }\n\n    return isFound;\n  };\n\n  const isReachable = dfs(m, n);\n  if (!isReachable) return -1;\n\n  let queue = [[m, n]];\n  grid[m][n] = BLOCKED;\n  let steps = 0;\n  while (queue.length) {\n    steps++;\n    const nextLevel = [];\n    for (const [row, col] of queue) {\n      for (const [dRow, dCol] of DIRECTIONS) {\n        const nRow = row + dRow,\n          nCol = col + dCol;\n\n        if (grid[nRow][nCol] === TARGET) return steps;\n        if (grid[nRow][nCol] !== EMPTY) continue;\n        grid[nRow][nCol] = BLOCKED;\n\n        nextLevel.push([nRow, nCol]);\n      }\n    }\n\n    queue = nextLevel;\n  }\n\n  return -1;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nconst DIR_LABELS = [\"U\", \"R\", \"D\", \"L\"];\n\nconst OPPS = {\n  U: \"D\",\n  D: \"U\",\n  L: \"R\",\n  R: \"L\",\n};\n\nreturn findShortestPath;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clxyf7j9y00037ai3ovd6qf6r": {
+      "id": "clxyf7j9y00037ai3ovd6qf6r",
+      "createdAt": "2024-06-28T08:17:38.886Z",
+      "updatedAt": "2024-07-01T13:16:40.129Z",
+      "projectId": "clxyf7j9y00017ai3z7fhpkyz",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} recipes\n * @param {string[][]} ingredients\n * @param {string[]} supplies\n * @return {string[]}\n */\nvar findAllRecipes = function (recipes, ingredients, supplies) {\n  const n = recipes.length;\n  const graph = new Object();\n  const sup = new Set(supplies);\n  const indegrees = new Object();\n  for (const name of recipes) indegrees[name] = 0;\n\n  for (let i = 0; i < n; i++) {\n    const recipe = recipes[i];\n    for (let j = 0; j < ingredients[i].length; j++) {\n      const ingredient = ingredients[i][j];\n      if (!sup.has(ingredient)) {\n        (graph[ingredient] ??= new Array()).push(recipe);\n        indegrees[recipe]++;\n      }\n    }\n  }\n\n  const queue = new Queue();\n  for (const name in indegrees) {\n    if (indegrees[name] === 0) {\n      queue.enqueue(name);\n    }\n  }\n\n  const result = new Array();\n  while (!queue.isEmpty()) {\n    const name = queue.dequeue();\n    result.push(name);\n\n    if (!graph[name]) continue;\n    for (const next of graph[name]) {\n      indegrees[next]--;\n      if (indegrees[next] === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn findAllRecipes;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -27834,7 +27881,7 @@
     "cly09u6be00039ie3gax3a4ai": {
       "id": "cly09u6be00039ie3gax3a4ai",
       "createdAt": "2024-06-29T15:22:49.850Z",
-      "updatedAt": "2024-06-29T15:24:17.029Z",
+      "updatedAt": "2024-06-29T15:34:42.514Z",
       "projectId": "cly09u6bd00019ie39i745qha",
       "title": "Solution 1",
       "slug": "solution-1",
