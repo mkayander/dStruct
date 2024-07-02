@@ -4899,6 +4899,76 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cly35os5y0001krhr07qwe4pj": {
+      "id": "cly35os5y0001krhr07qwe4pj",
+      "createdAt": "2024-07-01T15:49:58.292Z",
+      "updatedAt": "2024-07-01T15:49:58.292Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Strobogrammatic Number II",
+      "category": "BACKTRACKING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/strobogrammatic-number-ii",
+      "slug": "strobogrammatic-number-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly3grfhq000114fvgdfavkjv": {
+      "id": "cly3grfhq000114fvgdfavkjv",
+      "createdAt": "2024-07-01T20:59:57.614Z",
+      "updatedAt": "2024-07-01T20:59:57.614Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Lunar Rover",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "",
+      "slug": "lunar-rover",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly49ye990001b788jsnbzm4i": {
+      "id": "cly49ye990001b788jsnbzm4i",
+      "createdAt": "2024-07-02T10:37:11.463Z",
+      "updatedAt": "2024-07-02T10:37:11.463Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Largest BST Subtree",
+      "category": "BST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/largest-bst-subtree",
+      "slug": "largest-bst-subtree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly4an8id0001id96v8t01hjl": {
+      "id": "cly4an8id0001id96v8t01hjl",
+      "createdAt": "2024-07-02T10:56:30.407Z",
+      "updatedAt": "2024-07-02T10:56:30.407Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Path Sum II",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/path-sum-ii",
+      "slug": "path-sum-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly4duwaq00012ubr6peggb60": {
+      "id": "cly4duwaq00012ubr6peggb60",
+      "createdAt": "2024-07-02T12:26:26.689Z",
+      "updatedAt": "2024-07-02T12:26:26.689Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Insertions to Balance a Parentheses String",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string",
+      "slug": "minimum-insertions-to-balance-a-parentheses-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20636,6 +20706,31 @@
       },
       "description": null
     },
+    "cly3gs8jb000714fv9oxfzjwe": {
+      "id": "cly3gs8jb000714fv9oxfzjwe",
+      "createdAt": "2024-07-01T21:00:35.256Z",
+      "updatedAt": "2024-07-01T21:00:37.462Z",
+      "projectId": "cly3grfhq000114fvgdfavkjv",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "100",
+          "order": 0
+        },
+        "hb28kgJBmmLRbhtaARUUdH": {
+          "name": "hb28kgJBmmLRbhtaARUUdH",
+          "type": "array",
+          "input": "[[0, 20], [20, 10], [40, 10], [60, 40]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cly09u6bd00029ie35fupd5vp": {
       "id": "cly09u6bd00029ie35fupd5vp",
       "createdAt": "2024-06-29T15:22:49.850Z",
@@ -20661,6 +20756,25 @@
       },
       "description": null
     },
+    "cly49ye9b0002b788sitwm0yw": {
+      "id": "cly49ye9b0002b788sitwm0yw",
+      "createdAt": "2024-07-02T10:37:11.463Z",
+      "updatedAt": "2024-07-02T10:37:39.297Z",
+      "projectId": "cly49ye990001b788jsnbzm4i",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "qcNogQw5PfSvvkysNbigpi": {
+          "name": "qcNogQw5PfSvvkysNbigpi",
+          "type": "binaryTree",
+          "input": "[10,5,15,1,8,null,7]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cly3080q6000213n6fysstrt7": {
       "id": "cly3080q6000213n6fysstrt7",
       "createdAt": "2024-07-01T13:16:58.158Z",
@@ -20676,6 +20790,119 @@
           "type": "matrix",
           "input": "[[\"X\",\".\",\".\",\"X\"],[\".\",\".\",\".\",\"X\"],[\".\",\".\",\".\",\"X\"]]",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly4an8if0002id961baa45y4": {
+      "id": "cly4an8if0002id961baa45y4",
+      "createdAt": "2024-07-02T10:56:30.407Z",
+      "updatedAt": "2024-07-02T10:56:57.522Z",
+      "projectId": "cly4an8id0001id96v8t01hjl",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "binaryTree",
+          "input": "[5,4,8,11,null,13,4,7,2,null,null,5,1]",
+          "order": 0
+        },
+        "9hztQfPDaw4epCzLhz8YMb": {
+          "name": "9hztQfPDaw4epCzLhz8YMb",
+          "type": "number",
+          "input": "22",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cly35os600002krhrey645n39": {
+      "id": "cly35os600002krhrey645n39",
+      "createdAt": "2024-07-01T15:49:58.292Z",
+      "updatedAt": "2024-07-01T15:53:52.533Z",
+      "projectId": "cly35os5y0001krhr07qwe4pj",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "r9fQs75btFAdRfVgfadmT1": {
+          "name": "r9fQs75btFAdRfVgfadmT1",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly4duwar00022ubri17r6c0l": {
+      "id": "cly4duwar00022ubri17r6c0l",
+      "createdAt": "2024-07-02T12:26:26.689Z",
+      "updatedAt": "2024-07-02T12:26:54.200Z",
+      "projectId": "cly4duwaq00012ubr6peggb60",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "string",
+          "input": "))())(",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly3grfhq000214fvzbncvnyj": {
+      "id": "cly3grfhq000214fvzbncvnyj",
+      "createdAt": "2024-07-01T20:59:57.614Z",
+      "updatedAt": "2024-07-01T21:00:23.827Z",
+      "projectId": "cly3grfhq000114fvgdfavkjv",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "100",
+          "order": 0
+        },
+        "hb28kgJBmmLRbhtaARUUdH": {
+          "name": "hb28kgJBmmLRbhtaARUUdH",
+          "type": "array",
+          "input": "[[0, 10]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cly3gs0uq000514fvb28xgmi4": {
+      "id": "cly3gs0uq000514fvb28xgmi4",
+      "createdAt": "2024-07-01T21:00:25.298Z",
+      "updatedAt": "2024-07-01T21:00:31.671Z",
+      "projectId": "cly3grfhq000114fvgdfavkjv",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "number",
+          "input": "100",
+          "order": 0
+        },
+        "hb28kgJBmmLRbhtaARUUdH": {
+          "name": "hb28kgJBmmLRbhtaARUUdH",
+          "type": "array",
+          "input": "[[0, 1], [20, 1], [40, 1], [60, 1], [80, 1]]",
+          "order": 1
         }
       },
       "description": null
@@ -27881,7 +28108,7 @@
     "cly09u6be00039ie3gax3a4ai": {
       "id": "cly09u6be00039ie3gax3a4ai",
       "createdAt": "2024-06-29T15:22:49.850Z",
-      "updatedAt": "2024-06-29T15:34:42.514Z",
+      "updatedAt": "2024-07-01T20:59:44.325Z",
       "projectId": "cly09u6bd00019ie39i745qha",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -27889,6 +28116,76 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[][]}\n */\nvar getAncestors = function (n, edges) {\n  const adjList = new Object();\n  for (const [from, to] of edges) {\n    (adjList[from] ??= new Array()).push(to);\n  }\n\n  const result = Array.from({ length: n }, () => new Array());\n\n  const dfs = (ancestor, node) => {\n    if (adjList[node]) {\n      for (const next of adjList[node]) {\n        if (result[next].at(-1) !== ancestor) {\n          result[next].push(ancestor);\n          dfs(ancestor, next);\n        }\n      }\n    }\n  };\n\n  for (let i = 0; i < n; i++) {\n    dfs(i, i);\n  }\n\n  return result;\n};\n\nreturn getAncestors;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly35os600003krhrm6wl0mk9": {
+      "id": "cly35os600003krhrm6wl0mk9",
+      "createdAt": "2024-07-01T15:49:58.292Z",
+      "updatedAt": "2024-07-01T15:56:09.094Z",
+      "projectId": "cly35os5y0001krhr07qwe4pj",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @return {string[]}\n */\nvar findStrobogrammatic = function (n) {\n  const pairs = {\n    0: \"0\",\n    1: \"1\",\n    6: \"9\",\n    8: \"8\",\n    9: \"6\",\n  };\n  const symmetric = new Set([\"0\", \"1\", \"8\"]);\n  const isEven = n % 2 === 0;\n\n  const result = new Array();\n\n  if (n === 1) {\n    return [...symmetric];\n  }\n\n  const half = Math.floor(n / 2);\n  const current = [];\n\n  const buildFromState = (state) => {\n    const mirror = [];\n    const curSize = state.length;\n    for (let j = curSize - 1; j >= 0; j--) {\n      const num = state[j];\n      mirror.push(pairs[num]);\n    }\n\n    if (isEven) {\n      result.push([...state, ...mirror].join(\"\"));\n    } else {\n      for (const num of symmetric) {\n        result.push([...state, num, ...mirror].join(\"\"));\n      }\n    }\n  };\n\n  const dfs = (i) => {\n    if (i === half) {\n      buildFromState(current);\n      return;\n    }\n\n    for (const next in pairs) {\n      if (next === \"0\" && i === 0) continue;\n\n      current.push(next);\n      dfs(i + 1);\n      current.pop();\n    }\n  };\n\n  dfs(0);\n\n  return result;\n};\n\nreturn findStrobogrammatic;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly4duwar00032ubrsxnxc9ln": {
+      "id": "cly4duwar00032ubrsxnxc9ln",
+      "createdAt": "2024-07-02T12:26:26.689Z",
+      "updatedAt": "2024-07-02T12:27:20.900Z",
+      "projectId": "cly4duwaq00012ubr6peggb60",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var minInsertions = function (s) {\n  let left = 0; // left paren not paired so far\n  let count = 0;\n\n  for (let i = 0; i < s.length; i++) {\n    if (s[i] === \"(\") {\n      s.setColor(i, \"green\");\n\n      left++;\n    } else {\n      s.setColor(i, \"cyan\");\n\n      if (left === 0) count++;\n      else left--;\n\n      if (s[i + 1] != \")\") count++;\n      else i++;\n    }\n  }\n\n  return count + left * 2;\n};\n\nreturn minInsertions;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly49ye9b0003b788mow3qpe4": {
+      "id": "cly49ye9b0003b788mow3qpe4",
+      "createdAt": "2024-07-02T10:37:11.463Z",
+      "updatedAt": "2024-07-02T10:37:25.270Z",
+      "projectId": "cly49ye990001b788jsnbzm4i",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar largestBSTSubtree = function (root) {\n  if (!root) return 0;\n\n  let result = 0;\n\n  const dfs = (node) => {\n    if (!node) return [Infinity, -Infinity, 0, true];\n\n    const [leftMin, leftMax, leftCount, leftValid] = dfs(node.left);\n    const [rightMin, rightMax, rightCount, rightValid] = dfs(node.right);\n\n    if (\n      !leftValid ||\n      !rightValid ||\n      leftMax >= node.val ||\n      rightMin < node.val\n    ) {\n      return [Infinity, -Infinity, 0, false];\n    }\n\n    const count = leftCount + 1 + rightCount;\n    result = Math.max(result, count);\n\n    const min = Math.min(leftMin, node.val);\n    const max = Math.max(rightMax, node.val);\n\n    return [min, max, count, true];\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn largestBSTSubtree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly4an8if0003id96wlgvrt99": {
+      "id": "cly4an8if0003id96wlgvrt99",
+      "createdAt": "2024-07-02T10:56:30.407Z",
+      "updatedAt": "2024-07-02T12:24:47.350Z",
+      "projectId": "cly4an8id0001id96v8t01hjl",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} targetSum\n * @return {number[][]}\n */\nvar pathSum = function (root, targetSum) {\n  if (!root) return [];\n\n  const result = new Array();\n  const current = new Array();\n  const dfs = (node, sum) => {\n    if (!node) return;\n\n    current.push(node.val);\n    const newSum = sum + node.val;\n    if (isLeaf(node)) {\n      if (newSum === targetSum) {\n        result.push([...current]);\n      }\n    } else {\n      dfs(node.left, newSum);\n      dfs(node.right, newSum);\n    }\n\n    current.pop();\n  };\n\n  dfs(root, 0);\n\n  return result;\n};\n\nfunction isLeaf(node) {\n  return !node.left && !node.right;\n}\n\nreturn pathSum;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly3grfhq000314fv70371wis": {
+      "id": "cly3grfhq000314fv70371wis",
+      "createdAt": "2024-07-01T20:59:57.614Z",
+      "updatedAt": "2024-07-01T21:14:49.578Z",
+      "projectId": "cly3grfhq000114fvgdfavkjv",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "function getMaxDistance(circumference, fuelDrops) {\n  if (fuelDrops.length === 1) return fuelDrops[0][1];\n\n  // Sort fuel drops by location\n  fuelDrops.sort((a, b) => a[0] - b[0]);\n\n  const n = fuelDrops.length;\n  // let totalFuel = fuelDrops.reduce((acc, drop) => acc + drop[1], 0);\n\n  // if (totalFuel < circumference) {\n  //   return totalFuel; // If total fuel is less than circumference, return total fuel\n  // }\n\n  let maxDistance = 0;\n  let currentFuel = 0;\n  let startIdx = 0;\n  let distanceTraveled = 0;\n\n  // Traverse each drop to start from there\n  for (let i = 0; i < n * 2; i++) {\n    let idx = i % n;\n    let nextIdx = (idx + 1) % n;\n    let distanceToNext =\n      (fuelDrops[nextIdx][0] - fuelDrops[idx][0] + circumference) %\n      circumference;\n\n    currentFuel += fuelDrops[idx][1];\n\n    currentFuel -= distanceToNext;\n    distanceTraveled += distanceToNext;\n\n    if (currentFuel < 0) {\n      maxDistance = Math.max(maxDistance, distanceTraveled - distanceToNext + fuelDrops[idx][1]);\n      startIdx = i + 1;\n      currentFuel = 0;\n      distanceTraveled = 0;\n    } else {\n      maxDistance = Math.max(maxDistance, distanceTraveled);\n    }\n  }\n\n  return maxDistance;\n}\n\nreturn getMaxDistance;\n",
       "pythonCode": null,
       "order": 0
     }
