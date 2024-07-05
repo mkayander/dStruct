@@ -4969,6 +4969,104 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cly5u3ns10001lqptkmdwbia7": {
+      "id": "cly5u3ns10001lqptkmdwbia7",
+      "createdAt": "2024-07-03T12:48:55.585Z",
+      "updatedAt": "2024-07-03T12:48:55.585Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Basic Calculator II",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/basic-calculator-ii",
+      "slug": "basic-calculator-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly5x6alk00012r6i0xg0tu9y": {
+      "id": "cly5x6alk00012r6i0xg0tu9y",
+      "createdAt": "2024-07-03T14:14:57.319Z",
+      "updatedAt": "2024-07-03T14:14:57.319Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Basic Calculator III",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/basic-calculator-iii",
+      "slug": "basic-calculator-iii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly5xa3pw00052r6i6wqqhgge": {
+      "id": "cly5xa3pw00052r6i6wqqhgge",
+      "createdAt": "2024-07-03T14:17:55.028Z",
+      "updatedAt": "2024-07-03T14:17:55.028Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Basic Calculator",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/basic-calculator",
+      "slug": "basic-calculator",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly70sbxm000114bkj1wehk94": {
+      "id": "cly70sbxm000114bkj1wehk94",
+      "createdAt": "2024-07-04T08:43:50.506Z",
+      "updatedAt": "2024-07-04T08:43:50.506Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Merge Nodes in Between Zeros",
+      "category": "LINKED_LIST",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/merge-nodes-in-between-zeros",
+      "slug": "merge-nodes-in-between-zeros",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly7jm2pk0001bcmllncgedq7": {
+      "id": "cly7jm2pk0001bcmllncgedq7",
+      "createdAt": "2024-07-04T17:30:51.320Z",
+      "updatedAt": "2024-07-04T17:30:51.320Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Distinct Islands",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/number-of-distinct-islands",
+      "slug": "number-of-distinct-islands",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly8hbafx0001zf20ig5pwcn1": {
+      "id": "cly8hbafx0001zf20ig5pwcn1",
+      "createdAt": "2024-07-05T09:14:15.068Z",
+      "updatedAt": "2024-07-05T09:14:15.068Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Partition Array Into Three Parts With Equal Sum",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum",
+      "slug": "partition-array-into-three-parts-with-equal-sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cly8r498500019n3xclt4zcak": {
+      "id": "cly8r498500019n3xclt4zcak",
+      "createdAt": "2024-07-05T13:48:43.061Z",
+      "updatedAt": "2024-07-05T13:48:43.061Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number of Visible People in a Queue",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/number-of-visible-people-in-a-queue",
+      "slug": "number-of-visible-people-in-a-queue",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -20731,6 +20829,25 @@
       },
       "description": null
     },
+    "cly5xa3pw00062r6i22g36i2i": {
+      "id": "cly5xa3pw00062r6i22g36i2i",
+      "createdAt": "2024-07-03T14:17:55.028Z",
+      "updatedAt": "2024-07-03T14:22:02.067Z",
+      "projectId": "cly5xa3pw00052r6i6wqqhgge",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "pDFQDBwYebcoYpq5xfrVrg": {
+          "name": "pDFQDBwYebcoYpq5xfrVrg",
+          "type": "string",
+          "input": "(1 + (4 + 5 * 2) / 3)",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cly09u6bd00029ie35fupd5vp": {
       "id": "cly09u6bd00029ie35fupd5vp",
       "createdAt": "2024-06-29T15:22:49.850Z",
@@ -20819,6 +20936,25 @@
       },
       "description": null
     },
+    "cly5u4jq10005lqpt02qmjwyf": {
+      "id": "cly5u4jq10005lqpt02qmjwyf",
+      "createdAt": "2024-07-03T12:49:36.986Z",
+      "updatedAt": "2024-07-03T12:49:42.726Z",
+      "projectId": "cly5u3ns10001lqptkmdwbia7",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "r2EavGQRTD5fh3TpuGydYi": {
+          "name": "r2EavGQRTD5fh3TpuGydYi",
+          "type": "string",
+          "input": " 3+5 / 2 ",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cly35os600002krhrey645n39": {
       "id": "cly35os600002krhrey645n39",
       "createdAt": "2024-07-01T15:49:58.292Z",
@@ -20852,6 +20988,25 @@
           "name": "array",
           "type": "string",
           "input": "))())(",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly7jpzea0007bcmlso3fe85o": {
+      "id": "cly7jpzea0007bcmlso3fe85o",
+      "createdAt": "2024-07-04T17:33:53.650Z",
+      "updatedAt": "2024-07-04T17:34:21.396Z",
+      "projectId": "cly7jm2pk0001bcmllncgedq7",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "g9nPjZjHeMtgJU7dpdfTcd": {
+          "name": "g9nPjZjHeMtgJU7dpdfTcd",
+          "type": "matrix",
+          "input": "[[1,1,0,1,1],[1,0,0,0,0],[0,0,0,0,1],[1,1,0,1,1]]",
           "order": 0
         }
       },
@@ -20903,6 +21058,215 @@
           "type": "array",
           "input": "[[0, 1], [20, 1], [40, 1], [60, 1], [80, 1]]",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "cly5x6am200022r6il2zk2vsd": {
+      "id": "cly5x6am200022r6il2zk2vsd",
+      "createdAt": "2024-07-03T14:14:57.319Z",
+      "updatedAt": "2024-07-03T14:15:42.560Z",
+      "projectId": "cly5x6alk00012r6i0xg0tu9y",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "bVkLeYyZWh7LKGsoyxZVqE": {
+          "name": "bVkLeYyZWh7LKGsoyxZVqE",
+          "type": "string",
+          "input": "2*(5+5*2)/3+(6/2+8)",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly5u3ns10002lqpt8gge77vn": {
+      "id": "cly5u3ns10002lqpt8gge77vn",
+      "createdAt": "2024-07-03T12:48:55.585Z",
+      "updatedAt": "2024-07-03T12:49:35.040Z",
+      "projectId": "cly5u3ns10001lqptkmdwbia7",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "r2EavGQRTD5fh3TpuGydYi": {
+          "name": "r2EavGQRTD5fh3TpuGydYi",
+          "type": "string",
+          "input": "3+2*2",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly70sbxm000214bkmu9wqwnr": {
+      "id": "cly70sbxm000214bkmu9wqwnr",
+      "createdAt": "2024-07-04T08:43:50.506Z",
+      "updatedAt": "2024-07-04T08:44:28.740Z",
+      "projectId": "cly70sbxm000114bkj1wehk94",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "head": {
+          "name": "head",
+          "type": "linkedList",
+          "input": "[0,3,1,0,4,5,2,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly5xf37v00092r6ilb5epck3": {
+      "id": "cly5xf37v00092r6ilb5epck3",
+      "createdAt": "2024-07-03T14:21:47.659Z",
+      "updatedAt": "2024-07-03T14:21:47.659Z",
+      "projectId": "cly5xa3pw00052r6i6wqqhgge",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "pDFQDBwYebcoYpq5xfrVrg": {
+          "name": "pDFQDBwYebcoYpq5xfrVrg",
+          "type": "string",
+          "input": "(1 + (4 + 5 + 2) - 3) + (  6 + 8 )",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8hbafz0002zf20e6zhgrb4": {
+      "id": "cly8hbafz0002zf20e6zhgrb4",
+      "createdAt": "2024-07-05T09:14:15.068Z",
+      "updatedAt": "2024-07-05T09:14:49.120Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,2,1,-6,6,-7,9,1,2,0,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8hf45d000120raspzctxdw": {
+      "id": "cly8hf45d000120raspzctxdw",
+      "createdAt": "2024-07-05T09:17:13.535Z",
+      "updatedAt": "2024-07-05T09:17:15.860Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,2,1,-6,6,7,9,-1,2,0,1]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly7jm2pm0002bcmlevi0mm7b": {
+      "id": "cly7jm2pm0002bcmlevi0mm7b",
+      "createdAt": "2024-07-04T17:30:51.320Z",
+      "updatedAt": "2024-07-04T17:31:55.699Z",
+      "projectId": "cly7jm2pk0001bcmllncgedq7",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "g9nPjZjHeMtgJU7dpdfTcd": {
+          "name": "g9nPjZjHeMtgJU7dpdfTcd",
+          "type": "matrix",
+          "input": "[[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8hfo0j000320rad4egl06o": {
+      "id": "cly8hfo0j000320rad4egl06o",
+      "createdAt": "2024-07-05T09:17:39.284Z",
+      "updatedAt": "2024-07-05T09:17:41.645Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[3,3,6,5,-2,2,5,1,-9,4]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8hg02z000520rab3e8vl7z": {
+      "id": "cly8hg02z000520rab3e8vl7z",
+      "createdAt": "2024-07-05T09:17:54.923Z",
+      "updatedAt": "2024-07-05T09:18:04.783Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Case 4",
+      "order": 3,
+      "slug": "case-4",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[0,0,0,0,0,0,0,0]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8r498500029n3x8nmjbl4j": {
+      "id": "cly8r498500029n3x8nmjbl4j",
+      "createdAt": "2024-07-05T13:48:43.061Z",
+      "updatedAt": "2024-07-05T13:49:27.255Z",
+      "projectId": "cly8r498500019n3xclt4zcak",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "st1zAQTdEuwkhBCUMq6b6Q": {
+          "name": "st1zAQTdEuwkhBCUMq6b6Q",
+          "type": "array",
+          "input": "[10,6,8,5,11,9]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly8hgofb000720ra50av462k": {
+      "id": "cly8hgofb000720ra50av462k",
+      "createdAt": "2024-07-05T09:18:26.472Z",
+      "updatedAt": "2024-07-05T09:18:34.823Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Case 5",
+      "order": 4,
+      "slug": "case-5",
+      "input": null,
+      "args": {
+        "array": {
+          "name": "array",
+          "type": "array",
+          "input": "[5,-5,5,-5,]",
+          "order": 0
         }
       },
       "description": null
@@ -26061,6 +26425,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "cly5x6am200032r6iwupdqddm": {
+      "id": "cly5x6am200032r6iwupdqddm",
+      "createdAt": "2024-07-03T14:14:57.319Z",
+      "updatedAt": "2024-07-03T14:16:27.398Z",
+      "projectId": "cly5x6alk00012r6i0xg0tu9y",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar calculate = function (s) {\n  const n = s.length;\n  let i = 0;\n\n  const solve = () => {\n    const stack = new Array();\n    let curr = 0;\n    let prevOperator = \"+\";\n\n    for (i; i <= n; i++) {\n      const char = s[i];\n      if (char === \" \") continue;\n      s.setColor(i, \"green\");\n\n      if (isDigit(char)) {\n        curr *= 10;\n        curr += +char;\n        continue;\n      }\n\n      if (char === \"(\") {\n        i++;\n        curr = solve();\n        continue;\n      }\n\n      if (prevOperator === \"+\") {\n        stack.push(curr);\n      } else if (prevOperator === \"-\") {\n        stack.push(-curr);\n      } else if (prevOperator === \"*\") {\n        stack.push(stack.pop() * curr);\n      } else {\n        stack.push(Math.trunc(stack.pop() / curr));\n      }\n\n      if (char === \")\") break;\n\n      curr = 0;\n      prevOperator = char;\n    }\n\n    return stack.reduce((acc, val) => acc + val, 0);\n  };\n\n  return solve();\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn calculate;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clur14frc0001cob26yxytwjf": {
       "id": "clur14frc0001cob26yxytwjf",
       "createdAt": "2024-04-08T14:09:49.510Z",
@@ -26074,6 +26452,34 @@
       "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar findTargetSumWays = function (nums, target) {\n  const n = nums.length;\n\n  const total = nums.reduce((acc, curr) => acc + curr, 0);\n  if (Math.abs(target) > total) {\n    return 0;\n  }\n\n  const len = total * 2 + 1;\n\n  const dp = Array.from({ length: n }, () => {\n    const row = new Array(len).fill(0);\n    row.setColorMap({ 0: \"black\" });\n    return row;\n  });\n  dp.showIndexes(n, len - 1);\n  dp[0][nums[0] + total] += 1;\n  dp[0][-nums[0] + total] += 1;\n\n  for (let i = 1; i < n; i++) {\n    nums.setColor(i, \"green\");\n    const num = nums[i];\n    for (let sum = -total; sum <= total; sum++) {\n      const sumIndex = sum + total;\n      if (dp[i - 1][sumIndex] > 0) {\n        dp[i][sumIndex + num] += dp[i - 1][sumIndex];\n        dp[i][sumIndex - num] += dp[i - 1][sumIndex];\n      }\n    }\n  }\n\n  return dp[n - 1][target + total];\n};\n\nreturn findTargetSumWays;\n",
       "pythonCode": null,
       "order": 3
+    },
+    "cly70sbxm000314bkdf8ahlx5": {
+      "id": "cly70sbxm000314bkdf8ahlx5",
+      "createdAt": "2024-07-04T08:43:50.506Z",
+      "updatedAt": "2024-07-04T08:47:19.188Z",
+      "projectId": "cly70sbxm000114bkj1wehk94",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nvar mergeNodes = function (head) {\n  let zero = head;\n  let current = head.next;\n  let sum = 0;\n\n  while (current) {\n    current.setColor(\"cyan\");\n    if (current.val !== 0) {\n      sum += current.val;\n    } else {\n      zero.setColor(\"green\");\n      zero.val = sum;\n      sum = 0;\n      if (current.next) {\n        zero = zero.next;\n      }\n    }\n\n    current = current.next;\n  }\n\n  zero.next = null;\n\n  return head;\n};\n\nreturn mergeNodes;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cly7jm2pm0003bcml25ptke6z": {
+      "id": "cly7jm2pm0003bcml25ptke6z",
+      "createdAt": "2024-07-04T17:30:51.320Z",
+      "updatedAt": "2024-07-04T17:32:21.619Z",
+      "projectId": "cly7jm2pk0001bcmllncgedq7",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "const numDistinctIslands = (grid) => {\n  const res = new Set();\n\n  const dfs = (i, j, dir) => {\n    if (\n      i < 0 ||\n      j < 0 ||\n      i >= grid.length ||\n      j >= grid[0].length ||\n      grid[i][j] === 0\n    )\n      return \"\";\n\n    grid[i][j] = 0;\n    return (\n      dir +\n      dfs(i + 1, j, \"D\") +\n      dfs(i - 1, j, \"U\") +\n      dfs(i, j + 1, \"R\") +\n      dfs(i, j - 1, \"L\") +\n      \"0\"\n    );\n  };\n\n  for (let i = 0; i < grid.length; i++) {\n    for (let j = 0; j < grid[0].length; j++) {\n      if (grid[i][j] === 1) {\n        res.add(dfs(i, j, \"\"));\n      }\n    }\n  }\n\n  console.log(res);\n\n  return res.size;\n};\n\nreturn numDistinctIslands;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clurayvb30003uhcbqq17yc67": {
       "id": "clurayvb30003uhcbqq17yc67",
@@ -26187,6 +26593,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cly8r498500039n3xsrhp60xm": {
+      "id": "cly8r498500039n3xsrhp60xm",
+      "createdAt": "2024-07-05T13:48:43.061Z",
+      "updatedAt": "2024-07-05T13:52:08.916Z",
+      "projectId": "cly8r498500019n3xclt4zcak",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} heights\n * @return {number[]}\n */\nvar canSeePersonsCount = function (heights) {\n  const n = heights.length;\n\n  const result = new Uint32Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i < n; i++) {\n    heights.setColor(i, \"green\");\n    const val = heights[i];\n\n    while (stack.length && heights[stack.at(-1)] <= val) {\n      result[stack.pop()]++;\n    }\n    if (stack.length) {\n      result[stack.at(-1)]++;\n    }\n    stack.push(i);\n  }\n\n  return result;\n};\n\nreturn canSeePersonsCount;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cluvkx9170003uozgzg669cgg": {
       "id": "cluvkx9170003uozgzg669cgg",
       "createdAt": "2024-04-11T18:35:11.227Z",
@@ -26214,6 +26634,20 @@
       "code": "/**\n */\nreturn function getCount(s, k) {\n  const n = s.length;\n  const freqMap = new Uint32Array(26);\n  const offset = \"a\".charCodeAt(0);\n  const getIndex = (char) => char.charCodeAt(0) - offset;\n\n  const v = new Object();\n  v.result = 0;\n\n  let left = 0;\n  let right = 0;\n  for (right; right < n; right++) {\n    s.setColor(right, \"green\");\n    const rightIndex = getIndex(s[right]);\n    freqMap[rightIndex]++;\n\n    while (freqMap[rightIndex] === k && left < right) {\n      s.setColor(left, \"cyan\");\n      freqMap[getIndex(s[left++])]--;\n    }\n\n    v.result += left;\n  }\n\n  return v.result;\n};\n\nreturn getCount;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "cly8hbafz0003zf20ueaqdk21": {
+      "id": "cly8hbafz0003zf20ueaqdk21",
+      "createdAt": "2024-07-05T09:14:15.068Z",
+      "updatedAt": "2024-07-05T13:48:01.929Z",
+      "projectId": "cly8hbafx0001zf20ig5pwcn1",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} arr\n * @return {boolean}\n */\nvar canThreePartsEqualSum = function (arr) {\n  const n = arr.length;\n  const total = arr.reduce((acc, curr) => acc + curr);\n\n  const part = total / 3;\n  console.log({total, part});\n  if (!Number.isInteger(part)) return false;\n  const colors = [\"green\", \"cyan\", \"orange\"];\n\n  let current = 0;\n  let count = 0;\n  for (let i = 0; i < n; i++) {\n    arr.setColor(i, colors[count] ?? \"red\");\n    current += arr[i];\n    if (current === part) {\n      current = 0;\n      count++;\n    }\n  }\n\n  return count >= 3;\n};\n\nreturn canThreePartsEqualSum;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clwrm7dap0003bhkzljehus9t": {
       "id": "clwrm7dap0003bhkzljehus9t",
@@ -27142,7 +27576,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-06-18T17:37:35.571Z",
+      "updatedAt": "2024-07-04T17:30:04.250Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -28133,10 +28567,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "cly5xa3pw00072r6i4wakhob0": {
+      "id": "cly5xa3pw00072r6i4wakhob0",
+      "createdAt": "2024-07-03T14:17:55.028Z",
+      "updatedAt": "2024-07-04T08:43:37.292Z",
+      "projectId": "cly5xa3pw00052r6i6wqqhgge",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar calculate = function (s) {\n  const n = s.length;\n  let i = 0;\n\n  const solve = () => {\n    const stack = new Array();\n    let curr = 0;\n    let prevOperator = \"+\";\n\n    for (i; i <= n; i++) {\n      const char = s[i];\n      if (char === \" \") continue;\n      s.setColor(i, \"green\");\n\n      if (isDigit(char)) {\n        curr *= 10;\n        curr += +char;\n        continue;\n      }\n\n      if (char === \"(\") {\n        i++;\n        curr = solve();\n        continue;\n      }\n\n      if (prevOperator === \"+\") {\n        stack.push(curr);\n      } else if (prevOperator === \"-\") {\n        stack.push(-curr);\n      } else if (prevOperator === \"*\") {\n        stack.push(stack.pop() * curr);\n      } else {\n        stack.push(Math.trunc(stack.pop() / curr));\n      }\n\n      if (char === \")\") break;\n\n      curr = 0;\n      prevOperator = char;\n    }\n\n    return stack.reduce((acc, val) => acc + val, 0);\n  };\n\n  return solve();\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn calculate;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cly4duwar00032ubrsxnxc9ln": {
       "id": "cly4duwar00032ubrsxnxc9ln",
       "createdAt": "2024-07-02T12:26:26.689Z",
-      "updatedAt": "2024-07-02T12:27:20.900Z",
+      "updatedAt": "2024-07-03T12:48:42.511Z",
       "projectId": "cly4duwaq00012ubr6peggb60",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -28175,10 +28623,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "cly5u3ns10003lqpt896hgxia": {
+      "id": "cly5u3ns10003lqpt896hgxia",
+      "createdAt": "2024-07-03T12:48:55.585Z",
+      "updatedAt": "2024-07-03T12:51:03.404Z",
+      "projectId": "cly5u3ns10001lqptkmdwbia7",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar calculate = function (s) {\n  const n = s.length;\n  if (!n) return 0;\n\n  const stack = new Array();\n  let curr = 0;\n  let operation = \"+\";\n\n  for (let i = 0; i <= n; i++) {\n    const char = s[i];\n    if (char === \" \") continue;\n    s.setColor(i, \"green\");\n\n    if (isDigit(char)) {\n      curr *= 10;\n      curr += +char;\n      continue;\n    }\n\n    if (operation === \"+\") {\n      stack.push(curr);\n    } else if (operation === \"-\") {\n      stack.push(-curr);\n    } else if (operation === \"*\") {\n      stack.push(stack.pop() * curr);\n    } else {\n      stack.push(Math.trunc(stack.pop() / curr));\n    }\n    operation = char;\n    curr = 0;\n  }\n\n  return stack.reduce((acc, val) => acc + val, 0);\n};\n\nfunction isDigit(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn calculate;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cly3grfhq000314fv70371wis": {
       "id": "cly3grfhq000314fv70371wis",
       "createdAt": "2024-07-01T20:59:57.614Z",
-      "updatedAt": "2024-07-01T21:14:49.578Z",
+      "updatedAt": "2024-07-02T16:33:22.486Z",
       "projectId": "cly3grfhq000114fvgdfavkjv",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -28188,6 +28650,20 @@
       "code": "function getMaxDistance(circumference, fuelDrops) {\n  if (fuelDrops.length === 1) return fuelDrops[0][1];\n\n  // Sort fuel drops by location\n  fuelDrops.sort((a, b) => a[0] - b[0]);\n\n  const n = fuelDrops.length;\n  // let totalFuel = fuelDrops.reduce((acc, drop) => acc + drop[1], 0);\n\n  // if (totalFuel < circumference) {\n  //   return totalFuel; // If total fuel is less than circumference, return total fuel\n  // }\n\n  let maxDistance = 0;\n  let currentFuel = 0;\n  let startIdx = 0;\n  let distanceTraveled = 0;\n\n  // Traverse each drop to start from there\n  for (let i = 0; i < n * 2; i++) {\n    let idx = i % n;\n    let nextIdx = (idx + 1) % n;\n    let distanceToNext =\n      (fuelDrops[nextIdx][0] - fuelDrops[idx][0] + circumference) %\n      circumference;\n\n    currentFuel += fuelDrops[idx][1];\n\n    currentFuel -= distanceToNext;\n    distanceTraveled += distanceToNext;\n\n    if (currentFuel < 0) {\n      maxDistance = Math.max(maxDistance, distanceTraveled - distanceToNext + fuelDrops[idx][1]);\n      startIdx = i + 1;\n      currentFuel = 0;\n      distanceTraveled = 0;\n    } else {\n      maxDistance = Math.max(maxDistance, distanceTraveled);\n    }\n  }\n\n  return maxDistance;\n}\n\nreturn getMaxDistance;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "cly7jpin20005bcml2vk46uhw": {
+      "id": "cly7jpin20005bcml2vk46uhw",
+      "createdAt": "2024-07-04T17:33:31.935Z",
+      "updatedAt": "2024-07-04T17:33:40.488Z",
+      "projectId": "cly7jm2pk0001bcmllncgedq7",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar numDistinctIslands = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const getBounds = (row, col, id) => {\n    let minRow = row;\n    let maxRow = row;\n    let minCol = col;\n    let maxCol = col;\n\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n      if (grid[nRow][nCol] !== 1) continue;\n      grid[nRow][nCol] = id;\n\n      const [nMinRow, nMaxRow, nMinCol, nMaxCol] = getBounds(nRow, nCol, id);\n      minRow = Math.min(minRow, nMinRow);\n      maxRow = Math.max(maxRow, nMaxRow);\n      minCol = Math.min(minCol, nMinCol);\n      maxCol = Math.max(maxCol, nMaxCol);\n    }\n\n    return [minRow, maxRow, minCol, maxCol];\n  };\n\n  const shapes = new Set();\n\n  const addShape = ([minRow, maxRow, minCol, maxCol], id) => {\n    const arr = [];\n    for (let row = minRow; row <= maxRow; row++) {\n      // arr.push(grid[row].slice(minCol, maxCol + 1));\n      const level = [];\n      for (let col = minCol; col <= maxCol; col++) {\n        const val = grid[row][col];\n        level.push(+(val === id));\n      }\n      arr.push(level);\n    }\n    const key = arr.join(\"#\");\n    shapes.add(key);\n  };\n\n  let id = 2;\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (grid[row][col] === 1) {\n        grid[row][col] = id;\n        const bounds = getBounds(row, col, id);\n        // console.log(bounds);\n\n        addShape(bounds, id);\n        id++;\n      }\n    }\n  }\n\n  // console.log(grid);\n  // console.log(shapes);\n\n  return shapes.size;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nreturn numDistinctIslands;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
