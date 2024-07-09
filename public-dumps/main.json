@@ -5067,6 +5067,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clyecpw7m0001bg2x5t8zxoh3": {
+      "id": "clyecpw7m0001bg2x5t8zxoh3",
+      "createdAt": "2024-07-09T11:52:15.441Z",
+      "updatedAt": "2024-07-09T11:52:15.441Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Remove to Make Valid Parentheses",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses",
+      "slug": "minimum-remove-to-make-valid-parentheses",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -21270,6 +21284,63 @@
         }
       },
       "description": null
+    },
+    "clyecpw7o0002bg2x1hc5fa1y": {
+      "id": "clyecpw7o0002bg2x1hc5fa1y",
+      "createdAt": "2024-07-09T11:52:15.441Z",
+      "updatedAt": "2024-07-09T11:52:34.870Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "nriQUNZFRMZa1JPtQRPzBy": {
+          "name": "nriQUNZFRMZa1JPtQRPzBy",
+          "type": "string",
+          "input": "lee(t(c)o)de)",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clyecr9or0005bg2xh87hbzfm": {
+      "id": "clyecr9or0005bg2xh87hbzfm",
+      "createdAt": "2024-07-09T11:53:19.563Z",
+      "updatedAt": "2024-07-09T11:53:22.486Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "nriQUNZFRMZa1JPtQRPzBy": {
+          "name": "nriQUNZFRMZa1JPtQRPzBy",
+          "type": "string",
+          "input": "a)b(c)d",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clyecrkco0007bg2x39efem5r": {
+      "id": "clyecrkco0007bg2x39efem5r",
+      "createdAt": "2024-07-09T11:53:33.385Z",
+      "updatedAt": "2024-07-09T11:53:35.781Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
+      "title": "Case 3",
+      "order": 2,
+      "slug": "case-3",
+      "input": null,
+      "args": {
+        "nriQUNZFRMZa1JPtQRPzBy": {
+          "name": "nriQUNZFRMZa1JPtQRPzBy",
+          "type": "string",
+          "input": "))((",
+          "order": 0
+        }
+      },
+      "description": null
     }
   },
   "solutions": {
@@ -26593,17 +26664,17 @@
       "pythonCode": null,
       "order": 0
     },
-    "cly8r498500039n3xsrhp60xm": {
-      "id": "cly8r498500039n3xsrhp60xm",
-      "createdAt": "2024-07-05T13:48:43.061Z",
-      "updatedAt": "2024-07-05T13:52:08.916Z",
-      "projectId": "cly8r498500019n3xclt4zcak",
+    "clyecpw7o0003bg2xo2gtjuft": {
+      "id": "clyecpw7o0003bg2xo2gtjuft",
+      "createdAt": "2024-07-09T11:52:15.441Z",
+      "updatedAt": "2024-07-09T11:55:23.078Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number[]} heights\n * @return {number[]}\n */\nvar canSeePersonsCount = function (heights) {\n  const n = heights.length;\n\n  const result = new Uint32Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i < n; i++) {\n    heights.setColor(i, \"green\");\n    const val = heights[i];\n\n    while (stack.length && heights[stack.at(-1)] <= val) {\n      result[stack.pop()]++;\n    }\n    if (stack.length) {\n      result[stack.at(-1)]++;\n    }\n    stack.push(i);\n  }\n\n  return result;\n};\n\nreturn canSeePersonsCount;\n",
+      "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar minRemoveToMakeValid = function (s) {\n  const result = new Array();\n  const stack = new Array();\n\n  for (let i = 0; i < s.length; i++) {\n    const char = s[i];\n    if (char === \"(\") {\n      stack.push(result.length);\n      result.push(char);\n    } else if (char === \")\") {\n      if (stack.length > 0) {\n        stack.pop();\n        result.push(char);\n      }\n    } else {\n      result.push(char);\n    }\n  }\n\n  for (const i of stack) {\n    result[i] = \"\";\n  }\n\n  return result.join(\"\");\n};\n\nreturn minRemoveToMakeValid;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -26662,6 +26733,34 @@
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar numSteps = function (s) {\n  let steps = 0;\n  const arr = new Array(s.length);\n  for (let i = s.length - 1; i >= 0; i--) {\n    arr[s.length - 1 - i] = +s[i];\n  }\n\n  for (let i = 0; i < arr.length - 1; i++) {\n    if (arr[i] === 0) {\n      steps++;\n    } else {\n      let add = 1;\n      for (let j = i; j < arr.length && add; j++) {\n        let next = arr[j] + add;\n        add = 0;\n        if (next > 1) {\n          add = 1;\n          next = 0;\n        }\n        arr[j] = next;\n      }\n      if (add) {\n        arr.push(1);\n      }\n\n      steps += 2;\n    }\n  }\n\n  // console.log({arr});\n\n  return steps;\n};\n\nreturn numSteps;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "cly8r498500039n3xsrhp60xm": {
+      "id": "cly8r498500039n3xsrhp60xm",
+      "createdAt": "2024-07-05T13:48:43.061Z",
+      "updatedAt": "2024-07-09T11:36:50.919Z",
+      "projectId": "cly8r498500019n3xclt4zcak",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} heights\n * @return {number[]}\n */\nvar canSeePersonsCount = function (heights) {\n  const n = heights.length;\n\n  const result = new Uint32Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i < n; i++) {\n    heights.setColor(i, \"green\");\n    const val = heights[i];\n\n    while (stack.length && heights[stack.at(-1)] <= val) {\n      result[stack.pop()]++;\n    }\n    if (stack.length) {\n      result[stack.at(-1)]++;\n    }\n    stack.push(i);\n  }\n\n  return result;\n};\n\nreturn canSeePersonsCount;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clyecu7u70009bg2xj9pq50jy": {
+      "id": "clyecu7u70009bg2xj9pq50jy",
+      "createdAt": "2024-07-09T11:55:37.136Z",
+      "updatedAt": "2024-07-09T11:56:01.823Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "const minRemoveToMakeValid = (str) => {\n  const stack = new Array();\n  const splitted = str.split(\"\");\n\n  for (let i = 0; i < splitted.length; i++) {\n    const char = splitted[i];\n    if (char === \"(\") {\n      stack.push(i);\n    } else if (char === \")\") {\n      if (stack.length === 0) {\n        splitted[i] = \"\";\n      } else {\n        stack.pop();\n      }\n    }\n  }\n\n  for (let i = 0; i < stack.length; i++) {\n    const index = stack[i];\n    splitted[index] = \"\";\n  }\n\n  return splitted.join(\"\");\n};\n\nreturn minRemoveToMakeValid;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "cluzt0a9b0003gt0wct5aij78": {
       "id": "cluzt0a9b0003gt0wct5aij78",
@@ -28640,7 +28739,7 @@
     "cly3grfhq000314fv70371wis": {
       "id": "cly3grfhq000314fv70371wis",
       "createdAt": "2024-07-01T20:59:57.614Z",
-      "updatedAt": "2024-07-02T16:33:22.486Z",
+      "updatedAt": "2024-07-07T14:15:23.178Z",
       "projectId": "cly3grfhq000114fvgdfavkjv",
       "title": "Solution 1",
       "slug": "solution-1",
