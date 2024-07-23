@@ -5081,6 +5081,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clyhgszll00016jrnlr3xhp0t": {
+      "id": "clyhgszll00016jrnlr3xhp0t",
+      "createdAt": "2024-07-11T16:09:56.793Z",
+      "updatedAt": "2024-07-11T16:09:56.793Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Recover a Tree From Preorder Traversal",
+      "category": "STACK",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/recover-a-tree-from-preorder-traversal",
+      "slug": "recover-a-tree-from-preorder-traversal",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clysnbydq0001xbozx03pg60p": {
+      "id": "clysnbydq0001xbozx03pg60p",
+      "createdAt": "2024-07-19T11:58:07.310Z",
+      "updatedAt": "2024-07-19T11:58:07.310Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Optimize Water Distribution in a Village",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/optimize-water-distribution-in-a-village",
+      "slug": "optimize-water-distribution-in-a-village",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17165,6 +17193,25 @@
       },
       "description": null
     },
+    "clyhgszll00026jrnw4rre6y6": {
+      "id": "clyhgszll00026jrnw4rre6y6",
+      "createdAt": "2024-07-11T16:09:56.793Z",
+      "updatedAt": "2024-07-11T16:16:26.156Z",
+      "projectId": "clyhgszll00016jrnlr3xhp0t",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "v1Kj4rr78kuRvHZEY5wDnv": {
+          "name": "v1Kj4rr78kuRvHZEY5wDnv",
+          "type": "string",
+          "input": "1-2--3--4-5--6--7",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cluct9g0t0005p872g7lvzcdp": {
       "id": "cluct9g0t0005p872g7lvzcdp",
       "createdAt": "2024-03-29T15:20:59.741Z",
@@ -17685,6 +17732,37 @@
       },
       "description": null
     },
+    "clysnl7720005xboz46wsdn9t": {
+      "id": "clysnl7720005xboz46wsdn9t",
+      "createdAt": "2024-07-19T12:05:18.638Z",
+      "updatedAt": "2024-07-19T12:05:52.066Z",
+      "projectId": "clysnbydq0001xbozx03pg60p",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "4s44xstf438RV5JHjfw7Em": {
+          "name": "4s44xstf438RV5JHjfw7Em",
+          "type": "number",
+          "input": "50",
+          "order": 0
+        },
+        "adXCUUfRyhb1CeYsFE5reo": {
+          "name": "adXCUUfRyhb1CeYsFE5reo",
+          "type": "array",
+          "input": "[[1, 24, 341], [3, 6, 795], [3, 25, 782], [3, 38, 576], [3, 48, 747], [4, 7, 437], [4, 36, 100], [5, 10, 911], [5, 24, 61], [5, 34, 138], [5, 45, 570], [7, 42, 734], [7, 43, 739], [8, 20, 382], [8, 44, 899], [9, 10, 547], [9, 27, 410], [10, 35, 33], [10, 40, 458], [11, 13, 538], [12, 38, 882], [12, 49, 458], [13, 31, 377], [13, 42, 340], [13, 47, 86], [14, 22, 316], [14, 44, 670], [15, 23, 331], [15, 34, 436], [16, 31, 966], [16, 39, 882], [16, 40, 561], [17, 22, 119], [17, 29, 626], [17, 42, 523], [17, 45, 475], [18, 20, 587], [20, 44, 568], [21, 31, 142], [22, 36, 95], [22, 37, 224], [23, 41, 247], [23, 50, 137], [25, 33, 574], [26, 44, 288], [27, 29, 90], [28, 42, 810], [28, 47, 496], [29, 32, 763], [29, 35, 336], [29, 49, 889], [30, 50, 579], [33, 34, 155], [34, 35, 667], [34, 46, 398], [34, 50, 49], [35, 46, 531], [36, 49, 632], [39, 46, 165], [42, 43, 171], [47, 49, 193]]",
+          "order": 2
+        },
+        "p4X1H8nfpy2tTW6raDqUyv": {
+          "name": "p4X1H8nfpy2tTW6raDqUyv",
+          "type": "array",
+          "input": "[80, 21, 34, 6, 8, 35, 33, 91, 97, 55, 21, 97, 43, 66, 23, 1, 3, 69, 38, 39, 89, 31, 8, 67, 35, 91, 61, 95, 80, 44, 7, 91, 93, 98, 23, 31, 67, 94, 100, 47, 4, 77, 50, 34, 71, 31, 89, 99, 5, 99]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cluk8jb3b0007nlib6z3m4sjn": {
       "id": "cluk8jb3b0007nlib6z3m4sjn",
       "createdAt": "2024-04-03T20:02:57.383Z",
@@ -17705,6 +17783,37 @@
           "name": "sygYVQSmKp52vJdrFK9vBK",
           "type": "string",
           "input": "321321321321",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "clysnbydq0002xbozoci4iacn": {
+      "id": "clysnbydq0002xbozoci4iacn",
+      "createdAt": "2024-07-19T11:58:07.310Z",
+      "updatedAt": "2024-07-19T12:00:21.557Z",
+      "projectId": "clysnbydq0001xbozx03pg60p",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4s44xstf438RV5JHjfw7Em": {
+          "name": "4s44xstf438RV5JHjfw7Em",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        },
+        "adXCUUfRyhb1CeYsFE5reo": {
+          "name": "adXCUUfRyhb1CeYsFE5reo",
+          "type": "array",
+          "input": "[[1,2,1],[2,3,1]]",
+          "order": 2
+        },
+        "p4X1H8nfpy2tTW6raDqUyv": {
+          "name": "p4X1H8nfpy2tTW6raDqUyv",
+          "type": "array",
+          "input": "[1,2,2]",
           "order": 1
         }
       },
@@ -22873,7 +22982,7 @@
     "cljyqcyek0001mi08u1hh7513": {
       "id": "cljyqcyek0001mi08u1hh7513",
       "createdAt": "2023-07-11T20:13:54.861Z",
-      "updatedAt": "2023-07-11T20:13:54.861Z",
+      "updatedAt": "2024-07-23T08:58:41.287Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Map + DFS",
       "slug": "map-dfs",
@@ -26650,6 +26759,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clyecu7u70009bg2xj9pq50jy": {
+      "id": "clyecu7u70009bg2xj9pq50jy",
+      "createdAt": "2024-07-09T11:55:37.136Z",
+      "updatedAt": "2024-07-11T16:09:29.732Z",
+      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "const minRemoveToMakeValid = (str) => {\n  const stack = new Array();\n  const splitted = str.split(\"\");\n\n  for (let i = 0; i < splitted.length; i++) {\n    const char = splitted[i];\n    if (char === \"(\") {\n      stack.push(i);\n    } else if (char === \")\") {\n      if (stack.length === 0) {\n        splitted[i] = \"\";\n      } else {\n        stack.pop();\n      }\n    }\n  }\n\n  for (let i = 0; i < stack.length; i++) {\n    const index = stack[i];\n    splitted[index] = \"\";\n  }\n\n  return splitted.join(\"\");\n};\n\nreturn minRemoveToMakeValid;\n",
+      "pythonCode": null,
+      "order": 1
+    },
     "cluza62jt0003blgu0y6eley3": {
       "id": "cluza62jt0003blgu0y6eley3",
       "createdAt": "2024-04-14T08:45:11.656Z",
@@ -26747,20 +26870,6 @@
       "code": "/**\n * @param {number[]} heights\n * @return {number[]}\n */\nvar canSeePersonsCount = function (heights) {\n  const n = heights.length;\n\n  const result = new Uint32Array(n);\n\n  const stack = new Array();\n  for (let i = 0; i < n; i++) {\n    heights.setColor(i, \"green\");\n    const val = heights[i];\n\n    while (stack.length && heights[stack.at(-1)] <= val) {\n      result[stack.pop()]++;\n    }\n    if (stack.length) {\n      result[stack.at(-1)]++;\n    }\n    stack.push(i);\n  }\n\n  return result;\n};\n\nreturn canSeePersonsCount;\n",
       "pythonCode": null,
       "order": 0
-    },
-    "clyecu7u70009bg2xj9pq50jy": {
-      "id": "clyecu7u70009bg2xj9pq50jy",
-      "createdAt": "2024-07-09T11:55:37.136Z",
-      "updatedAt": "2024-07-09T11:56:01.823Z",
-      "projectId": "clyecpw7m0001bg2x5t8zxoh3",
-      "title": "Solution 2",
-      "slug": "solution-2",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "const minRemoveToMakeValid = (str) => {\n  const stack = new Array();\n  const splitted = str.split(\"\");\n\n  for (let i = 0; i < splitted.length; i++) {\n    const char = splitted[i];\n    if (char === \"(\") {\n      stack.push(i);\n    } else if (char === \")\") {\n      if (stack.length === 0) {\n        splitted[i] = \"\";\n      } else {\n        stack.pop();\n      }\n    }\n  }\n\n  for (let i = 0; i < stack.length; i++) {\n    const index = stack[i];\n    splitted[index] = \"\";\n  }\n\n  return splitted.join(\"\");\n};\n\nreturn minRemoveToMakeValid;\n",
-      "pythonCode": null,
-      "order": 1
     },
     "cluzt0a9b0003gt0wct5aij78": {
       "id": "cluzt0a9b0003gt0wct5aij78",
@@ -27675,7 +27784,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-07-04T17:30:04.250Z",
+      "updatedAt": "2024-07-23T08:58:38.724Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -28763,6 +28872,34 @@
       "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar numDistinctIslands = function (grid) {\n  const m = grid.length;\n  const n = grid[0].length;\n\n  const getBounds = (row, col, id) => {\n    let minRow = row;\n    let maxRow = row;\n    let minCol = col;\n    let maxCol = col;\n\n    for (const [dRow, dCol] of DIRECTIONS) {\n      const nRow = row + dRow,\n        nCol = col + dCol;\n      if (nRow < 0 || nRow >= m || nCol < 0 || nCol >= n) continue;\n      if (grid[nRow][nCol] !== 1) continue;\n      grid[nRow][nCol] = id;\n\n      const [nMinRow, nMaxRow, nMinCol, nMaxCol] = getBounds(nRow, nCol, id);\n      minRow = Math.min(minRow, nMinRow);\n      maxRow = Math.max(maxRow, nMaxRow);\n      minCol = Math.min(minCol, nMinCol);\n      maxCol = Math.max(maxCol, nMaxCol);\n    }\n\n    return [minRow, maxRow, minCol, maxCol];\n  };\n\n  const shapes = new Set();\n\n  const addShape = ([minRow, maxRow, minCol, maxCol], id) => {\n    const arr = [];\n    for (let row = minRow; row <= maxRow; row++) {\n      // arr.push(grid[row].slice(minCol, maxCol + 1));\n      const level = [];\n      for (let col = minCol; col <= maxCol; col++) {\n        const val = grid[row][col];\n        level.push(+(val === id));\n      }\n      arr.push(level);\n    }\n    const key = arr.join(\"#\");\n    shapes.add(key);\n  };\n\n  let id = 2;\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      if (grid[row][col] === 1) {\n        grid[row][col] = id;\n        const bounds = getBounds(row, col, id);\n        // console.log(bounds);\n\n        addShape(bounds, id);\n        id++;\n      }\n    }\n  }\n\n  // console.log(grid);\n  // console.log(shapes);\n\n  return shapes.size;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nreturn numDistinctIslands;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clyhgszll00036jrnn2ny7s8n": {
+      "id": "clyhgszll00036jrnn2ny7s8n",
+      "createdAt": "2024-07-11T16:09:56.793Z",
+      "updatedAt": "2024-07-19T11:57:50.346Z",
+      "projectId": "clyhgszll00016jrnlr3xhp0t",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {string} traversal\n * @return {TreeNode}\n */\nvar recoverFromPreorder = function (traversal) {\n  const n = traversal.length;\n  let root = null;\n  const stack = [];\n\n  let current = 0;\n  let depth = 0;\n  for (let i = 0; i < n; i++) {\n    const char = traversal[i];\n    if (isNumber(char)) {\n      current *= 10;\n      current += +char;\n\n      if (i === n - 1 || traversal[i + 1] === \"-\") {\n        const newNode = new BinaryTree(current);\n        if (!stack.length) {\n          root = newNode;\n          stack.push(root);\n        } else {\n          while (stack.length > depth) {\n            stack.pop();\n          }\n          const parent = stack.at(-1);\n\n          if (!parent.left) {\n            parent.left = newNode;\n          } else {\n            parent.right = newNode;\n          }\n\n          stack.push(newNode);\n        }\n\n        depth = 0;\n        current = 0;\n      }\n    }\n\n    if (char === \"-\") {\n      depth++;\n    }\n  }\n\n  return root;\n};\n\nfunction isNumber(char) {\n  return char >= \"0\" && char <= \"9\";\n}\n\nreturn recoverFromPreorder;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clysnbydq0003xbozoabnyrlo": {
+      "id": "clysnbydq0003xbozoabnyrlo",
+      "createdAt": "2024-07-19T11:58:07.310Z",
+      "updatedAt": "2024-07-23T08:58:13.376Z",
+      "projectId": "clysnbydq0001xbozx03pg60p",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[]} wells\n * @param {number[][]} pipes\n * @return {number}\n */\nvar minCostToSupplyWater = function (n, wells, pipes) {\n  for (let i = 0; i < wells.length; i++) {\n    pipes.push([0, i + 1, wells[i]]);\n  }\n\n  // Sort all edges based on the cost\n  pipes.sort((a, b) => a[2] - b[2]);\n\n  const graph = new UnionFind(n + 1);\n\n  let totalCost = 0;\n  let edgesUsed = 0;\n\n  // Iterate over sorted edges and add them if they connect new nodes\n  for (const [house1, house2, cost] of pipes) {\n    if (graph.union(house1, house2)) {\n      totalCost += cost;\n      edgesUsed++;\n\n      if (edgesUsed === n + 1) {\n        break;\n      }\n    }\n  }\n\n  return totalCost;\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.rank = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n\n    if (this.rank[parent] < this.rank[child]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.rank[parent] += this.rank[child];\n    this.rank[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn minCostToSupplyWater;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
