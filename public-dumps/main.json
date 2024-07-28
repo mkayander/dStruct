@@ -5109,6 +5109,34 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clz2i8m71000113fcsgl6li1x": {
+      "id": "clz2i8m71000113fcsgl6li1x",
+      "createdAt": "2024-07-26T09:33:15.229Z",
+      "updatedAt": "2024-07-26T09:33:15.229Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+      "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clz5o8apt00015e21vxvrbg5h": {
+      "id": "clz5o8apt00015e21vxvrbg5h",
+      "createdAt": "2024-07-28T14:44:16.577Z",
+      "updatedAt": "2024-07-28T14:44:16.577Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Cost to Reach City With Discounts",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts",
+      "slug": "minimum-cost-to-reach-city-with-discounts",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17788,6 +17816,68 @@
       },
       "description": null
     },
+    "clz5o8apt00025e21fnr22ah9": {
+      "id": "clz5o8apt00025e21fnr22ah9",
+      "createdAt": "2024-07-28T14:44:16.577Z",
+      "updatedAt": "2024-07-28T14:44:52.876Z",
+      "projectId": "clz5o8apt00015e21vxvrbg5h",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "bCFDmzp3tFqfEqsWpBdaKe": {
+          "name": "bCFDmzp3tFqfEqsWpBdaKe",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        },
+        "rx2Dm3BL6D7pX6DCWxXwrS": {
+          "name": "rx2Dm3BL6D7pX6DCWxXwrS",
+          "type": "array",
+          "input": "[[0,1,4],[2,1,3],[1,4,11],[3,2,3],[3,4,2]]",
+          "order": 1
+        },
+        "u4kiF5HP4xKDQjAdA4VEch": {
+          "name": "u4kiF5HP4xKDQjAdA4VEch",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        }
+      },
+      "description": null
+    },
+    "clz2i8m71000213fc2nbxhgnd": {
+      "id": "clz2i8m71000213fc2nbxhgnd",
+      "createdAt": "2024-07-26T09:33:15.229Z",
+      "updatedAt": "2024-07-26T09:34:41.735Z",
+      "projectId": "clz2i8m71000113fcsgl6li1x",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "aaZwypFXE85PcgaEiCaMRG": {
+          "name": "aaZwypFXE85PcgaEiCaMRG",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        },
+        "oqePjWEdd5Gsvp2djAdfP7": {
+          "name": "oqePjWEdd5Gsvp2djAdfP7",
+          "type": "number",
+          "input": "4",
+          "order": 2
+        },
+        "ws7Hv7WhmV9PVQFgaX18Bp": {
+          "name": "ws7Hv7WhmV9PVQFgaX18Bp",
+          "type": "array",
+          "input": "[[0,1,3],[1,2,1],[1,3,4],[2,3,1]]",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "clysnbydq0002xbozoci4iacn": {
       "id": "clysnbydq0002xbozoci4iacn",
       "createdAt": "2024-07-19T11:58:07.310Z",
@@ -22982,7 +23072,7 @@
     "cljyqcyek0001mi08u1hh7513": {
       "id": "cljyqcyek0001mi08u1hh7513",
       "createdAt": "2023-07-11T20:13:54.861Z",
-      "updatedAt": "2024-07-23T08:58:41.287Z",
+      "updatedAt": "2024-07-26T09:32:54.128Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Map + DFS",
       "slug": "map-dfs",
@@ -27784,7 +27874,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-07-23T08:58:38.724Z",
+      "updatedAt": "2024-07-28T14:43:20.565Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -28789,6 +28879,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clz2i8m71000313fc0ew8tf2f": {
+      "id": "clz2i8m71000313fc0ew8tf2f",
+      "createdAt": "2024-07-26T09:33:15.229Z",
+      "updatedAt": "2024-07-26T09:42:32.474Z",
+      "projectId": "clz2i8m71000113fcsgl6li1x",
+      "title": "Floyd-Warshall",
+      "slug": "floyd-warshall",
+      "timeComplexity": "O(n ^ 3)",
+      "spaceComplexity": "O(n ^ 2)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nvar findTheCity = function (n, edges, distanceThreshold) {\n  const distanceMatrix = Array.from({ length: n }, () =>\n    new Array(n).fill(Infinity),\n  );\n  for (let i = 0; i < n; i++) {\n    distanceMatrix[i][i] = 0;\n  }\n\n  for (const [from, to, cost] of edges) {\n    distanceMatrix[from][to] = cost;\n    distanceMatrix[to][from] = cost;\n  }\n\n  floyd(n, distanceMatrix);\n\n  let result = -1;\n  let minCount = Infinity;\n  for (let i = 0; i < n; i++) {\n    let reachableCount = 0;\n    for (let j = 0; j < n; j++) {\n      if (i === j) continue;\n      if (distanceMatrix[i][j] <= distanceThreshold) {\n        reachableCount++;\n      }\n    }\n\n    if (reachableCount <= minCount) {\n      minCount = reachableCount;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nfunction floyd(n, matrix) {\n  for (let k = 0; k < n; k++) {\n    for (let i = 0; i < n; i++) {\n      for (let j = 0; j < n; j++) {\n        matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);\n      }\n    }\n  }\n}\n\nreturn findTheCity;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cly4duwar00032ubrsxnxc9ln": {
       "id": "cly4duwar00032ubrsxnxc9ln",
       "createdAt": "2024-07-02T12:26:26.689Z",
@@ -28887,6 +28991,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "clz5o8apt00035e212uavttca": {
+      "id": "clz5o8apt00035e212uavttca",
+      "createdAt": "2024-07-28T14:44:16.577Z",
+      "updatedAt": "2024-07-28T14:45:07.397Z",
+      "projectId": "clz5o8apt00015e21vxvrbg5h",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} highways\n * @param {number} discounts\n * @return {number}\n */\nvar minimumCost = function (n, highways, discounts) {\n  const adjList = new Array(n);\n  for (const [from, to, cost] of highways) {\n    (adjList[from] ??= new Array()).push([to, cost]);\n    (adjList[to] ??= new Array()).push([from, cost]);\n  }\n\n  const distances = Array.from({ length: discounts + 1 }, () =>\n    new Array(n).fill(Infinity),\n  );\n  distances[discounts][0] = 0;\n  const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  queue.enqueue([0, 0, discounts]);\n\n  let result = Infinity;\n\n  while (!queue.isEmpty()) {\n    const [node, dist, discLeft] = queue.dequeue();\n\n    if (node === n - 1 && dist < result) {\n      result = dist;\n    }\n\n    if (!adjList[node]) continue;\n\n    for (const [next, cost] of adjList[node]) {\n      const nextDist = dist + cost;\n      if (nextDist < distances[discLeft][next]) {\n        distances[discLeft][next] = nextDist;\n        queue.enqueue([next, nextDist, discLeft]);\n      }\n\n      if (discLeft > 0) {\n        const nextDist = dist + Math.floor(cost / 2);\n        if (nextDist < distances[discLeft - 1][next]) {\n          distances[discLeft - 1][next] = nextDist;\n          queue.enqueue([next, nextDist, discLeft - 1]);\n        }\n      }\n    }\n  }\n\n  if (!Number.isFinite(result)) return -1;\n\n  return result;\n};\n\nreturn minimumCost;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clysnbydq0003xbozoabnyrlo": {
       "id": "clysnbydq0003xbozoabnyrlo",
       "createdAt": "2024-07-19T11:58:07.310Z",
@@ -28900,6 +29018,20 @@
       "code": "/**\n * @param {number} n\n * @param {number[]} wells\n * @param {number[][]} pipes\n * @return {number}\n */\nvar minCostToSupplyWater = function (n, wells, pipes) {\n  for (let i = 0; i < wells.length; i++) {\n    pipes.push([0, i + 1, wells[i]]);\n  }\n\n  // Sort all edges based on the cost\n  pipes.sort((a, b) => a[2] - b[2]);\n\n  const graph = new UnionFind(n + 1);\n\n  let totalCost = 0;\n  let edgesUsed = 0;\n\n  // Iterate over sorted edges and add them if they connect new nodes\n  for (const [house1, house2, cost] of pipes) {\n    if (graph.union(house1, house2)) {\n      totalCost += cost;\n      edgesUsed++;\n\n      if (edgesUsed === n + 1) {\n        break;\n      }\n    }\n  }\n\n  return totalCost;\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.rank = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n\n    if (this.rank[parent] < this.rank[child]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.rank[parent] += this.rank[child];\n    this.rank[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn minCostToSupplyWater;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clz2ikj7x00012kwcfgwt0dij": {
+      "id": "clz2ikj7x00012kwcfgwt0dij",
+      "createdAt": "2024-07-26T09:42:31.229Z",
+      "updatedAt": "2024-07-26T09:43:53.696Z",
+      "projectId": "clz2i8m71000113fcsgl6li1x",
+      "title": "Dijkstra's",
+      "slug": "dijkstras",
+      "timeComplexity": "O(n ^ 3 logn)",
+      "spaceComplexity": "O(n ^ 2)",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nvar findTheCity = function (n, edges, distanceThreshold) {\n  const adjList = new Array(n);\n  for (const [from, to, cost] of edges) {\n    (adjList[from] ??= new Array()).push([to, cost]);\n    (adjList[to] ??= new Array()).push([from, cost]);\n  }\n\n  const findNeighbors = (start) => {\n    const distances = new Array(n).fill(Infinity);\n    distances[start] = 0;\n    let count = 0;\n\n    const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n    queue.enqueue([start, 0]);\n    while (!queue.isEmpty()) {\n      const [node, dist] = queue.dequeue();\n\n      if (!adjList[node]) continue;\n      for (const [next, nextCost] of adjList[node]) {\n        const nextDist = dist + nextCost;\n        if (nextDist > distanceThreshold || nextDist > distances[next])\n          continue;\n\n        if (distances[next] === Infinity) {\n          count++;\n        }\n        distances[next] = nextDist;\n\n        if (nextDist < distanceThreshold) queue.enqueue([next, nextDist]);\n      }\n    }\n\n    return count;\n  };\n\n  let result = -1;\n  let minCount = Infinity;\n  for (let i = 0; i < n; i++) {\n    const count = findNeighbors(i);\n    if (count <= minCount) {\n      minCount = count;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nreturn findTheCity;\n",
+      "pythonCode": null,
+      "order": 1
     }
   }
 }
