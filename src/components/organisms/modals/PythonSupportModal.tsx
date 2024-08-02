@@ -10,6 +10,7 @@ import {
   DialogTitle,
   IconButton,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
@@ -29,6 +30,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
   onClose,
   ...props
 }) => {
+  const theme = useTheme();
   const isMobile = useMobileLayout();
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
 
@@ -111,7 +113,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
           position: "absolute",
           right: 8,
           top: 8,
-          color: (theme) => theme.palette.grey[500],
+          color: theme.palette.grey[500],
         }}
       >
         <Close />
@@ -128,7 +130,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
           sx={{
             mt: isMobile ? 32 : 8,
             p: 2,
-            backgroundColor: (theme) => alpha(theme.palette.primary.light, 0.1),
+            backgroundColor: alpha(theme.palette.primary.light, 0.1),
             backdropFilter: "blur(10px)",
             borderRadius: 2,
             border: `1px solid #ffffff10`,
