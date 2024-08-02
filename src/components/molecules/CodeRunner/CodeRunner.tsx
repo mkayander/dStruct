@@ -39,6 +39,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
       <MonacoEditor
         theme={theme.palette.mode === "dark" ? "app-dark" : "vs-light"}
         options={{
+          fontSize: 13,
           minimap: { enabled: false },
           tabSize: 2,
           fixedOverflowWidgets: true,
