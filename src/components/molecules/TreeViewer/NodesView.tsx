@@ -32,7 +32,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
   const Node =
     data.type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
 
-  let left = Number(style?.left) ?? 0;
+  let left = Number(style?.left) || 0;
   left -= offset;
 
   return (
