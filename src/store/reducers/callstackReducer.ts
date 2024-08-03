@@ -36,36 +36,43 @@ type NodeFrameBase = CallFrameBase & {
 type SetColorFrame = NodeFrameBase & {
   name: "setColor";
   args: { color: string | null; animation?: string };
+  prevArgs?: SetColorFrame["args"];
 };
 
 type SetColorMapFrame = CallFrameBase & {
   name: "setColorMap";
   args: { colorMap: Record<number | string, string> };
+  prevArgs?: SetColorMapFrame["args"];
 };
 
 type SetInfoFrame = NodeFrameBase & {
   name: "setInfo";
   args: { info: Record<string, any> };
+  prevArgs?: SetInfoFrame["args"];
 };
 
 type SetHeadersFrame = CallFrameBase & {
   name: "setHeaders";
   args: { colHeaders?: string[]; rowHeaders?: string[] };
+  prevArgs?: SetHeadersFrame["args"];
 };
 
 type SetValFrame = NodeFrameBase & {
   name: "setVal";
   args: { value: number | string | null; childName?: string };
+  prevArgs?: SetValFrame["args"];
 };
 
 type SetChildFrame = NodeFrameBase & {
   name: "setLeftChild" | "setRightChild" | "setNextNode";
   args: { childId: string | null; childTreeName?: string };
+  prevArgs?: SetChildFrame["args"];
 };
 
 type ShowPointerFrame = NodeFrameBase & {
   name: "showPointer";
   args: { name: string };
+  prevArgs?: ShowPointerFrame["args"];
 };
 
 type BlinkFrame = NodeFrameBase & {
@@ -75,6 +82,7 @@ type BlinkFrame = NodeFrameBase & {
 type AddNodeFrame = NodeFrameBase & {
   name: "addNode";
   args: { value: number | string };
+  prevArgs?: AddNodeFrame["args"];
 };
 
 export type AddArrayItemFrame = NodeFrameBase & {
@@ -85,6 +93,7 @@ export type AddArrayItemFrame = NodeFrameBase & {
     index: number;
     key?: number | string;
   };
+  prevArgs?: AddArrayItemFrame["args"];
 };
 
 type AddArrayFrame = CallFrameBase & {
@@ -93,6 +102,7 @@ type AddArrayFrame = CallFrameBase & {
     arrayData?: EntityState<ArrayItemData, string>;
     options?: ControlledArrayRuntimeOptions;
   };
+  prevArgs?: AddArrayFrame["args"];
 };
 
 type DeleteNodeFrame = NodeFrameBase & {
@@ -215,6 +225,13 @@ export const callstackSlice = createSlice({
       state.benchmarkResults = benchmarkResults;
       state.startTimestamp = startTimestamp;
       state.error = error;
+    },
+    setPrevArgs: (state, action: PayloadAction<CallFrame>) => {
+      const { payload } = action;
+      const frame = state.frames.entities[payload.id];
+      if (frame && "prevArgs" in frame && "prevArgs" in payload) {
+        frame.prevArgs = payload.prevArgs;
+      }
     },
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
