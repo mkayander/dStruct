@@ -15,6 +15,8 @@ import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
 import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 
+import { usePrevious } from "./usePrevious";
+
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,
   replayCount: number,
@@ -25,6 +27,7 @@ export const useNodesRuntimeUpdates = (
 
   const callstackIsPlaying = useAppSelector(selectCallstackIsPlaying);
   const frameIndex = useAppSelector(selectCallstackFrameIndex);
+  const prevFrameIndex = usePrevious(frameIndex) ?? -2;
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
 
@@ -223,11 +226,24 @@ export const useNodesRuntimeUpdates = (
     [dispatch],
   );
 
+  const revertFrame = useCallback(
+    (frame: CallFrame) => {
+      console.log("Revert frame: ", frame);
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
 
     const currentFrame = callstack[frameIndex];
-    currentFrame && applyFrame(currentFrame);
+    const isForward = frameIndex > prevFrameIndex;
+    if (currentFrame) {
+      if (!isForward) {
+        revertFrame(currentFrame);
+      }
+      currentFrame && applyFrame(currentFrame);
+    }
 
     if (!callstackIsPlaying) return;
 
