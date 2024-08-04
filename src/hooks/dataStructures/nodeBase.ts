@@ -9,6 +9,10 @@ export interface NodeMeta {
   id: string;
   type: ArgumentTreeType;
   displayTraversal?: boolean;
+  color?: string | null;
+  animation?: string | null;
+  colorMap?: Record<number | string, string>;
+  info?: Record<string, any>;
 }
 
 export abstract class NodeBase<T extends number | string> {
@@ -51,29 +55,37 @@ export abstract class NodeBase<T extends number | string> {
   }
 
   public set val(value: T) {
+    const prevVal = this._val;
     this._val = value;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setVal",
       args: { value },
+      prevArgs: { value: prevVal },
     });
   }
 
   public setColor(color: string | null, animation?: string) {
+    const prevColor = this.meta.color;
+    const prevAnimation = this.meta.animation;
+    this.meta.color = color;
+    this.meta.animation = animation;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setColor",
       args: { color, animation },
+      prevArgs: { color: prevColor, animation: prevAnimation },
     });
   }
 
   public setColorMap(colorMap: Record<T, string>) {
-    const base = this.getDispatchBase();
-    if (!base) return;
+    const prevColorMap = this.meta.colorMap;
+    this.meta.colorMap = colorMap;
     this.callstack.addOne({
-      ...base,
+      ...this.getDispatchBase(),
       name: "setColorMap",
       args: { colorMap },
+      prevArgs: { colorMap: prevColorMap },
     });
   }
 
@@ -85,10 +97,13 @@ export abstract class NodeBase<T extends number | string> {
   }
 
   public setInfo(info: Record<string, any>) {
+    const prevInfo = this.meta.info;
+    this.meta.info = info;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setInfo",
       args: { info },
+      prevArgs: { info: prevInfo },
     });
   }
 

@@ -35,19 +35,19 @@ type NodeFrameBase = CallFrameBase & {
 
 type SetColorFrame = NodeFrameBase & {
   name: "setColor";
-  args: { color: string | null; animation?: string };
+  args: { color?: string | null; animation?: string | null };
   prevArgs?: SetColorFrame["args"];
 };
 
 type SetColorMapFrame = CallFrameBase & {
   name: "setColorMap";
-  args: { colorMap: Record<number | string, string> };
+  args: { colorMap?: Record<number | string, string> };
   prevArgs?: SetColorMapFrame["args"];
 };
 
 type SetInfoFrame = NodeFrameBase & {
   name: "setInfo";
-  args: { info: Record<string, any> };
+  args: { info?: Record<string, any> };
   prevArgs?: SetInfoFrame["args"];
 };
 
@@ -59,7 +59,7 @@ type SetHeadersFrame = CallFrameBase & {
 
 type SetValFrame = NodeFrameBase & {
   name: "setVal";
-  args: { value: number | string | null; childName?: string };
+  args: { value?: number | string | null; childName?: string };
   prevArgs?: SetValFrame["args"];
 };
 

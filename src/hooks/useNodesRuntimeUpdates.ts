@@ -228,21 +228,96 @@ export const useNodesRuntimeUpdates = (
 
   const revertFrame = useCallback(
     (frame: CallFrame) => {
-      console.log("Revert frame: ", frame);
+      if (!("treeName" in frame)) return;
+
+      const treeName = frame.treeName;
+      const slice =
+        frame.structureType === "array" ? arrayStructureSlice : treeNodeSlice;
+
+      switch (frame.name) {
+        case "setColor":
+          frame.prevArgs &&
+            applyFrame({
+              ...frame,
+              args: frame.prevArgs,
+            });
+          break;
+
+        case "setColorMap":
+          frame.prevArgs &&
+            applyFrame({
+              ...frame,
+              args: frame.prevArgs,
+            });
+          break;
+
+        case "setVal": {
+          frame.prevArgs &&
+            applyFrame({
+              ...frame,
+              args: frame.prevArgs,
+            });
+          break;
+        }
+
+        case "addArray":
+          "delete" in slice.actions &&
+            dispatch(slice.actions.delete({ name: treeName }));
+          break;
+
+        case "addArrayItem":
+        case "addNode":
+          applyFrame({
+            ...frame,
+            name: "deleteNode",
+          });
+          break;
+
+        case "setNextNode":
+        case "setLeftChild":
+          frame.prevArgs &&
+            applyFrame({
+              ...frame,
+              name: "setLeftChild",
+              args: frame.prevArgs,
+            });
+          break;
+
+        case "setRightChild":
+          frame.prevArgs &&
+            applyFrame({
+              ...frame,
+              name: "setRightChild",
+              args: frame.prevArgs,
+            });
+          break;
+
+        case "blink":
+          slice.actions.update({
+            name: treeName,
+            data: {
+              id: frame.nodeId,
+              changes: {
+                animation: undefined,
+              },
+            },
+          });
+          break;
+      }
     },
-    [dispatch],
+    [applyFrame, dispatch],
   );
 
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
 
-    const currentFrame = callstack[frameIndex];
     const isForward = frameIndex > prevFrameIndex;
-    if (currentFrame) {
-      if (!isForward) {
-        revertFrame(currentFrame);
-      }
+    if (isForward) {
+      const currentFrame = callstack[frameIndex];
       currentFrame && applyFrame(currentFrame);
+    } else {
+      const prevFrame = callstack[prevFrameIndex];
+      prevFrame && revertFrame(prevFrame);
     }
 
     if (!callstackIsPlaying) return;

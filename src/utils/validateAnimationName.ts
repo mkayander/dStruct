@@ -1,7 +1,7 @@
 import type { AnimationName } from "#/store/reducers/structures/treeNodeReducer";
 
 export const validateAnimationName = (
-  name?: string,
+  name?: string | null,
 ): AnimationName | undefined => {
   if (!name) return;
 

@@ -1,4 +1,3 @@
-import { type BinaryNodeMeta } from "#/hooks/dataStructures/binaryTreeNode";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
@@ -34,11 +33,16 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   }
 
   public set next(node: LinkedListNode<T> | null) {
+    const prevNode = this._next;
     this._next = node;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setNextNode",
       args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+      prevArgs: {
+        childId: prevNode?.meta.id ?? null,
+        childTreeName: prevNode?.name,
+      },
     });
     if (node) {
       node.name = this.name;
@@ -50,7 +54,7 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
     nodeData: TreeNodeData | undefined,
     dataMap: Record<string, TreeNodeData>,
     callstack: CallstackHelper,
-    meta?: Partial<BinaryNodeMeta>,
+    meta?: Partial<NodeMeta>,
   ): LinkedListNode<number | string> | null {
     if (!nodeData) return null;
 

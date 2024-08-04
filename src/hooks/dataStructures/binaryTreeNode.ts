@@ -57,11 +57,16 @@ export class BinaryTreeNode<
   }
 
   public set left(node: BinaryTreeNode<T> | null) {
+    const prevNode = this._left;
     this._left = node;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setLeftChild",
       args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+      prevArgs: {
+        childId: prevNode?.meta.id ?? null,
+        childTreeName: prevNode?.name,
+      },
     });
   }
 
@@ -73,11 +78,16 @@ export class BinaryTreeNode<
   }
 
   public set right(node: BinaryTreeNode<T> | null) {
+    const prevNode = this._right;
     this._right = node;
     this.callstack.addOne({
       ...this.getDispatchBase(),
       name: "setRightChild",
       args: { childId: node?.meta.id ?? null, childTreeName: node?.name },
+      prevArgs: {
+        childId: prevNode?.meta.id ?? null,
+        childTreeName: prevNode?.name,
+      },
     });
   }
 

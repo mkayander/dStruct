@@ -99,6 +99,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
           ...base,
           name: "setVal",
           args: { value, childName },
+          prevArgs: { value: prevData.value, childName: prevData.childName },
         });
       } else {
         const newItem = {
