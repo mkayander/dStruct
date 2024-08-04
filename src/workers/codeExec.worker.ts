@@ -9,8 +9,6 @@ import {
 import type { ArgumentObject } from "#/utils/argumentObject";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
-console.log("Worker: started");
-
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
   // prettier-ignore
@@ -79,7 +77,6 @@ setGlobalRuntimeContext(callstack);
 self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
   const { data } = event;
   if (!data.type) throw new Error("No worker message type provided");
-  console.log("Worker received:", event.data);
 
   switch (data.type) {
     case "run": {

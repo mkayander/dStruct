@@ -13,7 +13,6 @@ export const awaitWorkerResponse = <T extends WorkerRequestType>(
     const listener = (event: MessageEvent<WorkerResponse>) => {
       if (event.data?.type !== type) return;
 
-      console.log("Worker response:", event.data);
       if (event.data.error) {
         reject(event.data.error);
       } else {

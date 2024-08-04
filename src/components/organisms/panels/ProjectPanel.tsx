@@ -73,7 +73,7 @@ export const ProjectPanel: React.FC = () => {
 
   useEffect(() => {
     if (selectedProject.error) {
-      console.log("selectedProject.error2: ", selectedProject.error);
+      console.log("selectedProject.error: ", selectedProject.error);
       clearSlugs();
       return;
     }

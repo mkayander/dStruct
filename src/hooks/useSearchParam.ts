@@ -52,7 +52,6 @@ export const useSearchParam = <T extends string = string>(
       } else {
         newQuery[param] = value;
       }
-      console.log("newQuery", newQuery);
       void router.push({ pathname, query: newQuery }, undefined, {
         shallow: true,
       });
