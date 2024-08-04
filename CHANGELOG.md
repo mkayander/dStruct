@@ -1,3 +1,16 @@
+# [1.297.0](https://github.com/mkayander/dStruct/compare/v1.296.0...v1.297.0) (2024-08-04)
+
+
+### Bug Fixes
+
+* Change any to unknown ([420163c](https://github.com/mkayander/dStruct/commit/420163c07cdec1cb24472407917c16b7aa9ca6de))
+
+
+### Features
+
+* Initial frame revert implementation ([62adba6](https://github.com/mkayander/dStruct/commit/62adba6d148a2a25cdaf18212a3477e161a34fa8))
+* Removed some console logs ([842209e](https://github.com/mkayander/dStruct/commit/842209e193924bcaa9167e5b05a27ad930729f1a))
+
 # [1.296.0](https://github.com/mkayander/dStruct/compare/v1.295.5...v1.296.0) (2024-08-04)
 
 
