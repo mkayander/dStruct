@@ -1,3 +1,21 @@
+# [1.296.0](https://github.com/mkayander/dStruct/compare/v1.295.5...v1.296.0) (2024-08-04)
+
+
+### Bug Fixes
+
+* Avoid NaN values for the "left" property ([ccabce8](https://github.com/mkayander/dStruct/commit/ccabce812a0dc1147b48ec4c59eaff9c5426f727))
+* Use theme explicitly ([0c8c21e](https://github.com/mkayander/dStruct/commit/0c8c21e5eb542490ef772ea08e00fec02cc70d46))
+
+
+### Features
+
+* Add prevArgs attributes ([62d9ae5](https://github.com/mkayander/dStruct/commit/62d9ae5395d9361e5e97771961221abea363f7ae))
+* Catch a step back in call stack ([3795c52](https://github.com/mkayander/dStruct/commit/3795c52a5cbe2777fcbe11bc2359c48f80c4016a))
+* Migrate from Jest to Vitest ([ab0ad57](https://github.com/mkayander/dStruct/commit/ab0ad57239d78ff150e6de7b462f215d00362da0))
+* Set editor font size to 13px ([f470d6d](https://github.com/mkayander/dStruct/commit/f470d6d5d9c3c0367bcfae47d07b9d6d85019ef5))
+* Updated dependencies ([f9bd934](https://github.com/mkayander/dStruct/commit/f9bd934cfbb7d2ba88a3b740744bf2068544cf5c))
+* Updated Husky usage ([1dc33b0](https://github.com/mkayander/dStruct/commit/1dc33b01ea3e567cba6bd93879cc468227b624af))
+
 ## [1.295.5](https://github.com/mkayander/dStruct/compare/v1.295.4...v1.295.5) (2024-06-17)
 
 
