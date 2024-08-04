@@ -1,3 +1,16 @@
+# [1.298.0](https://github.com/mkayander/dStruct/compare/v1.297.0...v1.298.0) (2024-08-04)
+
+
+### Bug Fixes
+
+* Delete unused import ([fe250eb](https://github.com/mkayander/dStruct/commit/fe250ebbdb555381a0ad85ecbb43a9cdd4a712b3))
+
+
+### Features
+
+* Set project type to "module" ([fa91728](https://github.com/mkayander/dStruct/commit/fa917289f942bea7a057cca98cd743199888852f))
+* Updated semantic-release version and config type ([b93ecd8](https://github.com/mkayander/dStruct/commit/b93ecd8fdc3d0b24596a45f05674d61c61263fa1))
+
 # [1.297.0](https://github.com/mkayander/dStruct/compare/v1.296.0...v1.297.0) (2024-08-04)
 
 
