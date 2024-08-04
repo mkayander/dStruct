@@ -2,7 +2,6 @@ import "@testing-library/jest-dom/vitest";
 import { defineWebWorkers } from "@vitest/web-worker/pure";
 import ResizeObserver from "resize-observer-polyfill";
 import { TextDecoder, TextEncoder } from "util";
-import { vi } from "vitest";
 import "vitest-canvas-mock";
 
 defineWebWorkers({ clone: "none" });
