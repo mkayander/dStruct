@@ -68,7 +68,7 @@ describe("codeExec.worker", () => {
         arrayStore: {},
         treeStore: {},
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       expect(e).toBeTruthy();
     }
   });
