@@ -3,7 +3,7 @@
   "version": "1.295.5",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "build": "next build",
     "dev": "next dev",
     "postinstall": "node postinstall.mjs",
