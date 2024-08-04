@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   branches: ["main", "next"],
   plugins: [
     "@semantic-release/commit-analyzer",
@@ -19,3 +19,5 @@ module.exports = {
     "@semantic-release/github",
   ],
 };
+
+export default config;
