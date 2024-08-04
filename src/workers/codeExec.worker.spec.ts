@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import fs from "fs/promises";
 
 import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
 
@@ -9,14 +8,7 @@ describe("codeExec.worker", () => {
     execSync(
       "pnpm exec esbuild src/workers/codeExec.worker.ts --bundle --platform=browser --outfile=src/workers/codeExec.worker.js",
     );
-    worker = new Worker(
-      URL.createObjectURL(
-        new Blob(
-          [await fs.readFile("./src/workers/codeExec.worker.js", "utf-8")],
-          { type: "application/javascript" },
-        ),
-      ),
-    );
+    worker = new Worker(new URL("codeExec.worker.ts", import.meta.url));
   });
 
   it("should run the code and return the result", async () => {

@@ -9,6 +9,8 @@ import {
 import type { ArgumentObject } from "#/utils/argumentObject";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
+console.log("Worker: started");
+
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
   // prettier-ignore

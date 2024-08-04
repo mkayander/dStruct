@@ -1,9 +1,7 @@
-/**
- * @jest-environment jsdom
- */
 import { MockedProvider } from "@apollo/client/testing";
 import { render, screen } from "@testing-library/react";
 import { Provider as ReduxProvider } from "react-redux";
+import { vi } from "vitest";
 
 import { StateThemeProvider } from "#/components/providers/StateThemeProvider";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
@@ -15,10 +13,10 @@ import { withNextTRPC } from "#/utils/trpc-test-decorator";
 
 const store = makeStore();
 
-jest.mock("next/router", () => jest.requireActual("next-router-mock"));
+vi.mock("next/router", () => vi.importActual("next-router-mock"));
 
-jest.mock("next-auth/react", () => {
-  const originalModule = jest.requireActual("next-auth/react");
+vi.mock("next-auth/react", () => {
+  const originalModule = vi.importActual("next-auth/react");
   const mockSession = {
     expires: new Date(Date.now() + 2 * 86400).toISOString(),
     user: { username: "admin" },
@@ -26,7 +24,7 @@ jest.mock("next-auth/react", () => {
   return {
     __esModule: true,
     ...originalModule,
-    useSession: jest.fn(() => {
+    useSession: vi.fn(() => {
       return { data: mockSession, status: "authenticated" }; // return type is [] in v3 but changed to {} in v4
     }),
   };
