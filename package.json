@@ -2,6 +2,7 @@
   "name": "dstruct",
   "version": "1.297.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "husky",
     "build": "next build",
