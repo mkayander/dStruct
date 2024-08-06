@@ -1,3 +1,19 @@
+# [1.299.0](https://github.com/mkayander/dStruct/compare/v1.298.0...v1.299.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* Fixed BigInt test ([c29a034](https://github.com/mkayander/dStruct/commit/c29a034c0f933624f19fdb23c493b3102d339312))
+* Fixed types ([1808725](https://github.com/mkayander/dStruct/commit/18087255a279148222638c69ef6bba3955983b31))
+* Removed old husky script call ([6ce93ee](https://github.com/mkayander/dStruct/commit/6ce93ee64972ff2b0c2a4b6df1508df2ed3ef8bf))
+
+
+### Features
+
+* Added new utils unit tests ([1b72896](https://github.com/mkayander/dStruct/commit/1b7289670f74d51091690d962878bbed014285ec))
+* Improved callstack reverting logic ([627cec4](https://github.com/mkayander/dStruct/commit/627cec49096c313cb9291f9ec8c8ece79115dc56))
+* Include package manager info in package json ([27ab541](https://github.com/mkayander/dStruct/commit/27ab541074f2b0997e269f126f35377c1fbfdc1d))
+
 # [1.298.0](https://github.com/mkayander/dStruct/compare/v1.297.0...v1.298.0) (2024-08-04)
 
 
