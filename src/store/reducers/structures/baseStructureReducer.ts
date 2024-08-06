@@ -11,25 +11,27 @@ export type StructureNode = {
   id: string;
   value?: string | number;
   childName?: string;
-  color?: string;
+  color?: string | null;
+  animation?: AnimationName | null;
   info?: Record<string, any>;
-  animation?: AnimationName;
   isHighlighted?: boolean;
 };
 
 export type BaseStructureItem<N extends StructureNode = StructureNode> = {
   nodes: EntityState<N, string>;
+  hiddenNodes: EntityState<N, string>;
   initialNodes: EntityState<N, string> | null;
   isRuntime: boolean;
   isNested?: boolean;
   hasNested?: boolean;
-  colorMap?: Record<string | number, string>;
+  colorMap?: Record<string | number, string> | null;
 };
 
 export const getInitialDataBase = <N extends StructureNode>(
   adapter: EntityAdapter<N, string>,
 ): BaseStructureItem<N> => ({
   nodes: adapter.getInitialState(),
+  hiddenNodes: adapter.getInitialState(),
   initialNodes: null,
   isRuntime: false,
 });
@@ -214,5 +216,35 @@ export const getBaseStructureReducers = <N extends StructureNode>(
         runStateActionByName(state, name, (treeState) => resetNodes(treeState));
       }
     },
+    hide: <T extends BaseStructureState>(
+      state: T,
+      action: NamedPayload<{ id: string }>,
+    ) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const {
+          data: { id },
+        } = action.payload;
+
+        const node = selectors.selectById(treeState.nodes, id);
+        if (!node) return;
+
+        adapter.removeOne(treeState.nodes, id);
+        adapter.addOne(treeState.hiddenNodes, node);
+      }),
+    reveal: <T extends BaseStructureState>(
+      state: T,
+      action: NamedPayload<{ id: string }>,
+    ) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const {
+          data: { id },
+        } = action.payload;
+
+        const node = selectors.selectById(treeState.hiddenNodes, id);
+        if (!node) return;
+
+        adapter.removeOne(treeState.hiddenNodes, id);
+        adapter.addOne(treeState.nodes, node);
+      }),
   };
 };

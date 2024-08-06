@@ -162,12 +162,7 @@ export const useNodesRuntimeUpdates = (
 
         case "deleteNode":
           dispatch(
-            slice.actions.remove({
-              name: treeName,
-              data: {
-                id: frame.nodeId,
-              },
-            }),
+            slice.actions.hide({ name: treeName, data: { id: frame.nodeId } }),
           );
           break;
 
@@ -267,10 +262,21 @@ export const useNodesRuntimeUpdates = (
 
         case "addArrayItem":
         case "addNode":
-          applyFrame({
-            ...frame,
-            name: "deleteNode",
-          });
+          dispatch(
+            slice.actions.remove({
+              name: treeName,
+              data: { id: frame.nodeId },
+            }),
+          );
+          break;
+
+        case "deleteNode":
+          dispatch(
+            slice.actions.reveal({
+              name: treeName,
+              data: { id: frame.nodeId },
+            }),
+          );
           break;
 
         case "setNextNode":

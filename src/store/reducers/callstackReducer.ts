@@ -41,7 +41,7 @@ type SetColorFrame = NodeFrameBase & {
 
 type SetColorMapFrame = CallFrameBase & {
   name: "setColorMap";
-  args: { colorMap?: Record<number | string, string> };
+  args: { colorMap?: Record<number | string, string> | null };
   prevArgs?: SetColorMapFrame["args"];
 };
 

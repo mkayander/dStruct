@@ -6,58 +6,74 @@ import type {
   CallstackHelper,
 } from "#/store/reducers/callstackReducer";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
+import { type AnimationName } from "#/store/reducers/structures/baseStructureReducer";
 import type { Constructor } from "#/types/helpers";
 import type { ArgumentArrayType } from "#/utils/argumentObject";
 import { safeStringify } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 
+export interface ArrayMeta {
+  colorMap?: Record<string, string> | null;
+}
+
 export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
   abstract class BaseStructure extends Base {
     readonly callstack!: CallstackHelper;
     protected readonly name!: string;
     protected readonly argType!: ArgumentArrayType;
+    protected readonly meta!: ArrayMeta;
 
     protected constructor(...args: any[]) {
       super(...args);
+      Object.defineProperty(this, "meta", {
+        enumerable: false,
+        value: {},
+      });
     }
 
     public blink(index: number) {
-      const base = this.getDispatchBase(index);
-      if (!base) return;
       this.callstack.addOne({
-        ...base,
+        ...this.getDispatchBase(index),
         name: "blink",
       });
     }
 
-    public setColor(index: number, color: string | null, animation?: string) {
-      const base = this.getDispatchBase(index);
-      if (!base) return;
+    public setColor(
+      index: number,
+      color: string | null,
+      animation?: AnimationName,
+    ) {
+      const meta = this.getNodeMeta(index);
+      const { color: prevColor, animation: prevAnimation } = meta ?? {};
+      if (meta) {
+        meta.color = color;
+        meta.animation = animation;
+      }
       this.callstack.addOne({
-        ...base,
+        ...this.getDispatchBase(index),
         name: "setColor",
         args: { color, animation },
+        prevArgs: { color: prevColor, animation: prevAnimation },
       });
     }
 
     public showPointer(index: number, name: string) {
-      const base = this.getDispatchBase(index);
-      if (!base) return;
       this.callstack.addOne({
-        ...base,
+        ...this.getDispatchBase(index),
         name: "showPointer",
         args: { name },
       });
     }
 
     public setColorMap(colorMap: Record<string, string>) {
-      const base = this.getDispatchBase();
-      if (!base) return;
+      const prevColorMap = this.meta.colorMap;
+      this.meta.colorMap = colorMap;
       this.callstack.addOne({
-        ...base,
+        ...this.getDispatchBase(),
         name: "setColorMap",
         args: { colorMap },
+        prevArgs: { colorMap: prevColorMap },
       });
     }
 
