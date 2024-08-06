@@ -11,7 +11,7 @@ const relationProps = {
 export const processNodeRelation = (
   relations: RelationType[],
   nodeColor: string,
-  color?: string,
+  color?: string | null,
   data?: TreeNodeData | null,
 ) => {
   if (!data) return;

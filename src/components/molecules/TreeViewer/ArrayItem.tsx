@@ -8,7 +8,7 @@ import { NestedStructure } from "./NestedStructure";
 
 type ArrayItemProps = {
   item: ArrayItemData;
-  colorMap?: Record<number | string, string>;
+  colorMap?: Record<number | string, string> | null;
   size?: number;
   isGrid?: boolean;
 };

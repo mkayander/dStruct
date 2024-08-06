@@ -8,7 +8,7 @@ import { safeStringify } from "#/utils/stringifySolutionResult";
 
 type MapItemProps = {
   item: ArrayItemData;
-  colorMap?: Record<number | string, string>;
+  colorMap?: Record<number | string, string> | null;
 };
 
 export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
