@@ -120,7 +120,7 @@ describe("utils", () => {
     });
 
     it("should return the bigint itself for bigint input", () => {
-      const result = safeStringify(123n);
+      const result = safeStringify(BigInt(123));
       expect(result).toBe("123n");
     });
 
