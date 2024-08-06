@@ -152,5 +152,6 @@
     "patchedDependencies": {
       "@react-three/fiber@8.15.16": "patches/@react-three__fiber@8.15.16.patch"
     }
-  }
+  },
+  "packageManager": "pnpm@9.6.0"
 }
