@@ -5137,6 +5137,48 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "clzcvhx7o00013n23eec0x5ew": {
+      "id": "clzcvhx7o00013n23eec0x5ew",
+      "createdAt": "2024-08-02T15:42:06.180Z",
+      "updatedAt": "2024-08-02T15:42:06.180Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Swaps to Group All 1's Together II",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii",
+      "slug": "minimum-swaps-to-group-all-1s-together-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clzjrut6k0001z3cem7q1yish": {
+      "id": "clzjrut6k0001z3cem7q1yish",
+      "createdAt": "2024-08-07T11:34:32.252Z",
+      "updatedAt": "2024-08-07T11:34:32.252Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Integer to English Words",
+      "category": "MATH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/integer-to-english-words",
+      "slug": "integer-to-english-words",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clzjshvir0001p6soywdptlvc": {
+      "id": "clzjshvir0001p6soywdptlvc",
+      "createdAt": "2024-08-07T11:52:28.370Z",
+      "updatedAt": "2024-08-07T11:52:28.370Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest Repeating Substring",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-repeating-substring",
+      "slug": "longest-repeating-substring",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17760,6 +17802,25 @@
       },
       "description": null
     },
+    "clzjrut6k0002z3ce1kgw8rz6": {
+      "id": "clzjrut6k0002z3ce1kgw8rz6",
+      "createdAt": "2024-08-07T11:34:32.252Z",
+      "updatedAt": "2024-08-07T11:35:47.076Z",
+      "projectId": "clzjrut6k0001z3cem7q1yish",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "fn6QyqBKh34DBK9L5yuVQm": {
+          "name": "fn6QyqBKh34DBK9L5yuVQm",
+          "type": "number",
+          "input": "12345",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "clysnl7720005xboz46wsdn9t": {
       "id": "clysnl7720005xboz46wsdn9t",
       "createdAt": "2024-07-19T12:05:18.638Z",
@@ -17874,6 +17935,44 @@
           "type": "array",
           "input": "[[0,1,3],[1,2,1],[1,3,4],[2,3,1]]",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "clzjshvis0002p6soe6olmzx1": {
+      "id": "clzjshvis0002p6soe6olmzx1",
+      "createdAt": "2024-08-07T11:52:28.370Z",
+      "updatedAt": "2024-08-07T11:52:50.823Z",
+      "projectId": "clzjshvir0001p6soywdptlvc",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "szaevKuvFu9j6KmY3sbgLB": {
+          "name": "szaevKuvFu9j6KmY3sbgLB",
+          "type": "string",
+          "input": "aabcaabdaab",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "clzcvhx7o00023n23soryyand": {
+      "id": "clzcvhx7o00023n23soryyand",
+      "createdAt": "2024-08-02T15:42:06.180Z",
+      "updatedAt": "2024-08-02T17:46:57.880Z",
+      "projectId": "clzcvhx7o00013n23eec0x5ew",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "pMYGHRMyJyL8EGqz48xMPs": {
+          "name": "pMYGHRMyJyL8EGqz48xMPs",
+          "type": "array",
+          "input": "[0,1,0,1,1,0,0]",
+          "order": 0
         }
       },
       "description": null
@@ -21906,20 +22005,6 @@
       "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function pathSum(root, targetSum) {\n  let output = 0;\n  const map = {};\n  traverse(root, 0);\n  return output;\n\n  function traverse(node, pathSum) {\n    if (!node) return null;\n    node.setColor(\"cyan\", \"blink\");\n\n    pathSum += node.val;\n    if (pathSum === targetSum) {\n      output++;\n      node.setColor(\"green\");\n    }\n\n    if (map[pathSum - targetSum]) output += map[pathSum - targetSum];\n    map[pathSum] = ~~map[pathSum] + 1;\n\n    if (node.left) traverse(node.left, pathSum);\n    if (node.right) traverse(node.right, pathSum);\n\n    map[pathSum]--;\n  }\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 2
-    },
-    "clg6qf72i0004k208htjfv7ts": {
-      "id": "clg6qf72i0004k208htjfv7ts",
-      "createdAt": "2023-04-07T15:58:59.466Z",
-      "updatedAt": "2023-04-07T15:58:59.466Z",
-      "projectId": "clg6qf72i0001k2083iwr3d44",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function rightSideView(root) {\n  if (!root) return [];\n\n  const result = [];\n  const queue = [root]\n\n  let levelLength = 1;\n  while (queue.length > 0) {\n    result.push(queue[0].val);\n    queue[0].setColor(\"green\", \"blink\");\n\n    for (let i = 0; i < levelLength; i++) {\n      const node = queue.pop();\n      i < levelLength - 1 && node.setColor(\"cyan\");\n\n      node.left && queue.unshift(node.left);\n      node.right && queue.unshift(node.right);\n    }\n\n    levelLength = queue.length;\n  }\n\n  return result;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clg6qsrwp000dk2088119d5or": {
       "id": "clg6qsrwp000dk2088119d5or",
@@ -26359,20 +26444,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "cltbu4bv40009arczpjaf74hx": {
-      "id": "cltbu4bv40009arczpjaf74hx",
-      "createdAt": "2024-03-03T18:17:32.176Z",
-      "updatedAt": "2024-03-05T20:30:51.645Z",
-      "projectId": "cltbu4bv40007arczoibiugbl",
-      "title": "Top-Down DP",
-      "slug": "top-down-dp",
-      "timeComplexity": "O(m * n)",
-      "spaceComplexity": "O(m * n)",
-      "description": "",
-      "code": "/**\r\n * @param {number[]} nums\r\n * @return {boolean}\r\n */\r\nvar canPartition = function (nums) {\r\n  const n = nums.length;\r\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\r\n  const half = sum / 2;\r\n  if (!Number.isInteger(half)) return false;\r\n  console.log(half);\r\n\r\n  const dp = new Array(n);\r\n  dp.showIndexes(n, half);\r\n  const dfs = (i, sum) => {\r\n    console.log({ i, sum });\r\n    if (sum === 0) return true;\r\n    if (i < 0 || sum < 0) return false;\r\n\r\n    dp[i] ??= new Array(half + 1);\r\n    if (dp[i][sum] !== undefined) {\r\n      nums.setColor(i, null);\r\n      dp[i].setColor(sum, \"green\");\r\n      return dp[i][sum];\r\n    } else {\r\n      dp[i].setColor(sum, \"cyan\");\r\n    }\r\n\r\n    nums.setColor(i, \"green\");\r\n    let result = dfs(i - 1, sum - nums[i]);\r\n\r\n    nums.setColor(i, \"cyan\");\r\n    result ||= dfs(i - 1, sum);\r\n    nums.setColor(i, \"null\");\r\n\r\n    dp[i][sum] = result;\r\n    return result;\r\n  };\r\n\r\n  return dfs(n - 1, half);\r\n};\r\n\r\nreturn canPartition;\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cltcsxcmt0003wilusow4mhid": {
       "id": "cltcsxcmt0003wilusow4mhid",
       "createdAt": "2024-03-04T10:31:53.141Z",
@@ -26656,7 +26727,7 @@
     "clu8cu2rl00035kqdnpwyxrmo": {
       "id": "clu8cu2rl00035kqdnpwyxrmo",
       "createdAt": "2024-03-26T12:30:04.161Z",
-      "updatedAt": "2024-05-28T16:05:45.931Z",
+      "updatedAt": "2024-08-04T15:03:01.542Z",
       "projectId": "clu8cu2rl00015kqd3ryzhi7s",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -26778,6 +26849,20 @@
       "code": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {string[]}\n */\nfunction wordBreak(s, wordDict) {\n  const wordSet = new Set();\n  wordDict.forEach((word) => wordSet.add(word));\n  const results = new Array();\n\n  const path = new Array();\n  function backtrack(start) {\n    if (start === s.length) {\n      results.push(path.join(\" \"));\n      return;\n    }\n    s.setColor(start, \"green\");\n\n    for (let end = start + 1; end <= s.length; end++) {\n      const word = s.slice(start, end);\n      if (wordSet.has(word)) {\n        path.push(word);\n        backtrack(end);\n        path.pop();\n      }\n    }\n\n    s.setColor(start, null);\n  }\n\n  backtrack(0);\n  return results;\n}\n\nreturn wordBreak;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "cltbu4bv40009arczpjaf74hx": {
+      "id": "cltbu4bv40009arczpjaf74hx",
+      "createdAt": "2024-03-03T18:17:32.176Z",
+      "updatedAt": "2024-08-04T14:09:16.716Z",
+      "projectId": "cltbu4bv40007arczoibiugbl",
+      "title": "Top-Down DP",
+      "slug": "top-down-dp",
+      "timeComplexity": "O(m * n)",
+      "spaceComplexity": "O(m * n)",
+      "description": "",
+      "code": "/**\r\n * @param {number[]} nums\r\n * @return {boolean}\r\n */\r\nvar canPartition = function (nums) {\r\n  const n = nums.length;\r\n  const sum = nums.reduce((acc, curr) => acc + curr, 0);\r\n  const half = sum / 2;\r\n  if (!Number.isInteger(half)) return false;\r\n  console.log(half);\r\n\r\n  const dp = new Array(n);\r\n  dp.showIndexes(n, half);\r\n  const dfs = (i, sum) => {\r\n    console.log({ i, sum });\r\n    if (sum === 0) return true;\r\n    if (i < 0 || sum < 0) return false;\r\n\r\n    dp[i] ??= new Array(half + 1);\r\n    if (dp[i][sum] !== undefined) {\r\n      nums.setColor(i, null);\r\n      dp[i].setColor(sum, \"green\");\r\n      return dp[i][sum];\r\n    } else {\r\n      dp[i].setColor(sum, \"cyan\");\r\n    }\r\n\r\n    nums.setColor(i, \"green\");\r\n    let result = dfs(i - 1, sum - nums[i]);\r\n\r\n    nums.setColor(i, \"cyan\");\r\n    result ||= dfs(i - 1, sum);\r\n    nums.setColor(i, \"null\");\r\n\r\n    dp[i][sum] = result;\r\n    return result;\r\n  };\r\n\r\n  return dfs(n - 1, half);\r\n};\r\n\r\nreturn canPartition;\r\n",
+      "pythonCode": null,
+      "order": 0
     },
     "cll6g2p760003mi08gqsl87n6": {
       "id": "cll6g2p760003mi08gqsl87n6",
@@ -27874,7 +27959,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-07-28T14:43:20.565Z",
+      "updatedAt": "2024-08-10T11:31:14.483Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -28056,7 +28141,7 @@
     "clxaor1si0003avenu93utrgt": {
       "id": "clxaor1si0003avenu93utrgt",
       "createdAt": "2024-06-11T17:38:17.679Z",
-      "updatedAt": "2024-06-11T18:07:07.983Z",
+      "updatedAt": "2024-08-04T15:05:46.548Z",
       "projectId": "clxaor1sg0001aveni64ywcse",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -28952,7 +29037,7 @@
     "cly3grfhq000314fv70371wis": {
       "id": "cly3grfhq000314fv70371wis",
       "createdAt": "2024-07-01T20:59:57.614Z",
-      "updatedAt": "2024-07-07T14:15:23.178Z",
+      "updatedAt": "2024-08-04T15:05:03.265Z",
       "projectId": "cly3grfhq000114fvgdfavkjv",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -28994,7 +29079,7 @@
     "clz5o8apt00035e212uavttca": {
       "id": "clz5o8apt00035e212uavttca",
       "createdAt": "2024-07-28T14:44:16.577Z",
-      "updatedAt": "2024-07-28T14:45:07.397Z",
+      "updatedAt": "2024-07-31T11:37:09.252Z",
       "projectId": "clz5o8apt00015e21vxvrbg5h",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -29002,6 +29087,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[][]} highways\n * @param {number} discounts\n * @return {number}\n */\nvar minimumCost = function (n, highways, discounts) {\n  const adjList = new Array(n);\n  for (const [from, to, cost] of highways) {\n    (adjList[from] ??= new Array()).push([to, cost]);\n    (adjList[to] ??= new Array()).push([from, cost]);\n  }\n\n  const distances = Array.from({ length: discounts + 1 }, () =>\n    new Array(n).fill(Infinity),\n  );\n  distances[discounts][0] = 0;\n  const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  queue.enqueue([0, 0, discounts]);\n\n  let result = Infinity;\n\n  while (!queue.isEmpty()) {\n    const [node, dist, discLeft] = queue.dequeue();\n\n    if (node === n - 1 && dist < result) {\n      result = dist;\n    }\n\n    if (!adjList[node]) continue;\n\n    for (const [next, cost] of adjList[node]) {\n      const nextDist = dist + cost;\n      if (nextDist < distances[discLeft][next]) {\n        distances[discLeft][next] = nextDist;\n        queue.enqueue([next, nextDist, discLeft]);\n      }\n\n      if (discLeft > 0) {\n        const nextDist = dist + Math.floor(cost / 2);\n        if (nextDist < distances[discLeft - 1][next]) {\n          distances[discLeft - 1][next] = nextDist;\n          queue.enqueue([next, nextDist, discLeft - 1]);\n        }\n      }\n    }\n  }\n\n  if (!Number.isFinite(result)) return -1;\n\n  return result;\n};\n\nreturn minimumCost;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clzcvhx7o00033n23y7ln6uyg": {
+      "id": "clzcvhx7o00033n23y7ln6uyg",
+      "createdAt": "2024-08-02T15:42:06.180Z",
+      "updatedAt": "2024-08-07T11:27:15.881Z",
+      "projectId": "clzcvhx7o00013n23eec0x5ew",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minSwaps = function (nums) {\n  const length = nums.length;\n  const totalOnes = nums.reduce((acc, curr) => acc + curr, 0);\n  if (!totalOnes) return 0;\n\n  const doubleLen = nums.length * 2;\n  const getIndex = (i) => i % length;\n\n  let result = Infinity;\n  let zeroes = 0;\n\n  let left = 0;\n  for (let right = 0; right < doubleLen; right++) {\n    nums.setColor(getIndex(right), \"green\");\n    if (nums[getIndex(right)] === 0) zeroes++;\n    if (right - left + 1 < totalOnes) continue;\n\n    result = Math.min(result, zeroes);\n\n    if (nums[getIndex(left)] === 0) {\n      zeroes--;\n    }\n    nums.setColor(getIndex(left), null);\n    left++;\n  }\n\n  return result;\n};\n\nreturn minSwaps;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clg6qf72i0004k208htjfv7ts": {
+      "id": "clg6qf72i0004k208htjfv7ts",
+      "createdAt": "2023-04-07T15:58:59.466Z",
+      "updatedAt": "2024-08-07T11:28:30.234Z",
+      "projectId": "clg6qf72i0001k2083iwr3d44",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function rightSideView(root) {\n  if (!root) return [];\n\n  const result = new Array();\n  const queue = Array.from([root]);\n\n  let levelLength = 1;\n  while (queue.length > 0) {\n    result.push(queue[0].val);\n    queue[0].setColor(\"green\", \"blink\");\n\n    for (let i = 0; i < levelLength; i++) {\n      const node = queue.pop();\n      i < levelLength - 1 && node.setColor(\"cyan\");\n\n      node.left && queue.unshift(node.left);\n      node.right && queue.unshift(node.right);\n    }\n\n    levelLength = queue.length;\n  }\n\n  return result;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29019,10 +29132,24 @@
       "pythonCode": null,
       "order": 0
     },
+    "clzjshvis0003p6so33b7vr3c": {
+      "id": "clzjshvis0003p6so33b7vr3c",
+      "createdAt": "2024-08-07T11:52:28.370Z",
+      "updatedAt": "2024-08-07T12:00:11.220Z",
+      "projectId": "clzjshvir0001p6soywdptlvc",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar longestRepeatingSubstring = function (s) {\n  const length = s.length;\n\n  const dp = Array.from(\n    { length: length + 1 },\n    () => new Uint32Array(length + 1),\n  );\n  dp.showIndexes(length, length);\n\n  let maxLength = 0;\n\n  for (let i = 1; i <= length; i++) {\n    s.setColor(i, \"green\");\n    for (let j = i + 1; j <= length; j++) {\n      s.setColor(j, \"cyan\");\n      if (s[i - 1] === s[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1] + 1;\n        maxLength = Math.max(maxLength, dp[i][j]);\n      }\n      s.setColor(j, null);\n    }\n    s.setColor(i, null);\n  }\n\n  return maxLength;\n};\n\nreturn longestRepeatingSubstring;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "clz2ikj7x00012kwcfgwt0dij": {
       "id": "clz2ikj7x00012kwcfgwt0dij",
       "createdAt": "2024-07-26T09:42:31.229Z",
-      "updatedAt": "2024-07-26T09:43:53.696Z",
+      "updatedAt": "2024-08-02T15:41:52.547Z",
       "projectId": "clz2i8m71000113fcsgl6li1x",
       "title": "Dijkstra's",
       "slug": "dijkstras",
@@ -29032,6 +29159,20 @@
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nvar findTheCity = function (n, edges, distanceThreshold) {\n  const adjList = new Array(n);\n  for (const [from, to, cost] of edges) {\n    (adjList[from] ??= new Array()).push([to, cost]);\n    (adjList[to] ??= new Array()).push([from, cost]);\n  }\n\n  const findNeighbors = (start) => {\n    const distances = new Array(n).fill(Infinity);\n    distances[start] = 0;\n    let count = 0;\n\n    const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n    queue.enqueue([start, 0]);\n    while (!queue.isEmpty()) {\n      const [node, dist] = queue.dequeue();\n\n      if (!adjList[node]) continue;\n      for (const [next, nextCost] of adjList[node]) {\n        const nextDist = dist + nextCost;\n        if (nextDist > distanceThreshold || nextDist > distances[next])\n          continue;\n\n        if (distances[next] === Infinity) {\n          count++;\n        }\n        distances[next] = nextDist;\n\n        if (nextDist < distanceThreshold) queue.enqueue([next, nextDist]);\n      }\n    }\n\n    return count;\n  };\n\n  let result = -1;\n  let minCount = Infinity;\n  for (let i = 0; i < n; i++) {\n    const count = findNeighbors(i);\n    if (count <= minCount) {\n      minCount = count;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nreturn findTheCity;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clzjrut6k0003z3celkzyikpf": {
+      "id": "clzjrut6k0003z3celkzyikpf",
+      "createdAt": "2024-08-07T11:34:32.252Z",
+      "updatedAt": "2024-08-07T11:36:57.324Z",
+      "projectId": "clzjrut6k0001z3cem7q1yish",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} num\n * @return {string}\n */\nconst numToWord = {\n  0: \"\",\n  1: \"One\",\n  2: \"Two\",\n  3: \"Three\",\n  4: \"Four\",\n  5: \"Five\",\n  6: \"Six\",\n  7: \"Seven\",\n  8: \"Eight\",\n  9: \"Nine\",\n  10: \"Ten\",\n  11: \"Eleven\",\n  12: \"Twelve\",\n  13: \"Thirteen\",\n  14: \"Fourteen\",\n  15: \"Fifteen\",\n  16: \"Sixteen\",\n  17: \"Seventeen\",\n  18: \"Eighteen\",\n  19: \"Nineteen\",\n  20: \"Twenty\",\n  30: \"Thirty\",\n  40: \"Forty\",\n  50: \"Fifty\",\n  60: \"Sixty\",\n  70: \"Seventy\",\n  80: \"Eighty\",\n  90: \"Ninety\",\n};\n\nconst numberToWords = function (num) {\n  if (num === 0) {\n    return \"Zero\";\n  }\n  const arr = new Array();\n  toWords(num, arr);\n\n  return arr.filter(Boolean).join(\" \");\n};\n\nconst toWords = function (num, arr) {\n  console.log(num);\n  if (num < 20) {\n    arr.push(numToWord[num]);\n  } else if (num < 100) {\n    arr.push(numToWord[Math.floor(num / 10) * 10]);\n    arr.push(numToWord[num % 10]);\n  } else if (num < 1000) {\n    arr.push(toWords(Math.floor(num / 100), arr));\n    arr.push(\"Hundred\");\n    arr.push(toWords(num % 100, arr));\n  } else if (num < 1000_000) {\n    arr.push(toWords(Math.floor(num / 1000), arr));\n    arr.push(\"Thousand\");\n    arr.push(toWords(num % 1000, arr));\n  } else if (num < 1000_000_000) {\n    arr.push(toWords(Math.floor(num / 1000_000), arr));\n    arr.push(\"Million\");\n    arr.push(toWords(num % 1000_000, arr));\n  } else {\n    arr.push(toWords(Math.floor(num / 1000_000_000), arr));\n    arr.push(\"Billion\");\n    arr.push(toWords(num % 1000_000_000, arr));\n  }\n};\n\nconst handleSmall = (num) => {\n  return numToWord[num];\n};\n\nreturn numberToWords;\n",
+      "pythonCode": null,
+      "order": 0
     }
   }
 }
