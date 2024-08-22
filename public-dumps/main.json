@@ -5179,6 +5179,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cm05ft8iz0001mws9sih3df7d": {
+      "id": "cm05ft8iz0001mws9sih3df7d",
+      "createdAt": "2024-08-22T15:28:19.307Z",
+      "updatedAt": "2024-08-22T15:28:19.307Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Number Complement",
+      "category": "BIT_MANIPULATION",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/number-complement",
+      "slug": "number-complement",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -18008,6 +18022,25 @@
       },
       "description": null
     },
+    "cm05ft8iz0002mws9ec40soh5": {
+      "id": "cm05ft8iz0002mws9ec40soh5",
+      "createdAt": "2024-08-22T15:28:19.307Z",
+      "updatedAt": "2024-08-22T15:28:26.865Z",
+      "projectId": "cm05ft8iz0001mws9sih3df7d",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "9rsNGkV5rJwGLe7MY61aXi": {
+          "name": "9rsNGkV5rJwGLe7MY61aXi",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cluplqzf90002smnq7c4cuvww": {
       "id": "cluplqzf90002smnq7c4cuvww",
       "createdAt": "2024-04-07T14:11:41.396Z",
@@ -28141,7 +28174,7 @@
     "clxaor1si0003avenu93utrgt": {
       "id": "clxaor1si0003avenu93utrgt",
       "createdAt": "2024-06-11T17:38:17.679Z",
-      "updatedAt": "2024-08-04T15:05:46.548Z",
+      "updatedAt": "2024-08-22T15:28:01.249Z",
       "projectId": "clxaor1sg0001aveni64ywcse",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -29129,6 +29162,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @param {number[]} wells\n * @param {number[][]} pipes\n * @return {number}\n */\nvar minCostToSupplyWater = function (n, wells, pipes) {\n  for (let i = 0; i < wells.length; i++) {\n    pipes.push([0, i + 1, wells[i]]);\n  }\n\n  // Sort all edges based on the cost\n  pipes.sort((a, b) => a[2] - b[2]);\n\n  const graph = new UnionFind(n + 1);\n\n  let totalCost = 0;\n  let edgesUsed = 0;\n\n  // Iterate over sorted edges and add them if they connect new nodes\n  for (const [house1, house2, cost] of pipes) {\n    if (graph.union(house1, house2)) {\n      totalCost += cost;\n      edgesUsed++;\n\n      if (edgesUsed === n + 1) {\n        break;\n      }\n    }\n  }\n\n  return totalCost;\n};\n\nclass UnionFind extends Object {\n  constructor(size) {\n    super();\n    this.size = size;\n    this.rank = new Array(size).fill(1);\n    this.pars = new Array(size);\n    for (let i = 0; i < size; i++) {\n      this.pars[i] = i;\n    }\n  }\n\n  find(node) {\n    let parent = this.pars[node];\n    while (parent !== this.pars[parent]) {\n      parent = this.pars[this.pars[parent]];\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    let parent = this.find(a);\n    let child = this.find(b);\n    if (parent === child) return false;\n\n    if (this.rank[parent] < this.rank[child]) {\n      [parent, child] = [child, parent];\n    }\n\n    this.rank[parent] += this.rank[child];\n    this.rank[child] = 0;\n    this.pars[child] = parent;\n\n    return true;\n  }\n}\n\nreturn minCostToSupplyWater;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cm05fyz5g0005mws9l0pi9gxe": {
+      "id": "cm05fyz5g0005mws9l0pi9gxe",
+      "createdAt": "2024-08-22T15:32:47.092Z",
+      "updatedAt": "2024-08-22T15:59:25.262Z",
+      "projectId": "cm05ft8iz0001mws9sih3df7d",
+      "title": "Solution 2",
+      "slug": "solution-2",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} num\n * @return {number}\n */\nvar findComplement = function (num) {\n  const n = Math.floor(Math.log2(num)) + 1;\n\n  const bitmask = (1 << n) - 1;\n\n  return num ^ bitmask;\n};\n\nreturn findComplement;\n",
+      "pythonCode": null,
+      "order": 1
+    },
+    "cm05ft8iz0003mws9ea48rzhe": {
+      "id": "cm05ft8iz0003mws9ea48rzhe",
+      "createdAt": "2024-08-22T15:28:19.307Z",
+      "updatedAt": "2024-08-22T15:30:50.548Z",
+      "projectId": "cm05ft8iz0001mws9sih3df7d",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} num\n * @return {number}\n */\nvar findComplement = function (num) {\n  let result = 0;\n\n  let step = 0;\n  while (num > 0) {\n    const bit = ((num & 1) ^ 1) << step;\n    result |= bit;\n\n    step++;\n    num >>= 1;\n  }\n\n  return result;\n};\n\nreturn findComplement;\n",
       "pythonCode": null,
       "order": 0
     },
