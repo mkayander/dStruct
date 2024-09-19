@@ -5193,6 +5193,20 @@
       "description": "",
       "isExample": false,
       "isPublic": true
+    },
+    "cm0j9x4om000132a7r7kz6l3j": {
+      "id": "cm0j9x4om000132a7r7kz6l3j",
+      "createdAt": "2024-09-01T07:52:09.718Z",
+      "updatedAt": "2024-09-01T07:52:09.718Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Convert 1D Array Into 2D Array",
+      "category": "GRID",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/convert-1d-array-into-2d-array",
+      "slug": "convert-1d-array-into-2d-array",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
     }
   },
   "testCases": {
@@ -17953,6 +17967,37 @@
       },
       "description": null
     },
+    "cm0j9x4om000232a7malfewhr": {
+      "id": "cm0j9x4om000232a7malfewhr",
+      "createdAt": "2024-09-01T07:52:09.718Z",
+      "updatedAt": "2024-09-01T07:52:59.266Z",
+      "projectId": "cm0j9x4om000132a7r7kz6l3j",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8QUGNXTVF4y5JXiacNd6cb": {
+          "name": "8QUGNXTVF4y5JXiacNd6cb",
+          "type": "array",
+          "input": "[1,2,3,4]",
+          "order": 0
+        },
+        "dCUpnr3cjDjjA4Qkfo4BfQ": {
+          "name": "dCUpnr3cjDjjA4Qkfo4BfQ",
+          "type": "number",
+          "input": "2",
+          "order": 2
+        },
+        "gAL8B8rppS38MT5p3i9dRP": {
+          "name": "gAL8B8rppS38MT5p3i9dRP",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "clzjshvis0002p6soe6olmzx1": {
       "id": "clzjshvis0002p6soe6olmzx1",
       "createdAt": "2024-08-07T11:52:28.370Z",
@@ -22949,48 +22994,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "cljg6moa20004me082ujpmh7s": {
-      "id": "cljg6moa20004me082ujpmh7s",
-      "createdAt": "2023-06-28T20:41:44.810Z",
-      "updatedAt": "2023-06-28T20:41:44.810Z",
-      "projectId": "cljg6moa10001me08ddgn81oj",
-      "title": "Bellman-Ford Algorithm",
-      "slug": "bellman-ford-algorithm",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  let weights = new Array(n).fill(0);\n\n  weights[start] = 1;\n\n  for (let i = 0; i < n - 1; i++) {\n    let noChange = true;\n\n    for (let i = 0; i < edges.length; i++) {\n      const [src, target] = edges[i];\n      edges.setColor(i, \"green\");\n\n      if (weights[target] < weights[src] * succProb[i]) {\n        noChange = false;\n        weights[target] = weights[src] * succProb[i];\n      }\n      if (weights[src] < weights[target] * succProb[i]) {\n        noChange = false;\n        weights[src] = weights[target] * succProb[i];\n      }\n      edges.setColor(i, null);\n    }\n    if (noChange) break;\n  }\n\n  return weights[end];\n};\n\nreturn maxProbability;\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "cljg6q3zb0001ms08ghqvnr4k": {
-      "id": "cljg6q3zb0001ms08ghqvnr4k",
-      "createdAt": "2023-06-28T20:44:25.128Z",
-      "updatedAt": "2023-06-28T20:44:25.128Z",
-      "projectId": "cljg6moa10001me08ddgn81oj",
-      "title": "Dijkstra's Log Prob",
-      "slug": "dijkstras-log-prob",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  const adjList = {};\n\n  for (let i = 0; i < edges.length; i++) {\n    const [src, target] = edges[i];\n    const weight = succProb[i];\n    (adjList[src] ??= new Array()).push([target, Math.log(weight)]);\n    (adjList[target] ??= new Array()).push([src, Math.log(weight)]);\n  }\n\n  console.log(adjList);\n\n  let result = 0;\n\n  let pq = new PriorityQueue({\n    compare: (a, b) => b[1] - a[1],\n  });\n  const distances = new Array();\n  let previous = new Array();\n  for (let i = 0; i < n; i++) {\n    if (i === start) {\n      pq.enqueue([i, 0]);\n      distances[i] = 0;\n    } else {\n      pq.enqueue([i, -Infinity]);\n      distances[i] = -Infinity;\n    }\n    previous[i] = null;\n  }\n\n  while (!pq.isEmpty()) {\n    const [node, logProb] = pq.dequeue();\n    if (!Number.isInteger(node) || !(node in adjList)) continue;\n\n    if (node === end) {\n      return Math.exp(distances[node]);\n    }\n\n    if (distances[node] === -Infinity) continue;\n\n    for (const [neighbor, weight] of adjList[node]) {\n      let nextWeight = distances[node] + weight;\n      if (nextWeight > distances[neighbor]) {\n        // updating new smallest distance to neighbor\n        distances[neighbor] = nextWeight;\n        // updating previous - How we got to neighbor\n        previous[neighbor] = node;\n        // enqueue in priority queue with new priority\n        pq.enqueue([neighbor, nextWeight]);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn maxProbability;\n",
-      "pythonCode": null,
-      "order": 1
-    },
-    "cljg6uz050003ms08ta3f5qrb": {
-      "id": "cljg6uz050003ms08ta3f5qrb",
-      "createdAt": "2023-06-28T20:48:11.957Z",
-      "updatedAt": "2023-06-28T20:48:11.957Z",
-      "projectId": "cljg6moa10001me08ddgn81oj",
-      "title": "Dijkstra's",
-      "slug": "dijkstras",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  const adjList = {};\n\n  for (let i = 0; i < edges.length; i++) {\n    const [src, target] = edges[i];\n    const weight = succProb[i];\n    (adjList[src] ??= new Array()).push([target, weight]);\n    (adjList[target] ??= new Array()).push([src, weight]);\n  }\n\n  console.log(adjList);\n\n  let result = 0;\n\n  let pq = new PriorityQueue({\n    compare: (a, b) => b[1] - a[1],\n  });\n  const distances = new Array();\n  let previous = new Array();\n  for (let i = 0; i < n; i++) {\n    if (i === start) {\n      pq.enqueue([i, 1]);\n      distances[i] = 1;\n    } else {\n      pq.enqueue([i, 0]);\n      distances[i] = 0;\n    }\n    previous[i] = null;\n  }\n\n  while (!pq.isEmpty()) {\n    const [node] = pq.dequeue();\n    if (!Number.isInteger(node) || !(node in adjList)) continue;\n\n    if (node === end) {\n      return distances[node];\n    }\n\n    if (distances[node] === -Infinity) continue;\n\n    for (const [neighbor, weight] of adjList[node]) {\n      let nextWeight = distances[node] * weight;\n      if (nextWeight > distances[neighbor]) {\n        // updating new smallest distance to neighbor\n        distances[neighbor] = nextWeight;\n        // updating previous - How we got to neighbor\n        previous[neighbor] = node;\n        // enqueue in priority queue with new priority\n        pq.enqueue([neighbor, nextWeight]);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn maxProbability;\n",
-      "pythonCode": null,
-      "order": 2
-    },
     "cljh16cn40004l108t9k78grj": {
       "id": "cljh16cn40004l108t9k78grj",
       "createdAt": "2023-06-29T10:56:51.329Z",
@@ -23018,6 +23021,34 @@
       "code": "/**\n * @param {string[]} grid\n * @return {number}\n */\nvar shortestPathAllKeys = function (grid) {\n  const row = grid.length,\n    col = grid[0].length,\n    dirs = [\n      [1, 0],\n      [0, 1],\n      [-1, 0],\n      [0, -1],\n    ];\n  let queue = [],\n    keyCount = 0,\n    steps = -1;\n\n  for (let i = 0; i < row; i++) {\n    for (let j = 0; j < col; j++) {\n      if (grid[i][j] >= \"a\" && grid[i][j] <= \"f\") keyCount++;\n      else if (grid[i][j] === \"@\") queue.push([i, j, 0]);\n    }\n  }\n\n  let keyBitmask = 1 << keyCount,\n    visited = window.Array.from({ length: row }, (_) =>\n      Array.from({ length: col }, (_) => window.Array(keyBitmask))\n    );\n\n  while (queue.length) {\n    steps++;\n    const len = queue.length;\n\n    for (let i = 0; i < len; i++) {\n      const [curX, curY, keys] = queue.shift();\n\n      if (keys === keyBitmask - 1) return steps;\n\n      for (const [xDir, yDir] of dirs) {\n        let x = curX + xDir,\n          y = curY + yDir;\n\n        if (\n          grid[x] &&\n          grid[x][y] &&\n          grid[x][y] !== \"#\" &&\n          !visited[x][y][keys]\n        ) {\n          visited[x][y][keys] = 1;\n          if (grid[x][y] >= \"a\" && grid[x][y] <= \"f\") {\n            queue.push([\n              x,\n              y,\n              keys | (1 << (grid[x].charCodeAt(y) - \"a\".charCodeAt(0))),\n            ]);\n          } else if (grid[x][y] >= \"A\" && grid[x][y] <= \"F\") {\n            if ((1 << (grid[x].charCodeAt(y) - \"A\".charCodeAt(0))) & keys)\n              queue.push([x, y, keys]);\n          } else {\n            queue.push([x, y, keys]);\n          }\n        }\n      }\n    }\n  }\n\n  return -1;\n};\n\nreturn shortestPathAllKeys;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "cljg6uz050003ms08ta3f5qrb": {
+      "id": "cljg6uz050003ms08ta3f5qrb",
+      "createdAt": "2023-06-28T20:48:11.957Z",
+      "updatedAt": "2024-08-27T09:18:59.947Z",
+      "projectId": "cljg6moa10001me08ddgn81oj",
+      "title": "Dijkstra's",
+      "slug": "dijkstras",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  const adjList = new Object();\n\n  for (let i = 0; i < edges.length; i++) {\n    const [src, target] = edges[i];\n    const weight = succProb[i];\n    (adjList[src] ??= new Array()).push([target, weight]);\n    (adjList[target] ??= new Array()).push([src, weight]);\n  }\n\n  let result = 0;\n\n  let pq = new PriorityQueue({\n    compare: (a, b) => b[1] - a[1],\n  });\n  const distances = new Array();\n  let previous = new Array();\n  for (let i = 0; i < n; i++) {\n    if (i === start) {\n      pq.enqueue([i, 1]);\n      distances[i] = 1;\n    } else {\n      pq.enqueue([i, 0]);\n      distances[i] = 0;\n    }\n    previous[i] = null;\n  }\n\n  while (!pq.isEmpty()) {\n    const [node] = pq.dequeue();\n    if (!Number.isInteger(node) || !(node in adjList)) continue;\n\n    if (node === end) {\n      return distances[node];\n    }\n\n    if (distances[node] === -Infinity) continue;\n\n    for (const [neighbor, weight] of adjList[node]) {\n      let nextWeight = distances[node] * weight;\n      if (nextWeight > distances[neighbor]) {\n        // updating new smallest distance to neighbor\n        distances[neighbor] = nextWeight;\n        // updating previous - How we got to neighbor\n        previous[neighbor] = node;\n        // enqueue in priority queue with new priority\n        pq.enqueue([neighbor, nextWeight]);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn maxProbability;\n",
+      "pythonCode": null,
+      "order": 2
+    },
+    "cljg6q3zb0001ms08ghqvnr4k": {
+      "id": "cljg6q3zb0001ms08ghqvnr4k",
+      "createdAt": "2023-06-28T20:44:25.128Z",
+      "updatedAt": "2024-08-28T15:36:32.203Z",
+      "projectId": "cljg6moa10001me08ddgn81oj",
+      "title": "Dijkstra's Log Prob",
+      "slug": "dijkstras-log-prob",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  const adjList = new Object();\n\n  for (let i = 0; i < edges.length; i++) {\n    const [src, target] = edges[i];\n    const weight = succProb[i];\n    (adjList[src] ??= new Array()).push([target, Math.log(weight)]);\n    (adjList[target] ??= new Array()).push([src, Math.log(weight)]);\n  }\n\n  let result = 0;\n\n  let pq = new PriorityQueue({\n    compare: (a, b) => b[1] - a[1],\n  });\n  const distances = new Array();\n  let previous = new Array();\n  for (let i = 0; i < n; i++) {\n    if (i === start) {\n      pq.enqueue([i, 0]);\n      distances[i] = 0;\n    } else {\n      pq.enqueue([i, -Infinity]);\n      distances[i] = -Infinity;\n    }\n    previous[i] = null;\n  }\n\n  while (!pq.isEmpty()) {\n    const [node, logProb] = pq.dequeue();\n    if (!Number.isInteger(node) || !(node in adjList)) continue;\n\n    if (node === end) {\n      return Math.exp(distances[node]);\n    }\n\n    if (distances[node] === -Infinity) continue;\n\n    for (const [neighbor, weight] of adjList[node]) {\n      let nextWeight = distances[node] + weight;\n      if (nextWeight > distances[neighbor]) {\n        // updating new smallest distance to neighbor\n        distances[neighbor] = nextWeight;\n        // updating previous - How we got to neighbor\n        previous[neighbor] = node;\n        // enqueue in priority queue with new priority\n        pq.enqueue([neighbor, nextWeight]);\n      }\n    }\n  }\n\n  return result;\n};\n\nreturn maxProbability;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "cljhmhx8q0001k308g0u1y6lc": {
       "id": "cljhmhx8q0001k308g0u1y6lc",
@@ -23858,20 +23889,6 @@
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar lengthOfLongestSubstring = function (s) {\n  const n = s.length;\n  let result = 0;\n\n  const set = new Set();\n\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"cyan\");\n    const char = s[right];\n    while (set.has(char)) {\n      set.delete(s[left++]);\n      s.setColor(left, \"green\");\n    }\n    set.add(char);\n    result = Math.max(result, right - left + 1);\n  }\n\n  return result;\n};\n\nreturn lengthOfLongestSubstring;\n",
       "pythonCode": null,
       "order": 2
-    },
-    "clm80nkri0003nd0hjnruozo4": {
-      "id": "clm80nkri0003nd0hjnruozo4",
-      "createdAt": "2023-09-06T17:31:26.814Z",
-      "updatedAt": "2023-09-06T17:31:26.814Z",
-      "projectId": "clm80nkrh0001nd0hufs6lgrd",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode[]}\n */\nvar splitListToParts = function (head, k) {\n  if (!head) return new Array(k).fill(null);\n  let length = 0;\n\n  let current = head;\n  while (current) {\n    current.setColor(\"cyan\");\n    length++;\n    current = current.next;\n  }\n\n  let partSize = Math.floor(length / k) || 1;\n  let extraNodes = length % k;\n  if (k < length && extraNodes) partSize++;\n  else extraNodes = -1;\n\n  current = head;\n  const result = [current];\n\n  // console.log({length, partSize, extraNodes});\n\n  let size = 0;\n  while (current) {\n    size++;\n    if (size >= partSize && current.next) {\n      const next = current.next;\n      current.next = null;\n      result.push(next);\n      current = next;\n      size = 0;\n      extraNodes--;\n      if (extraNodes === 0) {\n        partSize--;\n        extraNodes = -1;\n      }\n\n      continue;\n    }\n\n    current = current.next;\n  }\n\n  while (result.length < k) result.push(null);\n\n  return result;\n};\n\nreturn splitListToParts;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clm86mnq80003pl0h8rkhwdqo": {
       "id": "clm86mnq80003pl0h8rkhwdqo",
@@ -27992,7 +28009,7 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-08-10T11:31:14.483Z",
+      "updatedAt": "2024-09-01T07:51:30.240Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
@@ -28381,20 +28398,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "clw8wflvi000311a8elh78kzj": {
-      "id": "clw8wflvi000311a8elh78kzj",
-      "createdAt": "2024-05-16T06:58:06.077Z",
-      "updatedAt": "2024-05-20T16:26:40.677Z",
-      "projectId": "clw8wflvi000111a8aoq7aw7m",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar maximumSafenessFactor = function (grid) {\n  const n = grid.length;\n  if (grid[n - 1][n - 1] === 1 || grid[0][0] === 1) return 0;\n\n  const dist = computeDistanceGrid(grid);\n  const pq = new PriorityQueue({ compare: (a, b) => b[0] - a[0] });\n  const vis = Array.from({ length: n }, () => new Array(n).fill(false));\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  pq.enqueue([dist[0][0], 0, 0]);\n  vis[0][0] = true;\n\n  while (!pq.isEmpty()) {\n    const [ds, i, j] = pq.dequeue();\n    grid[i].setColor(j, \"green\");\n\n    if (i === n - 1 && j === n - 1) return ds;\n\n    for (const [dRow, dCol] of directions) {\n      const newRow = i + dRow;\n      const newCol = j + dCol;\n      if (\n        isValid(newRow, newCol, n) &&\n        grid[newRow][newCol] !== 1 &&\n        !vis[newRow][newCol]\n      ) {\n        vis[newRow][newCol] = true;\n        const nextDs = dist[newRow][newCol];\n        pq.enqueue([Math.min(ds, nextDs), newRow, newCol]);\n      }\n    }\n  }\n\n  return 0;\n};\n\nfunction isValid(x, y, n) {\n  return x >= 0 && x < n && y >= 0 && y < n;\n}\n\nfunction computeDistanceGrid(grid) {\n  const n = grid.length;\n  const distGrid = Array.from({ length: n }, () => new Array(n).fill(Infinity));\n  const queue = new Queue();\n\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      if (grid[i][j] === 1) {\n        queue.enqueue([i, j]);\n        distGrid[i][j] = 0;\n      }\n    }\n  }\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  while (!queue.isEmpty()) {\n    const [row, col] = queue.dequeue();\n    distGrid[row].setColor(col, \"cyan\");\n    for (const [dRow, dCol] of directions) {\n      const newRow = row + dRow;\n      const newCol = col + dCol;\n      if (isValid(newRow, newCol, n) && distGrid[newRow][newCol] === Infinity) {\n        distGrid[newRow][newCol] = distGrid[row][col] + 1;\n        queue.enqueue([newRow, newCol]);\n      }\n    }\n  }\n\n  return distGrid;\n}\n\nreturn maximumSafenessFactor;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clvtixjal0001joe48caby3wv": {
       "id": "clvtixjal0001joe48caby3wv",
       "createdAt": "2024-05-05T12:43:35.275Z",
@@ -28422,6 +28425,20 @@
       "code": "/**\n * @param {number[]} strength\n * @return {number}\n */\nvar totalStrength = function (strength) {\n  const n = BigInt(strength.length);\n  strength = strength.map((val) => BigInt(val));\n  const mod = BigInt(1e9 + 7);\n  let result = 0n;\n\n  const pps = getPresum(Array.from([0n, ...getPresum(strength, mod)]), mod);\n\n  const stack = new Array();\n  for (let right = 0n; right <= n; right++) {\n    strength.setColor(Number(right), \"green\");\n    while (\n      stack.length &&\n      (right === n || strength[stack.at(-1)] >= strength[right])\n    ) {\n      const mid = stack.pop();\n      const left = stack.length ? stack.at(-1) : -1n;\n\n      const leftSize = mid - left;\n      const rightSize = right - mid;\n      const rightSum = pps[right] - pps[mid];\n      const leftSum = pps[mid] - pps[left > -1n ? left : 0];\n      const sum =\n        mod + ((rightSum * leftSize) % mod) - ((leftSum * rightSize) % mod);\n\n      console.log({left, mid, right, leftSize, rightSize, leftSum, rightSum, sum});\n\n      result = (result + ((sum * strength[mid]) % mod)) % mod;\n    }\n\n    stack.push(right);\n  }\n\n  return result;\n};\n\nfunction getPresum(arr, mod) {\n  let sum = 0n;\n  return arr.map((num) => {\n    sum = (sum + num) % mod;\n    return sum;\n  });\n}\nreturn totalStrength;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "clw8wflvi000311a8elh78kzj": {
+      "id": "clw8wflvi000311a8elh78kzj",
+      "createdAt": "2024-05-16T06:58:06.077Z",
+      "updatedAt": "2024-09-08T11:58:45.040Z",
+      "projectId": "clw8wflvi000111a8aoq7aw7m",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nvar maximumSafenessFactor = function (grid) {\n  const n = grid.length;\n  if (grid[n - 1][n - 1] === 1 || grid[0][0] === 1) return 0;\n\n  const dist = computeDistanceGrid(grid);\n  const pq = new PriorityQueue({ compare: (a, b) => b[0] - a[0] });\n  const vis = Array.from({ length: n }, () => new Array(n).fill(false));\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  pq.enqueue([dist[0][0], 0, 0]);\n  vis[0][0] = true;\n\n  while (!pq.isEmpty()) {\n    const [ds, i, j] = pq.dequeue();\n    grid[i].setColor(j, \"green\");\n\n    if (i === n - 1 && j === n - 1) return ds;\n\n    for (const [dRow, dCol] of directions) {\n      const newRow = i + dRow;\n      const newCol = j + dCol;\n      if (\n        isValid(newRow, newCol, n) &&\n        grid[newRow][newCol] !== 1 &&\n        !vis[newRow][newCol]\n      ) {\n        vis[newRow][newCol] = true;\n        const nextDs = dist[newRow][newCol];\n        pq.enqueue([Math.min(ds, nextDs), newRow, newCol]);\n      }\n    }\n  }\n\n  return 0;\n};\n\nfunction isValid(x, y, n) {\n  return x >= 0 && x < n && y >= 0 && y < n;\n}\n\nfunction computeDistanceGrid(grid) {\n  const n = grid.length;\n  const distGrid = Array.from({ length: n }, () => new Array(n).fill(Infinity));\n  const queue = new Queue();\n\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      if (grid[i][j] === 1) {\n        queue.enqueue([i, j]);\n        distGrid[i][j] = 0;\n      }\n    }\n  }\n\n  const directions = [\n    [-1, 0],\n    [1, 0],\n    [0, -1],\n    [0, 1],\n  ];\n\n  while (!queue.isEmpty()) {\n    const [row, col] = queue.dequeue();\n    distGrid[row].setColor(col, \"cyan\");\n    for (const [dRow, dCol] of directions) {\n      const newRow = row + dRow;\n      const newCol = col + dCol;\n      if (isValid(newRow, newCol, n) && distGrid[newRow][newCol] === Infinity) {\n        distGrid[newRow][newCol] = distGrid[row][col] + 1;\n        queue.enqueue([newRow, newCol]);\n      }\n    }\n  }\n\n  return distGrid;\n}\n\nreturn maximumSafenessFactor;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clwf74a530001q5kk0cm5lvme": {
       "id": "clwf74a530001q5kk0cm5lvme",
@@ -29179,6 +29196,20 @@
       "pythonCode": null,
       "order": 1
     },
+    "clzjshvis0003p6so33b7vr3c": {
+      "id": "clzjshvis0003p6so33b7vr3c",
+      "createdAt": "2024-08-07T11:52:28.370Z",
+      "updatedAt": "2024-08-27T09:14:08.697Z",
+      "projectId": "clzjshvir0001p6soywdptlvc",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar longestRepeatingSubstring = function (s) {\n  const length = s.length;\n\n  const dp = Array.from(\n    { length: length + 1 },\n    () => new Uint32Array(length + 1),\n  );\n  dp.showIndexes(length, length);\n\n  let maxLength = 0;\n\n  for (let i = 1; i <= length; i++) {\n    s.setColor(i, \"green\");\n    for (let j = i + 1; j <= length; j++) {\n      s.setColor(j, \"cyan\");\n      if (s[i - 1] === s[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1] + 1;\n        maxLength = Math.max(maxLength, dp[i][j]);\n      }\n      s.setColor(j, null);\n    }\n    s.setColor(i, null);\n  }\n\n  return maxLength;\n};\n\nreturn longestRepeatingSubstring;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cm05ft8iz0003mws9ea48rzhe": {
       "id": "cm05ft8iz0003mws9ea48rzhe",
       "createdAt": "2024-08-22T15:28:19.307Z",
@@ -29193,17 +29224,17 @@
       "pythonCode": null,
       "order": 0
     },
-    "clzjshvis0003p6so33b7vr3c": {
-      "id": "clzjshvis0003p6so33b7vr3c",
-      "createdAt": "2024-08-07T11:52:28.370Z",
-      "updatedAt": "2024-08-07T12:00:11.220Z",
-      "projectId": "clzjshvir0001p6soywdptlvc",
+    "cm0j9x4om000332a7dmptizo3": {
+      "id": "cm0j9x4om000332a7dmptizo3",
+      "createdAt": "2024-09-01T07:52:09.718Z",
+      "updatedAt": "2024-09-07T16:38:58.808Z",
+      "projectId": "cm0j9x4om000132a7r7kz6l3j",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar longestRepeatingSubstring = function (s) {\n  const length = s.length;\n\n  const dp = Array.from(\n    { length: length + 1 },\n    () => new Uint32Array(length + 1),\n  );\n  dp.showIndexes(length, length);\n\n  let maxLength = 0;\n\n  for (let i = 1; i <= length; i++) {\n    s.setColor(i, \"green\");\n    for (let j = i + 1; j <= length; j++) {\n      s.setColor(j, \"cyan\");\n      if (s[i - 1] === s[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1] + 1;\n        maxLength = Math.max(maxLength, dp[i][j]);\n      }\n      s.setColor(j, null);\n    }\n    s.setColor(i, null);\n  }\n\n  return maxLength;\n};\n\nreturn longestRepeatingSubstring;\n",
+      "code": "/**\n * @param {number[]} original\n * @param {number} m\n * @param {number} n\n * @return {number[][]}\n */\nvar construct2DArray = function (original, m, n) {\n  if (m * n !== original.length) return [];\n\n  const result = Array.from({ length: m }, () => new Array(n));\n\n  let p1 = 0;\n  for (let row = 0; row < m; row++) {\n    for (let col = 0; col < n; col++) {\n      result[row][col] = original[p1++];\n    }\n  }\n\n  return result;\n};\n\nreturn construct2DArray;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29220,6 +29251,34 @@
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nvar findTheCity = function (n, edges, distanceThreshold) {\n  const adjList = new Array(n);\n  for (const [from, to, cost] of edges) {\n    (adjList[from] ??= new Array()).push([to, cost]);\n    (adjList[to] ??= new Array()).push([from, cost]);\n  }\n\n  const findNeighbors = (start) => {\n    const distances = new Array(n).fill(Infinity);\n    distances[start] = 0;\n    let count = 0;\n\n    const queue = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n    queue.enqueue([start, 0]);\n    while (!queue.isEmpty()) {\n      const [node, dist] = queue.dequeue();\n\n      if (!adjList[node]) continue;\n      for (const [next, nextCost] of adjList[node]) {\n        const nextDist = dist + nextCost;\n        if (nextDist > distanceThreshold || nextDist > distances[next])\n          continue;\n\n        if (distances[next] === Infinity) {\n          count++;\n        }\n        distances[next] = nextDist;\n\n        if (nextDist < distanceThreshold) queue.enqueue([next, nextDist]);\n      }\n    }\n\n    return count;\n  };\n\n  let result = -1;\n  let minCount = Infinity;\n  for (let i = 0; i < n; i++) {\n    const count = findNeighbors(i);\n    if (count <= minCount) {\n      minCount = count;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nreturn findTheCity;\n",
       "pythonCode": null,
       "order": 1
+    },
+    "cljg6moa20004me082ujpmh7s": {
+      "id": "cljg6moa20004me082ujpmh7s",
+      "createdAt": "2023-06-28T20:41:44.810Z",
+      "updatedAt": "2024-08-27T09:27:41.213Z",
+      "projectId": "cljg6moa10001me08ddgn81oj",
+      "title": "Bellman-Ford Algorithm",
+      "slug": "bellman-ford-algorithm",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number[]} succProb\n * @param {number} start\n * @param {number} end\n * @return {number}\n */\nvar maxProbability = function (n, edges, succProb, start, end) {\n  let weights = new Array(n).fill(0);\n\n  weights[start] = 1;\n\n  for (let i = 0; i < n - 1; i++) {\n    let noChange = true;\n\n    for (let i = 0; i < edges.length; i++) {\n      const [src, target] = edges[i];\n      edges.setColor(i, \"green\");\n\n      if (weights[target] < weights[src] * succProb[i]) {\n        noChange = false;\n        weights[target] = weights[src] * succProb[i];\n      }\n      if (weights[src] < weights[target] * succProb[i]) {\n        noChange = false;\n        weights[src] = weights[target] * succProb[i];\n      }\n      edges.setColor(i, null);\n    }\n    if (noChange) break;\n  }\n\n  return weights[end];\n};\n\nreturn maxProbability;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clm80nkri0003nd0hjnruozo4": {
+      "id": "clm80nkri0003nd0hjnruozo4",
+      "createdAt": "2023-09-06T17:31:26.814Z",
+      "updatedAt": "2024-09-08T11:59:19.958Z",
+      "projectId": "clm80nkrh0001nd0hufs6lgrd",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode[]}\n */\nvar splitListToParts = function (head, k) {\n  if (!head) return new Array(k).fill(null);\n  let length = 0;\n\n  let current = head;\n  while (current) {\n    current.setColor(\"cyan\");\n    length++;\n    current = current.next;\n  }\n\n  let partSize = Math.floor(length / k) || 1;\n  let extraNodes = length % k;\n  if (k < length && extraNodes) partSize++;\n  else extraNodes = -1;\n\n  current = head;\n  const result = Array.from([current]);\n\n  // console.log({length, partSize, extraNodes});\n\n  let size = 0;\n  while (current) {\n    size++;\n    if (size >= partSize && current.next) {\n      const next = current.next;\n      current.next = null;\n      result.push(next);\n      current = next;\n      size = 0;\n      extraNodes--;\n      if (extraNodes === 0) {\n        partSize--;\n        extraNodes = -1;\n      }\n\n      continue;\n    }\n\n    current = current.next;\n  }\n\n  while (result.length < k) result.push(null);\n\n  return result;\n};\n\nreturn splitListToParts;\n",
+      "pythonCode": null,
+      "order": 0
     },
     "clzjrut6k0003z3celkzyikpf": {
       "id": "clzjrut6k0003z3celkzyikpf",
