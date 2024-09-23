@@ -59,7 +59,7 @@
     "@vercel/kv": "^2.0.0",
     "@vercel/speed-insights": "^1.0.12",
     "aws-sdk": "^2.1573.0",
-    "axios": "1.7.3",
+    "axios": "1.7.4",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "cookies-next": "^4.2.1",
