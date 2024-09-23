@@ -8,7 +8,9 @@
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/no-unused-expressions": "error",
+    "@typescript-eslint/no-unused-vars": "off"
   },
   "overrides": [
     // Only uses Testing Library lint rules in test files
@@ -20,5 +22,11 @@
       "extends": ["plugin:testing-library/react"]
     }
   ],
-  "ignorePatterns": [".eslintrc.js", "jest.config.cjs", "jest.setup.mjs", "*.worker.js", "**/dist/**"]
+  "ignorePatterns": [
+    ".eslintrc.js",
+    "jest.config.cjs",
+    "jest.setup.mjs",
+    "*.worker.js",
+    "**/dist/**"
+  ]
 }

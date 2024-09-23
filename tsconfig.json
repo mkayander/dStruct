@@ -16,6 +16,8 @@
     "jsx": "preserve",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
