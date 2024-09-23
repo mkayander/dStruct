@@ -1,3 +1,17 @@
+# [1.300.0](https://github.com/mkayander/dStruct/compare/v1.299.0...v1.300.0) (2024-09-23)
+
+
+### Bug Fixes
+
+* Updated env types file ([7f1e86a](https://github.com/mkayander/dStruct/commit/7f1e86a9ab19c967f278ad79415292cf2b8a9549))
+
+
+### Features
+
+* Refactored UserSettings component to avoid using formik-mui package ([978a765](https://github.com/mkayander/dStruct/commit/978a765057a5e4cfc1c2516a9d5b8581a44ff975))
+* Updated dependencies ([e4d5feb](https://github.com/mkayander/dStruct/commit/e4d5feb274210bc725f65f3c39d11b75a18d9e53))
+* Updated linting rules ([653dd63](https://github.com/mkayander/dStruct/commit/653dd63bf3feb07b69d6c40fb8e252dff2c0c11d))
+
 # [1.299.0](https://github.com/mkayander/dStruct/compare/v1.298.0...v1.299.0) (2024-08-06)
 
 
