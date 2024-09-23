@@ -1,9 +1,15 @@
 import { ManageAccounts } from "@mui/icons-material";
-import { Button, CircularProgress, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { deleteCookie, setCookie } from "cookies-next";
-import { Field, Formik } from "formik";
-import { TextField } from "formik-mui";
+import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
+import { useSnackbar } from "notistack";
 import React from "react";
 
 import { DataSection } from "#/components/templates/DataSection";
@@ -17,11 +23,10 @@ import { trpc } from "#/utils";
 export const UserSettings: React.FC = () => {
   const { LL } = useI18nContext();
   const session = useSession();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [getUserProfile, { loading: gqlLoading }] =
     useGetUserProfileLazyQuery();
-
-  // const { data } = useGlobalDataQuery();
 
   const userId = session.data?.user.id;
 
@@ -50,6 +55,65 @@ export const UserSettings: React.FC = () => {
 
   const [getGlobalData] = useGlobalDataLazyQuery();
 
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      token: "",
+    },
+    validate: async (values) => {
+      const errors: { username?: string; token?: string } = {};
+      if (!values.username) {
+        errors.username = "Required";
+      }
+      return errors;
+    },
+    onSubmit: async ({ username, token }, { setErrors }) => {
+      setCookie("LEETCODE_SESSION", token);
+
+      const { data: globalData } = await getGlobalData();
+
+      const extUsername = globalData?.userStatus.username;
+
+      if (!extUsername) {
+        setErrors({ token: "Invalid token!" });
+        deleteCookie("LEETCODE_SESSION");
+        return;
+      }
+
+      if (extUsername !== username) {
+        setErrors({
+          username: "Username does not match the token!",
+        });
+        deleteCookie("LEETCODE_SESSION");
+        return;
+      }
+
+      const { data } = await getUserProfile({
+        variables: { username: username },
+      });
+
+      if (!data?.matchedUser) {
+        setErrors({ username: "No user with given username found!" });
+        return;
+      }
+
+      const { userAvatar } = data.matchedUser.profile;
+
+      await linkUser.mutate({
+        username,
+        userAvatar: userAvatar || "none",
+        token,
+      });
+
+      enqueueSnackbar("User linked successfully! 🔗", {
+        variant: "success",
+      });
+
+      await trpcUtils.user.getById.invalidate(userId);
+      await refetch();
+    },
+  });
+
   return (
     <DataSection title={LL.USER_SETTINGS()} Icon={ManageAccounts}>
       <Stack spacing={2}>
@@ -67,99 +131,43 @@ export const UserSettings: React.FC = () => {
             </Button>
           </>
         ) : (
-          <Formik
-            initialValues={{
-              username: "",
-              token: "",
-            }}
-            validate={async (values) => {
-              const errors: { username?: string } = {};
-              if (!values.username) {
-                errors.username = "Required";
-              } else {
-              }
-              return errors;
-            }}
-            onSubmit={async ({ username, token }, { setErrors }) => {
-              setCookie("LEETCODE_SESSION", token);
-
-              const { data: globalData } = await getGlobalData();
-
-              const extUsername = globalData?.userStatus.username;
-
-              if (!extUsername) {
-                setErrors({ token: "Invalid token!" });
-                deleteCookie("LEETCODE_SESSION");
-                return;
-              }
-
-              if (extUsername !== username) {
-                setErrors({
-                  username: "Username does not match the token!",
-                });
-                deleteCookie("LEETCODE_SESSION");
-                return;
-              }
-
-              const { data } = await getUserProfile({
-                variables: { username: username },
-              });
-
-              if (!data?.matchedUser) {
-                setErrors({ username: "No user with given username found!" });
-                return;
-              }
-
-              const { userAvatar } = data.matchedUser.profile;
-
-              await linkUser.mutate({
-                username,
-                userAvatar: userAvatar || "none",
-                token,
-              });
-
-              await trpcUtils.user.getById.invalidate(userId);
-              await refetch();
-            }}
-          >
-            {({ submitForm, isSubmitting }) => (
-              <Stack spacing={1}>
-                <Typography>
-                  {LL.PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME()}
-                </Typography>
-                <Field
-                  component={TextField}
-                  name="username"
-                  type="text"
-                  label={LL.USERNAME()}
-                  required
-                  helperText="LeetCode Username"
-                  // error={errors['username']}
-                />
-
-                <Field
-                  component={TextField}
-                  name="token"
-                  type="text"
-                  label={LL.TOKEN()}
-                  required
-                  helperText="LeetCode Token"
-                  // error={errors['username']}
-                />
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  onClick={submitForm}
-                  sx={{ display: "block" }}
-                >
-                  {LL.SUBMIT()}
-                </Button>
-                {loading && <CircularProgress variant="indeterminate" />}
-              </Stack>
-            )}
-          </Formik>
+          <form onSubmit={formik.handleSubmit}>
+            <Stack spacing={2}>
+              <TextField
+                name="username"
+                label={LL.USERNAME()}
+                variant="outlined"
+                fullWidth
+                onChange={formik.handleChange}
+                value={formik.values.username}
+                error={Boolean(formik.errors.username)}
+                helperText={formik.errors.username}
+              />
+              <TextField
+                name="token"
+                label={LL.TOKEN()}
+                variant="outlined"
+                fullWidth
+                onChange={formik.handleChange}
+                value={formik.values.token}
+                error={Boolean(formik.errors.token)}
+                helperText={formik.errors.token}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={formik.isSubmitting || loading}
+                startIcon={
+                  formik.isSubmitting || loading ? (
+                    <CircularProgress size="1rem" />
+                  ) : null
+                }
+              >
+                {LL.SUBMIT()}
+              </Button>
+            </Stack>
+          </form>
         )}
       </Stack>
     </DataSection>
