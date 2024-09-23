@@ -36,7 +36,7 @@ export const BenchmarkChart: React.FC = () => {
             showMark: false,
             area: true,
             connectNulls: true,
-            valueFormatter: (v) => v.toFixed(24),
+            valueFormatter: (v) => v?.toFixed(24) ?? "",
             color: theme.palette.primary.light,
           },
         ]}
@@ -50,7 +50,7 @@ export const BenchmarkChart: React.FC = () => {
             showMark: false,
             area: true,
             connectNulls: true,
-            valueFormatter: (v) => v.toFixed(24),
+            valueFormatter: (v) => v?.toFixed(24) ?? "",
             color: theme.palette.secondary.light,
           },
         ]}

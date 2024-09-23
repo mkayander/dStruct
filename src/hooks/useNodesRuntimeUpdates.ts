@@ -133,7 +133,7 @@ export const useNodesRuntimeUpdates = (
           break;
 
         case "addArrayItem":
-          !("setChildId" in slice.actions) &&
+          if (!("setChildId" in slice.actions)) {
             dispatch(
               slice.actions.add({
                 name: treeName,
@@ -143,11 +143,11 @@ export const useNodesRuntimeUpdates = (
                 },
               }),
             );
+          }
           break;
 
         case "addArray":
-          "create" in slice.actions &&
-            isArgumentArrayType(frame.argType) &&
+          if ("create" in slice.actions && isArgumentArrayType(frame.argType)) {
             dispatch(
               slice.actions.create({
                 name: treeName,
@@ -158,6 +158,7 @@ export const useNodesRuntimeUpdates = (
                 },
               }),
             );
+          }
           break;
 
         case "deleteNode":
@@ -231,33 +232,37 @@ export const useNodesRuntimeUpdates = (
 
       switch (frame.name) {
         case "setColor":
-          frame.prevArgs &&
+          if (frame.prevArgs) {
             applyFrame({
               ...frame,
               args: frame.prevArgs,
             });
+          }
           break;
 
         case "setColorMap":
-          frame.prevArgs &&
+          if (frame.prevArgs) {
             applyFrame({
               ...frame,
               args: frame.prevArgs,
             });
+          }
           break;
 
         case "setVal": {
-          frame.prevArgs &&
+          if (frame.prevArgs) {
             applyFrame({
               ...frame,
               args: frame.prevArgs,
             });
+          }
           break;
         }
 
         case "addArray":
-          "delete" in slice.actions &&
+          if ("delete" in slice.actions) {
             dispatch(slice.actions.delete({ name: treeName }));
+          }
           break;
 
         case "addArrayItem":
@@ -281,33 +286,37 @@ export const useNodesRuntimeUpdates = (
 
         case "setNextNode":
         case "setLeftChild":
-          frame.prevArgs &&
+          if (frame.prevArgs) {
             applyFrame({
               ...frame,
               name: "setLeftChild",
               args: frame.prevArgs,
             });
+          }
           break;
 
         case "setRightChild":
-          frame.prevArgs &&
+          if (frame.prevArgs) {
             applyFrame({
               ...frame,
               name: "setRightChild",
               args: frame.prevArgs,
             });
+          }
           break;
 
         case "blink":
-          slice.actions.update({
-            name: treeName,
-            data: {
-              id: frame.nodeId,
-              changes: {
-                animation: undefined,
+          dispatch(
+            slice.actions.update({
+              name: treeName,
+              data: {
+                id: frame.nodeId,
+                changes: {
+                  animation: undefined,
+                },
               },
-            },
-          });
+            }),
+          );
           break;
       }
     },
@@ -320,10 +329,14 @@ export const useNodesRuntimeUpdates = (
     const isForward = frameIndex > prevFrameIndex;
     if (isForward) {
       const currentFrame = callstack[frameIndex];
-      currentFrame && applyFrame(currentFrame);
+      if (currentFrame) {
+        applyFrame(currentFrame);
+      }
     } else {
       const prevFrame = callstack[prevFrameIndex];
-      prevFrame && revertFrame(prevFrame);
+      if (prevFrame) {
+        revertFrame(prevFrame);
+      }
     }
 
     if (!callstackIsPlaying) return;

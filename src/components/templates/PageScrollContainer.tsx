@@ -58,7 +58,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
         events={
           isPage
             ? {
-                scroll: (instance, ev) => {
+                scroll: (_, ev) => {
                   if (
                     ev.target instanceof Element &&
                     ev.target.scrollTop > 0 !== isScrolled

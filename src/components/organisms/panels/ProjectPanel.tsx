@@ -78,20 +78,22 @@ export const ProjectPanel: React.FC = () => {
       return;
     }
     if (!selectedProject.data || !session.data) {
-      isEditable &&
+      if (isEditable) {
         dispatch(projectSlice.actions.update({ isEditable: false }));
+      }
       return;
     }
 
     const user = session.data.user;
 
     const newState = user.isAdmin || selectedProject.data.userId === user.id;
-    isEditable !== newState &&
+    if (isEditable !== newState) {
       dispatch(
         projectSlice.actions.update({
           isEditable: newState,
         }),
       );
+    }
   }, [
     clearSlugs,
     dispatch,
@@ -104,13 +106,15 @@ export const ProjectPanel: React.FC = () => {
   useEffect(() => {
     if (allBrief.data?.length && router.isReady && !projectSlug) {
       const firstProject = allBrief.data[0];
-      firstProject && setProject(firstProject.slug, true);
+      if (firstProject) {
+        setProject(firstProject.slug, true);
+      }
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
   const problemLink = selectedProject.data?.lcLink;
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 

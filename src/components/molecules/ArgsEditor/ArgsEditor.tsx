@@ -81,11 +81,12 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           return acc;
         }, {}),
       });
-      !isCancelled &&
+      if (!isCancelled) {
         trpcUtils.project.getCaseBySlug.setData(
           { projectId: data.projectId, slug: data.slug },
           data,
         );
+      }
     }, 500);
 
     return () => {

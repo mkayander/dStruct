@@ -88,7 +88,9 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       } satisfies CallFrameBase & { nodeId: string };
       if (key !== undefined) {
         const meta = this.getNodeMeta(key);
-        meta && (data.nodeId = meta.id);
+        if (meta) {
+          data.nodeId = meta.id;
+        }
       }
       return data;
     }

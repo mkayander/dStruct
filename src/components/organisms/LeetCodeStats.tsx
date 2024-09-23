@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 
 import { CircularPercentage } from "#/components/atoms/CircularPercentage/CircularPercentage";
 import { DataSection } from "#/components/templates/DataSection";
-import {
+import type {
   Difficulty,
   GetUserProfileQueryResult,
   QuestionCount,

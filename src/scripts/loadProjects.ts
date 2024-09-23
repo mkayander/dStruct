@@ -30,7 +30,9 @@ if (!dumpPath) {
     console.log("Loading projects");
   }
   for (const project of Object.values(data.projects)) {
-    isDebug && console.log(project.id, project.title);
+    if (isDebug) {
+      console.log(project.id, project.title);
+    }
     const userId = project.userId;
     let attachUser = false;
     if (userId) {

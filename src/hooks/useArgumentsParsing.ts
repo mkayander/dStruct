@@ -286,13 +286,14 @@ const parseArrayArgument = (
       argType: arg.type,
     }),
   );
-  newItems &&
+  if (newItems) {
     dispatch(
       arrayStructureSlice.actions.addMany({
         name: arg.name,
         data: newItems,
       }),
     );
+  }
 
   dispatch(
     caseSlice.actions.updateArgumentInfo({
@@ -333,10 +334,12 @@ export const useArgumentsParsing = () => {
       }
     }
 
-    removedTreeNames.size > 0 &&
+    if (removedTreeNames.size > 0) {
       dispatch(treeNodeSlice.actions.clearMany([...removedTreeNames]));
-    removedArrayNames.size > 0 &&
+    }
+    if (removedArrayNames.size > 0) {
       dispatch(arrayStructureSlice.actions.clearMany([...removedArrayNames]));
+    }
 
     dispatch(callstackSlice.actions.removeAll());
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,7 +11,7 @@ export type I18nContextType = {
 export const fallbackProxy = new Proxy(
   {},
   {
-    get: (target, key) => {
+    get: (_, key) => {
       if (key === "toString") return () => "FallbackProxy";
 
       return () => key;

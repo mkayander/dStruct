@@ -7,7 +7,9 @@ export const resetStructuresState = (
   performBackup = true,
 ) => {
   [treeNodeSlice, arrayStructureSlice].forEach((slice) => {
-    performBackup && dispatch(slice.actions.backupAllNodes());
+    if (performBackup) {
+      dispatch(slice.actions.backupAllNodes());
+    }
     dispatch(slice.actions.resetAll()); // Reset all nodes to default
   });
 };

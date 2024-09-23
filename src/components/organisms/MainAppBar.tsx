@@ -97,9 +97,12 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     const isLightMode = theme.palette.mode === "light";
     const databaseLightModeValue = session.data?.user.usesLightMode;
 
-    databaseLightModeValue !== undefined &&
-      databaseLightModeValue !== isLightMode &&
+    if (
+      databaseLightModeValue !== undefined &&
+      databaseLightModeValue !== isLightMode
+    ) {
       dispatch(appBarSlice.actions.setIsLightMode(databaseLightModeValue));
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.data?.user.usesLightMode]);
@@ -108,7 +111,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const handleLightModeSwitch = (value: boolean) => {
     dispatch(appBarSlice.actions.setIsLightMode(value));
-    session.status === "authenticated" && lightModeMutation.mutate(value);
+    if (session.status === "authenticated") {
+      lightModeMutation.mutate(value);
+    }
     localStorage.setItem("isLightMode", value ? "true" : "");
   };
 

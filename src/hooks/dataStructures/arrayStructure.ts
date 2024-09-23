@@ -105,7 +105,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
       item: number | string | undefined,
       index: number,
     ) => number | string,
-    thisArg?: unknown,
+    _?: unknown,
     options?: ControlledArrayRuntimeOptions,
   ) {
     const { id, array, data } = ControlledArray._mapArrayData(
@@ -162,7 +162,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
 
   override map<U>(
     callback: (value: T, index: number, array: T[]) => U,
-    thisArg?: unknown,
+    _?: unknown,
     options?: ControlledArrayRuntimeOptions,
   ): ControlledArray<U> {
     const { id, array, data } = ControlledArray._mapArrayData(

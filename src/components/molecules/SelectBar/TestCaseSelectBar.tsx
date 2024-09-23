@@ -99,7 +99,9 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
 
     const firstCaseSlug = selectedProject.data.cases[0]?.slug;
 
-    firstCaseSlug && setCase(firstCaseSlug);
+    if (firstCaseSlug) {
+      setCase(firstCaseSlug);
+    }
   }, [caseSlug, selectedProject.data, dispatch, setCase]);
 
   const handleCaseClick = (testCase: TestCaseBrief) => {
@@ -160,7 +162,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
         isEditable={isEditable}
         {...restProps}
       >
-        {(provided, droppableSnapshot) =>
+        {(_, droppableSnapshot) =>
           cases?.map((testCase, index) => (
             <DraggableSelectBarChip
               id={testCase.id}

@@ -183,7 +183,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     setModalName(PYTHON_SUPPORT_MODAL_ID);
   };
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 

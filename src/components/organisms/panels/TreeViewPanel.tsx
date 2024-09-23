@@ -70,11 +70,11 @@ export const TreeViewPanel: React.FC = () => {
   const maxDepth = useAppSelector(selectTreeMaxDepth);
   const isMobile = useMobileLayout();
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+  const handleSliderChange = (_: Event, newValue: number | number[]) => {
     setSliderValue(newValue as number);
   };
 

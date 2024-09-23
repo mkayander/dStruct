@@ -60,10 +60,12 @@ const ThemeSwitch: React.FC<SwitchProps> = (props) => {
 
   const lightModeMutation = trpc.user.setLightMode.useMutation();
 
-  const handleLightModeSwitch: SwitchProps["onChange"] = (event, checked) => {
+  const handleLightModeSwitch: SwitchProps["onChange"] = (_, checked) => {
     const newValue = !checked;
     dispatch(appBarSlice.actions.setIsLightMode(newValue));
-    session.status === "authenticated" && lightModeMutation.mutate(newValue);
+    if (session.status === "authenticated") {
+      lightModeMutation.mutate(newValue);
+    }
     localStorage.setItem("isLightMode", newValue ? "true" : "");
   };
 

@@ -99,7 +99,9 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
     const firstSolutionSlug = selectedProject.data.solutions[0]?.slug;
 
-    firstSolutionSlug && setSolution(firstSolutionSlug);
+    if (firstSolutionSlug) {
+      setSolution(firstSolutionSlug);
+    }
   }, [solutionSlug, selectedProject.data, dispatch, setSolution, caseSlug]);
 
   const handleSolutionClick = (solution: SolutionBrief) => {
@@ -160,7 +162,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
         isEditable={isEditable}
         {...restProps}
       >
-        {(provided, droppableSnapshot) =>
+        {(_, droppableSnapshot) =>
           solutions?.map((solution, index) => (
             <DraggableSelectBarChip
               id={solution.id}
