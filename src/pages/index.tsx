@@ -113,12 +113,7 @@ const DashboardPage: NextPage<{
           },
         }}
       >
-        <Box
-          position="absolute"
-          height={isMobile ? 700 : 600}
-          width="100%"
-          top="30px"
-        >
+        <Box position="absolute" height={isMobile ? 700 : 600} width="100%">
           <LogoModelView controlsRef={controlsRef} />
         </Box>
         <Stack
@@ -194,7 +189,6 @@ const DashboardPage: NextPage<{
               }}
             >
               Don&apos;t know what to solve today? Here is a daily problem from{" "}
-              {""}
               <MuiLink
                 href={"https://leetcode.com/"}
                 color="inherit"

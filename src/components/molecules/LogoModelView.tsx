@@ -38,6 +38,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
       <BinaryTreeModel />
       <OrbitControls
         ref={controlsRef}
+        target={[0, 0.5, 0]}
         minAzimuthAngle={Math.PI / -2.2}
         maxAzimuthAngle={Math.PI / 2.2}
         minPolarAngle={Math.PI / 10}
