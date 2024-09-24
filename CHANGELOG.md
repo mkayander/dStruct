@@ -1,3 +1,16 @@
+# [1.301.0](https://github.com/mkayander/dStruct/compare/v1.300.0...v1.301.0) (2024-09-24)
+
+
+### Bug Fixes
+
+* Fixed model view position ([a02c3ca](https://github.com/mkayander/dStruct/commit/a02c3ca3f369638a28b7c95f219dfbc0eb0e76df))
+* Fixed theme type ([3b144de](https://github.com/mkayander/dStruct/commit/3b144ded3377806d859dc3928609f243d174f578))
+
+
+### Features
+
+* Enable theme css variables ([05f5fd1](https://github.com/mkayander/dStruct/commit/05f5fd1a008adef24d7e51545098b4aaa4d474e2))
+
 # [1.300.0](https://github.com/mkayander/dStruct/compare/v1.299.0...v1.300.0) (2024-09-23)
 
 
