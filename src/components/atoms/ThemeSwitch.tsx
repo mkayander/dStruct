@@ -1,7 +1,7 @@
 "use client";
 
-import { Switch, type SwitchProps, Tooltip, useTheme } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Switch, type SwitchProps, Tooltip } from "@mui/material";
+import { styled, useColorScheme } from "@mui/material/styles";
 import React from "react";
 
 const StyledThemeSwitch = styled(Switch)(({ theme }) => ({
@@ -42,9 +42,10 @@ const StyledThemeSwitch = styled(Switch)(({ theme }) => ({
 type ThemeSwitchProps = Omit<SwitchProps, "checked">;
 
 export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ ...restProps }) => {
-  const theme = useTheme();
+  const { mode } = useColorScheme();
 
-  const isDark = theme.palette.mode === "dark";
+  console.log("mode", mode);
+  const isDark = mode === "dark";
 
   return (
     <Tooltip

@@ -1,4 +1,4 @@
-import { Brightness4, Translate } from "@mui/icons-material";
+import { Translate } from "@mui/icons-material";
 import {
   alpha,
   Box,
@@ -15,9 +15,8 @@ import {
   Select,
   type SelectChangeEvent,
   SwipeableDrawer,
-  Switch,
-  type SwitchProps,
   Typography,
+  useColorScheme,
   useTheme,
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
@@ -30,9 +29,6 @@ import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels } from "#/i18n/labels";
-import { useAppDispatch } from "#/store/hooks";
-import { appBarSlice } from "#/store/reducers/appBarReducer";
-import { trpc } from "#/utils";
 
 import { GITHUB_URL } from "#/constants";
 
@@ -53,29 +49,6 @@ const NavItem: React.FC<NavItemProps> = ({ title, onClick, href }) => {
   );
 };
 
-const ThemeSwitch: React.FC<SwitchProps> = (props) => {
-  const dispatch = useAppDispatch();
-  const session = useSession();
-  const theme = useTheme();
-
-  const lightModeMutation = trpc.user.setLightMode.useMutation();
-
-  const handleLightModeSwitch: SwitchProps["onChange"] = (_, checked) => {
-    const newValue = !checked;
-    dispatch(appBarSlice.actions.setIsLightMode(newValue));
-    if (session.status === "authenticated") {
-      lightModeMutation.mutate(newValue);
-    }
-    localStorage.setItem("isLightMode", newValue ? "true" : "");
-  };
-
-  const isDark = theme.palette.mode === "dark";
-
-  return (
-    <Switch {...props} onChange={handleLightModeSwitch} checked={isDark} />
-  );
-};
-
 type SidePanelProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -85,7 +58,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const router = useRouter();
   const { LL } = useI18nContext();
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
+  const { mode } = useColorScheme();
+  const isDarkMode = mode === "dark";
   const session = useSession();
 
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
@@ -134,21 +108,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
             <ListSubheader disableSticky>{LL.SETTINGS()}</ListSubheader>
           }
         >
-          <ListItem>
-            <ListItemIcon>
-              <Brightness4 />
-            </ListItemIcon>
-            <ListItemText
-              id="side-menu-dark-mode-switch"
-              primary={LL.DARK_MODE()}
-            />
-            <ThemeSwitch
-              edge="end"
-              inputProps={{
-                "aria-labelledby": "side-menu-dark-mode-switch",
-              }}
-            />
-          </ListItem>
           <ListItem>
             <ListItemIcon>
               <Translate />

@@ -26,18 +26,14 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { type MouseEvent, useEffect, useState } from "react";
+import React, { type MouseEvent, useState } from "react";
 
-import { ThemeSwitch } from "#/components/atoms/ThemeSwitch";
 import { SidePanel } from "#/components/organisms/SidePanel";
 import { useProfileImageUploader } from "#/hooks";
 import { useI18nContext } from "#/hooks";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import {
-  appBarSlice,
-  selectIsAppBarScrolled,
-} from "#/store/reducers/appBarReducer";
-import { getImageUrl, trpc } from "#/utils";
+import { useAppSelector } from "#/store/hooks";
+import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
+import { getImageUrl } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
@@ -50,7 +46,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   appBarVariant = "elevation",
   toolbarVariant = "dense",
 }) => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const currentPath = router.pathname;
   const theme = useTheme();
@@ -88,35 +83,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     setIsSidePanelOpen(true);
   };
 
-  useEffect(() => {
-    const cachedDarkModeValue = localStorage.getItem("isLightMode");
-    dispatch(appBarSlice.actions.setIsLightMode(Boolean(cachedDarkModeValue)));
-  }, [dispatch]);
-
-  useEffect(() => {
-    const isLightMode = theme.palette.mode === "light";
-    const databaseLightModeValue = session.data?.user.usesLightMode;
-
-    if (
-      databaseLightModeValue !== undefined &&
-      databaseLightModeValue !== isLightMode
-    ) {
-      dispatch(appBarSlice.actions.setIsLightMode(databaseLightModeValue));
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session.data?.user.usesLightMode]);
-
-  const lightModeMutation = trpc.user.setLightMode.useMutation();
-
-  const handleLightModeSwitch = (value: boolean) => {
-    dispatch(appBarSlice.actions.setIsLightMode(value));
-    if (session.status === "authenticated") {
-      lightModeMutation.mutate(value);
-    }
-    localStorage.setItem("isLightMode", value ? "true" : "");
-  };
-
   return (
     <>
       <SidePanel isOpen={isSidePanelOpen} setIsOpen={setIsSidePanelOpen} />
@@ -124,16 +90,17 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
         position="sticky"
         elevation={isScrolled ? 2 : 0}
         variant={appBarVariant}
+        color={"transparent"}
         sx={{
-          transition: "background .1s, borderBottom .1s",
-          backdropFilter: "blur(12px)",
+          transition: "all .2s",
+          backdropFilter: isScrolled ? "blur(12px)" : "blur(0px)",
+          background: isScrolled
+            ? alpha(theme.palette.primary.main, 0.2)
+            : alpha(theme.palette.primary.main, 0),
           boxShadow: `0 0 12px 0 ${alpha(
             theme.palette.primary.main,
             isScrolled ? 0.2 : 0,
           )}`,
-          background: isScrolled
-            ? alpha(theme.palette.primary.main, 0.2)
-            : alpha(theme.palette.primary.main, 0),
           borderBottom: `1px solid ${alpha(
             theme.palette.common.white,
             isScrolled ? 0.05 : 0,
@@ -259,12 +226,6 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               alignItems="center"
               sx={{ flexGrow: 0 }}
             >
-              <ThemeSwitch
-                onChange={(_, checked) => {
-                  handleLightModeSwitch(!checked);
-                }}
-              />
-
               {session.status === "loading" ? (
                 <Skeleton
                   variant="circular"

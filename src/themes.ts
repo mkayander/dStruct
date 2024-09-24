@@ -1,16 +1,17 @@
 "use client";
 
-import type { PaletteColor, PaletteMode } from "@mui/material";
+import type { PaletteColor } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
 
-const createCustomTheme = (mode: PaletteMode) => {
+const createCustomTheme = () => {
   // Create a theme instance.
   const theme = createTheme({
+    cssVariables: true,
     palette: {
-      mode,
+      mode: "dark",
       primary: {
         main: "#556cd6",
       },
@@ -87,11 +88,4 @@ declare module "@mui/material/styles" {
   }
 }
 
-const dark = createCustomTheme("dark");
-
-const light = createCustomTheme("light");
-
-export const themes = {
-  dark,
-  light,
-};
+export const theme = createCustomTheme();

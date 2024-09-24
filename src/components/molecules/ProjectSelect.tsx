@@ -9,6 +9,7 @@ import {
   Stack,
   Tooltip,
   Typography,
+  useColorScheme,
   useTheme,
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
@@ -35,12 +36,13 @@ type ProjectSelectProps = {
 export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
+  const { mode } = useColorScheme();
   const { newProjectMarginMs } = useContext(ConfigContext);
   const [searchValue, setSearchValue] = useState("");
 
   const { projectSlug = "", setProject } = usePlaygroundSlugs();
 
-  const panelBgColor = theme.palette.mode === "dark" ? "#2f2f2f" : "#fff";
+  const panelBgColor = mode === "dark" ? "#2f2f2f" : "#fff";
 
   const handleSelectProject = (e: SelectChangeEvent) => {
     void setProject(

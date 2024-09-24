@@ -1,5 +1,5 @@
 import type { EditorProps } from "@monaco-editor/react";
-import { Box, Skeleton, useTheme } from "@mui/material";
+import { Box, Skeleton, useColorScheme } from "@mui/material";
 import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -31,13 +31,13 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   height,
   ...restProps
 }) => {
-  const theme = useTheme();
+  const { mode } = useColorScheme();
   const isMobile = useMobileLayout();
 
   return (
     <Box position="relative">
       <MonacoEditor
-        theme={theme.palette.mode === "dark" ? "app-dark" : "vs-light"}
+        theme={mode === "dark" ? "app-dark" : "vs-light"}
         options={{
           fontSize: 13,
           minimap: { enabled: false },
