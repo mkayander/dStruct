@@ -1,7 +1,7 @@
 import { ProjectDifficulty } from "@prisma/client";
 
 import { Difficulty } from "#/graphql/generated";
-import type { themes } from "#/themes";
+import type { theme as muiTheme } from "#/themes";
 
 export const difficultyLabels: Record<ProjectDifficulty, string> = {
   [ProjectDifficulty.EASY]: "Easy",
@@ -10,7 +10,7 @@ export const difficultyLabels: Record<ProjectDifficulty, string> = {
 };
 
 export const getDifficultyColor = (
-  theme: (typeof themes)["dark"],
+  theme: typeof muiTheme,
   difficulty?: ProjectDifficulty | null,
 ) => {
   switch (difficulty) {
