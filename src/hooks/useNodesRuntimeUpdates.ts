@@ -326,16 +326,18 @@ export const useNodesRuntimeUpdates = (
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
 
-    const isForward = frameIndex > prevFrameIndex;
-    if (isForward) {
-      const currentFrame = callstack[frameIndex];
-      if (currentFrame) {
-        applyFrame(currentFrame);
-      }
-    } else {
-      const prevFrame = callstack[prevFrameIndex];
-      if (prevFrame) {
-        revertFrame(prevFrame);
+    const isForward = frameIndex >= prevFrameIndex;
+    if (frameIndex !== prevFrameIndex) {
+      if (isForward) {
+        const currentFrame = callstack[frameIndex];
+        if (currentFrame) {
+          applyFrame(currentFrame);
+        }
+      } else {
+        const prevFrame = callstack[prevFrameIndex];
+        if (prevFrame) {
+          revertFrame(prevFrame);
+        }
       }
     }
 
@@ -359,7 +361,8 @@ export const useNodesRuntimeUpdates = (
       if (nextIndex < callstack.length) {
         setIsActive(true);
         dispatch(callstackSlice.actions.setFrameIndex(nextIndex));
-      } else {
+      }
+      if (nextIndex >= callstack.length - 1) {
         dispatch(callstackSlice.actions.setIsPlaying(false));
       }
     }, playbackInterval);
