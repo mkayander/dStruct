@@ -48,6 +48,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         enableRotate={true}
         enableZoom={false}
         enablePan={false}
+        dampingFactor={0.005}
       />
     </Canvas>
   );
