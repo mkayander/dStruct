@@ -1,3 +1,10 @@
+## [1.301.1](https://github.com/mkayander/dStruct/compare/v1.301.0...v1.301.1) (2024-09-28)
+
+
+### Bug Fixes
+
+* Avoid additional frame revert ([b6e007f](https://github.com/mkayander/dStruct/commit/b6e007f8bb8ab25f65fb86a1003dbb27124761c4))
+
 # [1.301.0](https://github.com/mkayander/dStruct/compare/v1.300.0...v1.301.0) (2024-09-24)
 
 
