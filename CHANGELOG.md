@@ -1,3 +1,11 @@
+# [1.302.0](https://github.com/mkayander/dStruct/compare/v1.301.1...v1.302.0) (2024-09-28)
+
+
+### Features
+
+* Don't reset animation on interval change ([34d5338](https://github.com/mkayander/dStruct/commit/34d53383ae9c2d0dcb38a5f58e05397bc3dd516e))
+* Smooth dumping factor ([318f15a](https://github.com/mkayander/dStruct/commit/318f15a0226b246d204f6da865a9912a97015544))
+
 ## [1.301.1](https://github.com/mkayander/dStruct/compare/v1.301.0...v1.301.1) (2024-09-28)
 
 
