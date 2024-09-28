@@ -387,5 +387,5 @@ export const useNodesRuntimeUpdates = (
       setIsActive(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, replayCount, playbackInterval, callstack, callstackIsReady]);
+  }, [dispatch, replayCount, callstack, callstackIsReady]);
 };
