@@ -120,29 +120,31 @@ export const TreeViewPanel: React.FC = () => {
     }
   };
 
+  const handleKeyDown: React.KeyboardEventHandler = (event) => {
+    if (event.key === "ArrowLeft") {
+      handleStepBack();
+    } else if (event.key === "ArrowRight") {
+      handleStepForward();
+    } else if (event.key === " ") {
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLButtonElement
+      )
+        return;
+      handlePlay();
+    } else if (event.key === "r") {
+      handleReplay();
+    } else if (event.key === "Escape") {
+      handleReset();
+    }
+  };
+
   return (
     <PanelWrapper
       sx={{
         height: isMobile ? 240 + maxDepth * 60 : "100%",
       }}
-      onKeyDown={(event) => {
-        if (event.key === "ArrowLeft") {
-          handleStepBack();
-        } else if (event.key === "ArrowRight") {
-          handleStepForward();
-        } else if (event.key === " ") {
-          if (
-            event.target instanceof HTMLInputElement ||
-            event.target instanceof HTMLButtonElement
-          )
-            return;
-          handlePlay();
-        } else if (event.key === "r") {
-          handleReplay();
-        } else if (event.key === "Escape") {
-          handleReset();
-        }
-      }}
+      onKeyDown={handleKeyDown}
     >
       <LoadingSkeletonOverlay />
 
@@ -244,7 +246,9 @@ export const TreeViewPanel: React.FC = () => {
               </IconButton>
               <IconButton
                 title={isPlaying ? "Pause" : "Play"}
-                disabled={!callstackLength}
+                disabled={
+                  !callstackLength || frameIndex === callstackLength - 1
+                }
                 onClick={handlePlay}
               >
                 {isPlaying ? <Pause /> : <PlayArrow />}
