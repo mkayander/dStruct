@@ -101,6 +101,14 @@ const createRuntimeMatrix = (
   return matrix;
 };
 
+/**
+ * Create controlled/tracked runtime arguments for a visual function call.
+ * @param callstack - Callstack to be filled as the function is executed.
+ * @param treeStore - Tree data store.
+ * @param arrayStore - Array data store.
+ * @param args - Arguments to be converted.
+ * @returns Controlled runtime arguments.
+ */
 export const createCaseRuntimeArgs = (
   callstack: CallstackHelper,
   treeStore: TreeDataState,
@@ -129,6 +137,12 @@ export const createCaseRuntimeArgs = (
   });
 };
 
+/**
+ * Create raw JavaScript function arguments that are not controlled/tracked.
+ * Use for benchmarks and other non-visual operations.
+ * @param args - Arguments to be converted.
+ * @returns Raw JavaScript function arguments.
+ */
 export const createRawRuntimeArgs = (args: ArgumentObject[]) =>
   args.map((arg) => {
     switch (arg.type) {
