@@ -15,6 +15,7 @@ import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   type TreeData,
   treeDataSelector,
+  treeDataStructuresSelector,
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
@@ -41,9 +42,11 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   const treeState = useAppSelector(treeDataSelector);
   const arrayState = useAppSelector(arrayDataSelector);
+  const treeStructures = useAppSelector(treeDataStructuresSelector);
 
   // Archer container forced re-render after animations hack
   useEffect(() => {
+    handleScroll();
     const timeoutId = setTimeout(() => setForceUpdate((prev) => !prev), 50);
 
     return () => clearTimeout(timeoutId);
@@ -70,10 +73,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   };
 
   useEffect(() => {
-    handleScroll();
-  }, [treeState]);
-
-  useEffect(() => {
     const handler = () => {
       handleScroll();
     };
@@ -85,34 +84,24 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   const binaryTrees = useMemo(() => {
     let prevTree: TreeData | null = null;
     let topOffset = 0;
-    return Object.entries(treeState)
-      .sort(([, { order: a }], [, { order: b }]) => a - b)
-      .map(([treeName, data]) => {
-        const style: React.CSSProperties = {
-          top: topOffset,
-          left: 0,
-        };
-        if (data.type === ArgumentType.BINARY_TREE) {
-          style.top = 0;
-          if (prevTree?.type === ArgumentType.BINARY_TREE) {
-            style.left =
-              (Number(style.left) || 0) + 200 + prevTree.maxDepth ** 5.3;
-          }
-          topOffset += data.maxDepth * 72;
-        } else {
-          return null;
-        }
-        prevTree = data;
-        return (
-          <NodesView
-            key={treeName}
-            treeName={treeName}
-            data={data}
-            style={style}
-          />
-        );
-      });
-  }, [treeState]);
+    return treeStructures.binaryTree.map(({ name, treeState }) => {
+      const style: React.CSSProperties = {
+        top: topOffset,
+        left: 0,
+      };
+
+      style.top = 0;
+      if (prevTree) {
+        style.left = (Number(style.left) || 0) + 200 + prevTree.maxDepth ** 5.3;
+      }
+      topOffset += treeState.maxDepth * 72;
+
+      prevTree = treeState;
+      return (
+        <NodesView key={name} treeName={name} data={treeState} style={style} />
+      );
+    });
+  }, [treeStructures.binaryTree]);
 
   const arrayStructures = useMemo(() => {
     if (!arrayState) return null;
@@ -146,24 +135,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     return arrayNodes;
   }, [arrayState]);
-
-  const linkedLists = useMemo(() => {
-    const linkedListData = Object.entries(treeState).filter(
-      ([, { type }]) => type === ArgumentType.LINKED_LIST,
-    );
-
-    return linkedListData.map(([treeName, data]) => (
-      <NodesView
-        key={treeName}
-        treeName={treeName}
-        data={data}
-        sx={{
-          position: "relative",
-          height: "42px",
-        }}
-      />
-    ));
-  }, [treeState]);
 
   return (
     <Box
@@ -226,10 +197,28 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               <Stack width="fit-content" minWidth="100%" spacing={2}>
                 {arrayStructures}
                 <br />
-                {linkedLists}
+
+                {treeStructures.linkedList.map(({ name, treeState }) => (
+                  <NodesView
+                    key={name}
+                    treeName={name}
+                    data={treeState}
+                    sx={{
+                      position: "relative",
+                      height: "42px",
+                    }}
+                  />
+                ))}
               </Stack>
             )}
-            {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
+            {(binaryTrees || treeStructures.graph) && (
+              <Box height="100%">
+                {binaryTrees}
+                {treeStructures.graph.map(({ name, treeState }) => (
+                  <NodesView key={name} treeName={name} data={treeState} />
+                ))}
+              </Box>
+            )}
           </ArcherContainer>
         </Box>
       </ScrollContainer>

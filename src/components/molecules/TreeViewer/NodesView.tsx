@@ -30,7 +30,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
   useBinaryTreePositioning(treeName, data);
 
   const Node =
-    data.type === ArgumentType.BINARY_TREE ? BinaryNode : LinkedListNode;
+    data.type === ArgumentType.LINKED_LIST ? LinkedListNode : BinaryNode;
 
   let left = Number(style?.left) || 0;
   left -= offset;

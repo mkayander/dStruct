@@ -133,6 +133,9 @@ export const createCaseRuntimeArgs = (
 
       case ArgumentType.MATRIX:
         return createRuntimeMatrix(arrayStore, arg, callstack);
+
+      case ArgumentType.GRAPH:
+        return JSON.parse(arg.input);
     }
   });
 };
@@ -146,8 +149,7 @@ export const createCaseRuntimeArgs = (
 export const createRawRuntimeArgs = (args: ArgumentObject[]) =>
   args.map((arg) => {
     switch (arg.type) {
-      case ArgumentType.LINKED_LIST:
-      case ArgumentType.BINARY_TREE:
+      case ArgumentType.STRING:
         return arg.input;
 
       case ArgumentType.NUMBER:
@@ -156,11 +158,11 @@ export const createRawRuntimeArgs = (args: ArgumentObject[]) =>
       case ArgumentType.BOOLEAN:
         return arg.input === "true";
 
-      case ArgumentType.STRING:
-        return arg.input;
-
       case ArgumentType.ARRAY:
       case ArgumentType.MATRIX:
+      case ArgumentType.LINKED_LIST:
+      case ArgumentType.BINARY_TREE:
+      case ArgumentType.GRAPH:
         return JSON.parse(arg.input);
     }
   });

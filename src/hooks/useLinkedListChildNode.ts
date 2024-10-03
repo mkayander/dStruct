@@ -11,6 +11,7 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
 import { processNodeRelation } from "#/utils";
+import { ArgumentType } from "#/utils/argumentObject";
 
 export const useLinkedListChildNode = (
   props: BinaryNodeProps,
@@ -27,7 +28,7 @@ export const useLinkedListChildNode = (
   processNodeRelation(relations, nodeColor, color, nextNodeData);
 
   const updateChildPosition = (data?: TreeNodeData | null) => {
-    if (!data) return;
+    if (!data || data.argType !== ArgumentType.LINKED_LIST) return;
 
     const horizontalOffset = 64;
 

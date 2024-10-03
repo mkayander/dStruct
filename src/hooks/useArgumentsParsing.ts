@@ -34,6 +34,7 @@ import {
 import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export type TreeInput = (number | null)[];
+export type GraphInput = Array<[number, number, number]>;
 
 const createNodeData = (
   map: Record<string, TreeNodeData>,
@@ -145,6 +146,49 @@ const parseLinkedListArgument = (rawInput: string) => {
   return { maxDepth, nodesMap };
 };
 
+const parseGraphArgument = (rawInput: string) => {
+  let input: GraphInput | null = null;
+  try {
+    input = JSON.parse(rawInput);
+  } catch (e) {
+    console.warn(e);
+  }
+
+  if (!input || input.length === 0) return;
+
+  const nodesMap: Record<string, TreeNodeData> = {};
+  const idMap = new Map<number, TreeNodeData>();
+
+  const initNode = (value: number): TreeNodeData => {
+    if (idMap.get(value)) return idMap.get(value)!;
+
+    const newNode = createNodeData(nodesMap, value, 0, ArgumentType.GRAPH);
+    if (!newNode) {
+      throw new Error("Failed to create node data");
+    }
+    newNode.x = Math.random() * 500;
+    newNode.y = Math.random() * 500;
+
+    idMap.set(value, newNode);
+
+    return newNode;
+  };
+
+  const maxDepth = 0;
+
+  for (const value of input) {
+    const [from, to, weight] = value;
+    if (!isNumber(from) || !isNumber(to) || !isNumber(weight)) continue;
+
+    const fromNode = initNode(from);
+    const toNode = initNode(to);
+
+    fromNode.childrenIds.push(toNode.id);
+  }
+
+  return { maxDepth, nodesMap };
+};
+
 const parseTreeArgument = (
   arg: ArgumentObject<ArgumentTreeType>,
   argsInfo: Record<string, ArgumentInfo>,
@@ -158,13 +202,16 @@ const parseTreeArgument = (
     }),
   );
 
-  let parsed = null;
+  let parsed: ReturnType<typeof parseBinaryTreeArgument>;
   switch (arg.type) {
     case ArgumentType.BINARY_TREE:
       parsed = parseBinaryTreeArgument(arg.input);
       break;
     case ArgumentType.LINKED_LIST:
       parsed = parseLinkedListArgument(arg.input);
+    case ArgumentType.GRAPH:
+      parsed = parseGraphArgument(arg.input);
+      break;
   }
   if (!parsed) return;
 
