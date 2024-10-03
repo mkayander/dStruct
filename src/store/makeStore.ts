@@ -1,8 +1,8 @@
 import {
   type Action,
-  type AnyAction,
   configureStore,
   type Middleware,
+  type PayloadAction,
   type ThunkAction,
 } from "@reduxjs/toolkit";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
@@ -14,7 +14,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const reducer = (
   state: RootState | undefined,
-  action: AnyAction,
+  action: PayloadAction<any>,
 ): RootState => {
   if (action.type === HYDRATE) {
     // Attention! This will overwrite client state! Real apps should use proper reconciliation.
