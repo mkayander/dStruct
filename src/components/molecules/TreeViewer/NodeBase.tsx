@@ -3,6 +3,7 @@
 import {
   alpha,
   Box,
+  type BoxProps,
   keyframes,
   type SxProps,
   type Theme,
@@ -48,11 +49,12 @@ const animationSx = {
   },
 };
 
-export type NodeBaseProps = TreeNodeData & {
-  nodeColor: string;
-  shadowColor: string;
-  relations: RelationType[];
-};
+export type NodeBaseProps = Pick<BoxProps, "onMouseDown" | "onMouseUp"> &
+  TreeNodeData & {
+    nodeColor: string;
+    shadowColor: string;
+    relations: RelationType[];
+  };
 
 export const NodeBase: React.FC<NodeBaseProps> = ({
   id,
@@ -64,6 +66,8 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   x,
   y,
   relations,
+  onMouseDown,
+  onMouseUp,
 }: NodeBaseProps) => {
   const theme = useTheme();
 
@@ -85,6 +89,8 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         left: x,
         top: y,
       }}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       <Box
         sx={{

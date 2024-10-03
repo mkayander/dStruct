@@ -11,6 +11,14 @@ import {
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
+import { GraphNode } from "./GraphNode";
+
+const nodeComponentMap = {
+  [ArgumentType.LINKED_LIST]: LinkedListNode,
+  [ArgumentType.BINARY_TREE]: BinaryNode,
+  [ArgumentType.GRAPH]: GraphNode,
+};
+
 type NodesViewProps = {
   treeName: string;
   data: TreeData;
@@ -29,8 +37,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
 
   useBinaryTreePositioning(treeName, data);
 
-  const Node =
-    data.type === ArgumentType.LINKED_LIST ? LinkedListNode : BinaryNode;
+  const Node = nodeComponentMap[data.type];
 
   let left = Number(style?.left) || 0;
   left -= offset;

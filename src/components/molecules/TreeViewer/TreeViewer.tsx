@@ -10,12 +10,14 @@ import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructure
 import { MatrixStructureView } from "#/components/molecules/TreeViewer/MatrixStructureView";
 import { NodesView } from "#/components/molecules/TreeViewer/NodesView";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { editorSlice, selectDragState } from "#/store/reducers/editorReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   type TreeData,
   treeDataSelector,
   treeDataStructuresSelector,
+  treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
@@ -39,10 +41,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   replayCount,
 }) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
   const treeState = useAppSelector(treeDataSelector);
   const arrayState = useAppSelector(arrayDataSelector);
   const treeStructures = useAppSelector(treeDataStructuresSelector);
+  const dragState = useAppSelector(selectDragState);
 
   // Archer container forced re-render after animations hack
   useEffect(() => {
@@ -144,6 +148,23 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       borderRadius={1}
       position="relative"
       width="100%"
+      onMouseLeave={() => {
+        if (dragState) dispatch(editorSlice.actions.clear());
+      }}
+      onMouseUp={() => {
+        if (dragState) dispatch(editorSlice.actions.clear());
+      }}
+      onMouseMove={(ev: React.MouseEvent) => {
+        if (!dragState) return;
+
+        dispatch(
+          treeNodeSlice.actions.dragNode({
+            ...dragState,
+            clientX: ev.clientX,
+            clientY: ev.clientY,
+          }),
+        );
+      }}
       sx={{
         flexGrow: 1,
         "&:before": {
@@ -168,6 +189,8 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
     >
       <ScrollContainer
         innerRef={scrollRef}
+        vertical={!dragState}
+        horizontal={!dragState}
         onScroll={handleScroll}
         style={{ height: "100%" }}
       >
@@ -193,6 +216,13 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               height: "100%",
             }}
           >
+            {treeStructures.graph && (
+              <Box height="100%" position="absolute">
+                {treeStructures.graph.map(({ name, treeState }) => (
+                  <NodesView key={name} treeName={name} data={treeState} />
+                ))}
+              </Box>
+            )}
             {arrayStructures && (
               <Stack width="fit-content" minWidth="100%" spacing={2}>
                 {arrayStructures}
@@ -211,14 +241,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
                 ))}
               </Stack>
             )}
-            {(binaryTrees || treeStructures.graph) && (
-              <Box height="100%">
-                {binaryTrees}
-                {treeStructures.graph.map(({ name, treeState }) => (
-                  <NodesView key={name} treeName={name} data={treeState} />
-                ))}
-              </Box>
-            )}
+            {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
           </ArcherContainer>
         </Box>
       </ScrollContainer>
