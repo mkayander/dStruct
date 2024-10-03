@@ -287,6 +287,9 @@ importers:
       '@vitest/web-worker':
         specifier: ^2.1.1
         version: 2.1.1(vitest@2.1.1(@types/node@20.16.5)(jsdom@25.0.1)(sass@1.79.3)(terser@5.26.0))
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       esbuild:
         specifier: ^0.24.0
         version: 0.24.0
