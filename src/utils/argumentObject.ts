@@ -72,19 +72,34 @@ export function isArgumentArrayType(
   );
 }
 
-export type ArgumentObject<T extends ArgumentType = ArgumentType> = {
+type BaseArgumentData = {
   name: string;
   parentName?: string;
-  type: T;
   order: number;
   input: string;
 };
+
+type TreeArgumentData = BaseArgumentData & {
+  nodeData?: Record<
+    string,
+    {
+      x: number;
+      y: number;
+    }
+  >;
+};
+
+export type ArgumentObject<T extends ArgumentType = ArgumentType> =
+  T extends ArgumentTreeType
+    ? TreeArgumentData & { type: T }
+    : BaseArgumentData & { type: T };
 
 export const argumentObjectValidator = z.object({
   name: z.string(),
   type: z.nativeEnum(ArgumentType),
   order: z.number(),
   input: z.string(),
+  nodeData: z.record(z.object({ x: z.number(), y: z.number() })).optional(),
 });
 
 export const isArgumentObjectValid = (
