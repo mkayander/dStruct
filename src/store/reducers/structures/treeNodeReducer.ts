@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
+import { type NodeDragState } from "#/store/reducers/editorReducer";
 import {
   type BaseStructureItem,
   type BaseStructureState,
@@ -166,6 +167,33 @@ export const treeNodeSlice = createSlice({
         });
       });
     },
+    dragNode: (
+      state,
+      action: PayloadAction<
+        NodeDragState & { clientX: number; clientY: number }
+      >,
+    ) =>
+      runStateActionByName(state, action.payload.treeName, (treeState) => {
+        const {
+          payload: {
+            nodeId,
+            startX,
+            startY,
+            startClientX,
+            startClientY,
+            clientX,
+            clientY,
+          },
+        } = action;
+
+        const deltaX = clientX - startClientX;
+        const deltaY = clientY - startClientY;
+
+        treeNodeDataAdapter.updateOne(treeState.nodes, {
+          id: nodeId,
+          changes: { x: startX + deltaX, y: startY + deltaY },
+        });
+      }),
     setRoot: (state, action: NamedPayload<string>) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         treeState.rootId = action.payload.data;
