@@ -16,7 +16,7 @@ import {
   runStateActionByName,
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
-import { type ArgumentTreeType } from "#/utils/argumentObject";
+import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";
 
@@ -191,6 +191,35 @@ export const treeNodeReducer = treeNodeSlice.reducer;
  * Selector
  */
 export const treeDataSelector = (state: RootState) => state.treeNode;
+
+export type TreeDataSelect = {
+  name: string;
+  treeState: TreeData;
+};
+export type TreeDataStructures = {
+  [ArgumentType.BINARY_TREE]: TreeDataSelect[];
+  [ArgumentType.LINKED_LIST]: TreeDataSelect[];
+  [ArgumentType.GRAPH]: TreeDataSelect[];
+};
+export const treeDataStructuresSelector = createSelector(
+  treeDataSelector,
+  (state) => {
+    const structures: TreeDataStructures = {
+      [ArgumentType.BINARY_TREE]: [],
+      [ArgumentType.LINKED_LIST]: [],
+      [ArgumentType.GRAPH]: [],
+    };
+
+    Object.entries(state)
+      .sort(([, { order: a }], [, { order: b }]) => a - b)
+      .forEach(([name, treeState]) => {
+        const type = treeState.type;
+        structures[type].push({ name, treeState });
+      });
+
+    return structures;
+  },
+);
 
 export const treeNodeDataSelector = treeNodeDataAdapter.getSelectors();
 
