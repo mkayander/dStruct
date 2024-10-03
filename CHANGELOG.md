@@ -1,3 +1,21 @@
+# [1.303.0](https://github.com/mkayander/dStruct/compare/v1.302.0...v1.303.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* Fix payload type ([d8e19bb](https://github.com/mkayander/dStruct/commit/d8e19bb59e88e6c269b7fdeed3fc47a1f7534192))
+
+
+### Features
+
+* Add cross-env ([1503f4b](https://github.com/mkayander/dStruct/commit/1503f4bc9aaadbd9d8915a59dfcc7d1b147652dd))
+* Added a new structures selector ([58cf25c](https://github.com/mkayander/dStruct/commit/58cf25cb0ee0b4a7bc9624e985def393aedb9269))
+* Allow to save argument node data ([c4b9a59](https://github.com/mkayander/dStruct/commit/c4b9a59a0319d905a73f8264fd12234012f1a07a))
+* Implemented a graph node component ([f971f9b](https://github.com/mkayander/dStruct/commit/f971f9b1f698bbfff2db6c47560a852c1f3bf525))
+* Implemented an editor reducer ([b5fd8dd](https://github.com/mkayander/dStruct/commit/b5fd8ddf8b2b98b94e8bb59909cc96e3724166a0))
+* Implemented basic graph node dragging ([5f75c39](https://github.com/mkayander/dStruct/commit/5f75c39b0be338df5beccfea2bba3d7105403fa5))
+* Implemented graph tree parsing ([b513fd3](https://github.com/mkayander/dStruct/commit/b513fd3261bbda0ff83de0bc2e0bd667474c3050))
+
 # [1.302.0](https://github.com/mkayander/dStruct/compare/v1.301.1...v1.302.0) (2024-09-28)
 
 
