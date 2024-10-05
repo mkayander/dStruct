@@ -33,8 +33,10 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
     }
 
     public blink(index: number) {
+      const base = this.getDispatchBase();
       const prevFrame = this.callstack.frames.at(-1);
-      if (prevFrame?.name === "blink") return;
+      if (prevFrame?.name === "blink" && prevFrame.nodeId === base.nodeId)
+        return;
 
       this.callstack.addOne({
         ...this.getDispatchBase(index),
