@@ -1,5 +1,6 @@
 import { alpha, Box, Typography } from "@mui/material";
-import React from "react";
+import clsx from "clsx";
+import React, { useEffect, useRef } from "react";
 
 import { useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
@@ -22,10 +23,20 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
   const valueColor = colorMap?.[String(item.value)];
   const { nodeColor } = useNodeColors(item.color ?? valueColor, false);
   const isChildNested = Boolean(item.childName);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      const animation = ref.current.style.animation;
+      ref.current.style.animation = "none";
+      void ref.current.offsetWidth;
+      ref.current.style.animation = animation;
+    }
+  }, [item.animationCount]);
 
   return (
     <Box
-      className={`array-item ${isGrid ? "grid-item" : ""}`}
+      className={clsx("array-item", { "grid-item": isGrid })}
       sx={{
         position: "relative",
         minWidth: size,
@@ -36,25 +47,6 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         justifyContent: "center",
         alignItems: "center",
         transition: "background-color 0.1s",
-
-        "&::after": {
-          content: '""',
-          position: "absolute",
-          zIndex: 15,
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(255, 255, 255, 0.1)",
-          opacity: 0,
-          transition: "opacity 0.1s",
-          mixBlendMode: "difference",
-          backdropFilter: "blur(2px)",
-        },
-
-        "&:hover::after": {
-          opacity: 0.3,
-        },
 
         "&:not(:last-child)": {
           "&::before": {
@@ -76,6 +68,27 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         },
       }}
     >
+      <Box
+        ref={ref}
+        sx={{
+          position: "absolute",
+          zIndex: 15,
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "rgba(255, 255, 255, 0.1)",
+          opacity: 0,
+          transition: "opacity 0.1s",
+          mixBlendMode: "difference",
+          backdropFilter: "blur(2px)",
+          animation: `${item.animation} 0.3s ease-in-out`,
+
+          "&:hover": {
+            opacity: 0.3,
+          },
+        }}
+      />
       <Typography
         sx={{ textAlign: "center", wordWrap: "none", pt: 0.32, mx: 1 }}
       >
