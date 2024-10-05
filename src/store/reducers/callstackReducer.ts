@@ -283,25 +283,29 @@ export const selectRuntimeData = createSelector(
   }),
 );
 
-export const selectCallstackIsReady = createSelector(
-  (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.isReady,
-);
+export const selectCallstackIsReady = (state: RootState) =>
+  state.callstack.isReady;
+export const selectCallstackRuntime = (state: RootState) =>
+  state.callstack.runtime;
+export const selectCallstackResult = (state: RootState) =>
+  state.callstack.result;
+export const selectCallstackError = (state: RootState) => state.callstack.error;
+export const selectBenchmarkResults = (state: RootState) =>
+  state.callstack.benchmarkResults;
 
-export const selectCallstackIsPlaying = createSelector(
-  (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.isPlaying,
-);
+export const selectCallstackIsPlaying = (state: RootState) =>
+  state.callstack.isPlaying;
 
-export const selectCallstackLength = createSelector(
-  (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.frames.ids.length,
-);
+export const selectCallstackLength = (state: RootState) =>
+  state.callstack.frames.ids.length;
 
-export const selectCallstackFrameIndex = createSelector(
-  (state: RootState) => state.callstack,
-  (callstack: CallstackState) => callstack.frameIndex,
-);
+export const selectCallstackFrameIndex = (state: RootState) =>
+  state.callstack.frameIndex;
+
+export const selectIsRootFrame = (state: RootState) =>
+  state.callstack.frameIndex === -1;
+export const selectIsLastFrame = (state: RootState) =>
+  state.callstack.frameIndex === selectCallstackLength(state) - 1;
 
 export const selectConsoleLogs = createSelector(
   (state: RootState) => state.callstack,
