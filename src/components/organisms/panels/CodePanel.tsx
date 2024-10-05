@@ -45,7 +45,7 @@ import {
   type ProgrammingLanguage,
 } from "#/hooks/useCodeExecution";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { selectRuntimeData } from "#/store/reducers/callstackReducer";
+import { selectCallstackError } from "#/store/reducers/callstackReducer";
 import {
   projectSlice,
   selectIsEditable,
@@ -86,7 +86,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
-  const { error } = useAppSelector(selectRuntimeData);
+  const error = useAppSelector(selectCallstackError);
 
   const selectedProject = trpc.project.getBySlug.useQuery(projectSlug || "", {
     enabled: Boolean(projectSlug),

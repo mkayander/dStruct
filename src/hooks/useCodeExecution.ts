@@ -4,11 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import shortUUID from "short-uuid";
 
-import { useAppSelector } from "#/store/hooks";
+import { useAppStore } from "#/store/hooks";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
-import { selectCaseArguments } from "#/store/reducers/caseReducer";
-import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
-import { treeDataSelector } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
@@ -33,6 +30,7 @@ const uuid = shortUUID();
 
 export const useCodeExecution = (codeInput: string) => {
   const dispatch = useDispatch();
+  const store = useAppStore();
 
   const [worker, setWorker] = useState<Worker | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -53,7 +51,10 @@ export const useCodeExecution = (codeInput: string) => {
     if (!worker) return;
 
     setIsProcessing(true);
-    const args = createRawRuntimeArgs(caseArgs);
+    const state = store.getState();
+    const args = createRawRuntimeArgs(
+      Object.values(state.testCase.args.entities),
+    );
 
     let startTimestamp = performance.now();
 
@@ -105,14 +106,14 @@ export const useCodeExecution = (codeInput: string) => {
     }
   };
 
-  const treeStore = useAppSelector(treeDataSelector);
-  const arrayStore = useAppSelector(arrayDataSelector);
-  const caseArgs = useAppSelector(selectCaseArguments);
-
   const runCode = async () => {
     if (!worker) return;
 
     setIsProcessing(true);
+    const state = store.getState();
+    const caseArgs = Object.values(state.testCase.args.entities);
+    const arrayStore = state.arrayStructure;
+    const treeStore = state.treeNode;
 
     // Before running the code, clear the callstack
     dispatch(callstackSlice.actions.removeAll());

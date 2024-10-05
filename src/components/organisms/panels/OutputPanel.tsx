@@ -12,8 +12,11 @@ import {
 import { useI18nContext } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
 import {
+  selectCallstackError,
+  selectCallstackIsReady,
+  selectCallstackResult,
+  selectCallstackRuntime,
   selectConsoleLogs,
-  selectRawCallstack,
 } from "#/store/reducers/callstackReducer";
 
 const ConsoleOutput: React.FC = () => {
@@ -82,8 +85,10 @@ export const OutputPanel: React.FC = () => {
     setValue(newValue);
   };
 
-  const { isReady, runtime, result, error } =
-    useAppSelector(selectRawCallstack);
+  const isReady = useAppSelector(selectCallstackIsReady);
+  const runtime = useAppSelector(selectCallstackRuntime);
+  const result = useAppSelector(selectCallstackResult);
+  const error = useAppSelector(selectCallstackError);
 
   return (
     <PanelWrapper>
