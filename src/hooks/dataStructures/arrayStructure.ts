@@ -70,7 +70,7 @@ export function initControlledArray<T extends ArrayBaseType>(
 
       return isSuccessful;
     },
-    get: (target, prop) => {
+    get: (target, prop, receiver) => {
       const index = typeof prop === "string" ? Number(prop) : -1;
       if (
         globalThis.recordReads !== false &&
@@ -80,7 +80,11 @@ export function initControlledArray<T extends ArrayBaseType>(
         array.blink(index);
       }
 
-      return Reflect.get(target, prop);
+      const value = Reflect.get(target, prop, receiver);
+      if (typeof value === "function") {
+        return value.bind(target);
+      }
+      return value;
     },
   });
 }
