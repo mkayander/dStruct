@@ -48,11 +48,21 @@ export const useNodesRuntimeUpdates = (
                 id: frame.nodeId,
                 changes: {
                   color: frame.args.color ?? undefined,
-                  animation: validateAnimationName(frame.args.animation),
                 },
               },
             }),
           );
+          if ("animation" in frame.args) {
+            dispatch(
+              slice.actions.triggerAnimation({
+                name: treeName,
+                data: {
+                  id: frame.nodeId,
+                  animation: validateAnimationName(frame.args.animation),
+                },
+              }),
+            );
+          }
           break;
 
         case "setColorMap":
@@ -203,13 +213,11 @@ export const useNodesRuntimeUpdates = (
 
         case "blink":
           dispatch(
-            slice.actions.update({
+            slice.actions.triggerAnimation({
               name: treeName,
               data: {
                 id: frame.nodeId,
-                changes: {
-                  animation: "blink",
-                },
+                animation: "blink",
               },
             }),
           );
