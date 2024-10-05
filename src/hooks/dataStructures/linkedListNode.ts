@@ -28,9 +28,6 @@ export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   _next: LinkedListNode<T> | null;
 
   public get next() {
-    if (this.meta.displayTraversal) {
-      this.setColor("cyan", "blink");
-    }
     return this._next;
   }
 
