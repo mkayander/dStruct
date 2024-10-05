@@ -1,3 +1,18 @@
+# [1.306.0](https://github.com/mkayander/dStruct/compare/v1.305.0...v1.306.0) (2024-10-05)
+
+
+### Bug Fixes
+
+* Fixed array base execution ([0c49081](https://github.com/mkayander/dStruct/commit/0c49081ebc1f1c7a7f785fcda6aaecc6746c11ac))
+* Fixed string method execution ([35a9c7c](https://github.com/mkayander/dStruct/commit/35a9c7ca5e4a7377a48cebee45879e7b613657bc))
+
+
+### Features
+
+* Add a player controls hook ([69a2eda](https://github.com/mkayander/dStruct/commit/69a2eda02f9c22473c4193c063b592e170e3bcec))
+* Added an app store selector ([1dafaab](https://github.com/mkayander/dStruct/commit/1dafaab95069e92d8e40573e223eef81b8ce475f))
+* Added new callstack selectors ([6f8dd5e](https://github.com/mkayander/dStruct/commit/6f8dd5e67442184e96b0f5802d7421ecd4cf7a72))
+
 # [1.305.0](https://github.com/mkayander/dStruct/compare/v1.304.0...v1.305.0) (2024-10-05)
 
 
