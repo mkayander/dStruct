@@ -52,7 +52,7 @@ export const useNodesRuntimeUpdates = (
               },
             }),
           );
-          if ("animation" in frame.args) {
+          if (frame.args["animation"]) {
             dispatch(
               slice.actions.triggerAnimation({
                 name: treeName,
