@@ -11,13 +11,16 @@ import {
   useTheme,
 } from "@mui/material";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ArcherElement } from "react-archer";
 import { type RelationType } from "react-archer/lib/types";
 
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
+import {
+  type TreeNodeData,
+  treeNodeSlice,
+} from "#/store/reducers/structures/treeNodeReducer";
 
 const nodeSize = "42px";
 
@@ -34,7 +37,7 @@ const blinkKeyframes = keyframes`
     transform: scale(1);
   }
 
-  15% {
+  5% {
     transform: scale(1.3);
   }
 
@@ -43,14 +46,9 @@ const blinkKeyframes = keyframes`
   }
 `;
 
-const animationSx = {
-  "&.blink": {
-    animation: `${blinkKeyframes} 0.24s ease-out`,
-  },
-};
-
 export type NodeBaseProps = Pick<BoxProps, "onMouseDown" | "onMouseUp"> &
   TreeNodeData & {
+    treeName: string;
     nodeColor: string;
     shadowColor: string;
     relations: RelationType[];
@@ -58,10 +56,12 @@ export type NodeBaseProps = Pick<BoxProps, "onMouseDown" | "onMouseUp"> &
 
 export const NodeBase: React.FC<NodeBaseProps> = ({
   id,
+  treeName,
   value,
   nodeColor,
   shadowColor,
   animation,
+  animationCount,
   isHighlighted,
   x,
   y,
@@ -70,12 +70,30 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   onMouseUp,
 }: NodeBaseProps) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
 
   const handleBlink = () => {
-    // api.start({
+    dispatch(
+      treeNodeSlice.actions.triggerAnimation({
+        name: treeName,
+        data: { id, animation: "blink" },
+      }),
+    );
   };
+
+  useEffect(() => {
+    if (animationCount === undefined) return;
+
+    if (nodeRef.current) {
+      nodeRef.current.classList.remove("blink");
+      void nodeRef.current.offsetWidth;
+      nodeRef.current.classList.add("blink");
+    }
+  }, [animation, animationCount]);
 
   return (
     <Box
@@ -84,6 +102,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         zIndex: 1,
         width: "fit-content",
         transition: isCallstackReady ? "all .05s" : "none",
+        ".blink": {
+          animation: `${blinkKeyframes} 0.24s ease-out`,
+        },
       }}
       style={{
         left: x,
@@ -93,6 +114,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
       onMouseUp={onMouseUp}
     >
       <Box
+        ref={nodeRef}
         sx={{
           position: "relative",
           "&:hover": {
@@ -108,11 +130,10 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           relations={relations.length > 0 ? relations : undefined}
         >
           <Box
-            className={animation}
             onClick={handleBlink}
             sx={{
               ...nodeProps,
-              ...animationSx,
+              transition: "all .2s",
               borderRadius: "50%",
               background: alpha(nodeColor, 0.3),
               border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
@@ -120,7 +141,6 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
               userSelect: "none",
               boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
               color: theme.palette.primary.contrastText,
-              transition: "all .2s",
             }}
           />
         </ArcherElement>
@@ -138,9 +158,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           {value}
         </Typography>
         <Box
-          className={clsx("node-overlay", animation)}
+          ref={overlayRef}
+          className={clsx("node-overlay")}
           sx={{
-            ...animationSx,
             position: "absolute",
             top: 0,
             left: 0,

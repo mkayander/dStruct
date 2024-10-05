@@ -52,9 +52,6 @@ export class BinaryTreeNode<
   private _left!: BinaryTreeNode<T> | null;
 
   public get left() {
-    if (this.meta.displayTraversal) {
-      this.setColor("cyan", "blink");
-    }
     return this._left;
   }
 
@@ -75,9 +72,6 @@ export class BinaryTreeNode<
   private _right!: BinaryTreeNode<T> | null;
 
   public get right() {
-    if (this.meta.displayTraversal) {
-      this.setColor("cyan", "blink");
-    }
     return this._right;
   }
 

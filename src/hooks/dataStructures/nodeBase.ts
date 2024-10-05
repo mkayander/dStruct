@@ -8,7 +8,6 @@ const uuid = shortUUID();
 export interface NodeMeta {
   id: string;
   type: ArgumentTreeType;
-  displayTraversal?: boolean;
   color?: string | null;
   animation?: string | null;
   colorMap?: Record<number | string, string>;
@@ -51,6 +50,10 @@ export abstract class NodeBase<T extends number | string> {
   _val!: T;
 
   public get val(): T {
+    if (globalThis.recordReads !== false) {
+      this.blink();
+    }
+
     return this._val;
   }
 
@@ -90,8 +93,12 @@ export abstract class NodeBase<T extends number | string> {
   }
 
   public blink() {
+    const base = this.getDispatchBase();
+    const prevFrame = this.callstack.frames.at(-1);
+    if (prevFrame?.name === "blink" && prevFrame.nodeId === base.nodeId) return;
+
     this.callstack.addOne({
-      ...this.getDispatchBase(),
+      ...base,
       name: "blink",
     });
   }
