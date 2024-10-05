@@ -112,7 +112,7 @@ export const arrayStructureSlice = createSlice({
 
       state[name] = treeState;
     },
-    delete: (state, action: NamedPayload) => {
+    delete: (state, action: NamedPayload<void>) => {
       const { name } = action.payload;
       delete state[name];
     },

@@ -149,7 +149,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
       runStateActionByName(state, action.payload.name, (treeState) => {
         adapter.removeOne(treeState.nodes, action.payload.data.id);
       }),
-    clear: <T extends State>(state: T, action: NamedPayload<void>) => {
+    clear: <T extends State>(state: T, action: NamedPayload<undefined>) => {
       delete state[action.payload.name];
     },
     clearMany: <T extends State>(state: T, action: PayloadAction<string[]>) => {

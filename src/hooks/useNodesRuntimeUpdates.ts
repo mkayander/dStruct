@@ -269,7 +269,7 @@ export const useNodesRuntimeUpdates = (
 
         case "addArray":
           if ("delete" in slice.actions) {
-            dispatch(slice.actions.delete({ name: treeName }));
+            dispatch(slice.actions.delete({ name: treeName, data: undefined }));
           }
           break;
 

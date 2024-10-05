@@ -199,6 +199,7 @@ const parseTreeArgument = (
   dispatch(
     treeNodeSlice.actions.clear({
       name: arg.name,
+      data: undefined,
     }),
   );
 
@@ -278,6 +279,7 @@ const parseArrayArgument = (
   dispatch(
     arrayStructureSlice.actions.clear({
       name: arg.name,
+      data: undefined,
     }),
   );
 
