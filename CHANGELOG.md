@@ -1,3 +1,21 @@
+# [1.304.0](https://github.com/mkayander/dStruct/compare/v1.303.0...v1.304.0) (2024-10-05)
+
+
+### Bug Fixes
+
+* FIx named payload type errors ([55423bd](https://github.com/mkayander/dStruct/commit/55423bda206927cb53ffed451fc34f24fe2a0a2c))
+* Return proxy string object ([ac47e90](https://github.com/mkayander/dStruct/commit/ac47e90fdefe5d6e9dd0f308a9ac0f37ce0dda92))
+
+
+### Features
+
+* Added animation count state and trigger animation action. Refactored types. ([0fe5e53](https://github.com/mkayander/dStruct/commit/0fe5e534b42c2bb6c24da02d55b1aa8747c5dd66))
+* Added global blink key frames ([ba05595](https://github.com/mkayander/dStruct/commit/ba05595efc93e686514d6dcdce691b7a01542751))
+* Avoid pushing adjacent blink frames ([e939651](https://github.com/mkayander/dStruct/commit/e939651b95c931521c47d03af9cd7afe7564de2a))
+* Re-trigger array item animations ([b3c4536](https://github.com/mkayander/dStruct/commit/b3c4536aff463c90b64418e2abec0fad35a3f4e7))
+* Record array structure reads. Improve proxy logic. ([2341425](https://github.com/mkayander/dStruct/commit/234142537233703e850e3b54129f8e1d1670925d))
+* Use the new trigger animation action ([5498948](https://github.com/mkayander/dStruct/commit/54989486910c66a29769a2add9e4983b8e40d5e3))
+
 # [1.303.0](https://github.com/mkayander/dStruct/compare/v1.302.0...v1.303.0) (2024-10-03)
 
 
