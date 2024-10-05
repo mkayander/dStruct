@@ -20,7 +20,7 @@ export class ControlledString extends ArrayBase {
   ) {
     super(value);
 
-    initControlledArray(
+    return initControlledArray(
       this,
       arrayData,
       name,
