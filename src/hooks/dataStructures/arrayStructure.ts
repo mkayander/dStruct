@@ -60,16 +60,27 @@ export function initControlledArray<T extends ArrayBaseType>(
 
   return new Proxy(array, {
     set: (target, prop, value) => {
-      const index = Number(prop);
-      // @ts-expect-error - TS can't infer a type for target[prop]
-      target[prop] = value;
-      if (Number.isNaN(index)) {
-        return true;
+      const isSuccessful = Reflect.set(target, prop, value);
+      if (isSuccessful) {
+        const index = typeof prop === "string" ? Number(prop) : -1;
+        if (Number.isInteger(index) && index >= 0) {
+          array.updateItem(value, index);
+        }
       }
 
-      array.updateItem(value, index);
+      return isSuccessful;
+    },
+    get: (target, prop) => {
+      const index = typeof prop === "string" ? Number(prop) : -1;
+      if (
+        globalThis.recordReads !== false &&
+        Number.isInteger(index) &&
+        index >= 0
+      ) {
+        array.blink(index);
+      }
 
-      return true;
+      return Reflect.get(target, prop);
     },
   });
 }
