@@ -1,3 +1,17 @@
+# [1.305.0](https://github.com/mkayander/dStruct/compare/v1.304.0...v1.305.0) (2024-10-05)
+
+
+### Bug Fixes
+
+* Check if animation is truthy ([b2a8be6](https://github.com/mkayander/dStruct/commit/b2a8be66b17c54ef8cacd12490ce007589099ff8))
+* Fix adjacent blink check ([384ddd0](https://github.com/mkayander/dStruct/commit/384ddd0cb4b191cb78f1299ab5b8097d5dbfecfb))
+* Removed property check ([ad1b4d4](https://github.com/mkayander/dStruct/commit/ad1b4d4a1e8cd8437d5c8b9a1d18286118d8df76))
+
+
+### Features
+
+* Implemented re-runnable node blink animations ([5093dc2](https://github.com/mkayander/dStruct/commit/5093dc218fb389c85c63a70fcd35f1d42cab12b5))
+
 # [1.304.0](https://github.com/mkayander/dStruct/compare/v1.303.0...v1.304.0) (2024-10-05)
 
 
