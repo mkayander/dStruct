@@ -1,3 +1,10 @@
+# [1.307.0](https://github.com/mkayander/dStruct/compare/v1.306.0...v1.307.0) (2024-10-06)
+
+
+### Features
+
+* Updated dependencies ([55b44c5](https://github.com/mkayander/dStruct/commit/55b44c55cf2e8e32063aa5e1a5fc581a834fc188))
+
 # [1.306.0](https://github.com/mkayander/dStruct/compare/v1.305.0...v1.306.0) (2024-10-05)
 
 
