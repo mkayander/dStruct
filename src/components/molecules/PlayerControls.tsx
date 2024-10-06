@@ -63,12 +63,18 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Stack p={2} direction="row" alignItems="center" spacing={2}>
-      <Box sx={{ maxWidth: 600, flexGrow: 1 }}>
+    <Stack
+      p={1}
+      direction="row"
+      alignItems="center"
+      justifyContent="flex-end"
+      spacing={1}
+    >
+      <Box width="100%">
         <Typography id="input-slider" variant="caption" gutterBottom>
           {LL.PLAYBACK_INTERVAL()}
         </Typography>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={1} alignItems="center">
           <Grid item>
             <Speed />
           </Grid>
@@ -102,8 +108,12 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           </Grid>
         </Grid>
       </Box>
-      <FrameIndexLabel />
-      <Stack direction="row" alignItems="center" spacing={0.5}>
+      <Stack
+        position="relative"
+        direction="row"
+        alignItems="center"
+        spacing={0.5}
+      >
         <IconButton
           title="Step back"
           disabled={!callstackLength || isRootFrame}
@@ -125,6 +135,16 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         >
           <LastPage />
         </IconButton>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -1,
+            left: "47%",
+            transform: "translate(-50%, 50%)",
+          }}
+        >
+          <FrameIndexLabel />
+        </Box>
       </Stack>
     </Stack>
   );

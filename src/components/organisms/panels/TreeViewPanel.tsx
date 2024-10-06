@@ -1,12 +1,14 @@
 import { Replay, Settings } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
+  alpha,
+  Box,
   Button,
-  Divider,
   IconButton,
   Stack,
   Tab,
   Tooltip,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 
@@ -32,6 +34,7 @@ const isValidTabName = (name: unknown): name is TabName =>
 
 export const TreeViewPanel: React.FC = () => {
   const { LL } = useI18nContext();
+  const theme = useTheme();
 
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
     defaultValue: "structure",
@@ -112,14 +115,29 @@ export const TreeViewPanel: React.FC = () => {
           useScroll={!isMobile}
           sx={{ height: "100%", p: 0, position: "relative" }}
         >
-          <PlayerControls
-            sliderValue={sliderValue}
-            setSliderValue={setSliderValue}
-            handlePlay={handlePlay}
-            handleStepBack={handleStepBack}
-            handleStepForward={handleStepForward}
-          />
-          <Divider sx={{ mt: 1 }} />
+          <Box
+            sx={{
+              position: "absolute",
+              maxWidth: "100%",
+              width: "400px",
+              top: "0",
+              right: "0",
+              borderLeft: `1px solid ${theme.palette.divider}`,
+              borderBottom: `1px solid ${theme.palette.divider}`,
+              borderRadius: "0 0 0 14px",
+              backgroundColor: alpha(theme.palette.secondary.main, 0.05),
+              zIndex: 50,
+              backdropFilter: "blur(14px)",
+            }}
+          >
+            <PlayerControls
+              sliderValue={sliderValue}
+              setSliderValue={setSliderValue}
+              handlePlay={handlePlay}
+              handleStepBack={handleStepBack}
+              handleStepForward={handleStepForward}
+            />
+          </Box>
           <TreeViewer
             replayCount={replayCount}
             playbackInterval={sliderValue}
