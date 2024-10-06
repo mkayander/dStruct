@@ -6,6 +6,7 @@ import shortUUID from "short-uuid";
 
 import { useAppStore } from "#/store/hooks";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
+import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { resetStructuresState } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 
@@ -52,9 +53,7 @@ export const useCodeExecution = (codeInput: string) => {
 
     setIsProcessing(true);
     const state = store.getState();
-    const args = createRawRuntimeArgs(
-      Object.values(state.testCase.args.entities),
-    );
+    const args = createRawRuntimeArgs(selectCaseArguments(state));
 
     let startTimestamp = performance.now();
 
@@ -111,7 +110,7 @@ export const useCodeExecution = (codeInput: string) => {
 
     setIsProcessing(true);
     const state = store.getState();
-    const caseArgs = Object.values(state.testCase.args.entities);
+    const caseArgs = selectCaseArguments(state);
     const arrayStore = state.arrayStructure;
     const treeStore = state.treeNode;
 
