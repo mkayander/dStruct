@@ -1,3 +1,12 @@
+## [1.307.1](https://github.com/mkayander/dStruct/compare/v1.307.0...v1.307.1) (2024-10-06)
+
+
+### Bug Fixes
+
+* Bind only a toString function ([ab3eb77](https://github.com/mkayander/dStruct/commit/ab3eb77940e12240ed63a481df831df91bafcffc))
+* Ensure frameIndex is set to -1 after code execution ([27932bc](https://github.com/mkayander/dStruct/commit/27932bcab23252a3f21ce1aa4848094a82da8ed5))
+* Use test case selectors to maintain order ([82efa55](https://github.com/mkayander/dStruct/commit/82efa55585cfdc1e863af2949b30f112cbada999))
+
 # [1.307.0](https://github.com/mkayander/dStruct/compare/v1.306.0...v1.307.0) (2024-10-06)
 
 
