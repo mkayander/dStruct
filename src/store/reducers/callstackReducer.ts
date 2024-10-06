@@ -220,6 +220,7 @@ export const callstackSlice = createSlice({
       }
 
       state.isReady = isReady;
+      state.frameIndex = -1;
       state.result = result;
       state.runtime = runtime;
       state.benchmarkResults = benchmarkResults;
