@@ -10,6 +10,9 @@ export const stripQuotes = (val?: string) => {
 };
 
 export const safeStringify = (val: unknown): string => {
+  if (val === null) return "null";
+  if (val === undefined) return "undefined";
+
   if (Array.isArray(val)) {
     const items = [];
     for (const item of val) {
@@ -75,8 +78,5 @@ export const stringifySolutionResult = (
     | LinkedListNode<any>
     | null,
 ) => {
-  if (result === null) return "null";
-  if (result === undefined) return "undefined";
-
   return safeStringify(result);
 };
