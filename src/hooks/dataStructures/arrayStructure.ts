@@ -81,7 +81,7 @@ export function initControlledArray<T extends ArrayBaseType>(
       }
 
       const value = Reflect.get(target, prop, receiver);
-      if (typeof value === "function") {
+      if (typeof value === "function" && prop === "toString") {
         return value.bind(target);
       }
       return value;
