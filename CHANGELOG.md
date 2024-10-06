@@ -1,3 +1,10 @@
+# [1.308.0](https://github.com/mkayander/dStruct/compare/v1.307.1...v1.308.0) (2024-10-06)
+
+
+### Features
+
+* Reworked player controls panel ([5bdf321](https://github.com/mkayander/dStruct/commit/5bdf3210267ab6ed8f794a1207a4f0ab53994b13))
+
 ## [1.307.1](https://github.com/mkayander/dStruct/compare/v1.307.0...v1.307.1) (2024-10-06)
 
 
