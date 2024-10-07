@@ -1,3 +1,10 @@
+## [1.309.1](https://github.com/mkayander/dStruct/compare/v1.309.0...v1.309.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* Fixed mobile tree view display ([dd15329](https://github.com/mkayander/dStruct/commit/dd15329c189ab1ae874570e7af5765da69e00663))
+
 # [1.309.0](https://github.com/mkayander/dStruct/compare/v1.308.0...v1.309.0) (2024-10-07)
 
 
