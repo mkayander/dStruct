@@ -391,7 +391,6 @@ export const useNodesRuntimeUpdates = (
   useEffect(() => {
     if (isActive) {
       resetStructuresState(dispatch, false);
-      dispatch(callstackSlice.actions.setFrameIndex(-1));
       setIsActive(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -17,8 +17,6 @@ export const usePlayerControls = () => {
 
   const handleReset = () => {
     resetStructuresState(dispatch);
-    dispatch(callstackSlice.actions.setFrameIndex(-1));
-    dispatch(callstackSlice.actions.setIsPlaying(false));
   };
 
   const handleReplay = () => {
