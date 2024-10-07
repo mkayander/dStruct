@@ -118,14 +118,16 @@ export const TreeViewPanel: React.FC = () => {
           <Box
             sx={{
               position: "absolute",
-              maxWidth: "100%",
+              maxWidth: "94%",
               width: "400px",
-              top: "0",
-              right: "0",
-              borderLeft: `1px solid ${theme.palette.divider}`,
-              borderBottom: `1px solid ${theme.palette.divider}`,
-              borderRadius: "0 0 0 14px",
+              bottom: "0",
+              left: "50%",
+              transform: "translateX(-50%)",
+              border: `1px solid ${theme.palette.divider}`,
+              borderBottom: "none",
+              borderRadius: "8px 8px 0 0",
               backgroundColor: alpha(theme.palette.secondary.main, 0.05),
+              boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
               zIndex: 50,
               backdropFilter: "blur(14px)",
             }}
