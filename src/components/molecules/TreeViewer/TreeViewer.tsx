@@ -192,7 +192,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         vertical={!dragState}
         horizontal={!dragState}
         onScroll={handleScroll}
-        style={{ height: "100%" }}
+        style={{ height: "100%", flexGrow: 1 }}
       >
         <Box
           sx={{

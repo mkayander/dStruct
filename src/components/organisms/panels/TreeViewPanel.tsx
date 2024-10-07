@@ -25,7 +25,6 @@ import { useI18nContext, usePlayerControls, useSearchParam } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { selectTreeMaxDepth } from "#/store/reducers/structures/treeNodeReducer";
 
 type TabName = "structure" | "benchmark";
 const TabNames = new Set<TabName>(["structure", "benchmark"]);
@@ -43,7 +42,6 @@ export const TreeViewPanel: React.FC = () => {
   const [sliderValue, setSliderValue] = useState(100);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
-  const maxDepth = useAppSelector(selectTreeMaxDepth);
   const isMobile = useMobileLayout();
 
   const {
@@ -63,7 +61,8 @@ export const TreeViewPanel: React.FC = () => {
   return (
     <PanelWrapper
       sx={{
-        height: isMobile ? 240 + maxDepth * 60 : "100%",
+        height: "100%",
+        minHeight: isMobile ? "70vh" : "",
       }}
       onKeyDown={handleKeyDown}
     >
@@ -113,7 +112,7 @@ export const TreeViewPanel: React.FC = () => {
         <StyledTabPanel
           value="structure"
           useScroll={!isMobile}
-          sx={{ height: "100%", p: 0, position: "relative" }}
+          sx={{ position: "relative", height: "100%", p: 0, flexGrow: 1 }}
         >
           <Box
             sx={{
