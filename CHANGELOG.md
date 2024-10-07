@@ -1,3 +1,15 @@
+# [1.309.0](https://github.com/mkayander/dStruct/compare/v1.308.0...v1.309.0) (2024-10-07)
+
+
+### Bug Fixes
+
+* Don't record reads on stringification ([b7c6bdd](https://github.com/mkayander/dStruct/commit/b7c6bdd42d29efe79a06660d1aa8ff34b005b5b8))
+
+
+### Features
+
+* Place player controls at the bottom of the panel ([e57990b](https://github.com/mkayander/dStruct/commit/e57990b45bca01e632fab97f909a1e67091762c8))
+
 # [1.308.0](https://github.com/mkayander/dStruct/compare/v1.307.1...v1.308.0) (2024-10-06)
 
 
