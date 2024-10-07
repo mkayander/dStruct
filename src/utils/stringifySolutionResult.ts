@@ -78,5 +78,9 @@ export const stringifySolutionResult = (
     | LinkedListNode<any>
     | null,
 ) => {
-  return safeStringify(result);
+  globalThis.recordReads = false;
+  const string = safeStringify(result);
+  globalThis.recordReads = true;
+
+  return string;
 };

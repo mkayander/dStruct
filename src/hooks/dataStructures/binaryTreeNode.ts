@@ -147,6 +147,8 @@ export class BinaryTreeNode<
     const queue: Queue<BinaryTreeNode<T> | null> = new Queue();
     queue.enqueue(this);
 
+    const recordReads = globalThis.recordReads;
+    globalThis.recordReads = false;
     while (!queue.isEmpty()) {
       const node = queue.dequeue();
 
@@ -157,6 +159,7 @@ export class BinaryTreeNode<
         queue.enqueue(node.right);
       }
     }
+    globalThis.recordReads = recordReads;
 
     while (result.at(-1) === "null") result.pop();
 
