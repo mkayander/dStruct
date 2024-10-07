@@ -55,7 +55,7 @@ export type NodeBaseProps = Pick<
     nodeColor: string;
     shadowColor: string;
     relations: RelationType[];
-    cursor: "pointer" | "grab";
+    cursor?: "pointer" | "grab";
   };
 
 export const NodeBase: React.FC<NodeBaseProps> = ({
