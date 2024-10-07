@@ -23,8 +23,10 @@ import {
 } from "#/components/organisms/panels/common/styled";
 import { useI18nContext, usePlayerControls, useSearchParam } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
-import { useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
+import { editorSlice, selectIsEditing } from "#/store/reducers/editorReducer";
+import { resetStructuresState } from "#/utils";
 
 type TabName = "structure" | "benchmark";
 const TabNames = new Set<TabName>(["structure", "benchmark"]);
@@ -32,6 +34,7 @@ const isValidTabName = (name: unknown): name is TabName =>
   TabNames.has(name as TabName);
 
 export const TreeViewPanel: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { LL } = useI18nContext();
   const theme = useTheme();
 
@@ -41,6 +44,7 @@ export const TreeViewPanel: React.FC = () => {
   });
   const [sliderValue, setSliderValue] = useState(100);
 
+  const isEditing = useAppSelector(selectIsEditing);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const isMobile = useMobileLayout();
 
@@ -56,6 +60,13 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
+  };
+
+  const handleEditButtonClick = () => {
+    if (!isEditing) {
+      resetStructuresState(dispatch);
+    }
+    dispatch(editorSlice.actions.setIsEditing(!isEditing));
   };
 
   return (
@@ -117,6 +128,22 @@ export const TreeViewPanel: React.FC = () => {
           <Box
             sx={{
               position: "absolute",
+              top: 8,
+              right: 8,
+              zIndex: 50,
+            }}
+          >
+            <Button
+              title={`${isEditing ? "Save" : "Edit"} graph node positions`}
+              color={isEditing ? "success" : "info"}
+              onClick={handleEditButtonClick}
+            >
+              {isEditing ? "Save" : "Edit"}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              position: "absolute",
               maxWidth: "94%",
               width: "400px",
               bottom: "0",
@@ -127,7 +154,7 @@ export const TreeViewPanel: React.FC = () => {
               borderRadius: "8px 8px 0 0",
               backgroundColor: alpha(theme.palette.secondary.main, 0.05),
               boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
-              zIndex: 50,
+              zIndex: 70,
               backdropFilter: "blur(14px)",
             }}
           >

@@ -2,8 +2,8 @@ import React from "react";
 
 import { NodeBase } from "#/components/molecules/TreeViewer/NodeBase";
 import { useBinaryChildNodes, useNodeColors } from "#/hooks";
-import { useAppDispatch } from "#/store/hooks";
-import { editorSlice } from "#/store/reducers/editorReducer";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { editorSlice, selectIsEditing } from "#/store/reducers/editorReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
@@ -16,11 +16,14 @@ export const GraphNode: React.FC<GraphNodeProps> = (props) => {
   const { color } = props;
   const dispatch = useAppDispatch();
 
+  const isEditing = useAppSelector(selectIsEditing);
   const { nodeColor, shadowColor } = useNodeColors(color);
 
   const { relations } = useBinaryChildNodes(props, nodeColor);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+    if (!isEditing) return;
+
     ev.stopPropagation();
     dispatch(
       editorSlice.actions.startDrag({
@@ -40,6 +43,7 @@ export const GraphNode: React.FC<GraphNodeProps> = (props) => {
       shadowColor={shadowColor}
       relations={relations}
       onMouseDown={handleMouseDown}
+      cursor={isEditing ? "grab" : "pointer"}
       {...props}
     />
   );

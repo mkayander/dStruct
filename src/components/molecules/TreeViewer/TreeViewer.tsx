@@ -219,7 +219,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             {treeStructures.graph && (
               <Box height="100%" position="absolute">
                 {treeStructures.graph.map(({ name, treeState }) => (
-                  <NodesView key={name} treeName={name} data={treeState} />
+                  <NodesView
+                    key={name}
+                    treeName={name}
+                    data={treeState}
+                    sx={{ zIndex: 50 }}
+                  />
                 ))}
               </Box>
             )}

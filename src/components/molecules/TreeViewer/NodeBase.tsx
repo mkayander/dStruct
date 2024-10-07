@@ -46,12 +46,16 @@ const blinkKeyframes = keyframes`
   }
 `;
 
-export type NodeBaseProps = Pick<BoxProps, "onMouseDown" | "onMouseUp"> &
+export type NodeBaseProps = Pick<
+  BoxProps,
+  "style" | "onMouseDown" | "onMouseUp"
+> &
   TreeNodeData & {
     treeName: string;
     nodeColor: string;
     shadowColor: string;
     relations: RelationType[];
+    cursor: "pointer" | "grab";
   };
 
 export const NodeBase: React.FC<NodeBaseProps> = ({
@@ -66,6 +70,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   x,
   y,
   relations,
+  cursor = "pointer",
   onMouseDown,
   onMouseUp,
 }: NodeBaseProps) => {
@@ -118,7 +123,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         sx={{
           position: "relative",
           "&:hover": {
-            cursor: "pointer",
+            cursor,
             "& > .node-overlay": {
               opacity: "0.1!important",
             },
