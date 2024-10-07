@@ -21,7 +21,6 @@ export const GraphNode: React.FC<GraphNodeProps> = (props) => {
   const { relations } = useBinaryChildNodes(props, nodeColor);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    console.log("mouse down", ev);
     ev.stopPropagation();
     dispatch(
       editorSlice.actions.startDrag({

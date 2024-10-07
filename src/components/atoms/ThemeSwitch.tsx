@@ -44,7 +44,6 @@ type ThemeSwitchProps = Omit<SwitchProps, "checked">;
 export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ ...restProps }) => {
   const { mode } = useColorScheme();
 
-  console.log("mode", mode);
   const isDark = mode === "dark";
 
   return (

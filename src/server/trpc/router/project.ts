@@ -314,10 +314,6 @@ export const projectRouter = router({
             e instanceof Prisma.PrismaClientKnownRequestError &&
             e.code === "P2002"
           ) {
-            console.log(e.message);
-            console.log(e.cause);
-            console.log(e.meta);
-            console.log(e.name);
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "You already have a project with this name.",
