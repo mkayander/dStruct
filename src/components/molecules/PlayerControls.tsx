@@ -64,7 +64,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
 
   return (
     <Stack
-      p={1}
+      py={1}
+      px={2}
       direction="row"
       alignItems="center"
       justifyContent="flex-end"
@@ -74,7 +75,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         <Typography id="input-slider" variant="caption" gutterBottom>
           {LL.PLAYBACK_INTERVAL()}
         </Typography>
-        <Grid container spacing={1} alignItems="center">
+        <Grid container spacing={2} alignItems="center">
           <Grid item>
             <Speed />
           </Grid>
