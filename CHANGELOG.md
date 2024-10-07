@@ -1,3 +1,18 @@
+# [1.310.0](https://github.com/mkayander/dStruct/compare/v1.309.2...v1.310.0) (2024-10-07)
+
+
+### Bug Fixes
+
+* Fixed component spacing ([0866629](https://github.com/mkayander/dStruct/commit/0866629b38d7302b31574bbbef68ebbcdbdea9b1))
+* Make type optional ([6ac47a7](https://github.com/mkayander/dStruct/commit/6ac47a73a05ce1c6733820d63b69e678379c1f03))
+
+
+### Features
+
+* Added an editing mode toggle button ([efe57af](https://github.com/mkayander/dStruct/commit/efe57afd515e60331a8425a829a3868bebce2ee9))
+* Implemented editing state ([ce23268](https://github.com/mkayander/dStruct/commit/ce2326880557ecf07da9ce1c11edb093d37c7b0d))
+* Reset callstack state in one place ([32b21e9](https://github.com/mkayander/dStruct/commit/32b21e9ba56b6b44f5306cfde912487cd4207972))
+
 ## [1.309.2](https://github.com/mkayander/dStruct/compare/v1.309.1...v1.309.2) (2024-10-07)
 
 
