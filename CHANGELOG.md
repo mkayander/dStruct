@@ -1,3 +1,10 @@
+## [1.309.2](https://github.com/mkayander/dStruct/compare/v1.309.1...v1.309.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* Removed console logs ([dd99ffa](https://github.com/mkayander/dStruct/commit/dd99ffa94f09be45df3c293440bfd1832282c789))
+
 ## [1.309.1](https://github.com/mkayander/dStruct/compare/v1.309.0...v1.309.1) (2024-10-07)
 
 
