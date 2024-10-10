@@ -79,7 +79,7 @@ type BaseArgumentData = {
   input: string;
 };
 
-type TreeArgumentData = BaseArgumentData & {
+export type TreeArgumentData = BaseArgumentData & {
   nodeData?: Record<
     string,
     {
