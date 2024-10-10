@@ -146,7 +146,8 @@ const parseLinkedListArgument = (rawInput: string) => {
   return { maxDepth, nodesMap };
 };
 
-const parseGraphArgument = (rawInput: string) => {
+const parseGraphArgument = (arg: ArgumentObject<ArgumentTreeType>) => {
+  const rawInput = arg.input;
   let input: GraphInput | null = null;
   try {
     input = JSON.parse(rawInput);
@@ -156,6 +157,7 @@ const parseGraphArgument = (rawInput: string) => {
 
   if (!input || input.length === 0) return;
 
+  const savedData = arg.nodeData ?? {};
   const nodesMap: Record<string, TreeNodeData> = {};
   const idMap = new Map<number, TreeNodeData>();
 
@@ -166,8 +168,13 @@ const parseGraphArgument = (rawInput: string) => {
     if (!newNode) {
       throw new Error("Failed to create node data");
     }
-    newNode.x = Math.random() * 500;
-    newNode.y = Math.random() * 500;
+
+    const { x, y } = savedData[value] ?? {
+      x: Math.random() * 500,
+      y: Math.random() * 500,
+    };
+    newNode.x = x;
+    newNode.y = y;
 
     idMap.set(value, newNode);
 
@@ -211,7 +218,7 @@ const parseTreeArgument = (
     case ArgumentType.LINKED_LIST:
       parsed = parseLinkedListArgument(arg.input);
     case ArgumentType.GRAPH:
-      parsed = parseGraphArgument(arg.input);
+      parsed = parseGraphArgument(arg);
       break;
   }
   if (!parsed) return;
