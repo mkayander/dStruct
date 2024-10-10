@@ -26,6 +26,7 @@ import {
 } from "#/store/reducers/callstackReducer";
 
 export type PlayerControlsProps = {
+  disabled?: boolean;
   sliderValue: number;
   setSliderValue: (value: number) => void;
   handleStepBack: () => void;
@@ -34,6 +35,7 @@ export type PlayerControlsProps = {
 };
 
 export const PlayerControls: React.FC<PlayerControlsProps> = ({
+  disabled,
   sliderValue,
   setSliderValue,
   handleStepBack,
@@ -81,6 +83,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           </Grid>
           <Grid item xs>
             <Slider
+              disabled={disabled}
               value={sliderValue}
               min={1}
               max={700}
@@ -90,6 +93,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           </Grid>
           <Grid item>
             <Input
+              disabled={disabled}
               value={sliderValue}
               size="small"
               onChange={handleInputChange}
@@ -117,21 +121,21 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
       >
         <IconButton
           title="Step back"
-          disabled={!callstackLength || isRootFrame}
+          disabled={disabled || !callstackLength || isRootFrame}
           onClick={handleStepBack}
         >
           <FirstPage />
         </IconButton>
         <IconButton
           title={isPlaying ? "Pause" : "Play"}
-          disabled={!callstackLength || isLastFrame}
+          disabled={disabled || !callstackLength || isLastFrame}
           onClick={handlePlay}
         >
           {isPlaying ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           title="Step forward"
-          disabled={!callstackLength || isLastFrame}
+          disabled={disabled || !callstackLength || isLastFrame}
           onClick={handleStepForward}
         >
           <LastPage />

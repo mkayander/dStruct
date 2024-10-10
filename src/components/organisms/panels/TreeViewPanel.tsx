@@ -71,7 +71,7 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleEditButtonClick = () => {
     if (!isEditing) {
-      resetStructuresState(dispatch, false);
+      resetStructuresState(dispatch, false, true);
     } else {
       saveGraphNodePositions();
     }
@@ -171,6 +171,7 @@ export const TreeViewPanel: React.FC = () => {
             }}
           >
             <PlayerControls
+              disabled={isEditing}
               sliderValue={sliderValue}
               setSliderValue={setSliderValue}
               handlePlay={handlePlay}

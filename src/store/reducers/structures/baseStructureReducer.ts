@@ -205,6 +205,13 @@ export const getBaseStructureReducers = <N extends StructureNode>(
         });
       }
     },
+    clearAllBackups: <T extends State>(state: T) => {
+      for (const name in state) {
+        runStateActionByName(state, name, (treeState) => {
+          treeState.initialNodes = null;
+        });
+      }
+    },
     reset: <T extends State>(state: T, action: NamedPayload<void>) =>
       runStateActionByName(state, action.payload.name, (treeState) =>
         resetNodes(treeState),
