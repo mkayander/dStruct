@@ -34,7 +34,6 @@ export const useArgumentsNodeData = () => {
         if (!node) continue;
 
         const { x, y } = node;
-        console.log(`Node ${nodeId} at (${x}, ${y})`);
         if (!node.value) continue;
         dataMap[node.value] = { x, y };
       }
