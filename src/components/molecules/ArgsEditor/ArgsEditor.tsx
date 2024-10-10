@@ -59,6 +59,8 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     ) {
       dispatch(
         caseSlice.actions.setArguments({
+          projectId: selectedCase.data.projectId,
+          caseId: selectedCase.data.id,
           data: Object.values(selectedCase.data.args),
           resetInfoState: caseSlug !== prevCaseSlug,
         }),
@@ -66,7 +68,14 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     } else {
       dispatch(caseSlice.actions.clear());
     }
-  }, [prevCaseSlug, caseSlug, dispatch, selectedCase.data?.args]);
+  }, [
+    prevCaseSlug,
+    caseSlug,
+    dispatch,
+    selectedCase.data?.projectId,
+    selectedCase.data?.id,
+    selectedCase.data?.args,
+  ]);
 
   useEffect(() => {
     if (!isEditable || !selectedCase.data || !isCaseEdited) return;
