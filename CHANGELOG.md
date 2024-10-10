@@ -1,3 +1,14 @@
+# [1.311.0](https://github.com/mkayander/dStruct/compare/v1.310.0...v1.311.0) (2024-10-10)
+
+
+### Features
+
+* Apply saved graph node data ([917bde0](https://github.com/mkayander/dStruct/commit/917bde0ff9a3b90155928c7ff403f5365f63bac3))
+* Implemented a node data saving hook ([974290a](https://github.com/mkayander/dStruct/commit/974290a6bdf39097ed21e47990042efd87cf2f3a))
+* Run node saving on click ([572bac8](https://github.com/mkayander/dStruct/commit/572bac803aab5b4a6a792685d12e7a6806196fdc))
+* Store project & case ids ([ada8f96](https://github.com/mkayander/dStruct/commit/ada8f964204f6f0c33faaff8ba8e06904f42b4af))
+* Support case node data updates ([53cca27](https://github.com/mkayander/dStruct/commit/53cca27104e0d6583323df9d7bd47e3bc9a6bb7b))
+
 # [1.310.0](https://github.com/mkayander/dStruct/compare/v1.309.2...v1.310.0) (2024-10-07)
 
 
