@@ -6,7 +6,10 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { RootState } from "#/store/makeStore";
-import { type ArgumentObject } from "#/utils/argumentObject";
+import {
+  type ArgumentObject,
+  type ArgumentTreeType,
+} from "#/utils/argumentObject";
 
 const argumentAdapter = createEntityAdapter<ArgumentObject, string>({
   selectId: (arg) => arg.name,
@@ -18,12 +21,16 @@ export type ArgumentInfo = {
 };
 
 type CaseState = {
+  projectId: string | null;
+  caseId: string | null;
   args: EntityState<ArgumentObject, string>;
   info: Record<string, ArgumentInfo>;
   isEdited: boolean;
 };
 
 const initialState: CaseState = {
+  projectId: null,
+  caseId: null,
   args: argumentAdapter.getInitialState(),
   info: {},
   isEdited: false,
@@ -54,14 +61,32 @@ export const caseSlice = createSlice({
         isParsed: false,
       };
     },
+    updateNodeData: (
+      state,
+      action: PayloadAction<ArgumentObject<ArgumentTreeType>>,
+    ) => {
+      const payload = action.payload;
+      const name = payload.name;
+
+      argumentAdapter.updateOne(state.args, {
+        id: name,
+        changes: {
+          nodeData: payload.nodeData,
+        },
+      });
+    },
     setArguments: (
       state,
       action: PayloadAction<{
+        projectId: string;
+        caseId: string;
         data: ArgumentObject[];
         resetInfoState?: boolean;
       }>,
     ) => {
       const { data, resetInfoState } = action.payload;
+      state.projectId = action.payload.projectId;
+      state.caseId = action.payload.caseId;
       argumentAdapter.setAll(state.args, data);
       state.isEdited = false;
       if (resetInfoState) {
