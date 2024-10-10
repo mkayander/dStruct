@@ -21,7 +21,12 @@ import {
   StyledTabPanel,
   TabListWrapper,
 } from "#/components/organisms/panels/common/styled";
-import { useI18nContext, usePlayerControls, useSearchParam } from "#/hooks";
+import {
+  useArgumentsNodeData,
+  useI18nContext,
+  usePlayerControls,
+  useSearchParam,
+} from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
@@ -58,6 +63,8 @@ export const TreeViewPanel: React.FC = () => {
     handleStepForward,
   } = usePlayerControls();
 
+  const { saveGraphNodePositions } = useArgumentsNodeData();
+
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
@@ -65,6 +72,8 @@ export const TreeViewPanel: React.FC = () => {
   const handleEditButtonClick = () => {
     if (!isEditing) {
       resetStructuresState(dispatch);
+    } else {
+      saveGraphNodePositions();
     }
     dispatch(editorSlice.actions.setIsEditing(!isEditing));
   };
