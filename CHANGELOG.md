@@ -1,3 +1,16 @@
+# [1.312.0](https://github.com/mkayander/dStruct/compare/v1.311.0...v1.312.0) (2024-10-10)
+
+
+### Bug Fixes
+
+* Removed console log ([d9068ca](https://github.com/mkayander/dStruct/commit/d9068ca802ba1081716fab04538d33e5be68a17e))
+
+
+### Features
+
+* Display editing state ([adf542c](https://github.com/mkayander/dStruct/commit/adf542c321a6568b21239dbfaf4cf8fa3aa60023))
+* Preserve edited state ([06217a0](https://github.com/mkayander/dStruct/commit/06217a0d6eb6dc4a3b1571660118f641440c9f3b))
+
 # [1.311.0](https://github.com/mkayander/dStruct/compare/v1.310.0...v1.311.0) (2024-10-10)
 
 
