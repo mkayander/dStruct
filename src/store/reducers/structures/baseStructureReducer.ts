@@ -5,7 +5,7 @@ import type {
   Update,
 } from "@reduxjs/toolkit";
 
-export type AnimationName = "blink";
+export type AnimationName = "blink" | "pulse";
 
 export type StructureNode = {
   id: string;

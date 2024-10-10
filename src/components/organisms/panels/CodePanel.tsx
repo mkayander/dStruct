@@ -46,6 +46,7 @@ import {
 } from "#/hooks/useCodeExecution";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackError } from "#/store/reducers/callstackReducer";
+import { selectIsEditing } from "#/store/reducers/editorReducer";
 import {
   projectSlice,
   selectIsEditable,
@@ -86,6 +87,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
+  const isEditing = useAppSelector(selectIsEditing);
   const error = useAppSelector(selectCallstackError);
 
   const selectedProject = trpc.project.getBySlug.useQuery(projectSlug || "", {
@@ -333,6 +335,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               variant="text"
               color="success"
               title={LL.RUN_CODE()}
+              disabled={isEditing}
               endIcon={<PlayArrow />}
               loading={isProcessing}
               loadingPosition="end"

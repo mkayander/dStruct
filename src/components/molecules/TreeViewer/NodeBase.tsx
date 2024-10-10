@@ -46,6 +46,20 @@ const blinkKeyframes = keyframes`
   }
 `;
 
+const pulseKeyframes = keyframes`
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+`;
+
 export type NodeBaseProps = Pick<
   BoxProps,
   "style" | "onMouseDown" | "onMouseUp"
@@ -91,13 +105,20 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   };
 
   useEffect(() => {
-    if (animationCount === undefined) return;
+    if (!animation || animationCount === undefined) return;
 
-    if (nodeRef.current) {
-      nodeRef.current.classList.remove("blink");
-      void nodeRef.current.offsetWidth;
-      nodeRef.current.classList.add("blink");
+    const element = nodeRef.current;
+    if (element) {
+      element.classList.remove(animation);
+      void element.offsetWidth;
+      element.classList.add(animation);
     }
+
+    return () => {
+      if (element) {
+        element.classList.remove(animation);
+      }
+    };
   }, [animation, animationCount]);
 
   return (
@@ -109,6 +130,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         transition: isCallstackReady ? "all .05s" : "none",
         ".blink": {
           animation: `${blinkKeyframes} 0.24s ease-out`,
+        },
+        ".pulse": {
+          animation: `${pulseKeyframes} 0.5s ease-out infinite`,
         },
       }}
       style={{

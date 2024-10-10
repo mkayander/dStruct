@@ -12,8 +12,12 @@ export type GraphNodeProps = TreeNodeData & {
   type: ArgumentTreeType;
 };
 
-export const GraphNode: React.FC<GraphNodeProps> = (props) => {
-  const { color } = props;
+export const GraphNode: React.FC<GraphNodeProps> = ({
+  color,
+  animation,
+  animationCount,
+  ...props
+}) => {
   const dispatch = useAppDispatch();
 
   const isEditing = useAppSelector(selectIsEditing);
@@ -44,6 +48,8 @@ export const GraphNode: React.FC<GraphNodeProps> = (props) => {
       relations={relations}
       onMouseDown={handleMouseDown}
       cursor={isEditing ? "grab" : "pointer"}
+      animation={isEditing ? "pulse" : animation}
+      animationCount={isEditing ? 1 : animationCount}
       {...props}
     />
   );

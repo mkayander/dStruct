@@ -71,12 +71,14 @@ export const TreeViewPanel: React.FC = () => {
 
   const handleEditButtonClick = () => {
     if (!isEditing) {
-      resetStructuresState(dispatch);
+      resetStructuresState(dispatch, false);
     } else {
       saveGraphNodePositions();
     }
     dispatch(editorSlice.actions.setIsEditing(!isEditing));
   };
+
+  const isReady = isCallstackReady && !isEditing;
 
   return (
     <PanelWrapper
@@ -100,6 +102,7 @@ export const TreeViewPanel: React.FC = () => {
             </IconButton>
             <Button
               title={LL.RESET_DATA_STRUCTURES()}
+              disabled={!isReady}
               color="inherit"
               onClick={handleReset}
               sx={{ height: "100%" }}
@@ -120,7 +123,7 @@ export const TreeViewPanel: React.FC = () => {
                   color="info"
                   endIcon={<Replay />}
                   onClick={handleReplay}
-                  disabled={!isCallstackReady}
+                  disabled={!isReady}
                   sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
                 >
                   {LL.REPLAY()}
