@@ -19510,10 +19510,35 @@
       },
       "description": null
     },
+    "cm24hoafp0002adnwxp661ho2": {
+      "id": "cm24hoafp0002adnwxp661ho2",
+      "createdAt": "2024-10-11T08:52:06.228Z",
+      "updatedAt": "2024-10-11T08:53:55.397Z",
+      "projectId": "cm24hoafp0001adnwyhzqyffy",
+      "title": "Case 1",
+      "order": 1,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "gevvwx93tpWh93KT5ZqAQ5": {
+          "name": "gevvwx93tpWh93KT5ZqAQ5",
+          "type": "array",
+          "input": "[[1,4],[2,3],[4,6]]",
+          "order": 0
+        },
+        "igDM1RDDk1W4nL1TUMqMmi": {
+          "name": "igDM1RDDk1W4nL1TUMqMmi",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
     "cluazzgro0002exgvvfmdrqjn": {
       "id": "cluazzgro0002exgvvfmdrqjn",
       "createdAt": "2024-03-28T08:53:39.108Z",
-      "updatedAt": "2024-10-07T16:55:36.407Z",
+      "updatedAt": "2024-10-11T16:44:49.723Z",
       "projectId": "cluazzgro0001exgvjtl1fnw1",
       "title": "Case 1",
       "order": 0,
@@ -19536,32 +19561,25 @@
           "name": "7wySHV7Apd17FumQ6PE7BJ",
           "type": "graph",
           "input": "[[2,1,1],[2,3,1],[3,4,1]]",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "cm24hoafp0002adnwxp661ho2": {
-      "id": "cm24hoafp0002adnwxp661ho2",
-      "createdAt": "2024-10-11T08:52:06.228Z",
-      "updatedAt": "2024-10-11T08:53:55.397Z",
-      "projectId": "cm24hoafp0001adnwyhzqyffy",
-      "title": "Case 1",
-      "order": 1,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "gevvwx93tpWh93KT5ZqAQ5": {
-          "name": "gevvwx93tpWh93KT5ZqAQ5",
-          "type": "array",
-          "input": "[[1,4],[2,3],[4,6]]",
-          "order": 0
-        },
-        "igDM1RDDk1W4nL1TUMqMmi": {
-          "name": "igDM1RDDk1W4nL1TUMqMmi",
-          "type": "number",
-          "input": "1",
-          "order": 1
+          "order": 0,
+          "nodeData": {
+            "1": {
+              "x": 28.20492715064859,
+              "y": 63.75083835773302
+            },
+            "2": {
+              "x": 138.1172249075077,
+              "y": 24.19440103022544
+            },
+            "3": {
+              "x": 255.2775910500782,
+              "y": 68.08078668585534
+            },
+            "4": {
+              "x": 164.0545354452025,
+              "y": 130.8492005501688
+            }
+          }
         }
       },
       "description": null
@@ -27751,7 +27769,7 @@
     "cluazzgro0003exgvrsveg4ru": {
       "id": "cluazzgro0003exgvrsveg4ru",
       "createdAt": "2024-03-28T08:53:39.108Z",
-      "updatedAt": "2024-10-11T08:51:35.099Z",
+      "updatedAt": "2024-10-11T16:44:56.968Z",
       "projectId": "cluazzgro0001exgvjtl1fnw1",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -29711,7 +29729,7 @@
     "cm24hoafp0003adnw0cel5j9x": {
       "id": "cm24hoafp0003adnw0cel5j9x",
       "createdAt": "2024-10-11T08:52:06.228Z",
-      "updatedAt": "2024-10-11T08:53:00.594Z",
+      "updatedAt": "2024-10-11T16:44:15.721Z",
       "projectId": "cm24hoafp0001adnwyhzqyffy",
       "title": "Solution 1",
       "slug": "solution-1",
