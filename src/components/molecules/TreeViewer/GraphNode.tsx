@@ -3,7 +3,10 @@ import React from "react";
 import { NodeBase } from "#/components/molecules/TreeViewer/NodeBase";
 import { useBinaryChildNodes, useNodeColors } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { editorSlice, selectIsEditing } from "#/store/reducers/editorReducer";
+import {
+  editorSlice,
+  selectIsEditingNodes,
+} from "#/store/reducers/editorReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { type ArgumentTreeType } from "#/utils/argumentObject";
 
@@ -20,13 +23,13 @@ export const GraphNode: React.FC<GraphNodeProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const isEditing = useAppSelector(selectIsEditing);
+  const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const { nodeColor, shadowColor } = useNodeColors(color);
 
   const { relations } = useBinaryChildNodes(props, nodeColor);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    if (!isEditing) return;
+    if (!isEditingNodes) return;
 
     ev.stopPropagation();
     dispatch(
@@ -47,9 +50,9 @@ export const GraphNode: React.FC<GraphNodeProps> = ({
       shadowColor={shadowColor}
       relations={relations}
       onMouseDown={handleMouseDown}
-      cursor={isEditing ? "grab" : "pointer"}
-      animation={isEditing ? "pulse" : animation}
-      animationCount={isEditing ? 1 : animationCount}
+      cursor={isEditingNodes ? "grab" : "pointer"}
+      animation={isEditingNodes ? "pulse" : animation}
+      animationCount={isEditingNodes ? 1 : animationCount}
       {...props}
     />
   );

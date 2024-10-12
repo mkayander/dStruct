@@ -6,6 +6,7 @@ import {
   selectCallstackIsPlaying,
   selectCallstackLength,
 } from "#/store/reducers/callstackReducer";
+import { selectIsEditingNodes } from "#/store/reducers/editorReducer";
 import { resetStructuresState } from "#/utils";
 
 export const usePlayerControls = () => {
@@ -14,6 +15,7 @@ export const usePlayerControls = () => {
   const store = useAppStore();
   const isPlaying = useAppSelector(selectCallstackIsPlaying);
   const callstackLength = useAppSelector(selectCallstackLength);
+  const isEditingNodes = useAppSelector(selectIsEditingNodes);
 
   const handleReset = () => {
     resetStructuresState(dispatch);
@@ -48,6 +50,8 @@ export const usePlayerControls = () => {
   };
 
   const handleKeyDown: React.KeyboardEventHandler = (event) => {
+    if (isEditingNodes) return;
+
     if (event.key === "ArrowLeft") {
       handleStepBack();
     } else if (event.key === "ArrowRight") {

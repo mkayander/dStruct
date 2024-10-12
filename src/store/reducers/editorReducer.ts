@@ -12,12 +12,12 @@ export type NodeDragState = {
 };
 
 type EditorState = {
-  isEditing: boolean;
+  isEditingNodes: boolean;
   dragState: NodeDragState | null;
 };
 
 const initialState: EditorState = {
-  isEditing: false,
+  isEditingNodes: false,
   dragState: null,
 };
 
@@ -33,7 +33,7 @@ export const editorSlice = createSlice({
       };
     },
     setIsEditing: (state, action: PayloadAction<boolean>) => {
-      state.isEditing = action.payload;
+      state.isEditingNodes = action.payload;
     },
     startDrag: (state, action: PayloadAction<EditorState["dragState"]>) => {
       state.dragState = action.payload;
@@ -53,4 +53,5 @@ export const editorReducer = editorSlice.reducer;
  * Selectors
  */
 export const selectDragState = (state: RootState) => state.editor.dragState;
-export const selectIsEditing = (state: RootState) => state.editor.isEditing;
+export const selectIsEditingNodes = (state: RootState) =>
+  state.editor.isEditingNodes;

@@ -30,7 +30,10 @@ import {
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
-import { editorSlice, selectIsEditing } from "#/store/reducers/editorReducer";
+import {
+  editorSlice,
+  selectIsEditingNodes,
+} from "#/store/reducers/editorReducer";
 import { resetStructuresState } from "#/utils";
 
 type TabName = "structure" | "benchmark";
@@ -49,7 +52,7 @@ export const TreeViewPanel: React.FC = () => {
   });
   const [sliderValue, setSliderValue] = useState(100);
 
-  const isEditing = useAppSelector(selectIsEditing);
+  const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const isMobile = useMobileLayout();
 
@@ -70,15 +73,15 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const handleEditButtonClick = () => {
-    if (!isEditing) {
+    if (!isEditingNodes) {
       resetStructuresState(dispatch, false, true);
     } else {
       saveGraphNodePositions();
     }
-    dispatch(editorSlice.actions.setIsEditing(!isEditing));
+    dispatch(editorSlice.actions.setIsEditing(!isEditingNodes));
   };
 
-  const isReady = isCallstackReady && !isEditing;
+  const isReady = isCallstackReady && !isEditingNodes;
 
   return (
     <PanelWrapper
@@ -146,11 +149,11 @@ export const TreeViewPanel: React.FC = () => {
             }}
           >
             <Button
-              title={`${isEditing ? "Save" : "Edit"} graph node positions`}
-              color={isEditing ? "success" : "info"}
+              title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
+              color={isEditingNodes ? "success" : "info"}
               onClick={handleEditButtonClick}
             >
-              {isEditing ? "Save" : "Edit"}
+              {isEditingNodes ? "Save" : "Edit"}
             </Button>
           </Box>
           <Box
@@ -171,7 +174,7 @@ export const TreeViewPanel: React.FC = () => {
             }}
           >
             <PlayerControls
-              disabled={isEditing}
+              disabled={isEditingNodes}
               sliderValue={sliderValue}
               setSliderValue={setSliderValue}
               handlePlay={handlePlay}
