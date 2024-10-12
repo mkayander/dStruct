@@ -1,3 +1,10 @@
+# [1.313.0](https://github.com/mkayander/dStruct/compare/v1.312.0...v1.313.0) (2024-10-12)
+
+
+### Features
+
+* Ignore key commands when editing nodes ([c4a26c3](https://github.com/mkayander/dStruct/commit/c4a26c378ed977082bbb83de6d5818271c9c3da8))
+
 # [1.312.0](https://github.com/mkayander/dStruct/compare/v1.311.0...v1.312.0) (2024-10-10)
 
 
