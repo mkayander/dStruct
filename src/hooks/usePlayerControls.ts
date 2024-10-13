@@ -6,7 +6,10 @@ import {
   selectCallstackIsPlaying,
   selectCallstackLength,
 } from "#/store/reducers/callstackReducer";
-import { selectIsEditingNodes } from "#/store/reducers/editorReducer";
+import {
+  editorSlice,
+  selectIsEditingNodes,
+} from "#/store/reducers/editorReducer";
 import { resetStructuresState } from "#/utils";
 
 export const usePlayerControls = () => {
@@ -50,7 +53,12 @@ export const usePlayerControls = () => {
   };
 
   const handleKeyDown: React.KeyboardEventHandler = (event) => {
-    if (isEditingNodes) return;
+    if (isEditingNodes) {
+      if (event.key === "Escape") {
+        dispatch(editorSlice.actions.setIsEditing(false));
+      }
+      return;
+    }
 
     if (event.key === "ArrowLeft") {
       handleStepBack();
