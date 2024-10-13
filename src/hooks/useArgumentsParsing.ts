@@ -65,7 +65,7 @@ type TreeParsingResult =
   | {
       maxDepth: number;
       nodesMap: Record<string, TreeNodeData>;
-      edgesMap?: Record<string, EdgeData>;
+      edgesMap: Record<string, EdgeData>;
     }
   | undefined;
 
@@ -81,6 +81,7 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
   if (!input || input.length === 0) return;
 
   const nodesMap: Record<string, TreeNodeData> = {};
+  const edgesMap: Record<string, EdgeData> = {};
 
   const rootNum = input[0];
   if (!isNumber(rootNum)) return;
@@ -105,6 +106,14 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
     const newLeft = createNodeData(nodesMap, input[i], newDepth, type);
     if (newLeft) {
       current.childrenIds[0] = newLeft.id;
+
+      const leftEdge = getEdgeId(current.id, newLeft.id);
+      edgesMap[leftEdge] = {
+        id: leftEdge,
+        sourceId: current.id,
+        targetId: newLeft.id,
+        isDirected: true,
+      };
       queue.push(newLeft);
     }
     i++;
@@ -112,12 +121,20 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
     const newRight = createNodeData(nodesMap, input[i], newDepth, type);
     if (newRight) {
       current.childrenIds[1] = newRight.id;
+
+      const rightEdge = getEdgeId(current.id, newRight.id);
+      edgesMap[rightEdge] = {
+        id: rightEdge,
+        sourceId: current.id,
+        targetId: newRight.id,
+        isDirected: true,
+      };
       queue.push(newRight);
     }
     i++;
   }
 
-  return { maxDepth, nodesMap };
+  return { maxDepth, nodesMap, edgesMap };
 };
 
 const parseLinkedListArgument = (rawInput: string): TreeParsingResult => {
@@ -131,6 +148,7 @@ const parseLinkedListArgument = (rawInput: string): TreeParsingResult => {
   if (!input || input.length === 0) return;
 
   const nodesMap: Record<string, TreeNodeData> = {};
+  const edgesMap: Record<string, EdgeData> = {};
 
   let prevNode: TreeNodeData | null = null;
   let maxDepth = 0;
@@ -148,13 +166,21 @@ const parseLinkedListArgument = (rawInput: string): TreeParsingResult => {
 
     if (prevNode) {
       prevNode.childrenIds[0] = newNode.id;
+
+      const edgeId = getEdgeId(prevNode.id, newNode.id);
+      edgesMap[edgeId] = {
+        id: edgeId,
+        sourceId: prevNode.id,
+        targetId: newNode.id,
+        isDirected: true,
+      };
     }
 
     prevNode = newNode;
     maxDepth++;
   }
 
-  return { maxDepth, nodesMap };
+  return { maxDepth, nodesMap, edgesMap };
 };
 
 const parseGraphArgument = (
@@ -216,6 +242,7 @@ const parseGraphArgument = (
   };
 
   for (const value of input) {
+    if (!Array.isArray(value)) continue;
     const [from, to, weight] = value;
     if (!isNumber(from) || !isNumber(to)) continue;
 
@@ -271,6 +298,7 @@ const parseTreeArgument = (
       break;
     case ArgumentType.LINKED_LIST:
       parsed = parseLinkedListArgument(arg.input);
+      break;
     case ArgumentType.GRAPH:
       parsed = parseGraphArgument(arg);
       break;
