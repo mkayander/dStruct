@@ -28,7 +28,15 @@ export const useArgumentsNodeData = () => {
   const store = useAppStore();
   const dispatch = useAppDispatch();
 
-  const updateCase = trpc.project.updateCase.useMutation();
+  const trpcUtils = trpc.useUtils();
+  const updateCase = trpc.project.updateCase.useMutation({
+    onSuccess: (data) => {
+      trpcUtils.project.getCaseBySlug.setData(
+        { projectId: data.projectId, slug: data.slug },
+        data,
+      );
+    },
+  });
 
   const saveGraphNodePositions = async () => {
     const state = store.getState();
@@ -81,17 +89,6 @@ export const useArgumentsNodeData = () => {
       const args = state.testCase.args.entities;
       if (!projectId || !caseId || !args) continue;
 
-      // await updateCase.mutateAsync({
-      //   projectId,
-      //   caseId,
-      //   args: {
-      //     ...args,
-      //     [treeName]: {
-      //       ...caseArg,
-      //       nodeData: {},
-      //     },
-      //   },
-      // });
       dispatch(caseSlice.actions.clearNodeData(treeName));
     }
   };
