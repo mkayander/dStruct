@@ -18,6 +18,8 @@ import {
   arrayStructureSlice,
 } from "#/store/reducers/structures/arrayReducer";
 import {
+  type EdgeData,
+  getEdgeId,
   treeDataSelector,
   type TreeNodeData,
   treeNodeSlice,
@@ -63,6 +65,7 @@ type TreeParsingResult =
   | {
       maxDepth: number;
       nodesMap: Record<string, TreeNodeData>;
+      edgesMap?: Record<string, EdgeData>;
     }
   | undefined;
 
@@ -169,6 +172,7 @@ const parseGraphArgument = (
 
   const savedData = arg.nodeData ?? {};
   const nodesMap: Record<string, TreeNodeData> = {};
+  const edgesMap: Record<string, EdgeData> = {};
   const idMap = new Map<number, TreeNodeData>();
   const adjacencyList = new Map<number, number[]>();
 
@@ -189,12 +193,35 @@ const parseGraphArgument = (
     return newNode;
   };
 
+  const initEdge = (
+    fromId: string,
+    toId: string,
+    label?: string | number,
+  ): EdgeData => {
+    const id = getEdgeId(fromId, toId);
+    if (edgesMap[id]) return edgesMap[id];
+
+    if (label !== undefined) {
+      label = String(label);
+    }
+    const newEdge: EdgeData = {
+      id,
+      sourceId: fromId,
+      targetId: toId,
+      label,
+      isDirected: true,
+    };
+    edgesMap[id] = newEdge;
+    return newEdge;
+  };
+
   for (const value of input) {
-    const [from, to] = value;
+    const [from, to, weight] = value;
     if (!isNumber(from) || !isNumber(to)) continue;
 
     const fromNode = initNode(from);
     const toNode = initNode(to);
+    initEdge(fromNode.id, toNode.id, weight);
 
     fromNode.childrenIds.push(toNode.id);
     adjacencyList.get(from)!.push(to);
@@ -220,7 +247,7 @@ const parseGraphArgument = (
     );
   }
 
-  return { maxDepth: 0, nodesMap };
+  return { maxDepth: 0, nodesMap, edgesMap };
 };
 
 const parseTreeArgument = (
@@ -266,6 +293,14 @@ const parseTreeArgument = (
       },
     }),
   );
+  if (parsed.edgesMap) {
+    dispatch(
+      treeNodeSlice.actions.addManyEdges({
+        name: arg.name,
+        data: Object.values(parsed.edgesMap),
+      }),
+    );
+  }
   dispatch(
     caseSlice.actions.updateArgumentInfo({
       name: arg.name,
