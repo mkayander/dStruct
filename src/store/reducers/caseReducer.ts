@@ -75,6 +75,20 @@ export const caseSlice = createSlice({
         },
       });
     },
+    clearNodeData: (state, action: PayloadAction<string>) => {
+      const name = action.payload;
+      if (!state.args.entities[name]) return;
+
+      argumentAdapter.updateOne(state.args, {
+        id: name,
+        changes: {
+          nodeData: {},
+        },
+      });
+      state.info[name] = {
+        isParsed: false,
+      };
+    },
     setArguments: (
       state,
       action: PayloadAction<{

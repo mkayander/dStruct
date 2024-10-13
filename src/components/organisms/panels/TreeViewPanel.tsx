@@ -66,7 +66,8 @@ export const TreeViewPanel: React.FC = () => {
     handleStepForward,
   } = usePlayerControls();
 
-  const { saveGraphNodePositions } = useArgumentsNodeData();
+  const { saveGraphNodePositions, clearGraphNodePositions } =
+    useArgumentsNodeData();
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -148,13 +149,24 @@ export const TreeViewPanel: React.FC = () => {
               zIndex: 50,
             }}
           >
-            <Button
-              title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
-              color={isEditingNodes ? "success" : "info"}
-              onClick={handleEditButtonClick}
-            >
-              {isEditingNodes ? "Save" : "Edit"}
-            </Button>
+            <Stack gap={1}>
+              <Button
+                title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
+                color={isEditingNodes ? "success" : "info"}
+                onClick={handleEditButtonClick}
+              >
+                {isEditingNodes ? "Save" : "Edit"}
+              </Button>
+              {isEditingNodes && (
+                <Button
+                  title="Your changes will be lost"
+                  color="warning"
+                  onClick={clearGraphNodePositions}
+                >
+                  Recalculate
+                </Button>
+              )}
+            </Stack>
           </Box>
           <Box
             sx={{
