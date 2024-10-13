@@ -1,3 +1,18 @@
+# [1.314.0](https://github.com/mkayander/dStruct/compare/v1.313.0...v1.314.0) (2024-10-13)
+
+
+### Bug Fixes
+
+* Update test case cache after updating node data ([ca687e8](https://github.com/mkayander/dStruct/commit/ca687e85712d8ddadd2e810cfbc7f3888f7638ac))
+
+
+### Features
+
+* Added a button to recalculate node positions ([0315e0b](https://github.com/mkayander/dStruct/commit/0315e0bb2f1f6d7d98fb18ee198e678186255d6c))
+* Generate snowflake graph node positions ([19cb2a1](https://github.com/mkayander/dStruct/commit/19cb2a1471f8bbf624c68ea7417a343cd21f042c))
+* Implemented util graph algorithms ([4e0d845](https://github.com/mkayander/dStruct/commit/4e0d845efc6f8ad6426cc801caa8fdb1bddb261f))
+* Support more than 2 edges for graphs ([5988a58](https://github.com/mkayander/dStruct/commit/5988a5893b156a9cc5fd159229d9ea879da1cffb))
+
 # [1.313.0](https://github.com/mkayander/dStruct/compare/v1.312.0...v1.313.0) (2024-10-12)
 
 
