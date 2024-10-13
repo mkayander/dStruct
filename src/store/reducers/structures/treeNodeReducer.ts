@@ -273,6 +273,28 @@ export const selectNodeDataById = (name: string, id: string) =>
     return treeNodeDataSelector.selectById(treeState.nodes, id);
   });
 
+export const selectNodeDataByIds = (
+  name: string,
+  ids: (string | undefined)[],
+) =>
+  createSelector(treeDataSelector, (state) => {
+    if (!ids) return [];
+
+    const treeState = getStateByName(state, name);
+    if (!treeState) return null;
+
+    const children = [];
+
+    for (const id of ids) {
+      if (!id) continue;
+
+      const node = treeNodeDataSelector.selectById(treeState.nodes, id);
+      if (node) children.push(node);
+    }
+
+    return children;
+  });
+
 export const selectRootNodeData = (name: string) =>
   createSelector(treeDataSelector, (state) => {
     const treeState = getStateByName(state, name);

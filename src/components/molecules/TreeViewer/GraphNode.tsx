@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NodeBase } from "#/components/molecules/TreeViewer/NodeBase";
-import { useBinaryChildNodes, useNodeColors } from "#/hooks";
+import { useGraphEdges, useNodeColors } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   editorSlice,
@@ -26,7 +26,7 @@ export const GraphNode: React.FC<GraphNodeProps> = ({
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const { nodeColor, shadowColor } = useNodeColors(color);
 
-  const { relations } = useBinaryChildNodes(props, nodeColor);
+  const { relations } = useGraphEdges(props, nodeColor);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (!isEditingNodes) return;

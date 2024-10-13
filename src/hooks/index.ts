@@ -13,3 +13,4 @@ export { useAppConfig } from "./useAppConfig";
 export { useSearchParam } from "./useSearchParam";
 export { usePlayerControls } from "./usePlayerControls";
 export { useArgumentsNodeData } from "./useArgumentsNodeData";
+export { useGraphEdges } from "./useGraphEdges";
