@@ -11,6 +11,7 @@ import {
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
+import { GraphEdge } from "./GraphEdge";
 import { GraphNode } from "./GraphNode";
 
 const nodeComponentMap = {
@@ -66,6 +67,11 @@ export const NodesView: React.FC<NodesViewProps> = ({
               {...node}
             />
           ),
+      )}
+
+      {Object.values(data.edges.entities).map(
+        (edge) =>
+          edge && <GraphEdge key={edge.id} treeName={treeName} {...edge} />,
       )}
     </Box>
   );

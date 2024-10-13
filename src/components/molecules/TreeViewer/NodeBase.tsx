@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
-import { ArcherElement } from "react-archer";
-import { type RelationType } from "react-archer/lib/types";
 
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
@@ -68,7 +66,6 @@ export type NodeBaseProps = Pick<
     treeName: string;
     nodeColor: string;
     shadowColor: string;
-    relations: RelationType[];
     cursor?: "pointer" | "grab";
   };
 
@@ -83,7 +80,6 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   isHighlighted,
   x,
   y,
-  relations,
   cursor = "pointer",
   onMouseDown,
   onMouseUp,
@@ -154,25 +150,20 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           },
         }}
       >
-        <ArcherElement
-          id={id}
-          relations={relations.length > 0 ? relations : undefined}
-        >
-          <Box
-            onClick={handleBlink}
-            sx={{
-              ...nodeProps,
-              transition: "all .2s",
-              borderRadius: "50%",
-              background: alpha(nodeColor, 0.3),
-              border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
-              backdropFilter: "blur(4px)",
-              userSelect: "none",
-              boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
-              color: theme.palette.primary.contrastText,
-            }}
-          />
-        </ArcherElement>
+        <Box
+          onClick={handleBlink}
+          sx={{
+            ...nodeProps,
+            transition: "all .2s",
+            borderRadius: "50%",
+            background: alpha(nodeColor, 0.3),
+            border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
+            backdropFilter: "blur(4px)",
+            userSelect: "none",
+            boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
+            color: theme.palette.primary.contrastText,
+          }}
+        />
         <Typography
           component="span"
           color="white"

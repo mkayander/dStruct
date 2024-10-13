@@ -1,8 +1,7 @@
 "use client";
 
-import { alpha, Box, Stack, useTheme } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ArcherContainer } from "react-archer";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
@@ -40,7 +39,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   playbackInterval,
   replayCount,
 }) => {
-  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const treeState = useAppSelector(treeDataSelector);
@@ -203,51 +201,37 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             },
           }}
         >
-          <ArcherContainer
-            lineStyle="straight"
-            strokeColor={alpha(theme.palette.primary.dark, 0.5)}
-            strokeWidth={4}
-            endMarker={false}
-            style={{
-              height: "100%",
-            }}
-            svgContainerStyle={{
-              overflow: "visible",
-              height: "100%",
-            }}
-          >
-            {treeStructures.graph && (
-              <Box height="100%" position="absolute">
-                {treeStructures.graph.map(({ name, treeState }) => (
-                  <NodesView
-                    key={name}
-                    treeName={name}
-                    data={treeState}
-                    sx={{ zIndex: 50 }}
-                  />
-                ))}
-              </Box>
-            )}
-            {arrayStructures && (
-              <Stack width="fit-content" minWidth="100%" spacing={2}>
-                {arrayStructures}
-                <br />
+          {treeStructures.graph && (
+            <Box height="100%" position="absolute">
+              {treeStructures.graph.map(({ name, treeState }) => (
+                <NodesView
+                  key={name}
+                  treeName={name}
+                  data={treeState}
+                  sx={{ zIndex: 50 }}
+                />
+              ))}
+            </Box>
+          )}
+          {arrayStructures && (
+            <Stack width="fit-content" minWidth="100%" spacing={2}>
+              {arrayStructures}
+              <br />
 
-                {treeStructures.linkedList.map(({ name, treeState }) => (
-                  <NodesView
-                    key={name}
-                    treeName={name}
-                    data={treeState}
-                    sx={{
-                      position: "relative",
-                      height: "42px",
-                    }}
-                  />
-                ))}
-              </Stack>
-            )}
-            {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
-          </ArcherContainer>
+              {treeStructures.linkedList.map(({ name, treeState }) => (
+                <NodesView
+                  key={name}
+                  treeName={name}
+                  data={treeState}
+                  sx={{
+                    position: "relative",
+                    height: "42px",
+                  }}
+                />
+              ))}
+            </Stack>
+          )}
+          {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
         </Box>
       </ScrollContainer>
     </Box>
