@@ -1,3 +1,22 @@
+# [1.315.0](https://github.com/mkayander/dStruct/compare/v1.314.0...v1.315.0) (2024-10-13)
+
+
+### Bug Fixes
+
+* Add binary tree top offset ([010b0c2](https://github.com/mkayander/dStruct/commit/010b0c2c448082ccf47b658de631635ee6d7512a))
+* Fix tree viewer overlay rendering ([f884800](https://github.com/mkayander/dStruct/commit/f8848002ffc318ec7e0a786c3b79a82f20e7cce0))
+
+
+### Features
+
+* Allow to calculate color as a util function ([b20c3a9](https://github.com/mkayander/dStruct/commit/b20c3a96c6fc2c4150670180e35ecb5a810f70b8))
+* Exit editing state on escape press ([2d19059](https://github.com/mkayander/dStruct/commit/2d19059dcbf07fb5da3986f5d194f94eea71210c))
+* Generate edges for all tree structures ([2f80b56](https://github.com/mkayander/dStruct/commit/2f80b560076ffd0d7d3445ad45cc7c5146bd2139))
+* Generate edges for graphs ([236ea00](https://github.com/mkayander/dStruct/commit/236ea00a336a35317f9f82fb489165071ad3bcbd))
+* Implement global edges display ([875ea05](https://github.com/mkayander/dStruct/commit/875ea05d26d64871bb7781bff60b9907f8c1bdad))
+* Implemented edge data state ([badf8bd](https://github.com/mkayander/dStruct/commit/badf8bd48301d4c3e294a5bb973a89de3d4995d8))
+* Implemented graph edges rendering ([da83e3d](https://github.com/mkayander/dStruct/commit/da83e3d23eea501334dbff872ac147fda87607a4))
+
 # [1.314.0](https://github.com/mkayander/dStruct/compare/v1.313.0...v1.314.0) (2024-10-13)
 
 
