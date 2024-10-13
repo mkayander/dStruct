@@ -8,6 +8,8 @@ import {
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
 
+const TOP_OFFSET = 25;
+
 export const useBinaryTreePositioning = (
   treeName: string,
   treeData: TreeData,
@@ -74,7 +76,7 @@ export const useBinaryTreePositioning = (
           name: treeName,
           data: {
             id: rootNode.id,
-            changes: { x: newRootX },
+            changes: { x: newRootX, y: TOP_OFFSET },
           },
         }),
       );
