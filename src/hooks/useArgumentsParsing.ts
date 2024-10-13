@@ -31,6 +31,7 @@ import {
   isArgumentArrayType,
   isArgumentTreeType,
 } from "#/utils/argumentObject";
+import { findCentroid, positionSnowflakeNodes } from "#/utils/graphs";
 import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export type TreeInput = (number | null)[];
@@ -58,7 +59,14 @@ const createNodeData = (
   return map[newId];
 };
 
-const parseBinaryTreeArgument = (rawInput: string) => {
+type TreeParsingResult =
+  | {
+      maxDepth: number;
+      nodesMap: Record<string, TreeNodeData>;
+    }
+  | undefined;
+
+const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
   const type = ArgumentType.BINARY_TREE;
   let input: TreeInput | null = null;
   try {
@@ -109,7 +117,7 @@ const parseBinaryTreeArgument = (rawInput: string) => {
   return { maxDepth, nodesMap };
 };
 
-const parseLinkedListArgument = (rawInput: string) => {
+const parseLinkedListArgument = (rawInput: string): TreeParsingResult => {
   let input: TreeInput | null = null;
   try {
     input = JSON.parse(rawInput);
@@ -146,7 +154,9 @@ const parseLinkedListArgument = (rawInput: string) => {
   return { maxDepth, nodesMap };
 };
 
-const parseGraphArgument = (arg: ArgumentObject<ArgumentTreeType>) => {
+const parseGraphArgument = (
+  arg: ArgumentObject<ArgumentTreeType>,
+): TreeParsingResult => {
   const rawInput = arg.input;
   let input: GraphInput | null = null;
   try {
@@ -160,6 +170,7 @@ const parseGraphArgument = (arg: ArgumentObject<ArgumentTreeType>) => {
   const savedData = arg.nodeData ?? {};
   const nodesMap: Record<string, TreeNodeData> = {};
   const idMap = new Map<number, TreeNodeData>();
+  const adjacencyList = new Map<number, number[]>();
 
   const initNode = (value: number): TreeNodeData => {
     if (idMap.get(value)) return idMap.get(value)!;
@@ -169,38 +180,54 @@ const parseGraphArgument = (arg: ArgumentObject<ArgumentTreeType>) => {
       throw new Error("Failed to create node data");
     }
 
-    const { x, y } = savedData[value] ?? {
-      x: Math.random() * 500,
-      y: Math.random() * 500,
-    };
+    const { x, y } = savedData[value] ?? { x: 0, y: 0 };
     newNode.x = x;
     newNode.y = y;
 
     idMap.set(value, newNode);
-
+    adjacencyList.set(value, []);
     return newNode;
   };
 
-  const maxDepth = 0;
-
   for (const value of input) {
-    const [from, to, weight] = value;
-    if (!isNumber(from) || !isNumber(to) || !isNumber(weight)) continue;
+    const [from, to] = value;
+    if (!isNumber(from) || !isNumber(to)) continue;
 
     const fromNode = initNode(from);
     const toNode = initNode(to);
 
     fromNode.childrenIds.push(toNode.id);
+    adjacencyList.get(from)!.push(to);
+    adjacencyList.get(to)!.push(from);
   }
 
-  return { maxDepth, nodesMap };
+  const centroid = findCentroid(adjacencyList);
+  if (!centroid) return;
+
+  const centroidData = idMap.get(centroid);
+  if (centroidData) {
+    if (!centroidData.x && !centroidData.y) {
+      centroidData.x = 300;
+      centroidData.y = 300;
+    }
+
+    positionSnowflakeNodes(
+      adjacencyList,
+      idMap,
+      centroid,
+      centroidData.x,
+      centroidData.y,
+    );
+  }
+
+  return { maxDepth: 0, nodesMap };
 };
 
 const parseTreeArgument = (
   arg: ArgumentObject<ArgumentTreeType>,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch,
-) => {
+): TreeParsingResult => {
   if (argsInfo[arg.name]?.isParsed) return;
 
   dispatch(
@@ -210,7 +237,7 @@ const parseTreeArgument = (
     }),
   );
 
-  let parsed: ReturnType<typeof parseBinaryTreeArgument>;
+  let parsed: TreeParsingResult;
   switch (arg.type) {
     case ArgumentType.BINARY_TREE:
       parsed = parseBinaryTreeArgument(arg.input);
