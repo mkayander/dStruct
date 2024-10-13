@@ -2,6 +2,7 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  type EntityState,
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
@@ -29,16 +30,34 @@ export type TreeNodeData = StructureNode & {
   y: number;
 };
 
+export type EdgeData = {
+  id: string;
+  sourceId: string;
+  targetId: string;
+  isDirected?: boolean;
+  label?: string;
+};
+
+export const getEdgeId = (sourceId: string, targetId: string) => {
+  if (sourceId > targetId) {
+    [sourceId, targetId] = [targetId, sourceId];
+  }
+
+  return `${sourceId}-${targetId}`;
+};
+
 export type TreeData = BaseStructureItem<TreeNodeData> & {
   type: ArgumentTreeType;
   order: number;
   maxDepth: number;
   rootId: string | null;
+  edges: EntityState<EdgeData, string>;
 };
 
 export type TreeDataState = BaseStructureState<TreeData>;
 
 const treeNodeDataAdapter = createEntityAdapter<TreeNodeData>();
+const edgeDataAdapter = createEntityAdapter<EdgeData>();
 
 const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   ...getInitialDataBase(treeNodeDataAdapter),
@@ -46,6 +65,7 @@ const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   order,
   maxDepth: 0,
   rootId: null,
+  edges: edgeDataAdapter.getInitialState(),
 });
 const initialState: TreeDataState = {};
 
@@ -118,6 +138,14 @@ export const treeNodeSlice = createSlice({
         treeState.rootId = nodes[0]?.id || null;
         treeState.maxDepth = maxDepth;
         treeNodeDataAdapter.addMany(treeState.nodes, nodes);
+      }),
+    addManyEdges: (state, action: NamedPayload<EdgeData[]>) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const {
+          payload: { data: edges },
+        } = action;
+
+        edgeDataAdapter.addMany(treeState.edges, edges);
       }),
     setChildId: (
       state,
