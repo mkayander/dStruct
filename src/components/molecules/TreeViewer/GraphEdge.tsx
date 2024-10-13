@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 
+import { getNodeColors } from "#/hooks/useNodeColors";
 import { useAppSelector } from "#/store/hooks";
 import {
   type EdgeData,
@@ -7,6 +8,7 @@ import {
 } from "#/store/reducers/structures/treeNodeReducer";
 
 const NODE_OFFSET = 21;
+const THICKNESS = 4;
 
 export type GraphEdgeProps = EdgeData & {
   treeName: string;
@@ -18,6 +20,7 @@ export const GraphEdge: React.FC<GraphEdgeProps> = ({
   targetId,
   label,
 }) => {
+  const theme = useTheme();
   const source = useAppSelector(selectNodeDataById(treeName, sourceId));
   const target = useAppSelector(selectNodeDataById(treeName, targetId));
 
@@ -29,24 +32,25 @@ export const GraphEdge: React.FC<GraphEdgeProps> = ({
   const y2 = target.y + NODE_OFFSET;
 
   const distance = Math.hypot(x2 - x1, y2 - y1);
-
-  // Calculate the angle
   const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
+
+  const sourceColor = getNodeColors(theme, source.color).nodeColor;
+  const targetColor = getNodeColors(theme, target.color).nodeColor;
+  const gradient = `linear-gradient(to right, ${sourceColor}, ${targetColor})`;
 
   return (
     <Box
       sx={{
         position: "absolute",
-        zIndex: -1,
-        height: "4px",
+        height: THICKNESS,
         transformOrigin: "0 50%",
         width: distance,
-        top: y1,
+        top: y1 - THICKNESS / 2,
         left: x1,
         transform: `rotate(${angle}deg)`,
 
         transition: "opacity 0.3s",
-        backgroundColor: "primary.main",
+        background: gradient,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

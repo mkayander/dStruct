@@ -57,6 +57,11 @@ export const NodesView: React.FC<NodesViewProps> = ({
         transition: "left 0.05s ease-in-out",
       }}
     >
+      {Object.values(data.edges.entities).map(
+        (edge) =>
+          edge && <GraphEdge key={edge.id} treeName={treeName} {...edge} />,
+      )}
+
       {Object.values(data.nodes.entities).map(
         (node) =>
           node && (
@@ -67,11 +72,6 @@ export const NodesView: React.FC<NodesViewProps> = ({
               {...node}
             />
           ),
-      )}
-
-      {Object.values(data.edges.entities).map(
-        (edge) =>
-          edge && <GraphEdge key={edge.id} treeName={treeName} {...edge} />,
       )}
     </Box>
   );

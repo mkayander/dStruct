@@ -14,7 +14,6 @@ import { editorSlice, selectDragState } from "#/store/reducers/editorReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   type TreeData,
-  treeDataSelector,
   treeDataStructuresSelector,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
@@ -41,25 +40,15 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const treeState = useAppSelector(treeDataSelector);
   const arrayState = useAppSelector(arrayDataSelector);
   const treeStructures = useAppSelector(treeDataStructuresSelector);
   const dragState = useAppSelector(selectDragState);
-
-  // Archer container forced re-render after animations hack
-  useEffect(() => {
-    handleScroll();
-    const timeoutId = setTimeout(() => setForceUpdate((prev) => !prev), 50);
-
-    return () => clearTimeout(timeoutId);
-  }, [treeState]);
 
   useArgumentsParsing();
 
   useNodesRuntimeUpdates(playbackInterval, replayCount);
 
   const scrollRef = useRef<HTMLElement>(null);
-  const [, setForceUpdate] = useState(false);
   const [scrolledStart, setScrolledStart] = useState(true);
   const [scrolledEnd, setScrolledEnd] = useState(true);
 
@@ -195,7 +184,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         <Box
           sx={{
             height: "100%",
-            m: 3,
             path: {
               transition: "fill 0.3s",
             },
@@ -214,7 +202,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             </Box>
           )}
           {arrayStructures && (
-            <Stack width="fit-content" minWidth="100%" spacing={2}>
+            <Stack width="fit-content" minWidth="100%" m={3} spacing={2}>
               {arrayStructures}
               <br />
 
