@@ -1,12 +1,11 @@
-import { useTheme } from "@mui/material";
+import { type Theme, useTheme } from "@mui/material";
 import * as muiColors from "@mui/material/colors";
 
-export const useNodeColors = (
+export const getNodeColors = (
+  theme: Theme,
   color?: string | null,
   useDefaultPrimary = true,
 ) => {
-  const theme = useTheme();
-
   let nodeColor = "";
   let shadowColor = "";
   if (useDefaultPrimary) {
@@ -26,4 +25,13 @@ export const useNodeColors = (
   }
 
   return { nodeColor, shadowColor };
+};
+
+export const useNodeColors = (
+  color?: string | null,
+  useDefaultPrimary = true,
+) => {
+  const theme = useTheme();
+
+  return getNodeColors(theme, color, useDefaultPrimary);
 };
