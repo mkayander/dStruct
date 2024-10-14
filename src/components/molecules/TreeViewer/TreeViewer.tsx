@@ -102,6 +102,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       rowGap={1}
       borderRadius={1}
       position="relative"
+      minHeight="100%"
       width="100%"
       onMouseLeave={() => {
         if (nodeDragState) dispatch(editorSlice.actions.clear());

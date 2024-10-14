@@ -15,6 +15,7 @@ export const PannableViewer: React.FC<PannableViewerProps> = ({ children }) => {
   return (
     <div
       style={{
+        minHeight: "100%",
         transform: `translate(${xOffset}px, ${yOffset}px)`,
       }}
     >
