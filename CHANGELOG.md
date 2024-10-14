@@ -1,3 +1,10 @@
+# [1.319.0](https://github.com/mkayander/dStruct/compare/v1.318.0...v1.319.0) (2024-10-14)
+
+
+### Features
+
+* Rework edge label display ([3717015](https://github.com/mkayander/dStruct/commit/3717015110ac7e72dc3f7abbea0093373f2078c7))
+
 # [1.318.0](https://github.com/mkayander/dStruct/compare/v1.317.0...v1.318.0) (2024-10-14)
 
 
