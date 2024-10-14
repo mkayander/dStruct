@@ -1,3 +1,15 @@
+# [1.320.0](https://github.com/mkayander/dStruct/compare/v1.319.0...v1.320.0) (2024-10-14)
+
+
+### Bug Fixes
+
+* Fixed tree container size ([84feb0a](https://github.com/mkayander/dStruct/commit/84feb0aa251e0fd9cde9740fcd1e8eb73fc5419d))
+
+
+### Features
+
+* Improved performance by avoiding re-renders during panning ([0b009d8](https://github.com/mkayander/dStruct/commit/0b009d8690ea061fea24c88dfc2df202c66e3675))
+
 # [1.319.0](https://github.com/mkayander/dStruct/compare/v1.318.0...v1.319.0) (2024-10-14)
 
 
