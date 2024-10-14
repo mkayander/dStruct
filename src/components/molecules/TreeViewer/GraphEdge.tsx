@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 
 import { getNodeColors } from "#/hooks/useNodeColors";
 import { useAppSelector } from "#/store/hooks";
@@ -40,52 +40,66 @@ export const GraphEdge: React.FC<GraphEdgeProps> = ({
   const gradient = `linear-gradient(to right, ${sourceColor}, ${targetColor})`;
 
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        height: THICKNESS,
-        transformOrigin: "0 50%",
-        width: distance,
-        top: y1 - THICKNESS / 2,
-        left: x1,
-        transform: `rotate(${angle}deg)`,
+    <>
+      <Box
+        sx={{
+          position: "absolute",
+          height: THICKNESS,
+          transformOrigin: "0 50%",
+          width: distance,
+          top: y1 - THICKNESS / 2,
+          left: x1,
+          transform: `rotate(${angle}deg)`,
 
-        transition: "opacity 0.3s",
-        background: gradient,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        color: "text.primary",
-        fontSize: 14,
-        textShadow: "0 0 6px rgba(255, 255, 255, 0.7)",
-        cursor: "pointer",
+          transition: "opacity 0.3s",
+          background: gradient,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
 
-        opacity: 0.5,
-        "&:hover": {
-          opacity: 1,
-        },
+          opacity: 0.5,
+          "&:hover": {
+            opacity: 1,
+          },
 
-        span: {
-          transform: `rotate(${-angle}deg)`,
-        },
-      }}
-    >
-      {label ? <span>{label}</span> : null}
-      {isDirected ? (
-        <Box
+          span: {
+            transform: `rotate(${-angle}deg)`,
+          },
+        }}
+      >
+        {isDirected ? (
+          <Box
+            sx={{
+              position: "absolute",
+              width: 0,
+              height: 0,
+              borderLeft: "8px solid transparent",
+              borderRight: "8px solid transparent",
+              borderTop: `8px solid ${targetColor}`,
+              top: "50%",
+              right: 16,
+              transform: "translateY(-50%) rotate(-90deg) scaleY(2)",
+            }}
+          />
+        ) : null}
+      </Box>
+      {label ? (
+        <Typography
+          component="span"
           sx={{
             position: "absolute",
-            width: 0,
-            height: 0,
-            borderLeft: "8px solid transparent",
-            borderRight: "8px solid transparent",
-            borderTop: `8px solid ${targetColor}`,
-            top: "50%",
-            right: 16,
-            transform: "translateY(-50%) rotate(-90deg) scaleY(2)",
+            top: (y1 + y2) / 2,
+            left: (x1 + x2) / 2,
+            transform: `translate(-50%, -50%) rotate(${angle > 100 || angle < -100 ? angle + 180 : angle}deg)`,
+            fontSize: 14,
+            textShadow: "0 0 6px rgba(255, 255, 255, 0.7)",
+            pointerEvents: "none",
           }}
-        />
+        >
+          {label}
+        </Typography>
       ) : null}
-    </Box>
+    </>
   );
 };
