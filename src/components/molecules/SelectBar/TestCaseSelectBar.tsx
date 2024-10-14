@@ -47,7 +47,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     });
   };
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = trpc.useUtils();
 
   const updateCasesCache = (cases: TestCaseBrief[]) => {
     trpcUtils.project.getBySlug.setData(projectSlug, (prevData) => {
