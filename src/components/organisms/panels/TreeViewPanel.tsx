@@ -46,6 +46,10 @@ export const TreeViewPanel: React.FC = () => {
   const { LL } = useI18nContext();
   const theme = useTheme();
 
+  const [xOffset, setXOffset] = useState(0);
+  const [yOffset, setYOffset] = useState(0);
+  const [dragEvent, setDragEvent] = useState<React.MouseEvent | null>(null);
+
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
     defaultValue: "structure",
     validate: isValidTabName,
@@ -143,9 +147,25 @@ export const TreeViewPanel: React.FC = () => {
             height: "100%",
             p: 0,
             flexGrow: 1,
+            cursor: dragEvent ? "grabbing" : "grab",
           }}
           style={{
             height: isMobile ? "70vh" : "100%",
+          }}
+          onMouseDown={(ev: React.MouseEvent) => {
+            setDragEvent(ev);
+          }}
+          onMouseUp={() => {
+            setDragEvent(null);
+          }}
+          onMouseMove={(ev: React.MouseEvent) => {
+            if (dragEvent) {
+              setXOffset((prev) => prev + ev.movementX);
+              setYOffset((prev) => prev + ev.movementY);
+            }
+          }}
+          onMouseLeave={() => {
+            setDragEvent(null);
           }}
           overlay={
             <>
@@ -205,10 +225,16 @@ export const TreeViewPanel: React.FC = () => {
             </>
           }
         >
-          <TreeViewer
-            replayCount={replayCount}
-            playbackInterval={sliderValue}
-          />
+          <div
+            style={{
+              transform: `translate(${xOffset}px, ${yOffset}px)`,
+            }}
+          >
+            <TreeViewer
+              replayCount={replayCount}
+              playbackInterval={sliderValue}
+            />
+          </div>
         </StyledTabPanel>
         <StyledTabPanel value="benchmark">
           <BenchmarkView />
