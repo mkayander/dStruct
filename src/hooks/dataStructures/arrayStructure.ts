@@ -36,6 +36,10 @@ export function initControlledArray<T extends ArrayBaseType>(
       value: name,
       enumerable: false,
     },
+    structureType: {
+      value: "array",
+      enumerable: false,
+    },
     itemsMeta: {
       value: arrayDataItemSelectors.selectAll(arrayData),
       enumerable: false,

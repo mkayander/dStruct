@@ -28,6 +28,10 @@ export class ControlledSet extends ArrayBase {
         value: name,
         enumerable: false,
       },
+      structureType: {
+        value: "array",
+        enumerable: false,
+      },
       itemsMeta: {
         value: new Map(
           arrayDataItemSelectors

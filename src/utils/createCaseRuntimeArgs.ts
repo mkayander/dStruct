@@ -1,5 +1,6 @@
 import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
+import { ControlledGraphArray } from "#/hooks/dataStructures/graphArray";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { getMatrixChildArrayArgs } from "#/hooks/useArgumentsParsing";
@@ -101,6 +102,18 @@ const createRuntimeMatrix = (
   return matrix;
 };
 
+const createRuntimeGraph = (
+  nodesData: TreeData | undefined,
+  arg: ArgumentObject,
+  callstack: CallstackHelper,
+) => {
+  if (arg.type !== ArgumentType.GRAPH || !nodesData) return null;
+
+  const input = JSON.parse(arg.input);
+
+  return new ControlledGraphArray(input, arg.name, nodesData.nodes, callstack);
+};
+
 /**
  * Create controlled/tracked runtime arguments for a visual function call.
  * @param callstack - Callstack to be filled as the function is executed.
@@ -135,7 +148,7 @@ export const createCaseRuntimeArgs = (
         return createRuntimeMatrix(arrayStore, arg, callstack);
 
       case ArgumentType.GRAPH:
-        return JSON.parse(arg.input);
+        return createRuntimeGraph(treeStore[arg.name], arg, callstack);
     }
   });
 };

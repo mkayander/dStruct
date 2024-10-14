@@ -4,9 +4,12 @@ import type {
   AddArrayItemFrame,
   CallFrameBase,
   CallstackHelper,
+  StructureTypeName,
 } from "#/store/reducers/callstackReducer";
-import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
-import { type AnimationName } from "#/store/reducers/structures/baseStructureReducer";
+import {
+  type AnimationName,
+  type StructureNode,
+} from "#/store/reducers/structures/baseStructureReducer";
 import type { Constructor } from "#/types/helpers";
 import type { ArgumentArrayType } from "#/utils/argumentObject";
 import { safeStringify } from "#/utils/stringifySolutionResult";
@@ -23,12 +26,15 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
     protected readonly name!: string;
     protected readonly argType!: ArgumentArrayType;
     protected readonly meta!: ArrayMeta;
+    protected readonly structureType!: StructureTypeName;
 
     protected constructor(...args: any[]) {
       super(...args);
-      Object.defineProperty(this, "meta", {
-        enumerable: false,
-        value: {},
+      Object.defineProperties(this, {
+        meta: {
+          value: {},
+          enumerable: false,
+        },
       });
     }
 
@@ -88,7 +94,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         argType: this.argType,
         nodeId: "-1",
         treeName: this.name,
-        structureType: "array",
+        structureType: this.structureType,
         timestamp: performance.now(),
       } satisfies CallFrameBase & { nodeId: string };
       if (key !== undefined) {
@@ -141,7 +147,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
           name: "addArrayItem",
           argType: this.argType,
           treeName: this.name,
-          structureType: "array",
+          structureType: this.structureType,
           nodeId: newItem.id,
           timestamp: performance.now(),
           args,
@@ -149,9 +155,9 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       }
     }
 
-    protected abstract getNodeMeta(key: any): ArrayItemData | undefined;
+    protected abstract getNodeMeta(key: any): StructureNode | undefined;
 
-    protected abstract setNodeMeta(key: any, data: ArrayItemData): void;
+    protected abstract setNodeMeta(key: any, data: StructureNode): void;
   }
 
   return BaseStructure;
