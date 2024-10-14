@@ -83,3 +83,5 @@ export const selectIsEditingNodes = (state: RootState) =>
 export const selectIsPanning = (state: RootState) => state.editor.isPanning;
 export const selectViewerOffsetX = (state: RootState) => state.editor.offsetX;
 export const selectViewerOffsetY = (state: RootState) => state.editor.offsetY;
+export const selectIsViewCentered = (state: RootState) =>
+  state.editor.offsetX === 0 && state.editor.offsetY === 0;

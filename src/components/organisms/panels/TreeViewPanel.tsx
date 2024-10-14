@@ -21,6 +21,7 @@ import {
   StyledTabPanel,
   TabListWrapper,
 } from "#/components/organisms/panels/common/styled";
+import { PannableViewer } from "#/components/templates/PannableViewer";
 import {
   useArgumentsNodeData,
   useI18nContext,
@@ -35,8 +36,7 @@ import {
   editorSlice,
   selectIsEditingNodes,
   selectIsPanning,
-  selectViewerOffsetX,
-  selectViewerOffsetY,
+  selectIsViewCentered,
 } from "#/store/reducers/editorReducer";
 import { resetStructuresState } from "#/utils";
 
@@ -60,8 +60,7 @@ export const TreeViewPanel: React.FC = () => {
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const isMobile = useMobileLayout();
   const isPanning = useAppSelector(selectIsPanning);
-  const xOffset = useAppSelector(selectViewerOffsetX);
-  const yOffset = useAppSelector(selectViewerOffsetY);
+  const isViewCentered = useAppSelector(selectIsViewCentered);
 
   const { handlePanStart, handlePanEnd, handlePanReset, handleMouseMove } =
     useViewerPan();
@@ -93,7 +92,6 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const isReady = isCallstackReady && !isEditingNodes;
-  const isViewCentered = xOffset === 0 && yOffset === 0;
 
   return (
     <PanelWrapper
@@ -152,7 +150,6 @@ export const TreeViewPanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel
           value="structure"
-          containerId="tree-view-panel"
           sx={{
             position: "relative",
             height: "100%",
@@ -227,16 +224,12 @@ export const TreeViewPanel: React.FC = () => {
             </>
           }
         >
-          <div
-            style={{
-              transform: `translate(${xOffset}px, ${yOffset}px)`,
-            }}
-          >
+          <PannableViewer>
             <TreeViewer
               replayCount={replayCount}
               playbackInterval={sliderValue}
             />
-          </div>
+          </PannableViewer>
         </StyledTabPanel>
         <StyledTabPanel value="benchmark">
           <BenchmarkView />
