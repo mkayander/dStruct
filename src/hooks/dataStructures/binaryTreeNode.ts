@@ -152,14 +152,14 @@ export class BinaryTreeNode<
     globalThis.recordReads = false;
     while (!queue.isEmpty()) {
       const node = queue.dequeue();
-      if (circularRefs.has(node)) {
-        result.push(`Circular Ref to ${circularRefs.get(node)}`);
-        continue;
-      }
 
       result.push(node?.val ?? "null");
 
       if (node) {
+        if (circularRefs.has(node)) {
+          result.push(`Circular Ref to ${circularRefs.get(node)}`);
+          continue;
+        }
         circularRefs.set(node.left, node.val);
         queue.enqueue(node.left);
         queue.enqueue(node.right);
