@@ -1,3 +1,18 @@
+# [1.317.0](https://github.com/mkayander/dStruct/compare/v1.316.0...v1.317.0) (2024-10-14)
+
+
+### Bug Fixes
+
+* Enable pan operation only on background clicks ([cd94a5a](https://github.com/mkayander/dStruct/commit/cd94a5ac642bdd5d589bdd5dd212c5ef8f3a0047))
+* Fix pan event conditions ([12b9cfa](https://github.com/mkayander/dStruct/commit/12b9cfacd673ae50c3b616bc5423f66b331a73f1))
+* Fixed tree view display ([5bd58a2](https://github.com/mkayander/dStruct/commit/5bd58a2c0492e26a25b3480737b93230789d830a))
+
+
+### Features
+
+* Implemented controlled graph array class ([aef6a7d](https://github.com/mkayander/dStruct/commit/aef6a7dbd95a989940f737a1cba74f5f060243e2))
+* Updated NextJS ([950c55f](https://github.com/mkayander/dStruct/commit/950c55f7b8571ca80d71ea5b35f87192a0d6c570))
+
 # [1.316.0](https://github.com/mkayander/dStruct/compare/v1.315.0...v1.316.0) (2024-10-14)
 
 
