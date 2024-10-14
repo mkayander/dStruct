@@ -72,6 +72,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
       alignItems="center"
       justifyContent="flex-end"
       spacing={1}
+      onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
     >
       <Box width="100%">
         <Typography id="input-slider" variant="caption" gutterBottom>

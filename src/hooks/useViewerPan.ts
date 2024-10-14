@@ -23,15 +23,16 @@ export const useViewerPan = () => {
   };
 
   const handlePanStart = (ev: React.MouseEvent) => {
-    if (
-      ev.target instanceof HTMLElement &&
-      ev.target.id !== "tree-view-panel"
-    ) {
-      return;
-    }
+    if (ev.target instanceof HTMLElement) {
+      if (
+        !(ev.target instanceof HTMLDivElement) ||
+        ev.target.classList.contains("os-scrollbar-handle")
+      )
+        return;
 
-    setPanEvent(ev);
-    dispatch(editorSlice.actions.setIsPanning(true));
+      setPanEvent(ev);
+      dispatch(editorSlice.actions.setIsPanning(true));
+    }
   };
 
   const handlePanEnd = () => {
