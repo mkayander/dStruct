@@ -211,7 +211,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
 
           {treeStructures.graph && (
-            <Box height="100%" position="absolute">
+            <Box height="100%" position="absolute" top="0">
               {treeStructures.graph.map(({ name, treeState }) => (
                 <NodesView
                   key={name}
