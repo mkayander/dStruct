@@ -46,7 +46,6 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
           background: "rgba(255, 255, 255, 0.1)",
           opacity: 0,
           transition: "opacity 0.1s",
-          mixBlendMode: "difference",
           backdropFilter: "blur(2px)",
         },
 

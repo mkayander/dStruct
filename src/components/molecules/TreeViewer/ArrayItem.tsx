@@ -80,7 +80,6 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
           background: "rgba(255, 255, 255, 0.1)",
           opacity: 0,
           transition: "opacity 0.1s",
-          mixBlendMode: "difference",
           backdropFilter: "blur(2px)",
           animation: `${item.animation} 0.3s ease-in-out`,
 

@@ -189,18 +189,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
             },
           }}
         >
-          {treeStructures.graph && (
-            <Box height="100%" position="absolute">
-              {treeStructures.graph.map(({ name, treeState }) => (
-                <NodesView
-                  key={name}
-                  treeName={name}
-                  data={treeState}
-                  sx={{ zIndex: 50 }}
-                />
-              ))}
-            </Box>
-          )}
           {arrayStructures && (
             <Stack width="fit-content" minWidth="100%" m={3} spacing={2}>
               {arrayStructures}
@@ -219,7 +207,21 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
               ))}
             </Stack>
           )}
+
           {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
+
+          {treeStructures.graph && (
+            <Box height="100%" position="absolute">
+              {treeStructures.graph.map(({ name, treeState }) => (
+                <NodesView
+                  key={name}
+                  treeName={name}
+                  data={treeState}
+                  sx={{ zIndex: 50 }}
+                />
+              ))}
+            </Box>
+          )}
         </Box>
       </ScrollContainer>
     </Box>
