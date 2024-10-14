@@ -1,3 +1,10 @@
+# [1.318.0](https://github.com/mkayander/dStruct/compare/v1.317.0...v1.318.0) (2024-10-14)
+
+
+### Features
+
+* Display arrows for directed graphs ([2cbce63](https://github.com/mkayander/dStruct/commit/2cbce634fcc0936d6f2eec4788aeb1f8d495d0f8))
+
 # [1.317.0](https://github.com/mkayander/dStruct/compare/v1.316.0...v1.317.0) (2024-10-14)
 
 
