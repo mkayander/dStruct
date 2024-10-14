@@ -1,6 +1,9 @@
-import { useAppDispatch, useAppStore } from "#/store/hooks";
+import { useSnackbar } from "notistack";
+
+import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 import { type RootState } from "#/store/makeStore";
 import { caseSlice } from "#/store/reducers/caseReducer";
+import { selectIsEditable } from "#/store/reducers/projectReducer";
 import {
   ArgumentType,
   isArgumentTreeType,
@@ -27,6 +30,8 @@ function* iterateGraphStructures(state: RootState) {
 export const useArgumentsNodeData = () => {
   const store = useAppStore();
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const isEditable = useAppSelector(selectIsEditable);
 
   const trpcUtils = trpc.useUtils();
   const updateCase = trpc.project.updateCase.useMutation({
@@ -60,17 +65,29 @@ export const useArgumentsNodeData = () => {
       const args = state.testCase.args.entities;
       if (!projectId || !caseId || !args) continue;
 
-      await updateCase.mutateAsync({
-        projectId,
-        caseId,
-        args: {
-          ...args,
-          [treeName]: {
-            ...caseArg,
-            nodeData: dataMap,
-          },
-        },
-      });
+      if (isEditable) {
+        try {
+          await updateCase.mutateAsync({
+            projectId,
+            caseId,
+            args: {
+              ...args,
+              [treeName]: {
+                ...caseArg,
+                nodeData: dataMap,
+              },
+            },
+          });
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            enqueueSnackbar(error.message, {
+              variant: "error",
+            });
+          }
+          console.error("Failed to save graph node data on server", error);
+        }
+      }
+
       dispatch(
         caseSlice.actions.updateNodeData({
           ...caseArg,
