@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import shortUUID from "short-uuid";
 
@@ -23,6 +24,7 @@ import {
   selectCaseArguments,
   selectCaseIsEdited,
 } from "#/store/reducers/caseReducer";
+import { editorSlice } from "#/store/reducers/editorReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
 import {
   type ArgumentObject,
@@ -41,6 +43,7 @@ type ArgsEditorProps = {
 export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const { caseSlug } = usePlaygroundSlugs();
   const prevCaseSlug = usePrevious(caseSlug);
   const args = useAppSelector(selectCaseArguments);
@@ -65,6 +68,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           resetInfoState: caseSlug !== prevCaseSlug,
         }),
       );
+      dispatch(editorSlice.actions.resetViewOffset());
     } else {
       dispatch(caseSlice.actions.clear());
     }
@@ -82,19 +86,28 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
 
     let isCancelled = false;
     const timeoutId = setTimeout(async () => {
-      const data = await updateCase.mutateAsync({
-        projectId: selectedCase.data.projectId,
-        caseId: selectedCase.data.id,
-        args: args.reduce<ArgumentObjectMap>((acc, arg) => {
-          acc[arg.name] = arg;
-          return acc;
-        }, {}),
-      });
-      if (!isCancelled) {
-        trpcUtils.project.getCaseBySlug.setData(
-          { projectId: data.projectId, slug: data.slug },
-          data,
-        );
+      try {
+        const data = await updateCase.mutateAsync({
+          projectId: selectedCase.data.projectId,
+          caseId: selectedCase.data.id,
+          args: args.reduce<ArgumentObjectMap>((acc, arg) => {
+            acc[arg.name] = arg;
+            return acc;
+          }, {}),
+        });
+        if (!isCancelled) {
+          trpcUtils.project.getCaseBySlug.setData(
+            { projectId: data.projectId, slug: data.slug },
+            data,
+          );
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          enqueueSnackbar(error.message, {
+            variant: "error",
+          });
+        }
+        console.error("Failed to update case arguments: ", error);
       }
     }, 500);
 
