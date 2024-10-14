@@ -30,6 +30,7 @@ export const useBinaryTreePositioning = (
   ) => {
     if (visited.has(id)) return;
     visited.add(id);
+    if (id === treeData.rootId) return;
     const childData = treeData.nodes.entities[id];
     if (!childData) return;
 

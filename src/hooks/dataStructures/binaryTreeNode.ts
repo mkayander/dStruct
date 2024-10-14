@@ -146,15 +146,21 @@ export class BinaryTreeNode<
     const result = [];
     const queue: Queue<BinaryTreeNode<T> | null> = new Queue();
     queue.enqueue(this);
+    const circularRefs = new Map();
 
     const recordReads = globalThis.recordReads;
     globalThis.recordReads = false;
     while (!queue.isEmpty()) {
       const node = queue.dequeue();
+      if (circularRefs.has(node)) {
+        result.push(`Circular Ref to ${circularRefs.get(node)}`);
+        continue;
+      }
 
       result.push(node?.val ?? "null");
 
       if (node) {
+        circularRefs.set(node.left, node.val);
         queue.enqueue(node.left);
         queue.enqueue(node.right);
       }
