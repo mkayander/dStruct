@@ -68,7 +68,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
           resetInfoState: caseSlug !== prevCaseSlug,
         }),
       );
-      dispatch(editorSlice.actions.resetViewOffset());
+      dispatch(editorSlice.actions.reset());
     } else {
       dispatch(caseSlice.actions.clear());
     }

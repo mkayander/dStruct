@@ -56,6 +56,9 @@ export const editorSlice = createSlice({
       state.offsetY = 0;
       state.isPanning = false;
     },
+    reset: () => {
+      return initialState;
+    },
     startDrag: (state, action: PayloadAction<EditorState["nodeDragState"]>) => {
       state.nodeDragState = action.payload;
     },
