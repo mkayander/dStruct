@@ -13,12 +13,18 @@ export type NodeDragState = {
 
 type EditorState = {
   isEditingNodes: boolean;
-  dragState: NodeDragState | null;
+  isPanning: boolean;
+  offsetX: number;
+  offsetY: number;
+  nodeDragState: NodeDragState | null;
 };
 
 const initialState: EditorState = {
   isEditingNodes: false,
-  dragState: null,
+  isPanning: false,
+  offsetX: 0,
+  offsetY: 0,
+  nodeDragState: null,
 };
 
 export const editorSlice = createSlice({
@@ -35,11 +41,26 @@ export const editorSlice = createSlice({
     setIsEditing: (state, action: PayloadAction<boolean>) => {
       state.isEditingNodes = action.payload;
     },
-    startDrag: (state, action: PayloadAction<EditorState["dragState"]>) => {
-      state.dragState = action.payload;
+    setIsPanning: (state, action: PayloadAction<boolean>) => {
+      state.isPanning = action.payload;
+    },
+    panView: (
+      state,
+      action: PayloadAction<Pick<EditorState, "offsetX" | "offsetY">>,
+    ) => {
+      state.offsetX += action.payload.offsetX;
+      state.offsetY += action.payload.offsetY;
+    },
+    resetViewOffset: (state) => {
+      state.offsetX = 0;
+      state.offsetY = 0;
+      state.isPanning = false;
+    },
+    startDrag: (state, action: PayloadAction<EditorState["nodeDragState"]>) => {
+      state.nodeDragState = action.payload;
     },
     clear: (state) => {
-      state.dragState = null;
+      state.nodeDragState = null;
     },
   },
 });
@@ -52,6 +73,10 @@ export const editorReducer = editorSlice.reducer;
 /**
  * Selectors
  */
-export const selectDragState = (state: RootState) => state.editor.dragState;
+export const selectNodeDragState = (state: RootState) =>
+  state.editor.nodeDragState;
 export const selectIsEditingNodes = (state: RootState) =>
   state.editor.isEditingNodes;
+export const selectIsPanning = (state: RootState) => state.editor.isPanning;
+export const selectViewerOffsetX = (state: RootState) => state.editor.offsetX;
+export const selectViewerOffsetY = (state: RootState) => state.editor.offsetY;
