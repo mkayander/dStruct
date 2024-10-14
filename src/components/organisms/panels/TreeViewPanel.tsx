@@ -138,12 +138,14 @@ export const TreeViewPanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel
           value="structure"
-          useScroll={!isMobile}
           sx={{
             position: "relative",
             height: "100%",
             p: 0,
             flexGrow: 1,
+          }}
+          style={{
+            height: isMobile ? "70vh" : "100%",
           }}
           overlay={
             <>

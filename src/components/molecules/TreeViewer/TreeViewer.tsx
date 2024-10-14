@@ -1,8 +1,7 @@
 "use client";
 
 import { Box, Stack } from "@mui/material";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import ScrollContainer from "react-indiana-drag-scroll";
+import React, { useMemo } from "react";
 
 import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
 import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructureView";
@@ -18,16 +17,6 @@ import {
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
 import { ArgumentType } from "#/utils/argumentObject";
-
-const overlayStyles = {
-  content: "''",
-  height: "100%",
-  width: "32px",
-  position: "absolute",
-  pointerEvents: "none",
-  top: 0,
-  transition: "opacity .3s",
-};
 
 type TreeViewerProps = {
   playbackInterval: number;
@@ -47,30 +36,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
   useArgumentsParsing();
 
   useNodesRuntimeUpdates(playbackInterval, replayCount);
-
-  const scrollRef = useRef<HTMLElement>(null);
-  const [scrolledStart, setScrolledStart] = useState(true);
-  const [scrolledEnd, setScrolledEnd] = useState(true);
-
-  const handleScroll = () => {
-    const current = scrollRef.current;
-    if (!current) return;
-    const offset = 10;
-
-    setScrolledStart(current.scrollLeft <= offset);
-    setScrolledEnd(
-      current.scrollLeft + current.offsetWidth >= current.scrollWidth - offset,
-    );
-  };
-
-  useEffect(() => {
-    const handler = () => {
-      handleScroll();
-    };
-    window.addEventListener("resize", handler);
-
-    return () => window.removeEventListener("resize", handler);
-  }, []);
 
   const binaryTrees = useMemo(() => {
     let prevTree: TreeData | null = null;
@@ -154,76 +119,37 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       }}
       sx={{
         flexGrow: 1,
-        "&:before": {
-          ...overlayStyles,
-          left: 0,
-          background: "linear-gradient(90deg, black, transparent)",
-          opacity: scrolledStart ? 0 : 0.3,
-        },
-        "&:after": {
-          ...overlayStyles,
-          right: 0,
-          background: "linear-gradient(-90deg, black, transparent)",
-          opacity: scrolledEnd ? 0 : 0.3,
-        },
-        ".indiana-scroll-container": {
-          cursor: !scrolledStart || !scrolledEnd ? "grab" : "initial",
-        },
-        ".indiana-scroll-container--dragging": {
-          cursor: "grabbing",
-        },
       }}
     >
-      <ScrollContainer
-        innerRef={scrollRef}
-        vertical={!dragState}
-        horizontal={!dragState}
-        onScroll={handleScroll}
-        style={{ height: "100%", flexGrow: 1 }}
-      >
-        <Box
-          sx={{
-            height: "100%",
-            path: {
-              transition: "fill 0.3s",
-            },
-          }}
-        >
-          {arrayStructures && (
-            <Stack width="fit-content" minWidth="100%" m={3} spacing={2}>
-              {arrayStructures}
-              <br />
+      {arrayStructures?.length || treeStructures.linkedList.length ? (
+        <Stack width="fit-content" minWidth="100%" m={3} spacing={2}>
+          {arrayStructures}
+          <br />
 
-              {treeStructures.linkedList.map(({ name, treeState }) => (
-                <NodesView
-                  key={name}
-                  treeName={name}
-                  data={treeState}
-                  sx={{
-                    position: "relative",
-                    height: "42px",
-                  }}
-                />
-              ))}
-            </Stack>
-          )}
+          {treeStructures.linkedList.map(({ name, treeState }) => (
+            <NodesView
+              key={name}
+              treeName={name}
+              data={treeState}
+              sx={{
+                position: "relative",
+                height: "42px",
+              }}
+            />
+          ))}
+        </Stack>
+      ) : null}
 
-          {binaryTrees && <Box height="100%">{binaryTrees}</Box>}
+      {binaryTrees.length ? <Box height="100%">{binaryTrees}</Box> : null}
 
-          {treeStructures.graph && (
-            <Box height="100%" position="absolute" top="0">
-              {treeStructures.graph.map(({ name, treeState }) => (
-                <NodesView
-                  key={name}
-                  treeName={name}
-                  data={treeState}
-                  sx={{ zIndex: 50 }}
-                />
-              ))}
-            </Box>
-          )}
-        </Box>
-      </ScrollContainer>
+      {treeStructures.graph.map(({ name, treeState }) => (
+        <NodesView
+          key={name}
+          treeName={name}
+          data={treeState}
+          sx={{ top: 0, zIndex: 50 }}
+        />
+      ))}
     </Box>
   );
 };
