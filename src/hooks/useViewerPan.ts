@@ -24,8 +24,8 @@ export const useViewerPan = () => {
 
   const handlePanStart = (ev: React.MouseEvent) => {
     if (
-      ev.target instanceof HTMLDivElement &&
-      ev.target.classList.contains("os-scrollbar-handle")
+      ev.target instanceof HTMLElement &&
+      ev.target.id !== "tree-view-panel"
     ) {
       return;
     }

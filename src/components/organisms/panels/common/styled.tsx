@@ -60,6 +60,7 @@ type StyledTabPanelProps = TabPanelProps & {
   scrollViewportStyle?: React.CSSProperties;
   useScroll?: boolean;
   overlay?: React.ReactNode;
+  containerId?: string;
 };
 
 export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
@@ -67,6 +68,7 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
   scrollViewportStyle,
   useScroll = true,
   overlay,
+  containerId,
   sx,
   children,
   ...restProps
@@ -87,14 +89,20 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
           style={{ height: "100%", ...scrollContainerStyle }}
           viewportStyle={scrollViewportStyle}
         >
-          <Box sx={sxProps}>{children}</Box>
+          <Box id={containerId} sx={sxProps}>
+            {children}
+          </Box>
         </TabContentScrollContainer>
       </TabPanel>
     );
   }
 
   return (
-    <TabPanel sx={{ height: "fit-content", ...sxProps }} {...restProps}>
+    <TabPanel
+      id={containerId}
+      sx={{ height: "fit-content", ...sxProps }}
+      {...restProps}
+    >
       {children}
     </TabPanel>
   );

@@ -152,6 +152,7 @@ export const TreeViewPanel: React.FC = () => {
         </TabListWrapper>
         <StyledTabPanel
           value="structure"
+          containerId="tree-view-panel"
           sx={{
             position: "relative",
             height: "100%",
