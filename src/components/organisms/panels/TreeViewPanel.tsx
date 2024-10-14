@@ -92,7 +92,6 @@ export const TreeViewPanel: React.FC = () => {
     <PanelWrapper
       sx={{
         height: "100%",
-        minHeight: isMobile ? "70vh" : "",
       }}
       onKeyDown={handleKeyDown}
     >
