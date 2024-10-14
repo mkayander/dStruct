@@ -19,6 +19,7 @@ export const GraphEdge: React.FC<GraphEdgeProps> = ({
   sourceId,
   targetId,
   label,
+  isDirected,
 }) => {
   const theme = useTheme();
   const source = useAppSelector(selectNodeDataById(treeName, sourceId));
@@ -70,6 +71,21 @@ export const GraphEdge: React.FC<GraphEdgeProps> = ({
       }}
     >
       {label ? <span>{label}</span> : null}
+      {isDirected ? (
+        <Box
+          sx={{
+            position: "absolute",
+            width: 0,
+            height: 0,
+            borderLeft: "8px solid transparent",
+            borderRight: "8px solid transparent",
+            borderTop: `8px solid ${targetColor}`,
+            top: "50%",
+            right: 16,
+            transform: "translateY(-50%) rotate(-90deg) scaleY(2)",
+          }}
+        />
+      ) : null}
     </Box>
   );
 };
