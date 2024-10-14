@@ -1,4 +1,4 @@
-import { Replay, Settings } from "@mui/icons-material";
+import { FilterCenterFocus, Replay } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
   alpha,
@@ -26,6 +26,7 @@ import {
   useI18nContext,
   usePlayerControls,
   useSearchParam,
+  useViewerPan,
 } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -33,6 +34,9 @@ import { selectCallstackIsReady } from "#/store/reducers/callstackReducer";
 import {
   editorSlice,
   selectIsEditingNodes,
+  selectIsPanning,
+  selectViewerOffsetX,
+  selectViewerOffsetY,
 } from "#/store/reducers/editorReducer";
 import { resetStructuresState } from "#/utils";
 
@@ -46,10 +50,6 @@ export const TreeViewPanel: React.FC = () => {
   const { LL } = useI18nContext();
   const theme = useTheme();
 
-  const [xOffset, setXOffset] = useState(0);
-  const [yOffset, setYOffset] = useState(0);
-  const [dragEvent, setDragEvent] = useState<React.MouseEvent | null>(null);
-
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
     defaultValue: "structure",
     validate: isValidTabName,
@@ -59,6 +59,12 @@ export const TreeViewPanel: React.FC = () => {
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const isMobile = useMobileLayout();
+  const isPanning = useAppSelector(selectIsPanning);
+  const xOffset = useAppSelector(selectViewerOffsetX);
+  const yOffset = useAppSelector(selectViewerOffsetY);
+
+  const { handlePanStart, handlePanEnd, handlePanReset, handleMouseMove } =
+    useViewerPan();
 
   const {
     replayCount,
@@ -87,6 +93,7 @@ export const TreeViewPanel: React.FC = () => {
   };
 
   const isReady = isCallstackReady && !isEditingNodes;
+  const isViewCentered = xOffset === 0 && yOffset === 0;
 
   return (
     <PanelWrapper
@@ -104,8 +111,12 @@ export const TreeViewPanel: React.FC = () => {
             <Tab label={"Benchmark"} value="benchmark" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
-            <IconButton>
-              <Settings fontSize="small" />
+            <IconButton
+              title="Reset view pan"
+              disabled={isViewCentered}
+              onClick={handlePanReset}
+            >
+              <FilterCenterFocus fontSize="small" />
             </IconButton>
             <Button
               title={LL.RESET_DATA_STRUCTURES()}
@@ -146,26 +157,17 @@ export const TreeViewPanel: React.FC = () => {
             height: "100%",
             p: 0,
             flexGrow: 1,
-            cursor: dragEvent ? "grabbing" : "grab",
+            cursor: isPanning ? "grabbing" : "grab",
           }}
           style={{
             height: isMobile ? "70vh" : "100%",
           }}
           onMouseDown={(ev: React.MouseEvent) => {
-            setDragEvent(ev);
+            handlePanStart(ev);
           }}
-          onMouseUp={() => {
-            setDragEvent(null);
-          }}
-          onMouseMove={(ev: React.MouseEvent) => {
-            if (dragEvent) {
-              setXOffset((prev) => prev + ev.movementX);
-              setYOffset((prev) => prev + ev.movementY);
-            }
-          }}
-          onMouseLeave={() => {
-            setDragEvent(null);
-          }}
+          onMouseUp={handlePanEnd}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handlePanEnd}
           overlay={
             <>
               <Box
