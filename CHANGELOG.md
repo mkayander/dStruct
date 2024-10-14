@@ -1,3 +1,27 @@
+# [1.316.0](https://github.com/mkayander/dStruct/compare/v1.315.0...v1.316.0) (2024-10-14)
+
+
+### Bug Fixes
+
+* Added request error handling ([6b62ede](https://github.com/mkayander/dStruct/commit/6b62edeb9ec524a475d82325e953a92df7ba7f87))
+* Avoid getting into infinite loops with binary trees ([fccc4a9](https://github.com/mkayander/dStruct/commit/fccc4a90ec941f3eba59a39592ae1e8a7fb56688))
+* Check if case is editable ([6e1282f](https://github.com/mkayander/dStruct/commit/6e1282f382ebc866640f138faf3812832fccef7b))
+* Fix backdrop filter rendering issues ([8a9323d](https://github.com/mkayander/dStruct/commit/8a9323d8c671cec833a2d73688c4d7057bdfe395))
+* Fix circular ref check ([9f901fa](https://github.com/mkayander/dStruct/commit/9f901fad051f15248c6a36c2a9dd3186075cf905))
+* Fix graph container position ([f822ebe](https://github.com/mkayander/dStruct/commit/f822ebe08e37f5dff3aead4a73e5219a3f811cb2))
+* Removed unneeded line ([b6f96d6](https://github.com/mkayander/dStruct/commit/b6f96d66e5ef4c5daac5178b8c668acc34de1be8))
+* Renamed variables ([3961ae3](https://github.com/mkayander/dStruct/commit/3961ae3f0bb9659fb92db8f04426991a4415b26d))
+* Reset global editor state on case change ([03fb632](https://github.com/mkayander/dStruct/commit/03fb6320a555c55e178e5f83bbc415ade220075e))
+* Use new utils function name ([c40339f](https://github.com/mkayander/dStruct/commit/c40339f02ede3f05271858f94a3d5e16f568e8d7))
+
+
+### Features
+
+* Added a global viewer pan management ([a38b9f7](https://github.com/mkayander/dStruct/commit/a38b9f78eb34c1f708807322c2957cfbb4be6c1e))
+* Implemented custom viewer pan logic ([66f4f88](https://github.com/mkayander/dStruct/commit/66f4f88bc2d60acc64c68862cd64122fa12dddd2))
+* Remove indiana scroll ([43d8d24](https://github.com/mkayander/dStruct/commit/43d8d24683301e7ec1a573b2b5ee52a02c21183c))
+* Use new panning logic ([3f17638](https://github.com/mkayander/dStruct/commit/3f1763890b87a5bd492a827943aaa65fc71471aa))
+
 # [1.315.0](https://github.com/mkayander/dStruct/compare/v1.314.0...v1.315.0) (2024-10-13)
 
 
