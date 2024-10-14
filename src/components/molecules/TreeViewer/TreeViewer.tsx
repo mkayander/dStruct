@@ -9,7 +9,10 @@ import { MatrixStructureView } from "#/components/molecules/TreeViewer/MatrixStr
 import { NodesView } from "#/components/molecules/TreeViewer/NodesView";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { editorSlice, selectDragState } from "#/store/reducers/editorReducer";
+import {
+  editorSlice,
+  selectNodeDragState,
+} from "#/store/reducers/editorReducer";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
   type TreeData,
@@ -31,7 +34,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   const arrayState = useAppSelector(arrayDataSelector);
   const treeStructures = useAppSelector(treeDataStructuresSelector);
-  const dragState = useAppSelector(selectDragState);
+  const nodeDragState = useAppSelector(selectNodeDragState);
 
   useArgumentsParsing();
 
@@ -101,17 +104,17 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       position="relative"
       width="100%"
       onMouseLeave={() => {
-        if (dragState) dispatch(editorSlice.actions.clear());
+        if (nodeDragState) dispatch(editorSlice.actions.clear());
       }}
       onMouseUp={() => {
-        if (dragState) dispatch(editorSlice.actions.clear());
+        if (nodeDragState) dispatch(editorSlice.actions.clear());
       }}
       onMouseMove={(ev: React.MouseEvent) => {
-        if (!dragState) return;
+        if (!nodeDragState) return;
 
         dispatch(
           treeNodeSlice.actions.dragNode({
-            ...dragState,
+            ...nodeDragState,
             clientX: ev.clientX,
             clientY: ev.clientY,
           }),
