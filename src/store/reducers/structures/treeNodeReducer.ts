@@ -74,11 +74,12 @@ const deleteTreeNode = (
   treeName: string,
   treeState: TreeData,
   id: string,
+  cleanupState = true,
 ) => {
   if (!(id in treeState.nodes.entities)) return;
 
   const count = treeState.nodes.ids.length;
-  if (count === 1) {
+  if (count === 1 && cleanupState) {
     delete state[treeName];
   } else {
     treeNodeDataAdapter.removeOne(treeState.nodes, id);
@@ -165,7 +166,7 @@ export const treeNodeSlice = createSlice({
           childData = childTreeState.nodes.entities[childId];
           if (!childData) return;
 
-          deleteTreeNode(state, childTreeName, childTreeState, childId);
+          deleteTreeNode(state, childTreeName, childTreeState, childId, false);
         });
 
         runStateActionByName(state, action.payload.name, (treeState) => {
@@ -188,10 +189,51 @@ export const treeNodeSlice = createSlice({
         if (!node) return;
 
         const childrenIds = [...node.childrenIds];
+
+        if (childrenIds[index]) {
+          edgeDataAdapter.removeOne(
+            treeState.edges,
+            getEdgeId(id, childrenIds[index]),
+          );
+        }
+
         childrenIds[index] = childId;
+        if (childId) {
+          edgeDataAdapter.addOne(treeState.edges, {
+            id: getEdgeId(id, childId),
+            sourceId: id,
+            targetId: childId,
+            isDirected: false,
+          });
+        }
+
         treeNodeDataAdapter.updateOne(treeState.nodes, {
           id,
           changes: { childrenIds },
+        });
+      });
+    },
+    revertChildId: (
+      state,
+      action: NamedPayload<{
+        id: string;
+        childId?: string | null;
+        childTreeName?: string;
+      }>,
+    ) => {
+      const { id, childId, childTreeName } = action.payload.data;
+      if (!childId || !childTreeName || action.payload.name === childTreeName)
+        return;
+
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const node = treeNodeDataSelector.selectById(treeState.nodes, id);
+        const childData = treeState.nodes.entities[childId];
+        if (!node || !childData) return;
+
+        deleteTreeNode(state, action.payload.name, treeState, childData.id);
+
+        runStateActionByName(state, childTreeName, (childTreeState) => {
+          treeNodeDataAdapter.addOne(childTreeState.nodes, childData);
         });
       });
     },

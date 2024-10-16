@@ -136,17 +136,21 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           {arrayStructures}
           <br />
 
-          {treeStructures.linkedList.map(({ name, treeState }) => (
-            <NodesView
-              key={name}
-              treeName={name}
-              data={treeState}
-              sx={{
-                position: "relative",
-                height: "42px",
-              }}
-            />
-          ))}
+          {treeStructures.linkedList.map(({ name, treeState }) => {
+            if (!treeState.nodes.ids.length) return null;
+
+            return (
+              <NodesView
+                key={name}
+                treeName={name}
+                data={treeState}
+                sx={{
+                  position: "relative",
+                  height: "42px",
+                }}
+              />
+            );
+          })}
         </Stack>
       ) : null}
     </Box>

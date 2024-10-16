@@ -295,6 +295,16 @@ export const useNodesRuntimeUpdates = (
         case "setNextNode":
         case "setLeftChild":
           if (frame.prevArgs) {
+            if ("revertChildId" in slice.actions)
+              dispatch(
+                slice.actions.revertChildId({
+                  name: treeName,
+                  data: {
+                    id: frame.nodeId,
+                    ...frame.args,
+                  },
+                }),
+              );
             applyFrame({
               ...frame,
               name: "setLeftChild",
