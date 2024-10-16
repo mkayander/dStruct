@@ -56,7 +56,7 @@ export const useArgumentsNodeData = () => {
         if (!node) continue;
 
         const { x, y } = node;
-        if (!node.value) continue;
+        if (node.value === undefined) continue;
         dataMap[node.value] = { x, y };
       }
 
