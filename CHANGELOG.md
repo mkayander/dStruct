@@ -1,3 +1,12 @@
+## [1.320.1](https://github.com/mkayander/dStruct/compare/v1.320.0...v1.320.1) (2024-10-16)
+
+
+### Bug Fixes
+
+* Fix value nullability check ([48c8fc2](https://github.com/mkayander/dStruct/commit/48c8fc295d176f7e2655b87eff943c43d0dc43cf))
+* Handle reverting of trees combination ([d98222b](https://github.com/mkayander/dStruct/commit/d98222b05538352f45febf8d2c26448f8e7c1352))
+* Update linked list child positions ([f5ef430](https://github.com/mkayander/dStruct/commit/f5ef430957d46b1b0ec028bb1ad3da9913844011))
+
 # [1.320.0](https://github.com/mkayander/dStruct/compare/v1.319.0...v1.320.0) (2024-10-14)
 
 
