@@ -364,20 +364,6 @@
       "isExample": false,
       "isPublic": true
     },
-    "clgs9hrkw0001ld08vet38wu3": {
-      "id": "clgs9hrkw0001ld08vet38wu3",
-      "createdAt": "2023-04-22T17:36:01.760Z",
-      "updatedAt": "2023-04-22T17:36:01.760Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Minimum Insertion Steps to Make a String Palindrome",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": null,
-      "lcLink": "",
-      "slug": "minimum-insertion-steps-to-make-a-string-palindrome",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
     "clgtnpe3s0001kz08u18p5guj": {
       "id": "clgtnpe3s0001kz08u18p5guj",
       "createdAt": "2023-04-23T17:01:38.345Z",
@@ -938,20 +924,6 @@
       "isExample": false,
       "isPublic": true
     },
-    "cljlim0dk0001l508mlevifak": {
-      "id": "cljlim0dk0001l508mlevifak",
-      "createdAt": "2023-07-02T14:16:00.104Z",
-      "updatedAt": "2023-07-02T14:16:00.104Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Maximum Number of Achievable Transfer Requests",
-      "category": "GRAPH",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/description/",
-      "slug": "maximum-number-of-achievable-transfer-requests",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
     "cljq523120001lf087us464xs": {
       "id": "cljq523120001lf087us464xs",
       "createdAt": "2023-07-05T19:55:26.294Z",
@@ -1074,20 +1046,6 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/",
       "slug": "evaluate-reverse-polish-notation",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clk5wag700001l908rwyyt2hl": {
-      "id": "clk5wag700001l908rwyyt2hl",
-      "createdAt": "2023-07-16T20:34:18.876Z",
-      "updatedAt": "2023-07-16T20:34:18.876Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Lowest Common Ancestor of a Binary Tree",
-      "category": "BINARY_TREE",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/",
-      "slug": "lowest-common-ancestor-of-a-binary-tree",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -1470,20 +1428,6 @@
       "isExample": false,
       "isPublic": true
     },
-    "cllyzy4ya0005ol0h95ej0d6s": {
-      "id": "cllyzy4ya0005ol0h95ej0d6s",
-      "createdAt": "2023-08-31T10:01:44.339Z",
-      "updatedAt": "2023-08-31T10:01:44.339Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Minimum Number of Taps to Open to Water a Garden",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/",
-      "slug": "minimum-number-of-taps-to-open-to-water-a-garden",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
     "cllzchyp40001vy0hfv69zeue": {
       "id": "cllzchyp40001vy0hfv69zeue",
       "createdAt": "2023-08-31T15:53:04.745Z",
@@ -1578,272 +1522,6 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/reverse-linked-list-ii",
       "slug": "reverse-linked-list-ii",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmau5u2j0001mn0fawrkm7pi": {
-      "id": "clmau5u2j0001mn0fawrkm7pi",
-      "createdAt": "2023-09-08T16:52:59.899Z",
-      "updatedAt": "2023-09-08T16:52:59.899Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Pascal's Triangle",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "EASY",
-      "lcLink": "https://leetcode.com/problems/pascals-triangle",
-      "slug": "pascals-triangle",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmbzodwo0001qy0hi0hj5jpx": {
-      "id": "clmbzodwo0001qy0hi0hj5jpx",
-      "createdAt": "2023-09-09T12:15:09.672Z",
-      "updatedAt": "2023-09-09T12:15:09.672Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Combination Sum IV",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/combination-sum-iv",
-      "slug": "combination-sum-iv",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmd7u1xk0001nr0hj7na8djt": {
-      "id": "clmd7u1xk0001nr0hj7na8djt",
-      "createdAt": "2023-09-10T08:51:17.192Z",
-      "updatedAt": "2023-09-10T08:51:17.192Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Count All Valid Pickup and Delivery Options",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options",
-      "slug": "count-all-valid-pickup-and-delivery-options",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmeqp9bx0001lu0h2fta3yi2": {
-      "id": "clmeqp9bx0001lu0h2fta3yi2",
-      "createdAt": "2023-09-11T10:27:12.381Z",
-      "updatedAt": "2023-09-11T10:27:12.381Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Group the People Given the Group Size They Belong To",
-      "category": "ARRAY",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to",
-      "slug": "group-the-people-given-the-group-size-they-belong-to",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmg97mk40001mf0h0dpjrgaf": {
-      "id": "clmg97mk40001mf0h0dpjrgaf",
-      "createdAt": "2023-09-12T11:53:08.597Z",
-      "updatedAt": "2023-09-12T11:53:08.597Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Construct Quad Tree",
-      "category": "GRID",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/construct-quad-tree",
-      "slug": "construct-quad-tree",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmggsmiw0001p90hlngzmjcs": {
-      "id": "clmggsmiw0001p90hlngzmjcs",
-      "createdAt": "2023-09-12T15:25:25.640Z",
-      "updatedAt": "2023-09-12T15:25:25.640Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Minimum Deletions to Make Character Frequencies Unique",
-      "category": "ARRAY",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique",
-      "slug": "minimum-deletions-to-make-character-frequencies-unique",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmi23u2d0001o80fgeaokmaj": {
-      "id": "clmi23u2d0001o80fgeaokmaj",
-      "createdAt": "2023-09-13T18:09:46.741Z",
-      "updatedAt": "2023-09-13T18:09:46.741Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Candy",
-      "category": "ARRAY",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/candy",
-      "slug": "candy",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmjhpa820001qc0fzt48t50z": {
-      "id": "clmjhpa820001qc0fzt48t50z",
-      "createdAt": "2023-09-14T18:14:07.874Z",
-      "updatedAt": "2023-09-14T18:14:07.874Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Reconstruct Itinerary",
-      "category": "GRAPH",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/reconstruct-itinerary",
-      "slug": "reconstruct-itinerary",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmkrrtyq0001pb0hfd15m7d0": {
-      "id": "clmkrrtyq0001pb0hfd15m7d0",
-      "createdAt": "2023-09-15T15:43:49.106Z",
-      "updatedAt": "2023-09-15T15:43:49.106Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Min Cost to Connect All Points",
-      "category": "GRAPH",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/min-cost-to-connect-all-points",
-      "slug": "min-cost-to-connect-all-points",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmnbl22t0001lc0h5unud36e": {
-      "id": "clmnbl22t0001lc0h5unud36e",
-      "createdAt": "2023-09-17T10:33:57.701Z",
-      "updatedAt": "2023-09-17T10:33:57.701Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Shortest Path Visiting All Nodes",
-      "category": "GRAPH",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/shortest-path-visiting-all-nodes",
-      "slug": "shortest-path-visiting-all-nodes",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmp9bbo30001qq0hj5r98g9y": {
-      "id": "clmp9bbo30001qq0hj5r98g9y",
-      "createdAt": "2023-09-18T19:05:56.690Z",
-      "updatedAt": "2023-09-18T19:05:56.690Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "The K Weakest Rows in a Matrix",
-      "category": "BINARY_SEARCH",
-      "difficulty": "EASY",
-      "lcLink": "https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix",
-      "slug": "the-k-weakest-rows-in-a-matrix",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmrki19m0001p70hacs83im0": {
-      "id": "clmrki19m0001p70hacs83im0",
-      "createdAt": "2023-09-20T09:54:37.930Z",
-      "updatedAt": "2023-09-20T09:54:37.930Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Minimum Operations to Reduce X to Zero",
-      "category": "SLIDING_WINDOW",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero",
-      "slug": "minimum-operations-to-reduce-x-to-zero",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmt1xwdg0001s40hdbc47fj2": {
-      "id": "clmt1xwdg0001s40hdbc47fj2",
-      "createdAt": "2023-09-21T10:50:37.733Z",
-      "updatedAt": "2023-09-21T10:50:37.733Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Median of Two Sorted Arrays",
-      "category": "BINARY_SEARCH",
-      "difficulty": "HARD",
-      "lcLink": "https://leetcode.com/problems/median-of-two-sorted-arrays",
-      "slug": "median-of-two-sorted-arrays",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmt3czb30001n90htcfcue0g": {
-      "id": "clmt3czb30001n90htcfcue0g",
-      "createdAt": "2023-09-21T11:30:20.992Z",
-      "updatedAt": "2023-09-21T11:30:20.992Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Parallel Courses",
-      "category": "GRAPH",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/parallel-courses",
-      "slug": "parallel-courses",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmuzuot40003pp0fi89e3ekk": {
-      "id": "clmuzuot40003pp0fi89e3ekk",
-      "createdAt": "2023-09-22T19:27:41.080Z",
-      "updatedAt": "2023-09-22T19:27:41.080Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Is Subsequence",
-      "category": "ARRAY",
-      "difficulty": "EASY",
-      "lcLink": "https://leetcode.com/problems/is-subsequence",
-      "slug": "is-subsequence",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmw8rxet0001ov0hhtofpsh1": {
-      "id": "clmw8rxet0001ov0hhtofpsh1",
-      "createdAt": "2023-09-23T16:25:14.981Z",
-      "updatedAt": "2023-09-23T16:25:14.981Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Longest String Chain",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/longest-string-chain",
-      "slug": "longest-string-chain",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmxdpaho0001ob0gu2p4pi6b": {
-      "id": "clmxdpaho0001ob0gu2p4pi6b",
-      "createdAt": "2023-09-24T11:30:56.220Z",
-      "updatedAt": "2023-09-24T11:30:56.220Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Champagne Tower",
-      "category": "DYNAMIC_PROGRAMMING",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/champagne-tower",
-      "slug": "champagne-tower",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "clmz95u7b0001o60hnq81ctrx": {
-      "id": "clmz95u7b0001o60hnq81ctrx",
-      "createdAt": "2023-09-25T18:59:22.535Z",
-      "updatedAt": "2023-09-25T18:59:22.535Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Find the Difference",
-      "category": "ARRAY",
-      "difficulty": "EASY",
-      "lcLink": "https://leetcode.com/problems/find-the-difference",
-      "slug": "find-the-difference",
-      "description": "",
-      "isExample": false,
-      "isPublic": true
-    },
-    "cln0igalv0001p60hr0ds55ch": {
-      "id": "cln0igalv0001p60hr0ds55ch",
-      "createdAt": "2023-09-26T16:07:13.075Z",
-      "updatedAt": "2023-09-26T16:07:13.075Z",
-      "userId": "clamcsslr0000oj2rm8884xyg",
-      "title": "Remove Duplicate Letters",
-      "category": "STACK",
-      "difficulty": "MEDIUM",
-      "lcLink": "https://leetcode.com/problems/remove-duplicate-letters",
-      "slug": "remove-duplicate-letters",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -2082,6 +1760,244 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/3sum",
       "slug": "3sum",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmbzodwo0001qy0hi0hj5jpx": {
+      "id": "clmbzodwo0001qy0hi0hj5jpx",
+      "createdAt": "2023-09-09T12:15:09.672Z",
+      "updatedAt": "2023-09-09T12:15:09.672Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Combination Sum IV",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/combination-sum-iv",
+      "slug": "combination-sum-iv",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmeqp9bx0001lu0h2fta3yi2": {
+      "id": "clmeqp9bx0001lu0h2fta3yi2",
+      "createdAt": "2023-09-11T10:27:12.381Z",
+      "updatedAt": "2023-09-11T10:27:12.381Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Group the People Given the Group Size They Belong To",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to",
+      "slug": "group-the-people-given-the-group-size-they-belong-to",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmg97mk40001mf0h0dpjrgaf": {
+      "id": "clmg97mk40001mf0h0dpjrgaf",
+      "createdAt": "2023-09-12T11:53:08.597Z",
+      "updatedAt": "2023-09-12T11:53:08.597Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Construct Quad Tree",
+      "category": "GRID",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/construct-quad-tree",
+      "slug": "construct-quad-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmggsmiw0001p90hlngzmjcs": {
+      "id": "clmggsmiw0001p90hlngzmjcs",
+      "createdAt": "2023-09-12T15:25:25.640Z",
+      "updatedAt": "2023-09-12T15:25:25.640Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Deletions to Make Character Frequencies Unique",
+      "category": "ARRAY",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique",
+      "slug": "minimum-deletions-to-make-character-frequencies-unique",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmi23u2d0001o80fgeaokmaj": {
+      "id": "clmi23u2d0001o80fgeaokmaj",
+      "createdAt": "2023-09-13T18:09:46.741Z",
+      "updatedAt": "2023-09-13T18:09:46.741Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Candy",
+      "category": "ARRAY",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/candy",
+      "slug": "candy",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmjhpa820001qc0fzt48t50z": {
+      "id": "clmjhpa820001qc0fzt48t50z",
+      "createdAt": "2023-09-14T18:14:07.874Z",
+      "updatedAt": "2023-09-14T18:14:07.874Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Reconstruct Itinerary",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/reconstruct-itinerary",
+      "slug": "reconstruct-itinerary",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmkrrtyq0001pb0hfd15m7d0": {
+      "id": "clmkrrtyq0001pb0hfd15m7d0",
+      "createdAt": "2023-09-15T15:43:49.106Z",
+      "updatedAt": "2023-09-15T15:43:49.106Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Min Cost to Connect All Points",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/min-cost-to-connect-all-points",
+      "slug": "min-cost-to-connect-all-points",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmnbl22t0001lc0h5unud36e": {
+      "id": "clmnbl22t0001lc0h5unud36e",
+      "createdAt": "2023-09-17T10:33:57.701Z",
+      "updatedAt": "2023-09-17T10:33:57.701Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Shortest Path Visiting All Nodes",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/shortest-path-visiting-all-nodes",
+      "slug": "shortest-path-visiting-all-nodes",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmp9bbo30001qq0hj5r98g9y": {
+      "id": "clmp9bbo30001qq0hj5r98g9y",
+      "createdAt": "2023-09-18T19:05:56.690Z",
+      "updatedAt": "2023-09-18T19:05:56.690Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "The K Weakest Rows in a Matrix",
+      "category": "BINARY_SEARCH",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix",
+      "slug": "the-k-weakest-rows-in-a-matrix",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmrki19m0001p70hacs83im0": {
+      "id": "clmrki19m0001p70hacs83im0",
+      "createdAt": "2023-09-20T09:54:37.930Z",
+      "updatedAt": "2023-09-20T09:54:37.930Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Operations to Reduce X to Zero",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero",
+      "slug": "minimum-operations-to-reduce-x-to-zero",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmt1xwdg0001s40hdbc47fj2": {
+      "id": "clmt1xwdg0001s40hdbc47fj2",
+      "createdAt": "2023-09-21T10:50:37.733Z",
+      "updatedAt": "2023-09-21T10:50:37.733Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Median of Two Sorted Arrays",
+      "category": "BINARY_SEARCH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/median-of-two-sorted-arrays",
+      "slug": "median-of-two-sorted-arrays",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmt3czb30001n90htcfcue0g": {
+      "id": "clmt3czb30001n90htcfcue0g",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2023-09-21T11:30:20.992Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Parallel Courses",
+      "category": "GRAPH",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/parallel-courses",
+      "slug": "parallel-courses",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmuzuot40003pp0fi89e3ekk": {
+      "id": "clmuzuot40003pp0fi89e3ekk",
+      "createdAt": "2023-09-22T19:27:41.080Z",
+      "updatedAt": "2023-09-22T19:27:41.080Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Is Subsequence",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/is-subsequence",
+      "slug": "is-subsequence",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmw8rxet0001ov0hhtofpsh1": {
+      "id": "clmw8rxet0001ov0hhtofpsh1",
+      "createdAt": "2023-09-23T16:25:14.981Z",
+      "updatedAt": "2023-09-23T16:25:14.981Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest String Chain",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-string-chain",
+      "slug": "longest-string-chain",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmxdpaho0001ob0gu2p4pi6b": {
+      "id": "clmxdpaho0001ob0gu2p4pi6b",
+      "createdAt": "2023-09-24T11:30:56.220Z",
+      "updatedAt": "2023-09-24T11:30:56.220Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Champagne Tower",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/champagne-tower",
+      "slug": "champagne-tower",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmz95u7b0001o60hnq81ctrx": {
+      "id": "clmz95u7b0001o60hnq81ctrx",
+      "createdAt": "2023-09-25T18:59:22.535Z",
+      "updatedAt": "2023-09-25T18:59:22.535Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Find the Difference",
+      "category": "ARRAY",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/find-the-difference",
+      "slug": "find-the-difference",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cln0igalv0001p60hr0ds55ch": {
+      "id": "cln0igalv0001p60hr0ds55ch",
+      "createdAt": "2023-09-26T16:07:13.075Z",
+      "updatedAt": "2023-09-26T16:07:13.075Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Remove Duplicate Letters",
+      "category": "STACK",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/remove-duplicate-letters",
+      "slug": "remove-duplicate-letters",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -5302,6 +5218,132 @@
       "difficulty": "MEDIUM",
       "lcLink": "https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair",
       "slug": "the-number-of-the-smallest-unoccupied-chair",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cm260z5u10001un7184fyefa9": {
+      "id": "cm260z5u10001un7184fyefa9",
+      "createdAt": "2024-10-12T10:40:12.359Z",
+      "updatedAt": "2024-10-12T10:40:12.359Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Trapping Rain Water II",
+      "category": "HEAP",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/trapping-rain-water-ii",
+      "slug": "trapping-rain-water-ii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cm268hmuq0001f9mrea49uazi": {
+      "id": "cm268hmuq0001f9mrea49uazi",
+      "createdAt": "2024-10-12T14:10:31.537Z",
+      "updatedAt": "2024-10-12T14:10:31.537Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Contains Duplicate III",
+      "category": "SLIDING_WINDOW",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/contains-duplicate-iii",
+      "slug": "contains-duplicate-iii",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cm2c26uyy0001yj4epu85od6n": {
+      "id": "cm2c26uyy0001yj4epu85od6n",
+      "createdAt": "2024-10-16T16:00:48.201Z",
+      "updatedAt": "2024-10-16T16:00:48.201Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Longest Happy String",
+      "category": "HEAP",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/longest-happy-string",
+      "slug": "longest-happy-string",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clgs9hrkw0001ld08vet38wu3": {
+      "id": "clgs9hrkw0001ld08vet38wu3",
+      "createdAt": "2023-04-22T17:36:01.760Z",
+      "updatedAt": "2023-04-22T17:36:01.760Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Insertion Steps to Make a String Palindrome",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": null,
+      "lcLink": "",
+      "slug": "minimum-insertion-steps-to-make-a-string-palindrome",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cljlim0dk0001l508mlevifak": {
+      "id": "cljlim0dk0001l508mlevifak",
+      "createdAt": "2023-07-02T14:16:00.104Z",
+      "updatedAt": "2023-07-02T14:16:00.104Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Maximum Number of Achievable Transfer Requests",
+      "category": "GRAPH",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/description/",
+      "slug": "maximum-number-of-achievable-transfer-requests",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clk5wag700001l908rwyyt2hl": {
+      "id": "clk5wag700001l908rwyyt2hl",
+      "createdAt": "2023-07-16T20:34:18.876Z",
+      "updatedAt": "2023-07-16T20:34:18.876Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Lowest Common Ancestor of a Binary Tree",
+      "category": "BINARY_TREE",
+      "difficulty": "MEDIUM",
+      "lcLink": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/",
+      "slug": "lowest-common-ancestor-of-a-binary-tree",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "cllyzy4ya0005ol0h95ej0d6s": {
+      "id": "cllyzy4ya0005ol0h95ej0d6s",
+      "createdAt": "2023-08-31T10:01:44.339Z",
+      "updatedAt": "2023-08-31T10:01:44.339Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Minimum Number of Taps to Open to Water a Garden",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/",
+      "slug": "minimum-number-of-taps-to-open-to-water-a-garden",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmau5u2j0001mn0fawrkm7pi": {
+      "id": "clmau5u2j0001mn0fawrkm7pi",
+      "createdAt": "2023-09-08T16:52:59.899Z",
+      "updatedAt": "2023-09-08T16:52:59.899Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Pascal's Triangle",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "EASY",
+      "lcLink": "https://leetcode.com/problems/pascals-triangle",
+      "slug": "pascals-triangle",
+      "description": "",
+      "isExample": false,
+      "isPublic": true
+    },
+    "clmd7u1xk0001nr0hj7na8djt": {
+      "id": "clmd7u1xk0001nr0hj7na8djt",
+      "createdAt": "2023-09-10T08:51:17.192Z",
+      "updatedAt": "2023-09-10T08:51:17.192Z",
+      "userId": "clamcsslr0000oj2rm8884xyg",
+      "title": "Count All Valid Pickup and Delivery Options",
+      "category": "DYNAMIC_PROGRAMMING",
+      "difficulty": "HARD",
+      "lcLink": "https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options",
+      "slug": "count-all-valid-pickup-and-delivery-options",
       "description": "",
       "isExample": false,
       "isPublic": true
@@ -12006,31 +12048,6 @@
       },
       "description": null
     },
-    "clmt3czb30002n90hiczuyugb": {
-      "id": "clmt3czb30002n90hiczuyugb",
-      "createdAt": "2023-09-21T11:30:20.992Z",
-      "updatedAt": "2023-09-21T11:37:20.843Z",
-      "projectId": "clmt3czb30001n90htcfcue0g",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "fzEdb2okGjoXdJQXCiiaaw": {
-          "name": "fzEdb2okGjoXdJQXCiiaaw",
-          "type": "number",
-          "input": "3",
-          "order": 0
-        },
-        "v9ALvgfTWyXRVvasiGtgnY": {
-          "name": "v9ALvgfTWyXRVvasiGtgnY",
-          "type": "array",
-          "input": "[[1,3],[2,3]]",
-          "order": 1
-        }
-      },
-      "description": null
-    },
     "clmuzuot40004pp0fznksdlfq": {
       "id": "clmuzuot40004pp0fznksdlfq",
       "createdAt": "2023-09-22T19:27:41.080Z",
@@ -16406,92 +16423,6 @@
       },
       "description": null
     },
-    "clsyiyjl80002ad9jovrh1f3a": {
-      "id": "clsyiyjl80002ad9jovrh1f3a",
-      "createdAt": "2024-02-23T10:44:06.189Z",
-      "updatedAt": "2024-02-23T10:45:04.672Z",
-      "projectId": "clsyiyjl80001ad9jtz7pzsws",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "4j9EF1afq7XKKpCXMcbj6j": {
-          "name": "4j9EF1afq7XKKpCXMcbj6j",
-          "type": "number",
-          "input": "0",
-          "order": 2
-        },
-        "5QY4niqsELA6woGiFSHZHA": {
-          "name": "5QY4niqsELA6woGiFSHZHA",
-          "type": "array",
-          "input": "[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]",
-          "order": 1
-        },
-        "jqN54ShkZNE4u4UnsaUpVP": {
-          "name": "jqN54ShkZNE4u4UnsaUpVP",
-          "type": "number",
-          "input": "1",
-          "order": 4
-        },
-        "tRN2zhzE36iFyAP7eS2D1Y": {
-          "name": "tRN2zhzE36iFyAP7eS2D1Y",
-          "type": "number",
-          "input": "3",
-          "order": 3
-        },
-        "vzEQm2zx8QJK8Y6gwbNC39": {
-          "name": "vzEQm2zx8QJK8Y6gwbNC39",
-          "type": "number",
-          "input": "4",
-          "order": 0
-        }
-      },
-      "description": null
-    },
-    "clsyj06pz0005ad9jfpqofov8": {
-      "id": "clsyj06pz0005ad9jfpqofov8",
-      "createdAt": "2024-02-23T10:45:22.823Z",
-      "updatedAt": "2024-02-23T10:45:36.150Z",
-      "projectId": "clsyiyjl80001ad9jtz7pzsws",
-      "title": "Case 2",
-      "order": 1,
-      "slug": "case-2",
-      "input": null,
-      "args": {
-        "4j9EF1afq7XKKpCXMcbj6j": {
-          "name": "4j9EF1afq7XKKpCXMcbj6j",
-          "type": "number",
-          "input": "0",
-          "order": 2
-        },
-        "5QY4niqsELA6woGiFSHZHA": {
-          "name": "5QY4niqsELA6woGiFSHZHA",
-          "type": "array",
-          "input": "[[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]]",
-          "order": 1
-        },
-        "jqN54ShkZNE4u4UnsaUpVP": {
-          "name": "jqN54ShkZNE4u4UnsaUpVP",
-          "type": "number",
-          "input": "2",
-          "order": 4
-        },
-        "tRN2zhzE36iFyAP7eS2D1Y": {
-          "name": "tRN2zhzE36iFyAP7eS2D1Y",
-          "type": "number",
-          "input": "2",
-          "order": 3
-        },
-        "vzEQm2zx8QJK8Y6gwbNC39": {
-          "name": "vzEQm2zx8QJK8Y6gwbNC39",
-          "type": "number",
-          "input": "5",
-          "order": 0
-        }
-      },
-      "description": null
-    },
     "clt1umhyz000286hwbr7ovws2": {
       "id": "clt1umhyz000286hwbr7ovws2",
       "createdAt": "2024-02-25T18:33:58.139Z",
@@ -19366,6 +19297,37 @@
       },
       "description": null
     },
+    "cm268hmuq0002f9mr4k2qkkxu": {
+      "id": "cm268hmuq0002f9mr4k2qkkxu",
+      "createdAt": "2024-10-12T14:10:31.537Z",
+      "updatedAt": "2024-10-12T14:13:48.293Z",
+      "projectId": "cm268hmuq0001f9mrea49uazi",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "imMTYjyW4BBUxjn1jQLjEC": {
+          "name": "imMTYjyW4BBUxjn1jQLjEC",
+          "type": "number",
+          "input": "2",
+          "order": 1
+        },
+        "raxj9rYZwkXZWikejeQiQU": {
+          "name": "raxj9rYZwkXZWikejeQiQU",
+          "type": "number",
+          "input": "3",
+          "order": 2
+        },
+        "tTpBUZMFMqjtJ41CpRSRSW": {
+          "name": "tTpBUZMFMqjtJ41CpRSRSW",
+          "type": "array",
+          "input": "[1,5,9,1,5,9]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
     "cluzub6za0003xegihdlodivr": {
       "id": "cluzub6za0003xegihdlodivr",
       "createdAt": "2024-04-14T18:09:02.998Z",
@@ -19510,35 +19472,10 @@
       },
       "description": null
     },
-    "cm24hoafp0002adnwxp661ho2": {
-      "id": "cm24hoafp0002adnwxp661ho2",
-      "createdAt": "2024-10-11T08:52:06.228Z",
-      "updatedAt": "2024-10-11T08:53:55.397Z",
-      "projectId": "cm24hoafp0001adnwyhzqyffy",
-      "title": "Case 1",
-      "order": 1,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "gevvwx93tpWh93KT5ZqAQ5": {
-          "name": "gevvwx93tpWh93KT5ZqAQ5",
-          "type": "array",
-          "input": "[[1,4],[2,3],[4,6]]",
-          "order": 0
-        },
-        "igDM1RDDk1W4nL1TUMqMmi": {
-          "name": "igDM1RDDk1W4nL1TUMqMmi",
-          "type": "number",
-          "input": "1",
-          "order": 1
-        }
-      },
-      "description": null
-    },
     "cluazzgro0002exgvvfmdrqjn": {
       "id": "cluazzgro0002exgvvfmdrqjn",
       "createdAt": "2024-03-28T08:53:39.108Z",
-      "updatedAt": "2024-10-11T16:44:49.723Z",
+      "updatedAt": "2024-10-14T14:49:44.934Z",
       "projectId": "cluazzgro0001exgvjtl1fnw1",
       "title": "Case 1",
       "order": 0,
@@ -19564,22 +19501,66 @@
           "order": 0,
           "nodeData": {
             "1": {
-              "x": 28.20492715064859,
-              "y": 63.75083835773302
+              "x": 153.9110991546881,
+              "y": 128.9417145876975
             },
             "2": {
-              "x": 138.1172249075077,
-              "y": 24.19440103022544
+              "x": 268,
+              "y": 30
             },
             "3": {
-              "x": 255.2775910500782,
-              "y": 68.08078668585534
+              "x": 382,
+              "y": 145
             },
             "4": {
-              "x": 164.0545354452025,
-              "y": 130.8492005501688
+              "x": 273,
+              "y": 244
             }
           }
+        }
+      },
+      "description": null
+    },
+    "cm24hoafp0002adnwxp661ho2": {
+      "id": "cm24hoafp0002adnwxp661ho2",
+      "createdAt": "2024-10-11T08:52:06.228Z",
+      "updatedAt": "2024-10-11T08:53:55.397Z",
+      "projectId": "cm24hoafp0001adnwyhzqyffy",
+      "title": "Case 1",
+      "order": 1,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "gevvwx93tpWh93KT5ZqAQ5": {
+          "name": "gevvwx93tpWh93KT5ZqAQ5",
+          "type": "array",
+          "input": "[[1,4],[2,3],[4,6]]",
+          "order": 0
+        },
+        "igDM1RDDk1W4nL1TUMqMmi": {
+          "name": "igDM1RDDk1W4nL1TUMqMmi",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cm260zrqk0001kg9gwarhv6eq": {
+      "id": "cm260zrqk0001kg9gwarhv6eq",
+      "createdAt": "2024-10-12T10:40:40.747Z",
+      "updatedAt": "2024-10-12T10:40:59.871Z",
+      "projectId": "cm260z5u10001un7184fyefa9",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "8Av8HJmPB6C5xRjzotX6fF": {
+          "name": "8Av8HJmPB6C5xRjzotX6fF",
+          "type": "matrix",
+          "input": "[[12,13,1,12],[13,4,13,12],[13,8,10,12],[12,13,12,12],[13,13,13,13]]",
+          "order": 0
         }
       },
       "description": null
@@ -19630,6 +19611,98 @@
           "type": "number",
           "input": "0",
           "order": 1
+        }
+      },
+      "description": null
+    },
+    "cm260z5u10002un71xp8wehoy": {
+      "id": "cm260z5u10002un71xp8wehoy",
+      "createdAt": "2024-10-12T10:40:12.359Z",
+      "updatedAt": "2024-10-12T10:40:35.967Z",
+      "projectId": "cm260z5u10001un7184fyefa9",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "8Av8HJmPB6C5xRjzotX6fF": {
+          "name": "8Av8HJmPB6C5xRjzotX6fF",
+          "type": "array",
+          "input": "[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cm27d2irv00019afqhhocmzuc": {
+      "id": "cm27d2irv00019afqhhocmzuc",
+      "createdAt": "2024-10-13T09:06:30.654Z",
+      "updatedAt": "2024-10-13T14:06:56.137Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "21KPeG4f4F3xDQXf1Hx5sd": {
+          "name": "21KPeG4f4F3xDQXf1Hx5sd",
+          "type": "number",
+          "input": "2",
+          "order": 2
+        },
+        "31dPaHPgtnRZ4bz193ngo2": {
+          "name": "31dPaHPgtnRZ4bz193ngo2",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        },
+        "7wySHV7Apd17FumQ6PE7BJ": {
+          "name": "7wySHV7Apd17FumQ6PE7BJ",
+          "type": "graph",
+          "input": "[[2, 1, 1], [2, 3, 1], [3, 4, 1], [1, 4, 2], [4, 5, 3], [5, 6, 2], [6, 7, 1], [7, 8, 2], [8, 9, 1], [9, 10, 2], [10, 1, 4], [1, 5, 7], [5, 3, 6], [3, 6, 4], [6, 2, 5]]",
+          "order": 0,
+          "nodeData": {
+            "1": {
+              "x": 578.9733833648572,
+              "y": 315.6631430664062
+            },
+            "2": {
+              "x": 216.9999999999999,
+              "y": 41
+            },
+            "3": {
+              "x": 258,
+              "y": 271
+            },
+            "4": {
+              "x": 404.8655439013544,
+              "y": 266.0779881161892
+            },
+            "5": {
+              "x": 371,
+              "y": 416
+            },
+            "6": {
+              "x": 131,
+              "y": 331
+            },
+            "7": {
+              "x": 158,
+              "y": 453
+            },
+            "8": {
+              "x": 249.9417145876975,
+              "y": 521.9110991546881
+            },
+            "9": {
+              "x": 389.6083812543641,
+              "y": 522.2871422250282
+            },
+            "10": {
+              "x": 575.0054715023579,
+              "y": 505.2705078773417
+            }
+          }
         }
       },
       "description": null
@@ -20627,6 +20700,79 @@
       },
       "description": null
     },
+    "cm295upbv0001yi9bikphwbwo": {
+      "id": "cm295upbv0001yi9bikphwbwo",
+      "createdAt": "2024-10-14T15:20:00.938Z",
+      "updatedAt": "2024-10-14T15:20:57.052Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Case 9",
+      "order": 3,
+      "slug": "case-9",
+      "input": null,
+      "args": {
+        "21KPeG4f4F3xDQXf1Hx5sd": {
+          "name": "21KPeG4f4F3xDQXf1Hx5sd",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        },
+        "31dPaHPgtnRZ4bz193ngo2": {
+          "name": "31dPaHPgtnRZ4bz193ngo2",
+          "type": "number",
+          "input": "10",
+          "order": 1
+        },
+        "7wySHV7Apd17FumQ6PE7BJ": {
+          "name": "7wySHV7Apd17FumQ6PE7BJ",
+          "type": "graph",
+          "input": "[[1,2,4],[1,3,2],[2,3,5],[2,4,10],[3,5,3],[4,6,1],[5,6,9],[5,7,2],[6,8,7],[7,8,4],[8,9,6],[9,10,3],[6,10,12]]",
+          "order": 0,
+          "nodeData": {
+            "1": {
+              "x": 663.2873172121806,
+              "y": 207.7602280435859
+            },
+            "2": {
+              "x": 575.9110991546881,
+              "y": 268.9417145876975
+            },
+            "3": {
+              "x": 607.0424171990803,
+              "y": 441.763114494309
+            },
+            "4": {
+              "x": 460,
+              "y": 300
+            },
+            "5": {
+              "x": 300,
+              "y": 460
+            },
+            "6": {
+              "x": 300,
+              "y": 300
+            },
+            "7": {
+              "x": 146.9575828009197,
+              "y": 455.763114494309
+            },
+            "8": {
+              "x": 140,
+              "y": 300
+            },
+            "9": {
+              "x": 139.236885505691,
+              "y": 139.9575828009197
+            },
+            "10": {
+              "x": 299.9999999999999,
+              "y": 140
+            }
+          }
+        }
+      },
+      "description": null
+    },
     "clwi12p2e0009oxn5xyb1phsi": {
       "id": "clwi12p2e0009oxn5xyb1phsi",
       "createdAt": "2024-05-22T16:17:57.351Z",
@@ -20673,6 +20819,164 @@
           "type": "string",
           "input": "sucks",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "cm295r2p00001vgo40lx3rbiw": {
+      "id": "cm295r2p00001vgo40lx3rbiw",
+      "createdAt": "2024-10-14T15:17:11.651Z",
+      "updatedAt": "2024-10-14T15:18:40.634Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Case 8",
+      "order": 2,
+      "slug": "case-8",
+      "input": null,
+      "args": {
+        "21KPeG4f4F3xDQXf1Hx5sd": {
+          "name": "21KPeG4f4F3xDQXf1Hx5sd",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        },
+        "31dPaHPgtnRZ4bz193ngo2": {
+          "name": "31dPaHPgtnRZ4bz193ngo2",
+          "type": "number",
+          "input": "8",
+          "order": 1
+        },
+        "7wySHV7Apd17FumQ6PE7BJ": {
+          "name": "7wySHV7Apd17FumQ6PE7BJ",
+          "type": "graph",
+          "input": "[[1,2,2],[1,3,5],[2,3,1],[2,4,2],[3,5,3],[4,5,1],[4,6,3],[5,7,4],[6,7,1],[7,8,2],[6,8,8],[3,6,10]]",
+          "order": 0,
+          "nodeData": {
+            "1": {
+              "x": 552.763114494309,
+              "y": 471.9575828009197
+            },
+            "2": {
+              "x": 365,
+              "y": 556
+            },
+            "3": {
+              "x": 580,
+              "y": 300
+            },
+            "4": {
+              "x": 160,
+              "y": 346
+            },
+            "5": {
+              "x": 365,
+              "y": 369.5640646055102
+            },
+            "6": {
+              "x": 246.9999999999999,
+              "y": 31.43593539448986
+            },
+            "7": {
+              "x": 407.0746668257227,
+              "y": 235.6985777678949
+            },
+            "8": {
+              "x": 271.0779881161891,
+              "y": 279.5703914931355
+            }
+          }
+        }
+      },
+      "description": null
+    },
+    "cm2960o9s0003idekh3u3dhe0": {
+      "id": "cm2960o9s0003idekh3u3dhe0",
+      "createdAt": "2024-10-14T15:24:39.520Z",
+      "updatedAt": "2024-10-14T15:27:23.396Z",
+      "projectId": "cluazzgro0001exgvjtl1fnw1",
+      "title": "Case 11",
+      "order": 4,
+      "slug": "case-11",
+      "input": null,
+      "args": {
+        "21KPeG4f4F3xDQXf1Hx5sd": {
+          "name": "21KPeG4f4F3xDQXf1Hx5sd",
+          "type": "number",
+          "input": "1",
+          "order": 2
+        },
+        "31dPaHPgtnRZ4bz193ngo2": {
+          "name": "31dPaHPgtnRZ4bz193ngo2",
+          "type": "number",
+          "input": "15",
+          "order": 1
+        },
+        "7wySHV7Apd17FumQ6PE7BJ": {
+          "name": "7wySHV7Apd17FumQ6PE7BJ",
+          "type": "graph",
+          "input": "[[1,2,1],[1,3,4],[2,4,2],[3,5,1],[4,6,7],[4,7,2],[5,7,5],[6,8,3],[7,8,4],[7,9,1],[8,10,6],[9,11,2],[10,12,8],[11,12,1],[12,13,2],[12,14,4],[13,15,3],[14,15,2]]",
+          "order": 0,
+          "nodeData": {
+            "1": {
+              "x": 467.1393325518014,
+              "y": 241.7760962568082
+            },
+            "2": {
+              "x": 413.763114494309,
+              "y": 317.9575828009197
+            },
+            "3": {
+              "x": 551.0582854123024,
+              "y": 313.9110991546881
+            },
+            "4": {
+              "x": 482,
+              "y": 415
+            },
+            "5": {
+              "x": 596,
+              "y": 402
+            },
+            "6": {
+              "x": 364,
+              "y": 375
+            },
+            "7": {
+              "x": 721,
+              "y": 578
+            },
+            "8": {
+              "x": 217,
+              "y": 422
+            },
+            "9": {
+              "x": 577,
+              "y": 203
+            },
+            "10": {
+              "x": 80.23688550569099,
+              "y": 333.9575828009197
+            },
+            "11": {
+              "x": 381.0582854123024,
+              "y": 159.0889008453118
+            },
+            "12": {
+              "x": 130.8606674481985,
+              "y": 207.7760962568082
+            },
+            "13": {
+              "x": 103.1329337671861,
+              "y": 41.21707549524223
+            },
+            "14": {
+              "x": 353.1307066135161,
+              "y": 87.43695167551964
+            },
+            "15": {
+              "x": 231.552171365891,
+              "y": 30.25149669720523
+            }
+          }
         }
       },
       "description": null
@@ -21159,6 +21463,122 @@
       },
       "description": null
     },
+    "clsyj06pz0005ad9jfpqofov8": {
+      "id": "clsyj06pz0005ad9jfpqofov8",
+      "createdAt": "2024-02-23T10:45:22.823Z",
+      "updatedAt": "2024-10-16T20:26:23.140Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "4j9EF1afq7XKKpCXMcbj6j": {
+          "name": "4j9EF1afq7XKKpCXMcbj6j",
+          "type": "number",
+          "input": "0",
+          "order": 2
+        },
+        "5QY4niqsELA6woGiFSHZHA": {
+          "name": "5QY4niqsELA6woGiFSHZHA",
+          "type": "graph",
+          "input": "[[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]]",
+          "order": 1,
+          "nodeData": {
+            "1": {
+              "x": 256,
+              "y": 239
+            },
+            "2": {
+              "x": 141,
+              "y": 135
+            },
+            "3": {
+              "x": 142,
+              "y": 361
+            },
+            "4": {
+              "x": 363.9999999999999,
+              "y": 134
+            }
+          }
+        },
+        "jqN54ShkZNE4u4UnsaUpVP": {
+          "name": "jqN54ShkZNE4u4UnsaUpVP",
+          "type": "number",
+          "input": "2",
+          "order": 4
+        },
+        "tRN2zhzE36iFyAP7eS2D1Y": {
+          "name": "tRN2zhzE36iFyAP7eS2D1Y",
+          "type": "number",
+          "input": "2",
+          "order": 3
+        },
+        "vzEQm2zx8QJK8Y6gwbNC39": {
+          "name": "vzEQm2zx8QJK8Y6gwbNC39",
+          "type": "number",
+          "input": "5",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cly09u6bd00029ie35fupd5vp": {
+      "id": "cly09u6bd00029ie35fupd5vp",
+      "createdAt": "2024-06-29T15:22:49.850Z",
+      "updatedAt": "2024-10-16T19:43:46.983Z",
+      "projectId": "cly09u6bd00019ie39i745qha",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "j3xmkVoZ2JHDjJhgEtc9zh": {
+          "name": "j3xmkVoZ2JHDjJhgEtc9zh",
+          "type": "number",
+          "input": "8",
+          "order": 0
+        },
+        "ojRhuDPueA8i7bovauvKH7": {
+          "name": "ojRhuDPueA8i7bovauvKH7",
+          "type": "graph",
+          "input": "[[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]]",
+          "order": 1,
+          "nodeData": {
+            "1": {
+              "x": 569.3777120880567,
+              "y": 176.0505971018689
+            },
+            "2": {
+              "x": 259,
+              "y": 443
+            },
+            "3": {
+              "x": 460,
+              "y": 300
+            },
+            "4": {
+              "x": 140,
+              "y": 300
+            },
+            "5": {
+              "x": 580,
+              "y": 300
+            },
+            "6": {
+              "x": 305,
+              "y": 345
+            },
+            "7": {
+              "x": 425.6254549171122,
+              "y": 416.808397169096
+            }
+          }
+        }
+      },
+      "description": null
+    },
     "clwz1bld70003oppemog6fowc": {
       "id": "clwz1bld70003oppemog6fowc",
       "createdAt": "2024-06-03T13:56:57.451Z",
@@ -21174,6 +21594,217 @@
           "type": "matrix",
           "input": "[[1,1,1,0,0,0,0,0],[0,0,0,1,0,1,0,0],[0,1,1,0,0,1,0,0],[0,0,0,1,0,1,0,0],[1,0,1,0,0,1,0,0],[1,0,0,0,0,1,0,0],[0,1,1,1,1,0,0,0],[0,0,0,0,0,0,0,0]]",
           "order": 0
+        }
+      },
+      "description": null
+    },
+    "clsyiyjl80002ad9jovrh1f3a": {
+      "id": "clsyiyjl80002ad9jovrh1f3a",
+      "createdAt": "2024-02-23T10:44:06.189Z",
+      "updatedAt": "2024-10-16T19:52:43.057Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "4j9EF1afq7XKKpCXMcbj6j": {
+          "name": "4j9EF1afq7XKKpCXMcbj6j",
+          "type": "number",
+          "input": "0",
+          "order": 2
+        },
+        "5QY4niqsELA6woGiFSHZHA": {
+          "name": "5QY4niqsELA6woGiFSHZHA",
+          "type": "graph",
+          "input": "[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]",
+          "order": 1
+        },
+        "jqN54ShkZNE4u4UnsaUpVP": {
+          "name": "jqN54ShkZNE4u4UnsaUpVP",
+          "type": "number",
+          "input": "1",
+          "order": 4
+        },
+        "tRN2zhzE36iFyAP7eS2D1Y": {
+          "name": "tRN2zhzE36iFyAP7eS2D1Y",
+          "type": "number",
+          "input": "3",
+          "order": 3
+        },
+        "vzEQm2zx8QJK8Y6gwbNC39": {
+          "name": "vzEQm2zx8QJK8Y6gwbNC39",
+          "type": "number",
+          "input": "4",
+          "order": 0
+        }
+      },
+      "description": null
+    },
+    "cm29iwake0001do834mu5klg2": {
+      "id": "cm29iwake0001do834mu5klg2",
+      "createdAt": "2024-10-14T21:25:10.141Z",
+      "updatedAt": "2024-10-14T21:25:49.825Z",
+      "projectId": "clmt3czb30001n90htcfcue0g",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "fzEdb2okGjoXdJQXCiiaaw": {
+          "name": "fzEdb2okGjoXdJQXCiiaaw",
+          "type": "number",
+          "input": "10",
+          "order": 0
+        },
+        "v9ALvgfTWyXRVvasiGtgnY": {
+          "name": "v9ALvgfTWyXRVvasiGtgnY",
+          "type": "graph",
+          "input": "[[1,2],[1,3],[2,4],[2,5],[3,6],[4,7],[5,7],[6,8],[7,9],[8,9],[9,10]]",
+          "order": 1,
+          "nodeData": {
+            "1": {
+              "x": 714.4969761869061,
+              "y": 393.860891827909
+            },
+            "2": {
+              "x": 712.1393325518014,
+              "y": 183.7760962568082
+            },
+            "3": {
+              "x": 515.9417145876976,
+              "y": 543.1418304268651
+            },
+            "4": {
+              "x": 580.763114494309,
+              "y": 283.9575828009197
+            },
+            "5": {
+              "x": 508,
+              "y": 121
+            },
+            "6": {
+              "x": 335.9417145876976,
+              "y": 535.4751637601985
+            },
+            "7": {
+              "x": 422,
+              "y": 309
+            },
+            "8": {
+              "x": 241,
+              "y": 408.5640646055102
+            },
+            "9": {
+              "x": 300,
+              "y": 300
+            },
+            "10": {
+              "x": 233.9999999999999,
+              "y": 169.4359353944899
+            }
+          }
+        }
+      },
+      "description": null
+    },
+    "clmt3czb30002n90hiczuyugb": {
+      "id": "clmt3czb30002n90hiczuyugb",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2024-10-14T21:28:43.334Z",
+      "projectId": "clmt3czb30001n90htcfcue0g",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "fzEdb2okGjoXdJQXCiiaaw": {
+          "name": "fzEdb2okGjoXdJQXCiiaaw",
+          "type": "number",
+          "input": "3",
+          "order": 0
+        },
+        "v9ALvgfTWyXRVvasiGtgnY": {
+          "name": "v9ALvgfTWyXRVvasiGtgnY",
+          "type": "graph",
+          "input": "[[1,3],[2,3]]",
+          "order": 1,
+          "nodeData": {
+            "1": {
+              "x": 264,
+              "y": 168
+            },
+            "2": {
+              "x": 263,
+              "y": 326
+            },
+            "3": {
+              "x": 391,
+              "y": 249
+            }
+          }
+        }
+      },
+      "description": null
+    },
+    "cm2c26uyy0002yj4eb8m0ju8g": {
+      "id": "cm2c26uyy0002yj4eb8m0ju8g",
+      "createdAt": "2024-10-16T16:00:48.201Z",
+      "updatedAt": "2024-10-16T16:01:21.247Z",
+      "projectId": "cm2c26uyy0001yj4epu85od6n",
+      "title": "Case 1",
+      "order": 0,
+      "slug": "case-1",
+      "input": null,
+      "args": {
+        "1hTyroMD2q8BmwAHBGAHdT": {
+          "name": "1hTyroMD2q8BmwAHBGAHdT",
+          "type": "number",
+          "input": "1",
+          "order": 0
+        },
+        "8yboV2ZhbZSkVxeUDenW1x": {
+          "name": "8yboV2ZhbZSkVxeUDenW1x",
+          "type": "number",
+          "input": "7",
+          "order": 2
+        },
+        "iXxtvEdxbeGCT7oJiDtXNV": {
+          "name": "iXxtvEdxbeGCT7oJiDtXNV",
+          "type": "number",
+          "input": "1",
+          "order": 1
+        }
+      },
+      "description": null
+    },
+    "cm2c27l21000141ee4309xmxp": {
+      "id": "cm2c27l21000141ee4309xmxp",
+      "createdAt": "2024-10-16T16:01:21.992Z",
+      "updatedAt": "2024-10-16T16:01:29.073Z",
+      "projectId": "cm2c26uyy0001yj4epu85od6n",
+      "title": "Case 2",
+      "order": 1,
+      "slug": "case-2",
+      "input": null,
+      "args": {
+        "1hTyroMD2q8BmwAHBGAHdT": {
+          "name": "1hTyroMD2q8BmwAHBGAHdT",
+          "type": "number",
+          "input": "0",
+          "order": 0
+        },
+        "8yboV2ZhbZSkVxeUDenW1x": {
+          "name": "8yboV2ZhbZSkVxeUDenW1x",
+          "type": "number",
+          "input": "11",
+          "order": 2
+        },
+        "iXxtvEdxbeGCT7oJiDtXNV": {
+          "name": "iXxtvEdxbeGCT7oJiDtXNV",
+          "type": "number",
+          "input": "8",
+          "order": 1
         }
       },
       "description": null
@@ -21698,31 +22329,6 @@
       },
       "description": null
     },
-    "cly09u6bd00029ie35fupd5vp": {
-      "id": "cly09u6bd00029ie35fupd5vp",
-      "createdAt": "2024-06-29T15:22:49.850Z",
-      "updatedAt": "2024-06-29T15:23:07.289Z",
-      "projectId": "cly09u6bd00019ie39i745qha",
-      "title": "Case 1",
-      "order": 0,
-      "slug": "case-1",
-      "input": null,
-      "args": {
-        "j3xmkVoZ2JHDjJhgEtc9zh": {
-          "name": "j3xmkVoZ2JHDjJhgEtc9zh",
-          "type": "number",
-          "input": "8",
-          "order": 0
-        },
-        "ojRhuDPueA8i7bovauvKH7": {
-          "name": "ojRhuDPueA8i7bovauvKH7",
-          "type": "array",
-          "input": "[[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]]",
-          "order": 1
-        }
-      },
-      "description": null
-    },
     "cly49ye9b0002b788sitwm0yw": {
       "id": "cly49ye9b0002b788sitwm0yw",
       "createdAt": "2024-07-02T10:37:11.463Z",
@@ -22180,20 +22786,6 @@
     }
   },
   "solutions": {
-    "clda4ezqy0004l00823woi4sk": {
-      "id": "clda4ezqy0004l00823woi4sk",
-      "createdAt": "2023-01-24T10:54:56.122Z",
-      "updatedAt": "2023-01-24T10:54:56.122Z",
-      "projectId": "clda4ezqy0001l008qe41ecpg",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function getSumOfNodes(head, bool, str) {\r\n  if (head === null) return 0;\r\n\r\n  console.log({bool, str});\r\n\r\n  head.setColor(\"green\", \"blink\");\r\n\r\n  const left = getSumOfNodes(head.left);\r\n  const right = getSumOfNodes(head.right);\r\n\r\n  head.setColor(null);\r\n\r\n  return head.val + left + right;\r\n};\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cldhvnpus0004jk08zfqir09o": {
       "id": "cldhvnpus0004jk08zfqir09o",
       "createdAt": "2023-01-29T21:11:56.068Z",
@@ -22401,20 +22993,6 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function invertTree(head) {\r\n  if (!head) return null\r\n\r\n  head.setColor(\"green\");\r\n\r\n  [head.left, head.right] = [invertTree(head.right), invertTree(head.left)];\r\n\r\n  head.setColor(null);\r\n  \r\n  return head;\r\n};\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
-    "cleneu5h30004mj0865tgqolj": {
-      "id": "cleneu5h30004mj0865tgqolj",
-      "createdAt": "2023-02-27T22:47:22.168Z",
-      "updatedAt": "2023-02-27T22:47:22.168Z",
-      "projectId": "cleneu5h30001mj08h0net2yy",
-      "title": "DFS Recursion",
-      "slug": "dfs",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": "",
-      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getLevels(head) {\n  const array = [];\n\n  const dfs = (node, depth = 0) => {\n      array[depth] ??= [];\n      array[depth].push(node.val);\n\n      node.setColor(\"green\", \"blink\");\n\n      node.left && dfs(node.left, depth + 1);\n      node.right && dfs(node.right, depth + 1);\n  }\n\n  dfs(head)\n\n  console.log(\"Raw array: \", array);\n\n  return array.map((values) => values.reduce((acc, curr) => acc + curr, 0) / values.length);\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 0
     },
@@ -24028,20 +24606,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clle0pfdy0003jo08drkxnndl": {
-      "id": "clle0pfdy0003jo08drkxnndl",
-      "createdAt": "2023-08-16T17:39:47.878Z",
-      "updatedAt": "2023-08-16T17:39:47.878Z",
-      "projectId": "clle0pfdy0001jo08fbicsvta",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maxPathSum = function (root) {\n  let max = -Infinity;\n\n  const dfs = (node) => {\n    node.setColor(\"cyan\", \"blink\");\n    const left = node.left ? dfs(node.left) : 0;\n    const right = node.right ? dfs(node.right) : 0;\n\n    const current = Math.max(node.val, node.val + left, node.val + right);\n\n    max = Math.max(max, current, left + node.val + right);\n\n    console.log(node.val, {current, max});\n\n    return current;\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn maxPathSum;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "cllfcxny50003l908j2phigjv": {
       "id": "cllfcxny50003l908j2phigjv",
       "createdAt": "2023-08-17T16:09:53.790Z",
@@ -24123,6 +24687,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @param {string} t\n * @param {number} maxCost\n * @return {number}\n */\nvar equalSubstring = function (s, t, maxCost) {\n  const n = s.length;\n\n  let result = 0;\n\n  let cost = 0;\n  let left = 0;\n  for (let right = 0; right < n; right++) {\n    s.setColor(right, \"green\");\n    t.setColor(right, \"green\");\n    cost += getCost(s[right], t[right]);\n\n    if (cost > maxCost) {\n      s.setColor(left, null);\n      t.setColor(left, null);\n      cost -= getCost(s[left], t[left]);\n      left++;\n    } else {\n      result = right - left + 1;\n    }\n  }\n\n  return result;\n};\n\nfunction getCost(a, b) {\n  return Math.abs(a.charCodeAt(0) - b.charCodeAt(0));\n}\n\nreturn equalSubstring;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clle0pfdy0003jo08drkxnndl": {
+      "id": "clle0pfdy0003jo08drkxnndl",
+      "createdAt": "2023-08-16T17:39:47.878Z",
+      "updatedAt": "2024-10-14T08:29:22.696Z",
+      "projectId": "clle0pfdy0001jo08fbicsvta",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maxPathSum = function (root) {\n  let max = -Infinity;\n\n  const dfs = (node) => {\n    node.setColor(\"cyan\");\n    const left = node.left ? dfs(node.left) : 0;\n    const right = node.right ? dfs(node.right) : 0;\n\n    const current = Math.max(node.val, node.val + left, node.val + right);\n\n    max = Math.max(max, current, left + node.val + right);\n\n    console.log(node.val, {current, max});\n\n    return current;\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn maxPathSum;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -25008,20 +25586,6 @@
       "pythonCode": null,
       "order": 1
     },
-    "clodb0yli0007pk0gazog988s": {
-      "id": "clodb0yli0007pk0gazog988s",
-      "createdAt": "2023-10-30T19:40:02.982Z",
-      "updatedAt": "2023-10-30T20:45:59.051Z",
-      "projectId": "clodb0yli0005pk0g7wegabyv",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @param {number[]} inorder\n * @return {TreeNode}\n */\nvar buildTree = function (preorder, inorder) {\n  const inorderIndexMap = new Map();\n  for (let i = 0; i < inorder.length; i++) {\n    inorderIndexMap.set(inorder[i], i);\n  }\n  let preorderIndex = 0;\n\n  const dfs = (left, right) => {\n    if (left > right) return null;\n    preorder.setColor(preorderIndex, \"green\");\n    inorder.setColor(left, \"cyan\");\n    inorder.setColor(right, \"cyan\");\n\n    const rootVal = preorder[preorderIndex++];\n    const root = new BinaryTree(rootVal);\n    const midIndex = inorderIndexMap.get(rootVal);\n    inorder.setColor(midIndex, \"green\");\n\n    root.left = dfs(left, midIndex - 1);\n    root.right = dfs(midIndex + 1, right);\n\n    return root;\n  };\n\n  return dfs(0, preorder.length - 1);\n};\n\nreturn buildTree;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clodcxws70009pk0gid8z5qsi": {
       "id": "clodcxws70009pk0gid8z5qsi",
       "createdAt": "2023-10-30T20:33:39.895Z",
@@ -25078,10 +25642,24 @@
       "pythonCode": null,
       "order": 2
     },
+    "clodb0yli0007pk0gazog988s": {
+      "id": "clodb0yli0007pk0gazog988s",
+      "createdAt": "2023-10-30T19:40:02.982Z",
+      "updatedAt": "2024-10-14T08:30:47.696Z",
+      "projectId": "clodb0yli0005pk0g7wegabyv",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {number[]} preorder\n * @param {number[]} inorder\n * @return {TreeNode}\n */\nvar buildTree = function (preorder, inorder) {\n  const inorderIndexMap = new Map();\n  for (let i = 0; i < inorder.length; i++) {\n    inorderIndexMap.set(inorder[i], i);\n  }\n  let preorderIndex = 0;\n\n  const dfs = (left, right) => {\n    if (left > right) return null;\n    preorder.setColor(preorderIndex, \"green\");\n    inorder.setColor(left, \"cyan\");\n    inorder.setColor(right, \"cyan\");\n\n    const rootVal = preorder[preorderIndex++];\n    const root = new BinaryTree(rootVal);\n    const midIndex = inorderIndexMap.get(rootVal);\n    inorder.setColor(midIndex, \"green\");\n\n    root.left = dfs(left, midIndex - 1);\n    root.right = dfs(midIndex + 1, right);\n\n    return root;\n  };\n\n  return dfs(0, preorder.length - 1);\n};\n\nreturn buildTree;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cloa9uum6000boy0fquoiqlzr": {
       "id": "cloa9uum6000boy0fquoiqlzr",
       "createdAt": "2023-10-28T16:43:59.742Z",
-      "updatedAt": "2024-10-06T21:09:08.080Z",
+      "updatedAt": "2024-10-14T08:28:56.896Z",
       "projectId": "cloa9uum60009oy0f5hlsz8kj",
       "title": "BFS",
       "slug": "bfs",
@@ -25568,20 +26146,6 @@
       "pythonCode": null,
       "order": 0
     },
-    "clpwhz0vw00032uy36n7helc4": {
-      "id": "clpwhz0vw00032uy36n7helc4",
-      "createdAt": "2023-12-08T10:41:49.629Z",
-      "updatedAt": "2023-12-08T14:46:22.888Z",
-      "projectId": "clpwhz0vw00012uy3428us0xn",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\r\n * Definition for a binary tree node.\r\n * function TreeNode(val, left, right) {\r\n *     this.val = (val===undefined ? 0 : val)\r\n *     this.left = (left===undefined ? null : left)\r\n *     this.right = (right===undefined ? null : right)\r\n * }\r\n */\r\n/**\r\n * @param {TreeNode} root\r\n * @return {string}\r\n */\r\nvar tree2str = function (root) {\r\n  const result = new Array();\r\n\r\n  const dfs = (node) => {\r\n    if (!node) return;\r\n    node.setColor(\"green\", \"\");\r\n\r\n    result.push(node.val);\r\n\r\n    if (node.left || node.right) {\r\n      result.push(\"(\");\r\n      dfs(node.left);\r\n      result.push(\")\");\r\n    }\r\n\r\n    if (node.right) {\r\n      result.push(\"(\");\r\n      dfs(node.right);\r\n      result.push(\")\");\r\n    }\r\n  };\r\n\r\n  dfs(root);\r\n\r\n  return result.join(\"\");\r\n};\r\n\r\nreturn tree2str;\r\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clpxtmy2q0003wwc2nv6hhnpb": {
       "id": "clpxtmy2q0003wwc2nv6hhnpb",
       "createdAt": "2023-12-09T08:56:07.682Z",
@@ -25595,20 +26159,6 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar inorderTraversal = function (root) {\n  if (!root) return [];\n  const arr = new Array();\n\n  let current = root;\n  let prev = null;\n\n  while (current) {\n    current.setColor(\"green\", \"blink\");\n    if (!current.left) {\n      arr.push(current.val);\n      current = current.right;\n    } else {\n      prev = current.left;\n      while (prev.right) {\n        prev = prev.right;\n      }\n      prev.right = current;\n      const temp = current;\n      current = current.left;\n      temp.left = null;\n    }\n  }\n\n  return arr;\n};\n\nreturn inorderTraversal;\n",
       "pythonCode": null,
       "order": 3
-    },
-    "clpxtsej70009wwc2lqckmn1k": {
-      "id": "clpxtsej70009wwc2lqckmn1k",
-      "createdAt": "2023-12-09T09:00:22.292Z",
-      "updatedAt": "2024-02-13T13:12:15.832Z",
-      "projectId": "clpxtmy2p0001wwc2wz9fsuww",
-      "title": "Recursion",
-      "slug": "recursion",
-      "timeComplexity": "O(n)",
-      "spaceComplexity": "O(n)",
-      "description": "",
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar inorderTraversal = function (root, arr = new Array()) {\n  if (!root) return [];\n  root.setColor(\"cyan\", \"blink\");\n\n  inorderTraversal(root.left, arr);\n  root.setColor(\"green\");\n  arr.push(root.val);\n  inorderTraversal(root.right, arr);\n\n  return arr;\n};\n\nreturn inorderTraversal;\n",
-      "pythonCode": null,
-      "order": 1
     },
     "clpxtwcns000bwwc2s0p4g34v": {
       "id": "clpxtwcns000bwwc2s0p4g34v",
@@ -25679,6 +26229,20 @@
       "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number}\n */\nvar maximumAverageSubtree = function (root) {\n  let result = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, 0];\n    node.setColor(\"cyan\");\n\n    const [leftSum, leftCount] = dfs(node.left);\n    const [rightSum, rightCount] = dfs(node.right);\n\n    const sum = leftSum + node.val + rightSum;\n    const count = leftCount + 1 + rightCount;\n    const average = sum / count;\n\n    if (average > result) {\n      result = average;\n      node.setColor(\"green\");\n    }\n\n    return [sum, count];\n  };\n\n  dfs(root);\n\n  return result;\n};\n\nreturn maximumAverageSubtree;\n",
       "pythonCode": null,
       "order": 0
+    },
+    "clpxtsej70009wwc2lqckmn1k": {
+      "id": "clpxtsej70009wwc2lqckmn1k",
+      "createdAt": "2023-12-09T09:00:22.292Z",
+      "updatedAt": "2024-10-14T08:28:17.422Z",
+      "projectId": "clpxtmy2p0001wwc2wz9fsuww",
+      "title": "Recursion",
+      "slug": "recursion",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "description": "",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar inorderTraversal = function (root, arr = new Array()) {\n  if (!root) return [];\n  root.setColor(\"cyan\");\n\n  inorderTraversal(root.left, arr);\n  root.setColor(\"green\");\n  arr.push(root.val);\n  inorderTraversal(root.right, arr);\n\n  return arr;\n};\n\nreturn inorderTraversal;\n",
+      "pythonCode": null,
+      "order": 1
     },
     "clq3q7lm10001pnwc6q5ue3k6": {
       "id": "clq3q7lm10001pnwc6q5ue3k6",
@@ -26141,20 +26705,6 @@
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar rob = function (nums) {\n  if (nums.length <= 1) return nums[0];\n\n  const dp = new Array(nums.length);\n  dp[0] = nums[0];\n  dp[1] = Math.max(dp[0], nums[1]);\n\n  for (let i = 2; i < nums.length; i++) {\n    dp.setColor(i, \"green\");\n    const num = nums[i];\n    dp[i] = Math.max(dp[i - 1], dp[i - 2] + num);\n  }\n\n  return Math.max(dp.at(-1), dp.at(-2));\n};\n\nreturn rob;\n",
       "pythonCode": null,
       "order": 1
-    },
-    "clr7rmznn0003pii1fs5h6i89": {
-      "id": "clr7rmznn0003pii1fs5h6i89",
-      "createdAt": "2024-01-10T12:37:34.594Z",
-      "updatedAt": "2024-10-06T21:07:05.964Z",
-      "projectId": "clr7rmznm0001pii1zxhjioao",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} start\n * @return {number}\n */\nvar amountOfTime = function (root, start) {\n  let max = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, -1];\n    node.blink();\n\n    const [leftHeight, leftStart] = dfs(node.left);\n    const [rightHeight, rightStart] = dfs(node.right);\n    const height = Math.max(leftHeight, rightHeight);\n    let startDist = -1;\n\n    if (leftStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, leftStart, leftStart + rightHeight);\n      startDist = leftStart + 1;\n    } else if (rightStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, rightStart, leftHeight + rightStart);\n      startDist = rightStart + 1;\n    } else if (node.val === start) {\n      node.setColor(\"red\");\n      startDist = 1;\n      max = height;\n    }\n\n    return [height + 1, startDist];\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn amountOfTime;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clrnj2p5y000b13dlfdbfwy83": {
       "id": "clrnj2p5y000b13dlfdbfwy83",
@@ -26673,20 +27223,6 @@
       "code": "/**\n * @param {number[][]} edges\n * @return {number}\n */\nvar treeDiameter = function (edges) {\n  const n = edges.length + 1;\n  const adjList = new Array(n);\n\n  for (let i = 0; i < edges.length; i++) {\n    edges.setColor(i, \"green\");\n    const [from, to] = edges[i];\n    (adjList[from] ??= new Array()).push(to);\n    (adjList[to] ??= new Array()).push(from);\n  }\n\n  let diameter = 0;\n\n  const dfs = (node, prev) => {\n    let firstMax = 0;\n    let secondMax = 0;\n    const neighbors = adjList[node] ?? [];\n    for (let i = 0; i < neighbors.length; i++) {\n      const neighbor = neighbors[i];\n      if (neighbor === prev) continue;\n\n      neighbors.setColor(i, \"green\");\n      const next = dfs(neighbor, node);\n      neighbors.setColor(i, null);\n      if (next > firstMax) {\n        secondMax = firstMax;\n        firstMax = next;\n      } else if (next > secondMax) {\n        secondMax = next;\n      }\n    }\n\n    diameter = Math.max(diameter, firstMax + secondMax);\n\n    return firstMax + 1;\n  };\n\n  dfs(0, -1);\n\n  return diameter;\n};\n\nreturn treeDiameter;\n",
       "pythonCode": null,
       "order": 1
-    },
-    "clsyiyjl80003ad9jrgxu0aqv": {
-      "id": "clsyiyjl80003ad9jrgxu0aqv",
-      "createdAt": "2024-02-23T10:44:06.189Z",
-      "updatedAt": "2024-02-23T11:20:03.397Z",
-      "projectId": "clsyiyjl80001ad9jtz7pzsws",
-      "title": "BFS",
-      "slug": "bfs",
-      "timeComplexity": "",
-      "spaceComplexity": "",
-      "description": "",
-      "code": "/**\n * @param {number} n\n * @param {number[][]} flights\n * @param {number} src\n * @param {number} dst\n * @param {number} k\n * @return {number}\n */\nvar findCheapestPrice = function (n, flights, src, dst, k) {\n  const adjList = new Array(n);\n\n  for (let i = 0; i < flights.length; i++) {\n    flights.setColor(i, \"green\");\n    const [from, to, cost] = flights[i];\n    (adjList[from] ??= new Array()).push([to, cost]);\n  }\n\n  const stops = new Array(n);\n  stops[src] = 0;\n  const pq = new Queue();\n  pq.enqueue([src, 0, 0]);\n\n  while (!pq.isEmpty()) {\n    const [stop, currCost, steps] = pq.dequeue();\n    if (!adjList[stop]) continue;\n\n    stops.setColor(stop, \"cyan\");\n    for (let i = 0; i < adjList[stop].length; i++) {\n      adjList[stop].setColor(i, \"blue\");\n      const [next, cost] = adjList[stop][i];\n      const nextCost = currCost + cost;\n      if ((stops[next] ?? Infinity) > nextCost) {\n        stops[next] = nextCost;\n        if (steps < k) {\n          pq.enqueue([next, nextCost, steps + 1]);\n        }\n      }\n      adjList[stop].setColor(i, null);\n    }\n\n    stops.setColor(stop, \"green\");\n  }\n\n  if (!stops[dst]) return -1;\n\n  return stops[dst];\n};\n\nreturn findCheapestPrice;\n",
-      "pythonCode": null,
-      "order": 0
     },
     "clt1umhyz000386hwn8wcddnd": {
       "id": "clt1umhyz000386hwn8wcddnd",
@@ -27769,28 +28305,28 @@
     "cluazzgro0003exgvrsveg4ru": {
       "id": "cluazzgro0003exgvrsveg4ru",
       "createdAt": "2024-03-28T08:53:39.108Z",
-      "updatedAt": "2024-10-11T16:44:56.968Z",
+      "updatedAt": "2024-10-16T19:53:46.914Z",
       "projectId": "cluazzgro0001exgvjtl1fnw1",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number[][]} times\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nvar networkDelayTime = function (times, n, k) {\n  const adjList = new Array(n + 1);\n  for (let i = 0; i < times.length; i++) {\n    times.setColor(i, \"cyan\");\n    const [from, to, delay] = times[i];\n    (adjList[from] ??= new Array()).push([to, delay]);\n  }\n\n  const delays = new Array(n + 1).fill(Infinity);\n  delays[k] = 0;\n\n  const pq = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  pq.enqueue([k, 0]);\n\n  while (!pq.isEmpty()) {\n    const [node, delay] = pq.dequeue();\n    if (!adjList[node] || delay > delays[node]) continue;\n\n    for (const [next, cost] of adjList[node]) {\n      const newDelay = delay + cost;\n      if (newDelay >= delays[next]) continue;\n\n      delays[next] = newDelay;\n      pq.enqueue([next, newDelay]);\n    }\n  }\n\n  let result = 0;\n  for (let i = 1; i <= n; i++) {\n    if (!Number.isFinite(delays[i])) return -1;\n\n    result = Math.max(result, delays[i]);\n  }\n\n  return result;\n};\n\nclass PriorityQueue {\n  constructor({ compare }) {\n    this.comparator = compare;\n    this.arr = new Array();\n  }\n\n  enqueue(item) {\n    this.arr.push(item);\n    this.arr.sort(this.comparator);\n  }\n\n  dequeue() {\n    return this.arr.shift();\n  }\n\n  isEmpty() {\n    return this.arr.length === 0;\n  }\n}\n\nreturn networkDelayTime;\n",
+      "code": "/**\n * @param {number[][]} times\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nvar networkDelayTime = function (times, n, k) {\n  const adjList = new Array(n + 1);\n  for (let i = 0; i < times.length; i++) {\n    const [from, to, delay] = times[i];\n    (adjList[from] ??= new Array()).push([to, delay]);\n  }\n\n  const delays = new Array(n + 1).fill(Infinity);\n  delays[k] = 0;\n\n  const pq = new PriorityQueue({ compare: (a, b) => a[1] - b[1] });\n  pq.enqueue([k, 0]);\n\n  while (!pq.isEmpty()) {\n    const [node, delay] = pq.dequeue();\n    times.blink(node);\n    if (!adjList[node] || delay > delays[node]) continue;\n    times.setColor(node, \"green\");\n\n    for (const [next, cost] of adjList[node]) {\n      const newDelay = delay + cost;\n      if (newDelay >= delays[next]) continue;\n\n      delays[next] = newDelay;\n      pq.enqueue([next, newDelay]);\n    }\n  }\n\n  let result = 0;\n  for (let i = 1; i <= n; i++) {\n    if (!Number.isFinite(delays[i])) return -1;\n\n    result = Math.max(result, delays[i]);\n  }\n\n  return result;\n};\n\nclass PriorityQueue {\n  constructor({ compare }) {\n    this.comparator = compare;\n    this.arr = new Array();\n  }\n\n  enqueue(item) {\n    this.arr.push(item);\n    this.arr.sort(this.comparator);\n  }\n\n  dequeue() {\n    return this.arr.shift();\n  }\n\n  isEmpty() {\n    return this.arr.length === 0;\n  }\n}\n\nreturn networkDelayTime;\n",
       "pythonCode": null,
       "order": 0
     },
     "clumq8xdn0003b8gg7pkw6tpi": {
       "id": "clumq8xdn0003b8gg7pkw6tpi",
       "createdAt": "2024-04-05T13:54:18.491Z",
-      "updatedAt": "2024-04-08T11:08:41.663Z",
+      "updatedAt": "2024-10-14T08:30:28.229Z",
       "projectId": "clumq8xdn0001b8ggrraj2hoj",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar boundaryOfBinaryTree = function (root) {\n  if (!root) return [];\n\n  const result = [root.val];\n  if (!root.left && !root.right) return result;\n\n  const isLeaf = (node) => !node.left && !node.right;\n\n  const dfsLeft = (node) => {\n    if (!node || isLeaf(node)) return;\n    node.setColor(\"cyan\", \"blink\");\n\n    result.push(node.val);\n\n    if (node.left) {\n      dfsLeft(node.left);\n    } else {\n      dfsLeft(node.right);\n    }\n  };\n  dfsLeft(root.left);\n\n  const dfsLeaves = (node) => {\n    if (!node) return;\n    node.blink();\n\n    if (isLeaf(node)) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n    } else {\n      dfsLeaves(node.left);\n      dfsLeaves(node.right);\n    }\n  };\n  dfsLeaves(root);\n\n  const dfsRight = (node) => {\n    if (!node || isLeaf(node)) return;\n\n    if (node.right) {\n      dfsRight(node.right);\n    } else {\n      dfsRight(node.left);\n    }\n\n    node.setColor(\"orange\", \"blink\");\n    result.push(node.val);\n  };\n  dfsRight(root.right);\n\n  return result;\n};\n\nreturn boundaryOfBinaryTree;\n",
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nvar boundaryOfBinaryTree = function (root) {\n  if (!root) return [];\n\n  const result = [root.val];\n  if (!root.left && !root.right) return result;\n\n  const isLeaf = (node) => !node.left && !node.right;\n\n  const dfsLeft = (node) => {\n    if (!node || isLeaf(node)) return;\n    node.setColor(\"cyan\");\n\n    result.push(node.val);\n\n    if (node.left) {\n      dfsLeft(node.left);\n    } else {\n      dfsLeft(node.right);\n    }\n  };\n  dfsLeft(root.left);\n\n  const dfsLeaves = (node) => {\n    if (!node) return;\n    node.blink();\n\n    if (isLeaf(node)) {\n      result.push(node.val);\n      node.setColor(\"green\");\n    } else {\n      dfsLeaves(node.left);\n      dfsLeaves(node.right);\n    }\n  };\n  dfsLeaves(root);\n\n  const dfsRight = (node) => {\n    if (!node || isLeaf(node)) return;\n\n    if (node.right) {\n      dfsRight(node.right);\n    } else {\n      dfsRight(node.left);\n    }\n\n    result.push(node.val);\n    node.setColor(\"orange\");\n  };\n  dfsRight(root.right);\n\n  return result;\n};\n\nreturn boundaryOfBinaryTree;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -28018,20 +28554,6 @@
       "pythonCode": null,
       "order": 2
     },
-    "clupdnquc0003gfiexgq4lzm5": {
-      "id": "clupdnquc0003gfiexgq4lzm5",
-      "createdAt": "2024-04-07T10:25:13.379Z",
-      "updatedAt": "2024-04-07T10:27:34.117Z",
-      "projectId": "clupdnqua0001gfiepqgbcchu",
-      "title": "Solution 1",
-      "slug": "solution-1",
-      "timeComplexity": null,
-      "spaceComplexity": null,
-      "description": null,
-      "code": "/**\n * @param {string[]} words\n * @return {string}\n */\nvar alienOrder = function (words) {\n  const n = words.length;\n\n  const indegrees = new Map();\n  const adjList = new Object();\n  for (const word of words) {\n    for (const char of word) {\n      adjList[char] ??= new Array();\n      if (!indegrees.has(char)) {\n        indegrees.set(char, 0);\n      }\n    }\n  }\n\n  for (let i = 0; i < n - 1; i++) {\n    const word = words[i];\n    const nextWord = words[i + 1];\n\n    if (word.length > nextWord.length && word.startsWith(nextWord)) {\n      return \"\";\n    }\n\n    for (let j = 0; j < word.length && j < nextWord.length; j++) {\n      const from = word[j];\n      const to = nextWord[j];\n      if (from === to) continue;\n\n      adjList[from].push(to);\n      indegrees.set(to, indegrees.get(to) + 1);\n      break;\n    }\n  }\n\n  console.log({ adjList, indegrees });\n\n  const result = [];\n  const queue = new Queue();\n  for (const [char, count] of indegrees) {\n    if (count !== 0) continue;\n\n    queue.enqueue(char);\n  }\n\n  while (!queue.isEmpty()) {\n    const curr = queue.dequeue();\n    result.push(curr);\n\n    for (const next of adjList[curr]) {\n      const nextCount = indegrees.get(next) - 1;\n      indegrees.set(next, nextCount);\n      if (nextCount < 0) continue;\n\n      if (nextCount === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  if (result.length < indegrees.size) return \"\";\n\n  return result.join(\"\");\n};\n\nreturn alienOrder;\n",
-      "pythonCode": null,
-      "order": 0
-    },
     "clls4ecw90003jz08wk6znpig": {
       "id": "clls4ecw90003jz08wk6znpig",
       "createdAt": "2023-08-26T14:31:56.362Z",
@@ -28043,6 +28565,20 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s1\n * @param {string} s2\n * @param {string} s3\n * @return {boolean}\n */\nvar isInterleave = function (s1, s2, s3) {\n  const m = s1.length;\n  const n = s2.length;\n  const l = s3.length;\n\n  if (m + n !== l) return false;\n\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n\n  for (let j = 1; j <= n; j++) {\n    dp.setColor(j, \"cyan\");\n    dp[j] = dp[j - 1] && s2[j - 1] === s3[j - 1];\n  }\n\n  for (let i = 1; i <= m; i++) {\n    dp[0] = dp[0] && s1[i - 1] === s3[i - 1];\n    for (let j = 1; j <= n; ++j) {\n      dp.setColor(j, \"green\");\n      dp[j] =\n        (dp[j] && s1[i - 1] === s3[i + j - 1]) ||\n        (dp[j - 1] && s2[j - 1] === s3[i + j - 1]);\n      dp.setColor(j, null);\n    }\n  }\n\n  return dp[n];\n};\n\nreturn isInterleave;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clupdnquc0003gfiexgq4lzm5": {
+      "id": "clupdnquc0003gfiexgq4lzm5",
+      "createdAt": "2024-04-07T10:25:13.379Z",
+      "updatedAt": "2024-10-16T19:39:52.770Z",
+      "projectId": "clupdnqua0001gfiepqgbcchu",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {string[]} words\n * @return {string}\n */\nvar alienOrder = function (words) {\n  const n = words.length;\n\n  const indegrees = new Map();\n  const adjList = new Object();\n  for (const word of words) {\n    for (const char of word) {\n      adjList[char] ??= new Array();\n      if (!indegrees.has(char)) {\n        indegrees.set(char, 0);\n      }\n    }\n  }\n\n  for (let i = 0; i < n - 1; i++) {\n    const word = words[i];\n    const nextWord = words[i + 1];\n\n    if (word.length > nextWord.length && word.startsWith(nextWord)) {\n      return \"\";\n    }\n\n    for (let j = 0; j < word.length && j < nextWord.length; j++) {\n      const from = word[j];\n      const to = nextWord[j];\n      if (from === to) continue;\n\n      adjList[from].push(to);\n      indegrees.set(to, indegrees.get(to) + 1);\n      break;\n    }\n  }\n\n  console.log({ adjList, indegrees });\n\n  const result = [];\n  const queue = new Queue();\n  for (const [char, count] of indegrees) {\n    if (count !== 0) continue;\n\n    queue.enqueue(char);\n  }\n\n  while (!queue.isEmpty()) {\n    const curr = queue.dequeue();\n    result.push(curr);\n\n    for (const next of adjList[curr]) {\n      const nextCount = indegrees.get(next) - 1;\n      indegrees.set(next, nextCount);\n      if (nextCount < 0) continue;\n\n      if (nextCount === 0) {\n        queue.enqueue(next);\n      }\n    }\n  }\n\n  if (result.length < indegrees.size) return \"\";\n\n  return result.join(\"\");\n};\n\nreturn alienOrder;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -28385,14 +28921,14 @@
     "cljyq5r920004mf089avdcfj0": {
       "id": "cljyq5r920004mf089avdcfj0",
       "createdAt": "2023-07-11T20:08:18.999Z",
-      "updatedAt": "2024-10-06T21:03:47.333Z",
+      "updatedAt": "2024-10-14T08:27:19.855Z",
       "projectId": "cljyq5r920001mf08to6vn3bx",
       "title": "Double DFS",
       "slug": "double-dfs",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": "",
-      "code": "/**\n * @param {TreeNodeObject} root\n * @param {number} target\n * @param {number} k\n */\nvar distanceK = function (root, target, k) {\n  if (!root) return [];\n\n  const result = [];\n\n  const findAtDistance = (node, depth, prevVal) => {\n    if (depth === k) {\n      node.setColor(\"green\", \"blink\");\n      result.push(node.val);\n      return;\n    } else if (depth > k) return;\n    node.setColor(\"orange\");\n\n    const nextDepth = depth + 1;\n    if (node.left && node.left.val !== prevVal) {\n      findAtDistance(node.left, nextDepth, node.val);\n    }\n    if (node.right && node.right.val !== prevVal) {\n      findAtDistance(node.right, nextDepth, node.val);\n    }\n  };\n\n  const traverse = (node) => {\n    node.setColor(\"cyan\");\n    if (node.val === target) {\n      findAtDistance(node, 0, null);\n      return 1;\n    }\n    if (node.left) {\n      const distance = traverse(node.left);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.left.val);\n        return distance + 1;\n      }\n    }\n    if (node.right) {\n      const distance = traverse(node.right);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.right.val);\n        return distance + 1;\n      }\n    }\n\n    return -1;\n  };\n\n  traverse(root);\n\n  return result;\n};\n\nreturn distanceK;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "code": "/**\n * @param {TreeNodeObject} root\n * @param {number} target\n * @param {number} k\n */\nvar distanceK = function (root, target, k) {\n  if (!root) return [];\n\n  const result = [];\n\n  const findAtDistance = (node, depth, prevVal) => {\n    if (depth === k) {\n      node.setColor(\"green\");\n      result.push(node.val);\n      return;\n    } else if (depth > k) return;\n    node.setColor(\"orange\");\n\n    const nextDepth = depth + 1;\n    if (node.left && node.left.val !== prevVal) {\n      findAtDistance(node.left, nextDepth, node.val);\n    }\n    if (node.right && node.right.val !== prevVal) {\n      findAtDistance(node.right, nextDepth, node.val);\n    }\n  };\n\n  const traverse = (node) => {\n    node.setColor(\"cyan\");\n    if (node.val === target) {\n      findAtDistance(node, 0, null);\n      return 1;\n    }\n    if (node.left) {\n      const distance = traverse(node.left);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.left.val);\n        return distance + 1;\n      }\n    }\n    if (node.right) {\n      const distance = traverse(node.right);\n      if (distance !== -1) {\n        findAtDistance(node, distance, node.right.val);\n        return distance + 1;\n      }\n    }\n\n    return -1;\n  };\n\n  traverse(root);\n\n  return result;\n};\n\nreturn distanceK;\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string, animation: \"blink\"): void\n *   blink(): void\n * }} TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": "",
       "order": 0
     },
@@ -28567,7 +29103,7 @@
     "clxaor1si0003avenu93utrgt": {
       "id": "clxaor1si0003avenu93utrgt",
       "createdAt": "2024-06-11T17:38:17.679Z",
-      "updatedAt": "2024-10-07T16:54:44.812Z",
+      "updatedAt": "2024-10-16T19:39:34.564Z",
       "projectId": "clxaor1sg0001aveni64ywcse",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -28987,7 +29523,7 @@
     "clwnknuqi0003yfs5h1ez87xa": {
       "id": "clwnknuqi0003yfs5h1ez87xa",
       "createdAt": "2024-05-26T13:25:08.054Z",
-      "updatedAt": "2024-05-28T18:28:49.278Z",
+      "updatedAt": "2024-10-14T11:26:50.888Z",
       "projectId": "clwnknuqf0001yfs5rgclhue4",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -29043,7 +29579,7 @@
     "clxht2wuy0003aosfp9sv61xx": {
       "id": "clxht2wuy0003aosfp9sv61xx",
       "createdAt": "2024-06-16T17:13:52.858Z",
-      "updatedAt": "2024-06-17T08:53:35.471Z",
+      "updatedAt": "2024-10-14T08:31:00.057Z",
       "projectId": "clxht2wuy0001aosf3hzv7dcd",
       "title": "Recursion",
       "slug": "recursion",
@@ -29351,14 +29887,14 @@
     "cly09u6be00039ie3gax3a4ai": {
       "id": "cly09u6be00039ie3gax3a4ai",
       "createdAt": "2024-06-29T15:22:49.850Z",
-      "updatedAt": "2024-07-01T20:59:44.325Z",
+      "updatedAt": "2024-10-16T19:50:57.275Z",
       "projectId": "cly09u6bd00019ie39i745qha",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[][]}\n */\nvar getAncestors = function (n, edges) {\n  const adjList = new Object();\n  for (const [from, to] of edges) {\n    (adjList[from] ??= new Array()).push(to);\n  }\n\n  const result = Array.from({ length: n }, () => new Array());\n\n  const dfs = (ancestor, node) => {\n    if (adjList[node]) {\n      for (const next of adjList[node]) {\n        if (result[next].at(-1) !== ancestor) {\n          result[next].push(ancestor);\n          dfs(ancestor, next);\n        }\n      }\n    }\n  };\n\n  for (let i = 0; i < n; i++) {\n    dfs(i, i);\n  }\n\n  return result;\n};\n\nreturn getAncestors;\n",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[][]}\n */\nvar getAncestors = function (n, edges) {\n  const adjList = new Object();\n  for (const [from, to] of edges) {\n    (adjList[from] ??= new Array()).push(to);\n  }\n\n  const result = Array.from({ length: n }, () => new Array());\n\n  const dfs = (ancestor, node) => {\n    edges.setColor(node, \"green\", \"blink\");\n    if (adjList[node]) {\n      for (const next of adjList[node]) {\n        if (result[next].at(-1) !== ancestor) {\n          result[next].push(ancestor);\n          dfs(ancestor, next);\n        }\n      }\n    }\n  };\n\n  for (let i = 0; i < n; i++) {\n    dfs(i, i);\n  }\n\n  return result;\n};\n\nreturn getAncestors;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29401,6 +29937,20 @@
       "spaceComplexity": "O(n ^ 2)",
       "description": "",
       "code": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nvar findTheCity = function (n, edges, distanceThreshold) {\n  const distanceMatrix = Array.from({ length: n }, () =>\n    new Array(n).fill(Infinity),\n  );\n  for (let i = 0; i < n; i++) {\n    distanceMatrix[i][i] = 0;\n  }\n\n  for (const [from, to, cost] of edges) {\n    distanceMatrix[from][to] = cost;\n    distanceMatrix[to][from] = cost;\n  }\n\n  floyd(n, distanceMatrix);\n\n  let result = -1;\n  let minCount = Infinity;\n  for (let i = 0; i < n; i++) {\n    let reachableCount = 0;\n    for (let j = 0; j < n; j++) {\n      if (i === j) continue;\n      if (distanceMatrix[i][j] <= distanceThreshold) {\n        reachableCount++;\n      }\n    }\n\n    if (reachableCount <= minCount) {\n      minCount = reachableCount;\n      result = i;\n    }\n  }\n\n  return result;\n};\n\nfunction floyd(n, matrix) {\n  for (let k = 0; k < n; k++) {\n    for (let i = 0; i < n; i++) {\n      for (let j = 0; j < n; j++) {\n        matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);\n      }\n    }\n  }\n}\n\nreturn findTheCity;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clmt3czb30003n90hr0zl2wmj": {
+      "id": "clmt3czb30003n90hr0zl2wmj",
+      "createdAt": "2023-09-21T11:30:20.992Z",
+      "updatedAt": "2024-10-16T16:00:29.520Z",
+      "projectId": "clmt3czb30001n90htcfcue0g",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number} n\n * @param {number[][]} relations\n * @return {number}\n */\nvar minimumSemesters = function (n, relations) {\n  const indegrees = new Uint32Array(n);\n\n  const adjList = new Object();\n  for (const [from, to] of relations) {\n    (adjList[from - 1] ??= new Array()).push(to - 1);\n    indegrees[to - 1]++;\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 0) queue.enqueue(i);\n  }\n  if (queue.isEmpty()) {\n    return -1;\n  }\n\n  const v = new Object();\n  v.steps = 0;\n  v.visitedCount = 0;\n\n  while (!queue.isEmpty()) {\n    v.steps++;\n    const size = queue.size();\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      relations.setColor(node + 1, \"green\");\n      v.visitedCount++;\n      if (!adjList[node]) continue;\n\n      for (const neighbor of adjList[node]) {\n        if (indegrees[neighbor] > 0) {\n          relations.blink(neighbor + 1);\n          indegrees[neighbor]--;\n          if (indegrees[neighbor] === 0) queue.enqueue(neighbor);\n        }\n      }\n    }\n  }\n\n  if (v.visitedCount < n) return -1;\n\n  return v.steps;\n};\n\nreturn minimumSemesters;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29533,14 +30083,14 @@
     "clg6qf72i0004k208htjfv7ts": {
       "id": "clg6qf72i0004k208htjfv7ts",
       "createdAt": "2023-04-07T15:58:59.466Z",
-      "updatedAt": "2024-08-07T11:28:30.234Z",
+      "updatedAt": "2024-10-14T08:29:32.882Z",
       "projectId": "clg6qf72i0001k2083iwr3d44",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function rightSideView(root) {\n  if (!root) return [];\n\n  const result = new Array();\n  const queue = Array.from([root]);\n\n  let levelLength = 1;\n  while (queue.length > 0) {\n    result.push(queue[0].val);\n    queue[0].setColor(\"green\", \"blink\");\n\n    for (let i = 0; i < levelLength; i++) {\n      const node = queue.pop();\n      i < levelLength - 1 && node.setColor(\"cyan\");\n\n      node.left && queue.unshift(node.left);\n      node.right && queue.unshift(node.right);\n    }\n\n    levelLength = queue.length;\n  }\n\n  return result;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function rightSideView(root) {\n  if (!root) return [];\n\n  const result = new Array();\n  const queue = Array.from([root]);\n\n  let levelLength = 1;\n  while (queue.length > 0) {\n    result.push(queue[0].val);\n    queue[0].setColor(\"green\");\n\n    for (let i = 0; i < levelLength; i++) {\n      const node = queue.pop();\n      i < levelLength - 1 && node.setColor(\"cyan\");\n\n      node.left && queue.unshift(node.left);\n      node.right && queue.unshift(node.right);\n    }\n\n    levelLength = queue.length;\n  }\n\n  return result;\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29698,6 +30248,20 @@
       "pythonCode": null,
       "order": 0
     },
+    "cm268hmuq0003f9mrv7zu47eo": {
+      "id": "cm268hmuq0003f9mrv7zu47eo",
+      "createdAt": "2024-10-12T14:10:31.537Z",
+      "updatedAt": "2024-10-13T08:57:26.254Z",
+      "projectId": "cm268hmuq0001f9mrea49uazi",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "var containsNearbyAlmostDuplicate = function (nums, indexDiff, valueDiff) {\n  const buckets = new Map();\n\n  const width = valueDiff + 1;\n\n  let left = 0;\n  for (let right = 0; right < nums.length; right++) {\n    const curNumber = nums[right];\n\n    const bucketIdx = Math.floor(curNumber / width);\n    if (\n      buckets.has(bucketIdx) ||\n      (buckets.has(bucketIdx + 1) &&\n        Math.abs(curNumber - buckets.get(bucketIdx + 1)) < width) ||\n      (buckets.has(bucketIdx - 1) &&\n        Math.abs(curNumber - buckets.get(bucketIdx - 1)) < width)\n    ) {\n      return true;\n    }\n\n    // put current number into corresponding bucket\n    buckets.set(bucketIdx, curNumber);\n\n    if (right >= indexDiff) {\n      const oldNumber = nums[left++];\n      const oldNumberBucketIdx = Math.floor(oldNumber / width);\n      buckets.delete(oldNumberBucketIdx);\n    }\n  }\n\n  return false;\n};\n\nreturn containsNearbyAlmostDuplicate;\n",
+      "pythonCode": null,
+      "order": 0
+    },
     "cm1z912fh0003i6pqsdq1ndzp": {
       "id": "cm1z912fh0003i6pqsdq1ndzp",
       "createdAt": "2024-10-07T16:51:14.924Z",
@@ -29723,6 +30287,34 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} num\n * @return {string}\n */\nconst numToWord = {\n  0: \"\",\n  1: \"One\",\n  2: \"Two\",\n  3: \"Three\",\n  4: \"Four\",\n  5: \"Five\",\n  6: \"Six\",\n  7: \"Seven\",\n  8: \"Eight\",\n  9: \"Nine\",\n  10: \"Ten\",\n  11: \"Eleven\",\n  12: \"Twelve\",\n  13: \"Thirteen\",\n  14: \"Fourteen\",\n  15: \"Fifteen\",\n  16: \"Sixteen\",\n  17: \"Seventeen\",\n  18: \"Eighteen\",\n  19: \"Nineteen\",\n  20: \"Twenty\",\n  30: \"Thirty\",\n  40: \"Forty\",\n  50: \"Fifty\",\n  60: \"Sixty\",\n  70: \"Seventy\",\n  80: \"Eighty\",\n  90: \"Ninety\",\n};\n\nconst numberToWords = function (num) {\n  if (num === 0) {\n    return \"Zero\";\n  }\n  const arr = new Array();\n  toWords(num, arr);\n\n  return arr.filter(Boolean).join(\" \");\n};\n\nconst toWords = function (num, arr) {\n  console.log(num);\n  if (num < 20) {\n    arr.push(numToWord[num]);\n  } else if (num < 100) {\n    arr.push(numToWord[Math.floor(num / 10) * 10]);\n    arr.push(numToWord[num % 10]);\n  } else if (num < 1000) {\n    arr.push(toWords(Math.floor(num / 100), arr));\n    arr.push(\"Hundred\");\n    arr.push(toWords(num % 100, arr));\n  } else if (num < 1000_000) {\n    arr.push(toWords(Math.floor(num / 1000), arr));\n    arr.push(\"Thousand\");\n    arr.push(toWords(num % 1000, arr));\n  } else if (num < 1000_000_000) {\n    arr.push(toWords(Math.floor(num / 1000_000), arr));\n    arr.push(\"Million\");\n    arr.push(toWords(num % 1000_000, arr));\n  } else {\n    arr.push(toWords(Math.floor(num / 1000_000_000), arr));\n    arr.push(\"Billion\");\n    arr.push(toWords(num % 1000_000_000, arr));\n  }\n};\n\nconst handleSmall = (num) => {\n  return numToWord[num];\n};\n\nreturn numberToWords;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clda4ezqy0004l00823woi4sk": {
+      "id": "clda4ezqy0004l00823woi4sk",
+      "createdAt": "2023-01-24T10:54:56.122Z",
+      "updatedAt": "2024-10-13T08:59:46.804Z",
+      "projectId": "clda4ezqy0001l008qe41ecpg",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\r\n * @param {TreeNodeObject} head\r\n */\r\nreturn function getSumOfNodes(head, bool, str) {\r\n  if (head === null) return 0;\r\n\r\n  head.setColor(\"green\", \"blink\");\r\n\r\n  const left = getSumOfNodes(head.left);\r\n  const right = getSumOfNodes(head.right);\r\n\r\n  head.setColor(null);\r\n\r\n  return head.val + left + right;\r\n};\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clpwhz0vw00032uy36n7helc4": {
+      "id": "clpwhz0vw00032uy36n7helc4",
+      "createdAt": "2023-12-08T10:41:49.629Z",
+      "updatedAt": "2024-10-14T08:31:12.015Z",
+      "projectId": "clpwhz0vw00012uy3428us0xn",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\r\n * Definition for a binary tree node.\r\n * function TreeNode(val, left, right) {\r\n *     this.val = (val===undefined ? 0 : val)\r\n *     this.left = (left===undefined ? null : left)\r\n *     this.right = (right===undefined ? null : right)\r\n * }\r\n */\r\n/**\r\n * @param {TreeNode} root\r\n * @return {string}\r\n */\r\nvar tree2str = function (root) {\r\n  const result = new Array();\r\n\r\n  const dfs = (node) => {\r\n    if (!node) return;\r\n    node.setColor(\"green\", \"\");\r\n\r\n    result.push(node.val);\r\n\r\n    if (node.left || node.right) {\r\n      result.push(\"(\");\r\n      dfs(node.left);\r\n      result.push(\")\");\r\n    }\r\n\r\n    if (node.right) {\r\n      result.push(\"(\");\r\n      dfs(node.right);\r\n      result.push(\")\");\r\n    }\r\n  };\r\n\r\n  dfs(root);\r\n\r\n  return result.join(\"\");\r\n};\r\n\r\nreturn tree2str;\r\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29754,17 +30346,17 @@
       "pythonCode": null,
       "order": 0
     },
-    "clmt3czb30003n90hr0zl2wmj": {
-      "id": "clmt3czb30003n90hr0zl2wmj",
-      "createdAt": "2023-09-21T11:30:20.992Z",
-      "updatedAt": "2024-10-07T16:55:11.613Z",
-      "projectId": "clmt3czb30001n90htcfcue0g",
+    "cm2c26uyy0003yj4eldi3e72f": {
+      "id": "cm2c26uyy0003yj4eldi3e72f",
+      "createdAt": "2024-10-16T16:00:48.201Z",
+      "updatedAt": "2024-10-16T19:38:58.356Z",
+      "projectId": "cm2c26uyy0001yj4epu85od6n",
       "title": "Solution 1",
       "slug": "solution-1",
       "timeComplexity": null,
       "spaceComplexity": null,
       "description": null,
-      "code": "/**\n * @param {number} n\n * @param {number[][]} relations\n * @return {number}\n */\nvar minimumSemesters = function (n, relations) {\n  const indegrees = new Array(n).fill(0);\n\n  const adjList = {};\n  for (const [from, to] of relations) {\n    (adjList[from - 1] ??= []).push(to - 1);\n    indegrees[to - 1]++;\n  }\n\n  const queue = new Queue();\n  for (let i = 0; i < n; i++) {\n    if (indegrees[i] === 0) queue.enqueue(i);\n  }\n  if (queue.isEmpty()) {\n    return -1;\n  }\n\n  console.log(adjList);\n  console.log(indegrees);\n\n  let steps = 0;\n  let visitedCount = 0;\n\n  while (!queue.isEmpty()) {\n    steps++;\n    const size = queue.size();\n    for (let i = 0; i < size; i++) {\n      const node = queue.dequeue();\n      visitedCount++;\n      if (!adjList[node]) continue;\n\n      for (const neighbor of adjList[node]) {\n        if (indegrees[neighbor] > 0) {\n          indegrees[neighbor]--;\n          if (indegrees[neighbor] === 0) queue.enqueue(neighbor);\n        }\n      }\n    }\n  }\n\n  if (visitedCount < n) return -1;\n\n  return steps;\n};\n\nreturn minimumSemesters;\n",
+      "code": "/**\n * @param {number} a\n * @param {number} b\n * @param {number} c\n * @return {string}\n */\nvar longestDiverseString = function (a, b, c) {\n  const result = new Array();\n  const arr = [\n    [a, \"a\"],\n    [b, \"b\"],\n    [c, \"c\"],\n  ];\n  const pq = new PriorityQueue({ compare: (a, b) => b[0] - a[0] });\n  arr.forEach((item) => {\n    if (!item[0]) return;\n    pq.enqueue(item);\n  });\n\n  while (!pq.isEmpty()) {\n    const top = pq.dequeue();\n\n    if (result.at(-1) === top[1] && result.at(-2) === top[1]) {\n      if (pq.isEmpty()) break;\n\n      const next = pq.dequeue();\n      result.push(next[1]);\n      next[0]--;\n      if (next[0]) pq.enqueue(next);\n    }\n\n    result.push(top[1]);\n    top[0]--;\n    if (top[0]) pq.enqueue(top);\n  }\n\n  return result.join(\"\");\n};\n\nreturn longestDiverseString;\n",
       "pythonCode": null,
       "order": 0
     },
@@ -29849,6 +30441,62 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number} n\n * @return {string[][]}\n */\nvar solveNQueens = function (n) {\n  const grid = Array.from({ length: n }, () =>\n    Array.from({ length: n }, () => \".\", null, {\n      colorMap: { Q: \"cyan\" },\n    }),\n  );\n  grid.showIndexes(n - 1, n - 1);\n\n  const cols = new Array(n);\n  const offset = n - 1;\n  const posDiag = new Array(n + offset);\n  const negDiag = new Array(n + offset);\n  // [cols, posDiag, negDiag].forEach((arr) => arr.setColorMap({ 1: \"green\" }));\n\n  const makeResult = () => grid.map((row) => row.join(\"\"));\n\n  const result = [];\n\n  const backtrack = (row) => {\n    if (row === n) {\n      result.push(makeResult());\n      return;\n    }\n\n    for (let col = 0; col < n; col++) {\n      const pdIndex = row + col;\n      const ndIndex = row - col + offset;\n      if (cols[col] || posDiag[pdIndex] || negDiag[ndIndex]) continue;\n\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 1;\n      grid[row][col] = \"Q\";\n      backtrack(row + 1);\n      grid[row][col] = \".\";\n      cols[col] = posDiag[pdIndex] = negDiag[ndIndex] = 0;\n    }\n  };\n\n  backtrack(0);\n\n  return result;\n};\n\nreturn solveNQueens;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cm260z5u10003un713vt2vaw3": {
+      "id": "cm260z5u10003un713vt2vaw3",
+      "createdAt": "2024-10-12T10:40:12.359Z",
+      "updatedAt": "2024-10-13T14:34:45.800Z",
+      "projectId": "cm260z5u10001un7184fyefa9",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * @param {number[][]} heightMap\n * @return {number}\n */\nvar trapRainWater = function (heightMap) {\n  if (!heightMap || !heightMap[0]) return 0;\n\n  const m = heightMap.length;\n  const n = heightMap[0].length;\n  if (m < 3 || n < 3) return 0;\n\n  const visited = Array.from({ length: m }, () => new Array(n));\n  const heap = new PriorityQueue({ compare: (a, b) => a[0] - b[0] });\n\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      if (i === 0 || i === m - 1 || j === 0 || j === n - 1) {\n        heightMap[i].setColor(j, \"green\");\n        heap.enqueue([heightMap[i][j], i, j]);\n        visited[i][j] = 1;\n      }\n    }\n  }\n\n  const v = new Object();\n  v.level = 0;\n  v.result = 0;\n\n  while (!heap.isEmpty()) {\n    const [height, x, y] = heap.dequeue();\n    v.level = Math.max(v.level, height);\n\n    for (const [row, col] of iterateNeighbors(x, y)) {\n      if (row < 0 || row >= m || col < 0 || col >= n) continue;\n      if (visited[row][col]) continue;\n\n      heap.enqueue([heightMap[row][col], row, col]);\n\n      if (heightMap[row][col] < v.level) {\n        v.result += v.level - heightMap[row][col];\n        heightMap[row].setColor(col, \"blue\");\n      }\n\n      visited[row][col] = 1;\n    }\n  }\n\n  return v.result;\n};\n\nconst DIRECTIONS = [\n  [-1, 0],\n  [0, 1],\n  [1, 0],\n  [0, -1],\n];\n\nfunction* iterateNeighbors(row, col) {\n  for (const [dRow, dCol] of DIRECTIONS) {\n    yield [row + dRow, col + dCol];\n  }\n}\n\nreturn trapRainWater;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clr7rmznn0003pii1fs5h6i89": {
+      "id": "clr7rmznn0003pii1fs5h6i89",
+      "createdAt": "2024-01-10T12:37:34.594Z",
+      "updatedAt": "2024-10-14T08:27:33.583Z",
+      "projectId": "clr7rmznm0001pii1zxhjioao",
+      "title": "Solution 1",
+      "slug": "solution-1",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": null,
+      "code": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.left = (left===undefined ? null : left)\n *     this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} start\n * @return {number}\n */\nvar amountOfTime = function (root, start) {\n  let max = 0;\n\n  const dfs = (node) => {\n    if (!node) return [0, -1];\n    node.blink();\n\n    const [leftHeight, leftStart] = dfs(node.left);\n    const [rightHeight, rightStart] = dfs(node.right);\n    const height = Math.max(leftHeight, rightHeight);\n    let startDist = -1;\n\n    if (leftStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, leftStart, leftStart + rightHeight);\n      startDist = leftStart + 1;\n    } else if (rightStart > -1) {\n      node.setColor(\"green\");\n      max = Math.max(max, rightStart, leftHeight + rightStart);\n      startDist = rightStart + 1;\n    } else if (node.val === start) {\n      node.setColor(\"red\");\n      startDist = 1;\n      max = height;\n    }\n\n    return [height + 1, startDist];\n  };\n\n  dfs(root);\n\n  return max;\n};\n\nreturn amountOfTime;\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "cleneu5h30004mj0865tgqolj": {
+      "id": "cleneu5h30004mj0865tgqolj",
+      "createdAt": "2023-02-27T22:47:22.168Z",
+      "updatedAt": "2024-10-14T08:28:05.005Z",
+      "projectId": "cleneu5h30001mj08h0net2yy",
+      "title": "DFS Recursion",
+      "slug": "dfs",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "description": "",
+      "code": "/**\n * @param {TreeNodeObject} head\n */\nreturn function getLevels(head) {\n  const array = [];\n\n  const dfs = (node, depth = 0) => {\n      array[depth] ??= [];\n      array[depth].push(node.val);\n\n      node.setColor(\"green\");\n\n      node.left && dfs(node.left, depth + 1);\n      node.right && dfs(node.right, depth + 1);\n  }\n\n  dfs(head)\n\n  console.log(\"Raw array: \", array);\n\n  return array.map((values) => values.reduce((acc, curr) => acc + curr, 0) / values.length);\n};\n\n/**\n * Definitions for a binary tree node.\n *\n * @typedef {{\n *   val: number,\n *   left: TreeNodeObject,\n *   right: TreeNodeObject,\n *   setColor(color: string): void }\n * } TreeNodeObject\n *\n * @callback TreeNode\n * @param {number} val\n * @param {(TreeNodeObject | null)?} left\n * @param {(TreeNodeObject | null)?} right\n * @returns {TreeNodeObject}\n */\n",
+      "pythonCode": null,
+      "order": 0
+    },
+    "clsyiyjl80003ad9jrgxu0aqv": {
+      "id": "clsyiyjl80003ad9jrgxu0aqv",
+      "createdAt": "2024-02-23T10:44:06.189Z",
+      "updatedAt": "2024-10-16T20:26:45.806Z",
+      "projectId": "clsyiyjl80001ad9jtz7pzsws",
+      "title": "BFS",
+      "slug": "bfs",
+      "timeComplexity": "",
+      "spaceComplexity": "",
+      "description": "",
+      "code": "/**\n * @param {number} n\n * @param {number[][]} flights\n * @param {number} src\n * @param {number} dst\n * @param {number} k\n * @return {number}\n */\nvar findCheapestPrice = function (n, flights, src, dst, k) {\n  const adjList = new Array(n);\n\n  for (let i = 0; i < flights.length; i++) {\n    const [from, to, cost] = flights[i];\n    (adjList[from] ??= new Array()).push([to, cost]);\n  }\n\n  const stops = new Array(n);\n  stops[src] = 0;\n  const pq = new Queue();\n  pq.enqueue([src, 0, 0]);\n\n  while (!pq.isEmpty()) {\n    const [stop, currCost, steps] = pq.dequeue();\n    if (!adjList[stop]) continue;\n\n    stops.setColor(stop, \"cyan\");\n    for (let i = 0; i < adjList[stop].length; i++) {\n      adjList[stop].setColor(i, \"blue\");\n      const [next, cost] = adjList[stop][i];\n      const nextCost = currCost + cost;\n\n      if ((stops[next] ?? Infinity) > nextCost) {\n        stops[next] = nextCost;\n        if (steps < k) {\n          pq.enqueue([next, nextCost, steps + 1]);\n        }\n      }\n      adjList[stop].setColor(i, null);\n    }\n\n    stops.setColor(stop, \"green\");\n  }\n\n  if (!stops[dst]) return -1;\n\n  return stops[dst];\n};\n\nreturn findCheapestPrice;\n",
       "pythonCode": null,
       "order": 0
     }
