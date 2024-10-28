@@ -1,3 +1,15 @@
+# [1.321.0](https://github.com/mkayander/dStruct/compare/v1.320.1...v1.321.0) (2024-10-28)
+
+
+### Features
+
+* Accept string keys ([1a21571](https://github.com/mkayander/dStruct/commit/1a215714d2d4675906e518e7f92ad53e5cd7e84f))
+* Added a reusable node overlay component ([3d885f9](https://github.com/mkayander/dStruct/commit/3d885f9c6854efbf99bd4c40f565bed813cfe6b2))
+* Moved node animation logic to a separate hook ([fc38fb7](https://github.com/mkayander/dStruct/commit/fc38fb76048c887228dd38b21e79980678747108))
+* Record Map structure reads ([aa93225](https://github.com/mkayander/dStruct/commit/aa93225445fa0f4f92e3b32edbedc6b2a46bf12d))
+* Record object structure reads ([b3b8724](https://github.com/mkayander/dStruct/commit/b3b87241945965c5b664c440b80dc06700969598))
+* Use new animation hook and component ([f772e0f](https://github.com/mkayander/dStruct/commit/f772e0f403cbd23f9764bb2a5a0869676703f562))
+
 ## [1.320.1](https://github.com/mkayander/dStruct/compare/v1.320.0...v1.320.1) (2024-10-16)
 
 
