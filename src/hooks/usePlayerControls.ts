@@ -25,6 +25,7 @@ export const usePlayerControls = () => {
   };
 
   const handleReplay = () => {
+    handleReset();
     setReplayCount(replayCount + 1);
     dispatch(callstackSlice.actions.setFrameIndex(-1));
     dispatch(callstackSlice.actions.setIsPlaying(true));

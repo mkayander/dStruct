@@ -3,6 +3,7 @@ import {
   LastPage,
   Pause,
   PlayArrow,
+  Replay,
   Speed,
 } from "@mui/icons-material";
 import {
@@ -31,6 +32,7 @@ export type PlayerControlsProps = {
   setSliderValue: (value: number) => void;
   handleStepBack: () => void;
   handlePlay: () => void;
+  handleReplay: () => void;
   handleStepForward: () => void;
 };
 
@@ -40,6 +42,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   setSliderValue,
   handleStepBack,
   handlePlay,
+  handleReplay,
   handleStepForward,
 }) => {
   const { LL } = useI18nContext();
@@ -63,6 +66,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
       setSliderValue(700);
     }
   };
+
+  const canReplay = Boolean(callstackLength && !isPlaying && isLastFrame);
 
   return (
     <Stack
@@ -127,20 +132,6 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         >
           <FirstPage />
         </IconButton>
-        <IconButton
-          title={isPlaying ? "Pause" : "Play"}
-          disabled={disabled || !callstackLength || isLastFrame}
-          onClick={handlePlay}
-        >
-          {isPlaying ? <Pause /> : <PlayArrow />}
-        </IconButton>
-        <IconButton
-          title="Step forward"
-          disabled={disabled || !callstackLength || isLastFrame}
-          onClick={handleStepForward}
-        >
-          <LastPage />
-        </IconButton>
         <Box
           sx={{
             position: "absolute",
@@ -151,6 +142,20 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         >
           <FrameIndexLabel />
         </Box>
+        <IconButton
+          title={canReplay ? "Replay" : isPlaying ? "Pause" : "Play"}
+          disabled={!callstackLength}
+          onClick={canReplay ? handleReplay : handlePlay}
+        >
+          {canReplay ? <Replay /> : isPlaying ? <Pause /> : <PlayArrow />}
+        </IconButton>
+        <IconButton
+          title="Step forward"
+          disabled={disabled || !callstackLength || isLastFrame}
+          onClick={handleStepForward}
+        >
+          <LastPage />
+        </IconButton>
       </Stack>
     </Stack>
   );

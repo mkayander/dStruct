@@ -344,7 +344,9 @@ export const useNodesRuntimeUpdates = (
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
 
-    const isForward = frameIndex >= prevFrameIndex;
+    const diff = frameIndex - prevFrameIndex;
+
+    const isForward = diff > 0;
     if (frameIndex !== prevFrameIndex) {
       if (isForward) {
         const currentFrame = callstack[frameIndex];
@@ -376,8 +378,8 @@ export const useNodesRuntimeUpdates = (
     const timeoutId = setTimeout(() => {
       const nextIndex = getNextValidIndex();
 
+      setIsActive(nextIndex < callstack.length - 1);
       if (nextIndex < callstack.length) {
-        setIsActive(true);
         dispatch(callstackSlice.actions.setFrameIndex(nextIndex));
       }
       if (nextIndex >= callstack.length - 1) {

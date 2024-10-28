@@ -125,27 +125,6 @@ export const TreeViewPanel: React.FC = () => {
             >
               {LL.RESET()}
             </Button>
-            <Tooltip
-              title={
-                isCallstackReady
-                  ? LL.REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION()
-                  : LL.YOU_NEED_TO_RUN_THE_CODE_FIRST()
-              }
-              disableInteractive={false}
-              arrow
-            >
-              <span style={{ height: "100%" }}>
-                <Button
-                  color="info"
-                  endIcon={<Replay />}
-                  onClick={handleReplay}
-                  disabled={!isReady}
-                  sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
-                >
-                  {LL.REPLAY()}
-                </Button>
-              </span>
-            </Tooltip>
           </Stack>
         </TabListWrapper>
         <StyledTabPanel
@@ -217,6 +196,7 @@ export const TreeViewPanel: React.FC = () => {
                   sliderValue={sliderValue}
                   setSliderValue={setSliderValue}
                   handlePlay={handlePlay}
+                  handleReplay={handleReplay}
                   handleStepBack={handleStepBack}
                   handleStepForward={handleStepForward}
                 />
