@@ -65,6 +65,16 @@ export class ControlledMap extends ArrayBase {
     }
   }
 
+  override get(key: any) {
+    const value = super.get(key);
+
+    if (globalThis.recordReads !== false) {
+      this.blink(key);
+    }
+
+    return value;
+  }
+
   override set(key: any, value: any) {
     super.set(key, value);
 
