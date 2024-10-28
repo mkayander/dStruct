@@ -15,3 +15,4 @@ export { usePlayerControls } from "./usePlayerControls";
 export { useArgumentsNodeData } from "./useArgumentsNodeData";
 export { useGraphEdges } from "./useGraphEdges";
 export { useViewerPan } from "./useViewerPan";
+export { useNodeAnimations } from "./useNodeAnimations";
