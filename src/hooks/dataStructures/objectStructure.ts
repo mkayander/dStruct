@@ -60,13 +60,27 @@ export class ControlledObject extends ArrayBase {
     }
 
     return new Proxy(this, {
-      set: (target, key, value) => {
-        key = String(key);
-        target[key as any] = value;
+      get: (target, prop) => {
+        if (prop === "toJSON") {
+          return () => value;
+        }
 
-        this.updateItem(value, this.nextIndex++, key);
+        if (globalThis.recordReads !== false) {
+          const key = String(prop);
+          if (this.itemsMeta.has(key)) {
+            this.blink(key);
+          }
+        }
 
-        return true;
+        return Reflect.get(target, prop);
+      },
+      set: (target, prop, value) => {
+        const isSuccessful = Reflect.set(target, prop, value);
+        if (isSuccessful) {
+          this.updateItem(value, this.nextIndex++, String(prop));
+        }
+
+        return isSuccessful;
       },
     });
   }
