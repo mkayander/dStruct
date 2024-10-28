@@ -1,10 +1,12 @@
 import { alpha, Box } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 
 import { NestedStructure } from "#/components/molecules/TreeViewer/NestedStructure";
-import { useNodeColors } from "#/hooks";
+import { useNodeAnimations, useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { safeStringify } from "#/utils/stringifySolutionResult";
+
+import { NodeOverlay } from "./NodeOverlay";
 
 type MapItemProps = {
   item: ArrayItemData;
@@ -12,10 +14,12 @@ type MapItemProps = {
 };
 
 export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
-  const { key, value, childName, color } = item;
+  const { key, value, childName, color, animation, animationCount } = item;
   const valueColor = colorMap?.[String(value)];
+  const ref = useRef<HTMLDivElement>(null);
   const { nodeColor } = useNodeColors(color ?? valueColor, false);
-  const isValueNested = Boolean(childName);
+  const nodeAnimation = useNodeAnimations(ref, animation, animationCount);
+  const isChildNested = Boolean(childName);
 
   return (
     <Box
@@ -33,31 +37,20 @@ export const MapItem: React.FC<MapItemProps> = ({ item, colorMap }) => {
             padding: "initial",
           },
         },
-
-        "&::after": {
-          content: '""',
-          position: "absolute",
-          zIndex: 15,
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          // borderRadius: "4px",
-          background: "rgba(255, 255, 255, 0.1)",
-          opacity: 0,
-          transition: "opacity 0.1s",
-          backdropFilter: "blur(2px)",
-        },
-
-        "&:hover::after": {
-          opacity: 0.3,
-        },
       }}
     >
-      <td style={{ textAlign: "center" }}>{safeStringify(key)}</td>
+      <td style={{ textAlign: "center" }}>
+        <NodeOverlay
+          ref={ref}
+          animation={nodeAnimation}
+          isChildNested={isChildNested}
+        />
+
+        {safeStringify(key)}
+      </td>
       <td className="arrow">&rArr;</td>
       <td style={{ position: "relative", zIndex: 20 }}>
-        {isValueNested ? <NestedStructure item={item} /> : safeStringify(value)}
+        {isChildNested ? <NestedStructure item={item} /> : safeStringify(value)}
       </td>
     </Box>
   );

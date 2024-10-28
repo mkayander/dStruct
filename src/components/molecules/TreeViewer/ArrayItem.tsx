@@ -1,11 +1,12 @@
 import { alpha, Box, Typography } from "@mui/material";
 import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
-import { useNodeColors } from "#/hooks";
+import { useNodeAnimations, useNodeColors } from "#/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 import { NestedStructure } from "./NestedStructure";
+import { NodeOverlay } from "./NodeOverlay";
 
 type ArrayItemProps = {
   item: ArrayItemData;
@@ -25,14 +26,7 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
   const isChildNested = Boolean(item.childName);
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (ref.current) {
-      const animation = ref.current.style.animation;
-      ref.current.style.animation = "none";
-      void ref.current.offsetWidth;
-      ref.current.style.animation = animation;
-    }
-  }, [item.animationCount]);
+  const animation = useNodeAnimations(ref, item.animation, item.animationCount);
 
   return (
     <Box
@@ -68,24 +62,10 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
         },
       }}
     >
-      <Box
+      <NodeOverlay
         ref={ref}
-        sx={{
-          position: "absolute",
-          zIndex: 15,
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(255, 255, 255, 0.1)",
-          opacity: 0,
-          transition: "opacity 0.1s",
-          animation: `${item.animation} 0.3s ease-in-out`,
-
-          "&:hover": {
-            opacity: 0.3,
-          },
-        }}
+        animation={animation}
+        isChildNested={isChildNested}
       />
       <Typography
         sx={{ textAlign: "center", wordWrap: "none", pt: 0.32, mx: 1 }}
