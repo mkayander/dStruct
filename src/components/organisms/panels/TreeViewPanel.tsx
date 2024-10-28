@@ -1,4 +1,4 @@
-import { FilterCenterFocus, Replay } from "@mui/icons-material";
+import { FilterCenterFocus } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import {
   alpha,
@@ -7,7 +7,6 @@ import {
   IconButton,
   Stack,
   Tab,
-  Tooltip,
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
