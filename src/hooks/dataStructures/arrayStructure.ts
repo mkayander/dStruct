@@ -63,17 +63,6 @@ export function initControlledArray<T extends ArrayBaseType>(
   }
 
   return new Proxy(array, {
-    set: (target, prop, value) => {
-      const isSuccessful = Reflect.set(target, prop, value);
-      if (isSuccessful) {
-        const index = typeof prop === "string" ? Number(prop) : -1;
-        if (Number.isInteger(index) && index >= 0) {
-          array.updateItem(value, index);
-        }
-      }
-
-      return isSuccessful;
-    },
     get: (target, prop, receiver) => {
       const index = typeof prop === "string" ? Number(prop) : -1;
       if (
@@ -89,6 +78,17 @@ export function initControlledArray<T extends ArrayBaseType>(
         return value.bind(target);
       }
       return value;
+    },
+    set: (target, prop, value) => {
+      const isSuccessful = Reflect.set(target, prop, value);
+      if (isSuccessful) {
+        const index = typeof prop === "string" ? Number(prop) : -1;
+        if (Number.isInteger(index) && index >= 0) {
+          array.updateItem(value, index);
+        }
+      }
+
+      return isSuccessful;
     },
   });
 }
