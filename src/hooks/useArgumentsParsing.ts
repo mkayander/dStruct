@@ -112,7 +112,7 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
         id: leftEdge,
         sourceId: current.id,
         targetId: newLeft.id,
-        isDirected: true,
+        isDirected: false,
       };
       queue.push(newLeft);
     }
@@ -127,7 +127,7 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
         id: rightEdge,
         sourceId: current.id,
         targetId: newRight.id,
-        isDirected: true,
+        isDirected: false,
       };
       queue.push(newRight);
     }
