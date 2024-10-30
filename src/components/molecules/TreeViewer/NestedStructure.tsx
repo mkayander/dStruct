@@ -4,6 +4,7 @@ import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStruc
 import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructureView";
 import { useAppSelector } from "#/store/hooks";
 import {
+  type ArrayData,
   type ArrayItemData,
   selectArrayStateByName,
 } from "#/store/reducers/structures/arrayReducer";
@@ -11,10 +12,12 @@ import { ArgumentType } from "#/utils/argumentObject";
 
 type NestedStructureProps = {
   item: ArrayItemData;
+  colorMap?: ArrayData["colorMap"];
 };
 
 export const NestedStructure: React.FC<NestedStructureProps> = ({
   item: { childName },
+  colorMap,
 }) => {
   const data = useAppSelector(selectArrayStateByName(childName ?? ""));
   if (!data) return null;
@@ -32,7 +35,7 @@ export const NestedStructure: React.FC<NestedStructureProps> = ({
   }
 
   if (Component) {
-    return <Component data={data} />;
+    return <Component data={data} parentColorMap={colorMap} />;
   }
 
   return null;

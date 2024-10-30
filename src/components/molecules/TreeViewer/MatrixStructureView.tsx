@@ -106,7 +106,14 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
             const nodeData = arrayState[name];
             const header = data.rowHeaders?.[node.index];
             if (nodeData) {
-              return <MatrixRow key={name} header={header} data={nodeData} />;
+              return (
+                <MatrixRow
+                  key={name}
+                  header={header}
+                  data={nodeData}
+                  parentColorMap={data.colorMap}
+                />
+              );
             }
 
             return (

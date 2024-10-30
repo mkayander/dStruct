@@ -2,16 +2,17 @@ import { alpha, Box, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { MapItem } from "#/components/molecules/TreeViewer/MapItem";
-import {
-  type ArrayData,
-  arrayDataItemSelectors,
-} from "#/store/reducers/structures/arrayReducer";
+import { arrayDataItemSelectors } from "#/store/reducers/structures/arrayReducer";
 
-type MapStructureViewProps = {
-  data: ArrayData;
-};
+import { type ArrayStructureViewProps } from "./ArrayStructureView";
 
-export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
+type MapStructureViewProps = ArrayStructureViewProps;
+
+export const MapStructureView: React.FC<MapStructureViewProps> = ({
+  data,
+  parentColorMap,
+  sx,
+}) => {
   const theme = useTheme();
   const items = useMemo(
     () => arrayDataItemSelectors.selectAll(data.nodes),
@@ -53,11 +54,16 @@ export const MapStructureView: React.FC<MapStructureViewProps> = ({ data }) => {
             borderRadius: "0 0 4px 4px",
           },
         },
+        ...sx,
       }}
     >
       <tbody>
         {items.map((item) => (
-          <MapItem key={item.id} item={item} colorMap={data.colorMap} />
+          <MapItem
+            key={item.id}
+            item={item}
+            colorMap={data.colorMap ?? parentColorMap}
+          />
         ))}
         {items.length === 0 && (
           <tr>

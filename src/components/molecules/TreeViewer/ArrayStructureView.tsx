@@ -68,11 +68,13 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({
 
 export type ArrayStructureViewProps = {
   data: ArrayData;
+  parentColorMap?: ArrayData["colorMap"];
   sx?: SxProps;
 };
 
 export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
   data,
+  parentColorMap,
 }) => {
   const items = useMemo(() => {
     return arrayDataItemSelectors.selectAll(data.nodes);
@@ -101,7 +103,11 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
       <Stack direction="row">
         {items.length > 0 ? (
           items.map((item) => (
-            <ArrayItem key={item.id} colorMap={data.colorMap} item={item} />
+            <ArrayItem
+              key={item.id}
+              colorMap={data.colorMap ?? parentColorMap}
+              item={item}
+            />
           ))
         ) : (
           <Box

@@ -9,7 +9,12 @@ type MatrixRowProps = ArrayStructureViewProps & {
   header?: string;
 };
 
-export const MatrixRow: React.FC<MatrixRowProps> = ({ data, header }) => {
+export const MatrixRow: React.FC<MatrixRowProps> = ({
+  data,
+  header,
+  parentColorMap,
+  sx,
+}) => {
   const theme = useTheme();
   const items = useMemo(
     () => arrayDataItemSelectors.selectAll(data.nodes),
@@ -23,13 +28,18 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ data, header }) => {
         "&:hover": {
           backgroundColor: alpha(theme.palette.primary.light, 0.032),
         },
+        ...sx,
       }}
     >
       {header ? <th scope="row">{header}</th> : null}
       {items.length > 0 ? (
         items.map((item) => (
           <td key={item.id}>
-            <ArrayItem colorMap={data.colorMap} isGrid={true} item={item} />
+            <ArrayItem
+              colorMap={data.colorMap ?? parentColorMap}
+              isGrid={true}
+              item={item}
+            />
           </td>
         ))
       ) : (

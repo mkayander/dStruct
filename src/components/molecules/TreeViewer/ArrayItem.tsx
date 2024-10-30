@@ -70,7 +70,11 @@ export const ArrayItem: React.FC<ArrayItemProps> = ({
       <Typography
         sx={{ textAlign: "center", wordWrap: "none", pt: 0.32, mx: 1 }}
       >
-        {isChildNested ? <NestedStructure item={item} /> : item.value}
+        {isChildNested ? (
+          <NestedStructure item={item} colorMap={colorMap} />
+        ) : (
+          item.value
+        )}
       </Typography>
     </Box>
   );
