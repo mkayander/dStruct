@@ -1,3 +1,18 @@
+# [1.323.0](https://github.com/mkayander/dStruct/compare/v1.322.0...v1.323.0) (2024-10-30)
+
+
+### Bug Fixes
+
+* Removed comment ([c49e736](https://github.com/mkayander/dStruct/commit/c49e7369e8282ae1cbeda3e82bf547253d617684))
+* Reset color maps to null ([99c4c51](https://github.com/mkayander/dStruct/commit/99c4c51f37b9e59f7c9397e0688216bdf82205f2))
+* Set map function return type to unknown ([242fbe9](https://github.com/mkayander/dStruct/commit/242fbe9011e12afa9e938b9c29654be3c09c86fc))
+
+
+### Features
+
+* Parse a controlled root array for the matrix argument ([e097dda](https://github.com/mkayander/dStruct/commit/e097dda350e2daad4bdb89974b8b8b82fbe798cc))
+* Recursively pass color maps from parents to children ([5cefb2c](https://github.com/mkayander/dStruct/commit/5cefb2c10d0e8e0201e68f6c015035a2b5ed71fc))
+
 # [1.322.0](https://github.com/mkayander/dStruct/compare/v1.321.0...v1.322.0) (2024-10-28)
 
 
