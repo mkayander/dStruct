@@ -86,6 +86,7 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
     <Stack
       direction="row"
       sx={{
+        width: "fit-content",
         zIndex: 10,
         "&:hover": {
           ".array-bracket": {
