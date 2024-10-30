@@ -84,7 +84,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
 
     adapter.removeAll(state.nodes);
     adapter.addMany(state.nodes, selectors.selectAll(state.initialNodes));
-    state.colorMap = {};
+    state.colorMap = null;
   };
 
   return {
@@ -186,7 +186,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     ) =>
       runStateActionByName(state, action.payload.name, (treeState) => {
         if (action.payload.data === null) {
-          treeState.colorMap = {};
+          treeState.colorMap = null;
           return;
         }
 
