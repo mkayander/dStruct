@@ -39,7 +39,6 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
 export type ArrayDataState = BaseStructureState<ArrayData>;
 
 export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
-  // selectId: (node: ArrayItemData) => node.id,
   sortComparer: (a, b) => a.index - b.index,
 });
 
