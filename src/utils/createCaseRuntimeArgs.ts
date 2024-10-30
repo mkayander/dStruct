@@ -84,20 +84,19 @@ const createRuntimeMatrix = (
   arg: ArgumentObject,
   callstack: CallstackHelper,
 ) => {
-  if (!isArgumentArrayType(arg)) return null;
+  const nodeData = arrayStore[arg.name];
+  if (!isArgumentArrayType(arg) || !nodeData) return null;
 
-  const input = JSON.parse(arg.input) as (number | string)[][];
-  const matrix: ReturnType<typeof createRuntimeArray>[] = new Array(
-    input.length,
+  const children = getMatrixChildArrayArgs(arg).map((child) =>
+    createRuntimeArray(arrayStore[child.name], child, callstack),
   );
 
-  getMatrixChildArrayArgs(arg, (childArg, index) => {
-    matrix[index] = createRuntimeArray(
-      arrayStore[childArg.name],
-      childArg,
-      callstack,
-    );
-  });
+  const matrix = new ControlledArray(
+    children,
+    arg.name,
+    nodeData.nodes,
+    callstack,
+  );
 
   return matrix;
 };
