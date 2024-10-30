@@ -1,3 +1,12 @@
+## [1.323.1](https://github.com/mkayander/dStruct/compare/v1.323.0...v1.323.1) (2024-10-30)
+
+
+### Bug Fixes
+
+* Avoid node text overflowing the circle ([9240a11](https://github.com/mkayander/dStruct/commit/9240a11f6e087f55d272d167704f26fa0415f0a4))
+* Fit array structure containers width to content ([5834a44](https://github.com/mkayander/dStruct/commit/5834a44c6f23b67d2486781f3d720c750cfe42af))
+* Render edges without arrows for binary trees ([cabcc70](https://github.com/mkayander/dStruct/commit/cabcc70d204e21a34fcf166dab3fe6978d4e1707))
+
 # [1.323.0](https://github.com/mkayander/dStruct/compare/v1.322.0...v1.323.0) (2024-10-30)
 
 
