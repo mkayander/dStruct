@@ -120,10 +120,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
   static _from(
     callstack: CallstackHelper,
     inputArray: Array<number | string>,
-    mapFn?: (
-      item: number | string | undefined,
-      index: number,
-    ) => number | string,
+    mapFn?: (item: number | string | undefined, index: number) => unknown,
     _?: unknown,
     options?: ControlledArrayRuntimeOptions,
   ) {
