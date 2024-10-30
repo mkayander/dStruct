@@ -152,6 +152,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
       >
         <Box
           onClick={handleBlink}
+          title={value}
           sx={{
             ...nodeProps,
             transition: "all .2s",
@@ -170,9 +171,15 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           sx={{
             position: "absolute",
             top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            left: 0,
+            transform: "translateY(-50%)",
+            width: "100%",
+            textAlign: "center",
+            overflow: "hidden",
             pointerEvents: "none",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            padding: "0 4px",
           }}
         >
           {value}
