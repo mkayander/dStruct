@@ -1,3 +1,6 @@
+import { isArgumentArrayType } from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type { ArgumentObject } from "#/entities/argument/model/types";
 import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { ControlledGraphArray } from "#/hooks/dataStructures/graphArray";
@@ -13,11 +16,6 @@ import type {
   TreeData,
   TreeDataState,
 } from "#/store/reducers/structures/treeNodeReducer";
-import {
-  type ArgumentObject,
-  ArgumentType,
-  isArgumentArrayType,
-} from "#/utils/argumentObject";
 
 const createRuntimeTree = (
   nodesData: TreeData | undefined,

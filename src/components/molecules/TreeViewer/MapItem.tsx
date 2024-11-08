@@ -3,8 +3,8 @@ import React, { useRef } from "react";
 
 import { NestedStructure } from "#/components/molecules/TreeViewer/NestedStructure";
 import { useNodeAnimations, useNodeColors } from "#/hooks";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
-import { safeStringify } from "#/utils/stringifySolutionResult";
 
 import { NodeOverlay } from "./NodeOverlay";
 

@@ -5,11 +5,11 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
+import type {
+  ArgumentObject,
+  ArgumentTreeType,
+} from "#/entities/argument/model/types";
 import type { RootState } from "#/store/makeStore";
-import {
-  type ArgumentObject,
-  type ArgumentTreeType,
-} from "#/utils/argumentObject";
 
 const argumentAdapter = createEntityAdapter<ArgumentObject, string>({
   selectId: (arg) => arg.name,

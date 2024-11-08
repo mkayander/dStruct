@@ -14,6 +14,7 @@ import {
 import React, { useEffect, useRef } from "react";
 
 import { useI18nContext } from "#/hooks";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type CallFrame,
@@ -23,7 +24,6 @@ import {
   selectNodeDataById,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { safeStringify } from "#/utils/stringifySolutionResult";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,

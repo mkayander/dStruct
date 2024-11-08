@@ -6,6 +6,8 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import type { RootState } from "#/store/makeStore";
 import { type NodeDragState } from "#/store/reducers/editorReducer";
 import {
@@ -18,7 +20,6 @@ import {
   runStateActionByName,
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
-import { type ArgumentTreeType, ArgumentType } from "#/utils/argumentObject";
 
 export type AnimationName = "blink";
 

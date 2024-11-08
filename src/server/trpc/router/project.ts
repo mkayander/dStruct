@@ -3,6 +3,9 @@ import { TRPCError } from "@trpc/server";
 import shortUUID from "short-uuid";
 import { z } from "zod";
 
+import { argumentObjectValidator } from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type { ArgumentObjectMap } from "#/entities/argument/model/types";
 import { type AppPrismaClient } from "#/server/db/client";
 import {
   protectedProcedure,
@@ -15,11 +18,6 @@ import {
   getNextEntityIndex,
   setLastEntityIndex,
 } from "#/utils";
-import {
-  type ArgumentObjectMap,
-  argumentObjectValidator,
-  ArgumentType,
-} from "#/utils/argumentObject";
 
 import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
 import defaultBinaryTreeTemplate from "#/assets/codeTemplates/binaryTreeTemplate.js.txt";

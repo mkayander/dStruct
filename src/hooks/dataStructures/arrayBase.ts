@@ -1,5 +1,7 @@
 import shortUUID from "short-uuid";
 
+import type { ArgumentArrayType } from "#/entities/argument/model/types";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import type {
   AddArrayItemFrame,
   CallFrameBase,
@@ -11,8 +13,6 @@ import {
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
 import type { Constructor } from "#/types/helpers";
-import type { ArgumentArrayType } from "#/utils/argumentObject";
-import { safeStringify } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 

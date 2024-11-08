@@ -6,10 +6,10 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
+import type { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
 import type { RootState } from "#/store/makeStore";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
-import { type ArgumentType } from "#/utils/argumentObject";
 
 import type { ExecWorkerInterface } from "#/workers/codeExec.worker";
 

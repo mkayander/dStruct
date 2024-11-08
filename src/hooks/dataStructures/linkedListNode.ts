@@ -1,8 +1,8 @@
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
-import { ArgumentType } from "#/utils/argumentObject";
-import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export class LinkedListNode<T extends number | string> extends NodeBase<T> {
   constructor(

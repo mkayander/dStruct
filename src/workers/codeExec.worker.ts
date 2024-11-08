@@ -1,12 +1,9 @@
+import type { ArgumentObject } from "#/entities/argument/model/types";
+import { stringifySolutionResult } from "#/shared/lib";
 import { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
 import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
-import {
-  createCaseRuntimeArgs,
-  setGlobalRuntimeContext,
-  stringifySolutionResult,
-} from "#/utils";
-import type { ArgumentObject } from "#/utils/argumentObject";
+import { createCaseRuntimeArgs, setGlobalRuntimeContext } from "#/utils";
 import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
 
 const dummy = () => {};

@@ -3,6 +3,19 @@
 import { useEffect } from "react";
 import uuid4 from "short-uuid";
 
+import {
+  isArgumentArrayType,
+  isArgumentTreeType,
+} from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type {
+  ArgumentArrayType,
+  ArgumentObject,
+  ArgumentTreeType,
+} from "#/entities/argument/model/types";
+import { findCentroid, positionSnowflakeNodes } from "#/entities/graph/lib";
+import { isNumber } from "#/shared/lib";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { type AppDispatch } from "#/store/makeStore";
 import { callstackSlice } from "#/store/reducers/callstackReducer";
@@ -24,17 +37,6 @@ import {
   type TreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { isNumber } from "#/utils";
-import {
-  type ArgumentArrayType,
-  type ArgumentObject,
-  type ArgumentTreeType,
-  ArgumentType,
-  isArgumentArrayType,
-  isArgumentTreeType,
-} from "#/utils/argumentObject";
-import { findCentroid, positionSnowflakeNodes } from "#/utils/graphs";
-import { safeStringify } from "#/utils/stringifySolutionResult";
 
 export type TreeInput = (number | null)[];
 export type GraphInput = Array<[number, number, number]>;

@@ -1,6 +1,7 @@
 import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   type ArrayBaseType,
   makeArrayBaseClass,
@@ -11,7 +12,6 @@ import {
   type ArrayItemData,
   generateArrayData,
 } from "#/store/reducers/structures/arrayReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 

@@ -1,6 +1,7 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
 import shortUUID from "short-uuid";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   ControlledArray,
   type ControlledArrayRuntimeOptions,
@@ -23,10 +24,12 @@ import {
   ControlledUint16Array,
   ControlledUint32Array,
 } from "#/hooks/dataStructures/typedArrayStructure";
+import {
+  safeStringify,
+  stripQuotes,
+} from "#/shared/lib/stringifySolutionResult";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
-import { ArgumentType } from "#/utils/argumentObject";
-import { safeStringify, stripQuotes } from "#/utils/stringifySolutionResult";
 
 const uuid = shortUUID();
 

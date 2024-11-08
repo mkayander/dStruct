@@ -3,13 +3,13 @@
 import { useEffect } from "react";
 
 import { type BinaryNodeProps } from "#/components/molecules/TreeViewer/BinaryNode";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   selectNodeDataById,
   type TreeNodeData,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 export const useLinkedListChildNode = (props: BinaryNodeProps) => {
   const { treeName, childrenIds, y, x } = props;

@@ -19,14 +19,12 @@ import sanitizeHtml from "sanitize-html";
 import { NewLabel } from "#/components/atoms/NewLabel";
 import { SearchInput } from "#/components/molecules/SearchInput";
 import { ConfigContext } from "#/context";
+import { categoryLabels } from "#/entities/category/model/categoryLabels";
+import { getDifficultyColor } from "#/entities/difficulty/lib";
+import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
-import {
-  categoryLabels,
-  difficultyLabels,
-  getDifficultyColor,
-  getImageUrl,
-} from "#/utils";
+import { getImageUrl } from "#/utils";
 import { type RouterOutputs } from "#/utils/trpc";
 
 type ProjectSelectProps = {

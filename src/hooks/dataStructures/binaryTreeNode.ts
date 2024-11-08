@@ -1,9 +1,9 @@
 import { Queue } from "@datastructures-js/queue";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 export interface BinaryNodeMeta<T extends number | string = number | string>
   extends NodeMeta {

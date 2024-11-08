@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { isArgumentArrayType } from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type CallFrame,
@@ -13,7 +15,6 @@ import {
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
-import { ArgumentType, isArgumentArrayType } from "#/utils/argumentObject";
 
 import { usePrevious } from "./usePrevious";
 

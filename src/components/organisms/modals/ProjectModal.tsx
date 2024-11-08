@@ -32,16 +32,14 @@ import React, { useEffect, useState } from "react";
 import slugify from "slugify";
 import * as yup from "yup";
 
+import { categoryLabels } from "#/entities/category/model/categoryLabels";
+import { getDifficultyValue } from "#/entities/difficulty/lib/getDifficultyValue";
+import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
 import { usePlaygroundSlugs, usePrevious } from "#/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { projectSlice } from "#/store/reducers/projectReducer";
-import {
-  categoryLabels,
-  difficultyLabels,
-  getDifficultyValue,
-  trpc,
-} from "#/utils";
+import { trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
 const difficultiesList = Object.values(ProjectDifficulty);

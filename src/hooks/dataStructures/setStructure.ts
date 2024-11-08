@@ -1,12 +1,12 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 const ArrayBase = makeArrayBaseClass(Set);
 

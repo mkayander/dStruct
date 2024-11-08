@@ -13,7 +13,7 @@ import {
 } from "#/utils";
 import { ArgumentType } from "#/utils/argumentObject";
 
-import { safeStringify } from "../stringifySolutionResult";
+import { safeStringify } from "../../shared/lib/stringifySolutionResult";
 
 describe("utils", () => {
   describe("getImageUrl", () => {
