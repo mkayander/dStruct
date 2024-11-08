@@ -1,9 +1,9 @@
 import React from "react";
 
 import { NodeBase } from "#/components/molecules/TreeViewer/NodeBase";
+import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import { useNodeColors } from "#/hooks";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
-import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type BinaryNodeProps = TreeNodeData & {
   treeName: string;

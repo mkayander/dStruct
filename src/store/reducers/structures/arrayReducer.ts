@@ -7,6 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
+import type { ArgumentArrayType } from "#/entities/argument/model/types";
 import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
 import type { RootState } from "#/store/makeStore";
 import {
@@ -18,7 +19,6 @@ import {
   type NamedPayload,
   type StructureNode,
 } from "#/store/reducers/structures/baseStructureReducer";
-import { type ArgumentArrayType } from "#/utils/argumentObject";
 
 const uuid = shortUUID();
 

@@ -16,7 +16,7 @@ import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
 
-import { usePrevious } from "./usePrevious";
+import { usePrevious } from "../shared/hooks/usePrevious";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,

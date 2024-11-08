@@ -23,8 +23,9 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { argumentTypeLabels } from "#/entities/argument/model/argumentTypeLabels";
 import { useI18nContext } from "#/hooks";
-import { ArgumentType, argumentTypeLabels } from "#/utils/argumentObject";
 
 type ArgumentTypeSelectProps = Omit<
   SelectProps,

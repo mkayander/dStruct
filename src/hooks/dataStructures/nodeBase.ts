@@ -1,7 +1,7 @@
 import shortUUID from "short-uuid";
 
-import { type CallstackHelper } from "#/store/reducers/callstackReducer";
-import { type ArgumentTreeType } from "#/utils/argumentObject";
+import type { ArgumentTreeType } from "#/entities/argument/model/types";
+import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 
 const uuid = shortUUID();
 

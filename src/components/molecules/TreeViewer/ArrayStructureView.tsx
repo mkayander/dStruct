@@ -2,11 +2,11 @@ import { Box, Stack, type SxProps, Typography, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { ArrayItem } from "#/components/molecules/TreeViewer/ArrayItem";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   type ArrayData,
   arrayDataItemSelectors,
 } from "#/store/reducers/structures/arrayReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 type ArrayBracketProps = {
   argType: ArgumentType;

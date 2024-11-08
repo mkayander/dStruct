@@ -7,6 +7,7 @@ import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStruc
 import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructureView";
 import { MatrixStructureView } from "#/components/molecules/TreeViewer/MatrixStructureView";
 import { NodesView } from "#/components/molecules/TreeViewer/NodesView";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
@@ -19,7 +20,6 @@ import {
   treeDataStructuresSelector,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 type TreeViewerProps = {
   playbackInterval: number;

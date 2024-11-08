@@ -3,13 +3,13 @@ import React from "react";
 
 import { BinaryNode } from "#/components/molecules/TreeViewer/BinaryNode";
 import { LinkedListNode } from "#/components/molecules/TreeViewer/LinkedListNode";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useBinaryTreePositioning } from "#/hooks/useBinaryTreePositioning";
 import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,
   type TreeData,
 } from "#/store/reducers/structures/treeNodeReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 import { GraphEdge } from "./GraphEdge";
 import { GraphNode } from "./GraphNode";

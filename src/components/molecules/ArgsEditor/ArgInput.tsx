@@ -7,13 +7,11 @@ import React, { useEffect, useState } from "react";
 import { BooleanToggleInput } from "#/components/molecules/ArgsEditor/BooleanToggleInput";
 import { DebouncedInput } from "#/components/molecules/ArgsEditor/DebouncedInput";
 import { JsonInput } from "#/components/molecules/ArgsEditor/JsonInput";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { argumentTypeLabels } from "#/entities/argument/model/argumentTypeLabels";
+import type { ArgumentObject } from "#/entities/argument/model/types";
 import { useAppDispatch } from "#/store/hooks";
 import { caseSlice } from "#/store/reducers/caseReducer";
-import {
-  type ArgumentObject,
-  ArgumentType,
-  argumentTypeLabels,
-} from "#/utils/argumentObject";
 
 const validationSchemaMap = {
   [ArgumentType.ARRAY]: Joi.array(),

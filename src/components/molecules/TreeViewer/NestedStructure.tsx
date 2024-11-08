@@ -2,13 +2,13 @@ import React from "react";
 
 import { ArrayStructureView } from "#/components/molecules/TreeViewer/ArrayStructureView";
 import { MapStructureView } from "#/components/molecules/TreeViewer/MapStructureView";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useAppSelector } from "#/store/hooks";
 import {
   type ArrayData,
   type ArrayItemData,
   selectArrayStateByName,
 } from "#/store/reducers/structures/arrayReducer";
-import { ArgumentType } from "#/utils/argumentObject";
 
 type NestedStructureProps = {
   item: ArrayItemData;

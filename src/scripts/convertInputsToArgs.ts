@@ -1,5 +1,6 @@
+import { argumentObjectValidator } from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { prisma } from "#/server/db/client";
-import { argumentObjectValidator, ArgumentType } from "#/utils/argumentObject";
 
 (async () => {
   const cases = await prisma.playgroundTestCase.findMany();

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { NodeBase } from "#/components/molecules/TreeViewer/NodeBase";
+import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import { useNodeColors } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
@@ -8,7 +9,6 @@ import {
   selectIsEditingNodes,
 } from "#/store/reducers/editorReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
-import { type ArgumentTreeType } from "#/utils/argumentObject";
 
 export type GraphNodeProps = TreeNodeData & {
   treeName: string;

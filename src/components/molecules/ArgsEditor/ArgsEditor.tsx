@@ -16,8 +16,15 @@ import shortUUID from "short-uuid";
 
 import { ArgInput } from "#/components/molecules/ArgsEditor/ArgInput";
 import { ArgumentTypeSelect } from "#/components/molecules/ArgsEditor/ArgumentTypeSelect";
-import { usePlaygroundSlugs, usePrevious } from "#/hooks";
+import { isArgumentObjectValid } from "#/entities/argument/lib";
+import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type {
+  ArgumentObject,
+  ArgumentObjectMap,
+} from "#/entities/argument/model/types";
+import { usePlaygroundSlugs } from "#/hooks";
 import { useI18nContext } from "#/hooks";
+import { usePrevious } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   caseSlice,
@@ -26,12 +33,6 @@ import {
 } from "#/store/reducers/caseReducer";
 import { editorSlice } from "#/store/reducers/editorReducer";
 import { selectIsEditable } from "#/store/reducers/projectReducer";
-import {
-  type ArgumentObject,
-  type ArgumentObjectMap,
-  ArgumentType,
-  isArgumentObjectValid,
-} from "#/utils/argumentObject";
 import { type RouterOutputs, trpc } from "#/utils/trpc";
 
 const uuid = shortUUID();
