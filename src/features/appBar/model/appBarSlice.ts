@@ -42,11 +42,6 @@ export const appBarSlice = createSlice({
 });
 
 /**
- * Reducer
- */
-export const appBarReducer = appBarSlice.reducer;
-
-/**
  * Selectors
  */
 export const selectIsAppBarScrolled = (state: RootState): boolean =>

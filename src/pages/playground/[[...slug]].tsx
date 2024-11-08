@@ -2,7 +2,6 @@ import { Container, darken, Stack, useTheme } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
 
-import { MainAppBar } from "#/components/organisms/MainAppBar";
 import {
   CodePanel,
   OutputPanel,
@@ -13,6 +12,7 @@ import { PageScrollContainer } from "#/components/templates/PageScrollContainer"
 import type { SplitPanelsLayoutProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayout } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { ConfigContext } from "#/context";
+import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
 import { useAppConfig } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 

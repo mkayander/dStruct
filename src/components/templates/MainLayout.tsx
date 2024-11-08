@@ -2,11 +2,11 @@ import { Box, type BoxProps, LinearProgress } from "@mui/material";
 import React from "react";
 
 import { Footer } from "#/components/organisms/Footer";
-import { MainAppBar } from "#/components/organisms/MainAppBar";
 import {
   PageScrollContainer,
   type PageScrollContainerProps,
 } from "#/components/templates/PageScrollContainer";
+import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
 
 export type MainLayoutProps = Omit<BoxProps, "onScroll"> & {
   children: React.ReactNode;

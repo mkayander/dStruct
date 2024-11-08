@@ -29,10 +29,10 @@ import { useRouter } from "next/router";
 import React, { type MouseEvent, useState } from "react";
 
 import { SidePanel } from "#/components/organisms/SidePanel";
+import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
 import { useProfileImageUploader } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";
-import { selectIsAppBarScrolled } from "#/store/reducers/appBarReducer";
 import { getImageUrl } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";

@@ -3,11 +3,11 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { type OverlayScrollbarsComponentProps } from "overlayscrollbars-react/types/OverlayScrollbarsComponent";
 import React from "react";
 
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   appBarSlice,
   selectIsAppBarScrolled,
-} from "#/store/reducers/appBarReducer";
+} from "#/features/appBar/model/appBarSlice";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 export type PageScrollContainerProps = {
   children: React.ReactNode;

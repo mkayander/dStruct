@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { appBarReducer } from "#/store/reducers/appBarReducer";
+import { appBarSlice } from "#/features/appBar/model/appBarSlice";
 import { callstackReducer } from "#/store/reducers/callstackReducer";
 import { caseReducer } from "#/store/reducers/caseReducer";
 import { projectReducer } from "#/store/reducers/projectReducer";
@@ -14,7 +14,7 @@ import { editorReducer } from "./reducers/editorReducer";
  * @see https://redux-toolkit.js.org/usage/usage-with-typescript
  */
 export const rootReducer = combineReducers({
-  appBar: appBarReducer,
+  appBar: appBarSlice.reducer,
   treeNode: treeNodeReducer,
   arrayStructure: arrayStructureReducer,
   callstack: callstackReducer,
