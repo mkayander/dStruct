@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { type BinaryNodeProps } from "#/features/treeViewer/ui/BinaryNode";
+import { type BinaryNodeProps } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   selectNodeDataById,

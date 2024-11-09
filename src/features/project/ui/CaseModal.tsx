@@ -8,8 +8,8 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { selectProjectId } from "#/features/project/model/projectSlice";
-import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/hooks";
+import { usePlaygroundSlugs } from "#/shared/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { EditFormModal } from "#/shared/ui/organisms/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 import { trpc } from "#/utils";

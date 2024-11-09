@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 

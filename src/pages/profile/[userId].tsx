@@ -6,7 +6,7 @@ import React from "react";
 import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
 import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 const ProfilePage: NextPage = () => {

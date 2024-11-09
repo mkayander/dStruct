@@ -7,7 +7,7 @@ import {
 import { Tooltip } from "@mui/material";
 import React from "react";
 
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 
 export enum EditorState {
   INITIAL,

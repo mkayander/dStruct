@@ -1,7 +1,7 @@
 import { alpha, Box } from "@mui/material";
 import React, { useRef } from "react";
 
-import { useNodeAnimations, useNodeColors } from "#/hooks";
+import { useNodeAnimations, useNodeColors } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 

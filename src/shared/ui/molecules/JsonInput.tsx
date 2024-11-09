@@ -4,7 +4,7 @@ import { type TextFieldProps } from "@mui/material";
 import Joi from "joi";
 import React, { useState } from "react";
 
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { DebouncedInput } from "#/shared/ui/molecules/DebouncedInput";
 
 type JsonInputProps = Omit<TextFieldProps, "onChange"> & {

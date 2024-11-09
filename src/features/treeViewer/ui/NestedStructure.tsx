@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { ArrayStructureView } from "#/features/treeViewer/ui/ArrayStructureView";
+import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
 import { MapStructureView } from "#/features/treeViewer/ui/MapStructureView";
 import { useAppSelector } from "#/store/hooks";
 import {

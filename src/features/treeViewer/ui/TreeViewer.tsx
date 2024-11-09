@@ -4,15 +4,14 @@ import { Box, Stack } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
 import {
   editorSlice,
   selectNodeDragState,
 } from "#/features/treeViewer/model/editorSlice";
-import { ArrayStructureView } from "#/features/treeViewer/ui/ArrayStructureView";
 import { MapStructureView } from "#/features/treeViewer/ui/MapStructureView";
 import { MatrixStructureView } from "#/features/treeViewer/ui/MatrixStructureView";
 import { NodesView } from "#/features/treeViewer/ui/NodesView";
-import { useArgumentsParsing, useNodesRuntimeUpdates } from "#/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
 import {
@@ -20,6 +19,8 @@ import {
   treeDataStructuresSelector,
   treeNodeSlice,
 } from "#/store/reducers/structures/treeNodeReducer";
+
+import { useArgumentsParsing, useNodesRuntimeUpdates } from "../hooks";
 
 type TreeViewerProps = {
   playbackInterval: number;

@@ -17,7 +17,7 @@ import {
   type CallFrame,
   selectCallstack,
 } from "#/features/callstack/model/callstackSlice";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {

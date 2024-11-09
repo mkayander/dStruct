@@ -14,8 +14,8 @@ import {
 } from "#/features/project/model/projectSlice";
 import { ProjectSelect } from "#/features/project/ui/ProjectSelect";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
-import { usePlaygroundSlugs } from "#/hooks";
-import { useI18nContext } from "#/hooks";
+import { usePlaygroundSlugs } from "#/shared/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { ProblemLinkButton } from "#/shared/ui/atoms/ProblemLinkButton";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";

@@ -1,8 +1,8 @@
 import { alpha, Box, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
-import { ArrayItem } from "#/features/treeViewer/ui/ArrayItem";
-import { type ArrayStructureViewProps } from "#/features/treeViewer/ui/ArrayStructureView";
+import { ArrayItem } from "#/entities/dataStructures/array/ui/ArrayItem";
+import { type ArrayStructureViewProps } from "#/entities/dataStructures/array/ui/ArrayStructureView";
 import { arrayDataItemSelectors } from "#/store/reducers/structures/arrayReducer";
 
 type MatrixRowProps = ArrayStructureViewProps & {

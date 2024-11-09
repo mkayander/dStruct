@@ -11,12 +11,11 @@ import {
   selectCallstackFrameIndex,
   selectCallstackIsPlaying,
 } from "#/features/callstack/model/callstackSlice";
+import { usePrevious } from "#/shared/hooks/usePrevious";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
-
-import { usePrevious } from "../shared/hooks/usePrevious";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,

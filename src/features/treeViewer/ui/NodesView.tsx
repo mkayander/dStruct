@@ -2,17 +2,17 @@ import { Box } from "@mui/material";
 import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { BinaryNode } from "#/features/treeViewer/ui/BinaryNode";
-import { LinkedListNode } from "#/features/treeViewer/ui/LinkedListNode";
-import { useBinaryTreePositioning } from "#/hooks/useBinaryTreePositioning";
+import { useBinaryTreePositioning } from "#/entities/dataStructures/binaryTree/hooks/useBinaryTreePositioning";
+import { BinaryNode } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
+import { LinkedListNode } from "#/entities/dataStructures/linkedList/ui/LinkedListNode";
 import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,
   type TreeData,
 } from "#/store/reducers/structures/treeNodeReducer";
 
-import { GraphEdge } from "./GraphEdge";
-import { GraphNode } from "./GraphNode";
+import { GraphEdge } from "../../../entities/dataStructures/graph/ui/GraphEdge";
+import { GraphNode } from "../../../entities/dataStructures/graph/ui/GraphNode";
 
 const nodeComponentMap = {
   [ArgumentType.LINKED_LIST]: LinkedListNode,

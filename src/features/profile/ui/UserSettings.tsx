@@ -16,7 +16,7 @@ import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { DataSection } from "#/shared/ui/templates/DataSection";
 import { trpc } from "#/utils";
 

@@ -10,7 +10,7 @@ import {
   selectConsoleLogs,
 } from "#/features/callstack/model/callstackSlice";
 import { CallstackTable } from "#/features/callstack/ui/CallstackTable";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";

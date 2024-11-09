@@ -18,6 +18,12 @@ import prettier from "prettier/standalone";
 import React, { useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
+import {
+  getCodeKey,
+  isLanguageValid,
+  type ProgrammingLanguage,
+  useCodeExecution,
+} from "#/features/codeRunner/hooks/useCodeExecution";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
@@ -31,13 +37,11 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { selectIsEditingNodes } from "#/features/treeViewer/model/editorSlice";
-import { useCodeExecution, usePlaygroundSlugs, useSearchParam } from "#/hooks";
-import { useI18nContext } from "#/hooks";
 import {
-  getCodeKey,
-  isLanguageValid,
-  type ProgrammingLanguage,
-} from "#/hooks/useCodeExecution";
+  useI18nContext,
+  usePlaygroundSlugs,
+  useSearchParam,
+} from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
 import {

@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { MapItem } from "#/features/treeViewer/ui/MapItem";
 import { arrayDataItemSelectors } from "#/store/reducers/structures/arrayReducer";
 
-import { type ArrayStructureViewProps } from "./ArrayStructureView";
+import { type ArrayStructureViewProps } from "../../../entities/dataStructures/array/ui/ArrayStructureView";
 
 type MapStructureViewProps = ArrayStructureViewProps;
 

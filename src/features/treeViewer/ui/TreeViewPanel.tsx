@@ -21,14 +21,8 @@ import {
 } from "#/features/treeViewer/model/editorSlice";
 import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
-import {
-  useArgumentsNodeData,
-  useI18nContext,
-  usePlayerControls,
-  useSearchParam,
-  useViewerPan,
-} from "#/hooks";
-import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { useI18nContext, useSearchParam } from "#/shared/hooks";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { PannableViewer } from "#/shared/ui/templates/PannableViewer";
@@ -36,6 +30,12 @@ import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { resetStructuresState } from "#/utils";
+
+import {
+  useArgumentsNodeData,
+  usePlayerControls,
+  useViewerPan,
+} from "../hooks";
 
 type TabName = "structure" | "benchmark";
 const TabNames = new Set<TabName>(["structure", "benchmark"]);

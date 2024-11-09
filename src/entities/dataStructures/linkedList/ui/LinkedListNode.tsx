@@ -1,20 +1,22 @@
 import React from "react";
 
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
-import { useNodeColors } from "#/hooks";
+import { NodeBase } from "#/features/treeViewer/ui/NodeBase";
+import { useNodeColors } from "#/shared/hooks";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 
-import { NodeBase } from "./NodeBase";
+import { useLinkedListChildNode } from "../hooks";
 
-export type BinaryNodeProps = TreeNodeData & {
+export type LinkedListProps = TreeNodeData & {
   treeName: string;
   type: ArgumentTreeType;
 };
 
-export const BinaryNode: React.FC<BinaryNodeProps> = (props) => {
+export const LinkedListNode: React.FC<LinkedListProps> = (props) => {
   const { color } = props;
 
   const { nodeColor, shadowColor } = useNodeColors(color);
+  useLinkedListChildNode(props);
 
   return (
     <NodeBase nodeColor={nodeColor} shadowColor={shadowColor} {...props} />

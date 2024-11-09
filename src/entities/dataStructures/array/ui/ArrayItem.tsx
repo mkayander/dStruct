@@ -2,11 +2,11 @@ import { alpha, Box, Typography } from "@mui/material";
 import clsx from "clsx";
 import React, { useRef } from "react";
 
-import { useNodeAnimations, useNodeColors } from "#/hooks";
+import { useNodeAnimations, useNodeColors } from "#/shared/hooks";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
-import { NestedStructure } from "./NestedStructure";
-import { NodeOverlay } from "./NodeOverlay";
+import { NestedStructure } from "../../../../features/treeViewer/ui/NestedStructure";
+import { NodeOverlay } from "../../../../features/treeViewer/ui/NodeOverlay";
 
 type ArrayItemProps = {
   item: ArrayItemData;

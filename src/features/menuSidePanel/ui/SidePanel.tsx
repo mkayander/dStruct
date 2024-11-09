@@ -24,11 +24,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { useI18nContext } from "#/hooks";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels } from "#/i18n/labels";
+import { useI18nContext } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
 

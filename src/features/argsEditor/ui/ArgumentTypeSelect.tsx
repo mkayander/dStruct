@@ -25,7 +25,7 @@ import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { argumentTypeLabels } from "#/entities/argument/model/argumentTypeLabels";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 
 type ArgumentTypeSelectProps = Omit<
   SelectProps,

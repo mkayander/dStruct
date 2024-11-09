@@ -1,9 +1,9 @@
 import { MenuItem, Select, type SelectChangeEvent } from "@mui/material";
 import Image from "next/image";
 
+import type { ProgrammingLanguage } from "#/features/codeRunner/hooks/useCodeExecution";
 import javaScriptLogo from "#/features/codeRunner/ui/assets/javaScriptLogo.svg";
 import pythonLogo from "#/features/codeRunner/ui/assets/pythonLogo.svg";
-import type { ProgrammingLanguage } from "#/hooks/useCodeExecution";
 
 export type EditorLanguageSelectProps = {
   language: ProgrammingLanguage | "";

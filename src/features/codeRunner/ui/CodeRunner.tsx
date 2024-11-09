@@ -4,7 +4,7 @@ import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import dynamic from "next/dynamic";
 import React from "react";
 
-import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,

@@ -37,7 +37,7 @@ import { getDifficultyValue } from "#/entities/difficulty/lib/getDifficultyValue
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
-import { usePlaygroundSlugs } from "#/hooks";
+import { usePlaygroundSlugs } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
 import { useAppDispatch } from "#/store/hooks";
 import { trpc } from "#/utils";

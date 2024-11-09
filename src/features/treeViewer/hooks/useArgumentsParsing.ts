@@ -19,7 +19,10 @@ import type {
   ArgumentObject,
   ArgumentTreeType,
 } from "#/entities/argument/model/types";
-import { findCentroid, positionSnowflakeNodes } from "#/entities/graph/lib";
+import {
+  findCentroid,
+  positionSnowflakeNodes,
+} from "#/entities/dataStructures/graph/lib";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { isNumber } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";

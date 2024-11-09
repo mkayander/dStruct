@@ -22,7 +22,7 @@ import {
   selectIsLastFrame,
   selectIsRootFrame,
 } from "#/features/callstack/model/callstackSlice";
-import { useI18nContext } from "#/hooks";
+import { useI18nContext } from "#/shared/hooks";
 import { FrameIndexLabel } from "#/shared/ui/atoms/FrameIndexLabel";
 import { useAppSelector } from "#/store/hooks";
 

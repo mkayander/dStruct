@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 
-import { getNodeColors } from "#/hooks/useNodeColors";
+import { getNodeColors } from "#/shared/lib";
 import { useAppSelector } from "#/store/hooks";
 import {
   type EdgeData,
