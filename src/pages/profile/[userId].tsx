@@ -3,8 +3,8 @@ import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import React from "react";
 
-import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
-import { UserSettings } from "#/components/organisms/UserSettings";
+import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
+import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";

@@ -15,8 +15,8 @@ import {
 import React, { useEffect } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import { PythonLogoView } from "#/components/molecules/PythonLogoView";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { PythonLogoView } from "#/shared/ui/molecules/PythonLogoView";
 
 import { GITHUB_URL } from "#/constants";
 

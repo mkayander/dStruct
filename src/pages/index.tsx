@@ -19,12 +19,12 @@ import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useDailyQuestionData } from "#/api";
-import { LogoModelView } from "#/components/molecules/LogoModelView";
-import { QuestionSummary } from "#/components/molecules/QuestionSummary";
-import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
+import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
+import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
+import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 import type { PageScrollContainerProps } from "#/shared/ui/templates/PageScrollContainer";
 
