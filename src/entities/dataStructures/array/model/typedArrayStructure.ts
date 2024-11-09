@@ -1,11 +1,11 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
+import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
 import {
   type ControlledArrayRuntimeOptions,
   initControlledArray,
-} from "#/hooks/dataStructures/arrayStructure";
+} from "#/entities/dataStructures/array/model/arrayStructure";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 import { type Constructor } from "#/types/helpers";
 

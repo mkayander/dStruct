@@ -2,7 +2,7 @@ import { alpha, Box, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { type ArrayStructureViewProps } from "#/entities/dataStructures/array/ui/ArrayStructureView";
-import { MapItem } from "#/entities/map/ui/MapItem";
+import { MapItem } from "#/entities/dataStructures/map/ui/MapItem";
 import { arrayDataItemSelectors } from "#/store/reducers/structures/arrayReducer";
 
 type MapStructureViewProps = ArrayStructureViewProps;

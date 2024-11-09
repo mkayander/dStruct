@@ -2,7 +2,7 @@ import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
-import { MapStructureView } from "#/entities/map/ui/MapStructureView";
+import { MapStructureView } from "#/entities/dataStructures/map/ui/MapStructureView";
 import { useAppSelector } from "#/store/hooks";
 import {
   type ArrayData,

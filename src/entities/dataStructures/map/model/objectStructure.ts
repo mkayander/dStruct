@@ -1,21 +1,20 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import {
-  arrayDataItemSelectors,
-  type ArrayItemData,
-} from "#/store/reducers/structures/arrayReducer";
+import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
-const ArrayBase = makeArrayBaseClass(Map);
+const ArrayBase = makeArrayBaseClass(Object);
 
-export class ControlledMap extends ArrayBase {
+export class ControlledObject extends ArrayBase {
+  [key: string]: any;
+
   private nextIndex!: number;
   private itemsMeta!: Map<any, ArrayItemData>;
 
   constructor(
-    entries: any[] | null | undefined,
+    value: any,
     name: string,
     arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
@@ -23,7 +22,7 @@ export class ControlledMap extends ArrayBase {
   ) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    super(entries);
+    super(value);
     Object.defineProperties(this, {
       name: {
         value: name,
@@ -34,11 +33,7 @@ export class ControlledMap extends ArrayBase {
         enumerable: false,
       },
       itemsMeta: {
-        value: new Map(
-          arrayDataItemSelectors
-            .selectAll(arrayData)
-            .map((item) => [item.value, item]),
-        ),
+        value: new Map(),
         enumerable: false,
       },
       nextIndex: {
@@ -47,7 +42,7 @@ export class ControlledMap extends ArrayBase {
         writable: true,
       },
       argType: {
-        value: ArgumentType.MAP,
+        value: ArgumentType.OBJECT,
         enumerable: false,
       },
       callstack: {
@@ -63,37 +58,31 @@ export class ControlledMap extends ArrayBase {
         args: { arrayData },
       });
     }
-  }
 
-  override get(key: any) {
-    const value = super.get(key);
+    return new Proxy(this, {
+      get: (target, prop) => {
+        if (prop === "toJSON") {
+          return () => value;
+        }
 
-    if (globalThis.recordReads !== false) {
-      this.blink(key);
-    }
+        if (globalThis.recordReads !== false) {
+          const key = String(prop);
+          if (this.itemsMeta.has(key)) {
+            this.blink(key);
+          }
+        }
 
-    return value;
-  }
+        return Reflect.get(target, prop);
+      },
+      set: (target, prop, value) => {
+        const isSuccessful = Reflect.set(target, prop, value);
+        if (isSuccessful) {
+          this.updateItem(value, this.nextIndex++, String(prop));
+        }
 
-  override set(key: any, value: any) {
-    super.set(key, value);
-
-    this.updateItem(value, this.nextIndex++, key);
-
-    return this;
-  }
-
-  override delete(key: any) {
-    if (!super.has(key)) return false;
-
-    const base = this.getDispatchBase(key);
-    super.delete(key);
-    this.callstack.addOne({
-      ...base,
-      name: "deleteNode",
+        return isSuccessful;
+      },
     });
-
-    return true;
   }
 
   protected getNodeMeta(key: any): ArrayItemData | undefined {

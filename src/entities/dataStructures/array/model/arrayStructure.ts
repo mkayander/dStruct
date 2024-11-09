@@ -2,11 +2,11 @@ import type { EntityState } from "@reduxjs/toolkit";
 import shortUUID from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   type ArrayBaseType,
   makeArrayBaseClass,
-} from "#/hooks/dataStructures/arrayBase";
+} from "#/entities/dataStructures/array/model/arrayBase";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,

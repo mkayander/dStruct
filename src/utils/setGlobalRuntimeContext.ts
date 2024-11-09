@@ -2,17 +2,12 @@ import { PriorityQueue } from "@datastructures-js/priority-queue";
 import shortUUID from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   ControlledArray,
   type ControlledArrayRuntimeOptions,
-} from "#/hooks/dataStructures/arrayStructure";
-import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
-import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
-import { ControlledMap } from "#/hooks/dataStructures/mapStructure";
-import { ControlledObject } from "#/hooks/dataStructures/objectStructure";
-import { ControlledSet } from "#/hooks/dataStructures/setStructure";
-import { ControlledString } from "#/hooks/dataStructures/stringStructure";
+} from "#/entities/dataStructures/array/model/arrayStructure";
+import { ControlledSet } from "#/entities/dataStructures/array/model/setStructure";
+import { ControlledString } from "#/entities/dataStructures/array/model/stringStructure";
 import {
   ControlledBigInt64Array,
   ControlledBigUint64Array,
@@ -24,7 +19,12 @@ import {
   ControlledUint8ClampedArray,
   ControlledUint16Array,
   ControlledUint32Array,
-} from "#/hooks/dataStructures/typedArrayStructure";
+} from "#/entities/dataStructures/array/model/typedArrayStructure";
+import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
+import { LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
+import { ControlledMap } from "#/entities/dataStructures/map/model/mapStructure";
+import { ControlledObject } from "#/entities/dataStructures/map/model/objectStructure";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   safeStringify,
   stripQuotes,

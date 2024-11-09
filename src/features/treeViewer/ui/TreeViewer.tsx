@@ -5,8 +5,8 @@ import React, { useMemo } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
-import { MapStructureView } from "#/entities/map/ui/MapStructureView";
-import { MatrixStructureView } from "#/entities/matrix/ui/MatrixStructureView";
+import { MapStructureView } from "#/entities/dataStructures/map/ui/MapStructureView";
+import { MatrixStructureView } from "#/entities/dataStructures/matrix/ui/MatrixStructureView";
 import {
   editorSlice,
   selectNodeDragState,

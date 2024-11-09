@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
+import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { RootState } from "#/store/makeStore";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 

@@ -1,5 +1,5 @@
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { type LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
+import { type LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
 
 export const stripQuotes = (val?: string) => {
   if (val?.[0] === '"' && val.at(-1) === '"') {

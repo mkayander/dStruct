@@ -1,28 +1,29 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
 } from "#/store/reducers/structures/arrayReducer";
 
-const ArrayBase = makeArrayBaseClass(Set);
+const ArrayBase = makeArrayBaseClass(Map);
 
-export class ControlledSet extends ArrayBase {
+export class ControlledMap extends ArrayBase {
   private nextIndex!: number;
   private itemsMeta!: Map<any, ArrayItemData>;
-  private isInitialized?: boolean;
 
   constructor(
-    value: any[] | null | undefined,
+    entries: any[] | null | undefined,
     name: string,
     arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {
-    super(value);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    super(entries);
     Object.defineProperties(this, {
       name: {
         value: name,
@@ -46,15 +47,11 @@ export class ControlledSet extends ArrayBase {
         writable: true,
       },
       argType: {
-        value: ArgumentType.SET,
+        value: ArgumentType.MAP,
         enumerable: false,
       },
       callstack: {
         value: callstack,
-        enumerable: false,
-      },
-      isInitialized: {
-        value: true,
         enumerable: false,
       },
     });
@@ -68,23 +65,29 @@ export class ControlledSet extends ArrayBase {
     }
   }
 
-  override add(value: any) {
-    if (super.has(value)) return this;
+  override get(key: any) {
+    const value = super.get(key);
 
-    super.add(value);
-
-    if (this.isInitialized) {
-      this.updateItem(value, this.nextIndex++, value);
+    if (globalThis.recordReads !== false) {
+      this.blink(key);
     }
+
+    return value;
+  }
+
+  override set(key: any, value: any) {
+    super.set(key, value);
+
+    this.updateItem(value, this.nextIndex++, key);
 
     return this;
   }
 
-  override delete(value: any) {
-    if (!super.has(value)) return false;
+  override delete(key: any) {
+    if (!super.has(key)) return false;
 
-    const base = this.getDispatchBase(value);
-    super.delete(value);
+    const base = this.getDispatchBase(key);
+    super.delete(key);
     this.callstack.addOne({
       ...base,
       name: "deleteNode",

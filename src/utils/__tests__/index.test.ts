@@ -2,9 +2,9 @@ import { alpha } from "@mui/material";
 import type { RelationType } from "react-archer/lib/types";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
+import { LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
-import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { isNumber, stringifySolutionResult } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";

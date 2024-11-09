@@ -1,13 +1,13 @@
 import { isArgumentArrayType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObject } from "#/entities/argument/model/types";
+import { ControlledArray } from "#/entities/dataStructures/array/model/arrayStructure";
+import { ControlledString } from "#/entities/dataStructures/array/model/stringStructure";
+import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
+import { ControlledGraphArray } from "#/entities/dataStructures/graph/model/graphArray";
+import { LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { getMatrixChildArrayArgs } from "#/features/treeViewer/hooks/useArgumentsParsing";
-import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
-import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
-import { ControlledGraphArray } from "#/hooks/dataStructures/graphArray";
-import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
-import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import type {
   ArrayData,
   ArrayDataState,

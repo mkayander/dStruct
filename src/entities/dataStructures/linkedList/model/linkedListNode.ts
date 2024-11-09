@@ -1,6 +1,9 @@
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import {
+  NodeBase,
+  type NodeMeta,
+} from "#/entities/dataStructures/node/model/nodeBase";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { NodeBase, type NodeMeta } from "#/hooks/dataStructures/nodeBase";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 

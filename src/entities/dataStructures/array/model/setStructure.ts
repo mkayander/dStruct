@@ -1,27 +1,27 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
-import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
+import {
+  arrayDataItemSelectors,
+  type ArrayItemData,
+} from "#/store/reducers/structures/arrayReducer";
 
-const ArrayBase = makeArrayBaseClass(Object);
+const ArrayBase = makeArrayBaseClass(Set);
 
-export class ControlledObject extends ArrayBase {
-  [key: string]: any;
-
+export class ControlledSet extends ArrayBase {
   private nextIndex!: number;
   private itemsMeta!: Map<any, ArrayItemData>;
+  private isInitialized?: boolean;
 
   constructor(
-    value: any,
+    value: any[] | null | undefined,
     name: string,
     arrayData: EntityState<ArrayItemData, string>,
     callstack: CallstackHelper,
     addToCallstack?: boolean,
   ) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     super(value);
     Object.defineProperties(this, {
       name: {
@@ -33,7 +33,11 @@ export class ControlledObject extends ArrayBase {
         enumerable: false,
       },
       itemsMeta: {
-        value: new Map(),
+        value: new Map(
+          arrayDataItemSelectors
+            .selectAll(arrayData)
+            .map((item) => [item.value, item]),
+        ),
         enumerable: false,
       },
       nextIndex: {
@@ -42,11 +46,15 @@ export class ControlledObject extends ArrayBase {
         writable: true,
       },
       argType: {
-        value: ArgumentType.OBJECT,
+        value: ArgumentType.SET,
         enumerable: false,
       },
       callstack: {
         value: callstack,
+        enumerable: false,
+      },
+      isInitialized: {
+        value: true,
         enumerable: false,
       },
     });
@@ -58,31 +66,31 @@ export class ControlledObject extends ArrayBase {
         args: { arrayData },
       });
     }
+  }
 
-    return new Proxy(this, {
-      get: (target, prop) => {
-        if (prop === "toJSON") {
-          return () => value;
-        }
+  override add(value: any) {
+    if (super.has(value)) return this;
 
-        if (globalThis.recordReads !== false) {
-          const key = String(prop);
-          if (this.itemsMeta.has(key)) {
-            this.blink(key);
-          }
-        }
+    super.add(value);
 
-        return Reflect.get(target, prop);
-      },
-      set: (target, prop, value) => {
-        const isSuccessful = Reflect.set(target, prop, value);
-        if (isSuccessful) {
-          this.updateItem(value, this.nextIndex++, String(prop));
-        }
+    if (this.isInitialized) {
+      this.updateItem(value, this.nextIndex++, value);
+    }
 
-        return isSuccessful;
-      },
+    return this;
+  }
+
+  override delete(value: any) {
+    if (!super.has(value)) return false;
+
+    const base = this.getDispatchBase(value);
+    super.delete(value);
+    this.callstack.addOne({
+      ...base,
+      name: "deleteNode",
     });
+
+    return true;
   }
 
   protected getNodeMeta(key: any): ArrayItemData | undefined {

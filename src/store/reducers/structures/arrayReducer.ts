@@ -8,7 +8,7 @@ import {
 import shortUUID from "short-uuid";
 
 import type { ArgumentArrayType } from "#/entities/argument/model/types";
-import { type ControlledArrayRuntimeOptions } from "#/hooks/dataStructures/arrayStructure";
+import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { RootState } from "#/store/makeStore";
 import {
   type BaseStructureItem,
