@@ -1,29 +1,27 @@
 import { Prisma, ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import shortUUID from "short-uuid";
 import { z } from "zod";
 
 import { argumentObjectValidator } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObjectMap } from "#/entities/argument/model/types";
+import {
+  clearProjectEntities,
+  getEntitySlug,
+  getNextEntityIndex,
+  setLastEntityIndex,
+} from "#/entities/projectEntity/lib";
 import { type AppPrismaClient } from "#/server/db/client";
 import {
   protectedProcedure,
   publicProcedure,
   router,
 } from "#/server/trpc/trpc";
-import {
-  clearProjectEntities,
-  getEntitySlug,
-  getNextEntityIndex,
-  setLastEntityIndex,
-} from "#/utils";
+import { uuid } from "#/shared/lib";
 
 import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
 import defaultBinaryTreeTemplate from "#/assets/codeTemplates/binaryTreeTemplate.js.txt";
 import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt";
-
-const uuid = shortUUID();
 
 const templatesMap: Partial<Record<ProjectCategory, string>> = {
   [ProjectCategory.ARRAY]: defaultArrayTemplate,
