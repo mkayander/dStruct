@@ -7,9 +7,9 @@ import {
 } from "@reduxjs/toolkit";
 
 import type { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { RootState } from "#/store/makeStore";
-import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 import type { ExecWorkerInterface } from "#/workers/codeExec.worker";
 

@@ -1,11 +1,11 @@
 import { type EntityState } from "@reduxjs/toolkit";
 
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
-import { type CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   type TreeNodeData,
   treeNodeDataSelector,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { type CallstackHelper } from "#/features/callstack/model/callstackSlice";
 
 type ArrayContent = Array<string | number>;
 

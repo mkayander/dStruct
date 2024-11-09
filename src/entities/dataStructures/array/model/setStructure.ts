@@ -2,11 +2,14 @@ import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { uuid } from "#/shared/lib";
+
+import { generateArrayData } from "../lib/generateArrayData";
 
 const ArrayBase = makeArrayBaseClass(Set);
 
@@ -101,3 +104,12 @@ export class ControlledSet extends ArrayBase {
     this.itemsMeta.set(key, data);
   }
 }
+
+export const getRuntimeSet = (callstack: CallstackHelper) =>
+  class SetProxy extends ControlledSet {
+    constructor(input?: any[] | null) {
+      const set = new Set(input);
+      const data = generateArrayData(Array.from(set));
+      super(Array.from(set), uuid.generate(), data, callstack, true);
+    }
+  };

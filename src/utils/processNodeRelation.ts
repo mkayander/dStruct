@@ -1,7 +1,7 @@
 import { alpha } from "@mui/material";
 import type { RelationType } from "react-archer/lib/types";
 
-import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
+import type { TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 
 const relationProps = {
   targetAnchor: "middle",

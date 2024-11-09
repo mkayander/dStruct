@@ -1,10 +1,13 @@
 import type { ArgumentObject } from "#/entities/argument/model/types";
+import type { ArrayDataState } from "#/entities/dataStructures/array/model/arraySlice";
+import type { TreeDataState } from "#/entities/dataStructures/node/model/nodeSlice";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import {
+  globalDefinitionsPrefix,
+  setGlobalRuntimeContext,
+} from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import { stringifySolutionResult } from "#/shared/lib";
-import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
-import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
-import { createCaseRuntimeArgs, setGlobalRuntimeContext } from "#/utils";
-import { globalDefinitionsPrefix } from "#/utils/setGlobalRuntimeContext";
+import { createCaseRuntimeArgs } from "#/utils";
 
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>

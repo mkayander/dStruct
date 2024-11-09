@@ -1,14 +1,14 @@
 import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
-import { MapStructureView } from "#/entities/dataStructures/map/ui/MapStructureView";
-import { useAppSelector } from "#/store/hooks";
 import {
   type ArrayData,
   type ArrayItemData,
   selectArrayStateByName,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
+import { MapStructureView } from "#/entities/dataStructures/map/ui/MapStructureView";
+import { useAppSelector } from "#/store/hooks";
 
 type NestedStructureProps = {
   item: ArrayItemData;

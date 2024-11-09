@@ -4,12 +4,12 @@ import { useEffect } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type BinaryNodeProps } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   selectNodeDataById,
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 export const useLinkedListChildNode = (props: BinaryNodeProps) => {
   const { treeName, childrenIds, y, x } = props;

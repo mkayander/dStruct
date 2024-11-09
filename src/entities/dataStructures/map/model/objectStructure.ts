@@ -1,9 +1,11 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
+import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
+import { uuid } from "#/shared/lib";
 
 const ArrayBase = makeArrayBaseClass(Object);
 
@@ -93,3 +95,11 @@ export class ControlledObject extends ArrayBase {
     this.itemsMeta.set(key, data);
   }
 }
+
+export const getRuntimeObject = (callstack: CallstackHelper) =>
+  class ObjectProxy extends ControlledObject {
+    constructor(input?: any) {
+      const data = generateArrayData([]);
+      super(input, uuid.generate(), data, callstack, true);
+    }
+  };

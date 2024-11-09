@@ -4,21 +4,21 @@ import { Box, Stack } from "@mui/material";
 import React, { useMemo } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { arrayDataSelector } from "#/entities/dataStructures/array/model/arraySlice";
 import { ArrayStructureView } from "#/entities/dataStructures/array/ui/ArrayStructureView";
 import { MapStructureView } from "#/entities/dataStructures/map/ui/MapStructureView";
 import { MatrixStructureView } from "#/entities/dataStructures/matrix/ui/MatrixStructureView";
+import {
+  type TreeData,
+  treeDataStructuresSelector,
+  treeNodeSlice,
+} from "#/entities/dataStructures/node/model/nodeSlice";
 import {
   editorSlice,
   selectNodeDragState,
 } from "#/features/treeViewer/model/editorSlice";
 import { NodesView } from "#/features/treeViewer/ui/NodesView";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { arrayDataSelector } from "#/store/reducers/structures/arrayReducer";
-import {
-  type TreeData,
-  treeDataStructuresSelector,
-  treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
 
 import { useArgumentsParsing, useNodesRuntimeUpdates } from "../hooks";
 

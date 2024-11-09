@@ -9,7 +9,6 @@ import {
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import { type NodeDragState } from "#/features/treeViewer/model/editorSlice";
-import type { RootState } from "#/store/makeStore";
 import {
   type BaseStructureItem,
   type BaseStructureState,
@@ -19,7 +18,8 @@ import {
   type NamedPayload,
   runStateActionByName,
   type StructureNode,
-} from "#/store/reducers/structures/baseStructureReducer";
+} from "#/shared/model/baseStructureSlice";
+import type { RootState } from "#/store/makeStore";
 
 export type AnimationName = "blink";
 
@@ -280,11 +280,6 @@ export const treeNodeSlice = createSlice({
       }),
   },
 });
-
-/**
- * Reducer
- */
-export const treeNodeReducer = treeNodeSlice.reducer;
 
 /**
  * Selector

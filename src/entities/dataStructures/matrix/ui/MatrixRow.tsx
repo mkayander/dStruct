@@ -1,9 +1,9 @@
 import { alpha, Box, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
+import { arrayDataItemSelectors } from "#/entities/dataStructures/array/model/arraySlice";
 import { ArrayItem } from "#/entities/dataStructures/array/ui/ArrayItem";
 import { type ArrayStructureViewProps } from "#/entities/dataStructures/array/ui/ArrayStructureView";
-import { arrayDataItemSelectors } from "#/store/reducers/structures/arrayReducer";
 
 type MatrixRowProps = ArrayStructureViewProps & {
   header?: string;

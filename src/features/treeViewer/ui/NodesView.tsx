@@ -7,11 +7,11 @@ import { BinaryNode } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
 import { GraphEdge } from "#/entities/dataStructures/graph/ui/GraphEdge";
 import { GraphNode } from "#/entities/dataStructures/graph/ui/GraphNode";
 import { LinkedListNode } from "#/entities/dataStructures/linkedList/ui/LinkedListNode";
-import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,
   type TreeData,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { useAppSelector } from "#/store/hooks";
 
 const nodeComponentMap = {
   [ArgumentType.LINKED_LIST]: LinkedListNode,

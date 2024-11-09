@@ -24,6 +24,7 @@ import {
   type ProgrammingLanguage,
   useCodeExecution,
 } from "#/features/codeRunner/hooks/useCodeExecution";
+import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
@@ -54,7 +55,6 @@ import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { trpc } from "#/utils";
-import { codePrefixLinesCount } from "#/utils/setGlobalRuntimeContext";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const dispatch = useAppDispatch();

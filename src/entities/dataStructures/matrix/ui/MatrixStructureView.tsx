@@ -1,12 +1,12 @@
 import { alpha, Box, useTheme } from "@mui/material";
 import React from "react";
 
-import { MatrixRow } from "#/entities/dataStructures/matrix/ui/MatrixRow";
 import type {
   ArrayData,
   ArrayDataState,
   ArrayItemData,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import { MatrixRow } from "#/entities/dataStructures/matrix/ui/MatrixRow";
 
 type MatrixStructureViewProps = {
   data: ArrayData;

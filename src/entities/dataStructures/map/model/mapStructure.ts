@@ -1,12 +1,14 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { uuid } from "#/shared/lib";
 
 const ArrayBase = makeArrayBaseClass(Map);
 
@@ -104,3 +106,12 @@ export class ControlledMap extends ArrayBase {
     this.itemsMeta.set(key, data);
   }
 }
+
+export const getRuntimeMap = (callstack: CallstackHelper) =>
+  class MapProxy extends ControlledMap {
+    constructor(input?: any[] | null) {
+      const map = new Map(input);
+      const data = generateArrayData(Array.from(map));
+      super(Array.from(map), uuid.generate(), data, callstack, true);
+    }
+  };

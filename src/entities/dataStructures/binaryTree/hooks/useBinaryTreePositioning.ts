@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { useAppDispatch } from "#/store/hooks";
 import {
   type TreeData,
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { useAppDispatch } from "#/store/hooks";
 
 const TOP_OFFSET = 25;
 

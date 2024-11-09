@@ -1,7 +1,7 @@
+import { arrayStructureSlice } from "#/entities/dataStructures/array/model/arraySlice";
+import { treeNodeSlice } from "#/entities/dataStructures/node/model/nodeSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import type { AppDispatch } from "#/store/makeStore";
-import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
-import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 
 export const resetStructuresState = (
   dispatch: AppDispatch,

@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import { isArgumentArrayType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { arrayStructureSlice } from "#/entities/dataStructures/array/model/arraySlice";
+import { treeNodeSlice } from "#/entities/dataStructures/node/model/nodeSlice";
 import {
   type CallFrame,
   callstackSlice,
@@ -13,8 +15,6 @@ import {
 } from "#/features/callstack/model/callstackSlice";
 import { usePrevious } from "#/shared/hooks/usePrevious";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
-import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";
 
 export const useNodesRuntimeUpdates = (

@@ -14,16 +14,16 @@ import {
 import React, { useEffect, useRef } from "react";
 
 import {
+  selectNodeDataById,
+  treeNodeSlice,
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import {
   type CallFrame,
   selectCallstack,
 } from "#/features/callstack/model/callstackSlice";
 import { useI18nContext } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import {
-  selectNodeDataById,
-  treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,

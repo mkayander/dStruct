@@ -13,12 +13,12 @@ import {
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 
-import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 const nodeSize = "42px";
 

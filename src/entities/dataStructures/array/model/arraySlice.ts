@@ -5,11 +5,9 @@ import {
   type EntityState,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
 import type { ArgumentArrayType } from "#/entities/argument/model/types";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
-import type { RootState } from "#/store/makeStore";
 import {
   type BaseStructureItem,
   type BaseStructureState,
@@ -18,9 +16,8 @@ import {
   getStateByName,
   type NamedPayload,
   type StructureNode,
-} from "#/store/reducers/structures/baseStructureReducer";
-
-const uuid = shortUUID();
+} from "#/shared/model/baseStructureSlice";
+import type { RootState } from "#/store/makeStore";
 
 export type ArrayItemData = StructureNode & {
   index: number;
@@ -133,27 +130,6 @@ export const arrayStructureSlice = createSlice({
     },
   },
 });
-
-export const generateArrayData = (array: Array<any>) => {
-  const data = arrayDataAdapter.getInitialState();
-
-  for (const [index, value] of array.entries()) {
-    const id = uuid.generate();
-    data.ids.push(id);
-    data.entities[id] = {
-      id,
-      index,
-      value,
-    };
-  }
-
-  return data;
-};
-
-/**
- * Reducer
- */
-export const arrayStructureReducer = arrayStructureSlice.reducer;
 
 /**
  * Selector

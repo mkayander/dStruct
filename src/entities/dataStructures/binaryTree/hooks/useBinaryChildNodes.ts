@@ -3,8 +3,8 @@
 import { type RelationType } from "react-archer/lib/types";
 
 import { type BinaryNodeProps } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
+import { selectNodeDataById } from "#/entities/dataStructures/node/model/nodeSlice";
 import { useAppSelector } from "#/store/hooks";
-import { selectNodeDataById } from "#/store/reducers/structures/treeNodeReducer";
 import { processNodeRelation } from "#/utils";
 
 export const useBinaryChildNodes = (

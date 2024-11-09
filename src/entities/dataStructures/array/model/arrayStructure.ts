@@ -1,19 +1,18 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import shortUUID from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   type ArrayBaseType,
   makeArrayBaseClass,
 } from "#/entities/dataStructures/array/model/arrayBase";
-import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   arrayDataItemSelectors,
   type ArrayItemData,
-  generateArrayData,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { uuid } from "#/shared/lib";
 
-const uuid = shortUUID();
+import { generateArrayData } from "../lib/generateArrayData";
 
 const ArrayBase = makeArrayBaseClass(Array);
 
@@ -246,3 +245,38 @@ export class ControlledArray<T> extends ArrayBase<T> {
     this.setHeaderRanges({ rowStart: 0, rowEnd: m, colStart: 0, colEnd: n });
   }
 }
+
+export const getRuntimeArrayClass = (callstack: CallstackHelper) =>
+  class ArrayProxy<T extends string | number> extends ControlledArray<T> {
+    constructor(arrayLength: number);
+    constructor(...items: Array<T>) {
+      if (items.length === 1 && typeof items[0] === "number") {
+        const arrayLength = items[0];
+        items = new Array(arrayLength);
+      }
+
+      if (
+        items[0] &&
+        typeof items[0] !== "number" &&
+        typeof items[0] !== "string"
+      ) {
+        throw new Error("ArrayProxy can only contain numbers or strings");
+      }
+
+      const data = generateArrayData(items);
+
+      super(items, uuid.generate(), data, callstack, true);
+    }
+
+    static override from(
+      array: Array<number | string>,
+      mapFn?: (
+        item: number | string | undefined,
+        index: number,
+      ) => number | string,
+      thisArg?: unknown,
+      options?: ControlledArrayRuntimeOptions,
+    ) {
+      return ControlledArray._from(callstack, array, mapFn, thisArg, options);
+    }
+  };

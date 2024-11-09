@@ -1,11 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
 
-import { getNodeColors } from "#/shared/lib";
-import { useAppSelector } from "#/store/hooks";
 import {
   type EdgeData,
   selectNodeDataById,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { getNodeColors } from "#/shared/lib";
+import { useAppSelector } from "#/store/hooks";
 
 const NODE_OFFSET = 21;
 const THICKNESS = 4;

@@ -2,10 +2,10 @@ import { alpha, Box, Typography } from "@mui/material";
 import clsx from "clsx";
 import React, { useRef } from "react";
 
+import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { NestedStructure } from "#/features/treeViewer/ui/NestedStructure";
 import { NodeOverlay } from "#/features/treeViewer/ui/NodeOverlay";
 import { useNodeAnimations, useNodeColors } from "#/shared/hooks";
-import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 type ArrayItemProps = {
   item: ArrayItemData;

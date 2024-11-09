@@ -11,7 +11,7 @@ import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import {
   type AnimationName,
   type StructureNode,
-} from "#/store/reducers/structures/baseStructureReducer";
+} from "#/shared/model/baseStructureSlice";
 import type { Constructor } from "#/types/helpers";
 
 const uuid = shortUUID();

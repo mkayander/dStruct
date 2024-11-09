@@ -5,8 +5,9 @@ import {
   NodeBase,
   type NodeMeta,
 } from "#/entities/dataStructures/node/model/nodeBase";
+import type { TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import type { TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
+import { uuid } from "#/shared/lib";
 
 export interface BinaryNodeMeta<T extends number | string = number | string>
   extends NodeMeta {
@@ -175,3 +176,26 @@ export class BinaryTreeNode<
     return `Binary Tree [${String(result)}]`;
   }
 }
+
+export const getRuntimeBinaryTreeClass = (callstack: CallstackHelper) =>
+  class BinaryTree extends BinaryTreeNode {
+    constructor(
+      val: number,
+      left: BinaryTreeNode | null = null,
+      right: BinaryTreeNode | null = null,
+    ) {
+      super(
+        val,
+        left,
+        right,
+        {
+          id: uuid.generate(),
+          type: ArgumentType.BINARY_TREE,
+          depth: 0,
+        },
+        uuid.generate(),
+        callstack,
+        true,
+      );
+    }
+  };

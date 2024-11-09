@@ -5,7 +5,7 @@ import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   type ArrayData,
   arrayDataItemSelectors,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
 
 import { ArrayItem } from "./ArrayItem";
 

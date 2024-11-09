@@ -20,26 +20,26 @@ import type {
   ArgumentTreeType,
 } from "#/entities/argument/model/types";
 import {
-  findCentroid,
-  positionSnowflakeNodes,
-} from "#/entities/dataStructures/graph/lib";
-import { callstackSlice } from "#/features/callstack/model/callstackSlice";
-import { isNumber } from "#/shared/lib";
-import { safeStringify } from "#/shared/lib/stringifySolutionResult";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { type AppDispatch } from "#/store/makeStore";
-import {
   arrayDataSelector,
   type ArrayItemData,
   arrayStructureSlice,
-} from "#/store/reducers/structures/arrayReducer";
+} from "#/entities/dataStructures/array/model/arraySlice";
+import {
+  findCentroid,
+  positionSnowflakeNodes,
+} from "#/entities/dataStructures/graph/lib";
 import {
   type EdgeData,
   getEdgeId,
   treeDataSelector,
   type TreeNodeData,
   treeNodeSlice,
-} from "#/store/reducers/structures/treeNodeReducer";
+} from "#/entities/dataStructures/node/model/nodeSlice";
+import { callstackSlice } from "#/features/callstack/model/callstackSlice";
+import { isNumber } from "#/shared/lib";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { type AppDispatch } from "#/store/makeStore";
 
 export type TreeInput = (number | null)[];
 export type GraphInput = Array<[number, number, number]>;

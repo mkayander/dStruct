@@ -4,10 +4,10 @@ import type { RelationType } from "react-archer/lib/types";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
 import { LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
+import { type TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { isNumber, stringifySolutionResult } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
-import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { getImageUrl, processNodeRelation } from "#/utils";
 
 describe("utils", () => {
