@@ -4,15 +4,14 @@ import React from "react";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useBinaryTreePositioning } from "#/entities/dataStructures/binaryTree/hooks/useBinaryTreePositioning";
 import { BinaryNode } from "#/entities/dataStructures/binaryTree/ui/BinaryNode";
+import { GraphEdge } from "#/entities/dataStructures/graph/ui/GraphEdge";
+import { GraphNode } from "#/entities/dataStructures/graph/ui/GraphNode";
 import { LinkedListNode } from "#/entities/dataStructures/linkedList/ui/LinkedListNode";
 import { useAppSelector } from "#/store/hooks";
 import {
   selectMinXOffset,
   type TreeData,
 } from "#/store/reducers/structures/treeNodeReducer";
-
-import { GraphEdge } from "../../../entities/dataStructures/graph/ui/GraphEdge";
-import { GraphNode } from "../../../entities/dataStructures/graph/ui/GraphNode";
 
 const nodeComponentMap = {
   [ArgumentType.LINKED_LIST]: LinkedListNode,

@@ -6,10 +6,9 @@ import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { isNumber, stringifySolutionResult } from "#/shared/lib";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { getImageUrl, processNodeRelation } from "#/utils";
-
-import { safeStringify } from "../../shared/lib/stringifySolutionResult";
 
 describe("utils", () => {
   describe("getImageUrl", () => {

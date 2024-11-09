@@ -5,11 +5,10 @@ import {
   editorSlice,
   selectIsEditingNodes,
 } from "#/features/treeViewer/model/editorSlice";
+import { NodeBase } from "#/features/treeViewer/ui/NodeBase";
 import { useNodeColors } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
-
-import { NodeBase } from "../../../../features/treeViewer/ui/NodeBase";
 
 export type GraphNodeProps = TreeNodeData & {
   treeName: string;

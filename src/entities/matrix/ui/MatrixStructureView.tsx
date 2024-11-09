@@ -1,7 +1,7 @@
 import { alpha, Box, useTheme } from "@mui/material";
 import React from "react";
 
-import { MatrixRow } from "#/features/treeViewer/ui/MatrixRow";
+import { MatrixRow } from "#/entities/matrix/ui/MatrixRow";
 import type {
   ArrayData,
   ArrayDataState,

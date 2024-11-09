@@ -1,12 +1,11 @@
 import { alpha, Box } from "@mui/material";
 import React, { useRef } from "react";
 
+import { NestedStructure } from "#/features/treeViewer/ui/NestedStructure";
+import { NodeOverlay } from "#/features/treeViewer/ui/NodeOverlay";
 import { useNodeAnimations, useNodeColors } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
-
-import { NestedStructure } from "./NestedStructure";
-import { NodeOverlay } from "./NodeOverlay";
 
 type MapItemProps = {
   item: ArrayItemData;
