@@ -8,7 +8,6 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  swcMinify: true,
   transpilePackages: ["@mui/x-charts"],
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
@@ -25,7 +24,10 @@ const config = {
         protocol: "https",
         hostname: "leetpal-prod.s3.eu-central-1.amazonaws.com",
       },
-    ]
+    ],
+  },
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
   },
   webpack: (config) => {
     return {
