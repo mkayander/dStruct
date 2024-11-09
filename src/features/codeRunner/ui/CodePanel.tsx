@@ -17,8 +17,8 @@ import * as prettierPluginEstree from "prettier/plugins/estree";
 import prettier from "prettier/standalone";
 import React, { useEffect, useRef, useState } from "react";
 
-import prettierIcon from "#/components/molecules/CodeRunner/assets/prettierIcon.svg";
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
+import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
 import {

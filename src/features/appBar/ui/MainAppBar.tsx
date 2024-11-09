@@ -28,8 +28,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { type MouseEvent, useState } from "react";
 
-import { SidePanel } from "#/components/organisms/SidePanel";
 import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
+import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
 import { useProfileImageUploader } from "#/hooks";
 import { useI18nContext } from "#/hooks";
 import { useAppSelector } from "#/store/hooks";

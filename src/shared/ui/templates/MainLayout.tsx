@@ -1,8 +1,8 @@
 import { Box, type BoxProps, LinearProgress } from "@mui/material";
 import React from "react";
 
-import { Footer } from "#/components/organisms/Footer";
 import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
+import { Footer } from "#/shared/ui/organisms/Footer";
 import {
   PageScrollContainer,
   type PageScrollContainerProps,
