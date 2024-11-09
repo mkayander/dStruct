@@ -1,3 +1,10 @@
+# [1.324.0](https://github.com/mkayander/dStruct/compare/v1.323.1...v1.324.0) (2024-11-09)
+
+
+### Features
+
+* Further FSD implementation ([d2f16c5](https://github.com/mkayander/dStruct/commit/d2f16c52f630881cfd51da2b632be43bfd24b39c))
+
 ## [1.323.1](https://github.com/mkayander/dStruct/compare/v1.323.0...v1.323.1) (2024-10-30)
 
 
