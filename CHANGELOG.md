@@ -1,3 +1,10 @@
+## [1.324.1](https://github.com/mkayander/dStruct/compare/v1.324.0...v1.324.1) (2024-11-09)
+
+
+### Bug Fixes
+
+* Fixed imports ([517f0e4](https://github.com/mkayander/dStruct/commit/517f0e4685668a3c0023874b2f27e19364c0e6da))
+
 # [1.324.0](https://github.com/mkayander/dStruct/compare/v1.323.1...v1.324.0) (2024-11-09)
 
 
