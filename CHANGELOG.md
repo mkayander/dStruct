@@ -1,3 +1,19 @@
+# [1.325.0](https://github.com/mkayander/dStruct/compare/v1.324.1...v1.325.0) (2024-11-09)
+
+
+### Bug Fixes
+
+* Fixed import ([5ad0bc6](https://github.com/mkayander/dStruct/commit/5ad0bc6c7913669991d553a12bdcf4e2c6721b85))
+* Fixed imports ([9264a43](https://github.com/mkayander/dStruct/commit/9264a436cb9268f409bc010ef033b818a9362359))
+* Moved map & matrix folders ([c89f301](https://github.com/mkayander/dStruct/commit/c89f301b25cd22c5a9c265e6fd4051e3ef0c87cd))
+
+
+### Features
+
+* Moved data structure models to FSD folders ([ad07bbd](https://github.com/mkayander/dStruct/commit/ad07bbd9f36ac28ef550fb97007bc67fc6cf4184))
+* Moved hooks to FSD ([61dc7da](https://github.com/mkayander/dStruct/commit/61dc7da0b39039b31762f23ed2f28b5389ac2ce7))
+* Spread args creation across FSD ([f793ad0](https://github.com/mkayander/dStruct/commit/f793ad0c682b4c5477d7cb8accb48c5468182fe7))
+
 ## [1.324.1](https://github.com/mkayander/dStruct/compare/v1.324.0...v1.324.1) (2024-11-09)
 
 
