@@ -145,9 +145,6 @@ importers:
       react:
         specifier: 18.3.1
         version: 18.3.1
-      react-archer:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/react@18.3.8)(prop-types@15.8.1)(react@18.3.1)
       react-beautiful-dnd:
         specifier: ^13.1.1
         version: 13.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3111,6 +3108,7 @@ packages:
 
   acorn-import-assertions@1.9.0:
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
 
@@ -6338,13 +6336,6 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-archer@4.4.0:
-    resolution: {integrity: sha512-m9mEpGHphwWZW7mzk7UVGJVwom353lAbDQ/DJIYH59LnEpEVyaE3KxZKBChB5WYipyOl3HhRlVQk+TknJbGfSQ==}
-    peerDependencies:
-      '@types/react': ^16.8.8 || ^17 || ^18
-      prop-types: ^15.6.2
-      react: ^16.9.0 || ^17 || ^18
-
   react-beautiful-dnd@13.1.1:
     resolution: {integrity: sha512-0Lvs4tq2VcrEjEgDXHjT98r+63drkKEgqyxdA7qD3mvKwga6a5SscbdLPO2IExotU1jW8L0Ksdl0Cj2AF67nPQ==}
     peerDependencies:
@@ -6535,9 +6526,6 @@ packages:
 
   reselect@5.1.0:
     resolution: {integrity: sha512-aw7jcGLDpSgNDyWBQLv2cedml85qd95/iszJjN988zX1t7AVRJi19d9kto5+W7oCfQ94gyo40dVbT6g2k4/kXg==}
-
-  resize-observer-polyfill@1.5.0:
-    resolution: {integrity: sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==}
 
   resize-observer-polyfill@1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
@@ -14798,14 +14786,6 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-archer@4.4.0(@types/react@18.3.8)(prop-types@15.8.1)(react@18.3.1):
-    dependencies:
-      '@types/react': 18.3.8
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-fast-compare: 2.0.4
-      resize-observer-polyfill: 1.5.0
-
   react-beautiful-dnd@13.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.23.6
@@ -15014,8 +14994,6 @@ snapshots:
     optional: true
 
   reselect@5.1.0: {}
-
-  resize-observer-polyfill@1.5.0: {}
 
   resize-observer-polyfill@1.5.1: {}
 
