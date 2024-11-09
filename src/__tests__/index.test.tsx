@@ -3,11 +3,11 @@ import { render, screen } from "@testing-library/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { vi } from "vitest";
 
-import { StateThemeProvider } from "#/components/providers/StateThemeProvider";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
 import en from "#/i18n/en/index";
 import type { Translation } from "#/i18n/i18n-types";
 import DashboardPage from "#/pages/index";
+import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { makeStore } from "#/store/makeStore";
 import { withNextTRPC } from "#/utils/trpc-test-decorator";
 

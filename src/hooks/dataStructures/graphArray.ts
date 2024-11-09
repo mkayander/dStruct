@@ -1,6 +1,6 @@
 import { type EntityState } from "@reduxjs/toolkit";
 
-import { type CallstackHelper } from "#/store/reducers/callstackReducer";
+import { type CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   type TreeNodeData,
   treeNodeDataSelector,

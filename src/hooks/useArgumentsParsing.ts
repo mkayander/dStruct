@@ -8,23 +8,23 @@ import {
   isArgumentTreeType,
 } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import {
+  type ArgumentInfo,
+  caseSlice,
+  selectCaseArguments,
+  selectCaseArgumentsInfo,
+} from "#/entities/argument/model/caseSlice";
 import type {
   ArgumentArrayType,
   ArgumentObject,
   ArgumentTreeType,
 } from "#/entities/argument/model/types";
 import { findCentroid, positionSnowflakeNodes } from "#/entities/graph/lib";
+import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { isNumber } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { type AppDispatch } from "#/store/makeStore";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
-import {
-  type ArgumentInfo,
-  caseSlice,
-  selectCaseArguments,
-  selectCaseArgumentsInfo,
-} from "#/store/reducers/caseReducer";
 import {
   arrayDataSelector,
   type ArrayItemData,

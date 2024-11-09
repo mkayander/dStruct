@@ -22,11 +22,11 @@ import { useDailyQuestionData } from "#/api";
 import { LogoModelView } from "#/components/molecules/LogoModelView";
 import { QuestionSummary } from "#/components/molecules/QuestionSummary";
 import { DailyProblem } from "#/components/organisms/DailyProblem/DailyProblem";
-import { MainLayout } from "#/components/templates/MainLayout";
-import type { PageScrollContainerProps } from "#/components/templates/PageScrollContainer";
 import { useI18nContext } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
 import type { Locales, Translations } from "#/i18n/i18n-types";
+import { MainLayout } from "#/shared/ui/templates/MainLayout";
+import type { PageScrollContainerProps } from "#/shared/ui/templates/PageScrollContainer";
 
 const DashboardPage: NextPage<{
   i18n: {

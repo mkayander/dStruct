@@ -4,14 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 
 import { isArgumentArrayType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   type CallFrame,
   callstackSlice,
   selectCallstack,
   selectCallstackFrameIndex,
   selectCallstackIsPlaying,
-} from "#/store/reducers/callstackReducer";
+} from "#/features/callstack/model/callstackSlice";
+import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { arrayStructureSlice } from "#/store/reducers/structures/arrayReducer";
 import { treeNodeSlice } from "#/store/reducers/structures/treeNodeReducer";
 import { resetStructuresState, validateAnimationName } from "#/utils";

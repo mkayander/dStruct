@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
+import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import { useAppDispatch } from "#/store/hooks";
-import { editorSlice } from "#/store/reducers/editorReducer";
 
 export const useViewerPan = () => {
   const dispatch = useAppDispatch();

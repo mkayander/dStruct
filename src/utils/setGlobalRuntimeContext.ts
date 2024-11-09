@@ -2,6 +2,7 @@ import { PriorityQueue } from "@datastructures-js/priority-queue";
 import shortUUID from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import {
   ControlledArray,
   type ControlledArrayRuntimeOptions,
@@ -28,7 +29,6 @@ import {
   safeStringify,
   stripQuotes,
 } from "#/shared/lib/stringifySolutionResult";
-import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { generateArrayData } from "#/store/reducers/structures/arrayReducer";
 
 const uuid = shortUUID();

@@ -2,14 +2,14 @@ import { Code } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useMemo } from "react";
 
-import { CircularPercentage } from "#/components/atoms/CircularPercentage/CircularPercentage";
-import { DataSection } from "#/components/templates/DataSection";
 import type {
   Difficulty,
   GetUserProfileQueryResult,
   QuestionCount,
   SubmissionNum,
 } from "#/graphql/generated";
+import { CircularPercentage } from "#/shared/ui/atoms/CircularPercentage/CircularPercentage";
+import { DataSection } from "#/shared/ui/templates/DataSection";
 
 type SubmissionsData = {
   allQuestionsCount: Record<keyof typeof Difficulty, QuestionCount>;

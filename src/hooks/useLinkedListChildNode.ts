@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { type BinaryNodeProps } from "#/components/molecules/TreeViewer/BinaryNode";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { type BinaryNodeProps } from "#/features/treeViewer/ui/BinaryNode";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import {
   selectNodeDataById,

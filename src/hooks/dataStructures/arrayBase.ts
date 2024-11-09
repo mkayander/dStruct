@@ -1,13 +1,13 @@
 import shortUUID from "short-uuid";
 
 import type { ArgumentArrayType } from "#/entities/argument/model/types";
-import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import type {
   AddArrayItemFrame,
   CallFrameBase,
   CallstackHelper,
   StructureTypeName,
-} from "#/store/reducers/callstackReducer";
+} from "#/features/callstack/model/callstackSlice";
+import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import {
   type AnimationName,
   type StructureNode,

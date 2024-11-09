@@ -12,12 +12,12 @@ import { useSession } from "next-auth/react";
 import { useSnackbar } from "notistack";
 import React from "react";
 
-import { DataSection } from "#/components/templates/DataSection";
 import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
+import { DataSection } from "#/shared/ui/templates/DataSection";
 import { trpc } from "#/utils";
 
 export const UserSettings: React.FC = () => {

@@ -2,7 +2,7 @@
 
 import { type RelationType } from "react-archer/lib/types";
 
-import { type BinaryNodeProps } from "#/components/molecules/TreeViewer/BinaryNode";
+import { type BinaryNodeProps } from "#/features/treeViewer/ui/BinaryNode";
 import { useAppSelector } from "#/store/hooks";
 import { selectNodeDataById } from "#/store/reducers/structures/treeNodeReducer";
 import { processNodeRelation } from "#/utils";

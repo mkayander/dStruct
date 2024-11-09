@@ -5,9 +5,9 @@ import React from "react";
 
 import { LeetCodeStats } from "#/components/organisms/LeetCodeStats";
 import { UserSettings } from "#/components/organisms/UserSettings";
-import { MainLayout } from "#/components/templates/MainLayout";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/hooks";
+import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 const ProfilePage: NextPage = () => {
   const { LL } = useI18nContext();

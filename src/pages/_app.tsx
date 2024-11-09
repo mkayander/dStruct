@@ -8,11 +8,11 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
-import { SnackbarCloseButton } from "#/components/atoms/SnackbarCloseButton";
-import { I18nProvider } from "#/components/providers/I18nProvider";
-import { StateThemeProvider } from "#/components/providers/StateThemeProvider";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
+import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
+import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
+import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { wrapper } from "#/store/makeStore";
 import { trpc } from "#/utils";
 

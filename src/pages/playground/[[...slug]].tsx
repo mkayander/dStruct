@@ -2,19 +2,17 @@ import { Container, darken, Stack, useTheme } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
 
-import {
-  CodePanel,
-  OutputPanel,
-  ProjectPanel,
-  TreeViewPanel,
-} from "#/components/organisms/panels";
-import { PageScrollContainer } from "#/components/templates/PageScrollContainer";
-import type { SplitPanelsLayoutProps } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
-import { SplitPanelsLayout } from "#/components/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { ConfigContext } from "#/context";
 import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
+import { CodePanel } from "#/features/codeRunner/ui/CodePanel";
+import { OutputPanel } from "#/features/output/ui/OutputPanel";
+import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
+import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
 import { useAppConfig } from "#/hooks";
 import { useMobileLayout } from "#/hooks/useMobileLayout";
+import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
+import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 
 type WrapperProps = SplitPanelsLayoutProps;
 

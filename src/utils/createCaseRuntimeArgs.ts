@@ -1,13 +1,13 @@
 import { isArgumentArrayType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObject } from "#/entities/argument/model/types";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { ControlledArray } from "#/hooks/dataStructures/arrayStructure";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { ControlledGraphArray } from "#/hooks/dataStructures/graphArray";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { ControlledString } from "#/hooks/dataStructures/stringStructure";
 import { getMatrixChildArrayArgs } from "#/hooks/useArgumentsParsing";
-import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type {
   ArrayData,
   ArrayDataState,

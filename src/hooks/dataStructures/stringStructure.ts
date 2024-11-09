@@ -1,9 +1,9 @@
 import type { EntityState } from "@reduxjs/toolkit";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { makeArrayBaseClass } from "#/hooks/dataStructures/arrayBase";
 import { initControlledArray } from "#/hooks/dataStructures/arrayStructure";
-import type { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { type ArrayItemData } from "#/store/reducers/structures/arrayReducer";
 
 const ArrayBase = makeArrayBaseClass(String);

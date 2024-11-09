@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 import {
   callstackSlice,
   selectCallstackIsPlaying,
   selectCallstackLength,
-} from "#/store/reducers/callstackReducer";
+} from "#/features/callstack/model/callstackSlice";
 import {
   editorSlice,
   selectIsEditingNodes,
-} from "#/store/reducers/editorReducer";
+} from "#/features/treeViewer/model/editorSlice";
+import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 import { resetStructuresState } from "#/utils";
 
 export const usePlayerControls = () => {

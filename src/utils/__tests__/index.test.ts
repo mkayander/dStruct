@@ -2,10 +2,10 @@ import { alpha } from "@mui/material";
 import type { RelationType } from "react-archer/lib/types";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { BinaryTreeNode } from "#/hooks/dataStructures/binaryTreeNode";
 import { LinkedListNode } from "#/hooks/dataStructures/linkedListNode";
 import { isNumber, stringifySolutionResult } from "#/shared/lib";
-import { CallstackHelper } from "#/store/reducers/callstackReducer";
 import { type TreeNodeData } from "#/store/reducers/structures/treeNodeReducer";
 import { getImageUrl, processNodeRelation } from "#/utils";
 

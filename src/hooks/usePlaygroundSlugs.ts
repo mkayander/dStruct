@@ -3,8 +3,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 
+import { projectSlice } from "#/features/project/model/projectSlice";
 import { useAppDispatch } from "#/store/hooks";
-import { projectSlice } from "#/store/reducers/projectReducer";
 
 const BASE_PATH = "/playground";
 

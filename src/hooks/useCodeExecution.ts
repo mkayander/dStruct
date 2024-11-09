@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import shortUUID from "short-uuid";
 
+import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
+import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { useAppStore } from "#/store/hooks";
-import { callstackSlice } from "#/store/reducers/callstackReducer";
-import { selectCaseArguments } from "#/store/reducers/caseReducer";
 import { resetStructuresState } from "#/utils";
 import { createRawRuntimeArgs } from "#/utils/createCaseRuntimeArgs";
 

@@ -1,6 +1,6 @@
 import type { ArgumentObject } from "#/entities/argument/model/types";
+import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { stringifySolutionResult } from "#/shared/lib";
-import { CallstackHelper } from "#/store/reducers/callstackReducer";
 import type { ArrayDataState } from "#/store/reducers/structures/arrayReducer";
 import type { TreeDataState } from "#/store/reducers/structures/treeNodeReducer";
 import { createCaseRuntimeArgs, setGlobalRuntimeContext } from "#/utils";

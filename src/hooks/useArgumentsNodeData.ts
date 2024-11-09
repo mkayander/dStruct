@@ -2,11 +2,11 @@ import { useSnackbar } from "notistack";
 
 import { isArgumentTreeType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { caseSlice } from "#/entities/argument/model/caseSlice";
 import type { TreeArgumentData } from "#/entities/argument/model/types";
+import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 import { type RootState } from "#/store/makeStore";
-import { caseSlice } from "#/store/reducers/caseReducer";
-import { selectIsEditable } from "#/store/reducers/projectReducer";
 import { trpc } from "#/utils/trpc";
 
 function* iterateGraphStructures(state: RootState) {

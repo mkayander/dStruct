@@ -8,8 +8,8 @@ import {
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
+import { type NodeDragState } from "#/features/treeViewer/model/editorSlice";
 import type { RootState } from "#/store/makeStore";
-import { type NodeDragState } from "#/store/reducers/editorReducer";
 import {
   type BaseStructureItem,
   type BaseStructureState,
