@@ -15,7 +15,8 @@ import {
 } from "#/features/callstack/model/callstackSlice";
 import { usePrevious } from "#/shared/hooks/usePrevious";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { resetStructuresState, validateAnimationName } from "#/utils";
+
+import { resetStructuresState, validateAnimationName } from "../lib";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,

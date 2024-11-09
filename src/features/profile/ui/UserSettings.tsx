@@ -17,8 +17,8 @@ import {
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
 import { useI18nContext } from "#/shared/hooks";
+import { trpc } from "#/shared/lib";
 import { DataSection } from "#/shared/ui/templates/DataSection";
-import { trpc } from "#/utils";
 
 export const UserSettings: React.FC = () => {
   const { LL } = useI18nContext();

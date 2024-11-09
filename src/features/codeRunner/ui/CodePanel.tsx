@@ -43,6 +43,7 @@ import {
   usePlaygroundSlugs,
   useSearchParam,
 } from "#/shared/hooks";
+import { trpc } from "#/shared/lib";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
 import {
@@ -54,7 +55,6 @@ import { type PanelContentProps } from "#/shared/ui/templates/SplitPanelsLayout/
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { trpc } from "#/utils";
 
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const dispatch = useAppDispatch();

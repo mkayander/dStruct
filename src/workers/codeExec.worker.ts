@@ -2,12 +2,12 @@ import type { ArgumentObject } from "#/entities/argument/model/types";
 import type { ArrayDataState } from "#/entities/dataStructures/array/model/arraySlice";
 import type { TreeDataState } from "#/entities/dataStructures/node/model/nodeSlice";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { createCaseRuntimeArgs } from "#/features/codeRunner/lib";
 import {
   globalDefinitionsPrefix,
   setGlobalRuntimeContext,
 } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import { stringifySolutionResult } from "#/shared/lib";
-import { createCaseRuntimeArgs } from "#/utils";
 
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>

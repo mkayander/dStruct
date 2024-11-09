@@ -5,7 +5,7 @@ import axios from "axios";
 import type { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { getImageUrl, trpc } from "#/utils";
+import { getImageUrl, trpc } from "#/shared/lib";
 
 type SessionHook = ReturnType<typeof useSession>;
 type Status = "loading" | "done";

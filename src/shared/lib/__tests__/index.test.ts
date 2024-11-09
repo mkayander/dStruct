@@ -1,14 +1,9 @@
-import { alpha } from "@mui/material";
-import type { RelationType } from "react-archer/lib/types";
-
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
 import { LinkedListNode } from "#/entities/dataStructures/linkedList/model/linkedListNode";
-import { type TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { isNumber, stringifySolutionResult } from "#/shared/lib";
-import { safeStringify } from "#/shared/lib/stringifySolutionResult";
-import { getImageUrl, processNodeRelation } from "#/utils";
+import { getImageUrl, safeStringify } from "#/shared/lib";
 
 describe("utils", () => {
   describe("getImageUrl", () => {
@@ -32,60 +27,6 @@ describe("utils", () => {
       expect(isNumber(NaN)).toBe(false);
       expect(isNumber("1")).toBe(false);
       expect(isNumber("0")).toBe(false);
-    });
-  });
-
-  describe("processNodeRelation", () => {
-    it("should not throw if data is undefined or null", () => {
-      const nodeColor = "#000";
-      const color = "#fff";
-      const data = null;
-
-      expect(() => processNodeRelation([], nodeColor)).not.toThrow();
-      expect(() =>
-        processNodeRelation([], nodeColor, color, data),
-      ).not.toThrow();
-    });
-
-    let relations: RelationType[] = [];
-    const nodeColor = "#000";
-    const color = "#fff";
-    const data: TreeNodeData = {
-      id: "1",
-      value: 1,
-      argType: ArgumentType.BINARY_TREE,
-      depth: 0,
-      childrenIds: [],
-      x: 0,
-      y: 0,
-    };
-
-    it("should return the correct relations", () => {
-      processNodeRelation(relations, nodeColor, color, data);
-
-      expect(relations).toEqual([
-        {
-          targetAnchor: "middle",
-          sourceAnchor: "middle",
-          targetId: "1",
-          style: { strokeColor: undefined },
-        },
-      ]);
-    });
-
-    it("should return the colored relation if node colors match", () => {
-      relations = [];
-      data.color = color;
-      processNodeRelation(relations, nodeColor, color, data);
-
-      expect(relations).toEqual([
-        {
-          targetAnchor: "middle",
-          sourceAnchor: "middle",
-          targetId: "1",
-          style: { strokeColor: alpha(nodeColor, 0.4) },
-        },
-      ]);
     });
   });
 

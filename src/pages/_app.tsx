@@ -10,11 +10,11 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
+import { trpc } from "#/shared/lib";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { wrapper } from "#/store/makeStore";
-import { trpc } from "#/utils";
 
 import "#/styles/globals.css";
 

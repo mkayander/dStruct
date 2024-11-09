@@ -7,8 +7,8 @@ import shortUUID from "short-uuid";
 import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { createRawRuntimeArgs } from "#/features/codeRunner/lib";
+import { resetStructuresState } from "#/features/treeViewer/lib";
 import { useAppStore } from "#/store/hooks";
-import { resetStructuresState } from "#/utils";
 
 import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
 

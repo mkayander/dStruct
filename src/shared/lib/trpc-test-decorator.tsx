@@ -3,7 +3,7 @@ import { httpBatchLink } from "@trpc/react-query";
 import React from "react";
 import superjson from "superjson";
 
-import { trpcReact } from "#/utils/trpc";
+import { trpcReact } from "#/shared/lib/trpc";
 
 const url = `http://localhost:${process.env.PORT ?? 3000}/api/trpc`;
 

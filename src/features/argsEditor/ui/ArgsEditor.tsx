@@ -32,8 +32,8 @@ import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
+import { type RouterOutputs, trpc } from "#/shared/lib/trpc";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { type RouterOutputs, trpc } from "#/utils/trpc";
 
 const uuid = shortUUID();
 

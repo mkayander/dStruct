@@ -32,8 +32,8 @@ import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
 import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
 import { useProfileImageUploader } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
+import { getImageUrl } from "#/shared/lib";
 import { useAppSelector } from "#/store/hooks";
-import { getImageUrl } from "#/utils";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 

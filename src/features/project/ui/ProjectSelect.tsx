@@ -22,10 +22,10 @@ import { getDifficultyColor } from "#/entities/difficulty/lib";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
+import { getImageUrl } from "#/shared/lib";
+import { type RouterOutputs } from "#/shared/lib/trpc";
 import { NewLabel } from "#/shared/ui/atoms/NewLabel";
 import { SearchInput } from "#/shared/ui/molecules/SearchInput";
-import { getImageUrl } from "#/utils";
-import { type RouterOutputs } from "#/utils/trpc";
 
 type ProjectSelectProps = {
   allBrief: UseQueryResult<RouterOutputs["project"]["allBrief"]>;

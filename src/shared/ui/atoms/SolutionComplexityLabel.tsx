@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React from "react";
 
-import { type RouterOutputs } from "#/utils/trpc";
+import { type RouterOutputs } from "#/shared/lib/trpc";
 
 type SolutionComplexityLabelProps = {
   solution: UseQueryResult<RouterOutputs["project"]["getSolutionBySlug"]>;

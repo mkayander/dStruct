@@ -7,9 +7,9 @@ import { QuestionOfTodayDocument } from "#/graphql/generated";
 import en from "#/i18n/en/index";
 import type { Translation } from "#/i18n/i18n-types";
 import DashboardPage from "#/pages/index";
+import { withNextTRPC } from "#/shared/lib/trpc-test-decorator";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { makeStore } from "#/store/makeStore";
-import { withNextTRPC } from "#/utils/trpc-test-decorator";
 
 const store = makeStore();
 

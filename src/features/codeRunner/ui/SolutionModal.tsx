@@ -12,9 +12,9 @@ import { selectProjectId } from "#/features/project/model/projectSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
+import { trpc } from "#/shared/lib";
 import { EditFormModal } from "#/shared/ui/organisms/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
-import { trpc } from "#/utils";
 
 const complexityRegExp = /^O\([\w\s*+\-/^(),!]+\)$/;
 

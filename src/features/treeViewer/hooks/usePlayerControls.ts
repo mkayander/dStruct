@@ -10,7 +10,8 @@ import {
   selectIsEditingNodes,
 } from "#/features/treeViewer/model/editorSlice";
 import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
-import { resetStructuresState } from "#/utils";
+
+import { resetStructuresState } from "../lib";
 
 export const usePlayerControls = () => {
   const dispatch = useAppDispatch();

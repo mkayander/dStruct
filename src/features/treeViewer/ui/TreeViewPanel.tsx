@@ -29,13 +29,13 @@ import { PannableViewer } from "#/shared/ui/templates/PannableViewer";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { resetStructuresState } from "#/utils";
 
 import {
   useArgumentsNodeData,
   usePlayerControls,
   useViewerPan,
 } from "../hooks";
+import { resetStructuresState } from "../lib";
 
 type TabName = "structure" | "benchmark";
 const TabNames = new Set<TabName>(["structure", "benchmark"]);

@@ -12,9 +12,9 @@ import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectB
 import { DraggableSelectBarChip } from "#/features/selectBar/ui/SelectBarChip";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
+import { trpc } from "#/shared/lib";
+import type { RouterOutputs } from "#/shared/lib/trpc";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-import { trpc } from "#/utils";
-import type { RouterOutputs } from "#/utils/trpc";
 
 import { CaseModal } from "./CaseModal";
 

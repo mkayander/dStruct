@@ -39,8 +39,8 @@ import { projectSlice } from "#/features/project/model/projectSlice";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
+import { trpc } from "#/shared/lib";
 import { useAppDispatch } from "#/store/hooks";
-import { trpc } from "#/utils";
 
 const categoriesList = Object.values(ProjectCategory);
 const difficultiesList = Object.values(ProjectDifficulty);
