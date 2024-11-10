@@ -231,10 +231,10 @@ export class ControlledArray<T> extends ArrayBase<T> {
     colStart: number;
     colEnd: number;
   }) {
-    const rowHeaders = Array.from({ length: rowEnd - rowStart + 1 }, (_, i) =>
+    const rowHeaders = Array.from({ length: rowEnd - rowStart }, (_, i) =>
       String(i + rowStart),
     );
-    const colHeaders = Array.from({ length: colEnd - colStart + 1 }, (_, i) =>
+    const colHeaders = Array.from({ length: colEnd - colStart }, (_, i) =>
       String(i + colStart),
     );
 
@@ -242,7 +242,21 @@ export class ControlledArray<T> extends ArrayBase<T> {
   }
 
   public showIndexes(m: number, n: number) {
-    this.setHeaderRanges({ rowStart: 0, rowEnd: m, colStart: 0, colEnd: n });
+    if (m === undefined || n === undefined) {
+      const row = this[0];
+      let cols = this.length;
+      if (Array.isArray(row)) {
+        cols = row.length;
+      }
+      this.setHeaderRanges({
+        rowStart: 0,
+        rowEnd: this.length,
+        colStart: 0,
+        colEnd: cols,
+      });
+    } else {
+      this.setHeaderRanges({ rowStart: 0, rowEnd: m, colStart: 0, colEnd: n });
+    }
   }
 }
 
