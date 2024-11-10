@@ -224,6 +224,15 @@ export const useNodesRuntimeUpdates = (
           );
           break;
 
+        case "clearAppearance":
+          dispatch(
+            slice.actions.clearAppearance({
+              name: treeName,
+              data: undefined,
+            }),
+          );
+          break;
+
         default:
           console.error("Unknown frame name: ", frame.name);
       }

@@ -78,6 +78,10 @@ type BlinkFrame = NodeFrameBase & {
   name: "blink";
 };
 
+type ClearAppearanceFrame = CallFrameBase & {
+  name: "clearAppearance";
+};
+
 type AddNodeFrame = NodeFrameBase & {
   name: "addNode";
   args: { value: number | string };
@@ -129,7 +133,8 @@ export type CallFrame =
   | SetValFrame
   | SetChildFrame
   | BlinkFrame
-  | ShowPointerFrame;
+  | ShowPointerFrame
+  | ClearAppearanceFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
   sortComparer: (a, b) => a.timestamp - b.timestamp,

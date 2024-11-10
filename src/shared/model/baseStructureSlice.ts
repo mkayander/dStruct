@@ -160,6 +160,24 @@ export const getBaseStructureReducers = <N extends StructureNode>(
     clearAll: () => {
       return {};
     },
+    clearAppearance: <T extends State>(
+      state: T,
+      action: NamedPayload<void>,
+    ) => {
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        selectors.selectAll(treeState.nodes).forEach((node) => {
+          adapter.updateOne(treeState.nodes, {
+            id: node.id,
+            changes: {
+              color: null,
+              animation: null,
+              animationCount: 0,
+              isHighlighted: false,
+            } as Partial<N>,
+          });
+        });
+      });
+    },
     triggerAnimation: <T extends State>(
       state: T,
       action: NamedPayload<{ id: string; animation: N["animation"] }>,

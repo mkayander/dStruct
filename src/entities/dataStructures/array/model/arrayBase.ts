@@ -88,6 +88,13 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
       });
     }
 
+    public clearAppearance() {
+      this.callstack.addOne({
+        ...this.getDispatchBase(),
+        name: "clearAppearance",
+      });
+    }
+
     getDispatchBase(key?: any) {
       const data = {
         id: uuid.generate(),
