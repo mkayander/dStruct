@@ -7,10 +7,9 @@ import shortUUID from "short-uuid";
 import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { createRawRuntimeArgs } from "#/features/codeRunner/lib";
+import { requestWorkerAction } from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
 import { resetStructuresState } from "#/features/treeViewer/lib";
 import { useAppStore } from "#/store/hooks";
-
-import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
 
 export type ProgrammingLanguage = "javascript" | "python";
 
@@ -39,7 +38,10 @@ export const useCodeExecution = (codeInput: string) => {
 
   useEffect(() => {
     const worker = new Worker(
-      new URL("src/workers/codeExec.worker.ts", import.meta.url),
+      new URL(
+        "src/features/codeRunner/lib/workers/codeExec.worker.ts",
+        import.meta.url,
+      ),
     );
     setWorker(worker);
 

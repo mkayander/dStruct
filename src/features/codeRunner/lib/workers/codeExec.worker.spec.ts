@@ -1,12 +1,12 @@
 import { execSync } from "child_process";
 
-import { requestWorkerAction } from "#/workers/codeExecWorkerInterface";
+import { requestWorkerAction } from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
 
 describe("codeExec.worker", () => {
   let worker: Worker;
   beforeAll(async () => {
     execSync(
-      "pnpm exec esbuild src/workers/codeExec.worker.ts --bundle --platform=browser --outfile=src/workers/codeExec.worker.js",
+      "pnpm exec esbuild src/features/codeRunner/lib/workers/codeExec.worker.ts --bundle --platform=browser --outfile=src/features/codeRunner/lib/workers/codeExec.worker.js",
     );
     worker = new Worker(new URL("codeExec.worker.ts", import.meta.url));
   });

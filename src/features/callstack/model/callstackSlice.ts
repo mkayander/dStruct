@@ -9,9 +9,8 @@ import {
 import type { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
+import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import type { RootState } from "#/store/makeStore";
-
-import type { ExecWorkerInterface } from "#/workers/codeExec.worker";
 
 export type StructureTypeName = "treeNode" | "array";
 

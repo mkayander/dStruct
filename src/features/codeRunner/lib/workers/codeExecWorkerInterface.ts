@@ -2,7 +2,7 @@ import type {
   ExecWorkerInterface,
   WorkerRequestType,
   WorkerResponse,
-} from "#/workers/codeExec.worker";
+} from "#/features/codeRunner/lib/workers/codeExec.worker";
 
 export const awaitWorkerResponse = <T extends WorkerRequestType>(
   worker: Worker,
