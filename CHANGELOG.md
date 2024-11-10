@@ -1,3 +1,20 @@
+# [1.326.0](https://github.com/mkayander/dStruct/compare/v1.325.0...v1.326.0) (2024-11-10)
+
+
+### Bug Fixes
+
+* Updated lock file ([7fff711](https://github.com/mkayander/dStruct/commit/7fff711a4069227be19d1eae517ec14cc5a13faa))
+
+
+### Features
+
+* Added clearAppearance feature ([aec8552](https://github.com/mkayander/dStruct/commit/aec85521ffed1be8fc3b48e506cf80a5b458e0ab))
+* Allow to call showIndexes without args ([e2d576b](https://github.com/mkayander/dStruct/commit/e2d576b410fb0594146f2759b7818e6d7bc14e68))
+* Deleted react-archer ([72ed6a6](https://github.com/mkayander/dStruct/commit/72ed6a617b3b8b1e32605cb82e2c188aa12adb3c))
+* Reorganized remaining util functions to FSD ([40c2039](https://github.com/mkayander/dStruct/commit/40c203988ffda0f46e2d91fd472209b95a421204))
+* Updated dependencies ([1f9046f](https://github.com/mkayander/dStruct/commit/1f9046f4741c449bba7b8c6f3239f5b3d2e76278))
+* Updated Sass ([223f8ee](https://github.com/mkayander/dStruct/commit/223f8ee9fde1be27e1c6e238a626575a705383a9))
+
 # [1.325.0](https://github.com/mkayander/dStruct/compare/v1.324.1...v1.325.0) (2024-11-09)
 
 
