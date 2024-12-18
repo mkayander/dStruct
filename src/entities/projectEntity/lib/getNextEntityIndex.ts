@@ -1,4 +1,4 @@
-import { kv } from "@vercel/kv";
+import { kv } from "#/shared/lib/kvClient";
 
 import type { EntityData, EntityType } from "../model/types";
 import { fetchEntityData } from "./fetchEntityData";
