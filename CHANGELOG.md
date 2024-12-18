@@ -1,3 +1,10 @@
+# [1.327.0](https://github.com/mkayander/dStruct/compare/v1.326.0...v1.327.0) (2024-12-18)
+
+
+### Features
+
+* Migrated to Upstash KV ([428be18](https://github.com/mkayander/dStruct/commit/428be18c5762389cb9f18b7eba023ef9fa262ad1))
+
 # [1.326.0](https://github.com/mkayander/dStruct/compare/v1.325.0...v1.326.0) (2024-11-10)
 
 
