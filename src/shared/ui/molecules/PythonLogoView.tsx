@@ -6,7 +6,7 @@ import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 import { PythonLogoModel } from "#/3d-models/PythonLogoModel";
 
 type PythonLogoViewProps = {
-  controlsRef: React.MutableRefObject<ThreeOrbitControls | null>;
+  controlsRef: React.RefObject<ThreeOrbitControls | null>;
 };
 
 export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
@@ -43,6 +43,7 @@ export const PythonLogoView: React.FC<PythonLogoViewProps> = ({
         enableRotate={true}
         enableZoom={false}
         enablePan={false}
+        dampingFactor={0.005}
       />
     </Canvas>
   );

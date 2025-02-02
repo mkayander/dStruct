@@ -9,7 +9,7 @@ import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 type LogoModelViewProps = {
-  controlsRef: React.MutableRefObject<ThreeOrbitControls | null>;
+  controlsRef: React.RefObject<ThreeOrbitControls | null>;
 };
 
 export const LogoModelView: React.FC<LogoModelViewProps> = ({
