@@ -210,6 +210,7 @@ export const CallstackTable: React.FC = () => {
                   width: "100%",
                   height: "100%",
                   backgroundColor: getBackgroundColor(index),
+                  pointerEvents: "none",
                 },
               }}
             >
