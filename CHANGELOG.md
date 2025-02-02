@@ -1,3 +1,10 @@
+## [1.332.2](https://github.com/mkayander/dStruct/compare/v1.332.1...v1.332.2) (2025-02-02)
+
+
+### Bug Fixes
+
+* Updated Apollo client ([29e23d8](https://github.com/mkayander/dStruct/commit/29e23d80aa961c5099f0451cece87c601f1ea269))
+
 ## [1.332.1](https://github.com/mkayander/dStruct/compare/v1.332.0...v1.332.1) (2025-02-02)
 
 
