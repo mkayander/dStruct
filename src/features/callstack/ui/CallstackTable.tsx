@@ -11,7 +11,8 @@ import {
   Tooltip,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
+import { TableVirtuoso } from "react-virtuoso";
 
 import {
   selectNodeDataById,
@@ -23,7 +24,23 @@ import {
 } from "#/features/callstack/model/callstackSlice";
 import { useI18nContext } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
+import { TabContentScrollContainer } from "#/shared/ui/templates/TabContentScrollContainer";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
+
+type ScrollerProps = React.HTMLAttributes<HTMLDivElement>;
+
+const Scroller = forwardRef<HTMLDivElement, ScrollerProps>(
+  ({ style, ...props }, ref) => {
+    return (
+      <TabContentScrollContainer
+        ref={ref}
+        style={{ height: "100%" }}
+        {...props}
+      />
+    );
+  },
+);
+Scroller.displayName = "Scroller";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,
@@ -140,45 +157,80 @@ export const CallstackTable: React.FC = () => {
     }
   }, [callstack.frameIndex]);
 
+  if (!callstack.isReady) {
+    return (
+      <Box p={2} textAlign="center">
+        Here you will see a table of runtime actions once the code is executed!
+      </Box>
+    );
+  }
+
   return (
-    <Stack spacing={2}>
-      <TableContainer>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>{LL.NODE()}</TableCell>
-              <TableCell align="right">{LL.ACTION()}</TableCell>
-              <TableCell align="right">{LL.TIMESTAMP()}</TableCell>
-              <TableCell align="left">{LL.ARGUMENTS()}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody ref={containerRef}>
-            {callstack.frames.map((frame, index) => (
-              <TableRow
-                key={frame.id}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  transition: "background-color .2s",
+    <Stack
+      spacing={2}
+      sx={{
+        height: "100%",
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        overflow: "hidden",
+        table: {
+          width: "100%",
+          borderCollapse: "collapse",
+        },
+        tr: {
+          position: "relative",
+        },
+      }}
+    >
+      <TableVirtuoso
+        components={{ Scroller }}
+        style={{ height: "100%", width: "100%" }}
+        data={callstack.frames}
+        fixedHeaderContent={() => (
+          <TableRow sx={{ backdropFilter: "blur(10px)" }}>
+            <TableCell component="th">{LL.NODE()}</TableCell>
+            <TableCell component="th" align="right">
+              {LL.ACTION()}
+            </TableCell>
+            <TableCell component="th" align="right">
+              {LL.TIMESTAMP()}
+            </TableCell>
+            <TableCell component="th" align="left">
+              {LL.ARGUMENTS()}
+            </TableCell>
+          </TableRow>
+        )}
+        itemContent={(index, frame) => (
+          <>
+            <TableCell
+              component="th"
+              scope="row"
+              sx={{
+                "&::before": {
+                  content: "''",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
                   backgroundColor: getBackgroundColor(index),
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {"treeName" in frame && "nodeId" in frame && (
-                    <NodeCell treeName={frame.treeName} id={frame.nodeId} />
-                  )}
-                </TableCell>
-                <TableCell align="right">{frame.name}</TableCell>
-                <TableCell align="right">
-                  {`+${(frame.timestamp - startTimestamp).toFixed(2)} ms`}
-                </TableCell>
-                <TableCell align="left">
-                  <ArgumentsCell frame={frame} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                },
+              }}
+            >
+              {"treeName" in frame && "nodeId" in frame && (
+                <NodeCell treeName={frame.treeName} id={frame.nodeId} />
+              )}
+            </TableCell>
+            <TableCell align="right">{frame.name}</TableCell>
+            <TableCell align="right">
+              {`+${(frame.timestamp - startTimestamp).toFixed(2)} ms`}
+            </TableCell>
+            <TableCell align="left">
+              <ArgumentsCell frame={frame} />
+            </TableCell>
+          </>
+        )}
+      />
     </Stack>
   );
 };

@@ -136,7 +136,13 @@ export const OutputPanel: React.FC = () => {
             )}
           </Stack>
         </StyledTabPanel>
-        <StyledTabPanel value="2">
+        <StyledTabPanel
+          value="2"
+          sx={{
+            p: 0,
+            height: "100%",
+          }}
+        >
           <CallstackTable />
         </StyledTabPanel>
       </TabContext>

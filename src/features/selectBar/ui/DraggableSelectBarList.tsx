@@ -50,6 +50,8 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
         droppableId={droppableId}
         direction="horizontal"
         isDropDisabled={!isEditable}
+        isCombineEnabled={false}
+        ignoreContainerClipping
       >
         {(provided, droppableSnapshot) => (
           <Stack
