@@ -7,7 +7,7 @@ import {
   Tooltip,
   useTheme,
 } from "@mui/material";
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { TableVirtuoso } from "react-virtuoso";
 
 import {
@@ -20,23 +20,7 @@ import {
 } from "#/features/callstack/model/callstackSlice";
 import { useI18nContext } from "#/shared/hooks";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
-import { TabContentScrollContainer } from "#/shared/ui/templates/TabContentScrollContainer";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-
-type ScrollerProps = React.HTMLAttributes<HTMLDivElement>;
-
-const Scroller = forwardRef<HTMLDivElement, ScrollerProps>(
-  ({ style, ...props }, ref) => {
-    return (
-      <TabContentScrollContainer
-        ref={ref}
-        style={{ height: "100%" }}
-        {...props}
-      />
-    );
-  },
-);
-Scroller.displayName = "Scroller";
 
 const NodeCell: React.FC<{ treeName: string; id: string }> = ({
   treeName,
@@ -118,8 +102,23 @@ const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
         <span>null</span>
       );
 
-    default:
-      return <span>{safeStringify(frame.args)}</span>;
+    default: {
+      const value = safeStringify(frame.args);
+      return (
+        <Tooltip title={<pre>{value}</pre>} arrow>
+          <Box
+            sx={{
+              overflow: "hidden",
+              maxWidth: "70vh",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {value}
+          </Box>
+        </Tooltip>
+      );
+    }
   }
 };
 
@@ -179,7 +178,6 @@ export const CallstackTable: React.FC = () => {
       }}
     >
       <TableVirtuoso
-        components={{ Scroller }}
         style={{ height: "100%", width: "100%" }}
         data={callstack.frames}
         fixedHeaderContent={() => (

@@ -142,6 +142,7 @@ export const OutputPanel: React.FC = () => {
             p: 0,
             height: "100%",
           }}
+          useScroll={false}
         >
           <CallstackTable />
         </StyledTabPanel>
