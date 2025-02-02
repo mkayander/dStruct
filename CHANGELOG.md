@@ -1,3 +1,10 @@
+## [1.332.3](https://github.com/mkayander/dStruct/compare/v1.332.2...v1.332.3) (2025-02-02)
+
+
+### Bug Fixes
+
+* Fixed callstack table ([f6b7ff3](https://github.com/mkayander/dStruct/commit/f6b7ff33aebb08fb0d4f1c428a729e8a89add77f))
+
 ## [1.332.2](https://github.com/mkayander/dStruct/compare/v1.332.1...v1.332.2) (2025-02-02)
 
 
