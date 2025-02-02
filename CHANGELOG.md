@@ -1,3 +1,10 @@
+# [1.331.0](https://github.com/mkayander/dStruct/compare/v1.330.0...v1.331.0) (2025-02-02)
+
+
+### Features
+
+* Added damping ([d08ffd1](https://github.com/mkayander/dStruct/commit/d08ffd174e4e686e9fed58b8f713790312029945))
+
 # [1.330.0](https://github.com/mkayander/dStruct/compare/v1.329.0...v1.330.0) (2025-02-02)
 
 
