@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.9.6",
+    "@apollo/client": "^3.12.8",
     "@datastructures-js/priority-queue": "5.3.0",
     "@datastructures-js/queue": "4.2.1",
     "@emotion/react": "^11.14.0",
