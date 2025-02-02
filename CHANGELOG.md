@@ -1,3 +1,10 @@
+## [1.332.1](https://github.com/mkayander/dStruct/compare/v1.332.0...v1.332.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* Fixed pointer events ([a4ab2db](https://github.com/mkayander/dStruct/commit/a4ab2db86e30dcc50bc3131b3e912113bcf4f78d))
+
 # [1.332.0](https://github.com/mkayander/dStruct/compare/v1.331.0...v1.332.0) (2025-02-02)
 
 
