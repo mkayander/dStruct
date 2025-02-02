@@ -1,3 +1,15 @@
+# [1.332.0](https://github.com/mkayander/dStruct/compare/v1.331.0...v1.332.0) (2025-02-02)
+
+
+### Bug Fixes
+
+* Removed unused imports ([883ebdf](https://github.com/mkayander/dStruct/commit/883ebdf498b4ce96164b45fd120bad62a2db79d0))
+
+
+### Features
+
+* Callstack table virtualization ([b46f598](https://github.com/mkayander/dStruct/commit/b46f598aa4140a86d915205e9154c909703aa2ac))
+
 # [1.331.0](https://github.com/mkayander/dStruct/compare/v1.330.0...v1.331.0) (2025-02-02)
 
 
