@@ -43,9 +43,10 @@ export const UserSettings: React.FC = () => {
   const linkUser = trpc.leetcode.linkUser.useMutation();
   const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
 
-  const loading =
+  const loading = Boolean(
     userId &&
-    (gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading);
+      (gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading),
+  );
 
   const handleLinkedUserReset = async () => {
     await unlinkUser.mutate();

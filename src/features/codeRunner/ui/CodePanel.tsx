@@ -8,13 +8,11 @@ import {
   Tab,
   Tooltip,
 } from "@mui/material";
-import type * as monaco from "monaco-editor";
+import * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import parserBabel from "prettier/plugins/babel";
-import * as prettierPluginEstree from "prettier/plugins/estree";
-import prettier from "prettier/standalone";
+import * as prettier from "prettier";
 import React, { useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
@@ -60,7 +58,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const dispatch = useAppDispatch();
   const session = useSession();
   const trpcUtils = trpc.useUtils();
-  const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>();
+  const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { LL } = useI18nContext();
 
@@ -227,7 +225,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
       const key = getCodeKey(language);
 
-      clearTimeout(changeTimeoutId.current);
+      clearTimeout(changeTimeoutId.current ?? undefined);
       const newTimeout = (changeTimeoutId.current = setTimeout(async () => {
         const data = await updateSolution.mutateAsync({
           projectId: currentSolution.data.projectId,
@@ -253,20 +251,22 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
       openPythonSupportModal();
       return;
     }
-    const formattedCode = await prettier.format(codeInput, {
+    const result = await prettier.formatWithCursor(codeInput, {
       parser: "babel",
-      plugins: [parserBabel, prettierPluginEstree],
+      cursorOffset: 0,
     });
     if (textModel) {
-      const edit = {
+      const edit: monaco.editor.IIdentifiedSingleEditOperation = {
         range: textModel.getFullModelRange(),
-        text: formattedCode,
+        text: result.formatted,
       };
       textModel.pushEditOperations(
         [],
         [edit],
         () => null, // no undo stop
       );
+      const newPosition = textModel.getPositionAt(result.cursorOffset);
+      editorInstance?.setPosition(newPosition);
     }
     setIsFormattingAvailable(false);
   };

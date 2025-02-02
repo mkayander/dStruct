@@ -42,7 +42,7 @@ const ControlledPanel: React.FC<ControlledPanelProps> = ({
 };
 
 export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
-  component,
+  component = "div",
   TopLeft,
   TopRight,
   BottomLeft,

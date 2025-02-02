@@ -151,8 +151,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         }}
       >
         <Box
+          component="div"
           onClick={handleBlink}
-          title={value}
+          title={String(value)}
           sx={{
             ...nodeProps,
             transition: "all .2s",

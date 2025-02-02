@@ -23,7 +23,7 @@ type GLTFResult = GLTF & {
 
 const assetPath = "/assets/python-transformed.glb";
 
-export function PythonLogoModel(props: JSX.IntrinsicElements["group"]) {
+export function PythonLogoModel(props: React.JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(assetPath) as GLTFResult;
   return (
     <group {...props} dispose={null}>

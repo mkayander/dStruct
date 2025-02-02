@@ -21,7 +21,7 @@ type GLTFResult = GLTF & {
 
 const assetPath = "/assets/binary_tree-transformed.glb";
 
-export function BinaryTreeModel(props: JSX.IntrinsicElements["group"]) {
+export function BinaryTreeModel(props: React.JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(assetPath) as GLTFResult;
   return (
     <group {...props} dispose={null}>

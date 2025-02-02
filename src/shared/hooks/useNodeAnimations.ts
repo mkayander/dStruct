@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 export const useNodeAnimations = (
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
   animationName: string | null | undefined,
   animationCount?: number,
 ) => {
