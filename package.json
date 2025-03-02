@@ -1,6 +1,6 @@
 {
   "name": "dstruct",
-  "version": "1.332.3",
+  "version": "1.333.0",
   "private": true,
   "type": "module",
   "scripts": {

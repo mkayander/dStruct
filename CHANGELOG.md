@@ -1,3 +1,10 @@
+# [1.333.0](https://github.com/mkayander/dStruct/compare/v1.332.3...v1.333.0) (2025-03-02)
+
+
+### Features
+
+* Updated Next ([6b35d0a](https://github.com/mkayander/dStruct/commit/6b35d0ac4a7358a5f7fe2b5614bd9ee0135c0183))
+
 ## [1.332.3](https://github.com/mkayander/dStruct/compare/v1.332.2...v1.332.3) (2025-02-02)
 
 
