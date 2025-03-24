@@ -1,7 +1,8 @@
 import { DeleteForever } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
 import {
   Alert,
+  Button,
+  Dialog,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -12,8 +13,6 @@ import {
   Switch,
   Tooltip,
 } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
 import type { DialogProps } from "@mui/material/Dialog/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -422,7 +421,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   arrow
                 >
                   <span>
-                    <LoadingButton
+                    <Button
                       loading={isQuestionLoading}
                       disabled={Boolean(
                         !formik.values.projectLcLink ||
@@ -431,7 +430,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       onClick={handleFetchProblemData}
                     >
                       Fetch Data
-                    </LoadingButton>
+                    </Button>
                   </span>
                 </Tooltip>
                 <Alert
@@ -463,7 +462,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         </DialogContent>
         <DialogActions>
           {isEditMode && (
-            <LoadingButton
+            <Button
               title="Delete this project"
               color="error"
               endIcon={<DeleteForever />}
@@ -473,12 +472,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               sx={{ mr: "auto" }}
             >
               Delete
-            </LoadingButton>
+            </Button>
           )}
           <Button onClick={onClose}>Cancel</Button>
-          <LoadingButton type="submit" loading={formik.isSubmitting}>
+          <Button type="submit" loading={formik.isSubmitting}>
             {isEditMode ? "Update" : "Create"}
-          </LoadingButton>
+          </Button>
         </DialogActions>
       </form>
     </Dialog>

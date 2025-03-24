@@ -1,14 +1,15 @@
 import { AutoFixHigh, ContentCopy, PlayArrow } from "@mui/icons-material";
-import { LoadingButton, TabContext, TabList } from "@mui/lab";
+import { TabContext, TabList } from "@mui/lab";
 import {
   Box,
+  Button,
   IconButton,
   type SelectChangeEvent,
   Stack,
   Tab,
   Tooltip,
 } from "@mui/material";
-import * as monaco from "monaco-editor";
+import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
@@ -333,7 +334,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
                 </IconButton>
               </span>
             </Tooltip>
-            <LoadingButton
+            <Button
               variant="text"
               color="success"
               title={LL.RUN_CODE()}
@@ -345,7 +346,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               sx={{ height: "100%", borderRadius: "0 8px 0 0" }}
             >
               {LL.RUN()}
-            </LoadingButton>
+            </Button>
           </Stack>
         </TabListWrapper>
         <StyledTabPanel

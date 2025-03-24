@@ -1,8 +1,5 @@
 import { DeleteForever } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
-import { Stack } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
+import { Button, Dialog, Stack } from "@mui/material";
 import type { DialogProps } from "@mui/material/Dialog/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -46,7 +43,7 @@ export const EditFormModal: React.FC<EditModalProps> = ({
           </Stack>
         </DialogContent>
         <DialogActions>
-          <LoadingButton
+          <Button
             title={LL.DELETE_THIS_PROJECT()}
             color="error"
             endIcon={<DeleteForever />}
@@ -56,11 +53,11 @@ export const EditFormModal: React.FC<EditModalProps> = ({
             sx={{ mr: "auto" }}
           >
             {LL.DELETE()}
-          </LoadingButton>
+          </Button>
           <Button onClick={onClose}>{LL.CANCEL()}</Button>
-          <LoadingButton type="submit" loading={formik.isSubmitting}>
+          <Button type="submit" loading={formik.isSubmitting}>
             {LL.UPDATE()}
-          </LoadingButton>
+          </Button>
         </DialogActions>
       </form>
     </Dialog>
