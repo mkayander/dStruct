@@ -1,3 +1,16 @@
+# [1.334.0](https://github.com/mkayander/dStruct/compare/v1.333.0...v1.334.0) (2025-03-24)
+
+
+### Bug Fixes
+
+* Use arg input state directly ([beb12f3](https://github.com/mkayander/dStruct/commit/beb12f301a7de74f728155c367dd947c55b611ca))
+
+
+### Features
+
+* Updated NextJS config ([1bb900d](https://github.com/mkayander/dStruct/commit/1bb900d3f88f5ce198520940a5a81950ccfa901c))
+* Use Button component ([281feb7](https://github.com/mkayander/dStruct/commit/281feb73d116bd210c72160f8b6fe2daa8d991e3))
+
 # [1.333.0](https://github.com/mkayander/dStruct/compare/v1.332.3...v1.333.0) (2025-03-02)
 
 
