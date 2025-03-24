@@ -2,7 +2,7 @@
 
 import { TextField } from "@mui/material";
 import Joi from "joi";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { argumentTypeLabels } from "#/entities/argument/model/argumentTypeLabels";
@@ -34,22 +34,14 @@ const validationSchemaMap = {
 export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
   const dispatch = useAppDispatch();
 
-  const [input, setInput] = useState<string>(arg.input);
-
-  useEffect(() => {
-    setInput(arg.input);
-  }, [arg.input]);
-
-  useEffect(() => {
-    if (arg.input === input) return;
-
+  const handleChange = (value: string) => {
     dispatch(
       caseSlice.actions.updateArgument({
         ...arg,
-        input: input,
+        input: value,
       }),
     );
-  }, [arg, dispatch, input]);
+  };
 
   switch (arg.type) {
     case ArgumentType.ARRAY:
@@ -60,8 +52,8 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
       return (
         <JsonInput
           label={argumentTypeLabels[arg.type]}
-          value={input}
-          onChange={setInput}
+          value={arg.input}
+          onChange={handleChange}
           validationSchema={validationSchemaMap[arg.type]}
           size="small"
         />
@@ -73,23 +65,23 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
           label={argumentTypeLabels.string}
           fullWidth
           size="small"
-          onChange={setInput}
-          value={input}
+          onChange={handleChange}
+          value={arg.input}
         />
       );
 
     case ArgumentType.BOOLEAN:
-      return <BooleanToggleInput value={input} onChange={setInput} />;
+      return <BooleanToggleInput value={arg.input} onChange={handleChange} />;
   }
 
   return (
     <TextField
       label={argumentTypeLabels[arg.type]}
-      value={input}
+      value={arg.input}
       type={arg.type === ArgumentType.NUMBER ? "number" : "text"}
       fullWidth
       size="small"
-      onChange={(ev) => setInput(ev.target.value)}
+      onChange={(ev) => handleChange(ev.target.value)}
     />
   );
 };
