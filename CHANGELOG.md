@@ -1,3 +1,10 @@
+# [1.335.0](https://github.com/mkayander/dStruct/compare/v1.334.0...v1.335.0) (2025-03-24)
+
+
+### Features
+
+* Updated deps ([507c391](https://github.com/mkayander/dStruct/commit/507c391da0db83feab53e52c7973d995d9d55441))
+
 # [1.334.0](https://github.com/mkayander/dStruct/compare/v1.333.0...v1.334.0) (2025-03-24)
 
 
