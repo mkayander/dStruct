@@ -1,3 +1,10 @@
+## [1.335.1](https://github.com/mkayander/dStruct/compare/v1.335.0...v1.335.1) (2025-03-30)
+
+
+### Bug Fixes
+
+* Fixed prettier formatting ([550ca3f](https://github.com/mkayander/dStruct/commit/550ca3f9c65707b9a0ba7f2ac2856f1e00529745))
+
 # [1.335.0](https://github.com/mkayander/dStruct/compare/v1.334.0...v1.335.0) (2025-03-24)
 
 
