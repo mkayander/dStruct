@@ -13,7 +13,10 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import * as prettier from "prettier";
+// @ts-expect-error Type declarations for prettier/parser-babel are broken
+import * as parserBabel from "prettier/parser-babel";
+import * as prettierPluginEstree from "prettier/plugins/estree";
+import * as prettier from "prettier/standalone";
 import React, { useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
@@ -254,6 +257,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     }
     const result = await prettier.formatWithCursor(codeInput, {
       parser: "babel",
+      plugins: [parserBabel, prettierPluginEstree],
       cursorOffset: 0,
     });
     if (textModel) {
