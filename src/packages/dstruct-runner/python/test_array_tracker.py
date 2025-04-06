@@ -169,7 +169,7 @@ if __name__ == "__main__":
     ])
 else:
     # When running with unittest module, use standard test suite
-    def load_tests(loader):
+    def load_tests(loader, tests, pattern):
         suite = unittest.TestSuite()
         suite.addTests(loader.loadTestsFromTestCase(TestArrayTracker))
         suite.addTests(loader.loadTestsFromTestCase(TestSafeExec))
