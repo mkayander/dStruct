@@ -1,7 +1,6 @@
 import unittest
 from array_tracker import ArrayTracker, transform_and_track_code, ExecutionResult
 from exec import safe_exec
-import ast
 from typing import List, Dict, Any
 from test_utils import run_tests_with_pretty_output
 
@@ -170,7 +169,7 @@ if __name__ == "__main__":
     ])
 else:
     # When running with unittest module, use standard test suite
-    def load_tests(loader, tests, pattern):
+    def load_tests(loader):
         suite = unittest.TestSuite()
         suite.addTests(loader.loadTestsFromTestCase(TestArrayTracker))
         suite.addTests(loader.loadTestsFromTestCase(TestSafeExec))

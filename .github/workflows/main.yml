@@ -56,5 +56,14 @@ jobs:
       - name: Run tests
         run: pnpm run test:ci
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Run Python tests
+        working-directory: src/packages/dstruct-runner/python
+        run: python -m unittest test_array_tracker.py -v
+
       - name: Run Semantic Release
         run: npx semantic-release

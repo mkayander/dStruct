@@ -155,4 +155,4 @@ def __dstruct_track_array_op(op: str, array_name: str, index: Optional[int] = No
     
     transformed_tree.body = tracking_code.body + transformed_tree.body
     
-    return ast.unparse(transformed_tree), tracker.callstack 
+    return ast.unparse(transformed_tree), tracker.callstack

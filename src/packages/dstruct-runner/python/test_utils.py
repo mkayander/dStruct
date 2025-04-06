@@ -1,6 +1,6 @@
 import unittest
 import json
-from typing import Any, Dict, List
+from typing import Any, List
 from datetime import datetime
 
 class PrettyTestResult(unittest.TextTestResult):
@@ -78,4 +78,4 @@ def run_tests_with_pretty_output(test_classes: List[type[unittest.TestCase]]) ->
     result = runner.run(suite)
     
     # Print summary
-    print_test_summary(result, start_time) 
+    print_test_summary(result, start_time)
