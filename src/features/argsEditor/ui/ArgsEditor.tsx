@@ -1,6 +1,6 @@
 "use client";
 
-import { Draggable, type OnDragEndResponder } from "@hello-pangea/dnd";
+import { type OnDragEndResponder } from "@hello-pangea/dnd";
 import { DeleteForever, DragIndicator } from "@mui/icons-material";
 import {
   Box,
@@ -30,6 +30,7 @@ import { AddArgumentButton } from "#/features/argsEditor/ui/AddArgumentButton";
 import { ArgInput } from "#/features/argsEditor/ui/ArgInput";
 import { ArgumentTypeSelect } from "#/features/argsEditor/ui/ArgumentTypeSelect";
 import { DraggableArgsList } from "#/features/argsEditor/ui/DraggableArgsList";
+import { DraggableItem } from "#/features/argsEditor/ui/DraggableItem";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
@@ -174,27 +175,18 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         }
       >
         {args.map((arg, index) => (
-          <Draggable
+          <DraggableItem
             key={arg.name}
-            draggableId={arg.name}
+            id={arg.name}
             index={index}
             isDragDisabled={!isEditable}
           >
-            {(provided, snapshot) => (
+            {(provided) => (
               <Stack
-                ref={provided.innerRef}
-                {...provided.draggableProps}
                 direction="row"
                 justifyContent="space-between"
                 alignItems="start"
                 spacing={1}
-                sx={{
-                  opacity: snapshot.isDragging ? 0.5 : 1,
-                  transform: snapshot.isDragging ? "scale(1.02)" : "none",
-                  transition: snapshot.isDragging
-                    ? "opacity 0.2s, transform 0.2s"
-                    : "none",
-                }}
               >
                 <Box display="flex" flexDirection="row" flexGrow={1}>
                   <Box
@@ -235,7 +227,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                 )}
               </Stack>
             )}
-          </Draggable>
+          </DraggableItem>
         ))}
       </DraggableArgsList>
     </Box>
