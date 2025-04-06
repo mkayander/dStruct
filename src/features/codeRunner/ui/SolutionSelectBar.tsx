@@ -1,10 +1,10 @@
 "use client";
 
+import { type OnDragEndResponder } from "@hello-pangea/dnd";
 import { type StackProps } from "@mui/material";
 import type { PlaygroundSolution } from "@prisma/client";
 import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { type OnDragEndResponder } from "react-beautiful-dnd";
 
 import { SolutionModal } from "#/features/codeRunner/ui/SolutionModal";
 import { selectIsEditable } from "#/features/project/model/projectSlice";

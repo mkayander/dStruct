@@ -1,3 +1,4 @@
+import { Draggable, type DroppableStateSnapshot } from "@hello-pangea/dnd";
 import { Edit } from "@mui/icons-material";
 import {
   Box,
@@ -9,7 +10,6 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import { Draggable, type DroppableStateSnapshot } from "react-beautiful-dnd";
 
 type SelectBarChipProps = ChipProps & {
   isCurrent: boolean;

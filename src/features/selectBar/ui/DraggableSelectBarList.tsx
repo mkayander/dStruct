@@ -1,3 +1,10 @@
+import {
+  DragDropContext,
+  Droppable,
+  type DroppableProvided,
+  type DroppableStateSnapshot,
+  type OnDragEndResponder,
+} from "@hello-pangea/dnd";
 import { Add } from "@mui/icons-material";
 import {
   CircularProgress,
@@ -6,15 +13,8 @@ import {
   type StackProps,
 } from "@mui/material";
 import React from "react";
-import {
-  DragDropContext,
-  type DroppableProvided,
-  type DroppableStateSnapshot,
-  type OnDragEndResponder,
-} from "react-beautiful-dnd";
 
 import { SelectBarChipSkeleton } from "#/features/selectBar/ui/SelectBarChip";
-import { StrictModeDroppable } from "#/features/selectBar/ui/StrictModeDroppable";
 
 type DraggableSelectBarListProps = Omit<
   StackProps,
@@ -46,7 +46,7 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
 }) => {
   return (
     <DragDropContext onDragEnd={onItemDragEnd}>
-      <StrictModeDroppable
+      <Droppable
         droppableId={droppableId}
         direction="horizontal"
         isDropDisabled={!isEditable}
@@ -94,7 +94,7 @@ export const DraggableSelectBarList: React.FC<DraggableSelectBarListProps> = ({
             )}
           </Stack>
         )}
-      </StrictModeDroppable>
+      </Droppable>
     </DragDropContext>
   );
 };
