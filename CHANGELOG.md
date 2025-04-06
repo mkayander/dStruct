@@ -1,3 +1,18 @@
+# [1.336.0](https://github.com/mkayander/dStruct/compare/v1.335.1...v1.336.0) (2025-04-06)
+
+
+### Bug Fixes
+
+* update load_tests function signature in test_array_tracker.py ([30841b2](https://github.com/mkayander/dStruct/commit/30841b2c472963bfc4073b806110b919536d2d92))
+
+
+### Features
+
+* add AddArgumentButton and DraggableArgsList components to ArgsEditor ([f0c0a45](https://github.com/mkayander/dStruct/commit/f0c0a4567bd5bebea2ea7187e3995ee3f869b258))
+* enhance Python execution and array tracking capabilities ([d79b0e3](https://github.com/mkayander/dStruct/commit/d79b0e31a2ae7585abdbb7f6375afe74674dea96))
+* enhance Python testing and project structure ([e85d50f](https://github.com/mkayander/dStruct/commit/e85d50f047c8f5f5219c8f5c85580676835dc931))
+* implement drag-and-drop reordering for arguments in ArgsEditor ([75d9b78](https://github.com/mkayander/dStruct/commit/75d9b78f7701404b47f3f44e2862c4717fdd8e7b))
+
 ## [1.335.1](https://github.com/mkayander/dStruct/compare/v1.335.0...v1.335.1) (2025-03-30)
 
 
