@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  type OnDragEndResponder,
-} from "@hello-pangea/dnd";
-import { Add, DeleteForever, DragIndicator } from "@mui/icons-material";
+import { Draggable, type OnDragEndResponder } from "@hello-pangea/dnd";
+import { DeleteForever, DragIndicator } from "@mui/icons-material";
 import {
   Box,
   CircularProgress,
@@ -31,8 +26,10 @@ import type {
   ArgumentObject,
   ArgumentObjectMap,
 } from "#/entities/argument/model/types";
+import { AddArgumentButton } from "#/features/argsEditor/ui/AddArgumentButton";
 import { ArgInput } from "#/features/argsEditor/ui/ArgInput";
 import { ArgumentTypeSelect } from "#/features/argsEditor/ui/ArgumentTypeSelect";
+import { DraggableArgsList } from "#/features/argsEditor/ui/DraggableArgsList";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
@@ -165,89 +162,82 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
         {isLoading && <CircularProgress size={14} />}
         <Divider sx={{ flexGrow: 1 }} />
       </Stack>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="args-list">
-          {(provided) => (
-            <Stack
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              mt={1}
-              spacing={1}
-            >
-              {args.map((arg, index) => (
-                <Draggable
-                  key={arg.name}
-                  draggableId={arg.name}
-                  index={index}
-                  isDragDisabled={!isEditable}
-                >
-                  {(provided, snapshot) => (
-                    <Stack
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="start"
-                      spacing={1}
-                      sx={{
-                        opacity: snapshot.isDragging ? 0.5 : 1,
-                        transform: snapshot.isDragging ? "scale(1.02)" : "none",
-                        transition: "all 0.2s ease",
-                      }}
-                    >
-                      <Box display="flex" flexDirection="row" flexGrow={1}>
-                        <Box
-                          {...provided.dragHandleProps}
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            height: "37px",
-                            cursor: isEditable ? "grab" : "default",
-                            opacity: isEditable ? 1 : 0.3,
-                            "&:active": {
-                              cursor: isEditable ? "grabbing" : "default",
-                            },
-                          }}
-                        >
-                          <DragIndicator
-                            fontSize="small"
-                            sx={{ color: "text.secondary" }}
-                          />
-                        </Box>
-                        <ArgInput arg={arg} />
-                      </Box>
-                      {isEditable && (
-                        <Stack direction="row" spacing={1} alignItems="center">
-                          <ArgumentTypeSelect
-                            value={arg.type}
-                            onChange={(type) => handleArgTypeChange(arg, type)}
-                          />
-                          <IconButton
-                            title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
-                            onClick={() => handleDeleteArg(arg)}
-                            size="small"
-                            sx={{ top: -2 }}
-                          >
-                            <DeleteForever fontSize="small" />
-                          </IconButton>
-                        </Stack>
-                      )}
-                    </Stack>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-              {isEditable && caseSlug && (
-                <Box display="flex" justifyContent="center">
-                  <IconButton title={LL.ADD_ARGUMENT()} onClick={handleAddArg}>
-                    <Add />
-                  </IconButton>
+      <DraggableArgsList
+        onDragEnd={handleDragEnd}
+        renderAddButton={() =>
+          isEditable && caseSlug ? (
+            <AddArgumentButton
+              onClick={handleAddArg}
+              title={LL.ADD_ARGUMENT()}
+            />
+          ) : null
+        }
+      >
+        {args.map((arg, index) => (
+          <Draggable
+            key={arg.name}
+            draggableId={arg.name}
+            index={index}
+            isDragDisabled={!isEditable}
+          >
+            {(provided, snapshot) => (
+              <Stack
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                direction="row"
+                justifyContent="space-between"
+                alignItems="start"
+                spacing={1}
+                sx={{
+                  opacity: snapshot.isDragging ? 0.5 : 1,
+                  transform: snapshot.isDragging ? "scale(1.02)" : "none",
+                  transition: snapshot.isDragging
+                    ? "opacity 0.2s, transform 0.2s"
+                    : "none",
+                }}
+              >
+                <Box display="flex" flexDirection="row" flexGrow={1}>
+                  <Box
+                    {...provided.dragHandleProps}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      height: "37px",
+                      cursor: isEditable ? "grab" : "default",
+                      opacity: isEditable ? 1 : 0.3,
+                      "&:active": {
+                        cursor: isEditable ? "grabbing" : "default",
+                      },
+                    }}
+                  >
+                    <DragIndicator
+                      fontSize="small"
+                      sx={{ color: "text.secondary" }}
+                    />
+                  </Box>
+                  <ArgInput arg={arg} />
                 </Box>
-              )}
-            </Stack>
-          )}
-        </Droppable>
-      </DragDropContext>
+                {isEditable && (
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <ArgumentTypeSelect
+                      value={arg.type}
+                      onChange={(type) => handleArgTypeChange(arg, type)}
+                    />
+                    <IconButton
+                      title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
+                      onClick={() => handleDeleteArg(arg)}
+                      size="small"
+                      sx={{ top: -2 }}
+                    >
+                      <DeleteForever fontSize="small" />
+                    </IconButton>
+                  </Stack>
+                )}
+              </Stack>
+            )}
+          </Draggable>
+        ))}
+      </DraggableArgsList>
     </Box>
   );
 };
