@@ -115,6 +115,30 @@ export const caseSlice = createSlice({
       if (!state.args.entities[name]) return;
       Object.assign((state.info[name] ??= {}), data);
     },
+    reorderArgument: (
+      state,
+      action: PayloadAction<{ oldIndex: number; newIndex: number }>,
+    ) => {
+      const { oldIndex, newIndex } = action.payload;
+
+      const args = argumentAdapter.getSelectors().selectAll(state.args);
+      const from = args[oldIndex];
+      const to = args[newIndex];
+      if (!from || !to) return;
+
+      argumentAdapter.updateOne(state.args, {
+        id: from.name,
+        changes: {
+          order: newIndex,
+        },
+      });
+      argumentAdapter.updateOne(state.args, {
+        id: to.name,
+        changes: {
+          order: oldIndex,
+        },
+      });
+    },
     clear: () => ({ ...initialState }),
   },
 });
