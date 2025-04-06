@@ -189,24 +189,25 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                 spacing={1}
               >
                 <Box display="flex" flexDirection="row" flexGrow={1}>
-                  <Box
-                    {...provided.dragHandleProps}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      height: "37px",
-                      cursor: isEditable ? "grab" : "default",
-                      opacity: isEditable ? 1 : 0.3,
-                      "&:active": {
-                        cursor: isEditable ? "grabbing" : "default",
-                      },
-                    }}
-                  >
-                    <DragIndicator
-                      fontSize="small"
-                      sx={{ color: "text.secondary" }}
-                    />
-                  </Box>
+                  {isEditable && (
+                    <Box
+                      {...provided.dragHandleProps}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        height: "37px",
+                        cursor: "grab",
+                        "&:active": {
+                          cursor: "grabbing",
+                        },
+                      }}
+                    >
+                      <DragIndicator
+                        fontSize="small"
+                        sx={{ color: "text.secondary" }}
+                      />
+                    </Box>
+                  )}
                   <ArgInput arg={arg} />
                 </Box>
                 {isEditable && (
