@@ -25,7 +25,9 @@
     "loadMainDump": "tsx src/scripts/loadProjects.ts public-dumps/main.json",
     "runners:build": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --minify --outfile=src/packages/dstruct-runner/dist/main.js",
     "runners:watch": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --sourcemap --outfile=src/packages/dstruct-runner/dist/main.js --watch",
-    "runners:run": "node --watch src/packages/dstruct-runner/dist/main.js"
+    "runners:run": "node --watch src/packages/dstruct-runner/dist/main.js",
+    "runners:dev": "concurrently \"npm run runners:watch\" \"nodemon --watch src/packages/dstruct-runner/dist/main.js src/packages/dstruct-runner/dist/main.js\"",
+    "dev:all": "concurrently \"npm run dev\" \"npm run runners:dev\""
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
