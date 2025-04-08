@@ -1,0 +1,7 @@
+from typing import List
+
+def get_array_sum(array: List[int]) -> int:
+  sum = 0
+    for i in range(len(array)):
+      sum += array[i]
+  return sum

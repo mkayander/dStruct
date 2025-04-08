@@ -11,6 +11,10 @@ import {
   getNextEntityIndex,
   setLastEntityIndex,
 } from "#/entities/projectEntity/lib";
+import {
+  getDefaultCodeSnippets,
+  getMergedCodeContent,
+} from "#/features/codeRunner/lib/getDefaultCodeSnippets";
 import { type AppPrismaClient } from "#/server/db/client";
 import {
   protectedProcedure,
@@ -18,20 +22,6 @@ import {
   router,
 } from "#/server/trpc/trpc";
 import { uuid } from "#/shared/lib";
-
-import defaultArrayTemplate from "#/assets/codeTemplates/arrayTemplate.js.txt";
-import defaultBinaryTreeTemplate from "#/assets/codeTemplates/binaryTreeTemplate.js.txt";
-import linkedListTemplate from "#/assets/codeTemplates/linkedListTemplate.js.txt";
-
-const templatesMap: Partial<Record<ProjectCategory, string>> = {
-  [ProjectCategory.ARRAY]: defaultArrayTemplate,
-  [ProjectCategory.BINARY_TREE]: defaultBinaryTreeTemplate,
-  [ProjectCategory.LINKED_LIST]: linkedListTemplate,
-};
-
-const getTemplate = (category: ProjectCategory): string => {
-  return templatesMap[category] || defaultBinaryTreeTemplate;
-};
 
 const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   switch (category) {
@@ -300,7 +290,7 @@ export const projectRouter = router({
                 title: "Solution 1",
                 slug: "solution-1",
                 order: 0,
-                code: getTemplate(data.category),
+                ...getDefaultCodeSnippets(data.category),
               },
             },
           },
@@ -523,6 +513,7 @@ export const projectRouter = router({
         timeComplexity: z.ostring().nullable(),
         spaceComplexity: z.ostring().nullable(),
         code: z.ostring().nullable(),
+        pythonCode: z.ostring().nullable(),
         order: z.onumber(),
       }),
     )
@@ -554,9 +545,9 @@ export const projectRouter = router({
       return ctx.prisma.playgroundSolution.create({
         data: {
           title: input.title || `Solution ${solutionIndex}`,
-          code: data.code || getTemplate(ctx.project.category),
           slug: solutionSlug,
           ...data,
+          ...getMergedCodeContent(ctx.project.category, data),
         },
       });
     }),
