@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import shortUUID from "short-uuid";
+import { useCallback, useState } from "react";
 
-import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
-import { callstackSlice } from "#/features/callstack/model/callstackSlice";
-import { createRawRuntimeArgs } from "#/features/codeRunner/lib";
-import { requestWorkerAction } from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
-import { resetStructuresState } from "#/features/treeViewer/lib";
-import { useAppStore } from "#/store/hooks";
+import { useJSCodeRunner } from "./useJSCodeRunner";
 
 export type ProgrammingLanguage = "javascript" | "python";
 
@@ -26,155 +19,38 @@ export const getCodeKey = (language: ProgrammingLanguage | "") => {
   }
 };
 
-const uuid = shortUUID();
-
 export const useCodeExecution = (codeInput: string) => {
-  const dispatch = useDispatch();
-  const store = useAppStore();
-
-  const [worker, setWorker] = useState<Worker | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const worker = new Worker(
-      new URL(
-        "src/features/codeRunner/lib/workers/codeExec.worker.ts",
-        import.meta.url,
-      ),
-    );
-    setWorker(worker);
+  const { runJSCode, runJSBenchmark } = useJSCodeRunner();
 
-    return () => {
-      worker.terminate();
-    };
+  const processTask = useCallback(async (task: () => Promise<void>) => {
+    setIsProcessing(true);
+    try {
+      await task();
+    } catch (e) {
+      setError(e as Error);
+    } finally {
+      setIsProcessing(false);
+    }
   }, []);
 
-  const runBenchmark = async () => {
-    if (!worker) return;
+  const runCode = useCallback(
+    () =>
+      processTask(async () => {
+        await runJSCode(codeInput);
+      }),
+    [codeInput, processTask, runJSCode],
+  );
 
-    setIsProcessing(true);
-    const state = store.getState();
-    const args = createRawRuntimeArgs(selectCaseArguments(state));
+  const runBenchmark = useCallback(
+    () =>
+      processTask(async () => {
+        await runJSBenchmark(codeInput);
+      }),
+    [codeInput, processTask, runJSBenchmark],
+  );
 
-    let startTimestamp = performance.now();
-
-    try {
-      const result = await requestWorkerAction(worker, "benchmark", {
-        type: "benchmark",
-        code: codeInput,
-        input: args,
-        count: 128,
-      });
-      startTimestamp = result.workStartTime;
-      if (result.error) throw result.error;
-      setError(null);
-      dispatch(
-        callstackSlice.actions.setStatus({
-          isReady: true,
-          error: null,
-          result: String(result.output),
-          runtime: result.runtime,
-          benchmarkResults: result,
-          startTimestamp,
-        }),
-      );
-      return result;
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        dispatch(
-          callstackSlice.actions.addOne({
-            id: uuid.generate(),
-            timestamp: performance.now(),
-            name: "error",
-          }),
-        );
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: { name: e.name, message: e.message, stack: e.stack },
-            result: null,
-            runtime: performance.now() - startTimestamp,
-            startTimestamp,
-          }),
-        );
-        console.warn(e);
-      } else {
-        console.error("Invalid error type: ", e);
-      }
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const runCode = async () => {
-    if (!worker) return;
-
-    setIsProcessing(true);
-    const state = store.getState();
-    const caseArgs = selectCaseArguments(state);
-    const arrayStore = state.arrayStructure;
-    const treeStore = state.treeNode;
-
-    // Before running the code, clear the callstack
-    dispatch(callstackSlice.actions.removeAll());
-    resetStructuresState(dispatch);
-
-    let startTimestamp = performance.now();
-
-    try {
-      const { runtime, output, error, callstack, workStartTime } =
-        await requestWorkerAction(worker, "run", {
-          type: "run",
-          code: codeInput,
-          caseArgs,
-          arrayStore,
-          treeStore,
-        });
-      startTimestamp = workStartTime;
-      if (error) throw error;
-      setError(null);
-
-      // Identify that the callstack is filled and can now be used
-      dispatch(
-        callstackSlice.actions.setStatus({
-          isReady: true,
-          error: null,
-          result: String(output),
-          frames: callstack,
-          runtime,
-          startTimestamp,
-        }),
-      );
-      // Automatically play the callstack
-      dispatch(callstackSlice.actions.setIsPlaying(true));
-    } catch (e: unknown) {
-      const runtime = performance.now() - startTimestamp;
-      if (e instanceof Error) {
-        dispatch(
-          callstackSlice.actions.addOne({
-            id: uuid.generate(),
-            timestamp: performance.now(),
-            name: "error",
-          }),
-        );
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: { name: e.name, message: e.message, stack: e.stack },
-            result: null,
-            runtime,
-            startTimestamp,
-          }),
-        );
-        console.warn(e);
-      } else {
-        console.error("Invalid error type: ", e);
-      }
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  return { worker, isProcessing, error, runBenchmark, runCode };
+  return { isProcessing, error, runCode, runBenchmark };
 };
