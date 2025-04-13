@@ -1,3 +1,10 @@
+# [1.337.0](https://github.com/mkayander/dStruct/compare/v1.336.0...v1.337.0) (2025-04-13)
+
+
+### Features
+
+* add default code snippets for data structures ([3a61bce](https://github.com/mkayander/dStruct/commit/3a61bceeb85058aa043a83c97217bd42a3910f62))
+
 # [1.336.0](https://github.com/mkayander/dStruct/compare/v1.335.1...v1.336.0) (2025-04-06)
 
 
