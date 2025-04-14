@@ -6,6 +6,9 @@ import path from "path";
 
 import type { CallFrame } from "#/features/callstack/model/callstackSlice";
 
+const PORT = 8085;
+const PYTHON_PATH = path.join(process.cwd(), "python", "exec.py");
+
 interface ExecutionResult {
   success: boolean;
   callstack?: CallFrame[];
@@ -17,10 +20,7 @@ interface ExecutionRequest {
 }
 
 async function execPython(codeInput: string): Promise<ExecutionResult> {
-  const child = spawn(`python`, [
-    path.join(process.cwd(), "python", "exec.py"),
-    codeInput,
-  ]);
+  const child = spawn(`python`, [PYTHON_PATH, codeInput]);
 
   let result = "";
   for await (const chunk of child.stdout) {
@@ -48,7 +48,6 @@ async function execPython(codeInput: string): Promise<ExecutionResult> {
   return parsedResult;
 }
 
-const PORT = 8085;
 const app = express();
 
 app.use(
