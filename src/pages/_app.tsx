@@ -14,6 +14,7 @@ import { trpc } from "#/shared/lib";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
+import { ThemeProvider } from "#/shared/ui/providers/theme";
 import { wrapper } from "#/store/makeStore";
 
 import "#/styles/globals.css";
@@ -32,20 +33,22 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, ...restProps }) => {
     <ReduxProvider store={store}>
       <SessionProvider session={props.pageProps.session}>
         <ApolloProvider client={apolloClient}>
-          <StateThemeProvider>
-            <SnackbarProvider
-              maxSnack={4}
-              action={(snackbarKey) => (
-                <SnackbarCloseButton snackbarKey={snackbarKey} />
-              )}
-            >
-              <I18nProvider i18n={props.pageProps.i18n}>
-                <Component {...props.pageProps} />
-                <Analytics />
-                <SpeedInsights />
-              </I18nProvider>
-            </SnackbarProvider>
-          </StateThemeProvider>
+          <ThemeProvider>
+            <StateThemeProvider>
+              <SnackbarProvider
+                maxSnack={4}
+                action={(snackbarKey) => (
+                  <SnackbarCloseButton snackbarKey={snackbarKey} />
+                )}
+              >
+                <I18nProvider i18n={props.pageProps.i18n}>
+                  <Component {...props.pageProps} />
+                  <Analytics />
+                  <SpeedInsights />
+                </I18nProvider>
+              </SnackbarProvider>
+            </StateThemeProvider>
+          </ThemeProvider>
         </ApolloProvider>
       </SessionProvider>
     </ReduxProvider>
