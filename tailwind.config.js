@@ -12,6 +12,9 @@ export default {
         secondary: colors.secondary,
         error: colors.error,
         question: colors.question,
+        success: colors.success,
+        info: colors.info,
+        popover: "#22242c",
       }
     },
   },

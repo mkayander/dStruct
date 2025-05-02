@@ -12,6 +12,7 @@ import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { trpc } from "#/shared/lib";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
+import { TooltipProvider } from "#/shared/ui/atoms/Tooltip";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { ThemeProvider } from "#/shared/ui/providers/theme";
@@ -42,9 +43,11 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, ...restProps }) => {
                 )}
               >
                 <I18nProvider i18n={props.pageProps.i18n}>
-                  <Component {...props.pageProps} />
-                  <Analytics />
-                  <SpeedInsights />
+                  <TooltipProvider delayDuration={200}>
+                    <Component {...props.pageProps} />
+                    <Analytics />
+                    <SpeedInsights />
+                  </TooltipProvider>
                 </I18nProvider>
               </SnackbarProvider>
             </StateThemeProvider>
