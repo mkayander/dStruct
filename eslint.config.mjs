@@ -23,6 +23,8 @@ const eslintConfig = [
       "jest.setup.mjs",
       "*.worker.js",
       "**/dist/**",
+      "postcss.config.js",
+      "tailwind.config.js"
     ],
     overrides: [
       // Only uses Testing Library lint rules in test files
