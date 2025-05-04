@@ -1,8 +1,7 @@
 import React from "react";
 
-import { useI18nContext } from "#/shared/hooks";
-
 import { Tooltip, TooltipContent, TooltipTrigger } from "#/shadcn/ui/tooltip";
+import { useI18nContext } from "#/shared/hooks";
 
 type NewLabelProps = {
   createdAt: Date;
@@ -14,7 +13,7 @@ export const NewLabel: React.FC<NewLabelProps> = ({ createdAt }) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="inline-block text-xs px-1.5 pt-1 h-5 text-white bg-green-700 rounded-lg shadow-md opacity-90">
+        <span className="inline-block h-5 rounded-lg bg-green-700 px-1.5 pt-1 text-xs text-white opacity-90 shadow-md">
           {LL.NEW()}
         </span>
       </TooltipTrigger>

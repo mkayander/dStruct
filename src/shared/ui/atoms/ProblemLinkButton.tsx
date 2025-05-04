@@ -2,13 +2,13 @@ import { Source } from "@mui/icons-material";
 import Image from "next/image";
 import React from "react";
 
-import { Button } from "#/shadcn/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "#/shadcn/ui/tooltip";
+import { IconButton } from "#/shared/ui/atoms/IconButton";
 
 const ICON_SIZE = 24;
 
@@ -61,11 +61,13 @@ export const ProblemLinkButton: React.FC<ProblemLinkButtonProps> = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
-            <a href={problemLink} target="_blank" rel="noopener noreferrer">
-              {site.icon}
-            </a>
-          </Button>
+          <IconButton
+            icon={site.icon}
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(problemLink, "_blank", "noopener,noreferrer");
+            }}
+          />
         </TooltipTrigger>
         <TooltipContent>
           <p>{site.title}</p>

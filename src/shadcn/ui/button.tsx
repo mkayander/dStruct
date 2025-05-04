@@ -58,8 +58,14 @@ function Button({
       )}
       {...props}
     >
-      <Ripple />
-      {children}
+      {asChild ? (
+        children
+      ) : (
+        <>
+          <Ripple />
+          {children}
+        </>
+      )}
     </Comp>
   );
 }
