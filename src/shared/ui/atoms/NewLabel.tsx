@@ -1,11 +1,8 @@
 import React from "react";
 
 import { useI18nContext } from "#/shared/hooks";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "#/shared/ui/atoms/Tooltip";
+
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shadcn/ui/tooltip";
 
 type NewLabelProps = {
   createdAt: Date;

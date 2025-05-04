@@ -1,35 +1,36 @@
-import { FormControlLabel, Switch, type SwitchProps } from "@mui/material";
 import React from "react";
 
-type BooleanToggleInputProps = Omit<SwitchProps, "value" | "onChange"> & {
+import { Switch } from "#/shadcn/ui/switch";
+
+type BooleanToggleInputProps = {
   value: string;
   onChange(value: string): void;
+  className?: string;
+  disabled?: boolean;
 };
 
 export const BooleanToggleInput: React.FC<BooleanToggleInputProps> = ({
   value,
   onChange,
-  ...restProps
+  className = "",
+  disabled = false,
 }) => {
-  const handleChange: React.EventHandler<
-    React.ChangeEvent<HTMLInputElement>
-  > = (ev) => {
-    onChange(ev.target.checked ? "true" : "false");
+  const isChecked = value === "true";
+
+  const handleChange = (checked: boolean) => {
+    onChange(checked ? "true" : "false");
   };
 
   return (
-    <FormControlLabel
-      control={
-        <Switch
-          checked={value === "true"}
-          onChange={handleChange}
-          size="small"
-          {...restProps}
-        />
-      }
-      label={value === "true" ? "True" : "False"}
-      labelPlacement="end"
-      sx={{ ml: 1 }}
-    />
+    <div className={`flex items-center gap-2 ${className}`}>
+      <Switch
+        checked={isChecked}
+        onCheckedChange={handleChange}
+        disabled={disabled}
+      />
+      <span className="text-sm text-zinc-700 dark:text-zinc-300">
+        {isChecked ? "True" : "False"}
+      </span>
+    </div>
   );
 };

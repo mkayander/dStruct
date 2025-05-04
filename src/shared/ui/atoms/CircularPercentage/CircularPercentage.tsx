@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useTheme } from "#/shared/hooks/useTheme";
+import { colors } from "#/shared/lib/colors";
 
 const SIZE = 44;
 const VIEW_BOX = `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`;
@@ -22,8 +22,6 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
   bgColor,
   children,
 }) => {
-  const { colors } = useTheme();
-
   const [displayedLevel, setDisplayedLevel] = useState(0);
   useEffect(() => {
     setDisplayedLevel(value);
@@ -63,7 +61,7 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
           >
             <stop offset="0%" stopColor={colors.error.main} />
             <stop offset="20%" stopColor={colors.info.main} />
-            <stop offset="50%" stopColor={colors.secondary.main} />
+            <stop offset="50%" stopColor={colors.secondary.light} />
             <stop offset="100%" stopColor={colors.success.main} />
           </linearGradient>
         </defs>
