@@ -1,3 +1,10 @@
+# [1.341.0](https://github.com/mkayander/dStruct/compare/v1.340.0...v1.341.0) (2025-05-04)
+
+
+### Features
+
+* enhance code execution capabilities for multiple programming languages ([3a3fee2](https://github.com/mkayander/dStruct/commit/3a3fee2c90fef64280b1892763dbb83cbe056d68))
+
 # [1.340.0](https://github.com/mkayander/dStruct/compare/v1.339.0...v1.340.0) (2025-05-04)
 
 
