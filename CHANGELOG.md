@@ -1,3 +1,21 @@
+# [1.339.0](https://github.com/mkayander/dStruct/compare/v1.338.0...v1.339.0) (2025-05-04)
+
+
+### Features
+
+* add ProgressBar and RateButton components for enhanced user interaction ([0d71b06](https://github.com/mkayander/dStruct/commit/0d71b06f33022b30d5a8a937cc842403924b6687))
+* add Radix UI tooltips and utility functions for Tailwind CSS integration ([54bd18d](https://github.com/mkayander/dStruct/commit/54bd18d6bb1b4fdd5efa761f15dae791bd677d8b))
+* enhance button and skeleton components for improved UI consistency ([d0cf3af](https://github.com/mkayander/dStruct/commit/d0cf3af37837fa108aec0a34425e3a33ddcbbc97))
+* enhance Prettier configuration and introduce new UI components ([4fb2338](https://github.com/mkayander/dStruct/commit/4fb2338bfaa42958a433326e012e0c6b0ae6d37c))
+* enhance SolutionModal and TopicTag components with new features ([fdc9def](https://github.com/mkayander/dStruct/commit/fdc9defa0f9e0733a703e624bb0b62279c613cea))
+* enhance Tailwind CSS configuration with custom colors ([64ccab4](https://github.com/mkayander/dStruct/commit/64ccab4ebf5a8918f747612f73e8a5cef84b744d))
+* enhance UI components with Ripple effect and update Tailwind configuration ([781be23](https://github.com/mkayander/dStruct/commit/781be23933b07f5942e76e973e2b3e6fbf476c5c))
+* improve playground slug handling and refactor ResizeHandle and SolutionComplexityLabel components ([b43c46f](https://github.com/mkayander/dStruct/commit/b43c46f666ba08bd258825acad88d224b1dbb7b7))
+* integrate Tailwind CSS with theme provider and custom hooks ([ddd05cd](https://github.com/mkayander/dStruct/commit/ddd05cdab9df77269fe2fafb894271685ddaca79))
+* refactor ProblemLinkButton to use Radix UI components and improve accessibility ([5fbf24c](https://github.com/mkayander/dStruct/commit/5fbf24c6714e3f8a1d9bfe162d857e5ff6d9b70a))
+* update UI components and enhance Tailwind CSS configuration ([220deff](https://github.com/mkayander/dStruct/commit/220deff7904872361986a041ad1c541e11084ab9))
+* update VSCode settings for improved development experience ([9b1932a](https://github.com/mkayander/dStruct/commit/9b1932ac90d30d6fb9199c270d797fe8d9b165ce))
+
 # [1.338.0](https://github.com/mkayander/dStruct/compare/v1.337.0...v1.338.0) (2025-04-14)
 
 
