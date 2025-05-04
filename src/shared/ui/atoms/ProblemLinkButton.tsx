@@ -1,7 +1,14 @@
 import { Source } from "@mui/icons-material";
-import { IconButton, Tooltip } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+
+import { Button } from "#/shadcn/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "#/shadcn/ui/tooltip";
 
 const ICON_SIZE = 24;
 
@@ -51,10 +58,19 @@ export const ProblemLinkButton: React.FC<ProblemLinkButtonProps> = ({
   const site = getSiteFromUrl(problemLink);
 
   return (
-    <Tooltip title={site.title} arrow>
-      <IconButton href={problemLink} target="_blank" size="small">
-        {site.icon}
-      </IconButton>
-    </Tooltip>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+            <a href={problemLink} target="_blank" rel="noopener noreferrer">
+              {site.icon}
+            </a>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{site.title}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
