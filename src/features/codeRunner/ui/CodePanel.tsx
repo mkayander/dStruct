@@ -242,10 +242,6 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   };
 
   const handleFormatCode = async () => {
-    if (language === "python") {
-      openPythonSupportModal();
-      return;
-    }
     const result = await prettier.formatWithCursor(codeInput, {
       parser: "babel",
       plugins: [parserBabel, prettierPluginEstree],

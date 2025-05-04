@@ -3,10 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { useJSCodeRunner } from "./useJSCodeRunner";
-import {
-  checkPythonRunnerAvailability,
-  usePythonCodeRunner,
-} from "./usePythonCodeRunner";
+import { usePythonCodeRunner } from "./usePythonCodeRunner";
 
 export type ProgrammingLanguage = "javascript" | "python";
 
