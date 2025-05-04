@@ -1,4 +1,3 @@
-import { Stack, Typography } from "@mui/material";
 import { type UseQueryResult } from "@tanstack/react-query";
 import React from "react";
 
@@ -14,29 +13,29 @@ export const SolutionComplexityLabel: React.FC<
   if (!solution.data) return null;
 
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      sx={{
-        i: {
-          whiteSpace: "nowrap",
-          color: "text.secondary",
-          fontSize: 11,
-          fontWeight: "normal",
-        },
-      }}
-    >
+    <div className="flex flex-row items-center gap-1">
       {solution.data.timeComplexity && (
-        <Typography variant="body2" fontWeight="bold">
-          <i>TC:</i> {solution.data.timeComplexity}
-          {solution.data.spaceComplexity && <i>&nbsp; | </i>}
-        </Typography>
+        <span className="text-sm font-bold">
+          <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
+            TC:
+          </i>{" "}
+          {solution.data.timeComplexity}
+          {solution.data.spaceComplexity && (
+            <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
+              {" "}
+              |{" "}
+            </i>
+          )}
+        </span>
       )}
       {solution.data.spaceComplexity && (
-        <Typography variant="body2" fontWeight="bold">
-          <i>SC:</i> {solution.data.spaceComplexity}
-        </Typography>
+        <span className="text-sm font-bold">
+          <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
+            SC:
+          </i>{" "}
+          {solution.data.spaceComplexity}
+        </span>
       )}
-    </Stack>
+    </div>
   );
 };

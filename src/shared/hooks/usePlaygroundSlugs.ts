@@ -57,6 +57,8 @@ export const usePlaygroundSlugs = () => {
       if (!projectSlug || !caseSlug)
         throw new Error("Project and case ids must be set first");
 
+      if (slug === solutionSlug) return;
+
       return router[solutionSlug ? "push" : "replace"](
         `${BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
       );
