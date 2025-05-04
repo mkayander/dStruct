@@ -67,6 +67,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
             rules: [],
             colors: {
               "editor.background": "#00000000",
+              focusBorder: "#00000000",
             },
           });
 
