@@ -1,10 +1,9 @@
 import React from "react";
 
 import type { TopicTag as Topic } from "#/graphql/generated";
-import { getTagGradient } from "#/shared/lib/tagColors";
-
 import { Badge } from "#/shadcn/ui/badge";
 import { Skeleton } from "#/shadcn/ui/skeleton";
+import { getTagGradient } from "#/shared/lib/tagColors";
 
 interface TopicTagProps {
   topic: Partial<Topic>;
@@ -18,7 +17,7 @@ export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
   return (
     <Badge
       variant="secondary"
-      className="cursor-pointer rounded-full border-0 px-3 py-1.5 font-bold tracking-wider"
+      className="relative cursor-pointer overflow-hidden rounded-full border-0 px-3 py-1.5 font-bold tracking-wider"
       style={{
         background: getTagGradient(topic.slug),
         color: "white",

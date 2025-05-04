@@ -1,10 +1,8 @@
-import { colors } from './src/shared/lib/colors';
+import { colors } from "./src/shared/lib/colors";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
@@ -15,11 +13,16 @@ export default {
         success: colors.success,
         info: colors.info,
         popover: "#22242c",
-      }
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [],
   corePlugins: {
     preflight: false,
   },
-}
+};

@@ -7,7 +7,7 @@
     "prettier-plugin-tailwindcss"
   ],
   "importOrder": [
-    "^#/(api|components|entities|features|shared|context|env|graphql|hooks|layouts|pages|server|types|utils|theme|store|i18n)/?(.*)$",
+    "^#/(api|components|entities|features|shared|shadcn|context|env|graphql|hooks|layouts|pages|server|types|utils|theme|store|i18n)/?(.*)$",
     "^#/theme/?(.*)$",
     "^#/(.*)$",
     "^[./]",
