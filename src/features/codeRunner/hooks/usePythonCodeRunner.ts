@@ -1,6 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
 
+import { useSearchParam } from "#/shared/hooks";
+import { PYTHON_SUPPORT_MODAL_ID } from "#/shared/ui/organisms/PythonSupportModal";
+
 interface ExecutionResult {
   success: boolean;
   callstack?: any[];
@@ -8,6 +11,12 @@ interface ExecutionResult {
 }
 
 export const usePythonCodeRunner = () => {
+  const [, setModalName] = useSearchParam("modal");
+
+  const openPythonSupportModal = () => {
+    setModalName(PYTHON_SUPPORT_MODAL_ID);
+  };
+
   const { mutateAsync: executePythonCode, isLoading } = useMutation({
     mutationFn: async (codeInput: string) => {
       const response = await fetch("http://localhost:8085/python", {
@@ -27,6 +36,9 @@ export const usePythonCodeRunner = () => {
         throw new Error(result.error);
       }
       return result;
+    },
+    onError: () => {
+      openPythonSupportModal();
     },
   });
 

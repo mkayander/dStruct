@@ -111,7 +111,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { isProcessing, runCode, runBenchmark } = useCodeExecution(codeInput);
+  const { isProcessing, runCode, runBenchmark } = useCodeExecution(
+    codeInput,
+    language || "javascript",
+  );
 
   // Update code on solution change
   useEffect(() => {
@@ -181,10 +184,6 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     ]);
   }, [editorInstance, error, monacoInstance, textModel]);
 
-  const openPythonSupportModal = () => {
-    setModalName(PYTHON_SUPPORT_MODAL_ID);
-  };
-
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
@@ -194,10 +193,6 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   };
 
   const handleRunCode = async () => {
-    if (language === "python") {
-      openPythonSupportModal();
-      return;
-    }
     if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
