@@ -46,6 +46,8 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           lineNumbersMinChars: 3,
           lineDecorationsWidth: 6,
           folding: !isMobile,
+          stickyScroll: { enabled: false },
+          wordWrap: "on",
         }}
         {...restProps}
         height={`calc(${height}px - 6vh)`}
