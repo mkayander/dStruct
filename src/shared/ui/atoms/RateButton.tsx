@@ -4,8 +4,6 @@ import React from "react";
 import { Button } from "#/shadcn/ui/button";
 import { cn } from "#/shared/lib/utils";
 
-import { Ripple } from "./Ripple";
-
 interface RateButtonProps {
   icon: ReactNode;
   count: number;

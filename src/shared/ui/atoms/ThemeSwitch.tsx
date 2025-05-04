@@ -4,12 +4,7 @@ import { useTheme } from "next-themes";
 import React from "react";
 
 import { Switch } from "#/shadcn/ui/switch";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shadcn/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shadcn/ui/tooltip";
 
 type ThemeSwitchProps = {
   className?: string;
@@ -24,19 +19,17 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ className }) => {
   };
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Switch
-            checked={isDark}
-            onCheckedChange={toggleTheme}
-            className={className}
-          />
-        </TooltipTrigger>
-        <TooltipContent>
-          {isDark ? "Switch to light mode 🌞" : "Switch to dark mode 🌚"}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Switch
+          checked={isDark}
+          onCheckedChange={toggleTheme}
+          className={className}
+        />
+      </TooltipTrigger>
+      <TooltipContent>
+        {isDark ? "Switch to light mode 🌞" : "Switch to dark mode 🌚"}
+      </TooltipContent>
+    </Tooltip>
   );
 };

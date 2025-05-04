@@ -29,7 +29,6 @@ export const RatingButtons: React.FC<RatingButtonsProps> = ({
 
   return (
     <div className="relative">
-      {/* ButtonGroup-like container */}
       <div className="inline-flex rounded-md">
         <RateButton
           variant="left"
