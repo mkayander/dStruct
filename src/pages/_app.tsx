@@ -6,18 +6,17 @@ import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
 import { SnackbarProvider } from "notistack";
 import React from "react";
-import { Provider as ReduxProvider } from "react-redux";
 
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
+import { TooltipProvider } from "#/shadcn/ui/tooltip";
 import { trpc } from "#/shared/lib";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { ThemeProvider } from "#/shared/ui/providers/theme";
-import { makeStore } from "#/store/makeStore";
+import { ReduxProvider } from "#/store/provider";
 
-import { TooltipProvider } from "#/shadcn/ui/tooltip";
 import "#/styles/globals.css";
 
 import "overlayscrollbars/overlayscrollbars.css";
@@ -28,10 +27,8 @@ type MyAppProps = {
 };
 
 const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
-  const store = makeStore();
-
   return (
-    <ReduxProvider store={store}>
+    <ReduxProvider>
       <SessionProvider session={pageProps.session}>
         <ApolloProvider client={apolloClient}>
           <ThemeProvider

@@ -118,11 +118,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     if (!currentSolution.data) return;
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
-    dispatch(
-      projectSlice.actions.update({
-        isInitialized: true,
-      }),
-    );
+    dispatch(projectSlice.actions.loadFinish());
 
     const key = getCodeKey(language);
     const newCode = currentSolution.data[key] ?? "";

@@ -28,11 +28,7 @@ export const usePlaygroundSlugs = () => {
       : [];
 
     const setProject = (slug?: string, isInitial?: boolean) => {
-      dispatch(
-        projectSlice.actions.update({
-          isInitialized: false,
-        }),
-      );
+      dispatch(projectSlice.actions.loadStart());
       if (!slug) return router.replace(BASE_PATH);
 
       const lastPath = localStorage.getItem("lastPlaygroundPath");

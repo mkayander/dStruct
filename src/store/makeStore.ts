@@ -41,6 +41,16 @@ export const makeStore = () =>
         .concat(additionalMiddleware),
   });
 
+// Create a singleton store instance
+let store: ReturnType<typeof makeStore> | undefined;
+
+export const getStore = () => {
+  if (!store) {
+    store = makeStore();
+  }
+  return store;
+};
+
 type Store = ReturnType<typeof makeStore>;
 
 export type AppDispatch = Store["dispatch"];

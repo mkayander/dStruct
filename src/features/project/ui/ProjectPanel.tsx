@@ -57,18 +57,18 @@ export const ProjectPanel: React.FC = () => {
 
       return failureCount < 4;
     },
+    onSuccess: (data) => {
+      dispatch(projectSlice.actions.changeProjectId(data.id));
+    },
+    onError: () => {
+      dispatch(projectSlice.actions.loadFinish());
+    },
   });
 
   const selectedCase = trpc.project.getCaseBySlug.useQuery(
     { projectId: selectedProject.data?.id || "", slug: caseSlug },
     { enabled: Boolean(selectedProject.data?.id && caseSlug) },
   );
-
-  useEffect(() => {
-    dispatch(
-      projectSlice.actions.update({ projectId: selectedProject.data?.id }),
-    );
-  }, [dispatch, selectedProject.data?.id]);
 
   useEffect(() => {
     if (selectedProject.error) {
@@ -78,7 +78,7 @@ export const ProjectPanel: React.FC = () => {
     }
     if (!selectedProject.data || !session.data) {
       if (isEditable) {
-        dispatch(projectSlice.actions.update({ isEditable: false }));
+        dispatch(projectSlice.actions.changeIsEditable(false));
       }
       return;
     }
@@ -87,11 +87,7 @@ export const ProjectPanel: React.FC = () => {
 
     const newState = user.isAdmin || selectedProject.data.userId === user.id;
     if (isEditable !== newState) {
-      dispatch(
-        projectSlice.actions.update({
-          isEditable: newState,
-        }),
-      );
+      dispatch(projectSlice.actions.changeIsEditable(newState));
     }
   }, [
     clearSlugs,

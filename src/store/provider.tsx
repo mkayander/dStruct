@@ -3,9 +3,9 @@
 import React from "react";
 import { Provider } from "react-redux";
 
-import { makeStore } from "#/store/makeStore";
+import { getStore } from "#/store/makeStore";
 
-const store = makeStore();
+const store = getStore();
 
 export const ReduxProvider: React.FC<React.PropsWithChildren> = ({
   children,

@@ -18,12 +18,17 @@ export const projectSlice = createSlice({
   name: "PROJECT",
   initialState,
   reducers: {
-    update: (state, action: PayloadAction<Partial<ProjectState>>) => {
-      const { payload } = action;
-      return {
-        ...state,
-        ...payload,
-      };
+    loadStart: (state) => {
+      state.isInitialized = false;
+    },
+    loadFinish: (state) => {
+      state.isInitialized = true;
+    },
+    changeProjectId: (state, action: PayloadAction<string>) => {
+      state.projectId = action.payload;
+    },
+    changeIsEditable: (state, action: PayloadAction<boolean>) => {
+      state.isEditable = action.payload;
     },
     clear: () => ({ ...initialState }),
   },
