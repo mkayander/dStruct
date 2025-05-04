@@ -1,3 +1,16 @@
+# [1.340.0](https://github.com/mkayander/dStruct/compare/v1.339.0...v1.340.0) (2025-05-04)
+
+
+### Bug Fixes
+
+* update focusBorder color in CodeRunner component ([be6c01e](https://github.com/mkayander/dStruct/commit/be6c01ef4f7820a9f8586b14389549507d2acf97))
+
+
+### Features
+
+* add dev:all script and update dependencies ([796971f](https://github.com/mkayander/dStruct/commit/796971f7bd862d64089361724a49b38ee50f617b))
+* enhance CodeRunner component with new features ([6c56a27](https://github.com/mkayander/dStruct/commit/6c56a2764dce11d92cc3840207c6ac41d8ce47d7))
+
 # [1.339.0](https://github.com/mkayander/dStruct/compare/v1.338.0...v1.339.0) (2025-05-04)
 
 
