@@ -1,56 +1,35 @@
-import {
-  alpha,
-  Chip,
-  darken,
-  Skeleton,
-  type SkeletonProps,
-  useTheme,
-} from "@mui/material";
 import React from "react";
 
 import type { TopicTag as Topic } from "#/graphql/generated";
+import { getTagGradient } from "#/shared/lib/tagColors";
+
+import { Badge } from "#/shadcn/ui/badge";
+import { Skeleton } from "#/shadcn/ui/skeleton";
 
 interface TopicTagProps {
   topic: Partial<Topic>;
 }
 
 export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
-  const theme = useTheme();
-
-  const colors = theme.palette.question.getTagColors(topic.slug);
-
   const handleClick = () => {
     // console.log(topic.slug);
   };
 
   return (
-    <Chip
-      label={topic.name}
-      variant="filled"
-      onClick={handleClick}
-      sx={{
-        color: alpha(theme.palette.primary.contrastText, 0.9),
-        background: `linear-gradient(55deg, ${darken(colors[0], 0.4)} 0%, ${
-          colors[1]
-        } 100%)`,
-        fontWeight: "bold",
-        letterSpacing: "1px",
-        lineHeight: "2rem",
+    <Badge
+      variant="secondary"
+      className="cursor-pointer rounded-full border-0 px-3 py-1.5 font-bold tracking-wider"
+      style={{
+        background: getTagGradient(topic.slug),
+        color: "white",
       }}
-    />
+      onClick={handleClick}
+    >
+      {topic.name}
+    </Badge>
   );
 };
 
-export const TopicTagSkeleton: React.FC<SkeletonProps> = (props) => {
-  return (
-    <Skeleton
-      height="28px"
-      width="12%"
-      variant="rectangular"
-      sx={{
-        borderRadius: 4,
-      }}
-      {...props}
-    />
-  );
+export const TopicTagSkeleton: React.FC = () => {
+  return <Skeleton className="h-7 w-[12%] rounded-md" />;
 };
