@@ -52,7 +52,10 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }), "relative")}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        "relative cursor-pointer overflow-hidden",
+      )}
       {...props}
     >
       <Ripple />

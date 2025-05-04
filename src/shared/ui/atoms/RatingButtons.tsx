@@ -4,63 +4,62 @@ import {
   ThumbUp,
   ThumbUpOutlined,
 } from "@mui/icons-material";
-import { Box, Button, ButtonGroup, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 
 import type { QuestionDataQuery } from "#/graphql/generated";
 
+import { ProgressBar } from "./ProgressBar";
+import { RateButton } from "./RateButton";
+
 interface RatingButtonsProps {
   question: QuestionDataQuery["question"];
+  onLike?: () => void;
+  onDislike?: () => void;
 }
 
-export const RatingButtons: React.FC<RatingButtonsProps> = ({ question }) => {
-  const theme = useTheme();
-
+export const RatingButtons: React.FC<RatingButtonsProps> = ({
+  question,
+  onLike,
+  onDislike,
+}) => {
   const likesPercentage = useMemo(
     () => (question.likes / (question.likes + question.dislikes)) * 100,
     [question.dislikes, question.likes],
   );
 
   return (
-    <Box position="relative">
-      <ButtonGroup
-        variant="text"
-        color={likesPercentage > 50 ? "success" : "error"}
-      >
-        <Button
-          startIcon={question.isLiked ? <ThumbUp /> : <ThumbUpOutlined />}
-          color="success"
-        >
-          {question.likes}
-        </Button>
-        <Button
-          startIcon={
-            question.isLiked === false ? <ThumbDown /> : <ThumbDownOutlined />
+    <div className="relative">
+      {/* ButtonGroup-like container */}
+      <div className="inline-flex rounded-md">
+        <RateButton
+          variant="left"
+          icon={
+            question.isLiked ? (
+              <ThumbUp fontSize="small" />
+            ) : (
+              <ThumbUpOutlined fontSize="small" />
+            )
           }
-          color="error"
-        >
-          {question.dislikes}
-        </Button>
-      </ButtonGroup>
-      <Box
-        sx={{
-          height: "4px",
-          width: "100%",
-          marginTop: "1px",
-          borderRadius: theme.shape.borderRadius,
-          background: theme.palette.error.dark,
-          overflow: "hidden",
-        }}
-      >
-        <Box
-          sx={{
-            height: "100%",
-            transition: "0.3s width",
-            width: `${likesPercentage}%`,
-            background: theme.palette.success.main,
-          }}
-        ></Box>
-      </Box>
-    </Box>
+          count={question.likes}
+          onClick={onLike}
+          aria-label="Like"
+        />
+        <RateButton
+          variant="right"
+          icon={
+            question.isLiked === false ? (
+              <ThumbDown fontSize="small" />
+            ) : (
+              <ThumbDownOutlined fontSize="small" />
+            )
+          }
+          count={question.dislikes}
+          onClick={onDislike}
+          aria-label="Dislike"
+        />
+      </div>
+
+      <ProgressBar value={likesPercentage} className="mt-1" />
+    </div>
   );
 };

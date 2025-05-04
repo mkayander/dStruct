@@ -27,7 +27,7 @@ export const Ripple = () => {
   return (
     <span
       className="absolute inset-0 top-0 left-0 h-full w-full overflow-hidden"
-      style={{ pointerEvents: "auto" }}
+      style={{ pointerEvents: "auto", cursor: "inherit" }}
       onClick={handleClick}
     >
       <span
