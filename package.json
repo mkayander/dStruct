@@ -7,6 +7,7 @@
     "prepare": "husky",
     "build": "next build",
     "dev": "next dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run runners:dev\"",
     "postinstall": "node postinstall.mjs",
     "prisma:generate": "prisma generate",
     "prisma:generate-accelerate": "prisma generate --accelerate",
@@ -26,8 +27,7 @@
     "runners:build": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --minify --outfile=src/packages/dstruct-runner/dist/main.js",
     "runners:watch": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --sourcemap --outfile=src/packages/dstruct-runner/dist/main.js --watch",
     "runners:run": "node --watch src/packages/dstruct-runner/dist/main.js",
-    "runners:dev": "concurrently \"npm run runners:watch\" \"nodemon --watch src/packages/dstruct-runner/dist/main.js src/packages/dstruct-runner/dist/main.js\"",
-    "dev:all": "concurrently \"npm run dev\" \"npm run runners:dev\""
+    "runners:dev": "concurrently \"npm run runners:watch\" \"nodemon --watch src/packages/dstruct-runner/dist/main.js src/packages/dstruct-runner/dist/main.js\""
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -135,6 +135,7 @@
     "@vitest/coverage-v8": "^3.0.9",
     "@vitest/web-worker": "^3.0.9",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "esbuild": "^0.25.1",
     "eslint": "^9.23.0",
