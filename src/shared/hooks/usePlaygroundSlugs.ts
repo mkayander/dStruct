@@ -49,6 +49,8 @@ export const usePlaygroundSlugs = () => {
 
       if (!slug) return setProject(projectSlug);
 
+      if (slug === caseSlug) return;
+
       return router[caseSlug ? "push" : "replace"](
         `${BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
       );

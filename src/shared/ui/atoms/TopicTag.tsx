@@ -29,6 +29,12 @@ export const TopicTag: React.FC<TopicTagProps> = ({ topic }) => {
   );
 };
 
-export const TopicTagSkeleton: React.FC = () => {
-  return <Skeleton className="h-7 w-[12%] rounded-md" />;
+interface TopicTagSkeletonProps {
+  width?: string;
+}
+
+export const TopicTagSkeleton: React.FC<TopicTagSkeletonProps> = ({
+  width = "12%",
+}) => {
+  return <Skeleton className={`h-7 w-[${width}] rounded-md`} />;
 };
