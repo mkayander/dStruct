@@ -1,5 +1,4 @@
 import { leetcodeRouter } from "#/server/trpc/router/leetcode";
-import { problemRouter } from "#/server/trpc/router/problem";
 import { projectRouter } from "#/server/trpc/router/project";
 import { userRouter } from "#/server/trpc/router/user";
 
@@ -21,7 +20,6 @@ export const appRouter = router({
 
   user: userRouter,
   leetcode: leetcodeRouter,
-  problem: problemRouter,
   project: projectRouter,
 });
 
