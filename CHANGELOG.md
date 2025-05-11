@@ -1,3 +1,10 @@
+## [1.341.1](https://github.com/mkayander/dStruct/compare/v1.341.0...v1.341.1) (2025-05-11)
+
+
+### Bug Fixes
+
+* update postinstall script to skip Python checks in Vercel environment ([de7b729](https://github.com/mkayander/dStruct/commit/de7b7290d8f3f6477928bf5fcf1a9b6ed17e0026))
+
 # [1.341.0](https://github.com/mkayander/dStruct/compare/v1.340.0...v1.341.0) (2025-05-04)
 
 
