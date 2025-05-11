@@ -48,7 +48,11 @@ async function main() {
   runPrismaAndGraphQL();
 
   // Skip Python checks in CI/server environments
-  if (process.env.CI === "true" || process.env.NODE_ENV === "production") {
+  if (
+    process.env.CI === "true" ||
+    process.env.NODE_ENV === "production" ||
+    process.env.VERCEL
+  ) {
     console.log("⏩ Skipping Python checks in CI/server environment");
     console.timeEnd("postinstall");
     return;
