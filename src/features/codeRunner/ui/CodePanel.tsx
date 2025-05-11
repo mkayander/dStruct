@@ -242,23 +242,25 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   };
 
   const handleFormatCode = async () => {
-    const result = await prettier.formatWithCursor(codeInput, {
-      parser: "babel",
-      plugins: [parserBabel, prettierPluginEstree],
-      cursorOffset: 0,
-    });
-    if (textModel) {
-      const edit: monaco.editor.IIdentifiedSingleEditOperation = {
-        range: textModel.getFullModelRange(),
-        text: result.formatted,
-      };
-      textModel.pushEditOperations(
-        [],
-        [edit],
-        () => null, // no undo stop
-      );
-      const newPosition = textModel.getPositionAt(result.cursorOffset);
-      editorInstance?.setPosition(newPosition);
+    if (language === "javascript") {
+      const result = await prettier.formatWithCursor(codeInput, {
+        parser: "babel",
+        plugins: [parserBabel, prettierPluginEstree],
+        cursorOffset: 0,
+      });
+      if (textModel) {
+        const edit: monaco.editor.IIdentifiedSingleEditOperation = {
+          range: textModel.getFullModelRange(),
+          text: result.formatted,
+        };
+        textModel.pushEditOperations(
+          [],
+          [edit],
+          () => null, // no undo stop
+        );
+        const newPosition = textModel.getPositionAt(result.cursorOffset);
+        editorInstance?.setPosition(newPosition);
+      }
     }
     setIsFormattingAvailable(false);
   };
@@ -305,20 +307,26 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
             <Tooltip
               title={
                 <Box display="flex" alignItems="center" gap="3px">
-                  {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
-                  <Image
-                    src={prettierIcon}
-                    alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
-                    width={22}
-                    height={22}
-                  />
+                  {language === "javascript" ? (
+                    <>
+                      {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
+                      <Image
+                        src={prettierIcon}
+                        alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
+                        width={22}
+                        height={22}
+                      />
+                    </>
+                  ) : (
+                    <span>Formatting is only available for JavaScript</span>
+                  )}
                 </Box>
               }
               arrow
             >
               <span>
                 <IconButton
-                  disabled={!isFormattingAvailable}
+                  disabled={!isFormattingAvailable || language !== "javascript"}
                   onClick={handleFormatCode}
                 >
                   <AutoFixHigh fontSize="small" />
