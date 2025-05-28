@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+print("sys.path:", sys.path, file=sys.stderr)
+print("Current directory:", os.getcwd(), file=sys.stderr)
 import json
 from typing import Dict, Any, Optional, List
 from array_tracker import transform_and_track_code, ExecutionResult
@@ -45,6 +49,7 @@ def safe_exec(code_str: str) -> ExecutionResult:
         }
 
 if __name__ == "__main__":
-    code_str: str = sys.argv[1]
+    # Read code from stdin
+    code_str: str = sys.stdin.read()
     result: ExecutionResult = safe_exec(code_str)
     print(json.dumps(result))
