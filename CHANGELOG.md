@@ -1,3 +1,10 @@
+# [1.342.0](https://github.com/mkayander/dStruct/compare/v1.341.1...v1.342.0) (2025-05-28)
+
+
+### Features
+
+* enhance Python execution and readiness checks ([1c0e207](https://github.com/mkayander/dStruct/commit/1c0e2072fd32e89a8a8e68be5299c86db9f02f19))
+
 ## [1.341.1](https://github.com/mkayander/dStruct/compare/v1.341.0...v1.341.1) (2025-05-11)
 
 
