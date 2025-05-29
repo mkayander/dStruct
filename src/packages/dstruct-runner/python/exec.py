@@ -7,45 +7,60 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 print("sys.path:", sys.path, file=sys.stderr)
 print("Current directory:", os.getcwd(), file=sys.stderr)
 import json
-from typing import Dict, Any, Optional, List
-from array_tracker import transform_and_track_code, ExecutionResult
+from typing import Dict, Any, Optional, List, TypedDict
+from array_tracker import transform_and_track_code
 
-def safe_exec(code_str: str) -> ExecutionResult:
+class ExecutionResult(TypedDict):
+    success: bool
+    callstack: Optional[List[Dict[str, Any]]]
+    error: Optional[str]
+
+def safe_exec(code: str) -> ExecutionResult:
     """
-    Safely execute the provided code string and return the execution result.
+    Execute Python code safely, returning execution results including success status,
+    callstack, and error messages.
     
     Args:
-        code_str: The Python code to execute
+        code: The Python code to execute as a string
         
     Returns:
-        A dictionary containing execution success status, callstack, and any error messages
+        A dictionary containing:
+        - success: Boolean indicating if execution was successful
+        - callstack: List of operation frames if successful, None if failed
+        - error: Error message if failed, None if successful
     """
     try:
-        # Transform and track the code
-        transformed_code: str
-        callstack: List[Dict[str, Any]]
-        transformed_code, callstack = transform_and_track_code(code_str)
+        # Transform the code to track array operations
+        transformed_code, callstack = transform_and_track_code(code)
         
-        # Create a safe execution environment
-        allowed_globals: Dict[str, None] = {"__builtins__": None}
-        allowed_locals: Dict[str, Any] = {
-            "print": print,
-            "__dstruct_track_array_op": lambda op, array_name, index=None, value=None: None
+        # Create a restricted globals dict
+        restricted_globals = {
+            '__builtins__': {
+                name: getattr(__builtins__, name)
+                for name in ['print', 'len', 'range', 'str', 'int', 'float', 'bool', 'list', 'dict', 'set', 'tuple']
+            }
         }
         
         # Execute the transformed code
-        exec(transformed_code, allowed_globals, allowed_locals)
+        exec(transformed_code, restricted_globals)
         
         return {
             "success": True,
             "callstack": callstack,
             "error": None
         }
+        
+    except SyntaxError as e:
+        return {
+            "success": False,
+            "callstack": None,
+            "error": f"Syntax error: {str(e)}"
+        }
     except Exception as e:
         return {
             "success": False,
             "callstack": None,
-            "error": str(e)
+            "error": f"Runtime error: {str(e)}"
         }
 
 if __name__ == "__main__":
