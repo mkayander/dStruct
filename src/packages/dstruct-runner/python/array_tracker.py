@@ -3,6 +3,7 @@ import ast
 from typing import List, Dict, Any, Optional, Union, Tuple, TypedDict, TypeVar, Generic
 import uuid
 from datetime import datetime
+from shared_types import ExecutionResult
 
 T = TypeVar('T')
 
@@ -25,11 +26,6 @@ class CallFrame(TypedDict):
     argType: str
     name: str
     args: Dict[str, Any]
-
-class ExecutionResult(TypedDict):
-    success: bool
-    callstack: Optional[List[CallFrame]]
-    error: Optional[str]
 
 class TrackedArray(Generic[T]):
     """A proxy-like array class that tracks all operations performed on it."""

@@ -9,11 +9,9 @@ print("Current directory:", os.getcwd(), file=sys.stderr)
 import json
 from typing import Dict, Any, Optional, List, TypedDict
 from array_tracker import transform_and_track_code
-
-class ExecutionResult(TypedDict):
-    success: bool
-    callstack: Optional[List[Dict[str, Any]]]
-    error: Optional[str]
+from array_tracker_ast import ListTrackingTransformer
+import ast
+from shared_types import ExecutionResult
 
 def safe_exec(code: str) -> ExecutionResult:
     """
@@ -30,26 +28,27 @@ def safe_exec(code: str) -> ExecutionResult:
         - error: Error message if failed, None if successful
     """
     try:
-        # Transform the code to track array operations
-        transformed_code, callstack = transform_and_track_code(code)
+        # Transform the code to replace native lists with TrackedList instances
+        tree = ast.parse(code)
+        transformer = ListTrackingTransformer()
+        new_tree = transformer.visit(tree)
+        ast.fix_missing_locations(new_tree)
+        transformed_code = ast.unparse(new_tree)
         
-        # Create a restricted globals dict
+        # Execute the transformed code
         restricted_globals = {
             '__builtins__': {
                 name: getattr(__builtins__, name)
                 for name in ['print', 'len', 'range', 'str', 'int', 'float', 'bool', 'list', 'dict', 'set', 'tuple']
             }
         }
-        
-        # Execute the transformed code
         exec(transformed_code, restricted_globals)
         
         return {
             "success": True,
-            "callstack": callstack,
+            "callstack": transformer.callstack,
             "error": None
         }
-        
     except SyntaxError as e:
         return {
             "success": False,
