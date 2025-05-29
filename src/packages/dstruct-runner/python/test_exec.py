@@ -5,6 +5,9 @@ import json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exec import safe_exec
 
+def get_frame_names(callstack):
+    return [frame.get("name") for frame in (callstack or [])]
+
 class TestExec(unittest.TestCase):
     def test_successful_execution(self):
         """Test successful execution of valid Python code"""
@@ -16,7 +19,8 @@ result = x + y
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        self.assertEqual(result["callstack"], [])  # No list ops
 
     def test_syntax_error(self):
         """Test handling of syntax errors"""
@@ -49,7 +53,8 @@ result = x + y  # TypeError: unsupported operand type(s) for +: 'int' and 'str'
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        self.assertEqual(result["callstack"], [])
 
     def test_print_statement(self):
         """Test that print statements are allowed"""
@@ -59,7 +64,8 @@ print("Hello, World!")
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        self.assertEqual(result["callstack"], [])
 
     def test_restricted_globals(self):
         """Test that restricted globals are not accessible"""
@@ -77,40 +83,63 @@ print("Hello, World!")
             self.assertIsNotNone(result["error"])
             self.assertIsNone(result["callstack"])
 
-    def test_array_operations(self):
-        """Test array operations tracking"""
-        test_cases = [
-            # Basic array operations
-            """
-arr = [1, 2, 3]
-arr[0] = 4
-x = arr[1]
-""",
-            # Nested array operations
-            """
+    def test_tracked_list_operations(self):
+        """Test that list operations are tracked at runtime"""
+        code = '''
+lst = [1, 2, 3]
+lst[0] = 10
+x = lst[1]
+'''
+        result = safe_exec(code)
+        self.assertTrue(result["success"])
+        self.assertIsInstance(result["callstack"], list)
+        frame_names = get_frame_names(result["callstack"])
+        self.assertIn("addArray", frame_names)
+        self.assertIn("addArrayItem", frame_names)
+        self.assertIn("readArrayItem", frame_names)
+
+    def test_tracked_nested_list(self):
+        """Test that nested list operations are tracked at runtime"""
+        code = '''
 matrix = [[1, 2], [3, 4]]
 matrix[0][1] = 5
 x = matrix[1][0]
-""",
-            # Array slicing
-            """
-arr = [1, 2, 3, 4, 5]
-sub_arr = arr[1:3]
-arr[1:3] = [6, 7]
-""",
-            # List comprehension
-            """
-arr = [1, 2, 3, 4, 5]
-squares = [x*x for x in arr]
-"""
-        ]
-        
-        for code in test_cases:
-            result = safe_exec(code)
-            self.assertTrue(result["success"], f"Failed for code: {code}")
-            self.assertIsNone(result["error"])
-            self.assertIsNotNone(result["callstack"])
-            self.assertTrue(len(result["callstack"]) > 0)
+'''
+        result = safe_exec(code)
+        self.assertTrue(result["success"])
+        frame_names = get_frame_names(result["callstack"])
+        self.assertGreaterEqual(frame_names.count("addArray"), 2)  # Outer and inner
+        self.assertIn("addArrayItem", frame_names)
+        self.assertIn("readArrayItem", frame_names)
+
+    def test_tracked_list_slice(self):
+        """Test that list slicing is tracked at runtime"""
+        code = '''
+lst = [1, 2, 3, 4, 5]
+sub_lst = lst[1:3]
+lst[1:3] = [6, 7]
+'''
+        result = safe_exec(code)
+        if not result["success"]:
+            print("test_tracked_list_slice error:", result["error"])
+        self.assertTrue(result["success"])
+        frame_names = get_frame_names(result["callstack"])
+        self.assertIn("addArray", frame_names)
+        self.assertIn("addArrayItem", frame_names)
+        self.assertIn("readArrayItem", frame_names)
+
+    def test_tracked_list_comprehension(self):
+        """Test that list comprehensions are tracked at runtime"""
+        code = '''
+lst = [1, 2, 3, 4, 5]
+squares = [x*x for x in lst]
+'''
+        result = safe_exec(code)
+        if not result["success"]:
+            print("test_tracked_list_comprehension error:", result["error"])
+        self.assertTrue(result["success"])
+        frame_names = get_frame_names(result["callstack"])
+        self.assertIn("addArray", frame_names)
 
     def test_data_types(self):
         """Test various Python data types and operations"""
@@ -148,7 +177,10 @@ b3 = b1 and b2
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        # Only the list operations should be tracked
+        frame_names = get_frame_names(result["callstack"])
+        self.assertIn("addArray", frame_names)
 
     def test_multiline_code(self):
         """Test handling of multiline code with various indentation levels"""
@@ -163,7 +195,8 @@ result = add(x, y)
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        self.assertEqual(result["callstack"], [])
 
     def test_comments(self):
         """Test handling of various comment types"""
@@ -179,7 +212,8 @@ y = 10
         result = safe_exec(code)
         self.assertTrue(result["success"])
         self.assertIsNone(result["error"])
-        self.assertIsNotNone(result["callstack"])
+        self.assertIsInstance(result["callstack"], list)
+        self.assertEqual(result["callstack"], [])
 
     def test_json_output(self):
         """Test that the output can be properly serialized to JSON"""

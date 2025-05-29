@@ -7,9 +7,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 print("sys.path:", sys.path, file=sys.stderr)
 print("Current directory:", os.getcwd(), file=sys.stderr)
 import json
-from typing import Dict, Any, Optional, List, TypedDict
-from array_tracker import transform_and_track_code
-from array_tracker_ast import ListTrackingTransformer
+from array_tracker import TrackedList
+from array_tracker_transformer import ListTrackingTransformer
 import ast
 from shared_types import ExecutionResult
 
@@ -35,18 +34,49 @@ def safe_exec(code: str) -> ExecutionResult:
         ast.fix_missing_locations(new_tree)
         transformed_code = ast.unparse(new_tree)
         
-        # Execute the transformed code
-        restricted_globals = {
-            '__builtins__': {
-                name: getattr(__builtins__, name)
-                for name in ['print', 'len', 'range', 'str', 'int', 'float', 'bool', 'list', 'dict', 'set', 'tuple']
+        # Create a safe but complete set of built-ins
+        safe_builtins = {
+            name: getattr(__builtins__, name)
+            for name in dir(__builtins__)
+            if name not in {
+                # Dangerous operations
+                'open', 'exec', 'eval', 'compile', '__import__',
+                # File system operations
+                'os', 'sys', 'subprocess',
+                # Network operations
+                'socket', 'http', 'urllib',
+                # Other potentially dangerous operations
+                'globals', 'locals', 'vars', 'dir',
+                'getattr', 'setattr', 'delattr',
+                'super', 'property', 'staticmethod', 'classmethod',
+                'type', 'isinstance', 'issubclass',
+                'breakpoint', 'help',
+                # Keep these safe operations
+                'len', 'range', 'str', 'int', 'float', 'bool',
+                'list', 'dict', 'set', 'tuple', 'sum', 'min', 'max',
+                'enumerate', 'zip', 'filter', 'map', 'sorted',
+                'abs', 'all', 'any', 'ascii', 'bin', 'chr', 'divmod',
+                'format', 'hash', 'hex', 'id', 'iter', 'next', 'oct',
+                'ord', 'pow', 'repr', 'round', 'slice', 'sorted',
+                'True', 'False', 'None'
             }
         }
-        exec(transformed_code, restricted_globals)
+        safe_builtins['print'] = print
+        
+        # Create separate global and local namespaces
+        globals_dict = {
+            '__builtins__': safe_builtins,
+            'TrackedList': TrackedList,
+            '__callstack__': []  # Inject callstack
+        }
+        locals_dict = {}
+        
+        exec(transformed_code, globals_dict, locals_dict)
+        callstack = globals_dict['__callstack__']
         
         return {
             "success": True,
-            "callstack": transformer.callstack,
+            "callstack": callstack,
             "error": None
         }
     except SyntaxError as e:
@@ -56,6 +86,7 @@ def safe_exec(code: str) -> ExecutionResult:
             "error": f"Syntax error: {str(e)}"
         }
     except Exception as e:
+        print(f"Error in safe_exec: {str(e)}")  # Debug print
         return {
             "success": False,
             "callstack": None,

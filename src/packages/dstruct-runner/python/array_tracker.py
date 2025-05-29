@@ -3,44 +3,35 @@ import ast
 from typing import List, Dict, Any, Optional, Union, Tuple, TypedDict, TypeVar, Generic
 import uuid
 from datetime import datetime
-from shared_types import ExecutionResult
+from shared_types import ExecutionResult, CallFrame, CallFrameBase, NodeFrameBase, AddArrayItemFrame, AddArrayFrame
 
 T = TypeVar('T')
 
-class ArrayItemData(TypedDict):
+class ListItemData(TypedDict):
     id: str
     value: Union[int, str, float, None]
 
-class ArrayData(TypedDict):
+class ListData(TypedDict):
     ids: List[str]
-    entities: Dict[str, ArrayItemData]
+    entities: Dict[str, ListItemData]
 
-class ArrayOptions(TypedDict):
+class ListOptions(TypedDict):
     name: str
 
-class CallFrame(TypedDict):
-    id: str
-    timestamp: int
-    treeName: str
-    structureType: str
-    argType: str
-    name: str
-    args: Dict[str, Any]
-
-class TrackedArray(Generic[T]):
-    """A proxy-like array class that tracks all operations performed on it."""
+class TrackedList(list, Generic[T]):
+    """A proxy-like list class that tracks all operations performed on it."""
     
     def __init__(self, items: List[T], name: str, callstack: List[CallFrame]) -> None:
-        self._items = items
+        super().__init__(items)
         self._name = name
         self._callstack = callstack
         self._timestamp_counter = 0
         
-        # Add initial array creation to callstack
+        # Add initial list creation to callstack
         self._add_frame(
             "addArray",
             args={
-                "arrayData": self._generate_array_data(items),
+                "arrayData": self._generate_list_data(items),
                 "options": {"name": name}
             }
         )
@@ -61,7 +52,7 @@ class TrackedArray(Generic[T]):
         }
         self._callstack.append(frame)
 
-    def _generate_array_data(self, items: List[T]) -> ArrayData:
+    def _generate_list_data(self, items: List[T]) -> ListData:
         return {
             "ids": [str(i) for i in range(len(items))],
             "entities": {
@@ -73,7 +64,7 @@ class TrackedArray(Generic[T]):
             }
         }
 
-    def __getitem__(self, index: Union[int, slice]) -> Union[T, List[T]]:
+    def __getitem__(self, index: Union[int, slice]) -> Union[T, list[T]]:
         # Track read operation
         if isinstance(index, int):
             self._add_frame(
@@ -93,7 +84,9 @@ class TrackedArray(Generic[T]):
                     "nodeId": "slice"
                 }
             )
-        return self._items[index]
+            # Return a plain list to avoid recursion issues with TrackedList
+            return list(super().__getitem__(index))
+        return super().__getitem__(index)
 
     def __setitem__(self, index: Union[int, slice], value: Union[T, List[T]]) -> None:
         # Track write operation
@@ -117,64 +110,24 @@ class TrackedArray(Generic[T]):
                     "nodeId": "slice"
                 }
             )
-        self._items[index] = value
+            # Avoid recursion: if value is a TrackedList, convert to plain list
+            if isinstance(value, TrackedList):
+                value = list(value)
+        super().__setitem__(index, value)
 
     def __len__(self) -> int:
-        return len(self._items)
+        return len(self)
 
     def __iter__(self):
-        return iter(self._items)
+        return iter(self)
 
     def __str__(self) -> str:
-        return str(self._items)
+        return str(self)
 
     def __repr__(self) -> str:
-        return f"TrackedArray({self._items})"
+        return f"TrackedList({self})"
 
-def create_tracked_array(items: List[Any], name: str) -> Tuple[TrackedArray, List[CallFrame]]:
-    """Create a new tracked array with the given items and name."""
+def create_tracked_list(items: List[Any], name: str) -> Tuple[TrackedList, List[CallFrame]]:
+    """Create a new tracked list with the given items and name."""
     callstack: List[CallFrame] = []
-    return TrackedArray(items, name, callstack), callstack
-
-def transform_and_track_code(code: str) -> Tuple[str, List[CallFrame]]:
-    """Transform Python code to use tracked arrays."""
-    tree = ast.parse(code)
-    transformer = ArrayTransformer()
-    transformed_tree = transformer.visit(tree)
-    return ast.unparse(transformed_tree), transformer.callstack
-
-class ArrayTransformer(ast.NodeTransformer):
-    """AST transformer that replaces array operations with tracked array operations."""
-    
-    def __init__(self) -> None:
-        self.callstack: List[CallFrame] = []
-        self.array_counter = 0
-
-    def visit_Assign(self, node: ast.Assign) -> ast.AST:
-        if isinstance(node.value, ast.List):
-            # Create a tracked array for list literals
-            array_name = f"arr_{self.array_counter}"
-            self.array_counter += 1
-            
-            # Create the tracked array
-            items = [self.get_value(elt) for elt in node.value.elts]
-            tracked_array, callstack = create_tracked_array(items, array_name)
-            self.callstack.extend(callstack)
-            
-            # Replace the assignment with the tracked array
-            return ast.Assign(
-                targets=node.targets,
-                value=ast.Call(
-                    func=ast.Name(id='TrackedArray', ctx=ast.Load()),
-                    args=[ast.List(elts=node.value.elts, ctx=ast.Load())],
-                    keywords=[
-                        ast.keyword(arg='name', value=ast.Constant(value=array_name))
-                    ]
-                )
-            )
-        return node
-
-    def get_value(self, node: ast.AST) -> Any:
-        if isinstance(node, ast.Constant):
-            return node.value
-        return None
+    return TrackedList(items, name, callstack), callstack
