@@ -3,14 +3,14 @@
 from __future__ import annotations
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-print("sys.path:", sys.path, file=sys.stderr)
-print("Current directory:", os.getcwd(), file=sys.stderr)
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
 import ast
 from shared_types import ExecutionResult
+from output import tracked_print
+import traceback
+import time
 
 def safe_exec(code: str) -> ExecutionResult:
     """
@@ -25,72 +25,118 @@ def safe_exec(code: str) -> ExecutionResult:
         - success: Boolean indicating if execution was successful
         - callstack: List of operation frames if successful, None if failed
         - error: Error message if failed, None if successful
+        - runtime: Execution time in milliseconds
+        - startTimestamp: When execution started
     """
     try:
-        # Transform the code to replace native lists with TrackedList instances
+        start_time = time.time()
+        start_timestamp = int(start_time * 1000)  # Convert to milliseconds
+        
+        # Parse the code into an AST
         tree = ast.parse(code)
+        
+        # Transform the AST to track function calls
         transformer = ListTrackingTransformer()
         new_tree = transformer.visit(tree)
         ast.fix_missing_locations(new_tree)
         transformed_code = ast.unparse(new_tree)
         
-        # Create a safe but complete set of built-ins
-        safe_builtins = {
-            name: getattr(__builtins__, name)
-            for name in dir(__builtins__)
-            if name not in {
-                # Dangerous operations
-                'open', 'exec', 'eval', 'compile', '__import__',
-                # File system operations
-                'os', 'sys', 'subprocess',
-                # Network operations
-                'socket', 'http', 'urllib',
-                # Other potentially dangerous operations
-                'globals', 'locals', 'vars', 'dir',
-                'getattr', 'setattr', 'delattr',
-                'super', 'property', 'staticmethod', 'classmethod',
-                'type', 'isinstance', 'issubclass',
-                'breakpoint', 'help',
-                # Keep these safe operations
-                'len', 'range', 'str', 'int', 'float', 'bool',
-                'list', 'dict', 'set', 'tuple', 'sum', 'min', 'max',
-                'enumerate', 'zip', 'filter', 'map', 'sorted',
-                'abs', 'all', 'any', 'ascii', 'bin', 'chr', 'divmod',
-                'format', 'hash', 'hex', 'id', 'iter', 'next', 'oct',
-                'ord', 'pow', 'repr', 'round', 'slice', 'sorted',
-                'True', 'False', 'None'
-            }
-        }
-        safe_builtins['print'] = print
-        
         # Create separate global and local namespaces
         globals_dict = {
-            '__builtins__': safe_builtins,
-            'TrackedList': TrackedList,
-            '__callstack__': []  # Inject callstack
+            '__callstack__': [],
+            '__stdout__': "",
+            'TrackedList': TrackedList
         }
         locals_dict = {}
         
-        exec(transformed_code, globals_dict, locals_dict)
-        callstack = globals_dict['__callstack__']
-        
-        return {
-            "success": True,
-            "callstack": callstack,
-            "error": None
+        # Create a whitelist of safe built-in operations
+        safe_builtins = {
+            # Basic types and operations
+            'len': len,
+            'range': range,
+            'str': str,
+            'int': int,
+            'float': float,
+            'bool': bool,
+            'list': list,
+            'dict': dict,
+            'set': set,
+            'tuple': tuple,
+            
+            # Iteration and sequence operations
+            'enumerate': enumerate,
+            'zip': zip,
+            'filter': filter,
+            'map': map,
+            'sorted': sorted,
+            'iter': iter,
+            'next': next,
+            
+            # Mathematical operations
+            'sum': sum,
+            'min': min,
+            'max': max,
+            'abs': abs,
+            'divmod': divmod,
+            'pow': pow,
+            'round': round,
+            
+            # Type conversion and formatting
+            'ascii': ascii,
+            'bin': bin,
+            'chr': chr,
+            'format': format,
+            'hex': hex,
+            'oct': oct,
+            'ord': ord,
+            'repr': repr,
+            
+            # Boolean operations
+            'all': all,
+            'any': any,
+            
+            # Constants
+            'True': True,
+            'False': False,
+            'None': None,
+            
+            # Output
+            'print': tracked_print
         }
+        
+        # Add safe built-ins to globals
+        globals_dict.update(safe_builtins)
+        
+        # Execute the transformed code
+        exec(transformed_code, globals_dict, locals_dict)
+        
+        # Return the result
+        result = {
+            "success": True,
+            "output": globals_dict['__stdout__'],
+            "callstack": globals_dict['__callstack__'],
+            "error": None,
+            "runtime": int((time.time() - start_time) * 1000),  # Convert to milliseconds
+            "startTimestamp": start_timestamp
+        }
+        return result
     except SyntaxError as e:
+        runtime = int((time.time() - start_time) * 1000)
         return {
             "success": False,
             "callstack": None,
-            "error": f"Syntax error: {str(e)}"
+            "error": f"Syntax error: {str(e)}",
+            "runtime": runtime,
+            "startTimestamp": start_timestamp
         }
     except Exception as e:
-        print(f"Error in safe_exec: {str(e)}")  # Debug print
+        runtime = int((time.time() - start_time) * 1000)
         return {
             "success": False,
             "callstack": None,
-            "error": f"Runtime error: {str(e)}"
+            "error": f"Runtime error: {str(e)}\n{traceback.format_exc()}",
+            "runtime": runtime,
+            "startTimestamp": start_timestamp
         }
 
 if __name__ == "__main__":

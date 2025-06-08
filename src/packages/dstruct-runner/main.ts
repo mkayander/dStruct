@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import cors from "cors";
 import express, { type Request, type Response } from "express";
-import fs from "fs";
 import { spawn } from "node:child_process";
 import path from "path";
 
 import type { CallFrame } from "#/features/callstack/model/callstackSlice";
 
 const PORT = 8085;
-const PYTHON_PATH = path.join(__dirname, "..", "python", "exec.py");
+const PYTHON_DIR = path.join(__dirname, "..", "python");
+const PYTHON_APP_PATH = path.join(PYTHON_DIR, "exec.py");
 
 interface ExecutionResult {
   success: boolean;
@@ -21,7 +21,9 @@ interface ExecutionRequest {
 }
 
 async function execPython(codeInput: string): Promise<ExecutionResult> {
-  const child = spawn(`py`, [PYTHON_PATH]);
+  console.debug("🐍 Executing Python code: ", codeInput);
+
+  const child = spawn(`py`, [PYTHON_APP_PATH], { cwd: PYTHON_DIR });
 
   // Write code to stdin
   child.stdin.write(codeInput);
@@ -58,7 +60,7 @@ async function execPython(codeInput: string): Promise<ExecutionResult> {
 }
 
 async function checkPythonReady(): Promise<{ ready: boolean; error?: string }> {
-  // 1. Check if python is available
+  // Check if python is available
   const pythonCheck = spawn("py", ["--version"]);
   let pythonVersion = "";
   let pythonError = "";
@@ -97,28 +99,6 @@ async function checkPythonReady(): Promise<{ ready: boolean; error?: string }> {
     };
   }
 
-  // 2. Check if exec.py exists
-  if (!fs.existsSync(PYTHON_PATH)) {
-    return { ready: false, error: `Python script not found at ${PYTHON_PATH}` };
-  }
-
-  // 3. Check if array_tracker can be imported
-  const importCheck = spawn("py", ["-c", "import array_tracker"]);
-  let importError = "";
-  for await (const chunk of importCheck.stderr) {
-    importError += chunk.toString();
-  }
-  const importExit = await new Promise<number>((resolve) =>
-    importCheck.on("exit", resolve),
-  );
-  const importErrorStr = importError || "";
-  if (importExit !== 0) {
-    return {
-      ready: false,
-      error: `Python module 'array_tracker' cannot be imported: ${importErrorStr}`,
-    };
-  }
-
   return { ready: true };
 }
 
@@ -135,9 +115,12 @@ app.use(express.json());
 app.post(
   "/python",
   async (req: Request<{}, {}, ExecutionRequest>, res: Response) => {
+    console.debug("🐍 Python request: ", req.body);
+
     // Run readiness check first
     const readyStatus = await checkPythonReady();
     if (!readyStatus.ready) {
+      console.error("❌ Python not ready: ", readyStatus.error);
       res.status(500).json({ error: readyStatus.error });
       return;
     }
@@ -147,6 +130,7 @@ app.post(
       const result = await execPython(data.code);
       res.json(result);
     } catch (error: any) {
+      console.error("❌ Python error: ", error);
       res.status(500).json({
         error: error.message,
       });
