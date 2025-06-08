@@ -212,6 +212,7 @@ export const useNodesRuntimeUpdates = (
           }
           break;
 
+        case "readArrayItem":
         case "blink":
           dispatch(
             slice.actions.triggerAnimation({
@@ -333,6 +334,7 @@ export const useNodesRuntimeUpdates = (
           }
           break;
 
+        case "readArrayItem":
         case "blink":
           dispatch(
             slice.actions.update({

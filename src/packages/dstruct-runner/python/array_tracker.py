@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast
+import time
 from typing import List, Dict, Any, Optional, Union, Tuple, TypedDict, TypeVar, Generic
 import uuid
 from datetime import datetime
@@ -25,7 +25,6 @@ class TrackedList(list, Generic[T]):
         super().__init__(items)
         self._name = name
         self._callstack = callstack
-        self._timestamp_counter = 0
         self._tracking = True
         
         # Add initial list creation to callstack
@@ -38,8 +37,7 @@ class TrackedList(list, Generic[T]):
         )
 
     def _get_timestamp(self) -> int:
-        self._timestamp_counter += 1
-        return self._timestamp_counter
+        return int(time.time() * 1000)
 
     def _add_frame(self, frame_type: str, **kwargs: Any) -> None:
         frame: CallFrame = {
@@ -49,6 +47,7 @@ class TrackedList(list, Generic[T]):
             "structureType": "array",
             "argType": "array",
             "name": frame_type,
+            "nodeId": kwargs.get("nodeId", ""),
             "args": kwargs.get("args", {})
         }
         self._callstack.append(frame)
@@ -59,6 +58,7 @@ class TrackedList(list, Generic[T]):
             "entities": {
                 str(i): {
                     "id": str(i),
+                    "index": i,
                     "value": item
                 }
                 for i, item in enumerate(items)
@@ -72,8 +72,8 @@ class TrackedList(list, Generic[T]):
                 "readArrayItem",
                 args={
                     "index": index,
-                    "nodeId": str(index)
-                }
+                },
+                nodeId=str(index)
             )
         elif isinstance(index, slice):
             self._add_frame(
@@ -82,8 +82,8 @@ class TrackedList(list, Generic[T]):
                     "slice": True,
                     "start": index.start if index.start is not None else 0,
                     "end": index.stop,
-                    "nodeId": "slice"
-                }
+                },
+                nodeId="slice"
             )
             # Return a plain list to avoid recursion issues with TrackedList
             return list(super().__getitem__(index))
@@ -97,8 +97,8 @@ class TrackedList(list, Generic[T]):
                 args={
                     "index": index,
                     "value": value,
-                    "nodeId": str(index)
-                }
+                },
+                nodeId=str(index)
             )
         elif isinstance(index, slice):
             self._add_frame(
@@ -108,8 +108,8 @@ class TrackedList(list, Generic[T]):
                     "start": index.start if index.start is not None else 0,
                     "end": index.stop,
                     "value": value,
-                    "nodeId": "slice"
-                }
+                },
+                nodeId="slice"
             )
             # Avoid recursion: if value is a TrackedList, convert to plain list
             if isinstance(value, TrackedList):
