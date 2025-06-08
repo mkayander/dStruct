@@ -1,149 +1,75 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import shortUUID from "short-uuid";
 
-import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
-import { callstackSlice } from "#/features/callstack/model/callstackSlice";
-import { createRawRuntimeArgs } from "#/features/codeRunner/lib";
+import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import { requestWorkerAction } from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
-import { resetStructuresState } from "#/features/treeViewer/lib";
-import { useAppStore } from "#/store/hooks";
 
+import type { ExecutionResult } from "./useCodeExecution";
 import { useJSWorker } from "./useJSWorker";
 
-const uuid = shortUUID();
+type RunParams = ExecWorkerInterface["run"]["request"];
+type BenchmarkParams = ExecWorkerInterface["benchmark"]["request"];
 
 export const useJSCodeRunner = () => {
-  const dispatch = useDispatch();
-  const store = useAppStore();
   const { worker } = useJSWorker();
 
   const runJSBenchmark = useCallback(
-    async (codeInput: string) => {
-      if (!worker) return;
+    async (
+      codeInput: string,
+      params: BenchmarkParams,
+    ): Promise<ExecutionResult> => {
+      if (!worker) throw new Error("Worker not initialized");
 
-      const state = store.getState();
-      const args = createRawRuntimeArgs(selectCaseArguments(state));
+      const result = await requestWorkerAction(worker, "benchmark", {
+        type: "benchmark",
+        code: codeInput,
+        input: params.input,
+        count: params.count,
+      });
 
-      let startTimestamp = performance.now();
-
-      try {
-        const result = await requestWorkerAction(worker, "benchmark", {
-          type: "benchmark",
-          code: codeInput,
-          input: args,
-          count: 128,
-        });
-        startTimestamp = result.workStartTime;
-        if (result.error) throw result.error;
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: null,
-            result: String(result.output),
-            runtime: result.runtime,
-            benchmarkResults: result,
-            startTimestamp,
-          }),
-        );
-        return result;
-      } catch (e: unknown) {
-        if (e instanceof Error) {
-          dispatch(
-            callstackSlice.actions.addOne({
-              id: uuid.generate(),
-              timestamp: performance.now(),
-              name: "error",
-            }),
-          );
-          dispatch(
-            callstackSlice.actions.setStatus({
-              isReady: true,
-              error: { name: e.name, message: e.message, stack: e.stack },
-              result: null,
-              runtime: performance.now() - startTimestamp,
-              startTimestamp,
-            }),
-          );
-          console.warn(e);
-        } else {
-          console.error("Invalid error type: ", e);
-        }
-
-        throw e;
-      }
+      return {
+        output: result.output || "",
+        callstack: [],
+        runtime: result.runtime,
+        startTimestamp: result.workStartTime,
+        error: result.error
+          ? {
+              name: result.error.name,
+              message: result.error.message,
+              stack: result.error.stack,
+            }
+          : undefined,
+      };
     },
-    [worker, store, dispatch],
+    [worker],
   );
 
   const runJSCode = useCallback(
-    async (codeInput: string) => {
-      if (!worker) return;
+    async (codeInput: string, params: RunParams): Promise<ExecutionResult> => {
+      if (!worker) throw new Error("Worker not initialized");
 
-      const state = store.getState();
-      const caseArgs = selectCaseArguments(state);
-      const arrayStore = state.arrayStructure;
-      const treeStore = state.treeNode;
+      const result = await requestWorkerAction(worker, "run", {
+        type: "run",
+        code: codeInput,
+        caseArgs: params.caseArgs,
+        arrayStore: params.arrayStore,
+        treeStore: params.treeStore,
+      });
 
-      // Before running the code, clear the callstack
-      dispatch(callstackSlice.actions.removeAll());
-      resetStructuresState(dispatch);
-
-      let startTimestamp = performance.now();
-
-      try {
-        const { runtime, output, error, callstack, workStartTime } =
-          await requestWorkerAction(worker, "run", {
-            type: "run",
-            code: codeInput,
-            caseArgs,
-            arrayStore,
-            treeStore,
-          });
-        startTimestamp = workStartTime;
-        if (error) throw error;
-
-        // Identify that the callstack is filled and can now be used
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: null,
-            result: String(output),
-            frames: callstack,
-            runtime,
-            startTimestamp,
-          }),
-        );
-        // Automatically play the callstack
-        dispatch(callstackSlice.actions.setIsPlaying(true));
-      } catch (e: unknown) {
-        const runtime = performance.now() - startTimestamp;
-        if (e instanceof Error) {
-          dispatch(
-            callstackSlice.actions.addOne({
-              id: uuid.generate(),
-              timestamp: performance.now(),
-              name: "error",
-            }),
-          );
-          dispatch(
-            callstackSlice.actions.setStatus({
-              isReady: true,
-              error: { name: e.name, message: e.message, stack: e.stack },
-              result: null,
-              runtime,
-              startTimestamp,
-            }),
-          );
-          console.warn(e);
-        } else {
-          console.error("Invalid error type: ", e);
-        }
-
-        throw e;
-      }
+      return {
+        output: result.output || "",
+        callstack: result.callstack || [],
+        runtime: result.runtime,
+        startTimestamp: result.workStartTime,
+        error: result.error
+          ? {
+              name: result.error.name,
+              message: result.error.message,
+              stack: result.error.stack,
+            }
+          : undefined,
+      };
     },
-    [worker, store, dispatch],
+    [worker],
   );
 
   return { worker, runJSBenchmark, runJSCode };

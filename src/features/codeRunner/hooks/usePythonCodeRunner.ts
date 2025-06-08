@@ -4,11 +4,7 @@ import { useCallback } from "react";
 import { useSearchParam } from "#/shared/hooks";
 import { PYTHON_SUPPORT_MODAL_ID } from "#/shared/ui/organisms/PythonSupportModal";
 
-interface ExecutionResult {
-  success: boolean;
-  callstack?: any[];
-  error?: string;
-}
+import type { ExecutionResult } from "./useCodeExecution";
 
 export const usePythonCodeRunner = () => {
   const [, setModalName] = useSearchParam("modal");
@@ -18,7 +14,7 @@ export const usePythonCodeRunner = () => {
   };
 
   const { mutateAsync: executePythonCode, isLoading } = useMutation({
-    mutationFn: async (codeInput: string) => {
+    mutationFn: async (codeInput: string): Promise<ExecutionResult> => {
       const response = await fetch("http://localhost:8085/python", {
         method: "POST",
         headers: {
@@ -31,11 +27,12 @@ export const usePythonCodeRunner = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = (await response.json()) as ExecutionResult;
-      if (!result.success) {
-        throw new Error(result.error);
+      const result = await response.json();
+      if (!result) {
+        throw new Error("No result returned from Python execution");
       }
-      return result;
+
+      return result as ExecutionResult;
     },
     onError: () => {
       openPythonSupportModal();
@@ -43,7 +40,7 @@ export const usePythonCodeRunner = () => {
   });
 
   const runPythonCode = useCallback(
-    async (codeInput: string) => {
+    async (codeInput: string): Promise<ExecutionResult> => {
       return await executePythonCode(codeInput);
     },
     [executePythonCode],

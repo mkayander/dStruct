@@ -52,9 +52,6 @@ async function execPython(codeInput: string): Promise<ExecutionResult> {
   }
 
   const parsedResult: ExecutionResult = JSON.parse(result);
-  if (!parsedResult.success) {
-    throw new Error(parsedResult.error);
-  }
 
   return parsedResult;
 }

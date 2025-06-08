@@ -26,6 +26,7 @@ class TrackedList(list, Generic[T]):
         self._name = name
         self._callstack = callstack
         self._timestamp_counter = 0
+        self._tracking = True
         
         # Add initial list creation to callstack
         self._add_frame(
@@ -116,7 +117,8 @@ class TrackedList(list, Generic[T]):
         super().__setitem__(index, value)
 
     def __len__(self) -> int:
-        return len(self)
+        # Use super().__len__() to avoid recursion
+        return super().__len__()
 
     def __iter__(self):
         return iter(self)

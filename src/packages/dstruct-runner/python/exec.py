@@ -22,11 +22,11 @@ def safe_exec(code: str) -> ExecutionResult:
         
     Returns:
         A dictionary containing:
-        - success: Boolean indicating if execution was successful
-        - callstack: List of operation frames if successful, None if failed
-        - error: Error message if failed, None if successful
+        - output: String containing the execution output
+        - callstack: List of operation frames
         - runtime: Execution time in milliseconds
         - startTimestamp: When execution started
+        - error: Optional error object with name, message, and stack
     """
     try:
         start_time = time.time()
@@ -35,17 +35,37 @@ def safe_exec(code: str) -> ExecutionResult:
         # Parse the code into an AST
         tree = ast.parse(code)
         
+        # Find the function definition
+        function_def = None
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):
+                function_def = node
+                break
+        
+        if not function_def:
+            raise SyntaxError("Code must contain a function definition")
+            
         # Transform the AST to track function calls
         transformer = ListTrackingTransformer()
         new_tree = transformer.visit(tree)
         ast.fix_missing_locations(new_tree)
         transformed_code = ast.unparse(new_tree)
         
+        # Create wrapper code
+        wrapper_code = f"""
+# Original function definition
+{transformed_code}
+
+# Execute the function and store result
+__result__ = {function_def.name}()
+"""
+        
         # Create separate global and local namespaces
         globals_dict = {
             '__callstack__': [],
             '__stdout__': "",
-            'TrackedList': TrackedList
+            'TrackedList': TrackedList,
+            '__result__': None
         }
         locals_dict = {}
         
@@ -107,36 +127,42 @@ def safe_exec(code: str) -> ExecutionResult:
         # Add safe built-ins to globals
         globals_dict.update(safe_builtins)
         
-        # Execute the transformed code
-        exec(transformed_code, globals_dict, locals_dict)
+        # Execute the wrapper code
+        exec(wrapper_code, globals_dict, locals_dict)
         
         # Return the result
-        result = {
-            "success": True,
+        return {
             "output": globals_dict['__stdout__'],
             "callstack": globals_dict['__callstack__'],
-            "error": None,
-            "runtime": int((time.time() - start_time) * 1000),  # Convert to milliseconds
-            "startTimestamp": start_timestamp
+            "runtime": int((time.time() - start_time) * 1000),
+            "startTimestamp": start_timestamp,
+            "error": None
         }
-        return result
     except SyntaxError as e:
         runtime = int((time.time() - start_time) * 1000)
         return {
-            "success": False,
-            "callstack": None,
-            "error": f"Syntax error: {str(e)}",
+            "output": "",
+            "callstack": [],
             "runtime": runtime,
-            "startTimestamp": start_timestamp
+            "startTimestamp": start_timestamp,
+            "error": {
+                "name": "SyntaxError",
+                "message": str(e),
+                "stack": traceback.format_exc()
+            }
         }
     except Exception as e:
         runtime = int((time.time() - start_time) * 1000)
         return {
-            "success": False,
-            "callstack": None,
-            "error": f"Runtime error: {str(e)}\n{traceback.format_exc()}",
+            "output": "",
+            "callstack": [],
             "runtime": runtime,
-            "startTimestamp": start_timestamp
+            "startTimestamp": start_timestamp,
+            "error": {
+                "name": type(e).__name__,
+                "message": str(e),
+                "stack": traceback.format_exc()
+            }
         }
 
 if __name__ == "__main__":

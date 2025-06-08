@@ -90,6 +90,8 @@ class CallFrame(TypedDict):
     args: Dict[str, Any]
 
 class ExecutionResult(TypedDict):
-    success: bool
-    callstack: Optional[List[Dict[str, Any]]]
-    error: Optional[str] 
+    output: str
+    callstack: List[Dict[str, Any]]
+    runtime: int
+    startTimestamp: int
+    error: Optional[Dict[str, str]] 
