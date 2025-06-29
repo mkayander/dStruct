@@ -1,11 +1,14 @@
 import { spawn } from "child_process";
+import { join } from "path";
 import { z } from "zod";
 
 import { publicProcedure, router } from "../trpc";
 
 function formatPython(code: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const black = spawn("black", ["--quiet", "-"], {
+    // Use black from the virtual environment
+    const blackPath = join(process.cwd(), ".venv", "bin", "black");
+    const black = spawn(blackPath, ["--quiet", "-"], {
       stdio: ["pipe", "pipe", "pipe"],
     });
 

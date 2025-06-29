@@ -1,7 +1,14 @@
 import { exec, execSync } from "child_process";
+import { existsSync, mkdirSync } from "fs";
+import { join } from "path";
 import { promisify } from "util";
 
 const execAsync = promisify(exec);
+
+// Virtual environment path relative to project root
+const VENV_PATH = join(process.cwd(), ".venv");
+const VENV_BIN = join(VENV_PATH, "bin");
+const VENV_PIP = join(VENV_BIN, "pip");
 
 async function checkPython() {
   try {
@@ -17,10 +24,39 @@ async function checkPython() {
   }
 }
 
+async function createVirtualEnvironment() {
+  try {
+    console.log("🔧 Creating virtual environment...");
+
+    // Create .venv directory if it doesn't exist
+    if (!existsSync(VENV_PATH)) {
+      mkdirSync(VENV_PATH, { recursive: true });
+    }
+
+    // Create virtual environment
+    await execAsync(`python3 -m venv ${VENV_PATH}`);
+    console.log("✅ Virtual environment created successfully");
+  } catch (error) {
+    console.error(
+      "❌ Failed to create virtual environment:",
+      error instanceof Error ? error.message : String(error),
+    );
+    process.exit(1);
+  }
+}
+
 async function installBlack() {
   try {
-    await execAsync("pip install black");
+    console.log("📦 Installing Black formatter in virtual environment...");
+
+    // Install black in the virtual environment
+    await execAsync(`${VENV_PIP} install black`);
     console.log("✅ Black formatter installed successfully");
+
+    // Create a symlink or script to make black easily accessible
+    const blackPath = join(VENV_BIN, "black");
+    console.log(`📍 Black is available at: ${blackPath}`);
+    console.log("💡 You can run it with: .venv/bin/black <file>");
   } catch (error) {
     console.error(
       "❌ Failed to install Black formatter:",
@@ -72,7 +108,14 @@ async function main() {
   }
 
   console.log("✅ Python is installed");
-  console.log("📦 Installing Black formatter...");
+
+  // Create virtual environment if it doesn't exist
+  if (!existsSync(VENV_PATH)) {
+    await createVirtualEnvironment();
+  } else {
+    console.log("✅ Virtual environment already exists");
+  }
+
   await installBlack();
 
   console.timeEnd("postinstall");
