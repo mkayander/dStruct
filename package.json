@@ -106,6 +106,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
+    "@eslint/eslintrc": "^3.3.1",
     "@graphql-codegen/add": "^3.2.3",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.9",
