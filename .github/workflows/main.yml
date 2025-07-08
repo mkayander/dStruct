@@ -65,5 +65,11 @@ jobs:
         working-directory: src/packages/dstruct-runner/python
         run: python -m unittest test_array_tracker.py -v
 
+      - name: Build Project
+        run: pnpm build
+
+      - name: ES Guard
+        run: pnpm exec es-guard
+
       - name: Run Semantic Release
         run: npx semantic-release
