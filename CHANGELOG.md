@@ -1,3 +1,12 @@
+# [1.343.0](https://github.com/mkayander/dStruct/compare/v1.342.0...v1.343.0) (2025-07-08)
+
+
+### Features
+
+* add Python virtual environment setup and integration ([3d52c1b](https://github.com/mkayander/dStruct/commit/3d52c1bdd1c848eb5a4f37d4272c9492128e78b5))
+* add readArrayItem frame for enhanced callstack tracking ([19fafad](https://github.com/mkayander/dStruct/commit/19fafad32aaf10c3564b7a355e4470dbb5d39bd4))
+* implement list tracking transformer for enhanced array management ([2d78fa3](https://github.com/mkayander/dStruct/commit/2d78fa38c97603b37edc088f281af76cb4255980))
+
 # [1.342.0](https://github.com/mkayander/dStruct/compare/v1.341.1...v1.342.0) (2025-05-28)
 
 
