@@ -10,6 +10,7 @@ void (
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  productionBrowserSourceMaps: true,
   transpilePackages: ["@mui/x-charts"],
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
