@@ -143,6 +143,7 @@
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
+    "es-guard": "^1.5.0",
     "esbuild": "^0.25.5",
     "eslint": "^9.30.0",
     "eslint-config-next": "15.3.4",
