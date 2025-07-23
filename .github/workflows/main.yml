@@ -7,6 +7,7 @@ env:
   GITHUB_TOKEN: ${{ github.token }}
   HUSKY: 0
   SKIP_ENV_VALIDATION: true
+  PRISMA_FIELD_ENCRYPTION_KEY: ${{ secrets.PRISMA_FIELD_ENCRYPTION_KEY }}
 
 on:
   push:
