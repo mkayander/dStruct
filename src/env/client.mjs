@@ -1,7 +1,8 @@
 // @ts-check
 import { clientEnv, clientSchema } from "./schema.mjs";
 
-const _clientEnv = clientSchema.safeParse(clientEnv);
+/** @type {typeof clientEnv} */
+let validatedEnv = clientEnv;
 
 export const formatErrors = (
   /** @type {import('zod').ZodFormattedError<Map<string,string>,string>} */
@@ -14,22 +15,28 @@ export const formatErrors = (
     })
     .filter(Boolean);
 
-if (!_clientEnv.success) {
-  console.error(
-    "❌ Invalid environment variables:\n",
-    ...formatErrors(_clientEnv.error.format()),
-  );
-  throw new Error("Invalid environment variables");
-}
+if (!process.env.SKIP_ENV_VALIDATION) {
+  const _clientEnv = clientSchema.safeParse(clientEnv);
 
-for (let key of Object.keys(_clientEnv.data)) {
-  if (!key.startsWith("NEXT_PUBLIC_")) {
-    console.warn(
-      `❌ Invalid public environment variable name: ${key}. It must begin with 'NEXT_PUBLIC_'`,
+  if (!_clientEnv.success) {
+    console.error(
+      "❌ Invalid environment variables:\n",
+      ...formatErrors(_clientEnv.error.format()),
+      "\nSet SKIP_ENV_VALIDATION=1 to bypass this check (not recommended for production).",
     );
-
-    throw new Error("Invalid public environment variable name");
+    throw new Error("Invalid environment variables");
   }
+
+  for (let key of Object.keys(_clientEnv.data)) {
+    if (!key.startsWith("NEXT_PUBLIC_")) {
+      console.warn(
+        `❌ Invalid public environment variable name: ${key}. It must begin with 'NEXT_PUBLIC_'`,
+      );
+      throw new Error("Invalid public environment variable name");
+    }
+  }
+
+  validatedEnv = _clientEnv.data;
 }
 
-export const env = _clientEnv.data;
+export const env = validatedEnv;
