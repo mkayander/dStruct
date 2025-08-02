@@ -32,13 +32,11 @@ const config = {
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
-  experimental: {
-    turbo: {
-      rules: {
-        "*.txt": {
-          loaders: ["raw-loader"],
-          as: "*.js",
-        },
+  turbopack: {
+    rules: {
+      "*.txt": {
+        loaders: ["raw-loader"],
+        as: "*.js",
       },
     },
   },
@@ -57,4 +55,5 @@ const config = {
     };
   },
 };
+
 export default config;
