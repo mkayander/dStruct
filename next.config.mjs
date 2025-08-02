@@ -11,7 +11,18 @@ void (
 const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
-  transpilePackages: ["@mui/x-charts"],
+  transpilePackages: [
+    "@mui/x-charts",
+    "three",
+    "@mui/material",
+    "@mui/system",
+    "zod",
+    "superjson",
+    "@hello-pangea/dnd",
+    "postcss",
+    "@monaco-editor/react",
+    "prettier",
+  ],
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
     defaultLocale: "en",
