@@ -22,6 +22,7 @@ const config = {
     "postcss",
     "@monaco-editor/react",
     "prettier",
+    "@tanstack/query-core",
   ],
   i18n: {
     locales: ["en", "ru", "de", "es", "sr", "uk"],
