@@ -313,8 +313,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       es-guard:
-        specifier: ^1.5.0
-        version: 1.5.0(jiti@2.4.2)
+        specifier: ^1.8.0
+        version: 1.8.0(jiti@2.4.2)
       esbuild:
         specifier: ^0.25.5
         version: 0.25.5
@@ -4760,8 +4760,8 @@ packages:
   es-get-iterator@1.1.3:
     resolution: {integrity: sha512-sPZmqHBe6JIiTfN5q2pEi//TwxmAFHwj/XEuYjTuse78i8KxaqMTTzxPoFKuzRpDpTJ+0NAbpfenkmH2rePtuw==}
 
-  es-guard@1.5.0:
-    resolution: {integrity: sha512-INYqTyZUrAHcJ9nhxZj6mdM+jG0O8jjaK8qCGH1DaxPNdWLoXfbTEdko/PTf2QzdKCD0rzQyPsTugni0IJwsow==}
+  es-guard@1.8.0:
+    resolution: {integrity: sha512-Ji3vw3fGQvNTprKpAcfeVSIIbpwAUmmR2DlL/VP5GBpBJ5/gS5ncrpGgcTUeoEMXHkqDTVdSjFh2CQV2pfnGVQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -9121,13 +9121,13 @@ snapshots:
 
   '@babel/highlight@7.23.4':
     dependencies:
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
       chalk: 2.4.2
       js-tokens: 4.0.0
 
   '@babel/highlight@7.24.7':
     dependencies:
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.1.1
@@ -9513,7 +9513,7 @@ snapshots:
   '@babel/types@7.23.6':
     dependencies:
       '@babel/helper-string-parser': 7.23.4
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
       to-fast-properties: 2.0.0
 
   '@babel/types@7.25.2':
@@ -9525,7 +9525,7 @@ snapshots:
   '@babel/types@7.26.0':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
 
   '@babel/types@7.26.10':
     dependencies:
@@ -13508,7 +13508,6 @@ snapshots:
   debug@4.4.1:
     dependencies:
       ms: 2.1.3
-    optional: true
 
   decamelize@1.2.0: {}
 
@@ -13786,7 +13785,7 @@ snapshots:
       isarray: 2.0.5
       stop-iteration-iterator: 1.0.0
 
-  es-guard@1.5.0(jiti@2.4.2):
+  es-guard@1.8.0(jiti@2.4.2):
     dependencies:
       '@actions/core': 1.11.1
       '@babel/code-frame': 7.27.1
@@ -13944,7 +13943,7 @@ snapshots:
     dependencies:
       '@mdn/browser-compat-data': 5.7.6
       ast-metadata-inferer: 0.8.1
-      browserslist: 4.24.4
+      browserslist: 4.25.1
       caniuse-lite: 1.0.30001731
       eslint: 9.31.0(jiti@2.4.2)
       find-up: 5.0.0
@@ -14106,12 +14105,12 @@ snapshots:
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.2
-      '@types/estree': 1.0.7
+      '@types/estree': 1.0.8
       '@types/json-schema': 7.0.15
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.4.0(supports-color@5.5.0)
+      debug: 4.4.1
       escape-string-regexp: 4.0.0
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
@@ -16389,14 +16388,14 @@ snapshots:
 
   parse-json@5.2.0:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
 
   parse-json@7.1.1:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       error-ex: 1.3.2
       json-parse-even-better-errors: 3.0.1
       lines-and-columns: 2.0.4
@@ -16404,7 +16403,7 @@ snapshots:
 
   parse-json@8.1.0:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       index-to-position: 0.1.2
       type-fest: 4.10.2
 

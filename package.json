@@ -143,7 +143,7 @@
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
-    "es-guard": "^1.5.0",
+    "es-guard": "^1.8.0",
     "esbuild": "^0.25.5",
     "eslint": "^9.30.0",
     "eslint-config-next": "15.3.4",
@@ -186,5 +186,12 @@
   "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184",
   "engines": {
     "node": "^v22.17.0"
-  }
+  },
+  "browserslist": [
+    "chrome 64",
+    "edge 79",
+    "firefox 67",
+    "opera 51",
+    "safari 12"
+  ]
 }
