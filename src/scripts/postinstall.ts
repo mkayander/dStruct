@@ -5,10 +5,13 @@ import { promisify } from "util";
 
 const execAsync = promisify(exec);
 
-// Virtual environment path relative to project root
+// Detect OS for virtual environment paths
+const isWindows = process.platform === "win32";
 const VENV_PATH = join(process.cwd(), ".venv");
-const VENV_BIN = join(VENV_PATH, "bin");
-const VENV_PIP = join(VENV_BIN, "pip");
+const VENV_BIN = isWindows
+  ? join(VENV_PATH, "Scripts")
+  : join(VENV_PATH, "bin");
+const VENV_PIP = join(VENV_BIN, isWindows ? "pip.exe" : "pip");
 
 async function checkPython() {
   try {
@@ -33,8 +36,9 @@ async function createVirtualEnvironment() {
       mkdirSync(VENV_PATH, { recursive: true });
     }
 
-    // Create virtual environment
-    await execAsync(`python3 -m venv ${VENV_PATH}`);
+    // Create virtual environment - use python on Windows, python3 on Unix
+    const pythonCommand = isWindows ? "python" : "python3";
+    await execAsync(`${pythonCommand} -m venv ${VENV_PATH}`);
     console.log("✅ Virtual environment created successfully");
   } catch (error) {
     console.error(
@@ -54,9 +58,12 @@ async function installBlack() {
     console.log("✅ Black formatter installed successfully");
 
     // Create a symlink or script to make black easily accessible
-    const blackPath = join(VENV_BIN, "black");
+    const blackPath = join(VENV_BIN, isWindows ? "black.exe" : "black");
     console.log(`📍 Black is available at: ${blackPath}`);
-    console.log("💡 You can run it with: .venv/bin/black <file>");
+    const runCommand = isWindows
+      ? ".venv\\Scripts\\black.exe"
+      : ".venv/bin/black";
+    console.log(`💡 You can run it with: ${runCommand} <file>`);
   } catch (error) {
     console.error(
       "❌ Failed to install Black formatter:",
