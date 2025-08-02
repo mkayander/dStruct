@@ -177,6 +177,7 @@
       "@prisma/client",
       "@prisma/engines",
       "@vercel/speed-insights",
+      "aws-sdk",
       "esbuild",
       "prisma",
       "sharp"
