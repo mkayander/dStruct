@@ -1,14 +1,14 @@
 import shortUUID from "short-uuid";
 
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 const uuid = shortUUID();
 
 (async () => {
-  const projects = await prisma.playgroundProject.findMany();
-  await prisma.$transaction(
+  const projects = await db.playgroundProject.findMany();
+  await db.$transaction(
     projects.map((item) =>
-      prisma.playgroundProject.update({
+      db.playgroundProject.update({
         where: { id: item.id },
         data: {
           slug: `project-${uuid.generate()}`,
@@ -17,10 +17,10 @@ const uuid = shortUUID();
     ),
   );
 
-  const cases = await prisma.playgroundTestCase.findMany();
-  await prisma.$transaction(
+  const cases = await db.playgroundTestCase.findMany();
+  await db.$transaction(
     cases.map((item) =>
-      prisma.playgroundTestCase.update({
+      db.playgroundTestCase.update({
         where: { id: item.id },
         data: {
           slug: `case-${uuid.generate()}`,
@@ -29,10 +29,10 @@ const uuid = shortUUID();
     ),
   );
 
-  const solutions = await prisma.playgroundSolution.findMany();
-  await prisma.$transaction(
+  const solutions = await db.playgroundSolution.findMany();
+  await db.$transaction(
     solutions.map((item) =>
-      prisma.playgroundSolution.update({
+      db.playgroundSolution.update({
         where: { id: item.id },
         data: {
           slug: `solution-${uuid.generate()}`,

@@ -9,10 +9,10 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { selectProjectId } from "#/features/project/model/projectSlice";
+import { api } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
-import { trpc } from "#/shared/lib";
 import { EditFormModal } from "#/shared/ui/organisms/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 
@@ -71,12 +71,12 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     void trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
-  const currentSolution = trpc.project.getSolutionBySlug.useQuery(
+  const currentSolution = api.project.getSolutionBySlug.useQuery(
     { projectId: currentProjectId, slug: solutionSlug },
     { enabled: Boolean(currentProjectId && solutionSlug) },
   );
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = api.useUtils();
 
   const formik = useFormik({
     initialValues: {
@@ -119,7 +119,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     },
   });
 
-  const editSolution = trpc.project.updateSolution.useMutation({
+  const editSolution = api.project.updateSolution.useMutation({
     onSuccess: (data) => {
       invalidateQueries();
       void setSolution(data.slug);
@@ -136,7 +136,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       );
     },
   });
-  const deleteSolution = trpc.project.deleteSolution.useMutation({
+  const deleteSolution = api.project.deleteSolution.useMutation({
     onSuccess: (data) => {
       void setSolution("");
       invalidateQueries();
@@ -196,7 +196,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
       formik={formik}
       title={`🚀 ${LL.EDIT_SOLUTION()}`}
       summary="Edit the details of your solution"
-      isDeleting={deleteSolution.isLoading}
+      isDeleting={deleteSolution.isPending}
       onClose={onClose}
       onDelete={handleSolutionDelete}
       fullWidth

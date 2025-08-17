@@ -1,12 +1,12 @@
 import { argumentObjectValidator } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 (async () => {
-  const cases = await prisma.playgroundTestCase.findMany();
-  await prisma.$transaction(
+  const cases = await db.playgroundTestCase.findMany();
+  await db.$transaction(
     cases.map((item) =>
-      prisma.playgroundTestCase.update({
+      db.playgroundTestCase.update({
         where: { id: item.id },
         data: {
           args: {

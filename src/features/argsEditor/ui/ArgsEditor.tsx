@@ -1,6 +1,6 @@
 "use client";
 
-import { type OnDragEndResponder } from "@hello-pangea/dnd";
+import type { OnDragEndResponder } from "@hello-pangea/dnd";
 import { DeleteForever, DragIndicator } from "@mui/icons-material";
 import {
   Box,
@@ -10,7 +10,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { type UseQueryResult } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import shortUUID from "short-uuid";
@@ -33,16 +32,18 @@ import { DraggableArgsList } from "#/features/argsEditor/ui/DraggableArgsList";
 import { DraggableItem } from "#/features/argsEditor/ui/DraggableItem";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
+import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import { api } from "#/shared/api";
+import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
-import { type RouterOutputs, trpc } from "#/shared/lib/trpc";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 const uuid = shortUUID();
 
 type ArgsEditorProps = {
-  selectedCase: UseQueryResult<RouterOutputs["project"]["getCaseBySlug"]>;
+  selectedCase: UseTRPCQueryResult<RouterOutputs["project"]["getCaseBySlug"]>;
 };
 
 export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
@@ -55,9 +56,9 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = api.useUtils();
 
-  const updateCase = trpc.project.updateCase.useMutation();
+  const updateCase = api.project.updateCase.useMutation();
 
   useEffect(() => {
     if (
@@ -92,6 +93,8 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     let isCancelled = false;
     const timeoutId = setTimeout(async () => {
       try {
+        if (!selectedCase.data) return; // Additional safety check
+
         const data = await updateCase.mutateAsync({
           projectId: selectedCase.data.projectId,
           caseId: selectedCase.data.id,
@@ -154,7 +157,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
     );
   };
 
-  const isLoading = selectedCase.isLoading || updateCase.isLoading;
+  const isLoading = selectedCase.isLoading || updateCase.isPending;
 
   return (
     <Box>

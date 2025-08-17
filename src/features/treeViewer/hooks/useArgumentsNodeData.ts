@@ -5,7 +5,7 @@ import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { caseSlice } from "#/entities/argument/model/caseSlice";
 import type { TreeArgumentData } from "#/entities/argument/model/types";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
-import { trpc } from "#/shared/lib/trpc";
+import { api } from "#/shared/api";
 import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 import { type RootState } from "#/store/makeStore";
 
@@ -28,11 +28,11 @@ function* iterateGraphStructures(state: RootState) {
 export const useArgumentsNodeData = () => {
   const store = useAppStore();
   const dispatch = useAppDispatch();
+  const trpcUtils = api.useUtils();
   const { enqueueSnackbar } = useSnackbar();
   const isEditable = useAppSelector(selectIsEditable);
 
-  const trpcUtils = trpc.useUtils();
-  const updateCase = trpc.project.updateCase.useMutation({
+  const updateCase = api.project.updateCase.useMutation({
     onSuccess: (data) => {
       trpcUtils.project.getCaseBySlug.setData(
         { projectId: data.projectId, slug: data.slug },

@@ -1,20 +1,20 @@
 import { z } from "zod";
 
 import {
+  createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-  router,
-} from "#/server/trpc/trpc";
+} from "#/server/api/trpc";
 
-export const userRouter = router({
+export const userRouter = createTRPCRouter({
   all: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.user.findMany();
+    return await ctx.db.user.findMany();
   }),
 
   getById: publicProcedure
-    .input(z.ostring())
+    .input(z.string())
     .query(async ({ input: id, ctx }) => {
-      return ctx.prisma.user.findFirstOrThrow({
+      return ctx.db.user.findFirstOrThrow({
         where: { id },
       });
     }),
@@ -22,11 +22,11 @@ export const userRouter = router({
   setBucketImage: protectedProcedure
     .input(
       z.object({
-        imageName: z.ostring(),
+        imageName: z.string().optional(),
       }),
     )
     .mutation(async ({ input: { imageName }, ctx }) => {
-      return ctx.prisma.user.update({
+      return ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
           bucketImage: imageName ?? null,
@@ -37,7 +37,7 @@ export const userRouter = router({
   setLightMode: protectedProcedure
     .input(z.boolean())
     .mutation(({ input, ctx }) =>
-      ctx.prisma.user.update({
+      ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
           usesLightMode: input,

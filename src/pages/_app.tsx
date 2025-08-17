@@ -10,7 +10,7 @@ import React from "react";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { TooltipProvider } from "#/shadcn/ui/tooltip";
-import { trpc } from "#/shared/lib";
+import { api } from "#/shared/api";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
@@ -60,4 +60,4 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
   );
 };
 
-export default trpc.withTRPC(MyApp);
+export default api.withTRPC(MyApp);

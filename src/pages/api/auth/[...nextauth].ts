@@ -6,7 +6,7 @@ import GHProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "#/env/server.mjs";
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma as any), // TODO: Remove `as any` when @next-auth/prisma-adapter fixes types
+  adapter: PrismaAdapter(db as any), // TODO: Remove `as any` when @next-auth/prisma-adapter fixes types
   providers: [
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,

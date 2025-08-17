@@ -1,19 +1,19 @@
 "use client";
 
-import { type OnDragEndResponder } from "@hello-pangea/dnd";
-import { type StackProps } from "@mui/material";
+import type { OnDragEndResponder } from "@hello-pangea/dnd";
+import type { StackProps } from "@mui/material";
 import type { PlaygroundTestCase } from "@prisma/client";
-import type { UseQueryResult } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/features/selectBar/ui/SelectBarChip";
+import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import { api } from "#/shared/api";
+import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
-import type { RouterOutputs } from "#/shared/lib/trpc";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import { CaseModal } from "./CaseModal";
@@ -24,7 +24,7 @@ type TestCaseBrief = Pick<
 >;
 
 type TestCaseSelectBarProps = StackProps & {
-  selectedProject: UseQueryResult<RouterOutputs["project"]["getBySlug"]>;
+  selectedProject: UseTRPCQueryResult<RouterOutputs["project"]["getBySlug"]>;
 };
 
 export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
@@ -48,7 +48,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     });
   };
 
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = api.useUtils();
 
   const updateCasesCache = (cases: TestCaseBrief[]) => {
     trpcUtils.project.getBySlug.setData(projectSlug, (prevData) => {
@@ -61,7 +61,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     });
   };
 
-  const addCase = trpc.project.addCase.useMutation({
+  const addCase = api.project.addCase.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
       void setCase(data.slug);
@@ -72,13 +72,13 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     },
   });
 
-  const reorderCases = trpc.project.reorderCases.useMutation({
+  const reorderCases = api.project.reorderCases.useMutation({
     onSuccess: async (data) => {
       updateCasesCache(data);
     },
   });
 
-  const deleteCase = trpc.project.deleteCase.useMutation({
+  const deleteCase = api.project.deleteCase.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
 
@@ -91,7 +91,7 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   const cases = selectedProject.data?.cases;
 
   const isLoading =
-    selectedProject.isLoading || addCase.isLoading || deleteCase.isLoading;
+    selectedProject.isLoading || addCase.isPending || deleteCase.isPending;
 
   const isEditable = useAppSelector(selectIsEditable);
 

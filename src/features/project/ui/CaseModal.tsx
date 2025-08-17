@@ -8,9 +8,8 @@ import slugify from "slugify";
 import * as yup from "yup";
 
 import { selectProjectId } from "#/features/project/model/projectSlice";
-import { usePlaygroundSlugs } from "#/shared/hooks";
-import { useI18nContext } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
+import { api } from "#/shared/api";
+import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
 import { EditFormModal } from "#/shared/ui/organisms/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 
@@ -45,12 +44,12 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     await trpcUtils.project.getBySlug.invalidate(projectSlug);
   };
 
-  const currentCase = trpc.project.getCaseBySlug.useQuery(
+  const currentCase = api.project.getCaseBySlug.useQuery(
     { projectId: currentProjectId, slug: caseSlug },
     { enabled: Boolean(currentProjectId && caseSlug) },
   );
 
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = api.useUtils();
 
   const formik = useFormik({
     initialValues: {
@@ -90,7 +89,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
     },
   });
 
-  const editCase = trpc.project.updateCase.useMutation({
+  const editCase = api.project.updateCase.useMutation({
     onSuccess: (data) => {
       void invalidateQueries();
 
@@ -102,7 +101,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       );
     },
   });
-  const deleteCase = trpc.project.deleteCase.useMutation({
+  const deleteCase = api.project.deleteCase.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries();
       void setCase("");
@@ -161,7 +160,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ onClose, ...props }) => {
       formik={formik}
       title={`🧪 ${LL.EDIT_TEST_CASE()}`}
       summary={LL.EDIT_TEST_CASE_SUMMARY()}
-      isDeleting={deleteCase.isLoading}
+      isDeleting={deleteCase.isPending}
       onClose={onClose}
       onDelete={handleCaseDelete}
       fullWidth

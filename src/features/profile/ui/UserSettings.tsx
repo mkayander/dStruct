@@ -16,8 +16,8 @@ import {
   useGetUserProfileLazyQuery,
   useGlobalDataLazyQuery,
 } from "#/graphql/generated";
+import { api } from "#/shared/api";
 import { useI18nContext } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
 import { DataSection } from "#/shared/ui/templates/DataSection";
 
 export const UserSettings: React.FC = () => {
@@ -34,18 +34,18 @@ export const UserSettings: React.FC = () => {
     data: user,
     isLoading,
     refetch,
-  } = trpc.user.getById.useQuery(userId, {
+  } = api.user.getById.useQuery(userId ?? "", {
     enabled: Boolean(userId),
   });
 
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = api.useUtils();
 
-  const linkUser = trpc.leetcode.linkUser.useMutation();
-  const unlinkUser = trpc.leetcode.unlinkUser.useMutation();
+  const linkUser = api.leetcode.linkUser.useMutation();
+  const unlinkUser = api.leetcode.unlinkUser.useMutation();
 
   const loading = Boolean(
     userId &&
-      (gqlLoading || linkUser.isLoading || unlinkUser.isLoading || isLoading),
+      (gqlLoading || linkUser.isPending || unlinkUser.isPending || isLoading),
   );
 
   const handleLinkedUserReset = async () => {
@@ -123,7 +123,7 @@ export const UserSettings: React.FC = () => {
             <Typography>{LL.YOUR_LEETCODE_ACCOUNT_NAME()}</Typography>
             <Typography>{user.leetCodeUsername}</Typography>
             <Button
-              disabled={unlinkUser.isLoading}
+              disabled={unlinkUser.isPending}
               color="error"
               variant="outlined"
               onClick={handleLinkedUserReset}

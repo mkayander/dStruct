@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import { promises as fs } from "fs";
 import * as process from "process";
 
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 import PlaygroundTestCaseCreateInput = Prisma.PlaygroundTestCaseCreateInput;
 
@@ -37,7 +37,7 @@ if (!dumpPath) {
     let attachUser = false;
     if (userId) {
       if (!availableUsers.has(userId)) {
-        const user = await prisma.user.findUnique({
+        const user = await db.user.findUnique({
           where: {
             id: userId,
           },
@@ -48,7 +48,7 @@ if (!dumpPath) {
     }
 
     try {
-      await prisma.playgroundProject.upsert({
+      await db.playgroundProject.upsert({
         where: {
           id: project.id,
         },
@@ -74,7 +74,7 @@ if (!dumpPath) {
   for (const testCase of Object.values(data.testCases)) {
     console.log(testCase.id, testCase.title);
     try {
-      await prisma.playgroundTestCase.upsert({
+      await db.playgroundTestCase.upsert({
         where: {
           id: testCase.id,
         },
@@ -95,7 +95,7 @@ if (!dumpPath) {
   for (const solution of Object.values(data.solutions)) {
     console.log(solution.id, solution.title);
     try {
-      await prisma.playgroundSolution.upsert({
+      await db.playgroundSolution.upsert({
         where: {
           id: solution.id,
         },

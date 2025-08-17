@@ -1,7 +1,7 @@
 import type { PlaygroundProject } from "@prisma/client";
 import type { GetServerSideProps } from "next";
 
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 function generateSiteMap(projects: Partial<PlaygroundProject>[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -32,7 +32,7 @@ function SiteMap() {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // We make an API call to gather the URLs for our site
-  const projects = await prisma.playgroundProject.findMany({
+  const projects = await db.playgroundProject.findMany({
     select: {
       slug: true,
     },

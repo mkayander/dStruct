@@ -16,7 +16,7 @@ import { ProjectSelect } from "#/features/project/ui/ProjectSelect";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
+import { api } from "#/shared/lib";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { ProblemLinkButton } from "#/shared/ui/atoms/ProblemLinkButton";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
@@ -44,11 +44,11 @@ export const ProjectPanel: React.FC = () => {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isModalEditMode, setIsModalEditMode] = useState(false);
 
-  const allBrief = trpc.project.allBrief.useQuery();
+  const allBrief = api.project.allBrief.useQuery();
 
   const isEditable = useAppSelector(selectIsEditable);
 
-  const selectedProject = trpc.project.getBySlug.useQuery(projectSlug, {
+  const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
     retry(failureCount, error) {
       if (error instanceof TRPCClientError && error.data.code === "NOT_FOUND") {
@@ -57,15 +57,21 @@ export const ProjectPanel: React.FC = () => {
 
       return failureCount < 4;
     },
-    onSuccess: (data) => {
-      dispatch(projectSlice.actions.changeProjectId(data.id));
-    },
-    onError: () => {
-      dispatch(projectSlice.actions.loadFinish());
-    },
   });
 
-  const selectedCase = trpc.project.getCaseBySlug.useQuery(
+  useEffect(() => {
+    if (selectedProject.data) {
+      dispatch(projectSlice.actions.changeProjectId(selectedProject.data.id));
+    }
+  }, [selectedProject.data, dispatch]);
+
+  useEffect(() => {
+    if (selectedProject.error) {
+      dispatch(projectSlice.actions.loadFinish());
+    }
+  }, [selectedProject.error, dispatch]);
+
+  const selectedCase = api.project.getCaseBySlug.useQuery(
     { projectId: selectedProject.data?.id || "", slug: caseSlug },
     { enabled: Boolean(selectedProject.data?.id && caseSlug) },
   );

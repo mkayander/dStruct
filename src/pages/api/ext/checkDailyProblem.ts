@@ -7,7 +7,7 @@ import type {
   GetUserProfileQueryVariables,
 } from "#/graphql/generated";
 import { GetUserProfileDocument } from "#/graphql/generated";
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 const checkDailyProblem = async (req: NextApiRequest, res: NextApiResponse) => {
   // const { extToken } = req.cookies;
@@ -18,7 +18,7 @@ const checkDailyProblem = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const leetCodeUser = await prisma.leetCodeUser.findFirstOrThrow({
+  const leetCodeUser = await db.leetCodeUser.findFirstOrThrow({
     where: {
       user: {
         name: body.username,

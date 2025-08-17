@@ -8,7 +8,7 @@ const isProduction = env.NODE_ENV === "production";
 
 declare global {
   // eslint-disable-next-line no-var
-  var prisma: ReturnType<typeof makeClient> | undefined;
+  var db: ReturnType<typeof makeClient> | undefined;
 }
 
 const makeClient = () => {
@@ -21,12 +21,12 @@ const makeClient = () => {
   return client.$extends(withAccelerate());
 };
 
-const prisma = global.prisma || makeClient();
+const db = global.db || makeClient();
 
 if (!isProduction) {
-  global.prisma = prisma;
+  global.db = db;
 }
 
-export { prisma };
+export { db };
 
-export type AppPrismaClient = typeof prisma;
+export type AppPrismaClient = typeof db;

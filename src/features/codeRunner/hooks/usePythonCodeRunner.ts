@@ -13,7 +13,7 @@ export const usePythonCodeRunner = () => {
     setModalName(PYTHON_SUPPORT_MODAL_ID);
   };
 
-  const { mutateAsync: executePythonCode, isLoading } = useMutation({
+  const { mutateAsync: executePythonCode, isPending } = useMutation({
     mutationFn: async (codeInput: string): Promise<ExecutionResult> => {
       const response = await fetch("http://localhost:8085/python", {
         method: "POST",
@@ -46,5 +46,5 @@ export const usePythonCodeRunner = () => {
     [executePythonCode],
   );
 
-  return { runPythonCode, isProcessing: isLoading };
+  return { runPythonCode, isProcessing: isPending };
 };

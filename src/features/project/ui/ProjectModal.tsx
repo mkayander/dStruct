@@ -36,9 +36,8 @@ import { getDifficultyValue } from "#/entities/difficulty/lib/getDifficultyValue
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
-import { usePlaygroundSlugs } from "#/shared/hooks";
-import { usePrevious } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
+import { api } from "#/shared/api";
+import { usePlaygroundSlugs, usePrevious } from "#/shared/hooks";
 import { useAppDispatch } from "#/store/hooks";
 
 const categoriesList = Object.values(ProjectCategory);
@@ -96,10 +95,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const prevEditMode = usePrevious(isEditMode);
 
-  const createProject = trpc.project.create.useMutation();
-  const editProject = trpc.project.update.useMutation();
-  const deleteProject = trpc.project.delete.useMutation();
-  const trpcUtils = trpc.useContext();
+  const createProject = api.project.create.useMutation();
+  const editProject = api.project.update.useMutation();
+  const deleteProject = api.project.delete.useMutation();
+  const trpcUtils = api.useUtils();
 
   const { setProject, clearSlugs } = usePlaygroundSlugs();
 
@@ -466,7 +465,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               title="Delete this project"
               color="error"
               endIcon={<DeleteForever />}
-              loading={deleteProject.isLoading}
+              loading={deleteProject.isPending}
               loadingPosition="end"
               onClick={handleDeleteProject}
               sx={{ mr: "auto" }}

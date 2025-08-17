@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { protectedProcedure, router } from "#/server/trpc/trpc";
+import { createTRPCRouter, protectedProcedure } from "#/server/api/trpc";
 
-export const leetcodeRouter = router({
+export const leetcodeRouter = createTRPCRouter({
   linkUser: protectedProcedure
     .input(
       z.object({
@@ -11,10 +11,9 @@ export const leetcodeRouter = router({
         token: z.string(),
       }),
     )
-
     .mutation(async ({ input, ctx }) => {
       const { username, userAvatar, token } = input;
-      return await ctx.prisma.user.update({
+      return await ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
           leetCode: {
@@ -29,7 +28,7 @@ export const leetcodeRouter = router({
     }),
 
   unlinkUser: protectedProcedure.mutation(async ({ ctx }) => {
-    return await ctx.prisma.user.update({
+    return await ctx.db.user.update({
       where: { id: ctx.session.user.id },
       data: {
         leetCode: {
@@ -40,7 +39,7 @@ export const leetcodeRouter = router({
   }),
 
   getProfile: protectedProcedure.query(async ({ ctx }) => {
-    const user = await ctx.prisma.user.findUnique({
+    const user = await ctx.db.user.findUnique({
       where: { id: ctx.session.user.id },
       select: {
         leetCode: true,

@@ -15,12 +15,12 @@ import {
   getDefaultCodeSnippets,
   getMergedCodeContent,
 } from "#/features/codeRunner/lib/getDefaultCodeSnippets";
-import { type AppPrismaClient } from "#/server/db/client";
 import {
+  createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-  router,
-} from "#/server/trpc/trpc";
+} from "#/server/api/trpc";
+import type { AppPrismaClient } from "#/server/db/client";
 import { uuid } from "#/shared/lib";
 
 const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
@@ -60,13 +60,13 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   }
 };
 
-const getCaseIndex = async (projectId: string, prisma: AppPrismaClient) => {
+const getCaseIndex = async (projectId: string, db: AppPrismaClient) => {
   let caseIndex = await getNextEntityIndex(projectId, "case");
   let caseSlug = getEntitySlug("case", caseIndex);
   let didSkip = false;
 
   while (
-    await prisma.playgroundTestCase.findUnique({
+    await db.playgroundTestCase.findUnique({
       where: {
         projectId_slug: {
           projectId,
@@ -87,13 +87,13 @@ const getCaseIndex = async (projectId: string, prisma: AppPrismaClient) => {
   return { caseIndex, caseSlug };
 };
 
-const getSolutionIndex = async (projectId: string, prisma: AppPrismaClient) => {
+const getSolutionIndex = async (projectId: string, db: AppPrismaClient) => {
   let solutionIndex = await getNextEntityIndex(projectId, "solution");
   let solutionSlug = getEntitySlug("solution", solutionIndex);
   let didSkip = false;
 
   while (
-    await prisma.playgroundSolution.findUnique({
+    await db.playgroundSolution.findUnique({
       where: {
         projectId_slug: {
           projectId,
@@ -115,16 +115,15 @@ const getSolutionIndex = async (projectId: string, prisma: AppPrismaClient) => {
 };
 
 const projectOwnerProcedure = protectedProcedure.use(
-  async ({ ctx, rawInput, next }) => {
-    const projectId: string | undefined =
-      typeof rawInput === "object" && (rawInput as any).projectId;
+  async ({ ctx, input, next }) => {
+    const projectId: string | undefined = (input as any)?.projectId;
     if (!projectId)
       throw new TRPCError({
         code: "BAD_REQUEST",
         message: "Missing projectId",
       });
 
-    const project = await ctx.prisma.playgroundProject.findUniqueOrThrow({
+    const project = await ctx.db.playgroundProject.findUniqueOrThrow({
       where: {
         id: projectId,
       },
@@ -147,11 +146,11 @@ const projectOwnerProcedure = protectedProcedure.use(
   },
 );
 
-export const projectRouter = router({
+export const projectRouter = createTRPCRouter({
   // Select public and personal projects if authenticated
   all: publicProcedure.query(async ({ ctx }) => {
     const userId = ctx.session?.user.id;
-    return ctx.prisma.playgroundProject.findMany({
+    return ctx.db.playgroundProject.findMany({
       where: {
         OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }],
       },
@@ -160,7 +159,7 @@ export const projectRouter = router({
 
   allBrief: publicProcedure.query(async ({ ctx }) => {
     const userId = ctx.session?.user.id;
-    return ctx.prisma.playgroundProject.findMany({
+    return ctx.db.playgroundProject.findMany({
       where: {
         OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }],
       },
@@ -193,16 +192,16 @@ export const projectRouter = router({
   allFiltered: publicProcedure
     .input(
       z.object({
-        id: z.ostring(),
-        title: z.ostring(),
+        id: z.string().optional(),
+        title: z.string().optional(),
         category: z.nativeEnum(ProjectCategory).optional(),
-        input: z.ostring(),
-        isPublic: z.oboolean(),
-        isExample: z.oboolean(),
+        input: z.string().optional(),
+        isPublic: z.boolean().optional(),
+        isExample: z.boolean().optional(),
       }),
     )
     .query(async ({ ctx, input }) =>
-      ctx.prisma.playgroundProject.findMany({
+      ctx.db.playgroundProject.findMany({
         where: {
           AND: [
             input,
@@ -214,7 +213,7 @@ export const projectRouter = router({
 
   // Select a single project
   getBySlug: publicProcedure.input(z.string()).query(async ({ ctx, input }) =>
-    ctx.prisma.playgroundProject
+    ctx.db.playgroundProject
       .findUniqueOrThrow({
         where: {
           slug: input,
@@ -244,7 +243,7 @@ export const projectRouter = router({
           },
         },
       })
-      .catch((e) => {
+      .catch((e: any) => {
         if (
           e instanceof Prisma.PrismaClientKnownRequestError &&
           e.code === "P2025"
@@ -261,17 +260,17 @@ export const projectRouter = router({
     .input(
       z.object({
         title: z.string(),
-        slug: z.ostring(),
+        slug: z.string().optional(),
         category: z.nativeEnum(ProjectCategory),
         difficulty: z.nativeEnum(ProjectDifficulty).optional(),
-        description: z.ostring(),
-        lcLink: z.ostring(),
+        description: z.string().optional(),
+        lcLink: z.string().optional(),
         isPublic: z.boolean(),
-        isExample: z.oboolean(),
+        isExample: z.boolean().optional(),
       }),
     )
     .mutation(async ({ input: data, ctx }) =>
-      ctx.prisma.playgroundProject
+      ctx.db.playgroundProject
         .create({
           data: {
             ...data,
@@ -295,7 +294,7 @@ export const projectRouter = router({
             },
           },
         })
-        .catch((e) => {
+        .catch((e: any) => {
           if (
             e instanceof Prisma.PrismaClientKnownRequestError &&
             e.code === "P2002"
@@ -312,25 +311,25 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
-        slug: z.ostring(),
-        title: z.ostring(),
+        slug: z.string().optional(),
+        title: z.string().optional(),
         category: z.nativeEnum(ProjectCategory).optional(),
         difficulty: z.nativeEnum(ProjectDifficulty).optional(),
-        description: z.ostring(),
-        lcLink: z.ostring(),
-        isPublic: z.oboolean(),
-        isExample: z.oboolean(),
+        description: z.string().optional(),
+        lcLink: z.string().optional(),
+        isPublic: z.boolean().optional(),
+        isExample: z.boolean().optional(),
       }),
     )
     .mutation(async ({ input: { projectId: id, ...data }, ctx }) =>
-      ctx.prisma.playgroundProject
+      ctx.db.playgroundProject
         .update({
           where: {
             id,
           },
           data,
         })
-        .catch((error) => {
+        .catch((error: any) => {
           if (error.code === "P2002") {
             throw new TRPCError({
               code: "BAD_REQUEST",
@@ -348,7 +347,7 @@ export const projectRouter = router({
     )
     .mutation(async ({ input: { projectId }, ctx }) => {
       void clearProjectEntities(projectId);
-      return ctx.prisma.playgroundProject.delete({
+      return ctx.db.playgroundProject.delete({
         where: {
           id: projectId,
         },
@@ -357,7 +356,7 @@ export const projectRouter = router({
 
   // Delete all personal projects
   deleteAll: protectedProcedure.mutation(async ({ ctx }) =>
-    ctx.prisma.playgroundProject.deleteMany({
+    ctx.db.playgroundProject.deleteMany({
       where: {
         userId: ctx.session.user.id,
       },
@@ -372,7 +371,7 @@ export const projectRouter = router({
       }),
     )
     .query(async ({ input, ctx }) =>
-      ctx.prisma.playgroundTestCase.findUniqueOrThrow({
+      ctx.db.playgroundTestCase.findUniqueOrThrow({
         where: {
           projectId_slug: input,
         },
@@ -383,15 +382,15 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
-        referenceCaseSlug: z.ostring(),
-        title: z.ostring(),
+        referenceCaseSlug: z.string().optional(),
+        title: z.string().optional(),
         order: z.number(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
       const args: ArgumentObjectMap = {};
       if (input.referenceCaseSlug) {
-        const referenceCase = await ctx.prisma.playgroundTestCase.findUnique({
+        const referenceCase = await ctx.db.playgroundTestCase.findUnique({
           where: {
             projectId_slug: {
               projectId: input.projectId,
@@ -403,7 +402,7 @@ export const projectRouter = router({
           Object.assign(args, referenceCase.args);
         }
       } else {
-        const project = await ctx.prisma.playgroundProject.findUnique({
+        const project = await ctx.db.playgroundProject.findUnique({
           where: {
             id: input.projectId,
           },
@@ -421,10 +420,10 @@ export const projectRouter = router({
 
       const { caseIndex, caseSlug } = await getCaseIndex(
         input.projectId,
-        ctx.prisma,
+        ctx.db,
       );
 
-      return ctx.prisma.playgroundTestCase.create({
+      return ctx.db.playgroundTestCase.create({
         data: {
           projectId: ctx.project.id,
           title: input.title || `Case ${caseIndex}`,
@@ -440,14 +439,14 @@ export const projectRouter = router({
       z.object({
         projectId: z.string(),
         caseId: z.string(),
-        title: z.ostring(),
-        slug: z.ostring(),
+        title: z.string().optional(),
+        slug: z.string().optional(),
         args: z.record(argumentObjectValidator).optional(),
-        description: z.ostring(),
+        description: z.string().optional(),
       }),
     )
     .mutation(async ({ input: { caseId, ...data }, ctx }) =>
-      ctx.prisma.playgroundTestCase.update({
+      ctx.db.playgroundTestCase.update({
         where: { id: caseId },
         data,
       }),
@@ -461,7 +460,7 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input: { caseId }, ctx }) =>
-      ctx.prisma.playgroundTestCase.delete({
+      ctx.db.playgroundTestCase.delete({
         where: { id: caseId },
       }),
     ),
@@ -474,9 +473,9 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) =>
-      ctx.prisma.$transaction(
+      ctx.db.$transaction(
         input.caseIds.map((id, index) =>
-          ctx.prisma.playgroundTestCase.update({
+          ctx.db.playgroundTestCase.update({
             where: {
               id,
             },
@@ -496,7 +495,7 @@ export const projectRouter = router({
       }),
     )
     .query(async ({ input, ctx }) =>
-      ctx.prisma.playgroundSolution.findUniqueOrThrow({
+      ctx.db.playgroundSolution.findUniqueOrThrow({
         where: {
           projectId_slug: input,
         },
@@ -507,28 +506,27 @@ export const projectRouter = router({
     .input(
       z.object({
         projectId: z.string(),
-        referenceSolutionSlug: z.ostring(),
-        title: z.ostring(),
-        description: z.ostring().nullable(),
-        timeComplexity: z.ostring().nullable(),
-        spaceComplexity: z.ostring().nullable(),
-        code: z.ostring().nullable(),
-        pythonCode: z.ostring().nullable(),
-        order: z.onumber(),
+        referenceSolutionSlug: z.string().optional(),
+        title: z.string().optional(),
+        description: z.string().nullable().optional(),
+        timeComplexity: z.string().nullable().optional(),
+        spaceComplexity: z.string().nullable().optional(),
+        code: z.string().nullable().optional(),
+        pythonCode: z.string().nullable().optional(),
+        order: z.number().optional(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
       const { referenceSolutionSlug, ...data } = input;
       if (referenceSolutionSlug) {
-        const referenceSolution =
-          await ctx.prisma.playgroundSolution.findUnique({
-            where: {
-              projectId_slug: {
-                projectId: input.projectId,
-                slug: referenceSolutionSlug,
-              },
+        const referenceSolution = await ctx.db.playgroundSolution.findUnique({
+          where: {
+            projectId_slug: {
+              projectId: input.projectId,
+              slug: referenceSolutionSlug,
             },
-          });
+          },
+        });
         if (referenceSolution) {
           data.code = referenceSolution.code;
           data.description = referenceSolution.description;
@@ -539,10 +537,10 @@ export const projectRouter = router({
 
       const { solutionIndex, solutionSlug } = await getSolutionIndex(
         input.projectId,
-        ctx.prisma,
+        ctx.db,
       );
 
-      return ctx.prisma.playgroundSolution.create({
+      return ctx.db.playgroundSolution.create({
         data: {
           title: input.title || `Solution ${solutionIndex}`,
           slug: solutionSlug,
@@ -557,18 +555,18 @@ export const projectRouter = router({
       z.object({
         projectId: z.string(),
         solutionId: z.string(),
-        title: z.ostring(),
-        slug: z.ostring(),
-        description: z.ostring(),
-        timeComplexity: z.ostring(),
-        spaceComplexity: z.ostring(),
-        code: z.ostring(),
-        pythonCode: z.ostring(),
-        order: z.onumber(),
+        title: z.string().optional(),
+        slug: z.string().optional(),
+        description: z.string().optional(),
+        timeComplexity: z.string().optional(),
+        spaceComplexity: z.string().optional(),
+        code: z.string().optional(),
+        pythonCode: z.string().optional(),
+        order: z.number().optional(),
       }),
     )
     .mutation(async ({ input: { solutionId, ...data }, ctx }) =>
-      ctx.prisma.playgroundSolution.update({
+      ctx.db.playgroundSolution.update({
         where: {
           id: solutionId,
         },
@@ -584,7 +582,7 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) =>
-      ctx.prisma.playgroundSolution.delete({
+      ctx.db.playgroundSolution.delete({
         where: {
           id: input.solutionId,
         },
@@ -599,9 +597,9 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) =>
-      ctx.prisma.$transaction(
+      ctx.db.$transaction(
         input.solutionIds.map((id, index) =>
-          ctx.prisma.playgroundSolution.update({
+          ctx.db.playgroundSolution.update({
             where: {
               id,
             },

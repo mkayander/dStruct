@@ -12,7 +12,7 @@ const eslintConfig = [
     extends: ["next/core-web-vitals", "next/typescript"],
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/consistent-type-imports": "warn",
+      "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-unused-expressions": "error",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-empty-object-type": "off",
@@ -24,7 +24,7 @@ const eslintConfig = [
       "*.worker.js",
       "**/dist/**",
       "postcss.config.js",
-      "tailwind.config.js"
+      "tailwind.config.js",
     ],
     overrides: [
       // Only uses Testing Library lint rules in test files

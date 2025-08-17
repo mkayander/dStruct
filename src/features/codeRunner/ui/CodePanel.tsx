@@ -40,12 +40,12 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { selectIsEditingNodes } from "#/features/treeViewer/model/editorSlice";
+import { api } from "#/shared/api";
 import {
   useI18nContext,
   usePlaygroundSlugs,
   useSearchParam,
 } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
 import {
@@ -61,7 +61,7 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const dispatch = useAppDispatch();
   const session = useSession();
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = api.useUtils();
   const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { LL } = useI18nContext();
@@ -94,10 +94,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const error = useAppSelector(selectCallstackError);
 
-  const selectedProject = trpc.project.getBySlug.useQuery(projectSlug || "", {
+  const selectedProject = api.project.getBySlug.useQuery(projectSlug || "", {
     enabled: Boolean(projectSlug),
   });
-  const currentSolution = trpc.project.getSolutionBySlug.useQuery(
+  const currentSolution = api.project.getSolutionBySlug.useQuery(
     {
       projectId: selectedProject.data?.id || "",
       slug: solutionSlug,
@@ -107,7 +107,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     },
   );
 
-  const updateSolution = trpc.project.updateSolution.useMutation();
+  const updateSolution = api.project.updateSolution.useMutation();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -275,7 +275,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
   const isLoading =
     selectedProject.isLoading ||
     currentSolution.isLoading ||
-    updateSolution.isLoading;
+    updateSolution.isPending;
 
   let editorHeight = 500;
   if (verticalSize) {
@@ -401,7 +401,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               </Tooltip>
               <EditorStateIcon
                 state={editorState}
-                isLoading={updateSolution.isLoading}
+                isLoading={updateSolution.isPending}
               />
               <Tooltip
                 title={LL.COPY_CODE_TO_CLIPBOARD()}

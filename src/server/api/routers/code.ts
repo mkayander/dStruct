@@ -2,7 +2,7 @@ import { spawn } from "child_process";
 import { join } from "path";
 import { z } from "zod";
 
-import { publicProcedure, router } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 function formatPython(code: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ function formatPython(code: string): Promise<string> {
   });
 }
 
-export const codeRouter = router({
+export const codeRouter = createTRPCRouter({
   formatPython: publicProcedure
     .input(z.object({ code: z.string() }))
     .mutation(async ({ input }) => {

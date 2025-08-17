@@ -1,10 +1,10 @@
-import { type UseQueryResult } from "@tanstack/react-query";
 import React from "react";
 
-import { type RouterOutputs } from "#/shared/lib/trpc";
+import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import type { RouterOutputs } from "#/shared/api";
 
 type SolutionComplexityLabelProps = {
-  solution: UseQueryResult<RouterOutputs["project"]["getSolutionBySlug"]>;
+  solution: UseTRPCQueryResult<RouterOutputs["project"]["getSolutionBySlug"]>;
 };
 
 export const SolutionComplexityLabel: React.FC<

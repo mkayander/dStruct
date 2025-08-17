@@ -1,15 +1,15 @@
 import slugify from "slugify";
 
-import { prisma } from "#/server/db/client";
+import { db } from "#/server/db/client";
 
 (async () => {
-  const projects = await prisma.playgroundProject.findMany();
+  const projects = await db.playgroundProject.findMany();
   for (const project of projects) {
     console.log(project.slug);
     if (project.slug.startsWith("project-")) {
       const slug = slugify(project.title, { lower: true, strict: true });
       try {
-        await prisma.playgroundProject.update({
+        await db.playgroundProject.update({
           where: { id: project.id },
           data: { slug },
         });
@@ -19,7 +19,7 @@ import { prisma } from "#/server/db/client";
     }
   }
 
-  const cases = await prisma.playgroundTestCase.findMany();
+  const cases = await db.playgroundTestCase.findMany();
   for (const testCase of cases) {
     console.log(testCase.slug);
     if (
@@ -28,7 +28,7 @@ import { prisma } from "#/server/db/client";
     ) {
       let index = testCase.order + 1;
       while (
-        await prisma.playgroundTestCase.findUnique({
+        await db.playgroundTestCase.findUnique({
           where: {
             projectId_slug: {
               projectId: testCase.projectId,
@@ -41,14 +41,14 @@ import { prisma } from "#/server/db/client";
       }
 
       const slug = `case-${index}`;
-      await prisma.playgroundTestCase.update({
+      await db.playgroundTestCase.update({
         where: { id: testCase.id },
         data: { title: `Case ${index}`, slug },
       });
     }
   }
 
-  const solutions = await prisma.playgroundSolution.findMany();
+  const solutions = await db.playgroundSolution.findMany();
   for (const solution of solutions) {
     console.log(solution.slug);
     if (
@@ -57,7 +57,7 @@ import { prisma } from "#/server/db/client";
     ) {
       let index = solution.order + 1;
       while (
-        await prisma.playgroundSolution.findUnique({
+        await db.playgroundSolution.findUnique({
           where: {
             projectId_slug: {
               projectId: solution.projectId,
@@ -70,7 +70,7 @@ import { prisma } from "#/server/db/client";
       }
 
       const slug = `solution-${index}`;
-      await prisma.playgroundSolution.update({
+      await db.playgroundSolution.update({
         where: { id: solution.id },
         data: { title: `Solution ${index}`, slug },
       });

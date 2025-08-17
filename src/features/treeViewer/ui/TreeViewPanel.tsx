@@ -128,85 +128,84 @@ export const TreeViewPanel: React.FC = () => {
           value="structure"
           sx={{
             position: "relative",
-            height: "100%",
+            height: isMobile ? "70vh" : "100%",
             p: 0,
             flexGrow: 1,
             cursor: isPanning ? "grabbing" : "grab",
           }}
-          style={{
-            height: isMobile ? "70vh" : "100%",
-          }}
-          onMouseDown={(ev: React.MouseEvent) => {
-            handlePanStart(ev);
-          }}
-          onMouseUp={handlePanEnd}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handlePanEnd}
-          overlay={
-            <>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 62,
-                  right: 8,
-                  zIndex: 50,
-                }}
-              >
-                <Stack gap={1}>
-                  <Button
-                    title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
-                    color={isEditingNodes ? "success" : "info"}
-                    onClick={handleEditButtonClick}
-                  >
-                    {isEditingNodes ? "Save" : "Edit"}
-                  </Button>
-                  {isEditingNodes && (
-                    <Button
-                      title="Your changes will be lost"
-                      color="warning"
-                      onClick={clearGraphNodePositions}
-                    >
-                      Recalculate
-                    </Button>
-                  )}
-                </Stack>
-              </Box>
-              <Box
-                sx={{
-                  position: "absolute",
-                  maxWidth: "94%",
-                  width: "400px",
-                  bottom: "0",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  border: `1px solid ${theme.palette.divider}`,
-                  borderBottom: "none",
-                  borderRadius: "8px 8px 0 0",
-                  backgroundColor: alpha(theme.palette.secondary.main, 0.05),
-                  boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
-                  zIndex: 70,
-                  backdropFilter: "blur(14px)",
-                }}
-              >
-                <PlayerControls
-                  disabled={isEditingNodes}
-                  sliderValue={sliderValue}
-                  setSliderValue={setSliderValue}
-                  handlePlay={handlePlay}
-                  handleReplay={handleReplay}
-                  handleStepBack={handleStepBack}
-                  handleStepForward={handleStepForward}
-                />
-              </Box>
-            </>
-          }
         >
-          <PannableViewer>
-            <TreeViewer
-              replayCount={replayCount}
-              playbackInterval={sliderValue}
-            />
-          </PannableViewer>
+          <div
+            onMouseDown={(ev: React.MouseEvent) => {
+              if (ev.button === 0) {
+                handlePanStart(ev);
+              }
+            }}
+            onMouseUp={handlePanEnd}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handlePanEnd}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                top: 62,
+                right: 8,
+                zIndex: 50,
+              }}
+            >
+              <Stack gap={1}>
+                <Button
+                  title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
+                  color={isEditingNodes ? "success" : "info"}
+                  onClick={handleEditButtonClick}
+                >
+                  {isEditingNodes ? "Save" : "Edit"}
+                </Button>
+                {isEditingNodes && (
+                  <Button
+                    title="Your changes will be lost"
+                    color="warning"
+                    onClick={clearGraphNodePositions}
+                  >
+                    Recalculate
+                  </Button>
+                )}
+              </Stack>
+            </Box>
+            <Box
+              sx={{
+                position: "absolute",
+                maxWidth: "94%",
+                width: "400px",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                border: `1px solid ${theme.palette.divider}`,
+                borderBottom: "none",
+                borderRadius: "8px 8px 0 0",
+                backgroundColor: alpha(theme.palette.secondary.main, 0.05),
+                boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
+                zIndex: 70,
+                backdropFilter: "blur(14px)",
+              }}
+            >
+              <PlayerControls
+                disabled={isEditingNodes}
+                sliderValue={sliderValue}
+                setSliderValue={setSliderValue}
+                handlePlay={handlePlay}
+                handleReplay={handleReplay}
+                handleStepBack={handleStepBack}
+                handleStepForward={handleStepForward}
+              />
+            </Box>
+            <PannableViewer>
+              <TreeViewer
+                replayCount={replayCount}
+                playbackInterval={sliderValue}
+              />
+            </PannableViewer>
+          </div>
         </StyledTabPanel>
         <StyledTabPanel value="benchmark">
           <BenchmarkView />

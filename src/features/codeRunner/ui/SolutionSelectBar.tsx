@@ -1,19 +1,19 @@
 "use client";
 
-import { type OnDragEndResponder } from "@hello-pangea/dnd";
-import { type StackProps } from "@mui/material";
+import type { OnDragEndResponder } from "@hello-pangea/dnd";
+import type { StackProps } from "@mui/material";
 import type { PlaygroundSolution } from "@prisma/client";
-import type { UseQueryResult } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
 import { SolutionModal } from "#/features/codeRunner/ui/SolutionModal";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/features/selectBar/ui/SelectBarChip";
+import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import { api } from "#/shared/api";
+import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { trpc } from "#/shared/lib";
-import type { RouterOutputs } from "#/shared/lib/trpc";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 type SolutionBrief = Pick<
@@ -22,7 +22,7 @@ type SolutionBrief = Pick<
 >;
 
 type SolutionSelectBarProps = StackProps & {
-  selectedProject: UseQueryResult<RouterOutputs["project"]["getBySlug"]>;
+  selectedProject: UseTRPCQueryResult<RouterOutputs["project"]["getBySlug"]>;
 };
 
 export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
@@ -43,7 +43,7 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
   const dispatch = useAppDispatch();
 
-  const trpcUtils = trpc.useContext();
+  const trpcUtils = api.useUtils();
 
   const updateSolutionsCache = (solutions: SolutionBrief[]) => {
     trpcUtils.project.getBySlug.setData(projectSlug, (prevData) => {
@@ -64,20 +64,20 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     });
   };
 
-  const addSolution = trpc.project.addSolution.useMutation({
+  const addSolution = api.project.addSolution.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries(data.slug);
       void setSolution(data.slug);
     },
   });
 
-  const reorderSolutions = trpc.project.reorderSolutions.useMutation({
+  const reorderSolutions = api.project.reorderSolutions.useMutation({
     onSuccess: async (newList) => {
       updateSolutionsCache(newList);
     },
   });
 
-  const deleteSolution = trpc.project.deleteSolution.useMutation({
+  const deleteSolution = api.project.deleteSolution.useMutation({
     onSuccess: async (data) => {
       await invalidateQueries();
 
@@ -89,8 +89,8 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
   const isLoading =
     selectedProject.isLoading ||
-    addSolution.isLoading ||
-    deleteSolution.isLoading;
+    addSolution.isPending ||
+    deleteSolution.isPending;
 
   const isEditable = useAppSelector(selectIsEditable);
 

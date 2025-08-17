@@ -5,7 +5,8 @@ import axios from "axios";
 import type { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { getImageUrl, trpc } from "#/shared/lib";
+import { api } from "#/shared/api";
+import { getImageUrl } from "#/shared/lib";
 
 type SessionHook = ReturnType<typeof useSession>;
 type Status = "loading" | "done";
@@ -25,7 +26,7 @@ export const useProfileImageUploader = (session: SessionHook) => {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutation = trpc.user.setBucketImage.useMutation();
+  const mutation = api.user.setBucketImage.useMutation();
 
   useEffect(() => {
     if (status === "done" || isLoading) return;
