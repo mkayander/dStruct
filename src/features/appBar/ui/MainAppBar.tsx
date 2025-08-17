@@ -118,23 +118,21 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 height="32"
               />
             </Box>
-            {/* TODO: Remove legacyBehavior - issue with nested MUI links https://github.com/mui/material-ui/issues/34898 */}
-            <Link href="/" legacyBehavior={true} passHref>
-              <MuiLink
-                variant="h6"
-                noWrap
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "'Share Tech', sans-serif",
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                dStruct
-              </MuiLink>
-            </Link>
+            <MuiLink
+              component={Link}
+              href="/"
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "'Share Tech', sans-serif",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              dStruct
+            </MuiLink>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -182,23 +180,22 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 height="32"
               />
             </Box>
-            <Link href="/" legacyBehavior={true} passHref>
-              <MuiLink
-                variant="h5"
-                noWrap
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "'Share Tech', sans-serif",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                dStruct
-              </MuiLink>
-            </Link>
+            <MuiLink
+              component={Link}
+              variant="h5"
+              noWrap
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "'Share Tech', sans-serif",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              dStruct
+            </MuiLink>
             <Box
               sx={{ flexGrow: 1, gap: 1, display: { xs: "none", md: "flex" } }}
             >

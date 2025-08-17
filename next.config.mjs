@@ -21,7 +21,6 @@ const config = {
     "@hello-pangea/dnd",
     "postcss",
     "@monaco-editor/react",
-    "prettier",
     "@tanstack/query-core",
   ],
   i18n: {

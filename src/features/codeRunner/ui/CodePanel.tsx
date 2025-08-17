@@ -13,10 +13,6 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-// @ts-expect-error Type declarations for prettier/parser-babel are broken
-import * as parserBabel from "prettier/parser-babel";
-import * as prettierPluginEstree from "prettier/plugins/estree";
-import * as prettier from "prettier/standalone";
 import React, { useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
@@ -241,25 +237,28 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     }
   };
 
+  const formatJavaScript = api.code.formatJavaScript.useMutation();
+
   const handleFormatCode = async () => {
     if (language === "javascript") {
-      const result = await prettier.formatWithCursor(codeInput, {
-        parser: "babel",
-        plugins: [parserBabel, prettierPluginEstree],
-        cursorOffset: 0,
-      });
-      if (textModel) {
-        const edit: monaco.editor.IIdentifiedSingleEditOperation = {
-          range: textModel.getFullModelRange(),
-          text: result.formatted,
-        };
-        textModel.pushEditOperations(
-          [],
-          [edit],
-          () => null, // no undo stop
-        );
-        const newPosition = textModel.getPositionAt(result.cursorOffset);
-        editorInstance?.setPosition(newPosition);
+      try {
+        const result = await formatJavaScript.mutateAsync({ code: codeInput });
+        if (textModel && result.formatted) {
+          const edit: monaco.editor.IIdentifiedSingleEditOperation = {
+            range: textModel.getFullModelRange(),
+            text: result.formatted,
+          };
+          textModel.pushEditOperations(
+            [],
+            [edit],
+            () => null, // no undo stop
+          );
+          // Reset cursor to beginning since we don't have cursor offset from server
+          editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+        }
+      } catch (error) {
+        console.error("Error formatting code:", error);
+        enqueueSnackbar("Failed to format code", { variant: "error" });
       }
     }
     setIsFormattingAvailable(false);
@@ -327,6 +326,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
               <span>
                 <IconButton
                   disabled={!isFormattingAvailable || language !== "javascript"}
+                  loading={formatJavaScript.isPending}
                   onClick={handleFormatCode}
                 >
                   <AutoFixHigh fontSize="small" />
