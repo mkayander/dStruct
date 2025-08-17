@@ -1,0 +1,323 @@
+# dStruct Project - Cursor Rules
+
+## Project Overview
+
+dStruct is a LeetCode problem visualization web app with data structure visualization, code execution, and interactive learning tools.
+
+## Technology Stack
+
+- **Frontend**: React, Next.js, TypeScript
+- **State Management**: Redux Toolkit with RTK Query
+- **Styling**: Tailwind CSS, Material-UI, Emotion, SCSS
+- **Database**: Prisma ORM with MySQL
+- **Authentication**: NextAuth.js
+- **API**: tRPC, GraphQL with Apollo Client
+- **Testing**: Vitest with Testing Library
+- **Package Manager**: PNPM (always use PNPM, never NPM)
+
+## Architecture Patterns
+
+### Project Structure
+
+```
+src/
+├── entities/          # Domain entities and business logic
+├── features/          # Feature-based modules with UI/model separation
+├── shared/            # Shared utilities, hooks, and components
+├── store/             # Redux store configuration
+├── server/            # Backend API (tRPC, GraphQL)
+├── context/           # React Context providers
+└── pages/             # Next.js pages and API routes
+```
+
+### State Management
+
+- Use Redux Toolkit for global state with slices
+- Use RTK Query for server state management
+- Keep local component state with React hooks when appropriate
+
+### Data Flow
+
+- Entities contain business logic and data models
+- Features contain UI components and feature-specific state
+- Shared utilities provide common functionality
+- Use tRPC for type-safe API calls
+
+## Coding Standards
+
+### TypeScript
+
+- **ALWAYS** use TypeScript - no JavaScript files
+- Use proper type annotations, avoid `any`
+- Use type imports: `import type { ... } from "..."`
+- Define proper interfaces and types for all data structures
+
+### React Patterns
+
+- Use functional components with hooks
+- Implement proper prop typing
+- Use React.forwardRef when needed
+- Use proper dependency arrays in useEffect/useMemo/useCallback
+
+### Component Architecture
+
+- Follow atomic design: atoms → molecules → organisms → templates
+- Keep components focused and single-responsibility
+- Use composition over inheritance
+- Implement proper prop drilling alternatives (Context, Redux)
+
+### Styling
+
+- Use Tailwind CSS as primary styling solution
+- Leverage Material-UI components when appropriate
+- Use CSS modules for component-specific styles
+- Follow design system color palette from `src/shared/lib/colors.ts`
+- Use `cn()` utility for conditional class merging
+
+## File Naming & Organization
+
+### Naming Conventions
+
+- **Files**: kebab-case for files, PascalCase for components
+- **Components**: PascalCase (e.g., `BinaryNode.tsx`)
+- **Hooks**: camelCase with `use` prefix (e.g., `useBinaryTreePositioning.ts`)
+- **Utilities**: camelCase (e.g., `getNodeColors.ts`)
+- **Types**: PascalCase with descriptive names
+
+### Import Organization
+
+- Use absolute imports with `#/` alias for src directory
+- Group imports: external → internal → relative
+- Use barrel exports in index files
+- Avoid circular dependencies
+
+## Code Quality
+
+### Linting & Formatting
+
+- Follow ESLint configuration in `eslint.config.mjs`
+- Use Prettier for code formatting
+- Run `pnpm lint` before committing
+
+### Testing
+
+- Write tests for business logic and complex components
+- Use Vitest with Testing Library
+- Test user interactions, not implementation details
+- Avoid testing constants or static values
+- Use proper test setup and mocking
+
+### Performance
+
+- Implement proper memoization with useMemo/useCallback
+- Use React.memo for expensive components
+- Optimize bundle size with dynamic imports
+- Implement proper loading states and error boundaries
+
+## Database & API
+
+### Prisma
+
+- Use Prisma for all database operations
+- Generate client after schema changes: `pnpm prisma:generate`
+- Use proper typing for database models
+- Implement proper error handling
+
+### tRPC
+
+- Use tRPC for type-safe API calls
+- Define proper input/output schemas
+- Use protected procedures for authenticated routes
+- Implement proper error handling and validation
+
+### GraphQL
+
+- Use GraphQL for complex queries
+- Generate types with GraphQL Code Generator
+- Use Apollo Client for GraphQL operations
+
+## Security & Best Practices
+
+### Authentication
+
+- Use NextAuth.js for authentication
+- Implement proper session management
+- Use protected routes for sensitive operations
+- Validate user permissions
+
+### Environment Variables
+
+- Use Zod schemas for environment validation
+- Never commit sensitive data
+- Update schema in `src/env/schema.mjs` when adding new vars
+
+### Data Validation
+
+- Use Zod for runtime validation
+- Validate all user inputs
+- Implement proper error handling
+- Use TypeScript for compile-time validation
+
+## 3D Visualization
+
+### Blender Integration
+
+- Store 3D models in `blender/` directory
+- Export as .glb files
+- Use gltfjsx to convert to React components
+- Follow naming convention: `ModelName.tsx`
+
+### Three.js Usage
+
+- Use @react-three/fiber and @react-three/drei
+- Implement proper performance optimizations
+- Handle loading states and errors
+- Use proper lighting and materials
+
+## Development Workflow
+
+### Git & Deployment
+
+- Use semantic commit messages
+- Follow conventional commits for releases
+- Use Husky for pre-commit hooks
+
+### Dependencies
+
+- Always use PNPM for package management
+- Keep dependencies up to date
+- Use exact versions for critical packages
+
+### Build & Development
+
+- Use `pnpm dev` for development
+- Use `pnpm build` for production builds
+- Run tests with `pnpm test`
+
+## Common Patterns
+
+### State Management
+
+```typescript
+// Redux slice pattern
+export const exampleSlice = createSlice({
+  name: "EXAMPLE",
+  initialState,
+  reducers: {
+    update: (state, action: PayloadAction<Partial<State>>) => ({
+      ...state,
+      ...action.payload,
+    }),
+  },
+});
+```
+
+### Component Structure
+
+```typescript
+// Component with proper typing
+interface ComponentProps {
+  title: string;
+  onAction: (data: ActionData) => void;
+}
+
+export const Component: React.FC<ComponentProps> = ({ title, onAction }) => {
+  // Component implementation
+};
+```
+
+### Hook Pattern
+
+```typescript
+// Custom hook with proper typing
+export const useCustomHook = (): ReturnType => {
+  // Hook implementation
+  return result;
+};
+```
+
+## Error Handling
+
+### Client-Side
+
+- Implement proper error boundaries
+- Use try-catch for async operations
+- Provide user-friendly error messages
+- Log errors appropriately
+
+### Server-Side
+
+- Use proper HTTP status codes
+- Implement proper error logging
+- Return structured error responses
+- Handle edge cases gracefully
+
+## Performance Considerations
+
+### Code Splitting
+
+- Use dynamic imports for large components
+- Implement proper loading states
+- Optimize bundle size
+- Use Next.js built-in optimizations
+
+### Data Fetching
+
+- Implement proper caching strategies
+- Use RTK Query for server state
+- Implement optimistic updates
+- Handle loading and error states
+
+## Internationalization
+
+### i18n Implementation
+
+- Use typesafe-i18n for translations
+- Support multiple locales: en, ru, de, es, sr, uk
+- Implement proper locale detection
+- Use translation keys consistently
+
+## Testing Strategy
+
+### Test Organization
+
+- Place tests in `__tests__` directories
+- Use descriptive test names
+- Test user behavior, not implementation
+- Mock external dependencies properly
+
+### Test Utilities
+
+- Use Testing Library for component testing
+- Implement proper test setup
+- Use custom render functions with providers
+- Mock Next.js router and authentication
+
+## Documentation
+
+### Code Documentation
+
+- Use JSDoc for complex functions
+- Document component props and interfaces
+- Keep README and documentation updated
+- Document complex business logic
+
+### API Documentation
+
+- Document tRPC procedures
+- Document GraphQL schema
+- Provide usage examples
+- Keep API documentation current
+
+## Remember
+
+- Always use TypeScript
+- Follow the established architecture patterns
+- Use PNPM for package management
+- Write meaningful tests
+- Keep code clean and maintainable
+- Follow security best practices
+- Optimize for performance
+- Maintain proper error handling
+- Use proper typing throughout
+- Follow the project's established conventions
