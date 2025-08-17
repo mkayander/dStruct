@@ -34,5 +34,3 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
     session,
   });
 };
-
-export type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;

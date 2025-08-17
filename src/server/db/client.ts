@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { fieldEncryptionMiddleware } from "prisma-field-encryption";
+import { fieldEncryptionExtension } from "prisma-field-encryption";
 
 import { env } from "#/env/server.mjs";
 
@@ -16,9 +16,7 @@ const makeClient = () => {
     log: isProduction ? ["error"] : ["query", "error", "warn"],
   });
 
-  client.$use(fieldEncryptionMiddleware());
-
-  return client.$extends(withAccelerate());
+  return client.$extends(withAccelerate()).$extends(fieldEncryptionExtension());
 };
 
 const db = global.db || makeClient();

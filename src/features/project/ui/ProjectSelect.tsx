@@ -12,23 +12,23 @@ import {
   useColorScheme,
   useTheme,
 } from "@mui/material";
-import { type UseQueryResult } from "@tanstack/react-query";
 import React, { useContext, useMemo, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 
 import { ConfigContext } from "#/context";
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
-import { getDifficultyColor } from "#/entities/difficulty/lib";
+import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
+import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { getImageUrl } from "#/shared/lib";
-import { type RouterOutputs } from "#/shared/lib/trpc";
 import { NewLabel } from "#/shared/ui/atoms/NewLabel";
 import { SearchInput } from "#/shared/ui/molecules/SearchInput";
 
 type ProjectSelectProps = {
-  allBrief: UseQueryResult<RouterOutputs["project"]["allBrief"]>;
+  allBrief: UseTRPCQueryResult<RouterOutputs["project"]["allBrief"]>;
 };
 
 export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {

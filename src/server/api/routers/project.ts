@@ -159,7 +159,7 @@ export const projectRouter = createTRPCRouter({
 
   allBrief: publicProcedure.query(async ({ ctx }) => {
     const userId = ctx.session?.user.id;
-    return ctx.db.playgroundProject.findMany({
+    const args = Prisma.validator<Prisma.PlaygroundProjectFindManyArgs>()({
       where: {
         OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }],
       },
@@ -178,15 +178,10 @@ export const projectRouter = createTRPCRouter({
           },
         },
       },
-      orderBy: [
-        {
-          category: "asc",
-        },
-        {
-          title: "asc",
-        },
-      ],
+      orderBy: [{ category: "asc" }, { title: "asc" }],
     });
+
+    return ctx.db.playgroundProject.findMany(args);
   }),
 
   allFiltered: publicProcedure
