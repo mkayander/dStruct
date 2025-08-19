@@ -197,12 +197,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     }
   };
 
-  const handleChangeCode = (
+  const updateSolutionOnServer = (
     value: string | undefined,
     ev: monaco.editor.IModelContentChangedEvent,
   ) => {
-    setCodeInput(value ?? "");
-    if (!isFormattingAvailable) setIsFormattingAvailable(true);
     const range = ev.changes[0]?.rangeLength ?? 0;
     if (session.status === "unauthenticated" && range > 0 && range < 200) {
       setEditorState(EditorState.FORKED_UNAUTHENTICATED);
@@ -235,6 +233,21 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
         }
       }, 750));
     }
+  };
+
+  const handleChangeCode = (
+    value: string | undefined,
+    ev: monaco.editor.IModelContentChangedEvent,
+  ) => {
+    setCodeInput(value ?? "");
+    if (!isFormattingAvailable) setIsFormattingAvailable(true);
+
+    // Only update the solution on server if it was a user edit
+    if (ev.isFlush) {
+      return;
+    }
+
+    updateSolutionOnServer(value, ev);
   };
 
   const formatJavaScript = api.code.formatJavaScript.useMutation();

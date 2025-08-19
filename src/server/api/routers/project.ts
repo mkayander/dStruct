@@ -115,7 +115,8 @@ const getSolutionIndex = async (projectId: string, db: AppPrismaClient) => {
 };
 
 const projectOwnerProcedure = protectedProcedure.use(
-  async ({ ctx, input, next }) => {
+  async ({ ctx, next, getRawInput }) => {
+    const input = await getRawInput();
     const projectId: string | undefined = (input as any)?.projectId;
     if (!projectId)
       throw new TRPCError({
