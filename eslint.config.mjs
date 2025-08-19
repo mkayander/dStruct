@@ -25,6 +25,7 @@ const eslintConfig = [
       "**/dist/**",
       "postcss.config.js",
       "tailwind.config.js",
+      "src/graphql/generated/**",
     ],
     overrides: [
       // Only uses Testing Library lint rules in test files
