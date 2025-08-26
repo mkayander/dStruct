@@ -1,16 +1,14 @@
 import {
-  alpha,
   Box,
   Button,
   CircularProgress,
   Container,
-  Grid,
   Link as MuiLink,
   Stack,
-  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
+import Grid2 from "@mui/material/Grid2";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -82,134 +80,227 @@ const DashboardPage: NextPage<{
   const isMobile = useMobileLayout();
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-empty-function,react/jsx-no-undef
     <MainLayout onScroll={handleScroll}>
       <Head>
         <title>dStruct</title>
       </Head>
+      {/* Hero Section */}
       <Box
-        onMouseMove={handleMouseMove}
-        onMouseLeave={resetAngles}
         sx={{
-          position: "relative",
-          background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-          boxShadow: `0 0 32px 0 ${alpha(theme.palette.primary.main, 0.5)}`,
-          pb: isMobile ? 4 : 10,
-          marginTop: -8.7,
-          borderRadius: isMobile ? "0 0 50% 2%" : "0 0 80% 2%",
+          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
           color: theme.palette.primary.contrastText,
-          overflow: "hidden",
-          "&::after": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 3,
-            width: "100%",
-            height: "100%",
-            background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, #00000000 100%)`,
-            opacity: 0.3,
-            pointerEvents: "none",
-          },
+          minHeight: "80vh",
+          display: "flex",
+          alignItems: "center",
+          position: "relative",
+          clipPath: isMobile
+            ? "ellipse(100% 100% at 50% 0%)"
+            : "ellipse(140% 100% at 50% 0%)",
         }}
       >
-        <Box position="absolute" height={isMobile ? 700 : 600} width="100%">
-          <LogoModelView controlsRef={controlsRef} />
-        </Box>
-        <Stack
-          position="relative"
-          spacing={2}
-          alignItems={isMobile ? "flex-start" : "center"}
-          pt={32}
-          px={3}
-          sx={{
-            pointerEvents: "none",
-            "& > *": {
-              pointerEvents: "initial",
-              zIndex: 5,
-            },
-          }}
-        >
-          <Typography
-            variant="h2"
-            sx={{
-              userSelect: "none",
-            }}
-          >
-            {LL.DATA_STRUCTURES_SIMPLIFIED()}
-          </Typography>
-          <Typography variant="subtitle1">
-            {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()} 👩‍💻
-          </Typography>
-          <br />
-          <Link data-testid="cta-to-playground" href={"/playground"}>
-            <Button variant="outlined" color="inherit" size="large">
-              {LL.TRY_IT_OUT_NOW()} 🚀
-            </Button>
-          </Link>
-        </Stack>
-      </Box>
-      <Container>
-        <Grid container spacing={2} mt={4}>
-          {session.status === "loading" ? (
-            <CircularProgress />
-          ) : session.status === "authenticated" ? (
-            <Grid item xs={12} display="flex" justifyContent="center">
-              <Link href={`/profile/${session.data.user.id}`}>
-                <Button variant="contained">Open Profile</Button>
-              </Link>
-            </Grid>
-          ) : (
-            <Grid item xs={12}>
-              <Tooltip
-                title={LL.SIGN_IN_WITH_GITHUB_OR_GOOGLE_IN_THE_TOP_RIGHT()}
+        <Container maxWidth="xl">
+          <Grid2 container alignItems="center" spacing={4}>
+            {/* Left Column - Content */}
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <Stack spacing={2} sx={{ pt: 8 }}>
+                <Typography
+                  variant={isMobile ? "h3" : "h1"}
+                  sx={{
+                    fontWeight: "bold",
+                    lineHeight: 1.2,
+                    maxWidth: "90%",
+                  }}
+                >
+                  {LL.DATA_STRUCTURES_SIMPLIFIED()}
+                </Typography>
+                <Typography
+                  variant={isMobile ? "body1" : "h6"}
+                  sx={{
+                    opacity: 0.9,
+                    maxWidth: "85%",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()}{" "}
+                  Developers deserve better tools for understanding complex
+                  algorithms and data structures.
+                </Typography>
+                <Stack
+                  direction={isMobile ? "column" : "row"}
+                  spacing={2}
+                  sx={{ pt: 2 }}
+                >
+                  <Link data-testid="cta-to-playground" href={"/playground"}>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      fullWidth
+                      sx={{
+                        bgcolor: "rgba(255, 255, 255, 0.2)",
+                        color: "inherit",
+                        backdropFilter: "blur(10px)",
+                        border: "1px solid rgba(255, 255, 255, 0.3)",
+                        "&:hover": {
+                          bgcolor: "rgba(255, 255, 255, 0.3)",
+                        },
+                        px: 4,
+                        py: 1.5,
+                      }}
+                    >
+                      {LL.TRY_IT_OUT_NOW()} 🚀
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{
+                      borderColor: "rgba(255, 255, 255, 0.3)",
+                      color: "inherit",
+                      "&:hover": {
+                        borderColor: "rgba(255, 255, 255, 0.5)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)",
+                      },
+                      px: 4,
+                      py: 1.5,
+                    }}
+                  >
+                    Documentation →
+                  </Button>
+                </Stack>
+              </Stack>
+            </Grid2>
+
+            {/* Right Column - 3D Model */}
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <Box
+                onMouseMove={handleMouseMove}
+                onMouseLeave={resetAngles}
+                sx={{
+                  height: isMobile ? 400 : 600,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
+                <LogoModelView controlsRef={controlsRef} />
+              </Box>
+            </Grid2>
+          </Grid2>
+        </Container>
+      </Box>
+
+      {/* Content Section */}
+      <Box
+        sx={{
+          bgcolor: "background.default",
+          py: { xs: 8, md: 12 },
+        }}
+      >
+        <Container maxWidth="xl">
+          {/* Authentication Status Section */}
+          <Box sx={{ mb: 8, textAlign: "center" }}>
+            {session.status === "loading" ? (
+              <CircularProgress />
+            ) : session.status === "authenticated" ? (
+              <Link href={`/profile/${session.data.user.id}`}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    px: 4,
+                    py: 1.5,
+                  }}
+                >
+                  Open Profile
+                </Button>
+              </Link>
+            ) : (
+              <Box>
                 <Typography
                   variant="h4"
                   sx={{
-                    width: "fit-content",
-                    margin: "auto",
+                    fontWeight: "bold",
+                    color: "text.primary",
+                    mb: 2,
                   }}
                 >
-                  {LL.SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE()} 🔑
+                  The right balance of security and simplicity.
                 </Typography>
-              </Tooltip>
-            </Grid>
-          )}
-          <Grid item xs={12}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "text.secondary",
+                    maxWidth: 600,
+                    mx: "auto",
+                    mb: 4,
+                  }}
+                >
+                  {LL.SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE()}{" "}
+                  Authentication happens on your server, the visualization
+                  happens on ours.
+                </Typography>
+              </Box>
+            )}
+          </Box>
+
+          {/* Daily Problem Section */}
+          <Box sx={{ textAlign: "center", mb: 6 }}>
             <Typography
-              variant="h5"
-              mt={6}
-              display="inline-block"
-              position="relative"
-              zIndex={100}
+              variant="h4"
               sx={{
                 fontWeight: "bold",
-                textShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
+                color: "text.primary",
+                mb: 2,
               }}
             >
-              Don&apos;t know what to solve today? Here is a daily problem from{" "}
+              Don&apos;t know what to solve today?
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                color: "text.secondary",
+                mb: 4,
+              }}
+            >
+              Here is a daily problem from{" "}
               <MuiLink
-                href={"https://leetcode.com/"}
-                color="inherit"
+                href="https://leetcode.com/"
                 target="_blank"
                 rel="noreferrer"
+                sx={{
+                  color: "primary.main",
+                  textDecoration: "none",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
               >
                 LeetCode
               </MuiLink>
               !
             </Typography>
-            <QuestionSummary
-              questionDataQuery={questionDataQuery}
-              mt={4}
-              mb={12}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <DailyProblem questionDataQuery={questionDataQuery} />
-          </Grid>
-        </Grid>
-      </Container>
+          </Box>
+
+          <Grid2 container spacing={4} justifyContent="center">
+            <Grid2 size={{ xs: 12, lg: 8 }}>
+              <QuestionSummary
+                questionDataQuery={questionDataQuery}
+                sx={{
+                  mb: 4,
+                  p: 3,
+                  borderRadius: 2,
+                  bgcolor: "background.paper",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                }}
+              />
+            </Grid2>
+            <Grid2 size={{ xs: 12 }}>
+              <DailyProblem questionDataQuery={questionDataQuery} />
+            </Grid2>
+          </Grid2>
+        </Container>
+      </Box>
     </MainLayout>
   );
 };
