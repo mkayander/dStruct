@@ -87,7 +87,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     <>
       <SidePanel isOpen={isSidePanelOpen} setIsOpen={setIsSidePanelOpen} />
       <AppBar
-        position="fixed"
+        position="sticky"
         elevation={isScrolled ? 2 : 0}
         variant={appBarVariant}
         color={"transparent"}
