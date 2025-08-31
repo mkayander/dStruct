@@ -37,14 +37,16 @@ import { useAppSelector } from "#/store/hooks";
 
 const AVATAR_PLACEHOLDER = "/avatars/placeholder.png";
 
-type MainAppBarProps = {
+export type MainAppBarProps = {
   appBarVariant?: AppBarProps["variant"];
   toolbarVariant?: ToolbarProps["variant"];
+  position?: AppBarProps["position"];
 };
 
 export const MainAppBar: React.FC<MainAppBarProps> = ({
   appBarVariant = "elevation",
   toolbarVariant = "dense",
+  position = "sticky",
 }) => {
   const router = useRouter();
   const currentPath = router.pathname;
@@ -87,7 +89,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     <>
       <SidePanel isOpen={isSidePanelOpen} setIsOpen={setIsSidePanelOpen} />
       <AppBar
-        position="sticky"
+        position={position}
         elevation={isScrolled ? 2 : 0}
         variant={appBarVariant}
         color={"transparent"}

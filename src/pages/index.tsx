@@ -80,7 +80,7 @@ const DashboardPage: NextPage<{
   const isMobile = useMobileLayout();
 
   return (
-    <MainLayout onScroll={handleScroll}>
+    <MainLayout onScroll={handleScroll} headerPosition="fixed">
       <Head>
         <title>dStruct</title>
       </Head>
