@@ -229,6 +229,22 @@ type RootTranslation = {
 	 */
 	PROJECT: string
 	/**
+	 * P​r​o​j​e​c​t​ ​B​r​o​w​s​e​r
+	 */
+	PROJECT_BROWSER: string
+	/**
+	 * S​e​a​r​c​h​ ​p​r​o​j​e​c​t​s​ ​b​y​ ​t​i​t​l​e​.​.​.
+	 */
+	SEARCH_PROJECTS: string
+	/**
+	 * N​o​ ​p​r​o​j​e​c​t​s​ ​f​o​u​n​d
+	 */
+	NO_PROJECTS_FOUND: string
+	/**
+	 * N​o​ ​p​r​o​j​e​c​t​s​ ​m​a​t​c​h​ ​y​o​u​r​ ​f​i​l​t​e​r​s
+	 */
+	NO_PROJECTS_MATCH_FILTERS: string
+	/**
 	 * R​e​p​l​a​y
 	 */
 	REPLAY: string
@@ -601,6 +617,22 @@ export type TranslationFunctions = {
 	 * Project
 	 */
 	PROJECT: () => LocalizedString
+	/**
+	 * Project Browser
+	 */
+	PROJECT_BROWSER: () => LocalizedString
+	/**
+	 * Search projects by title...
+	 */
+	SEARCH_PROJECTS: () => LocalizedString
+	/**
+	 * No projects found
+	 */
+	NO_PROJECTS_FOUND: () => LocalizedString
+	/**
+	 * No projects match your filters
+	 */
+	NO_PROJECTS_MATCH_FILTERS: () => LocalizedString
 	/**
 	 * Replay
 	 */

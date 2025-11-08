@@ -18,6 +18,7 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
   value,
   onChange,
   timeout,
+  InputProps,
   ...restProps
 }) => {
   const [rawInput, setRawInput] = useState<string>(value);
@@ -50,11 +51,14 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
       value={rawInput}
       onChange={handleChange}
       InputProps={{
+        ...InputProps,
         endAdornment: hasPendingChanges ? (
           <InputAdornment position="end">
             <CircularProgress size={24} />
           </InputAdornment>
-        ) : null,
+        ) : (
+          (InputProps?.endAdornment ?? null)
+        ),
       }}
       {...restProps}
     />

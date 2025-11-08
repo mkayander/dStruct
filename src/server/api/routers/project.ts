@@ -207,6 +207,179 @@ export const projectRouter = createTRPCRouter({
       }),
     ),
 
+  browseProjects: publicProcedure
+    .input(
+      z.object({
+        // Pagination
+        page: z.number().min(1).default(1),
+        pageSize: z.number().min(1).max(100).default(20),
+
+        // Search
+        search: z.string().optional(),
+
+        // Filters
+        categories: z.array(z.nativeEnum(ProjectCategory)).optional(),
+        difficulties: z.array(z.nativeEnum(ProjectDifficulty)).optional(),
+        showOnlyNew: z.boolean().optional(),
+        showOnlyMine: z.boolean().optional(),
+
+        // Sorting
+        sortBy: z
+          .enum(["title", "difficulty", "createdAt", "category"])
+          .default("category"),
+        sortOrder: z.enum(["asc", "desc"]).default("asc"),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.session?.user.id;
+      const {
+        page,
+        pageSize,
+        search,
+        categories,
+        difficulties,
+        showOnlyNew,
+        showOnlyMine,
+        sortBy,
+        sortOrder,
+      } = input;
+
+      // Build where clause
+      const whereConditions: Prisma.PlaygroundProjectWhereInput[] = [];
+
+      // Base visibility filter
+      whereConditions.push({
+        OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }],
+      });
+
+      // Search filter (title)
+      if (search && search.trim()) {
+        whereConditions.push({
+          title: {
+            contains: search.trim(),
+            mode: "insensitive",
+          },
+        });
+      }
+
+      // Category filter
+      if (categories && categories.length > 0) {
+        whereConditions.push({
+          category: {
+            in: categories,
+          },
+        });
+      }
+
+      // Difficulty filter
+      if (difficulties && difficulties.length > 0) {
+        whereConditions.push({
+          difficulty: {
+            in: difficulties,
+          },
+        });
+      }
+
+      // Show only new projects
+      if (showOnlyNew) {
+        // This will need to be passed from client with newProjectMarginMs
+        // For now, we'll filter by createdAt in the last 30 days as default
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        whereConditions.push({
+          createdAt: {
+            gte: thirtyDaysAgo,
+          },
+        });
+      }
+
+      // Show only user's projects
+      if (showOnlyMine && userId) {
+        whereConditions.push({
+          userId,
+        });
+      }
+
+      // Build orderBy clause
+      let orderBy: Prisma.PlaygroundProjectOrderByWithRelationInput[];
+      switch (sortBy) {
+        case "title":
+          orderBy = [{ title: sortOrder }];
+          break;
+        case "difficulty":
+          // For difficulty, we need to handle nulls
+          // Projects without difficulty will be sorted last
+          orderBy = [
+            {
+              difficulty: sortOrder === "asc" ? "asc" : "desc",
+            },
+            { title: "asc" }, // Secondary sort by title
+          ];
+          break;
+        case "createdAt":
+          orderBy = [{ createdAt: sortOrder }];
+          break;
+        case "category":
+          orderBy = [
+            { category: sortOrder },
+            { title: "asc" }, // Secondary sort by title
+          ];
+          break;
+        default:
+          orderBy = [{ category: "asc" }, { title: "asc" }];
+      }
+
+      // Calculate pagination
+      const skip = (page - 1) * pageSize;
+      const take = pageSize + 1; // Fetch one extra to check if there's more
+
+      // Execute query
+      const projects = await ctx.db.playgroundProject.findMany({
+        where: {
+          AND: whereConditions,
+        },
+        select: {
+          id: true,
+          createdAt: true,
+          slug: true,
+          title: true,
+          category: true,
+          difficulty: true,
+          author: {
+            select: {
+              id: true,
+              name: true,
+              bucketImage: true,
+            },
+          },
+        },
+        orderBy,
+        skip,
+        take,
+      });
+
+      // Check if there are more results
+      const hasMore = projects.length > pageSize;
+      const paginatedProjects = hasMore
+        ? projects.slice(0, pageSize)
+        : projects;
+
+      // Get total count for pagination info (optional, can be expensive)
+      const total = await ctx.db.playgroundProject.count({
+        where: {
+          AND: whereConditions,
+        },
+      });
+
+      return {
+        projects: paginatedProjects,
+        total,
+        hasMore,
+        page,
+        pageSize,
+      };
+    }),
+
   // Select a single project
   getBySlug: publicProcedure.input(z.string()).query(async ({ ctx, input }) =>
     ctx.db.playgroundProject

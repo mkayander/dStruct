@@ -138,6 +138,10 @@ model PlaygroundProject {
   @@unique([slug])
   @@unique([title, userId])
   @@index([userId])
+  @@index([category])
+  @@index([difficulty])
+  @@index([createdAt])
+  @@index([title])
 }
 
 enum CodeLanguage {

@@ -2,18 +2,27 @@
 
 ## Executive Summary
 
-This document outlines the design and implementation plan for a comprehensive ProjectBrowser component to replace the current `ProjectSelect` dropdown. The new browser will provide advanced filtering, searching, sorting, and pagination capabilities similar to LeetCode's problem browser, optimized for handling large datasets efficiently.
+This document outlines the design and implementation plan for a comprehensive ProjectBrowser component to replace the current `ProjectSelect` dropdown. The new browser will provide advanced filtering, searching, sorting, and pagination capabilities similar to modern coding challenge platforms, optimized for handling large datasets efficiently.
 
 **Overall Implementation Difficulty: 6/10** (Medium-Hard)
 
 **Estimated Total Effort:** 16-21 days (including testing)
 
+**Current Status:**
+
+- ✅ **Phase 1: Foundation** - Complete
+- ✅ **Phase 2: Modern UI & Filtering** - Complete
+- ⏳ **Phase 3: Performance Optimization** - Pending (API integration, virtualization)
+- ⏳ **Phase 4: Polish & Integration** - Partially complete
+- ⏳ **Phase 5: Testing** - Pending
+- ⏳ **Phase 6: Documentation** - In progress
+
 **Key Challenges:**
 
-- Server-side pagination and filtering (7/10)
-- Performance optimization with virtualization (7/10)
-- Complex state management with filters and sorting (6/10)
-- Comprehensive unit testing with mock data (5/10)
+- Server-side pagination and filtering (7/10) - ✅ API endpoint created, ⏳ client integration pending
+- Performance optimization with virtualization (7/10) - ⏳ Pending
+- Complex state management with filters and sorting (6/10) - ✅ Complete
+- Comprehensive unit testing with mock data (5/10) - ⏳ Pending
 
 ## Current State Analysis
 
@@ -65,30 +74,46 @@ type ProjectBrief = {
 ### Functional Requirements
 
 1. **Location & Entry Point**
-   - Opens in the left-side panel (replacing or complementing ProjectSelect)
-   - Clear, intuitive entry point (button/icon in ProjectPanel)
+   - Opens as a **left-side drawer panel** using MUI Drawer component
+   - Slides in from the left with backdrop overlay
+   - Clear, intuitive entry point (FolderOpen icon button in ProjectPanel)
    - Should be accessible from the playground page
+   - Drawer width: `70vw` (responsive: max 90vw, min 300px)
 
 2. **UI Framework**
    - Use Material-UI (MUI) components consistently
-   - Follow existing design patterns (PanelWrapper, StyledTabPanel, etc.)
+   - **Use MUI Drawer** for the left-side panel (matches existing SidePanel pattern)
+   - Follow existing design patterns (PanelWrapper, Drawer, StyledTabPanel, etc.)
    - Match the application's theme and color scheme
+   - Drawer styling: backdrop blur, theme-aware opacity (95% dark mode, 98% light mode)
 
-3. **Core Features (LeetCode-like)**
-   - **Search**: Full-text search across project titles and descriptions
+3. **Core Features (Modern Problem Browser Layout)**
+   - **Top Category Bar**: Horizontal scrollable bar with category chips showing counts (e.g., "Array: 2037", "String: 826") - clickable filters
+   - **Topic Filter Row**: Removed - project only has algorithms, so no topic filtering needed
+   - **Search Bar**: Prominent search input with magnifying glass icon, placeholder "Search questions"
+   - **Header Controls**:
+     - Sort dropdown/button with up/down arrow icon
+     - Filter icon button (funnel icon) for advanced filters
+     - Progress indicator (optional: "X/Y Solved" with circular progress bar)
    - **Filters**:
-     - Category filter (multi-select chips or checkboxes)
-     - Difficulty filter (Easy/Medium/Hard)
-     - Author filter (optional, for user's own projects)
-     - Status filter (New/Recent projects)
+     - Category filter (top bar chips - clickable)
+     - Difficulty filter (Easy/Medium/Hard toggle buttons in advanced panel)
+     - Author filter (Show only mine - placeholder, disabled)
+     - Status filter (Show only new projects)
    - **Sorting**:
      - By title (A-Z, Z-A)
      - By difficulty (Easy → Hard, Hard → Easy)
      - By date created (Newest first, Oldest first)
      - By category (alphabetical)
-   - **View Options**:
-     - List view (default)
-     - Compact view (optional, for future)
+   - **List Items** (Enhanced):
+     - Completion status indicator (checkmark for solved/completed)
+     - Project ID and title
+     - Success rate percentage (optional, if available)
+     - Difficulty badge (color-coded: Easy/Med/Hard)
+     - Visual indicator bars (popularity/complexity gauge)
+     - Favorite/bookmark icon (optional)
+     - Category label
+     - Author avatar
 
 4. **Performance Requirements**
    - Handle large datasets (1000+ projects) efficiently
@@ -127,52 +152,85 @@ type ProjectBrief = {
 src/features/project/
 ├── ui/
 │   ├── ProjectBrowser/
-│   │   ├── ProjectBrowser.tsx          # Main container component
-│   │   ├── ProjectBrowserHeader.tsx    # Search, filters, sort controls
-│   │   ├── ProjectBrowserFilters.tsx   # Filter chips/checkboxes
-│   │   ├── ProjectBrowserList.tsx      # Virtualized list container
-│   │   ├── ProjectBrowserItem.tsx     # Individual project item
-│   │   └── ProjectBrowserEmpty.tsx     # Empty state component
-│   ├── ProjectSelect.tsx               # Keep for backward compatibility
-│   └── ProjectPanel.tsx                # Update to include browser entry point
+│   │   ├── ProjectBrowser.tsx              # Main container (MUI Drawer wrapper)
+│   │   ├── ProjectBrowserCategoryBar.tsx   # Top horizontal category chips with counts
+│   │   ├── ProjectBrowserTopicFilters.tsx   # Topic filter buttons row (All Topics, Algorithms, etc.)
+│   │   ├── ProjectBrowserHeader.tsx        # Search, sort, filter controls
+│   │   ├── ProjectBrowserFilters.tsx       # Advanced filter panel (category, difficulty, etc.)
+│   │   ├── ProjectBrowserList.tsx          # Virtualized list container
+│   │   ├── ProjectBrowserItem.tsx          # Individual project item (enhanced)
+│   │   └── ProjectBrowserEmpty.tsx        # Empty state component
+│   ├── ProjectSelect.tsx                   # Keep for backward compatibility
+│   └── ProjectPanel.tsx                    # Update to include browser entry point
 ├── model/
-│   └── projectBrowserSlice.ts          # Redux slice for browser state
+│   └── projectBrowserSlice.ts              # Redux slice for browser state
 └── hooks/
-    ├── useProjectBrowser.ts            # Main hook for browser logic
-    ├── useProjectFilters.ts            # Filter management hook
-    └── useProjectPagination.ts         # Pagination hook
+    ├── useProjectBrowser.ts                # Main hook for browser logic
+    ├── useProjectFilters.ts                # Filter management hook
+    └── useProjectPagination.ts             # Pagination hook
 ```
+
+**Implementation Notes:**
+
+- `ProjectBrowser.tsx` wraps content in MUI `Drawer` component with `anchor="left"`
+- Drawer width: 400px (max 90vw on mobile for responsiveness)
+- Drawer closes on backdrop click, ESC key, or project selection
+- Uses `PanelWrapper` inside Drawer for consistent styling
 
 ### Component Hierarchy Diagram
 
 ```mermaid
 graph TD
     A[ProjectPanel] --> B[ProjectBrowser]
-    B --> C[ProjectBrowserHeader]
-    B --> D[ProjectBrowserList]
-    B --> E[ProjectBrowserEmpty]
+    B --> B1[MUI Drawer]
+    B1 --> B2[PanelWrapper]
+    B2 --> C1[ProjectBrowserCategoryBar]
+    B2 --> C2[ProjectBrowserTopicFilters]
+    B2 --> C3[ProjectBrowserHeader]
+    B2 --> D[ProjectBrowserList]
+    B2 --> E[ProjectBrowserEmpty]
 
-    C --> F[SearchInput]
-    C --> G[ProjectBrowserFilters]
-    C --> H[SortDropdown]
+    C1 --> C1A[CategoryChip with Count]
 
+    C2 --> C2A[All Topics Button]
+    C2 --> C2B[Algorithms Button]
+    C2 --> C2C[Database Button]
+
+    C3 --> F[SearchInput]
+    C3 --> H[SortDropdown]
+    C3 --> I1[FilterIconButton]
+    C3 --> I2[ProgressIndicator]
+
+    I1 --> G[ProjectBrowserFilters]
     G --> I[CategoryFilter]
     G --> J[DifficultyFilter]
     G --> K[OtherFilters]
 
     D --> L[Virtuoso]
     L --> M[ProjectBrowserItem]
-    M --> N[ProjectTitle]
-    M --> O[DifficultyBadge]
-    M --> P[CategoryLabel]
-    M --> Q[AuthorAvatar]
+    M --> N[CompletionStatus]
+    M --> O[ProjectID & Title]
+    M --> P[DifficultyBadge]
+    M --> Q[SuccessRate]
+    M --> R[VisualBars]
+    M --> S[FavoriteIcon]
+    M --> T[CategoryLabel]
+    M --> U[AuthorAvatar]
 
-    B -.-> R[projectBrowserSlice]
-    B -.-> S[useProjectBrowser]
-    S -.-> T[useProjectFilters]
-    S -.-> U[useProjectPagination]
-    S -.-> V[api.project.browseProjects]
+    B -.-> V[projectBrowserSlice]
+    B -.-> W[useProjectBrowser]
+    W -.-> X[useProjectFilters]
+    W -.-> Y[useProjectPagination]
+    W -.-> Z[api.project.browseProjects]
 ```
+
+**Drawer Implementation:**
+
+- MUI `Drawer` component with `anchor="left"`
+- Width: 400px (responsive: max 90vw)
+- Backdrop blur effect matching SidePanel pattern
+- Theme-aware opacity (95% dark, 98% light)
+- Closes on backdrop click, ESC key, or project selection
 
 ### State Management
 
@@ -301,35 +359,95 @@ browseProjects: publicProcedure
 
 ## UI/UX Design
 
-### Layout Structure
+### Layout Structure (Modern Problem Browser Style)
+
+**Drawer Panel (Left Side) - Reference Layout:**
 
 ```
 ┌─────────────────────────────────────────┐
-│  ProjectBrowser                         │
+│  [Backdrop Overlay - Blurred]          │
 │  ┌───────────────────────────────────┐  │
-│  │ Header:                           │  │
-│  │  - Search Input (full width)      │  │
-│  │  - Filter Chips Row               │  │
-│  │  - Sort Dropdown                  │  │
-│  └───────────────────────────────────┘  │
-│  ┌───────────────────────────────────┐  │
-│  │ Virtualized List:                  │  │
-│  │  ┌─────────────────────────────┐   │  │
-│  │  │ Project Item 1              │   │  │
-│  │  │ [Title] [Difficulty] [New]  │   │  │
-│  │  └─────────────────────────────┘   │  │
-│  │  ┌─────────────────────────────┐   │  │
-│  │  │ Project Item 2              │   │  │
-│  │  └─────────────────────────────┘   │  │
-│  │  ... (virtualized)                │  │
-│  └───────────────────────────────────┘  │
-│  ┌───────────────────────────────────┐  │
-│  │ Footer:                            │  │
-│  │  - Loading indicator (if loading)  │  │
-│  │  - "Load More" button (optional)   │  │
+│  │  ProjectBrowser (Drawer)          │  │
+│  │  Width: 400px (max 90vw mobile)  │  │
+│  │                                    │  │
+│  │  ┌─────────────────────────────┐  │  │
+│  │  │ TOP CATEGORY BAR            │  │  │
+│  │  │ [Array: 2037] [String: 826] │  │  │
+│  │  │ [Hash Table: 752] [Math...] │  │  │
+│  │  │ (Horizontal scrollable)     │  │  │
+│  │  └─────────────────────────────┘  │  │
+│  │                                    │  │
+│  │  ┌─────────────────────────────┐  │  │
+│  │  │ TOPIC FILTER ROW             │  │  │
+│  │  │ [✓ All Topics] [Algorithms]  │  │  │
+│  │  │ [Database] [pandas] [JS...]  │  │  │
+│  │  └─────────────────────────────┘  │  │
+│  │                                    │  │
+│  │  ┌─────────────────────────────┐  │  │
+│  │  │ HEADER CONTROLS              │  │  │
+│  │  │ [🔍 Search questions]        │  │  │
+│  │  │ [↓↑ Sort] [∇ Filter] [1473/│  │  │
+│  │  │  3739 Solved ▓▓▓░░░░░░]     │  │  │
+│  │  └─────────────────────────────┘  │  │
+│  │                                    │  │
+│  │  ┌─────────────────────────────┐  │  │
+│  │  │ VIRTUALIZED LIST            │  │  │
+│  │  │ ┌─────────────────────────┐ │  │  │
+│  │  │ │ ✓ 1611. Minimum One... │ │  │  │
+│  │  │ │    78.4% [Hard] ▓▓▓▓▓  │ │  │  │
+│  │  │ └─────────────────────────┘ │  │  │
+│  │  │ ┌─────────────────────────┐ │  │  │
+│  │  │ │   1. Two Sum           │ │  │  │
+│  │  │ │    56.5% [Easy] ▓▓▓▓   │ │  │  │
+│  │  │ └─────────────────────────┘ │  │  │
+│  │  │ ... (virtualized)          │  │  │
+│  │  └─────────────────────────────┘  │  │
 │  └───────────────────────────────────┘  │
 └─────────────────────────────────────────┘
 ```
+
+**Layout Components Breakdown:**
+
+1. **Top Category Bar** (`ProjectBrowserCategoryBar.tsx`):
+   - Horizontal scrollable row of category chips
+   - Each chip shows: `[Category Name]: [Count]`
+   - Examples: "Array: 2037", "String: 826", "Hash Table: 752"
+   - Clickable to filter by category
+   - Active state highlighting
+   - Uses MUI `Chip` component with horizontal scroll
+
+2. **Topic Filter Row** (`ProjectBrowserTopicFilters.tsx`):
+   - Horizontal row of topic buttons
+   - Topics: "All Topics", "Algorithms", "Database", "pandas", "JavaScript", "Shell", "Concurrency"
+   - Selected topic highlighted (e.g., "All Topics" with checkmark/trash icon)
+   - Each button has icon + text
+   - Uses MUI `ToggleButtonGroup` or `ButtonGroup`
+
+3. **Header Controls** (`ProjectBrowserHeader.tsx`):
+   - **Search Bar**: Full-width input with magnifying glass icon, placeholder "Search questions"
+   - **Sort Control**: Icon button with up/down arrows (↓↑) - opens sort menu
+   - **Filter Button**: Icon button with funnel icon (∇) - opens advanced filter panel
+   - **Progress Indicator** (optional): "X/Y Solved" with circular progress bar (if tracking completion)
+
+4. **Enhanced List Items** (`ProjectBrowserItem.tsx`):
+   - **Completion Status**: Green checkmark (✓) for solved/completed projects
+   - **Project ID & Title**: "1611. Minimum One Bit Operations..."
+   - **Success Rate**: Percentage (e.g., "78.4%") - optional if available
+   - **Difficulty Badge**: Color-coded (Easy/Med/Hard) with appropriate colors
+   - **Visual Bars**: Small vertical bars indicating popularity/complexity
+   - **Favorite Icon**: Star icon (optional) for bookmarked projects
+   - **Category Label**: Subtle text below title
+   - **Author Avatar**: Small avatar on the right
+
+**Drawer Specifications:**
+
+- **Width:** 400px (desktop), max 90vw (mobile)
+- **Anchor:** Left side
+- **Backdrop:** Blurred overlay (closes drawer on click)
+- **Animation:** Slide-in from left with smooth transition
+- **Theme:** Backdrop opacity 95% (dark) / 98% (light)
+- **Close triggers:** Backdrop click, ESC key, project selection
+- **Entry point:** FolderOpen icon button in ProjectPanel toolbar
 
 ### Project Item Design
 
@@ -395,23 +513,38 @@ browseProjects: publicProcedure
 
 ### Phase 1: Foundation (Week 1) - **Difficulty: 4/10**
 
-1. Create component structure - **Difficulty: 2/10**
-2. Set up Redux slice - **Difficulty: 3/10**
-3. Create basic UI layout - **Difficulty: 3/10**
-4. Implement search input - **Difficulty: 4/10**
-5. Basic project list (no virtualization yet) - **Difficulty: 3/10**
+1. Create component structure - **Difficulty: 2/10** ✅
+2. Set up Redux slice - **Difficulty: 3/10** ✅
+3. Create basic UI layout with MUI Drawer - **Difficulty: 4/10** ✅
+   - Implement MUI Drawer as left-side panel
+   - Configure drawer width (70vw, max 90vw, min 300px)
+   - Add backdrop blur and theme-aware opacity
+   - Handle drawer open/close state
+   - Add entry point button (FolderOpen icon) in ProjectPanel
+4. Implement search input - **Difficulty: 4/10** ✅
+5. Basic project list (no virtualization yet) - **Difficulty: 3/10** ✅
 
 **Total Estimated Effort:** 2-3 days
 
-### Phase 2: Filtering & Sorting (Week 1-2) - **Difficulty: 6/10**
+**Phase 1 Implementation Notes:**
 
-1. Implement filter UI components - **Difficulty: 5/10**
-2. Add filter logic to Redux - **Difficulty: 4/10**
-3. Implement sorting UI and logic - **Difficulty: 5/10**
-4. Connect filters to API endpoint - **Difficulty: 6/10**
-5. Update API endpoint with filtering - **Difficulty: 7/10**
+- ✅ Implemented MUI Drawer with `anchor="left"` (70vw width, max 90vw, min 300px)
+- ✅ Drawer closes on backdrop click, ESC key, and project selection
+- ✅ Styling matches existing SidePanel pattern (backdrop blur, theme-aware)
+- ✅ Entry point: FolderOpen icon button in ProjectPanel toolbar
+- ✅ Uses PanelWrapper inside Drawer for consistent styling
+- ✅ Uses `slotProps.paper` (MUI v6+ API, avoiding deprecated `PaperProps`)
 
-**Total Estimated Effort:** 4-5 days
+### Phase 2: Filtering & Sorting (Week 1-2) - **Difficulty: 6/10** ✅ **COMPLETE**
+
+1. ✅ Implement filter UI components - **Difficulty: 5/10**
+2. ✅ Add filter logic to Redux - **Difficulty: 4/10**
+3. ✅ Implement sorting UI and logic - **Difficulty: 5/10**
+4. ✅ Create API endpoint with filtering - **Difficulty: 7/10**
+5. ⏳ Connect client to API endpoint - **Difficulty: 6/10** (Pending in Phase 3)
+
+**Total Estimated Effort:** 4-5 days  
+**Actual Status:** Phase 2 complete, API endpoint ready for integration
 
 ### Phase 3: Performance Optimization (Week 2) - **Difficulty: 7/10**
 
@@ -750,6 +883,27 @@ const createMockBrowseResponse = (
    - Proper error handling
    - Full test coverage
 
+## Implementation Status Summary
+
+### Completed ✅
+
+- **Phase 1: Foundation** - All components created, Redux slice implemented, basic UI working
+- **Phase 2: Modern UI & Filtering** - Complete UI with category bar, topic filters (simplified), advanced filters, sorting, enhanced list items
+- **API Endpoint** - `browseProjects` endpoint created with filtering, sorting, and pagination
+- **Database Indexes** - Added to Prisma schema (migration pending: run `pnpm prisma migrate dev`)
+
+### In Progress ⏳
+
+- **Phase 3: Performance Optimization** - API integration, virtualization, infinite scroll
+- **Phase 4: Polish** - I18n translations, error handling, keyboard navigation improvements
+- **Phase 5: Testing** - Unit tests, integration tests
+
+### Pending Actions ⚠️
+
+- **Database Migration** - Run `pnpm prisma migrate dev` to apply indexes
+- **Translation Types** - Run `pnpm typesafe-i18n` to update types (runs as file watcher)
+- **Client-Side API Integration** - Replace `allBrief` with `browseProjects` in components
+
 ## Open Questions
 
 1. Should we support saved filter presets?
@@ -760,7 +914,6 @@ const createMockBrowseResponse = (
 
 ## References
 
-- [LeetCode Problems Page](https://leetcode.com/problemset/)
 - [react-virtuoso Documentation](https://virtuoso.dev/)
 - [MUI Data Grid Patterns](https://mui.com/x/react-data-grid/)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
@@ -838,3 +991,23 @@ interface ProjectBrowserFiltersProps {
   onDifficultyChange: (difficulties: ProjectDifficulty[]) => void;
 }
 ```
+
+### Implementation Status
+
+**Phase 1: Foundation - ✅ COMPLETED**
+
+- ✅ Component structure created
+- ✅ Redux slice implemented and registered
+- ✅ MUI Drawer implemented as left-side panel
+- ✅ Search input integrated with Redux
+- ✅ Basic project list displaying (client-side filtering)
+- ✅ Entry point button added to ProjectPanel
+- ✅ I18n translations added
+
+**Key Implementation Details:**
+
+- Drawer width: 400px (max 90vw on mobile)
+- Drawer anchor: left
+- Backdrop blur with theme-aware opacity
+- Closes on backdrop click, ESC key, or project selection
+- Uses PanelWrapper inside Drawer for consistent styling

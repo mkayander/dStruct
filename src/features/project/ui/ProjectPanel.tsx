@@ -1,4 +1,4 @@
-import { Add, Edit } from "@mui/icons-material";
+import { Add, Edit, FolderOpen } from "@mui/icons-material";
 import { TabContext, TabList } from "@mui/lab";
 import { IconButton, Stack, Tab, Tooltip } from "@mui/material";
 import { TRPCClientError } from "@trpc/client";
@@ -8,10 +8,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { ArgsEditor } from "#/features/argsEditor/ui/ArgsEditor";
+import { projectBrowserSlice } from "#/features/project/model/projectBrowserSlice";
 import {
   projectSlice,
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
+import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectSelect } from "#/features/project/ui/ProjectSelect";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
 import { usePlaygroundSlugs } from "#/shared/hooks";
@@ -47,6 +49,10 @@ export const ProjectPanel: React.FC = () => {
   const allBrief = api.project.allBrief.useQuery();
 
   const isEditable = useAppSelector(selectIsEditable);
+
+  const handleOpenBrowser = () => {
+    dispatch(projectBrowserSlice.actions.setIsOpen(true));
+  };
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
@@ -164,6 +170,11 @@ export const ProjectPanel: React.FC = () => {
           <Stack direction="row" alignItems="center" spacing={2}>
             <ProjectSelect allBrief={allBrief} />
             <Stack direction="row" spacing={0.5}>
+              <Tooltip title={`${LL.PROJECT_BROWSER()} 📁`} arrow>
+                <IconButton onClick={handleOpenBrowser}>
+                  <FolderOpen />
+                </IconButton>
+              </Tooltip>
               {isEditable && (
                 <Tooltip title={`${LL.EDIT_SELECTED_PROJECT()} ✍`} arrow>
                   <IconButton onClick={handleEditProject}>
@@ -180,6 +191,12 @@ export const ProjectPanel: React.FC = () => {
               )}
             </Stack>
           </Stack>
+
+          <ProjectBrowser
+            onSelectProject={(_slug) => {
+              dispatch(projectBrowserSlice.actions.setIsOpen(false));
+            }}
+          />
 
           <TestCaseSelectBar selectedProject={selectedProject} />
 

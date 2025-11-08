@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const config = { matcher: "/api/config" };
 
-export async function middleware() {
+export async function proxy() {
   const config = await getAll();
 
   return NextResponse.json(config ?? {});
