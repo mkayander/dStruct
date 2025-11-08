@@ -74,6 +74,31 @@ src/
 - Follow design system color palette from `src/shared/lib/colors.ts`
 - Use `cn()` utility for conditional class merging
 
+### Material-UI (MUI) Best Practices
+
+- **ALWAYS** use the latest MUI API patterns
+- **NEVER** use deprecated props - check deprecation warnings
+- **Common deprecations to avoid:**
+  - `PaperProps` → Use `slotProps.paper` instead
+  - `InputProps` → Use `slotProps.input` instead
+  - `InputLabelProps` → Use `slotProps.inputLabel` instead
+  - Other `*Props` patterns → Check for `slotProps.*` alternatives
+- When encountering deprecation warnings:
+  1. Check MUI migration guide: https://mui.com/material-ui/migration/
+  2. Replace deprecated prop with `slotProps` pattern
+  3. Verify functionality remains the same
+  4. Update all occurrences in the codebase
+- Prefer `slotProps` pattern for component customization:
+  ```typescript
+  // ✅ Correct (MUI v6+)
+  <Drawer slotProps={{ paper: { sx: {...} } }} />
+  
+  // ❌ Deprecated (will be removed in v7)
+  <Drawer PaperProps={{ sx: {...} }} />
+  ```
+- Keep MUI components updated and follow migration guides
+- Test after updating deprecated APIs
+
 ## File Naming & Organization
 
 ### Naming Conventions
