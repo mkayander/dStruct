@@ -7,7 +7,6 @@ import { env } from "#/env/server.mjs";
 const isProduction = env.NODE_ENV === "production";
 
 declare global {
-  // eslint-disable-next-line no-var
   var db: ReturnType<typeof makeClient> | undefined;
 }
 
