@@ -24,7 +24,6 @@ import React from "react";
 
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
-import { useI18nContext } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
@@ -44,7 +43,6 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
   open,
   onClose,
 }) => {
-  const { LL } = useI18nContext();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const session = useSession();

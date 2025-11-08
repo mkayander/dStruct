@@ -7,7 +7,6 @@ import {
   IconButton,
   Stack,
   Typography,
-  useColorScheme,
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useMemo, useRef } from "react";
@@ -45,8 +44,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const { mode } = useColorScheme();
-  const isDarkMode = mode === "dark";
   const isOpen = useAppSelector(selectIsOpen);
   const searchQuery = useAppSelector(selectSearchQuery);
   const selectedCategories = useAppSelector(selectSelectedCategories);

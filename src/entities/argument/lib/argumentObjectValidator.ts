@@ -7,5 +7,7 @@ export const argumentObjectValidator = z.object({
   type: z.nativeEnum(ArgumentType),
   order: z.number(),
   input: z.string(),
-  nodeData: z.record(z.object({ x: z.number(), y: z.number() })).optional(),
+  nodeData: z
+    .record(z.string(), z.object({ x: z.number(), y: z.number() }))
+    .optional(),
 });

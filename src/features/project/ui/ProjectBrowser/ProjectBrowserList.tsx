@@ -74,36 +74,6 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
     }
   }, [hasMoreData, isLoading, currentPage, dispatch]);
 
-  // Only show full-page spinner on initial load (when no projects yet)
-  // During pagination, show the list with footer loading indicator
-  const isInitialLoad = isLoading && displayedProjects.length === 0;
-
-  if (isInitialLoad) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: 200,
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (!isLoading && displayedProjects.length === 0) {
-    const hasFilters =
-      searchQuery.trim().length > 0 ||
-      selectedCategories.length > 0 ||
-      selectedDifficulties.length > 0 ||
-      showOnlyNew;
-    return (
-      <ProjectBrowserEmpty searchQuery={searchQuery} hasFilters={hasFilters} />
-    );
-  }
-
   // Memoize item renderer to prevent unnecessary re-renders
   // Use a stable callback map to prevent onClick recreation
   const itemContent = useCallback(
@@ -152,6 +122,36 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
     }),
     [Footer],
   );
+
+  // Only show full-page spinner on initial load (when no projects yet)
+  // During pagination, show the list with footer loading indicator
+  const isInitialLoad = isLoading && displayedProjects.length === 0;
+
+  if (isInitialLoad) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: 200,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!isLoading && displayedProjects.length === 0) {
+    const hasFilters =
+      searchQuery.trim().length > 0 ||
+      selectedCategories.length > 0 ||
+      selectedDifficulties.length > 0 ||
+      showOnlyNew;
+    return (
+      <ProjectBrowserEmpty searchQuery={searchQuery} hasFilters={hasFilters} />
+    );
+  }
 
   return (
     <Box

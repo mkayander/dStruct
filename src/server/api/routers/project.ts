@@ -610,7 +610,7 @@ export const projectRouter = createTRPCRouter({
         caseId: z.string(),
         title: z.string().optional(),
         slug: z.string().optional(),
-        args: z.record(argumentObjectValidator).optional(),
+        args: z.record(z.string(), argumentObjectValidator).optional(),
         description: z.string().optional(),
       }),
     )

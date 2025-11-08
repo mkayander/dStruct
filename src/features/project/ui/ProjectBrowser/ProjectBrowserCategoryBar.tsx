@@ -5,7 +5,6 @@ import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import type { RouterOutputs } from "#/shared/api";
-import { useI18nContext } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
@@ -25,7 +24,6 @@ const COLLAPSED_MAX_HEIGHT = 120;
 export const ProjectBrowserCategoryBar: React.FC<
   ProjectBrowserCategoryBarProps
 > = ({ projects }) => {
-  const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
   const selectedCategories = useAppSelector(selectSelectedCategories);
   const [isExpanded, setIsExpanded] = useState(false);
