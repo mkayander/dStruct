@@ -377,7 +377,9 @@ export const useCustomHook = (): ReturnType => {
   - Add keys to `src/i18n/en/index.ts`
   - Use `LL.KEY_NAME()` pattern in components
   - Support all locales: en, ru, de, es, sr, uk
-  - Run `pnpm typesafe-i18n` after adding keys
+  - **IMPORTANT**: `pnpm typesafe-i18n` runs as a file watcher and does NOT exit by itself
+  - After adding translation keys, instruct user to run `pnpm typesafe-i18n` manually (or run in background)
+  - Do NOT run `pnpm typesafe-i18n` directly in terminal commands as it will hang
 - Never hardcode strings in components
 - Document all new translation keys in design docs
 
