@@ -1,0 +1,45 @@
+# Dependencies - large and not useful for code understanding
+node_modules/
+.pnp
+.pnp.js
+
+# Python virtual environment - not source code
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files - sensitive, shouldn't be indexed
+.env
+.env*.local
+
+# Database files - binary data
+prisma/db.sqlite
+prisma/db.sqlite-journal
+
+# Large binary assets - not useful for code understanding
+# 3D model source files and compiled assets
+blender/**/*.blend
+blender/**/*.glb
+blender/**/*.bin
+public/assets/**/*.glb
+
+# Lock files - very large, not useful for understanding code
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Vercel deployment artifacts
+.vercel/
+
+# Data dumps - large JSON files
+dumps/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Note: Test coverage, logs, IDE configs, and patches are kept
+# as they may be useful for understanding the project context
+
