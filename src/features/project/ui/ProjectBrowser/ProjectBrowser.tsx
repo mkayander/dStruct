@@ -248,8 +248,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
           <ProjectBrowserList
             projects={accumulatedProjects}
             isLoading={browseProjects.isLoading}
-            hasMore={browseProjects.data?.hasMore ?? false}
-            total={browseProjects.data?.total ?? 0}
             selectedProjectSlug={projectSlug}
             onSelectProject={handleSelectProject}
           />

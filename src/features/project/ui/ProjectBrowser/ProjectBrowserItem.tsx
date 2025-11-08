@@ -28,169 +28,189 @@ type ProjectBrowserItemProps = {
   onClick: () => void;
 };
 
-export const ProjectBrowserItem: React.FC<ProjectBrowserItemProps> = ({
-  project,
-  isSelected,
-  onClick,
-}) => {
-  const theme = useTheme();
-  const { newProjectMarginMs } = useContext(ConfigContext);
+export const ProjectBrowserItem: React.FC<ProjectBrowserItemProps> = React.memo(
+  ({ project, isSelected, onClick }) => {
+    const theme = useTheme();
+    const { newProjectMarginMs } = useContext(ConfigContext);
 
-  const isProjectNew =
-    newProjectMarginMs &&
-    project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
+    const isProjectNew =
+      newProjectMarginMs &&
+      project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
 
-  const handleKeyDown = (ev: React.KeyboardEvent) => {
-    if (ev.key === "Enter" || ev.key === " ") {
-      ev.preventDefault();
-      onClick();
-    }
-  };
+    const handleKeyDown = (ev: React.KeyboardEvent) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        onClick();
+      }
+    };
 
-  const difficultyColor = project.difficulty
-    ? getDifficultyColor(theme, project.difficulty)
-    : undefined;
+    const difficultyColor = project.difficulty
+      ? getDifficultyColor(theme, project.difficulty)
+      : undefined;
 
-  return (
-    <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-      spacing={1.5}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      sx={{
-        p: 1.75,
-        px: 2,
-        cursor: "pointer",
-        borderRadius: 1.5,
-        backgroundColor: isSelected
-          ? theme.palette.action.selected
-          : "transparent",
-        border: `1px solid ${
-          isSelected ? theme.palette.primary.main : theme.palette.divider
-        }`,
-        borderColor: isSelected ? theme.palette.primary.main : "transparent",
-        "&:hover": {
-          backgroundColor: theme.palette.action.hover,
-        },
-        "&:focus-visible": {
-          outline: `2px solid ${theme.palette.primary.main}`,
-          outlineOffset: -2,
-        },
-        transition: "background-color 0.2s ease-in-out",
-      }}
-      role="listitem"
-      aria-selected={isSelected}
-      aria-label={`Select project ${project.title}`}
-    >
-      {/* Left side: Completion status placeholder, title, category */}
+    return (
       <Stack
         direction="row"
-        spacing={1.5}
+        justifyContent="space-between"
         alignItems="center"
-        flex={1}
-        minWidth={0}
+        spacing={1.5}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        sx={{
+          height: 76,
+          p: 1.75,
+          px: 2,
+          cursor: "pointer",
+          borderRadius: 1.5,
+          backgroundColor: isSelected
+            ? theme.palette.action.selected
+            : "transparent",
+          border: `1px solid ${
+            isSelected ? theme.palette.primary.main : theme.palette.divider
+          }`,
+          borderColor: isSelected ? theme.palette.primary.main : "transparent",
+          "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.primary.main}`,
+            outlineOffset: -2,
+          },
+          transition: "background-color 0.15s ease-out",
+        }}
+        role="listitem"
+        aria-selected={isSelected}
+        aria-label={`Select project ${project.title}`}
       >
-        {/* Completion status placeholder - can be added when data is available */}
-        <Box
-          sx={{
-            width: 20,
-            height: 20,
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          aria-label="Completion status"
+        {/* Left side: Completion status placeholder, title, category */}
+        <Stack
+          direction="row"
+          spacing={1.5}
+          alignItems="center"
+          flex={1}
+          minWidth={0}
         >
-          {/* Placeholder for checkmark icon when completion data is available */}
-        </Box>
-
-        <Stack direction="column" spacing={0.5} flex={1} minWidth={0}>
-          <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
-            flexWrap="nowrap"
+          {/* Completion status placeholder - can be added when data is available */}
+          <Box
+            sx={{
+              width: 20,
+              height: 20,
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Completion status"
           >
-            <Typography
-              variant="body1"
-              sx={{
-                fontWeight: isSelected ? 600 : 500,
-                fontSize: "0.95rem",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                color: isSelected
-                  ? theme.palette.text.primary
-                  : theme.palette.text.primary,
-              }}
+            {/* Placeholder for checkmark icon when completion data is available */}
+          </Box>
+
+          <Stack direction="column" spacing={0.5} flex={1} minWidth={0}>
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              flexWrap="nowrap"
             >
-              {project.title}
-            </Typography>
-            {isProjectNew && <NewLabel createdAt={project.createdAt} />}
-          </Stack>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography
-              variant="caption"
-              sx={{
-                color: "text.secondary",
-                fontSize: "0.75rem",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {categoryLabels[project.category]}
-            </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontWeight: isSelected ? 600 : 500,
+                  fontSize: "0.95rem",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  color: isSelected
+                    ? theme.palette.text.primary
+                    : theme.palette.text.primary,
+                }}
+              >
+                {project.title}
+              </Typography>
+              {isProjectNew && <NewLabel createdAt={project.createdAt} />}
+            </Stack>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Typography
+                variant="caption"
+                sx={{
+                  color: "text.secondary",
+                  fontSize: "0.75rem",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {
+                  categoryLabels[
+                    project.category as keyof typeof categoryLabels
+                  ]
+                }
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
 
-      {/* Right side: Difficulty badge, author avatar */}
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={1.5}
-        sx={{ minWidth: 0, flexShrink: 0 }}
-      >
-        {project.difficulty && (
-          <Chip
-            label={difficultyLabels[project.difficulty]}
-            size="small"
-            sx={{
-              height: 24,
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              backgroundColor: difficultyColor
-                ? `${difficultyColor}20`
-                : "transparent",
-              color: difficultyColor || theme.palette.text.secondary,
-              border: difficultyColor
-                ? `1px solid ${difficultyColor}40`
-                : `1px solid ${theme.palette.divider}`,
-              "& .MuiChip-label": {
-                px: 1,
-              },
-            }}
-          />
-        )}
-        {project.author?.bucketImage && (
-          <Tooltip title={`Author: ${project.author.name}`} arrow>
-            <Avatar
-              src={getImageUrl(project.author.bucketImage)}
-              alt={`${project.author.name} avatar`}
+        {/* Right side: Difficulty badge, author avatar */}
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={1.5}
+          sx={{ minWidth: 0, flexShrink: 0 }}
+        >
+          {project.difficulty && (
+            <Chip
+              label={
+                difficultyLabels[
+                  project.difficulty as keyof typeof difficultyLabels
+                ]
+              }
+              size="small"
               sx={{
-                height: 28,
-                width: 28,
-                border: `2px solid ${theme.palette.divider}`,
+                height: 24,
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                backgroundColor: difficultyColor
+                  ? `${difficultyColor}20`
+                  : "transparent",
+                color: difficultyColor || theme.palette.text.secondary,
+                border: difficultyColor
+                  ? `1px solid ${difficultyColor}40`
+                  : `1px solid ${theme.palette.divider}`,
+                "& .MuiChip-label": {
+                  px: 1,
+                },
               }}
             />
-          </Tooltip>
-        )}
+          )}
+          {project.author?.bucketImage && (
+            <Tooltip title={`Author: ${project.author.name}`} arrow>
+              <Avatar
+                src={getImageUrl(project.author.bucketImage)}
+                alt={`${project.author.name} avatar`}
+                sx={{
+                  height: 28,
+                  width: 28,
+                  border: `2px solid ${theme.palette.divider}`,
+                }}
+              />
+            </Tooltip>
+          )}
+        </Stack>
       </Stack>
-    </Stack>
-  );
-};
+    );
+  },
+  (prevProps, nextProps) => {
+    // Custom comparison: return true if props are equal (skip re-render)
+    // Only re-render if project id, isSelected, or onClick reference changes
+    return (
+      prevProps.project.id === nextProps.project.id &&
+      prevProps.isSelected === nextProps.isSelected &&
+      prevProps.onClick === nextProps.onClick &&
+      prevProps.project.slug === nextProps.project.slug &&
+      prevProps.project.title === nextProps.project.title &&
+      prevProps.project.category === nextProps.project.category &&
+      prevProps.project.difficulty === nextProps.project.difficulty
+    );
+  },
+);

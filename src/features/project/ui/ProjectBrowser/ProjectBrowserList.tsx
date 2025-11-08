@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { Virtuoso } from "react-virtuoso";
 
 import type { RouterOutputs } from "#/shared/api";
@@ -23,20 +23,36 @@ type ProjectBrief =
 type ProjectBrowserListProps = {
   projects: ProjectBrief[] | undefined;
   isLoading: boolean;
-  hasMore: boolean;
-  total: number;
   selectedProjectSlug?: string;
   onSelectProject: (slug: string) => void;
 };
 
-// Estimated item height for virtualization (matches ProjectBrowserItem height)
-const ITEM_HEIGHT = 72;
+// Fixed item height for virtualization - matches actual rendered height
+const ITEM_HEIGHT = 76;
+
+// List component for Virtuoso
+const VirtuosoList: React.FC<{
+  children?: React.ReactNode;
+  ref?: React.Ref<HTMLDivElement>;
+}> = ({ children, ref, ...props }) => (
+  <Box
+    component="ul"
+    role="list"
+    ref={ref}
+    {...props}
+    sx={{
+      listStyle: "none",
+      p: 0,
+      m: 0,
+    }}
+  >
+    {children}
+  </Box>
+);
 
 export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
   projects,
   isLoading,
-  hasMore,
-  total,
   selectedProjectSlug,
   onSelectProject,
 }) => {
@@ -52,13 +68,17 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
   const displayedProjects = projects ?? [];
 
   // Handle infinite scroll - load next page when reaching the end
-  const handleEndReached = () => {
+  const handleEndReached = useCallback(() => {
     if (hasMoreData && !isLoading) {
       dispatch(projectBrowserSlice.actions.setCurrentPage(currentPage + 1));
     }
-  };
+  }, [hasMoreData, isLoading, currentPage, dispatch]);
 
-  if (isLoading) {
+  // Only show full-page spinner on initial load (when no projects yet)
+  // During pagination, show the list with footer loading indicator
+  const isInitialLoad = isLoading && displayedProjects.length === 0;
+
+  if (isInitialLoad) {
     return (
       <Box
         sx={{
@@ -84,6 +104,55 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
     );
   }
 
+  // Memoize item renderer to prevent unnecessary re-renders
+  // Use a stable callback map to prevent onClick recreation
+  const itemContent = useCallback(
+    (_index: number, project: ProjectBrief) => {
+      const handleClick = () => onSelectProject(project.slug);
+      return (
+        <Box
+          component="li"
+          sx={{
+            listStyle: "none",
+          }}
+        >
+          <ProjectBrowserItem
+            project={project}
+            isSelected={project.slug === selectedProjectSlug}
+            onClick={handleClick}
+          />
+        </Box>
+      );
+    },
+    [selectedProjectSlug, onSelectProject],
+  );
+
+  // Memoize Footer component to prevent recreation on every render
+  const Footer = useMemo(
+    () =>
+      isLoading && hasMoreData ? (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            p: 2,
+          }}
+        >
+          <CircularProgress size={24} />
+        </Box>
+      ) : null,
+    [isLoading, hasMoreData],
+  );
+
+  const components = useMemo(
+    () => ({
+      List: VirtuosoList,
+      Footer: () => Footer,
+    }),
+    [Footer],
+  );
+
   return (
     <Box
       sx={{
@@ -94,53 +163,11 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
       <Virtuoso
         data={displayedProjects}
         totalCount={displayedProjects.length}
-        itemContent={(index, project) => (
-          <Box
-            component="li"
-            key={project.id}
-            sx={{
-              listStyle: "none",
-            }}
-          >
-            <ProjectBrowserItem
-              project={project}
-              isSelected={project.slug === selectedProjectSlug}
-              onClick={() => onSelectProject(project.slug)}
-            />
-          </Box>
-        )}
+        itemContent={itemContent}
         endReached={handleEndReached}
-        overscan={5}
         fixedItemHeight={ITEM_HEIGHT}
         style={{ height: "100%", width: "100%" }}
-        components={{
-          List: React.forwardRef<HTMLDivElement>((props, ref) => (
-            <Box
-              component="ul"
-              role="list"
-              ref={ref}
-              {...props}
-              sx={{
-                listStyle: "none",
-                p: 0,
-                m: 0,
-              }}
-            />
-          )),
-          Footer: () =>
-            isLoading && hasMoreData ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 2,
-                }}
-              >
-                <CircularProgress size={24} />
-              </Box>
-            ) : null,
-        }}
+        components={components}
       />
     </Box>
   );
