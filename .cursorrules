@@ -309,6 +309,188 @@ export const useCustomHook = (): ReturnType => {
 - Provide usage examples
 - Keep API documentation current
 
+## Feature Design & Implementation
+
+### Design Documentation
+
+- **ALWAYS** create design documents in `vibe-docs/` directory before implementation
+- Design docs must include:
+  - Executive summary and current state analysis
+  - Functional and technical requirements
+  - Architecture design (component structure, state management, API design)
+  - UI/UX mockups and interaction patterns
+  - Implementation phases with difficulty ratings (0-10 scale)
+  - Performance considerations and optimization strategies
+  - I18n and A11y requirements
+  - Testing strategy
+  - Migration/deprecation plans if applicable
+
+### TODO Tracking
+
+- **ALWAYS** create a separate TODO file (`vibe-docs/{FeatureName}-TODO.md`) alongside design docs
+- TODO files must:
+  - Break down implementation into phases
+  - Include checkboxes for each task
+  - Track progress systematically
+  - Include difficulty ratings (0-10) for complex tasks
+  - Reference related design doc sections
+
+### Technology Stack Adherence
+
+- **NEVER** introduce new major libraries without justification
+- When considering new dependencies:
+  - Document bundle size impact (use `pnpm why` and bundle analyzers)
+  - List pros/cons vs existing solutions
+  - Assess difficulty of integration (0-10 scale)
+  - Check compatibility with existing stack (MUI, tRPC, Next.js, etc.)
+  - Prefer existing solutions: MUI components, tRPC procedures, Redux Toolkit
+
+### Difficulty Assessment
+
+- Rate implementation difficulty on 0-10 scale:
+  - **0-2**: Trivial (simple UI changes, copy-paste patterns)
+  - **3-4**: Easy (standard patterns, existing components)
+  - **5-6**: Medium (new components, moderate complexity)
+  - **7-8**: Hard (complex logic, performance optimization, integration)
+  - **9-10**: Very Hard (architectural changes, new patterns, high risk)
+- Include difficulty in design docs and TODO files
+- Break down complex tasks (7+) into smaller subtasks
+
+### Diagrams & Schemas
+
+- Create visual documentation when applicable:
+  - **Component hierarchy diagrams** (Mermaid or ASCII art)
+  - **Data flow diagrams** (state management, API calls)
+  - **Database relation schemes** (Prisma schema visualizations)
+  - **User flow diagrams** (interaction patterns)
+- Store diagrams in `vibe-docs/` as markdown with Mermaid or images
+- Use Mermaid syntax for version-controlled diagrams:
+  ```mermaid
+  graph TD
+    A[Component] --> B[Child Component]
+  ```
+
+### I18n Requirements
+
+- **ALWAYS** use typesafe-i18n for all user-facing strings
+- Follow existing pattern:
+  - Add keys to `src/i18n/en/index.ts`
+  - Use `LL.KEY_NAME()` pattern in components
+  - Support all locales: en, ru, de, es, sr, uk
+  - Run `pnpm typesafe-i18n` after adding keys
+- Never hardcode strings in components
+- Document all new translation keys in design docs
+
+### Accessibility (A11y) Requirements
+
+- **ALWAYS** implement accessibility features:
+  - ARIA labels and roles for interactive elements
+  - Keyboard navigation (Tab, Enter, Arrow keys, Escape)
+  - Screen reader support with descriptive text
+  - Focus management and visible focus indicators
+  - Semantic HTML structure
+  - Color contrast ratios (WCAG AA minimum)
+- Test with keyboard-only navigation
+- Use MUI's built-in accessibility features
+- Document A11y features in design docs
+
+### Performance Considerations
+
+- For data-heavy features (lists, tables, filters):
+  - Use virtualization (`react-virtuoso`) for large lists
+  - Implement server-side pagination
+  - Debounce search/filter inputs (200-300ms)
+  - Memoize expensive computations
+  - Use React.memo for expensive components
+- Document performance optimizations in design docs
+- Include bundle size impact analysis
+
+### API Design (tRPC)
+
+- Follow existing tRPC patterns:
+  - Use `publicProcedure` or `protectedProcedure`
+  - Validate inputs with Zod schemas
+  - Return typed responses
+  - Handle errors with TRPCError
+- For pagination:
+  - Use `page` and `pageSize` parameters
+  - Return `{ data, total, hasMore }` structure
+- Document API endpoints in design docs with:
+  - Input/output schemas
+  - Example usage
+  - Error cases
+
+### Component Architecture
+
+- Follow feature-based structure:
+  ```
+  src/features/{feature}/
+  ├── ui/
+  │   └── {FeatureName}/
+  │       ├── {FeatureName}.tsx
+  │       └── {FeatureName}*.tsx (sub-components)
+  ├── model/
+  │   └── {feature}Slice.ts (Redux)
+  └── hooks/
+      └── use{FeatureName}.ts
+  ```
+- Keep components focused and composable
+- Use MUI components consistently
+- Follow existing patterns from similar features
+
+### State Management
+
+- Use Redux Toolkit for:
+  - Global UI state (filters, selections, modals)
+  - Complex state that needs persistence
+  - State shared across multiple components
+- Use React hooks for:
+  - Local component state
+  - Form state (consider Formik if complex)
+  - Temporary UI state (hover, focus)
+- Use tRPC queries for:
+  - Server state
+  - Data fetching
+  - Caching and invalidation
+
+### Testing Requirements
+
+- **ALWAYS** write unit tests after implementing features
+- Write tests for:
+  - Business logic functions
+  - Complex components with user interactions
+  - Redux slice reducers
+  - Custom hooks
+  - API endpoint handlers (tRPC procedures)
+- Use Vitest with Testing Library
+- Test user behavior, not implementation
+- Avoid testing constants or TypeScript types
+- **Generate mock data** where applicable:
+  - Use factories/builders for test data
+  - Create reusable mock generators
+  - Mock external dependencies (APIs, databases)
+  - Use realistic test data that matches production structure
+- Focus on **most essential tests**:
+  - Critical user flows
+  - Edge cases and error handling
+  - State transitions
+  - Integration points
+- Document test strategy in design docs:
+  - What will be tested
+  - Mock data structure
+  - Test coverage goals
+  - Testing approach (unit/integration/E2E)
+
+### Migration & Backward Compatibility
+
+- When replacing existing features:
+  - Keep old components for backward compatibility
+  - Add feature flags if needed
+  - Document migration path
+  - Plan deprecation timeline
+- Update related components gradually
+- Maintain API compatibility when possible
+
 ## Remember
 
 - Always use TypeScript
@@ -321,3 +503,6 @@ export const useCustomHook = (): ReturnType => {
 - Maintain proper error handling
 - Use proper typing throughout
 - Follow the project's established conventions
+- **ALWAYS** create design docs in `vibe-docs/` before major features
+- **ALWAYS** create TODO files to track implementation progress
+- **ALWAYS** assess difficulty and document bundle impact for new dependencies
