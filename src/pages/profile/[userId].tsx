@@ -1,7 +1,6 @@
 import { CircularProgress, Container, Grid, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import React from "react";
 
 import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
 import { UserSettings } from "#/features/profile/ui/UserSettings";
