@@ -20,8 +20,16 @@ const eslintConfig = [
         },
       ],
       "@typescript-eslint/no-unused-expressions": "error",
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
       "@typescript-eslint/no-empty-object-type": "off",
+      "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
     },
     ignorePatterns: [
       ".eslintrc.js",

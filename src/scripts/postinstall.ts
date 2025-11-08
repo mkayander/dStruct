@@ -17,11 +17,11 @@ async function checkPython() {
   try {
     await execAsync("python --version");
     return true;
-  } catch (error) {
+  } catch (_error) {
     try {
       await execAsync("python3 --version");
       return true;
-    } catch (error) {
+    } catch (_error) {
       return false;
     }
   }

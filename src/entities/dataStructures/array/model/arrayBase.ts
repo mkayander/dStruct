@@ -170,5 +170,5 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
   return BaseStructure;
 }
 
-const base = makeArrayBaseClass(Object);
-export type ArrayBaseType = InstanceType<typeof base>;
+const _base = makeArrayBaseClass(Object);
+export type ArrayBaseType = InstanceType<typeof _base>;
