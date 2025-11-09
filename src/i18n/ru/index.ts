@@ -61,6 +61,7 @@ const ru: Record<keyof Translation, string> = {
   REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION: "Повтор предыдущей визуализации кода",
   RESET: "Сброс",
   RESET_DATA_STRUCTURES: "Сбросить структуры данных в начальное состояние",
+  RETRY: "Повторить",
   RETURNED: "Возвращено",
   RUN: "Пуск",
   RUNTIME: "Время выполнения",

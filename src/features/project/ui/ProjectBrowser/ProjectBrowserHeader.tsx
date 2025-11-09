@@ -26,6 +26,7 @@ import { ProjectBrowserFilters } from "./ProjectBrowserFilters";
 type ProjectBrowserHeaderProps = {
   searchValue: string;
   onSearchChange: (value: string) => void;
+  searchInputRef?: React.RefObject<HTMLInputElement | null>;
 };
 
 type SortOption = {
@@ -65,6 +66,7 @@ const SORT_OPTIONS: SortOption[] = [
 export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   searchValue,
   onSearchChange,
+  searchInputRef,
 }) => {
   const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
@@ -139,6 +141,7 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
         >
           <Box sx={{ flex: 1 }}>
             <DebouncedInput
+              inputRef={searchInputRef}
               label={LL.SEARCH_PROJECTS()}
               title={LL.SEARCH_PROJECTS()}
               name="search-project-browser"

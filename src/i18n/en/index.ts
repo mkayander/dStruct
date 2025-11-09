@@ -61,6 +61,7 @@ const en: BaseTranslation = {
   REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION: "Replay previous code result visualization",
   RESET: "Reset",
   RESET_DATA_STRUCTURES: "Reset data structures to initial states",
+  RETRY: "Retry",
   RETURNED: "Returned",
   RUN: "Run",
   RUNTIME: "Runtime",

@@ -19,6 +19,7 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
   onChange,
   timeout,
   InputProps,
+  inputRef,
   ...restProps
 }) => {
   const [rawInput, setRawInput] = useState<string>(value);
@@ -50,6 +51,7 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
     <TextField
       value={rawInput}
       onChange={handleChange}
+      inputRef={inputRef}
       InputProps={{
         ...InputProps,
         endAdornment: hasPendingChanges ? (

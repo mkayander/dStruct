@@ -261,6 +261,10 @@ type RootTranslation = {
 	 */
 	RESET_DATA_STRUCTURES: string
 	/**
+	 * R​e​t​r​y
+	 */
+	RETRY: string
+	/**
 	 * R​e​t​u​r​n​e​d
 	 */
 	RETURNED: string
@@ -649,6 +653,10 @@ export type TranslationFunctions = {
 	 * Reset data structures to initial states
 	 */
 	RESET_DATA_STRUCTURES: () => LocalizedString
+	/**
+	 * Retry
+	 */
+	RETRY: () => LocalizedString
 	/**
 	 * Returned
 	 */

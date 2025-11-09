@@ -18,7 +18,6 @@ type ProjectBrowserState = {
   // UI State
   isOpen: boolean;
   isLoading: boolean;
-  error: string | null;
 
   // Pagination
   currentPage: number;
@@ -36,7 +35,6 @@ const initialState: ProjectBrowserState = {
   sortOrder: "asc",
   isOpen: false,
   isLoading: false,
-  error: null,
   currentPage: 1,
   pageSize: 20,
   hasMore: false,
@@ -89,9 +87,6 @@ export const projectBrowserSlice = createSlice({
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
-    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
@@ -128,7 +123,6 @@ export const selectSortOrder = (state: RootState) =>
 export const selectIsOpen = (state: RootState) => state.projectBrowser.isOpen;
 export const selectIsLoading = (state: RootState) =>
   state.projectBrowser.isLoading;
-export const selectError = (state: RootState) => state.projectBrowser.error;
 export const selectCurrentPage = (state: RootState) =>
   state.projectBrowser.currentPage;
 export const selectPageSize = (state: RootState) =>

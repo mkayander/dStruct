@@ -9,6 +9,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useMemo, useRef } from "react";
 
 import type { RouterOutputs } from "#/shared/api";
@@ -36,14 +37,13 @@ type ProjectBrowserProps = {
   onSelectProject?: (projectSlug: string) => void;
 };
 
-const DRAWER_WIDTH = "70vw";
-
 export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   onSelectProject,
 }) => {
   const { LL } = useI18nContext();
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const isOpen = useAppSelector(selectIsOpen);
   const searchQuery = useAppSelector(selectSearchQuery);
   const selectedCategories = useAppSelector(selectSelectedCategories);
@@ -71,6 +71,9 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     sortBy: sortBy === "date" ? "createdAt" : sortBy,
     sortOrder,
   });
+
+  // Get errors directly from TRPC queries
+  const error = browseProjects.error || allBrief.error;
 
   // Create a query key based on filters/sort (excluding page for accumulation)
   const queryKey = useMemo(
@@ -151,19 +154,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   }, [allBrief.isLoading, browseProjects.isLoading, dispatch]);
 
   useEffect(() => {
-    const error = browseProjects.error || allBrief.error;
-    if (error) {
-      dispatch(
-        projectBrowserSlice.actions.setError(
-          error.message || "Failed to load projects",
-        ),
-      );
-    } else {
-      dispatch(projectBrowserSlice.actions.setError(null));
-    }
-  }, [browseProjects.error, allBrief.error, dispatch]);
-
-  useEffect(() => {
     if (browseProjects.data?.hasMore !== undefined) {
       dispatch(
         projectBrowserSlice.actions.setHasMore(browseProjects.data.hasMore),
@@ -184,6 +174,66 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const handleClose = () => {
     dispatch(projectBrowserSlice.actions.setIsOpen(false));
   };
+
+  const handleRetry = () => {
+    // Refetch queries to retry
+    void allBrief.refetch();
+    void browseProjects.refetch();
+  };
+
+  // Show error snackbar when error occurs
+  useEffect(() => {
+    if (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to load projects";
+      enqueueSnackbar(errorMessage, {
+        variant: "error",
+        action: (key) => (
+          <IconButton
+            size="small"
+            onClick={() => {
+              handleRetry();
+              closeSnackbar(key);
+            }}
+            color="inherit"
+            aria-label="Retry"
+          >
+            {(LL as { RETRY?: () => string }).RETRY?.() ?? "Retry"}
+          </IconButton>
+        ),
+        persist: false,
+        autoHideDuration: 6000,
+      });
+    }
+  }, [error, enqueueSnackbar, closeSnackbar, handleRetry]);
+
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Keyboard navigation: Escape to close, Ctrl/Cmd+F to focus search
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (ev: KeyboardEvent) => {
+      // Escape to close browser
+      if (ev.key === "Escape") {
+        ev.preventDefault();
+        handleClose();
+        return;
+      }
+
+      // Ctrl/Cmd + F to focus search
+      if ((ev.ctrlKey || ev.metaKey) && ev.key === "f") {
+        ev.preventDefault();
+        searchInputRef.current?.focus();
+        return;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   return (
     <Drawer
@@ -240,6 +290,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
         <ProjectBrowserHeader
           searchValue={searchQuery}
           onSearchChange={handleSearchChange}
+          searchInputRef={searchInputRef}
         />
         <Box sx={{ flex: 1, overflow: "hidden" }}>
           <ProjectBrowserList
