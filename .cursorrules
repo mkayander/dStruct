@@ -32,9 +32,46 @@ src/
 
 ### State Management
 
-- Use Redux Toolkit for global state with slices
-- Use RTK Query for server state management
-- Keep local component state with React hooks when appropriate
+**General Principles:**
+
+- Use Redux Toolkit for global UI state (filters, selections, modals)
+- Use Redux Toolkit for complex state that needs persistence
+- Use Redux Toolkit for state shared across multiple components
+- **NOT** for server state (loading/error/data from API calls)
+- Use React hooks for local component state, form state, temporary UI state
+
+**tRPC/TanStack Query (CRITICAL):**
+
+- **ALWAYS** use TanStack Query states directly from tRPC queries
+- **NEVER** duplicate loading/error states in Redux - they're already managed
+- Use query states directly: `query.isLoading`, `query.isError`, `query.error`, `query.data`
+- Use `query.refetch()` for retry functionality
+- Only store derived state or UI state in Redux (e.g., filters, selections, modals)
+
+**Code Examples:**
+
+```typescript
+// ✅ Correct - use query states directly
+const projects = api.project.browseProjects.useQuery({...});
+const isLoading = projects.isLoading;
+const error = projects.error;
+
+// ❌ Wrong - don't duplicate in Redux
+// dispatch(setIsLoading(projects.isLoading));
+// dispatch(setError(projects.error));
+
+// ✅ Redux slice pattern for UI state
+export const exampleSlice = createSlice({
+  name: "EXAMPLE",
+  initialState,
+  reducers: {
+    update: (state, action: PayloadAction<Partial<State>>) => ({
+      ...state,
+      ...action.payload,
+    }),
+  },
+});
+```
 
 ### Data Flow
 
@@ -59,12 +96,51 @@ src/
 - Use React.forwardRef when needed
 - Use proper dependency arrays in useEffect/useMemo/useCallback
 
+**Component Structure:**
+
+```typescript
+// Component with proper typing
+interface ComponentProps {
+  title: string;
+  onAction: (data: ActionData) => void;
+}
+
+export const Component: React.FC<ComponentProps> = ({ title, onAction }) => {
+  // Component implementation
+};
+```
+
+**Hook Pattern:**
+
+```typescript
+// Custom hook with proper typing
+export const useCustomHook = (): ReturnType => {
+  // Hook implementation
+  return result;
+};
+```
+
 ### Component Architecture
 
 - Follow atomic design: atoms → molecules → organisms → templates
 - Keep components focused and single-responsibility
 - Use composition over inheritance
 - Implement proper prop drilling alternatives (Context, Redux)
+- Follow feature-based structure:
+  ```
+  src/features/{feature}/
+  ├── ui/
+  │   └── {FeatureName}/
+  │       ├── {FeatureName}.tsx
+  │       └── {FeatureName}*.tsx (sub-components)
+  ├── model/
+  │   └── {feature}Slice.ts (Redux)
+  └── hooks/
+      └── use{FeatureName}.ts
+  ```
+- Keep components focused and composable
+- Use MUI components consistently
+- Follow existing patterns from similar features
 
 ### Styling
 
@@ -89,13 +165,15 @@ src/
   3. Verify functionality remains the same
   4. Update all occurrences in the codebase
 - Prefer `slotProps` pattern for component customization:
+
   ```typescript
   // ✅ Correct (MUI v6+)
   <Drawer slotProps={{ paper: { sx: {...} } }} />
-  
+
   // ❌ Deprecated (will be removed in v7)
   <Drawer PaperProps={{ sx: {...} }} />
   ```
+
 - Keep MUI components updated and follow migration guides
 - Test after updating deprecated APIs
 
@@ -126,18 +204,64 @@ src/
 
 ### Testing
 
-- Write tests for business logic and complex components
+- **ALWAYS** write unit tests after implementing features
+- Write tests for:
+  - Business logic functions
+  - Complex components with user interactions
+  - Redux slice reducers
+  - Custom hooks
+  - API endpoint handlers (tRPC procedures)
 - Use Vitest with Testing Library
-- Test user interactions, not implementation details
-- Avoid testing constants or static values
-- Use proper test setup and mocking
+- Test user behavior, not implementation details
+- Avoid testing constants, static values, or TypeScript types
+- **Generate mock data** where applicable:
+  - Use factories/builders for test data
+  - Create reusable mock generators
+  - Mock external dependencies (APIs, databases)
+  - Use realistic test data that matches production structure
+- Focus on **most essential tests**:
+  - Critical user flows
+  - Edge cases and error handling
+  - State transitions
+  - Integration points
+- **Test Organization:**
+  - Place tests in `__tests__` directories
+  - Use descriptive test names
+  - Use custom render functions with providers
+  - Mock Next.js router and authentication
+- Document test strategy in design docs:
+  - What will be tested
+  - Mock data structure
+  - Test coverage goals
+  - Testing approach (unit/integration/E2E)
 
 ### Performance
+
+**General Performance:**
 
 - Implement proper memoization with useMemo/useCallback
 - Use React.memo for expensive components
 - Optimize bundle size with dynamic imports
 - Implement proper loading states and error boundaries
+- Use dynamic imports for large components
+- Use Next.js built-in optimizations
+
+**Data-Heavy Features:**
+
+- Use virtualization (`react-virtuoso`) for large lists
+- Implement server-side pagination
+- Debounce search/filter inputs (200-300ms)
+- Memoize expensive computations
+- Use React.memo for expensive components
+- Document performance optimizations in design docs
+- Include bundle size impact analysis
+
+**Data Fetching:**
+
+- Implement proper caching strategies
+- Use RTK Query for server state
+- Implement optimistic updates
+- Handle loading and error states
 
 ## Database & API
 
@@ -154,12 +278,79 @@ src/
 - Define proper input/output schemas
 - Use protected procedures for authenticated routes
 - Implement proper error handling and validation
+- **ALWAYS** use TanStack Query states directly from tRPC queries:
+  - `query.isLoading` - loading state
+  - `query.isError` - error state
+  - `query.error` - error object
+  - `query.data` - response data
+  - `query.refetch()` - retry function
+- **NEVER** sync these states to Redux - they're already managed by TanStack Query
+- **API Design Patterns:**
+  - Use `publicProcedure` or `protectedProcedure`
+  - Validate inputs with Zod schemas
+  - Return typed responses
+  - Handle errors with TRPCError
+  - For pagination: Use `page` and `pageSize` parameters, return `{ data, total, hasMore }` structure
+- Document API endpoints in design docs with:
+  - Input/output schemas
+  - Example usage
+  - Error cases
 
 ### GraphQL
 
 - Use GraphQL for complex queries
 - Generate types with GraphQL Code Generator
 - Use Apollo Client for GraphQL operations
+
+## Error Handling
+
+### Client-Side
+
+- Implement proper error boundaries
+- Use try-catch for async operations
+- Provide user-friendly error messages
+- Log errors appropriately
+- **ALWAYS** use `notistack` (via `useSnackbar` hook) for user-facing notifications:
+  - Error messages
+  - Success messages
+  - Warning messages
+  - Info messages
+- **NEVER** use MUI `Alert` components for transient notifications - use snackbars instead
+- Example:
+
+  ```typescript
+  import { useSnackbar } from "notistack";
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  // ✅ Correct - use snackbar for errors
+  if (error) {
+    enqueueSnackbar(error.message, {
+      variant: "error",
+      action: (key) => (
+        <IconButton onClick={() => { handleRetry(); closeSnackbar(key); }}>
+          Retry
+        </IconButton>
+      ),
+      persist: false,
+      autoHideDuration: 6000,
+    });
+  }
+
+  // ❌ Wrong - don't use Alert for transient notifications
+  // <Alert severity="error">{error.message}</Alert>
+  ```
+
+- Use snackbar `action` prop for retry buttons or other actions
+- Set appropriate `autoHideDuration` (default: 5000ms, errors: 6000ms)
+- Use `persist: false` for most notifications (except critical errors)
+
+### Server-Side
+
+- Use proper HTTP status codes
+- Implement proper error logging
+- Return structured error responses
+- Handle edge cases gracefully
 
 ## Security & Best Practices
 
@@ -199,6 +390,23 @@ src/
 - Handle loading states and errors
 - Use proper lighting and materials
 
+## Internationalization
+
+### i18n Implementation
+
+- **ALWAYS** use typesafe-i18n for all user-facing strings
+- Support multiple locales: en, ru, de, es, sr, uk
+- Implement proper locale detection
+- Use translation keys consistently
+- Follow existing pattern:
+  - Add keys to `src/i18n/en/index.ts`
+  - Use `LL.KEY_NAME()` pattern in components
+  - **IMPORTANT**: `pnpm typesafe-i18n` runs as a file watcher and does NOT exit by itself
+  - After adding translation keys, instruct user to run `pnpm typesafe-i18n` manually (or run in background)
+  - Do NOT run `pnpm typesafe-i18n` directly in terminal commands as it will hang
+- Never hardcode strings in components
+- Document all new translation keys in design docs
+
 ## Development Workflow
 
 ### Git & Deployment
@@ -218,105 +426,6 @@ src/
 - Use `pnpm dev` for development
 - Use `pnpm build` for production builds
 - Run tests with `pnpm test`
-
-## Common Patterns
-
-### State Management
-
-```typescript
-// Redux slice pattern
-export const exampleSlice = createSlice({
-  name: "EXAMPLE",
-  initialState,
-  reducers: {
-    update: (state, action: PayloadAction<Partial<State>>) => ({
-      ...state,
-      ...action.payload,
-    }),
-  },
-});
-```
-
-### Component Structure
-
-```typescript
-// Component with proper typing
-interface ComponentProps {
-  title: string;
-  onAction: (data: ActionData) => void;
-}
-
-export const Component: React.FC<ComponentProps> = ({ title, onAction }) => {
-  // Component implementation
-};
-```
-
-### Hook Pattern
-
-```typescript
-// Custom hook with proper typing
-export const useCustomHook = (): ReturnType => {
-  // Hook implementation
-  return result;
-};
-```
-
-## Error Handling
-
-### Client-Side
-
-- Implement proper error boundaries
-- Use try-catch for async operations
-- Provide user-friendly error messages
-- Log errors appropriately
-
-### Server-Side
-
-- Use proper HTTP status codes
-- Implement proper error logging
-- Return structured error responses
-- Handle edge cases gracefully
-
-## Performance Considerations
-
-### Code Splitting
-
-- Use dynamic imports for large components
-- Implement proper loading states
-- Optimize bundle size
-- Use Next.js built-in optimizations
-
-### Data Fetching
-
-- Implement proper caching strategies
-- Use RTK Query for server state
-- Implement optimistic updates
-- Handle loading and error states
-
-## Internationalization
-
-### i18n Implementation
-
-- Use typesafe-i18n for translations
-- Support multiple locales: en, ru, de, es, sr, uk
-- Implement proper locale detection
-- Use translation keys consistently
-
-## Testing Strategy
-
-### Test Organization
-
-- Place tests in `__tests__` directories
-- Use descriptive test names
-- Test user behavior, not implementation
-- Mock external dependencies properly
-
-### Test Utilities
-
-- Use Testing Library for component testing
-- Implement proper test setup
-- Use custom render functions with providers
-- Mock Next.js router and authentication
 
 ## Documentation
 
@@ -395,19 +504,6 @@ export const useCustomHook = (): ReturnType => {
     A[Component] --> B[Child Component]
   ```
 
-### I18n Requirements
-
-- **ALWAYS** use typesafe-i18n for all user-facing strings
-- Follow existing pattern:
-  - Add keys to `src/i18n/en/index.ts`
-  - Use `LL.KEY_NAME()` pattern in components
-  - Support all locales: en, ru, de, es, sr, uk
-  - **IMPORTANT**: `pnpm typesafe-i18n` runs as a file watcher and does NOT exit by itself
-  - After adding translation keys, instruct user to run `pnpm typesafe-i18n` manually (or run in background)
-  - Do NOT run `pnpm typesafe-i18n` directly in terminal commands as it will hang
-- Never hardcode strings in components
-- Document all new translation keys in design docs
-
 ### Accessibility (A11y) Requirements
 
 - **ALWAYS** implement accessibility features:
@@ -420,93 +516,6 @@ export const useCustomHook = (): ReturnType => {
 - Test with keyboard-only navigation
 - Use MUI's built-in accessibility features
 - Document A11y features in design docs
-
-### Performance Considerations
-
-- For data-heavy features (lists, tables, filters):
-  - Use virtualization (`react-virtuoso`) for large lists
-  - Implement server-side pagination
-  - Debounce search/filter inputs (200-300ms)
-  - Memoize expensive computations
-  - Use React.memo for expensive components
-- Document performance optimizations in design docs
-- Include bundle size impact analysis
-
-### API Design (tRPC)
-
-- Follow existing tRPC patterns:
-  - Use `publicProcedure` or `protectedProcedure`
-  - Validate inputs with Zod schemas
-  - Return typed responses
-  - Handle errors with TRPCError
-- For pagination:
-  - Use `page` and `pageSize` parameters
-  - Return `{ data, total, hasMore }` structure
-- Document API endpoints in design docs with:
-  - Input/output schemas
-  - Example usage
-  - Error cases
-
-### Component Architecture
-
-- Follow feature-based structure:
-  ```
-  src/features/{feature}/
-  ├── ui/
-  │   └── {FeatureName}/
-  │       ├── {FeatureName}.tsx
-  │       └── {FeatureName}*.tsx (sub-components)
-  ├── model/
-  │   └── {feature}Slice.ts (Redux)
-  └── hooks/
-      └── use{FeatureName}.ts
-  ```
-- Keep components focused and composable
-- Use MUI components consistently
-- Follow existing patterns from similar features
-
-### State Management
-
-- Use Redux Toolkit for:
-  - Global UI state (filters, selections, modals)
-  - Complex state that needs persistence
-  - State shared across multiple components
-- Use React hooks for:
-  - Local component state
-  - Form state (consider Formik if complex)
-  - Temporary UI state (hover, focus)
-- Use tRPC queries for:
-  - Server state
-  - Data fetching
-  - Caching and invalidation
-
-### Testing Requirements
-
-- **ALWAYS** write unit tests after implementing features
-- Write tests for:
-  - Business logic functions
-  - Complex components with user interactions
-  - Redux slice reducers
-  - Custom hooks
-  - API endpoint handlers (tRPC procedures)
-- Use Vitest with Testing Library
-- Test user behavior, not implementation
-- Avoid testing constants or TypeScript types
-- **Generate mock data** where applicable:
-  - Use factories/builders for test data
-  - Create reusable mock generators
-  - Mock external dependencies (APIs, databases)
-  - Use realistic test data that matches production structure
-- Focus on **most essential tests**:
-  - Critical user flows
-  - Edge cases and error handling
-  - State transitions
-  - Integration points
-- Document test strategy in design docs:
-  - What will be tested
-  - Mock data structure
-  - Test coverage goals
-  - Testing approach (unit/integration/E2E)
 
 ### Migration & Backward Compatibility
 
@@ -533,3 +542,5 @@ export const useCustomHook = (): ReturnType => {
 - **ALWAYS** create design docs in `vibe-docs/` before major features
 - **ALWAYS** create TODO files to track implementation progress
 - **ALWAYS** assess difficulty and document bundle impact for new dependencies
+- **NEVER** duplicate tRPC/TanStack Query loading/error states in Redux - use query states directly
+- **ALWAYS** use `notistack` snackbars for user notifications (errors, success, warnings) - never use Alert components for transient notifications
