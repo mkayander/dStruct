@@ -70,7 +70,30 @@ const es = extendDictionary(en, {
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Visualiza tus problemas de LeetCode a partir de tu código",
   YOUR_LEETCODE_ACCOUNT_NAME: "Tu nombre de cuenta de LeetCode",
   YOUR_NAME: "Tu nombre:",
-  YOU_NEED_TO_RUN_THE_CODE_FIRST: "Necesitas ejecutar el código primero"
+  YOU_NEED_TO_RUN_THE_CODE_FIRST: "Necesitas ejecutar el código primero",
+  PROJECT_BROWSER: "Navegador de proyectos",
+  SEARCH_PROJECTS: "Buscar proyectos por título...",
+  NO_PROJECTS_FOUND: "No se encontraron proyectos",
+  NO_PROJECTS_MATCH_FILTERS: "No hay proyectos que coincidan con tus filtros",
+  FILTERS: "Filtros",
+  FILTER_BY_DIFFICULTY: "Dificultad",
+  SHOW_ONLY_NEW: "Mostrar solo proyectos nuevos",
+  SHOW_ONLY_MINE: "Mostrar solo mis proyectos",
+  CLEAR_ALL_FILTERS: "Limpiar todos los filtros",
+  SORT_BY: "Ordenar por",
+  SORT_TITLE: "Título",
+  SORT_TITLE_ASC: "Título (A-Z)",
+  SORT_TITLE_DESC: "Título (Z-A)",
+  SORT_DIFFICULTY: "Dificultad",
+  SORT_DIFFICULTY_ASC: "Dificultad (Fácil → Difícil)",
+  SORT_DIFFICULTY_DESC: "Dificultad (Difícil → Fácil)",
+  SORT_DATE: "Fecha",
+  SORT_DATE_ASC: "Fecha (Más recientes primero)",
+  SORT_DATE_DESC: "Fecha (Más antiguos primero)",
+  SORT_CATEGORY: "Categoría",
+  SORT_CATEGORY_ASC: "Categoría (A-Z)",
+  SORT_CATEGORY_DESC: "Categoría (Z-A)",
+  RETRY: "Reintentar"
 });
 
 export default es;

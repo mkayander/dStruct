@@ -24,7 +24,30 @@ const uk = extendDictionary(en, {
   TRY_IT_OUT_NOW: "Спробуйте зараз",
   USER_DASHBOARD: "{name:string}'s панель керування",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Візуалізуйте свої проблеми LeetCode лише зі свого коду",
-  YOUR_NAME: "Ваше ім'я:"
+  YOUR_NAME: "Ваше ім'я:",
+  PROJECT_BROWSER: "Браузер проектів",
+  SEARCH_PROJECTS: "Пошук проектів за назвою...",
+  NO_PROJECTS_FOUND: "Проекти не знайдено",
+  NO_PROJECTS_MATCH_FILTERS: "Немає проектів, що відповідають вашим фільтрам",
+  FILTERS: "Фільтри",
+  FILTER_BY_DIFFICULTY: "Складність",
+  SHOW_ONLY_NEW: "Показати лише нові проекти",
+  SHOW_ONLY_MINE: "Показати лише мої проекти",
+  CLEAR_ALL_FILTERS: "Очистити всі фільтри",
+  SORT_BY: "Сортувати за",
+  SORT_TITLE: "Назва",
+  SORT_TITLE_ASC: "Назва (А-Я)",
+  SORT_TITLE_DESC: "Назва (Я-А)",
+  SORT_DIFFICULTY: "Складність",
+  SORT_DIFFICULTY_ASC: "Складність (Легко → Складно)",
+  SORT_DIFFICULTY_DESC: "Складність (Складно → Легко)",
+  SORT_DATE: "Дата",
+  SORT_DATE_ASC: "Дата (Спочатку нові)",
+  SORT_DATE_DESC: "Дата (Спочатку старі)",
+  SORT_CATEGORY: "Категорія",
+  SORT_CATEGORY_ASC: "Категорія (А-Я)",
+  SORT_CATEGORY_DESC: "Категорія (Я-А)",
+  RETRY: "Повторити"
 });
 
 export default uk;

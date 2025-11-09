@@ -24,6 +24,7 @@ import React from "react";
 
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
+import { useI18nContext } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
@@ -43,6 +44,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
   open,
   onClose,
 }) => {
+  const { LL } = useI18nContext();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const session = useSession();
@@ -99,7 +101,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
           alignItems="center"
         >
           <Typography variant="h6" fontSize={16} fontWeight={600}>
-            Filters
+            {LL.FILTERS()}
           </Typography>
           <IconButton size="small" onClick={onClose} aria-label="Close filters">
             <Close fontSize="small" />
@@ -110,7 +112,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
 
         <Box>
           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
-            Difficulty
+            {LL.FILTER_BY_DIFFICULTY()}
           </Typography>
           <ToggleButtonGroup
             value={selectedDifficulties}
@@ -170,7 +172,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
                 checkedIcon={<CheckBox />}
               />
             }
-            label="Show only new projects"
+            label={LL.SHOW_ONLY_NEW()}
           />
         </Box>
 
@@ -185,7 +187,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
                   checkedIcon={<CheckBox />}
                 />
               }
-              label="Show only my projects"
+              label={LL.SHOW_ONLY_MINE()}
             />
             <Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
               Coming soon
@@ -203,7 +205,7 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
               size="small"
               fullWidth
             >
-              Clear all filters
+              {LL.CLEAR_ALL_FILTERS()}
             </Button>
           </>
         )}

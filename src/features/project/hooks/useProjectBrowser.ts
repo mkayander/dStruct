@@ -23,18 +23,6 @@ export const useProjectBrowser = () => {
     dispatch(projectBrowserSlice.actions.setIsLoading(allBrief.isLoading));
   }, [allBrief.isLoading, dispatch]);
 
-  useEffect(() => {
-    if (allBrief.error) {
-      dispatch(
-        projectBrowserSlice.actions.setError(
-          allBrief.error.message || "Failed to load projects",
-        ),
-      );
-    } else {
-      dispatch(projectBrowserSlice.actions.setError(null));
-    }
-  }, [allBrief.error, dispatch]);
-
   const openBrowser = () => {
     dispatch(projectBrowserSlice.actions.setIsOpen(true));
   };

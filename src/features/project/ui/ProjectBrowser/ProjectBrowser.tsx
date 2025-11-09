@@ -12,15 +12,16 @@ import {
 import { useSnackbar } from "notistack";
 import React, { useEffect, useMemo, useRef } from "react";
 
-import type { RouterOutputs } from "#/shared/api";
 import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
   projectBrowserSlice,
+  selectAccumulatedProjects,
   selectCurrentPage,
   selectIsOpen,
+  selectLastQueryKey,
   selectPageSize,
   selectSearchQuery,
   selectSelectedCategories,
@@ -53,6 +54,8 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const sortOrder = useAppSelector(selectSortOrder);
   const currentPage = useAppSelector(selectCurrentPage);
   const pageSize = useAppSelector(selectPageSize);
+  const accumulatedProjects = useAppSelector(selectAccumulatedProjects);
+  const lastQueryKey = useAppSelector(selectLastQueryKey);
   const { projectSlug = "", setProject } = usePlaygroundSlugs();
 
   // Get all projects for category counts (category bar needs all projects)
@@ -101,49 +104,39 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     ],
   );
 
-  // Accumulate projects across pages
-  type ProjectBrief =
-    RouterOutputs["project"]["browseProjects"]["projects"][number];
-  const accumulatedProjectsRef = useRef<ProjectBrief[]>([]);
-  const lastQueryKeyRef = useRef<string>("");
-
   // Reset accumulated projects when filters/sort change
   useEffect(() => {
-    if (queryKey !== lastQueryKeyRef.current) {
-      accumulatedProjectsRef.current = [];
-      lastQueryKeyRef.current = queryKey;
+    if (queryKey !== lastQueryKey) {
+      dispatch(projectBrowserSlice.actions.clearAccumulatedProjects());
+      dispatch(projectBrowserSlice.actions.setLastQueryKey(queryKey));
       // Reset to page 1 when filters change
       if (currentPage !== 1) {
         dispatch(projectBrowserSlice.actions.setCurrentPage(1));
       }
     }
-  }, [queryKey, currentPage, dispatch]);
+  }, [queryKey, lastQueryKey, currentPage, dispatch]);
 
   // Accumulate projects when new page loads
-  const accumulatedProjects = useMemo(() => {
+  useEffect(() => {
     if (!browseProjects.data?.projects) {
-      return accumulatedProjectsRef.current;
+      return;
     }
 
     // If this is page 1, replace all projects
     if (currentPage === 1) {
-      accumulatedProjectsRef.current = browseProjects.data.projects;
-      return browseProjects.data.projects;
+      dispatch(
+        projectBrowserSlice.actions.setAccumulatedProjects(
+          browseProjects.data.projects,
+        ),
+      );
+      return;
     }
 
-    // Otherwise, append new projects (avoid duplicates)
-    const existingIds = new Set(
-      accumulatedProjectsRef.current.map((p: ProjectBrief) => p.id),
+    // Otherwise, append new projects
+    dispatch(
+      projectBrowserSlice.actions.appendProjects(browseProjects.data.projects),
     );
-    const newProjects = browseProjects.data.projects.filter(
-      (p: ProjectBrief) => !existingIds.has(p.id),
-    );
-    accumulatedProjectsRef.current = [
-      ...accumulatedProjectsRef.current,
-      ...newProjects,
-    ];
-    return accumulatedProjectsRef.current;
-  }, [browseProjects.data?.projects, currentPage]);
+  }, [browseProjects.data?.projects, currentPage, dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -196,16 +189,16 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
               closeSnackbar(key);
             }}
             color="inherit"
-            aria-label="Retry"
+            aria-label={LL.RETRY()}
           >
-            {(LL as { RETRY?: () => string }).RETRY?.() ?? "Retry"}
+            {LL.RETRY()}
           </IconButton>
         ),
         persist: false,
         autoHideDuration: 6000,
       });
     }
-  }, [error, enqueueSnackbar, closeSnackbar, handleRetry]);
+  }, [error, enqueueSnackbar, closeSnackbar, handleRetry, LL]);
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 

@@ -1,7 +1,11 @@
 import type { ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+import type { RouterOutputs } from "#/shared/api";
 import type { RootState } from "#/store/makeStore";
+
+type ProjectBrief =
+  RouterOutputs["project"]["browseProjects"]["projects"][number];
 
 type ProjectBrowserState = {
   // Filters
@@ -23,6 +27,10 @@ type ProjectBrowserState = {
   currentPage: number;
   pageSize: number;
   hasMore: boolean;
+
+  // Accumulated projects across pages
+  accumulatedProjects: ProjectBrief[];
+  lastQueryKey: string; // Track query key to detect filter changes
 };
 
 const initialState: ProjectBrowserState = {
@@ -38,6 +46,8 @@ const initialState: ProjectBrowserState = {
   currentPage: 1,
   pageSize: 20,
   hasMore: false,
+  accumulatedProjects: [],
+  lastQueryKey: "",
 };
 
 export const projectBrowserSlice = createSlice({
@@ -47,6 +57,8 @@ export const projectBrowserSlice = createSlice({
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
       state.currentPage = 1; // Reset to first page on search
+      state.accumulatedProjects = []; // Clear accumulated projects
+      state.lastQueryKey = ""; // Reset query key
     },
     setSelectedCategories: (
       state,
@@ -54,6 +66,8 @@ export const projectBrowserSlice = createSlice({
     ) => {
       state.selectedCategories = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setSelectedDifficulties: (
       state,
@@ -61,14 +75,20 @@ export const projectBrowserSlice = createSlice({
     ) => {
       state.selectedDifficulties = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setShowOnlyNew: (state, action: PayloadAction<boolean>) => {
       state.showOnlyNew = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setShowOnlyMine: (state, action: PayloadAction<boolean>) => {
       state.showOnlyMine = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setSortBy: (
       state,
@@ -76,10 +96,14 @@ export const projectBrowserSlice = createSlice({
     ) => {
       state.sortBy = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setSortOrder: (state, action: PayloadAction<"asc" | "desc">) => {
       state.sortOrder = action.payload;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
     },
     setIsOpen: (state, action: PayloadAction<boolean>) => {
       state.isOpen = action.payload;
@@ -100,6 +124,28 @@ export const projectBrowserSlice = createSlice({
       state.showOnlyNew = false;
       state.showOnlyMine = false;
       state.currentPage = 1;
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
+    },
+    // Actions for managing accumulated projects
+    setAccumulatedProjects: (state, action: PayloadAction<ProjectBrief[]>) => {
+      state.accumulatedProjects = action.payload;
+    },
+    appendProjects: (state, action: PayloadAction<ProjectBrief[]>) => {
+      // Avoid duplicates by checking IDs
+      const existingIds = new Set(state.accumulatedProjects.map((p) => p.id));
+      const newProjects = action.payload.filter((p) => !existingIds.has(p.id));
+      state.accumulatedProjects = [
+        ...state.accumulatedProjects,
+        ...newProjects,
+      ];
+    },
+    clearAccumulatedProjects: (state) => {
+      state.accumulatedProjects = [];
+      state.lastQueryKey = "";
+    },
+    setLastQueryKey: (state, action: PayloadAction<string>) => {
+      state.lastQueryKey = action.payload;
     },
   },
 });
@@ -128,6 +174,10 @@ export const selectCurrentPage = (state: RootState) =>
 export const selectPageSize = (state: RootState) =>
   state.projectBrowser.pageSize;
 export const selectHasMore = (state: RootState) => state.projectBrowser.hasMore;
+export const selectAccumulatedProjects = (state: RootState) =>
+  state.projectBrowser.accumulatedProjects;
+export const selectLastQueryKey = (state: RootState) =>
+  state.projectBrowser.lastQueryKey;
 
 export const selectFilters = (state: RootState) => ({
   searchQuery: state.projectBrowser.searchQuery,

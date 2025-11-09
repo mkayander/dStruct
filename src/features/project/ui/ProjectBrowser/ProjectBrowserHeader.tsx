@@ -36,33 +36,6 @@ type SortOption = {
   descLabel: string;
 };
 
-const SORT_OPTIONS: SortOption[] = [
-  {
-    value: "title",
-    label: "Title",
-    ascLabel: "Title (A-Z)",
-    descLabel: "Title (Z-A)",
-  },
-  {
-    value: "difficulty",
-    label: "Difficulty",
-    ascLabel: "Difficulty (Easy → Hard)",
-    descLabel: "Difficulty (Hard → Easy)",
-  },
-  {
-    value: "date",
-    label: "Date",
-    ascLabel: "Date (Newest First)",
-    descLabel: "Date (Oldest First)",
-  },
-  {
-    value: "category",
-    label: "Category",
-    ascLabel: "Category (A-Z)",
-    descLabel: "Category (Z-A)",
-  },
-];
-
 export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   searchValue,
   onSearchChange,
@@ -77,6 +50,34 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   );
   const filterButtonRef = useRef<HTMLButtonElement>(null);
   const [filterPopoverOpen, setFilterPopoverOpen] = useState(false);
+
+  // Create sort options with translations
+  const SORT_OPTIONS: SortOption[] = [
+    {
+      value: "title",
+      label: LL.SORT_TITLE(),
+      ascLabel: LL.SORT_TITLE_ASC(),
+      descLabel: LL.SORT_TITLE_DESC(),
+    },
+    {
+      value: "difficulty",
+      label: LL.SORT_DIFFICULTY(),
+      ascLabel: LL.SORT_DIFFICULTY_ASC(),
+      descLabel: LL.SORT_DIFFICULTY_DESC(),
+    },
+    {
+      value: "date",
+      label: LL.SORT_DATE(),
+      ascLabel: LL.SORT_DATE_ASC(),
+      descLabel: LL.SORT_DATE_DESC(),
+    },
+    {
+      value: "category",
+      label: LL.SORT_CATEGORY(),
+      ascLabel: LL.SORT_CATEGORY_ASC(),
+      descLabel: LL.SORT_CATEGORY_DESC(),
+    },
+  ];
 
   const handlePropagation = (ev: React.BaseSyntheticEvent) => {
     ev.stopPropagation();
@@ -178,11 +179,11 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
           alignItems="center"
           justifyContent="flex-start"
         >
-          <Tooltip title={sortLabel || "Sort options"} arrow>
+          <Tooltip title={sortLabel || LL.SORT_BY()} arrow>
             <IconButton
               onClick={handleSortMenuOpen}
               size="small"
-              aria-label="Sort options"
+              aria-label={LL.SORT_BY()}
               aria-haspopup="true"
               aria-expanded={Boolean(sortMenuAnchor)}
               sx={{

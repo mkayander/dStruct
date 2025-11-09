@@ -153,6 +153,8 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
           height: "100%",
           width: "100%",
         }}
+        aria-live="polite"
+        aria-busy={true}
       >
         <Virtuoso
           data={Array.from({ length: skeletonCount }, (_, i) => i)}
@@ -185,6 +187,8 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
         height: "100%",
         width: "100%",
       }}
+      aria-live="polite"
+      aria-busy={isLoading}
     >
       <Virtuoso
         data={displayedProjects}

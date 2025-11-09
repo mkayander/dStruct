@@ -24,7 +24,30 @@ const sr = extendDictionary(en, {
   TRY_IT_OUT_NOW: "Isprobajte sada",
   USER_DASHBOARD: "{name:string}'s kontrolna tabla",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Vizualizujte svoje LeetCode probleme samo na osnovu svog koda",
-  YOUR_NAME: "Vaše ime:"
+  YOUR_NAME: "Vaše ime:",
+  PROJECT_BROWSER: "Pretraživač projekata",
+  SEARCH_PROJECTS: "Pretraži projekte po naslovu...",
+  NO_PROJECTS_FOUND: "Projekti nisu pronađeni",
+  NO_PROJECTS_MATCH_FILTERS: "Nema projekata koji odgovaraju vašim filterima",
+  FILTERS: "Filteri",
+  FILTER_BY_DIFFICULTY: "Težina",
+  SHOW_ONLY_NEW: "Prikaži samo nove projekte",
+  SHOW_ONLY_MINE: "Prikaži samo moje projekte",
+  CLEAR_ALL_FILTERS: "Obriši sve filtere",
+  SORT_BY: "Sortiraj po",
+  SORT_TITLE: "Naslov",
+  SORT_TITLE_ASC: "Naslov (A-Z)",
+  SORT_TITLE_DESC: "Naslov (Z-A)",
+  SORT_DIFFICULTY: "Težina",
+  SORT_DIFFICULTY_ASC: "Težina (Lako → Teško)",
+  SORT_DIFFICULTY_DESC: "Težina (Teško → Lako)",
+  SORT_DATE: "Datum",
+  SORT_DATE_ASC: "Datum (Najnovije prvo)",
+  SORT_DATE_DESC: "Datum (Najstarije prvo)",
+  SORT_CATEGORY: "Kategorija",
+  SORT_CATEGORY_ASC: "Kategorija (A-Z)",
+  SORT_CATEGORY_DESC: "Kategorija (Z-A)",
+  RETRY: "Pokušaj ponovo"
 });
 
 export default sr;

@@ -24,7 +24,30 @@ const de = extendDictionary(en, {
   TRY_IT_OUT_NOW: "Probieren Sie es jetzt aus",
   USER_DASHBOARD: "{name:string}'s Dashboard",
   VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE: "Visualisieren Sie Ihre LeetCode-Probleme direkt aus Ihrem Code",
-  YOUR_NAME: "Ihr Name:"
+  YOUR_NAME: "Ihr Name:",
+  PROJECT_BROWSER: "Projekt-Browser",
+  SEARCH_PROJECTS: "Projekte nach Titel suchen...",
+  NO_PROJECTS_FOUND: "Keine Projekte gefunden",
+  NO_PROJECTS_MATCH_FILTERS: "Keine Projekte entsprechen Ihren Filtern",
+  FILTERS: "Filter",
+  FILTER_BY_DIFFICULTY: "Schwierigkeit",
+  SHOW_ONLY_NEW: "Nur neue Projekte anzeigen",
+  SHOW_ONLY_MINE: "Nur meine Projekte anzeigen",
+  CLEAR_ALL_FILTERS: "Alle Filter löschen",
+  SORT_BY: "Sortieren nach",
+  SORT_TITLE: "Titel",
+  SORT_TITLE_ASC: "Titel (A-Z)",
+  SORT_TITLE_DESC: "Titel (Z-A)",
+  SORT_DIFFICULTY: "Schwierigkeit",
+  SORT_DIFFICULTY_ASC: "Schwierigkeit (Einfach → Schwer)",
+  SORT_DIFFICULTY_DESC: "Schwierigkeit (Schwer → Einfach)",
+  SORT_DATE: "Datum",
+  SORT_DATE_ASC: "Datum (Neueste zuerst)",
+  SORT_DATE_DESC: "Datum (Älteste zuerst)",
+  SORT_CATEGORY: "Kategorie",
+  SORT_CATEGORY_ASC: "Kategorie (A-Z)",
+  SORT_CATEGORY_DESC: "Kategorie (Z-A)",
+  RETRY: "Wiederholen"
 });
 
 export default de;

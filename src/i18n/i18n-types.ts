@@ -245,6 +245,78 @@ type RootTranslation = {
 	 */
 	NO_PROJECTS_MATCH_FILTERS: string
 	/**
+	 * F​i​l​t​e​r​s
+	 */
+	FILTERS: string
+	/**
+	 * D​i​f​f​i​c​u​l​t​y
+	 */
+	FILTER_BY_DIFFICULTY: string
+	/**
+	 * S​h​o​w​ ​o​n​l​y​ ​n​e​w​ ​p​r​o​j​e​c​t​s
+	 */
+	SHOW_ONLY_NEW: string
+	/**
+	 * S​h​o​w​ ​o​n​l​y​ ​m​y​ ​p​r​o​j​e​c​t​s
+	 */
+	SHOW_ONLY_MINE: string
+	/**
+	 * C​l​e​a​r​ ​a​l​l​ ​f​i​l​t​e​r​s
+	 */
+	CLEAR_ALL_FILTERS: string
+	/**
+	 * S​o​r​t​ ​b​y
+	 */
+	SORT_BY: string
+	/**
+	 * T​i​t​l​e
+	 */
+	SORT_TITLE: string
+	/**
+	 * T​i​t​l​e​ ​(​A​-​Z​)
+	 */
+	SORT_TITLE_ASC: string
+	/**
+	 * T​i​t​l​e​ ​(​Z​-​A​)
+	 */
+	SORT_TITLE_DESC: string
+	/**
+	 * D​i​f​f​i​c​u​l​t​y
+	 */
+	SORT_DIFFICULTY: string
+	/**
+	 * D​i​f​f​i​c​u​l​t​y​ ​(​E​a​s​y​ ​→​ ​H​a​r​d​)
+	 */
+	SORT_DIFFICULTY_ASC: string
+	/**
+	 * D​i​f​f​i​c​u​l​t​y​ ​(​H​a​r​d​ ​→​ ​E​a​s​y​)
+	 */
+	SORT_DIFFICULTY_DESC: string
+	/**
+	 * D​a​t​e
+	 */
+	SORT_DATE: string
+	/**
+	 * D​a​t​e​ ​(​N​e​w​e​s​t​ ​F​i​r​s​t​)
+	 */
+	SORT_DATE_ASC: string
+	/**
+	 * D​a​t​e​ ​(​O​l​d​e​s​t​ ​F​i​r​s​t​)
+	 */
+	SORT_DATE_DESC: string
+	/**
+	 * C​a​t​e​g​o​r​y
+	 */
+	SORT_CATEGORY: string
+	/**
+	 * C​a​t​e​g​o​r​y​ ​(​A​-​Z​)
+	 */
+	SORT_CATEGORY_ASC: string
+	/**
+	 * C​a​t​e​g​o​r​y​ ​(​Z​-​A​)
+	 */
+	SORT_CATEGORY_DESC: string
+	/**
 	 * R​e​p​l​a​y
 	 */
 	REPLAY: string
@@ -637,6 +709,78 @@ export type TranslationFunctions = {
 	 * No projects match your filters
 	 */
 	NO_PROJECTS_MATCH_FILTERS: () => LocalizedString
+	/**
+	 * Filters
+	 */
+	FILTERS: () => LocalizedString
+	/**
+	 * Difficulty
+	 */
+	FILTER_BY_DIFFICULTY: () => LocalizedString
+	/**
+	 * Show only new projects
+	 */
+	SHOW_ONLY_NEW: () => LocalizedString
+	/**
+	 * Show only my projects
+	 */
+	SHOW_ONLY_MINE: () => LocalizedString
+	/**
+	 * Clear all filters
+	 */
+	CLEAR_ALL_FILTERS: () => LocalizedString
+	/**
+	 * Sort by
+	 */
+	SORT_BY: () => LocalizedString
+	/**
+	 * Title
+	 */
+	SORT_TITLE: () => LocalizedString
+	/**
+	 * Title (A-Z)
+	 */
+	SORT_TITLE_ASC: () => LocalizedString
+	/**
+	 * Title (Z-A)
+	 */
+	SORT_TITLE_DESC: () => LocalizedString
+	/**
+	 * Difficulty
+	 */
+	SORT_DIFFICULTY: () => LocalizedString
+	/**
+	 * Difficulty (Easy → Hard)
+	 */
+	SORT_DIFFICULTY_ASC: () => LocalizedString
+	/**
+	 * Difficulty (Hard → Easy)
+	 */
+	SORT_DIFFICULTY_DESC: () => LocalizedString
+	/**
+	 * Date
+	 */
+	SORT_DATE: () => LocalizedString
+	/**
+	 * Date (Newest First)
+	 */
+	SORT_DATE_ASC: () => LocalizedString
+	/**
+	 * Date (Oldest First)
+	 */
+	SORT_DATE_DESC: () => LocalizedString
+	/**
+	 * Category
+	 */
+	SORT_CATEGORY: () => LocalizedString
+	/**
+	 * Category (A-Z)
+	 */
+	SORT_CATEGORY_ASC: () => LocalizedString
+	/**
+	 * Category (Z-A)
+	 */
+	SORT_CATEGORY_DESC: () => LocalizedString
 	/**
 	 * Replay
 	 */
