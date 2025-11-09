@@ -12,7 +12,11 @@ import {
 import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
+import {
+  useI18nContext,
+  useMobileLayout,
+  usePlaygroundSlugs,
+} from "#/shared/hooks";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
@@ -45,6 +49,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const isMobile = useMobileLayout();
   const isOpen = useAppSelector(selectIsOpen);
   const searchQuery = useAppSelector(selectSearchQuery);
   const selectedCategories = useAppSelector(selectSelectedCategories);
@@ -228,6 +233,16 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     };
   }, [isOpen, handleClose]);
 
+  const drawerLayout = isMobile
+    ? {
+        width: "100%",
+      }
+    : {
+        width: "800px",
+        maxWidth: "90vw",
+        minWidth: 300, // Minimum width for usability
+      };
+
   return (
     <Drawer
       anchor="left"
@@ -237,9 +252,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
       slotProps={{
         paper: {
           sx: {
-            width: "800px",
-            maxWidth: "90vw",
-            minWidth: 300, // Minimum width for usability
+            ...drawerLayout,
             background: alpha(theme.palette.background.paper, 0.68),
             backdropFilter: "blur(18px)",
           },
