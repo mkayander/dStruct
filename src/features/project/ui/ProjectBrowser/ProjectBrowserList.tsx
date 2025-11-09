@@ -16,6 +16,7 @@ import {
 } from "../../model/projectBrowserSlice";
 import { ProjectBrowserEmpty } from "./ProjectBrowserEmpty";
 import { ProjectBrowserItem } from "./ProjectBrowserItem";
+import { ProjectBrowserItemSkeleton } from "./ProjectBrowserItemSkeleton";
 
 type ProjectBrief =
   RouterOutputs["project"]["browseProjects"]["projects"][number];
@@ -123,21 +124,46 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
     [Footer],
   );
 
-  // Only show full-page spinner on initial load (when no projects yet)
+  // Only show skeleton list on initial load (when no projects yet)
   // During pagination, show the list with footer loading indicator
   const isInitialLoad = isLoading && displayedProjects.length === 0;
 
+  // Skeleton item renderer for initial load
+  const skeletonItemContent = useCallback(
+    (_index: number) => (
+      <Box
+        component="li"
+        sx={{
+          listStyle: "none",
+        }}
+      >
+        <ProjectBrowserItemSkeleton />
+      </Box>
+    ),
+    [],
+  );
+
   if (isInitialLoad) {
+    // Show skeleton list during initial load
+    // Estimate ~10 items visible at once (adjust based on viewport)
+    const skeletonCount = 10;
     return (
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: 200,
+          height: "100%",
+          width: "100%",
         }}
       >
-        <CircularProgress />
+        <Virtuoso
+          data={Array.from({ length: skeletonCount }, (_, i) => i)}
+          totalCount={skeletonCount}
+          itemContent={skeletonItemContent}
+          fixedItemHeight={ITEM_HEIGHT}
+          style={{ height: "100%", width: "100%" }}
+          components={{
+            List: VirtuosoList,
+          }}
+        />
       </Box>
     );
   }

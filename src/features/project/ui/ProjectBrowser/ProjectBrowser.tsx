@@ -194,7 +194,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
       slotProps={{
         paper: {
           sx: {
-            width: DRAWER_WIDTH,
+            width: "800px",
             maxWidth: "90vw",
             minWidth: 300, // Minimum width for usability
             background: alpha(theme.palette.background.paper, 0.68),
