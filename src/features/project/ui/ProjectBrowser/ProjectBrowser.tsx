@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
 import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
 import { api } from "#/shared/lib";
@@ -164,15 +164,15 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     onSelectProject?.(slug);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(projectBrowserSlice.actions.setIsOpen(false));
-  };
+  }, [dispatch]);
 
-  const handleRetry = () => {
+  const handleRetry = useCallback(() => {
     // Refetch queries to retry
     void allBrief.refetch();
     void browseProjects.refetch();
-  };
+  }, [allBrief, browseProjects]);
 
   // Show error snackbar when error occurs
   useEffect(() => {
@@ -226,7 +226,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   return (
     <Drawer

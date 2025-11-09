@@ -24,9 +24,11 @@ vi.mock("#/shared/lib", async () => {
 
 const createWrapper = () => {
   const store = makeStore();
-  return ({ children }: { children: React.ReactNode }) => (
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <ReduxProvider store={store}>{children}</ReduxProvider>
   );
+  Wrapper.displayName = "TestWrapper";
+  return Wrapper;
 };
 
 describe("useProjectBrowser", () => {

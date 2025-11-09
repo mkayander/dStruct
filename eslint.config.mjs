@@ -37,6 +37,7 @@ const eslintConfig = [
       "jest.setup.mjs",
       "*.worker.js",
       "**/dist/**",
+      "**/coverage/**",
       "postcss.config.js",
       "tailwind.config.js",
       "src/graphql/generated/**",
