@@ -204,6 +204,26 @@ export const useCustomHook = (): ReturnType => {
 
 ### Testing
 
+**Testing Stack:**
+
+- **Vitest** - Test runner (v3.2.4+)
+- **@testing-library/react** - React component testing (v16.3.0+)
+- **@testing-library/jest-dom** - DOM matchers (v6.7.0+)
+- **@testing-library/user-event** - User interaction simulation (v14.6.1+)
+- **@vitest/coverage-v8** - Code coverage (v3.2.4+)
+- **jsdom** - DOM environment for tests
+- **vitest-canvas-mock** - Canvas mocking for visual components
+
+**Test Configuration:**
+
+- Test files: `vitest.config.ts` with React plugin and jsdom environment
+- Setup file: `vitest.setup.ts` includes jest-dom matchers and polyfills
+- Global test utilities available via `vitest` globals
+- Path aliases: Use `#/` for src directory imports in tests
+- Environment: Set `SKIP_ENV_VALIDATION=true` for tests
+
+**Test Writing Rules:**
+
 - **ALWAYS** write unit tests after implementing features
 - Write tests for:
   - Business logic functions
@@ -211,29 +231,81 @@ export const useCustomHook = (): ReturnType => {
   - Redux slice reducers
   - Custom hooks
   - API endpoint handlers (tRPC procedures)
-- Use Vitest with Testing Library
 - Test user behavior, not implementation details
 - Avoid testing constants, static values, or TypeScript types
-- **Generate mock data** where applicable:
-  - Use factories/builders for test data
-  - Create reusable mock generators
-  - Mock external dependencies (APIs, databases)
-  - Use realistic test data that matches production structure
+- Use descriptive test names: `"should [expected behavior] when [condition]"`
+- Group related tests with `describe` blocks
+
+**Mock Data Patterns:**
+
+- **ALWAYS** create mock data generators in `__tests__/mocks/` directories
+- Use factory functions with optional overrides pattern
+- Create specialized generators for specific test scenarios (by category, difficulty, title, date, etc.)
+- Use realistic test data that matches production structure
+- Mock external dependencies (APIs, databases, Next.js router, auth)
+
+**Component Testing:**
+
+- **ALWAYS** create `renderWithProviders` helper function with required providers:
+  - `ReduxProvider` with `makeStore()`
+  - `ThemeProvider` with `theme` from `#/themes` (includes custom `question` palette)
+  - `ConfigContext.Provider` for app configuration
+  - `withNextTRPC` wrapper for tRPC queries (if needed)
+- Mock Next.js dependencies (`next-auth/react`, router, etc.)
+- Use `screen` from `@testing-library/react` for queries
+- Prefer `getByRole`, `getByText`, `getByLabelText` over `getByTestId`
+- Test user interactions with `userEvent` from `@testing-library/user-event`
+
+**Redux Testing:**
+
+- Use `makeStore()` to create test store instances
+- Test reducers directly by dispatching actions and checking state
+- Test selectors by accessing state through selectors
+- Test state transitions and side effects (e.g., page reset on filter change)
+- Use `beforeEach` to reset store state between tests
+
+**tRPC Testing:**
+
+- Use `withNextTRPC` wrapper for components using tRPC queries
+- Mock tRPC queries using Vitest mocks with `vi.mock()` and `vi.importActual()`
+- Test error states by mocking query errors
+- Test loading states by mocking `isLoading: true`
+
+**Test Organization:**
+
+- Place tests in `__tests__` directories adjacent to source files
+- Mock data generators go in `__tests__/mocks/` directories
+- Use `.test.ts` or `.test.tsx` file extensions
+- Group related tests with `describe` blocks
+- Use `beforeEach` and `afterEach` for setup/teardown
+
+**Test Coverage:**
+
 - Focus on **most essential tests**:
   - Critical user flows
   - Edge cases and error handling
   - State transitions
   - Integration points
-- **Test Organization:**
-  - Place tests in `__tests__` directories
-  - Use descriptive test names
-  - Use custom render functions with providers
-  - Mock Next.js router and authentication
+- Aim for >80% coverage for business logic
+- Aim for >70% coverage for complex components
+- Use `pnpm test --coverage` to check coverage
+- Don't aim for 100% coverage - focus on meaningful tests
+
+**Running Tests:**
+
+- Development: `pnpm test` (watch mode)
+- CI: `pnpm test:ci` (single run)
+- Specific file: `pnpm test path/to/test/file.test.ts`
+- Coverage: `pnpm test --coverage`
+
+**Documentation:**
+
 - Document test strategy in design docs:
   - What will be tested
   - Mock data structure
   - Test coverage goals
   - Testing approach (unit/integration/E2E)
+- Include test examples in design docs for complex features
 
 ### Performance
 
