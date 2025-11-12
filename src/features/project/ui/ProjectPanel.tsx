@@ -14,7 +14,6 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
-import { ProjectSelect } from "#/features/project/ui/ProjectSelect";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
@@ -26,6 +25,7 @@ import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
+import { ProjectInfo } from "./ProjectInfo";
 import { ProjectModal } from "./ProjectModal";
 
 export const ProjectPanel: React.FC = () => {
@@ -150,6 +150,11 @@ export const ProjectPanel: React.FC = () => {
         isEditMode={isModalEditMode}
         currentProject={selectedProject.data}
       />
+      <ProjectBrowser
+        onSelectProject={() => {
+          dispatch(projectBrowserSlice.actions.setIsOpen(false));
+        }}
+      />
 
       <LoadingSkeletonOverlay />
 
@@ -159,7 +164,25 @@ export const ProjectPanel: React.FC = () => {
             <Tab label={LL.PROJECT()} value="1" />
           </TabList>
           <Stack direction="row" spacing={1} alignItems="center" pr={1}>
-            {problemLink && <ProblemLinkButton problemLink={problemLink} />}
+            <Tooltip title={`${LL.PROJECT_BROWSER()} 📁`} arrow>
+              <IconButton onClick={handleOpenBrowser}>
+                <FolderOpen />
+              </IconButton>
+            </Tooltip>
+            {isEditable && (
+              <Tooltip title={`${LL.EDIT_SELECTED_PROJECT()} ✍`} arrow>
+                <IconButton onClick={handleEditProject}>
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+            )}
+            {session.data && (
+              <Tooltip title={`${LL.CREATE_NEW_PROJECT()} ➕`} arrow>
+                <IconButton onClick={handleCreateProject}>
+                  <Add />
+                </IconButton>
+              </Tooltip>
+            )}
           </Stack>
         </TabListWrapper>
 
@@ -167,36 +190,7 @@ export const ProjectPanel: React.FC = () => {
           value="1"
           sx={{ display: "flex", flexFlow: "column nowrap", p: 2, gap: 1 }}
         >
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <ProjectSelect allBrief={allBrief} />
-            <Stack direction="row" spacing={0.5}>
-              <Tooltip title={`${LL.PROJECT_BROWSER()} 📁`} arrow>
-                <IconButton onClick={handleOpenBrowser}>
-                  <FolderOpen />
-                </IconButton>
-              </Tooltip>
-              {isEditable && (
-                <Tooltip title={`${LL.EDIT_SELECTED_PROJECT()} ✍`} arrow>
-                  <IconButton onClick={handleEditProject}>
-                    <Edit />
-                  </IconButton>
-                </Tooltip>
-              )}
-              {session.data && (
-                <Tooltip title={`${LL.CREATE_NEW_PROJECT()} ➕`} arrow>
-                  <IconButton onClick={handleCreateProject}>
-                    <Add />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </Stack>
-          </Stack>
-
-          <ProjectBrowser
-            onSelectProject={(_slug) => {
-              dispatch(projectBrowserSlice.actions.setIsOpen(false));
-            }}
-          />
+          <ProjectInfo project={selectedProject.data} />
 
           <TestCaseSelectBar selectedProject={selectedProject} />
 

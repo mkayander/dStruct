@@ -396,8 +396,8 @@ export const projectRouter = createTRPCRouter({
     }),
 
   // Select a single project
-  getBySlug: publicProcedure.input(z.string()).query(async ({ ctx, input }) =>
-    ctx.db.playgroundProject
+  getBySlug: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    const project = await ctx.db.playgroundProject
       .findUniqueOrThrow({
         where: {
           slug: input,
@@ -425,6 +425,13 @@ export const projectRouter = createTRPCRouter({
               order: true,
             },
           },
+          author: {
+            select: {
+              id: true,
+              name: true,
+              bucketImage: true,
+            },
+          },
         },
       })
       .catch((e: any) => {
@@ -437,8 +444,13 @@ export const projectRouter = createTRPCRouter({
             message: `Project "${input}" not found.`,
           });
         } else throw e;
-      }),
-  ),
+      });
+
+    return {
+      ...project,
+      isNew: calculateIsNew(project.createdAt, await getNewProjectMarginMs()),
+    };
+  }),
 
   create: protectedProcedure
     .input(
