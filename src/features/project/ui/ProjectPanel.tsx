@@ -19,7 +19,6 @@ import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { api } from "#/shared/lib";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
-import { ProblemLinkButton } from "#/shared/ui/atoms/ProblemLinkButton";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
@@ -118,8 +117,6 @@ export const ProjectPanel: React.FC = () => {
       }
     }
   }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
-
-  const problemLink = selectedProject.data?.lcLink;
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
