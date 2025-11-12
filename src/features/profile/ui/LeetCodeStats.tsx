@@ -63,11 +63,11 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
         {matchedUser ? (
           <>
             <Grid container spacing={1}>
-              <Grid className="row" container item spacing={1}>
-                <Grid item xs={5}>
+              <Grid className="row" container spacing={1}>
+                <Grid size={{ xs: 5 }}>
                   <Typography fontWeight="bold">Ranking:</Typography>
                 </Grid>
-                <Grid item xs={7}>
+                <Grid size={{ xs: 7 }}>
                   <Typography>
                     {matchedUser?.profile.ranking?.toLocaleString()}
                   </Typography>
@@ -79,15 +79,14 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
                   wrap="nowrap"
                   className="row"
                   container
-                  item
                   spacing={1}
                 >
-                  <Grid item xs={5}>
+                  <Grid size={{ xs: 5 }}>
                     <Typography fontWeight="bold">
                       {titlesMap[item.difficulty]}:
                     </Typography>
                   </Grid>
-                  <Grid item xs={7}>
+                  <Grid size={{ xs: 7 }}>
                     <Typography>
                       <span>{item.count}</span> /{" "}
                       <Typography

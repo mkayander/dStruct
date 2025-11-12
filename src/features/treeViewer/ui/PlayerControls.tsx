@@ -84,10 +84,10 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           {LL.PLAYBACK_INTERVAL()}
         </Typography>
         <Grid container spacing={2} alignItems="center">
-          <Grid item>
+          <Grid>
             <Speed />
           </Grid>
-          <Grid item xs>
+          <Grid size="grow">
             <Slider
               disabled={disabled}
               value={sliderValue}
@@ -97,7 +97,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
               aria-labelledby="input-slider"
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Input
               disabled={disabled}
               value={sliderValue}

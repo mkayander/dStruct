@@ -22,7 +22,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import type { BoxProps } from "@mui/material/Box/Box";
+import type { BoxProps } from "@mui/material/Box";
 import React from "react";
 
 import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
@@ -184,10 +184,10 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                     <Typography>{question.difficulty}</Typography>
                   </Box>
                 </div>
-                <Grid item>
+                <Grid>
                   <RatingButtons question={question} />
                 </Grid>
-                <Grid item>
+                <Grid>
                   <Button startIcon={<FavoriteBorder />} color="inherit">
                     Favorite
                   </Button>
@@ -198,7 +198,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
 
               <Grid container spacing={1} marginTop={0} marginBottom={1}>
                 {question.topicTags.map((topic) => (
-                  <Grid item key={topic.slug}>
+                  <Grid key={topic.slug}>
                     <TopicTag topic={topic} />
                   </Grid>
                 ))}

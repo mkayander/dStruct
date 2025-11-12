@@ -1,6 +1,6 @@
 import { alpha, Box, useTheme } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { type OverlayScrollbarsComponentProps } from "overlayscrollbars-react/types/OverlayScrollbarsComponent";
+import type { OverlayScrollbarsComponentProps } from "overlayscrollbars-react";
 import React from "react";
 
 import {

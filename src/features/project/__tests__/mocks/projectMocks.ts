@@ -23,6 +23,7 @@ export const createMockProject = (
     title: `Mock Project ${randomId}`,
     category: "ARRAY" as ProjectCategory,
     difficulty: "EASY" as ProjectDifficulty,
+    isNew: false,
     author: {
       id: `mock-author-${randomId}`,
       name: `Mock Author ${randomId}`,

@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import type { DialogProps } from "@mui/material/Dialog/Dialog";
+import type { DialogProps } from "@mui/material/Dialog";
 import TextField from "@mui/material/TextField";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";

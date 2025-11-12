@@ -13,7 +13,7 @@ import {
   Switch,
   Tooltip,
 } from "@mui/material";
-import type { DialogProps } from "@mui/material/Dialog/Dialog";
+import type { DialogProps } from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";

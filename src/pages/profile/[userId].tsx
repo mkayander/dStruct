@@ -32,10 +32,10 @@ const ProfilePage: NextPage = () => {
             <CircularProgress />
           ) : (
             <>
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <UserSettings />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <LeetCodeStats userProfile={userProfileQueryResult} />
               </Grid>
             </>

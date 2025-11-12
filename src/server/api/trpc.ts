@@ -1,7 +1,7 @@
 import type { TRPCClientErrorLike } from "@trpc/client";
-import type { UseTRPCQueryResult as OriginalUseTRPCQueryResult } from "@trpc/react-query/dist/shared/index.cjs";
+import type { UseTRPCQueryResult as OriginalUseTRPCQueryResult } from "@trpc/react-query/shared";
 import { initTRPC, TRPCError } from "@trpc/server";
-import type { AnyClientTypes } from "@trpc/server/dist/unstable-core-do-not-import.cjs";
+import type { AnyClientTypes } from "@trpc/server/unstable-core-do-not-import";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
