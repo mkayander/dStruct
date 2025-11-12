@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 import { colors } from "#/shared/lib/colors";
 
@@ -17,13 +17,12 @@ export function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
-  const [isDark, setIsDark] = useState(false);
+  const isDark = useMemo(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
 
-  useEffect(() => {
-    const isDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    setIsDark(isDarkMode);
+    return false;
   }, []);
 
   return (

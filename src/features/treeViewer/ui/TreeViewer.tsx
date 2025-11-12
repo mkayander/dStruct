@@ -54,6 +54,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
       if (prevTree) {
         style.left = (Number(style.left) || 0) + 200 + prevTree.maxDepth ** 5.3;
       }
+      // eslint-disable-next-line react-hooks/immutability
       topOffset += treeState.maxDepth * 72;
 
       prevTree = treeState;

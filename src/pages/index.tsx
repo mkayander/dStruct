@@ -3,12 +3,12 @@ import {
   Button,
   CircularProgress,
   Container,
+  Grid,
   Link as MuiLink,
   Stack,
   Typography,
   useTheme,
 } from "@mui/material";
-import Grid2 from "@mui/material/Grid2";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -99,9 +99,9 @@ const DashboardPage: NextPage<{
         }}
       >
         <Container maxWidth="xl">
-          <Grid2 container alignItems="center" spacing={4}>
+          <Grid container alignItems="center" spacing={4}>
             {/* Left Column - Content */}
-            <Grid2 size={{ xs: 12, md: 6 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Stack spacing={2} sx={{ pt: 8 }}>
                 <Typography
                   variant={isMobile ? "h3" : "h1"}
@@ -168,10 +168,10 @@ const DashboardPage: NextPage<{
                   </Button>
                 </Stack>
               </Stack>
-            </Grid2>
+            </Grid>
 
             {/* Right Column - 3D Model */}
-            <Grid2 size={{ xs: 12, md: 6 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 onMouseMove={handleMouseMove}
                 onMouseLeave={resetAngles}
@@ -185,8 +185,8 @@ const DashboardPage: NextPage<{
               >
                 <LogoModelView controlsRef={controlsRef} />
               </Box>
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
 
@@ -282,8 +282,8 @@ const DashboardPage: NextPage<{
             </Typography>
           </Box>
 
-          <Grid2 container spacing={4} justifyContent="center">
-            <Grid2 size={{ xs: 12, lg: 8 }}>
+          <Grid container spacing={4} justifyContent="center">
+            <Grid size={{ xs: 12, lg: 8 }}>
               <QuestionSummary
                 questionDataQuery={questionDataQuery}
                 sx={{
@@ -294,11 +294,11 @@ const DashboardPage: NextPage<{
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                 }}
               />
-            </Grid2>
-            <Grid2 size={{ xs: 12 }}>
+            </Grid>
+            <Grid size={{ xs: 12 }}>
               <DailyProblem questionDataQuery={questionDataQuery} />
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </MainLayout>

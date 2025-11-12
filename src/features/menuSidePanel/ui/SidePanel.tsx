@@ -77,13 +77,15 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
       open={isOpen}
       onOpen={() => setIsOpen(true)}
       onClose={() => setIsOpen(false)}
-      PaperProps={{
-        sx: {
-          background: alpha(
-            theme.palette.background.paper,
-            isDarkMode ? 0.2 : 0.6,
-          ),
-          backdropFilter: "blur(18px)",
+      slotProps={{
+        paper: {
+          sx: {
+            background: alpha(
+              theme.palette.background.paper,
+              isDarkMode ? 0.2 : 0.6,
+            ),
+            backdropFilter: "blur(18px)",
+          },
         },
       }}
     >

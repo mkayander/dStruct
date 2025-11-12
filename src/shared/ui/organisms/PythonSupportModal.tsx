@@ -59,10 +59,12 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
     <Dialog
       maxWidth="lg"
       onClose={onClose}
-      PaperProps={{
-        sx: {
-          overflow: "visible",
-          marginTop: isMobile ? 0 : "15vh",
+      slotProps={{
+        paper: {
+          sx: {
+            overflow: "visible",
+            marginTop: isMobile ? 0 : "15vh",
+          },
         },
       }}
       onMouseMove={handleMouseMove}

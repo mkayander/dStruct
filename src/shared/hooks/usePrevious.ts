@@ -9,5 +9,6 @@ export const usePrevious = <T>(value: T) => {
     ref.current = value;
   }, [value]);
 
+  // eslint-disable-next-line -- usePrevious hook intentionally accesses ref during render
   return ref.current;
 };
