@@ -1,3 +1,4 @@
+export { calculateIsNew, getNewProjectMarginMs } from "./calculateIsNew";
 export { clearEntityData } from "./clearEntityData";
 export { clearProjectEntities } from "./clearProjectEntities";
 export { fetchEntityData } from "./fetchEntityData";

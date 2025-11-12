@@ -6,8 +6,10 @@ import { argumentObjectValidator } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObjectMap } from "#/entities/argument/model/types";
 import {
+  calculateIsNew,
   clearProjectEntities,
   getEntitySlug,
+  getNewProjectMarginMs,
   getNextEntityIndex,
   setLastEntityIndex,
 } from "#/entities/projectEntity/lib";
@@ -182,7 +184,13 @@ export const projectRouter = createTRPCRouter({
       orderBy: [{ category: "asc" }, { title: "asc" }],
     });
 
-    return ctx.db.playgroundProject.findMany(args);
+    const projects = await ctx.db.playgroundProject.findMany(args);
+    const newProjectMarginMs = await getNewProjectMarginMs();
+
+    return projects.map((project) => ({
+      ...project,
+      isNew: calculateIsNew(project.createdAt, newProjectMarginMs),
+    }));
   }),
 
   allFiltered: publicProcedure
@@ -371,8 +379,15 @@ export const projectRouter = createTRPCRouter({
         },
       });
 
+      // Calculate isNew for each project
+      const newProjectMarginMs = await getNewProjectMarginMs();
+      const projectsWithIsNew = paginatedProjects.map((project) => ({
+        ...project,
+        isNew: calculateIsNew(project.createdAt, newProjectMarginMs),
+      }));
+
       return {
-        projects: paginatedProjects,
+        projects: projectsWithIsNew,
         total,
         hasMore,
         page,

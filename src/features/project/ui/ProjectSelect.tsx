@@ -12,10 +12,9 @@ import {
   useColorScheme,
   useTheme,
 } from "@mui/material";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 
-import { ConfigContext } from "#/context";
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
@@ -35,7 +34,6 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
   const { mode } = useColorScheme();
-  const { newProjectMarginMs } = useContext(ConfigContext);
   const [searchValue, setSearchValue] = useState("");
 
   const { projectSlug = "", setProject } = usePlaygroundSlugs();
@@ -82,10 +80,6 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
         );
       }
 
-      const isProjectNew =
-        newProjectMarginMs &&
-        project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
-
       elements.push(
         <MenuItem key={project.id} value={project.slug}>
           <Stack
@@ -97,7 +91,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
           >
             <Stack direction="row" spacing={1}>
               <span>{project.title}</span>
-              {isProjectNew && <NewLabel createdAt={project.createdAt} />}
+              {project.isNew && <NewLabel createdAt={project.createdAt} />}
             </Stack>
             <Stack
               direction="row"
@@ -134,7 +128,7 @@ export const ProjectSelect: React.FC<ProjectSelectProps> = ({ allBrief }) => {
     }
 
     return elements;
-  }, [allBrief.data, newProjectMarginMs, panelBgColor, searchValue, theme]);
+  }, [allBrief.data, panelBgColor, searchValue, theme]);
 
   return (
     <FormControl fullWidth>

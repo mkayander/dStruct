@@ -7,9 +7,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 
-import { ConfigContext } from "#/context";
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
@@ -34,11 +33,6 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
   onClick,
 }) => {
   const theme = useTheme();
-  const { newProjectMarginMs } = useContext(ConfigContext);
-
-  const isProjectNew =
-    newProjectMarginMs &&
-    project.createdAt.getTime() > Date.now() - Number(newProjectMarginMs);
 
   const handleKeyDown = (ev: React.KeyboardEvent) => {
     if (ev.key === "Enter" || ev.key === " ") {
@@ -131,7 +125,7 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
             >
               {project.title}
             </Typography>
-            {isProjectNew && <NewLabel createdAt={project.createdAt} />}
+            {project.isNew && <NewLabel createdAt={project.createdAt} />}
           </Stack>
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography
