@@ -1,23 +1,22 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 export const useJSWorker = () => {
-  // Create worker using useMemo to avoid recreating on every render
-  const worker = useMemo(
-    () =>
-      new Worker(
-        new URL(
-          "src/features/codeRunner/lib/workers/codeExec.worker.ts",
-          import.meta.url,
-        ),
-      ),
-    [],
-  );
+  const [worker, setWorker] = useState<Worker | null>(null);
 
   useEffect(() => {
+    const worker = new Worker(
+      new URL(
+        "src/features/codeRunner/lib/workers/codeExec.worker.ts",
+        import.meta.url,
+      ),
+    );
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setWorker(worker);
+
     return () => {
       worker.terminate();
     };
-  }, [worker]);
+  }, []);
 
   return { worker };
 };
