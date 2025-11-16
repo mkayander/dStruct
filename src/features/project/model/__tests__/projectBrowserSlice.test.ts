@@ -139,8 +139,8 @@ describe("projectBrowserSlice", () => {
 
       const accumulated = selectAccumulatedProjects(store.getState());
       expect(accumulated).toHaveLength(2);
-      expect(accumulated[0].id).toBe("1");
-      expect(accumulated[1].id).toBe("2");
+      expect(accumulated[0]?.id).toBe("1");
+      expect(accumulated[1]?.id).toBe("2");
     });
 
     it("should avoid duplicates by ID", () => {

@@ -1,52 +1,31 @@
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
-
-import {
-  projectBrowserSlice,
-  selectFilters,
-} from "../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "../ui/ProjectBrowser/ProjectBrowserContext";
 
 /**
- * Hook for managing project filters
+ * Hook for managing project filters.
+ * @deprecated This hook is deprecated. Use `useProjectBrowserContext` directly instead.
+ * This hook is kept for backward compatibility but now delegates to ProjectBrowserContext.
  */
 export const useProjectFilters = () => {
-  const dispatch = useAppDispatch();
-  const filters = useAppSelector(selectFilters);
-
-  const setSearchQuery = (query: string) => {
-    dispatch(projectBrowserSlice.actions.setSearchQuery(query));
-  };
-
-  const setSelectedCategories = (
-    categories: typeof filters.selectedCategories,
-  ) => {
-    dispatch(projectBrowserSlice.actions.setSelectedCategories(categories));
-  };
-
-  const setSelectedDifficulties = (
-    difficulties: typeof filters.selectedDifficulties,
-  ) => {
-    dispatch(projectBrowserSlice.actions.setSelectedDifficulties(difficulties));
-  };
-
-  const setShowOnlyNew = (show: boolean) => {
-    dispatch(projectBrowserSlice.actions.setShowOnlyNew(show));
-  };
-
-  const setShowOnlyMine = (show: boolean) => {
-    dispatch(projectBrowserSlice.actions.setShowOnlyMine(show));
-  };
-
-  const resetFilters = () => {
-    dispatch(projectBrowserSlice.actions.resetFilters());
-  };
+  const context = useProjectBrowserContext();
 
   return {
-    filters,
-    setSearchQuery,
-    setSelectedCategories,
-    setSelectedDifficulties,
-    setShowOnlyNew,
-    setShowOnlyMine,
-    resetFilters,
+    filters: {
+      searchQuery: context.searchQuery,
+      selectedCategories: context.selectedCategories,
+      selectedDifficulties: context.selectedDifficulties,
+      showOnlyNew: context.showOnlyNew,
+      showOnlyMine: false, // showOnlyMine is not available in URL state
+    },
+    setSearchQuery: context.setSearchQuery,
+    setSelectedCategories: context.setSelectedCategories,
+    setSelectedDifficulties: context.setSelectedDifficulties,
+    setShowOnlyNew: context.setShowOnlyNew,
+    setShowOnlyMine: () => {
+      // No-op: showOnlyMine is not available in URL state
+      console.warn(
+        "setShowOnlyMine is not supported. Use ProjectBrowserContext directly for filter management.",
+      );
+    },
+    resetFilters: context.resetFilters,
   };
 };
