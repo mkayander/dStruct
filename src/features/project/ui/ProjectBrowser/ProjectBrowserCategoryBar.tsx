@@ -5,12 +5,8 @@ import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import type { RouterOutputs } from "#/shared/api";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-import {
-  projectBrowserSlice,
-  selectSelectedCategories,
-} from "../../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 
 type ProjectBrief = RouterOutputs["project"]["allBrief"][number];
 
@@ -24,8 +20,8 @@ const COLLAPSED_MAX_HEIGHT = 120;
 export const ProjectBrowserCategoryBar: React.FC<
   ProjectBrowserCategoryBarProps
 > = ({ projects }) => {
-  const dispatch = useAppDispatch();
-  const selectedCategories = useAppSelector(selectSelectedCategories);
+  const { selectedCategories, setSelectedCategories } =
+    useProjectBrowserContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Calculate category counts
@@ -57,19 +53,10 @@ export const ProjectBrowserCategoryBar: React.FC<
     const isSelected = selectedCategories.includes(category);
     if (isSelected) {
       // Remove category from selection
-      dispatch(
-        projectBrowserSlice.actions.setSelectedCategories(
-          selectedCategories.filter((c) => c !== category),
-        ),
-      );
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
     } else {
       // Add category to selection
-      dispatch(
-        projectBrowserSlice.actions.setSelectedCategories([
-          ...selectedCategories,
-          category,
-        ]),
-      );
+      setSelectedCategories([...selectedCategories, category]);
     }
   };
 

@@ -2,9 +2,7 @@ import { AllInclusive, Psychology } from "@mui/icons-material";
 import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React from "react";
 
-import { useAppDispatch } from "#/store/hooks";
-
-import { projectBrowserSlice } from "../../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 
 type Topic = "all" | "algorithms";
 
@@ -28,7 +26,7 @@ const TOPICS: TopicConfig[] = [
 ];
 
 export const ProjectBrowserTopicFilters: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const { setSelectedCategories } = useProjectBrowserContext();
 
   // For now, "All Topics" is always selected since we don't have topic filtering yet
   // This is a placeholder for future topic-based filtering
@@ -47,7 +45,7 @@ export const ProjectBrowserTopicFilters: React.FC = () => {
     // This will be extended when topic field is added to projects
     // For now, selecting a topic clears category filters (placeholder behavior)
     if (newTopic === "all") {
-      dispatch(projectBrowserSlice.actions.setSelectedCategories([]));
+      setSelectedCategories([]);
     }
     // Other topics will filter categories when topic filtering is implemented
   };

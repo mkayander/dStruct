@@ -5,17 +5,19 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
   projectBrowserSlice,
-  selectBrowserState,
   selectIsLoading,
 } from "../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "../ui/ProjectBrowser/ProjectBrowserContext";
 
 /**
+ * @deprecated This hook is deprecated. Use `useProjectBrowserContext` instead for URL-driven state
+ * and Redux selectors directly for pagination state.
  * Main hook for ProjectBrowser functionality
  */
 export const useProjectBrowser = () => {
   const dispatch = useAppDispatch();
-  const browserState = useAppSelector(selectBrowserState);
   const isLoading = useAppSelector(selectIsLoading);
+  const context = useProjectBrowserContext();
 
   const allBrief = api.project.allBrief.useQuery();
 
@@ -23,19 +25,11 @@ export const useProjectBrowser = () => {
     dispatch(projectBrowserSlice.actions.setIsLoading(allBrief.isLoading));
   }, [allBrief.isLoading, dispatch]);
 
-  const openBrowser = () => {
-    dispatch(projectBrowserSlice.actions.setIsOpen(true));
-  };
-
-  const closeBrowser = () => {
-    dispatch(projectBrowserSlice.actions.setIsOpen(false));
-  };
-
   return {
-    ...browserState,
+    ...context,
     isLoading,
     projects: allBrief.data,
-    openBrowser,
-    closeBrowser,
+    openBrowser: context.openBrowser,
+    closeBrowser: context.closeBrowser,
   };
 };

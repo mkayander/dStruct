@@ -8,12 +8,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { ArgsEditor } from "#/features/argsEditor/ui/ArgsEditor";
-import { projectBrowserSlice } from "#/features/project/model/projectBrowserSlice";
 import {
   projectSlice,
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
-import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
+import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
@@ -48,10 +47,7 @@ export const ProjectPanel: React.FC = () => {
   const allBrief = api.project.allBrief.useQuery();
 
   const isEditable = useAppSelector(selectIsEditable);
-
-  const handleOpenBrowser = () => {
-    dispatch(projectBrowserSlice.actions.setIsOpen(true));
-  };
+  const { openBrowser } = useProjectBrowserContext();
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
@@ -147,11 +143,6 @@ export const ProjectPanel: React.FC = () => {
         isEditMode={isModalEditMode}
         currentProject={selectedProject.data}
       />
-      <ProjectBrowser
-        onSelectProject={() => {
-          dispatch(projectBrowserSlice.actions.setIsOpen(false));
-        }}
-      />
 
       <LoadingSkeletonOverlay />
 
@@ -162,7 +153,7 @@ export const ProjectPanel: React.FC = () => {
           </TabList>
           <Stack direction="row" spacing={1} alignItems="center" pr={1}>
             <Tooltip title={`${LL.PROJECT_BROWSER()} 📁`} arrow>
-              <IconButton onClick={handleOpenBrowser}>
+              <IconButton onClick={openBrowser}>
                 <FolderOpen />
               </IconButton>
             </Tooltip>

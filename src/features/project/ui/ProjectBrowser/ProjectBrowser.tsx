@@ -24,17 +24,11 @@ import {
   projectBrowserSlice,
   selectAccumulatedProjects,
   selectCurrentPage,
-  selectIsOpen,
   selectLastQueryKey,
   selectPageSize,
-  selectSearchQuery,
-  selectSelectedCategories,
-  selectSelectedDifficulties,
-  selectShowOnlyNew,
-  selectSortBy,
-  selectSortOrder,
 } from "../../model/projectBrowserSlice";
 import { ProjectBrowserCategoryBar } from "./ProjectBrowserCategoryBar";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 import { ProjectBrowserHeader } from "./ProjectBrowserHeader";
 import { ProjectBrowserList } from "./ProjectBrowserList";
 
@@ -50,13 +44,21 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const theme = useTheme();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const isMobile = useMobileLayout();
-  const isOpen = useAppSelector(selectIsOpen);
-  const searchQuery = useAppSelector(selectSearchQuery);
-  const selectedCategories = useAppSelector(selectSelectedCategories);
-  const selectedDifficulties = useAppSelector(selectSelectedDifficulties);
-  const showOnlyNew = useAppSelector(selectShowOnlyNew);
-  const sortBy = useAppSelector(selectSortBy);
-  const sortOrder = useAppSelector(selectSortOrder);
+
+  // Get all filter state from context (URL-based, no Redux sync needed)
+  const {
+    isOpen,
+    closeBrowser,
+    searchQuery,
+    selectedCategories,
+    selectedDifficulties,
+    showOnlyNew,
+    sortBy,
+    sortOrder,
+    setSearchQuery,
+  } = useProjectBrowserContext();
+
+  // Redux state - only for derived/computed state (pagination, accumulated projects)
   const currentPage = useAppSelector(selectCurrentPage);
   const pageSize = useAppSelector(selectPageSize);
   const accumulatedProjects = useAppSelector(selectAccumulatedProjects);
@@ -160,24 +162,24 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   }, [browseProjects.data?.hasMore, dispatch]);
 
   const handleSearchChange = (value: string) => {
-    dispatch(projectBrowserSlice.actions.setSearchQuery(value));
+    setSearchQuery(value);
   };
 
   const handleSelectProject = (slug: string) => {
     void setProject(slug);
-    dispatch(projectBrowserSlice.actions.setIsOpen(false));
+    closeBrowser();
     onSelectProject?.(slug);
   };
 
   const handleClose = useCallback(() => {
-    dispatch(projectBrowserSlice.actions.setIsOpen(false));
-  }, [dispatch]);
+    closeBrowser();
+  }, [closeBrowser]);
 
   const handleRetry = useCallback(() => {
     // Refetch queries to retry
     void allBrief.refetch();
     void browseProjects.refetch();
-  }, [allBrief, browseProjects]);
+  }, [allBrief.refetch, browseProjects.refetch]);
 
   // Show error snackbar when error occurs
   useEffect(() => {
@@ -201,6 +203,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
         ),
         persist: false,
         autoHideDuration: 6000,
+        key: "project-browser-error", // Prevent duplicate snackbars
       });
     }
   }, [error, enqueueSnackbar, closeSnackbar, handleRetry, LL]);

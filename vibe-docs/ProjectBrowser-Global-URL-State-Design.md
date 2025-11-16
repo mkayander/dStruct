@@ -8,6 +8,8 @@ This document outlines the design and implementation plan for making the Project
 
 **Estimated Total Effort:** 2-4 days (including testing)
 
+**Actual Implementation Status:** ✅ **COMPLETED** (with optimizations)
+
 **Key Benefits:**
 
 - Global accessibility: Open project browser from any page via header button
@@ -50,7 +52,7 @@ type ProjectBrowserState = {
   sortOrder: "asc" | "desc";
 
   // UI State
-  isOpen: boolean;  // Currently only in Redux
+  isOpen: boolean; // Currently only in Redux
 
   // Pagination
   currentPage: number;
@@ -95,10 +97,13 @@ setModalName("");
 ```typescript
 // In CodePanel.tsx - multiple independent params
 const [runMode] = useSearchParam("mode");
-const [language, setLanguage] = useSearchParam<ProgrammingLanguage>("language", {
-  defaultValue: "javascript",
-  validate: isLanguageValid,
-});
+const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(
+  "language",
+  {
+    defaultValue: "javascript",
+    validate: isLanguageValid,
+  },
+);
 const [modalName, setModalName] = useSearchParam("modal");
 ```
 
@@ -127,12 +132,11 @@ const [modalName, setModalName] = useSearchParam("modal");
      - `search` - search query string
      - `categories` - comma-separated category list
      - `difficulties` - comma-separated difficulty list
-     - `showOnlyNew` - boolean flag
-     - `sortBy` - sort field name
-     - `sortOrder` - "asc" or "desc"
+     - `new` - boolean flag ("true" or empty)
+     - `sort` - combined sort value (e.g., "titleAsc", "difficultyDesc")
    - URL should update when filters change (shallow routing)
-   - Redux state should initialize from URL on mount
-   - URL should update when Redux state changes (bidirectional sync)
+   - State is managed via Context + URL pattern (single source of truth)
+   - URL is the primary state store, Context provides typed access
 
 3. **Shareability**
    - URLs with query parameters should open browser with same filters
@@ -310,9 +314,11 @@ useEffect(() => {
 // Parse comma-separated arrays
 const parseCategories = (value: string): ProjectCategory[] => {
   if (!value) return [];
-  return value.split(",").filter((cat): cat is ProjectCategory =>
-    Object.values(ProjectCategory).includes(cat as ProjectCategory)
-  );
+  return value
+    .split(",")
+    .filter((cat): cat is ProjectCategory =>
+      Object.values(ProjectCategory).includes(cat as ProjectCategory),
+    );
 };
 
 const serializeCategories = (categories: ProjectCategory[]): string => {
@@ -522,21 +528,35 @@ OPEN_PROJECT_BROWSER: "Open Project Browser",
 
 ## Testing Strategy
 
-### Unit Tests
+### Unit Tests ✅ Completed
 
-1. **URL Sync Hook (`useProjectBrowserUrlSync.test.ts`)**
-   - Test URL → Redux sync on mount
-   - Test Redux → URL sync on state change
-   - Test array parsing (categories, difficulties)
-   - Test boolean parsing (isOpen, showOnlyNew)
-   - Test debouncing behavior
-   - Test invalid param handling
+1. **Helper Functions (`ProjectBrowserContext.test.tsx`)**
+   - ✅ `parseCategories` / `serializeCategories` - 11 tests (O(1) lookup optimization)
+   - ✅ `parseDifficulties` / `serializeDifficulties` - 9 tests (O(1) lookup optimization)
+   - ✅ `parseBoolean` / `serializeBoolean` - 4 tests
+   - ✅ `parseSort` / `serializeSort` - 5 tests (combined sort parameter)
+   - ✅ Edge cases: empty strings, invalid values, multiple values, case-insensitive parsing
 
-2. **MainAppBar Button (`MainAppBar.test.tsx`)**
-   - Test button renders
-   - Test click handler updates URL
-   - Test keyboard navigation
-   - Test tooltip display
+2. **Context Provider (`ProjectBrowserContext.test.tsx`)**
+   - ✅ Default values when no URL params
+   - ✅ Setter functions update URL params correctly
+   - ✅ URL parameter parsing for all filter types
+   - ✅ Error handling when used outside provider
+   - ✅ Reset filters functionality
+   - ✅ Combined sort parameter parsing and serialization
+
+3. **Redux Slice (`projectBrowserSlice.test.ts`)**
+   - ✅ Pagination state management (17 tests)
+   - ✅ Project accumulation logic
+   - ✅ Query key tracking
+   - ✅ Duplicate prevention in appendProjects
+
+4. **Query Key Generation (`queryKey.test.ts`)**
+   - ✅ Same key for identical filters
+   - ✅ Different keys when filters change
+   - ✅ Special handling (date → createdAt, empty values as undefined)
+
+**Total: 52 unit tests, all passing**
 
 ### Integration Tests
 

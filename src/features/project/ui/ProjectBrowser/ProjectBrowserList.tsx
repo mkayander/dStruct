@@ -9,11 +9,8 @@ import {
   projectBrowserSlice,
   selectCurrentPage,
   selectHasMore,
-  selectSearchQuery,
-  selectSelectedCategories,
-  selectSelectedDifficulties,
-  selectShowOnlyNew,
 } from "../../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 import { ProjectBrowserEmpty } from "./ProjectBrowserEmpty";
 import { ProjectBrowserItem } from "./ProjectBrowserItem";
 import { ProjectBrowserItemSkeleton } from "./ProjectBrowserItemSkeleton";
@@ -58,10 +55,8 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
   onSelectProject,
 }) => {
   const dispatch = useAppDispatch();
-  const searchQuery = useAppSelector(selectSearchQuery);
-  const selectedCategories = useAppSelector(selectSelectedCategories);
-  const selectedDifficulties = useAppSelector(selectSelectedDifficulties);
-  const showOnlyNew = useAppSelector(selectShowOnlyNew);
+  const { searchQuery, selectedCategories, selectedDifficulties, showOnlyNew } =
+    useProjectBrowserContext();
   const currentPage = useAppSelector(selectCurrentPage);
   const hasMoreData = useAppSelector(selectHasMore);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Settings } from "@mui/icons-material";
+import { FolderOpen, Settings } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   alpha,
@@ -30,6 +30,7 @@ import React, { type MouseEvent, useState } from "react";
 
 import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
 import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
+import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { useProfileImageUploader } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { getImageUrl } from "#/shared/lib";
@@ -55,6 +56,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const { openBrowser } = useProjectBrowserContext();
 
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
@@ -225,6 +227,15 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
               alignItems="center"
               sx={{ flexGrow: 0 }}
             >
+              <Tooltip title={LL.PROJECT_BROWSER()} arrow>
+                <IconButton
+                  onClick={openBrowser}
+                  color="inherit"
+                  aria-label={LL.PROJECT_BROWSER()}
+                >
+                  <FolderOpen />
+                </IconButton>
+              </Tooltip>
               {session.status === "loading" ? (
                 <Skeleton
                   variant="circular"

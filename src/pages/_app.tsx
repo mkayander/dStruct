@@ -7,6 +7,8 @@ import { type AppProps } from "next/app";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 
+import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
+import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { TooltipProvider } from "#/shadcn/ui/tooltip";
@@ -45,11 +47,14 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
                 )}
               >
                 <I18nProvider i18n={pageProps.i18n}>
-                  <TooltipProvider delayDuration={200}>
-                    <Component {...pageProps} />
-                    <Analytics />
-                    <SpeedInsights />
-                  </TooltipProvider>
+                  <ProjectBrowserProvider>
+                    <TooltipProvider delayDuration={200}>
+                      <Component {...pageProps} />
+                      <ProjectBrowser />
+                      <Analytics />
+                      <SpeedInsights />
+                    </TooltipProvider>
+                  </ProjectBrowserProvider>
                 </I18nProvider>
               </SnackbarProvider>
             </StateThemeProvider>

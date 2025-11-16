@@ -25,13 +25,8 @@ import React from "react";
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { useI18nContext } from "#/shared/hooks";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-import {
-  projectBrowserSlice,
-  selectSelectedDifficulties,
-  selectShowOnlyNew,
-} from "../../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 
 type ProjectBrowserFiltersProps = {
   anchorEl: HTMLElement | null;
@@ -46,26 +41,28 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
 }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
-  const dispatch = useAppDispatch();
   const session = useSession();
-  const selectedDifficulties = useAppSelector(selectSelectedDifficulties);
-  const showOnlyNew = useAppSelector(selectShowOnlyNew);
+  const {
+    selectedDifficulties,
+    showOnlyNew,
+    setSelectedDifficulties,
+    setShowOnlyNew,
+    resetFilters,
+  } = useProjectBrowserContext();
 
   const handleDifficultyToggle = (
     _ev: React.MouseEvent<HTMLElement>,
     newDifficulties: ProjectDifficulty[],
   ) => {
-    dispatch(
-      projectBrowserSlice.actions.setSelectedDifficulties(newDifficulties),
-    );
+    setSelectedDifficulties(newDifficulties);
   };
 
   const handleShowOnlyNewChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(projectBrowserSlice.actions.setShowOnlyNew(ev.target.checked));
+    setShowOnlyNew(ev.target.checked);
   };
 
   const handleClearAll = () => {
-    dispatch(projectBrowserSlice.actions.resetFilters());
+    resetFilters();
   };
 
   const hasActiveFilters = selectedDifficulties.length > 0 || showOnlyNew;

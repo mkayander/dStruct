@@ -2,6 +2,12 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import {
+  mockSetBrowserParam,
+  mockUseSearchParam,
+  resetAllMocks,
+} from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
+import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { makeStore } from "#/store/makeStore";
 
 import { useProjectBrowser } from "../useProjectBrowser";
@@ -22,10 +28,29 @@ vi.mock("#/shared/lib", async () => {
   };
 });
 
+// Setup mocks at top level (vi.mock() must be hoisted)
+vi.mock("#/shared/hooks", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("#/shared/hooks")>();
+  return {
+    ...actual,
+    useSearchParam: (param: string) => mockUseSearchParam(param),
+  };
+});
+
+vi.mock("next/router", () => ({
+  useRouter: vi.fn(() => ({
+    pathname: "/",
+    query: {},
+    push: vi.fn(),
+  })),
+}));
+
 const createWrapper = () => {
   const store = makeStore();
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ReduxProvider store={store}>{children}</ReduxProvider>
+    <ReduxProvider store={store}>
+      <ProjectBrowserProvider>{children}</ProjectBrowserProvider>
+    </ReduxProvider>
   );
   Wrapper.displayName = "TestWrapper";
   return Wrapper;
@@ -33,7 +58,7 @@ const createWrapper = () => {
 
 describe("useProjectBrowser", () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    resetAllMocks();
     mockUseQuery.mockReturnValue({
       data: undefined,
       isLoading: false,
@@ -50,6 +75,8 @@ describe("useProjectBrowser", () => {
     expect(result.current.selectedCategories).toEqual([]);
     expect(result.current.isOpen).toBe(false);
     expect(result.current.isLoading).toBe(false);
+    expect(result.current.openBrowser).toBeDefined();
+    expect(result.current.closeBrowser).toBeDefined();
   });
 
   it("should sync isLoading from query", async () => {
@@ -113,25 +140,32 @@ describe("useProjectBrowser", () => {
       result.current.openBrowser();
     });
 
-    expect(result.current.isOpen).toBe(true);
+    expect(mockSetBrowserParam).toHaveBeenCalledWith("true");
+    // Note: isOpen state comes from URL param, which is mocked to return ""
+    // In real usage, the URL param would update and isOpen would become true
   });
 
   it("should close browser when closeBrowser is called", () => {
+    // Mock browser param to be "true" initially
+    mockUseSearchParam.mockImplementation((param: string) => {
+      if (param === "browser") {
+        return ["true", mockSetBrowserParam];
+      }
+      return ["", vi.fn()];
+    });
+
     const { result } = renderHook(() => useProjectBrowser(), {
       wrapper: createWrapper(),
     });
 
-    // Open first
-    act(() => {
-      result.current.openBrowser();
-    });
     expect(result.current.isOpen).toBe(true);
 
     // Then close
     act(() => {
       result.current.closeBrowser();
     });
-    expect(result.current.isOpen).toBe(false);
+
+    expect(mockSetBrowserParam).toHaveBeenCalledWith("");
   });
 
   it("should handle query loading state", () => {

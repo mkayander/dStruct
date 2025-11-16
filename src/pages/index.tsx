@@ -7,6 +7,7 @@ import {
   Link as MuiLink,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
@@ -78,6 +79,7 @@ const DashboardPage: NextPage<{
   const questionDataQuery = useDailyQuestionData();
 
   const isMobile = useMobileLayout();
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "lg"));
 
   return (
     <MainLayout onScroll={handleScroll} headerPosition="fixed">
@@ -93,31 +95,37 @@ const DashboardPage: NextPage<{
           display: "flex",
           alignItems: "center",
           position: "relative",
+          overflow: "hidden",
           clipPath: isMobile
             ? "ellipse(100% 100% at 50% 0%)"
-            : "ellipse(140% 100% at 50% 0%)",
+            : isMediumScreen
+              ? "ellipse(120% 100% at 50% 0%)"
+              : "ellipse(140% 100% at 50% 0%)",
         }}
       >
-        <Container maxWidth="xl">
-          <Grid container alignItems="center" spacing={4}>
+        <Container
+          maxWidth={isMediumScreen ? "lg" : "xl"}
+          sx={{ px: { xs: 2, sm: 3, md: 4 } }}
+        >
+          <Grid container alignItems="center" spacing={{ xs: 3, md: 4 }}>
             {/* Left Column - Content */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <Stack spacing={2} sx={{ pt: 8 }}>
+              <Stack spacing={2} sx={{ pt: { xs: 6, md: 8 } }}>
                 <Typography
-                  variant={isMobile ? "h3" : "h1"}
+                  variant={isMobile ? "h3" : isMediumScreen ? "h2" : "h1"}
                   sx={{
                     fontWeight: "bold",
                     lineHeight: 1.2,
-                    maxWidth: "90%",
+                    maxWidth: { xs: "90%", md: "100%" },
                   }}
                 >
                   {LL.DATA_STRUCTURES_SIMPLIFIED()}
                 </Typography>
                 <Typography
-                  variant={isMobile ? "body1" : "h6"}
+                  variant={isMobile ? "body1" : isMediumScreen ? "body1" : "h6"}
                   sx={{
                     opacity: 0.9,
-                    maxWidth: "85%",
+                    maxWidth: { xs: "85%", md: "100%" },
                     lineHeight: 1.6,
                   }}
                 >
@@ -134,7 +142,7 @@ const DashboardPage: NextPage<{
                     <Button
                       variant="contained"
                       size="large"
-                      fullWidth
+                      fullWidth={isMobile}
                       sx={{
                         bgcolor: "rgba(255, 255, 255, 0.2)",
                         color: "inherit",
@@ -143,7 +151,7 @@ const DashboardPage: NextPage<{
                         "&:hover": {
                           bgcolor: "rgba(255, 255, 255, 0.3)",
                         },
-                        px: 4,
+                        px: { xs: 3, md: 4 },
                         py: 1.5,
                       }}
                     >
@@ -153,6 +161,7 @@ const DashboardPage: NextPage<{
                   <Button
                     variant="outlined"
                     size="large"
+                    fullWidth={isMobile}
                     sx={{
                       borderColor: "rgba(255, 255, 255, 0.3)",
                       color: "inherit",
@@ -160,7 +169,7 @@ const DashboardPage: NextPage<{
                         borderColor: "rgba(255, 255, 255, 0.5)",
                         bgcolor: "rgba(255, 255, 255, 0.1)",
                       },
-                      px: 4,
+                      px: { xs: 3, md: 4 },
                       py: 1.5,
                     }}
                   >
@@ -176,7 +185,7 @@ const DashboardPage: NextPage<{
                 onMouseMove={handleMouseMove}
                 onMouseLeave={resetAngles}
                 sx={{
-                  height: isMobile ? 400 : 600,
+                  height: { xs: 400, md: isMediumScreen ? 500 : 600 },
                   position: "relative",
                   display: "flex",
                   alignItems: "center",
@@ -197,7 +206,10 @@ const DashboardPage: NextPage<{
           py: { xs: 8, md: 12 },
         }}
       >
-        <Container maxWidth="xl">
+        <Container
+          maxWidth={isMediumScreen ? "lg" : "xl"}
+          sx={{ px: { xs: 2, sm: 3, md: 4 } }}
+        >
           {/* Authentication Status Section */}
           <Box sx={{ mb: 8, textAlign: "center" }}>
             {session.status === "loading" ? (

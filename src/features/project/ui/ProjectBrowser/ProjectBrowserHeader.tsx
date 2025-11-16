@@ -12,15 +12,8 @@ import React, { useRef, useState } from "react";
 
 import { useI18nContext } from "#/shared/hooks";
 import { DebouncedInput } from "#/shared/ui/molecules/DebouncedInput";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-import {
-  projectBrowserSlice,
-  selectSelectedDifficulties,
-  selectShowOnlyNew,
-  selectSortBy,
-  selectSortOrder,
-} from "../../model/projectBrowserSlice";
+import { useProjectBrowserContext } from "./ProjectBrowserContext";
 import { ProjectBrowserFilters } from "./ProjectBrowserFilters";
 
 type ProjectBrowserHeaderProps = {
@@ -42,9 +35,8 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   searchInputRef,
 }) => {
   const { LL } = useI18nContext();
-  const dispatch = useAppDispatch();
-  const sortBy = useAppSelector(selectSortBy);
-  const sortOrder = useAppSelector(selectSortOrder);
+  const { sortBy, sortOrder, setSort, selectedDifficulties, showOnlyNew } =
+    useProjectBrowserContext();
   const [sortMenuAnchor, setSortMenuAnchor] = useState<null | HTMLElement>(
     null,
   );
@@ -102,8 +94,10 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   };
 
   const handleSortSelect = (option: SortOption, order: "asc" | "desc") => {
-    dispatch(projectBrowserSlice.actions.setSortBy(option.value));
-    dispatch(projectBrowserSlice.actions.setSortOrder(order));
+    // Combine sortBy and order into single value like "titleAsc", "difficultyDesc"
+    const orderCapitalized = order.charAt(0).toUpperCase() + order.slice(1);
+    const sortValue = `${option.value}${orderCapitalized}`;
+    setSort(sortValue);
     handleSortMenuClose();
   };
 
@@ -121,8 +115,6 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
       ? currentSortOption?.ascLabel
       : currentSortOption?.descLabel;
 
-  const selectedDifficulties = useAppSelector(selectSelectedDifficulties);
-  const showOnlyNew = useAppSelector(selectShowOnlyNew);
   const hasActiveFilters = selectedDifficulties.length > 0 || showOnlyNew;
 
   return (

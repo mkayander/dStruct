@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { vi } from "vitest";
 
+import { mockUseSearchParam } from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
+import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
 import en from "#/i18n/en/index";
 import type { Translation } from "#/i18n/i18n-types";
@@ -28,6 +30,15 @@ vi.mock("next-auth/react", () => {
     useSession: vi.fn(() => {
       return { data: mockSession, status: "authenticated" }; // return type is [] in v3 but changed to {} in v4
     }),
+  };
+});
+
+// Setup mocks at top level (vi.mock() must be hoisted)
+vi.mock("#/shared/hooks", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("#/shared/hooks")>();
+  return {
+    ...actual,
+    useSearchParam: (param: string) => mockUseSearchParam(param),
   };
 });
 
@@ -60,9 +71,11 @@ describe("DashboardPage", () => {
       <ReduxProvider store={store}>
         <MockedProvider mocks={mocks} addTypename={false}>
           <StateThemeProvider>
-            <TooltipProvider>
-              <DashboardPage i18n={i18n} />
-            </TooltipProvider>
+            <ProjectBrowserProvider>
+              <TooltipProvider>
+                <DashboardPage i18n={i18n} />
+              </TooltipProvider>
+            </ProjectBrowserProvider>
           </StateThemeProvider>
         </MockedProvider>
       </ReduxProvider>,
