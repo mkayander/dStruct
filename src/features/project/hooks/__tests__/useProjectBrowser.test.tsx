@@ -30,6 +30,7 @@ vi.mock("#/shared/lib", async () => {
 
 // Setup mocks at top level (vi.mock() must be hoisted)
 vi.mock("#/shared/hooks", async (importOriginal) => {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const actual = await importOriginal<typeof import("#/shared/hooks")>();
   return {
     ...actual,

@@ -10,7 +10,7 @@ const eslintConfig = [
       ".eslintrc.js",
       "jest.config.cjs",
       "jest.setup.mjs",
-      "*.worker.js",
+      "**/*.worker.js",
       "**/dist/**",
       "**/coverage/**",
       "postcss.config.js",
