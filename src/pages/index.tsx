@@ -39,14 +39,24 @@ const DashboardPage: NextPage<{
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    const azimuthalAngle =
-      ((window.innerWidth - event.clientX) / window.innerWidth) * Math.PI -
-      Math.PI / 2;
-
     const rect = event.currentTarget.getBoundingClientRect();
+
+    // Calculate normalized mouse position (0 to 1) within the hero section
+    const normalizedX = (event.clientX - rect.left) / rect.width;
+    const normalizedY = (event.clientY - rect.top) / rect.height;
+
+    // Map to OrbitControls angle ranges
+    // Azimuthal: left to right (minAzimuthAngle to maxAzimuthAngle)
+    const minAzimuthalAngle = Math.PI / -2.2;
+    const maxAzimuthalAngle = Math.PI / 2.2;
+    const azimuthalAngle =
+      minAzimuthalAngle + normalizedX * (maxAzimuthalAngle - minAzimuthalAngle);
+
+    // Polar: top to bottom (minPolarAngle to maxPolarAngle)
+    const minPolarAngle = Math.PI / 10;
+    const maxPolarAngle = Math.PI / 1.1;
     const polarAngle =
-      ((rect.height - event.clientY) / rect.height) * (Math.PI * 1) +
-      Math.PI / 22;
+      minPolarAngle + normalizedY * (maxPolarAngle - minPolarAngle);
 
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(azimuthalAngle);
@@ -88,6 +98,8 @@ const DashboardPage: NextPage<{
       </Head>
       {/* Hero Section */}
       <Box
+        onMouseMove={handleMouseMove}
+        onMouseLeave={resetAngles}
         sx={{
           background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
           color: theme.palette.primary.contrastText,
@@ -182,8 +194,6 @@ const DashboardPage: NextPage<{
             {/* Right Column - 3D Model */}
             <Grid size={{ xs: 12, md: 6 }}>
               <Box
-                onMouseMove={handleMouseMove}
-                onMouseLeave={resetAngles}
                 sx={{
                   height: { xs: 400, md: isMediumScreen ? 500 : 600 },
                   position: "relative",
