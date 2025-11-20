@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 
+import styles from "./Ripple.module.scss";
+
 export const Ripple = () => {
   const rippleRef = useRef<HTMLSpanElement>(null);
 
@@ -26,14 +28,11 @@ export const Ripple = () => {
 
   return (
     <span
-      className="absolute inset-0 top-0 left-0 h-full w-full overflow-hidden"
+      className={styles.container}
       style={{ pointerEvents: "auto", cursor: "inherit" }}
       onClick={handleClick}
     >
-      <span
-        ref={rippleRef}
-        className="ripple pointer-events-none absolute rounded-full bg-white/30 opacity-0"
-      />
+      <span ref={rippleRef} className={styles.ripple} />
     </span>
   );
 };

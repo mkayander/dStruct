@@ -1,3 +1,4 @@
+import { Stack, Typography } from "@mui/material";
 import React from "react";
 
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
@@ -13,29 +14,29 @@ export const SolutionComplexityLabel: React.FC<
   if (!solution.data) return null;
 
   return (
-    <div className="flex flex-row items-center gap-1">
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        i: {
+          whiteSpace: "nowrap",
+          color: "text.secondary",
+          fontSize: 11,
+          fontWeight: "normal",
+        },
+      }}
+    >
       {solution.data.timeComplexity && (
-        <span className="text-sm font-bold">
-          <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
-            TC:
-          </i>{" "}
-          {solution.data.timeComplexity}
-          {solution.data.spaceComplexity && (
-            <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
-              {" "}
-              |{" "}
-            </i>
-          )}
-        </span>
+        <Typography variant="body2" fontWeight="bold">
+          <i>TC:</i> {solution.data.timeComplexity}
+          {solution.data.spaceComplexity && <i>&nbsp; | </i>}
+        </Typography>
       )}
       {solution.data.spaceComplexity && (
-        <span className="text-sm font-bold">
-          <i className="text-muted-foreground text-xs font-normal whitespace-nowrap">
-            SC:
-          </i>{" "}
-          {solution.data.spaceComplexity}
-        </span>
+        <Typography variant="body2" fontWeight="bold">
+          <i>SC:</i> {solution.data.spaceComplexity}
+        </Typography>
       )}
-    </div>
+    </Stack>
   );
 };

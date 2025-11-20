@@ -1,8 +1,7 @@
+import { Skeleton } from "@mui/material";
 import React from "react";
 
 import { selectIsInitialized } from "#/features/project/model/projectSlice";
-import { Skeleton } from "#/shadcn/ui/skeleton";
-import { cn } from "#/shared/lib/utils";
 import { useAppSelector } from "#/store/hooks";
 
 export const LoadingSkeletonOverlay: React.FC = () => {
@@ -11,7 +10,32 @@ export const LoadingSkeletonOverlay: React.FC = () => {
 
   return (
     <Skeleton
-      className={cn("absolute inset-0 z-10 cursor-wait rounded-md bg-white/5")}
+      animation="wave"
+      variant="rectangular"
+      sx={{
+        position: "absolute",
+        background: "#0000",
+        animation: "pulse 2s infinite ease-in-out",
+        height: "100%",
+        width: "100%",
+        borderRadius: 2,
+        top: 0,
+        left: 0,
+        zIndex: 10,
+        cursor: "wait",
+
+        "@keyframes pulse": {
+          "0%": {
+            background: "#fff0",
+          },
+          "50%": {
+            background: "#fff1",
+          },
+          "100%": {
+            background: "#fff0",
+          },
+        },
+      }}
     />
   );
 };

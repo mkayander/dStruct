@@ -1,6 +1,6 @@
+import { Tooltip, Typography } from "@mui/material";
 import React from "react";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "#/shadcn/ui/tooltip";
 import { useI18nContext } from "#/shared/hooks";
 
 type NewLabelProps = {
@@ -11,15 +11,24 @@ export const NewLabel: React.FC<NewLabelProps> = ({ createdAt }) => {
   const { LL } = useI18nContext();
 
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <span className="inline-block h-5 rounded-lg bg-green-700 px-1.5 pt-1 text-xs text-white opacity-90 shadow-md">
-          {LL.NEW()}
-        </span>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>Created at {createdAt.toLocaleString()}</p>
-      </TooltipContent>
+    <Tooltip title={`Created at ${createdAt.toLocaleString()}`} arrow>
+      <Typography
+        display="inline-block"
+        fontSize={12}
+        px={0.5}
+        pt={0.1}
+        variant="caption"
+        height="1.2rem"
+        sx={{
+          opacity: 0.9,
+          color: "white",
+          backgroundColor: "success.main",
+          borderRadius: 2,
+          boxShadow: 4,
+        }}
+      >
+        {LL.NEW()}
+      </Typography>
     </Tooltip>
   );
 };

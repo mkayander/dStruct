@@ -13,8 +13,6 @@ const eslintConfig = [
       "**/*.worker.js",
       "**/dist/**",
       "**/coverage/**",
-      "postcss.config.js",
-      "tailwind.config.js",
       "src/graphql/generated/**",
       ".next/**",
       "node_modules/**",

@@ -1,8 +1,9 @@
 "use client";
 
+import { useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { colors } from "#/shared/lib/colors";
+import styles from "./CircularPercentage.module.scss";
 
 const SIZE = 44;
 const VIEW_BOX = `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`;
@@ -12,6 +13,7 @@ interface CircularPercentageProps extends React.PropsWithChildren {
   size?: number;
   radius?: number;
   thickness?: number;
+
   bgColor?: string;
 }
 
@@ -22,6 +24,8 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
   bgColor,
   children,
 }) => {
+  const theme = useTheme();
+
   const [displayedLevel, setDisplayedLevel] = useState(0);
   useEffect(() => {
     setDisplayedLevel(value);
@@ -40,17 +44,14 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
 
   return (
     <div
-      className="relative"
+      className={styles.root}
       aria-valuenow={Math.round(value)}
       style={{
         height: sizePx,
         width: sizePx,
       }}
     >
-      <svg
-        viewBox={VIEW_BOX}
-        className="h-full w-full pointer-events-none -rotate-90 absolute overflow-visible"
-      >
+      <svg viewBox={VIEW_BOX}>
         <defs>
           <linearGradient
             id="circle-gradient"
@@ -59,36 +60,39 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
             x2="0%"
             y2="0%"
           >
-            <stop offset="0%" stopColor={colors.error.main} />
-            <stop offset="20%" stopColor={colors.info.main} />
-            <stop offset="50%" stopColor={colors.secondary.light} />
-            <stop offset="100%" stopColor={colors.success.main} />
+            <stop offset="0%" stopColor={theme.palette.error.light} />
+            <stop offset="20%" stopColor={theme.palette.info.dark} />
+            <stop offset="50%" stopColor={theme.palette.info.light} />
+            <stop offset="100%" stopColor={theme.palette.success.main} />
           </linearGradient>
         </defs>
         <circle
+          className={styles.bgCircle}
           cx={SIZE}
           cy={SIZE}
           r={radius}
-          stroke={bgColor || colors.primary.main}
+          stroke={bgColor || theme.palette.primary.dark}
           strokeWidth={thickness}
           fill="none"
-          className="opacity-40"
+          style={{
+            opacity: 0.4,
+          }}
         />
         <circle
+          className={styles.mainCircle}
           cx={SIZE}
           cy={SIZE}
           r={radius}
           stroke="url(#circle-gradient)"
           strokeWidth={thickness}
           fill="none"
-          className="transition-[stroke-dashoffset] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
             strokeDasharray,
             strokeDashoffset,
           }}
         />
       </svg>
-      <div className="z-20 w-full h-full flex flex-col justify-center items-center">
+      <div className={styles.content}>
         {children ? children : `${value?.toFixed(2)}%`}
       </div>
     </div>

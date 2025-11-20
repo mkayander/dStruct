@@ -11,12 +11,10 @@ import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrow
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
-import { TooltipProvider } from "#/shadcn/ui/tooltip";
 import { api } from "#/shared/api";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
-import { ThemeProvider } from "#/shared/ui/providers/theme";
 import { ReduxProvider } from "#/store/provider";
 
 import "#/styles/globals.css";
@@ -33,32 +31,23 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
     <ReduxProvider>
       <SessionProvider session={pageProps.session}>
         <ApolloProvider client={apolloClient}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <StateThemeProvider>
-              <SnackbarProvider
-                maxSnack={4}
-                action={(snackbarKey) => (
-                  <SnackbarCloseButton snackbarKey={snackbarKey} />
-                )}
-              >
-                <I18nProvider i18n={pageProps.i18n}>
-                  <ProjectBrowserProvider>
-                    <TooltipProvider delayDuration={200}>
-                      <Component {...pageProps} />
-                      <ProjectBrowser />
-                      <Analytics />
-                      <SpeedInsights />
-                    </TooltipProvider>
-                  </ProjectBrowserProvider>
-                </I18nProvider>
-              </SnackbarProvider>
-            </StateThemeProvider>
-          </ThemeProvider>
+          <StateThemeProvider>
+            <SnackbarProvider
+              maxSnack={4}
+              action={(snackbarKey) => (
+                <SnackbarCloseButton snackbarKey={snackbarKey} />
+              )}
+            >
+              <I18nProvider i18n={pageProps.i18n}>
+                <ProjectBrowserProvider>
+                  <Component {...pageProps} />
+                  <ProjectBrowser />
+                  <Analytics />
+                  <SpeedInsights />
+                </ProjectBrowserProvider>
+              </I18nProvider>
+            </SnackbarProvider>
+          </StateThemeProvider>
         </ApolloProvider>
       </SessionProvider>
     </ReduxProvider>
