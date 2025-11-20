@@ -1,11 +1,7 @@
 {
   "semi": true,
   "singleQuote": false,
-
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss"
-  ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
     "^#/(api|components|entities|features|shared|shadcn|context|env|graphql|hooks|layouts|pages|server|types|utils|theme|store|i18n)/?(.*)$",
     "^#/theme/?(.*)$",

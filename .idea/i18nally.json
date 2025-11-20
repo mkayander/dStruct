@@ -1,41 +1,108 @@
 {
-  "version" : "1.2",
-  "profiles" : [ {
-    "id" : "dcbd1a6e-5d91-44ab-a7b1-4070ef154bd4",
-    "name" : "Default",
-    "keyNamingPattern" : "SNAKE_CASE_PATTERN",
-    "sink" : {
-      "id" : "04760351-3c1c-48c0-94e0-97dc5ed588c9",
-      "type" : "namespaced",
-      "translationsDirectory" : "$PROJECT_DIR$/src/i18n",
-      "fileType" : "javascript",
-      "defaultLocale" : "en",
-      "namespaces" : [ "index" ],
-      "outputFilenameTemplate" : "%locale%/%namespace%.ts",
-      "nestingType" : "DISABLED",
-      "placeholderFormatterName" : "SYMFONY_REPLACEMENT"
-    },
-    "sources" : [ {
-      "id" : "46894a53-ed59-4a37-a52e-9f8a72433a78",
-      "type" : "jsx",
-      "scopeName" : "Project Files",
-      "scopePattern" : "",
-      "defaultReplacementTemplate" : "LL('%key%', %map%, '%namespace%')",
-      "attributeReplacementTemplate" : "",
-      "inlineTagsReplacementTemplate" : "",
-      "recognizedReplacementTemplates" : [ ],
-      "inlineTagNames" : [ "small", "tt", "big", "sub", "img", "strong", "code", "data", "samp", "wbr", "del", "slot", "sup", "br", "output", "abbr", "a", "b", "acronym", "bdi", "meter", "var", "em", "i", "label", "bdo", "kbd", "dfn", "ins", "ruby", "input", "q", "s", "u", "cite", "progress", "time", "mark", "span" ],
-      "translatableAttributeNames" : [ "alt", "placeholder", "label", "title", "aria-label" ],
-      "skipDefaultNamespace" : false,
-      "inlineTagHandler" : "NONE"
-    } ]
-  } ],
-  "ignores" : {
-    "valuesInProject" : [ "use strict", "Prettier" ],
-    "valuesInFile" : { },
-    "filesInProject" : [ ],
-    "unignoredFunctionNames" : [ ],
-    "unignoredFunctionArguments" : { },
-    "ignoredArrayKeys" : [ "template", "date", "dateFormat", "el", "query", "type", "sql", "layout", "component", "condition", "name", "selector", "id", "class", "key", "middleware" ]
+  "version": "1.2",
+  "profiles": [
+    {
+      "id": "dcbd1a6e-5d91-44ab-a7b1-4070ef154bd4",
+      "name": "Default",
+      "keyNamingPattern": "SNAKE_CASE_PATTERN",
+      "sink": {
+        "id": "04760351-3c1c-48c0-94e0-97dc5ed588c9",
+        "type": "namespaced",
+        "translationsDirectory": "$PROJECT_DIR$/src/i18n",
+        "fileType": "javascript",
+        "defaultLocale": "en",
+        "namespaces": ["index"],
+        "outputFilenameTemplate": "%locale%/%namespace%.ts",
+        "nestingType": "DISABLED",
+        "placeholderFormatterName": "SYMFONY_REPLACEMENT"
+      },
+      "sources": [
+        {
+          "id": "46894a53-ed59-4a37-a52e-9f8a72433a78",
+          "type": "jsx",
+          "scopeName": "Project Files",
+          "scopePattern": "",
+          "defaultReplacementTemplate": "LL('%key%', %map%, '%namespace%')",
+          "attributeReplacementTemplate": "",
+          "inlineTagsReplacementTemplate": "",
+          "recognizedReplacementTemplates": [],
+          "inlineTagNames": [
+            "small",
+            "tt",
+            "big",
+            "sub",
+            "img",
+            "strong",
+            "code",
+            "data",
+            "samp",
+            "wbr",
+            "del",
+            "slot",
+            "sup",
+            "br",
+            "output",
+            "abbr",
+            "a",
+            "b",
+            "acronym",
+            "bdi",
+            "meter",
+            "var",
+            "em",
+            "i",
+            "label",
+            "bdo",
+            "kbd",
+            "dfn",
+            "ins",
+            "ruby",
+            "input",
+            "q",
+            "s",
+            "u",
+            "cite",
+            "progress",
+            "time",
+            "mark",
+            "span"
+          ],
+          "translatableAttributeNames": [
+            "alt",
+            "placeholder",
+            "label",
+            "title",
+            "aria-label"
+          ],
+          "skipDefaultNamespace": false,
+          "inlineTagHandler": "NONE"
+        }
+      ]
+    }
+  ],
+  "ignores": {
+    "valuesInProject": ["use strict", "Prettier"],
+    "valuesInFile": {},
+    "filesInProject": [],
+    "unignoredFunctionNames": [],
+    "unignoredFunctionArguments": {},
+    "ignoredArrayKeys": [
+      "template",
+      "date",
+      "dateFormat",
+      "el",
+      "query",
+      "type",
+      "sql",
+      "layout",
+      "component",
+      "condition",
+      "name",
+      "selector",
+      "id",
+      "class",
+      "key",
+      "middleware"
+    ]
   }
 }

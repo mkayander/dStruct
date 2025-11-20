@@ -8,9 +8,11 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-  },
-  "keywords": ["dstruct", "runner"],
+  "scripts": {},
+  "keywords": [
+    "dstruct",
+    "runner"
+  ],
   "author": "Maksim Kaiander",
   "license": "GNU",
   "publishConfig": {

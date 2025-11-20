@@ -42,7 +42,6 @@ code editor where users can write and visualize their solutions.
 ## Tech Stack
 
 - **Frontend**:
-
   - React
   - Next.js
   - Redux Toolkit
@@ -52,7 +51,6 @@ code editor where users can write and visualize their solutions.
   - Apollo Client
 
 - **Backend**:
-
   - Node.js
   - Express
   - Prisma
@@ -60,7 +58,6 @@ code editor where users can write and visualize their solutions.
   - NextAuth
 
 - **Database**:
-
   - Prisma ORM
   - SQLite (or your preferred database)
 

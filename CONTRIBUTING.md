@@ -24,6 +24,7 @@ This project and everyone participating in it are governed by the [Code of Condu
 Before submitting a bug report, ensure you've checked the [existing issues](https://github.com/mkayander/dStruct/issues) to avoid duplicates. If your issue seems to be a new bug, go ahead and [open a new issue](https://github.com/mkayander/dStruct/issues/new).
 
 When creating a bug report, please provide the following information:
+
 - A clear and descriptive title.
 - A detailed description of the issue, including steps to reproduce.
 - Your operating system and browser details.
