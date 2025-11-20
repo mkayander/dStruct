@@ -362,12 +362,6 @@
 - [ ] Remove console.logs
 - [ ] Optimize imports
 
-### 6.3 Migration & Deprecation ⏳
-
-- [ ] Keep `ProjectSelect` for backward compatibility
-- [ ] Document migration path
-- [ ] Plan deprecation timeline (if applicable)
-
 ---
 
 ## Future Enhancements (Post-MVP)
