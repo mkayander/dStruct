@@ -1,3 +1,36 @@
+# [1.344.0](https://github.com/mkayander/dStruct/compare/v1.343.0...v1.344.0) (2025-11-20)
+
+
+### Bug Fixes
+
+* change AppBar position to sticky for improved layout ([7c0debf](https://github.com/mkayander/dStruct/commit/7c0debf96ae9099954985e3d382c0e4f76950c26))
+* enhance CodePanel functionality and update projectOwnerProcedure ([14dafa7](https://github.com/mkayander/dStruct/commit/14dafa7fe5821919d69fdf8f2487a63df7bb9d03))
+* enhance ESLint configuration for MUI import restrictions ([3d1962f](https://github.com/mkayander/dStruct/commit/3d1962f2f439ef230ea891c6d040fd0caebdbd15))
+* expand transpilePackages in Next.js configuration ([e98003c](https://github.com/mkayander/dStruct/commit/e98003cfb6a992d56224ef6bbff3abb1c1d68395))
+* simplify MainAppBar links and integrate code formatting API ([8215a89](https://github.com/mkayander/dStruct/commit/8215a8999bde49c4c40541375a5e6e07db45b790))
+* SKIP_ENV_VALIDATION on CI ([f719c3a](https://github.com/mkayander/dStruct/commit/f719c3a24944ab56325d87a53cae5c0c9602136e))
+* update ES Guard command in CI workflow ([136a0cf](https://github.com/mkayander/dStruct/commit/136a0cf3fc02c0e0da85dbd4eb83c1e5e68e236a))
+
+
+### Features
+
+* add new project margin calculation and isNew flag for projects ([7f19d55](https://github.com/mkayander/dStruct/commit/7f19d5591a260960cd8f0f6dda3598db7032d181))
+* add ProjectBrowser design document and TODO list ([7491678](https://github.com/mkayander/dStruct/commit/7491678b079b05721214d2153b73ee71e1959b62))
+* enhance MainAppBar and MainLayout for improved layout flexibility ([5fe2971](https://github.com/mkayander/dStruct/commit/5fe2971931c21987c10e166002afbaff08e39f09))
+* enhance mouse interaction for 3D model controls ([a0d6633](https://github.com/mkayander/dStruct/commit/a0d6633d205e181852a0062be2944afb5fa6404b))
+* enhance ProjectBrowser layout for mobile responsiveness ([f8adf58](https://github.com/mkayander/dStruct/commit/f8adf58e0964caaf879f843d15706a04816053e7))
+* enhance ProjectBrowser with accumulated projects and improved filtering ([e20d1cd](https://github.com/mkayander/dStruct/commit/e20d1cd7ce23ea71dc16a9cb5df12024d6ea248c))
+* enhance ProjectBrowser with loading skeletons and UI adjustments ([2a2c1ea](https://github.com/mkayander/dStruct/commit/2a2c1ea04350dc38cc0ce923a8faded97db50095))
+* implement ProjectBrowser component with advanced filtering and pagination ([cae6e68](https://github.com/mkayander/dStruct/commit/cae6e68b0687e860d6b0089933322cbb4fd569f3))
+* implement ProjectBrowser context for global URL state management ([3855159](https://github.com/mkayander/dStruct/commit/38551595f205e1a447d8880836f10d8691143a07))
+* implement ProjectInfo component for project details display ([29eb2af](https://github.com/mkayander/dStruct/commit/29eb2af7a2ed118c45cfd1a8c372721ca05cd63d))
+* remove unused files and dependencies for cleaner codebase ([f53a2b1](https://github.com/mkayander/dStruct/commit/f53a2b16fad3a3efb2e7a32246b90d6423e7927d))
+* update dependencies and ESLint configuration ([335c1dd](https://github.com/mkayander/dStruct/commit/335c1dd85be0ab3e4b97ff04d6d31be7b014981e))
+* update dependencies and refactor project structure ([f7c7341](https://github.com/mkayander/dStruct/commit/f7c73419ee3d8eed3c362b20636f8bfb9662507f))
+* update GitHub Actions workflow to include build and ES Guard steps ([36a9dde](https://github.com/mkayander/dStruct/commit/36a9ddec29c8a4f32065bca055288911f39c3d43))
+* update MainAppBar position and enhance Dashboard layout ([4b59970](https://github.com/mkayander/dStruct/commit/4b59970824755e78edf005607f3867486c6edb5f))
+* update package dependencies for improved stability and performance ([5e800e1](https://github.com/mkayander/dStruct/commit/5e800e19ac3854fc6c7a08c8d3227f6bebbaf372))
+
 # [1.343.0](https://github.com/mkayander/dStruct/compare/v1.342.0...v1.343.0) (2025-07-08)
 
 ### Features
