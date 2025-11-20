@@ -1,9 +1,7 @@
-import {
-  CloudDone,
-  CloudQueue,
-  CloudSync,
-  SdCardAlert,
-} from "@mui/icons-material";
+import CloudDone from "@mui/icons-material/CloudDone";
+import CloudQueue from "@mui/icons-material/CloudQueue";
+import CloudSync from "@mui/icons-material/CloudSync";
+import SdCardAlert from "@mui/icons-material/SdCardAlert";
 import { Tooltip } from "@mui/material";
 import React from "react";
 

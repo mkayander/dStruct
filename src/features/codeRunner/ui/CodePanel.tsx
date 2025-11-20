@@ -1,4 +1,6 @@
-import { AutoFixHigh, ContentCopy, PlayArrow } from "@mui/icons-material";
+import AutoFixHigh from "@mui/icons-material/AutoFixHigh";
+import ContentCopy from "@mui/icons-material/ContentCopy";
+import PlayArrow from "@mui/icons-material/PlayArrow";
 import { TabContext, TabList } from "@mui/lab";
 import {
   Box,

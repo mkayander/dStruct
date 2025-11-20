@@ -1,4 +1,4 @@
-import { ManageAccounts } from "@mui/icons-material";
+import ManageAccounts from "@mui/icons-material/ManageAccounts";
 import {
   Button,
   CircularProgress,

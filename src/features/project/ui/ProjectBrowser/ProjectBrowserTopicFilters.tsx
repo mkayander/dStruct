@@ -1,4 +1,5 @@
-import { AllInclusive, Psychology } from "@mui/icons-material";
+import AllInclusive from "@mui/icons-material/AllInclusive";
+import Psychology from "@mui/icons-material/Psychology";
 import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React from "react";
 

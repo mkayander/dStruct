@@ -1,9 +1,7 @@
-import {
-  ThumbDown,
-  ThumbDownOutlined,
-  ThumbUp,
-  ThumbUpOutlined,
-} from "@mui/icons-material";
+import ThumbDown from "@mui/icons-material/ThumbDown";
+import ThumbDownOutlined from "@mui/icons-material/ThumbDownOutlined";
+import ThumbUp from "@mui/icons-material/ThumbUp";
+import ThumbUpOutlined from "@mui/icons-material/ThumbUpOutlined";
 import { Box, Button, ButtonGroup, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
 

@@ -1,4 +1,7 @@
-import { Backspace, FilterList, Search, SwapVert } from "@mui/icons-material";
+import Backspace from "@mui/icons-material/Backspace";
+import FilterList from "@mui/icons-material/FilterList";
+import Search from "@mui/icons-material/Search";
+import SwapVert from "@mui/icons-material/SwapVert";
 import {
   Box,
   IconButton,

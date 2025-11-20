@@ -1,4 +1,6 @@
-import { Add, Edit, FolderOpen } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import Edit from "@mui/icons-material/Edit";
+import FolderOpen from "@mui/icons-material/FolderOpen";
 import { TabContext, TabList } from "@mui/lab";
 import { IconButton, Stack, Tab, Tooltip } from "@mui/material";
 import { TRPCClientError } from "@trpc/client";

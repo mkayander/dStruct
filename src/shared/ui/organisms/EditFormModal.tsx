@@ -1,4 +1,4 @@
-import { DeleteForever } from "@mui/icons-material";
+import DeleteForever from "@mui/icons-material/DeleteForever";
 import { Button, Dialog, Stack } from "@mui/material";
 import type { DialogProps } from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";

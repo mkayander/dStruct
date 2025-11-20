@@ -1,5 +1,5 @@
 import { Draggable, type DroppableStateSnapshot } from "@hello-pangea/dnd";
-import { Edit } from "@mui/icons-material";
+import Edit from "@mui/icons-material/Edit";
 import {
   Box,
   Chip,

@@ -1,7 +1,8 @@
 "use client";
 
-import { FolderOpen, Settings } from "@mui/icons-material";
+import FolderOpen from "@mui/icons-material/FolderOpen";
 import MenuIcon from "@mui/icons-material/Menu";
+import Settings from "@mui/icons-material/Settings";
 import {
   alpha,
   AppBar,

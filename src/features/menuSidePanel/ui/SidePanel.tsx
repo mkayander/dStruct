@@ -1,4 +1,4 @@
-import { Translate } from "@mui/icons-material";
+import Translate from "@mui/icons-material/Translate";
 import {
   alpha,
   Box,

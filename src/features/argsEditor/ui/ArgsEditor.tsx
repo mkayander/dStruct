@@ -1,7 +1,8 @@
 "use client";
 
 import type { OnDragEndResponder } from "@hello-pangea/dnd";
-import { DeleteForever, DragIndicator } from "@mui/icons-material";
+import DeleteForever from "@mui/icons-material/DeleteForever";
+import DragIndicator from "@mui/icons-material/DragIndicator";
 import {
   Box,
   CircularProgress,

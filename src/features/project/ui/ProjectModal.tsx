@@ -1,4 +1,4 @@
-import { DeleteForever } from "@mui/icons-material";
+import DeleteForever from "@mui/icons-material/DeleteForever";
 import {
   Alert,
   Button,

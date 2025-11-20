@@ -1,4 +1,4 @@
-import { Source } from "@mui/icons-material";
+import Source from "@mui/icons-material/Source";
 import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import React from "react";

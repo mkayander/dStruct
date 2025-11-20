@@ -5,7 +5,7 @@ import {
   type DroppableStateSnapshot,
   type OnDragEndResponder,
 } from "@hello-pangea/dnd";
-import { Add } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
 import {
   CircularProgress,
   IconButton,

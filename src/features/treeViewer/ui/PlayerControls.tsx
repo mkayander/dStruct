@@ -1,11 +1,9 @@
-import {
-  FirstPage,
-  LastPage,
-  Pause,
-  PlayArrow,
-  Replay,
-  Speed,
-} from "@mui/icons-material";
+import FirstPage from "@mui/icons-material/FirstPage";
+import LastPage from "@mui/icons-material/LastPage";
+import Pause from "@mui/icons-material/Pause";
+import PlayArrow from "@mui/icons-material/PlayArrow";
+import Replay from "@mui/icons-material/Replay";
+import Speed from "@mui/icons-material/Speed";
 import {
   Box,
   Grid,

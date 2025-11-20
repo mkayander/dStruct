@@ -1,12 +1,10 @@
-import {
-  EventRepeatTwoTone,
-  FavoriteBorder,
-  HistoryToggleOff,
-  SignalCellular0Bar,
-  SignalCellular2Bar,
-  SignalCellular4Bar,
-} from "@mui/icons-material";
 import EventIcon from "@mui/icons-material/Event";
+import EventRepeatTwoTone from "@mui/icons-material/EventRepeatTwoTone";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import HistoryToggleOff from "@mui/icons-material/HistoryToggleOff";
+import SignalCellular0Bar from "@mui/icons-material/SignalCellular0Bar";
+import SignalCellular2Bar from "@mui/icons-material/SignalCellular2Bar";
+import SignalCellular4Bar from "@mui/icons-material/SignalCellular4Bar";
 import {
   alpha,
   Box,

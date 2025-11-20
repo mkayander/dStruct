@@ -1,4 +1,4 @@
-import { FilterCenterFocus } from "@mui/icons-material";
+import FilterCenterFocus from "@mui/icons-material/FilterCenterFocus";
 import { TabContext, TabList } from "@mui/lab";
 import {
   alpha,

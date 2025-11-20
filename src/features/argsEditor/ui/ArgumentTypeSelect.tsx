@@ -1,16 +1,14 @@
-import {
-  AccountTree,
-  DataArray,
-  DataObject,
-  GridOn,
-  Link,
-  ListAlt,
-  LooksOne,
-  RadioButtonChecked,
-  SettingsEthernet,
-  TextFields,
-  Timeline,
-} from "@mui/icons-material";
+import AccountTree from "@mui/icons-material/AccountTree";
+import DataArray from "@mui/icons-material/DataArray";
+import DataObject from "@mui/icons-material/DataObject";
+import GridOn from "@mui/icons-material/GridOn";
+import Link from "@mui/icons-material/Link";
+import ListAlt from "@mui/icons-material/ListAlt";
+import LooksOne from "@mui/icons-material/LooksOne";
+import RadioButtonChecked from "@mui/icons-material/RadioButtonChecked";
+import SettingsEthernet from "@mui/icons-material/SettingsEthernet";
+import TextFields from "@mui/icons-material/TextFields";
+import Timeline from "@mui/icons-material/Timeline";
 import {
   FormControl,
   FormHelperText,

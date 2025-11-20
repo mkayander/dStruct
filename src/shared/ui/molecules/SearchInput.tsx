@@ -1,4 +1,4 @@
-import { Backspace } from "@mui/icons-material";
+import Backspace from "@mui/icons-material/Backspace";
 import { IconButton, Stack, type SxProps } from "@mui/material";
 import React from "react";
 

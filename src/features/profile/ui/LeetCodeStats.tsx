@@ -1,4 +1,4 @@
-import { Code } from "@mui/icons-material";
+import Code from "@mui/icons-material/Code";
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useMemo } from "react";
 

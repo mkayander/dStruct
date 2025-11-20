@@ -1,4 +1,4 @@
-import { Close } from "@mui/icons-material";
+import Close from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import { type SnackbarKey, useSnackbar } from "notistack";
 import React from "react";

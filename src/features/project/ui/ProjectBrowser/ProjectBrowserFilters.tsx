@@ -1,9 +1,7 @@
-import {
-  CheckBox,
-  CheckBoxOutlineBlank,
-  Clear,
-  Close,
-} from "@mui/icons-material";
+import CheckBox from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlank from "@mui/icons-material/CheckBoxOutlineBlank";
+import Clear from "@mui/icons-material/Clear";
+import Close from "@mui/icons-material/Close";
 import {
   Box,
   Button,
