@@ -50,6 +50,18 @@ const eslintConfig = [
       ],
       "@typescript-eslint/no-empty-object-type": "off",
       "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["^@mui/material$", "^@mui/icons-material$"],
+              message:
+                "Import from specific files to avoid loading entire package. Use '@mui/material/Button' instead of '@mui/material' or '@mui/icons-material/Close' instead of '@mui/icons-material'.",
+            },
+          ],
+        },
+      ],
     },
   },
   // TypeScript-specific config with parser options

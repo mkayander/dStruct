@@ -14,5 +14,8 @@
     "tanstack",
     "trivago",
     "trpc"
+  ],
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": [
+    "^@mui/(material|icons-material)$"
   ]
 }
