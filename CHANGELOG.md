@@ -1,3 +1,10 @@
+# [1.345.0](https://github.com/mkayander/dStruct/compare/v1.344.0...v1.345.0) (2025-11-23)
+
+
+### Features
+
+* update dependencies and Next.js configuration ([8678f6f](https://github.com/mkayander/dStruct/commit/8678f6f0ae9b05dc68c1b81d9e112a269f9727ad))
+
 # [1.344.0](https://github.com/mkayander/dStruct/compare/v1.343.0...v1.344.0) (2025-11-20)
 
 
