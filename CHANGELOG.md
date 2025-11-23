@@ -1,3 +1,10 @@
+## [1.345.1](https://github.com/mkayander/dStruct/compare/v1.345.0...v1.345.1) (2025-11-23)
+
+
+### Bug Fixes
+
+* upgrade es-guard to version 1.18.1 ([e306d3a](https://github.com/mkayander/dStruct/commit/e306d3a9d79116d1972ae71aeff4c7f99d7d2eb9))
+
 # [1.345.0](https://github.com/mkayander/dStruct/compare/v1.344.0...v1.345.0) (2025-11-23)
 
 
