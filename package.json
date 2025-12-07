@@ -170,7 +170,7 @@
   },
   "packageManager": "pnpm@10.23.0",
   "engines": {
-    "node": "^v22.17.0"
+    "node": "^v24.11.1"
   },
   "browserslist": [
     "chrome 64",
