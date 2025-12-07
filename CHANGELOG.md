@@ -1,3 +1,11 @@
+# [1.346.0](https://github.com/mkayander/dStruct/compare/v1.345.1...v1.346.0) (2025-12-07)
+
+
+### Features
+
+* update node engine version to ^v24.11.1 in package.json ([f283950](https://github.com/mkayander/dStruct/commit/f283950c2eae2538da678515726c91349310d295))
+* update package manager version to pnpm@10.24.0 in package.json ([8d0d50f](https://github.com/mkayander/dStruct/commit/8d0d50fff02b46a3f65beff92e27868043996bd7))
+
 ## [1.345.1](https://github.com/mkayander/dStruct/compare/v1.345.0...v1.345.1) (2025-11-23)
 
 
