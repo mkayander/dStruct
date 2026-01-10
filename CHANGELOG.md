@@ -1,3 +1,10 @@
+# [1.349.0](https://github.com/mkayander/dStruct/compare/v1.348.0...v1.349.0) (2026-01-10)
+
+
+### Features
+
+* **deps:** update dependencies and improve component styling ([a326593](https://github.com/mkayander/dStruct/commit/a3265937f1c1715e35f13a21cf0814bc5a9741ed))
+
 # [1.348.0](https://github.com/mkayander/dStruct/compare/v1.347.0...v1.348.0) (2026-01-10)
 
 
