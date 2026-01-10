@@ -1,3 +1,10 @@
+# [1.347.0](https://github.com/mkayander/dStruct/compare/v1.346.0...v1.347.0) (2026-01-10)
+
+
+### Features
+
+* update footer copyright year to 2026 ([9a6d839](https://github.com/mkayander/dStruct/commit/9a6d8396949a084529544d87994a35dc2531aff0))
+
 # [1.346.0](https://github.com/mkayander/dStruct/compare/v1.345.1...v1.346.0) (2025-12-07)
 
 
