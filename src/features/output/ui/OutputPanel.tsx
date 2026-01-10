@@ -100,7 +100,7 @@ export const OutputPanel: React.FC = () => {
           </TabList>
         </TabListWrapper>
 
-        <StyledTabPanel value="1">
+        <StyledTabPanel value="1" style={{ height: "100%" }}>
           <Stack spacing={2}>
             {!isReady ? (
               <Box display="box">

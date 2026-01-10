@@ -1,25 +1,19 @@
 import { alpha, Box } from "@mui/material";
 import { styled } from "@mui/material";
 import React from "react";
-import { PanelResizeHandle } from "react-resizable-panels";
+import { Separator } from "react-resizable-panels";
 
 type ResizeHandleProps = {
   id?: string;
 };
 
-const StyledPanelResizeHandle = styled(PanelResizeHandle)(({ theme }) => ({
-  ".ResizeHandleOuter": {
-    background: "transparent",
-    flex: "0 0 12px",
-    position: "relative",
-    outline: "none",
-  },
-  "&": {
-    background: "transparent",
-    flex: "0 0 12px",
-    position: "relative",
-    outline: "none",
-  },
+const StyledPanelResizeHandle = styled(Separator)(({ theme }) => ({
+  background: "transparent",
+  flex: "0 0 12px",
+  position: "relative",
+  outline: "none",
+  minWidth: "12px",
+  minHeight: "12px",
   "&:hover": {
     ".ResizeHandleInner": {
       background: alpha(theme.palette.primary.light, 0.3),
@@ -44,7 +38,7 @@ const StyledPanelResizeHandle = styled(PanelResizeHandle)(({ theme }) => ({
 
 export const ResizeHandle: React.FC<ResizeHandleProps> = ({ id }) => {
   return (
-    <StyledPanelResizeHandle className="ResizeHandleOuter" id={id}>
+    <StyledPanelResizeHandle id={id}>
       <Box
         className="ResizeHandleInner"
         sx={{
