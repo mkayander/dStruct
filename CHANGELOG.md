@@ -1,3 +1,10 @@
+# [1.348.0](https://github.com/mkayander/dStruct/compare/v1.347.0...v1.348.0) (2026-01-10)
+
+
+### Features
+
+* **deps:** update [@trpc](https://github.com/trpc) packages to version 11.8.1 and bump pnpm to 10.28.0 ([fa436ba](https://github.com/mkayander/dStruct/commit/fa436bab247b1cdec97bd59695f138fe86ee0436))
+
 # [1.347.0](https://github.com/mkayander/dStruct/compare/v1.346.0...v1.347.0) (2026-01-10)
 
 
