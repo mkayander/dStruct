@@ -195,7 +195,7 @@ const DashboardPage: NextPage<{
             <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 sx={{
-                  height: { xs: 400, md: isMediumScreen ? 500 : 600 },
+                  height: { xs: 400, md: isMediumScreen ? 500 : 700 },
                   position: "relative",
                   display: "flex",
                   alignItems: "center",

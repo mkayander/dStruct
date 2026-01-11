@@ -4,8 +4,6 @@ import { Canvas } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
-
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 type LogoModelViewProps = {
@@ -16,7 +14,6 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
   controlsRef,
 }) => {
   const theme = useTheme();
-  const isMobile = useMobileLayout();
 
   return (
     <Canvas>
@@ -43,8 +40,8 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         maxAzimuthAngle={Math.PI / 2.2}
         minPolarAngle={Math.PI / 10}
         maxPolarAngle={Math.PI / 1.1}
-        minDistance={isMobile ? 12 : 10}
-        maxDistance={15}
+        minDistance={13}
+        maxDistance={20}
         enableRotate={true}
         enableZoom={false}
         enablePan={false}
