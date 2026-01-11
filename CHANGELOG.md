@@ -1,3 +1,15 @@
+# [1.350.0](https://github.com/mkayander/dStruct/compare/v1.349.0...v1.350.0) (2026-01-11)
+
+
+### Bug Fixes
+
+* adjust height and distance parameters in Dashboard and LogoModelView components ([b306932](https://github.com/mkayander/dStruct/commit/b306932d41bba296ca78768b399928a1b65ecce9))
+
+
+### Features
+
+* **treeViewer:** add ControlsOverlay component for enhanced user interaction ([97ddac5](https://github.com/mkayander/dStruct/commit/97ddac5a6245a711cbaa453fa28502eb9b89873a))
+
 # [1.349.0](https://github.com/mkayander/dStruct/compare/v1.348.0...v1.349.0) (2026-01-10)
 
 
