@@ -37,15 +37,105 @@ import {
 } from "../hooks";
 import { resetStructuresState } from "../lib";
 
+type ControlsOverlayProps = {
+  sliderValue: number;
+  setSliderValue: (value: number) => void;
+  handlePlay: () => void;
+  handleReplay: () => void;
+  handleStepBack: () => void;
+  handleStepForward: () => void;
+};
+
+const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
+  sliderValue,
+  setSliderValue,
+  handlePlay,
+  handleReplay,
+  handleStepBack,
+  handleStepForward,
+}) => {
+  const dispatch = useAppDispatch();
+  const isEditingNodes = useAppSelector(selectIsEditingNodes);
+  const theme = useTheme();
+  const { saveGraphNodePositions, clearGraphNodePositions } =
+    useArgumentsNodeData();
+
+  const handleEditButtonClick = () => {
+    if (!isEditingNodes) {
+      resetStructuresState(dispatch, false, true);
+    } else {
+      saveGraphNodePositions();
+    }
+    dispatch(editorSlice.actions.setIsEditing(!isEditingNodes));
+  };
+
+  return (
+    <>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 62,
+          right: 8,
+          zIndex: 50,
+        }}
+      >
+        <Stack gap={1}>
+          <Button
+            title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
+            color={isEditingNodes ? "success" : "info"}
+            onClick={handleEditButtonClick}
+          >
+            {isEditingNodes ? "Save" : "Edit"}
+          </Button>
+          {isEditingNodes && (
+            <Button
+              title="Your changes will be lost"
+              color="warning"
+              onClick={clearGraphNodePositions}
+            >
+              Recalculate
+            </Button>
+          )}
+        </Stack>
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          maxWidth: "94%",
+          width: "400px",
+          bottom: "0",
+          left: "50%",
+          transform: "translateX(-50%)",
+          border: `1px solid ${theme.palette.divider}`,
+          borderBottom: "none",
+          borderRadius: "8px 8px 0 0",
+          backgroundColor: alpha(theme.palette.secondary.main, 0.05),
+          boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
+          zIndex: 70,
+          backdropFilter: "blur(14px)",
+        }}
+      >
+        <PlayerControls
+          disabled={isEditingNodes}
+          sliderValue={sliderValue}
+          setSliderValue={setSliderValue}
+          handlePlay={handlePlay}
+          handleReplay={handleReplay}
+          handleStepBack={handleStepBack}
+          handleStepForward={handleStepForward}
+        />
+      </Box>
+    </>
+  );
+};
+
 type TabName = "structure" | "benchmark";
 const TabNames = new Set<TabName>(["structure", "benchmark"]);
 const isValidTabName = (name: unknown): name is TabName =>
   TabNames.has(name as TabName);
 
 export const TreeViewPanel: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { LL } = useI18nContext();
-  const theme = useTheme();
 
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
     defaultValue: "structure",
@@ -72,23 +162,22 @@ export const TreeViewPanel: React.FC = () => {
     handleStepForward,
   } = usePlayerControls();
 
-  const { saveGraphNodePositions, clearGraphNodePositions } =
-    useArgumentsNodeData();
-
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
-  const handleEditButtonClick = () => {
-    if (!isEditingNodes) {
-      resetStructuresState(dispatch, false, true);
-    } else {
-      saveGraphNodePositions();
-    }
-    dispatch(editorSlice.actions.setIsEditing(!isEditingNodes));
-  };
-
   const isReady = isCallstackReady && !isEditingNodes;
+
+  const overlay = (
+    <ControlsOverlay
+      sliderValue={sliderValue}
+      setSliderValue={setSliderValue}
+      handlePlay={handlePlay}
+      handleReplay={handleReplay}
+      handleStepBack={handleStepBack}
+      handleStepForward={handleStepForward}
+    />
+  );
 
   return (
     <PanelWrapper
@@ -133,6 +222,7 @@ export const TreeViewPanel: React.FC = () => {
             flexGrow: 1,
             cursor: isPanning ? "grabbing" : "grab",
           }}
+          overlay={overlay}
         >
           <div
             onMouseDown={(ev: React.MouseEvent) => {
@@ -145,60 +235,6 @@ export const TreeViewPanel: React.FC = () => {
             onMouseLeave={handlePanEnd}
             style={{ height: "100%", width: "100%" }}
           >
-            <Box
-              sx={{
-                position: "absolute",
-                top: 62,
-                right: 8,
-                zIndex: 50,
-              }}
-            >
-              <Stack gap={1}>
-                <Button
-                  title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
-                  color={isEditingNodes ? "success" : "info"}
-                  onClick={handleEditButtonClick}
-                >
-                  {isEditingNodes ? "Save" : "Edit"}
-                </Button>
-                {isEditingNodes && (
-                  <Button
-                    title="Your changes will be lost"
-                    color="warning"
-                    onClick={clearGraphNodePositions}
-                  >
-                    Recalculate
-                  </Button>
-                )}
-              </Stack>
-            </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                maxWidth: "94%",
-                width: "400px",
-                bottom: "0",
-                left: "50%",
-                transform: "translateX(-50%)",
-                border: `1px solid ${theme.palette.divider}`,
-                borderBottom: "none",
-                borderRadius: "8px 8px 0 0",
-                backgroundColor: alpha(theme.palette.secondary.main, 0.05),
-                boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
-                zIndex: 70,
-                backdropFilter: "blur(14px)",
-              }}
-            >
-              <PlayerControls
-                disabled={isEditingNodes}
-                sliderValue={sliderValue}
-                setSliderValue={setSliderValue}
-                handlePlay={handlePlay}
-                handleReplay={handleReplay}
-                handleStepBack={handleStepBack}
-                handleStepForward={handleStepForward}
-              />
-            </Box>
             <PannableViewer>
               <TreeViewer
                 replayCount={replayCount}
