@@ -12,6 +12,7 @@ import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/Pro
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { api } from "#/shared/api";
+import { EmotionCacheProvider } from "#/shared/emotion/EmotionCacheContext";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
@@ -28,29 +29,31 @@ type MyAppProps = {
 
 const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
   return (
-    <ReduxProvider>
-      <SessionProvider session={pageProps.session}>
-        <ApolloProvider client={apolloClient}>
-          <StateThemeProvider>
-            <SnackbarProvider
-              maxSnack={4}
-              action={(snackbarKey) => (
-                <SnackbarCloseButton snackbarKey={snackbarKey} />
-              )}
-            >
-              <I18nProvider i18n={pageProps.i18n}>
-                <ProjectBrowserProvider>
-                  <Component {...pageProps} />
-                  <ProjectBrowser />
-                  <Analytics />
-                  <SpeedInsights />
-                </ProjectBrowserProvider>
-              </I18nProvider>
-            </SnackbarProvider>
-          </StateThemeProvider>
-        </ApolloProvider>
-      </SessionProvider>
-    </ReduxProvider>
+    <EmotionCacheProvider>
+      <ReduxProvider>
+        <SessionProvider session={pageProps.session}>
+          <ApolloProvider client={apolloClient}>
+            <StateThemeProvider>
+              <SnackbarProvider
+                maxSnack={4}
+                action={(snackbarKey) => (
+                  <SnackbarCloseButton snackbarKey={snackbarKey} />
+                )}
+              >
+                <I18nProvider i18n={pageProps.i18n}>
+                  <ProjectBrowserProvider>
+                    <Component {...pageProps} />
+                    <ProjectBrowser />
+                    <Analytics />
+                    <SpeedInsights />
+                  </ProjectBrowserProvider>
+                </I18nProvider>
+              </SnackbarProvider>
+            </StateThemeProvider>
+          </ApolloProvider>
+        </SessionProvider>
+      </ReduxProvider>
+    </EmotionCacheProvider>
   );
 };
 

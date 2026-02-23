@@ -1,10 +1,21 @@
-import { Head, Html, Main, NextScript } from "next/document";
+import createEmotionServer from "@emotion/server/create-instance";
+import NextDocument, { Head, Html, Main, NextScript } from "next/document";
+import type { DocumentContext, DocumentProps } from "next/document";
+import React from "react";
 
-export default function Document() {
+import { createEmotionCache } from "#/shared/emotion/createEmotionCache";
+import { EmotionCacheContext } from "#/shared/emotion/EmotionCacheContext";
+
+type MyDocumentProps = DocumentProps & {
+  emotionStyleTags?: React.ReactElement;
+};
+
+function Document({ emotionStyleTags }: MyDocumentProps) {
   // noinspection HtmlRequiredTitleElement
   return (
     <Html lang="en">
       <Head>
+        {emotionStyleTags}
         <meta
           name="description"
           content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
@@ -79,3 +90,37 @@ export default function Document() {
     </Html>
   );
 }
+
+Document.getInitialProps = async (ctx: DocumentContext) => {
+  const originalRenderPage = ctx.renderPage;
+  const cache = createEmotionCache();
+  const { extractCritical } = createEmotionServer(cache);
+
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) =>
+        function EnhancedApp(props) {
+          return (
+            <EmotionCacheContext.Provider value={cache}>
+              <App {...props} />
+            </EmotionCacheContext.Provider>
+          );
+        },
+    });
+
+  const initialProps = await NextDocument.getInitialProps(ctx);
+  const { css, ids } = extractCritical(initialProps.html);
+  const emotionStyleTags = (
+    <style
+      data-emotion={`${cache.key} ${ids.join(" ")}`}
+      dangerouslySetInnerHTML={{ __html: css }}
+    />
+  );
+
+  return {
+    ...initialProps,
+    emotionStyleTags,
+  };
+};
+
+export default Document;

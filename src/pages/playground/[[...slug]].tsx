@@ -8,11 +8,12 @@ import { CodePanel } from "#/features/codeRunner/ui/CodePanel";
 import { OutputPanel } from "#/features/output/ui/OutputPanel";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
-import { useAppConfig } from "#/shared/hooks";
+import { useAppConfig, useHasMounted } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
 import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 
 type WrapperProps = SplitPanelsLayoutProps;
 
@@ -23,6 +24,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   BottomRight,
 }) => {
   const isMobile = useMobileLayout();
+  const hasMounted = useHasMounted();
 
   if (isMobile)
     return (
@@ -35,6 +37,10 @@ const Wrapper: React.FC<WrapperProps> = ({
         </Stack>
       </Container>
     );
+
+  // Defer split layout until after mount to avoid Emotion hydration mismatch
+  // (server and client can render the four panels in different order).
+  if (!hasMounted) return <SplitPanelsLayoutSkeleton />;
 
   return (
     <SplitPanelsLayout
