@@ -1,4 +1,4 @@
-import { ProjectCategory } from "@prisma/client";
+import { ProjectCategory } from "#/server/db/generated/client";
 
 export const categoryLabels: Record<ProjectCategory, string> = {
   [ProjectCategory.BINARY_TREE]: "Binary Tree",

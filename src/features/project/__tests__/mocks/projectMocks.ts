@@ -1,5 +1,7 @@
-import type { ProjectCategory, ProjectDifficulty } from "@prisma/client";
-
+import type {
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 import type { RouterOutputs } from "#/shared/api";
 
 type ProjectBrief =

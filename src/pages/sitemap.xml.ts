@@ -1,7 +1,7 @@
-import type { PlaygroundProject } from "@prisma/client";
 import type { GetServerSideProps } from "next";
 
 import { db } from "#/server/db/client";
+import type { PlaygroundProject } from "#/server/db/generated/client";
 
 function generateSiteMap(projects: Partial<PlaygroundProject>[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>

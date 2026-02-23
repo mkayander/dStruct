@@ -1,7 +1,11 @@
-import { ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { renderHook } from "@testing-library/react";
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import {
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 
 import {
   parseBoolean,

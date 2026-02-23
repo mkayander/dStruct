@@ -18,6 +18,8 @@
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 
+generated/
+
 # next.js
 /.next/
 /out/

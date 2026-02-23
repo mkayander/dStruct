@@ -1,5 +1,4 @@
-import { ProjectDifficulty } from "@prisma/client";
-
+import { ProjectDifficulty } from "#/server/db/generated/client";
 import type { theme as muiTheme } from "#/themes";
 
 export const getDifficultyColor = (

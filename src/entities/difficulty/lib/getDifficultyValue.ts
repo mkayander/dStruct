@@ -1,6 +1,5 @@
-import { ProjectDifficulty } from "@prisma/client";
-
 import { Difficulty } from "#/graphql/generated";
+import { ProjectDifficulty } from "#/server/db/generated/client";
 
 export const getDifficultyValue = (
   difficulty: Difficulty | undefined | null,

@@ -1,4 +1,4 @@
-import { ProjectCategory } from "@prisma/client";
+import { ProjectCategory } from "#/server/db/generated/client";
 
 import defaultArrayTemplate from "./assets/codeTemplates/arrayTemplate.js.txt";
 import defaultArrayTemplatePython from "./assets/codeTemplates/arrayTemplate.py.txt";

@@ -19,11 +19,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import {
-  type PlaygroundProject,
-  ProjectCategory,
-  ProjectDifficulty,
-} from "@prisma/client";
 import { TRPCClientError } from "@trpc/client";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
@@ -36,6 +31,11 @@ import { getDifficultyValue } from "#/entities/difficulty/lib/getDifficultyValue
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
+import {
+  type PlaygroundProject,
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 import { api } from "#/shared/api";
 import { usePlaygroundSlugs, usePrevious } from "#/shared/hooks";
 import { useAppDispatch } from "#/store/hooks";
@@ -424,7 +424,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       loading={isQuestionLoading}
                       disabled={Boolean(
                         !formik.values.projectLcLink ||
-                          formik.errors.projectLcLink,
+                        formik.errors.projectLcLink,
                       )}
                       onClick={handleFetchProblemData}
                     >

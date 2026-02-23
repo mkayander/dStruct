@@ -1,4 +1,4 @@
-import { ProjectDifficulty } from "@prisma/client";
+import { ProjectDifficulty } from "#/server/db/generated/client";
 
 export const difficultyLabels: Record<ProjectDifficulty, string> = {
   [ProjectDifficulty.EASY]: "Easy",

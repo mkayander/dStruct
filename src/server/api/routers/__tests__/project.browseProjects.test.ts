@@ -1,10 +1,13 @@
-import type { PrismaClient } from "@prisma/client";
-import { ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createMockProjects } from "#/features/project/__tests__/mocks/projectMocks";
 import { createInnerTRPCContext } from "#/server/api/context";
 import { appRouter } from "#/server/api/root";
+import type { PrismaClient } from "#/server/db/generated/client";
+import {
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 
 // Mock Prisma client using dependency injection pattern
 // Create mock functions that will be used in tests

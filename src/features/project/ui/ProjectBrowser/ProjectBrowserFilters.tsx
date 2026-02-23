@@ -16,12 +16,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { ProjectDifficulty } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import React from "react";
 
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
+import { ProjectDifficulty } from "#/server/db/generated/client";
 import { useI18nContext } from "#/shared/hooks";
 
 import { useProjectBrowserContext } from "./ProjectBrowserContext";

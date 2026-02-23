@@ -1,4 +1,3 @@
-import { Prisma, ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import uuid from "short-uuid";
 import { z } from "zod";
@@ -24,6 +23,11 @@ import {
   publicProcedure,
 } from "#/server/api/trpc";
 import type { AppPrismaClient } from "#/server/db/client";
+import {
+  Prisma,
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 
 const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   switch (category) {
@@ -162,7 +166,7 @@ export const projectRouter = createTRPCRouter({
 
   allBrief: publicProcedure.query(async ({ ctx }) => {
     const userId = ctx.session?.user.id;
-    const args = Prisma.validator<Prisma.PlaygroundProjectFindManyArgs>()({
+    const args = {
       where: {
         OR: userId ? [{ isPublic: true }, { userId }] : [{ isPublic: true }],
       },
@@ -182,7 +186,7 @@ export const projectRouter = createTRPCRouter({
         },
       },
       orderBy: [{ category: "asc" }, { title: "asc" }],
-    });
+    } satisfies Prisma.PlaygroundProjectFindManyArgs;
 
     const projects = await ctx.db.playgroundProject.findMany(args);
     const newProjectMarginMs = await getNewProjectMarginMs();
@@ -198,7 +202,7 @@ export const projectRouter = createTRPCRouter({
       z.object({
         id: z.string().optional(),
         title: z.string().optional(),
-        category: z.nativeEnum(ProjectCategory).optional(),
+        category: z.enum(ProjectCategory).optional(),
         input: z.string().optional(),
         isPublic: z.boolean().optional(),
         isExample: z.boolean().optional(),
@@ -226,8 +230,8 @@ export const projectRouter = createTRPCRouter({
         search: z.string().optional(),
 
         // Filters
-        categories: z.array(z.nativeEnum(ProjectCategory)).optional(),
-        difficulties: z.array(z.nativeEnum(ProjectDifficulty)).optional(),
+        categories: z.array(z.enum(ProjectCategory)).optional(),
+        difficulties: z.array(z.enum(ProjectDifficulty)).optional(),
         showOnlyNew: z.boolean().optional(),
         showOnlyMine: z.boolean().optional(),
 
@@ -457,8 +461,8 @@ export const projectRouter = createTRPCRouter({
       z.object({
         title: z.string(),
         slug: z.string().optional(),
-        category: z.nativeEnum(ProjectCategory),
-        difficulty: z.nativeEnum(ProjectDifficulty).optional(),
+        category: z.enum(ProjectCategory),
+        difficulty: z.enum(ProjectDifficulty).optional(),
         description: z.string().optional(),
         lcLink: z.string().optional(),
         isPublic: z.boolean(),
@@ -509,8 +513,8 @@ export const projectRouter = createTRPCRouter({
         projectId: z.string(),
         slug: z.string().optional(),
         title: z.string().optional(),
-        category: z.nativeEnum(ProjectCategory).optional(),
-        difficulty: z.nativeEnum(ProjectDifficulty).optional(),
+        category: z.enum(ProjectCategory).optional(),
+        difficulty: z.enum(ProjectDifficulty).optional(),
         description: z.string().optional(),
         lcLink: z.string().optional(),
         isPublic: z.boolean().optional(),

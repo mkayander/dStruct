@@ -2,7 +2,6 @@
 
 import type { OnDragEndResponder } from "@hello-pangea/dnd";
 import type { StackProps } from "@mui/material";
-import type { PlaygroundTestCase } from "@prisma/client";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 
@@ -10,6 +9,7 @@ import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/features/selectBar/ui/SelectBarChip";
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
+import type { PlaygroundTestCase } from "#/server/db/generated/client";
 import { api } from "#/shared/api";
 import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";

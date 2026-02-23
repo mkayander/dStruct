@@ -1,9 +1,12 @@
-import type { PlaygroundProject, PlaygroundSolution } from "@prisma/client";
-import { Prisma } from "@prisma/client";
 import { promises as fs } from "fs";
 import * as process from "process";
 
 import { db } from "#/server/db/client";
+import type {
+  PlaygroundProject,
+  PlaygroundSolution,
+} from "#/server/db/generated/client";
+import { Prisma } from "#/server/db/generated/client";
 
 import PlaygroundTestCaseCreateInput = Prisma.PlaygroundTestCaseCreateInput;
 

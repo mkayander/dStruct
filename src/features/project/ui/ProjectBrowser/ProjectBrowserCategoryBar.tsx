@@ -1,10 +1,10 @@
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { Box, Button, Chip, Typography } from "@mui/material";
-import type { ProjectCategory } from "@prisma/client";
 import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
+import type { ProjectCategory } from "#/server/db/generated/client";
 import type { RouterOutputs } from "#/shared/api";
 
 import { useProjectBrowserContext } from "./ProjectBrowserContext";

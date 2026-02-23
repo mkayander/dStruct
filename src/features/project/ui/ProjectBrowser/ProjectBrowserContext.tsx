@@ -1,4 +1,3 @@
-import type { ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import React, {
   createContext,
   type ReactNode,
@@ -9,6 +8,10 @@ import React, {
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
+import type {
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 import { useSearchParam } from "#/shared/hooks";
 
 /**

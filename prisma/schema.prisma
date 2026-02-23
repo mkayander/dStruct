@@ -2,13 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/server/db/generated"
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  directUrl    = env("DIRECT_DATABASE_URL")
+  provider = "postgresql"
 }
 
 model Problem {
@@ -86,7 +85,7 @@ model VerificationToken {
 
 model LeetCodeUser {
   username   String   @id
-  token      String?  @db.Text /// @encrypted
+  token      String?  @db.Text
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userAvatar String

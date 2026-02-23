@@ -1,5 +1,9 @@
-import { ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { describe, expect, it } from "vitest";
+
+import {
+  ProjectCategory,
+  ProjectDifficulty,
+} from "#/server/db/generated/client";
 
 /**
  * Tests for queryKey generation logic used in ProjectBrowser
