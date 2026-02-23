@@ -1,5 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
@@ -100,6 +100,6 @@ export const getRuntimeObject = (callstack: CallstackHelper) =>
   class ObjectProxy extends ControlledObject {
     constructor(input?: any) {
       const data = generateArrayData([]);
-      super(input, uuid.generate(), data, callstack, true);
+      super(input, generate(), data, callstack, true);
     }
   };

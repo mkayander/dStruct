@@ -1,5 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
@@ -49,6 +49,6 @@ export const getRuntimeString = (callstack: CallstackHelper) =>
       let string = String(input);
       if (input === undefined) string = "";
       const data = generateArrayData(string.split(""));
-      super(string, uuid.generate(), data, callstack, true);
+      super(string, generate(), data, callstack, true);
     }
   };

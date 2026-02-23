@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
@@ -70,7 +70,7 @@ export const useCodeExecution = (
       if (e instanceof ExecutionError) {
         dispatch(
           callstackSlice.actions.addOne({
-            id: uuid.generate(),
+            id: generate(),
             timestamp: performance.now(),
             name: "error",
           }),

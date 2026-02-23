@@ -1,4 +1,4 @@
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
@@ -110,10 +110,10 @@ export const getRuntimeLinkedListClass = (callstack: CallstackHelper) =>
         val,
         next,
         {
-          id: uuid.generate(),
+          id: generate(),
           type: ArgumentType.LINKED_LIST,
         },
-        uuid.generate(),
+        generate(),
         callstack,
         true,
       );

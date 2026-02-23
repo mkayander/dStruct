@@ -1,4 +1,4 @@
-import uuid from "short-uuid";
+import { generate as generateShortUuid } from "short-uuid";
 
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
@@ -114,7 +114,7 @@ export abstract class NodeBase<T extends number | string> {
 
   protected getDispatchBase() {
     return {
-      id: uuid.generate(),
+      id: generateShortUuid(),
       argType: this.meta.type,
       treeName: this.name,
       structureType: "treeNode",

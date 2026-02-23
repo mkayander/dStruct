@@ -1,5 +1,5 @@
 import { Queue } from "@datastructures-js/queue";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
@@ -9,8 +9,9 @@ import {
 import type { TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 
-export interface BinaryNodeMeta<T extends number | string = number | string>
-  extends NodeMeta {
+export interface BinaryNodeMeta<
+  T extends number | string = number | string,
+> extends NodeMeta {
   depth: number;
   isRoot?: boolean;
   isLeaf?: boolean;
@@ -189,11 +190,11 @@ export const getRuntimeBinaryTreeClass = (callstack: CallstackHelper) =>
         left,
         right,
         {
-          id: uuid.generate(),
+          id: generate(),
           type: ArgumentType.BINARY_TREE,
           depth: 0,
         },
-        uuid.generate(),
+        generate(),
         callstack,
         true,
       );

@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import uuid from "short-uuid";
+import { generate as generateShortUuid } from "short-uuid";
 import { z } from "zod";
 
 import { argumentObjectValidator } from "#/entities/argument/lib";
@@ -475,7 +475,7 @@ export const projectRouter = createTRPCRouter({
           data: {
             ...data,
             userId: ctx.session.user.id,
-            slug: data.slug || `project-${uuid.generate()}`,
+            slug: data.slug || `project-${generateShortUuid()}`,
             cases: {
               create: {
                 title: "Case 1",

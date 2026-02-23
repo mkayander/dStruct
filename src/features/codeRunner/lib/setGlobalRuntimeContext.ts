@@ -1,5 +1,5 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { getRuntimeArrayClass } from "#/entities/dataStructures/array/model/arrayStructure";
 import { getRuntimeSet } from "#/entities/dataStructures/array/model/setStructure";
@@ -79,7 +79,7 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
     ListNode: LinkedList,
     log: (...args: unknown[]) => {
       callstack.addOne({
-        id: uuid.generate(),
+        id: generate(),
         timestamp: performance.now(),
         name: "consoleLog",
         args: args.map((arg) => {

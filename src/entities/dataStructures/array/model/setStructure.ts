@@ -1,5 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
@@ -110,6 +110,6 @@ export const getRuntimeSet = (callstack: CallstackHelper) =>
     constructor(input?: any[] | null) {
       const set = new Set(input);
       const data = generateArrayData(Array.from(set));
-      super(Array.from(set), uuid.generate(), data, callstack, true);
+      super(Array.from(set), generate(), data, callstack, true);
     }
   };

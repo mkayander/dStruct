@@ -1,4 +1,4 @@
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { db } from "#/server/db/client";
 
@@ -9,7 +9,7 @@ import { db } from "#/server/db/client";
       db.playgroundProject.update({
         where: { id: item.id },
         data: {
-          slug: `project-${uuid.generate()}`,
+          slug: `project-${generate()}`,
         },
       }),
     ),
@@ -21,7 +21,7 @@ import { db } from "#/server/db/client";
       db.playgroundTestCase.update({
         where: { id: item.id },
         data: {
-          slug: `case-${uuid.generate()}`,
+          slug: `case-${generate()}`,
         },
       }),
     ),
@@ -33,7 +33,7 @@ import { db } from "#/server/db/client";
       db.playgroundSolution.update({
         where: { id: item.id },
         data: {
-          slug: `solution-${uuid.generate()}`,
+          slug: `solution-${generate()}`,
         },
       }),
     ),

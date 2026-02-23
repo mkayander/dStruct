@@ -1,4 +1,4 @@
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import type { ArgumentArrayType } from "#/entities/argument/model/types";
 import type {
@@ -95,7 +95,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
 
     getDispatchBase(key?: any) {
       const data = {
-        id: uuid.generate(),
+        id: generate(),
         argType: this.argType,
         nodeId: "-1",
         treeName: this.name,
@@ -137,7 +137,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
         });
       } else {
         const newItem = {
-          id: uuid.generate(),
+          id: generate(),
           index,
           value,
           childName,
@@ -148,7 +148,7 @@ export function makeArrayBaseClass<TBase extends Constructor>(Base: TBase) {
           args.key = propKey;
         }
         this.callstack.addOne({
-          id: uuid.generate(),
+          id: generate(),
           name: "addArrayItem",
           argType: this.argType,
           treeName: this.name,

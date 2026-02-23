@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { isArgumentObjectValid } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
@@ -128,7 +128,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const handleAddArg = () => {
     dispatch(
       caseSlice.actions.addArgument({
-        name: uuid.generate(),
+        name: generate(),
         type: ArgumentType.BINARY_TREE,
         order: args.length,
         input: "[]",

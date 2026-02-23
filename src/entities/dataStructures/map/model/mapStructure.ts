@@ -1,5 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
@@ -112,6 +112,6 @@ export const getRuntimeMap = (callstack: CallstackHelper) =>
     constructor(input?: any[] | null) {
       const map = new Map(input);
       const data = generateArrayData(Array.from(map));
-      super(Array.from(map), uuid.generate(), data, callstack, true);
+      super(Array.from(map), generate(), data, callstack, true);
     }
   };

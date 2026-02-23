@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import uuid4 from "short-uuid";
+import { generate } from "short-uuid";
 
 import {
   isArgumentArrayType,
@@ -52,7 +52,7 @@ const createNodeData = (
 ) => {
   if (!isNumber(value)) return;
 
-  const newId = uuid4.generate();
+  const newId = generate();
   map[newId] = {
     id: newId,
     value: value,
@@ -418,7 +418,7 @@ const parseArrayArgument = (
       if (childName) {
         value = undefined;
       }
-      const newId = uuid4.generate();
+      const newId = generate();
       newItems[i] = {
         id: newId,
         index: i,

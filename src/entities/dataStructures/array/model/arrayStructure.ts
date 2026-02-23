@@ -1,5 +1,5 @@
 import type { EntityState } from "@reduxjs/toolkit";
-import uuid from "short-uuid";
+import { generate } from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
@@ -155,7 +155,7 @@ export class ControlledArray<T> extends ArrayBase<T> {
       array.push(...inputArray);
     }
     const data = generateArrayData(array);
-    const id = uuid.generate();
+    const id = generate();
 
     return {
       id,
@@ -279,7 +279,7 @@ export const getRuntimeArrayClass = (callstack: CallstackHelper) =>
 
       const data = generateArrayData(items);
 
-      super(items, uuid.generate(), data, callstack, true);
+      super(items, generate(), data, callstack, true);
     }
 
     static override from(
