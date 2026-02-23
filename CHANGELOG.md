@@ -1,3 +1,17 @@
+# [1.351.0](https://github.com/mkayander/dStruct/compare/v1.350.0...v1.351.0) (2026-02-23)
+
+
+### Bug Fixes
+
+* add DATABASE_URL to GitHub Actions workflow ([d5a0835](https://github.com/mkayander/dStruct/commit/d5a0835e5d50b4823c8e6701cbd3caa639a3d7e5))
+
+
+### Features
+
+* **emotion:** integrate Emotion for styling and hydration consistency ([be282ad](https://github.com/mkayander/dStruct/commit/be282adaa1ff1d0c59e5892cf3ed407f8c0ded93))
+* **encryption:** implement field-level encryption for Prisma ([44875d7](https://github.com/mkayander/dStruct/commit/44875d7b54a148ef4d634cd9448cee0b444ab646))
+* **prisma:** implement date serialization extension for Prisma ([eb280f9](https://github.com/mkayander/dStruct/commit/eb280f97622acf3cd20b8db21d547c21ac35aa3b))
+
 # [1.350.0](https://github.com/mkayander/dStruct/compare/v1.349.0...v1.350.0) (2026-01-11)
 
 
