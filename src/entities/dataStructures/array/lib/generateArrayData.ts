@@ -1,4 +1,4 @@
-import { uuid } from "#/shared/lib";
+import uuid from "short-uuid";
 
 import { arrayDataAdapter } from "../model/arraySlice";
 

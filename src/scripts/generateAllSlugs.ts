@@ -1,8 +1,6 @@
-import shortUUID from "short-uuid";
+import uuid from "short-uuid";
 
 import { db } from "#/server/db/client";
-
-const uuid = shortUUID();
 
 (async () => {
   const projects = await db.playgroundProject.findMany();

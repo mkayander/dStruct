@@ -1,4 +1,29 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+let clientMounted = false;
+let scheduleScheduled = false;
+const listeners = new Set<() => void>();
+
+function subscribe(listener: () => void): () => void {
+  listeners.add(listener);
+  if (!clientMounted && !scheduleScheduled) {
+    scheduleScheduled = true;
+    setTimeout(() => {
+      clientMounted = true;
+      scheduleScheduled = false;
+      listeners.forEach((l) => l());
+    }, 0);
+  }
+  return () => listeners.delete(listener);
+}
+
+function getSnapshot(): boolean {
+  return clientMounted;
+}
+
+function getServerSnapshot(): boolean {
+  return false;
+}
 
 /**
  * Returns true only after the component has mounted (client-side).
@@ -6,9 +31,5 @@ import { useEffect, useState } from "react";
  * (e.g. to avoid hydration mismatch when SSR and client render order differs).
  */
 export function useHasMounted(): boolean {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  return mounted;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

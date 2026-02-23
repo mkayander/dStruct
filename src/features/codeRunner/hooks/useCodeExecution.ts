@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import shortUUID from "short-uuid";
+import uuid from "short-uuid";
 
 import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
@@ -51,8 +51,6 @@ export const getCodeKey = (language: ProgrammingLanguage | "") => {
       return "pythonCode";
   }
 };
-
-const uuid = shortUUID();
 
 export const useCodeExecution = (
   codeInput: string,

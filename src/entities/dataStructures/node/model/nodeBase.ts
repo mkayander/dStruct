@@ -1,9 +1,7 @@
-import shortUUID from "short-uuid";
+import uuid from "short-uuid";
 
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-
-const uuid = shortUUID();
 
 export interface NodeMeta {
   id: string;

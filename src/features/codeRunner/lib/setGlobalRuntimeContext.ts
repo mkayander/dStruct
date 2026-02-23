@@ -1,4 +1,5 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
+import uuid from "short-uuid";
 
 import { getRuntimeArrayClass } from "#/entities/dataStructures/array/model/arrayStructure";
 import { getRuntimeSet } from "#/entities/dataStructures/array/model/setStructure";
@@ -23,7 +24,6 @@ import {
 import { getRuntimeMap } from "#/entities/dataStructures/map/model/mapStructure";
 import { getRuntimeObject } from "#/entities/dataStructures/map/model/objectStructure";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { uuid } from "#/shared/lib";
 import {
   safeStringify,
   stripQuotes,

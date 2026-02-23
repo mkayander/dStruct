@@ -1,4 +1,4 @@
-import shortUUID from "short-uuid";
+import uuid from "short-uuid";
 
 import type { ArgumentArrayType } from "#/entities/argument/model/types";
 import type {
@@ -13,8 +13,6 @@ import {
   type StructureNode,
 } from "#/shared/model/baseStructureSlice";
 import type { Constructor } from "#/types/helpers";
-
-const uuid = shortUUID();
 
 export interface ArrayMeta {
   colorMap?: Record<string, string> | null;

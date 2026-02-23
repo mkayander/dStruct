@@ -1,4 +1,5 @@
 import { Queue } from "@datastructures-js/queue";
+import uuid from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
@@ -7,7 +8,6 @@ import {
 } from "#/entities/dataStructures/node/model/nodeBase";
 import type { TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { uuid } from "#/shared/lib";
 
 export interface BinaryNodeMeta<T extends number | string = number | string>
   extends NodeMeta {

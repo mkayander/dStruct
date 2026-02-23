@@ -1,11 +1,11 @@
 import type { EntityState } from "@reduxjs/toolkit";
+import uuid from "short-uuid";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { makeArrayBaseClass } from "#/entities/dataStructures/array/model/arrayBase";
 import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { initControlledArray } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { uuid } from "#/shared/lib";
 
 import { generateArrayData } from "../lib/generateArrayData";
 

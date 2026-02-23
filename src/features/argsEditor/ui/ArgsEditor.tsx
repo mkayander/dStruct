@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
-import shortUUID from "short-uuid";
+import uuid from "short-uuid";
 
 import { isArgumentObjectValid } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
@@ -40,8 +40,6 @@ import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
-
-const uuid = shortUUID();
 
 type ArgsEditorProps = {
   selectedCase: UseTRPCQueryResult<RouterOutputs["project"]["getCaseBySlug"]>;

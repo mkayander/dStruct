@@ -1,3 +1,5 @@
+import uuid from "short-uuid";
+
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   NodeBase,
@@ -5,7 +7,6 @@ import {
 } from "#/entities/dataStructures/node/model/nodeBase";
 import { type TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { uuid } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 
 export class LinkedListNode<T extends number | string> extends NodeBase<T> {

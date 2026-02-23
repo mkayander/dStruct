@@ -1,5 +1,6 @@
 import { Prisma, ProjectCategory, ProjectDifficulty } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
+import uuid from "short-uuid";
 import { z } from "zod";
 
 import { argumentObjectValidator } from "#/entities/argument/lib";
@@ -23,7 +24,6 @@ import {
   publicProcedure,
 } from "#/server/api/trpc";
 import type { AppPrismaClient } from "#/server/db/client";
-import { uuid } from "#/shared/lib";
 
 const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   switch (category) {
