@@ -21,7 +21,7 @@ import React from "react";
 
 import { getDifficultyColor } from "#/entities/difficulty/lib/getDifficultyColor";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
-import { ProjectDifficulty } from "#/server/db/generated/client";
+import { ProjectDifficulty } from "#/server/db/generated/enums";
 import { useI18nContext } from "#/shared/hooks";
 
 import { useProjectBrowserContext } from "./ProjectBrowserContext";

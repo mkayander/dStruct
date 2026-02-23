@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { createMockProject } from "#/features/project/__tests__/mocks/projectMocks";
 import { makeStore } from "#/store/makeStore";
 
 import {
@@ -74,12 +75,15 @@ describe("projectBrowserSlice", () => {
   });
 
   describe("setAccumulatedProjects", () => {
+    const createProject = (id: string, title: string, slug: string) =>
+      createMockProject({ id, title, slug });
+
     it("should set accumulated projects", () => {
       const store = createStore();
       const projects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-        { id: "2", title: "Project 2", slug: "project-2" },
-      ] as any;
+        createProject("1", "Project 1", "project-1"),
+        createProject("2", "Project 2", "project-2"),
+      ];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(projects),
@@ -90,12 +94,8 @@ describe("projectBrowserSlice", () => {
 
     it("should replace existing projects", () => {
       const store = createStore();
-      const initialProjects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
-      const newProjects = [
-        { id: "2", title: "Project 2", slug: "project-2" },
-      ] as any;
+      const initialProjects = [createProject("1", "Project 1", "project-1")];
+      const newProjects = [createProject("2", "Project 2", "project-2")];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(initialProjects),
@@ -109,9 +109,7 @@ describe("projectBrowserSlice", () => {
 
     it("should handle empty array", () => {
       const store = createStore();
-      const projects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
+      const projects = [createProject("1", "Project 1", "project-1")];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(projects),
@@ -123,14 +121,13 @@ describe("projectBrowserSlice", () => {
   });
 
   describe("appendProjects", () => {
+    const createProject = (id: string, title: string, slug: string) =>
+      createMockProject({ id, title, slug });
+
     it("should append new projects to existing ones", () => {
       const store = createStore();
-      const initialProjects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
-      const newProjects = [
-        { id: "2", title: "Project 2", slug: "project-2" },
-      ] as any;
+      const initialProjects = [createProject("1", "Project 1", "project-1")];
+      const newProjects = [createProject("2", "Project 2", "project-2")];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(initialProjects),
@@ -146,13 +143,13 @@ describe("projectBrowserSlice", () => {
     it("should avoid duplicates by ID", () => {
       const store = createStore();
       const initialProjects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-        { id: "2", title: "Project 2", slug: "project-2" },
-      ] as any;
+        createProject("1", "Project 1", "project-1"),
+        createProject("2", "Project 2", "project-2"),
+      ];
       const newProjects = [
-        { id: "2", title: "Project 2 Updated", slug: "project-2" },
-        { id: "3", title: "Project 3", slug: "project-3" },
-      ] as any;
+        createProject("2", "Project 2 Updated", "project-2"),
+        createProject("3", "Project 3", "project-3"),
+      ];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(initialProjects),
@@ -166,9 +163,7 @@ describe("projectBrowserSlice", () => {
 
     it("should handle appending to empty array", () => {
       const store = createStore();
-      const newProjects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
+      const newProjects = [createProject("1", "Project 1", "project-1")];
 
       store.dispatch(projectBrowserSlice.actions.appendProjects(newProjects));
 
@@ -177,9 +172,7 @@ describe("projectBrowserSlice", () => {
 
     it("should handle empty array append", () => {
       const store = createStore();
-      const initialProjects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
+      const initialProjects = [createProject("1", "Project 1", "project-1")];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(initialProjects),
@@ -196,8 +189,8 @@ describe("projectBrowserSlice", () => {
     it("should clear accumulated projects and reset query key", () => {
       const store = createStore();
       const projects = [
-        { id: "1", title: "Project 1", slug: "project-1" },
-      ] as any;
+        createMockProject({ id: "1", title: "Project 1", slug: "project-1" }),
+      ];
 
       store.dispatch(
         projectBrowserSlice.actions.setAccumulatedProjects(projects),

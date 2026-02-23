@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   ProjectCategory,
   ProjectDifficulty,
-} from "#/server/db/generated/client";
+} from "#/server/db/generated/enums";
 
 /**
  * Tests for queryKey generation logic used in ProjectBrowser

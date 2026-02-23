@@ -5,32 +5,37 @@ import minimist from "minimist";
 import slugify from "slugify";
 
 import { db } from "#/server/db/client";
-import type {
-  PlaygroundProject,
-  PlaygroundSolution,
-  PlaygroundTestCase,
-} from "#/server/db/generated/client";
 
 import "./load-env";
 
 type Args = { rewrite?: boolean };
 const argv = minimist<Args>(process.argv.slice(2));
 
+type ProjectFromDb = Awaited<
+  ReturnType<typeof db.playgroundProject.findMany>
+>[number];
+type TestCaseFromDb = Awaited<
+  ReturnType<typeof db.playgroundTestCase.findMany>
+>[number];
+type SolutionFromDb = Awaited<
+  ReturnType<typeof db.playgroundSolution.findMany>
+>[number];
+
 (async () => {
   const projectsList = await db.playgroundProject.findMany();
-  const projects: Record<string, PlaygroundProject> = {};
+  const projects: Record<string, ProjectFromDb> = {};
   for (const project of projectsList) {
     projects[project.id] = project;
   }
 
   const casesList = await db.playgroundTestCase.findMany();
-  const testCases: Record<string, PlaygroundTestCase> = {};
+  const testCases: Record<string, TestCaseFromDb> = {};
   for (const testCase of casesList) {
     testCases[testCase.id] = testCase;
   }
 
   const solutionsList = await db.playgroundSolution.findMany();
-  const solutions: Record<string, PlaygroundSolution> = {};
+  const solutions: Record<string, SolutionFromDb> = {};
   for (const solution of solutionsList) {
     solutions[solution.id] = solution;
   }

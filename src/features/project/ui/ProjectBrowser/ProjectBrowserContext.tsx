@@ -11,7 +11,7 @@ import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import type {
   ProjectCategory,
   ProjectDifficulty,
-} from "#/server/db/generated/client";
+} from "#/server/db/generated/enums";
 import { useSearchParam } from "#/shared/hooks";
 
 /**

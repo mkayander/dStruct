@@ -9,7 +9,7 @@ import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectBarList";
 import { DraggableSelectBarChip } from "#/features/selectBar/ui/SelectBarChip";
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
-import type { PlaygroundSolution } from "#/server/db/generated/client";
+import type { PlaygroundSolution } from "#/server/db/generated/browser";
 import { api } from "#/shared/api";
 import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";

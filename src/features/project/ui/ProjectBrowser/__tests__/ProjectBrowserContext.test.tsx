@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   ProjectCategory,
   ProjectDifficulty,
-} from "#/server/db/generated/client";
+} from "#/server/db/generated/enums";
 
 import {
   parseBoolean,

@@ -4,14 +4,15 @@ import React from "react";
 import { useI18nContext } from "#/shared/hooks";
 
 type NewLabelProps = {
-  createdAt: Date;
+  createdAt: string;
 };
 
 export const NewLabel: React.FC<NewLabelProps> = ({ createdAt }) => {
   const { LL } = useI18nContext();
+  const date = typeof createdAt === "string" ? new Date(createdAt) : createdAt;
 
   return (
-    <Tooltip title={`Created at ${createdAt.toLocaleString()}`} arrow>
+    <Tooltip title={`Created at ${date.toLocaleString()}`} arrow>
       <Typography
         display="inline-block"
         fontSize={12}

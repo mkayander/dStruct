@@ -3,7 +3,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RouterOutputs } from "#/shared/api";
 import type { RootState } from "#/store/makeStore";
 
-type ProjectBrief =
+export type ProjectBrief =
   RouterOutputs["project"]["browseProjects"]["projects"][number];
 
 type ProjectBrowserState = {
@@ -15,7 +15,7 @@ type ProjectBrowserState = {
   pageSize: number;
   hasMore: boolean;
 
-  // Accumulated projects across pages
+  // Accumulated projects across pages (API returns serializable createdAt as ISO string)
   accumulatedProjects: ProjectBrief[];
   lastQueryKey: string; // Track query key to detect filter changes
 };

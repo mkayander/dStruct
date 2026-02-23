@@ -1,4 +1,4 @@
-import { ProjectDifficulty } from "#/server/db/generated/client";
+import { ProjectDifficulty } from "#/server/db/generated/enums";
 import type { theme as muiTheme } from "#/themes";
 
 export const getDifficultyColor = (

@@ -1,5 +1,5 @@
 import { Difficulty } from "#/graphql/generated";
-import { ProjectDifficulty } from "#/server/db/generated/client";
+import { ProjectDifficulty } from "#/server/db/generated/enums";
 
 export const getDifficultyValue = (
   difficulty: Difficulty | undefined | null,

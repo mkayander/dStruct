@@ -138,7 +138,7 @@ describe("ProjectBrowserItem", () => {
 
   it("should display 'New' label for recent projects", () => {
     const recentProject = createMockProject({
-      createdAt: new Date(), // Created today
+      createdAt: new Date().toISOString(), // Created today
     });
     renderWithProviders(
       <ProjectBrowserItem
@@ -169,7 +169,7 @@ describe("ProjectBrowserItem", () => {
 
   it("should render formatted date", () => {
     const project = createMockProject({
-      createdAt: new Date("2024-01-15"),
+      createdAt: new Date("2024-01-15").toISOString(),
     });
     renderWithProviders(
       <ProjectBrowserItem

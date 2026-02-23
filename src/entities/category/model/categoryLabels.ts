@@ -1,4 +1,4 @@
-import { ProjectCategory } from "#/server/db/generated/client";
+import { ProjectCategory } from "#/server/db/generated/enums";
 
 export const categoryLabels: Record<ProjectCategory, string> = {
   [ProjectCategory.BINARY_TREE]: "Binary Tree",

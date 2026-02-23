@@ -1,0 +1,1 @@
+export { createDateSerializationExtension } from "./extension";

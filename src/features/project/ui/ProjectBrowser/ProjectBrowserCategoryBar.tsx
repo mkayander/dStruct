@@ -4,7 +4,7 @@ import { Box, Button, Chip, Typography } from "@mui/material";
 import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
-import type { ProjectCategory } from "#/server/db/generated/client";
+import type { ProjectCategory } from "#/server/db/generated/enums";
 import type { RouterOutputs } from "#/shared/api";
 
 import { useProjectBrowserContext } from "./ProjectBrowserContext";

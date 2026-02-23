@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { createMockProjects } from "#/features/project/__tests__/mocks/projectMocks";
+import { createMockDbProjects } from "#/features/project/__tests__/mocks/projectMocks";
 import { createInnerTRPCContext } from "#/server/api/context";
 import { appRouter } from "#/server/api/root";
 import type { PrismaClient } from "#/server/db/generated/client";
@@ -76,7 +76,7 @@ describe("project.browseProjects", () => {
 
   describe("pagination", () => {
     it("should return first page with default pageSize", async () => {
-      const mockProjects = createMockProjects(20);
+      const mockProjects = createMockDbProjects(20);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(20);
 
@@ -95,7 +95,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should return correct page when hasMore is true", async () => {
-      const mockProjects = createMockProjects(21); // One more than pageSize
+      const mockProjects = createMockDbProjects(21); // One more than pageSize
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(21);
 
@@ -111,7 +111,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should handle second page correctly", async () => {
-      const mockProjects = createMockProjects(20);
+      const mockProjects = createMockDbProjects(20);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(40);
 
@@ -134,7 +134,7 @@ describe("project.browseProjects", () => {
 
   describe("search", () => {
     it("should filter by search query", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -366,7 +366,7 @@ describe("project.browseProjects", () => {
 
   describe("sorting", () => {
     it("should sort by title ascending", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -385,7 +385,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should sort by title descending", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -404,7 +404,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should sort by difficulty with secondary sort by title", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -423,7 +423,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should sort by createdAt", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -442,7 +442,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should sort by category with secondary sort by title", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -461,7 +461,7 @@ describe("project.browseProjects", () => {
     });
 
     it("should default to category sort when sortBy is not provided", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -477,7 +477,7 @@ describe("project.browseProjects", () => {
 
   describe("visibility filter", () => {
     it("should filter by isPublic when user is not authenticated", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -498,7 +498,7 @@ describe("project.browseProjects", () => {
 
     it("should filter by isPublic OR userId when user is authenticated", async () => {
       const userId = "user-123";
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 
@@ -520,7 +520,7 @@ describe("project.browseProjects", () => {
 
   describe("combined filters", () => {
     it("should combine search, category, and difficulty filters", async () => {
-      const mockProjects = createMockProjects(5);
+      const mockProjects = createMockDbProjects(5);
       mockFindMany.mockResolvedValue(mockProjects);
       mockCount.mockResolvedValue(5);
 

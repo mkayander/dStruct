@@ -32,10 +32,10 @@ import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useQuestionTitleLazyQuery } from "#/graphql/generated";
 import {
-  type PlaygroundProject,
   ProjectCategory,
   ProjectDifficulty,
-} from "#/server/db/generated/client";
+} from "#/server/db/generated/enums";
+import type { RouterOutputs } from "#/shared/api";
 import { api } from "#/shared/api";
 import { usePlaygroundSlugs, usePrevious } from "#/shared/hooks";
 import { useAppDispatch } from "#/store/hooks";
@@ -72,7 +72,7 @@ enum ProblemFetchStatus {
 
 type ProjectModalProps = DialogProps & {
   onClose: () => void;
-  currentProject?: PlaygroundProject;
+  currentProject?: RouterOutputs["project"]["getBySlug"];
   isEditMode: boolean;
 };
 

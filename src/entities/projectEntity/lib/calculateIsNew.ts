@@ -16,14 +16,14 @@ export const getNewProjectMarginMs = async (): Promise<number | undefined> => {
 
 /**
  * Calculates if a project is new based on its creation date and the margin
- * @param createdAt - The project creation date
+ * @param createdAt - ISO date string (from Prisma extension)
  * @param newProjectMarginMs - The margin in milliseconds (optional)
  * @returns true if the project was created within the margin, false otherwise
  */
 export const calculateIsNew = (
-  createdAt: Date,
+  createdAt: string,
   newProjectMarginMs?: number,
 ): boolean => {
   if (!newProjectMarginMs) return false;
-  return createdAt.getTime() > Date.now() - newProjectMarginMs;
+  return new Date(createdAt).getTime() > Date.now() - newProjectMarginMs;
 };
