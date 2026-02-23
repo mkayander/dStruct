@@ -26,6 +26,7 @@
     "semantic-release": "semantic-release",
     "lint-staged": "lint-staged",
     "typesafe-i18n": "typesafe-i18n",
+    "check:es": "es-guard",
     "dumpAllProjects": "tsx src/scripts/dumpAllProjects.ts --rewrite",
     "loadMainDump": "tsx src/scripts/loadProjects.ts public-dumps/main.json",
     "runners:build": "esbuild src/packages/dstruct-runner/main.ts --bundle --platform=node --target=node12 --minify --outfile=src/packages/dstruct-runner/dist/main.js",
