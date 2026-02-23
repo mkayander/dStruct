@@ -1,3 +1,11 @@
+## [1.351.1](https://github.com/mkayander/dStruct/compare/v1.351.0...v1.351.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **deps:** update axios to version 1.13.5 ([5de442b](https://github.com/mkayander/dStruct/commit/5de442b22420994c80deb37f7de741edd18f6956))
+* **deps:** update testing-library and semantic-release versions ([eb10134](https://github.com/mkayander/dStruct/commit/eb10134ae68dc2f72011d043e3013fc934e24d9d))
+
 # [1.351.0](https://github.com/mkayander/dStruct/compare/v1.350.0...v1.351.0) (2026-02-23)
 
 
