@@ -74,10 +74,7 @@ async function installBlack() {
 }
 
 function runPrismaAndGraphQL() {
-  const isCI = process.env.CI === "true";
-  const prismaCommand = isCI
-    ? "pnpm run prisma:generate-accelerate"
-    : "pnpm run prisma:generate";
+  const prismaCommand = "pnpm run prisma:generate";
   const graphqlCommand = "pnpm run generate-graphql";
   const commands = [prismaCommand, graphqlCommand];
 

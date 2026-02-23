@@ -15,7 +15,6 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run runners:dev\"",
     "postinstall": "tsx src/scripts/postinstall.ts",
     "prisma:generate": "dotenv -e .env -e .env.local -- prisma generate && tsx prisma/scripts/generate-date-serialization.ts",
-    "prisma:generate-accelerate": "dotenv -e .env -e .env.local -- prisma generate --accelerate",
     "prisma:push": "dotenv -e .env -e .env.local -- prisma db push",
     "prisma:studio": "dotenv -e .env -e .env.local -- prisma studio",
     "generate-graphql": "graphql-codegen --config codegen.yml",
