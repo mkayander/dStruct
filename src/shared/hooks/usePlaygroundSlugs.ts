@@ -14,6 +14,8 @@ export const usePlaygroundSlugs = () => {
 
   useEffect(() => {
     const currentPath = router.asPath;
+    if (!currentPath.startsWith(BASE_PATH)) return;
+
     const projectSlug = currentPath.split("/")[2];
     if (!projectSlug) return;
 
@@ -32,14 +34,23 @@ export const usePlaygroundSlugs = () => {
       if (!slug) return router.replace(BASE_PATH);
 
       const lastPath = localStorage.getItem("lastPlaygroundPath");
-      const lastProjectSlug = lastPath?.split("/")[2];
+      if (lastPath && !lastPath.startsWith(BASE_PATH)) {
+        localStorage.removeItem("lastPlaygroundPath");
+      }
+      const pathToRestore =
+        isInitial &&
+        lastPath?.startsWith(BASE_PATH) &&
+        !lastPath.split("/")[2]?.startsWith("[[")
+          ? lastPath
+          : null;
 
-      if (lastProjectSlug && isInitial && !lastProjectSlug.startsWith("[[")) {
-        return router.replace(lastPath);
+      if (pathToRestore) {
+        return router.replace(pathToRestore);
       }
 
       return router.replace(`${BASE_PATH}/${slug}`);
     };
+
     const setCase = (slug: string) => {
       if (!projectSlug) throw new Error("Project id must be set first");
 
@@ -51,6 +62,7 @@ export const usePlaygroundSlugs = () => {
         `${BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
       );
     };
+
     const setSolution = (slug: string) => {
       if (!projectSlug || !caseSlug)
         throw new Error("Project and case ids must be set first");
