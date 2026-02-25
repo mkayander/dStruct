@@ -50,13 +50,14 @@ const DashboardPage: NextPage<{
     const minAzimuthalAngle = Math.PI / -2.2;
     const maxAzimuthalAngle = Math.PI / 2.2;
     const azimuthalAngle =
-      minAzimuthalAngle + normalizedX * (maxAzimuthalAngle - minAzimuthalAngle);
+      minAzimuthalAngle +
+      (1 - normalizedX) * (maxAzimuthalAngle - minAzimuthalAngle);
 
     // Polar: top to bottom (minPolarAngle to maxPolarAngle)
     const minPolarAngle = Math.PI / 10;
     const maxPolarAngle = Math.PI / 1.1;
     const polarAngle =
-      minPolarAngle + normalizedY * (maxPolarAngle - minPolarAngle);
+      minPolarAngle + (1 - normalizedY) * (maxPolarAngle - minPolarAngle);
 
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(azimuthalAngle);
