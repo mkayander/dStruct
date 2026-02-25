@@ -1,3 +1,11 @@
+## [1.351.2](https://github.com/mkayander/dStruct/compare/v1.351.1...v1.351.2) (2026-02-25)
+
+
+### Bug Fixes
+
+* correct azimuthal and polar angle calculations in DashboardPage ([af976d3](https://github.com/mkayander/dStruct/commit/af976d3878ea0859de9be20a7e6f68bf2b1363a9))
+* improve playground slug handling in usePlaygroundSlugs hook ([9ec68ac](https://github.com/mkayander/dStruct/commit/9ec68ac23a1981946bf44065e97932df4faf8952))
+
 ## [1.351.1](https://github.com/mkayander/dStruct/compare/v1.351.0...v1.351.1) (2026-02-23)
 
 
