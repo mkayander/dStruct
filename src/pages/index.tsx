@@ -171,23 +171,6 @@ const DashboardPage: NextPage<{
                       {LL.TRY_IT_OUT_NOW()} 🚀
                     </Button>
                   </Link>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    fullWidth={isMobile}
-                    sx={{
-                      borderColor: "rgba(255, 255, 255, 0.3)",
-                      color: "inherit",
-                      "&:hover": {
-                        borderColor: "rgba(255, 255, 255, 0.5)",
-                        bgcolor: "rgba(255, 255, 255, 0.1)",
-                      },
-                      px: { xs: 3, md: 4 },
-                      py: 1.5,
-                    }}
-                  >
-                    Documentation →
-                  </Button>
                 </Stack>
               </Stack>
             </Grid>
