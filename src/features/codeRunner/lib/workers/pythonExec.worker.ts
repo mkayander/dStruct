@@ -1,4 +1,4 @@
-import { loadPyodide, type PyodideInterface } from "pyodide";
+import { loadPyodide, type PyodideInterface, version } from "pyodide";
 
 import arrayTrackerSrc from "../../../../packages/dstruct-runner/python/array_tracker.py";
 import arrayTrackerTransformerSrc from "../../../../packages/dstruct-runner/python/array_tracker_transformer.py";
@@ -13,6 +13,11 @@ import type {
 let pyodide: PyodideInterface | null = null;
 
 const HARNESS_DIR = "/home/pyodide";
+
+// Bundlers bundle this worker into /_next/static/chunks/, so loadPyodide's
+// auto-detected indexURL would point there instead of at the actual Pyodide
+// assets. We derive the correct CDN URL from the installed package version.
+const DEFAULT_CDN_URL = `https://cdn.jsdelivr.net/pyodide/v${version}/full/`;
 
 const HARNESS_FILES: Record<string, string> = {
   "shared_types.py": sharedTypesSrc,
@@ -49,16 +54,19 @@ async function handleInit(indexURL?: string) {
     return;
   }
 
-  pyodide = await loadPyodide(indexURL ? { indexURL } : undefined);
+  pyodide = await loadPyodide({ indexURL: indexURL ?? DEFAULT_CDN_URL });
 
   for (const [filename, source] of Object.entries(HARNESS_FILES)) {
     pyodide.FS.writeFile(`${HARNESS_DIR}/${filename}`, source);
   }
 
-  // Configure sys.path via the globals API instead of string interpolation
+  // Invalidate import caches so Python sees the files we just wrote.
+  // See: https://pyodide.org/en/stable/usage/faq.html#why-can-t-i-import-a-file-i-just-wrote-to-the-file-system
+  // Configure sys.path via the globals API instead of string interpolation.
   pyodide.globals.set("__harness_dir__", HARNESS_DIR);
   await pyodide.runPythonAsync(`
-import sys, json
+import importlib, sys, json
+importlib.invalidate_caches()
 _hdir = __harness_dir__
 if _hdir not in sys.path:
     sys.path.insert(0, _hdir)
