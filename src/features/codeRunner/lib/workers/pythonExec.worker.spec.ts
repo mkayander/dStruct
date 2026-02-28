@@ -1,4 +1,5 @@
 import type { ExecutionResult } from "#/features/codeRunner/hooks/useCodeExecution";
+import { PythonRunner } from "#/features/codeRunner/lib/pythonRunner";
 import type {
   PythonWorkerInMessage,
   PythonWorkerOutMessage,
@@ -158,5 +159,48 @@ describe("pythonExec.worker protocol", () => {
     worker.terminate();
     expect(terminateSpy).toHaveBeenCalled();
     expect(worker.terminated).toBe(true);
+  });
+
+  it("should forward PROGRESS messages to onProgress callback during init", async () => {
+    const progressCalls: Array<[number, string]> = [];
+    const onProgress = vi.fn((value: number, stage: string) => {
+      progressCalls.push([value, stage]);
+    });
+
+    const mockWorker = new MockPythonWorker();
+    mockWorker.postMessage = (msg: PythonWorkerInMessage) => {
+      if (msg.type !== "INIT") return;
+      // Simulate worker sending PROGRESS then READY (matches real worker sequence)
+      const steps: PythonWorkerOutMessage[] = [
+        { type: "PROGRESS", value: 5, stage: "Loading runtime…" },
+        { type: "PROGRESS", value: 45, stage: "Preparing harness…" },
+        { type: "PROGRESS", value: 70, stage: "Importing Python…" },
+        { type: "PROGRESS", value: 100, stage: "Ready" },
+        { type: "READY" },
+      ];
+      steps.forEach((data, i) => {
+        setTimeout(() => {
+          if (!mockWorker.terminated) {
+            mockWorker.dispatchEvent(new MessageEvent("message", { data }));
+          }
+        }, i * 5);
+      });
+    };
+
+    const runner = new PythonRunner();
+    await runner.init({
+      onProgress,
+      workerFactory: () => mockWorker as Worker,
+    });
+
+    expect(onProgress).toHaveBeenCalledTimes(4);
+    expect(progressCalls).toEqual([
+      [5, "Loading runtime…"],
+      [45, "Preparing harness…"],
+      [70, "Importing Python…"],
+      [100, "Ready"],
+    ]);
+
+    runner.dispose();
   });
 });

@@ -5,6 +5,7 @@ import { arrayStructureSlice } from "#/entities/dataStructures/array/model/array
 import { treeNodeSlice } from "#/entities/dataStructures/node/model/nodeSlice";
 import { appBarSlice } from "#/features/appBar/model/appBarSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
+import { pyodideSlice } from "#/features/codeRunner/model/pyodideSlice";
 import { projectBrowserSlice } from "#/features/project/model/projectBrowserSlice";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
@@ -15,6 +16,7 @@ import { editorSlice } from "#/features/treeViewer/model/editorSlice";
  */
 export const rootReducer = combineReducers({
   appBar: appBarSlice.reducer,
+  pyodide: pyodideSlice.reducer,
   treeNode: treeNodeSlice.reducer,
   arrayStructure: arrayStructureSlice.reducer,
   callstack: callstackSlice.reducer,

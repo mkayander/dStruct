@@ -36,41 +36,59 @@ class PythonRunner {
   private initPromise: Promise<void> | null = null;
   private indexURL: string | undefined;
 
+  /** Updated on each init() so concurrent callers receive PROGRESS. */
+  private onProgressRef: {
+    current: ((value: number, stage: string) => void) | null;
+  } = { current: null };
+
   constructor(indexURL?: string) {
     this.indexURL = indexURL;
   }
 
   /** Warm up the Pyodide worker. Safe to call multiple times. */
-  async init(): Promise<void> {
-    if (this.state === "ready") return;
+  async init(options?: {
+    onProgress?: (value: number, stage: string) => void;
+    /** For testing: inject a mock worker instead of creating a real one. */
+    workerFactory?: () => Worker;
+  }): Promise<void> {
+    if (this.state === "ready") return Promise.resolve();
     if (this.state === "disposed") {
       throw new Error("PythonRunner has been disposed");
     }
+
+    this.onProgressRef.current = options?.onProgress ?? null;
+
     if (this.initPromise) return this.initPromise;
 
-    this.initPromise = this.doInit();
+    this.initPromise = this.doInit(options);
     return this.initPromise;
   }
 
-  private async doInit(): Promise<void> {
+  private async doInit(options?: {
+    onProgress?: (value: number, stage: string) => void;
+    workerFactory?: () => Worker;
+  }): Promise<void> {
     this.state = "initializing";
-    this.worker = createWorker();
+    this.worker = (options?.workerFactory?.() ?? createWorker()) as Worker;
+    this.onProgressRef.current = options?.onProgress ?? null;
 
     return new Promise<void>((resolve, reject) => {
       const onMessage = (event: MessageEvent<PythonWorkerOutMessage>) => {
-        if (event.data.type === "READY") {
+        const data = event.data;
+        if (data.type === "PROGRESS") {
+          this.onProgressRef.current?.(data.value, data.stage);
+          return;
+        }
+        if (data.type === "READY") {
           cleanup();
           this.state = "ready";
           resolve();
-        } else if (
-          event.data.type === "ERROR" &&
-          event.data.requestId === "__init__"
-        ) {
+        } else if (data.type === "ERROR" && data.requestId === "__init__") {
           cleanup();
           this.state = "idle";
           this.worker?.terminate();
           this.worker = null;
-          reject(new Error(`Pyodide init failed: ${event.data.error.message}`));
+          reject(new Error(`Pyodide init failed: ${data.error.message}`));
         }
       };
 
@@ -245,3 +263,6 @@ class PythonRunner {
 
 /** Singleton runner instance for the application. */
 export const pythonRunner = new PythonRunner();
+
+/** Exported for testing. */
+export { PythonRunner };

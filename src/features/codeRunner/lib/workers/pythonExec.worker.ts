@@ -48,19 +48,28 @@ function postError(requestId: string, err: unknown): void {
   self.postMessage(msg);
 }
 
+function postProgress(value: number, stage: string): void {
+  const msg: PythonWorkerOutMessage = { type: "PROGRESS", value, stage };
+  self.postMessage(msg);
+}
+
 async function handleInit(indexURL?: string) {
   if (pyodide) {
+    postProgress(100, "Ready");
     const msg: PythonWorkerOutMessage = { type: "READY" };
     self.postMessage(msg);
     return;
   }
 
+  postProgress(5, "Loading runtime…");
   pyodide = await loadPyodide({ indexURL: indexURL ?? DEFAULT_CDN_URL });
 
+  postProgress(45, "Preparing harness…");
   for (const [filename, source] of Object.entries(HARNESS_FILES)) {
     pyodide.FS.writeFile(`${HARNESS_DIR}/${filename}`, source);
   }
 
+  postProgress(70, "Importing Python…");
   // Invalidate import caches so Python sees the files we just wrote.
   // See: https://pyodide.org/en/stable/usage/faq.html#why-can-t-i-import-a-file-i-just-wrote-to-the-file-system
   // Configure sys.path via the globals API instead of string interpolation.
@@ -76,6 +85,7 @@ from exec import safe_exec
 `);
   pyodide.globals.delete("__harness_dir__");
 
+  postProgress(100, "Ready");
   const msg: PythonWorkerOutMessage = { type: "READY" };
   self.postMessage(msg);
 }

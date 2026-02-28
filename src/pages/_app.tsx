@@ -16,6 +16,7 @@ import { EmotionCacheProvider } from "#/shared/emotion/EmotionCacheContext";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
+import { isSnackbarClosable } from "#/shared/ui/snackbarClosability";
 import { ReduxProvider } from "#/store/provider";
 
 import "#/styles/globals.css";
@@ -36,9 +37,11 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
             <StateThemeProvider>
               <SnackbarProvider
                 maxSnack={4}
-                action={(snackbarKey) => (
-                  <SnackbarCloseButton snackbarKey={snackbarKey} />
-                )}
+                action={(snackbarKey) =>
+                  isSnackbarClosable(snackbarKey) ? (
+                    <SnackbarCloseButton snackbarKey={snackbarKey} />
+                  ) : null
+                }
               >
                 <I18nProvider i18n={pageProps.i18n}>
                   <ProjectBrowserProvider>
