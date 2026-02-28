@@ -1,3 +1,10 @@
+# [1.354.0](https://github.com/mkayander/dStruct/compare/v1.353.0...v1.354.0) (2026-02-28)
+
+
+### Features
+
+* implement Pyodide progress snackbar and code runner enhancements ([a307f26](https://github.com/mkayander/dStruct/commit/a307f26679cb669dea1f0412d1b656b0fb15aa9a))
+
 # [1.353.0](https://github.com/mkayander/dStruct/compare/v1.352.0...v1.353.0) (2026-02-28)
 
 
