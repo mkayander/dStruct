@@ -8,9 +8,21 @@ import type {
 /**
  * Minimal mock worker that simulates the Pyodide worker protocol
  * without actually loading Pyodide.
+ * Implements Worker-compatible shape for use with workerFactory.
  */
-class MockPythonWorker extends EventTarget {
+class MockPythonWorker
+  extends EventTarget
+  implements
+    Pick<
+      Worker,
+      "postMessage" | "terminate" | "addEventListener" | "removeEventListener"
+    >
+{
   terminated = false;
+
+  onerror: Worker["onerror"] = null;
+  onmessage: Worker["onmessage"] = null;
+  onmessageerror: Worker["onmessageerror"] = null;
 
   postMessage(msg: PythonWorkerInMessage) {
     setTimeout(() => {
@@ -190,7 +202,7 @@ describe("pythonExec.worker protocol", () => {
     const runner = new PythonRunner();
     await runner.init({
       onProgress,
-      workerFactory: () => mockWorker as Worker,
+      workerFactory: () => mockWorker,
     });
 
     expect(onProgress).toHaveBeenCalledTimes(4);
