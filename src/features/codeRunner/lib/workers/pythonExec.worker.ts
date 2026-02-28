@@ -1,10 +1,11 @@
 import { loadPyodide, type PyodideInterface, version } from "pyodide";
 
-import arrayTrackerSrc from "../../../../packages/dstruct-runner/python/array_tracker.py";
-import arrayTrackerTransformerSrc from "../../../../packages/dstruct-runner/python/array_tracker_transformer.py";
-import execPySrc from "../../../../packages/dstruct-runner/python/exec.py";
-import outputSrc from "../../../../packages/dstruct-runner/python/output.py";
-import sharedTypesSrc from "../../../../packages/dstruct-runner/python/shared_types.py";
+import arrayTrackerSrc from "#/packages/dstruct-runner/python/array_tracker.py";
+import arrayTrackerTransformerSrc from "#/packages/dstruct-runner/python/array_tracker_transformer.py";
+import execPySrc from "#/packages/dstruct-runner/python/exec.py";
+import outputSrc from "#/packages/dstruct-runner/python/output.py";
+import sharedTypesSrc from "#/packages/dstruct-runner/python/shared_types.py";
+
 import type {
   PythonWorkerInMessage,
   PythonWorkerOutMessage,
