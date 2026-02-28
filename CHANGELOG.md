@@ -1,3 +1,10 @@
+# [1.352.0](https://github.com/mkayander/dStruct/compare/v1.351.2...v1.352.0) (2026-02-28)
+
+
+### Features
+
+* integrate Pyodide for in-browser Python execution ([460dd97](https://github.com/mkayander/dStruct/commit/460dd97eba3ff51a53d0c0b755ff6a48d6d15042))
+
 ## [1.351.2](https://github.com/mkayander/dStruct/compare/v1.351.1...v1.351.2) (2026-02-25)
 
 
