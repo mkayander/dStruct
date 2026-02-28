@@ -62,6 +62,10 @@ const config = {
         loaders: ["raw-loader"],
         as: "*.js",
       },
+      "*.py": {
+        loaders: ["raw-loader"],
+        as: "*.js",
+      },
     },
   },
   webpack: (config) => {
@@ -72,6 +76,10 @@ const config = {
         rules: config.module.rules.concat([
           {
             test: /\.txt$/,
+            loader: "raw-loader",
+          },
+          {
+            test: /\.py$/,
             loader: "raw-loader",
           },
         ]),

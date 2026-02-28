@@ -143,45 +143,19 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
           <Typography variant="h4" textAlign="center" gutterBottom>
             {isMobile
               ? "Open this page on desktop to run Python code!"
-              : "Install and run dStruct worker to run Python code!"}
+              : "Could not connect to the local Python runner"}
           </Typography>
           <Typography gutterBottom>
-            🚀 One of the key differences of dStruct is that it runs code
-            locally. There is no competitive aspect, so no reason to judge your
-            solutions in a single place. Therefore, you are free to run any code
-            you want with a full power of your machine. It results in the
-            fastest code execution experience possible.
+            You are currently using the legacy server execution mode
+            (NEXT_PUBLIC_PYTHON_EXEC_MODE=server). This requires a local dStruct
+            runner process on port 8085.
           </Typography>
           <Typography gutterBottom>
-            🐍 We run JavaScript code in a Web Worker, but for Python code you
-            need to install and run the dStruct standalone worker. Make sure you
-            have NodeJS and Python3 installed on your machine as well.
+            Tip: switch to the default in-browser Pyodide mode by removing
+            NEXT_PUBLIC_PYTHON_EXEC_MODE from your environment. Python code will
+            then execute directly in the browser via a Web Worker with no server
+            required.
           </Typography>
-          <Typography gutterBottom fontWeight={600}>
-            🚧 Currently this standalone worker is under development and not
-            published to NPM yet. You can contribute to the development of the
-            worker by visiting the GitHub repository.
-          </Typography>
-
-          {/* <Typography gutterBottom>
-            It is easy to install and run the dStruct worker. Just follow the
-            instructions below:
-          </Typography>
-          <Typography>
-            <ol>
-              <li>
-                Download and install the dStruct worker from the releases page.
-              </li>
-              <li>
-                Open a terminal and navigate to the folder where you installed
-                the dStruct worker.
-              </li>
-              <li>
-                Run the command `dstruct-worker` to start the dStruct worker.
-              </li>
-              <li>You can now run Python code on dStruct.</li>
-            </ol>
-          </Typography> */}
         </Box>
       </DialogContent>
       <DialogActions>

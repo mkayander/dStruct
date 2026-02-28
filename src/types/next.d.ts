@@ -14,6 +14,11 @@ declare module "*.txt" {
   export default content;
 }
 
+declare module "*.py" {
+  const content: string;
+  export default content;
+}
+
 /**
  * If set to false, reads from the controlled structure will not be recorded.
  * This is useful when you want to read from the data structure without
