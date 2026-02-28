@@ -1,3 +1,10 @@
+# [1.353.0](https://github.com/mkayander/dStruct/compare/v1.352.0...v1.353.0) (2026-02-28)
+
+
+### Features
+
+* enhance Python execution worker with dynamic CDN URL ([17dcfb6](https://github.com/mkayander/dStruct/commit/17dcfb6f8c99aafcda7d2c96a465218cd7dd13e3))
+
 # [1.352.0](https://github.com/mkayander/dStruct/compare/v1.351.2...v1.352.0) (2026-02-28)
 
 
