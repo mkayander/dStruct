@@ -1,3 +1,10 @@
+# [1.355.0](https://github.com/mkayander/dStruct/compare/v1.354.0...v1.355.0) (2026-03-01)
+
+
+### Features
+
+* enhance Python code execution with serialized arguments support ([83f85a3](https://github.com/mkayander/dStruct/commit/83f85a3f168662fe4b0d8f1416077191203704f6))
+
 # [1.354.0](https://github.com/mkayander/dStruct/compare/v1.353.0...v1.354.0) (2026-02-28)
 
 
