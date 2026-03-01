@@ -83,6 +83,6 @@ describe("DashboardPage", () => {
     const ctaButton = screen.getByTestId("cta-to-playground");
 
     expect(ctaButton).toBeInTheDocument();
-    expect(ctaButton).toHaveAttribute("href", "/playground");
+    expect(ctaButton).toHaveAttribute("href", "/playground/invert-binary-tree");
   });
 });
