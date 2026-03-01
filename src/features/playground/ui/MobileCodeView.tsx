@@ -50,17 +50,7 @@ export const MobileCodeView: React.FC<MobileCodeViewProps> = ({
         </Box>
       </CollapsiblePanel>
 
-      <Box
-        sx={{
-          flex: 1,
-          minHeight: 0,
-          overflow: "hidden",
-          "& > *:first-of-type": {
-            background: "transparent",
-            borderRadius: 0,
-          },
-        }}
-      >
+      <Box sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
         <CodePanel onRunComplete={onRunComplete} />
       </Box>
     </Box>
