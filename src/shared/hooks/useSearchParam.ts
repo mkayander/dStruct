@@ -6,6 +6,23 @@ export type SearchParamOptions<T extends string = string> = {
   validate: (value: unknown) => value is T;
 };
 
+export type SearchParamUpdateOptions = {
+  replace?: boolean;
+  pathName?: string;
+};
+
+/**
+ * Get param value from router.query for SSR-safe initial state.
+ * Avoids window.location which causes hydration mismatch (undefined on server).
+ */
+const getParamFromRouter = (
+  param: string,
+  query: Record<string, string | string[] | undefined>,
+) => {
+  const paramValue = query[param];
+  return Array.isArray(paramValue) ? paramValue[0] : paramValue;
+};
+
 /**
  * React hook to read and update a single search param.
  *
@@ -22,7 +39,14 @@ export const useSearchParam = <T extends string = string>(
 ) => {
   const { defaultValue, validate } = options;
   const router = useRouter();
-  const [state, setState] = useState<T | "">(defaultValue);
+  const [state, setState] = useState<T | "">(() => {
+    const initialValue = getParamFromRouter(param, router.query);
+    if (validate(initialValue)) {
+      return initialValue;
+    }
+
+    return defaultValue;
+  });
 
   useEffect(() => {
     const { query } = router;
@@ -41,7 +65,7 @@ export const useSearchParam = <T extends string = string>(
   }, [router, param]);
 
   const updateParam = useCallback(
-    (value: unknown) => {
+    (value: T | "", options: SearchParamUpdateOptions = {}) => {
       if (value !== "" && !validate(value)) return;
 
       setState(value);
@@ -52,9 +76,13 @@ export const useSearchParam = <T extends string = string>(
       } else {
         newQuery[param] = value;
       }
-      void router.push({ pathname, query: newQuery }, undefined, {
-        shallow: true,
-      });
+      void router[options.replace ? "replace" : "push"](
+        { pathname: options.pathName ?? pathname, query: newQuery },
+        undefined,
+        {
+          shallow: true,
+        },
+      );
     },
     [validate, router, param],
   );

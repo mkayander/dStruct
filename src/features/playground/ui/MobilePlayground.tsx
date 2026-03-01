@@ -20,6 +20,8 @@ const visibleSx = {
 export const MobilePlayground: React.FC = () => {
   const { currentView, goToResults } = useMobilePlaygroundView();
 
+  console.log("!!! MobilePlayground", currentView);
+
   return (
     <Box
       component="main"

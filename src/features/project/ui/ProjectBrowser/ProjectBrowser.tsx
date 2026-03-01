@@ -9,24 +9,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
-import { api } from "#/shared/lib";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-import {
-  projectBrowserSlice,
-  selectAccumulatedProjects,
-  selectCurrentPage,
-  selectLastQueryKey,
-  selectPageSize,
-} from "../../model/projectBrowserSlice";
-import { ProjectBrowserCategoryBar } from "./ProjectBrowserCategoryBar";
+import { ProjectBrowserContent } from "./ProjectBrowserContent";
 import { useProjectBrowserContext } from "./ProjectBrowserContext";
-import { ProjectBrowserHeader } from "./ProjectBrowserHeader";
-import { ProjectBrowserList } from "./ProjectBrowserList";
 
 type ProjectBrowserProps = {
   onSelectProject?: (projectSlug: string) => void;
@@ -36,172 +24,23 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   onSelectProject,
 }) => {
   const { LL } = useI18nContext();
-  const dispatch = useAppDispatch();
   const theme = useTheme();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  // Get all filter state from context (URL-based, no Redux sync needed)
-  const {
-    isOpen,
-    closeBrowser,
-    searchQuery,
-    selectedCategories,
-    selectedDifficulties,
-    showOnlyNew,
-    sortBy,
-    sortOrder,
-    setSearchQuery,
-  } = useProjectBrowserContext();
+  const { isOpen, closeBrowser } = useProjectBrowserContext();
+  const { setProject } = usePlaygroundSlugs();
 
-  // Redux state - only for derived/computed state (pagination, accumulated projects)
-  const currentPage = useAppSelector(selectCurrentPage);
-  const pageSize = useAppSelector(selectPageSize);
-  const accumulatedProjects = useAppSelector(selectAccumulatedProjects);
-  const lastQueryKey = useAppSelector(selectLastQueryKey);
-  const { projectSlug = "", setProject } = usePlaygroundSlugs();
-
-  // Get all projects for category counts (category bar needs all projects)
-  const allBrief = api.project.allBrief.useQuery();
-
-  // Get paginated, filtered, and sorted projects
-  const browseProjects = api.project.browseProjects.useQuery({
-    page: currentPage,
-    pageSize,
-    search: searchQuery.trim() || undefined,
-    categories: selectedCategories.length > 0 ? selectedCategories : undefined,
-    difficulties:
-      selectedDifficulties.length > 0 ? selectedDifficulties : undefined,
-    showOnlyNew: showOnlyNew || undefined,
-    showOnlyMine: false, // Placeholder for future
-    sortBy: sortBy === "date" ? "createdAt" : sortBy,
-    sortOrder,
-  });
-
-  // Get errors directly from TRPC queries
-  const error = browseProjects.error || allBrief.error;
-
-  // Create a query key based on filters/sort (excluding page for accumulation)
-  const queryKey = useMemo(
-    () =>
-      JSON.stringify({
-        pageSize,
-        search: searchQuery.trim() || undefined,
-        categories:
-          selectedCategories.length > 0 ? selectedCategories : undefined,
-        difficulties:
-          selectedDifficulties.length > 0 ? selectedDifficulties : undefined,
-        showOnlyNew: showOnlyNew || undefined,
-        showOnlyMine: false,
-        sortBy: sortBy === "date" ? "createdAt" : sortBy,
-        sortOrder,
-      }),
-    [
-      pageSize,
-      searchQuery,
-      selectedCategories,
-      selectedDifficulties,
-      showOnlyNew,
-      sortBy,
-      sortOrder,
-    ],
+  const handleSelectProject = useCallback(
+    (slug: string) => {
+      void setProject(slug);
+      closeBrowser();
+      onSelectProject?.(slug);
+    },
+    [closeBrowser, onSelectProject, setProject],
   );
-
-  // Reset accumulated projects when filters/sort change
-  useEffect(() => {
-    if (queryKey !== lastQueryKey) {
-      dispatch(projectBrowserSlice.actions.clearAccumulatedProjects());
-      dispatch(projectBrowserSlice.actions.setLastQueryKey(queryKey));
-      // Reset to page 1 when filters change
-      if (currentPage !== 1) {
-        dispatch(projectBrowserSlice.actions.setCurrentPage(1));
-      }
-    }
-  }, [queryKey, lastQueryKey, currentPage, dispatch]);
-
-  // Accumulate projects when new page loads
-  useEffect(() => {
-    if (!browseProjects.data?.projects) {
-      return;
-    }
-
-    // If this is page 1, replace all projects
-    if (currentPage === 1) {
-      dispatch(
-        projectBrowserSlice.actions.setAccumulatedProjects(
-          browseProjects.data.projects,
-        ),
-      );
-      return;
-    }
-
-    // Otherwise, append new projects
-    dispatch(
-      projectBrowserSlice.actions.appendProjects(browseProjects.data.projects),
-    );
-  }, [browseProjects.data?.projects, currentPage, dispatch]);
-
-  useEffect(() => {
-    dispatch(
-      projectBrowserSlice.actions.setIsLoading(
-        allBrief.isLoading || browseProjects.isLoading,
-      ),
-    );
-  }, [allBrief.isLoading, browseProjects.isLoading, dispatch]);
-
-  useEffect(() => {
-    if (browseProjects.data?.hasMore !== undefined) {
-      dispatch(
-        projectBrowserSlice.actions.setHasMore(browseProjects.data.hasMore),
-      );
-    }
-  }, [browseProjects.data?.hasMore, dispatch]);
-
-  const handleSearchChange = (value: string) => {
-    setSearchQuery(value);
-  };
-
-  const handleSelectProject = (slug: string) => {
-    void setProject(slug);
-    closeBrowser();
-    onSelectProject?.(slug);
-  };
 
   const handleClose = useCallback(() => {
     closeBrowser();
   }, [closeBrowser]);
-
-  const handleRetry = useCallback(() => {
-    // Refetch queries to retry
-    void allBrief.refetch();
-    void browseProjects.refetch();
-  }, [allBrief, browseProjects]);
-
-  // Show error snackbar when error occurs
-  useEffect(() => {
-    if (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Failed to load projects";
-      enqueueSnackbar(errorMessage, {
-        variant: "error",
-        action: (key) => (
-          <IconButton
-            size="small"
-            onClick={() => {
-              handleRetry();
-              closeSnackbar(key);
-            }}
-            color="inherit"
-            aria-label={LL.RETRY()}
-          >
-            {LL.RETRY()}
-          </IconButton>
-        ),
-        persist: false,
-        autoHideDuration: 6000,
-        key: "project-browser-error", // Prevent duplicate snackbars
-      });
-    }
-  }, [error, enqueueSnackbar, closeSnackbar, handleRetry, LL]);
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -282,20 +121,10 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
         </Box>
         <Divider />
 
-        <ProjectBrowserCategoryBar projects={allBrief.data} />
-        <ProjectBrowserHeader
-          searchValue={searchQuery}
-          onSearchChange={handleSearchChange}
+        <ProjectBrowserContent
+          onSelectProject={handleSelectProject}
           searchInputRef={searchInputRef}
         />
-        <Box sx={{ flex: 1, overflow: "hidden" }}>
-          <ProjectBrowserList
-            projects={accumulatedProjects}
-            isLoading={browseProjects.isLoading}
-            selectedProjectSlug={projectSlug}
-            onSelectProject={handleSelectProject}
-          />
-        </Box>
       </Stack>
     </Drawer>
   );

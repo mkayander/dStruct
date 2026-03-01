@@ -8,11 +8,12 @@ import React, {
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
+import { usePlaygroundViewParam } from "#/features/playground/hooks/usePlaygroundViewParam";
 import type {
   ProjectCategory,
   ProjectDifficulty,
 } from "#/server/db/generated/enums";
-import { useSearchParam } from "#/shared/hooks";
+import { useMobileLayout, useSearchParam } from "#/shared/hooks";
 
 /**
  * Helper functions for parsing/serializing URL query parameters.
@@ -304,9 +305,9 @@ type ProjectBrowserProviderProps = {
 export const ProjectBrowserProvider: React.FC<ProjectBrowserProviderProps> = ({
   children,
 }) => {
-  // Browser open/close
-  const [browserParam, setBrowserParam] = useSearchParam("browser");
-  const isOpen = parseBoolean(browserParam);
+  const isMobile = useMobileLayout();
+  const { view, setView } = usePlaygroundViewParam();
+  const isOpen = !isMobile && view === "browse";
 
   // Filters
   const [searchParam, setSearchParam] = useSearchParam("search");
@@ -315,6 +316,13 @@ export const ProjectBrowserProvider: React.FC<ProjectBrowserProviderProps> = ({
     useSearchParam("difficulties");
   const [newParam, setNewParam] = useSearchParam("new");
   const [sortParam, setSortParam] = useSearchParam("sort");
+
+  const setOpened = useCallback(
+    (newState: boolean) => {
+      setView(newState ? "browse" : "");
+    },
+    [setView],
+  );
 
   // Parse URL params to typed values
   const selectedCategories = useMemo(
@@ -333,12 +341,12 @@ export const ProjectBrowserProvider: React.FC<ProjectBrowserProviderProps> = ({
 
   // Memoize setter functions to prevent unnecessary re-renders
   const openBrowser = useCallback(() => {
-    setBrowserParam("true");
-  }, [setBrowserParam]);
+    setOpened(true);
+  }, [setOpened]);
 
   const closeBrowser = useCallback(() => {
-    setBrowserParam("");
-  }, [setBrowserParam]);
+    setOpened(false);
+  }, [setOpened]);
 
   const setSearchQuery = useCallback(
     (query: string) => {

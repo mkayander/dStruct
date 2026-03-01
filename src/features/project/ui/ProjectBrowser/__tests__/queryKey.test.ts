@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { getBrowseProjectsQueryKey } from "#/features/project/lib/browseProjectsQuery";
 import {
   ProjectCategory,
   ProjectDifficulty,
@@ -10,32 +11,7 @@ import {
  * This tests the business logic for creating stable query keys based on filters
  */
 describe("ProjectBrowser - QueryKey Generation Logic", () => {
-  const generateQueryKey = (params: {
-    pageSize: number;
-    searchQuery: string;
-    selectedCategories: ProjectCategory[];
-    selectedDifficulties: ProjectDifficulty[];
-    showOnlyNew: boolean;
-    sortBy: "title" | "difficulty" | "date" | "category";
-    sortOrder: "asc" | "desc";
-  }) => {
-    return JSON.stringify({
-      pageSize: params.pageSize,
-      search: params.searchQuery.trim() || undefined,
-      categories:
-        params.selectedCategories.length > 0
-          ? params.selectedCategories
-          : undefined,
-      difficulties:
-        params.selectedDifficulties.length > 0
-          ? params.selectedDifficulties
-          : undefined,
-      showOnlyNew: params.showOnlyNew || undefined,
-      showOnlyMine: false,
-      sortBy: params.sortBy === "date" ? "createdAt" : params.sortBy,
-      sortOrder: params.sortOrder,
-    });
-  };
+  const generateQueryKey = getBrowseProjectsQueryKey;
 
   describe("queryKey generation", () => {
     it("should generate same key for identical filters", () => {

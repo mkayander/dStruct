@@ -3,12 +3,19 @@
 import { useRouter } from "next/router";
 import { useCallback, useMemo } from "react";
 
-const PLAYGROUND_VIEWS = ["browse", "code", "results"] as const;
-export type PlaygroundView = (typeof PLAYGROUND_VIEWS)[number];
+import { useHasMounted } from "#/shared/hooks/useHasMounted";
+import {
+  getLastPlaygroundPath,
+  isValidLastPlaygroundPath,
+} from "#/shared/local-storage/playgroundPath";
 
-const isPlaygroundView = (value: unknown): value is PlaygroundView =>
-  typeof value === "string" &&
-  PLAYGROUND_VIEWS.includes(value as PlaygroundView);
+import {
+  isPlaygroundView,
+  type PlaygroundView,
+  usePlaygroundViewParam,
+} from "./usePlaygroundViewParam";
+
+export type { PlaygroundView } from "./usePlaygroundViewParam";
 
 /** Pairs of views that should use replace (not push) to avoid history stack growth. */
 const REPLACE_TRANSITION_PAIRS: ReadonlyArray<
@@ -24,23 +31,15 @@ const isReplaceTransition = (
   );
 
 /**
- * Reads the `view` query param directly from the browser URL.
- * Used as an immediate fallback before Next.js router hydrates `router.query`.
- */
-const getViewFromLocation = (): PlaygroundView | null => {
-  if (typeof window === "undefined") return null;
-  const params = new URLSearchParams(window.location.search);
-  const view = params.get("view");
-  return isPlaygroundView(view) ? view : null;
-};
-
-/**
  * Manages the mobile playground phase via the `?view=` query parameter.
  * Uses `router.push` for transitions so browser back/forward work naturally.
  * Defaults to "browse" when no project is selected, "code" otherwise.
  */
 export const useMobilePlaygroundView = () => {
   const router = useRouter();
+  const hasMounted = useHasMounted();
+
+  const { view, setView } = usePlaygroundViewParam();
 
   const hasProjectSlug = useMemo(() => {
     const slugs = router.query.slug;
@@ -48,53 +47,41 @@ export const useMobilePlaygroundView = () => {
   }, [router.query.slug]);
 
   const currentView: PlaygroundView = useMemo(() => {
-    const param = router.query.view;
-    if (typeof param === "string" && isPlaygroundView(param)) {
-      return param;
+    if (view && isPlaygroundView(view)) {
+      return view;
     }
 
-    if (!router.isReady) {
-      const locationView = getViewFromLocation();
-      if (locationView) return locationView;
+    if (hasProjectSlug) {
+      return "code";
     }
 
-    if (hasProjectSlug) return "code";
+    // Avoid localStorage on server to prevent hydration mismatch
+    if (!hasMounted) {
+      return "browse";
+    }
 
-    const lastPath =
-      typeof window !== "undefined"
-        ? localStorage.getItem("lastPlaygroundPath")
-        : null;
-    const hasLastProject =
-      lastPath?.startsWith("/playground/") && Boolean(lastPath.split("/")[2]);
-
-    return hasLastProject ? "code" : "browse";
-  }, [router.query.view, router.isReady, hasProjectSlug]);
+    return isValidLastPlaygroundPath(getLastPlaygroundPath())
+      ? "code"
+      : "browse";
+  }, [view, hasProjectSlug, hasMounted]);
 
   const navigateTo = useCallback(
-    (view: PlaygroundView) => {
-      const { pathname, query } = router;
-      const newQuery = { ...query };
-
-      if (view === "code") {
-        delete newQuery.view;
-      } else {
-        newQuery.view = view;
-      }
-
-      const route = { pathname, query: newQuery };
-      const opts = { shallow: true };
-
-      if (isReplaceTransition(currentView, view)) {
-        void router.replace(route, undefined, opts);
-      } else {
-        void router.push(route, undefined, opts);
-      }
+    (view: PlaygroundView, pathName?: string) => {
+      const replace = isReplaceTransition(currentView, view);
+      setView(view, { replace, pathName });
     },
-    [router, currentView],
+    [setView, currentView],
   );
 
   const goToBrowse = useCallback(() => navigateTo("browse"), [navigateTo]);
-  const goToCode = useCallback(() => navigateTo("code"), [navigateTo]);
+  const goToCode = useCallback(
+    (projectSlug?: string) => {
+      const pathName = projectSlug ? `/playground/${projectSlug}` : undefined;
+
+      navigateTo("code", pathName);
+    },
+    [navigateTo],
+  );
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
 
   return {

@@ -4,9 +4,14 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 
 import { projectSlice } from "#/features/project/model/projectSlice";
+import {
+  getLastPlaygroundPath,
+  getRestorablePlaygroundPath,
+  PLAYGROUND_BASE_PATH,
+  removeLastPlaygroundPath,
+  setLastPlaygroundPath,
+} from "#/shared/local-storage/playgroundPath";
 import { useAppDispatch } from "#/store/hooks";
-
-const BASE_PATH = "/playground";
 
 export const usePlaygroundSlugs = () => {
   const dispatch = useAppDispatch();
@@ -14,12 +19,12 @@ export const usePlaygroundSlugs = () => {
 
   useEffect(() => {
     const currentPath = router.asPath;
-    if (!currentPath.startsWith(BASE_PATH)) return;
+    if (!currentPath.startsWith(PLAYGROUND_BASE_PATH)) return;
 
     const projectSlug = currentPath.split("/")[2];
     if (!projectSlug) return;
 
-    localStorage.setItem("lastPlaygroundPath", currentPath);
+    setLastPlaygroundPath(currentPath);
   }, [router.asPath]);
 
   return useMemo(() => {
@@ -31,24 +36,21 @@ export const usePlaygroundSlugs = () => {
 
     const setProject = (slug?: string, isInitial?: boolean) => {
       dispatch(projectSlice.actions.loadStart());
-      if (!slug) return router.replace(BASE_PATH);
+      if (!slug) return router.replace(PLAYGROUND_BASE_PATH);
 
-      const lastPath = localStorage.getItem("lastPlaygroundPath");
-      if (lastPath && !lastPath.startsWith(BASE_PATH)) {
-        localStorage.removeItem("lastPlaygroundPath");
+      const lastPath = getLastPlaygroundPath();
+      if (lastPath && !lastPath.startsWith(PLAYGROUND_BASE_PATH)) {
+        removeLastPlaygroundPath();
       }
-      const pathToRestore =
-        isInitial &&
-        lastPath?.startsWith(BASE_PATH) &&
-        !lastPath.split("/")[2]?.startsWith("[[")
-          ? lastPath
-          : null;
+      const pathToRestore = isInitial
+        ? getRestorablePlaygroundPath(lastPath)
+        : null;
 
       if (pathToRestore) {
         return router.replace(pathToRestore);
       }
 
-      return router.replace(`${BASE_PATH}/${slug}`);
+      return router.replace(`${PLAYGROUND_BASE_PATH}/${slug}`);
     };
 
     const setCase = (slug: string) => {
@@ -59,7 +61,7 @@ export const usePlaygroundSlugs = () => {
       if (slug === caseSlug) return;
 
       return router[caseSlug ? "push" : "replace"](
-        `${BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
+        `${PLAYGROUND_BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
       );
     };
 
@@ -70,13 +72,13 @@ export const usePlaygroundSlugs = () => {
       if (slug === solutionSlug) return;
 
       return router[solutionSlug ? "push" : "replace"](
-        `${BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
+        `${PLAYGROUND_BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
       );
     };
 
     const clearSlugs = () => {
-      localStorage.removeItem("lastPlaygroundPath");
-      return router.push(BASE_PATH);
+      removeLastPlaygroundPath();
+      return router.push(PLAYGROUND_BASE_PATH);
     };
 
     return {

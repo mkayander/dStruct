@@ -28,6 +28,7 @@ import {
 } from "#/features/playground/hooks/useMobilePlaygroundView";
 import { MOBILE_APPBAR_HEIGHT } from "#/features/playground/ui/MobilePlayground";
 import { useI18nContext } from "#/shared/hooks";
+import { useHasMounted } from "#/shared/hooks/useHasMounted";
 import { getImageUrl } from "#/shared/lib";
 import { useAppSelector } from "#/store/hooks";
 
@@ -48,6 +49,7 @@ export const MobilePlaygroundToolbar: React.FC<
   MobilePlaygroundToolbarProps
 > = ({ toolbarVariant, onOpenUserMenu }) => {
   const { LL } = useI18nContext();
+  const hasMounted = useHasMounted();
   const session = useSession();
   const router = useRouter();
   const { currentView, hasProjectSlug, goToBrowse, goToCode, goToResults } =
@@ -123,7 +125,7 @@ export const MobilePlaygroundToolbar: React.FC<
           </Tooltip>
         )}
 
-        {session.status === "loading" ? (
+        {!hasMounted || session.status === "loading" ? (
           <Skeleton
             variant="circular"
             animation="wave"
