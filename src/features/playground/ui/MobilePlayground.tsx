@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useMobilePlaygroundView } from "../hooks/useMobilePlaygroundView";
 import { MobileBrowseView } from "./MobileBrowseView";
@@ -20,19 +20,6 @@ const visibleSx = {
 export const MobilePlayground: React.FC = () => {
   const { currentView, goToResults } = useMobilePlaygroundView();
 
-  const [mounted, setMounted] = useState({
-    browse: currentView === "browse",
-    code: currentView === "code",
-    results: currentView === "results",
-  });
-
-  useEffect(() => {
-    setMounted((prev) => {
-      if (prev[currentView]) return prev;
-      return { ...prev, [currentView]: true };
-    });
-  }, [currentView]);
-
   return (
     <Box
       component="main"
@@ -41,21 +28,15 @@ export const MobilePlayground: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      {mounted.browse && (
-        <Box sx={currentView === "browse" ? visibleSx : hiddenSx}>
-          <MobileBrowseView />
-        </Box>
-      )}
-      {mounted.code && (
-        <Box sx={currentView === "code" ? visibleSx : hiddenSx}>
-          <MobileCodeView onRunComplete={goToResults} />
-        </Box>
-      )}
-      {mounted.results && (
-        <Box sx={currentView === "results" ? visibleSx : hiddenSx}>
-          <MobileResultsView />
-        </Box>
-      )}
+      <Box sx={currentView === "browse" ? visibleSx : hiddenSx}>
+        <MobileBrowseView />
+      </Box>
+      <Box sx={currentView === "code" ? visibleSx : hiddenSx}>
+        <MobileCodeView onRunComplete={goToResults} />
+      </Box>
+      <Box sx={currentView === "results" ? visibleSx : hiddenSx}>
+        <MobileResultsView />
+      </Box>
     </Box>
   );
 };
