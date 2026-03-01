@@ -39,6 +39,14 @@ type RootTranslation = {
 	 */
 	BROWSE: string
 	/**
+	 * B​r​o​w​s​e​ ​P​r​o​j​e​c​t​s
+	 */
+	BROWSE_PROJECTS: string
+	/**
+	 * B​a​c​k
+	 */
+	BACK: string
+	/**
 	 * C​a​l​l​s​t​a​c​k
 	 */
 	CALLSTACK: string
@@ -46,6 +54,10 @@ type RootTranslation = {
 	 * C​a​n​c​e​l
 	 */
 	CANCEL: string
+	/**
+	 * C​o​d​e
+	 */
+	CODE: string
 	/**
 	 * C​h​o​o​s​e​ ​l​o​c​a​l​e​.​.​.
 	 */
@@ -329,6 +341,10 @@ type RootTranslation = {
 	 */
 	RESET: string
 	/**
+	 * R​e​s​u​l​t​s
+	 */
+	RESULTS: string
+	/**
 	 * R​e​s​e​t​ ​d​a​t​a​ ​s​t​r​u​c​t​u​r​e​s​ ​t​o​ ​i​n​i​t​i​a​l​ ​s​t​a​t​e​s
 	 */
 	RESET_DATA_STRUCTURES: string
@@ -506,6 +522,14 @@ export type TranslationFunctions = {
 	 */
 	BROWSE: () => LocalizedString
 	/**
+	 * Browse Projects
+	 */
+	BROWSE_PROJECTS: () => LocalizedString
+	/**
+	 * Back
+	 */
+	BACK: () => LocalizedString
+	/**
 	 * Callstack
 	 */
 	CALLSTACK: () => LocalizedString
@@ -513,6 +537,10 @@ export type TranslationFunctions = {
 	 * Cancel
 	 */
 	CANCEL: () => LocalizedString
+	/**
+	 * Code
+	 */
+	CODE: () => LocalizedString
 	/**
 	 * Choose locale...
 	 */
@@ -793,6 +821,10 @@ export type TranslationFunctions = {
 	 * Reset
 	 */
 	RESET: () => LocalizedString
+	/**
+	 * Results
+	 */
+	RESULTS: () => LocalizedString
 	/**
 	 * Reset data structures to initial states
 	 */

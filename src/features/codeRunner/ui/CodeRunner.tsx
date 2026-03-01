@@ -35,7 +35,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   const isMobile = useMobileLayout();
 
   return (
-    <Box position="relative">
+    <Box position="relative" height={height === "100%" ? "100%" : undefined}>
       <MonacoEditor
         theme={mode === "dark" ? "app-dark" : "vs-light"}
         options={{
@@ -50,7 +50,7 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
           wordWrap: "on",
         }}
         {...restProps}
-        height={`calc(${height}px - 6vh)`}
+        height={typeof height === "number" ? `calc(${height}px - 6vh)` : height}
         onMount={(editor, monaco) => {
           const model = editor.getModel();
 

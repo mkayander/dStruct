@@ -45,6 +45,7 @@ import {
   usePlaygroundSlugs,
   useSearchParam,
 } from "#/shared/hooks";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
 import {
@@ -57,7 +58,14 @@ import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
+type CodePanelProps = PanelContentProps & {
+  onRunComplete?: () => void;
+};
+
+export const CodePanel: React.FC<CodePanelProps> = ({
+  verticalSize,
+  onRunComplete,
+}) => {
   const dispatch = useAppDispatch();
   const session = useSession();
   const trpcUtils = api.useUtils();
@@ -197,8 +205,10 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
+      onRunComplete?.();
     } else {
-      void runCode();
+      await runCode();
+      onRunComplete?.();
     }
   };
 
@@ -289,14 +299,18 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
     });
   };
 
+  const isMobile = useMobileLayout();
+
   const isLoading =
     selectedProject.isLoading ||
     currentSolution.isLoading ||
     updateSolution.isPending;
 
-  let editorHeight = 500;
+  let editorHeight: number | string = 500;
   if (verticalSize) {
     editorHeight = verticalSize * 9 * (window.innerHeight / 1010);
+  } else if (isMobile) {
+    editorHeight = "100%";
   }
 
   return (
@@ -371,7 +385,11 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
           useScroll={false}
           scrollContainerStyle={{ zIndex: 1000, overflowY: "hidden" }}
           scrollViewportStyle={{ zIndex: 100, overflowY: "hidden" }}
-          sx={{ p: 0, overflowY: "hidden" }}
+          sx={{
+            p: 0,
+            overflowY: "hidden",
+            ...(isMobile && { flex: 1, minHeight: 0, height: "auto" }),
+          }}
         >
           <Box
             mx={2}
@@ -387,6 +405,7 @@ export const CodePanel: React.FC<PanelContentProps> = ({ verticalSize }) => {
           <Box
             sx={{
               position: "relative",
+              ...(isMobile && { flex: 1, minHeight: 0 }),
             }}
           >
             <CodeRunner

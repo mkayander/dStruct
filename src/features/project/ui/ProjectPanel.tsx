@@ -3,118 +3,33 @@ import Edit from "@mui/icons-material/Edit";
 import FolderOpen from "@mui/icons-material/FolderOpen";
 import { TabContext, TabList } from "@mui/lab";
 import { IconButton, Stack, Tab, Tooltip } from "@mui/material";
-import { TRPCClientError } from "@trpc/client";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { ArgsEditor } from "#/features/argsEditor/ui/ArgsEditor";
-import {
-  projectSlice,
-  selectIsEditable,
-} from "#/features/project/model/projectSlice";
+import { useProjectPanelData } from "#/features/project/hooks/useProjectPanelData";
 import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { TestCaseSelectBar } from "#/features/project/ui/TestCaseSelectBar";
-import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { api } from "#/shared/lib";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectModal } from "./ProjectModal";
 
 export const ProjectPanel: React.FC = () => {
-  const session = useSession();
-  const dispatch = useAppDispatch();
-
   const { LL } = useI18nContext();
 
-  const router = useRouter();
-  const {
-    projectSlug = "",
-    caseSlug = "",
-    setProject,
-    clearSlugs,
-  } = usePlaygroundSlugs();
+  const { session, isEditable, selectedProject, selectedCase } =
+    useProjectPanelData();
+
+  const { openBrowser } = useProjectBrowserContext();
 
   const [tabValue, setTabValue] = useState("1");
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isModalEditMode, setIsModalEditMode] = useState(false);
-
-  const allBrief = api.project.allBrief.useQuery();
-
-  const isEditable = useAppSelector(selectIsEditable);
-  const { openBrowser } = useProjectBrowserContext();
-
-  const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
-    enabled: Boolean(projectSlug),
-    retry(failureCount, error) {
-      if (error instanceof TRPCClientError && error.data.code === "NOT_FOUND") {
-        return false;
-      }
-
-      return failureCount < 4;
-    },
-  });
-
-  useEffect(() => {
-    if (selectedProject.data) {
-      dispatch(projectSlice.actions.changeProjectId(selectedProject.data.id));
-    }
-  }, [selectedProject.data, dispatch]);
-
-  useEffect(() => {
-    if (selectedProject.error) {
-      dispatch(projectSlice.actions.loadFinish());
-    }
-  }, [selectedProject.error, dispatch]);
-
-  const selectedCase = api.project.getCaseBySlug.useQuery(
-    { projectId: selectedProject.data?.id || "", slug: caseSlug },
-    { enabled: Boolean(selectedProject.data?.id && caseSlug) },
-  );
-
-  useEffect(() => {
-    if (selectedProject.error) {
-      console.log("selectedProject.error: ", selectedProject.error);
-      clearSlugs();
-      return;
-    }
-    if (!selectedProject.data || !session.data) {
-      if (isEditable) {
-        dispatch(projectSlice.actions.changeIsEditable(false));
-      }
-      return;
-    }
-
-    const user = session.data.user;
-
-    const newState = user.isAdmin || selectedProject.data.userId === user.id;
-    if (isEditable !== newState) {
-      dispatch(projectSlice.actions.changeIsEditable(newState));
-    }
-  }, [
-    clearSlugs,
-    dispatch,
-    isEditable,
-    selectedProject.data,
-    selectedProject.error,
-    session.data,
-  ]);
-
-  useEffect(() => {
-    if (allBrief.data?.length && router.isReady && !projectSlug) {
-      const firstProject = allBrief.data[0];
-      if (firstProject) {
-        setProject(firstProject.slug, true);
-      }
-    }
-  }, [allBrief.data, dispatch, router.isReady, projectSlug, setProject]);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);

@@ -1,7 +1,5 @@
-import { Box, Container, Skeleton, Stack } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import React from "react";
-
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
 function PanelSkeleton({ flex }: { flex: string }) {
   return (
@@ -9,16 +7,6 @@ function PanelSkeleton({ flex }: { flex: string }) {
       variant="rectangular"
       animation="wave"
       sx={{ flex, borderRadius: 2, cursor: "wait" }}
-    />
-  );
-}
-
-function ListPanelSkeleton() {
-  return (
-    <Skeleton
-      variant="rectangular"
-      animation="wave"
-      sx={{ width: "100%", height: 200, borderRadius: 1, cursor: "wait" }}
     />
   );
 }
@@ -48,24 +36,10 @@ function SkeletonColumn({
 }
 
 /**
- * Desktop: two-column split (project+code | structure+output).
- * Mobile: simple list of four panels, matching Wrapper mobile layout.
+ * Desktop-only skeleton shown while the split layout hydrates.
+ * Mobile uses `MobilePlayground` directly and does not need this skeleton.
  */
 export const SplitPanelsLayoutSkeleton: React.FC = () => {
-  const isMobile = useMobileLayout();
-
-  if (isMobile)
-    return (
-      <Container component="main" sx={{ pb: 4 }}>
-        <Stack spacing={1} mt={1} pb={4}>
-          <ListPanelSkeleton />
-          <ListPanelSkeleton />
-          <ListPanelSkeleton />
-          <ListPanelSkeleton />
-        </Stack>
-      </Container>
-    );
-
   return (
     <Box
       component="main"

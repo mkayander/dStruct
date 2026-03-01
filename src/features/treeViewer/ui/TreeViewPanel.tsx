@@ -22,7 +22,6 @@ import {
 import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
 import { useI18nContext, useSearchParam } from "#/shared/hooks";
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { PannableViewer } from "#/shared/ui/templates/PannableViewer";
@@ -145,7 +144,6 @@ export const TreeViewPanel: React.FC = () => {
 
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
-  const isMobile = useMobileLayout();
   const isPanning = useAppSelector(selectIsPanning);
   const isViewCentered = useAppSelector(selectIsViewCentered);
 
@@ -217,7 +215,7 @@ export const TreeViewPanel: React.FC = () => {
           value="structure"
           sx={{
             position: "relative",
-            height: isMobile ? "70vh" : "100%",
+            height: "100%",
             p: 0,
             flexGrow: 1,
             cursor: isPanning ? "grabbing" : "grab",

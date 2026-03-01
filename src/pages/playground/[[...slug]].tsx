@@ -1,4 +1,4 @@
-import { Container, darken, Stack, useTheme } from "@mui/material";
+import { darken, useTheme } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
 
@@ -6,6 +6,7 @@ import { ConfigContext } from "#/context";
 import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
 import { CodePanel } from "#/features/codeRunner/ui/CodePanel";
 import { OutputPanel } from "#/features/output/ui/OutputPanel";
+import { MobilePlayground } from "#/features/playground/ui/MobilePlayground";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
 import { useAppConfig, useHasMounted } from "#/shared/hooks";
@@ -15,28 +16,15 @@ import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLa
 import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 
-type WrapperProps = SplitPanelsLayoutProps;
+type DesktopWrapperProps = SplitPanelsLayoutProps;
 
-const Wrapper: React.FC<WrapperProps> = ({
+const DesktopWrapper: React.FC<DesktopWrapperProps> = ({
   TopLeft,
   BottomLeft,
   TopRight,
   BottomRight,
 }) => {
-  const isMobile = useMobileLayout();
   const hasMounted = useHasMounted();
-
-  if (isMobile)
-    return (
-      <Container component="main" sx={{ pb: 4 }}>
-        <Stack spacing={1} mt={1} pb={4}>
-          <TopLeft />
-          <TopRight />
-          <BottomLeft />
-          <BottomRight />
-        </Stack>
-      </Container>
-    );
 
   // Defer split layout until after mount to avoid Emotion hydration mismatch
   // (server and client can render the four panels in different order).
@@ -55,6 +43,7 @@ const Wrapper: React.FC<WrapperProps> = ({
 
 const PlaygroundPage: NextPage = () => {
   const theme = useTheme();
+  const isMobile = useMobileLayout();
 
   const { data = {} } = useAppConfig();
 
@@ -62,18 +51,27 @@ const PlaygroundPage: NextPage = () => {
     <ConfigContext.Provider value={data}>
       <PageScrollContainer
         isPage={true}
+        options={
+          isMobile
+            ? { overflow: { x: "hidden", y: "hidden" } }
+            : { scrollbars: { autoHide: "scroll" }, overflow: { x: "hidden" } }
+        }
         style={{
           height: "100vh",
           background: darken(theme.palette.background.default, 0.1),
         }}
       >
         <MainAppBar toolbarVariant="dense" />
-        <Wrapper
-          TopLeft={ProjectPanel}
-          BottomLeft={CodePanel}
-          TopRight={TreeViewPanel}
-          BottomRight={OutputPanel}
-        />
+        {isMobile ? (
+          <MobilePlayground />
+        ) : (
+          <DesktopWrapper
+            TopLeft={ProjectPanel}
+            BottomLeft={CodePanel}
+            TopRight={TreeViewPanel}
+            BottomRight={OutputPanel}
+          />
+        )}
       </PageScrollContainer>
     </ConfigContext.Provider>
   );

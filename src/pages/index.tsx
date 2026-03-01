@@ -151,7 +151,10 @@ const DashboardPage: NextPage<{
                   spacing={2}
                   sx={{ pt: 2 }}
                 >
-                  <Link data-testid="cta-to-playground" href={"/playground"}>
+                  <Link
+                    data-testid="cta-to-playground"
+                    href="/playground/invert-binary-tree"
+                  >
                     <Button
                       variant="contained"
                       size="large"
@@ -169,6 +172,26 @@ const DashboardPage: NextPage<{
                       }}
                     >
                       {LL.TRY_IT_OUT_NOW()} 🚀
+                    </Button>
+                  </Link>
+                  <Link href="/playground?view=browse">
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      fullWidth={isMobile}
+                      sx={{
+                        color: "inherit",
+                        borderColor: "rgba(255, 255, 255, 0.3)",
+                        backdropFilter: "blur(10px)",
+                        "&:hover": {
+                          borderColor: "rgba(255, 255, 255, 0.5)",
+                          bgcolor: "rgba(255, 255, 255, 0.1)",
+                        },
+                        px: { xs: 3, md: 4 },
+                        py: 1.5,
+                      }}
+                    >
+                      {LL.BROWSE_PROJECTS()}
                     </Button>
                   </Link>
                 </Stack>
