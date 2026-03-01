@@ -1,9 +1,15 @@
 import type { ExecutionResult } from "../../hooks/useCodeExecution";
+import type { SerializedPythonArg } from "../createPythonRuntimeArgs";
 
 /** Messages sent from the main thread to the Pyodide worker. */
 export type PythonWorkerInMessage =
   | { type: "INIT"; indexURL?: string }
-  | { type: "RUN"; requestId: string; code: string };
+  | {
+      type: "RUN";
+      requestId: string;
+      code: string;
+      args?: SerializedPythonArg[];
+    };
 
 /** Progress during INIT: value 0–100, stage label for UI. */
 export type PythonWorkerProgressMessage = {

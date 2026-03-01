@@ -5,6 +5,7 @@ import arrayTrackerTransformerSrc from "#/packages/dstruct-runner/python/array_t
 import execPySrc from "#/packages/dstruct-runner/python/exec.py";
 import outputSrc from "#/packages/dstruct-runner/python/output.py";
 import sharedTypesSrc from "#/packages/dstruct-runner/python/shared_types.py";
+import treeUtilsSrc from "#/packages/dstruct-runner/python/tree_utils.py";
 
 import type {
   PythonWorkerInMessage,
@@ -25,6 +26,7 @@ const HARNESS_FILES: Record<string, string> = {
   "output.py": outputSrc,
   "array_tracker.py": arrayTrackerSrc,
   "array_tracker_transformer.py": arrayTrackerTransformerSrc,
+  "tree_utils.py": treeUtilsSrc,
   "exec.py": execPySrc,
 };
 
@@ -90,7 +92,11 @@ from exec import safe_exec
   self.postMessage(msg);
 }
 
-async function handleRun(requestId: string, code: string) {
+async function handleRun(
+  requestId: string,
+  code: string,
+  args?: Array<{ type: string; value: unknown }>,
+) {
   if (!pyodide) {
     postError(
       requestId,
@@ -101,10 +107,11 @@ async function handleRun(requestId: string, code: string) {
 
   try {
     pyodide.globals.set("__user_code__", code);
+    pyodide.globals.set("__user_args__", args ?? null);
 
     const resultJson: string = await pyodide.runPythonAsync(`
 import json as _json
-_result = safe_exec(__user_code__)
+_result = safe_exec(__user_code__, __user_args__)
 _json.dumps(_result)
 `);
 
@@ -118,8 +125,8 @@ _json.dumps(_result)
   } catch (err: unknown) {
     postError(requestId, err);
   } finally {
-    // Clean up the user code from Python globals to avoid retaining large strings
     pyodide?.globals.delete("__user_code__");
+    pyodide?.globals.delete("__user_args__");
   }
 }
 
@@ -137,10 +144,12 @@ self.addEventListener(
         break;
 
       case "RUN":
-        handleRun(data.requestId, data.code).catch((err: unknown) => {
-          console.error("Pyodide RUN failed:", err);
-          postError(data.requestId, err);
-        });
+        handleRun(data.requestId, data.code, data.args).catch(
+          (err: unknown) => {
+            console.error("Pyodide RUN failed:", err);
+            postError(data.requestId, err);
+          },
+        );
         break;
 
       default:

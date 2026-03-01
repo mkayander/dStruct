@@ -5,6 +5,7 @@ import { useSearchParam } from "#/shared/hooks";
 import { PYTHON_SUPPORT_MODAL_ID } from "#/shared/ui/organisms/PythonSupportModal";
 import { useAppDispatch } from "#/store/hooks";
 
+import type { SerializedPythonArg } from "../lib/createPythonRuntimeArgs";
 import { pythonRunner } from "../lib/pythonRunner";
 import { pyodideSlice } from "../model/pyodideSlice";
 import type { ExecutionResult } from "./useCodeExecution";
@@ -65,16 +66,22 @@ export const usePythonCodeRunner = () => {
   }, [dispatch]);
 
   const { mutateAsync: executePythonCode, isPending } = useMutation({
-    mutationFn: async (codeInput: string): Promise<ExecutionResult> => {
+    mutationFn: async ({
+      codeInput,
+      args,
+    }: {
+      codeInput: string;
+      args?: SerializedPythonArg[];
+    }): Promise<ExecutionResult> => {
       if (PYTHON_EXEC_MODE === "pyodide") {
-        return pythonRunner.run(codeInput);
+        return pythonRunner.run(codeInput, undefined, args);
       }
 
       // Legacy server mode
       const response = await fetch("http://localhost:8085/python", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: codeInput }),
+        body: JSON.stringify({ code: codeInput, args }),
       });
 
       if (!response.ok) {
@@ -96,8 +103,11 @@ export const usePythonCodeRunner = () => {
   });
 
   const runPythonCode = useCallback(
-    async (codeInput: string): Promise<ExecutionResult> => {
-      return await executePythonCode(codeInput);
+    async (
+      codeInput: string,
+      args?: SerializedPythonArg[],
+    ): Promise<ExecutionResult> => {
+      return await executePythonCode({ codeInput, args });
     },
     [executePythonCode],
   );

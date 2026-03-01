@@ -6,7 +6,10 @@ import { generate } from "short-uuid";
 
 import { selectCaseArguments } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
-import { createRawRuntimeArgs } from "#/features/codeRunner/lib";
+import {
+  createPythonRuntimeArgs,
+  createRawRuntimeArgs,
+} from "#/features/codeRunner/lib";
 import { resetStructuresState } from "#/features/treeViewer/lib";
 import { useAppStore } from "#/store/hooks";
 
@@ -154,7 +157,9 @@ export const useCodeExecution = (
             treeStore,
           });
         } else {
-          return await runPythonCode(codeInput);
+          const caseArgs = selectCaseArguments(store.getState());
+          const args = createPythonRuntimeArgs(caseArgs);
+          return await runPythonCode(codeInput, args);
         }
       }),
     [codeInput, language, processTask, runJSCode, runPythonCode, store],

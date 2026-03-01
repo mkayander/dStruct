@@ -1,6 +1,7 @@
 import { generate } from "short-uuid";
 
 import type { ExecutionResult } from "../hooks/useCodeExecution";
+import type { SerializedPythonArg } from "./createPythonRuntimeArgs";
 import type { PythonWorkerOutMessage } from "./workers/pythonExec.worker.types";
 
 const DEFAULT_TIMEOUT_MS = 30_000;
@@ -129,6 +130,7 @@ class PythonRunner {
   async run(
     code: string,
     timeoutMs: number = DEFAULT_TIMEOUT_MS,
+    args?: SerializedPythonArg[],
   ): Promise<ExecutionResult> {
     if (this.state === "disposed") {
       return makeErrorResult({
@@ -227,7 +229,7 @@ class PythonRunner {
           );
         }, timeoutMs);
 
-        worker.postMessage({ type: "RUN", requestId, code });
+        worker.postMessage({ type: "RUN", requestId, code, args });
       });
     } finally {
       resolveGate();
