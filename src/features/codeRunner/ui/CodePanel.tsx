@@ -201,10 +201,10 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     if (runMode === "benchmark") {
       const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
-      onRunComplete?.();
+      if (result) onRunComplete?.();
     } else {
-      await runCode();
-      onRunComplete?.();
+      const result = await runCode();
+      if (result) onRunComplete?.();
     }
   };
 

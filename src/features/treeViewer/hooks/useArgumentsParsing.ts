@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { generate } from "short-uuid";
 
 import {
@@ -463,6 +463,7 @@ export const useArgumentsParsing = () => {
   const argsInfo = useAppSelector(selectCaseArgumentsInfo);
   const treeData = useAppSelector(treeDataSelector);
   const arrayData = useAppSelector(arrayDataSelector);
+  const prevArgsRef = useRef<typeof args | null>(null);
 
   useEffect(() => {
     const removedTreeNames = new Set(Object.keys(treeData));
@@ -492,7 +493,12 @@ export const useArgumentsParsing = () => {
       dispatch(arrayStructureSlice.actions.clearMany([...removedArrayNames]));
     }
 
-    dispatch(callstackSlice.actions.removeAll());
+    // Only clear callstack when args change (e.g. test case switch),
+    // not on initial mount or self-triggered argsInfo updates from parseTreeArgument
+    if (prevArgsRef.current !== null && prevArgsRef.current !== args) {
+      dispatch(callstackSlice.actions.removeAll());
+    }
+    prevArgsRef.current = args;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [args, argsInfo, dispatch]);
 };
