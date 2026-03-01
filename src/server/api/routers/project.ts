@@ -694,13 +694,22 @@ export const projectRouter = createTRPCRouter({
         slug: z.string(),
       }),
     )
-    .query(async ({ input, ctx }) =>
-      ctx.db.playgroundSolution.findUniqueOrThrow({
+    .query(async ({ input, ctx }) => {
+      const solution = await ctx.db.playgroundSolution.findUniqueOrThrow({
         where: {
           projectId_slug: input,
         },
-      }),
-    ),
+        include: {
+          project: { select: { category: true } },
+        },
+      });
+      const { project, ...rest } = solution;
+      const mergedCode = getMergedCodeContent(project.category, {
+        code: rest.code,
+        pythonCode: rest.pythonCode,
+      });
+      return { ...rest, ...mergedCode };
+    }),
 
   addSolution: projectOwnerProcedure
     .input(
