@@ -7,6 +7,7 @@ import outputSrc from "#/packages/dstruct-runner/python/output.py";
 import sharedTypesSrc from "#/packages/dstruct-runner/python/shared_types.py";
 import treeUtilsSrc from "#/packages/dstruct-runner/python/tree_utils.py";
 
+import type { SerializedPythonArg } from "../createPythonRuntimeArgs";
 import type {
   PythonWorkerInMessage,
   PythonWorkerOutMessage,
@@ -95,7 +96,7 @@ from exec import safe_exec
 async function handleRun(
   requestId: string,
   code: string,
-  args?: Array<{ type: string; value: unknown }>,
+  args?: SerializedPythonArg[],
 ) {
   if (!pyodide) {
     postError(
