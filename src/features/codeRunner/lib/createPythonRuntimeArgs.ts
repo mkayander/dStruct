@@ -3,6 +3,10 @@ import type { ArgumentObject } from "#/entities/argument/model/types";
 
 export type SerializedPythonArg = { type: string; value: unknown };
 
+function serializeFallback(a: ArgumentObject): SerializedPythonArg {
+  return { type: a.type, value: a.input };
+}
+
 /**
  * Serialize case arguments for Python execution.
  * Returns [{type, value}, ...] for the Python harness to reconstruct (TreeNode, etc.).
@@ -44,8 +48,9 @@ export function createPythonRuntimeArgs(
           value: arg.input ? JSON.parse(arg.input) : null,
         };
 
-      default:
-        return { type: arg.type, value: arg.input };
+      default: {
+        return serializeFallback(arg);
+      }
     }
   });
 }

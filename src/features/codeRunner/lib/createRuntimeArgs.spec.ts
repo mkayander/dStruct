@@ -25,17 +25,23 @@ describe("createPythonRuntimeArgs", () => {
     const result = createPythonRuntimeArgs([
       arg(ArgumentType.ARRAY, "[1, 2, 3]"),
     ]);
-    expect(result[0].value).toEqual([1, 2, 3]);
+    const first = result[0];
+    expect(first).toBeDefined();
+    if (first) expect(first.value).toEqual([1, 2, 3]);
   });
 
   it("returns empty array when input is empty for ARRAY type", () => {
     const result = createPythonRuntimeArgs([arg(ArgumentType.ARRAY, "")]);
-    expect(result[0].value).toEqual([]);
+    const first = result[0];
+    expect(first).toBeDefined();
+    if (first) expect(first.value).toEqual([]);
   });
 
   it("returns null when input is empty for BINARY_TREE type", () => {
     const result = createPythonRuntimeArgs([arg(ArgumentType.BINARY_TREE, "")]);
-    expect(result[0].value).toBeNull();
+    const first = result[0];
+    expect(first).toBeDefined();
+    if (first) expect(first.value).toBeNull();
   });
 });
 
