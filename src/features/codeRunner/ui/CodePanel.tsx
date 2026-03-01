@@ -24,7 +24,6 @@ import {
   type ProgrammingLanguage,
   useCodeExecution,
 } from "#/features/codeRunner/hooks/useCodeExecution";
-import { usePyodideProgressSnackbar } from "#/features/codeRunner/hooks/usePyodideProgressSnackbar";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
@@ -122,8 +121,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     codeInput,
     language || "javascript",
   );
-
-  usePyodideProgressSnackbar();
 
   // Update code on solution change
   useEffect(() => {

@@ -9,6 +9,7 @@ import type { SerializedPythonArg } from "../lib/createPythonRuntimeArgs";
 import { pythonRunner } from "../lib/pythonRunner";
 import { pyodideSlice } from "../model/pyodideSlice";
 import type { ExecutionResult } from "./useCodeExecution";
+import { usePyodideProgressSnackbar } from "./usePyodideProgressSnackbar";
 
 const PYTHON_EXEC_MODE = process.env.NEXT_PUBLIC_PYTHON_EXEC_MODE ?? "pyodide";
 
@@ -18,6 +19,8 @@ const PROGRESS_COMPLETE_DELAY_MS = 400;
 export const usePythonCodeRunner = () => {
   const dispatch = useAppDispatch();
   const [, setModalName] = useSearchParam("modal");
+
+  usePyodideProgressSnackbar();
 
   const openPythonSupportModal = () => {
     setModalName(PYTHON_SUPPORT_MODAL_ID);

@@ -37,4 +37,12 @@ export function usePyodideProgressSnackbar(): void {
       }
     }
   }, [progress, enqueueSnackbar, closeSnackbar]);
+
+  useEffect(() => {
+    return () => {
+      if (hasSnackbarShownRef.current) {
+        closeSnackbar(PYODIDE_LOADING_SNACKBAR_KEY);
+      }
+    };
+  }, []);
 }
