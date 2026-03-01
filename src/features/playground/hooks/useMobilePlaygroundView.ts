@@ -10,6 +10,19 @@ const isPlaygroundView = (value: unknown): value is PlaygroundView =>
   typeof value === "string" &&
   PLAYGROUND_VIEWS.includes(value as PlaygroundView);
 
+/** Pairs of views that should use replace (not push) to avoid history stack growth. */
+const REPLACE_TRANSITION_PAIRS: ReadonlyArray<
+  [PlaygroundView, PlaygroundView]
+> = [["code", "results"]];
+
+const isReplaceTransition = (
+  from: PlaygroundView,
+  to: PlaygroundView,
+): boolean =>
+  REPLACE_TRANSITION_PAIRS.some(
+    ([a, b]) => (from === a && to === b) || (from === b && to === a),
+  );
+
 /**
  * Reads the `view` query param directly from the browser URL.
  * Used as an immediate fallback before Next.js router hydrates `router.query`.
@@ -68,11 +81,16 @@ export const useMobilePlaygroundView = () => {
         newQuery.view = view;
       }
 
-      void router.push({ pathname, query: newQuery }, undefined, {
-        shallow: true,
-      });
+      const route = { pathname, query: newQuery };
+      const opts = { shallow: true };
+
+      if (isReplaceTransition(currentView, view)) {
+        void router.replace(route, undefined, opts);
+      } else {
+        void router.push(route, undefined, opts);
+      }
     },
-    [router],
+    [router, currentView],
   );
 
   const goToBrowse = useCallback(() => navigateTo("browse"), [navigateTo]);

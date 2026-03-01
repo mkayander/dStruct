@@ -198,13 +198,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   };
 
   const handleRunCode = async () => {
+    const run = runMode === "benchmark" ? runBenchmark : runCode;
+    const result = await run();
     if (runMode === "benchmark") {
-      const result = await runBenchmark();
       console.log("Worker: bench result: ", result);
-      if (result) onRunComplete?.();
-    } else {
-      const result = await runCode();
-      if (result) onRunComplete?.();
+    }
+    if (result) {
+      onRunComplete?.();
     }
   };
 

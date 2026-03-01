@@ -9,6 +9,7 @@ vi.mock("next/router", () => ({
 }));
 
 const mockPush = vi.fn();
+const mockReplace = vi.fn();
 
 const createMockRouter = (overrides: Partial<NextRouter> = {}): NextRouter => ({
   pathname: "/playground/[[...slug]]",
@@ -20,7 +21,7 @@ const createMockRouter = (overrides: Partial<NextRouter> = {}): NextRouter => ({
   isLocaleDomain: false,
   isPreview: false,
   push: mockPush,
-  replace: vi.fn(),
+  replace: mockReplace,
   reload: vi.fn(),
   back: vi.fn(),
   forward: vi.fn(),
@@ -162,7 +163,7 @@ describe("useMobilePlaygroundView", () => {
   });
 
   describe("navigateTo", () => {
-    it("goToResults pushes ?view=results with shallow routing", () => {
+    it("goToResults replaces when on code (squash code↔results history)", () => {
       vi.mocked(useRouter).mockReturnValue(
         createMockRouter({ query: { slug: ["project-a"] } }),
       );
@@ -170,17 +171,16 @@ describe("useMobilePlaygroundView", () => {
       const { result } = renderHook(() => useMobilePlaygroundView());
       result.current.goToResults();
 
-      expect(mockPush).toHaveBeenCalledWith(
-        {
-          pathname: "/playground/[[...slug]]",
-          query: { slug: ["project-a"], view: "results" },
-        },
-        undefined,
-        { shallow: true },
-      );
+      const route = {
+        pathname: "/playground/[[...slug]]",
+        query: { slug: ["project-a"], view: "results" },
+      };
+      const opts = { shallow: true };
+      expect(mockReplace).toHaveBeenCalledWith(route, undefined, opts);
+      expect(mockPush).not.toHaveBeenCalled();
     });
 
-    it("goToCode removes the view param from the query", () => {
+    it("goToCode replaces when on results (squash code↔results history)", () => {
       vi.mocked(useRouter).mockReturnValue(
         createMockRouter({
           query: { slug: ["project-a"], view: "results" },
@@ -190,14 +190,13 @@ describe("useMobilePlaygroundView", () => {
       const { result } = renderHook(() => useMobilePlaygroundView());
       result.current.goToCode();
 
-      expect(mockPush).toHaveBeenCalledWith(
-        {
-          pathname: "/playground/[[...slug]]",
-          query: { slug: ["project-a"] },
-        },
-        undefined,
-        { shallow: true },
-      );
+      const route = {
+        pathname: "/playground/[[...slug]]",
+        query: { slug: ["project-a"] },
+      };
+      const opts = { shallow: true };
+      expect(mockReplace).toHaveBeenCalledWith(route, undefined, opts);
+      expect(mockPush).not.toHaveBeenCalled();
     });
 
     it("goToBrowse pushes ?view=browse", () => {
