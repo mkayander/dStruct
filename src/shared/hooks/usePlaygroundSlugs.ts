@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 import { projectSlice } from "#/features/project/model/projectSlice";
 import {
@@ -17,9 +17,30 @@ export const usePlaygroundSlugs = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const getCurrentQuery = useCallback(() => {
+    const query = { ...router.query };
+    delete query.slug;
+
+    return query;
+  }, [router]);
+
+  const navigateTo = useCallback(
+    (pathname: string, replace: boolean) => {
+      router[replace ? "replace" : "push"](
+        {
+          pathname,
+          query: getCurrentQuery(),
+        },
+        undefined,
+        { shallow: true },
+      );
+    },
+    [getCurrentQuery, router],
+  );
+
   useEffect(() => {
-    const currentPath = router.asPath;
-    if (!currentPath.startsWith(PLAYGROUND_BASE_PATH)) return;
+    const currentPath = router.asPath.split("?")[0];
+    if (!currentPath?.startsWith(PLAYGROUND_BASE_PATH)) return;
 
     const projectSlug = currentPath.split("/")[2];
     if (!projectSlug) return;
@@ -36,7 +57,7 @@ export const usePlaygroundSlugs = () => {
 
     const setProject = (slug?: string, isInitial?: boolean) => {
       dispatch(projectSlice.actions.loadStart());
-      if (!slug) return router.replace(PLAYGROUND_BASE_PATH);
+      if (!slug) return navigateTo(PLAYGROUND_BASE_PATH, true);
 
       const lastPath = getLastPlaygroundPath();
       if (lastPath && !lastPath.startsWith(PLAYGROUND_BASE_PATH)) {
@@ -47,10 +68,10 @@ export const usePlaygroundSlugs = () => {
         : null;
 
       if (pathToRestore) {
-        return router.replace(pathToRestore);
+        return navigateTo(pathToRestore, true);
       }
 
-      return router.replace(`${PLAYGROUND_BASE_PATH}/${slug}`);
+      return navigateTo(`${PLAYGROUND_BASE_PATH}/${slug}`, true);
     };
 
     const setCase = (slug: string) => {
@@ -60,8 +81,9 @@ export const usePlaygroundSlugs = () => {
 
       if (slug === caseSlug) return;
 
-      return router[caseSlug ? "push" : "replace"](
+      return navigateTo(
         `${PLAYGROUND_BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
+        caseSlug ? false : true,
       );
     };
 
@@ -71,14 +93,15 @@ export const usePlaygroundSlugs = () => {
 
       if (slug === solutionSlug) return;
 
-      return router[solutionSlug ? "push" : "replace"](
+      return navigateTo(
         `${PLAYGROUND_BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
+        solutionSlug ? false : true,
       );
     };
 
     const clearSlugs = () => {
       removeLastPlaygroundPath();
-      return router.push(PLAYGROUND_BASE_PATH);
+      return navigateTo(PLAYGROUND_BASE_PATH, false);
     };
 
     return {

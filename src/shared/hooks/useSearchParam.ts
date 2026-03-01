@@ -69,15 +69,20 @@ export const useSearchParam = <T extends string = string>(
       if (value !== "" && !validate(value)) return;
 
       setState(value);
-      const { pathname, query } = router;
-      const newQuery = { ...query };
+      const {
+        asPath,
+        query: { slug: _slugQuery, ...newQuery },
+      } = router;
       if (value === "") {
         delete newQuery[param];
       } else {
         newQuery[param] = value;
       }
+
+      const currentPathname = asPath.split("?")[0];
+
       void router[options.replace ? "replace" : "push"](
-        { pathname: options.pathName ?? pathname, query: newQuery },
+        { pathname: options.pathName || currentPathname, query: newQuery },
         undefined,
         {
           shallow: true,
