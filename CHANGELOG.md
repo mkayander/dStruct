@@ -1,3 +1,10 @@
+## [1.357.1](https://github.com/mkayander/dStruct/compare/v1.357.0...v1.357.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* ensure onRunComplete is only called when results are available ([4c668b3](https://github.com/mkayander/dStruct/commit/4c668b3cf1f045ef20afa67f13db2422cbb4c0fd))
+
 # [1.357.0](https://github.com/mkayander/dStruct/compare/v1.356.0...v1.357.0) (2026-03-01)
 
 
