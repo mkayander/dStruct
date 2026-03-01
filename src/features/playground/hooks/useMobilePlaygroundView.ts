@@ -11,6 +11,17 @@ const isPlaygroundView = (value: unknown): value is PlaygroundView =>
   PLAYGROUND_VIEWS.includes(value as PlaygroundView);
 
 /**
+ * Reads the `view` query param directly from the browser URL.
+ * Used as an immediate fallback before Next.js router hydrates `router.query`.
+ */
+const getViewFromLocation = (): PlaygroundView | null => {
+  if (typeof window === "undefined") return null;
+  const params = new URLSearchParams(window.location.search);
+  const view = params.get("view");
+  return isPlaygroundView(view) ? view : null;
+};
+
+/**
  * Manages the mobile playground phase via the `?view=` query parameter.
  * Uses `router.push` for transitions so browser back/forward work naturally.
  * Defaults to "browse" when no project is selected, "code" otherwise.
@@ -28,6 +39,12 @@ export const useMobilePlaygroundView = () => {
     if (typeof param === "string" && isPlaygroundView(param)) {
       return param;
     }
+
+    if (!router.isReady) {
+      const locationView = getViewFromLocation();
+      if (locationView) return locationView;
+    }
+
     if (hasProjectSlug) return "code";
 
     const lastPath =
@@ -38,7 +55,7 @@ export const useMobilePlaygroundView = () => {
       lastPath?.startsWith("/playground/") && Boolean(lastPath.split("/")[2]);
 
     return hasLastProject ? "code" : "browse";
-  }, [router.query.view, hasProjectSlug]);
+  }, [router.query.view, router.isReady, hasProjectSlug]);
 
   const navigateTo = useCallback(
     (view: PlaygroundView) => {

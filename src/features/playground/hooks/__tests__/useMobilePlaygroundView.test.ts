@@ -102,6 +102,36 @@ describe("useMobilePlaygroundView", () => {
       const { result } = renderHook(() => useMobilePlaygroundView());
       expect(result.current.currentView).toBe("browse");
     });
+
+    it("reads ?view= from window.location before router is ready", () => {
+      Object.defineProperty(window, "location", {
+        value: { search: "?view=browse" },
+        writable: true,
+      });
+      localStorage.setItem("lastPlaygroundPath", "/playground/some-project");
+
+      vi.mocked(useRouter).mockReturnValue(
+        createMockRouter({ query: {}, isReady: false }),
+      );
+
+      const { result } = renderHook(() => useMobilePlaygroundView());
+      expect(result.current.currentView).toBe("browse");
+    });
+
+    it("falls back to localStorage when router is not ready and no ?view= in URL", () => {
+      Object.defineProperty(window, "location", {
+        value: { search: "" },
+        writable: true,
+      });
+      localStorage.setItem("lastPlaygroundPath", "/playground/some-project");
+
+      vi.mocked(useRouter).mockReturnValue(
+        createMockRouter({ query: {}, isReady: false }),
+      );
+
+      const { result } = renderHook(() => useMobilePlaygroundView());
+      expect(result.current.currentView).toBe("code");
+    });
   });
 
   describe("hasProjectSlug", () => {
