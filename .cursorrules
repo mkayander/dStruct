@@ -96,18 +96,29 @@ export const exampleSlice = createSlice({
 - Use React.forwardRef when needed
 - Use proper dependency arrays in useEffect/useMemo/useCallback
 
-**Component Structure:**
+**React component code style:**
+
+- **ALWAYS** define React components using the `const ComponentName: React.FC<Props> = () => { ... }` pattern
+- **DO NOT** use `function ComponentName()` declarations for components
+- Define a props interface/type and pass it as the generic to `React.FC<Props>`
+- Export the component (named export); keep the props interface in the same file or in a shared types module
+
+**Component structure example:**
 
 ```typescript
-// Component with proper typing
+// Props interface (same file or shared types)
 interface ComponentProps {
   title: string;
   onAction: (data: ActionData) => void;
 }
 
+// ✅ Correct - const with React.FC
 export const Component: React.FC<ComponentProps> = ({ title, onAction }) => {
   // Component implementation
 };
+
+// ❌ Avoid - function declaration
+// export function Component({ title, onAction }: ComponentProps) { ... }
 ```
 
 **Hook Pattern:**
