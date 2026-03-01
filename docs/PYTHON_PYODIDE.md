@@ -6,7 +6,7 @@ dStruct runs Python code directly in the browser using [Pyodide](https://pyodide
 
 1. When a user opens a Python problem page, the `usePythonCodeRunner` hook eagerly calls `pythonRunner.init()` to warm up a dedicated **Web Worker**.
 2. The worker downloads the Pyodide runtime (~30 MB, cached by the browser after first load) from the jsDelivr CDN. It then writes the dStruct Python harness files (`exec.py`, `array_tracker.py`, etc.) into Pyodide's virtual Emscripten filesystem and pre-imports `safe_exec`.
-3. When the user clicks **Run**, the code string is posted to the worker. The existing `safe_exec()` harness performs AST transformation (list tracking via `TrackedList`), executes the code in a sandboxed namespace, and returns a structured `ExecutionResult` as JSON back to the main thread.
+3. When the user clicks **Run**, the code string and optional test-case arguments (e.g. binary tree root) are posted to the worker. The existing `safe_exec(code, args)` harness performs AST transformation (list tracking via `TrackedList`), reconstructs arguments (TreeNode, ListNode, etc.) from the serialized payload, executes the code in a sandboxed namespace, and returns a structured `ExecutionResult` as JSON back to the main thread.
 4. If execution exceeds the timeout (default 30 s), the main-thread runner terminates the worker via `Worker.terminate()` and automatically recreates a fresh one for subsequent runs.
 
 ```
@@ -14,13 +14,14 @@ Main thread                           Web Worker
     |                                     |
     |--- INIT { indexURL? } ------------->|
     |                                     |  loadPyodide(indexURL)
+    |<------------- PROGRESS { value, stage } --- (5, 45, 70, 100)
     |                                     |  FS.writeFile(harness .py files)
     |                                     |  importlib.invalidate_caches()
     |                                     |  from exec import safe_exec
     |<------------- READY ----------------|
     |                                     |
-    |--- RUN { requestId, code } -------->|
-    |                                     |  safe_exec(code) -> JSON
+    |--- RUN { requestId, code, args? } ->|
+    |                                     |  safe_exec(code, args) -> JSON
     |<-- RUN_RESULT { requestId, ... } ---|
     |                                     |
     |--- RUN { ... } (timeout fires) ---->|
@@ -32,18 +33,23 @@ Main thread                           Web Worker
 ## Worker Message Protocol
 
 ```typescript
+type SerializedPythonArg = { type: string; value: unknown };
+
 // Main thread -> Worker
 type PythonWorkerInMessage =
   | { type: "INIT"; indexURL?: string }
-  | { type: "RUN"; requestId: string; code: string };
+  | { type: "RUN"; requestId: string; code: string; args?: SerializedPythonArg[] };
 
 // Worker -> Main thread
 type PythonWorkerOutMessage =
   | { type: "READY" }
+  | { type: "PROGRESS"; value: number; stage: string }  // during INIT (5, 45, 70, 100)
   | { type: "RUN_RESULT"; requestId: string; result: ExecutionResult }
   | { type: "ERROR"; requestId: string;
       error: { name: string; message: string; stack?: string } };
 ```
+
+During INIT, the worker sends **PROGRESS** messages (value 0–100, stage label) so the UI can show a loading snackbar. The main thread subscribes via `usePyodideProgressSnackbar`.
 
 Calls are **serialized**: only one RUN is in-flight at a time. The `requestId` (a short UUID) is still included for correctness. If `run()` is called while a previous run is still executing, the new call awaits a gate promise that resolves when the current run finishes.
 
@@ -108,10 +114,13 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 |---|---|
 | `src/features/codeRunner/lib/workers/pythonExec.worker.ts` | Web Worker: loads Pyodide, writes harness to FS, handles INIT/RUN messages |
 | `src/features/codeRunner/lib/workers/pythonExec.worker.types.ts` | TypeScript types for the worker message protocol |
+| `src/features/codeRunner/lib/createPythonRuntimeArgs.ts` | Serializes case arguments to `SerializedPythonArg[]` for the Python harness |
 | `src/features/codeRunner/lib/pythonRunner.ts` | Main-thread singleton: worker lifecycle, timeout, auto-recreate, serialization gate |
 | `src/features/codeRunner/hooks/usePythonCodeRunner.ts` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
-| `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator (unchanged): calls `runPythonCode`, handles `ExecutionResult` |
-| `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec (unchanged, loaded into Pyodide FS) |
+| `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx` | Shows loading snackbar when Pyodide INIT sends PROGRESS messages |
+| `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult` |
+| `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)` |
+| `src/packages/dstruct-runner/python/tree_utils.py` | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction |
 | `src/packages/dstruct-runner/python/array_tracker.py` | `TrackedList` implementation for callstack frame generation |
 | `src/packages/dstruct-runner/python/array_tracker_transformer.py` | AST transformer: rewrites list literals to `TrackedList(...)` |
 | `src/packages/dstruct-runner/python/output.py` | `tracked_print`: captures print output into `__stdout__` global |
@@ -169,6 +178,9 @@ When the worker is bundled by webpack/Next.js, its script URL is something like 
 ```bash
 # Protocol-level unit tests (fast, no Pyodide download)
 pnpm vitest run src/features/codeRunner/lib/workers/pythonExec.worker.spec.ts
+
+# Runtime args serialization (createPythonRuntimeArgs, createRawRuntimeArgs)
+pnpm vitest run src/features/codeRunner/lib/createRuntimeArgs.spec.ts
 ```
 
 ## Manual Integration Test
