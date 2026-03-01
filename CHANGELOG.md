@@ -1,3 +1,16 @@
+# [1.356.0](https://github.com/mkayander/dStruct/compare/v1.355.0...v1.356.0) (2026-03-01)
+
+
+### Bug Fixes
+
+* ensure snackbar cleanup on component unmount in Pyodide progress hook ([30a2def](https://github.com/mkayander/dStruct/commit/30a2defa3fd952e46796b5f95fea64f3624d6a4e))
+
+
+### Features
+
+* enhance mobile playground view handling with URL query support ([1b1cdfa](https://github.com/mkayander/dStruct/commit/1b1cdfa68d9d6aead57099cd2503b6b1ba41a3ca))
+* implement mobile playground layout with phased navigation ([01970ca](https://github.com/mkayander/dStruct/commit/01970cafb96eaac020b3c0d932e922f160027f08))
+
 # [1.355.0](https://github.com/mkayander/dStruct/compare/v1.354.0...v1.355.0) (2026-03-01)
 
 
