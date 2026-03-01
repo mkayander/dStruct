@@ -3,13 +3,24 @@
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { ThemeProviderProps } from "@mui/material/styles";
-import React from "react";
+import React, { useMemo } from "react";
 
-import { theme } from "#/themes";
+import { createCustomTheme, type SsrDeviceType } from "#/themes";
 
-export const StateThemeProvider: React.FC<
-  Omit<ThemeProviderProps, "theme">
-> = ({ children, ...props }) => {
+type StateThemeProviderProps = Omit<ThemeProviderProps, "theme"> & {
+  ssrDeviceType?: SsrDeviceType;
+};
+
+export const StateThemeProvider: React.FC<StateThemeProviderProps> = ({
+  children,
+  ssrDeviceType = "desktop",
+  ...props
+}) => {
+  const theme = useMemo(
+    () => createCustomTheme(ssrDeviceType),
+    [ssrDeviceType],
+  );
+
   return (
     <ThemeProvider theme={theme} {...props}>
       <CssBaseline />

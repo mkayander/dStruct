@@ -44,7 +44,6 @@ import {
   usePlaygroundSlugs,
   useSearchParam,
 } from "#/shared/hooks";
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
 import {
@@ -296,19 +295,14 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     });
   };
 
-  const isMobile = useMobileLayout();
-
   const isLoading =
     selectedProject.isLoading ||
     currentSolution.isLoading ||
     updateSolution.isPending;
 
-  let editorHeight: number | string = 500;
-  if (verticalSize) {
-    editorHeight = verticalSize * 9 * (window.innerHeight / 1010);
-  } else if (isMobile) {
-    editorHeight = "100%";
-  }
+  const editorHeight: number | string = verticalSize
+    ? verticalSize * 9 * (window.innerHeight / 1010)
+    : "100%";
 
   return (
     <PanelWrapper
@@ -385,7 +379,9 @@ export const CodePanel: React.FC<CodePanelProps> = ({
           sx={{
             p: 0,
             overflowY: "hidden",
-            ...(isMobile && { flex: 1, minHeight: 0, height: "auto" }),
+            flex: { xs: 1, sm: "unset" },
+            minHeight: { xs: 0, sm: "unset" },
+            height: { xs: "auto", sm: "unset" },
           }}
         >
           <Box
@@ -402,7 +398,8 @@ export const CodePanel: React.FC<CodePanelProps> = ({
           <Box
             sx={{
               position: "relative",
-              ...(isMobile && { flex: 1, minHeight: 0 }),
+              flex: { xs: 1, sm: "unset" },
+              minHeight: { xs: 0, sm: "unset" },
             }}
           >
             <CodeRunner

@@ -1,5 +1,5 @@
 import { darken, useTheme } from "@mui/material";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import React from "react";
 
 import { ConfigContext } from "#/context";
@@ -11,10 +11,15 @@ import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
 import { useAppConfig, useHasMounted } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
+import {
+  resolveSsrDeviceType,
+  setDeviceHintResponseHeaders,
+} from "#/shared/lib/ssrDevice";
 import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
 import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
+import type { SsrDeviceType } from "#/themes";
 
 type DesktopWrapperProps = SplitPanelsLayoutProps;
 
@@ -41,7 +46,11 @@ const DesktopWrapper: React.FC<DesktopWrapperProps> = ({
   );
 };
 
-const PlaygroundPage: NextPage = () => {
+type PlaygroundPageProps = {
+  ssrDeviceType: SsrDeviceType;
+};
+
+const PlaygroundPage: NextPage<PlaygroundPageProps> = () => {
   const theme = useTheme();
   const isMobile = useMobileLayout();
 
@@ -75,6 +84,19 @@ const PlaygroundPage: NextPage = () => {
       </PageScrollContainer>
     </ConfigContext.Provider>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<
+  PlaygroundPageProps
+> = async ({ req, res }) => {
+  const ssrDeviceType = resolveSsrDeviceType(req.headers);
+  setDeviceHintResponseHeaders(res);
+
+  return {
+    props: {
+      ssrDeviceType,
+    },
+  };
 };
 
 export default PlaygroundPage;

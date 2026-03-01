@@ -6,7 +6,46 @@ import { createTheme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
 
-const createCustomTheme = () => {
+export type SsrDeviceType = "mobile" | "desktop";
+
+const getViewportWidth = (deviceType: SsrDeviceType) =>
+  deviceType === "mobile" ? 375 : 1024;
+
+const parseCssPx = (value: string | undefined) => {
+  if (!value) return undefined;
+
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+};
+
+const queryMatchesViewport = (query: string, viewportWidth: number) => {
+  const minMatches = Array.from(
+    query.matchAll(/\(min-width:\s*([0-9.]+)px\)/gi),
+  )
+    .map((match) => parseCssPx(match[1]))
+    .filter((value): value is number => typeof value === "number");
+  const maxMatches = Array.from(
+    query.matchAll(/\(max-width:\s*([0-9.]+)px\)/gi),
+  )
+    .map((match) => parseCssPx(match[1]))
+    .filter((value): value is number => typeof value === "number");
+
+  if (minMatches.length === 0 && maxMatches.length === 0) {
+    // Keep SSR behavior conservative for unsupported query types.
+    return false;
+  }
+
+  if (minMatches.some((minWidth) => viewportWidth < minWidth)) return false;
+  if (maxMatches.some((maxWidth) => viewportWidth > maxWidth)) return false;
+
+  return true;
+};
+
+const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
+  matches: queryMatchesViewport(query, getViewportWidth(deviceType)),
+});
+
+export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
   // Create a theme instance.
   const theme = createTheme({
     cssVariables: true,
@@ -20,6 +59,13 @@ const createCustomTheme = () => {
       },
       error: {
         main: red.A400,
+      },
+    },
+    components: {
+      MuiUseMediaQuery: {
+        defaultProps: {
+          ssrMatchMedia: createSsrMatchMedia(deviceType),
+        },
       },
     },
   });

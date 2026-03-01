@@ -12,7 +12,6 @@ import { selectProjectId } from "#/features/project/model/projectSlice";
 import { api } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { EditFormModal } from "#/shared/ui/organisms/EditFormModal";
 import { useAppSelector } from "#/store/hooks";
 
@@ -63,7 +62,6 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
     solutionSlug = "",
     setSolution,
   } = usePlaygroundSlugs();
-  const isMobile = useMobileLayout();
 
   const currentProjectId = useAppSelector(selectProjectId) || "";
 
@@ -240,7 +238,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
           "You can edit a slug that's used in the URL to this solution"
         }
       />
-      <Stack direction={isMobile ? "column" : "row"} spacing={1}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
         <TextField
           id="solutionTimeComplexity"
           name="solutionTimeComplexity"

@@ -22,7 +22,6 @@ import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
 import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import { useI18nContext } from "#/shared/hooks";
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 import type { PageScrollContainerProps } from "#/shared/ui/templates/PageScrollContainer";
@@ -66,7 +65,7 @@ const DashboardPage: NextPage<{
   };
 
   const handleScroll: PageScrollContainerProps["onScroll"] = (event) => {
-    if (!isMobile) return;
+    if (!window.matchMedia("(max-width: 599.95px)").matches) return;
 
     if (event.target instanceof Element) {
       const { scrollTop } = event.target;
@@ -89,7 +88,6 @@ const DashboardPage: NextPage<{
 
   const questionDataQuery = useDailyQuestionData();
 
-  const isMobile = useMobileLayout();
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "lg"));
 
   return (
@@ -109,11 +107,13 @@ const DashboardPage: NextPage<{
           alignItems: "center",
           position: "relative",
           overflow: "hidden",
-          clipPath: isMobile
-            ? "ellipse(100% 100% at 50% 0%)"
-            : isMediumScreen
-              ? "ellipse(120% 100% at 50% 0%)"
-              : "ellipse(140% 100% at 50% 0%)",
+          clipPath: "ellipse(140% 100% at 50% 0%)",
+          [theme.breakpoints.between("sm", "lg")]: {
+            clipPath: "ellipse(120% 100% at 50% 0%)",
+          },
+          [theme.breakpoints.down("sm")]: {
+            clipPath: "ellipse(100% 100% at 50% 0%)",
+          },
         }}
       >
         <Container
@@ -125,21 +125,23 @@ const DashboardPage: NextPage<{
             <Grid size={{ xs: 12, md: 6 }}>
               <Stack spacing={2} sx={{ pt: { xs: 6, md: 8 } }}>
                 <Typography
-                  variant={isMobile ? "h3" : isMediumScreen ? "h2" : "h1"}
+                  variant="h1"
                   sx={{
                     fontWeight: "bold",
                     lineHeight: 1.2,
                     maxWidth: { xs: "90%", md: "100%" },
+                    fontSize: { xs: "2rem", sm: "3rem", lg: "3.75rem" },
                   }}
                 >
                   {LL.DATA_STRUCTURES_SIMPLIFIED()}
                 </Typography>
                 <Typography
-                  variant={isMobile ? "body1" : isMediumScreen ? "body1" : "h6"}
+                  variant="body1"
                   sx={{
                     opacity: 0.9,
                     maxWidth: { xs: "85%", md: "100%" },
                     lineHeight: 1.6,
+                    fontSize: { lg: "1.25rem" },
                   }}
                 >
                   {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()}{" "}
@@ -147,7 +149,7 @@ const DashboardPage: NextPage<{
                   algorithms and data structures.
                 </Typography>
                 <Stack
-                  direction={isMobile ? "column" : "row"}
+                  direction={{ xs: "column", sm: "row" }}
                   spacing={2}
                   sx={{ pt: 2 }}
                 >
@@ -158,7 +160,6 @@ const DashboardPage: NextPage<{
                     <Button
                       variant="contained"
                       size="large"
-                      fullWidth={isMobile}
                       sx={{
                         bgcolor: "rgba(255, 255, 255, 0.2)",
                         color: "inherit",
@@ -169,6 +170,7 @@ const DashboardPage: NextPage<{
                         },
                         px: { xs: 3, md: 4 },
                         py: 1.5,
+                        width: { xs: "100%", sm: "auto" },
                       }}
                     >
                       {LL.TRY_IT_OUT_NOW()} 🚀
@@ -178,7 +180,6 @@ const DashboardPage: NextPage<{
                     <Button
                       variant="outlined"
                       size="large"
-                      fullWidth={isMobile}
                       sx={{
                         color: "inherit",
                         borderColor: "rgba(255, 255, 255, 0.3)",
@@ -189,6 +190,7 @@ const DashboardPage: NextPage<{
                         },
                         px: { xs: 3, md: 4 },
                         py: 1.5,
+                        width: { xs: "100%", sm: "auto" },
                       }}
                     >
                       {LL.BROWSE_PROJECTS()}

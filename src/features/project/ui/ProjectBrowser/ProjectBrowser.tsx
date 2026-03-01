@@ -12,11 +12,7 @@ import {
 import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
-import {
-  useI18nContext,
-  useMobileLayout,
-  usePlaygroundSlugs,
-} from "#/shared/hooks";
+import { useI18nContext, usePlaygroundSlugs } from "#/shared/hooks";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
@@ -43,7 +39,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const isMobile = useMobileLayout();
 
   // Get all filter state from context (URL-based, no Redux sync needed)
   const {
@@ -179,7 +174,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     // Refetch queries to retry
     void allBrief.refetch();
     void browseProjects.refetch();
-  }, [allBrief.refetch, browseProjects.refetch]);
+  }, [allBrief, browseProjects]);
 
   // Show error snackbar when error occurs
   useEffect(() => {
@@ -236,16 +231,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     };
   }, [isOpen, handleClose]);
 
-  const drawerLayout = isMobile
-    ? {
-        width: "100%",
-      }
-    : {
-        width: "800px",
-        maxWidth: "90vw",
-        minWidth: 300, // Minimum width for usability
-      };
-
   return (
     <Drawer
       anchor="left"
@@ -255,7 +240,9 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
       slotProps={{
         paper: {
           sx: {
-            ...drawerLayout,
+            width: { xs: "100%", md: "800px" },
+            maxWidth: { xs: "100vw", md: "90vw" },
+            minWidth: { md: 300 }, // Minimum width for usability
             background: alpha(theme.palette.background.paper, 0.68),
             backdropFilter: "blur(18px)",
           },

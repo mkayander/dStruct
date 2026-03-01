@@ -18,6 +18,7 @@ import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { isSnackbarClosable } from "#/shared/ui/snackbarClosability";
 import { ReduxProvider } from "#/store/provider";
+import type { SsrDeviceType } from "#/themes";
 
 import "#/styles/globals.css";
 
@@ -26,6 +27,7 @@ import "overlayscrollbars/overlayscrollbars.css";
 type MyAppProps = {
   session: Session | null;
   i18n?: I18nProps;
+  ssrDeviceType?: SsrDeviceType;
 };
 
 const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
@@ -34,7 +36,7 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
       <ReduxProvider>
         <SessionProvider session={pageProps.session}>
           <ApolloProvider client={apolloClient}>
-            <StateThemeProvider>
+            <StateThemeProvider ssrDeviceType={pageProps.ssrDeviceType}>
               <SnackbarProvider
                 maxSnack={4}
                 action={(snackbarKey) =>
