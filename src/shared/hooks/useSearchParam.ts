@@ -65,7 +65,7 @@ export const useSearchParam = <T extends string = string>(
   }, [router, param]);
 
   const updateParam = useCallback(
-    (value: T | "", options: SearchParamUpdateOptions = {}) => {
+    (value: string, options: SearchParamUpdateOptions = {}) => {
       if (value !== "" && !validate(value)) return;
 
       setState(value);
