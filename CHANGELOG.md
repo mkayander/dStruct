@@ -1,3 +1,10 @@
+# [1.357.0](https://github.com/mkayander/dStruct/compare/v1.356.0...v1.357.0) (2026-03-01)
+
+
+### Features
+
+* implement SSR device type handling to mitigate mobile flicker ([6c7a071](https://github.com/mkayander/dStruct/commit/6c7a071c1585d6981c965568e57656d5b55276c7))
+
 # [1.356.0](https://github.com/mkayander/dStruct/compare/v1.355.0...v1.356.0) (2026-03-01)
 
 
