@@ -3,11 +3,13 @@
 import { useRouter } from "next/router";
 import { useCallback, useMemo } from "react";
 
+import { projectSlice } from "#/features/project/model/projectSlice";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
 import {
   getLastPlaygroundPath,
   isValidLastPlaygroundPath,
 } from "#/shared/local-storage/playgroundPath";
+import { useAppDispatch } from "#/store/hooks";
 
 import {
   isPlaygroundView,
@@ -37,6 +39,7 @@ const isReplaceTransition = (
  */
 export const useMobilePlaygroundView = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const hasMounted = useHasMounted();
 
   const { view, setView } = usePlaygroundViewParam();
@@ -78,9 +81,12 @@ export const useMobilePlaygroundView = () => {
     (projectSlug?: string) => {
       const pathName = projectSlug ? `/playground/${projectSlug}` : undefined;
 
+      if (projectSlug) {
+        dispatch(projectSlice.actions.loadStart());
+      }
       navigateTo("code", pathName);
     },
-    [navigateTo],
+    [dispatch, navigateTo],
   );
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
 
