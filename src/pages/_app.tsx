@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
 import { SnackbarProvider } from "notistack";
 import React from "react";
+import "symbol-observable";
 
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";

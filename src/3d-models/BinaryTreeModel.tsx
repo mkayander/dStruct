@@ -8,6 +8,8 @@ import React from "react";
 import type * as THREE from "three";
 import type { GLTF } from "three-stdlib";
 
+import { assertGltfNodes } from "#/shared/lib/gltfTypeGuard";
+
 type GLTFResult = GLTF & {
   nodes: {
     Circle001: THREE.Mesh;
@@ -20,9 +22,12 @@ type GLTFResult = GLTF & {
 };
 
 const assetPath = "/assets/binary_tree-transformed.glb";
+const REQUIRED_NODES = ["Circle001", "Circle001_1"] as const;
 
 export function BinaryTreeModel(props: React.JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(assetPath) as GLTFResult;
+  const gltf = useGLTF(assetPath);
+  assertGltfNodes<GLTFResult>(gltf, REQUIRED_NODES);
+  const { nodes, materials } = gltf;
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={5.875}>

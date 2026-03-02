@@ -8,6 +8,8 @@ import React from "react";
 import type * as THREE from "three";
 import type { GLTF } from "three-stdlib";
 
+import { assertGltfNodes } from "#/shared/lib/gltfTypeGuard";
+
 type GLTFResult = GLTF & {
   nodes: {
     Main_LP: THREE.Mesh;
@@ -22,9 +24,12 @@ type GLTFResult = GLTF & {
 };
 
 const assetPath = "/assets/python-transformed.glb";
+const REQUIRED_NODES = ["Main_LP", "path1950007", "path1950007_1"] as const;
 
 export function PythonLogoModel(props: React.JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(assetPath) as GLTFResult;
+  const gltf = useGLTF(assetPath);
+  assertGltfNodes<GLTFResult>(gltf, REQUIRED_NODES);
+  const { nodes, materials } = gltf;
   return (
     <group {...props} dispose={null}>
       <mesh
