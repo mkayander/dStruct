@@ -46,7 +46,7 @@ export const StyledTabPanel: React.FC<StyledTabPanelProps> = ({
   }
 
   return (
-    <TabPanel sx={{ height: "fit-content", ...sxProps }} {...restProps}>
+    <TabPanel sx={{ flex: 1, minHeight: 0, ...sxProps }} {...restProps}>
       <Box
         id={containerId}
         sx={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}

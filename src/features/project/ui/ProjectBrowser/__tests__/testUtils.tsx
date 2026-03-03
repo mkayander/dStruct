@@ -10,6 +10,7 @@ import { vi } from "vitest";
 
 // Mock setters for useSearchParam
 export const mockSetBrowserParam = vi.fn();
+export const mockSetViewParam = vi.fn();
 export const mockSetSearchParam = vi.fn();
 export const mockSetCategoriesParam = vi.fn();
 export const mockSetDifficultiesParam = vi.fn();
@@ -24,6 +25,8 @@ export const createDefaultMockUseSearchParam = () => {
     switch (param) {
       case "browser":
         return ["", mockSetBrowserParam];
+      case "view":
+        return ["", mockSetViewParam];
       case "search":
         return ["", mockSetSearchParam];
       case "categories":
@@ -86,6 +89,7 @@ export const createRouterMock = () => ({
 export const resetAllMocks = () => {
   vi.clearAllMocks();
   mockSetBrowserParam.mockClear();
+  mockSetViewParam.mockClear();
   mockSetSearchParam.mockClear();
   mockSetCategoriesParam.mockClear();
   mockSetDifficultiesParam.mockClear();

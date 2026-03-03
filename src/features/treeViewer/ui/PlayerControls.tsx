@@ -12,6 +12,7 @@ import {
   Slider,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 
 import {
@@ -22,6 +23,7 @@ import {
 } from "#/features/callstack/model/callstackSlice";
 import { useI18nContext } from "#/shared/hooks";
 import { FrameIndexLabel } from "#/shared/ui/atoms/FrameIndexLabel";
+import { iconButtonHoverSx } from "#/shared/ui/styles/iconButtonHoverStyles";
 import { useAppSelector } from "#/store/hooks";
 
 export type PlayerControlsProps = {
@@ -44,6 +46,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   handleStepForward,
 }) => {
   const { LL } = useI18nContext();
+  const theme = useTheme();
   const callstackLength = useAppSelector(selectCallstackLength);
   const isPlaying = useAppSelector(selectCallstackIsPlaying);
   const isRootFrame = useAppSelector(selectIsRootFrame);
@@ -54,14 +57,17 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderValue(Number(event.target.value));
+    const parsed = Number(event.target.value);
+    if (!Number.isFinite(parsed)) {
+      return;
+    }
+    setSliderValue(parsed);
   };
 
   const handleBlur = () => {
-    if (sliderValue < 1) {
-      setSliderValue(1);
-    } else if (sliderValue > 700) {
-      setSliderValue(700);
+    const clamped = Math.min(700, Math.max(1, sliderValue));
+    if (sliderValue !== clamped) {
+      setSliderValue(clamped);
     }
   };
 
@@ -127,6 +133,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           title="Step back"
           disabled={disabled || !callstackLength || isRootFrame}
           onClick={handleStepBack}
+          sx={iconButtonHoverSx(theme)}
         >
           <FirstPage />
         </IconButton>
@@ -144,6 +151,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           title={canReplay ? "Replay" : isPlaying ? "Pause" : "Play"}
           disabled={!callstackLength}
           onClick={canReplay ? handleReplay : handlePlay}
+          sx={iconButtonHoverSx(theme)}
         >
           {canReplay ? <Replay /> : isPlaying ? <Pause /> : <PlayArrow />}
         </IconButton>
@@ -151,6 +159,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           title="Step forward"
           disabled={disabled || !callstackLength || isLastFrame}
           onClick={handleStepForward}
+          sx={iconButtonHoverSx(theme)}
         >
           <LastPage />
         </IconButton>

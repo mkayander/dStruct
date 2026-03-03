@@ -1,4 +1,6 @@
 import FilterCenterFocus from "@mui/icons-material/FilterCenterFocus";
+import ZoomIn from "@mui/icons-material/ZoomIn";
+import ZoomOut from "@mui/icons-material/ZoomOut";
 import { TabContext, TabList } from "@mui/lab";
 import {
   alpha,
@@ -11,18 +13,20 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
+import { hasGraphArgumentsSelector } from "#/entities/dataStructures/node/model/nodeSlice";
 import { BenchmarkView } from "#/features/benchmark/ui/BenchmarkView";
 import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
 import {
   editorSlice,
   selectIsEditingNodes,
   selectIsPanning,
-  selectIsViewCentered,
+  selectIsViewAtDefault,
 } from "#/features/treeViewer/model/editorSlice";
 import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
 import { useI18nContext, useSearchParam } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
+import { iconButtonHoverSx } from "#/shared/ui/styles/iconButtonHoverStyles";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { PannableViewer } from "#/shared/ui/templates/PannableViewer";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
@@ -36,6 +40,84 @@ import {
 } from "../hooks";
 import { resetStructuresState } from "../lib";
 
+type ZoomControlsProps = {
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onReset: () => void;
+  isAtDefault: boolean;
+};
+
+const ZoomControls: React.FC<ZoomControlsProps> = ({
+  onZoomIn,
+  onZoomOut,
+  onReset,
+  isAtDefault,
+}) => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        right: 12,
+        top: "50%",
+        transform: "translateY(-50%)",
+        zIndex: 60,
+        display: "flex",
+        flexDirection: "column",
+        gap: 0.5,
+        padding: 0.5,
+        borderRadius: 2,
+        background: alpha(theme.palette.background.paper, isDark ? 0.25 : 0.55),
+        backdropFilter: "blur(20px) saturate(180%)",
+        WebkitBackdropFilter: "blur(20px) saturate(180%)",
+        border: `1px solid ${alpha(
+          theme.palette.common.white,
+          isDark ? 0.08 : 0.35,
+        )}`,
+        boxShadow: `0 8px 32px ${alpha(
+          theme.palette.common.black,
+          isDark ? 0.4 : 0.08,
+        )}`,
+      }}
+    >
+      <IconButton
+        title="Zoom in"
+        onClick={onZoomIn}
+        size="small"
+        sx={iconButtonHoverSx(theme)}
+      >
+        <ZoomIn fontSize="small" />
+      </IconButton>
+      <IconButton
+        title="Zoom out"
+        onClick={onZoomOut}
+        size="small"
+        sx={iconButtonHoverSx(theme)}
+      >
+        <ZoomOut fontSize="small" />
+      </IconButton>
+      <Box
+        sx={{
+          height: 1,
+          mx: 0.5,
+          background: alpha(theme.palette.divider, 0.5),
+        }}
+      />
+      <IconButton
+        title="Reset view (pan and zoom)"
+        onClick={onReset}
+        disabled={isAtDefault}
+        size="small"
+        sx={iconButtonHoverSx(theme)}
+      >
+        <FilterCenterFocus fontSize="small" />
+      </IconButton>
+    </Box>
+  );
+};
+
 type ControlsOverlayProps = {
   sliderValue: number;
   setSliderValue: (value: number) => void;
@@ -43,6 +125,10 @@ type ControlsOverlayProps = {
   handleReplay: () => void;
   handleStepBack: () => void;
   handleStepForward: () => void;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onViewReset: () => void;
+  isViewAtDefault: boolean;
 };
 
 const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
@@ -52,9 +138,14 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
   handleReplay,
   handleStepBack,
   handleStepForward,
+  onZoomIn,
+  onZoomOut,
+  onViewReset,
+  isViewAtDefault,
 }) => {
   const dispatch = useAppDispatch();
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
+  const hasGraphArguments = useAppSelector(hasGraphArgumentsSelector);
   const theme = useTheme();
   const { saveGraphNodePositions, clearGraphNodePositions } =
     useArgumentsNodeData();
@@ -70,48 +161,66 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
 
   return (
     <>
-      <Box
-        sx={{
-          position: "absolute",
-          top: 62,
-          right: 8,
-          zIndex: 50,
-        }}
-      >
-        <Stack gap={1}>
-          <Button
-            title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
-            color={isEditingNodes ? "success" : "info"}
-            onClick={handleEditButtonClick}
-          >
-            {isEditingNodes ? "Save" : "Edit"}
-          </Button>
-          {isEditingNodes && (
+      <ZoomControls
+        onZoomIn={onZoomIn}
+        onZoomOut={onZoomOut}
+        onReset={onViewReset}
+        isAtDefault={isViewAtDefault}
+      />
+      {hasGraphArguments && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 62,
+            right: 8,
+            zIndex: 50,
+          }}
+        >
+          <Stack gap={1}>
             <Button
-              title="Your changes will be lost"
-              color="warning"
-              onClick={clearGraphNodePositions}
+              title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
+              color={isEditingNodes ? "success" : "info"}
+              onClick={handleEditButtonClick}
             >
-              Recalculate
+              {isEditingNodes ? "Save" : "Edit"}
             </Button>
-          )}
-        </Stack>
-      </Box>
+            {isEditingNodes && (
+              <Button
+                title="Your changes will be lost"
+                color="warning"
+                onClick={clearGraphNodePositions}
+              >
+                Recalculate
+              </Button>
+            )}
+          </Stack>
+        </Box>
+      )}
       <Box
         sx={{
           position: "absolute",
           maxWidth: "94%",
           width: "400px",
-          bottom: "0",
+          bottom: 0,
           left: "50%",
           transform: "translateX(-50%)",
-          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: "12px 12px 0 0",
+          background: alpha(
+            theme.palette.background.paper,
+            theme.palette.mode === "dark" ? 0.25 : 0.55,
+          ),
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          border: `1px solid ${alpha(
+            theme.palette.common.white,
+            theme.palette.mode === "dark" ? 0.08 : 0.35,
+          )}`,
           borderBottom: "none",
-          borderRadius: "8px 8px 0 0",
-          backgroundColor: alpha(theme.palette.secondary.main, 0.05),
-          boxShadow: `0 4px 30px ${alpha(theme.palette.secondary.main, 0.1)}`,
+          boxShadow: `0 8px 32px ${alpha(
+            theme.palette.common.black,
+            theme.palette.mode === "dark" ? 0.4 : 0.08,
+          )}`,
           zIndex: 70,
-          backdropFilter: "blur(14px)",
         }}
       >
         <PlayerControls
@@ -133,7 +242,17 @@ const TabNames = new Set<TabName>(["structure", "benchmark"]);
 const isValidTabName = (name: unknown): name is TabName =>
   TabNames.has(name as TabName);
 
-export const TreeViewPanel: React.FC = () => {
+export type TreeViewPanelProps = {
+  /** Optional actions to render in the tab header (e.g. output panel collapse on mobile) */
+  trailingHeaderActions?: React.ReactNode;
+  /** From SplitPanelsLayout - panel vertical size (unused, for type compatibility) */
+  verticalSize?: number;
+};
+
+export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
+  trailingHeaderActions,
+  verticalSize: _verticalSize,
+}) => {
   const { LL } = useI18nContext();
 
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
@@ -145,10 +264,20 @@ export const TreeViewPanel: React.FC = () => {
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
   const isPanning = useAppSelector(selectIsPanning);
-  const isViewCentered = useAppSelector(selectIsViewCentered);
+  const isViewAtDefault = useAppSelector(selectIsViewAtDefault);
 
-  const { handlePanStart, handlePanEnd, handlePanReset, handleMouseMove } =
-    useViewerPan();
+  const {
+    handlePanStart,
+    handlePanEnd,
+    handleViewReset,
+    handleMouseMove,
+    handleZoomIn,
+    handleZoomOut,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    viewerRef,
+  } = useViewerPan();
 
   const {
     replayCount,
@@ -174,6 +303,10 @@ export const TreeViewPanel: React.FC = () => {
       handleReplay={handleReplay}
       handleStepBack={handleStepBack}
       handleStepForward={handleStepForward}
+      onZoomIn={handleZoomIn}
+      onZoomOut={handleZoomOut}
+      onViewReset={handleViewReset}
+      isViewAtDefault={isViewAtDefault}
     />
   );
 
@@ -193,13 +326,7 @@ export const TreeViewPanel: React.FC = () => {
             <Tab label={"Benchmark"} value="benchmark" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
-            <IconButton
-              title="Reset view pan"
-              disabled={isViewCentered}
-              onClick={handlePanReset}
-            >
-              <FilterCenterFocus fontSize="small" />
-            </IconButton>
+            {trailingHeaderActions}
             <Button
               title={LL.RESET_DATA_STRUCTURES()}
               disabled={!isReady}
@@ -223,6 +350,7 @@ export const TreeViewPanel: React.FC = () => {
           overlay={overlay}
         >
           <div
+            ref={viewerRef}
             onMouseDown={(ev: React.MouseEvent) => {
               if (ev.button === 0) {
                 handlePanStart(ev);
@@ -231,7 +359,10 @@ export const TreeViewPanel: React.FC = () => {
             onMouseUp={handlePanEnd}
             onMouseMove={handleMouseMove}
             onMouseLeave={handlePanEnd}
-            style={{ height: "100%", width: "100%" }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{ height: "100%", width: "100%", touchAction: "none" }}
           >
             <PannableViewer>
               <TreeViewer

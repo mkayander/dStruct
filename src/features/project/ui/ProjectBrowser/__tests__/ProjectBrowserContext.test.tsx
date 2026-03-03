@@ -6,6 +6,7 @@ import {
   ProjectCategory,
   ProjectDifficulty,
 } from "#/server/db/generated/enums";
+import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 
 import {
   parseBoolean,
@@ -26,6 +27,7 @@ import {
   mockSetNewParam,
   mockSetSearchParam,
   mockSetSortParam,
+  mockSetViewParam,
   mockUseSearchParam,
   resetAllMocks,
 } from "./testUtils";
@@ -49,7 +51,9 @@ vi.mock("next/router", () => ({
 }));
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <ProjectBrowserProvider>{children}</ProjectBrowserProvider>
+  <StateThemeProvider>
+    <ProjectBrowserProvider>{children}</ProjectBrowserProvider>
+  </StateThemeProvider>
 );
 
 describe("ProjectBrowserContext - Helper Functions", () => {
@@ -302,22 +306,22 @@ describe("ProjectBrowserContext - Provider", () => {
     expect(result.current.sortOrder).toBe("asc");
   });
 
-  it("should call setBrowserParam when openBrowser is called", () => {
+  it("should call setViewParam when openBrowser is called", () => {
     const { result } = renderHook(() => useProjectBrowserContext(), {
       wrapper,
     });
 
     result.current.openBrowser();
-    expect(mockSetBrowserParam).toHaveBeenCalledWith("true");
+    expect(mockSetViewParam).toHaveBeenCalledWith("browse");
   });
 
-  it("should call setBrowserParam with empty string when closeBrowser is called", () => {
+  it("should call setViewParam with empty string when closeBrowser is called", () => {
     const { result } = renderHook(() => useProjectBrowserContext(), {
       wrapper,
     });
 
     result.current.closeBrowser();
-    expect(mockSetBrowserParam).toHaveBeenCalledWith("");
+    expect(mockSetViewParam).toHaveBeenCalledWith("");
   });
 
   it("should call setSearchParam when setSearchQuery is called", () => {
@@ -430,10 +434,10 @@ describe("ProjectBrowserContext - URL Parameter Parsing", () => {
     resetAllMocks();
   });
 
-  it("should parse browser param correctly", () => {
+  it("should parse view param correctly", () => {
     mockUseSearchParam.mockImplementation((param: string) => {
-      if (param === "browser") {
-        return ["true", mockSetBrowserParam];
+      if (param === "view") {
+        return ["browse", mockSetViewParam];
       }
       return ["", vi.fn()];
     });

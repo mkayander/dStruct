@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  mockSetBrowserParam,
+  mockSetViewParam,
   mockUseSearchParam,
   resetAllMocks,
 } from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
@@ -10,6 +10,7 @@ import {
   ProjectBrowserProvider,
   useProjectBrowserContext,
 } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
+import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 
 // Setup mocks at top level (vi.mock() must be hoisted)
 vi.mock("#/shared/hooks", async (importOriginal) => {
@@ -30,7 +31,9 @@ vi.mock("next/router", () => ({
 }));
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <ProjectBrowserProvider>{children}</ProjectBrowserProvider>
+  <StateThemeProvider>
+    <ProjectBrowserProvider>{children}</ProjectBrowserProvider>
+  </StateThemeProvider>
 );
 
 /**
@@ -69,14 +72,13 @@ describe("useProjectBrowserContext", () => {
       result.current.openBrowser();
     });
 
-    expect(mockSetBrowserParam).toHaveBeenCalledWith("true");
+    expect(mockSetViewParam).toHaveBeenCalledWith("browse");
   });
 
   it("should close browser when closeBrowser is called", () => {
-    // Mock browser param to be "true" initially
     mockUseSearchParam.mockImplementation((param: string) => {
-      if (param === "browser") {
-        return ["true", mockSetBrowserParam];
+      if (param === "view") {
+        return ["browse", mockSetViewParam];
       }
       return ["", vi.fn()];
     });
@@ -87,11 +89,10 @@ describe("useProjectBrowserContext", () => {
 
     expect(result.current.isOpen).toBe(true);
 
-    // Then close
     act(() => {
       result.current.closeBrowser();
     });
 
-    expect(mockSetBrowserParam).toHaveBeenCalledWith("");
+    expect(mockSetViewParam).toHaveBeenCalledWith("");
   });
 });

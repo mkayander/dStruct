@@ -74,13 +74,38 @@ const ResultData: React.FC<{
   );
 };
 
-export const OutputPanel: React.FC = () => {
-  const [value, setValue] = useState("1");
+export type OutputPanelProps = {
+  /** Optional actions to render in the tab header (e.g. collapse toggle on mobile) */
+  trailingHeaderActions?: React.ReactNode;
+  /** From SplitPanelsLayout - panel vertical size (unused, for type compatibility) */
+  verticalSize?: number;
+  /** Controlled tab value ("1" = Output, "2" = Callstack) */
+  value?: string;
+  /** Called when tab changes (for controlled mode) */
+  onTabChange?: (newValue: string) => void;
+  /** When true, render only the tab bar (for collapsed state on mobile) */
+  headerOnly?: boolean;
+  /** When headerOnly, called when the tab bar is clicked (e.g. to expand on active tab click) */
+  onTabBarClick?: () => void;
+};
+
+export const OutputPanel: React.FC<OutputPanelProps> = ({
+  trailingHeaderActions,
+  value: controlledValue,
+  onTabChange,
+  headerOnly = false,
+  onTabBarClick,
+}) => {
+  const [internalValue, setInternalValue] = useState("1");
+  const value = controlledValue ?? internalValue;
 
   const { LL } = useI18nContext();
 
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    if (controlledValue === undefined) {
+      setInternalValue(newValue);
+    }
+    onTabChange?.(newValue);
   };
 
   const isReady = useAppSelector(selectCallstackIsReady);
@@ -88,17 +113,37 @@ export const OutputPanel: React.FC = () => {
   const result = useAppSelector(selectCallstackResult);
   const error = useAppSelector(selectCallstackError);
 
+  const tabBar = (
+    <TabListWrapper>
+      <TabList onChange={handleChange} aria-label={LL.PANEL_TABS()}>
+        <Tab label={LL.OUTPUT()} value="1" />
+        <Tab label={LL.CALLSTACK()} value="2" />
+      </TabList>
+      {!headerOnly && trailingHeaderActions && (
+        <Stack direction="row" alignItems="center">
+          {trailingHeaderActions}
+        </Stack>
+      )}
+    </TabListWrapper>
+  );
+
+  if (headerOnly) {
+    return (
+      <Box
+        sx={{ flexShrink: 0, cursor: onTabBarClick ? "pointer" : undefined }}
+        onClick={onTabBarClick}
+      >
+        <TabContext value={value}>{tabBar}</TabContext>
+      </Box>
+    );
+  }
+
   return (
     <PanelWrapper>
       <LoadingSkeletonOverlay />
 
       <TabContext value={value}>
-        <TabListWrapper>
-          <TabList onChange={handleChange} aria-label={LL.PANEL_TABS()}>
-            <Tab label={LL.OUTPUT()} value="1" />
-            <Tab label={LL.CALLSTACK()} value="2" />
-          </TabList>
-        </TabListWrapper>
+        {tabBar}
 
         <StyledTabPanel value="1" style={{ height: "100%" }}>
           <Stack spacing={2}>
@@ -114,9 +159,11 @@ export const OutputPanel: React.FC = () => {
                 <Typography variant="h5" color="error">
                   {error.name}: {error.message}
                 </Typography>
-                <Typography variant="caption" color="error">
-                  {error.stack}
-                </Typography>
+                {error.stack && (
+                  <Typography variant="caption" color="error">
+                    {error.stack}
+                  </Typography>
+                )}
               </Box>
             ) : (
               <Stack spacing={1}>
@@ -140,7 +187,8 @@ export const OutputPanel: React.FC = () => {
           value="2"
           sx={{
             p: 0,
-            height: "100%",
+            flex: 1,
+            minHeight: 0,
           }}
           useScroll={false}
         >

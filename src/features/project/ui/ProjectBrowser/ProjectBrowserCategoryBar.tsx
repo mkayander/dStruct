@@ -15,8 +15,8 @@ type ProjectBrowserCategoryBarProps = {
   projects: ProjectBrief[] | undefined;
 };
 
-// Max height for collapsed state (approximately 2-3 rows of chips)
-const COLLAPSED_MAX_HEIGHT = 120;
+// Max height for collapsed state (slightly taller to peek second row with fade)
+const COLLAPSED_MAX_HEIGHT = 64; // Single row + peek of second
 
 export const ProjectBrowserCategoryBar: React.FC<
   ProjectBrowserCategoryBarProps
@@ -111,53 +111,69 @@ export const ProjectBrowserCategoryBar: React.FC<
       <Box
         sx={{
           px: 1.5,
-          pb: 1.5,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 1,
-            maxHeight: isExpanded ? "none" : COLLAPSED_MAX_HEIGHT,
-            overflow: isExpanded ? "visible" : "hidden",
-            transition: "max-height 0.3s ease-in-out",
-          }}
-        >
-          {sortedCategories.map((category) => {
-            const count = categoryCounts.get(category) || 0;
-            const isSelected = selectedCategories.includes(category);
-            const label = categoryLabels[category];
+        <Box sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1,
+              maxHeight: isExpanded ? "none" : COLLAPSED_MAX_HEIGHT,
+              overflowY: isExpanded ? "visible" : "hidden",
+              transition: "max-height 0.3s ease-in-out",
+            }}
+          >
+            {sortedCategories.map((category) => {
+              const count = categoryCounts.get(category) || 0;
+              const isSelected = selectedCategories.includes(category);
+              const label = categoryLabels[category];
 
-            return (
-              <Chip
-                key={category}
-                label={`${label}: ${count}`}
-                onClick={() => handleCategoryClick(category)}
-                onKeyDown={(ev) => handleKeyDown(ev, category)}
-                color={isSelected ? "primary" : "default"}
-                variant={isSelected ? "filled" : "outlined"}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: isSelected ? 600 : 400,
-                  "&:focus-visible": {
-                    outline: "2px solid",
-                    outlineColor: "primary.main",
-                    outlineOffset: 2,
-                  },
-                }}
-                tabIndex={0}
-                aria-pressed={isSelected}
-                aria-label={`Filter by ${label} category, ${count} projects`}
-              />
-            );
-          })}
+              return (
+                <Chip
+                  key={category}
+                  label={`${label}: ${count}`}
+                  onClick={() => handleCategoryClick(category)}
+                  onKeyDown={(ev) => handleKeyDown(ev, category)}
+                  color={isSelected ? "primary" : "default"}
+                  variant={isSelected ? "filled" : "outlined"}
+                  sx={{
+                    cursor: "pointer",
+                    fontWeight: isSelected ? 600 : 400,
+                    "&:focus-visible": {
+                      outline: "2px solid",
+                      outlineColor: "primary.main",
+                      outlineOffset: 2,
+                    },
+                  }}
+                  tabIndex={0}
+                  aria-pressed={isSelected}
+                  aria-label={`Filter by ${label} category, ${count} projects`}
+                />
+              );
+            })}
+          </Box>
+          {/* Fade overlay when collapsed - hints at more content */}
+          {!isExpanded && (
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 32,
+                background: (theme) =>
+                  `linear-gradient(to top, ${theme.palette.background.paper}, transparent)`,
+                pointerEvents: "auto",
+              }}
+              aria-hidden
+            />
+          )}
         </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
-            mt: 1,
           }}
         >
           <Button

@@ -315,6 +315,11 @@ export const treeDataStructuresSelector = createSelector(
   },
 );
 
+export const hasGraphArgumentsSelector = createSelector(
+  treeDataStructuresSelector,
+  (structures) => structures.graph.length > 0,
+);
+
 export const treeNodeDataSelector = treeNodeDataAdapter.getSelectors();
 
 export const selectTreeData = (name: string) =>
