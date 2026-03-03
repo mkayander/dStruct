@@ -26,6 +26,7 @@ import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
 import { useI18nContext, useSearchParam } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
+import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 import { iconButtonHoverSx } from "#/shared/ui/styles/iconButtonHoverStyles";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { PannableViewer } from "#/shared/ui/templates/PannableViewer";
@@ -54,7 +55,6 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({
   isAtDefault,
 }) => {
   const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
 
   return (
     <Box
@@ -69,17 +69,7 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({
         gap: 0.5,
         padding: 0.5,
         borderRadius: 2,
-        background: alpha(theme.palette.background.paper, isDark ? 0.25 : 0.55),
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        border: `1px solid ${alpha(
-          theme.palette.common.white,
-          isDark ? 0.08 : 0.35,
-        )}`,
-        boxShadow: `0 8px 32px ${alpha(
-          theme.palette.common.black,
-          isDark ? 0.4 : 0.08,
-        )}`,
+        ...glassOverlaySx(theme),
       }}
     >
       <IconButton
@@ -205,22 +195,9 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
           left: "50%",
           transform: "translateX(-50%)",
           borderRadius: "12px 12px 0 0",
-          background: alpha(
-            theme.palette.background.paper,
-            theme.palette.mode === "dark" ? 0.25 : 0.55,
-          ),
-          backdropFilter: "blur(20px) saturate(180%)",
-          WebkitBackdropFilter: "blur(20px) saturate(180%)",
-          border: `1px solid ${alpha(
-            theme.palette.common.white,
-            theme.palette.mode === "dark" ? 0.08 : 0.35,
-          )}`,
           borderBottom: "none",
-          boxShadow: `0 8px 32px ${alpha(
-            theme.palette.common.black,
-            theme.palette.mode === "dark" ? 0.4 : 0.08,
-          )}`,
           zIndex: 70,
+          ...glassOverlaySx(theme),
         }}
       >
         <PlayerControls
