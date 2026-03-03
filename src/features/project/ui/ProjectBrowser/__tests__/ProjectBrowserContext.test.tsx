@@ -21,7 +21,6 @@ import {
   useProjectBrowserContext,
 } from "../ProjectBrowserContext";
 import {
-  mockSetBrowserParam,
   mockSetCategoriesParam,
   mockSetDifficultiesParam,
   mockSetNewParam,
