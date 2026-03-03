@@ -195,9 +195,9 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
           left: "50%",
           transform: "translateX(-50%)",
           borderRadius: "12px 12px 0 0",
-          borderBottom: "none",
           zIndex: 70,
           ...glassOverlaySx(theme),
+          borderBottom: "none",
         }}
       >
         <PlayerControls

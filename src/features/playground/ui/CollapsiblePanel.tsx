@@ -2,8 +2,10 @@
 
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Box, Collapse, IconButton, Stack } from "@mui/material";
+import { Box, Collapse, IconButton, Stack, useTheme } from "@mui/material";
 import React, { useState } from "react";
+
+import { iconButtonHoverSx } from "#/shared/ui/styles/iconButtonHoverStyles";
 
 const HEADER_HEIGHT = 44;
 
@@ -32,6 +34,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
   hideHeaderRow = false,
   collapsedContent,
 }) => {
+  const theme = useTheme();
   const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed);
 
   const isCollapsed = controlledCollapsed ?? internalCollapsed;
@@ -62,6 +65,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
             onClick={handleToggle}
             aria-label={isCollapsed ? "Expand panel" : "Collapse panel"}
             aria-expanded={!isCollapsed}
+            sx={iconButtonHoverSx(theme)}
           >
             {isCollapsed ? (
               <ExpandMore fontSize="small" />
@@ -90,6 +94,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
                 onClick={handleToggle}
                 aria-label="Expand panel"
                 aria-expanded={false}
+                sx={iconButtonHoverSx(theme)}
               >
                 <ExpandMore fontSize="small" />
               </IconButton>
@@ -116,17 +121,23 @@ export const CollapsiblePanelToggle: React.FC<CollapsiblePanelToggleProps> = ({
   isCollapsed,
   onToggle,
   "aria-label": ariaLabel,
-}) => (
-  <IconButton
-    size="small"
-    onClick={onToggle}
-    aria-label={ariaLabel ?? (isCollapsed ? "Expand panel" : "Collapse panel")}
-    aria-expanded={!isCollapsed}
-  >
-    {isCollapsed ? (
-      <ExpandLess fontSize="small" />
-    ) : (
-      <ExpandMore fontSize="small" />
-    )}
-  </IconButton>
-);
+}) => {
+  const theme = useTheme();
+  return (
+    <IconButton
+      size="small"
+      onClick={onToggle}
+      aria-label={
+        ariaLabel ?? (isCollapsed ? "Expand panel" : "Collapse panel")
+      }
+      aria-expanded={!isCollapsed}
+      sx={iconButtonHoverSx(theme)}
+    >
+      {isCollapsed ? (
+        <ExpandLess fontSize="small" />
+      ) : (
+        <ExpandMore fontSize="small" />
+      )}
+    </IconButton>
+  );
+};

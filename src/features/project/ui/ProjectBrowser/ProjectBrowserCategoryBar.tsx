@@ -127,7 +127,7 @@ export const ProjectBrowserCategoryBar: React.FC<
             {sortedCategories.map((category) => {
               const count = categoryCounts.get(category) || 0;
               const isSelected = selectedCategories.includes(category);
-              const label = categoryLabels[category];
+              const label = categoryLabels[category] ?? String(category);
 
               return (
                 <Chip
