@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useRef } from "react";
-import { TableVirtuoso } from "react-virtuoso";
+import { TableVirtuoso, type TableVirtuosoHandle } from "react-virtuoso";
 
 import {
   selectNodeDataById,
@@ -126,7 +126,7 @@ export const CallstackTable: React.FC = () => {
   const { LL } = useI18nContext();
   const theme = useTheme();
   const callstack = useAppSelector(selectCallstack);
-  const containerRef = useRef<HTMLTableSectionElement>(null);
+  const virtuosoRef = useRef<TableVirtuosoHandle>(null);
 
   const startTimestamp = callstack.startTimestamp ?? 0;
 
@@ -142,15 +142,15 @@ export const CallstackTable: React.FC = () => {
   };
 
   useEffect(() => {
-    if (containerRef.current) {
-      const rowElement = containerRef.current.children[
-        callstack.frameIndex
-      ] as HTMLTableRowElement;
-      if (rowElement) {
-        rowElement.scrollIntoView({ block: "center", behavior: "smooth" });
-      }
+    const { frameIndex, frames } = callstack;
+    if (frameIndex >= 0 && frameIndex < frames.length && virtuosoRef.current) {
+      virtuosoRef.current.scrollToIndex({
+        index: frameIndex,
+        align: "center",
+        behavior: "smooth",
+      });
     }
-  }, [callstack.frameIndex]);
+  }, [callstack, callstack.frameIndex, callstack.frames.length]);
 
   if (!callstack.isReady) {
     return (
@@ -178,6 +178,7 @@ export const CallstackTable: React.FC = () => {
       }}
     >
       <TableVirtuoso
+        ref={virtuosoRef}
         style={{ height: "100%", width: "100%" }}
         data={callstack.frames}
         fixedHeaderContent={() => (
