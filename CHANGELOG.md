@@ -1,3 +1,22 @@
+# [1.358.0](https://github.com/mkayander/dStruct/compare/v1.357.1...v1.358.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* remove unused mock function from ProjectBrowserContext tests ([0262772](https://github.com/mkayander/dStruct/commit/02627721c7f10496989b2cd452a587a717eff4a7))
+* streamline MobilePlayground and enhance playground navigation ([c0eb5b7](https://github.com/mkayander/dStruct/commit/c0eb5b7d3dab732e84c469fbd8c2d402389e95f9))
+* update useSearchParam to accept string type for parameter value ([51fc9d0](https://github.com/mkayander/dStruct/commit/51fc9d013f6e526335f3340ebb54498f186e56ff))
+
+
+### Features
+
+* add tests for CallstackTable component ([09ad0de](https://github.com/mkayander/dStruct/commit/09ad0de221247c6aba3e1b9fb4233ace0126dd9e))
+* enhance CollapsiblePanel with hover styles and improved accessibility ([945903a](https://github.com/mkayander/dStruct/commit/945903a64f5726f4e9df0a83b8c5d00d234f43e3))
+* enhance mobile playground view with project loading state ([7c0d47e](https://github.com/mkayander/dStruct/commit/7c0d47ef646569feca534b12154a906d7f616a09))
+* enhance output panel and viewer functionality with collapsible features ([9cf289b](https://github.com/mkayander/dStruct/commit/9cf289bc3da230bc55a24d9e1d7c74873ea5787e))
+* implement shared glass overlay styles for UI components ([4cb581d](https://github.com/mkayander/dStruct/commit/4cb581d61cc122bfae442b43a88de600360b341b))
+* update CallstackTable to utilize TableVirtuoso ref for scrolling ([d091c98](https://github.com/mkayander/dStruct/commit/d091c98aa1a6e449ac763d865b524fd103e71109))
+
 ## [1.357.1](https://github.com/mkayander/dStruct/compare/v1.357.0...v1.357.1) (2026-03-01)
 
 
