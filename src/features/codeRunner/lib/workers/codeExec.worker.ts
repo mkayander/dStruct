@@ -75,6 +75,13 @@ export type CodeBenchmarkResponse =
 const callstack = new CallstackHelper();
 setGlobalRuntimeContext(callstack);
 
+/** No-op callstack for benchmark - visualization methods exist but do no work */
+const noOpCallstack: CallstackHelper = {
+  frames: [],
+  addOne: () => {},
+  clear: () => {},
+};
+
 self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
   const { data } = event;
   if (!data.type) throw new Error("No worker message type provided");
@@ -118,9 +125,14 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
     case "benchmark": {
       const { code, input, count } = data;
+      const prefixedCode = `${globalDefinitionsPrefix}\n${code}`;
       const startTimestamp = performance.now();
+      const prevRecordReads = globalThis.recordReads;
       try {
-        const getInputFunction = new Function(code);
+        setGlobalRuntimeContext(noOpCallstack);
+        globalThis.recordReads = false;
+
+        const getInputFunction = new Function(prefixedCode);
         const runFunction = getInputFunction();
         const timeData: number[] = [];
         let output: any;
@@ -163,6 +175,9 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           error,
         };
         self.postMessage(errorResponse);
+      } finally {
+        setGlobalRuntimeContext(callstack);
+        globalThis.recordReads = prevRecordReads;
       }
       break;
     }

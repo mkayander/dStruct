@@ -37,7 +37,12 @@ export const BenchmarkView = () => {
   const benchmarkResults = useAppSelector(selectBenchmarkResults);
 
   return (
-    <Stack spacing={2}>
+    <Stack
+      spacing={{
+        xs: 1,
+        md: 2,
+      }}
+    >
       <Stack direction="row" flexWrap="wrap" gap={1} useFlexGap>
         <StatChip label="Avg" value={benchmarkResults?.averageTime} />
         <StatChip label="Med" value={benchmarkResults?.medianTime} />

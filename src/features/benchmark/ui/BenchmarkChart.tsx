@@ -46,7 +46,7 @@ export const BenchmarkChart: React.FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="subtitle2" sx={{ alignSelf: "flex-start", mb: 1 }}>
+      <Typography variant="subtitle2" sx={{ alignSelf: "flex-start" }}>
         Runtime by execution order
       </Typography>
       <LineChart
@@ -68,10 +68,7 @@ export const BenchmarkChart: React.FC = () => {
           width: "100%",
         }}
       />
-      <Typography
-        variant="subtitle2"
-        sx={{ alignSelf: "flex-start", mb: 1, mt: 2 }}
-      >
+      <Typography variant="subtitle2" sx={{ alignSelf: "flex-start" }}>
         Runtime distribution (sorted)
       </Typography>
       <LineChart

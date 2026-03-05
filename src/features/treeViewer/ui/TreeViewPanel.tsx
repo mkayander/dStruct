@@ -287,24 +287,35 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
       <LoadingSkeletonOverlay />
 
       <TabContext value={tabValue}>
-        <TabListWrapper>
-          {!isMobile && (
-            <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
-              <Tab label={"Structure Viewer"} value="structure" />
-              <Tab label={"Benchmark"} value="benchmark" />
-            </TabList>
-          )}
+        <TabListWrapper
+          sx={{
+            display: "none",
+
+            xs: {
+              display: "none",
+            },
+            md: {
+              display: "flex",
+            },
+          }}
+        >
+          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+            <Tab label={"Structure Viewer"} value="structure" />
+            <Tab label={"Benchmark"} value="benchmark" />
+          </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
             {trailingHeaderActions}
-            <Button
-              title={LL.RESET_DATA_STRUCTURES()}
-              disabled={!isReady}
-              color="inherit"
-              onClick={handleReset}
-              sx={{ height: "100%" }}
-            >
-              {LL.RESET()}
-            </Button>
+            {tabValue === "structure" && (
+              <Button
+                title={LL.RESET_DATA_STRUCTURES()}
+                disabled={!isReady}
+                color="inherit"
+                onClick={handleReset}
+                sx={{ height: "100%" }}
+              >
+                {LL.RESET()}
+              </Button>
+            )}
           </Stack>
         </TabListWrapper>
         <StyledTabPanel
