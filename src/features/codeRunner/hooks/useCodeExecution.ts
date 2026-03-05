@@ -10,6 +10,7 @@ import {
   createPythonRuntimeArgs,
   createRawRuntimeArgs,
 } from "#/features/codeRunner/lib";
+import type { CodeBenchmarkResponse } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import { resetStructuresState } from "#/features/treeViewer/lib";
 import { useAppStore } from "#/store/hooks";
 
@@ -40,15 +41,7 @@ export interface ExecutionResult {
     stack?: string;
   };
   /** Benchmark-specific data (only present when running benchmark) */
-  benchmarkResults?: {
-    results?: number[];
-    averageTime?: number;
-    medianTime?: number;
-    p75Time?: number;
-    p90Time?: number;
-    p95Time?: number;
-    p99Time?: number;
-  };
+  benchmarkResults?: CodeBenchmarkResponse;
 }
 
 export const isLanguageValid = (value: unknown): value is ProgrammingLanguage =>
