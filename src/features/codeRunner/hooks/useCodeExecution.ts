@@ -46,6 +46,7 @@ export interface ExecutionResult {
     medianTime?: number;
     p75Time?: number;
     p90Time?: number;
+    p95Time?: number;
     p99Time?: number;
   };
 }

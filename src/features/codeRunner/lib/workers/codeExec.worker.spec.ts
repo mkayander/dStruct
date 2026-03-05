@@ -50,6 +50,7 @@ describe("codeExec.worker", () => {
     expect(response.medianTime).toBeLessThan(1);
     expect(response.p75Time).toBeLessThan(1);
     expect(response.p90Time).toBeLessThan(1);
+    expect(response.p95Time).toBeLessThan(1);
     expect(response.p99Time).toBeLessThan(1);
   });
 

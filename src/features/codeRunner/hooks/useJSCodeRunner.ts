@@ -44,6 +44,7 @@ export const useJSCodeRunner = () => {
           medianTime: result.medianTime,
           p75Time: result.p75Time,
           p90Time: result.p90Time,
+          p95Time: result.p95Time,
           p99Time: result.p99Time,
         },
       };

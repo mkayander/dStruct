@@ -41,6 +41,7 @@ export interface ExecWorkerInterface {
       medianTime?: number;
       p75Time?: number;
       p90Time?: number;
+      p95Time?: number;
       p99Time?: number;
     };
   };
@@ -136,6 +137,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const medianTime = sortedTimeData[Math.floor(count / 2)];
         const p75Time = sortedTimeData[Math.floor(count * 0.75)];
         const p90Time = sortedTimeData[Math.floor(count * 0.9)];
+        const p95Time = sortedTimeData[Math.floor(count * 0.95)];
         const p99Time = sortedTimeData[Math.floor(count * 0.99)];
 
         const response: CodeBenchmarkResponse = {
@@ -148,6 +150,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           medianTime,
           p75Time,
           p90Time,
+          p95Time,
           p99Time,
         };
         self.postMessage(response);
