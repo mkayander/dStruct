@@ -3,7 +3,6 @@ import React from "react";
 import { Provider } from "react-redux";
 import { describe, expect, it } from "vitest";
 
-import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import { makeStore } from "#/store/makeStore";
 
 import { useViewerPan } from "../useViewerPan";
@@ -19,19 +18,34 @@ const createWrapper = () => {
 };
 
 describe("useViewerPan", () => {
-  it("handlePanEnd always clears isPanning state", () => {
-    const { store, wrapper } = createWrapper();
+  it("handlePanEnd syncs accumulated offset to view state when mouse pan was active", () => {
+    const { wrapper } = createWrapper();
 
     const { result } = renderHook(() => useViewerPan(), { wrapper });
 
     act(() => {
-      store.dispatch(editorSlice.actions.setIsPanning(true));
+      result.current.handlePanStart({
+        button: 0,
+        clientX: 100,
+        clientY: 100,
+        target: document.createElement("div"),
+      } as React.MouseEvent);
     });
-    expect(store.getState().editor.isPanning).toBe(true);
+
+    act(() => {
+      result.current.handleMouseMove({
+        clientX: 150,
+        clientY: 120,
+        target: document.createElement("div"),
+      } as React.MouseEvent);
+    });
 
     act(() => {
       result.current.handlePanEnd();
     });
-    expect(store.getState().editor.isPanning).toBe(false);
+
+    const view = result.current.getViewState();
+    expect(view.offsetX).toBe(50);
+    expect(view.offsetY).toBe(20);
   });
 });

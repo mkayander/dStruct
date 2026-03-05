@@ -11,7 +11,7 @@ import {
   Tab,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { hasGraphArgumentsSelector } from "#/entities/dataStructures/node/model/nodeSlice";
 import { BenchmarkView } from "#/features/benchmark/ui/BenchmarkView";
@@ -19,8 +19,6 @@ import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlic
 import {
   editorSlice,
   selectIsEditingNodes,
-  selectIsPanning,
-  selectIsViewAtDefault,
 } from "#/features/treeViewer/model/editorSlice";
 import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
@@ -38,21 +36,18 @@ import {
   useArgumentsNodeData,
   usePlayerControls,
   useViewerPan,
+  type ViewerPanHandle,
 } from "../hooks";
 import { resetStructuresState } from "../lib";
 
 type ZoomControlsProps = {
-  onZoomIn: () => void;
-  onZoomOut: () => void;
-  onReset: () => void;
-  isAtDefault: boolean;
+  viewerPanRef: React.RefObject<ViewerPanHandle | null>;
+  isViewAtDefault: boolean;
 };
 
 const ZoomControls: React.FC<ZoomControlsProps> = ({
-  onZoomIn,
-  onZoomOut,
-  onReset,
-  isAtDefault,
+  viewerPanRef,
+  isViewAtDefault,
 }) => {
   const theme = useTheme();
 
@@ -74,7 +69,7 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({
     >
       <IconButton
         title="Zoom in"
-        onClick={onZoomIn}
+        onClick={() => viewerPanRef.current?.zoomIn()}
         size="small"
         sx={iconButtonHoverSx(theme)}
       >
@@ -82,7 +77,7 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({
       </IconButton>
       <IconButton
         title="Zoom out"
-        onClick={onZoomOut}
+        onClick={() => viewerPanRef.current?.zoomOut()}
         size="small"
         sx={iconButtonHoverSx(theme)}
       >
@@ -97,8 +92,8 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({
       />
       <IconButton
         title="Reset view (pan and zoom)"
-        onClick={onReset}
-        disabled={isAtDefault}
+        onClick={() => viewerPanRef.current?.resetView()}
+        disabled={isViewAtDefault}
         size="small"
         sx={iconButtonHoverSx(theme)}
       >
@@ -115,9 +110,7 @@ type ControlsOverlayProps = {
   handleReplay: () => void;
   handleStepBack: () => void;
   handleStepForward: () => void;
-  onZoomIn: () => void;
-  onZoomOut: () => void;
-  onViewReset: () => void;
+  viewerPanRef: React.RefObject<ViewerPanHandle | null>;
   isViewAtDefault: boolean;
 };
 
@@ -128,9 +121,7 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
   handleReplay,
   handleStepBack,
   handleStepForward,
-  onZoomIn,
-  onZoomOut,
-  onViewReset,
+  viewerPanRef,
   isViewAtDefault,
 }) => {
   const dispatch = useAppDispatch();
@@ -152,10 +143,8 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
   return (
     <>
       <ZoomControls
-        onZoomIn={onZoomIn}
-        onZoomOut={onZoomOut}
-        onReset={onViewReset}
-        isAtDefault={isViewAtDefault}
+        viewerPanRef={viewerPanRef}
+        isViewAtDefault={isViewAtDefault}
       />
       {hasGraphArguments && (
         <Box
@@ -240,21 +229,19 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
 
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
-  const isPanning = useAppSelector(selectIsPanning);
-  const isViewAtDefault = useAppSelector(selectIsViewAtDefault);
 
+  const viewerPanRef = useRef<ViewerPanHandle>(null);
   const {
     handlePanStart,
     handlePanEnd,
-    handleViewReset,
     handleMouseMove,
-    handleZoomIn,
-    handleZoomOut,
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
     viewerRef,
-  } = useViewerPan();
+    transformRef,
+    isViewAtDefault,
+  } = useViewerPan({ ref: viewerPanRef });
 
   const {
     replayCount,
@@ -280,9 +267,7 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
       handleReplay={handleReplay}
       handleStepBack={handleStepBack}
       handleStepForward={handleStepForward}
-      onZoomIn={handleZoomIn}
-      onZoomOut={handleZoomOut}
-      onViewReset={handleViewReset}
+      viewerPanRef={viewerPanRef}
       isViewAtDefault={isViewAtDefault}
     />
   );
@@ -322,12 +307,17 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
             height: "100%",
             p: 0,
             flexGrow: 1,
-            cursor: isPanning ? "grabbing" : "grab",
           }}
           overlay={overlay}
         >
           <div
             ref={viewerRef}
+            style={{
+              height: "100%",
+              width: "100%",
+              touchAction: "none",
+              cursor: "grab",
+            }}
             onMouseDown={(ev: React.MouseEvent) => {
               if (ev.button === 0) {
                 handlePanStart(ev);
@@ -339,9 +329,8 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            style={{ height: "100%", width: "100%", touchAction: "none" }}
           >
-            <PannableViewer>
+            <PannableViewer transformRef={transformRef}>
               <TreeViewer
                 replayCount={replayCount}
                 playbackInterval={sliderValue}
