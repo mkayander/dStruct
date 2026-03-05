@@ -36,6 +36,7 @@ import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
 import { api } from "#/shared/api";
 import type { RouterOutputs } from "#/shared/api";
+import { useMobileLayout } from "#/shared/hooks";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { usePrevious } from "#/shared/hooks";
@@ -50,6 +51,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { caseSlug } = usePlaygroundSlugs();
+  const isMobile = useMobileLayout();
   const prevCaseSlug = usePrevious(caseSlug);
   const args = useAppSelector(selectCaseArguments);
   const isEditable = useAppSelector(selectIsEditable);
@@ -158,23 +160,22 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
 
   const isLoading = selectedCase.isLoading || updateCase.isPending;
 
+  const addButton =
+    isEditable && caseSlug ? (
+      <AddArgumentButton onClick={handleAddArg} title={LL.ADD_ARGUMENT()} />
+    ) : null;
+
   return (
     <Box>
       <Stack direction="row" spacing={1} alignItems="center" mt={1} mb={2}>
         <Typography variant="caption">{LL.ARGUMENTS()}</Typography>
         {isLoading && <CircularProgress size={14} />}
         <Divider sx={{ flexGrow: 1 }} />
+        {isMobile && addButton}
       </Stack>
       <DraggableArgsList
         onDragEnd={handleDragEnd}
-        renderAddButton={() =>
-          isEditable && caseSlug ? (
-            <AddArgumentButton
-              onClick={handleAddArg}
-              title={LL.ADD_ARGUMENT()}
-            />
-          ) : null
-        }
+        renderAddButton={() => (isMobile ? null : addButton)}
       >
         {args.map((arg, index) => (
           <DraggableItem
