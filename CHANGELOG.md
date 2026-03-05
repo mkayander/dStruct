@@ -1,3 +1,15 @@
+# [1.360.0](https://github.com/mkayander/dStruct/compare/v1.359.0...v1.360.0) (2026-03-05)
+
+
+### Bug Fixes
+
+* improve viewer pan functionality and enhance zoom behavior ([fd6639a](https://github.com/mkayander/dStruct/commit/fd6639ab27bf504a3d716d0f35a1512fce8fc1ca))
+
+
+### Features
+
+* enhance viewer pan functionality and introduce zoom at point logic ([39b8896](https://github.com/mkayander/dStruct/commit/39b8896c0298ee0ba17f116335f38c3eab6df70c))
+
 # [1.359.0](https://github.com/mkayander/dStruct/compare/v1.358.0...v1.359.0) (2026-03-05)
 
 
