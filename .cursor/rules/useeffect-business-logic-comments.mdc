@@ -1,0 +1,53 @@
+---
+description: Add comments explaining business logic of important useEffects
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# useEffect Business Logic Comments
+
+For `useEffect` hooks that implement non-trivial business logic, add a brief comment above the effect explaining **what** it does and **why** (the business rule or user-facing behavior).
+
+## When to Add Comments
+
+- Effects that sync UI with external state (Redux, URL, etc.)
+- Effects that handle side effects on mount/unmount or when deps change
+- Effects that implement domain rules (e.g. "stop playback when leaving results view")
+- Effects with cleanup logic
+
+## When to Skip
+
+- Trivial effects (e.g. single `document.title` assignment)
+- Effects whose purpose is obvious from the code
+
+## Format
+
+Place a 1–2 line comment immediately above the `useEffect`:
+
+```typescript
+// Stop callstack playback when user leaves results view on mobile (Back button).
+useEffect(() => {
+  if (prevView === "results" && currentView !== "results") {
+    dispatch(callstackSlice.actions.setIsPlaying(false));
+  }
+}, [currentView, prevView, dispatch]);
+```
+
+## Example
+
+```typescript
+// Show snackbar when progress is non-null; hide when null. Single source of truth for this snackbar.
+useEffect(() => {
+  if (progress !== null) {
+    if (!hasSnackbarShownRef.current) {
+      hasSnackbarShownRef.current = true;
+      enqueueSnackbar(<ProgressContent />, { key: SNACKBAR_KEY });
+    }
+  } else {
+    if (hasSnackbarShownRef.current) {
+      hasSnackbarShownRef.current = false;
+      closeSnackbar(SNACKBAR_KEY);
+    }
+  }
+}, [progress, enqueueSnackbar, closeSnackbar]);
+```

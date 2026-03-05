@@ -92,6 +92,7 @@ export const useMobilePlaygroundView = () => {
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
 
   const prevView = usePrevious(currentView);
+  // Stop callstack playback when user leaves results view on mobile (e.g. Back button).
   useEffect(() => {
     if (prevView === "results" && currentView !== "results") {
       dispatch(callstackSlice.actions.setIsPlaying(false));

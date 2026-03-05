@@ -353,6 +353,7 @@ export const useNodesRuntimeUpdates = (
     [applyFrame, dispatch],
   );
 
+  // Apply or revert frame when frameIndex changes; when playing, advance to next frame after playbackInterval.
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
 
@@ -412,6 +413,7 @@ export const useNodesRuntimeUpdates = (
     playbackInterval,
   ]);
 
+  // Reset structures when replay is triggered (replayCount changed) so we start from a clean state.
   useEffect(() => {
     if (isActive) {
       resetStructuresState(dispatch, false);

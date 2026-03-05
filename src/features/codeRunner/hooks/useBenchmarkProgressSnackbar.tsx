@@ -16,6 +16,7 @@ export function useBenchmarkProgressSnackbar(): void {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const hasSnackbarShownRef = useRef(false);
 
+  // Show snackbar when progress is non-null; hide when null. Single source of truth for this snackbar.
   useEffect(() => {
     if (progress !== null) {
       if (!hasSnackbarShownRef.current) {
@@ -35,6 +36,7 @@ export function useBenchmarkProgressSnackbar(): void {
     }
   }, [progress, enqueueSnackbar, closeSnackbar]);
 
+  // Cleanup: close snackbar on unmount so it does not persist across navigation.
   useEffect(() => {
     return () => {
       if (hasSnackbarShownRef.current) {

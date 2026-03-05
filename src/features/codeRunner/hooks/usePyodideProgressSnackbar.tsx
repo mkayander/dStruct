@@ -18,6 +18,7 @@ export function usePyodideProgressSnackbar(): void {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const hasSnackbarShownRef = useRef(false);
 
+  // Show snackbar when progress is non-null; hide when null. Single source of truth for this snackbar.
   useEffect(() => {
     if (PYTHON_EXEC_MODE !== "pyodide") return;
 
@@ -38,6 +39,7 @@ export function usePyodideProgressSnackbar(): void {
     }
   }, [progress, enqueueSnackbar, closeSnackbar]);
 
+  // Cleanup: close snackbar on unmount so it does not persist across navigation.
   useEffect(() => {
     return () => {
       if (hasSnackbarShownRef.current) {
