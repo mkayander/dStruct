@@ -1,3 +1,11 @@
+# [1.359.0](https://github.com/mkayander/dStruct/compare/v1.358.0...v1.359.0) (2026-03-05)
+
+
+### Features
+
+* revamp mobile playground navigation and UI components ([8a6eb29](https://github.com/mkayander/dStruct/commit/8a6eb29d50e5a80b46decadc9cc0bf8fd1bee831))
+* update theme colors and enhance layout for mobile responsiveness ([1dfaf75](https://github.com/mkayander/dStruct/commit/1dfaf75c5ddd808cc10acb0c1b9509aa7118513e)), closes [#121212](https://github.com/mkayander/dStruct/issues/121212)
+
 # [1.358.0](https://github.com/mkayander/dStruct/compare/v1.357.1...v1.358.0) (2026-03-03)
 
 
