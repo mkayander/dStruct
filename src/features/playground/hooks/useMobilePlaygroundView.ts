@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
+import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { projectSlice } from "#/features/project/model/projectSlice";
-import { useHasMounted } from "#/shared/hooks/useHasMounted";
+import { useHasMounted, usePrevious } from "#/shared/hooks";
 import {
   getLastPlaygroundPath,
   isValidLastPlaygroundPath,
@@ -89,6 +90,13 @@ export const useMobilePlaygroundView = () => {
     [dispatch, navigateTo],
   );
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
+
+  const prevView = usePrevious(currentView);
+  useEffect(() => {
+    if (prevView === "results" && currentView !== "results") {
+      dispatch(callstackSlice.actions.setIsPlaying(false));
+    }
+  }, [currentView, prevView, dispatch]);
 
   return {
     currentView,
