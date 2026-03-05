@@ -1,3 +1,17 @@
+# [1.362.0](https://github.com/mkayander/dStruct/compare/v1.361.0...v1.362.0) (2026-03-05)
+
+
+### Bug Fixes
+
+* improve project selection handling in ProjectBrowser ([c4fd408](https://github.com/mkayander/dStruct/commit/c4fd408c7179324780e76258ea9c992376a71f52))
+
+
+### Features
+
+* add p95 time metric to benchmark results and enhance UI display ([b77c05c](https://github.com/mkayander/dStruct/commit/b77c05c61aca7fd409b956695c6996f0ddcf5470))
+* add rule to forbid inline type imports in TypeScript ([67ce20f](https://github.com/mkayander/dStruct/commit/67ce20fe97f3f5258feb4ef1a584772d553407ad))
+* enhance benchmark functionality and mobile layout support ([98d35d6](https://github.com/mkayander/dStruct/commit/98d35d6141bdad50112ad2c020f4a21171f22bea))
+
 # [1.361.0](https://github.com/mkayander/dStruct/compare/v1.360.0...v1.361.0) (2026-03-05)
 
 
