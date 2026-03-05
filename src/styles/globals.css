@@ -71,3 +71,10 @@ a {
     ) !important;
   }
 }
+
+/* Bigger bottom margin for notistack snackbars on mobile (safe area + nav bar clearance) */
+@media (max-width: 599.95px) {
+  .snackbar-mobile-bottom-margin {
+    bottom: calc(48px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}

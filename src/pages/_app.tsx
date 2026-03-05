@@ -45,6 +45,14 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
                     <SnackbarCloseButton snackbarKey={snackbarKey} />
                   ) : null
                 }
+                classes={{
+                  containerAnchorOriginBottomLeft:
+                    "snackbar-mobile-bottom-margin",
+                  containerAnchorOriginBottomCenter:
+                    "snackbar-mobile-bottom-margin",
+                  containerAnchorOriginBottomRight:
+                    "snackbar-mobile-bottom-margin",
+                }}
               >
                 <I18nProvider i18n={pageProps.i18n}>
                   <ProjectBrowserProvider>
