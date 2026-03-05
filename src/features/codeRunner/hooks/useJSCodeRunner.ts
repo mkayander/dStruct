@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 
 import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
-import { requestWorkerAction } from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
+import {
+  requestBenchmarkWithProgress,
+  requestWorkerAction,
+} from "#/features/codeRunner/lib/workers/codeExecWorkerInterface";
 
 import type { ExecutionResult } from "./useCodeExecution";
 import { useJSWorker } from "./useJSWorker";
@@ -16,15 +19,20 @@ export const useJSCodeRunner = () => {
     async (
       codeInput: string,
       params: BenchmarkParams,
+      onProgress?: (current: number, total: number) => void,
     ): Promise<ExecutionResult> => {
       if (!worker) throw new Error("Worker not initialized");
 
-      const result = await requestWorkerAction(worker, "benchmark", {
-        type: "benchmark",
+      const request = {
+        type: "benchmark" as const,
         code: codeInput,
         input: params.input,
         count: params.count,
-      });
+      };
+
+      const result = onProgress
+        ? await requestBenchmarkWithProgress(worker, request, onProgress)
+        : await requestWorkerAction(worker, "benchmark", request);
 
       return {
         output: result.output || "",

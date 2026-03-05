@@ -141,6 +141,12 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           const start = performance.now();
           output = runFunction(...input);
           timeData.push(performance.now() - start);
+          const current = i + 1;
+          self.postMessage({
+            type: "benchmark-progress",
+            current,
+            total: count,
+          });
         }
 
         const totalTime = performance.now() - startTimestamp;
@@ -152,12 +158,18 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const p95Time = sortedTimeData[Math.floor(count * 0.95)];
         const p99Time = sortedTimeData[Math.floor(count * 0.99)];
 
+        let outputStr: string;
+        try {
+          outputStr = stringifySolutionResult(output);
+        } catch {
+          outputStr = "[output could not be serialized]";
+        }
         const response: CodeBenchmarkResponse = {
           type: "benchmark",
           workStartTime: startTimestamp,
           runtime: totalTime,
           results: timeData,
-          output: stringifySolutionResult(output),
+          output: outputStr,
           averageTime,
           medianTime,
           p75Time,

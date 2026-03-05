@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { generate } from "short-uuid";
 
@@ -11,11 +11,17 @@ import {
   createRawRuntimeArgs,
 } from "#/features/codeRunner/lib";
 import type { CodeBenchmarkResponse } from "#/features/codeRunner/lib/workers/codeExec.worker";
+import { benchmarkSlice } from "#/features/codeRunner/model/benchmarkSlice";
 import { resetStructuresState } from "#/features/treeViewer/lib";
+import { throttleWithRAF } from "#/shared/lib";
 import { useAppStore } from "#/store/hooks";
 
+import { useBenchmarkProgressSnackbar } from "./useBenchmarkProgressSnackbar";
 import { useJSCodeRunner } from "./useJSCodeRunner";
 import { usePythonCodeRunner } from "./usePythonCodeRunner";
+
+/** Delay after 100% so the progress bar animation completes before snackbar closes. */
+const BENCHMARK_PROGRESS_COMPLETE_DELAY_MS = 400;
 
 class ExecutionError extends Error {
   constructor(errorData: ExecutionResult["error"]) {
@@ -68,6 +74,16 @@ export const useCodeExecution = (
 
   const { runJSCode, runJSBenchmark } = useJSCodeRunner();
   const { runPythonCode } = usePythonCodeRunner();
+
+  useBenchmarkProgressSnackbar();
+
+  const throttledBenchmarkProgress = useMemo(
+    () =>
+      throttleWithRAF((current: number, total: number) => {
+        dispatch(benchmarkSlice.actions.setProgress({ current, total }));
+      }),
+    [dispatch],
+  );
 
   // Handles execution errors and updates Redux store accordingly
   const handleExecutionError = useCallback(
@@ -176,16 +192,50 @@ export const useCodeExecution = (
         if (language === "javascript") {
           const state = store.getState();
           const args = createRawRuntimeArgs(selectCaseArguments(state));
-          return await runJSBenchmark(codeInput, {
-            type: "benchmark",
+          const count = 128;
+          const params = {
+            type: "benchmark" as const,
             code: codeInput,
             input: args,
-            count: 128,
-          });
+            count,
+          };
+          dispatch(
+            benchmarkSlice.actions.setProgress({ current: 0, total: count }),
+          );
+          try {
+            const result = await runJSBenchmark(
+              codeInput,
+              params,
+              throttledBenchmarkProgress,
+            );
+            dispatch(
+              benchmarkSlice.actions.setProgress({
+                current: count,
+                total: count,
+              }),
+            );
+            setTimeout(() => {
+              dispatch(benchmarkSlice.actions.clearProgress());
+            }, BENCHMARK_PROGRESS_COMPLETE_DELAY_MS);
+            return result;
+          } catch (e) {
+            setTimeout(() => {
+              dispatch(benchmarkSlice.actions.clearProgress());
+            }, BENCHMARK_PROGRESS_COMPLETE_DELAY_MS);
+            throw e;
+          }
         }
         throw new Error("Benchmark not supported for Python");
       }),
-    [codeInput, language, processTask, runJSBenchmark, store],
+    [
+      codeInput,
+      dispatch,
+      language,
+      processTask,
+      runJSBenchmark,
+      store,
+      throttledBenchmarkProgress,
+    ],
   );
 
   return { isProcessing, runCode, runBenchmark };

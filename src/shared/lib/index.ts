@@ -1,4 +1,5 @@
 export { isNumber } from "./isNumber";
+export { throttleWithRAF } from "./throttleWithRAF";
 export {
   stringifySolutionResult,
   safeStringify,
