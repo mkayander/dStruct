@@ -19,6 +19,30 @@ describe("computeZoomAtPoint", () => {
     expect(result.offsetY).not.toBe(0);
   });
 
+  it("should throw when current scale is zero or negative", () => {
+    expect(() =>
+      computeZoomAtPoint(
+        { offsetX: 0, offsetY: 0, scale: 0 },
+        100,
+        100,
+        0,
+        0,
+        1,
+      ),
+    ).toThrow(RangeError);
+
+    expect(() =>
+      computeZoomAtPoint(
+        { offsetX: 0, offsetY: 0, scale: -1 },
+        100,
+        100,
+        0,
+        0,
+        1,
+      ),
+    ).toThrow(RangeError);
+  });
+
   it("should clamp scale to valid range", () => {
     const resultHigh = computeZoomAtPoint(
       { offsetX: 0, offsetY: 0, scale: 1 },

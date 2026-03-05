@@ -18,6 +18,11 @@ export function computeZoomAtPoint(
   containerTop: number,
   newScale: number,
 ): ViewTransform {
+  if (current.scale <= 0) {
+    throw new RangeError(
+      `computeZoomAtPoint: scale must be positive, got ${current.scale}`,
+    );
+  }
   const clampedScale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, newScale));
   const contentX = (clientX - containerLeft - current.offsetX) / current.scale;
   const contentY = (clientY - containerTop - current.offsetY) / current.scale;

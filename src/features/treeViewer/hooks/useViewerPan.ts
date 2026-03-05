@@ -72,6 +72,7 @@ export const useViewerPan = (options?: UseViewerPanOptions) => {
   const wheelSyncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const isMountedRef = useRef(true);
 
   const pinchRef = useRef<{
     initialDistance: number;
@@ -227,20 +228,28 @@ export const useViewerPan = (options?: UseViewerPanOptions) => {
       }
       wheelSyncTimeoutRef.current = setTimeout(() => {
         wheelSyncTimeoutRef.current = null;
-        setView(next.offsetX, next.offsetY, next.scale);
+        if (isMountedRef.current) {
+          setView(next.offsetX, next.offsetY, next.scale);
+        }
       }, WHEEL_SYNC_DELAY_MS);
     },
     [applyTransform, setView],
   );
 
   useEffect(() => {
+    isMountedRef.current = true;
     const el = viewerRef.current;
-    if (!el) return;
-    el.addEventListener("wheel", handleWheel, { passive: false });
+    if (el) {
+      el.addEventListener("wheel", handleWheel, { passive: false });
+    }
     return () => {
-      el.removeEventListener("wheel", handleWheel);
+      isMountedRef.current = false;
+      if (el) {
+        el.removeEventListener("wheel", handleWheel);
+      }
       if (wheelSyncTimeoutRef.current) {
         clearTimeout(wheelSyncTimeoutRef.current);
+        wheelSyncTimeoutRef.current = null;
       }
     };
   }, [handleWheel]);
@@ -259,9 +268,13 @@ export const useViewerPan = (options?: UseViewerPanOptions) => {
 
     if (ev.touches.length === 2) {
       ev.preventDefault();
+      touchPanRef.current = null;
+      const initialDistance = getTouchDistance(ev.touches);
+      if (initialDistance <= 0) return;
+
       const base = { ...viewRef.current };
       pinchRef.current = {
-        initialDistance: getTouchDistance(ev.touches),
+        initialDistance,
         baseTransform: base,
         center: getTouchCenter(ev.touches),
         containerRect: target.getBoundingClientRect(),
@@ -338,6 +351,7 @@ export const useViewerPan = (options?: UseViewerPanOptions) => {
             pinch.lastApplied.offsetY,
             pinch.lastApplied.scale,
           );
+          touchPanRef.current = null;
         }
         pinchRef.current = null;
       }
