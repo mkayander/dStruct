@@ -8,6 +8,7 @@ import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
 import { useI18nContext } from "#/shared/hooks";
 
 import { CollapsiblePanel, CollapsiblePanelToggle } from "./CollapsiblePanel";
+import { MOBILE_PHASE_NAV_HEIGHT } from "./MobilePhaseNavBar";
 
 export const MobileResultsView: React.FC = () => {
   const { LL } = useI18nContext();
@@ -45,13 +46,7 @@ export const MobileResultsView: React.FC = () => {
       <Box
         sx={{
           mt: 1,
-          borderRadius: 2,
-          borderTopLeftRadius: 12,
-          borderTopRightRadius: 12,
           overflow: "hidden",
-          border: 1,
-          borderColor: "divider",
-          borderBottom: "none",
           flexShrink: 0,
         }}
       >
@@ -61,7 +56,15 @@ export const MobileResultsView: React.FC = () => {
           onToggle={setOutputCollapsed}
           hideHeaderRow
           collapsedContent={
-            <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              sx={{
+                width: "100%",
+                minHeight: 52,
+                paddingBottom: `calc(${MOBILE_PHASE_NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px))`,
+              }}
+            >
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <OutputPanel
                   headerOnly

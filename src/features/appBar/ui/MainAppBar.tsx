@@ -27,14 +27,17 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import React, { type MouseEvent, useState } from "react";
 
+import { MOBILE_APPBAR_HEIGHT } from "#/features/appBar/constants";
 import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
-import { MobilePlaygroundToolbar } from "#/features/appBar/ui/MobilePlaygroundToolbar";
 import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
+import { useMobilePlaygroundView } from "#/features/playground/hooks/useMobilePlaygroundView";
 import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { useProfileImageUploader } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
+import { useHasMounted } from "#/shared/hooks/useHasMounted";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { getImageUrl } from "#/shared/lib";
 import { useAppSelector } from "#/store/hooks";
@@ -47,6 +50,42 @@ export type MainAppBarProps = {
   position?: AppBarProps["position"];
 };
 
+const LogoBrand: React.FC<{
+  alt: string;
+  showName?: boolean;
+  logoSize?: number;
+}> = ({ alt, showName = true, logoSize = 32 }) => (
+  <MuiLink
+    component={Link}
+    href="/"
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "inherit",
+      mr: 1,
+    }}
+  >
+    <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+      <Image
+        alt={alt}
+        src="/android-chrome-192x192.png"
+        width={logoSize}
+        height={logoSize}
+      />
+      {showName && (
+        <Typography
+          variant="h6"
+          noWrap
+          sx={{ fontFamily: "'Share Tech', sans-serif" }}
+        >
+          dStruct
+        </Typography>
+      )}
+    </Box>
+  </MuiLink>
+);
+
 export const MainAppBar: React.FC<MainAppBarProps> = ({
   appBarVariant = "elevation",
   toolbarVariant = "dense",
@@ -57,13 +96,15 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const theme = useTheme();
   const isMobile = useMobileLayout();
   const { LL } = useI18nContext();
+  const { enqueueSnackbar } = useSnackbar();
+  const hasMounted = useHasMounted();
 
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { openBrowser } = useProjectBrowserContext();
+  const { currentView } = useMobilePlaygroundView();
 
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
-
   const session = useSession();
 
   const isPlayground = currentPath.startsWith("/playground");
@@ -79,7 +120,15 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   useProfileImageUploader(session);
 
   const handleSignIn = async () => {
-    await signIn();
+    try {
+      await signIn();
+    } catch (error: unknown) {
+      if (useMobilePlayground) {
+        const message =
+          error instanceof Error ? error.message : LL.SIGN_IN_FAILED();
+        enqueueSnackbar(message, { variant: "error" });
+      }
+    }
   };
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -93,6 +142,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const handleOpenUserMenu = () => {
     setIsSidePanelOpen(true);
   };
+
+  const toolbarHeight = useMobilePlayground ? MOBILE_APPBAR_HEIGHT : 56;
+  const isCompact = useMobilePlayground;
 
   return (
     <>
@@ -120,41 +172,21 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
         }}
       >
         <Container maxWidth="xl" disableGutters={useMobilePlayground}>
-          {useMobilePlayground ? (
-            <MobilePlaygroundToolbar
-              toolbarVariant={toolbarVariant}
-              onOpenUserMenu={handleOpenUserMenu}
+          <Toolbar
+            disableGutters
+            variant={toolbarVariant}
+            sx={{
+              height: toolbarHeight,
+              px: useMobilePlayground ? 1 : undefined,
+            }}
+          >
+            <LogoBrand
+              alt={LL.DSTRUCT_LOGO()}
+              showName={true}
+              logoSize={isCompact ? 24 : 32}
             />
-          ) : (
-            <Toolbar
-              disableGutters
-              variant={toolbarVariant}
-              sx={{ height: 56 }}
-            >
-              <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-                <Image
-                  alt={LL.DSTRUCT_LOGO()}
-                  src="/android-chrome-192x192.png"
-                  width="32"
-                  height="32"
-                />
-              </Box>
-              <MuiLink
-                component={Link}
-                href="/"
-                variant="h6"
-                noWrap
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "'Share Tech', sans-serif",
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                dStruct
-              </MuiLink>
 
+            {!useMobilePlayground && (
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
                   size="large"
@@ -193,30 +225,9 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   ))}
                 </Menu>
               </Box>
-              <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-                <Image
-                  alt={LL.DSTRUCT_LOGO()}
-                  src="/android-chrome-192x192.png"
-                  width="32"
-                  height="32"
-                />
-              </Box>
-              <MuiLink
-                component={Link}
-                variant="h5"
-                noWrap
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "'Share Tech', sans-serif",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                dStruct
-              </MuiLink>
+            )}
+
+            {!useMobilePlayground && (
               <Box
                 sx={{
                   flexGrow: 1,
@@ -241,66 +252,84 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   </Link>
                 ))}
               </Box>
+            )}
 
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                sx={{ flexGrow: 0 }}
-              >
+            {useMobilePlayground && <Box sx={{ flex: 1 }} />}
+
+            <Stack
+              direction="row"
+              spacing={isCompact ? 0.5 : 1}
+              alignItems="center"
+              sx={{ flexGrow: 0 }}
+            >
+              {(!useMobilePlayground || currentView !== "browse") && (
                 <Tooltip title={LL.PROJECT_BROWSER()} arrow>
                   <IconButton
+                    size={isCompact ? "small" : "medium"}
                     onClick={openBrowser}
                     color="inherit"
                     aria-label={LL.PROJECT_BROWSER()}
                   >
-                    <FolderOpen />
+                    <FolderOpen fontSize={isCompact ? "small" : "medium"} />
                   </IconButton>
                 </Tooltip>
-                {session.status === "loading" ? (
-                  <Skeleton
-                    variant="circular"
-                    animation="wave"
-                    height={40}
-                    width={40}
-                  />
-                ) : (
-                  <>
-                    {session.status === "unauthenticated" ? (
-                      <Button
-                        title={LL.SIGN_IN()}
-                        color="inherit"
-                        onClick={handleSignIn}
-                      >
-                        {LL.SIGN_IN()}
-                      </Button>
-                    ) : null}
-                    <Tooltip title={LL.OPEN_OPTIONS()} arrow>
-                      <IconButton onClick={handleOpenUserMenu}>
-                        {session.data ? (
-                          <Avatar>
-                            <Image
-                              src={getImageUrl(
-                                session.data.user.bucketImage ||
-                                  AVATAR_PLACEHOLDER,
-                              )}
-                              alt={`${session.data.user.name} avatar`}
-                              referrerPolicy="no-referrer"
-                              crossOrigin="anonymous"
-                              width={40}
-                              height={40}
-                            />
-                          </Avatar>
-                        ) : (
-                          <Settings />
-                        )}
-                      </IconButton>
-                    </Tooltip>
-                  </>
-                )}
-              </Stack>
-            </Toolbar>
-          )}
+              )}
+
+              {(useMobilePlayground && !hasMounted) ||
+              session.status === "loading" ? (
+                <Skeleton
+                  variant="circular"
+                  animation="wave"
+                  height={isCompact ? 32 : 40}
+                  width={isCompact ? 32 : 40}
+                />
+              ) : (
+                <>
+                  {session.status === "unauthenticated" && (
+                    <Button
+                      title={LL.SIGN_IN()}
+                      color="inherit"
+                      size={isCompact ? "small" : "medium"}
+                      onClick={handleSignIn}
+                      sx={
+                        isCompact
+                          ? { fontSize: "0.75rem", minWidth: "auto", px: 1 }
+                          : undefined
+                      }
+                    >
+                      {LL.SIGN_IN()}
+                    </Button>
+                  )}
+                  <Tooltip title={LL.OPEN_OPTIONS()} arrow>
+                    <IconButton
+                      size={isCompact ? "small" : "medium"}
+                      onClick={handleOpenUserMenu}
+                    >
+                      {session.data ? (
+                        <Avatar
+                          sx={isCompact ? { width: 28, height: 28 } : undefined}
+                        >
+                          <Image
+                            src={getImageUrl(
+                              session.data.user.bucketImage ||
+                                AVATAR_PLACEHOLDER,
+                            )}
+                            alt={`${session.data.user.name} avatar`}
+                            referrerPolicy="no-referrer"
+                            crossOrigin="anonymous"
+                            width={isCompact ? 28 : 40}
+                            height={isCompact ? 28 : 40}
+                          />
+                        </Avatar>
+                      ) : (
+                        <Settings fontSize={isCompact ? "small" : "medium"} />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+            </Stack>
+          </Toolbar>
         </Container>
       </AppBar>
     </>

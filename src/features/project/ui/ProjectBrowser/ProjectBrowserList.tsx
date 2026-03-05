@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from "react";
 import { Virtuoso } from "react-virtuoso";
 
 import type { RouterOutputs } from "#/shared/api";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 import {
@@ -27,6 +28,9 @@ type ProjectBrowserListProps = {
 
 // Fixed item height for virtualization - matches actual rendered height
 const ITEM_HEIGHT = 76;
+
+// Space after last item when bottom nav bar overlaps (mobile playground)
+const BOTTOM_SPACER_HEIGHT = "calc(38px + env(safe-area-inset-bottom, 0px))";
 
 // List component for Virtuoso
 const VirtuosoList: React.FC<{
@@ -55,6 +59,7 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
   onSelectProject,
 }) => {
   const dispatch = useAppDispatch();
+  const isMobile = useMobileLayout();
   const { searchQuery, selectedCategories, selectedDifficulties, showOnlyNew } =
     useProjectBrowserContext();
   const currentPage = useAppSelector(selectCurrentPage);
@@ -93,22 +98,26 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
     [selectedProjectSlug, onSelectProject],
   );
 
-  // Memoize Footer component to prevent recreation on every render
+  // Footer: loading indicator + blank spacer for nav bar overlap (mobile)
   const Footer = useMemo(
-    () =>
-      isLoading && hasMoreData ? (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 2,
-          }}
-        >
-          <CircularProgress size={24} />
-        </Box>
-      ) : null,
-    [isLoading, hasMoreData],
+    () => (
+      <>
+        {isLoading && hasMoreData && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              p: 2,
+            }}
+          >
+            <CircularProgress size={24} />
+          </Box>
+        )}
+        {isMobile && <Box sx={{ height: BOTTOM_SPACER_HEIGHT }} aria-hidden />}
+      </>
+    ),
+    [isLoading, hasMoreData, isMobile],
   );
 
   const components = useMemo(
@@ -159,6 +168,10 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
           style={{ height: "100%", width: "100%" }}
           components={{
             List: VirtuosoList,
+            Footer: () =>
+              isMobile ? (
+                <Box sx={{ height: BOTTOM_SPACER_HEIGHT }} aria-hidden />
+              ) : null,
           }}
         />
       </Box>

@@ -80,6 +80,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
           sx={{
             borderTop: 1,
             borderColor: "divider",
+            borderRadius: 2,
           }}
         >
           {collapsedContent ?? (

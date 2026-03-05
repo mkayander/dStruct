@@ -3,12 +3,13 @@
 import { Box } from "@mui/material";
 import React from "react";
 
+import { MOBILE_APPBAR_HEIGHT } from "#/features/appBar/constants";
+
 import { useMobilePlaygroundView } from "../hooks/useMobilePlaygroundView";
 import { MobileBrowseView } from "./MobileBrowseView";
 import { MobileCodeView } from "./MobileCodeView";
+import { MobilePhaseNavBar } from "./MobilePhaseNavBar";
 import { MobileResultsView } from "./MobileResultsView";
-
-export const MOBILE_APPBAR_HEIGHT = 48;
 
 const hiddenSx = { display: "none" } as const;
 const visibleSx = {
@@ -37,6 +38,7 @@ export const MobilePlayground: React.FC = () => {
       <Box sx={currentView === "results" ? visibleSx : hiddenSx}>
         <MobileResultsView />
       </Box>
+      <MobilePhaseNavBar />
     </Box>
   );
 };

@@ -6,11 +6,11 @@ The playground page (`src/pages/playground/[[...slug]].tsx`) renders a completel
 
 Mobile organizes the playground into three distinct phases, controlled by the `?view=` query parameter:
 
-| Phase | `?view=` | Component | Contains |
-|---|---|---|---|
-| **Browse** | `browse` | `MobileBrowseView` | Project browser with search, categories, difficulty filters |
-| **Code** | _(absent)_ | `MobileCodeView` | Collapsible args panel + `CodePanel` with Monaco editor |
-| **Results** | `results` | `MobileResultsView` | `TreeViewPanel` (structure viewer) + collapsible `OutputPanel` |
+| Phase       | `?view=`   | Component           | Contains                                                       |
+| ----------- | ---------- | ------------------- | -------------------------------------------------------------- |
+| **Browse**  | `browse`   | `MobileBrowseView`  | Project browser with search, categories, difficulty filters    |
+| **Code**    | _(absent)_ | `MobileCodeView`    | Collapsible args panel + `CodePanel` with Monaco editor        |
+| **Results** | `results`  | `MobileResultsView` | `TreeViewPanel` (structure viewer) + collapsible `OutputPanel` |
 
 The "code" view is the default when a project slug is present, so `?view=` is omitted to keep URLs clean.
 
@@ -89,37 +89,47 @@ stateDiagram-v2
 
 - **Forward button** — disabled on Browse if no project is selected; disabled on Code if no results exist
 
-## Toolbar (`MobilePlaygroundToolbar`)
+## Bottom Nav Bar (`MobilePhaseNavBar`)
 
-Compact `AppBar` with:
-- **Back/Forward arrows** for phase navigation
+Fixed bottom bar (thumb-friendly) with:
+
+- **Back** — navigate to previous phase or home
 - **Current phase label** (BROWSE / CODE / RESULTS)
-- **Folder icon** — quick jump to Browse from any view
+- **Forward** — advance to next phase when available
+
+## Toolbar (MainAppBar on mobile playground)
+
+`MainAppBar` adapts for mobile playground with a compact layout:
+
+- **Logo + dStruct** — brand on the left
+- **Folder icon** — quick jump to Browse from any view (when not on Browse)
 - **User avatar / Sign In** — session-aware
 
 ## Layout Constraints
 
 - No vertical scrolling on the page container (`overflow: hidden`)
 - Full viewport height: `calc(100vh - 48px)` (48px = `MOBILE_APPBAR_HEIGHT`)
+- Bottom nav bar overlaps content with glass background (fixed, no bottom padding)
 - Monaco editor uses `height: "100%"` on mobile (not fixed pixel height)
 - Collapsible panels have max-height constraints (`35vh` for args, `40vh` for output)
 
 ## Key Files
 
-| File | Purpose |
-|---|---|
-| `src/pages/playground/[[...slug]].tsx` | Page component; renders `MobilePlayground` or `DesktopWrapper` |
-| `src/features/playground/ui/MobilePlayground.tsx` | Keep-alive container for all three mobile views |
-| `src/features/playground/hooks/useMobilePlaygroundView.ts` | View state management via `?view=` query param |
-| `src/features/playground/ui/MobileBrowseView.tsx` | Project browser with search/filter/pagination |
-| `src/features/playground/ui/MobileCodeView.tsx` | Args panel + code editor |
-| `src/features/playground/ui/MobileResultsView.tsx` | Tree viewer + output panel |
-| `src/features/playground/ui/CollapsiblePanel.tsx` | Reusable collapsible section with header |
-| `src/features/appBar/ui/MobilePlaygroundToolbar.tsx` | Mobile-specific toolbar with phase navigation |
+| File                                                       | Purpose                                                        |
+| ---------------------------------------------------------- | -------------------------------------------------------------- |
+| `src/pages/playground/[[...slug]].tsx`                     | Page component; renders `MobilePlayground` or `DesktopWrapper` |
+| `src/features/playground/ui/MobilePlayground.tsx`          | Keep-alive container for all three mobile views                |
+| `src/features/playground/hooks/useMobilePlaygroundView.ts` | View state management via `?view=` query param                 |
+| `src/features/playground/ui/MobileBrowseView.tsx`          | Project browser with search/filter/pagination                  |
+| `src/features/playground/ui/MobileCodeView.tsx`            | Args panel + code editor                                       |
+| `src/features/playground/ui/MobileResultsView.tsx`         | Tree viewer + output panel                                     |
+| `src/features/playground/ui/CollapsiblePanel.tsx`          | Reusable collapsible section with header                       |
+| `src/features/appBar/ui/MainAppBar.tsx`                    | Unified app bar (adapts for mobile playground)                 |
+| `src/features/playground/ui/MobilePhaseNavBar.tsx`         | Bottom nav bar with phase navigation (Back/Forward)            |
 
 ## Entry Points from Home Page
 
-| Button | Destination | Behavior |
-|---|---|---|
-| "Try It Out" | `/playground/invert-binary-tree` | Opens a specific demo problem in Code view |
-| "Browse Projects" | `/playground?view=browse` | Opens the project browser |
+| Button            | Destination                      | Behavior                                   |
+| ----------------- | -------------------------------- | ------------------------------------------ |
+| "Try It Out"      | `/playground/invert-binary-tree` | Opens a specific demo problem in Code view |
+| "Browse Projects" | `/playground?view=browse`        | Opens the project browser                  |

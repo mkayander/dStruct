@@ -61,3 +61,13 @@ a {
 :root {
   --animate-ripple: ripple 600ms linear forwards;
 }
+
+/* Move Monaco's iPadShowKeyboard widget above the bottom nav bar on mobile */
+@media (max-width: 599.95px) {
+  textarea.iPadShowKeyboard,
+  .overlayWidgets textarea.iPadShowKeyboard {
+    transform: translateY(
+      calc(-1 * (38px + env(safe-area-inset-bottom, 0px)))
+    ) !important;
+  }
+}

@@ -156,6 +156,10 @@ type RootTranslation = {
 	 */
 	FEEDBACK: string
 	/**
+	 * F​o​r​w​a​r​d
+	 */
+	FORWARD: string
+	/**
 	 * F​o​r​m​a​t​t​i​n​g​ ​i​c​o​n
 	 */
 	FORMATTING_ICON: string
@@ -384,6 +388,10 @@ type RootTranslation = {
 	 * S​i​g​n​ ​i​n
 	 */
 	SIGN_IN: string
+	/**
+	 * S​i​g​n​-​i​n​ ​f​a​i​l​e​d
+	 */
+	SIGN_IN_FAILED: string
 	/**
 	 * S​i​g​n​ ​i​n​ ​t​o​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​y​o​u​r​ ​p​r​o​g​r​e​s​s​ ​a​n​d​ ​m​o​r​e​!
 	 */
@@ -638,6 +646,10 @@ export type TranslationFunctions = {
 	 */
 	FEEDBACK: () => LocalizedString
 	/**
+	 * Forward
+	 */
+	FORWARD: () => LocalizedString
+	/**
 	 * Formatting icon
 	 */
 	FORMATTING_ICON: () => LocalizedString
@@ -865,6 +877,10 @@ export type TranslationFunctions = {
 	 * Sign in
 	 */
 	SIGN_IN: () => LocalizedString
+	/**
+	 * Sign-in failed
+	 */
+	SIGN_IN_FAILED: () => LocalizedString
 	/**
 	 * Sign in to keep track of your progress and more!
 	 */
