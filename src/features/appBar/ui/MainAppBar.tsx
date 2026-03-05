@@ -155,6 +155,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
         variant={appBarVariant}
         color={"transparent"}
         sx={{
+          paddingTop: "env(safe-area-inset-top, 0px)",
           transition: "all .2s",
           backdropFilter: isScrolled ? "blur(12px)" : "blur(0px)",
           background: isScrolled

@@ -25,7 +25,7 @@ export const MobilePlayground: React.FC = () => {
     <Box
       component="main"
       sx={{
-        height: `calc(100vh - ${MOBILE_APPBAR_HEIGHT}px)`,
+        height: `calc(100vh - ${MOBILE_APPBAR_HEIGHT}px - env(safe-area-inset-top, 0px))`,
         overflow: "hidden",
       }}
     >
