@@ -1,3 +1,12 @@
+# [1.361.0](https://github.com/mkayander/dStruct/compare/v1.360.0...v1.361.0) (2026-03-05)
+
+
+### Features
+
+* enhance MobilePlayground component for improved view transitions ([7e422a9](https://github.com/mkayander/dStruct/commit/7e422a9ec47fc5d30da52389d192af88c6a9731b))
+* enhance snackbar positioning for mobile devices ([8755cf5](https://github.com/mkayander/dStruct/commit/8755cf53519d9ccc4e9a50abdc6e0f144a67c7bd))
+* integrate mobile layout support in ArgsEditor component ([ecba9ac](https://github.com/mkayander/dStruct/commit/ecba9ac82c7ba5c8f0002f18b031a15868cec60e))
+
 # [1.360.0](https://github.com/mkayander/dStruct/compare/v1.359.0...v1.360.0) (2026-03-05)
 
 
