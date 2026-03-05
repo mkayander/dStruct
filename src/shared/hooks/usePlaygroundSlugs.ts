@@ -20,6 +20,8 @@ export const usePlaygroundSlugs = () => {
   const getCurrentQuery = useCallback(() => {
     const query = { ...router.query };
     delete query.slug;
+    // Exclude view so project selection doesn't get overwritten by closeBrowser
+    delete query.view;
 
     return query;
   }, [router]);

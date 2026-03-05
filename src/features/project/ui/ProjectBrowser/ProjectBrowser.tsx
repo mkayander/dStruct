@@ -31,8 +31,8 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
 
   const handleSelectProject = useCallback(
     (slug: string) => {
+      closeBrowser(); // Close immediately (setState); setProject nav will overwrite closeBrowser nav
       void setProject(slug);
-      closeBrowser();
       onSelectProject?.(slug);
     },
     [closeBrowser, onSelectProject, setProject],
