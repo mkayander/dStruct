@@ -9,6 +9,8 @@ import {
   type SelectChangeEvent,
   Stack,
   Tab,
+  ToggleButton,
+  ToggleButtonGroup,
   Tooltip,
 } from "@mui/material";
 import type * as monaco from "monaco-editor";
@@ -41,6 +43,7 @@ import { selectIsEditingNodes } from "#/features/treeViewer/model/editorSlice";
 import { api } from "#/shared/api";
 import {
   useI18nContext,
+  useMobileLayout,
   usePlaygroundSlugs,
   useSearchParam,
 } from "#/shared/hooks";
@@ -70,8 +73,16 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { LL } = useI18nContext();
+  const isMobile = useMobileLayout();
 
-  const [runMode] = useSearchParam("mode");
+  const [runMode, setRunMode] = useSearchParam<"structure" | "benchmark">(
+    "mode",
+    {
+      defaultValue: "structure",
+      validate: (v): v is "structure" | "benchmark" =>
+        v === "structure" || v === "benchmark",
+    },
+  );
   const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(
     "language",
     {
@@ -120,6 +131,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     codeInput,
     language || "javascript",
   );
+
+  // Reset to run mode when switching to Python (benchmark is JS-only)
+  useEffect(() => {
+    if (language === "python" && runMode === "benchmark") {
+      setRunMode("structure");
+    }
+  }, [language, runMode, setRunMode]);
 
   // Update code on solution change
   useEffect(() => {
@@ -326,36 +344,32 @@ export const CodePanel: React.FC<CodePanelProps> = ({
             <Tab label={LL.CODE_RUNNER()} value="1" />
           </TabList>
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Tooltip
-              title={
-                <Box display="flex" alignItems="center" gap="3px">
-                  {language === "javascript" ? (
-                    <>
-                      {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
-                      <Image
-                        src={prettierIcon}
-                        alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
-                        width={22}
-                        height={22}
-                      />
-                    </>
-                  ) : (
-                    <span>Formatting is only available for JavaScript</span>
-                  )}
-                </Box>
-              }
-              arrow
-            >
-              <span>
-                <IconButton
-                  disabled={!isFormattingAvailable || language !== "javascript"}
-                  loading={formatJavaScript.isPending}
-                  onClick={handleFormatCode}
+            {isMobile && (
+              <ToggleButtonGroup
+                value={runMode}
+                exclusive
+                onChange={(_, value) => {
+                  if (value) setRunMode(value);
+                }}
+                size="small"
+              >
+                <ToggleButton
+                  value="structure"
+                  aria-label="Structure"
+                  title="Structure"
                 >
-                  <AutoFixHigh fontSize="small" />
-                </IconButton>
-              </span>
-            </Tooltip>
+                  Struct
+                </ToggleButton>
+                <ToggleButton
+                  value="benchmark"
+                  aria-label="Benchmark"
+                  title="Benchmark"
+                  disabled={language !== "javascript"}
+                >
+                  Bench
+                </ToggleButton>
+              </ToggleButtonGroup>
+            )}
             <Button
               variant="text"
               color="success"
@@ -444,6 +458,36 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                   style={{ marginRight: "-6px", marginTop: "2px" }}
                 >
                   <ContentCopy fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip
+                title={
+                  <Box display="flex" alignItems="center" gap="3px">
+                    {language === "javascript" ? (
+                      <>
+                        {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}
+                        <Image
+                          src={prettierIcon}
+                          alt={`'Prettier' ${LL.FORMATTING_ICON()}`}
+                          width={22}
+                          height={22}
+                        />
+                      </>
+                    ) : (
+                      <span>Formatting is only available for JavaScript</span>
+                    )}
+                  </Box>
+                }
+                arrow
+                placement="left"
+              >
+                <IconButton
+                  disabled={!isFormattingAvailable || language !== "javascript"}
+                  loading={formatJavaScript.isPending}
+                  onClick={handleFormatCode}
+                  style={{ marginRight: "-6px", marginTop: "2px" }}
+                >
+                  <AutoFixHigh fontSize="small" />
                 </IconButton>
               </Tooltip>
             </Stack>

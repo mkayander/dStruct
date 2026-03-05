@@ -22,7 +22,11 @@ import {
 } from "#/features/treeViewer/model/editorSlice";
 import { PlayerControls } from "#/features/treeViewer/ui/PlayerControls";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
-import { useI18nContext, useSearchParam } from "#/shared/hooks";
+import {
+  useI18nContext,
+  useMobileLayout,
+  useSearchParam,
+} from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 import { iconButtonHoverSx } from "#/shared/ui/styles/iconButtonHoverStyles";
@@ -220,6 +224,7 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
   verticalSize: _verticalSize,
 }) => {
   const { LL } = useI18nContext();
+  const isMobile = useMobileLayout();
 
   const [tabValue, setTabValue] = useSearchParam<TabName>("mode", {
     defaultValue: "structure",
@@ -283,10 +288,12 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
 
       <TabContext value={tabValue}>
         <TabListWrapper>
-          <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
-            <Tab label={"Structure Viewer"} value="structure" />
-            <Tab label={"Benchmark"} value="benchmark" />
-          </TabList>
+          {!isMobile && (
+            <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
+              <Tab label={"Structure Viewer"} value="structure" />
+              <Tab label={"Benchmark"} value="benchmark" />
+            </TabList>
+          )}
           <Stack direction="row" alignItems="center" spacing={1}>
             {trailingHeaderActions}
             <Button

@@ -39,6 +39,15 @@ export interface ExecutionResult {
     message: string;
     stack?: string;
   };
+  /** Benchmark-specific data (only present when running benchmark) */
+  benchmarkResults?: {
+    results?: number[];
+    averageTime?: number;
+    medianTime?: number;
+    p75Time?: number;
+    p90Time?: number;
+    p99Time?: number;
+  };
 }
 
 export const isLanguageValid = (value: unknown): value is ProgrammingLanguage =>
@@ -111,6 +120,7 @@ export const useCodeExecution = (
           frames: result.callstack,
           runtime: result.runtime,
           startTimestamp,
+          benchmarkResults: result.benchmarkResults,
         }),
       );
       dispatch(callstackSlice.actions.setIsPlaying(true));

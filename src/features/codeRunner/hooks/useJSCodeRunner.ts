@@ -38,6 +38,14 @@ export const useJSCodeRunner = () => {
               stack: result.error.stack,
             }
           : undefined,
+        benchmarkResults: {
+          results: result.results,
+          averageTime: result.averageTime,
+          medianTime: result.medianTime,
+          p75Time: result.p75Time,
+          p90Time: result.p90Time,
+          p99Time: result.p99Time,
+        },
       };
     },
     [worker],
