@@ -1,0 +1,35 @@
+---
+description: Forbid inline imports in types - always export and import types separately
+globs: **/*.{ts,tsx}
+alwaysApply: true
+---
+
+# No Inline Type Imports
+
+Never use inline `import()` in type annotations. Always export types from their source module and import them separately.
+
+## ❌ Bad
+
+```typescript
+// Inline import in type annotation
+benchmarkResults?: import("#/features/codeRunner/lib/workers/codeExec.worker").CodeBenchmarkResponse;
+
+// Inline import in generic
+const x: Promise<import("./types").MyType> = fetch();
+```
+
+## ✅ Good
+
+```typescript
+// Import type at top of file
+import type { CodeBenchmarkResponse } from "#/features/codeRunner/lib/workers/codeExec.worker";
+
+// Use imported type
+benchmarkResults?: CodeBenchmarkResponse;
+```
+
+## Rule
+
+1. Export types from the module where they are defined
+2. Use `import type { TypeName } from "module"` at the top of the file
+3. Reference the imported type name in annotations
