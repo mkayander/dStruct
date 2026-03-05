@@ -11,12 +11,18 @@ import { MobileCodeView } from "./MobileCodeView";
 import { MobilePhaseNavBar } from "./MobilePhaseNavBar";
 import { MobileResultsView } from "./MobileResultsView";
 
-const hiddenSx = { display: "none" } as const;
-const visibleSx = {
-  display: "flex",
-  flexDirection: "column",
+const mainSx = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: "100%",
   height: "100%",
+  transition: "opacity 0.1s ease-in-out",
 } as const;
+const hiddenSx = { opacity: 0, pointerEvents: "none" } as const;
+const visibleSx = { opacity: 1 } as const;
 
 export const MobilePlayground: React.FC = () => {
   const { currentView, goToResults } = useMobilePlaygroundView();
@@ -25,17 +31,30 @@ export const MobilePlayground: React.FC = () => {
     <Box
       component="main"
       sx={{
+        position: "relative",
         height: `calc(100vh - ${MOBILE_APPBAR_HEIGHT}px - env(safe-area-inset-top, 0px))`,
         overflow: "hidden",
       }}
     >
-      <Box sx={currentView === "browse" ? visibleSx : hiddenSx}>
+      <Box
+        id="browse-view"
+        sx={{ ...mainSx, ...(currentView === "browse" ? visibleSx : hiddenSx) }}
+      >
         <MobileBrowseView />
       </Box>
-      <Box sx={currentView === "code" ? visibleSx : hiddenSx}>
+      <Box
+        id="code-view"
+        sx={{ ...mainSx, ...(currentView === "code" ? visibleSx : hiddenSx) }}
+      >
         <MobileCodeView onRunComplete={goToResults} />
       </Box>
-      <Box sx={currentView === "results" ? visibleSx : hiddenSx}>
+      <Box
+        id="results-view"
+        sx={{
+          ...mainSx,
+          ...(currentView === "results" ? visibleSx : hiddenSx),
+        }}
+      >
         <MobileResultsView />
       </Box>
       <MobilePhaseNavBar />
