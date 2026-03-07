@@ -30,6 +30,7 @@ export const awaitWorkerResponse = <T extends WorkerRequestType>(
     const listener = (event: MessageEvent<WorkerResponse>) => {
       if (event.data?.type !== type) return;
 
+      worker.removeEventListener("message", listener);
       clearTimeout(timeoutId);
       if (event.data.error) {
         reject(event.data.error);
@@ -37,7 +38,7 @@ export const awaitWorkerResponse = <T extends WorkerRequestType>(
         resolve(event.data);
       }
     };
-    worker.addEventListener("message", listener, { once: true });
+    worker.addEventListener("message", listener);
   });
 
 export const requestWorkerAction = async <T extends WorkerRequestType>(

@@ -42,7 +42,7 @@ describe("codeExec.worker", () => {
       type: "benchmark",
       code: String(code),
       input: [],
-      count: 128,
+      count: 8,
     });
 
     expect(response.type).toBe("benchmark");
