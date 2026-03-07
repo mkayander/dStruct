@@ -1,3 +1,14 @@
+# [1.363.0](https://github.com/mkayander/dStruct/compare/v1.362.0...v1.363.0) (2026-03-07)
+
+
+### Features
+
+* add comments for business logic in useEffect hooks ([80968eb](https://github.com/mkayander/dStruct/commit/80968eb7697773f2a0bbcf13c78a45ca8d22494d))
+* add tests for benchmark and pyodide progress snackbar hooks ([e768611](https://github.com/mkayander/dStruct/commit/e768611b18824e3ebd59d27209b36e2935757252))
+* enhance error handling and context management in code execution ([b042740](https://github.com/mkayander/dStruct/commit/b042740581909fb91f486892e4526520a000ace0))
+* enhance mobile playground view with callstack playback control ([d49369b](https://github.com/mkayander/dStruct/commit/d49369bf7139d2af73ea33241bf329f7de5b53f4))
+* implement benchmark progress snackbar and state management ([8f7e981](https://github.com/mkayander/dStruct/commit/8f7e981ab098556d77f41b24caf2a1f8b7508ba2))
+
 # [1.362.0](https://github.com/mkayander/dStruct/compare/v1.361.0...v1.362.0) (2026-03-05)
 
 
