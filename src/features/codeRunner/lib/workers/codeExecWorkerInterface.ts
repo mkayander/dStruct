@@ -18,18 +18,7 @@ export const awaitWorkerResponse = <T extends WorkerRequestType>(
   timeLimit = 60000,
 ): Promise<ExecWorkerInterface[T]["response"]> =>
   new Promise((resolve, reject) => {
-    const listener = (event: MessageEvent<WorkerResponse>) => {
-      if (event.data?.type !== type) return;
-
-      if (event.data.error) {
-        reject(event.data.error);
-      } else {
-        resolve(event.data);
-      }
-    };
-    worker.addEventListener("message", listener, { once: true });
-
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       worker.removeEventListener("message", listener);
       reject(
         new Error(
@@ -37,6 +26,18 @@ export const awaitWorkerResponse = <T extends WorkerRequestType>(
         ),
       );
     }, timeLimit);
+
+    const listener = (event: MessageEvent<WorkerResponse>) => {
+      if (event.data?.type !== type) return;
+
+      clearTimeout(timeoutId);
+      if (event.data.error) {
+        reject(event.data.error);
+      } else {
+        resolve(event.data);
+      }
+    };
+    worker.addEventListener("message", listener, { once: true });
   });
 
 export const requestWorkerAction = async <T extends WorkerRequestType>(

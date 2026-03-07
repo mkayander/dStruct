@@ -68,16 +68,7 @@ export const safeStringify = (val: unknown): string => {
   return stripQuotes(jsonString);
 };
 
-export const stringifySolutionResult = (
-  result?:
-    | string
-    | number
-    | bigint
-    | Set<unknown>
-    | Map<unknown, unknown>
-    | LinkedListNode<any>
-    | null,
-) => {
+export const stringifySolutionResult = (result?: unknown) => {
   globalThis.recordReads = false;
   const string = safeStringify(result);
   globalThis.recordReads = true;

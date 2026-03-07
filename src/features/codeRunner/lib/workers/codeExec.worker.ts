@@ -22,6 +22,9 @@ const dummy = () => {};
   ),
 );
 
+/** Serializable error shape sent via postMessage (Error is not structured-cloneable). */
+export type WorkerError = { name: string; message: string; stack?: string };
+
 export interface ExecWorkerInterface {
   benchmark: {
     request: {
@@ -36,7 +39,7 @@ export interface ExecWorkerInterface {
       runtime: number;
       results?: number[];
       output?: string;
-      error?: Error;
+      error?: WorkerError;
       averageTime?: number;
       medianTime?: number;
       p75Time?: number;
@@ -58,7 +61,7 @@ export interface ExecWorkerInterface {
       workStartTime: number;
       runtime: number;
       output?: string;
-      error?: Error;
+      error?: WorkerError;
       callstack?: CallstackHelper["frames"];
     };
   };
@@ -74,6 +77,19 @@ export type CodeBenchmarkResponse =
 
 const callstack = new CallstackHelper();
 setGlobalRuntimeContext(callstack);
+
+/** Serialize error for postMessage (structured clone cannot serialize Error reliably). */
+const serializeError = (
+  err: unknown,
+): { name: string; message: string; stack?: string } => {
+  if (err instanceof Error) {
+    return { name: err.name, message: err.message, stack: err.stack };
+  }
+  return {
+    name: "Error",
+    message: typeof err === "string" ? err : String(err),
+  };
+};
 
 /** No-op callstack for benchmark - visualization methods exist but do no work */
 const noOpCallstack: CallstackHelper = {
@@ -110,13 +126,13 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           callstack: callstack.frames,
         };
         self.postMessage(response);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.log("Worker: error: ", error);
         const errorResponse: WorkerResponse = {
           type: "run",
           workStartTime: startTimestamp,
           runtime: performance.now() - startTimestamp,
-          error,
+          error: serializeError(error),
         };
         self.postMessage(errorResponse);
       }
@@ -135,7 +151,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const getInputFunction = new Function(prefixedCode);
         const runFunction = getInputFunction();
         const timeData: number[] = [];
-        let output: any;
+        let output: unknown;
 
         for (let i = 0; i < count; i++) {
           const start = performance.now();
@@ -178,13 +194,13 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           p99Time,
         };
         self.postMessage(response);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.log("Worker: error: ", error);
         const errorResponse: WorkerResponse = {
           type: "benchmark",
           workStartTime: performance.now(),
           runtime: performance.now() - startTimestamp,
-          error,
+          error: serializeError(error),
         };
         self.postMessage(errorResponse);
       } finally {

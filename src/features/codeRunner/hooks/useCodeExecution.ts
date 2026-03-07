@@ -1,5 +1,6 @@
 "use client";
 
+import { useSnackbar } from "notistack";
 import { useCallback, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { generate } from "short-uuid";
@@ -64,12 +65,25 @@ export const getCodeKey = (language: ProgrammingLanguage | "") => {
   }
 };
 
+export const toErrorInfo = (
+  e: unknown,
+): { name: string; message: string; stack?: string } => {
+  if (e instanceof Error) {
+    return { name: e.name, message: e.message, stack: e.stack };
+  }
+  return {
+    name: "Error",
+    message: typeof e === "string" ? e : "An unexpected error occurred",
+  };
+};
+
 export const useCodeExecution = (
   codeInput: string,
   language: ProgrammingLanguage,
 ) => {
   const dispatch = useDispatch();
   const store = useAppStore();
+  const { enqueueSnackbar } = useSnackbar();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { runJSCode, runJSBenchmark } = useJSCodeRunner();
@@ -89,29 +103,33 @@ export const useCodeExecution = (
   const handleExecutionError = useCallback(
     (e: unknown, startTimestamp: number) => {
       const runtime = performance.now() - startTimestamp;
-      if (e instanceof ExecutionError) {
-        dispatch(
-          callstackSlice.actions.addOne({
-            id: generate(),
-            timestamp: performance.now(),
-            name: "error",
-          }),
-        );
-        dispatch(
-          callstackSlice.actions.setStatus({
-            isReady: true,
-            error: { name: e.name, message: e.message, stack: e.stack },
-            result: null,
-            runtime,
-            startTimestamp,
-          }),
-        );
-        console.warn(e);
+      const errorInfo = toErrorInfo(e);
+
+      dispatch(
+        callstackSlice.actions.addOne({
+          id: generate(),
+          timestamp: performance.now(),
+          name: "error",
+        }),
+      );
+      dispatch(
+        callstackSlice.actions.setStatus({
+          isReady: true,
+          error: errorInfo,
+          result: null,
+          runtime,
+          startTimestamp,
+        }),
+      );
+
+      if (!(e instanceof ExecutionError)) {
+        enqueueSnackbar(errorInfo.message, { variant: "error" });
+        console.error("Execution error:", e);
       } else {
-        console.error("Invalid error type: ", e);
+        console.warn(e);
       }
     },
-    [dispatch],
+    [dispatch, enqueueSnackbar],
   );
 
   // Updates Redux store with successful execution results

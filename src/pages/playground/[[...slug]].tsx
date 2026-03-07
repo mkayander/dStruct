@@ -6,6 +6,7 @@ import { ConfigContext } from "#/context";
 import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
 import { CodePanel } from "#/features/codeRunner/ui/CodePanel";
 import { OutputPanel } from "#/features/output/ui/OutputPanel";
+import { PlaygroundViewProvider } from "#/features/playground/context/PlaygroundViewContext";
 import { MobilePlayground } from "#/features/playground/ui/MobilePlayground";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
@@ -70,16 +71,21 @@ const PlaygroundPage: NextPage<PlaygroundPageProps> = () => {
           background: darken(theme.palette.background.default, 0.1),
         }}
       >
-        <MainAppBar toolbarVariant="dense" />
         {isMobile ? (
-          <MobilePlayground />
+          <PlaygroundViewProvider>
+            <MainAppBar toolbarVariant="dense" />
+            <MobilePlayground />
+          </PlaygroundViewProvider>
         ) : (
-          <DesktopWrapper
-            TopLeft={ProjectPanel}
-            BottomLeft={CodePanel}
-            TopRight={TreeViewPanel}
-            BottomRight={OutputPanel}
-          />
+          <>
+            <MainAppBar toolbarVariant="dense" />
+            <DesktopWrapper
+              TopLeft={ProjectPanel}
+              BottomLeft={CodePanel}
+              TopRight={TreeViewPanel}
+              BottomRight={OutputPanel}
+            />
+          </>
         )}
       </PageScrollContainer>
     </ConfigContext.Provider>
