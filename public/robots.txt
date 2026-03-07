@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://dstruct.app/sitemap.xml
+Sitemap: https://dstruct.pro/sitemap.xml

@@ -1,9 +1,9 @@
 # dStruct - LeetCode Problem Visualization Web App
 
-#### [dstruct.app](https://dstruct.app/)
+#### [dstruct.pro](https://dstruct.pro/)
 
 <p align="center">
-  <a href="https://dstruct.app">
+  <a href="https://dstruct.pro">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
   </a>
   <a href="/LICENSE">
@@ -17,7 +17,7 @@ dStruct is a web app designed to assist users in understanding and visualizing L
 code editor where users can write and visualize their solutions.
 
 <p align="center">
-  <a href="https://dstruct.app/playground">
+  <a href="https://dstruct.pro/playground">
     <img src="https://i.imgur.com/Q1FRwaK.png" alt="dStruct Web App" />
   </a>
 </p>

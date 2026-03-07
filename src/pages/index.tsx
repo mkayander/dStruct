@@ -94,6 +94,7 @@ const DashboardPage: NextPage<{
     <MainLayout onScroll={handleScroll} headerPosition="fixed">
       <Head>
         <title>dStruct</title>
+        <link rel="canonical" href="https://dstruct.pro/" />
       </Head>
       {/* Hero Section */}
       <Box

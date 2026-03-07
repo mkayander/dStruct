@@ -1,24 +1,45 @@
 import type { GetServerSideProps } from "next";
 
 import { db } from "#/server/db/client";
-import type { PlaygroundProject } from "#/server/db/generated/client";
 
-function generateSiteMap(projects: Partial<PlaygroundProject>[]) {
+const BASE_URL = "https://dstruct.pro";
+
+type ProjectForSitemap = {
+  slug: string;
+  updatedAt: string;
+};
+
+function formatLastmod(date: Date | string): string {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return d.toISOString().split("T")[0] ?? "";
+}
+
+function generateSiteMap(projects: ProjectForSitemap[]) {
+  const now = formatLastmod(new Date());
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://dstruct.app</loc>
+       <loc>${BASE_URL}</loc>
+       <lastmod>${now}</lastmod>
+       <changefreq>weekly</changefreq>
+       <priority>1.0</priority>
      </url>
      <url>
-       <loc>https://dstruct.app/playground</loc>
+       <loc>${BASE_URL}/playground</loc>
+       <lastmod>${now}</lastmod>
+       <changefreq>weekly</changefreq>
+       <priority>0.9</priority>
      </url>
      ${projects
-       .map(({ slug }) => {
+       .map(({ slug, updatedAt }) => {
+         const lastmod = formatLastmod(updatedAt);
          return `
-       <url>
-           <loc>${`https://dstruct.app/playground/${slug}`}</loc>
-       </url>
+     <url>
+       <loc>${BASE_URL}/playground/${slug}</loc>
+       <lastmod>${lastmod}</lastmod>
+       <changefreq>weekly</changefreq>
+       <priority>0.8</priority>
+     </url>
      `;
        })
        .join("")}
@@ -33,8 +54,10 @@ function SiteMap() {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // We make an API call to gather the URLs for our site
   const projects = await db.playgroundProject.findMany({
+    where: { isPublic: true },
     select: {
       slug: true,
+      updatedAt: true,
     },
   });
 
