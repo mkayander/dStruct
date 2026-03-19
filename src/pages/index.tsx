@@ -156,7 +156,7 @@ const DashboardPage: NextPage<{
                 >
                   <Link
                     data-testid="cta-to-playground"
-                    href="/playground/invert-binary-tree"
+                    href="/playground/invert-binary-tree?view=code"
                   >
                     <Button
                       variant="contained"

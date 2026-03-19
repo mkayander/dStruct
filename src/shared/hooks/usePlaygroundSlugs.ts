@@ -13,25 +13,41 @@ import {
 } from "#/shared/local-storage/playgroundPath";
 import { useAppDispatch } from "#/store/hooks";
 
+type PlaygroundSlugNavigateOptions = {
+  /** @default false */
+  replace?: boolean;
+  /**
+   * Remove `view` from the next URL. Use when changing project or landing on
+   * `/playground` so `?view=browse` from the picker is not carried over; omit
+   * for case/solution path changes so `?view=code` / `?view=results` stay put.
+   */
+  omitView?: boolean;
+};
+
 export const usePlaygroundSlugs = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const getCurrentQuery = useCallback(() => {
-    const query = { ...router.query };
-    delete query.slug;
-    // Exclude view so project selection doesn't get overwritten by closeBrowser
-    delete query.view;
+  const getCurrentQuery = useCallback(
+    (omitView?: boolean) => {
+      const query = { ...router.query };
+      delete query.slug;
+      if (omitView) {
+        delete query.view;
+      }
 
-    return query;
-  }, [router]);
+      return query;
+    },
+    [router],
+  );
 
   const navigateTo = useCallback(
-    (pathname: string, replace: boolean) => {
+    (pathname: string, options?: PlaygroundSlugNavigateOptions) => {
+      const replace = options?.replace ?? false;
       router[replace ? "replace" : "push"](
         {
           pathname,
-          query: getCurrentQuery(),
+          query: getCurrentQuery(options?.omitView),
         },
         undefined,
         { shallow: true },
@@ -59,7 +75,12 @@ export const usePlaygroundSlugs = () => {
 
     const setProject = (slug?: string, isInitial?: boolean) => {
       dispatch(projectSlice.actions.loadStart());
-      if (!slug) return navigateTo(PLAYGROUND_BASE_PATH, true);
+      if (!slug) {
+        return navigateTo(PLAYGROUND_BASE_PATH, {
+          replace: true,
+          omitView: true,
+        });
+      }
 
       const lastPath = getLastPlaygroundPath();
       if (lastPath && !lastPath.startsWith(PLAYGROUND_BASE_PATH)) {
@@ -70,10 +91,13 @@ export const usePlaygroundSlugs = () => {
         : null;
 
       if (pathToRestore) {
-        return navigateTo(pathToRestore, true);
+        return navigateTo(pathToRestore, { replace: true, omitView: true });
       }
 
-      return navigateTo(`${PLAYGROUND_BASE_PATH}/${slug}`, true);
+      return navigateTo(`${PLAYGROUND_BASE_PATH}/${slug}`, {
+        replace: true,
+        omitView: true,
+      });
     };
 
     const setCase = (slug: string) => {
@@ -85,7 +109,7 @@ export const usePlaygroundSlugs = () => {
 
       return navigateTo(
         `${PLAYGROUND_BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
-        caseSlug ? false : true,
+        { replace: !caseSlug },
       );
     };
 
@@ -97,13 +121,13 @@ export const usePlaygroundSlugs = () => {
 
       return navigateTo(
         `${PLAYGROUND_BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
-        solutionSlug ? false : true,
+        { replace: !solutionSlug },
       );
     };
 
     const clearSlugs = () => {
       removeLastPlaygroundPath();
-      return navigateTo(PLAYGROUND_BASE_PATH, false);
+      return navigateTo(PLAYGROUND_BASE_PATH, { omitView: true });
     };
 
     return {

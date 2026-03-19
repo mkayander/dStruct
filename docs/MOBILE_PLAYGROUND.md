@@ -6,13 +6,13 @@ The playground page (`src/pages/playground/[[...slug]].tsx`) renders a completel
 
 Mobile organizes the playground into three distinct phases, controlled by the `?view=` query parameter:
 
-| Phase       | `?view=`   | Component           | Contains                                                       |
-| ----------- | ---------- | ------------------- | -------------------------------------------------------------- |
-| **Browse**  | `browse`   | `MobileBrowseView`  | Project browser with search, categories, difficulty filters    |
-| **Code**    | _(absent)_ | `MobileCodeView`    | Collapsible args panel + `CodePanel` with Monaco editor        |
-| **Results** | `results`  | `MobileResultsView` | `TreeViewPanel` (structure viewer) + collapsible `OutputPanel` |
+| Phase       | `?view=`  | Component           | Contains                                                       |
+| ----------- | --------- | ------------------- | -------------------------------------------------------------- |
+| **Browse**  | `browse`  | `MobileBrowseView`  | Project browser with search, categories, difficulty filters    |
+| **Code**    | `code`    | `MobileCodeView`    | Collapsible args panel + `CodePanel` with Monaco editor        |
+| **Results** | `results` | `MobileResultsView` | `TreeViewPanel` (structure viewer) + collapsible `OutputPanel` |
 
-The "code" view is the default when a project slug is present, so `?view=` is omitted to keep URLs clean.
+When a project slug is in the URL but `view` is missing, the client still shows Code and **`useMobilePlaygroundView` shallow-replaces** the URL with `?view=code` so the address bar matches the active tab.
 
 ## Keep-Alive Rendering
 
@@ -76,15 +76,14 @@ stateDiagram-v2
     [*] --> Browse : No project selected
     [*] --> Code : Project slug in URL
 
-    Browse --> Code : Select project (push)
-    Code --> Browse : Browse tab (push)
+    Browse --> Code : Select project (push, new pathname)
+    Code --> Browse : Browse tab if undo (router.back) else push
     Browse --> Home : Browser / app bar (not bottom tabs)
 
-    Code --> Results : Run code (replace)
-    Results --> Code : Bottom tab or browser back (replace)
+    Code --> Results : Run code (push)
+    Results --> Code : Bottom tab (push)
 
-    note right of Code : Code ↔ Results uses router.replace\n(no extra history entry)
-    note right of Browse : Browse ↔ Code uses router.push\n(supports browser Back)
+    note right of Code : Tab changes use shallow push\n(router.back when target equals previous view)
 ```
 
 - **Bottom tabs** — **Code** is disabled until a project is selected; **Results** is disabled until a run has produced a callstack

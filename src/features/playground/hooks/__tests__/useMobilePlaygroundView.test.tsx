@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { type NextRouter, useRouter } from "next/router";
 import React from "react";
 import { Provider } from "react-redux";
@@ -200,12 +200,59 @@ describe("useMobilePlaygroundView", () => {
     });
   });
 
-  describe("navigateTo", () => {
-    it("goToResults replaces when on code (squash code↔results history)", () => {
+  describe("implicit view param sync", () => {
+    it("replaces URL with ?view=code when a project slug is present but view is omitted", async () => {
       vi.mocked(useRouter).mockReturnValue(
         createMockRouter({
           query: { slug: ["project-a"] },
           asPath: "/playground/project-a",
+          isReady: true,
+        }),
+      );
+
+      renderHook(() => useMobilePlaygroundView(), {
+        wrapper,
+      });
+
+      await waitFor(() => {
+        expect(mockReplace).toHaveBeenCalledWith(
+          {
+            pathname: "/playground/project-a",
+            query: { view: "code" },
+          },
+          undefined,
+          { shallow: true },
+        );
+      });
+    });
+
+    it("does not sync when view is already set", async () => {
+      vi.mocked(useRouter).mockReturnValue(
+        createMockRouter({
+          query: { slug: ["project-a"], view: "browse" },
+          asPath: "/playground/project-a?view=browse",
+          isReady: true,
+        }),
+      );
+
+      renderHook(() => useMobilePlaygroundView(), {
+        wrapper,
+      });
+
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(mockReplace).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("navigateTo", () => {
+    it("goToResults replaces ?view=results when on code", () => {
+      vi.mocked(useRouter).mockReturnValue(
+        createMockRouter({
+          query: { slug: ["project-a"], view: "code" },
+          asPath: "/playground/project-a?view=code",
         }),
       );
 
@@ -225,7 +272,7 @@ describe("useMobilePlaygroundView", () => {
       expect(mockPush).not.toHaveBeenCalled();
     });
 
-    it("goToCode replaces when on results (squash code↔results history)", () => {
+    it("goToCode replaces ?view=code when on results", () => {
       vi.mocked(useRouter).mockReturnValue(
         createMockRouter({
           query: { slug: ["project-a"], view: "results" },
@@ -249,11 +296,11 @@ describe("useMobilePlaygroundView", () => {
       expect(mockPush).not.toHaveBeenCalled();
     });
 
-    it("goToBrowse pushes ?view=browse", () => {
+    it("goToBrowse replaces ?view=browse", () => {
       vi.mocked(useRouter).mockReturnValue(
         createMockRouter({
-          query: { slug: ["project-a"] },
-          asPath: "/playground/project-a",
+          query: { slug: ["project-a"], view: "code" },
+          asPath: "/playground/project-a?view=code",
         }),
       );
 
@@ -264,7 +311,7 @@ describe("useMobilePlaygroundView", () => {
         result.current.goToBrowse();
       });
 
-      expect(mockPush).toHaveBeenCalledWith(
+      expect(mockReplace).toHaveBeenCalledWith(
         {
           pathname: "/playground/project-a",
           query: { view: "browse" },
@@ -272,6 +319,7 @@ describe("useMobilePlaygroundView", () => {
         undefined,
         { shallow: true },
       );
+      expect(mockPush).not.toHaveBeenCalled();
     });
   });
 });

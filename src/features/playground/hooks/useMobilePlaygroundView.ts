@@ -20,23 +20,11 @@ import {
 
 export type { PlaygroundView } from "./usePlaygroundViewParam";
 
-/** Pairs of views that should use replace (not push) to avoid history stack growth. */
-const REPLACE_TRANSITION_PAIRS: ReadonlyArray<
-  [PlaygroundView, PlaygroundView]
-> = [["code", "results"]];
-
-const isReplaceTransition = (
-  from: PlaygroundView,
-  to: PlaygroundView,
-): boolean =>
-  REPLACE_TRANSITION_PAIRS.some(
-    ([a, b]) => (from === a && to === b) || (from === b && to === a),
-  );
-
 /**
  * Manages the mobile playground phase via the `?view=` query parameter.
- * Uses `router.push` for transitions so browser back/forward work naturally.
- * Defaults to "browse" when no project is selected, "code" otherwise.
+ *
+ * - **Implicit code with a slug**: if `view` is absent, shallow `replace` adds `?view=code`.
+ * - **Tab changes**: shallow `router.replace` (no extra history entries per tab tap).
  */
 export const useMobilePlaygroundView = () => {
   const router = useRouter();
@@ -69,12 +57,23 @@ export const useMobilePlaygroundView = () => {
       : "browse";
   }, [view, hasProjectSlug, hasMounted]);
 
+  const previousView = usePrevious(currentView);
+
+  // With a project slug, default UI is Code; mirror that in the URL when `view` is omitted
+  // (e.g. "Try it out", shared links, or `/playground/foo` without query).
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!hasProjectSlug) return;
+    if (view !== "") return;
+
+    setView("code", { replace: true });
+  }, [router.isReady, hasProjectSlug, view, setView, router]);
+
   const navigateTo = useCallback(
-    (view: PlaygroundView, pathName?: string) => {
-      const replace = isReplaceTransition(currentView, view);
-      setView(view, { replace, pathName });
+    (targetView: PlaygroundView, pathName?: string) => {
+      setView(targetView, { replace: true, pathName });
     },
-    [setView, currentView],
+    [setView],
   );
 
   const goToBrowse = useCallback(() => navigateTo("browse"), [navigateTo]);
@@ -91,13 +90,12 @@ export const useMobilePlaygroundView = () => {
   );
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
 
-  const prevView = usePrevious(currentView);
   // Stop callstack playback when user leaves results view on mobile (e.g. Back button).
   useEffect(() => {
-    if (prevView === "results" && currentView !== "results") {
+    if (previousView === "results" && currentView !== "results") {
       dispatch(callstackSlice.actions.setIsPlaying(false));
     }
-  }, [currentView, prevView, dispatch]);
+  }, [currentView, previousView, dispatch]);
 
   return {
     currentView,
