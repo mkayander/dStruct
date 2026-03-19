@@ -77,25 +77,25 @@ stateDiagram-v2
     [*] --> Code : Project slug in URL
 
     Browse --> Code : Select project (push)
-    Code --> Browse : Back button (push)
-    Browse --> Home : Back button (push to /)
+    Code --> Browse : Browse tab (push)
+    Browse --> Home : Browser / app bar (not bottom tabs)
 
     Code --> Results : Run code (replace)
-    Results --> Code : Back button (replace)
+    Results --> Code : Bottom tab or browser back (replace)
 
     note right of Code : Code ↔ Results uses router.replace\n(no extra history entry)
     note right of Browse : Browse ↔ Code uses router.push\n(supports browser Back)
 ```
 
-- **Forward button** — disabled on Browse if no project is selected; disabled on Code if no results exist
+- **Bottom tabs** — **Code** is disabled until a project is selected; **Results** is disabled until a run has produced a callstack
 
 ## Bottom Nav Bar (`MobilePhaseNavBar`)
 
-Fixed bottom bar (thumb-friendly) with:
+Fixed bottom bar (thumb-friendly) with three full-width tabs:
 
-- **Back** — navigate to previous phase or home
-- **Current phase label** (BROWSE / CODE / RESULTS)
-- **Forward** — advance to next phase when available
+- **Browse** — project browser
+- **Code** — editor (disabled without a project slug)
+- **Results** — tree + output (disabled until results exist)
 
 ## Toolbar (MainAppBar on mobile playground)
 
@@ -125,7 +125,7 @@ Fixed bottom bar (thumb-friendly) with:
 | `src/features/playground/ui/MobileResultsView.tsx`         | Tree viewer + output panel                                     |
 | `src/features/playground/ui/CollapsiblePanel.tsx`          | Reusable collapsible section with header                       |
 | `src/features/appBar/ui/MainAppBar.tsx`                    | Unified app bar (adapts for mobile playground)                 |
-| `src/features/playground/ui/MobilePhaseNavBar.tsx`         | Bottom nav bar with phase navigation (Back/Forward)            |
+| `src/features/playground/ui/MobilePhaseNavBar.tsx`         | Bottom nav bar (Browse / Code / Results tabs)                  |
 
 ## Entry Points from Home Page
 

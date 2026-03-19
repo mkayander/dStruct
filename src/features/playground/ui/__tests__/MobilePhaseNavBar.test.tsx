@@ -12,16 +12,9 @@ import { theme } from "#/themes";
 
 import { MobilePhaseNavBar } from "../MobilePhaseNavBar";
 
-const mockPush = vi.fn();
 const mockGoToBrowse = vi.fn();
 const mockGoToCode = vi.fn();
 const mockGoToResults = vi.fn();
-
-vi.mock("next/router", () => ({
-  useRouter: () => ({
-    push: mockPush,
-  }),
-}));
 
 vi.mock("#/shared/hooks", async (importOriginal) => {
   const actual = await importOriginal<typeof SharedHooks>();
@@ -74,7 +67,7 @@ describe("MobilePhaseNavBar", () => {
     vi.clearAllMocks();
   });
 
-  it("calls router.push('/') when Back is clicked on browse view", async () => {
+  it("disables Code tab when there is no project slug", () => {
     useMobilePlaygroundView.mockReturnValue({
       currentView: "browse",
       hasProjectSlug: false,
@@ -85,14 +78,10 @@ describe("MobilePhaseNavBar", () => {
 
     renderWithProviders(<MobilePhaseNavBar />);
 
-    await userEvent.click(screen.getByRole("button", { name: "BACK" }));
-
-    expect(mockPush).toHaveBeenCalledWith("/");
-    expect(mockGoToBrowse).not.toHaveBeenCalled();
-    expect(mockGoToCode).not.toHaveBeenCalled();
+    expect(screen.getByRole("tab", { name: "CODE" })).toBeDisabled();
   });
 
-  it("calls goToBrowse when Back is clicked on code view", async () => {
+  it("disables Results tab when callstack is not ready", () => {
     useMobilePlaygroundView.mockReturnValue({
       currentView: "code",
       hasProjectSlug: true,
@@ -103,60 +92,28 @@ describe("MobilePhaseNavBar", () => {
 
     renderWithProviders(<MobilePhaseNavBar />);
 
-    await userEvent.click(screen.getByRole("button", { name: "BACK" }));
+    expect(screen.getByRole("tab", { name: "RESULTS" })).toBeDisabled();
+  });
+
+  it("calls goToBrowse when Browse tab is selected from code view", async () => {
+    useMobilePlaygroundView.mockReturnValue({
+      currentView: "code",
+      hasProjectSlug: true,
+      goToBrowse: mockGoToBrowse,
+      goToCode: mockGoToCode,
+      goToResults: mockGoToResults,
+    });
+
+    renderWithProviders(<MobilePhaseNavBar />);
+
+    await userEvent.click(screen.getByRole("tab", { name: "BROWSE" }));
 
     expect(mockGoToBrowse).toHaveBeenCalledTimes(1);
-    expect(mockPush).not.toHaveBeenCalled();
+    expect(mockGoToCode).not.toHaveBeenCalled();
+    expect(mockGoToResults).not.toHaveBeenCalled();
   });
 
-  it("calls goToCode when Back is clicked on results view", async () => {
-    useMobilePlaygroundView.mockReturnValue({
-      currentView: "results",
-      hasProjectSlug: true,
-      goToBrowse: mockGoToBrowse,
-      goToCode: mockGoToCode,
-      goToResults: mockGoToResults,
-    });
-
-    renderWithProviders(<MobilePhaseNavBar />);
-
-    await userEvent.click(screen.getByRole("button", { name: "BACK" }));
-
-    expect(mockGoToCode).toHaveBeenCalledTimes(1);
-    expect(mockGoToBrowse).not.toHaveBeenCalled();
-  });
-
-  it("disables Forward when on browse without project slug", () => {
-    useMobilePlaygroundView.mockReturnValue({
-      currentView: "browse",
-      hasProjectSlug: false,
-      goToBrowse: mockGoToBrowse,
-      goToCode: mockGoToCode,
-      goToResults: mockGoToResults,
-    });
-
-    renderWithProviders(<MobilePhaseNavBar />);
-
-    const forwardButton = screen.getByRole("button", { name: "FORWARD" });
-    expect(forwardButton).toBeDisabled();
-  });
-
-  it("disables Forward when on code without results", () => {
-    useMobilePlaygroundView.mockReturnValue({
-      currentView: "code",
-      hasProjectSlug: true,
-      goToBrowse: mockGoToBrowse,
-      goToCode: mockGoToCode,
-      goToResults: mockGoToResults,
-    });
-
-    renderWithProviders(<MobilePhaseNavBar />);
-
-    const forwardButton = screen.getByRole("button", { name: "FORWARD" });
-    expect(forwardButton).toBeDisabled();
-  });
-
-  it("calls goToCode when Forward is clicked on browse with project slug", async () => {
+  it("calls goToCode when Code tab is selected from browse with project slug", async () => {
     useMobilePlaygroundView.mockReturnValue({
       currentView: "browse",
       hasProjectSlug: true,
@@ -167,12 +124,12 @@ describe("MobilePhaseNavBar", () => {
 
     renderWithProviders(<MobilePhaseNavBar />);
 
-    await userEvent.click(screen.getByRole("button", { name: "FORWARD" }));
+    await userEvent.click(screen.getByRole("tab", { name: "CODE" }));
 
     expect(mockGoToCode).toHaveBeenCalledTimes(1);
   });
 
-  it("calls goToResults when Forward is clicked on code with results", async () => {
+  it("calls goToResults when Results tab is selected with results ready", async () => {
     useMobilePlaygroundView.mockReturnValue({
       currentView: "code",
       hasProjectSlug: true,
@@ -183,7 +140,7 @@ describe("MobilePhaseNavBar", () => {
 
     renderWithProviders(<MobilePhaseNavBar />, { hasResults: true });
 
-    await userEvent.click(screen.getByRole("button", { name: "FORWARD" }));
+    await userEvent.click(screen.getByRole("tab", { name: "RESULTS" }));
 
     expect(mockGoToResults).toHaveBeenCalledTimes(1);
   });

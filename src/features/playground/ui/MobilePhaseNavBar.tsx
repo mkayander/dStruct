@@ -1,44 +1,38 @@
 "use client";
 
-import ArrowBack from "@mui/icons-material/ArrowBack";
-import ArrowForward from "@mui/icons-material/ArrowForward";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useRouter } from "next/router";
+import { Box, Tab, Tabs, useTheme } from "@mui/material";
 import React from "react";
 
 import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
 import { VIEW_LABEL_KEYS } from "#/features/playground/constants/playgroundViewLabels";
 import { useMobilePlaygroundView } from "#/features/playground/hooks/useMobilePlaygroundView";
+import {
+  isPlaygroundView,
+  PLAYGROUND_VIEWS,
+} from "#/features/playground/model/playgroundView";
 import { useI18nContext } from "#/shared/hooks";
 import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 import { useAppSelector } from "#/store/hooks";
 
 const NAV_BAR_HEIGHT = 38;
+/** Matches the nav shell’s top corners (`borderRadius` on the outer `Box`). */
+const NAV_BAR_TOP_CORNER_RADIUS_PX = 12;
 
 export const MOBILE_PHASE_NAV_HEIGHT = NAV_BAR_HEIGHT;
 
 export const MobilePhaseNavBar: React.FC = () => {
   const { LL } = useI18nContext();
   const theme = useTheme();
-  const router = useRouter();
   const { currentView, hasProjectSlug, goToBrowse, goToCode, goToResults } =
     useMobilePlaygroundView();
   const hasResults = useAppSelector(selectCallstackIsReady);
 
-  const handleBack = () => {
-    if (currentView === "browse") void router.push("/");
-    else if (currentView === "results") goToCode();
-    else if (currentView === "code") goToBrowse();
+  const handleChange = (_: React.SyntheticEvent, raw: string) => {
+    if (!isPlaygroundView(raw)) return;
+    if (raw === "browse") goToBrowse();
+    else if (raw === "code") goToCode();
+    else goToResults();
   };
-
-  const handleForward = () => {
-    if (currentView === "browse" && hasProjectSlug) goToCode();
-    else if (currentView === "code" && hasResults) goToResults();
-  };
-
-  const canGoForward =
-    (currentView === "browse" && hasProjectSlug) ||
-    (currentView === "code" && hasResults);
 
   return (
     <Box
@@ -52,46 +46,62 @@ export const MobilePhaseNavBar: React.FC = () => {
         paddingBottom: "env(safe-area-inset-bottom)",
         zIndex: 1100,
         display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius: "12px 12px 0 0",
-        px: 2,
+        alignItems: "stretch",
+        borderRadius: `${NAV_BAR_TOP_CORNER_RADIUS_PX}px ${NAV_BAR_TOP_CORNER_RADIUS_PX}px 0 0`,
         ...glassOverlaySx(theme),
         border: "none",
       }}
     >
-      <IconButton
-        size="small"
-        onClick={handleBack}
-        aria-label={LL.BACK()}
-        sx={{ flexShrink: 0 }}
-      >
-        <ArrowBack fontSize="small" />
-      </IconButton>
-
-      <Typography
-        variant="subtitle2"
-        noWrap
+      <Tabs
+        value={currentView}
+        onChange={handleChange}
+        variant="fullWidth"
+        aria-label={LL.PLAYGROUND()}
         sx={{
-          fontWeight: 600,
-          textTransform: "uppercase",
-          letterSpacing: "0.5px",
-          fontSize: "0.75rem",
-          color: "text.secondary",
+          minHeight: NAV_BAR_HEIGHT,
+          width: "100%",
+          "& .MuiTabs-flexContainer": {
+            alignItems: "stretch",
+            minHeight: NAV_BAR_HEIGHT,
+          },
+          "& .MuiTab-root": {
+            minHeight: NAV_BAR_HEIGHT,
+            py: 0,
+            px: 0.5,
+            fontSize: "0.7rem",
+            fontWeight: 600,
+            textTransform: "none",
+            letterSpacing: "0.02em",
+            lineHeight: 1.2,
+            overflow: "hidden",
+          },
+          "& .MuiTab-root:first-of-type": {
+            borderTopLeftRadius: `${NAV_BAR_TOP_CORNER_RADIUS_PX}px`,
+          },
+          "& .MuiTab-root:last-of-type": {
+            borderTopRightRadius: `${NAV_BAR_TOP_CORNER_RADIUS_PX}px`,
+          },
+          "& .MuiTabs-indicator": {
+            height: 2,
+            borderRadius: "2px 2px 0 0",
+          },
         }}
       >
-        {LL[VIEW_LABEL_KEYS[currentView]]()}
-      </Typography>
-
-      <IconButton
-        size="small"
-        onClick={handleForward}
-        disabled={!canGoForward}
-        aria-label={LL.FORWARD()}
-        sx={{ flexShrink: 0 }}
-      >
-        <ArrowForward fontSize="small" />
-      </IconButton>
+        {PLAYGROUND_VIEWS.map((view) => (
+          <Tab
+            key={view}
+            value={view}
+            label={LL[VIEW_LABEL_KEYS[view]]()}
+            disabled={
+              view === "code"
+                ? !hasProjectSlug
+                : view === "results"
+                  ? !hasResults
+                  : false
+            }
+          />
+        ))}
+      </Tabs>
     </Box>
   );
 };
