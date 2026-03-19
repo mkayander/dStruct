@@ -114,7 +114,16 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
   const error = useAppSelector(selectCallstackError);
 
   const tabBar = (
-    <TabListWrapper>
+    <TabListWrapper
+      sx={
+        headerOnly
+          ? {
+              // Collapsed mobile row: shadow reads as a vertical hairline against the adjacent expand control.
+              boxShadow: "none",
+            }
+          : undefined
+      }
+    >
       <TabList onChange={handleChange} aria-label={LL.PANEL_TABS()}>
         <Tab label={LL.OUTPUT()} value="1" />
         <Tab label={LL.CALLSTACK()} value="2" />
