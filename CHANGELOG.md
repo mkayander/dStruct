@@ -1,3 +1,10 @@
+# [1.365.0](https://github.com/mkayander/dStruct/compare/v1.364.0...v1.365.0) (2026-03-19)
+
+
+### Features
+
+* enhance OutputPanel and TabListWrapper styling for better mobile experience ([c6c5b62](https://github.com/mkayander/dStruct/commit/c6c5b62dc8e423caa1a81da63bc26c10c883bfae))
+
 # [1.364.0](https://github.com/mkayander/dStruct/compare/v1.363.0...v1.364.0) (2026-03-19)
 
 
