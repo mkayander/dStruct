@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -18,7 +19,10 @@ import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useDailyQuestionData } from "#/api";
+import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
+import { HomeLandingFaq } from "#/features/homePage/ui/landing/HomeLandingFaq";
+import { HomeLandingSections } from "#/features/homePage/ui/landing/HomeLandingSections";
 import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import { useI18nContext, useMobileLayout } from "#/shared/hooks";
@@ -129,25 +133,24 @@ const DashboardPage: NextPage<{
                   variant="h1"
                   sx={{
                     fontWeight: "bold",
-                    lineHeight: 1.2,
-                    maxWidth: { xs: "90%", md: "100%" },
-                    fontSize: { xs: "2rem", sm: "3rem", lg: "3.75rem" },
+                    lineHeight: 1.15,
+                    maxWidth: { xs: "95%", md: "100%" },
+                    fontSize: { xs: "2rem", sm: "2.75rem", lg: "3.5rem" },
+                    letterSpacing: "-0.02em",
                   }}
                 >
-                  {LL.DATA_STRUCTURES_SIMPLIFIED()}
+                  {LL.HOME_LANDING_TITLE()}
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{
-                    opacity: 0.9,
-                    maxWidth: { xs: "85%", md: "100%" },
-                    lineHeight: 1.6,
-                    fontSize: { lg: "1.25rem" },
+                    opacity: 0.92,
+                    maxWidth: { md: "95%" },
+                    lineHeight: 1.65,
+                    fontSize: { sm: "1.05rem", lg: "1.2rem" },
                   }}
                 >
-                  {LL.VISUALIZE_YOUR_LEETCODE_PROBLEMS_JUST_FORM_YOUR_CODE()}{" "}
-                  Developers deserve better tools for understanding complex
-                  algorithms and data structures.
+                  {LL.HOME_LANDING_SUBTITLE()}
                 </Typography>
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
@@ -156,7 +159,7 @@ const DashboardPage: NextPage<{
                 >
                   <Link
                     data-testid="cta-to-playground"
-                    href="/playground/invert-binary-tree?view=code"
+                    href={LANDING_PRIMARY_PLAYGROUND_HREF}
                   >
                     <Button
                       variant="contained"
@@ -198,6 +201,22 @@ const DashboardPage: NextPage<{
                     </Button>
                   </Link>
                 </Stack>
+                <Box sx={{ pt: 1 }}>
+                  <Button
+                    component={Link}
+                    href="#faq"
+                    variant="text"
+                    sx={{
+                      color: "inherit",
+                      opacity: 0.85,
+                      textTransform: "none",
+                      fontWeight: 600,
+                      "&:hover": { opacity: 1, bgcolor: "rgba(255,255,255,0.08)" },
+                    }}
+                  >
+                    {LL.HOME_HERO_FAQ_LINK()} →
+                  </Button>
+                </Box>
               </Stack>
             </Grid>
 
@@ -219,6 +238,8 @@ const DashboardPage: NextPage<{
         </Container>
       </Box>
 
+      <HomeLandingSections LL={LL} />
+
       {/* Content Section */}
       <Box
         sx={{
@@ -234,7 +255,8 @@ const DashboardPage: NextPage<{
           <Box sx={{ mb: 8, textAlign: "center" }}>
             {session.status === "loading" ? (
               <CircularProgress />
-            ) : session.status === "authenticated" ? (
+            ) : session.status === "authenticated" &&
+              session.data?.user?.id ? (
               <Link href={`/profile/${session.data.user.id}`}>
                 <Button
                   variant="contained"
@@ -244,9 +266,13 @@ const DashboardPage: NextPage<{
                     py: 1.5,
                   }}
                 >
-                  Open Profile
+                  {LL.HOME_OPEN_PROFILE()}
                 </Button>
               </Link>
+            ) : session.status === "authenticated" ? (
+              <Alert severity="warning" sx={{ maxWidth: 480, mx: "auto" }}>
+                {LL.HOME_PROFILE_LINK_UNAVAILABLE()}
+              </Alert>
             ) : (
               <Box>
                 <Typography
@@ -257,20 +283,31 @@ const DashboardPage: NextPage<{
                     mb: 2,
                   }}
                 >
-                  The right balance of security and simplicity.
+                  {LL.HOME_AUTH_HEADLINE_SIGNED_OUT()}
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{
                     color: "text.secondary",
-                    maxWidth: 600,
+                    maxWidth: 640,
                     mx: "auto",
-                    mb: 4,
+                    mb: 1.5,
+                    lineHeight: 1.65,
                   }}
                 >
-                  {LL.SIGN_IN_TO_KEEP_TRACK_OF_YOUR_PROGRESS_AND_MORE()}{" "}
-                  Authentication happens on your server, the visualization
-                  happens on ours.
+                  {LL.HOME_AUTH_BODY_SIGNED_OUT()}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "text.secondary",
+                    maxWidth: 560,
+                    mx: "auto",
+                    mb: 4,
+                    opacity: 0.9,
+                  }}
+                >
+                  {LL.HOME_AUTH_VISUALIZATION_NOTE()}
                 </Typography>
               </Box>
             )}
@@ -286,16 +323,19 @@ const DashboardPage: NextPage<{
                 mb: 2,
               }}
             >
-              Don&apos;t know what to solve today?
+              {LL.HOME_DAILY_SECTION_TITLE()}
             </Typography>
             <Typography
               variant="body1"
               sx={{
                 color: "text.secondary",
                 mb: 4,
+                maxWidth: 560,
+                mx: "auto",
+                lineHeight: 1.65,
               }}
             >
-              Here is a daily problem from{" "}
+              {LL.HOME_DAILY_SECTION_LEAD()}{" "}
               <MuiLink
                 href="https://leetcode.com/"
                 target="_blank"
@@ -303,6 +343,7 @@ const DashboardPage: NextPage<{
                 sx={{
                   color: "primary.main",
                   textDecoration: "none",
+                  fontWeight: 600,
                   "&:hover": {
                     textDecoration: "underline",
                   },
@@ -310,9 +351,14 @@ const DashboardPage: NextPage<{
               >
                 LeetCode
               </MuiLink>
-              !
             </Typography>
           </Box>
+
+          {questionDataQuery.error ? (
+            <Alert severity="error" sx={{ mb: 4 }}>
+              {LL.HOME_DAILY_QUESTION_ERROR()}
+            </Alert>
+          ) : null}
 
           <Grid container spacing={4} justifyContent="center">
             <Grid size={{ xs: 12, lg: 8 }}>
@@ -333,6 +379,8 @@ const DashboardPage: NextPage<{
           </Grid>
         </Container>
       </Box>
+
+      <HomeLandingFaq LL={LL} />
     </MainLayout>
   );
 };
