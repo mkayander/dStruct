@@ -1,6 +1,6 @@
-import type { EditorProps } from "@monaco-editor/react";
+import type { EditorProps, Monaco } from "@monaco-editor/react";
 import { Box, Skeleton, useColorScheme } from "@mui/material";
-import type * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import type { editor } from "monaco-editor";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -13,15 +13,11 @@ const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
 
 type CodeRunnerProps = EditorProps & {
   isUpdating?: boolean;
-  setMonacoInstance?: React.Dispatch<
-    React.SetStateAction<typeof monaco | null>
-  >;
+  setMonacoInstance?: React.Dispatch<React.SetStateAction<Monaco | null>>;
   setEditorInstance?: React.Dispatch<
-    React.SetStateAction<monaco.editor.IStandaloneCodeEditor | null>
+    React.SetStateAction<editor.IStandaloneCodeEditor | null>
   >;
-  setTextModel: React.Dispatch<
-    React.SetStateAction<monaco.editor.ITextModel | null>
-  >;
+  setTextModel: React.Dispatch<React.SetStateAction<editor.ITextModel | null>>;
 };
 
 export const CodeRunner: React.FC<CodeRunnerProps> = ({
