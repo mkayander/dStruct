@@ -1,3 +1,10 @@
+# [1.366.0](https://github.com/mkayander/dStruct/compare/v1.365.0...v1.366.0) (2026-03-19)
+
+
+### Features
+
+* enhance mobile playground URL handling and navigation ([856b276](https://github.com/mkayander/dStruct/commit/856b276fb7afc1515baa157a6dc6a27a2fbbc490))
+
 # [1.365.0](https://github.com/mkayander/dStruct/compare/v1.364.0...v1.365.0) (2026-03-19)
 
 
