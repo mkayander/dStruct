@@ -27,6 +27,7 @@ const en: BaseTranslation = {
   DELETE: "Delete",
   DELETE_THIS_PROJECT: "Delete this project",
   DELETE_X_ARGUMENT: "Delete {name:string} argument",
+  DAILY_PROBLEM_NAV: "Daily problem",
   DESCRIPTION: "Description",
   DSTRUCT_LOGO: "DStruct Logo",
   EDIT_AND_SAVE: "Edit <code>pages/index.tsx</code> and save to reload.",

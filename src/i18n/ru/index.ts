@@ -27,6 +27,7 @@ const ru: Record<keyof Translation, string> = {
   DELETE: "Удалить",
   DELETE_THIS_PROJECT: "Удалить этот проект",
   DELETE_X_ARGUMENT: "Удалить аргумент {name:string}",
+  DAILY_PROBLEM_NAV: "Задача дня",
   DESCRIPTION: "Описание",
   DSTRUCT_LOGO: "Логотип DStruct",
   EDIT_AND_SAVE: "Редактируйте <code>pages/index.tsx</code> и сохраните, чтобы перезагрузить.",

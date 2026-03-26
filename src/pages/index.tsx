@@ -1,29 +1,22 @@
 import {
-  Alert,
   Box,
   Button,
-  CircularProgress,
   Container,
   Grid,
-  Link as MuiLink,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import { useDailyQuestionData } from "#/api";
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
-import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
 import { HomeLandingFaq } from "#/features/homePage/ui/landing/HomeLandingFaq";
 import { HomeLandingSections } from "#/features/homePage/ui/landing/HomeLandingSections";
-import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import { useI18nContext, useMobileLayout } from "#/shared/hooks";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
@@ -37,7 +30,6 @@ const DashboardPage: NextPage<{
   };
 }> = () => {
   const { LL } = useI18nContext();
-  const session = useSession();
   const theme = useTheme();
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
   const isMobile = useMobileLayout();
@@ -89,8 +81,6 @@ const DashboardPage: NextPage<{
       controlsRef.current.setPolarAngle(Math.PI / 2);
     }
   };
-
-  const questionDataQuery = useDailyQuestionData();
 
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "lg"));
 
@@ -201,7 +191,12 @@ const DashboardPage: NextPage<{
                     </Button>
                   </Link>
                 </Stack>
-                <Box sx={{ pt: 1 }}>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={1}
+                  sx={{ pt: 1 }}
+                  alignItems={{ xs: "stretch", sm: "center" }}
+                >
                   <Button
                     component={Link}
                     href="#faq"
@@ -211,12 +206,32 @@ const DashboardPage: NextPage<{
                       opacity: 0.85,
                       textTransform: "none",
                       fontWeight: 600,
-                      "&:hover": { opacity: 1, bgcolor: "rgba(255,255,255,0.08)" },
+                      "&:hover": {
+                        opacity: 1,
+                        bgcolor: "rgba(255,255,255,0.08)",
+                      },
                     }}
                   >
                     {LL.HOME_HERO_FAQ_LINK()} →
                   </Button>
-                </Box>
+                  <Button
+                    component={Link}
+                    href="/daily"
+                    variant="text"
+                    sx={{
+                      color: "inherit",
+                      opacity: 0.85,
+                      textTransform: "none",
+                      fontWeight: 600,
+                      "&:hover": {
+                        opacity: 1,
+                        bgcolor: "rgba(255,255,255,0.08)",
+                      },
+                    }}
+                  >
+                    {LL.DAILY_PROBLEM_NAV()} →
+                  </Button>
+                </Stack>
               </Stack>
             </Grid>
 
@@ -239,146 +254,6 @@ const DashboardPage: NextPage<{
       </Box>
 
       <HomeLandingSections LL={LL} />
-
-      {/* Content Section */}
-      <Box
-        sx={{
-          bgcolor: "background.default",
-          py: { xs: 8, md: 12 },
-        }}
-      >
-        <Container
-          maxWidth={isMediumScreen ? "lg" : "xl"}
-          sx={{ px: { xs: 2, sm: 3, md: 4 } }}
-        >
-          {/* Authentication Status Section */}
-          <Box sx={{ mb: 8, textAlign: "center" }}>
-            {session.status === "loading" ? (
-              <CircularProgress />
-            ) : session.status === "authenticated" &&
-              session.data?.user?.id ? (
-              <Link href={`/profile/${session.data.user.id}`}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                  }}
-                >
-                  {LL.HOME_OPEN_PROFILE()}
-                </Button>
-              </Link>
-            ) : session.status === "authenticated" ? (
-              <Alert severity="warning" sx={{ maxWidth: 480, mx: "auto" }}>
-                {LL.HOME_PROFILE_LINK_UNAVAILABLE()}
-              </Alert>
-            ) : (
-              <Box>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontWeight: "bold",
-                    color: "text.primary",
-                    mb: 2,
-                  }}
-                >
-                  {LL.HOME_AUTH_HEADLINE_SIGNED_OUT()}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "text.secondary",
-                    maxWidth: 640,
-                    mx: "auto",
-                    mb: 1.5,
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {LL.HOME_AUTH_BODY_SIGNED_OUT()}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "text.secondary",
-                    maxWidth: 560,
-                    mx: "auto",
-                    mb: 4,
-                    opacity: 0.9,
-                  }}
-                >
-                  {LL.HOME_AUTH_VISUALIZATION_NOTE()}
-                </Typography>
-              </Box>
-            )}
-          </Box>
-
-          {/* Daily Problem Section */}
-          <Box sx={{ textAlign: "center", mb: 6 }}>
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: "bold",
-                color: "text.primary",
-                mb: 2,
-              }}
-            >
-              {LL.HOME_DAILY_SECTION_TITLE()}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: "text.secondary",
-                mb: 4,
-                maxWidth: 560,
-                mx: "auto",
-                lineHeight: 1.65,
-              }}
-            >
-              {LL.HOME_DAILY_SECTION_LEAD()}{" "}
-              <MuiLink
-                href="https://leetcode.com/"
-                target="_blank"
-                rel="noreferrer"
-                sx={{
-                  color: "primary.main",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  "&:hover": {
-                    textDecoration: "underline",
-                  },
-                }}
-              >
-                LeetCode
-              </MuiLink>
-            </Typography>
-          </Box>
-
-          {questionDataQuery.error ? (
-            <Alert severity="error" sx={{ mb: 4 }}>
-              {LL.HOME_DAILY_QUESTION_ERROR()}
-            </Alert>
-          ) : null}
-
-          <Grid container spacing={4} justifyContent="center">
-            <Grid size={{ xs: 12, lg: 8 }}>
-              <QuestionSummary
-                questionDataQuery={questionDataQuery}
-                sx={{
-                  mb: 4,
-                  p: 3,
-                  borderRadius: 2,
-                  bgcolor: "background.paper",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                }}
-              />
-            </Grid>
-            <Grid size={{ xs: 12 }}>
-              <DailyProblem questionDataQuery={questionDataQuery} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
 
       <HomeLandingFaq LL={LL} />
     </MainLayout>

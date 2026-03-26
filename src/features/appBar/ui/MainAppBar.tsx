@@ -115,6 +115,10 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
       name: LL.PLAYGROUND(),
       href: "/playground",
     },
+    {
+      name: LL.DAILY_PROBLEM_NAV(),
+      href: "/daily",
+    },
   ] as const;
 
   useProfileImageUploader(session);

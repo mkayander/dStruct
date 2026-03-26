@@ -124,6 +124,10 @@ type RootTranslation = {
 	 */
 	DELETE_X_ARGUMENT: RequiredParams<'name'>
 	/**
+	 * D​a​i​l​y​ ​p​r​o​b​l​e​m
+	 */
+	DAILY_PROBLEM_NAV: string
+	/**
 	 * D​e​s​c​r​i​p​t​i​o​n
 	 */
 	DESCRIPTION: string
@@ -881,6 +885,10 @@ export type TranslationFunctions = {
 	 * Delete {name} argument
 	 */
 	DELETE_X_ARGUMENT: (arg: { name: string }) => LocalizedString
+	/**
+	 * Daily problem
+	 */
+	DAILY_PROBLEM_NAV: () => LocalizedString
 	/**
 	 * Description
 	 */
