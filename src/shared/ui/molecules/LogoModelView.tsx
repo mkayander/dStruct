@@ -4,8 +4,9 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 import { useMobileLayout } from "#/shared/hooks";
+
+import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 type LogoModelViewProps = {
   controlsRef: React.RefObject<ThreeOrbitControls | null>;
@@ -20,16 +21,23 @@ type LogoModelViewProps = {
  */
 const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
   const gl = useThree((state) => state.gl);
+  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+
+  React.useLayoutEffect(() => {
+    canvasRef.current = gl.domElement;
+  }, [gl]);
 
   useFrame(() => {
     if (!active) return;
-    const canvas = gl.domElement;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     canvas.style.pointerEvents = "none";
     canvas.style.touchAction = "auto";
   });
 
   React.useEffect(() => {
-    const canvas = gl.domElement;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     if (active) {
       return () => {
         canvas.style.removeProperty("pointer-events");
@@ -38,7 +46,7 @@ const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
     }
     canvas.style.removeProperty("pointer-events");
     canvas.style.touchAction = "none";
-  }, [active, gl]);
+  }, [active]);
 
   return null;
 };
