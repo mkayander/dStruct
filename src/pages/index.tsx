@@ -34,6 +34,42 @@ const DashboardPage: NextPage<{
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
   const isMobile = useMobileLayout();
 
+  const applyMobileHeroLogoAngles = React.useCallback((scrollTop: number) => {
+    const polarAngle =
+      Math.PI / 2.5 -
+      ((scrollTop / window.innerHeight) * Math.PI - Math.PI / 4);
+    const ctrl = controlsRef.current;
+    if (!ctrl) return;
+    ctrl.setAzimuthalAngle(Math.PI / 4);
+    ctrl.setPolarAngle(polarAngle);
+    ctrl.update();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMobile) return;
+
+    let cancelled = false;
+    let attempts = 0;
+    const maxAttempts = 120;
+
+    const syncWhenControlsReady = () => {
+      if (cancelled) return;
+      if (controlsRef.current) {
+        applyMobileHeroLogoAngles(0);
+        return;
+      }
+      attempts += 1;
+      if (attempts < maxAttempts) {
+        requestAnimationFrame(syncWhenControlsReady);
+      }
+    };
+
+    requestAnimationFrame(syncWhenControlsReady);
+    return () => {
+      cancelled = true;
+    };
+  }, [applyMobileHeroLogoAngles, isMobile]);
+
   const handleMouseMove = (event: React.MouseEvent) => {
     const rect = event.currentTarget.getBoundingClientRect();
 
@@ -58,20 +94,14 @@ const DashboardPage: NextPage<{
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(azimuthalAngle);
       controlsRef.current.setPolarAngle(polarAngle);
+      controlsRef.current.update();
     }
   };
 
   const handleScroll: PageScrollContainerProps["onScroll"] = (event) => {
     if (!isMobile) return;
     if (event.target instanceof Element) {
-      const { scrollTop } = event.target;
-      const polarAngle =
-        Math.PI / 2.5 -
-        ((scrollTop / window.innerHeight) * Math.PI - Math.PI / 4);
-      if (controlsRef.current) {
-        controlsRef.current.setAzimuthalAngle(Math.PI / 4);
-        controlsRef.current.setPolarAngle(polarAngle);
-      }
+      applyMobileHeroLogoAngles(event.target.scrollTop);
     }
   };
 
@@ -79,6 +109,7 @@ const DashboardPage: NextPage<{
     if (controlsRef.current) {
       controlsRef.current.setAzimuthalAngle(0);
       controlsRef.current.setPolarAngle(Math.PI / 2);
+      controlsRef.current.update();
     }
   };
 
