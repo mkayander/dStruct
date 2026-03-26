@@ -1,19 +1,42 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
+import { useMobileLayout } from "#/shared/hooks";
 
 type LogoModelViewProps = {
   controlsRef: React.RefObject<ThreeOrbitControls | null>;
+};
+
+/**
+ * OrbitControls.connect() sets gl.domElement.style.touchAction = "none", which
+ * captures touch and blocks page scroll. Restore vertical pan on the actual
+ * canvas after controls connect (this runs in a later sibling useEffect).
+ */
+const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
+  const gl = useThree((state) => state.gl);
+
+  React.useEffect(() => {
+    const canvas = gl.domElement;
+    if (!active) return;
+    canvas.style.touchAction = "pan-y";
+    return () => {
+      canvas.style.touchAction = "none";
+    };
+  }, [active, gl]);
+
+  return null;
 };
 
 export const LogoModelView: React.FC<LogoModelViewProps> = ({
   controlsRef,
 }) => {
   const theme = useTheme();
+  const isMobile = useMobileLayout();
+  const pointerRotationEnabled = !isMobile;
 
   return (
     <Canvas>
@@ -42,11 +65,13 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         maxPolarAngle={Math.PI / 1.1}
         minDistance={13}
         maxDistance={20}
-        enableRotate={true}
+        enableRotate={pointerRotationEnabled}
         enableZoom={false}
         enablePan={false}
+        enableDamping={pointerRotationEnabled}
         dampingFactor={0.005}
       />
+      <MobileCanvasTouchScroll active={isMobile} />
     </Canvas>
   );
 };
