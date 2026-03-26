@@ -21,7 +21,7 @@ import { useDailyQuestionData } from "#/api";
 import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
 import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import type { Locales, Translations } from "#/i18n/i18n-types";
-import { useI18nContext } from "#/shared/hooks";
+import { useI18nContext, useMobileLayout } from "#/shared/hooks";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 import type { PageScrollContainerProps } from "#/shared/ui/templates/PageScrollContainer";
@@ -36,6 +36,7 @@ const DashboardPage: NextPage<{
   const session = useSession();
   const theme = useTheme();
   const controlsRef = React.useRef<ThreeOrbitControls>(null);
+  const isMobile = useMobileLayout();
 
   const handleMouseMove = (event: React.MouseEvent) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -65,8 +66,7 @@ const DashboardPage: NextPage<{
   };
 
   const handleScroll: PageScrollContainerProps["onScroll"] = (event) => {
-    if (!window.matchMedia("(max-width: 599.95px)").matches) return;
-
+    if (!isMobile) return;
     if (event.target instanceof Element) {
       const { scrollTop } = event.target;
       const polarAngle =
