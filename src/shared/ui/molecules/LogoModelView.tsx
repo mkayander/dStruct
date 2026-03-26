@@ -1,6 +1,6 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
@@ -12,20 +12,32 @@ type LogoModelViewProps = {
 };
 
 /**
- * OrbitControls.connect() sets gl.domElement.style.touchAction = "none", which
- * captures touch and blocks page scroll. Restore vertical pan on the actual
- * canvas after controls connect (this runs in a later sibling useEffect).
+ * OrbitControls.connect() sets touch-action: none on the canvas and keeps
+ * pointer listeners. touch-action: pan-y alone is not enough for reliable
+ * scrolling (e.g. OverlayScrollbars). Let touches hit the scroll container by
+ * making the canvas non-interactive; scroll-linked angles still update via ref.
+ * useFrame reapplies styles in case connect() or a controls reconnect runs later.
  */
 const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
   const gl = useThree((state) => state.gl);
 
+  useFrame(() => {
+    if (!active) return;
+    const canvas = gl.domElement;
+    canvas.style.pointerEvents = "none";
+    canvas.style.touchAction = "auto";
+  });
+
   React.useEffect(() => {
     const canvas = gl.domElement;
-    if (!active) return;
-    canvas.style.touchAction = "pan-y";
-    return () => {
-      canvas.style.touchAction = "none";
-    };
+    if (active) {
+      return () => {
+        canvas.style.removeProperty("pointer-events");
+        canvas.style.touchAction = "none";
+      };
+    }
+    canvas.style.removeProperty("pointer-events");
+    canvas.style.touchAction = "none";
   }, [active, gl]);
 
   return null;
@@ -39,7 +51,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
   const pointerRotationEnabled = !isMobile;
 
   return (
-    <Canvas>
+    <Canvas style={isMobile ? { pointerEvents: "none" } : undefined}>
       <ambientLight intensity={2.5} />
       <pointLight
         intensity={2}
@@ -58,6 +70,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
       <BinaryTreeModel />
       <OrbitControls
         ref={controlsRef}
+        enabled={pointerRotationEnabled}
         target={[0, 0.5, 0]}
         minAzimuthAngle={Math.PI / -2.2}
         maxAzimuthAngle={Math.PI / 2.2}
