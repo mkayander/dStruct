@@ -2,11 +2,26 @@
 name: Landing page killer features
 overview: A research-backed list of differentiators to highlight on dStruct’s main page, grounded in the repo (workers, Pyodide, Redux playback, project model, benchmarks) and framed with landing-page best practices—not a literal repeat of the user’s examples.
 todos:
-  - id: finalize-copy
-    content: Turn pillar + card list into short headlines + 1-line subcopy (EN + i18n keys if needed)
+  - id: copy-hero
+    content: Draft hero + pillar bullets (honest Pyodide/worker wording; one-liner under Positioning)
+    status: completed
+  - id: copy-sections
+    content: Map pillars/features to landing sections per Landing information architecture
+    status: in_progress
+  - id: cta-examples
+    content: Pick 2–4 /playground/ slugs as proof CTAs (tree, graph, grid, trie)
+    status: pending
+  - id: finalize-i18n
+    content: Add EN strings + typesafe-i18n keys for new home sections
     status: pending
   - id: implement-section
-    content: Add Features/benefits section to home page or homePage feature module
+    content: Add Features/benefits section on index or under src/features/homePage/
+    status: pending
+  - id: faq-home
+    content: Add FAQ accordion on index + i18n keys; anchor id faq
+    status: pending
+  - id: legal-sync
+    content: Reconcile README license line vs LICENSE (AGPL vs MIT) before publishing
     status: pending
 isProject: false
 ---
