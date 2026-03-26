@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { vi } from "vitest";
 
+import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { mockUseSearchParam } from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
@@ -83,9 +84,6 @@ describe("DashboardPage", () => {
     const ctaButton = screen.getByTestId("cta-to-playground");
 
     expect(ctaButton).toBeInTheDocument();
-    expect(ctaButton).toHaveAttribute(
-      "href",
-      "/playground/invert-binary-tree?view=code",
-    );
+    expect(ctaButton).toHaveAttribute("href", LANDING_PRIMARY_PLAYGROUND_HREF);
   });
 });

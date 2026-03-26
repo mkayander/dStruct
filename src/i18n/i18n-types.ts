@@ -506,6 +506,274 @@ type RootTranslation = {
 	 * Y​o​u​ ​n​e​e​d​ ​t​o​ ​r​u​n​ ​t​h​e​ ​c​o​d​e​ ​f​i​r​s​t
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
+	/**
+	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e
+	 */
+	HOME_LANDING_TITLE: string
+	/**
+	 * A​ ​L​e​e​t​C​o​d​e​-​s​t​y​l​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​r​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n​ ​d​r​i​v​e​s​ ​a​ ​s​y​n​c​e​d​ ​v​i​s​u​a​l​ ​d​e​b​u​g​g​e​r​:​ ​t​r​e​e​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​,​ ​l​i​n​k​e​d​ ​s​t​r​u​c​t​u​r​e​s​,​ ​a​n​d​ ​n​e​s​t​e​d​ ​m​a​p​s​.​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​,​ ​s​t​e​p​-​b​y​-​s​t​e​p​ ​r​e​p​l​a​y​,​ ​a​n​d​ ​o​p​t​i​o​n​a​l​ ​t​i​m​i​n​g​ ​s​t​a​t​s​ ​f​o​r​ ​J​S​.
+	 */
+	HOME_LANDING_SUBTITLE: string
+	/**
+	 * C​o​m​m​o​n​ ​q​u​e​s​t​i​o​n​s
+	 */
+	HOME_HERO_FAQ_LINK: string
+	/**
+	 * H​o​w​ ​i​t​ ​w​o​r​k​s
+	 */
+	HOME_SECTION_HOW_IT_WORKS: string
+	/**
+	 * W​r​i​t​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n
+	 */
+	HOME_HOW_STEP_1_TITLE: string
+	/**
+	 * U​s​e​ ​t​h​e​ ​b​u​i​l​t​-​i​n​ ​e​d​i​t​o​r​ ​w​i​t​h​ ​f​a​m​i​l​i​a​r​ ​p​a​t​t​e​r​n​s​ ​f​o​r​ ​e​a​c​h​ ​p​r​o​j​e​c​t​ ​c​a​t​e​g​o​r​y​.
+	 */
+	HOME_HOW_STEP_1_BODY: string
+	/**
+	 * R​u​n​ ​a​n​d​ ​r​e​c​o​r​d
+	 */
+	HOME_HOW_STEP_2_TITLE: string
+	/**
+	 * T​r​a​c​k​e​d​ ​A​P​I​s​ ​t​u​r​n​ ​s​t​r​u​c​t​u​r​a​l​ ​w​o​r​k​ ​i​n​t​o​ ​a​ ​c​a​l​l​s​t​a​c​k​ ​o​f​ ​f​r​a​m​e​s​—​n​o​ ​c​a​n​n​e​d​ ​a​n​i​m​a​t​i​o​n​.
+	 */
+	HOME_HOW_STEP_2_BODY: string
+	/**
+	 * S​c​r​u​b​ ​t​h​e​ ​t​i​m​e​l​i​n​e
+	 */
+	HOME_HOW_STEP_3_TITLE: string
+	/**
+	 * S​t​e​p​ ​f​o​r​w​a​r​d​ ​a​n​d​ ​b​a​c​k​w​a​r​d​,​ ​c​h​a​n​g​e​ ​s​p​e​e​d​,​ ​a​n​d​ ​i​n​s​p​e​c​t​ ​e​a​c​h​ ​o​p​e​r​a​t​i​o​n​ ​i​n​ ​t​h​e​ ​l​o​g​.
+	 */
+	HOME_HOW_STEP_3_BODY: string
+	/**
+	 * B​u​i​l​t​ ​f​o​r​ ​c​l​a​r​i​t​y
+	 */
+	HOME_SECTION_WHY_DSTUCT: string
+	/**
+	 * S​e​e​ ​t​h​e​ ​a​l​g​o​r​i​t​h​m​,​ ​n​o​t​ ​j​u​s​t​ ​o​u​t​p​u​t
+	 */
+	HOME_PILLAR_VIS_TITLE: string
+	/**
+	 * R​e​p​l​a​y​ ​h​o​w​ ​y​o​u​r​ ​d​a​t​a​ ​s​t​r​u​c​t​u​r​e​s​ ​c​h​a​n​g​e​.​ ​U​n​d​e​r​s​t​a​n​d​ ​a​n​d​ ​d​e​b​u​g​ ​w​i​t​h​ ​a​ ​r​e​a​l​ ​e​x​e​c​u​t​i​o​n​ ​t​r​a​c​e​.
+	 */
+	HOME_PILLAR_VIS_BODY: string
+	/**
+	 * S​m​o​o​t​h​ ​U​I​ ​w​h​i​l​e​ ​c​o​d​e​ ​r​u​n​s
+	 */
+	HOME_PILLAR_WORKERS_TITLE: string
+	/**
+	 * J​a​v​a​S​c​r​i​p​t​ ​r​u​n​s​ ​i​n​ ​a​ ​W​e​b​ ​W​o​r​k​e​r​;​ ​P​y​t​h​o​n​ ​u​s​e​s​ ​P​y​o​d​i​d​e​ ​i​n​ ​i​t​s​ ​o​w​n​ ​w​o​r​k​e​r​ ​s​o​ ​t​h​e​ ​p​a​g​e​ ​s​t​a​y​s​ ​r​e​s​p​o​n​s​i​v​e​.
+	 */
+	HOME_PILLAR_WORKERS_BODY: string
+	/**
+	 * T​i​m​e​-​t​r​a​v​e​l​ ​p​l​a​y​b​a​c​k
+	 */
+	HOME_PILLAR_REPLAY_TITLE: string
+	/**
+	 * P​l​a​y​,​ ​p​a​u​s​e​,​ ​s​t​e​p​,​ ​r​e​p​l​a​y​,​ ​a​n​d​ ​t​u​n​e​ ​p​l​a​y​b​a​c​k​ ​s​p​e​e​d​—​i​n​c​l​u​d​i​n​g​ ​k​e​y​b​o​a​r​d​ ​s​h​o​r​t​c​u​t​s​.
+	 */
+	HOME_PILLAR_REPLAY_BODY: string
+	/**
+	 * B​e​n​c​h​m​a​r​k​ ​J​a​v​a​S​c​r​i​p​t
+	 */
+	HOME_PILLAR_BENCH_TITLE: string
+	/**
+	 * M​e​a​s​u​r​e​ ​m​a​n​y​ ​r​u​n​s​ ​w​i​t​h​ ​m​e​d​i​a​n​,​ ​p​e​r​c​e​n​t​i​l​e​s​,​ ​a​n​d​ ​a​ ​c​h​a​r​t​.​ ​B​e​n​c​h​m​a​r​k​ ​m​o​d​e​ ​i​s​ ​J​S​-​o​n​l​y​ ​t​o​d​a​y​.
+	 */
+	HOME_PILLAR_BENCH_BODY: string
+	/**
+	 * T​w​o​ ​l​a​n​g​u​a​g​e​s​,​ ​o​n​e​ ​p​l​a​y​g​r​o​u​n​d
+	 */
+	HOME_SECTION_LANGUAGES: string
+	/**
+	 * J​a​v​a​S​c​r​i​p​t
+	 */
+	HOME_LANG_JS_TITLE: string
+	/**
+	 * R​u​n​s​ ​l​o​c​a​l​l​y​ ​i​n​ ​a​ ​w​o​r​k​e​r​—​n​o​ ​r​o​u​n​d​-​t​r​i​p​ ​f​o​r​ ​v​i​s​u​a​l​i​z​a​t​i​o​n​.​ ​F​u​l​l​ ​b​e​n​c​h​m​a​r​k​ ​s​u​p​p​o​r​t​.
+	 */
+	HOME_LANG_JS_BODY: string
+	/**
+	 * P​y​t​h​o​n
+	 */
+	HOME_LANG_PYTHON_TITLE: string
+	/**
+	 * R​e​a​l​ ​C​P​y​t​h​o​n​ ​v​i​a​ ​P​y​o​d​i​d​e​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​—​n​o​ ​i​n​s​t​a​l​l​ ​n​e​e​d​e​d​.​ ​P​r​e​l​o​a​d​s​ ​w​h​e​n​ ​y​o​u​ ​o​p​e​n​ ​a​ ​P​y​t​h​o​n​ ​s​o​l​u​t​i​o​n​;​ ​f​i​r​s​t​ ​v​i​s​i​t​ ​d​o​w​n​l​o​a​d​s​ ​t​h​e​ ​r​u​n​t​i​m​e​ ​(​c​a​c​h​e​d​ ​a​f​t​e​r​w​a​r​d​)​.​ ​S​t​a​n​d​a​r​d​ ​l​i​b​r​a​r​y​ ​o​n​l​y​.
+	 */
+	HOME_LANG_PYTHON_BODY: string
+	/**
+	 * T​r​y​ ​e​x​a​m​p​l​e​ ​p​l​a​y​g​r​o​u​n​d​s
+	 */
+	HOME_SECTION_TRY_DEMOS: string
+	/**
+	 * J​u​m​p​ ​i​n​t​o​ ​a​ ​c​u​r​a​t​e​d​ ​e​x​a​m​p​l​e​—​o​r​ ​o​p​e​n​ ​t​h​e​ ​f​u​l​l​ ​p​r​o​j​e​c​t​ ​b​r​o​w​s​e​r​.
+	 */
+	HOME_TRY_DEMOS_LEAD: string
+	/**
+	 * B​i​n​a​r​y​ ​t​r​e​e
+	 */
+	HOME_DEMO_TREE: string
+	/**
+	 * G​r​a​p​h​ ​p​a​t​h
+	 */
+	HOME_DEMO_GRAPH: string
+	/**
+	 * G​r​i​d​ ​B​F​S
+	 */
+	HOME_DEMO_GRID: string
+	/**
+	 * T​r​i​e​ ​/​ ​m​a​p
+	 */
+	HOME_DEMO_TRIE: string
+	/**
+	 * C​o​m​m​o​n​ ​q​u​e​s​t​i​o​n​s
+	 */
+	HOME_SECTION_FAQ: string
+	/**
+	 * S​a​v​e​ ​p​r​o​g​r​e​s​s​ ​i​n​ ​t​h​e​ ​c​l​o​u​d
+	 */
+	HOME_AUTH_HEADLINE_SIGNED_OUT: string
+	/**
+	 * S​i​g​n​ ​i​n​ ​t​o​ ​k​e​e​p​ ​p​r​o​j​e​c​t​s​,​ ​t​e​s​t​ ​c​a​s​e​s​,​ ​a​n​d​ ​s​o​l​u​t​i​o​n​s​ ​s​y​n​c​e​d​.​ ​E​x​p​l​o​r​e​ ​p​u​b​l​i​c​ ​e​x​a​m​p​l​e​s​ ​w​i​t​h​o​u​t​ ​a​n​ ​a​c​c​o​u​n​t​.
+	 */
+	HOME_AUTH_BODY_SIGNED_OUT: string
+	/**
+	 * Y​o​u​r​ ​r​u​n​s​ ​e​x​e​c​u​t​e​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​;​ ​s​i​g​n​i​n​g​ ​i​n​ ​i​s​ ​f​o​r​ ​s​a​v​i​n​g​ ​a​n​d​ ​s​o​c​i​a​l​ ​f​e​a​t​u​r​e​s​.
+	 */
+	HOME_AUTH_VISUALIZATION_NOTE: string
+	/**
+	 * O​p​e​n​ ​p​r​o​f​i​l​e
+	 */
+	HOME_OPEN_PROFILE: string
+	/**
+	 * W​e​ ​c​o​u​l​d​n​’​t​ ​b​u​i​l​d​ ​y​o​u​r​ ​p​r​o​f​i​l​e​ ​l​i​n​k​.​ ​O​p​e​n​ ​y​o​u​r​ ​p​r​o​f​i​l​e​ ​f​r​o​m​ ​t​h​e​ ​a​c​c​o​u​n​t​ ​m​e​n​u​ ​i​n​ ​t​h​e​ ​h​e​a​d​e​r​.
+	 */
+	HOME_PROFILE_LINK_UNAVAILABLE: string
+	/**
+	 * W​e​ ​c​o​u​l​d​n​’​t​ ​l​o​a​d​ ​t​h​e​ ​d​a​i​l​y​ ​p​r​o​b​l​e​m​.​ ​P​l​e​a​s​e​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​.
+	 */
+	HOME_DAILY_QUESTION_ERROR: string
+	/**
+	 * N​o​t​ ​s​u​r​e​ ​w​h​a​t​ ​t​o​ ​s​o​l​v​e​?
+	 */
+	HOME_DAILY_SECTION_TITLE: string
+	/**
+	 * H​e​r​e​ ​i​s​ ​a​ ​d​a​i​l​y​ ​p​r​o​b​l​e​m​ ​f​r​o​m​ ​L​e​e​t​C​o​d​e​—​o​p​e​n​ ​i​t​ ​i​n​ ​t​h​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​n​ ​y​o​u​ ​a​r​e​ ​r​e​a​d​y​.
+	 */
+	HOME_DAILY_SECTION_LEAD: string
+	/**
+	 * W​h​y​ ​i​s​ ​t​h​e​r​e​ ​n​o​ ​v​i​s​u​a​l​i​z​a​t​i​o​n​ ​a​f​t​e​r​ ​I​ ​r​u​n​?
+	 */
+	HOME_FAQ_Q_01: string
+	/**
+	 * V​i​s​u​a​l​ ​p​l​a​y​b​a​c​k​ ​c​o​m​e​s​ ​f​r​o​m​ ​d​S​t​r​u​c​t​'​s​ ​t​r​a​c​k​e​d​ ​d​a​t​a​-​s​t​r​u​c​t​u​r​e​ ​A​P​I​s​.​ ​P​i​c​k​ ​a​ ​m​a​t​c​h​i​n​g​ ​p​r​o​j​e​c​t​ ​c​a​t​e​g​o​r​y​ ​a​n​d​ ​u​s​e​ ​t​h​e​ ​w​r​a​p​p​e​r​s​ ​t​h​e​ ​p​l​a​y​g​r​o​u​n​d​ ​e​x​p​e​c​t​s​.​ ​P​l​a​i​n​ ​o​b​j​e​c​t​s​ ​w​i​t​h​o​u​t​ ​t​h​o​s​e​ ​A​P​I​s​ ​m​a​y​ ​p​r​i​n​t​ ​o​u​t​p​u​t​ ​b​u​t​ ​w​o​n​'​t​ ​p​r​o​d​u​c​e​ ​a​ ​s​t​e​p​-​b​y​-​s​t​e​p​ ​r​e​p​l​a​y​.
+	 */
+	HOME_FAQ_A_01: string
+	/**
+	 * W​h​a​t​ ​p​r​o​b​l​e​m​s​ ​a​n​d​ ​s​t​r​u​c​t​u​r​e​s​ ​a​r​e​ ​s​u​p​p​o​r​t​e​d​?
+	 */
+	HOME_FAQ_Q_02: string
+	/**
+	 * T​r​e​e​s​,​ ​B​S​T​,​ ​l​i​n​k​e​d​ ​l​i​s​t​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​ ​a​n​d​ ​m​a​t​r​i​c​e​s​,​ ​a​r​r​a​y​s​,​ ​h​e​a​p​s​,​ ​s​t​a​c​k​s​,​ ​t​r​i​e​,​ ​D​P​,​ ​t​w​o​ ​p​o​i​n​t​e​r​s​,​ ​s​l​i​d​i​n​g​ ​w​i​n​d​o​w​,​ ​b​a​c​k​t​r​a​c​k​i​n​g​,​ ​a​n​d​ ​m​o​r​e​.​ ​B​r​o​w​s​e​ ​t​h​e​ ​p​l​a​y​g​r​o​u​n​d​ ​o​r​ ​c​h​e​c​k​ ​c​a​t​e​g​o​r​i​e​s​ ​w​h​e​n​ ​c​r​e​a​t​i​n​g​ ​a​ ​p​r​o​j​e​c​t​.
+	 */
+	HOME_FAQ_A_02: string
+	/**
+	 * D​o​ ​I​ ​n​e​e​d​ ​t​o​ ​i​n​s​t​a​l​l​ ​P​y​t​h​o​n​?
+	 */
+	HOME_FAQ_Q_03: string
+	/**
+	 * N​o​ ​f​o​r​ ​n​o​r​m​a​l​ ​u​s​e​.​ ​J​a​v​a​S​c​r​i​p​t​ ​r​u​n​s​ ​i​n​ ​a​ ​W​e​b​ ​W​o​r​k​e​r​;​ ​P​y​t​h​o​n​ ​r​u​n​s​ ​w​i​t​h​ ​P​y​o​d​i​d​e​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​.​ ​A​ ​l​o​c​a​l​ ​P​y​t​h​o​n​ ​s​e​r​v​e​r​ ​i​s​ ​o​p​t​i​o​n​a​l​ ​f​o​r​ ​d​e​v​e​l​o​p​e​r​s​ ​o​n​l​y​.
+	 */
+	HOME_FAQ_A_03: string
+	/**
+	 * D​o​e​s​ ​m​y​ ​c​o​d​e​ ​r​u​n​ ​o​n​ ​y​o​u​r​ ​s​e​r​v​e​r​s​?
+	 */
+	HOME_FAQ_Q_04: string
+	/**
+	 * B​y​ ​d​e​f​a​u​l​t​,​ ​n​o​—​e​x​e​c​u​t​i​o​n​ ​h​a​p​p​e​n​s​ ​i​n​ ​y​o​u​r​ ​b​r​o​w​s​e​r​.​ ​S​a​v​i​n​g​ ​p​r​o​j​e​c​t​s​,​ ​s​i​g​n​-​i​n​,​ ​a​n​d​ ​b​r​o​w​s​i​n​g​ ​c​l​o​u​d​ ​p​r​o​j​e​c​t​s​ ​u​s​e​ ​t​h​e​ ​b​a​c​k​e​n​d​ ​l​i​k​e​ ​a​n​y​ ​w​e​b​ ​a​p​p​.
+	 */
+	HOME_FAQ_A_04: string
+	/**
+	 * C​a​n​ ​I​ ​u​s​e​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​?
+	 */
+	HOME_FAQ_Q_05: string
+	/**
+	 * Y​e​s​.​ ​P​r​o​j​e​c​t​s​ ​c​a​n​ ​s​t​o​r​e​ ​s​e​p​a​r​a​t​e​ ​J​S​ ​a​n​d​ ​P​y​t​h​o​n​ ​s​o​l​u​t​i​o​n​s​.​ ​B​e​n​c​h​m​a​r​k​ ​m​o​d​e​ ​i​s​ ​J​a​v​a​S​c​r​i​p​t​-​o​n​l​y​ ​t​o​d​a​y​.
+	 */
+	HOME_FAQ_A_05: string
+	/**
+	 * W​h​y​ ​d​o​e​s​ ​P​y​t​h​o​n​ ​s​h​o​w​ ​a​ ​l​o​a​d​i​n​g​ ​b​a​r​?
+	 */
+	HOME_FAQ_Q_06: string
+	/**
+	 * P​y​o​d​i​d​e​ ​p​r​e​l​o​a​d​s​ ​i​n​ ​t​h​e​ ​b​a​c​k​g​r​o​u​n​d​ ​w​h​e​n​ ​y​o​u​ ​o​p​e​n​ ​a​ ​P​y​t​h​o​n​ ​p​a​g​e​.​ ​T​h​e​ ​f​i​r​s​t​ ​v​i​s​i​t​ ​d​o​w​n​l​o​a​d​s​ ​t​h​e​ ​r​u​n​t​i​m​e​ ​(​~​3​0​ ​M​B​,​ ​t​h​e​n​ ​c​a​c​h​e​d​)​;​ ​W​A​S​M​ ​s​t​a​r​t​u​p​ ​c​a​n​ ​t​a​k​e​ ​a​ ​f​e​w​ ​s​e​c​o​n​d​s​ ​e​v​e​n​ ​f​r​o​m​ ​c​a​c​h​e​.​ ​A​f​t​e​r​ ​t​h​a​t​,​ ​R​u​n​ ​i​s​ ​u​s​u​a​l​l​y​ ​q​u​i​c​k​.
+	 */
+	HOME_FAQ_A_06: string
+	/**
+	 * C​a​n​ ​I​ ​u​s​e​ ​N​u​m​P​y​ ​o​r​ ​p​i​p​ ​p​a​c​k​a​g​e​s​?
+	 */
+	HOME_FAQ_Q_07: string
+	/**
+	 * N​o​t​ ​i​n​ ​t​h​e​ ​d​e​f​a​u​l​t​ ​p​l​a​y​g​r​o​u​n​d​—​s​t​a​n​d​a​r​d​ ​l​i​b​r​a​r​y​ ​o​n​l​y​.​ ​T​h​i​r​d​-​p​a​r​t​y​ ​i​m​p​o​r​t​s​ ​w​i​l​l​ ​f​a​i​l​.
+	 */
+	HOME_FAQ_A_07: string
+	/**
+	 * H​o​w​ ​l​o​n​g​ ​c​a​n​ ​a​ ​r​u​n​ ​t​a​k​e​?
+	 */
+	HOME_FAQ_Q_08: string
+	/**
+	 * P​y​t​h​o​n​ ​t​i​m​e​s​ ​o​u​t​ ​a​f​t​e​r​ ​3​0​ ​s​e​c​o​n​d​s​ ​b​y​ ​d​e​f​a​u​l​t​;​ ​t​h​e​ ​w​o​r​k​e​r​ ​i​s​ ​t​h​e​n​ ​r​e​c​r​e​a​t​e​d​.​ ​C​a​n​c​e​l​l​a​t​i​o​n​ ​i​s​ ​c​o​a​r​s​e​ ​f​o​r​ ​v​e​r​y​ ​h​e​a​v​y​ ​w​o​r​k​.
+	 */
+	HOME_FAQ_A_08: string
+	/**
+	 * H​o​w​ ​d​o​ ​I​ ​s​a​v​e​ ​m​y​ ​w​o​r​k​?
+	 */
+	HOME_FAQ_Q_09: string
+	/**
+	 * U​s​e​ ​p​u​b​l​i​c​ ​p​r​o​j​e​c​t​s​ ​a​n​d​ ​t​h​e​ ​e​d​i​t​o​r​ ​w​i​t​h​o​u​t​ ​s​i​g​n​i​n​g​ ​i​n​.​ ​T​o​ ​p​e​r​s​i​s​t​ ​p​r​o​j​e​c​t​s​,​ ​t​e​s​t​ ​c​a​s​e​s​,​ ​a​n​d​ ​n​a​m​e​d​ ​s​o​l​u​t​i​o​n​s​,​ ​s​i​g​n​ ​i​n​.
+	 */
+	HOME_FAQ_A_09: string
+	/**
+	 * C​a​n​ ​I​ ​s​h​a​r​e​ ​p​r​o​j​e​c​t​s​ ​o​r​ ​l​e​a​r​n​ ​f​r​o​m​ ​o​t​h​e​r​s​?
+	 */
+	HOME_FAQ_Q_10: string
+	/**
+	 * Y​e​s​.​ ​M​a​k​e​ ​a​ ​p​r​o​j​e​c​t​ ​p​u​b​l​i​c​ ​a​n​d​ ​u​s​e​ ​B​r​o​w​s​e​ ​t​o​ ​d​i​s​c​o​v​e​r​ ​e​x​a​m​p​l​e​s​.
+	 */
+	HOME_FAQ_A_10: string
+	/**
+	 * W​h​a​t​ ​d​o​e​s​ ​l​i​n​k​i​n​g​ ​m​y​ ​L​e​e​t​C​o​d​e​ ​a​c​c​o​u​n​t​ ​d​o​?
+	 */
+	HOME_FAQ_Q_11: string
+	/**
+	 * O​p​t​i​o​n​a​l​ ​p​r​o​f​i​l​e​ ​f​e​a​t​u​r​e​s​,​ ​p​a​s​t​i​n​g​ ​a​ ​L​e​e​t​C​o​d​e​ ​p​r​o​b​l​e​m​ ​U​R​L​ ​t​o​ ​f​i​l​l​ ​m​e​t​a​d​a​t​a​,​ ​a​n​d​ ​s​h​o​r​t​c​u​t​s​ ​t​o​ ​o​p​e​n​ ​t​h​e​ ​s​a​m​e​ ​p​r​o​b​l​e​m​ ​o​n​ ​L​e​e​t​C​o​d​e​.​ ​S​u​b​m​i​t​t​i​n​g​ ​s​o​l​u​t​i​o​n​s​ ​s​t​i​l​l​ ​h​a​p​p​e​n​s​ ​o​n​ ​L​e​e​t​C​o​d​e​—​d​S​t​r​u​c​t​ ​i​s​ ​a​ ​c​o​m​p​a​n​i​o​n​ ​p​l​a​y​g​r​o​u​n​d​.
+	 */
+	HOME_FAQ_A_11: string
+	/**
+	 * C​a​n​ ​I​ ​m​e​a​s​u​r​e​ ​h​o​w​ ​f​a​s​t​ ​m​y​ ​s​o​l​u​t​i​o​n​ ​i​s​?
+	 */
+	HOME_FAQ_Q_12: string
+	/**
+	 * Y​e​s​,​ ​f​o​r​ ​J​a​v​a​S​c​r​i​p​t​—​u​s​e​ ​B​e​n​c​h​m​a​r​k​ ​m​o​d​e​ ​(​m​a​n​y​ ​i​t​e​r​a​t​i​o​n​s​,​ ​m​e​d​i​a​n​,​ ​p​e​r​c​e​n​t​i​l​e​s​,​ ​c​h​a​r​t​)​.​ ​P​y​t​h​o​n​ ​d​o​e​s​ ​n​o​t​ ​h​a​v​e​ ​b​e​n​c​h​m​a​r​k​ ​m​o​d​e​ ​y​e​t​.
+	 */
+	HOME_FAQ_A_12: string
+	/**
+	 * D​o​e​s​ ​d​S​t​r​u​c​t​ ​w​o​r​k​ ​o​n​ ​a​ ​p​h​o​n​e​ ​o​r​ ​t​a​b​l​e​t​?
+	 */
+	HOME_FAQ_Q_13: string
+	/**
+	 * T​h​e​r​e​ ​i​s​ ​a​ ​m​o​b​i​l​e​-​f​r​i​e​n​d​l​y​ ​p​l​a​y​g​r​o​u​n​d​ ​f​l​o​w​ ​w​i​t​h​ ​k​e​e​p​-​a​l​i​v​e​ ​w​h​e​n​ ​s​w​i​t​c​h​i​n​g​ ​t​a​b​s​.​ ​L​o​n​g​ ​e​d​i​t​i​n​g​ ​s​e​s​s​i​o​n​s​ ​a​r​e​ ​s​t​i​l​l​ ​e​a​s​i​e​s​t​ ​o​n​ ​d​e​s​k​t​o​p​.
+	 */
+	HOME_FAQ_A_13: string
+	/**
+	 * I​s​ ​d​S​t​r​u​c​t​ ​o​p​e​n​ ​s​o​u​r​c​e​?
+	 */
+	HOME_FAQ_Q_14: string
+	/**
+	 * Y​e​s​.​ ​S​e​e​ ​t​h​e​ ​L​I​C​E​N​S​E​ ​f​i​l​e​ ​i​n​ ​t​h​e​ ​r​e​p​o​s​i​t​o​r​y​ ​(​A​G​P​L​-​3​.​0​)​.
+	 */
+	HOME_FAQ_A_14: string
 }
 
 export type TranslationFunctions = {
@@ -993,6 +1261,274 @@ export type TranslationFunctions = {
 	 * You need to run the code first
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: () => LocalizedString
+	/**
+	 * Your code, frame by frame
+	 */
+	HOME_LANDING_TITLE: () => LocalizedString
+	/**
+	 * A LeetCode-style playground where your solution drives a synced visual debugger: trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, step-by-step replay, and optional timing stats for JS.
+	 */
+	HOME_LANDING_SUBTITLE: () => LocalizedString
+	/**
+	 * Common questions
+	 */
+	HOME_HERO_FAQ_LINK: () => LocalizedString
+	/**
+	 * How it works
+	 */
+	HOME_SECTION_HOW_IT_WORKS: () => LocalizedString
+	/**
+	 * Write your solution
+	 */
+	HOME_HOW_STEP_1_TITLE: () => LocalizedString
+	/**
+	 * Use the built-in editor with familiar patterns for each project category.
+	 */
+	HOME_HOW_STEP_1_BODY: () => LocalizedString
+	/**
+	 * Run and record
+	 */
+	HOME_HOW_STEP_2_TITLE: () => LocalizedString
+	/**
+	 * Tracked APIs turn structural work into a callstack of frames—no canned animation.
+	 */
+	HOME_HOW_STEP_2_BODY: () => LocalizedString
+	/**
+	 * Scrub the timeline
+	 */
+	HOME_HOW_STEP_3_TITLE: () => LocalizedString
+	/**
+	 * Step forward and backward, change speed, and inspect each operation in the log.
+	 */
+	HOME_HOW_STEP_3_BODY: () => LocalizedString
+	/**
+	 * Built for clarity
+	 */
+	HOME_SECTION_WHY_DSTUCT: () => LocalizedString
+	/**
+	 * See the algorithm, not just output
+	 */
+	HOME_PILLAR_VIS_TITLE: () => LocalizedString
+	/**
+	 * Replay how your data structures change. Understand and debug with a real execution trace.
+	 */
+	HOME_PILLAR_VIS_BODY: () => LocalizedString
+	/**
+	 * Smooth UI while code runs
+	 */
+	HOME_PILLAR_WORKERS_TITLE: () => LocalizedString
+	/**
+	 * JavaScript runs in a Web Worker; Python uses Pyodide in its own worker so the page stays responsive.
+	 */
+	HOME_PILLAR_WORKERS_BODY: () => LocalizedString
+	/**
+	 * Time-travel playback
+	 */
+	HOME_PILLAR_REPLAY_TITLE: () => LocalizedString
+	/**
+	 * Play, pause, step, replay, and tune playback speed—including keyboard shortcuts.
+	 */
+	HOME_PILLAR_REPLAY_BODY: () => LocalizedString
+	/**
+	 * Benchmark JavaScript
+	 */
+	HOME_PILLAR_BENCH_TITLE: () => LocalizedString
+	/**
+	 * Measure many runs with median, percentiles, and a chart. Benchmark mode is JS-only today.
+	 */
+	HOME_PILLAR_BENCH_BODY: () => LocalizedString
+	/**
+	 * Two languages, one playground
+	 */
+	HOME_SECTION_LANGUAGES: () => LocalizedString
+	/**
+	 * JavaScript
+	 */
+	HOME_LANG_JS_TITLE: () => LocalizedString
+	/**
+	 * Runs locally in a worker—no round-trip for visualization. Full benchmark support.
+	 */
+	HOME_LANG_JS_BODY: () => LocalizedString
+	/**
+	 * Python
+	 */
+	HOME_LANG_PYTHON_TITLE: () => LocalizedString
+	/**
+	 * Real CPython via Pyodide in the browser—no install needed. Preloads when you open a Python solution; first visit downloads the runtime (cached afterward). Standard library only.
+	 */
+	HOME_LANG_PYTHON_BODY: () => LocalizedString
+	/**
+	 * Try example playgrounds
+	 */
+	HOME_SECTION_TRY_DEMOS: () => LocalizedString
+	/**
+	 * Jump into a curated example—or open the full project browser.
+	 */
+	HOME_TRY_DEMOS_LEAD: () => LocalizedString
+	/**
+	 * Binary tree
+	 */
+	HOME_DEMO_TREE: () => LocalizedString
+	/**
+	 * Graph path
+	 */
+	HOME_DEMO_GRAPH: () => LocalizedString
+	/**
+	 * Grid BFS
+	 */
+	HOME_DEMO_GRID: () => LocalizedString
+	/**
+	 * Trie / map
+	 */
+	HOME_DEMO_TRIE: () => LocalizedString
+	/**
+	 * Common questions
+	 */
+	HOME_SECTION_FAQ: () => LocalizedString
+	/**
+	 * Save progress in the cloud
+	 */
+	HOME_AUTH_HEADLINE_SIGNED_OUT: () => LocalizedString
+	/**
+	 * Sign in to keep projects, test cases, and solutions synced. Explore public examples without an account.
+	 */
+	HOME_AUTH_BODY_SIGNED_OUT: () => LocalizedString
+	/**
+	 * Your runs execute in the browser; signing in is for saving and social features.
+	 */
+	HOME_AUTH_VISUALIZATION_NOTE: () => LocalizedString
+	/**
+	 * Open profile
+	 */
+	HOME_OPEN_PROFILE: () => LocalizedString
+	/**
+	 * We couldn’t build your profile link. Open your profile from the account menu in the header.
+	 */
+	HOME_PROFILE_LINK_UNAVAILABLE: () => LocalizedString
+	/**
+	 * We couldn’t load the daily problem. Please try again later.
+	 */
+	HOME_DAILY_QUESTION_ERROR: () => LocalizedString
+	/**
+	 * Not sure what to solve?
+	 */
+	HOME_DAILY_SECTION_TITLE: () => LocalizedString
+	/**
+	 * Here is a daily problem from LeetCode—open it in the playground when you are ready.
+	 */
+	HOME_DAILY_SECTION_LEAD: () => LocalizedString
+	/**
+	 * Why is there no visualization after I run?
+	 */
+	HOME_FAQ_Q_01: () => LocalizedString
+	/**
+	 * Visual playback comes from dStruct's tracked data-structure APIs. Pick a matching project category and use the wrappers the playground expects. Plain objects without those APIs may print output but won't produce a step-by-step replay.
+	 */
+	HOME_FAQ_A_01: () => LocalizedString
+	/**
+	 * What problems and structures are supported?
+	 */
+	HOME_FAQ_Q_02: () => LocalizedString
+	/**
+	 * Trees, BST, linked lists, graphs, grids and matrices, arrays, heaps, stacks, trie, DP, two pointers, sliding window, backtracking, and more. Browse the playground or check categories when creating a project.
+	 */
+	HOME_FAQ_A_02: () => LocalizedString
+	/**
+	 * Do I need to install Python?
+	 */
+	HOME_FAQ_Q_03: () => LocalizedString
+	/**
+	 * No for normal use. JavaScript runs in a Web Worker; Python runs with Pyodide in the browser. A local Python server is optional for developers only.
+	 */
+	HOME_FAQ_A_03: () => LocalizedString
+	/**
+	 * Does my code run on your servers?
+	 */
+	HOME_FAQ_Q_04: () => LocalizedString
+	/**
+	 * By default, no—execution happens in your browser. Saving projects, sign-in, and browsing cloud projects use the backend like any web app.
+	 */
+	HOME_FAQ_A_04: () => LocalizedString
+	/**
+	 * Can I use JavaScript and Python?
+	 */
+	HOME_FAQ_Q_05: () => LocalizedString
+	/**
+	 * Yes. Projects can store separate JS and Python solutions. Benchmark mode is JavaScript-only today.
+	 */
+	HOME_FAQ_A_05: () => LocalizedString
+	/**
+	 * Why does Python show a loading bar?
+	 */
+	HOME_FAQ_Q_06: () => LocalizedString
+	/**
+	 * Pyodide preloads in the background when you open a Python page. The first visit downloads the runtime (~30 MB, then cached); WASM startup can take a few seconds even from cache. After that, Run is usually quick.
+	 */
+	HOME_FAQ_A_06: () => LocalizedString
+	/**
+	 * Can I use NumPy or pip packages?
+	 */
+	HOME_FAQ_Q_07: () => LocalizedString
+	/**
+	 * Not in the default playground—standard library only. Third-party imports will fail.
+	 */
+	HOME_FAQ_A_07: () => LocalizedString
+	/**
+	 * How long can a run take?
+	 */
+	HOME_FAQ_Q_08: () => LocalizedString
+	/**
+	 * Python times out after 30 seconds by default; the worker is then recreated. Cancellation is coarse for very heavy work.
+	 */
+	HOME_FAQ_A_08: () => LocalizedString
+	/**
+	 * How do I save my work?
+	 */
+	HOME_FAQ_Q_09: () => LocalizedString
+	/**
+	 * Use public projects and the editor without signing in. To persist projects, test cases, and named solutions, sign in.
+	 */
+	HOME_FAQ_A_09: () => LocalizedString
+	/**
+	 * Can I share projects or learn from others?
+	 */
+	HOME_FAQ_Q_10: () => LocalizedString
+	/**
+	 * Yes. Make a project public and use Browse to discover examples.
+	 */
+	HOME_FAQ_A_10: () => LocalizedString
+	/**
+	 * What does linking my LeetCode account do?
+	 */
+	HOME_FAQ_Q_11: () => LocalizedString
+	/**
+	 * Optional profile features, pasting a LeetCode problem URL to fill metadata, and shortcuts to open the same problem on LeetCode. Submitting solutions still happens on LeetCode—dStruct is a companion playground.
+	 */
+	HOME_FAQ_A_11: () => LocalizedString
+	/**
+	 * Can I measure how fast my solution is?
+	 */
+	HOME_FAQ_Q_12: () => LocalizedString
+	/**
+	 * Yes, for JavaScript—use Benchmark mode (many iterations, median, percentiles, chart). Python does not have benchmark mode yet.
+	 */
+	HOME_FAQ_A_12: () => LocalizedString
+	/**
+	 * Does dStruct work on a phone or tablet?
+	 */
+	HOME_FAQ_Q_13: () => LocalizedString
+	/**
+	 * There is a mobile-friendly playground flow with keep-alive when switching tabs. Long editing sessions are still easiest on desktop.
+	 */
+	HOME_FAQ_A_13: () => LocalizedString
+	/**
+	 * Is dStruct open source?
+	 */
+	HOME_FAQ_Q_14: () => LocalizedString
+	/**
+	 * Yes. See the LICENSE file in the repository (AGPL-3.0).
+	 */
+	HOME_FAQ_A_14: () => LocalizedString
 }
 
 export type Formatters = {

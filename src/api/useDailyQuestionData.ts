@@ -14,9 +14,17 @@ export const useDailyQuestionData = (
     questionOfTodayQuery.data ?? {};
   const titleSlug = activeDailyCodingChallengeQuestion?.question.titleSlug;
 
-  return useQuestionDataQuery({
+  const questionDataQuery = useQuestionDataQuery({
     variables: { titleSlug: titleSlug || "" },
     skip: !titleSlug,
     ...options,
   });
+
+  // Surface failures from either step (today slug fetch or detail query)—avoid silent empty state.
+  const error = questionOfTodayQuery.error ?? questionDataQuery.error;
+
+  return {
+    ...questionDataQuery,
+    error,
+  };
 };

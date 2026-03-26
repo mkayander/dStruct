@@ -122,6 +122,104 @@ const ru: Record<keyof Translation, string> = {
   YOU_DONT_OWN_THIS_PROJECT: "Вы не владеете этим проектом",
   YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "Нужно быть авторизованным, чтобы сохранить код",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Сначала нужно запустить код",
+
+  HOME_LANDING_TITLE: "Your code, frame by frame",
+  HOME_LANDING_SUBTITLE:
+    "A LeetCode-style playground where your solution drives a synced visual debugger: trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, step-by-step replay, and optional timing stats for JS.",
+  HOME_HERO_FAQ_LINK: "Common questions",
+  HOME_SECTION_HOW_IT_WORKS: "How it works",
+  HOME_HOW_STEP_1_TITLE: "Write your solution",
+  HOME_HOW_STEP_1_BODY:
+    "Use the built-in editor with familiar patterns for each project category.",
+  HOME_HOW_STEP_2_TITLE: "Run and record",
+  HOME_HOW_STEP_2_BODY:
+    "Tracked APIs turn structural work into a callstack of frames—no canned animation.",
+  HOME_HOW_STEP_3_TITLE: "Scrub the timeline",
+  HOME_HOW_STEP_3_BODY:
+    "Step forward and backward, change speed, and inspect each operation in the log.",
+  HOME_SECTION_WHY_DSTUCT: "Built for clarity",
+  HOME_PILLAR_VIS_TITLE: "See the algorithm, not just output",
+  HOME_PILLAR_VIS_BODY:
+    "Replay how your data structures change. Understand and debug with a real execution trace.",
+  HOME_PILLAR_WORKERS_TITLE: "Smooth UI while code runs",
+  HOME_PILLAR_WORKERS_BODY:
+    "JavaScript runs in a Web Worker; Python uses Pyodide in its own worker so the page stays responsive.",
+  HOME_PILLAR_REPLAY_TITLE: "Time-travel playback",
+  HOME_PILLAR_REPLAY_BODY:
+    "Play, pause, step, replay, and tune playback speed—including keyboard shortcuts.",
+  HOME_PILLAR_BENCH_TITLE: "Benchmark JavaScript",
+  HOME_PILLAR_BENCH_BODY:
+    "Measure many runs with median, percentiles, and a chart. Benchmark mode is JS-only today.",
+  HOME_SECTION_LANGUAGES: "Two languages, one playground",
+  HOME_LANG_JS_TITLE: "JavaScript",
+  HOME_LANG_JS_BODY:
+    "Runs locally in a worker—no round-trip for visualization. Full benchmark support.",
+  HOME_LANG_PYTHON_TITLE: "Python",
+  HOME_LANG_PYTHON_BODY:
+    "Real CPython via Pyodide in the browser—no install needed. Preloads when you open a Python solution; first visit downloads the runtime (cached afterward). Standard library only.",
+  HOME_SECTION_TRY_DEMOS: "Try example playgrounds",
+  HOME_TRY_DEMOS_LEAD: "Jump into a curated example—or open the full project browser.",
+  HOME_DEMO_TREE: "Binary tree",
+  HOME_DEMO_GRAPH: "Graph path",
+  HOME_DEMO_GRID: "Grid BFS",
+  HOME_DEMO_TRIE: "Trie / map",
+  HOME_SECTION_FAQ: "Common questions",
+  HOME_AUTH_HEADLINE_SIGNED_OUT: "Save progress in the cloud",
+  HOME_AUTH_BODY_SIGNED_OUT:
+    "Sign in to keep projects, test cases, and solutions synced. Explore public examples without an account.",
+  HOME_AUTH_VISUALIZATION_NOTE:
+    "Your runs execute in the browser; signing in is for saving and social features.",
+  HOME_OPEN_PROFILE: "Open profile",
+  HOME_PROFILE_LINK_UNAVAILABLE:
+    "We couldn’t build your profile link. Open your profile from the account menu in the header.",
+  HOME_DAILY_QUESTION_ERROR:
+    "We couldn’t load the daily problem. Please try again later.",
+  HOME_DAILY_SECTION_TITLE: "Not sure what to solve?",
+  HOME_DAILY_SECTION_LEAD:
+    "Here is a daily problem from LeetCode—open it in the playground when you are ready.",
+
+  HOME_FAQ_Q_01: "Why is there no visualization after I run?",
+  HOME_FAQ_A_01:
+    "Visual playback comes from dStruct's tracked data-structure APIs. Pick a matching project category and use the wrappers the playground expects. Plain objects without those APIs may print output but won't produce a step-by-step replay.",
+  HOME_FAQ_Q_02: "What problems and structures are supported?",
+  HOME_FAQ_A_02:
+    "Trees, BST, linked lists, graphs, grids and matrices, arrays, heaps, stacks, trie, DP, two pointers, sliding window, backtracking, and more. Browse the playground or check categories when creating a project.",
+  HOME_FAQ_Q_03: "Do I need to install Python?",
+  HOME_FAQ_A_03:
+    "No for normal use. JavaScript runs in a Web Worker; Python runs with Pyodide in the browser. A local Python server is optional for developers only.",
+  HOME_FAQ_Q_04: "Does my code run on your servers?",
+  HOME_FAQ_A_04:
+    "By default, no—execution happens in your browser. Saving projects, sign-in, and browsing cloud projects use the backend like any web app.",
+  HOME_FAQ_Q_05: "Can I use JavaScript and Python?",
+  HOME_FAQ_A_05:
+    "Yes. Projects can store separate JS and Python solutions. Benchmark mode is JavaScript-only today.",
+  HOME_FAQ_Q_06: "Why does Python show a loading bar?",
+  HOME_FAQ_A_06:
+    "Pyodide preloads in the background when you open a Python page. The first visit downloads the runtime (~30 MB, then cached); WASM startup can take a few seconds even from cache. After that, Run is usually quick.",
+  HOME_FAQ_Q_07: "Can I use NumPy or pip packages?",
+  HOME_FAQ_A_07:
+    "Not in the default playground—standard library only. Third-party imports will fail.",
+  HOME_FAQ_Q_08: "How long can a run take?",
+  HOME_FAQ_A_08:
+    "Python times out after 30 seconds by default; the worker is then recreated. Cancellation is coarse for very heavy work.",
+  HOME_FAQ_Q_09: "How do I save my work?",
+  HOME_FAQ_A_09:
+    "Use public projects and the editor without signing in. To persist projects, test cases, and named solutions, sign in.",
+  HOME_FAQ_Q_10: "Can I share projects or learn from others?",
+  HOME_FAQ_A_10:
+    "Yes. Make a project public and use Browse to discover examples.",
+  HOME_FAQ_Q_11: "What does linking my LeetCode account do?",
+  HOME_FAQ_A_11:
+    "Optional profile features, pasting a LeetCode problem URL to fill metadata, and shortcuts to open the same problem on LeetCode. Submitting solutions still happens on LeetCode—dStruct is a companion playground.",
+  HOME_FAQ_Q_12: "Can I measure how fast my solution is?",
+  HOME_FAQ_A_12:
+    "Yes, for JavaScript—use Benchmark mode (many iterations, median, percentiles, chart). Python does not have benchmark mode yet.",
+  HOME_FAQ_Q_13: "Does dStruct work on a phone or tablet?",
+  HOME_FAQ_A_13:
+    "There is a mobile-friendly playground flow with keep-alive when switching tabs. Long editing sessions are still easiest on desktop.",
+  HOME_FAQ_Q_14: "Is dStruct open source?",
+  HOME_FAQ_A_14:
+    "Yes. See the LICENSE file in the repository (AGPL-3.0).",
 };
 
 export default ru;
