@@ -1,3 +1,23 @@
+# [1.367.0](https://github.com/mkayander/dStruct/compare/v1.366.0...v1.367.0) (2026-04-02)
+
+
+### Bug Fixes
+
+* **home:** allow page scroll on mobile over 3D logo; sync orbit via scroll ([afeeb56](https://github.com/mkayander/dStruct/commit/afeeb56aa27503e6741aff56a485d00e9d6a68de))
+* **home:** pass scroll through logo canvas on mobile ([400356d](https://github.com/mkayander/dStruct/commit/400356d2f165f72b53a9eaa7e9eeb98ce27f0bf7))
+* **lint:** touch-scroll canvas styles via ref in LogoModelView ([99f526e](https://github.com/mkayander/dStruct/commit/99f526e286ab7cf6559a635bdaa7007f4c673882))
+* update CodeRunner component type imports for Monaco editor ([f56829f](https://github.com/mkayander/dStruct/commit/f56829fd59068e6dcb835af12f956579da3e66d4))
+
+
+### Features
+
+* add landing page killer features plan ([fcc9ce4](https://github.com/mkayander/dStruct/commit/fcc9ce413de411d405ebb802bd6f93f5b4dad73b))
+* **daily:** add Daily Problem page and navigation ([8b55955](https://github.com/mkayander/dStruct/commit/8b55955e17479cee167a10be3d4836eaa8dd7d48))
+* **home:** enhance mobile hero logo interaction ([2803a88](https://github.com/mkayander/dStruct/commit/2803a880ceb992fc3cf00a13bf66b1d44a808e3e))
+* **home:** landing sections, FAQ, and daily question errors ([179ac7c](https://github.com/mkayander/dStruct/commit/179ac7c0c8399116e2b02a573d03b723e9f95d45))
+* update dependencies in package.json and pnpm-lock.yaml ([fcc8865](https://github.com/mkayander/dStruct/commit/fcc886571ce8c0ec656f89627b7c556e81bc9f93))
+* update landing page killer features plan ([2fca18f](https://github.com/mkayander/dStruct/commit/2fca18fa10bb90384fa2d5f363ab7674149f17b0))
+
 # [1.366.0](https://github.com/mkayander/dStruct/compare/v1.365.0...v1.366.0) (2026-03-19)
 
 
