@@ -1,3 +1,10 @@
+# [1.370.0](https://github.com/mkayander/dStruct/compare/v1.369.1...v1.370.0) (2026-04-05)
+
+
+### Features
+
+* **callstack:** implement CallstackFrameContent and CompactCallstackList components ([780e009](https://github.com/mkayander/dStruct/commit/780e009652ec1f032464244e9b2c9c07ee96002d))
+
 ## [1.369.1](https://github.com/mkayander/dStruct/compare/v1.369.0...v1.369.1) (2026-04-05)
 
 
