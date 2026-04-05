@@ -159,7 +159,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
             transition: "all .2s",
             borderRadius: "50%",
             background: alpha(nodeColor, 0.3),
-            border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
+            border: `1px solid ${alpha(nodeColor, 0.22)}`,
             backdropFilter: "blur(4px)",
             userSelect: "none",
             boxShadow: `0px 0px 18px -2px ${alpha(shadowColor, 0.5)}`,
@@ -213,7 +213,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
           width: "18px",
           height: "18px",
           borderRadius: "50%",
-          background: theme.palette.primary.main,
+          background: nodeColor,
         }}
       />
     </Box>

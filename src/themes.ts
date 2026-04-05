@@ -17,6 +17,8 @@ const obsidianTokens = {
   outline: "#444749",
   accent: "#026be0",
   accentSoft: "#adc7ff",
+  accentLight: "#88aef7",
+  accentDark: "#4d8fff",
   accentGlow: "#d9e7ff",
   textPrimary: "#f5f7fa",
   textSecondary: "#a6b0ba",
@@ -298,6 +300,8 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
     outline: obsidianTokens.outline,
     accent: obsidianTokens.accent,
     accentSoft: obsidianTokens.accentSoft,
+    accentLight: obsidianTokens.accentLight,
+    accentDark: obsidianTokens.accentDark,
     textMuted: obsidianTokens.textMuted,
   };
 
@@ -374,6 +378,8 @@ declare module "@mui/material/styles" {
       surfaceLowest: string;
       outline: string;
       accent: string;
+      accentLight: string;
+      accentDark: string;
       accentSoft: string;
       textMuted: string;
     };

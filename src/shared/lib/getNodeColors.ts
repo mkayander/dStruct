@@ -9,8 +9,8 @@ export const getNodeColors = (
   let nodeColor = "";
   let shadowColor = "";
   if (useDefaultPrimary) {
-    nodeColor = theme.palette.primary.main;
-    shadowColor = theme.palette.primary.dark;
+    nodeColor = theme.appDesign.accentLight;
+    shadowColor = theme.appDesign.accentDark;
   }
   type ColorName = keyof typeof muiColors;
   if (color && color in muiColors) {
