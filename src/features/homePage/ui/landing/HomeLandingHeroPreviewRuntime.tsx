@@ -81,7 +81,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const replayRestartTimeoutRef = useRef<number | null>(null);
   const {
     handleReset,
-    replayCount,
     handlePlay,
     handleReplay,
     handleStepBack,
@@ -244,7 +243,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
         >
           <TreeViewer
             playbackInterval={PLAYBACK_INTERVAL_MS}
-            replayCount={replayCount}
             binaryTreeAlign="center"
           />
         </Box>

@@ -24,13 +24,11 @@ import { useArgumentsParsing, useNodesRuntimeUpdates } from "../hooks";
 
 type TreeViewerProps = {
   playbackInterval: number;
-  replayCount: number;
   binaryTreeAlign?: "start" | "center";
 };
 
 export const TreeViewer: React.FC<TreeViewerProps> = ({
   playbackInterval,
-  replayCount,
   binaryTreeAlign = "start",
 }) => {
   const dispatch = useAppDispatch();
@@ -41,7 +39,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   useArgumentsParsing();
 
-  useNodesRuntimeUpdates(playbackInterval, replayCount);
+  useNodesRuntimeUpdates(playbackInterval);
 
   const binaryTrees = useMemo(() => {
     let prevTree: TreeData | null = null;

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   callstackSlice,
   selectCallstack,
@@ -21,7 +19,6 @@ import {
 export const usePlayerControls = () => {
   const dispatch = useAppDispatch();
   const store = useAppStore();
-  const [replayCount, setReplayCount] = useState(0);
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
 
   const handleReset = () => {
@@ -30,7 +27,6 @@ export const usePlayerControls = () => {
 
   const handleReplay = () => {
     handleReset();
-    setReplayCount((prevReplayCount) => prevReplayCount + 1);
     dispatch(callstackSlice.actions.setFrameIndex(-1));
     dispatch(callstackSlice.actions.setIsPlaying(true));
   };
@@ -99,7 +95,6 @@ export const usePlayerControls = () => {
   };
 
   return {
-    replayCount,
     handleReset,
     handleReplay,
     handleStepBack,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { batch } from "react-redux";
 
 import { isArgumentArrayType } from "#/entities/argument/lib";
@@ -23,17 +23,11 @@ import {
   getPlaybackStepGroups,
   getPlaybackStepIndex,
   type PlaybackStepGroup,
-  resetStructuresState,
   validateAnimationName,
 } from "../lib";
 
-export const useNodesRuntimeUpdates = (
-  playbackInterval: number,
-  replayCount: number,
-) => {
+export const useNodesRuntimeUpdates = (playbackInterval: number) => {
   const dispatch = useAppDispatch();
-
-  const [isActive, setIsActive] = useState(false);
 
   const callstackIsPlaying = useAppSelector(selectCallstackIsPlaying);
   const frameIndex = useAppSelector(selectCallstackFrameIndex);
@@ -494,7 +488,7 @@ export const useNodesRuntimeUpdates = (
   // Apply or revert frame when frameIndex changes; when playing, advance to next frame after playbackInterval.
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
-    if (resetVersion !== prevResetVersion) return;
+    const didReset = resetVersion !== prevResetVersion;
 
     const diff = frameIndex - prevFrameIndex;
     const currentGroupIndex = getPlaybackStepIndex(
@@ -511,7 +505,7 @@ export const useNodesRuntimeUpdates = (
       previousGroupIndex >= 0 ? playbackStepGroups[previousGroupIndex] : null;
 
     const isForward = diff > 0;
-    if (frameIndex !== prevFrameIndex) {
+    if (!didReset && frameIndex !== prevFrameIndex) {
       if (isForward) {
         if (
           currentGroup?.kind === "swap" &&
@@ -540,7 +534,6 @@ export const useNodesRuntimeUpdates = (
     const timeoutId = setTimeout(() => {
       const nextIndex = getNextPlaybackFrameIndex(callstack, frameIndex);
 
-      setIsActive(nextIndex !== -1 && nextIndex < callstack.length - 1);
       if (nextIndex !== -1) {
         dispatch(callstackSlice.actions.setFrameIndex(nextIndex));
       }
@@ -566,13 +559,4 @@ export const useNodesRuntimeUpdates = (
     revertFrameRange,
     revertPlaybackStepGroup,
   ]);
-
-  // Reset structures when replay is triggered (replayCount changed) so we start from a clean state.
-  useEffect(() => {
-    if (isActive) {
-      resetStructuresState(dispatch, false);
-      setIsActive(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, replayCount, callstack, callstackIsReady]);
 };

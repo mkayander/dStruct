@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { act, renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { Provider } from "react-redux";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type {
@@ -109,28 +109,38 @@ const createWrapper =
   );
 
 describe("usePlayerControls", () => {
-  it("increments replayCount for repeated replay calls in the same update", () => {
+  beforeEach(() => {
+    resetStructuresStateMock.mockClear();
+  });
+
+  it("replay resets structures and resumes playback from the start", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setVal", "left"),
+    ];
+    const store = createStoreWithCallstack({
+      frames: {
+        ids: frames.map((frame) => frame.id),
+        entities: Object.fromEntries(frames.map((frame) => [frame.id, frame])),
+      },
+      frameIndex: 1,
+      isPlaying: false,
+    });
     const { result } = renderHook(() => usePlayerControls(), {
-      wrapper: createWrapper(createStoreWithCallstack({})),
+      wrapper: createWrapper(store),
     });
 
     act(() => {
       result.current.handleReplay();
-      result.current.handleReplay();
     });
 
-    expect(result.current.replayCount).toBe(2);
-    expect(resetStructuresStateMock).toHaveBeenCalledTimes(2);
-    expect(resetStructuresStateMock).toHaveBeenNthCalledWith(
-      1,
+    expect(resetStructuresStateMock).toHaveBeenCalledTimes(1);
+    expect(resetStructuresStateMock).toHaveBeenCalledWith(
       expect.anything(),
       false,
     );
-    expect(resetStructuresStateMock).toHaveBeenNthCalledWith(
-      2,
-      expect.anything(),
-      false,
-    );
+    expect(store.getState().callstack.frameIndex).toBe(-1);
+    expect(store.getState().callstack.isPlaying).toBe(true);
   });
 
   it("steps over sibling child swap pairs as one visual transition", () => {

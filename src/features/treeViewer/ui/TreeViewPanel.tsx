@@ -244,7 +244,6 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
   } = useViewerPan({ ref: viewerPanRef });
 
   const {
-    replayCount,
     handleKeyDown,
     handlePlay,
     handleReplay,
@@ -344,10 +343,7 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
             onTouchEnd={handleTouchEnd}
           >
             <PannableViewer transformRef={transformRef}>
-              <TreeViewer
-                replayCount={replayCount}
-                playbackInterval={sliderValue}
-              />
+              <TreeViewer playbackInterval={sliderValue} />
             </PannableViewer>
           </div>
         </StyledTabPanel>
