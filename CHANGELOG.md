@@ -1,3 +1,18 @@
+# [1.371.0](https://github.com/mkayander/dStruct/compare/v1.370.0...v1.371.0) (2026-04-05)
+
+
+### Bug Fixes
+
+* **landingHeroPreview:** refactor replay timer management and enhance tests ([dddd30b](https://github.com/mkayander/dStruct/commit/dddd30badd120f900cbbc1e7b0214fafbbc06b32))
+
+
+### Features
+
+* **landingHeroPreview:** normalize setColor frame handling and add tests ([e7b3a80](https://github.com/mkayander/dStruct/commit/e7b3a80e60357c5149ce4b0ed1429002aad81224))
+* **theme:** enhance theme colors and update node color logic ([b9b4977](https://github.com/mkayander/dStruct/commit/b9b4977dcf91c6886d1d25b3caf04dee4eb40fec))
+* **tree:** enhance child ID management and playback step handling ([a2bfc15](https://github.com/mkayander/dStruct/commit/a2bfc15bdd247d0cecf63087b0bedaca299237b0))
+* **tree:** enhance tree node management with initial edges support ([a3eb70a](https://github.com/mkayander/dStruct/commit/a3eb70a59f2aed54f5c006522d001363a14c5c92))
+
 # [1.370.0](https://github.com/mkayander/dStruct/compare/v1.369.1...v1.370.0) (2026-04-05)
 
 
