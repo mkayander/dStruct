@@ -8,6 +8,8 @@ import type { Difficulty } from "#/graphql/generated";
 export type SsrDeviceType = "mobile" | "desktop";
 
 const obsidianTokens = {
+  /** True black canvas (body / app shell); sections can use `background` for lifted tones. */
+  canvas: "#000000",
   background: "#101417",
   surfaceLow: "#181c1f",
   surface: "#1c2023",
@@ -95,7 +97,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
         main: obsidianTokens.error,
       },
       background: {
-        default: obsidianTokens.background,
+        default: obsidianTokens.canvas,
         paper: obsidianTokens.surfaceLow,
       },
       text: {
@@ -292,6 +294,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
 
   theme.appDesign = {
     background: obsidianTokens.background,
+    canvas: obsidianTokens.canvas,
     surfaceLow: obsidianTokens.surfaceLow,
     surface: obsidianTokens.surface,
     surfaceHigh: obsidianTokens.surfaceHigh,
@@ -370,6 +373,7 @@ declare module "@mui/material/styles" {
 
   interface Theme {
     appDesign: {
+      canvas: string;
       background: string;
       surfaceLow: string;
       surface: string;
