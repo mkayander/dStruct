@@ -12,7 +12,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Provider } from "react-redux";
 
 import {
@@ -98,7 +104,19 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     [frameIndex, playbackStepGroups],
   );
 
+  const clearReplayTimers = useCallback(() => {
+    if (replayTimeoutRef.current !== null) {
+      window.clearTimeout(replayTimeoutRef.current);
+      replayTimeoutRef.current = null;
+    }
+    if (replayRestartTimeoutRef.current !== null) {
+      window.clearTimeout(replayRestartTimeoutRef.current);
+      replayRestartTimeoutRef.current = null;
+    }
+  }, []);
+
   const stopAutoplay = () => {
+    clearReplayTimers();
     hasManualOverrideRef.current = true;
     dispatch(callstackSlice.actions.setIsPlaying(false));
   };
@@ -149,33 +167,32 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     }
 
     replayTimeoutRef.current = window.setTimeout(() => {
+      replayTimeoutRef.current = null;
       handleReset();
 
       replayRestartTimeoutRef.current = window.setTimeout(() => {
+        replayRestartTimeoutRef.current = null;
         if (!hasManualOverrideRef.current) {
           dispatch(callstackSlice.actions.setIsPlaying(true));
         }
       }, REPLAY_RESET_PAUSE_MS);
     }, 900);
 
-    return () => {
-      if (replayTimeoutRef.current !== null) {
-        window.clearTimeout(replayTimeoutRef.current);
-        replayTimeoutRef.current = null;
-      }
-    };
-  }, [dispatch, handleReset, isLastFrame, isPlaying, isReady]);
+    return clearReplayTimers;
+  }, [
+    clearReplayTimers,
+    dispatch,
+    handleReset,
+    isLastFrame,
+    isPlaying,
+    isReady,
+  ]);
 
   useEffect(
     () => () => {
-      if (replayTimeoutRef.current !== null) {
-        window.clearTimeout(replayTimeoutRef.current);
-      }
-      if (replayRestartTimeoutRef.current !== null) {
-        window.clearTimeout(replayRestartTimeoutRef.current);
-      }
+      clearReplayTimers();
     },
-    [],
+    [clearReplayTimers],
   );
 
   return (
