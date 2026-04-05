@@ -1,3 +1,10 @@
+# [1.369.0](https://github.com/mkayander/dStruct/compare/v1.368.0...v1.369.0) (2026-04-05)
+
+
+### Features
+
+* **lint:** enforce named imports for React hooks ([c05b587](https://github.com/mkayander/dStruct/commit/c05b5876563506f0b9f1c08a57c50fa01204330c))
+
 # [1.368.0](https://github.com/mkayander/dStruct/compare/v1.367.0...v1.368.0) (2026-04-05)
 
 
