@@ -198,7 +198,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       <Box
         sx={{
           position: "relative",
-          minHeight: { xs: 168, sm: 196 },
+          minHeight: 212,
           borderRadius: 3,
           bgcolor: alpha(theme.appDesign.surfaceLowest, 0.92),
           border: `1px solid ${alpha(theme.appDesign.outline, 0.12)}`,

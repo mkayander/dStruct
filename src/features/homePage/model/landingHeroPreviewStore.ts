@@ -26,6 +26,41 @@ type SnapshotTreeNode =
 type SnapshotCallFrame =
   SnapshotState["callstack"]["frames"]["entities"][keyof SnapshotState["callstack"]["frames"]["entities"]];
 
+const normalizeSnapshotSetColorPrevArgs = (
+  prevArgs: unknown,
+): NonNullable<Extract<CallFrame, { name: "setColor" }>["prevArgs"]> => {
+  if (!prevArgs || typeof prevArgs !== "object") {
+    return {
+      color: null,
+      animation: null,
+    };
+  }
+
+  const maybeColorPrevArgs = prevArgs as Record<string, unknown>;
+  if (
+    !("color" in maybeColorPrevArgs) &&
+    !("animation" in maybeColorPrevArgs)
+  ) {
+    return {
+      color: null,
+      animation: null,
+    };
+  }
+
+  return {
+    color:
+      typeof maybeColorPrevArgs.color === "string" ||
+      maybeColorPrevArgs.color === null
+        ? maybeColorPrevArgs.color
+        : null,
+    animation:
+      typeof maybeColorPrevArgs.animation === "string" ||
+      maybeColorPrevArgs.animation === null
+        ? maybeColorPrevArgs.animation
+        : null,
+  };
+};
+
 const toArgumentTreeType = (value: string): ArgumentTreeType => {
   switch (value) {
     case ArgumentType.BINARY_TREE:
@@ -96,6 +131,9 @@ const normalizeTreeState = (treeState: SnapshotTree): TreeData => ({
 const normalizeCallFrame = (frame: SnapshotCallFrame): CallFrame => {
   switch (frame.name) {
     case "setColor":
+      // The captured landing snapshot uses an empty object for initial
+      // color frames, which semantically means "no previous highlight".
+      // Normalize that into explicit nulls so grouped rewind clears color.
       return {
         id: frame.id,
         timestamp: frame.timestamp,
@@ -109,13 +147,7 @@ const normalizeCallFrame = (frame: SnapshotCallFrame): CallFrame => {
           animation:
             "animation" in frame.args ? (frame.args.animation ?? null) : null,
         },
-        prevArgs:
-          frame.prevArgs && "color" in frame.prevArgs
-            ? {
-                color: frame.prevArgs.color ?? null,
-                animation: frame.prevArgs.animation ?? null,
-              }
-            : undefined,
+        prevArgs: normalizeSnapshotSetColorPrevArgs(frame.prevArgs),
       };
     case "setLeftChild":
       return {

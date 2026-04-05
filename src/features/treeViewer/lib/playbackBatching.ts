@@ -72,6 +72,12 @@ const areBatchableSwapFrames = (
   );
 };
 
+const isMatchingSwapPartnerFrame = (
+  primaryFrame: SwapChildFrame,
+  candidateFrame: CallFrame | undefined,
+): candidateFrame is SwapChildFrame =>
+  areBatchableSwapFrames(primaryFrame, candidateFrame);
+
 const getSwapBatchPartnerIndex = (frames: CallFrame[], startIndex: number) => {
   const startFrame = frames[startIndex];
   if (!isSwapChildFrame(startFrame)) {
@@ -166,9 +172,8 @@ export const getPlaybackStepGroups = (
       const groupFrames = frames
         .slice(startIndex, endIndex + 1)
         .filter(isRenderableCallFrame);
-      const partnerFrame = groupFrames.find(
-        (frame): frame is SwapChildFrame =>
-          isSwapChildFrame(frame) && frame.name !== primaryFrame.name,
+      const partnerFrame = groupFrames.find((frame) =>
+        isMatchingSwapPartnerFrame(primaryFrame, frame),
       );
 
       if (partnerFrame) {

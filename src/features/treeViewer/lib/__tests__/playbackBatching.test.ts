@@ -132,4 +132,28 @@ describe("playbackBatching", () => {
       { kind: "single", startIndex: 5, endIndex: 5 },
     ]);
   });
+
+  it("keeps the actual sibling setter as the swap partner", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f3", "setRightChild", "child"),
+      createMockFrame("f4", "setColor", "child"),
+      createMockFrame("f5", "setRightChild", "root"),
+      createMockFrame("f6", "setVal", "tail"),
+    ];
+
+    const groups = getPlaybackStepGroups(frames);
+
+    expect(groups).toMatchObject([
+      { kind: "single", startIndex: 0, endIndex: 0 },
+      { kind: "swap", startIndex: 1, endIndex: 4 },
+      { kind: "single", startIndex: 5, endIndex: 5 },
+    ]);
+    expect(groups[1]).toMatchObject({
+      kind: "swap",
+      primaryFrame: { id: "f2", nodeId: "root", name: "setLeftChild" },
+      partnerFrame: { id: "f5", nodeId: "root", name: "setRightChild" },
+    });
+  });
 });
