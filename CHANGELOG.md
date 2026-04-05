@@ -1,3 +1,10 @@
+## [1.369.1](https://github.com/mkayander/dStruct/compare/v1.369.0...v1.369.1) (2026-04-05)
+
+
+### Bug Fixes
+
+* **home:** update icons and remove unused text in landing page components ([2242e33](https://github.com/mkayander/dStruct/commit/2242e33b0dfe92ab9d45dcdd494b8d69c7b18f5d))
+
 # [1.369.0](https://github.com/mkayander/dStruct/compare/v1.368.0...v1.369.0) (2026-04-05)
 
 
