@@ -30,6 +30,33 @@ const HERO_MODEL_DAMPING = 0.08;
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
+const AmbientBackground = () => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100vh",
+        background: `radial-gradient(circle at 18% 18%, ${alpha(
+          theme.appDesign.accent,
+          0.16,
+        )} 0%, transparent 42%), radial-gradient(circle at 82% 12%, ${alpha(
+          theme.appDesign.accentSoft,
+          0.12,
+        )} 0%, transparent 36%), linear-gradient(180deg, ${alpha(
+          theme.appDesign.surfaceLow,
+          0.12,
+        )} 0%, transparent 55%)`,
+        pointerEvents: "none",
+      }}
+    />
+  );
+};
+
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
   const isMobileLayout = useMobileLayout();
@@ -155,23 +182,7 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
         pb: { xs: 8, md: 10 },
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background: `radial-gradient(circle at 18% 18%, ${alpha(
-            theme.appDesign.accent,
-            0.16,
-          )} 0%, transparent 42%), radial-gradient(circle at 82% 12%, ${alpha(
-            theme.appDesign.accentSoft,
-            0.12,
-          )} 0%, transparent 36%), linear-gradient(180deg, ${alpha(
-            theme.appDesign.surfaceLow,
-            0.12,
-          )} 0%, transparent 55%)`,
-          pointerEvents: "none",
-        }}
-      />
+      <AmbientBackground />
 
       <Box
         sx={{
@@ -331,7 +342,6 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                 position: "relative",
                 zIndex: 1,
                 minWidth: 0,
-                maxWidth: { xs: 340, sm: 560, lg: "none" },
                 mx: { xs: "auto", lg: 0 },
               }}
             >

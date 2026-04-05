@@ -4,124 +4,23 @@ import {
   Stack,
   TableCell,
   TableRow,
-  Tooltip,
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useMemo, useRef } from "react";
 import { TableVirtuoso, type TableVirtuosoHandle } from "react-virtuoso";
 
 import {
-  selectNodeDataById,
-  treeNodeSlice,
-} from "#/entities/dataStructures/node/model/nodeSlice";
-import {
   type CallFrame,
   selectCallstack,
 } from "#/features/callstack/model/callstackSlice";
 import { useI18nContext } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
-import { safeStringify } from "#/shared/lib/stringifySolutionResult";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppSelector } from "#/store/hooks";
 
-const NodeCell: React.FC<{ treeName: string; id: string }> = ({
-  treeName,
-  id,
-}) => {
-  const theme = useTheme();
-  const nodeData = useAppSelector(selectNodeDataById(treeName, id));
-  const dispatcher = useAppDispatch();
-
-  if (!nodeData) return <span>{id}</span>;
-
-  const handleMouseEnter: React.MouseEventHandler<HTMLSpanElement> = () => {
-    dispatcher(
-      treeNodeSlice.actions.update({
-        name: treeName,
-        data: {
-          id: nodeData.id,
-          changes: {
-            isHighlighted: true,
-          },
-        },
-      }),
-    );
-  };
-
-  const handleMouseLeave: React.MouseEventHandler<HTMLSpanElement> = () => {
-    dispatcher(
-      treeNodeSlice.actions.update({
-        name: treeName,
-        data: {
-          id: nodeData.id,
-          changes: {
-            isHighlighted: false,
-          },
-        },
-      }),
-    );
-  };
-
-  return (
-    <Tooltip
-      title={`id: ${id}`}
-      arrow
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Box
-        component="span"
-        sx={{
-          height: "32px",
-          width: "32px",
-          display: "inline-block",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          pt: "7px",
-          pb: 1,
-          background: alpha(theme.palette.primary.main, 0.1),
-          borderRadius: "50%",
-        }}
-      >
-        {nodeData.value}
-      </Box>
-    </Tooltip>
-  );
-};
-
-const ArgumentsCell: React.FC<{ frame: CallFrame }> = ({ frame }) => {
-  if (!("args" in frame)) {
-    return <span>---</span>;
-  }
-
-  switch (frame.name) {
-    case "setLeftChild":
-    case "setRightChild":
-      return frame.args.childId ? (
-        <NodeCell treeName={frame.treeName} id={frame.args.childId} />
-      ) : (
-        <span>null</span>
-      );
-
-    default: {
-      const value = safeStringify(frame.args);
-      return (
-        <Tooltip title={<pre>{value}</pre>} arrow>
-          <Box
-            sx={{
-              overflow: "hidden",
-              maxWidth: "70vh",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {value}
-          </Box>
-        </Tooltip>
-      );
-    }
-  }
-};
+import {
+  CallstackArgumentsValue,
+  CallstackNodeBadge,
+} from "./CallstackFrameContent";
 
 const BOTTOM_SPACER_HEIGHT = "calc(38px + env(safe-area-inset-bottom, 0px))";
 
@@ -243,7 +142,10 @@ export const CallstackTable: React.FC = () => {
                 }}
               >
                 {"treeName" in frame && "nodeId" in frame && (
-                  <NodeCell treeName={frame.treeName} id={frame.nodeId} />
+                  <CallstackNodeBadge
+                    treeName={frame.treeName}
+                    id={frame.nodeId}
+                  />
                 )}
               </TableCell>
               <TableCell align="right">{frame.name}</TableCell>
@@ -251,7 +153,7 @@ export const CallstackTable: React.FC = () => {
                 {`+${(frame.timestamp - startTimestamp).toFixed(2)} ms`}
               </TableCell>
               <TableCell align="left">
-                <ArgumentsCell frame={frame} />
+                <CallstackArgumentsValue frame={frame} />
               </TableCell>
             </>
           );
