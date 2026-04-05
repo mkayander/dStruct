@@ -1,12 +1,9 @@
 {
   "name": "@dstruct/runner",
   "version": "0.1.2",
-  "description": "",
-  "bin": {
-    "dstruct-runner": "dist/main.js"
-  },
+  "description": "Python harness sources embedded by the Pyodide Web Worker (no Node server).",
   "files": [
-    "dist"
+    "python"
   ],
   "scripts": {},
   "keywords": [
