@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  alpha,
   Box,
   Container,
   Typography,
@@ -39,20 +40,17 @@ export const HomeLandingFaq: React.FC<HomeLandingFaqProps> = ({ LL }) => {
       component="section"
       aria-labelledby="landing-faq-heading"
       sx={{
-        py: { xs: 6, md: 9 },
-        bgcolor: "background.paper",
-        borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+        py: { xs: 6, md: 8 },
+        bgcolor: alpha("#181c1f", 0.72),
       }}
     >
-      <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Typography
           id="landing-faq-heading"
-          variant="h4"
+          variant="h3"
           component="h2"
           sx={{
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-            mb: 3,
+            mb: 1.5,
             color: "text.primary",
           }}
         >
@@ -65,9 +63,11 @@ export const HomeLandingFaq: React.FC<HomeLandingFaqProps> = ({ LL }) => {
             elevation={0}
             defaultExpanded={index === 0}
             sx={{
-              border: (theme) => `1px solid ${theme.palette.divider}`,
-              borderRadius: "12px !important",
-              mb: 1.5,
+              bgcolor: (theme) => alpha(theme.appDesign.surface, 0.88),
+              border: (theme) =>
+                `1px solid ${alpha(theme.appDesign.outline, index === 0 ? 0.2 : 0.12)}`,
+              borderRadius: "8px !important",
+              mb: 1.25,
               "&:before": { display: "none" },
               overflow: "hidden",
             }}
@@ -76,7 +76,7 @@ export const HomeLandingFaq: React.FC<HomeLandingFaqProps> = ({ LL }) => {
               expandIcon={<ExpandMore />}
               sx={{
                 fontWeight: 600,
-                "& .MuiAccordionSummary-content": { my: 1.5 },
+                "& .MuiAccordionSummary-content": { my: 1.25 },
               }}
             >
               {item.q}

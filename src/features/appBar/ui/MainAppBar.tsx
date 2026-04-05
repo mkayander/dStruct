@@ -21,6 +21,7 @@ import {
   type ToolbarProps,
   Tooltip,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { signIn, useSession } from "next-auth/react";
@@ -77,7 +78,11 @@ const LogoBrand: React.FC<{
         <Typography
           variant="h6"
           noWrap
-          sx={{ fontFamily: "'Share Tech', sans-serif" }}
+          sx={{
+            fontFamily: '"Space Grotesk", "Inter", sans-serif',
+            fontWeight: 700,
+            letterSpacing: "-0.04em",
+          }}
         >
           dStruct
         </Typography>
@@ -94,7 +99,8 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const router = useRouter();
   const currentPath = router.pathname;
   const theme = useTheme();
-  const isMobile = useMobileLayout();
+  const isMobileLayout = useMobileLayout();
+  const useCompactNav = useMediaQuery(theme.breakpoints.down("lg"));
   const { LL } = useI18nContext();
   const { enqueueSnackbar } = useSnackbar();
   const hasMounted = useHasMounted();
@@ -108,7 +114,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   const session = useSession();
 
   const isPlayground = currentPath.startsWith("/playground");
-  const useMobilePlayground = isMobile && isPlayground;
+  const useMobilePlayground = isMobileLayout && isPlayground;
 
   const pages = [
     {
@@ -148,31 +154,25 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   };
 
   const toolbarHeight = useMobilePlayground ? MOBILE_APPBAR_HEIGHT : 56;
-  const isCompact = useMobilePlayground;
+  const isCompact = useCompactNav;
 
   return (
     <>
       <SidePanel isOpen={isSidePanelOpen} setIsOpen={setIsSidePanelOpen} />
       <AppBar
         position={position}
-        elevation={isScrolled ? 2 : 0}
+        elevation={0}
         variant={appBarVariant}
         color={"transparent"}
         sx={{
           paddingTop: "env(safe-area-inset-top, 0px)",
           transition: "all .2s",
-          backdropFilter: isScrolled ? "blur(12px)" : "blur(0px)",
-          background: isScrolled
-            ? alpha(theme.palette.primary.main, 0.2)
-            : alpha(theme.palette.primary.main, 0),
-          boxShadow: `0 0 12px 0 ${alpha(
-            theme.palette.primary.main,
-            isScrolled ? 0.2 : 0,
-          )}`,
-          borderBottom: `1px solid ${alpha(
-            theme.palette.common.white,
-            isScrolled ? 0.05 : 0,
-          )}`,
+          backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          borderBottom: isScrolled
+            ? `1px solid ${alpha(theme.appDesign.outline, 0.18)}`
+            : "1px solid transparent",
           color: theme.palette.text.primary,
         }}
       >
@@ -182,17 +182,17 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             variant={toolbarVariant}
             sx={{
               height: toolbarHeight,
-              px: useMobilePlayground ? 1 : undefined,
+              px: useMobilePlayground ? 1 : { xs: 1.25, md: 0 },
             }}
           >
             <LogoBrand
               alt={LL.DSTRUCT_LOGO()}
-              showName={true}
+              showName={!useCompactNav}
               logoSize={isCompact ? 24 : 32}
             />
 
-            {!useMobilePlayground && (
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {useCompactNav && (
+              <Box sx={{ flexGrow: 1, display: "flex" }}>
                 <IconButton
                   size="large"
                   aria-label={LL.CURRENT_USER_ACCOUNT()}
@@ -217,49 +217,61 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   }}
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
+                  sx={{ display: "block" }}
                 >
                   {pages.map((page) => (
-                    <MenuItem key={page.href}>
-                      <Link href={page.href}>
-                        <Typography textAlign="center">{page.name}</Typography>
-                      </Link>
+                    <MenuItem
+                      key={page.href}
+                      component={Link}
+                      href={page.href}
+                      onClick={handleCloseNavMenu}
+                    >
+                      <Typography textAlign="center">{page.name}</Typography>
                     </MenuItem>
                   ))}
                 </Menu>
               </Box>
             )}
 
-            {!useMobilePlayground && (
+            {!useCompactNav && (
               <Box
                 sx={{
                   flexGrow: 1,
                   gap: 1,
-                  display: { xs: "none", md: "flex" },
+                  display: "flex",
                 }}
               >
                 {pages.map((page) => (
-                  <Link key={page.href} href={page.href}>
-                    <Button
-                      key={page.href}
-                      color="inherit"
-                      sx={{
-                        backgroundColor:
-                          page.href && currentPath.startsWith(page.href)
-                            ? alpha("#fff", 0.1)
-                            : "",
-                      }}
-                    >
-                      {page.name}
-                    </Button>
-                  </Link>
+                  <Button
+                    key={page.href}
+                    component={Link}
+                    href={page.href}
+                    color="inherit"
+                    sx={{
+                      backgroundColor:
+                        page.href && currentPath.startsWith(page.href)
+                          ? alpha(theme.appDesign.surfaceHighest, 0.9)
+                          : "transparent",
+                      border:
+                        page.href && currentPath.startsWith(page.href)
+                          ? `1px solid ${alpha(theme.appDesign.outline, 0.22)}`
+                          : "1px solid transparent",
+                      "&:hover": {
+                        backgroundColor: alpha(
+                          theme.appDesign.surfaceHigh,
+                          0.82,
+                        ),
+                        borderColor: alpha(theme.appDesign.outline, 0.18),
+                      },
+                    }}
+                  >
+                    {page.name}
+                  </Button>
                 ))}
               </Box>
             )}
 
-            {useMobilePlayground && <Box sx={{ flex: 1 }} />}
+            {useCompactNav && <Box sx={{ flex: 1 }} />}
 
             <Stack
               direction="row"

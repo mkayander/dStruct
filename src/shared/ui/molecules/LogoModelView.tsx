@@ -9,7 +9,12 @@ import { useMobileLayout } from "#/shared/hooks";
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
 type LogoModelViewProps = {
-  controlsRef: React.RefObject<ThreeOrbitControls | null>;
+  controlsRef?: React.RefObject<ThreeOrbitControls | null>;
+  interactive?: boolean;
+  cameraPosition?: [number, number, number];
+  cameraFov?: number;
+  target?: [number, number, number];
+  distanceRange?: readonly [number, number];
 };
 
 /**
@@ -53,13 +58,29 @@ const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
 
 export const LogoModelView: React.FC<LogoModelViewProps> = ({
   controlsRef,
+  interactive = true,
+  cameraPosition = [0, 0, 5],
+  cameraFov = 50,
+  target = [0, 0.5, 0],
+  distanceRange = [13, 20],
 }) => {
   const theme = useTheme();
   const isMobile = useMobileLayout();
-  const pointerRotationEnabled = !isMobile;
+  const pointerRotationEnabled = interactive && !isMobile;
+  const pointerEventsDisabled = isMobile || !interactive;
 
   return (
-    <Canvas style={isMobile ? { pointerEvents: "none" } : undefined}>
+    <Canvas
+      camera={{ position: cameraPosition, fov: cameraFov }}
+      gl={{ alpha: true, antialias: true }}
+      onCreated={({ gl }) => {
+        gl.setClearColor("#000000", 0);
+      }}
+      style={{
+        background: "transparent",
+        ...(pointerEventsDisabled ? { pointerEvents: "none" } : {}),
+      }}
+    >
       <ambientLight intensity={2.5} />
       <pointLight
         intensity={2}
@@ -79,20 +100,20 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
       <OrbitControls
         ref={controlsRef}
         enabled={pointerRotationEnabled}
-        target={[0, 0.5, 0]}
+        target={target}
         minAzimuthAngle={Math.PI / -2.2}
         maxAzimuthAngle={Math.PI / 2.2}
         minPolarAngle={Math.PI / 10}
         maxPolarAngle={Math.PI / 1.1}
-        minDistance={13}
-        maxDistance={20}
+        minDistance={distanceRange[0]}
+        maxDistance={distanceRange[1]}
         enableRotate={pointerRotationEnabled}
         enableZoom={false}
         enablePan={false}
         enableDamping={pointerRotationEnabled}
         dampingFactor={0.005}
       />
-      <MobileCanvasTouchScroll active={isMobile} />
+      <MobileCanvasTouchScroll active={pointerEventsDisabled} />
     </Canvas>
   );
 };

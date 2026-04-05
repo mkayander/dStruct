@@ -1,12 +1,30 @@
 "use client";
 
 import type { PaletteColor } from "@mui/material";
-import { red } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
+import { alpha, createTheme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
 
 export type SsrDeviceType = "mobile" | "desktop";
+
+const obsidianTokens = {
+  background: "#101417",
+  surfaceLow: "#181c1f",
+  surface: "#1c2023",
+  surfaceHigh: "#262a2d",
+  surfaceHighest: "#2f3438",
+  surfaceLowest: "#0b0f11",
+  outline: "#444749",
+  accent: "#026be0",
+  accentSoft: "#adc7ff",
+  accentGlow: "#d9e7ff",
+  textPrimary: "#f5f7fa",
+  textSecondary: "#a6b0ba",
+  textMuted: "#88929b",
+  success: "#63d2a1",
+  warning: "#e0b267",
+  error: "#ee7d77",
+} as const;
 
 const getViewportWidth = (deviceType: SsrDeviceType) =>
   deviceType === "mobile" ? 375 : 1024;
@@ -46,41 +64,254 @@ const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
 });
 
 export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
-  // Create a theme instance.
   const theme = createTheme({
     cssVariables: true,
     palette: {
       mode: "dark",
       primary: {
-        main: "#556cd6",
+        main: "#ffffff",
+        light: "#f5f7fa",
+        dark: "#c5c6c8",
+        contrastText: obsidianTokens.background,
       },
       secondary: {
-        main: "#19857b",
+        main: obsidianTokens.accentSoft,
+        light: obsidianTokens.accentGlow,
+        dark: "#88aef7",
+        contrastText: obsidianTokens.background,
+      },
+      info: {
+        main: obsidianTokens.accent,
+      },
+      success: {
+        main: obsidianTokens.success,
+      },
+      warning: {
+        main: obsidianTokens.warning,
       },
       error: {
-        main: red.A400,
+        main: obsidianTokens.error,
+      },
+      background: {
+        default: obsidianTokens.background,
+        paper: obsidianTokens.surfaceLow,
+      },
+      text: {
+        primary: obsidianTokens.textPrimary,
+        secondary: obsidianTokens.textSecondary,
+      },
+      divider: alpha(obsidianTokens.outline, 0.18),
+      action: {
+        hover: alpha(obsidianTokens.accentSoft, 0.08),
+        selected: alpha(obsidianTokens.accentSoft, 0.12),
+        focus: alpha(obsidianTokens.accentSoft, 0.18),
+      },
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    typography: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      h1: {
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "-0.04em",
+        lineHeight: 1.04,
+      },
+      h2: {
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "-0.04em",
+        lineHeight: 1.08,
+      },
+      h3: {
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "-0.035em",
+      },
+      h4: {
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "-0.03em",
+      },
+      h5: {
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+      },
+      h6: {
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+      },
+      subtitle2: {
+        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontWeight: 600,
+        letterSpacing: "0.05em",
+        textTransform: "uppercase",
+      },
+      button: {
+        fontWeight: 600,
+        letterSpacing: "-0.01em",
+        textTransform: "none",
       },
     },
     components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            backgroundColor: obsidianTokens.background,
+            color: obsidianTokens.textPrimary,
+          },
+          "::selection": {
+            backgroundColor: alpha(obsidianTokens.accentSoft, 0.26),
+          },
+        },
+      },
       MuiUseMediaQuery: {
         defaultProps: {
           ssrMatchMedia: createSsrMatchMedia(deviceType),
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: "none",
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            backgroundColor: obsidianTokens.surface,
+            backgroundImage: "none",
+            borderRadius: 8,
+            border: `1px solid ${alpha(obsidianTokens.outline, 0.14)}`,
+            boxShadow: "none",
+          },
+        },
+      },
+      MuiAccordion: {
+        styleOverrides: {
+          root: {
+            backgroundColor: obsidianTokens.surface,
+            backgroundImage: "none",
+            borderRadius: "8px !important",
+            boxShadow: "none",
+          },
+        },
+      },
+      MuiButton: {
+        defaultProps: {
+          disableElevation: true,
+        },
+        styleOverrides: {
+          root: {
+            minHeight: 40,
+            borderRadius: 4,
+            paddingInline: 16,
+          },
+          containedPrimary: {
+            background: "linear-gradient(180deg, #ffffff 0%, #c5c6c8 100%)",
+            color: obsidianTokens.background,
+            "&:hover": {
+              background: "linear-gradient(180deg, #ffffff 0%, #d9dadc 100%)",
+            },
+          },
+          outlined: {
+            borderColor: alpha(obsidianTokens.outline, 0.36),
+            backgroundColor: alpha(obsidianTokens.surfaceHigh, 0.55),
+            "&:hover": {
+              borderColor: alpha(obsidianTokens.accentSoft, 0.45),
+              backgroundColor: alpha(obsidianTokens.surfaceHigh, 0.82),
+            },
+          },
+          text: {
+            "&:hover": {
+              backgroundColor: alpha(obsidianTokens.accentSoft, 0.08),
+            },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            borderRadius: 999,
+            backgroundColor: alpha(obsidianTokens.accent, 0.12),
+            color: obsidianTokens.accentSoft,
+            border: `1px solid ${alpha(obsidianTokens.accentSoft, 0.12)}`,
+          },
+        },
+      },
+      MuiDrawer: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: alpha(obsidianTokens.surfaceHigh, 0.88),
+            backdropFilter: "blur(20px)",
+            borderColor: alpha(obsidianTokens.outline, 0.18),
+            backgroundImage: "none",
+          },
+        },
+      },
+      MuiMenu: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: alpha(obsidianTokens.surfaceHigh, 0.94),
+            backdropFilter: "blur(18px)",
+            border: `1px solid ${alpha(obsidianTokens.outline, 0.16)}`,
+          },
+        },
+      },
+      MuiTooltip: {
+        styleOverrides: {
+          tooltip: {
+            backgroundColor: alpha(obsidianTokens.surfaceHigh, 0.96),
+            border: `1px solid ${alpha(obsidianTokens.outline, 0.16)}`,
+            color: obsidianTokens.textPrimary,
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: obsidianTokens.surfaceLowest,
+            "& fieldset": {
+              borderColor: alpha(obsidianTokens.outline, 0.14),
+            },
+            "&:hover fieldset": {
+              borderColor: alpha(obsidianTokens.accentSoft, 0.24),
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: alpha(obsidianTokens.accentSoft, 0.7),
+            },
+          },
+        },
+      },
     },
   });
 
+  theme.appDesign = {
+    background: obsidianTokens.background,
+    surfaceLow: obsidianTokens.surfaceLow,
+    surface: obsidianTokens.surface,
+    surfaceHigh: obsidianTokens.surfaceHigh,
+    surfaceHighest: obsidianTokens.surfaceHighest,
+    surfaceLowest: obsidianTokens.surfaceLowest,
+    outline: obsidianTokens.outline,
+    accent: obsidianTokens.accent,
+    accentSoft: obsidianTokens.accentSoft,
+    textMuted: obsidianTokens.textMuted,
+  };
+
   const tagColors: Record<string, [string, string]> = {
-    "two-pointers": ["#009ab2", "#095abd"],
-    "union-find": ["#2a40a6", "#00d9ff"],
-    string: ["#a35382", "#70ceac"],
-    queue: ["#509e26", "#b2eb50"],
-    design: ["#395af9", "#aacafd"],
-    array: ["#095abd", "#009ab2"],
-    "dynamic-programming": ["#15b792", "#45e88c"],
-    graph: ["#abaeff", "#93b9bc"],
-    "linked-list": ["#feaa7b", "#abaeff"],
-    heap: ["#ec75b1", "#f7cae0"],
+    "two-pointers": ["#69a3ff", "#026be0"],
+    "union-find": ["#87b0ff", "#2d6de7"],
+    string: ["#ba93ff", "#7a7dff"],
+    queue: ["#53d3c2", "#2f8b8f"],
+    design: ["#adc7ff", "#026be0"],
+    array: ["#4d8fff", "#026be0"],
+    "dynamic-programming": ["#7bc2ff", "#1c77d8"],
+    graph: ["#adc7ff", "#6a8ef6"],
+    "linked-list": ["#f0b37a", "#8ca8ff"],
+    heap: ["#f29ad8", "#8d7bff"],
   };
 
   theme.palette.question = {
@@ -93,7 +324,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
     Easy: theme.palette.augmentColor({
       name: "Easy",
       color: {
-        main: "#4bffea",
+        main: "#55d5c2",
       },
     }),
     Medium: theme.palette.augmentColor({
@@ -131,6 +362,25 @@ declare module "@mui/material/styles" {
     question: Record<Difficulty, PaletteColor> & {
       getTagColors(slug?: string): [string, string];
     };
+  }
+
+  interface Theme {
+    appDesign: {
+      background: string;
+      surfaceLow: string;
+      surface: string;
+      surfaceHigh: string;
+      surfaceHighest: string;
+      surfaceLowest: string;
+      outline: string;
+      accent: string;
+      accentSoft: string;
+      textMuted: string;
+    };
+  }
+
+  interface ThemeOptions {
+    appDesign?: Partial<Theme["appDesign"]>;
   }
 }
 

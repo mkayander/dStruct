@@ -16,7 +16,6 @@ import {
   type SelectChangeEvent,
   SwipeableDrawer,
   Typography,
-  useColorScheme,
   useTheme,
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
@@ -38,7 +37,7 @@ type NavItemProps = {
   href?: string;
 };
 const NavItem: React.FC<NavItemProps> = ({ title, onClick, href }) => {
-  const component: any = href ? "a" : "button";
+  const component: React.ElementType = href ? "a" : "button";
 
   return (
     <ListItem disablePadding>
@@ -58,8 +57,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const router = useRouter();
   const { LL } = useI18nContext();
   const theme = useTheme();
-  const { mode } = useColorScheme();
-  const isDarkMode = mode === "dark";
   const session = useSession();
 
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
@@ -80,11 +77,9 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
       slotProps={{
         paper: {
           sx: {
-            background: alpha(
-              theme.palette.background.paper,
-              isDarkMode ? 0.2 : 0.6,
-            ),
-            backdropFilter: "blur(18px)",
+            background: alpha(theme.appDesign.surfaceHigh, 0.88),
+            backdropFilter: "blur(20px)",
+            borderLeft: `1px solid ${alpha(theme.appDesign.outline, 0.16)}`,
           },
         },
       }}

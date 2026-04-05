@@ -124,10 +124,10 @@ const en: BaseTranslation = {
   YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "You need to be authed to save code",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "You need to run the code first",
 
-  HOME_LANDING_TITLE: "Your code, frame by frame",
+  HOME_LANDING_TITLE: "Your code, frame by frame. Step forward. Step back.",
   HOME_LANDING_SUBTITLE:
-    "A LeetCode-style playground where your solution drives a synced visual debugger: trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, step-by-step replay, and optional timing stats for JS.",
-  HOME_HERO_FAQ_LINK: "Common questions",
+    "A LeetCode-style playground where your solution becomes a visual execution trace for trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, replayable state changes, and optional timing stats for JS.",
+  HOME_HERO_FAQ_LINK: "Frequently asked questions",
   HOME_SECTION_HOW_IT_WORKS: "How it works",
   HOME_HOW_STEP_1_TITLE: "Write your solution",
   HOME_HOW_STEP_1_BODY:
@@ -138,7 +138,7 @@ const en: BaseTranslation = {
   HOME_HOW_STEP_3_TITLE: "Scrub the timeline",
   HOME_HOW_STEP_3_BODY:
     "Step forward and backward, change speed, and inspect each operation in the log.",
-  HOME_SECTION_WHY_DSTUCT: "Built for clarity",
+  HOME_SECTION_WHY_DSTUCT: "Capabilities",
   HOME_PILLAR_VIS_TITLE: "See the algorithm, not just output",
   HOME_PILLAR_VIS_BODY:
     "Replay how your data structures change. Understand and debug with a real execution trace.",
@@ -158,8 +158,9 @@ const en: BaseTranslation = {
   HOME_LANG_PYTHON_TITLE: "Python",
   HOME_LANG_PYTHON_BODY:
     "Real CPython via Pyodide in the browser—no install needed. Preloads when you open a Python solution; first visit downloads the runtime (cached afterward). Standard library only.",
-  HOME_SECTION_TRY_DEMOS: "Try example playgrounds",
-  HOME_TRY_DEMOS_LEAD: "Jump into a curated example—or open the full project browser.",
+  HOME_SECTION_TRY_DEMOS: "Algorithm gallery",
+  HOME_TRY_DEMOS_LEAD:
+    "Open a curated playground to see the debugger on a real problem, or jump into the full browser.",
   HOME_DEMO_TREE: "Binary tree",
   HOME_DEMO_GRAPH: "Graph path",
   HOME_DEMO_GRID: "Grid BFS",
