@@ -78,12 +78,26 @@ export const getBaseStructureReducers = <N extends StructureNode>(
   type State = BaseStructureState<BaseStructureItem<N>>;
   const selectors = adapter.getSelectors();
 
+  const cloneEntityState = (entityState: EntityState<N, string>) => ({
+    ...entityState,
+    ids: [...entityState.ids],
+    entities: Object.fromEntries(
+      Object.entries(entityState.entities).map(([id, entity]) => [
+        id,
+        entity ? { ...entity } : entity,
+      ]),
+    ),
+  });
+
   const resetNodes = <T extends State>(state: T[string]) => {
     if (state.isRuntime) adapter.removeAll(state.nodes);
     if (state.initialNodes === null) return;
 
     adapter.removeAll(state.nodes);
-    adapter.addMany(state.nodes, selectors.selectAll(state.initialNodes));
+    adapter.addMany(
+      state.nodes,
+      selectors.selectAll(cloneEntityState(state.initialNodes)),
+    );
     state.colorMap = null;
   };
 
@@ -215,11 +229,7 @@ export const getBaseStructureReducers = <N extends StructureNode>(
         runStateActionByName(state, name, (treeState) => {
           if (treeState.isRuntime || treeState.initialNodes !== null) return;
 
-          treeState.initialNodes = {
-            ...treeState.nodes,
-            ids: [...treeState.nodes.ids],
-            entities: { ...treeState.nodes.entities },
-          };
+          treeState.initialNodes = cloneEntityState(treeState.nodes);
         });
       }
     },

@@ -1,7 +1,11 @@
 import { alpha, Box, Stack, Typography, useTheme } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
 import { selectCallstack } from "#/features/callstack/model/callstackSlice";
+import {
+  getPlaybackStepGroups,
+  getPlaybackStepIndex,
+} from "#/features/treeViewer/lib";
 import { TabContentScrollContainer } from "#/shared/ui/templates/TabContentScrollContainer";
 import { useAppSelector } from "#/store/hooks";
 
@@ -21,24 +25,28 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
 }) => {
   const theme = useTheme();
   const callstack = useAppSelector(selectCallstack);
-  const startTimestamp = callstack.startTimestamp ?? 0;
   const runtimeErrorMessage = callstack.error?.message ?? null;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rowRefs = useRef<Record<string, HTMLElement | null>>({});
+  const playbackStepGroups = useMemo(
+    () => getPlaybackStepGroups(callstack.frames),
+    [callstack.frames],
+  );
+  const activePlaybackStepIndex = useMemo(
+    () => getPlaybackStepIndex(playbackStepGroups, callstack.frameIndex),
+    [callstack.frameIndex, playbackStepGroups],
+  );
 
   useEffect(() => {
-    if (
-      callstack.frameIndex < 0 ||
-      callstack.frameIndex >= callstack.frames.length
-    ) {
+    if (activePlaybackStepIndex < 0) {
       return;
     }
 
-    const activeFrame = callstack.frames[callstack.frameIndex];
-    if (!activeFrame) return;
+    const activeGroup = playbackStepGroups[activePlaybackStepIndex];
+    if (!activeGroup) return;
 
     const container = containerRef.current;
-    const activeRow = rowRefs.current[activeFrame.id];
+    const activeRow = rowRefs.current[activeGroup.key];
 
     if (!container || !activeRow) return;
 
@@ -55,9 +63,9 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
       top: nextScrollTop,
       behavior: "smooth",
     });
-  }, [callstack.frameIndex, callstack.frames]);
+  }, [activePlaybackStepIndex, playbackStepGroups]);
 
-  if (!callstack.isReady || callstack.frames.length === 0) {
+  if (!callstack.isReady || playbackStepGroups.length === 0) {
     return (
       <TabContentScrollContainer
         ref={containerRef}
@@ -108,21 +116,25 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
     >
       <Box sx={{ px: 1.5, py: 1.25 }}>
         <Stack spacing={0.75}>
-          {callstack.frames.map((frame, index) => {
-            const isActive = index === callstack.frameIndex;
-            const isPast = index < callstack.frameIndex;
+          {playbackStepGroups.map((group, index) => {
+            const isActive = index === activePlaybackStepIndex;
+            const isPast =
+              activePlaybackStepIndex >= 0 &&
+              group.endIndex < callstack.frameIndex;
+            const frame = group.primaryFrame;
+            const isSwapGroup = group.kind === "swap";
 
             return (
               <div
-                key={frame.id}
+                key={group.key}
                 ref={(node) => {
-                  rowRefs.current[frame.id] = node;
+                  rowRefs.current[group.key] = node;
                 }}
               >
                 <Box
                   sx={{
                     display: "grid",
-                    gridTemplateColumns: "auto minmax(0, 1fr) auto",
+                    gridTemplateColumns: "auto minmax(0, 1fr)",
                     gap: 1,
                     alignItems: "center",
                     px: 1,
@@ -142,6 +154,7 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
                         treeName={frame.treeName}
                         id={frame.nodeId}
                         size={24}
+                        showTooltip={false}
                       />
                     ) : null}
                   </Box>
@@ -155,7 +168,8 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
                         fontWeight: isActive ? 700 : 500,
                       }}
                     >
-                      {String(index + 1).padStart(2, "0")} {frame.name}
+                      {String(index + 1).padStart(2, "0")}{" "}
+                      {isSwapGroup ? "swapChildren" : frame.name}
                     </Typography>
                     <Box
                       sx={{
@@ -167,16 +181,38 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
                         minHeight: 18,
                       }}
                     >
-                      {"args" in frame ? (
-                        <CallstackArgumentsValue frame={frame} />
+                      {isSwapGroup ? (
+                        <Stack
+                          direction="row"
+                          spacing={0.5}
+                          alignItems="center"
+                          sx={{ minWidth: 0, whiteSpace: "nowrap" }}
+                        >
+                          <Typography component="span" variant="inherit">
+                            L:
+                          </Typography>
+                          <CallstackArgumentsValue
+                            frame={group.primaryFrame}
+                            showTooltip={false}
+                          />
+                          <Typography component="span" variant="inherit">
+                            R:
+                          </Typography>
+                          <CallstackArgumentsValue
+                            frame={group.partnerFrame}
+                            showTooltip={false}
+                          />
+                        </Stack>
+                      ) : "args" in frame ? (
+                        <CallstackArgumentsValue
+                          frame={frame}
+                          showTooltip={false}
+                        />
                       ) : (
                         "\u00A0"
                       )}
                     </Box>
                   </Stack>
-                  <Typography variant="caption" color="text.secondary">
-                    +{(frame.timestamp - startTimestamp).toFixed(2)} ms
-                  </Typography>
                 </Box>
               </div>
             );

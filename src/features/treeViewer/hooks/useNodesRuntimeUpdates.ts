@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { batch } from "react-redux";
 
 import { isArgumentArrayType } from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
@@ -12,11 +13,19 @@ import {
   selectCallstack,
   selectCallstackFrameIndex,
   selectCallstackIsPlaying,
+  selectCallstackResetVersion,
 } from "#/features/callstack/model/callstackSlice";
 import { usePrevious } from "#/shared/hooks/usePrevious";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-import { resetStructuresState, validateAnimationName } from "../lib";
+import {
+  getNextPlaybackFrameIndex,
+  getPlaybackStepGroups,
+  getPlaybackStepIndex,
+  type PlaybackStepGroup,
+  resetStructuresState,
+  validateAnimationName,
+} from "../lib";
 
 export const useNodesRuntimeUpdates = (
   playbackInterval: number,
@@ -29,8 +38,14 @@ export const useNodesRuntimeUpdates = (
   const callstackIsPlaying = useAppSelector(selectCallstackIsPlaying);
   const frameIndex = useAppSelector(selectCallstackFrameIndex);
   const prevFrameIndex = usePrevious(frameIndex) ?? -2;
+  const resetVersion = useAppSelector(selectCallstackResetVersion);
+  const prevResetVersion = usePrevious(resetVersion) ?? resetVersion;
   const { isReady: callstackIsReady, frames: callstack } =
     useAppSelector(selectCallstack);
+  const playbackStepGroups = useMemo(
+    () => getPlaybackStepGroups(callstack),
+    [callstack],
+  );
 
   const applyFrame = useCallback(
     (frame: CallFrame) => {
@@ -353,49 +368,183 @@ export const useNodesRuntimeUpdates = (
     [applyFrame, dispatch],
   );
 
+  const applyPlaybackStepGroup = useCallback(
+    (group: PlaybackStepGroup) => {
+      if (group.kind !== "swap") {
+        applyFrame(group.primaryFrame);
+        return;
+      }
+
+      const childUpdates = group.frames
+        .filter(
+          (
+            frame,
+          ): frame is typeof group.primaryFrame | typeof group.partnerFrame =>
+            frame.id === group.primaryFrame.id ||
+            frame.id === group.partnerFrame.id,
+        )
+        .map((frame) => ({
+          index: frame.name === "setLeftChild" ? 0 : 1,
+          childId: frame.args.childId ?? undefined,
+        }));
+      const pairedFrameIds = new Set([
+        group.primaryFrame.id,
+        group.partnerFrame.id,
+      ]);
+      const nonGroupedFrames = group.frames.filter(
+        (frame) => !pairedFrameIds.has(frame.id),
+      );
+
+      batch(() => {
+        dispatch(
+          treeNodeSlice.actions.setChildIds({
+            name: group.primaryFrame.treeName,
+            data: {
+              id: group.primaryFrame.nodeId,
+              updates: childUpdates,
+            },
+          }),
+        );
+
+        for (const frame of nonGroupedFrames) {
+          applyFrame(frame);
+        }
+      });
+    },
+    [applyFrame, dispatch],
+  );
+
+  const revertPlaybackStepGroup = useCallback(
+    (group: PlaybackStepGroup) => {
+      if (group.kind !== "swap") {
+        revertFrame(group.primaryFrame);
+        return;
+      }
+
+      const childUpdates = [group.primaryFrame, group.partnerFrame]
+        .filter(
+          (
+            frame,
+          ): frame is
+            | (typeof group.primaryFrame & {
+                prevArgs: NonNullable<typeof group.primaryFrame.prevArgs>;
+              })
+            | (typeof group.partnerFrame & {
+                prevArgs: NonNullable<typeof group.partnerFrame.prevArgs>;
+              }) => Boolean(frame.prevArgs),
+        )
+        .map((frame) => ({
+          index: frame.name === "setLeftChild" ? 0 : 1,
+          childId: frame.prevArgs.childId ?? undefined,
+        }));
+      const pairedFrameIds = new Set([
+        group.primaryFrame.id,
+        group.partnerFrame.id,
+      ]);
+      const nonGroupedFrames = group.frames.filter(
+        (frame) => !pairedFrameIds.has(frame.id),
+      );
+
+      batch(() => {
+        for (let index = nonGroupedFrames.length - 1; index >= 0; index -= 1) {
+          const frame = nonGroupedFrames[index];
+          if (frame) {
+            revertFrame(frame);
+          }
+        }
+
+        dispatch(
+          treeNodeSlice.actions.setChildIds({
+            name: group.primaryFrame.treeName,
+            data: {
+              id: group.primaryFrame.nodeId,
+              updates: childUpdates,
+            },
+          }),
+        );
+      });
+    },
+    [dispatch, revertFrame],
+  );
+
+  const applyFrameRange = useCallback(
+    (fromIndex: number, toIndex: number) => {
+      for (let index = fromIndex + 1; index <= toIndex; index += 1) {
+        const frame = callstack[index];
+        if (frame) {
+          applyFrame(frame);
+        }
+      }
+    },
+    [applyFrame, callstack],
+  );
+
+  const revertFrameRange = useCallback(
+    (fromIndex: number, toIndex: number) => {
+      for (let index = fromIndex; index > toIndex; index -= 1) {
+        const frame = callstack[index];
+        if (frame) {
+          revertFrame(frame);
+        }
+      }
+    },
+    [callstack, revertFrame],
+  );
+
   // Apply or revert frame when frameIndex changes; when playing, advance to next frame after playbackInterval.
   useEffect(() => {
     if (!callstackIsReady || callstack.length === 0) return;
+    if (resetVersion !== prevResetVersion) return;
 
     const diff = frameIndex - prevFrameIndex;
+    const currentGroupIndex = getPlaybackStepIndex(
+      playbackStepGroups,
+      frameIndex,
+    );
+    const previousGroupIndex = getPlaybackStepIndex(
+      playbackStepGroups,
+      prevFrameIndex,
+    );
+    const currentGroup =
+      currentGroupIndex >= 0 ? playbackStepGroups[currentGroupIndex] : null;
+    const previousGroup =
+      previousGroupIndex >= 0 ? playbackStepGroups[previousGroupIndex] : null;
 
     const isForward = diff > 0;
     if (frameIndex !== prevFrameIndex) {
       if (isForward) {
-        const currentFrame = callstack[frameIndex];
-        if (currentFrame) {
-          applyFrame(currentFrame);
+        if (
+          currentGroup?.kind === "swap" &&
+          frameIndex === currentGroup.endIndex &&
+          prevFrameIndex < currentGroup.startIndex
+        ) {
+          applyPlaybackStepGroup(currentGroup);
+        } else {
+          applyFrameRange(prevFrameIndex, frameIndex);
         }
       } else {
-        const prevFrame = callstack[prevFrameIndex];
-        if (prevFrame) {
-          revertFrame(prevFrame);
+        if (
+          previousGroup?.kind === "swap" &&
+          prevFrameIndex === previousGroup.endIndex &&
+          frameIndex < previousGroup.startIndex
+        ) {
+          revertPlaybackStepGroup(previousGroup);
+        } else {
+          revertFrameRange(prevFrameIndex, frameIndex);
         }
       }
     }
 
     if (!callstackIsPlaying) return;
 
-    const getNextValidIndex = () => {
-      let nextIndex = frameIndex + 1;
-      let frame = callstack[nextIndex];
-
-      while (frame && !("treeName" in frame)) {
-        nextIndex++;
-        frame = callstack[nextIndex];
-      }
-
-      return nextIndex;
-    };
-
     const timeoutId = setTimeout(() => {
-      const nextIndex = getNextValidIndex();
+      const nextIndex = getNextPlaybackFrameIndex(callstack, frameIndex);
 
-      setIsActive(nextIndex < callstack.length - 1);
-      if (nextIndex < callstack.length) {
+      setIsActive(nextIndex !== -1 && nextIndex < callstack.length - 1);
+      if (nextIndex !== -1) {
         dispatch(callstackSlice.actions.setFrameIndex(nextIndex));
       }
-      if (nextIndex >= callstack.length - 1) {
+      if (nextIndex === -1 || nextIndex >= callstack.length - 1) {
         dispatch(callstackSlice.actions.setIsPlaying(false));
       }
     }, playbackInterval);
@@ -405,12 +554,17 @@ export const useNodesRuntimeUpdates = (
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    applyFrame,
+    applyFrameRange,
     callstack,
     callstackIsReady,
     callstackIsPlaying,
     frameIndex,
     playbackInterval,
+    playbackStepGroups,
+    prevResetVersion,
+    resetVersion,
+    revertFrameRange,
+    revertPlaybackStepGroup,
   ]);
 
   // Reset structures when replay is triggered (replayCount changed) so we start from a clean state.

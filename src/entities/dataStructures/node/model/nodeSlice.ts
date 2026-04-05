@@ -96,6 +96,49 @@ const restoreInitialEdges = (treeState: TreeData) => {
   );
 };
 
+const applyChildIdUpdates = (
+  treeState: TreeData,
+  id: string,
+  updates: Array<{ index: number; childId?: string }>,
+) => {
+  const node = treeNodeDataSelector.selectById(treeState.nodes, id);
+  if (!node) return;
+
+  const previousChildrenIds = [...node.childrenIds];
+  const nextChildrenIds = [...previousChildrenIds];
+
+  for (const { index, childId } of updates) {
+    nextChildrenIds[index] = childId;
+  }
+
+  const removedChildIds = previousChildrenIds.filter(
+    (childId): childId is string =>
+      Boolean(childId) && !nextChildrenIds.includes(childId),
+  );
+  const addedChildIds = nextChildrenIds.filter(
+    (childId): childId is string =>
+      Boolean(childId) && !previousChildrenIds.includes(childId),
+  );
+
+  for (const childId of removedChildIds) {
+    edgeDataAdapter.removeOne(treeState.edges, getEdgeId(id, childId));
+  }
+
+  for (const childId of addedChildIds) {
+    edgeDataAdapter.addOne(treeState.edges, {
+      id: getEdgeId(id, childId),
+      sourceId: id,
+      targetId: childId,
+      isDirected: false,
+    });
+  }
+
+  treeNodeDataAdapter.updateOne(treeState.nodes, {
+    id,
+    changes: { childrenIds: nextChildrenIds },
+  });
+};
+
 const baseTreeReducers =
   getBaseStructureReducers<TreeNodeData>(treeNodeDataAdapter);
 
@@ -214,41 +257,25 @@ export const treeNodeSlice = createSlice({
             data: { id, index, childId },
           },
         } = action;
-
-        const node = treeNodeDataSelector.selectById(treeState.nodes, id);
-        if (!node) return;
-
-        const previousChildrenIds = [...node.childrenIds];
-        const previousChildId = previousChildrenIds[index];
-        const nextChildrenIds = [...previousChildrenIds];
-        nextChildrenIds[index] = childId;
-
-        if (
-          previousChildId &&
-          previousChildId !== childId &&
-          !nextChildrenIds.includes(previousChildId)
-        ) {
-          edgeDataAdapter.removeOne(
-            treeState.edges,
-            getEdgeId(id, previousChildId),
-          );
-        }
-
-        if (childId && !previousChildrenIds.includes(childId)) {
-          edgeDataAdapter.addOne(treeState.edges, {
-            id: getEdgeId(id, childId),
-            sourceId: id,
-            targetId: childId,
-            isDirected: false,
-          });
-        }
-
-        treeNodeDataAdapter.updateOne(treeState.nodes, {
-          id,
-          changes: { childrenIds: nextChildrenIds },
-        });
+        applyChildIdUpdates(treeState, id, [{ index, childId }]);
       });
     },
+    setChildIds: (
+      state,
+      action: NamedPayload<{
+        id: string;
+        updates: Array<{ index: number; childId?: string }>;
+      }>,
+    ) =>
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        const {
+          payload: {
+            data: { id, updates },
+          },
+        } = action;
+
+        applyChildIdUpdates(treeState, id, updates);
+      }),
     revertChildId: (
       state,
       action: NamedPayload<{

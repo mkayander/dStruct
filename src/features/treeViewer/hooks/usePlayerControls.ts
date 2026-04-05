@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import {
   callstackSlice,
+  selectCallstack,
   selectCallstackIsPlaying,
-  selectCallstackLength,
 } from "#/features/callstack/model/callstackSlice";
 import {
   editorSlice,
@@ -11,18 +11,21 @@ import {
 } from "#/features/treeViewer/model/editorSlice";
 import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 
-import { resetStructuresState } from "../lib";
+import {
+  getLastRenderableFrameIndex,
+  getNextPlaybackFrameIndex,
+  getPreviousPlaybackFrameIndex,
+  resetStructuresState,
+} from "../lib";
 
 export const usePlayerControls = () => {
   const dispatch = useAppDispatch();
-  const [replayCount, setReplayCount] = useState(0);
   const store = useAppStore();
-  const isPlaying = useAppSelector(selectCallstackIsPlaying);
-  const callstackLength = useAppSelector(selectCallstackLength);
+  const [replayCount, setReplayCount] = useState(0);
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
 
   const handleReset = () => {
-    resetStructuresState(dispatch);
+    resetStructuresState(dispatch, false);
   };
 
   const handleReplay = () => {
@@ -33,25 +36,40 @@ export const usePlayerControls = () => {
   };
 
   const handleStepBack = () => {
-    const frameIndex = store.getState().callstack.frameIndex;
+    const callstack = selectCallstack(store.getState());
+    const frameIndex = callstack.frameIndex;
     if (frameIndex === -1) return;
 
-    dispatch(callstackSlice.actions.setFrameIndex(frameIndex - 1));
+    dispatch(
+      callstackSlice.actions.setFrameIndex(
+        getPreviousPlaybackFrameIndex(callstack.frames, frameIndex),
+      ),
+    );
   };
 
   const handlePlay = () => {
-    const frameIndex = store.getState().callstack.frameIndex;
+    const callstack = selectCallstack(store.getState());
+    const isPlaying = selectCallstackIsPlaying(store.getState());
+    const frameIndex = callstack.frameIndex;
+    const lastRenderableFrameIndex = getLastRenderableFrameIndex(
+      callstack.frames,
+    );
 
-    if (frameIndex === callstackLength - 1) return;
+    if (frameIndex >= lastRenderableFrameIndex) return;
 
     dispatch(callstackSlice.actions.setIsPlaying(!isPlaying));
   };
 
   const handleStepForward = () => {
-    const frameIndex = store.getState().callstack.frameIndex;
-    if (frameIndex === callstackLength - 1) return;
+    const callstack = selectCallstack(store.getState());
+    const frameIndex = callstack.frameIndex;
+    const nextFrameIndex = getNextPlaybackFrameIndex(
+      callstack.frames,
+      frameIndex,
+    );
+    if (nextFrameIndex === -1) return;
 
-    dispatch(callstackSlice.actions.setFrameIndex(frameIndex + 1));
+    dispatch(callstackSlice.actions.setFrameIndex(nextFrameIndex));
   };
 
   const handleKeyDown: React.KeyboardEventHandler = (event) => {

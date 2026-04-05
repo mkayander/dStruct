@@ -13,12 +13,14 @@ type CallstackNodeBadgeProps = {
   treeName: string;
   id: string;
   size?: number;
+  showTooltip?: boolean;
 };
 
 export const CallstackNodeBadge: React.FC<CallstackNodeBadgeProps> = ({
   treeName,
   id,
   size = 32,
+  showTooltip = true,
 }) => {
   const theme = useTheme();
   const nodeData = useAppSelector(selectNodeDataById(treeName, id));
@@ -54,38 +56,44 @@ export const CallstackNodeBadge: React.FC<CallstackNodeBadgeProps> = ({
     );
   };
 
-  return (
-    <Tooltip
-      title={`id: ${id}`}
-      arrow
+  const badge = (
+    <Box
+      component="span"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      sx={{
+        width: size,
+        height: size,
+        display: "inline-grid",
+        placeItems: "center",
+        background: alpha(theme.palette.primary.main, 0.1),
+        borderRadius: "50%",
+        fontSize: size <= 24 ? "0.72rem" : "0.8rem",
+      }}
     >
-      <Box
-        component="span"
-        sx={{
-          width: size,
-          height: size,
-          display: "inline-grid",
-          placeItems: "center",
-          background: alpha(theme.palette.primary.main, 0.1),
-          borderRadius: "50%",
-          fontSize: size <= 24 ? "0.72rem" : "0.8rem",
-        }}
-      >
-        {nodeData.value}
-      </Box>
+      {nodeData.value}
+    </Box>
+  );
+
+  if (!showTooltip) {
+    return badge;
+  }
+
+  return (
+    <Tooltip title={`id: ${id}`} arrow>
+      {badge}
     </Tooltip>
   );
 };
 
 type CallstackArgumentsValueProps = {
   frame: CallFrame;
+  showTooltip?: boolean;
 };
 
 export const CallstackArgumentsValue: React.FC<
   CallstackArgumentsValueProps
-> = ({ frame }) => {
+> = ({ frame, showTooltip = true }) => {
   if (!("args" in frame)) {
     return <span>---</span>;
   }
@@ -94,7 +102,11 @@ export const CallstackArgumentsValue: React.FC<
     case "setLeftChild":
     case "setRightChild":
       return frame.args.childId ? (
-        <CallstackNodeBadge treeName={frame.treeName} id={frame.args.childId} />
+        <CallstackNodeBadge
+          treeName={frame.treeName}
+          id={frame.args.childId}
+          showTooltip={showTooltip}
+        />
       ) : (
         <span>null</span>
       );
@@ -102,18 +114,22 @@ export const CallstackArgumentsValue: React.FC<
     default: {
       const value = safeStringify(frame.args);
       return (
-        <Tooltip title={<pre>{value}</pre>} arrow>
-          <Box
-            sx={{
-              overflow: "hidden",
-              maxWidth: "70vh",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {value}
-          </Box>
-        </Tooltip>
+        <Box
+          sx={{
+            overflow: "hidden",
+            maxWidth: "70vh",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {showTooltip ? (
+            <Tooltip title={<pre>{value}</pre>} arrow>
+              <Box component="span">{value}</Box>
+            </Tooltip>
+          ) : (
+            value
+          )}
+        </Box>
       );
     }
   }

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { useBinaryTreePositioning } from "#/entities/dataStructures/binaryTree/hooks/useBinaryTreePositioning";
@@ -24,13 +24,17 @@ type NodesViewProps = {
   data: TreeData;
   style?: React.CSSProperties;
   sx?: React.CSSProperties;
+  horizontalAlign?: "start" | "center";
 };
+
+const NODE_WIDTH = 42;
 
 export const NodesView: React.FC<NodesViewProps> = ({
   treeName,
   data,
   style,
   sx,
+  horizontalAlign = "start",
 }) => {
   const adjustXOffset = data.type === ArgumentType.LINKED_LIST;
   const offset = useAppSelector(selectMinXOffset(treeName, adjustXOffset)) ?? 0;
@@ -39,8 +43,35 @@ export const NodesView: React.FC<NodesViewProps> = ({
 
   const Node = nodeComponentMap[data.type];
 
-  let left = Number(style?.left) || 0;
-  left -= offset;
+  const left = useMemo(() => {
+    const baseLeft = (Number(style?.left) || 0) - offset;
+
+    if (
+      horizontalAlign !== "center" ||
+      data.type !== ArgumentType.BINARY_TREE
+    ) {
+      return baseLeft;
+    }
+
+    const nodes = Object.values(data.nodes.entities).filter(
+      (node): node is NonNullable<(typeof data.nodes.entities)[string]> =>
+        node !== undefined,
+    );
+    if (nodes.length === 0) {
+      return baseLeft;
+    }
+
+    const minX = Math.min(...nodes.map((node) => node.x));
+    const maxX = Math.max(...nodes.map((node) => node.x));
+    const treeCenterX = (minX + maxX + NODE_WIDTH) / 2;
+
+    if (baseLeft === 0) {
+      return `calc(50% - ${treeCenterX}px)`;
+    }
+
+    const leftSign = baseLeft >= 0 ? "+" : "-";
+    return `calc(50% ${leftSign} ${Math.abs(baseLeft)}px - ${treeCenterX}px)`;
+  }, [data.nodes.entities, data.type, horizontalAlign, offset, style?.left]);
 
   return (
     <Box

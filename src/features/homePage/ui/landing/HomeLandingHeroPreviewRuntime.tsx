@@ -12,11 +12,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Provider } from "react-redux";
 
 import {
   callstackSlice,
+  selectCallstack,
   selectCallstackFrameIndex,
   selectCallstackIsPlaying,
   selectCallstackIsReady,
@@ -30,6 +31,10 @@ import {
   type LandingHeroPreviewStore,
 } from "#/features/homePage/model/landingHeroPreviewStore";
 import { usePlayerControls } from "#/features/treeViewer/hooks";
+import {
+  getPlaybackStepGroups,
+  getPlaybackStepIndex,
+} from "#/features/treeViewer/lib";
 import { TreeViewer } from "#/features/treeViewer/ui/TreeViewer";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -38,7 +43,8 @@ type HomeLandingHeroPreviewRuntimeProps = {
   LL: TranslationFunctions;
 };
 
-const PLAYBACK_INTERVAL_MS = 140;
+const PLAYBACK_INTERVAL_MS = 300;
+const REPLAY_RESET_PAUSE_MS = 220;
 
 type LandingHeroPreviewRuntimeState =
   | {
@@ -65,7 +71,10 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const dispatch = useAppDispatch();
   const hasAutoStartedRef = useRef(false);
   const hasManualOverrideRef = useRef(false);
+  const replayTimeoutRef = useRef<number | null>(null);
+  const replayRestartTimeoutRef = useRef<number | null>(null);
   const {
+    handleReset,
     replayCount,
     handlePlay,
     handleReplay,
@@ -74,11 +83,20 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   } = usePlayerControls();
 
   const isReady = useAppSelector(selectCallstackIsReady);
+  const callstack = useAppSelector(selectCallstack);
   const isPlaying = useAppSelector(selectCallstackIsPlaying);
   const frameIndex = useAppSelector(selectCallstackFrameIndex);
   const callstackLength = useAppSelector(selectCallstackLength);
   const isLastFrame = useAppSelector(selectIsLastFrame);
   const isRootFrame = useAppSelector(selectIsRootFrame);
+  const playbackStepGroups = useMemo(
+    () => getPlaybackStepGroups(callstack.frames),
+    [callstack.frames],
+  );
+  const activePlaybackStepIndex = useMemo(
+    () => getPlaybackStepIndex(playbackStepGroups, frameIndex),
+    [frameIndex, playbackStepGroups],
+  );
 
   const stopAutoplay = () => {
     hasManualOverrideRef.current = true;
@@ -130,14 +148,35 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
-      handleReplay();
+    replayTimeoutRef.current = window.setTimeout(() => {
+      handleReset();
+
+      replayRestartTimeoutRef.current = window.setTimeout(() => {
+        if (!hasManualOverrideRef.current) {
+          dispatch(callstackSlice.actions.setIsPlaying(true));
+        }
+      }, REPLAY_RESET_PAUSE_MS);
     }, 900);
 
     return () => {
-      window.clearTimeout(timeoutId);
+      if (replayTimeoutRef.current !== null) {
+        window.clearTimeout(replayTimeoutRef.current);
+        replayTimeoutRef.current = null;
+      }
     };
-  }, [handleReplay, isLastFrame, isPlaying, isReady]);
+  }, [dispatch, handleReset, isLastFrame, isPlaying, isReady]);
+
+  useEffect(
+    () => () => {
+      if (replayTimeoutRef.current !== null) {
+        window.clearTimeout(replayTimeoutRef.current);
+      }
+      if (replayRestartTimeoutRef.current !== null) {
+        window.clearTimeout(replayRestartTimeoutRef.current);
+      }
+    },
+    [],
+  );
 
   return (
     <Stack spacing={1.5} sx={{ minWidth: 0 }}>
@@ -151,7 +190,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           {LL.HOME_PILLAR_REPLAY_TITLE()}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          Frame {Math.max(frameIndex + 1, 0)} / {callstackLength}
+          Step {Math.max(activePlaybackStepIndex + 1, 0)} /{" "}
+          {playbackStepGroups.length || callstackLength}
         </Typography>
       </Stack>
 
@@ -188,6 +228,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           <TreeViewer
             playbackInterval={PLAYBACK_INTERVAL_MS}
             replayCount={replayCount}
+            binaryTreeAlign="center"
           />
         </Box>
       </Box>

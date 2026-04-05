@@ -10,6 +10,7 @@ export const resetStructuresState = (
 ) => {
   dispatch(callstackSlice.actions.setIsPlaying(false));
   dispatch(callstackSlice.actions.setFrameIndex(-1));
+  dispatch(callstackSlice.actions.markReset());
   [treeNodeSlice, arrayStructureSlice].forEach((slice) => {
     if (performBackup) {
       dispatch(slice.actions.backupAllNodes());

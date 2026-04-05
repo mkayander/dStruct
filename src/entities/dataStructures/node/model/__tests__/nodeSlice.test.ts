@@ -80,6 +80,29 @@ const createInitializedTreeState = () => {
 };
 
 describe("treeNodeSlice", () => {
+  it("applies sibling child swaps atomically with a single childrenIds update", () => {
+    const state = reduce(
+      createInitializedTreeState(),
+      treeNodeSlice.actions.setChildIds({
+        name: TREE_NAME,
+        data: {
+          id: "1",
+          updates: [
+            { index: 0, childId: "3" },
+            { index: 1, childId: "2" },
+          ],
+        },
+      }),
+    );
+
+    const treeState = state[TREE_NAME];
+    expect(treeState?.nodes.entities["1"]?.childrenIds).toEqual(["3", "2"]);
+    expect(treeState?.edges.ids).toEqual(
+      expect.arrayContaining([getEdgeId("1", "2"), getEdgeId("1", "3")]),
+    );
+    expect(treeState?.edges.ids).toHaveLength(2);
+  });
+
   it("keeps both edges during a left/right child swap", () => {
     let state = createInitializedTreeState();
 
@@ -150,5 +173,29 @@ describe("treeNodeSlice", () => {
       expect.arrayContaining([getEdgeId("1", "2"), getEdgeId("1", "3")]),
     );
     expect(treeState?.edges.ids).toHaveLength(2);
+  });
+
+  it("restores original node colors after resetAll", () => {
+    let state = createInitializedTreeState();
+
+    state = reduce(state, treeNodeSlice.actions.backupAllNodes());
+    state = reduce(
+      state,
+      treeNodeSlice.actions.update({
+        name: TREE_NAME,
+        data: {
+          id: "1",
+          changes: {
+            color: "green",
+          },
+        },
+      }),
+    );
+
+    expect(state[TREE_NAME]?.nodes.entities["1"]?.color).toBe("green");
+
+    state = reduce(state, treeNodeSlice.actions.resetAll());
+
+    expect(state[TREE_NAME]?.nodes.entities["1"]?.color).toBeUndefined();
   });
 });

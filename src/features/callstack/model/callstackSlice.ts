@@ -163,6 +163,7 @@ export type CallstackState = {
   error: Error | null;
   frames: EntityState<CallFrame, string>;
   frameIndex: number;
+  resetVersion: number;
   benchmarkResults?: ExecWorkerInterface["benchmark"]["response"];
 };
 
@@ -175,6 +176,7 @@ const initialState: CallstackState = {
   error: null,
   frames: callstackAdapter.getInitialState(),
   frameIndex: -1,
+  resetVersion: 0,
 };
 
 /**
@@ -208,7 +210,10 @@ export const callstackSlice = createSlice({
     setStatus: (
       state,
       action: PayloadAction<
-        Omit<CallstackState, "isPlaying" | "frames" | "frameIndex"> & {
+        Omit<
+          CallstackState,
+          "isPlaying" | "frames" | "frameIndex" | "resetVersion"
+        > & {
           frames?: CallFrame[];
         }
       >,
@@ -249,6 +254,9 @@ export const callstackSlice = createSlice({
     },
     setFrameIndex: (state, action: PayloadAction<number>) => {
       state.frameIndex = action.payload;
+    },
+    markReset: (state) => {
+      state.resetVersion += 1;
     },
   },
 });
@@ -307,6 +315,8 @@ export const selectCallstackLength = (state: RootState) =>
 
 export const selectCallstackFrameIndex = (state: RootState) =>
   state.callstack.frameIndex;
+export const selectCallstackResetVersion = (state: RootState) =>
+  state.callstack.resetVersion;
 
 export const selectIsRootFrame = (state: RootState) =>
   state.callstack.frameIndex === -1;

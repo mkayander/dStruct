@@ -90,7 +90,7 @@ const normalizeTreeState = (treeState: SnapshotTree): TreeData => ({
     ? normalizeTreeEntityState(treeState.initialNodes)
     : null,
   edges: normalizeTreeEdges(treeState.edges),
-  initialEdges: null,
+  initialEdges: normalizeTreeEdges(treeState.edges),
 });
 
 const normalizeCallFrame = (frame: SnapshotCallFrame): CallFrame => {
@@ -194,6 +194,7 @@ const normalizeTreePreviewState = (): Pick<
       ...invertTreeStateSnapshot.callstack,
       isPlaying: false,
       frameIndex: -1,
+      resetVersion: 0,
       error: null,
       frames: {
         ids: [...invertTreeStateSnapshot.callstack.frames.ids],
