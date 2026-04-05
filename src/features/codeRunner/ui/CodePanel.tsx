@@ -49,10 +49,6 @@ import {
 } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
-import {
-  PYTHON_SUPPORT_MODAL_ID,
-  PythonSupportModal,
-} from "#/shared/ui/organisms/PythonSupportModal";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { type PanelContentProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
@@ -90,8 +86,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       validate: isLanguageValid,
     },
   );
-  const [modalName, setModalName] = useSearchParam("modal");
-
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
@@ -331,11 +325,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
         }
       }}
     >
-      <PythonSupportModal
-        open={modalName === PYTHON_SUPPORT_MODAL_ID}
-        onClose={() => setModalName("")}
-      />
-
       <LoadingSkeletonOverlay />
 
       <TabContext value={tabValue}>

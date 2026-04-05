@@ -75,17 +75,6 @@ The `run()` method **never rejects**. All failure modes (timeout, worker crash, 
 
 ## Configuration
 
-### Execution Mode
-
-Set the `NEXT_PUBLIC_PYTHON_EXEC_MODE` environment variable to control the backend:
-
-| Value | Description |
-|---|---|
-| `pyodide` **(default)** | In-browser execution via Pyodide Web Worker. No setup needed. |
-| `server` | Legacy mode: sends code to the local Express runner on `localhost:8085`. Requires `pnpm dev:all`. |
-
-If the variable is not set, **pyodide** mode is used automatically.
-
 ### Pyodide CDN URL
 
 By default, Pyodide WASM/JS assets are fetched from jsDelivr. The URL is derived from the installed `pyodide` npm package version at build time:
@@ -116,7 +105,7 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 | `src/features/codeRunner/lib/workers/pythonExec.worker.types.ts` | TypeScript types for the worker message protocol |
 | `src/features/codeRunner/lib/createPythonRuntimeArgs.ts` | Serializes case arguments to `SerializedPythonArg[]` for the Python harness |
 | `src/features/codeRunner/lib/pythonRunner.ts` | Main-thread singleton: worker lifecycle, timeout, auto-recreate, serialization gate |
-| `src/features/codeRunner/hooks/usePythonCodeRunner.ts` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
+| `src/features/codeRunner/hooks/usePythonCodeRunner.tsx` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
 | `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx` | Shows loading snackbar when Pyodide INIT sends PROGRESS messages |
 | `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult` |
 | `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)` |
@@ -187,11 +176,10 @@ pnpm vitest run src/features/codeRunner/lib/createRuntimeArgs.spec.ts
 
 1. Start the dev server: `pnpm dev`
 2. Open a Python problem page in the browser.
-3. Open DevTools Network tab -- confirm no requests to `localhost:8085`.
-4. Observe the Pyodide WASM download (~30 MB, one-time) from `cdn.jsdelivr.net`.
-5. Click **Run** with a simple solution. Verify:
+3. Open DevTools Network tab and observe the Pyodide WASM download (~30 MB, one-time) from `cdn.jsdelivr.net`.
+4. Click **Run** with a simple solution. Verify:
    - Output appears in the Output panel.
    - Callstack frames appear (if the solution uses lists).
    - Runtime is displayed.
-6. Test error handling: submit code with a syntax error, verify traceback appears.
-7. Test timeout: submit `def solution():\n    while True: pass` and verify TLE error appears within ~30 s and subsequent runs still work.
+5. Test error handling: submit code with a syntax error, verify traceback appears.
+6. Test timeout: submit `def solution():\n    while True: pass` and verify TLE error appears within ~30 s and subsequent runs still work.

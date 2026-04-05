@@ -76,22 +76,6 @@ type ProjectBrowserState = {
 - `usePlaygroundSlugs` hook manages playground route slugs
 - Next.js router with shallow routing for URL updates
 
-**Modal Pattern Example (PythonSupportModal):**
-
-```typescript
-// In CodePanel.tsx
-const [modalName, setModalName] = useSearchParam("modal");
-
-// Open modal
-setModalName(PYTHON_SUPPORT_MODAL_ID); // "python-support"
-
-// Close modal
-setModalName("");
-
-// Check if open
-<PythonSupportModal open={modalName === PYTHON_SUPPORT_MODAL_ID} />
-```
-
 **Multiple URL Params Pattern:**
 
 ```typescript
@@ -104,7 +88,6 @@ const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(
     validate: isLanguageValid,
   },
 );
-const [modalName, setModalName] = useSearchParam("modal");
 ```
 
 **Key Pattern Characteristics:**
