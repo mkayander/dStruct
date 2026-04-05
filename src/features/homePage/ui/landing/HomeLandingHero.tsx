@@ -270,13 +270,9 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                   href="#faq"
                   variant="text"
                   color="inherit"
-                  sx={{ px: 0, justifyContent: "flex-start" }}
                 >
                   {LL.HOME_HERO_FAQ_LINK()} →
                 </Button>
-                <Typography variant="body2" color="text.secondary">
-                  {LL.HOME_PILLAR_WORKERS_BODY()}
-                </Typography>
               </Stack>
 
               <Stack

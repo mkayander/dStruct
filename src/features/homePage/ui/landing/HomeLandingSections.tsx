@@ -59,22 +59,22 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
 
   const capabilities = [
     {
-      icon: <PlayCircleOutline fontSize="small" />,
+      icon: <CallSplit fontSize="small" />,
       title: LL.HOME_PILLAR_VIS_TITLE(),
       body: LL.HOME_PILLAR_VIS_BODY(),
     },
     {
-      icon: <History fontSize="small" />,
+      icon: <PlayCircleOutline fontSize="small" />,
       title: LL.HOME_PILLAR_WORKERS_TITLE(),
       body: LL.HOME_PILLAR_WORKERS_BODY(),
     },
     {
-      icon: <AutoAwesomeMotion fontSize="small" />,
+      icon: <History fontSize="small" />,
       title: LL.HOME_PILLAR_REPLAY_TITLE(),
       body: LL.HOME_PILLAR_REPLAY_BODY(),
     },
     {
-      icon: <CallSplit fontSize="small" />,
+      icon: <AutoAwesomeMotion fontSize="small" />,
       title: LL.HOME_PILLAR_BENCH_TITLE(),
       body: LL.HOME_PILLAR_BENCH_BODY(),
     },
