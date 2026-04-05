@@ -1,3 +1,10 @@
+# [1.368.0](https://github.com/mkayander/dStruct/compare/v1.367.0...v1.368.0) (2026-04-05)
+
+
+### Features
+
+* **home:** enhance landing page with new hero and sections ([f48f59e](https://github.com/mkayander/dStruct/commit/f48f59e3a1dc2e7a365a179665838757e1d31693))
+
 # [1.367.0](https://github.com/mkayander/dStruct/compare/v1.366.0...v1.367.0) (2026-04-02)
 
 
