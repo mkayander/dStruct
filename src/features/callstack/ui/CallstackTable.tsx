@@ -7,7 +7,7 @@ import {
   Tooltip,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { TableVirtuoso, type TableVirtuosoHandle } from "react-virtuoso";
 
 import {
@@ -144,7 +144,7 @@ export const CallstackTable: React.FC = () => {
   const startTimestamp = callstack.startTimestamp ?? 0;
 
   // Append spacer row on mobile so last frame can scroll above bottom nav bar
-  const tableData = React.useMemo<TableRowData[]>(
+  const tableData = useMemo<TableRowData[]>(
     () =>
       isMobile ? [...callstack.frames, SPACER_SENTINEL] : callstack.frames,
     [callstack.frames, isMobile],

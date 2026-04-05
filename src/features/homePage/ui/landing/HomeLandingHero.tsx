@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
@@ -33,24 +33,21 @@ const clamp = (value: number, min: number, max: number) =>
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
   const isMobileLayout = useMobileLayout();
-  const controlsRef = React.useRef<ThreeOrbitControls>(null);
-  const currentAzimuthRef = React.useRef(HERO_MODEL_BASE_AZIMUTH);
-  const currentPolarRef = React.useRef(HERO_MODEL_BASE_POLAR);
-  const targetAzimuthRef = React.useRef(HERO_MODEL_BASE_AZIMUTH);
-  const targetPolarRef = React.useRef(HERO_MODEL_BASE_POLAR);
+  const controlsRef = useRef<ThreeOrbitControls>(null);
+  const currentAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
+  const currentPolarRef = useRef(HERO_MODEL_BASE_POLAR);
+  const targetAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
+  const targetPolarRef = useRef(HERO_MODEL_BASE_POLAR);
 
-  const applyModelAngles = React.useCallback(
-    (azimuth: number, polar: number) => {
-      const controls = controlsRef.current;
-      if (!controls) return;
-      controls.setAzimuthalAngle(azimuth);
-      controls.setPolarAngle(polar);
-      controls.update();
-    },
-    [],
-  );
+  const applyModelAngles = useCallback((azimuth: number, polar: number) => {
+    const controls = controlsRef.current;
+    if (!controls) return;
+    controls.setAzimuthalAngle(azimuth);
+    controls.setPolarAngle(polar);
+    controls.update();
+  }, []);
 
-  const setModelRestingPosition = React.useCallback(() => {
+  const setModelRestingPosition = useCallback(() => {
     currentAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
     currentPolarRef.current = HERO_MODEL_BASE_POLAR;
     targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
@@ -58,12 +55,12 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
     applyModelAngles(HERO_MODEL_BASE_AZIMUTH, HERO_MODEL_BASE_POLAR);
   }, [applyModelAngles]);
 
-  const resetModelAngles = React.useCallback(() => {
+  const resetModelAngles = useCallback(() => {
     targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
     targetPolarRef.current = HERO_MODEL_BASE_POLAR;
   }, []);
 
-  const updateModelFromPointer = React.useCallback(
+  const updateModelFromPointer = useCallback(
     (clientX: number, clientY: number) => {
       if (isMobileLayout) return;
 
@@ -89,11 +86,11 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
     [isMobileLayout],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     setModelRestingPosition();
   }, [setModelRestingPosition]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMobileLayout) {
       setModelRestingPosition();
       return;

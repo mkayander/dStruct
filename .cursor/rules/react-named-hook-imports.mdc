@@ -1,0 +1,35 @@
+---
+description: Import React hooks by name; do not use React.useEffect-style namespace calls
+globs: **/*.{ts,tsx}
+alwaysApply: true
+---
+
+# React Hook Imports
+
+Import hooks (and other hook-like APIs) as named imports from `"react"`. Call them directly, not via the `React` namespace.
+
+## ❌ Bad
+
+```tsx
+import React from "react";
+
+React.useEffect(() => {}, []);
+React.useState(0);
+React.useCallback(fn, []);
+```
+
+## ✅ Good
+
+```tsx
+import { useCallback, useEffect, useState } from "react";
+
+useEffect(() => {}, []);
+useState(0);
+useCallback(fn, []);
+```
+
+## Rule
+
+1. Add each hook you use to the import list from `"react"` (e.g. `useEffect`, `useState`, `useRef`, `useMemo`, `useCallback`, `useContext`, `useReducer`, `useLayoutEffect`, `useId`, …).
+2. Use the imported identifier in the file body.
+3. A default `import React from "react"` is fine when needed for JSX or `React.*` types — but hooks must still be named imports, not `React.use*` calls.

@@ -12,7 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
@@ -32,7 +32,7 @@ export const PythonSupportModal: React.FC<PythonSupportModalProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMobileLayout();
-  const controlsRef = React.useRef<ThreeOrbitControls>(null);
+  const controlsRef = useRef<ThreeOrbitControls>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     const azimuthalAngle =

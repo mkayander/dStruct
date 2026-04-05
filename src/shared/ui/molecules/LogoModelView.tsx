@@ -1,7 +1,7 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useMobileLayout } from "#/shared/hooks";
@@ -26,9 +26,9 @@ type LogoModelViewProps = {
  */
 const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
   const gl = useThree((state) => state.gl);
-  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     canvasRef.current = gl.domElement;
   }, [gl]);
 
@@ -40,7 +40,7 @@ const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
     canvas.style.touchAction = "auto";
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     if (active) {

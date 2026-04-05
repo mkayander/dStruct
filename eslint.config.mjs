@@ -50,6 +50,15 @@ const eslintConfig = [
       ],
       "@typescript-eslint/no-empty-object-type": "off",
       "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            'MemberExpression[object.name="React"][property.name=/^use([A-Z]|$)/]',
+          message:
+            'Import hooks from "react" and call them directly (e.g. useEffect), not React.useEffect.',
+        },
+      ],
       "no-restricted-imports": [
         "error",
         {
