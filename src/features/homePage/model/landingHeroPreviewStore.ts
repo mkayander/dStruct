@@ -90,6 +90,7 @@ const normalizeTreeState = (treeState: SnapshotTree): TreeData => ({
     ? normalizeTreeEntityState(treeState.initialNodes)
     : null,
   edges: normalizeTreeEdges(treeState.edges),
+  initialEdges: null,
 });
 
 const normalizeCallFrame = (frame: SnapshotCallFrame): CallFrame => {

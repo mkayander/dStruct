@@ -53,6 +53,7 @@ export type TreeData = BaseStructureItem<TreeNodeData> & {
   maxDepth: number;
   rootId: string | null;
   edges: EntityState<EdgeData, string>;
+  initialEdges: EntityState<EdgeData, string> | null;
 };
 
 export type TreeDataState = BaseStructureState<TreeData>;
@@ -67,8 +68,36 @@ const getInitialData = (type: ArgumentTreeType, order: number): TreeData => ({
   maxDepth: 0,
   rootId: null,
   edges: edgeDataAdapter.getInitialState(),
+  initialEdges: null,
 });
 const initialState: TreeDataState = {};
+
+const cloneEdges = (
+  edges: EntityState<EdgeData, string>,
+): EntityState<EdgeData, string> => ({
+  ids: [...edges.ids],
+  entities: Object.fromEntries(
+    Object.entries(edges.entities).map(([id, edge]) => [
+      id,
+      edge ? { ...edge } : edge,
+    ]),
+  ),
+});
+
+const restoreInitialEdges = (treeState: TreeData) => {
+  edgeDataAdapter.removeAll(treeState.edges);
+  if (treeState.initialEdges === null) return;
+
+  edgeDataAdapter.addMany(
+    treeState.edges,
+    Object.values(treeState.initialEdges.entities).filter(
+      (edge): edge is EdgeData => edge !== undefined,
+    ),
+  );
+};
+
+const baseTreeReducers =
+  getBaseStructureReducers<TreeNodeData>(treeNodeDataAdapter);
 
 const deleteTreeNode = (
   state: TreeDataState,
@@ -95,7 +124,7 @@ export const treeNodeSlice = createSlice({
   name: "TREE_STRUCTURE",
   initialState,
   reducers: {
-    ...getBaseStructureReducers<TreeNodeData>(treeNodeDataAdapter),
+    ...baseTreeReducers,
     init: (
       state,
       action: PayloadAction<{
@@ -189,17 +218,23 @@ export const treeNodeSlice = createSlice({
         const node = treeNodeDataSelector.selectById(treeState.nodes, id);
         if (!node) return;
 
-        const childrenIds = [...node.childrenIds];
+        const previousChildrenIds = [...node.childrenIds];
+        const previousChildId = previousChildrenIds[index];
+        const nextChildrenIds = [...previousChildrenIds];
+        nextChildrenIds[index] = childId;
 
-        if (childrenIds[index]) {
+        if (
+          previousChildId &&
+          previousChildId !== childId &&
+          !nextChildrenIds.includes(previousChildId)
+        ) {
           edgeDataAdapter.removeOne(
             treeState.edges,
-            getEdgeId(id, childrenIds[index]),
+            getEdgeId(id, previousChildId),
           );
         }
 
-        childrenIds[index] = childId;
-        if (childId) {
+        if (childId && !previousChildrenIds.includes(childId)) {
           edgeDataAdapter.addOne(treeState.edges, {
             id: getEdgeId(id, childId),
             sourceId: id,
@@ -210,7 +245,7 @@ export const treeNodeSlice = createSlice({
 
         treeNodeDataAdapter.updateOne(treeState.nodes, {
           id,
-          changes: { childrenIds },
+          changes: { childrenIds: nextChildrenIds },
         });
       });
     },
@@ -278,6 +313,32 @@ export const treeNodeSlice = createSlice({
 
         deleteTreeNode(state, name, treeState, id);
       }),
+    backupAllNodes: (state) => {
+      baseTreeReducers.backupAllNodes(state);
+
+      for (const name in state) {
+        runStateActionByName(state, name, (treeState) => {
+          if (treeState.isRuntime || treeState.initialEdges !== null) return;
+
+          treeState.initialEdges = cloneEdges(treeState.edges);
+        });
+      }
+    },
+    reset: (state, action: NamedPayload<void>) => {
+      baseTreeReducers.reset(state, action);
+      runStateActionByName(state, action.payload.name, (treeState) => {
+        restoreInitialEdges(treeState);
+      });
+    },
+    resetAll: (state) => {
+      baseTreeReducers.resetAll(state);
+
+      for (const name in state) {
+        runStateActionByName(state, name, (treeState) => {
+          restoreInitialEdges(treeState);
+        });
+      }
+    },
   },
 });
 
