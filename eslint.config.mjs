@@ -1,4 +1,5 @@
 import nextPlugin from "@next/eslint-plugin-next";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
 import tseslint from "typescript-eslint";
@@ -14,6 +15,7 @@ const eslintConfig = [
       "**/dist/**",
       "**/coverage/**",
       "src/graphql/generated/**",
+      "src/server/db/generated/**",
       ".next/**",
       "node_modules/**",
     ],
@@ -95,6 +97,8 @@ const eslintConfig = [
       ...testingLibrary.configs.react.rules,
     },
   },
+  // Last: Prettier as ESLint rule + disable conflicting formatting rules
+  eslintPluginPrettierRecommended,
 ];
 
 export default eslintConfig;

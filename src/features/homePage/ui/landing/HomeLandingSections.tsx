@@ -44,10 +44,7 @@ function landingDemoLabel(LL: TranslationFunctions, id: LandingDemoId): string {
   }
 }
 
-function landingDemoSlug(
-  LL: TranslationFunctions,
-  id: LandingDemoId,
-): string {
+function landingDemoSlug(LL: TranslationFunctions, id: LandingDemoId): string {
   switch (id) {
     case "tree":
       return LL.HOME_DEMO_SLUG_INVERT_BINARY_TREE();
