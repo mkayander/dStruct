@@ -174,7 +174,8 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                   variant="text"
                   color="inherit"
                 >
-                  {LL.HOME_HERO_FAQ_LINK()} →
+                  {LL.HOME_HERO_FAQ_LINK()}
+                  {LL.HOME_HERO_FAQ_LINK_SUFFIX()}
                 </Button>
               </Stack>
 

@@ -24,6 +24,7 @@ import type { BoxProps } from "@mui/material/Box";
 import React from "react";
 
 import type { Difficulty, QuestionDataQueryResult } from "#/graphql/generated";
+import { useI18nContext } from "#/shared/hooks";
 import { CircularPercentage } from "#/shared/ui/atoms/CircularPercentage/CircularPercentage";
 import { RatingButtons } from "#/shared/ui/atoms/RatingButtons";
 import { TopicTag, TopicTagSkeleton } from "#/shared/ui/atoms/TopicTag";
@@ -71,8 +72,10 @@ const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
   Hard: SignalCellular4Bar,
 };
 
-interface QuestionSummaryProps
-  extends Exclude<BoxProps, "position" | "zIndex"> {
+interface QuestionSummaryProps extends Exclude<
+  BoxProps,
+  "position" | "zIndex"
+> {
   questionDataQuery: QuestionDataQueryResult;
 }
 
@@ -81,6 +84,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
   ...props
 }) => {
   const theme = useTheme();
+  const { LL } = useI18nContext();
 
   const question = questionDataQuery.data?.question;
 
@@ -143,7 +147,7 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                 <Box display="flex" sx={{ opacity: 0.9 }}>
                   <EventRepeatTwoTone sx={{ mr: 1 }} />
                   <Typography variant="subtitle1" lineHeight={1.1}>
-                    Question Of Today
+                    {LL.QUESTION_OF_TODAY_LABEL()}
                   </Typography>
                 </Box>
               </Box>

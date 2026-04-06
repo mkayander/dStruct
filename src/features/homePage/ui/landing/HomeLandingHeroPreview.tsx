@@ -126,10 +126,10 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
               sx={{ minWidth: 0 }}
             >
               <Typography variant="subtitle2" color="text.secondary">
-                javascript
+                {LL.HOME_LANDING_PREVIEW_CODE_LANGUAGE()}
               </Typography>
               <Typography variant="caption" color="text.secondary">
-                solution.js
+                {LL.HOME_LANDING_PREVIEW_CODE_FILENAME()}
               </Typography>
             </Stack>
             <Box

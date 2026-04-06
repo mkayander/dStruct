@@ -38,7 +38,7 @@ describe("HomeLandingHeroPreviewRuntime", () => {
     );
 
     expect(
-      screen.getByText("Landing preview failed to load."),
+      screen.getByText("HOME_LANDING_PREVIEW_LOAD_FAILED"),
     ).toBeInTheDocument();
     expect(
       screen.getByText("Landing preview snapshot is missing callstack frames."),
@@ -95,7 +95,7 @@ describe("HomeLandingHeroPreviewRuntime", () => {
       </StateThemeProvider>,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Replay" }));
+    fireEvent.click(screen.getByRole("button", { name: "REPLAY" }));
 
     expect(store.getState().callstack.frameIndex).toBe(-1);
     expect(store.getState().callstack.isPlaying).toBe(true);

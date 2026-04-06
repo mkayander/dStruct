@@ -24,9 +24,8 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import type { Locales } from "#/i18n/i18n-types";
-import { locales } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
-import { localeLabels } from "#/i18n/labels";
+import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
 import { useI18nContext } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
@@ -119,7 +118,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
                 value={(router.locale as Locales) ?? "en"}
                 onChange={handleChangeLocale}
               >
-                {locales.map((locale) => (
+                {localesForLanguagePicker.map((locale) => (
                   <MenuItem key={locale} value={locale}>
                     <Typography>{localeLabels[locale]}</Typography>
                   </MenuItem>
