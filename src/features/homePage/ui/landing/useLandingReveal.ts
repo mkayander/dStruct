@@ -12,7 +12,12 @@ export type UseLandingRevealOptions = {
   staggerMs?: number;
 };
 
-type RevealState = "pending" | "reduce" | "static" | "hidden" | "revealed";
+type RevealState =
+  | "pending"
+  | "reduce"
+  | "static"
+  | "hidden"
+  | "revealed";
 
 const hiddenSx: CSSObject = {
   opacity: 0,
@@ -34,8 +39,8 @@ const inViewportLoose = (el: HTMLElement) => {
 };
 
 /**
- * Scroll-triggered entrance: `pending` + hidden styles until layout measures;
- * in-viewport → `static` (no motion) before paint; below-fold → `hidden` until IO, then `revealed`.
+ * Scroll-triggered entrance: `pending` is **fully visible** (matches SSR / first paint — no flash).
+ * After layout: in-viewport → `static`; below-fold → `hidden` until IO, then `revealed`.
  * Respects `prefers-reduced-motion: reduce`.
  */
 export const useLandingReveal = (
@@ -90,11 +95,11 @@ export const useLandingReveal = (
   }, [ref, state, staggerMs]);
 
   const revealSx = useMemo((): CSSObject => {
-    if (state === "reduce" || state === "static") {
+    if (state === "pending" || state === "reduce" || state === "static") {
       return {};
     }
 
-    if (state === "pending" || state === "hidden") {
+    if (state === "hidden") {
       return hiddenSx;
     }
 
