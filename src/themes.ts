@@ -1,7 +1,7 @@
 "use client";
 
 import type { PaletteColor } from "@mui/material";
-import { alpha, createTheme, type Theme } from "@mui/material/styles";
+import { alpha, createTheme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
 
@@ -67,42 +67,12 @@ const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
   matches: queryMatchesViewport(query, getViewportWidth(deviceType)),
 });
 
-/** MUI uses a hardcoded #266798 autofill inset in dark mode; we match obsidian surfaces instead. */
-const webkitAutofillInsetShadow = (fillColor: string) =>
-  `0 0 0 100px ${fillColor} inset`;
-
-type WebkitAutofillBorderRadii =
-  | { borderRadius: "inherit" }
-  | {
-      borderTopLeftRadius: "inherit";
-      borderTopRightRadius: "inherit";
-    };
-
-const webkitAutofillChrome = (
-  fillColor: string,
-  radii: WebkitAutofillBorderRadii,
-) => ({
-  WebkitBoxShadow: webkitAutofillInsetShadow(fillColor),
+/** MUI dark mode uses a #266798 autofill inset; transparent avoids the blue wash with any surface. */
+const webkitAutofillTransparent = {
+  WebkitBoxShadow: "0 0 0 100px transparent inset",
   WebkitTextFillColor: obsidianTokens.textPrimary,
   caretColor: obsidianTokens.textPrimary,
-  ...radii,
-});
-
-/**
- * Override MUI's hardcoded #266798 autofill inset on dark inputs.
- *
- * With a single dark `colorScheme`, MUI's `getColorSchemeSelector("dark")` resolves to `"&"`.
- * Nesting `&` + `&:-webkit-autofill` then breaks the generated selector, so overrides never apply.
- * Using `palette.mode === "dark"` matches our app (dark-only) and fixes that case.
- */
-const darkModeInputWebkitAutofillOverrides = (
-  muiTheme: Theme,
-  fillColor: string,
-  borderRadii: WebkitAutofillBorderRadii,
-) =>
-  muiTheme.palette.mode === "dark"
-    ? { "&:-webkit-autofill": webkitAutofillChrome(fillColor, borderRadii) }
-    : {};
+} as const;
 
 export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
   const theme = createTheme({
@@ -313,7 +283,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            backgroundColor: obsidianTokens.surfaceLowest,
+            backgroundColor: "transparent",
             "& fieldset": {
               borderColor: alpha(obsidianTokens.outline, 0.14),
             },
@@ -324,25 +294,38 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
               borderColor: alpha(obsidianTokens.accentSoft, 0.7),
             },
           },
-          input: ({ theme: muiTheme }) =>
-            darkModeInputWebkitAutofillOverrides(
-              muiTheme,
-              obsidianTokens.surfaceLowest,
-              { borderRadius: "inherit" },
-            ),
+          input: {
+            "&:-webkit-autofill": {
+              ...webkitAutofillTransparent,
+              borderRadius: "inherit",
+            },
+          },
         },
       },
       MuiFilledInput: {
         styleOverrides: {
-          input: ({ theme: muiTheme }) =>
-            darkModeInputWebkitAutofillOverrides(
-              muiTheme,
-              alpha(obsidianTokens.surfaceLow, 0.98),
-              {
-                borderTopLeftRadius: "inherit",
-                borderTopRightRadius: "inherit",
+          root: {
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: "transparent",
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
               },
-            ),
+            },
+            "&.Mui-focused": {
+              backgroundColor: "transparent",
+            },
+            "&.Mui-disabled": {
+              backgroundColor: "transparent",
+            },
+          },
+          input: {
+            "&:-webkit-autofill": {
+              ...webkitAutofillTransparent,
+              borderTopLeftRadius: "inherit",
+              borderTopRightRadius: "inherit",
+            },
+          },
         },
       },
     },
