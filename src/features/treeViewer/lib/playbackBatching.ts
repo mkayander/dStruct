@@ -94,13 +94,10 @@ const getSwapBatchPartnerIndex = (frames: CallFrame[], startIndex: number) => {
       return index;
     }
 
-    if (
-      isSwapChildFrame(frame) &&
-      frame.treeName === startFrame.treeName &&
-      frame.nodeId === startFrame.nodeId &&
-      frame.structureType === startFrame.structureType &&
-      frame.name === startFrame.name
-    ) {
+    // Do not batch across other child-pointer updates (different node or same side).
+    // Those are separate logical steps and should appear as their own playback rows
+    // (e.g. landing hero preview: subtree detach work between root L/R must stay visible).
+    if (isSwapChildFrame(frame)) {
       break;
     }
   }

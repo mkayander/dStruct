@@ -106,45 +106,7 @@ describe("playbackBatching", () => {
 
     expect(getNextPlaybackFrameIndex(frames, 0)).toBe(4);
     expect(getPreviousPlaybackFrameIndex(frames, 4)).toBe(0);
-    expect(getPlaybackStepGroups(frames)).toMatchObject([
-      { kind: "single", startIndex: 0, endIndex: 0 },
-      { kind: "swap", startIndex: 1, endIndex: 4 },
-      { kind: "single", startIndex: 5, endIndex: 5 },
-    ]);
-    expect(getPlaybackStepIndex(getPlaybackStepGroups(frames), 3)).toBe(1);
-  });
-
-  it("keeps the swap grouped across intervening subtree structural work", () => {
-    const frames = [
-      createMockFrame("f1", "setVal", "root"),
-      createMockFrame("f2", "setLeftChild", "root"),
-      createMockFrame("f3", "setLeftChild", "child"),
-      createMockFrame("f4", "setColor", "child"),
-      createMockFrame("f5", "setRightChild", "root"),
-      createMockFrame("f6", "setVal", "tail"),
-    ];
-
-    expect(getNextPlaybackFrameIndex(frames, 0)).toBe(4);
-    expect(getPreviousPlaybackFrameIndex(frames, 4)).toBe(0);
-    expect(getPlaybackStepGroups(frames)).toMatchObject([
-      { kind: "single", startIndex: 0, endIndex: 0 },
-      { kind: "swap", startIndex: 1, endIndex: 4 },
-      { kind: "single", startIndex: 5, endIndex: 5 },
-    ]);
-  });
-
-  it("keeps the actual sibling setter as the swap partner", () => {
-    const frames = [
-      createMockFrame("f1", "setVal", "root"),
-      createMockFrame("f2", "setLeftChild", "root"),
-      createMockFrame("f3", "setRightChild", "child"),
-      createMockFrame("f4", "setColor", "child"),
-      createMockFrame("f5", "setRightChild", "root"),
-      createMockFrame("f6", "setVal", "tail"),
-    ];
-
     const groups = getPlaybackStepGroups(frames);
-
     expect(groups).toMatchObject([
       { kind: "single", startIndex: 0, endIndex: 0 },
       { kind: "swap", startIndex: 1, endIndex: 4 },
@@ -155,5 +117,47 @@ describe("playbackBatching", () => {
       primaryFrame: { id: "f2", nodeId: "root", name: "setLeftChild" },
       partnerFrame: { id: "f5", nodeId: "root", name: "setRightChild" },
     });
+    expect(getPlaybackStepIndex(groups, 3)).toBe(1);
+  });
+
+  it("does not batch root swap across intervening subtree child-pointer work", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f3", "setLeftChild", "child"),
+      createMockFrame("f4", "setColor", "child"),
+      createMockFrame("f5", "setRightChild", "root"),
+      createMockFrame("f6", "setVal", "tail"),
+    ];
+
+    expect(getNextPlaybackFrameIndex(frames, 0)).toBe(1);
+    expect(getNextPlaybackFrameIndex(frames, 1)).toBe(2);
+    expect(getPreviousPlaybackFrameIndex(frames, 4)).toBe(3);
+    expect(getPlaybackStepGroups(frames)).toMatchObject([
+      { kind: "single", startIndex: 0, endIndex: 0 },
+      { kind: "single", startIndex: 1, endIndex: 1 },
+      { kind: "single", startIndex: 2, endIndex: 2 },
+      { kind: "single", startIndex: 3, endIndex: 3 },
+      { kind: "single", startIndex: 4, endIndex: 4 },
+      { kind: "single", startIndex: 5, endIndex: 5 },
+    ]);
+  });
+
+  it("does not batch across another node's child-pointer between sibling setters", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f3", "setLeftChild", "other"),
+      createMockFrame("f4", "setRightChild", "root"),
+      createMockFrame("f5", "setVal", "tail"),
+    ];
+
+    expect(getPlaybackStepGroups(frames)).toMatchObject([
+      { kind: "single", startIndex: 0, endIndex: 0 },
+      { kind: "single", startIndex: 1, endIndex: 1 },
+      { kind: "single", startIndex: 2, endIndex: 2 },
+      { kind: "single", startIndex: 3, endIndex: 3 },
+      { kind: "single", startIndex: 4, endIndex: 4 },
+    ]);
   });
 });
