@@ -89,34 +89,20 @@ const webkitAutofillChrome = (
 });
 
 /**
- * Mirrors MUI's split between legacy palette.mode and cssVariables + getColorSchemeSelector("dark").
+ * Override MUI's hardcoded #266798 autofill inset on dark inputs.
+ *
+ * With a single dark `colorScheme`, MUI's `getColorSchemeSelector("dark")` resolves to `"&"`.
+ * Nesting `&` + `&:-webkit-autofill` then breaks the generated selector, so overrides never apply.
+ * Using `palette.mode === "dark"` matches our app (dark-only) and fixes that case.
  */
 const darkModeInputWebkitAutofillOverrides = (
   muiTheme: Theme,
   fillColor: string,
   borderRadii: WebkitAutofillBorderRadii,
-) => {
-  const autofillBlock = {
-    "&:-webkit-autofill": webkitAutofillChrome(fillColor, borderRadii),
-  };
-
-  if (
-    muiTheme.vars &&
-    "getColorSchemeSelector" in muiTheme &&
-    typeof muiTheme.getColorSchemeSelector === "function"
-  ) {
-    return {
-      "&:-webkit-autofill": borderRadii,
-      [muiTheme.getColorSchemeSelector("dark")]: autofillBlock,
-    };
-  }
-
-  if (muiTheme.palette.mode === "dark") {
-    return autofillBlock;
-  }
-
-  return {};
-};
+) =>
+  muiTheme.palette.mode === "dark"
+    ? { "&:-webkit-autofill": webkitAutofillChrome(fillColor, borderRadii) }
+    : {};
 
 export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
   const theme = createTheme({
