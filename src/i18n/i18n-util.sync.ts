@@ -5,25 +5,47 @@ import { initFormatters } from './formatters'
 import type { Locales, Translations } from './i18n-types'
 import { loadedFormatters, loadedLocales, locales } from './i18n-util'
 
+import ar from './ar'
 import be from './be'
 import de from './de'
 import en from './en'
 import es from './es'
+import fr from './fr'
 import hi from './hi'
+import id from './id'
+import it from './it'
+import ja from './ja'
+import ko from './ko'
+import nl from './nl'
+import pl from './pl'
+import pt from './pt'
 import ru from './ru'
 import sr from './sr'
+import tr from './tr'
 import uk from './uk'
+import vi from './vi'
 import zh from './zh'
 
 const localeTranslations = {
+	ar,
 	be,
 	de,
 	en,
 	es,
+	fr,
 	hi,
+	id,
+	it,
+	ja,
+	ko,
+	nl,
+	pl,
+	pt,
 	ru,
 	sr,
+	tr,
 	uk,
+	vi,
 	zh,
 }
 

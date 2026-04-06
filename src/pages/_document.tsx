@@ -3,17 +3,21 @@ import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 import type { DocumentContext, DocumentProps } from "next/document";
 import React from "react";
 
+import { getDocumentTextDirection } from "#/i18n/localeMeta";
 import { createEmotionCache } from "#/shared/emotion/createEmotionCache";
 import { EmotionCacheContext } from "#/shared/emotion/EmotionCacheContext";
 
 type MyDocumentProps = DocumentProps & {
   emotionStyleTags?: React.ReactElement;
+  locale: string;
 };
 
-function Document({ emotionStyleTags }: MyDocumentProps) {
+function Document({ emotionStyleTags, locale }: MyDocumentProps) {
+  const lang = locale || "en";
+  const dir = getDocumentTextDirection(lang);
   // noinspection HtmlRequiredTitleElement
   return (
-    <Html lang="en">
+    <Html lang={lang} dir={dir}>
       <Head>
         {emotionStyleTags}
         <meta
@@ -133,6 +137,7 @@ Document.getInitialProps = async (ctx: DocumentContext) => {
   return {
     ...initialProps,
     emotionStyleTags,
+    locale: ctx.locale ?? "en",
   };
 };
 
