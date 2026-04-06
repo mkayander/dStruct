@@ -39,6 +39,7 @@ const ru: Record<keyof Translation, string> = {
   FORWARD: "Вперёд",
   FORMATTING_ICON: "Иконка форматирования",
   FORMAT_CODE_WITH: "Форматировать код с помощью",
+  FORMAT_CODE_WITH_BLACK: "Форматировать код с помощью Black (Pyodide)",
   HI: "Привет {name}!",
   INPUT: "Ввод",
   LANGUAGE: "Язык",

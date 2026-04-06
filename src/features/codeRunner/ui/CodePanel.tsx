@@ -26,6 +26,7 @@ import {
   type ProgrammingLanguage,
   useCodeExecution,
 } from "#/features/codeRunner/hooks/useCodeExecution";
+import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
@@ -274,28 +275,32 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   };
 
   const formatJavaScript = api.code.formatJavaScript.useMutation();
+  const formatPython = usePythonFormatCode();
+
+  const applyFormattedCode = (formatted: string) => {
+    if (!textModel) return;
+    const edit: monaco.editor.IIdentifiedSingleEditOperation = {
+      range: textModel.getFullModelRange(),
+      text: formatted,
+    };
+    textModel.pushEditOperations([], [edit], () => null);
+    editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+  };
 
   const handleFormatCode = async () => {
-    if (language === "javascript") {
-      try {
+    try {
+      if (language === "javascript") {
         const result = await formatJavaScript.mutateAsync({ code: codeInput });
-        if (textModel && result.formatted) {
-          const edit: monaco.editor.IIdentifiedSingleEditOperation = {
-            range: textModel.getFullModelRange(),
-            text: result.formatted,
-          };
-          textModel.pushEditOperations(
-            [],
-            [edit],
-            () => null, // no undo stop
-          );
-          // Reset cursor to beginning since we don't have cursor offset from server
-          editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+        if (result.formatted) {
+          applyFormattedCode(result.formatted);
         }
-      } catch (error) {
-        console.error("Error formatting code:", error);
-        enqueueSnackbar("Failed to format code", { variant: "error" });
+      } else if (language === "python") {
+        const formatted = await formatPython.mutateAsync(codeInput);
+        applyFormattedCode(formatted);
       }
+    } catch (error) {
+      console.error("Error formatting code:", error);
+      enqueueSnackbar("Failed to format code", { variant: "error" });
     }
     setIsFormattingAvailable(false);
   };
@@ -462,8 +467,12 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                           height={22}
                         />
                       </>
+                    ) : language === "python" ? (
+                      <span>{LL.FORMAT_CODE_WITH_BLACK()}</span>
                     ) : (
-                      <span>Formatting is only available for JavaScript</span>
+                      <span>
+                        Formatting is only available for JavaScript and Python
+                      </span>
                     )}
                   </Box>
                 }
@@ -471,8 +480,15 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                 placement="left"
               >
                 <IconButton
-                  disabled={!isFormattingAvailable || language !== "javascript"}
-                  loading={formatJavaScript.isPending}
+                  disabled={
+                    !isFormattingAvailable ||
+                    (language !== "javascript" && language !== "python")
+                  }
+                  loading={
+                    language === "javascript"
+                      ? formatJavaScript.isPending
+                      : formatPython.isPending
+                  }
                   onClick={handleFormatCode}
                   style={{ marginRight: "-6px", marginTop: "2px" }}
                 >

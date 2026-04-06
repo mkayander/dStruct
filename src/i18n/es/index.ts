@@ -26,6 +26,7 @@ const es = extendDictionary(en, {
   FEEDBACK: "Comentarios",
   FORMATTING_ICON: "Icono de formateo",
   FORMAT_CODE_WITH: "Formatear código con",
+  FORMAT_CODE_WITH_BLACK: "Formatear código con Black (Pyodide)",
   HI: "¡Hola {name:string}!",
   LANGUAGE: "Idioma",
   LOGOUT: "Cerrar sesión",

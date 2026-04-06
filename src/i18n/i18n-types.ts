@@ -172,6 +172,10 @@ type RootTranslation = {
 	 */
 	FORMAT_CODE_WITH: string
 	/**
+	 * F​o​r​m​a​t​ ​c​o​d​e​ ​w​i​t​h​ ​B​l​a​c​k​ ​(​P​y​o​d​i​d​e​)
+	 */
+	FORMAT_CODE_WITH_BLACK: string
+	/**
 	 * H​e​l​l​o​ ​{​n​a​m​e​}​!
 	 * @param {string} name
 	 */
@@ -933,6 +937,10 @@ export type TranslationFunctions = {
 	 * Format code with
 	 */
 	FORMAT_CODE_WITH: () => LocalizedString
+	/**
+	 * Format code with Black (Pyodide)
+	 */
+	FORMAT_CODE_WITH_BLACK: () => LocalizedString
 	/**
 	 * Hello {name}!
 	 */
