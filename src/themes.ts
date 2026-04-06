@@ -1,7 +1,7 @@
 "use client";
 
 import type { PaletteColor } from "@mui/material";
-import { alpha, createTheme } from "@mui/material/styles";
+import { alpha, createTheme, type Theme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
 
@@ -66,6 +66,57 @@ const queryMatchesViewport = (query: string, viewportWidth: number) => {
 const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
   matches: queryMatchesViewport(query, getViewportWidth(deviceType)),
 });
+
+/** MUI uses a hardcoded #266798 autofill inset in dark mode; we match obsidian surfaces instead. */
+const webkitAutofillInsetShadow = (fillColor: string) =>
+  `0 0 0 100px ${fillColor} inset`;
+
+type WebkitAutofillBorderRadii =
+  | { borderRadius: "inherit" }
+  | {
+      borderTopLeftRadius: "inherit";
+      borderTopRightRadius: "inherit";
+    };
+
+const webkitAutofillChrome = (
+  fillColor: string,
+  radii: WebkitAutofillBorderRadii,
+) => ({
+  WebkitBoxShadow: webkitAutofillInsetShadow(fillColor),
+  WebkitTextFillColor: obsidianTokens.textPrimary,
+  caretColor: obsidianTokens.textPrimary,
+  ...radii,
+});
+
+/**
+ * Mirrors MUI's split between legacy palette.mode and cssVariables + getColorSchemeSelector("dark").
+ */
+const darkModeInputWebkitAutofillOverrides = (
+  muiTheme: Theme,
+  fillColor: string,
+  borderRadii: WebkitAutofillBorderRadii,
+) => {
+  const autofillBlock = {
+    "&:-webkit-autofill": webkitAutofillChrome(fillColor, borderRadii),
+  };
+
+  if (
+    muiTheme.vars &&
+    "getColorSchemeSelector" in muiTheme &&
+    typeof muiTheme.getColorSchemeSelector === "function"
+  ) {
+    return {
+      "&:-webkit-autofill": borderRadii,
+      [muiTheme.getColorSchemeSelector("dark")]: autofillBlock,
+    };
+  }
+
+  if (muiTheme.palette.mode === "dark") {
+    return autofillBlock;
+  }
+
+  return {};
+};
 
 export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
   const theme = createTheme({
@@ -287,65 +338,25 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
               borderColor: alpha(obsidianTokens.accentSoft, 0.7),
             },
           },
-          // MUI defaults to a hardcoded #266798 autofill inset in dark mode; match app surfaces instead.
-          input: ({ theme: muiTheme }) => ({
-            ...(!muiTheme.vars && muiTheme.palette.mode === "dark"
-              ? {
-                  "&:-webkit-autofill": {
-                    WebkitBoxShadow: `0 0 0 100px ${obsidianTokens.surfaceLowest} inset`,
-                    WebkitTextFillColor: obsidianTokens.textPrimary,
-                    caretColor: obsidianTokens.textPrimary,
-                    borderRadius: "inherit",
-                  },
-                }
-              : {}),
-            ...(muiTheme.vars
-              ? {
-                  "&:-webkit-autofill": {
-                    borderRadius: "inherit",
-                  },
-                  [muiTheme.getColorSchemeSelector("dark")]: {
-                    "&:-webkit-autofill": {
-                      WebkitBoxShadow: `0 0 0 100px ${obsidianTokens.surfaceLowest} inset`,
-                      WebkitTextFillColor: obsidianTokens.textPrimary,
-                      caretColor: obsidianTokens.textPrimary,
-                    },
-                  },
-                }
-              : {}),
-          }),
+          input: ({ theme: muiTheme }) =>
+            darkModeInputWebkitAutofillOverrides(
+              muiTheme,
+              obsidianTokens.surfaceLowest,
+              { borderRadius: "inherit" },
+            ),
         },
       },
       MuiFilledInput: {
         styleOverrides: {
-          input: ({ theme: muiTheme }) => ({
-            ...(!muiTheme.vars && muiTheme.palette.mode === "dark"
-              ? {
-                  "&:-webkit-autofill": {
-                    WebkitBoxShadow: `0 0 0 100px ${alpha(obsidianTokens.surfaceLow, 0.98)} inset`,
-                    WebkitTextFillColor: obsidianTokens.textPrimary,
-                    caretColor: obsidianTokens.textPrimary,
-                    borderTopLeftRadius: "inherit",
-                    borderTopRightRadius: "inherit",
-                  },
-                }
-              : {}),
-            ...(muiTheme.vars
-              ? {
-                  "&:-webkit-autofill": {
-                    borderTopLeftRadius: "inherit",
-                    borderTopRightRadius: "inherit",
-                  },
-                  [muiTheme.getColorSchemeSelector("dark")]: {
-                    "&:-webkit-autofill": {
-                      WebkitBoxShadow: `0 0 0 100px ${alpha(obsidianTokens.surfaceLow, 0.98)} inset`,
-                      WebkitTextFillColor: obsidianTokens.textPrimary,
-                      caretColor: obsidianTokens.textPrimary,
-                    },
-                  },
-                }
-              : {}),
-          }),
+          input: ({ theme: muiTheme }) =>
+            darkModeInputWebkitAutofillOverrides(
+              muiTheme,
+              alpha(obsidianTokens.surfaceLow, 0.98),
+              {
+                borderTopLeftRadius: "inherit",
+                borderTopRightRadius: "inherit",
+              },
+            ),
         },
       },
     },
