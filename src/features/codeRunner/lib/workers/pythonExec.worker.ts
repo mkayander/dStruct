@@ -14,6 +14,7 @@ import type {
 } from "./pythonExec.worker.types";
 
 let pyodide: PyodideInterface | null = null;
+let blackFormatterReady = false;
 
 const HARNESS_DIR = "/home/pyodide";
 
@@ -93,6 +94,69 @@ from exec import safe_exec
   self.postMessage(msg);
 }
 
+async function ensureBlackFormatter(): Promise<void> {
+  if (!pyodide || blackFormatterReady) return;
+
+  await pyodide.loadPackage("micropip");
+  await pyodide.runPythonAsync(`
+import micropip
+await micropip.install("black")
+`);
+  blackFormatterReady = true;
+}
+
+async function handleFormat(requestId: string, code: string) {
+  if (!pyodide) {
+    postError(
+      requestId,
+      new Error("Pyodide not initialized. Send INIT first."),
+    );
+    return;
+  }
+
+  try {
+    await ensureBlackFormatter();
+    pyodide.globals.set("__format_src__", code);
+    const payloadJson: string = await pyodide.runPythonAsync(`
+import json as _json
+from black import Mode, format_str
+
+_src = __format_src__
+try:
+    _out = format_str(_src, mode=Mode())
+    _payload = {"ok": True, "text": _out}
+except Exception as _e:
+    _payload = {"ok": False, "text": _src, "message": str(_e)}
+_json.dumps(_payload)
+`);
+
+    const payload = JSON.parse(payloadJson) as {
+      ok: boolean;
+      text: string;
+      message?: string;
+    };
+
+    if (!payload.ok) {
+      postError(
+        requestId,
+        new Error(payload.message ?? "Black could not format this code."),
+      );
+      return;
+    }
+
+    const msg: PythonWorkerOutMessage = {
+      type: "FORMAT_RESULT",
+      requestId,
+      formatted: payload.text,
+    };
+    self.postMessage(msg);
+  } catch (err: unknown) {
+    postError(requestId, err);
+  } finally {
+    pyodide?.globals.delete("__format_src__");
+  }
+}
+
 async function handleRun(
   requestId: string,
   code: string,
@@ -151,6 +215,13 @@ self.addEventListener(
             postError(data.requestId, err);
           },
         );
+        break;
+
+      case "FORMAT":
+        handleFormat(data.requestId, data.code).catch((err: unknown) => {
+          console.error("Pyodide FORMAT failed:", err);
+          postError(data.requestId, err);
+        });
         break;
 
       default:

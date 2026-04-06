@@ -1,4 +1,3 @@
-import { codeRouter } from "#/server/api/routers/code";
 import { leetcodeRouter } from "#/server/api/routers/leetcode";
 import { projectRouter } from "#/server/api/routers/project";
 import { userRouter } from "#/server/api/routers/user";
@@ -31,7 +30,6 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   leetcode: leetcodeRouter,
   project: projectRouter,
-  code: codeRouter,
 });
 
 // export type definition of API

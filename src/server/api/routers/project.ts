@@ -438,16 +438,17 @@ export const projectRouter = createTRPCRouter({
           },
         },
       })
-      .catch((e: any) => {
+      .catch((error: unknown) => {
         if (
-          e instanceof Prisma.PrismaClientKnownRequestError &&
-          e.code === "P2025"
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          error.code === "P2025"
         ) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: `Project "${input}" not found.`,
           });
-        } else throw e;
+        }
+        throw error;
       });
 
     return {
@@ -494,16 +495,17 @@ export const projectRouter = createTRPCRouter({
             },
           },
         })
-        .catch((e: any) => {
+        .catch((error: unknown) => {
           if (
-            e instanceof Prisma.PrismaClientKnownRequestError &&
-            e.code === "P2002"
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2002"
           ) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "You already have a project with this name.",
             });
-          } else throw e;
+          }
+          throw error;
         }),
     ),
 

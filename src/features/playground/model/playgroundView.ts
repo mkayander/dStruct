@@ -11,7 +11,8 @@ export const PLAYGROUND_VIEW_PARAM_OPTIONS: SearchParamOptions<
   PlaygroundView | ""
 > = {
   defaultValue: "",
-  validate: (v): v is PlaygroundView | "" => v === "" || isPlaygroundView(v),
+  validate: (rawView): rawView is PlaygroundView | "" =>
+    rawView === "" || isPlaygroundView(rawView),
 };
 
 export type PlaygroundViewParam = {

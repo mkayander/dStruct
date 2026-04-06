@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const uk: Record<keyof Translation, string> = {
+const ukOverrides = {
   ACTION: "Дія",
   ADD_ARGUMENT: "Додати аргумент",
   ADD_NEW_SOLUTION: "Додати нове рішення",
@@ -254,6 +255,7 @@ const uk: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "Чи dStruct з відкритим кодом?",
   HOME_FAQ_A_14:
     "Так. Див. LICENSE у репозиторії (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const uk = { ...en, ...ukOverrides } as Translation;
 export default uk;

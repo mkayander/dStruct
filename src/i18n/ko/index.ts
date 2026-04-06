@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const ko: Record<keyof Translation, string> = {
+const koOverrides = {
   ACTION: "동작",
   ADD_ARGUMENT: "인수 추가",
   ADD_NEW_SOLUTION: "새 풀이 추가",
@@ -254,6 +255,7 @@ const ko: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "dStruct는 오픈 소스인가요?",
   HOME_FAQ_A_14:
     "예. 저장소의 LICENSE 참조 (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const ko = { ...en, ...koOverrides } as Translation;
 export default ko;

@@ -66,14 +66,21 @@ export const getCodeKey = (language: ProgrammingLanguage | "") => {
 };
 
 export const toErrorInfo = (
-  e: unknown,
+  errorValue: unknown,
 ): { name: string; message: string; stack?: string } => {
-  if (e instanceof Error) {
-    return { name: e.name, message: e.message, stack: e.stack };
+  if (errorValue instanceof Error) {
+    return {
+      name: errorValue.name,
+      message: errorValue.message,
+      stack: errorValue.stack,
+    };
   }
   return {
     name: "Error",
-    message: typeof e === "string" ? e : "An unexpected error occurred",
+    message:
+      typeof errorValue === "string"
+        ? errorValue
+        : "An unexpected error occurred",
   };
 };
 
@@ -101,9 +108,9 @@ export const useCodeExecution = (
 
   // Handles execution errors and updates Redux store accordingly
   const handleExecutionError = useCallback(
-    (e: unknown, startTimestamp: number) => {
+    (errorValue: unknown, startTimestamp: number) => {
       const runtime = performance.now() - startTimestamp;
-      const errorInfo = toErrorInfo(e);
+      const errorInfo = toErrorInfo(errorValue);
 
       dispatch(
         callstackSlice.actions.addOne({
@@ -122,11 +129,11 @@ export const useCodeExecution = (
         }),
       );
 
-      if (!(e instanceof ExecutionError)) {
+      if (!(errorValue instanceof ExecutionError)) {
         enqueueSnackbar(errorInfo.message, { variant: "error" });
-        console.error("Execution error:", e);
+        console.error("Execution error:", errorValue);
       } else {
-        console.warn(e);
+        console.warn(errorValue);
       }
     },
     [dispatch, enqueueSnackbar],
@@ -169,8 +176,8 @@ export const useCodeExecution = (
         const result = await task();
         handleExecutionResult(result, startTimestamp);
         return result;
-      } catch (e) {
-        handleExecutionError(e, performance.now());
+      } catch (error) {
+        handleExecutionError(error, performance.now());
       } finally {
         setIsProcessing(false);
       }
@@ -236,11 +243,11 @@ export const useCodeExecution = (
               dispatch(benchmarkSlice.actions.clearProgress());
             }, BENCHMARK_PROGRESS_COMPLETE_DELAY_MS);
             return result;
-          } catch (e) {
+          } catch (error) {
             setTimeout(() => {
               dispatch(benchmarkSlice.actions.clearProgress());
             }, BENCHMARK_PROGRESS_COMPLETE_DELAY_MS);
-            throw e;
+            throw error;
           }
         }
         throw new Error("Benchmark not supported for Python");

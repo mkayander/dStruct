@@ -75,7 +75,10 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
     const sorted = Object.entries(arrayState)
       .filter(([, item]) => !item.isNested)
-      .sort(([, { order: a }], [, { order: b }]) => a - b);
+      .sort(
+        ([, { order: orderLeft }], [, { order: orderRight }]) =>
+          orderLeft - orderRight,
+      );
     const arrayNodes = [];
 
     for (const [arrayName, data] of sorted) {

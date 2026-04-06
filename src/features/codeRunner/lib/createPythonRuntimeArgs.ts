@@ -3,8 +3,8 @@ import type { ArgumentObject } from "#/entities/argument/model/types";
 
 export type SerializedPythonArg = { type: string; value: unknown };
 
-function serializeFallback(a: ArgumentObject): SerializedPythonArg {
-  return { type: a.type, value: a.input };
+function serializeFallback(argument: ArgumentObject): SerializedPythonArg {
+  return { type: argument.type, value: argument.input };
 }
 
 /**

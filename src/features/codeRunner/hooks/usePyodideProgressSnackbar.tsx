@@ -7,8 +7,6 @@ import { PyodideLoadingSnackbarContent } from "../ui/PyodideLoadingSnackbarConte
 
 const PYODIDE_LOADING_SNACKBAR_KEY = "pyodide-loading";
 
-const PYTHON_EXEC_MODE = process.env.NEXT_PUBLIC_PYTHON_EXEC_MODE ?? "pyodide";
-
 /**
  * Single source of truth for the Pyodide loading snackbar.
  * Call near the Python code runner; shows snackbar when progress is non-null, hides when null.
@@ -20,8 +18,6 @@ export function usePyodideProgressSnackbar(): void {
 
   // Show snackbar when progress is non-null; hide when null. Single source of truth for this snackbar.
   useEffect(() => {
-    if (PYTHON_EXEC_MODE !== "pyodide") return;
-
     if (progress !== null) {
       if (!hasSnackbarShownRef.current) {
         hasSnackbarShownRef.current = true;
@@ -46,5 +42,5 @@ export function usePyodideProgressSnackbar(): void {
         closeSnackbar(PYODIDE_LOADING_SNACKBAR_KEY);
       }
     };
-  }, []);
+  }, [closeSnackbar]);
 }

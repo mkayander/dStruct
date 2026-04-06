@@ -43,7 +43,6 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 - Monaco editor options (e.g. `folding: !isMobile`)
 - Mobile toolbar vs desktop toolbar (different components)
 - Mobile flow state machine (browse/code/results phases)
-- Modal messaging that changes by device (e.g. Python support modal)
 
 ### Components Using CSS-First (No `useMobileLayout`)
 
@@ -57,7 +56,6 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 - `src/pages/playground/[[...slug]].tsx` — Mobile vs desktop layout branch (MobilePlayground vs SplitPanelsLayout)
 - `src/features/appBar/ui/MainAppBar.tsx` — Mobile playground toolbar vs desktop toolbar
 - `src/features/codeRunner/ui/CodeRunner.tsx` — Monaco `folding` option
-- `src/shared/ui/organisms/PythonSupportModal.tsx` — Modal layout and messaging by device
 
 ## SSR Match Media
 

@@ -14,8 +14,8 @@ type ProjectForSitemap = {
 
 /** Formats a date as `YYYY-MM-DD` for sitemap `lastmod` (date-only is widely accepted). */
 function formatLastmod(date: Date | string): string {
-  const d = typeof date === "string" ? new Date(date) : date;
-  return d.toISOString().split("T")[0] ?? "";
+  const parsedDate = typeof date === "string" ? new Date(date) : date;
+  return parsedDate.toISOString().split("T")[0] ?? "";
 }
 
 /**

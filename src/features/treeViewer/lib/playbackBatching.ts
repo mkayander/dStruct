@@ -47,9 +47,9 @@ const getNextRenderableFrameIndex = (
   frames: CallFrame[],
   startIndex: number,
 ) => {
-  for (let index = startIndex + 1; index < frames.length; index += 1) {
-    if (isRenderableCallFrame(frames[index])) {
-      return index;
+  for (let i = startIndex + 1; i < frames.length; i += 1) {
+    if (isRenderableCallFrame(frames[i])) {
+      return i;
     }
   }
 
@@ -114,14 +114,14 @@ const getSwapBatchPartnerIndex = (
     ? null
     : getRelatedChildNodeIds(startFrame);
 
-  for (let index = startIndex + 1; index < frames.length; index += 1) {
-    const frame = frames[index];
+  for (let i = startIndex + 1; i < frames.length; i += 1) {
+    const frame = frames[i];
     if (!isRenderableCallFrame(frame)) {
       continue;
     }
 
     if (areBatchableSwapFrames(startFrame, frame)) {
-      return index;
+      return i;
     }
 
     if (isSwapChildFrame(frame)) {
@@ -197,15 +197,15 @@ export const getPlaybackStepGroups = (
   const groups: PlaybackStepGroup[] = [];
   const stopAtForeignSwapChild = Boolean(options?.forCallstackDisplay);
 
-  for (let index = 0; index < frames.length; ) {
-    const startIndex = getNextRenderableFrameIndex(frames, index - 1);
+  for (let i = 0; i < frames.length; ) {
+    const startIndex = getNextRenderableFrameIndex(frames, i - 1);
     if (startIndex === -1) {
       break;
     }
 
     const primaryFrame = getRenderableFrameAtIndex(frames, startIndex);
     if (!primaryFrame) {
-      index = startIndex + 1;
+      i = startIndex + 1;
       continue;
     }
 
@@ -233,7 +233,7 @@ export const getPlaybackStepGroups = (
           primaryFrame,
           partnerFrame,
         });
-        index = endIndex + 1;
+        i = endIndex + 1;
         continue;
       }
     }
@@ -246,7 +246,7 @@ export const getPlaybackStepGroups = (
       frames: [primaryFrame],
       primaryFrame,
     });
-    index = startIndex + 1;
+    i = startIndex + 1;
   }
 
   return groups;

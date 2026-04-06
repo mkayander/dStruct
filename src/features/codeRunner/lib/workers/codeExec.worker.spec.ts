@@ -69,8 +69,8 @@ describe("codeExec.worker", () => {
         arrayStore: {},
         treeStore: {},
       });
-    } catch (e: unknown) {
-      expect(e).toBeTruthy();
+    } catch (error: unknown) {
+      expect(error).toBeTruthy();
     }
   });
 

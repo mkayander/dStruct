@@ -48,6 +48,16 @@ class MockPythonWorker
           result,
         };
         this.dispatchEvent(new MessageEvent("message", { data: response }));
+        return;
+      }
+
+      if (msg.type === "FORMAT") {
+        const response: PythonWorkerOutMessage = {
+          type: "FORMAT_RESULT",
+          requestId: msg.requestId,
+          formatted: `${msg.code}\n# formatted`,
+        };
+        this.dispatchEvent(new MessageEvent("message", { data: response }));
       }
     }, 10);
   }
@@ -137,6 +147,42 @@ describe("pythonExec.worker protocol", () => {
     worker.terminate();
   });
 
+  it("should return FORMAT_RESULT after FORMAT", async () => {
+    const worker = new MockPythonWorker();
+
+    const initPromise = new Promise<void>((resolve) => {
+      const listener = (event: Event) => {
+        const data = (event as MessageEvent<PythonWorkerOutMessage>).data;
+        if (data.type === "READY") {
+          worker.removeEventListener("message", listener);
+          resolve();
+        }
+      };
+      worker.addEventListener("message", listener);
+    });
+    worker.postMessage({ type: "INIT" });
+    await initPromise;
+
+    const formatPromise = new Promise<PythonWorkerOutMessage>((resolve) => {
+      worker.addEventListener("message", (event) => {
+        resolve((event as MessageEvent<PythonWorkerOutMessage>).data);
+      });
+    });
+
+    const src = "x=1";
+    worker.postMessage({ type: "FORMAT", requestId: "fmt-1", code: src });
+
+    const msg = await formatPromise;
+
+    expect(msg.type).toBe("FORMAT_RESULT");
+    if (msg.type === "FORMAT_RESULT") {
+      expect(msg.requestId).toBe("fmt-1");
+      expect(msg.formatted).toContain(src);
+    }
+
+    worker.terminate();
+  });
+
   it("should handle timeout by terminating the worker", async () => {
     const worker = new MockPythonWorker();
 
@@ -190,12 +236,12 @@ describe("pythonExec.worker protocol", () => {
         { type: "PROGRESS", value: 100, stage: "Ready" },
         { type: "READY" },
       ];
-      steps.forEach((data, i) => {
+      steps.forEach((data, stepIndex) => {
         setTimeout(() => {
           if (!mockWorker.terminated) {
             mockWorker.dispatchEvent(new MessageEvent("message", { data }));
           }
-        }, i * 5);
+        }, stepIndex * 5);
       });
     };
 

@@ -1,10 +1,11 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useMobileLayout } from "#/shared/hooks";
+import { OrbitModelCanvasTouchScroll } from "#/shared/ui/molecules/OrbitModelCanvasTouchScroll";
 
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
@@ -15,45 +16,6 @@ type LogoModelViewProps = {
   cameraFov?: number;
   target?: [number, number, number];
   distanceRange?: readonly [number, number];
-};
-
-/**
- * OrbitControls.connect() sets touch-action: none on the canvas and keeps
- * pointer listeners. touch-action: pan-y alone is not enough for reliable
- * scrolling (e.g. OverlayScrollbars). Let touches hit the scroll container by
- * making the canvas non-interactive; scroll-linked angles still update via ref.
- * useFrame reapplies styles in case connect() or a controls reconnect runs later.
- */
-const MobileCanvasTouchScroll: React.FC<{ active: boolean }> = ({ active }) => {
-  const gl = useThree((state) => state.gl);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useLayoutEffect(() => {
-    canvasRef.current = gl.domElement;
-  }, [gl]);
-
-  useFrame(() => {
-    if (!active) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    canvas.style.pointerEvents = "none";
-    canvas.style.touchAction = "auto";
-  });
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    if (active) {
-      return () => {
-        canvas.style.removeProperty("pointer-events");
-        canvas.style.touchAction = "none";
-      };
-    }
-    canvas.style.removeProperty("pointer-events");
-    canvas.style.touchAction = "none";
-  }, [active]);
-
-  return null;
 };
 
 export const LogoModelView: React.FC<LogoModelViewProps> = ({
@@ -113,7 +75,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         enableDamping={pointerRotationEnabled}
         dampingFactor={0.005}
       />
-      <MobileCanvasTouchScroll active={pointerEventsDisabled} />
+      <OrbitModelCanvasTouchScroll active={pointerEventsDisabled} />
     </Canvas>
   );
 };
