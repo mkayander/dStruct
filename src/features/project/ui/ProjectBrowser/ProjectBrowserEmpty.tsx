@@ -16,7 +16,7 @@ export const ProjectBrowserEmpty: React.FC<ProjectBrowserEmptyProps> = ({
 
   const getMessage = () => {
     if (searchQuery) {
-      return `${LL.NO_PROJECTS_FOUND()} for "${searchQuery}"`;
+      return LL.NO_PROJECTS_FOUND_FOR_SEARCH({ query: searchQuery });
     }
     if (hasFilters) {
       return LL.NO_PROJECTS_MATCH_FILTERS();

@@ -6,12 +6,26 @@ export type BaseTranslation = BaseTranslationType
 export type BaseLocale = 'en'
 
 export type Locales =
+	| 'ar'
+	| 'be'
 	| 'de'
 	| 'en'
 	| 'es'
+	| 'fr'
+	| 'hi'
+	| 'id'
+	| 'it'
+	| 'ja'
+	| 'ko'
+	| 'nl'
+	| 'pl'
+	| 'pt'
 	| 'ru'
 	| 'sr'
+	| 'tr'
 	| 'uk'
+	| 'vi'
+	| 'zh'
 
 export type Translation = RootTranslation
 
@@ -511,17 +525,92 @@ type RootTranslation = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
 	/**
-	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e
+	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e​.​ ​S​t​e​p​ ​f​o​r​w​a​r​d​.​ ​S​t​e​p​ ​b​a​c​k​.
 	 */
 	HOME_LANDING_TITLE: string
 	/**
-	 * A​ ​L​e​e​t​C​o​d​e​-​s​t​y​l​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​r​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n​ ​d​r​i​v​e​s​ ​a​ ​s​y​n​c​e​d​ ​v​i​s​u​a​l​ ​d​e​b​u​g​g​e​r​:​ ​t​r​e​e​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​,​ ​l​i​n​k​e​d​ ​s​t​r​u​c​t​u​r​e​s​,​ ​a​n​d​ ​n​e​s​t​e​d​ ​m​a​p​s​.​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​,​ ​s​t​e​p​-​b​y​-​s​t​e​p​ ​r​e​p​l​a​y​,​ ​a​n​d​ ​o​p​t​i​o​n​a​l​ ​t​i​m​i​n​g​ ​s​t​a​t​s​ ​f​o​r​ ​J​S​.
+	 * A​ ​L​e​e​t​C​o​d​e​-​s​t​y​l​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​r​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n​ ​b​e​c​o​m​e​s​ ​a​ ​v​i​s​u​a​l​ ​e​x​e​c​u​t​i​o​n​ ​t​r​a​c​e​ ​f​o​r​ ​t​r​e​e​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​,​ ​l​i​n​k​e​d​ ​s​t​r​u​c​t​u​r​e​s​,​ ​a​n​d​ ​n​e​s​t​e​d​ ​m​a​p​s​.​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​,​ ​r​e​p​l​a​y​a​b​l​e​ ​s​t​a​t​e​ ​c​h​a​n​g​e​s​,​ ​a​n​d​ ​o​p​t​i​o​n​a​l​ ​t​i​m​i​n​g​ ​s​t​a​t​s​ ​f​o​r​ ​J​S​.
 	 */
 	HOME_LANDING_SUBTITLE: string
 	/**
-	 * C​o​m​m​o​n​ ​q​u​e​s​t​i​o​n​s
+	 * F​r​e​q​u​e​n​t​l​y​ ​a​s​k​e​d​ ​q​u​e​s​t​i​o​n​s
 	 */
 	HOME_HERO_FAQ_LINK: string
+	/**
+	 *  ​→
+	 */
+	HOME_HERO_FAQ_LINK_SUFFIX: string
+	/**
+	 * J​a​v​a​S​c​r​i​p​t
+	 */
+	HOME_LANDING_PREVIEW_CODE_LANGUAGE: string
+	/**
+	 * s​o​l​u​t​i​o​n​.​j​s
+	 */
+	HOME_LANDING_PREVIEW_CODE_FILENAME: string
+	/**
+	 * S​t​e​p​ ​{​s​t​e​p​}​ ​/​ ​{​t​o​t​a​l​}
+	 * @param {number} step
+	 * @param {number} total
+	 */
+	HOME_PREVIEW_STEP_PROGRESS: RequiredParams<'step' | 'total'>
+	/**
+	 * P​l​a​y
+	 */
+	HOME_LANDING_PREVIEW_PLAY: string
+	/**
+	 * P​a​u​s​e
+	 */
+	HOME_LANDING_PREVIEW_PAUSE: string
+	/**
+	 * S​t​e​p​ ​b​a​c​k
+	 */
+	HOME_PREVIEW_STEP_BACK: string
+	/**
+	 * S​t​e​p​ ​f​o​r​w​a​r​d
+	 */
+	HOME_PREVIEW_STEP_FORWARD: string
+	/**
+	 * L​a​n​d​i​n​g​ ​p​r​e​v​i​e​w​ ​f​a​i​l​e​d​ ​t​o​ ​l​o​a​d​.
+	 */
+	HOME_LANDING_PREVIEW_LOAD_FAILED: string
+	/**
+	 * U​n​e​x​p​e​c​t​e​d​ ​l​a​n​d​i​n​g​ ​p​r​e​v​i​e​w​ ​i​n​i​t​i​a​l​i​z​a​t​i​o​n​ ​e​r​r​o​r​.
+	 */
+	HOME_LANDING_PREVIEW_ERROR_UNEXPECTED: string
+	/**
+	 * i​n​v​e​r​t​ ​b​i​n​a​r​y​ ​t​r​e​e
+	 */
+	HOME_DEMO_SLUG_INVERT_BINARY_TREE: string
+	/**
+	 * f​i​n​d​ ​i​f​ ​p​a​t​h​ ​e​x​i​s​t​s​ ​i​n​ ​g​r​a​p​h
+	 */
+	HOME_DEMO_SLUG_PATH_IN_GRAPH: string
+	/**
+	 * s​h​o​r​t​e​s​t​ ​p​a​t​h​ ​i​n​ ​b​i​n​a​r​y​ ​m​a​t​r​i​x
+	 */
+	HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: string
+	/**
+	 * t​r​i​e
+	 */
+	HOME_DEMO_SLUG_TRIE_NAME: string
+	/**
+	 * D​a​i​l​y​ ​P​r​o​b​l​e​m
+	 */
+	DAILY_PROBLEM_FALLBACK_TITLE: string
+	/**
+	 * �​�​ ​Q​u​e​s​t​i​o​n​ ​O​f​ ​T​o​d​a​y
+	 */
+	DAILY_PROBLEM_SECTION_CAPTION: string
+	/**
+	 * Q​u​e​s​t​i​o​n​ ​O​f​ ​T​o​d​a​y
+	 */
+	QUESTION_OF_TODAY_LABEL: string
+	/**
+	 * N​o​ ​p​r​o​j​e​c​t​s​ ​f​o​u​n​d​ ​f​o​r​ ​"​{​q​u​e​r​y​}​"
+	 * @param {string} query
+	 */
+	NO_PROJECTS_FOUND_FOR_SEARCH: RequiredParams<'query'>
 	/**
 	 * H​o​w​ ​i​t​ ​w​o​r​k​s
 	 */
@@ -551,7 +640,7 @@ type RootTranslation = {
 	 */
 	HOME_HOW_STEP_3_BODY: string
 	/**
-	 * B​u​i​l​t​ ​f​o​r​ ​c​l​a​r​i​t​y
+	 * C​a​p​a​b​i​l​i​t​i​e​s
 	 */
 	HOME_SECTION_WHY_DSTUCT: string
 	/**
@@ -607,11 +696,11 @@ type RootTranslation = {
 	 */
 	HOME_LANG_PYTHON_BODY: string
 	/**
-	 * T​r​y​ ​e​x​a​m​p​l​e​ ​p​l​a​y​g​r​o​u​n​d​s
+	 * A​l​g​o​r​i​t​h​m​ ​g​a​l​l​e​r​y
 	 */
 	HOME_SECTION_TRY_DEMOS: string
 	/**
-	 * J​u​m​p​ ​i​n​t​o​ ​a​ ​c​u​r​a​t​e​d​ ​e​x​a​m​p​l​e​—​o​r​ ​o​p​e​n​ ​t​h​e​ ​f​u​l​l​ ​p​r​o​j​e​c​t​ ​b​r​o​w​s​e​r​.
+	 * O​p​e​n​ ​a​ ​c​u​r​a​t​e​d​ ​p​l​a​y​g​r​o​u​n​d​ ​t​o​ ​s​e​e​ ​t​h​e​ ​d​e​b​u​g​g​e​r​ ​o​n​ ​a​ ​r​e​a​l​ ​p​r​o​b​l​e​m​,​ ​o​r​ ​j​u​m​p​ ​i​n​t​o​ ​t​h​e​ ​f​u​l​l​ ​b​r​o​w​s​e​r​.
 	 */
 	HOME_TRY_DEMOS_LEAD: string
 	/**
@@ -1270,17 +1359,89 @@ export type TranslationFunctions = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: () => LocalizedString
 	/**
-	 * Your code, frame by frame
+	 * Your code, frame by frame. Step forward. Step back.
 	 */
 	HOME_LANDING_TITLE: () => LocalizedString
 	/**
-	 * A LeetCode-style playground where your solution drives a synced visual debugger: trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, step-by-step replay, and optional timing stats for JS.
+	 * A LeetCode-style playground where your solution becomes a visual execution trace for trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, replayable state changes, and optional timing stats for JS.
 	 */
 	HOME_LANDING_SUBTITLE: () => LocalizedString
 	/**
-	 * Common questions
+	 * Frequently asked questions
 	 */
 	HOME_HERO_FAQ_LINK: () => LocalizedString
+	/**
+	 *  →
+	 */
+	HOME_HERO_FAQ_LINK_SUFFIX: () => LocalizedString
+	/**
+	 * JavaScript
+	 */
+	HOME_LANDING_PREVIEW_CODE_LANGUAGE: () => LocalizedString
+	/**
+	 * solution.js
+	 */
+	HOME_LANDING_PREVIEW_CODE_FILENAME: () => LocalizedString
+	/**
+	 * Step {step} / {total}
+	 */
+	HOME_PREVIEW_STEP_PROGRESS: (arg: { step: number, total: number }) => LocalizedString
+	/**
+	 * Play
+	 */
+	HOME_LANDING_PREVIEW_PLAY: () => LocalizedString
+	/**
+	 * Pause
+	 */
+	HOME_LANDING_PREVIEW_PAUSE: () => LocalizedString
+	/**
+	 * Step back
+	 */
+	HOME_PREVIEW_STEP_BACK: () => LocalizedString
+	/**
+	 * Step forward
+	 */
+	HOME_PREVIEW_STEP_FORWARD: () => LocalizedString
+	/**
+	 * Landing preview failed to load.
+	 */
+	HOME_LANDING_PREVIEW_LOAD_FAILED: () => LocalizedString
+	/**
+	 * Unexpected landing preview initialization error.
+	 */
+	HOME_LANDING_PREVIEW_ERROR_UNEXPECTED: () => LocalizedString
+	/**
+	 * invert binary tree
+	 */
+	HOME_DEMO_SLUG_INVERT_BINARY_TREE: () => LocalizedString
+	/**
+	 * find if path exists in graph
+	 */
+	HOME_DEMO_SLUG_PATH_IN_GRAPH: () => LocalizedString
+	/**
+	 * shortest path in binary matrix
+	 */
+	HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: () => LocalizedString
+	/**
+	 * trie
+	 */
+	HOME_DEMO_SLUG_TRIE_NAME: () => LocalizedString
+	/**
+	 * Daily Problem
+	 */
+	DAILY_PROBLEM_FALLBACK_TITLE: () => LocalizedString
+	/**
+	 * 📅 Question Of Today
+	 */
+	DAILY_PROBLEM_SECTION_CAPTION: () => LocalizedString
+	/**
+	 * Question Of Today
+	 */
+	QUESTION_OF_TODAY_LABEL: () => LocalizedString
+	/**
+	 * No projects found for "{query}"
+	 */
+	NO_PROJECTS_FOUND_FOR_SEARCH: (arg: { query: string }) => LocalizedString
 	/**
 	 * How it works
 	 */
@@ -1310,7 +1471,7 @@ export type TranslationFunctions = {
 	 */
 	HOME_HOW_STEP_3_BODY: () => LocalizedString
 	/**
-	 * Built for clarity
+	 * Capabilities
 	 */
 	HOME_SECTION_WHY_DSTUCT: () => LocalizedString
 	/**
@@ -1366,11 +1527,11 @@ export type TranslationFunctions = {
 	 */
 	HOME_LANG_PYTHON_BODY: () => LocalizedString
 	/**
-	 * Try example playgrounds
+	 * Algorithm gallery
 	 */
 	HOME_SECTION_TRY_DEMOS: () => LocalizedString
 	/**
-	 * Jump into a curated example—or open the full project browser.
+	 * Open a curated playground to see the debugger on a real problem, or jump into the full browser.
 	 */
 	HOME_TRY_DEMOS_LEAD: () => LocalizedString
 	/**
