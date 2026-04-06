@@ -78,11 +78,41 @@ const isMatchingSwapPartnerFrame = (
 ): candidateFrame is SwapChildFrame =>
   areBatchableSwapFrames(primaryFrame, candidateFrame);
 
-const getSwapBatchPartnerIndex = (frames: CallFrame[], startIndex: number) => {
+/** Node ids touched by the start frame's child pointer (for wide swap batching). */
+const getRelatedChildNodeIds = (frame: SwapChildFrame): Set<string> => {
+  const ids = new Set<string>();
+  if (frame.args.childId) {
+    ids.add(frame.args.childId);
+  }
+  if (frame.prevArgs?.childId) {
+    ids.add(frame.prevArgs.childId);
+  }
+  return ids;
+};
+
+export type GetPlaybackStepGroupsOptions = {
+  /**
+   * When true, stop at any other `setLeftChild` / `setRightChild` before the partner
+   * so each subtree pointer step is its own row (compact callstack / landing preview list).
+   * When false (default), only stop on a repeat same-side setter on the same node so a
+   * parent swap can span descendant detach/reattach work (single playback step).
+   */
+  forCallstackDisplay?: boolean;
+};
+
+const getSwapBatchPartnerIndex = (
+  frames: CallFrame[],
+  startIndex: number,
+  stopAtForeignSwapChild: boolean,
+) => {
   const startFrame = frames[startIndex];
   if (!isSwapChildFrame(startFrame)) {
     return startIndex;
   }
+
+  const relatedChildNodeIds = stopAtForeignSwapChild
+    ? null
+    : getRelatedChildNodeIds(startFrame);
 
   for (let i = startIndex + 1; i < frames.length; i += 1) {
     const frame = frames[i];
@@ -94,14 +124,25 @@ const getSwapBatchPartnerIndex = (frames: CallFrame[], startIndex: number) => {
       return i;
     }
 
-    if (
-      isSwapChildFrame(frame) &&
-      frame.treeName === startFrame.treeName &&
-      frame.nodeId === startFrame.nodeId &&
-      frame.structureType === startFrame.structureType &&
-      frame.name === startFrame.name
-    ) {
-      break;
+    if (isSwapChildFrame(frame)) {
+      if (
+        frame.treeName === startFrame.treeName &&
+        frame.nodeId === startFrame.nodeId &&
+        frame.structureType === startFrame.structureType &&
+        frame.name === startFrame.name
+      ) {
+        break;
+      }
+      if (stopAtForeignSwapChild) {
+        break;
+      }
+      if (
+        relatedChildNodeIds &&
+        relatedChildNodeIds.size > 0 &&
+        !relatedChildNodeIds.has(frame.nodeId)
+      ) {
+        break;
+      }
     }
   }
 
@@ -151,8 +192,10 @@ export const getPreviousPlaybackFrameIndex = (
 
 export const getPlaybackStepGroups = (
   frames: CallFrame[],
+  options?: GetPlaybackStepGroupsOptions,
 ): PlaybackStepGroup[] => {
   const groups: PlaybackStepGroup[] = [];
+  const stopAtForeignSwapChild = Boolean(options?.forCallstackDisplay);
 
   for (let i = 0; i < frames.length; ) {
     const startIndex = getNextRenderableFrameIndex(frames, i - 1);
@@ -166,7 +209,11 @@ export const getPlaybackStepGroups = (
       continue;
     }
 
-    const endIndex = getSwapBatchPartnerIndex(frames, startIndex);
+    const endIndex = getSwapBatchPartnerIndex(
+      frames,
+      startIndex,
+      stopAtForeignSwapChild,
+    );
 
     if (endIndex > startIndex && isSwapChildFrame(primaryFrame)) {
       const groupFrames = frames

@@ -9,6 +9,7 @@ Good starting points in the bundle:
 - `01-app/02-guides/ai-agents.md` — agent setup and doc layout
 - `01-app/01-getting-started/` — App Router basics
 - `01-app/03-api-reference/` — APIs and file conventions
+- `02-pages/` — **Pages Router** (this repo uses `src/pages/` — prefer this tree for `getServerSideProps`, API routes, and `next.config` under `02-pages/04-api-reference/`)
 
 <!-- END:nextjs-agent-rules -->
 

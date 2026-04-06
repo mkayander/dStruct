@@ -95,7 +95,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const isLastFrame = useAppSelector(selectIsLastFrame);
   const isRootFrame = useAppSelector(selectIsRootFrame);
   const playbackStepGroups = useMemo(
-    () => getPlaybackStepGroups(callstack.frames),
+    () =>
+      getPlaybackStepGroups(callstack.frames, { forCallstackDisplay: true }),
     [callstack.frames],
   );
   const activePlaybackStepIndex = useMemo(
@@ -111,6 +112,16 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     if (replayRestartTimeoutRef.current !== null) {
       window.clearTimeout(replayRestartTimeoutRef.current);
       replayRestartTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Auto-replay schedules a 900ms wait, then reset, then a short pause before setIsPlaying(true).
+  // When reset runs, `isLastFrame` becomes false and this effect re-runs; its cleanup must not clear
+  // the post-reset timeout or replay never resumes (playground-style reset sets isPlaying false).
+  const clearAutoReplayEndDelayOnly = useCallback(() => {
+    if (replayTimeoutRef.current !== null) {
+      window.clearTimeout(replayTimeoutRef.current);
+      replayTimeoutRef.current = null;
     }
   }, []);
 
@@ -177,9 +188,9 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       }, REPLAY_RESET_PAUSE_MS);
     }, 900);
 
-    return clearReplayTimers;
+    return clearAutoReplayEndDelayOnly;
   }, [
-    clearReplayTimers,
+    clearAutoReplayEndDelayOnly,
     dispatch,
     handleReset,
     isLastFrame,
