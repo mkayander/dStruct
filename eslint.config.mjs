@@ -50,6 +50,8 @@ const eslintConfig = [
       ],
       "@typescript-eslint/no-empty-object-type": "off",
       "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
+      // Forbid one-letter variable/parameter/catch names (see .cursor/rules/no-one-letter-identifiers.mdc).
+      // "_" is allowed as an intentional discard (e.g. map((_, index) => ...)). Object property keys are not checked.
       "id-length": [
         "error",
         {
