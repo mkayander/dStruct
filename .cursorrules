@@ -1,629 +1,264 @@
-# dStruct Project - Cursor Rules
+# dStruct Project — Cursor Rules
 
-## Project Overview
+How this fits together:
 
-dStruct is a LeetCode problem visualization web app with data structure visualization, code execution, and interactive learning tools.
+- **`AGENTS.md`** — Next.js doc lookup, pnpm, DB/env, and local dev commands.
+- **`.cursor/rules/*.mdc`** — Always-on code style (hook imports, type imports, `useEffect` comments).
+- **This file** — Architecture, stack, patterns, testing, and feature workflow.
 
-## Technology Stack
+If **Next.js bundled docs** disagree with **`.cursor/rules/`** on style (hooks, types), follow **`.cursor/rules/`** for code in this repo.
 
-- **Frontend**: React, Next.js, TypeScript
-- **State Management**: Redux Toolkit (UI / client state); TanStack Query (server state via tRPC)
-- **Styling**: Material-UI (MUI), Emotion; CSS modules / SCSS only where already used (e.g. `.module.scss`)
-- **Database**: Prisma ORM with PostgreSQL
-- **Authentication**: NextAuth.js
-- **API**: tRPC, GraphQL with Apollo Client
-- **Testing**: Vitest with Testing Library
-- **Package Manager**: PNPM (always use PNPM, never NPM)
+---
 
-## Architecture Patterns
+## Project overview
 
-### Project Structure
+dStruct is a LeetCode-style problem visualization app: data-structure views, code execution (JS/Python), and interactive learning.
+
+---
+
+## Technology stack (current)
+
+| Area | Choice |
+|------|--------|
+| Framework | **Next.js** (Pages Router: `src/pages/`), **React 19**, **TypeScript** |
+| UI | **MUI (Material UI) v7**, **Emotion** (`sx`, `styled`, theme) |
+| Global UI state | **Redux Toolkit** — not for server/async query state |
+| Server state | **TanStack Query** via **`@trpc/react-query`** / **`api.*.useQuery`** |
+| API | **tRPC** (primary for app data), **GraphQL + Apollo** where used |
+| DB | **PostgreSQL** + **Prisma** |
+| Auth | **NextAuth.js** |
+| i18n | **typesafe-i18n** |
+| Tests | **Vitest 4**, **Testing Library**, **jsdom** |
+| Package manager | **pnpm** only (never npm for installs/scripts) |
+
+**Not in use:** Tailwind (rolled back — do not add without deps + config and team decision).
+
+---
+
+## Repository layout
 
 ```
 src/
-├── entities/          # Domain entities and business logic
-├── features/          # Feature-based modules with UI/model separation
-├── shared/            # Shared utilities, hooks, and components
-├── store/             # Redux store configuration
-├── server/            # Backend API (tRPC, GraphQL)
-├── context/           # React Context providers
-└── pages/             # Next.js pages and API routes
+├── pages/           # Next.js routes, _app, _document, API routes
+├── features/        # Feature modules (ui/, model/, hooks/ — match existing feature)
+├── entities/        # Domain + data-structure logic
+├── shared/          # Shared UI, hooks, lib
+├── store/           # Redux store, provider
+├── server/          # tRPC (routers, context), other server code
+├── context/         # React context
+├── graphql/         # Apollo client, generated types
+├── themes.ts        # MUI theme + appDesign tokens
+└── i18n/            # Locales and typesafe-i18n
 ```
 
-### State Management
+**Prisma schema:** `prisma/schema.prisma` (not under `src/`).
 
-**General Principles:**
+---
 
-- Use Redux Toolkit for global UI state (filters, selections, modals)
-- Use Redux Toolkit for complex state that needs persistence
-- Use Redux Toolkit for state shared across multiple components
-- **NOT** for server state (loading/error/data from API calls)
-- Use React hooks for local component state, form state, temporary UI state
+## State management
 
-**tRPC/TanStack Query (CRITICAL):**
+**Redux Toolkit** — filters, selections, modals, playground view mode, app bar scroll flag, and other **client UI** state.
 
-- **ALWAYS** use TanStack Query states directly from tRPC queries
-- **NEVER** duplicate loading/error states in Redux - they're already managed
-- Use query states directly: `query.isLoading`, `query.isError`, `query.error`, `query.data`
-- Use `query.refetch()` for retry functionality
-- Only store derived state or UI state in Redux (e.g., filters, selections, modals)
+**Do not** mirror tRPC query loading, error, or data into Redux.
 
-**Code Examples:**
+**tRPC + TanStack Query** — use the hook return value directly:
 
-```typescript
-// ✅ Correct - use query states directly
-const projects = api.project.browseProjects.useQuery({...});
-const isLoading = projects.isLoading;
-const error = projects.error;
+- `query.isLoading` for queries; **`isPending`** for mutations (see existing `api.*` usage)
+- `query.isError`, `query.error`, `query.data`
+- `query.refetch()` for retry
 
-// ❌ Wrong - don't duplicate in Redux
-// dispatch(setIsLoading(projects.isLoading));
-// dispatch(setError(projects.error));
+Store in Redux only **derived UI** or **IDs/selections** that queries should not own.
 
-// ✅ Redux slice pattern for UI state
-export const exampleSlice = createSlice({
-  name: "EXAMPLE",
-  initialState,
-  reducers: {
-    update: (state, action: PayloadAction<Partial<State>>) => ({
-      ...state,
-      ...action.payload,
-    }),
-  },
-});
+---
+
+## Styling
+
+1. **MUI** components + **`sx`** and theme from **`#/themes`** (`createCustomTheme`, `theme.appDesign`).
+2. **`styled`** (Emotion) when a styled primitive is clearer than repeated `sx`.
+3. **CSS modules / `.module.scss`** only where that pattern already exists in the feature.
+4. **`clsx`** for conditional `className` strings when not using MUI `sx`.
+5. **No Tailwind** unless reintroduced deliberately.
+
+**Deprecations:** prefer MUI **`slotProps.*`** over legacy `*Props` (e.g. `PaperProps` → `slotProps.paper`). See [MUI migration](https://mui.com/material-ui/migration/).
+
+---
+
+## Next.js (this repo)
+
+- Routing and data loading use the **Pages Router** (`getServerSideProps` / `getStaticProps` on pages under `src/pages/`).
+- For **Next.js API behavior**, read **`node_modules/next/dist/docs/`** when unsure (see `AGENTS.md`).
+- **Internal imports:** use the **`#/`** alias → `src/`.
+
+---
+
+## TypeScript
+
+- **TS only** in `src/` (no new `.js` sources).
+- Avoid **`any`** and type assertions that hide real errors (`as any`, unchecked `!`).
+- Use **`import type { … }`** for type-only imports.
+- **No inline `import("…")` in type positions** — see `.cursor/rules/no-inline-type-imports.mdc`.
+
+---
+
+## React components and hooks
+
+**Components:** use **`const Name: React.FC<Props> = (…) => { … }`** with a named export; avoid `function Name()` for components.
+
+**Hooks:** import from **`"react"`** by name (`useEffect`, `useState`, …); do not call **`React.use*`** — see `.cursor/rules/react-named-hook-imports.mdc`.
+
+**`useEffect`:** for non-trivial business logic, add a short comment above the effect (what/why) — see `.cursor/rules/useeffect-business-logic-comments.mdc`.
+
+---
+
+## Feature module shape
+
+Match **existing** features. Common pattern:
+
+```
+src/features/{feature}/
+├── ui/
+├── model/           # optional Redux slices
+├── hooks/
+└── constants/
 ```
 
-### Data Flow
+Use **MUI** consistently; follow a **nearby feature** for file naming and folder layout.
 
-- Entities contain business logic and data models
-- Features contain UI components and feature-specific state
-- Shared utilities provide common functionality
-- Use tRPC for type-safe API calls
+---
 
-## Coding Standards
+## File naming
 
-### TypeScript
+- **React components:** `PascalCase.tsx`.
+- **Hooks:** `useThing.ts` / `useThing.tsx`.
+- **Tests:** `*.test.ts` / `*.test.tsx` next to code or under `__tests__/`.
+- **Other files:** the tree mixes **kebab-case** and **camelCase** (`appBarSlice.ts`, `getI18nProps.ts`) — **match the directory** you are editing.
 
-- **ALWAYS** use TypeScript - no JavaScript files
-- Use proper type annotations, avoid `any`
-- Use type imports: `import type { ... } from "..."`
-- Define proper interfaces and types for all data structures
+---
 
-### React Patterns
+## Imports
 
-- Use functional components with hooks
-- Implement proper prop typing
-- Use React.forwardRef when needed
-- Use proper dependency arrays in useEffect/useMemo/useCallback
+- **`#/`** for `src/` (e.g. `#/features/...`, `#/themes`).
+- Order: external → internal (`#/`) → relative.
+- Avoid **import cycles**; extract shared code to a neutral module if needed.
 
-**React component code style:**
+---
 
-- **ALWAYS** define React components using the `const ComponentName: React.FC<Props> = () => { ... }` pattern
-- **DO NOT** use `function ComponentName()` declarations for components
-- Define a props interface/type and pass it as the generic to `React.FC<Props>`
-- Export the component (named export); keep the props interface in the same file or in a shared types module
+## Error handling and notifications
 
-**Component structure example:**
+- **Transient** errors/success/warnings: **`notistack`** (`useSnackbar` / `enqueueSnackbar`).
+- Do **not** use MUI **`Alert`** for short-lived toasts.
+- Use **error boundaries** and server-appropriate status codes on API routes.
 
-```typescript
-// Props interface (same file or shared types)
-interface ComponentProps {
-  title: string;
-  onAction: (data: ActionData) => void;
-}
-
-// ✅ Correct - const with React.FC
-export const Component: React.FC<ComponentProps> = ({ title, onAction }) => {
-  // Component implementation
-};
-
-// ❌ Avoid - function declaration
-// export function Component({ title, onAction }: ComponentProps) { ... }
-```
-
-**Hook Pattern:**
-
-```typescript
-// Custom hook with proper typing
-export const useCustomHook = (): ReturnType => {
-  // Hook implementation
-  return result;
-};
-```
-
-### Component Architecture
-
-- Follow atomic design: atoms → molecules → organisms → templates
-- Keep components focused and single-responsibility
-- Use composition over inheritance
-- Implement proper prop drilling alternatives (Context, Redux)
-- Follow feature-based structure:
-  ```
-  src/features/{feature}/
-  ├── ui/
-  │   └── {FeatureName}/
-  │       ├── {FeatureName}.tsx
-  │       └── {FeatureName}*.tsx (sub-components)
-  ├── model/
-  │   └── {feature}Slice.ts (Redux)
-  └── hooks/
-      └── use{FeatureName}.ts
-  ```
-- Keep components focused and composable
-- Use MUI components consistently
-- Follow existing patterns from similar features
-
-### Styling
-
-- **Primary:** MUI components with the app theme from `#/themes` — use `sx`, `styled` (Emotion), and `theme.appDesign` tokens for colors and surfaces
-- **Do not add Tailwind** unless the project reintroduces it explicitly (dependencies + config); it was rolled back
-- Use **CSS modules** (including `.module.scss`) only when matching an existing pattern in that area
-- Follow design tokens from `src/themes.ts` / `theme.appDesign`; use `src/shared/lib/colors.ts` where that file is already the source of truth
-- For plain `className` strings, use **`clsx`** when you need conditional classes (there is no shared `cn()` helper in this repo)
-
-### Material-UI (MUI) Best Practices
-
-- **ALWAYS** use the latest MUI API patterns
-- **NEVER** use deprecated props - check deprecation warnings
-- **Common deprecations to avoid:**
-  - `PaperProps` → Use `slotProps.paper` instead
-  - `InputProps` → Use `slotProps.input` instead
-  - `InputLabelProps` → Use `slotProps.inputLabel` instead
-  - Other `*Props` patterns → Check for `slotProps.*` alternatives
-- When encountering deprecation warnings:
-  1. Check MUI migration guide: https://mui.com/material-ui/migration/
-  2. Replace deprecated prop with `slotProps` pattern
-  3. Verify functionality remains the same
-  4. Update all occurrences in the codebase
-- Prefer `slotProps` pattern for component customization:
-
-  ```typescript
-  // ✅ Correct (MUI v6+)
-  <Drawer slotProps={{ paper: { sx: {...} } }} />
-
-  // ❌ Deprecated (will be removed in v7)
-  <Drawer PaperProps={{ sx: {...} }} />
-  ```
-
-- Keep MUI components updated and follow migration guides
-- Test after updating deprecated APIs
-
-## File Naming & Organization
-
-### Naming Conventions
-
-- **Files**: kebab-case for files, PascalCase for components
-- **Components**: PascalCase (e.g., `BinaryNode.tsx`)
-- **Hooks**: camelCase with `use` prefix (e.g., `useBinaryTreePositioning.ts`)
-- **Utilities**: camelCase (e.g., `getNodeColors.ts`)
-- **Types**: PascalCase with descriptive names
-
-### Import Organization
-
-- Use absolute imports with `#/` alias for src directory
-- Group imports: external → internal → relative
-- Use barrel exports in index files
-- Avoid circular dependencies
-
-## Code Quality
-
-### Linting & Formatting
-
-- Follow ESLint configuration in `eslint.config.mjs`
-- Use Prettier for code formatting
-- Run `pnpm lint` before committing
-
-### Testing
-
-**Testing Stack:**
-
-- **Vitest** - Test runner (v3.2.4+)
-- **@testing-library/react** - React component testing (v16.3.0+)
-- **@testing-library/jest-dom** - DOM matchers (v6.7.0+)
-- **@testing-library/user-event** - User interaction simulation (v14.6.1+)
-- **@vitest/coverage-v8** - Code coverage (v3.2.4+)
-- **jsdom** - DOM environment for tests
-- **vitest-canvas-mock** - Canvas mocking for visual components
-
-**Test Configuration:**
-
-- Test files: `vitest.config.ts` with React plugin and jsdom environment
-- Setup file: `vitest.setup.ts` includes jest-dom matchers and polyfills
-- Global test utilities available via `vitest` globals
-- Path aliases: Use `#/` for src directory imports in tests
-- Environment: Set `SKIP_ENV_VALIDATION=true` for tests
-
-**Test Writing Rules:**
-
-- **ALWAYS** write unit tests after implementing features
-- Write tests for:
-  - Business logic functions
-  - Complex components with user interactions
-  - Redux slice reducers
-  - Custom hooks
-  - API endpoint handlers (tRPC procedures)
-- Test user behavior, not implementation details
-- Avoid testing constants, static values, or TypeScript types
-- Use descriptive test names: `"should [expected behavior] when [condition]"`
-- Group related tests with `describe` blocks
-
-**Mock Data Patterns:**
-
-- **ALWAYS** create mock data generators in `__tests__/mocks/` directories
-- Use factory functions with optional overrides pattern
-- Create specialized generators for specific test scenarios (by category, difficulty, title, date, etc.)
-- Use realistic test data that matches production structure
-- Mock external dependencies (APIs, databases, Next.js router, auth)
-
-**Component Testing:**
-
-- **ALWAYS** create `renderWithProviders` helper function with required providers:
-  - `ReduxProvider` with `makeStore()`
-  - `ThemeProvider` with `theme` from `#/themes` (includes custom `question` palette)
-  - `ConfigContext.Provider` for app configuration
-  - `withNextTRPC` wrapper for tRPC queries (if needed)
-- Mock Next.js dependencies (`next-auth/react`, router, etc.)
-- Use `screen` from `@testing-library/react` for queries
-- Prefer `getByRole`, `getByText`, `getByLabelText` over `getByTestId`
-- Test user interactions with `userEvent` from `@testing-library/user-event`
-
-**Redux Testing:**
-
-- Use `makeStore()` to create test store instances
-- Test reducers directly by dispatching actions and checking state
-- Test selectors by accessing state through selectors
-- Test state transitions and side effects (e.g., page reset on filter change)
-- Use `beforeEach` to reset store state between tests
-
-**tRPC Testing:**
-
-- Use `withNextTRPC` wrapper for components using tRPC queries
-- Mock tRPC queries using Vitest mocks with `vi.mock()` and `vi.importActual()`
-- Test error states by mocking query errors
-- Test loading states by mocking `isLoading: true`
-
-**Test Organization:**
-
-- Place tests in `__tests__` directories adjacent to source files
-- Mock data generators go in `__tests__/mocks/` directories
-- Use `.test.ts` or `.test.tsx` file extensions
-- Group related tests with `describe` blocks
-- Use `beforeEach` and `afterEach` for setup/teardown
-
-**Test Coverage:**
-
-- Focus on **most essential tests**:
-  - Critical user flows
-  - Edge cases and error handling
-  - State transitions
-  - Integration points
-- Aim for >80% coverage for business logic
-- Aim for >70% coverage for complex components
-- Use `pnpm test --coverage` to check coverage
-- Don't aim for 100% coverage - focus on meaningful tests
-
-**Running Tests:**
-
-- Development: `pnpm test` (watch mode)
-- CI: `pnpm test:ci` (single run)
-- Specific file: `pnpm test path/to/test/file.test.ts`
-- Coverage: `pnpm test --coverage`
-
-**Documentation:**
-
-- Document test strategy in design docs:
-  - What will be tested
-  - Mock data structure
-  - Test coverage goals
-  - Testing approach (unit/integration/E2E)
-- Include test examples in design docs for complex features
-
-### Performance
-
-**General Performance:**
-
-- Implement proper memoization with useMemo/useCallback
-- Use React.memo for expensive components
-- Optimize bundle size with dynamic imports
-- Implement proper loading states and error boundaries
-- Use dynamic imports for large components
-- Use Next.js built-in optimizations
-
-**Data-Heavy Features:**
-
-- Use virtualization (`react-virtuoso`) for large lists
-- Implement server-side pagination
-- Debounce search/filter inputs (200-300ms)
-- Memoize expensive computations
-- Use React.memo for expensive components
-- Document performance optimizations in design docs
-- Include bundle size impact analysis
-
-**Data Fetching:**
-
-- Implement proper caching strategies
-- Use **TanStack Query via tRPC** for server state (see tRPC section — do not duplicate query state in Redux)
-- Implement optimistic updates where appropriate
-- Handle loading and error states
-
-## Database & API
-
-### Prisma
-
-- Use Prisma for all database operations
-- Generate client after schema changes: `pnpm prisma:generate`
-- Use proper typing for database models
-- Implement proper error handling
-
-### tRPC
-
-- Use tRPC for type-safe API calls
-- Define proper input/output schemas
-- Use protected procedures for authenticated routes
-- Implement proper error handling and validation
-- **ALWAYS** use TanStack Query states directly from tRPC queries:
-  - `query.isLoading` - loading state
-  - `query.isError` - error state
-  - `query.error` - error object
-  - `query.data` - response data
-  - `query.refetch()` - retry function
-- **NEVER** sync these states to Redux - they're already managed by TanStack Query
-- **API Design Patterns:**
-  - Use `publicProcedure` or `protectedProcedure`
-  - Validate inputs with Zod schemas
-  - Return typed responses
-  - Handle errors with TRPCError
-  - For pagination: Use `page` and `pageSize` parameters, return `{ data, total, hasMore }` structure
-- Document API endpoints in design docs with:
-  - Input/output schemas
-  - Example usage
-  - Error cases
-
-### GraphQL
-
-- Use GraphQL for complex queries
-- Generate types with GraphQL Code Generator
-- Use Apollo Client for GraphQL operations
-
-## Error Handling
-
-### Client-Side
-
-- Implement proper error boundaries
-- Use try-catch for async operations
-- Provide user-friendly error messages
-- Log errors appropriately
-- **ALWAYS** use `notistack` (via `useSnackbar` hook) for user-facing notifications:
-  - Error messages
-  - Success messages
-  - Warning messages
-  - Info messages
-- **NEVER** use MUI `Alert` components for transient notifications - use snackbars instead
-- Example:
-
-  ```typescript
-  import { useSnackbar } from "notistack";
-
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
-  // ✅ Correct - use snackbar for errors
-  if (error) {
-    enqueueSnackbar(error.message, {
-      variant: "error",
-      action: (key) => (
-        <IconButton onClick={() => { handleRetry(); closeSnackbar(key); }}>
-          Retry
-        </IconButton>
-      ),
-      persist: false,
-      autoHideDuration: 6000,
-    });
-  }
-
-  // ❌ Wrong - don't use Alert for transient notifications
-  // <Alert severity="error">{error.message}</Alert>
-  ```
-
-- Use snackbar `action` prop for retry buttons or other actions
-- Set appropriate `autoHideDuration` (default: 5000ms, errors: 6000ms)
-- Use `persist: false` for most notifications (except critical errors)
-
-### Server-Side
-
-- Use proper HTTP status codes
-- Implement proper error logging
-- Return structured error responses
-- Handle edge cases gracefully
-
-## Security & Best Practices
-
-### Authentication
-
-- Use NextAuth.js for authentication
-- Implement proper session management
-- Use protected routes for sensitive operations
-- Validate user permissions
-
-### Environment Variables
-
-- Use Zod schemas for environment validation
-- Never commit sensitive data
-- Update schema in `src/env/schema.mjs` when adding new vars
-
-### Data Validation
-
-- Use Zod for runtime validation
-- Validate all user inputs
-- Implement proper error handling
-- Use TypeScript for compile-time validation
-
-## 3D Visualization
-
-### Blender Integration
-
-- Store 3D models in `blender/` directory
-- Export as .glb files
-- Use gltfjsx to convert to React components
-- Follow naming convention: `ModelName.tsx`
-
-### Three.js Usage
-
-- Use @react-three/fiber and @react-three/drei
-- Implement proper performance optimizations
-- Handle loading states and errors
-- Use proper lighting and materials
+---
 
 ## Internationalization
 
-### i18n Implementation
+- **typesafe-i18n** for user-visible strings; **`LL.KEY()`** in components.
+- Add keys in locale files (e.g. **`src/i18n/en/index.ts`**).
+- **`pnpm typesafe-i18n`** is a **watcher** — do not run it as a blocking one-shot in automation; run in background or let the user run it.
 
-- **ALWAYS** use typesafe-i18n for all user-facing strings
-- Support multiple locales: en, ru, de, es, sr, uk
-- Implement proper locale detection
-- Use translation keys consistently
-- Follow existing pattern:
-  - Add keys to `src/i18n/en/index.ts`
-  - Use `LL.KEY_NAME()` pattern in components
-  - **IMPORTANT**: `pnpm typesafe-i18n` runs as a file watcher and does NOT exit by itself
-  - After adding translation keys, instruct user to run `pnpm typesafe-i18n` manually (or run in background)
-  - Do NOT run `pnpm typesafe-i18n` directly in terminal commands as it will hang
-- Never hardcode strings in components
-- Document all new translation keys in design docs
+---
 
-## Development Workflow
+## Database and Prisma
 
-### Git & Deployment
+- **PostgreSQL**; local URL and commands in **`AGENTS.md`**.
+- After schema changes: **`pnpm prisma:generate`** (also runs via **postinstall**).
+- Apply schema locally: **`pnpm prisma:push`** (with env loaded as in scripts).
 
-- Use semantic commit messages
-- Follow conventional commits for releases
-- Use Husky for pre-commit hooks
+---
 
-### Dependencies
+## tRPC
 
-- Always use PNPM for package management
-- Keep dependencies up to date
-- Use exact versions for critical packages
+- Routers under **`src/server/api/routers/`**, composed in **`src/server/api/root.ts`**.
+- Validate inputs with **Zod**; use **`TRPCError`** for failures.
+- Use **`publicProcedure`** / **`protectedProcedure`** (and context from **`src/server/api/context.ts`**) as established in existing routers.
+- **Pagination:** prefer `{ data, total, hasMore }` (or match existing router contracts).
 
-### Build & Development
+---
 
-- Use `pnpm dev` for development
-- Use `pnpm build` for production builds
-- Run tests with `pnpm test`
+## GraphQL
 
-## Documentation
+- Use where the app already does; types from **GraphQL Codegen** (`pnpm generate-graphql`).
+- **Apollo Client** setup in **`src/graphql/`**.
 
-### Code Documentation
+---
 
-- Use JSDoc for complex functions
-- Document component props and interfaces
-- Keep README and documentation updated
-- Document complex business logic
+## Testing
 
-### API Documentation
+**Runner:** Vitest 4 (`vitest.config.ts`, `vitest.setup.ts` — jest-dom, canvas mock, web worker helper).
 
-- Document tRPC procedures
-- Document GraphQL schema
-- Provide usage examples
-- Keep API documentation current
+**Commands:**
 
-## Feature Design & Implementation
+- **`pnpm test`** / **`pnpm test:ci`** — single run (CI uses this).
+- **`pnpm test:watch`** — watch mode (not the default for `pnpm test`).
 
-### Design Documentation
+**Conventions:**
 
-- **ALWAYS** create design documents in `vibe-docs/` directory before implementation
-- Design docs must include:
-  - Executive summary and current state analysis
-  - Functional and technical requirements
-  - Architecture design (component structure, state management, API design)
-  - UI/UX mockups and interaction patterns
-  - Implementation phases with difficulty ratings (0-10 scale)
-  - Performance considerations and optimization strategies
-  - I18n and A11y requirements
-  - Testing strategy
-  - Migration/deprecation plans if applicable
+- Prefer **`screen`** + **`getByRole`** / **`getByLabelText`** over **`getByTestId`**.
+- Use **`userEvent`** for interactions.
+- **`SKIP_ENV_VALIDATION`** is set for tests via config/env; do not rely on ad hoc env in every file.
 
-### TODO Tracking
+**Providers:** there is **no single global `renderWithProviders`** — each suite defines helpers (Redux `makeStore()`, MUI `ThemeProvider`, **`withNextTRPC`** from **`#/shared/lib/trpc-test-decorator`**, etc.). **Copy the pattern** from a similar feature test.
 
-- **ALWAYS** create a separate TODO file (`vibe-docs/{FeatureName}-TODO.md`) alongside design docs
-- TODO files must:
-  - Break down implementation into phases
-  - Include checkboxes for each task
-  - Track progress systematically
-  - Include difficulty ratings (0-10) for complex tasks
-  - Reference related design doc sections
+**Scope:** test behavior and regressions; avoid tests that only duplicate TypeScript or constants.
 
-### Technology Stack Adherence
+**Coverage:** **`pnpm exec vitest run --coverage`** works if configured; there is no dedicated **`pnpm test:coverage`** script unless added later.
 
-- **NEVER** introduce new major libraries without justification
-- When considering new dependencies:
-  - Document bundle size impact (use `pnpm why` and bundle analyzers)
-  - List pros/cons vs existing solutions
-  - Assess difficulty of integration (0-10 scale)
-  - Check compatibility with existing stack (MUI, tRPC, Next.js, etc.)
-  - Prefer existing solutions: MUI components, tRPC procedures, Redux Toolkit
+---
 
-### Difficulty Assessment
+## Performance
 
-- Rate implementation difficulty on 0-10 scale:
-  - **0-2**: Trivial (simple UI changes, copy-paste patterns)
-  - **3-4**: Easy (standard patterns, existing components)
-  - **5-6**: Medium (new components, moderate complexity)
-  - **7-8**: Hard (complex logic, performance optimization, integration)
-  - **9-10**: Very Hard (architectural changes, new patterns, high risk)
-- Include difficulty in design docs and TODO files
-- Break down complex tasks (7+) into smaller subtasks
+- Memoize hot paths (`useMemo`, `useCallback`, `React.memo`) when profiling suggests it.
+- **Lists:** virtualization (**`react-virtuoso`**) for large collections; **pagination** on the server where applicable.
+- Debounce search/filters (~200–300ms) when needed.
+- **Code splitting:** `dynamic()` for heavy client-only UI.
 
-### Diagrams & Schemas
+---
 
-- Create visual documentation when applicable:
-  - **Component hierarchy diagrams** (Mermaid or ASCII art)
-  - **Data flow diagrams** (state management, API calls)
-  - **Database relation schemes** (Prisma schema visualizations)
-  - **User flow diagrams** (interaction patterns)
-- Store diagrams in `vibe-docs/` as markdown with Mermaid or images
-- Use Mermaid syntax for version-controlled diagrams:
-  ```mermaid
-  graph TD
-    A[Component] --> B[Child Component]
-  ```
+## 3D / Blender
 
-### Accessibility (A11y) Requirements
+- Models in **`blender/`**; **`.glb`** exports; **`gltfjsx`** → React components in the established naming style.
+- Runtime: **`@react-three/fiber`**, **`@react-three/drei`**.
 
-- **ALWAYS** implement accessibility features:
-  - ARIA labels and roles for interactive elements
-  - Keyboard navigation (Tab, Enter, Arrow keys, Escape)
-  - Screen reader support with descriptive text
-  - Focus management and visible focus indicators
-  - Semantic HTML structure
-  - Color contrast ratios (WCAG AA minimum)
-- Test with keyboard-only navigation
-- Use MUI's built-in accessibility features
-- Document A11y features in design docs
+---
 
-### Migration & Backward Compatibility
+## Lint and format
 
-- When replacing existing features:
-  - Keep old components for backward compatibility
-  - Add feature flags if needed
-  - Document migration path
-  - Plan deprecation timeline
-- Update related components gradually
-- Maintain API compatibility when possible
+- **`pnpm lint`** — ESLint + **`tsc --noEmit`**.
+- **Prettier** via **lint-staged** on commit.
+
+---
+
+## Design docs and TODOs
+
+For **non-trivial** features (new flows, API shape, or multi-file refactors):
+
+- Design note in **`vibe-docs/`** (problem, approach, tradeoffs).
+- Optional checklist **`vibe-docs/{Feature}-TODO.md`** for multi-step work.
+
+Skip heavy paperwork for **trivial** fixes (typos, one-line bugs) unless the ticket requires it.
+
+---
+
+## Dependencies
+
+- **pnpm** for add/remove; prefer **existing** MUI / tRPC / Redux patterns over new UI frameworks.
+- New **major** libraries need justification (bundle cost, maintenance, fit with MUI and Next).
+
+---
+
+## Security
+
+- **NextAuth** for sessions; protect sensitive tRPC procedures.
+- **Env:** validate in **`src/env/schema.mjs`**; never commit secrets.
+
+---
 
 ## Remember
 
-- Always use TypeScript
-- Follow the established architecture patterns
-- Use PNPM for package management
-- Write meaningful tests
-- Keep code clean and maintainable
-- Follow security best practices
-- Optimize for performance
-- Maintain proper error handling
-- Use proper typing throughout
-- Follow the project's established conventions
-- **ALWAYS** create design docs in `vibe-docs/` before major features
-- **ALWAYS** create TODO files to track implementation progress
-- **ALWAYS** assess difficulty and document bundle impact for new dependencies
-- **NEVER** duplicate tRPC/TanStack Query loading/error states in Redux - use query states directly
-- **ALWAYS** use `notistack` snackbars for user notifications (errors, success, warnings) - never use Alert components for transient notifications
+- **pnpm** only for package scripts.
+- **Redux** for UI state — **not** tRPC query mirrors.
+- **MUI + Emotion** for styling — **no Tailwind** unless explicitly reintroduced.
+- **notistack** for transient notifications.
+- **typesafe-i18n** for copy; **no hardcoded user-facing strings** in UI.
+- Follow **`.cursor/rules/*.mdc`** for hooks, types, and `useEffect` comments.
