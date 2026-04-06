@@ -110,6 +110,9 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 | `src/features/codeRunner/hooks/usePythonCodeRunner.tsx` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
 | `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx` | Shows loading snackbar when Pyodide INIT sends PROGRESS messages |
 | `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult` |
+| `src/features/codeRunner/lib/workers/prettierFormat.worker.ts` | Web Worker: Prettier `FORMAT` → `FORMAT_RESULT` |
+| `src/features/codeRunner/lib/javascriptFormatRunner.ts` | Main-thread singleton: serializes JS `formatCode()`, timeout + worker reset |
+| `src/features/codeRunner/hooks/useJavaScriptFormatCode.ts` | TanStack mutation → `javascriptFormatRunner.formatCode()` |
 | `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)` |
 | `src/packages/dstruct-runner/python/tree_utils.py` | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction |
 | `src/packages/dstruct-runner/python/array_tracker.py` | `TrackedList` implementation for callstack frame generation |
@@ -138,6 +141,10 @@ The same worker also handles **Python formatting** (Black via `micropip`): `form
 ### Python formatting (Black in the worker)
 
 On the first **Format** action, the worker loads `micropip` and installs **Black**, then formats with `black.format_str(..., mode=Mode())`. Subsequent formats reuse the install. Formatting uses a longer default timeout than runs because the first install can take tens of seconds on a slow network.
+
+### JavaScript formatting (Prettier worker)
+
+JavaScript playground code is formatted in a **separate** Web Worker (`prettierFormat.worker.ts`) using **Prettier standalone** + the same Babel / estree plugins as before. The main thread uses `javascriptFormatRunner` and `useJavaScriptFormatCode` (symmetric to `pythonRunner` / `usePythonFormatCode`). There is **no** server `formatJavaScript` endpoint.
 
 ### Why `run()` never rejects
 
@@ -176,6 +183,8 @@ When the worker is bundled by webpack/Next.js, its script URL is something like 
 # Protocol-level unit tests (fast, no Pyodide download)
 pnpm vitest run src/features/codeRunner/lib/workers/pythonExec.worker.spec.ts
 pnpm vitest run src/features/codeRunner/lib/pythonRunner.spec.ts
+pnpm vitest run src/features/codeRunner/lib/javascriptFormatRunner.spec.ts
+pnpm vitest run src/features/codeRunner/lib/workers/prettierFormat.worker.spec.ts
 
 # Runtime args serialization (createPythonRuntimeArgs, createRawRuntimeArgs)
 pnpm vitest run src/features/codeRunner/lib/createRuntimeArgs.spec.ts

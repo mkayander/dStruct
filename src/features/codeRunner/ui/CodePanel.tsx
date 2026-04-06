@@ -26,6 +26,7 @@ import {
   type ProgrammingLanguage,
   useCodeExecution,
 } from "#/features/codeRunner/hooks/useCodeExecution";
+import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
@@ -141,7 +142,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
   }, [language, runMode, setRunMode]);
 
-  const formatJavaScript = api.code.formatJavaScript.useMutation();
+  const formatJavaScript = useJavaScriptFormatCode();
   const formatPython = usePythonFormatCode();
 
   const cancelInFlightFormatting = useCallback(() => {
@@ -324,11 +325,9 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     setFormatUiPending(true);
     try {
       if (language === "javascript") {
-        const result = await formatJavaScript.mutateAsync({ code: codeInput });
+        const formatted = await formatJavaScript.mutateAsync(codeInput);
         if (gen !== formatGenerationRef.current) return;
-        if (result.formatted) {
-          applyFormattedCode(result.formatted);
-        }
+        applyFormattedCode(formatted);
       } else if (language === "python") {
         const formatted = await formatPython.mutateAsync(codeInput);
         if (gen !== formatGenerationRef.current) return;
