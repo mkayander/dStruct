@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,9 +16,19 @@ import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
 import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/shared/hooks";
+import {
+  absoluteUrlFromPathname,
+  DEFAULT_SITE_DESCRIPTION,
+  pathnameFromResolvedUrl,
+} from "#/shared/lib/seo";
+import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
-const ProfilePage: NextPage = () => {
+type ProfilePageProps = {
+  canonicalUrl: string;
+};
+
+const ProfilePage: NextPage<ProfilePageProps> = ({ canonicalUrl }) => {
   const { LL } = useI18nContext();
   const router = useRouter();
   const session = useSession();
@@ -122,6 +132,12 @@ const ProfilePage: NextPage = () => {
 
   return (
     <MainLayout>
+      <SiteSeoHead
+        title="Profile | dStruct"
+        description={DEFAULT_SITE_DESCRIPTION}
+        canonicalUrl={canonicalUrl}
+        noindex
+      />
       <Container>
         {renderAuthStatusSection()}
         {session.status !== "loading" ? (
@@ -144,6 +160,21 @@ const ProfilePage: NextPage = () => {
       </Container>
     </MainLayout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
+  ctx,
+) => {
+  const raw = ctx.params?.userId;
+  const profileUserId = typeof raw === "string" ? raw : "";
+  if (!profileUserId) {
+    return { notFound: true };
+  }
+  const pathOnly =
+    pathnameFromResolvedUrl(ctx.resolvedUrl) ||
+    `/profile/${profileUserId}`;
+  const canonicalUrl = absoluteUrlFromPathname(pathOnly);
+  return { props: { canonicalUrl } };
 };
 
 export default ProfilePage;
