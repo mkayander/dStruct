@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { fallbackProxy } from "#/context/I18nContext";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
+import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { HomeLandingHeroPreviewRuntime } from "#/features/homePage/ui/landing/HomeLandingHeroPreviewRuntime";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import type { RootState } from "#/store/makeStore";
@@ -103,6 +104,74 @@ describe("HomeLandingHeroPreviewRuntime", () => {
     vi.advanceTimersByTime(1200);
 
     expect(store.getState().callstack.frameIndex).toBe(-1);
+    expect(store.getState().callstack.isPlaying).toBe(true);
+
+    vi.useRealTimers();
+  });
+
+  it("auto-replay after reaching the last frame resumes playback following reset", () => {
+    vi.useFakeTimers();
+
+    const initialState = rootReducer(undefined, { type: "test/init" });
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: {
+        ...initialState,
+        callstack: {
+          ...initialState.callstack,
+          isReady: true,
+          isPlaying: false,
+          frameIndex: 0,
+          frames: {
+            ids: ["f1", "f2"],
+            entities: {
+              f1: {
+                id: "f1",
+                timestamp: 1,
+                name: "setVal",
+                treeName: "head",
+                nodeId: "root",
+                structureType: "treeNode",
+                argType: ArgumentType.BINARY_TREE,
+                args: { value: 1 },
+              },
+              f2: {
+                id: "f2",
+                timestamp: 2,
+                name: "setVal",
+                treeName: "head",
+                nodeId: "left",
+                structureType: "treeNode",
+                argType: ArgumentType.BINARY_TREE,
+                args: { value: 2 },
+              },
+            },
+          },
+        },
+      } satisfies RootState,
+    });
+
+    createLandingHeroPreviewStoreMock.mockReturnValueOnce(store);
+
+    render(
+      <StateThemeProvider>
+        <HomeLandingHeroPreviewRuntime LL={fallbackProxy} />
+      </StateThemeProvider>,
+    );
+
+    // TreeViewer is mocked, so simulate playback finishing at the last frame.
+    act(() => {
+      store.dispatch(callstackSlice.actions.setFrameIndex(1));
+      store.dispatch(callstackSlice.actions.setIsPlaying(false));
+    });
+
+    vi.advanceTimersByTime(900);
+
+    expect(store.getState().callstack.frameIndex).toBe(-1);
+    expect(store.getState().callstack.isPlaying).toBe(false);
+
+    vi.advanceTimersByTime(220);
+
     expect(store.getState().callstack.isPlaying).toBe(true);
 
     vi.useRealTimers();

@@ -114,6 +114,16 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     }
   }, []);
 
+  // Auto-replay schedules a 900ms wait, then reset, then a short pause before setIsPlaying(true).
+  // When reset runs, `isLastFrame` becomes false and this effect re-runs; its cleanup must not clear
+  // the post-reset timeout or replay never resumes (playground-style reset sets isPlaying false).
+  const clearAutoReplayEndDelayOnly = useCallback(() => {
+    if (replayTimeoutRef.current !== null) {
+      window.clearTimeout(replayTimeoutRef.current);
+      replayTimeoutRef.current = null;
+    }
+  }, []);
+
   const stopAutoplay = () => {
     clearReplayTimers();
     hasManualOverrideRef.current = true;
@@ -177,9 +187,9 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       }, REPLAY_RESET_PAUSE_MS);
     }, 900);
 
-    return clearReplayTimers;
+    return clearAutoReplayEndDelayOnly;
   }, [
-    clearReplayTimers,
+    clearAutoReplayEndDelayOnly,
     dispatch,
     handleReset,
     isLastFrame,
