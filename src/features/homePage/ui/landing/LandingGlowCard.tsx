@@ -54,27 +54,31 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
     [],
   );
 
-  const resetGlowCenter = useCallback(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    el.style.setProperty("--landing-glow-x", "50%");
-    el.style.setProperty("--landing-glow-y", "50%");
-  }, []);
-
   const accent = theme.appDesign.accentSoft;
   const accentCore = theme.appDesign.accent;
   const delayMs = Math.min(staggerIndex * 55, 480);
 
+  // Align glow wrapper with `MuiCard` theme override (cards use 8px, not `theme.shape.borderRadius`).
+  const muiCardRoot = theme.components?.MuiCard?.styleOverrides?.root;
+  const cardBorderRadius =
+    muiCardRoot &&
+    typeof muiCardRoot === "object" &&
+    "borderRadius" in muiCardRoot &&
+    (typeof muiCardRoot.borderRadius === "number" ||
+      typeof muiCardRoot.borderRadius === "string")
+      ? muiCardRoot.borderRadius
+      : 8;
+
   return (
     <Box
       ref={rootRef}
+      onPointerEnter={updateGlowPosition}
       onPointerMove={updateGlowPosition}
-      onPointerLeave={resetGlowCenter}
       className="landing-glow-card-root"
       sx={{
         position: "relative",
         height: "100%",
-        borderRadius: theme.shape.borderRadius,
+        borderRadius: cardBorderRadius,
         // Default spotlight for SSR / before first pointer move
         "--landing-glow-x": "50%",
         "--landing-glow-y": "42%",
@@ -90,6 +94,7 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           position: "relative",
           zIndex: 0,
           height: "100%",
+          borderRadius: cardBorderRadius,
           overflow: "hidden",
           border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
           bgcolor: alpha(theme.appDesign.surface, 0.62),
