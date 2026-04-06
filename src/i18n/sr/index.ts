@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const sr: Record<keyof Translation, string> = {
+const srOverrides = {
   ACTION: "Akcija",
   ADD_ARGUMENT: "Dodaj argument",
   ADD_NEW_SOLUTION: "Dodaj novo rešenje",
@@ -40,7 +41,6 @@ const sr: Record<keyof Translation, string> = {
   FORWARD: "Napred",
   FORMATTING_ICON: "Ikona formatiranja",
   FORMAT_CODE_WITH: "Formatiraj kod sa",
-  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   HI: "Zdravo, {name:string}!",
   INPUT: "Ulaz",
   LANGUAGE: "Jezik",
@@ -255,6 +255,7 @@ const sr: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "Da li je dStruct otvorenog koda?",
   HOME_FAQ_A_14:
     "Da. Pogledajte LICENSE u repozitorijumu (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const sr = { ...en, ...srOverrides } as Translation;
 export default sr;

@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const pl: Record<keyof Translation, string> = {
+const plOverrides = {
   ACTION: "Akcja",
   ADD_ARGUMENT: "Dodaj argument",
   ADD_NEW_SOLUTION: "Dodaj nowe rozwiązanie",
@@ -40,7 +41,6 @@ const pl: Record<keyof Translation, string> = {
   FORWARD: "Dalej",
   FORMATTING_ICON: "Ikona formatowania",
   FORMAT_CODE_WITH: "Formatuj kod za pomocą",
-  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   HI: "Cześć, {name:string}!",
   INPUT: "Wejście",
   LANGUAGE: "Język",
@@ -255,6 +255,7 @@ const pl: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "Open source?",
   HOME_FAQ_A_14:
     "Tak. Zobacz LICENSE (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const pl = { ...en, ...plOverrides } as Translation;
 export default pl;

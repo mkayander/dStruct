@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const be: Record<keyof Translation, string> = {
+const beOverrides = {
   ACTION: "Дзеянне",
   ADD_ARGUMENT: "Дадаць аргумент",
   ADD_NEW_SOLUTION: "Дадаць новае рашэнне",
@@ -41,7 +42,6 @@ const be: Record<keyof Translation, string> = {
   FILTER_BY_DIFFICULTY: "Складанасць",
   FORMATTING_ICON: "Значок фарматавання",
   FORMAT_CODE_WITH: "Фарматаваць код з дапамогай",
-  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   FORWARD: "Наперад",
   HI: "Вітаю, {name:string}!",
   HOME_AUTH_BODY_SIGNED_OUT: "Увайдзіце, каб сінхранізаваць праекты, тэсты і рашэнні. Публічныя прыклады даступныя без уліковага запісу.",
@@ -212,6 +212,7 @@ const be: Record<keyof Translation, string> = {
   YOU_DONT_OWN_THIS_PROJECT: "Гэты праект вам не належыць",
   YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "Каб захаваць код, трэба ўвайсці",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Спачатку запусціце код",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const be = { ...en, ...beOverrides } as Translation;
 export default be;

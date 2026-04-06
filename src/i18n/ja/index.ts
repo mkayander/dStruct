@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const ja: Record<keyof Translation, string> = {
+const jaOverrides = {
   ACTION: "操作",
   ADD_ARGUMENT: "引数を追加",
   ADD_NEW_SOLUTION: "新しい解答を追加",
@@ -40,7 +41,6 @@ const ja: Record<keyof Translation, string> = {
   FORWARD: "進む",
   FORMATTING_ICON: "フォーマットアイコン",
   FORMAT_CODE_WITH: "次でコードを整形",
-  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   HI: "こんにちは、{name:string}！",
   INPUT: "入力",
   LANGUAGE: "言語",
@@ -255,6 +255,7 @@ const ja: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "dStruct はオープンソースですか？",
   HOME_FAQ_A_14:
     "はい。リポジトリの LICENSE を参照（AGPL-3.0）。",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const ja = { ...en, ...jaOverrides } as Translation;
 export default ja;

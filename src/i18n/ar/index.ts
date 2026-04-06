@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const ar: Record<keyof Translation, string> = {
+const arOverrides = {
   ACTION: "إجراء",
   ADD_ARGUMENT: "إضافة وسيط",
   ADD_NEW_SOLUTION: "إضافة حل جديد",
@@ -40,7 +41,6 @@ const ar: Record<keyof Translation, string> = {
   FORWARD: "للأمام",
   FORMATTING_ICON: "أيقونة التنسيق",
   FORMAT_CODE_WITH: "تنسيق الكود باستخدام",
-  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   HI: "مرحبًا {name:string}!",
   INPUT: "الإدخال",
   LANGUAGE: "اللغة",
@@ -255,6 +255,7 @@ const ar: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "هل dStruct مفتوح المصدر؟",
   HOME_FAQ_A_14:
     "نعم. راجع ملف LICENSE في المستودع (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const ar = { ...en, ...arOverrides } as Translation;
 export default ar;
