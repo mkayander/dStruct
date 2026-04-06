@@ -359,18 +359,18 @@ export const getMatrixChildArrayArgs = (
   const input = JSON.parse(arg.input) as (Array<number | string> | string)[];
   const childArgs: ArrayArg[] = [];
 
-  for (let rowIndex = 0; rowIndex < input.length; rowIndex++) {
-    const name = getChildArrayName(arg.name, rowIndex);
-    const item = input[rowIndex];
+  for (let i = 0; i < input.length; i++) {
+    const name = getChildArrayName(arg.name, i);
+    const item = input[i];
     const newArg: ArrayArg = {
       name,
       parentName: arg.name,
       type: Array.isArray(item) ? ArgumentType.ARRAY : ArgumentType.STRING,
       input: JSON.stringify(item),
-      order: arg.order + rowIndex + 1,
+      order: arg.order + i + 1,
     };
     childArgs.push(newArg);
-    onParsed?.(newArg, rowIndex);
+    onParsed?.(newArg, i);
   }
 
   return childArgs;
@@ -417,16 +417,16 @@ const parseArrayArgument = (
   let newItems: ArrayItemData[] | null = null;
   if (array) {
     newItems = [];
-    for (let itemIndex = 0; itemIndex < array.length; itemIndex++) {
-      let value: string | undefined = safeStringify(array[itemIndex]);
-      const childName = childNames?.[itemIndex];
+    for (let i = 0; i < array.length; i++) {
+      let value: string | undefined = safeStringify(array[i]);
+      const childName = childNames?.[i];
       if (childName) {
         value = undefined;
       }
       const newId = generate();
-      newItems[itemIndex] = {
+      newItems[i] = {
         id: newId,
-        index: itemIndex,
+        index: i,
         value,
         childName,
       };

@@ -20,7 +20,7 @@ Cursor rules to apply (see each file for full wording):
 
 - `react-named-hook-imports.mdc` — named hook imports from `"react"`; no `React.use*` for hooks
 - `no-inline-type-imports.mdc` — no inline `import()` in type positions; use top-level `import type`
-- `no-one-letter-identifiers.mdc` — no single-letter variables/parameters (ESLint `id-length`)
+- `no-one-letter-identifiers.mdc` — no single-letter variables/parameters except `_` (discard) and `i`/`j`/`k` for classic `for` loops (ESLint `id-length`)
 - `i18n-english-fallback-locales.mdc` — new strings only in `en`; other locales use `{ ...en, ...overrides }`, no English copies for fallback
 - `useeffect-business-logic-comments.mdc` — short comments above non-trivial `useEffect` hooks that encode business logic
 

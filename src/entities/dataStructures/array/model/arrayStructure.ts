@@ -135,10 +135,8 @@ export class ControlledArray<T> extends ArrayBase<T> {
       options,
     );
 
-    for (let index = 0; index < inputArray.length; index++) {
-      newArray[index] = mapFn
-        ? mapFn(inputArray[index], index)
-        : inputArray[index];
+    for (let i = 0; i < inputArray.length; i++) {
+      newArray[i] = mapFn ? mapFn(inputArray[i], i) : inputArray[i];
     }
 
     return newArray;
@@ -150,8 +148,8 @@ export class ControlledArray<T> extends ArrayBase<T> {
   ) {
     const array = [];
     if (mapFn) {
-      for (let index = 0; index < inputArray.length; index++) {
-        array[index] = mapFn(inputArray[index] as T, index, inputArray);
+      for (let i = 0; i < inputArray.length; i++) {
+        array[i] = mapFn(inputArray[i] as T, i, inputArray);
       }
     } else {
       array.push(...inputArray);
@@ -194,8 +192,8 @@ export class ControlledArray<T> extends ArrayBase<T> {
       true,
       options,
     );
-    for (let index = 0; index < this.length; index++) {
-      newArray[index] = callback(this[index]!, index, this);
+    for (let i = 0; i < this.length; i++) {
+      newArray[i] = callback(this[i]!, i, this);
     }
     return newArray;
   }

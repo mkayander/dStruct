@@ -153,11 +153,11 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const timeData: number[] = [];
         let output: unknown;
 
-        for (let iteration = 0; iteration < count; iteration++) {
+        for (let i = 0; i < count; i++) {
           const start = performance.now();
           output = runFunction(...input);
           timeData.push(performance.now() - start);
-          const current = iteration + 1;
+          const current = i + 1;
           self.postMessage({
             type: "benchmark-progress",
             current,
