@@ -41,7 +41,8 @@ export const DEFAULT_SITE_DESCRIPTION =
 const DEFAULT_OG_IMAGE_PATH = "/static/screen2.png";
 
 /** Default Open Graph / Twitter image URL for pages that do not set a custom preview image. */
-export const DEFAULT_OG_IMAGE_URL = `${SITE_ORIGIN}${DEFAULT_OG_IMAGE_PATH}` as const;
+export const DEFAULT_OG_IMAGE_URL =
+  `${SITE_ORIGIN}${DEFAULT_OG_IMAGE_PATH}` as const;
 
 /**
  * Escapes `& < > " '` so a string is safe inside XML text nodes (e.g. sitemap `<loc>`).
@@ -65,7 +66,10 @@ export const escapeXmlText = (unsafe: string): string =>
  * @param maxLength - Maximum characters before appending an ellipsis (default 155).
  * @returns Trimmed description, with `…` if truncated.
  */
-export const truncateMetaDescription = (text: string, maxLength = 155): string => {
+export const truncateMetaDescription = (
+  text: string,
+  maxLength = 155,
+): string => {
   const normalized = text.replace(/\s+/g, " ").trim();
   if (normalized.length <= maxLength) {
     return normalized;

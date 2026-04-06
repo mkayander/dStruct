@@ -171,8 +171,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
     return { notFound: true };
   }
   const pathOnly =
-    pathnameFromResolvedUrl(ctx.resolvedUrl) ||
-    `/profile/${profileUserId}`;
+    pathnameFromResolvedUrl(ctx.resolvedUrl) || `/profile/${profileUserId}`;
   const canonicalUrl = absoluteUrlFromPathname(pathOnly);
   return { props: { canonicalUrl } };
 };

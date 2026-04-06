@@ -45,7 +45,7 @@ export const UserSettings: React.FC = () => {
 
   const loading = Boolean(
     userId &&
-      (gqlLoading || linkUser.isPending || unlinkUser.isPending || isLoading),
+    (gqlLoading || linkUser.isPending || unlinkUser.isPending || isLoading),
   );
 
   const handleLinkedUserReset = async () => {
