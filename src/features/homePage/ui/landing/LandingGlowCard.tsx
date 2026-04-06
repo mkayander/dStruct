@@ -11,6 +11,10 @@ import React, { useCallback, useRef } from "react";
 
 import { useLandingReveal } from "#/features/homePage/ui/landing/useLandingReveal";
 
+/** Keeps `staggerIndex * step` distinct through demo row indices (e.g. 8–11). */
+const LANDING_CARD_STAGGER_STEP_MS = 55;
+const LANDING_CARD_STAGGER_MAX_MS = 11 * LANDING_CARD_STAGGER_STEP_MS;
+
 export type LandingGlowCardProps = {
   children: React.ReactNode;
   /** Applied to the inner MUI `Card` (layout, padding, etc.). */
@@ -31,7 +35,10 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
   interactive = false,
 }) => {
   const theme = useTheme();
-  const delayMs = Math.min(staggerIndex * 55, 480);
+  const delayMs = Math.min(
+    staggerIndex * LANDING_CARD_STAGGER_STEP_MS,
+    LANDING_CARD_STAGGER_MAX_MS,
+  );
   const revealRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const { revealSx } = useLandingReveal(revealRef, { staggerMs: delayMs });
