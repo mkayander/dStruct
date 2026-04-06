@@ -8,20 +8,33 @@ import {
   truncateMetaDescription,
 } from "#/shared/lib/seo";
 
+/**
+ * Props for {@link SiteSeoHead}: per-page title, description, canonical, and social preview.
+ */
 export type SiteSeoHeadProps = {
+  /** Document `<title>`; also used for `og:title` and `twitter:title`. */
   title: string;
+  /** Meta description and social descriptions; defaults to {@link DEFAULT_SITE_DESCRIPTION}. */
   description?: string;
+  /** Absolute canonical URL; must match the preferred URL for this document (incl. locale prefix). */
   canonicalUrl: string;
+  /** Open Graph / Twitter image URL; defaults to {@link DEFAULT_OG_IMAGE_URL}. */
   ogImageUrl?: string;
-  /** Use for account or low-value pages that should not appear in search results. */
+  /**
+   * When true, emits `robots` so the page is not indexed.
+   * Default combination is `noindex, follow` so crawlers may still follow links to public pages.
+   */
   noindex?: boolean;
   /**
-   * When `noindex` is true, pass `false` to disallow following links (default).
-   * Prefer `noindex, follow` so crawlers can still discover linked public pages.
+   * When `noindex` is true: if true, use `noindex, nofollow`; if false (default), use `noindex, follow`.
    */
   noFollowWhenNoindex?: boolean;
 };
 
+/**
+ * Renders `next/head` tags for core SEO and social sharing (canonical, meta description,
+ * Open Graph, Twitter Card). Use once per page instead of duplicating tags in `_document`.
+ */
 export const SiteSeoHead: React.FC<SiteSeoHeadProps> = ({
   title,
   description = DEFAULT_SITE_DESCRIPTION,

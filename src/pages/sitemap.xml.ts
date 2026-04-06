@@ -3,16 +3,26 @@ import type { GetServerSideProps } from "next";
 import { db } from "#/server/db/client";
 import { escapeXmlText, SITE_ORIGIN } from "#/shared/lib/seo";
 
+/**
+ * Dynamic sitemap at `/sitemap.xml`: lists the home page, daily and playground entry,
+ * and all public playground projects. URLs are XML-escaped for safe `<loc>` values.
+ */
 type ProjectForSitemap = {
   slug: string;
   updatedAt: string;
 };
 
+/** Formats a date as `YYYY-MM-DD` for sitemap `lastmod` (date-only is widely accepted). */
 function formatLastmod(date: Date | string): string {
   const d = typeof date === "string" ? new Date(date) : date;
   return d.toISOString().split("T")[0] ?? "";
 }
 
+/**
+ * Full absolute URL for sitemap XML, with special characters escaped for text content.
+ *
+ * @param pathname - `""` or `"/"` for home; otherwise path after origin, e.g. `"/daily"`.
+ */
 function absoluteLoc(pathname: string): string {
   const path =
     pathname === "" || pathname === "/"
@@ -23,6 +33,7 @@ function absoluteLoc(pathname: string): string {
   return escapeXmlText(`${SITE_ORIGIN}${path}`);
 }
 
+/** Builds the complete `urlset` XML document for public crawlable URLs. */
 function generateSiteMap(projects: ProjectForSitemap[]) {
   const now = formatLastmod(new Date());
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -62,12 +73,12 @@ function generateSiteMap(projects: ProjectForSitemap[]) {
  `;
 }
 
+/** Placeholder page component; response body is written in `getServerSideProps`. */
 function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  // We make an API call to gather the URLs for our site
   const projects = await db.playgroundProject.findMany({
     where: { isPublic: true },
     select: {
