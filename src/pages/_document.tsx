@@ -20,6 +20,7 @@ function Document({ emotionStyleTags }: MyDocumentProps) {
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
+        <meta name="darkreader-lock" />
         <meta
           name="description"
           content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
