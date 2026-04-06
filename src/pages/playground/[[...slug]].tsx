@@ -14,19 +14,19 @@ import { db } from "#/server/db/client";
 import { useAppConfig, useHasMounted } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import {
-  resolveSsrDeviceType,
-  setDeviceHintResponseHeaders,
-} from "#/shared/lib/ssrDevice";
-import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
-import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
-import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
-import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
-import {
   absoluteUrlFromPathname,
   DEFAULT_SITE_DESCRIPTION,
   pathnameFromResolvedUrl,
 } from "#/shared/lib/seo";
+import {
+  resolveSsrDeviceType,
+  setDeviceHintResponseHeaders,
+} from "#/shared/lib/ssrDevice";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
+import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
+import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
+import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 import type { SsrDeviceType } from "#/themes";
 
 type DesktopWrapperProps = SplitPanelsLayoutProps;

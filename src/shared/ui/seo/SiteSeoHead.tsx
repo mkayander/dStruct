@@ -44,7 +44,9 @@ export const SiteSeoHead: React.FC<SiteSeoHeadProps> = ({
   noFollowWhenNoindex = false,
 }) => {
   const metaDescription = truncateMetaDescription(description);
-  const robotsWhenNoindex = noFollowWhenNoindex ? "noindex, nofollow" : "noindex, follow";
+  const robotsWhenNoindex = noFollowWhenNoindex
+    ? "noindex, nofollow"
+    : "noindex, follow";
 
   return (
     <Head>

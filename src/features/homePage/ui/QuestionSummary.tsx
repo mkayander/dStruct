@@ -71,8 +71,10 @@ const DifficultyIconMap: Record<keyof typeof Difficulty, typeof SvgIcon> = {
   Hard: SignalCellular4Bar,
 };
 
-interface QuestionSummaryProps
-  extends Exclude<BoxProps, "position" | "zIndex"> {
+interface QuestionSummaryProps extends Exclude<
+  BoxProps,
+  "position" | "zIndex"
+> {
   questionDataQuery: QuestionDataQueryResult;
 }
 
