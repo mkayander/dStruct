@@ -1,3 +1,10 @@
+# [1.372.0](https://github.com/mkayander/dStruct/compare/v1.371.1...v1.372.0) (2026-04-06)
+
+
+### Features
+
+* add darkreader-lock meta for Dark Reader extension ([#112](https://github.com/mkayander/dStruct/issues/112)) ([bb57539](https://github.com/mkayander/dStruct/commit/bb57539e235324a44a459570082f4fd279f16462))
+
 ## [1.371.1](https://github.com/mkayander/dStruct/compare/v1.371.0...v1.371.1) (2026-04-06)
 
 
