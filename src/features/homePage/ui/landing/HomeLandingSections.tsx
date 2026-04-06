@@ -19,6 +19,7 @@ import Link from "next/link";
 import React from "react";
 
 import { LANDING_PLAYGROUND_DEMOS } from "#/features/homePage/lib/landingPlaygroundDemos";
+import { HomeLandingPythonDecor } from "#/features/homePage/ui/landing/HomeLandingPythonDecor";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 export type HomeLandingSectionsProps = {
@@ -198,6 +199,8 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           </Grid>
         </Container>
       </Box>
+
+      <HomeLandingPythonDecor />
 
       <Box
         sx={{

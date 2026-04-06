@@ -12,26 +12,22 @@ import React, { useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
+import {
+  LANDING_DECOR_BRAND_BASE_AZIMUTH,
+  LANDING_DECOR_BRAND_BASE_POLAR,
+  LANDING_DECOR_MODEL_CAMERA,
+  LANDING_DECOR_MODEL_DISTANCE,
+  LANDING_DECOR_MODEL_FOV,
+  LANDING_DECOR_MODEL_TARGET,
+} from "#/features/homePage/lib/landingDecor3dConstants";
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { HomeLandingHeroPreview } from "#/features/homePage/ui/landing/HomeLandingHeroPreview";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
-import { PythonLogoModelView } from "#/shared/ui/molecules/PythonLogoModelView";
 
 type HomeLandingHeroProps = {
   LL: TranslationFunctions;
 };
-
-const HERO_BRAND_BASE_AZIMUTH = Math.PI / 4.6;
-const HERO_BRAND_BASE_POLAR = Math.PI / 2.5;
-/** Mirrored resting pose so the left decoration faces inward toward content. */
-const HERO_PYTHON_BASE_AZIMUTH = -HERO_BRAND_BASE_AZIMUTH;
-const HERO_PYTHON_BASE_POLAR = HERO_BRAND_BASE_POLAR;
-
-const HERO_MODEL_CAMERA: [number, number, number] = [1, 2.6, 22];
-const HERO_MODEL_FOV = 38;
-const HERO_MODEL_TARGET: [number, number, number] = [0, 0.75, 0];
-const HERO_MODEL_DISTANCE: readonly [number, number] = [18, 28];
 
 const AmbientBackground = () => {
   const theme = useTheme();
@@ -47,8 +43,6 @@ const AmbientBackground = () => {
         background: `
           radial-gradient(circle at 18% 18%, ${alpha(theme.appDesign.accent, 0.16)} 0%, transparent 42%),
           radial-gradient(circle at 82% 12%, ${alpha(theme.appDesign.accentSoft, 0.12)} 0%, transparent 36%),
-          radial-gradient(circle at 10% 58%, ${alpha(theme.palette.info.main, 0.14)} 0%, transparent 38%),
-          radial-gradient(circle at 6% 78%, ${alpha(theme.palette.warning.main, 0.1)} 0%, transparent 44%),
           linear-gradient(180deg, ${alpha(theme.appDesign.surfaceLow, 0.12)} 0%, transparent 55%)
         `,
         pointerEvents: "none",
@@ -60,22 +54,13 @@ const AmbientBackground = () => {
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
   const brandControlsRef = useRef<ThreeOrbitControls>(null);
-  const pythonControlsRef = useRef<ThreeOrbitControls>(null);
 
   useHeroOrbitModelMotion({
     controlsRef: brandControlsRef,
-    baseAzimuth: HERO_BRAND_BASE_AZIMUTH,
-    basePolar: HERO_BRAND_BASE_POLAR,
+    baseAzimuth: LANDING_DECOR_BRAND_BASE_AZIMUTH,
+    basePolar: LANDING_DECOR_BRAND_BASE_POLAR,
     invertPointerX: false,
     scrollPhasePx: 0,
-  });
-
-  useHeroOrbitModelMotion({
-    controlsRef: pythonControlsRef,
-    baseAzimuth: HERO_PYTHON_BASE_AZIMUTH,
-    basePolar: HERO_PYTHON_BASE_POLAR,
-    invertPointerX: true,
-    scrollPhasePx: 140,
   });
 
   return (
@@ -108,34 +93,10 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
         <LogoModelView
           controlsRef={brandControlsRef}
           interactive={false}
-          cameraPosition={HERO_MODEL_CAMERA}
-          cameraFov={HERO_MODEL_FOV}
-          target={HERO_MODEL_TARGET}
-          distanceRange={HERO_MODEL_DISTANCE}
-        />
-      </Box>
-
-      <Box
-        sx={{
-          position: "absolute",
-          top: { xs: 140, sm: 220, md: 320 },
-          left: { xs: -132, sm: -200, md: -340 },
-          width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-          height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-          opacity: { xs: 0.1, md: 0.17 },
-          filter: "blur(0.4px)",
-          pointerEvents: "none",
-          maskImage:
-            "radial-gradient(circle at 52% 50%, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.42) 64%, transparent 90%)",
-        }}
-      >
-        <PythonLogoModelView
-          controlsRef={pythonControlsRef}
-          interactive={false}
-          cameraPosition={HERO_MODEL_CAMERA}
-          cameraFov={HERO_MODEL_FOV}
-          target={HERO_MODEL_TARGET}
-          distanceRange={HERO_MODEL_DISTANCE}
+          cameraPosition={LANDING_DECOR_MODEL_CAMERA}
+          cameraFov={LANDING_DECOR_MODEL_FOV}
+          target={LANDING_DECOR_MODEL_TARGET}
+          distanceRange={LANDING_DECOR_MODEL_DISTANCE}
         />
       </Box>
 
