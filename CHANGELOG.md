@@ -1,3 +1,10 @@
+## [1.371.1](https://github.com/mkayander/dStruct/compare/v1.371.0...v1.371.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* **theme:** restore full black global app background ([#108](https://github.com/mkayander/dStruct/issues/108)) ([6d7253f](https://github.com/mkayander/dStruct/commit/6d7253f57cc7364e16fc426b58a0e8ad72e5ebd5)), closes [#000000](https://github.com/mkayander/dStruct/issues/000000) [#101417](https://github.com/mkayander/dStruct/issues/101417) [#121212](https://github.com/mkayander/dStruct/issues/121212) [#000000](https://github.com/mkayander/dStruct/issues/000000)
+
 # [1.371.0](https://github.com/mkayander/dStruct/compare/v1.370.0...v1.371.0) (2026-04-05)
 
 

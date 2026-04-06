@@ -1,6 +1,5 @@
 import { darken, useTheme } from "@mui/material";
 import type { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
 import React from "react";
 
 import { ConfigContext } from "#/context";
@@ -22,6 +21,12 @@ import { PageScrollContainer } from "#/shared/ui/templates/PageScrollContainer";
 import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
+import {
+  absoluteUrlFromPathname,
+  DEFAULT_SITE_DESCRIPTION,
+  pathnameFromResolvedUrl,
+} from "#/shared/lib/seo";
+import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import type { SsrDeviceType } from "#/themes";
 
 type DesktopWrapperProps = SplitPanelsLayoutProps;
@@ -49,17 +54,17 @@ const DesktopWrapper: React.FC<DesktopWrapperProps> = ({
   );
 };
 
-const BASE_URL = "https://dstruct.pro";
-
 type PlaygroundPageProps = {
   ssrDeviceType: SsrDeviceType;
   canonicalUrl: string;
   pageTitle: string;
+  pageDescription: string;
 };
 
 const PlaygroundPage: NextPage<PlaygroundPageProps> = ({
   canonicalUrl,
   pageTitle,
+  pageDescription,
 }) => {
   const theme = useTheme();
   const isMobile = useMobileLayout();
@@ -68,10 +73,11 @@ const PlaygroundPage: NextPage<PlaygroundPageProps> = ({
 
   return (
     <ConfigContext.Provider value={data}>
-      <Head>
-        <title>{pageTitle}</title>
-        <link rel="canonical" href={canonicalUrl} />
-      </Head>
+      <SiteSeoHead
+        title={pageTitle}
+        description={pageDescription}
+        canonicalUrl={canonicalUrl}
+      />
       <PageScrollContainer
         isPage={true}
         options={
@@ -107,23 +113,32 @@ const PlaygroundPage: NextPage<PlaygroundPageProps> = ({
 
 export const getServerSideProps: GetServerSideProps<
   PlaygroundPageProps
-> = async ({ req, res, params }) => {
+> = async ({ req, res, params, resolvedUrl }) => {
   const ssrDeviceType = resolveSsrDeviceType(req.headers);
   setDeviceHintResponseHeaders(res);
 
   const slug = params?.slug;
   const slugStr = Array.isArray(slug) ? slug[0] : undefined;
-  const canonicalUrl = slugStr
-    ? `${BASE_URL}/playground/${slugStr}`
-    : `${BASE_URL}/playground`;
+  const pathOnly = pathnameFromResolvedUrl(resolvedUrl) || "/playground";
+  const canonicalUrl = absoluteUrlFromPathname(pathOnly);
 
   let pageTitle = "Playground | dStruct";
+  let pageDescription =
+    "Write code in the dStruct playground and visualize data structures for LeetCode-style problems.";
+
   if (slugStr) {
     const project = await db.playgroundProject.findUnique({
       where: { slug: slugStr },
-      select: { title: true },
+      select: { title: true, description: true },
     });
-    pageTitle = project ? `${project.title} | dStruct` : "Playground | dStruct";
+    if (project) {
+      pageTitle = `${project.title} | dStruct`;
+      pageDescription = project.description?.trim()
+        ? `${project.title}: ${project.description.trim()}`
+        : `Practice ${project.title} in dStruct — visualize solutions and run code in the browser.`;
+    }
+  } else {
+    pageDescription = DEFAULT_SITE_DESCRIPTION;
   }
 
   return {
@@ -131,6 +146,7 @@ export const getServerSideProps: GetServerSideProps<
       ssrDeviceType,
       canonicalUrl,
       pageTitle,
+      pageDescription,
     },
   };
 };

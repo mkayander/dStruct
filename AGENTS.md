@@ -24,6 +24,8 @@ Cursor rules to apply (see each file for full wording):
 
 **Tooling:** Use **pnpm** for installs and scripts (`pnpm install`, `pnpm dev`, `pnpm lint`, `pnpm test`). Local dev: `pnpm dev`. Prefer iterating with the dev server rather than repeated full production builds during exploration.
 
+**Project rules:** See **`.cursorrules`** for stack, architecture, tRPC/Redux boundaries, styling (MUI + Emotion, no Tailwind), testing conventions, and feature workflow. **`.cursor/rules/*.mdc`** adds always-on style rules (React hook imports, type imports, `useEffect` comments).
+
 ## Cursor Cloud specific instructions
 
 ### Services overview
@@ -57,7 +59,7 @@ Refer to `package.json` scripts. Summary of most-used:
 
 - **Dev server**: `pnpm dev`
 - **Lint**: `pnpm lint` (runs ESLint + TypeScript `--noEmit`)
-- **Tests**: `pnpm test:ci` (single run) or `pnpm test` (watch mode)
+- **Tests**: `pnpm test` or `pnpm test:ci` (both run Vitest once); `pnpm test:watch` for watch mode
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)
 - **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`)
 

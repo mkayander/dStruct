@@ -8,12 +8,13 @@ import { EmotionCacheContext } from "#/shared/emotion/EmotionCacheContext";
 
 type MyDocumentProps = DocumentProps & {
   emotionStyleTags?: React.ReactElement;
+  htmlLang?: string;
 };
 
-function Document({ emotionStyleTags }: MyDocumentProps) {
+function Document({ emotionStyleTags, htmlLang = "en" }: MyDocumentProps) {
   // noinspection HtmlRequiredTitleElement
   return (
-    <Html lang="en">
+    <Html lang={htmlLang}>
       <Head>
         {emotionStyleTags}
         <meta
@@ -21,42 +22,6 @@ function Document({ emotionStyleTags }: MyDocumentProps) {
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <meta name="darkreader-lock" />
-        <meta
-          name="description"
-          content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
-        />
-
-        <meta property="og:site_name" content="dStruct" />
-        <meta property="og:title" content="dStruct" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dstruct.pro/" />
-        <meta
-          property="og:description"
-          content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
-        />
-        <meta
-          property="og:image"
-          content="https://dstruct.pro/static/screen2.png"
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          property="og:image:alt"
-          content="dStruct - LeetCode solution visualizer"
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="dstruct.pro" />
-        <meta property="twitter:url" content="https://dstruct.pro/" />
-        <meta name="twitter:title" content="dStruct" />
-        <meta
-          name="twitter:description"
-          content="dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor."
-        />
-        <meta
-          name="twitter:image"
-          content="https://dstruct.pro/static/screen2.png"
-        />
 
         <link
           rel="apple-touch-icon"
@@ -131,9 +96,12 @@ Document.getInitialProps = async (ctx: DocumentContext) => {
     />
   );
 
+  const htmlLang = ctx.locale ?? "en";
+
   return {
     ...initialProps,
     emotionStyleTags,
+    htmlLang,
   };
 };
 
