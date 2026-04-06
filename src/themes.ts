@@ -8,8 +8,8 @@ import type { Difficulty } from "#/graphql/generated";
 export type SsrDeviceType = "mobile" | "desktop";
 
 const obsidianTokens = {
-  /** True black canvas (body / app shell); sections can use `background` for lifted tones. */
-  canvas: "#000000",
+  /** App shell canvas (body / CssBaseline); landing sections can use `background` for lifted tones. */
+  canvas: "#121212",
   background: "#101417",
   surfaceLow: "#181c1f",
   surface: "#1c2023",
