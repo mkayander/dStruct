@@ -1,3 +1,10 @@
+## [1.373.1](https://github.com/mkayander/dStruct/compare/v1.373.0...v1.373.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* narrow swapChildren playback batching for landing hero callstack ([#115](https://github.com/mkayander/dStruct/issues/115)) ([1717194](https://github.com/mkayander/dStruct/commit/1717194e805b8d4092d6e0950de5f749104abadf))
+
 # [1.373.0](https://github.com/mkayander/dStruct/compare/v1.372.0...v1.373.0) (2026-04-06)
 
 
