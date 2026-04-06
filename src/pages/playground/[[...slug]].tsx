@@ -22,8 +22,8 @@ import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLa
 import { SplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 import {
+  absoluteUrlFromPathname,
   DEFAULT_SITE_DESCRIPTION,
-  SITE_ORIGIN,
 } from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import type { SsrDeviceType } from "#/themes";
@@ -112,15 +112,15 @@ const PlaygroundPage: NextPage<PlaygroundPageProps> = ({
 
 export const getServerSideProps: GetServerSideProps<
   PlaygroundPageProps
-> = async ({ req, res, params }) => {
+> = async ({ req, res, params, resolvedUrl }) => {
   const ssrDeviceType = resolveSsrDeviceType(req.headers);
   setDeviceHintResponseHeaders(res);
 
   const slug = params?.slug;
   const slugStr = Array.isArray(slug) ? slug[0] : undefined;
-  const canonicalUrl = slugStr
-    ? `${SITE_ORIGIN}/playground/${slugStr}`
-    : `${SITE_ORIGIN}/playground`;
+  const pathOnly =
+    resolvedUrl.split("?")[0]?.split("#")[0] ?? "/playground";
+  const canonicalUrl = absoluteUrlFromPathname(pathOnly);
 
   let pageTitle = "Playground | dStruct";
   let pageDescription =

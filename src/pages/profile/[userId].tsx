@@ -16,15 +16,18 @@ import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
 import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/shared/hooks";
-import { DEFAULT_SITE_DESCRIPTION, SITE_ORIGIN } from "#/shared/lib/seo";
+import {
+  absoluteUrlFromPathname,
+  DEFAULT_SITE_DESCRIPTION,
+} from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 type ProfilePageProps = {
-  profileUserId: string;
+  canonicalUrl: string;
 };
 
-const ProfilePage: NextPage<ProfilePageProps> = ({ profileUserId }) => {
+const ProfilePage: NextPage<ProfilePageProps> = ({ canonicalUrl }) => {
   const { LL } = useI18nContext();
   const router = useRouter();
   const session = useSession();
@@ -131,7 +134,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ profileUserId }) => {
       <SiteSeoHead
         title="Profile | dStruct"
         description={DEFAULT_SITE_DESCRIPTION}
-        canonicalUrl={`${SITE_ORIGIN}/profile/${profileUserId}`}
+        canonicalUrl={canonicalUrl}
         noindex
       />
       <Container>
@@ -166,7 +169,11 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
   if (!profileUserId) {
     return { notFound: true };
   }
-  return { props: { profileUserId } };
+  const pathOnly =
+    ctx.resolvedUrl.split("?")[0]?.split("#")[0] ??
+    `/profile/${profileUserId}`;
+  const canonicalUrl = absoluteUrlFromPathname(pathOnly);
+  return { props: { canonicalUrl } };
 };
 
 export default ProfilePage;

@@ -8,23 +8,23 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import type { NextPage } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 
 import { useDailyQuestionData } from "#/api";
 import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
 import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
-import type { Locales, Translations } from "#/i18n/i18n-types";
+import { getI18nPropsWithCanonical } from "#/i18n/getI18nProps";
 import { useI18nContext } from "#/shared/hooks";
-import { SITE_ORIGIN } from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
-const DailyProblemPage: NextPage<{
-  i18n: {
-    locale: Locales;
-    dictionary: Translations;
-  };
-}> = () => {
+export const getStaticProps = getI18nPropsWithCanonical("/daily");
+
+type DailyProblemPageProps = InferGetStaticPropsType<typeof getStaticProps>;
+
+const DailyProblemPage: NextPage<DailyProblemPageProps> = ({
+  canonicalUrl,
+}) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
   const questionDataQuery = useDailyQuestionData();
@@ -35,7 +35,7 @@ const DailyProblemPage: NextPage<{
       <SiteSeoHead
         title={`${LL.HOME_DAILY_SECTION_TITLE()} — dStruct`}
         description={`${LL.HOME_DAILY_SECTION_TITLE()}. ${LL.HOME_DAILY_SECTION_LEAD()}`}
-        canonicalUrl={`${SITE_ORIGIN}/daily`}
+        canonicalUrl={canonicalUrl}
       />
       <Box
         sx={{
@@ -115,7 +115,5 @@ const DailyProblemPage: NextPage<{
     </MainLayout>
   );
 };
-
-export { getI18nProps as getStaticProps } from "#/i18n/getI18nProps";
 
 export default DailyProblemPage;

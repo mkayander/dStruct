@@ -1,5 +1,11 @@
 export const SITE_ORIGIN = "https://dstruct.pro" as const;
 
+/** Canonical URL from a request path (e.g. Next.js `resolvedUrl` without query). */
+export const absoluteUrlFromPathname = (pathname: string): string => {
+  const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  return `${SITE_ORIGIN}${path}`;
+};
+
 export const DEFAULT_SITE_DESCRIPTION =
   "dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor.";
 
