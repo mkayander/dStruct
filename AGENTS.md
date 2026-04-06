@@ -21,6 +21,7 @@ Cursor rules to apply (see each file for full wording):
 - `react-named-hook-imports.mdc` — named hook imports from `"react"`; no `React.use*` for hooks
 - `no-inline-type-imports.mdc` — no inline `import()` in type positions; use top-level `import type`
 - `no-one-letter-identifiers.mdc` — no single-letter variables/parameters (ESLint `id-length`)
+- `i18n-english-fallback-locales.mdc` — new strings only in `en`; other locales use `{ ...en, ...overrides }`, no English copies for fallback
 - `useeffect-business-logic-comments.mdc` — short comments above non-trivial `useEffect` hooks that encode business logic
 
 **Tooling:** Use **pnpm** for installs and scripts (`pnpm install`, `pnpm dev`, `pnpm lint`, `pnpm test`). Local dev: `pnpm dev`. Prefer iterating with the dev server rather than repeated full production builds during exploration.
@@ -35,7 +36,7 @@ Cursor rules to apply (see each file for full wording):
 |---|---|---|
 | Next.js dev server | `pnpm dev` | Runs on `http://localhost:3000`. Core app (frontend + tRPC API). |
 | PostgreSQL | `sudo service postgresql start` | Must be running before dev server or any DB commands. |
-| Python runner (optional) | `pnpm runners:dev` | Only needed for server-side Python code execution. |
+| Python in the app | (none) | Python runs in the browser via Pyodide (workers); no separate Python server. |
 
 ### Node.js version
 
