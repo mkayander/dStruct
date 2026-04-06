@@ -101,6 +101,8 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           position: "relative",
           zIndex: 0,
           height: "100%",
+          display: "flex",
+          flexDirection: "column",
           borderRadius: cardBorderRadius,
           overflow: "hidden",
           border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
@@ -121,7 +123,53 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           ...cardSx,
         }}
       >
-        {children}
+        {interactive ? (
+          <>
+            <Box
+              aria-hidden
+              className="landing-glow-card-ambient"
+              sx={{
+                position: "absolute",
+                inset: 0,
+                zIndex: 0,
+                borderRadius: "inherit",
+                pointerEvents: "none",
+                opacity: 0,
+                transition: "opacity 0.4s ease",
+                background: `radial-gradient(
+                  520px circle at var(--landing-glow-x) var(--landing-glow-y),
+                  ${alpha(accent, 0.14)} 0%,
+                  ${alpha(accentCore, 0.06)} 42%,
+                  transparent 58%
+                )`,
+                ".landing-glow-card-root:hover &": {
+                  opacity: 1,
+                },
+              }}
+            />
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: 1,
+                flex: "1 1 auto",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: 0,
+                height: "100%",
+                "& .MuiCardActionArea-root": {
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                },
+              }}
+            >
+              {children}
+            </Box>
+          </>
+        ) : (
+          children
+        )}
       </Card>
       <Box
         aria-hidden
