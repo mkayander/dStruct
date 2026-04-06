@@ -32,6 +32,7 @@ const config = {
     ],
   },
   transpilePackages: [
+    "@mui/material-nextjs",
     "@apollo/client",
     "@hello-pangea/dnd",
     "@monaco-editor/react",

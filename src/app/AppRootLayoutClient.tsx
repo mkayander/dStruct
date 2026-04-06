@@ -1,44 +1,50 @@
+"use client";
+
 import { ApolloProvider } from "@apollo/client";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { type AppProps } from "next/app";
 import { SnackbarProvider } from "notistack";
-import React from "react";
+import React, { type ReactNode } from "react";
 import "symbol-observable";
 
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
-import { EmotionCacheProvider } from "#/shared/emotion/EmotionCacheContext";
+import type { Locales } from "#/i18n/i18n-types";
 import { TrpcProvider } from "#/shared/trpc/TrpcProvider";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
-import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
+import { AppRouterI18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { isSnackbarClosable } from "#/shared/ui/snackbarClosability";
 import { ReduxProvider } from "#/store/provider";
-import type { SsrDeviceType } from "#/themes";
 
-import "#/styles/globals.css";
-
-import "overlayscrollbars/overlayscrollbars.css";
-
-type MyAppProps = {
+type AppRootLayoutClientProps = {
+  children: ReactNode;
+  i18n: I18nProps;
   session: Session | null;
-  i18n?: I18nProps;
-  ssrDeviceType?: SsrDeviceType;
+  locale: Locales;
 };
 
-const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
+/**
+ * Mirrors `pages/_app` providers for App Router routes (default locale home).
+ */
+export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
+  children,
+  i18n,
+  session,
+  locale,
+}) => {
   return (
-    <EmotionCacheProvider>
+    <AppRouterCacheProvider options={{ key: "css" }}>
       <TrpcProvider>
         <ReduxProvider>
-          <SessionProvider session={pageProps.session}>
+          <SessionProvider session={session}>
             <ApolloProvider client={apolloClient}>
-              <StateThemeProvider ssrDeviceType={pageProps.ssrDeviceType}>
+              <StateThemeProvider>
                 <SnackbarProvider
                   maxSnack={4}
                   action={(snackbarKey) =>
@@ -55,22 +61,20 @@ const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
                       "snackbar-mobile-bottom-margin",
                   }}
                 >
-                  <I18nProvider i18n={pageProps.i18n}>
+                  <AppRouterI18nProvider locale={locale} i18n={i18n}>
                     <ProjectBrowserProvider>
-                      <Component {...pageProps} />
+                      {children}
                       <ProjectBrowser />
                       <Analytics />
                       <SpeedInsights />
                     </ProjectBrowserProvider>
-                  </I18nProvider>
+                  </AppRouterI18nProvider>
                 </SnackbarProvider>
               </StateThemeProvider>
             </ApolloProvider>
           </SessionProvider>
         </ReduxProvider>
       </TrpcProvider>
-    </EmotionCacheProvider>
+    </AppRouterCacheProvider>
   );
 };
-
-export default MyApp;
