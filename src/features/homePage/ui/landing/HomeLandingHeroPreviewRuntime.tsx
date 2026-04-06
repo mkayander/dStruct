@@ -95,7 +95,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const isLastFrame = useAppSelector(selectIsLastFrame);
   const isRootFrame = useAppSelector(selectIsRootFrame);
   const playbackStepGroups = useMemo(
-    () => getPlaybackStepGroups(callstack.frames),
+    () =>
+      getPlaybackStepGroups(callstack.frames, { forCallstackDisplay: true }),
     [callstack.frames],
   );
   const activePlaybackStepIndex = useMemo(

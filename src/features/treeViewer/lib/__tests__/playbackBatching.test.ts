@@ -11,10 +11,17 @@ import {
   getPreviousPlaybackFrameIndex,
 } from "../playbackBatching";
 
+type MockChildArgs = {
+  childId: string | null;
+  childTreeName?: string;
+  prevArgs?: { childId: string | null; childTreeName?: string };
+};
+
 const createMockFrame = (
   id: string,
   name: "setLeftChild" | "setRightChild" | "setVal" | "setColor" | "blink",
   nodeId: string,
+  childPointer?: MockChildArgs,
 ): CallFrame => {
   if (name === "setVal") {
     return {
@@ -62,10 +69,13 @@ const createMockFrame = (
     nodeId,
     structureType: "treeNode",
     argType: ArgumentType.BINARY_TREE,
-    args: {
+    args: childPointer ?? {
       childId: `${nodeId}-${name}`,
       childTreeName: "head",
     },
+    ...(childPointer?.prevArgs !== undefined
+      ? { prevArgs: childPointer.prevArgs }
+      : {}),
   };
 };
 
@@ -120,20 +130,44 @@ describe("playbackBatching", () => {
     expect(getPlaybackStepIndex(groups, 3)).toBe(1);
   });
 
-  it("does not batch root swap across intervening subtree child-pointer work", () => {
+  it("batches parent swap across intervening subtree child-pointer work for playback", () => {
     const frames = [
       createMockFrame("f1", "setVal", "root"),
-      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f2", "setLeftChild", "root", {
+        childId: "child",
+        childTreeName: "head",
+      }),
       createMockFrame("f3", "setLeftChild", "child"),
       createMockFrame("f4", "setColor", "child"),
       createMockFrame("f5", "setRightChild", "root"),
       createMockFrame("f6", "setVal", "tail"),
     ];
 
-    expect(getNextPlaybackFrameIndex(frames, 0)).toBe(1);
-    expect(getNextPlaybackFrameIndex(frames, 1)).toBe(2);
-    expect(getPreviousPlaybackFrameIndex(frames, 4)).toBe(3);
+    expect(getNextPlaybackFrameIndex(frames, 0)).toBe(4);
+    expect(getPreviousPlaybackFrameIndex(frames, 4)).toBe(0);
     expect(getPlaybackStepGroups(frames)).toMatchObject([
+      { kind: "single", startIndex: 0, endIndex: 0 },
+      { kind: "swap", startIndex: 1, endIndex: 4 },
+      { kind: "single", startIndex: 5, endIndex: 5 },
+    ]);
+  });
+
+  it("splits that sequence for compact callstack display", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setLeftChild", "root", {
+        childId: "child",
+        childTreeName: "head",
+      }),
+      createMockFrame("f3", "setLeftChild", "child"),
+      createMockFrame("f4", "setColor", "child"),
+      createMockFrame("f5", "setRightChild", "root"),
+      createMockFrame("f6", "setVal", "tail"),
+    ];
+
+    expect(
+      getPlaybackStepGroups(frames, { forCallstackDisplay: true }),
+    ).toMatchObject([
       { kind: "single", startIndex: 0, endIndex: 0 },
       { kind: "single", startIndex: 1, endIndex: 1 },
       { kind: "single", startIndex: 2, endIndex: 2 },
@@ -143,10 +177,33 @@ describe("playbackBatching", () => {
     ]);
   });
 
+  it("wide playback still batches when left clear uses prevArgs child id (detach subtree)", () => {
+    const frames = [
+      createMockFrame("f1", "setVal", "root"),
+      createMockFrame("f2", "setLeftChild", "root", {
+        childId: null,
+        childTreeName: "head",
+        prevArgs: { childId: "sub", childTreeName: "head" },
+      }),
+      createMockFrame("f3", "setLeftChild", "sub"),
+      createMockFrame("f4", "setRightChild", "root"),
+      createMockFrame("f5", "setVal", "tail"),
+    ];
+
+    expect(getPlaybackStepGroups(frames)).toMatchObject([
+      { kind: "single", startIndex: 0, endIndex: 0 },
+      { kind: "swap", startIndex: 1, endIndex: 3 },
+      { kind: "single", startIndex: 4, endIndex: 4 },
+    ]);
+  });
+
   it("does not batch across another node's child-pointer between sibling setters", () => {
     const frames = [
       createMockFrame("f1", "setVal", "root"),
-      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f2", "setLeftChild", "root", {
+        childId: "left-node",
+        childTreeName: "head",
+      }),
       createMockFrame("f3", "setLeftChild", "other"),
       createMockFrame("f4", "setRightChild", "root"),
       createMockFrame("f5", "setVal", "tail"),
