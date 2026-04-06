@@ -14,8 +14,8 @@ import {
 import { PythonLogoModelView } from "#/shared/ui/molecules/PythonLogoModelView";
 
 /**
- * Background Python 3D logo between "How it works" and Browse demos — mirrors the hero
- * brand model (size / camera) but anchored on the left, lower on the page.
+ * Ambient Python 3D logo: absolutely positioned within a `position: relative` parent
+ * so it does not take foreground layout space (same idea as the hero brand model).
  */
 export const HomeLandingPythonDecor: React.FC = () => {
   const pythonControlsRef = useRef<ThreeOrbitControls>(null);
@@ -30,14 +30,13 @@ export const HomeLandingPythonDecor: React.FC = () => {
 
   return (
     <Box
-      component="section"
       aria-hidden
       sx={{
-        position: "relative",
+        position: "absolute",
+        inset: 0,
         overflow: "visible",
-        minHeight: { xs: 300, sm: 440, md: 560, lg: 640 },
-        bgcolor: "background.default",
         pointerEvents: "none",
+        zIndex: 0,
       }}
     >
       <Box
