@@ -272,8 +272,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   return (
     <Dialog {...props} onClose={onClose}>
       <form
-        onSubmit={(e) => {
-          formik.handleSubmit(e);
+        onSubmit={(event) => {
+          formik.handleSubmit(event);
         }}
       >
         <DialogTitle>

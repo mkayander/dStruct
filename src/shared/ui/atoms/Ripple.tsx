@@ -5,8 +5,11 @@ import styles from "./Ripple.module.scss";
 export const Ripple = () => {
   const rippleRef = useRef<HTMLSpanElement>(null);
 
-  const handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const parent = (e.target as HTMLSpanElement).parentElement as HTMLElement;
+  const handleClick = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+  ) => {
+    const parent = (event.target as HTMLSpanElement)
+      .parentElement as HTMLElement;
     if (!parent) return;
     const ripple = rippleRef.current;
     if (!ripple) return;
@@ -16,8 +19,8 @@ export const Ripple = () => {
     const radius = diameter / 2;
 
     ripple.style.width = ripple.style.height = `${diameter}px`;
-    ripple.style.left = `${e.clientX - rect.left - radius}px`;
-    ripple.style.top = `${e.clientY - rect.top - radius}px`;
+    ripple.style.left = `${event.clientX - rect.left - radius}px`;
+    ripple.style.top = `${event.clientY - rect.top - radius}px`;
     ripple.style.opacity = "1";
 
     // Retrigger the custom ripple animation

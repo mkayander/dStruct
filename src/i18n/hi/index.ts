@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const hi: Record<keyof Translation, string> = {
+const hiOverrides = {
   ACTION: "क्रिया",
   ADD_ARGUMENT: "आर्ग्युमेंट जोड़ें",
   ADD_NEW_SOLUTION: "नया समाधान जोड़ें",
@@ -254,6 +255,7 @@ const hi: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "क्या dStruct ओपन सोर्स है?",
   HOME_FAQ_A_14:
     "हाँ। रिपॉज़िटरी में LICENSE देखें (AGPL-3.0)।",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const hi = { ...en, ...hiOverrides } as Translation;
 export default hi;

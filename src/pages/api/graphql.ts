@@ -22,9 +22,9 @@ export default async function handler(
       },
       data: req.body,
     });
-  } catch (e: unknown) {
-    if (e instanceof AxiosError) {
-      response = e.response;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      response = error.response;
     }
   }
 

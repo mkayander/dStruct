@@ -17,7 +17,7 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
 import {
@@ -26,6 +26,8 @@ import {
   type ProgrammingLanguage,
   useCodeExecution,
 } from "#/features/codeRunner/hooks/useCodeExecution";
+import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
+import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
@@ -49,10 +51,6 @@ import {
 } from "#/shared/hooks";
 import { LoadingSkeletonOverlay } from "#/shared/ui/atoms/LoadingSkeletonOverlay";
 import { SolutionComplexityLabel } from "#/shared/ui/atoms/SolutionComplexityLabel";
-import {
-  PYTHON_SUPPORT_MODAL_ID,
-  PythonSupportModal,
-} from "#/shared/ui/organisms/PythonSupportModal";
 import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { type PanelContentProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
@@ -79,8 +77,8 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     "mode",
     {
       defaultValue: "structure",
-      validate: (v): v is "structure" | "benchmark" =>
-        v === "structure" || v === "benchmark",
+      validate: (rawMode): rawMode is "structure" | "benchmark" =>
+        rawMode === "structure" || rawMode === "benchmark",
     },
   );
   const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(
@@ -90,8 +88,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       validate: isLanguageValid,
     },
   );
-  const [modalName, setModalName] = useSearchParam("modal");
-
   const [tabValue, setTabValue] = useState("1");
   const [codeInput, setCodeInput] = useState("");
   const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
@@ -104,6 +100,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   );
   const [editorState, setEditorState] = useState(EditorState.INITIAL);
   const [isFormattingAvailable, setIsFormattingAvailable] = useState(true);
+  /** True while a format request is in flight for the current generation (see formatGenerationRef). */
+  const [formatUiPending, setFormatUiPending] = useState(false);
+
+  /** Bumped to invalidate in-flight format when the user edits or switches language. */
+  const formatGenerationRef = useRef(0);
+  /** When true, editor updates come from applying formatted code — do not cancel format. */
+  const skipFormatCancelRef = useRef(false);
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
@@ -139,9 +142,20 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
   }, [language, runMode, setRunMode]);
 
+  const formatJavaScript = useJavaScriptFormatCode();
+  const formatPython = usePythonFormatCode();
+
+  const cancelInFlightFormatting = useCallback(() => {
+    formatGenerationRef.current += 1;
+    setFormatUiPending(false);
+    formatJavaScript.reset();
+    formatPython.reset();
+  }, [formatJavaScript, formatPython]);
+
   // Update code on solution change
   useEffect(() => {
     if (!currentSolution.data) return;
+    cancelInFlightFormatting();
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
     dispatch(projectSlice.actions.loadFinish());
@@ -154,8 +168,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       textModel.setValue(newCode);
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSolution.data?.slug, language, textModel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- load editor when solution slug/language/model changes; avoid re-running on unrelated state
+  }, [
+    cancelInFlightFormatting,
+    currentSolution.data?.slug,
+    language,
+    textModel,
+  ]);
 
   // Handle code errors
   useEffect(() => {
@@ -212,6 +231,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   };
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
+    cancelInFlightFormatting();
     setLanguage(event.target.value);
   };
 
@@ -271,6 +291,10 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     setCodeInput(value ?? "");
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
+    if (!ev.isFlush && !skipFormatCancelRef.current) {
+      cancelInFlightFormatting();
+    }
+
     // Only update the solution on server if it was a user edit
     if (ev.isFlush) {
       return;
@@ -279,31 +303,48 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     updateSolutionOnServer(value, ev);
   };
 
-  const formatJavaScript = api.code.formatJavaScript.useMutation();
+  const applyFormattedCode = (formatted: string) => {
+    if (!textModel) return;
+    skipFormatCancelRef.current = true;
+    try {
+      const edit: monaco.editor.IIdentifiedSingleEditOperation = {
+        range: textModel.getFullModelRange(),
+        text: formatted,
+      };
+      textModel.pushEditOperations([], [edit], () => null);
+      editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+    } finally {
+      queueMicrotask(() => {
+        skipFormatCancelRef.current = false;
+      });
+    }
+  };
 
   const handleFormatCode = async () => {
-    if (language === "javascript") {
-      try {
-        const result = await formatJavaScript.mutateAsync({ code: codeInput });
-        if (textModel && result.formatted) {
-          const edit: monaco.editor.IIdentifiedSingleEditOperation = {
-            range: textModel.getFullModelRange(),
-            text: result.formatted,
-          };
-          textModel.pushEditOperations(
-            [],
-            [edit],
-            () => null, // no undo stop
-          );
-          // Reset cursor to beginning since we don't have cursor offset from server
-          editorInstance?.setPosition({ lineNumber: 1, column: 1 });
-        }
-      } catch (error) {
+    const gen = ++formatGenerationRef.current;
+    setFormatUiPending(true);
+    try {
+      if (language === "javascript") {
+        const formatted = await formatJavaScript.mutateAsync(codeInput);
+        if (gen !== formatGenerationRef.current) return;
+        applyFormattedCode(formatted);
+      } else if (language === "python") {
+        const formatted = await formatPython.mutateAsync(codeInput);
+        if (gen !== formatGenerationRef.current) return;
+        applyFormattedCode(formatted);
+      }
+    } catch (error) {
+      if (gen === formatGenerationRef.current) {
         console.error("Error formatting code:", error);
         enqueueSnackbar("Failed to format code", { variant: "error" });
       }
+    } finally {
+      // Only the latest in-flight format clears loading (double-click starts a new gen).
+      if (gen === formatGenerationRef.current) {
+        setIsFormattingAvailable(false);
+        setFormatUiPending(false);
+      }
     }
-    setIsFormattingAvailable(false);
   };
 
   const copyCode = () => {
@@ -331,11 +372,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
         }
       }}
     >
-      <PythonSupportModal
-        open={modalName === PYTHON_SUPPORT_MODAL_ID}
-        onClose={() => setModalName("")}
-      />
-
       <LoadingSkeletonOverlay />
 
       <TabContext value={tabValue}>
@@ -473,8 +509,12 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                           height={22}
                         />
                       </>
+                    ) : language === "python" ? (
+                      <span>{LL.FORMAT_CODE_WITH_BLACK()}</span>
                     ) : (
-                      <span>Formatting is only available for JavaScript</span>
+                      <span>
+                        Formatting is only available for JavaScript and Python
+                      </span>
                     )}
                   </Box>
                 }
@@ -482,8 +522,11 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                 placement="left"
               >
                 <IconButton
-                  disabled={!isFormattingAvailable || language !== "javascript"}
-                  loading={formatJavaScript.isPending}
+                  disabled={
+                    !isFormattingAvailable ||
+                    (language !== "javascript" && language !== "python")
+                  }
+                  loading={formatUiPending}
                   onClick={handleFormatCode}
                   style={{ marginRight: "-6px", marginTop: "2px" }}
                 >

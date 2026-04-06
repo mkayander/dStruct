@@ -38,20 +38,22 @@ type SerializedPythonArg = { type: string; value: unknown };
 // Main thread -> Worker
 type PythonWorkerInMessage =
   | { type: "INIT"; indexURL?: string }
-  | { type: "RUN"; requestId: string; code: string; args?: SerializedPythonArg[] };
+  | { type: "RUN"; requestId: string; code: string; args?: SerializedPythonArg[] }
+  | { type: "FORMAT"; requestId: string; code: string };
 
 // Worker -> Main thread
 type PythonWorkerOutMessage =
   | { type: "READY" }
   | { type: "PROGRESS"; value: number; stage: string }  // during INIT (5, 45, 70, 100)
   | { type: "RUN_RESULT"; requestId: string; result: ExecutionResult }
+  | { type: "FORMAT_RESULT"; requestId: string; formatted: string }
   | { type: "ERROR"; requestId: string;
       error: { name: string; message: string; stack?: string } };
 ```
 
 During INIT, the worker sends **PROGRESS** messages (value 0–100, stage label) so the UI can show a loading snackbar. The main thread subscribes via `usePyodideProgressSnackbar`.
 
-Calls are **serialized**: only one RUN is in-flight at a time. The `requestId` (a short UUID) is still included for correctness. If `run()` is called while a previous run is still executing, the new call awaits a gate promise that resolves when the current run finishes.
+Calls are **serialized**: only one worker RPC (`RUN` or `FORMAT`) is in-flight at a time. The `requestId` (a short UUID) is still included for correctness. If `run()` is called while a previous run or format is still executing, the new call awaits a gate promise that resolves when the current operation finishes.
 
 ## `ExecutionResult` Shape
 
@@ -74,17 +76,6 @@ interface ExecutionResult {
 The `run()` method **never rejects**. All failure modes (timeout, worker crash, init failure, Python error) resolve with an `ExecutionResult` containing a populated `error` field.
 
 ## Configuration
-
-### Execution Mode
-
-Set the `NEXT_PUBLIC_PYTHON_EXEC_MODE` environment variable to control the backend:
-
-| Value | Description |
-|---|---|
-| `pyodide` **(default)** | In-browser execution via Pyodide Web Worker. No setup needed. |
-| `server` | Legacy mode: sends code to the local Express runner on `localhost:8085`. Requires `pnpm dev:all`. |
-
-If the variable is not set, **pyodide** mode is used automatically.
 
 ### Pyodide CDN URL
 
@@ -112,13 +103,16 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 
 | File | Purpose |
 |---|---|
-| `src/features/codeRunner/lib/workers/pythonExec.worker.ts` | Web Worker: loads Pyodide, writes harness to FS, handles INIT/RUN messages |
+| `src/features/codeRunner/lib/workers/pythonExec.worker.ts` | Web Worker: loads Pyodide, writes harness to FS, handles INIT/RUN/FORMAT messages |
 | `src/features/codeRunner/lib/workers/pythonExec.worker.types.ts` | TypeScript types for the worker message protocol |
 | `src/features/codeRunner/lib/createPythonRuntimeArgs.ts` | Serializes case arguments to `SerializedPythonArg[]` for the Python harness |
-| `src/features/codeRunner/lib/pythonRunner.ts` | Main-thread singleton: worker lifecycle, timeout, auto-recreate, serialization gate |
-| `src/features/codeRunner/hooks/usePythonCodeRunner.ts` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
+| `src/features/codeRunner/lib/pythonRunner.ts` | Main-thread singleton: worker lifecycle, timeout, auto-recreate; serializes `run()` and `formatCode()` |
+| `src/features/codeRunner/hooks/usePythonCodeRunner.tsx` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
 | `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx` | Shows loading snackbar when Pyodide INIT sends PROGRESS messages |
 | `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult` |
+| `src/features/codeRunner/lib/workers/prettierFormat.worker.ts` | Web Worker: Prettier `FORMAT` → `FORMAT_RESULT` |
+| `src/features/codeRunner/lib/javascriptFormatRunner.ts` | Main-thread singleton: serializes JS `formatCode()`, timeout + worker reset |
+| `src/features/codeRunner/hooks/useJavaScriptFormatCode.ts` | TanStack mutation → `javascriptFormatRunner.formatCode()` |
 | `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)` |
 | `src/packages/dstruct-runner/python/tree_utils.py` | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction |
 | `src/packages/dstruct-runner/python/array_tracker.py` | `TrackedList` implementation for callstack frame generation |
@@ -141,6 +135,16 @@ Service Workers intercept network requests and have a different lifecycle. A ded
 ### Why serialize runs instead of supporting concurrency?
 
 Pyodide hosts a single CPython interpreter. Python itself is single-threaded (GIL). Running two scripts "concurrently" in the same interpreter would interleave at `await` boundaries and corrupt shared state (`__callstack__`, `__stdout__`). Serialization keeps things simple and correct.
+
+The same worker also handles **Python formatting** (Black via `micropip`): `formatCode()` shares the serialization gate with `run()` so only one operation uses Pyodide at a time.
+
+### Python formatting (Black in the worker)
+
+On the first **Format** action, the worker loads `micropip` and installs **Black**, then formats with `black.format_str(..., mode=Mode())`. Subsequent formats reuse the install. Formatting uses a longer default timeout than runs because the first install can take tens of seconds on a slow network.
+
+### JavaScript formatting (Prettier worker)
+
+JavaScript playground code is formatted in a **separate** Web Worker (`prettierFormat.worker.ts`) using **Prettier standalone** + the same Babel / estree plugins as before. The main thread uses `javascriptFormatRunner` and `useJavaScriptFormatCode` (symmetric to `pythonRunner` / `usePythonFormatCode`). There is **no** server `formatJavaScript` endpoint.
 
 ### Why `run()` never rejects
 
@@ -178,6 +182,9 @@ When the worker is bundled by webpack/Next.js, its script URL is something like 
 ```bash
 # Protocol-level unit tests (fast, no Pyodide download)
 pnpm vitest run src/features/codeRunner/lib/workers/pythonExec.worker.spec.ts
+pnpm vitest run src/features/codeRunner/lib/pythonRunner.spec.ts
+pnpm vitest run src/features/codeRunner/lib/javascriptFormatRunner.spec.ts
+pnpm vitest run src/features/codeRunner/lib/workers/prettierFormat.worker.spec.ts
 
 # Runtime args serialization (createPythonRuntimeArgs, createRawRuntimeArgs)
 pnpm vitest run src/features/codeRunner/lib/createRuntimeArgs.spec.ts
@@ -187,11 +194,11 @@ pnpm vitest run src/features/codeRunner/lib/createRuntimeArgs.spec.ts
 
 1. Start the dev server: `pnpm dev`
 2. Open a Python problem page in the browser.
-3. Open DevTools Network tab -- confirm no requests to `localhost:8085`.
-4. Observe the Pyodide WASM download (~30 MB, one-time) from `cdn.jsdelivr.net`.
-5. Click **Run** with a simple solution. Verify:
+3. Open DevTools Network tab and observe the Pyodide WASM download (~30 MB, one-time) from `cdn.jsdelivr.net`.
+4. Click **Run** with a simple solution. Verify:
    - Output appears in the Output panel.
    - Callstack frames appear (if the solution uses lists).
    - Runtime is displayed.
-6. Test error handling: submit code with a syntax error, verify traceback appears.
-7. Test timeout: submit `def solution():\n    while True: pass` and verify TLE error appears within ~30 s and subsequent runs still work.
+5. Test error handling: submit code with a syntax error, verify traceback appears.
+6. Test timeout: submit `def solution():\n    while True: pass` and verify TLE error appears within ~30 s and subsequent runs still work.
+7. Click **Format** (magic wand): first time may pause while Black installs via micropip; code should re-indent per Black.

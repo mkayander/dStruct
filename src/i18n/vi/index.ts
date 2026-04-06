@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const vi: Record<keyof Translation, string> = {
+const viOverrides = {
   ACTION: "Hành động",
   ADD_ARGUMENT: "Thêm tham số",
   ADD_NEW_SOLUTION: "Thêm lời giải mới",
@@ -254,6 +255,7 @@ const vi: Record<keyof Translation, string> = {
   HOME_FAQ_Q_14: "dStruct có mã nguồn mở không?",
   HOME_FAQ_A_14:
     "Có. Xem LICENSE trong kho (AGPL-3.0).",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const vi = { ...en, ...viOverrides } as Translation;
 export default vi;

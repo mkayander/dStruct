@@ -13,7 +13,7 @@ import type { RootState } from "#/store/makeStore";
 
 const argumentAdapter = createEntityAdapter<ArgumentObject, string>({
   selectId: (arg) => arg.name,
-  sortComparer: (a, b) => a.order - b.order,
+  sortComparer: (left, right) => left.order - right.order,
 });
 
 export type ArgumentInfo = {
