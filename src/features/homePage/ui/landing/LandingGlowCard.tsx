@@ -2,7 +2,6 @@ import {
   alpha,
   Box,
   Card,
-  keyframes,
   useTheme,
   type SxProps,
   type Theme,
@@ -10,15 +9,7 @@ import {
 import type { PointerEvent as ReactPointerEvent } from "react";
 import React, { useCallback, useRef } from "react";
 
-// Transform only + `forwards` (not `both`) so stagger delays do not apply `opacity: 0` from the first keyframe.
-const landingCardEnterMotion = keyframes`
-  from {
-    transform: translate3d(0, 14px, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-`;
+import { useLandingReveal } from "#/features/homePage/ui/landing/useLandingReveal";
 
 export type LandingGlowCardProps = {
   children: React.ReactNode;
@@ -40,7 +31,10 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
   interactive = false,
 }) => {
   const theme = useTheme();
+  const delayMs = Math.min(staggerIndex * 55, 480);
+  const revealRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const { revealSx } = useLandingReveal(revealRef, { staggerMs: delayMs });
 
   const updateGlowPosition = useCallback(
     (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -58,7 +52,6 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
 
   const accent = theme.appDesign.accentSoft;
   const accentCore = theme.appDesign.accent;
-  const delayMs = Math.min(staggerIndex * 55, 480);
 
   // Align glow wrapper with `MuiCard` theme override (cards use 8px, not `theme.shape.borderRadius`).
   const muiCardRoot = theme.components?.MuiCard?.styleOverrides?.root;
@@ -72,32 +65,31 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
       : 8;
 
   return (
-    <Box
-      ref={rootRef}
-      onPointerEnter={updateGlowPosition}
-      onPointerMove={updateGlowPosition}
-      className="landing-glow-card-root"
-      sx={{
-        position: "relative",
-        height: "100%",
-        borderRadius: cardBorderRadius,
-        // Default spotlight for SSR / before first pointer move
-        "--landing-glow-x": "50%",
-        "--landing-glow-y": "42%",
-        // Lift the whole stack (card + edge glow) so the ring stays aligned on hover.
-        "@media (prefers-reduced-motion: no-preference)": {
-          ...(interactive
-            ? {
-                transition: "transform 0.22s ease",
-                "&:hover": { transform: "translateY(-3px)" },
-              }
-            : {}),
-          animation: `${landingCardEnterMotion} 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards`,
-          animationDelay: `${delayMs}ms`,
-        },
-      }}
-    >
-      <Card
+    <Box ref={revealRef} sx={[{ height: "100%" }, revealSx] as SxProps<Theme>}>
+      <Box
+        ref={rootRef}
+        onPointerEnter={updateGlowPosition}
+        onPointerMove={updateGlowPosition}
+        className="landing-glow-card-root"
+        sx={{
+          position: "relative",
+          height: "100%",
+          borderRadius: cardBorderRadius,
+          // Default spotlight for SSR / before first pointer move
+          "--landing-glow-x": "50%",
+          "--landing-glow-y": "42%",
+          // Lift the whole stack (card + edge glow) so the ring stays aligned on hover.
+          "@media (prefers-reduced-motion: no-preference)": {
+            ...(interactive
+              ? {
+                  transition: "transform 0.22s ease",
+                  "&:hover": { transform: "translateY(-3px)" },
+                }
+              : {}),
+          },
+        }}
+      >
+        <Card
         elevation={0}
         sx={{
           position: "relative",
@@ -186,8 +178,8 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
         ) : (
           children
         )}
-      </Card>
-      <Box
+        </Card>
+        <Box
         aria-hidden
         className="landing-glow-card-ring"
         sx={{
@@ -220,7 +212,8 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
             },
           },
         }}
-      />
+        />
+      </Box>
     </Box>
   );
 };

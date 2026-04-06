@@ -10,18 +10,16 @@ import {
   Chip,
   Container,
   Grid,
-  keyframes,
   Stack,
   Typography,
   useTheme,
-  type SxProps,
-  type Theme,
 } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
 import { LANDING_PLAYGROUND_DEMOS } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { LandingGlowCard } from "#/features/homePage/ui/landing/LandingGlowCard";
+import { LandingReveal } from "#/features/homePage/ui/landing/LandingReveal";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 export type HomeLandingSectionsProps = {
@@ -54,23 +52,6 @@ function landingDemoSlug(href: string): string {
     .split("-")
     .join(" ");
 }
-
-// Transform only + `forwards` so stagger does not hide headings during `animation-delay`.
-const landingSectionHeadingMotion = keyframes`
-  from {
-    transform: translate3d(0, 10px, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-`;
-
-const landingSectionHeadingEntranceSx = (delayMs = 0): SxProps<Theme> => ({
-  "@media (prefers-reduced-motion: no-preference)": {
-    animation: `${landingSectionHeadingMotion} 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards`,
-    ...(delayMs > 0 ? { animationDelay: `${delayMs}ms` } : {}),
-  },
-});
 
 export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
   LL,
@@ -128,18 +109,15 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
         }}
       >
         <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-          <Typography
-            id="landing-capabilities-heading"
-            variant="h3"
-            component="h2"
-            sx={{
-              mb: 1.5,
-              maxWidth: 780,
-              ...landingSectionHeadingEntranceSx(),
-            }}
-          >
-            {LL.HOME_PILLAR_VIS_TITLE()}
-          </Typography>
+          <LandingReveal sx={{ mb: 1.5, maxWidth: 780 }}>
+            <Typography
+              id="landing-capabilities-heading"
+              variant="h3"
+              component="h2"
+            >
+              {LL.HOME_PILLAR_VIS_TITLE()}
+            </Typography>
+          </LandingReveal>
           <Grid container spacing={3}>
             {capabilities.map((capability, index) => (
               <Grid key={capability.title} size={{ xs: 12, sm: 6, lg: 3 }}>
@@ -173,28 +151,16 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
         }}
       >
         <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-          <Typography
-            variant="h3"
-            component="h2"
-            sx={{
-              mb: 1.5,
-              maxWidth: 720,
-              ...landingSectionHeadingEntranceSx(80),
-            }}
-          >
-            {LL.HOME_SECTION_HOW_IT_WORKS()}
-          </Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{
-              mb: 4,
-              maxWidth: 680,
-              ...landingSectionHeadingEntranceSx(120),
-            }}
-          >
-            {LL.HOME_HOW_STEP_1_BODY()}
-          </Typography>
+          <LandingReveal sx={{ mb: 1.5, maxWidth: 720 }}>
+            <Typography variant="h3" component="h2">
+              {LL.HOME_SECTION_HOW_IT_WORKS()}
+            </Typography>
+          </LandingReveal>
+          <LandingReveal sx={{ mb: 4, maxWidth: 680 }} staggerMs={70}>
+            <Typography variant="body1" color="text.secondary">
+              {LL.HOME_HOW_STEP_1_BODY()}
+            </Typography>
+          </LandingReveal>
           <Grid container spacing={2}>
             {coreLoop.map((item, index) => (
               <Grid key={item.label} size={{ xs: 12, sm: 6, lg: 3 }}>
@@ -231,39 +197,21 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
         }}
       >
         <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-          <Typography
-            variant="subtitle2"
-            component="h2"
-            sx={{
-              color: "text.secondary",
-              mb: 1.5,
-              ...landingSectionHeadingEntranceSx(),
-            }}
-          >
-            {LL.HOME_SECTION_TRY_DEMOS()}
-          </Typography>
-          <Typography
-            variant="h3"
-            component="h2"
-            sx={{
-              mb: 1.5,
-              maxWidth: 720,
-              ...landingSectionHeadingEntranceSx(60),
-            }}
-          >
-            {LL.BROWSE_PROJECTS()}
-          </Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{
-              mb: 4,
-              maxWidth: 620,
-              ...landingSectionHeadingEntranceSx(100),
-            }}
-          >
-            {LL.HOME_TRY_DEMOS_LEAD()}
-          </Typography>
+          <LandingReveal sx={{ mb: 1.5 }}>
+            <Typography variant="subtitle2" component="h2" color="text.secondary">
+              {LL.HOME_SECTION_TRY_DEMOS()}
+            </Typography>
+          </LandingReveal>
+          <LandingReveal sx={{ mb: 1.5, maxWidth: 720 }} staggerMs={50}>
+            <Typography variant="h3" component="h2">
+              {LL.BROWSE_PROJECTS()}
+            </Typography>
+          </LandingReveal>
+          <LandingReveal sx={{ mb: 4, maxWidth: 620 }} staggerMs={100}>
+            <Typography variant="body1" color="text.secondary">
+              {LL.HOME_TRY_DEMOS_LEAD()}
+            </Typography>
+          </LandingReveal>
           <Grid container spacing={2.5}>
             {LANDING_PLAYGROUND_DEMOS.map(({ href, id, Icon }, demoIndex) => (
               <Grid key={href} size={{ xs: 12, sm: 6, lg: 3 }}>
