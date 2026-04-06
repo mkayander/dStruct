@@ -6,11 +6,11 @@ import {
   alpha,
   Box,
   Button,
-  Card,
   CardActionArea,
   Chip,
   Container,
   Grid,
+  keyframes,
   Stack,
   Typography,
   useTheme,
@@ -19,6 +19,7 @@ import Link from "next/link";
 import React from "react";
 
 import { LANDING_PLAYGROUND_DEMOS } from "#/features/homePage/lib/landingPlaygroundDemos";
+import { LandingGlowCard } from "#/features/homePage/ui/landing/LandingGlowCard";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 export type HomeLandingSectionsProps = {
@@ -51,6 +52,17 @@ function landingDemoSlug(href: string): string {
     .split("-")
     .join(" ");
 }
+
+const landingSectionHeadingIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
 
 export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
   LL,
@@ -112,20 +124,20 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             id="landing-capabilities-heading"
             variant="h3"
             component="h2"
-            sx={{ mb: 1.5, maxWidth: 780 }}
+            sx={{
+              mb: 1.5,
+              maxWidth: 780,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+              },
+            }}
           >
             {LL.HOME_PILLAR_VIS_TITLE()}
           </Typography>
           <Grid container spacing={3}>
-            {capabilities.map((capability) => (
+            {capabilities.map((capability, index) => (
               <Grid key={capability.title} size={{ xs: 12, sm: 6, lg: 3 }}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    borderColor: alpha(theme.appDesign.outline, 0.12),
-                    bgcolor: alpha(theme.appDesign.surface, 0.92),
-                  }}
-                >
+                <LandingGlowCard staggerIndex={index}>
                   <Stack spacing={1.5} sx={{ p: 2.5 }}>
                     <Chip
                       size="small"
@@ -141,7 +153,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
                       {capability.body}
                     </Typography>
                   </Stack>
-                </Card>
+                </LandingGlowCard>
               </Grid>
             ))}
           </Grid>
@@ -158,25 +170,38 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           <Typography
             variant="h3"
             component="h2"
-            sx={{ mb: 1.5, maxWidth: 720 }}
+            sx={{
+              mb: 1.5,
+              maxWidth: 720,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+                animationDelay: "80ms",
+              },
+            }}
           >
             {LL.HOME_SECTION_HOW_IT_WORKS()}
           </Typography>
           <Typography
             variant="body1"
             color="text.secondary"
-            sx={{ mb: 4, maxWidth: 680 }}
+            sx={{
+              mb: 4,
+              maxWidth: 680,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+                animationDelay: "120ms",
+              },
+            }}
           >
             {LL.HOME_HOW_STEP_1_BODY()}
           </Typography>
           <Grid container spacing={2}>
             {coreLoop.map((item, index) => (
               <Grid key={item.label} size={{ xs: 12, sm: 6, lg: 3 }}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    bgcolor: alpha(theme.appDesign.surfaceLowest, 0.86),
-                    borderColor: alpha(theme.appDesign.outline, 0.1),
+                <LandingGlowCard
+                  staggerIndex={index + 4}
+                  cardSx={{
+                    bgcolor: alpha(theme.appDesign.surfaceLowest, 0.72),
                   }}
                 >
                   <Stack spacing={2} sx={{ p: 2.5 }}>
@@ -192,7 +217,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
                       {item.body}
                     </Typography>
                   </Stack>
-                </Card>
+                </LandingGlowCard>
               </Grid>
             ))}
           </Grid>
@@ -209,38 +234,51 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           <Typography
             variant="subtitle2"
             component="h2"
-            sx={{ color: "text.secondary", mb: 1.5 }}
+            sx={{
+              color: "text.secondary",
+              mb: 1.5,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+              },
+            }}
           >
             {LL.HOME_SECTION_TRY_DEMOS()}
           </Typography>
           <Typography
             variant="h3"
             component="h2"
-            sx={{ mb: 1.5, maxWidth: 720 }}
+            sx={{
+              mb: 1.5,
+              maxWidth: 720,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+                animationDelay: "60ms",
+              },
+            }}
           >
             {LL.BROWSE_PROJECTS()}
           </Typography>
           <Typography
             variant="body1"
             color="text.secondary"
-            sx={{ mb: 4, maxWidth: 620 }}
+            sx={{
+              mb: 4,
+              maxWidth: 620,
+              "@media (prefers-reduced-motion: no-preference)": {
+                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
+                animationDelay: "100ms",
+              },
+            }}
           >
             {LL.HOME_TRY_DEMOS_LEAD()}
           </Typography>
           <Grid container spacing={2.5}>
-            {LANDING_PLAYGROUND_DEMOS.map(({ href, id, Icon }) => (
+            {LANDING_PLAYGROUND_DEMOS.map(({ href, id, Icon }, demoIndex) => (
               <Grid key={href} size={{ xs: 12, sm: 6, lg: 3 }}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    borderColor: alpha(theme.appDesign.outline, 0.12),
-                    bgcolor: alpha(theme.appDesign.surface, 0.92),
-                    transition: "transform 0.2s ease, border-color 0.2s ease",
-                    "&:hover": {
-                      transform: "translateY(-3px)",
-                      borderColor: alpha(theme.appDesign.accentSoft, 0.28),
-                    },
-                  }}
+                <LandingGlowCard
+                  interactive
+                  staggerIndex={demoIndex + 8}
+                  cardSx={{ height: "100%" }}
                 >
                   <CardActionArea component={Link} href={href} sx={{ p: 2.5 }}>
                     <Stack spacing={2}>
@@ -271,7 +309,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
                       </Typography>
                     </Stack>
                   </CardActionArea>
-                </Card>
+                </LandingGlowCard>
               </Grid>
             ))}
           </Grid>
