@@ -17,7 +17,7 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
 import {
@@ -99,6 +99,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   );
   const [editorState, setEditorState] = useState(EditorState.INITIAL);
   const [isFormattingAvailable, setIsFormattingAvailable] = useState(true);
+  /** True while a format request is in flight for the current generation (see formatGenerationRef). */
+  const [formatUiPending, setFormatUiPending] = useState(false);
+
+  /** Bumped to invalidate in-flight format when the user edits or switches language. */
+  const formatGenerationRef = useRef(0);
+  /** When true, editor updates come from applying formatted code — do not cancel format. */
+  const skipFormatCancelRef = useRef(false);
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
@@ -134,9 +141,20 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
   }, [language, runMode, setRunMode]);
 
+  const formatJavaScript = api.code.formatJavaScript.useMutation();
+  const formatPython = usePythonFormatCode();
+
+  const cancelInFlightFormatting = useCallback(() => {
+    formatGenerationRef.current += 1;
+    setFormatUiPending(false);
+    formatJavaScript.reset();
+    formatPython.reset();
+  }, [formatJavaScript, formatPython]);
+
   // Update code on solution change
   useEffect(() => {
     if (!currentSolution.data) return;
+    cancelInFlightFormatting();
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
     dispatch(projectSlice.actions.loadFinish());
@@ -149,8 +167,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       textModel.setValue(newCode);
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSolution.data?.slug, language, textModel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- load editor when solution slug/language/model changes; avoid re-running on unrelated state
+  }, [
+    cancelInFlightFormatting,
+    currentSolution.data?.slug,
+    language,
+    textModel,
+  ]);
 
   // Handle code errors
   useEffect(() => {
@@ -207,6 +230,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   };
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
+    cancelInFlightFormatting();
     setLanguage(event.target.value);
   };
 
@@ -266,6 +290,10 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     setCodeInput(value ?? "");
     if (!isFormattingAvailable) setIsFormattingAvailable(true);
 
+    if (!ev.isFlush && !skipFormatCancelRef.current) {
+      cancelInFlightFormatting();
+    }
+
     // Only update the solution on server if it was a user edit
     if (ev.isFlush) {
       return;
@@ -274,35 +302,50 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     updateSolutionOnServer(value, ev);
   };
 
-  const formatJavaScript = api.code.formatJavaScript.useMutation();
-  const formatPython = usePythonFormatCode();
-
   const applyFormattedCode = (formatted: string) => {
     if (!textModel) return;
-    const edit: monaco.editor.IIdentifiedSingleEditOperation = {
-      range: textModel.getFullModelRange(),
-      text: formatted,
-    };
-    textModel.pushEditOperations([], [edit], () => null);
-    editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+    skipFormatCancelRef.current = true;
+    try {
+      const edit: monaco.editor.IIdentifiedSingleEditOperation = {
+        range: textModel.getFullModelRange(),
+        text: formatted,
+      };
+      textModel.pushEditOperations([], [edit], () => null);
+      editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+    } finally {
+      queueMicrotask(() => {
+        skipFormatCancelRef.current = false;
+      });
+    }
   };
 
   const handleFormatCode = async () => {
+    const gen = ++formatGenerationRef.current;
+    setFormatUiPending(true);
     try {
       if (language === "javascript") {
         const result = await formatJavaScript.mutateAsync({ code: codeInput });
+        if (gen !== formatGenerationRef.current) return;
         if (result.formatted) {
           applyFormattedCode(result.formatted);
         }
       } else if (language === "python") {
         const formatted = await formatPython.mutateAsync(codeInput);
+        if (gen !== formatGenerationRef.current) return;
         applyFormattedCode(formatted);
       }
     } catch (error) {
-      console.error("Error formatting code:", error);
-      enqueueSnackbar("Failed to format code", { variant: "error" });
+      if (gen === formatGenerationRef.current) {
+        console.error("Error formatting code:", error);
+        enqueueSnackbar("Failed to format code", { variant: "error" });
+      }
+    } finally {
+      // Only the latest in-flight format clears loading (double-click starts a new gen).
+      if (gen === formatGenerationRef.current) {
+        setIsFormattingAvailable(false);
+        setFormatUiPending(false);
+      }
     }
-    setIsFormattingAvailable(false);
   };
 
   const copyCode = () => {
@@ -484,11 +527,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
                     !isFormattingAvailable ||
                     (language !== "javascript" && language !== "python")
                   }
-                  loading={
-                    language === "javascript"
-                      ? formatJavaScript.isPending
-                      : formatPython.isPending
-                  }
+                  loading={formatUiPending}
                   onClick={handleFormatCode}
                   style={{ marginRight: "-6px", marginTop: "2px" }}
                 >
