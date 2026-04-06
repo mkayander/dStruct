@@ -7,9 +7,9 @@ dStruct is a LeetCode problem visualization web app with data structure visualiz
 ## Technology Stack
 
 - **Frontend**: React, Next.js, TypeScript
-- **State Management**: Redux Toolkit with RTK Query
-- **Styling**: Tailwind CSS, Material-UI, Emotion, SCSS
-- **Database**: Prisma ORM with MySQL
+- **State Management**: Redux Toolkit (UI / client state); TanStack Query (server state via tRPC)
+- **Styling**: Material-UI (MUI), Emotion; CSS modules / SCSS only where already used (e.g. `.module.scss`)
+- **Database**: Prisma ORM with PostgreSQL
 - **Authentication**: NextAuth.js
 - **API**: tRPC, GraphQL with Apollo Client
 - **Testing**: Vitest with Testing Library
@@ -155,11 +155,11 @@ export const useCustomHook = (): ReturnType => {
 
 ### Styling
 
-- Use Tailwind CSS as primary styling solution
-- Leverage Material-UI components when appropriate
-- Use CSS modules for component-specific styles
-- Follow design system color palette from `src/shared/lib/colors.ts`
-- Use `cn()` utility for conditional class merging
+- **Primary:** MUI components with the app theme from `#/themes` — use `sx`, `styled` (Emotion), and `theme.appDesign` tokens for colors and surfaces
+- **Do not add Tailwind** unless the project reintroduces it explicitly (dependencies + config); it was rolled back
+- Use **CSS modules** (including `.module.scss`) only when matching an existing pattern in that area
+- Follow design tokens from `src/themes.ts` / `theme.appDesign`; use `src/shared/lib/colors.ts` where that file is already the source of truth
+- For plain `className` strings, use **`clsx`** when you need conditional classes (there is no shared `cn()` helper in this repo)
 
 ### Material-UI (MUI) Best Practices
 
@@ -342,8 +342,8 @@ export const useCustomHook = (): ReturnType => {
 **Data Fetching:**
 
 - Implement proper caching strategies
-- Use RTK Query for server state
-- Implement optimistic updates
+- Use **TanStack Query via tRPC** for server state (see tRPC section — do not duplicate query state in Redux)
+- Implement optimistic updates where appropriate
 - Handle loading and error states
 
 ## Database & API
