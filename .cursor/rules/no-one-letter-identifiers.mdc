@@ -1,5 +1,5 @@
 ---
-description: Use descriptive names — no single-letter variables or parameters (except intentional underscore discard)
+description: Descriptive names — no single-letter vars/params except _ (discard) and i/j/k in classic for loops
 globs: **/*.{ts,tsx,mjs,cjs,js,jsx}
 alwaysApply: true
 ---
@@ -11,6 +11,7 @@ Do not use **single-letter** names for variables, function parameters, or catch 
 ## Allowed
 
 - **`_`** only as a **discard** placeholder (e.g. `array.map((_, index) => index)`), matching ESLint `id-length` exceptions.
+- **`i`**, **`j`**, **`k`** only as **classic `for` loop** index variables (`for (let i = 0; …)`, nested loops). Do not use them elsewhere when a longer name is clearer; ESLint cannot restrict these names to loops only, so rely on convention.
 - **Type parameters** in generics may stay conventional single letters when standard (`T`, `K`, `V`) only if the team agrees; prefer a short **word** (`TItem`, `TResult`) when clarity helps.
 
 ## ❌ Bad
@@ -31,8 +32,20 @@ items.map((left, right) => left + right);
 } catch (error) {
   console.warn(error);
 }
+
+for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+  for (let columnIndex = 0; columnIndex < cols; columnIndex++) {
+    // ...
+  }
+}
+// or, when a single-letter index is idiomatic:
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < m; j++) {
+    matrix[i][j] = 0;
+  }
+}
 ```
 
 ## Enforcement
 
-ESLint `id-length` is enabled in `eslint.config.mjs` (`min: 2`, `exceptions: ["_"]`, `properties: "never"`).
+ESLint `id-length` is enabled in `eslint.config.mjs` (`min: 2`, `exceptions: ["_", "i", "j", "k"]`, `properties: "never"`).
