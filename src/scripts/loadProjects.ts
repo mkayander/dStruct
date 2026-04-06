@@ -63,9 +63,9 @@ if (!dumpPath) {
           ...project,
         },
       });
-    } catch (e) {
+    } catch (error) {
       if (!isDebug) continue;
-      console.error(e);
+      console.error(error);
       console.error(project);
     }
   }
@@ -84,9 +84,9 @@ if (!dumpPath) {
         create: testCase,
         update: testCase,
       });
-    } catch (e) {
+    } catch (error) {
       if (!isDebug) continue;
-      console.error(e);
+      console.error(error);
       console.error(testCase);
     }
   }
@@ -105,9 +105,9 @@ if (!dumpPath) {
         create: solution,
         update: solution,
       });
-    } catch (e) {
+    } catch (error) {
       if (!isDebug) continue;
-      console.error(e);
+      console.error(error);
       console.error(solution);
     }
   }

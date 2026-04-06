@@ -440,8 +440,8 @@ export const useNodesRuntimeUpdates = (playbackInterval: number) => {
       );
 
       batch(() => {
-        for (let index = nonGroupedFrames.length - 1; index >= 0; index -= 1) {
-          const frame = nonGroupedFrames[index];
+        for (let i = nonGroupedFrames.length - 1; i >= 0; i -= 1) {
+          const frame = nonGroupedFrames[i];
           if (frame) {
             revertFrame(frame);
           }
@@ -463,8 +463,8 @@ export const useNodesRuntimeUpdates = (playbackInterval: number) => {
 
   const applyFrameRange = useCallback(
     (fromIndex: number, toIndex: number) => {
-      for (let index = fromIndex + 1; index <= toIndex; index += 1) {
-        const frame = callstack[index];
+      for (let i = fromIndex + 1; i <= toIndex; i += 1) {
+        const frame = callstack[i];
         if (frame) {
           applyFrame(frame);
         }
@@ -475,8 +475,8 @@ export const useNodesRuntimeUpdates = (playbackInterval: number) => {
 
   const revertFrameRange = useCallback(
     (fromIndex: number, toIndex: number) => {
-      for (let index = fromIndex; index > toIndex; index -= 1) {
-        const frame = callstack[index];
+      for (let i = fromIndex; i > toIndex; i -= 1) {
+        const frame = callstack[i];
         if (frame) {
           revertFrame(frame);
         }

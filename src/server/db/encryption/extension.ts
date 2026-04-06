@@ -30,7 +30,7 @@ function groupFieldsByModel(
 function allEncryptedFieldNames(
   fields: readonly EncryptedField[],
 ): Set<string> {
-  return new Set(fields.map((f) => f.field));
+  return new Set(fields.map((fieldDef) => fieldDef.field));
 }
 
 function createModelHandlers(
@@ -43,8 +43,9 @@ function createModelHandlers(
   ): void => {
     if (!data || typeof data !== "object") return;
     for (const field of encryptFields) {
-      const v = data[field];
-      if (typeof v === "string") data[field] = cipher.encrypt(v);
+      const fieldValue = data[field];
+      if (typeof fieldValue === "string")
+        data[field] = cipher.encrypt(fieldValue);
     }
   };
 
@@ -55,11 +56,13 @@ function createModelHandlers(
 
     const obj = value as Record<string, unknown>;
     const result: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(obj)) {
-      result[k] =
-        decryptFields.has(k) && typeof v === "string" && v
-          ? cipher.tryDecrypt(v)
-          : decryptInResult(v);
+    for (const [entryKey, entryValue] of Object.entries(obj)) {
+      result[entryKey] =
+        decryptFields.has(entryKey) &&
+        typeof entryValue === "string" &&
+        entryValue
+          ? cipher.tryDecrypt(entryValue)
+          : decryptInResult(entryValue);
     }
     return result as T;
   };

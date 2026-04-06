@@ -1,0 +1,18 @@
+---
+description: Non-English locale files inherit English via spread; do not duplicate English strings for untranslated keys
+alwaysApply: true
+---
+
+# i18n: English fallback for non-`en` locales
+
+Locale files under `src/i18n/<locale>/index.ts` (except `en`) are built as **`{ ...en, ...overrides } as Translation`**: `overrides` is typed with **`satisfies Partial<Record<keyof Translation, string>>`** so every key is valid but placeholder strings are not checked against `RequiredParams` (those checks apply to `en` only). Export only the merged object as default.
+
+## When adding a new translation key
+
+1. **Always** add the English string in `src/i18n/en/index.ts` and run `pnpm typesafe-i18n` (or the project’s codegen) so `i18n-types` updates.
+2. **Do not** copy the English text into every other locale file to satisfy TypeScript. Missing keys in `*Overrides` are filled from `en` at runtime.
+3. **Only** add the key under `*Overrides` in another locale when you have a **real translation** for that locale (same pattern as `es` / `ru` for `FORMAT_CODE_WITH_BLACK`).
+
+## Anti-pattern
+
+Duplicating the same English sentence across `ar`, `de`, `fr`, etc. “for fallback” — it bloats diffs and hides which strings still need translation. Rely on spread-from-`en` instead.

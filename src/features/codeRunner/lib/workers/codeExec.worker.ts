@@ -167,7 +167,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
         const totalTime = performance.now() - startTimestamp;
         const averageTime = totalTime / count;
-        const sortedTimeData = timeData.toSorted((a, b) => a - b);
+        const sortedTimeData = timeData.toSorted((left, right) => left - right);
         const medianTime = sortedTimeData[Math.floor(count / 2)];
         const p75Time = sortedTimeData[Math.floor(count * 0.75)];
         const p90Time = sortedTimeData[Math.floor(count * 0.9)];

@@ -4,9 +4,16 @@ import type { ExecutionResult } from "../hooks/useCodeExecution";
 import type { SerializedPythonArg } from "./createPythonRuntimeArgs";
 import type { PythonWorkerOutMessage } from "./workers/pythonExec.worker.types";
 
-const DEFAULT_TIMEOUT_MS = 30_000;
+const DEFAULT_RUN_TIMEOUT_MS = 30_000;
+/** First Black install via micropip can be slow; subsequent formats reuse the package. */
+const DEFAULT_FORMAT_TIMEOUT_MS = 120_000;
 
 type RunnerState = "idle" | "initializing" | "ready" | "running" | "disposed";
+
+export type PythonFormatResult = {
+  formatted: string;
+  error: string | null;
+};
 
 function createWorker(): Worker {
   return new Worker(
@@ -42,6 +49,9 @@ class PythonRunner {
     current: ((value: number, stage: string) => void) | null;
   } = { current: null };
 
+  /** Serializes run(), formatCode(), and any future worker RPCs. */
+  private operationGate: Promise<void> = Promise.resolve();
+
   constructor(indexURL?: string) {
     this.indexURL = indexURL;
   }
@@ -52,9 +62,12 @@ class PythonRunner {
     /** For testing: inject a mock worker instead of creating a real one. */
     workerFactory?: () => Worker;
   }): Promise<void> {
-    if (this.state === "ready") return Promise.resolve();
     if (this.state === "disposed") {
       throw new Error("PythonRunner has been disposed");
+    }
+    // Worker is already up while a run/format is in flight — do not spawn another.
+    if (this.state === "ready" || this.state === "running") {
+      return Promise.resolve();
     }
 
     this.onProgressRef.current = options?.onProgress ?? null;
@@ -117,19 +130,32 @@ class PythonRunner {
   }
 
   /**
+   * One worker operation at a time (run vs format share the same Pyodide).
+   */
+  private async withSerializedOperation<T>(fn: () => Promise<T>): Promise<T> {
+    await this.operationGate;
+    let release!: () => void;
+    this.operationGate = new Promise<void>((resolveGate) => {
+      release = resolveGate;
+    });
+    try {
+      return await fn();
+    } finally {
+      release();
+    }
+  }
+
+  /**
    * Execute Python code and return the result.
    * Auto-initializes the worker if not yet ready.
    * On timeout, terminates the worker and returns a TLE-shaped result.
-   *
-   * Calls are serialized: if a run is already in-flight the new call waits
-   * for it to finish before proceeding.
    *
    * Never rejects -- all failure modes (timeout, crash, Python error)
    * are represented as an ExecutionResult with a populated `error` field.
    */
   async run(
     code: string,
-    timeoutMs: number = DEFAULT_TIMEOUT_MS,
+    timeoutMs: number = DEFAULT_RUN_TIMEOUT_MS,
     args?: SerializedPythonArg[],
   ): Promise<ExecutionResult> {
     if (this.state === "disposed") {
@@ -139,41 +165,32 @@ class PythonRunner {
       });
     }
 
-    // Serialize: wait for any in-flight run to finish before proceeding
-    if (this.state === "running") {
-      await this.runGate;
-    }
+    return this.withSerializedOperation(async () => {
+      if (this.state !== "ready") {
+        try {
+          await this.init();
+        } catch (err: unknown) {
+          return makeErrorResult({
+            name: "InitError",
+            message:
+              err instanceof Error
+                ? err.message
+                : "Failed to initialize Pyodide",
+          });
+        }
+      }
 
-    if (this.state !== "ready") {
-      try {
-        await this.init();
-      } catch (err: unknown) {
+      const worker = this.worker;
+      if (!worker) {
         return makeErrorResult({
-          name: "InitError",
-          message:
-            err instanceof Error ? err.message : "Failed to initialize Pyodide",
+          name: "RuntimeError",
+          message: "Worker unavailable after init.",
         });
       }
-    }
 
-    const worker = this.worker;
-    if (!worker) {
-      return makeErrorResult({
-        name: "RuntimeError",
-        message: "Worker unavailable after init.",
-      });
-    }
+      this.state = "running";
+      const requestId = generate();
 
-    this.state = "running";
-    const requestId = generate();
-
-    // Create a gate that subsequent callers can await
-    let resolveGate!: () => void;
-    this.runGate = new Promise<void>((r) => {
-      resolveGate = r;
-    });
-
-    try {
       return await new Promise<ExecutionResult>((resolve) => {
         let settled = false;
         let timer: ReturnType<typeof setTimeout> | null = null;
@@ -231,9 +248,101 @@ class PythonRunner {
 
         worker.postMessage({ type: "RUN", requestId, code, args });
       });
-    } finally {
-      resolveGate();
+    });
+  }
+
+  /**
+   * Format Python with Black inside Pyodide (micropip on first use).
+   * Serialized with `run()`; returns original `code` when formatting fails.
+   */
+  async formatCode(
+    code: string,
+    timeoutMs: number = DEFAULT_FORMAT_TIMEOUT_MS,
+  ): Promise<PythonFormatResult> {
+    if (this.state === "disposed") {
+      return {
+        formatted: code,
+        error: "Python runner has been disposed.",
+      };
     }
+
+    return this.withSerializedOperation(async () => {
+      if (this.state !== "ready") {
+        try {
+          await this.init();
+        } catch (err: unknown) {
+          return {
+            formatted: code,
+            error:
+              err instanceof Error
+                ? err.message
+                : "Failed to initialize Pyodide",
+          };
+        }
+      }
+
+      const worker = this.worker;
+      if (!worker) {
+        return { formatted: code, error: "Worker unavailable after init." };
+      }
+
+      this.state = "running";
+      const requestId = generate();
+
+      return await new Promise<PythonFormatResult>((resolve) => {
+        let settled = false;
+        let timer: ReturnType<typeof setTimeout> | null = null;
+
+        const settle = () => {
+          settled = true;
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          worker.removeEventListener("message", onMessage);
+          worker.removeEventListener("error", onError);
+        };
+
+        const onMessage = (event: MessageEvent<PythonWorkerOutMessage>) => {
+          const { data } = event;
+
+          if (data.type === "FORMAT_RESULT" && data.requestId === requestId) {
+            settle();
+            this.state = "ready";
+            resolve({ formatted: data.formatted, error: null });
+          } else if (data.type === "ERROR" && data.requestId === requestId) {
+            settle();
+            this.state = "ready";
+            resolve({ formatted: code, error: data.error.message });
+          }
+        };
+
+        const onError = (err: ErrorEvent) => {
+          if (settled) return;
+          settle();
+          this.resetWorker();
+          resolve({
+            formatted: code,
+            error: `Worker crashed: ${err.message}`,
+          });
+        };
+
+        worker.addEventListener("message", onMessage);
+        worker.addEventListener("error", onError);
+
+        timer = setTimeout(() => {
+          if (settled) return;
+          settle();
+          this.resetWorker();
+          resolve({
+            formatted: code,
+            error: `Format timed out (limit: ${timeoutMs}ms).`,
+          });
+        }, timeoutMs);
+
+        worker.postMessage({ type: "FORMAT", requestId, code });
+      });
+    });
   }
 
   /** Terminate the worker and release resources. */
@@ -250,9 +359,6 @@ class PythonRunner {
   get isReady(): boolean {
     return this.state === "ready";
   }
-
-  // Gate promise that serializes concurrent run() calls
-  private runGate: Promise<void> = Promise.resolve();
 
   /** Kill the worker and reset to idle so a fresh worker is created on next use. */
   private resetWorker(): void {

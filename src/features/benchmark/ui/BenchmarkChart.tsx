@@ -10,12 +10,12 @@ export const BenchmarkChart: React.FC = () => {
   const { benchmarkResults } = useAppSelector(selectRuntimeData);
 
   const sortedRuntimes = useMemo(
-    () => benchmarkResults?.results?.toSorted((a, b) => a - b),
+    () => benchmarkResults?.results?.toSorted((left, right) => left - right),
     [benchmarkResults?.results],
   );
 
   const xAxisData = useMemo(
-    () => benchmarkResults?.results?.map((_, i) => i) ?? [],
+    () => benchmarkResults?.results?.map((_, index) => index) ?? [],
     [benchmarkResults?.results],
   );
 
@@ -56,7 +56,7 @@ export const BenchmarkChart: React.FC = () => {
             showMark: false,
             area: true,
             connectNulls: true,
-            valueFormatter: (v) => v?.toFixed(24) ?? "",
+            valueFormatter: (value) => value?.toFixed(24) ?? "",
             color: theme.palette.primary.light,
           },
         ]}
@@ -78,13 +78,13 @@ export const BenchmarkChart: React.FC = () => {
             showMark: false,
             area: true,
             connectNulls: true,
-            valueFormatter: (v) => v?.toFixed(24) ?? "",
+            valueFormatter: (value) => value?.toFixed(24) ?? "",
             color: theme.palette.secondary.light,
           },
         ]}
         xAxis={[
           {
-            data: (sortedRuntimes ?? []).map((_, i) => i),
+            data: (sortedRuntimes ?? []).map((_, index) => index),
             scaleType: "point" as const,
             label: "Sample index",
           },

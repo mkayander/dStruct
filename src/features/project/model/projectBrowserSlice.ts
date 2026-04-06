@@ -48,8 +48,12 @@ export const projectBrowserSlice = createSlice({
     },
     appendProjects: (state, action: PayloadAction<ProjectBrief[]>) => {
       // Avoid duplicates by checking IDs
-      const existingIds = new Set(state.accumulatedProjects.map((p) => p.id));
-      const newProjects = action.payload.filter((p) => !existingIds.has(p.id));
+      const existingIds = new Set(
+        state.accumulatedProjects.map((project) => project.id),
+      );
+      const newProjects = action.payload.filter(
+        (project) => !existingIds.has(project.id),
+      );
       state.accumulatedProjects = [
         ...state.accumulatedProjects,
         ...newProjects,

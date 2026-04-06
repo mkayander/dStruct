@@ -1,6 +1,7 @@
+import en from "../en";
 import type { Translation } from "../i18n-types";
 
-const zh: Record<keyof Translation, string> = {
+const zhOverrides = {
   ACTION: "操作",
   ADD_ARGUMENT: "添加参数",
   ADD_NEW_SOLUTION: "添加新解法",
@@ -233,6 +234,7 @@ const zh: Record<keyof Translation, string> = {
     "有适合手机的练习场流程，切换标签时保持连接。长时间编辑仍推荐桌面。",
   HOME_FAQ_Q_14: "dStruct 是开源的吗？",
   HOME_FAQ_A_14: "是。见仓库中的 LICENSE（AGPL-3.0）。",
-};
+} satisfies Partial<Record<keyof Translation, string>>;
 
+const zh = { ...en, ...zhOverrides } as Translation;
 export default zh;

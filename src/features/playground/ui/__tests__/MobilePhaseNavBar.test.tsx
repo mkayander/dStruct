@@ -35,11 +35,11 @@ vi.mock("#/store/hooks", () => ({
 
 const useMobilePlaygroundView = vi.mocked(
   await import("#/features/playground/hooks/useMobilePlaygroundView").then(
-    (m) => m.useMobilePlaygroundView,
+    (playgroundModule) => playgroundModule.useMobilePlaygroundView,
   ),
 );
 const useAppSelector = vi.mocked(
-  await import("#/store/hooks").then((m) => m.useAppSelector),
+  await import("#/store/hooks").then((storeHooks) => storeHooks.useAppSelector),
 );
 
 const renderWithProviders = (

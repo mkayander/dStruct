@@ -9,7 +9,8 @@ export type PythonWorkerInMessage =
       requestId: string;
       code: string;
       args?: SerializedPythonArg[];
-    };
+    }
+  | { type: "FORMAT"; requestId: string; code: string };
 
 /** Progress during INIT: value 0–100, stage label for UI. */
 export type PythonWorkerProgressMessage = {
@@ -23,6 +24,7 @@ export type PythonWorkerOutMessage =
   | { type: "READY" }
   | PythonWorkerProgressMessage
   | { type: "RUN_RESULT"; requestId: string; result: ExecutionResult }
+  | { type: "FORMAT_RESULT"; requestId: string; formatted: string }
   | {
       type: "ERROR";
       requestId: string;

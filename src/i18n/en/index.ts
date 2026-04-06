@@ -39,6 +39,7 @@ const en: BaseTranslation = {
   FORWARD: "Forward",
   FORMATTING_ICON: "Formatting icon",
   FORMAT_CODE_WITH: "Format code with",
+  FORMAT_CODE_WITH_BLACK: "Format code with Black (Pyodide)",
   HI: "Hello {name:string}!",
   INPUT: "Input",
   LANGUAGE: "Language",

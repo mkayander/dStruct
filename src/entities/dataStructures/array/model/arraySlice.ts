@@ -36,7 +36,7 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
 export type ArrayDataState = BaseStructureState<ArrayData>;
 
 export const arrayDataAdapter = createEntityAdapter<ArrayItemData>({
-  sortComparer: (a, b) => a.index - b.index,
+  sortComparer: (left, right) => left.index - right.index,
 });
 
 const getInitialData = (

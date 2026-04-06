@@ -54,10 +54,14 @@ const EDTECH_LOCALE_ORDER: Locales[] = [
 
 export const localesForLanguagePicker: Locales[] = (() => {
   const configured = new Set(locales);
-  const ordered = EDTECH_LOCALE_ORDER.filter((l) => configured.has(l));
-  const missingFromOrder = locales.filter((l) => !ordered.includes(l));
-  missingFromOrder.sort((a, b) =>
-    localeLabels[a].localeCompare(localeLabels[b], "en"),
+  const ordered = EDTECH_LOCALE_ORDER.filter((localeCode) =>
+    configured.has(localeCode),
+  );
+  const missingFromOrder = locales.filter(
+    (localeCode) => !ordered.includes(localeCode),
+  );
+  missingFromOrder.sort((left, right) =>
+    localeLabels[left].localeCompare(localeLabels[right], "en"),
   );
   return [...ordered, ...missingFromOrder];
 })();
