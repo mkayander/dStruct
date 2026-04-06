@@ -11,6 +11,21 @@ void (
 const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/reactCompiler.md`
+  reactCompiler: true,
+  // Bundled docs: `node_modules/next/dist/docs/02-pages/04-api-reference/04-config/01-next-config-js/bundlePagesRouterDependencies.md`
+  bundlePagesRouterDependencies: true,
+  experimental: {
+    // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/optimizePackageImports.md`
+    // @mui/material and @mui/icons-material are optimized by default; add other @mui/* barrel-heavy packages.
+    optimizePackageImports: [
+      "@mui/lab",
+      "@mui/system",
+      "@mui/utils",
+      "@mui/x-charts",
+      "@mui/x-internal-gestures",
+    ],
+  },
   transpilePackages: [
     "@apollo/client",
     "@hello-pangea/dnd",
