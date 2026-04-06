@@ -21,6 +21,7 @@ function Document({ emotionStyleTags, htmlLang = "en" }: MyDocumentProps) {
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
+        <meta name="darkreader-lock" />
 
         <link
           rel="apple-touch-icon"
