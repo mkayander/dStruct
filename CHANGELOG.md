@@ -1,3 +1,10 @@
+# [1.373.0](https://github.com/mkayander/dStruct/compare/v1.372.0...v1.373.0) (2026-04-06)
+
+
+### Features
+
+* **i18n:** Belarusian, Hindi, Chinese locales and full translations ([#113](https://github.com/mkayander/dStruct/issues/113)) ([dab5c92](https://github.com/mkayander/dStruct/commit/dab5c927b50d7c4bef8c8349dd3f801317b278da))
+
 # [1.372.0](https://github.com/mkayander/dStruct/compare/v1.371.1...v1.372.0) (2026-04-06)
 
 
