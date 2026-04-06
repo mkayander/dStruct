@@ -30,20 +30,23 @@ export function absoluteCanonicalFromStaticContext(
   return `${SITE_ORIGIN}${localePathForCanonical(context, pagePath)}`;
 }
 
-export const getI18nProps: GetStaticProps<{
-  i18n: I18nProps;
-}> = async (context) => {
+async function loadI18nPageProps(
+  context: Pick<GetStaticPropsContext, "locale">,
+): Promise<{ i18n: I18nProps }> {
   const locale = (context.locale as Locales) || "en";
   const translations = { [locale]: await importLocaleAsync(locale) };
-
   return {
-    props: {
-      i18n: {
-        translations,
-      },
+    i18n: {
+      translations,
     },
   };
-};
+}
+
+export const getI18nProps: GetStaticProps<{
+  i18n: I18nProps;
+}> = async (context) => ({
+  props: await loadI18nPageProps(context),
+});
 
 export const getI18nPropsWithCanonical = (
   pagePath: string,
@@ -52,16 +55,11 @@ export const getI18nPropsWithCanonical = (
   canonicalUrl: string;
 }> => {
   return async (context) => {
-    const locale = (context.locale as Locales) || "en";
-    const translations = { [locale]: await importLocaleAsync(locale) };
-    const canonicalUrl = absoluteCanonicalFromStaticContext(context, pagePath);
-
+    const i18n = await loadI18nPageProps(context);
     return {
       props: {
-        i18n: {
-          translations,
-        },
-        canonicalUrl,
+        ...i18n,
+        canonicalUrl: absoluteCanonicalFromStaticContext(context, pagePath),
       },
     };
   };

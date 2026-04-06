@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 
 import { db } from "#/server/db/client";
-import { SITE_ORIGIN } from "#/shared/lib/seo";
+import { escapeXmlText, SITE_ORIGIN } from "#/shared/lib/seo";
 
 type ProjectForSitemap = {
   slug: string;
@@ -13,24 +13,34 @@ function formatLastmod(date: Date | string): string {
   return d.toISOString().split("T")[0] ?? "";
 }
 
+function absoluteLoc(pathname: string): string {
+  const path =
+    pathname === "" || pathname === "/"
+      ? ""
+      : pathname.startsWith("/")
+        ? pathname
+        : `/${pathname}`;
+  return escapeXmlText(`${SITE_ORIGIN}${path}`);
+}
+
 function generateSiteMap(projects: ProjectForSitemap[]) {
   const now = formatLastmod(new Date());
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
-       <loc>${SITE_ORIGIN}</loc>
+       <loc>${absoluteLoc("")}</loc>
        <lastmod>${now}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>1.0</priority>
      </url>
      <url>
-       <loc>${SITE_ORIGIN}/daily</loc>
+       <loc>${absoluteLoc("/daily")}</loc>
        <lastmod>${now}</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.85</priority>
      </url>
      <url>
-       <loc>${SITE_ORIGIN}/playground</loc>
+       <loc>${absoluteLoc("/playground")}</loc>
        <lastmod>${now}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>0.9</priority>
@@ -40,7 +50,7 @@ function generateSiteMap(projects: ProjectForSitemap[]) {
          const lastmod = formatLastmod(updatedAt);
          return `
      <url>
-       <loc>${SITE_ORIGIN}/playground/${slug}</loc>
+       <loc>${absoluteLoc(`/playground/${slug}`)}</loc>
        <lastmod>${lastmod}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>0.8</priority>

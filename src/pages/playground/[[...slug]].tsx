@@ -24,6 +24,7 @@ import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayo
 import {
   absoluteUrlFromPathname,
   DEFAULT_SITE_DESCRIPTION,
+  pathnameFromResolvedUrl,
 } from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import type { SsrDeviceType } from "#/themes";
@@ -118,8 +119,7 @@ export const getServerSideProps: GetServerSideProps<
 
   const slug = params?.slug;
   const slugStr = Array.isArray(slug) ? slug[0] : undefined;
-  const pathOnly =
-    resolvedUrl.split("?")[0]?.split("#")[0] ?? "/playground";
+  const pathOnly = pathnameFromResolvedUrl(resolvedUrl) || "/playground";
   const canonicalUrl = absoluteUrlFromPathname(pathOnly);
 
   let pageTitle = "Playground | dStruct";

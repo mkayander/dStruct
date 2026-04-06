@@ -19,6 +19,7 @@ import { useI18nContext } from "#/shared/hooks";
 import {
   absoluteUrlFromPathname,
   DEFAULT_SITE_DESCRIPTION,
+  pathnameFromResolvedUrl,
 } from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
@@ -170,7 +171,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
     return { notFound: true };
   }
   const pathOnly =
-    ctx.resolvedUrl.split("?")[0]?.split("#")[0] ??
+    pathnameFromResolvedUrl(ctx.resolvedUrl) ||
     `/profile/${profileUserId}`;
   const canonicalUrl = absoluteUrlFromPathname(pathOnly);
   return { props: { canonicalUrl } };
