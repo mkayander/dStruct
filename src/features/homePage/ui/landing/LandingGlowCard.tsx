@@ -10,13 +10,12 @@ import {
 import type { PointerEvent as ReactPointerEvent } from "react";
 import React, { useCallback, useRef } from "react";
 
-const landingCardEnter = keyframes`
+// Transform only + `forwards` (not `both`) so stagger delays do not apply `opacity: 0` from the first keyframe.
+const landingCardEnterMotion = keyframes`
   from {
-    opacity: 0;
     transform: translate3d(0, 14px, 0);
   }
   to {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 `;
@@ -27,7 +26,10 @@ export type LandingGlowCardProps = {
   cardSx?: SxProps<Theme>;
   /** Staggered entrance delay index; multiplied by 55ms. */
   staggerIndex?: number;
-  /** Slight lift and shadow on hover (e.g. demo link tiles). */
+  /**
+   * Demo / link tiles: hover lift, stronger shadow, inner ambient gradient,
+   * and flex layout so `CardActionArea` fills the card height.
+   */
   interactive?: boolean;
 };
 
@@ -83,14 +85,14 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
         "--landing-glow-x": "50%",
         "--landing-glow-y": "42%",
         // Lift the whole stack (card + edge glow) so the ring stays aligned on hover.
-        ...(interactive
-          ? {
-              transition: "transform 0.22s ease",
-              "&:hover": { transform: "translateY(-3px)" },
-            }
-          : {}),
         "@media (prefers-reduced-motion: no-preference)": {
-          animation: `${landingCardEnter} 0.62s cubic-bezier(0.22, 1, 0.36, 1) both`,
+          ...(interactive
+            ? {
+                transition: "transform 0.22s ease",
+                "&:hover": { transform: "translateY(-3px)" },
+              }
+            : {}),
+          animation: `${landingCardEnterMotion} 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards`,
           animationDelay: `${delayMs}ms`,
         },
       }}
@@ -101,8 +103,9 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           position: "relative",
           zIndex: 0,
           height: "100%",
-          display: "flex",
-          flexDirection: "column",
+          ...(interactive
+            ? { display: "flex", flexDirection: "column" as const }
+            : {}),
           borderRadius: cardBorderRadius,
           overflow: "hidden",
           border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
@@ -110,16 +113,23 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           backdropFilter: "blur(14px) saturate(160%)",
           boxShadow: `0 0 0 1px ${alpha(theme.appDesign.surfaceHigh, 0.06)} inset,
             0 18px 42px ${alpha(theme.appDesign.background, 0.35)}`,
-          transition: "border-color 0.22s ease, box-shadow 0.22s ease",
-          ...(interactive
-            ? {
-                ".landing-glow-card-root:hover &": {
-                  borderColor: alpha(theme.appDesign.accentSoft, 0.32),
-                  boxShadow: `0 0 0 1px ${alpha(theme.appDesign.accentSoft, 0.12)} inset,
+          ...(!interactive
+            ? { transition: "border-color 0.22s ease, box-shadow 0.22s ease" }
+            : {
+                "@media (prefers-reduced-motion: no-preference)": {
+                  transition: "border-color 0.22s ease, box-shadow 0.22s ease",
+                  ".landing-glow-card-root:hover &": {
+                    borderColor: alpha(theme.appDesign.accentSoft, 0.32),
+                    boxShadow: `0 0 0 1px ${alpha(theme.appDesign.accentSoft, 0.12)} inset,
                     0 22px 48px ${alpha(theme.appDesign.background, 0.42)}`,
+                  },
                 },
-              }
-            : {}),
+                "@media (prefers-reduced-motion: reduce)": {
+                  ".landing-glow-card-root:hover &": {
+                    borderColor: alpha(theme.appDesign.accentSoft, 0.28),
+                  },
+                },
+              }),
           ...cardSx,
         }}
       >
@@ -142,8 +152,14 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
                   ${alpha(accentCore, 0.06)} 42%,
                   transparent 58%
                 )`,
-                ".landing-glow-card-root:hover &": {
-                  opacity: 1,
+                "@media (prefers-reduced-motion: reduce)": {
+                  opacity: 0,
+                  transition: "none",
+                },
+                "@media (prefers-reduced-motion: no-preference)": {
+                  ".landing-glow-card-root:hover &": {
+                    opacity: 1,
+                  },
                 },
               }}
             />
@@ -194,8 +210,14 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           WebkitMaskComposite: "xor",
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
-          ".landing-glow-card-root:hover &": {
-            opacity: 1,
+          "@media (prefers-reduced-motion: reduce)": {
+            opacity: 0,
+            transition: "none",
+          },
+          "@media (prefers-reduced-motion: no-preference)": {
+            ".landing-glow-card-root:hover &": {
+              opacity: 1,
+            },
           },
         }}
       />

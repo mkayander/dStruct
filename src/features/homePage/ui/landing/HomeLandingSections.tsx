@@ -14,6 +14,8 @@ import {
   Stack,
   Typography,
   useTheme,
+  type SxProps,
+  type Theme,
 } from "@mui/material";
 import Link from "next/link";
 import React from "react";
@@ -53,16 +55,22 @@ function landingDemoSlug(href: string): string {
     .join(" ");
 }
 
-const landingSectionHeadingIn = keyframes`
+// Transform only + `forwards` so stagger does not hide headings during `animation-delay`.
+const landingSectionHeadingMotion = keyframes`
   from {
-    opacity: 0;
     transform: translate3d(0, 10px, 0);
   }
   to {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 `;
+
+const landingSectionHeadingEntranceSx = (delayMs = 0): SxProps<Theme> => ({
+  "@media (prefers-reduced-motion: no-preference)": {
+    animation: `${landingSectionHeadingMotion} 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards`,
+    ...(delayMs > 0 ? { animationDelay: `${delayMs}ms` } : {}),
+  },
+});
 
 export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
   LL,
@@ -127,9 +135,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               mb: 1.5,
               maxWidth: 780,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-              },
+              ...landingSectionHeadingEntranceSx(),
             }}
           >
             {LL.HOME_PILLAR_VIS_TITLE()}
@@ -173,10 +179,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               mb: 1.5,
               maxWidth: 720,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-                animationDelay: "80ms",
-              },
+              ...landingSectionHeadingEntranceSx(80),
             }}
           >
             {LL.HOME_SECTION_HOW_IT_WORKS()}
@@ -187,10 +190,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               mb: 4,
               maxWidth: 680,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-                animationDelay: "120ms",
-              },
+              ...landingSectionHeadingEntranceSx(120),
             }}
           >
             {LL.HOME_HOW_STEP_1_BODY()}
@@ -237,9 +237,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               color: "text.secondary",
               mb: 1.5,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-              },
+              ...landingSectionHeadingEntranceSx(),
             }}
           >
             {LL.HOME_SECTION_TRY_DEMOS()}
@@ -250,10 +248,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               mb: 1.5,
               maxWidth: 720,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-                animationDelay: "60ms",
-              },
+              ...landingSectionHeadingEntranceSx(60),
             }}
           >
             {LL.BROWSE_PROJECTS()}
@@ -264,10 +259,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
             sx={{
               mb: 4,
               maxWidth: 620,
-              "@media (prefers-reduced-motion: no-preference)": {
-                animation: `${landingSectionHeadingIn} 0.55s cubic-bezier(0.22, 1, 0.36, 1) both`,
-                animationDelay: "100ms",
-              },
+              ...landingSectionHeadingEntranceSx(100),
             }}
           >
             {LL.HOME_TRY_DEMOS_LEAD()}
