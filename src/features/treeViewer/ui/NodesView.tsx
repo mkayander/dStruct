@@ -61,17 +61,24 @@ export const NodesView: React.FC<NodesViewProps> = ({
       return baseLeft;
     }
 
-    const minX = Math.min(...nodes.map((node) => node.x));
-    const maxX = Math.max(...nodes.map((node) => node.x));
-    const treeCenterX = (minX + maxX + NODE_WIDTH) / 2;
+    // Anchor to the root so the tree does not drift horizontally when the bbox
+    // narrows (e.g. left subtree moves in); min/max centering shifts the whole tree each step.
+    const rootNode = data.rootId ? data.nodes.entities[data.rootId] : undefined;
+    const anchorCenterX = rootNode
+      ? rootNode.x + NODE_WIDTH / 2
+      : (() => {
+          const minX = Math.min(...nodes.map((node) => node.x));
+          const maxX = Math.max(...nodes.map((node) => node.x));
+          return (minX + maxX + NODE_WIDTH) / 2;
+        })();
 
     if (baseLeft === 0) {
-      return `calc(50% - ${treeCenterX}px)`;
+      return `calc(50% - ${anchorCenterX}px)`;
     }
 
     const leftSign = baseLeft >= 0 ? "+" : "-";
-    return `calc(50% ${leftSign} ${Math.abs(baseLeft)}px - ${treeCenterX}px)`;
-  }, [data.nodes.entities, data.type, horizontalAlign, offset, style?.left]);
+    return `calc(50% ${leftSign} ${Math.abs(baseLeft)}px - ${anchorCenterX}px)`;
+  }, [data, horizontalAlign, offset, style?.left]);
 
   return (
     <Box

@@ -67,7 +67,7 @@ const getPreviewRuntimeErrorMessage = (error: unknown): string => {
     return error.message;
   }
 
-  return "Unexpected landing preview initialization error.";
+  return "";
 };
 
 const HomeLandingHeroPreviewRuntimeInner: React.FC<
@@ -95,7 +95,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const isLastFrame = useAppSelector(selectIsLastFrame);
   const isRootFrame = useAppSelector(selectIsRootFrame);
   const playbackStepGroups = useMemo(
-    () => getPlaybackStepGroups(callstack.frames),
+    () =>
+      getPlaybackStepGroups(callstack.frames, { forCallstackDisplay: true }),
     [callstack.frames],
   );
   const activePlaybackStepIndex = useMemo(
@@ -111,6 +112,16 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     if (replayRestartTimeoutRef.current !== null) {
       window.clearTimeout(replayRestartTimeoutRef.current);
       replayRestartTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Auto-replay schedules a 900ms wait, then reset, then a short pause before setIsPlaying(true).
+  // When reset runs, `isLastFrame` becomes false and this effect re-runs; its cleanup must not clear
+  // the post-reset timeout or replay never resumes (playground-style reset sets isPlaying false).
+  const clearAutoReplayEndDelayOnly = useCallback(() => {
+    if (replayTimeoutRef.current !== null) {
+      window.clearTimeout(replayTimeoutRef.current);
+      replayTimeoutRef.current = null;
     }
   }, []);
 
@@ -177,9 +188,9 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       }, REPLAY_RESET_PAUSE_MS);
     }, 900);
 
-    return clearReplayTimers;
+    return clearAutoReplayEndDelayOnly;
   }, [
-    clearReplayTimers,
+    clearAutoReplayEndDelayOnly,
     dispatch,
     handleReset,
     isLastFrame,
@@ -206,8 +217,10 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           {LL.HOME_PILLAR_REPLAY_TITLE()}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          Step {Math.max(activePlaybackStepIndex + 1, 0)} /{" "}
-          {playbackStepGroups.length || callstackLength}
+          {LL.HOME_PREVIEW_STEP_PROGRESS({
+            step: Math.max(activePlaybackStepIndex + 1, 0),
+            total: playbackStepGroups.length || callstackLength,
+          })}
         </Typography>
       </Stack>
 
@@ -280,8 +293,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             size="small"
             onClick={handleManualStepBack}
             disabled={!isReady || isRootFrame}
-            aria-label="Step back"
-            title="Step back"
+            aria-label={LL.HOME_PREVIEW_STEP_BACK()}
+            title={LL.HOME_PREVIEW_STEP_BACK()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
             }}
@@ -298,17 +311,17 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             disabled={!callstackLength}
             aria-label={
               isLastFrame && !isPlaying
-                ? "Replay"
+                ? LL.REPLAY()
                 : isPlaying
-                  ? "Pause"
-                  : "Play"
+                  ? LL.HOME_LANDING_PREVIEW_PAUSE()
+                  : LL.HOME_LANDING_PREVIEW_PLAY()
             }
             title={
               isLastFrame && !isPlaying
-                ? "Replay"
+                ? LL.REPLAY()
                 : isPlaying
-                  ? "Pause"
-                  : "Play"
+                  ? LL.HOME_LANDING_PREVIEW_PAUSE()
+                  : LL.HOME_LANDING_PREVIEW_PLAY()
             }
             sx={{
               bgcolor: alpha(theme.appDesign.accent, 0.14),
@@ -327,8 +340,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             size="small"
             onClick={handleManualStepForward}
             disabled={!isReady || isLastFrame}
-            aria-label="Step forward"
-            title="Step forward"
+            aria-label={LL.HOME_PREVIEW_STEP_FORWARD()}
+            title={LL.HOME_PREVIEW_STEP_FORWARD()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
             }}
@@ -373,9 +386,12 @@ export const HomeLandingHeroPreviewRuntime: React.FC<
     return (
       <Alert severity="error" variant="outlined">
         <Typography variant="subtitle2">
-          Landing preview failed to load.
+          {LL.HOME_LANDING_PREVIEW_LOAD_FAILED()}
         </Typography>
-        <Typography variant="caption">{runtimeState.errorMessage}</Typography>
+        <Typography variant="caption">
+          {runtimeState.errorMessage ||
+            LL.HOME_LANDING_PREVIEW_ERROR_UNEXPECTED()}
+        </Typography>
       </Alert>
     );
   }

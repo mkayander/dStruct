@@ -11,6 +11,26 @@ void (
 const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  // Bundled docs: `node_modules/next/dist/docs/02-pages/04-api-reference/04-config/01-next-config-js/poweredByHeader.md`
+  poweredByHeader: false,
+  // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/reactCompiler.md`
+  reactCompiler: true,
+  // Bundled docs: `node_modules/next/dist/docs/02-pages/04-api-reference/04-config/01-next-config-js/bundlePagesRouterDependencies.md`
+  bundlePagesRouterDependencies: true,
+  experimental: {
+    // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/optimizePackageImports.md`
+    // @mui/material and @mui/icons-material are optimized by default; add other @mui/* barrel-heavy packages.
+    optimizePackageImports: [
+      "@hello-pangea/dnd",
+      "@monaco-editor/react",
+      "@mui/lab",
+      "@mui/system",
+      "@mui/utils",
+      "@mui/x-charts",
+      "@mui/x-internal-gestures",
+      "overlayscrollbars-react",
+    ],
+  },
   transpilePackages: [
     "@apollo/client",
     "@hello-pangea/dnd",
@@ -37,7 +57,28 @@ const config = {
     "zod",
   ],
   i18n: {
-    locales: ["en", "ru", "de", "es", "sr", "uk"],
+    locales: [
+      "ar",
+      "be",
+      "de",
+      "en",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pl",
+      "pt",
+      "ru",
+      "sr",
+      "tr",
+      "uk",
+      "vi",
+      "zh",
+    ],
     defaultLocale: "en",
     localeDetection: false,
   },
@@ -50,6 +91,16 @@ const config = {
       {
         protocol: "https",
         hostname: "leetpal-prod.s3.eu-central-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/u/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
       },
     ],
   },
