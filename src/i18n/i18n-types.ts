@@ -6,12 +6,15 @@ export type BaseTranslation = BaseTranslationType
 export type BaseLocale = 'en'
 
 export type Locales =
+	| 'be'
 	| 'de'
 	| 'en'
 	| 'es'
+	| 'hi'
 	| 'ru'
 	| 'sr'
 	| 'uk'
+	| 'zh'
 
 export type Translation = RootTranslation
 
@@ -511,15 +514,15 @@ type RootTranslation = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
 	/**
-	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e
+	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e​.​ ​S​t​e​p​ ​f​o​r​w​a​r​d​.​ ​S​t​e​p​ ​b​a​c​k​.
 	 */
 	HOME_LANDING_TITLE: string
 	/**
-	 * A​ ​L​e​e​t​C​o​d​e​-​s​t​y​l​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​r​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n​ ​d​r​i​v​e​s​ ​a​ ​s​y​n​c​e​d​ ​v​i​s​u​a​l​ ​d​e​b​u​g​g​e​r​:​ ​t​r​e​e​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​,​ ​l​i​n​k​e​d​ ​s​t​r​u​c​t​u​r​e​s​,​ ​a​n​d​ ​n​e​s​t​e​d​ ​m​a​p​s​.​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​,​ ​s​t​e​p​-​b​y​-​s​t​e​p​ ​r​e​p​l​a​y​,​ ​a​n​d​ ​o​p​t​i​o​n​a​l​ ​t​i​m​i​n​g​ ​s​t​a​t​s​ ​f​o​r​ ​J​S​.
+	 * A​ ​L​e​e​t​C​o​d​e​-​s​t​y​l​e​ ​p​l​a​y​g​r​o​u​n​d​ ​w​h​e​r​e​ ​y​o​u​r​ ​s​o​l​u​t​i​o​n​ ​b​e​c​o​m​e​s​ ​a​ ​v​i​s​u​a​l​ ​e​x​e​c​u​t​i​o​n​ ​t​r​a​c​e​ ​f​o​r​ ​t​r​e​e​s​,​ ​g​r​a​p​h​s​,​ ​g​r​i​d​s​,​ ​l​i​n​k​e​d​ ​s​t​r​u​c​t​u​r​e​s​,​ ​a​n​d​ ​n​e​s​t​e​d​ ​m​a​p​s​.​ ​J​a​v​a​S​c​r​i​p​t​ ​a​n​d​ ​P​y​t​h​o​n​ ​i​n​ ​t​h​e​ ​b​r​o​w​s​e​r​,​ ​r​e​p​l​a​y​a​b​l​e​ ​s​t​a​t​e​ ​c​h​a​n​g​e​s​,​ ​a​n​d​ ​o​p​t​i​o​n​a​l​ ​t​i​m​i​n​g​ ​s​t​a​t​s​ ​f​o​r​ ​J​S​.
 	 */
 	HOME_LANDING_SUBTITLE: string
 	/**
-	 * C​o​m​m​o​n​ ​q​u​e​s​t​i​o​n​s
+	 * F​r​e​q​u​e​n​t​l​y​ ​a​s​k​e​d​ ​q​u​e​s​t​i​o​n​s
 	 */
 	HOME_HERO_FAQ_LINK: string
 	/**
@@ -551,7 +554,7 @@ type RootTranslation = {
 	 */
 	HOME_HOW_STEP_3_BODY: string
 	/**
-	 * B​u​i​l​t​ ​f​o​r​ ​c​l​a​r​i​t​y
+	 * C​a​p​a​b​i​l​i​t​i​e​s
 	 */
 	HOME_SECTION_WHY_DSTUCT: string
 	/**
@@ -607,11 +610,11 @@ type RootTranslation = {
 	 */
 	HOME_LANG_PYTHON_BODY: string
 	/**
-	 * T​r​y​ ​e​x​a​m​p​l​e​ ​p​l​a​y​g​r​o​u​n​d​s
+	 * A​l​g​o​r​i​t​h​m​ ​g​a​l​l​e​r​y
 	 */
 	HOME_SECTION_TRY_DEMOS: string
 	/**
-	 * J​u​m​p​ ​i​n​t​o​ ​a​ ​c​u​r​a​t​e​d​ ​e​x​a​m​p​l​e​—​o​r​ ​o​p​e​n​ ​t​h​e​ ​f​u​l​l​ ​p​r​o​j​e​c​t​ ​b​r​o​w​s​e​r​.
+	 * O​p​e​n​ ​a​ ​c​u​r​a​t​e​d​ ​p​l​a​y​g​r​o​u​n​d​ ​t​o​ ​s​e​e​ ​t​h​e​ ​d​e​b​u​g​g​e​r​ ​o​n​ ​a​ ​r​e​a​l​ ​p​r​o​b​l​e​m​,​ ​o​r​ ​j​u​m​p​ ​i​n​t​o​ ​t​h​e​ ​f​u​l​l​ ​b​r​o​w​s​e​r​.
 	 */
 	HOME_TRY_DEMOS_LEAD: string
 	/**
@@ -1270,15 +1273,15 @@ export type TranslationFunctions = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: () => LocalizedString
 	/**
-	 * Your code, frame by frame
+	 * Your code, frame by frame. Step forward. Step back.
 	 */
 	HOME_LANDING_TITLE: () => LocalizedString
 	/**
-	 * A LeetCode-style playground where your solution drives a synced visual debugger: trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, step-by-step replay, and optional timing stats for JS.
+	 * A LeetCode-style playground where your solution becomes a visual execution trace for trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, replayable state changes, and optional timing stats for JS.
 	 */
 	HOME_LANDING_SUBTITLE: () => LocalizedString
 	/**
-	 * Common questions
+	 * Frequently asked questions
 	 */
 	HOME_HERO_FAQ_LINK: () => LocalizedString
 	/**
@@ -1310,7 +1313,7 @@ export type TranslationFunctions = {
 	 */
 	HOME_HOW_STEP_3_BODY: () => LocalizedString
 	/**
-	 * Built for clarity
+	 * Capabilities
 	 */
 	HOME_SECTION_WHY_DSTUCT: () => LocalizedString
 	/**
@@ -1366,11 +1369,11 @@ export type TranslationFunctions = {
 	 */
 	HOME_LANG_PYTHON_BODY: () => LocalizedString
 	/**
-	 * Try example playgrounds
+	 * Algorithm gallery
 	 */
 	HOME_SECTION_TRY_DEMOS: () => LocalizedString
 	/**
-	 * Jump into a curated example—or open the full project browser.
+	 * Open a curated playground to see the debugger on a real problem, or jump into the full browser.
 	 */
 	HOME_TRY_DEMOS_LEAD: () => LocalizedString
 	/**

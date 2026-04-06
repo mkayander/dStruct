@@ -37,7 +37,7 @@ const config = {
     "zod",
   ],
   i18n: {
-    locales: ["en", "ru", "de", "es", "sr", "uk"],
+    locales: ["en", "ru", "de", "es", "sr", "uk", "be", "hi", "zh"],
     defaultLocale: "en",
     localeDetection: false,
   },
