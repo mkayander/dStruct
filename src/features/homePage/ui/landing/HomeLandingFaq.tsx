@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { LandingReveal } from "#/features/homePage/ui/landing/LandingReveal";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 export type HomeLandingFaqProps = {
@@ -45,53 +46,56 @@ export const HomeLandingFaq: React.FC<HomeLandingFaqProps> = ({ LL }) => {
       }}
     >
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-        <Typography
-          id="landing-faq-heading"
-          variant="h3"
-          component="h2"
-          sx={{
-            mb: 1.5,
-            color: "text.primary",
-          }}
-        >
-          {LL.HOME_SECTION_FAQ()}
-        </Typography>
-        {items.map((item, index) => (
-          <Accordion
-            key={`home-landing-faq-${String(index + 1).padStart(2, "0")}`}
-            disableGutters
-            elevation={0}
-            defaultExpanded={index === 0}
-            sx={{
-              bgcolor: (theme) => alpha(theme.appDesign.surface, 0.88),
-              border: (theme) =>
-                `1px solid ${alpha(theme.appDesign.outline, index === 0 ? 0.2 : 0.12)}`,
-              borderRadius: "8px !important",
-              mb: 1.25,
-              "&:before": { display: "none" },
-              overflow: "hidden",
-            }}
+        <LandingReveal sx={{ mb: 1.5 }}>
+          <Typography
+            id="landing-faq-heading"
+            variant="h3"
+            component="h2"
+            sx={{ color: "text.primary" }}
           >
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
+            {LL.HOME_SECTION_FAQ()}
+          </Typography>
+        </LandingReveal>
+        {items.map((item, index) => (
+          <LandingReveal
+            key={`home-landing-faq-${String(index + 1).padStart(2, "0")}`}
+            sx={{ mb: 1.25 }}
+            staggerMs={Math.min(index * 42, 520)}
+          >
+            <Accordion
+              disableGutters
+              elevation={0}
+              defaultExpanded={index === 0}
               sx={{
-                fontWeight: 600,
-                "& .MuiAccordionSummary-content": { my: 1.25 },
+                bgcolor: (theme) => alpha(theme.appDesign.surface, 0.88),
+                border: (theme) =>
+                  `1px solid ${alpha(theme.appDesign.outline, index === 0 ? 0.2 : 0.12)}`,
+                borderRadius: "8px !important",
+                "&:before": { display: "none" },
+                overflow: "hidden",
               }}
             >
-              {item.q}
-            </AccordionSummary>
-            <AccordionDetails
-              sx={{
-                pt: 0,
-                pb: 2,
-                color: "text.secondary",
-                lineHeight: 1.65,
-              }}
-            >
-              {item.a}
-            </AccordionDetails>
-          </Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                sx={{
+                  fontWeight: 600,
+                  "& .MuiAccordionSummary-content": { my: 1.25 },
+                }}
+              >
+                {item.q}
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  pt: 0,
+                  pb: 2,
+                  color: "text.secondary",
+                  lineHeight: 1.65,
+                }}
+              >
+                {item.a}
+              </AccordionDetails>
+            </Accordion>
+          </LandingReveal>
         ))}
       </Container>
     </Box>
