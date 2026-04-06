@@ -2,6 +2,7 @@ export { computeZoomAtPoint, type ViewTransform } from "./zoomAtPoint";
 export {
   getLastRenderableFrameIndex,
   getNextPlaybackFrameIndex,
+  type GetPlaybackStepGroupsOptions,
   type PlaybackStepGroup,
   getPlaybackStepGroups,
   getPlaybackStepIndex,
