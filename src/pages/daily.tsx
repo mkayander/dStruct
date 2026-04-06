@@ -9,13 +9,14 @@ import {
   useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
-import Head from "next/head";
 
 import { useDailyQuestionData } from "#/api";
 import { DailyProblem } from "#/features/homePage/ui/DailyProblem/DailyProblem";
 import { QuestionSummary } from "#/features/homePage/ui/QuestionSummary";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import { useI18nContext } from "#/shared/hooks";
+import { SITE_ORIGIN } from "#/shared/lib/seo";
+import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 const DailyProblemPage: NextPage<{
@@ -31,10 +32,11 @@ const DailyProblemPage: NextPage<{
 
   return (
     <MainLayout>
-      <Head>
-        <title>{`${LL.HOME_DAILY_SECTION_TITLE()} — dStruct`}</title>
-        <link rel="canonical" href="https://dstruct.pro/daily" />
-      </Head>
+      <SiteSeoHead
+        title={`${LL.HOME_DAILY_SECTION_TITLE()} — dStruct`}
+        description={`${LL.HOME_DAILY_SECTION_TITLE()}. ${LL.HOME_DAILY_SECTION_LEAD()}`}
+        canonicalUrl={`${SITE_ORIGIN}/daily`}
+      />
       <Box
         sx={{
           bgcolor: "background.default",

@@ -1,8 +1,7 @@
 import type { GetServerSideProps } from "next";
 
 import { db } from "#/server/db/client";
-
-const BASE_URL = "https://dstruct.pro";
+import { SITE_ORIGIN } from "#/shared/lib/seo";
 
 type ProjectForSitemap = {
   slug: string;
@@ -19,13 +18,19 @@ function generateSiteMap(projects: ProjectForSitemap[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
-       <loc>${BASE_URL}</loc>
+       <loc>${SITE_ORIGIN}</loc>
        <lastmod>${now}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>1.0</priority>
      </url>
      <url>
-       <loc>${BASE_URL}/playground</loc>
+       <loc>${SITE_ORIGIN}/daily</loc>
+       <lastmod>${now}</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.85</priority>
+     </url>
+     <url>
+       <loc>${SITE_ORIGIN}/playground</loc>
        <lastmod>${now}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>0.9</priority>
@@ -35,7 +40,7 @@ function generateSiteMap(projects: ProjectForSitemap[]) {
          const lastmod = formatLastmod(updatedAt);
          return `
      <url>
-       <loc>${BASE_URL}/playground/${slug}</loc>
+       <loc>${SITE_ORIGIN}/playground/${slug}</loc>
        <lastmod>${lastmod}</lastmod>
        <changefreq>weekly</changefreq>
        <priority>0.8</priority>

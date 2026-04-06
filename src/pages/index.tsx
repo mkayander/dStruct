@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 
 import { HomeLandingFaq } from "#/features/homePage/ui/landing/HomeLandingFaq";
 import { HomeLandingHero } from "#/features/homePage/ui/landing/HomeLandingHero";
 import { HomeLandingSections } from "#/features/homePage/ui/landing/HomeLandingSections";
 import type { Locales, Translations } from "#/i18n/i18n-types";
 import { useI18nContext } from "#/shared/hooks";
+import { SITE_ORIGIN } from "#/shared/lib/seo";
+import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
 import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 const DashboardPage: NextPage<{
@@ -18,10 +19,10 @@ const DashboardPage: NextPage<{
 
   return (
     <MainLayout headerPosition="fixed">
-      <Head>
-        <title>dStruct</title>
-        <link rel="canonical" href="https://dstruct.pro/" />
-      </Head>
+      <SiteSeoHead
+        title="dStruct — visualize LeetCode solutions"
+        canonicalUrl={`${SITE_ORIGIN}/`}
+      />
       <HomeLandingHero LL={LL} />
 
       <HomeLandingSections LL={LL} />
