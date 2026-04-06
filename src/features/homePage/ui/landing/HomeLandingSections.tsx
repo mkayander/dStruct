@@ -68,21 +68,25 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
 
   const capabilities = [
     {
+      id: "pillar-vis",
       icon: <CallSplit fontSize="small" />,
       title: LL.HOME_PILLAR_VIS_TITLE(),
       body: LL.HOME_PILLAR_VIS_BODY(),
     },
     {
+      id: "pillar-workers",
       icon: <PlayCircleOutline fontSize="small" />,
       title: LL.HOME_PILLAR_WORKERS_TITLE(),
       body: LL.HOME_PILLAR_WORKERS_BODY(),
     },
     {
+      id: "pillar-replay",
       icon: <History fontSize="small" />,
       title: LL.HOME_PILLAR_REPLAY_TITLE(),
       body: LL.HOME_PILLAR_REPLAY_BODY(),
     },
     {
+      id: "pillar-bench",
       icon: <AutoAwesomeMotion fontSize="small" />,
       title: LL.HOME_PILLAR_BENCH_TITLE(),
       body: LL.HOME_PILLAR_BENCH_BODY(),
@@ -91,18 +95,22 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
 
   const coreLoop = [
     {
+      id: "core-run",
       label: LL.RUN(),
       body: LL.HOME_HOW_STEP_2_BODY(),
     },
     {
+      id: "core-forward",
       label: LL.FORWARD(),
       body: LL.HOME_HOW_STEP_3_BODY(),
     },
     {
+      id: "core-replay",
       label: LL.REPLAY(),
       body: LL.HOME_PILLAR_REPLAY_BODY(),
     },
     {
+      id: "core-callstack",
       label: LL.CALLSTACK(),
       body: LL.HOME_PILLAR_VIS_BODY(),
     },
@@ -127,7 +135,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           </Typography>
           <Grid container spacing={3}>
             {capabilities.map((capability) => (
-              <Grid key={capability.title} size={{ xs: 12, sm: 6, lg: 3 }}>
+              <Grid key={capability.id} size={{ xs: 12, sm: 6, lg: 3 }}>
                 <Card
                   sx={{
                     height: "100%",
@@ -180,7 +188,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           </Typography>
           <Grid container spacing={2}>
             {coreLoop.map((item, index) => (
-              <Grid key={item.label} size={{ xs: 12, sm: 6, lg: 3 }}>
+              <Grid key={item.id} size={{ xs: 12, sm: 6, lg: 3 }}>
                 <Card
                   sx={{
                     height: "100%",
@@ -238,7 +246,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
           </Typography>
           <Grid container spacing={2.5}>
             {LANDING_PLAYGROUND_DEMOS.map(({ href, id, Icon }) => (
-              <Grid key={href} size={{ xs: 12, sm: 6, lg: 3 }}>
+              <Grid key={id} size={{ xs: 12, sm: 6, lg: 3 }}>
                 <Card
                   sx={{
                     height: "100%",
