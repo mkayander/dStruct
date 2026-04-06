@@ -8,27 +8,30 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
+import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { HomeLandingHeroPreview } from "#/features/homePage/ui/landing/HomeLandingHeroPreview";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
-import { useMobileLayout } from "#/shared/hooks";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
+import { PythonLogoModelView } from "#/shared/ui/molecules/PythonLogoModelView";
 
 type HomeLandingHeroProps = {
   LL: TranslationFunctions;
 };
 
-const HERO_MODEL_BASE_AZIMUTH = Math.PI / 4.6;
-const HERO_MODEL_BASE_POLAR = Math.PI / 2.5;
-const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.28;
-const HERO_MODEL_MAX_POLAR_OFFSET = 0.18;
-const HERO_MODEL_DAMPING = 0.08;
+const HERO_BRAND_BASE_AZIMUTH = Math.PI / 4.6;
+const HERO_BRAND_BASE_POLAR = Math.PI / 2.5;
+/** Mirrored resting pose so the left decoration faces inward toward content. */
+const HERO_PYTHON_BASE_AZIMUTH = -HERO_BRAND_BASE_AZIMUTH;
+const HERO_PYTHON_BASE_POLAR = HERO_BRAND_BASE_POLAR;
 
-const clamp = (value: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, value));
+const HERO_MODEL_CAMERA: [number, number, number] = [1, 2.6, 22];
+const HERO_MODEL_FOV = 38;
+const HERO_MODEL_TARGET: [number, number, number] = [0, 0.75, 0];
+const HERO_MODEL_DISTANCE: readonly [number, number] = [18, 28];
 
 const AmbientBackground = () => {
   const theme = useTheme();
@@ -41,16 +44,13 @@ const AmbientBackground = () => {
         left: 0,
         width: "100%",
         height: "100vh",
-        background: `radial-gradient(circle at 18% 18%, ${alpha(
-          theme.appDesign.accent,
-          0.16,
-        )} 0%, transparent 42%), radial-gradient(circle at 82% 12%, ${alpha(
-          theme.appDesign.accentSoft,
-          0.12,
-        )} 0%, transparent 36%), linear-gradient(180deg, ${alpha(
-          theme.appDesign.surfaceLow,
-          0.12,
-        )} 0%, transparent 55%)`,
+        background: `
+          radial-gradient(circle at 18% 18%, ${alpha(theme.appDesign.accent, 0.16)} 0%, transparent 42%),
+          radial-gradient(circle at 82% 12%, ${alpha(theme.appDesign.accentSoft, 0.12)} 0%, transparent 36%),
+          radial-gradient(circle at 10% 58%, ${alpha(theme.palette.info.main, 0.14)} 0%, transparent 38%),
+          radial-gradient(circle at 6% 78%, ${alpha(theme.palette.warning.main, 0.1)} 0%, transparent 44%),
+          linear-gradient(180deg, ${alpha(theme.appDesign.surfaceLow, 0.12)} 0%, transparent 55%)
+        `,
         pointerEvents: "none",
       }}
     />
@@ -59,117 +59,24 @@ const AmbientBackground = () => {
 
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
-  const isMobileLayout = useMobileLayout();
-  const controlsRef = useRef<ThreeOrbitControls>(null);
-  const currentAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
-  const currentPolarRef = useRef(HERO_MODEL_BASE_POLAR);
-  const targetAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
-  const targetPolarRef = useRef(HERO_MODEL_BASE_POLAR);
+  const brandControlsRef = useRef<ThreeOrbitControls>(null);
+  const pythonControlsRef = useRef<ThreeOrbitControls>(null);
 
-  const applyModelAngles = useCallback((azimuth: number, polar: number) => {
-    const controls = controlsRef.current;
-    if (!controls) return;
-    controls.setAzimuthalAngle(azimuth);
-    controls.setPolarAngle(polar);
-    controls.update();
-  }, []);
+  useHeroOrbitModelMotion({
+    controlsRef: brandControlsRef,
+    baseAzimuth: HERO_BRAND_BASE_AZIMUTH,
+    basePolar: HERO_BRAND_BASE_POLAR,
+    invertPointerX: false,
+    scrollPhasePx: 0,
+  });
 
-  const setModelRestingPosition = useCallback(() => {
-    currentAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    currentPolarRef.current = HERO_MODEL_BASE_POLAR;
-    targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    targetPolarRef.current = HERO_MODEL_BASE_POLAR;
-    applyModelAngles(HERO_MODEL_BASE_AZIMUTH, HERO_MODEL_BASE_POLAR);
-  }, [applyModelAngles]);
-
-  const resetModelAngles = useCallback(() => {
-    targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    targetPolarRef.current = HERO_MODEL_BASE_POLAR;
-  }, []);
-
-  const updateModelFromPointer = useCallback(
-    (clientX: number, clientY: number) => {
-      if (isMobileLayout) return;
-
-      if (
-        !controlsRef.current ||
-        window.innerWidth === 0 ||
-        window.innerHeight === 0
-      ) {
-        return;
-      }
-
-      const xRatio = clientX / window.innerWidth - 0.5;
-      const yRatio = clientY / window.innerHeight - 0.5;
-
-      targetAzimuthRef.current =
-        HERO_MODEL_BASE_AZIMUTH - xRatio * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2;
-      targetPolarRef.current = clamp(
-        HERO_MODEL_BASE_POLAR + yRatio * HERO_MODEL_MAX_POLAR_OFFSET * 2,
-        Math.PI / 2.9,
-        Math.PI / 1.9,
-      );
-    },
-    [isMobileLayout],
-  );
-
-  useEffect(() => {
-    setModelRestingPosition();
-  }, [setModelRestingPosition]);
-
-  useEffect(() => {
-    if (isMobileLayout) {
-      setModelRestingPosition();
-      return;
-    }
-
-    let frameId = 0;
-
-    const animateModel = () => {
-      const nextAzimuth =
-        currentAzimuthRef.current +
-        (targetAzimuthRef.current - currentAzimuthRef.current) *
-          HERO_MODEL_DAMPING;
-      const nextPolar =
-        currentPolarRef.current +
-        (targetPolarRef.current - currentPolarRef.current) * HERO_MODEL_DAMPING;
-
-      currentAzimuthRef.current = nextAzimuth;
-      currentPolarRef.current = nextPolar;
-      applyModelAngles(nextAzimuth, nextPolar);
-
-      frameId = window.requestAnimationFrame(animateModel);
-    };
-
-    const handleWindowMouseMove = (event: MouseEvent) => {
-      updateModelFromPointer(event.clientX, event.clientY);
-    };
-
-    const handlePointerExit = () => {
-      resetModelAngles();
-    };
-
-    window.addEventListener("mousemove", handleWindowMouseMove);
-    window.addEventListener("blur", handlePointerExit);
-    document.documentElement.addEventListener("mouseleave", handlePointerExit);
-    frameId = window.requestAnimationFrame(animateModel);
-
-    return () => {
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("blur", handlePointerExit);
-      document.documentElement.removeEventListener(
-        "mouseleave",
-        handlePointerExit,
-      );
-      window.cancelAnimationFrame(frameId);
-    };
-  }, [
-    applyModelAngles,
-    isMobileLayout,
-    resetModelAngles,
-    setModelRestingPosition,
-    updateModelFromPointer,
-  ]);
+  useHeroOrbitModelMotion({
+    controlsRef: pythonControlsRef,
+    baseAzimuth: HERO_PYTHON_BASE_AZIMUTH,
+    basePolar: HERO_PYTHON_BASE_POLAR,
+    invertPointerX: true,
+    scrollPhasePx: 140,
+  });
 
   return (
     <Box
@@ -199,12 +106,36 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
         }}
       >
         <LogoModelView
-          controlsRef={controlsRef}
+          controlsRef={brandControlsRef}
           interactive={false}
-          cameraPosition={[1, 2.6, 22]}
-          cameraFov={38}
-          target={[0, 0.75, 0]}
-          distanceRange={[18, 28]}
+          cameraPosition={HERO_MODEL_CAMERA}
+          cameraFov={HERO_MODEL_FOV}
+          target={HERO_MODEL_TARGET}
+          distanceRange={HERO_MODEL_DISTANCE}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: { xs: 140, sm: 220, md: 320 },
+          left: { xs: -132, sm: -200, md: -340 },
+          width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
+          height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
+          opacity: { xs: 0.1, md: 0.17 },
+          filter: "blur(0.4px)",
+          pointerEvents: "none",
+          maskImage:
+            "radial-gradient(circle at 52% 50%, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.42) 64%, transparent 90%)",
+        }}
+      >
+        <PythonLogoModelView
+          controlsRef={pythonControlsRef}
+          interactive={false}
+          cameraPosition={HERO_MODEL_CAMERA}
+          cameraFov={HERO_MODEL_FOV}
+          target={HERO_MODEL_TARGET}
+          distanceRange={HERO_MODEL_DISTANCE}
         />
       </Box>
 

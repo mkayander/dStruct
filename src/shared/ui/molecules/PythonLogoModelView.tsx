@@ -7,9 +7,9 @@ import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 import { useMobileLayout } from "#/shared/hooks";
 import { OrbitModelCanvasTouchScroll } from "#/shared/ui/molecules/OrbitModelCanvasTouchScroll";
 
-import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
+import { PythonLogoModel } from "#/3d-models/PythonLogoModel";
 
-type LogoModelViewProps = {
+type PythonLogoModelViewProps = {
   controlsRef?: React.RefObject<ThreeOrbitControls | null>;
   interactive?: boolean;
   cameraPosition?: [number, number, number];
@@ -18,7 +18,7 @@ type LogoModelViewProps = {
   distanceRange?: readonly [number, number];
 };
 
-export const LogoModelView: React.FC<LogoModelViewProps> = ({
+export const PythonLogoModelView: React.FC<PythonLogoModelViewProps> = ({
   controlsRef,
   interactive = true,
   cameraPosition = [0, 0, 5],
@@ -58,7 +58,7 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         position={[-6.44, -5.881, 2.343]}
         rotation={[-1.839, 0.602, 1.932]}
       />
-      <BinaryTreeModel />
+      <PythonLogoModel />
       <OrbitControls
         ref={controlsRef}
         enabled={pointerRotationEnabled}
