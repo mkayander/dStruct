@@ -143,7 +143,7 @@ export type CallFrame =
   | ReadArrayItemFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
-  sortComparer: (a, b) => a.timestamp - b.timestamp,
+  sortComparer: (left, right) => left.timestamp - right.timestamp,
 });
 
 /**

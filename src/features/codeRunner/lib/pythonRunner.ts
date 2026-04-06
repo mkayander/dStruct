@@ -135,8 +135,8 @@ class PythonRunner {
   private async withSerializedOperation<T>(fn: () => Promise<T>): Promise<T> {
     await this.operationGate;
     let release!: () => void;
-    this.operationGate = new Promise<void>((r) => {
-      release = r;
+    this.operationGate = new Promise<void>((resolveGate) => {
+      release = resolveGate;
     });
     try {
       return await fn();

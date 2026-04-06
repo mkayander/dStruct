@@ -68,7 +68,10 @@ function generateExtension(models: Map<string, Set<string>>): string {
 
     const modelKey = toCamelCase(modelName);
     const fieldEntries = Array.from(fields)
-      .map((f) => `        ${f}: dateField("${f}"),`)
+      .map(
+        (fieldName) =>
+          `        ${fieldName}: dateField("${fieldName}"),`,
+      )
       .join("\n");
 
     entries.push(`      ${modelKey}: {

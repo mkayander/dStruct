@@ -161,7 +161,7 @@ export const ProjectBrowserList: React.FC<ProjectBrowserListProps> = ({
         aria-busy={true}
       >
         <Virtuoso
-          data={Array.from({ length: skeletonCount }, (_, i) => i)}
+          data={Array.from({ length: skeletonCount }, (_, index) => index)}
           totalCount={skeletonCount}
           itemContent={skeletonItemContent}
           fixedItemHeight={ITEM_HEIGHT}

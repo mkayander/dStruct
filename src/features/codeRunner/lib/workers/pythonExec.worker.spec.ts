@@ -236,12 +236,12 @@ describe("pythonExec.worker protocol", () => {
         { type: "PROGRESS", value: 100, stage: "Ready" },
         { type: "READY" },
       ];
-      steps.forEach((data, i) => {
+      steps.forEach((data, stepIndex) => {
         setTimeout(() => {
           if (!mockWorker.terminated) {
             mockWorker.dispatchEvent(new MessageEvent("message", { data }));
           }
-        }, i * 5);
+        }, stepIndex * 5);
       });
     };
 

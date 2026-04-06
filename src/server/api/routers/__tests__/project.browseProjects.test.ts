@@ -536,13 +536,13 @@ describe("project.browseProjects", () => {
       const whereConditions = callArgs?.where?.AND || [];
 
       const hasSearch = whereConditions.some(
-        (c: any) => c.title?.contains === "test",
+        (condition: any) => condition.title?.contains === "test",
       );
-      const hasCategory = whereConditions.some((c: any) =>
-        c.category?.in?.includes(ProjectCategory.ARRAY),
+      const hasCategory = whereConditions.some((condition: any) =>
+        condition.category?.in?.includes(ProjectCategory.ARRAY),
       );
-      const hasDifficulty = whereConditions.some((c: any) =>
-        c.difficulty?.in?.includes(ProjectDifficulty.EASY),
+      const hasDifficulty = whereConditions.some((condition: any) =>
+        condition.difficulty?.in?.includes(ProjectDifficulty.EASY),
       );
 
       expect(hasSearch).toBe(true);

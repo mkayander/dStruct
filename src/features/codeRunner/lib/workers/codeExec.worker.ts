@@ -153,11 +153,11 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const timeData: number[] = [];
         let output: unknown;
 
-        for (let i = 0; i < count; i++) {
+        for (let iteration = 0; iteration < count; iteration++) {
           const start = performance.now();
           output = runFunction(...input);
           timeData.push(performance.now() - start);
-          const current = i + 1;
+          const current = iteration + 1;
           self.postMessage({
             type: "benchmark-progress",
             current,
@@ -167,7 +167,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
 
         const totalTime = performance.now() - startTimestamp;
         const averageTime = totalTime / count;
-        const sortedTimeData = timeData.toSorted((a, b) => a - b);
+        const sortedTimeData = timeData.toSorted((left, right) => left - right);
         const medianTime = sortedTimeData[Math.floor(count / 2)];
         const p75Time = sortedTimeData[Math.floor(count * 0.75)];
         const p90Time = sortedTimeData[Math.floor(count * 0.9)];

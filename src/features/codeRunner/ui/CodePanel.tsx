@@ -76,8 +76,8 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     "mode",
     {
       defaultValue: "structure",
-      validate: (v): v is "structure" | "benchmark" =>
-        v === "structure" || v === "benchmark",
+      validate: (rawMode): rawMode is "structure" | "benchmark" =>
+        rawMode === "structure" || rawMode === "benchmark",
     },
   );
   const [language, setLanguage] = useSearchParam<ProgrammingLanguage>(

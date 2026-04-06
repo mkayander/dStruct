@@ -97,10 +97,11 @@ export const useHeroOrbitModelMotion = ({
 
     const scrollY = window.scrollY + scrollPhasePx;
     const denom = Math.max(window.innerHeight * 0.9, 1);
-    const t = clamp(scrollY / denom, 0, 1);
-    const yRatio = t - 0.5;
+    const scrollProgress = clamp(scrollY / denom, 0, 1);
+    const yRatio = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
-    const azimuthDrift = (t - 0.5) * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2.2;
+    const azimuthDrift =
+      (scrollProgress - 0.5) * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2.2;
 
     targetAzimuthRef.current = baseAzimuth + xSign * azimuthDrift;
     targetPolarRef.current = clamp(

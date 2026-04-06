@@ -158,7 +158,7 @@ describe("projectBrowserSlice", () => {
 
       const accumulated = selectAccumulatedProjects(store.getState());
       expect(accumulated).toHaveLength(3);
-      expect(accumulated.map((p) => p.id)).toEqual(["1", "2", "3"]);
+      expect(accumulated.map((project) => project.id)).toEqual(["1", "2", "3"]);
     });
 
     it("should handle appending to empty array", () => {

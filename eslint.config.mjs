@@ -50,6 +50,14 @@ const eslintConfig = [
       ],
       "@typescript-eslint/no-empty-object-type": "off",
       "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
+      "id-length": [
+        "error",
+        {
+          min: 2,
+          exceptions: ["_"],
+          properties: "never",
+        },
+      ],
       "no-restricted-syntax": [
         "error",
         {

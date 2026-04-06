@@ -20,6 +20,7 @@ Cursor rules to apply (see each file for full wording):
 
 - `react-named-hook-imports.mdc` — named hook imports from `"react"`; no `React.use*` for hooks
 - `no-inline-type-imports.mdc` — no inline `import()` in type positions; use top-level `import type`
+- `no-one-letter-identifiers.mdc` — no single-letter variables/parameters (ESLint `id-length`)
 - `useeffect-business-logic-comments.mdc` — short comments above non-trivial `useEffect` hooks that encode business logic
 
 **Tooling:** Use **pnpm** for installs and scripts (`pnpm install`, `pnpm dev`, `pnpm lint`, `pnpm test`). Local dev: `pnpm dev`. Prefer iterating with the dev server rather than repeated full production builds during exploration.

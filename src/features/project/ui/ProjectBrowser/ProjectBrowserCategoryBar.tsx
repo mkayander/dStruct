@@ -40,13 +40,15 @@ export const ProjectBrowserCategoryBar: React.FC<
   // Get all categories sorted by count (descending) then alphabetically
   const sortedCategories = useMemo(() => {
     const allCategories = Array.from(categoryCounts.keys());
-    return allCategories.sort((a, b) => {
-      const countA = categoryCounts.get(a) || 0;
-      const countB = categoryCounts.get(b) || 0;
-      if (countA !== countB) {
-        return countB - countA; // Descending by count
+    return allCategories.sort((categoryLeft, categoryRight) => {
+      const countLeft = categoryCounts.get(categoryLeft) || 0;
+      const countRight = categoryCounts.get(categoryRight) || 0;
+      if (countLeft !== countRight) {
+        return countRight - countLeft; // Descending by count
       }
-      return categoryLabels[a].localeCompare(categoryLabels[b]); // Alphabetical
+      return categoryLabels[categoryLeft].localeCompare(
+        categoryLabels[categoryRight],
+      ); // Alphabetical
     });
   }, [categoryCounts]);
 
@@ -54,7 +56,11 @@ export const ProjectBrowserCategoryBar: React.FC<
     const isSelected = selectedCategories.includes(category);
     if (isSelected) {
       // Remove category from selection
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+      setSelectedCategories(
+        selectedCategories.filter(
+          (selectedCategory) => selectedCategory !== category,
+        ),
+      );
     } else {
       // Add category to selection
       setSelectedCategories([...selectedCategories, category]);

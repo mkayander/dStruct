@@ -17,16 +17,16 @@ export const SessionWidget: React.FC = () => {
   }
 
   const handleSignIn: React.MouseEventHandler<HTMLButtonElement> = async (
-    e,
+    event,
   ) => {
-    e.preventDefault();
+    event.preventDefault();
     await signIn();
   };
 
   const handleSignOut: React.MouseEventHandler<HTMLButtonElement> = async (
-    e,
+    event,
   ) => {
-    e.preventDefault();
+    event.preventDefault();
     await signOut();
   };
 

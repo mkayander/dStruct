@@ -56,8 +56,8 @@ export const ProblemLinkButton: React.FC<ProblemLinkButtonProps> = ({
     <Tooltip title={site.title} arrow>
       <IconButton
         icon={site.icon}
-        onClick={(e) => {
-          e.preventDefault();
+        onClick={(event) => {
+          event.preventDefault();
           window.open(problemLink, "_blank", "noopener,noreferrer");
         }}
       />

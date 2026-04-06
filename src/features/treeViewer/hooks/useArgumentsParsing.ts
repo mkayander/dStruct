@@ -79,8 +79,8 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
   let input: TreeInput | null = null;
   try {
     input = JSON.parse(rawInput);
-  } catch (e) {
-    console.warn(e);
+  } catch (error) {
+    console.warn(error);
   }
 
   if (!input || input.length === 0) return;
@@ -98,9 +98,9 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
 
   let maxDepth = 0;
 
-  let i = 1;
+  let inputIndex = 1;
 
-  while (queue.length > 0 && i < input.length) {
+  while (queue.length > 0 && inputIndex < input.length) {
     const current = queue.shift();
     if (!current) break;
 
@@ -108,7 +108,7 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
 
     maxDepth = newDepth;
 
-    const newLeft = createNodeData(nodesMap, input[i], newDepth, type);
+    const newLeft = createNodeData(nodesMap, input[inputIndex], newDepth, type);
     if (newLeft) {
       current.childrenIds[0] = newLeft.id;
 
@@ -121,9 +121,14 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
       };
       queue.push(newLeft);
     }
-    i++;
+    inputIndex++;
 
-    const newRight = createNodeData(nodesMap, input[i], newDepth, type);
+    const newRight = createNodeData(
+      nodesMap,
+      input[inputIndex],
+      newDepth,
+      type,
+    );
     if (newRight) {
       current.childrenIds[1] = newRight.id;
 
@@ -136,7 +141,7 @@ const parseBinaryTreeArgument = (rawInput: string): TreeParsingResult => {
       };
       queue.push(newRight);
     }
-    i++;
+    inputIndex++;
   }
 
   return { maxDepth, nodesMap, edgesMap };
@@ -146,8 +151,8 @@ const parseLinkedListArgument = (rawInput: string): TreeParsingResult => {
   let input: TreeInput | null = null;
   try {
     input = JSON.parse(rawInput);
-  } catch (e) {
-    console.warn(e);
+  } catch (error) {
+    console.warn(error);
   }
 
   if (!input || input.length === 0) return;
@@ -195,8 +200,8 @@ const parseGraphArgument = (
   let input: GraphInput | null = null;
   try {
     input = JSON.parse(rawInput);
-  } catch (e) {
-    console.warn(e);
+  } catch (error) {
+    console.warn(error);
   }
 
   if (!input || input.length === 0) return;
@@ -354,18 +359,18 @@ export const getMatrixChildArrayArgs = (
   const input = JSON.parse(arg.input) as (Array<number | string> | string)[];
   const childArgs: ArrayArg[] = [];
 
-  for (let i = 0; i < input.length; i++) {
-    const name = getChildArrayName(arg.name, i);
-    const item = input[i];
+  for (let rowIndex = 0; rowIndex < input.length; rowIndex++) {
+    const name = getChildArrayName(arg.name, rowIndex);
+    const item = input[rowIndex];
     const newArg: ArrayArg = {
       name,
       parentName: arg.name,
       type: Array.isArray(item) ? ArgumentType.ARRAY : ArgumentType.STRING,
       input: JSON.stringify(item),
-      order: arg.order + i + 1,
+      order: arg.order + rowIndex + 1,
     };
     childArgs.push(newArg);
-    onParsed?.(newArg, i);
+    onParsed?.(newArg, rowIndex);
   }
 
   return childArgs;
@@ -394,16 +399,16 @@ const parseArrayArgument = (
         parseArrayArgument(childArg, argsInfo, dispatch),
       );
       array = new Array(childArgs.length);
-    } catch (e) {
-      console.warn(e);
+    } catch (error) {
+      console.warn(error);
     }
   }
   const childNames = childArgs?.map((arg) => arg.name);
   if (arg.type === ArgumentType.ARRAY) {
     try {
       array = JSON.parse(arg.input);
-    } catch (e) {
-      console.warn(e);
+    } catch (error) {
+      console.warn(error);
     }
   } else if (arg.type === ArgumentType.STRING) {
     array = arg.input.split("");
@@ -412,16 +417,16 @@ const parseArrayArgument = (
   let newItems: ArrayItemData[] | null = null;
   if (array) {
     newItems = [];
-    for (let i = 0; i < array.length; i++) {
-      let value: string | undefined = safeStringify(array[i]);
-      const childName = childNames?.[i];
+    for (let itemIndex = 0; itemIndex < array.length; itemIndex++) {
+      let value: string | undefined = safeStringify(array[itemIndex]);
+      const childName = childNames?.[itemIndex];
       if (childName) {
         value = undefined;
       }
       const newId = generate();
-      newItems[i] = {
+      newItems[itemIndex] = {
         id: newId,
-        index: i,
+        index: itemIndex,
         value,
         childName,
       };

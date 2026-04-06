@@ -1,0 +1,38 @@
+---
+description: Use descriptive names — no single-letter variables or parameters (except intentional underscore discard)
+globs: **/*.{ts,tsx,mjs,cjs,js,jsx}
+alwaysApply: true
+---
+
+# No one-letter identifiers
+
+Do not use **single-letter** names for variables, function parameters, or catch bindings. Names should communicate role (e.g. `event`, `error`, `index`, `rawValue`).
+
+## Allowed
+
+- **`_`** only as a **discard** placeholder (e.g. `array.map((_, index) => index)`), matching ESLint `id-length` exceptions.
+- **Type parameters** in generics may stay conventional single letters when standard (`T`, `K`, `V`) only if the team agrees; prefer a short **word** (`TItem`, `TResult`) when clarity helps.
+
+## ❌ Bad
+
+```ts
+const t = clamp(x / y, 0, 1);
+items.map((a, b) => a + b);
+} catch (e) {
+  console.warn(e);
+}
+```
+
+## ✅ Good
+
+```ts
+const scrollProgress = clamp(scrollY / viewportHeight, 0, 1);
+items.map((left, right) => left + right);
+} catch (error) {
+  console.warn(error);
+}
+```
+
+## Enforcement
+
+ESLint `id-length` is enabled in `eslint.config.mjs` (`min: 2`, `exceptions: ["_"]`, `properties: "never"`).

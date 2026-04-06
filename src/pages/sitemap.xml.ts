@@ -10,8 +10,8 @@ type ProjectForSitemap = {
 };
 
 function formatLastmod(date: Date | string): string {
-  const d = typeof date === "string" ? new Date(date) : date;
-  return d.toISOString().split("T")[0] ?? "";
+  const parsedDate = typeof date === "string" ? new Date(date) : date;
+  return parsedDate.toISOString().split("T")[0] ?? "";
 }
 
 function generateSiteMap(projects: ProjectForSitemap[]) {
