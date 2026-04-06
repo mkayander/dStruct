@@ -139,6 +139,27 @@ const es: Record<keyof Translation, string> = {
   HOME_LANDING_SUBTITLE:
     "Un playground al estilo LeetCode donde tu solución se convierte en un rastro visual de ejecución: árboles, grafos, cuadrículas, estructuras enlazadas y mapas anidados. JavaScript y Python en el navegador, reproducción paso a paso y estadísticas de tiempo opcionales para JS.",
   HOME_HERO_FAQ_LINK: "Preguntas frecuentes",
+  HOME_HERO_FAQ_LINK_SUFFIX: " →",
+  HOME_LANDING_PREVIEW_CODE_LANGUAGE: "JavaScript",
+  HOME_LANDING_PREVIEW_CODE_FILENAME: "solution.js",
+  HOME_PREVIEW_STEP_PROGRESS: "Paso {step:number} / {total:number}",
+  HOME_LANDING_PREVIEW_PLAY: "Reproducir",
+  HOME_LANDING_PREVIEW_PAUSE: "Pausa",
+  HOME_PREVIEW_STEP_BACK: "Paso atrás",
+  HOME_PREVIEW_STEP_FORWARD: "Paso adelante",
+  HOME_LANDING_PREVIEW_LOAD_FAILED:
+    "No se pudo cargar la vista previa de la página principal.",
+  HOME_LANDING_PREVIEW_ERROR_UNEXPECTED:
+    "Error inesperado al inicializar la vista previa.",
+  HOME_DEMO_SLUG_INVERT_BINARY_TREE: "invertir árbol binario",
+  HOME_DEMO_SLUG_PATH_IN_GRAPH: "comprobar si existe un camino en el grafo",
+  HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: "camino más corto en matriz binaria",
+  HOME_DEMO_SLUG_TRIE_NAME: "trie",
+  DAILY_PROBLEM_FALLBACK_TITLE: "Problema del día",
+  DAILY_PROBLEM_SECTION_CAPTION: "📅 Pregunta del día",
+  QUESTION_OF_TODAY_LABEL: "Pregunta del día",
+  NO_PROJECTS_FOUND_FOR_SEARCH:
+    "No se encontraron proyectos para «{query:string}»",
   HOME_SECTION_HOW_IT_WORKS: "Cómo funciona",
   HOME_HOW_STEP_1_TITLE: "Escribe tu solución",
   HOME_HOW_STEP_1_BODY:

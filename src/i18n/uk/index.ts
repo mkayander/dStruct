@@ -139,6 +139,27 @@ const uk: Record<keyof Translation, string> = {
   HOME_LANDING_SUBTITLE:
     "Майданчик у стилі LeetCode, де ваше рішення стає наочною трасою виконання: дерева, графи, сітки, зв'язні структури та вкладені карти. JavaScript і Python у браузері, покрокове відтворення й за бажанням вимірювання часу для JS.",
   HOME_HERO_FAQ_LINK: "Часті запитання",
+  HOME_HERO_FAQ_LINK_SUFFIX: " →",
+  HOME_LANDING_PREVIEW_CODE_LANGUAGE: "JavaScript",
+  HOME_LANDING_PREVIEW_CODE_FILENAME: "solution.js",
+  HOME_PREVIEW_STEP_PROGRESS: "Крок {step:number} / {total:number}",
+  HOME_LANDING_PREVIEW_PLAY: "Відтворити",
+  HOME_LANDING_PREVIEW_PAUSE: "Пауза",
+  HOME_PREVIEW_STEP_BACK: "Крок назад",
+  HOME_PREVIEW_STEP_FORWARD: "Крок уперед",
+  HOME_LANDING_PREVIEW_LOAD_FAILED:
+    "Не вдалося завантажити попередній перегляд на головній.",
+  HOME_LANDING_PREVIEW_ERROR_UNEXPECTED:
+    "Неочікувана помилка ініціалізації попереднього перегляду.",
+  HOME_DEMO_SLUG_INVERT_BINARY_TREE: "інвертувати бінарне дерево",
+  HOME_DEMO_SLUG_PATH_IN_GRAPH: "знайти шлях у графі",
+  HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: "найкоротший шлях у бінарній матриці",
+  HOME_DEMO_SLUG_TRIE_NAME: "trie",
+  DAILY_PROBLEM_FALLBACK_TITLE: "Задача дня",
+  DAILY_PROBLEM_SECTION_CAPTION: "📅 Питання дня",
+  QUESTION_OF_TODAY_LABEL: "Питання дня",
+  NO_PROJECTS_FOUND_FOR_SEARCH:
+    "Проєктів не знайдено за запитом «{query:string}»",
   HOME_SECTION_HOW_IT_WORKS: "Як це працює",
   HOME_HOW_STEP_1_TITLE: "Напишіть рішення",
   HOME_HOW_STEP_1_BODY:

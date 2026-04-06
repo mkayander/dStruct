@@ -139,6 +139,27 @@ const hi: Record<keyof Translation, string> = {
   HOME_LANDING_SUBTITLE:
     "LeetCode-शैली का प्लेग्राउंड जहाँ आपका समाधान दृश्य निष्पादन ट्रेस बन जाता है: ट्री, ग्राफ़, ग्रिड, लिंक्ड संरचनाएँ और नेस्टेड मैप। ब्राउज़र में JavaScript और Python, चरण-दर-चरण प्लेबैक और JS के लिए वैकल्पिक समय आँकड़े।",
   HOME_HERO_FAQ_LINK: "अक्सर पूछे जाने वाले प्रश्न",
+  HOME_HERO_FAQ_LINK_SUFFIX: " →",
+  HOME_LANDING_PREVIEW_CODE_LANGUAGE: "JavaScript",
+  HOME_LANDING_PREVIEW_CODE_FILENAME: "solution.js",
+  HOME_PREVIEW_STEP_PROGRESS: "चरण {step:number} / {total:number}",
+  HOME_LANDING_PREVIEW_PLAY: "चलाएं",
+  HOME_LANDING_PREVIEW_PAUSE: "रोकें",
+  HOME_PREVIEW_STEP_BACK: "पीछे का चरण",
+  HOME_PREVIEW_STEP_FORWARD: "आगे का चरण",
+  HOME_LANDING_PREVIEW_LOAD_FAILED:
+    "लैंडिंग पूर्वावलोकन लोड नहीं हो सका।",
+  HOME_LANDING_PREVIEW_ERROR_UNEXPECTED:
+    "पूर्वावलोकन आरंभ करने में अप्रत्याशित त्रुटि।",
+  HOME_DEMO_SLUG_INVERT_BINARY_TREE: "बाइनरी ट्री उलटें",
+  HOME_DEMO_SLUG_PATH_IN_GRAPH: "ग्राफ़ में पथ खोजें",
+  HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: "बाइनरी मैट्रिक्स में सबसे छोटा रास्ता",
+  HOME_DEMO_SLUG_TRIE_NAME: "trie",
+  DAILY_PROBLEM_FALLBACK_TITLE: "दैनिक समस्या",
+  DAILY_PROBLEM_SECTION_CAPTION: "📅 आज का प्रश्न",
+  QUESTION_OF_TODAY_LABEL: "आज का प्रश्न",
+  NO_PROJECTS_FOUND_FOR_SEARCH:
+    "«{query:string}» के लिए कोई प्रोजेक्ट नहीं मिला",
   HOME_SECTION_HOW_IT_WORKS: "यह कैसे काम करता है",
   HOME_HOW_STEP_1_TITLE: "अपना समाधान लिखें",
   HOME_HOW_STEP_1_BODY:

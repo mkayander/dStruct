@@ -139,6 +139,27 @@ const sr: Record<keyof Translation, string> = {
   HOME_LANDING_SUBTITLE:
     "Igralište u stilu LeetCode-a gde vaše rešenje postaje vizuelni trag izvršavanja: stabla, grafovi, mreže, povezane strukture i ugnježđene mape. JavaScript i Python u pregledaču, reprodukcija korak po korak i opciona merenja vremena za JS.",
   HOME_HERO_FAQ_LINK: "Česta pitanja",
+  HOME_HERO_FAQ_LINK_SUFFIX: " →",
+  HOME_LANDING_PREVIEW_CODE_LANGUAGE: "JavaScript",
+  HOME_LANDING_PREVIEW_CODE_FILENAME: "solution.js",
+  HOME_PREVIEW_STEP_PROGRESS: "Korak {step:number} / {total:number}",
+  HOME_LANDING_PREVIEW_PLAY: "Pusti",
+  HOME_LANDING_PREVIEW_PAUSE: "Pauza",
+  HOME_PREVIEW_STEP_BACK: "Korak nazad",
+  HOME_PREVIEW_STEP_FORWARD: "Korak napred",
+  HOME_LANDING_PREVIEW_LOAD_FAILED:
+    "Pregled na početnoj stranici nije mogao da se učita.",
+  HOME_LANDING_PREVIEW_ERROR_UNEXPECTED:
+    "Neočekivana greška pri pokretanju pregleda.",
+  HOME_DEMO_SLUG_INVERT_BINARY_TREE: "invertuj binarno stablo",
+  HOME_DEMO_SLUG_PATH_IN_GRAPH: "pronađi put u grafu",
+  HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: "najkraći put u binarnoj matrici",
+  HOME_DEMO_SLUG_TRIE_NAME: "trie",
+  DAILY_PROBLEM_FALLBACK_TITLE: "Dnevni zadatak",
+  DAILY_PROBLEM_SECTION_CAPTION: "📅 Pitanje dana",
+  QUESTION_OF_TODAY_LABEL: "Pitanje dana",
+  NO_PROJECTS_FOUND_FOR_SEARCH:
+    "Nema projekata za upit „{query:string}“",
   HOME_SECTION_HOW_IT_WORKS: "Kako radi",
   HOME_HOW_STEP_1_TITLE: "Napišite rešenje",
   HOME_HOW_STEP_1_BODY:

@@ -140,6 +140,27 @@ const de: Record<keyof Translation, string> = {
   HOME_LANDING_SUBTITLE:
     "Ein Playground im LeetCode-Stil: Ihre Lösung wird zur visuellen Ausführungsspur – Bäume, Graphen, Raster, verkettete Strukturen und verschachtelte Maps. JavaScript und Python im Browser, schrittweise Wiedergabe und optional Zeitmessung für JS.",
   HOME_HERO_FAQ_LINK: "Häufige Fragen",
+  HOME_HERO_FAQ_LINK_SUFFIX: " →",
+  HOME_LANDING_PREVIEW_CODE_LANGUAGE: "JavaScript",
+  HOME_LANDING_PREVIEW_CODE_FILENAME: "solution.js",
+  HOME_PREVIEW_STEP_PROGRESS: "Schritt {step:number} / {total:number}",
+  HOME_LANDING_PREVIEW_PLAY: "Wiedergabe",
+  HOME_LANDING_PREVIEW_PAUSE: "Pause",
+  HOME_PREVIEW_STEP_BACK: "Schritt zurück",
+  HOME_PREVIEW_STEP_FORWARD: "Schritt vor",
+  HOME_LANDING_PREVIEW_LOAD_FAILED:
+    "Landing-Vorschau konnte nicht geladen werden.",
+  HOME_LANDING_PREVIEW_ERROR_UNEXPECTED:
+    "Unerwarteter Fehler beim Initialisieren der Landing-Vorschau.",
+  HOME_DEMO_SLUG_INVERT_BINARY_TREE: "binären Baum invertieren",
+  HOME_DEMO_SLUG_PATH_IN_GRAPH: "Pfad im Graph finden",
+  HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: "kürzester Pfad in binärer Matrix",
+  HOME_DEMO_SLUG_TRIE_NAME: "Trie",
+  DAILY_PROBLEM_FALLBACK_TITLE: "Tagesaufgabe",
+  DAILY_PROBLEM_SECTION_CAPTION: "📅 Frage des Tages",
+  QUESTION_OF_TODAY_LABEL: "Frage des Tages",
+  NO_PROJECTS_FOUND_FOR_SEARCH:
+    "Keine Projekte gefunden für „{query:string}“",
   HOME_SECTION_HOW_IT_WORKS: "So funktioniert es",
   HOME_HOW_STEP_1_TITLE: "Schreiben Sie Ihre Lösung",
   HOME_HOW_STEP_1_BODY:

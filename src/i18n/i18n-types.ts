@@ -526,6 +526,81 @@ type RootTranslation = {
 	 */
 	HOME_HERO_FAQ_LINK: string
 	/**
+	 *  ​→
+	 */
+	HOME_HERO_FAQ_LINK_SUFFIX: string
+	/**
+	 * J​a​v​a​S​c​r​i​p​t
+	 */
+	HOME_LANDING_PREVIEW_CODE_LANGUAGE: string
+	/**
+	 * s​o​l​u​t​i​o​n​.​j​s
+	 */
+	HOME_LANDING_PREVIEW_CODE_FILENAME: string
+	/**
+	 * S​t​e​p​ ​{​s​t​e​p​}​ ​/​ ​{​t​o​t​a​l​}
+	 * @param {number} step
+	 * @param {number} total
+	 */
+	HOME_PREVIEW_STEP_PROGRESS: RequiredParams<'step' | 'total'>
+	/**
+	 * P​l​a​y
+	 */
+	HOME_LANDING_PREVIEW_PLAY: string
+	/**
+	 * P​a​u​s​e
+	 */
+	HOME_LANDING_PREVIEW_PAUSE: string
+	/**
+	 * S​t​e​p​ ​b​a​c​k
+	 */
+	HOME_PREVIEW_STEP_BACK: string
+	/**
+	 * S​t​e​p​ ​f​o​r​w​a​r​d
+	 */
+	HOME_PREVIEW_STEP_FORWARD: string
+	/**
+	 * L​a​n​d​i​n​g​ ​p​r​e​v​i​e​w​ ​f​a​i​l​e​d​ ​t​o​ ​l​o​a​d​.
+	 */
+	HOME_LANDING_PREVIEW_LOAD_FAILED: string
+	/**
+	 * U​n​e​x​p​e​c​t​e​d​ ​l​a​n​d​i​n​g​ ​p​r​e​v​i​e​w​ ​i​n​i​t​i​a​l​i​z​a​t​i​o​n​ ​e​r​r​o​r​.
+	 */
+	HOME_LANDING_PREVIEW_ERROR_UNEXPECTED: string
+	/**
+	 * i​n​v​e​r​t​ ​b​i​n​a​r​y​ ​t​r​e​e
+	 */
+	HOME_DEMO_SLUG_INVERT_BINARY_TREE: string
+	/**
+	 * f​i​n​d​ ​i​f​ ​p​a​t​h​ ​e​x​i​s​t​s​ ​i​n​ ​g​r​a​p​h
+	 */
+	HOME_DEMO_SLUG_PATH_IN_GRAPH: string
+	/**
+	 * s​h​o​r​t​e​s​t​ ​p​a​t​h​ ​i​n​ ​b​i​n​a​r​y​ ​m​a​t​r​i​x
+	 */
+	HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: string
+	/**
+	 * t​r​i​e
+	 */
+	HOME_DEMO_SLUG_TRIE_NAME: string
+	/**
+	 * D​a​i​l​y​ ​P​r​o​b​l​e​m
+	 */
+	DAILY_PROBLEM_FALLBACK_TITLE: string
+	/**
+	 * �​�​ ​Q​u​e​s​t​i​o​n​ ​O​f​ ​T​o​d​a​y
+	 */
+	DAILY_PROBLEM_SECTION_CAPTION: string
+	/**
+	 * Q​u​e​s​t​i​o​n​ ​O​f​ ​T​o​d​a​y
+	 */
+	QUESTION_OF_TODAY_LABEL: string
+	/**
+	 * N​o​ ​p​r​o​j​e​c​t​s​ ​f​o​u​n​d​ ​f​o​r​ ​"​{​q​u​e​r​y​}​"
+	 * @param {string} query
+	 */
+	NO_PROJECTS_FOUND_FOR_SEARCH: RequiredParams<'query'>
+	/**
 	 * H​o​w​ ​i​t​ ​w​o​r​k​s
 	 */
 	HOME_SECTION_HOW_IT_WORKS: string
@@ -1284,6 +1359,78 @@ export type TranslationFunctions = {
 	 * Frequently asked questions
 	 */
 	HOME_HERO_FAQ_LINK: () => LocalizedString
+	/**
+	 *  →
+	 */
+	HOME_HERO_FAQ_LINK_SUFFIX: () => LocalizedString
+	/**
+	 * JavaScript
+	 */
+	HOME_LANDING_PREVIEW_CODE_LANGUAGE: () => LocalizedString
+	/**
+	 * solution.js
+	 */
+	HOME_LANDING_PREVIEW_CODE_FILENAME: () => LocalizedString
+	/**
+	 * Step {step} / {total}
+	 */
+	HOME_PREVIEW_STEP_PROGRESS: (arg: { step: number, total: number }) => LocalizedString
+	/**
+	 * Play
+	 */
+	HOME_LANDING_PREVIEW_PLAY: () => LocalizedString
+	/**
+	 * Pause
+	 */
+	HOME_LANDING_PREVIEW_PAUSE: () => LocalizedString
+	/**
+	 * Step back
+	 */
+	HOME_PREVIEW_STEP_BACK: () => LocalizedString
+	/**
+	 * Step forward
+	 */
+	HOME_PREVIEW_STEP_FORWARD: () => LocalizedString
+	/**
+	 * Landing preview failed to load.
+	 */
+	HOME_LANDING_PREVIEW_LOAD_FAILED: () => LocalizedString
+	/**
+	 * Unexpected landing preview initialization error.
+	 */
+	HOME_LANDING_PREVIEW_ERROR_UNEXPECTED: () => LocalizedString
+	/**
+	 * invert binary tree
+	 */
+	HOME_DEMO_SLUG_INVERT_BINARY_TREE: () => LocalizedString
+	/**
+	 * find if path exists in graph
+	 */
+	HOME_DEMO_SLUG_PATH_IN_GRAPH: () => LocalizedString
+	/**
+	 * shortest path in binary matrix
+	 */
+	HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX: () => LocalizedString
+	/**
+	 * trie
+	 */
+	HOME_DEMO_SLUG_TRIE_NAME: () => LocalizedString
+	/**
+	 * Daily Problem
+	 */
+	DAILY_PROBLEM_FALLBACK_TITLE: () => LocalizedString
+	/**
+	 * 📅 Question Of Today
+	 */
+	DAILY_PROBLEM_SECTION_CAPTION: () => LocalizedString
+	/**
+	 * Question Of Today
+	 */
+	QUESTION_OF_TODAY_LABEL: () => LocalizedString
+	/**
+	 * No projects found for "{query}"
+	 */
+	NO_PROJECTS_FOUND_FOR_SEARCH: (arg: { query: string }) => LocalizedString
 	/**
 	 * How it works
 	 */

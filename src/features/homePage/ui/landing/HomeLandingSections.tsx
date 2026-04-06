@@ -44,12 +44,24 @@ function landingDemoLabel(LL: TranslationFunctions, id: LandingDemoId): string {
   }
 }
 
-function landingDemoSlug(href: string): string {
-  return href
-    .replace("/playground/", "")
-    .replace("?view=code", "")
-    .split("-")
-    .join(" ");
+function landingDemoSlug(
+  LL: TranslationFunctions,
+  id: LandingDemoId,
+): string {
+  switch (id) {
+    case "tree":
+      return LL.HOME_DEMO_SLUG_INVERT_BINARY_TREE();
+    case "graph":
+      return LL.HOME_DEMO_SLUG_PATH_IN_GRAPH();
+    case "grid":
+      return LL.HOME_DEMO_SLUG_SHORTEST_PATH_MATRIX();
+    case "trie":
+      return LL.HOME_DEMO_SLUG_TRIE_NAME();
+    default: {
+      const _exhaustive: never = id;
+      return _exhaustive;
+    }
+  }
 }
 
 export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
@@ -267,7 +279,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
                         </Typography>
                       </Stack>
                       <Typography variant="body2" color="text.secondary">
-                        {landingDemoSlug(href)}
+                        {landingDemoSlug(LL, id)}
                       </Typography>
                     </Stack>
                   </CardActionArea>
