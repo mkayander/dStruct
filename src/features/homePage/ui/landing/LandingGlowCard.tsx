@@ -82,6 +82,13 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
         // Default spotlight for SSR / before first pointer move
         "--landing-glow-x": "50%",
         "--landing-glow-y": "42%",
+        // Lift the whole stack (card + edge glow) so the ring stays aligned on hover.
+        ...(interactive
+          ? {
+              transition: "transform 0.22s ease",
+              "&:hover": { transform: "translateY(-3px)" },
+            }
+          : {}),
         "@media (prefers-reduced-motion: no-preference)": {
           animation: `${landingCardEnter} 0.62s cubic-bezier(0.22, 1, 0.36, 1) both`,
           animationDelay: `${delayMs}ms`,
@@ -101,12 +108,10 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
           backdropFilter: "blur(14px) saturate(160%)",
           boxShadow: `0 0 0 1px ${alpha(theme.appDesign.surfaceHigh, 0.06)} inset,
             0 18px 42px ${alpha(theme.appDesign.background, 0.35)}`,
-          transition:
-            "transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease",
+          transition: "border-color 0.22s ease, box-shadow 0.22s ease",
           ...(interactive
             ? {
                 ".landing-glow-card-root:hover &": {
-                  transform: "translateY(-3px)",
                   borderColor: alpha(theme.appDesign.accentSoft, 0.32),
                   boxShadow: `0 0 0 1px ${alpha(theme.appDesign.accentSoft, 0.12)} inset,
                     0 22px 48px ${alpha(theme.appDesign.background, 0.42)}`,
