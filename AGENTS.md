@@ -66,6 +66,15 @@ Refer to `package.json` scripts. Summary of most-used:
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)
 - **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`)
 
+### Fonts (Pages Router)
+
+- **App UI:** Inter (body / default MUI typography) and Space Grotesk (headings `h1`–`h4`, `subtitle2`, app bar wordmark) load via **`next/font/google`** in `src/shared/fonts/appFonts.ts`. `pages/_document.tsx` sets `className={fontVariableClassNames}` on `<Html>` so CSS variables apply everywhere; **do not** add a duplicate Google Fonts stylesheet for those families.
+- **Stacks:** use `appFontStackSans` / `appFontStackDisplay` from `src/shared/fonts/fontVariables.ts` in theme or `sx` so names stay aligned with the loader.
+- **Material Icons** still use the Google Fonts icon stylesheet in `_document.tsx` (separate from text fonts).
+- **Code samples** (e.g. landing preview) intentionally use a **monospace** stack, not Inter.
+
+Bundled Next.js reference: `node_modules/next/dist/docs/01-app/01-getting-started/13-fonts.md` (includes Pages Router `_app` examples for `next/font`).
+
 ### Gotchas
 
 - The `/api/config` endpoint uses `@vercel/edge-config` which requires Vercel's `EDGE_CONFIG` env var. It returns 404 locally but the app handles this gracefully — the playground still works fully.
