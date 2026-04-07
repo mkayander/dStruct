@@ -12,6 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import type { Theme } from "@mui/material/styles";
 import React, {
   useCallback,
   useEffect,
@@ -51,6 +52,32 @@ type HomeLandingHeroPreviewRuntimeProps = {
 
 const PLAYBACK_INTERVAL_MS = 300;
 const REPLAY_RESET_PAUSE_MS = 220;
+
+const landingPreviewCircleIconButtonSx = (muiTheme: Theme) => ({
+  "&:hover": {
+    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.95),
+  },
+  "&.Mui-focusVisible": {
+    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.9),
+  },
+  "&:active": {
+    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.85),
+  },
+});
+
+const landingPreviewPlayIconButtonSx = (muiTheme: Theme) => ({
+  bgcolor: alpha(muiTheme.appDesign.accent, 0.14),
+  color: muiTheme.appDesign.accentSoft,
+  "&:hover": {
+    bgcolor: alpha(muiTheme.appDesign.accent, 0.22),
+  },
+  "&.Mui-focusVisible": {
+    bgcolor: alpha(muiTheme.appDesign.accent, 0.18),
+  },
+  "&:active": {
+    bgcolor: alpha(muiTheme.appDesign.accent, 0.26),
+  },
+});
 
 type LandingHeroPreviewRuntimeState =
   | {
@@ -285,10 +312,14 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={1}
-        alignItems={{ xs: "flex-start", sm: "center" }}
+        alignItems="center"
         sx={{ minWidth: 0 }}
       >
-        <Stack direction="row" spacing={0.5}>
+        <Stack
+          direction="row"
+          spacing={0.5}
+          justifyContent={{ xs: "flex-end", sm: "flex-start" }}
+        >
           <IconButton
             size="small"
             onClick={handleManualStepBack}
@@ -297,6 +328,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             title={LL.HOME_PREVIEW_STEP_BACK()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
+              ...landingPreviewCircleIconButtonSx(theme),
             }}
           >
             <SkipPrevious fontSize="small" />
@@ -324,8 +356,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
                   : LL.HOME_LANDING_PREVIEW_PLAY()
             }
             sx={{
-              bgcolor: alpha(theme.appDesign.accent, 0.14),
-              color: theme.appDesign.accentSoft,
+              ...landingPreviewPlayIconButtonSx(theme),
             }}
           >
             {isLastFrame && !isPlaying ? (
@@ -344,6 +375,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             title={LL.HOME_PREVIEW_STEP_FORWARD()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
+              ...landingPreviewCircleIconButtonSx(theme),
             }}
           >
             <SkipNext fontSize="small" />
@@ -356,6 +388,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             ml: { sm: 0.5 },
             lineHeight: 1.6,
             maxWidth: { xs: "100%", sm: 220 },
+            textAlign: { xs: "right", sm: "left" },
           }}
         >
           {LL.HOME_PILLAR_VIS_BODY()}
