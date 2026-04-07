@@ -16,6 +16,8 @@ import { useLandingDecor3dMobileEntrance } from "#/features/homePage/hooks/useLa
 import {
   LANDING_DECOR_BRAND_BASE_AZIMUTH,
   LANDING_DECOR_BRAND_BASE_POLAR,
+  LANDING_DECOR_CANVAS_SIZE_PX,
+  LANDING_DECOR_GLASS_OPACITY_SX,
   LANDING_DECOR_MODEL_CAMERA,
   LANDING_DECOR_MODEL_DISTANCE,
   LANDING_DECOR_MODEL_FOV,
@@ -84,9 +86,9 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
             position: "absolute",
             top: { xs: -88, sm: -170, md: -280 },
             right: { xs: -118, sm: -180, md: -320 },
-            width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-            height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-            opacity: { xs: 0.12, md: 0.2 },
+            width: LANDING_DECOR_CANVAS_SIZE_PX,
+            height: LANDING_DECOR_CANVAS_SIZE_PX,
+            opacity: LANDING_DECOR_GLASS_OPACITY_SX,
             filter: "blur(0.4px)",
             pointerEvents: "none",
             maskImage:

@@ -15,6 +15,26 @@ export const resolvePageScrollElement = (): HTMLElement | null => {
   return node instanceof HTMLElement ? node : null;
 };
 
+export const getPageScrollRoot = (): HTMLElement | Window =>
+  resolvePageScrollElement() ?? window;
+
+/** Passive scroll + optional ResizeObserver on element roots. */
+export const attachPageScrollRoot = (
+  scrollRoot: HTMLElement | Window,
+  onScrollOrResize: () => void,
+): (() => void) => {
+  scrollRoot.addEventListener("scroll", onScrollOrResize, { passive: true });
+  let resizeObserver: ResizeObserver | undefined;
+  if (scrollRoot instanceof HTMLElement) {
+    resizeObserver = new ResizeObserver(onScrollOrResize);
+    resizeObserver.observe(scrollRoot);
+  }
+  return () => {
+    scrollRoot.removeEventListener("scroll", onScrollOrResize);
+    resizeObserver?.disconnect();
+  };
+};
+
 export const getPageScrollMetrics = (
   scrollRoot: HTMLElement | Window,
 ): PageScrollMetrics => {

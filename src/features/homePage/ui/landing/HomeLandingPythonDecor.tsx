@@ -5,6 +5,8 @@ import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
 import { useLandingDecor3dMobileEntrance } from "#/features/homePage/hooks/useLandingDecor3dMobileEntrance";
 import {
+  LANDING_DECOR_CANVAS_SIZE_PX,
+  LANDING_DECOR_GLASS_OPACITY_SX,
   LANDING_DECOR_MODEL_CAMERA,
   LANDING_DECOR_MODEL_DISTANCE,
   LANDING_DECOR_MODEL_FOV,
@@ -52,8 +54,8 @@ export const HomeLandingPythonDecor: React.FC = () => {
           top: "50%",
           left: { xs: -118, sm: -180, md: -320 },
           transform: "translateY(-50%)",
-          width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-          height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
+          width: LANDING_DECOR_CANVAS_SIZE_PX,
+          height: LANDING_DECOR_CANVAS_SIZE_PX,
         }}
       >
         <Box
@@ -61,7 +63,7 @@ export const HomeLandingPythonDecor: React.FC = () => {
             {
               width: "100%",
               height: "100%",
-              opacity: { xs: 0.12, md: 0.2 },
+              opacity: LANDING_DECOR_GLASS_OPACITY_SX,
               filter: "blur(0.4px)",
               maskImage:
                 "radial-gradient(circle at 52% 50%, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.88) 30%, rgba(0,0,0,0.44) 64%, transparent 90%)",

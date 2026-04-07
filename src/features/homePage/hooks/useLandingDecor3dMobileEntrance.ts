@@ -2,24 +2,13 @@ import type { CSSObject } from "@mui/material/styles";
 import type { RefObject } from "react";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
+import { LANDING_DECOR_GLASS_OPACITY_SX } from "#/features/homePage/lib/landingDecor3dConstants";
 import { useMobileLayout } from "#/shared/hooks";
+import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 
 export type LandingDecor3dMobileEntranceVariant = "hero" | "python";
 
-const prefersReducedMotion = () => {
-  if (
-    typeof window === "undefined" ||
-    typeof window.matchMedia !== "function"
-  ) {
-    return false;
-  }
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-};
-
 const easing = "cubic-bezier(0.22, 1, 0.36, 1)";
-
-/** Matches landing decor opacity at `xs` (see HomeLandingHero / HomeLandingPythonDecor). */
-const MOBILE_DECOR_TARGET_OPACITY = 0.12;
 
 const scheduleEnteredTrue = (
   setEntered: (value: boolean) => void,
@@ -52,18 +41,11 @@ export const useLandingDecor3dMobileEntrance = (
   const isMobile = useMobileLayout();
   const [entered, setEntered] = useState(false);
   const isMountedRef = useRef(true);
+  const prevIsMobileRef = useRef(isMobile);
 
   const reduceMotion = typeof window !== "undefined" && prefersReducedMotion();
   const skipEntranceAnimation = !isMobile || reduceMotion;
   const effectiveEntered = skipEntranceAnimation || entered;
-
-  // Re-arm entrance when returning to mobile (e.g. rotation) so the animation can run again.
-  useLayoutEffect(() => {
-    if (!isMobile || reduceMotion) return;
-    queueMicrotask(() => {
-      setEntered(false);
-    });
-  }, [isMobile, reduceMotion]);
 
   useLayoutEffect(() => {
     isMountedRef.current = true;
@@ -71,6 +53,17 @@ export const useLandingDecor3dMobileEntrance = (
       isMountedRef.current = false;
     };
   }, []);
+
+  // Re-arm only when crossing from desktop → mobile so resize on mobile does not replay.
+  useLayoutEffect(() => {
+    const wasMobile = prevIsMobileRef.current;
+    prevIsMobileRef.current = isMobile;
+    if (!isMobile || reduceMotion) return;
+    if (wasMobile) return;
+    queueMicrotask(() => {
+      setEntered(false);
+    });
+  }, [isMobile, reduceMotion]);
 
   useEffect(() => {
     if (skipEntranceAnimation || variant !== "hero") return;
@@ -122,7 +115,7 @@ export const useLandingDecor3dMobileEntrance = (
 
     if (effectiveEntered) {
       return {
-        opacity: MOBILE_DECOR_TARGET_OPACITY,
+        opacity: LANDING_DECOR_GLASS_OPACITY_SX.xs,
         transform: "translate3d(0, 0, 0) scale(1)",
         transition: `opacity 0.8s ${easing}, transform 0.8s ${easing}`,
         willChange: "auto",

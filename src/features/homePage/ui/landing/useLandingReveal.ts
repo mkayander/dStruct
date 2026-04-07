@@ -1,35 +1,25 @@
 import type { CSSObject } from "@mui/material/styles";
 import {
+  type RefObject,
   useEffect,
   useLayoutEffect,
   useMemo,
   useState,
-  type RefObject,
 } from "react";
+
+import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 
 export type UseLandingRevealOptions = {
   /** Extra delay after intersecting (e.g. stagger between siblings). */
   staggerMs?: number;
 };
 
-type RevealState =
-  | "pending"
-  | "reduce"
-  | "static"
-  | "hidden"
-  | "revealed";
+type RevealState = "pending" | "reduce" | "static" | "hidden" | "revealed";
 
 const hiddenSx: CSSObject = {
   opacity: 0,
   transform: "translate3d(0, 14px, 0)",
   transition: "none",
-};
-
-const prefersReducedMotion = () => {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
-    return false;
-  }
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 
 const inViewportLoose = (el: HTMLElement) => {
@@ -54,6 +44,8 @@ export const useLandingReveal = (
     const el = ref.current;
     if (!el) return;
 
+    // Sync layout read → reveal state (same frame as paint); linter disallows sync setState in effects.
+    /* eslint-disable react-hooks/set-state-in-effect -- intentional: classify viewport before paint */
     if (prefersReducedMotion()) {
       setState("reduce");
       return;
@@ -64,6 +56,7 @@ export const useLandingReveal = (
     } else {
       setState("hidden");
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [ref]);
 
   useEffect(() => {
@@ -72,13 +65,14 @@ export const useLandingReveal = (
     if (!el) return;
 
     if (typeof IntersectionObserver !== "function") {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect -- degrade gracefully when IO missing */
       setState("revealed");
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const hit = entries.some((e) => e.isIntersecting);
+        const hit = entries.some((entry) => entry.isIntersecting);
         if (!hit) return;
         observer.disconnect();
         if (staggerMs > 0) {

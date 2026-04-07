@@ -3,26 +3,13 @@ import { useCallback, useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import {
+  attachPageScrollRoot,
   getPageScrollMetrics,
+  getPageScrollRoot,
   resolvePageScrollElement,
 } from "#/features/homePage/hooks/getPageScrollMetrics";
+import { LANDING_HERO_ORBIT_TUNING } from "#/features/homePage/lib/landingHeroOrbitMotionConstants";
 import { useMobileLayout } from "#/shared/hooks";
-
-/** Desktop: pointer parallax only (original subtlety). */
-const HERO_DESKTOP_MAX_AZIMUTH_OFFSET = 0.28;
-const HERO_DESKTOP_MAX_POLAR_OFFSET = 0.18;
-const HERO_DESKTOP_DAMPING = 0.08;
-
-/** Mobile: scroll-driven motion + stronger follow. */
-const HERO_MOBILE_MAX_AZIMUTH_OFFSET = 0.62;
-const HERO_MOBILE_MAX_POLAR_OFFSET = 0.4;
-const HERO_MOBILE_DAMPING = 0.2;
-
-const HERO_DESKTOP_POLAR_ANGLE_MIN = Math.PI / 2.9;
-const HERO_DESKTOP_POLAR_ANGLE_MAX = Math.PI / 1.9;
-
-const HERO_MOBILE_POLAR_ANGLE_MIN = Math.PI / 3.15;
-const HERO_MOBILE_POLAR_ANGLE_MAX = Math.PI / 1.72;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
@@ -73,12 +60,9 @@ export const useHeroOrbitModelMotion = ({
   );
 
   const syncTargetFromDeltas = useCallback(() => {
-    const polarMin = isMobileLayout
-      ? HERO_MOBILE_POLAR_ANGLE_MIN
-      : HERO_DESKTOP_POLAR_ANGLE_MIN;
-    const polarMax = isMobileLayout
-      ? HERO_MOBILE_POLAR_ANGLE_MAX
-      : HERO_DESKTOP_POLAR_ANGLE_MAX;
+    const polar = isMobileLayout
+      ? LANDING_HERO_ORBIT_TUNING.mobile
+      : LANDING_HERO_ORBIT_TUNING.desktop;
 
     targetAzimuthRef.current =
       baseAzimuth +
@@ -86,8 +70,8 @@ export const useHeroOrbitModelMotion = ({
       pointerAzimuthDeltaRef.current;
     targetPolarRef.current = clamp(
       basePolar + scrollPolarDeltaRef.current + pointerPolarDeltaRef.current,
-      polarMin,
-      polarMax,
+      polar.polarAngleMin,
+      polar.polarAngleMax,
     );
   }, [baseAzimuth, basePolar, isMobileLayout]);
 
@@ -95,17 +79,20 @@ export const useHeroOrbitModelMotion = ({
     const root = scrollRootRef.current;
     if (!root) return;
 
+    const mobile = LANDING_HERO_ORBIT_TUNING.mobile;
     const { scrollTop, scrollableHeight } = getPageScrollMetrics(root);
     const adjustedScrollY = scrollTop + scrollPhasePx;
     const scrollProgress = clamp(adjustedScrollY / scrollableHeight, 0, 1);
     const yRatioScroll = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
     const azimuthDrift =
-      (scrollProgress - 0.5) * HERO_MOBILE_MAX_AZIMUTH_OFFSET * 3.4;
+      (scrollProgress - 0.5) *
+      mobile.maxAzimuthOffset *
+      mobile.scrollAzimuthMultiplier;
 
     scrollAzimuthDeltaRef.current = xSign * azimuthDrift;
     scrollPolarDeltaRef.current =
-      yRatioScroll * HERO_MOBILE_MAX_POLAR_OFFSET * 3.6;
+      yRatioScroll * mobile.maxPolarOffset * mobile.scrollPolarMultiplier;
     syncTargetFromDeltas();
   }, [invertPointerX, scrollPhasePx, syncTargetFromDeltas]);
 
@@ -139,13 +126,18 @@ export const useHeroOrbitModelMotion = ({
         return;
       }
 
+      const desktop = LANDING_HERO_ORBIT_TUNING.desktop;
       const xRatio = clientX / window.innerWidth - 0.5;
       const yRatio = clientY / window.innerHeight - 0.5;
       const xSign = invertPointerX ? -1 : 1;
 
       pointerAzimuthDeltaRef.current =
-        -xSign * xRatio * HERO_DESKTOP_MAX_AZIMUTH_OFFSET * 2;
-      pointerPolarDeltaRef.current = yRatio * HERO_DESKTOP_MAX_POLAR_OFFSET * 2;
+        -xSign *
+        xRatio *
+        desktop.maxAzimuthOffset *
+        desktop.pointerAzimuthMultiplier;
+      pointerPolarDeltaRef.current =
+        yRatio * desktop.maxPolarOffset * desktop.pointerPolarMultiplier;
       syncTargetFromDeltas();
     },
     [controlsRef, invertPointerX, isMobileLayout, syncTargetFromDeltas],
@@ -157,12 +149,11 @@ export const useHeroOrbitModelMotion = ({
 
   useEffect(() => {
     const frameDamping = isMobileLayout
-      ? HERO_MOBILE_DAMPING
-      : HERO_DESKTOP_DAMPING;
+      ? LANDING_HERO_ORBIT_TUNING.mobile.frameDamping
+      : LANDING_HERO_ORBIT_TUNING.desktop.frameDamping;
 
     let frameId = 0;
-    let removeScrollListener: (() => void) | undefined;
-    let resizeObserver: ResizeObserver | undefined;
+    let detachScrollRoot: (() => void) | undefined;
     let chaseFrames = 0;
 
     const animateModel = () => {
@@ -209,38 +200,16 @@ export const useHeroOrbitModelMotion = ({
       };
     }
 
-    const pickScrollRoot = (): HTMLElement | Window =>
-      resolvePageScrollElement() ?? window;
-
     const bindScrollRoot = () => {
-      const nextRoot = pickScrollRoot();
-      if (scrollRootRef.current === nextRoot && removeScrollListener) {
+      const nextRoot = getPageScrollRoot();
+      if (scrollRootRef.current === nextRoot && detachScrollRoot) {
         updateScrollDeltas();
         return;
       }
 
-      removeScrollListener?.();
-      resizeObserver?.disconnect();
-
+      detachScrollRoot?.();
       scrollRootRef.current = nextRoot;
-
-      const onScroll = () => {
-        updateScrollDeltas();
-      };
-
-      nextRoot.addEventListener("scroll", onScroll, { passive: true });
-      removeScrollListener = () => {
-        nextRoot.removeEventListener("scroll", onScroll);
-        removeScrollListener = undefined;
-      };
-
-      if (nextRoot instanceof HTMLElement) {
-        resizeObserver = new ResizeObserver(() => {
-          updateScrollDeltas();
-        });
-        resizeObserver.observe(nextRoot);
-      }
-
+      detachScrollRoot = attachPageScrollRoot(nextRoot, updateScrollDeltas);
       updateScrollDeltas();
     };
 
@@ -258,15 +227,15 @@ export const useHeroOrbitModelMotion = ({
       const overlay = resolvePageScrollElement();
       if (overlay && scrollRootRef.current !== overlay) {
         bindScrollRoot();
-        return;
       }
-      window.requestAnimationFrame(chaseDeferredOverlay);
+      if (!overlay || scrollRootRef.current !== overlay) {
+        window.requestAnimationFrame(chaseDeferredOverlay);
+      }
     };
     window.requestAnimationFrame(chaseDeferredOverlay);
 
     return () => {
-      removeScrollListener?.();
-      resizeObserver?.disconnect();
+      detachScrollRoot?.();
       window.removeEventListener("resize", handleWindowResize);
       window.cancelAnimationFrame(frameId);
       scrollRootRef.current = null;
