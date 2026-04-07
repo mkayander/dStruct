@@ -1,4 +1,4 @@
-/** CSS variable names; must match `variable` in `appFonts.ts` (next/font). */
+/** CSS variable names — must match literal `variable` in `appFonts.ts` (Turbopack requires literals there). */
 export const FONT_VAR_SANS = "--font-app-sans";
 export const FONT_VAR_DISPLAY = "--font-app-display";
 

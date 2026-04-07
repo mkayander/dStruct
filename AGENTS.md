@@ -69,7 +69,7 @@ Refer to `package.json` scripts. Summary of most-used:
 ### Fonts (Pages Router)
 
 - **App UI:** Inter (body / default MUI typography) and Space Grotesk (headings `h1`–`h4`, `subtitle2`, app bar wordmark) load via **`next/font/google`** in `src/shared/fonts/appFonts.ts`. `pages/_document.tsx` sets `className={fontVariableClassNames}` on `<Html>` so CSS variables apply everywhere; **do not** add a duplicate Google Fonts stylesheet for those families.
-- **Stacks:** use `appFontStackSans` / `appFontStackDisplay` from `src/shared/fonts/fontVariables.ts` in theme or `sx` so names stay aligned with the loader.
+- **Stacks:** use `appFontStackSans` / `appFontStackDisplay` from `src/shared/fonts/fontVariables.ts` in theme or `sx` so names stay aligned with the loader. In `appFonts.ts`, the `next/font` `variable` option must stay **string literals** (Turbopack does not accept imported constants there).
 - **Material Icons** still use the Google Fonts icon stylesheet in `_document.tsx` (separate from text fonts).
 - **Code samples** (e.g. landing preview) intentionally use a **monospace** stack, not Inter.
 
