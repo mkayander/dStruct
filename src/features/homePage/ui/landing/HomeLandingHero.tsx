@@ -12,6 +12,7 @@ import React, { useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
+import { useLandingDecor3dMobileEntrance } from "#/features/homePage/hooks/useLandingDecor3dMobileEntrance";
 import {
   LANDING_DECOR_BRAND_BASE_AZIMUTH,
   LANDING_DECOR_BRAND_BASE_POLAR,
@@ -54,6 +55,7 @@ const AmbientBackground = () => {
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
   const brandControlsRef = useRef<ThreeOrbitControls>(null);
+  const { mobileEntranceSx } = useLandingDecor3dMobileEntrance("hero");
 
   useHeroOrbitModelMotion({
     controlsRef: brandControlsRef,
@@ -77,18 +79,21 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
       <AmbientBackground />
 
       <Box
-        sx={{
-          position: "absolute",
-          top: { xs: -88, sm: -170, md: -280 },
-          right: { xs: -118, sm: -180, md: -320 },
-          width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-          height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
-          opacity: { xs: 0.12, md: 0.2 },
-          filter: "blur(0.4px)",
-          pointerEvents: "none",
-          maskImage:
-            "radial-gradient(circle at 48% 50%, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.9) 32%, rgba(0,0,0,0.46) 66%, transparent 90%)",
-        }}
+        sx={[
+          {
+            position: "absolute",
+            top: { xs: -88, sm: -170, md: -280 },
+            right: { xs: -118, sm: -180, md: -320 },
+            width: { xs: 460, sm: 700, md: 1180, lg: 1360 },
+            height: { xs: 460, sm: 700, md: 1180, lg: 1360 },
+            opacity: { xs: 0.12, md: 0.2 },
+            filter: "blur(0.4px)",
+            pointerEvents: "none",
+            maskImage:
+              "radial-gradient(circle at 48% 50%, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.9) 32%, rgba(0,0,0,0.46) 66%, transparent 90%)",
+          },
+          mobileEntranceSx,
+        ]}
       >
         <LogoModelView
           controlsRef={brandControlsRef}
