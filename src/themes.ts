@@ -242,6 +242,26 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
           },
         },
       },
+      MuiIconButton: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            // MUI sets backgroundColor: transparent under &:hover + @media (hover: none) for touch
+            // devices, which makes sticky :hover after a tap wipe out any custom resting bgcolor.
+            // Keep the same hover tint as fine pointers so behavior matches across form factors.
+            "&:hover": {
+              "@media (hover: none)": {
+                backgroundColor: "var(--IconButton-hoverBg)",
+              },
+            },
+            "&.Mui-focusVisible": {
+              backgroundColor: theme.palette.action.focus,
+            },
+            "&:active": {
+              backgroundColor: theme.palette.action.selected,
+            },
+          }),
+        },
+      },
       MuiChip: {
         styleOverrides: {
           root: {
