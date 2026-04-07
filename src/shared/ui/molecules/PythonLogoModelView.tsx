@@ -73,7 +73,7 @@ export const PythonLogoModelView: React.FC<PythonLogoModelViewProps> = ({
         enableZoom={false}
         enablePan={false}
         enableDamping={pointerRotationEnabled}
-        dampingFactor={0.02}
+        dampingFactor={0.005}
       />
       <OrbitModelCanvasTouchScroll active={pointerEventsDisabled} />
     </Canvas>

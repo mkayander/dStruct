@@ -8,15 +8,21 @@ import {
 } from "#/features/homePage/hooks/getPageScrollMetrics";
 import { useMobileLayout } from "#/shared/hooks";
 
-/** Max radians added from pointer / scroll (before scroll/pointer multipliers). */
-const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.62;
-const HERO_MODEL_MAX_POLAR_OFFSET = 0.4;
-/** Lerp factor per frame toward target angles (higher = snappier follow). */
-const HERO_MODEL_DAMPING = 0.2;
+/** Desktop: pointer parallax only (original subtlety). */
+const HERO_DESKTOP_MAX_AZIMUTH_OFFSET = 0.28;
+const HERO_DESKTOP_MAX_POLAR_OFFSET = 0.18;
+const HERO_DESKTOP_DAMPING = 0.08;
 
-/** Wider than before so larger scroll/polar swings are not flattened by clamp. */
-const HERO_POLAR_ANGLE_MIN = Math.PI / 3.15;
-const HERO_POLAR_ANGLE_MAX = Math.PI / 1.72;
+/** Mobile: scroll-driven motion + stronger follow. */
+const HERO_MOBILE_MAX_AZIMUTH_OFFSET = 0.62;
+const HERO_MOBILE_MAX_POLAR_OFFSET = 0.4;
+const HERO_MOBILE_DAMPING = 0.2;
+
+const HERO_DESKTOP_POLAR_ANGLE_MIN = Math.PI / 2.9;
+const HERO_DESKTOP_POLAR_ANGLE_MAX = Math.PI / 1.9;
+
+const HERO_MOBILE_POLAR_ANGLE_MIN = Math.PI / 3.15;
+const HERO_MOBILE_POLAR_ANGLE_MAX = Math.PI / 1.72;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
@@ -32,8 +38,8 @@ export type UseHeroOrbitModelMotionParams = {
 };
 
 /**
- * Drives OrbitControls azimuth/polar from the page scroll container (OverlayScrollbars
- * viewport in MainLayout, else window), with optional pointer parallax on desktop.
+ * Mobile: OrbitControls follow page scroll (OverlayScrollbars viewport) + eased follow.
+ * Desktop: pointer parallax only; no scroll-driven motion.
  */
 export const useHeroOrbitModelMotion = ({
   controlsRef,
@@ -67,16 +73,23 @@ export const useHeroOrbitModelMotion = ({
   );
 
   const syncTargetFromDeltas = useCallback(() => {
+    const polarMin = isMobileLayout
+      ? HERO_MOBILE_POLAR_ANGLE_MIN
+      : HERO_DESKTOP_POLAR_ANGLE_MIN;
+    const polarMax = isMobileLayout
+      ? HERO_MOBILE_POLAR_ANGLE_MAX
+      : HERO_DESKTOP_POLAR_ANGLE_MAX;
+
     targetAzimuthRef.current =
       baseAzimuth +
       scrollAzimuthDeltaRef.current +
       pointerAzimuthDeltaRef.current;
     targetPolarRef.current = clamp(
       basePolar + scrollPolarDeltaRef.current + pointerPolarDeltaRef.current,
-      HERO_POLAR_ANGLE_MIN,
-      HERO_POLAR_ANGLE_MAX,
+      polarMin,
+      polarMax,
     );
-  }, [baseAzimuth, basePolar]);
+  }, [baseAzimuth, basePolar, isMobileLayout]);
 
   const updateScrollDeltas = useCallback(() => {
     const root = scrollRootRef.current;
@@ -88,11 +101,11 @@ export const useHeroOrbitModelMotion = ({
     const yRatioScroll = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
     const azimuthDrift =
-      (scrollProgress - 0.5) * HERO_MODEL_MAX_AZIMUTH_OFFSET * 3.4;
+      (scrollProgress - 0.5) * HERO_MOBILE_MAX_AZIMUTH_OFFSET * 3.4;
 
     scrollAzimuthDeltaRef.current = xSign * azimuthDrift;
     scrollPolarDeltaRef.current =
-      yRatioScroll * HERO_MODEL_MAX_POLAR_OFFSET * 3.6;
+      yRatioScroll * HERO_MOBILE_MAX_POLAR_OFFSET * 3.6;
     syncTargetFromDeltas();
   }, [invertPointerX, scrollPhasePx, syncTargetFromDeltas]);
 
@@ -131,8 +144,8 @@ export const useHeroOrbitModelMotion = ({
       const xSign = invertPointerX ? -1 : 1;
 
       pointerAzimuthDeltaRef.current =
-        -xSign * xRatio * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2.6;
-      pointerPolarDeltaRef.current = yRatio * HERO_MODEL_MAX_POLAR_OFFSET * 2.6;
+        -xSign * xRatio * HERO_DESKTOP_MAX_AZIMUTH_OFFSET * 2;
+      pointerPolarDeltaRef.current = yRatio * HERO_DESKTOP_MAX_POLAR_OFFSET * 2;
       syncTargetFromDeltas();
     },
     [controlsRef, invertPointerX, isMobileLayout, syncTargetFromDeltas],
@@ -140,10 +153,13 @@ export const useHeroOrbitModelMotion = ({
 
   useEffect(() => {
     setModelRestingPosition();
-  }, [setModelRestingPosition]);
+  }, [isMobileLayout, setModelRestingPosition]);
 
-  // Bind to MainLayout's OverlayScrollbars viewport (window.scrollY stays 0); rebind after deferred init.
   useEffect(() => {
+    const frameDamping = isMobileLayout
+      ? HERO_MOBILE_DAMPING
+      : HERO_DESKTOP_DAMPING;
+
     let frameId = 0;
     let removeScrollListener: (() => void) | undefined;
     let resizeObserver: ResizeObserver | undefined;
@@ -152,11 +168,10 @@ export const useHeroOrbitModelMotion = ({
     const animateModel = () => {
       const nextAzimuth =
         currentAzimuthRef.current +
-        (targetAzimuthRef.current - currentAzimuthRef.current) *
-          HERO_MODEL_DAMPING;
+        (targetAzimuthRef.current - currentAzimuthRef.current) * frameDamping;
       const nextPolar =
         currentPolarRef.current +
-        (targetPolarRef.current - currentPolarRef.current) * HERO_MODEL_DAMPING;
+        (targetPolarRef.current - currentPolarRef.current) * frameDamping;
 
       currentAzimuthRef.current = nextAzimuth;
       currentPolarRef.current = nextPolar;
@@ -164,6 +179,35 @@ export const useHeroOrbitModelMotion = ({
 
       frameId = window.requestAnimationFrame(animateModel);
     };
+
+    if (!isMobileLayout) {
+      frameId = window.requestAnimationFrame(animateModel);
+
+      const handleWindowMouseMove = (event: MouseEvent) => {
+        updateModelFromPointer(event.clientX, event.clientY);
+      };
+
+      const handlePointerExit = () => {
+        resetPointerDeltas();
+      };
+
+      window.addEventListener("mousemove", handleWindowMouseMove);
+      window.addEventListener("blur", handlePointerExit);
+      document.documentElement.addEventListener(
+        "mouseleave",
+        handlePointerExit,
+      );
+
+      return () => {
+        window.removeEventListener("mousemove", handleWindowMouseMove);
+        window.removeEventListener("blur", handlePointerExit);
+        document.documentElement.removeEventListener(
+          "mouseleave",
+          handlePointerExit,
+        );
+        window.cancelAnimationFrame(frameId);
+      };
+    }
 
     const pickScrollRoot = (): HTMLElement | Window =>
       resolvePageScrollElement() ?? window;
@@ -208,7 +252,6 @@ export const useHeroOrbitModelMotion = ({
     };
     window.addEventListener("resize", handleWindowResize);
 
-    // PageScrollContainer uses `defer`; the viewport may not exist on the first frame.
     const chaseDeferredOverlay = () => {
       if (chaseFrames > 90) return;
       chaseFrames += 1;
@@ -221,38 +264,12 @@ export const useHeroOrbitModelMotion = ({
     };
     window.requestAnimationFrame(chaseDeferredOverlay);
 
-    const cleanupScroll = () => {
+    return () => {
       removeScrollListener?.();
       resizeObserver?.disconnect();
       window.removeEventListener("resize", handleWindowResize);
       window.cancelAnimationFrame(frameId);
       scrollRootRef.current = null;
-    };
-
-    if (isMobileLayout) {
-      return cleanupScroll;
-    }
-
-    const handleWindowMouseMove = (event: MouseEvent) => {
-      updateModelFromPointer(event.clientX, event.clientY);
-    };
-
-    const handlePointerExit = () => {
-      resetPointerDeltas();
-    };
-
-    window.addEventListener("mousemove", handleWindowMouseMove);
-    window.addEventListener("blur", handlePointerExit);
-    document.documentElement.addEventListener("mouseleave", handlePointerExit);
-
-    return () => {
-      cleanupScroll();
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("blur", handlePointerExit);
-      document.documentElement.removeEventListener(
-        "mouseleave",
-        handlePointerExit,
-      );
     };
   }, [
     applyModelAngles,
