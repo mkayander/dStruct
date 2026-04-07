@@ -17,5 +17,8 @@ export const fontDisplay = Space_Grotesk({
   variable: "--font-app-display",
 });
 
-/** Set on `<Html>` in `_document` so `var(--font-app-*)` resolves everywhere. */
+/**
+ * Set on `<Html>` in `_document` so `var(--font-app-*)` inherits to `body` (globals + MUI CssBaseline).
+ * Also import this module from `_app` so Next injects font CSS on the client — `_document` alone is not enough.
+ */
 export const fontVariableClassNames = `${fontSans.variable} ${fontDisplay.variable}`;
