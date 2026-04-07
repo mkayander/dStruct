@@ -8,13 +8,15 @@ import {
 } from "#/features/homePage/hooks/getPageScrollMetrics";
 import { useMobileLayout } from "#/shared/hooks";
 
-const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.28;
-const HERO_MODEL_MAX_POLAR_OFFSET = 0.18;
+/** Max radians added from pointer / scroll (before scroll/pointer multipliers). */
+const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.62;
+const HERO_MODEL_MAX_POLAR_OFFSET = 0.4;
 /** Lerp factor per frame toward target angles (higher = snappier follow). */
-const HERO_MODEL_DAMPING = 0.14;
+const HERO_MODEL_DAMPING = 0.2;
 
-const HERO_POLAR_ANGLE_MIN = Math.PI / 2.9;
-const HERO_POLAR_ANGLE_MAX = Math.PI / 1.9;
+/** Wider than before so larger scroll/polar swings are not flattened by clamp. */
+const HERO_POLAR_ANGLE_MIN = Math.PI / 3.15;
+const HERO_POLAR_ANGLE_MAX = Math.PI / 1.72;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
@@ -86,11 +88,11 @@ export const useHeroOrbitModelMotion = ({
     const yRatioScroll = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
     const azimuthDrift =
-      (scrollProgress - 0.5) * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2.2;
+      (scrollProgress - 0.5) * HERO_MODEL_MAX_AZIMUTH_OFFSET * 3.4;
 
     scrollAzimuthDeltaRef.current = xSign * azimuthDrift;
     scrollPolarDeltaRef.current =
-      yRatioScroll * HERO_MODEL_MAX_POLAR_OFFSET * 2.4;
+      yRatioScroll * HERO_MODEL_MAX_POLAR_OFFSET * 3.6;
     syncTargetFromDeltas();
   }, [invertPointerX, scrollPhasePx, syncTargetFromDeltas]);
 
@@ -129,8 +131,8 @@ export const useHeroOrbitModelMotion = ({
       const xSign = invertPointerX ? -1 : 1;
 
       pointerAzimuthDeltaRef.current =
-        -xSign * xRatio * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2;
-      pointerPolarDeltaRef.current = yRatio * HERO_MODEL_MAX_POLAR_OFFSET * 2;
+        -xSign * xRatio * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2.6;
+      pointerPolarDeltaRef.current = yRatio * HERO_MODEL_MAX_POLAR_OFFSET * 2.6;
       syncTargetFromDeltas();
     },
     [controlsRef, invertPointerX, isMobileLayout, syncTargetFromDeltas],
