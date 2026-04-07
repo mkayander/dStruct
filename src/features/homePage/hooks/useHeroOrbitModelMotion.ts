@@ -71,9 +71,15 @@ export const useHeroOrbitModelMotion = ({
   }, [baseAzimuth, basePolar]);
 
   const updateScrollDeltas = useCallback(() => {
-    const scrollY = window.scrollY + scrollPhasePx;
-    const denom = Math.max(window.innerHeight * 0.9, 1);
-    const scrollProgress = clamp(scrollY / denom, 0, 1);
+    const viewportHeight = window.innerHeight;
+    const scrollableHeight = Math.max(
+      document.documentElement.scrollHeight - viewportHeight,
+      1,
+    );
+    // Map the full landing scroll range (not only the first ~1 viewport) so both
+    // hero and lower-section decor keep responding as the user scrolls.
+    const adjustedScrollY = window.scrollY + scrollPhasePx;
+    const scrollProgress = clamp(adjustedScrollY / scrollableHeight, 0, 1);
     const yRatioScroll = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
     const azimuthDrift =
@@ -152,15 +158,17 @@ export const useHeroOrbitModelMotion = ({
       frameId = window.requestAnimationFrame(animateModel);
     };
 
-    const handleScroll = () => {
+    const handleScrollOrResize = () => {
       updateScrollDeltas();
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScrollOrResize, { passive: true });
+    window.addEventListener("resize", handleScrollOrResize);
     frameId = window.requestAnimationFrame(animateModel);
 
     const cleanupScroll = () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollOrResize);
+      window.removeEventListener("resize", handleScrollOrResize);
       window.cancelAnimationFrame(frameId);
     };
 
