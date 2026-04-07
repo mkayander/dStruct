@@ -122,7 +122,6 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         const getInputFunction = new Function(prefixedCode);
         const runFunction = getInputFunction();
         callstack.clear();
-        clearExecutionSource();
         const result = runFunction(...args);
         const response: WorkerResponse = {
           type: "run",

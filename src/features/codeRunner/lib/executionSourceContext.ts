@@ -1,8 +1,4 @@
-/** Mutable execution source position for the in-worker JS runtime (line = 1-based editor line). */
-export type ExecutionSourceSnapshot = {
-  line: number;
-  column?: number;
-};
+import type { SourceLocationSnapshot } from "#/shared/lib/sourceLocationSnapshot";
 
 const state: { line: number | null; column: number | null } = {
   line: null,
@@ -20,10 +16,10 @@ export const setExecutionSource = (line: number, column?: number | null): void =
 };
 
 export const peekExecutionSourceForFrame = ():
-  | ExecutionSourceSnapshot
+  | SourceLocationSnapshot
   | undefined => {
   if (state.line == null) return undefined;
-  const snap: ExecutionSourceSnapshot = { line: state.line };
+  const snap: SourceLocationSnapshot = { line: state.line };
   if (state.column != null) snap.column = state.column;
   return snap;
 };

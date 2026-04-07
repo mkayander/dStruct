@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { instrumentUserJsForLineTracking } from "#/features/codeRunner/lib/instrumentUserJsForLineTracking";
 
 describe("instrumentUserJsForLineTracking", () => {
-  it("injects self.__dstructSetExecutionSource before statements in returned function", () => {
+  it("injects globalThis.__dstructSetExecutionSource before statements in returned function", () => {
     const code = `return function sum(a) {
   return a + 1;
 };`;
@@ -22,5 +22,13 @@ describe("instrumentUserJsForLineTracking", () => {
 };`;
     const { ok } = instrumentUserJsForLineTracking(code);
     expect(ok).toBe(true);
+  });
+
+  it("skips instrumentation when there is no return function template", () => {
+    const code = `function run() { return 1; }
+return run;`;
+    const { code: out, ok } = instrumentUserJsForLineTracking(code);
+    expect(ok).toBe(false);
+    expect(out).toBe(code);
   });
 });

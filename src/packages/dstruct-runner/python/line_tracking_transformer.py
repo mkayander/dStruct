@@ -6,6 +6,7 @@ import ast
 
 
 class LineTrackingTransformer(ast.NodeTransformer):
+    # generic_visit runs first so nested function bodies are transformed before the outer body is replaced.
     def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.FunctionDef:
         self.generic_visit(node)
         node.body = self._instrument_body(node.body)

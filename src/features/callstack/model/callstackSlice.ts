@@ -10,14 +10,14 @@ import type { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
-import type { ExecutionSourceSnapshot } from "#/features/codeRunner/lib/executionSourceContext";
 import { peekExecutionSourceForFrame } from "#/features/codeRunner/lib/executionSourceContext";
 import type { RootState } from "#/store/makeStore";
+import type { SourceLocationSnapshot } from "#/shared/lib/sourceLocationSnapshot";
 
 export type StructureTypeName = "treeNode" | "array";
 
 /** Optional mapping from a visualization frame to user source (editor lines are 1-based). */
-export type CallFrameSource = ExecutionSourceSnapshot;
+export type CallFrameSource = SourceLocationSnapshot;
 
 export type CallFrameBase = {
   id: string;

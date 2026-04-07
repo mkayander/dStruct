@@ -309,8 +309,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       return;
     }
 
+    const nextText = value ?? "";
     const { isReady, lastRunCodeSource } = store.getState().callstack;
-    if (isReady && lastRunCodeSource != null) {
+    if (
+      isReady &&
+      lastRunCodeSource != null &&
+      nextText !== lastRunCodeSource
+    ) {
       dispatch(callstackSlice.actions.markCodeSnapshotStale());
     }
 

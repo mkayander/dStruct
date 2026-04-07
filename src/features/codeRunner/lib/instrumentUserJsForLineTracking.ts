@@ -3,7 +3,7 @@ import { parse } from "@babel/parser";
 import traverse, { type NodePath } from "@babel/traverse";
 import * as t from "@babel/types";
 
-import type { Node } from "@babel/types";
+import type { File } from "@babel/types";
 
 const insertProbesInBlock = (bodyPath: NodePath<t.BlockStatement>) => {
   const statements = bodyPath.get("body");
@@ -37,9 +37,27 @@ const instrumentFunctionBody = (fnPath: NodePath<t.Function>) => {
   }
 };
 
+type SolutionFnPath = NodePath<t.FunctionExpression | t.ArrowFunctionExpression>;
+
+const findReturnedSolutionPath = (file: File): SolutionFnPath | null => {
+  let found: SolutionFnPath | null = null;
+  traverse(file, {
+    ReturnStatement(path) {
+      const arg = path.get("argument");
+      if (!arg.node) return;
+      if (arg.isFunctionExpression() || arg.isArrowFunctionExpression()) {
+        found = arg as SolutionFnPath;
+        path.stop();
+      }
+    },
+  });
+  return found;
+};
+
 /**
- * Injects `self.__dstructSetExecutionSource(line, column)` before each statement in
- * every function body. Line/column match the Monaco model (user code only).
+ * Injects `globalThis.__dstructSetExecutionSource(line, column)` before each statement
+ * in every function body **inside** the first `return <function>` (dStruct solution template).
+ * Line/column match the Monaco model (user code only).
  */
 export const instrumentUserJsForLineTracking = (
   code: string,
@@ -51,7 +69,15 @@ export const instrumentUserJsForLineTracking = (
       allowAwaitOutsideFunction: true,
     });
 
-    traverse(ast, {
+    const solutionPath = findReturnedSolutionPath(ast);
+    if (!solutionPath) {
+      return { code, ok: false };
+    }
+
+    // traverse() does not visit the root path; instrument the solution fn itself first.
+    instrumentFunctionBody(solutionPath as NodePath<t.Function>);
+
+    solutionPath.traverse({
       FunctionDeclaration(path) {
         instrumentFunctionBody(path);
       },
@@ -66,7 +92,7 @@ export const instrumentUserJsForLineTracking = (
       },
     });
 
-    const out = generate(ast as Node, { retainLines: false });
+    const out = generate(ast, { retainLines: false });
     return { code: out.code, ok: true };
   } catch {
     return { code, ok: false };
