@@ -67,6 +67,13 @@ const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
   matches: queryMatchesViewport(query, getViewportWidth(deviceType)),
 });
 
+/** MUI dark mode uses a #266798 autofill inset; transparent avoids the blue wash with any surface. */
+const webkitAutofillTransparent = {
+  WebkitBoxShadow: "0 0 0 100px transparent inset",
+  WebkitTextFillColor: obsidianTokens.textPrimary,
+  caretColor: obsidianTokens.textPrimary,
+} as const;
+
 export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
   const theme = createTheme({
     cssVariables: true,
@@ -276,7 +283,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            backgroundColor: obsidianTokens.surfaceLowest,
+            backgroundColor: "transparent",
             "& fieldset": {
               borderColor: alpha(obsidianTokens.outline, 0.14),
             },
@@ -285,6 +292,38 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
             },
             "&.Mui-focused fieldset": {
               borderColor: alpha(obsidianTokens.accentSoft, 0.7),
+            },
+          },
+          input: {
+            "&:-webkit-autofill": {
+              ...webkitAutofillTransparent,
+              borderRadius: "inherit",
+            },
+          },
+        },
+      },
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: "transparent",
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
+              },
+            },
+            "&.Mui-focused": {
+              backgroundColor: "transparent",
+            },
+            "&.Mui-disabled": {
+              backgroundColor: "transparent",
+            },
+          },
+          input: {
+            "&:-webkit-autofill": {
+              ...webkitAutofillTransparent,
+              borderTopLeftRadius: "inherit",
+              borderTopRightRadius: "inherit",
             },
           },
         },

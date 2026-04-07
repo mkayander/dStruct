@@ -1,3 +1,10 @@
+## [1.374.1](https://github.com/mkayander/dStruct/compare/v1.374.0...v1.374.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* **theme:** align input autofill with obsidian surfaces ([#117](https://github.com/mkayander/dStruct/issues/117)) ([a072efd](https://github.com/mkayander/dStruct/commit/a072efde34cafb883bbe00f52a0641469972aaaa)), closes [#266798](https://github.com/mkayander/dStruct/issues/266798) [#266798](https://github.com/mkayander/dStruct/issues/266798)
+
 # [1.374.0](https://github.com/mkayander/dStruct/compare/v1.373.1...v1.374.0) (2026-04-06)
 
 
