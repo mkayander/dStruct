@@ -2,6 +2,10 @@ import type { RefObject } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
+import {
+  getPageScrollMetrics,
+  resolvePageScrollElement,
+} from "#/features/homePage/hooks/getPageScrollMetrics";
 import { useMobileLayout } from "#/shared/hooks";
 
 const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.28;
@@ -26,8 +30,8 @@ export type UseHeroOrbitModelMotionParams = {
 };
 
 /**
- * Drives OrbitControls azimuth/polar from window scroll on all viewports, with optional
- * pointer parallax on desktop. Eased follow via requestAnimationFrame.
+ * Drives OrbitControls azimuth/polar from the page scroll container (OverlayScrollbars
+ * viewport in MainLayout, else window), with optional pointer parallax on desktop.
  */
 export const useHeroOrbitModelMotion = ({
   controlsRef,
@@ -46,6 +50,8 @@ export const useHeroOrbitModelMotion = ({
   const scrollPolarDeltaRef = useRef(0);
   const pointerAzimuthDeltaRef = useRef(0);
   const pointerPolarDeltaRef = useRef(0);
+
+  const scrollRootRef = useRef<HTMLElement | Window | null>(null);
 
   const applyModelAngles = useCallback(
     (azimuth: number, polar: number) => {
@@ -71,14 +77,11 @@ export const useHeroOrbitModelMotion = ({
   }, [baseAzimuth, basePolar]);
 
   const updateScrollDeltas = useCallback(() => {
-    const viewportHeight = window.innerHeight;
-    const scrollableHeight = Math.max(
-      document.documentElement.scrollHeight - viewportHeight,
-      1,
-    );
-    // Map the full landing scroll range (not only the first ~1 viewport) so both
-    // hero and lower-section decor keep responding as the user scrolls.
-    const adjustedScrollY = window.scrollY + scrollPhasePx;
+    const root = scrollRootRef.current;
+    if (!root) return;
+
+    const { scrollTop, scrollableHeight } = getPageScrollMetrics(root);
+    const adjustedScrollY = scrollTop + scrollPhasePx;
     const scrollProgress = clamp(adjustedScrollY / scrollableHeight, 0, 1);
     const yRatioScroll = scrollProgress - 0.5;
     const xSign = invertPointerX ? -1 : 1;
@@ -137,10 +140,12 @@ export const useHeroOrbitModelMotion = ({
     setModelRestingPosition();
   }, [setModelRestingPosition]);
 
+  // Bind to MainLayout's OverlayScrollbars viewport (window.scrollY stays 0); rebind after deferred init.
   useEffect(() => {
-    updateScrollDeltas();
-
     let frameId = 0;
+    let removeScrollListener: (() => void) | undefined;
+    let resizeObserver: ResizeObserver | undefined;
+    let chaseFrames = 0;
 
     const animateModel = () => {
       const nextAzimuth =
@@ -158,18 +163,68 @@ export const useHeroOrbitModelMotion = ({
       frameId = window.requestAnimationFrame(animateModel);
     };
 
-    const handleScrollOrResize = () => {
+    const pickScrollRoot = (): HTMLElement | Window =>
+      resolvePageScrollElement() ?? window;
+
+    const bindScrollRoot = () => {
+      const nextRoot = pickScrollRoot();
+      if (scrollRootRef.current === nextRoot && removeScrollListener) {
+        updateScrollDeltas();
+        return;
+      }
+
+      removeScrollListener?.();
+      resizeObserver?.disconnect();
+
+      scrollRootRef.current = nextRoot;
+
+      const onScroll = () => {
+        updateScrollDeltas();
+      };
+
+      nextRoot.addEventListener("scroll", onScroll, { passive: true });
+      removeScrollListener = () => {
+        nextRoot.removeEventListener("scroll", onScroll);
+        removeScrollListener = undefined;
+      };
+
+      if (nextRoot instanceof HTMLElement) {
+        resizeObserver = new ResizeObserver(() => {
+          updateScrollDeltas();
+        });
+        resizeObserver.observe(nextRoot);
+      }
+
       updateScrollDeltas();
     };
 
-    window.addEventListener("scroll", handleScrollOrResize, { passive: true });
-    window.addEventListener("resize", handleScrollOrResize);
+    bindScrollRoot();
     frameId = window.requestAnimationFrame(animateModel);
 
+    const handleWindowResize = () => {
+      updateScrollDeltas();
+    };
+    window.addEventListener("resize", handleWindowResize);
+
+    // PageScrollContainer uses `defer`; the viewport may not exist on the first frame.
+    const chaseDeferredOverlay = () => {
+      if (chaseFrames > 90) return;
+      chaseFrames += 1;
+      const overlay = resolvePageScrollElement();
+      if (overlay && scrollRootRef.current !== overlay) {
+        bindScrollRoot();
+        return;
+      }
+      window.requestAnimationFrame(chaseDeferredOverlay);
+    };
+    window.requestAnimationFrame(chaseDeferredOverlay);
+
     const cleanupScroll = () => {
-      window.removeEventListener("scroll", handleScrollOrResize);
-      window.removeEventListener("resize", handleScrollOrResize);
+      removeScrollListener?.();
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", handleWindowResize);
       window.cancelAnimationFrame(frameId);
+      scrollRootRef.current = null;
     };
 
     if (isMobileLayout) {
