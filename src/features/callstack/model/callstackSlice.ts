@@ -9,10 +9,10 @@ import {
 import type { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
-import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import { peekExecutionSourceForFrame } from "#/features/codeRunner/lib/executionSourceContext";
-import type { RootState } from "#/store/makeStore";
+import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import type { SourceLocationSnapshot } from "#/shared/lib/sourceLocationSnapshot";
+import type { RootState } from "#/store/makeStore";
 
 export type StructureTypeName = "treeNode" | "array";
 
@@ -150,7 +150,7 @@ export type CallFrame =
   | ReadArrayItemFrame;
 
 const callstackAdapter = createEntityAdapter<CallFrame>({
-  sortComparer: (a, b) => a.timestamp - b.timestamp,
+  sortComparer: (left, right) => left.timestamp - right.timestamp,
 });
 
 /**
@@ -377,7 +377,11 @@ export const selectPlaybackSourceLine = createSelector(
     const all = rootSelectors.selectAll(frames);
     for (let i = frameIndex; i >= 0; i -= 1) {
       const frame = all[i];
-      if (frame && frameHasOptionalSource(frame) && frame.source?.line != null) {
+      if (
+        frame &&
+        frameHasOptionalSource(frame) &&
+        frame.source?.line != null
+      ) {
         return frame.source.line;
       }
     }
@@ -394,10 +398,7 @@ export class CallstackHelper {
       return;
     }
     const snap = peekExecutionSourceForFrame();
-    if (
-      snap &&
-      !("source" in frame && frame.source != null)
-    ) {
+    if (snap && !("source" in frame && frame.source != null)) {
       this.frames.push({ ...frame, source: snap });
       return;
     }

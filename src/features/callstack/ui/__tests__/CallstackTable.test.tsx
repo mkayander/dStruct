@@ -110,8 +110,10 @@ describe("CallstackTable", () => {
       const { store } = renderWithProviders({
         isReady: true,
         frames: {
-          ids: frames.map((f) => f.id),
-          entities: Object.fromEntries(frames.map((f) => [f.id, f])),
+          ids: frames.map((frame) => frame.id),
+          entities: Object.fromEntries(
+            frames.map((frame) => [frame.id, frame]),
+          ),
         },
         frameIndex: 0,
         startTimestamp: 100,
@@ -142,8 +144,10 @@ describe("CallstackTable", () => {
       renderWithProviders({
         isReady: true,
         frames: {
-          ids: frames.map((f) => f.id),
-          entities: Object.fromEntries(frames.map((f) => [f.id, f])),
+          ids: frames.map((frame) => frame.id),
+          entities: Object.fromEntries(
+            frames.map((frame) => [frame.id, frame]),
+          ),
         },
         frameIndex: -1,
         startTimestamp: 100,
@@ -156,8 +160,10 @@ describe("CallstackTable", () => {
       renderWithProviders({
         isReady: true,
         frames: {
-          ids: frames.map((f) => f.id),
-          entities: Object.fromEntries(frames.map((f) => [f.id, f])),
+          ids: frames.map((frame) => frame.id),
+          entities: Object.fromEntries(
+            frames.map((frame) => [frame.id, frame]),
+          ),
         },
         frameIndex: 10,
         startTimestamp: 100,

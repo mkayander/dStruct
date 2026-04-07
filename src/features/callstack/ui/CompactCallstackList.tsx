@@ -29,7 +29,8 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rowRefs = useRef<Record<string, HTMLElement | null>>({});
   const playbackStepGroups = useMemo(
-    () => getPlaybackStepGroups(callstack.frames),
+    () =>
+      getPlaybackStepGroups(callstack.frames, { forCallstackDisplay: true }),
     [callstack.frames],
   );
   const activePlaybackStepIndex = useMemo(

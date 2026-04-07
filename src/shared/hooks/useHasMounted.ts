@@ -11,7 +11,7 @@ function subscribe(listener: () => void): () => void {
     setTimeout(() => {
       clientMounted = true;
       scheduleScheduled = false;
-      listeners.forEach((l) => l());
+      listeners.forEach((notifyListener) => notifyListener());
     }, 0);
   }
   return () => listeners.delete(listener);

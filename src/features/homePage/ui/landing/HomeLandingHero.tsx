@@ -8,27 +8,26 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
+import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
+import {
+  LANDING_DECOR_BRAND_BASE_AZIMUTH,
+  LANDING_DECOR_BRAND_BASE_POLAR,
+  LANDING_DECOR_MODEL_CAMERA,
+  LANDING_DECOR_MODEL_DISTANCE,
+  LANDING_DECOR_MODEL_FOV,
+  LANDING_DECOR_MODEL_TARGET,
+} from "#/features/homePage/lib/landingDecor3dConstants";
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { HomeLandingHeroPreview } from "#/features/homePage/ui/landing/HomeLandingHeroPreview";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
-import { useMobileLayout } from "#/shared/hooks";
 import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
 
 type HomeLandingHeroProps = {
   LL: TranslationFunctions;
 };
-
-const HERO_MODEL_BASE_AZIMUTH = Math.PI / 4.6;
-const HERO_MODEL_BASE_POLAR = Math.PI / 2.5;
-const HERO_MODEL_MAX_AZIMUTH_OFFSET = 0.28;
-const HERO_MODEL_MAX_POLAR_OFFSET = 0.18;
-const HERO_MODEL_DAMPING = 0.08;
-
-const clamp = (value: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, value));
 
 const AmbientBackground = () => {
   const theme = useTheme();
@@ -41,16 +40,11 @@ const AmbientBackground = () => {
         left: 0,
         width: "100%",
         height: "100vh",
-        background: `radial-gradient(circle at 18% 18%, ${alpha(
-          theme.appDesign.accent,
-          0.16,
-        )} 0%, transparent 42%), radial-gradient(circle at 82% 12%, ${alpha(
-          theme.appDesign.accentSoft,
-          0.12,
-        )} 0%, transparent 36%), linear-gradient(180deg, ${alpha(
-          theme.appDesign.surfaceLow,
-          0.12,
-        )} 0%, transparent 55%)`,
+        background: `
+          radial-gradient(circle at 18% 18%, ${alpha(theme.appDesign.accent, 0.16)} 0%, transparent 42%),
+          radial-gradient(circle at 82% 12%, ${alpha(theme.appDesign.accentSoft, 0.12)} 0%, transparent 36%),
+          linear-gradient(180deg, ${alpha(theme.appDesign.surfaceLow, 0.12)} 0%, transparent 55%)
+        `,
         pointerEvents: "none",
       }}
     />
@@ -59,117 +53,15 @@ const AmbientBackground = () => {
 
 export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
   const theme = useTheme();
-  const isMobileLayout = useMobileLayout();
-  const controlsRef = useRef<ThreeOrbitControls>(null);
-  const currentAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
-  const currentPolarRef = useRef(HERO_MODEL_BASE_POLAR);
-  const targetAzimuthRef = useRef(HERO_MODEL_BASE_AZIMUTH);
-  const targetPolarRef = useRef(HERO_MODEL_BASE_POLAR);
+  const brandControlsRef = useRef<ThreeOrbitControls>(null);
 
-  const applyModelAngles = useCallback((azimuth: number, polar: number) => {
-    const controls = controlsRef.current;
-    if (!controls) return;
-    controls.setAzimuthalAngle(azimuth);
-    controls.setPolarAngle(polar);
-    controls.update();
-  }, []);
-
-  const setModelRestingPosition = useCallback(() => {
-    currentAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    currentPolarRef.current = HERO_MODEL_BASE_POLAR;
-    targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    targetPolarRef.current = HERO_MODEL_BASE_POLAR;
-    applyModelAngles(HERO_MODEL_BASE_AZIMUTH, HERO_MODEL_BASE_POLAR);
-  }, [applyModelAngles]);
-
-  const resetModelAngles = useCallback(() => {
-    targetAzimuthRef.current = HERO_MODEL_BASE_AZIMUTH;
-    targetPolarRef.current = HERO_MODEL_BASE_POLAR;
-  }, []);
-
-  const updateModelFromPointer = useCallback(
-    (clientX: number, clientY: number) => {
-      if (isMobileLayout) return;
-
-      if (
-        !controlsRef.current ||
-        window.innerWidth === 0 ||
-        window.innerHeight === 0
-      ) {
-        return;
-      }
-
-      const xRatio = clientX / window.innerWidth - 0.5;
-      const yRatio = clientY / window.innerHeight - 0.5;
-
-      targetAzimuthRef.current =
-        HERO_MODEL_BASE_AZIMUTH - xRatio * HERO_MODEL_MAX_AZIMUTH_OFFSET * 2;
-      targetPolarRef.current = clamp(
-        HERO_MODEL_BASE_POLAR + yRatio * HERO_MODEL_MAX_POLAR_OFFSET * 2,
-        Math.PI / 2.9,
-        Math.PI / 1.9,
-      );
-    },
-    [isMobileLayout],
-  );
-
-  useEffect(() => {
-    setModelRestingPosition();
-  }, [setModelRestingPosition]);
-
-  useEffect(() => {
-    if (isMobileLayout) {
-      setModelRestingPosition();
-      return;
-    }
-
-    let frameId = 0;
-
-    const animateModel = () => {
-      const nextAzimuth =
-        currentAzimuthRef.current +
-        (targetAzimuthRef.current - currentAzimuthRef.current) *
-          HERO_MODEL_DAMPING;
-      const nextPolar =
-        currentPolarRef.current +
-        (targetPolarRef.current - currentPolarRef.current) * HERO_MODEL_DAMPING;
-
-      currentAzimuthRef.current = nextAzimuth;
-      currentPolarRef.current = nextPolar;
-      applyModelAngles(nextAzimuth, nextPolar);
-
-      frameId = window.requestAnimationFrame(animateModel);
-    };
-
-    const handleWindowMouseMove = (event: MouseEvent) => {
-      updateModelFromPointer(event.clientX, event.clientY);
-    };
-
-    const handlePointerExit = () => {
-      resetModelAngles();
-    };
-
-    window.addEventListener("mousemove", handleWindowMouseMove);
-    window.addEventListener("blur", handlePointerExit);
-    document.documentElement.addEventListener("mouseleave", handlePointerExit);
-    frameId = window.requestAnimationFrame(animateModel);
-
-    return () => {
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("blur", handlePointerExit);
-      document.documentElement.removeEventListener(
-        "mouseleave",
-        handlePointerExit,
-      );
-      window.cancelAnimationFrame(frameId);
-    };
-  }, [
-    applyModelAngles,
-    isMobileLayout,
-    resetModelAngles,
-    setModelRestingPosition,
-    updateModelFromPointer,
-  ]);
+  useHeroOrbitModelMotion({
+    controlsRef: brandControlsRef,
+    baseAzimuth: LANDING_DECOR_BRAND_BASE_AZIMUTH,
+    basePolar: LANDING_DECOR_BRAND_BASE_POLAR,
+    invertPointerX: false,
+    scrollPhasePx: 0,
+  });
 
   return (
     <Box
@@ -199,12 +91,12 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
         }}
       >
         <LogoModelView
-          controlsRef={controlsRef}
+          controlsRef={brandControlsRef}
           interactive={false}
-          cameraPosition={[1, 2.6, 22]}
-          cameraFov={38}
-          target={[0, 0.75, 0]}
-          distanceRange={[18, 28]}
+          cameraPosition={LANDING_DECOR_MODEL_CAMERA}
+          cameraFov={LANDING_DECOR_MODEL_FOV}
+          target={LANDING_DECOR_MODEL_TARGET}
+          distanceRange={LANDING_DECOR_MODEL_DISTANCE}
         />
       </Box>
 
@@ -282,7 +174,8 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                   variant="text"
                   color="inherit"
                 >
-                  {LL.HOME_HERO_FAQ_LINK()} →
+                  {LL.HOME_HERO_FAQ_LINK()}
+                  {LL.HOME_HERO_FAQ_LINK_SUFFIX()}
                 </Button>
               </Stack>
 

@@ -1,4 +1,5 @@
 import nextPlugin from "@next/eslint-plugin-next";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
 import tseslint from "typescript-eslint";
@@ -14,6 +15,7 @@ const eslintConfig = [
       "**/dist/**",
       "**/coverage/**",
       "src/graphql/generated/**",
+      "src/server/db/generated/**",
       ".next/**",
       "node_modules/**",
     ],
@@ -50,6 +52,17 @@ const eslintConfig = [
       ],
       "@typescript-eslint/no-empty-object-type": "off",
       "no-unused-vars": "off", // Turn off base rule as it conflicts with @typescript-eslint/no-unused-vars
+      // Forbid one-letter variable/parameter/catch names (see .cursor/rules/no-one-letter-identifiers.mdc).
+      // "_" is allowed as an intentional discard (e.g. map((_, index) => ...)). i/j/k are allowed for classic for-loop indices only.
+      // Object property keys are not checked.
+      "id-length": [
+        "error",
+        {
+          min: 2,
+          exceptions: ["_", "i", "j", "k"],
+          properties: "never",
+        },
+      ],
       "no-restricted-syntax": [
         "error",
         {
@@ -95,6 +108,8 @@ const eslintConfig = [
       ...testingLibrary.configs.react.rules,
     },
   },
+  // Last: Prettier as ESLint rule + disable conflicting formatting rules
+  eslintPluginPrettierRecommended,
 ];
 
 export default eslintConfig;

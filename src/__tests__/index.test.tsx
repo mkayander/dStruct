@@ -62,9 +62,10 @@ const mocks = [
 ];
 
 const i18n = {
-  locale: "en",
-  dictionary: en as Translation,
+  translations: { en: en as Translation },
 } as const;
+
+const canonicalUrl = "https://dstruct.pro/";
 
 describe("DashboardPage", () => {
   it("renders a CTA button", () => {
@@ -73,7 +74,7 @@ describe("DashboardPage", () => {
         <MockedProvider mocks={mocks} addTypename={false}>
           <StateThemeProvider>
             <ProjectBrowserProvider>
-              <DashboardPage i18n={i18n} />
+              <DashboardPage i18n={i18n} canonicalUrl={canonicalUrl} />
             </ProjectBrowserProvider>
           </StateThemeProvider>
         </MockedProvider>

@@ -2,7 +2,20 @@
 
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import React from "react";
+
+const isNextImageOptimizedAvatarUrl = (url: string): boolean => {
+  try {
+    const host = new URL(url).hostname;
+    return (
+      host === "avatars.githubusercontent.com" ||
+      host === "lh3.googleusercontent.com"
+    );
+  } catch {
+    return false;
+  }
+};
 
 export const SessionWidget: React.FC = () => {
   const { data: session, status } = useSession();
@@ -17,16 +30,16 @@ export const SessionWidget: React.FC = () => {
   }
 
   const handleSignIn: React.MouseEventHandler<HTMLButtonElement> = async (
-    e,
+    event,
   ) => {
-    e.preventDefault();
+    event.preventDefault();
     await signIn();
   };
 
   const handleSignOut: React.MouseEventHandler<HTMLButtonElement> = async (
-    e,
+    event,
   ) => {
-    e.preventDefault();
+    event.preventDefault();
     await signOut();
   };
 
@@ -62,10 +75,13 @@ export const SessionWidget: React.FC = () => {
             You are signed in as:
           </Typography>
           {session.user.image && (
-            <img
+            <Image
               alt="user avatar"
+              height={80}
               referrerPolicy="no-referrer"
               src={session.user.image}
+              unoptimized={!isNextImageOptimizedAvatarUrl(session.user.image)}
+              width={80}
             />
           )}
           <Typography variant="body1">

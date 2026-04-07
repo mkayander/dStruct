@@ -1,7 +1,7 @@
 ---
 description: Add comments explaining business logic of important useEffects
 globs: **/*.{ts,tsx}
-alwaysApply: false
+alwaysApply: true
 ---
 
 # useEffect Business Logic Comments

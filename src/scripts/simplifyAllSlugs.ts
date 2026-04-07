@@ -13,8 +13,8 @@ import { db } from "#/server/db/client";
           where: { id: project.id },
           data: { slug },
         });
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.error(error);
       }
     }
   }

@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import sanitizeHtml from "sanitize-html";
 
 import type { QuestionDataQueryResult } from "#/graphql/generated";
+import { useI18nContext } from "#/shared/hooks";
 import { DataSection } from "#/shared/ui/templates/DataSection";
 
 import styles from "./DailyProblem.module.scss";
@@ -15,6 +16,7 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
   questionDataQuery,
 }) => {
   const theme = useTheme();
+  const { LL } = useI18nContext();
   const question = questionDataQuery.data?.question;
 
   const sanitizedContent = useMemo(
@@ -30,8 +32,8 @@ export const DailyProblem: React.FC<DailyProblemProps> = ({
 
   return (
     <DataSection
-      title={question?.title || "Daily Problem"}
-      caption="📅 Question Of Today"
+      title={question?.title || LL.DAILY_PROBLEM_FALLBACK_TITLE()}
+      caption={LL.DAILY_PROBLEM_SECTION_CAPTION()}
       isLoading={loading}
     >
       {question && (

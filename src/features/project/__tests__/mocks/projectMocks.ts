@@ -47,7 +47,9 @@ export const createMockProjects = (
   count: number,
   overrides?: Partial<ProjectBrief>[],
 ): ProjectBrief[] =>
-  Array.from({ length: count }, (_, i) => createMockProject(overrides?.[i]));
+  Array.from({ length: count }, (_, index) =>
+    createMockProject(overrides?.[index]),
+  );
 
 /**
  * Creates mock projects for DB layer tests (createdAt as Date, simulates Prisma output)
@@ -56,7 +58,7 @@ export const createMockDbProjects = (
   count: number,
   overrides?: Partial<ProjectBriefFromDb>[],
 ): ProjectBriefFromDb[] =>
-  Array.from({ length: count }, (_, i) => {
+  Array.from({ length: count }, (_, index) => {
     const now = new Date();
     const randomId = Math.random().toString(36).substring(7);
     return {
@@ -74,7 +76,7 @@ export const createMockDbProjects = (
         name: `Mock Author ${randomId}`,
         bucketImage: `https://example.com/avatar-${randomId}.jpg`,
       },
-      ...overrides?.[i],
+      ...overrides?.[index],
     };
   });
 

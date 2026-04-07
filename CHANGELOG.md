@@ -1,3 +1,59 @@
+## [1.374.1](https://github.com/mkayander/dStruct/compare/v1.374.0...v1.374.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* **theme:** align input autofill with obsidian surfaces ([#117](https://github.com/mkayander/dStruct/issues/117)) ([a072efd](https://github.com/mkayander/dStruct/commit/a072efde34cafb883bbe00f52a0641469972aaaa)), closes [#266798](https://github.com/mkayander/dStruct/issues/266798) [#266798](https://github.com/mkayander/dStruct/issues/266798)
+
+# [1.374.0](https://github.com/mkayander/dStruct/compare/v1.373.1...v1.374.0) (2026-04-06)
+
+
+### Bug Fixes
+
+* **code-panel:** cancel superseded format when user edits or switches language ([50af246](https://github.com/mkayander/dStruct/commit/50af246b693e35aad3a4034df1d53604304c9eee))
+* **i18n:** merge non-en locales with en for English fallback ([296651b](https://github.com/mkayander/dStruct/commit/296651bc43cd937e734cf90983027fc8bccb0a8f))
+* **landing:** Python 3D decor as absolute ambient layer only ([5b0bfe5](https://github.com/mkayander/dStruct/commit/5b0bfe58e63ee6ea8f6ca118b85ceb717b7276d2))
+
+
+### Features
+
+* **code-runner:** format JavaScript with Prettier in a Web Worker ([72919ad](https://github.com/mkayander/dStruct/commit/72919ad546b1058b1f8b9bbbd57b9e071bd84074))
+* **code-runner:** format Python via Pyodide Black; drop server Black ([d69b43f](https://github.com/mkayander/dStruct/commit/d69b43f06c75b0f138f1f7d601ab4cfd6ab2c19b))
+* **home:** add Python 3D logo to hero with scroll-driven motion ([403af3f](https://github.com/mkayander/dStruct/commit/403af3f4cf9586e50dfd7158da9063a5e0ebedd1))
+
+
+### Reverts
+
+* disallow single-letter for-loop indices in id-length again ([a3a2702](https://github.com/mkayander/dStruct/commit/a3a27029dac8e2127bd380a7376cf9e0c567b1cc))
+
+## [1.373.1](https://github.com/mkayander/dStruct/compare/v1.373.0...v1.373.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* narrow swapChildren playback batching for landing hero callstack ([#115](https://github.com/mkayander/dStruct/issues/115)) ([1717194](https://github.com/mkayander/dStruct/commit/1717194e805b8d4092d6e0950de5f749104abadf))
+
+# [1.373.0](https://github.com/mkayander/dStruct/compare/v1.372.0...v1.373.0) (2026-04-06)
+
+
+### Features
+
+* **i18n:** Belarusian, Hindi, Chinese locales and full translations ([#113](https://github.com/mkayander/dStruct/issues/113)) ([dab5c92](https://github.com/mkayander/dStruct/commit/dab5c927b50d7c4bef8c8349dd3f801317b278da))
+
+# [1.372.0](https://github.com/mkayander/dStruct/compare/v1.371.1...v1.372.0) (2026-04-06)
+
+
+### Features
+
+* add darkreader-lock meta for Dark Reader extension ([#112](https://github.com/mkayander/dStruct/issues/112)) ([bb57539](https://github.com/mkayander/dStruct/commit/bb57539e235324a44a459570082f4fd279f16462))
+
+## [1.371.1](https://github.com/mkayander/dStruct/compare/v1.371.0...v1.371.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* **theme:** restore full black global app background ([#108](https://github.com/mkayander/dStruct/issues/108)) ([6d7253f](https://github.com/mkayander/dStruct/commit/6d7253f57cc7364e16fc426b58a0e8ad72e5ebd5)), closes [#000000](https://github.com/mkayander/dStruct/issues/000000) [#101417](https://github.com/mkayander/dStruct/issues/101417) [#121212](https://github.com/mkayander/dStruct/issues/121212) [#000000](https://github.com/mkayander/dStruct/issues/000000)
+
 # [1.371.0](https://github.com/mkayander/dStruct/compare/v1.370.0...v1.371.0) (2026-04-05)
 
 

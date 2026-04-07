@@ -57,7 +57,7 @@ Strongest differentiated claims:
 - **Main thread:** layout, paint, most React/DOM work — keep it free for a smooth editor and canvas.
 - **Web Worker:** parallel JS thread; solution runs there so tight loops **do not block** the main thread.
 - **JavaScript:** `[codeExec.worker.ts](../../src/features/codeRunner/lib/workers/codeExec.worker.ts)`, `[useJSWorker](../../src/features/codeRunner/hooks/useJSWorker.ts)`, `[useJSCodeRunner](../../src/features/codeRunner/hooks/useJSCodeRunner.ts)`.
-- **Python:** **Pyodide** in `[pythonExec.worker.ts](../../src/features/codeRunner/lib/workers/pythonExec.worker.ts)` ([docs/PYTHON_PYODIDE.md](../../docs/PYTHON_PYODIDE.md)) — same idea; shared `**ExecutionResult` with JS. Optional legacy server: `NEXT_PUBLIC_PYTHON_EXEC_MODE`.
+- **Python:** **Pyodide** in `[pythonExec.worker.ts](../../src/features/codeRunner/lib/workers/pythonExec.worker.ts)` ([docs/PYTHON_PYODIDE.md](../../docs/PYTHON_PYODIDE.md)) — same idea; shared `**ExecutionResult` with JS.
 - **Honest copy:** Pyodide **preloads** when you open a Python page (worker `init` on mount — see `[usePythonCodeRunner](../../src/features/codeRunner/hooks/usePythonCodeRunner.tsx)`); first visit pulls **~30 MB** (then cached); WASM startup still takes **a few seconds** even from cache. Default Python needs **no backend**. Pair **responsive UI** with **local execution**. Avoid “instant” / “zero delay.”
 
 1. **Time-travel through the run**
@@ -185,7 +185,7 @@ The animation comes from **dStruct’s tracked data-structure APIs** (trees, lis
 Many **LeetCode-style** categories: trees, BST, linked lists, **graphs**, **grids** / matrices, arrays, heaps, stacks, **trie**, DP, two pointers, sliding window, backtracking, and more. See **Browse** in the playground and the category list in the app when creating a project.
 
 **Do I need to install Python or anything else on my computer?**  
-**No** for normal use in the browser. **JavaScript** runs in a **Web Worker**; **Python** runs via **Pyodide** (in-browser CPython). A separate local Python server is optional for developers only (`NEXT_PUBLIC_PYTHON_EXEC_MODE=server`).
+**No** for normal use in the browser. **JavaScript** runs in a **Web Worker**; **Python** runs via **Pyodide** (in-browser CPython).
 
 **When I click Run, is my code executed on your servers?**  
 For the **default** setup, **no** — runs happen **in your browser** (workers). **Saving** projects, signing in, and browsing cloud data use dStruct’s backend like any web app; the **execution** of your solution for visualization is local unless you deliberately use legacy server Python mode.

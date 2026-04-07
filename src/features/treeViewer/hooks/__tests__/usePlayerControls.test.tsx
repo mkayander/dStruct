@@ -26,10 +26,17 @@ vi.mock("#/features/treeViewer/lib", async (importOriginal) => {
   });
 });
 
+type MockChildArgs = {
+  childId: string | null;
+  childTreeName?: string;
+  prevArgs?: { childId: string | null; childTreeName?: string };
+};
+
 const createMockFrame = (
   id: string,
   name: "setLeftChild" | "setRightChild" | "setVal" | "setColor" | "blink",
   nodeId: string,
+  childPointer?: MockChildArgs,
 ): CallFrame => {
   if (name === "setVal") {
     return {
@@ -77,10 +84,13 @@ const createMockFrame = (
     nodeId,
     structureType: "treeNode",
     argType: ArgumentType.BINARY_TREE,
-    args: {
+    args: childPointer ?? {
       childId: `${nodeId}-${name}`,
       childTreeName: "head",
     },
+    ...(childPointer?.prevArgs !== undefined
+      ? { prevArgs: childPointer.prevArgs }
+      : {}),
   };
 };
 
@@ -146,7 +156,10 @@ describe("usePlayerControls", () => {
   it("steps over sibling child swap pairs as one visual transition", () => {
     const frames = [
       createMockFrame("f1", "setVal", "root"),
-      createMockFrame("f2", "setLeftChild", "root"),
+      createMockFrame("f2", "setLeftChild", "root", {
+        childId: "child",
+        childTreeName: "head",
+      }),
       createMockFrame("f3", "setLeftChild", "child"),
       createMockFrame("f4", "setColor", "root"),
       createMockFrame("f5", "setRightChild", "root"),

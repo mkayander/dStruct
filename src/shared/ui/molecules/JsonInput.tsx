@@ -32,12 +32,12 @@ export const JsonInput: React.FC<JsonInputProps> = ({
       const parsed = JSON.parse(value);
       Joi.assert(parsed, validationSchema);
       setInputError(null);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        setInputError(e.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setInputError(error.message);
       } else {
         setInputError("Unknown error");
-        console.error(e);
+        console.error(error);
       }
     }
   };

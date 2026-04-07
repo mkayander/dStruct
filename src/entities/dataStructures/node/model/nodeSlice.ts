@@ -393,7 +393,10 @@ export const treeDataStructuresSelector = createSelector(
     };
 
     Object.entries(state)
-      .sort(([, { order: a }], [, { order: b }]) => a - b)
+      .sort(
+        ([, { order: orderLeft }], [, { order: orderRight }]) =>
+          orderLeft - orderRight,
+      )
       .forEach(([name, treeState]) => {
         const type = treeState.type;
         structures[type].push({ name, treeState });

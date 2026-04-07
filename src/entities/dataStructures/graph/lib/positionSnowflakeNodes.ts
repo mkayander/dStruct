@@ -75,19 +75,19 @@ export const positionSnowflakeNodes = (
 
         // Calculate angle for the child node based on the parent's angle and child index
         const angle = startAngle + childIndex * angleStep; // Spread children around the parent's angle
-        const x = parentX + radius * Math.cos(angle);
-        const y = parentY + radius * Math.sin(angle);
+        const childX = parentX + radius * Math.cos(angle);
+        const childY = parentY + radius * Math.sin(angle);
 
         const childData = nodeMap.get(child);
         if (childData && childData.x === 0 && childData.y === 0) {
-          childData.x = x;
-          childData.y = y;
+          childData.x = childX;
+          childData.y = childY;
         }
 
         nextQueue.push({
           node: child,
-          parentX: x,
-          parentY: y,
+          parentX: childX,
+          parentY: childY,
           parentAngle: angle,
         });
       });

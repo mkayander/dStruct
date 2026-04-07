@@ -231,18 +231,18 @@ export class ControlledArray<T> extends ArrayBase<T> {
     colStart: number;
     colEnd: number;
   }) {
-    const rowHeaders = Array.from({ length: rowEnd - rowStart }, (_, i) =>
-      String(i + rowStart),
+    const rowHeaders = Array.from({ length: rowEnd - rowStart }, (_, index) =>
+      String(index + rowStart),
     );
-    const colHeaders = Array.from({ length: colEnd - colStart }, (_, i) =>
-      String(i + colStart),
+    const colHeaders = Array.from({ length: colEnd - colStart }, (_, index) =>
+      String(index + colStart),
     );
 
     this.setHeaders(rowHeaders, colHeaders);
   }
 
-  public showIndexes(m: number, n: number) {
-    if (m === undefined || n === undefined) {
+  public showIndexes(rowCount: number, colCount: number) {
+    if (rowCount === undefined || colCount === undefined) {
       const row = this[0];
       let cols = this.length;
       if (Array.isArray(row)) {
@@ -255,7 +255,12 @@ export class ControlledArray<T> extends ArrayBase<T> {
         colEnd: cols,
       });
     } else {
-      this.setHeaderRanges({ rowStart: 0, rowEnd: m, colStart: 0, colEnd: n });
+      this.setHeaderRanges({
+        rowStart: 0,
+        rowEnd: rowCount,
+        colStart: 0,
+        colEnd: colCount,
+      });
     }
   }
 }

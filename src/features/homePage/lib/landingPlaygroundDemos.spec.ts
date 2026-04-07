@@ -8,7 +8,7 @@ import {
 describe("landingPlaygroundDemos", () => {
   it("keeps a fixed count of curated demos with unique hrefs", () => {
     expect(LANDING_PLAYGROUND_DEMOS).toHaveLength(4);
-    const hrefs = LANDING_PLAYGROUND_DEMOS.map((d) => d.href);
+    const hrefs = LANDING_PLAYGROUND_DEMOS.map((demo) => demo.href);
     expect(new Set(hrefs).size).toBe(hrefs.length);
   });
 
