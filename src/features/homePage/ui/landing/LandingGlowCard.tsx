@@ -49,10 +49,10 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
       if (!el) return;
       const rect = el.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
-      const x = ((event.clientX - rect.left) / rect.width) * 100;
-      const y = ((event.clientY - rect.top) / rect.height) * 100;
-      el.style.setProperty("--landing-glow-x", `${x}%`);
-      el.style.setProperty("--landing-glow-y", `${y}%`);
+      const pointerXPct = ((event.clientX - rect.left) / rect.width) * 100;
+      const pointerYPct = ((event.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty("--landing-glow-x", `${pointerXPct}%`);
+      el.style.setProperty("--landing-glow-y", `${pointerYPct}%`);
     },
     [],
   );

@@ -1,11 +1,10 @@
 import generate from "@babel/generator";
 import { parse } from "@babel/parser";
 import traverse, { type NodePath } from "@babel/traverse";
-import * as t from "@babel/types";
-
+import * as babelTypes from "@babel/types";
 import type { File } from "@babel/types";
 
-const insertProbesInBlock = (bodyPath: NodePath<t.BlockStatement>) => {
+const insertProbesInBlock = (bodyPath: NodePath<babelTypes.BlockStatement>) => {
   const statements = bodyPath.get("body");
   if (!Array.isArray(statements)) return;
 
@@ -17,27 +16,32 @@ const insertProbesInBlock = (bodyPath: NodePath<t.BlockStatement>) => {
     if (!loc) continue;
 
     stmtPath.insertBefore(
-      t.expressionStatement(
-        t.callExpression(
-          t.memberExpression(
-            t.identifier("globalThis"),
-            t.identifier("__dstructSetExecutionSource"),
+      babelTypes.expressionStatement(
+        babelTypes.callExpression(
+          babelTypes.memberExpression(
+            babelTypes.identifier("globalThis"),
+            babelTypes.identifier("__dstructSetExecutionSource"),
           ),
-          [t.numericLiteral(loc.line), t.numericLiteral(loc.column)],
+          [
+            babelTypes.numericLiteral(loc.line),
+            babelTypes.numericLiteral(loc.column),
+          ],
         ),
       ),
     );
   }
 };
 
-const instrumentFunctionBody = (fnPath: NodePath<t.Function>) => {
+const instrumentFunctionBody = (fnPath: NodePath<babelTypes.Function>) => {
   const bodyPath = fnPath.get("body");
   if (bodyPath.isBlockStatement()) {
     insertProbesInBlock(bodyPath);
   }
 };
 
-type SolutionFnPath = NodePath<t.FunctionExpression | t.ArrowFunctionExpression>;
+type SolutionFnPath = NodePath<
+  babelTypes.FunctionExpression | babelTypes.ArrowFunctionExpression
+>;
 
 const findReturnedSolutionPath = (file: File): SolutionFnPath | null => {
   let found: SolutionFnPath | null = null;
@@ -75,7 +79,7 @@ export const instrumentUserJsForLineTracking = (
     }
 
     // traverse() does not visit the root path; instrument the solution fn itself first.
-    instrumentFunctionBody(solutionPath as NodePath<t.Function>);
+    instrumentFunctionBody(solutionPath as NodePath<babelTypes.Function>);
 
     solutionPath.traverse({
       FunctionDeclaration(path) {

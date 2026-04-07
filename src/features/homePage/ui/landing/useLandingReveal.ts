@@ -52,7 +52,9 @@ export const useLandingReveal = (
     const el = ref.current;
     if (!el) return;
 
+    // Sync reveal state to layout (viewport / a11y); intentional after DOM measure.
     if (prefersReducedMotion()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- layout sync from matchMedia + ref geometry
       setState("reduce");
       return;
     }
@@ -70,13 +72,14 @@ export const useLandingReveal = (
     if (!el) return;
 
     if (typeof IntersectionObserver !== "function") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- no IO API; show content
       setState("revealed");
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const hit = entries.some((e) => e.isIntersecting);
+        const hit = entries.some((entry) => entry.isIntersecting);
         if (!hit) return;
         observer.disconnect();
         if (staggerMs > 0) {

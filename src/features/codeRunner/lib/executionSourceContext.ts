@@ -10,7 +10,10 @@ export const clearExecutionSource = (): void => {
   state.column = null;
 };
 
-export const setExecutionSource = (line: number, column?: number | null): void => {
+export const setExecutionSource = (
+  line: number,
+  column?: number | null,
+): void => {
   state.line = line;
   state.column = column ?? null;
 };
