@@ -12,7 +12,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import type { Theme } from "@mui/material/styles";
 import React, {
   useCallback,
   useEffect,
@@ -52,32 +51,6 @@ type HomeLandingHeroPreviewRuntimeProps = {
 
 const PLAYBACK_INTERVAL_MS = 300;
 const REPLAY_RESET_PAUSE_MS = 220;
-
-const landingPreviewCircleIconButtonSx = (muiTheme: Theme) => ({
-  "&:hover": {
-    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.95),
-  },
-  "&.Mui-focusVisible": {
-    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.9),
-  },
-  "&:active": {
-    bgcolor: alpha(muiTheme.appDesign.surfaceHigh, 0.85),
-  },
-});
-
-const landingPreviewPlayIconButtonSx = (muiTheme: Theme) => ({
-  bgcolor: alpha(muiTheme.appDesign.accent, 0.14),
-  color: muiTheme.appDesign.accentSoft,
-  "&:hover": {
-    bgcolor: alpha(muiTheme.appDesign.accent, 0.22),
-  },
-  "&.Mui-focusVisible": {
-    bgcolor: alpha(muiTheme.appDesign.accent, 0.18),
-  },
-  "&:active": {
-    bgcolor: alpha(muiTheme.appDesign.accent, 0.26),
-  },
-});
 
 type LandingHeroPreviewRuntimeState =
   | {
@@ -328,7 +301,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             title={LL.HOME_PREVIEW_STEP_BACK()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
-              ...landingPreviewCircleIconButtonSx(theme),
             }}
           >
             <SkipPrevious fontSize="small" />
@@ -356,7 +328,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
                   : LL.HOME_LANDING_PREVIEW_PLAY()
             }
             sx={{
-              ...landingPreviewPlayIconButtonSx(theme),
+              bgcolor: alpha(theme.appDesign.accent, 0.14),
+              color: theme.appDesign.accentSoft,
             }}
           >
             {isLastFrame && !isPlaying ? (
@@ -375,7 +348,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             title={LL.HOME_PREVIEW_STEP_FORWARD()}
             sx={{
               bgcolor: alpha(theme.appDesign.surfaceHigh, 0.9),
-              ...landingPreviewCircleIconButtonSx(theme),
             }}
           >
             <SkipNext fontSize="small" />
