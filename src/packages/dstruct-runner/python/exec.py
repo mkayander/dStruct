@@ -6,6 +6,8 @@ import os
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
+from execution_location import clear_execution_source, set_execution_source
+from line_tracking_transformer import LineTrackingTransformer
 from tree_utils import TreeNode, ListNode, build_tree, build_list
 import ast
 from shared_types import ExecutionResult
@@ -87,9 +89,11 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
             for arg in args:
                 python_args.append(_convert_arg_to_python(arg))
 
-        # Transform the AST to track function calls
-        transformer = ListTrackingTransformer()
-        new_tree = transformer.visit(tree)
+        # Transform the AST to track list ops, then statement-level line probes
+        list_transformer = ListTrackingTransformer()
+        new_tree = list_transformer.visit(tree)
+        line_transformer = LineTrackingTransformer()
+        new_tree = line_transformer.visit(new_tree)
         ast.fix_missing_locations(new_tree)
         transformed_code = ast.unparse(new_tree)
         
@@ -175,7 +179,9 @@ __result__ = {call_str}
         
         # Add safe built-ins to globals
         globals_dict.update(safe_builtins)
-        
+        globals_dict["set_execution_source"] = set_execution_source
+
+        clear_execution_source()
         # Execute the wrapper code
         exec(wrapper_code, globals_dict, locals_dict)
         

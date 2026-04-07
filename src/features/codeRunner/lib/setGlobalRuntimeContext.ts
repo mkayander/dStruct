@@ -24,6 +24,7 @@ import {
 import { getRuntimeMap } from "#/entities/dataStructures/map/model/mapStructure";
 import { getRuntimeObject } from "#/entities/dataStructures/map/model/objectStructure";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { setExecutionSource } from "#/features/codeRunner/lib/executionSourceContext";
 import {
   safeStringify,
   stripQuotes,
@@ -57,6 +58,9 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
   const ObjectProxy = getRuntimeObject(callstack);
 
   const context = {
+    __dstructSetExecutionSource: (line: number, column?: number) => {
+      setExecutionSource(line, column ?? 0);
+    },
     ArrayProxy,
     Uint32ArrayProxy,
     Int32ArrayProxy,
@@ -94,7 +98,7 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
     },
   };
 
-  Object.assign(self, context);
+  Object.assign(globalThis, context);
 };
 
 export const globalDefinitionsPrefix = `

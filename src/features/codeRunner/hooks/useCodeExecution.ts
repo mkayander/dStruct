@@ -119,6 +119,8 @@ export const useCodeExecution = (
           result: null,
           runtime,
           startTimestamp,
+          lastRunCodeSource: null,
+          codeModifiedSinceRun: true,
         }),
       );
 
@@ -149,11 +151,13 @@ export const useCodeExecution = (
           runtime: result.runtime,
           startTimestamp,
           benchmarkResults: result.benchmarkResults,
+          lastRunCodeSource: codeInput,
+          codeModifiedSinceRun: false,
         }),
       );
       dispatch(callstackSlice.actions.setIsPlaying(true));
     },
-    [dispatch, handleExecutionError],
+    [codeInput, dispatch, handleExecutionError],
   );
 
   // Core execution wrapper that handles state cleanup, timing, and error handling

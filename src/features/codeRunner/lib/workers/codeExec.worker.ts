@@ -3,6 +3,8 @@ import type { ArrayDataState } from "#/entities/dataStructures/array/model/array
 import type { TreeDataState } from "#/entities/dataStructures/node/model/nodeSlice";
 import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
 import { createCaseRuntimeArgs } from "#/features/codeRunner/lib";
+import { clearExecutionSource } from "#/features/codeRunner/lib/executionSourceContext";
+import { instrumentUserJsForLineTracking } from "#/features/codeRunner/lib/instrumentUserJsForLineTracking";
 import {
   globalDefinitionsPrefix,
   setGlobalRuntimeContext,
@@ -111,12 +113,16 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         arrayStore,
         caseArgs,
       );
-      const prefixedCode = `${globalDefinitionsPrefix}\n${code}`;
+      const { code: instrumentedCode, ok: instrumentOk } =
+        instrumentUserJsForLineTracking(code);
+      const codeToRun = instrumentOk ? instrumentedCode : code;
+      const prefixedCode = `${globalDefinitionsPrefix}\n${codeToRun}`;
       const startTimestamp = performance.now();
       try {
         const getInputFunction = new Function(prefixedCode);
         const runFunction = getInputFunction();
         callstack.clear();
+        clearExecutionSource();
         const result = runFunction(...args);
         const response: WorkerResponse = {
           type: "run",
@@ -135,6 +141,8 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
           error: serializeError(error),
         };
         self.postMessage(errorResponse);
+      } finally {
+        clearExecutionSource();
       }
       break;
     }

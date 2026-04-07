@@ -19,7 +19,11 @@ import Image from "next/image";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
 
-import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
+import {
+  callstackSlice,
+  selectCallstackError,
+  selectPlaybackSourceLine,
+} from "#/features/callstack/model/callstackSlice";
 import {
   getCodeKey,
   isLanguageValid,
@@ -57,7 +61,7 @@ import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { type PanelContentProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 
 type CodePanelProps = PanelContentProps & {
   onRunComplete?: () => void;
@@ -109,6 +113,9 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const isEditable = useAppSelector(selectIsEditable);
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const error = useAppSelector(selectCallstackError);
+  const playbackSourceLine = useAppSelector(selectPlaybackSourceLine);
+  const store = useAppStore();
+  const playbackDecorationsRef = useRef<string[]>([]);
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug || "", {
     enabled: Boolean(projectSlug),
@@ -207,6 +214,32 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     ]);
   }, [editorInstance, error, monacoInstance, textModel]);
 
+  // Callstack playback: highlight current source line (cleared when buffer diverges from last run)
+  useEffect(() => {
+    if (!editorInstance || !monacoInstance || !textModel || textModel.isDisposed()) {
+      return;
+    }
+
+    const line = playbackSourceLine;
+    const nextDecorations =
+      line != null && line >= 1 && line <= textModel.getLineCount()
+        ? [
+            {
+              range: new monacoInstance.Range(line, 1, line, 1),
+              options: {
+                isWholeLine: true,
+                className: "dstruct-editor-playback-line",
+              },
+            },
+          ]
+        : [];
+
+    playbackDecorationsRef.current = editorInstance.deltaDecorations(
+      playbackDecorationsRef.current,
+      nextDecorations,
+    );
+  }, [editorInstance, monacoInstance, playbackSourceLine, textModel]);
+
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
@@ -276,6 +309,11 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       return;
     }
 
+    const { isReady, lastRunCodeSource } = store.getState().callstack;
+    if (isReady && lastRunCodeSource != null) {
+      dispatch(callstackSlice.actions.markCodeSnapshotStale());
+    }
+
     updateSolutionOnServer(value, ev);
   };
 
@@ -297,6 +335,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
           );
           // Reset cursor to beginning since we don't have cursor offset from server
           editorInstance?.setPosition({ lineNumber: 1, column: 1 });
+          dispatch(callstackSlice.actions.markCodeSnapshotStale());
         }
       } catch (error) {
         console.error("Error formatting code:", error);

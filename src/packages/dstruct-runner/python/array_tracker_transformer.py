@@ -49,7 +49,7 @@ class ListTrackingTransformer(ast.NodeTransformer):
                     args=[
                         ast.ListComp(elt=elt, generators=generators),
                         ast.Constant(value="comprehension"),
-                        ast.Name(id="self.callstack", ctx=ast.Load())
+                        ast.Name(id="__callstack__", ctx=ast.Load())
                     ],
                     keywords=[]
                 )
