@@ -36,6 +36,7 @@ import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
 import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
 import { useMobilePlaygroundView } from "#/features/playground/hooks/useMobilePlaygroundView";
 import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
+import { appFontStackDisplay } from "#/shared/fonts/fontVariables";
 import { useProfileImageUploader } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
@@ -79,7 +80,7 @@ const LogoBrand: React.FC<{
           variant="h6"
           noWrap
           sx={{
-            fontFamily: '"Space Grotesk", "Inter", sans-serif',
+            fontFamily: appFontStackDisplay,
             fontWeight: 700,
             letterSpacing: "-0.04em",
           }}

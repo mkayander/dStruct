@@ -6,6 +6,7 @@ import React from "react";
 import { getDocumentTextDirection } from "#/i18n/localeMeta";
 import { createEmotionCache } from "#/shared/emotion/createEmotionCache";
 import { EmotionCacheContext } from "#/shared/emotion/EmotionCacheContext";
+import { fontVariableClassNames } from "#/shared/fonts/appFonts";
 
 type MyDocumentProps = DocumentProps & {
   emotionStyleTags?: React.ReactElement;
@@ -16,7 +17,7 @@ function Document({ emotionStyleTags, htmlLang = "en" }: MyDocumentProps) {
   const dir = getDocumentTextDirection(htmlLang);
   // noinspection HtmlRequiredTitleElement
   return (
-    <Html lang={htmlLang} dir={dir}>
+    <Html lang={htmlLang} dir={dir} className={fontVariableClassNames}>
       <Head>
         {emotionStyleTags}
         <meta
@@ -54,10 +55,10 @@ function Document({ emotionStyleTags, htmlLang = "en" }: MyDocumentProps) {
         <meta name="apple-mobile-web-app-title" content="dStruct" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=Share+Tech&family=Space+Grotesk:wght@500;700&display=swap"
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
         />
         <link
           rel="stylesheet"
