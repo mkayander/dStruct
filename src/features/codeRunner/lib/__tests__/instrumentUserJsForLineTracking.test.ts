@@ -31,4 +31,36 @@ return run;`;
     expect(ok).toBe(false);
     expect(out).toBe(code);
   });
+
+  it("does not instrument top-level functions outside the returned solution", () => {
+    const code = `function helper() {
+  return 1;
+}
+return function main() {
+  const x = helper();
+  return x + 1;
+};`;
+    const { code: out, ok } = instrumentUserJsForLineTracking(code);
+    expect(ok).toBe(true);
+    const probeMatches = out.match(/globalThis\.__dstructSetExecutionSource/g);
+    expect(probeMatches?.length).toBe(2);
+    const helperIdx = out.indexOf("function helper");
+    const firstProbeAfterHelper = out.indexOf(
+      "globalThis.__dstructSetExecutionSource",
+      helperIdx,
+    );
+    const mainIdx = out.indexOf("function main");
+    expect(mainIdx).toBeGreaterThan(helperIdx);
+    expect(firstProbeAfterHelper).toBeGreaterThan(mainIdx);
+  });
+
+  it("instruments return arrow function with block body", () => {
+    const code = `return () => {
+  const n = 1;
+  return n;
+};`;
+    const { code: out, ok } = instrumentUserJsForLineTracking(code);
+    expect(ok).toBe(true);
+    expect(out).toContain("globalThis.__dstructSetExecutionSource");
+  });
 });
