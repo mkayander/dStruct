@@ -8,6 +8,9 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import "symbol-observable";
 
+// `_document` is server-only; importing fonts here registers @font-face + CSS vars in the client bundle.
+import "#/shared/fonts/appFonts";
+
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
