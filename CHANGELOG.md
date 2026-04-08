@@ -1,3 +1,10 @@
+## [1.374.3](https://github.com/mkayander/dStruct/compare/v1.374.2...v1.374.3) (2026-04-08)
+
+
+### Bug Fixes
+
+* Google Fonts css2 URL 400 Bad Request (Roboto weight syntax) ([#122](https://github.com/mkayander/dStruct/issues/122)) ([a31b96b](https://github.com/mkayander/dStruct/commit/a31b96b61ce8f368cf18e88bb09e18f9b3bb6e9f))
+
 ## [1.374.2](https://github.com/mkayander/dStruct/compare/v1.374.1...v1.374.2) (2026-04-07)
 
 
