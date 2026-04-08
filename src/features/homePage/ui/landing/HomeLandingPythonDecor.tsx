@@ -5,7 +5,6 @@ import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 import { useHeroOrbitModelMotion } from "#/features/homePage/hooks/useHeroOrbitModelMotion";
 import { useLandingDecor3dMobileEntrance } from "#/features/homePage/hooks/useLandingDecor3dMobileEntrance";
 import {
-  LANDING_DECOR_CANVAS_SIZE_PX,
   LANDING_DECOR_GLASS_OPACITY_SX,
   LANDING_DECOR_MODEL_CAMERA,
   LANDING_DECOR_MODEL_DISTANCE,
@@ -13,6 +12,7 @@ import {
   LANDING_DECOR_MODEL_TARGET,
   LANDING_DECOR_PYTHON_BASE_AZIMUTH,
   LANDING_DECOR_PYTHON_BASE_POLAR,
+  LANDING_DECOR_PYTHON_CANVAS_SIZE_PX,
   LANDING_DECOR_PYTHON_IDLE_MOTION_PHASE_SEC,
 } from "#/features/homePage/lib/landingDecor3dConstants";
 import { PythonLogoModelView } from "#/shared/ui/molecules/PythonLogoModelView";
@@ -56,8 +56,8 @@ export const HomeLandingPythonDecor: React.FC = () => {
           top: "50%",
           left: { xs: -118, sm: -180, md: -320 },
           transform: "translateY(-50%)",
-          width: LANDING_DECOR_CANVAS_SIZE_PX,
-          height: LANDING_DECOR_CANVAS_SIZE_PX,
+          width: LANDING_DECOR_PYTHON_CANVAS_SIZE_PX,
+          height: LANDING_DECOR_PYTHON_CANVAS_SIZE_PX,
         }}
       >
         <Box

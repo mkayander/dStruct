@@ -25,6 +25,14 @@ export const LANDING_DECOR_CANVAS_SIZE_PX = {
   lg: 1360,
 } as const;
 
+/** Larger footprint for the Python ambient canvas only. */
+export const LANDING_DECOR_PYTHON_CANVAS_SIZE_PX = {
+  xs: 560,
+  sm: 860,
+  md: 1420,
+  lg: 1640,
+} as const;
+
 export const LANDING_DECOR_GLASS_OPACITY_SX = {
   xs: 0.12,
   md: 0.2,

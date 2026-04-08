@@ -5,7 +5,7 @@ export const LANDING_HERO_ORBIT_TUNING = {
   desktop: {
     maxAzimuthOffset: 0.28,
     maxPolarOffset: 0.18,
-    frameDamping: 0.08,
+    frameDamping: 0.16,
     pointerAzimuthMultiplier: 2,
     pointerPolarMultiplier: 2,
     polarAngleMin: Math.PI / 2.9,
@@ -14,14 +14,14 @@ export const LANDING_HERO_ORBIT_TUNING = {
   mobile: {
     maxAzimuthOffset: 0.62,
     maxPolarOffset: 0.4,
-    frameDamping: 0.2,
+    frameDamping: 0.4,
     scrollAzimuthMultiplier: 3.4,
     scrollPolarMultiplier: 3.6,
     polarAngleMin: Math.PI / 3.15,
     polarAngleMax: Math.PI / 1.72,
-    /** Finger position → orbit offset; stronger than desktop pointer. */
+    /** Finger position → orbit offset; polar higher so vertical screen position reads clearly. */
     touchAzimuthMultiplier: 5.8,
-    touchPolarMultiplier: 5.8,
+    touchPolarMultiplier: 11.2,
     /** Subtle continuous drift so decor reads as 3D without interaction. */
     idleAzimuthAmplitudeRad: 0.13,
     idlePolarAmplitudeRad: 0.075,
