@@ -34,7 +34,6 @@ export const HomeLandingPythonDecor: React.FC = () => {
     baseAzimuth: LANDING_DECOR_PYTHON_BASE_AZIMUTH,
     basePolar: LANDING_DECOR_PYTHON_BASE_POLAR,
     invertPointerX: true,
-    scrollPhasePx: 140,
     idleMotionPhaseSec: LANDING_DECOR_PYTHON_IDLE_MOTION_PHASE_SEC,
   });
 

@@ -64,7 +64,6 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
     baseAzimuth: LANDING_DECOR_BRAND_BASE_AZIMUTH,
     basePolar: LANDING_DECOR_BRAND_BASE_POLAR,
     invertPointerX: false,
-    scrollPhasePx: 0,
   });
 
   return (

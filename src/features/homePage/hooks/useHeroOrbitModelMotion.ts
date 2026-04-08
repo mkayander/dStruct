@@ -2,12 +2,6 @@ import type { RefObject } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
-import {
-  attachPageScrollRoot,
-  getPageScrollMetrics,
-  getPageScrollRoot,
-  resolvePageScrollElement,
-} from "#/features/homePage/hooks/getPageScrollMetrics";
 import { LANDING_HERO_ORBIT_TUNING } from "#/features/homePage/lib/landingHeroOrbitMotionConstants";
 import { useMobileLayout } from "#/shared/hooks";
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
@@ -23,22 +17,19 @@ export type UseHeroOrbitModelMotionParams = {
   basePolar: number;
   /** Flip horizontal pointer mapping (e.g. left-side decoration). */
   invertPointerX?: boolean;
-  /** Offset scroll position so two models do not move in lockstep on mobile. */
-  scrollPhasePx?: number;
   /** Seconds offset into idle motion so paired models do not move in phase. */
   idleMotionPhaseSec?: number;
 };
 
 /**
- * Mobile: scroll + subtle idle oscillation + strong touch parallax (window touches).
- * Desktop: pointer parallax only; no scroll-driven motion.
+ * Mobile: idle oscillation + touch parallax from screen-space finger position (window touches).
+ * Desktop: pointer parallax only. No scroll-driven motion.
  */
 export const useHeroOrbitModelMotion = ({
   controlsRef,
   baseAzimuth,
   basePolar,
   invertPointerX = false,
-  scrollPhasePx = 0,
   idleMotionPhaseSec = 0,
 }: UseHeroOrbitModelMotionParams): void => {
   const isMobileLayout = useMobileLayout();
@@ -47,8 +38,6 @@ export const useHeroOrbitModelMotion = ({
   const targetAzimuthRef = useRef(baseAzimuth);
   const targetPolarRef = useRef(basePolar);
 
-  const scrollAzimuthDeltaRef = useRef(0);
-  const scrollPolarDeltaRef = useRef(0);
   const pointerAzimuthDeltaRef = useRef(0);
   const pointerPolarDeltaRef = useRef(0);
   const touchAzimuthDeltaRef = useRef(0);
@@ -56,8 +45,6 @@ export const useHeroOrbitModelMotion = ({
   const idleAzimuthSmoothedRef = useRef(0);
   const idlePolarSmoothedRef = useRef(0);
   const touchActiveRef = useRef(false);
-
-  const scrollRootRef = useRef<HTMLElement | Window | null>(null);
 
   const applyModelAngles = useCallback(
     (azimuth: number, polar: number) => {
@@ -83,44 +70,15 @@ export const useHeroOrbitModelMotion = ({
       : pointerPolarDeltaRef.current;
 
     targetAzimuthRef.current =
-      baseAzimuth +
-      scrollAzimuthDeltaRef.current +
-      idleAzimuthSmoothedRef.current +
-      pointerAzimuth;
+      baseAzimuth + idleAzimuthSmoothedRef.current + pointerAzimuth;
     targetPolarRef.current = clamp(
-      basePolar +
-        scrollPolarDeltaRef.current +
-        idlePolarSmoothedRef.current +
-        pointerPolar,
+      basePolar + idlePolarSmoothedRef.current + pointerPolar,
       polar.polarAngleMin,
       polar.polarAngleMax,
     );
   }, [baseAzimuth, basePolar, isMobileLayout]);
 
-  const updateScrollDeltas = useCallback(() => {
-    const root = scrollRootRef.current;
-    if (!root) return;
-
-    const mobile = LANDING_HERO_ORBIT_TUNING.mobile;
-    const { scrollTop, scrollableHeight } = getPageScrollMetrics(root);
-    const adjustedScrollY = scrollTop + scrollPhasePx;
-    const scrollProgress = clamp(adjustedScrollY / scrollableHeight, 0, 1);
-    const yRatioScroll = scrollProgress - 0.5;
-    const xSign = invertPointerX ? -1 : 1;
-    const azimuthDrift =
-      (scrollProgress - 0.5) *
-      mobile.maxAzimuthOffset *
-      mobile.scrollAzimuthMultiplier;
-
-    scrollAzimuthDeltaRef.current = xSign * azimuthDrift;
-    scrollPolarDeltaRef.current =
-      yRatioScroll * mobile.maxPolarOffset * mobile.scrollPolarMultiplier;
-    syncTargetFromDeltas();
-  }, [invertPointerX, scrollPhasePx, syncTargetFromDeltas]);
-
   const setModelRestingPosition = useCallback(() => {
-    scrollAzimuthDeltaRef.current = 0;
-    scrollPolarDeltaRef.current = 0;
     pointerAzimuthDeltaRef.current = 0;
     pointerPolarDeltaRef.current = 0;
     touchAzimuthDeltaRef.current = 0;
@@ -208,8 +166,6 @@ export const useHeroOrbitModelMotion = ({
       : LANDING_HERO_ORBIT_TUNING.desktop.frameDamping;
 
     let frameId = 0;
-    let detachScrollRoot: (() => void) | undefined;
-    let chaseFrames = 0;
 
     const reduceMotionClient = prefersReducedMotion();
 
@@ -307,39 +263,7 @@ export const useHeroOrbitModelMotion = ({
       };
     }
 
-    const bindScrollRoot = () => {
-      const nextRoot = getPageScrollRoot();
-      if (scrollRootRef.current === nextRoot && detachScrollRoot) {
-        updateScrollDeltas();
-        return;
-      }
-
-      detachScrollRoot?.();
-      scrollRootRef.current = nextRoot;
-      detachScrollRoot = attachPageScrollRoot(nextRoot, updateScrollDeltas);
-      updateScrollDeltas();
-    };
-
-    bindScrollRoot();
     frameId = window.requestAnimationFrame(animateModel);
-
-    const handleWindowResize = () => {
-      updateScrollDeltas();
-    };
-    window.addEventListener("resize", handleWindowResize);
-
-    const chaseDeferredOverlay = () => {
-      if (chaseFrames > 90) return;
-      chaseFrames += 1;
-      const overlay = resolvePageScrollElement();
-      if (overlay && scrollRootRef.current !== overlay) {
-        bindScrollRoot();
-      }
-      if (!overlay || scrollRootRef.current !== overlay) {
-        window.requestAnimationFrame(chaseDeferredOverlay);
-      }
-    };
-    window.requestAnimationFrame(chaseDeferredOverlay);
 
     const syncTouchFromEvent = (event: TouchEvent) => {
       const primaryTouch = event.touches.item(0);
@@ -371,14 +295,11 @@ export const useHeroOrbitModelMotion = ({
     window.addEventListener("touchcancel", handleTouchEnd, touchOptions);
 
     return () => {
-      detachScrollRoot?.();
-      window.removeEventListener("resize", handleWindowResize);
       window.removeEventListener("touchstart", handleTouchStart, touchOptions);
       window.removeEventListener("touchmove", handleTouchMove, touchOptions);
       window.removeEventListener("touchend", handleTouchEnd, touchOptions);
       window.removeEventListener("touchcancel", handleTouchEnd, touchOptions);
       window.cancelAnimationFrame(frameId);
-      scrollRootRef.current = null;
     };
   }, [
     applyModelAngles,
@@ -388,6 +309,5 @@ export const useHeroOrbitModelMotion = ({
     syncTargetFromDeltas,
     updateModelFromPointer,
     updateModelFromTouch,
-    updateScrollDeltas,
   ]);
 };

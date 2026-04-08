@@ -1,11 +1,11 @@
 /**
- * Tuning for `useHeroOrbitModelMotion`: separate desktop (pointer) vs mobile (scroll) behavior.
+ * Tuning for `useHeroOrbitModelMotion`: desktop (mouse) vs mobile (touch + idle).
  */
 export const LANDING_HERO_ORBIT_TUNING = {
   desktop: {
     maxAzimuthOffset: 0.28,
     maxPolarOffset: 0.18,
-    frameDamping: 0.16,
+    frameDamping: 0.48,
     pointerAzimuthMultiplier: 2,
     pointerPolarMultiplier: 2,
     polarAngleMin: Math.PI / 2.9,
@@ -14,9 +14,8 @@ export const LANDING_HERO_ORBIT_TUNING = {
   mobile: {
     maxAzimuthOffset: 0.62,
     maxPolarOffset: 0.4,
-    frameDamping: 0.4,
-    scrollAzimuthMultiplier: 3.4,
-    scrollPolarMultiplier: 3.6,
+    /** Capped at 1: instant follow to target each frame. */
+    frameDamping: 1,
     polarAngleMin: Math.PI / 3.15,
     polarAngleMax: Math.PI / 1.72,
     /** Finger position → orbit offset; polar higher so vertical screen position reads clearly. */
