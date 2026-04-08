@@ -19,5 +19,18 @@ export const LANDING_HERO_ORBIT_TUNING = {
     scrollPolarMultiplier: 3.6,
     polarAngleMin: Math.PI / 3.15,
     polarAngleMax: Math.PI / 1.72,
+    /** Finger position → orbit offset; stronger than desktop pointer. */
+    touchAzimuthMultiplier: 5.8,
+    touchPolarMultiplier: 5.8,
+    /** Subtle continuous drift so decor reads as 3D without interaction. */
+    idleAzimuthAmplitudeRad: 0.13,
+    idlePolarAmplitudeRad: 0.075,
+    idleAzimuthAngularSpeed: 0.38,
+    idlePolarAngularSpeed: 0.52,
+    idleSecondaryAzimuthScale: 0.42,
+    idleSecondaryPolarScale: 0.38,
+    idleSmoothing: 0.055,
+    /** Per frame: factor *= (1 - value) when finger lifted. */
+    touchReleaseDecay: 0.085,
   },
 } as const;

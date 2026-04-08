@@ -29,3 +29,6 @@ export const LANDING_DECOR_GLASS_OPACITY_SX = {
   xs: 0.12,
   md: 0.2,
 } as const;
+
+/** Phase offset (seconds) so paired decor models do not idle in sync. */
+export const LANDING_DECOR_PYTHON_IDLE_MOTION_PHASE_SEC = 5.2;

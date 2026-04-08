@@ -13,6 +13,7 @@ import {
   LANDING_DECOR_MODEL_TARGET,
   LANDING_DECOR_PYTHON_BASE_AZIMUTH,
   LANDING_DECOR_PYTHON_BASE_POLAR,
+  LANDING_DECOR_PYTHON_IDLE_MOTION_PHASE_SEC,
 } from "#/features/homePage/lib/landingDecor3dConstants";
 import { PythonLogoModelView } from "#/shared/ui/molecules/PythonLogoModelView";
 
@@ -34,6 +35,7 @@ export const HomeLandingPythonDecor: React.FC = () => {
     basePolar: LANDING_DECOR_PYTHON_BASE_POLAR,
     invertPointerX: true,
     scrollPhasePx: 140,
+    idleMotionPhaseSec: LANDING_DECOR_PYTHON_IDLE_MOTION_PHASE_SEC,
   });
 
   return (

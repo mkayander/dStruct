@@ -10,9 +10,12 @@ import {
 } from "#/features/homePage/hooks/getPageScrollMetrics";
 import { LANDING_HERO_ORBIT_TUNING } from "#/features/homePage/lib/landingHeroOrbitMotionConstants";
 import { useMobileLayout } from "#/shared/hooks";
+import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
+
+const TOUCH_DELTA_EPSILON = 0.0004;
 
 export type UseHeroOrbitModelMotionParams = {
   controlsRef: RefObject<ThreeOrbitControls | null>;
@@ -22,10 +25,12 @@ export type UseHeroOrbitModelMotionParams = {
   invertPointerX?: boolean;
   /** Offset scroll position so two models do not move in lockstep on mobile. */
   scrollPhasePx?: number;
+  /** Seconds offset into idle motion so paired models do not move in phase. */
+  idleMotionPhaseSec?: number;
 };
 
 /**
- * Mobile: OrbitControls follow page scroll (OverlayScrollbars viewport) + eased follow.
+ * Mobile: scroll + subtle idle oscillation + strong touch parallax (window touches).
  * Desktop: pointer parallax only; no scroll-driven motion.
  */
 export const useHeroOrbitModelMotion = ({
@@ -34,6 +39,7 @@ export const useHeroOrbitModelMotion = ({
   basePolar,
   invertPointerX = false,
   scrollPhasePx = 0,
+  idleMotionPhaseSec = 0,
 }: UseHeroOrbitModelMotionParams): void => {
   const isMobileLayout = useMobileLayout();
   const currentAzimuthRef = useRef(baseAzimuth);
@@ -45,6 +51,11 @@ export const useHeroOrbitModelMotion = ({
   const scrollPolarDeltaRef = useRef(0);
   const pointerAzimuthDeltaRef = useRef(0);
   const pointerPolarDeltaRef = useRef(0);
+  const touchAzimuthDeltaRef = useRef(0);
+  const touchPolarDeltaRef = useRef(0);
+  const idleAzimuthSmoothedRef = useRef(0);
+  const idlePolarSmoothedRef = useRef(0);
+  const touchActiveRef = useRef(false);
 
   const scrollRootRef = useRef<HTMLElement | Window | null>(null);
 
@@ -64,12 +75,23 @@ export const useHeroOrbitModelMotion = ({
       ? LANDING_HERO_ORBIT_TUNING.mobile
       : LANDING_HERO_ORBIT_TUNING.desktop;
 
+    const pointerAzimuth = isMobileLayout
+      ? touchAzimuthDeltaRef.current
+      : pointerAzimuthDeltaRef.current;
+    const pointerPolar = isMobileLayout
+      ? touchPolarDeltaRef.current
+      : pointerPolarDeltaRef.current;
+
     targetAzimuthRef.current =
       baseAzimuth +
       scrollAzimuthDeltaRef.current +
-      pointerAzimuthDeltaRef.current;
+      idleAzimuthSmoothedRef.current +
+      pointerAzimuth;
     targetPolarRef.current = clamp(
-      basePolar + scrollPolarDeltaRef.current + pointerPolarDeltaRef.current,
+      basePolar +
+        scrollPolarDeltaRef.current +
+        idlePolarSmoothedRef.current +
+        pointerPolar,
       polar.polarAngleMin,
       polar.polarAngleMax,
     );
@@ -101,6 +123,11 @@ export const useHeroOrbitModelMotion = ({
     scrollPolarDeltaRef.current = 0;
     pointerAzimuthDeltaRef.current = 0;
     pointerPolarDeltaRef.current = 0;
+    touchAzimuthDeltaRef.current = 0;
+    touchPolarDeltaRef.current = 0;
+    idleAzimuthSmoothedRef.current = 0;
+    idlePolarSmoothedRef.current = 0;
+    touchActiveRef.current = false;
     currentAzimuthRef.current = baseAzimuth;
     currentPolarRef.current = basePolar;
     targetAzimuthRef.current = baseAzimuth;
@@ -143,6 +170,34 @@ export const useHeroOrbitModelMotion = ({
     [controlsRef, invertPointerX, isMobileLayout, syncTargetFromDeltas],
   );
 
+  const updateModelFromTouch = useCallback(
+    (clientX: number, clientY: number) => {
+      if (
+        !isMobileLayout ||
+        !controlsRef.current ||
+        window.innerWidth === 0 ||
+        window.innerHeight === 0
+      ) {
+        return;
+      }
+
+      const mobile = LANDING_HERO_ORBIT_TUNING.mobile;
+      const xRatio = clientX / window.innerWidth - 0.5;
+      const yRatio = clientY / window.innerHeight - 0.5;
+      const xSign = invertPointerX ? -1 : 1;
+
+      touchAzimuthDeltaRef.current =
+        -xSign *
+        xRatio *
+        mobile.maxAzimuthOffset *
+        mobile.touchAzimuthMultiplier;
+      touchPolarDeltaRef.current =
+        yRatio * mobile.maxPolarOffset * mobile.touchPolarMultiplier;
+      syncTargetFromDeltas();
+    },
+    [controlsRef, invertPointerX, isMobileLayout, syncTargetFromDeltas],
+  );
+
   useEffect(() => {
     setModelRestingPosition();
   }, [isMobileLayout, setModelRestingPosition]);
@@ -156,7 +211,59 @@ export const useHeroOrbitModelMotion = ({
     let detachScrollRoot: (() => void) | undefined;
     let chaseFrames = 0;
 
+    const reduceMotionClient = prefersReducedMotion();
+
     const animateModel = () => {
+      if (isMobileLayout) {
+        const mobile = LANDING_HERO_ORBIT_TUNING.mobile;
+
+        if (!reduceMotionClient) {
+          const timeSec = performance.now() / 1000 + idleMotionPhaseSec;
+
+          const idleAzimuthTarget =
+            Math.sin(timeSec * mobile.idleAzimuthAngularSpeed) *
+              mobile.idleAzimuthAmplitudeRad +
+            Math.sin(
+              timeSec * mobile.idleAzimuthAngularSpeed * 1.73 +
+                idleMotionPhaseSec * 2.1,
+            ) *
+              mobile.idleAzimuthAmplitudeRad *
+              mobile.idleSecondaryAzimuthScale;
+
+          const idlePolarTarget =
+            Math.cos(timeSec * mobile.idlePolarAngularSpeed + 0.7) *
+              mobile.idlePolarAmplitudeRad +
+            Math.sin(
+              timeSec * mobile.idlePolarAngularSpeed * 0.61 +
+                idleMotionPhaseSec,
+            ) *
+              mobile.idlePolarAmplitudeRad *
+              mobile.idleSecondaryPolarScale;
+
+          idleAzimuthSmoothedRef.current +=
+            (idleAzimuthTarget - idleAzimuthSmoothedRef.current) *
+            mobile.idleSmoothing;
+          idlePolarSmoothedRef.current +=
+            (idlePolarTarget - idlePolarSmoothedRef.current) *
+            mobile.idleSmoothing;
+        }
+
+        if (!touchActiveRef.current) {
+          const decay = 1 - mobile.touchReleaseDecay;
+          touchAzimuthDeltaRef.current *= decay;
+          touchPolarDeltaRef.current *= decay;
+          if (
+            Math.abs(touchAzimuthDeltaRef.current) < TOUCH_DELTA_EPSILON &&
+            Math.abs(touchPolarDeltaRef.current) < TOUCH_DELTA_EPSILON
+          ) {
+            touchAzimuthDeltaRef.current = 0;
+            touchPolarDeltaRef.current = 0;
+          }
+        }
+
+        syncTargetFromDeltas();
+      }
+
       const nextAzimuth =
         currentAzimuthRef.current +
         (targetAzimuthRef.current - currentAzimuthRef.current) * frameDamping;
@@ -234,17 +341,53 @@ export const useHeroOrbitModelMotion = ({
     };
     window.requestAnimationFrame(chaseDeferredOverlay);
 
+    const syncTouchFromEvent = (event: TouchEvent) => {
+      const primaryTouch = event.touches.item(0);
+      if (!primaryTouch) return;
+      updateModelFromTouch(primaryTouch.clientX, primaryTouch.clientY);
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchActiveRef.current = true;
+      syncTouchFromEvent(event);
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      syncTouchFromEvent(event);
+    };
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (event.touches.length === 0) {
+        touchActiveRef.current = false;
+      } else {
+        syncTouchFromEvent(event);
+      }
+    };
+
+    const touchOptions = { passive: true, capture: true } as const;
+    window.addEventListener("touchstart", handleTouchStart, touchOptions);
+    window.addEventListener("touchmove", handleTouchMove, touchOptions);
+    window.addEventListener("touchend", handleTouchEnd, touchOptions);
+    window.addEventListener("touchcancel", handleTouchEnd, touchOptions);
+
     return () => {
       detachScrollRoot?.();
       window.removeEventListener("resize", handleWindowResize);
+      window.removeEventListener("touchstart", handleTouchStart, touchOptions);
+      window.removeEventListener("touchmove", handleTouchMove, touchOptions);
+      window.removeEventListener("touchend", handleTouchEnd, touchOptions);
+      window.removeEventListener("touchcancel", handleTouchEnd, touchOptions);
       window.cancelAnimationFrame(frameId);
       scrollRootRef.current = null;
     };
   }, [
     applyModelAngles,
+    idleMotionPhaseSec,
     isMobileLayout,
     resetPointerDeltas,
+    syncTargetFromDeltas,
     updateModelFromPointer,
+    updateModelFromTouch,
     updateScrollDeltas,
   ]);
 };
