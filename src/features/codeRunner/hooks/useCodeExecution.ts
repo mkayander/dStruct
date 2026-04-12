@@ -143,11 +143,20 @@ export const useCodeExecution = (
 
   // Updates Redux store with successful execution results
   const handleExecutionResult = useCallback(
-    (result: ExecutionResult, startTimestamp: number) => {
+    (result: ExecutionResult, mainThreadStartTimestamp: number) => {
       if (result.error) {
-        handleExecutionError(new ExecutionError(result.error), startTimestamp);
+        handleExecutionError(
+          new ExecutionError(result.error),
+          mainThreadStartTimestamp,
+        );
         return;
       }
+
+      // Baseline must match frame timestamps: JS worker uses performance.now();
+      // Python uses Unix epoch ms. CallstackTable shows (frame.timestamp - this).
+      const startTimestampForCallstack = Number.isFinite(result.startTimestamp)
+        ? result.startTimestamp
+        : mainThreadStartTimestamp;
 
       dispatch(
         callstackSlice.actions.setStatus({
@@ -156,7 +165,7 @@ export const useCodeExecution = (
           result: String(result.output),
           frames: result.callstack,
           runtime: result.runtime,
-          startTimestamp,
+          startTimestamp: startTimestampForCallstack,
           benchmarkResults: result.benchmarkResults,
           lastRunCodeSource: codeInput,
           codeModifiedSinceRun: false,
