@@ -227,6 +227,8 @@ const normalizeTreePreviewState = (): Pick<
       isPlaying: false,
       frameIndex: -1,
       resetVersion: 0,
+      lastRunCodeSource: null,
+      codeModifiedSinceRun: true,
       error: null,
       frames: {
         ids: [...invertTreeStateSnapshot.callstack.frames.ids],

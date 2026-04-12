@@ -11,6 +11,18 @@ importers:
       '@apollo/client':
         specifier: ^3.14.1
         version: 3.14.1(@types/react@19.2.14)(graphql-ws@6.0.8(graphql@16.13.2)(ws@8.20.0))(graphql@16.13.2)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@babel/generator':
+        specifier: ^7.29.1
+        version: 7.29.1
+      '@babel/parser':
+        specifier: ^7.29.2
+        version: 7.29.2
+      '@babel/traverse':
+        specifier: ^7.29.0
+        version: 7.29.0
+      '@babel/types':
+        specifier: ^7.29.0
+        version: 7.29.0
       '@datastructures-js/priority-queue':
         specifier: 5.3.0
         version: 5.3.0
@@ -234,6 +246,12 @@ importers:
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^6.0.2
         version: 6.0.2(prettier@3.8.1)
+      '@types/babel__generator':
+        specifier: ^7.27.0
+        version: 7.27.0
+      '@types/babel__traverse':
+        specifier: ^7.28.0
+        version: 7.28.0
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5

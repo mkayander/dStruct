@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional, Union, Tuple, TypedDict, TypeVar, 
 import uuid
 from datetime import datetime
 from shared_types import ExecutionResult, CallFrame, CallFrameBase, NodeFrameBase, AddArrayItemFrame, AddArrayFrame
+from execution_location import snapshot_for_frame
 
 T = TypeVar('T')
 
@@ -50,6 +51,9 @@ class TrackedList(list, Generic[T]):
             "nodeId": kwargs.get("nodeId", ""),
             "args": kwargs.get("args", {})
         }
+        snap = snapshot_for_frame()
+        if snap is not None:
+            frame["source"] = snap
         self._callstack.append(frame)
 
     def _generate_list_data(self, items: List[T]) -> ListData:

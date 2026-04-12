@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { generate } from "short-uuid";
 
 import {
+  buildCaseArgsContentSignature,
   isArgumentArrayType,
   isArgumentTreeType,
 } from "#/entities/argument/lib";
@@ -466,9 +467,15 @@ export const useArgumentsParsing = () => {
 
   const args = useAppSelector(selectCaseArguments);
   const argsInfo = useAppSelector(selectCaseArgumentsInfo);
+  const projectId = useAppSelector((state) => state.testCase.projectId);
+  const caseId = useAppSelector((state) => state.testCase.caseId);
   const treeData = useAppSelector(treeDataSelector);
   const arrayData = useAppSelector(arrayDataSelector);
-  const prevArgsRef = useRef<typeof args | null>(null);
+  const argsContentSignature = useMemo(
+    () => buildCaseArgsContentSignature(projectId, caseId, args),
+    [args, caseId, projectId],
+  );
+  const prevArgsSignatureRef = useRef<string | null>(null);
 
   useEffect(() => {
     const removedTreeNames = new Set(Object.keys(treeData));
@@ -498,12 +505,16 @@ export const useArgumentsParsing = () => {
       dispatch(arrayStructureSlice.actions.clearMany([...removedArrayNames]));
     }
 
-    // Only clear callstack when args change (e.g. test case switch),
-    // not on initial mount or self-triggered argsInfo updates from parseTreeArgument
-    if (prevArgsRef.current !== null && prevArgsRef.current !== args) {
+    // Only clear callstack when case args *meaningfully* change (case switch / arg edits),
+    // not when `setAll` rehydrates the same args with new entity references or when
+    // `argsInfo` updates from parsing.
+    if (
+      prevArgsSignatureRef.current !== null &&
+      prevArgsSignatureRef.current !== argsContentSignature
+    ) {
       dispatch(callstackSlice.actions.removeAll());
     }
-    prevArgsRef.current = args;
+    prevArgsSignatureRef.current = argsContentSignature;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [args, argsInfo, dispatch]);
+  }, [args, argsInfo, argsContentSignature, dispatch]);
 };

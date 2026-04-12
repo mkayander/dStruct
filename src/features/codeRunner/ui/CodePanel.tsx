@@ -19,7 +19,11 @@ import Image from "next/image";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { selectCallstackError } from "#/features/callstack/model/callstackSlice";
+import {
+  callstackSlice,
+  selectCallstackError,
+  selectPlaybackSourceLine,
+} from "#/features/callstack/model/callstackSlice";
 import {
   getCodeKey,
   isLanguageValid,
@@ -28,6 +32,7 @@ import {
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
+import { createLatestOnlyTimeoutController } from "#/features/codeRunner/lib/createLatestOnlyTimeoutController";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
@@ -55,7 +60,7 @@ import { PanelWrapper } from "#/shared/ui/templates/PanelWrapper";
 import { type PanelContentProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 import { StyledTabPanel } from "#/shared/ui/templates/StyledTabPanel";
 import { TabListWrapper } from "#/shared/ui/templates/TabListWrapper";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppDispatch, useAppSelector, useAppStore } from "#/store/hooks";
 
 type CodePanelProps = PanelContentProps & {
   onRunComplete?: () => void;
@@ -68,7 +73,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const dispatch = useAppDispatch();
   const session = useSession();
   const trpcUtils = api.useUtils();
-  const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { LL } = useI18nContext();
   const isMobile = useMobileLayout();
@@ -107,11 +111,15 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const formatGenerationRef = useRef(0);
   /** When true, editor updates come from applying formatted code — do not cancel format. */
   const skipFormatCancelRef = useRef(false);
+  const saveTimeoutControllerRef = useRef(createLatestOnlyTimeoutController());
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const error = useAppSelector(selectCallstackError);
+  const playbackSourceLine = useAppSelector(selectPlaybackSourceLine);
+  const store = useAppStore();
+  const playbackDecorationsRef = useRef<string[]>([]);
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug || "", {
     enabled: Boolean(projectSlug),
@@ -142,15 +150,35 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
   }, [language, runMode, setRunMode]);
 
+  // Switching solution or language must cancel any pending debounced save for the
+  // previous editor state so stale writes cannot land after the view has moved on.
+  useEffect(() => {
+    saveTimeoutControllerRef.current.clear();
+  }, [language, solutionSlug, projectSlug]);
+
+  useEffect(
+    () => () => {
+      saveTimeoutControllerRef.current.clear();
+    },
+    [],
+  );
+
   const formatJavaScript = useJavaScriptFormatCode();
   const formatPython = usePythonFormatCode();
+
+  // `useMutation()` returns a new object each render; do not close over it in deps or
+  // any effect that dispatches to Redux (e.g. loadFinish) will re-run every render → loop.
+  const formatJavaScriptRef = useRef(formatJavaScript);
+  const formatPythonRef = useRef(formatPython);
+  formatJavaScriptRef.current = formatJavaScript;
+  formatPythonRef.current = formatPython;
 
   const cancelInFlightFormatting = useCallback(() => {
     formatGenerationRef.current += 1;
     setFormatUiPending(false);
-    formatJavaScript.reset();
-    formatPython.reset();
-  }, [formatJavaScript, formatPython]);
+    formatJavaScriptRef.current.reset();
+    formatPythonRef.current.reset();
+  }, []);
 
   // Update code on solution change
   useEffect(() => {
@@ -178,7 +206,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
   // Handle code errors
   useEffect(() => {
-    if (!monacoInstance || !textModel) return;
+    if (!monacoInstance || !textModel || textModel.isDisposed()) return;
     if (!error) {
       monacoInstance.editor.setModelMarkers(
         textModel,
@@ -214,17 +242,58 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       }
     }
 
-    monacoInstance.editor.setModelMarkers(textModel, "javascript", [
-      {
-        severity: monacoInstance.MarkerSeverity.Error,
-        message: `${error.name}: ${error.message}`,
-        startLineNumber,
-        endLineNumber,
-        startColumn,
-        endColumn,
-      },
-    ]);
+    if (!textModel.isDisposed()) {
+      monacoInstance.editor.setModelMarkers(textModel, "javascript", [
+        {
+          severity: monacoInstance.MarkerSeverity.Error,
+          message: `${error.name}: ${error.message}`,
+          startLineNumber,
+          endLineNumber,
+          startColumn,
+          endColumn,
+        },
+      ]);
+    }
   }, [editorInstance, error, monacoInstance, textModel]);
+
+  // Callstack playback: highlight current source line (cleared when buffer diverges from last run)
+  useEffect(() => {
+    if (
+      !editorInstance ||
+      !monacoInstance ||
+      !textModel ||
+      textModel.isDisposed()
+    ) {
+      return;
+    }
+
+    const line = playbackSourceLine;
+    const nextDecorations =
+      line != null && line >= 1 && line <= textModel.getLineCount()
+        ? [
+            {
+              range: new monacoInstance.Range(line, 1, line, 1),
+              options: {
+                isWholeLine: true,
+                className: "dstruct-editor-playback-line",
+              },
+            },
+          ]
+        : [];
+
+    try {
+      if (editorInstance.getModel() !== textModel) {
+        playbackDecorationsRef.current = [];
+        return;
+      }
+      playbackDecorationsRef.current = editorInstance.deltaDecorations(
+        playbackDecorationsRef.current,
+        nextDecorations,
+      );
+    } catch {
+      playbackDecorationsRef.current = [];
+    }
+  }, [editorInstance, monacoInstance, playbackSourceLine, textModel]);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -263,14 +332,15 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
       const key = getCodeKey(language);
 
-      clearTimeout(changeTimeoutId.current ?? undefined);
-      const newTimeout = (changeTimeoutId.current = setTimeout(async () => {
-        const data = await updateSolution.mutateAsync({
-          projectId: currentSolution.data.projectId,
-          solutionId: currentSolution.data.id,
-          [key]: value,
-        });
-        if (newTimeout === changeTimeoutId.current) {
+      saveTimeoutControllerRef.current.schedule(async (isLatest) => {
+        try {
+          const data = await updateSolution.mutateAsync({
+            projectId: currentSolution.data.projectId,
+            solutionId: currentSolution.data.id,
+            [key]: value,
+          });
+          if (!isLatest()) return;
+
           trpcUtils.project.getSolutionBySlug.setData(
             {
               projectId: data.projectId,
@@ -279,8 +349,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
             data,
           );
           setEditorState(EditorState.SAVED_ON_SERVER);
+        } catch (error) {
+          if (!isLatest()) return;
+
+          console.error("Failed to save solution", error);
+          enqueueSnackbar("Failed to save code", { variant: "error" });
         }
-      }, 750));
+      }, 750);
     }
   };
 
@@ -298,6 +373,16 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     // Only update the solution on server if it was a user edit
     if (ev.isFlush) {
       return;
+    }
+
+    const nextText = value ?? "";
+    const { isReady, lastRunCodeSource } = store.getState().callstack;
+    if (
+      isReady &&
+      lastRunCodeSource != null &&
+      nextText !== lastRunCodeSource
+    ) {
+      dispatch(callstackSlice.actions.markCodeSnapshotStale());
     }
 
     updateSolutionOnServer(value, ev);
@@ -328,10 +413,12 @@ export const CodePanel: React.FC<CodePanelProps> = ({
         const formatted = await formatJavaScript.mutateAsync(codeInput);
         if (gen !== formatGenerationRef.current) return;
         applyFormattedCode(formatted);
+        dispatch(callstackSlice.actions.markCodeSnapshotStale());
       } else if (language === "python") {
         const formatted = await formatPython.mutateAsync(codeInput);
         if (gen !== formatGenerationRef.current) return;
         applyFormattedCode(formatted);
+        dispatch(callstackSlice.actions.markCodeSnapshotStale());
       }
     } catch (error) {
       if (gen === formatGenerationRef.current) {

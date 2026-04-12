@@ -6,7 +6,16 @@ import os
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
-from tree_utils import TreeNode, ListNode, build_tree, build_list
+from execution_location import clear_execution_source, set_execution_source
+from line_tracking_transformer import LineTrackingTransformer
+from tree_utils import (
+    TreeNode,
+    ListNode,
+    build_list,
+    build_tree,
+    build_tracked_binary_tree,
+    build_tracked_linked_list,
+)
 import ast
 from shared_types import ExecutionResult
 from output import tracked_print
@@ -24,14 +33,30 @@ _ARG_NUMBER = "number"
 _ARG_BOOLEAN = "boolean"
 
 
-def _convert_arg_to_python(arg: dict) -> object:
+def _convert_arg_to_python(arg: dict, callstack: list) -> object:
     """Convert a serialized argument to a Python object."""
     arg_type = arg.get("type", "")
     value = arg.get("value")
 
     if arg_type == _ARG_BINARY_TREE:
+        if isinstance(value, dict) and "levelOrder" in value:
+            return build_tracked_binary_tree(
+                value["levelOrder"],
+                value["nodeIds"],
+                value["treeName"],
+                _ARG_BINARY_TREE,
+                callstack,
+            )
         return build_tree(value) if value else None
     if arg_type == _ARG_LINKED_LIST:
+        if isinstance(value, dict) and "values" in value:
+            return build_tracked_linked_list(
+                value["values"],
+                value["nodeIds"],
+                value["treeName"],
+                _ARG_LINKED_LIST,
+                callstack,
+            )
         return build_list(value) if value else None
     if arg_type == _ARG_GRAPH:
         # Graph: pass raw for now; could add build_graph later
@@ -54,7 +79,8 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
 
     Args:
         code: The Python code to execute as a string
-        args: Optional list of serialized arguments [{type, value}, ...] to pass to the solution function
+        args: Optional list of serialized arguments [{type, value}, ...] to pass to the solution function.
+            Caller should pass native Python structures (e.g. after json.loads); do not pass Pyodide JsProxy.
 
     Returns:
         A dictionary containing:
@@ -81,30 +107,19 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
         if not function_def:
             raise SyntaxError("Code must contain a function definition")
 
-        # Convert args to Python objects
-        python_args = []
-        if args:
-            for arg in args:
-                python_args.append(_convert_arg_to_python(arg))
+        if args is not None and not isinstance(args, list):
+            raise TypeError(
+                "args must be null or a JSON array of objects with 'type' and 'value'"
+            )
 
-        # Transform the AST to track function calls
-        transformer = ListTrackingTransformer()
-        new_tree = transformer.visit(tree)
+        # Transform the AST to track list ops, then statement-level line probes
+        list_transformer = ListTrackingTransformer()
+        new_tree = list_transformer.visit(tree)
+        line_transformer = LineTrackingTransformer()
+        new_tree = line_transformer.visit(new_tree)
         ast.fix_missing_locations(new_tree)
         transformed_code = ast.unparse(new_tree)
-        
-        # Create wrapper code with TreeNode, ListNode available
-        args_str = ", ".join(f"__arg_{i}__" for i in range(len(python_args)))
-        call_str = f"{function_def.name}({args_str})" if python_args else f"{function_def.name}()"
 
-        wrapper_code = f"""
-# Original function definition
-{transformed_code}
-
-# Execute the function and store result
-__result__ = {call_str}
-"""
-        
         # Create separate global and local namespaces
         globals_dict = {
             "__callstack__": [],
@@ -114,9 +129,25 @@ __result__ = {call_str}
             "ListNode": ListNode,
             "__result__": None,
         }
-        for i, arg_val in enumerate(python_args):
-            globals_dict[f"__arg_{i}__"] = arg_val
-        locals_dict = {}
+
+        python_args = []
+        if args:
+            callstack_ref = globals_dict["__callstack__"]
+            for arg in args:
+                python_args.append(_convert_arg_to_python(arg, callstack_ref))
+
+        args_str = ", ".join(f"__arg_{i}__" for i in range(len(python_args)))
+        call_str = f"{function_def.name}({args_str})" if python_args else f"{function_def.name}()"
+        wrapper_code = f"""
+# Original function definition
+{transformed_code}
+
+# Execute the function and store result
+__result__ = {call_str}
+"""
+
+        for index, arg_val in enumerate(python_args):
+            globals_dict[f"__arg_{index}__"] = arg_val
         
         # Create a whitelist of safe built-in operations
         safe_builtins = {
@@ -175,9 +206,12 @@ __result__ = {call_str}
         
         # Add safe built-ins to globals
         globals_dict.update(safe_builtins)
-        
-        # Execute the wrapper code
-        exec(wrapper_code, globals_dict, locals_dict)
+        globals_dict["set_execution_source"] = set_execution_source
+
+        clear_execution_source()
+        # Use the same mapping for globals and locals so user `def run` is stored in
+        # globals_dict; recursive calls resolve via the function's __globals__.
+        exec(wrapper_code, globals_dict, globals_dict)
         
         # Return the result
         return {

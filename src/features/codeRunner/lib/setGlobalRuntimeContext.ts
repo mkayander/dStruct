@@ -24,6 +24,7 @@ import {
 import { getRuntimeMap } from "#/entities/dataStructures/map/model/mapStructure";
 import { getRuntimeObject } from "#/entities/dataStructures/map/model/objectStructure";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import { setExecutionSource } from "#/features/codeRunner/lib/executionSourceContext";
 import {
   safeStringify,
   stripQuotes,
@@ -57,6 +58,20 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
   const ObjectProxy = getRuntimeObject(callstack);
 
   const context = {
+    __dstructSetExecutionSource: (line: number, column?: number) => {
+      setExecutionSource(line, column ?? 0);
+    },
+    /**
+     * Build a tracked array from literal elements (avoid `new Array(n)` length ambiguity
+     * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]`.
+     */
+    __dstructArrayLiteral: (...elements: unknown[]) => {
+      const out = new ArrayProxy(0) as unknown[];
+      for (let i = 0; i < elements.length; i += 1) {
+        out[i] = elements[i];
+      }
+      return out;
+    },
     ArrayProxy,
     Uint32ArrayProxy,
     Int32ArrayProxy,
@@ -94,11 +109,12 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
     },
   };
 
-  Object.assign(self, context);
+  Object.assign(globalThis, context);
 };
 
 export const globalDefinitionsPrefix = `
   const console = {...self.console, log: self.log, error: self.error, warn: self.warn, info: self.info};
+  const __dstructArrayLiteral = self.__dstructArrayLiteral;
   const Array = self.ArrayProxy;
   const Uint32Array = self.Uint32ArrayProxy;
   const Int32Array = self.Int32ArrayProxy;

@@ -9,10 +9,15 @@ import {
 import type { ArgumentType } from "#/entities/argument/model/argumentObject";
 import { type ArrayItemData } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ControlledArrayRuntimeOptions } from "#/entities/dataStructures/array/model/arrayStructure";
+import { peekExecutionSourceForFrame } from "#/features/codeRunner/lib/executionSourceContext";
 import type { ExecWorkerInterface } from "#/features/codeRunner/lib/workers/codeExec.worker";
+import type { SourceLocationSnapshot } from "#/shared/lib/sourceLocationSnapshot";
 import type { RootState } from "#/store/makeStore";
 
 export type StructureTypeName = "treeNode" | "array";
+
+/** Optional mapping from a visualization frame to user source (editor lines are 1-based). */
+export type CallFrameSource = SourceLocationSnapshot;
 
 export type CallFrameBase = {
   id: string;
@@ -20,6 +25,7 @@ export type CallFrameBase = {
   treeName: string;
   structureType: StructureTypeName;
   argType: ArgumentType;
+  source?: CallFrameSource;
 };
 
 type RuntimeErrorFrame = {
@@ -122,6 +128,7 @@ type ConsoleLogFrame = {
   timestamp: number;
   name: "consoleLog";
   args: string[];
+  source?: CallFrameSource;
 };
 
 export type CallFrame =
@@ -164,6 +171,10 @@ export type CallstackState = {
   frames: EntityState<CallFrame, string>;
   frameIndex: number;
   resetVersion: number;
+  /** Source text from the last successful run; used to detect editor drift vs highlights. */
+  lastRunCodeSource: string | null;
+  /** True after user edits post-run until the next successful run. */
+  codeModifiedSinceRun: boolean;
   benchmarkResults?: ExecWorkerInterface["benchmark"]["response"];
 };
 
@@ -177,6 +188,8 @@ const initialState: CallstackState = {
   frames: callstackAdapter.getInitialState(),
   frameIndex: -1,
   resetVersion: 0,
+  lastRunCodeSource: null,
+  codeModifiedSinceRun: true,
 };
 
 /**
@@ -205,16 +218,28 @@ export const callstackSlice = createSlice({
       state.runtime = null;
       state.startTimestamp = null;
       state.error = null;
+      state.lastRunCodeSource = null;
+      state.codeModifiedSinceRun = true;
       callstackAdapter.removeAll(state.frames);
+    },
+    markCodeSnapshotStale: (state) => {
+      state.codeModifiedSinceRun = true;
     },
     setStatus: (
       state,
       action: PayloadAction<
         Omit<
           CallstackState,
-          "isPlaying" | "frames" | "frameIndex" | "resetVersion"
+          | "isPlaying"
+          | "frames"
+          | "frameIndex"
+          | "resetVersion"
+          | "lastRunCodeSource"
+          | "codeModifiedSinceRun"
         > & {
           frames?: CallFrame[];
+          lastRunCodeSource?: string | null;
+          codeModifiedSinceRun?: boolean;
         }
       >,
     ) => {
@@ -227,6 +252,8 @@ export const callstackSlice = createSlice({
           benchmarkResults,
           startTimestamp,
           error,
+          lastRunCodeSource,
+          codeModifiedSinceRun,
         },
       } = action;
 
@@ -241,6 +268,12 @@ export const callstackSlice = createSlice({
       state.benchmarkResults = benchmarkResults;
       state.startTimestamp = startTimestamp;
       state.error = error;
+      if (lastRunCodeSource !== undefined) {
+        state.lastRunCodeSource = lastRunCodeSource;
+      }
+      if (codeModifiedSinceRun !== undefined) {
+        state.codeModifiedSinceRun = codeModifiedSinceRun;
+      }
     },
     setPrevArgs: (state, action: PayloadAction<CallFrame>) => {
       const { payload } = action;
@@ -331,10 +364,47 @@ export const selectConsoleLogs = createSelector(
       .filter((frame) => frame.name === "consoleLog") as ConsoleLogFrame[],
 );
 
+const frameHasOptionalSource = (
+  frame: CallFrame,
+): frame is CallFrame & { source?: CallFrameSource } => frame.name !== "error";
+
+export const selectPlaybackSourceLine = createSelector(
+  (state: RootState) => state.callstack,
+  (callstack): number | null => {
+    if (callstack.codeModifiedSinceRun) return null;
+    const { frameIndex, frames } = callstack;
+    if (frameIndex < 0) return null;
+    const all = rootSelectors.selectAll(frames);
+    if (all.length === 0) return null;
+    // frameIndex can be briefly out of range (e.g. stale UI vs new frames); avoid undefined access.
+    const safeIndex = Math.min(frameIndex, all.length - 1);
+    for (let i = safeIndex; i >= 0; i -= 1) {
+      const frame = all[i];
+      if (
+        frame &&
+        frameHasOptionalSource(frame) &&
+        frame.source?.line != null
+      ) {
+        return frame.source.line;
+      }
+    }
+    return null;
+  },
+);
+
 export class CallstackHelper {
   frames: CallFrame[] = [];
 
   addOne(frame: CallFrame) {
+    if (frame.name === "error") {
+      this.frames.push(frame);
+      return;
+    }
+    const snap = peekExecutionSourceForFrame();
+    if (snap && !("source" in frame && frame.source != null)) {
+      this.frames.push({ ...frame, source: snap });
+      return;
+    }
     this.frames.push(frame);
   }
 

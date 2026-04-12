@@ -28,6 +28,11 @@ a {
   }
 }
 
+/* Monaco: current line during callstack playback (className on IModelDecorationOptions) */
+.dstruct-editor-playback-line {
+  background-color: rgba(25, 118, 210, 0.14);
+}
+
 @keyframes blink {
   from {
     opacity: 1;
