@@ -63,4 +63,14 @@ return function main() {
     expect(ok).toBe(true);
     expect(out).toContain("globalThis.__dstructSetExecutionSource");
   });
+
+  it("replaces array literals with __dstructArrayLiteral in solution", () => {
+    const code = `return function f() {
+  const a = [1, 2];
+  return a;
+};`;
+    const { code: out, ok } = instrumentUserJsForLineTracking(code);
+    expect(ok).toBe(true);
+    expect(out).toContain("__dstructArrayLiteral(1, 2)");
+  });
 });

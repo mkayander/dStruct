@@ -4,6 +4,8 @@ import traverse, { type NodePath } from "@babel/traverse";
 import * as babelTypes from "@babel/types";
 import type { File } from "@babel/types";
 
+import { transformArrayLiteralsInSolution } from "#/features/codeRunner/lib/transformJsArrayLiterals";
+
 const insertProbesInBlock = (bodyPath: NodePath<babelTypes.BlockStatement>) => {
   const statements = bodyPath.get("body");
   if (!Array.isArray(statements)) return;
@@ -77,6 +79,8 @@ export const instrumentUserJsForLineTracking = (
     if (!solutionPath) {
       return { code, ok: false };
     }
+
+    transformArrayLiteralsInSolution(solutionPath);
 
     // traverse() does not visit the root path; instrument the solution fn itself first.
     instrumentFunctionBody(solutionPath as NodePath<babelTypes.Function>);
