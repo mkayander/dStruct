@@ -2,9 +2,9 @@ import {
   alpha,
   Box,
   Card,
-  useTheme,
   type SxProps,
   type Theme,
+  useTheme,
 } from "@mui/material";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import React, { useCallback, useRef } from "react";
@@ -97,128 +97,129 @@ export const LandingGlowCard: React.FC<LandingGlowCardProps> = ({
         }}
       >
         <Card
-        elevation={0}
-        sx={{
-          position: "relative",
-          zIndex: 0,
-          height: "100%",
-          ...(interactive
-            ? { display: "flex", flexDirection: "column" as const }
-            : {}),
-          borderRadius: cardBorderRadius,
-          overflow: "hidden",
-          border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
-          bgcolor: alpha(theme.appDesign.surface, 0.62),
-          backdropFilter: "blur(14px) saturate(160%)",
-          boxShadow: `0 0 0 1px ${alpha(theme.appDesign.surfaceHigh, 0.06)} inset,
+          elevation={0}
+          sx={{
+            position: "relative",
+            zIndex: 0,
+            height: "100%",
+            ...(interactive
+              ? { display: "flex", flexDirection: "column" as const }
+              : {}),
+            borderRadius: cardBorderRadius,
+            overflow: "hidden",
+            border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
+            bgcolor: alpha(theme.appDesign.surface, 0.62),
+            backdropFilter: "blur(14px) saturate(160%)",
+            boxShadow: `0 0 0 1px ${alpha(theme.appDesign.surfaceHigh, 0.06)} inset,
             0 18px 42px ${alpha(theme.appDesign.background, 0.35)}`,
-          ...(!interactive
-            ? { transition: "border-color 0.22s ease, box-shadow 0.22s ease" }
-            : {
-                "@media (prefers-reduced-motion: no-preference)": {
-                  transition: "border-color 0.22s ease, box-shadow 0.22s ease",
-                  ".landing-glow-card-root:hover &": {
-                    borderColor: alpha(theme.appDesign.accentSoft, 0.32),
-                    boxShadow: `0 0 0 1px ${alpha(theme.appDesign.accentSoft, 0.12)} inset,
+            ...(!interactive
+              ? { transition: "border-color 0.22s ease, box-shadow 0.22s ease" }
+              : {
+                  "@media (prefers-reduced-motion: no-preference)": {
+                    transition:
+                      "border-color 0.22s ease, box-shadow 0.22s ease",
+                    ".landing-glow-card-root:hover &": {
+                      borderColor: alpha(theme.appDesign.accentSoft, 0.32),
+                      boxShadow: `0 0 0 1px ${alpha(theme.appDesign.accentSoft, 0.12)} inset,
                     0 22px 48px ${alpha(theme.appDesign.background, 0.42)}`,
+                    },
                   },
-                },
-                "@media (prefers-reduced-motion: reduce)": {
-                  ".landing-glow-card-root:hover &": {
-                    borderColor: alpha(theme.appDesign.accentSoft, 0.28),
+                  "@media (prefers-reduced-motion: reduce)": {
+                    ".landing-glow-card-root:hover &": {
+                      borderColor: alpha(theme.appDesign.accentSoft, 0.28),
+                    },
                   },
-                },
-              }),
-          ...cardSx,
-        }}
-      >
-        {interactive ? (
-          <>
-            <Box
-              aria-hidden
-              className="landing-glow-card-ambient"
-              sx={{
-                position: "absolute",
-                inset: 0,
-                zIndex: 0,
-                borderRadius: "inherit",
-                pointerEvents: "none",
-                opacity: 0,
-                transition: "opacity 0.4s ease",
-                background: `radial-gradient(
+                }),
+            ...cardSx,
+          }}
+        >
+          {interactive ? (
+            <>
+              <Box
+                aria-hidden
+                className="landing-glow-card-ambient"
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 0,
+                  borderRadius: "inherit",
+                  pointerEvents: "none",
+                  opacity: 0,
+                  transition: "opacity 0.4s ease",
+                  background: `radial-gradient(
                   520px circle at var(--landing-glow-x) var(--landing-glow-y),
                   ${alpha(accent, 0.14)} 0%,
                   ${alpha(accentCore, 0.06)} 42%,
                   transparent 58%
                 )`,
-                "@media (prefers-reduced-motion: reduce)": {
-                  opacity: 0,
-                  transition: "none",
-                },
-                "@media (prefers-reduced-motion: no-preference)": {
-                  ".landing-glow-card-root:hover &": {
-                    opacity: 1,
+                  "@media (prefers-reduced-motion: reduce)": {
+                    opacity: 0,
+                    transition: "none",
                   },
-                },
-              }}
-            />
-            <Box
-              sx={{
-                position: "relative",
-                zIndex: 1,
-                flex: "1 1 auto",
-                display: "flex",
-                flexDirection: "column",
-                minHeight: 0,
-                height: "100%",
-                "& .MuiCardActionArea-root": {
-                  flex: 1,
+                  "@media (prefers-reduced-motion: no-preference)": {
+                    ".landing-glow-card-root:hover &": {
+                      opacity: 1,
+                    },
+                  },
+                }}
+              />
+              <Box
+                sx={{
+                  position: "relative",
+                  zIndex: 1,
+                  flex: "1 1 auto",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "stretch",
-                },
-              }}
-            >
-              {children}
-            </Box>
-          </>
-        ) : (
-          children
-        )}
+                  minHeight: 0,
+                  height: "100%",
+                  "& .MuiCardActionArea-root": {
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "stretch",
+                  },
+                }}
+              >
+                {children}
+              </Box>
+            </>
+          ) : (
+            children
+          )}
         </Card>
         <Box
-        aria-hidden
-        className="landing-glow-card-ring"
-        sx={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          borderRadius: "inherit",
-          pointerEvents: "none",
-          padding: "1px",
-          opacity: 0,
-          transition: "opacity 0.35s ease",
-          background: `radial-gradient(
+          aria-hidden
+          className="landing-glow-card-ring"
+          sx={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            borderRadius: "inherit",
+            pointerEvents: "none",
+            padding: "1px",
+            opacity: 0,
+            transition: "opacity 0.35s ease",
+            background: `radial-gradient(
             420px circle at var(--landing-glow-x) var(--landing-glow-y),
             ${alpha(accent, 0.55)} 0%,
             ${alpha(accentCore, 0.22)} 38%,
             transparent 68%
           )`,
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          "@media (prefers-reduced-motion: reduce)": {
-            opacity: 0,
-            transition: "none",
-          },
-          "@media (prefers-reduced-motion: no-preference)": {
-            ".landing-glow-card-root:hover &": {
-              opacity: 1,
+            WebkitMask:
+              "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            maskComposite: "exclude",
+            "@media (prefers-reduced-motion: reduce)": {
+              opacity: 0,
+              transition: "none",
             },
-          },
-        }}
+            "@media (prefers-reduced-motion: no-preference)": {
+              ".landing-glow-card-root:hover &": {
+                opacity: 1,
+              },
+            },
+          }}
         />
       </Box>
     </Box>

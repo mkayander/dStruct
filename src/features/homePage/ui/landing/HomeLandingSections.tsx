@@ -18,9 +18,9 @@ import Link from "next/link";
 import React from "react";
 
 import { LANDING_PLAYGROUND_DEMOS } from "#/features/homePage/lib/landingPlaygroundDemos";
+import { HomeLandingPythonDecor } from "#/features/homePage/ui/landing/HomeLandingPythonDecor";
 import { LandingGlowCard } from "#/features/homePage/ui/landing/LandingGlowCard";
 import { LandingReveal } from "#/features/homePage/ui/landing/LandingReveal";
-import { HomeLandingPythonDecor } from "#/features/homePage/ui/landing/HomeLandingPythonDecor";
 import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 export type HomeLandingSectionsProps = {
@@ -235,48 +235,54 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
                 </Typography>
               </LandingReveal>
               <Grid container spacing={2.5}>
-                {LANDING_PLAYGROUND_DEMOS.map(({ href, id, Icon }, demoIndex) => (
-                  <Grid key={id} size={{ xs: 12, sm: 6, lg: 3 }}>
-                    <LandingGlowCard
-                      interactive
-                      staggerIndex={demoIndex + 8}
-                      cardSx={{ height: "100%" }}
-                    >
-                      <CardActionArea component={Link} href={href} sx={{ p: 2.5 }}>
-                        <Stack spacing={2}>
-                          <Box
-                            sx={{
-                              width: 48,
-                              height: 48,
-                              borderRadius: 3,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              bgcolor: alpha(theme.appDesign.accent, 0.12),
-                              color: theme.appDesign.accentSoft,
-                            }}
-                          >
-                            <Icon />
-                          </Box>
-                          <Stack spacing={0.5}>
-                            <Typography
-                              variant="subtitle2"
-                              color="text.secondary"
+                {LANDING_PLAYGROUND_DEMOS.map(
+                  ({ href, id, Icon }, demoIndex) => (
+                    <Grid key={id} size={{ xs: 12, sm: 6, lg: 3 }}>
+                      <LandingGlowCard
+                        interactive
+                        staggerIndex={demoIndex + 8}
+                        cardSx={{ height: "100%" }}
+                      >
+                        <CardActionArea
+                          component={Link}
+                          href={href}
+                          sx={{ p: 2.5 }}
+                        >
+                          <Stack spacing={2}>
+                            <Box
+                              sx={{
+                                width: 48,
+                                height: 48,
+                                borderRadius: 3,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                bgcolor: alpha(theme.appDesign.accent, 0.12),
+                                color: theme.appDesign.accentSoft,
+                              }}
                             >
-                              {LL.HOME_SECTION_TRY_DEMOS()}
-                            </Typography>
-                            <Typography variant="h6">
-                              {landingDemoLabel(LL, id)}
+                              <Icon />
+                            </Box>
+                            <Stack spacing={0.5}>
+                              <Typography
+                                variant="subtitle2"
+                                color="text.secondary"
+                              >
+                                {LL.HOME_SECTION_TRY_DEMOS()}
+                              </Typography>
+                              <Typography variant="h6">
+                                {landingDemoLabel(LL, id)}
+                              </Typography>
+                            </Stack>
+                            <Typography variant="body2" color="text.secondary">
+                              {landingDemoSlug(LL, id)}
                             </Typography>
                           </Stack>
-                          <Typography variant="body2" color="text.secondary">
-                            {landingDemoSlug(LL, id)}
-                          </Typography>
-                        </Stack>
-                      </CardActionArea>
-                    </LandingGlowCard>
-                  </Grid>
-                ))}
+                        </CardActionArea>
+                      </LandingGlowCard>
+                    </Grid>
+                  ),
+                )}
               </Grid>
               <Box sx={{ mt: 3, textAlign: { xs: "center", sm: "left" } }}>
                 <Button

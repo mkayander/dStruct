@@ -8,15 +8,14 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import "symbol-observable";
 
-// `_document` is server-only; importing fonts here registers @font-face + CSS vars in the client bundle.
-import "#/shared/fonts/appFonts";
-
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { api } from "#/shared/api";
 import { EmotionCacheProvider } from "#/shared/emotion/EmotionCacheContext";
+// `_document` is server-only; importing fonts here registers @font-face + CSS vars in the client bundle.
+import "#/shared/fonts/appFonts";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
