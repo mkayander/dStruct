@@ -56,7 +56,8 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
 
     Args:
         code: The Python code to execute as a string
-        args: Optional list of serialized arguments [{type, value}, ...] to pass to the solution function
+        args: Optional list of serialized arguments [{type, value}, ...] to pass to the solution function.
+            Caller should pass native Python structures (e.g. after json.loads); do not pass Pyodide JsProxy.
 
     Returns:
         A dictionary containing:
@@ -82,6 +83,11 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
         
         if not function_def:
             raise SyntaxError("Code must contain a function definition")
+
+        if args is not None and not isinstance(args, list):
+            raise TypeError(
+                "args must be null or a JSON array of objects with 'type' and 'value'"
+            )
 
         # Convert args to Python objects
         python_args = []

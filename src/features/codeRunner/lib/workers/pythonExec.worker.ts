@@ -176,11 +176,14 @@ async function handleRun(
 
   try {
     pyodide.globals.set("__user_code__", code);
-    pyodide.globals.set("__user_args__", args ?? null);
+    // Pass args as JSON text so Pyodide materializes plain dict/list in Python.
+    // Passing live JS objects via globals.set yields JsProxy (no dict.get, etc.).
+    pyodide.globals.set("__user_args_json__", JSON.stringify(args ?? null));
 
     const resultJson: string = await pyodide.runPythonAsync(`
 import json as _json
-_result = safe_exec(__user_code__, __user_args__)
+_user_args = _json.loads(__user_args_json__)
+_result = safe_exec(__user_code__, _user_args)
 _json.dumps(_result)
 `);
 
@@ -195,7 +198,7 @@ _json.dumps(_result)
     postError(requestId, err);
   } finally {
     pyodide?.globals.delete("__user_code__");
-    pyodide?.globals.delete("__user_args__");
+    pyodide?.globals.delete("__user_args_json__");
   }
 }
 
