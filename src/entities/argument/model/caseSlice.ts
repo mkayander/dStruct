@@ -1,5 +1,6 @@
 import {
   createEntityAdapter,
+  createSelector,
   createSlice,
   type EntityState,
   type PayloadAction,
@@ -148,8 +149,15 @@ export const caseSlice = createSlice({
  */
 export const caseArgumentSelector = argumentAdapter.getSelectors();
 
-export const selectCaseArguments = (state: RootState) =>
-  caseArgumentSelector.selectAll(state.testCase.args);
+/**
+ * Memoized: entity adapter `selectAll` allocates a new array every call; a plain
+ * selector makes `args` a new reference each render and breaks consumers that
+ * compare by reference (e.g. `useArgumentsParsing` vs. callstack reset).
+ */
+export const selectCaseArguments = createSelector(
+  (state: RootState) => state.testCase.args,
+  (argsState) => caseArgumentSelector.selectAll(argsState),
+);
 
 export const selectCaseIsEdited = (state: RootState) => state.testCase.isEdited;
 

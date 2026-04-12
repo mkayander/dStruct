@@ -32,6 +32,7 @@ import {
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
+import { createLatestOnlyTimeoutController } from "#/features/codeRunner/lib/createLatestOnlyTimeoutController";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
@@ -72,7 +73,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const dispatch = useAppDispatch();
   const session = useSession();
   const trpcUtils = api.useUtils();
-  const changeTimeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { LL } = useI18nContext();
   const isMobile = useMobileLayout();
@@ -111,6 +111,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const formatGenerationRef = useRef(0);
   /** When true, editor updates come from applying formatted code — do not cancel format. */
   const skipFormatCancelRef = useRef(false);
+  const saveTimeoutControllerRef = useRef(createLatestOnlyTimeoutController());
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const isEditable = useAppSelector(selectIsEditable);
@@ -149,15 +150,35 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
   }, [language, runMode, setRunMode]);
 
+  // Switching solution or language must cancel any pending debounced save for the
+  // previous editor state so stale writes cannot land after the view has moved on.
+  useEffect(() => {
+    saveTimeoutControllerRef.current.clear();
+  }, [language, solutionSlug, projectSlug]);
+
+  useEffect(
+    () => () => {
+      saveTimeoutControllerRef.current.clear();
+    },
+    [],
+  );
+
   const formatJavaScript = useJavaScriptFormatCode();
   const formatPython = usePythonFormatCode();
+
+  // `useMutation()` returns a new object each render; do not close over it in deps or
+  // any effect that dispatches to Redux (e.g. loadFinish) will re-run every render → loop.
+  const formatJavaScriptRef = useRef(formatJavaScript);
+  const formatPythonRef = useRef(formatPython);
+  formatJavaScriptRef.current = formatJavaScript;
+  formatPythonRef.current = formatPython;
 
   const cancelInFlightFormatting = useCallback(() => {
     formatGenerationRef.current += 1;
     setFormatUiPending(false);
-    formatJavaScript.reset();
-    formatPython.reset();
-  }, [formatJavaScript, formatPython]);
+    formatJavaScriptRef.current.reset();
+    formatPythonRef.current.reset();
+  }, []);
 
   // Update code on solution change
   useEffect(() => {
@@ -311,14 +332,15 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
       const key = getCodeKey(language);
 
-      clearTimeout(changeTimeoutId.current ?? undefined);
-      const newTimeout = (changeTimeoutId.current = setTimeout(async () => {
-        const data = await updateSolution.mutateAsync({
-          projectId: currentSolution.data.projectId,
-          solutionId: currentSolution.data.id,
-          [key]: value,
-        });
-        if (newTimeout === changeTimeoutId.current) {
+      saveTimeoutControllerRef.current.schedule(async (isLatest) => {
+        try {
+          const data = await updateSolution.mutateAsync({
+            projectId: currentSolution.data.projectId,
+            solutionId: currentSolution.data.id,
+            [key]: value,
+          });
+          if (!isLatest()) return;
+
           trpcUtils.project.getSolutionBySlug.setData(
             {
               projectId: data.projectId,
@@ -327,8 +349,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
             data,
           );
           setEditorState(EditorState.SAVED_ON_SERVER);
+        } catch (error) {
+          if (!isLatest()) return;
+
+          console.error("Failed to save solution", error);
+          enqueueSnackbar("Failed to save code", { variant: "error" });
         }
-      }, 750));
+      }, 750);
     }
   };
 
