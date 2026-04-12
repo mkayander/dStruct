@@ -38,17 +38,25 @@ type SerializedPythonArg = { type: string; value: unknown };
 // Main thread -> Worker
 type PythonWorkerInMessage =
   | { type: "INIT"; indexURL?: string }
-  | { type: "RUN"; requestId: string; code: string; args?: SerializedPythonArg[] }
+  | {
+      type: "RUN";
+      requestId: string;
+      code: string;
+      args?: SerializedPythonArg[];
+    }
   | { type: "FORMAT"; requestId: string; code: string };
 
 // Worker -> Main thread
 type PythonWorkerOutMessage =
   | { type: "READY" }
-  | { type: "PROGRESS"; value: number; stage: string }  // during INIT (5, 45, 70, 100)
+  | { type: "PROGRESS"; value: number; stage: string } // during INIT (5, 45, 70, 100)
   | { type: "RUN_RESULT"; requestId: string; result: ExecutionResult }
   | { type: "FORMAT_RESULT"; requestId: string; formatted: string }
-  | { type: "ERROR"; requestId: string;
-      error: { name: string; message: string; stack?: string } };
+  | {
+      type: "ERROR";
+      requestId: string;
+      error: { name: string; message: string; stack?: string };
+    };
 ```
 
 During INIT, the worker sends **PROGRESS** messages (value 0–100, stage label) so the UI can show a loading snackbar. The main thread subscribes via `usePyodideProgressSnackbar`.
@@ -61,14 +69,14 @@ This is the contract between the runner and the UI, shared with the JavaScript r
 
 ```typescript
 interface ExecutionResult {
-  output: string;               // captured stdout (via tracked_print)
-  callstack: any[];             // array operation frames from TrackedList
-  runtime: number;              // wall-clock ms
-  startTimestamp: number;       // performance.now() at start
+  output: string; // captured stdout (via tracked_print)
+  callstack: any[]; // array operation frames from TrackedList
+  runtime: number; // wall-clock ms
+  startTimestamp: number; // performance.now() at start
   error?: {
-    name: string;               // e.g. "SyntaxError", "TimeoutError"
+    name: string; // e.g. "SyntaxError", "TimeoutError"
     message: string;
-    stack?: string;             // Python traceback when available
+    stack?: string; // Python traceback when available
   };
 }
 ```
@@ -101,26 +109,26 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 
 ## Key Files
 
-| File | Purpose |
-|---|---|
-| `src/features/codeRunner/lib/workers/pythonExec.worker.ts` | Web Worker: loads Pyodide, writes harness to FS, handles INIT/RUN/FORMAT messages |
-| `src/features/codeRunner/lib/workers/pythonExec.worker.types.ts` | TypeScript types for the worker message protocol |
-| `src/features/codeRunner/lib/createPythonRuntimeArgs.ts` | Serializes case arguments to `SerializedPythonArg[]` for the Python harness |
-| `src/features/codeRunner/lib/pythonRunner.ts` | Main-thread singleton: worker lifecycle, timeout, auto-recreate; serializes `run()` and `formatCode()` |
-| `src/features/codeRunner/hooks/usePythonCodeRunner.tsx` | React hook: preloads worker on mount, delegates to `pythonRunner.run()` |
-| `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx` | Shows loading snackbar when Pyodide INIT sends PROGRESS messages |
-| `src/features/codeRunner/hooks/useCodeExecution.ts` | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult` |
-| `src/features/codeRunner/lib/workers/prettierFormat.worker.ts` | Web Worker: Prettier `FORMAT` → `FORMAT_RESULT` |
-| `src/features/codeRunner/lib/javascriptFormatRunner.ts` | Main-thread singleton: serializes JS `formatCode()`, timeout + worker reset |
-| `src/features/codeRunner/hooks/useJavaScriptFormatCode.ts` | TanStack mutation → `javascriptFormatRunner.formatCode()` |
-| `src/packages/dstruct-runner/python/exec.py` | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)` |
-| `src/packages/dstruct-runner/python/tree_utils.py` | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction |
-| `src/packages/dstruct-runner/python/array_tracker.py` | `TrackedList` implementation for callstack frame generation |
-| `src/packages/dstruct-runner/python/array_tracker_transformer.py` | AST transformer: rewrites list literals to `TrackedList(...)` |
-| `src/packages/dstruct-runner/python/output.py` | `tracked_print`: captures print output into `__stdout__` global |
-| `src/packages/dstruct-runner/python/shared_types.py` | Python TypedDicts for `ExecutionResult`, `CallFrame`, etc. |
-| `next.config.mjs` | Webpack + Turbopack `*.py` raw-loader rules for embedding Python as strings |
-| `src/types/next.d.ts` | `declare module "*.py"` for TypeScript |
+| File                                                              | Purpose                                                                                                |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `src/features/codeRunner/lib/workers/pythonExec.worker.ts`        | Web Worker: loads Pyodide, writes harness to FS, handles INIT/RUN/FORMAT messages                      |
+| `src/features/codeRunner/lib/workers/pythonExec.worker.types.ts`  | TypeScript types for the worker message protocol                                                       |
+| `src/features/codeRunner/lib/createPythonRuntimeArgs.ts`          | Serializes case arguments to `SerializedPythonArg[]` for the Python harness                            |
+| `src/features/codeRunner/lib/pythonRunner.ts`                     | Main-thread singleton: worker lifecycle, timeout, auto-recreate; serializes `run()` and `formatCode()` |
+| `src/features/codeRunner/hooks/usePythonCodeRunner.tsx`           | React hook: preloads worker on mount, delegates to `pythonRunner.run()`                                |
+| `src/features/codeRunner/hooks/usePyodideProgressSnackbar.tsx`    | Shows loading snackbar when Pyodide INIT sends PROGRESS messages                                       |
+| `src/features/codeRunner/hooks/useCodeExecution.ts`               | Unified orchestrator: calls `runPythonCode`, handles `ExecutionResult`                                 |
+| `src/features/codeRunner/lib/workers/prettierFormat.worker.ts`    | Web Worker: Prettier `FORMAT` → `FORMAT_RESULT`                                                        |
+| `src/features/codeRunner/lib/javascriptFormatRunner.ts`           | Main-thread singleton: serializes JS `formatCode()`, timeout + worker reset                            |
+| `src/features/codeRunner/hooks/useJavaScriptFormatCode.ts`        | TanStack mutation → `javascriptFormatRunner.formatCode()`                                              |
+| `src/packages/dstruct-runner/python/exec.py`                      | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)`                       |
+| `src/packages/dstruct-runner/python/tree_utils.py`                | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction                         |
+| `src/packages/dstruct-runner/python/array_tracker.py`             | `TrackedList` implementation for callstack frame generation                                            |
+| `src/packages/dstruct-runner/python/array_tracker_transformer.py` | AST transformer: rewrites list literals to `TrackedList(...)`                                          |
+| `src/packages/dstruct-runner/python/output.py`                    | `tracked_print`: captures print output into `__stdout__` global                                        |
+| `src/packages/dstruct-runner/python/shared_types.py`              | Python TypedDicts for `ExecutionResult`, `CallFrame`, etc.                                             |
+| `next.config.mjs`                                                 | Webpack + Turbopack `*.py` raw-loader rules for embedding Python as strings                            |
+| `src/types/next.d.ts`                                             | `declare module "*.py"` for TypeScript                                                                 |
 
 ## Architecture Decisions
 

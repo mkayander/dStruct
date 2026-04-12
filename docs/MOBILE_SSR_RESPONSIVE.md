@@ -14,14 +14,14 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `src/shared/hooks/useMobileLayout.ts` | Thin wrapper around MUI `useMediaQuery` for `theme.breakpoints.down("sm")`. Still used where behavior (not just layout) differs. |
-| `src/shared/lib/ssrDevice.ts` | `resolveSsrDeviceType(headers)` — parses `Sec-CH-UA-Mobile` and `User-Agent` to return `"mobile"` or `"desktop"`. `setDeviceHintResponseHeaders(res)` — sets `Accept-CH`, merges `Vary` for caching correctness. |
-| `src/themes.ts` | `createCustomTheme(deviceType)` — injects `MuiUseMediaQuery.defaultProps.ssrMatchMedia` so media queries resolve correctly during SSR. `queryMatchesViewport` returns `false` for unsupported query types (conservative). |
-| `src/shared/ui/providers/StateThemeProvider.tsx` | Accepts `ssrDeviceType`, creates theme via `createCustomTheme(ssrDeviceType)`. |
-| `src/pages/playground/[[...slug]].tsx` | Uses `getServerSideProps` to resolve `ssrDeviceType` from `req.headers`, calls `setDeviceHintResponseHeaders(res)`, passes `ssrDeviceType` into page props → `_app` → `StateThemeProvider`. |
-| `src/pages/_app.tsx` | Passes `pageProps.ssrDeviceType` into `StateThemeProvider`. No `getInitialProps` — device hint is page-scoped. |
+| File                                             | Purpose                                                                                                                                                                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/shared/hooks/useMobileLayout.ts`            | Thin wrapper around MUI `useMediaQuery` for `theme.breakpoints.down("sm")`. Still used where behavior (not just layout) differs.                                                                                          |
+| `src/shared/lib/ssrDevice.ts`                    | `resolveSsrDeviceType(headers)` — parses `Sec-CH-UA-Mobile` and `User-Agent` to return `"mobile"` or `"desktop"`. `setDeviceHintResponseHeaders(res)` — sets `Accept-CH`, merges `Vary` for caching correctness.          |
+| `src/themes.ts`                                  | `createCustomTheme(deviceType)` — injects `MuiUseMediaQuery.defaultProps.ssrMatchMedia` so media queries resolve correctly during SSR. `queryMatchesViewport` returns `false` for unsupported query types (conservative). |
+| `src/shared/ui/providers/StateThemeProvider.tsx` | Accepts `ssrDeviceType`, creates theme via `createCustomTheme(ssrDeviceType)`.                                                                                                                                            |
+| `src/pages/playground/[[...slug]].tsx`           | Uses `getServerSideProps` to resolve `ssrDeviceType` from `req.headers`, calls `setDeviceHintResponseHeaders(res)`, passes `ssrDeviceType` into page props → `_app` → `StateThemeProvider`.                               |
+| `src/pages/_app.tsx`                             | Passes `pageProps.ssrDeviceType` into `StateThemeProvider`. No `getInitialProps` — device hint is page-scoped.                                                                                                            |
 
 ## Header Strategy
 

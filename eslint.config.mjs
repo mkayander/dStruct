@@ -18,6 +18,7 @@ const eslintConfig = [
       "src/server/db/generated/**",
       ".next/**",
       "node_modules/**",
+      "next-env.d.ts",
     ],
   },
   // TypeScript ESLint recommended configs
@@ -59,7 +60,7 @@ const eslintConfig = [
         "error",
         {
           min: 2,
-          exceptions: ["_", "i", "j", "k"],
+          exceptions: ["_", "i", "j", "k", "x", "y", "z"],
           properties: "never",
         },
       ],

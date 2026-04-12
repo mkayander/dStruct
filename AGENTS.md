@@ -33,11 +33,11 @@ Cursor rules to apply (see each file for full wording):
 
 ### Services overview
 
-| Service | Command | Notes |
-|---|---|---|
-| Next.js dev server | `pnpm dev` | Runs on `http://localhost:3000`. Core app (frontend + tRPC API). |
-| PostgreSQL | `sudo service postgresql start` | Must be running before dev server or any DB commands. |
-| Python in the app | (none) | Python runs in the browser via Pyodide (workers); no separate Python server. |
+| Service            | Command                         | Notes                                                                        |
+| ------------------ | ------------------------------- | ---------------------------------------------------------------------------- |
+| Next.js dev server | `pnpm dev`                      | Runs on `http://localhost:3000`. Core app (frontend + tRPC API).             |
+| PostgreSQL         | `sudo service postgresql start` | Must be running before dev server or any DB commands.                        |
+| Python in the app  | (none)                          | Python runs in the browser via Pyodide (workers); no separate Python server. |
 
 ### Node.js version
 

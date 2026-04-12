@@ -4,12 +4,12 @@ This document describes how code execution flows through the Redux state, from p
 
 ## Redux Slices Involved
 
-| Slice | Key State | Purpose |
-|---|---|---|
-| `callstackSlice` | `frames`, `isReady`, `isPlaying`, `frameIndex`, `result`, `error`, `runtime` | Execution results and animation playback state |
-| `treeNodeSlice` | Per-tree node entities with positions, colors, values | Binary tree / linked list / graph visual state |
-| `arrayStructureSlice` | Per-array node entities | Array / matrix visual state |
-| `caseSlice` | `arguments`, `argumentsInfo` | Test case input data and metadata |
+| Slice                 | Key State                                                                    | Purpose                                        |
+| --------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------- |
+| `callstackSlice`      | `frames`, `isReady`, `isPlaying`, `frameIndex`, `result`, `error`, `runtime` | Execution results and animation playback state |
+| `treeNodeSlice`       | Per-tree node entities with positions, colors, values                        | Binary tree / linked list / graph visual state |
+| `arrayStructureSlice` | Per-array node entities                                                      | Array / matrix visual state                    |
+| `caseSlice`           | `arguments`, `argumentsInfo`                                                 | Test case input data and metadata              |
 
 ## Execution Timeline
 
@@ -48,9 +48,9 @@ sequenceDiagram
 
 `CALLSTACK/removeAll` resets `isReady` to `false`, clears all frames, result, error, and runtime. It is dispatched from two places:
 
-| Caller | When | Purpose |
-|---|---|---|
-| `processTask` in `useCodeExecution.ts` | Before every code execution | Clear stale results before new run |
+| Caller                                            | When                                   | Purpose                                       |
+| ------------------------------------------------- | -------------------------------------- | --------------------------------------------- |
+| `processTask` in `useCodeExecution.ts`            | Before every code execution            | Clear stale results before new run            |
 | `useArgumentsParsing` in `useArgumentsParsing.ts` | When `args` changes (test case switch) | Old callstack frames are invalid for new args |
 
 ### Guard in `useArgumentsParsing`
@@ -88,7 +88,7 @@ prevArgsRef.current = args;
 Utility that resets the visual state of tree and array structures before a new execution:
 
 ```typescript
-resetStructuresState(dispatch, performBackup = true, clearBackup = false)
+resetStructuresState(dispatch, (performBackup = true), (clearBackup = false));
 ```
 
 ```mermaid
@@ -105,6 +105,7 @@ flowchart TD
 ```
 
 Called from:
+
 - `processTask` — with backup (`performBackup = true`)
 - `useNodesRuntimeUpdates` — without backup on replay (`performBackup = false`)
 
@@ -150,13 +151,13 @@ Located in `TreeViewer`, this hook initializes the visual tree/array structures 
 
 ## Key Files
 
-| File | Purpose |
-|---|---|
-| `src/features/codeRunner/hooks/useCodeExecution.ts` | Orchestrates code execution, dispatches results to Redux |
-| `src/features/codeRunner/hooks/useJSCodeRunner.ts` | JavaScript execution via Web Worker |
-| `src/features/codeRunner/hooks/usePythonCodeRunner.ts` | Python execution via Pyodide Web Worker |
-| `src/features/codeRunner/ui/CodePanel.tsx` | UI for code editing and run controls |
-| `src/features/callstack/model/callstackSlice.ts` | Redux slice for execution results and playback state |
-| `src/features/treeViewer/hooks/useArgumentsParsing.ts` | Parses case args into visual tree/array structures |
-| `src/features/treeViewer/hooks/useNodesRuntimeUpdates.ts` | Drives frame-by-frame animation playback |
-| `src/features/treeViewer/lib/resetStructuresState.ts` | Utility to reset visual structures before execution |
+| File                                                      | Purpose                                                  |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| `src/features/codeRunner/hooks/useCodeExecution.ts`       | Orchestrates code execution, dispatches results to Redux |
+| `src/features/codeRunner/hooks/useJSCodeRunner.ts`        | JavaScript execution via Web Worker                      |
+| `src/features/codeRunner/hooks/usePythonCodeRunner.ts`    | Python execution via Pyodide Web Worker                  |
+| `src/features/codeRunner/ui/CodePanel.tsx`                | UI for code editing and run controls                     |
+| `src/features/callstack/model/callstackSlice.ts`          | Redux slice for execution results and playback state     |
+| `src/features/treeViewer/hooks/useArgumentsParsing.ts`    | Parses case args into visual tree/array structures       |
+| `src/features/treeViewer/hooks/useNodesRuntimeUpdates.ts` | Drives frame-by-frame animation playback                 |
+| `src/features/treeViewer/lib/resetStructuresState.ts`     | Utility to reset visual structures before execution      |
