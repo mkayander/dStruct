@@ -48,7 +48,7 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
         direction={{ xs: "column", sm: "row" }}
         spacing={1.25}
         justifyContent="space-between"
-        alignItems={{ xs: "flex-start", sm: "center" }}
+        alignItems={{ xs: "stretch", sm: "center" }}
         sx={{
           p: 1.5,
           borderBottom: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
@@ -56,7 +56,12 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
           rowGap: 1.25,
         }}
       >
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          justifyContent={{ xs: "center", sm: "flex-start" }}
+        >
           {WINDOW_CONTROLS.map((color) => (
             <Box
               key={color}
@@ -73,6 +78,7 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
         <Stack
           direction="row"
           spacing={1}
+          justifyContent="flex-end"
           sx={{
             flexWrap: "wrap",
             rowGap: 1,

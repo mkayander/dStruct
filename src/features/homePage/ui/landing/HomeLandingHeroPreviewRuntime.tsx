@@ -285,10 +285,14 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={1}
-        alignItems={{ xs: "flex-start", sm: "center" }}
+        alignItems="center"
         sx={{ minWidth: 0 }}
       >
-        <Stack direction="row" spacing={0.5}>
+        <Stack
+          direction="row"
+          spacing={0.5}
+          justifyContent={{ xs: "flex-end", sm: "flex-start" }}
+        >
           <IconButton
             size="small"
             onClick={handleManualStepBack}
@@ -356,6 +360,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             ml: { sm: 0.5 },
             lineHeight: 1.6,
             maxWidth: { xs: "100%", sm: 220 },
+            textAlign: { xs: "right", sm: "left" },
           }}
         >
           {LL.HOME_PILLAR_VIS_BODY()}

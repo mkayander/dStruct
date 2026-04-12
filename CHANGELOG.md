@@ -1,3 +1,17 @@
+## [1.374.3](https://github.com/mkayander/dStruct/compare/v1.374.2...v1.374.3) (2026-04-08)
+
+
+### Bug Fixes
+
+* Google Fonts css2 URL 400 Bad Request (Roboto weight syntax) ([#122](https://github.com/mkayander/dStruct/issues/122)) ([a31b96b](https://github.com/mkayander/dStruct/commit/a31b96b61ce8f368cf18e88bb09e18f9b3bb6e9f))
+
+## [1.374.2](https://github.com/mkayander/dStruct/compare/v1.374.1...v1.374.2) (2026-04-07)
+
+
+### Bug Fixes
+
+* **home:** mobile hero preview alignment and IconButton backgrounds ([#120](https://github.com/mkayander/dStruct/issues/120)) ([1bd9f0c](https://github.com/mkayander/dStruct/commit/1bd9f0cbf42726b62098a98f4c15f0be60fdc5f0))
+
 ## [1.374.1](https://github.com/mkayander/dStruct/compare/v1.374.0...v1.374.1) (2026-04-06)
 
 

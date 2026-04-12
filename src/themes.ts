@@ -4,6 +4,10 @@ import type { PaletteColor } from "@mui/material";
 import { alpha, createTheme } from "@mui/material/styles";
 
 import type { Difficulty } from "#/graphql/generated";
+import {
+  appFontStackDisplay,
+  appFontStackSans,
+} from "#/shared/fonts/fontVariables";
 
 export type SsrDeviceType = "mobile" | "desktop";
 
@@ -122,26 +126,26 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
       borderRadius: 4,
     },
     typography: {
-      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: appFontStackSans,
       h1: {
-        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontFamily: appFontStackDisplay,
         fontWeight: 700,
         letterSpacing: "-0.04em",
         lineHeight: 1.04,
       },
       h2: {
-        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontFamily: appFontStackDisplay,
         fontWeight: 700,
         letterSpacing: "-0.04em",
         lineHeight: 1.08,
       },
       h3: {
-        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontFamily: appFontStackDisplay,
         fontWeight: 700,
         letterSpacing: "-0.035em",
       },
       h4: {
-        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontFamily: appFontStackDisplay,
         fontWeight: 700,
         letterSpacing: "-0.03em",
       },
@@ -154,7 +158,7 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
         letterSpacing: "-0.02em",
       },
       subtitle2: {
-        fontFamily: '"Space Grotesk", "Inter", sans-serif',
+        fontFamily: appFontStackDisplay,
         fontWeight: 600,
         letterSpacing: "0.05em",
         textTransform: "uppercase",
@@ -240,6 +244,26 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
               backgroundColor: alpha(obsidianTokens.accentSoft, 0.08),
             },
           },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            // MUI sets backgroundColor: transparent under &:hover + @media (hover: none) for touch
+            // devices, which makes sticky :hover after a tap wipe out any custom resting bgcolor.
+            // Keep the same hover tint as fine pointers so behavior matches across form factors.
+            "&:hover": {
+              "@media (hover: none)": {
+                backgroundColor: "var(--IconButton-hoverBg)",
+              },
+            },
+            "&.Mui-focusVisible": {
+              backgroundColor: theme.palette.action.focus,
+            },
+            "&:active": {
+              backgroundColor: theme.palette.action.selected,
+            },
+          }),
         },
       },
       MuiChip: {
