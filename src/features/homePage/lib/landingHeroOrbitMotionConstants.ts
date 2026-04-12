@@ -8,7 +8,7 @@ export const LANDING_HERO_ORBIT_TUNING = {
   desktop: {
     maxAzimuthOffset: 0.28,
     maxPolarOffset: 0.18,
-    frameDamping: 0.055,
+    frameDamping: 0.032,
     pointerAzimuthMultiplier: 2,
     pointerPolarMultiplier: 2,
     polarAngleMin: Math.PI / 2.9,
@@ -17,7 +17,7 @@ export const LANDING_HERO_ORBIT_TUNING = {
   mobile: {
     maxAzimuthOffset: 0.62,
     maxPolarOffset: 0.4,
-    frameDamping: 0.1,
+    frameDamping: 0.058,
     polarAngleMin: Math.PI / 3.15,
     polarAngleMax: Math.PI / 1.72,
     /** Finger position → orbit offset; polar higher so vertical screen position reads clearly. */
@@ -30,8 +30,8 @@ export const LANDING_HERO_ORBIT_TUNING = {
     idlePolarAngularSpeed: 0.52,
     idleSecondaryAzimuthScale: 0.42,
     idleSecondaryPolarScale: 0.38,
-    idleSmoothing: 0.055,
+    idleSmoothing: 0.034,
     /** Per frame when finger lifted: delta *= (1 - value). Lower = slower, smoother settle. */
-    touchReleaseDecay: 0.038,
+    touchReleaseDecay: 0.022,
   },
 } as const;
