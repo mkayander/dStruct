@@ -46,7 +46,7 @@ type SolutionFnPath = NodePath<
 const findReturnedSolutionPath = (file: File): SolutionFnPath | null => {
   let found: SolutionFnPath | null = null;
   traverse(file, {
-    ReturnStatement(path) {
+    ReturnStatement(path: NodePath<babelTypes.ReturnStatement>) {
       const arg = path.get("argument");
       if (!arg.node) return;
       if (arg.isFunctionExpression() || arg.isArrowFunctionExpression()) {
@@ -82,13 +82,15 @@ export const instrumentUserJsForLineTracking = (
     instrumentFunctionBody(solutionPath as NodePath<babelTypes.Function>);
 
     solutionPath.traverse({
-      FunctionDeclaration(path) {
+      FunctionDeclaration(path: NodePath<babelTypes.FunctionDeclaration>) {
         instrumentFunctionBody(path);
       },
-      FunctionExpression(path) {
+      FunctionExpression(path: NodePath<babelTypes.FunctionExpression>) {
         instrumentFunctionBody(path);
       },
-      ArrowFunctionExpression(path) {
+      ArrowFunctionExpression(
+        path: NodePath<babelTypes.ArrowFunctionExpression>,
+      ) {
         const body = path.get("body");
         if (body.isBlockStatement()) {
           insertProbesInBlock(body);
