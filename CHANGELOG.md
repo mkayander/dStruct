@@ -1,3 +1,10 @@
+# [1.375.0](https://github.com/mkayander/dStruct/compare/v1.374.3...v1.375.0) (2026-04-12)
+
+
+### Features
+
+* **callstack:** optional source locations and playback line highlight ([#121](https://github.com/mkayander/dStruct/issues/121)) ([571955a](https://github.com/mkayander/dStruct/commit/571955a99eb186cefa992579b14ec6366a1bc358))
+
 ## [1.374.3](https://github.com/mkayander/dStruct/compare/v1.374.2...v1.374.3) (2026-04-08)
 
 ### Bug Fixes
