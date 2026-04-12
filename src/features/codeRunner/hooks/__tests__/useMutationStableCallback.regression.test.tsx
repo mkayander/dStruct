@@ -74,7 +74,11 @@ describe("useMutation + useCallback + useEffect (CodePanel regression)", () => {
         mutationFn: async (value: string) => value,
       });
       const mutationRef = useRef(mutation);
-      mutationRef.current = mutation;
+
+      useEffect(() => {
+        mutationRef.current = mutation;
+      }, [mutation]);
+
       const cancel = useCallback(() => {
         mutationRef.current.reset();
       }, []);
