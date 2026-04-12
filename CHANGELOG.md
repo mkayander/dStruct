@@ -1,402 +1,350 @@
 ## [1.374.3](https://github.com/mkayander/dStruct/compare/v1.374.2...v1.374.3) (2026-04-08)
 
-
 ### Bug Fixes
 
-* Google Fonts css2 URL 400 Bad Request (Roboto weight syntax) ([#122](https://github.com/mkayander/dStruct/issues/122)) ([a31b96b](https://github.com/mkayander/dStruct/commit/a31b96b61ce8f368cf18e88bb09e18f9b3bb6e9f))
+- Google Fonts css2 URL 400 Bad Request (Roboto weight syntax) ([#122](https://github.com/mkayander/dStruct/issues/122)) ([a31b96b](https://github.com/mkayander/dStruct/commit/a31b96b61ce8f368cf18e88bb09e18f9b3bb6e9f))
 
 ## [1.374.2](https://github.com/mkayander/dStruct/compare/v1.374.1...v1.374.2) (2026-04-07)
 
-
 ### Bug Fixes
 
-* **home:** mobile hero preview alignment and IconButton backgrounds ([#120](https://github.com/mkayander/dStruct/issues/120)) ([1bd9f0c](https://github.com/mkayander/dStruct/commit/1bd9f0cbf42726b62098a98f4c15f0be60fdc5f0))
+- **home:** mobile hero preview alignment and IconButton backgrounds ([#120](https://github.com/mkayander/dStruct/issues/120)) ([1bd9f0c](https://github.com/mkayander/dStruct/commit/1bd9f0cbf42726b62098a98f4c15f0be60fdc5f0))
 
 ## [1.374.1](https://github.com/mkayander/dStruct/compare/v1.374.0...v1.374.1) (2026-04-06)
 
-
 ### Bug Fixes
 
-* **theme:** align input autofill with obsidian surfaces ([#117](https://github.com/mkayander/dStruct/issues/117)) ([a072efd](https://github.com/mkayander/dStruct/commit/a072efde34cafb883bbe00f52a0641469972aaaa)), closes [#266798](https://github.com/mkayander/dStruct/issues/266798) [#266798](https://github.com/mkayander/dStruct/issues/266798)
+- **theme:** align input autofill with obsidian surfaces ([#117](https://github.com/mkayander/dStruct/issues/117)) ([a072efd](https://github.com/mkayander/dStruct/commit/a072efde34cafb883bbe00f52a0641469972aaaa)), closes [#266798](https://github.com/mkayander/dStruct/issues/266798) [#266798](https://github.com/mkayander/dStruct/issues/266798)
 
 # [1.374.0](https://github.com/mkayander/dStruct/compare/v1.373.1...v1.374.0) (2026-04-06)
 
-
 ### Bug Fixes
 
-* **code-panel:** cancel superseded format when user edits or switches language ([50af246](https://github.com/mkayander/dStruct/commit/50af246b693e35aad3a4034df1d53604304c9eee))
-* **i18n:** merge non-en locales with en for English fallback ([296651b](https://github.com/mkayander/dStruct/commit/296651bc43cd937e734cf90983027fc8bccb0a8f))
-* **landing:** Python 3D decor as absolute ambient layer only ([5b0bfe5](https://github.com/mkayander/dStruct/commit/5b0bfe58e63ee6ea8f6ca118b85ceb717b7276d2))
-
+- **code-panel:** cancel superseded format when user edits or switches language ([50af246](https://github.com/mkayander/dStruct/commit/50af246b693e35aad3a4034df1d53604304c9eee))
+- **i18n:** merge non-en locales with en for English fallback ([296651b](https://github.com/mkayander/dStruct/commit/296651bc43cd937e734cf90983027fc8bccb0a8f))
+- **landing:** Python 3D decor as absolute ambient layer only ([5b0bfe5](https://github.com/mkayander/dStruct/commit/5b0bfe58e63ee6ea8f6ca118b85ceb717b7276d2))
 
 ### Features
 
-* **code-runner:** format JavaScript with Prettier in a Web Worker ([72919ad](https://github.com/mkayander/dStruct/commit/72919ad546b1058b1f8b9bbbd57b9e071bd84074))
-* **code-runner:** format Python via Pyodide Black; drop server Black ([d69b43f](https://github.com/mkayander/dStruct/commit/d69b43f06c75b0f138f1f7d601ab4cfd6ab2c19b))
-* **home:** add Python 3D logo to hero with scroll-driven motion ([403af3f](https://github.com/mkayander/dStruct/commit/403af3f4cf9586e50dfd7158da9063a5e0ebedd1))
-
+- **code-runner:** format JavaScript with Prettier in a Web Worker ([72919ad](https://github.com/mkayander/dStruct/commit/72919ad546b1058b1f8b9bbbd57b9e071bd84074))
+- **code-runner:** format Python via Pyodide Black; drop server Black ([d69b43f](https://github.com/mkayander/dStruct/commit/d69b43f06c75b0f138f1f7d601ab4cfd6ab2c19b))
+- **home:** add Python 3D logo to hero with scroll-driven motion ([403af3f](https://github.com/mkayander/dStruct/commit/403af3f4cf9586e50dfd7158da9063a5e0ebedd1))
 
 ### Reverts
 
-* disallow single-letter for-loop indices in id-length again ([a3a2702](https://github.com/mkayander/dStruct/commit/a3a27029dac8e2127bd380a7376cf9e0c567b1cc))
+- disallow single-letter for-loop indices in id-length again ([a3a2702](https://github.com/mkayander/dStruct/commit/a3a27029dac8e2127bd380a7376cf9e0c567b1cc))
 
 ## [1.373.1](https://github.com/mkayander/dStruct/compare/v1.373.0...v1.373.1) (2026-04-06)
 
-
 ### Bug Fixes
 
-* narrow swapChildren playback batching for landing hero callstack ([#115](https://github.com/mkayander/dStruct/issues/115)) ([1717194](https://github.com/mkayander/dStruct/commit/1717194e805b8d4092d6e0950de5f749104abadf))
+- narrow swapChildren playback batching for landing hero callstack ([#115](https://github.com/mkayander/dStruct/issues/115)) ([1717194](https://github.com/mkayander/dStruct/commit/1717194e805b8d4092d6e0950de5f749104abadf))
 
 # [1.373.0](https://github.com/mkayander/dStruct/compare/v1.372.0...v1.373.0) (2026-04-06)
 
-
 ### Features
 
-* **i18n:** Belarusian, Hindi, Chinese locales and full translations ([#113](https://github.com/mkayander/dStruct/issues/113)) ([dab5c92](https://github.com/mkayander/dStruct/commit/dab5c927b50d7c4bef8c8349dd3f801317b278da))
+- **i18n:** Belarusian, Hindi, Chinese locales and full translations ([#113](https://github.com/mkayander/dStruct/issues/113)) ([dab5c92](https://github.com/mkayander/dStruct/commit/dab5c927b50d7c4bef8c8349dd3f801317b278da))
 
 # [1.372.0](https://github.com/mkayander/dStruct/compare/v1.371.1...v1.372.0) (2026-04-06)
 
-
 ### Features
 
-* add darkreader-lock meta for Dark Reader extension ([#112](https://github.com/mkayander/dStruct/issues/112)) ([bb57539](https://github.com/mkayander/dStruct/commit/bb57539e235324a44a459570082f4fd279f16462))
+- add darkreader-lock meta for Dark Reader extension ([#112](https://github.com/mkayander/dStruct/issues/112)) ([bb57539](https://github.com/mkayander/dStruct/commit/bb57539e235324a44a459570082f4fd279f16462))
 
 ## [1.371.1](https://github.com/mkayander/dStruct/compare/v1.371.0...v1.371.1) (2026-04-06)
 
-
 ### Bug Fixes
 
-* **theme:** restore full black global app background ([#108](https://github.com/mkayander/dStruct/issues/108)) ([6d7253f](https://github.com/mkayander/dStruct/commit/6d7253f57cc7364e16fc426b58a0e8ad72e5ebd5)), closes [#000000](https://github.com/mkayander/dStruct/issues/000000) [#101417](https://github.com/mkayander/dStruct/issues/101417) [#121212](https://github.com/mkayander/dStruct/issues/121212) [#000000](https://github.com/mkayander/dStruct/issues/000000)
+- **theme:** restore full black global app background ([#108](https://github.com/mkayander/dStruct/issues/108)) ([6d7253f](https://github.com/mkayander/dStruct/commit/6d7253f57cc7364e16fc426b58a0e8ad72e5ebd5)), closes [#000000](https://github.com/mkayander/dStruct/issues/000000) [#101417](https://github.com/mkayander/dStruct/issues/101417) [#121212](https://github.com/mkayander/dStruct/issues/121212) [#000000](https://github.com/mkayander/dStruct/issues/000000)
 
 # [1.371.0](https://github.com/mkayander/dStruct/compare/v1.370.0...v1.371.0) (2026-04-05)
 
-
 ### Bug Fixes
 
-* **landingHeroPreview:** refactor replay timer management and enhance tests ([dddd30b](https://github.com/mkayander/dStruct/commit/dddd30badd120f900cbbc1e7b0214fafbbc06b32))
-
+- **landingHeroPreview:** refactor replay timer management and enhance tests ([dddd30b](https://github.com/mkayander/dStruct/commit/dddd30badd120f900cbbc1e7b0214fafbbc06b32))
 
 ### Features
 
-* **landingHeroPreview:** normalize setColor frame handling and add tests ([e7b3a80](https://github.com/mkayander/dStruct/commit/e7b3a80e60357c5149ce4b0ed1429002aad81224))
-* **theme:** enhance theme colors and update node color logic ([b9b4977](https://github.com/mkayander/dStruct/commit/b9b4977dcf91c6886d1d25b3caf04dee4eb40fec))
-* **tree:** enhance child ID management and playback step handling ([a2bfc15](https://github.com/mkayander/dStruct/commit/a2bfc15bdd247d0cecf63087b0bedaca299237b0))
-* **tree:** enhance tree node management with initial edges support ([a3eb70a](https://github.com/mkayander/dStruct/commit/a3eb70a59f2aed54f5c006522d001363a14c5c92))
+- **landingHeroPreview:** normalize setColor frame handling and add tests ([e7b3a80](https://github.com/mkayander/dStruct/commit/e7b3a80e60357c5149ce4b0ed1429002aad81224))
+- **theme:** enhance theme colors and update node color logic ([b9b4977](https://github.com/mkayander/dStruct/commit/b9b4977dcf91c6886d1d25b3caf04dee4eb40fec))
+- **tree:** enhance child ID management and playback step handling ([a2bfc15](https://github.com/mkayander/dStruct/commit/a2bfc15bdd247d0cecf63087b0bedaca299237b0))
+- **tree:** enhance tree node management with initial edges support ([a3eb70a](https://github.com/mkayander/dStruct/commit/a3eb70a59f2aed54f5c006522d001363a14c5c92))
 
 # [1.370.0](https://github.com/mkayander/dStruct/compare/v1.369.1...v1.370.0) (2026-04-05)
 
-
 ### Features
 
-* **callstack:** implement CallstackFrameContent and CompactCallstackList components ([780e009](https://github.com/mkayander/dStruct/commit/780e009652ec1f032464244e9b2c9c07ee96002d))
+- **callstack:** implement CallstackFrameContent and CompactCallstackList components ([780e009](https://github.com/mkayander/dStruct/commit/780e009652ec1f032464244e9b2c9c07ee96002d))
 
 ## [1.369.1](https://github.com/mkayander/dStruct/compare/v1.369.0...v1.369.1) (2026-04-05)
 
-
 ### Bug Fixes
 
-* **home:** update icons and remove unused text in landing page components ([2242e33](https://github.com/mkayander/dStruct/commit/2242e33b0dfe92ab9d45dcdd494b8d69c7b18f5d))
+- **home:** update icons and remove unused text in landing page components ([2242e33](https://github.com/mkayander/dStruct/commit/2242e33b0dfe92ab9d45dcdd494b8d69c7b18f5d))
 
 # [1.369.0](https://github.com/mkayander/dStruct/compare/v1.368.0...v1.369.0) (2026-04-05)
 
-
 ### Features
 
-* **lint:** enforce named imports for React hooks ([c05b587](https://github.com/mkayander/dStruct/commit/c05b5876563506f0b9f1c08a57c50fa01204330c))
+- **lint:** enforce named imports for React hooks ([c05b587](https://github.com/mkayander/dStruct/commit/c05b5876563506f0b9f1c08a57c50fa01204330c))
 
 # [1.368.0](https://github.com/mkayander/dStruct/compare/v1.367.0...v1.368.0) (2026-04-05)
 
-
 ### Features
 
-* **home:** enhance landing page with new hero and sections ([f48f59e](https://github.com/mkayander/dStruct/commit/f48f59e3a1dc2e7a365a179665838757e1d31693))
+- **home:** enhance landing page with new hero and sections ([f48f59e](https://github.com/mkayander/dStruct/commit/f48f59e3a1dc2e7a365a179665838757e1d31693))
 
 # [1.367.0](https://github.com/mkayander/dStruct/compare/v1.366.0...v1.367.0) (2026-04-02)
 
-
 ### Bug Fixes
 
-* **home:** allow page scroll on mobile over 3D logo; sync orbit via scroll ([afeeb56](https://github.com/mkayander/dStruct/commit/afeeb56aa27503e6741aff56a485d00e9d6a68de))
-* **home:** pass scroll through logo canvas on mobile ([400356d](https://github.com/mkayander/dStruct/commit/400356d2f165f72b53a9eaa7e9eeb98ce27f0bf7))
-* **lint:** touch-scroll canvas styles via ref in LogoModelView ([99f526e](https://github.com/mkayander/dStruct/commit/99f526e286ab7cf6559a635bdaa7007f4c673882))
-* update CodeRunner component type imports for Monaco editor ([f56829f](https://github.com/mkayander/dStruct/commit/f56829fd59068e6dcb835af12f956579da3e66d4))
-
+- **home:** allow page scroll on mobile over 3D logo; sync orbit via scroll ([afeeb56](https://github.com/mkayander/dStruct/commit/afeeb56aa27503e6741aff56a485d00e9d6a68de))
+- **home:** pass scroll through logo canvas on mobile ([400356d](https://github.com/mkayander/dStruct/commit/400356d2f165f72b53a9eaa7e9eeb98ce27f0bf7))
+- **lint:** touch-scroll canvas styles via ref in LogoModelView ([99f526e](https://github.com/mkayander/dStruct/commit/99f526e286ab7cf6559a635bdaa7007f4c673882))
+- update CodeRunner component type imports for Monaco editor ([f56829f](https://github.com/mkayander/dStruct/commit/f56829fd59068e6dcb835af12f956579da3e66d4))
 
 ### Features
 
-* add landing page killer features plan ([fcc9ce4](https://github.com/mkayander/dStruct/commit/fcc9ce413de411d405ebb802bd6f93f5b4dad73b))
-* **daily:** add Daily Problem page and navigation ([8b55955](https://github.com/mkayander/dStruct/commit/8b55955e17479cee167a10be3d4836eaa8dd7d48))
-* **home:** enhance mobile hero logo interaction ([2803a88](https://github.com/mkayander/dStruct/commit/2803a880ceb992fc3cf00a13bf66b1d44a808e3e))
-* **home:** landing sections, FAQ, and daily question errors ([179ac7c](https://github.com/mkayander/dStruct/commit/179ac7c0c8399116e2b02a573d03b723e9f95d45))
-* update dependencies in package.json and pnpm-lock.yaml ([fcc8865](https://github.com/mkayander/dStruct/commit/fcc886571ce8c0ec656f89627b7c556e81bc9f93))
-* update landing page killer features plan ([2fca18f](https://github.com/mkayander/dStruct/commit/2fca18fa10bb90384fa2d5f363ab7674149f17b0))
+- add landing page killer features plan ([fcc9ce4](https://github.com/mkayander/dStruct/commit/fcc9ce413de411d405ebb802bd6f93f5b4dad73b))
+- **daily:** add Daily Problem page and navigation ([8b55955](https://github.com/mkayander/dStruct/commit/8b55955e17479cee167a10be3d4836eaa8dd7d48))
+- **home:** enhance mobile hero logo interaction ([2803a88](https://github.com/mkayander/dStruct/commit/2803a880ceb992fc3cf00a13bf66b1d44a808e3e))
+- **home:** landing sections, FAQ, and daily question errors ([179ac7c](https://github.com/mkayander/dStruct/commit/179ac7c0c8399116e2b02a573d03b723e9f95d45))
+- update dependencies in package.json and pnpm-lock.yaml ([fcc8865](https://github.com/mkayander/dStruct/commit/fcc886571ce8c0ec656f89627b7c556e81bc9f93))
+- update landing page killer features plan ([2fca18f](https://github.com/mkayander/dStruct/commit/2fca18fa10bb90384fa2d5f363ab7674149f17b0))
 
 # [1.366.0](https://github.com/mkayander/dStruct/compare/v1.365.0...v1.366.0) (2026-03-19)
 
-
 ### Features
 
-* enhance mobile playground URL handling and navigation ([856b276](https://github.com/mkayander/dStruct/commit/856b276fb7afc1515baa157a6dc6a27a2fbbc490))
+- enhance mobile playground URL handling and navigation ([856b276](https://github.com/mkayander/dStruct/commit/856b276fb7afc1515baa157a6dc6a27a2fbbc490))
 
 # [1.365.0](https://github.com/mkayander/dStruct/compare/v1.364.0...v1.365.0) (2026-03-19)
 
-
 ### Features
 
-* enhance OutputPanel and TabListWrapper styling for better mobile experience ([c6c5b62](https://github.com/mkayander/dStruct/commit/c6c5b62dc8e423caa1a81da63bc26c10c883bfae))
+- enhance OutputPanel and TabListWrapper styling for better mobile experience ([c6c5b62](https://github.com/mkayander/dStruct/commit/c6c5b62dc8e423caa1a81da63bc26c10c883bfae))
 
 # [1.364.0](https://github.com/mkayander/dStruct/compare/v1.363.0...v1.364.0) (2026-03-19)
 
-
 ### Features
 
-* enhance mobile playground navigation and UI components ([4d3f7fa](https://github.com/mkayander/dStruct/commit/4d3f7fa7c3b637a74d96944b39b624017c8253e4))
+- enhance mobile playground navigation and UI components ([4d3f7fa](https://github.com/mkayander/dStruct/commit/4d3f7fa7c3b637a74d96944b39b624017c8253e4))
 
 # [1.363.0](https://github.com/mkayander/dStruct/compare/v1.362.0...v1.363.0) (2026-03-07)
 
-
 ### Features
 
-* add comments for business logic in useEffect hooks ([80968eb](https://github.com/mkayander/dStruct/commit/80968eb7697773f2a0bbcf13c78a45ca8d22494d))
-* add tests for benchmark and pyodide progress snackbar hooks ([e768611](https://github.com/mkayander/dStruct/commit/e768611b18824e3ebd59d27209b36e2935757252))
-* enhance error handling and context management in code execution ([b042740](https://github.com/mkayander/dStruct/commit/b042740581909fb91f486892e4526520a000ace0))
-* enhance mobile playground view with callstack playback control ([d49369b](https://github.com/mkayander/dStruct/commit/d49369bf7139d2af73ea33241bf329f7de5b53f4))
-* implement benchmark progress snackbar and state management ([8f7e981](https://github.com/mkayander/dStruct/commit/8f7e981ab098556d77f41b24caf2a1f8b7508ba2))
+- add comments for business logic in useEffect hooks ([80968eb](https://github.com/mkayander/dStruct/commit/80968eb7697773f2a0bbcf13c78a45ca8d22494d))
+- add tests for benchmark and pyodide progress snackbar hooks ([e768611](https://github.com/mkayander/dStruct/commit/e768611b18824e3ebd59d27209b36e2935757252))
+- enhance error handling and context management in code execution ([b042740](https://github.com/mkayander/dStruct/commit/b042740581909fb91f486892e4526520a000ace0))
+- enhance mobile playground view with callstack playback control ([d49369b](https://github.com/mkayander/dStruct/commit/d49369bf7139d2af73ea33241bf329f7de5b53f4))
+- implement benchmark progress snackbar and state management ([8f7e981](https://github.com/mkayander/dStruct/commit/8f7e981ab098556d77f41b24caf2a1f8b7508ba2))
 
 # [1.362.0](https://github.com/mkayander/dStruct/compare/v1.361.0...v1.362.0) (2026-03-05)
 
-
 ### Bug Fixes
 
-* improve project selection handling in ProjectBrowser ([c4fd408](https://github.com/mkayander/dStruct/commit/c4fd408c7179324780e76258ea9c992376a71f52))
-
+- improve project selection handling in ProjectBrowser ([c4fd408](https://github.com/mkayander/dStruct/commit/c4fd408c7179324780e76258ea9c992376a71f52))
 
 ### Features
 
-* add p95 time metric to benchmark results and enhance UI display ([b77c05c](https://github.com/mkayander/dStruct/commit/b77c05c61aca7fd409b956695c6996f0ddcf5470))
-* add rule to forbid inline type imports in TypeScript ([67ce20f](https://github.com/mkayander/dStruct/commit/67ce20fe97f3f5258feb4ef1a584772d553407ad))
-* enhance benchmark functionality and mobile layout support ([98d35d6](https://github.com/mkayander/dStruct/commit/98d35d6141bdad50112ad2c020f4a21171f22bea))
+- add p95 time metric to benchmark results and enhance UI display ([b77c05c](https://github.com/mkayander/dStruct/commit/b77c05c61aca7fd409b956695c6996f0ddcf5470))
+- add rule to forbid inline type imports in TypeScript ([67ce20f](https://github.com/mkayander/dStruct/commit/67ce20fe97f3f5258feb4ef1a584772d553407ad))
+- enhance benchmark functionality and mobile layout support ([98d35d6](https://github.com/mkayander/dStruct/commit/98d35d6141bdad50112ad2c020f4a21171f22bea))
 
 # [1.361.0](https://github.com/mkayander/dStruct/compare/v1.360.0...v1.361.0) (2026-03-05)
 
-
 ### Features
 
-* enhance MobilePlayground component for improved view transitions ([7e422a9](https://github.com/mkayander/dStruct/commit/7e422a9ec47fc5d30da52389d192af88c6a9731b))
-* enhance snackbar positioning for mobile devices ([8755cf5](https://github.com/mkayander/dStruct/commit/8755cf53519d9ccc4e9a50abdc6e0f144a67c7bd))
-* integrate mobile layout support in ArgsEditor component ([ecba9ac](https://github.com/mkayander/dStruct/commit/ecba9ac82c7ba5c8f0002f18b031a15868cec60e))
+- enhance MobilePlayground component for improved view transitions ([7e422a9](https://github.com/mkayander/dStruct/commit/7e422a9ec47fc5d30da52389d192af88c6a9731b))
+- enhance snackbar positioning for mobile devices ([8755cf5](https://github.com/mkayander/dStruct/commit/8755cf53519d9ccc4e9a50abdc6e0f144a67c7bd))
+- integrate mobile layout support in ArgsEditor component ([ecba9ac](https://github.com/mkayander/dStruct/commit/ecba9ac82c7ba5c8f0002f18b031a15868cec60e))
 
 # [1.360.0](https://github.com/mkayander/dStruct/compare/v1.359.0...v1.360.0) (2026-03-05)
 
-
 ### Bug Fixes
 
-* improve viewer pan functionality and enhance zoom behavior ([fd6639a](https://github.com/mkayander/dStruct/commit/fd6639ab27bf504a3d716d0f35a1512fce8fc1ca))
-
+- improve viewer pan functionality and enhance zoom behavior ([fd6639a](https://github.com/mkayander/dStruct/commit/fd6639ab27bf504a3d716d0f35a1512fce8fc1ca))
 
 ### Features
 
-* enhance viewer pan functionality and introduce zoom at point logic ([39b8896](https://github.com/mkayander/dStruct/commit/39b8896c0298ee0ba17f116335f38c3eab6df70c))
+- enhance viewer pan functionality and introduce zoom at point logic ([39b8896](https://github.com/mkayander/dStruct/commit/39b8896c0298ee0ba17f116335f38c3eab6df70c))
 
 # [1.359.0](https://github.com/mkayander/dStruct/compare/v1.358.0...v1.359.0) (2026-03-05)
 
-
 ### Features
 
-* revamp mobile playground navigation and UI components ([8a6eb29](https://github.com/mkayander/dStruct/commit/8a6eb29d50e5a80b46decadc9cc0bf8fd1bee831))
-* update theme colors and enhance layout for mobile responsiveness ([1dfaf75](https://github.com/mkayander/dStruct/commit/1dfaf75c5ddd808cc10acb0c1b9509aa7118513e)), closes [#121212](https://github.com/mkayander/dStruct/issues/121212)
+- revamp mobile playground navigation and UI components ([8a6eb29](https://github.com/mkayander/dStruct/commit/8a6eb29d50e5a80b46decadc9cc0bf8fd1bee831))
+- update theme colors and enhance layout for mobile responsiveness ([1dfaf75](https://github.com/mkayander/dStruct/commit/1dfaf75c5ddd808cc10acb0c1b9509aa7118513e)), closes [#121212](https://github.com/mkayander/dStruct/issues/121212)
 
 # [1.358.0](https://github.com/mkayander/dStruct/compare/v1.357.1...v1.358.0) (2026-03-03)
 
-
 ### Bug Fixes
 
-* remove unused mock function from ProjectBrowserContext tests ([0262772](https://github.com/mkayander/dStruct/commit/02627721c7f10496989b2cd452a587a717eff4a7))
-* streamline MobilePlayground and enhance playground navigation ([c0eb5b7](https://github.com/mkayander/dStruct/commit/c0eb5b7d3dab732e84c469fbd8c2d402389e95f9))
-* update useSearchParam to accept string type for parameter value ([51fc9d0](https://github.com/mkayander/dStruct/commit/51fc9d013f6e526335f3340ebb54498f186e56ff))
-
+- remove unused mock function from ProjectBrowserContext tests ([0262772](https://github.com/mkayander/dStruct/commit/02627721c7f10496989b2cd452a587a717eff4a7))
+- streamline MobilePlayground and enhance playground navigation ([c0eb5b7](https://github.com/mkayander/dStruct/commit/c0eb5b7d3dab732e84c469fbd8c2d402389e95f9))
+- update useSearchParam to accept string type for parameter value ([51fc9d0](https://github.com/mkayander/dStruct/commit/51fc9d013f6e526335f3340ebb54498f186e56ff))
 
 ### Features
 
-* add tests for CallstackTable component ([09ad0de](https://github.com/mkayander/dStruct/commit/09ad0de221247c6aba3e1b9fb4233ace0126dd9e))
-* enhance CollapsiblePanel with hover styles and improved accessibility ([945903a](https://github.com/mkayander/dStruct/commit/945903a64f5726f4e9df0a83b8c5d00d234f43e3))
-* enhance mobile playground view with project loading state ([7c0d47e](https://github.com/mkayander/dStruct/commit/7c0d47ef646569feca534b12154a906d7f616a09))
-* enhance output panel and viewer functionality with collapsible features ([9cf289b](https://github.com/mkayander/dStruct/commit/9cf289bc3da230bc55a24d9e1d7c74873ea5787e))
-* implement shared glass overlay styles for UI components ([4cb581d](https://github.com/mkayander/dStruct/commit/4cb581d61cc122bfae442b43a88de600360b341b))
-* update CallstackTable to utilize TableVirtuoso ref for scrolling ([d091c98](https://github.com/mkayander/dStruct/commit/d091c98aa1a6e449ac763d865b524fd103e71109))
+- add tests for CallstackTable component ([09ad0de](https://github.com/mkayander/dStruct/commit/09ad0de221247c6aba3e1b9fb4233ace0126dd9e))
+- enhance CollapsiblePanel with hover styles and improved accessibility ([945903a](https://github.com/mkayander/dStruct/commit/945903a64f5726f4e9df0a83b8c5d00d234f43e3))
+- enhance mobile playground view with project loading state ([7c0d47e](https://github.com/mkayander/dStruct/commit/7c0d47ef646569feca534b12154a906d7f616a09))
+- enhance output panel and viewer functionality with collapsible features ([9cf289b](https://github.com/mkayander/dStruct/commit/9cf289bc3da230bc55a24d9e1d7c74873ea5787e))
+- implement shared glass overlay styles for UI components ([4cb581d](https://github.com/mkayander/dStruct/commit/4cb581d61cc122bfae442b43a88de600360b341b))
+- update CallstackTable to utilize TableVirtuoso ref for scrolling ([d091c98](https://github.com/mkayander/dStruct/commit/d091c98aa1a6e449ac763d865b524fd103e71109))
 
 ## [1.357.1](https://github.com/mkayander/dStruct/compare/v1.357.0...v1.357.1) (2026-03-01)
 
-
 ### Bug Fixes
 
-* ensure onRunComplete is only called when results are available ([4c668b3](https://github.com/mkayander/dStruct/commit/4c668b3cf1f045ef20afa67f13db2422cbb4c0fd))
+- ensure onRunComplete is only called when results are available ([4c668b3](https://github.com/mkayander/dStruct/commit/4c668b3cf1f045ef20afa67f13db2422cbb4c0fd))
 
 # [1.357.0](https://github.com/mkayander/dStruct/compare/v1.356.0...v1.357.0) (2026-03-01)
 
-
 ### Features
 
-* implement SSR device type handling to mitigate mobile flicker ([6c7a071](https://github.com/mkayander/dStruct/commit/6c7a071c1585d6981c965568e57656d5b55276c7))
+- implement SSR device type handling to mitigate mobile flicker ([6c7a071](https://github.com/mkayander/dStruct/commit/6c7a071c1585d6981c965568e57656d5b55276c7))
 
 # [1.356.0](https://github.com/mkayander/dStruct/compare/v1.355.0...v1.356.0) (2026-03-01)
 
-
 ### Bug Fixes
 
-* ensure snackbar cleanup on component unmount in Pyodide progress hook ([30a2def](https://github.com/mkayander/dStruct/commit/30a2defa3fd952e46796b5f95fea64f3624d6a4e))
-
+- ensure snackbar cleanup on component unmount in Pyodide progress hook ([30a2def](https://github.com/mkayander/dStruct/commit/30a2defa3fd952e46796b5f95fea64f3624d6a4e))
 
 ### Features
 
-* enhance mobile playground view handling with URL query support ([1b1cdfa](https://github.com/mkayander/dStruct/commit/1b1cdfa68d9d6aead57099cd2503b6b1ba41a3ca))
-* implement mobile playground layout with phased navigation ([01970ca](https://github.com/mkayander/dStruct/commit/01970cafb96eaac020b3c0d932e922f160027f08))
+- enhance mobile playground view handling with URL query support ([1b1cdfa](https://github.com/mkayander/dStruct/commit/1b1cdfa68d9d6aead57099cd2503b6b1ba41a3ca))
+- implement mobile playground layout with phased navigation ([01970ca](https://github.com/mkayander/dStruct/commit/01970cafb96eaac020b3c0d932e922f160027f08))
 
 # [1.355.0](https://github.com/mkayander/dStruct/compare/v1.354.0...v1.355.0) (2026-03-01)
 
-
 ### Features
 
-* enhance Python code execution with serialized arguments support ([83f85a3](https://github.com/mkayander/dStruct/commit/83f85a3f168662fe4b0d8f1416077191203704f6))
+- enhance Python code execution with serialized arguments support ([83f85a3](https://github.com/mkayander/dStruct/commit/83f85a3f168662fe4b0d8f1416077191203704f6))
 
 # [1.354.0](https://github.com/mkayander/dStruct/compare/v1.353.0...v1.354.0) (2026-02-28)
 
-
 ### Features
 
-* implement Pyodide progress snackbar and code runner enhancements ([a307f26](https://github.com/mkayander/dStruct/commit/a307f26679cb669dea1f0412d1b656b0fb15aa9a))
+- implement Pyodide progress snackbar and code runner enhancements ([a307f26](https://github.com/mkayander/dStruct/commit/a307f26679cb669dea1f0412d1b656b0fb15aa9a))
 
 # [1.353.0](https://github.com/mkayander/dStruct/compare/v1.352.0...v1.353.0) (2026-02-28)
 
-
 ### Features
 
-* enhance Python execution worker with dynamic CDN URL ([17dcfb6](https://github.com/mkayander/dStruct/commit/17dcfb6f8c99aafcda7d2c96a465218cd7dd13e3))
+- enhance Python execution worker with dynamic CDN URL ([17dcfb6](https://github.com/mkayander/dStruct/commit/17dcfb6f8c99aafcda7d2c96a465218cd7dd13e3))
 
 # [1.352.0](https://github.com/mkayander/dStruct/compare/v1.351.2...v1.352.0) (2026-02-28)
 
-
 ### Features
 
-* integrate Pyodide for in-browser Python execution ([460dd97](https://github.com/mkayander/dStruct/commit/460dd97eba3ff51a53d0c0b755ff6a48d6d15042))
+- integrate Pyodide for in-browser Python execution ([460dd97](https://github.com/mkayander/dStruct/commit/460dd97eba3ff51a53d0c0b755ff6a48d6d15042))
 
 ## [1.351.2](https://github.com/mkayander/dStruct/compare/v1.351.1...v1.351.2) (2026-02-25)
 
-
 ### Bug Fixes
 
-* correct azimuthal and polar angle calculations in DashboardPage ([af976d3](https://github.com/mkayander/dStruct/commit/af976d3878ea0859de9be20a7e6f68bf2b1363a9))
-* improve playground slug handling in usePlaygroundSlugs hook ([9ec68ac](https://github.com/mkayander/dStruct/commit/9ec68ac23a1981946bf44065e97932df4faf8952))
+- correct azimuthal and polar angle calculations in DashboardPage ([af976d3](https://github.com/mkayander/dStruct/commit/af976d3878ea0859de9be20a7e6f68bf2b1363a9))
+- improve playground slug handling in usePlaygroundSlugs hook ([9ec68ac](https://github.com/mkayander/dStruct/commit/9ec68ac23a1981946bf44065e97932df4faf8952))
 
 ## [1.351.1](https://github.com/mkayander/dStruct/compare/v1.351.0...v1.351.1) (2026-02-23)
 
-
 ### Bug Fixes
 
-* **deps:** update axios to version 1.13.5 ([5de442b](https://github.com/mkayander/dStruct/commit/5de442b22420994c80deb37f7de741edd18f6956))
-* **deps:** update testing-library and semantic-release versions ([eb10134](https://github.com/mkayander/dStruct/commit/eb10134ae68dc2f72011d043e3013fc934e24d9d))
+- **deps:** update axios to version 1.13.5 ([5de442b](https://github.com/mkayander/dStruct/commit/5de442b22420994c80deb37f7de741edd18f6956))
+- **deps:** update testing-library and semantic-release versions ([eb10134](https://github.com/mkayander/dStruct/commit/eb10134ae68dc2f72011d043e3013fc934e24d9d))
 
 # [1.351.0](https://github.com/mkayander/dStruct/compare/v1.350.0...v1.351.0) (2026-02-23)
 
-
 ### Bug Fixes
 
-* add DATABASE_URL to GitHub Actions workflow ([d5a0835](https://github.com/mkayander/dStruct/commit/d5a0835e5d50b4823c8e6701cbd3caa639a3d7e5))
-
+- add DATABASE_URL to GitHub Actions workflow ([d5a0835](https://github.com/mkayander/dStruct/commit/d5a0835e5d50b4823c8e6701cbd3caa639a3d7e5))
 
 ### Features
 
-* **emotion:** integrate Emotion for styling and hydration consistency ([be282ad](https://github.com/mkayander/dStruct/commit/be282adaa1ff1d0c59e5892cf3ed407f8c0ded93))
-* **encryption:** implement field-level encryption for Prisma ([44875d7](https://github.com/mkayander/dStruct/commit/44875d7b54a148ef4d634cd9448cee0b444ab646))
-* **prisma:** implement date serialization extension for Prisma ([eb280f9](https://github.com/mkayander/dStruct/commit/eb280f97622acf3cd20b8db21d547c21ac35aa3b))
+- **emotion:** integrate Emotion for styling and hydration consistency ([be282ad](https://github.com/mkayander/dStruct/commit/be282adaa1ff1d0c59e5892cf3ed407f8c0ded93))
+- **encryption:** implement field-level encryption for Prisma ([44875d7](https://github.com/mkayander/dStruct/commit/44875d7b54a148ef4d634cd9448cee0b444ab646))
+- **prisma:** implement date serialization extension for Prisma ([eb280f9](https://github.com/mkayander/dStruct/commit/eb280f97622acf3cd20b8db21d547c21ac35aa3b))
 
 # [1.350.0](https://github.com/mkayander/dStruct/compare/v1.349.0...v1.350.0) (2026-01-11)
 
-
 ### Bug Fixes
 
-* adjust height and distance parameters in Dashboard and LogoModelView components ([b306932](https://github.com/mkayander/dStruct/commit/b306932d41bba296ca78768b399928a1b65ecce9))
-
+- adjust height and distance parameters in Dashboard and LogoModelView components ([b306932](https://github.com/mkayander/dStruct/commit/b306932d41bba296ca78768b399928a1b65ecce9))
 
 ### Features
 
-* **treeViewer:** add ControlsOverlay component for enhanced user interaction ([97ddac5](https://github.com/mkayander/dStruct/commit/97ddac5a6245a711cbaa453fa28502eb9b89873a))
+- **treeViewer:** add ControlsOverlay component for enhanced user interaction ([97ddac5](https://github.com/mkayander/dStruct/commit/97ddac5a6245a711cbaa453fa28502eb9b89873a))
 
 # [1.349.0](https://github.com/mkayander/dStruct/compare/v1.348.0...v1.349.0) (2026-01-10)
 
-
 ### Features
 
-* **deps:** update dependencies and improve component styling ([a326593](https://github.com/mkayander/dStruct/commit/a3265937f1c1715e35f13a21cf0814bc5a9741ed))
+- **deps:** update dependencies and improve component styling ([a326593](https://github.com/mkayander/dStruct/commit/a3265937f1c1715e35f13a21cf0814bc5a9741ed))
 
 # [1.348.0](https://github.com/mkayander/dStruct/compare/v1.347.0...v1.348.0) (2026-01-10)
 
-
 ### Features
 
-* **deps:** update [@trpc](https://github.com/trpc) packages to version 11.8.1 and bump pnpm to 10.28.0 ([fa436ba](https://github.com/mkayander/dStruct/commit/fa436bab247b1cdec97bd59695f138fe86ee0436))
+- **deps:** update [@trpc](https://github.com/trpc) packages to version 11.8.1 and bump pnpm to 10.28.0 ([fa436ba](https://github.com/mkayander/dStruct/commit/fa436bab247b1cdec97bd59695f138fe86ee0436))
 
 # [1.347.0](https://github.com/mkayander/dStruct/compare/v1.346.0...v1.347.0) (2026-01-10)
 
-
 ### Features
 
-* update footer copyright year to 2026 ([9a6d839](https://github.com/mkayander/dStruct/commit/9a6d8396949a084529544d87994a35dc2531aff0))
+- update footer copyright year to 2026 ([9a6d839](https://github.com/mkayander/dStruct/commit/9a6d8396949a084529544d87994a35dc2531aff0))
 
 # [1.346.0](https://github.com/mkayander/dStruct/compare/v1.345.1...v1.346.0) (2025-12-07)
 
-
 ### Features
 
-* update node engine version to ^v24.11.1 in package.json ([f283950](https://github.com/mkayander/dStruct/commit/f283950c2eae2538da678515726c91349310d295))
-* update package manager version to pnpm@10.24.0 in package.json ([8d0d50f](https://github.com/mkayander/dStruct/commit/8d0d50fff02b46a3f65beff92e27868043996bd7))
+- update node engine version to ^v24.11.1 in package.json ([f283950](https://github.com/mkayander/dStruct/commit/f283950c2eae2538da678515726c91349310d295))
+- update package manager version to pnpm@10.24.0 in package.json ([8d0d50f](https://github.com/mkayander/dStruct/commit/8d0d50fff02b46a3f65beff92e27868043996bd7))
 
 ## [1.345.1](https://github.com/mkayander/dStruct/compare/v1.345.0...v1.345.1) (2025-11-23)
 
-
 ### Bug Fixes
 
-* upgrade es-guard to version 1.18.1 ([e306d3a](https://github.com/mkayander/dStruct/commit/e306d3a9d79116d1972ae71aeff4c7f99d7d2eb9))
+- upgrade es-guard to version 1.18.1 ([e306d3a](https://github.com/mkayander/dStruct/commit/e306d3a9d79116d1972ae71aeff4c7f99d7d2eb9))
 
 # [1.345.0](https://github.com/mkayander/dStruct/compare/v1.344.0...v1.345.0) (2025-11-23)
 
-
 ### Features
 
-* update dependencies and Next.js configuration ([8678f6f](https://github.com/mkayander/dStruct/commit/8678f6f0ae9b05dc68c1b81d9e112a269f9727ad))
+- update dependencies and Next.js configuration ([8678f6f](https://github.com/mkayander/dStruct/commit/8678f6f0ae9b05dc68c1b81d9e112a269f9727ad))
 
 # [1.344.0](https://github.com/mkayander/dStruct/compare/v1.343.0...v1.344.0) (2025-11-20)
 
-
 ### Bug Fixes
 
-* change AppBar position to sticky for improved layout ([7c0debf](https://github.com/mkayander/dStruct/commit/7c0debf96ae9099954985e3d382c0e4f76950c26))
-* enhance CodePanel functionality and update projectOwnerProcedure ([14dafa7](https://github.com/mkayander/dStruct/commit/14dafa7fe5821919d69fdf8f2487a63df7bb9d03))
-* enhance ESLint configuration for MUI import restrictions ([3d1962f](https://github.com/mkayander/dStruct/commit/3d1962f2f439ef230ea891c6d040fd0caebdbd15))
-* expand transpilePackages in Next.js configuration ([e98003c](https://github.com/mkayander/dStruct/commit/e98003cfb6a992d56224ef6bbff3abb1c1d68395))
-* simplify MainAppBar links and integrate code formatting API ([8215a89](https://github.com/mkayander/dStruct/commit/8215a8999bde49c4c40541375a5e6e07db45b790))
-* SKIP_ENV_VALIDATION on CI ([f719c3a](https://github.com/mkayander/dStruct/commit/f719c3a24944ab56325d87a53cae5c0c9602136e))
-* update ES Guard command in CI workflow ([136a0cf](https://github.com/mkayander/dStruct/commit/136a0cf3fc02c0e0da85dbd4eb83c1e5e68e236a))
-
+- change AppBar position to sticky for improved layout ([7c0debf](https://github.com/mkayander/dStruct/commit/7c0debf96ae9099954985e3d382c0e4f76950c26))
+- enhance CodePanel functionality and update projectOwnerProcedure ([14dafa7](https://github.com/mkayander/dStruct/commit/14dafa7fe5821919d69fdf8f2487a63df7bb9d03))
+- enhance ESLint configuration for MUI import restrictions ([3d1962f](https://github.com/mkayander/dStruct/commit/3d1962f2f439ef230ea891c6d040fd0caebdbd15))
+- expand transpilePackages in Next.js configuration ([e98003c](https://github.com/mkayander/dStruct/commit/e98003cfb6a992d56224ef6bbff3abb1c1d68395))
+- simplify MainAppBar links and integrate code formatting API ([8215a89](https://github.com/mkayander/dStruct/commit/8215a8999bde49c4c40541375a5e6e07db45b790))
+- SKIP_ENV_VALIDATION on CI ([f719c3a](https://github.com/mkayander/dStruct/commit/f719c3a24944ab56325d87a53cae5c0c9602136e))
+- update ES Guard command in CI workflow ([136a0cf](https://github.com/mkayander/dStruct/commit/136a0cf3fc02c0e0da85dbd4eb83c1e5e68e236a))
 
 ### Features
 
-* add new project margin calculation and isNew flag for projects ([7f19d55](https://github.com/mkayander/dStruct/commit/7f19d5591a260960cd8f0f6dda3598db7032d181))
-* add ProjectBrowser design document and TODO list ([7491678](https://github.com/mkayander/dStruct/commit/7491678b079b05721214d2153b73ee71e1959b62))
-* enhance MainAppBar and MainLayout for improved layout flexibility ([5fe2971](https://github.com/mkayander/dStruct/commit/5fe2971931c21987c10e166002afbaff08e39f09))
-* enhance mouse interaction for 3D model controls ([a0d6633](https://github.com/mkayander/dStruct/commit/a0d6633d205e181852a0062be2944afb5fa6404b))
-* enhance ProjectBrowser layout for mobile responsiveness ([f8adf58](https://github.com/mkayander/dStruct/commit/f8adf58e0964caaf879f843d15706a04816053e7))
-* enhance ProjectBrowser with accumulated projects and improved filtering ([e20d1cd](https://github.com/mkayander/dStruct/commit/e20d1cd7ce23ea71dc16a9cb5df12024d6ea248c))
-* enhance ProjectBrowser with loading skeletons and UI adjustments ([2a2c1ea](https://github.com/mkayander/dStruct/commit/2a2c1ea04350dc38cc0ce923a8faded97db50095))
-* implement ProjectBrowser component with advanced filtering and pagination ([cae6e68](https://github.com/mkayander/dStruct/commit/cae6e68b0687e860d6b0089933322cbb4fd569f3))
-* implement ProjectBrowser context for global URL state management ([3855159](https://github.com/mkayander/dStruct/commit/38551595f205e1a447d8880836f10d8691143a07))
-* implement ProjectInfo component for project details display ([29eb2af](https://github.com/mkayander/dStruct/commit/29eb2af7a2ed118c45cfd1a8c372721ca05cd63d))
-* remove unused files and dependencies for cleaner codebase ([f53a2b1](https://github.com/mkayander/dStruct/commit/f53a2b16fad3a3efb2e7a32246b90d6423e7927d))
-* update dependencies and ESLint configuration ([335c1dd](https://github.com/mkayander/dStruct/commit/335c1dd85be0ab3e4b97ff04d6d31be7b014981e))
-* update dependencies and refactor project structure ([f7c7341](https://github.com/mkayander/dStruct/commit/f7c73419ee3d8eed3c362b20636f8bfb9662507f))
-* update GitHub Actions workflow to include build and ES Guard steps ([36a9dde](https://github.com/mkayander/dStruct/commit/36a9ddec29c8a4f32065bca055288911f39c3d43))
-* update MainAppBar position and enhance Dashboard layout ([4b59970](https://github.com/mkayander/dStruct/commit/4b59970824755e78edf005607f3867486c6edb5f))
-* update package dependencies for improved stability and performance ([5e800e1](https://github.com/mkayander/dStruct/commit/5e800e19ac3854fc6c7a08c8d3227f6bebbaf372))
+- add new project margin calculation and isNew flag for projects ([7f19d55](https://github.com/mkayander/dStruct/commit/7f19d5591a260960cd8f0f6dda3598db7032d181))
+- add ProjectBrowser design document and TODO list ([7491678](https://github.com/mkayander/dStruct/commit/7491678b079b05721214d2153b73ee71e1959b62))
+- enhance MainAppBar and MainLayout for improved layout flexibility ([5fe2971](https://github.com/mkayander/dStruct/commit/5fe2971931c21987c10e166002afbaff08e39f09))
+- enhance mouse interaction for 3D model controls ([a0d6633](https://github.com/mkayander/dStruct/commit/a0d6633d205e181852a0062be2944afb5fa6404b))
+- enhance ProjectBrowser layout for mobile responsiveness ([f8adf58](https://github.com/mkayander/dStruct/commit/f8adf58e0964caaf879f843d15706a04816053e7))
+- enhance ProjectBrowser with accumulated projects and improved filtering ([e20d1cd](https://github.com/mkayander/dStruct/commit/e20d1cd7ce23ea71dc16a9cb5df12024d6ea248c))
+- enhance ProjectBrowser with loading skeletons and UI adjustments ([2a2c1ea](https://github.com/mkayander/dStruct/commit/2a2c1ea04350dc38cc0ce923a8faded97db50095))
+- implement ProjectBrowser component with advanced filtering and pagination ([cae6e68](https://github.com/mkayander/dStruct/commit/cae6e68b0687e860d6b0089933322cbb4fd569f3))
+- implement ProjectBrowser context for global URL state management ([3855159](https://github.com/mkayander/dStruct/commit/38551595f205e1a447d8880836f10d8691143a07))
+- implement ProjectInfo component for project details display ([29eb2af](https://github.com/mkayander/dStruct/commit/29eb2af7a2ed118c45cfd1a8c372721ca05cd63d))
+- remove unused files and dependencies for cleaner codebase ([f53a2b1](https://github.com/mkayander/dStruct/commit/f53a2b16fad3a3efb2e7a32246b90d6423e7927d))
+- update dependencies and ESLint configuration ([335c1dd](https://github.com/mkayander/dStruct/commit/335c1dd85be0ab3e4b97ff04d6d31be7b014981e))
+- update dependencies and refactor project structure ([f7c7341](https://github.com/mkayander/dStruct/commit/f7c73419ee3d8eed3c362b20636f8bfb9662507f))
+- update GitHub Actions workflow to include build and ES Guard steps ([36a9dde](https://github.com/mkayander/dStruct/commit/36a9ddec29c8a4f32065bca055288911f39c3d43))
+- update MainAppBar position and enhance Dashboard layout ([4b59970](https://github.com/mkayander/dStruct/commit/4b59970824755e78edf005607f3867486c6edb5f))
+- update package dependencies for improved stability and performance ([5e800e1](https://github.com/mkayander/dStruct/commit/5e800e19ac3854fc6c7a08c8d3227f6bebbaf372))
 
 # [1.343.0](https://github.com/mkayander/dStruct/compare/v1.342.0...v1.343.0) (2025-07-08)
 
