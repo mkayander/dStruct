@@ -206,8 +206,11 @@ export const useCodeExecution = (
             treeStore,
           });
         } else {
-          const caseArgs = selectCaseArguments(store.getState());
-          const args = createPythonRuntimeArgs(caseArgs);
+          const state = store.getState();
+          const caseArgs = selectCaseArguments(state);
+          const args = createPythonRuntimeArgs(caseArgs, {
+            treeNode: state.treeNode,
+          });
           return await runPythonCode(codeInput, args);
         }
       }),
