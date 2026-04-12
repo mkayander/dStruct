@@ -375,7 +375,10 @@ export const selectPlaybackSourceLine = createSelector(
     const { frameIndex, frames } = callstack;
     if (frameIndex < 0) return null;
     const all = rootSelectors.selectAll(frames);
-    for (let i = frameIndex; i >= 0; i -= 1) {
+    if (all.length === 0) return null;
+    // frameIndex can be briefly out of range (e.g. stale UI vs new frames); avoid undefined access.
+    const safeIndex = Math.min(frameIndex, all.length - 1);
+    for (let i = safeIndex; i >= 0; i -= 1) {
       const frame = all[i];
       if (
         frame &&

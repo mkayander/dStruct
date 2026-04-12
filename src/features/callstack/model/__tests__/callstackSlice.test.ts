@@ -84,6 +84,35 @@ describe("callstackSlice", () => {
     expect(selectPlaybackSourceLine(store.getState())).toBeNull();
   });
 
+  it("selectPlaybackSourceLine clamps frameIndex when it exceeds frames length", () => {
+    const store = makeStore();
+    store.dispatch(
+      callstackSlice.actions.setStatus({
+        isReady: true,
+        error: null,
+        result: "",
+        runtime: 1,
+        startTimestamp: 0,
+        frames: [
+          {
+            id: "a",
+            timestamp: 0,
+            treeName: "main",
+            structureType: "treeNode",
+            argType: ArgumentType.BINARY_TREE,
+            nodeId: "n1",
+            name: "blink",
+            source: { line: 10 },
+          },
+        ],
+        lastRunCodeSource: "x",
+        codeModifiedSinceRun: false,
+      }),
+    );
+    store.dispatch(callstackSlice.actions.setFrameIndex(99));
+    expect(selectPlaybackSourceLine(store.getState())).toBe(10);
+  });
+
   it("selectPlaybackSourceLine is null when frameIndex is -1", () => {
     const store = makeStore();
     store.dispatch(

@@ -185,7 +185,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
   // Handle code errors
   useEffect(() => {
-    if (!monacoInstance || !textModel) return;
+    if (!monacoInstance || !textModel || textModel.isDisposed()) return;
     if (!error) {
       monacoInstance.editor.setModelMarkers(
         textModel,
@@ -221,16 +221,18 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       }
     }
 
-    monacoInstance.editor.setModelMarkers(textModel, "javascript", [
-      {
-        severity: monacoInstance.MarkerSeverity.Error,
-        message: `${error.name}: ${error.message}`,
-        startLineNumber,
-        endLineNumber,
-        startColumn,
-        endColumn,
-      },
-    ]);
+    if (!textModel.isDisposed()) {
+      monacoInstance.editor.setModelMarkers(textModel, "javascript", [
+        {
+          severity: monacoInstance.MarkerSeverity.Error,
+          message: `${error.name}: ${error.message}`,
+          startLineNumber,
+          endLineNumber,
+          startColumn,
+          endColumn,
+        },
+      ]);
+    }
   }, [editorInstance, error, monacoInstance, textModel]);
 
   // Callstack playback: highlight current source line (cleared when buffer diverges from last run)
@@ -258,10 +260,18 @@ export const CodePanel: React.FC<CodePanelProps> = ({
           ]
         : [];
 
-    playbackDecorationsRef.current = editorInstance.deltaDecorations(
-      playbackDecorationsRef.current,
-      nextDecorations,
-    );
+    try {
+      if (editorInstance.getModel() !== textModel) {
+        playbackDecorationsRef.current = [];
+        return;
+      }
+      playbackDecorationsRef.current = editorInstance.deltaDecorations(
+        playbackDecorationsRef.current,
+        nextDecorations,
+      );
+    } catch {
+      playbackDecorationsRef.current = [];
+    }
   }, [editorInstance, monacoInstance, playbackSourceLine, textModel]);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
