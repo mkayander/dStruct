@@ -32,6 +32,14 @@ import {
 const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
   switch (category) {
     case ProjectCategory.ARRAY:
+    case ProjectCategory.HEAP:
+    case ProjectCategory.STACK:
+    case ProjectCategory.TWO_POINTERS:
+    case ProjectCategory.BINARY_SEARCH:
+    case ProjectCategory.SLIDING_WINDOW:
+    case ProjectCategory.BACKTRACKING:
+    case ProjectCategory.DYNAMIC_PROGRAMMING:
+    case ProjectCategory.BIT_MANIPULATION:
       return {
         array: {
           name: "array",
@@ -42,6 +50,7 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
       };
 
     case ProjectCategory.BINARY_TREE:
+    case ProjectCategory.BST:
       return {
         head: {
           name: "head",
@@ -58,6 +67,46 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
           order: 0,
           type: ArgumentType.LINKED_LIST,
           input: "[1,2,3]",
+        },
+      };
+
+    case ProjectCategory.GRAPH:
+      return {
+        graph: {
+          name: "graph",
+          order: 0,
+          type: ArgumentType.GRAPH,
+          input: "[[0,1],[1,2]]",
+        },
+      };
+
+    case ProjectCategory.GRID:
+      return {
+        grid: {
+          name: "grid",
+          order: 0,
+          type: ArgumentType.MATRIX,
+          input: "[[1,2,3],[4,5,6]]",
+        },
+      };
+
+    case ProjectCategory.TRIE:
+      return {
+        word: {
+          name: "word",
+          order: 0,
+          type: ArgumentType.STRING,
+          input: "leetcode",
+        },
+      };
+
+    case ProjectCategory.MATH:
+      return {
+        n: {
+          name: "n",
+          order: 0,
+          type: ArgumentType.NUMBER,
+          input: "1",
         },
       };
 
