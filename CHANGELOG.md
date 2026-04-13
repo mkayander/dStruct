@@ -1,3 +1,15 @@
+# [1.376.0](https://github.com/mkayander/dStruct/compare/v1.375.0...v1.376.0) (2026-04-13)
+
+
+### Bug Fixes
+
+* repair load-env for postinstall (dotenv-cli requires a command) ([#126](https://github.com/mkayander/dStruct/issues/126)) ([723e66a](https://github.com/mkayander/dStruct/commit/723e66ac970548c2ebaaa7799049439c08677414))
+
+
+### Features
+
+* **public-dumps:** add new problem entries for various data structures and algorithms ([28ddf2e](https://github.com/mkayander/dStruct/commit/28ddf2e91d8e3f954112979bed3ebb45679ff5b8))
+
 # [1.375.0](https://github.com/mkayander/dStruct/compare/v1.374.3...v1.375.0) (2026-04-12)
 
 
