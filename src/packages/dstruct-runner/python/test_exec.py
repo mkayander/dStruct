@@ -62,6 +62,24 @@ def double(y):
         self.assertIsNone(result["error"])
         self.assertIn("42", result["output"])
 
+    def test_tracked_list_iteration_does_not_recurse(self) -> None:
+        # List literal is rewritten to TrackedList by ListTrackingTransformer.
+        code = """
+def run():
+    total = 0
+    for value in [1, 2, 3]:
+        total += value
+    print(total)
+    return total
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        self.assertIn("6", result["output"])
+        read_frames = [
+            frame for frame in result["callstack"] if frame["name"] == "readArrayItem"
+        ]
+        self.assertGreaterEqual(len(read_frames), 3)
+
 
 if __name__ == "__main__":
     unittest.main()
