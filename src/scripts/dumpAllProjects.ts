@@ -1,4 +1,4 @@
-// Environment: `pnpm run dumpAllProjects` uses dotenv-cli (`-e .env` then `-e .env.local`) so
+// Environment: `pnpm run dumpAllProjects` uses `load-env` (`loadEnvAndRun.ts`: `.env` then `.env.local`) so
 // variables exist before `tsx` runs and `#/env/server.mjs` is validated.
 import { promises as fs } from "fs";
 import minimist from "minimist";
