@@ -27805,7 +27805,7 @@
     "clsg5wnhj0003yl25nlnmhr09": {
       "id": "clsg5wnhj0003yl25nlnmhr09",
       "createdAt": "2024-02-10T14:18:51.751Z",
-      "updatedAt": "2024-02-11T14:30:10.338Z",
+      "updatedAt": "2026-04-14T12:00:00.000Z",
       "projectId": "clsg5wnhj0001yl252fss1tds",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -27813,7 +27813,7 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar countSubstrings = function (s) {\n  let result = 0;\n\n  const countFromCenter = (i, j) => {\n    let count = 0;\n\n    while (i >= 0 && j < s.length) {\n      if (s[i] !== s[j]) break;\n\n      i--;\n      j++;\n      count++;\n    }\n\n    return count;\n  };\n\n  for (let i = 0; i < s.length; i++) {\n    result += countFromCenter(i, i);\n    result += countFromCenter(i, i + 1);\n  }\n\n  return result;\n};\n\nreturn countSubstrings;\n",
-      "pythonCode": "class Soulution:\r\n  def main():\r\n    print(1 + 2)\r\n",
+      "pythonCode": "def count_palindromes(arg_2xRAG3Lfa9HWaf1vRYL9k3):\r\n  total = 0\r\n\r\n  def expand(left, right):\r\n    nonlocal total\r\n    while left >= 0 and right < len(arg_2xRAG3Lfa9HWaf1vRYL9k3):\r\n      if arg_2xRAG3Lfa9HWaf1vRYL9k3[left] != arg_2xRAG3Lfa9HWaf1vRYL9k3[right]:\r\n        break\r\n      total += 1\r\n      left -= 1\r\n      right += 1\r\n\r\n  for index in range(len(arg_2xRAG3Lfa9HWaf1vRYL9k3)):\r\n    expand(index, index)\r\n    expand(index, index + 1)\r\n  return total\r\n",
       "order": 0
     },
     "clsj2rzzk0003coyk5e290e9y": {
@@ -29695,7 +29695,7 @@
     "cmaifj9yu0003jq040xkn5m33": {
       "id": "cmaifj9yu0003jq040xkn5m33",
       "createdAt": "2025-05-10T16:18:38.262Z",
-      "updatedAt": "2025-05-12T16:19:20.530Z",
+      "updatedAt": "2026-04-14T12:00:00.000Z",
       "projectId": "cmaifj9yt0001jq042spmpxhe",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -29703,7 +29703,7 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function getArraySum(array) {\n  let sum = 0;\n  for (var i = 0; i < array.length; i++) {\n      sum += array[i];\n      array.setColor(i, \"green\");\n  }\n  return sum;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
-      "pythonCode": "class Solution:\n    def minSum(self, nums1: List[int], nums2: List[int]) -> int:\n        sum1 = sum(nums1)\n        zeroCount1 = nums1.count(0)\n\n        sum2 = sum(nums2)\n        zeroCount2 = nums2.count(0)\n\n        if zeroCount1 == 0 and zeroCount2 == 0:\n            if sum1 == sum2:\n                return sum1\n            else:\n                return -1\n\n        if zeroCount2 == 0:\n            if sum1 + zeroCount1 > sum2:\n                return -1\n            else:\n                return sum2\n\n        if zeroCount1 == 0:\n            if sum2 + zeroCount2 > sum1:\n                return -1\n            else:\n                return sum1\n\n        return max(sum1 + zeroCount1, sum2 + zeroCount2)\n",
+      "pythonCode": "def run(array):\r\n  total = 0\r\n  for idx in range(len(array)):\r\n    total += array[idx]\r\n  return total\r\n",
       "order": 0
     },
     "cluo4h2tx0003rsrn39bmji6i": {
@@ -30143,7 +30143,7 @@
     "cmalaj3zi0003l704loyxl1pg": {
       "id": "cmalaj3zi0003l704loyxl1pg",
       "createdAt": "2025-05-12T16:21:50.957Z",
-      "updatedAt": "2025-06-09T18:34:46.784Z",
+      "updatedAt": "2026-04-14T12:00:00.000Z",
       "projectId": "cmalaj3zg0001l704hmqnjyr1",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -30151,7 +30151,7 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {ArrayProxyObject} array\n */\nreturn function getArraySum(array) {\n  let sum = 0;\n  for (var i = 0; i < array.length; i++) {\n      sum += array[i];\n      array.setColor(i, \"green\");\n  }\n  return sum;\n};\n\n/**\n * Definitions for ArrayProxy.\n *\n * @typedef {number[] & {\n *   setColor(index: number, color: string): void\n * }} ArrayProxyObject\n */\n",
-      "pythonCode": "class Solution:\n    def findEvenNumbers(self, digits: List[int]) -> List[int]:\n        n = len(digits)\n        result = set()\n\n        seenEvens = set()\n        evens = []\n        for i in range(n):\n            if digits[i] % 2 == 0 and digits[i] not in seenEvens:\n                seenEvens.add(digits[i])\n                evens.append(i)\n\n        for lastIdx in evens:\n            last = digits[lastIdx]\n            for i in range(n):\n                if lastIdx == i:\n                    continue\n\n                second = digits[i]\n                for j in range(n):\n                    first = digits[j]\n                    if i == j or lastIdx == j or first is None or first == 0:\n                        continue\n\n                    num = (first * 100) + (second * 10) + last\n                    result.add(num)\n\n        return sorted(list(result))\n",
+      "pythonCode": "def run(array):\r\n  length = len(array)\r\n  found = set()\r\n  seen_even_values = set()\r\n  even_indices = []\r\n  for index in range(length):\r\n    value = int(array[index])\r\n    if value % 2 == 0 and value not in seen_even_values:\r\n      seen_even_values.add(value)\r\n      even_indices.append(index)\r\n  for last_index in even_indices:\r\n    last = int(array[last_index])\r\n    for middle_index in range(length):\r\n      if middle_index == last_index:\r\n        continue\r\n      second = int(array[middle_index])\r\n      for first_index in range(length):\r\n        if first_index == middle_index or first_index == last_index:\r\n          continue\r\n        first = int(array[first_index])\r\n        if first == 0:\r\n          continue\r\n        number = first * 100 + second * 10 + last\r\n        found.add(number)\r\n  return sorted(found)\r\n",
       "order": 0
     },
     "clon81vmi0001mp0g7t3envq8": {
@@ -31739,7 +31739,7 @@
     "cm2t1sfb70003wl9qubalhq1e": {
       "id": "cm2t1sfb70003wl9qubalhq1e",
       "createdAt": "2024-10-28T13:21:39.714Z",
-      "updatedAt": "2024-10-30T17:41:45.893Z",
+      "updatedAt": "2026-04-14T12:00:00.000Z",
       "projectId": "cm2t1sfb70001wl9q8p7qrvic",
       "title": "Union Find",
       "slug": "union-find",
@@ -31747,7 +31747,7 @@
       "spaceComplexity": "O(n)",
       "description": "",
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar longestSquareStreak = function (nums) {\n  const graph = new UnionFind();\n\n  for (let i = 0; i < nums.length; i++) {\n    const num = nums[i];\n    nums.setColor(i, \"green\");\n    graph.initNode(num);\n\n    const prev = Math.sqrt(num);\n    const next = num ** 2;\n\n    graph.union(prev, num);\n    graph.union(num, next);\n  }\n\n  return graph.maxSize;\n};\n\nclass UnionFind extends Object {\n  constructor() {\n    super()\n    this.ranks = new Map();\n    this.pars = new Map();\n    this.maxSize = -1;\n  }\n\n  initNode(num) {\n    if (this.ranks.has(num)) return;\n\n    this.ranks.set(num, 1);\n    this.pars.set(num, num);\n  }\n\n  find(num) {\n    let parent = this.pars.get(num);\n    while (parent !== this.pars.get(parent)) {\n      parent = this.pars.get(this.pars.get(parent));\n    }\n\n    return parent;\n  }\n\n  union(a, b) {\n    if (!this.ranks.has(a) || !this.ranks.has(b)) return false;\n\n    let child = this.find(a);\n    let parent = this.find(b);\n\n    if (child === parent) return false;\n\n    if (this.ranks.get(child) > this.ranks.get(parent)) {\n      [child, parent] = [parent, child];\n    }\n\n    this.ranks.set(parent, this.ranks.get(parent) + this.ranks.get(child));\n    this.ranks.set(child, 0);\n    this.pars.set(child, parent);\n    this.maxSize = Math.max(this.maxSize, this.ranks.get(parent));\n\n    return true;\n  }\n}\n\nreturn longestSquareStreak;\n",
-      "pythonCode": "class Solution:\r\n    def longestSquareStreak(self, nums: List[int]) -> int:\r\n        graph = UnionFind()\r\n\r\n        for num in nums:\r\n            graph.init_node(num)\r\n\r\n            prev = math.sqrt(num)\r\n            next_num = num ** 2\r\n\r\n            if prev.is_integer():\r\n                graph.union(prev, num)\r\n\r\n            graph.union(num, next_num)\r\n\r\n        return graph.max_size\r\n\r\nclass UnionFind:\r\n    def __init__(self):\r\n        self.ranks = {}\r\n        self.parents = {}\r\n        self.max_size = -1\r\n\r\n    def init_node(self, num):\r\n        if num in self.ranks:\r\n            return\r\n\r\n        self.ranks[num] = 1\r\n        self.parents[num] = num\r\n\r\n    def find(self, num):\r\n        parent = self.parents[num]\r\n        while parent != self.parents[parent]:\r\n            parent = self.parents[self.parents[parent]]\r\n\r\n        return parent\r\n\r\n    def union(self, a, b):\r\n        if a not in self.ranks or b not in self.ranks:\r\n            return False\r\n\r\n        child = self.find(a)\r\n        parent = self.find(b)\r\n\r\n        if child == parent:\r\n            return False\r\n\r\n        if self.ranks[child] > self.ranks[parent]:\r\n            child, parent = parent, child\r\n\r\n        self.parents[child] = parent\r\n        self.ranks[parent] += self.ranks[child]\r\n        self.ranks[child] = 0\r\n        self.max_size = max(self.max_size, self.ranks[parent])\r\n\r\n        return True\r\n",
+      "pythonCode": "def run(array):\r\n  values = []\r\n  for idx in range(len(array)):\r\n    values.append(int(array[idx]))\r\n  values.sort()\r\n  length_at = {}\r\n  best = -1\r\n  for value in values:\r\n    root = int(value**0.5)\r\n    if root * root == value and root in length_at:\r\n      length_at[value] = length_at[root] + 1\r\n    else:\r\n      length_at[value] = 1\r\n    if length_at[value] >= 2 and length_at[value] > best:\r\n      best = length_at[value]\r\n  return best\r\n",
       "order": 0
     }
   }
