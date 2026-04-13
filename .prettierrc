@@ -1,6 +1,7 @@
 {
   "semi": true,
   "singleQuote": false,
+  "endOfLine": "auto",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
     "^#/(api|components|entities|features|shared|shadcn|context|env|graphql|hooks|layouts|pages|server|types|utils|theme|store|i18n)/?(.*)$",
