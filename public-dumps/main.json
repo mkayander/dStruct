@@ -23661,7 +23661,7 @@
     "cldtcc6v30004l208nku3z7f2": {
       "id": "cldtcc6v30004l208nku3z7f2",
       "createdAt": "2023-02-06T21:44:19.647Z",
-      "updatedAt": "2026-04-13T00:00:00.000Z",
+      "updatedAt": "2026-04-13T12:00:00.000Z",
       "projectId": "cldtcc6v30001l2088ls4i85o",
       "title": "Solution 1",
       "slug": "solution-1",
@@ -23669,7 +23669,7 @@
       "spaceComplexity": null,
       "description": "Depth First Search solution",
       "code": "/**\r\n * @param {TreeNodeObject} tree\r\n */\r\nreturn function validateBst(tree) {\r\n   return dfs(tree, -Infinity, Infinity);\r\n}\r\n\r\n/**\r\n * @param {TreeNodeObject} node\r\n */\r\nfunction dfs(node, min, max) {\r\n  let left = true;\r\n  let right = true;\r\n\r\n  if (node.val >= max || node.val < min) {\r\n    node.setColor(\"red\");\r\n    return false;\r\n  }\r\n\r\n  node.setColor(\"green\");\r\n\r\n  if (node.left) {\r\n    left = dfs(node.left, min, node.val);\r\n  }\r\n  if (node.right) {\r\n    right = dfs(node.right, node.val, max);\r\n  }\r\n\r\n  node.setColor(\"cyan\");\r\n  \r\n  return left && right;\r\n}\r\n\r\n/**\r\n * Definitions for a binary tree node.\r\n *\r\n * @typedef {{\r\n *   val: number,\r\n *   left: TreeNodeObject,\r\n *   right: TreeNodeObject,\r\n *   setColor(color: string): void }\r\n * } TreeNodeObject\r\n *\r\n * @callback TreeNode\r\n * @param {number} val\r\n * @param {(TreeNodeObject | null)?} left\r\n * @param {(TreeNodeObject | null)?} right\r\n * @returns {TreeNodeObject}\r\n */\r\n",
-      "pythonCode": "def validate_bst(tree):\r\n  return _dfs(tree, float(\"-inf\"), float(\"inf\"))\r\n\r\n\r\ndef _set_color(node, color):\r\n  setter = getattr(node, \"setColor\", None)\r\n  if setter:\r\n    setter(color)\r\n\r\n\r\ndef _dfs(node, min_val, max_val):\r\n  left_ok = True\r\n  right_ok = True\r\n\r\n  if node.val >= max_val or node.val < min_val:\r\n    _set_color(node, \"red\")\r\n    return False\r\n\r\n  _set_color(node, \"green\")\r\n\r\n  if node.left:\r\n    left_ok = _dfs(node.left, min_val, node.val)\r\n  if node.right:\r\n    right_ok = _dfs(node.right, node.val, max_val)\r\n\r\n  _set_color(node, \"cyan\")\r\n  return left_ok and right_ok\r\n",
+      "pythonCode": "def validate_bst(tree):\r\n  return dfs(tree, float(\"-inf\"), float(\"inf\"))\r\n\r\n\r\ndef dfs(node, min_val, max_val):\r\n  left_ok = True\r\n  right_ok = True\r\n\r\n  if node.val >= max_val or node.val < min_val:\r\n    node.setColor(\"red\")\r\n    return False\r\n\r\n  node.setColor(\"green\")\r\n\r\n  if node.left:\r\n    left_ok = dfs(node.left, min_val, node.val)\r\n  if node.right:\r\n    right_ok = dfs(node.right, node.val, max_val)\r\n\r\n  node.setColor(\"cyan\")\r\n  return left_ok and right_ok\r\n",
       "order": 0
     },
     "cldtch88b0004mh08yi3bbfn0": {
