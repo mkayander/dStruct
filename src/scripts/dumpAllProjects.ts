@@ -1,12 +1,10 @@
-// Load environment variables from .env.local before any other imports
-// This must be imported first to ensure env vars are loaded before module evaluation
+// Environment: `pnpm run dumpAllProjects` uses dotenv-cli (`-e .env` then `-e .env.local`) so
+// variables exist before `tsx` runs and `#/env/server.mjs` is validated.
 import { promises as fs } from "fs";
 import minimist from "minimist";
 import slugify from "slugify";
 
 import { db } from "#/server/db/client";
-
-import "./load-env";
 
 type Args = { rewrite?: boolean };
 const argv = minimist<Args>(process.argv.slice(2));

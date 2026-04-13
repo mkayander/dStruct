@@ -16,9 +16,10 @@
     "check:es": "es-guard",
     "dev": "next dev",
     "postinstall": "tsx src/scripts/postinstall.ts",
-    "prisma:generate": "dotenv -e .env -e .env.local -- prisma generate && tsx prisma/scripts/generate-date-serialization.ts",
-    "prisma:push": "dotenv -e .env -e .env.local -- prisma db push",
-    "prisma:studio": "dotenv -e .env -e .env.local -- prisma studio",
+    "load-env": "dotenv -e .env -e .env.local",
+    "prisma:generate": "pnpm run load-env && prisma generate && tsx prisma/scripts/generate-date-serialization.ts",
+    "prisma:push": "pnpm run load-env && prisma db push",
+    "prisma:studio": "pnpm run load-env && prisma studio",
     "generate-graphql": "graphql-codegen --config codegen.yml",
     "tsc": "tsc --noEmit",
     "lint": "eslint . && pnpm run tsc",
@@ -30,8 +31,8 @@
     "semantic-release": "semantic-release",
     "lint-staged": "lint-staged",
     "typesafe-i18n": "typesafe-i18n",
-    "dumpAllProjects": "tsx src/scripts/dumpAllProjects.ts --rewrite",
-    "loadMainDump": "tsx src/scripts/loadProjects.ts public-dumps/main.json"
+    "dumpAllProjects": "pnpm run load-env && cross-env NODE_ENV=development tsx src/scripts/dumpAllProjects.ts --rewrite",
+    "loadMainDump": "pnpm run load-env && cross-env NODE_ENV=development tsx src/scripts/loadProjects.ts public-dumps/main.json"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
