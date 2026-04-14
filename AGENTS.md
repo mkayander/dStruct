@@ -51,6 +51,7 @@ The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.jso
 
 ### Public playground dump (`public-dumps/main.json`)
 
+- **GitHub Actions does not run** dump helpers (`sync-main-dump`, `fill-dump-python`, `upgrade-dump-python`, `validate-main-dump`, `loadMainDump`, etc.). Those are **manual** only.
 - **`pnpm loadMainDump`** upserts everything in that file into the DB pointed at by **`DATABASE_URL`**. Running it against prod **overwrites** matching rows by id, so anything only in the file and not in prod can be lost if you do not refresh the file first.
 - **Refresh the file from prod (recommended before shipping dump changes or before loading to prod after prod edits):** point **`DATABASE_URL`** at production (or use a prod read replica), then run **`pnpm sync-main-dump`**. That runs `dumpAllProjects` with **`--public-only`**, rewriting **`public-dumps/main.json`** with only **`isPublic`** playground projects and their test cases and solutions.
 - **Full DB export** (all projects, not only public): `pnpm dumpAllProjects` (writes `public-dumps/main.json` when using `--rewrite` without `--public-only`).
