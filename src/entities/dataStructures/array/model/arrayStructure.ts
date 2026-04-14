@@ -19,6 +19,8 @@ const ArrayBase = makeArrayBaseClass(Array);
 export type ControlledArrayRuntimeOptions = {
   length?: number;
   colorMap?: Record<string, string>;
+  /** User source variable name (inferred by AST); shown as a viewer label, not the internal tree id. */
+  displayLabel?: string;
 };
 
 export function initControlledArray<T extends ArrayBaseType>(
