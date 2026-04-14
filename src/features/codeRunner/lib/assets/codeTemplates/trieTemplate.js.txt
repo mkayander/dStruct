@@ -1,0 +1,14 @@
+/**
+ * @param {string & {
+ *   length: number,
+ *   setColor(index: number, color: string): void
+ * }} word
+ */
+return function wordLength(word) {
+  let count = 0;
+  for (let index = 0; index < word.length; index++) {
+    word.setColor(index, "green");
+    count++;
+  }
+  return count;
+};

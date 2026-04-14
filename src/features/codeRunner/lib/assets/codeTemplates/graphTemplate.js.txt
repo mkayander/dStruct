@@ -1,0 +1,6 @@
+/**
+ * @param {number[][]} graph  Edge list: each item is [u, v] (or adjacency payload from the case).
+ */
+return function graphEdgeCount(graph) {
+  return graph.length;
+};

@@ -4,11 +4,15 @@ import defaultArrayTemplate from "./assets/codeTemplates/arrayTemplate.js.txt";
 import defaultArrayTemplatePython from "./assets/codeTemplates/arrayTemplate.py.txt";
 import defaultBinaryTreeTemplate from "./assets/codeTemplates/binaryTreeTemplate.js.txt";
 import defaultBinaryTreeTemplatePython from "./assets/codeTemplates/binaryTreeTemplate.py.txt";
+import graphTemplate from "./assets/codeTemplates/graphTemplate.js.txt";
 import graphTemplatePython from "./assets/codeTemplates/graphTemplate.py.txt";
+import gridTemplate from "./assets/codeTemplates/gridTemplate.js.txt";
 import gridTemplatePython from "./assets/codeTemplates/gridTemplate.py.txt";
 import linkedListTemplate from "./assets/codeTemplates/linkedListTemplate.js.txt";
 import linkedListTemplatePython from "./assets/codeTemplates/linkedListTemplate.py.txt";
+import mathTemplate from "./assets/codeTemplates/mathTemplate.js.txt";
 import mathTemplatePython from "./assets/codeTemplates/mathTemplate.py.txt";
+import trieTemplate from "./assets/codeTemplates/trieTemplate.js.txt";
 import trieTemplatePython from "./assets/codeTemplates/trieTemplate.py.txt";
 
 type CodeLanguageProp =
@@ -35,22 +39,22 @@ const linkedListCodeContent: CodeContent = {
 };
 
 const graphCodeContent: CodeContent = {
-  code: defaultArrayTemplate,
+  code: graphTemplate,
   pythonCode: graphTemplatePython,
 };
 
 const gridCodeContent: CodeContent = {
-  code: defaultArrayTemplate,
+  code: gridTemplate,
   pythonCode: gridTemplatePython,
 };
 
 const trieCodeContent: CodeContent = {
-  code: defaultArrayTemplate,
+  code: trieTemplate,
   pythonCode: trieTemplatePython,
 };
 
 const mathCodeContent: CodeContent = {
-  code: defaultArrayTemplate,
+  code: mathTemplate,
   pythonCode: mathTemplatePython,
 };
 
