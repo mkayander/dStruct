@@ -80,6 +80,37 @@ const createInitializedTreeState = () => {
 };
 
 describe("treeNodeSlice", () => {
+  it("sets rootId on the first runtime binary tree node add", () => {
+    let state = reduce(
+      undefined,
+      treeNodeSlice.actions.init({
+        name: TREE_NAME,
+        type: ArgumentType.BINARY_TREE,
+        order: 0,
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.add({
+        name: TREE_NAME,
+        data: createNode("root", 3),
+      }),
+    );
+
+    expect(state[TREE_NAME]?.rootId).toBe("root");
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.add({
+        name: TREE_NAME,
+        data: createNode("child", 9),
+      }),
+    );
+
+    expect(state[TREE_NAME]?.rootId).toBe("root");
+  });
+
   it("applies sibling child swaps atomically with a single childrenIds update", () => {
     const state = reduce(
       createInitializedTreeState(),

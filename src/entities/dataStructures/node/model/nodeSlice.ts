@@ -155,6 +155,9 @@ const deleteTreeNode = (
   if (count === 1 && cleanupState) {
     delete state[treeName];
   } else {
+    if (treeState.rootId === id) {
+      treeState.rootId = null;
+    }
     treeNodeDataAdapter.removeOne(treeState.nodes, id);
   }
 };
@@ -192,6 +195,11 @@ export const treeNodeSlice = createSlice({
       const nodeId = action.payload.data.id;
       treeState.nodes.ids.push(nodeId);
       treeState.nodes.entities[nodeId] = action.payload.data;
+
+      // Runtime binary trees share one Redux tree per logical structure; first added node is the root for layout.
+      if (argType === ArgumentType.BINARY_TREE && treeState.rootId === null) {
+        treeState.rootId = nodeId;
+      }
 
       state[name] = treeState;
     },
