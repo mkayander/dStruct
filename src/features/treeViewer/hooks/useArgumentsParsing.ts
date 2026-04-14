@@ -441,6 +441,7 @@ const parseArrayArgument = (
       childNames: childArgs?.map((arg) => arg.name),
       order: arg.order,
       argType: arg.type,
+      displayLabel: arg.name,
     }),
   );
   if (newItems) {
