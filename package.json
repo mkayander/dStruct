@@ -32,6 +32,7 @@
     "lint-staged": "lint-staged",
     "typesafe-i18n": "typesafe-i18n",
     "dumpAllProjects": "pnpm run load-env -- cross-env NODE_ENV=development tsx src/scripts/dumpAllProjects.ts --rewrite",
+    "sync-main-dump": "pnpm run load-env -- cross-env NODE_ENV=development tsx src/scripts/dumpAllProjects.ts --rewrite --public-only",
     "loadMainDump": "pnpm run load-env -- cross-env NODE_ENV=development tsx src/scripts/loadProjects.ts public-dumps/main.json",
     "fill-dump-python": "tsx src/scripts/fillMainDumpPythonPlaceholders.ts",
     "upgrade-dump-python": "tsx src/scripts/upgradeMainDumpPython.ts",
