@@ -1,7 +1,11 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
 import { generate } from "short-uuid";
 
-import { getRuntimeArrayClass } from "#/entities/dataStructures/array/model/arrayStructure";
+import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
+import {
+  ControlledArray,
+  getRuntimeArrayClass,
+} from "#/entities/dataStructures/array/model/arrayStructure";
 import { getRuntimeSet } from "#/entities/dataStructures/array/model/setStructure";
 import { getRuntimeString } from "#/entities/dataStructures/array/model/stringStructure";
 import {
@@ -63,7 +67,8 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
     },
     /**
      * Build a tracked array from literal elements (avoid `new Array(n)` length ambiguity
-     * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]`.
+     * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]` when the binding name
+     * is unknown or would be ambiguous (e.g. single string element).
      */
     __dstructArrayLiteral: (...elements: unknown[]) => {
       const out = new ArrayProxy(0) as unknown[];
@@ -71,6 +76,27 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
         out[i] = elements[i];
       }
       return out;
+    },
+    /**
+     * Same as `__dstructArrayLiteral` but records `displayLabel` for the viewer (inferred variable name).
+     */
+    __dstructArrayLiteralWithName: (
+      displayLabel: string,
+      ...elements: unknown[]
+    ) => {
+      const out: unknown[] = [];
+      for (let index = 0; index < elements.length; index += 1) {
+        out[index] = elements[index];
+      }
+      const data = generateArrayData(out);
+      return new ControlledArray(
+        out as (string | number)[],
+        generate(),
+        data,
+        callstack,
+        true,
+        { displayLabel },
+      );
     },
     ArrayProxy,
     Uint32ArrayProxy,
@@ -115,6 +141,7 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 export const globalDefinitionsPrefix = `
   const console = {...self.console, log: self.log, error: self.error, warn: self.warn, info: self.info};
   const __dstructArrayLiteral = self.__dstructArrayLiteral;
+  const __dstructArrayLiteralWithName = self.__dstructArrayLiteralWithName;
   const Array = self.ArrayProxy;
   const Uint32Array = self.Uint32ArrayProxy;
   const Int32Array = self.Int32ArrayProxy;

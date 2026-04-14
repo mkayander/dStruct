@@ -30,10 +30,12 @@ const findSolution = (
 };
 
 describe("transformArrayLiteralsInSolution", () => {
-  it("replaces [] and [1, 2, 3] with __dstructArrayLiteral calls", () => {
+  it("uses __dstructArrayLiteralWithName when literal is RHS of const / assignment", () => {
     const code = `return function f() {
   const a = [];
   const b = [1, 2, 3];
+  let c;
+  c = [4];
   return b;
 };`;
     const ast = parse(code, {
@@ -44,8 +46,25 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(solution).toBeTruthy();
     transformArrayLiteralsInSolution(solution!);
     const out = generate(ast).code;
-    expect(out).toContain("__dstructArrayLiteral()");
-    expect(out).toContain("__dstructArrayLiteral(1, 2, 3)");
+    expect(out).toContain('__dstructArrayLiteralWithName("a")');
+    expect(out).toContain('__dstructArrayLiteralWithName("b", 1, 2, 3)');
+    expect(out).toContain('__dstructArrayLiteralWithName("c", 4)');
+  });
+
+  it("uses unnamed helper when only element is a string literal (avoid ambiguity)", () => {
+    const code = `return function f() {
+  const labels = ["one"];
+  return labels;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteral("one")');
+    expect(out).not.toContain("__dstructArrayLiteralWithName");
   });
 
   it("preserves spread elements", () => {

@@ -33,7 +33,7 @@ class TrackedList(list, Generic[T]):
             "addArray",
             args={
                 "arrayData": self._generate_list_data(items),
-                "options": {"name": name}
+                "options": {"displayLabel": name},
             }
         )
 
