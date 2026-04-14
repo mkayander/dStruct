@@ -72,6 +72,9 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
+    if (node) {
+      node.name = this.name;
+    }
   }
 
   private _right!: BinaryTreeNode<T> | null;
@@ -92,6 +95,9 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
+    if (node) {
+      node.name = this.name;
+    }
   }
 
   static fromNodeData(
@@ -185,18 +191,27 @@ export const getRuntimeBinaryTreeClass = (callstack: CallstackHelper) =>
       left: BinaryTreeNode | null = null,
       right: BinaryTreeNode | null = null,
     ) {
+      const treeName = generate();
+      // Wire children via setters so the callstack (and Redux) link them under this tree; passing
+      // them into `super` would skip setters and leave each subtree in its own `treeName` bucket.
       super(
         val,
-        left,
-        right,
+        null,
+        null,
         {
           id: generate(),
           type: ArgumentType.BINARY_TREE,
           depth: 0,
         },
-        generate(),
+        treeName,
         callstack,
         true,
       );
+      if (left) {
+        this.left = left;
+      }
+      if (right) {
+        this.right = right;
+      }
     }
   };
