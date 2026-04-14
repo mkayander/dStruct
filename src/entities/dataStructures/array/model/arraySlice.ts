@@ -31,6 +31,8 @@ export type ArrayData = BaseStructureItem<ArrayItemData> & {
   childNames?: string[];
   colHeaders?: string[];
   rowHeaders?: string[];
+  /** Inferred from user code (e.g. `const nums = [...]`); shown above the structure in the viewer. */
+  displayLabel?: string;
 };
 
 export type ArrayDataState = BaseStructureState<ArrayData>;
@@ -44,12 +46,14 @@ const getInitialData = (
   argType: ArgumentArrayType,
   parentName?: string,
   childNames?: string[],
+  displayLabel?: string,
 ): ArrayData => ({
   ...getInitialDataBase(arrayDataAdapter),
   order,
   argType,
   parentName,
   childNames,
+  displayLabel,
 });
 
 const initialState: ArrayDataState = {};
@@ -74,10 +78,18 @@ export const arrayStructureSlice = createSlice({
         childNames?: string[];
         order: number;
         argType: ArgumentArrayType;
+        displayLabel?: string;
       }>,
     ) => {
-      const { name, order, argType, parentName, childNames } = action.payload;
-      state[name] = getInitialData(order, argType, parentName, childNames);
+      const { name, order, argType, parentName, childNames, displayLabel } =
+        action.payload;
+      state[name] = getInitialData(
+        order,
+        argType,
+        parentName,
+        childNames,
+        displayLabel,
+      );
     },
     create: (
       state,
@@ -93,7 +105,7 @@ export const arrayStructureSlice = createSlice({
           data: { argType, nodes, options },
         },
       } = action;
-      const { colorMap } = options ?? {};
+      const { colorMap, displayLabel } = options ?? {};
       const treeState = {
         ...getInitialData(999, argType),
         isRuntime: true,
@@ -104,6 +116,10 @@ export const arrayStructureSlice = createSlice({
 
       if (colorMap) {
         treeState.colorMap = colorMap;
+      }
+
+      if (displayLabel !== undefined) {
+        treeState.displayLabel = displayLabel;
       }
 
       state[name] = treeState;

@@ -6,6 +6,7 @@ import type {
   ArrayDataState,
   ArrayItemData,
 } from "#/entities/dataStructures/array/model/arraySlice";
+import { StructureDisplayLabel } from "#/entities/dataStructures/array/ui/StructureDisplayLabel";
 import { MatrixRow } from "#/entities/dataStructures/matrix/ui/MatrixRow";
 
 type MatrixStructureViewProps = {
@@ -36,6 +37,9 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
         overflow: "hidden",
       }}
     >
+      {data.displayLabel ? (
+        <StructureDisplayLabel label={data.displayLabel} />
+      ) : null}
       <Box
         component="table"
         sx={{

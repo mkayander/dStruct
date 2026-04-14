@@ -1,6 +1,5 @@
 import ast
-from typing import List, Dict, Any, Union, TypedDict, TypeVar
-from shared_types import CallFrame
+from typing import List, Dict, Any, Union, TypedDict, TypeVar, Optional
 
 T = TypeVar('T')
 
@@ -15,18 +14,53 @@ class ListData(TypedDict):
 class ListOptions(TypedDict):
     name: str
 
+def attach_ast_parents(root: ast.AST) -> None:
+    """Set ``node.parent`` for every node so transforms can infer binding names."""
+
+    def visit(node: ast.AST, parent: Optional[ast.AST]) -> None:
+        setattr(node, "parent", parent)
+        for child in ast.iter_child_nodes(node):
+            visit(child, node)
+
+    visit(root, None)
+
+
+def _infer_list_literal_display_name(list_node: ast.List) -> Optional[str]:
+    parent = getattr(list_node, "parent", None)
+    if parent is None:
+        return None
+
+    if isinstance(parent, ast.Assign) and parent.value is list_node:
+        targets = parent.targets
+        if targets and all(isinstance(target, ast.Name) for target in targets):
+            return targets[0].id
+
+    if isinstance(parent, ast.AnnAssign) and parent.value is list_node:
+        if isinstance(parent.target, ast.Name):
+            return parent.target.id
+
+    if isinstance(parent, ast.AugAssign) and parent.value is list_node:
+        if isinstance(parent.target, ast.Name):
+            return parent.target.id
+
+    return None
+
+
 class ListTrackingTransformer(ast.NodeTransformer):
     """AST transformer that replaces list operations with tracked list operations."""
-    
+
     def __init__(self) -> None:
         super().__init__()
         self.counter = 0
 
-    def visit_List(self, node):
-        # Replace [1, 2, 3] with TrackedList([1, 2, 3], "auto_list_N", __callstack__)
+    def visit_List(self, node: ast.List) -> ast.Call:
         self.generic_visit(node)
-        list_name = f"auto_list_{self.counter}"
-        self.counter += 1
+        inferred = _infer_list_literal_display_name(node)
+        if inferred is not None:
+            list_name: str = inferred
+        else:
+            list_name = f"auto_list_{self.counter}"
+            self.counter += 1
         return ast.Call(
             func=ast.Name(id="TrackedList", ctx=ast.Load()),
             args=[
