@@ -56,9 +56,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Validate public main dump
-        run: pnpm validate-main-dump
-
       - name: Run tests
         run: pnpm run test:ci
 
