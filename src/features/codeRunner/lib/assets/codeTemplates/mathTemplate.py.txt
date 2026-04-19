@@ -1,0 +1,2 @@
+def run(n):
+  return int(n)

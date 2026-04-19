@@ -1,6 +1,4 @@
-from typing import Optional
-
-def get_middle_node(head: Optional[ListNode]) -> Optional[ListNode]:
+def run(head):
   slow = head
   fast = head
 

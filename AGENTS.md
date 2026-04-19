@@ -49,6 +49,14 @@ The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.jso
 - After starting PostgreSQL, push the schema with `pnpm prisma:push`.
 - To seed with sample data: `SKIP_ENV_VALIDATION=true PRISMA_FIELD_ENCRYPTION_KEY=dev-local-encryption-key-for-testing-only DATABASE_URL=postgresql://dstruct:dstruct@localhost:5432/dstruct pnpm loadMainDump`.
 
+### Public playground dump (`public-dumps/main.json`)
+
+- **GitHub Actions does not run** dump helpers (`sync-main-dump`, `fill-dump-python`, `upgrade-dump-python`, `validate-main-dump`, `loadMainDump`, etc.). Those are **manual** only.
+- **`pnpm loadMainDump`** upserts everything in that file into the DB pointed at by **`DATABASE_URL`**. Running it against prod **overwrites** matching rows by id, so anything only in the file and not in prod can be lost if you do not refresh the file first.
+- **Refresh the file from prod (recommended before shipping dump changes or before loading to prod after prod edits):** point **`DATABASE_URL`** at production (or use a prod read replica), then run **`pnpm sync-main-dump`**. That runs `dumpAllProjects` with **`--public-only`**, rewriting **`public-dumps/main.json`** with only **`isPublic`** playground projects and their test cases and solutions.
+- **Full DB export** (all projects, not only public): `pnpm dumpAllProjects` (writes `public-dumps/main.json` when using `--rewrite` without `--public-only`).
+- **Custom output path:** `pnpm run load-env -- cross-env NODE_ENV=development tsx src/scripts/dumpAllProjects.ts --rewrite --public-only --out /path/to/main.json`
+
 ### Environment variables
 
 - A `.env` file must exist at the repo root. See `.env.example` for the template.
@@ -61,6 +69,7 @@ The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.jso
 Refer to `package.json` scripts. Summary of most-used:
 
 - **Dev server**: `pnpm dev`
+- **Sync public dump from DB**: `pnpm sync-main-dump` (with `DATABASE_URL` set; exports `isPublic` projects to `public-dumps/main.json`)
 - **Lint**: `pnpm lint` (runs ESLint + TypeScript `--noEmit`)
 - **Tests**: `pnpm test` or `pnpm test:ci` (both run Vitest once); `pnpm test:watch` for watch mode
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)

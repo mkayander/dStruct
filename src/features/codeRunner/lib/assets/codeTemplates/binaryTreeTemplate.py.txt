@@ -1,10 +1,9 @@
-from typing import Optional
-
-def get_sum_of_nodes(head: Optional[TreeNode]) -> int:
+def run(head):
   if head is None:
     return 0
 
-  left = get_sum_of_nodes(head.left)
-  right = get_sum_of_nodes(head.right)
-
+  head.setColor("green")
+  left = run(head.left)
+  right = run(head.right)
+  head.setColor(None)
   return head.val + left + right

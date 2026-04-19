@@ -1,0 +1,3 @@
+def run(graph):
+  # graph is JSON from the case (often adjacency lists per node index).
+  return len(graph) if graph else 0
