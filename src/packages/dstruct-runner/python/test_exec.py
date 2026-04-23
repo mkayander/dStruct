@@ -202,6 +202,57 @@ def solve():
         self.assertIsNotNone(result["error"])
         self.assertEqual(result["error"]["name"], "TypeError")
 
+    def test_frozenset_call_tracked_for_membership(self) -> None:
+        code = """
+def solve():
+    fs = frozenset([1, 2])
+    return 1 in fs
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        set_reads = [
+            frame
+            for frame in result["callstack"]
+            if frame.get("argType") == "set" and frame["name"] == "readArrayItem"
+        ]
+        self.assertGreaterEqual(len(set_reads), 1)
+
+    def test_graph_argument_wrapped_as_nested_lists(self) -> None:
+        code = """
+def solve(graph):
+    return len(graph[0])
+"""
+        args = [{"type": "graph", "value": [[0, 1], [1, 2]]}]
+        result = safe_exec(code, args)
+        self.assertIsNone(result["error"])
+        array_frames = [
+            frame
+            for frame in result["callstack"]
+            if frame.get("argType") == "array"
+        ]
+        self.assertGreaterEqual(len(array_frames), 1)
+
+    def test_graph_argument_non_list_surfaces_type_error(self) -> None:
+        code = """
+def solve(graph):
+    return 0
+"""
+        result = safe_exec(code, [{"type": "graph", "value": {}}])
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
+    def test_dict_clear_emits_clear_appearance(self) -> None:
+        code = """
+def solve():
+    d = {"a": 1}
+    d.clear()
+    return len(d)
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        names = [frame["name"] for frame in result["callstack"]]
+        self.assertIn("clearAppearance", names)
+
 
 if __name__ == "__main__":
     unittest.main()

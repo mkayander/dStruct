@@ -5,7 +5,7 @@ import sys
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
-from collection_tracker import TrackedDict, TrackedSet
+from collection_tracker import TrackedDict, TrackedFrozenSet, TrackedSet
 from execution_location import clear_execution_source, set_execution_source
 from line_tracking_transformer import LineTrackingTransformer
 from tree_utils import (
@@ -85,8 +85,15 @@ def _convert_arg_to_python(arg: object, callstack: list) -> object:
             )
         return build_list(value) if value else None
     if arg_type == _ARG_GRAPH:
-        # Graph: pass raw for now; could add build_graph later
-        return value
+        if value is None:
+            return None
+        if not isinstance(value, list):
+            raise TypeError(
+                "Argument type 'graph' requires value to be a JSON array (edge list), "
+                f"got {type(value).__name__}",
+            )
+        counter = [0]
+        return _deep_wrap_json_value(value, callstack, counter)
     if arg_type == _ARG_ARRAY or arg_type == _ARG_MATRIX:
         if value is None:
             return TrackedList([], "arg_array", callstack)
@@ -188,6 +195,7 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
             "TrackedList": TrackedList,
             "TrackedDict": TrackedDict,
             "TrackedSet": TrackedSet,
+            "TrackedFrozenSet": TrackedFrozenSet,
             "TreeNode": TreeNode,
             "ListNode": ListNode,
             "__result__": None,
@@ -224,6 +232,7 @@ __result__ = {call_str}
             "list": list,
             "dict": dict,
             "set": set,
+            "frozenset": frozenset,
             "tuple": tuple,
             
             # Iteration and sequence operations

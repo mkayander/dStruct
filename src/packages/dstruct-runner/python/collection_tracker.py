@@ -1,4 +1,4 @@
-"""Tracked dict and set for Python harness (parity with JS Map / Set proxies)."""
+"""Tracked dict, set, and frozenset for Python harness (parity with JS Map / Set proxies)."""
 
 from __future__ import annotations
 
@@ -129,6 +129,89 @@ class TrackedDict(dict):
         )
         super().__delitem__(key)
 
+    def setdefault(self, key: Any, default: Any = None) -> Any:  # type: ignore[override]
+        if key in self:
+            _append_collection_frame(
+                self._callstack,
+                arg_type="map",
+                frame_type="readArrayItem",
+                node_id=self._node_id_for_key(key),
+                args={"key": key},
+            )
+            return dict.__getitem__(self, key)
+        self[key] = default
+        return default
+
+    def pop(self, key: Any, *args: Any) -> Any:  # type: ignore[override]
+        if len(args) > 1:
+            raise TypeError(f"pop expected at most 2 arguments, got {1 + len(args)}")
+        if key not in self:
+            if args:
+                return args[0]
+            raise KeyError(key)
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="readArrayItem",
+            node_id=self._node_id_for_key(key),
+            args={"key": key},
+        )
+        popped = dict.__getitem__(self, key)
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="deleteNode",
+            node_id=self._node_id_for_key(key),
+            args={"key": key},
+        )
+        dict.__delitem__(self, key)
+        return popped
+
+    def popitem(self) -> tuple[Any, Any]:
+        if not self:
+            raise KeyError("popitem(): dictionary is empty")
+        key = next(reversed(self))
+        value = dict.__getitem__(self, key)
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="deleteNode",
+            node_id=self._node_id_for_key(key),
+            args={"key": key, "value": value},
+        )
+        dict.__delitem__(self, key)
+        return key, value
+
+    def clear(self) -> None:  # type: ignore[override]
+        if not self:
+            return None
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="clearAppearance",
+            node_id="",
+            args={},
+        )
+        dict.clear(self)
+        return None
+
+    def update(self, *args: Any, **kwargs: Any) -> None:  # type: ignore[override]
+        if len(args) > 1:
+            raise TypeError("update expected at most 1 argument, got %d" % len(args))
+        if args:
+            other = args[0]
+            if other is None:
+                pass
+            elif isinstance(other, Mapping):
+                for key, value in other.items():
+                    self[key] = value
+            else:
+                for key, value in other:
+                    self[key] = value
+        for key, value in kwargs.items():
+            self[key] = value
+        return None
+
     def __repr__(self) -> str:
         return f"TrackedDict({super().__repr__()})"
 
@@ -189,7 +272,6 @@ class TrackedSet(set):
         return contained
 
     def add(self, value: Any) -> None:
-        # Use super().__contains__ so duplicate checks do not emit readArrayItem frames.
         if super().__contains__(value):
             return None
         super().add(value)
@@ -203,7 +285,7 @@ class TrackedSet(set):
         return None
 
     def discard(self, value: Any) -> None:
-        if value not in self:
+        if not super().__contains__(value):
             return None
         node_id = self._node_id_for_value(value)
         super().discard(value)
@@ -217,7 +299,7 @@ class TrackedSet(set):
         return None
 
     def remove(self, value: Any) -> None:
-        if value not in self:
+        if not super().__contains__(value):
             raise KeyError(value)
         node_id = self._node_id_for_value(value)
         super().remove(value)
@@ -229,5 +311,96 @@ class TrackedSet(set):
             args={"value": value},
         )
 
+    def pop(self) -> Any:
+        if not self:
+            raise KeyError("pop from an empty set")
+        value = next(iter(self))
+        node_id = self._node_id_for_value(value)
+        super().discard(value)
+        _append_collection_frame(
+            self._callstack,
+            arg_type="set",
+            frame_type="deleteNode",
+            node_id=node_id,
+            args={"value": value},
+        )
+        return value
+
+    def clear(self) -> None:  # type: ignore[override]
+        if not self:
+            return None
+        _append_collection_frame(
+            self._callstack,
+            arg_type="set",
+            frame_type="clearAppearance",
+            node_id="",
+            args={},
+        )
+        super().clear()
+        return None
+
     def __repr__(self) -> str:
         return f"TrackedSet({super().__repr__()})"
+
+
+class TrackedFrozenSet(frozenset):
+    """Immutable set with read tracking (for frozenset(...) in transformed user code)."""
+
+    def __new__(
+        cls,
+        iterable: Iterable[Any] = (),
+        *,
+        name: str,
+        callstack: List[CallFrame],
+    ) -> TrackedFrozenSet:
+        data = tuple(iterable) if iterable is not None else ()
+        instance = super().__new__(cls, data)
+        object.__setattr__(instance, "_name", name)
+        object.__setattr__(instance, "_callstack", callstack)
+        _append_collection_frame(
+            callstack,
+            arg_type="set",
+            frame_type="addArray",
+            node_id="",
+            args={
+                "arrayData": _frozen_set_snapshot_data(instance),
+                "options": {"name": name},
+            },
+        )
+        return instance
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        raise AttributeError(f"{type(self).__name__!r} object has no attribute {name!r}")
+
+    def _node_id_for_value(self, value: Any) -> str:
+        for index, existing in enumerate(self):
+            if existing == value:
+                return str(index)
+        return repr(value)
+
+    def __contains__(self, value: object) -> bool:  # type: ignore[override]
+        contained = super().__contains__(value)
+        if contained:
+            callstack = object.__getattribute__(self, "_callstack")
+            _append_collection_frame(
+                callstack,
+                arg_type="set",
+                frame_type="readArrayItem",
+                node_id=self._node_id_for_value(value),
+                args={"value": value},
+            )
+        return contained
+
+
+def _frozen_set_snapshot_data(fs: frozenset) -> ListData:
+    entities: Dict[str, ListItemData] = {}
+    ordered_ids: List[str] = []
+    for index, value in enumerate(sorted(fs, key=lambda item: repr(item))):
+        node_id = str(index)
+        ordered_ids.append(node_id)
+        entities[node_id] = {
+            "id": node_id,
+            "index": index,
+            "value": value,
+        }
+    return {"ids": ordered_ids, "entities": entities}

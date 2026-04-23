@@ -6,7 +6,7 @@ dStruct runs Python code directly in the browser using [Pyodide](https://pyodide
 
 1. When a user opens a Python problem page, the `usePythonCodeRunner` hook eagerly calls `pythonRunner.init()` to warm up a dedicated **Web Worker**.
 2. The worker downloads the Pyodide runtime (~30 MB, cached by the browser after first load) from the jsDelivr CDN. It then writes the dStruct Python harness files (`exec.py`, `array_tracker.py`, etc.) into Pyodide's virtual Emscripten filesystem and pre-imports `safe_exec`.
-3. When the user clicks **Run**, the code string and optional test-case arguments (e.g. binary tree root) are posted to the worker. The existing `safe_exec(code, args)` harness performs AST transformation (list tracking via `TrackedList`), reconstructs arguments (TreeNode, ListNode, etc.) from the serialized payload, executes the code in a sandboxed namespace, and returns a structured `ExecutionResult` as JSON back to the main thread.
+3. When the user clicks **Run**, the code string and optional test-case arguments (e.g. binary tree root) are posted to the worker. The existing `safe_exec(code, args)` harness performs AST transformation (tracked list/dict/set literals and `frozenset(...)` calls), reconstructs arguments (TreeNode, ListNode, nested JSON collections, graph edge lists, etc.) from the serialized payload, executes the code in a sandboxed namespace, and returns a structured `ExecutionResult` as JSON back to the main thread.
 4. If execution exceeds the timeout (default 30 s), the main-thread runner terminates the worker via `Worker.terminate()` and automatically recreates a fresh one for subsequent runs.
 
 ```
@@ -124,7 +124,8 @@ To avoid the CDN dependency (e.g. for air-gapped deployments):
 | `src/packages/dstruct-runner/python/exec.py`                      | Python harness: AST transform + sandboxed exec, receives `safe_exec(code, args)`                       |
 | `src/packages/dstruct-runner/python/tree_utils.py`                | `TreeNode`, `ListNode`, `build_tree`, `build_list` for argument reconstruction                         |
 | `src/packages/dstruct-runner/python/array_tracker.py`             | `TrackedList` implementation for callstack frame generation                                            |
-| `src/packages/dstruct-runner/python/array_tracker_transformer.py` | AST transformer: rewrites list literals to `TrackedList(...)`                                          |
+| `src/packages/dstruct-runner/python/collection_tracker.py`       | `TrackedDict`, `TrackedSet`, `TrackedFrozenSet` for map/set-style frames                                 |
+| `src/packages/dstruct-runner/python/array_tracker_transformer.py` | AST transformer: rewrites list/dict/set literals, comprehensions, and `frozenset(...)` calls            |
 | `src/packages/dstruct-runner/python/output.py`                    | `tracked_print`: captures print output into `__stdout__` global                                        |
 | `src/packages/dstruct-runner/python/shared_types.py`              | Python TypedDicts for `ExecutionResult`, `CallFrame`, etc.                                             |
 | `next.config.mjs`                                                 | Webpack + Turbopack `*.py` raw-loader rules for embedding Python as strings                            |
@@ -173,6 +174,30 @@ When the worker is bundled by webpack/Next.js, its script URL is something like 
 - On next `run()`: a fresh worker is created and Pyodide is reloaded (cold start ~2-5 s).
 - On worker crash (uncaught error): same recovery -- terminate, reset, recreate on next use.
 - The `settle()` helper inside `run()` ensures event listeners and the timeout timer are always cleaned up, preventing memory leaks.
+
+## Collection and graph tracking (harness contract)
+
+User code is parsed and transformed **before** execution:
+
+- **List literals** `[a, b, …]` become `TrackedList(..., name, __callstack__)`.
+- **Dict literals** `{…}` become `TrackedDict(dict({…}), name=…, callstack=__callstack__)`.
+- **Set literals** `{a, b}` (when not an empty dict) become `TrackedSet(..., name=…, callstack=__callstack__)`.
+- **List / dict / set comprehensions** are rewritten so the inner comprehension builds tracked data, then `list()` / `dict()` / `set()` unwraps to a normal value where needed.
+- **Calls** `frozenset(x)` (no keywords, at most one positional) become `TrackedFrozenSet(x, name=…, callstack=__callstack__)` for membership reads. Other `frozenset` forms are left unchanged.
+
+Case arguments from JSON (`createPythonRuntimeArgs` → worker) are converted in `_convert_arg_to_python`:
+
+| `type` field   | Expected JSON `value` | Wrapped as |
+| -------------- | ---------------------- | ---------- |
+| `array`, `matrix` | JSON array (or `null` → empty tracked list) | Nested lists → `TrackedList`; nested objects → `TrackedDict` |
+| `set`          | JSON array of elements (or `null` → empty `TrackedSet`) | Elements deep-wrapped |
+| `map`, `object` | JSON object (or `null` → empty `TrackedDict`) | Values deep-wrapped |
+| `graph`        | JSON array (edge list / adjacency-style rows) | Same deep wrap as array (nested lists + dicts) |
+| `binaryTree`, `linkedList` | Tracked builders when payload includes ids | Unchanged contract |
+
+Malformed shapes raise **`TypeError`** with a clear message; `safe_exec` returns them in `ExecutionResult.error` (same as other Python exceptions).
+
+**`TrackedDict` / `TrackedSet` methods:** common mutators are tracked (`clear` emits `clearAppearance`; `pop` / `popitem` / `setdefault` / `update` route through tracked paths where reads or writes apply). **`defaultdict`**, **`Counter`**, and other dict subclasses built without going through literals are **not** auto-wrapped.
 
 ## Known Limitations
 
