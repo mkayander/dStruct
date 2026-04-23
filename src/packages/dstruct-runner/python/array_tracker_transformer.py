@@ -17,7 +17,7 @@ class ListOptions(TypedDict):
 
 class ListTrackingTransformer(ast.NodeTransformer):
     """AST transformer that replaces list operations with tracked list operations."""
-    
+
     def __init__(self) -> None:
         super().__init__()
         self.counter = 0
@@ -49,10 +49,89 @@ class ListTrackingTransformer(ast.NodeTransformer):
                     args=[
                         ast.ListComp(elt=elt, generators=generators),
                         ast.Constant(value="comprehension"),
-                        ast.Name(id="__callstack__", ctx=ast.Load())
+                        ast.Name(id="__callstack__", ctx=ast.Load()),
                     ],
-                    keywords=[]
+                    keywords=[],
                 )
             ],
-            keywords=[]
+            keywords=[],
+        )
+
+    def visit_Dict(self, node: ast.Dict) -> ast.Call:
+        self.generic_visit(node)
+        dict_name = f"auto_dict_{self.counter}"
+        self.counter += 1
+        return ast.Call(
+            func=ast.Name(id="TrackedDict", ctx=ast.Load()),
+            args=[
+                ast.Call(func=ast.Name(id="dict", ctx=ast.Load()), args=[node], keywords=[]),
+                ast.keyword(arg="name", value=ast.Constant(value=dict_name)),
+                ast.keyword(
+                    arg="callstack", value=ast.Name(id="__callstack__", ctx=ast.Load())
+                ),
+            ],
+            keywords=[],
+        )
+
+    def visit_Set(self, node: ast.Set) -> ast.Call:
+        self.generic_visit(node)
+        set_name = f"auto_set_{self.counter}"
+        self.counter += 1
+        return ast.Call(
+            func=ast.Name(id="TrackedSet", ctx=ast.Load()),
+            args=[
+                node,
+                ast.keyword(arg="name", value=ast.Constant(value=set_name)),
+                ast.keyword(
+                    arg="callstack", value=ast.Name(id="__callstack__", ctx=ast.Load())
+                ),
+            ],
+            keywords=[],
+        )
+
+    def visit_DictComp(self, node: ast.DictComp) -> ast.Call:
+        key = self.visit(node.key)
+        value = self.visit(node.value)
+        generators = [self.visit(g) for g in node.generators]
+        return ast.Call(
+            func=ast.Name(id="dict", ctx=ast.Load()),
+            args=[
+                ast.Call(
+                    func=ast.Name(id="TrackedDict", ctx=ast.Load()),
+                    args=[
+                        ast.DictComp(key=key, value=value, generators=generators),
+                    ],
+                    keywords=[
+                        ast.keyword(arg="name", value=ast.Constant(value="dict_comp")),
+                        ast.keyword(
+                            arg="callstack",
+                            value=ast.Name(id="__callstack__", ctx=ast.Load()),
+                        ),
+                    ],
+                )
+            ],
+            keywords=[],
+        )
+
+    def visit_SetComp(self, node: ast.SetComp) -> ast.Call:
+        elt = self.visit(node.elt)
+        generators = [self.visit(g) for g in node.generators]
+        return ast.Call(
+            func=ast.Name(id="set", ctx=ast.Load()),
+            args=[
+                ast.Call(
+                    func=ast.Name(id="TrackedSet", ctx=ast.Load()),
+                    args=[
+                        ast.SetComp(elt=elt, generators=generators),
+                    ],
+                    keywords=[
+                        ast.keyword(arg="name", value=ast.Constant(value="set_comp")),
+                        ast.keyword(
+                            arg="callstack",
+                            value=ast.Name(id="__callstack__", ctx=ast.Load()),
+                        ),
+                    ],
+                )
+            ],
+            keywords=[],
         )
