@@ -285,30 +285,30 @@ export const treeNodeSlice = createSlice({
           );
           const subtreeIdSet = new Set(subtreeIds);
 
-          movedNodes = subtreeIds
-            .map((nodeId) => childTreeState.nodes.entities[nodeId])
-            .filter((node): node is TreeNodeData => Boolean(node));
+          movedNodes = [];
+          for (const nodeId of subtreeIds) {
+            const node = childTreeState.nodes.entities[nodeId];
+            if (node) {
+              movedNodes.push(node);
+            }
+          }
 
-          movedInternalEdges = Object.values(
-            childTreeState.edges.entities,
-          ).filter(
-            (edge): edge is EdgeData =>
-              Boolean(edge) &&
-              subtreeIdSet.has(edge.sourceId) &&
-              subtreeIdSet.has(edge.targetId),
-          );
+          movedInternalEdges = [];
+          const edgeIdsTouchingSubtree: string[] = [];
+          for (const edge of Object.values(childTreeState.edges.entities)) {
+            if (!edge) continue;
+            const sourceInSubtree = subtreeIdSet.has(edge.sourceId);
+            const targetInSubtree = subtreeIdSet.has(edge.targetId);
+            if (sourceInSubtree && targetInSubtree) {
+              movedInternalEdges.push(edge);
+            }
+            if (sourceInSubtree || targetInSubtree) {
+              edgeIdsTouchingSubtree.push(edge.id);
+            }
+          }
 
-          const edgesTouchingSubtree = Object.values(
-            childTreeState.edges.entities,
-          ).filter(
-            (edge): edge is EdgeData =>
-              Boolean(edge) &&
-              (subtreeIdSet.has(edge.sourceId) ||
-                subtreeIdSet.has(edge.targetId)),
-          );
-
-          for (const edge of edgesTouchingSubtree) {
-            edgeDataAdapter.removeOne(childTreeState.edges, edge.id);
+          for (const edgeId of edgeIdsTouchingSubtree) {
+            edgeDataAdapter.removeOne(childTreeState.edges, edgeId);
           }
 
           treeNodeDataAdapter.removeMany(childTreeState.nodes, subtreeIds);
