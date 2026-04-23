@@ -38,10 +38,11 @@ function sortedArgs(testCase: DumpTestCase): DumpArg[] {
 function pickReferenceTestCase(
   testCases: DumpTestCase[],
 ): DumpTestCase | undefined {
-  return testCases.toSorted((left, right) => {
+  const ordered = testCases.toSorted((left, right) => {
     if (left.order !== right.order) return left.order - right.order;
     return left.slug.localeCompare(right.slug);
-  })[0];
+  });
+  return ordered.length > 0 ? ordered[0] : undefined;
 }
 
 function argTypeKey(args: DumpArg[]): string {
@@ -55,6 +56,7 @@ function isSolveReturnFirstStub(code: string): boolean {
   const lines = normalized.split("\n").map((line) => line.trim());
   if (lines.length !== 2) return false;
   const body = lines[1];
+  if (body === undefined) return false;
   return /^return [a-zA-Z_][a-zA-Z0-9_]*$/.test(body);
 }
 
@@ -369,12 +371,13 @@ async function main(): Promise<void> {
       isNaiveTreeSum(code) &&
       project.slug === "minimize-maximum-of-array"
     ) {
-      const [arr] = paramNames;
+      const arr = paramNames[0] ?? "array";
       nextCode = `def run(${arr}):\r\n  answer = 0\r\n  prefix = 0\r\n  for idx in range(len(${arr})):\r\n    prefix += ${arr}[idx]\r\n    candidate = (prefix + idx) // (idx + 1)\r\n    if candidate > answer:\r\n      answer = candidate\r\n    ${arr}[idx] += 1\r\n  return answer\r\n`;
     }
 
     if (!nextCode && isNaiveArraySum(code)) {
-      const singleType = args.length === 1 ? args[0].type : "";
+      const soleArg = args.length === 1 ? args[0] : undefined;
+      const singleType = soleArg?.type ?? "";
       if (singleType === "array" || singleType === "matrix") {
         const multiDefault = buildMultiArgDefault(
           project.category,
@@ -384,7 +387,7 @@ async function main(): Promise<void> {
         if (multiDefault) {
           nextCode = multiDefault;
         } else if (project.category === "DYNAMIC_PROGRAMMING") {
-          const [arr] = paramNames;
+          const arr = paramNames[0] ?? "array";
           nextCode = `def run(${arr}):\r\n  if len(${arr}) == 0:\r\n    return 0\r\n  best = ${arr}[0]\r\n  current = ${arr}[0]\r\n  for idx in range(1, len(${arr})):\r\n    value = ${arr}[idx]\r\n    if value > current + value:\r\n      current = value\r\n    else:\r\n      current = current + value\r\n    if current > best:\r\n      best = current\r\n  return best\r\n`;
         }
       }
