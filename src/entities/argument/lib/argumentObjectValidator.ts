@@ -4,6 +4,7 @@ import { ArgumentType } from "../model/argumentObject";
 
 export const argumentObjectValidator = z.object({
   name: z.string(),
+  label: z.string().optional(),
   type: z.nativeEnum(ArgumentType),
   order: z.number(),
   input: z.string(),

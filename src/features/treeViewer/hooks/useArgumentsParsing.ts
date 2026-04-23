@@ -5,6 +5,7 @@ import { generate } from "short-uuid";
 
 import {
   buildCaseArgsContentSignature,
+  getArgumentDisplayLabel,
   isArgumentArrayType,
   isArgumentTreeType,
 } from "#/entities/argument/lib";
@@ -441,7 +442,7 @@ const parseArrayArgument = (
       childNames: childArgs?.map((arg) => arg.name),
       order: arg.order,
       argType: arg.type,
-      displayLabel: arg.name,
+      displayLabel: getArgumentDisplayLabel(arg),
     }),
   );
   if (newItems) {
