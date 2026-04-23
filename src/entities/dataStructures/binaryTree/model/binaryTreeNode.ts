@@ -54,6 +54,13 @@ export class BinaryTreeNode<
     }
   }
 
+  /** Keep callstack/Redux `treeName` aligned with the parent so the whole tree lives in one bucket. */
+  private adoptVisualizationTreeName(child: BinaryTreeNode<T> | null): void {
+    if (child) {
+      child.name = this.name;
+    }
+  }
+
   private _left!: BinaryTreeNode<T> | null;
 
   public get left() {
@@ -72,9 +79,7 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
-    if (node) {
-      node.name = this.name;
-    }
+    this.adoptVisualizationTreeName(node);
   }
 
   private _right!: BinaryTreeNode<T> | null;
@@ -95,9 +100,7 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
-    if (node) {
-      node.name = this.name;
-    }
+    this.adoptVisualizationTreeName(node);
   }
 
   static fromNodeData(

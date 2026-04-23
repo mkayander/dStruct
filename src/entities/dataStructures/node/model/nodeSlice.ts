@@ -104,9 +104,11 @@ const collectSubtreeNodeIds = (
   const orderedIds: string[] = [];
   const visited = new Set<string>();
   const queue: string[] = [rootId];
+  let headIndex = 0;
 
-  while (queue.length > 0) {
-    const nodeId = queue.shift();
+  while (headIndex < queue.length) {
+    const nodeId = queue[headIndex];
+    headIndex += 1;
     if (!nodeId || visited.has(nodeId)) continue;
     visited.add(nodeId);
     orderedIds.push(nodeId);
@@ -287,7 +289,9 @@ export const treeNodeSlice = createSlice({
             .map((nodeId) => childTreeState.nodes.entities[nodeId])
             .filter((node): node is TreeNodeData => Boolean(node));
 
-          movedInternalEdges = Object.values(childTreeState.edges.entities).filter(
+          movedInternalEdges = Object.values(
+            childTreeState.edges.entities,
+          ).filter(
             (edge): edge is EdgeData =>
               Boolean(edge) &&
               subtreeIdSet.has(edge.sourceId) &&
