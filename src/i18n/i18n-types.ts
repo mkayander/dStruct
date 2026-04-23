@@ -49,6 +49,22 @@ type RootTranslation = {
 	 */
 	ARGUMENTS: string
 	/**
+	 * D​i​s​p​l​a​y​ ​n​a​m​e
+	 */
+	ARGUMENT_DISPLAY_NAME: string
+	/**
+	 * S​h​o​w​n​ ​o​n​ ​a​r​g​u​m​e​n​t​ ​i​n​p​u​t​s​.​ ​D​u​p​l​i​c​a​t​e​s​ ​a​r​e​ ​a​l​l​o​w​e​d​;​ ​e​m​p​t​y​ ​u​s​e​s​ ​a​r​g​-​1​,​ ​a​r​g​-​2​,​ ​…​ ​b​y​ ​o​r​d​e​r​.
+	 */
+	ARGUMENT_DISPLAY_NAME_HELPER: string
+	/**
+	 * e​.​g​.​ ​n​u​m​s
+	 */
+	ARGUMENT_DISPLAY_NAME_PLACEHOLDER: string
+	/**
+	 * R​e​n​a​m​e​ ​d​i​s​p​l​a​y​ ​n​a​m​e
+	 */
+	ARGUMENT_RENAME: string
+	/**
 	 * B​r​o​w​s​e
 	 */
 	BROWSE: string
@@ -1254,6 +1270,22 @@ export type TranslationFunctions = {
 	 * Arguments
 	 */
 	ARGUMENTS: () => LocalizedString
+	/**
+	 * Display name
+	 */
+	ARGUMENT_DISPLAY_NAME: () => LocalizedString
+	/**
+	 * Shown on argument inputs. Duplicates are allowed; empty uses arg-1, arg-2, … by order.
+	 */
+	ARGUMENT_DISPLAY_NAME_HELPER: () => LocalizedString
+	/**
+	 * e.g. nums
+	 */
+	ARGUMENT_DISPLAY_NAME_PLACEHOLDER: () => LocalizedString
+	/**
+	 * Rename display name
+	 */
+	ARGUMENT_RENAME: () => LocalizedString
 	/**
 	 * Browse
 	 */

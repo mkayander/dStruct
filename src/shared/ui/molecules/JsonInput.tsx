@@ -11,11 +11,18 @@ type JsonInputProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
   onChange: (value: string) => void;
   validationSchema: Joi.Schema;
+  /** Debounce for persisting JSON text (passed to `DebouncedInput`). */
+  timeout?: number;
+  /** Rendered inside `InputProps.endAdornment` before any inherited adornment (e.g. rename control). */
+  suffixSlot?: React.ReactNode;
 };
 
 export const JsonInput: React.FC<JsonInputProps> = ({
   onChange,
   validationSchema,
+  timeout,
+  suffixSlot,
+  InputProps,
   ...restProps
 }) => {
   const { LL } = useI18nContext();
@@ -50,6 +57,16 @@ export const JsonInput: React.FC<JsonInputProps> = ({
       error={!!inputError}
       helperText={inputError}
       fullWidth
+      timeout={timeout}
+      InputProps={{
+        ...InputProps,
+        endAdornment: (
+          <>
+            {suffixSlot}
+            {InputProps?.endAdornment}
+          </>
+        ),
+      }}
       {...restProps}
     />
   );
