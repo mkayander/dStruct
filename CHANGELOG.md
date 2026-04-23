@@ -1,3 +1,10 @@
+## [1.377.1](https://github.com/mkayander/dStruct/compare/v1.377.0...v1.377.1) (2026-04-23)
+
+
+### Bug Fixes
+
+* **playback:** restore full subtree on revertChildId; setRightChild undo parity ([#131](https://github.com/mkayander/dStruct/issues/131)) ([f789935](https://github.com/mkayander/dStruct/commit/f789935318b7f3c394850d7d994011fd6123be68))
+
 # [1.377.0](https://github.com/mkayander/dStruct/compare/v1.376.0...v1.377.0) (2026-04-14)
 
 
