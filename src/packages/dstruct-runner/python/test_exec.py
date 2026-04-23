@@ -141,6 +141,67 @@ def solve(m):
         names = [frame["name"] for frame in result["callstack"]]
         self.assertIn("addArrayItem", names)
 
+    def test_map_argument_non_object_surfaces_type_error(self) -> None:
+        code = """
+def solve(m):
+    return 0
+"""
+        args = [{"type": "map", "value": []}]
+        result = safe_exec(code, args)
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
+    def test_set_argument_non_array_surfaces_type_error(self) -> None:
+        code = """
+def solve(s):
+    return 0
+"""
+        args = [{"type": "set", "value": {"not": "a list"}}]
+        result = safe_exec(code, args)
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
+    def test_array_null_yields_tracked_empty_list(self) -> None:
+        code = """
+def solve(nums):
+    return len(nums)
+"""
+        args = [{"type": "array", "value": None}]
+        result = safe_exec(code, args)
+        self.assertIsNone(result["error"])
+        add_array = [
+            frame
+            for frame in result["callstack"]
+            if frame["name"] == "addArray" and frame.get("argType") == "array"
+        ]
+        self.assertGreaterEqual(len(add_array), 1)
+
+    def test_set_add_duplicate_does_not_emit_read_frame(self) -> None:
+        """add() must not use `in` (overridden __contains__) for duplicate check."""
+        code = """
+def solve():
+    s = {1}
+    s.add(1)
+    return len(s)
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        set_reads = [
+            frame
+            for frame in result["callstack"]
+            if frame.get("argType") == "set" and frame["name"] == "readArrayItem"
+        ]
+        self.assertEqual(len(set_reads), 0)
+
+    def test_args_entry_not_dict_surfaces_type_error(self) -> None:
+        code = """
+def solve():
+    return 0
+"""
+        result = safe_exec(code, ["not-an-object"])
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
 
 if __name__ == "__main__":
     unittest.main()

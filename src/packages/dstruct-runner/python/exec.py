@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 import sys
-import os
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
@@ -55,8 +54,13 @@ def _deep_wrap_json_value(value: object, callstack: list, counter: list[int]) ->
     return value
 
 
-def _convert_arg_to_python(arg: dict, callstack: list) -> object:
+def _convert_arg_to_python(arg: object, callstack: list) -> object:
     """Convert a serialized argument to a Python object."""
+    if not isinstance(arg, dict):
+        raise TypeError(
+            "Each argument must be a JSON object with 'type' and 'value' keys, "
+            f"got {type(arg).__name__}",
+        )
     arg_type = arg.get("type", "")
     value = arg.get("value")
 
