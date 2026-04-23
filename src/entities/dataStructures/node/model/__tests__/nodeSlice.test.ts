@@ -180,6 +180,131 @@ describe("treeNodeSlice", () => {
     expect(state[childTree]).toBeUndefined();
   });
 
+  it("revertChildId moves the full subtree back to the original tree bucket", () => {
+    const parentTree = "parentTree";
+    const childTree = "childTree";
+
+    let state = reduce(
+      undefined,
+      treeNodeSlice.actions.init({
+        name: parentTree,
+        type: ArgumentType.BINARY_TREE,
+        order: 0,
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.init({
+        name: childTree,
+        type: ArgumentType.BINARY_TREE,
+        order: 1,
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.addMany({
+        name: parentTree,
+        data: {
+          maxDepth: 0,
+          nodes: [createNode("root", 3)],
+        },
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.addMany({
+        name: childTree,
+        data: {
+          maxDepth: 0,
+          nodes: [
+            createNode("subroot", 20, ["left", "right"]),
+            createNode("left", 15),
+            createNode("right", 7),
+          ],
+        },
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.addManyEdges({
+        name: childTree,
+        data: [
+          {
+            id: getEdgeId("subroot", "left"),
+            sourceId: "subroot",
+            targetId: "left",
+            isDirected: false,
+          },
+          {
+            id: getEdgeId("subroot", "right"),
+            sourceId: "subroot",
+            targetId: "right",
+            isDirected: false,
+          },
+        ],
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.setChildId({
+        name: parentTree,
+        data: {
+          id: "root",
+          index: 1,
+          childId: "subroot",
+          childTreeName: childTree,
+        },
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.revertChildId({
+        name: parentTree,
+        data: {
+          id: "root",
+          childId: "subroot",
+          childTreeName: childTree,
+        },
+      }),
+    );
+
+    state = reduce(
+      state,
+      treeNodeSlice.actions.setChildId({
+        name: parentTree,
+        data: {
+          id: "root",
+          index: 1,
+          childId: undefined,
+        },
+      }),
+    );
+
+    const parent = state[parentTree];
+    const restored = state[childTree];
+    expect(parent?.nodes.ids).toEqual(["root"]);
+    expect(parent?.edges.ids).toHaveLength(0);
+    expect(restored?.nodes.ids).toHaveLength(3);
+    expect(restored?.nodes.entities["subroot"]?.childrenIds).toEqual([
+      "left",
+      "right",
+    ]);
+    expect(restored?.edges.ids).toEqual(
+      expect.arrayContaining([
+        getEdgeId("subroot", "left"),
+        getEdgeId("subroot", "right"),
+      ]),
+    );
+    expect(restored?.edges.ids).toHaveLength(2);
+    expect(restored?.rootId).toBe("subroot");
+  });
+
   it("sets rootId on the first runtime binary tree node add", () => {
     let state = reduce(
       undefined,
