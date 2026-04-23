@@ -189,7 +189,8 @@ class TrackedSet(set):
         return contained
 
     def add(self, value: Any) -> None:
-        if value in self:
+        # Use super().__contains__ so duplicate checks do not emit readArrayItem frames.
+        if super().__contains__(value):
             return None
         super().add(value)
         _append_collection_frame(
