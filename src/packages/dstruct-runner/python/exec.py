@@ -85,24 +85,35 @@ def _convert_arg_to_python(arg: dict, callstack: list) -> object:
         return value
     if arg_type == _ARG_ARRAY or arg_type == _ARG_MATRIX:
         if value is None:
-            return []
+            return TrackedList([], "arg_array", callstack)
+        if not isinstance(value, list):
+            raise TypeError(
+                f"Argument type {arg_type!r} requires value to be a JSON array (list), "
+                f"got {type(value).__name__}",
+            )
         counter: list[int] = [0]
         return _deep_wrap_json_value(value, callstack, counter)
     if arg_type == _ARG_SET:
         if value is None:
             return TrackedSet((), name="arg_set", callstack=callstack)
-        if isinstance(value, list):
-            counter = [0]
-            wrapped_elements = [
-                _deep_wrap_json_value(item, callstack, counter) for item in value
-            ]
-            return TrackedSet(wrapped_elements, name="arg_set", callstack=callstack)
-        return TrackedSet((value,), name="arg_set", callstack=callstack)
+        if not isinstance(value, list):
+            raise TypeError(
+                "Argument type 'set' requires value to be a JSON array of set elements, "
+                f"got {type(value).__name__}",
+            )
+        counter = [0]
+        wrapped_elements = [
+            _deep_wrap_json_value(item, callstack, counter) for item in value
+        ]
+        return TrackedSet(wrapped_elements, name="arg_set", callstack=callstack)
     if arg_type == _ARG_MAP or arg_type == _ARG_OBJECT:
         if value is None:
             return TrackedDict(None, name=f"arg_{arg_type}", callstack=callstack)
         if not isinstance(value, dict):
-            return value
+            raise TypeError(
+                f"Argument type {arg_type!r} requires value to be a JSON object, "
+                f"got {type(value).__name__}",
+            )
         counter = [0]
         wrapped = {
             key: _deep_wrap_json_value(nested, callstack, counter)

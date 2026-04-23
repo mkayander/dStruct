@@ -1,0 +1,3 @@
+def run(word):
+  # Implement prefix / search logic using the trie built from case input.
+  return len(word)

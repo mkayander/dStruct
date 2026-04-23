@@ -13,6 +13,30 @@ ListItemData = Dict[str, Any]
 ListData = Dict[str, Any]
 
 
+def _append_collection_frame(
+    callstack: List[CallFrame],
+    *,
+    arg_type: str,
+    frame_type: str,
+    node_id: str,
+    args: Dict[str, Any],
+) -> None:
+    frame: CallFrame = {
+        "id": str(uuid.uuid4()),
+        "timestamp": int(time.time() * 1000),
+        "treeName": "main",
+        "structureType": "array",
+        "argType": arg_type,
+        "name": frame_type,
+        "nodeId": node_id,
+        "args": args,
+    }
+    snap = snapshot_for_frame()
+    if snap is not None:
+        frame["source"] = snap
+    callstack.append(frame)
+
+
 class TrackedDict(dict):
     """dict subclass that records reads/writes/deletes on the visualization callstack."""
 
@@ -29,32 +53,16 @@ class TrackedDict(dict):
         if items:
             for key, value in items.items():
                 dict.__setitem__(self, key, value)
-        self._add_frame(
-            "addArray",
+        _append_collection_frame(
+            callstack,
+            arg_type="map",
+            frame_type="addArray",
+            node_id="",
             args={
                 "arrayData": self._generate_dict_data(),
                 "options": {"name": name},
             },
         )
-
-    def _get_timestamp(self) -> int:
-        return int(time.time() * 1000)
-
-    def _add_frame(self, frame_type: str, **kwargs: Any) -> None:
-        frame: CallFrame = {
-            "id": str(uuid.uuid4()),
-            "timestamp": self._get_timestamp(),
-            "treeName": "main",
-            "structureType": "array",
-            "argType": "map",
-            "name": frame_type,
-            "nodeId": kwargs.get("nodeId", ""),
-            "args": kwargs.get("args", {}),
-        }
-        snap = snapshot_for_frame()
-        if snap is not None:
-            frame["source"] = snap
-        self._callstack.append(frame)
 
     def _generate_dict_data(self) -> ListData:
         entities: Dict[str, ListItemData] = {}
@@ -78,37 +86,45 @@ class TrackedDict(dict):
 
     def __getitem__(self, key: Any) -> Any:
         if key in self:
-            self._add_frame(
-                "readArrayItem",
+            _append_collection_frame(
+                self._callstack,
+                arg_type="map",
+                frame_type="readArrayItem",
+                node_id=self._node_id_for_key(key),
                 args={"key": key},
-                nodeId=self._node_id_for_key(key),
             )
         return super().__getitem__(key)
 
     def get(self, key: Any, default: Any = None) -> Any:  # type: ignore[override]
         if key in self:
-            self._add_frame(
-                "readArrayItem",
+            _append_collection_frame(
+                self._callstack,
+                arg_type="map",
+                frame_type="readArrayItem",
+                node_id=self._node_id_for_key(key),
                 args={"key": key},
-                nodeId=self._node_id_for_key(key),
             )
             return super().__getitem__(key)
         return default
 
     def __setitem__(self, key: Any, value: Any) -> None:
-        self._add_frame(
-            "addArrayItem",
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="addArrayItem",
+            node_id=self._node_id_for_key(key) if key in self else "",
             args={"key": key, "value": value},
-            nodeId=self._node_id_for_key(key) if key in self else "",
         )
         super().__setitem__(key, value)
 
     def __delitem__(self, key: Any) -> None:
         if key not in self:
             raise KeyError(key)
-        self._add_frame(
-            "deleteNode",
-            nodeId=self._node_id_for_key(key),
+        _append_collection_frame(
+            self._callstack,
+            arg_type="map",
+            frame_type="deleteNode",
+            node_id=self._node_id_for_key(key),
             args={"key": key},
         )
         super().__delitem__(key)
@@ -130,32 +146,16 @@ class TrackedSet(set):
         super().__init__(items if items is not None else ())
         self._name = name
         self._callstack = callstack
-        self._add_frame(
-            "addArray",
+        _append_collection_frame(
+            callstack,
+            arg_type="set",
+            frame_type="addArray",
+            node_id="",
             args={
                 "arrayData": self._generate_set_data(),
                 "options": {"name": name},
             },
         )
-
-    def _get_timestamp(self) -> int:
-        return int(time.time() * 1000)
-
-    def _add_frame(self, frame_type: str, **kwargs: Any) -> None:
-        frame: CallFrame = {
-            "id": str(uuid.uuid4()),
-            "timestamp": self._get_timestamp(),
-            "treeName": "main",
-            "structureType": "array",
-            "argType": "set",
-            "name": frame_type,
-            "nodeId": kwargs.get("nodeId", ""),
-            "args": kwargs.get("args", {}),
-        }
-        snap = snapshot_for_frame()
-        if snap is not None:
-            frame["source"] = snap
-        self._callstack.append(frame)
 
     def _generate_set_data(self) -> ListData:
         entities: Dict[str, ListItemData] = {}
@@ -179,10 +179,12 @@ class TrackedSet(set):
     def __contains__(self, value: object) -> bool:  # type: ignore[override]
         contained = super().__contains__(value)
         if contained:
-            self._add_frame(
-                "readArrayItem",
+            _append_collection_frame(
+                self._callstack,
+                arg_type="set",
+                frame_type="readArrayItem",
+                node_id=self._node_id_for_value(value),
                 args={"value": value},
-                nodeId=self._node_id_for_value(value),
             )
         return contained
 
@@ -190,10 +192,12 @@ class TrackedSet(set):
         if value in self:
             return None
         super().add(value)
-        self._add_frame(
-            "addArrayItem",
+        _append_collection_frame(
+            self._callstack,
+            arg_type="set",
+            frame_type="addArrayItem",
+            node_id=self._node_id_for_value(value),
             args={"value": value, "index": len(self) - 1},
-            nodeId=self._node_id_for_value(value),
         )
         return None
 
@@ -202,7 +206,13 @@ class TrackedSet(set):
             return None
         node_id = self._node_id_for_value(value)
         super().discard(value)
-        self._add_frame("deleteNode", nodeId=node_id, args={"value": value})
+        _append_collection_frame(
+            self._callstack,
+            arg_type="set",
+            frame_type="deleteNode",
+            node_id=node_id,
+            args={"value": value},
+        )
         return None
 
     def remove(self, value: Any) -> None:
@@ -210,7 +220,13 @@ class TrackedSet(set):
             raise KeyError(value)
         node_id = self._node_id_for_value(value)
         super().remove(value)
-        self._add_frame("deleteNode", nodeId=node_id, args={"value": value})
+        _append_collection_frame(
+            self._callstack,
+            arg_type="set",
+            frame_type="deleteNode",
+            node_id=node_id,
+            args={"value": value},
+        )
 
     def __repr__(self) -> str:
         return f"TrackedSet({super().__repr__()})"

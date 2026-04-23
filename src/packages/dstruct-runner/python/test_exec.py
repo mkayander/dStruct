@@ -62,6 +62,24 @@ def double(y):
         self.assertIsNone(result["error"])
         self.assertIn("42", result["output"])
 
+    def test_tracked_list_iteration_does_not_recurse(self) -> None:
+        # List literal is rewritten to TrackedList by ListTrackingTransformer.
+        code = """
+def run():
+    total = 0
+    for value in [1, 2, 3]:
+        total += value
+    print(total)
+    return total
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        self.assertIn("6", result["output"])
+        read_frames = [
+            frame for frame in result["callstack"] if frame["name"] == "readArrayItem"
+        ]
+        self.assertGreaterEqual(len(read_frames), 3)
+
     def test_inline_dict_literal_emits_map_frames(self) -> None:
         code = """
 def solve():
@@ -122,6 +140,41 @@ def solve(m):
         self.assertIsNone(result["error"])
         names = [frame["name"] for frame in result["callstack"]]
         self.assertIn("addArrayItem", names)
+
+    def test_map_argument_non_object_surfaces_type_error(self) -> None:
+        code = """
+def solve(m):
+    return 0
+"""
+        args = [{"type": "map", "value": []}]
+        result = safe_exec(code, args)
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
+    def test_set_argument_non_array_surfaces_type_error(self) -> None:
+        code = """
+def solve(s):
+    return 0
+"""
+        args = [{"type": "set", "value": {"not": "a list"}}]
+        result = safe_exec(code, args)
+        self.assertIsNotNone(result["error"])
+        self.assertEqual(result["error"]["name"], "TypeError")
+
+    def test_array_null_yields_tracked_empty_list(self) -> None:
+        code = """
+def solve(nums):
+    return len(nums)
+"""
+        args = [{"type": "array", "value": None}]
+        result = safe_exec(code, args)
+        self.assertIsNone(result["error"])
+        add_array = [
+            frame
+            for frame in result["callstack"]
+            if frame["name"] == "addArray" and frame.get("argType") == "array"
+        ]
+        self.assertGreaterEqual(len(add_array), 1)
 
 
 if __name__ == "__main__":

@@ -54,6 +54,13 @@ export class BinaryTreeNode<
     }
   }
 
+  /** Keep callstack/Redux `treeName` aligned with the parent so the whole tree lives in one bucket. */
+  private adoptVisualizationTreeName(child: BinaryTreeNode<T> | null): void {
+    if (child) {
+      child.name = this.name;
+    }
+  }
+
   private _left!: BinaryTreeNode<T> | null;
 
   public get left() {
@@ -72,6 +79,7 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
+    this.adoptVisualizationTreeName(node);
   }
 
   private _right!: BinaryTreeNode<T> | null;
@@ -92,6 +100,7 @@ export class BinaryTreeNode<
         childTreeName: prevNode?.name,
       },
     });
+    this.adoptVisualizationTreeName(node);
   }
 
   static fromNodeData(
@@ -185,18 +194,27 @@ export const getRuntimeBinaryTreeClass = (callstack: CallstackHelper) =>
       left: BinaryTreeNode | null = null,
       right: BinaryTreeNode | null = null,
     ) {
+      const treeName = generate();
+      // Wire children via setters so the callstack (and Redux) link them under this tree; passing
+      // them into `super` would skip setters and leave each subtree in its own `treeName` bucket.
       super(
         val,
-        left,
-        right,
+        null,
+        null,
         {
           id: generate(),
           type: ArgumentType.BINARY_TREE,
           depth: 0,
         },
-        generate(),
+        treeName,
         callstack,
         true,
       );
+      if (left) {
+        this.left = left;
+      }
+      if (right) {
+        this.right = right;
+      }
     }
   };

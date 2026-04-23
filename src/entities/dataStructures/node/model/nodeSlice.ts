@@ -96,6 +96,35 @@ const restoreInitialEdges = (treeState: TreeData) => {
   );
 };
 
+/** All node ids in the subtree rooted at `rootId` (BFS over `childrenIds`). */
+const collectSubtreeNodeIds = (
+  entities: TreeData["nodes"]["entities"],
+  rootId: string,
+): string[] => {
+  const orderedIds: string[] = [];
+  const visited = new Set<string>();
+  const queue: string[] = [rootId];
+  let headIndex = 0;
+
+  while (headIndex < queue.length) {
+    const nodeId = queue[headIndex];
+    headIndex += 1;
+    if (!nodeId || visited.has(nodeId)) continue;
+    visited.add(nodeId);
+    orderedIds.push(nodeId);
+
+    const node = entities[nodeId];
+    if (!node) continue;
+    for (const childId of node.childrenIds) {
+      if (childId) {
+        queue.push(childId);
+      }
+    }
+  }
+
+  return orderedIds;
+};
+
 const applyChildIdUpdates = (
   treeState: TreeData,
   id: string,
@@ -155,6 +184,9 @@ const deleteTreeNode = (
   if (count === 1 && cleanupState) {
     delete state[treeName];
   } else {
+    if (treeState.rootId === id) {
+      treeState.rootId = null;
+    }
     treeNodeDataAdapter.removeOne(treeState.nodes, id);
   }
 };
@@ -192,6 +224,11 @@ export const treeNodeSlice = createSlice({
       const nodeId = action.payload.data.id;
       treeState.nodes.ids.push(nodeId);
       treeState.nodes.entities[nodeId] = action.payload.data;
+
+      // Runtime binary trees share one Redux tree per logical structure; first added node is the root for layout.
+      if (argType === ArgumentType.BINARY_TREE && treeState.rootId === null) {
+        treeState.rootId = nodeId;
+      }
 
       state[name] = treeState;
     },
@@ -232,21 +269,67 @@ export const treeNodeSlice = createSlice({
     ) => {
       const { childId, childTreeName } = action.payload.data;
 
-      // If child is from another tree, remove it from the old tree and add it to the new one
+      // If child is from another tree, move the whole subtree (not only the root node) so
+      // descendants stay linked when a parent node is re-parented under a new BinaryTree name.
       if (childId && childTreeName && childTreeName !== action.payload.name) {
-        let childData: TreeNodeData | undefined = undefined;
+        let movedNodes: TreeNodeData[] = [];
+        let movedInternalEdges: EdgeData[] = [];
+
         runStateActionByName(state, childTreeName, (childTreeState) => {
-          childData = childTreeState.nodes.entities[childId];
+          const childData = childTreeState.nodes.entities[childId];
           if (!childData) return;
 
-          deleteTreeNode(state, childTreeName, childTreeState, childId, false);
+          const subtreeIds = collectSubtreeNodeIds(
+            childTreeState.nodes.entities,
+            childId,
+          );
+          const subtreeIdSet = new Set(subtreeIds);
+
+          movedNodes = [];
+          for (const nodeId of subtreeIds) {
+            const node = childTreeState.nodes.entities[nodeId];
+            if (node) {
+              movedNodes.push(node);
+            }
+          }
+
+          movedInternalEdges = [];
+          const edgeIdsTouchingSubtree: string[] = [];
+          for (const edge of Object.values(childTreeState.edges.entities)) {
+            if (!edge) continue;
+            const sourceInSubtree = subtreeIdSet.has(edge.sourceId);
+            const targetInSubtree = subtreeIdSet.has(edge.targetId);
+            if (sourceInSubtree && targetInSubtree) {
+              movedInternalEdges.push(edge);
+            }
+            if (sourceInSubtree || targetInSubtree) {
+              edgeIdsTouchingSubtree.push(edge.id);
+            }
+          }
+
+          for (const edgeId of edgeIdsTouchingSubtree) {
+            edgeDataAdapter.removeOne(childTreeState.edges, edgeId);
+          }
+
+          treeNodeDataAdapter.removeMany(childTreeState.nodes, subtreeIds);
+
+          if (childTreeState.nodes.ids.length === 0) {
+            delete state[childTreeName];
+          } else if (
+            childTreeState.rootId &&
+            subtreeIdSet.has(childTreeState.rootId)
+          ) {
+            childTreeState.rootId = null;
+          }
         });
 
         runStateActionByName(state, action.payload.name, (treeState) => {
-          if (!childData) return;
+          if (movedNodes.length === 0) return;
 
-          childData.childrenIds = []; // TODO: Allow to keep track of relations to different trees
-          treeNodeDataAdapter.addOne(treeState.nodes, childData);
+          treeNodeDataAdapter.addMany(treeState.nodes, movedNodes);
+          if (movedInternalEdges.length > 0) {
+            edgeDataAdapter.addMany(treeState.edges, movedInternalEdges);
+          }
         });
       }
 
