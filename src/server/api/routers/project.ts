@@ -39,36 +39,42 @@ const getDefaultArguments = (category: ProjectCategory): ArgumentObjectMap => {
     case ProjectCategory.SLIDING_WINDOW:
     case ProjectCategory.BACKTRACKING:
     case ProjectCategory.DYNAMIC_PROGRAMMING:
-    case ProjectCategory.BIT_MANIPULATION:
+    case ProjectCategory.BIT_MANIPULATION: {
+      const argumentId = generateShortUuid();
       return {
-        array: {
-          name: "array",
+        [argumentId]: {
+          name: argumentId,
           order: 0,
           type: ArgumentType.ARRAY,
           input: "[1,2,3]",
         },
       };
+    }
 
     case ProjectCategory.BINARY_TREE:
-    case ProjectCategory.BST:
+    case ProjectCategory.BST: {
+      const argumentId = generateShortUuid();
       return {
-        head: {
-          name: "head",
+        [argumentId]: {
+          name: argumentId,
           order: 0,
           type: ArgumentType.BINARY_TREE,
           input: "[1,2,3]",
         },
       };
+    }
 
-    case ProjectCategory.LINKED_LIST:
+    case ProjectCategory.LINKED_LIST: {
+      const argumentId = generateShortUuid();
       return {
-        head: {
-          name: "head",
+        [argumentId]: {
+          name: argumentId,
           order: 0,
           type: ArgumentType.LINKED_LIST,
           input: "[1,2,3]",
         },
       };
+    }
 
     case ProjectCategory.GRAPH:
       return {
@@ -660,8 +666,9 @@ export const projectRouter = createTRPCRouter({
         });
 
         if (project?.category === ProjectCategory.BINARY_TREE) {
-          args["head"] = {
-            name: "head",
+          const argumentId = generateShortUuid();
+          args[argumentId] = {
+            name: argumentId,
             order: 0,
             type: ArgumentType.BINARY_TREE,
             input: "[]",

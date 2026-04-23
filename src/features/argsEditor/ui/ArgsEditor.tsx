@@ -15,7 +15,10 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import { generate } from "short-uuid";
 
-import { isArgumentObjectValid } from "#/entities/argument/lib";
+import {
+  getArgumentDisplayLabel,
+  isArgumentObjectValid,
+} from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   caseSlice,
@@ -220,7 +223,9 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                       onChange={(type) => handleArgTypeChange(arg, type)}
                     />
                     <IconButton
-                      title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
+                      title={LL.DELETE_X_ARGUMENT({
+                        name: getArgumentDisplayLabel(arg),
+                      })}
                       onClick={() => handleDeleteArg(arg)}
                       size="small"
                       sx={{ top: -2 }}

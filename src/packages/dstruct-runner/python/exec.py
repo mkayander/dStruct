@@ -5,7 +5,7 @@ import sys
 import os
 import json
 from array_tracker import TrackedList
-from array_tracker_transformer import ListTrackingTransformer
+from array_tracker_transformer import ListTrackingTransformer, attach_ast_parents
 from execution_location import clear_execution_source, set_execution_source
 from line_tracking_transformer import LineTrackingTransformer
 from tree_utils import (
@@ -113,6 +113,7 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
             )
 
         # Transform the AST to track list ops, then statement-level line probes
+        attach_ast_parents(tree)
         list_transformer = ListTrackingTransformer()
         new_tree = list_transformer.visit(tree)
         line_transformer = LineTrackingTransformer()
