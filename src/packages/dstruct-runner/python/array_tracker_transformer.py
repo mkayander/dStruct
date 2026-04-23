@@ -135,3 +135,40 @@ class ListTrackingTransformer(ast.NodeTransformer):
             ],
             keywords=[],
         )
+
+    def visit_Call(self, node: ast.Call) -> ast.Call:
+        """Rewrite frozenset(iterable) to TrackedFrozenSet for read tracking."""
+        self.generic_visit(node)
+        if not isinstance(node.func, ast.Name) or node.func.id != "frozenset":
+            return node
+        if node.keywords:
+            return node
+        frozen_name = f"auto_frozen_{self.counter}"
+        self.counter += 1
+        if node.args:
+            iterable = node.args[0]
+            extra_args = node.args[1:]
+            if extra_args:
+                return node
+            return ast.Call(
+                func=ast.Name(id="TrackedFrozenSet", ctx=ast.Load()),
+                args=[iterable],
+                keywords=[
+                    ast.keyword(arg="name", value=ast.Constant(value=frozen_name)),
+                    ast.keyword(
+                        arg="callstack",
+                        value=ast.Name(id="__callstack__", ctx=ast.Load()),
+                    ),
+                ],
+            )
+        return ast.Call(
+            func=ast.Name(id="TrackedFrozenSet", ctx=ast.Load()),
+            args=[],
+            keywords=[
+                ast.keyword(arg="name", value=ast.Constant(value=frozen_name)),
+                ast.keyword(
+                    arg="callstack",
+                    value=ast.Name(id="__callstack__", ctx=ast.Load()),
+                ),
+            ],
+        )
