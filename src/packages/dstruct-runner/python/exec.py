@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 import sys
-import os
 import json
 from array_tracker import TrackedList
 from array_tracker_transformer import ListTrackingTransformer
+from collection_tracker import TrackedDict, TrackedFrozenSet, TrackedSet
 from execution_location import clear_execution_source, set_execution_source
 from line_tracking_transformer import LineTrackingTransformer
 from tree_utils import (
@@ -31,10 +31,36 @@ _ARG_MATRIX = "matrix"
 _ARG_STRING = "string"
 _ARG_NUMBER = "number"
 _ARG_BOOLEAN = "boolean"
+_ARG_SET = "set"
+_ARG_MAP = "map"
+_ARG_OBJECT = "object"
 
 
-def _convert_arg_to_python(arg: dict, callstack: list) -> object:
+def _deep_wrap_json_value(value: object, callstack: list, counter: list[int]) -> object:
+    """Wrap nested JSON-derived list/dict values in tracked containers (inline JSON args)."""
+    if isinstance(value, list):
+        counter[0] += 1
+        name = f"arg_json_list_{counter[0]}"
+        wrapped_items = [_deep_wrap_json_value(item, callstack, counter) for item in value]
+        return TrackedList(wrapped_items, name, callstack)
+    if isinstance(value, dict):
+        counter[0] += 1
+        name = f"arg_json_dict_{counter[0]}"
+        wrapped_map = {
+            key: _deep_wrap_json_value(nested, callstack, counter)
+            for key, nested in value.items()
+        }
+        return TrackedDict(wrapped_map, name=name, callstack=callstack)
+    return value
+
+
+def _convert_arg_to_python(arg: object, callstack: list) -> object:
     """Convert a serialized argument to a Python object."""
+    if not isinstance(arg, dict):
+        raise TypeError(
+            "Each argument must be a JSON object with 'type' and 'value' keys, "
+            f"got {type(arg).__name__}",
+        )
     arg_type = arg.get("type", "")
     value = arg.get("value")
 
@@ -59,10 +85,52 @@ def _convert_arg_to_python(arg: dict, callstack: list) -> object:
             )
         return build_list(value) if value else None
     if arg_type == _ARG_GRAPH:
-        # Graph: pass raw for now; could add build_graph later
-        return value
+        if value is None:
+            return None
+        if not isinstance(value, list):
+            raise TypeError(
+                "Argument type 'graph' requires value to be a JSON array (edge list), "
+                f"got {type(value).__name__}",
+            )
+        counter = [0]
+        return _deep_wrap_json_value(value, callstack, counter)
     if arg_type == _ARG_ARRAY or arg_type == _ARG_MATRIX:
-        return value if value is not None else []
+        if value is None:
+            return TrackedList([], "arg_array", callstack)
+        if not isinstance(value, list):
+            raise TypeError(
+                f"Argument type {arg_type!r} requires value to be a JSON array (list), "
+                f"got {type(value).__name__}",
+            )
+        counter: list[int] = [0]
+        return _deep_wrap_json_value(value, callstack, counter)
+    if arg_type == _ARG_SET:
+        if value is None:
+            return TrackedSet((), name="arg_set", callstack=callstack)
+        if not isinstance(value, list):
+            raise TypeError(
+                "Argument type 'set' requires value to be a JSON array of set elements, "
+                f"got {type(value).__name__}",
+            )
+        counter = [0]
+        wrapped_elements = [
+            _deep_wrap_json_value(item, callstack, counter) for item in value
+        ]
+        return TrackedSet(wrapped_elements, name="arg_set", callstack=callstack)
+    if arg_type == _ARG_MAP or arg_type == _ARG_OBJECT:
+        if value is None:
+            return TrackedDict(None, name=f"arg_{arg_type}", callstack=callstack)
+        if not isinstance(value, dict):
+            raise TypeError(
+                f"Argument type {arg_type!r} requires value to be a JSON object, "
+                f"got {type(value).__name__}",
+            )
+        counter = [0]
+        wrapped = {
+            key: _deep_wrap_json_value(nested, callstack, counter)
+            for key, nested in value.items()
+        }
+        return TrackedDict(wrapped, name=f"arg_{arg_type}", callstack=callstack)
     if arg_type == _ARG_STRING:
         return value if value is not None else ""
     if arg_type == _ARG_NUMBER:
@@ -125,6 +193,9 @@ def safe_exec(code: str, args: list | None = None) -> ExecutionResult:
             "__callstack__": [],
             "__stdout__": "",
             "TrackedList": TrackedList,
+            "TrackedDict": TrackedDict,
+            "TrackedSet": TrackedSet,
+            "TrackedFrozenSet": TrackedFrozenSet,
             "TreeNode": TreeNode,
             "ListNode": ListNode,
             "__result__": None,
@@ -158,10 +229,11 @@ __result__ = {call_str}
             'int': int,
             'float': float,
             'bool': bool,
-            'list': list,
-            'dict': dict,
-            'set': set,
-            'tuple': tuple,
+            "list": list,
+            "dict": dict,
+            "set": set,
+            "frozenset": frozenset,
+            "tuple": tuple,
             
             # Iteration and sequence operations
             'enumerate': enumerate,
