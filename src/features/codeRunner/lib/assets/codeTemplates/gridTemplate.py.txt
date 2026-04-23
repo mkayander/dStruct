@@ -1,0 +1,6 @@
+def run(grid):
+  if not grid:
+    return 0
+  row_count = len(grid)
+  col_count = len(grid[0]) if row_count > 0 else 0
+  return row_count * col_count

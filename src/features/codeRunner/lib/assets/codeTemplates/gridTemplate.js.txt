@@ -1,0 +1,20 @@
+/**
+ * @param {ArrayProxyObject[]} grid  Matrix rows; each row supports setColor(index, color).
+ */
+return function gridCellCount(grid) {
+  let cells = 0;
+  for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
+    const row = grid[rowIndex];
+    for (let colIndex = 0; colIndex < row.length; colIndex++) {
+      row.setColor(colIndex, "green");
+      cells++;
+    }
+  }
+  return cells;
+};
+
+/**
+ * @typedef {number[] & {
+ *   setColor(index: number, color: string): void
+ * }} ArrayProxyObject
+ */

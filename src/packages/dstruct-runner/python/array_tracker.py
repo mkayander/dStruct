@@ -125,13 +125,22 @@ class TrackedList(list, Generic[T]):
         return super().__len__()
 
     def __iter__(self):
-        return iter(self)
+        # Index-based iteration so each step records readArrayItem via __getitem__.
+        # `return iter(self)` recurses infinitely (TrackedList is its own iterator).
+        # Use self.__getitem__, not super().__getitem__, so reads are tracked.
+        length = super().__len__()
+        for index in range(length):
+            yield self.__getitem__(index)
 
     def __str__(self) -> str:
-        return str(self)
+        # Avoid `str(self)` which would recurse through __str__.
+        pieces: List[str] = []
+        for index in range(super().__len__()):
+            pieces.append(repr(super().__getitem__(index)))
+        return "[" + ", ".join(pieces) + "]"
 
     def __repr__(self) -> str:
-        return f"TrackedList({self})"
+        return f"TrackedList({str(self)})"
 
 def create_tracked_list(items: List[Any], name: str) -> Tuple[TrackedList, List[CallFrame]]:
     """Create a new tracked list with the given items and name."""
