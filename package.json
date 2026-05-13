@@ -84,7 +84,7 @@
     "graphql": "16.13.2",
     "joi": "^18.1.2",
     "monaco-editor": "^0.55.1",
-    "next": "16.2.3",
+    "next": "16.2.6",
     "next-auth": "4.24.13",
     "notistack": "^3.0.2",
     "overlayscrollbars": "^2.14.0",
