@@ -2,6 +2,7 @@ import { loadPyodide, type PyodideInterface, version } from "pyodide";
 
 import arrayTrackerSrc from "#/packages/dstruct-runner/python/array_tracker.py";
 import arrayTrackerTransformerSrc from "#/packages/dstruct-runner/python/array_tracker_transformer.py";
+import collectionTrackerSrc from "#/packages/dstruct-runner/python/collection_tracker.py";
 import execPySrc from "#/packages/dstruct-runner/python/exec.py";
 import executionLocationSrc from "#/packages/dstruct-runner/python/execution_location.py";
 import lineTrackingTransformerSrc from "#/packages/dstruct-runner/python/line_tracking_transformer.py";
@@ -29,6 +30,7 @@ const HARNESS_FILES: Record<string, string> = {
   "shared_types.py": sharedTypesSrc,
   "output.py": outputSrc,
   "array_tracker.py": arrayTrackerSrc,
+  "collection_tracker.py": collectionTrackerSrc,
   "array_tracker_transformer.py": arrayTrackerTransformerSrc,
   "execution_location.py": executionLocationSrc,
   "line_tracking_transformer.py": lineTrackingTransformerSrc,
