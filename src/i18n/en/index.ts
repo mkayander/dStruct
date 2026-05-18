@@ -5,6 +5,11 @@ const en: BaseTranslation = {
   ADD_ARGUMENT: "Add argument",
   ADD_NEW_SOLUTION: "Add new solution",
   ARGUMENTS: "Arguments",
+  ARGUMENT_DISPLAY_NAME: "Display name",
+  ARGUMENT_DISPLAY_NAME_HELPER:
+    "Shown on argument inputs. Duplicates are allowed; empty uses arg-1, arg-2, … by order.",
+  ARGUMENT_DISPLAY_NAME_PLACEHOLDER: "e.g. nums",
+  ARGUMENT_RENAME: "Rename display name",
   BROWSE: "Browse",
   BROWSE_PROJECTS: "Browse Projects",
   BACK: "Back",

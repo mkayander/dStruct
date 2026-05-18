@@ -51,6 +51,9 @@ describe("buildCaseArgsContentSignature", () => {
     expect(
       buildCaseArgsContentSignature("p", "c", [{ ...argument, input: "[1]" }]),
     ).not.toBe(base);
+    expect(
+      buildCaseArgsContentSignature("p", "c", [{ ...argument, label: "root" }]),
+    ).not.toBe(base);
   });
 
   it("changes when parentName changes", () => {

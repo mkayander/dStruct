@@ -8,6 +8,7 @@ import {
 } from "#/entities/dataStructures/array/model/arraySlice";
 
 import { ArrayItem } from "./ArrayItem";
+import { StructureDisplayLabel } from "./StructureDisplayLabel";
 
 type ArrayBracketProps = {
   argType: ArgumentType;
@@ -81,46 +82,48 @@ export const ArrayStructureView: React.FC<ArrayStructureViewProps> = ({
     return arrayDataItemSelectors.selectAll(data.nodes);
   }, [data.nodes]);
 
-  const { argType } = data;
+  const { argType, displayLabel } = data;
 
   return (
-    <Stack
-      direction="row"
-      sx={{
-        width: "fit-content",
-        zIndex: 10,
-        "&:hover": {
-          ".array-bracket": {
-            opacity: 1,
-          },
-          ".array-item": {
-            "&::before": {
+    <Stack direction="column" sx={{ width: "fit-content", zIndex: 10 }}>
+      {displayLabel ? <StructureDisplayLabel label={displayLabel} /> : null}
+      <Stack
+        direction="row"
+        sx={{
+          width: "fit-content",
+          "&:hover": {
+            ".array-bracket": {
               opacity: 1,
             },
+            ".array-item": {
+              "&::before": {
+                opacity: 1,
+              },
+            },
           },
-        },
-      }}
-    >
-      <ArrayBracket argType={argType} />
-      <Stack direction="row">
-        {items.length > 0 ? (
-          items.map((item) => (
-            <ArrayItem
-              key={item.id}
-              colorMap={data.colorMap ?? parentColorMap}
-              item={item}
+        }}
+      >
+        <ArrayBracket argType={argType} />
+        <Stack direction="row">
+          {items.length > 0 ? (
+            items.map((item) => (
+              <ArrayItem
+                key={item.id}
+                colorMap={data.colorMap ?? parentColorMap}
+                item={item}
+              />
+            ))
+          ) : (
+            <Box
+              sx={{
+                width: 32,
+                height: 12,
+              }}
             />
-          ))
-        ) : (
-          <Box
-            sx={{
-              width: 32,
-              height: 12,
-            }}
-          />
-        )}
+          )}
+        </Stack>
+        <ArrayBracket argType={argType} side="right" />
       </Stack>
-      <ArrayBracket argType={argType} side="right" />
     </Stack>
   );
 };

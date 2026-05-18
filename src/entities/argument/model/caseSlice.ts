@@ -62,6 +62,20 @@ export const caseSlice = createSlice({
         isParsed: false,
       };
     },
+    updateArgumentLabel: (
+      state,
+      action: PayloadAction<{ name: string; label: string | undefined }>,
+    ) => {
+      const { name, label } = action.payload;
+      if (!state.args.entities[name]) return;
+      const nextLabel =
+        label === undefined || label.trim() === "" ? undefined : label.trim();
+      argumentAdapter.updateOne(state.args, {
+        id: name,
+        changes: { label: nextLabel },
+      });
+      state.isEdited = true;
+    },
     updateNodeData: (
       state,
       action: PayloadAction<ArgumentObject<ArgumentTreeType>>,
