@@ -17,7 +17,13 @@ import type * as monaco from "monaco-editor";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import {
   callstackSlice,
@@ -170,39 +176,43 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   // any effect that dispatches to Redux (e.g. loadFinish) will re-run every render → loop.
   const formatJavaScriptRef = useRef(formatJavaScript);
   const formatPythonRef = useRef(formatPython);
-  formatJavaScriptRef.current = formatJavaScript;
-  formatPythonRef.current = formatPython;
+  useEffect(() => {
+    formatJavaScriptRef.current = formatJavaScript;
+    formatPythonRef.current = formatPython;
+  });
 
-  const cancelInFlightFormatting = useCallback(() => {
+  const cancelFormattingRefs = useCallback(() => {
     formatGenerationRef.current += 1;
-    setFormatUiPending(false);
     formatJavaScriptRef.current.reset();
     formatPythonRef.current.reset();
   }, []);
 
+  const cancelInFlightFormatting = useCallback(() => {
+    cancelFormattingRefs();
+    setFormatUiPending(false);
+  }, [cancelFormattingRefs]);
+
   // Update code on solution change
   useEffect(() => {
     if (!currentSolution.data) return;
-    cancelInFlightFormatting();
-    if (!isFormattingAvailable) setIsFormattingAvailable(true);
-
-    dispatch(projectSlice.actions.loadFinish());
+    cancelFormattingRefs();
 
     const key = getCodeKey(language);
     const newCode = currentSolution.data[key] ?? "";
 
-    setEditorState(EditorState.INITIAL);
     if (textModel && !textModel.isDisposed()) {
       textModel.setValue(newCode);
     }
 
+    startTransition(() => {
+      setFormatUiPending(false);
+      if (!isFormattingAvailable) setIsFormattingAvailable(true);
+      dispatch(projectSlice.actions.loadFinish());
+      setEditorState(EditorState.INITIAL);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps -- load editor when solution slug/language/model changes; avoid re-running on unrelated state
-  }, [
-    cancelInFlightFormatting,
-    currentSolution.data?.slug,
-    language,
-    textModel,
-  ]);
+  }, [cancelFormattingRefs, currentSolution.data?.slug, language, textModel]);
 
   // Handle code errors
   useEffect(() => {

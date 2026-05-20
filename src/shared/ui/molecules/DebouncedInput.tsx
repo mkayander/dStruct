@@ -24,10 +24,14 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
 }) => {
   const [rawInput, setRawInput] = useState<string>(value);
   const [hasPendingChanges, setHasPendingChanges] = useState<boolean>(false);
+  const [syncedExternalValue, setSyncedExternalValue] = useState(value);
 
-  useEffect(() => {
-    setRawInput(value);
-  }, [value]);
+  if (value !== syncedExternalValue) {
+    setSyncedExternalValue(value);
+    if (!hasPendingChanges) {
+      setRawInput(value);
+    }
+  }
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
