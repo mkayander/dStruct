@@ -136,8 +136,7 @@ const esOverrides = {
     "Debes iniciar sesión para guardar código",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Primero debes ejecutar el código",
 
-  HOME_LANDING_TITLE:
-    "Tu código, fotograma a fotograma. Un paso adelante. Un paso atrás.",
+  HOME_LANDING_TITLE: "Tu código, fotograma a fotograma.",
   HOME_LANDING_SUBTITLE:
     "Un playground al estilo LeetCode donde tu solución se convierte en un rastro visual de ejecución: árboles, grafos, cuadrículas, estructuras enlazadas y mapas anidados. JavaScript y Python en el navegador, reproducción paso a paso y estadísticas de tiempo opcionales para JS.",
   HOME_HERO_FAQ_LINK: "Preguntas frecuentes",

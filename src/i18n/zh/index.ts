@@ -125,7 +125,7 @@ const zhOverrides = {
   YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "需要登录才能保存代码",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "请先运行代码",
 
-  HOME_LANDING_TITLE: "你的代码，逐帧呈现。向前一步。向后一步。",
+  HOME_LANDING_TITLE: "你的代码，逐帧呈现。",
   HOME_LANDING_SUBTITLE:
     "LeetCode 风格的练习场：你的解法会变成可视的执行轨迹——树、图、网格、链表结构与嵌套映射。浏览器内 JavaScript 与 Python，可逐步回放，JS 还可选计时统计。",
   HOME_HERO_FAQ_LINK: "常见问题",

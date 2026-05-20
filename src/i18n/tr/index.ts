@@ -135,8 +135,7 @@ const trOverrides = {
     "Kodu kaydetmek için giriş yapmalısınız",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Önce kodu çalıştırın",
 
-  HOME_LANDING_TITLE:
-    "Kodunuz, kare kare. İleri adım. Geri adım.",
+  HOME_LANDING_TITLE: "Kodunuz, kare kare.",
   HOME_LANDING_SUBTITLE:
     "Çözümünüzün ağaçlar, grafikler, ızgaralar, bağlı yapılar ve iç içe haritalar için görsel bir yürütme izi olduğu LeetCode tarzı bir oyun alanı. Tarayıcıda JavaScript ve Python, adım adım oynatma ve JS için isteğe bağlı süre istatistikleri.",
   HOME_HERO_FAQ_LINK: "Sıkça sorulan sorular",

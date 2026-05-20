@@ -136,8 +136,7 @@ const deOverrides = {
   YOU_NEED_TO_RUN_THE_CODE_FIRST:
     "Sie müssen den Code zuerst ausführen",
 
-  HOME_LANDING_TITLE:
-    "Ihr Code, Bild für Bild. Schritt vor. Schritt zurück.",
+  HOME_LANDING_TITLE: "Ihr Code, Bild für Bild.",
   HOME_LANDING_SUBTITLE:
     "Ein Playground im LeetCode-Stil: Ihre Lösung wird zur visuellen Ausführungsspur – Bäume, Graphen, Raster, verkettete Strukturen und verschachtelte Maps. JavaScript und Python im Browser, schrittweise Wiedergabe und optional Zeitmessung für JS.",
   HOME_HERO_FAQ_LINK: "Häufige Fragen",

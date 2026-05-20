@@ -135,8 +135,7 @@ const viOverrides = {
     "Bạn cần đăng nhập để lưu mã",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Hãy chạy mã trước",
 
-  HOME_LANDING_TITLE:
-    "Mã của bạn, từng khung hình. Bước tới. Bước lui.",
+  HOME_LANDING_TITLE: "Mã của bạn, từng khung hình.",
   HOME_LANDING_SUBTITLE:
     "Sân chơi kiểu LeetCode nơi lời giải trở thành dấu vết thực thi trực quan: cây, đồ thị, lưới, cấu trúc liên kết và map lồng nhau. JavaScript và Python trên trình duyệt, phát lại từng bước và thống kê thời gian tuỳ chọn cho JS.",
   HOME_HERO_FAQ_LINK: "Câu hỏi thường gặp",

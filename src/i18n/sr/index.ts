@@ -135,8 +135,7 @@ const srOverrides = {
     "Morate biti prijavljeni da biste sačuvali kod",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Prvo pokrenite kod",
 
-  HOME_LANDING_TITLE:
-    "Vaš kod, kadar po kadar. Korak napred. Korak nazad.",
+  HOME_LANDING_TITLE: "Vaš kod, kadar po kadar.",
   HOME_LANDING_SUBTITLE:
     "Igralište u stilu LeetCode-a gde vaše rešenje postaje vizuelni trag izvršavanja: stabla, grafovi, mreže, povezane strukture i ugnježđene mape. JavaScript i Python u pregledaču, reprodukcija korak po korak i opciona merenja vremena za JS.",
   HOME_HERO_FAQ_LINK: "Česta pitanja",

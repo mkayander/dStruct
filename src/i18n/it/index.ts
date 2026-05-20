@@ -135,8 +135,7 @@ const itOverrides = {
     "Devi essere autenticato per salvare il codice",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Esegui prima il codice",
 
-  HOME_LANDING_TITLE:
-    "Il tuo codice, fotogramma per fotogramma. Un passo avanti. Un passo indietro.",
+  HOME_LANDING_TITLE: "Il tuo codice, fotogramma per fotogramma.",
   HOME_LANDING_SUBTITLE:
     "Un playground in stile LeetCode dove la soluzione diventa traccia visuale di esecuzione: alberi, grafi, griglie, strutture collegate e mappe annidate. JavaScript e Python nel browser, riproduzione passo passo e statistiche temporali opzionali per JS.",
   HOME_HERO_FAQ_LINK: "Domande frequenti",
