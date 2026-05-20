@@ -49,7 +49,7 @@ type HomeLandingHeroPreviewRuntimeProps = {
   LL: TranslationFunctions;
 };
 
-const PLAYBACK_INTERVAL_MS = 300;
+const PLAYBACK_INTERVAL_MS = 600;
 const REPLAY_RESET_PAUSE_MS = 220;
 
 type LandingHeroPreviewRuntimeState =
