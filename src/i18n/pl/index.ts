@@ -135,8 +135,7 @@ const plOverrides = {
     "Musisz być zalogowany, aby zapisać kod",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Najpierw uruchom kod",
 
-  HOME_LANDING_TITLE:
-    "Twój kod, klatka po klatce. Krok naprzód. Krok wstecz.",
+  HOME_LANDING_TITLE: "Twój kod, klatka po klatce.",
   HOME_LANDING_SUBTITLE:
     "Piaskownica w stylu LeetCode, gdzie rozwiązanie staje się wizualnym śladem wykonania: drzewa, grafy, siatki, struktury powiązane i zagnieżdżone mapy. JavaScript i Python w przeglądarce, odtwarzanie krok po kroku i opcjonalny pomiar czasu dla JS.",
   HOME_HERO_FAQ_LINK: "Często zadawane pytania",

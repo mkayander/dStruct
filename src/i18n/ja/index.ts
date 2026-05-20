@@ -135,8 +135,7 @@ const jaOverrides = {
     "コードを保存するにはサインインが必要です",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "先にコードを実行してください",
 
-  HOME_LANDING_TITLE:
-    "あなたのコードを、フレームごと。一歩進んで、一歩戻る。",
+  HOME_LANDING_TITLE: "あなたのコードを、フレームごと。",
   HOME_LANDING_SUBTITLE:
     "解答が木・グラフ・グリッド・連結構造・ネストしたマップの視覚的な実行トレースになる LeetCode 風プレイグラウンド。ブラウザ上の JavaScript と Python、ステップ再生、JS 向けオプションのタイミング統計。",
   HOME_HERO_FAQ_LINK: "よくある質問",

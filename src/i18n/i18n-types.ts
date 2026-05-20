@@ -529,7 +529,7 @@ type RootTranslation = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: string
 	/**
-	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e​.​ ​S​t​e​p​ ​f​o​r​w​a​r​d​.​ ​S​t​e​p​ ​b​a​c​k​.
+	 * Y​o​u​r​ ​c​o​d​e​,​ ​f​r​a​m​e​ ​b​y​ ​f​r​a​m​e​.
 	 */
 	HOME_LANDING_TITLE: string
 	/**
@@ -1367,7 +1367,7 @@ export type TranslationFunctions = {
 	 */
 	YOU_NEED_TO_RUN_THE_CODE_FIRST: () => LocalizedString
 	/**
-	 * Your code, frame by frame. Step forward. Step back.
+	 * Your code, frame by frame.
 	 */
 	HOME_LANDING_TITLE: () => LocalizedString
 	/**

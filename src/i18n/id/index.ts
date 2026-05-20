@@ -135,8 +135,7 @@ const idOverrides = {
     "Anda harus masuk untuk menyimpan kode",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Jalankan kode terlebih dahulu",
 
-  HOME_LANDING_TITLE:
-    "Kode Anda, bingkai demi bingkai. Melangkah maju. Melangkah mundur.",
+  HOME_LANDING_TITLE: "Kode Anda, bingkai demi bingkai.",
   HOME_LANDING_SUBTITLE:
     "Playground bergaya LeetCode di mana solusi Anda menjadi jejak eksekusi visual untuk pohon, graf, grid, struktur tertaut, dan peta bersarang. JavaScript dan Python di browser, pemutaran ulang langkah demi langkah, dan statistik waktu opsional untuk JS.",
   HOME_HERO_FAQ_LINK: "Pertanyaan umum",

@@ -135,8 +135,7 @@ const ptOverrides = {
     "É necessário entrar para salvar o código",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Execute o código primeiro",
 
-  HOME_LANDING_TITLE:
-    "Seu código, quadro a quadro. Um passo à frente. Um passo atrás.",
+  HOME_LANDING_TITLE: "Seu código, quadro a quadro.",
   HOME_LANDING_SUBTITLE:
     "Um playground estilo LeetCode onde sua solução vira um rastro visual de execução: árvores, grafos, grades, estruturas encadeadas e mapas aninhados. JavaScript e Python no navegador, reprodução passo a passo e estatísticas de tempo opcionais para JS.",
   HOME_HERO_FAQ_LINK: "Perguntas frequentes",

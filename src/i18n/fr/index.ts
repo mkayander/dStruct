@@ -135,8 +135,7 @@ const frOverrides = {
     "Vous devez être connecté pour enregistrer le code",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Exécutez d'abord le code",
 
-  HOME_LANDING_TITLE:
-    "Votre code, image par image. Un pas en avant. Un pas en arrière.",
+  HOME_LANDING_TITLE: "Votre code, image par image.",
   HOME_LANDING_SUBTITLE:
     "Un terrain de jeu style LeetCode où votre solution devient une trace d'exécution visuelle : arbres, graphes, grilles, structures chaînées et cartes imbriquées. JavaScript et Python dans le navigateur, lecture pas à pas et statistiques de temps optionnelles pour JS.",
   HOME_HERO_FAQ_LINK: "Questions fréquentes",

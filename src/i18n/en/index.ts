@@ -125,7 +125,7 @@ const en: BaseTranslation = {
   YOU_NEED_TO_BE_AUTHED_TO_SAVE_CODE: "You need to be authed to save code",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "You need to run the code first",
 
-  HOME_LANDING_TITLE: "Your code, frame by frame. Step forward. Step back.",
+  HOME_LANDING_TITLE: "Your code, frame by frame.",
   HOME_LANDING_SUBTITLE:
     "A LeetCode-style playground where your solution becomes a visual execution trace for trees, graphs, grids, linked structures, and nested maps. JavaScript and Python in the browser, replayable state changes, and optional timing stats for JS.",
   HOME_HERO_FAQ_LINK: "Frequently asked questions",

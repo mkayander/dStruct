@@ -135,8 +135,7 @@ const koOverrides = {
     "코드를 저장하려면 로그인해야 합니다",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "먼저 코드를 실행하세요",
 
-  HOME_LANDING_TITLE:
-    "코드를 한 프레임씩. 앞으로 한 걸음. 뒤로 한 걸음.",
+  HOME_LANDING_TITLE: "코드를 한 프레임씩.",
   HOME_LANDING_SUBTITLE:
     "풀이가 트리, 그래프, 그리드, 연결 구조, 중첩 맵의 시각적 실행 추적이 되는 LeetCode 스타일 플레이그라운드. 브라우저의 JavaScript와 Python, 단계별 재생, JS용 선택적 타이밍 통계.",
   HOME_HERO_FAQ_LINK: "자주 묻는 질문",

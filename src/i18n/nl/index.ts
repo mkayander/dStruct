@@ -135,8 +135,7 @@ const nlOverrides = {
     "Je moet ingelogd zijn om code op te slaan",
   YOU_NEED_TO_RUN_THE_CODE_FIRST: "Voer eerst de code uit",
 
-  HOME_LANDING_TITLE:
-    "Je code, frame voor frame. Stap vooruit. Stap terug.",
+  HOME_LANDING_TITLE: "Je code, frame voor frame.",
   HOME_LANDING_SUBTITLE:
     "Een LeetCode-achtige speeltuin waar je oplossing een visueel uitvoeringsspoor wordt: bomen, grafen, roosters, gekoppelde structuren en geneste maps. JavaScript en Python in de browser, stap-voor-stap afspelen en optionele timing voor JS.",
   HOME_HERO_FAQ_LINK: "Veelgestelde vragen",
