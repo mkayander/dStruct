@@ -94,8 +94,12 @@ describe("transformArrayLiteralsInSolution", () => {
     const solution = findSolution(ast);
     transformArrayLiteralsInSolution(solution!);
     const out = generate(ast).code;
-    expect(out).toMatch(/new Array\(1,\s*2,\s*3,\s*\{[^}]*displayLabel:\s*"nums"/);
-    expect(out).toMatch(/new ArrayProxy\(4,\s*5,\s*\{[^}]*displayLabel:\s*"copy"/);
+    expect(out).toMatch(
+      /new Array\(1,\s*2,\s*3,\s*\{[^}]*displayLabel:\s*"nums"/,
+    );
+    expect(out).toMatch(
+      /new ArrayProxy\(4,\s*5,\s*\{[^}]*displayLabel:\s*"copy"/,
+    );
   });
 
   it("does not append displayLabel to ambiguous new Array(number) length form", () => {
