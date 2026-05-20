@@ -30403,7 +30403,7 @@
       "spaceComplexity": null,
       "description": null,
       "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function (nums) {\n  const n = nums.length;\n\n  for (let i = 0; i < n; i++) {\n    while (nums[i] > 0 && nums[i] < n && nums[i] !== nums[nums[i] - 1]) {\n      swap(nums, i, nums[i] - 1);\n    }\n    nums.setColor(i, \"green\");\n  }\n\n  for (let i = 0; i < n; i++) {\n    nums.setColor(i, \"blue\");\n    if (nums[i] !== i + 1) {\n      return i + 1;\n    }\n  }\n\n  return n + 1;\n};\n\nfunction swap(arr, i, j) {\n  [arr[i], arr[j]] = [arr[j], arr[i]];\n}\n\nreturn firstMissingPositive;\n",
-      "pythonCode": "from typing import List\n\ndef get_array_sum(array: List[int]) -> int:\n  sum = 0\n    for i in range(len(array)):\n      sum += array[i]\n  return sum\n",
+      "pythonCode": "def first_missing_positive(nums):\r\n  n = len(nums)\r\n\r\n  def swap(first_index, second_index):\r\n    nums[first_index], nums[second_index] = nums[second_index], nums[first_index]\r\n\r\n  for idx in range(n):\r\n    while 0 < nums[idx] < n and nums[idx] != nums[nums[idx] - 1]:\r\n      swap(idx, nums[idx] - 1)\r\n    nums.setColor(idx, \"green\")\r\n\r\n  for idx in range(n):\r\n    nums.setColor(idx, \"blue\")\r\n    if nums[idx] != idx + 1:\r\n      return idx + 1\r\n\r\n  return n + 1\r\n",
       "order": 2
     },
     "clvb8szpn0001jnq9f720euxn": {
