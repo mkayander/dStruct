@@ -1,3 +1,18 @@
+## [1.377.1](https://github.com/mkayander/dStruct/compare/v1.377.0...v1.377.1) (2026-04-23)
+
+
+### Bug Fixes
+
+* **playback:** restore full subtree on revertChildId; setRightChild undo parity ([#131](https://github.com/mkayander/dStruct/issues/131)) ([f789935](https://github.com/mkayander/dStruct/commit/f789935318b7f3c394850d7d994011fd6123be68))
+
+# [1.377.0](https://github.com/mkayander/dStruct/compare/v1.376.0...v1.377.0) (2026-04-14)
+
+
+### Features
+
+* **homePage:** update invert-tree-state.json with new node structure and animations ([9900aa0](https://github.com/mkayander/dStruct/commit/9900aa0d93f1dc5fc710921c0f66172e2e24cd94))
+* **landingHeroPreviewStore:** add animation handling for tree nodes ([3e2ab17](https://github.com/mkayander/dStruct/commit/3e2ab1726b32854a616382d738c0177b0e952f43))
+
 # [1.376.0](https://github.com/mkayander/dStruct/compare/v1.375.0...v1.376.0) (2026-04-13)
 
 

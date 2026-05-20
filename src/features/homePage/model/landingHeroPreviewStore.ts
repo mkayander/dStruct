@@ -16,6 +16,7 @@ import type {
   StructureTypeName,
 } from "#/features/callstack/model/callstackSlice";
 import invertTreeStateSnapshot from "#/features/homePage/model/assets/invert-tree-state.json";
+import type { AnimationName } from "#/shared/model/baseStructureSlice";
 import type { RootState } from "#/store/makeStore";
 import { rootReducer } from "#/store/rootReducer";
 
@@ -86,10 +87,28 @@ const toStructureTypeName = (value: string): StructureTypeName => {
   }
 };
 
+const toStructureAnimation = (
+  value: SnapshotTreeNode["animation"],
+): AnimationName | null | undefined => {
+  if (value === null || value === undefined) {
+    return value;
+  }
+  switch (value) {
+    case "blink":
+    case "pulse":
+      return value;
+    default:
+      throw new Error(
+        `Unsupported animation in landing preview: ${String(value)}`,
+      );
+  }
+};
+
 const normalizeTreeNode = (node: SnapshotTreeNode): TreeNodeData => ({
   ...node,
   argType: toArgumentTreeType(node.argType),
-  childrenIds: [...node.childrenIds],
+  animation: toStructureAnimation(node.animation),
+  childrenIds: node.childrenIds.map((childId) => childId ?? undefined),
 });
 
 const normalizeTreeEdges = (

@@ -2,6 +2,7 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  current,
   type EntityState,
   type PayloadAction,
 } from "@reduxjs/toolkit";
@@ -96,6 +97,134 @@ const restoreInitialEdges = (treeState: TreeData) => {
   );
 };
 
+/** All node ids in the subtree rooted at `rootId` (BFS over `childrenIds`). */
+const collectSubtreeNodeIds = (
+  entities: TreeData["nodes"]["entities"],
+  rootId: string,
+): string[] => {
+  const orderedIds: string[] = [];
+  const visited = new Set<string>();
+  const queue: string[] = [rootId];
+  let headIndex = 0;
+
+  while (headIndex < queue.length) {
+    const nodeId = queue[headIndex];
+    headIndex += 1;
+    if (!nodeId || visited.has(nodeId)) continue;
+    visited.add(nodeId);
+    orderedIds.push(nodeId);
+
+    const node = entities[nodeId];
+    if (!node) continue;
+    for (const childId of node.childrenIds) {
+      if (childId) {
+        queue.push(childId);
+      }
+    }
+  }
+
+  return orderedIds;
+};
+
+/** Move every node and internal edge in the subtree rooted at `subtreeRootId` from one tree bucket to another (playback undo uses the same path as forward cross-tree `setChildId`). */
+const moveSubtreeBetweenTreeBuckets = (
+  state: TreeDataState,
+  fromTreeName: string,
+  toTreeName: string,
+  subtreeRootId: string,
+) => {
+  if (fromTreeName === toTreeName) return;
+
+  const fromTreeState = getStateByName(state, fromTreeName);
+  if (!fromTreeState?.nodes.entities[subtreeRootId]) return;
+
+  const subtreeIds = collectSubtreeNodeIds(
+    fromTreeState.nodes.entities,
+    subtreeRootId,
+  );
+  const subtreeIdSet = new Set(subtreeIds);
+
+  const movedNodes: TreeNodeData[] = [];
+  for (const nodeId of subtreeIds) {
+    const node = fromTreeState.nodes.entities[nodeId];
+    if (node) {
+      const plain = current(node);
+      movedNodes.push({
+        ...plain,
+        childrenIds: [...plain.childrenIds],
+        info: plain.info ? { ...plain.info } : undefined,
+      });
+    }
+  }
+
+  const movedInternalEdges: EdgeData[] = [];
+  const edgeIdsTouchingSubtree: string[] = [];
+  for (const edge of Object.values(fromTreeState.edges.entities)) {
+    if (!edge) continue;
+    const sourceInSubtree = subtreeIdSet.has(edge.sourceId);
+    const targetInSubtree = subtreeIdSet.has(edge.targetId);
+    if (sourceInSubtree && targetInSubtree) {
+      movedInternalEdges.push({ ...current(edge) });
+    }
+    if (sourceInSubtree || targetInSubtree) {
+      edgeIdsTouchingSubtree.push(edge.id);
+    }
+  }
+
+  if (movedNodes.length === 0) return;
+
+  if (!getStateByName(state, toTreeName)) {
+    const sampleArgType = movedNodes[0]?.argType;
+    if (sampleArgType) {
+      state[toTreeName] = {
+        ...getInitialData(sampleArgType, 999),
+        isRuntime: true,
+      };
+    }
+  }
+
+  // Insert into destination before removing from source so Immer never sees dangling draft-only data.
+  runStateActionByName(state, toTreeName, (toTreeState) => {
+    const hadNoNodesBeforeMove = toTreeState.nodes.ids.length === 0;
+
+    // Manual insert: entity adapter `addMany` skipped inserts when moving snapshots from another
+    // tree under the same Immer produce (duplicate id bookkeeping). Direct assignment is reliable.
+    for (const node of movedNodes) {
+      if (!(node.id in toTreeState.nodes.entities)) {
+        toTreeState.nodes.ids.push(node.id);
+      }
+      toTreeState.nodes.entities[node.id] = node;
+    }
+    for (const edge of movedInternalEdges) {
+      if (!(edge.id in toTreeState.edges.entities)) {
+        toTreeState.edges.ids.push(edge.id);
+      }
+      toTreeState.edges.entities[edge.id] = edge;
+    }
+
+    if (
+      hadNoNodesBeforeMove &&
+      toTreeState.type === ArgumentType.BINARY_TREE &&
+      toTreeState.rootId === null
+    ) {
+      toTreeState.rootId = subtreeRootId;
+    }
+  });
+
+  runStateActionByName(state, fromTreeName, (mutableFrom) => {
+    for (const edgeId of edgeIdsTouchingSubtree) {
+      edgeDataAdapter.removeOne(mutableFrom.edges, edgeId);
+    }
+    treeNodeDataAdapter.removeMany(mutableFrom.nodes, subtreeIds);
+
+    if (mutableFrom.nodes.ids.length === 0) {
+      delete state[fromTreeName];
+    } else if (mutableFrom.rootId && subtreeIdSet.has(mutableFrom.rootId)) {
+      mutableFrom.rootId = null;
+    }
+  });
+};
+
 const applyChildIdUpdates = (
   treeState: TreeData,
   id: string,
@@ -155,6 +284,9 @@ const deleteTreeNode = (
   if (count === 1 && cleanupState) {
     delete state[treeName];
   } else {
+    if (treeState.rootId === id) {
+      treeState.rootId = null;
+    }
     treeNodeDataAdapter.removeOne(treeState.nodes, id);
   }
 };
@@ -192,6 +324,11 @@ export const treeNodeSlice = createSlice({
       const nodeId = action.payload.data.id;
       treeState.nodes.ids.push(nodeId);
       treeState.nodes.entities[nodeId] = action.payload.data;
+
+      // Runtime binary trees share one Redux tree per logical structure; first added node is the root for layout.
+      if (argType === ArgumentType.BINARY_TREE && treeState.rootId === null) {
+        treeState.rootId = nodeId;
+      }
 
       state[name] = treeState;
     },
@@ -232,22 +369,15 @@ export const treeNodeSlice = createSlice({
     ) => {
       const { childId, childTreeName } = action.payload.data;
 
-      // If child is from another tree, remove it from the old tree and add it to the new one
+      // If child is from another tree, move the whole subtree (not only the root node) so
+      // descendants stay linked when a parent node is re-parented under a new BinaryTree name.
       if (childId && childTreeName && childTreeName !== action.payload.name) {
-        let childData: TreeNodeData | undefined = undefined;
-        runStateActionByName(state, childTreeName, (childTreeState) => {
-          childData = childTreeState.nodes.entities[childId];
-          if (!childData) return;
-
-          deleteTreeNode(state, childTreeName, childTreeState, childId, false);
-        });
-
-        runStateActionByName(state, action.payload.name, (treeState) => {
-          if (!childData) return;
-
-          childData.childrenIds = []; // TODO: Allow to keep track of relations to different trees
-          treeNodeDataAdapter.addOne(treeState.nodes, childData);
-        });
+        moveSubtreeBetweenTreeBuckets(
+          state,
+          childTreeName,
+          action.payload.name,
+          childId,
+        );
       }
 
       // Normal child id update
@@ -284,21 +414,21 @@ export const treeNodeSlice = createSlice({
         childTreeName?: string;
       }>,
     ) => {
-      const { id, childId, childTreeName } = action.payload.data;
+      const { childId, childTreeName } = action.payload.data;
       if (!childId || !childTreeName || action.payload.name === childTreeName)
         return;
 
-      runStateActionByName(state, action.payload.name, (treeState) => {
-        const node = treeNodeDataSelector.selectById(treeState.nodes, id);
-        const childData = treeState.nodes.entities[childId];
-        if (!node || !childData) return;
+      const parentTreeName = action.payload.name;
+      const parentTree = getStateByName(state, parentTreeName);
+      const childNode = parentTree?.nodes.entities[childId];
+      if (!childNode) return;
 
-        deleteTreeNode(state, action.payload.name, treeState, childData.id);
-
-        runStateActionByName(state, childTreeName, (childTreeState) => {
-          treeNodeDataAdapter.addOne(childTreeState.nodes, childData);
-        });
-      });
+      moveSubtreeBetweenTreeBuckets(
+        state,
+        parentTreeName,
+        childTreeName,
+        childId,
+      );
     },
     dragNode: (
       state,
