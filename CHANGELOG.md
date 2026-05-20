@@ -1,3 +1,10 @@
+# [1.378.0](https://github.com/mkayander/dStruct/compare/v1.377.1...v1.378.0) (2026-05-20)
+
+
+### Features
+
+* pnpm update ([3283b5d](https://github.com/mkayander/dStruct/commit/3283b5d9f3626019b15fd3ecc328cb99c31dcc1c))
+
 ## [1.377.1](https://github.com/mkayander/dStruct/compare/v1.377.0...v1.377.1) (2026-04-23)
 
 
