@@ -13,6 +13,31 @@ ListItemData = Dict[str, Any]
 ListData = Dict[str, Any]
 
 
+def _emit_collection_frame(
+    callstack: List[CallFrame],
+    *,
+    arg_type: str,
+    frame_type: str,
+    node_id: str,
+    args: Dict[str, Any],
+) -> None:
+    """Append one frame (used from TrackedFrozenSet.__new__ where self is not available)."""
+    frame: CallFrame = {
+        "id": str(uuid.uuid4()),
+        "timestamp": int(time.time() * 1000),
+        "treeName": "main",
+        "structureType": "array",
+        "argType": arg_type,
+        "name": frame_type,
+        "nodeId": node_id,
+        "args": args,
+    }
+    snap = snapshot_for_frame()
+    if snap is not None:
+        frame["source"] = snap
+    callstack.append(frame)
+
+
 class TrackedDict(dict):
     """dict subclass that records reads/writes/deletes on the visualization callstack."""
 
@@ -115,11 +140,9 @@ class TrackedDict(dict):
 
     def setdefault(self, key: Any, default: Any = None) -> Any:  # type: ignore[override]
         if key in self:
-            _append_collection_frame(
-                self._callstack,
-                arg_type="map",
-                frame_type="readArrayItem",
-                node_id=self._node_id_for_key(key),
+            self._add_frame(
+                "readArrayItem",
+                nodeId=self._node_id_for_key(key),
                 args={"key": key},
             )
             return dict.__getitem__(self, key)
@@ -133,19 +156,15 @@ class TrackedDict(dict):
             if args:
                 return args[0]
             raise KeyError(key)
-        _append_collection_frame(
-            self._callstack,
-            arg_type="map",
-            frame_type="readArrayItem",
-            node_id=self._node_id_for_key(key),
+        self._add_frame(
+            "readArrayItem",
+            nodeId=self._node_id_for_key(key),
             args={"key": key},
         )
         popped = dict.__getitem__(self, key)
-        _append_collection_frame(
-            self._callstack,
-            arg_type="map",
-            frame_type="deleteNode",
-            node_id=self._node_id_for_key(key),
+        self._add_frame(
+            "deleteNode",
+            nodeId=self._node_id_for_key(key),
             args={"key": key},
         )
         dict.__delitem__(self, key)
@@ -156,11 +175,9 @@ class TrackedDict(dict):
             raise KeyError("popitem(): dictionary is empty")
         key = next(reversed(self))
         value = dict.__getitem__(self, key)
-        _append_collection_frame(
-            self._callstack,
-            arg_type="map",
-            frame_type="deleteNode",
-            node_id=self._node_id_for_key(key),
+        self._add_frame(
+            "deleteNode",
+            nodeId=self._node_id_for_key(key),
             args={"key": key, "value": value},
         )
         dict.__delitem__(self, key)
@@ -169,13 +186,7 @@ class TrackedDict(dict):
     def clear(self) -> None:  # type: ignore[override]
         if not self:
             return None
-        _append_collection_frame(
-            self._callstack,
-            arg_type="map",
-            frame_type="clearAppearance",
-            node_id="",
-            args={},
-        )
+        self._add_frame("clearAppearance", nodeId="", args={})
         dict.clear(self)
         return None
 
@@ -301,25 +312,13 @@ class TrackedSet(set):
         value = next(iter(self))
         node_id = self._node_id_for_value(value)
         super().discard(value)
-        _append_collection_frame(
-            self._callstack,
-            arg_type="set",
-            frame_type="deleteNode",
-            node_id=node_id,
-            args={"value": value},
-        )
+        self._add_frame("deleteNode", nodeId=node_id, args={"value": value})
         return value
 
     def clear(self) -> None:  # type: ignore[override]
         if not self:
             return None
-        _append_collection_frame(
-            self._callstack,
-            arg_type="set",
-            frame_type="clearAppearance",
-            node_id="",
-            args={},
-        )
+        self._add_frame("clearAppearance", nodeId="", args={})
         super().clear()
         return None
 
@@ -341,7 +340,7 @@ class TrackedFrozenSet(frozenset):
         instance = super().__new__(cls, data)
         object.__setattr__(instance, "_name", name)
         object.__setattr__(instance, "_callstack", callstack)
-        _append_collection_frame(
+        _emit_collection_frame(
             callstack,
             arg_type="set",
             frame_type="addArray",
@@ -366,7 +365,7 @@ class TrackedFrozenSet(frozenset):
         contained = super().__contains__(value)
         if contained:
             callstack = object.__getattribute__(self, "_callstack")
-            _append_collection_frame(
+            _emit_collection_frame(
                 callstack,
                 arg_type="set",
                 frame_type="readArrayItem",
