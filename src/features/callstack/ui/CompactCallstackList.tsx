@@ -186,8 +186,11 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
                         <Stack
                           direction="row"
                           spacing={0.5}
-                          alignItems="center"
-                          sx={{ minWidth: 0, whiteSpace: "nowrap" }}
+                          sx={{
+                            alignItems: "center",
+                            minWidth: 0,
+                            whiteSpace: "nowrap",
+                          }}
                         >
                           <Typography component="span" variant="inherit">
                             L:

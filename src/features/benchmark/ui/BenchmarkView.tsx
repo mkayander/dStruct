@@ -23,10 +23,20 @@ const StatChip: React.FC<{
         backgroundColor: theme.palette.action.hover,
       }}
     >
-      <Typography variant="caption" color="text.secondary">
+      <Typography
+        variant="caption"
+        sx={{
+          color: "text.secondary",
+        }}
+      >
         {label}
       </Typography>
-      <Typography variant="caption" fontWeight={600}>
+      <Typography
+        variant="caption"
+        sx={{
+          fontWeight: 600,
+        }}
+      >
         {value != null ? `${value.toFixed(2)} ms` : "—"}
       </Typography>
     </Box>
@@ -43,7 +53,14 @@ export const BenchmarkView = () => {
         md: 2,
       }}
     >
-      <Stack direction="row" flexWrap="wrap" gap={1} useFlexGap>
+      <Stack
+        direction="row"
+        useFlexGap
+        sx={{
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
         <StatChip label="Avg" value={benchmarkResults?.averageTime} />
         <StatChip label="Med" value={benchmarkResults?.medianTime} />
         <StatChip label="P75" value={benchmarkResults?.p75Time} />

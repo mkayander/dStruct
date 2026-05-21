@@ -26,7 +26,11 @@ export const RatingButtons: React.FC<RatingButtonsProps> = ({
   );
 
   return (
-    <Box position="relative">
+    <Box
+      sx={{
+        position: "relative",
+      }}
+    >
       <ButtonGroup
         variant="text"
         color={likesPercentage > 50 ? "success" : "error"}

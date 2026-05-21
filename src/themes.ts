@@ -223,13 +223,20 @@ export const createCustomTheme = (deviceType: SsrDeviceType = "desktop") => {
             minHeight: 40,
             borderRadius: 4,
             paddingInline: 16,
-          },
-          containedPrimary: {
-            background: "linear-gradient(180deg, #ffffff 0%, #c5c6c8 100%)",
-            color: obsidianTokens.background,
-            "&:hover": {
-              background: "linear-gradient(180deg, #ffffff 0%, #d9dadc 100%)",
-            },
+            variants: [
+              {
+                props: { variant: "contained", color: "primary" },
+                style: {
+                  background:
+                    "linear-gradient(180deg, #ffffff 0%, #c5c6c8 100%)",
+                  color: obsidianTokens.background,
+                  "&:hover": {
+                    background:
+                      "linear-gradient(180deg, #ffffff 0%, #d9dadc 100%)",
+                  },
+                },
+              },
+            ],
           },
           outlined: {
             borderColor: alpha(obsidianTokens.outline, 0.36),

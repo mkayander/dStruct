@@ -142,7 +142,12 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ canonicalUrl }) => {
         {renderAuthStatusSection()}
         {session.status !== "loading" ? (
           <>
-            <Typography variant="h5" my={3}>
+            <Typography
+              variant="h5"
+              sx={{
+                my: 3,
+              }}
+            >
               {LL.USER_DASHBOARD({
                 name: leetCodeUsername || username || "User",
               })}

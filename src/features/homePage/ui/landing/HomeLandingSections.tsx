@@ -1,7 +1,7 @@
 import AutoAwesomeMotion from "@mui/icons-material/AutoAwesomeMotion";
 import CallSplit from "@mui/icons-material/CallSplit";
 import History from "@mui/icons-material/History";
-import PlayCircleOutline from "@mui/icons-material/PlayCircleOutline";
+import PlayCircleOutlined from "@mui/icons-material/PlayCircleOutlined";
 import {
   alpha,
   Box,
@@ -77,7 +77,7 @@ export const HomeLandingSections: React.FC<HomeLandingSectionsProps> = ({
     },
     {
       id: "pillar-workers",
-      icon: <PlayCircleOutline fontSize="small" />,
+      icon: <PlayCircleOutlined fontSize="small" />,
       title: LL.HOME_PILLAR_WORKERS_TITLE(),
       body: LL.HOME_PILLAR_WORKERS_BODY(),
     },

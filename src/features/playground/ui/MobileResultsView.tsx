@@ -16,7 +16,12 @@ export const MobileResultsView: React.FC = () => {
   const [outputTab, setOutputTab] = useState("1");
 
   const outputHeader = (
-    <Typography variant="caption" fontWeight={600}>
+    <Typography
+      variant="caption"
+      sx={{
+        fontWeight: 600,
+      }}
+    >
       {LL.OUTPUT()}
     </Typography>
   );
@@ -42,7 +47,6 @@ export const MobileResultsView: React.FC = () => {
       <Box sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
         <TreeViewPanel />
       </Box>
-
       <Box
         sx={{
           mt: 1,
@@ -58,8 +62,8 @@ export const MobileResultsView: React.FC = () => {
           collapsedContent={
             <Stack
               direction="row"
-              alignItems="center"
               sx={{
+                alignItems: "center",
                 width: "100%",
                 minHeight: 52,
                 paddingBottom: `calc(${MOBILE_PHASE_NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px))`,

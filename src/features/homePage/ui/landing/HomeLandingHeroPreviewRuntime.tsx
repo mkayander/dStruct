@@ -209,21 +209,32 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     <Stack spacing={1.5} sx={{ minWidth: 0 }}>
       <Stack
         direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ minWidth: 0 }}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          minWidth: 0,
+        }}
       >
-        <Typography variant="subtitle2" color="text.secondary">
+        <Typography
+          variant="subtitle2"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           {LL.HOME_PILLAR_REPLAY_TITLE()}
         </Typography>
-        <Typography variant="caption" color="text.secondary">
+        <Typography
+          variant="caption"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           {LL.HOME_PREVIEW_STEP_PROGRESS({
             step: Math.max(activePlaybackStepIndex + 1, 0),
             total: playbackStepGroups.length || callstackLength,
           })}
         </Typography>
       </Stack>
-
       <Box
         sx={{
           position: "relative",
@@ -260,7 +271,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           />
         </Box>
       </Box>
-
       <Box
         sx={{
           borderRadius: 3,
@@ -272,26 +282,37 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
         <Stack
           direction="row"
           spacing={1}
-          alignItems="center"
-          sx={{ px: 1.5, py: 1.25 }}
+          sx={{
+            alignItems: "center",
+            px: 1.5,
+            py: 1.25,
+          }}
         >
-          <Typography variant="subtitle2" color="text.secondary">
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: "text.secondary",
+            }}
+          >
             {LL.CALLSTACK()}
           </Typography>
         </Stack>
         <CompactCallstackList height={262} />
       </Box>
-
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={1}
-        alignItems="center"
-        sx={{ minWidth: 0 }}
+        sx={{
+          alignItems: "center",
+          minWidth: 0,
+        }}
       >
         <Stack
           direction="row"
           spacing={0.5}
-          justifyContent={{ xs: "flex-end", sm: "flex-start" }}
+          sx={{
+            justifyContent: { xs: "flex-end", sm: "flex-start" },
+          }}
         >
           <IconButton
             size="small"
@@ -355,8 +376,8 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
         </Stack>
         <Typography
           variant="caption"
-          color="text.secondary"
           sx={{
+            color: "text.secondary",
             ml: { sm: 0.5 },
             lineHeight: 1.6,
             maxWidth: { xs: "100%", sm: 220 },

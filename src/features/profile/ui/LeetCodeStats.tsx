@@ -65,7 +65,13 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
             <Grid container spacing={1}>
               <Grid className="row" container spacing={1}>
                 <Grid size={{ xs: 5 }}>
-                  <Typography fontWeight="bold">Ranking:</Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Ranking:
+                  </Typography>
                 </Grid>
                 <Grid size={{ xs: 7 }}>
                   <Typography>
@@ -82,7 +88,11 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
                   spacing={1}
                 >
                   <Grid size={{ xs: 5 }}>
-                    <Typography fontWeight="bold">
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                      }}
+                    >
                       {titlesMap[item.difficulty]}:
                     </Typography>
                   </Grid>
@@ -91,8 +101,10 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
                       <span>{item.count}</span> /{" "}
                       <Typography
                         variant="body2"
-                        fontWeight="lighter"
                         component="span"
+                        sx={{
+                          fontWeight: "lighter",
+                        }}
                       >
                         {
                           submissionsData?.allQuestionsCount[item.difficulty]
@@ -123,7 +135,12 @@ export const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({
             </Box>
           </>
         ) : (
-          <Typography variant="h6" fontWeight="bold">
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
             No LeetCode profile found!
           </Typography>
         )}

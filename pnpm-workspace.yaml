@@ -7,3 +7,6 @@ allowBuilds:
   esbuild: true
   prisma: true
   sharp: true
+minimumReleaseAgeExclude:
+  - '@mui/x-charts@9.3.0'
+  - '@mui/x-internal-gestures@9.3.0'

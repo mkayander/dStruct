@@ -470,13 +470,18 @@ export const CodePanel: React.FC<CodePanelProps> = ({
       }}
     >
       <LoadingSkeletonOverlay />
-
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
             <Tab label={LL.CODE_RUNNER()} value="1" />
           </TabList>
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: "center",
+            }}
+          >
             {isMobile && (
               <ToggleButtonGroup
                 value={runMode}
@@ -532,11 +537,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
           }}
         >
           <Box
-            mx={2}
-            my={1}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+            sx={{
+              mx: 2,
+              my: 1,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <SolutionSelectBar selectedProject={selectedProject} />
 
@@ -595,7 +602,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
               </Tooltip>
               <Tooltip
                 title={
-                  <Box display="flex" alignItems="center" gap="3px">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "3px",
+                    }}
+                  >
                     {language === "javascript" ? (
                       <>
                         {LL.FORMAT_CODE_WITH()} <b>Prettier</b>{" "}

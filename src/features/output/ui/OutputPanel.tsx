@@ -129,7 +129,12 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
         <Tab label={LL.CALLSTACK()} value="2" />
       </TabList>
       {!headerOnly && trailingHeaderActions && (
-        <Stack direction="row" alignItems="center">
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: "center",
+          }}
+        >
           {trailingHeaderActions}
         </Stack>
       )}
@@ -150,21 +155,28 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
   return (
     <PanelWrapper>
       <LoadingSkeletonOverlay />
-
       <TabContext value={value}>
         {tabBar}
 
         <StyledTabPanel value="1" style={{ height: "100%" }}>
           <Stack spacing={2}>
             {!isReady ? (
-              <Box display="box">
+              <Box
+                sx={{
+                  display: "box",
+                }}
+              >
                 <Typography variant="h5">{LL.NO_DATA()}</Typography>
                 <Typography variant="caption">
                   {LL.YOU_NEED_TO_RUN_THE_CODE_FIRST()}
                 </Typography>
               </Box>
             ) : error ? (
-              <Box display="box">
+              <Box
+                sx={{
+                  display: "box",
+                }}
+              >
                 <Typography variant="h5" color="error">
                   {error.name}: {error.message}
                 </Typography>
@@ -177,11 +189,22 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
             ) : (
               <Stack spacing={1}>
                 <Stack direction="row" spacing={1}>
-                  <Typography variant="h5" color="success.main">
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: "success.main",
+                    }}
+                  >
                     {LL.SUCCESS()}
                   </Typography>
                   {typeof runtime === "number" && (
-                    <Typography variant="caption" color="text.disabled" mt={1}>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: "text.disabled",
+                        mt: 1,
+                      }}
+                    >
                       {LL.RUNTIME()}: {runtime.toFixed(2)} {LL.MS()}
                     </Typography>
                   )}

@@ -34,8 +34,18 @@ export const ProjectBrowserEmpty: React.FC<ProjectBrowserEmptyProps> = ({
         p: 4,
       }}
     >
-      <Stack spacing={1} alignItems="center">
-        <Typography variant="body1" color="text.secondary">
+      <Stack
+        spacing={1}
+        sx={{
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="body1"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           {getMessage()}
         </Typography>
       </Stack>

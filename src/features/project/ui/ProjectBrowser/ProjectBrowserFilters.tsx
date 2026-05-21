@@ -92,10 +92,18 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
       <Stack spacing={2}>
         <Stack
           direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          <Typography variant="h6" fontSize={16} fontWeight={600}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: 16,
+              fontWeight: 600,
+            }}
+          >
             {LL.FILTERS()}
           </Typography>
           <IconButton size="small" onClick={onClose} aria-label="Close filters">
@@ -184,7 +192,13 @@ export const ProjectBrowserFilters: React.FC<ProjectBrowserFiltersProps> = ({
               }
               label={LL.SHOW_ONLY_MINE()}
             />
-            <Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
+            <Typography
+              variant="caption"
+              sx={{
+                color: "text.secondary",
+                ml: 4,
+              }}
+            >
               Coming soon
             </Typography>
           </Box>

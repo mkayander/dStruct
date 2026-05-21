@@ -25,10 +25,10 @@ const ArrayBracket: React.FC<ArrayBracketProps> = ({
       <Typography
         component="span"
         className="array-bracket"
-        color="primary.light"
-        fontSize={26}
-        fontWeight={200}
         sx={{
+          color: "primary.light",
+          fontSize: 26,
+          fontWeight: 200,
           display: "inline-block",
           height: 37,
           opacity: 0.6,

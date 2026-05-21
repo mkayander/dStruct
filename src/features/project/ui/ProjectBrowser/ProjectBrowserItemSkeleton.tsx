@@ -8,10 +8,10 @@ export const ProjectBrowserItemSkeleton: React.FC = () => {
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
-      alignItems="center"
       spacing={1.5}
       sx={{
+        justifyContent: "space-between",
+        alignItems: "center",
         height: ITEM_HEIGHT,
         p: 1.75,
         px: 2,
@@ -22,9 +22,11 @@ export const ProjectBrowserItemSkeleton: React.FC = () => {
       <Stack
         direction="row"
         spacing={1.5}
-        alignItems="center"
-        flex={1}
-        minWidth={0}
+        sx={{
+          alignItems: "center",
+          flex: 1,
+          minWidth: 0,
+        }}
       >
         {/* Completion status placeholder */}
         <Box
@@ -35,12 +37,21 @@ export const ProjectBrowserItemSkeleton: React.FC = () => {
           }}
         />
 
-        <Stack direction="column" spacing={0.5} flex={1} minWidth={0}>
+        <Stack
+          direction="column"
+          spacing={0.5}
+          sx={{
+            flex: 1,
+            minWidth: 0,
+          }}
+        >
           <Stack
             direction="row"
             spacing={1}
-            alignItems="center"
-            flexWrap="nowrap"
+            sx={{
+              alignItems: "center",
+              flexWrap: "nowrap",
+            }}
           >
             {/* Title skeleton */}
             <Skeleton
@@ -63,9 +74,15 @@ export const ProjectBrowserItemSkeleton: React.FC = () => {
           </Stack>
         </Stack>
       </Stack>
-
       {/* Right side: Difficulty chip, avatar, "new" label */}
-      <Stack direction="row" spacing={1} alignItems="center" flexShrink={0}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "center",
+          flexShrink: 0,
+        }}
+      >
         {/* Difficulty chip skeleton */}
         <Skeleton
           variant="rectangular"

@@ -74,7 +74,12 @@ export const CallstackTable: React.FC = () => {
 
   if (!callstack.isReady) {
     return (
-      <Box p={2} textAlign="center">
+      <Box
+        sx={{
+          p: 2,
+          textAlign: "center",
+        }}
+      >
         Here you will see a table of runtime actions once the code is executed!
       </Box>
     );

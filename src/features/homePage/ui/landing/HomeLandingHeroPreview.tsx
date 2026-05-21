@@ -1,6 +1,6 @@
 import CallSplit from "@mui/icons-material/CallSplit";
 import History from "@mui/icons-material/History";
-import PlayCircleOutline from "@mui/icons-material/PlayCircleOutline";
+import PlayCircleOutlined from "@mui/icons-material/PlayCircleOutlined";
 import { alpha, Box, Chip, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 
@@ -47,9 +47,9 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={1.25}
-        justifyContent="space-between"
-        alignItems={{ xs: "stretch", sm: "center" }}
         sx={{
+          justifyContent: "space-between",
+          alignItems: { xs: "stretch", sm: "center" },
           p: 1.5,
           borderBottom: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
           columnGap: 1.5,
@@ -59,8 +59,10 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
         <Stack
           direction="row"
           spacing={1}
-          alignItems="center"
-          justifyContent={{ xs: "center", sm: "flex-start" }}
+          sx={{
+            alignItems: "center",
+            justifyContent: { xs: "center", sm: "flex-start" },
+          }}
         >
           {WINDOW_CONTROLS.map((color) => (
             <Box
@@ -78,15 +80,15 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
         <Stack
           direction="row"
           spacing={1}
-          justifyContent="flex-end"
           sx={{
+            justifyContent: "flex-end",
             flexWrap: "wrap",
             rowGap: 1,
           }}
         >
           <Chip
             size="small"
-            icon={<PlayCircleOutline fontSize="small" />}
+            icon={<PlayCircleOutlined fontSize="small" />}
             label={LL.HOME_HOW_STEP_2_TITLE()}
           />
           <Chip
@@ -101,7 +103,6 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
           />
         </Stack>
       </Stack>
-
       <Box
         sx={{
           display: "grid",
@@ -127,14 +128,26 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
           <Stack spacing={1.25}>
             <Stack
               direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{ minWidth: 0 }}
+              sx={{
+                justifyContent: "space-between",
+                alignItems: "center",
+                minWidth: 0,
+              }}
             >
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: "text.secondary",
+                }}
+              >
                 {LL.HOME_LANDING_PREVIEW_CODE_LANGUAGE()}
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                sx={{
+                  color: "text.secondary",
+                }}
+              >
                 {LL.HOME_LANDING_PREVIEW_CODE_FILENAME()}
               </Typography>
             </Stack>
