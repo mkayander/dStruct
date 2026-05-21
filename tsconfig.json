@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es2019",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,7 +21,7 @@
     "emitDecoratorMetadata": true,
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
     "paths": {
-      "#/*": ["src/*"]
+      "#/*": ["./src/*"]
     },
     "plugins": [
       {
