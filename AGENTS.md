@@ -31,6 +31,16 @@ Cursor rules to apply (see each file for full wording):
 
 ## Cursor Cloud specific instructions
 
+### Cloud agent update (`install`)
+
+Repo-level config is in **`.cursor/environment.json`**. The **`install`** command runs **`bash .cursor/cloud-agent-update.sh`**, which:
+
+1. Starts PostgreSQL
+2. Creates **`.env`** from **`.cursor/cloud-agent.env.template`** when missing (so **`pnpm install`** / postinstall Prisma generate succeed)
+3. Runs **`pnpm install`** and **`pnpm prisma:push`**
+
+If you override the dashboard update script, keep step 2 before **`pnpm install`**, or rely on **`prisma.config.ts`** local URL fallback and Cursor Secrets for **`DATABASE_URL`**.
+
 ### Services overview
 
 | Service            | Command                         | Notes                                                                        |

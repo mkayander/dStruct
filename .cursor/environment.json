@@ -1,0 +1,11 @@
+{
+  "install": "bash .cursor/cloud-agent-update.sh",
+  "start": "sudo service postgresql start",
+  "terminals": [
+    {
+      "name": "Next.js dev server",
+      "command": "pnpm dev",
+      "description": "Runs the app on http://localhost:3000"
+    }
+  ]
+}
