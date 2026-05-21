@@ -253,6 +253,46 @@ def solve():
         names = [frame["name"] for frame in result["callstack"]]
         self.assertIn("clearAppearance", names)
 
+    def test_return_tracked_binary_tree_output_is_readable_level_order(self) -> None:
+        code = """
+def solve(root):
+    return root
+"""
+        args = [
+            {
+                "type": "binaryTree",
+                "value": {
+                    "levelOrder": [1, 2, 3],
+                    "nodeIds": ["node-a", "node-b", "node-c"],
+                    "treeName": "t",
+                },
+            }
+        ]
+        result = safe_exec(code, args)
+        self.assertIsNone(result["error"])
+        self.assertIn("[1, 2, 3]", result["output"])
+        self.assertNotIn("object at 0x", result["output"])
+
+    def test_return_tracked_linked_list_output_is_readable_chain(self) -> None:
+        code = """
+def solve(head):
+    return head
+"""
+        args = [
+            {
+                "type": "linkedList",
+                "value": {
+                    "values": [10, 20],
+                    "nodeIds": ["list-a", "list-b"],
+                    "treeName": "lst",
+                },
+            }
+        ]
+        result = safe_exec(code, args)
+        self.assertIsNone(result["error"])
+        self.assertIn("10 -> 20", result["output"])
+        self.assertNotIn("object at 0x", result["output"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -19,6 +19,7 @@ from tree_utils import (
 import ast
 from shared_types import ExecutionResult
 from output import tracked_print
+from solution_display import compose_run_output
 import traceback
 import time
 
@@ -287,7 +288,10 @@ __result__ = {call_str}
         
         # Return the result
         return {
-            "output": globals_dict['__stdout__'],
+            "output": compose_run_output(
+                globals_dict["__stdout__"],
+                globals_dict.get("__result__"),
+            ),
             "callstack": globals_dict['__callstack__'],
             "runtime": int((time.time() - start_time) * 1000),
             "startTimestamp": start_timestamp,
