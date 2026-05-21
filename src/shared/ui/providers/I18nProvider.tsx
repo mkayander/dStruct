@@ -26,9 +26,10 @@ export const I18nProvider: React.FC<I18nProviderProps> = (props) => {
   const [translations, setTranslations] = useState<TranslationDictionary>(
     props.i18n?.translations ?? {},
   );
-  const [formatters, setFormatters] = useState<FormattersDictionary>({
-    [locale]: initFormatters(locale),
-  });
+  const formatters = useMemo(
+    () => ({ [locale]: initFormatters(locale) }),
+    [locale],
+  );
 
   useEffect(() => {
     if (!(locale in translations)) {
@@ -40,13 +41,6 @@ export const I18nProvider: React.FC<I18nProviderProps> = (props) => {
           [locale]: newTranslation,
         }));
       })();
-    }
-
-    if (!(locale in formatters)) {
-      setFormatters((prev) => ({
-        ...prev,
-        [locale]: initFormatters(locale),
-      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);

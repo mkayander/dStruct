@@ -3,7 +3,7 @@
 import type S3 from "aws-sdk/clients/s3";
 import axios from "axios";
 import type { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { api } from "#/shared/api";
 import { getImageUrl } from "#/shared/lib";
@@ -20,14 +20,25 @@ const getAvatarFileName = (username: string, url: string, imageBlob: Blob) => {
 };
 
 export const useProfileImageUploader = (session: SessionHook) => {
-  let bucketImage = session.data?.user.bucketImage;
+  const sessionBucketImage = session.data?.user.bucketImage;
+  const [missingBucketImage, setMissingBucketImage] = useState<
+    string | undefined
+  >();
+  const bucketImage =
+    sessionBucketImage === missingBucketImage ? undefined : sessionBucketImage;
   const [status, setStatus] = useState<Status>(
     bucketImage ? "done" : "loading",
   );
   const [isLoading, setIsLoading] = useState(false);
 
   const mutation = api.user.setBucketImage.useMutation();
+  const mutationRef = useRef(mutation);
 
+  useEffect(() => {
+    mutationRef.current = mutation;
+  });
+
+  // Verify or upload the profile image once session image state is available.
   useEffect(() => {
     if (status === "done" || isLoading) return;
 
@@ -37,9 +48,8 @@ export const useProfileImageUploader = (session: SessionHook) => {
           await axios.head(getImageUrl(bucketImage) + "?no-cache");
         } catch (error) {
           if (axios.isAxiosError(error) && error.response?.status === 404) {
-            await mutation.mutateAsync({ imageName: undefined });
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            bucketImage = undefined;
+            await mutationRef.current.mutateAsync({ imageName: undefined });
+            setMissingBucketImage(bucketImage);
           }
         }
       }
@@ -76,12 +86,12 @@ export const useProfileImageUploader = (session: SessionHook) => {
 
       await axios.post(url, formData);
 
-      await mutation.mutateAsync({ imageName: filename });
+      await mutationRef.current.mutateAsync({ imageName: filename });
 
       setStatus("done");
       setIsLoading(false);
     })();
-  }, [isLoading, session.data]);
+  }, [bucketImage, isLoading, session.data, status]);
 
   return status;
 };

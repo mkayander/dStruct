@@ -11,7 +11,7 @@ import {
   Stack,
   Tooltip,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { useI18nContext } from "#/shared/hooks";
 import { DebouncedInput } from "#/shared/ui/molecules/DebouncedInput";
@@ -43,7 +43,9 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
   const [sortMenuAnchor, setSortMenuAnchor] = useState<null | HTMLElement>(
     null,
   );
-  const filterButtonRef = useRef<HTMLButtonElement>(null);
+  const [filterMenuAnchor, setFilterMenuAnchor] = useState<HTMLElement | null>(
+    null,
+  );
   const [filterPopoverOpen, setFilterPopoverOpen] = useState(false);
 
   // Create sort options with translations
@@ -104,11 +106,20 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
     handleSortMenuClose();
   };
 
-  const handleFilterClick = () => {
-    setFilterPopoverOpen(!filterPopoverOpen);
+  const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
+    handlePropagation(event);
+    if (filterPopoverOpen) {
+      setFilterMenuAnchor(null);
+      setFilterPopoverOpen(false);
+      return;
+    }
+
+    setFilterMenuAnchor(event.currentTarget);
+    setFilterPopoverOpen(true);
   };
 
   const handleFilterClose = () => {
+    setFilterMenuAnchor(null);
     setFilterPopoverOpen(false);
   };
 
@@ -192,7 +203,6 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
           </Tooltip>
           <Tooltip title="Advanced filters" arrow>
             <IconButton
-              ref={filterButtonRef}
               onClick={handleFilterClick}
               size="small"
               aria-label="Advanced filters"
@@ -249,7 +259,7 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
         ))}
       </Menu>
       <ProjectBrowserFilters
-        anchorEl={filterButtonRef.current}
+        anchorEl={filterMenuAnchor}
         open={filterPopoverOpen}
         onClose={handleFilterClose}
       />

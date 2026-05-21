@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { startTransition, useCallback, useEffect, useState } from "react";
 
 export type SearchParamOptions<T extends string = string> = {
   defaultValue: T;
@@ -59,7 +59,9 @@ export const useSearchParam = <T extends string = string>(
     }
 
     if (validate(paramValue)) {
-      setState(paramValue);
+      startTransition(() => {
+        setState(paramValue);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, param]);

@@ -4,8 +4,11 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll.eslint": "never"
   },
+  "eslint.format.enable": false,
+  "eslint.autoFixOnSave": false,
+  "eslint.codeActionsOnSave.rules": [],
   "cSpell.words": [
     "codegen",
     "formik",

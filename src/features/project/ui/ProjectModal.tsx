@@ -95,6 +95,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const prevEditMode = usePrevious(isEditMode);
 
+  const problemFetchResetKey = `${isEditMode}:${currentProject?.id ?? ""}`;
+  const [trackedProblemFetchResetKey, setTrackedProblemFetchResetKey] =
+    useState(problemFetchResetKey);
+  if (trackedProblemFetchResetKey !== problemFetchResetKey) {
+    setTrackedProblemFetchResetKey(problemFetchResetKey);
+    setProblemFetchStatus(ProblemFetchStatus.IDLE);
+  }
+
   const createProject = api.project.create.useMutation();
   const editProject = api.project.update.useMutation();
   const deleteProject = api.project.delete.useMutation();
@@ -185,7 +193,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     } else if (prevEditMode && !isEditMode) {
       formik.resetForm();
     }
-    setProblemFetchStatus(ProblemFetchStatus.IDLE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditMode, currentProject]);
 

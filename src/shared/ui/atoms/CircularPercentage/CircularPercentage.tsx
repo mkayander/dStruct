@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import styles from "./CircularPercentage.module.scss";
 
@@ -26,19 +26,13 @@ export const CircularPercentage: React.FC<CircularPercentageProps> = ({
 }) => {
   const theme = useTheme();
 
-  const [displayedLevel, setDisplayedLevel] = useState(0);
-  useEffect(() => {
-    setDisplayedLevel(value);
-  }, [value]);
-
   const radius = (SIZE - thickness) / 2;
 
   const circumference = 2 * Math.PI * radius;
   const strokeDasharray = circumference.toFixed(3);
-  const strokeDashoffset = `${(
-    ((100 - displayedLevel) / 100) *
-    circumference
-  ).toFixed(3)}px`;
+  const strokeDashoffset = `${(((100 - value) / 100) * circumference).toFixed(
+    3,
+  )}px`;
 
   const sizePx = `${size}px`;
 

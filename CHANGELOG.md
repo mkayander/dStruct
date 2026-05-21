@@ -1,3 +1,10 @@
+## [1.378.1](https://github.com/mkayander/dStruct/compare/v1.378.0...v1.378.1) (2026-05-20)
+
+
+### Bug Fixes
+
+* **homePage:** increase playback interval for landing hero preview ([1c7107d](https://github.com/mkayander/dStruct/commit/1c7107d16e41e72d879d3de2a8c388a996bab119))
+
 # [1.378.0](https://github.com/mkayander/dStruct/compare/v1.377.1...v1.378.0) (2026-05-20)
 
 
