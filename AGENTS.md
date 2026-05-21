@@ -86,6 +86,6 @@ Bundled Next.js reference: `node_modules/next/dist/docs/01-app/01-getting-starte
 ### Gotchas
 
 - The `/api/config` endpoint uses `@vercel/edge-config` which requires Vercel's `EDGE_CONFIG` env var. It returns 404 locally but the app handles this gracefully — the playground still works fully.
-- The `postinstall` script runs `prisma:generate`, `generate-graphql`, creates a Python venv, and installs `black`. Ensure `python3-venv` is installed on the system.
+- The `postinstall` script runs `prisma:generate`, `generate-graphql`, creates a Python venv, and installs `black`. Ensure `python3-venv` is installed on the system. **`.env` with `DATABASE_URL` must exist before `pnpm install`** because `prisma generate` (via `prisma.config.ts`) requires it at postinstall time.
 - `pnpm typesafe-i18n` is a **file watcher** that never exits. Do not run it in a blocking terminal session; run in background or skip.
 - Pre-commit hook runs `prettier --write` via `lint-staged`. Pre-push hook runs `pnpm lint`.
