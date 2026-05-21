@@ -17,10 +17,7 @@ export type PythonFormatResult = {
 
 function createWorker(): Worker {
   return new Worker(
-    new URL(
-      "src/features/codeRunner/lib/workers/pythonExec.worker.ts",
-      import.meta.url,
-    ),
+    new URL("./workers/pythonExec.worker.ts", import.meta.url),
   );
 }
 

@@ -5,10 +5,7 @@ export const useJSWorker = () => {
 
   useEffect(() => {
     const worker = new Worker(
-      new URL(
-        "src/features/codeRunner/lib/workers/codeExec.worker.ts",
-        import.meta.url,
-      ),
+      new URL("../lib/workers/codeExec.worker.ts", import.meta.url),
     );
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setWorker(worker);
