@@ -76,7 +76,7 @@ export const useLandingReveal = (
         if (!hit) return;
         observer.disconnect();
         if (staggerMs > 0) {
-          window.setTimeout(() => setState("revealed"), staggerMs);
+          setTimeout(() => setState("revealed"), staggerMs);
         } else {
           setState("revealed");
         }

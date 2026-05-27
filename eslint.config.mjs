@@ -75,6 +75,30 @@ const eslintConfig = [
             'Import hooks from "react" and call them directly (e.g. useEffect), not React.useEffect.',
         },
       ],
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "window",
+          property: "setTimeout",
+          message: "Use setTimeout(...) instead of window.setTimeout(...).",
+        },
+        {
+          object: "window",
+          property: "clearTimeout",
+          message: "Use clearTimeout(...) instead of window.clearTimeout(...).",
+        },
+        {
+          object: "window",
+          property: "setInterval",
+          message: "Use setInterval(...) instead of window.setInterval(...).",
+        },
+        {
+          object: "window",
+          property: "clearInterval",
+          message:
+            "Use clearInterval(...) instead of window.clearInterval(...).",
+        },
+      ],
       "no-restricted-imports": [
         "error",
         {

@@ -52,14 +52,14 @@ export const useLandingHeroPreviewPlaybackGate = (
   }, [rootRef]);
 
   useEffect(() => {
-    let idleTimeoutId: number | null = null;
+    let idleTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
     const markPageScrolling = () => {
       setIsPageScrolling(true);
       if (idleTimeoutId !== null) {
-        window.clearTimeout(idleTimeoutId);
+        clearTimeout(idleTimeoutId);
       }
-      idleTimeoutId = window.setTimeout(() => {
+      idleTimeoutId = setTimeout(() => {
         idleTimeoutId = null;
         setIsPageScrolling(false);
       }, PAGE_SCROLL_IDLE_MS);
@@ -75,7 +75,7 @@ export const useLandingHeroPreviewPlaybackGate = (
         capture: true,
       });
       if (idleTimeoutId !== null) {
-        window.clearTimeout(idleTimeoutId);
+        clearTimeout(idleTimeoutId);
       }
     };
   }, []);

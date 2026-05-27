@@ -80,8 +80,10 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const hasAutoStartedRef = useRef(false);
   const hasManualOverrideRef = useRef(false);
   const wasPlayingBeforeSuppressRef = useRef(false);
-  const replayTimeoutRef = useRef<number | null>(null);
-  const replayRestartTimeoutRef = useRef<number | null>(null);
+  const replayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const replayRestartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const { isPlaybackSuppressed } =
     useLandingHeroPreviewPlaybackGate(previewRootRef);
   const {
@@ -111,11 +113,11 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
 
   const clearReplayTimers = useCallback(() => {
     if (replayTimeoutRef.current !== null) {
-      window.clearTimeout(replayTimeoutRef.current);
+      clearTimeout(replayTimeoutRef.current);
       replayTimeoutRef.current = null;
     }
     if (replayRestartTimeoutRef.current !== null) {
-      window.clearTimeout(replayRestartTimeoutRef.current);
+      clearTimeout(replayRestartTimeoutRef.current);
       replayRestartTimeoutRef.current = null;
     }
   }, []);
@@ -125,7 +127,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   // the post-reset timeout or replay never resumes (playground-style reset sets isPlaying false).
   const clearAutoReplayEndDelayOnly = useCallback(() => {
     if (replayTimeoutRef.current !== null) {
-      window.clearTimeout(replayTimeoutRef.current);
+      clearTimeout(replayTimeoutRef.current);
       replayTimeoutRef.current = null;
     }
   }, []);
@@ -213,11 +215,11 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
       return;
     }
 
-    replayTimeoutRef.current = window.setTimeout(() => {
+    replayTimeoutRef.current = setTimeout(() => {
       replayTimeoutRef.current = null;
       handleReset();
 
-      replayRestartTimeoutRef.current = window.setTimeout(() => {
+      replayRestartTimeoutRef.current = setTimeout(() => {
         replayRestartTimeoutRef.current = null;
         if (!hasManualOverrideRef.current) {
           dispatch(callstackSlice.actions.setIsPlaying(true));
