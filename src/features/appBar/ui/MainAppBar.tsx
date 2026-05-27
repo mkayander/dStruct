@@ -227,7 +227,13 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                       href={page.href}
                       onClick={handleCloseNavMenu}
                     >
-                      <Typography textAlign="center">{page.name}</Typography>
+                      <Typography
+                        sx={{
+                          textAlign: "center",
+                        }}
+                      >
+                        {page.name}
+                      </Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -277,8 +283,10 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
             <Stack
               direction="row"
               spacing={isCompact ? 0.5 : 1}
-              alignItems="center"
-              sx={{ flexGrow: 0 }}
+              sx={{
+                alignItems: "center",
+                flexGrow: 0,
+              }}
             >
               {(!useMobilePlayground || currentView !== "browse") && (
                 <Tooltip title={LL.PROJECT_BROWSER()} arrow>

@@ -31,7 +31,12 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
   const isMobile = useMobileLayout();
 
   return (
-    <Box position="relative" height={height === "100%" ? "100%" : undefined}>
+    <Box
+      sx={{
+        position: "relative",
+        height: height === "100%" ? "100%" : undefined,
+      }}
+    >
       <MonacoEditor
         theme={mode === "dark" ? "app-dark" : "vs-light"}
         options={{

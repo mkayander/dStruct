@@ -50,9 +50,9 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
       {!hideHeaderRow && (
         <Stack
           direction="row"
-          alignItems="center"
-          justifyContent="space-between"
           sx={{
+            alignItems: "center",
+            justifyContent: "space-between",
             height: HEADER_HEIGHT,
             px: 1,
             borderBottom: 1,
@@ -86,9 +86,11 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
           {collapsedContent ?? (
             <Stack
               direction="row"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ height: 36 }}
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 36,
+              }}
             >
               <IconButton
                 size="small"

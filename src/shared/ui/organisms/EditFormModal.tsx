@@ -38,7 +38,12 @@ export const EditFormModal: React.FC<EditModalProps> = ({
         <DialogTitle sx={{ textTransform: "capitalize" }}>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{summary}</DialogContentText>
-          <Stack spacing={2} mt={2}>
+          <Stack
+            spacing={2}
+            sx={{
+              mt: 2,
+            }}
+          >
             {children}
           </Stack>
         </DialogContent>

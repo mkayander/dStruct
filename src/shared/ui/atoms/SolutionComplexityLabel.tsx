@@ -27,13 +27,23 @@ export const SolutionComplexityLabel: React.FC<
       }}
     >
       {solution.data.timeComplexity && (
-        <Typography variant="body2" fontWeight="bold">
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: "bold",
+          }}
+        >
           <i>TC:</i> {solution.data.timeComplexity}
           {solution.data.spaceComplexity && <i>&nbsp; | </i>}
         </Typography>
       )}
       {solution.data.spaceComplexity && (
-        <Typography variant="body2" fontWeight="bold">
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: "bold",
+          }}
+        >
           <i>SC:</i> {solution.data.spaceComplexity}
         </Typography>
       )}

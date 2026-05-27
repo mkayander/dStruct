@@ -83,7 +83,12 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
         },
       }}
     >
-      <Box role="presentation" minWidth="22vw">
+      <Box
+        role="presentation"
+        sx={{
+          minWidth: "22vw",
+        }}
+      >
         <List
           subheader={
             <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>

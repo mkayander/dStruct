@@ -14,13 +14,13 @@ export const NewLabel: React.FC<NewLabelProps> = ({ createdAt }) => {
   return (
     <Tooltip title={`Created at ${date.toLocaleString()}`} arrow>
       <Typography
-        display="inline-block"
-        fontSize={12}
-        px={0.5}
-        pt={0.1}
         variant="caption"
-        height="1.2rem"
         sx={{
+          display: "inline-block",
+          fontSize: 12,
+          px: 0.5,
+          pt: 0.1,
+          height: "1.2rem",
           opacity: 0.9,
           color: "white",
           backgroundColor: "success.main",

@@ -60,15 +60,20 @@ export const ProjectPanel: React.FC = () => {
         isEditMode={isModalEditMode}
         currentProject={selectedProject.data}
       />
-
       <LoadingSkeletonOverlay />
-
       <TabContext value={tabValue}>
         <TabListWrapper>
           <TabList onChange={handleTabChange} aria-label={LL.PANEL_TABS()}>
             <Tab label={LL.PROJECT()} value="1" />
           </TabList>
-          <Stack direction="row" spacing={1} alignItems="center" pr={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: "center",
+              pr: 1,
+            }}
+          >
             <Tooltip title={`${LL.PROJECT_BROWSER()} 📁`} arrow>
               <IconButton onClick={openBrowser}>
                 <FolderOpen />

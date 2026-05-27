@@ -117,7 +117,13 @@ export const MatrixStructureView: React.FC<MatrixStructureViewProps> = ({
             }
 
             return (
-              <Box key={index} component="tr" height={43}>
+              <Box
+                key={index}
+                component="tr"
+                sx={{
+                  height: 43,
+                }}
+              >
                 {header ? <th scope="row">{header}</th> : null}
               </Box>
             );

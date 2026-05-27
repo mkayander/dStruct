@@ -39,8 +39,9 @@ export const SelectBarChip = React.forwardRef<
   return (
     <Box
       ref={ref}
-      position="relative"
       sx={{
+        position: "relative",
+
         "&:hover": {
           ".EditIcon": {
             opacity: 1,

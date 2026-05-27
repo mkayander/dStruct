@@ -78,7 +78,6 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
       }}
     >
       <AmbientBackground />
-
       <Box
         sx={[
           {
@@ -105,7 +104,6 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
           distanceRange={LANDING_DECOR_MODEL_DISTANCE}
         />
       </Box>
-
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <Box
           sx={{
@@ -133,8 +131,8 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
 
               <Typography
                 variant="body1"
-                color="text.secondary"
                 sx={{
+                  color: "text.secondary",
                   maxWidth: 620,
                   fontSize: { xs: "1rem", md: "1.08rem" },
                   lineHeight: 1.75,
@@ -172,7 +170,9 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={1}
-                alignItems={{ xs: "flex-start", sm: "center" }}
+                sx={{
+                  alignItems: { xs: "flex-start", sm: "center" },
+                }}
               >
                 <Button
                   component={Link}
@@ -188,9 +188,11 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
               <Stack
                 direction="row"
                 spacing={1}
-                flexWrap="wrap"
                 useFlexGap={true}
-                sx={{ pt: 1 }}
+                sx={{
+                  flexWrap: "wrap",
+                  pt: 1,
+                }}
               >
                 <Box
                   sx={{
@@ -201,7 +203,12 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                     border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
                   }}
                 >
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "text.secondary",
+                    }}
+                  >
                     {LL.HOME_LANG_JS_TITLE()}
                   </Typography>
                 </Box>
@@ -214,7 +221,12 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                     border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
                   }}
                 >
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "text.secondary",
+                    }}
+                  >
                     {LL.HOME_LANG_PYTHON_TITLE()}
                   </Typography>
                 </Box>
@@ -227,7 +239,12 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                     border: `1px solid ${alpha(theme.appDesign.outline, 0.14)}`,
                   }}
                 >
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "text.secondary",
+                    }}
+                  >
                     {LL.HOME_PILLAR_REPLAY_TITLE()}
                   </Typography>
                 </Box>

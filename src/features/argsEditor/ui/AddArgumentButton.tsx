@@ -12,7 +12,12 @@ export const AddArgumentButton: React.FC<AddArgumentButtonProps> = ({
   title,
 }) => {
   return (
-    <Box display="flex" justifyContent="center">
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <IconButton title={title} onClick={onClick}>
         <Add />
       </IconButton>

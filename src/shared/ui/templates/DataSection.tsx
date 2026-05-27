@@ -41,8 +41,8 @@ export const DataSection: React.FC<DataSectionProps> = ({
       }}
     >
       <Box
-        marginBottom={1}
         sx={{
+          marginBottom: 1,
           display: "flex",
           justifyContent: "space-between",
         }}
@@ -60,7 +60,12 @@ export const DataSection: React.FC<DataSectionProps> = ({
         {Icon && <Icon color="primary" fontSize={"large"} />}
       </Box>
       <Divider />
-      <Box className={contentClassName} marginTop={2}>
+      <Box
+        className={contentClassName}
+        sx={{
+          marginTop: 2,
+        }}
+      >
         {isLoading ? <LinearProgress variant="indeterminate" /> : children}
       </Box>
     </Paper>
