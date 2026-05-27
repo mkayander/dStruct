@@ -58,16 +58,20 @@ const pulseKeyframes = keyframes`
   }
 `;
 
+export type TreeNodeLayoutOptions = {
+  disableLayoutTransitions?: boolean;
+};
+
 export type NodeBaseProps = Pick<
   BoxProps,
   "style" | "onMouseDown" | "onMouseUp"
 > &
-  TreeNodeData & {
+  TreeNodeData &
+  TreeNodeLayoutOptions & {
     treeName: string;
     nodeColor: string;
     shadowColor: string;
     cursor?: "pointer" | "grab";
-    disableLayoutTransitions?: boolean;
   };
 
 export const NodeBase: React.FC<NodeBaseProps> = ({

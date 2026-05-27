@@ -6,14 +6,18 @@ import {
   editorSlice,
   selectIsEditingNodes,
 } from "#/features/treeViewer/model/editorSlice";
-import { NodeBase } from "#/features/treeViewer/ui/NodeBase";
+import {
+  NodeBase,
+  type TreeNodeLayoutOptions,
+} from "#/features/treeViewer/ui/NodeBase";
 import { useNodeColors } from "#/shared/hooks";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
-export type GraphNodeProps = TreeNodeData & {
-  treeName: string;
-  type: ArgumentTreeType;
-};
+export type GraphNodeProps = TreeNodeData &
+  TreeNodeLayoutOptions & {
+    treeName: string;
+    type: ArgumentTreeType;
+  };
 
 export const GraphNode: React.FC<GraphNodeProps> = ({
   color,
