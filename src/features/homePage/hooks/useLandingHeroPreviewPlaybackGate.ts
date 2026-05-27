@@ -21,6 +21,7 @@ export const useLandingHeroPreviewPlaybackGate = (
 ): UseLandingHeroPreviewPlaybackGateResult => {
   const [isSufficientlyVisible, setIsSufficientlyVisible] = useState(true);
   const [isPageScrolling, setIsPageScrolling] = useState(false);
+  const [scrollActivityVersion, setScrollActivityVersion] = useState(0);
 
   useEffect(() => {
     const element = rootRef.current;
@@ -52,17 +53,9 @@ export const useLandingHeroPreviewPlaybackGate = (
   }, [rootRef]);
 
   useEffect(() => {
-    let idleTimeoutId: ReturnType<typeof setTimeout> | null = null;
-
     const markPageScrolling = () => {
       setIsPageScrolling(true);
-      if (idleTimeoutId !== null) {
-        clearTimeout(idleTimeoutId);
-      }
-      idleTimeoutId = setTimeout(() => {
-        idleTimeoutId = null;
-        setIsPageScrolling(false);
-      }, PAGE_SCROLL_IDLE_MS);
+      setScrollActivityVersion((version) => version + 1);
     };
 
     document.addEventListener("scroll", markPageScrolling, {
@@ -74,11 +67,21 @@ export const useLandingHeroPreviewPlaybackGate = (
       document.removeEventListener("scroll", markPageScrolling, {
         capture: true,
       });
-      if (idleTimeoutId !== null) {
-        clearTimeout(idleTimeoutId);
-      }
     };
   }, []);
+
+  // Each scroll bumps scrollActivityVersion; effect cleanup clears the prior idle timer.
+  useEffect(() => {
+    if (scrollActivityVersion === 0) {
+      return undefined;
+    }
+
+    const idleTimeoutId = setTimeout(() => {
+      setIsPageScrolling(false);
+    }, PAGE_SCROLL_IDLE_MS);
+
+    return () => clearTimeout(idleTimeoutId);
+  }, [scrollActivityVersion]);
 
   return {
     isPlaybackSuppressed: !isSufficientlyVisible || isPageScrolling,
