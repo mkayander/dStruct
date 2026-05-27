@@ -18,6 +18,7 @@ import {
   treeNodeSlice,
 } from "#/entities/dataStructures/node/model/nodeSlice";
 import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
+import { selectDisableLayoutTransitions } from "#/features/treeViewer/model/editorSlice";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 const nodeSize = "42px";
@@ -58,16 +59,11 @@ const pulseKeyframes = keyframes`
   }
 `;
 
-export type TreeNodeLayoutOptions = {
-  disableLayoutTransitions?: boolean;
-};
-
 export type NodeBaseProps = Pick<
   BoxProps,
   "style" | "onMouseDown" | "onMouseUp"
 > &
-  TreeNodeData &
-  TreeNodeLayoutOptions & {
+  TreeNodeData & {
     treeName: string;
     nodeColor: string;
     shadowColor: string;
@@ -86,7 +82,6 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   x,
   y,
   cursor = "pointer",
-  disableLayoutTransitions = false,
   onMouseDown,
   onMouseUp,
 }: NodeBaseProps) => {
@@ -96,6 +91,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
+  const disableLayoutTransitions = useAppSelector(
+    selectDisableLayoutTransitions,
+  );
 
   const handleBlink = () => {
     dispatch(

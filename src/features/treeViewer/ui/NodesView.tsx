@@ -11,6 +11,7 @@ import {
   selectMinXOffset,
   type TreeData,
 } from "#/entities/dataStructures/node/model/nodeSlice";
+import { selectDisableLayoutTransitions } from "#/features/treeViewer/model/editorSlice";
 import { useAppSelector } from "#/store/hooks";
 
 const nodeComponentMap = {
@@ -25,7 +26,6 @@ type NodesViewProps = {
   style?: React.CSSProperties;
   sx?: React.CSSProperties;
   horizontalAlign?: "start" | "center";
-  disableLayoutTransitions?: boolean;
 };
 
 const NODE_WIDTH = 42;
@@ -36,10 +36,12 @@ export const NodesView: React.FC<NodesViewProps> = ({
   style,
   sx,
   horizontalAlign = "start",
-  disableLayoutTransitions = false,
 }) => {
   const adjustXOffset = data.type === ArgumentType.LINKED_LIST;
   const offset = useAppSelector(selectMinXOffset(treeName, adjustXOffset)) ?? 0;
+  const disableLayoutTransitions = useAppSelector(
+    selectDisableLayoutTransitions,
+  );
 
   useBinaryTreePositioning(treeName, data);
 
@@ -110,7 +112,6 @@ export const NodesView: React.FC<NodesViewProps> = ({
               key={node.id}
               treeName={treeName}
               type={data.type}
-              disableLayoutTransitions={disableLayoutTransitions}
               {...node}
             />
           ),

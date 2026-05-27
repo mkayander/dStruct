@@ -308,6 +308,10 @@ const createLandingHeroPreviewPreloadedState = (): RootState => {
   return {
     ...initialState,
     ...previewState,
+    editor: {
+      ...initialState.editor,
+      disableLayoutTransitions: true,
+    },
   };
 };
 

@@ -311,7 +311,6 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           <TreeViewer
             playbackInterval={PLAYBACK_INTERVAL_MS}
             binaryTreeAlign="center"
-            disableLayoutTransitions={true}
           />
         </Box>
       </Box>

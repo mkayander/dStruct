@@ -2,17 +2,13 @@ import React from "react";
 
 import type { ArgumentTreeType } from "#/entities/argument/model/types";
 import { type TreeNodeData } from "#/entities/dataStructures/node/model/nodeSlice";
-import {
-  NodeBase,
-  type TreeNodeLayoutOptions,
-} from "#/features/treeViewer/ui/NodeBase";
+import { NodeBase } from "#/features/treeViewer/ui/NodeBase";
 import { useNodeColors } from "#/shared/hooks";
 
-export type BinaryNodeProps = TreeNodeData &
-  TreeNodeLayoutOptions & {
-    treeName: string;
-    type: ArgumentTreeType;
-  };
+export type BinaryNodeProps = TreeNodeData & {
+  treeName: string;
+  type: ArgumentTreeType;
+};
 
 export const BinaryNode: React.FC<BinaryNodeProps> = (props) => {
   const { color } = props;
