@@ -32,6 +32,7 @@ import {
   selectIsRootFrame,
 } from "#/features/callstack/model/callstackSlice";
 import { CompactCallstackList } from "#/features/callstack/ui/CompactCallstackList";
+import { useLandingHeroPreviewPlaybackGate } from "#/features/homePage/hooks/useLandingHeroPreviewPlaybackGate";
 import {
   createLandingHeroPreviewStore,
   type LandingHeroPreviewStore,
@@ -75,10 +76,14 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
 > = ({ LL }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const previewRootRef = useRef<HTMLDivElement>(null);
   const hasAutoStartedRef = useRef(false);
   const hasManualOverrideRef = useRef(false);
+  const wasPlayingBeforeSuppressRef = useRef(false);
   const replayTimeoutRef = useRef<number | null>(null);
   const replayRestartTimeoutRef = useRef<number | null>(null);
+  const { isPlaybackSuppressed } =
+    useLandingHeroPreviewPlaybackGate(previewRootRef);
   const {
     handleReset,
     handlePlay,
@@ -151,25 +156,57 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     handleStepForward();
   };
 
+  // Landing UX: pause autoplay during page scroll or when the preview leaves the viewport so playback
+  // does not compete with scroll compositing; resume only if playback was active before suppression.
+  useEffect(() => {
+    if (!isPlaybackSuppressed) {
+      if (
+        wasPlayingBeforeSuppressRef.current &&
+        !hasManualOverrideRef.current &&
+        isReady &&
+        !isLastFrame
+      ) {
+        dispatch(callstackSlice.actions.setIsPlaying(true));
+      }
+      wasPlayingBeforeSuppressRef.current = false;
+      return;
+    }
+
+    if (isPlaying) {
+      wasPlayingBeforeSuppressRef.current = true;
+      dispatch(callstackSlice.actions.setIsPlaying(false));
+    }
+    clearReplayTimers();
+  }, [
+    clearReplayTimers,
+    dispatch,
+    isLastFrame,
+    isPlaybackSuppressed,
+    isPlaying,
+    isReady,
+  ]);
+
   useEffect(() => {
     if (
       !isReady ||
       callstackLength === 0 ||
       hasAutoStartedRef.current ||
-      hasManualOverrideRef.current
+      hasManualOverrideRef.current ||
+      isPlaybackSuppressed
     ) {
       return;
     }
 
     hasAutoStartedRef.current = true;
     handlePlay();
-  }, [callstackLength, handlePlay, isReady]);
+  }, [callstackLength, handlePlay, isPlaybackSuppressed, isReady]);
 
   useEffect(() => {
     if (
       !isReady ||
       !hasAutoStartedRef.current ||
       hasManualOverrideRef.current ||
+      isPlaybackSuppressed ||
       isPlaying ||
       !isLastFrame
     ) {
@@ -194,6 +231,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     dispatch,
     handleReset,
     isLastFrame,
+    isPlaybackSuppressed,
     isPlaying,
     isReady,
   ]);
@@ -206,7 +244,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   );
 
   return (
-    <Stack spacing={1.5} sx={{ minWidth: 0 }}>
+    <Stack ref={previewRootRef} spacing={1.5} sx={{ minWidth: 0 }}>
       <Stack
         direction="row"
         sx={{
@@ -268,6 +306,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
           <TreeViewer
             playbackInterval={PLAYBACK_INTERVAL_MS}
             binaryTreeAlign="center"
+            disableLayoutTransitions={true}
           />
         </Box>
       </Box>
@@ -297,7 +336,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             {LL.CALLSTACK()}
           </Typography>
         </Stack>
-        <CompactCallstackList height={262} />
+        <CompactCallstackList height={262} activeRowScrollBehavior="auto" />
       </Box>
       <Stack
         direction={{ xs: "column", sm: "row" }}

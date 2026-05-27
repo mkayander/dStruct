@@ -25,11 +25,14 @@ import { useArgumentsParsing, useNodesRuntimeUpdates } from "../hooks";
 type TreeViewerProps = {
   playbackInterval: number;
   binaryTreeAlign?: "start" | "center";
+  /** Skips position transitions (landing hero preview — less layout work during scroll). */
+  disableLayoutTransitions?: boolean;
 };
 
 export const TreeViewer: React.FC<TreeViewerProps> = ({
   playbackInterval,
   binaryTreeAlign = "start",
+  disableLayoutTransitions = false,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -65,10 +68,11 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
           data={treeState}
           style={style}
           horizontalAlign={binaryTreeAlign}
+          disableLayoutTransitions={disableLayoutTransitions}
         />
       );
     });
-  }, [binaryTreeAlign, treeStructures.binaryTree]);
+  }, [binaryTreeAlign, disableLayoutTransitions, treeStructures.binaryTree]);
 
   const arrayStructures = useMemo(() => {
     if (!arrayState) return null;
@@ -146,7 +150,12 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         </Box>
       ) : null}
       {treeStructures.graph.map(({ name, treeState }) => (
-        <NodesView key={name} treeName={name} data={treeState} />
+        <NodesView
+          key={name}
+          treeName={name}
+          data={treeState}
+          disableLayoutTransitions={disableLayoutTransitions}
+        />
       ))}
       {arrayStructures?.length || treeStructures.linkedList.length ? (
         <Stack
@@ -168,6 +177,7 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
                 key={name}
                 treeName={name}
                 data={treeState}
+                disableLayoutTransitions={disableLayoutTransitions}
                 sx={{
                   position: "relative",
                   height: "42px",

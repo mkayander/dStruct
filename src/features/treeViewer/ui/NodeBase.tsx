@@ -67,6 +67,7 @@ export type NodeBaseProps = Pick<
     nodeColor: string;
     shadowColor: string;
     cursor?: "pointer" | "grab";
+    disableLayoutTransitions?: boolean;
   };
 
 export const NodeBase: React.FC<NodeBaseProps> = ({
@@ -81,6 +82,7 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   x,
   y,
   cursor = "pointer",
+  disableLayoutTransitions = false,
   onMouseDown,
   onMouseUp,
 }: NodeBaseProps) => {
@@ -123,7 +125,8 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         position: "absolute",
         zIndex: 1,
         width: "fit-content",
-        transition: isCallstackReady ? "all .05s" : "none",
+        transition:
+          disableLayoutTransitions || !isCallstackReady ? "none" : "all .05s",
         ".blink": {
           animation: `${blinkKeyframes} 0.24s ease-out`,
         },

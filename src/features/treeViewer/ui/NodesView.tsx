@@ -25,6 +25,7 @@ type NodesViewProps = {
   style?: React.CSSProperties;
   sx?: React.CSSProperties;
   horizontalAlign?: "start" | "center";
+  disableLayoutTransitions?: boolean;
 };
 
 const NODE_WIDTH = 42;
@@ -35,6 +36,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
   style,
   sx,
   horizontalAlign = "start",
+  disableLayoutTransitions = false,
 }) => {
   const adjustXOffset = data.type === ArgumentType.LINKED_LIST;
   const offset = useAppSelector(selectMinXOffset(treeName, adjustXOffset)) ?? 0;
@@ -91,7 +93,9 @@ export const NodesView: React.FC<NodesViewProps> = ({
       style={{
         ...style,
         left,
-        transition: "left 0.05s ease-in-out",
+        transition: disableLayoutTransitions
+          ? "none"
+          : "left 0.05s ease-in-out",
       }}
     >
       {Object.values(data.edges.entities).map(
@@ -106,6 +110,7 @@ export const NodesView: React.FC<NodesViewProps> = ({
               key={node.id}
               treeName={treeName}
               type={data.type}
+              disableLayoutTransitions={disableLayoutTransitions}
               {...node}
             />
           ),
