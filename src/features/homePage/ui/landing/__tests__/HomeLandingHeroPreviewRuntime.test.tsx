@@ -34,7 +34,10 @@ describe("HomeLandingHeroPreviewRuntime", () => {
 
     render(
       <StateThemeProvider>
-        <HomeLandingHeroPreviewRuntime LL={fallbackProxy} />
+        <HomeLandingHeroPreviewRuntime
+          LL={fallbackProxy}
+          pageScrollViewport={null}
+        />
       </StateThemeProvider>,
     );
 
@@ -92,7 +95,10 @@ describe("HomeLandingHeroPreviewRuntime", () => {
 
     render(
       <StateThemeProvider>
-        <HomeLandingHeroPreviewRuntime LL={fallbackProxy} />
+        <HomeLandingHeroPreviewRuntime
+          LL={fallbackProxy}
+          pageScrollViewport={null}
+        />
       </StateThemeProvider>,
     );
 
@@ -155,7 +161,10 @@ describe("HomeLandingHeroPreviewRuntime", () => {
 
     render(
       <StateThemeProvider>
-        <HomeLandingHeroPreviewRuntime LL={fallbackProxy} />
+        <HomeLandingHeroPreviewRuntime
+          LL={fallbackProxy}
+          pageScrollViewport={null}
+        />
       </StateThemeProvider>,
     );
 

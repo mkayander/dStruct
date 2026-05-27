@@ -30,6 +30,7 @@ import { LogoModelView } from "#/shared/ui/molecules/LogoModelView";
 
 type HomeLandingHeroProps = {
   LL: TranslationFunctions;
+  pageScrollViewport: HTMLDivElement | null;
 };
 
 const AmbientBackground = () => {
@@ -54,7 +55,10 @@ const AmbientBackground = () => {
   );
 };
 
-export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
+export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({
+  LL,
+  pageScrollViewport,
+}) => {
   const theme = useTheme();
   const brandControlsRef = useRef<ThreeOrbitControls>(null);
   const { mobileEntranceSx } = useLandingDecor3dMobileEntrance("hero");
@@ -261,7 +265,10 @@ export const HomeLandingHero: React.FC<HomeLandingHeroProps> = ({ LL }) => {
                 mx: { xs: "auto", lg: 0 },
               }}
             >
-              <HomeLandingHeroPreview LL={LL} />
+              <HomeLandingHeroPreview
+                LL={LL}
+                pageScrollViewport={pageScrollViewport}
+              />
             </Box>
           </Box>
         </Box>

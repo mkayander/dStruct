@@ -6,22 +6,15 @@ const MIN_VISIBLE_INTERSECTION_RATIO = 0.4;
 /** Resume autoplay after page scroll is idle for this long. */
 const PAGE_SCROLL_IDLE_MS = 200;
 
+export type UseLandingHeroPreviewPlaybackGateParams = {
+  previewRootRef: RefObject<HTMLElement | null>;
+  /** OverlayScrollbars viewport for the page (not nested preview scrollers). */
+  pageScrollViewport: HTMLElement | null;
+};
+
 export type UseLandingHeroPreviewPlaybackGateResult = {
   /** When true, hero preview autoplay and auto-replay should not run. */
   isPlaybackSuppressed: boolean;
-};
-
-/** Capture-phase document listeners see nested scrollers; ignore preview internals. */
-export const isLandingPreviewNestedScroll = (
-  event: Event,
-  previewRoot: HTMLElement | null,
-): boolean => {
-  if (!previewRoot) {
-    return false;
-  }
-
-  const scrollTarget = event.target;
-  return scrollTarget instanceof Node && previewRoot.contains(scrollTarget);
 };
 
 /**
@@ -29,15 +22,15 @@ export const isLandingPreviewNestedScroll = (
  * when the preview is mostly off-screen — reduces jank from Redux + layout
  * updates fighting scroll compositing.
  */
-export const useLandingHeroPreviewPlaybackGate = (
-  rootRef: RefObject<HTMLElement | null>,
-): UseLandingHeroPreviewPlaybackGateResult => {
+export const useLandingHeroPreviewPlaybackGate = ({
+  previewRootRef,
+  pageScrollViewport,
+}: UseLandingHeroPreviewPlaybackGateParams): UseLandingHeroPreviewPlaybackGateResult => {
   const [isSufficientlyVisible, setIsSufficientlyVisible] = useState(true);
   const [isPageScrolling, setIsPageScrolling] = useState(false);
-  const [scrollActivityVersion, setScrollActivityVersion] = useState(0);
 
   useEffect(() => {
-    const element = rootRef.current;
+    const element = previewRootRef.current;
     if (!element) {
       return;
     }
@@ -63,42 +56,37 @@ export const useLandingHeroPreviewPlaybackGate = (
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [rootRef]);
+  }, [previewRootRef]);
 
   useEffect(() => {
-    const markPageScrolling = (event: Event) => {
-      if (isLandingPreviewNestedScroll(event, rootRef.current)) {
-        return;
-      }
+    if (!pageScrollViewport) {
+      return;
+    }
 
+    let idleTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const markPageScrolling = () => {
       setIsPageScrolling(true);
-      setScrollActivityVersion((version) => version + 1);
+      if (idleTimeoutId !== null) {
+        clearTimeout(idleTimeoutId);
+      }
+      idleTimeoutId = setTimeout(() => {
+        idleTimeoutId = null;
+        setIsPageScrolling(false);
+      }, PAGE_SCROLL_IDLE_MS);
     };
 
-    document.addEventListener("scroll", markPageScrolling, {
-      capture: true,
+    pageScrollViewport.addEventListener("scroll", markPageScrolling, {
       passive: true,
     });
 
     return () => {
-      document.removeEventListener("scroll", markPageScrolling, {
-        capture: true,
-      });
+      pageScrollViewport.removeEventListener("scroll", markPageScrolling);
+      if (idleTimeoutId !== null) {
+        clearTimeout(idleTimeoutId);
+      }
     };
-  }, [rootRef]);
-
-  // Each scroll bumps scrollActivityVersion; effect cleanup clears the prior idle timer.
-  useEffect(() => {
-    if (scrollActivityVersion === 0) {
-      return undefined;
-    }
-
-    const idleTimeoutId = setTimeout(() => {
-      setIsPageScrolling(false);
-    }, PAGE_SCROLL_IDLE_MS);
-
-    return () => clearTimeout(idleTimeoutId);
-  }, [scrollActivityVersion]);
+  }, [pageScrollViewport]);
 
   return {
     isPlaybackSuppressed: !isSufficientlyVisible || isPageScrolling,

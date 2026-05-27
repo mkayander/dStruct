@@ -48,6 +48,7 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 type HomeLandingHeroPreviewRuntimeProps = {
   LL: TranslationFunctions;
+  pageScrollViewport: HTMLDivElement | null;
 };
 
 const PLAYBACK_INTERVAL_MS = 600;
@@ -73,7 +74,7 @@ const getPreviewRuntimeErrorMessage = (error: unknown): string => {
 
 const HomeLandingHeroPreviewRuntimeInner: React.FC<
   HomeLandingHeroPreviewRuntimeProps
-> = ({ LL }) => {
+> = ({ LL, pageScrollViewport }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const previewRootRef = useRef<HTMLDivElement>(null);
@@ -84,8 +85,10 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   const replayRestartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
-  const { isPlaybackSuppressed } =
-    useLandingHeroPreviewPlaybackGate(previewRootRef);
+  const { isPlaybackSuppressed } = useLandingHeroPreviewPlaybackGate({
+    previewRootRef,
+    pageScrollViewport,
+  });
   const {
     handleReset,
     handlePlay,
@@ -434,7 +437,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
 
 export const HomeLandingHeroPreviewRuntime: React.FC<
   HomeLandingHeroPreviewRuntimeProps
-> = ({ LL }) => {
+> = ({ LL, pageScrollViewport }) => {
   const [runtimeState] = useState<LandingHeroPreviewRuntimeState>(() => {
     try {
       return {
@@ -465,7 +468,10 @@ export const HomeLandingHeroPreviewRuntime: React.FC<
 
   return (
     <Provider store={runtimeState.store}>
-      <HomeLandingHeroPreviewRuntimeInner LL={LL} />
+      <HomeLandingHeroPreviewRuntimeInner
+        LL={LL}
+        pageScrollViewport={pageScrollViewport}
+      />
     </Provider>
   );
 };

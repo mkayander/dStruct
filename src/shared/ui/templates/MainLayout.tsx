@@ -1,5 +1,5 @@
 import { Box, type BoxProps, LinearProgress } from "@mui/material";
-import React from "react";
+import React, { type Ref } from "react";
 
 import {
   MainAppBar,
@@ -16,6 +16,7 @@ export type MainLayoutProps = Omit<BoxProps, "onScroll"> & {
   isLoading?: boolean;
   headerPosition?: MainAppBarProps["position"];
   onScroll?: PageScrollContainerProps["onScroll"];
+  pageScrollViewportRef?: Ref<HTMLDivElement | null>;
 };
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
@@ -23,6 +24,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   isLoading,
   headerPosition = "sticky",
   onScroll,
+  pageScrollViewportRef,
   ...restProps
 }) => {
   return (
@@ -30,6 +32,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       isPage={true}
       style={{ height: "100vh" }}
       onScroll={onScroll}
+      viewportRef={pageScrollViewportRef}
     >
       <Box sx={{ minHeight: "100vh" }} {...restProps}>
         <MainAppBar position={headerPosition} />

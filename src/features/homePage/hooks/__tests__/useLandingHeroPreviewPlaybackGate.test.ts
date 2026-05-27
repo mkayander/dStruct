@@ -2,10 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { createRef } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import {
-  isLandingPreviewNestedScroll,
-  useLandingHeroPreviewPlaybackGate,
-} from "#/features/homePage/hooks/useLandingHeroPreviewPlaybackGate";
+import { useLandingHeroPreviewPlaybackGate } from "#/features/homePage/hooks/useLandingHeroPreviewPlaybackGate";
 
 describe("useLandingHeroPreviewPlaybackGate", () => {
   beforeEach(() => {
@@ -17,16 +14,19 @@ describe("useLandingHeroPreviewPlaybackGate", () => {
   });
 
   it("starts unsuppressed when IntersectionObserver is unavailable", () => {
-    const rootRef = createRef<HTMLDivElement>();
+    const previewRootRef = createRef<HTMLDivElement>();
     const element = document.createElement("div");
-    rootRef.current = element;
+    previewRootRef.current = element;
 
     const intersectionObserver = globalThis.IntersectionObserver;
     // @ts-expect-error — simulate environments without IO
     delete globalThis.IntersectionObserver;
 
     const { result } = renderHook(() =>
-      useLandingHeroPreviewPlaybackGate(rootRef),
+      useLandingHeroPreviewPlaybackGate({
+        previewRootRef,
+        pageScrollViewport: null,
+      }),
     );
 
     expect(result.current.isPlaybackSuppressed).toBe(false);
@@ -34,21 +34,20 @@ describe("useLandingHeroPreviewPlaybackGate", () => {
     globalThis.IntersectionObserver = intersectionObserver;
   });
 
-  it("suppresses playback while the page is scrolling", () => {
-    const rootRef = createRef<HTMLDivElement>();
-    const previewRoot = document.createElement("div");
-    rootRef.current = previewRoot;
-    document.body.append(previewRoot);
-
-    const pageScroller = document.createElement("div");
-    document.body.append(pageScroller);
+  it("suppresses playback while the page scroll container is scrolling", () => {
+    const previewRootRef = createRef<HTMLDivElement>();
+    previewRootRef.current = document.createElement("div");
+    const pageScrollViewport = document.createElement("div");
 
     const { result } = renderHook(() =>
-      useLandingHeroPreviewPlaybackGate(rootRef),
+      useLandingHeroPreviewPlaybackGate({
+        previewRootRef,
+        pageScrollViewport,
+      }),
     );
 
     act(() => {
-      pageScroller.dispatchEvent(new Event("scroll"));
+      pageScrollViewport.dispatchEvent(new Event("scroll"));
     });
 
     expect(result.current.isPlaybackSuppressed).toBe(true);
@@ -58,54 +57,40 @@ describe("useLandingHeroPreviewPlaybackGate", () => {
     });
 
     expect(result.current.isPlaybackSuppressed).toBe(false);
-
-    previewRoot.remove();
-    pageScroller.remove();
   });
 
-  it("does not suppress playback when scrolling inside the preview", () => {
-    const rootRef = createRef<HTMLDivElement>();
-    const previewRoot = document.createElement("div");
-    rootRef.current = previewRoot;
-    document.body.append(previewRoot);
+  it("does not attach a scroll listener until the page viewport is available", () => {
+    const previewRootRef = createRef<HTMLDivElement>();
+    previewRootRef.current = document.createElement("div");
+    const pageScrollViewport = document.createElement("div");
+    const addListenerSpy = vi.spyOn(pageScrollViewport, "addEventListener");
 
-    const callstackViewport = document.createElement("div");
-    previewRoot.append(callstackViewport);
-
-    const { result } = renderHook(() =>
-      useLandingHeroPreviewPlaybackGate(rootRef),
+    const { rerender } = renderHook(
+      ({ pageScrollViewport: viewport }) =>
+        useLandingHeroPreviewPlaybackGate({
+          previewRootRef,
+          pageScrollViewport: viewport,
+        }),
+      { initialProps: { pageScrollViewport: null as HTMLDivElement | null } },
     );
 
-    act(() => {
-      callstackViewport.dispatchEvent(new Event("scroll"));
-    });
+    expect(addListenerSpy).not.toHaveBeenCalled();
 
-    expect(result.current.isPlaybackSuppressed).toBe(false);
+    rerender({ pageScrollViewport });
 
-    previewRoot.remove();
-  });
+    expect(addListenerSpy).toHaveBeenCalledWith(
+      "scroll",
+      expect.any(Function),
+      { passive: true },
+    );
 
-  it("isLandingPreviewNestedScroll detects scroll inside the preview root", () => {
-    const previewRoot = document.createElement("div");
-    const nestedScroller = document.createElement("div");
-    previewRoot.append(nestedScroller);
-
-    const nestedEvent = new Event("scroll");
-    Object.defineProperty(nestedEvent, "target", { value: nestedScroller });
-
-    expect(isLandingPreviewNestedScroll(nestedEvent, previewRoot)).toBe(true);
-
-    const pageScroller = document.createElement("div");
-    const pageEvent = new Event("scroll");
-    Object.defineProperty(pageEvent, "target", { value: pageScroller });
-
-    expect(isLandingPreviewNestedScroll(pageEvent, previewRoot)).toBe(false);
+    addListenerSpy.mockRestore();
   });
 
   it("suppresses playback when the preview is mostly off-screen", () => {
-    const rootRef = createRef<HTMLDivElement>();
+    const previewRootRef = createRef<HTMLDivElement>();
     const element = document.createElement("div");
-    rootRef.current = element;
+    previewRootRef.current = element;
 
     let observerCallback: IntersectionObserverCallback = () => undefined;
 
@@ -126,7 +111,10 @@ describe("useLandingHeroPreviewPlaybackGate", () => {
     vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
 
     const { result } = renderHook(() =>
-      useLandingHeroPreviewPlaybackGate(rootRef),
+      useLandingHeroPreviewPlaybackGate({
+        previewRootRef,
+        pageScrollViewport: null,
+      }),
     );
 
     act(() => {
