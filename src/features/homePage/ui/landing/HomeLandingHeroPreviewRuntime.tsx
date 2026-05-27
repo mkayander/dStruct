@@ -336,7 +336,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
             {LL.CALLSTACK()}
           </Typography>
         </Stack>
-        <CompactCallstackList height={262} activeRowScrollBehavior="auto" />
+        <CompactCallstackList height={262} />
       </Box>
       <Stack
         direction={{ xs: "column", sm: "row" }}

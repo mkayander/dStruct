@@ -16,15 +16,12 @@ import {
 
 type CompactCallstackListProps = {
   height?: number | string;
-  /** Scroll behavior when following the active playback step (landing uses `auto`). */
-  activeRowScrollBehavior?: ScrollBehavior;
 };
 
 const COMPACT_CALLSTACK_ROW_HEIGHT = 58;
 
 export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
   height = 262,
-  activeRowScrollBehavior = "smooth",
 }) => {
   const theme = useTheme();
   const callstack = useAppSelector(selectCallstack);
@@ -65,9 +62,9 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
 
     container.scrollTo({
       top: nextScrollTop,
-      behavior: activeRowScrollBehavior,
+      behavior: "auto",
     });
-  }, [activePlaybackStepIndex, activeRowScrollBehavior, playbackStepGroups]);
+  }, [activePlaybackStepIndex, playbackStepGroups]);
 
   if (!callstack.isReady || playbackStepGroups.length === 0) {
     return (
