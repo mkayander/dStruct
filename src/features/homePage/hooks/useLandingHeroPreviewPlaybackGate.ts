@@ -11,6 +11,19 @@ export type UseLandingHeroPreviewPlaybackGateResult = {
   isPlaybackSuppressed: boolean;
 };
 
+/** Capture-phase document listeners see nested scrollers; ignore preview internals. */
+export const isLandingPreviewNestedScroll = (
+  event: Event,
+  previewRoot: HTMLElement | null,
+): boolean => {
+  if (!previewRoot) {
+    return false;
+  }
+
+  const scrollTarget = event.target;
+  return scrollTarget instanceof Node && previewRoot.contains(scrollTarget);
+};
+
 /**
  * Suppresses landing hero preview playback while the user scrolls the page or
  * when the preview is mostly off-screen — reduces jank from Redux + layout
@@ -53,7 +66,11 @@ export const useLandingHeroPreviewPlaybackGate = (
   }, [rootRef]);
 
   useEffect(() => {
-    const markPageScrolling = () => {
+    const markPageScrolling = (event: Event) => {
+      if (isLandingPreviewNestedScroll(event, rootRef.current)) {
+        return;
+      }
+
       setIsPageScrolling(true);
       setScrollActivityVersion((version) => version + 1);
     };
@@ -68,7 +85,7 @@ export const useLandingHeroPreviewPlaybackGate = (
         capture: true,
       });
     };
-  }, []);
+  }, [rootRef]);
 
   // Each scroll bumps scrollActivityVersion; effect cleanup clears the prior idle timer.
   useEffect(() => {
