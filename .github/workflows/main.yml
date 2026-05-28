@@ -55,6 +55,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Init workspace (postinstall)
+        run: pnpm run ci:init
+
       - name: Run tests
         run: pnpm run test:ci
 

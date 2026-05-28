@@ -72,7 +72,7 @@ Refer to `package.json` scripts. Summary of most-used:
 - **Lint**: `pnpm lint` (runs ESLint + TypeScript `--noEmit`)
 - **Tests**: `pnpm test` or `pnpm test:ci` (both run Vitest once); `pnpm test:watch` for watch mode
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)
-- **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`)
+- **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`). **CI**: run `pnpm run ci:init` after `pnpm install` (same as postinstall). **Vercel**: `vercel.json` runs `pnpm run ensure-generated-from-install` after install when gitignored `src/graphql/generated` may be missing from cache.
 
 ### Fonts (Pages Router)
 
