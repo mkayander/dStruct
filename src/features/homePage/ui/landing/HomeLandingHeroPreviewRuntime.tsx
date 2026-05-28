@@ -32,6 +32,7 @@ import {
   selectIsRootFrame,
 } from "#/features/callstack/model/callstackSlice";
 import { CompactCallstackList } from "#/features/callstack/ui/CompactCallstackList";
+import { useLandingHeroPreviewLayoutTransitions } from "#/features/homePage/hooks/useLandingHeroPreviewLayoutTransitions";
 import { useLandingHeroPreviewPlaybackGate } from "#/features/homePage/hooks/useLandingHeroPreviewPlaybackGate";
 import {
   createLandingHeroPreviewStore,
@@ -89,6 +90,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     previewRootRef,
     pageScrollViewport,
   });
+  useLandingHeroPreviewLayoutTransitions();
   const {
     handleReset,
     handlePlay,
