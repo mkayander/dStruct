@@ -16,6 +16,8 @@
     "check:es": "es-guard",
     "dev": "next dev",
     "postinstall": "tsx src/scripts/postinstall.ts",
+    "ci:init": "pnpm run postinstall",
+    "ensure-generated-from-install": "tsx src/scripts/ensureGeneratedFromInstall.ts",
     "load-env": "tsx src/scripts/loadEnvAndRun.ts",
     "prisma:generate": "pnpm run load-env -- prisma generate && tsx prisma/scripts/generate-date-serialization.ts",
     "prisma:push": "pnpm run load-env -- prisma db push",

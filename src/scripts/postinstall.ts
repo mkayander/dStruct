@@ -73,19 +73,19 @@ async function installBlack() {
   }
 }
 
-function runPrismaAndGraphQL() {
-  const prismaCommand = "pnpm run prisma:generate";
-  const graphqlCommand = "pnpm run generate-graphql";
-  const commands = [prismaCommand, graphqlCommand];
-
-  execSync(commands.join(" && "), { stdio: "inherit" });
+function runGraphQLThenPrisma() {
+  // GraphQL before Prisma: `prisma && graphql` skipped codegen when prisma:generate failed.
+  console.log("🧩 GraphQL codegen…");
+  execSync("pnpm run generate-graphql", { stdio: "inherit" });
+  console.log("🧩 Prisma generate…");
+  execSync("pnpm run prisma:generate", { stdio: "inherit" });
 }
 
 async function main() {
   console.time("postinstall");
 
-  console.log("🔍 Running Prisma and GraphQL generation...");
-  runPrismaAndGraphQL();
+  console.log("🔍 Running codegen (GraphQL, then Prisma)…");
+  runGraphQLThenPrisma();
 
   // Skip Python checks in CI/server environments
   if (
