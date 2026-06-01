@@ -13,7 +13,7 @@ type JsonInputProps = Omit<TextFieldProps, "onChange"> & {
   validationSchema: Joi.Schema;
   /** Debounce for persisting JSON text (passed to `DebouncedInput`). */
   timeout?: number;
-  /** Rendered inside `InputProps.endAdornment` before any inherited adornment (e.g. rename control). */
+  /** Rendered in `slotProps.input.endAdornment` before any inherited adornment (e.g. rename control). */
   suffixSlot?: React.ReactNode;
 };
 
@@ -22,7 +22,7 @@ export const JsonInput: React.FC<JsonInputProps> = ({
   validationSchema,
   timeout,
   suffixSlot,
-  InputProps,
+  slotProps,
   ...restProps
 }) => {
   const { LL } = useI18nContext();
@@ -49,6 +49,14 @@ export const JsonInput: React.FC<JsonInputProps> = ({
     }
   };
 
+  const inputSlotProps = slotProps?.input;
+  const inheritedEndAdornment =
+    typeof inputSlotProps === "object" &&
+    inputSlotProps !== null &&
+    "endAdornment" in inputSlotProps
+      ? inputSlotProps.endAdornment
+      : null;
+
   return (
     <DebouncedInput
       label={LL.INPUT()}
@@ -58,14 +66,19 @@ export const JsonInput: React.FC<JsonInputProps> = ({
       helperText={inputError}
       fullWidth
       timeout={timeout}
-      InputProps={{
-        ...InputProps,
-        endAdornment: (
-          <>
-            {suffixSlot}
-            {InputProps?.endAdornment}
-          </>
-        ),
+      slotProps={{
+        ...slotProps,
+        input: {
+          ...(typeof inputSlotProps === "object" && inputSlotProps !== null
+            ? inputSlotProps
+            : {}),
+          endAdornment: (
+            <>
+              {suffixSlot}
+              {inheritedEndAdornment}
+            </>
+          ),
+        },
       }}
       {...restProps}
     />

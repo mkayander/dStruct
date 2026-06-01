@@ -74,7 +74,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
           onChange={handleChange}
           value={arg.input}
           timeout={300}
-          InputProps={{ endAdornment: renameSuffix }}
+          slotProps={{ input: { endAdornment: renameSuffix } }}
         />
       );
 
@@ -84,8 +84,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
           <Stack
             direction="row"
             spacing={1}
-            alignItems="center"
-            justifyContent="space-between"
+            sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
             <Typography variant="caption" color="text.secondary">
               {inputLabel}
@@ -105,7 +104,7 @@ export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
       fullWidth
       size="small"
       onChange={(ev) => handleChange(ev.target.value)}
-      InputProps={{ endAdornment: renameSuffix }}
+      slotProps={{ input: { endAdornment: renameSuffix } }}
     />
   );
 };
