@@ -24,8 +24,10 @@ export const DraggableArgsList: React.FC<DraggableArgsListProps> = ({
           <Stack
             {...provided.droppableProps}
             ref={provided.innerRef}
-            mt={1}
             spacing={1}
+            sx={{
+              mt: 1,
+            }}
           >
             {children}
             {provided.placeholder}

@@ -75,19 +75,31 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
 
   return (
     <Stack
-      py={1}
-      px={2}
       direction="row"
-      alignItems="center"
-      justifyContent="flex-end"
       spacing={1}
       onMouseDown={(event: React.MouseEvent) => event.stopPropagation()}
+      sx={{
+        py: 1,
+        px: 2,
+        alignItems: "center",
+        justifyContent: "flex-end",
+      }}
     >
-      <Box width="100%">
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
         <Typography id="input-slider" variant="caption" gutterBottom>
           {LL.PLAYBACK_INTERVAL()}
         </Typography>
-        <Grid container spacing={2} alignItems="center">
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Grid>
             <Speed />
           </Grid>
@@ -124,10 +136,12 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         </Grid>
       </Box>
       <Stack
-        position="relative"
         direction="row"
-        alignItems="center"
         spacing={0.5}
+        sx={{
+          position: "relative",
+          alignItems: "center",
+        }}
       >
         <IconButton
           title="Step back"

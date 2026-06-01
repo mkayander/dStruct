@@ -18,7 +18,7 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
   value,
   onChange,
   timeout,
-  InputProps,
+  slotProps,
   inputRef,
   ...restProps
 }) => {
@@ -51,20 +51,33 @@ export const DebouncedInput: React.FC<DebouncedInputProps> = ({
     setHasPendingChanges(true);
   };
 
+  const inputSlotProps = slotProps?.input;
+  const endAdornment =
+    typeof inputSlotProps === "object" &&
+    inputSlotProps !== null &&
+    "endAdornment" in inputSlotProps
+      ? inputSlotProps.endAdornment
+      : null;
+
   return (
     <TextField
       value={rawInput}
       onChange={handleChange}
       inputRef={inputRef}
-      InputProps={{
-        ...InputProps,
-        endAdornment: hasPendingChanges ? (
-          <InputAdornment position="end">
-            <CircularProgress size={24} />
-          </InputAdornment>
-        ) : (
-          (InputProps?.endAdornment ?? null)
-        ),
+      slotProps={{
+        ...slotProps,
+        input: {
+          ...(typeof inputSlotProps === "object" && inputSlotProps !== null
+            ? inputSlotProps
+            : {}),
+          endAdornment: hasPendingChanges ? (
+            <InputAdornment position="end">
+              <CircularProgress size={24} />
+            </InputAdornment>
+          ) : (
+            endAdornment
+          ),
+        },
       }}
       {...restProps}
     />

@@ -143,8 +143,10 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
         <Stack
           direction="row"
           spacing={1}
-          alignItems="center"
           onClick={handlePropagation}
+          sx={{
+            alignItems: "center",
+          }}
         >
           <Box sx={{ flex: 1 }}>
             <DebouncedInput
@@ -160,12 +162,14 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
               onKeyDown={handlePropagation}
               sx={{ pointerEvents: "auto" }}
               timeout={200}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search sx={{ color: "text.secondary", fontSize: 20 }} />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search sx={{ color: "text.secondary", fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                },
               }}
             />
           </Box>
@@ -182,8 +186,10 @@ export const ProjectBrowserHeader: React.FC<ProjectBrowserHeaderProps> = ({
         <Stack
           direction="row"
           spacing={1}
-          alignItems="center"
-          justifyContent="flex-start"
+          sx={{
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
         >
           <Tooltip title={sortLabel || LL.SORT_BY()} arrow>
             <IconButton

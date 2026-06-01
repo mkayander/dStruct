@@ -93,7 +93,13 @@ const DailyProblemPage: NextPage<DailyProblemPageProps> = ({
             </Alert>
           ) : null}
 
-          <Grid container spacing={4} justifyContent="center">
+          <Grid
+            container
+            spacing={4}
+            sx={{
+              justifyContent: "center",
+            }}
+          >
             <Grid size={{ xs: 12, lg: 8 }}>
               <QuestionSummary
                 questionDataQuery={questionDataQuery}

@@ -88,6 +88,21 @@ class TestBuildTrackedBinaryTree(unittest.TestCase):
         self.assertIsInstance(root, TreeNode)
         self.assertNotIsInstance(root, InstrumentedTreeNode)
 
+    def test_instrumented_tree_repr_and_str_avoid_default_object_repr(self) -> None:
+        callstack: list = []
+        root = build_tracked_binary_tree(
+            [1, 2],
+            ["n0", "n1"],
+            "t",
+            "binaryTree",
+            callstack,
+        )
+        self.assertIsNotNone(root)
+        assert root is not None
+        self.assertIn("[1, 2", str(root))
+        self.assertIn("[1, 2", repr(root))
+        self.assertNotIn("object at 0x", repr(root))
+
 
 class TestBuildTrackedLinkedList(unittest.TestCase):
     def setUp(self) -> None:

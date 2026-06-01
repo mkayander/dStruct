@@ -48,45 +48,53 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
-      alignItems="center"
       spacing={1.5}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
+      role="button"
+      aria-selected={isSelected}
+      aria-label={`Select project ${project.title}`}
       sx={{
+        justifyContent: "space-between",
+        alignItems: "center",
         height: 76,
         p: 1.75,
         px: 2,
         cursor: "pointer",
         borderRadius: 1.5,
+
         backgroundColor: isSelected
           ? theme.palette.action.selected
           : "transparent",
+
         border: `1px solid ${
           isSelected ? theme.palette.primary.main : theme.palette.divider
         }`,
+
         borderColor: isSelected ? theme.palette.primary.main : "transparent",
+
         "&:hover": {
           backgroundColor: theme.palette.action.hover,
         },
+
         "&:focus-visible": {
           outline: `2px solid ${theme.palette.primary.main}`,
           outlineOffset: -2,
         },
+
         transition: "background-color 0.15s ease-out",
       }}
-      role="button"
-      aria-selected={isSelected}
-      aria-label={`Select project ${project.title}`}
     >
       {/* Left side: Completion status placeholder, title, category */}
       <Stack
         direction="row"
         spacing={1.5}
-        alignItems="center"
-        flex={1}
-        minWidth={0}
+        sx={{
+          alignItems: "center",
+          flex: 1,
+          minWidth: 0,
+        }}
       >
         {/* Completion status placeholder - can be added when data is available */}
         <Box
@@ -103,12 +111,21 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
           {/* Placeholder for checkmark icon when completion data is available */}
         </Box>
 
-        <Stack direction="column" spacing={0.5} flex={1} minWidth={0}>
+        <Stack
+          direction="column"
+          spacing={0.5}
+          sx={{
+            flex: 1,
+            minWidth: 0,
+          }}
+        >
           <Stack
             direction="row"
             spacing={1}
-            alignItems="center"
-            flexWrap="nowrap"
+            sx={{
+              alignItems: "center",
+              flexWrap: "nowrap",
+            }}
           >
             <Typography
               variant="body1"
@@ -127,7 +144,13 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
             </Typography>
             {project.isNew && <NewLabel createdAt={project.createdAt} />}
           </Stack>
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: "center",
+            }}
+          >
             <Typography
               variant="caption"
               sx={{
@@ -143,13 +166,15 @@ const ProjectBrowserItemComponent: React.FC<ProjectBrowserItemProps> = ({
           </Stack>
         </Stack>
       </Stack>
-
       {/* Right side: Difficulty badge, author avatar */}
       <Stack
         direction="row"
-        alignItems="center"
         spacing={1.5}
-        sx={{ minWidth: 0, flexShrink: 0 }}
+        sx={{
+          alignItems: "center",
+          minWidth: 0,
+          flexShrink: 0,
+        }}
       >
         {project.difficulty && (
           <Chip

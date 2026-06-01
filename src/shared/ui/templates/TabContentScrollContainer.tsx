@@ -44,11 +44,12 @@ export const TabContentScrollContainer = forwardRef<
   return (
     <Box
       component="div"
-      display="contents"
       sx={{
+        display: "contents",
         height: "100%",
         flexGrow: 1,
         ".os-viewport": viewportStyle,
+
         ".os-scrollbar > .os-scrollbar-track > div.os-scrollbar-handle": {
           transition: "background .2s",
           background: alpha(theme.palette.divider, 0.1),

@@ -170,7 +170,15 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
 
   return (
     <Box>
-      <Stack direction="row" spacing={1} alignItems="center" mt={1} mb={2}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "center",
+          mt: 1,
+          mb: 2,
+        }}
+      >
         <Typography variant="caption">{LL.ARGUMENTS()}</Typography>
         {isLoading && <CircularProgress size={14} />}
         <Divider sx={{ flexGrow: 1 }} />
@@ -190,11 +198,19 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
             {(provided) => (
               <Stack
                 direction="row"
-                justifyContent="space-between"
-                alignItems="start"
                 spacing={1}
+                sx={{
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                }}
               >
-                <Box display="flex" flexDirection="row" flexGrow={1}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexGrow: 1,
+                  }}
+                >
                   {isEditable && (
                     <Box
                       {...provided.dragHandleProps}
@@ -217,7 +233,13 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                   <ArgInput arg={arg} />
                 </Box>
                 {isEditable && (
-                  <Stack direction="row" spacing={1} alignItems="center">
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{
+                      alignItems: "center",
+                    }}
+                  >
                     <ArgumentTypeSelect
                       value={arg.type}
                       onChange={(type) => handleArgTypeChange(arg, type)}

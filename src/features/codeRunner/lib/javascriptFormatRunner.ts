@@ -14,10 +14,7 @@ export type JavaScriptFormatResult = {
 
 function createDefaultWorker(): Worker {
   return new Worker(
-    new URL(
-      "src/features/codeRunner/lib/workers/prettierFormat.worker.ts",
-      import.meta.url,
-    ),
+    new URL("./workers/prettierFormat.worker.ts", import.meta.url),
   );
 }
 

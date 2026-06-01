@@ -108,13 +108,6 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      rowGap={1}
-      borderRadius={1}
-      position="relative"
-      minHeight="100%"
-      width="100%"
       onMouseLeave={() => {
         if (nodeDragState) dispatch(editorSlice.actions.clear());
       }}
@@ -133,17 +126,37 @@ export const TreeViewer: React.FC<TreeViewerProps> = ({
         );
       }}
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        rowGap: 1,
+        borderRadius: 1,
+        position: "relative",
+        minHeight: "100%",
+        width: "100%",
         flexGrow: 1,
       }}
     >
-      {binaryTrees.length ? <Box height="100%">{binaryTrees}</Box> : null}
-
+      {binaryTrees.length ? (
+        <Box
+          sx={{
+            height: "100%",
+          }}
+        >
+          {binaryTrees}
+        </Box>
+      ) : null}
       {treeStructures.graph.map(({ name, treeState }) => (
         <NodesView key={name} treeName={name} data={treeState} />
       ))}
-
       {arrayStructures?.length || treeStructures.linkedList.length ? (
-        <Stack width="fit-content" minWidth="100%" m={2} spacing={2}>
+        <Stack
+          spacing={2}
+          sx={{
+            width: "fit-content",
+            minWidth: "100%",
+            m: 2,
+          }}
+        >
           {arrayStructures}
           <br />
 

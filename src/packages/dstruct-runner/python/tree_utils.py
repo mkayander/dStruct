@@ -12,6 +12,62 @@ from execution_location import snapshot_for_frame
 record_reads: bool = True
 
 
+def binary_tree_to_display_string(root: Optional["TreeNode"]) -> str:
+    """Level-order bracket string for trees; uses ``__dict__`` only (no read/blink frames)."""
+    if root is None:
+        return "None"
+    out: List[str] = []
+    queue: List[Optional["TreeNode"]] = [root]
+    while queue:
+        node = queue.pop(0)
+        if node is None:
+            out.append("null")
+            continue
+        data = object.__getattribute__(node, "__dict__")
+        val = data.get("val")
+        out.append("null" if val is None else str(val))
+        queue.append(data.get("left"))
+        queue.append(data.get("right"))
+    while len(out) > 1 and out[-1] == "null":
+        out.pop()
+    return "[" + ", ".join(out) + "]"
+
+
+def linked_list_to_display_string(head: Optional["ListNode"]) -> str:
+    """``1 -> 2 -> 3`` chain; uses ``__dict__`` only (no read/blink frames)."""
+    if head is None:
+        return "None"
+    parts: List[str] = []
+    seen: set[int] = set()
+    current: Optional["ListNode"] = head
+    while current is not None:
+        ident = id(current)
+        if ident in seen:
+            parts.append("(cycle)")
+            break
+        seen.add(ident)
+        data = object.__getattribute__(current, "__dict__")
+        parts.append(str(data.get("val")))
+        next_node = data.get("next")
+        if next_node is None:
+            current = None
+        elif isinstance(next_node, ListNode):
+            current = next_node
+        else:
+            # Duck-type plain solution nodes that carry val/next without inheriting ListNode.
+            next_data = getattr(next_node, "__dict__", None)
+            if (
+                isinstance(next_data, dict)
+                and "next" in next_data
+                and "val" in next_data
+                and "left" not in next_data
+            ):
+                current = next_node
+            else:
+                current = None
+    return " -> ".join(parts) if parts else "None"
+
+
 class TreeNode:
     """LeetCode-style binary tree node."""
 
@@ -24,6 +80,12 @@ class TreeNode:
         object.__setattr__(self, "val", val)
         object.__setattr__(self, "left", left)
         object.__setattr__(self, "right", right)
+
+    def __repr__(self) -> str:
+        return f"TreeNode({binary_tree_to_display_string(self)})"
+
+    def __str__(self) -> str:
+        return binary_tree_to_display_string(self)
 
 
 def build_tree(values: List[Any]) -> Optional[TreeNode]:
@@ -225,6 +287,12 @@ class InstrumentedTreeNode(TreeNode):
             node_id=data["_node_id"],
         )
 
+    def __repr__(self) -> str:
+        return f"InstrumentedTreeNode({binary_tree_to_display_string(self)})"
+
+    def __str__(self) -> str:
+        return binary_tree_to_display_string(self)
+
 
 def build_tracked_binary_tree(
     values: List[Any],
@@ -306,6 +374,12 @@ class ListNode:
     def __init__(self, val: int = 0, next: Optional["ListNode"] = None):
         object.__setattr__(self, "val", val)
         object.__setattr__(self, "next", next)
+
+    def __repr__(self) -> str:
+        return f"ListNode({linked_list_to_display_string(self)})"
+
+    def __str__(self) -> str:
+        return linked_list_to_display_string(self)
 
 
 class InstrumentedListNode(ListNode):
@@ -424,6 +498,12 @@ class InstrumentedListNode(ListNode):
             arg_type=data["_arg_type"],
             node_id=data["_node_id"],
         )
+
+    def __repr__(self) -> str:
+        return f"InstrumentedListNode({linked_list_to_display_string(self)})"
+
+    def __str__(self) -> str:
+        return linked_list_to_display_string(self)
 
 
 def build_list(values: List[Any]) -> Optional[ListNode]:

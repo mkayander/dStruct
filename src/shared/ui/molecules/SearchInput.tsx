@@ -32,9 +32,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     <Stack
       direction="row"
       spacing={1}
-      alignItems="center"
       onClick={handlePropagation}
       sx={{
+        alignItems: "center",
         p: 1,
         ...sx,
       }}

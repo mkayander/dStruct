@@ -290,7 +290,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           <DialogContentText>
             Edit the project details below according to your needs.
           </DialogContentText>
-          <Stack spacing={2} mt={2}>
+          <Stack
+            spacing={2}
+            sx={{
+              mt: 2,
+            }}
+          >
             <FormControl fullWidth>
               <InputLabel required id="new-proj-select-category-label">
                 Category
@@ -421,7 +426,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   "Where you found this problem. For example, LeetCode."
                 }
               />
-              <Stack direction="row" spacing={2} mt={1} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={2}
+                sx={{
+                  mt: 1,
+                  alignItems: "center",
+                }}
+              >
                 <Tooltip
                   title="Fetch and apply problem data from LeetCode"
                   arrow

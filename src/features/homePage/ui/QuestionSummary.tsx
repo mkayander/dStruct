@@ -36,7 +36,13 @@ const SummarySkeleton = () => (
       position: "relative",
     }}
   >
-    <Stack direction="row" width="100%" justifyContent="space-between">
+    <Stack
+      direction="row"
+      sx={{
+        width: "100%",
+        justifyContent: "space-between",
+      }}
+    >
       <Skeleton width="40%" height="52px" />
       <Skeleton width="30%" height="32px" />
     </Stack>
@@ -53,9 +59,19 @@ const SummarySkeleton = () => (
       <TopicTagSkeleton width="18%" />
     </Stack>
     <Divider />
-    <Box display="flex" justifyContent="center">
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <CircularPercentage size={180}>
-        <Stack alignItems="center" pb={1}>
+        <Stack
+          sx={{
+            alignItems: "center",
+            pb: 1,
+          }}
+        >
           <Skeleton width="80px" height="28px" />
           <Skeleton width="60px" height="32px" />
           <Skeleton width="100px" height="24px" />
@@ -94,7 +110,16 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
   const shadowColor = darken(theme.palette.primary.dark, 0.5);
 
   return (
-    <Box position="relative" zIndex={10} {...props}>
+    <Box
+      {...props}
+      sx={[
+        {
+          position: "relative",
+          zIndex: 10,
+        },
+        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
+      ]}
+    >
       <Paper
         elevation={12}
         sx={{
@@ -123,13 +148,27 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
         }}
       >
         {question ? (
-          <Box display="flex" justifyContent="center" flexWrap="wrap" gap={2}>
-            <Box flexBasis="512px" flexGrow={1}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 2,
+            }}
+          >
+            <Box
+              sx={{
+                flexBasis: "512px",
+                flexGrow: 1,
+              }}
+            >
               <Box
-                display="flex"
-                flexWrap="wrap"
-                justifyContent="space-between"
-                gap={1}
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  gap: 1,
+                }}
               >
                 <Typography variant="h4">
                   <span style={{ fontWeight: "300" }}>
@@ -144,28 +183,45 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
                     {question.title}
                   </MuiLink>
                 </Typography>
-                <Box display="flex" sx={{ opacity: 0.9 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    opacity: 0.9,
+                  }}
+                >
                   <EventRepeatTwoTone sx={{ mr: 1 }} />
-                  <Typography variant="subtitle1" lineHeight={1.1}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      lineHeight: 1.1,
+                    }}
+                  >
                     {LL.QUESTION_OF_TODAY_LABEL()}
                   </Typography>
                 </Box>
               </Box>
 
               <Box
-                my={1}
-                display="flex"
-                flexWrap="wrap"
-                gap={1}
                 sx={{
+                  my: 1,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 1,
                   opacity: 0.9,
+
                   justifyContent: {
                     xs: "space-between",
                     sm: "flex-start",
                   },
                 }}
               >
-                <Box display="flex" alignItems="center" justifyContent="center">
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
                   <Typography variant="subtitle1">
                     {question.categoryTitle}
                   </Typography>
@@ -198,7 +254,14 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
 
               <Divider />
 
-              <Grid container spacing={1} marginTop={0} marginBottom={1}>
+              <Grid
+                container
+                spacing={1}
+                sx={{
+                  marginTop: 0,
+                  marginBottom: 1,
+                }}
+              >
                 {question.topicTags.map((topic) => (
                   <Grid key={topic.slug}>
                     <TopicTag topic={topic} />
@@ -217,7 +280,11 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
             >
               <CircularPercentage value={question.stats.acRate} size={180}>
                 <Typography variant="caption">Acceptance</Typography>
-                <Typography fontWeight="bold">
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                  }}
+                >
                   {question.stats.acRate}%
                 </Typography>
                 <Typography variant="caption">
@@ -233,7 +300,6 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
           <SummarySkeleton />
         )}
       </Paper>
-
       <EventIcon
         sx={{
           position: "absolute",
@@ -245,7 +311,6 @@ export const QuestionSummary: React.FC<QuestionSummaryProps> = ({
           transform: "translateY(-40%) rotate(20deg)",
         }}
       />
-
       <HistoryToggleOff
         sx={{
           position: "absolute",

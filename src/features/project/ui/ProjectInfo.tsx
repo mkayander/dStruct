@@ -19,29 +19,39 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-      width="100%"
       spacing={1}
+      sx={{
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+      }}
     >
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Typography>{project.title}</Typography>
         {project.isNew && <NewLabel createdAt={project.createdAt} />}
         {project.lcLink && <ProblemLinkButton problemLink={project.lcLink} />}
       </Stack>
       <Stack
         direction="row"
-        alignItems="center"
-        minWidth={10}
-        overflow="hidden"
         spacing={1}
+        sx={{
+          alignItems: "center",
+          minWidth: 10,
+          overflow: "hidden",
+        }}
       >
         <Typography
-          fontSize={12}
           variant="subtitle1"
-          textOverflow="ellipsis"
-          overflow="hidden"
           sx={{
+            fontSize: 12,
+            textOverflow: "ellipsis",
+            overflow: "hidden",
             opacity: 0.6,
             color: getDifficultyColor(theme, project.difficulty),
           }}

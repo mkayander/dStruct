@@ -2,11 +2,13 @@ import { loadPyodide, type PyodideInterface, version } from "pyodide";
 
 import arrayTrackerSrc from "#/packages/dstruct-runner/python/array_tracker.py";
 import arrayTrackerTransformerSrc from "#/packages/dstruct-runner/python/array_tracker_transformer.py";
+import collectionTrackerSrc from "#/packages/dstruct-runner/python/collection_tracker.py";
 import execPySrc from "#/packages/dstruct-runner/python/exec.py";
 import executionLocationSrc from "#/packages/dstruct-runner/python/execution_location.py";
 import lineTrackingTransformerSrc from "#/packages/dstruct-runner/python/line_tracking_transformer.py";
 import outputSrc from "#/packages/dstruct-runner/python/output.py";
 import sharedTypesSrc from "#/packages/dstruct-runner/python/shared_types.py";
+import solutionDisplaySrc from "#/packages/dstruct-runner/python/solution_display.py";
 import treeUtilsSrc from "#/packages/dstruct-runner/python/tree_utils.py";
 
 import type { SerializedPythonArg } from "../createPythonRuntimeArgs";
@@ -28,7 +30,9 @@ const DEFAULT_CDN_URL = `https://cdn.jsdelivr.net/pyodide/v${version}/full/`;
 const HARNESS_FILES: Record<string, string> = {
   "shared_types.py": sharedTypesSrc,
   "output.py": outputSrc,
+  "solution_display.py": solutionDisplaySrc,
   "array_tracker.py": arrayTrackerSrc,
+  "collection_tracker.py": collectionTrackerSrc,
   "array_tracker_transformer.py": arrayTrackerTransformerSrc,
   "execution_location.py": executionLocationSrc,
   "line_tracking_transformer.py": lineTrackingTransformerSrc,

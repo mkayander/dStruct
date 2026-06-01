@@ -1,3 +1,10 @@
+# [1.379.0](https://github.com/mkayander/dStruct/compare/v1.378.1...v1.379.0) (2026-06-01)
+
+
+### Features
+
+* **python-harness:** auto-track dict/set and nested JSON args ([#130](https://github.com/mkayander/dStruct/issues/130)) ([61c5e23](https://github.com/mkayander/dStruct/commit/61c5e23c127aebd66d4d8e025269a02ccf725bdf))
+
 ## [1.378.1](https://github.com/mkayander/dStruct/compare/v1.378.0...v1.378.1) (2026-05-20)
 
 

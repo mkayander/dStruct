@@ -155,7 +155,11 @@ const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
             zIndex: 50,
           }}
         >
-          <Stack gap={1}>
+          <Stack
+            sx={{
+              gap: 1,
+            }}
+          >
             <Button
               title={`${isEditingNodes ? "Save" : "Edit"} graph node positions`}
               color={isEditingNodes ? "success" : "info"}
@@ -279,7 +283,6 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
       onKeyDown={handleKeyDown}
     >
       <LoadingSkeletonOverlay />
-
       <TabContext value={tabValue}>
         <TabListWrapper
           sx={{
@@ -297,7 +300,13 @@ export const TreeViewPanel: React.FC<TreeViewPanelProps> = ({
             <Tab label={"Structure Viewer"} value="structure" />
             <Tab label={"Benchmark"} value="benchmark" />
           </TabList>
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: "center",
+            }}
+          >
             {trailingHeaderActions}
             {tabValue === "structure" && (
               <Button
