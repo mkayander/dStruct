@@ -51,10 +51,6 @@ export const ArgumentRenameSuffix: React.FC<ArgumentRenameSuffixProps> = ({
   );
 
   useEffect(() => {
-    setLocalDraft(labelDraft);
-  }, [labelDraft]);
-
-  useEffect(() => {
     if (!anchorEl) return;
 
     if (debounceRef.current) {
@@ -73,9 +69,13 @@ export const ArgumentRenameSuffix: React.FC<ArgumentRenameSuffixProps> = ({
     };
   }, [anchorEl, flushLabelToStore, localDraft]);
 
-  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  }, []);
+  const handleOpen = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setLocalDraft(labelDraft);
+      setAnchorEl(event.currentTarget);
+    },
+    [labelDraft],
+  );
 
   const handleClose = useCallback(() => {
     if (debounceRef.current) {
