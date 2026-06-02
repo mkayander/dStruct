@@ -19,6 +19,17 @@ const ArrayBase = makeArrayBaseClass(Array);
 export type ControlledArrayRuntimeOptions = {
   length?: number;
   colorMap?: Record<string, string>;
+  /** User source variable name (inferred by AST); shown as a viewer label, not the internal tree id. */
+  displayLabel?: string;
+};
+
+const RUNTIME_DISPLAY_LABEL_KEY = "__dstructRuntimeDisplayLabel";
+
+export const getRuntimeDisplayLabel = (
+  array: ArrayBaseType,
+): string | undefined => {
+  const label = Reflect.get(array, RUNTIME_DISPLAY_LABEL_KEY);
+  return typeof label === "string" ? label : undefined;
 };
 
 export function initControlledArray<T extends ArrayBaseType>(
@@ -51,6 +62,14 @@ export function initControlledArray<T extends ArrayBaseType>(
       value: callstack,
       enumerable: false,
     },
+    ...(options?.displayLabel !== undefined
+      ? {
+          [RUNTIME_DISPLAY_LABEL_KEY]: {
+            value: options.displayLabel,
+            enumerable: false,
+          },
+        }
+      : {}),
   });
 
   if (addToCallstack) {
@@ -184,13 +203,21 @@ export class ControlledArray<T> extends ArrayBase<T> {
       new Array(this.length),
       undefined,
     );
+    const inheritedDisplayLabel = getRuntimeDisplayLabel(this);
+    const mapOptions: ControlledArrayRuntimeOptions | undefined =
+      inheritedDisplayLabel !== undefined || options !== undefined
+        ? {
+            ...options,
+            displayLabel: options?.displayLabel ?? inheritedDisplayLabel,
+          }
+        : undefined;
     const newArray = new ControlledArray(
       array as U[],
       id,
       data,
       this.callstack,
       true,
-      options,
+      mapOptions,
     );
     for (let i = 0; i < this.length; i++) {
       newArray[i] = callback(this[i]!, i, this);
@@ -269,22 +296,44 @@ export const getRuntimeArrayClass = (callstack: CallstackHelper) =>
   class ArrayProxy<T extends string | number> extends ControlledArray<T> {
     constructor(arrayLength: number);
     constructor(...items: Array<T>) {
-      if (items.length === 1 && typeof items[0] === "number") {
-        const arrayLength = items[0];
-        items = new Array(arrayLength);
+      let runtimeOptions: ControlledArrayRuntimeOptions | undefined;
+      let elementItems = items as Array<T | number>;
+      const lastItem = elementItems.at(-1);
+      if (
+        elementItems.length >= 2 &&
+        lastItem !== null &&
+        lastItem !== undefined &&
+        typeof lastItem === "object" &&
+        !Array.isArray(lastItem) &&
+        "displayLabel" in lastItem
+      ) {
+        runtimeOptions = lastItem as ControlledArrayRuntimeOptions;
+        elementItems = elementItems.slice(0, -1) as Array<T | number>;
+      }
+
+      if (elementItems.length === 1 && typeof elementItems[0] === "number") {
+        const arrayLength = elementItems[0];
+        elementItems = new Array(arrayLength) as Array<T | number>;
       }
 
       if (
-        items[0] &&
-        typeof items[0] !== "number" &&
-        typeof items[0] !== "string"
+        elementItems[0] &&
+        typeof elementItems[0] !== "number" &&
+        typeof elementItems[0] !== "string"
       ) {
         throw new Error("ArrayProxy can only contain numbers or strings");
       }
 
-      const data = generateArrayData(items);
+      const data = generateArrayData(elementItems as T[]);
 
-      super(items, generate(), data, callstack, true);
+      super(
+        elementItems as T[],
+        generate(),
+        data,
+        callstack,
+        true,
+        runtimeOptions,
+      );
     }
 
     static override from(

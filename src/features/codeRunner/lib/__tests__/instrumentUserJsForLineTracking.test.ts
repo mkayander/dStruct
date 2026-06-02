@@ -24,12 +24,16 @@ describe("instrumentUserJsForLineTracking", () => {
     expect(ok).toBe(true);
   });
 
-  it("skips instrumentation when there is no return function template", () => {
-    const code = `function run() { return 1; }
+  it("skips line probes without return function template but still transforms array literals", () => {
+    const code = `function run() {
+  const a = [1, 2];
+  return a;
+}
 return run;`;
     const { code: out, ok } = instrumentUserJsForLineTracking(code);
     expect(ok).toBe(false);
-    expect(out).toBe(code);
+    expect(out).toContain('__dstructArrayLiteralWithName("a", 1, 2)');
+    expect(out).not.toContain("__dstructSetExecutionSource");
   });
 
   it("does not instrument top-level functions outside the returned solution", () => {
@@ -64,13 +68,13 @@ return function main() {
     expect(out).toContain("globalThis.__dstructSetExecutionSource");
   });
 
-  it("replaces array literals with __dstructArrayLiteral in solution", () => {
+  it("replaces array literals with __dstructArrayLiteralWithName when bound to a variable", () => {
     const code = `return function f() {
   const a = [1, 2];
   return a;
 };`;
     const { code: out, ok } = instrumentUserJsForLineTracking(code);
     expect(ok).toBe(true);
-    expect(out).toContain("__dstructArrayLiteral(1, 2)");
+    expect(out).toContain('__dstructArrayLiteralWithName("a", 1, 2)');
   });
 });

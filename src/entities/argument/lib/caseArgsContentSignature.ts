@@ -14,6 +14,7 @@ export const buildCaseArgsContentSignature = (
   const normalizedArguments = [...argumentsList]
     .map((argument) => ({
       name: argument.name,
+      label: argument.label ?? null,
       parentName: argument.parentName ?? null,
       order: argument.order,
       type: argument.type,
