@@ -23,6 +23,15 @@ export type ControlledArrayRuntimeOptions = {
   displayLabel?: string;
 };
 
+const RUNTIME_DISPLAY_LABEL_KEY = "__dstructRuntimeDisplayLabel";
+
+export const getRuntimeDisplayLabel = (
+  array: ArrayBaseType,
+): string | undefined => {
+  const label = Reflect.get(array, RUNTIME_DISPLAY_LABEL_KEY);
+  return typeof label === "string" ? label : undefined;
+};
+
 export function initControlledArray<T extends ArrayBaseType>(
   array: T,
   arrayData: EntityState<ArrayItemData, string>,
@@ -53,6 +62,14 @@ export function initControlledArray<T extends ArrayBaseType>(
       value: callstack,
       enumerable: false,
     },
+    ...(options?.displayLabel !== undefined
+      ? {
+          [RUNTIME_DISPLAY_LABEL_KEY]: {
+            value: options.displayLabel,
+            enumerable: false,
+          },
+        }
+      : {}),
   });
 
   if (addToCallstack) {
@@ -186,13 +203,21 @@ export class ControlledArray<T> extends ArrayBase<T> {
       new Array(this.length),
       undefined,
     );
+    const inheritedDisplayLabel = getRuntimeDisplayLabel(this);
+    const mapOptions: ControlledArrayRuntimeOptions | undefined =
+      inheritedDisplayLabel !== undefined || options !== undefined
+        ? {
+            ...options,
+            displayLabel: options?.displayLabel ?? inheritedDisplayLabel,
+          }
+        : undefined;
     const newArray = new ControlledArray(
       array as U[],
       id,
       data,
       this.callstack,
       true,
-      options,
+      mapOptions,
     );
     for (let i = 0; i < this.length; i++) {
       newArray[i] = callback(this[i]!, i, this);

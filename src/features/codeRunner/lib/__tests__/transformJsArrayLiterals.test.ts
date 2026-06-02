@@ -102,6 +102,23 @@ describe("transformArrayLiteralsInSolution", () => {
     );
   });
 
+  it("names array literals on ??= assignment to an identifier", () => {
+    const code = `return function f() {
+  let bucket;
+  bucket ??= [];
+  return bucket;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    expect(solution).toBeTruthy();
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('bucket ??= __dstructArrayLiteralWithName("bucket"');
+  });
+
   it("does not append displayLabel to ambiguous new Array(number) length form", () => {
     const code = `return function f() {
   const buf = new Array(10);
