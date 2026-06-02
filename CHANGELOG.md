@@ -1,3 +1,10 @@
+## [1.379.1](https://github.com/mkayander/dStruct/compare/v1.379.0...v1.379.1) (2026-06-02)
+
+
+### Performance Improvements
+
+* **landing:** reduce hero preview scroll jank ([#141](https://github.com/mkayander/dStruct/issues/141)) ([bf8de6d](https://github.com/mkayander/dStruct/commit/bf8de6db2ae8d095e7435ceb770bf2e36076e80b))
+
 # [1.379.0](https://github.com/mkayander/dStruct/compare/v1.378.1...v1.379.0) (2026-06-01)
 
 
