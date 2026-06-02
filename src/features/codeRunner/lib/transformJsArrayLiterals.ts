@@ -1,4 +1,5 @@
-import { type NodePath } from "@babel/traverse";
+import traverse, { type NodePath } from "@babel/traverse";
+import type { File } from "@babel/types";
 import * as babelTypes from "@babel/types";
 
 const ARRAY_LITERAL_HELPER = "__dstructArrayLiteral";
@@ -22,6 +23,8 @@ const shouldUseUnnamedArrayLiteralHelper = (
   return babelTypes.isStringLiteral(only);
 };
 
+const ASSIGNMENT_OPERATORS_WITH_BINDING = new Set(["=", "??=", "||=", "&&="]);
+
 const tryInferBindingNameFromRhsPath = (
   path: InferableRhsPath,
 ): string | null => {
@@ -36,7 +39,7 @@ const tryInferBindingNameFromRhsPath = (
   }
   if (
     babelTypes.isAssignmentExpression(parent) &&
-    parent.operator === "=" &&
+    ASSIGNMENT_OPERATORS_WITH_BINDING.has(parent.operator) &&
     babelTypes.isIdentifier(parent.left) &&
     parent.right === node
   ) {
@@ -71,12 +74,10 @@ const isTrackedArrayCallee = (
  * is inferable so dynamic `new Array(1,2,3)` constructions get viewer labels (same as literals).
  * Runs before line probes so locations stay aligned with user source.
  */
-export const transformArrayLiteralsInSolution = (
-  solutionPath: NodePath<
-    babelTypes.FunctionExpression | babelTypes.ArrowFunctionExpression
-  >,
+export const transformArrayLiteralsInFunction = (
+  functionPath: NodePath<babelTypes.Function>,
 ): void => {
-  solutionPath.traverse({
+  functionPath.traverse({
     ArrayExpression(path: NodePath<babelTypes.ArrayExpression>) {
       const { node, parent } = path;
 
@@ -177,6 +178,33 @@ export const transformArrayLiteralsInSolution = (
           displayLabelObject,
         ]),
       );
+    },
+  });
+};
+
+export const transformArrayLiteralsInSolution = (
+  solutionPath: NodePath<
+    babelTypes.FunctionExpression | babelTypes.ArrowFunctionExpression
+  >,
+): void => {
+  transformArrayLiteralsInFunction(
+    solutionPath as NodePath<babelTypes.Function>,
+  );
+};
+
+/** Fallback when the solution template (`return function …`) is missing. */
+export const transformArrayLiteralsInProgram = (file: File): void => {
+  traverse(file, {
+    FunctionDeclaration(path: NodePath<babelTypes.FunctionDeclaration>) {
+      transformArrayLiteralsInFunction(path);
+    },
+    FunctionExpression(path: NodePath<babelTypes.FunctionExpression>) {
+      transformArrayLiteralsInFunction(path);
+    },
+    ArrowFunctionExpression(
+      path: NodePath<babelTypes.ArrowFunctionExpression>,
+    ) {
+      transformArrayLiteralsInFunction(path);
     },
   });
 };
