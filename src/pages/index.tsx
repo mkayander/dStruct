@@ -1,4 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
+import { useState } from "react";
 
 import { HomeLandingFaq } from "#/features/homePage/ui/landing/HomeLandingFaq";
 import { HomeLandingHero } from "#/features/homePage/ui/landing/HomeLandingHero";
@@ -14,14 +15,19 @@ type DashboardProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const DashboardPage: NextPage<DashboardProps> = ({ canonicalUrl }) => {
   const { LL } = useI18nContext();
+  const [pageScrollViewport, setPageScrollViewport] =
+    useState<HTMLDivElement | null>(null);
 
   return (
-    <MainLayout headerPosition="fixed">
+    <MainLayout
+      headerPosition="fixed"
+      pageScrollViewportRef={setPageScrollViewport}
+    >
       <SiteSeoHead
         title="dStruct — visualize LeetCode solutions"
         canonicalUrl={canonicalUrl}
       />
-      <HomeLandingHero LL={LL} />
+      <HomeLandingHero LL={LL} pageScrollViewport={pageScrollViewport} />
 
       <HomeLandingSections LL={LL} />
 

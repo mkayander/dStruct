@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import {
   callstackSlice,
   selectCallstack,
@@ -21,17 +23,17 @@ export const usePlayerControls = () => {
   const store = useAppStore();
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     resetStructuresState(dispatch, false);
-  };
+  }, [dispatch]);
 
-  const handleReplay = () => {
+  const handleReplay = useCallback(() => {
     handleReset();
     dispatch(callstackSlice.actions.setFrameIndex(-1));
     dispatch(callstackSlice.actions.setIsPlaying(true));
-  };
+  }, [dispatch, handleReset]);
 
-  const handleStepBack = () => {
+  const handleStepBack = useCallback(() => {
     const callstack = selectCallstack(store.getState());
     const frameIndex = callstack.frameIndex;
     if (frameIndex === -1) return;
@@ -41,9 +43,9 @@ export const usePlayerControls = () => {
         getPreviousPlaybackFrameIndex(callstack.frames, frameIndex),
       ),
     );
-  };
+  }, [dispatch, store]);
 
-  const handlePlay = () => {
+  const handlePlay = useCallback(() => {
     const callstack = selectCallstack(store.getState());
     const isPlaying = selectCallstackIsPlaying(store.getState());
     const frameIndex = callstack.frameIndex;
@@ -54,9 +56,9 @@ export const usePlayerControls = () => {
     if (frameIndex >= lastRenderableFrameIndex) return;
 
     dispatch(callstackSlice.actions.setIsPlaying(!isPlaying));
-  };
+  }, [dispatch, store]);
 
-  const handleStepForward = () => {
+  const handleStepForward = useCallback(() => {
     const callstack = selectCallstack(store.getState());
     const frameIndex = callstack.frameIndex;
     const nextFrameIndex = getNextPlaybackFrameIndex(
@@ -66,33 +68,44 @@ export const usePlayerControls = () => {
     if (nextFrameIndex === -1) return;
 
     dispatch(callstackSlice.actions.setFrameIndex(nextFrameIndex));
-  };
+  }, [dispatch, store]);
 
-  const handleKeyDown: React.KeyboardEventHandler = (event) => {
-    if (isEditingNodes) {
-      if (event.key === "Escape") {
-        dispatch(editorSlice.actions.setIsEditing(false));
-      }
-      return;
-    }
-
-    if (event.key === "ArrowLeft") {
-      handleStepBack();
-    } else if (event.key === "ArrowRight") {
-      handleStepForward();
-    } else if (event.key === " ") {
-      if (
-        event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLButtonElement
-      )
+  const handleKeyDown: React.KeyboardEventHandler = useCallback(
+    (event) => {
+      if (isEditingNodes) {
+        if (event.key === "Escape") {
+          dispatch(editorSlice.actions.setIsEditing(false));
+        }
         return;
-      handlePlay();
-    } else if (event.key === "r") {
-      handleReplay();
-    } else if (event.key === "Escape") {
-      handleReset();
-    }
-  };
+      }
+
+      if (event.key === "ArrowLeft") {
+        handleStepBack();
+      } else if (event.key === "ArrowRight") {
+        handleStepForward();
+      } else if (event.key === " ") {
+        if (
+          event.target instanceof HTMLInputElement ||
+          event.target instanceof HTMLButtonElement
+        )
+          return;
+        handlePlay();
+      } else if (event.key === "r") {
+        handleReplay();
+      } else if (event.key === "Escape") {
+        handleReset();
+      }
+    },
+    [
+      dispatch,
+      handlePlay,
+      handleReplay,
+      handleReset,
+      handleStepBack,
+      handleStepForward,
+      isEditingNodes,
+    ],
+  );
 
   return {
     handleReset,

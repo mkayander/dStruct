@@ -62,7 +62,7 @@ export const CompactCallstackList: React.FC<CompactCallstackListProps> = ({
 
     container.scrollTo({
       top: nextScrollTop,
-      behavior: "smooth",
+      behavior: "auto",
     });
   }, [activePlaybackStepIndex, playbackStepGroups]);
 

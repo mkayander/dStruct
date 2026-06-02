@@ -34,6 +34,8 @@ const eslintConfig = [
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
       ...reactHooksPlugin.configs.recommended.rules,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/consistent-type-imports": [
         "error",
@@ -71,6 +73,30 @@ const eslintConfig = [
             'MemberExpression[object.name="React"][property.name=/^use([A-Z]|$)/]',
           message:
             'Import hooks from "react" and call them directly (e.g. useEffect), not React.useEffect.',
+        },
+      ],
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "window",
+          property: "setTimeout",
+          message: "Use setTimeout(...) instead of window.setTimeout(...).",
+        },
+        {
+          object: "window",
+          property: "clearTimeout",
+          message: "Use clearTimeout(...) instead of window.clearTimeout(...).",
+        },
+        {
+          object: "window",
+          property: "setInterval",
+          message: "Use setInterval(...) instead of window.setInterval(...).",
+        },
+        {
+          object: "window",
+          property: "clearInterval",
+          message:
+            "Use clearInterval(...) instead of window.clearInterval(...).",
         },
       ],
       "no-restricted-imports": [

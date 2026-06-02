@@ -32,6 +32,8 @@ import {
   selectIsRootFrame,
 } from "#/features/callstack/model/callstackSlice";
 import { CompactCallstackList } from "#/features/callstack/ui/CompactCallstackList";
+import { useLandingHeroPreviewLayoutTransitions } from "#/features/homePage/hooks/useLandingHeroPreviewLayoutTransitions";
+import { useLandingHeroPreviewPlaybackGate } from "#/features/homePage/hooks/useLandingHeroPreviewPlaybackGate";
 import {
   createLandingHeroPreviewStore,
   type LandingHeroPreviewStore,
@@ -47,6 +49,7 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 type HomeLandingHeroPreviewRuntimeProps = {
   LL: TranslationFunctions;
+  pageScrollViewport: HTMLDivElement | null;
 };
 
 const PLAYBACK_INTERVAL_MS = 600;
@@ -72,13 +75,22 @@ const getPreviewRuntimeErrorMessage = (error: unknown): string => {
 
 const HomeLandingHeroPreviewRuntimeInner: React.FC<
   HomeLandingHeroPreviewRuntimeProps
-> = ({ LL }) => {
+> = ({ LL, pageScrollViewport }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const previewRootRef = useRef<HTMLDivElement>(null);
   const hasAutoStartedRef = useRef(false);
   const hasManualOverrideRef = useRef(false);
-  const replayTimeoutRef = useRef<number | null>(null);
-  const replayRestartTimeoutRef = useRef<number | null>(null);
+  const wasPlayingBeforeSuppressRef = useRef(false);
+  const replayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const replayRestartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const { isPlaybackSuppressed } = useLandingHeroPreviewPlaybackGate({
+    previewRootRef,
+    pageScrollViewport,
+  });
+  useLandingHeroPreviewLayoutTransitions();
   const {
     handleReset,
     handlePlay,
@@ -106,11 +118,11 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
 
   const clearReplayTimers = useCallback(() => {
     if (replayTimeoutRef.current !== null) {
-      window.clearTimeout(replayTimeoutRef.current);
+      clearTimeout(replayTimeoutRef.current);
       replayTimeoutRef.current = null;
     }
     if (replayRestartTimeoutRef.current !== null) {
-      window.clearTimeout(replayRestartTimeoutRef.current);
+      clearTimeout(replayRestartTimeoutRef.current);
       replayRestartTimeoutRef.current = null;
     }
   }, []);
@@ -120,7 +132,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   // the post-reset timeout or replay never resumes (playground-style reset sets isPlaying false).
   const clearAutoReplayEndDelayOnly = useCallback(() => {
     if (replayTimeoutRef.current !== null) {
-      window.clearTimeout(replayTimeoutRef.current);
+      clearTimeout(replayTimeoutRef.current);
       replayTimeoutRef.current = null;
     }
   }, []);
@@ -151,36 +163,68 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     handleStepForward();
   };
 
+  // Landing UX: pause autoplay during page scroll or when the preview leaves the viewport so playback
+  // does not compete with scroll compositing; resume only if playback was active before suppression.
+  useEffect(() => {
+    if (!isPlaybackSuppressed) {
+      if (
+        wasPlayingBeforeSuppressRef.current &&
+        !hasManualOverrideRef.current &&
+        isReady &&
+        !isLastFrame
+      ) {
+        dispatch(callstackSlice.actions.setIsPlaying(true));
+      }
+      wasPlayingBeforeSuppressRef.current = false;
+      return;
+    }
+
+    if (isPlaying) {
+      wasPlayingBeforeSuppressRef.current = true;
+      dispatch(callstackSlice.actions.setIsPlaying(false));
+    }
+    clearReplayTimers();
+  }, [
+    clearReplayTimers,
+    dispatch,
+    isLastFrame,
+    isPlaybackSuppressed,
+    isPlaying,
+    isReady,
+  ]);
+
   useEffect(() => {
     if (
       !isReady ||
       callstackLength === 0 ||
       hasAutoStartedRef.current ||
-      hasManualOverrideRef.current
+      hasManualOverrideRef.current ||
+      isPlaybackSuppressed
     ) {
       return;
     }
 
     hasAutoStartedRef.current = true;
     handlePlay();
-  }, [callstackLength, handlePlay, isReady]);
+  }, [callstackLength, handlePlay, isPlaybackSuppressed, isReady]);
 
   useEffect(() => {
     if (
       !isReady ||
       !hasAutoStartedRef.current ||
       hasManualOverrideRef.current ||
+      isPlaybackSuppressed ||
       isPlaying ||
       !isLastFrame
     ) {
       return;
     }
 
-    replayTimeoutRef.current = window.setTimeout(() => {
+    replayTimeoutRef.current = setTimeout(() => {
       replayTimeoutRef.current = null;
       handleReset();
 
-      replayRestartTimeoutRef.current = window.setTimeout(() => {
+      replayRestartTimeoutRef.current = setTimeout(() => {
         replayRestartTimeoutRef.current = null;
         if (!hasManualOverrideRef.current) {
           dispatch(callstackSlice.actions.setIsPlaying(true));
@@ -194,6 +238,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
     dispatch,
     handleReset,
     isLastFrame,
+    isPlaybackSuppressed,
     isPlaying,
     isReady,
   ]);
@@ -206,7 +251,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
   );
 
   return (
-    <Stack spacing={1.5} sx={{ minWidth: 0 }}>
+    <Stack ref={previewRootRef} spacing={1.5} sx={{ minWidth: 0 }}>
       <Stack
         direction="row"
         sx={{
@@ -393,7 +438,7 @@ const HomeLandingHeroPreviewRuntimeInner: React.FC<
 
 export const HomeLandingHeroPreviewRuntime: React.FC<
   HomeLandingHeroPreviewRuntimeProps
-> = ({ LL }) => {
+> = ({ LL, pageScrollViewport }) => {
   const [runtimeState] = useState<LandingHeroPreviewRuntimeState>(() => {
     try {
       return {
@@ -424,7 +469,10 @@ export const HomeLandingHeroPreviewRuntime: React.FC<
 
   return (
     <Provider store={runtimeState.store}>
-      <HomeLandingHeroPreviewRuntimeInner LL={LL} />
+      <HomeLandingHeroPreviewRuntimeInner
+        LL={LL}
+        pageScrollViewport={pageScrollViewport}
+      />
     </Provider>
   );
 };

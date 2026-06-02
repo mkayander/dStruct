@@ -18,6 +18,7 @@ import {
   treeNodeSlice,
 } from "#/entities/dataStructures/node/model/nodeSlice";
 import { selectCallstackIsReady } from "#/features/callstack/model/callstackSlice";
+import { selectDisableLayoutTransitions } from "#/features/treeViewer/model/editorSlice";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
 const nodeSize = "42px";
@@ -90,6 +91,9 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const isCallstackReady = useAppSelector(selectCallstackIsReady);
+  const disableLayoutTransitions = useAppSelector(
+    selectDisableLayoutTransitions,
+  );
 
   const handleBlink = () => {
     dispatch(
@@ -123,7 +127,8 @@ export const NodeBase: React.FC<NodeBaseProps> = ({
         position: "absolute",
         zIndex: 1,
         width: "fit-content",
-        transition: isCallstackReady ? "all .05s" : "none",
+        transition:
+          disableLayoutTransitions || !isCallstackReady ? "none" : "all .05s",
         ".blink": {
           animation: `${blinkKeyframes} 0.24s ease-out`,
         },

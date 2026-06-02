@@ -14,11 +14,14 @@ export type NodeDragState = {
 type EditorState = {
   isEditingNodes: boolean;
   nodeDragState: NodeDragState | null;
+  /** When true, tree nodes skip position/layout CSS transitions (e.g. landing preview). */
+  disableLayoutTransitions: boolean;
 };
 
 const initialState: EditorState = {
   isEditingNodes: false,
   nodeDragState: null,
+  disableLayoutTransitions: false,
 };
 
 export const editorSlice = createSlice({
@@ -34,6 +37,9 @@ export const editorSlice = createSlice({
     },
     setIsEditing: (state, action: PayloadAction<boolean>) => {
       state.isEditingNodes = action.payload;
+    },
+    setDisableLayoutTransitions: (state, action: PayloadAction<boolean>) => {
+      state.disableLayoutTransitions = action.payload;
     },
     reset: () => {
       return initialState;
@@ -54,5 +60,7 @@ export const selectNodeDragState = (state: RootState) =>
   state.editor.nodeDragState;
 export const selectIsEditingNodes = (state: RootState) =>
   state.editor.isEditingNodes;
+export const selectDisableLayoutTransitions = (state: RootState) =>
+  state.editor.disableLayoutTransitions;
 
 export { MIN_ZOOM, MAX_ZOOM, ZOOM_STEP } from "./editorConstants";

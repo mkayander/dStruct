@@ -9,6 +9,7 @@ import type { TranslationFunctions } from "#/i18n/i18n-types";
 
 type HomeLandingHeroPreviewProps = {
   LL: TranslationFunctions;
+  pageScrollViewport: HTMLDivElement | null;
 };
 
 const codeSnippet = `function invertTree(root) {
@@ -26,6 +27,7 @@ const WINDOW_CONTROLS = ["#ff5f57", "#febc2e", "#28c840"] as const;
 
 export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
   LL,
+  pageScrollViewport,
 }) => {
   const theme = useTheme();
 
@@ -172,7 +174,10 @@ export const HomeLandingHeroPreview: React.FC<HomeLandingHeroPreviewProps> = ({
         </Box>
 
         <Box sx={{ p: { xs: 1.5, sm: 2.5 }, minWidth: 0 }}>
-          <HomeLandingHeroPreviewRuntime LL={LL} />
+          <HomeLandingHeroPreviewRuntime
+            LL={LL}
+            pageScrollViewport={pageScrollViewport}
+          />
         </Box>
       </Box>
     </Box>

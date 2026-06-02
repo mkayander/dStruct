@@ -1,7 +1,10 @@
 import { alpha, Box, useTheme } from "@mui/material";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import {
+  OverlayScrollbarsComponent,
+  type OverlayScrollbarsComponentRef,
+} from "overlayscrollbars-react";
 import type { OverlayScrollbarsComponentProps } from "overlayscrollbars-react";
-import React from "react";
+import React, { type Ref } from "react";
 
 import {
   appBarSlice,
@@ -9,12 +12,30 @@ import {
 } from "#/features/appBar/model/appBarSlice";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
+const assignViewportRef = (
+  viewportRef: Ref<HTMLDivElement | null> | undefined,
+  viewport: HTMLDivElement | null,
+) => {
+  if (!viewportRef) {
+    return;
+  }
+
+  if (typeof viewportRef === "function") {
+    viewportRef(viewport);
+    return;
+  }
+
+  viewportRef.current = viewport;
+};
+
 export type PageScrollContainerProps = {
   children: React.ReactNode;
   isPage?: boolean;
   options?: OverlayScrollbarsComponentProps["options"];
   style?: React.CSSProperties;
   onScroll?: (event: Event) => void;
+  /** Receives the OverlayScrollbars viewport element when initialized. */
+  viewportRef?: Ref<HTMLDivElement | null>;
 };
 
 export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
@@ -30,10 +51,21 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
   },
   style,
   onScroll,
+  viewportRef,
 }) => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
+
+  const overlayScrollbarsRef = (
+    instance: OverlayScrollbarsComponentRef<"div"> | null,
+  ) => {
+    const viewport =
+      (instance?.osInstance()?.elements().viewport as
+        | HTMLDivElement
+        | undefined) ?? null;
+    assignViewportRef(viewportRef, viewport);
+  };
 
   return (
     <Box
@@ -52,6 +84,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
       }}
     >
       <OverlayScrollbarsComponent
+        ref={overlayScrollbarsRef}
         defer
         style={style}
         options={options}
