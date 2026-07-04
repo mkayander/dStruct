@@ -11,8 +11,8 @@ class ListData(TypedDict):
     ids: List[str]
     entities: Dict[str, ListItemData]
 
-class ListOptions(TypedDict):
-    name: str
+class ListOptions(TypedDict, total=False):
+    displayLabel: str
 
 def attach_ast_parents(root: ast.AST) -> None:
     """Set ``node.parent`` for every node so transforms can infer binding names."""

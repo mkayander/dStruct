@@ -25,7 +25,7 @@ export type ControlledArrayRuntimeOptions = {
 
 const RUNTIME_DISPLAY_LABEL_KEY = "__dstructRuntimeDisplayLabel";
 
-export const getRuntimeDisplayLabel = (
+const getRuntimeDisplayLabel = (
   array: ArrayBaseType,
 ): string | undefined => {
   const label = Reflect.get(array, RUNTIME_DISPLAY_LABEL_KEY);

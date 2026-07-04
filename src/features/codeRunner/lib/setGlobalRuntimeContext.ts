@@ -61,6 +61,33 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 
   const ObjectProxy = getRuntimeObject(callstack);
 
+  const buildTrackedArrayFromLiteralElements = (
+    elements: unknown[],
+    displayLabel?: string,
+  ) => {
+    if (displayLabel !== undefined) {
+      const values: unknown[] = [];
+      for (let index = 0; index < elements.length; index += 1) {
+        values[index] = elements[index];
+      }
+      const data = generateArrayData(values);
+      return new ControlledArray(
+        values as (string | number)[],
+        generate(),
+        data,
+        callstack,
+        true,
+        { displayLabel },
+      );
+    }
+
+    const out = new ArrayProxy(0) as unknown[];
+    for (let index = 0; index < elements.length; index += 1) {
+      out[index] = elements[index];
+    }
+    return out;
+  };
+
   const context = {
     __dstructSetExecutionSource: (line: number, column?: number) => {
       setExecutionSource(line, column ?? 0);
@@ -70,34 +97,15 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
      * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]` when the binding name
      * is unknown or would be ambiguous (e.g. single string element).
      */
-    __dstructArrayLiteral: (...elements: unknown[]) => {
-      const out = new ArrayProxy(0) as unknown[];
-      for (let i = 0; i < elements.length; i += 1) {
-        out[i] = elements[i];
-      }
-      return out;
-    },
+    __dstructArrayLiteral: (...elements: unknown[]) =>
+      buildTrackedArrayFromLiteralElements(elements),
     /**
      * Same as `__dstructArrayLiteral` but records `displayLabel` for the viewer (inferred variable name).
      */
     __dstructArrayLiteralWithName: (
       displayLabel: string,
       ...elements: unknown[]
-    ) => {
-      const out: unknown[] = [];
-      for (let index = 0; index < elements.length; index += 1) {
-        out[index] = elements[index];
-      }
-      const data = generateArrayData(out);
-      return new ControlledArray(
-        out as (string | number)[],
-        generate(),
-        data,
-        callstack,
-        true,
-        { displayLabel },
-      );
-    },
+    ) => buildTrackedArrayFromLiteralElements(elements, displayLabel),
     ArrayProxy,
     Uint32ArrayProxy,
     Int32ArrayProxy,

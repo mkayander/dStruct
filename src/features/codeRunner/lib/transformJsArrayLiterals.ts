@@ -195,16 +195,10 @@ export const transformArrayLiteralsInSolution = (
 /** Fallback when the solution template (`return function …`) is missing. */
 export const transformArrayLiteralsInProgram = (file: File): void => {
   traverse(file, {
-    FunctionDeclaration(path: NodePath<babelTypes.FunctionDeclaration>) {
-      transformArrayLiteralsInFunction(path);
-    },
-    FunctionExpression(path: NodePath<babelTypes.FunctionExpression>) {
-      transformArrayLiteralsInFunction(path);
-    },
-    ArrowFunctionExpression(
-      path: NodePath<babelTypes.ArrowFunctionExpression>,
-    ) {
-      transformArrayLiteralsInFunction(path);
+    "FunctionDeclaration|FunctionExpression|ArrowFunctionExpression"(path) {
+      transformArrayLiteralsInFunction(
+        path as NodePath<babelTypes.Function>,
+      );
     },
   });
 };
