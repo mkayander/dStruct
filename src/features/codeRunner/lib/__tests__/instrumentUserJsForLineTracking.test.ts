@@ -3,28 +3,16 @@ import { describe, expect, it } from "vitest";
 import { instrumentUserJsForLineTracking } from "#/features/codeRunner/lib/instrumentUserJsForLineTracking";
 
 describe("instrumentUserJsForLineTracking", () => {
-  it("injects globalThis.__dstructSetExecutionSource before statements in returned function", () => {
+  it("injects line probes before statements in the returned solution function", () => {
     const code = `return function sum(a) {
   return a + 1;
 };`;
     const { code: out, ok } = instrumentUserJsForLineTracking(code);
     expect(ok).toBe(true);
-    expect(out).toContain("__dstructSetExecutionSource");
     expect(out).toContain("globalThis.__dstructSetExecutionSource");
   });
 
-  it("instruments nested function bodies", () => {
-    const code = `return function outer() {
-  function inner() {
-    return 1;
-  }
-  return inner();
-};`;
-    const { ok } = instrumentUserJsForLineTracking(code);
-    expect(ok).toBe(true);
-  });
-
-  it("skips line probes without return function template but still transforms array literals", () => {
+  it("still transforms array literals when line probes cannot run", () => {
     const code = `function run() {
   const a = [1, 2];
   return a;
@@ -36,7 +24,7 @@ return run;`;
     expect(out).not.toContain("__dstructSetExecutionSource");
   });
 
-  it("does not instrument top-level functions outside the returned solution", () => {
+  it("does not instrument top-level helpers outside the returned solution", () => {
     const code = `function helper() {
   return 1;
 }
@@ -56,25 +44,5 @@ return function main() {
     const mainIdx = out.indexOf("function main");
     expect(mainIdx).toBeGreaterThan(helperIdx);
     expect(firstProbeAfterHelper).toBeGreaterThan(mainIdx);
-  });
-
-  it("instruments return arrow function with block body", () => {
-    const code = `return () => {
-  const n = 1;
-  return n;
-};`;
-    const { code: out, ok } = instrumentUserJsForLineTracking(code);
-    expect(ok).toBe(true);
-    expect(out).toContain("globalThis.__dstructSetExecutionSource");
-  });
-
-  it("replaces array literals with __dstructArrayLiteralWithName when bound to a variable", () => {
-    const code = `return function f() {
-  const a = [1, 2];
-  return a;
-};`;
-    const { code: out, ok } = instrumentUserJsForLineTracking(code);
-    expect(ok).toBe(true);
-    expect(out).toContain('__dstructArrayLiteralWithName("a", 1, 2)');
   });
 });

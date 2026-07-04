@@ -5,6 +5,7 @@ import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   caseSlice,
   selectCaseArguments,
+  selectCaseIsEdited,
 } from "#/entities/argument/model/caseSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { rootReducer } from "#/store/rootReducer";
@@ -75,5 +76,41 @@ describe("caseSlice selectors", () => {
 
     expect(secondArgs).not.toBe(firstArgs);
     expect(secondArgs).toEqual(firstArgs);
+  });
+
+  it("updateArgumentLabel trims and clears blank labels", () => {
+    const store = configureStore({ reducer: rootReducer });
+
+    store.dispatch(
+      caseSlice.actions.setArguments({
+        projectId: "project-1",
+        caseId: "case-1",
+        data: [
+          {
+            name: "arg-id",
+            order: 0,
+            type: ArgumentType.ARRAY,
+            input: "[1]",
+          },
+        ],
+      }),
+    );
+
+    store.dispatch(
+      caseSlice.actions.updateArgumentLabel({
+        name: "arg-id",
+        label: "  nums  ",
+      }),
+    );
+    expect(selectCaseArguments(store.getState())[0]?.label).toBe("nums");
+
+    store.dispatch(
+      caseSlice.actions.updateArgumentLabel({
+        name: "arg-id",
+        label: "   ",
+      }),
+    );
+    expect(selectCaseArguments(store.getState())[0]?.label).toBeUndefined();
+    expect(selectCaseIsEdited(store.getState())).toBe(true);
   });
 });

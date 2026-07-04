@@ -80,6 +80,23 @@ def run():
         ]
         self.assertGreaterEqual(len(read_frames), 3)
 
+    def test_inline_list_literal_infers_display_label(self) -> None:
+        code = """
+def solve():
+    values = [1, 2]
+    return len(values)
+"""
+        result = safe_exec(code, None)
+        self.assertIsNone(result["error"])
+        labeled = [
+            frame
+            for frame in result["callstack"]
+            if frame.get("name") == "addArray"
+            and frame.get("args", {}).get("options", {}).get("displayLabel")
+            == "values"
+        ]
+        self.assertEqual(len(labeled), 1)
+
     def test_inline_dict_literal_emits_map_frames(self) -> None:
         code = """
 def solve():

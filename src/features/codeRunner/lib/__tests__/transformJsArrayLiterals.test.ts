@@ -9,7 +9,10 @@ import type {
 } from "@babel/types";
 import { describe, expect, it } from "vitest";
 
-import { transformArrayLiteralsInSolution } from "#/features/codeRunner/lib/transformJsArrayLiterals";
+import {
+  transformArrayLiteralsInProgram,
+  transformArrayLiteralsInSolution,
+} from "#/features/codeRunner/lib/transformJsArrayLiterals";
 
 const findSolution = (
   ast: File,
@@ -149,5 +152,21 @@ describe("transformArrayLiteralsInSolution", () => {
     const out = generate(ast).code;
     expect(out).toContain("[[1, 2]]");
     expect(out).not.toContain("__dstructArrayLiteral(1, 2)");
+  });
+});
+
+describe("transformArrayLiteralsInProgram", () => {
+  it("rewrites literals in any function when solution template is absent", () => {
+    const code = `function run() {
+  const rows = [1, 2];
+  return rows;
+}`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    transformArrayLiteralsInProgram(ast);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteralWithName("rows", 1, 2)');
   });
 });
