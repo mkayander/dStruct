@@ -25,7 +25,7 @@ export const captureElementToCanvas = async (
   clone.style.position = "relative";
   clone.style.transform = "none";
   clone.style.backdropFilter = "none";
-  clone.style.webkitBackdropFilter = "none";
+  clone.style.setProperty("-webkit-backdrop-filter", "none");
   clone.style.backgroundColor = computed.backgroundColor;
   clone.style.color = computed.color;
   clone.style.border = computed.border;
