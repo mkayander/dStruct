@@ -20,6 +20,8 @@ const en: BaseTranslation = {
   COOKIE_CONSENT_TITLE: "Cookie preferences",
   COOKIE_CONSENT_STORE_FAILED:
     "Could not save your cookie preferences. Check your browser storage settings and try again.",
+  COOKIE_DISMISS_ANIMATION_FAILED:
+    "We saved your choice, but the dismiss animation could not play.",
   COOKIE_REJECT_NON_ESSENTIAL: "Reject non-essential",
   COOKIE_SETTINGS_LINK: "Cookie settings",
   COOKIE_SETTINGS_CLOSE: "Close cookie settings",

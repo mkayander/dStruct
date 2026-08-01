@@ -101,6 +101,10 @@ type RootTranslation = {
 	 */
 	COOKIE_CONSENT_STORE_FAILED: string
 	/**
+	 * W​e​ ​s​a​v​e​d​ ​y​o​u​r​ ​c​h​o​i​c​e​,​ ​b​u​t​ ​t​h​e​ ​d​i​s​m​i​s​s​ ​a​n​i​m​a​t​i​o​n​ ​c​o​u​l​d​ ​n​o​t​ ​p​l​a​y​.
+	 */
+	COOKIE_DISMISS_ANIMATION_FAILED: string
+	/**
 	 * R​e​j​e​c​t​ ​n​o​n​-​e​s​s​e​n​t​i​a​l
 	 */
 	COOKIE_REJECT_NON_ESSENTIAL: string
@@ -1302,6 +1306,10 @@ export type TranslationFunctions = {
 	 * Could not save your cookie preferences. Check your browser storage settings and try again.
 	 */
 	COOKIE_CONSENT_STORE_FAILED: () => LocalizedString
+	/**
+	 * We saved your choice, but the dismiss animation could not play.
+	 */
+	COOKIE_DISMISS_ANIMATION_FAILED: () => LocalizedString
 	/**
 	 * Reject non-essential
 	 */

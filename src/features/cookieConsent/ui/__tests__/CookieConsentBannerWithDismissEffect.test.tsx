@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { SnackbarProvider } from "notistack";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
@@ -38,26 +39,49 @@ vi.mock("#/shared/ui/effects/thanosDisintegrate", () => ({
   }),
 }));
 
+const enqueueSnackbarMock = vi.fn();
+
+vi.mock("notistack", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("notistack")>();
+  return {
+    ...actual,
+    useSnackbar: () => ({
+      enqueueSnackbar: enqueueSnackbarMock,
+      closeSnackbar: vi.fn(),
+    }),
+  };
+});
+
 describe("CookieConsentBannerWithDismissEffect", () => {
+  const renderBanner = (props: {
+    onAcceptAll?: () => boolean;
+    onBeginDismiss?: () => void;
+    onCompleteDismiss?: () => void;
+  }) =>
+    render(
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider>
+          <CookieConsentBannerWithDismissEffect
+            isSettingsView={false}
+            onAcceptAll={props.onAcceptAll ?? vi.fn(() => true)}
+            onRejectNonEssential={vi.fn()}
+            onClose={vi.fn()}
+            onBeginDismiss={props.onBeginDismiss ?? vi.fn()}
+            onCompleteDismiss={props.onCompleteDismiss ?? vi.fn()}
+          />
+        </SnackbarProvider>
+      </ThemeProvider>,
+    );
+
   it("persists consent before the disintegrate animation finishes", async () => {
     disintegrateMock.mockClear();
+    enqueueSnackbarMock.mockClear();
     const user = userEvent.setup();
     const onAcceptAll = vi.fn(() => true);
     const onBeginDismiss = vi.fn();
     const onCompleteDismiss = vi.fn();
 
-    render(
-      <ThemeProvider theme={theme}>
-        <CookieConsentBannerWithDismissEffect
-          isSettingsView={false}
-          onAcceptAll={onAcceptAll}
-          onRejectNonEssential={vi.fn()}
-          onClose={vi.fn()}
-          onBeginDismiss={onBeginDismiss}
-          onCompleteDismiss={onCompleteDismiss}
-        />
-      </ThemeProvider>,
-    );
+    renderBanner({ onAcceptAll, onBeginDismiss, onCompleteDismiss });
 
     await user.click(screen.getByRole("button", { name: "COOKIE_ACCEPT_ALL" }));
 
@@ -85,23 +109,13 @@ describe("CookieConsentBannerWithDismissEffect", () => {
 
   it("skips the disintegrate animation when consent persistence fails", async () => {
     disintegrateMock.mockClear();
+    enqueueSnackbarMock.mockClear();
     const user = userEvent.setup();
     const onAcceptAll = vi.fn(() => false);
     const onBeginDismiss = vi.fn();
     const onCompleteDismiss = vi.fn();
 
-    render(
-      <ThemeProvider theme={theme}>
-        <CookieConsentBannerWithDismissEffect
-          isSettingsView={false}
-          onAcceptAll={onAcceptAll}
-          onRejectNonEssential={vi.fn()}
-          onClose={vi.fn()}
-          onBeginDismiss={onBeginDismiss}
-          onCompleteDismiss={onCompleteDismiss}
-        />
-      </ThemeProvider>,
-    );
+    renderBanner({ onAcceptAll, onBeginDismiss, onCompleteDismiss });
 
     await user.click(screen.getByRole("button", { name: "COOKIE_ACCEPT_ALL" }));
 
@@ -109,5 +123,27 @@ describe("CookieConsentBannerWithDismissEffect", () => {
     expect(onBeginDismiss).not.toHaveBeenCalled();
     expect(disintegrateMock).not.toHaveBeenCalled();
     expect(onCompleteDismiss).not.toHaveBeenCalled();
+  });
+
+  it("still completes dismiss and shows a warning when the animation fails", async () => {
+    disintegrateMock.mockClear();
+    enqueueSnackbarMock.mockClear();
+    disintegrateMock.mockRejectedValueOnce(new Error("animation failed"));
+
+    const user = userEvent.setup();
+    const onBeginDismiss = vi.fn();
+    const onCompleteDismiss = vi.fn();
+
+    renderBanner({ onBeginDismiss, onCompleteDismiss });
+
+    await user.click(screen.getByRole("button", { name: "COOKIE_ACCEPT_ALL" }));
+
+    await waitFor(() => {
+      expect(onCompleteDismiss).toHaveBeenCalledTimes(1);
+    });
+    expect(enqueueSnackbarMock).toHaveBeenCalledWith(
+      "COOKIE_DISMISS_ANIMATION_FAILED",
+      { variant: "warning" },
+    );
   });
 });

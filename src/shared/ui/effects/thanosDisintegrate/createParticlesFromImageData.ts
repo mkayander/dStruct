@@ -1,23 +1,15 @@
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/createThanosParticle";
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 import type {
-  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
 
 export const createParticlesFromImageData = (
   imageData: ImageData,
   options?: ThanosDisintegrateOptions,
 ): ThanosParticle[] => {
-  const resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveThanosDisintegrateOptions(options);
   const particles: ThanosParticle[] = [];
   const { data, width, height } = imageData;
   const { particleStep } = resolvedOptions;

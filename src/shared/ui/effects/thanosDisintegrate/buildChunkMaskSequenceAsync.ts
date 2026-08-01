@@ -31,47 +31,71 @@ export const terminateChunkMaskWorker = (): void => {
   workerInstance = null;
 };
 
+const createRevocableSequence = (
+  sequence: Omit<ChunkMaskSequence, "revoke">,
+): ChunkMaskSequence => {
+  const modalMaskUrls = [...sequence.modalMaskUrls];
+  const particleMaskUrls = [...sequence.particleMaskUrls];
+
+  return {
+    ...sequence,
+    modalMaskUrls,
+    particleMaskUrls,
+    revoke: () => {
+      modalMaskUrls.length = 0;
+      particleMaskUrls.length = 0;
+    },
+  };
+};
+
+const buildChunkMaskSequenceOnMainThread = (
+  input: ChunkMaskSequenceInput,
+): ChunkMaskSequence => createRevocableSequence(createChunkMaskSequence(input));
+
 /** Builds chunk masks off-thread when workers are available. */
 export const buildChunkMaskSequenceAsync = (
   input: ChunkMaskSequenceInput,
   useWorker = true,
 ): Promise<ChunkMaskSequence> => {
   if (!useWorker) {
-    return Promise.resolve(createChunkMaskSequence(input));
+    return Promise.resolve(buildChunkMaskSequenceOnMainThread(input));
   }
 
   const worker = getChunkMaskWorker();
   if (!worker) {
-    return Promise.resolve(createChunkMaskSequence(input));
+    return Promise.resolve(buildChunkMaskSequenceOnMainThread(input));
   }
 
   const requestId = requestCounter + 1;
   requestCounter = requestId;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    const cleanup = () => {
+      worker.removeEventListener("message", handleMessage);
+      worker.removeEventListener("error", handleError);
+    };
+
+    const fallbackToMainThread = () => {
+      cleanup();
+      resolve(buildChunkMaskSequenceOnMainThread(input));
+    };
+
     const handleMessage = (event: MessageEvent<ChunkMaskWorkerResponse>) => {
       if (event.data.requestId !== requestId) {
         return;
       }
 
-      worker.removeEventListener("message", handleMessage);
-      worker.removeEventListener("error", handleError);
-
       if (event.data.type === "SUCCESS") {
-        resolve({
-          ...event.data.sequence,
-          revoke: () => {},
-        });
+        cleanup();
+        resolve(createRevocableSequence(event.data.sequence));
         return;
       }
 
-      reject(new Error(event.data.message));
+      fallbackToMainThread();
     };
 
     const handleError = () => {
-      worker.removeEventListener("message", handleMessage);
-      worker.removeEventListener("error", handleError);
-      reject(new Error("Chunk mask worker failed"));
+      fallbackToMainThread();
     };
 
     worker.addEventListener("message", handleMessage);

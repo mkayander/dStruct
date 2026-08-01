@@ -1,16 +1,8 @@
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 import type {
-  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
 
 type CreateParticleInput = {
   x: number;
@@ -32,7 +24,7 @@ export const createThanosParticle = ({
   surfaceHeight,
   options,
 }: CreateParticleInput): ThanosParticle => {
-  const resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveThanosDisintegrateOptions(options);
   const centerX = surfaceWidth / 2;
   const centerY = surfaceHeight / 2;
   const deltaX = x - centerX;

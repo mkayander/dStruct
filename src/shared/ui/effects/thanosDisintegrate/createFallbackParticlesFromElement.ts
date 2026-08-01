@@ -1,29 +1,21 @@
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/createThanosParticle";
 import {
   parseCssColor,
   type RgbaColor,
 } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 import { sampleColorAtLocalPoint } from "#/shared/ui/effects/thanosDisintegrate/sampleColorAtLocalPoint";
 import type {
-  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
 
 /** Builds particles from live DOM colors when raster capture is empty (e.g. glass blur). */
 export const createFallbackParticlesFromElement = (
   element: HTMLElement,
   options?: ThanosDisintegrateOptions,
 ): ThanosParticle[] => {
-  const resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveThanosDisintegrateOptions(options);
   const rootRect = element.getBoundingClientRect();
   const width = Math.round(rootRect.width);
   const height = Math.round(rootRect.height);

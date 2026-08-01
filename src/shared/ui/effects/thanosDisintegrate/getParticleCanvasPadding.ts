@@ -1,21 +1,11 @@
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
-import type {
-  ResolvedThanosDisintegrateOptions,
-  ThanosDisintegrateOptions,
-} from "#/shared/ui/effects/thanosDisintegrate/types";
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
+import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 /** Extra canvas margin so flying particles are not clipped by the surface bounds. */
 export const getParticleCanvasPadding = (
   options?: ThanosDisintegrateOptions,
 ): number => {
-  const resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveThanosDisintegrateOptions(options);
   const duration = resolvedOptions.maxDuration;
   const maxTravel =
     resolvedOptions.maxVelocity * duration +

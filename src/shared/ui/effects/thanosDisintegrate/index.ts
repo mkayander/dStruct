@@ -9,6 +9,7 @@ export { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDi
 export { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
 export { MASK_STRATEGY_GENERATORS } from "#/shared/ui/effects/thanosDisintegrate/maskStrategies";
 export { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
+export { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 export { runThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
 export { scaleParticleCoordinates } from "#/shared/ui/effects/thanosDisintegrate/scaleParticleCoordinates";
 export { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/useThanosDisintegrate";

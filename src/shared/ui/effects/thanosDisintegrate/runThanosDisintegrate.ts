@@ -5,7 +5,6 @@ import {
 } from "#/shared/ui/effects/thanosDisintegrate/assignParticleReleaseTimes";
 import { buildChunkMaskSequenceAsync } from "#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync";
 import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/buildThanosCapture";
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import type { ChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
@@ -16,6 +15,7 @@ import {
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
 import {
   applyChunkMaskFrame,
@@ -40,13 +40,6 @@ import type {
 } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 const MAX_DELTA_SECONDS = 0.05;
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
 
 export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
   /** Pre-built capture from idle warm-up; avoids blocking SnapDOM on dismiss. */
@@ -120,7 +113,7 @@ export const runThanosDisintegrate = async (
   }
 
   const { captureSnapshot, ...disintegrateOptions } = options ?? {};
-  const resolvedOptions = resolveOptions(disintegrateOptions);
+  const resolvedOptions = resolveThanosDisintegrateOptions(disintegrateOptions);
   const initialRect = element.getBoundingClientRect();
   if (initialRect.width <= 0 || initialRect.height <= 0) {
     return;

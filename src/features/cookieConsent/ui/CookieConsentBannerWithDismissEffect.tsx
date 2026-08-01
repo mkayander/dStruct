@@ -1,8 +1,10 @@
 "use client";
 
+import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
+import { useI18nContext } from "#/shared/hooks";
 import { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate";
 
 type CookieConsentBannerWithDismissEffectProps = {
@@ -28,7 +30,10 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
   onBeginDismiss,
   onCompleteDismiss,
 }) => {
-  const { targetRef, disintegrate, invalidateCapture } = useThanosDisintegrate();
+  const { LL } = useI18nContext();
+  const { enqueueSnackbar } = useSnackbar();
+  const { targetRef, disintegrate, invalidateCapture } =
+    useThanosDisintegrate();
   const isDismissingRef = useRef(false);
   const [frozenSettingsView, setFrozenSettingsView] = useState<boolean | null>(
     null,
@@ -65,6 +70,11 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
               },
               zIndex: 1200,
             });
+          } catch (error) {
+            console.error("Cookie consent dismiss animation failed", error);
+            enqueueSnackbar(LL.COOKIE_DISMISS_ANIMATION_FAILED(), {
+              variant: "warning",
+            });
           } finally {
             setFrozenSettingsView(null);
             onCompleteDismiss();
@@ -72,7 +82,14 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
           }
         })();
       },
-    [disintegrate, isSettingsView, onBeginDismiss, onCompleteDismiss],
+    [
+      disintegrate,
+      enqueueSnackbar,
+      isSettingsView,
+      LL,
+      onBeginDismiss,
+      onCompleteDismiss,
+    ],
   );
 
   return (

@@ -1,16 +1,8 @@
-import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
+import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
 import type {
-  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-const resolveOptions = (
-  options?: ThanosDisintegrateOptions,
-): ResolvedThanosDisintegrateOptions => ({
-  ...THANOS_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
 
 const applyDrag = (velocity: number, drag: number, deltaSeconds: number) =>
   velocity * Math.pow(drag, deltaSeconds * 60);
@@ -37,7 +29,7 @@ export const stepParticles = (
   elapsedSeconds: number,
   options?: ThanosDisintegrateOptions,
 ): number => {
-  const resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveThanosDisintegrateOptions(options);
   let visibleCount = 0;
 
   for (const particle of particles) {
