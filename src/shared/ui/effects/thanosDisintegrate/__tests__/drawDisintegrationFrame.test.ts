@@ -26,7 +26,7 @@ const createParticle = (
 });
 
 describe("drawDisintegrationFrame", () => {
-  it("keeps unreleased fallback pixels visible until the wave reaches them", () => {
+  it("draws only released flying particles beneath the live surface", () => {
     const fillRect = vi.fn();
     const context = {
       clearRect: vi.fn(),
@@ -36,52 +36,34 @@ describe("drawDisintegrationFrame", () => {
       translate: vi.fn(),
       rotate: vi.fn(),
       globalAlpha: 1,
-      filter: "none",
     } as unknown as CanvasRenderingContext2D;
 
     const particles = [
-      createParticle({ originX: 0, originY: 0, releaseTime: 0.5 }),
-      createParticle({ originX: 3, originY: 0, releaseTime: 0, x: 1, y: 1 }),
+      createParticle({ releaseTime: 0.5 }),
+      createParticle({ releaseTime: 0.2, x: 1, y: 1 }),
     ];
 
-    drawDisintegrationFrame(context, particles, 0, null, 6, 6, {
-      particleStep: 3,
-      snapshotBlur: 0,
-    });
+    drawDisintegrationFrame(context, particles, 0, 6, 6);
 
-    expect(fillRect).toHaveBeenCalledWith(0, 0, 3, 3);
-    expect(fillRect).not.toHaveBeenCalledWith(3, 0, 3, 3);
+    expect(fillRect).not.toHaveBeenCalled();
   });
 
-  it("punches holes in a captured snapshot as particles release", () => {
-    const sourceCanvas = document.createElement("canvas");
-    const clearRect = vi.fn();
-    const drawImage = vi.fn();
+  it("draws released particles after the wave reaches them", () => {
+    const fillRect = vi.fn();
     const context = {
-      clearRect,
-      drawImage,
-      fillRect: vi.fn(),
+      clearRect: vi.fn(),
+      fillRect,
       save: vi.fn(),
       restore: vi.fn(),
       translate: vi.fn(),
       rotate: vi.fn(),
       globalAlpha: 1,
-      filter: "none",
     } as unknown as CanvasRenderingContext2D;
 
-    const particles = [
-      createParticle({ originX: 0, originY: 0, releaseTime: 0, x: 1, y: 1 }),
-      createParticle({ originX: 3, originY: 0, releaseTime: 0.5 }),
-    ];
+    const particles = [createParticle({ releaseTime: 0, x: 1, y: 1 })];
 
-    drawDisintegrationFrame(context, particles, 0.1, sourceCanvas, 6, 6, {
-      particleStep: 3,
-      snapshotBlur: 0.6,
-    });
+    drawDisintegrationFrame(context, particles, 0.1, 6, 6);
 
-    expect(drawImage).toHaveBeenCalledWith(sourceCanvas, 0, 0, 6, 6);
-    expect(context.filter).toBe("none");
-    expect(clearRect).toHaveBeenCalledWith(0, 0, 3, 3);
-    expect(clearRect).not.toHaveBeenCalledWith(3, 0, 3, 3);
+    expect(fillRect).toHaveBeenCalled();
   });
 });

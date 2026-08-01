@@ -3,6 +3,7 @@ import { applyWaveOrigin } from "#/shared/ui/effects/thanosDisintegrate/applyWav
 import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/buildThanosCapture";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
+import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
 import {
   prepareElementForDisintegrate,
   subscribeToViewportChanges,
@@ -10,6 +11,10 @@ import {
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
 import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
+import {
+  applyWaveMaskToElement,
+  clearWaveMaskFromElement,
+} from "#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask";
 import {
   cloneThanosParticles,
   isThanosCaptureSnapshotValid,
@@ -35,9 +40,37 @@ export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
   captureSnapshot?: ThanosCaptureSnapshot | null;
 };
 
+const syncLiveSurfaceWithWave = (
+  element: HTMLElement,
+  particles: ReturnType<typeof cloneThanosParticles>,
+  elapsedSeconds: number,
+  relativeOrigin: { x: number; y: number } | null,
+  displayWidth: number,
+  displayHeight: number,
+  resolvedOptions: ResolvedThanosOptions,
+): void => {
+  if (relativeOrigin) {
+    applyWaveMaskToElement(
+      element,
+      relativeOrigin,
+      elapsedSeconds,
+      resolvedOptions.waveSpeed,
+      displayWidth,
+      displayHeight,
+    );
+    return;
+  }
+
+  const disintegrationProgress = getWaveDisintegrationProgress(
+    particles,
+    elapsedSeconds,
+  );
+  element.style.opacity = String(Math.max(0, 1 - disintegrationProgress));
+};
+
 /**
  * Plays a Thanos-style particle disintegration on a DOM surface, then resolves.
- * No-ops when reduced motion is preferred or capture fails.
+ * The live element stays visible with a synced radial mask; particles fly underneath.
  */
 export const runThanosDisintegrate = async (
   element: HTMLElement,
@@ -67,20 +100,21 @@ export const runThanosDisintegrate = async (
     return;
   }
 
-  const { displayWidth, displayHeight, sourceCanvas } = snapshot;
+  const { displayWidth, displayHeight } = snapshot;
 
   const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
   const maxReleaseTime = relativeOrigin
     ? applyWaveOrigin(particles, relativeOrigin, resolvedOptions.waveSpeed)
     : 0;
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
+  const particleZIndex = Math.max(1, resolvedOptions.zIndex - 5);
 
   const overlayCanvas = document.createElement("canvas");
   overlayCanvas.width = displayWidth;
   overlayCanvas.height = displayHeight;
   overlayCanvas.style.position = "fixed";
   overlayCanvas.style.pointerEvents = "none";
-  overlayCanvas.style.zIndex = String(Math.max(resolvedOptions.zIndex, 12_000));
+  overlayCanvas.style.zIndex = String(particleZIndex);
 
   const overlayContext = overlayCanvas.getContext("2d");
   if (!overlayContext) {
@@ -120,17 +154,21 @@ export const runThanosDisintegrate = async (
         lastTime = timestamp;
 
         syncOverlayPosition();
+        syncLiveSurfaceWithWave(
+          element,
+          particles,
+          elapsedSeconds,
+          relativeOrigin,
+          displayWidth,
+          displayHeight,
+          resolvedOptions,
+        );
         drawDisintegrationFrame(
           overlayContext,
           particles,
           elapsedSeconds,
-          sourceCanvas,
           displayWidth,
           displayHeight,
-          {
-            particleStep: resolvedOptions.particleStep,
-            snapshotBlur: resolvedOptions.snapshotBlur,
-          },
         );
         const visibleCount = stepParticles(
           particles,
@@ -141,6 +179,7 @@ export const runThanosDisintegrate = async (
 
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           element.style.opacity = "0";
+          clearWaveMaskFromElement(element);
           resolve();
           return;
         }

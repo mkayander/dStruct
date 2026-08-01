@@ -31,11 +31,12 @@ export const collectDocumentFontFaceCss = (): string => {
   for (const sheet of Array.from(document.styleSheets)) {
     try {
       const cssRules = sheet.cssRules;
-      for (let index = 0; index < cssRules.length; index += 1) {
-        const rule = cssRules[index];
-        if (rule.type === CSSRule.FONT_FACE_RULE) {
-          rules.push(rule.cssText);
+      for (const rule of Array.from(cssRules)) {
+        if (rule.type !== CSSRule.FONT_FACE_RULE) {
+          continue;
         }
+
+        rules.push(rule.cssText);
       }
     } catch {
       // Cross-origin stylesheets are not readable.

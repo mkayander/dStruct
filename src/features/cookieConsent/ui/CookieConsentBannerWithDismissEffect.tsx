@@ -53,6 +53,7 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
               clientX: event.clientX,
               clientY: event.clientY,
             },
+            zIndex: 1200,
           });
         } finally {
           setFrozenSettingsView(null);

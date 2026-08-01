@@ -1,33 +1,20 @@
-/** Hides the source once the overlay snapshot takes over rendering. */
+import { clearWaveMaskFromElement } from "#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask";
+
+/** Keeps the live surface visible; particles render on a canvas beneath it. */
 export const prepareElementForDisintegrate = (
   element: HTMLElement,
 ): (() => void) => {
   const snapshot = {
-    opacity: element.style.opacity,
     pointerEvents: element.style.pointerEvents,
-    visibility: element.style.visibility,
   };
 
   element.style.pointerEvents = "none";
-  element.style.opacity = "0";
 
   return () => {
-    element.style.opacity = snapshot.opacity;
     element.style.pointerEvents = snapshot.pointerEvents;
-    element.style.visibility = snapshot.visibility;
+    clearWaveMaskFromElement(element);
   };
 };
-
-/** @deprecated Snapshot overlay replaces the live element; kept for callers/tests. */
-export const syncElementOpacityWithWave = (
-  element: HTMLElement,
-  disintegrationProgress: number,
-): void => {
-  element.style.opacity = String(Math.max(0, 1 - disintegrationProgress));
-};
-
-/** @deprecated Use prepareElementForDisintegrate for wave-synced fades. */
-export const hideElementPreservingLayout = prepareElementForDisintegrate;
 
 export const syncFixedOverlayToElement = (
   overlay: HTMLElement,
