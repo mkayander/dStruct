@@ -4,7 +4,10 @@ import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObject } from "#/entities/argument/model/types";
 import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
 import type { TreeData } from "#/entities/dataStructures/node/model/nodeSlice";
-import { CallstackHelper } from "#/features/callstack/model/callstackSlice";
+import {
+  CallstackHelper,
+  type CallFrame,
+} from "#/features/callstack/model/callstackSlice";
 import { createCaseRuntimeArgs } from "#/features/codeRunner/lib/createCaseRuntimeArgs";
 import { instrumentUserJsForLineTracking } from "#/features/codeRunner/lib/instrumentUserJsForLineTracking";
 import {
@@ -12,14 +15,18 @@ import {
   setGlobalRuntimeContext,
 } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
 
-type AddArrayFrame = {
-  name: "addArray";
-  args: { options?: { displayLabel?: string } };
+const getDisplayLabelFromFrame = (frame: CallFrame): string | undefined => {
+  if (frame.name !== "addArray" || !("args" in frame)) return undefined;
+  return frame.args.options?.displayLabel;
 };
 
-const isAddArrayFrame = (
-  frame: { name: string },
-): frame is AddArrayFrame => frame.name === "addArray";
+const addArrayFramesWithLabel = (
+  callstack: CallstackHelper,
+  displayLabel: string,
+) =>
+  callstack.frames.filter(
+    (frame) => getDisplayLabelFromFrame(frame) === displayLabel,
+  );
 
 const runInstrumentedSolution = (
   solutionBody: string,
@@ -39,16 +46,6 @@ const runInstrumentedSolution = (
   const result = run()(...invokeArgs);
   return { callstack, result };
 };
-
-const addArrayFramesWithLabel = (
-  callstack: CallstackHelper,
-  displayLabel: string,
-) =>
-  callstack.frames.filter(
-    (frame): frame is AddArrayFrame =>
-      isAddArrayFrame(frame) &&
-      frame.args.options?.displayLabel === displayLabel,
-  );
 
 describe("array displayLabel runtime", () => {
   it("records displayLabel when __dstructArrayLiteralWithName runs", () => {
@@ -87,7 +84,9 @@ return function solve() {
     callstack.clear();
     run()();
 
-    expect(callstack.frames.some(isAddArrayFrame)).toBe(false);
+    expect(callstack.frames.some((frame) => frame.name === "addArray")).toBe(
+      false,
+    );
   });
 
   it("tracks getLevels-style nested arrays when instrumented", () => {
