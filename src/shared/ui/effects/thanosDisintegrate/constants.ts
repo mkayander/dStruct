@@ -13,4 +13,9 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   snapshotBlur: 0,
   maskMode: "chunks",
   maxChunkMaskSteps: 96,
-} as const satisfies Required<Omit<ThanosDisintegrateOptions, "origin">>;
+  maskSpreadDuration: 0.6,
+  particleRenderMode: "color",
+  useChunkMaskWorker: true,
+} as const satisfies Required<
+  Omit<ThanosDisintegrateOptions, "origin" | "maskStrategy">
+>;

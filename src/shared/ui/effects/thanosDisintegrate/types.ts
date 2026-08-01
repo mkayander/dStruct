@@ -1,5 +1,25 @@
 export type ThanosDisintegrateMaskMode = "radial" | "chunks";
 
+/** Click-origin radial wave or a morpheus-style grid dissolve pattern. */
+export type ThanosMaskStrategy =
+  | "wave"
+  | "centerOut"
+  | "sand"
+  | "random"
+  | "leftToRight"
+  | "rightToLeft"
+  | "topToBottom"
+  | "bottomToTop"
+  | "topLeftDiagonal"
+  | "topRightDiagonal"
+  | "bottomLeftDiagonal"
+  | "bottomRightDiagonal"
+  | "edgesIn"
+  | "splitHorizontal"
+  | "splitVertical";
+
+export type ThanosParticleRenderMode = "color" | "sprite";
+
 export type ThanosParticle = {
   x: number;
   y: number;
@@ -53,6 +73,14 @@ export type ThanosDisintegrateOptions = {
   maskMode?: ThanosDisintegrateMaskMode;
   /** Max precomputed chunk mask steps (bounds memory for large surfaces). */
   maxChunkMaskSteps?: number;
+  /** Dissolve pattern for particle release times (defaults to wave when origin is set). */
+  maskStrategy?: ThanosMaskStrategy;
+  /** Seconds for grid strategies to spread from first to last cell. */
+  maskSpreadDuration?: number;
+  /** Solid-color squares or snapshot sprites via drawImage. */
+  particleRenderMode?: ThanosParticleRenderMode;
+  /** Build chunk masks in a Web Worker when available. */
+  useChunkMaskWorker?: boolean;
   /** Optional blur on the snapshot layer before punch-out (px). */
   snapshotBlur?: number;
 };

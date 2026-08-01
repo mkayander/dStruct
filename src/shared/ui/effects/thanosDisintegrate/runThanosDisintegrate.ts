@@ -1,12 +1,15 @@
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
-import { applyWaveOrigin } from "#/shared/ui/effects/thanosDisintegrate/applyWaveOrigin";
+import {
+  assignParticleReleaseTimes,
+  resolveEffectiveMaskStrategy,
+} from "#/shared/ui/effects/thanosDisintegrate/assignParticleReleaseTimes";
+import { buildChunkMaskSequenceAsync } from "#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync";
 import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/buildThanosCapture";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
-import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
-import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
-import { createChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import type { ChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
+import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
+import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
 import {
   prepareElementForDisintegrate,
   subscribeToViewportChanges,
@@ -30,10 +33,13 @@ import {
   isThanosCaptureSnapshotValid,
   type ThanosCaptureSnapshot,
 } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
-import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
+import type {
+  ThanosDisintegrateOptions,
+  ThanosParticle,
+} from "#/shared/ui/effects/thanosDisintegrate/types";
 
 type ResolvedThanosOptions = Required<
-  Omit<ThanosDisintegrateOptions, "origin">
+  Omit<ThanosDisintegrateOptions, "origin" | "maskStrategy">
 >;
 
 const MAX_DELTA_SECONDS = 0.05;
@@ -53,7 +59,7 @@ export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
 const syncDualLayerWave = (
   element: HTMLElement,
   particleCanvas: HTMLCanvasElement,
-  particles: ReturnType<typeof cloneThanosParticles>,
+  particles: ThanosParticle[],
   elapsedSeconds: number,
   relativeOrigin: { x: number; y: number } | null,
   displayWidth: number,
@@ -136,28 +142,42 @@ export const runThanosDisintegrate = async (
     return;
   }
 
-  const { displayWidth, displayHeight } = snapshot;
-
+  const { displayWidth, displayHeight, sourceCanvas } = snapshot;
   const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
-  const maxReleaseTime = relativeOrigin
-    ? applyWaveOrigin(particles, relativeOrigin, resolvedOptions.waveSpeed)
-    : 0;
+  const effectiveMaskStrategy = resolveEffectiveMaskStrategy(
+    resolvedOptions.maskStrategy,
+    relativeOrigin !== null,
+  );
+  const maxReleaseTime = assignParticleReleaseTimes(particles, {
+    strategy: effectiveMaskStrategy,
+    displayWidth,
+    displayHeight,
+    particleStep: resolvedOptions.particleStep,
+    maskSpreadDuration: resolvedOptions.maskSpreadDuration,
+    waveOrigin: relativeOrigin,
+    waveSpeed: resolvedOptions.waveSpeed,
+  });
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
   const chunkMaskSequence =
     resolvedOptions.maskMode === "chunks"
-      ? createChunkMaskSequence(
-          particles,
-          displayWidth,
-          displayHeight,
-          particlePadding,
-          resolvedOptions.particleStep,
-          resolvedOptions.maxChunkMaskSteps,
+      ? await buildChunkMaskSequenceAsync(
+          {
+            particles,
+            displayWidth,
+            displayHeight,
+            particlePadding,
+            chunkSize: resolvedOptions.particleStep,
+            maxSteps: resolvedOptions.maxChunkMaskSteps,
+          },
+          resolvedOptions.useChunkMaskWorker,
         )
       : null;
   const canvasWidth = displayWidth + particlePadding * 2;
   const canvasHeight = displayHeight + particlePadding * 2;
   const particleZIndex = Math.max(1, resolvedOptions.zIndex - 5);
+  const spriteSourceCanvas =
+    resolvedOptions.particleRenderMode === "sprite" ? sourceCanvas : null;
 
   const overlayCanvas = document.createElement("canvas");
   overlayCanvas.width = canvasWidth;
@@ -225,6 +245,10 @@ export const runThanosDisintegrate = async (
           canvasWidth,
           canvasHeight,
           particlePadding,
+          {
+            renderMode: resolvedOptions.particleRenderMode,
+            sourceCanvas: spriteSourceCanvas,
+          },
         );
         const visibleCount = stepParticles(
           particles,

@@ -53,6 +53,7 @@ describe("drawDisintegrationFrame", () => {
     const context = {
       clearRect: vi.fn(),
       fillRect,
+      drawImage: vi.fn(),
       save: vi.fn(),
       restore: vi.fn(),
       translate: vi.fn(),
@@ -84,5 +85,32 @@ describe("drawDisintegrationFrame", () => {
     drawDisintegrationFrame(context, particles, 0.1, 20, 20, 8);
 
     expect(translate).toHaveBeenCalledWith(4 + 8 + 1, 6 + 8 + 1);
+  });
+
+  it("draws snapshot sprites when sprite mode is enabled", () => {
+    const drawImage = vi.fn();
+    const context = {
+      clearRect: vi.fn(),
+      fillRect: vi.fn(),
+      drawImage,
+      save: vi.fn(),
+      restore: vi.fn(),
+      translate: vi.fn(),
+      rotate: vi.fn(),
+      globalAlpha: 1,
+    } as unknown as CanvasRenderingContext2D;
+
+    const sourceCanvas = document.createElement("canvas");
+    const particles = [
+      createParticle({ releaseTime: 0, x: 2, y: 2, originX: 4, originY: 6 }),
+    ];
+
+    drawDisintegrationFrame(context, particles, 0.1, 20, 20, 0, {
+      renderMode: "sprite",
+      sourceCanvas,
+    });
+
+    expect(drawImage).toHaveBeenCalled();
+    expect(context.fillRect).not.toHaveBeenCalled();
   });
 });

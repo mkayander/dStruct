@@ -57,14 +57,14 @@ describe("createChunkMaskSequence", () => {
       createParticle({ x: 3, y: 0, releaseTime: 0.5 }),
     ];
 
-    const sequence = createChunkMaskSequence(
+    const sequence = createChunkMaskSequence({
       particles,
-      12,
-      6,
-      4,
-      3,
-      8,
-    );
+      displayWidth: 12,
+      displayHeight: 6,
+      particlePadding: 4,
+      chunkSize: 3,
+      maxSteps: 8,
+    });
 
     expect(sequence.modalMaskUrls.length).toBeGreaterThan(0);
     expect(sequence.particleMaskUrls).toHaveLength(
