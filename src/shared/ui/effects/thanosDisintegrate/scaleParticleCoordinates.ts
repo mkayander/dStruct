@@ -12,5 +12,9 @@ export const scaleParticleCoordinates = (
   for (const particle of particles) {
     particle.x *= scaleX;
     particle.y *= scaleY;
+    particle.originX *= scaleX;
+    particle.originY *= scaleY;
+    particle.vx *= scaleX;
+    particle.vy *= scaleY;
   }
 };

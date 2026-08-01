@@ -39,6 +39,7 @@ const drawUnreleasedFallbackParticles = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
   elapsedSeconds: number,
+  particleStep: number,
 ): void => {
   for (const particle of particles) {
     if (elapsedSeconds < particle.releaseTime) {
@@ -47,8 +48,8 @@ const drawUnreleasedFallbackParticles = (
       context.fillRect(
         particle.originX,
         particle.originY,
-        particle.size,
-        particle.size,
+        particleStep,
+        particleStep,
       );
     }
   }
@@ -102,7 +103,12 @@ export const drawDisintegrationFrame = (
       options.particleStep,
     );
   } else {
-    drawUnreleasedFallbackParticles(context, particles, elapsedSeconds);
+    drawUnreleasedFallbackParticles(
+      context,
+      particles,
+      elapsedSeconds,
+      options.particleStep,
+    );
   }
 
   drawReleasedParticles(context, particles, elapsedSeconds);

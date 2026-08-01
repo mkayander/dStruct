@@ -4,7 +4,6 @@ import React, { useCallback, useRef, useState } from "react";
 
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
 import { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate";
-import { waitForPaint } from "#/shared/ui/effects/thanosDisintegrate/waitForPaint";
 
 type CookieConsentBannerWithDismissEffectProps = {
   isSettingsView: boolean;
@@ -49,7 +48,6 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
 
       void (async () => {
         try {
-          await waitForPaint();
           await disintegrate({
             origin: {
               clientX: event.clientX,

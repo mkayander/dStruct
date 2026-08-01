@@ -24,10 +24,10 @@ export const captureElementViaSnapdom = async (
   return snapdom.toCanvas(element, {
     width,
     height,
-    dpr: window.devicePixelRatio || 1,
+    dpr: 1,
     backgroundColor: getPageBackgroundColor(),
     fast: true,
-    embedFonts: true,
-    outerShadows: true,
+    embedFonts: false,
+    outerShadows: false,
   });
 };

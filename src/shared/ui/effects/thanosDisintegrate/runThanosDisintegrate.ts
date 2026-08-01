@@ -1,9 +1,7 @@
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 import { applyWaveOrigin } from "#/shared/ui/effects/thanosDisintegrate/applyWaveOrigin";
-import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
+import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/buildThanosCapture";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
-import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
-import { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import {
   prepareElementForDisintegrate,
@@ -11,12 +9,13 @@ import {
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
-import { scaleParticleCoordinates } from "#/shared/ui/effects/thanosDisintegrate/scaleParticleCoordinates";
 import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
-import type {
-  ThanosDisintegrateOptions,
-  ThanosParticle,
-} from "#/shared/ui/effects/thanosDisintegrate/types";
+import {
+  cloneThanosParticles,
+  isThanosCaptureSnapshotValid,
+  type ThanosCaptureSnapshot,
+} from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
+import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 type ResolvedThanosOptions = Required<
   Omit<ThanosDisintegrateOptions, "origin">
@@ -31,74 +30,44 @@ const resolveOptions = (
   ...options,
 });
 
+export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
+  /** Pre-built capture from idle warm-up; avoids blocking SnapDOM on dismiss. */
+  captureSnapshot?: ThanosCaptureSnapshot | null;
+};
+
 /**
  * Plays a Thanos-style particle disintegration on a DOM surface, then resolves.
  * No-ops when reduced motion is preferred or capture fails.
  */
 export const runThanosDisintegrate = async (
   element: HTMLElement,
-  options?: ThanosDisintegrateOptions,
+  options?: RunThanosDisintegrateOptions,
 ): Promise<void> => {
   if (prefersReducedMotion()) {
     return;
   }
 
-  const resolvedOptions = resolveOptions(options);
+  const { captureSnapshot, ...disintegrateOptions } = options ?? {};
+  const resolvedOptions = resolveOptions(disintegrateOptions);
   const initialRect = element.getBoundingClientRect();
   if (initialRect.width <= 0 || initialRect.height <= 0) {
     return;
   }
 
-  let sourceCanvas: HTMLCanvasElement | null = null;
-  let hasReadableCapture = false;
-  try {
-    sourceCanvas = await captureElementToCanvas(element);
-  } catch {
-    sourceCanvas = null;
-  }
+  const snapshot =
+    captureSnapshot && isThanosCaptureSnapshotValid(captureSnapshot, element)
+      ? captureSnapshot
+      : await buildThanosCapture(element, {
+          mode: "fast",
+          disintegrateOptions: resolvedOptions,
+        });
 
-  const rect = element.getBoundingClientRect();
-  const displayWidth = Math.max(1, Math.round(rect.width));
-  const displayHeight = Math.max(1, Math.round(rect.height));
-  const captureWidth = Math.max(1, sourceCanvas?.width ?? displayWidth);
-  const captureHeight = Math.max(1, sourceCanvas?.height ?? displayHeight);
-
-  let particles: ThanosParticle[] = [];
-
-  if (sourceCanvas) {
-    const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
-    if (context) {
-      try {
-        const imageData = context.getImageData(
-          0,
-          0,
-          captureWidth,
-          captureHeight,
-        );
-        particles = createParticlesFromImageData(imageData, resolvedOptions);
-        hasReadableCapture = particles.length > 0;
-      } catch {
-        // SnapDOM/SVG capture may still taint pixel reads in some browsers.
-      }
-    }
-  }
-
-  if (!hasReadableCapture) {
-    sourceCanvas = null;
-  }
-
-  if (particles.length === 0) {
-    particles = createFallbackParticlesFromElement(element, resolvedOptions);
-  }
+  const particles = cloneThanosParticles(snapshot.particles);
   if (particles.length === 0) {
     return;
   }
 
-  scaleParticleCoordinates(
-    particles,
-    displayWidth / captureWidth,
-    displayHeight / captureHeight,
-  );
+  const { displayWidth, displayHeight, sourceCanvas } = snapshot;
 
   const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
   const maxReleaseTime = relativeOrigin

@@ -1,39 +1,77 @@
-import { type RefObject, useCallback, useRef } from "react";
+import { type RefCallback, useCallback, useEffect, useRef } from "react";
 
 import { runThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
-import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
+import type { RunThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
+import type { ThanosCaptureSnapshot } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
+import { warmThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/warmThanosCapture";
 
 type UseThanosDisintegrateResult = {
   /** Attach to the visual surface that should crumble away. */
-  targetRef: RefObject<HTMLDivElement | null>;
+  targetRef: RefCallback<HTMLDivElement>;
   /** Starts the disintegration animation on `targetRef`. */
-  disintegrate: (options?: ThanosDisintegrateOptions) => Promise<void>;
+  disintegrate: (options?: RunThanosDisintegrateOptions) => Promise<void>;
 };
 
 /**
  * Reusable hook for triggering a Thanos-style dismiss animation on a DOM node.
- * Keeps presentation concerns separate from feature/business logic.
+ * Pre-warms a quality capture in idle time so dismiss stays responsive.
  */
 export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const elementRef = useRef<HTMLDivElement | null>(null);
+  const captureCacheRef = useRef<ThanosCaptureSnapshot | null>(null);
   const isAnimatingRef = useRef(false);
+  const cancelWarmRef = useRef<(() => void) | null>(null);
+
+  const targetRef = useCallback((node: HTMLDivElement | null) => {
+    cancelWarmRef.current?.();
+    cancelWarmRef.current = null;
+    elementRef.current = node;
+    captureCacheRef.current = null;
+
+    if (node) {
+      cancelWarmRef.current = warmThanosCapture(node, captureCacheRef);
+    }
+  }, []);
+
+  useEffect(() => {
+    const invalidateCache = () => {
+      captureCacheRef.current = null;
+      const element = elementRef.current;
+      if (!element) {
+        return;
+      }
+
+      cancelWarmRef.current?.();
+      cancelWarmRef.current = warmThanosCapture(element, captureCacheRef);
+    };
+
+    window.addEventListener("resize", invalidateCache, { passive: true });
+    return () => {
+      window.removeEventListener("resize", invalidateCache);
+      cancelWarmRef.current?.();
+    };
+  }, []);
 
   const disintegrate = useCallback(
-    async (options?: ThanosDisintegrateOptions) => {
+    async (options?: RunThanosDisintegrateOptions) => {
       if (isAnimatingRef.current) {
         return;
       }
 
-      const element = targetRef.current;
+      const element = elementRef.current;
       if (!element) {
         return;
       }
 
       isAnimatingRef.current = true;
       try {
-        await runThanosDisintegrate(element, options);
+        await runThanosDisintegrate(element, {
+          ...options,
+          captureSnapshot: captureCacheRef.current,
+        });
       } finally {
         isAnimatingRef.current = false;
+        captureCacheRef.current = null;
       }
     },
     [],

@@ -49,8 +49,8 @@ describe("drawDisintegrationFrame", () => {
       snapshotBlur: 0,
     });
 
-    expect(fillRect).toHaveBeenCalledWith(0, 0, 2, 2);
-    expect(fillRect).not.toHaveBeenCalledWith(3, 0, 2, 2);
+    expect(fillRect).toHaveBeenCalledWith(0, 0, 3, 3);
+    expect(fillRect).not.toHaveBeenCalledWith(3, 0, 3, 3);
   });
 
   it("punches holes in a captured snapshot as particles release", () => {

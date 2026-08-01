@@ -10,5 +10,5 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   maxDuration: 1.35,
   zIndex: 9999,
   waveSpeed: 520,
-  snapshotBlur: 0.6,
+  snapshotBlur: 0,
 } as const satisfies Required<Omit<ThanosDisintegrateOptions, "origin">>;
