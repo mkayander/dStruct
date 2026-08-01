@@ -4,6 +4,8 @@ import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/build
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
+import { createChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
+import type { ChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
 import {
   prepareElementForDisintegrate,
@@ -12,6 +14,11 @@ import {
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
 import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
+import {
+  applyChunkMaskFrame,
+  clearChunkMaskFromCanvas,
+  clearChunkMaskFromElement,
+} from "#/shared/ui/effects/thanosDisintegrate/syncChunkMaskSequence";
 import {
   applyParticleWaveMaskToCanvas,
   applyWaveMaskToElement,
@@ -53,7 +60,18 @@ const syncDualLayerWave = (
   displayHeight: number,
   resolvedOptions: ResolvedThanosOptions,
   particlePadding: number,
+  chunkMaskSequence: ChunkMaskSequence | null,
 ): void => {
+  if (resolvedOptions.maskMode === "chunks" && chunkMaskSequence) {
+    applyChunkMaskFrame(
+      element,
+      particleCanvas,
+      chunkMaskSequence,
+      elapsedSeconds,
+    );
+    return;
+  }
+
   if (relativeOrigin) {
     applyWaveMaskToElement(
       element,
@@ -126,6 +144,17 @@ export const runThanosDisintegrate = async (
     : 0;
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
+  const chunkMaskSequence =
+    resolvedOptions.maskMode === "chunks"
+      ? createChunkMaskSequence(
+          particles,
+          displayWidth,
+          displayHeight,
+          particlePadding,
+          resolvedOptions.particleStep,
+          resolvedOptions.maxChunkMaskSteps,
+        )
+      : null;
   const canvasWidth = displayWidth + particlePadding * 2;
   const canvasHeight = displayHeight + particlePadding * 2;
   const particleZIndex = Math.max(1, resolvedOptions.zIndex - 5);
@@ -187,6 +216,7 @@ export const runThanosDisintegrate = async (
           displayHeight,
           resolvedOptions,
           particlePadding,
+          chunkMaskSequence,
         );
         drawDisintegrationFrame(
           overlayContext,
@@ -206,8 +236,13 @@ export const runThanosDisintegrate = async (
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           completedSuccessfully = true;
           element.style.opacity = "0";
-          clearWaveMaskFromElement(element);
-          clearParticleWaveMaskFromCanvas(overlayCanvas);
+          if (chunkMaskSequence) {
+            clearChunkMaskFromElement(element);
+            clearChunkMaskFromCanvas(overlayCanvas);
+          } else {
+            clearWaveMaskFromElement(element);
+            clearParticleWaveMaskFromCanvas(overlayCanvas);
+          }
           resolve();
           return;
         }
@@ -218,6 +253,7 @@ export const runThanosDisintegrate = async (
       requestAnimationFrame(animate);
     });
   } finally {
+    chunkMaskSequence?.revoke();
     restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();
     overlayCanvas.remove();

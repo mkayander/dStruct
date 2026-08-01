@@ -9,5 +9,6 @@ export { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/us
 export type {
   ThanosDisintegrateOptions,
   ThanosDisintegrateOrigin,
+  ThanosDisintegrateMaskMode,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";

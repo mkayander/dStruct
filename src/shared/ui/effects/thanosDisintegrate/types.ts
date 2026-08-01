@@ -1,3 +1,5 @@
+export type ThanosDisintegrateMaskMode = "radial" | "chunks";
+
 export type ThanosParticle = {
   x: number;
   y: number;
@@ -47,6 +49,10 @@ export type ThanosDisintegrateOptions = {
   origin?: ThanosDisintegrateOrigin;
   /** Radial wave speed in px/s. */
   waveSpeed?: number;
+  /** Dissolve mask style: smooth radial wave or pixel chunk bitmasks. */
+  maskMode?: ThanosDisintegrateMaskMode;
+  /** Max precomputed chunk mask steps (bounds memory for large surfaces). */
+  maxChunkMaskSteps?: number;
   /** Optional blur on the snapshot layer before punch-out (px). */
   snapshotBlur?: number;
 };

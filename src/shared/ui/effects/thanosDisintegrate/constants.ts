@@ -11,4 +11,6 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   zIndex: 9999,
   waveSpeed: 700,
   snapshotBlur: 0,
+  maskMode: "chunks",
+  maxChunkMaskSteps: 96,
 } as const satisfies Required<Omit<ThanosDisintegrateOptions, "origin">>;
