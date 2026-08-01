@@ -1,5 +1,6 @@
 import { type RefCallback, useCallback, useEffect, useRef } from "react";
 
+import { prewarmChunkMaskWorker } from "#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync";
 import { runThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
 import type { RunThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
 import type { ThanosCaptureSnapshot } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
@@ -42,6 +43,7 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
     captureCacheRef.current = null;
 
     if (node) {
+      prewarmChunkMaskWorker();
       cancelWarmRef.current = warmThanosCapture(node, captureCacheRef);
     }
   }, []);

@@ -5,7 +5,7 @@ import type {
 import {
   type ChunkMaskSequence,
   type ChunkMaskSequenceInput,
-  createChunkMaskSequence,
+  createChunkMaskSequenceAsync,
 } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 
 let requestCounter = 0;
@@ -24,6 +24,10 @@ const getChunkMaskWorker = (): Worker | null => {
   }
 
   return workerInstance;
+};
+
+export const prewarmChunkMaskWorker = (): void => {
+  getChunkMaskWorker();
 };
 
 export const terminateChunkMaskWorker = (): void => {
@@ -48,22 +52,32 @@ const createRevocableSequence = (
   };
 };
 
-const buildChunkMaskSequenceOnMainThread = (
+const buildChunkMaskSequenceYieldingOnMainThread = async (
   input: ChunkMaskSequenceInput,
-): ChunkMaskSequence => createRevocableSequence(createChunkMaskSequence(input));
+): Promise<ChunkMaskSequence> =>
+  createRevocableSequence(
+    await createChunkMaskSequenceAsync(input, {
+      preferOffscreen: true,
+      yieldBetweenSteps: true,
+    }),
+  );
 
-/** Builds chunk masks off-thread when workers are available. */
+/**
+ * Builds chunk masks off-thread when workers are available.
+ * Returns null when the worker is unavailable or fails so callers can fall back
+ * to radial masks without blocking the main thread on sync PNG encoding.
+ */
 export const buildChunkMaskSequenceAsync = (
   input: ChunkMaskSequenceInput,
   useWorker = true,
-): Promise<ChunkMaskSequence> => {
+): Promise<ChunkMaskSequence | null> => {
   if (!useWorker) {
-    return Promise.resolve(buildChunkMaskSequenceOnMainThread(input));
+    return buildChunkMaskSequenceYieldingOnMainThread(input);
   }
 
   const worker = getChunkMaskWorker();
   if (!worker) {
-    return Promise.resolve(buildChunkMaskSequenceOnMainThread(input));
+    return Promise.resolve(null);
   }
 
   const requestId = requestCounter + 1;
@@ -75,27 +89,24 @@ export const buildChunkMaskSequenceAsync = (
       worker.removeEventListener("error", handleError);
     };
 
-    const fallbackToMainThread = () => {
-      cleanup();
-      resolve(buildChunkMaskSequenceOnMainThread(input));
-    };
-
     const handleMessage = (event: MessageEvent<ChunkMaskWorkerResponse>) => {
       if (event.data.requestId !== requestId) {
         return;
       }
 
+      cleanup();
+
       if (event.data.type === "SUCCESS") {
-        cleanup();
         resolve(createRevocableSequence(event.data.sequence));
         return;
       }
 
-      fallbackToMainThread();
+      resolve(null);
     };
 
     const handleError = () => {
-      fallbackToMainThread();
+      cleanup();
+      resolve(null);
     };
 
     worker.addEventListener("message", handleMessage);

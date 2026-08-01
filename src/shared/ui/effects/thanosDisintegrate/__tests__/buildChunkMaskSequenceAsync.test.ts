@@ -76,6 +76,15 @@ const createParticle = (
   ...overrides,
 });
 
+const maskInput = {
+  particles: [createParticle({ x: 0, y: 0, releaseTime: 0 })],
+  displayWidth: 12,
+  displayHeight: 6,
+  particlePadding: 4,
+  chunkSize: 3,
+  maxSteps: 8,
+};
+
 describe("buildChunkMaskSequenceAsync", () => {
   afterEach(() => {
     terminateChunkMaskWorker();
@@ -83,41 +92,22 @@ describe("buildChunkMaskSequenceAsync", () => {
     vi.unstubAllGlobals();
   });
 
-  it("builds masks on the main thread when workers are disabled", async () => {
-    const sequence = await buildChunkMaskSequenceAsync(
-      {
-        particles: [createParticle({ x: 0, y: 0, releaseTime: 0 })],
-        displayWidth: 12,
-        displayHeight: 6,
-        particlePadding: 4,
-        chunkSize: 3,
-        maxSteps: 8,
-      },
-      false,
-    );
+  it("builds masks with a yielding main-thread path when workers are disabled", async () => {
+    const sequence = await buildChunkMaskSequenceAsync(maskInput, false);
 
-    expect(sequence.modalMaskUrls.length).toBeGreaterThan(0);
-    expect(sequence.particleMaskUrls).toHaveLength(
-      sequence.modalMaskUrls.length,
+    expect(sequence).not.toBeNull();
+    expect(sequence!.modalMaskUrls.length).toBeGreaterThan(0);
+    expect(sequence!.particleMaskUrls).toHaveLength(
+      sequence!.modalMaskUrls.length,
     );
   });
 
-  it("falls back to the main thread when the worker reports an error", async () => {
+  it("returns null when the worker reports an error instead of blocking main thread", async () => {
     vi.stubGlobal("Worker", MockWorker as unknown as typeof Worker);
 
-    const sequence = await buildChunkMaskSequenceAsync(
-      {
-        particles: [createParticle({ x: 0, y: 0, releaseTime: 0 })],
-        displayWidth: 12,
-        displayHeight: 6,
-        particlePadding: 4,
-        chunkSize: 3,
-        maxSteps: 8,
-      },
-      true,
-    );
+    const sequence = await buildChunkMaskSequenceAsync(maskInput, true);
 
-    expect(sequence.modalMaskUrls.length).toBeGreaterThan(0);
+    expect(sequence).toBeNull();
     expect(workerInstances.length).toBeGreaterThan(0);
   });
 });

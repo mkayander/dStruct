@@ -26,7 +26,21 @@ export type ChunkMaskSequenceInput = {
   maxSteps: number;
 };
 
+export type CreateChunkMaskSequenceAsyncOptions = {
+  /** Prefer OffscreenCanvas so encoding uses async convertToBlob instead of sync toDataURL. */
+  preferOffscreen?: boolean;
+  /** Yield to the browser between mask steps (tests / explicit non-worker builds). */
+  yieldBetweenSteps?: boolean;
+};
+
 export const CHUNK_TIME_QUANTUM_SECONDS = 1 / 60;
+
+const yieldToMainThread = (): Promise<void> =>
+  new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
 
 export const quantizeReleaseTime = (releaseTime: number): number =>
   Math.round(releaseTime / CHUNK_TIME_QUANTUM_SECONDS) *
@@ -130,15 +144,17 @@ const revealParticleChunk = (
 };
 
 type MaskBuildContext = {
+  modalCanvas: HTMLCanvasElement | OffscreenCanvas;
+  particleCanvas: HTMLCanvasElement | OffscreenCanvas;
   modalContext: Mask2dContext;
   particleContext: Mask2dContext;
-  displayWidth: number;
-  displayHeight: number;
   particlePadding: number;
   chunkSize: number;
   releaseGroups: Map<number, ChunkMaskParticle[]>;
   uniqueReleaseTimes: number[];
   timeThresholds: number[];
+  modalMaskSize: string;
+  particleMaskSize: string;
 };
 
 const advanceMaskSteps = (
@@ -184,14 +200,96 @@ const advanceMaskSteps = (
   }
 };
 
+const advanceMaskStepsAsync = async (
+  buildContext: MaskBuildContext,
+  captureStep: () => Promise<void>,
+  yieldBetweenSteps: boolean,
+): Promise<void> => {
+  const {
+    modalContext,
+    particleContext,
+    particlePadding,
+    chunkSize,
+    releaseGroups,
+    uniqueReleaseTimes,
+    timeThresholds,
+  } = buildContext;
+
+  const thresholds =
+    timeThresholds.length > 0 ? timeThresholds : [Number.NEGATIVE_INFINITY];
+  let processedTimeIndex = 0;
+
+  for (const threshold of thresholds) {
+    while (
+      processedTimeIndex < uniqueReleaseTimes.length &&
+      uniqueReleaseTimes[processedTimeIndex]! <= threshold
+    ) {
+      const releaseTime = uniqueReleaseTimes[processedTimeIndex]!;
+      const batch = releaseGroups.get(releaseTime) ?? [];
+
+      for (const particle of batch) {
+        punchModalChunk(modalContext, particle, 0, chunkSize);
+        revealParticleChunk(
+          particleContext,
+          particle,
+          particlePadding,
+          chunkSize,
+        );
+      }
+
+      processedTimeIndex += 1;
+    }
+
+    await captureStep();
+    if (yieldBetweenSteps) {
+      await yieldToMainThread();
+    }
+  }
+};
+
+const createMaskCanvas = (
+  width: number,
+  height: number,
+  preferOffscreen: boolean,
+): {
+  canvas: HTMLCanvasElement | OffscreenCanvas;
+  context: Mask2dContext;
+} => {
+  if (preferOffscreen && typeof OffscreenCanvas !== "undefined") {
+    const canvas = new OffscreenCanvas(width, height);
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error("2d canvas context unavailable");
+    }
+
+    return { canvas, context };
+  }
+
+  if (typeof document !== "undefined") {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error("2d canvas context unavailable");
+    }
+
+    return { canvas, context };
+  }
+
+  const canvas = new OffscreenCanvas(width, height);
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("2d canvas context unavailable");
+  }
+
+  return { canvas, context };
+};
+
 const createMaskBuildContext = (
   input: ChunkMaskSequenceInput,
-): MaskBuildContext & {
-  modalCanvas: HTMLCanvasElement | OffscreenCanvas;
-  particleCanvas: HTMLCanvasElement | OffscreenCanvas;
-  modalMaskSize: string;
-  particleMaskSize: string;
-} => {
+  preferOffscreen = false,
+): MaskBuildContext => {
   const {
     particles,
     displayWidth,
@@ -211,35 +309,15 @@ const createMaskBuildContext = (
     (left, right) => left - right,
   );
 
-  const createCanvas = (width: number, height: number) => {
-    if (typeof document !== "undefined") {
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-      const context = canvas.getContext("2d");
-      if (!context) {
-        throw new Error("2d canvas context unavailable");
-      }
-
-      return { canvas, context };
-    }
-
-    const canvas = new OffscreenCanvas(width, height);
-    const context = canvas.getContext("2d");
-    if (!context) {
-      throw new Error("2d canvas context unavailable");
-    }
-
-    return { canvas, context };
-  };
-
-  const { canvas: modalCanvas, context: modalContext } = createCanvas(
+  const { canvas: modalCanvas, context: modalContext } = createMaskCanvas(
     displayWidth,
     displayHeight,
+    preferOffscreen,
   );
-  const { canvas: particleCanvas, context: particleContext } = createCanvas(
+  const { canvas: particleCanvas, context: particleContext } = createMaskCanvas(
     canvasWidth,
     canvasHeight,
+    preferOffscreen,
   );
 
   modalContext.fillStyle = "#000000";
@@ -250,8 +328,6 @@ const createMaskBuildContext = (
     particleCanvas,
     modalContext,
     particleContext,
-    displayWidth,
-    displayHeight,
     particlePadding,
     chunkSize,
     releaseGroups,
@@ -287,48 +363,26 @@ export const createChunkMaskSequence = (
   };
 };
 
-/** Worker-safe async variant using OffscreenCanvas when document is unavailable. */
+/** Async mask build for workers and yielding main-thread builds. */
 export const createChunkMaskSequenceAsync = async (
   input: ChunkMaskSequenceInput,
+  {
+    preferOffscreen = false,
+    yieldBetweenSteps = false,
+  }: CreateChunkMaskSequenceAsyncOptions = {},
 ): Promise<ChunkMaskSequence> => {
-  const buildContext = createMaskBuildContext(input);
+  const buildContext = createMaskBuildContext(input, preferOffscreen);
   const modalMaskUrls: string[] = [];
   const particleMaskUrls: string[] = [];
-  const thresholds =
-    buildContext.timeThresholds.length > 0
-      ? buildContext.timeThresholds
-      : [Number.NEGATIVE_INFINITY];
-  let processedTimeIndex = 0;
 
-  for (const threshold of thresholds) {
-    while (
-      processedTimeIndex < buildContext.uniqueReleaseTimes.length &&
-      buildContext.uniqueReleaseTimes[processedTimeIndex]! <= threshold
-    ) {
-      const releaseTime = buildContext.uniqueReleaseTimes[processedTimeIndex]!;
-      const batch = buildContext.releaseGroups.get(releaseTime) ?? [];
-
-      for (const particle of batch) {
-        punchModalChunk(
-          buildContext.modalContext,
-          particle,
-          0,
-          buildContext.chunkSize,
-        );
-        revealParticleChunk(
-          buildContext.particleContext,
-          particle,
-          buildContext.particlePadding,
-          buildContext.chunkSize,
-        );
-      }
-
-      processedTimeIndex += 1;
-    }
-
-    modalMaskUrls.push(await canvasToDataUrl(buildContext.modalCanvas));
-    particleMaskUrls.push(await canvasToDataUrl(buildContext.particleCanvas));
-  }
+  await advanceMaskStepsAsync(
+    buildContext,
+    async () => {
+      modalMaskUrls.push(await canvasToDataUrl(buildContext.modalCanvas));
+      particleMaskUrls.push(await canvasToDataUrl(buildContext.particleCanvas));
+    },
+    yieldBetweenSteps,
+  );
 
   return {
     timeThresholds: buildContext.timeThresholds,

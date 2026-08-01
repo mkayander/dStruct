@@ -3,7 +3,7 @@ export {
   assignParticleReleaseTimes,
   resolveEffectiveMaskStrategy,
 } from "#/shared/ui/effects/thanosDisintegrate/assignParticleReleaseTimes";
-export { buildChunkMaskSequenceAsync } from "#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync";
+export { buildChunkMaskSequenceAsync, prewarmChunkMaskWorker } from "#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync";
 export { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 export { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
 export { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
