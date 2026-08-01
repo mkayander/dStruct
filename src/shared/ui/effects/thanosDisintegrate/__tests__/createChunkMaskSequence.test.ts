@@ -1,9 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   buildChunkMaskThresholds,
   createChunkMaskSequence,
   getChunkMaskIndex,
+  revealParticleChunk,
+  revealParticleMaskBleedZone,
 } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
@@ -62,6 +64,7 @@ describe("createChunkMaskSequence", () => {
       displayWidth: 12,
       displayHeight: 6,
       particlePadding: 4,
+      particleRevealMargin: 6,
       chunkSize: 3,
       maxSteps: 8,
     });
@@ -72,5 +75,38 @@ describe("createChunkMaskSequence", () => {
     );
     expect(sequence.modalMaskUrls[0]).toMatch(/^data:image\/png;base64,/);
     expect(sequence.particleMaskSize).toBe("20px 14px");
+  });
+
+  it("pre-reveals the particle canvas bleed zone before any chunks dissolve", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 20;
+    canvas.height = 14;
+    const context = canvas.getContext("2d");
+    expect(context).not.toBeNull();
+    if (!context) {
+      return;
+    }
+
+    const fillRectSpy = vi.spyOn(context, "fillRect");
+    revealParticleMaskBleedZone(context, 12, 6, 4);
+
+    expect(fillRectSpy).toHaveBeenCalledTimes(4);
+    expect(fillRectSpy).toHaveBeenCalledWith(0, 0, 20, 4);
+  });
+
+  it("expands particle chunk reveals beyond the grid cell size", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 20;
+    canvas.height = 14;
+    const context = canvas.getContext("2d");
+    expect(context).not.toBeNull();
+    if (!context) {
+      return;
+    }
+
+    const fillRectSpy = vi.spyOn(context, "fillRect");
+    revealParticleChunk(context, { x: 6, y: 3, releaseTime: 0 }, 4, 3, 8);
+
+    expect(fillRectSpy).toHaveBeenCalledWith(2, -1, 19, 19);
   });
 });

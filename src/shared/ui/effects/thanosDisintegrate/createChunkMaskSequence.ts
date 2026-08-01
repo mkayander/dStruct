@@ -22,6 +22,8 @@ export type ChunkMaskSequenceInput = {
   displayWidth: number;
   displayHeight: number;
   particlePadding: number;
+  /** Extra radius around each chunk reveal so outward-flying particles stay visible. */
+  particleRevealMargin: number;
   chunkSize: number;
   maxSteps: number;
 };
@@ -128,18 +130,50 @@ const punchModalChunk = (
   );
 };
 
-const revealParticleChunk = (
+/** Padding strips are always visible so edge particles can fly into the bleed zone. */
+export const revealParticleMaskBleedZone = (
+  context: Mask2dContext,
+  displayWidth: number,
+  displayHeight: number,
+  particlePadding: number,
+): void => {
+  if (particlePadding <= 0) {
+    return;
+  }
+
+  const canvasWidth = displayWidth + particlePadding * 2;
+  const canvasHeight = displayHeight + particlePadding * 2;
+
+  context.fillStyle = "#000000";
+  context.fillRect(0, 0, canvasWidth, particlePadding);
+  context.fillRect(
+    0,
+    canvasHeight - particlePadding,
+    canvasWidth,
+    particlePadding,
+  );
+  context.fillRect(0, particlePadding, particlePadding, displayHeight);
+  context.fillRect(
+    canvasWidth - particlePadding,
+    particlePadding,
+    particlePadding,
+    displayHeight,
+  );
+};
+
+export const revealParticleChunk = (
   context: Mask2dContext,
   particle: ChunkMaskParticle,
   originOffset: number,
   chunkSize: number,
+  revealMargin: number,
 ): void => {
   context.fillStyle = "#000000";
   context.fillRect(
-    particle.x + originOffset,
-    particle.y + originOffset,
-    chunkSize,
-    chunkSize,
+    particle.x + originOffset - revealMargin,
+    particle.y + originOffset - revealMargin,
+    chunkSize + revealMargin * 2,
+    chunkSize + revealMargin * 2,
   );
 };
 
@@ -149,6 +183,7 @@ type MaskBuildContext = {
   modalContext: Mask2dContext;
   particleContext: Mask2dContext;
   particlePadding: number;
+  particleRevealMargin: number;
   chunkSize: number;
   releaseGroups: Map<number, ChunkMaskParticle[]>;
   uniqueReleaseTimes: number[];
@@ -165,6 +200,7 @@ const advanceMaskSteps = (
     modalContext,
     particleContext,
     particlePadding,
+    particleRevealMargin,
     chunkSize,
     releaseGroups,
     uniqueReleaseTimes,
@@ -190,6 +226,7 @@ const advanceMaskSteps = (
           particle,
           particlePadding,
           chunkSize,
+          particleRevealMargin,
         );
       }
 
@@ -209,6 +246,7 @@ const advanceMaskStepsAsync = async (
     modalContext,
     particleContext,
     particlePadding,
+    particleRevealMargin,
     chunkSize,
     releaseGroups,
     uniqueReleaseTimes,
@@ -234,6 +272,7 @@ const advanceMaskStepsAsync = async (
           particle,
           particlePadding,
           chunkSize,
+          particleRevealMargin,
         );
       }
 
@@ -295,6 +334,7 @@ const createMaskBuildContext = (
     displayWidth,
     displayHeight,
     particlePadding,
+    particleRevealMargin,
     chunkSize,
     maxSteps,
   } = input;
@@ -322,6 +362,12 @@ const createMaskBuildContext = (
 
   modalContext.fillStyle = "#000000";
   modalContext.fillRect(0, 0, displayWidth, displayHeight);
+  revealParticleMaskBleedZone(
+    particleContext,
+    displayWidth,
+    displayHeight,
+    particlePadding,
+  );
 
   return {
     modalCanvas,
@@ -329,6 +375,7 @@ const createMaskBuildContext = (
     modalContext,
     particleContext,
     particlePadding,
+    particleRevealMargin,
     chunkSize,
     releaseGroups,
     uniqueReleaseTimes,

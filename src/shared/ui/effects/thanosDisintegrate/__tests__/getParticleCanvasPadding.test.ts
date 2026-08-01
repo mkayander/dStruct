@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
-import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
+import {
+  getParticleCanvasPadding,
+  getParticleMaxTravel,
+  getParticleRevealMargin,
+} from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
 
 describe("getParticleCanvasPadding", () => {
   it("scales with physics options so particles can travel outside the surface", () => {
@@ -20,5 +24,14 @@ describe("getParticleCanvasPadding", () => {
     });
 
     expect(padding).toBeLessThan(80);
+  });
+
+  it("keeps reveal margin within canvas padding", () => {
+    const options = THANOS_DISINTEGRATE_DEFAULTS;
+    const padding = getParticleCanvasPadding(options);
+    const revealMargin = getParticleRevealMargin(options);
+
+    expect(getParticleMaxTravel(options)).toBeGreaterThan(0);
+    expect(revealMargin).toBeLessThan(padding);
   });
 });

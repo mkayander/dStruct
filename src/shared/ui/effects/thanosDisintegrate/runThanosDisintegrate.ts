@@ -7,7 +7,10 @@ import { buildChunkMaskSequenceAsync } from "#/shared/ui/effects/thanosDisintegr
 import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/buildThanosCapture";
 import type { ChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
-import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
+import {
+  getParticleCanvasPadding,
+  getParticleRevealMargin,
+} from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
 import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
 import {
   prepareElementForDisintegrate,
@@ -149,6 +152,7 @@ export const runThanosDisintegrate = async (
   });
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
+  const particleRevealMargin = getParticleRevealMargin(resolvedOptions);
 
   const chunkMaskRef: { sequence: ChunkMaskSequence | null } = {
     sequence: null,
@@ -162,6 +166,7 @@ export const runThanosDisintegrate = async (
         displayWidth,
         displayHeight,
         particlePadding,
+        particleRevealMargin,
         chunkSize: resolvedOptions.particleStep,
         maxSteps: resolvedOptions.maxChunkMaskSteps,
       },

@@ -81,6 +81,7 @@ const maskInput = {
   displayWidth: 12,
   displayHeight: 6,
   particlePadding: 4,
+  particleRevealMargin: 6,
   chunkSize: 3,
   maxSteps: 8,
 };
