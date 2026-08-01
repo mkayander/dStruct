@@ -15,7 +15,9 @@ type StoredCookieConsentPayload = {
 export const CONSENT_STORAGE_KEY = "dstruct-cookie-consent";
 const CONSENT_VERSION = 1;
 
-const parseConsentPayload = (payload: unknown): CookieConsentPreferences | null => {
+const parseConsentPayload = (
+  payload: unknown,
+): CookieConsentPreferences | null => {
   if (
     typeof payload !== "object" ||
     payload === null ||
@@ -64,6 +66,5 @@ export const clearStoredCookieConsent = (): void => {
   cookieConsentStorage.remove();
 };
 
-export const subscribeCookieConsent = (
-  listener: () => void,
-): (() => void) => cookieConsentStorage.subscribe(listener);
+export const subscribeCookieConsent = (listener: () => void): (() => void) =>
+  cookieConsentStorage.subscribe(listener);

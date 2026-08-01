@@ -23,10 +23,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
+import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
 import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
-import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
 import { useI18nContext } from "#/shared/hooks";
 

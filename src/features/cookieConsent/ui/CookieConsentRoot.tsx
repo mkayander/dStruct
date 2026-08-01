@@ -2,13 +2,13 @@
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   CookieConsentProvider,
   useCookieConsentController,
 } from "#/features/cookieConsent/context/CookieConsentContext";
-import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
+import { CookieConsentBannerWithDismissEffect } from "#/features/cookieConsent/ui/CookieConsentBannerWithDismissEffect";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
 
 type CookieConsentRootProps = {
@@ -20,17 +20,23 @@ export const CookieConsentRoot: React.FC<CookieConsentRootProps> = ({
 }) => {
   const hasMounted = useHasMounted();
   const consent = useCookieConsentController();
+  const [isDismissAnimating, setIsDismissAnimating] = useState(false);
   const showConsentChrome = hasMounted;
+  const showBanner = consent.showBanner || isDismissAnimating;
 
   return (
-    <CookieConsentProvider value={{ openCookieSettings: consent.openCookieSettings }}>
+    <CookieConsentProvider
+      value={{ openCookieSettings: consent.openCookieSettings }}
+    >
       {children}
-      {showConsentChrome && consent.showBanner ? (
-        <CookieConsentBanner
+      {showConsentChrome && showBanner ? (
+        <CookieConsentBannerWithDismissEffect
           isSettingsView={consent.isSettingsView}
           onAcceptAll={consent.acceptAll}
           onRejectNonEssential={consent.rejectNonEssential}
           onClose={consent.closeCookieSettings}
+          onBeginDismiss={() => setIsDismissAnimating(true)}
+          onCompleteDismiss={() => setIsDismissAnimating(false)}
         />
       ) : null}
       {showConsentChrome && consent.analyticsEnabled ? (

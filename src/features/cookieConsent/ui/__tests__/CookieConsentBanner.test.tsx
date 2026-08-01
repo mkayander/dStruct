@@ -50,10 +50,9 @@ describe("CookieConsentBanner", () => {
     expect(
       screen.getByRole("button", { name: "COOKIE_REJECT_NON_ESSENTIAL" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "PRIVACY_POLICY" })).toHaveAttribute(
-      "href",
-      "/privacy",
-    );
+    expect(
+      screen.getByRole("link", { name: "PRIVACY_POLICY" }),
+    ).toHaveAttribute("href", "/privacy");
   });
 
   it("calls handlers when buttons are clicked", async () => {
@@ -74,7 +73,9 @@ describe("CookieConsentBanner", () => {
     const { onClose } = renderBanner({ isSettingsView: true });
 
     expect(screen.getByText("COOKIE_SETTINGS_TITLE")).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "COOKIE_SETTINGS_CLOSE" }));
+    await user.click(
+      screen.getByRole("button", { name: "COOKIE_SETTINGS_CLOSE" }),
+    );
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

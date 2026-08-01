@@ -104,6 +104,9 @@ importers:
       '@vercel/speed-insights':
         specifier: ^1.3.1
         version: 1.3.1(next@16.2.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.90.0))(react@19.2.6)
+      '@zumer/snapdom':
+        specifier: ^2.23.1
+        version: 2.23.1
       aws-sdk:
         specifier: ^2.1693.0
         version: 2.1693.0
@@ -3002,6 +3005,9 @@ packages:
 
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
+
+  '@zumer/snapdom@2.23.1':
+    resolution: {integrity: sha512-r+6LRFXIpzTxlvGBjTr7mhvVW05TozgyE1QFmvO1hbchdbl4Km5/7DIkeyl2+nEVbz8Sp6/K2g4b86pXhCrFIQ==}
 
   acorn-import-phases@1.0.4:
     resolution: {integrity: sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==}
@@ -9687,6 +9693,8 @@ snapshots:
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
+
+  '@zumer/snapdom@2.23.1': {}
 
   acorn-import-phases@1.0.4(acorn@8.17.0):
     dependencies:

@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
 import { useSnackbar } from "notistack";
+import { useCallback, useState } from "react";
 
 import { useCookieConsentStorage } from "#/features/cookieConsent/hooks/useCookieConsentStorage";
 import { storeCookieConsent } from "#/features/cookieConsent/lib/consentStorage";
@@ -9,8 +9,8 @@ type UseCookieConsentResult = {
   showBanner: boolean;
   isSettingsView: boolean;
   analyticsEnabled: boolean;
-  acceptAll: () => void;
-  rejectNonEssential: () => void;
+  acceptAll: () => boolean;
+  rejectNonEssential: () => boolean;
   openCookieSettings: () => void;
   closeCookieSettings: () => void;
 };
@@ -26,24 +26,25 @@ export const useCookieConsent = (): UseCookieConsentResult => {
   }, []);
 
   const persistConsent = useCallback(
-    (analytics: boolean) => {
+    (analytics: boolean): boolean => {
       const stored = storeCookieConsent({ analytics });
       if (stored) {
         setSettingsOpen(false);
-        return;
+        return true;
       }
 
       enqueueSnackbar(LL.COOKIE_CONSENT_STORE_FAILED(), { variant: "error" });
+      return false;
     },
     [enqueueSnackbar, LL],
   );
 
-  const acceptAll = useCallback(() => {
-    persistConsent(true);
+  const acceptAll = useCallback((): boolean => {
+    return persistConsent(true);
   }, [persistConsent]);
 
-  const rejectNonEssential = useCallback(() => {
-    persistConsent(false);
+  const rejectNonEssential = useCallback((): boolean => {
+    return persistConsent(false);
   }, [persistConsent]);
 
   const openCookieSettings = useCallback(() => {

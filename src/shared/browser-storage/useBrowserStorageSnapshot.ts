@@ -13,5 +13,5 @@ export const useBrowserStorageSnapshot = <TValue>(
     getServerSnapshot,
   );
 
-  return useMemo(() => storage.parseRaw(rawSnapshot), [rawSnapshot, storage.parseRaw]);
+  return useMemo(() => storage.parseRaw(rawSnapshot), [rawSnapshot, storage]);
 };
