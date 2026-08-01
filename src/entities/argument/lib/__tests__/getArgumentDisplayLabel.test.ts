@@ -16,9 +16,7 @@ const makeArg = (
 describe("getArgumentDisplayLabel", () => {
   it("returns trimmed custom label when set", () => {
     expect(
-      getArgumentDisplayLabel(
-        makeArg({ order: 0, label: "  head  " }),
-      ),
+      getArgumentDisplayLabel(makeArg({ order: 0, label: "  head  " })),
     ).toBe("head");
   });
 

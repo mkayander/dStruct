@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import type { ArgumentObject } from "#/entities/argument/model/types";
-import { BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
+import { type BinaryTreeNode } from "#/entities/dataStructures/binaryTree/model/binaryTreeNode";
 import type { TreeData } from "#/entities/dataStructures/node/model/nodeSlice";
 import {
-  CallstackHelper,
   type CallFrame,
+  CallstackHelper,
 } from "#/features/callstack/model/callstackSlice";
 import { createCaseRuntimeArgs } from "#/features/codeRunner/lib/createCaseRuntimeArgs";
 import { instrumentUserJsForLineTracking } from "#/features/codeRunner/lib/instrumentUserJsForLineTracking";
@@ -38,9 +38,9 @@ const runInstrumentedSolution = (
 
   const code = `return function solve(${paramList}) {\n${solutionBody}\n};`;
   const { code: instrumented } = instrumentUserJsForLineTracking(code);
-  const run = new Function(`${globalDefinitionsPrefix}\n${instrumented}`) as () => (
-    ...args: unknown[]
-  ) => unknown;
+  const run = new Function(
+    `${globalDefinitionsPrefix}\n${instrumented}`,
+  ) as () => (...args: unknown[]) => unknown;
 
   callstack.clear();
   const result = run()(...invokeArgs);
@@ -131,9 +131,9 @@ return function solve() {
     expect(addArrayFramesWithLabel(callstack, "array").length).toBeGreaterThan(
       0,
     );
-    expect(callstack.frames.some((frame) => frame.name === "addArrayItem")).toBe(
-      true,
-    );
+    expect(
+      callstack.frames.some((frame) => frame.name === "addArrayItem"),
+    ).toBe(true);
   });
 });
 

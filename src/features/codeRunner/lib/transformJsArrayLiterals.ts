@@ -196,9 +196,7 @@ export const transformArrayLiteralsInSolution = (
 export const transformArrayLiteralsInProgram = (file: File): void => {
   traverse(file, {
     "FunctionDeclaration|FunctionExpression|ArrowFunctionExpression"(path) {
-      transformArrayLiteralsInFunction(
-        path as NodePath<babelTypes.Function>,
-      );
+      transformArrayLiteralsInFunction(path as NodePath<babelTypes.Function>);
     },
   });
 };
