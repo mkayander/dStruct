@@ -8,6 +8,7 @@ import type {
   ThanosCaptureSnapshot,
 } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
 import { getElementDisplaySize } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
+import { waitForDocumentFonts } from "#/shared/ui/effects/thanosDisintegrate/waitForDocumentFonts";
 
 const tryCreateParticlesFromCanvas = (
   canvas: HTMLCanvasElement,
@@ -35,6 +36,8 @@ export const buildThanosCapture = async (
   element: HTMLElement,
   { mode, disintegrateOptions }: BuildThanosCaptureOptions,
 ): Promise<ThanosCaptureSnapshot> => {
+  await waitForDocumentFonts();
+
   const { displayWidth, displayHeight } = getElementDisplaySize(element);
 
   let rawCanvas: HTMLCanvasElement | null = null;

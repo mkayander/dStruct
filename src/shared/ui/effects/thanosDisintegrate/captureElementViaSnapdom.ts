@@ -1,5 +1,7 @@
 import { snapdom } from "@zumer/snapdom";
 
+import { waitForDocumentFonts } from "#/shared/ui/effects/thanosDisintegrate/waitForDocumentFonts";
+
 const getPageBackgroundColor = (): string | undefined => {
   const background = window.getComputedStyle(document.body).backgroundColor;
   if (
@@ -17,6 +19,8 @@ const getPageBackgroundColor = (): string | undefined => {
 export const captureElementViaSnapdom = async (
   element: HTMLElement,
 ): Promise<HTMLCanvasElement> => {
+  await waitForDocumentFonts();
+
   const rect = element.getBoundingClientRect();
   const width = Math.max(1, Math.round(rect.width));
   const height = Math.max(1, Math.round(rect.height));
@@ -27,7 +31,7 @@ export const captureElementViaSnapdom = async (
     dpr: 1,
     backgroundColor: getPageBackgroundColor(),
     fast: true,
-    embedFonts: false,
+    embedFonts: true,
     outerShadows: false,
   });
 };
