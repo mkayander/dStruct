@@ -16,9 +16,11 @@ type RelativeRect = {
   height: number;
 };
 
+type ResolvedThanosOptions = Required<Omit<ThanosDisintegrateOptions, "origin">>;
+
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): Required<ThanosDisintegrateOptions> => ({
+): ResolvedThanosOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
@@ -47,7 +49,7 @@ const createParticle = (
   x: number,
   y: number,
   color: RgbaColor,
-  options: Required<ThanosDisintegrateOptions>,
+  options: ResolvedThanosOptions,
 ): ThanosParticle => ({
   x,
   y,
@@ -65,7 +67,7 @@ const addParticlesForRect = (
   particles: ThanosParticle[],
   rect: RelativeRect,
   color: RgbaColor,
-  options: Required<ThanosDisintegrateOptions>,
+  options: ResolvedThanosOptions,
 ): void => {
   const { particleStep } = options;
   const startX = Math.max(0, Math.floor(rect.left));

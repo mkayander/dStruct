@@ -4,9 +4,11 @@ import type {
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
 
+type ResolvedThanosOptions = Required<Omit<ThanosDisintegrateOptions, "origin">>;
+
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): Required<ThanosDisintegrateOptions> => ({
+): ResolvedThanosOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
