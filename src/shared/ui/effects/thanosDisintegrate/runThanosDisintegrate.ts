@@ -83,14 +83,13 @@ export const runThanosDisintegrate = async (
     return;
   }
 
-  const rect = element.getBoundingClientRect();
-  const width = Math.round(rect.width);
-  const height = Math.round(rect.height);
   const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
   if (!context) {
     return;
   }
 
+  const width = sourceCanvas.width;
+  const height = sourceCanvas.height;
   const imageData = context.getImageData(0, 0, width, height);
   const particles = createParticlesFromImageData(imageData, resolvedOptions);
   if (particles.length === 0) {
@@ -144,9 +143,11 @@ export const runThanosDisintegrate = async (
 
       requestAnimationFrame(animate);
     });
+  } catch (error) {
+    restoreElement();
+    throw error;
   } finally {
     unsubscribeViewportChanges();
     overlayCanvas.remove();
-    restoreElement();
   }
 };

@@ -10,14 +10,24 @@ type CookieConsentBannerWithDismissEffectProps = {
   onAcceptAll: () => void;
   onRejectNonEssential: () => void;
   onClose: () => void;
+  onBeginDismiss: () => void;
+  onCompleteDismiss: () => void;
 };
 
 /**
- * Presentation wrapper: plays the Thanos disintegrate effect before consent actions run.
+ * Presentation wrapper: persists consent immediately, then plays the Thanos
+ * disintegrate effect while the banner stays mounted for the animation.
  */
 export const CookieConsentBannerWithDismissEffect: React.FC<
   CookieConsentBannerWithDismissEffectProps
-> = ({ isSettingsView, onAcceptAll, onRejectNonEssential, onClose }) => {
+> = ({
+  isSettingsView,
+  onAcceptAll,
+  onRejectNonEssential,
+  onClose,
+  onBeginDismiss,
+  onCompleteDismiss,
+}) => {
   const { targetRef, disintegrate } = useThanosDisintegrate();
   const isDismissingRef = useRef(false);
 
@@ -28,16 +38,19 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
       }
 
       isDismissingRef.current = true;
+      onBeginDismiss();
+      action();
+
       void (async () => {
         try {
           await disintegrate();
         } finally {
-          action();
+          onCompleteDismiss();
           isDismissingRef.current = false;
         }
       })();
     },
-    [disintegrate],
+    [disintegrate, onBeginDismiss, onCompleteDismiss],
   );
 
   return (
