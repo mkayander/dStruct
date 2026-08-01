@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
-const createParticle = (releaseFrame: number): ThanosParticle => ({
+const createParticle = (releaseTime: number): ThanosParticle => ({
   x: 0,
   y: 0,
   originX: 0,
@@ -14,15 +14,19 @@ const createParticle = (releaseFrame: number): ThanosParticle => ({
   alpha: 1,
   baseAlpha: 1,
   size: 2,
-  decay: 0.02,
-  releaseFrame,
+  rotation: 0,
+  rotationSpeed: 0,
+  drag: 0.96,
+  fadeStart: 0.5,
+  fadeDuration: 0.4,
+  releaseTime,
 });
 
 describe("getWaveDisintegrationProgress", () => {
   it("ramps from 0 before the wave to 1 after all particles release", () => {
-    const particles = [createParticle(0), createParticle(10)];
+    const particles = [createParticle(0), createParticle(0.5)];
 
     expect(getWaveDisintegrationProgress(particles, 0)).toBe(0);
-    expect(getWaveDisintegrationProgress(particles, 20)).toBe(1);
+    expect(getWaveDisintegrationProgress(particles, 1)).toBe(1);
   });
 });

@@ -1,8 +1,8 @@
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
+import { createThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/createThanosParticle";
 import {
   parseCssColor,
   type RgbaColor,
-  rgbaToCss,
 } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
 import { sampleColorAtLocalPoint } from "#/shared/ui/effects/thanosDisintegrate/sampleColorAtLocalPoint";
 import type {
@@ -19,26 +19,6 @@ const resolveOptions = (
 ): ResolvedThanosOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
-});
-
-const createParticle = (
-  x: number,
-  y: number,
-  color: RgbaColor,
-  options: ResolvedThanosOptions,
-): ThanosParticle => ({
-  x,
-  y,
-  originX: x,
-  originY: y,
-  vx: (Math.random() - 0.35) * options.maxVelocity + options.windX,
-  vy: (Math.random() - 0.55) * options.maxVelocity + options.windY,
-  color: rgbaToCss(color),
-  alpha: color.alpha,
-  baseAlpha: color.alpha,
-  size: options.particleSize + Math.random(),
-  decay: 0.012 + Math.random() * 0.02,
-  releaseFrame: 0,
 });
 
 /** Builds particles from live DOM colors when raster capture is empty (e.g. glass blur). */
@@ -70,9 +50,19 @@ export const createFallbackParticlesFromElement = (
     for (let x = 0; x < width; x += particleStep) {
       const sampleX = x + particleStep / 2;
       const sampleY = y + particleStep / 2;
-      const color =
+      const color: RgbaColor =
         sampleColorAtLocalPoint(element, sampleX, sampleY) ?? defaultColor;
-      particles.push(createParticle(x, y, color, resolvedOptions));
+      particles.push(
+        createThanosParticle({
+          x,
+          y,
+          color: `rgb(${color.red}, ${color.green}, ${color.blue})`,
+          alpha: color.alpha,
+          surfaceWidth: width,
+          surfaceHeight: height,
+          options: resolvedOptions,
+        }),
+      );
     }
   }
 

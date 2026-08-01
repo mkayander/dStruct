@@ -1,19 +1,22 @@
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
-/** Staggers particle release frames by distance from the click origin. */
+const RELEASE_JITTER_SECONDS = 0.03;
+
+/** Staggers particle release times by distance from the click origin. */
 export const applyWaveOrigin = (
   particles: ThanosParticle[],
   origin: { x: number; y: number },
-  waveSpeed: number,
+  waveSpeedPxPerSecond: number,
 ): number => {
-  let maxReleaseFrame = 0;
+  let maxReleaseTime = 0;
 
   for (const particle of particles) {
     const distance = Math.hypot(particle.x - origin.x, particle.y - origin.y);
-    const releaseFrame = Math.floor(distance / waveSpeed);
-    particle.releaseFrame = releaseFrame;
-    maxReleaseFrame = Math.max(maxReleaseFrame, releaseFrame);
+    const releaseTime =
+      distance / waveSpeedPxPerSecond + Math.random() * RELEASE_JITTER_SECONDS;
+    particle.releaseTime = releaseTime;
+    maxReleaseTime = Math.max(maxReleaseTime, releaseTime);
   }
 
-  return maxReleaseFrame;
+  return maxReleaseTime;
 };

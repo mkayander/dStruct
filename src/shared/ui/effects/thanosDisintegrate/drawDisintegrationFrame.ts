@@ -2,21 +2,34 @@ import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/type
 
 type DrawFrameOptions = {
   particleStep: number;
+  snapshotBlur: number;
 };
 
 const drawReleasedParticles = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
-  frame: number,
+  elapsedSeconds: number,
 ): void => {
   for (const particle of particles) {
-    if (frame < particle.releaseFrame || particle.alpha <= 0) {
+    if (elapsedSeconds < particle.releaseTime || particle.alpha <= 0) {
       continue;
     }
 
     context.globalAlpha = particle.alpha;
     context.fillStyle = particle.color;
-    context.fillRect(particle.x, particle.y, particle.size, particle.size);
+    context.save();
+    context.translate(
+      particle.x + particle.size / 2,
+      particle.y + particle.size / 2,
+    );
+    context.rotate(particle.rotation);
+    context.fillRect(
+      -particle.size / 2,
+      -particle.size / 2,
+      particle.size,
+      particle.size,
+    );
+    context.restore();
   }
 
   context.globalAlpha = 1;
@@ -25,10 +38,10 @@ const drawReleasedParticles = (
 const drawUnreleasedFallbackParticles = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
-  frame: number,
+  elapsedSeconds: number,
 ): void => {
   for (const particle of particles) {
-    if (frame < particle.releaseFrame) {
+    if (elapsedSeconds < particle.releaseTime) {
       context.globalAlpha = particle.baseAlpha;
       context.fillStyle = particle.color;
       context.fillRect(
@@ -46,11 +59,11 @@ const drawUnreleasedFallbackParticles = (
 const punchReleasedHolesInSnapshot = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
-  frame: number,
+  elapsedSeconds: number,
   particleStep: number,
 ): void => {
   for (const particle of particles) {
-    if (frame < particle.releaseFrame) {
+    if (elapsedSeconds < particle.releaseTime) {
       continue;
     }
 
@@ -67,7 +80,7 @@ const punchReleasedHolesInSnapshot = (
 export const drawDisintegrationFrame = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
-  frame: number,
+  elapsedSeconds: number,
   sourceCanvas: HTMLCanvasElement | null,
   displayWidth: number,
   displayHeight: number,
@@ -76,16 +89,21 @@ export const drawDisintegrationFrame = (
   context.clearRect(0, 0, displayWidth, displayHeight);
 
   if (sourceCanvas) {
+    if (options.snapshotBlur > 0) {
+      context.filter = `blur(${options.snapshotBlur}px)`;
+    }
+
     context.drawImage(sourceCanvas, 0, 0, displayWidth, displayHeight);
+    context.filter = "none";
     punchReleasedHolesInSnapshot(
       context,
       particles,
-      frame,
+      elapsedSeconds,
       options.particleStep,
     );
   } else {
-    drawUnreleasedFallbackParticles(context, particles, frame);
+    drawUnreleasedFallbackParticles(context, particles, elapsedSeconds);
   }
 
-  drawReleasedParticles(context, particles, frame);
+  drawReleasedParticles(context, particles, elapsedSeconds);
 };

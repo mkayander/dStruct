@@ -16,8 +16,12 @@ const createParticle = (
   alpha: 1,
   baseAlpha: 1,
   size: 2,
-  decay: 0.02,
-  releaseFrame: 0,
+  rotation: 0,
+  rotationSpeed: 0,
+  drag: 0.96,
+  fadeStart: 0.5,
+  fadeDuration: 0.4,
+  releaseTime: 0,
   ...overrides,
 });
 
@@ -27,16 +31,22 @@ describe("drawDisintegrationFrame", () => {
     const context = {
       clearRect: vi.fn(),
       fillRect,
+      save: vi.fn(),
+      restore: vi.fn(),
+      translate: vi.fn(),
+      rotate: vi.fn(),
       globalAlpha: 1,
+      filter: "none",
     } as unknown as CanvasRenderingContext2D;
 
     const particles = [
-      createParticle({ originX: 0, originY: 0, releaseFrame: 5 }),
-      createParticle({ originX: 3, originY: 0, releaseFrame: 0, x: 1, y: 1 }),
+      createParticle({ originX: 0, originY: 0, releaseTime: 0.5 }),
+      createParticle({ originX: 3, originY: 0, releaseTime: 0, x: 1, y: 1 }),
     ];
 
     drawDisintegrationFrame(context, particles, 0, null, 6, 6, {
       particleStep: 3,
+      snapshotBlur: 0,
     });
 
     expect(fillRect).toHaveBeenCalledWith(0, 0, 2, 2);
@@ -51,19 +61,26 @@ describe("drawDisintegrationFrame", () => {
       clearRect,
       drawImage,
       fillRect: vi.fn(),
+      save: vi.fn(),
+      restore: vi.fn(),
+      translate: vi.fn(),
+      rotate: vi.fn(),
       globalAlpha: 1,
+      filter: "none",
     } as unknown as CanvasRenderingContext2D;
 
     const particles = [
-      createParticle({ originX: 0, originY: 0, releaseFrame: 0, x: 1, y: 1 }),
-      createParticle({ originX: 3, originY: 0, releaseFrame: 5 }),
+      createParticle({ originX: 0, originY: 0, releaseTime: 0, x: 1, y: 1 }),
+      createParticle({ originX: 3, originY: 0, releaseTime: 0.5 }),
     ];
 
-    drawDisintegrationFrame(context, particles, 0, sourceCanvas, 6, 6, {
+    drawDisintegrationFrame(context, particles, 0.1, sourceCanvas, 6, 6, {
       particleStep: 3,
+      snapshotBlur: 0.6,
     });
 
     expect(drawImage).toHaveBeenCalledWith(sourceCanvas, 0, 0, 6, 6);
+    expect(context.filter).toBe("none");
     expect(clearRect).toHaveBeenCalledWith(0, 0, 3, 3);
     expect(clearRect).not.toHaveBeenCalledWith(3, 0, 3, 3);
   });

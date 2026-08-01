@@ -12,6 +12,7 @@ import {
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
 import { scaleParticleCoordinates } from "#/shared/ui/effects/thanosDisintegrate/scaleParticleCoordinates";
+import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
@@ -21,40 +22,14 @@ type ResolvedThanosOptions = Required<
   Omit<ThanosDisintegrateOptions, "origin">
 >;
 
+const MAX_DELTA_SECONDS = 0.05;
+
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
 ): ResolvedThanosOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
-
-const stepParticles = (
-  particles: ThanosParticle[],
-  frame: number,
-  options: ResolvedThanosOptions,
-): number => {
-  let visibleCount = 0;
-
-  for (const particle of particles) {
-    if (frame < particle.releaseFrame) {
-      visibleCount += 1;
-      continue;
-    }
-
-    particle.x += particle.vx;
-    particle.y += particle.vy;
-    particle.vy += options.gravity;
-    particle.vx += options.windX * 0.02;
-    particle.vy += options.windY * 0.02;
-    particle.alpha -= particle.decay;
-
-    if (particle.alpha > 0) {
-      visibleCount += 1;
-    }
-  }
-
-  return visibleCount;
-};
 
 /**
  * Plays a Thanos-style particle disintegration on a DOM surface, then resolves.
@@ -103,7 +78,7 @@ export const runThanosDisintegrate = async (
         particles = createParticlesFromImageData(imageData, resolvedOptions);
         hasReadableCapture = particles.length > 0;
       } catch {
-        // SVG foreignObject capture taints the canvas in some browsers.
+        // SnapDOM/SVG capture may still taint pixel reads in some browsers.
       }
     }
   }
@@ -126,10 +101,10 @@ export const runThanosDisintegrate = async (
   );
 
   const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
-  const waveDelayFrames = relativeOrigin
+  const maxReleaseTime = relativeOrigin
     ? applyWaveOrigin(particles, relativeOrigin, resolvedOptions.waveSpeed)
     : 0;
-  const totalMaxFrames = resolvedOptions.maxFrames + waveDelayFrames;
+  const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
 
   const overlayCanvas = document.createElement("canvas");
   overlayCanvas.width = displayWidth;
@@ -157,23 +132,45 @@ export const runThanosDisintegrate = async (
 
   try {
     await new Promise<void>((resolve) => {
-      let frame = 0;
+      let startTime: number | null = null;
+      let lastTime: number | null = null;
 
-      const animate = () => {
+      const animate = (timestamp: number) => {
+        if (startTime === null) {
+          startTime = timestamp;
+        }
+        if (lastTime === null) {
+          lastTime = timestamp;
+        }
+
+        const elapsedSeconds = (timestamp - startTime) / 1000;
+        const deltaSeconds = Math.min(
+          (timestamp - lastTime) / 1000,
+          MAX_DELTA_SECONDS,
+        );
+        lastTime = timestamp;
+
         syncOverlayPosition();
         drawDisintegrationFrame(
           overlayContext,
           particles,
-          frame,
+          elapsedSeconds,
           sourceCanvas,
           displayWidth,
           displayHeight,
-          { particleStep: resolvedOptions.particleStep },
+          {
+            particleStep: resolvedOptions.particleStep,
+            snapshotBlur: resolvedOptions.snapshotBlur,
+          },
         );
-        const visibleCount = stepParticles(particles, frame, resolvedOptions);
+        const visibleCount = stepParticles(
+          particles,
+          deltaSeconds,
+          elapsedSeconds,
+          resolvedOptions,
+        );
 
-        frame += 1;
-        if (visibleCount === 0 || frame >= totalMaxFrames) {
+        if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           element.style.opacity = "0";
           resolve();
           return;

@@ -14,18 +14,23 @@ const createParticle = (x: number, y: number): ThanosParticle => ({
   alpha: 1,
   baseAlpha: 1,
   size: 2,
-  decay: 0.02,
-  releaseFrame: 0,
+  rotation: 0,
+  rotationSpeed: 0,
+  drag: 0.96,
+  fadeStart: 0.5,
+  fadeDuration: 0.4,
+  releaseTime: 0,
 });
 
 describe("applyWaveOrigin", () => {
   it("delays particles farther from the origin", () => {
     const particles = [createParticle(0, 0), createParticle(30, 0)];
 
-    const maxReleaseFrame = applyWaveOrigin(particles, { x: 0, y: 0 }, 10);
+    const maxReleaseTime = applyWaveOrigin(particles, { x: 0, y: 0 }, 10);
 
-    expect(particles[0]?.releaseFrame).toBe(0);
-    expect(particles[1]?.releaseFrame).toBe(3);
-    expect(maxReleaseFrame).toBe(3);
+    expect(particles[0]?.releaseTime).toBeGreaterThanOrEqual(0);
+    expect(particles[0]?.releaseTime).toBeLessThan(0.05);
+    expect(particles[1]?.releaseTime).toBeGreaterThan(2.5);
+    expect(maxReleaseTime).toBe(particles[1]?.releaseTime);
   });
 });

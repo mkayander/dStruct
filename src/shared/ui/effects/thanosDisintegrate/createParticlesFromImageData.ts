@@ -1,4 +1,5 @@
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
+import { createThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/createThanosParticle";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
@@ -19,11 +20,10 @@ export const createParticlesFromImageData = (
   imageData: ImageData,
   options?: ThanosDisintegrateOptions,
 ): ThanosParticle[] => {
-  const { particleStep, particleSize, maxVelocity, windX, windY } =
-    resolveOptions(options);
-
+  const resolvedOptions = resolveOptions(options);
   const particles: ThanosParticle[] = [];
   const { data, width, height } = imageData;
+  const { particleStep } = resolvedOptions;
 
   for (let y = 0; y < height; y += particleStep) {
     for (let x = 0; x < width; x += particleStep) {
@@ -37,20 +37,17 @@ export const createParticlesFromImageData = (
       const green = data[index + 1] ?? 0;
       const blue = data[index + 2] ?? 0;
 
-      particles.push({
-        x,
-        y,
-        originX: x,
-        originY: y,
-        vx: (Math.random() - 0.35) * maxVelocity + windX,
-        vy: (Math.random() - 0.55) * maxVelocity + windY,
-        color: `rgb(${red}, ${green}, ${blue})`,
-        alpha: alphaChannel / 255,
-        baseAlpha: alphaChannel / 255,
-        size: particleSize + Math.random(),
-        decay: 0.012 + Math.random() * 0.02,
-        releaseFrame: 0,
-      });
+      particles.push(
+        createThanosParticle({
+          x,
+          y,
+          color: `rgb(${red}, ${green}, ${blue})`,
+          alpha: alphaChannel / 255,
+          surfaceWidth: width,
+          surfaceHeight: height,
+          options: resolvedOptions,
+        }),
+      );
     }
   }
 

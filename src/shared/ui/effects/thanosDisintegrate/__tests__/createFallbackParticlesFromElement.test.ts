@@ -61,6 +61,7 @@ describe("createFallbackParticlesFromElement", () => {
       maxVelocity: 1,
       windX: 0,
       windY: 0,
+      gravity: 0,
     });
 
     expect(particles).toHaveLength(3);

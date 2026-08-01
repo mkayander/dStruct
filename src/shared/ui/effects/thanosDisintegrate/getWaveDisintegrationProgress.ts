@@ -1,11 +1,11 @@
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
-const FADE_FRAMES_AFTER_RELEASE = 8;
+const FADE_SECONDS_AFTER_RELEASE = 0.12;
 
 /** Returns 0–1 progress of how much of the surface has been consumed by the wave. */
 export const getWaveDisintegrationProgress = (
   particles: ThanosParticle[],
-  frame: number,
+  elapsedSeconds: number,
 ): number => {
   if (particles.length === 0) {
     return 1;
@@ -16,14 +16,14 @@ export const getWaveDisintegrationProgress = (
 
   for (const particle of particles) {
     totalWeight += particle.baseAlpha;
-    if (frame < particle.releaseFrame) {
+    if (elapsedSeconds < particle.releaseTime) {
       continue;
     }
 
-    const framesSinceRelease = frame - particle.releaseFrame;
+    const secondsSinceRelease = elapsedSeconds - particle.releaseTime;
     const releaseProgress = Math.min(
       1,
-      framesSinceRelease / FADE_FRAMES_AFTER_RELEASE,
+      secondsSinceRelease / FADE_SECONDS_AFTER_RELEASE,
     );
     releasedWeight += particle.baseAlpha * releaseProgress;
   }

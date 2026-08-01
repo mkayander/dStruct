@@ -3,11 +3,12 @@ import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisint
 export const THANOS_DISINTEGRATE_DEFAULTS = {
   particleStep: 3,
   particleSize: 2,
-  maxVelocity: 2.4,
-  windX: 0.35,
-  windY: -0.25,
-  gravity: 0.04,
-  maxFrames: 75,
+  maxVelocity: 140,
+  windX: 20,
+  windY: -14,
+  gravity: 180,
+  maxDuration: 1.35,
   zIndex: 9999,
-  waveSpeed: 10,
+  waveSpeed: 520,
+  snapshotBlur: 0.6,
 } as const satisfies Required<Omit<ThanosDisintegrateOptions, "origin">>;

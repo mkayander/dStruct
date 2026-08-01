@@ -1,6 +1,14 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
+import { captureElementViaSnapdom } from "#/shared/ui/effects/thanosDisintegrate/captureElementViaSnapdom";
+
+vi.mock(
+  "#/shared/ui/effects/thanosDisintegrate/captureElementViaSnapdom",
+  () => ({
+    captureElementViaSnapdom: vi.fn(),
+  }),
+);
 
 describe("captureElementToCanvas", () => {
   const originalImage = globalThis.Image;
@@ -15,7 +23,21 @@ describe("captureElementToCanvas", () => {
     document.body.innerHTML = "";
   });
 
-  it("returns a sized canvas when SVG rasterization succeeds", async () => {
+  it("prefers SnapDOM when capture succeeds", async () => {
+    const element = document.createElement("div");
+    const snapdomCanvas = document.createElement("canvas");
+    snapdomCanvas.width = 160;
+    snapdomCanvas.height = 64;
+
+    vi.mocked(captureElementViaSnapdom).mockResolvedValue(snapdomCanvas);
+
+    const canvas = await captureElementToCanvas(element);
+
+    expect(canvas).toBe(snapdomCanvas);
+    expect(captureElementViaSnapdom).toHaveBeenCalledWith(element);
+  });
+
+  it("falls back to SVG rasterization when SnapDOM fails", async () => {
     const element = document.createElement("div");
     element.style.backgroundColor = "rgba(255, 255, 255, 0.55)";
     element.getBoundingClientRect = () =>
@@ -31,6 +53,10 @@ describe("captureElementToCanvas", () => {
         toJSON: () => ({}),
       }) as DOMRect;
     document.body.appendChild(element);
+
+    vi.mocked(captureElementViaSnapdom).mockRejectedValue(
+      new Error("snapdom unavailable"),
+    );
 
     URL.createObjectURL = vi.fn(() => "blob:mock");
     URL.revokeObjectURL = vi.fn();
@@ -64,7 +90,7 @@ describe("captureElementToCanvas", () => {
     expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock");
   });
 
-  it("throws when rasterization fails", async () => {
+  it("throws when both capture strategies fail", async () => {
     const element = document.createElement("div");
     element.getBoundingClientRect = () =>
       ({
@@ -78,6 +104,10 @@ describe("captureElementToCanvas", () => {
         y: 0,
         toJSON: () => ({}),
       }) as DOMRect;
+
+    vi.mocked(captureElementViaSnapdom).mockRejectedValue(
+      new Error("snapdom unavailable"),
+    );
 
     URL.createObjectURL = vi.fn(() => "blob:mock");
     URL.revokeObjectURL = vi.fn();
