@@ -1,62 +1,79 @@
 ---
 name: deep-code-review
-description: Deep code review that applies important and medium fixes plus dead-code removal in the same session
+description: Reviews code in scope and applies important/medium fixes plus dead-code and duplication removal in the same session. Use when the user requests a deep code review, PR review, /deep-code-review, code audit, or asks to fix review findings immediately — not report-only.
 disable-model-invocation: true
 ---
 
 # Deep code review
 
-Review the code in scope (the current branch, PR diff, or files the user pointed at) and **apply fixes in this same session**. A review that only lists issues without implementing fixes is incomplete.
+**Fix in place.** Review scope, implement fixes, verify, then summarize. A report without code changes is incomplete when important/medium/dead-code issues were in scope.
 
-## Non-negotiable: fix immediately
+## Workflow
 
-**Always implement in code before you finish** — do not defer to a follow-up unless the item is explicitly low-priority (see below):
+Copy and track progress:
 
-1. **Dead code** — unused exports, functions, types, constants, files, imports, commented-out blocks, unreachable branches, stale helpers left after a refactor.
-2. **Improper duplication** — copy-pasted logic that should be shared; parallel implementations of the same behavior; magic numbers/strings repeated across files; test helpers duplicated instead of extracted when used in 2+ places in the same feature.
-3. **Important issues** — bugs, incorrect behavior, security flaws, race conditions, memory/event leaks, silent failure paths, broken error handling, type-safety holes (`as any`, unchecked `!`), data-loss risks.
-4. **Medium issues** — misleading names, poor module boundaries, over-engineered abstractions, missing validation on failure paths, tests that only assert implementation details, redundant double work (e.g. resolving options twice), constants scattered instead of centralized.
+```
+Review progress:
+- [ ] Read scope (branch diff, PR, or pointed files) and direct callers/tests
+- [ ] Classify each finding: important / medium / low
+- [ ] Fix all important, medium, dead code, and improper duplication
+- [ ] Run targeted tests and lint on touched files
+- [ ] Commit and push if on a PR branch
+- [ ] Reply using the output template below
+```
 
-If you find dead or duplicated code, **delete or consolidate it in this turn**. Do not leave it “for later” and do not only mention it in the summary.
+**Scope** = current branch changes, open PR diff, or files the user named. Do not expand scope unless needed to fix a finding safely.
 
-## Severity guide
+## Fix immediately (non-negotiable)
 
-| Severity | Examples | Action |
-|----------|----------|--------|
-| **Important** | Bugs, security, leaks, races, silent failures | **Fix now** + add/regression test when behavior is non-trivial |
-| **Medium** | DRY violations, misnamed modules, dead exports, weak structure, redundant logic | **Fix now** |
-| **Low** | Subjective style, micro-naming, optional refactors with no clear win | Report only; skip unless trivial (<5 min) |
+Implement before finishing — never defer these to a follow-up:
 
-When unsure between medium and low, **treat it as medium and fix it**.
+| Category | Fix now |
+|----------|---------|
+| **Dead code** | Unused exports, functions, types, files, imports, unreachable branches, stale post-refactor helpers |
+| **Duplication** | Copy-pasted logic, parallel implementations, repeated magic values, duplicate test helpers (extract when used 2+ times in one feature) |
+| **Important** | Bugs, security flaws, races, leaks, silent failures, broken error handling, `as any` / unchecked `!`, data-loss risks |
+| **Medium** | Misleading names, weak module boundaries, over-engineering, redundant work, scattered constants, tests that only guard implementation details |
 
-## Review checklist
+**Low** (subjective style, optional refactors): report only, unless trivial (<5 min). When unsure between medium and low → **medium, fix it**.
 
-Evaluate against:
+## Review focus
 
-- **DRY, KISS, SOLID** — prefer the smallest correct change; match existing repo patterns (see `.cursorrules`, `.cursor/rules/*.mdc`, `AGENTS.md`).
-- **Security** — auth boundaries, input validation, secrets, injection, unsafe HTML/DOM.
-- **Reliability** — no silent failures; error paths must fail visibly (throw, `TRPCError`, snackbar, error boundary — match the feature’s established pattern).
-- **Concurrency** — race conditions, stale closures, missing cleanup in effects/subscriptions/timers/workers.
-- **Resources** — event listeners, intervals, observers, workers, object URLs revoked on unmount/teardown.
-- **Types** — no `as any` / unchecked `!`; fix root cause instead of suppressing.
-- **Tests** — add or update tests when fixing behavior or preventing regression; skip tests that only duplicate TypeScript or constants.
+- **Patterns** — match `.cursorrules`, `.cursor/rules/*.mdc`, `AGENTS.md`; smallest correct diff (DRY, KISS)
+- **Security** — auth boundaries, input validation, secrets, injection, unsafe HTML/DOM
+- **Reliability** — failure paths fail visibly (`TRPCError`, snackbar, throw, error boundary — match the feature)
+- **Concurrency & resources** — stale closures, missing effect/subscription/timer/worker cleanup
+- **Tests** — add regression tests for non-trivial behavior fixes; skip tests that duplicate TypeScript or constants
 
-## Required workflow
+## Verification
 
-1. **Read** the changed files and their direct callers/tests.
-2. **Identify** issues; classify as important / medium / low.
-3. **Fix** all important and medium issues plus all dead/duplicated code **before** writing the final summary.
-4. **Run** targeted tests and lint on touched files (`pnpm test`, `pnpm lint` as appropriate).
-5. **Commit and push** if working on a branch with an open PR.
+- `pnpm exec vitest run <touched-test-paths>` or `pnpm test` when scope is wide
+- `pnpm lint` or ESLint on touched files
+- Do **not** ship a report-only response when fixes were possible in scope
 
-Do **not** end with only a bullet list of recommendations when important/medium/dead-code fixes were possible in scope.
+## Output template
 
-## Output format
+```markdown
+## Fixes applied
+- [Dead code / dedup / behavior] — what changed and why
 
-Structure the final response as:
+## Left unchanged
+- [Low-priority or out-of-scope item] — brief rationale
 
-1. **Fixes applied** — what you changed and why (group dead-code removal, deduplication, and behavioral fixes).
-2. **Left unchanged** — only low-priority or out-of-scope items, with brief rationale.
-3. **Verification** — tests/lint run and results.
+## Verification
+- Tests: …
+- Lint: …
+```
 
-Keep prose concise; prefer code citations for non-obvious changes.
+Use code citations for non-obvious changes. Keep prose concise.
+
+## Example
+
+**Finding:** `windTurbulence.ts` exports Perlin noise used only for a tiny drift term on top of sine flutter.
+
+**Action:** Delete file; replace with `sparkFlutter.ts`; centralize constants in `sparkParticlePhysics.ts`; update tests.
+
+**Response excerpt:**
+> **Fixes applied** — Removed 80-line Perlin module (dead weight). Consolidated spark constants and motion profiles. Fixed double-resolve in padding helper.
+>
+> **Verification** — 64 thanos tests pass; ESLint clean on touched files.
