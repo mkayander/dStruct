@@ -5,10 +5,11 @@ export const drawDisintegrationFrame = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
   elapsedSeconds: number,
-  displayWidth: number,
-  displayHeight: number,
+  canvasWidth: number,
+  canvasHeight: number,
+  originOffset = 0,
 ): void => {
-  context.clearRect(0, 0, displayWidth, displayHeight);
+  context.clearRect(0, 0, canvasWidth, canvasHeight);
 
   for (const particle of particles) {
     if (elapsedSeconds < particle.releaseTime || particle.alpha <= 0) {
@@ -19,8 +20,8 @@ export const drawDisintegrationFrame = (
     context.fillStyle = particle.color;
     context.save();
     context.translate(
-      particle.x + particle.size / 2,
-      particle.y + particle.size / 2,
+      particle.x + originOffset + particle.size / 2,
+      particle.y + originOffset + particle.size / 2,
     );
     context.rotate(particle.rotation);
     context.fillRect(

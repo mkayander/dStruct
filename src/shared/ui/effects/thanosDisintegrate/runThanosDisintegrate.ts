@@ -4,6 +4,7 @@ import { buildThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/build
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
+import { getParticleCanvasPadding } from "#/shared/ui/effects/thanosDisintegrate/getParticleCanvasPadding";
 import {
   prepareElementForDisintegrate,
   subscribeToViewportChanges,
@@ -51,6 +52,7 @@ const syncDualLayerWave = (
   displayWidth: number,
   displayHeight: number,
   resolvedOptions: ResolvedThanosOptions,
+  particlePadding: number,
 ): void => {
   if (relativeOrigin) {
     applyWaveMaskToElement(
@@ -61,13 +63,16 @@ const syncDualLayerWave = (
       displayWidth,
       displayHeight,
     );
+    const canvasWidth = displayWidth + particlePadding * 2;
+    const canvasHeight = displayHeight + particlePadding * 2;
     applyParticleWaveMaskToCanvas(
       particleCanvas,
       relativeOrigin,
       elapsedSeconds,
       resolvedOptions.waveSpeed,
-      displayWidth,
-      displayHeight,
+      canvasWidth,
+      canvasHeight,
+      particlePadding,
     );
     return;
   }
@@ -120,11 +125,14 @@ export const runThanosDisintegrate = async (
     ? applyWaveOrigin(particles, relativeOrigin, resolvedOptions.waveSpeed)
     : 0;
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
+  const particlePadding = getParticleCanvasPadding(resolvedOptions);
+  const canvasWidth = displayWidth + particlePadding * 2;
+  const canvasHeight = displayHeight + particlePadding * 2;
   const particleZIndex = Math.max(1, resolvedOptions.zIndex - 5);
 
   const overlayCanvas = document.createElement("canvas");
-  overlayCanvas.width = displayWidth;
-  overlayCanvas.height = displayHeight;
+  overlayCanvas.width = canvasWidth;
+  overlayCanvas.height = canvasHeight;
   overlayCanvas.style.position = "fixed";
   overlayCanvas.style.pointerEvents = "none";
   overlayCanvas.style.zIndex = String(particleZIndex);
@@ -135,11 +143,11 @@ export const runThanosDisintegrate = async (
   }
 
   const restoreElement = prepareElementForDisintegrate(element);
-  syncFixedOverlayToElement(overlayCanvas, element);
+  syncFixedOverlayToElement(overlayCanvas, element, particlePadding);
   document.body.appendChild(overlayCanvas);
 
   const syncOverlayPosition = () => {
-    syncFixedOverlayToElement(overlayCanvas, element);
+    syncFixedOverlayToElement(overlayCanvas, element, particlePadding);
   };
   const unsubscribeViewportChanges = subscribeToViewportChanges(
     element,
@@ -178,13 +186,15 @@ export const runThanosDisintegrate = async (
           displayWidth,
           displayHeight,
           resolvedOptions,
+          particlePadding,
         );
         drawDisintegrationFrame(
           overlayContext,
           particles,
           elapsedSeconds,
-          displayWidth,
-          displayHeight,
+          canvasWidth,
+          canvasHeight,
+          particlePadding,
         );
         const visibleCount = stepParticles(
           particles,

@@ -23,12 +23,13 @@ export const prepareElementForDisintegrate = (
 export const syncFixedOverlayToElement = (
   overlay: HTMLElement,
   element: HTMLElement,
+  padding = 0,
 ): DOMRect => {
   const rect = element.getBoundingClientRect();
-  overlay.style.left = `${rect.left}px`;
-  overlay.style.top = `${rect.top}px`;
-  overlay.style.width = `${rect.width}px`;
-  overlay.style.height = `${rect.height}px`;
+  overlay.style.left = `${rect.left - padding}px`;
+  overlay.style.top = `${rect.top - padding}px`;
+  overlay.style.width = `${rect.width + padding * 2}px`;
+  overlay.style.height = `${rect.height + padding * 2}px`;
   return rect;
 };
 

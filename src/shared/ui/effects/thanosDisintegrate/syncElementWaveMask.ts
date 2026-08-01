@@ -62,12 +62,16 @@ export const applyParticleWaveMaskToCanvas = (
   origin: { x: number; y: number },
   elapsedSeconds: number,
   waveSpeedPxPerSecond: number,
-  displayWidth: number,
-  displayHeight: number,
+  canvasWidth: number,
+  canvasHeight: number,
+  originOffset = 0,
 ): void => {
   const radii = getWaveMaskRadii(elapsedSeconds, waveSpeedPxPerSecond);
-  const mask = createParticleWaveMask(origin, radii);
-  const maskSize = `${displayWidth}px ${displayHeight}px`;
+  const mask = createParticleWaveMask(
+    { x: origin.x + originOffset, y: origin.y + originOffset },
+    radii,
+  );
+  const maskSize = `${canvasWidth}px ${canvasHeight}px`;
   applyMaskStyles(canvas, mask, maskSize);
 };
 

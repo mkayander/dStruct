@@ -49,6 +49,24 @@ describe("syncElementWaveMask", () => {
     expect(canvas.style.maskSize).toBe("120px 60px");
   });
 
+  it("offsets the particle mask origin when the canvas has bleed padding", () => {
+    const canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
+
+    applyParticleWaveMaskToCanvas(
+      canvas,
+      { x: 10, y: 10 },
+      0.25,
+      520,
+      160,
+      100,
+      20,
+    );
+
+    expect(canvas.style.maskImage).toContain("30px 30px");
+    expect(canvas.style.maskSize).toBe("160px 100px");
+  });
+
   it("clears mask styles on cleanup", () => {
     const element = document.createElement("div");
     const canvas = document.createElement("canvas");

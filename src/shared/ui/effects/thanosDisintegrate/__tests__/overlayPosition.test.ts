@@ -53,6 +53,32 @@ describe("overlayPosition", () => {
     expect(overlay.style.height).toBe("120px");
   });
 
+  it("expands the overlay when particle bleed padding is provided", () => {
+    const element = document.createElement("div");
+    const overlay = document.createElement("canvas");
+
+    document.body.appendChild(element);
+    element.getBoundingClientRect = () =>
+      ({
+        left: 24,
+        top: 48,
+        width: 320,
+        height: 120,
+        right: 344,
+        bottom: 168,
+        x: 24,
+        y: 48,
+        toJSON: () => ({}),
+      }) as DOMRect;
+
+    syncFixedOverlayToElement(overlay, element, 40);
+
+    expect(overlay.style.left).toBe("-16px");
+    expect(overlay.style.top).toBe("8px");
+    expect(overlay.style.width).toBe("400px");
+    expect(overlay.style.height).toBe("200px");
+  });
+
   it("restores pointer events and opacity after disintegrate cleanup", () => {
     const element = document.createElement("div");
     element.style.pointerEvents = "auto";

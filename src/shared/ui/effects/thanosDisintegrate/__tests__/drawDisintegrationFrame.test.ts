@@ -66,4 +66,23 @@ describe("drawDisintegrationFrame", () => {
 
     expect(fillRect).toHaveBeenCalled();
   });
+
+  it("offsets drawing when the canvas has bleed padding", () => {
+    const translate = vi.fn();
+    const context = {
+      clearRect: vi.fn(),
+      fillRect: vi.fn(),
+      save: vi.fn(),
+      restore: vi.fn(),
+      translate,
+      rotate: vi.fn(),
+      globalAlpha: 1,
+    } as unknown as CanvasRenderingContext2D;
+
+    const particles = [createParticle({ releaseTime: 0, x: 4, y: 6, size: 2 })];
+
+    drawDisintegrationFrame(context, particles, 0.1, 20, 20, 8);
+
+    expect(translate).toHaveBeenCalledWith(4 + 8 + 1, 6 + 8 + 1);
+  });
 });
