@@ -1,29 +1,25 @@
+import { createStringStorage } from "#/shared/browser-storage";
+
 export const PLAYGROUND_BASE_PATH = "/playground";
 
-const LAST_PLAYGROUND_PATH_KEY = "lastPlaygroundPath";
+const lastPlaygroundPathStorage = createStringStorage({
+  key: "lastPlaygroundPath",
+});
 
 const getProjectSlug = (path: string): string | undefined => path.split("/")[2];
-
-const runOnClient = <T>(fn: () => T): T | null => {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return fn();
-};
 
 /**
  * Returns the last playground path from localStorage, or null on SSR / when not set.
  */
 export const getLastPlaygroundPath = (): string | null =>
-  runOnClient(() => localStorage.getItem(LAST_PLAYGROUND_PATH_KEY));
+  lastPlaygroundPathStorage.get();
 
-export const setLastPlaygroundPath = (path: string) => {
-  runOnClient(() => localStorage.setItem(LAST_PLAYGROUND_PATH_KEY, path));
+export const setLastPlaygroundPath = (path: string): void => {
+  lastPlaygroundPathStorage.set(path);
 };
 
-export const removeLastPlaygroundPath = () => {
-  runOnClient(() => localStorage.removeItem(LAST_PLAYGROUND_PATH_KEY));
+export const removeLastPlaygroundPath = (): void => {
+  lastPlaygroundPathStorage.remove();
 };
 
 /**
