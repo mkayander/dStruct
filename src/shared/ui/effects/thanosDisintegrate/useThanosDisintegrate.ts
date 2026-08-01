@@ -4,6 +4,7 @@ import { prewarmChunkMaskWorker } from "#/shared/ui/effects/thanosDisintegrate/b
 import { runThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
 import type { RunThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
 import type { ThanosCaptureSnapshot } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
+import { ThanosDisintegrateError } from "#/shared/ui/effects/thanosDisintegrate/thanosDisintegrateError";
 import { warmThanosCapture } from "#/shared/ui/effects/thanosDisintegrate/warmThanosCapture";
 
 type UseThanosDisintegrateResult = {
@@ -86,7 +87,10 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
 
       const element = elementRef.current;
       if (!element) {
-        return;
+        throw new ThanosDisintegrateError(
+          "no_target",
+          "Disintegrate target is not mounted.",
+        );
       }
 
       isAnimatingRef.current = true;

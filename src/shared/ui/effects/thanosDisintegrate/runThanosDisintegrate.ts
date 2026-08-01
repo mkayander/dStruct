@@ -36,6 +36,7 @@ import {
   isThanosCaptureSnapshotValid,
   type ThanosCaptureSnapshot,
 } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
+import { ThanosDisintegrateError } from "#/shared/ui/effects/thanosDisintegrate/thanosDisintegrateError";
 import type {
   ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
@@ -47,6 +48,21 @@ const MAX_DELTA_SECONDS = 0.05;
 export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
   /** Pre-built capture from idle warm-up; avoids blocking SnapDOM on dismiss. */
   captureSnapshot?: ThanosCaptureSnapshot | null;
+};
+
+const applyOpacityCrossfade = (
+  element: HTMLElement,
+  particleCanvas: HTMLCanvasElement,
+  particles: ThanosParticle[],
+  elapsedSeconds: number,
+): void => {
+  const disintegrationProgress = getWaveDisintegrationProgress(
+    particles,
+    elapsedSeconds,
+  );
+  const remainingOpacity = Math.max(0, 1 - disintegrationProgress);
+  element.style.opacity = String(remainingOpacity);
+  particleCanvas.style.opacity = String(disintegrationProgress);
 };
 
 const syncDualLayerWave = (
@@ -61,13 +77,19 @@ const syncDualLayerWave = (
   particlePadding: number,
   chunkMaskSequence: ChunkMaskSequence | null,
 ): void => {
-  if (resolvedOptions.maskMode === "chunks" && chunkMaskSequence) {
-    applyChunkMaskFrame(
-      element,
-      particleCanvas,
-      chunkMaskSequence,
-      elapsedSeconds,
-    );
+  if (resolvedOptions.maskMode === "chunks") {
+    if (chunkMaskSequence) {
+      applyChunkMaskFrame(
+        element,
+        particleCanvas,
+        chunkMaskSequence,
+        elapsedSeconds,
+      );
+      return;
+    }
+
+    // Chunk masks are still building — opacity crossfade avoids radial→chunk pop.
+    applyOpacityCrossfade(element, particleCanvas, particles, elapsedSeconds);
     return;
   }
 
@@ -94,13 +116,7 @@ const syncDualLayerWave = (
     return;
   }
 
-  const disintegrationProgress = getWaveDisintegrationProgress(
-    particles,
-    elapsedSeconds,
-  );
-  const remainingOpacity = Math.max(0, 1 - disintegrationProgress);
-  element.style.opacity = String(remainingOpacity);
-  particleCanvas.style.opacity = String(disintegrationProgress);
+  applyOpacityCrossfade(element, particleCanvas, particles, elapsedSeconds);
 };
 
 /**
@@ -119,7 +135,10 @@ export const runThanosDisintegrate = async (
   const resolvedOptions = resolveThanosDisintegrateOptions(disintegrateOptions);
   const initialRect = element.getBoundingClientRect();
   if (initialRect.width <= 0 || initialRect.height <= 0) {
-    return;
+    throw new ThanosDisintegrateError(
+      "zero_size_surface",
+      "Cannot disintegrate an element with zero width or height.",
+    );
   }
 
   const snapshot =
@@ -132,7 +151,10 @@ export const runThanosDisintegrate = async (
 
   const particles = cloneThanosParticles(snapshot.particles);
   if (particles.length === 0) {
-    return;
+    throw new ThanosDisintegrateError(
+      "no_particles",
+      "Cannot disintegrate a surface with no sample particles.",
+    );
   }
 
   const { displayWidth, displayHeight, sourceCanvas } = snapshot;
@@ -202,7 +224,10 @@ export const runThanosDisintegrate = async (
   if (!overlayContext) {
     isAnimationActive = false;
     chunkMaskRef.sequence?.revoke();
-    return;
+    throw new ThanosDisintegrateError(
+      "canvas_unavailable",
+      "2D canvas context is unavailable for the particle overlay.",
+    );
   }
 
   const restoreElement = prepareElementForDisintegrate(element);

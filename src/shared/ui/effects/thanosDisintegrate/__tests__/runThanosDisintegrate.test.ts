@@ -21,6 +21,8 @@ const { buildChunkMaskSequenceAsync } =
   await import("#/shared/ui/effects/thanosDisintegrate/buildChunkMaskSequenceAsync");
 const { runThanosDisintegrate } =
   await import("#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate");
+const { ThanosDisintegrateError } =
+  await import("#/shared/ui/effects/thanosDisintegrate/thanosDisintegrateError");
 
 const createParticle = () => ({
   x: 0,
@@ -104,6 +106,23 @@ describe("runThanosDisintegrate", () => {
     });
   });
 
+  it("throws when capture produces no particles", async () => {
+    vi.mocked(buildChunkMaskSequenceAsync).mockResolvedValue(null);
+    vi.mocked(buildThanosCapture).mockResolvedValue({
+      sourceCanvas: null,
+      particles: [],
+      displayWidth: 120,
+      displayHeight: 48,
+    });
+    const element = createElement();
+
+    await expect(
+      runThanosDisintegrate(element, {
+        origin: { x: 60, y: 24 },
+      }),
+    ).rejects.toBeInstanceOf(ThanosDisintegrateError);
+  });
+
   it("falls back to radial masks when chunk mask generation is unavailable", async () => {
     vi.mocked(buildChunkMaskSequenceAsync).mockResolvedValue(null);
     const element = createElement();
@@ -123,6 +142,46 @@ describe("runThanosDisintegrate", () => {
     ).resolves.toBeUndefined();
 
     expect(buildChunkMaskSequenceAsync).toHaveBeenCalled();
+  });
+
+  it("does not apply radial masks while chunk masks are building", async () => {
+    const syncElementWaveMask =
+      await import("#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask");
+    const applyWaveMaskSpy = vi.spyOn(
+      syncElementWaveMask,
+      "applyWaveMaskToElement",
+    );
+
+    vi.mocked(buildChunkMaskSequenceAsync).mockReturnValue(
+      new Promise(() => {}),
+    );
+
+    const element = createElement();
+    const snapshot = {
+      sourceCanvas: null,
+      particles: [createParticle()],
+      displayWidth: 120,
+      displayHeight: 48,
+    };
+
+    const animation = runThanosDisintegrate(element, {
+      captureSnapshot: snapshot,
+      origin: { x: 60, y: 24 },
+      maskMode: "chunks",
+      maxDuration: 0.2,
+    });
+
+    for (let frameIndex = 0; frameIndex < 3; frameIndex += 1) {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => {
+          resolve();
+        });
+      });
+    }
+
+    expect(applyWaveMaskSpy).not.toHaveBeenCalled();
+    await animation;
+    applyWaveMaskSpy.mockRestore();
   });
 
   it("starts animating before chunk masks finish building", async () => {

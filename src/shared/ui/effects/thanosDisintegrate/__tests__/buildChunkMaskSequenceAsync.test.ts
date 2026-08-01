@@ -103,12 +103,16 @@ describe("buildChunkMaskSequenceAsync", () => {
     );
   });
 
-  it("returns null when the worker reports an error instead of blocking main thread", async () => {
+  it("falls back to the main thread when the worker reports an error", async () => {
     vi.stubGlobal("Worker", MockWorker as unknown as typeof Worker);
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     const sequence = await buildChunkMaskSequenceAsync(maskInput, true);
 
-    expect(sequence).toBeNull();
+    expect(sequence).not.toBeNull();
+    expect(sequence!.modalMaskUrls.length).toBeGreaterThan(0);
     expect(workerInstances.length).toBeGreaterThan(0);
+    expect(warnSpy).toHaveBeenCalled();
+    warnSpy.mockRestore();
   });
 });

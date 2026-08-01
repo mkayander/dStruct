@@ -62,19 +62,17 @@ const buildChunkMaskSequenceYieldingOnMainThread = async (
     }),
   );
 
-/**
- * Builds chunk masks off-thread when workers are available.
- * Returns null when the worker is unavailable or fails so callers can fall back
- * to radial masks without blocking the main thread on sync PNG encoding.
- */
-export const buildChunkMaskSequenceAsync = (
-  input: ChunkMaskSequenceInput,
-  useWorker = true,
-): Promise<ChunkMaskSequence | null> => {
-  if (!useWorker) {
-    return buildChunkMaskSequenceYieldingOnMainThread(input);
+const warnChunkMaskFallback = (reason: string): void => {
+  if (process.env.NODE_ENV === "production") {
+    return;
   }
 
+  console.warn(`[thanosDisintegrate] ${reason}`);
+};
+
+const buildChunkMaskSequenceViaWorker = (
+  input: ChunkMaskSequenceInput,
+): Promise<ChunkMaskSequence | null> => {
   const worker = getChunkMaskWorker();
   if (!worker) {
     return Promise.resolve(null);
@@ -101,11 +99,17 @@ export const buildChunkMaskSequenceAsync = (
         return;
       }
 
+      warnChunkMaskFallback(
+        `Chunk mask worker failed: ${event.data.message}. Falling back to main thread.`,
+      );
       resolve(null);
     };
 
     const handleError = () => {
       cleanup();
+      warnChunkMaskFallback(
+        "Chunk mask worker crashed. Falling back to main thread.",
+      );
       resolve(null);
     };
 
@@ -118,4 +122,39 @@ export const buildChunkMaskSequenceAsync = (
     };
     worker.postMessage(request);
   });
+};
+
+/**
+ * Builds chunk masks off-thread when workers are available, otherwise on the
+ * main thread with yields between steps. Worker failures fall back to the
+ * yielding main-thread path instead of returning null.
+ */
+export const buildChunkMaskSequenceAsync = async (
+  input: ChunkMaskSequenceInput,
+  useWorker = true,
+): Promise<ChunkMaskSequence | null> => {
+  if (!useWorker) {
+    return buildChunkMaskSequenceYieldingOnMainThread(input);
+  }
+
+  const workerSequence = await buildChunkMaskSequenceViaWorker(input);
+  if (workerSequence) {
+    return workerSequence;
+  }
+
+  if (!getChunkMaskWorker()) {
+    warnChunkMaskFallback(
+      "Workers are unavailable. Building chunk masks on the main thread.",
+    );
+  }
+
+  try {
+    return await buildChunkMaskSequenceYieldingOnMainThread(input);
+  } catch (error) {
+    console.error(
+      "[thanosDisintegrate] Chunk mask build failed on the main thread.",
+      error,
+    );
+    return null;
+  }
 };

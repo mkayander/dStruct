@@ -192,9 +192,9 @@ type MaskBuildContext = {
   particleMaskSize: string;
 };
 
-const advanceMaskSteps = (
+const processReleaseBatch = (
   buildContext: MaskBuildContext,
-  captureStep: () => void,
+  batch: ChunkMaskParticle[],
 ): void => {
   const {
     modalContext,
@@ -202,10 +202,25 @@ const advanceMaskSteps = (
     particlePadding,
     particleRevealMargin,
     chunkSize,
-    releaseGroups,
-    uniqueReleaseTimes,
-    timeThresholds,
   } = buildContext;
+
+  for (const particle of batch) {
+    punchModalChunk(modalContext, particle, 0, chunkSize);
+    revealParticleChunk(
+      particleContext,
+      particle,
+      particlePadding,
+      chunkSize,
+      particleRevealMargin,
+    );
+  }
+};
+
+const advanceMaskSteps = (
+  buildContext: MaskBuildContext,
+  captureStep: () => void,
+): void => {
+  const { releaseGroups, uniqueReleaseTimes, timeThresholds } = buildContext;
 
   const thresholds =
     timeThresholds.length > 0 ? timeThresholds : [Number.NEGATIVE_INFINITY];
@@ -218,18 +233,7 @@ const advanceMaskSteps = (
     ) {
       const releaseTime = uniqueReleaseTimes[processedTimeIndex]!;
       const batch = releaseGroups.get(releaseTime) ?? [];
-
-      for (const particle of batch) {
-        punchModalChunk(modalContext, particle, 0, chunkSize);
-        revealParticleChunk(
-          particleContext,
-          particle,
-          particlePadding,
-          chunkSize,
-          particleRevealMargin,
-        );
-      }
-
+      processReleaseBatch(buildContext, batch);
       processedTimeIndex += 1;
     }
 
@@ -242,16 +246,7 @@ const advanceMaskStepsAsync = async (
   captureStep: () => Promise<void>,
   yieldBetweenSteps: boolean,
 ): Promise<void> => {
-  const {
-    modalContext,
-    particleContext,
-    particlePadding,
-    particleRevealMargin,
-    chunkSize,
-    releaseGroups,
-    uniqueReleaseTimes,
-    timeThresholds,
-  } = buildContext;
+  const { releaseGroups, uniqueReleaseTimes, timeThresholds } = buildContext;
 
   const thresholds =
     timeThresholds.length > 0 ? timeThresholds : [Number.NEGATIVE_INFINITY];
@@ -264,18 +259,7 @@ const advanceMaskStepsAsync = async (
     ) {
       const releaseTime = uniqueReleaseTimes[processedTimeIndex]!;
       const batch = releaseGroups.get(releaseTime) ?? [];
-
-      for (const particle of batch) {
-        punchModalChunk(modalContext, particle, 0, chunkSize);
-        revealParticleChunk(
-          particleContext,
-          particle,
-          particlePadding,
-          chunkSize,
-          particleRevealMargin,
-        );
-      }
-
+      processReleaseBatch(buildContext, batch);
       processedTimeIndex += 1;
     }
 
