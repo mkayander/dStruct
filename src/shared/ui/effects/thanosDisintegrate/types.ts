@@ -5,9 +5,16 @@ export type ThanosParticle = {
   vy: number;
   color: string;
   alpha: number;
+  baseAlpha: number;
   size: number;
   decay: number;
+  /** Animation frame when this particle begins to crumble. */
+  releaseFrame: number;
 };
+
+export type ThanosDisintegrateOrigin =
+  | { x: number; y: number }
+  | { clientX: number; clientY: number };
 
 export type ThanosDisintegrateOptions = {
   /** Pixel stride when sampling the captured surface. */
@@ -22,8 +29,12 @@ export type ThanosDisintegrateOptions = {
   windY?: number;
   /** Per-frame downward acceleration. */
   gravity?: number;
-  /** Hard cap on animation frames. */
+  /** Hard cap on animation frames after the wave reaches a particle. */
   maxFrames?: number;
   /** Canvas stacking order while animating. */
   zIndex?: number;
+  /** Click origin for a radial crumble wave (local or client coordinates). */
+  origin?: ThanosDisintegrateOrigin;
+  /** Distance in pixels per one frame of wave delay. */
+  waveSpeed?: number;
 };

@@ -40,8 +40,10 @@ export const createParticlesFromImageData = (
         vy: (Math.random() - 0.55) * maxVelocity + windY,
         color: `rgb(${red}, ${green}, ${blue})`,
         alpha: alphaChannel / 255,
+        baseAlpha: alphaChannel / 255,
         size: particleSize + Math.random(),
         decay: 0.012 + Math.random() * 0.02,
+        releaseFrame: 0,
       });
     }
   }

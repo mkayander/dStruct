@@ -55,8 +55,10 @@ const createParticle = (
   vy: (Math.random() - 0.55) * options.maxVelocity + options.windY,
   color: rgbaToCss(color),
   alpha: color.alpha,
+  baseAlpha: color.alpha,
   size: options.particleSize + Math.random(),
   decay: 0.012 + Math.random() * 0.02,
+  releaseFrame: 0,
 });
 
 const addParticlesForRect = (
@@ -119,6 +121,22 @@ export const createFallbackParticlesFromElement = (
   }
 
   const particles: ThanosParticle[] = [];
+  const rootStyle = window.getComputedStyle(element);
+  const rootBackground = parseCssColor(rootStyle.backgroundColor) ??
+    parseCssColor(rootStyle.color) ?? {
+      red: 180,
+      green: 180,
+      blue: 180,
+      alpha: 0.85,
+    };
+
+  addParticlesForRect(
+    particles,
+    { left: 0, top: 0, width, height },
+    rootBackground,
+    resolvedOptions,
+  );
+
   const nodes: Element[] = [element, ...element.querySelectorAll("*")];
 
   for (const node of nodes) {
@@ -145,12 +163,7 @@ export const createFallbackParticlesFromElement = (
   }
 
   const sampleColors = collectSampleColors(element);
-  const fallbackColor = sampleColors[0] ?? {
-    red: 180,
-    green: 180,
-    blue: 180,
-    alpha: 0.85,
-  };
+  const fallbackColor = sampleColors[0] ?? rootBackground;
 
   addParticlesForRect(
     particles,

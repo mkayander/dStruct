@@ -1,4 +1,5 @@
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
+import { applyWaveOrigin } from "#/shared/ui/effects/thanosDisintegrate/applyWaveOrigin";
 import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
@@ -8,25 +9,37 @@ import {
   subscribeToViewportChanges,
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
+import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
+import { scaleParticleCoordinates } from "#/shared/ui/effects/thanosDisintegrate/scaleParticleCoordinates";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
 
+type ResolvedThanosOptions = Required<
+  Omit<ThanosDisintegrateOptions, "origin">
+>;
+
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): Required<ThanosDisintegrateOptions> => ({
+): ResolvedThanosOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
 
 const stepParticles = (
   particles: ThanosParticle[],
-  options: Required<ThanosDisintegrateOptions>,
+  frame: number,
+  options: ResolvedThanosOptions,
 ): number => {
-  let aliveCount = 0;
+  let visibleCount = 0;
 
   for (const particle of particles) {
+    if (frame < particle.releaseFrame) {
+      visibleCount += 1;
+      continue;
+    }
+
     particle.x += particle.vx;
     particle.y += particle.vy;
     particle.vy += options.gravity;
@@ -35,18 +48,26 @@ const stepParticles = (
     particle.alpha -= particle.decay;
 
     if (particle.alpha > 0) {
-      aliveCount += 1;
+      visibleCount += 1;
     }
   }
 
-  return aliveCount;
+  return visibleCount;
 };
 
 const drawParticles = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
+  frame: number,
 ): void => {
   for (const particle of particles) {
+    if (frame < particle.releaseFrame) {
+      context.globalAlpha = particle.baseAlpha;
+      context.fillStyle = particle.color;
+      context.fillRect(particle.x, particle.y, particle.size, particle.size);
+      continue;
+    }
+
     if (particle.alpha <= 0) {
       continue;
     }
@@ -85,8 +106,10 @@ export const runThanosDisintegrate = async (
   }
 
   const rect = element.getBoundingClientRect();
-  const width = Math.max(1, Math.round(sourceCanvas?.width ?? rect.width));
-  const height = Math.max(1, Math.round(sourceCanvas?.height ?? rect.height));
+  const displayWidth = Math.max(1, Math.round(rect.width));
+  const displayHeight = Math.max(1, Math.round(rect.height));
+  const captureWidth = Math.max(1, sourceCanvas?.width ?? displayWidth);
+  const captureHeight = Math.max(1, sourceCanvas?.height ?? displayHeight);
 
   let particles: ThanosParticle[] = [];
 
@@ -94,7 +117,12 @@ export const runThanosDisintegrate = async (
     const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
     if (context) {
       try {
-        const imageData = context.getImageData(0, 0, width, height);
+        const imageData = context.getImageData(
+          0,
+          0,
+          captureWidth,
+          captureHeight,
+        );
         particles = createParticlesFromImageData(imageData, resolvedOptions);
       } catch {
         // SVG foreignObject capture taints the canvas in some browsers.
@@ -109,12 +137,22 @@ export const runThanosDisintegrate = async (
     return;
   }
 
+  scaleParticleCoordinates(
+    particles,
+    displayWidth / captureWidth,
+    displayHeight / captureHeight,
+  );
+
+  const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
+  const waveDelayFrames = relativeOrigin
+    ? applyWaveOrigin(particles, relativeOrigin, resolvedOptions.waveSpeed)
+    : 0;
+  const totalMaxFrames = resolvedOptions.maxFrames + waveDelayFrames;
+
   const overlayCanvas = document.createElement("canvas");
-  overlayCanvas.width = width;
-  overlayCanvas.height = height;
+  overlayCanvas.width = displayWidth;
+  overlayCanvas.height = displayHeight;
   overlayCanvas.style.position = "fixed";
-  overlayCanvas.style.width = `${width}px`;
-  overlayCanvas.style.height = `${height}px`;
   overlayCanvas.style.pointerEvents = "none";
   overlayCanvas.style.zIndex = String(Math.max(resolvedOptions.zIndex, 12_000));
 
@@ -141,12 +179,12 @@ export const runThanosDisintegrate = async (
 
       const animate = () => {
         syncOverlayPosition();
-        overlayContext.clearRect(0, 0, width, height);
-        const aliveCount = stepParticles(particles, resolvedOptions);
-        drawParticles(overlayContext, particles);
+        overlayContext.clearRect(0, 0, displayWidth, displayHeight);
+        const visibleCount = stepParticles(particles, frame, resolvedOptions);
+        drawParticles(overlayContext, particles, frame);
 
         frame += 1;
-        if (aliveCount === 0 || frame >= resolvedOptions.maxFrames) {
+        if (visibleCount === 0 || frame >= totalMaxFrames) {
           resolve();
           return;
         }

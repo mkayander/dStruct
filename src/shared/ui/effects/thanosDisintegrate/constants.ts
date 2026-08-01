@@ -7,6 +7,7 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   windX: 0.35,
   windY: -0.25,
   gravity: 0.04,
-  maxFrames: 90,
+  maxFrames: 75,
   zIndex: 9999,
-} as const satisfies Required<ThanosDisintegrateOptions>;
+  waveSpeed: 10,
+} as const satisfies Required<Omit<ThanosDisintegrateOptions, "origin">>;

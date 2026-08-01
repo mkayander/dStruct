@@ -48,5 +48,7 @@ describe("overlayPosition", () => {
     expect(rect.left).toBe(24);
     expect(overlay.style.left).toBe("24px");
     expect(overlay.style.top).toBe("48px");
+    expect(overlay.style.width).toBe("320px");
+    expect(overlay.style.height).toBe("120px");
   });
 });

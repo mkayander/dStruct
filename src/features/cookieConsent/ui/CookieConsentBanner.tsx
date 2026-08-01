@@ -22,9 +22,9 @@ import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 
 type CookieConsentBannerProps = {
   isSettingsView: boolean;
-  onAcceptAll: () => void;
-  onRejectNonEssential: () => void;
-  onClose: () => void;
+  onAcceptAll: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onRejectNonEssential: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /** Visual surface used by optional dismiss effects (e.g. Thanos disintegrate). */
   surfaceRef?: React.Ref<HTMLDivElement>;
 };

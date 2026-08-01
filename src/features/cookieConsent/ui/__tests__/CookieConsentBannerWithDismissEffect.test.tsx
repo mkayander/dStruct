@@ -65,6 +65,14 @@ describe("CookieConsentBannerWithDismissEffect", () => {
 
     await waitFor(() => {
       expect(disintegrateMock).toHaveBeenCalledTimes(1);
+      expect(disintegrateMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          origin: expect.objectContaining({
+            clientX: expect.any(Number),
+            clientY: expect.any(Number),
+          }),
+        }),
+      );
     });
     expect(onCompleteDismiss).not.toHaveBeenCalled();
 

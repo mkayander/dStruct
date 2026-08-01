@@ -37,7 +37,7 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
   const displayIsSettingsView = frozenSettingsView ?? isSettingsView;
 
   const withDisintegrateDismiss = useCallback(
-    (action: () => void) => () => {
+    (action: () => void) => (event: React.MouseEvent<HTMLButtonElement>) => {
       if (isDismissingRef.current) {
         return;
       }
@@ -50,7 +50,12 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
       void (async () => {
         try {
           await waitForPaint();
-          await disintegrate();
+          await disintegrate({
+            origin: {
+              clientX: event.clientX,
+              clientY: event.clientY,
+            },
+          });
         } finally {
           setFrozenSettingsView(null);
           onCompleteDismiss();
