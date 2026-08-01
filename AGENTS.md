@@ -36,7 +36,7 @@ Cursor rules to apply (see each file for full wording):
 | Service            | Command                         | Notes                                                                        |
 | ------------------ | ------------------------------- | ---------------------------------------------------------------------------- |
 | Next.js dev server | `pnpm dev`                      | Runs on `http://localhost:3000`. Core app (frontend + tRPC API).             |
-| PostgreSQL         | `sudo service postgresql start` | Must be running before dev server or any DB commands.                        |
+| PostgreSQL         | `sudo service postgresql start` | Auto-started + provisioned by the startup update script; use this command only if it is not already running. |
 | Python in the app  | (none)                          | Python runs in the browser via Pyodide (workers); no separate Python server. |
 
 ### Node.js version
@@ -48,8 +48,10 @@ The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.jso
 ### Database
 
 - PostgreSQL with user `dstruct`, password `dstruct`, database `dstruct` on `localhost:5432`.
-- After starting PostgreSQL, push the schema with `pnpm prisma:push`.
-- To seed with sample data: `SKIP_ENV_VALIDATION=true PRISMA_FIELD_ENCRYPTION_KEY=dev-local-encryption-key-for-testing-only DATABASE_URL=postgresql://dstruct:dstruct@localhost:5432/dstruct pnpm loadMainDump`.
+- **The startup update script already installs (if missing), starts, and provisions this** — it creates the `dstruct` role/db, ensures `.env`, and runs `pnpm prisma:push` + `pnpm loadMainDump` only when the DB is empty. On a normal boot the DB is already up and seeded, so you should not need to run anything manually.
+- Manual re-provision if needed: start PostgreSQL, push the schema with `pnpm prisma:push`.
+- To (re)seed with sample data: `SKIP_ENV_VALIDATION=true PRISMA_FIELD_ENCRYPTION_KEY=dev-local-encryption-key-for-testing-only DATABASE_URL=postgresql://dstruct:dstruct@localhost:5432/dstruct pnpm loadMainDump`.
+- **Why the update script provisions PostgreSQL (do not slim it back down to just `pnpm install`):** a prior startup script that only ran `sudo service postgresql start` hard-failed with `postgresql: unrecognized service` on fresh VMs where the DB was not present, which marked setup as failed. The update script is therefore idempotent and self-healing: every step is guarded and best-effort so it never aborts pod startup, and all steps short-circuit when the snapshot already has PostgreSQL + data.
 
 ### Public playground dump (`public-dumps/main.json`)
 
