@@ -56,6 +56,12 @@ function generateSiteMap(projects: ProjectForSitemap[]) {
        <changefreq>weekly</changefreq>
        <priority>0.9</priority>
      </url>
+     <url>
+       <loc>${absoluteLoc("/privacy")}</loc>
+       <lastmod>${now}</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.5</priority>
+     </url>
      ${projects
        .map(({ slug, updatedAt }) => {
          const lastmod = formatLastmod(updatedAt);

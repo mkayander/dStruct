@@ -14,6 +14,11 @@ const en: BaseTranslation = {
   CHOOSE_LOCALE: "Choose locale...",
   CODE_COPIED_TO_CLIPBOARD: "Copied code to clipboard",
   CODE_RUNNER: "Code Runner",
+  COOKIE_ACCEPT_ALL: "Accept all",
+  COOKIE_CONSENT_MESSAGE:
+    "We use cookies and similar technologies for sign-in, preferences, and optional analytics. You can accept all cookies or reject non-essential ones. See our",
+  COOKIE_CONSENT_TITLE: "Cookie preferences",
+  COOKIE_REJECT_NON_ESSENTIAL: "Reject non-essential",
   CONSOLE_OUTPUT: "Console output",
   CONTINUE: "Continue",
   COPY: "Copy",
@@ -57,6 +62,23 @@ const en: BaseTranslation = {
   PLAYBACK_INTERVAL: "Playback interval",
   PLAYGROUND: "Playground",
   PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: "Please enter your LeetCode account name:",
+  PRIVACY_COOKIES_ANALYTICS_BODY:
+    "With your consent, we load Vercel Analytics and Speed Insights to understand how the site is used. These are disabled until you accept non-essential cookies.",
+  PRIVACY_COOKIES_ANALYTICS_TITLE: "Analytics (optional)",
+  PRIVACY_COOKIES_ESSENTIAL_BODY:
+    "NextAuth session cookies are required for sign-in. A LeetCode session cookie is set only if you link your LeetCode account.",
+  PRIVACY_COOKIES_ESSENTIAL_TITLE: "Strictly necessary cookies",
+  PRIVACY_COOKIES_PREFERENCES_BODY:
+    "We store your locale and last playground path in local storage to improve your experience. These are not sent to our servers.",
+  PRIVACY_COOKIES_PREFERENCES_TITLE: "Preferences (local storage)",
+  PRIVACY_COOKIES_SECTION_TITLE: "Cookies and similar technologies",
+  PRIVACY_EXECUTION_BODY:
+    "By default, your code runs in the browser (Web Workers / Pyodide). Saving projects and browsing cloud content uses our backend like any web app.",
+  PRIVACY_EXECUTION_TITLE: "Code execution",
+  PRIVACY_INTRO:
+    "This page explains what data dStruct stores on your device and how we use it. Contact the site owner if you have questions about your data.",
+  PRIVACY_PAGE_TITLE: "Privacy Policy",
+  PRIVACY_POLICY: "Privacy policy",
   PROFILE: "Profile",
   PROJECT: "Project",
   PROJECT_BROWSER: "Project Browser",
