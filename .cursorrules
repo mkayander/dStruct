@@ -5,7 +5,7 @@ How this fits together:
 - **`AGENTS.md`** — Next.js doc lookup, pnpm, DB/env, local dev commands, slash commands.
 - **`.cursor/rules/*.mdc`** — Always-on code style (hook imports, type imports, `useEffect` comments).
 - **`.cursor/commands/`** — Legacy slash-command location (migrating to `.cursor/skills/`).
-- **`.cursor/skills/`** — Agent skills (e.g. `deep-code-review` for fix-in-place reviews).
+- **`.cursor/skills/`** — Agent skills; `deep-code-review` auto-applies on casual review requests (not only `/deep-code-review`).
 - **This file** — Architecture, stack, patterns, testing, and feature workflow.
 
 If **Next.js bundled docs** disagree with **`.cursor/rules/`** on style (hooks, types), follow **`.cursor/rules/`** for code in this repo.

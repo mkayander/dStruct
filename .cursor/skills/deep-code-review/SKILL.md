@@ -1,12 +1,11 @@
 ---
 name: deep-code-review
-description: Reviews code in scope and applies important/medium fixes plus dead-code and duplication removal in the same session. Use when the user requests a deep code review, PR review, /deep-code-review, code audit, or asks to fix review findings immediately — not report-only.
-disable-model-invocation: true
+description: Reviews code in scope and applies important/medium fixes plus dead-code and duplication removal in the same session. Use when the user asks to review changes, review the diff/PR/branch, look over their code, requests a code review, /deep-code-review, deep review, code audit, or asks to fix review findings — not report-only.
 ---
 
 # Deep code review
 
-**Fix in place.** Review scope, implement fixes, verify, then summarize. A report without code changes is incomplete when important/medium/dead-code issues were in scope.
+**Fix in place.** Applies to explicit `/deep-code-review` **and** casual requests like “review the changes”, “look over this PR”, or “check my diff”. Review scope, implement fixes, verify, then summarize. A report without code changes is incomplete when important/medium/dead-code issues were in scope.
 
 ## Workflow
 
