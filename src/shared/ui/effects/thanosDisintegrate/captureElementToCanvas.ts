@@ -59,6 +59,8 @@ export const captureElementToCanvas = async (
 
     context.drawImage(image, 0, 0, width, height);
     return canvas;
+  } catch {
+    throw new Error("Failed to rasterize captured surface");
   } finally {
     URL.revokeObjectURL(url);
   }

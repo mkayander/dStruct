@@ -77,22 +77,31 @@ export const runThanosDisintegrate = async (
     return;
   }
 
-  let sourceCanvas: HTMLCanvasElement;
+  let sourceCanvas: HTMLCanvasElement | null = null;
   try {
     sourceCanvas = await captureElementToCanvas(element);
   } catch {
-    return;
+    sourceCanvas = null;
   }
 
-  const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
-  if (!context) {
-    return;
+  const rect = element.getBoundingClientRect();
+  const width = Math.max(1, Math.round(sourceCanvas?.width ?? rect.width));
+  const height = Math.max(1, Math.round(sourceCanvas?.height ?? rect.height));
+
+  let particles: ThanosParticle[] = [];
+
+  if (sourceCanvas) {
+    const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
+    if (context) {
+      try {
+        const imageData = context.getImageData(0, 0, width, height);
+        particles = createParticlesFromImageData(imageData, resolvedOptions);
+      } catch {
+        // SVG foreignObject capture taints the canvas in some browsers.
+      }
+    }
   }
 
-  const width = sourceCanvas.width;
-  const height = sourceCanvas.height;
-  const imageData = context.getImageData(0, 0, width, height);
-  let particles = createParticlesFromImageData(imageData, resolvedOptions);
   if (particles.length === 0) {
     particles = createFallbackParticlesFromElement(element, resolvedOptions);
   }

@@ -1,17 +1,84 @@
-import { describe, expect, it, vi } from "vitest";
-
-import { runThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("#/shared/lib/prefersReducedMotion", () => ({
-  prefersReducedMotion: () => true,
+  prefersReducedMotion: () => false,
 }));
 
+vi.mock("#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas", () => ({
+  captureElementToCanvas: vi.fn(),
+}));
+
+vi.mock(
+  "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement",
+  () => ({
+    createFallbackParticlesFromElement: vi.fn(() => [
+      {
+        x: 0,
+        y: 0,
+        vx: 0,
+        vy: 0,
+        color: "rgb(100, 120, 140)",
+        alpha: 1,
+        size: 2,
+        decay: 0.02,
+      },
+    ]),
+  }),
+);
+
+const { captureElementToCanvas } = await import(
+  "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas"
+);
+const { createFallbackParticlesFromElement } = await import(
+  "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement"
+);
+const { runThanosDisintegrate } = await import(
+  "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate"
+);
+
 describe("runThanosDisintegrate", () => {
-  it("no-ops when reduced motion is preferred", async () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+    vi.clearAllMocks();
+  });
+
+  it("uses fallback particles when canvas pixel reads are blocked", async () => {
     const element = document.createElement("div");
+    element.style.width = "120px";
+    element.style.height = "48px";
+    element.getBoundingClientRect = () =>
+      ({
+        left: 10,
+        top: 20,
+        width: 120,
+        height: 48,
+        right: 130,
+        bottom: 68,
+        x: 10,
+        y: 20,
+        toJSON: () => ({}),
+      }) as DOMRect;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 120;
+    canvas.height = 48;
+    const context = {
+      getImageData: vi.fn(() => {
+        throw new DOMException(
+          "The canvas has been tainted by cross-origin data.",
+          "SecurityError",
+        );
+      }),
+    };
+    canvas.getContext = vi.fn(() => context) as typeof canvas.getContext;
+
+    vi.mocked(captureElementToCanvas).mockResolvedValue(canvas);
     document.body.appendChild(element);
 
     await expect(runThanosDisintegrate(element)).resolves.toBeUndefined();
-    expect(element.style.opacity).toBe("");
+    expect(createFallbackParticlesFromElement).toHaveBeenCalledWith(
+      element,
+      expect.any(Object),
+    );
   });
 });
