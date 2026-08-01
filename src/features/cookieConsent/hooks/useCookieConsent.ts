@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
 import { useSnackbar } from "notistack";
+import { useCallback, useState } from "react";
 
 import { useCookieConsentStorage } from "#/features/cookieConsent/hooks/useCookieConsentStorage";
 import { storeCookieConsent } from "#/features/cookieConsent/lib/consentStorage";

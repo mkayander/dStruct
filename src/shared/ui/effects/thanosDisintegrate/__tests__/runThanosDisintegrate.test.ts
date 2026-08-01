@@ -127,7 +127,9 @@ describe("runThanosDisintegrate", () => {
 
   it("starts animating before chunk masks finish building", async () => {
     let resolveChunkMasks:
-      | ((value: Awaited<ReturnType<typeof buildChunkMaskSequenceAsync>>) => void)
+      | ((
+          value: Awaited<ReturnType<typeof buildChunkMaskSequenceAsync>>,
+        ) => void)
       | undefined;
     vi.mocked(buildChunkMaskSequenceAsync).mockImplementation(
       () =>

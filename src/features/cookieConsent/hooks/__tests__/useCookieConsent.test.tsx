@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -17,9 +17,8 @@ vi.mock("#/shared/hooks", async (importOriginal) => {
   };
 });
 
-const { useCookieConsent } = await import(
-  "#/features/cookieConsent/hooks/useCookieConsent"
-);
+const { useCookieConsent } =
+  await import("#/features/cookieConsent/hooks/useCookieConsent");
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <SnackbarProvider>

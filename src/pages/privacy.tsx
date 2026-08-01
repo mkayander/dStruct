@@ -62,7 +62,9 @@ const PrivacyPage: NextPage<PrivacyPageProps> = ({ canonicalUrl }) => {
         </PrivacySection>
 
         <PrivacySection title={LL.PRIVACY_DATA_COLLECTED_TITLE()}>
-          <PrivacyParagraph>{LL.PRIVACY_DATA_COLLECTED_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_DATA_COLLECTED_BODY()}
+          </PrivacyParagraph>
         </PrivacySection>
 
         <PrivacySection title={LL.PRIVACY_LEGAL_BASES_TITLE()}>
@@ -75,7 +77,9 @@ const PrivacyPage: NextPage<PrivacyPageProps> = ({ canonicalUrl }) => {
 
         <PrivacySection title={LL.PRIVACY_RIGHTS_TITLE()}>
           <PrivacyParagraph>{LL.PRIVACY_RIGHTS_BODY()}</PrivacyParagraph>
-          <PrivacyParagraph>{LL.PRIVACY_WITHDRAW_CONSENT_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_WITHDRAW_CONSENT_BODY()}
+          </PrivacyParagraph>
         </PrivacySection>
 
         <PrivacySection title={LL.PRIVACY_SUBPROCESSORS_TITLE()}>
@@ -87,22 +91,30 @@ const PrivacyPage: NextPage<PrivacyPageProps> = ({ canonicalUrl }) => {
         </PrivacySection>
 
         <PrivacySection title={LL.PRIVACY_COOKIES_SECTION_TITLE()}>
-          <PrivacyParagraph>{LL.PRIVACY_COOKIES_OVERVIEW_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_COOKIES_OVERVIEW_BODY()}
+          </PrivacyParagraph>
 
           <Typography variant="h6" component="h3" sx={{ mt: 3, mb: 1 }}>
             {LL.PRIVACY_COOKIES_ESSENTIAL_TITLE()}
           </Typography>
-          <PrivacyParagraph>{LL.PRIVACY_COOKIES_ESSENTIAL_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_COOKIES_ESSENTIAL_BODY()}
+          </PrivacyParagraph>
 
           <Typography variant="h6" component="h3" sx={{ mt: 3, mb: 1 }}>
             {LL.PRIVACY_COOKIES_PREFERENCES_TITLE()}
           </Typography>
-          <PrivacyParagraph>{LL.PRIVACY_COOKIES_PREFERENCES_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_COOKIES_PREFERENCES_BODY()}
+          </PrivacyParagraph>
 
           <Typography variant="h6" component="h3" sx={{ mt: 3, mb: 1 }}>
             {LL.PRIVACY_COOKIES_ANALYTICS_TITLE()}
           </Typography>
-          <PrivacyParagraph>{LL.PRIVACY_COOKIES_ANALYTICS_BODY()}</PrivacyParagraph>
+          <PrivacyParagraph>
+            {LL.PRIVACY_COOKIES_ANALYTICS_BODY()}
+          </PrivacyParagraph>
 
           <Typography variant="h6" component="h3" sx={{ mt: 3, mb: 1 }}>
             {LL.PRIVACY_COOKIE_TABLE_TITLE()}

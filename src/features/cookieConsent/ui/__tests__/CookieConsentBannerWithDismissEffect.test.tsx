@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { SnackbarProvider } from "notistack";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { SnackbarProvider } from "notistack";
+import type * as Notistack from "notistack";
 import { describe, expect, it, vi } from "vitest";
 
 import type * as SharedHooks from "#/shared/hooks";
@@ -42,7 +43,7 @@ vi.mock("#/shared/ui/effects/thanosDisintegrate", () => ({
 const enqueueSnackbarMock = vi.fn();
 
 vi.mock("notistack", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("notistack")>();
+  const actual = await importOriginal<typeof Notistack>();
   return {
     ...actual,
     useSnackbar: () => ({
@@ -90,15 +91,15 @@ describe("CookieConsentBannerWithDismissEffect", () => {
 
     await waitFor(() => {
       expect(disintegrateMock).toHaveBeenCalledTimes(1);
-      expect(disintegrateMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          origin: expect.objectContaining({
-            clientX: expect.any(Number),
-            clientY: expect.any(Number),
-          }),
-        }),
-      );
     });
+    expect(disintegrateMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        origin: expect.objectContaining({
+          clientX: expect.any(Number),
+          clientY: expect.any(Number),
+        }),
+      }),
+    );
     expect(onCompleteDismiss).not.toHaveBeenCalled();
 
     resolveDisintegrate?.();

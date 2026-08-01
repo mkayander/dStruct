@@ -1,6 +1,5 @@
-import { createStringStorage } from "#/shared/browser-storage";
-
 import type { Locales } from "#/i18n/i18n-types";
+import { createStringStorage } from "#/shared/browser-storage";
 
 const localeStorage = createStringStorage({
   key: "locale",
