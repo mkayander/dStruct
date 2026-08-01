@@ -41,7 +41,9 @@ Cursor rules to apply (see each file for full wording):
 
 ### Node.js version
 
-The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.json`). Use `nvm use 24` before running any commands. The `.nvmrc` file is set to `24`.
+The project requires **Node.js 24** (`engines.node: "^v24.11.1"` in `package.json`; `.nvmrc` is `24`). In this environment **`node` already resolves to v24 by default** — just run `node`, `pnpm`, `pnpm dev`, etc. directly. No `nvm use` step is needed.
+
+**Gotcha (do not "fix" this):** the command runner injects `/exec-daemon` (which ships its own Node **v22**) at the front of `PATH` on every shell, so `nvm use 24` does **not** win and `pnpm`'s `#!/usr/bin/env node` shebang would otherwise pick v22. This is worked around during environment setup by placing `node`/`npm`/`npx`/`corepack`/`pnpm` shims in `/usr/local/cargo/bin` (which sits ahead of `/exec-daemon` in `PATH`) pointing at the nvm-managed Node 24. These shims live in the snapshot; if `node --version` ever reports v22, recreate them from `~/.nvm/versions/node/v24.*/bin`.
 
 ### Database
 
