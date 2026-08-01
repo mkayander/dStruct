@@ -1,31 +1,9 @@
-import { useMemo, useSyncExternalStore } from "react";
+import { useBrowserStorageSnapshot } from "#/shared/browser-storage";
 
 import {
-  CONSENT_STORAGE_KEY,
-  parseCookieConsentRaw,
-  subscribeCookieConsent,
+  cookieConsentStorage,
   type CookieConsentPreferences,
 } from "#/features/cookieConsent/lib/consentStorage";
 
-const getClientSnapshot = (): string | null => {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return localStorage.getItem(CONSENT_STORAGE_KEY);
-};
-
-const getServerSnapshot = (): string | null => null;
-
-export const useCookieConsentStorage = (): CookieConsentPreferences | null => {
-  const rawSnapshot = useSyncExternalStore(
-    subscribeCookieConsent,
-    getClientSnapshot,
-    getServerSnapshot,
-  );
-
-  return useMemo(
-    () => parseCookieConsentRaw(rawSnapshot),
-    [rawSnapshot],
-  );
-};
+export const useCookieConsentStorage = (): CookieConsentPreferences | null =>
+  useBrowserStorageSnapshot(cookieConsentStorage);

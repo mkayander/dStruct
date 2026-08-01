@@ -27,6 +27,7 @@ import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
+import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
 import { useI18nContext } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
@@ -68,7 +69,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
     const newLocale = event.target.value as Locales;
     if (newLocale !== router.locale) {
-      localStorage.setItem("locale", newLocale);
+      setStoredLocale(newLocale);
       await loadLocaleAsync(newLocale);
       void router.push(router.asPath, undefined, { locale: newLocale });
     }
