@@ -25,6 +25,8 @@ type CookieConsentBannerProps = {
   onAcceptAll: () => void;
   onRejectNonEssential: () => void;
   onClose: () => void;
+  /** Visual surface used by optional dismiss effects (e.g. Thanos disintegrate). */
+  surfaceRef?: React.Ref<HTMLDivElement>;
 };
 
 export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
@@ -32,6 +34,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
   onAcceptAll,
   onRejectNonEssential,
   onClose,
+  surfaceRef,
 }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
@@ -63,6 +66,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
       }}
     >
       <Paper
+        ref={surfaceRef}
         elevation={0}
         sx={{
           pointerEvents: "auto",

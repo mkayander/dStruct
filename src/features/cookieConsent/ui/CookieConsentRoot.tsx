@@ -8,7 +8,7 @@ import {
   CookieConsentProvider,
   useCookieConsentController,
 } from "#/features/cookieConsent/context/CookieConsentContext";
-import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
+import { CookieConsentBannerWithDismissEffect } from "#/features/cookieConsent/ui/CookieConsentBannerWithDismissEffect";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
 
 type CookieConsentRootProps = {
@@ -23,10 +23,12 @@ export const CookieConsentRoot: React.FC<CookieConsentRootProps> = ({
   const showConsentChrome = hasMounted;
 
   return (
-    <CookieConsentProvider value={{ openCookieSettings: consent.openCookieSettings }}>
+    <CookieConsentProvider
+      value={{ openCookieSettings: consent.openCookieSettings }}
+    >
       {children}
       {showConsentChrome && consent.showBanner ? (
-        <CookieConsentBanner
+        <CookieConsentBannerWithDismissEffect
           isSettingsView={consent.isSettingsView}
           onAcceptAll={consent.acceptAll}
           onRejectNonEssential={consent.rejectNonEssential}
