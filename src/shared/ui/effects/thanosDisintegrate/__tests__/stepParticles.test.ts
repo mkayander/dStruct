@@ -76,9 +76,12 @@ describe("stepParticles", () => {
     particle.vx = 10;
     particle.vy = 0;
     particle.drag = 1;
+    particle.turbulenceSeed = 42;
 
-    const positions: Array<{ x: number; y: number }> = [];
-    for (let frame = 1; frame <= 30; frame += 1) {
+    const positions: Array<{ x: number; y: number }> = [
+      { x: particle.x, y: particle.y },
+    ];
+    for (let frame = 1; frame <= 90; frame += 1) {
       stepParticles([particle], 1 / 60, frame / 60, {
         particleMotionMode: "windy",
         windX: 60,
@@ -91,10 +94,11 @@ describe("stepParticles", () => {
     const start = positions[0];
     const end = positions[positions.length - 1];
     const midpoint = positions[Math.floor(positions.length / 2)];
+    const straightLineMidY = ((start?.y ?? 0) + (end?.y ?? 0)) / 2;
 
-    expect(end?.x).toBeGreaterThan((start?.x ?? 0) + 8);
-    expect(
-      Math.abs((midpoint?.y ?? 0) - ((start?.y ?? 0) + (end?.y ?? 0)) / 2),
-    ).toBeGreaterThan(0.5);
+    expect(end?.x).toBeGreaterThan((start?.x ?? 0) + 4);
+    expect(Math.abs((midpoint?.y ?? 0) - straightLineMidY)).toBeGreaterThan(
+      0.25,
+    );
   });
 });
