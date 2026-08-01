@@ -6,6 +6,9 @@ import {
   SPARK_FLUTTER_STRENGTH,
   SPARK_GRAVITY_RAMP_SECONDS,
   SPARK_WIND_MULTIPLIER,
+  SPARK_ZIGZAG_FREQUENCY,
+  SPARK_ZIGZAG_STEER_RATE,
+  SPARK_ZIGZAG_VELOCITY,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
 import type {
   DisintegrateParticle,
@@ -55,6 +58,13 @@ const stepSparkParticle = (
 ): void => {
   particle.vx = applyDrag(particle.vx, particle.drag, deltaSeconds);
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
+
+  const zigzagPhase =
+    timeSinceRelease * SPARK_ZIGZAG_FREQUENCY + particle.turbulenceSeed * 0.09;
+  const targetZigzagVx = Math.sin(zigzagPhase) * SPARK_ZIGZAG_VELOCITY;
+  particle.vx +=
+    (targetZigzagVx - particle.vx) *
+    Math.min(1, deltaSeconds * SPARK_ZIGZAG_STEER_RATE);
 
   const flutter = sampleSparkFlutter(timeSinceRelease, particle.turbulenceSeed);
   const buoyancy =

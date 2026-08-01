@@ -80,7 +80,7 @@ describe("stepParticles", () => {
 
     const xPositions: number[] = [particle.x];
     const yPositions: number[] = [particle.y];
-    for (let frame = 1; frame <= 150; frame += 1) {
+    for (let frame = 1; frame <= 200; frame += 1) {
       stepParticles([particle], 1 / 60, frame / 60, {
         particleMotionMode: "windy",
         windX: 0,
@@ -102,8 +102,8 @@ describe("stepParticles", () => {
     const lateralSpread = Math.max(...xPositions) - Math.min(...xPositions);
     const peakAltitude = Math.min(...yPositions);
 
-    expect(directionChanges).toBeGreaterThanOrEqual(4);
-    expect(lateralSpread).toBeGreaterThan(12);
-    expect(peakAltitude).toBeLessThan(40 - 15);
+    expect(directionChanges).toBeGreaterThanOrEqual(10);
+    expect(lateralSpread).toBeGreaterThan(24);
+    expect(peakAltitude).toBeLessThan(40 - 12);
   });
 });

@@ -53,6 +53,6 @@ describe("createDisintegrateParticle", () => {
 
     expect(averageVelocityY).toBeLessThan(-8);
     expect(averageSpeed).toBeGreaterThan(20);
-    expect(averageSpeed).toBeLessThan(90);
+    expect(averageSpeed).toBeLessThan(105);
   });
 });

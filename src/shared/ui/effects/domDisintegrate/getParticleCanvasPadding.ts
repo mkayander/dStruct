@@ -2,6 +2,8 @@ import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegra
 import {
   SPARK_TRAVEL_PADDING,
   SPARK_UPWARD_TRAVEL_FACTOR,
+  SPARK_ZIGZAG_FREQUENCY,
+  SPARK_ZIGZAG_VELOCITY,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
 import type {
   DomDisintegrateOptions,
@@ -19,9 +21,13 @@ const computeParticleMaxTravel = (
     Math.abs(resolvedOptions.windY) * duration;
 
   if (resolvedOptions.particleMotionMode === "windy") {
+    const zigzagLateralExtent =
+      (SPARK_ZIGZAG_VELOCITY / SPARK_ZIGZAG_FREQUENCY) * 2.2;
+
     return (
-      baseTravel * 1.65 +
+      baseTravel * 1.95 +
       resolvedOptions.maxVelocity * SPARK_UPWARD_TRAVEL_FACTOR +
+      zigzagLateralExtent +
       SPARK_TRAVEL_PADDING
     );
   }

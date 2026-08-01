@@ -1,25 +1,26 @@
+import { SPARK_ZIGZAG_FREQUENCY } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
+
 type SparkFlutterForces = {
   forceX: number;
   forceY: number;
 };
 
 /**
- * Lateral sway and wobble along a spark's flight path.
- * Uses slower sine waves so motion reads as zig-zag, not high-frequency jitter.
+ * Secondary high-frequency wobble layered on top of the primary zig-zag steer.
  */
 export const sampleSparkFlutter = (
   timeSinceRelease: number,
   turbulenceSeed: number,
 ): SparkFlutterForces => {
-  const phase = timeSinceRelease + turbulenceSeed * 0.031;
+  const phase = timeSinceRelease + turbulenceSeed * 0.027;
+  const zigzag = phase * SPARK_ZIGZAG_FREQUENCY;
 
   return {
     forceX:
-      Math.sin(phase * 7.5) * 0.58 +
-      Math.sin(phase * 4.2 + turbulenceSeed * 0.08) * 0.36 +
-      Math.sin(phase * 11.4 + turbulenceSeed * 0.12) * 0.2,
+      Math.sin(zigzag * 1.62 + turbulenceSeed * 0.11) * 0.28 +
+      Math.sin(zigzag * 2.24 + turbulenceSeed * 0.07) * 0.16,
     forceY:
-      Math.cos(phase * 6.1 + turbulenceSeed * 0.15) * 0.14 +
-      Math.sin(phase * 9.4) * 0.09,
+      Math.cos(zigzag * 1.38 + turbulenceSeed * 0.13) * 0.1 +
+      Math.sin(zigzag * 1.94) * 0.06,
   };
 };

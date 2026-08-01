@@ -49,9 +49,9 @@ const createSparkVelocity = (
 
   return {
     vx:
-      Math.cos(launchAngle) * speed * 0.55 +
-      resolvedOptions.windX * 0.25 +
-      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.28,
+      Math.cos(launchAngle) * speed * 0.38 +
+      resolvedOptions.windX * 0.2 +
+      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.16,
     vy:
       Math.sin(launchAngle) * speed -
       resolvedOptions.maxVelocity * (0.1 + Math.random() * 0.16),
