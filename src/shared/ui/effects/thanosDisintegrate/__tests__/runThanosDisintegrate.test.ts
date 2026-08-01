@@ -12,6 +12,6 @@ describe("runThanosDisintegrate", () => {
     document.body.appendChild(element);
 
     await expect(runThanosDisintegrate(element)).resolves.toBeUndefined();
-    expect(element.style.visibility).toBe("");
+    expect(element.style.opacity).toBe("");
   });
 });

@@ -2,6 +2,11 @@ import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
+import {
+  hideElementPreservingLayout,
+  subscribeToViewportChanges,
+  syncFixedOverlayToElement,
+} from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
@@ -66,8 +71,8 @@ export const runThanosDisintegrate = async (
   }
 
   const resolvedOptions = resolveOptions(options);
-  const rect = element.getBoundingClientRect();
-  if (rect.width <= 0 || rect.height <= 0) {
+  const initialRect = element.getBoundingClientRect();
+  if (initialRect.width <= 0 || initialRect.height <= 0) {
     return;
   }
 
@@ -78,6 +83,7 @@ export const runThanosDisintegrate = async (
     return;
   }
 
+  const rect = element.getBoundingClientRect();
   const width = Math.round(rect.width);
   const height = Math.round(rect.height);
   const context = sourceCanvas.getContext("2d", { willReadFrequently: true });
@@ -95,8 +101,6 @@ export const runThanosDisintegrate = async (
   overlayCanvas.width = width;
   overlayCanvas.height = height;
   overlayCanvas.style.position = "fixed";
-  overlayCanvas.style.left = `${rect.left}px`;
-  overlayCanvas.style.top = `${rect.top}px`;
   overlayCanvas.style.width = `${width}px`;
   overlayCanvas.style.height = `${height}px`;
   overlayCanvas.style.pointerEvents = "none";
@@ -106,27 +110,43 @@ export const runThanosDisintegrate = async (
   if (!overlayContext) {
     return;
   }
-  element.style.visibility = "hidden";
+
+  const restoreElement = hideElementPreservingLayout(element);
+  syncFixedOverlayToElement(overlayCanvas, element);
   document.body.appendChild(overlayCanvas);
 
-  await new Promise<void>((resolve) => {
-    let frame = 0;
+  const syncOverlayPosition = () => {
+    syncFixedOverlayToElement(overlayCanvas, element);
+  };
+  const unsubscribeViewportChanges = subscribeToViewportChanges(
+    element,
+    syncOverlayPosition,
+  );
 
-    const animate = () => {
-      overlayContext.clearRect(0, 0, width, height);
-      const aliveCount = stepParticles(particles, resolvedOptions);
-      drawParticles(overlayContext, particles);
+  try {
+    await new Promise<void>((resolve) => {
+      let frame = 0;
 
-      frame += 1;
-      if (aliveCount === 0 || frame >= resolvedOptions.maxFrames) {
-        overlayCanvas.remove();
-        resolve();
-        return;
-      }
+      const animate = () => {
+        syncOverlayPosition();
+        overlayContext.clearRect(0, 0, width, height);
+        const aliveCount = stepParticles(particles, resolvedOptions);
+        drawParticles(overlayContext, particles);
+
+        frame += 1;
+        if (aliveCount === 0 || frame >= resolvedOptions.maxFrames) {
+          resolve();
+          return;
+        }
+
+        requestAnimationFrame(animate);
+      };
 
       requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  });
+    });
+  } finally {
+    unsubscribeViewportChanges();
+    overlayCanvas.remove();
+    restoreElement();
+  }
 };
