@@ -1,14 +1,9 @@
 import type { ChunkMaskSequence } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
 import { getChunkMaskIndex } from "#/shared/ui/effects/thanosDisintegrate/createChunkMaskSequence";
-
-const clearWaveMaskStyles = (target: HTMLElement): void => {
-  target.style.maskImage = "";
-  target.style.maskSize = "";
-  target.style.maskRepeat = "";
-  target.style.removeProperty("-webkit-mask-image");
-  target.style.removeProperty("-webkit-mask-size");
-  target.style.removeProperty("-webkit-mask-repeat");
-};
+import {
+  clearParticleWaveMaskFromCanvas,
+  clearWaveMaskFromElement,
+} from "#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask";
 
 const applyMaskImage = (
   target: HTMLElement,
@@ -44,5 +39,5 @@ export const applyChunkMaskFrame = (
   applyMaskImage(particleCanvas, particleMaskUrl, sequence.particleMaskSize);
 };
 
-export const clearChunkMaskFromElement = clearWaveMaskStyles;
-export const clearChunkMaskFromCanvas = clearWaveMaskStyles;
+export const clearChunkMaskFromElement = clearWaveMaskFromElement;
+export const clearChunkMaskFromCanvas = clearParticleWaveMaskFromCanvas;

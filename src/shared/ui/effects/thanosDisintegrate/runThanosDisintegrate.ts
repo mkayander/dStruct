@@ -151,6 +151,21 @@ const syncDualLayerWave = (
   applyOpacityCrossfade(element, particleCanvas, particles, elapsedSeconds);
 };
 
+const clearActiveMasks = (
+  element: HTMLElement,
+  particleCanvas: HTMLCanvasElement,
+  maskState: DualLayerMaskState,
+): void => {
+  if (maskState.chunkMaskSequence && !maskState.startedRadialFallback) {
+    clearChunkMaskFromElement(element);
+    clearChunkMaskFromCanvas(particleCanvas);
+    return;
+  }
+
+  clearWaveMaskFromElement(element);
+  clearParticleWaveMaskFromCanvas(particleCanvas);
+};
+
 /**
  * Plays a Thanos-style particle disintegration on a DOM surface, then resolves.
  * The live element stays visible with a synced radial mask; particles fly underneath.
@@ -208,9 +223,6 @@ export const runThanosDisintegrate = async (
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
   const particleRevealMargin = getParticleRevealMargin(resolvedOptions);
 
-  const chunkMaskRef: { sequence: ChunkMaskSequence | null } = {
-    sequence: null,
-  };
   const maskState: DualLayerMaskState = {
     chunkMaskSequence: null,
     startedRadialFallback: false,
@@ -234,12 +246,12 @@ export const runThanosDisintegrate = async (
         return;
       }
 
-      if (!isAnimationActive) {
+      // Drop unused sequences immediately so large PNG data-URL arrays do not linger.
+      if (!isAnimationActive || maskState.startedRadialFallback) {
         sequence.revoke();
         return;
       }
 
-      chunkMaskRef.sequence = sequence;
       maskState.chunkMaskSequence = sequence;
     });
   }
@@ -260,7 +272,7 @@ export const runThanosDisintegrate = async (
   const overlayContext = overlayCanvas.getContext("2d");
   if (!overlayContext) {
     isAnimationActive = false;
-    chunkMaskRef.sequence?.revoke();
+    maskState.chunkMaskSequence?.revoke();
     throw new ThanosDisintegrateError(
       "canvas_unavailable",
       "2D canvas context is unavailable for the particle overlay.",
@@ -282,80 +294,78 @@ export const runThanosDisintegrate = async (
   let completedSuccessfully = false;
 
   try {
-    await new Promise<void>((resolve) => {
+    await new Promise<void>((resolve, reject) => {
       let startTime: number | null = null;
       let lastTime: number | null = null;
 
       const animate = (timestamp: number) => {
-        if (startTime === null) {
-          startTime = timestamp;
-        }
-        if (lastTime === null) {
-          lastTime = timestamp;
-        }
-
-        const elapsedSeconds = (timestamp - startTime) / 1000;
-        const deltaSeconds = Math.min(
-          (timestamp - lastTime) / 1000,
-          MAX_DELTA_SECONDS,
-        );
-        lastTime = timestamp;
-
-        syncOverlayPosition();
-        syncDualLayerWave(
-          element,
-          overlayCanvas,
-          particles,
-          elapsedSeconds,
-          relativeOrigin,
-          displayWidth,
-          displayHeight,
-          resolvedOptions,
-          particlePadding,
-          maskState,
-        );
-        drawDisintegrationFrame(
-          overlayContext,
-          particles,
-          elapsedSeconds,
-          canvasWidth,
-          canvasHeight,
-          particlePadding,
-          {
-            renderMode: resolvedOptions.particleRenderMode,
-            sourceCanvas: spriteSourceCanvas,
-          },
-        );
-        const visibleCount = stepParticles(
-          particles,
-          deltaSeconds,
-          elapsedSeconds,
-          resolvedOptions,
-        );
-
-        if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
-          completedSuccessfully = true;
-          element.style.opacity = "0";
-          if (maskState.chunkMaskSequence && !maskState.startedRadialFallback) {
-            clearChunkMaskFromElement(element);
-            clearChunkMaskFromCanvas(overlayCanvas);
-          } else {
-            clearWaveMaskFromElement(element);
-            clearParticleWaveMaskFromCanvas(overlayCanvas);
+        try {
+          if (startTime === null) {
+            startTime = timestamp;
           }
-          resolve();
-          return;
-        }
+          if (lastTime === null) {
+            lastTime = timestamp;
+          }
 
-        requestAnimationFrame(animate);
+          const elapsedSeconds = (timestamp - startTime) / 1000;
+          const deltaSeconds = Math.min(
+            (timestamp - lastTime) / 1000,
+            MAX_DELTA_SECONDS,
+          );
+          lastTime = timestamp;
+
+          syncOverlayPosition();
+          syncDualLayerWave(
+            element,
+            overlayCanvas,
+            particles,
+            elapsedSeconds,
+            relativeOrigin,
+            displayWidth,
+            displayHeight,
+            resolvedOptions,
+            particlePadding,
+            maskState,
+          );
+          drawDisintegrationFrame(
+            overlayContext,
+            particles,
+            elapsedSeconds,
+            canvasWidth,
+            canvasHeight,
+            particlePadding,
+            {
+              renderMode: resolvedOptions.particleRenderMode,
+              sourceCanvas: spriteSourceCanvas,
+            },
+          );
+          const visibleCount = stepParticles(
+            particles,
+            deltaSeconds,
+            elapsedSeconds,
+            resolvedOptions,
+          );
+
+          if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
+            completedSuccessfully = true;
+            element.style.opacity = "0";
+            clearActiveMasks(element, overlayCanvas, maskState);
+            resolve();
+            return;
+          }
+
+          requestAnimationFrame(animate);
+        } catch (error) {
+          reject(error);
+        }
       };
 
       requestAnimationFrame(animate);
     });
   } finally {
     isAnimationActive = false;
-    chunkMaskRef.sequence?.revoke();
-    chunkMaskRef.sequence = null;
+    maskState.chunkMaskSequence?.revoke();
+    maskState.chunkMaskSequence = null;
     restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();
     overlayCanvas.remove();

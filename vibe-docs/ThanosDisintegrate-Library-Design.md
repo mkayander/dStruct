@@ -69,11 +69,14 @@ Extract the Thanos-style DOM disintegration effect from dStruct into a **framewo
 
 | Mode | Visual | CPU / memory | When to use |
 |------|--------|--------------|-------------|
-| **`chunks`** (default) | Pixel-accurate dissolve grid | Precomputes up to 96 PNG data-URL steps; worker + main-thread fallback | Cookie banner, modals with origin |
-| **`radial`** | Smooth circular wave | Cheap CSS gradients | No worker, simple wave from click |
-| **Opacity-only** (implicit while chunks build) | Whole-surface fade | Cheapest | Bridge until chunk masks ready |
+| **`chunks`** (default) | Pixel-accurate dissolve grid | Precomputes up to 96 PNG data-URL steps; worker + main-thread fallback | Surfaces that want bitmap punch-out without a click origin |
+| **`radial`** | Smooth circular wave from origin | Cheap CSS gradients | Cookie consent dismiss (current production path); click-origin waves |
+| **Opacity-only** | Whole-surface fade | Cheapest | Fallback when there is no origin and no chunk sequence |
 
-**Known behavior (post-#153):** In `chunks` mode, radial masks are **not** applied while chunk masks build (opacity crossfade instead) to avoid radial→bitmap pop.
+**Known behavior (post-#153):**
+
+- Cookie consent passes `maskMode: "radial"` for a reliable click-origin wave.
+- In `chunks` mode with an origin: while chunk masks are still building, the effect uses the **radial wave** bridge. Once radial has started, it stays sticky (does not swap to chunk bitmaps mid-animation) and late chunk sequences are revoked immediately.
 
 ---
 

@@ -75,18 +75,16 @@ export const applyParticleWaveMaskToCanvas = (
   applyMaskStyles(canvas, mask, maskSize);
 };
 
-export const clearWaveMaskFromElement = (element: HTMLElement): void => {
-  element.style.maskImage = "";
-  element.style.maskSize = "";
-  element.style.removeProperty("-webkit-mask-image");
-  element.style.removeProperty("-webkit-mask-size");
+const clearCssMaskStyles = (target: HTMLElement): void => {
+  target.style.maskImage = "";
+  target.style.maskSize = "";
+  target.style.maskRepeat = "";
+  target.style.imageRendering = "";
+  target.style.removeProperty("-webkit-mask-image");
+  target.style.removeProperty("-webkit-mask-size");
+  target.style.removeProperty("-webkit-mask-repeat");
 };
 
-export const clearParticleWaveMaskFromCanvas = (
-  canvas: HTMLCanvasElement,
-): void => {
-  canvas.style.maskImage = "";
-  canvas.style.maskSize = "";
-  canvas.style.removeProperty("-webkit-mask-image");
-  canvas.style.removeProperty("-webkit-mask-size");
-};
+export const clearWaveMaskFromElement = clearCssMaskStyles;
+
+export const clearParticleWaveMaskFromCanvas = clearCssMaskStyles;

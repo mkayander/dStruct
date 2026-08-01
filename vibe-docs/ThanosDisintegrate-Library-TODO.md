@@ -14,7 +14,9 @@
 - [ ] Move `src/shared/ui/effects/thanosDisintegrate/**` → package `src/`
 - [ ] Inline or inject `prefersReducedMotion` (remove `#/shared/lib` dep)
 - [ ] Keep worker as separate entry; verify Next.js `import.meta.url` worker pattern
-- [ ] Port all 58 unit tests; `pnpm test` green in package
+- [ ] Do not prewarm the chunk mask worker on mount — create lazily when `maskMode: "chunks"`
+- [ ] Port unit tests; `pnpm test` green in package
+- [ ] Preserve sticky radial fallback: late chunk sequences must be revoked, never applied mid-wave
 
 ## Phase 3 — Wire dStruct consumer
 

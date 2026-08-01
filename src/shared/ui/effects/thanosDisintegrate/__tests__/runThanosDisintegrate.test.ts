@@ -218,4 +218,81 @@ describe("runThanosDisintegrate", () => {
     resolveChunkMasks?.(null);
     await expect(animation).resolves.toBeUndefined();
   });
+
+  it("keeps radial masks when chunk sequence arrives after radial fallback started", async () => {
+    const syncChunkMaskSequence =
+      await import("#/shared/ui/effects/thanosDisintegrate/syncChunkMaskSequence");
+    const syncElementWaveMask =
+      await import("#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask");
+    const applyChunkMaskSpy = vi.spyOn(
+      syncChunkMaskSequence,
+      "applyChunkMaskFrame",
+    );
+    const applyWaveMaskSpy = vi.spyOn(
+      syncElementWaveMask,
+      "applyWaveMaskToElement",
+    );
+    const revoke = vi.fn();
+
+    let resolveChunkMasks:
+      | ((
+          value: Awaited<ReturnType<typeof buildChunkMaskSequenceAsync>>,
+        ) => void)
+      | undefined;
+    vi.mocked(buildChunkMaskSequenceAsync).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveChunkMasks = resolve;
+        }),
+    );
+
+    const element = createElement();
+    const snapshot = {
+      sourceCanvas: null,
+      particles: [createParticle()],
+      displayWidth: 120,
+      displayHeight: 48,
+    };
+
+    const animation = runThanosDisintegrate(element, {
+      captureSnapshot: snapshot,
+      origin: { x: 60, y: 24 },
+      maskMode: "chunks",
+      maxDuration: 0.25,
+    });
+
+    for (let frameIndex = 0; frameIndex < 3; frameIndex += 1) {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => {
+          resolve();
+        });
+      });
+    }
+
+    expect(applyWaveMaskSpy).toHaveBeenCalled();
+    expect(applyChunkMaskSpy).not.toHaveBeenCalled();
+
+    resolveChunkMasks?.({
+      timeThresholds: [0],
+      modalMaskUrls: ["data:image/png;base64,modal"],
+      particleMaskUrls: ["data:image/png;base64,particle"],
+      modalMaskSize: "120px 48px",
+      particleMaskSize: "200px 128px",
+      revoke,
+    });
+
+    for (let frameIndex = 0; frameIndex < 3; frameIndex += 1) {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => {
+          resolve();
+        });
+      });
+    }
+
+    expect(applyChunkMaskSpy).not.toHaveBeenCalled();
+    expect(revoke).toHaveBeenCalled();
+    await animation;
+    applyChunkMaskSpy.mockRestore();
+    applyWaveMaskSpy.mockRestore();
+  });
 });
