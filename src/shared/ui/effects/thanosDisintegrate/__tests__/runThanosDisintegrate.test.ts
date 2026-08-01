@@ -4,9 +4,12 @@ vi.mock("#/shared/lib/prefersReducedMotion", () => ({
   prefersReducedMotion: () => false,
 }));
 
-vi.mock("#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas", () => ({
-  captureElementToCanvas: vi.fn(),
-}));
+vi.mock(
+  "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas",
+  () => ({
+    captureElementToCanvas: vi.fn(),
+  }),
+);
 
 vi.mock(
   "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement",
@@ -26,15 +29,12 @@ vi.mock(
   }),
 );
 
-const { captureElementToCanvas } = await import(
-  "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas"
-);
-const { createFallbackParticlesFromElement } = await import(
-  "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement"
-);
-const { runThanosDisintegrate } = await import(
-  "#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate"
-);
+const { captureElementToCanvas } =
+  await import("#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas");
+const { createFallbackParticlesFromElement } =
+  await import("#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement");
+const { runThanosDisintegrate } =
+  await import("#/shared/ui/effects/thanosDisintegrate/runThanosDisintegrate");
 
 describe("runThanosDisintegrate", () => {
   afterEach(() => {
@@ -62,15 +62,16 @@ describe("runThanosDisintegrate", () => {
     const canvas = document.createElement("canvas");
     canvas.width = 120;
     canvas.height = 48;
-    const context = {
-      getImageData: vi.fn(() => {
-        throw new DOMException(
-          "The canvas has been tainted by cross-origin data.",
-          "SecurityError",
-        );
-      }),
-    };
-    canvas.getContext = vi.fn(() => context) as typeof canvas.getContext;
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error("2d context unavailable in test");
+    }
+    vi.spyOn(context, "getImageData").mockImplementation(() => {
+      throw new DOMException(
+        "The canvas has been tainted by cross-origin data.",
+        "SecurityError",
+      );
+    });
 
     vi.mocked(captureElementToCanvas).mockResolvedValue(canvas);
     document.body.appendChild(element);

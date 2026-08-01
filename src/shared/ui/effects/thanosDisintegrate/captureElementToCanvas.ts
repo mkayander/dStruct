@@ -1,4 +1,4 @@
-import { copyInlineStyles } from "#/shared/ui/effects/thanosDisintegrate/copyInlineStyles";
+import { prepareCaptureClone } from "#/shared/ui/effects/thanosDisintegrate/prepareCaptureClone";
 
 const loadImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -18,19 +18,7 @@ export const captureElementToCanvas = async (
   const width = Math.max(1, Math.round(rect.width));
   const height = Math.max(1, Math.round(rect.height));
 
-  const clone = element.cloneNode(true) as HTMLElement;
-  copyInlineStyles(element, clone);
-  const computed = window.getComputedStyle(element);
-  clone.style.margin = "0";
-  clone.style.position = "relative";
-  clone.style.transform = "none";
-  clone.style.backdropFilter = "none";
-  clone.style.setProperty("-webkit-backdrop-filter", "none");
-  clone.style.backgroundColor = computed.backgroundColor;
-  clone.style.color = computed.color;
-  clone.style.border = computed.border;
-  clone.style.borderRadius = computed.borderRadius;
-  clone.style.boxShadow = computed.boxShadow;
+  const clone = prepareCaptureClone(element);
 
   const svgMarkup = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
