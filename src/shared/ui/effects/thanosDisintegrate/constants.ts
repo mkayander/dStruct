@@ -10,7 +10,6 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   maxDuration: 1.0,
   zIndex: 9999,
   waveSpeed: 700,
-  snapshotBlur: 0,
   maskMode: "chunks",
   maxChunkMaskSteps: 96,
   maskSpreadDuration: 0.6,

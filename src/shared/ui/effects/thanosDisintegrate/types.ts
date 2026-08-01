@@ -81,8 +81,6 @@ export type ThanosDisintegrateOptions = {
   particleRenderMode?: ThanosParticleRenderMode;
   /** Build chunk masks in a Web Worker when available. */
   useChunkMaskWorker?: boolean;
-  /** Optional blur on the snapshot layer before punch-out (px). */
-  snapshotBlur?: number;
 };
 
 /** Options with defaults applied; excludes runtime-only `origin` and strategy defaulting. */

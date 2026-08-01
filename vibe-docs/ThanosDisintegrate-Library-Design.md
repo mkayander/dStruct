@@ -46,10 +46,9 @@ Extract the Thanos-style DOM disintegration effect from dStruct into a **framewo
 
 | Export tier | Contents | Consumers |
 |-------------|----------|-----------|
-| **Core (required)** | `runThanosDisintegrate`, `buildThanosCapture`, `resolveThanosDisintegrateOptions`, `ThanosDisintegrateError`, types, `THANOS_DISINTEGRATE_DEFAULTS` | Vanilla JS, any framework |
-| **Mask / physics** | `assignParticleReleaseTimes`, `MASK_STRATEGY_GENERATORS`, `buildChunkMaskSequenceAsync`, `getParticleCanvasPadding` | Advanced tuning |
+| **Core (required)** | `runThanosDisintegrate`, `resolveThanosDisintegrateOptions`, `ThanosDisintegrateError`, types, `THANOS_DISINTEGRATE_DEFAULTS` | Vanilla JS, any framework |
 | **React adapter** | `useThanosDisintegrate` | React apps only (separate entry: `thanos-disintegrate/react`) |
-| **Internal (do not export)** | `chunkMaskWorker.ts`, `prepareCaptureClone`, font CSS collectors | Implementation detail |
+| **Internal (do not export from package root)** | Mask builders, workers, capture helpers, `MASK_STRATEGY_GENERATORS` | Implementation detail / deep imports only if needed |
 
 ---
 
