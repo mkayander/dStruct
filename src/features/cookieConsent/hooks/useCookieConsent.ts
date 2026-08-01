@@ -1,53 +1,52 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
-import {
-  getStoredCookieConsent,
-  storeCookieConsent,
-  type CookieConsentPreferences,
-} from "#/features/cookieConsent/lib/consentStorage";
-import { useHasMounted } from "#/shared/hooks/useHasMounted";
+import { useCookieConsentStorage } from "#/features/cookieConsent/hooks/useCookieConsentStorage";
+import { storeCookieConsent } from "#/features/cookieConsent/lib/consentStorage";
 
 type UseCookieConsentResult = {
-  preferences: CookieConsentPreferences | null;
   showBanner: boolean;
+  isSettingsView: boolean;
   analyticsEnabled: boolean;
   acceptAll: () => void;
   rejectNonEssential: () => void;
+  openCookieSettings: () => void;
+  closeCookieSettings: () => void;
 };
 
 export const useCookieConsent = (): UseCookieConsentResult => {
-  const hasMounted = useHasMounted();
-  const [preferences, setPreferences] = useState<CookieConsentPreferences | null>(
-    null,
-  );
+  const preferences = useCookieConsentStorage();
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
-  // Hydrate consent from localStorage after mount to avoid SSR/client mismatch.
-  useEffect(() => {
-    if (!hasMounted) {
-      return;
-    }
-
-    setPreferences(getStoredCookieConsent());
-  }, [hasMounted]);
+  const closeCookieSettings = useCallback(() => {
+    setSettingsOpen(false);
+  }, []);
 
   const acceptAll = useCallback(() => {
-    const nextPreferences = storeCookieConsent({ analytics: true });
-    setPreferences(nextPreferences);
+    storeCookieConsent({ analytics: true });
+    setSettingsOpen(false);
   }, []);
 
   const rejectNonEssential = useCallback(() => {
-    const nextPreferences = storeCookieConsent({ analytics: false });
-    setPreferences(nextPreferences);
+    storeCookieConsent({ analytics: false });
+    setSettingsOpen(false);
   }, []);
 
-  const showBanner = hasMounted && preferences === null;
+  const openCookieSettings = useCallback(() => {
+    setSettingsOpen(true);
+  }, []);
+
+  const hasUndecidedConsent = preferences === null;
+  const showBanner = hasUndecidedConsent || settingsOpen;
+  const isSettingsView = settingsOpen && !hasUndecidedConsent;
   const analyticsEnabled = preferences?.analytics === true;
 
   return {
-    preferences,
     showBanner,
+    isSettingsView,
     analyticsEnabled,
     acceptAll,
     rejectNonEssential,
+    openCookieSettings,
+    closeCookieSettings,
   };
 };

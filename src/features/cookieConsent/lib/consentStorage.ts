@@ -8,8 +8,10 @@ type StoredCookieConsent = {
   preferences: CookieConsentPreferences;
 };
 
-const CONSENT_STORAGE_KEY = "dstruct-cookie-consent";
+export const CONSENT_STORAGE_KEY = "dstruct-cookie-consent";
 const CONSENT_VERSION = 1;
+
+const consentListeners = new Set<() => void>();
 
 const runOnClient = <T>(fn: () => T): T | null => {
   if (typeof window === "undefined") {
@@ -17,6 +19,31 @@ const runOnClient = <T>(fn: () => T): T | null => {
   }
 
   return fn();
+};
+
+const notifyConsentListeners = () => {
+  consentListeners.forEach((listener) => listener());
+};
+
+export const subscribeCookieConsent = (listener: () => void): (() => void) => {
+  consentListeners.add(listener);
+
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === null || event.key === CONSENT_STORAGE_KEY) {
+      listener();
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("storage", handleStorage);
+  }
+
+  return () => {
+    consentListeners.delete(listener);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("storage", handleStorage);
+    }
+  };
 };
 
 const parseStoredConsent = (raw: string): StoredCookieConsent | null => {
@@ -50,6 +77,16 @@ const parseStoredConsent = (raw: string): StoredCookieConsent | null => {
   }
 };
 
+export const parseCookieConsentRaw = (
+  raw: string | null,
+): CookieConsentPreferences | null => {
+  if (!raw) {
+    return null;
+  }
+
+  return parseStoredConsent(raw)?.preferences ?? null;
+};
+
 export const getStoredCookieConsent = (): CookieConsentPreferences | null => {
   const stored = runOnClient(() => {
     const raw = localStorage.getItem(CONSENT_STORAGE_KEY);
@@ -65,23 +102,36 @@ export const getStoredCookieConsent = (): CookieConsentPreferences | null => {
 
 export const storeCookieConsent = (
   preferences: Omit<CookieConsentPreferences, "decidedAt">,
-): CookieConsentPreferences => {
+): CookieConsentPreferences | null => {
   const nextPreferences: CookieConsentPreferences = {
     ...preferences,
     decidedAt: new Date().toISOString(),
   };
 
-  runOnClient(() => {
-    const payload: StoredCookieConsent = {
-      version: CONSENT_VERSION,
-      preferences: nextPreferences,
-    };
-    localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(payload));
+  const stored = runOnClient(() => {
+    try {
+      const payload: StoredCookieConsent = {
+        version: CONSENT_VERSION,
+        preferences: nextPreferences,
+      };
+      localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(payload));
+      notifyConsentListeners();
+      return nextPreferences;
+    } catch {
+      return null;
+    }
   });
 
-  return nextPreferences;
+  return stored ?? null;
 };
 
 export const clearStoredCookieConsent = (): void => {
-  runOnClient(() => localStorage.removeItem(CONSENT_STORAGE_KEY));
+  runOnClient(() => {
+    try {
+      localStorage.removeItem(CONSENT_STORAGE_KEY);
+      notifyConsentListeners();
+    } catch {
+      // Ignore storage errors (private mode, quota).
+    }
+  });
 };

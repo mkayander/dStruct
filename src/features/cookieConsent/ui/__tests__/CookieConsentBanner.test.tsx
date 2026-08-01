@@ -17,20 +17,23 @@ vi.mock("#/shared/hooks", async (importOriginal) => {
   };
 });
 
-const renderBanner = () => {
+const renderBanner = (options?: { isSettingsView?: boolean }) => {
   const onAcceptAll = vi.fn();
   const onRejectNonEssential = vi.fn();
+  const onClose = vi.fn();
 
   render(
     <ThemeProvider theme={theme}>
       <CookieConsentBanner
+        isSettingsView={options?.isSettingsView ?? false}
         onAcceptAll={onAcceptAll}
         onRejectNonEssential={onRejectNonEssential}
+        onClose={onClose}
       />
     </ThemeProvider>,
   );
 
-  return { onAcceptAll, onRejectNonEssential };
+  return { onAcceptAll, onRejectNonEssential, onClose };
 };
 
 describe("CookieConsentBanner", () => {
@@ -60,5 +63,14 @@ describe("CookieConsentBanner", () => {
 
     expect(onAcceptAll).toHaveBeenCalledTimes(1);
     expect(onRejectNonEssential).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows settings copy and close control in settings view", async () => {
+    const user = userEvent.setup();
+    const { onClose } = renderBanner({ isSettingsView: true });
+
+    expect(screen.getByText("COOKIE_SETTINGS_TITLE")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "CANCEL" }));
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

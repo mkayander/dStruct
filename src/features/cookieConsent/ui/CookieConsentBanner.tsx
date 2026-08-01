@@ -1,6 +1,16 @@
 "use client";
 
-import { Box, Button, Link as MuiLink, Paper, Stack, Typography, useTheme } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  Box,
+  Button,
+  IconButton,
+  Link as MuiLink,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
@@ -8,13 +18,17 @@ import { useI18nContext } from "#/shared/hooks";
 import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 
 type CookieConsentBannerProps = {
+  isSettingsView: boolean;
   onAcceptAll: () => void;
   onRejectNonEssential: () => void;
+  onClose: () => void;
 };
 
 export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
+  isSettingsView,
   onAcceptAll,
   onRejectNonEssential,
+  onClose,
 }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
@@ -22,7 +36,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
   return (
     <Box
       component="section"
-      role="dialog"
+      role="region"
       aria-labelledby="cookie-consent-title"
       aria-describedby="cookie-consent-description"
       sx={{
@@ -46,15 +60,28 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
           px: { xs: 2, sm: 3 },
           py: 2,
           borderRadius: 2,
+          position: "relative",
           ...glassOverlaySx(theme),
         }}
       >
+        {isSettingsView ? (
+          <IconButton
+            aria-label={LL.CANCEL()}
+            onClick={onClose}
+            size="small"
+            sx={{ position: "absolute", top: 8, right: 8 }}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        ) : null}
+
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={2}
           sx={{
             alignItems: { xs: "stretch", sm: "center" },
             justifyContent: "space-between",
+            pr: isSettingsView ? 4 : 0,
           }}
         >
           <Box sx={{ minWidth: 0 }}>
@@ -64,14 +91,18 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
               component="h2"
               sx={{ mb: 0.5 }}
             >
-              {LL.COOKIE_CONSENT_TITLE()}
+              {isSettingsView
+                ? LL.COOKIE_SETTINGS_TITLE()
+                : LL.COOKIE_CONSENT_TITLE()}
             </Typography>
             <Typography
               id="cookie-consent-description"
               variant="body2"
               color="text.secondary"
             >
-              {LL.COOKIE_CONSENT_MESSAGE()}{" "}
+              {isSettingsView
+                ? LL.COOKIE_SETTINGS_MESSAGE()
+                : LL.COOKIE_CONSENT_MESSAGE()}{" "}
               <MuiLink
                 component={Link}
                 href="/privacy"
@@ -92,12 +123,12 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
           >
             <Button
               variant="outlined"
-              color="inherit"
+              color="primary"
               onClick={onRejectNonEssential}
             >
               {LL.COOKIE_REJECT_NON_ESSENTIAL()}
             </Button>
-            <Button variant="contained" onClick={onAcceptAll}>
+            <Button variant="outlined" color="primary" onClick={onAcceptAll}>
               {LL.COOKIE_ACCEPT_ALL()}
             </Button>
           </Stack>

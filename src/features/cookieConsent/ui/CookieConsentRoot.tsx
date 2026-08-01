@@ -4,7 +4,10 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import React from "react";
 
-import { useCookieConsent } from "#/features/cookieConsent/hooks/useCookieConsent";
+import {
+  CookieConsentProvider,
+  useCookieConsentController,
+} from "#/features/cookieConsent/context/CookieConsentContext";
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
 
 type CookieConsentRootProps = {
@@ -14,28 +17,25 @@ type CookieConsentRootProps = {
 export const CookieConsentRoot: React.FC<CookieConsentRootProps> = ({
   children,
 }) => {
-  const {
-    showBanner,
-    analyticsEnabled,
-    acceptAll,
-    rejectNonEssential,
-  } = useCookieConsent();
+  const consent = useCookieConsentController();
 
   return (
-    <>
+    <CookieConsentProvider value={{ openCookieSettings: consent.openCookieSettings }}>
       {children}
-      {showBanner ? (
+      {consent.showBanner ? (
         <CookieConsentBanner
-          onAcceptAll={acceptAll}
-          onRejectNonEssential={rejectNonEssential}
+          isSettingsView={consent.isSettingsView}
+          onAcceptAll={consent.acceptAll}
+          onRejectNonEssential={consent.rejectNonEssential}
+          onClose={consent.closeCookieSettings}
         />
       ) : null}
-      {analyticsEnabled ? (
+      {consent.analyticsEnabled ? (
         <>
           <Analytics />
           <SpeedInsights />
         </>
       ) : null}
-    </>
+    </CookieConsentProvider>
   );
 };
