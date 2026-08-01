@@ -4,19 +4,15 @@ import {
   type RgbaColor,
   rgbaToCss,
 } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
+import { sampleColorAtLocalPoint } from "#/shared/ui/effects/thanosDisintegrate/sampleColorAtLocalPoint";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
 
-type RelativeRect = {
-  left: number;
-  top: number;
-  width: number;
-  height: number;
-};
-
-type ResolvedThanosOptions = Required<Omit<ThanosDisintegrateOptions, "origin">>;
+type ResolvedThanosOptions = Required<
+  Omit<ThanosDisintegrateOptions, "origin">
+>;
 
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
@@ -24,26 +20,6 @@ const resolveOptions = (
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
-
-const getRelativeRect = (
-  child: Element,
-  root: HTMLElement,
-): RelativeRect | null => {
-  const childRect = child.getBoundingClientRect();
-  const rootRect = root.getBoundingClientRect();
-  const width = childRect.width;
-  const height = childRect.height;
-  if (width <= 0 || height <= 0) {
-    return null;
-  }
-
-  return {
-    left: childRect.left - rootRect.left,
-    top: childRect.top - rootRect.top,
-    width,
-    height,
-  };
-};
 
 const createParticle = (
   x: number,
@@ -63,52 +39,6 @@ const createParticle = (
   releaseFrame: 0,
 });
 
-const addParticlesForRect = (
-  particles: ThanosParticle[],
-  rect: RelativeRect,
-  color: RgbaColor,
-  options: ResolvedThanosOptions,
-): void => {
-  const { particleStep } = options;
-  const startX = Math.max(0, Math.floor(rect.left));
-  const startY = Math.max(0, Math.floor(rect.top));
-  const endX = Math.ceil(rect.left + rect.width);
-  const endY = Math.ceil(rect.top + rect.height);
-
-  for (let y = startY; y < endY; y += particleStep) {
-    for (let x = startX; x < endX; x += particleStep) {
-      particles.push(createParticle(x, y, color, options));
-    }
-  }
-};
-
-const collectSampleColors = (element: HTMLElement): RgbaColor[] => {
-  const colors: RgbaColor[] = [];
-  const nodes: Element[] = [element, ...element.querySelectorAll("*")];
-
-  for (const node of nodes) {
-    if (!(node instanceof HTMLElement)) {
-      continue;
-    }
-
-    const style = window.getComputedStyle(node);
-    const candidates = [
-      style.backgroundColor,
-      style.color,
-      style.borderTopColor,
-    ];
-
-    for (const candidate of candidates) {
-      const parsed = parseCssColor(candidate);
-      if (parsed) {
-        colors.push(parsed);
-      }
-    }
-  }
-
-  return colors;
-};
-
 /** Builds particles from live DOM colors when raster capture is empty (e.g. glass blur). */
 export const createFallbackParticlesFromElement = (
   element: HTMLElement,
@@ -122,9 +52,8 @@ export const createFallbackParticlesFromElement = (
     return [];
   }
 
-  const particles: ThanosParticle[] = [];
   const rootStyle = window.getComputedStyle(element);
-  const rootBackground = parseCssColor(rootStyle.backgroundColor) ??
+  const defaultColor = parseCssColor(rootStyle.backgroundColor) ??
     parseCssColor(rootStyle.color) ?? {
       red: 180,
       green: 180,
@@ -132,47 +61,18 @@ export const createFallbackParticlesFromElement = (
       alpha: 0.85,
     };
 
-  addParticlesForRect(
-    particles,
-    { left: 0, top: 0, width, height },
-    rootBackground,
-    resolvedOptions,
-  );
+  const particles: ThanosParticle[] = [];
+  const { particleStep } = resolvedOptions;
 
-  const nodes: Element[] = [element, ...element.querySelectorAll("*")];
-
-  for (const node of nodes) {
-    if (!(node instanceof HTMLElement)) {
-      continue;
+  for (let y = 0; y < height; y += particleStep) {
+    for (let x = 0; x < width; x += particleStep) {
+      const sampleX = x + particleStep / 2;
+      const sampleY = y + particleStep / 2;
+      const color =
+        sampleColorAtLocalPoint(element, sampleX, sampleY) ?? defaultColor;
+      particles.push(createParticle(x, y, color, resolvedOptions));
     }
-
-    const style = window.getComputedStyle(node);
-    const background = parseCssColor(style.backgroundColor);
-    if (!background) {
-      continue;
-    }
-
-    const rect = getRelativeRect(node, element);
-    if (!rect) {
-      continue;
-    }
-
-    addParticlesForRect(particles, rect, background, resolvedOptions);
   }
-
-  if (particles.length > 0) {
-    return particles;
-  }
-
-  const sampleColors = collectSampleColors(element);
-  const fallbackColor = sampleColors[0] ?? rootBackground;
-
-  addParticlesForRect(
-    particles,
-    { left: 0, top: 0, width, height },
-    fallbackColor,
-    resolvedOptions,
-  );
 
   return particles;
 };

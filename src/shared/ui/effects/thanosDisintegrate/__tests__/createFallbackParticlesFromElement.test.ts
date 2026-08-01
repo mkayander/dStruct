@@ -1,20 +1,25 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
 
 describe("createFallbackParticlesFromElement", () => {
-  it("creates particles from descendant background colors", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+    vi.restoreAllMocks();
+  });
+
+  it("samples a single color per grid cell without stacking opaque child blocks", () => {
     const root = document.createElement("div");
-    root.style.width = "100px";
-    root.style.height = "40px";
+    root.style.width = "90px";
+    root.style.height = "30px";
     root.getBoundingClientRect = () =>
       ({
         left: 0,
         top: 0,
-        width: 100,
-        height: 40,
-        right: 100,
-        bottom: 40,
+        width: 90,
+        height: 30,
+        right: 90,
+        bottom: 30,
         x: 0,
         y: 0,
         toJSON: () => ({}),
@@ -22,45 +27,46 @@ describe("createFallbackParticlesFromElement", () => {
 
     const button = document.createElement("button");
     button.textContent = "Accept";
-    button.style.width = "40px";
+    button.style.width = "30px";
     button.style.height = "20px";
-    button.getBoundingClientRect = () =>
-      ({
-        left: 10,
-        top: 10,
-        width: 40,
-        height: 20,
-        right: 50,
-        bottom: 30,
-        x: 10,
-        y: 10,
-        toJSON: () => ({}),
-      }) as DOMRect;
-
     root.appendChild(button);
     document.body.appendChild(root);
 
-    window.getComputedStyle = (element: Element) => {
-      const style = {
-        backgroundColor: "transparent",
-        color: "rgb(0, 0, 0)",
-        borderTopColor: "rgb(0, 0, 0)",
-      };
-      if (element === button) {
-        style.backgroundColor = "rgb(30, 120, 220)";
+    document.elementsFromPoint = vi.fn((clientX: number) => {
+      if (clientX > 45) {
+        return [button, root];
       }
-      return style as CSSStyleDeclaration;
+      return [root];
+    });
+
+    window.getComputedStyle = (element: Element) => {
+      if (element === button) {
+        return {
+          backgroundColor: "rgb(255, 255, 255)",
+          color: "rgb(30, 120, 220)",
+          borderTopColor: "rgb(30, 120, 220)",
+        } as CSSStyleDeclaration;
+      }
+
+      return {
+        backgroundColor: "rgba(120, 130, 140, 0.6)",
+        color: "rgb(20, 20, 20)",
+        borderTopColor: "rgb(20, 20, 20)",
+      } as CSSStyleDeclaration;
     };
 
     const particles = createFallbackParticlesFromElement(root, {
-      particleStep: 10,
+      particleStep: 30,
       particleSize: 2,
       maxVelocity: 1,
       windX: 0,
       windY: 0,
     });
 
-    expect(particles.length).toBeGreaterThan(0);
+    expect(particles).toHaveLength(3);
+    expect(
+      particles.every((particle) => particle.color !== "rgb(255, 255, 255)"),
+    ).toBe(true);
     expect(
       particles.some((particle) => particle.color === "rgb(30, 120, 220)"),
     ).toBe(true);

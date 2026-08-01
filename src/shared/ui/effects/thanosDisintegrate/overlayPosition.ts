@@ -1,5 +1,5 @@
-/** Hides the source element while keeping layout so its rect can be tracked during scroll. */
-export const hideElementPreservingLayout = (
+/** Disables interaction while keeping the source visible for wave-synced fading. */
+export const prepareElementForDisintegrate = (
   element: HTMLElement,
 ): (() => void) => {
   const snapshot = {
@@ -8,7 +8,6 @@ export const hideElementPreservingLayout = (
     visibility: element.style.visibility,
   };
 
-  element.style.opacity = "0";
   element.style.pointerEvents = "none";
 
   return () => {
@@ -17,6 +16,16 @@ export const hideElementPreservingLayout = (
     element.style.visibility = snapshot.visibility;
   };
 };
+
+export const syncElementOpacityWithWave = (
+  element: HTMLElement,
+  disintegrationProgress: number,
+): void => {
+  element.style.opacity = String(Math.max(0, 1 - disintegrationProgress));
+};
+
+/** @deprecated Use prepareElementForDisintegrate for wave-synced fades. */
+export const hideElementPreservingLayout = prepareElementForDisintegrate;
 
 export const syncFixedOverlayToElement = (
   overlay: HTMLElement,

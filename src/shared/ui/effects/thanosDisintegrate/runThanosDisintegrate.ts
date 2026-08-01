@@ -4,9 +4,11 @@ import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/c
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
 import { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
+import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
 import {
-  hideElementPreservingLayout,
+  prepareElementForDisintegrate,
   subscribeToViewportChanges,
+  syncElementOpacityWithWave,
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
@@ -55,20 +57,13 @@ const stepParticles = (
   return visibleCount;
 };
 
-const drawParticles = (
+const drawReleasedParticles = (
   context: CanvasRenderingContext2D,
   particles: ThanosParticle[],
   frame: number,
 ): void => {
   for (const particle of particles) {
-    if (frame < particle.releaseFrame) {
-      context.globalAlpha = particle.baseAlpha;
-      context.fillStyle = particle.color;
-      context.fillRect(particle.x, particle.y, particle.size, particle.size);
-      continue;
-    }
-
-    if (particle.alpha <= 0) {
+    if (frame < particle.releaseFrame || particle.alpha <= 0) {
       continue;
     }
 
@@ -161,7 +156,7 @@ export const runThanosDisintegrate = async (
     return;
   }
 
-  const restoreElement = hideElementPreservingLayout(element);
+  const restoreElement = prepareElementForDisintegrate(element);
   syncFixedOverlayToElement(overlayCanvas, element);
   document.body.appendChild(overlayCanvas);
 
@@ -179,12 +174,18 @@ export const runThanosDisintegrate = async (
 
       const animate = () => {
         syncOverlayPosition();
+        const disintegrationProgress = getWaveDisintegrationProgress(
+          particles,
+          frame,
+        );
+        syncElementOpacityWithWave(element, disintegrationProgress);
         overlayContext.clearRect(0, 0, displayWidth, displayHeight);
         const visibleCount = stepParticles(particles, frame, resolvedOptions);
-        drawParticles(overlayContext, particles, frame);
+        drawReleasedParticles(overlayContext, particles, frame);
 
         frame += 1;
         if (visibleCount === 0 || frame >= totalMaxFrames) {
+          element.style.opacity = "0";
           resolve();
           return;
         }
