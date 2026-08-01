@@ -1,3 +1,10 @@
+## [1.379.2](https://github.com/mkayander/dStruct/compare/v1.379.1...v1.379.2) (2026-08-01)
+
+
+### Bug Fixes
+
+* **env:** harden codegen recovery and align .env.example with Postgres ([#152](https://github.com/mkayander/dStruct/issues/152)) ([acc8c62](https://github.com/mkayander/dStruct/commit/acc8c626ac8db8f7263404a28823030c5ddc1d45))
+
 ## [1.379.1](https://github.com/mkayander/dStruct/compare/v1.379.0...v1.379.1) (2026-06-02)
 
 
