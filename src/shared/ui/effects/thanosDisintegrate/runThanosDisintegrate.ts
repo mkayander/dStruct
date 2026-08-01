@@ -1,6 +1,7 @@
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
 import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
+import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
 import { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
 import {
   hideElementPreservingLayout,
@@ -91,7 +92,10 @@ export const runThanosDisintegrate = async (
   const width = sourceCanvas.width;
   const height = sourceCanvas.height;
   const imageData = context.getImageData(0, 0, width, height);
-  const particles = createParticlesFromImageData(imageData, resolvedOptions);
+  let particles = createParticlesFromImageData(imageData, resolvedOptions);
+  if (particles.length === 0) {
+    particles = createFallbackParticlesFromElement(element, resolvedOptions);
+  }
   if (particles.length === 0) {
     return;
   }
@@ -103,7 +107,7 @@ export const runThanosDisintegrate = async (
   overlayCanvas.style.width = `${width}px`;
   overlayCanvas.style.height = `${height}px`;
   overlayCanvas.style.pointerEvents = "none";
-  overlayCanvas.style.zIndex = String(resolvedOptions.zIndex);
+  overlayCanvas.style.zIndex = String(Math.max(resolvedOptions.zIndex, 12_000));
 
   const overlayContext = overlayCanvas.getContext("2d");
   if (!overlayContext) {

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
 import { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate";
+import { waitForPaint } from "#/shared/ui/effects/thanosDisintegrate/waitForPaint";
 
 type CookieConsentBannerWithDismissEffectProps = {
   isSettingsView: boolean;
@@ -30,6 +31,10 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
 }) => {
   const { targetRef, disintegrate } = useThanosDisintegrate();
   const isDismissingRef = useRef(false);
+  const [frozenSettingsView, setFrozenSettingsView] = useState<boolean | null>(
+    null,
+  );
+  const displayIsSettingsView = frozenSettingsView ?? isSettingsView;
 
   const withDisintegrateDismiss = useCallback(
     (action: () => void) => () => {
@@ -38,24 +43,27 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
       }
 
       isDismissingRef.current = true;
+      setFrozenSettingsView(isSettingsView);
       onBeginDismiss();
       action();
 
       void (async () => {
         try {
+          await waitForPaint();
           await disintegrate();
         } finally {
+          setFrozenSettingsView(null);
           onCompleteDismiss();
           isDismissingRef.current = false;
         }
       })();
     },
-    [disintegrate, onBeginDismiss, onCompleteDismiss],
+    [disintegrate, isSettingsView, onBeginDismiss, onCompleteDismiss],
   );
 
   return (
     <CookieConsentBanner
-      isSettingsView={isSettingsView}
+      isSettingsView={displayIsSettingsView}
       surfaceRef={targetRef}
       onAcceptAll={withDisintegrateDismiss(onAcceptAll)}
       onRejectNonEssential={withDisintegrateDismiss(onRejectNonEssential)}

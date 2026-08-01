@@ -20,9 +20,17 @@ export const captureElementToCanvas = async (
 
   const clone = element.cloneNode(true) as HTMLElement;
   copyInlineStyles(element, clone);
+  const computed = window.getComputedStyle(element);
   clone.style.margin = "0";
   clone.style.position = "relative";
   clone.style.transform = "none";
+  clone.style.backdropFilter = "none";
+  clone.style.webkitBackdropFilter = "none";
+  clone.style.backgroundColor = computed.backgroundColor;
+  clone.style.color = computed.color;
+  clone.style.border = computed.border;
+  clone.style.borderRadius = computed.borderRadius;
+  clone.style.boxShadow = computed.boxShadow;
 
   const svgMarkup = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
