@@ -1,4 +1,5 @@
 import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
+import { getParticleMotionProfile } from "#/shared/ui/effects/thanosDisintegrate/sparkParticlePhysics";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
@@ -40,7 +41,7 @@ const createSplatVelocity = (
   };
 };
 
-const createWindyVelocity = (
+const createSparkVelocity = (
   resolvedOptions: ReturnType<typeof resolveThanosDisintegrateOptions>,
 ): { vx: number; vy: number } => {
   const launchAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.35;
@@ -68,10 +69,13 @@ export const createThanosParticle = ({
   options,
 }: CreateParticleInput): ThanosParticle => {
   const resolvedOptions = resolveThanosDisintegrateOptions(options);
-  const isWindy = resolvedOptions.particleMotionMode === "windy";
-  const velocity = isWindy
-    ? createWindyVelocity(resolvedOptions)
-    : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
+  const motionProfile = getParticleMotionProfile(
+    resolvedOptions.particleMotionMode,
+  );
+  const velocity =
+    resolvedOptions.particleMotionMode === "windy"
+      ? createSparkVelocity(resolvedOptions)
+      : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
 
   return {
     x,
@@ -85,16 +89,13 @@ export const createThanosParticle = ({
     baseAlpha: alpha,
     size: resolvedOptions.particleSize * (0.75 + Math.random() * 0.45),
     rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.5) * (isWindy ? 9 : 5),
-    drag: isWindy
-      ? 0.978 + Math.random() * 0.015
-      : 0.955 + Math.random() * 0.03,
-    fadeStart: isWindy
-      ? 0.22 + Math.random() * 0.18
-      : 0.45 + Math.random() * 0.25,
-    fadeDuration: isWindy
-      ? 0.22 + Math.random() * 0.24
-      : 0.3 + Math.random() * 0.35,
+    rotationSpeed: (Math.random() - 0.5) * motionProfile.rotationSpeed,
+    drag: motionProfile.dragMin + Math.random() * motionProfile.dragRange,
+    fadeStart:
+      motionProfile.fadeStartMin + Math.random() * motionProfile.fadeStartRange,
+    fadeDuration:
+      motionProfile.fadeDurationMin +
+      Math.random() * motionProfile.fadeDurationRange,
     releaseTime: 0,
     turbulenceSeed: Math.random() * 1000,
   };

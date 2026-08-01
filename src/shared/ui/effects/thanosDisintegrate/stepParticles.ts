@@ -1,15 +1,16 @@
 import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
+import { sampleSparkFlutter } from "#/shared/ui/effects/thanosDisintegrate/sparkFlutter";
+import {
+  SPARK_BUOYANCY,
+  SPARK_BUOYANCY_DECAY,
+  SPARK_FLUTTER_STRENGTH,
+  SPARK_GRAVITY_RAMP_SECONDS,
+  SPARK_WIND_MULTIPLIER,
+} from "#/shared/ui/effects/thanosDisintegrate/sparkParticlePhysics";
 import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-import { sampleSparkFlutter } from "#/shared/ui/effects/thanosDisintegrate/windTurbulence";
-
-const SPARK_FLUTTER_STRENGTH = 210;
-const SPARK_BUOYANCY = -260;
-const SPARK_BUOYANCY_DECAY = 5.2;
-const SPARK_GRAVITY_RAMP_SECONDS = 0.18;
-const SPARK_WIND_MULTIPLIER = 0.55;
 
 const applyDrag = (velocity: number, drag: number, deltaSeconds: number) =>
   velocity * Math.pow(drag, deltaSeconds * 60);
@@ -44,7 +45,7 @@ const stepSplatParticle = (
   particle.y += particle.vy * deltaSeconds;
 };
 
-const stepWindyParticle = (
+const stepSparkParticle = (
   particle: ThanosParticle,
   deltaSeconds: number,
   elapsedSeconds: number,
@@ -96,7 +97,7 @@ export const stepParticles = (
     const timeSinceRelease = elapsedSeconds - particle.releaseTime;
 
     if (resolvedOptions.particleMotionMode === "windy") {
-      stepWindyParticle(
+      stepSparkParticle(
         particle,
         deltaSeconds,
         elapsedSeconds,

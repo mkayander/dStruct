@@ -1,25 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  sampleSparkFlutter,
-  sampleWindNoise2D,
-} from "#/shared/ui/effects/thanosDisintegrate/windTurbulence";
+import { sampleSparkFlutter } from "#/shared/ui/effects/thanosDisintegrate/sparkFlutter";
 
-describe("windTurbulence", () => {
-  it("returns smooth, bounded noise values", () => {
-    const samples = Array.from({ length: 20 }, (_, index) =>
-      sampleWindNoise2D(index * 0.25, index * 0.1),
-    );
-
-    for (const value of samples) {
-      expect(value).toBeGreaterThanOrEqual(-1.5);
-      expect(value).toBeLessThanOrEqual(1.5);
-    }
-
-    expect(samples[1]).not.toBe(samples[0]);
-  });
-
-  it("produces bounded flutter forces per particle", () => {
+describe("sampleSparkFlutter", () => {
+  it("produces bounded, per-particle flutter forces", () => {
     const first = sampleSparkFlutter(0.2, 12);
     const second = sampleSparkFlutter(0.2, 84);
 

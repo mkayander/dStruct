@@ -1,4 +1,8 @@
 import { resolveThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/resolveThanosDisintegrateOptions";
+import {
+  SPARK_TRAVEL_PADDING,
+  SPARK_UPWARD_TRAVEL_FACTOR,
+} from "#/shared/ui/effects/thanosDisintegrate/sparkParticlePhysics";
 import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 /** Max distance a particle can travel from its origin during the animation. */
@@ -14,8 +18,11 @@ export const getParticleMaxTravel = (
     Math.abs(resolvedOptions.windY) * duration;
 
   if (resolvedOptions.particleMotionMode === "windy") {
-    const upwardTravel = resolvedOptions.maxVelocity * 0.75;
-    return baseTravel * 1.45 + upwardTravel + 36;
+    return (
+      baseTravel * 1.45 +
+      resolvedOptions.maxVelocity * SPARK_UPWARD_TRAVEL_FACTOR +
+      SPARK_TRAVEL_PADDING
+    );
   }
 
   return baseTravel;
@@ -27,7 +34,7 @@ export const getParticleRevealMargin = (
 ): number => {
   const resolvedOptions = resolveThanosDisintegrateOptions(options);
   return Math.ceil(
-    getParticleMaxTravel(resolvedOptions) + resolvedOptions.particleSize,
+    getParticleMaxTravel(options) + resolvedOptions.particleSize,
   );
 };
 
@@ -37,6 +44,6 @@ export const getParticleCanvasPadding = (
 ): number => {
   const resolvedOptions = resolveThanosDisintegrateOptions(options);
   return Math.ceil(
-    getParticleMaxTravel(resolvedOptions) + resolvedOptions.particleSize * 4,
+    getParticleMaxTravel(options) + resolvedOptions.particleSize * 4,
   );
 };
