@@ -32,8 +32,8 @@ vi.mock("#/shared/hooks", async (importOriginal) => {
   };
 });
 
-vi.mock("#/shared/ui/effects/thanosDisintegrate", () => ({
-  useThanosDisintegrate: () => ({
+vi.mock("#/shared/ui/effects/domDisintegrate", () => ({
+  useDomDisintegrate: () => ({
     targetRef: { current: null },
     disintegrate: disintegrateMock,
     invalidateCapture: vi.fn(),

@@ -75,4 +75,4 @@ Use code citations for non-obvious changes. Keep prose concise.
 **Response excerpt:**
 > **Fixes applied** — Removed 80-line Perlin module (dead weight). Consolidated spark constants and motion profiles. Fixed double-resolve in padding helper.
 >
-> **Verification** — 64 thanos tests pass; ESLint clean on touched files.
+> **Verification** — 64 domDisintegrate tests pass; ESLint clean on touched files.
