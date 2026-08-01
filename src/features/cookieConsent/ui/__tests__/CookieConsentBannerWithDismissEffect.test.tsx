@@ -94,6 +94,7 @@ describe("CookieConsentBannerWithDismissEffect", () => {
     });
     expect(disintegrateMock).toHaveBeenCalledWith(
       expect.objectContaining({
+        maskMode: "radial",
         origin: expect.objectContaining({
           clientX: expect.any(Number),
           clientY: expect.any(Number),
