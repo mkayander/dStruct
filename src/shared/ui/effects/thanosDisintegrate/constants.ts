@@ -1,4 +1,4 @@
-import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
+import type { ResolvedThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 export const THANOS_DISINTEGRATE_DEFAULTS = {
   particleStep: 3,
@@ -16,6 +16,4 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   maskSpreadDuration: 0.6,
   particleRenderMode: "color",
   useChunkMaskWorker: true,
-} as const satisfies Required<
-  Omit<ThanosDisintegrateOptions, "origin" | "maskStrategy">
->;
+} as const satisfies ResolvedThanosDisintegrateOptions;

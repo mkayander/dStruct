@@ -6,17 +6,14 @@ import {
 } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
 import { sampleColorAtLocalPoint } from "#/shared/ui/effects/thanosDisintegrate/sampleColorAtLocalPoint";
 import type {
+  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
 
-type ResolvedThanosOptions = Required<
-  Omit<ThanosDisintegrateOptions, "origin">
->;
-
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): ResolvedThanosOptions => ({
+): ResolvedThanosDisintegrateOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });

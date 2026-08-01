@@ -84,3 +84,8 @@ export type ThanosDisintegrateOptions = {
   /** Optional blur on the snapshot layer before punch-out (px). */
   snapshotBlur?: number;
 };
+
+/** Options with defaults applied; excludes runtime-only `origin` and strategy defaulting. */
+export type ResolvedThanosDisintegrateOptions = Required<
+  Omit<ThanosDisintegrateOptions, "origin" | "maskStrategy">
+>;

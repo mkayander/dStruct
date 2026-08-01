@@ -1,6 +1,10 @@
 import { canvasToDataUrl } from "#/shared/ui/effects/thanosDisintegrate/canvasToDataUrl";
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
+type Mask2dContext =
+  | CanvasRenderingContext2D
+  | OffscreenCanvasRenderingContext2D;
+
 export type ChunkMaskParticle = Pick<ThanosParticle, "x" | "y" | "releaseTime">;
 
 export type ChunkMaskSequence = {
@@ -97,7 +101,7 @@ export const getChunkMaskIndex = (
 };
 
 const punchModalChunk = (
-  context: CanvasRenderingContext2D,
+  context: Mask2dContext,
   particle: ChunkMaskParticle,
   originOffset: number,
   chunkSize: number,
@@ -111,7 +115,7 @@ const punchModalChunk = (
 };
 
 const revealParticleChunk = (
-  context: CanvasRenderingContext2D,
+  context: Mask2dContext,
   particle: ChunkMaskParticle,
   originOffset: number,
   chunkSize: number,
@@ -126,8 +130,8 @@ const revealParticleChunk = (
 };
 
 type MaskBuildContext = {
-  modalContext: CanvasRenderingContext2D;
-  particleContext: CanvasRenderingContext2D;
+  modalContext: Mask2dContext;
+  particleContext: Mask2dContext;
   displayWidth: number;
   displayHeight: number;
   particlePadding: number;

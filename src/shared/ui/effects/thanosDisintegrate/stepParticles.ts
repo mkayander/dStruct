@@ -1,14 +1,13 @@
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
-import type { ThanosDisintegrateOptions } from "#/shared/ui/effects/thanosDisintegrate/types";
-import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-type ResolvedThanosOptions = Required<
-  Omit<ThanosDisintegrateOptions, "origin">
->;
+import type {
+  ResolvedThanosDisintegrateOptions,
+  ThanosDisintegrateOptions,
+  ThanosParticle,
+} from "#/shared/ui/effects/thanosDisintegrate/types";
 
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): ResolvedThanosOptions => ({
+): ResolvedThanosDisintegrateOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });

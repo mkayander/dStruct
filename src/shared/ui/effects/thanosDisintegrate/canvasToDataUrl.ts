@@ -17,12 +17,15 @@ const blobToDataUrl = (blob: Blob): Promise<string> =>
 
 type MaskCanvas = HTMLCanvasElement | OffscreenCanvas;
 
+const isOffscreenCanvas = (canvas: MaskCanvas): canvas is OffscreenCanvas =>
+  typeof OffscreenCanvas !== "undefined" && canvas instanceof OffscreenCanvas;
+
 /** Serializes a canvas mask to a PNG data URL on main thread or in a worker. */
 export const canvasToDataUrl = async (canvas: MaskCanvas): Promise<string> => {
-  if ("toDataURL" in canvas && typeof canvas.toDataURL === "function") {
-    return canvas.toDataURL("image/png");
+  if (isOffscreenCanvas(canvas)) {
+    const blob = await canvas.convertToBlob({ type: "image/png" });
+    return blobToDataUrl(blob);
   }
 
-  const blob = await canvas.convertToBlob({ type: "image/png" });
-  return blobToDataUrl(blob);
+  return canvas.toDataURL("image/png");
 };

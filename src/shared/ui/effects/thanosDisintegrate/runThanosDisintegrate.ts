@@ -34,19 +34,16 @@ import {
   type ThanosCaptureSnapshot,
 } from "#/shared/ui/effects/thanosDisintegrate/thanosCaptureSnapshot";
 import type {
+  ResolvedThanosDisintegrateOptions,
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-
-type ResolvedThanosOptions = Required<
-  Omit<ThanosDisintegrateOptions, "origin" | "maskStrategy">
->;
 
 const MAX_DELTA_SECONDS = 0.05;
 
 const resolveOptions = (
   options?: ThanosDisintegrateOptions,
-): ResolvedThanosOptions => ({
+): ResolvedThanosDisintegrateOptions => ({
   ...THANOS_DISINTEGRATE_DEFAULTS,
   ...options,
 });
@@ -64,7 +61,7 @@ const syncDualLayerWave = (
   relativeOrigin: { x: number; y: number } | null,
   displayWidth: number,
   displayHeight: number,
-  resolvedOptions: ResolvedThanosOptions,
+  resolvedOptions: ResolvedThanosDisintegrateOptions,
   particlePadding: number,
   chunkMaskSequence: ChunkMaskSequence | null,
 ): void => {
@@ -145,7 +142,7 @@ export const runThanosDisintegrate = async (
   const { displayWidth, displayHeight, sourceCanvas } = snapshot;
   const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
   const effectiveMaskStrategy = resolveEffectiveMaskStrategy(
-    resolvedOptions.maskStrategy,
+    disintegrateOptions?.maskStrategy,
     relativeOrigin !== null,
   );
   const maxReleaseTime = assignParticleReleaseTimes(particles, {
