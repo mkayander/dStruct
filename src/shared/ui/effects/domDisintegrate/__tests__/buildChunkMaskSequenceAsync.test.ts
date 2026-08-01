@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
+import { createTestDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle";
 
 const workerInstances: MockWorker[] = [];
 
@@ -54,31 +54,8 @@ vi.stubGlobal("Worker", MockWorker as unknown as typeof Worker);
 const { buildChunkMaskSequenceAsync, terminateChunkMaskWorker } =
   await import("#/shared/ui/effects/domDisintegrate/buildChunkMaskSequenceAsync");
 
-const createParticle = (
-  overrides: Partial<DisintegrateParticle> = {},
-): DisintegrateParticle => ({
-  x: 0,
-  y: 0,
-  originX: 0,
-  originY: 0,
-  vx: 0,
-  vy: 0,
-  color: "rgb(255, 0, 0)",
-  alpha: 1,
-  baseAlpha: 1,
-  size: 2,
-  rotation: 0,
-  rotationSpeed: 0,
-  drag: 0.96,
-  fadeStart: 0.5,
-  fadeDuration: 0.4,
-  releaseTime: 0,
-  turbulenceSeed: 0,
-  ...overrides,
-});
-
 const maskInput = {
-  particles: [createParticle({ x: 0, y: 0, releaseTime: 0 })],
+  particles: [createTestDisintegrateParticle({ x: 0, y: 0, releaseTime: 0 })],
   displayWidth: 12,
   displayHeight: 6,
   particlePadding: 4,

@@ -56,7 +56,7 @@ describe("stepParticles", () => {
     expect(secondParticle.x).toBeCloseTo(positionAfterOneFrame, 2);
   });
 
-  it("arcs windy particles upward before gravity pulls them down", () => {
+  it("zig-zags laterally while rising", () => {
     const particle = createDisintegrateParticle({
       x: 20,
       y: 40,
@@ -67,32 +67,43 @@ describe("stepParticles", () => {
       options: {
         particleMotionMode: "windy",
         maxVelocity: 80,
-        windX: 10,
-        windY: -6,
+        windX: 0,
+        windY: 0,
         gravity: 240,
       },
     });
     particle.releaseTime = 0;
-    particle.vx = 6;
-    particle.vy = -40;
-    particle.drag = 1;
-    particle.turbulenceSeed = 42;
+    particle.vx = 0;
+    particle.vy = -50;
+    particle.drag = 0.97;
+    particle.turbulenceSeed = 17;
 
+    const xPositions: number[] = [particle.x];
     const yPositions: number[] = [particle.y];
-    for (let frame = 1; frame <= 120; frame += 1) {
+    for (let frame = 1; frame <= 150; frame += 1) {
       stepParticles([particle], 1 / 60, frame / 60, {
         particleMotionMode: "windy",
-        windX: 10,
-        windY: -6,
+        windX: 0,
+        windY: 0,
         gravity: 240,
       });
+      xPositions.push(particle.x);
       yPositions.push(particle.y);
     }
 
-    const lowestY = Math.min(...yPositions);
-    const highestY = Math.max(...yPositions);
+    const xDeltas = xPositions
+      .slice(1)
+      .map((xPosition, index) => xPosition - xPositions[index]!);
+    const directionChanges = xDeltas
+      .slice(1)
+      .filter(
+        (delta, index) => Math.sign(delta) !== Math.sign(xDeltas[index]!),
+      ).length;
+    const lateralSpread = Math.max(...xPositions) - Math.min(...xPositions);
+    const peakAltitude = Math.min(...yPositions);
 
-    expect(lowestY).toBeLessThan(40);
-    expect(highestY).toBeGreaterThan(lowestY + 6);
+    expect(directionChanges).toBeGreaterThanOrEqual(4);
+    expect(lateralSpread).toBeGreaterThan(12);
+    expect(peakAltitude).toBeLessThan(40 - 15);
   });
 });

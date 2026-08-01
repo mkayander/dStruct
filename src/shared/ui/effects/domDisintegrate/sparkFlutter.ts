@@ -3,22 +3,23 @@ type SparkFlutterForces = {
   forceY: number;
 };
 
-/** High-frequency oscillation that makes sparks waver and zig-zag in the air. */
+/**
+ * Lateral sway and wobble along a spark's flight path.
+ * Uses slower sine waves so motion reads as zig-zag, not high-frequency jitter.
+ */
 export const sampleSparkFlutter = (
-  elapsedSeconds: number,
+  timeSinceRelease: number,
   turbulenceSeed: number,
 ): SparkFlutterForces => {
-  const phase = elapsedSeconds + turbulenceSeed * 0.017;
+  const phase = timeSinceRelease + turbulenceSeed * 0.031;
 
   return {
     forceX:
-      Math.sin(phase * 19.3) * 0.42 +
-      Math.sin(phase * 33.7 + turbulenceSeed) * 0.28 +
-      Math.cos(phase * 47.1) * 0.14 +
-      Math.sin(phase * 11.2 + turbulenceSeed * 0.35) * 0.12,
+      Math.sin(phase * 7.5) * 0.58 +
+      Math.sin(phase * 4.2 + turbulenceSeed * 0.08) * 0.36 +
+      Math.sin(phase * 11.4 + turbulenceSeed * 0.12) * 0.2,
     forceY:
-      Math.cos(phase * 24.5 + turbulenceSeed * 0.5) * 0.16 +
-      Math.sin(phase * 38.9) * 0.1 +
-      Math.cos(phase * 15.8 + turbulenceSeed * 0.2) * 0.08,
+      Math.cos(phase * 6.1 + turbulenceSeed * 0.15) * 0.14 +
+      Math.sin(phase * 9.4) * 0.09,
   };
 };

@@ -1,31 +1,14 @@
 import { describe, expect, it } from "vitest";
 
+import { createTestDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle";
 import { applyWaveOrigin } from "#/shared/ui/effects/domDisintegrate/applyWaveOrigin";
-import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
-
-const createParticle = (x: number, y: number): DisintegrateParticle => ({
-  x,
-  y,
-  originX: x,
-  originY: y,
-  vx: 0,
-  vy: 0,
-  color: "rgb(0, 0, 0)",
-  alpha: 1,
-  baseAlpha: 1,
-  size: 2,
-  rotation: 0,
-  rotationSpeed: 0,
-  drag: 0.96,
-  fadeStart: 0.5,
-  fadeDuration: 0.4,
-  releaseTime: 0,
-  turbulenceSeed: 0,
-});
 
 describe("applyWaveOrigin", () => {
   it("delays particles farther from the origin", () => {
-    const particles = [createParticle(0, 0), createParticle(30, 0)];
+    const particles = [
+      createTestDisintegrateParticle({ x: 0, y: 0, originX: 0, originY: 0 }),
+      createTestDisintegrateParticle({ x: 30, y: 0, originX: 30, originY: 0 }),
+    ];
 
     const maxReleaseTime = applyWaveOrigin(particles, { x: 0, y: 0 }, 10);
 

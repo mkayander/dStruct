@@ -23,26 +23,11 @@ const { runDomDisintegrate } =
   await import("#/shared/ui/effects/domDisintegrate/runDomDisintegrate");
 const { DomDisintegrateError } =
   await import("#/shared/ui/effects/domDisintegrate/domDisintegrateError");
+const { createTestDisintegrateParticle } =
+  await import("#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle");
 
-const createParticle = () => ({
-  x: 0,
-  y: 0,
-  originX: 0,
-  originY: 0,
-  vx: 0,
-  vy: 0,
-  color: "rgb(100, 120, 140)",
-  alpha: 1,
-  baseAlpha: 1,
-  size: 2,
-  rotation: 0,
-  rotationSpeed: 0,
-  drag: 0.96,
-  fadeStart: 0.5,
-  fadeDuration: 0.4,
-  releaseTime: 0,
-  turbulenceSeed: 0,
-});
+const createParticle = () =>
+  createTestDisintegrateParticle({ color: "rgb(100, 120, 140)" });
 
 const createElement = () => {
   const element = document.createElement("div");

@@ -3,13 +3,14 @@ import {
   SPARK_TRAVEL_PADDING,
   SPARK_UPWARD_TRAVEL_FACTOR,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
-import type { DomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/types";
+import type {
+  DomDisintegrateOptions,
+  ResolvedDomDisintegrateOptions,
+} from "#/shared/ui/effects/domDisintegrate/types";
 
-/** Max distance a particle can travel from its origin during the animation. */
-export const getParticleMaxTravel = (
-  options?: DomDisintegrateOptions,
+const computeParticleMaxTravel = (
+  resolvedOptions: ResolvedDomDisintegrateOptions,
 ): number => {
-  const resolvedOptions = resolveDomDisintegrateOptions(options);
   const duration = resolvedOptions.maxDuration;
   const baseTravel =
     resolvedOptions.maxVelocity * duration +
@@ -19,7 +20,7 @@ export const getParticleMaxTravel = (
 
   if (resolvedOptions.particleMotionMode === "windy") {
     return (
-      baseTravel * 1.45 +
+      baseTravel * 1.65 +
       resolvedOptions.maxVelocity * SPARK_UPWARD_TRAVEL_FACTOR +
       SPARK_TRAVEL_PADDING
     );
@@ -28,13 +29,18 @@ export const getParticleMaxTravel = (
   return baseTravel;
 };
 
+/** Max distance a particle can travel from its origin during the animation. */
+export const getParticleMaxTravel = (
+  options?: DomDisintegrateOptions,
+): number => computeParticleMaxTravel(resolveDomDisintegrateOptions(options));
+
 /** Margin around each chunk hole on the particle mask so flying pixels stay visible. */
 export const getParticleRevealMargin = (
   options?: DomDisintegrateOptions,
 ): number => {
   const resolvedOptions = resolveDomDisintegrateOptions(options);
   return Math.ceil(
-    getParticleMaxTravel(options) + resolvedOptions.particleSize,
+    computeParticleMaxTravel(resolvedOptions) + resolvedOptions.particleSize,
   );
 };
 
@@ -44,6 +50,7 @@ export const getParticleCanvasPadding = (
 ): number => {
   const resolvedOptions = resolveDomDisintegrateOptions(options);
   return Math.ceil(
-    getParticleMaxTravel(options) + resolvedOptions.particleSize * 4,
+    computeParticleMaxTravel(resolvedOptions) +
+      resolvedOptions.particleSize * 4,
   );
 };

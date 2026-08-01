@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { createTestDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle";
 import {
   buildChunkMaskThresholds,
   createChunkMaskSequence,
@@ -7,38 +8,14 @@ import {
   revealParticleChunk,
   revealParticleMaskBleedZone,
 } from "#/shared/ui/effects/domDisintegrate/createChunkMaskSequence";
-import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
-
-const createParticle = (
-  overrides: Partial<DisintegrateParticle> = {},
-): DisintegrateParticle => ({
-  x: 0,
-  y: 0,
-  originX: 0,
-  originY: 0,
-  vx: 0,
-  vy: 0,
-  color: "rgb(255, 0, 0)",
-  alpha: 1,
-  baseAlpha: 1,
-  size: 2,
-  rotation: 0,
-  rotationSpeed: 0,
-  drag: 0.96,
-  fadeStart: 0.5,
-  fadeDuration: 0.4,
-  releaseTime: 0,
-  turbulenceSeed: 0,
-  ...overrides,
-});
 
 describe("createChunkMaskSequence", () => {
   it("buckets release times to a bounded number of thresholds", () => {
     const particles = [
-      createParticle({ releaseTime: 0 }),
-      createParticle({ releaseTime: 0.1 }),
-      createParticle({ releaseTime: 0.2 }),
-      createParticle({ releaseTime: 0.35 }),
+      createTestDisintegrateParticle({ releaseTime: 0 }),
+      createTestDisintegrateParticle({ releaseTime: 0.1 }),
+      createTestDisintegrateParticle({ releaseTime: 0.2 }),
+      createTestDisintegrateParticle({ releaseTime: 0.35 }),
     ];
 
     const thresholds = buildChunkMaskThresholds(particles, 2);
@@ -56,8 +33,8 @@ describe("createChunkMaskSequence", () => {
 
   it("builds paired modal and particle mask data urls", () => {
     const particles = [
-      createParticle({ x: 0, y: 0, releaseTime: 0 }),
-      createParticle({ x: 3, y: 0, releaseTime: 0.5 }),
+      createTestDisintegrateParticle({ x: 0, y: 0, releaseTime: 0 }),
+      createTestDisintegrateParticle({ x: 3, y: 0, releaseTime: 0.5 }),
     ];
 
     const sequence = createChunkMaskSequence({

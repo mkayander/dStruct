@@ -44,17 +44,17 @@ const createSplatVelocity = (
 const createSparkVelocity = (
   resolvedOptions: ReturnType<typeof resolveDomDisintegrateOptions>,
 ): { vx: number; vy: number } => {
-  const launchAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.35;
-  const speed = resolvedOptions.maxVelocity * (0.32 + Math.random() * 0.58);
+  const launchAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.5;
+  const speed = resolvedOptions.maxVelocity * (0.42 + Math.random() * 0.62);
 
   return {
     vx:
-      Math.cos(launchAngle) * speed * 0.42 +
+      Math.cos(launchAngle) * speed * 0.55 +
       resolvedOptions.windX * 0.25 +
-      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.18,
+      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.28,
     vy:
       Math.sin(launchAngle) * speed -
-      resolvedOptions.maxVelocity * (0.08 + Math.random() * 0.14),
+      resolvedOptions.maxVelocity * (0.1 + Math.random() * 0.16),
   };
 };
 

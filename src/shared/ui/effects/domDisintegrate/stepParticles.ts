@@ -48,7 +48,6 @@ const stepSplatParticle = (
 const stepSparkParticle = (
   particle: DisintegrateParticle,
   deltaSeconds: number,
-  elapsedSeconds: number,
   timeSinceRelease: number,
   windX: number,
   windY: number,
@@ -57,7 +56,7 @@ const stepSparkParticle = (
   particle.vx = applyDrag(particle.vx, particle.drag, deltaSeconds);
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
 
-  const flutter = sampleSparkFlutter(elapsedSeconds, particle.turbulenceSeed);
+  const flutter = sampleSparkFlutter(timeSinceRelease, particle.turbulenceSeed);
   const buoyancy =
     SPARK_BUOYANCY * Math.exp(-timeSinceRelease * SPARK_BUOYANCY_DECAY);
   const gravityRamp = Math.min(
@@ -100,7 +99,6 @@ export const stepParticles = (
       stepSparkParticle(
         particle,
         deltaSeconds,
-        elapsedSeconds,
         timeSinceRelease,
         resolvedOptions.windX,
         resolvedOptions.windY,

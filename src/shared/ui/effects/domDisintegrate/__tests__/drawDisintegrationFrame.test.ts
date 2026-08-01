@@ -1,30 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { createTestDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/domDisintegrate/drawDisintegrationFrame";
-import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
-
-const createParticle = (
-  overrides: Partial<DisintegrateParticle> = {},
-): DisintegrateParticle => ({
-  x: 0,
-  y: 0,
-  originX: 0,
-  originY: 0,
-  vx: 0,
-  vy: 0,
-  color: "rgb(255, 0, 0)",
-  alpha: 1,
-  baseAlpha: 1,
-  size: 2,
-  rotation: 0,
-  rotationSpeed: 0,
-  drag: 0.96,
-  fadeStart: 0.5,
-  fadeDuration: 0.4,
-  releaseTime: 0,
-  turbulenceSeed: 0,
-  ...overrides,
-});
 
 describe("drawDisintegrationFrame", () => {
   it("draws only released flying particles beneath the live surface", () => {
@@ -40,8 +17,8 @@ describe("drawDisintegrationFrame", () => {
     } as unknown as CanvasRenderingContext2D;
 
     const particles = [
-      createParticle({ releaseTime: 0.5 }),
-      createParticle({ releaseTime: 0.2, x: 1, y: 1 }),
+      createTestDisintegrateParticle({ releaseTime: 0.5 }),
+      createTestDisintegrateParticle({ releaseTime: 0.2, x: 1, y: 1 }),
     ];
 
     drawDisintegrationFrame(context, particles, 0, 6, 6);
@@ -62,7 +39,9 @@ describe("drawDisintegrationFrame", () => {
       globalAlpha: 1,
     } as unknown as CanvasRenderingContext2D;
 
-    const particles = [createParticle({ releaseTime: 0, x: 1, y: 1 })];
+    const particles = [
+      createTestDisintegrateParticle({ releaseTime: 0, x: 1, y: 1 }),
+    ];
 
     drawDisintegrationFrame(context, particles, 0.1, 6, 6);
 
@@ -81,7 +60,9 @@ describe("drawDisintegrationFrame", () => {
       globalAlpha: 1,
     } as unknown as CanvasRenderingContext2D;
 
-    const particles = [createParticle({ releaseTime: 0, x: 4, y: 6, size: 2 })];
+    const particles = [
+      createTestDisintegrateParticle({ releaseTime: 0, x: 4, y: 6, size: 2 }),
+    ];
 
     drawDisintegrationFrame(context, particles, 0.1, 20, 20, 8);
 
@@ -103,7 +84,13 @@ describe("drawDisintegrationFrame", () => {
 
     const sourceCanvas = document.createElement("canvas");
     const particles = [
-      createParticle({ releaseTime: 0, x: 2, y: 2, originX: 4, originY: 6 }),
+      createTestDisintegrateParticle({
+        releaseTime: 0,
+        x: 2,
+        y: 2,
+        originX: 4,
+        originY: 6,
+      }),
     ];
 
     drawDisintegrationFrame(context, particles, 0.1, 20, 20, 0, {
