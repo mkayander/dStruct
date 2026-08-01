@@ -14,7 +14,8 @@ export const getParticleMaxTravel = (
     Math.abs(resolvedOptions.windY) * duration;
 
   if (resolvedOptions.particleMotionMode === "windy") {
-    return baseTravel * 1.65 + 48;
+    const upwardTravel = resolvedOptions.maxVelocity * 0.75;
+    return baseTravel * 1.45 + upwardTravel + 36;
   }
 
   return baseTravel;

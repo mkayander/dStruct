@@ -43,22 +43,17 @@ const createSplatVelocity = (
 const createWindyVelocity = (
   resolvedOptions: ReturnType<typeof resolveThanosDisintegrateOptions>,
 ): { vx: number; vy: number } => {
-  const windAngle = Math.atan2(
-    resolvedOptions.windY,
-    Math.max(12, Math.abs(resolvedOptions.windX)),
-  );
-  const spread = (Math.random() - 0.5) * 1.1;
-  const angle = windAngle + spread;
-  const speed = resolvedOptions.maxVelocity * (0.12 + Math.random() * 0.38);
+  const launchAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.35;
+  const speed = resolvedOptions.maxVelocity * (0.32 + Math.random() * 0.58);
 
   return {
     vx:
-      Math.cos(angle) * speed +
-      resolvedOptions.windX * (0.35 + Math.random() * 0.25),
+      Math.cos(launchAngle) * speed * 0.42 +
+      resolvedOptions.windX * 0.25 +
+      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.18,
     vy:
-      Math.sin(angle) * speed +
-      resolvedOptions.windY * 0.35 -
-      resolvedOptions.maxVelocity * (0.04 + Math.random() * 0.08),
+      Math.sin(launchAngle) * speed -
+      resolvedOptions.maxVelocity * (0.08 + Math.random() * 0.14),
   };
 };
 
@@ -73,10 +68,10 @@ export const createThanosParticle = ({
   options,
 }: CreateParticleInput): ThanosParticle => {
   const resolvedOptions = resolveThanosDisintegrateOptions(options);
-  const velocity =
-    resolvedOptions.particleMotionMode === "windy"
-      ? createWindyVelocity(resolvedOptions)
-      : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
+  const isWindy = resolvedOptions.particleMotionMode === "windy";
+  const velocity = isWindy
+    ? createWindyVelocity(resolvedOptions)
+    : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
 
   return {
     x,
@@ -90,13 +85,16 @@ export const createThanosParticle = ({
     baseAlpha: alpha,
     size: resolvedOptions.particleSize * (0.75 + Math.random() * 0.45),
     rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.5) * 5,
-    drag:
-      resolvedOptions.particleMotionMode === "windy"
-        ? 0.972 + Math.random() * 0.02
-        : 0.955 + Math.random() * 0.03,
-    fadeStart: 0.45 + Math.random() * 0.25,
-    fadeDuration: 0.3 + Math.random() * 0.35,
+    rotationSpeed: (Math.random() - 0.5) * (isWindy ? 9 : 5),
+    drag: isWindy
+      ? 0.978 + Math.random() * 0.015
+      : 0.955 + Math.random() * 0.03,
+    fadeStart: isWindy
+      ? 0.22 + Math.random() * 0.18
+      : 0.45 + Math.random() * 0.25,
+    fadeDuration: isWindy
+      ? 0.22 + Math.random() * 0.24
+      : 0.3 + Math.random() * 0.35,
     releaseTime: 0,
     turbulenceSeed: Math.random() * 1000,
   };

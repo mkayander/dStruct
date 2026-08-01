@@ -56,49 +56,43 @@ describe("stepParticles", () => {
     expect(secondParticle.x).toBeCloseTo(positionAfterOneFrame, 2);
   });
 
-  it("curves windy particles with turbulent flow instead of a straight drift", () => {
+  it("arcs windy particles upward before gravity pulls them down", () => {
     const particle = createThanosParticle({
       x: 20,
-      y: 20,
+      y: 40,
       color: "rgb(255, 255, 255)",
       alpha: 1,
       surfaceWidth: 120,
       surfaceHeight: 60,
       options: {
         particleMotionMode: "windy",
-        maxVelocity: 40,
-        windX: 60,
-        windY: -8,
-        gravity: 40,
+        maxVelocity: 80,
+        windX: 10,
+        windY: -6,
+        gravity: 240,
       },
     });
     particle.releaseTime = 0;
-    particle.vx = 10;
-    particle.vy = 0;
+    particle.vx = 6;
+    particle.vy = -40;
     particle.drag = 1;
     particle.turbulenceSeed = 42;
 
-    const positions: Array<{ x: number; y: number }> = [
-      { x: particle.x, y: particle.y },
-    ];
-    for (let frame = 1; frame <= 90; frame += 1) {
+    const yPositions: number[] = [particle.y];
+    for (let frame = 1; frame <= 120; frame += 1) {
       stepParticles([particle], 1 / 60, frame / 60, {
         particleMotionMode: "windy",
-        windX: 60,
-        windY: -8,
-        gravity: 40,
+        windX: 10,
+        windY: -6,
+        gravity: 240,
       });
-      positions.push({ x: particle.x, y: particle.y });
+      yPositions.push(particle.y);
     }
 
-    const start = positions[0];
-    const end = positions[positions.length - 1];
-    const midpoint = positions[Math.floor(positions.length / 2)];
-    const straightLineMidY = ((start?.y ?? 0) + (end?.y ?? 0)) / 2;
+    const lowestY = Math.min(...yPositions);
+    const highestY = Math.max(...yPositions);
 
-    expect(end?.x).toBeGreaterThan((start?.x ?? 0) + 4);
-    expect(Math.abs((midpoint?.y ?? 0) - straightLineMidY)).toBeGreaterThan(
-      0.25,
-    );
+    expect(lowestY).toBeLessThan(40);
+    expect(highestY).toBeGreaterThan(lowestY + 6);
   });
 });

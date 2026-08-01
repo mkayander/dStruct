@@ -29,21 +29,21 @@ describe("createThanosParticle", () => {
     expect(particle.turbulenceSeed).toBeGreaterThanOrEqual(0);
   });
 
-  it("biases windy particles along the wind direction instead of radial burst", () => {
+  it("launches windy particles upward like fire sparks", () => {
     const particles = Array.from({ length: 24 }, () =>
       createThanosParticle({
         ...baseInput,
         options: {
           particleMotionMode: "windy",
           maxVelocity: 100,
-          windX: 80,
-          windY: -10,
+          windX: 14,
+          windY: -8,
         },
       }),
     );
 
-    const averageVelocityX =
-      particles.reduce((sum, particle) => sum + particle.vx, 0) /
+    const averageVelocityY =
+      particles.reduce((sum, particle) => sum + particle.vy, 0) /
       particles.length;
     const averageSpeed =
       particles.reduce(
@@ -51,7 +51,8 @@ describe("createThanosParticle", () => {
         0,
       ) / particles.length;
 
-    expect(averageVelocityX).toBeGreaterThan(10);
-    expect(averageSpeed).toBeLessThan(80);
+    expect(averageVelocityY).toBeLessThan(-8);
+    expect(averageSpeed).toBeGreaterThan(20);
+    expect(averageSpeed).toBeLessThan(90);
   });
 });

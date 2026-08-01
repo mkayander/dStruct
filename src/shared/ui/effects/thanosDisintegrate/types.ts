@@ -20,7 +20,7 @@ export type ThanosMaskStrategy =
 
 export type ThanosParticleRenderMode = "color" | "sprite";
 
-/** Outward burst ("splat") or wind-carried turbulent drift ("windy"). */
+/** Outward burst ("splat") or fire-spark flutter with buoyant rise ("windy"). */
 export type ThanosParticleMotionMode = "splat" | "windy";
 
 export type ThanosParticle = {

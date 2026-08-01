@@ -1,6 +1,6 @@
 /**
- * Lightweight 2D value noise for windy particle steering.
- * Produces smooth, spatially continuous gusts without external dependencies.
+ * Lightweight turbulence for windy (fire-spark) particle steering.
+ * Combines high-frequency flutter with smooth noise for organic wavering.
  */
 
 const PERMUTATION_SIZE = 256;
@@ -79,49 +79,31 @@ export const sampleWindNoise2D = (x: number, y: number): number => {
   return lerp(x1, x2, fadeY);
 };
 
-const WIND_NOISE_SCALE = 0.012;
-const WIND_TIME_SCALE = 1.4;
-
-export type WindFlowSample = {
+export type SparkFlutterSample = {
   forceX: number;
   forceY: number;
 };
 
 /**
- * Samples a time-varying flow field at a particle position.
- * Nearby particles receive similar forces; gusts evolve over the animation.
+ * High-frequency flutter forces that make sparks waver and zig-zag in the air.
+ * Each particle uses its own phase via turbulenceSeed.
  */
-export const sampleWindFlow = (
-  x: number,
-  y: number,
+export const sampleSparkFlutter = (
   elapsedSeconds: number,
   turbulenceSeed: number,
-): WindFlowSample => {
-  const timeOffset = elapsedSeconds * WIND_TIME_SCALE + turbulenceSeed;
-  const noiseX = x * WIND_NOISE_SCALE;
-  const noiseY = y * WIND_NOISE_SCALE;
-
-  const flowAngle =
-    sampleWindNoise2D(noiseX + timeOffset, noiseY - timeOffset * 0.65) *
-      Math.PI *
-      2.2 +
-    sampleWindNoise2D(
-      noiseX * 1.7 - timeOffset * 0.4,
-      noiseY * 1.3 + timeOffset * 0.55 + turbulenceSeed,
-    ) *
-      Math.PI *
-      0.9;
-
-  const gustStrength =
-    0.55 +
-    0.45 *
-      sampleWindNoise2D(
-        noiseX * 0.6 + turbulenceSeed * 0.2,
-        noiseY * 0.6 - timeOffset * 0.25,
-      );
+): SparkFlutterSample => {
+  const phase = elapsedSeconds + turbulenceSeed * 0.017;
+  const drift = sampleWindNoise2D(phase * 0.75, turbulenceSeed * 0.04) * 0.18;
 
   return {
-    forceX: Math.cos(flowAngle) * gustStrength,
-    forceY: Math.sin(flowAngle) * gustStrength,
+    forceX:
+      Math.sin(phase * 19.3) * 0.42 +
+      Math.sin(phase * 33.7 + turbulenceSeed) * 0.28 +
+      Math.cos(phase * 47.1) * 0.14 +
+      drift,
+    forceY:
+      Math.cos(phase * 24.5 + turbulenceSeed * 0.5) * 0.16 +
+      Math.sin(phase * 38.9) * 0.1 +
+      drift * 0.35,
   };
 };

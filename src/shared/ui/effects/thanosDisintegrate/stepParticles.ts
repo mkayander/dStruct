@@ -3,11 +3,13 @@ import type {
   ThanosDisintegrateOptions,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";
-import { sampleWindFlow } from "#/shared/ui/effects/thanosDisintegrate/windTurbulence";
+import { sampleSparkFlutter } from "#/shared/ui/effects/thanosDisintegrate/windTurbulence";
 
-const WINDY_FLOW_STRENGTH = 320;
-const WINDY_WIND_MULTIPLIER = 1.8;
-const WINDY_GRAVITY_MULTIPLIER = 0.35;
+const SPARK_FLUTTER_STRENGTH = 210;
+const SPARK_BUOYANCY = -260;
+const SPARK_BUOYANCY_DECAY = 5.2;
+const SPARK_GRAVITY_RAMP_SECONDS = 0.18;
+const SPARK_WIND_MULTIPLIER = 0.55;
 
 const applyDrag = (velocity: number, drag: number, deltaSeconds: number) =>
   velocity * Math.pow(drag, deltaSeconds * 60);
@@ -46,6 +48,7 @@ const stepWindyParticle = (
   particle: ThanosParticle,
   deltaSeconds: number,
   elapsedSeconds: number,
+  timeSinceRelease: number,
   windX: number,
   windY: number,
   gravity: number,
@@ -53,20 +56,22 @@ const stepWindyParticle = (
   particle.vx = applyDrag(particle.vx, particle.drag, deltaSeconds);
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
 
-  const flow = sampleWindFlow(
-    particle.x,
-    particle.y,
-    elapsedSeconds,
-    particle.turbulenceSeed,
+  const flutter = sampleSparkFlutter(elapsedSeconds, particle.turbulenceSeed);
+  const buoyancy =
+    SPARK_BUOYANCY * Math.exp(-timeSinceRelease * SPARK_BUOYANCY_DECAY);
+  const gravityRamp = Math.min(
+    1,
+    timeSinceRelease / SPARK_GRAVITY_RAMP_SECONDS,
   );
 
   particle.vx +=
-    (flow.forceX * WINDY_FLOW_STRENGTH + windX * WINDY_WIND_MULTIPLIER) *
+    (flutter.forceX * SPARK_FLUTTER_STRENGTH + windX * SPARK_WIND_MULTIPLIER) *
     deltaSeconds;
   particle.vy +=
-    (flow.forceY * WINDY_FLOW_STRENGTH +
-      windY * WINDY_WIND_MULTIPLIER +
-      gravity * WINDY_GRAVITY_MULTIPLIER) *
+    (flutter.forceY * SPARK_FLUTTER_STRENGTH +
+      buoyancy +
+      gravity * gravityRamp +
+      windY * SPARK_WIND_MULTIPLIER) *
     deltaSeconds;
   particle.x += particle.vx * deltaSeconds;
   particle.y += particle.vy * deltaSeconds;
@@ -95,6 +100,7 @@ export const stepParticles = (
         particle,
         deltaSeconds,
         elapsedSeconds,
+        timeSinceRelease,
         resolvedOptions.windX,
         resolvedOptions.windY,
         resolvedOptions.gravity,
