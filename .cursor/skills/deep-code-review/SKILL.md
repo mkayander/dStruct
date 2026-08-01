@@ -1,3 +1,9 @@
+---
+name: deep-code-review
+description: Deep code review that applies important and medium fixes plus dead-code removal in the same session
+disable-model-invocation: true
+---
+
 # Deep code review
 
 Review the code in scope (the current branch, PR diff, or files the user pointed at) and **apply fixes in this same session**. A review that only lists issues without implementing fixes is incomplete.
