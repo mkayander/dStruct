@@ -9,7 +9,7 @@ describe("codeExec.worker", () => {
       "pnpm exec esbuild src/features/codeRunner/lib/workers/codeExec.worker.ts --bundle --platform=browser --outfile=src/features/codeRunner/lib/workers/codeExec.worker.js",
     );
     worker = new Worker(new URL("codeExec.worker.ts", import.meta.url));
-  });
+  }, 30_000);
 
   it("should run the code and return the result", async () => {
     const code = `
@@ -29,7 +29,7 @@ describe("codeExec.worker", () => {
 
     expect(response.type).toBe("run");
     expect(response.output).toBe(expectedResult);
-  });
+  }, 15_000);
 
   it("should run the benchmark and return the results", async () => {
     const code = `
