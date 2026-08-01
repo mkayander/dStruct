@@ -146,6 +146,8 @@ export const runThanosDisintegrate = async (
     syncOverlayPosition,
   );
 
+  let completedSuccessfully = false;
+
   try {
     await new Promise<void>((resolve) => {
       let startTime: number | null = null;
@@ -192,6 +194,7 @@ export const runThanosDisintegrate = async (
         );
 
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
+          completedSuccessfully = true;
           element.style.opacity = "0";
           clearWaveMaskFromElement(element);
           clearParticleWaveMaskFromCanvas(overlayCanvas);
@@ -204,10 +207,8 @@ export const runThanosDisintegrate = async (
 
       requestAnimationFrame(animate);
     });
-  } catch (error) {
-    restoreElement();
-    throw error;
   } finally {
+    restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();
     overlayCanvas.remove();
   }

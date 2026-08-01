@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 
 import {
   collectViewportChangeTargets,
+  prepareElementForDisintegrate,
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 
@@ -50,5 +51,32 @@ describe("overlayPosition", () => {
     expect(overlay.style.top).toBe("48px");
     expect(overlay.style.width).toBe("320px");
     expect(overlay.style.height).toBe("120px");
+  });
+
+  it("restores pointer events and opacity after disintegrate cleanup", () => {
+    const element = document.createElement("div");
+    element.style.pointerEvents = "auto";
+    element.style.opacity = "0.75";
+
+    const restoreElement = prepareElementForDisintegrate(element);
+
+    expect(element.style.pointerEvents).toBe("none");
+
+    restoreElement();
+
+    expect(element.style.pointerEvents).toBe("auto");
+    expect(element.style.opacity).toBe("0.75");
+  });
+
+  it("can keep opacity hidden after a successful disintegrate", () => {
+    const element = document.createElement("div");
+    element.style.opacity = "0.75";
+
+    const restoreElement = prepareElementForDisintegrate(element);
+    element.style.opacity = "0";
+
+    restoreElement({ restoreOpacity: false });
+
+    expect(element.style.opacity).toBe("0");
   });
 });

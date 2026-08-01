@@ -43,10 +43,12 @@ describe("useCookieConsent", () => {
   it("hides the banner after accepting analytics", () => {
     const { result } = renderHook(() => useCookieConsent(), { wrapper });
 
+    let accepted = false;
     act(() => {
-      result.current.acceptAll();
+      accepted = result.current.acceptAll();
     });
 
+    expect(accepted).toBe(true);
     expect(result.current.showBanner).toBe(false);
     expect(result.current.analyticsEnabled).toBe(true);
   });

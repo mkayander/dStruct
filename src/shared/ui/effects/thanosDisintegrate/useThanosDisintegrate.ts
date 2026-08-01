@@ -10,6 +10,8 @@ type UseThanosDisintegrateResult = {
   targetRef: RefCallback<HTMLDivElement>;
   /** Starts the disintegration animation on `targetRef`. */
   disintegrate: (options?: RunThanosDisintegrateOptions) => Promise<void>;
+  /** Drops any pre-warmed capture so the next dismiss re-captures. */
+  invalidateCapture: () => void;
 };
 
 /**
@@ -21,6 +23,17 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
   const captureCacheRef = useRef<ThanosCaptureSnapshot | null>(null);
   const isAnimatingRef = useRef(false);
   const cancelWarmRef = useRef<(() => void) | null>(null);
+
+  const invalidateCapture = useCallback(() => {
+    captureCacheRef.current = null;
+    const element = elementRef.current;
+    if (!element) {
+      return;
+    }
+
+    cancelWarmRef.current?.();
+    cancelWarmRef.current = warmThanosCapture(element, captureCacheRef);
+  }, []);
 
   const targetRef = useCallback((node: HTMLDivElement | null) => {
     cancelWarmRef.current?.();
@@ -35,14 +48,7 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
 
   useEffect(() => {
     const invalidateCache = () => {
-      captureCacheRef.current = null;
-      const element = elementRef.current;
-      if (!element) {
-        return;
-      }
-
-      cancelWarmRef.current?.();
-      cancelWarmRef.current = warmThanosCapture(element, captureCacheRef);
+      invalidateCapture();
     };
 
     window.addEventListener("resize", invalidateCache, { passive: true });
@@ -50,7 +56,25 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
       window.removeEventListener("resize", invalidateCache);
       cancelWarmRef.current?.();
     };
-  }, []);
+  }, [invalidateCapture]);
+
+  // Fonts can finish loading after the idle warm-up snapshot was taken.
+  useEffect(() => {
+    if (typeof document === "undefined" || !document.fonts?.ready) {
+      return;
+    }
+
+    let cancelled = false;
+    void document.fonts.ready.then(() => {
+      if (!cancelled) {
+        invalidateCapture();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [invalidateCapture]);
 
   const disintegrate = useCallback(
     async (options?: RunThanosDisintegrateOptions) => {
@@ -77,5 +101,5 @@ export const useThanosDisintegrate = (): UseThanosDisintegrateResult => {
     [],
   );
 
-  return { targetRef, disintegrate };
+  return { targetRef, disintegrate, invalidateCapture };
 };

@@ -3,15 +3,19 @@ import { clearWaveMaskFromElement } from "#/shared/ui/effects/thanosDisintegrate
 /** Keeps the live surface visible; particles render on a canvas beneath it. */
 export const prepareElementForDisintegrate = (
   element: HTMLElement,
-): (() => void) => {
+): ((options?: { restoreOpacity?: boolean }) => void) => {
   const snapshot = {
     pointerEvents: element.style.pointerEvents,
+    opacity: element.style.opacity,
   };
 
   element.style.pointerEvents = "none";
 
-  return () => {
+  return (options) => {
     element.style.pointerEvents = snapshot.pointerEvents;
+    if (options?.restoreOpacity !== false) {
+      element.style.opacity = snapshot.opacity;
+    }
     clearWaveMaskFromElement(element);
   };
 };

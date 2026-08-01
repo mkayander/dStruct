@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
 import { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate";
 
 type CookieConsentBannerWithDismissEffectProps = {
   isSettingsView: boolean;
-  onAcceptAll: () => void;
-  onRejectNonEssential: () => void;
+  onAcceptAll: () => boolean;
+  onRejectNonEssential: () => boolean;
   onClose: () => void;
   onBeginDismiss: () => void;
   onCompleteDismiss: () => void;
@@ -28,40 +28,50 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
   onBeginDismiss,
   onCompleteDismiss,
 }) => {
-  const { targetRef, disintegrate } = useThanosDisintegrate();
+  const { targetRef, disintegrate, invalidateCapture } = useThanosDisintegrate();
   const isDismissingRef = useRef(false);
   const [frozenSettingsView, setFrozenSettingsView] = useState<boolean | null>(
     null,
   );
   const displayIsSettingsView = frozenSettingsView ?? isSettingsView;
 
+  // Discard a stale warm capture when the banner surface content changes.
+  useEffect(() => {
+    invalidateCapture();
+  }, [invalidateCapture, isSettingsView]);
+
   const withDisintegrateDismiss = useCallback(
-    (action: () => void) => (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (isDismissingRef.current) {
-        return;
-      }
-
-      isDismissingRef.current = true;
-      setFrozenSettingsView(isSettingsView);
-      onBeginDismiss();
-      action();
-
-      void (async () => {
-        try {
-          await disintegrate({
-            origin: {
-              clientX: event.clientX,
-              clientY: event.clientY,
-            },
-            zIndex: 1200,
-          });
-        } finally {
-          setFrozenSettingsView(null);
-          onCompleteDismiss();
-          isDismissingRef.current = false;
+    (action: () => boolean | void) =>
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (isDismissingRef.current) {
+          return;
         }
-      })();
-    },
+
+        const persisted = action();
+        if (persisted === false) {
+          return;
+        }
+
+        isDismissingRef.current = true;
+        setFrozenSettingsView(isSettingsView);
+        onBeginDismiss();
+
+        void (async () => {
+          try {
+            await disintegrate({
+              origin: {
+                clientX: event.clientX,
+                clientY: event.clientY,
+              },
+              zIndex: 1200,
+            });
+          } finally {
+            setFrozenSettingsView(null);
+            onCompleteDismiss();
+            isDismissingRef.current = false;
+          }
+        })();
+      },
     [disintegrate, isSettingsView, onBeginDismiss, onCompleteDismiss],
   );
 
