@@ -18,8 +18,11 @@ const en: BaseTranslation = {
   COOKIE_CONSENT_MESSAGE:
     "We use cookies, local storage, and similar technologies for sign-in, remembering your choices, preferences, and optional analytics. You can accept all or reject non-essential technologies. See our",
   COOKIE_CONSENT_TITLE: "Cookie preferences",
+  COOKIE_CONSENT_STORE_FAILED:
+    "Could not save your cookie preferences. Check your browser storage settings and try again.",
   COOKIE_REJECT_NON_ESSENTIAL: "Reject non-essential",
   COOKIE_SETTINGS_LINK: "Cookie settings",
+  COOKIE_SETTINGS_CLOSE: "Close cookie settings",
   COOKIE_SETTINGS_MESSAGE:
     "Update your cookie and analytics preferences below. Your choice is stored in local storage on this device. See our",
   COOKIE_SETTINGS_TITLE: "Cookie settings",

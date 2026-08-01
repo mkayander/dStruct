@@ -9,6 +9,7 @@ import {
   useCookieConsentController,
 } from "#/features/cookieConsent/context/CookieConsentContext";
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
+import { useHasMounted } from "#/shared/hooks/useHasMounted";
 
 type CookieConsentRootProps = {
   children: React.ReactNode;
@@ -17,12 +18,14 @@ type CookieConsentRootProps = {
 export const CookieConsentRoot: React.FC<CookieConsentRootProps> = ({
   children,
 }) => {
+  const hasMounted = useHasMounted();
   const consent = useCookieConsentController();
+  const showConsentChrome = hasMounted;
 
   return (
     <CookieConsentProvider value={{ openCookieSettings: consent.openCookieSettings }}>
       {children}
-      {consent.showBanner ? (
+      {showConsentChrome && consent.showBanner ? (
         <CookieConsentBanner
           isSettingsView={consent.isSettingsView}
           onAcceptAll={consent.acceptAll}
@@ -30,7 +33,7 @@ export const CookieConsentRoot: React.FC<CookieConsentRootProps> = ({
           onClose={consent.closeCookieSettings}
         />
       ) : null}
-      {consent.analyticsEnabled ? (
+      {showConsentChrome && consent.analyticsEnabled ? (
         <>
           <Analytics />
           <SpeedInsights />

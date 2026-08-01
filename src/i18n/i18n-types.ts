@@ -97,6 +97,10 @@ type RootTranslation = {
 	 */
 	COOKIE_CONSENT_TITLE: string
 	/**
+	 * C​o​u​l​d​ ​n​o​t​ ​s​a​v​e​ ​y​o​u​r​ ​c​o​o​k​i​e​ ​p​r​e​f​e​r​e​n​c​e​s​.​ ​C​h​e​c​k​ ​y​o​u​r​ ​b​r​o​w​s​e​r​ ​s​t​o​r​a​g​e​ ​s​e​t​t​i​n​g​s​ ​a​n​d​ ​t​r​y​ ​a​g​a​i​n​.
+	 */
+	COOKIE_CONSENT_STORE_FAILED: string
+	/**
 	 * R​e​j​e​c​t​ ​n​o​n​-​e​s​s​e​n​t​i​a​l
 	 */
 	COOKIE_REJECT_NON_ESSENTIAL: string
@@ -104,6 +108,10 @@ type RootTranslation = {
 	 * C​o​o​k​i​e​ ​s​e​t​t​i​n​g​s
 	 */
 	COOKIE_SETTINGS_LINK: string
+	/**
+	 * C​l​o​s​e​ ​c​o​o​k​i​e​ ​s​e​t​t​i​n​g​s
+	 */
+	COOKIE_SETTINGS_CLOSE: string
 	/**
 	 * U​p​d​a​t​e​ ​y​o​u​r​ ​c​o​o​k​i​e​ ​a​n​d​ ​a​n​a​l​y​t​i​c​s​ ​p​r​e​f​e​r​e​n​c​e​s​ ​b​e​l​o​w​.​ ​Y​o​u​r​ ​c​h​o​i​c​e​ ​i​s​ ​s​t​o​r​e​d​ ​i​n​ ​l​o​c​a​l​ ​s​t​o​r​a​g​e​ ​o​n​ ​t​h​i​s​ ​d​e​v​i​c​e​.​ ​S​e​e​ ​o​u​r
 	 */
@@ -1291,6 +1299,10 @@ export type TranslationFunctions = {
 	 */
 	COOKIE_CONSENT_TITLE: () => LocalizedString
 	/**
+	 * Could not save your cookie preferences. Check your browser storage settings and try again.
+	 */
+	COOKIE_CONSENT_STORE_FAILED: () => LocalizedString
+	/**
 	 * Reject non-essential
 	 */
 	COOKIE_REJECT_NON_ESSENTIAL: () => LocalizedString
@@ -1298,6 +1310,10 @@ export type TranslationFunctions = {
 	 * Cookie settings
 	 */
 	COOKIE_SETTINGS_LINK: () => LocalizedString
+	/**
+	 * Close cookie settings
+	 */
+	COOKIE_SETTINGS_CLOSE: () => LocalizedString
 	/**
 	 * Update your cookie and analytics preferences below. Your choice is stored in local storage on this device. See our
 	 */

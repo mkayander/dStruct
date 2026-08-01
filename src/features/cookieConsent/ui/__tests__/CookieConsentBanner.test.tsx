@@ -9,6 +9,10 @@ import { theme } from "#/themes";
 
 import { CookieConsentBanner } from "../CookieConsentBanner";
 
+vi.mock("next/router", () => ({
+  useRouter: () => ({ pathname: "/" }),
+}));
+
 vi.mock("#/shared/hooks", async (importOriginal) => {
   const actual = await importOriginal<typeof SharedHooks>();
   return {
@@ -70,7 +74,7 @@ describe("CookieConsentBanner", () => {
     const { onClose } = renderBanner({ isSettingsView: true });
 
     expect(screen.getByText("COOKIE_SETTINGS_TITLE")).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "CANCEL" }));
+    await user.click(screen.getByRole("button", { name: "COOKIE_SETTINGS_CLOSE" }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

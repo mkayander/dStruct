@@ -12,9 +12,12 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
+import { MOBILE_PHASE_NAV_HEIGHT } from "#/features/playground/ui/MobilePhaseNavBar";
 import { useI18nContext } from "#/shared/hooks";
+import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 
 type CookieConsentBannerProps = {
@@ -32,6 +35,10 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
 }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
+  const router = useRouter();
+  const isMobileLayout = useMobileLayout();
+  const isPlaygroundRoute = router.pathname.startsWith("/playground");
+  const reserveMobileNavSpace = isMobileLayout && isPlaygroundRoute;
 
   return (
     <Box
@@ -41,12 +48,16 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
       aria-describedby="cookie-consent-description"
       sx={{
         position: "fixed",
-        bottom: 0,
+        bottom: reserveMobileNavSpace
+          ? `calc(${MOBILE_PHASE_NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px))`
+          : 0,
         left: 0,
         right: 0,
         zIndex: 1200,
         px: { xs: 2, sm: 3 },
-        pb: "calc(16px + env(safe-area-inset-bottom, 0px))",
+        pb: reserveMobileNavSpace
+          ? 2
+          : "calc(16px + env(safe-area-inset-bottom, 0px))",
         pt: 2,
         pointerEvents: "none",
       }}
@@ -66,7 +77,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
       >
         {isSettingsView ? (
           <IconButton
-            aria-label={LL.CANCEL()}
+            aria-label={LL.COOKIE_SETTINGS_CLOSE()}
             onClick={onClose}
             size="small"
             sx={{ position: "absolute", top: 8, right: 8 }}
