@@ -1,24 +1,43 @@
 /**
  * Vercel (and some CI caches) can restore `node_modules` without running the
- * root `postinstall` again, while `src/graphql/generated` stays gitignored and
- * absent — then `next build` fails on `#/graphql/generated`.
+ * root `postinstall` again, while gitignored codegen output stays absent — then
+ * `next build` fails on `#/graphql/generated` (GraphQL codegen) or
+ * `#/server/db/generated/*` (the Prisma client).
  *
- * Cheap no-op when artifacts already exist; otherwise runs `generate-graphql`.
+ * Cheap no-op when the artifacts already exist; otherwise regenerates them.
  */
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
 const repoRoot = process.cwd();
-const graphqlIndex = join(repoRoot, "src", "graphql", "generated", "index.tsx");
 
-if (!existsSync(graphqlIndex)) {
+const ensureGenerated = (
+  label: string,
+  sentinelPath: string,
+  command: string,
+): void => {
+  if (existsSync(sentinelPath)) {
+    console.log(
+      `[ensure-generated-from-install] ${label} output present; skipping.`,
+    );
+    return;
+  }
+
   console.warn(
-    "[ensure-generated-from-install] Missing GraphQL codegen output; running generate-graphql…",
+    `[ensure-generated-from-install] Missing ${label} output; running ${command}…`,
   );
-  execSync("pnpm run generate-graphql", { stdio: "inherit", cwd: repoRoot });
-} else {
-  console.log(
-    "[ensure-generated-from-install] GraphQL codegen output present; skipping.",
-  );
-}
+  execSync(command, { stdio: "inherit", cwd: repoRoot });
+};
+
+ensureGenerated(
+  "GraphQL codegen",
+  join(repoRoot, "src", "graphql", "generated", "index.tsx"),
+  "pnpm run generate-graphql",
+);
+
+ensureGenerated(
+  "Prisma client",
+  join(repoRoot, "src", "server", "db", "generated", "client.ts"),
+  "pnpm run prisma:generate",
+);
