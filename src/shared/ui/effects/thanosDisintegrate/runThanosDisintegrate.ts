@@ -150,7 +150,9 @@ export const runThanosDisintegrate = async (
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
 
-  let chunkMaskSequence: ChunkMaskSequence | null = null;
+  const chunkMaskRef: { sequence: ChunkMaskSequence | null } = {
+    sequence: null,
+  };
   let isAnimationActive = true;
 
   if (resolvedOptions.maskMode === "chunks") {
@@ -174,7 +176,7 @@ export const runThanosDisintegrate = async (
         return;
       }
 
-      chunkMaskSequence = sequence;
+      chunkMaskRef.sequence = sequence;
     });
   }
 
@@ -193,6 +195,8 @@ export const runThanosDisintegrate = async (
 
   const overlayContext = overlayCanvas.getContext("2d");
   if (!overlayContext) {
+    isAnimationActive = false;
+    chunkMaskRef.sequence?.revoke();
     return;
   }
 
@@ -241,7 +245,7 @@ export const runThanosDisintegrate = async (
           displayHeight,
           resolvedOptions,
           particlePadding,
-          chunkMaskSequence,
+          chunkMaskRef.sequence,
         );
         drawDisintegrationFrame(
           overlayContext,
@@ -265,7 +269,7 @@ export const runThanosDisintegrate = async (
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           completedSuccessfully = true;
           element.style.opacity = "0";
-          if (chunkMaskSequence) {
+          if (chunkMaskRef.sequence) {
             clearChunkMaskFromElement(element);
             clearChunkMaskFromCanvas(overlayCanvas);
           } else {
@@ -283,7 +287,8 @@ export const runThanosDisintegrate = async (
     });
   } finally {
     isAnimationActive = false;
-    chunkMaskSequence?.revoke();
+    chunkMaskRef.sequence?.revoke();
+    chunkMaskRef.sequence = null;
     restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();
     overlayCanvas.remove();
