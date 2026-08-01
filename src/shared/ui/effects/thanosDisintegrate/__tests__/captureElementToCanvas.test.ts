@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/captureElementToCanvas";
 
@@ -6,23 +6,6 @@ describe("captureElementToCanvas", () => {
   const originalImage = globalThis.Image;
   const originalCreateObjectURL = URL.createObjectURL;
   const originalRevokeObjectURL = URL.revokeObjectURL;
-
-  beforeEach(() => {
-    window.getComputedStyle = vi.fn(
-      () =>
-        ({
-          backgroundColor: "rgba(255, 255, 255, 0.55)",
-          color: "rgb(17, 24, 39)",
-          border: "1px solid rgba(255, 255, 255, 0.35)",
-          borderRadius: "8px",
-          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
-          length: 0,
-          item: () => "",
-          getPropertyValue: () => "",
-          getPropertyPriority: () => "",
-        }) as CSSStyleDeclaration,
-    );
-  });
 
   afterEach(() => {
     globalThis.Image = originalImage;
@@ -34,6 +17,7 @@ describe("captureElementToCanvas", () => {
 
   it("returns a sized canvas when SVG rasterization succeeds", async () => {
     const element = document.createElement("div");
+    element.style.backgroundColor = "rgba(255, 255, 255, 0.55)";
     element.getBoundingClientRect = () =>
       ({
         left: 0,
@@ -68,9 +52,10 @@ describe("captureElementToCanvas", () => {
     }
 
     globalThis.Image = MockImage as unknown as typeof Image;
-    vi.spyOn(CanvasRenderingContext2D.prototype, "drawImage").mockImplementation(
-      () => undefined,
-    );
+    vi.spyOn(
+      CanvasRenderingContext2D.prototype,
+      "drawImage",
+    ).mockImplementation(() => undefined);
 
     const canvas = await captureElementToCanvas(element);
 
