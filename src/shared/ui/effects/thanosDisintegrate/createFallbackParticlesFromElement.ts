@@ -29,6 +29,8 @@ const createParticle = (
 ): ThanosParticle => ({
   x,
   y,
+  originX: x,
+  originY: y,
   vx: (Math.random() - 0.35) * options.maxVelocity + options.windX,
   vy: (Math.random() - 0.55) * options.maxVelocity + options.windY,
   color: rgbaToCss(color),

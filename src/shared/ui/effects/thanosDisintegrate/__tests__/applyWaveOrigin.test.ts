@@ -6,6 +6,8 @@ import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/type
 const createParticle = (x: number, y: number): ThanosParticle => ({
   x,
   y,
+  originX: x,
+  originY: y,
   vx: 0,
   vy: 0,
   color: "rgb(0, 0, 0)",

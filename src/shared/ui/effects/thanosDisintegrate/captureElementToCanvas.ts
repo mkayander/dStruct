@@ -20,10 +20,13 @@ export const captureElementToCanvas = async (
 
   const clone = prepareCaptureClone(element);
 
+  const pageBackground =
+    window.getComputedStyle(document.body).backgroundColor || "transparent";
+
   const svgMarkup = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
   <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden;background:${pageBackground};">
       ${clone.outerHTML}
     </div>
   </foreignObject>

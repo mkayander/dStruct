@@ -29,6 +29,8 @@ describe("createParticlesFromImageData", () => {
     expect(particles[0]).toMatchObject({
       x: 0,
       y: 0,
+      originX: 0,
+      originY: 0,
       color: "rgb(255, 128, 64)",
       alpha: 1,
     });

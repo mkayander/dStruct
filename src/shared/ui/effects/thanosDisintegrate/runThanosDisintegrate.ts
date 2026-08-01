@@ -4,11 +4,10 @@ import { captureElementToCanvas } from "#/shared/ui/effects/thanosDisintegrate/c
 import { THANOS_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/thanosDisintegrate/constants";
 import { createFallbackParticlesFromElement } from "#/shared/ui/effects/thanosDisintegrate/createFallbackParticlesFromElement";
 import { createParticlesFromImageData } from "#/shared/ui/effects/thanosDisintegrate/createParticlesFromImageData";
-import { getWaveDisintegrationProgress } from "#/shared/ui/effects/thanosDisintegrate/getWaveDisintegrationProgress";
+import { drawDisintegrationFrame } from "#/shared/ui/effects/thanosDisintegrate/drawDisintegrationFrame";
 import {
   prepareElementForDisintegrate,
   subscribeToViewportChanges,
-  syncElementOpacityWithWave,
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/thanosDisintegrate/overlayPosition";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
@@ -57,24 +56,6 @@ const stepParticles = (
   return visibleCount;
 };
 
-const drawReleasedParticles = (
-  context: CanvasRenderingContext2D,
-  particles: ThanosParticle[],
-  frame: number,
-): void => {
-  for (const particle of particles) {
-    if (frame < particle.releaseFrame || particle.alpha <= 0) {
-      continue;
-    }
-
-    context.globalAlpha = particle.alpha;
-    context.fillStyle = particle.color;
-    context.fillRect(particle.x, particle.y, particle.size, particle.size);
-  }
-
-  context.globalAlpha = 1;
-};
-
 /**
  * Plays a Thanos-style particle disintegration on a DOM surface, then resolves.
  * No-ops when reduced motion is preferred or capture fails.
@@ -94,6 +75,7 @@ export const runThanosDisintegrate = async (
   }
 
   let sourceCanvas: HTMLCanvasElement | null = null;
+  let hasReadableCapture = false;
   try {
     sourceCanvas = await captureElementToCanvas(element);
   } catch {
@@ -119,10 +101,15 @@ export const runThanosDisintegrate = async (
           captureHeight,
         );
         particles = createParticlesFromImageData(imageData, resolvedOptions);
+        hasReadableCapture = particles.length > 0;
       } catch {
         // SVG foreignObject capture taints the canvas in some browsers.
       }
     }
+  }
+
+  if (!hasReadableCapture) {
+    sourceCanvas = null;
   }
 
   if (particles.length === 0) {
@@ -174,14 +161,16 @@ export const runThanosDisintegrate = async (
 
       const animate = () => {
         syncOverlayPosition();
-        const disintegrationProgress = getWaveDisintegrationProgress(
+        drawDisintegrationFrame(
+          overlayContext,
           particles,
           frame,
+          sourceCanvas,
+          displayWidth,
+          displayHeight,
+          { particleStep: resolvedOptions.particleStep },
         );
-        syncElementOpacityWithWave(element, disintegrationProgress);
-        overlayContext.clearRect(0, 0, displayWidth, displayHeight);
         const visibleCount = stepParticles(particles, frame, resolvedOptions);
-        drawReleasedParticles(overlayContext, particles, frame);
 
         frame += 1;
         if (visibleCount === 0 || frame >= totalMaxFrames) {

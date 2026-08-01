@@ -18,5 +18,21 @@ export const prepareCaptureClone = (element: HTMLElement): HTMLElement => {
   clone.style.borderRadius = computed.borderRadius;
   clone.style.boxShadow = computed.boxShadow;
 
+  const originalButtons = element.querySelectorAll("button");
+  const cloneButtons = clone.querySelectorAll("button");
+  cloneButtons.forEach((cloneButton, index) => {
+    if (!(cloneButton instanceof HTMLElement)) {
+      return;
+    }
+
+    const originalButton = originalButtons[index];
+    const buttonStyle = window.getComputedStyle(originalButton ?? cloneButton);
+    cloneButton.style.backgroundColor = buttonStyle.backgroundColor;
+    cloneButton.style.color = buttonStyle.color;
+    cloneButton.style.border = buttonStyle.border;
+    cloneButton.style.borderRadius = buttonStyle.borderRadius;
+    cloneButton.style.boxShadow = "none";
+  });
+
   return clone;
 };

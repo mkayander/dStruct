@@ -1,6 +1,9 @@
 export type ThanosParticle = {
   x: number;
   y: number;
+  /** Snapshot grid position used to punch holes in the captured surface. */
+  originX: number;
+  originY: number;
   vx: number;
   vy: number;
   color: string;

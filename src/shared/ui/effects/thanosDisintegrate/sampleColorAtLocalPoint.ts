@@ -1,5 +1,8 @@
-import type { RgbaColor } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
-import { parseCssColor } from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
+import {
+  blendColors,
+  parseCssColor,
+  type RgbaColor,
+} from "#/shared/ui/effects/thanosDisintegrate/parseCssColor";
 
 const getLuminance = (color: RgbaColor): number =>
   (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
@@ -31,7 +34,51 @@ const pickVisibleColor = (style: CSSStyleDeclaration): RgbaColor | null => {
   return null;
 };
 
-/** Samples the topmost visible color inside `root` at a local coordinate. */
+const compositeStackColors = (
+  root: HTMLElement,
+  stack: Element[],
+): RgbaColor | null => {
+  let composite: RgbaColor | null = null;
+
+  for (let index = stack.length - 1; index >= 0; index -= 1) {
+    const node = stack[index];
+    if (!(node instanceof HTMLElement) || !root.contains(node)) {
+      continue;
+    }
+
+    const background = parseCssColor(
+      window.getComputedStyle(node).backgroundColor,
+    );
+    if (
+      !background ||
+      background.alpha <= 0.04 ||
+      isLightOpaqueBackground(background)
+    ) {
+      continue;
+    }
+
+    composite = composite ? blendColors(background, composite) : background;
+  }
+
+  if (composite) {
+    return composite;
+  }
+
+  for (const node of stack) {
+    if (!(node instanceof HTMLElement) || !root.contains(node)) {
+      continue;
+    }
+
+    const color = pickVisibleColor(window.getComputedStyle(node));
+    if (color) {
+      return color;
+    }
+  }
+
+  return null;
+};
+
+/** Samples the visible composited color inside `root` at a local coordinate. */
 export const sampleColorAtLocalPoint = (
   root: HTMLElement,
   localX: number,
@@ -43,6 +90,7 @@ export const sampleColorAtLocalPoint = (
 
   if (typeof document.elementsFromPoint === "function") {
     const stack = document.elementsFromPoint(clientX, clientY);
+
     for (const node of stack) {
       if (!(node instanceof HTMLElement) || !root.contains(node)) {
         continue;
@@ -52,6 +100,11 @@ export const sampleColorAtLocalPoint = (
       if (color) {
         return color;
       }
+    }
+
+    const composite = compositeStackColors(root, stack);
+    if (composite) {
+      return composite;
     }
   }
 

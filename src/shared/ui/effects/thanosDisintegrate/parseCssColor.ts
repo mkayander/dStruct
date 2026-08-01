@@ -64,3 +64,26 @@ export const parseCssColor = (color: string): RgbaColor | null => {
 
 export const rgbaToCss = ({ red, green, blue }: RgbaColor): string =>
   `rgb(${red}, ${green}, ${blue})`;
+
+/** Alpha-composites `foreground` over `background` (both premultiplied-friendly inputs). */
+export const blendColors = (
+  foreground: RgbaColor,
+  background: RgbaColor,
+): RgbaColor => {
+  const alpha = foreground.alpha + background.alpha * (1 - foreground.alpha);
+  if (alpha <= 0.04) {
+    return { red: 0, green: 0, blue: 0, alpha: 0 };
+  }
+
+  const blendChannel = (foregroundChannel: number, backgroundChannel: number) =>
+    (foregroundChannel * foreground.alpha +
+      backgroundChannel * background.alpha * (1 - foreground.alpha)) /
+    alpha;
+
+  return {
+    red: clampByte(blendChannel(foreground.red, background.red)),
+    green: clampByte(blendChannel(foreground.green, background.green)),
+    blue: clampByte(blendChannel(foreground.blue, background.blue)),
+    alpha,
+  };
+};

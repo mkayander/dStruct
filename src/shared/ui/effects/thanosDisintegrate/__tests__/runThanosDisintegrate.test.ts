@@ -18,6 +18,8 @@ vi.mock(
       {
         x: 0,
         y: 0,
+        originX: 0,
+        originY: 0,
         vx: 0,
         vy: 0,
         color: "rgb(100, 120, 140)",

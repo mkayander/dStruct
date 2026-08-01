@@ -1,4 +1,4 @@
-/** Disables interaction while keeping the source visible for wave-synced fading. */
+/** Hides the source once the overlay snapshot takes over rendering. */
 export const prepareElementForDisintegrate = (
   element: HTMLElement,
 ): (() => void) => {
@@ -9,6 +9,7 @@ export const prepareElementForDisintegrate = (
   };
 
   element.style.pointerEvents = "none";
+  element.style.opacity = "0";
 
   return () => {
     element.style.opacity = snapshot.opacity;
@@ -17,6 +18,7 @@ export const prepareElementForDisintegrate = (
   };
 };
 
+/** @deprecated Snapshot overlay replaces the live element; kept for callers/tests. */
 export const syncElementOpacityWithWave = (
   element: HTMLElement,
   disintegrationProgress: number,

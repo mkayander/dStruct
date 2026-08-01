@@ -40,6 +40,8 @@ export const createParticlesFromImageData = (
       particles.push({
         x,
         y,
+        originX: x,
+        originY: y,
         vx: (Math.random() - 0.35) * maxVelocity + windX,
         vy: (Math.random() - 0.55) * maxVelocity + windY,
         color: `rgb(${red}, ${green}, ${blue})`,
