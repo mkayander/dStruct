@@ -41,6 +41,7 @@ const createParticle = () => ({
   fadeStart: 0.5,
   fadeDuration: 0.4,
   releaseTime: 0,
+  turbulenceSeed: 0,
 });
 
 const createElement = () => {

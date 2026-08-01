@@ -14,6 +14,7 @@ export type {
   ThanosDisintegrateOrigin,
   ThanosDisintegrateMaskMode,
   ThanosMaskStrategy,
+  ThanosParticleMotionMode,
   ThanosParticleRenderMode,
   ThanosParticle,
 } from "#/shared/ui/effects/thanosDisintegrate/types";

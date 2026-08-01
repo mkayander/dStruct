@@ -20,6 +20,7 @@ const createParticle = (x: number, y: number): ThanosParticle => ({
   fadeStart: 0.5,
   fadeDuration: 0.4,
   releaseTime: 0,
+  turbulenceSeed: 0,
 });
 
 describe("applyWaveOrigin", () => {

@@ -7,12 +7,17 @@ export const getParticleMaxTravel = (
 ): number => {
   const resolvedOptions = resolveThanosDisintegrateOptions(options);
   const duration = resolvedOptions.maxDuration;
-  return (
+  const baseTravel =
     resolvedOptions.maxVelocity * duration +
     0.5 * resolvedOptions.gravity * duration * duration +
     Math.abs(resolvedOptions.windX) * duration +
-    Math.abs(resolvedOptions.windY) * duration
-  );
+    Math.abs(resolvedOptions.windY) * duration;
+
+  if (resolvedOptions.particleMotionMode === "windy") {
+    return baseTravel * 1.65 + 48;
+  }
+
+  return baseTravel;
 };
 
 /** Margin around each chunk hole on the particle mask so flying pixels stay visible. */

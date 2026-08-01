@@ -20,6 +20,7 @@ const createParticle = (releaseTime: number): ThanosParticle => ({
   fadeStart: 0.5,
   fadeDuration: 0.4,
   releaseTime,
+  turbulenceSeed: 0,
 });
 
 describe("getWaveDisintegrationProgress", () => {

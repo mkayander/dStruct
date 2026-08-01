@@ -15,4 +15,5 @@ export const THANOS_DISINTEGRATE_DEFAULTS = {
   maskSpreadDuration: 0.6,
   particleRenderMode: "color",
   useChunkMaskWorker: true,
+  particleMotionMode: "windy",
 } as const satisfies ResolvedThanosDisintegrateOptions;

@@ -13,6 +13,7 @@ describe("stepParticles", () => {
       surfaceWidth: 100,
       surfaceHeight: 40,
       options: {
+        particleMotionMode: "splat",
         gravity: 0,
         windX: 0,
         windY: 0,
@@ -24,7 +25,12 @@ describe("stepParticles", () => {
     particle.vy = 0;
     particle.drag = 1;
 
-    stepParticles([particle], 1 / 60, 1 / 60);
+    stepParticles([particle], 1 / 60, 1 / 60, {
+      particleMotionMode: "splat",
+      gravity: 0,
+      windX: 0,
+      windY: 0,
+    });
     const positionAfterOneFrame = particle.x;
 
     const secondParticle = {
@@ -34,9 +40,61 @@ describe("stepParticles", () => {
       vx: 60,
       vy: 0,
     };
-    stepParticles([secondParticle], 1 / 120, 1 / 120);
-    stepParticles([secondParticle], 1 / 120, 1 / 60);
+    stepParticles([secondParticle], 1 / 120, 1 / 120, {
+      particleMotionMode: "splat",
+      gravity: 0,
+      windX: 0,
+      windY: 0,
+    });
+    stepParticles([secondParticle], 1 / 120, 1 / 60, {
+      particleMotionMode: "splat",
+      gravity: 0,
+      windX: 0,
+      windY: 0,
+    });
 
     expect(secondParticle.x).toBeCloseTo(positionAfterOneFrame, 2);
+  });
+
+  it("curves windy particles with turbulent flow instead of a straight drift", () => {
+    const particle = createThanosParticle({
+      x: 20,
+      y: 20,
+      color: "rgb(255, 255, 255)",
+      alpha: 1,
+      surfaceWidth: 120,
+      surfaceHeight: 60,
+      options: {
+        particleMotionMode: "windy",
+        maxVelocity: 40,
+        windX: 60,
+        windY: -8,
+        gravity: 40,
+      },
+    });
+    particle.releaseTime = 0;
+    particle.vx = 10;
+    particle.vy = 0;
+    particle.drag = 1;
+
+    const positions: Array<{ x: number; y: number }> = [];
+    for (let frame = 1; frame <= 30; frame += 1) {
+      stepParticles([particle], 1 / 60, frame / 60, {
+        particleMotionMode: "windy",
+        windX: 60,
+        windY: -8,
+        gravity: 40,
+      });
+      positions.push({ x: particle.x, y: particle.y });
+    }
+
+    const start = positions[0];
+    const end = positions[positions.length - 1];
+    const midpoint = positions[Math.floor(positions.length / 2)];
+
+    expect(end?.x).toBeGreaterThan((start?.x ?? 0) + 8);
+    expect(
+      Math.abs((midpoint?.y ?? 0) - ((start?.y ?? 0) + (end?.y ?? 0)) / 2),
+    ).toBeGreaterThan(0.5);
   });
 });

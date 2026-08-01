@@ -20,6 +20,9 @@ export type ThanosMaskStrategy =
 
 export type ThanosParticleRenderMode = "color" | "sprite";
 
+/** Outward burst ("splat") or wind-carried turbulent drift ("windy"). */
+export type ThanosParticleMotionMode = "splat" | "windy";
+
 export type ThanosParticle = {
   x: number;
   y: number;
@@ -42,6 +45,8 @@ export type ThanosParticle = {
   fadeDuration: number;
   /** Seconds from animation start when this particle begins to crumble. */
   releaseTime: number;
+  /** Per-particle phase offset for windy flow-field sampling. */
+  turbulenceSeed: number;
 };
 
 export type ThanosDisintegrateOrigin =
@@ -81,6 +86,8 @@ export type ThanosDisintegrateOptions = {
   particleRenderMode?: ThanosParticleRenderMode;
   /** Build chunk masks in a Web Worker when available. */
   useChunkMaskWorker?: boolean;
+  /** Particle physics style after release (defaults to windy). */
+  particleMotionMode?: ThanosParticleMotionMode;
 };
 
 /** Options with defaults applied; excludes runtime-only `origin` and strategy defaulting. */

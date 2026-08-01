@@ -16,6 +16,7 @@ describe("getParticleCanvasPadding", () => {
 
   it("returns a smaller margin when motion is reduced", () => {
     const padding = getParticleCanvasPadding({
+      particleMotionMode: "splat",
       maxVelocity: 40,
       gravity: 40,
       maxDuration: 0.5,
