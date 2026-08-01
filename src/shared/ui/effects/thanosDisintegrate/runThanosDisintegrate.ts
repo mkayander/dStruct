@@ -12,7 +12,9 @@ import {
 import { resolveRelativeOrigin } from "#/shared/ui/effects/thanosDisintegrate/resolveRelativeOrigin";
 import { stepParticles } from "#/shared/ui/effects/thanosDisintegrate/stepParticles";
 import {
+  applyParticleWaveMaskToCanvas,
   applyWaveMaskToElement,
+  clearParticleWaveMaskFromCanvas,
   clearWaveMaskFromElement,
 } from "#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask";
 import {
@@ -40,8 +42,9 @@ export type RunThanosDisintegrateOptions = ThanosDisintegrateOptions & {
   captureSnapshot?: ThanosCaptureSnapshot | null;
 };
 
-const syncLiveSurfaceWithWave = (
+const syncDualLayerWave = (
   element: HTMLElement,
+  particleCanvas: HTMLCanvasElement,
   particles: ReturnType<typeof cloneThanosParticles>,
   elapsedSeconds: number,
   relativeOrigin: { x: number; y: number } | null,
@@ -58,6 +61,14 @@ const syncLiveSurfaceWithWave = (
       displayWidth,
       displayHeight,
     );
+    applyParticleWaveMaskToCanvas(
+      particleCanvas,
+      relativeOrigin,
+      elapsedSeconds,
+      resolvedOptions.waveSpeed,
+      displayWidth,
+      displayHeight,
+    );
     return;
   }
 
@@ -65,7 +76,9 @@ const syncLiveSurfaceWithWave = (
     particles,
     elapsedSeconds,
   );
-  element.style.opacity = String(Math.max(0, 1 - disintegrationProgress));
+  const remainingOpacity = Math.max(0, 1 - disintegrationProgress);
+  element.style.opacity = String(remainingOpacity);
+  particleCanvas.style.opacity = String(disintegrationProgress);
 };
 
 /**
@@ -154,8 +167,9 @@ export const runThanosDisintegrate = async (
         lastTime = timestamp;
 
         syncOverlayPosition();
-        syncLiveSurfaceWithWave(
+        syncDualLayerWave(
           element,
+          overlayCanvas,
           particles,
           elapsedSeconds,
           relativeOrigin,
@@ -180,6 +194,7 @@ export const runThanosDisintegrate = async (
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           element.style.opacity = "0";
           clearWaveMaskFromElement(element);
+          clearParticleWaveMaskFromCanvas(overlayCanvas);
           resolve();
           return;
         }
