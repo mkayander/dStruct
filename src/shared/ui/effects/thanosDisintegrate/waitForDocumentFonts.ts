@@ -4,5 +4,9 @@ export const waitForDocumentFonts = async (): Promise<void> => {
     return;
   }
 
+  if (document.fonts.status === "loaded") {
+    return;
+  }
+
   await document.fonts.ready;
 };

@@ -36,7 +36,9 @@ export const buildThanosCapture = async (
   element: HTMLElement,
   { mode, disintegrateOptions }: BuildThanosCaptureOptions,
 ): Promise<ThanosCaptureSnapshot> => {
-  await waitForDocumentFonts();
+  if (mode === "quality") {
+    await waitForDocumentFonts();
+  }
 
   const { displayWidth, displayHeight } = getElementDisplaySize(element);
 

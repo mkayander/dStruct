@@ -149,20 +149,35 @@ export const runThanosDisintegrate = async (
   });
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
-  const chunkMaskSequence =
-    resolvedOptions.maskMode === "chunks"
-      ? await buildChunkMaskSequenceAsync(
-          {
-            particles,
-            displayWidth,
-            displayHeight,
-            particlePadding,
-            chunkSize: resolvedOptions.particleStep,
-            maxSteps: resolvedOptions.maxChunkMaskSteps,
-          },
-          resolvedOptions.useChunkMaskWorker,
-        )
-      : null;
+
+  let chunkMaskSequence: ChunkMaskSequence | null = null;
+  let isAnimationActive = true;
+
+  if (resolvedOptions.maskMode === "chunks") {
+    void buildChunkMaskSequenceAsync(
+      {
+        particles,
+        displayWidth,
+        displayHeight,
+        particlePadding,
+        chunkSize: resolvedOptions.particleStep,
+        maxSteps: resolvedOptions.maxChunkMaskSteps,
+      },
+      resolvedOptions.useChunkMaskWorker,
+    ).then((sequence) => {
+      if (!sequence) {
+        return;
+      }
+
+      if (!isAnimationActive) {
+        sequence.revoke();
+        return;
+      }
+
+      chunkMaskSequence = sequence;
+    });
+  }
+
   const canvasWidth = displayWidth + particlePadding * 2;
   const canvasHeight = displayHeight + particlePadding * 2;
   const particleZIndex = Math.max(1, resolvedOptions.zIndex - 5);
@@ -267,6 +282,7 @@ export const runThanosDisintegrate = async (
       requestAnimationFrame(animate);
     });
   } finally {
+    isAnimationActive = false;
     chunkMaskSequence?.revoke();
     restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();

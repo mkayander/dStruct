@@ -124,4 +124,37 @@ describe("runThanosDisintegrate", () => {
 
     expect(buildChunkMaskSequenceAsync).toHaveBeenCalled();
   });
+
+  it("starts animating before chunk masks finish building", async () => {
+    let resolveChunkMasks:
+      | ((value: Awaited<ReturnType<typeof buildChunkMaskSequenceAsync>>) => void)
+      | undefined;
+    vi.mocked(buildChunkMaskSequenceAsync).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveChunkMasks = resolve;
+        }),
+    );
+
+    const element = createElement();
+    const snapshot = {
+      sourceCanvas: null,
+      particles: [createParticle()],
+      displayWidth: 120,
+      displayHeight: 48,
+    };
+
+    const animation = runThanosDisintegrate(element, {
+      captureSnapshot: snapshot,
+      origin: { x: 60, y: 24 },
+      maskMode: "chunks",
+      maxDuration: 0.05,
+    });
+
+    await Promise.resolve();
+    expect(buildChunkMaskSequenceAsync).toHaveBeenCalled();
+
+    resolveChunkMasks?.(null);
+    await expect(animation).resolves.toBeUndefined();
+  });
 });

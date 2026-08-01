@@ -57,7 +57,7 @@ export const warmThanosCapture = (
       .catch(() => {
         // Warm-up is best-effort; dismiss falls back to a fast capture.
       });
-  }, 2_000);
+  }, 250);
 
   return () => {
     cancelled = true;
