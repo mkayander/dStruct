@@ -65,6 +65,43 @@ const applyOpacityCrossfade = (
   particleCanvas.style.opacity = String(disintegrationProgress);
 };
 
+const applyRadialWave = (
+  element: HTMLElement,
+  particleCanvas: HTMLCanvasElement,
+  relativeOrigin: { x: number; y: number },
+  elapsedSeconds: number,
+  waveSpeed: number,
+  displayWidth: number,
+  displayHeight: number,
+  particlePadding: number,
+): void => {
+  applyWaveMaskToElement(
+    element,
+    relativeOrigin,
+    elapsedSeconds,
+    waveSpeed,
+    displayWidth,
+    displayHeight,
+  );
+  const canvasWidth = displayWidth + particlePadding * 2;
+  const canvasHeight = displayHeight + particlePadding * 2;
+  applyParticleWaveMaskToCanvas(
+    particleCanvas,
+    relativeOrigin,
+    elapsedSeconds,
+    waveSpeed,
+    canvasWidth,
+    canvasHeight,
+    particlePadding,
+  );
+};
+
+type DualLayerMaskState = {
+  chunkMaskSequence: ChunkMaskSequence | null;
+  /** Sticky once radial masks were shown while chunk masks were still building. */
+  startedRadialFallback: boolean;
+};
+
 const syncDualLayerWave = (
   element: HTMLElement,
   particleCanvas: HTMLCanvasElement,
@@ -75,42 +112,37 @@ const syncDualLayerWave = (
   displayHeight: number,
   resolvedOptions: ResolvedThanosDisintegrateOptions,
   particlePadding: number,
-  chunkMaskSequence: ChunkMaskSequence | null,
+  maskState: DualLayerMaskState,
 ): void => {
-  if (resolvedOptions.maskMode === "chunks") {
-    if (chunkMaskSequence) {
-      applyChunkMaskFrame(
-        element,
-        particleCanvas,
-        chunkMaskSequence,
-        elapsedSeconds,
-      );
-      return;
-    }
+  const { chunkMaskSequence, startedRadialFallback } = maskState;
 
-    // Chunk masks are still building — opacity crossfade avoids radial→chunk pop.
-    applyOpacityCrossfade(element, particleCanvas, particles, elapsedSeconds);
+  if (
+    resolvedOptions.maskMode === "chunks" &&
+    chunkMaskSequence &&
+    !startedRadialFallback
+  ) {
+    applyChunkMaskFrame(
+      element,
+      particleCanvas,
+      chunkMaskSequence,
+      elapsedSeconds,
+    );
     return;
   }
 
   if (relativeOrigin) {
-    applyWaveMaskToElement(
+    if (resolvedOptions.maskMode === "chunks" && !chunkMaskSequence) {
+      maskState.startedRadialFallback = true;
+    }
+
+    applyRadialWave(
       element,
+      particleCanvas,
       relativeOrigin,
       elapsedSeconds,
       resolvedOptions.waveSpeed,
       displayWidth,
       displayHeight,
-    );
-    const canvasWidth = displayWidth + particlePadding * 2;
-    const canvasHeight = displayHeight + particlePadding * 2;
-    applyParticleWaveMaskToCanvas(
-      particleCanvas,
-      relativeOrigin,
-      elapsedSeconds,
-      resolvedOptions.waveSpeed,
-      canvasWidth,
-      canvasHeight,
       particlePadding,
     );
     return;
@@ -179,6 +211,10 @@ export const runThanosDisintegrate = async (
   const chunkMaskRef: { sequence: ChunkMaskSequence | null } = {
     sequence: null,
   };
+  const maskState: DualLayerMaskState = {
+    chunkMaskSequence: null,
+    startedRadialFallback: false,
+  };
   let isAnimationActive = true;
 
   if (resolvedOptions.maskMode === "chunks") {
@@ -204,6 +240,7 @@ export const runThanosDisintegrate = async (
       }
 
       chunkMaskRef.sequence = sequence;
+      maskState.chunkMaskSequence = sequence;
     });
   }
 
@@ -275,7 +312,7 @@ export const runThanosDisintegrate = async (
           displayHeight,
           resolvedOptions,
           particlePadding,
-          chunkMaskRef.sequence,
+          maskState,
         );
         drawDisintegrationFrame(
           overlayContext,
@@ -299,7 +336,7 @@ export const runThanosDisintegrate = async (
         if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
           completedSuccessfully = true;
           element.style.opacity = "0";
-          if (chunkMaskRef.sequence) {
+          if (maskState.chunkMaskSequence && !maskState.startedRadialFallback) {
             clearChunkMaskFromElement(element);
             clearChunkMaskFromCanvas(overlayCanvas);
           } else {

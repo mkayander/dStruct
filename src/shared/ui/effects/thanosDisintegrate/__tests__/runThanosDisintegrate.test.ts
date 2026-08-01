@@ -144,7 +144,7 @@ describe("runThanosDisintegrate", () => {
     expect(buildChunkMaskSequenceAsync).toHaveBeenCalled();
   });
 
-  it("does not apply radial masks while chunk masks are building", async () => {
+  it("applies radial masks while chunk masks are building when origin is set", async () => {
     const syncElementWaveMask =
       await import("#/shared/ui/effects/thanosDisintegrate/syncElementWaveMask");
     const applyWaveMaskSpy = vi.spyOn(
@@ -179,7 +179,7 @@ describe("runThanosDisintegrate", () => {
       });
     }
 
-    expect(applyWaveMaskSpy).not.toHaveBeenCalled();
+    expect(applyWaveMaskSpy).toHaveBeenCalled();
     await animation;
     applyWaveMaskSpy.mockRestore();
   });

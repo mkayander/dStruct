@@ -68,6 +68,7 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
                 clientX: event.clientX,
                 clientY: event.clientY,
               },
+              maskMode: "radial",
               zIndex: 1200,
             });
           } catch (error) {
