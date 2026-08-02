@@ -1,6 +1,13 @@
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Box, Button, Chip, Typography } from "@mui/material";
+import {
+  alpha,
+  Box,
+  Button,
+  Chip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
@@ -21,6 +28,7 @@ const COLLAPSED_MAX_HEIGHT = 64; // Single row + peek of second
 export const ProjectBrowserCategoryBar: React.FC<
   ProjectBrowserCategoryBarProps
 > = ({ projects }) => {
+  const theme = useTheme();
   const { selectedCategories, setSelectedCategories } =
     useProjectBrowserContext();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -141,11 +149,26 @@ export const ProjectBrowserCategoryBar: React.FC<
                   label={`${label}: ${count}`}
                   onClick={() => handleCategoryClick(category)}
                   onKeyDown={(ev) => handleKeyDown(ev, category)}
-                  color={isSelected ? "primary" : "default"}
-                  variant={isSelected ? "filled" : "outlined"}
+                  variant="filled"
                   sx={{
                     cursor: "pointer",
                     fontWeight: isSelected ? 600 : 400,
+                    backgroundColor: isSelected
+                      ? theme.palette.info.main
+                      : alpha(theme.palette.info.main, 0.12),
+                    color: isSelected
+                      ? theme.palette.common.white
+                      : theme.palette.secondary.main,
+                    border: `1px solid ${
+                      isSelected
+                        ? theme.palette.info.main
+                        : alpha(theme.palette.secondary.main, 0.24)
+                    }`,
+                    "&:hover": {
+                      backgroundColor: isSelected
+                        ? alpha(theme.palette.info.main, 0.88)
+                        : alpha(theme.palette.info.main, 0.2),
+                    },
                     "&:focus-visible": {
                       outline: "2px solid",
                       outlineColor: "primary.main",
