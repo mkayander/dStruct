@@ -14,14 +14,14 @@ export type SparkTurbulenceInput = {
   verticalTravel: number;
 };
 
-type SparkTurbulenceProfile = {
+export type SparkTurbulenceProfile = {
   influence: number;
   frequency: number;
   phase: number;
   noiseScale: number;
 };
 
-const getSparkTurbulenceProfile = (
+export const createSparkTurbulenceProfile = (
   turbulenceSeed: number,
 ): SparkTurbulenceProfile => ({
   influence: 0.42 + hashSparkSeed01(turbulenceSeed * 1.17) * 0.52,
@@ -34,14 +34,16 @@ const getSparkTurbulenceProfile = (
  * Wind-borne spark turbulence: per-particle phase/frequency, position-based
  * noise, and lateral sway that ramps with vertical travel (not time alone).
  */
-export const sampleSparkTurbulence = ({
-  originX,
-  originY,
-  timeSinceRelease,
-  turbulenceSeed,
-  verticalTravel,
-}: SparkTurbulenceInput): SparkTurbulenceForces => {
-  const profile = getSparkTurbulenceProfile(turbulenceSeed);
+export const sampleSparkTurbulence = (
+  {
+    originX,
+    originY,
+    timeSinceRelease,
+    turbulenceSeed,
+    verticalTravel,
+  }: SparkTurbulenceInput,
+  profile: SparkTurbulenceProfile,
+): SparkTurbulenceForces => {
   const travelFactor = Math.min(1, verticalTravel / 56);
   const swayEnvelope = 0.08 + travelFactor * 0.92;
 

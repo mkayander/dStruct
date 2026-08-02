@@ -1,5 +1,8 @@
 import { hashSparkSeed01 } from "#/shared/ui/effects/domDisintegrate/sparkSeedHash";
-import type { DisintegrateParticleMotionMode } from "#/shared/ui/effects/domDisintegrate/types";
+import type {
+  DisintegrateParticleMotionMode,
+  ResolvedDomDisintegrateOptions,
+} from "#/shared/ui/effects/domDisintegrate/types";
 
 export const SPARK_TURBULENCE_STRENGTH = 195;
 export const SPARK_TURBULENCE_MAX_LATERAL = 48;
@@ -49,6 +52,38 @@ const PARTICLE_MOTION_PROFILES: Record<
 /** Per-particle lift variation while sharing the same global wind field. */
 export const getSparkLiftFactor = (turbulenceSeed: number): number =>
   0.68 + hashSparkSeed01(turbulenceSeed * 7.31) * 0.56;
+
+const SPARK_MAX_LIFT_FACTOR = 1.24;
+const SPARK_MAX_TURBULENCE_FORCE = 1.15;
+
+/** Conservative travel bound for windy sparks (no splat gravity term). */
+export const computeWindyParticleMaxTravel = (
+  resolvedOptions: ResolvedDomDisintegrateOptions,
+): number => {
+  const duration = resolvedOptions.maxDuration;
+  const maxLaunchSpeed = resolvedOptions.maxVelocity * 1.12;
+  const maxLiftAccel =
+    Math.abs(SPARK_LIFT_ACCEL) * SPARK_MAX_LIFT_FACTOR +
+    Math.abs(resolvedOptions.windY) * SPARK_WIND_ACCEL;
+  const maxLateralAccel =
+    SPARK_TURBULENCE_STRENGTH * SPARK_MAX_TURBULENCE_FORCE +
+    Math.abs(resolvedOptions.windX) * SPARK_WIND_ACCEL;
+
+  const verticalReach =
+    maxLaunchSpeed * duration +
+    0.5 * maxLiftAccel * duration * duration +
+    resolvedOptions.maxVelocity * SPARK_UPWARD_TRAVEL_FACTOR;
+  const horizontalReach =
+    maxLaunchSpeed * duration +
+    0.5 * maxLateralAccel * duration * duration * 0.35 +
+    SPARK_TURBULENCE_MAX_LATERAL +
+    SPARK_TRAVEL_PADDING;
+
+  return (
+    Math.max(verticalReach, horizontalReach) * 1.12 +
+    resolvedOptions.particleSize * 2
+  );
+};
 
 export type SparkDriftDirection = {
   driftX: number;

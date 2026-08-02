@@ -1,6 +1,4 @@
-import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
 import {
-  getSparkLiftFactor,
   SPARK_LIFT_ACCEL,
   SPARK_MAX_DOWNWARD_VELOCITY,
   SPARK_TURBULENCE_STRENGTH,
@@ -9,7 +7,7 @@ import {
 import { sampleSparkTurbulence } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import type {
   DisintegrateParticle,
-  DomDisintegrateOptions,
+  ResolvedDomDisintegrateOptions,
 } from "#/shared/ui/effects/domDisintegrate/types";
 
 const applyDrag = (velocity: number, drag: number, deltaSeconds: number) =>
@@ -56,15 +54,22 @@ const stepSparkParticle = (
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
 
   const verticalTravel = Math.max(0, particle.originY - particle.y);
-  const turbulence = sampleSparkTurbulence({
-    originX: particle.originX,
-    originY: particle.originY,
-    timeSinceRelease,
-    turbulenceSeed: particle.turbulenceSeed,
-    verticalTravel,
-  });
-  const liftFactor = getSparkLiftFactor(particle.turbulenceSeed);
-  const uplift = SPARK_LIFT_ACCEL * liftFactor;
+  const turbulence = sampleSparkTurbulence(
+    {
+      originX: particle.originX,
+      originY: particle.originY,
+      timeSinceRelease,
+      turbulenceSeed: particle.turbulenceSeed,
+      verticalTravel,
+    },
+    {
+      influence: particle.turbulenceInfluence,
+      frequency: particle.turbulenceFrequency,
+      phase: particle.turbulencePhase,
+      noiseScale: particle.turbulenceNoiseScale,
+    },
+  );
+  const uplift = SPARK_LIFT_ACCEL * particle.sparkLiftFactor;
 
   particle.vx +=
     (turbulence.forceX * SPARK_TURBULENCE_STRENGTH + windX * SPARK_WIND_ACCEL) *
@@ -81,9 +86,8 @@ export const stepParticles = (
   particles: DisintegrateParticle[],
   deltaSeconds: number,
   elapsedSeconds: number,
-  options?: DomDisintegrateOptions,
+  resolvedOptions: ResolvedDomDisintegrateOptions,
 ): number => {
-  const resolvedOptions = resolveDomDisintegrateOptions(options);
   let visibleCount = 0;
 
   for (const particle of particles) {
@@ -93,6 +97,11 @@ export const stepParticles = (
     }
 
     const timeSinceRelease = elapsedSeconds - particle.releaseTime;
+    updateFadeAlpha(particle, timeSinceRelease);
+
+    if (particle.alpha <= 0.01) {
+      continue;
+    }
 
     if (resolvedOptions.particleMotionMode === "windy") {
       stepSparkParticle(
@@ -113,11 +122,8 @@ export const stepParticles = (
     }
 
     particle.rotation += particle.rotationSpeed * deltaSeconds;
-    updateFadeAlpha(particle, timeSinceRelease);
 
-    if (particle.alpha > 0.01) {
-      visibleCount += 1;
-    }
+    visibleCount += 1;
   }
 
   return visibleCount;

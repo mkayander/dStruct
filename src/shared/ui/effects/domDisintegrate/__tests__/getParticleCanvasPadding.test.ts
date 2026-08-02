@@ -14,6 +14,16 @@ describe("getParticleCanvasPadding", () => {
     expect(padding).toBeGreaterThan(200);
   });
 
+  it("uses windy-specific travel bounds instead of the legacy inflated formula", () => {
+    const windyPadding = getParticleCanvasPadding({
+      ...DOM_DISINTEGRATE_DEFAULTS,
+      particleMotionMode: "windy",
+    });
+
+    expect(windyPadding).toBeGreaterThan(400);
+    expect(windyPadding).toBeLessThan(650);
+  });
+
   it("returns a smaller margin when motion is reduced", () => {
     const padding = getParticleCanvasPadding({
       particleMotionMode: "splat",

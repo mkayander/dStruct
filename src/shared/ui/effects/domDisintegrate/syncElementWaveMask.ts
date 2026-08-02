@@ -1,6 +1,27 @@
 /** Radial CSS mask that reveals particles beneath the live surface as the wave expands. */
 export const WAVE_MASK_FADE_PX = 24;
 
+const WAVE_MASK_ORIGIN_X_VAR = "--ds-wave-x";
+const WAVE_MASK_ORIGIN_Y_VAR = "--ds-wave-y";
+const WAVE_MASK_INNER_RADIUS_VAR = "--ds-wave-inner-r";
+const WAVE_MASK_OUTER_RADIUS_VAR = "--ds-wave-outer-r";
+
+const MODAL_WAVE_MASK_TEMPLATE = `radial-gradient(circle at var(${WAVE_MASK_ORIGIN_X_VAR}, 0px) var(${WAVE_MASK_ORIGIN_Y_VAR}, 0px), transparent var(${WAVE_MASK_INNER_RADIUS_VAR}, 0px), black var(${WAVE_MASK_OUTER_RADIUS_VAR}, 0px))`;
+const PARTICLE_WAVE_MASK_TEMPLATE = `radial-gradient(circle at var(${WAVE_MASK_ORIGIN_X_VAR}, 0px) var(${WAVE_MASK_ORIGIN_Y_VAR}, 0px), black var(${WAVE_MASK_INNER_RADIUS_VAR}, 0px), transparent var(${WAVE_MASK_OUTER_RADIUS_VAR}, 0px))`;
+
+type WaveMaskKind = "modal" | "particle";
+
+type WaveMaskElementState = {
+  kind: WaveMaskKind;
+  originX: number;
+  originY: number;
+  innerRadius: number;
+  outerRadius: number;
+  templateApplied: boolean;
+};
+
+const waveMaskStateByElement = new WeakMap<HTMLElement, WaveMaskElementState>();
+
 export type WaveMaskRadii = {
   innerRadius: number;
   outerRadius: number;
@@ -32,15 +53,68 @@ export const createParticleWaveMask = (
 ): string =>
   `radial-gradient(circle at ${origin.x}px ${origin.y}px, black ${innerRadius}px, transparent ${outerRadius}px)`;
 
-const applyMaskStyles = (
+const applyMaskTemplate = (
   target: HTMLElement,
-  mask: string,
+  kind: WaveMaskKind,
   maskSize: string,
 ): void => {
+  const mask =
+    kind === "modal" ? MODAL_WAVE_MASK_TEMPLATE : PARTICLE_WAVE_MASK_TEMPLATE;
   target.style.maskImage = mask;
   target.style.maskSize = maskSize;
   target.style.setProperty("-webkit-mask-image", mask);
   target.style.setProperty("-webkit-mask-size", maskSize);
+};
+
+const applyWaveMaskRadii = (
+  target: HTMLElement,
+  kind: WaveMaskKind,
+  origin: { x: number; y: number },
+  radii: WaveMaskRadii,
+  maskSize: string,
+): void => {
+  const existingState = waveMaskStateByElement.get(target);
+  const state: WaveMaskElementState = existingState ?? {
+    kind,
+    originX: Number.NaN,
+    originY: Number.NaN,
+    innerRadius: Number.NaN,
+    outerRadius: Number.NaN,
+    templateApplied: false,
+  };
+
+  if (!state.templateApplied || state.kind !== kind) {
+    applyMaskTemplate(target, kind, maskSize);
+    state.kind = kind;
+    state.templateApplied = true;
+  }
+
+  if (state.originX !== origin.x || state.originY !== origin.y) {
+    target.style.setProperty(WAVE_MASK_ORIGIN_X_VAR, `${origin.x}px`);
+    target.style.setProperty(WAVE_MASK_ORIGIN_Y_VAR, `${origin.y}px`);
+    state.originX = origin.x;
+    state.originY = origin.y;
+  }
+
+  if (
+    state.innerRadius === radii.innerRadius &&
+    state.outerRadius === radii.outerRadius
+  ) {
+    waveMaskStateByElement.set(target, state);
+    return;
+  }
+
+  target.style.setProperty(
+    WAVE_MASK_INNER_RADIUS_VAR,
+    `${radii.innerRadius}px`,
+  );
+  target.style.setProperty(
+    WAVE_MASK_OUTER_RADIUS_VAR,
+    `${radii.outerRadius}px`,
+  );
+  state.innerRadius = radii.innerRadius;
+  state.outerRadius = radii.outerRadius;
+  waveMaskStateByElement.set(target, state);
 };
 
 export const applyWaveMaskToElement = (
@@ -52,9 +126,8 @@ export const applyWaveMaskToElement = (
   displayHeight: number,
 ): void => {
   const radii = getWaveMaskRadii(elapsedSeconds, waveSpeedPxPerSecond);
-  const mask = createModalWaveMask(origin, radii);
   const maskSize = `${displayWidth}px ${displayHeight}px`;
-  applyMaskStyles(element, mask, maskSize);
+  applyWaveMaskRadii(element, "modal", origin, radii, maskSize);
 };
 
 export const applyParticleWaveMaskToCanvas = (
@@ -67,12 +140,14 @@ export const applyParticleWaveMaskToCanvas = (
   originOffset = 0,
 ): void => {
   const radii = getWaveMaskRadii(elapsedSeconds, waveSpeedPxPerSecond);
-  const mask = createParticleWaveMask(
+  const maskSize = `${canvasWidth}px ${canvasHeight}px`;
+  applyWaveMaskRadii(
+    canvas,
+    "particle",
     { x: origin.x + originOffset, y: origin.y + originOffset },
     radii,
+    maskSize,
   );
-  const maskSize = `${canvasWidth}px ${canvasHeight}px`;
-  applyMaskStyles(canvas, mask, maskSize);
 };
 
 const clearCssMaskStyles = (target: HTMLElement): void => {
@@ -83,6 +158,11 @@ const clearCssMaskStyles = (target: HTMLElement): void => {
   target.style.removeProperty("-webkit-mask-image");
   target.style.removeProperty("-webkit-mask-size");
   target.style.removeProperty("-webkit-mask-repeat");
+  target.style.removeProperty(WAVE_MASK_ORIGIN_X_VAR);
+  target.style.removeProperty(WAVE_MASK_ORIGIN_Y_VAR);
+  target.style.removeProperty(WAVE_MASK_INNER_RADIUS_VAR);
+  target.style.removeProperty(WAVE_MASK_OUTER_RADIUS_VAR);
+  waveMaskStateByElement.delete(target);
 };
 
 export const clearWaveMaskFromElement = clearCssMaskStyles;

@@ -37,6 +37,11 @@ describe("scaleParticleCoordinates", () => {
       fadeDuration: 0.4,
       releaseTime: 0,
       turbulenceSeed: 0,
+      turbulenceInfluence: 0.5,
+      turbulenceFrequency: 3,
+      turbulencePhase: 0,
+      turbulenceNoiseScale: 1,
+      sparkLiftFactor: 1,
     };
 
     scaleParticleCoordinates([particle], 0.5, 0.5);

@@ -1,4 +1,11 @@
+import { getSparkLiftFactor } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
+import { createSparkTurbulenceProfile } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
+
+const defaultTurbulenceSeed = 0;
+const defaultTurbulenceProfile = createSparkTurbulenceProfile(
+  defaultTurbulenceSeed,
+);
 
 export const createTestDisintegrateParticle = (
   overrides: Partial<DisintegrateParticle> = {},
@@ -19,6 +26,11 @@ export const createTestDisintegrateParticle = (
   fadeStart: 0.5,
   fadeDuration: 0.4,
   releaseTime: 0,
-  turbulenceSeed: 0,
+  turbulenceSeed: defaultTurbulenceSeed,
+  turbulenceInfluence: defaultTurbulenceProfile.influence,
+  turbulenceFrequency: defaultTurbulenceProfile.frequency,
+  turbulencePhase: defaultTurbulenceProfile.phase,
+  turbulenceNoiseScale: defaultTurbulenceProfile.noiseScale,
+  sparkLiftFactor: getSparkLiftFactor(defaultTurbulenceSeed),
   ...overrides,
 });

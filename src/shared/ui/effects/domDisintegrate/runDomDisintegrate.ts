@@ -13,6 +13,7 @@ import {
 } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
 import { DomDisintegrateError } from "#/shared/ui/effects/domDisintegrate/domDisintegrateError";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/domDisintegrate/drawDisintegrationFrame";
+import type { DrawDisintegrationFrameState } from "#/shared/ui/effects/domDisintegrate/drawDisintegrationFrame";
 import {
   getParticleCanvasPadding,
   getParticleRevealMargin,
@@ -296,6 +297,13 @@ export const runDomDisintegrate = async (
   );
 
   let completedSuccessfully = false;
+  const drawState: DrawDisintegrationFrameState = {
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    initialized: false,
+  };
 
   try {
     await new Promise<void>((resolve, reject) => {
@@ -318,7 +326,6 @@ export const runDomDisintegrate = async (
           );
           lastTime = timestamp;
 
-          syncOverlayPosition();
           syncDualLayerWave(
             element,
             overlayCanvas,
@@ -342,6 +349,7 @@ export const runDomDisintegrate = async (
               renderMode: resolvedOptions.particleRenderMode,
               sourceCanvas: spriteSourceCanvas,
             },
+            drawState,
           );
           const visibleCount = stepParticles(
             particles,

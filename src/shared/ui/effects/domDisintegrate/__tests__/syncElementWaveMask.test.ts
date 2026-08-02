@@ -34,7 +34,8 @@ describe("syncElementWaveMask", () => {
     applyWaveMaskToElement(element, { x: 40, y: 20 }, 0.5, 520, 200, 80);
 
     expect(element.style.maskImage).toContain("radial-gradient");
-    expect(element.style.maskImage).toContain("40px 20px");
+    expect(element.style.getPropertyValue("--ds-wave-x")).toBe("40px");
+    expect(element.style.getPropertyValue("--ds-wave-y")).toBe("20px");
     expect(element.style.maskSize).toBe("200px 80px");
   });
 
@@ -46,6 +47,8 @@ describe("syncElementWaveMask", () => {
 
     expect(canvas.style.maskImage).toContain("black");
     expect(canvas.style.maskImage).toContain("transparent");
+    expect(canvas.style.getPropertyValue("--ds-wave-x")).toBe("10px");
+    expect(canvas.style.getPropertyValue("--ds-wave-y")).toBe("10px");
     expect(canvas.style.maskSize).toBe("120px 60px");
   });
 
@@ -63,7 +66,8 @@ describe("syncElementWaveMask", () => {
       20,
     );
 
-    expect(canvas.style.maskImage).toContain("30px 30px");
+    expect(canvas.style.getPropertyValue("--ds-wave-x")).toBe("30px");
+    expect(canvas.style.getPropertyValue("--ds-wave-y")).toBe("30px");
     expect(canvas.style.maskSize).toBe("160px 100px");
   });
 

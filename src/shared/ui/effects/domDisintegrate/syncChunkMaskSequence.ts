@@ -5,6 +5,15 @@ import {
   clearWaveMaskFromElement,
 } from "#/shared/ui/effects/domDisintegrate/syncElementWaveMask";
 
+type ChunkMaskFrameState = {
+  maskIndex: number;
+};
+
+const chunkMaskFrameStateByElement = new WeakMap<
+  HTMLElement,
+  ChunkMaskFrameState
+>();
+
 const applyMaskImage = (
   target: HTMLElement,
   maskUrl: string,
@@ -28,6 +37,12 @@ export const applyChunkMaskFrame = (
   elapsedSeconds: number,
 ): void => {
   const maskIndex = getChunkMaskIndex(sequence.timeThresholds, elapsedSeconds);
+  const cachedState = chunkMaskFrameStateByElement.get(element);
+
+  if (cachedState?.maskIndex === maskIndex) {
+    return;
+  }
+
   const modalMaskUrl = sequence.modalMaskUrls[maskIndex];
   const particleMaskUrl = sequence.particleMaskUrls[maskIndex];
 
@@ -37,6 +52,7 @@ export const applyChunkMaskFrame = (
 
   applyMaskImage(element, modalMaskUrl, sequence.modalMaskSize);
   applyMaskImage(particleCanvas, particleMaskUrl, sequence.particleMaskSize);
+  chunkMaskFrameStateByElement.set(element, { maskIndex });
 };
 
 export const clearChunkMaskFromElement = clearWaveMaskFromElement;

@@ -1,14 +1,19 @@
 import { describe, expect, it } from "vitest";
 
 import { createDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/createDisintegrateParticle";
+import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
 import { stepParticles } from "#/shared/ui/effects/domDisintegrate/stepParticles";
 
-const windyOptions = {
-  particleMotionMode: "windy" as const,
+const windyOptions = resolveDomDisintegrateOptions({
+  particleMotionMode: "windy",
   maxVelocity: 80,
   windX: 12,
   windY: -6,
-};
+});
+
+const splatOptions = (
+  overrides: Parameters<typeof resolveDomDisintegrateOptions>[0],
+) => resolveDomDisintegrateOptions(overrides);
 
 describe("stepParticles", () => {
   it("uses delta time so motion is independent of frame rate", () => {
@@ -32,12 +37,17 @@ describe("stepParticles", () => {
     particle.vy = 0;
     particle.drag = 1;
 
-    stepParticles([particle], 1 / 60, 1 / 60, {
-      particleMotionMode: "splat",
-      gravity: 0,
-      windX: 0,
-      windY: 0,
-    });
+    stepParticles(
+      [particle],
+      1 / 60,
+      1 / 60,
+      splatOptions({
+        particleMotionMode: "splat",
+        gravity: 0,
+        windX: 0,
+        windY: 0,
+      }),
+    );
     const positionAfterOneFrame = particle.x;
 
     const secondParticle = {
@@ -47,18 +57,28 @@ describe("stepParticles", () => {
       vx: 60,
       vy: 0,
     };
-    stepParticles([secondParticle], 1 / 120, 1 / 120, {
-      particleMotionMode: "splat",
-      gravity: 0,
-      windX: 0,
-      windY: 0,
-    });
-    stepParticles([secondParticle], 1 / 120, 1 / 60, {
-      particleMotionMode: "splat",
-      gravity: 0,
-      windX: 0,
-      windY: 0,
-    });
+    stepParticles(
+      [secondParticle],
+      1 / 120,
+      1 / 120,
+      splatOptions({
+        particleMotionMode: "splat",
+        gravity: 0,
+        windX: 0,
+        windY: 0,
+      }),
+    );
+    stepParticles(
+      [secondParticle],
+      1 / 120,
+      1 / 60,
+      splatOptions({
+        particleMotionMode: "splat",
+        gravity: 0,
+        windX: 0,
+        windY: 0,
+      }),
+    );
 
     expect(secondParticle.x).toBeCloseTo(positionAfterOneFrame, 2);
   });
@@ -155,13 +175,18 @@ describe("stepParticles", () => {
 
     const yPositions: number[] = [particle.y];
     for (let frame = 1; frame <= 150; frame += 1) {
-      stepParticles([particle], 1 / 60, frame / 60, {
-        particleMotionMode: "windy",
-        maxVelocity: 80,
-        windX: 16,
-        windY: -10,
-        gravity: 320,
-      });
+      stepParticles(
+        [particle],
+        1 / 60,
+        frame / 60,
+        resolveDomDisintegrateOptions({
+          particleMotionMode: "windy",
+          maxVelocity: 80,
+          windX: 16,
+          windY: -10,
+          gravity: 320,
+        }),
+      );
       yPositions.push(particle.y);
     }
 

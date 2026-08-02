@@ -2,7 +2,9 @@ import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegra
 import {
   getParticleMotionProfile,
   getSparkDriftDirection,
+  getSparkLiftFactor,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
+import { createSparkTurbulenceProfile } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import type {
   DisintegrateParticle,
   DomDisintegrateOptions,
@@ -83,6 +85,8 @@ export const createDisintegrateParticle = ({
     resolvedOptions.particleMotionMode === "windy"
       ? createSparkVelocity(resolvedOptions)
       : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
+  const turbulenceSeed = Math.random() * 1000;
+  const turbulenceProfile = createSparkTurbulenceProfile(turbulenceSeed);
 
   return {
     x,
@@ -104,6 +108,11 @@ export const createDisintegrateParticle = ({
       motionProfile.fadeDurationMin +
       Math.random() * motionProfile.fadeDurationRange,
     releaseTime: 0,
-    turbulenceSeed: Math.random() * 1000,
+    turbulenceSeed,
+    turbulenceInfluence: turbulenceProfile.influence,
+    turbulenceFrequency: turbulenceProfile.frequency,
+    turbulencePhase: turbulenceProfile.phase,
+    turbulenceNoiseScale: turbulenceProfile.noiseScale,
+    sparkLiftFactor: getSparkLiftFactor(turbulenceSeed),
   };
 };

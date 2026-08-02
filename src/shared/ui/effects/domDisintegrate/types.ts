@@ -47,6 +47,12 @@ export type DisintegrateParticle = {
   releaseTime: number;
   /** Per-particle seed for turbulence phase, frequency, and influence. */
   turbulenceSeed: number;
+  /** Cached at spawn; avoids per-frame hash work in windy mode. */
+  turbulenceInfluence: number;
+  turbulenceFrequency: number;
+  turbulencePhase: number;
+  turbulenceNoiseScale: number;
+  sparkLiftFactor: number;
 };
 
 export type DomDisintegrateOrigin =
