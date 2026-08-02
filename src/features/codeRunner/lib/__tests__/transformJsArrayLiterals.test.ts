@@ -122,6 +122,22 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(out).toContain('bucket ??= __dstructArrayLiteralWithName("bucket"');
   });
 
+  it("rewrites empty new Array() to __dstructArrayLiteralWithName when bound", () => {
+    const code = `return function f() {
+  const nums = new Array();
+  return nums;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteralWithName("nums")');
+    expect(out).not.toMatch(/new Array\(\{/);
+  });
+
   it("does not append displayLabel to ambiguous new Array(number) length form", () => {
     const code = `return function f() {
   const buf = new Array(10);

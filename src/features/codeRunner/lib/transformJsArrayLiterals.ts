@@ -151,6 +151,16 @@ export const transformArrayLiteralsInFunction = (
       const bindingName = tryInferBindingNameFromRhsPath(path);
       if (bindingName === null) return;
 
+      if (node.arguments.length === 0) {
+        path.replaceWith(
+          babelTypes.callExpression(
+            babelTypes.identifier(ARRAY_LITERAL_NAMED_HELPER),
+            [babelTypes.stringLiteral(bindingName)],
+          ),
+        );
+        return;
+      }
+
       if (node.arguments.length === 1) {
         const only = node.arguments[0];
         if (

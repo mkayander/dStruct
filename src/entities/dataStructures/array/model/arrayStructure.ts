@@ -25,6 +25,18 @@ export type ControlledArrayRuntimeOptions = {
 
 const RUNTIME_DISPLAY_LABEL_KEY = "__dstructRuntimeDisplayLabel";
 
+const isDisplayLabelRuntimeOptions = (
+  value: unknown,
+): value is ControlledArrayRuntimeOptions => {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    return false;
+  }
+  const record = value as Record<string, unknown>;
+  if (!("displayLabel" in record)) return false;
+  if (typeof record.displayLabel !== "string") return false;
+  return Object.keys(record).length === 1;
+};
+
 const getRuntimeDisplayLabel = (array: ArrayBaseType): string | undefined => {
   const label = Reflect.get(array, RUNTIME_DISPLAY_LABEL_KEY);
   return typeof label === "string" ? label : undefined;
@@ -297,15 +309,8 @@ export const getRuntimeArrayClass = (callstack: CallstackHelper) =>
       let runtimeOptions: ControlledArrayRuntimeOptions | undefined;
       let elementItems = items as Array<T | number>;
       const lastItem = elementItems.at(-1);
-      if (
-        elementItems.length >= 2 &&
-        lastItem !== null &&
-        lastItem !== undefined &&
-        typeof lastItem === "object" &&
-        !Array.isArray(lastItem) &&
-        "displayLabel" in lastItem
-      ) {
-        runtimeOptions = lastItem as ControlledArrayRuntimeOptions;
+      if (isDisplayLabelRuntimeOptions(lastItem)) {
+        runtimeOptions = lastItem;
         elementItems = elementItems.slice(0, -1) as Array<T | number>;
       }
 

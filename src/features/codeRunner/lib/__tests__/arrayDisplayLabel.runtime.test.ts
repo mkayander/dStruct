@@ -89,6 +89,34 @@ return function solve() {
     );
   });
 
+  it("supports addStrings-style empty new Array() with push", () => {
+    const { callstack, result } = runInstrumentedSolution(`
+      const nums = new Array();
+      nums.push(1, 2, 3);
+      return nums.reverse().join("");
+    `);
+
+    expect(result).toBe("321");
+    expect(addArrayFramesWithLabel(callstack, "nums")).toHaveLength(1);
+  });
+
+  it("accepts legacy new Array({ displayLabel }) single-arg form", () => {
+    const callstack = new CallstackHelper();
+    setGlobalRuntimeContext(callstack);
+
+    const run = new Function(
+      `${globalDefinitionsPrefix}
+return function solve() {
+  const nums = new Array({ displayLabel: "nums" });
+  nums.push(5);
+  return nums[0];
+};`,
+    ) as () => () => unknown;
+
+    callstack.clear();
+    expect(run()()).toBe(5);
+  });
+
   it("tracks getLevels-style nested arrays when instrumented", () => {
     const treeStore = buildBinaryTreeFixture();
     const caseArgs: ArgumentObject[] = [
