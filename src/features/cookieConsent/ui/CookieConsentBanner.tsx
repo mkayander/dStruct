@@ -96,10 +96,15 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
           sx={{
             alignItems: { xs: "stretch", sm: "center" },
             justifyContent: "space-between",
-            pr: isSettingsView ? 4 : 0,
           }}
         >
-          <Box sx={{ minWidth: 0 }}>
+          <Box
+            sx={{
+              minWidth: 0,
+              // Reserve space for the overlaid close control without narrowing buttons.
+              pr: isSettingsView ? 5 : 0,
+            }}
+          >
             <Typography
               id="cookie-consent-title"
               variant="subtitle2"
