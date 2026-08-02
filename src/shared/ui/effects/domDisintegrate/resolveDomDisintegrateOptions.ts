@@ -1,4 +1,6 @@
 import { DOM_DISINTEGRATE_DEFAULTS } from "#/shared/ui/effects/domDisintegrate/constants";
+import { getElementDisplaySize } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
+import { getDomDisintegrateQualityOverrides } from "#/shared/ui/effects/domDisintegrate/domDisintegrateQuality";
 import type {
   DomDisintegrateOptions,
   ResolvedDomDisintegrateOptions,
@@ -6,7 +8,16 @@ import type {
 
 export const resolveDomDisintegrateOptions = (
   options?: DomDisintegrateOptions,
-): ResolvedDomDisintegrateOptions => ({
-  ...DOM_DISINTEGRATE_DEFAULTS,
-  ...options,
-});
+  element?: HTMLElement | null,
+): ResolvedDomDisintegrateOptions => {
+  const qualityOverrides =
+    element !== undefined && element !== null
+      ? getDomDisintegrateQualityOverrides(getElementDisplaySize(element))
+      : {};
+
+  return {
+    ...DOM_DISINTEGRATE_DEFAULTS,
+    ...qualityOverrides,
+    ...options,
+  };
+};

@@ -179,7 +179,10 @@ export const runDomDisintegrate = async (
   }
 
   const { captureSnapshot, ...disintegrateOptions } = options ?? {};
-  const resolvedOptions = resolveDomDisintegrateOptions(disintegrateOptions);
+  const resolvedOptions = resolveDomDisintegrateOptions(
+    disintegrateOptions,
+    element,
+  );
   const initialRect = element.getBoundingClientRect();
   if (initialRect.width <= 0 || initialRect.height <= 0) {
     throw new DomDisintegrateError(

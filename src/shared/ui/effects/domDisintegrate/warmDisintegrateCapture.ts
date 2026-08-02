@@ -39,7 +39,10 @@ export const warmDisintegrateCapture = (
   disintegrateOptions?: DomDisintegrateOptions,
 ): (() => void) => {
   let cancelled = false;
-  const resolvedOptions = resolveDomDisintegrateOptions(disintegrateOptions);
+  const resolvedOptions = resolveDomDisintegrateOptions(
+    disintegrateOptions,
+    element,
+  );
 
   if (resolvedOptions.maskMode === "chunks") {
     prewarmChunkMaskWorker();

@@ -54,7 +54,7 @@ export type DomDisintegrateOrigin =
   | { clientX: number; clientY: number };
 
 export type DomDisintegrateOptions = {
-  /** Pixel stride when sampling the captured surface. */
+  /** Pixel stride when sampling the captured surface (auto-tuned on mobile/large surfaces when an element is resolved). */
   particleStep?: number;
   /** Base particle size in CSS pixels. */
   particleSize?: number;
