@@ -84,10 +84,11 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(out).toContain("__dstructArrayLiteral(...arr, 4)");
   });
 
-  it("appends displayLabel object to new Array / new ArrayProxy when binding is inferable", () => {
+  it("rewrites new Array / new ArrayProxy with element args to named literal helper", () => {
     const code = `return function f() {
   const nums = new Array(1, 2, 3);
   const copy = new ArrayProxy(4, 5);
+  const label = new Array("x");
   return nums;
 };`;
     const ast = parse(code, {
@@ -97,12 +98,26 @@ describe("transformArrayLiteralsInSolution", () => {
     const solution = findSolution(ast);
     transformArrayLiteralsInSolution(solution!);
     const out = generate(ast).code;
-    expect(out).toMatch(
-      /new Array\(1,\s*2,\s*3,\s*\{[^}]*displayLabel:\s*"nums"/,
-    );
-    expect(out).toMatch(
-      /new ArrayProxy\(4,\s*5,\s*\{[^}]*displayLabel:\s*"copy"/,
-    );
+    expect(out).toContain('__dstructArrayLiteralWithName("nums", 1, 2, 3)');
+    expect(out).toContain('__dstructArrayLiteralWithName("copy", 4, 5)');
+    expect(out).toContain('__dstructArrayLiteralWithName("label", "x")');
+    expect(out).not.toContain("displayLabel");
+  });
+
+  it("appends displayLabel for dynamic-length new Array(expr)", () => {
+    const code = `return function f(n) {
+  const buf = new Array(n);
+  return buf;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toMatch(/new Array\(n,\s*\{[^}]*displayLabel:\s*"buf"/);
+    expect(out).not.toContain("__dstructArrayLiteralWithName");
   });
 
   it("names array literals on ??= assignment to an identifier", () => {

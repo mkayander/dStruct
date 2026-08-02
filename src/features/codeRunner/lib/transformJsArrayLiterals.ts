@@ -64,14 +64,65 @@ const isTrackedArrayCallee = (
   return false;
 };
 
+const getNewArrayElementArguments = (
+  args: babelTypes.NewExpression["arguments"],
+): babelTypes.Expression[] => {
+  const elements: babelTypes.Expression[] = [];
+  for (const arg of args) {
+    if (
+      arg &&
+      babelTypes.isExpression(arg) &&
+      !babelTypes.isSpreadElement(arg)
+    ) {
+      elements.push(arg);
+    }
+  }
+  return elements;
+};
+
+/** `new Array(10)` — numeric literal is a length, not an element. */
+const isArrayLengthConstructor = (node: babelTypes.NewExpression): boolean => {
+  const elements = getNewArrayElementArguments(node.arguments);
+  return elements.length === 1 && babelTypes.isNumericLiteral(elements[0]);
+};
+
+/**
+ * Prefer `__dstructArrayLiteralWithName` over `new Array(..., { displayLabel })` when
+ * arguments are clearly element values (`[]`, `[1,2]`, `["x"]`). Dynamic single-arg
+ * forms like `new Array(n)` must stay as constructors (length), with displayLabel appended.
+ */
+const shouldUseNamedLiteralForNewArray = (
+  node: babelTypes.NewExpression,
+): boolean => {
+  const elements = getNewArrayElementArguments(node.arguments);
+  if (elements.length === 0) return true;
+  if (elements.length === 1) {
+    return babelTypes.isStringLiteral(elements[0]);
+  }
+  return true;
+};
+
+const replaceWithNamedArrayLiteral = (
+  path: NodePath<babelTypes.NewExpression>,
+  bindingName: string,
+  elements: babelTypes.Expression[],
+): void => {
+  path.replaceWith(
+    babelTypes.callExpression(
+      babelTypes.identifier(ARRAY_LITERAL_NAMED_HELPER),
+      [babelTypes.stringLiteral(bindingName), ...elements],
+    ),
+  );
+};
+
 /**
  * Replace `[a, b, ...rest]` with `__dstructArrayLiteral(a, b, ...rest)` inside the solution
  * function so literals use the proxied `Array` (tracked), matching Python `TrackedList` behavior.
  * When the literal is the RHS of a simple binding (`const x = [...]`, `x = [...]`, default param),
  * uses `__dstructArrayLiteralWithName("x", ...)` so the viewer can show the variable name.
  *
- * Also appends `{ displayLabel: "x" }` to `new Array(...)` / `new ArrayProxy(...)` when the name
- * is inferable so dynamic `new Array(1,2,3)` constructions get viewer labels (same as literals).
+ * Also rewrites inferable `new Array(...)` / `new ArrayProxy(...)` to tracked literals, or
+ * appends `{ displayLabel }` for dynamic `new Array(lengthExpr)` forms.
  * Runs before line probes so locations stay aligned with user source.
  */
 export const transformArrayLiteralsInFunction = (
@@ -151,26 +202,14 @@ export const transformArrayLiteralsInFunction = (
       const bindingName = tryInferBindingNameFromRhsPath(path);
       if (bindingName === null) return;
 
-      if (node.arguments.length === 0) {
-        path.replaceWith(
-          babelTypes.callExpression(
-            babelTypes.identifier(ARRAY_LITERAL_NAMED_HELPER),
-            [babelTypes.stringLiteral(bindingName)],
-          ),
-        );
+      if (isArrayLengthConstructor(node)) {
         return;
       }
 
-      if (node.arguments.length === 1) {
-        const only = node.arguments[0];
-        if (
-          only &&
-          babelTypes.isExpression(only) &&
-          !babelTypes.isSpreadElement(only) &&
-          babelTypes.isNumericLiteral(only)
-        ) {
-          return;
-        }
+      const elementArgs = getNewArrayElementArguments(node.arguments);
+      if (shouldUseNamedLiteralForNewArray(node)) {
+        replaceWithNamedArrayLiteral(path, bindingName, elementArgs);
+        return;
       }
 
       const displayLabelObject = babelTypes.objectExpression([

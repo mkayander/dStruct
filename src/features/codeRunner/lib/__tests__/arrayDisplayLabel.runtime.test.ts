@@ -117,6 +117,38 @@ return function solve() {
     expect(run()()).toBe(5);
   });
 
+  it("supports dynamic-length new Array(n) with displayLabel append", () => {
+    const callstack = new CallstackHelper();
+    setGlobalRuntimeContext(callstack);
+
+    const run = new Function(
+      `${globalDefinitionsPrefix}
+return function solve(n) {
+  const buf = new Array(n, { displayLabel: "buf" });
+  buf[0] = 7;
+  return buf.length;
+};`,
+    ) as () => (length: number) => number;
+
+    callstack.clear();
+    expect(run()(3)).toBe(3);
+    expect(addArrayFramesWithLabel(callstack, "buf")).toHaveLength(1);
+  });
+
+  it("rejects non-primitive elements in ArrayProxy constructor", () => {
+    const callstack = new CallstackHelper();
+    setGlobalRuntimeContext(callstack);
+    const ArrayProxy = (
+      globalThis as unknown as {
+        ArrayProxy: new (...items: unknown[]) => unknown;
+      }
+    ).ArrayProxy;
+
+    expect(() => {
+      new ArrayProxy({ not: "allowed" });
+    }).toThrow("ArrayProxy can only contain numbers or strings");
+  });
+
   it("tracks getLevels-style nested arrays when instrumented", () => {
     const treeStore = buildBinaryTreeFixture();
     const caseArgs: ArgumentObject[] = [

@@ -42,6 +42,16 @@ const getRuntimeDisplayLabel = (array: ArrayBaseType): string | undefined => {
   return typeof label === "string" ? label : undefined;
 };
 
+const assertArrayProxyElementsAreValid = (
+  elements: ReadonlyArray<unknown>,
+): void => {
+  for (const element of elements) {
+    if (element === undefined) continue;
+    if (typeof element === "number" || typeof element === "string") continue;
+    throw new Error("ArrayProxy can only contain numbers or strings");
+  }
+};
+
 export function initControlledArray<T extends ArrayBaseType>(
   array: T,
   arrayData: EntityState<ArrayItemData, string>,
@@ -319,13 +329,7 @@ export const getRuntimeArrayClass = (callstack: CallstackHelper) =>
         elementItems = new Array(arrayLength) as Array<T | number>;
       }
 
-      if (
-        elementItems[0] &&
-        typeof elementItems[0] !== "number" &&
-        typeof elementItems[0] !== "string"
-      ) {
-        throw new Error("ArrayProxy can only contain numbers or strings");
-      }
+      assertArrayProxyElementsAreValid(elementItems);
 
       const data = generateArrayData(elementItems as T[]);
 
