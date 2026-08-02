@@ -68,11 +68,11 @@ Use code citations for non-obvious changes. Keep prose concise.
 
 ## Example
 
-**Finding:** `sparkFlutter.ts` duplicated `hash01` with `sparkParticlePhysics.ts` and used stale global sine steering.
+**Finding:** Two modules duplicate the same `hash01` helper; an exported `prewarmWorker()` is never called.
 
-**Action:** Replace with `sparkTurbulence.ts` + shared `sparkSeedHash.ts`; wire `prewarmChunkMaskWorker` during chunk warm-up.
+**Action:** Extract a shared hash util; call `prewarmWorker()` from the existing idle warm-up path; add a regression test if behavior changed.
 
 **Response excerpt:**
-> **Fixes applied** — Deduplicated seed hash helper. Clarified windy vs splat option docs. Fixed duplicate JSDoc typo. Prewarm chunk mask worker on idle capture when `maskMode: "chunks"`.
+> **Fixes applied** — Deduplicated hash helper. Wired dead prewarm export into idle setup. Clarified misleading option JSDoc.
 >
-> **Verification** — 69 domDisintegrate tests pass; ESLint clean on touched files.
+> **Verification** — Targeted tests pass; ESLint clean on touched files.
