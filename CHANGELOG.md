@@ -1,3 +1,10 @@
+## [1.379.3](https://github.com/mkayander/dStruct/compare/v1.379.2...v1.379.3) (2026-08-02)
+
+
+### Bug Fixes
+
+* silence known production console warnings ([#156](https://github.com/mkayander/dStruct/issues/156)) ([2ffd511](https://github.com/mkayander/dStruct/commit/2ffd511f31cdd53ad73efc16bbe4cd11f477e0ec))
+
 ## [1.379.2](https://github.com/mkayander/dStruct/compare/v1.379.1...v1.379.2) (2026-08-01)
 
 
