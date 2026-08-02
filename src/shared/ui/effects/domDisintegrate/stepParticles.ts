@@ -1,15 +1,12 @@
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
-import { sampleSparkFlutter } from "#/shared/ui/effects/domDisintegrate/sparkFlutter";
 import {
   SPARK_BUOYANCY,
   SPARK_BUOYANCY_DECAY,
-  SPARK_FLUTTER_STRENGTH,
   SPARK_GRAVITY_RAMP_SECONDS,
+  SPARK_TURBULENCE_STRENGTH,
   SPARK_WIND_MULTIPLIER,
-  SPARK_ZIGZAG_FREQUENCY,
-  SPARK_ZIGZAG_STEER_RATE,
-  SPARK_ZIGZAG_VELOCITY,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
+import { sampleSparkTurbulence } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import type {
   DisintegrateParticle,
   DomDisintegrateOptions,
@@ -59,14 +56,14 @@ const stepSparkParticle = (
   particle.vx = applyDrag(particle.vx, particle.drag, deltaSeconds);
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
 
-  const zigzagPhase =
-    timeSinceRelease * SPARK_ZIGZAG_FREQUENCY + particle.turbulenceSeed * 0.09;
-  const targetZigzagVx = Math.sin(zigzagPhase) * SPARK_ZIGZAG_VELOCITY;
-  particle.vx +=
-    (targetZigzagVx - particle.vx) *
-    Math.min(1, deltaSeconds * SPARK_ZIGZAG_STEER_RATE);
-
-  const flutter = sampleSparkFlutter(timeSinceRelease, particle.turbulenceSeed);
+  const verticalTravel = Math.max(0, particle.originY - particle.y);
+  const turbulence = sampleSparkTurbulence({
+    originX: particle.originX,
+    originY: particle.originY,
+    timeSinceRelease,
+    turbulenceSeed: particle.turbulenceSeed,
+    verticalTravel,
+  });
   const buoyancy =
     SPARK_BUOYANCY * Math.exp(-timeSinceRelease * SPARK_BUOYANCY_DECAY);
   const gravityRamp = Math.min(
@@ -75,10 +72,11 @@ const stepSparkParticle = (
   );
 
   particle.vx +=
-    (flutter.forceX * SPARK_FLUTTER_STRENGTH + windX * SPARK_WIND_MULTIPLIER) *
+    (turbulence.forceX * SPARK_TURBULENCE_STRENGTH +
+      windX * SPARK_WIND_MULTIPLIER) *
     deltaSeconds;
   particle.vy +=
-    (flutter.forceY * SPARK_FLUTTER_STRENGTH +
+    (turbulence.forceY * SPARK_TURBULENCE_STRENGTH +
       buoyancy +
       gravity * gravityRamp +
       windY * SPARK_WIND_MULTIPLIER) *

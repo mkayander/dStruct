@@ -3,6 +3,14 @@ import { describe, expect, it } from "vitest";
 import { createDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/createDisintegrateParticle";
 import { stepParticles } from "#/shared/ui/effects/domDisintegrate/stepParticles";
 
+const windyOptions = {
+  particleMotionMode: "windy" as const,
+  maxVelocity: 80,
+  windX: 12,
+  windY: -6,
+  gravity: 240,
+};
+
 describe("stepParticles", () => {
   it("uses delta time so motion is independent of frame rate", () => {
     const particle = createDisintegrateParticle({
@@ -56,7 +64,38 @@ describe("stepParticles", () => {
     expect(secondParticle.x).toBeCloseTo(positionAfterOneFrame, 2);
   });
 
-  it("zig-zags laterally while rising", () => {
+  it("diverges windy particles with different turbulence seeds", () => {
+    const first = createDisintegrateParticle({
+      x: 40,
+      y: 40,
+      color: "rgb(255, 255, 255)",
+      alpha: 1,
+      surfaceWidth: 120,
+      surfaceHeight: 60,
+      options: windyOptions,
+    });
+    const second = createDisintegrateParticle({
+      x: 42,
+      y: 40,
+      color: "rgb(255, 255, 255)",
+      alpha: 1,
+      surfaceWidth: 120,
+      surfaceHeight: 60,
+      options: windyOptions,
+    });
+    first.releaseTime = 0;
+    second.releaseTime = 0;
+    first.turbulenceSeed = 11;
+    second.turbulenceSeed = 907;
+
+    for (let frame = 1; frame <= 120; frame += 1) {
+      stepParticles([first, second], 1 / 60, frame / 60, windyOptions);
+    }
+
+    expect(Math.abs(first.x - second.x)).toBeGreaterThan(8);
+  });
+
+  it("sways more laterally after rising farther", () => {
     const particle = createDisintegrateParticle({
       x: 20,
       y: 40,
@@ -64,46 +103,35 @@ describe("stepParticles", () => {
       alpha: 1,
       surfaceWidth: 120,
       surfaceHeight: 60,
-      options: {
-        particleMotionMode: "windy",
-        maxVelocity: 80,
-        windX: 0,
-        windY: 0,
-        gravity: 240,
-      },
+      options: windyOptions,
     });
     particle.releaseTime = 0;
-    particle.vx = 0;
-    particle.vy = -50;
+    particle.vx = 4;
+    particle.vy = -42;
     particle.drag = 0.97;
-    particle.turbulenceSeed = 17;
+    particle.turbulenceSeed = 33;
 
-    const xPositions: number[] = [particle.x];
-    const yPositions: number[] = [particle.y];
-    for (let frame = 1; frame <= 200; frame += 1) {
-      stepParticles([particle], 1 / 60, frame / 60, {
-        particleMotionMode: "windy",
-        windX: 0,
-        windY: 0,
-        gravity: 240,
-      });
-      xPositions.push(particle.x);
-      yPositions.push(particle.y);
+    let earlyLateralDelta = 0;
+    let lateralAtPeakRise = 0;
+    let peakVerticalTravel = 0;
+
+    for (let frame = 1; frame <= 120; frame += 1) {
+      stepParticles([particle], 1 / 60, frame / 60, windyOptions);
+
+      const verticalTravel = Math.max(0, particle.originY - particle.y);
+      const lateralDelta = Math.abs(particle.x - particle.originX);
+
+      if (frame <= 12) {
+        earlyLateralDelta = Math.max(earlyLateralDelta, lateralDelta);
+      }
+
+      if (verticalTravel > peakVerticalTravel) {
+        peakVerticalTravel = verticalTravel;
+        lateralAtPeakRise = lateralDelta;
+      }
     }
 
-    const xDeltas = xPositions
-      .slice(1)
-      .map((xPosition, index) => xPosition - xPositions[index]!);
-    const directionChanges = xDeltas
-      .slice(1)
-      .filter(
-        (delta, index) => Math.sign(delta) !== Math.sign(xDeltas[index]!),
-      ).length;
-    const lateralSpread = Math.max(...xPositions) - Math.min(...xPositions);
-    const peakAltitude = Math.min(...yPositions);
-
-    expect(directionChanges).toBeGreaterThanOrEqual(10);
-    expect(lateralSpread).toBeGreaterThan(24);
-    expect(peakAltitude).toBeLessThan(40 - 12);
+    expect(peakVerticalTravel).toBeGreaterThan(10);
+    expect(lateralAtPeakRise).toBeGreaterThan(earlyLateralDelta + 2);
   });
 });

@@ -45,7 +45,7 @@ export type DisintegrateParticle = {
   fadeDuration: number;
   /** Seconds from animation start when this particle begins to crumble. */
   releaseTime: number;
-  /** Per-particle phase offset for spark flutter oscillation. */
+  /** Per-particle seed for turbulence phase, frequency, and influence. */
   turbulenceSeed: number;
 };
 

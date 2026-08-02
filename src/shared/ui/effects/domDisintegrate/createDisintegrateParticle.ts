@@ -42,19 +42,33 @@ const createSplatVelocity = (
 };
 
 const createSparkVelocity = (
+  x: number,
+  y: number,
+  surfaceWidth: number,
+  surfaceHeight: number,
   resolvedOptions: ReturnType<typeof resolveDomDisintegrateOptions>,
 ): { vx: number; vy: number } => {
-  const launchAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.5;
-  const speed = resolvedOptions.maxVelocity * (0.42 + Math.random() * 0.62);
+  const centerX = surfaceWidth / 2;
+  const centerY = surfaceHeight * 0.55;
+  const deltaX = x - centerX;
+  const deltaY = y - centerY;
+  const distanceFromCenter = Math.hypot(deltaX, deltaY);
+  const outwardAngle =
+    distanceFromCenter > 0.5
+      ? Math.atan2(deltaY, deltaX)
+      : Math.random() * Math.PI * 2;
+  const upwardAngle = -Math.PI / 2 + (Math.random() - 0.5) * 1.25;
+  const launchAngle = outwardAngle * 0.4 + upwardAngle * 0.6;
+  const speed = resolvedOptions.maxVelocity * (0.36 + Math.random() * 0.78);
 
   return {
     vx:
-      Math.cos(launchAngle) * speed * 0.38 +
-      resolvedOptions.windX * 0.2 +
-      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.16,
+      Math.cos(launchAngle) * speed +
+      resolvedOptions.windX * (0.12 + Math.random() * 0.22) +
+      (Math.random() - 0.5) * resolvedOptions.maxVelocity * 0.42,
     vy:
-      Math.sin(launchAngle) * speed -
-      resolvedOptions.maxVelocity * (0.1 + Math.random() * 0.16),
+      Math.sin(launchAngle) * speed * 0.88 -
+      resolvedOptions.maxVelocity * (0.05 + Math.random() * 0.2),
   };
 };
 
@@ -74,7 +88,7 @@ export const createDisintegrateParticle = ({
   );
   const velocity =
     resolvedOptions.particleMotionMode === "windy"
-      ? createSparkVelocity(resolvedOptions)
+      ? createSparkVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions)
       : createSplatVelocity(x, y, surfaceWidth, surfaceHeight, resolvedOptions);
 
   return {
