@@ -66,7 +66,7 @@ describe("stepParticles", () => {
 
   it("diverges windy particles with different turbulence seeds", () => {
     const first = createDisintegrateParticle({
-      x: 40,
+      x: 20,
       y: 40,
       color: "rgb(255, 255, 255)",
       alpha: 1,
@@ -75,7 +75,7 @@ describe("stepParticles", () => {
       options: windyOptions,
     });
     const second = createDisintegrateParticle({
-      x: 42,
+      x: 90,
       y: 40,
       color: "rgb(255, 255, 255)",
       alpha: 1,
@@ -92,7 +92,7 @@ describe("stepParticles", () => {
       stepParticles([first, second], 1 / 60, frame / 60, windyOptions);
     }
 
-    expect(Math.abs(first.x - second.x)).toBeGreaterThan(8);
+    expect(Math.abs(first.x - second.x)).toBeGreaterThan(50);
   });
 
   it("sways more laterally after rising farther", () => {
@@ -133,5 +133,42 @@ describe("stepParticles", () => {
 
     expect(peakVerticalTravel).toBeGreaterThan(10);
     expect(lateralAtPeakRise).toBeGreaterThan(earlyLateralDelta + 2);
+  });
+
+  it("keeps windy sparks rising with the global wind instead of falling", () => {
+    const particle = createDisintegrateParticle({
+      x: 30,
+      y: 50,
+      color: "rgb(255, 255, 255)",
+      alpha: 1,
+      surfaceWidth: 120,
+      surfaceHeight: 60,
+      options: {
+        particleMotionMode: "windy",
+        maxVelocity: 80,
+        windX: 16,
+        windY: -10,
+        gravity: 320,
+      },
+    });
+    particle.releaseTime = 0;
+    particle.turbulenceSeed = 44;
+
+    const yPositions: number[] = [particle.y];
+    for (let frame = 1; frame <= 150; frame += 1) {
+      stepParticles([particle], 1 / 60, frame / 60, {
+        particleMotionMode: "windy",
+        maxVelocity: 80,
+        windX: 16,
+        windY: -10,
+        gravity: 320,
+      });
+      yPositions.push(particle.y);
+    }
+
+    expect(particle.y).toBeLessThan(particle.originY);
+    expect(particle.x).toBeGreaterThan(particle.originX);
+    expect(Math.min(...yPositions)).toBeLessThan(particle.originY - 8);
+    expect(particle.vy).toBeLessThanOrEqual(8);
   });
 });

@@ -70,11 +70,6 @@ export const sampleSparkTurbulence = ({
       (sway * swayEnvelope + positionNoise * 0.38 + eddy) *
       profile.influence *
       profile.noiseScale,
-    forceY:
-      (Math.cos(slowPhase * 0.81 + turbulenceSeed * 0.21) *
-        swayEnvelope *
-        0.14 +
-        positionNoise * 0.06) *
-      profile.influence,
+    forceY: 0,
   };
 };

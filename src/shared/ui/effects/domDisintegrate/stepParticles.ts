@@ -1,10 +1,10 @@
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
 import {
-  SPARK_BUOYANCY,
-  SPARK_BUOYANCY_DECAY,
-  SPARK_GRAVITY_RAMP_SECONDS,
+  getSparkLiftFactor,
+  SPARK_LIFT_ACCEL,
+  SPARK_MAX_DOWNWARD_VELOCITY,
   SPARK_TURBULENCE_STRENGTH,
-  SPARK_WIND_MULTIPLIER,
+  SPARK_WIND_ACCEL,
 } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
 import { sampleSparkTurbulence } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import type {
@@ -51,7 +51,6 @@ const stepSparkParticle = (
   timeSinceRelease: number,
   windX: number,
   windY: number,
-  gravity: number,
 ): void => {
   particle.vx = applyDrag(particle.vx, particle.drag, deltaSeconds);
   particle.vy = applyDrag(particle.vy, particle.drag, deltaSeconds);
@@ -64,23 +63,15 @@ const stepSparkParticle = (
     turbulenceSeed: particle.turbulenceSeed,
     verticalTravel,
   });
-  const buoyancy =
-    SPARK_BUOYANCY * Math.exp(-timeSinceRelease * SPARK_BUOYANCY_DECAY);
-  const gravityRamp = Math.min(
-    1,
-    timeSinceRelease / SPARK_GRAVITY_RAMP_SECONDS,
-  );
+  const liftFactor = getSparkLiftFactor(particle.turbulenceSeed);
+  const uplift = SPARK_LIFT_ACCEL * liftFactor;
 
   particle.vx +=
-    (turbulence.forceX * SPARK_TURBULENCE_STRENGTH +
-      windX * SPARK_WIND_MULTIPLIER) *
+    (turbulence.forceX * SPARK_TURBULENCE_STRENGTH + windX * SPARK_WIND_ACCEL) *
     deltaSeconds;
-  particle.vy +=
-    (turbulence.forceY * SPARK_TURBULENCE_STRENGTH +
-      buoyancy +
-      gravity * gravityRamp +
-      windY * SPARK_WIND_MULTIPLIER) *
-    deltaSeconds;
+  particle.vy += (uplift + windY * SPARK_WIND_ACCEL) * deltaSeconds;
+  particle.vy = Math.min(particle.vy, SPARK_MAX_DOWNWARD_VELOCITY);
+
   particle.x += particle.vx * deltaSeconds;
   particle.y += particle.vy * deltaSeconds;
 };
@@ -110,7 +101,6 @@ export const stepParticles = (
         timeSinceRelease,
         resolvedOptions.windX,
         resolvedOptions.windY,
-        resolvedOptions.gravity,
       );
     } else {
       stepSplatParticle(

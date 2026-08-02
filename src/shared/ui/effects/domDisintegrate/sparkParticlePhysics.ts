@@ -2,12 +2,14 @@ import type { DisintegrateParticleMotionMode } from "#/shared/ui/effects/domDisi
 
 export const SPARK_TURBULENCE_STRENGTH = 195;
 export const SPARK_TURBULENCE_MAX_LATERAL = 48;
-export const SPARK_BUOYANCY = -285;
-export const SPARK_BUOYANCY_DECAY = 3.1;
-export const SPARK_GRAVITY_RAMP_SECONDS = 0.36;
-export const SPARK_WIND_MULTIPLIER = 0.62;
-export const SPARK_UPWARD_TRAVEL_FACTOR = 1.2;
-export const SPARK_TRAVEL_PADDING = 72;
+/** Sustained upward acceleration (negative = rise on canvas Y). */
+export const SPARK_LIFT_ACCEL = -158;
+/** Global wind from options applied as acceleration (same for every spark). */
+export const SPARK_WIND_ACCEL = 1;
+/** Sparks may wobble slightly but never arc downward like thrown balls. */
+export const SPARK_MAX_DOWNWARD_VELOCITY = 8;
+export const SPARK_UPWARD_TRAVEL_FACTOR = 1.25;
+export const SPARK_TRAVEL_PADDING = 78;
 
 type ParticleMotionProfile = {
   dragMin: number;
@@ -33,14 +35,50 @@ const PARTICLE_MOTION_PROFILES: Record<
     fadeDurationRange: 0.35,
   },
   windy: {
-    dragMin: 0.964,
-    dragRange: 0.022,
+    dragMin: 0.966,
+    dragRange: 0.02,
     rotationSpeed: 11,
     fadeStartMin: 0.38,
     fadeStartRange: 0.24,
     fadeDurationMin: 0.5,
     fadeDurationRange: 0.38,
   },
+};
+
+const hash01 = (seed: number) => {
+  const value = Math.sin(seed) * 43758.5453123;
+  return value - Math.floor(value);
+};
+
+/** Per-particle lift variation while sharing the same global wind field. */
+export const getSparkLiftFactor = (turbulenceSeed: number): number =>
+  0.68 + hash01(turbulenceSeed * 7.31) * 0.56;
+
+export type SparkDriftDirection = {
+  driftX: number;
+  driftY: number;
+};
+
+/**
+ * Shared upwind drift for all sparks — wind from the left pushes everyone up-right.
+ * Blends option wind with a mandatory upward component.
+ */
+export const getSparkDriftDirection = (
+  windX: number,
+  windY: number,
+): SparkDriftDirection => {
+  const windLength = Math.hypot(windX, windY);
+  const windNormX = windLength > 0.01 ? windX / windLength : 0.85;
+  const windNormY = windLength > 0.01 ? windY / windLength : -0.52;
+
+  const blendedX = windNormX * 0.62;
+  const blendedY = windNormY * 0.62 - 0.78;
+  const length = Math.hypot(blendedX, blendedY) || 1;
+
+  return {
+    driftX: blendedX / length,
+    driftY: blendedY / length,
+  };
 };
 
 export const getParticleMotionProfile = (

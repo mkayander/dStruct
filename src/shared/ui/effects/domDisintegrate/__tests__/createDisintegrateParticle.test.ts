@@ -54,5 +54,10 @@ describe("createDisintegrateParticle", () => {
     expect(averageVelocityY).toBeLessThan(-8);
     expect(averageSpeed).toBeGreaterThan(20);
     expect(averageSpeed).toBeLessThan(105);
+
+    const averageVelocityX =
+      particles.reduce((sum, particle) => sum + particle.vx, 0) /
+      particles.length;
+    expect(averageVelocityX).toBeGreaterThan(4);
   });
 });
