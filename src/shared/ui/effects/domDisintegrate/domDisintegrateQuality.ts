@@ -67,31 +67,29 @@ export const detectDomDisintegrateQualityTier = (
     return "low";
   }
 
-  let pressureScore = 0;
-  if (profile.hardwareConcurrency <= 4) {
-    pressureScore += 1;
+  const cores = profile.hardwareConcurrency;
+  const memory = profile.deviceMemory;
+
+  // Modern phones and desktops (e.g. Nothing Phone 3: 8 cores, 8GB). Touch alone
+  // must not reduce quality — coarsePointer is collected but not scored here.
+  if (cores >= 6) {
+    return "high";
   }
-  if (profile.hardwareConcurrency <= 2) {
-    pressureScore += 1;
-  }
-  if (profile.deviceMemory !== undefined && profile.deviceMemory <= 4) {
-    pressureScore += 1;
-  }
-  if (profile.deviceMemory !== undefined && profile.deviceMemory <= 2) {
-    pressureScore += 1;
-  }
-  if (profile.coarsePointer) {
-    pressureScore += 1;
+  if (cores >= 4 && (memory === undefined || memory >= 4)) {
+    return "high";
   }
 
-  if (pressureScore >= 3) {
+  if (cores <= 2) {
     return "low";
   }
-  if (pressureScore >= 1) {
+  if (cores <= 4 && memory !== undefined && memory <= 2) {
     return "medium";
   }
+  if (memory !== undefined && memory <= 2) {
+    return "low";
+  }
 
-  return "high";
+  return "medium";
 };
 
 export const estimateParticleGridCells = (
@@ -130,14 +128,18 @@ export const getDomDisintegrateQualityOverrides = (
 ): DomDisintegrateQualityOverrides => {
   const tier = detectDomDisintegrateQualityTier(profile);
   const tierBase = TIER_BASE[tier];
+  const baseParticleStep = tierBase.particleStep ?? 3;
 
   return {
     ...tierBase,
-    particleStep: resolveParticleStepForSurface(
-      context.displayWidth,
-      context.displayHeight,
-      tierBase.particleStep ?? 3,
-      TIER_MAX_GRID_CELLS[tier],
-    ),
+    particleStep:
+      tier === "high"
+        ? baseParticleStep
+        : resolveParticleStepForSurface(
+            context.displayWidth,
+            context.displayHeight,
+            baseParticleStep,
+            TIER_MAX_GRID_CELLS[tier],
+          ),
   };
 };

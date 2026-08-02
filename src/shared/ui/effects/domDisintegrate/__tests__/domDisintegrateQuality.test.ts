@@ -56,12 +56,24 @@ describe("detectDomDisintegrateQualityTier", () => {
     expect(detectDomDisintegrateQualityTier(profile({}))).toBe("high");
   });
 
-  it("returns medium tier for modern mobile (e.g. Nothing Phone 3 class)", () => {
+  it("returns high tier for modern mobile (e.g. Nothing Phone 3 class)", () => {
     expect(
       detectDomDisintegrateQualityTier(
         profile({
           hardwareConcurrency: 8,
           deviceMemory: 8,
+          coarsePointer: true,
+        }),
+      ),
+    ).toBe("high");
+  });
+
+  it("returns medium tier for 4-core devices with tight memory", () => {
+    expect(
+      detectDomDisintegrateQualityTier(
+        profile({
+          hardwareConcurrency: 4,
+          deviceMemory: 2,
           coarsePointer: true,
         }),
       ),
@@ -101,13 +113,28 @@ describe("resolveParticleStepForSurface", () => {
 });
 
 describe("getDomDisintegrateQualityOverrides", () => {
-  it("applies medium-tier defaults for coarse-pointer mobile", () => {
+  it("keeps full quality on flagship mobile (no surface step bump)", () => {
     const overrides = getDomDisintegrateQualityOverrides(
-      { displayWidth: 120, displayHeight: 40 },
-      profile({ coarsePointer: true }),
+      { displayWidth: 400, displayHeight: 96 },
+      profile({
+        hardwareConcurrency: 8,
+        deviceMemory: 8,
+        coarsePointer: true,
+      }),
     );
 
-    expect(overrides.particleStep).toBe(4);
+    expect(overrides.particleStep).toBe(3);
+    expect(overrides.maxDuration).toBe(1);
+    expect(overrides.maxChunkMaskSteps).toBe(96);
+  });
+
+  it("applies medium-tier defaults and surface bump for weak 4-core devices", () => {
+    const overrides = getDomDisintegrateQualityOverrides(
+      { displayWidth: 400, displayHeight: 96 },
+      profile({ hardwareConcurrency: 4, deviceMemory: 2, coarsePointer: true }),
+    );
+
+    expect(overrides.particleStep).toBeGreaterThan(4);
     expect(overrides.maxDuration).toBe(0.9);
     expect(overrides.maxChunkMaskSteps).toBe(64);
   });
@@ -117,11 +144,11 @@ describe("getDomDisintegrateQualityOverrides", () => {
     setMatchMedia({ "(pointer: coarse)": true });
 
     const overrides = getDomDisintegrateQualityOverrides({
-      displayWidth: 120,
-      displayHeight: 40,
+      displayWidth: 400,
+      displayHeight: 96,
     });
 
-    expect(overrides.particleStep).toBe(4);
-    expect(overrides.maxDuration).toBe(0.9);
+    expect(overrides.particleStep).toBe(3);
+    expect(overrides.maxDuration).toBe(1);
   });
 });
