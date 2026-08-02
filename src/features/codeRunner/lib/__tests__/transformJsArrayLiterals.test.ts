@@ -169,6 +169,38 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(out).not.toContain("displayLabel");
   });
 
+  it("does not rewrite array literal used for destructuring assignment", () => {
+    const code = `return function f(num1, num2) {
+  [num1, num2] = [num2, num1];
+  return num1;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain("[num1, num2] = [num2, num1]");
+    expect(out).not.toContain("__dstructArrayLiteral");
+  });
+
+  it("does not rewrite array literal in const destructuring", () => {
+    const code = `return function f() {
+  const [left, right] = [1, 2];
+  return left + right;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain("const [left, right] = [1, 2]");
+    expect(out).not.toMatch(/\[1,\s*2\].*__dstructArrayLiteral/);
+  });
+
   it("does not replace array used as computed object key", () => {
     const code = `return function f() {
   const o = { [[1, 2]]: 0 };

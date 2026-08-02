@@ -102,6 +102,33 @@ const shouldUseNamedLiteralForNewArray = (
   return true;
 };
 
+/**
+ * Ephemeral tuple on the RHS of destructuring (e.g. `[a, b] = [b, a]`) must stay a plain
+ * array. Tracking it links tracked argument structures as nested children and renders a
+ * phantom matrix in the viewer.
+ */
+const isDestructuringArrayLiteralRhs = (
+  path: NodePath<babelTypes.ArrayExpression>,
+): boolean => {
+  const { node, parent } = path;
+  if (
+    babelTypes.isAssignmentExpression(parent) &&
+    ASSIGNMENT_OPERATORS_WITH_BINDING.has(parent.operator) &&
+    parent.right === node &&
+    babelTypes.isArrayPattern(parent.left)
+  ) {
+    return true;
+  }
+  if (
+    babelTypes.isVariableDeclarator(parent) &&
+    parent.init === node &&
+    babelTypes.isArrayPattern(parent.id)
+  ) {
+    return true;
+  }
+  return false;
+};
+
 const replaceWithNamedArrayLiteral = (
   path: NodePath<babelTypes.NewExpression>,
   bindingName: string,
@@ -137,6 +164,10 @@ export const transformArrayLiteralsInFunction = (
         parent.computed &&
         parent.key === node
       ) {
+        return;
+      }
+
+      if (isDestructuringArrayLiteralRhs(path)) {
         return;
       }
 

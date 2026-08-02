@@ -89,6 +89,38 @@ return function solve() {
     );
   });
 
+  it("does not create a phantom matrix from destructuring string-arg swap", () => {
+    const { callstack, result } = runInstrumentedSolution(`
+      let num1 = new String("11");
+      let num2 = new String("123");
+      if (num1.length < num2.length) {
+        [num1, num2] = [num2, num1];
+      }
+      const nums = new Array();
+      nums.push(1, 3, 4);
+      return nums.reverse().join("");
+    `);
+
+    expect(result).toBe("431");
+    const addArrayFrames = callstack.frames.filter(
+      (frame) => frame.name === "addArray",
+    );
+    expect(addArrayFrames).toHaveLength(3);
+    expect(
+      addArrayFrames.filter(
+        (frame) => getDisplayLabelFromFrame(frame) === "nums",
+      ),
+    ).toHaveLength(1);
+    expect(
+      callstack.frames.some(
+        (frame) =>
+          frame.name === "addArrayItem" &&
+          "args" in frame &&
+          frame.args.childName,
+      ),
+    ).toBe(false);
+  });
+
   it("supports addStrings-style empty new Array() with push", () => {
     const { callstack, result } = runInstrumentedSolution(`
       const nums = new Array();
