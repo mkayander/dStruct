@@ -60,11 +60,11 @@ export type DomDisintegrateOptions = {
   particleSize?: number;
   /** Max outward speed magnitude in px/s. */
   maxVelocity?: number;
-  /** Horizontal drift in px/s. */
+  /** Shared horizontal wind acceleration in px/s² (`windy` mode). */
   windX?: number;
-  /** Vertical drift in px/s. */
+  /** Shared vertical wind acceleration in px/s²; negative values rise on canvas. */
   windY?: number;
-  /** Downward acceleration in px/s². */
+  /** Downward acceleration in px/s² (`splat` mode only). */
   gravity?: number;
   /** Hard cap on animation duration in seconds after the wave reaches the edge. */
   maxDuration?: number;

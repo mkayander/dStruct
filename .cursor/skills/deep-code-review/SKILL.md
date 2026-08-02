@@ -68,11 +68,11 @@ Use code citations for non-obvious changes. Keep prose concise.
 
 ## Example
 
-**Finding:** `windTurbulence.ts` exports Perlin noise used only for a tiny drift term on top of sine flutter.
+**Finding:** `sparkFlutter.ts` duplicated `hash01` with `sparkParticlePhysics.ts` and used stale global sine steering.
 
-**Action:** Delete file; replace with `sparkFlutter.ts`; centralize constants in `sparkParticlePhysics.ts`; update tests.
+**Action:** Replace with `sparkTurbulence.ts` + shared `sparkSeedHash.ts`; wire `prewarmChunkMaskWorker` during chunk warm-up.
 
 **Response excerpt:**
-> **Fixes applied** — Removed 80-line Perlin module (dead weight). Consolidated spark constants and motion profiles. Fixed double-resolve in padding helper.
+> **Fixes applied** — Deduplicated seed hash helper. Clarified windy vs splat option docs. Fixed duplicate JSDoc typo. Prewarm chunk mask worker on idle capture when `maskMode: "chunks"`.
 >
-> **Verification** — 64 domDisintegrate tests pass; ESLint clean on touched files.
+> **Verification** — 69 domDisintegrate tests pass; ESLint clean on touched files.

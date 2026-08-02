@@ -1,3 +1,4 @@
+import { hashSparkSeed01 } from "#/shared/ui/effects/domDisintegrate/sparkSeedHash";
 import type { DisintegrateParticleMotionMode } from "#/shared/ui/effects/domDisintegrate/types";
 
 export const SPARK_TURBULENCE_STRENGTH = 195;
@@ -45,14 +46,9 @@ const PARTICLE_MOTION_PROFILES: Record<
   },
 };
 
-const hash01 = (seed: number) => {
-  const value = Math.sin(seed) * 43758.5453123;
-  return value - Math.floor(value);
-};
-
 /** Per-particle lift variation while sharing the same global wind field. */
 export const getSparkLiftFactor = (turbulenceSeed: number): number =>
-  0.68 + hash01(turbulenceSeed * 7.31) * 0.56;
+  0.68 + hashSparkSeed01(turbulenceSeed * 7.31) * 0.56;
 
 export type SparkDriftDirection = {
   driftX: number;

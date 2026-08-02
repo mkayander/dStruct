@@ -1,3 +1,5 @@
+import { hashSparkSeed01 } from "#/shared/ui/effects/domDisintegrate/sparkSeedHash";
+
 type SparkTurbulenceForces = {
   forceX: number;
   forceY: number;
@@ -19,17 +21,13 @@ type SparkTurbulenceProfile = {
   noiseScale: number;
 };
 
-const fract = (value: number) => value - Math.floor(value);
-
-const hash01 = (seed: number) => fract(Math.sin(seed) * 43758.5453123);
-
 const getSparkTurbulenceProfile = (
   turbulenceSeed: number,
 ): SparkTurbulenceProfile => ({
-  influence: 0.42 + hash01(turbulenceSeed * 1.17) * 0.52,
-  frequency: 2.1 + hash01(turbulenceSeed * 2.31) * 3.4,
-  phase: hash01(turbulenceSeed * 3.79) * Math.PI * 2,
-  noiseScale: 0.75 + hash01(turbulenceSeed * 5.13) * 0.85,
+  influence: 0.42 + hashSparkSeed01(turbulenceSeed * 1.17) * 0.52,
+  frequency: 2.1 + hashSparkSeed01(turbulenceSeed * 2.31) * 3.4,
+  phase: hashSparkSeed01(turbulenceSeed * 3.79) * Math.PI * 2,
+  noiseScale: 0.75 + hashSparkSeed01(turbulenceSeed * 5.13) * 0.85,
 });
 
 /**

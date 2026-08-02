@@ -167,7 +167,7 @@ const clearActiveMasks = (
 };
 
 /**
- * Plays a particle disintegration particle disintegration on a DOM surface, then resolves.
+ * Plays a particle disintegration on a DOM surface, then resolves.
  * The live element stays visible with a synced radial mask; particles fly underneath.
  */
 export const runDomDisintegrate = async (

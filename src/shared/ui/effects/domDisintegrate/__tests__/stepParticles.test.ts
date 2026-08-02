@@ -8,7 +8,6 @@ const windyOptions = {
   maxVelocity: 80,
   windX: 12,
   windY: -6,
-  gravity: 240,
 };
 
 describe("stepParticles", () => {

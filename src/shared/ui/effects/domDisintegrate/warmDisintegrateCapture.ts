@@ -1,5 +1,6 @@
 import type { RefObject } from "react";
 
+import { prewarmChunkMaskWorker } from "#/shared/ui/effects/domDisintegrate/buildChunkMaskSequenceAsync";
 import { buildDisintegrateCapture } from "#/shared/ui/effects/domDisintegrate/buildDisintegrateCapture";
 import type { DisintegrateCaptureSnapshot } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
@@ -39,6 +40,10 @@ export const warmDisintegrateCapture = (
 ): (() => void) => {
   let cancelled = false;
   const resolvedOptions = resolveDomDisintegrateOptions(disintegrateOptions);
+
+  if (resolvedOptions.maskMode === "chunks") {
+    prewarmChunkMaskWorker();
+  }
 
   const idleHandle = scheduleIdle(() => {
     if (cancelled) {
