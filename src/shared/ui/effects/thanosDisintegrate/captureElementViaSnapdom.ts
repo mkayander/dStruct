@@ -33,5 +33,7 @@ export const captureElementViaSnapdom = async (
     fast: true,
     embedFonts: true,
     outerShadows: false,
+    // Pin clone layout to live DOM sizes so inline/table-cell text does not re-wrap.
+    reconcile: true,
   });
 };
