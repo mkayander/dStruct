@@ -1,4 +1,5 @@
 import { prefersReducedMotion } from "#/shared/lib/prefersReducedMotion";
+import { createActiveParticleTracker } from "#/shared/ui/effects/domDisintegrate/activeParticles";
 import {
   assignParticleReleaseTimes,
   resolveEffectiveMaskStrategy,
@@ -24,6 +25,7 @@ import {
   subscribeToViewportChanges,
   syncFixedOverlayToElement,
 } from "#/shared/ui/effects/domDisintegrate/overlayPosition";
+import { canReuseWarmChunkMasks } from "#/shared/ui/effects/domDisintegrate/prebuildWarmChunkMasks";
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
 import { resolveRelativeOrigin } from "#/shared/ui/effects/domDisintegrate/resolveRelativeOrigin";
 import { stepParticles } from "#/shared/ui/effects/domDisintegrate/stepParticles";
@@ -201,7 +203,20 @@ export const runDomDisintegrate = async (
           disintegrateOptions: resolvedOptions,
         });
 
+  const { displayWidth, displayHeight, sourceCanvas } = snapshot;
+  const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
+  const effectiveMaskStrategy = resolveEffectiveMaskStrategy(
+    disintegrateOptions?.maskStrategy,
+    relativeOrigin !== null,
+  );
+  const reuseWarmChunkMasks = canReuseWarmChunkMasks(
+    snapshot,
+    resolvedOptions.maskMode,
+    effectiveMaskStrategy,
+  );
+
   const particles = cloneDisintegrateParticles(snapshot.particles);
+
   if (particles.length === 0) {
     throw new DomDisintegrateError(
       "no_particles",
@@ -209,32 +224,36 @@ export const runDomDisintegrate = async (
     );
   }
 
-  const { displayWidth, displayHeight, sourceCanvas } = snapshot;
-  const relativeOrigin = resolveRelativeOrigin(element, options?.origin);
-  const effectiveMaskStrategy = resolveEffectiveMaskStrategy(
-    disintegrateOptions?.maskStrategy,
-    relativeOrigin !== null,
-  );
-  const maxReleaseTime = assignParticleReleaseTimes(particles, {
-    strategy: effectiveMaskStrategy,
-    displayWidth,
-    displayHeight,
-    particleStep: resolvedOptions.particleStep,
-    maskSpreadDuration: resolvedOptions.maskSpreadDuration,
-    waveOrigin: relativeOrigin,
-    waveSpeed: resolvedOptions.waveSpeed,
-  });
+  let maxReleaseTime = 0;
+  if (!reuseWarmChunkMasks) {
+    maxReleaseTime = assignParticleReleaseTimes(particles, {
+      strategy: effectiveMaskStrategy,
+      displayWidth,
+      displayHeight,
+      particleStep: resolvedOptions.particleStep,
+      maskSpreadDuration: resolvedOptions.maskSpreadDuration,
+      waveOrigin: relativeOrigin,
+      waveSpeed: resolvedOptions.waveSpeed,
+    });
+  } else {
+    for (const particle of particles) {
+      maxReleaseTime = Math.max(maxReleaseTime, particle.releaseTime);
+    }
+  }
   const totalDurationSeconds = maxReleaseTime + resolvedOptions.maxDuration;
   const particlePadding = getParticleCanvasPadding(resolvedOptions);
   const particleRevealMargin = getParticleRevealMargin(resolvedOptions);
 
   const maskState: DualLayerMaskState = {
-    chunkMaskSequence: null,
+    chunkMaskSequence: reuseWarmChunkMasks
+      ? (snapshot.chunkMaskSequence ?? null)
+      : null,
     startedRadialFallback: false,
   };
   let isAnimationActive = true;
+  let ownsChunkMaskSequence = !reuseWarmChunkMasks;
 
-  if (resolvedOptions.maskMode === "chunks") {
+  if (resolvedOptions.maskMode === "chunks" && !reuseWarmChunkMasks) {
     void buildChunkMaskSequenceAsync(
       {
         particles,
@@ -258,8 +277,11 @@ export const runDomDisintegrate = async (
       }
 
       maskState.chunkMaskSequence = sequence;
+      ownsChunkMaskSequence = true;
     });
   }
+
+  const particleTracker = createActiveParticleTracker(particles);
 
   const canvasWidth = displayWidth + particlePadding * 2;
   const canvasHeight = displayHeight + particlePadding * 2;
@@ -338,9 +360,11 @@ export const runDomDisintegrate = async (
             particlePadding,
             maskState,
           );
+          particleTracker.syncReleased(elapsedSeconds);
+          const activeParticles = particleTracker.getActive();
           drawDisintegrationFrame(
             overlayContext,
-            particles,
+            activeParticles,
             elapsedSeconds,
             canvasWidth,
             canvasHeight,
@@ -351,12 +375,14 @@ export const runDomDisintegrate = async (
             },
             drawState,
           );
-          const visibleCount = stepParticles(
-            particles,
+          stepParticles(
+            activeParticles,
             deltaSeconds,
             elapsedSeconds,
             resolvedOptions,
           );
+          particleTracker.removeDead();
+          const visibleCount = particleTracker.getVisibleCount();
 
           if (visibleCount === 0 || elapsedSeconds >= totalDurationSeconds) {
             completedSuccessfully = true;
@@ -376,7 +402,9 @@ export const runDomDisintegrate = async (
     });
   } finally {
     isAnimationActive = false;
-    maskState.chunkMaskSequence?.revoke();
+    if (ownsChunkMaskSequence) {
+      maskState.chunkMaskSequence?.revoke();
+    }
     maskState.chunkMaskSequence = null;
     restoreElement({ restoreOpacity: !completedSuccessfully });
     unsubscribeViewportChanges();

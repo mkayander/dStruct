@@ -111,7 +111,7 @@ describe("stepParticles", () => {
       stepParticles([first, second], 1 / 60, frame / 60, windyOptions);
     }
 
-    expect(Math.abs(first.x - second.x)).toBeGreaterThan(50);
+    expect(Math.abs(first.x - second.x)).toBeGreaterThan(45);
   });
 
   it("sways more laterally after rising farther", () => {

@@ -4,7 +4,10 @@ import type { DisintegrateCaptureSnapshot } from "#/shared/ui/effects/domDisinte
 import { DomDisintegrateError } from "#/shared/ui/effects/domDisintegrate/domDisintegrateError";
 import { runDomDisintegrate } from "#/shared/ui/effects/domDisintegrate/runDomDisintegrate";
 import type { RunDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/runDomDisintegrate";
-import { warmDisintegrateCapture } from "#/shared/ui/effects/domDisintegrate/warmDisintegrateCapture";
+import {
+  revokeWarmChunkMasks,
+  warmDisintegrateCapture,
+} from "#/shared/ui/effects/domDisintegrate/warmDisintegrateCapture";
 
 type UseDomDisintegrateResult = {
   /** Attach to the visual surface that should crumble away. */
@@ -26,6 +29,7 @@ export const useDomDisintegrate = (): UseDomDisintegrateResult => {
   const cancelWarmRef = useRef<(() => void) | null>(null);
 
   const invalidateCapture = useCallback(() => {
+    revokeWarmChunkMasks(captureCacheRef.current);
     captureCacheRef.current = null;
     const element = elementRef.current;
     if (!element) {
@@ -39,8 +43,9 @@ export const useDomDisintegrate = (): UseDomDisintegrateResult => {
   const targetRef = useCallback((node: HTMLDivElement | null) => {
     cancelWarmRef.current?.();
     cancelWarmRef.current = null;
-    elementRef.current = node;
+    revokeWarmChunkMasks(captureCacheRef.current);
     captureCacheRef.current = null;
+    elementRef.current = node;
 
     if (node) {
       // Chunk mask workers are created lazily when maskMode is "chunks".
@@ -100,6 +105,7 @@ export const useDomDisintegrate = (): UseDomDisintegrateResult => {
         });
       } finally {
         isAnimatingRef.current = false;
+        revokeWarmChunkMasks(captureCacheRef.current);
         captureCacheRef.current = null;
       }
     },

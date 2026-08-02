@@ -83,16 +83,13 @@ const stepSparkParticle = (
 
 /** Advances particle physics using delta time (stable on high-refresh displays). */
 export const stepParticles = (
-  particles: DisintegrateParticle[],
+  particles: readonly DisintegrateParticle[],
   deltaSeconds: number,
   elapsedSeconds: number,
   resolvedOptions: ResolvedDomDisintegrateOptions,
-): number => {
-  let visibleCount = 0;
-
+): void => {
   for (const particle of particles) {
     if (elapsedSeconds < particle.releaseTime) {
-      visibleCount += 1;
       continue;
     }
 
@@ -122,9 +119,5 @@ export const stepParticles = (
     }
 
     particle.rotation += particle.rotationSpeed * deltaSeconds;
-
-    visibleCount += 1;
   }
-
-  return visibleCount;
 };

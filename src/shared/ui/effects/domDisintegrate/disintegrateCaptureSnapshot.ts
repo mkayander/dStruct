@@ -1,4 +1,6 @@
+import type { ChunkMaskSequence } from "#/shared/ui/effects/domDisintegrate/createChunkMaskSequence";
 import type {
+  DisintegrateMaskStrategy,
   DisintegrateParticle,
   DomDisintegrateOptions,
 } from "#/shared/ui/effects/domDisintegrate/types";
@@ -8,6 +10,9 @@ export type DisintegrateCaptureSnapshot = {
   particles: DisintegrateParticle[];
   displayWidth: number;
   displayHeight: number;
+  /** Pre-built during idle warm-up when maskMode is chunks. */
+  chunkMaskSequence?: ChunkMaskSequence | null;
+  warmMaskStrategy?: DisintegrateMaskStrategy;
 };
 
 export const cloneDisintegrateParticles = (

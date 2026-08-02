@@ -3,6 +3,10 @@ import type { RefObject } from "react";
 import { prewarmChunkMaskWorker } from "#/shared/ui/effects/domDisintegrate/buildChunkMaskSequenceAsync";
 import { buildDisintegrateCapture } from "#/shared/ui/effects/domDisintegrate/buildDisintegrateCapture";
 import type { DisintegrateCaptureSnapshot } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
+import {
+  prebuildWarmChunkMasks,
+  revokeWarmChunkMasks,
+} from "#/shared/ui/effects/domDisintegrate/prebuildWarmChunkMasks";
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
 import type { DomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/types";
 
@@ -57,9 +61,13 @@ export const warmDisintegrateCapture = (
       mode: "quality",
       disintegrateOptions: resolvedOptions,
     })
+      .then((snapshot) => prebuildWarmChunkMasks(snapshot, resolvedOptions))
       .then((snapshot) => {
         if (!cancelled) {
+          revokeWarmChunkMasks(cacheRef.current);
           cacheRef.current = snapshot;
+        } else {
+          revokeWarmChunkMasks(snapshot);
         }
       })
       .catch(() => {
@@ -72,3 +80,5 @@ export const warmDisintegrateCapture = (
     cancelIdle(idleHandle);
   };
 };
+
+export { revokeWarmChunkMasks };

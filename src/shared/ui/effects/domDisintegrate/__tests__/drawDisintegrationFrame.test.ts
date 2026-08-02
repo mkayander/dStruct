@@ -3,18 +3,23 @@ import { describe, expect, it, vi } from "vitest";
 import { createTestDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/__tests__/createTestDisintegrateParticle";
 import { drawDisintegrationFrame } from "#/shared/ui/effects/domDisintegrate/drawDisintegrationFrame";
 
+const createMockContext = (
+  overrides: Partial<CanvasRenderingContext2D> = {},
+): CanvasRenderingContext2D =>
+  ({
+    clearRect: vi.fn(),
+    fillRect: vi.fn(),
+    drawImage: vi.fn(),
+    setTransform: vi.fn(),
+    resetTransform: vi.fn(),
+    globalAlpha: 1,
+    ...overrides,
+  }) as unknown as CanvasRenderingContext2D;
+
 describe("drawDisintegrationFrame", () => {
   it("draws only released flying particles beneath the live surface", () => {
     const fillRect = vi.fn();
-    const context = {
-      clearRect: vi.fn(),
-      fillRect,
-      save: vi.fn(),
-      restore: vi.fn(),
-      translate: vi.fn(),
-      rotate: vi.fn(),
-      globalAlpha: 1,
-    } as unknown as CanvasRenderingContext2D;
+    const context = createMockContext({ fillRect });
 
     const particles = [
       createTestDisintegrateParticle({ releaseTime: 0.5 }),
@@ -28,16 +33,7 @@ describe("drawDisintegrationFrame", () => {
 
   it("draws released particles after the wave reaches them", () => {
     const fillRect = vi.fn();
-    const context = {
-      clearRect: vi.fn(),
-      fillRect,
-      drawImage: vi.fn(),
-      save: vi.fn(),
-      restore: vi.fn(),
-      translate: vi.fn(),
-      rotate: vi.fn(),
-      globalAlpha: 1,
-    } as unknown as CanvasRenderingContext2D;
+    const context = createMockContext({ fillRect });
 
     const particles = [
       createTestDisintegrateParticle({ releaseTime: 0, x: 1, y: 1 }),
@@ -49,16 +45,8 @@ describe("drawDisintegrationFrame", () => {
   });
 
   it("offsets drawing when the canvas has bleed padding", () => {
-    const translate = vi.fn();
-    const context = {
-      clearRect: vi.fn(),
-      fillRect: vi.fn(),
-      save: vi.fn(),
-      restore: vi.fn(),
-      translate,
-      rotate: vi.fn(),
-      globalAlpha: 1,
-    } as unknown as CanvasRenderingContext2D;
+    const fillRect = vi.fn();
+    const context = createMockContext({ fillRect });
 
     const particles = [
       createTestDisintegrateParticle({ releaseTime: 0, x: 4, y: 6, size: 2 }),
@@ -66,21 +54,13 @@ describe("drawDisintegrationFrame", () => {
 
     drawDisintegrationFrame(context, particles, 0.1, 20, 20, 8);
 
-    expect(translate).toHaveBeenCalledWith(4 + 8 + 1, 6 + 8 + 1);
+    expect(fillRect).toHaveBeenCalledWith(12, 14, 2, 2);
   });
 
   it("draws snapshot sprites when sprite mode is enabled", () => {
     const drawImage = vi.fn();
-    const context = {
-      clearRect: vi.fn(),
-      fillRect: vi.fn(),
-      drawImage,
-      save: vi.fn(),
-      restore: vi.fn(),
-      translate: vi.fn(),
-      rotate: vi.fn(),
-      globalAlpha: 1,
-    } as unknown as CanvasRenderingContext2D;
+    const setTransform = vi.fn();
+    const context = createMockContext({ drawImage, setTransform });
 
     const sourceCanvas = document.createElement("canvas");
     const particles = [
@@ -90,6 +70,7 @@ describe("drawDisintegrationFrame", () => {
         y: 2,
         originX: 4,
         originY: 6,
+        rotation: 0.4,
       }),
     ];
 
@@ -99,6 +80,7 @@ describe("drawDisintegrationFrame", () => {
     });
 
     expect(drawImage).toHaveBeenCalled();
+    expect(setTransform).toHaveBeenCalled();
     expect(context.fillRect).not.toHaveBeenCalled();
   });
 });

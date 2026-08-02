@@ -8,11 +8,12 @@ import type {
 export const createParticlesFromImageData = (
   imageData: ImageData,
   options?: DomDisintegrateOptions,
+  coordinateScale = 1,
 ): DisintegrateParticle[] => {
   const resolvedOptions = resolveDomDisintegrateOptions(options);
   const particles: DisintegrateParticle[] = [];
   const { data, width, height } = imageData;
-  const { particleStep } = resolvedOptions;
+  const particleStep = coordinateScale > 1 ? 1 : resolvedOptions.particleStep;
 
   for (let y = 0; y < height; y += particleStep) {
     for (let x = 0; x < width; x += particleStep) {
@@ -28,12 +29,12 @@ export const createParticlesFromImageData = (
 
       particles.push(
         createDisintegrateParticle({
-          x,
-          y,
+          x: x * coordinateScale,
+          y: y * coordinateScale,
           color: `rgb(${red}, ${green}, ${blue})`,
           alpha: alphaChannel / 255,
-          surfaceWidth: width,
-          surfaceHeight: height,
+          surfaceWidth: width * coordinateScale,
+          surfaceHeight: height * coordinateScale,
           options: resolvedOptions,
         }),
       );

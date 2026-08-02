@@ -1,35 +1,14 @@
 import { captureElementViaSnapdom } from "#/shared/ui/effects/domDisintegrate/captureElementViaSnapdom";
 import { captureElementViaSvgForeignObject } from "#/shared/ui/effects/domDisintegrate/captureElementViaSvgForeignObject";
 import { createFallbackParticlesFromElement } from "#/shared/ui/effects/domDisintegrate/createFallbackParticlesFromElement";
-import { createParticlesFromImageData } from "#/shared/ui/effects/domDisintegrate/createParticlesFromImageData";
 import type {
   BuildDisintegrateCaptureOptions,
   DisintegrateCaptureSnapshot,
 } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
 import { getElementDisplaySize } from "#/shared/ui/effects/domDisintegrate/disintegrateCaptureSnapshot";
 import { normalizeCaptureToDisplay } from "#/shared/ui/effects/domDisintegrate/normalizeCaptureToDisplay";
+import { sampleCanvasForParticles } from "#/shared/ui/effects/domDisintegrate/sampleCanvasForParticles";
 import { waitForDocumentFonts } from "#/shared/ui/effects/domDisintegrate/waitForDocumentFonts";
-
-const tryCreateParticlesFromCanvas = (
-  canvas: HTMLCanvasElement,
-  disintegrateOptions?: BuildDisintegrateCaptureOptions["disintegrateOptions"],
-) => {
-  const context = canvas.getContext("2d", { willReadFrequently: true });
-  if (!context) {
-    return null;
-  }
-
-  try {
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    const particles = createParticlesFromImageData(
-      imageData,
-      disintegrateOptions,
-    );
-    return particles.length > 0 ? particles : null;
-  } catch {
-    return null;
-  }
-};
 
 /** Builds particles + optional snapshot canvas for the disintegration effect. */
 export const buildDisintegrateCapture = async (
@@ -61,7 +40,7 @@ export const buildDisintegrateCapture = async (
       displayWidth,
       displayHeight,
     );
-    particles = tryCreateParticlesFromCanvas(sourceCanvas, disintegrateOptions);
+    particles = sampleCanvasForParticles(sourceCanvas, disintegrateOptions);
   }
 
   if (!particles) {

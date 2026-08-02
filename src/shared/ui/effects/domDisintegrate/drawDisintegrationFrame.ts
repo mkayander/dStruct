@@ -19,10 +19,58 @@ const DIRTY_REGION_PAD_PX = 2;
 const getParticleDrawRadius = (particle: DisintegrateParticle): number =>
   particle.size * 0.75;
 
+const drawParticle = (
+  context: CanvasRenderingContext2D,
+  particle: DisintegrateParticle,
+  originOffset: number,
+  useSprites: boolean,
+  sourceCanvas: HTMLCanvasElement | null,
+): void => {
+  const half = particle.size / 2;
+  const centerX = particle.x + originOffset + half;
+  const centerY = particle.y + originOffset + half;
+
+  context.globalAlpha = particle.alpha;
+
+  if (!useSprites && particle.rotation === 0) {
+    context.fillStyle = particle.color;
+    context.fillRect(
+      centerX - half,
+      centerY - half,
+      particle.size,
+      particle.size,
+    );
+    return;
+  }
+
+  const cos = Math.cos(particle.rotation);
+  const sin = Math.sin(particle.rotation);
+  context.setTransform(cos, sin, -sin, cos, centerX, centerY);
+
+  if (useSprites && sourceCanvas) {
+    context.drawImage(
+      sourceCanvas,
+      particle.originX,
+      particle.originY,
+      particle.size,
+      particle.size,
+      -half,
+      -half,
+      particle.size,
+      particle.size,
+    );
+  } else {
+    context.fillStyle = particle.color;
+    context.fillRect(-half, -half, particle.size, particle.size);
+  }
+
+  context.resetTransform();
+};
+
 /** Draws flying particles on the canvas layer beneath the live masked surface. */
 export const drawDisintegrationFrame = (
   context: CanvasRenderingContext2D,
-  particles: DisintegrateParticle[],
+  particles: readonly DisintegrateParticle[],
   elapsedSeconds: number,
   canvasWidth: number,
   canvasHeight: number,
@@ -103,37 +151,7 @@ export const drawDisintegrationFrame = (
       continue;
     }
 
-    context.globalAlpha = particle.alpha;
-    context.save();
-    context.translate(
-      particle.x + originOffset + particle.size / 2,
-      particle.y + originOffset + particle.size / 2,
-    );
-    context.rotate(particle.rotation);
-
-    if (useSprites) {
-      context.drawImage(
-        sourceCanvas,
-        particle.originX,
-        particle.originY,
-        particle.size,
-        particle.size,
-        -particle.size / 2,
-        -particle.size / 2,
-        particle.size,
-        particle.size,
-      );
-    } else {
-      context.fillStyle = particle.color;
-      context.fillRect(
-        -particle.size / 2,
-        -particle.size / 2,
-        particle.size,
-        particle.size,
-      );
-    }
-
-    context.restore();
+    drawParticle(context, particle, originOffset, useSprites, sourceCanvas);
   }
 
   context.globalAlpha = 1;

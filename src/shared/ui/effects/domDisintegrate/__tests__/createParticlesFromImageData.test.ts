@@ -36,4 +36,34 @@ describe("createParticlesFromImageData", () => {
       alpha: 1,
     });
   });
+
+  it("scales coordinates when sampling a downscaled grid", () => {
+    const imageData = new ImageData(2, 2);
+    for (let index = 0; index < imageData.data.length; index += 4) {
+      imageData.data[index] = 200;
+      imageData.data[index + 1] = 100;
+      imageData.data[index + 2] = 50;
+      imageData.data[index + 3] = 255;
+    }
+
+    const particles = createParticlesFromImageData(
+      imageData,
+      {
+        particleStep: 3,
+        particleSize: 2,
+        maxVelocity: 1,
+        windX: 0,
+        windY: 0,
+        gravity: 0,
+      },
+      3,
+    );
+
+    expect(particles[0]).toMatchObject({
+      x: 0,
+      y: 0,
+      originX: 0,
+      originY: 0,
+    });
+  });
 });
