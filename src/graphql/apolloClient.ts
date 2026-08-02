@@ -48,7 +48,10 @@ const cache = new InMemoryCache({
   },
 });
 
+const isApolloDevtoolsEnabled = process.env.NODE_ENV !== "production";
+
 export const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
+  devtools: { enabled: isApolloDevtoolsEnabled },
 });
