@@ -25,7 +25,7 @@ type CookieConsentBannerProps = {
   onAcceptAll: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onRejectNonEssential: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  /** Visual surface used by optional dismiss effects (e.g. Thanos disintegrate). */
+  /** Visual surface used by optional dismiss effects (e.g. DOM disintegrate). */
   surfaceRef?: React.Ref<HTMLDivElement>;
 };
 
