@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { CookieConsentBanner } from "#/features/cookieConsent/ui/CookieConsentBanner";
 import { useI18nContext } from "#/shared/hooks";
-import { useThanosDisintegrate } from "#/shared/ui/effects/thanosDisintegrate";
+import { useDomDisintegrate } from "#/shared/ui/effects/domDisintegrate";
 
 type CookieConsentBannerWithDismissEffectProps = {
   isSettingsView: boolean;
@@ -17,7 +17,7 @@ type CookieConsentBannerWithDismissEffectProps = {
 };
 
 /**
- * Presentation wrapper: persists consent immediately, then plays the Thanos
+ * Presentation wrapper: persists consent immediately, then plays the DOM
  * disintegrate effect while the banner stays mounted for the animation.
  */
 export const CookieConsentBannerWithDismissEffect: React.FC<
@@ -32,8 +32,7 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
 }) => {
   const { LL } = useI18nContext();
   const { enqueueSnackbar } = useSnackbar();
-  const { targetRef, disintegrate, invalidateCapture } =
-    useThanosDisintegrate();
+  const { targetRef, disintegrate, invalidateCapture } = useDomDisintegrate();
   const isDismissingRef = useRef(false);
   const [frozenSettingsView, setFrozenSettingsView] = useState<boolean | null>(
     null,

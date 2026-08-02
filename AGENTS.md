@@ -29,6 +29,8 @@ Cursor rules to apply (see each file for full wording):
 
 **Project rules:** See **`.cursorrules`** for stack, architecture, tRPC/Redux boundaries, styling (MUI + Emotion, no Tailwind), testing conventions, and feature workflow. **`.cursor/rules/*.mdc`** adds always-on style rules (React hook imports, type imports, `useEffect` comments).
 
+**Skills:** `deep-code-review` — applies to `/deep-code-review` **and** casual “review the changes” / PR review requests; fix in place (implement important/medium fixes, remove dead or duplicated code in the same session). See `.cursor/skills/deep-code-review/SKILL.md`.
+
 ## Cursor Cloud specific instructions
 
 ### Services overview
