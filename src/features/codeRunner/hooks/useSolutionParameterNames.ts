@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import {
   getCodeKey,
+  isLanguageValid,
   type ProgrammingLanguage,
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
@@ -14,9 +15,12 @@ import { useAppSelector } from "#/store/hooks";
 export const useSolutionParameterNames = ():
   | readonly (string | undefined)[]
   | undefined => {
-  const [language] = useSearchParam<ProgrammingLanguage>("language", {
+  const [languageParam] = useSearchParam<ProgrammingLanguage>("language", {
     defaultValue: "javascript",
+    validate: isLanguageValid,
   });
+  const language: ProgrammingLanguage =
+    languageParam === "" ? "javascript" : languageParam;
   const editorCode = useAppSelector(selectEditorCodeForLanguage(language));
 
   return useMemo(() => {
