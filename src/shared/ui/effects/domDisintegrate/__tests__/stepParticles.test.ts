@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import { createDisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/createDisintegrateParticle";
 import { resolveDomDisintegrateOptions } from "#/shared/ui/effects/domDisintegrate/resolveDomDisintegrateOptions";
+import { getSparkLiftFactor } from "#/shared/ui/effects/domDisintegrate/sparkParticlePhysics";
+import { createSparkTurbulenceProfile } from "#/shared/ui/effects/domDisintegrate/sparkTurbulence";
 import { stepParticles } from "#/shared/ui/effects/domDisintegrate/stepParticles";
+import type { DisintegrateParticle } from "#/shared/ui/effects/domDisintegrate/types";
 
 const windyOptions = resolveDomDisintegrateOptions({
   particleMotionMode: "windy",
@@ -14,6 +17,40 @@ const windyOptions = resolveDomDisintegrateOptions({
 const splatOptions = (
   overrides: Parameters<typeof resolveDomDisintegrateOptions>[0],
 ) => resolveDomDisintegrateOptions(overrides);
+
+const createDeterministicWindyParticle = (
+  turbulenceSeed: number,
+): DisintegrateParticle => {
+  const profile = createSparkTurbulenceProfile(turbulenceSeed);
+  const particle = createDisintegrateParticle({
+    x: 50,
+    y: 40,
+    color: "rgb(255, 255, 255)",
+    alpha: 1,
+    surfaceWidth: 120,
+    surfaceHeight: 60,
+    options: windyOptions,
+  });
+
+  particle.x = 50;
+  particle.y = 40;
+  particle.originX = 50;
+  particle.originY = 40;
+  particle.vx = 8;
+  particle.vy = -35;
+  particle.drag = 0.97;
+  particle.releaseTime = 0;
+  particle.fadeStart = 1;
+  particle.fadeDuration = 10;
+  particle.turbulenceSeed = turbulenceSeed;
+  particle.turbulenceInfluence = profile.influence;
+  particle.turbulenceFrequency = profile.frequency;
+  particle.turbulencePhase = profile.phase;
+  particle.turbulenceNoiseScale = profile.noiseScale;
+  particle.sparkLiftFactor = getSparkLiftFactor(turbulenceSeed);
+
+  return particle;
+};
 
 describe("stepParticles", () => {
   it("uses delta time so motion is independent of frame rate", () => {
@@ -84,34 +121,14 @@ describe("stepParticles", () => {
   });
 
   it("diverges windy particles with different turbulence seeds", () => {
-    const first = createDisintegrateParticle({
-      x: 20,
-      y: 40,
-      color: "rgb(255, 255, 255)",
-      alpha: 1,
-      surfaceWidth: 120,
-      surfaceHeight: 60,
-      options: windyOptions,
-    });
-    const second = createDisintegrateParticle({
-      x: 90,
-      y: 40,
-      color: "rgb(255, 255, 255)",
-      alpha: 1,
-      surfaceWidth: 120,
-      surfaceHeight: 60,
-      options: windyOptions,
-    });
-    first.releaseTime = 0;
-    second.releaseTime = 0;
-    first.turbulenceSeed = 11;
-    second.turbulenceSeed = 907;
+    const first = createDeterministicWindyParticle(11);
+    const second = createDeterministicWindyParticle(907);
 
     for (let frame = 1; frame <= 120; frame += 1) {
       stepParticles([first, second], 1 / 60, frame / 60, windyOptions);
     }
 
-    expect(Math.abs(first.x - second.x)).toBeGreaterThan(45);
+    expect(Math.abs(first.x - second.x)).toBeGreaterThan(15);
   });
 
   it("sways more laterally after rising farther", () => {
