@@ -9,28 +9,55 @@ import {
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
 import { selectEditorCodeForLanguage } from "#/features/codeRunner/model/editorCodeSlice";
-import { useSearchParam } from "#/shared/hooks";
+import { api } from "#/shared/api";
+import { usePlaygroundSlugs, useSearchParam } from "#/shared/hooks";
 import { useAppSelector } from "#/store/hooks";
-
-export const useSolutionParameterNames = ():
-  | readonly (string | undefined)[]
-  | undefined => {
-  const [languageParam] = useSearchParam<ProgrammingLanguage>("language", {
-    defaultValue: "javascript",
-    validate: isLanguageValid,
-  });
-  const language: ProgrammingLanguage =
-    languageParam === "" ? "javascript" : languageParam;
-  const editorCode = useAppSelector(selectEditorCodeForLanguage(language));
-
-  return useMemo(() => {
-    const names = inferSolutionParameterNames(editorCode, language);
-    return names ?? undefined;
-  }, [editorCode, language]);
-};
 
 /** Code field on a solution record for the active editor language. */
 export const getSolutionCodeForLanguage = (
   solution: Record<string, string | undefined> | null | undefined,
   language: ProgrammingLanguage,
 ): string => solution?.[getCodeKey(language)] ?? "";
+
+/**
+ * Inferred solution parameter names for the active language (JS or Python).
+ * Uses live editor text when available; otherwise falls back to the saved solution
+ * (needed when TreeView mounts before CodePanel, e.g. mobile results).
+ */
+export const useSolutionParameterNames = ():
+  | readonly (string | undefined)[]
+  | undefined => {
+  const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
+  const [languageParam] = useSearchParam<ProgrammingLanguage>("language", {
+    defaultValue: "javascript",
+    validate: isLanguageValid,
+  });
+  const language: ProgrammingLanguage =
+    languageParam === "" ? "javascript" : languageParam;
+
+  const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
+    enabled: Boolean(projectSlug),
+  });
+  const currentSolution = api.project.getSolutionBySlug.useQuery(
+    {
+      projectId: selectedProject.data?.id || "",
+      slug: solutionSlug,
+    },
+    {
+      enabled: Boolean(selectedProject.data?.id && solutionSlug),
+    },
+  );
+
+  const editorCode = useAppSelector(selectEditorCodeForLanguage(language));
+  const solutionCode = getSolutionCodeForLanguage(
+    currentSolution.data,
+    language,
+  );
+  const effectiveCode =
+    editorCode.trim().length > 0 ? editorCode : solutionCode;
+
+  return useMemo(() => {
+    const names = inferSolutionParameterNames(effectiveCode, language);
+    return names ?? undefined;
+  }, [effectiveCode, language]);
+};

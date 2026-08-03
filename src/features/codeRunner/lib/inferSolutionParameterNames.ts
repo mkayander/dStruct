@@ -9,6 +9,9 @@ type SolutionFnPath = NodePath<
   babelTypes.FunctionExpression | babelTypes.ArrowFunctionExpression
 >;
 
+/** Match Python runner entry points (`safe_exec` uses the first `FunctionDef`; these are the usual names). */
+const PYTHON_ENTRY_FUNCTION_NAMES = ["solve", "run"] as const;
+
 const findReturnedSolutionPath = (file: File): SolutionFnPath | null => {
   let found: SolutionFnPath | null = null;
   traverse(file, {
@@ -58,22 +61,54 @@ export const inferJsSolutionParameterNames = (
   }
 };
 
-/** Parameter names from `def solve(a, b):`, in call order (first top-level def). */
+const parsePythonParameterSegment = (segment: string): string | undefined => {
+  let raw = segment.trim();
+  const equalsIndex = raw.indexOf("=");
+  if (equalsIndex !== -1) {
+    raw = raw.slice(0, equalsIndex).trim();
+  }
+  const colonIndex = raw.indexOf(":");
+  if (colonIndex !== -1) {
+    raw = raw.slice(0, colonIndex).trim();
+  }
+  raw = raw.replace(/^\*\*/, "").replace(/^\*/, "");
+  if (raw === "" || raw === "self") return undefined;
+  return raw;
+};
+
+const parsePythonParameterList = (
+  paramsPart: string,
+): (string | undefined)[] => {
+  const trimmed = paramsPart.trim();
+  if (trimmed === "") return [];
+  return trimmed
+    .split(",")
+    .map((segment) => parsePythonParameterSegment(segment));
+};
+
+const findPythonDefParameterList = (code: string): string | null => {
+  for (const entryName of PYTHON_ENTRY_FUNCTION_NAMES) {
+    const pattern = new RegExp(
+      `^\\s*def\\s+${entryName}\\s*\\(([^)]*)\\)\\s*:`,
+      "m",
+    );
+    const match = code.match(pattern);
+    if (match) {
+      return match[1] ?? "";
+    }
+  }
+
+  const fallback = code.match(/^\s*def\s+\w+\s*\(([^)]*)\)\s*:/m);
+  return fallback?.[1] ?? null;
+};
+
+/** Parameter names from `def solve(a, b):` / `def run(head):`, in call order. */
 export const inferPythonSolutionParameterNames = (
   code: string,
 ): (string | undefined)[] | null => {
-  const defMatch = code.match(/^\s*def\s+\w+\s*\(([^)]*)\)\s*:/m);
-  if (!defMatch) return null;
-
-  const paramsPart = defMatch[1]?.trim() ?? "";
-  if (paramsPart === "") return [];
-
-  return paramsPart.split(",").map((segment) => {
-    const rawName = segment.trim().split("=")[0]?.trim() ?? "";
-    const name = rawName.replace(/^\*\*/, "").replace(/^\*/, "");
-    if (name === "" || name === "self") return undefined;
-    return name;
-  });
+  const paramsPart = findPythonDefParameterList(code);
+  if (paramsPart === null) return null;
+  return parsePythonParameterList(paramsPart);
 };
 
 export const inferSolutionParameterNames = (

@@ -32,7 +32,7 @@ return function addStrings(num1, num2) {
 });
 
 describe("inferPythonSolutionParameterNames", () => {
-  it("reads names from the first def", () => {
+  it("reads names from def solve", () => {
     const code = `def solve(num1, num2):
     return num1
 `;
@@ -40,12 +40,33 @@ describe("inferPythonSolutionParameterNames", () => {
     expect(inferPythonSolutionParameterNames(code)).toEqual(["num1", "num2"]);
   });
 
-  it("handles default parameter values", () => {
-    const code = `def solve(head, depth=0):
+  it("reads names from def run (common tree problems)", () => {
+    const code = `def run(head):
+  if head is None:
+    return 0
+  return head.val
+`;
+
+    expect(inferPythonSolutionParameterNames(code)).toEqual(["head"]);
+  });
+
+  it("handles type annotations and default values", () => {
+    const code = `def solve(head: TreeNode, depth: int = 0):
     return head
 `;
 
     expect(inferPythonSolutionParameterNames(code)).toEqual(["head", "depth"]);
+  });
+
+  it("prefers solve over an earlier helper def", () => {
+    const code = `def helper(x):
+    return x
+
+def solve(num1, num2):
+    return num1
+`;
+
+    expect(inferPythonSolutionParameterNames(code)).toEqual(["num1", "num2"]);
   });
 });
 
@@ -56,5 +77,12 @@ describe("inferSolutionParameterNames", () => {
 
     expect(inferSolutionParameterNames(js, "javascript")).toEqual(["nums"]);
     expect(inferSolutionParameterNames(py, "python")).toEqual(["nums"]);
+  });
+
+  it("uses python entry when language is python", () => {
+    const py = `def run(root):\n  return root.val\n`;
+
+    expect(inferSolutionParameterNames(py, "python")).toEqual(["root"]);
+    expect(inferSolutionParameterNames(py, "javascript")).toBeNull();
   });
 });
