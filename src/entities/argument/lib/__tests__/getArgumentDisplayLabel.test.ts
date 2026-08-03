@@ -38,4 +38,27 @@ describe("getArgumentDisplayLabel", () => {
     expect(getArgumentDisplayLabel(second)).toBe("nums");
     expect(first.name).not.toBe(second.name);
   });
+
+  it("uses solution parameter names for top-level args when label is unset", () => {
+    expect(
+      getArgumentDisplayLabel(makeArg({ order: 0 }), ["num1", "num2"]),
+    ).toBe("num1");
+    expect(
+      getArgumentDisplayLabel(makeArg({ order: 1 }), ["num1", "num2"]),
+    ).toBe("num2");
+  });
+
+  it("ignores parameter names for nested args (e.g. matrix rows)", () => {
+    expect(
+      getArgumentDisplayLabel(makeArg({ order: 1, parentName: "matrix-id" }), [
+        "grid",
+      ]),
+    ).toBe("arg-2");
+  });
+
+  it("prefers explicit label over solution parameter names", () => {
+    expect(
+      getArgumentDisplayLabel(makeArg({ order: 0, label: "custom" }), ["num1"]),
+    ).toBe("custom");
+  });
 });

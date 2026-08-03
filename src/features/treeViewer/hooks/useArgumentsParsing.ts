@@ -38,6 +38,7 @@ import {
   treeNodeSlice,
 } from "#/entities/dataStructures/node/model/nodeSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
+import { useSolutionParameterNames } from "#/features/codeRunner/hooks/useSolutionParameterNames";
 import { isNumber } from "#/shared/lib";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -382,6 +383,7 @@ const parseArrayArgument = (
   arg: ArrayArg,
   argsInfo: Record<string, ArgumentInfo>,
   dispatch: AppDispatch,
+  parameterNames?: readonly (string | undefined)[],
 ): ArrayArg[] | undefined => {
   if (argsInfo[arg.name]?.isParsed) return;
 
@@ -398,7 +400,7 @@ const parseArrayArgument = (
   if (arg.type === ArgumentType.MATRIX) {
     try {
       childArgs = getMatrixChildArrayArgs(arg, (childArg) =>
-        parseArrayArgument(childArg, argsInfo, dispatch),
+        parseArrayArgument(childArg, argsInfo, dispatch, parameterNames),
       );
       array = new Array(childArgs.length);
     } catch (error) {
@@ -442,7 +444,7 @@ const parseArrayArgument = (
       childNames: childArgs?.map((arg) => arg.name),
       order: arg.order,
       argType: arg.type,
-      displayLabel: getArgumentDisplayLabel(arg),
+      displayLabel: getArgumentDisplayLabel(arg, parameterNames),
     }),
   );
   if (newItems) {
@@ -469,15 +471,36 @@ export const useArgumentsParsing = () => {
 
   const args = useAppSelector(selectCaseArguments);
   const argsInfo = useAppSelector(selectCaseArgumentsInfo);
+  const arrayData = useAppSelector(arrayDataSelector);
+  const parameterNames = useSolutionParameterNames();
   const projectId = useAppSelector((state) => state.testCase.projectId);
   const caseId = useAppSelector((state) => state.testCase.caseId);
   const treeData = useAppSelector(treeDataSelector);
-  const arrayData = useAppSelector(arrayDataSelector);
   const argsContentSignature = useMemo(
     () => buildCaseArgsContentSignature(projectId, caseId, args),
     [args, caseId, projectId],
   );
   const prevArgsSignatureRef = useRef<string | null>(null);
+
+  // Keep structure captions in sync when the user renames solution parameters in code.
+  useEffect(() => {
+    if (!parameterNames) return;
+
+    for (const arg of args) {
+      if (!isArgumentArrayType(arg) || arg.parentName) continue;
+
+      const nextLabel = getArgumentDisplayLabel(arg, parameterNames);
+      const currentLabel = arrayData[arg.name]?.displayLabel;
+      if (currentLabel === nextLabel) continue;
+
+      dispatch(
+        arrayStructureSlice.actions.setDisplayLabel({
+          name: arg.name,
+          data: { displayLabel: nextLabel },
+        }),
+      );
+    }
+  }, [args, arrayData, dispatch, parameterNames]);
 
   useEffect(() => {
     const removedTreeNames = new Set(Object.keys(treeData));
@@ -488,7 +511,7 @@ export const useArgumentsParsing = () => {
         removedTreeNames.delete(arg.name);
       } else if (isArgumentArrayType(arg)) {
         const childNames =
-          parseArrayArgument(arg, argsInfo, dispatch) ??
+          parseArrayArgument(arg, argsInfo, dispatch, parameterNames) ??
           arrayData[arg.name]?.childNames;
 
         childNames?.forEach((value) => {
@@ -518,5 +541,5 @@ export const useArgumentsParsing = () => {
     }
     prevArgsSignatureRef.current = argsContentSignature;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [args, argsInfo, argsContentSignature, dispatch]);
+  }, [args, argsInfo, argsContentSignature, dispatch, parameterNames]);
 };

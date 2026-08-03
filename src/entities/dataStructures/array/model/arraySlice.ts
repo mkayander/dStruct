@@ -144,6 +144,18 @@ export const arrayStructureSlice = createSlice({
       treeState.colHeaders = data.colHeaders;
       treeState.rowHeaders = data.rowHeaders;
     },
+    setDisplayLabel: (
+      state,
+      action: NamedPayload<{ displayLabel: string }>,
+    ) => {
+      const {
+        payload: { name, data },
+      } = action;
+      const treeState = getStateByName(state, name);
+      if (!treeState) return;
+
+      treeState.displayLabel = data.displayLabel;
+    },
   },
 });
 

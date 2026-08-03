@@ -40,6 +40,7 @@ import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScri
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { createLatestOnlyTimeoutController } from "#/features/codeRunner/lib/createLatestOnlyTimeoutController";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
+import { editorCodeSlice } from "#/features/codeRunner/model/editorCodeSlice";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
@@ -199,6 +200,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
     const key = getCodeKey(language);
     const newCode = currentSolution.data[key] ?? "";
+
+    dispatch(
+      editorCodeSlice.actions.setCode({
+        language: language || "javascript",
+        code: newCode,
+      }),
+    );
 
     if (textModel && !textModel.isDisposed()) {
       textModel.setValue(newCode);
@@ -386,6 +394,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
 
     const nextText = value ?? "";
+    dispatch(
+      editorCodeSlice.actions.setCode({
+        language: language || "javascript",
+        code: nextText,
+      }),
+    );
+
     const { isReady, lastRunCodeSource } = store.getState().callstack;
     if (
       isReady &&

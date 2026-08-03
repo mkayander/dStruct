@@ -31,4 +31,26 @@ describe("arrayStructureSlice.create displayLabel", () => {
 
     expect(state["runtime-array"]?.displayLabel).toBeUndefined();
   });
+
+  it("updates displayLabel via setDisplayLabel", () => {
+    const created = arrayStructureSlice.reducer(
+      {},
+      arrayStructureSlice.actions.init({
+        name: "arg-id",
+        order: 0,
+        argType: ArgumentType.STRING,
+        displayLabel: "arg-1",
+      }),
+    );
+
+    const state = arrayStructureSlice.reducer(
+      created,
+      arrayStructureSlice.actions.setDisplayLabel({
+        name: "arg-id",
+        data: { displayLabel: "num1" },
+      }),
+    );
+
+    expect(state["arg-id"]?.displayLabel).toBe("num1");
+  });
 });

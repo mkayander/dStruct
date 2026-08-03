@@ -12,6 +12,10 @@ import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { useArgumentsParsing } from "#/features/treeViewer/hooks/useArgumentsParsing";
 import { rootReducer } from "#/store/rootReducer";
 
+vi.mock("#/features/codeRunner/hooks/useSolutionParameterNames", () => ({
+  useSolutionParameterNames: () => undefined,
+}));
+
 const ArgumentsParsingHarness: React.FC = () => {
   useArgumentsParsing();
   return null;

@@ -34,6 +34,7 @@ import { ArgInput } from "#/features/argsEditor/ui/ArgInput";
 import { ArgumentTypeSelect } from "#/features/argsEditor/ui/ArgumentTypeSelect";
 import { DraggableArgsList } from "#/features/argsEditor/ui/DraggableArgsList";
 import { DraggableItem } from "#/features/argsEditor/ui/DraggableItem";
+import { useSolutionParameterNames } from "#/features/codeRunner/hooks/useSolutionParameterNames";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
@@ -57,6 +58,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const isMobile = useMobileLayout();
   const prevCaseSlug = usePrevious(caseSlug);
   const args = useAppSelector(selectCaseArguments);
+  const parameterNames = useSolutionParameterNames();
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
@@ -246,7 +248,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                     />
                     <IconButton
                       title={LL.DELETE_X_ARGUMENT({
-                        name: getArgumentDisplayLabel(arg),
+                        name: getArgumentDisplayLabel(arg, parameterNames),
                       })}
                       onClick={() => handleDeleteArg(arg)}
                       size="small"
