@@ -1,13 +1,6 @@
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import {
-  alpha,
-  Box,
-  Button,
-  Chip,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { alpha, Box, Button, Chip, Typography, useTheme } from "@mui/material";
 import React, { useMemo, useState } from "react";
 
 import { categoryLabels } from "#/entities/category/model/categoryLabels";
@@ -152,7 +145,6 @@ export const ProjectBrowserCategoryBar: React.FC<
                   variant="filled"
                   sx={{
                     cursor: "pointer",
-                    fontWeight: isSelected ? 600 : 400,
                     backgroundColor: isSelected
                       ? theme.palette.info.main
                       : alpha(theme.palette.info.main, 0.12),
