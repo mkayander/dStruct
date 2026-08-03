@@ -1,3 +1,10 @@
+## [1.379.4](https://github.com/mkayander/dStruct/compare/v1.379.3...v1.379.4) (2026-08-03)
+
+
+### Bug Fixes
+
+* stop category chip bold text from shifting layout on select ([#159](https://github.com/mkayander/dStruct/issues/159)) ([0b144e3](https://github.com/mkayander/dStruct/commit/0b144e319ad722257d3e35195b85c968943f8948))
+
 ## [1.379.3](https://github.com/mkayander/dStruct/compare/v1.379.2...v1.379.3) (2026-08-02)
 
 
