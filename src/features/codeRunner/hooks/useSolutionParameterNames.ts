@@ -9,15 +9,22 @@ import {
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
 import { selectEditorCodeForLanguage } from "#/features/codeRunner/model/editorCodeSlice";
+import type { RouterOutputs } from "#/shared/api";
 import { api } from "#/shared/api";
 import { usePlaygroundSlugs, useSearchParam } from "#/shared/hooks";
 import { useAppSelector } from "#/store/hooks";
 
+type SolutionBySlug = RouterOutputs["project"]["getSolutionBySlug"];
+
 /** Code field on a solution record for the active editor language. */
 export const getSolutionCodeForLanguage = (
-  solution: Record<string, string | undefined> | null | undefined,
+  solution: SolutionBySlug | null | undefined,
   language: ProgrammingLanguage,
-): string => solution?.[getCodeKey(language)] ?? "";
+): string => {
+  if (!solution) return "";
+  const code = solution[getCodeKey(language)];
+  return code ?? "";
+};
 
 /**
  * Inferred solution parameter names for the active language (JS or Python).

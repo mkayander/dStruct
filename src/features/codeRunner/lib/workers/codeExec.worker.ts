@@ -9,7 +9,7 @@ import {
   globalDefinitionsPrefix,
   setGlobalRuntimeContext,
 } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
-import { stringifySolutionResult } from "#/shared/lib";
+import { stringifySolutionResult } from "#/shared/lib/stringifySolutionResult";
 
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
