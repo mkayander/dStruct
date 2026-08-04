@@ -9,9 +9,10 @@
 
 ## Phase 1 — 16.3.x on Vercel
 
-- [ ] Bump `next` to latest 16.3.x (not 16.3.0)
-- [ ] Preview smoke: `/api/auth/session`, `/api/trpc/project.allBrief`
-- [ ] `pnpm lint`, `pnpm test`, `pnpm build`
+- [x] Bump `next` to 16.3.0
+- [x] Local smoke: `/api/auth/session`, `/api/trpc/project.allBrief`
+- [x] `pnpm lint`, `pnpm test`, `pnpm build`
+- [ ] Preview smoke: verify `x-matched-path` on Vercel (not `/en/404`)
 - [ ] Merge dependency PR when previews green
 
 ## Phase 2 — App Router pilot
