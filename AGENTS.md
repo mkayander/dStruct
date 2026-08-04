@@ -29,6 +29,21 @@ Cursor rules to apply (see each file for full wording):
 
 **Project rules:** See **`.cursorrules`** for stack, architecture, tRPC/Redux boundaries, styling (MUI + Emotion, no Tailwind), testing conventions, and feature workflow. **`.cursor/rules/*.mdc`** adds always-on style rules (React hook imports, type imports, `useEffect` comments).
 
+### Instant Navigations (Next.js 16.3) — not on Pages Router yet
+
+dStruct is **Pages Router only** (`src/pages/`). **Instant Navigations** (`cacheComponents`, `partialPrefetching`, `'use cache'`, `unstable_instant`, Instant Insights) requires the **App Router** (`src/app/`). Do not enable `cacheComponents` or add `'use cache'` under `src/pages/`.
+
+Before implementing Instant Navigations, read:
+
+- `vibe-docs/Instant-Navigations-Design.md` — phased migration plan (i18n, Vercel 16.3 gate, route priorities)
+- `node_modules/next/dist/docs/01-app/02-guides/instant-navigation.md`
+- `node_modules/next/dist/docs/01-app/02-guides/migrating-to-cache-components.md`
+- `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/cacheComponents.md`
+
+**16.3 on Vercel:** stay on the pinned `next` version in `package.json` until preview `/api/*` routes return correct `x-matched-path` (not `/en/404`). See design doc Phase 1.
+
+**Pilot order when migrating:** marketing routes (`/`, `/privacy`, `/daily`) under `app/[lang]/` before `/playground`.
+
 ## Cursor Cloud specific instructions
 
 ### Services overview
