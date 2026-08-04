@@ -39,8 +39,9 @@ import {
 import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { createLatestOnlyTimeoutController } from "#/features/codeRunner/lib/createLatestOnlyTimeoutController";
+import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
-import { editorCodeSlice } from "#/features/codeRunner/model/editorCodeSlice";
+import { solutionParameterNamesSlice } from "#/features/codeRunner/model/solutionParameterNamesSlice";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
@@ -200,11 +201,12 @@ export const CodePanel: React.FC<CodePanelProps> = ({
 
     const key = getCodeKey(language);
     const newCode = currentSolution.data[key] ?? "";
+    const activeLanguage = language || "javascript";
 
     dispatch(
-      editorCodeSlice.actions.setCode({
-        language: language || "javascript",
-        code: newCode,
+      solutionParameterNamesSlice.actions.setParameterNames({
+        language: activeLanguage,
+        names: inferSolutionParameterNames(newCode, activeLanguage),
       }),
     );
 
@@ -394,12 +396,6 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     }
 
     const nextText = value ?? "";
-    dispatch(
-      editorCodeSlice.actions.setCode({
-        language: language || "javascript",
-        code: nextText,
-      }),
-    );
 
     const { isReady, lastRunCodeSource } = store.getState().callstack;
     if (

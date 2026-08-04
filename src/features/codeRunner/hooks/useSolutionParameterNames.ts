@@ -8,7 +8,7 @@ import {
   type ProgrammingLanguage,
 } from "#/features/codeRunner/hooks/useCodeExecution";
 import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
-import { selectEditorCodeForLanguage } from "#/features/codeRunner/model/editorCodeSlice";
+import { selectSolutionParameterNamesForLanguage } from "#/features/codeRunner/model/solutionParameterNamesSlice";
 import type { RouterOutputs } from "#/shared/api";
 import { api } from "#/shared/api";
 import { usePlaygroundSlugs, useSearchParam } from "#/shared/hooks";
@@ -28,8 +28,9 @@ export const getSolutionCodeForLanguage = (
 
 /**
  * Inferred solution parameter names for the active language (JS or Python).
- * Uses live editor text when available; otherwise falls back to the saved solution
- * (needed when TreeView mounts before CodePanel, e.g. mobile results).
+ * Names are set when code runs (or once when the saved solution loads in CodePanel).
+ * Falls back to parsing the saved solution when Redux has no names yet (e.g. mobile
+ * results before CodePanel mounts).
  */
 export const useSolutionParameterNames = ():
   | readonly (string | undefined)[]
@@ -55,16 +56,17 @@ export const useSolutionParameterNames = ():
     },
   );
 
-  const editorCode = useAppSelector(selectEditorCodeForLanguage(language));
+  const namesFromRun = useAppSelector(
+    selectSolutionParameterNamesForLanguage(language),
+  );
   const solutionCode = getSolutionCodeForLanguage(
     currentSolution.data,
     language,
   );
-  const effectiveCode =
-    editorCode.trim().length > 0 ? editorCode : solutionCode;
 
   return useMemo(() => {
-    const names = inferSolutionParameterNames(effectiveCode, language);
-    return names ?? undefined;
-  }, [effectiveCode, language]);
+    if (namesFromRun) return namesFromRun;
+    if (!solutionCode.trim()) return undefined;
+    return inferSolutionParameterNames(solutionCode, language) ?? undefined;
+  }, [language, namesFromRun, solutionCode]);
 };
