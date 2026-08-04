@@ -197,7 +197,7 @@ export const getPlaybackStepGroups = (
   const groups: PlaybackStepGroup[] = [];
   const stopAtForeignSwapChild = Boolean(options?.forCallstackDisplay);
 
-  for (let i = 0; i < frames.length; ) {
+  for (let i = 0; i < frames.length;) {
     const startIndex = getNextRenderableFrameIndex(frames, i - 1);
     if (startIndex === -1) {
       break;
