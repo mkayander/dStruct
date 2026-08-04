@@ -10,7 +10,6 @@ import { argumentTypeLabels } from "#/entities/argument/model/argumentTypeLabels
 import { caseSlice } from "#/entities/argument/model/caseSlice";
 import type { ArgumentObject } from "#/entities/argument/model/types";
 import { argumentRenameEndAdornment } from "#/features/argsEditor/ui/ArgumentRenameSuffix";
-import { useSolutionParameterNames } from "#/features/codeRunner/hooks/useSolutionParameterNames";
 import { BooleanToggleInput } from "#/shared/ui/atoms/BooleanToggleInput";
 import { DebouncedInput } from "#/shared/ui/molecules/DebouncedInput";
 import { JsonInput } from "#/shared/ui/molecules/JsonInput";
@@ -34,9 +33,11 @@ const validationSchemaMap = {
   ),
 } as const;
 
-export const ArgInput: React.FC<{ arg: ArgumentObject }> = ({ arg }) => {
+export const ArgInput: React.FC<{
+  arg: ArgumentObject;
+  parameterNames?: readonly (string | undefined)[];
+}> = ({ arg, parameterNames }) => {
   const dispatch = useAppDispatch();
-  const parameterNames = useSolutionParameterNames();
   const inputLabel = `${getArgumentDisplayLabel(arg, parameterNames)} (${argumentTypeLabels[arg.type]})`;
   const renameSuffix = argumentRenameEndAdornment(arg.name, arg.label ?? "");
 

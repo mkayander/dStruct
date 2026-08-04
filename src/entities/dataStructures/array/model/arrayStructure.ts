@@ -248,7 +248,19 @@ export class ControlledArray<T> extends ArrayBase<T> {
   override slice(start?: number, end?: number): T[] {
     const slicedArray = Array.from(this).slice(start, end);
     const { id, array, data } = ControlledArray._mapArrayData(slicedArray);
-    return new ControlledArray(array as T[], id, data, this.callstack, true);
+    const inheritedDisplayLabel = getRuntimeDisplayLabel(this);
+    const sliceOptions: ControlledArrayRuntimeOptions | undefined =
+      inheritedDisplayLabel !== undefined
+        ? { displayLabel: inheritedDisplayLabel }
+        : undefined;
+    return new ControlledArray(
+      array as T[],
+      id,
+      data,
+      this.callstack,
+      true,
+      sliceOptions,
+    );
   }
 
   protected getNodeMeta(key: number): ArrayItemData | undefined {

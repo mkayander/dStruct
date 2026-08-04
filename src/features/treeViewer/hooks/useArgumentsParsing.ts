@@ -40,7 +40,7 @@ import {
 } from "#/entities/dataStructures/node/model/nodeSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { useSolutionParameterNames } from "#/features/codeRunner/hooks/useSolutionParameterNames";
-import { isNumber } from "#/shared/lib";
+import { isNumber } from "#/shared/lib/isNumber";
 import { safeStringify } from "#/shared/lib/stringifySolutionResult";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 import { type AppDispatch } from "#/store/makeStore";

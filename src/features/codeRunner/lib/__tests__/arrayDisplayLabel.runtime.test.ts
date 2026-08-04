@@ -68,6 +68,15 @@ describe("array displayLabel runtime", () => {
     );
   });
 
+  it("inherits displayLabel on array.slice result", () => {
+    const { callstack } = runInstrumentedSolution(`
+      const array = [1, 2, 3];
+      return array.slice(1);
+    `);
+
+    expect(addArrayFramesWithLabel(callstack, "array")).toHaveLength(2);
+  });
+
   it("does not emit addArray for plain [] when transform is bypassed", () => {
     const callstack = new CallstackHelper();
     setGlobalRuntimeContext(callstack);

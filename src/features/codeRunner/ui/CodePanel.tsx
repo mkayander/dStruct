@@ -39,9 +39,8 @@ import {
 import { useJavaScriptFormatCode } from "#/features/codeRunner/hooks/useJavaScriptFormatCode";
 import { usePythonFormatCode } from "#/features/codeRunner/hooks/usePythonFormatCode";
 import { createLatestOnlyTimeoutController } from "#/features/codeRunner/lib/createLatestOnlyTimeoutController";
-import { inferSolutionParameterNames } from "#/features/codeRunner/lib/inferSolutionParameterNames";
 import { codePrefixLinesCount } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
-import { solutionParameterNamesSlice } from "#/features/codeRunner/model/solutionParameterNamesSlice";
+import { syncSolutionParameterNamesFromCode } from "#/features/codeRunner/lib/syncSolutionParameterNames";
 import prettierIcon from "#/features/codeRunner/ui/assets/prettierIcon.svg";
 import { CodeRunner } from "#/features/codeRunner/ui/CodeRunner";
 import { EditorLanguageSelect } from "#/features/codeRunner/ui/EditorLanguageSelect";
@@ -203,12 +202,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     const newCode = currentSolution.data[key] ?? "";
     const activeLanguage = language || "javascript";
 
-    dispatch(
-      solutionParameterNamesSlice.actions.setParameterNames({
-        language: activeLanguage,
-        names: inferSolutionParameterNames(newCode, activeLanguage),
-      }),
-    );
+    syncSolutionParameterNamesFromCode(dispatch, activeLanguage, newCode);
 
     if (textModel && !textModel.isDisposed()) {
       textModel.setValue(newCode);

@@ -232,7 +232,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                       />
                     </Box>
                   )}
-                  <ArgInput arg={arg} />
+                  <ArgInput arg={arg} parameterNames={parameterNames} />
                 </Box>
                 {isEditable && (
                   <Stack
