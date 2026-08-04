@@ -33,8 +33,7 @@ export const getSolutionCodeForLanguage = (
  * results before CodePanel mounts).
  */
 export const useSolutionParameterNames = ():
-  | readonly (string | undefined)[]
-  | undefined => {
+  readonly (string | undefined)[] | undefined => {
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
   const [languageParam] = useSearchParam<ProgrammingLanguage>("language", {
     defaultValue: "javascript",

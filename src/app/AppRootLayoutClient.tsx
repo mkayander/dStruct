@@ -10,6 +10,7 @@ import { SnackbarProvider } from "notistack";
 import React, { type ReactNode } from "react";
 import "symbol-observable";
 
+import { CookieConsentRoot } from "#/features/cookieConsent/ui/CookieConsentRoot";
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { apolloClient } from "#/graphql/apolloClient";
@@ -62,12 +63,14 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
                   }}
                 >
                   <AppRouterI18nProvider locale={locale} i18n={i18n}>
-                    <ProjectBrowserProvider>
-                      {children}
-                      <ProjectBrowser />
-                      <Analytics />
-                      <SpeedInsights />
-                    </ProjectBrowserProvider>
+                    <CookieConsentRoot>
+                      <ProjectBrowserProvider>
+                        {children}
+                        <ProjectBrowser />
+                        <Analytics />
+                        <SpeedInsights />
+                      </ProjectBrowserProvider>
+                    </CookieConsentRoot>
                   </AppRouterI18nProvider>
                 </SnackbarProvider>
               </StateThemeProvider>

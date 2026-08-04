@@ -47,11 +47,15 @@ export async function proxy(request: NextRequest) {
 
   const first = pathname.split("/").filter(Boolean)[0];
   if (first && localeSet.has(first)) {
-    const url = request.nextUrl.clone();
-    url.pathname = `${INTERNAL_MARKETING_PREFIX}/${first}`;
-    return NextResponse.rewrite(url, {
-      request: { headers: withLocaleHeader(request, first) },
-    });
+    const segments = pathname.split("/").filter(Boolean);
+    // Bare locale home only (`/de`), not nested Pages routes (`/de/playground`).
+    if (segments.length === 1) {
+      const url = request.nextUrl.clone();
+      url.pathname = `${INTERNAL_MARKETING_PREFIX}/${first}`;
+      return NextResponse.rewrite(url, {
+        request: { headers: withLocaleHeader(request, first) },
+      });
+    }
   }
 
   return NextResponse.next();
@@ -60,6 +64,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/config",
-    "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)",
+    "/((?!api/|_next/static|_next/image|favicon.ico|.*\\..*).*)",
   ],
 };

@@ -11,6 +11,9 @@ void (
 const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  // TODO(Instant Nav): enable after root layout avoids blocking `headers()` under Cache Components.
+  // cacheComponents: true,
+  // partialPrefetching: true,
   // Bundled docs: `node_modules/next/dist/docs/02-pages/04-api-reference/04-config/01-next-config-js/poweredByHeader.md`
   poweredByHeader: false,
   // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/reactCompiler.md`
