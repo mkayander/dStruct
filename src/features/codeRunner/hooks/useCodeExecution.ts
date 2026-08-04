@@ -11,6 +11,7 @@ import {
   createPythonRuntimeArgs,
   createRawRuntimeArgs,
 } from "#/features/codeRunner/lib";
+import { syncSolutionParameterNamesFromCode } from "#/features/codeRunner/lib/syncSolutionParameterNames";
 import type { CodeBenchmarkResponse } from "#/features/codeRunner/lib/workers/codeExec.worker";
 import { benchmarkSlice } from "#/features/codeRunner/model/benchmarkSlice";
 import { resetStructuresState } from "#/features/treeViewer/lib";
@@ -202,6 +203,8 @@ export const useCodeExecution = (
   const runCode = useCallback(
     () =>
       processTask(async () => {
+        syncSolutionParameterNamesFromCode(dispatch, language, codeInput);
+
         if (language === "javascript") {
           const state = store.getState();
           const caseArgs = selectCaseArguments(state);
@@ -223,7 +226,15 @@ export const useCodeExecution = (
           return await runPythonCode(codeInput, args);
         }
       }),
-    [codeInput, language, processTask, runJSCode, runPythonCode, store],
+    [
+      codeInput,
+      dispatch,
+      language,
+      processTask,
+      runJSCode,
+      runPythonCode,
+      store,
+    ],
   );
 
   // Runs performance benchmark (JavaScript only)

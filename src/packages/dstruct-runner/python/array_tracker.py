@@ -16,8 +16,8 @@ class ListData(TypedDict):
     ids: List[str]
     entities: Dict[str, ListItemData]
 
-class ListOptions(TypedDict):
-    name: str
+class ListOptions(TypedDict, total=False):
+    displayLabel: str
 
 class TrackedList(list, Generic[T]):
     """A proxy-like list class that tracks all operations performed on it."""
@@ -33,7 +33,7 @@ class TrackedList(list, Generic[T]):
             "addArray",
             args={
                 "arrayData": self._generate_list_data(items),
-                "options": {"name": name}
+                "options": {"displayLabel": name},
             }
         )
 

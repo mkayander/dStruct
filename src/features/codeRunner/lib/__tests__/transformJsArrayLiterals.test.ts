@@ -9,7 +9,10 @@ import type {
 } from "@babel/types";
 import { describe, expect, it } from "vitest";
 
-import { transformArrayLiteralsInSolution } from "#/features/codeRunner/lib/transformJsArrayLiterals";
+import {
+  transformArrayLiteralsInProgram,
+  transformArrayLiteralsInSolution,
+} from "#/features/codeRunner/lib/transformJsArrayLiterals";
 
 const findSolution = (
   ast: File,
@@ -30,10 +33,12 @@ const findSolution = (
 };
 
 describe("transformArrayLiteralsInSolution", () => {
-  it("replaces [] and [1, 2, 3] with __dstructArrayLiteral calls", () => {
+  it("uses __dstructArrayLiteralWithName when literal is RHS of const / assignment", () => {
     const code = `return function f() {
   const a = [];
   const b = [1, 2, 3];
+  let c;
+  c = [4];
   return b;
 };`;
     const ast = parse(code, {
@@ -44,8 +49,25 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(solution).toBeTruthy();
     transformArrayLiteralsInSolution(solution!);
     const out = generate(ast).code;
-    expect(out).toContain("__dstructArrayLiteral()");
-    expect(out).toContain("__dstructArrayLiteral(1, 2, 3)");
+    expect(out).toContain('__dstructArrayLiteralWithName("a")');
+    expect(out).toContain('__dstructArrayLiteralWithName("b", 1, 2, 3)');
+    expect(out).toContain('__dstructArrayLiteralWithName("c", 4)');
+  });
+
+  it("uses unnamed helper when only element is a string literal (avoid ambiguity)", () => {
+    const code = `return function f() {
+  const labels = ["one"];
+  return labels;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteral("one")');
+    expect(out).not.toContain("__dstructArrayLiteralWithName");
   });
 
   it("preserves spread elements", () => {
@@ -62,6 +84,123 @@ describe("transformArrayLiteralsInSolution", () => {
     expect(out).toContain("__dstructArrayLiteral(...arr, 4)");
   });
 
+  it("rewrites new Array / new ArrayProxy with element args to named literal helper", () => {
+    const code = `return function f() {
+  const nums = new Array(1, 2, 3);
+  const copy = new ArrayProxy(4, 5);
+  const label = new Array("x");
+  return nums;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteralWithName("nums", 1, 2, 3)');
+    expect(out).toContain('__dstructArrayLiteralWithName("copy", 4, 5)');
+    expect(out).toContain('__dstructArrayLiteralWithName("label", "x")');
+    expect(out).not.toContain("displayLabel");
+  });
+
+  it("appends displayLabel for dynamic-length new Array(expr)", () => {
+    const code = `return function f(n) {
+  const buf = new Array(n);
+  return buf;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toMatch(/new Array\(n,\s*\{[^}]*displayLabel:\s*"buf"/);
+    expect(out).not.toContain("__dstructArrayLiteralWithName");
+  });
+
+  it("names array literals on ??= assignment to an identifier", () => {
+    const code = `return function f() {
+  let bucket;
+  bucket ??= [];
+  return bucket;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    expect(solution).toBeTruthy();
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('bucket ??= __dstructArrayLiteralWithName("bucket"');
+  });
+
+  it("rewrites empty new Array() to __dstructArrayLiteralWithName when bound", () => {
+    const code = `return function f() {
+  const nums = new Array();
+  return nums;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteralWithName("nums")');
+    expect(out).not.toMatch(/new Array\(\{/);
+  });
+
+  it("does not append displayLabel to ambiguous new Array(number) length form", () => {
+    const code = `return function f() {
+  const buf = new Array(10);
+  return buf;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain("new Array(10)");
+    expect(out).not.toContain("displayLabel");
+  });
+
+  it("does not rewrite array literal used for destructuring assignment", () => {
+    const code = `return function f(num1, num2) {
+  [num1, num2] = [num2, num1];
+  return num1;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain("[num1, num2] = [num2, num1]");
+    expect(out).not.toContain("__dstructArrayLiteral");
+  });
+
+  it("does not rewrite array literal in const destructuring", () => {
+    const code = `return function f() {
+  const [left, right] = [1, 2];
+  return left + right;
+};`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    const solution = findSolution(ast);
+    transformArrayLiteralsInSolution(solution!);
+    const out = generate(ast).code;
+    expect(out).toContain("const [left, right] = [1, 2]");
+    expect(out).not.toMatch(/\[1,\s*2\].*__dstructArrayLiteral/);
+  });
+
   it("does not replace array used as computed object key", () => {
     const code = `return function f() {
   const o = { [[1, 2]]: 0 };
@@ -76,5 +215,21 @@ describe("transformArrayLiteralsInSolution", () => {
     const out = generate(ast).code;
     expect(out).toContain("[[1, 2]]");
     expect(out).not.toContain("__dstructArrayLiteral(1, 2)");
+  });
+});
+
+describe("transformArrayLiteralsInProgram", () => {
+  it("rewrites literals in any function when solution template is absent", () => {
+    const code = `function run() {
+  const rows = [1, 2];
+  return rows;
+}`;
+    const ast = parse(code, {
+      sourceType: "unambiguous",
+      allowReturnOutsideFunction: true,
+    });
+    transformArrayLiteralsInProgram(ast);
+    const out = generate(ast).code;
+    expect(out).toContain('__dstructArrayLiteralWithName("rows", 1, 2)');
   });
 });

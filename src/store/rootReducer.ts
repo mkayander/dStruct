@@ -7,6 +7,7 @@ import { appBarSlice } from "#/features/appBar/model/appBarSlice";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { benchmarkSlice } from "#/features/codeRunner/model/benchmarkSlice";
 import { pyodideSlice } from "#/features/codeRunner/model/pyodideSlice";
+import { solutionParameterNamesSlice } from "#/features/codeRunner/model/solutionParameterNamesSlice";
 import { projectBrowserSlice } from "#/features/project/model/projectBrowserSlice";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
@@ -18,6 +19,7 @@ import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 export const rootReducer = combineReducers({
   appBar: appBarSlice.reducer,
   benchmark: benchmarkSlice.reducer,
+  solutionParameterNames: solutionParameterNamesSlice.reducer,
   pyodide: pyodideSlice.reducer,
   treeNode: treeNodeSlice.reducer,
   arrayStructure: arrayStructureSlice.reducer,

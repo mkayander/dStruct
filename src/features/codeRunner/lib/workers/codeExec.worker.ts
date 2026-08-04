@@ -9,7 +9,7 @@ import {
   globalDefinitionsPrefix,
   setGlobalRuntimeContext,
 } from "#/features/codeRunner/lib/setGlobalRuntimeContext";
-import { stringifySolutionResult } from "#/shared/lib";
+import { stringifySolutionResult } from "#/shared/lib/stringifySolutionResult";
 
 const dummy = () => {};
 [Array, String, Map, Set, WeakMap, WeakSet, Object].forEach((proto) =>
@@ -113,9 +113,7 @@ self.addEventListener("message", (event: MessageEvent<WorkerRequest>) => {
         arrayStore,
         caseArgs,
       );
-      const { code: instrumentedCode, ok: instrumentOk } =
-        instrumentUserJsForLineTracking(code);
-      const codeToRun = instrumentOk ? instrumentedCode : code;
+      const { code: codeToRun } = instrumentUserJsForLineTracking(code);
       const prefixedCode = `${globalDefinitionsPrefix}\n${codeToRun}`;
       const startTimestamp = performance.now();
       try {

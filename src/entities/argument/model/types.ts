@@ -14,7 +14,10 @@ export type ArgumentArrayType =
   | ArgumentType.OBJECT;
 
 type BaseArgumentData = {
+  /** Stable unique id (Redux entity id, structure store key). */
   name: string;
+  /** Optional display name; duplicates allowed. Falls back to `arg-${order + 1}`. */
+  label?: string;
   parentName?: string;
   order: number;
   input: string;

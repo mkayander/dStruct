@@ -4,7 +4,10 @@ import traverse, { type NodePath } from "@babel/traverse";
 import * as babelTypes from "@babel/types";
 import type { File } from "@babel/types";
 
-import { transformArrayLiteralsInSolution } from "#/features/codeRunner/lib/transformJsArrayLiterals";
+import {
+  transformArrayLiteralsInProgram,
+  transformArrayLiteralsInSolution,
+} from "#/features/codeRunner/lib/transformJsArrayLiterals";
 
 const insertProbesInBlock = (bodyPath: NodePath<babelTypes.BlockStatement>) => {
   const statements = bodyPath.get("body");
@@ -61,9 +64,8 @@ const findReturnedSolutionPath = (file: File): SolutionFnPath | null => {
 };
 
 /**
- * Injects `globalThis.__dstructSetExecutionSource(line, column)` before each statement
- * in every function body **inside** the first `return <function>` (dStruct solution template).
- * Line/column match the Monaco model (user code only).
+ * Rewrites user JS for the code runner: array literals → tracked helpers (always when parse
+ * succeeds), and optionally line probes for editor sync (`ok` reflects probes only).
  */
 export const instrumentUserJsForLineTracking = (
   code: string,
@@ -76,11 +78,13 @@ export const instrumentUserJsForLineTracking = (
     });
 
     const solutionPath = findReturnedSolutionPath(ast);
-    if (!solutionPath) {
-      return { code, ok: false };
+    if (solutionPath) {
+      transformArrayLiteralsInSolution(solutionPath);
+    } else {
+      transformArrayLiteralsInProgram(ast);
+      const out = generate(ast, { retainLines: false });
+      return { code: out.code, ok: false };
     }
-
-    transformArrayLiteralsInSolution(solutionPath);
 
     // traverse() does not visit the root path; instrument the solution fn itself first.
     instrumentFunctionBody(solutionPath as NodePath<babelTypes.Function>);

@@ -15,7 +15,10 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import { generate } from "short-uuid";
 
-import { isArgumentObjectValid } from "#/entities/argument/lib";
+import {
+  getArgumentDisplayLabel,
+  isArgumentObjectValid,
+} from "#/entities/argument/lib";
 import { ArgumentType } from "#/entities/argument/model/argumentObject";
 import {
   caseSlice,
@@ -31,6 +34,7 @@ import { ArgInput } from "#/features/argsEditor/ui/ArgInput";
 import { ArgumentTypeSelect } from "#/features/argsEditor/ui/ArgumentTypeSelect";
 import { DraggableArgsList } from "#/features/argsEditor/ui/DraggableArgsList";
 import { DraggableItem } from "#/features/argsEditor/ui/DraggableItem";
+import { useSolutionParameterNames } from "#/features/codeRunner/hooks/useSolutionParameterNames";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { editorSlice } from "#/features/treeViewer/model/editorSlice";
 import type { UseTRPCQueryResult } from "#/server/api/trpc";
@@ -54,6 +58,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
   const isMobile = useMobileLayout();
   const prevCaseSlug = usePrevious(caseSlug);
   const args = useAppSelector(selectCaseArguments);
+  const parameterNames = useSolutionParameterNames();
   const isEditable = useAppSelector(selectIsEditable);
   const isCaseEdited = useAppSelector(selectCaseIsEdited);
 
@@ -227,7 +232,7 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                       />
                     </Box>
                   )}
-                  <ArgInput arg={arg} />
+                  <ArgInput arg={arg} parameterNames={parameterNames} />
                 </Box>
                 {isEditable && (
                   <Stack
@@ -242,7 +247,9 @@ export const ArgsEditor: React.FC<ArgsEditorProps> = ({ selectedCase }) => {
                       onChange={(type) => handleArgTypeChange(arg, type)}
                     />
                     <IconButton
-                      title={LL.DELETE_X_ARGUMENT({ name: arg.name })}
+                      title={LL.DELETE_X_ARGUMENT({
+                        name: getArgumentDisplayLabel(arg, parameterNames),
+                      })}
                       onClick={() => handleDeleteArg(arg)}
                       size="small"
                       sx={{ top: -2 }}

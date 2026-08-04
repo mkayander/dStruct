@@ -1,7 +1,11 @@
 import { PriorityQueue } from "@datastructures-js/priority-queue";
 import { generate } from "short-uuid";
 
-import { getRuntimeArrayClass } from "#/entities/dataStructures/array/model/arrayStructure";
+import { generateArrayData } from "#/entities/dataStructures/array/lib/generateArrayData";
+import {
+  ControlledArray,
+  getRuntimeArrayClass,
+} from "#/entities/dataStructures/array/model/arrayStructure";
 import { getRuntimeSet } from "#/entities/dataStructures/array/model/setStructure";
 import { getRuntimeString } from "#/entities/dataStructures/array/model/stringStructure";
 import {
@@ -57,21 +61,51 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 
   const ObjectProxy = getRuntimeObject(callstack);
 
+  const buildTrackedArrayFromLiteralElements = (
+    elements: unknown[],
+    displayLabel?: string,
+  ) => {
+    if (displayLabel !== undefined) {
+      const values: unknown[] = [];
+      for (let index = 0; index < elements.length; index += 1) {
+        values[index] = elements[index];
+      }
+      const data = generateArrayData(values);
+      return new ControlledArray(
+        values as (string | number)[],
+        generate(),
+        data,
+        callstack,
+        true,
+        { displayLabel },
+      );
+    }
+
+    const out = new ArrayProxy(0) as unknown[];
+    for (let index = 0; index < elements.length; index += 1) {
+      out[index] = elements[index];
+    }
+    return out;
+  };
+
   const context = {
     __dstructSetExecutionSource: (line: number, column?: number) => {
       setExecutionSource(line, column ?? 0);
     },
     /**
      * Build a tracked array from literal elements (avoid `new Array(n)` length ambiguity
-     * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]`.
+     * in ArrayProxy). Used by AST transform for `[]` and `[1,2,3]` when the binding name
+     * is unknown or would be ambiguous (e.g. single string element).
      */
-    __dstructArrayLiteral: (...elements: unknown[]) => {
-      const out = new ArrayProxy(0) as unknown[];
-      for (let i = 0; i < elements.length; i += 1) {
-        out[i] = elements[i];
-      }
-      return out;
-    },
+    __dstructArrayLiteral: (...elements: unknown[]) =>
+      buildTrackedArrayFromLiteralElements(elements),
+    /**
+     * Same as `__dstructArrayLiteral` but records `displayLabel` for the viewer (inferred variable name).
+     */
+    __dstructArrayLiteralWithName: (
+      displayLabel: string,
+      ...elements: unknown[]
+    ) => buildTrackedArrayFromLiteralElements(elements, displayLabel),
     ArrayProxy,
     Uint32ArrayProxy,
     Int32ArrayProxy,
@@ -115,6 +149,7 @@ export const setGlobalRuntimeContext = (callstack: CallstackHelper) => {
 export const globalDefinitionsPrefix = `
   const console = {...self.console, log: self.log, error: self.error, warn: self.warn, info: self.info};
   const __dstructArrayLiteral = self.__dstructArrayLiteral;
+  const __dstructArrayLiteralWithName = self.__dstructArrayLiteralWithName;
   const Array = self.ArrayProxy;
   const Uint32Array = self.Uint32ArrayProxy;
   const Int32Array = self.Int32ArrayProxy;

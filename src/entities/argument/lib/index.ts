@@ -3,3 +3,8 @@ export { buildCaseArgsContentSignature } from "./caseArgsContentSignature";
 export { isArgumentArrayType } from "./isArgumentArrayType";
 export { isArgumentTreeType } from "./isArgumentTreeType";
 export { isArgumentObjectValid } from "./isArgumentObjectValid";
+export { getArgumentDisplayLabel } from "./getArgumentDisplayLabel";
+export {
+  getChildArrayName,
+  getMatrixChildArrayArgs,
+} from "./getMatrixChildArrayArgs";

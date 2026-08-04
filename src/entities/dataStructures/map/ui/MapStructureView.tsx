@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 
 import { arrayDataItemSelectors } from "#/entities/dataStructures/array/model/arraySlice";
 import { type ArrayStructureViewProps } from "#/entities/dataStructures/array/ui/ArrayStructureView";
+import { StructureDisplayLabel } from "#/entities/dataStructures/array/ui/StructureDisplayLabel";
 import { MapItem } from "#/entities/dataStructures/map/ui/MapItem";
 
 type MapStructureViewProps = ArrayStructureViewProps;
@@ -18,64 +19,68 @@ export const MapStructureView: React.FC<MapStructureViewProps> = ({
     [data.nodes],
   );
 
-  return (
-    <Box
-      component="table"
-      sx={{
-        width: "fit-content",
-        borderCollapse: "separate",
-        borderSpacing: 0,
-        border: `1px solid ${alpha(theme.palette.primary.light, 0.3)}`,
-        borderRadius: "4px",
-        "&:hover": {
-          border: `1px solid ${alpha(theme.palette.primary.light, 0.8)}`,
-        },
+  const { displayLabel } = data;
 
-        "& tr:first-of-type": {
-          "& > td:first-of-type": {
-            borderTopLeftRadius: "4px",
+  return (
+    <Box sx={{ width: "fit-content", ...sx }}>
+      {displayLabel ? <StructureDisplayLabel label={displayLabel} /> : null}
+      <Box
+        component="table"
+        sx={{
+          width: "fit-content",
+          borderCollapse: "separate",
+          borderSpacing: 0,
+          border: `1px solid ${alpha(theme.palette.primary.light, 0.3)}`,
+          borderRadius: "4px",
+          "&:hover": {
+            border: `1px solid ${alpha(theme.palette.primary.light, 0.8)}`,
           },
-          "& > td:last-child": {
-            borderTopRightRadius: "4px",
+
+          "& tr:first-of-type": {
+            "& > td:first-of-type": {
+              borderTopLeftRadius: "4px",
+            },
+            "& > td:last-child": {
+              borderTopRightRadius: "4px",
+            },
+            "&::after": {
+              borderRadius: "4px 4px 0 0",
+            },
           },
-          "&::after": {
-            borderRadius: "4px 4px 0 0",
+          "& tr:last-child": {
+            "& > td:first-of-type": {
+              borderBottomLeftRadius: "4px",
+            },
+            "& > td:last-child": {
+              borderBottomRightRadius: "4px",
+            },
+            "&::after": {
+              borderRadius: "0 0 4px 4px",
+            },
           },
-        },
-        "& tr:last-child": {
-          "& > td:first-of-type": {
-            borderBottomLeftRadius: "4px",
-          },
-          "& > td:last-child": {
-            borderBottomRightRadius: "4px",
-          },
-          "&::after": {
-            borderRadius: "0 0 4px 4px",
-          },
-        },
-        ...sx,
-      }}
-    >
-      <tbody>
-        {items.map((item) => (
-          <MapItem
-            key={item.id}
-            item={item}
-            colorMap={data.colorMap ?? parentColorMap}
-          />
-        ))}
-        {items.length === 0 && (
-          <tr>
-            <Box
-              component="td"
-              sx={{
-                width: 44,
-                height: 44,
-              }}
+        }}
+      >
+        <tbody>
+          {items.map((item) => (
+            <MapItem
+              key={item.id}
+              item={item}
+              colorMap={data.colorMap ?? parentColorMap}
             />
-          </tr>
-        )}
-      </tbody>
+          ))}
+          {items.length === 0 && (
+            <tr>
+              <Box
+                component="td"
+                sx={{
+                  width: 44,
+                  height: 44,
+                }}
+              />
+            </tr>
+          )}
+        </tbody>
+      </Box>
     </Box>
   );
 };

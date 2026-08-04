@@ -1,10 +1,12 @@
-import { isArgumentArrayType } from "#/entities/argument/lib";
+import {
+  getMatrixChildArrayArgs,
+  isArgumentArrayType,
+} from "#/entities/argument/lib";
 import type { ArgumentObject } from "#/entities/argument/model/types";
 import { createRuntimeArray } from "#/entities/dataStructures/array/lib";
 import type { ArrayDataState } from "#/entities/dataStructures/array/model/arraySlice";
 import { ControlledArray } from "#/entities/dataStructures/array/model/arrayStructure";
 import type { CallstackHelper } from "#/features/callstack/model/callstackSlice";
-import { getMatrixChildArrayArgs } from "#/features/treeViewer/hooks/useArgumentsParsing";
 
 export const createRuntimeMatrix = (
   arrayStore: ArrayDataState,
