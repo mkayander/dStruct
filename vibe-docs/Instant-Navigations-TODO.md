@@ -3,28 +3,28 @@
 ## Phase 0 — Agent DX
 
 - [x] `AGENTS.md` bundled-docs block
-- [ ] `CLAUDE.md` with `@AGENTS.md`
-- [ ] `AGENTS.md` — Instant Nav doc paths + Pages Router guardrail
+- [x] `CLAUDE.md` with `@AGENTS.md`
+- [x] `AGENTS.md` — Instant Nav doc paths + Pages Router guardrail
 - [ ] Optional `.mcp.json` for `next-devtools-mcp`
 
 ## Phase 1 — 16.3.x on Vercel
 
-- [x] Bump `next` to 16.3.0
-- [x] Local smoke: `/api/auth/session`, `/api/trpc/project.allBrief`
-- [x] `pnpm lint`, `pnpm test`, `pnpm build`
-- [ ] Preview smoke: verify `x-matched-path` on Vercel (not `/en/404`)
-- [ ] Merge dependency PR when previews green
+- [x] Tried `next@16.3.0` — local OK; Vercel preview `/api/*` → `/en/404`
+- [x] **Pinned back to `next@16.2.12`** so previews + App Router pilot can be verified
+- [ ] Re-try latest 16.3.x when adapter-vercel i18n API fix is in a release that works on Turbopack previews
+- [ ] Preview smoke green on 16.3.x before enabling Instant Nav flags
 
 ## Phase 2 — App Router pilot
 
-- [ ] `src/shared/ui/providers/AppProviders.tsx` (extract from `_app.tsx`)
-- [ ] `src/app/[lang]/layout.tsx`
-- [ ] `src/app/[lang]/page.tsx` (home)
-- [ ] `src/app/[lang]/privacy/page.tsx`
-- [ ] `src/app/[lang]/daily/page.tsx`
-- [ ] `next.config.mjs`: `cacheComponents`, `partialPrefetching`, devtools toggle
+- [x] `TrpcProvider` + `AppRootLayoutClient`
+- [x] `src/app/layout.tsx` + `internal-marketing/[locale]/` home
+- [x] `MarketingHomeView` (replaced `pages/index`)
+- [x] `proxy.ts` bare-locale rewrites; exclude `/api/*`
+- [ ] Fix `next/router` in shared shell for App Router home
+- [ ] App layout metadata (viewport, icons, Material Icons)
+- [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
 - [ ] `unstable_instant` on pilot routes
-- [ ] Manual Instant Insights check in dev
+- [ ] Extend to `/privacy`, `/daily`
 
 ## Phase 3+ — Playground / full migration
 
