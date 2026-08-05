@@ -52,13 +52,16 @@ export const CookieConsentBannerWithDismissEffect: React.FC<
           return;
         }
 
+        const settingsViewAtDismiss = isSettingsView;
+        setFrozenSettingsView(settingsViewAtDismiss);
+
         const persisted = action();
         if (persisted === false) {
+          setFrozenSettingsView(null);
           return;
         }
 
         isDismissingRef.current = true;
-        setFrozenSettingsView(isSettingsView);
         onBeginDismiss();
 
         void (async () => {
