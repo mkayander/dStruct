@@ -12,11 +12,10 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 
 import { MOBILE_PHASE_NAV_HEIGHT } from "#/features/playground/ui/MobilePhaseNavBar";
-import { useI18nContext } from "#/shared/hooks";
+import { useI18nContext, useRoutePathname } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { glassOverlaySx } from "#/shared/ui/styles/glassOverlayStyles";
 
@@ -38,9 +37,9 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
 }) => {
   const { LL } = useI18nContext();
   const theme = useTheme();
-  const router = useRouter();
+  const currentPath = useRoutePathname();
   const isMobileLayout = useMobileLayout();
-  const isPlaygroundRoute = router.pathname.startsWith("/playground");
+  const isPlaygroundRoute = currentPath.startsWith("/playground");
   const reserveMobileNavSpace = isMobileLayout && isPlaygroundRoute;
 
   return (

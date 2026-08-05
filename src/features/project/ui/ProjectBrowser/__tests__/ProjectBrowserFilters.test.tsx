@@ -51,6 +51,7 @@ const createMockI18n = () => {
   });
 
   return {
+    locale: "en" as const,
     LL: LL as any,
   };
 };

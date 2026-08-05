@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
 
 import { projectSlice } from "#/features/project/model/projectSlice";
+import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
 import {
   getLastPlaygroundPath,
   getRestorablePlaygroundPath,
@@ -26,10 +26,13 @@ type PlaygroundSlugNavigateOptions = {
 
 export const usePlaygroundSlugs = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const router = usePagesRouterCompat();
 
   const getCurrentQuery = useCallback(
     (omitView?: boolean) => {
+      if (!router) {
+        return {};
+      }
       const query = { ...router.query };
       delete query.slug;
       if (omitView) {
@@ -43,6 +46,9 @@ export const usePlaygroundSlugs = () => {
 
   const navigateTo = useCallback(
     (pathname: string, options?: PlaygroundSlugNavigateOptions) => {
+      if (!router) {
+        return;
+      }
       const replace = options?.replace ?? false;
       router[replace ? "replace" : "push"](
         {
@@ -57,6 +63,9 @@ export const usePlaygroundSlugs = () => {
   );
 
   useEffect(() => {
+    if (!router) {
+      return;
+    }
     const currentPath = router.asPath.split("?")[0];
     if (!currentPath?.startsWith(PLAYGROUND_BASE_PATH)) return;
 
@@ -64,11 +73,11 @@ export const usePlaygroundSlugs = () => {
     if (!projectSlug) return;
 
     setLastPlaygroundPath(currentPath);
-  }, [router.asPath]);
+  }, [router, router?.asPath]);
 
   return useMemo(() => {
     const [projectSlug, caseSlug, solutionSlug] = Array.isArray(
-      router.query.slug,
+      router?.query.slug,
     )
       ? router.query.slug
       : [];
@@ -140,5 +149,5 @@ export const usePlaygroundSlugs = () => {
       clearSlugs,
     } as const;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query.slug]);
+  }, [router?.query.slug]);
 };

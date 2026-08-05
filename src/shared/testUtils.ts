@@ -16,4 +16,7 @@ import { fallbackProxy } from "#/context/I18nContext";
  *   };
  * });
  */
-export const mockUseI18nContext = () => ({ LL: fallbackProxy });
+export const mockUseI18nContext = () => ({
+  locale: "en" as const,
+  LL: fallbackProxy,
+});

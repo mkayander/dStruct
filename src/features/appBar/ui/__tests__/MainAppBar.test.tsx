@@ -19,6 +19,14 @@ vi.mock("next-auth/react", () => ({
   useSession: vi.fn(),
 }));
 
+vi.mock("next/compat/router", () => ({
+  useRouter: vi.fn(() => ({ pathname: "/playground" })),
+}));
+
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(() => "/playground"),
+}));
+
 vi.mock("next/router", () => ({
   useRouter: vi.fn(() => ({ pathname: "/playground" })),
 }));
