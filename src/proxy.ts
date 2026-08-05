@@ -15,9 +15,15 @@ function withLocaleHeader(request: NextRequest, locale: string): Headers {
 }
 
 /**
- * Next.js 16+ request proxy (replaces `middleware.ts`). Handles `/api/config` and
- * rewrites public `/{locale}` URLs to `app/internal-marketing/[locale]` so App routes
- * do not shadow Pages (`/daily`, `/playground`, …).
+ * Next.js 16+ request proxy (replaces `middleware.ts`).
+ *
+ * - Serves `/api/config` from Edge Config.
+ * - Sets {@link APP_ROUTER_LOCALE_HEADER} for direct App marketing visits
+ *   (`/internal-marketing/[locale]` Instant Nav pilot).
+ *
+ * Public `/` and bare `/{locale}` stay on Pages `pages/index` until locale
+ * routing leaves `next.config` `i18n` (middleware rewrites into App routes
+ * 404 for non-default locales under Pages i18n).
  */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -34,28 +40,6 @@ export async function proxy(request: NextRequest) {
         request: { headers: withLocaleHeader(request, segment) },
       });
     }
-    return NextResponse.next();
-  }
-
-  if (pathname === "/") {
-    const url = request.nextUrl.clone();
-    url.pathname = `${INTERNAL_MARKETING_PREFIX}/en`;
-    return NextResponse.rewrite(url, {
-      request: { headers: withLocaleHeader(request, "en") },
-    });
-  }
-
-  const first = pathname.split("/").filter(Boolean)[0];
-  if (first && localeSet.has(first)) {
-    const segments = pathname.split("/").filter(Boolean);
-    // Bare locale home only (`/de`), not nested Pages routes (`/de/playground`).
-    if (segments.length === 1) {
-      const url = request.nextUrl.clone();
-      url.pathname = `${INTERNAL_MARKETING_PREFIX}/${first}`;
-      return NextResponse.rewrite(url, {
-        request: { headers: withLocaleHeader(request, first) },
-      });
-    }
   }
 
   return NextResponse.next();
@@ -64,6 +48,9 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/config",
-    "/((?!api/|_next/static|_next/image|favicon.ico|.*\\..*).*)",
+    {
+      source: "/internal-marketing/:path*",
+      locale: false,
+    },
   ],
 };

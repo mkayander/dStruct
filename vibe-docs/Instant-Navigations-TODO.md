@@ -17,10 +17,12 @@
 ## Phase 2 — App Router pilot
 
 - [x] `TrpcProvider` + `AppRootLayoutClient`
-- [x] `src/app/layout.tsx` + `internal-marketing/[locale]/` home
-- [x] `MarketingHomeView` (replaced `pages/index`)
-- [x] `proxy.ts` bare-locale rewrites; exclude `/api/*`
-- [ ] Fix `next/router` in shared shell for App Router home
+- [x] `src/app/layout.tsx` + `internal-marketing/[locale]/` pilot
+- [x] `MarketingHomeView` shared by Pages home + App pilot
+- [x] Dual-router shell (`next/compat/router`) so App pilot does not throw
+- [x] Public `/` / `/{locale}` stay on Pages `pages/index` (Pages `i18n` cannot rewrite bare locales into App routes)
+- [x] `proxy.ts`: `/api/config` + locale header for direct `/internal-marketing/*`
+- [ ] Public cutover of home to App (blocked on removing `next.config` `i18n`)
 - [ ] App layout metadata (viewport, icons, Material Icons)
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
 - [ ] `unstable_instant` on pilot routes

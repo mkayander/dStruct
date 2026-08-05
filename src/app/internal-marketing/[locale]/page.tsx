@@ -1,7 +1,8 @@
 import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
 
 /**
- * Internal App path; `proxy.ts` rewrites `/` → `/internal-marketing/en` and `/{locale}` here.
+ * Instant Nav pilot (App Router). Public home remains Pages `pages/index`
+ * until locale routing leaves `next.config` `i18n`.
  */
 export default function InternalMarketingHomePage() {
   return <MarketingHomeView />;

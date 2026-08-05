@@ -12,7 +12,7 @@ import "overlayscrollbars/overlayscrollbars.css";
 
 /**
  * Minimal root shell for App Router only. Locale comes from {@link APP_ROUTER_LOCALE_HEADER}
- * (set in proxy for `/` rewrite and bare `/{locale}` marketing URLs).
+ * (set in proxy for direct `/internal-marketing/[locale]` visits).
  */
 export default async function RootLayout({
   children,

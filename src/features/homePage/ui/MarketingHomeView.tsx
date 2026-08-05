@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Marketing home UI. Served from App Router (`internal-marketing/[locale]`);
- * public `/` and bare `/{locale}` rewrite there via `proxy.ts`.
+ * Marketing home UI. Public `/` uses Pages `pages/index`; App Router
+ * `internal-marketing/[locale]` reuses this for the Instant Nav pilot.
  */
 import { useState } from "react";
 
