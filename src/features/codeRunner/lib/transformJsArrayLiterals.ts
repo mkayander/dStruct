@@ -6,8 +6,7 @@ const ARRAY_LITERAL_HELPER = "__dstructArrayLiteral";
 const ARRAY_LITERAL_NAMED_HELPER = "__dstructArrayLiteralWithName";
 
 type InferableRhsPath =
-  | NodePath<babelTypes.ArrayExpression>
-  | NodePath<babelTypes.NewExpression>;
+  NodePath<babelTypes.ArrayExpression> | NodePath<babelTypes.NewExpression>;
 
 /**
  * Single string literal as the only element is ambiguous with `__dstructArrayLiteralWithName("label", "x")`.

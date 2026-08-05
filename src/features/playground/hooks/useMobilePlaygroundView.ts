@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
 
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useHasMounted, usePrevious } from "#/shared/hooks";
+import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
 import {
   getLastPlaygroundPath,
   isValidLastPlaygroundPath,
@@ -25,18 +25,22 @@ export type { PlaygroundView } from "./usePlaygroundViewParam";
  *
  * - **Implicit code with a slug**: if `view` is absent, shallow `replace` adds `?view=code`.
  * - **Tab changes**: shallow `router.replace` (no extra history entries per tab tap).
+ * - Under App Router (no Pages router): returns browse defaults; no URL sync.
  */
 export const useMobilePlaygroundView = () => {
-  const router = useRouter();
+  const router = usePagesRouterCompat();
   const dispatch = useAppDispatch();
   const hasMounted = useHasMounted();
 
   const { view, setView } = usePlaygroundViewParam();
 
   const hasProjectSlug = useMemo(() => {
+    if (!router) {
+      return false;
+    }
     const slugs = router.query.slug;
     return Array.isArray(slugs) && slugs.length > 0;
-  }, [router.query.slug]);
+  }, [router]);
 
   const currentView: PlaygroundView = useMemo(() => {
     if (view && isPlaygroundView(view)) {
@@ -62,12 +66,12 @@ export const useMobilePlaygroundView = () => {
   // With a project slug, default UI is Code; mirror that in the URL when `view` is omitted
   // (e.g. "Try it out", shared links, or `/playground/foo` without query).
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router?.isReady) return;
     if (!hasProjectSlug) return;
     if (view !== "") return;
 
     setView("code", { replace: true });
-  }, [router.isReady, hasProjectSlug, view, setView, router]);
+  }, [router?.isReady, hasProjectSlug, view, setView, router]);
 
   const navigateTo = useCallback(
     (targetView: PlaygroundView, pathName?: string) => {

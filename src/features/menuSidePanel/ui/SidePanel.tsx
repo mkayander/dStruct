@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
@@ -28,7 +27,7 @@ import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
-import { useI18nContext } from "#/shared/hooks";
+import { useI18nContext, usePagesRouterCompat } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
 
@@ -55,8 +54,8 @@ type SidePanelProps = {
 };
 
 export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
-  const router = useRouter();
-  const { LL } = useI18nContext();
+  const pagesRouter = usePagesRouterCompat();
+  const { LL, locale: activeLocale } = useI18nContext();
   const theme = useTheme();
   const session = useSession();
   const cookieConsent = useOptionalCookieConsentContext();
@@ -68,11 +67,20 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
 
   const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
     const newLocale = event.target.value as Locales;
-    if (newLocale !== router.locale) {
-      setStoredLocale(newLocale);
-      await loadLocaleAsync(newLocale);
-      void router.push(router.asPath, undefined, { locale: newLocale });
+    const currentLocale = pagesRouter?.locale ?? activeLocale;
+    if (newLocale === currentLocale) {
+      return;
     }
+    setStoredLocale(newLocale);
+    await loadLocaleAsync(newLocale);
+    if (pagesRouter) {
+      void pagesRouter.push(pagesRouter.asPath, undefined, {
+        locale: newLocale,
+      });
+      return;
+    }
+    // App Router marketing home: full navigation to locale home URL.
+    window.location.assign(newLocale === "en" ? "/" : `/${newLocale}`);
   };
 
   return (
@@ -128,7 +136,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               <Select
                 labelId="side-panel-language-label"
                 label={LL.LANGUAGE()}
-                value={(router.locale as Locales) ?? "en"}
+                value={(pagesRouter?.locale as Locales) ?? activeLocale ?? "en"}
                 onChange={handleChangeLocale}
               >
                 {localesForLanguagePicker.map((locale) => (

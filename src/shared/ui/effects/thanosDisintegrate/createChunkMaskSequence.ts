@@ -2,8 +2,7 @@ import { canvasToDataUrl } from "#/shared/ui/effects/thanosDisintegrate/canvasTo
 import type { ThanosParticle } from "#/shared/ui/effects/thanosDisintegrate/types";
 
 type Mask2dContext =
-  | CanvasRenderingContext2D
-  | OffscreenCanvasRenderingContext2D;
+  CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
 
 export type ChunkMaskParticle = Pick<ThanosParticle, "x" | "y" | "releaseTime">;
 

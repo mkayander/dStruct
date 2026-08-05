@@ -62,8 +62,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
   ) => {
     const viewport =
       (instance?.osInstance()?.elements().viewport as
-        | HTMLDivElement
-        | undefined) ?? null;
+        HTMLDivElement | undefined) ?? null;
     assignViewportRef(viewportRef, viewport);
   };
 

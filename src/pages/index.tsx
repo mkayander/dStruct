@@ -1,39 +1,29 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
-import { useState } from "react";
 
-import { HomeLandingFaq } from "#/features/homePage/ui/landing/HomeLandingFaq";
-import { HomeLandingHero } from "#/features/homePage/ui/landing/HomeLandingHero";
-import { HomeLandingSections } from "#/features/homePage/ui/landing/HomeLandingSections";
+import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
 import { getI18nPropsWithCanonical } from "#/i18n/getI18nProps";
-import { useI18nContext } from "#/shared/hooks";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
-import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 export const getStaticProps = getI18nPropsWithCanonical("/");
 
 type DashboardProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const DashboardPage: NextPage<DashboardProps> = ({ canonicalUrl }) => {
-  const { LL } = useI18nContext();
-  const [pageScrollViewport, setPageScrollViewport] =
-    useState<HTMLDivElement | null>(null);
-
-  return (
-    <MainLayout
-      headerPosition="fixed"
-      pageScrollViewportRef={setPageScrollViewport}
-    >
-      <SiteSeoHead
-        title="dStruct — visualize LeetCode solutions"
-        canonicalUrl={canonicalUrl}
-      />
-      <HomeLandingHero LL={LL} pageScrollViewport={pageScrollViewport} />
-
-      <HomeLandingSections LL={LL} />
-
-      <HomeLandingFaq LL={LL} />
-    </MainLayout>
-  );
-};
+/**
+ * Public marketing home (Pages Router + `i18n`).
+ *
+ * App Router `internal-marketing/[locale]` keeps the Instant Nav pilot, but
+ * Pages `i18n` cannot rewrite bare `/{locale}` into App routes (invoke path
+ * becomes `/{locale}/internal-marketing/...` → 404). Public cutover waits on
+ * migrating locale routing off `next.config` `i18n`.
+ */
+const DashboardPage: NextPage<DashboardProps> = ({ canonicalUrl }) => (
+  <>
+    <SiteSeoHead
+      title="dStruct — visualize LeetCode solutions"
+      canonicalUrl={canonicalUrl}
+    />
+    <MarketingHomeView />
+  </>
+);
 
 export default DashboardPage;

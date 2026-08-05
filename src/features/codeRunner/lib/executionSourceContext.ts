@@ -19,8 +19,7 @@ export const setExecutionSource = (
 };
 
 export const peekExecutionSourceForFrame = ():
-  | SourceLocationSnapshot
-  | undefined => {
+  SourceLocationSnapshot | undefined => {
   if (state.line == null) return undefined;
   const snap: SourceLocationSnapshot = { line: state.line };
   if (state.column != null) snap.column = state.column;
