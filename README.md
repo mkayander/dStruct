@@ -8,7 +8,7 @@
   <a href="https://dstruct.pro">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
   </a>
-  <a href="/LICENSE">
+  <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-AGPL--3.0-blue?style=for-the-badge" alt="AGPL-3.0 License" />
   </a>
 </p>
@@ -56,8 +56,8 @@ It is built for learners who want intuition, not just green checkmarks.
 ### Prerequisites
 
 - **Node.js 24** (see `.nvmrc`)
-- **pnpm** (`corepack enable && corepack prepare pnpm@latest --activate`)
-- **PostgreSQL** — local dev uses `postgresql://dstruct:dstruct@localhost:5432/dstruct`
+- **pnpm** (`corepack enable`; the repository pins the supported version)
+- **PostgreSQL** or **Docker**
 
 ### 1. Clone and install
 
@@ -68,13 +68,27 @@ cp .env.example .env   # edit if needed; placeholders work for basic local dev
 pnpm install
 ```
 
-### 2. Set up the database
+### 2. Start PostgreSQL
 
-If PostgreSQL is running locally:
+The quickest option is a local Docker container matching `.env.example`:
+
+```bash
+docker run --name dstruct-postgres \
+  -e POSTGRES_USER=dstruct \
+  -e POSTGRES_PASSWORD=dstruct \
+  -e POSTGRES_DB=dstruct \
+  -p 5432:5432 \
+  -d postgres:17
+```
+
+If you already run PostgreSQL, create a `dstruct` role and database (or update
+`DATABASE_URL` in `.env` to use your existing credentials).
+
+Then apply the schema and load the public playground problems:
 
 ```bash
 pnpm prisma:push
-pnpm loadMainDump    # seeds public playground problems
+pnpm loadMainDump
 ```
 
 ### 3. Start the dev server
@@ -119,7 +133,7 @@ OAuth and AWS keys can stay as placeholders unless you are testing those flows. 
 | Layer | Technologies |
 |---|---|
 | **App** | [Next.js](https://nextjs.org/) (Pages Router), React 19, TypeScript |
-| **UI** | MUI v7, Emotion |
+| **UI** | MUI v9, Emotion |
 | **State** | Redux Toolkit (UI), TanStack Query via tRPC (server data) |
 | **API** | tRPC (primary), GraphQL + Apollo where used |
 | **Database** | PostgreSQL, Prisma |
