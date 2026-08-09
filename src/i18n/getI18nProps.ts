@@ -1,10 +1,20 @@
-import { type GetStaticProps, type GetStaticPropsContext } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { importLocaleAsync } from "#/i18n/i18n-util.async";
 import { localePathForPage } from "#/i18n/localePathForPage";
 import { SITE_ORIGIN } from "#/shared/lib/seo";
 import { type TranslationDictionary } from "#/shared/ui/providers/I18nProvider";
+
+type LocaleContext = Pick<
+  GetStaticPropsContext | GetServerSidePropsContext,
+  "locale" | "defaultLocale"
+>;
 
 /**
  * Serializable i18n payload for static pages: locale dictionary loaded at build time
@@ -47,17 +57,57 @@ export function absoluteCanonicalFromStaticContext(
 }
 
 /**
- * Loads translation bundle for the request locale (used by static page props).
+ * Active locale from Next.js static or server props context.
+ */
+export function localeFromContext(context: LocaleContext): Locales {
+  return (context.locale ?? context.defaultLocale ?? "en") as Locales;
+}
+
+/**
+ * Loads translation bundle for the request locale (static and server pages).
  */
 async function loadI18nPageProps(
-  context: Pick<GetStaticPropsContext, "locale">,
+  context: LocaleContext,
 ): Promise<{ i18n: I18nProps }> {
-  const locale = (context.locale as Locales) || "en";
+  const locale = localeFromContext(context);
   const translations = { [locale]: await importLocaleAsync(locale) };
   return {
     i18n: {
       translations,
     },
+  };
+}
+
+/**
+ * `getServerSideProps` helper: provides `i18n.translations` for the active locale.
+ */
+export async function loadI18nServerProps(
+  context: LocaleContext,
+): Promise<{ i18n: I18nProps }> {
+  return loadI18nPageProps(context);
+}
+
+/**
+ * Wraps `getServerSideProps` to merge `i18n.translations` into successful page props.
+ */
+export function withI18nServerSideProps<P extends Record<string, unknown>>(
+  handler: GetServerSideProps<P>,
+): GetServerSideProps<P & { i18n: I18nProps }> {
+  return async (context) => {
+    const result = await handler(context);
+    if ("notFound" in result && result.notFound) {
+      return result;
+    }
+    if ("redirect" in result && result.redirect) {
+      return result;
+    }
+    const i18n = await loadI18nPageProps(context);
+    return {
+      props: {
+        ...(result as { props: P }).props,
+        ...i18n,
+      },
+    };
   };
 }
 

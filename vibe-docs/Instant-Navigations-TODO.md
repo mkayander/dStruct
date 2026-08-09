@@ -31,6 +31,8 @@
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
 - [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
+- [x] SSR i18n preload for playground + profile (`loadI18nServerProps` / `withI18nServerSideProps`)
+- [x] Localized SEO titles/descriptions for home, playground landing, profile
 
 ## Phase 3+ — Playground / full migration
 

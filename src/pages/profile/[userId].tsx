@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,10 +15,10 @@ import { useRouter } from "next/router";
 import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
 import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
+import { withI18nServerSideProps } from "#/i18n/getI18nProps";
 import { useI18nContext } from "#/shared/hooks";
 import {
   absoluteUrlFromPathname,
-  DEFAULT_SITE_DESCRIPTION,
   pathnameFromResolvedUrl,
 } from "#/shared/lib/seo";
 import { SiteSeoHead } from "#/shared/ui/seo/SiteSeoHead";
@@ -133,8 +133,8 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ canonicalUrl }) => {
   return (
     <MainLayout>
       <SiteSeoHead
-        title="Profile | dStruct"
-        description={DEFAULT_SITE_DESCRIPTION}
+        title={`${LL.PROFILE()} | dStruct`}
+        description={LL.SITE_SEO_DESCRIPTION()}
         canonicalUrl={canonicalUrl}
         noindex
       />
@@ -167,18 +167,18 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ canonicalUrl }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
-  ctx,
-) => {
-  const raw = ctx.params?.userId;
-  const profileUserId = typeof raw === "string" ? raw : "";
-  if (!profileUserId) {
-    return { notFound: true };
-  }
-  const pathOnly =
-    pathnameFromResolvedUrl(ctx.resolvedUrl) || `/profile/${profileUserId}`;
-  const canonicalUrl = absoluteUrlFromPathname(pathOnly);
-  return { props: { canonicalUrl } };
-};
+export const getServerSideProps = withI18nServerSideProps<ProfilePageProps>(
+  async (ctx) => {
+    const raw = ctx.params?.userId;
+    const profileUserId = typeof raw === "string" ? raw : "";
+    if (!profileUserId) {
+      return { notFound: true };
+    }
+    const pathOnly =
+      pathnameFromResolvedUrl(ctx.resolvedUrl) || `/profile/${profileUserId}`;
+    const canonicalUrl = absoluteUrlFromPathname(pathOnly);
+    return { props: { canonicalUrl } };
+  },
+);
 
 export default ProfilePage;
