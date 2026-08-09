@@ -1,3 +1,10 @@
+# [1.381.0](https://github.com/mkayander/dStruct/compare/v1.380.0...v1.381.0) (2026-08-09)
+
+
+### Features
+
+* **i18n:** preload SSR translations and localize SEO metadata ([#166](https://github.com/mkayander/dStruct/issues/166)) ([2b6fb72](https://github.com/mkayander/dStruct/commit/2b6fb72613e5a5ee8de3886cbee5bbf7ebc919d2))
+
 # [1.380.0](https://github.com/mkayander/dStruct/compare/v1.379.4...v1.380.0) (2026-08-09)
 
 
