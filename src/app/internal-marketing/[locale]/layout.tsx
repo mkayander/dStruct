@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
+import { localeBareHomePath } from "#/i18n/localeBareHomePath";
 import { authOptions } from "#/pages/api/auth/[...nextauth]";
 import {
   absoluteUrlFromPathname,
@@ -17,10 +18,6 @@ import {
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 
 const homeTitle = "dStruct — visualize LeetCode solutions";
-
-function localePathForSeo(locale: string): string {
-  return locale === "en" ? "/" : `/${locale}`;
-}
 
 export function generateStaticParams(): { locale: Locales }[] {
   return locales.map((locale) => ({ locale }));
@@ -36,7 +33,7 @@ export async function generateMetadata({
     return { title: homeTitle };
   }
   const locale = localeParam as Locales;
-  const canonicalUrl = absoluteUrlFromPathname(localePathForSeo(locale));
+  const canonicalUrl = absoluteUrlFromPathname(localeBareHomePath(locale));
   const metaDescription = truncateMetaDescription(DEFAULT_SITE_DESCRIPTION);
 
   return {

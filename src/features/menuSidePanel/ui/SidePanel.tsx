@@ -28,6 +28,7 @@ import type { Locales } from "#/i18n/i18n-types";
 import { isLocale } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
+import { localeBareHomePath } from "#/i18n/localeBareHomePath";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
 import { useI18nContext, usePagesRouterCompat } from "#/shared/hooks";
 
@@ -41,7 +42,7 @@ const AppLocaleHomeRedirect: React.FC<{ locale: Locales }> = ({ locale }) => {
     if (!isLocale(locale)) {
       return;
     }
-    appRouter.push(locale === "en" ? "/" : `/${locale}`);
+    appRouter.push(localeBareHomePath(locale));
   }, [appRouter, locale]);
 
   return null;
