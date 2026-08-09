@@ -1,12 +1,14 @@
 import { createStringStorage } from "#/shared/browser-storage";
+import {
+  parsePlaygroundPathname,
+  PLAYGROUND_PUBLIC_BASE_PATH,
+} from "#/shared/lib/playgroundRoute";
 
-export const PLAYGROUND_BASE_PATH = "/playground";
+export const PLAYGROUND_BASE_PATH = PLAYGROUND_PUBLIC_BASE_PATH;
 
 const lastPlaygroundPathStorage = createStringStorage({
   key: "lastPlaygroundPath",
 });
-
-const getProjectSlug = (path: string): string | undefined => path.split("/")[2];
 
 /**
  * Returns the last playground path from localStorage, or null on SSR / when not set.
@@ -27,13 +29,8 @@ export const removeLastPlaygroundPath = (): void => {
  * Used to decide if we have a "last project" to show (e.g. default view).
  */
 export const isValidLastPlaygroundPath = (path: string | null): boolean => {
-  if (!path?.startsWith(PLAYGROUND_BASE_PATH)) {
-    return false;
-  }
-
-  const projectSlug = getProjectSlug(path);
-
-  return Boolean(projectSlug);
+  const parsed = path ? parsePlaygroundPathname(path) : null;
+  return Boolean(parsed?.slug[0]);
 };
 
 /**
@@ -44,6 +41,7 @@ export const getRestorablePlaygroundPath = (
   path: string | null,
 ): string | null => {
   if (!isValidLastPlaygroundPath(path)) return null;
-  const projectSlug = getProjectSlug(path!);
+  const parsed = parsePlaygroundPathname(path!);
+  const projectSlug = parsed?.slug[0];
   return projectSlug?.startsWith("[[") ? null : path;
 };

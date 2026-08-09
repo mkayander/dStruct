@@ -17,6 +17,16 @@ vi.mock("next/compat/router", () => ({
   }),
 }));
 
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/playground",
+  useParams: () => ({}),
+  useRouter: () => ({
+    push: mockPush,
+    replace: mockReplace,
+  }),
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 vi.mock("next/router", () => ({
   useRouter: () => ({
     asPath: "/playground",

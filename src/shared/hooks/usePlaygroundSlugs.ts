@@ -1,98 +1,70 @@
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { projectSlice } from "#/features/project/model/projectSlice";
-import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
+import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
+import {
+  buildPlaygroundPath,
+  parsePlaygroundPathname,
+} from "#/shared/lib/playgroundRoute";
 import {
   getLastPlaygroundPath,
   getRestorablePlaygroundPath,
-  PLAYGROUND_BASE_PATH,
   removeLastPlaygroundPath,
   setLastPlaygroundPath,
 } from "#/shared/local-storage/playgroundPath";
 import { useAppDispatch } from "#/store/hooks";
 
-type PlaygroundSlugNavigateOptions = {
-  /** @default false */
-  replace?: boolean;
-  /**
-   * Remove `view` from the next URL. Use when changing project or landing on
-   * `/playground` so `?view=browse` from the picker is not carried over; omit
-   * for case/solution path changes so `?view=code` / `?view=results` stay put.
-   */
-  omitView?: boolean;
-};
-
 export const usePlaygroundSlugs = () => {
   const dispatch = useAppDispatch();
-  const router = usePagesRouterCompat();
-
-  const getCurrentQuery = useCallback(
-    (omitView?: boolean) => {
-      if (!router) {
-        return {};
-      }
-      const query = { ...router.query };
-      delete query.slug;
-      if (omitView) {
-        delete query.view;
-      }
-
-      return query;
-    },
-    [router],
-  );
-
-  const navigateTo = useCallback(
-    (pathname: string, options?: PlaygroundSlugNavigateOptions) => {
-      if (!router) {
-        return;
-      }
-      const replace = options?.replace ?? false;
-      router[replace ? "replace" : "push"](
-        {
-          pathname,
-          query: getCurrentQuery(options?.omitView),
-        },
-        undefined,
-        { shallow: true },
-      );
-    },
-    [getCurrentQuery, router],
-  );
+  const route = usePlaygroundRoute();
 
   useEffect(() => {
-    if (!router) {
+    if (!route) {
       return;
     }
-    const currentPath = router.asPath.split("?")[0];
-    if (!currentPath?.startsWith(PLAYGROUND_BASE_PATH)) return;
+    const parsed = parsePlaygroundPathname(route.pathname);
+    if (!parsed) {
+      return;
+    }
 
-    const projectSlug = currentPath.split("/")[2];
-    if (!projectSlug) return;
+    const projectSlug = parsed.slug[0];
+    if (!projectSlug) {
+      return;
+    }
 
-    setLastPlaygroundPath(currentPath);
-  }, [router, router?.asPath]);
+    setLastPlaygroundPath(route.pathname);
+  }, [route]);
 
   return useMemo(() => {
-    const [projectSlug, caseSlug, solutionSlug] = Array.isArray(
-      router?.query.slug,
-    )
-      ? router.query.slug
-      : [];
+    if (!route) {
+      return {
+        projectSlug: undefined,
+        caseSlug: undefined,
+        solutionSlug: undefined,
+        setProject: () => undefined,
+        setCase: () => undefined,
+        setSolution: () => undefined,
+        clearSlugs: () => undefined,
+      } as const;
+    }
+
+    const [projectSlug, caseSlug, solutionSlug] = route.slug;
+    const { basePath, navigateTo } = route;
 
     const setProject = (slug?: string, isInitial?: boolean) => {
       dispatch(projectSlice.actions.loadStart());
       if (!slug) {
-        return navigateTo(PLAYGROUND_BASE_PATH, {
+        return navigateTo(basePath, {
           replace: true,
           omitView: true,
         });
       }
 
       const lastPath = getLastPlaygroundPath();
-      if (lastPath && !lastPath.startsWith(PLAYGROUND_BASE_PATH)) {
+      const lastParsed = lastPath ? parsePlaygroundPathname(lastPath) : null;
+      if (lastPath && !lastParsed) {
         removeLastPlaygroundPath();
       }
       const pathToRestore = isInitial
@@ -103,7 +75,7 @@ export const usePlaygroundSlugs = () => {
         return navigateTo(pathToRestore, { replace: true, omitView: true });
       }
 
-      return navigateTo(`${PLAYGROUND_BASE_PATH}/${slug}`, {
+      return navigateTo(buildPlaygroundPath(basePath, [slug]), {
         replace: true,
         omitView: true,
       });
@@ -117,7 +89,7 @@ export const usePlaygroundSlugs = () => {
       if (slug === caseSlug) return;
 
       return navigateTo(
-        `${PLAYGROUND_BASE_PATH}/${projectSlug}/${slug}/${solutionSlug ?? ""}`,
+        buildPlaygroundPath(basePath, [projectSlug, slug, solutionSlug ?? ""]),
         { replace: !caseSlug },
       );
     };
@@ -129,14 +101,14 @@ export const usePlaygroundSlugs = () => {
       if (slug === solutionSlug) return;
 
       return navigateTo(
-        `${PLAYGROUND_BASE_PATH}/${projectSlug}/${caseSlug}/${slug}`,
+        buildPlaygroundPath(basePath, [projectSlug, caseSlug, slug]),
         { replace: !solutionSlug },
       );
     };
 
     const clearSlugs = () => {
       removeLastPlaygroundPath();
-      return navigateTo(PLAYGROUND_BASE_PATH, { omitView: true });
+      return navigateTo(basePath, { omitView: true });
     };
 
     return {
@@ -148,6 +120,5 @@ export const usePlaygroundSlugs = () => {
       setSolution,
       clearSlugs,
     } as const;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router?.query.slug]);
+  }, [dispatch, route]);
 };
