@@ -1,3 +1,10 @@
+# [1.380.0](https://github.com/mkayander/dStruct/compare/v1.379.4...v1.380.0) (2026-08-09)
+
+
+### Features
+
+* **app:** Instant Nav pilot phase 2 — metadata, privacy/daily, cleanup ([#163](https://github.com/mkayander/dStruct/issues/163)) ([01a2392](https://github.com/mkayander/dStruct/commit/01a2392ffff27bb8fadb80fd3a39ddc2b8341013))
+
 ## [1.379.4](https://github.com/mkayander/dStruct/compare/v1.379.3...v1.379.4) (2026-08-03)
 
 
