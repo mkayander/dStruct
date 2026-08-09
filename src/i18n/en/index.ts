@@ -75,6 +75,9 @@ const en: BaseTranslation = {
   PENDING_CHANGES: "Pending changes",
   PLAYBACK_INTERVAL: "Playback interval",
   PLAYGROUND: "Playground",
+  PLAYGROUND_PROJECT_SEO_DESCRIPTION:
+    "Practice {title:string} in dStruct — visualize solutions and run code in the browser.",
+  PLAYGROUND_SEO_TITLE: "Playground | dStruct",
   PLEASE_ENTER_YOUR_LEETCODE_ACCOUNT_NAME: "Please enter your LeetCode account name:",
   PRIVACY_CCPA_BODY:
     "If you are a California resident, you may have additional rights under the CCPA/CPRA, including the right to know what personal information is collected and to opt out of certain sharing. dStruct does not sell personal information. Analytics run only with your consent. Contact us using the email below to exercise your rights.",
@@ -197,6 +200,9 @@ const en: BaseTranslation = {
   SORT_CATEGORY: "Category",
   SORT_CATEGORY_ASC: "Category (A-Z)",
   SORT_CATEGORY_DESC: "Category (Z-A)",
+  SITE_SEO_DESCRIPTION:
+    "dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor.",
+  SITE_SEO_TITLE: "dStruct — visualize LeetCode solutions",
   REPLAY: "Replay",
   REPLAY_PREVIOUS_CODE_RESULT_VISUALIZATION: "Replay previous code result visualization",
   RESET: "Reset",

@@ -10,12 +10,13 @@ import { PlaygroundViewProvider } from "#/features/playground/context/Playground
 import { MobilePlayground } from "#/features/playground/ui/MobilePlayground";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
+import { createTranslationFunctions } from "#/i18n/createTranslationFunctions";
+import { loadI18nServerProps, localeFromContext } from "#/i18n/getI18nProps";
 import { db } from "#/server/db/client";
 import { useAppConfig, useHasMounted } from "#/shared/hooks";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import {
   absoluteUrlFromPathname,
-  DEFAULT_SITE_DESCRIPTION,
   pathnameFromResolvedUrl,
 } from "#/shared/lib/seo";
 import {
@@ -113,7 +114,8 @@ const PlaygroundPage: NextPage<PlaygroundPageProps> = ({
 
 export const getServerSideProps: GetServerSideProps<
   PlaygroundPageProps
-> = async ({ req, res, params, resolvedUrl }) => {
+> = async (context) => {
+  const { req, res, params, resolvedUrl } = context;
   const ssrDeviceType = resolveSsrDeviceType(req.headers);
   setDeviceHintResponseHeaders(res);
 
@@ -122,9 +124,17 @@ export const getServerSideProps: GetServerSideProps<
   const pathOnly = pathnameFromResolvedUrl(resolvedUrl) || "/playground";
   const canonicalUrl = absoluteUrlFromPathname(pathOnly);
 
-  let pageTitle = "Playground | dStruct";
+  const { i18n } = await loadI18nServerProps(context);
+  const locale = localeFromContext(context);
+  const translation = i18n.translations[locale];
+  const LL = translation
+    ? createTranslationFunctions(locale, translation)
+    : undefined;
+
+  let pageTitle = LL?.PLAYGROUND_SEO_TITLE() ?? "Playground | dStruct";
   let pageDescription =
-    "Write code in the dStruct playground and visualize data structures for LeetCode-style problems.";
+    LL?.SITE_SEO_DESCRIPTION() ??
+    "dStruct is a web app that helps you understand LeetCode problems. It allows you to visualize your solutions that you write in a built-in code editor.";
 
   if (slugStr) {
     const project = await db.playgroundProject.findUnique({
@@ -135,10 +145,11 @@ export const getServerSideProps: GetServerSideProps<
       pageTitle = `${project.title} | dStruct`;
       pageDescription = project.description?.trim()
         ? `${project.title}: ${project.description.trim()}`
-        : `Practice ${project.title} in dStruct — visualize solutions and run code in the browser.`;
+        : (LL?.PLAYGROUND_PROJECT_SEO_DESCRIPTION({
+            title: project.title,
+          }) ??
+          `Practice ${project.title} in dStruct — visualize solutions and run code in the browser.`);
     }
-  } else {
-    pageDescription = DEFAULT_SITE_DESCRIPTION;
   }
 
   return {
@@ -147,6 +158,7 @@ export const getServerSideProps: GetServerSideProps<
       canonicalUrl,
       pageTitle,
       pageDescription,
+      i18n,
     },
   };
 };

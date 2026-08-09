@@ -3,11 +3,8 @@ import type { Metadata } from "next";
 import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
-import { DEFAULT_SITE_DESCRIPTION } from "#/shared/lib/seo";
 
-import { internalMarketingPilotMetadata } from "#/app/internal-marketing/internalMarketingPilotMetadata";
-
-const homeTitle = "dStruct — visualize LeetCode solutions";
+import { pilotPageMetadataFromTranslation } from "#/app/internal-marketing/pilotPageMetadata";
 
 export async function generateMetadata({
   params,
@@ -16,16 +13,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
   if (!locales.includes(localeParam as Locales)) {
-    return { title: homeTitle, robots: { index: false, follow: false } };
+    return pilotPageMetadataFromTranslation("en", "/", (translation) => ({
+      title: translation.SITE_SEO_TITLE,
+      description: translation.SITE_SEO_DESCRIPTION,
+    }));
   }
   const locale = localeParam as Locales;
 
-  return internalMarketingPilotMetadata({
-    locale,
-    pagePath: "/",
-    title: homeTitle,
-    description: DEFAULT_SITE_DESCRIPTION,
-  });
+  return pilotPageMetadataFromTranslation(locale, "/", (translation) => ({
+    title: translation.SITE_SEO_TITLE,
+    description: translation.SITE_SEO_DESCRIPTION,
+  }));
 }
 
 /**
