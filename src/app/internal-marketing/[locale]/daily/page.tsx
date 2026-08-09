@@ -3,9 +3,8 @@ import type { Metadata } from "next";
 import { DailyPageView } from "#/features/homePage/ui/DailyPageView";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
-import { loadLocaleTranslationFunctions } from "#/i18n/loadLocaleTranslationFunctions";
 
-import { internalMarketingPilotMetadata } from "#/app/internal-marketing/internalMarketingPilotMetadata";
+import { pilotPageMetadataFromTranslation } from "#/app/internal-marketing/pilotPageMetadata";
 
 export async function generateMetadata({
   params,
@@ -17,14 +16,11 @@ export async function generateMetadata({
     return { robots: { index: false, follow: false } };
   }
   const locale = localeParam as Locales;
-  const LL = await loadLocaleTranslationFunctions(locale);
 
-  return internalMarketingPilotMetadata({
-    locale,
-    pagePath: "/daily",
-    title: `${LL.HOME_DAILY_SECTION_TITLE()} — dStruct`,
-    description: `${LL.HOME_DAILY_SECTION_TITLE()}. ${LL.HOME_DAILY_SECTION_LEAD()}`,
-  });
+  return pilotPageMetadataFromTranslation(locale, "/daily", (translation) => ({
+    title: `${translation.HOME_DAILY_SECTION_TITLE} — dStruct`,
+    description: `${translation.HOME_DAILY_SECTION_TITLE}. ${translation.HOME_DAILY_SECTION_LEAD}`,
+  }));
 }
 
 /** Instant Nav pilot: daily problem (noindex; public `/daily` remains canonical). */

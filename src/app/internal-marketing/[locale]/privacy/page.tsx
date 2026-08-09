@@ -3,9 +3,8 @@ import type { Metadata } from "next";
 import { PrivacyPageView } from "#/features/privacy/ui/PrivacyPageView";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
-import { loadLocaleTranslationFunctions } from "#/i18n/loadLocaleTranslationFunctions";
 
-import { internalMarketingPilotMetadata } from "#/app/internal-marketing/internalMarketingPilotMetadata";
+import { pilotPageMetadataFromTranslation } from "#/app/internal-marketing/pilotPageMetadata";
 
 export async function generateMetadata({
   params,
@@ -17,14 +16,15 @@ export async function generateMetadata({
     return { robots: { index: false, follow: false } };
   }
   const locale = localeParam as Locales;
-  const LL = await loadLocaleTranslationFunctions(locale);
 
-  return internalMarketingPilotMetadata({
+  return pilotPageMetadataFromTranslation(
     locale,
-    pagePath: "/privacy",
-    title: `${LL.PRIVACY_PAGE_TITLE()} — dStruct`,
-    description: LL.PRIVACY_INTRO(),
-  });
+    "/privacy",
+    (translation) => ({
+      title: `${translation.PRIVACY_PAGE_TITLE} — dStruct`,
+      description: translation.PRIVACY_INTRO,
+    }),
+  );
 }
 
 /** Instant Nav pilot: privacy policy (noindex; public `/privacy` remains canonical). */

@@ -6,37 +6,16 @@ import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
 import { authOptions } from "#/pages/api/auth/[...nextauth]";
-import {
-  DEFAULT_SITE_DESCRIPTION,
-  truncateMetaDescription,
-} from "#/shared/lib/seo";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
-import { internalMarketingPilotMetadata } from "#/app/internal-marketing/internalMarketingPilotMetadata";
 
-const homeTitle = "dStruct — visualize LeetCode solutions";
+/** All pilot routes stay noindex even when a child page omits metadata. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
-/** Pilot routes are noindex; skip build-time SSG (daily page SSR can hang on data hooks). */
+/** Pilot routes are dynamic (daily data hooks + session); skip build-time SSG. */
 export const dynamic = "force-dynamic";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale: localeParam } = await params;
-  if (!locales.includes(localeParam as Locales)) {
-    return { title: homeTitle, robots: { index: false, follow: false } };
-  }
-  const locale = localeParam as Locales;
-
-  return internalMarketingPilotMetadata({
-    locale,
-    pagePath: "/",
-    title: homeTitle,
-    description: truncateMetaDescription(DEFAULT_SITE_DESCRIPTION),
-  });
-}
 
 export default async function InternalMarketingLocaleLayout({
   children,

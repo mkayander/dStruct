@@ -23,7 +23,7 @@
 - [x] Public `/` / `/{locale}` stay on Pages `pages/index` (Pages `i18n` cannot rewrite bare locales into App routes)
 - [x] `proxy.ts`: `/api/config` + locale header for direct `/internal-marketing/*`
 - [x] App layout metadata (viewport, icons, Material Icons)
-- [x] `robots: noindex` on pilot routes (`internalMarketingPilotMetadata`)
+- [x] `robots: noindex` on pilot routes (`internalMarketingPilotMetadata` + layout default)
 - [x] Extend pilot to `/internal-marketing/[locale]/privacy` and `/daily`
 - [ ] Public cutover of home to App (blocked on removing `next.config` `i18n`)
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
