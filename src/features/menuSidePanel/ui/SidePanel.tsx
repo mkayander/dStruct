@@ -13,7 +13,6 @@ import {
   ListSubheader,
   MenuItem,
   Select,
-  type SelectChangeEvent,
   SwipeableDrawer,
   Typography,
   useTheme,
@@ -25,10 +24,10 @@ import React, { useEffect, useState } from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
 import type { Locales } from "#/i18n/i18n-types";
-import { isLocale } from "#/i18n/i18n-util";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
 import { localeBareHomePath } from "#/i18n/localeBareHomePath";
+import { parseSelectLocaleValue } from "#/i18n/parseSelectLocaleValue";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
 import { useI18nContext, usePagesRouterCompat } from "#/shared/hooks";
 
@@ -39,9 +38,6 @@ const AppLocaleHomeRedirect: React.FC<{ locale: Locales }> = ({ locale }) => {
   const appRouter = useAppRouter();
 
   useEffect(() => {
-    if (!isLocale(locale)) {
-      return;
-    }
     appRouter.push(localeBareHomePath(locale));
   }, [appRouter, locale]);
 
@@ -85,8 +81,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
     setIsOpen(false);
   };
 
-  const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
-    const newLocale = event.target.value as Locales;
+  const handleChangeLocale = async (newLocale: Locales) => {
     const currentLocale = pagesRouter?.locale ?? activeLocale;
     if (newLocale === currentLocale) {
       return;
@@ -100,9 +95,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
       return;
     }
     // App Router marketing pilot: defer navigation to child (no Pages `useRouter`).
-    if (!isLocale(newLocale)) {
-      return;
-    }
     setAppLocaleRedirect(newLocale);
   };
 
@@ -166,11 +158,18 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
                   value={
                     (pagesRouter?.locale as Locales) ?? activeLocale ?? "en"
                   }
-                  onChange={handleChangeLocale}
+                  onChange={(event) => {
+                    const newLocale = parseSelectLocaleValue(
+                      String(event.target.value),
+                    );
+                    if (newLocale) {
+                      void handleChangeLocale(newLocale);
+                    }
+                  }}
                 >
-                  {localesForLanguagePicker.map((locale) => (
-                    <MenuItem key={locale} value={locale}>
-                      <Typography>{localeLabels[locale]}</Typography>
+                  {localesForLanguagePicker.map((localeOption) => (
+                    <MenuItem key={localeOption} value={localeOption}>
+                      <Typography>{localeLabels[localeOption]}</Typography>
                     </MenuItem>
                   ))}
                 </Select>
