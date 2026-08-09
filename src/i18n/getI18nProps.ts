@@ -2,6 +2,7 @@ import { type GetStaticProps, type GetStaticPropsContext } from "next";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { importLocaleAsync } from "#/i18n/i18n-util.async";
+import { localePathForPage } from "#/i18n/localePathForPage";
 import { SITE_ORIGIN } from "#/shared/lib/seo";
 import { type TranslationDictionary } from "#/shared/ui/providers/I18nProvider";
 
@@ -27,13 +28,9 @@ export function localePathForCanonical(
   context: Pick<GetStaticPropsContext, "locale" | "defaultLocale">,
   pagePath: string,
 ): string {
-  const normalized = pagePath.startsWith("/") ? pagePath : `/${pagePath}`;
-  const locale = context.locale ?? context.defaultLocale ?? "en";
-  const defaultLocale = context.defaultLocale ?? "en";
-  if (locale === defaultLocale) {
-    return normalized || "/";
-  }
-  return `/${locale}${normalized === "/" ? "" : normalized}`;
+  const locale = (context.locale ?? context.defaultLocale ?? "en") as Locales;
+  const defaultLocale = (context.defaultLocale ?? "en") as Locales;
+  return localePathForPage(locale, pagePath, defaultLocale);
 }
 
 /**

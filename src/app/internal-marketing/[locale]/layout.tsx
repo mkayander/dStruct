@@ -5,68 +5,17 @@ import { notFound } from "next/navigation";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
-import { localeBareHomePath } from "#/i18n/localeBareHomePath";
 import { authOptions } from "#/pages/api/auth/[...nextauth]";
-import {
-  absoluteUrlFromPathname,
-  DEFAULT_OG_IMAGE_URL,
-  DEFAULT_SITE_DESCRIPTION,
-  SITE_HOSTNAME,
-  truncateMetaDescription,
-} from "#/shared/lib/seo";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 
-const homeTitle = "dStruct — visualize LeetCode solutions";
+/** All pilot routes stay noindex even when a child page omits metadata. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
-export function generateStaticParams(): { locale: Locales }[] {
-  return locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale: localeParam } = await params;
-  if (!locales.includes(localeParam as Locales)) {
-    return { title: homeTitle };
-  }
-  const locale = localeParam as Locales;
-  const canonicalUrl = absoluteUrlFromPathname(localeBareHomePath(locale));
-  const metaDescription = truncateMetaDescription(DEFAULT_SITE_DESCRIPTION);
-
-  return {
-    title: homeTitle,
-    description: metaDescription,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      siteName: "dStruct",
-      title: homeTitle,
-      type: "website",
-      url: canonicalUrl,
-      description: metaDescription,
-      images: [
-        {
-          url: DEFAULT_OG_IMAGE_URL,
-          width: 1200,
-          height: 630,
-          alt: "dStruct — LeetCode solution visualizer",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: homeTitle,
-      description: metaDescription,
-      images: [DEFAULT_OG_IMAGE_URL],
-    },
-    other: {
-      "twitter:domain": SITE_HOSTNAME,
-      "twitter:url": canonicalUrl,
-    },
-  };
-}
+/** Pilot routes are dynamic (daily data hooks + session); skip build-time SSG. */
+export const dynamic = "force-dynamic";
 
 export default async function InternalMarketingLocaleLayout({
   children,
