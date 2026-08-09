@@ -10,8 +10,8 @@
 ## Phase 1 — 16.3.x on Vercel
 
 - [x] Tried `next@16.3.0` — local OK; Vercel preview `/api/*` → `/en/404` (2026-08, pre-adapter fix)
-- [x] **Pinned to `next@16.2.12`** until pilot + API routing verified on previews
-- [x] Re-try `next@16.3.0` on branch `cursor/instant-nav-phase1-8f0a` (await Vercel preview smoke)
+- [x] Re-tried on PR #165 preview (2026-08-09) — **same regression** (`x-matched-path: /en/404`)
+- [x] **Stay on `next@16.2.12`** until Vercel + Pages `i18n` API routing is fixed
 - [ ] Preview smoke green on 16.3.x before enabling Instant Nav flags
 
 ## Phase 2 — App Router pilot
