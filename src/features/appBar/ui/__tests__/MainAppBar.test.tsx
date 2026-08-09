@@ -25,6 +25,7 @@ vi.mock("next/compat/router", () => ({
 
 vi.mock("next/navigation", () => ({
   usePathname: vi.fn(() => "/playground"),
+  useRouter: vi.fn(() => ({ push: vi.fn() })),
 }));
 
 vi.mock("next/router", () => ({
