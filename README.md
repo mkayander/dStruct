@@ -1,156 +1,148 @@
-# dStruct - LeetCode Problem Visualization Web App
+# dStruct
 
-#### [dstruct.pro](https://dstruct.pro/)
+**See algorithms run. Understand data structures.**
+
+[dstruct.pro](https://dstruct.pro) is an interactive playground for LeetCode-style problems. Write JavaScript or Python, run your code in the browser, and watch data structures update step by step — trees, graphs, linked lists, and more.
 
 <p align="center">
   <a href="https://dstruct.pro">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=dstruct&style=for-the-badge" alt="Deployed on Vercel" />
   </a>
   <a href="/LICENSE">
-    <img src="https://img.shields.io/badge/license-AGPL-blue?style=for-the-badge" alt="AGPL-3.0 License" />
+    <img src="https://img.shields.io/badge/license-AGPL--3.0-blue?style=for-the-badge" alt="AGPL-3.0 License" />
   </a>
 </p>
-
-## Overview
-
-dStruct is a web app designed to assist users in understanding and visualizing LeetCode problems. It provides a built-in
-code editor where users can write and visualize their solutions.
 
 <p align="center">
-  <a href="https://dstruct.pro/playground">
-    <img src="https://i.imgur.com/Q1FRwaK.png" alt="dStruct Web App" />
+  <a href="https://dstruct.pro/playground/tree-traversal">
+    <img src="docs/images/playground-screenshot.png" alt="dStruct playground — code editor, tree visualization, and step-by-step playback" width="900" />
   </a>
 </p>
+
+<p align="center">
+  <a href="https://dstruct.pro/playground"><strong>Try the playground</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://dstruct.pro/daily"><strong>Daily problem</strong></a>
+</p>
+
+---
+
+## Why dStruct?
+
+Most coding platforms show you pass/fail. dStruct shows you **what your code is doing** to the underlying data structure.
+
+- Pick a problem and test case
+- Write a solution in the built-in editor
+- Run it and scrub through each step with playback controls
+- Inspect output and the call stack as execution unfolds
+
+It is built for learners who want intuition, not just green checkmarks.
 
 ## Features
 
-- **Integrated Code Editor**: Write and visualize LeetCode solutions within the app using the built-in code editor
-  powered by Monaco Editor.
-- **Graphical Visualization**: Gain insights into data structures and algorithms through graphical representations,
-  making it easier to understand and debug code.
-- **Authentication with NextAuth**: Secure user authentication with NextAuth for a personalized experience.
-- **Prisma ORM for Database Operations**: Utilizes Prisma ORM for efficient database operations, enhancing data handling
-  and storage capabilities.
-- **GraphQL Integration**: Incorporates GraphQL for efficient query execution and improved API interactions.
-- **State Management with Redux Toolkit**: Manages application state seamlessly with the help of Redux Toolkit for
-  predictable state changes.
-- **Internationalization (i18n) Support**: Implements Typesafe i18n for easy translation and localization.
-- **Interactive UI with Material-UI and Emotion**: Enhances user interface with the help of Material-UI components and
-  Emotion for styling.
-- **Code Quality and Testing**: Maintains code quality through linting with ESLint, Prettier, and testing with Jest.
+| | |
+|---|---|
+| **Interactive visualizations** | 2D and 3D views of trees, graphs, arrays, and other structures that update as your code runs |
+| **In-browser code execution** | JavaScript and Python (via Pyodide) — no local interpreter setup required |
+| **Monaco editor** | Syntax highlighting, familiar editing experience |
+| **Step-by-step playback** | Pause, step forward/back, and adjust speed to follow the algorithm |
+| **Curated problems** | Public playground projects with multiple test cases |
+| **Daily challenge** | A rotating problem to practice on |
+| **Sign in & save progress** | Optional accounts via NextAuth (GitHub, Google) |
+| **Multilingual UI** | English plus additional locales via typesafe-i18n |
 
-## Tech Stack
+## Quick start
 
-- **Frontend**:
-  - React
-  - Next.js
-  - Redux Toolkit
-  - Material-UI
-  - Emotion
-  - Monaco Editor
-  - Apollo Client
+### Prerequisites
 
-- **Backend**:
-  - Node.js
-  - Express
-  - Prisma
-  - GraphQL
-  - NextAuth
+- **Node.js 24** (see `.nvmrc`)
+- **pnpm** (`corepack enable && corepack prepare pnpm@latest --activate`)
+- **PostgreSQL** — local dev uses `postgresql://dstruct:dstruct@localhost:5432/dstruct`
 
-- **Database**:
-  - Prisma ORM
-  - SQLite (or your preferred database)
+### 1. Clone and install
 
-- **Other Tools**:
-  - Typesafe i18n
-  - Axios
-  - Husky (Git Hooks)
-  - Semantic Release
-  - Jest Testing Framework
+```bash
+git clone https://github.com/mkayander/dStruct.git
+cd dStruct
+cp .env.example .env   # edit if needed; placeholders work for basic local dev
+pnpm install
+```
 
-## 3D Visualization
+### 2. Set up the database
 
-This project has a "blender" folder which contains the 3D models used for visualization. The 3D models are created using
-Blender and exported as .glb files.
-To convert a `.glb` file to a React component, use the `gltffsx` package, for example:
+If PostgreSQL is running locally:
+
+```bash
+pnpm prisma:push
+pnpm loadMainDump    # seeds public playground problems
+```
+
+### 3. Start the dev server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000). The playground is at `/playground`.
+
+For more detail (Cloud Agent setup, env vars, fonts, dump sync), see **[AGENTS.md](AGENTS.md)**.
+
+## Environment variables
+
+Copy [`.env.example`](.env.example) to `.env`. For local development you mainly need:
+
+| Variable | Purpose |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `PRISMA_FIELD_ENCRYPTION_KEY` | Any non-empty string for local dev |
+| `NEXTAUTH_SECRET` | Session secret (`openssl rand -base64 32`) |
+| `NEXTAUTH_URL` | App URL, e.g. `http://localhost:3000` |
+
+OAuth and AWS keys can stay as placeholders unless you are testing those flows. New variables must be added to [`src/env/schema.mjs`](src/env/schema.mjs).
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `pnpm dev` | Development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Run production server |
+| `pnpm test` | Vitest + Python harness tests |
+| `pnpm lint` | ESLint + TypeScript check |
+| `pnpm prisma:push` | Apply Prisma schema to the database |
+| `pnpm prisma:generate` | Regenerate Prisma client |
+| `pnpm loadMainDump` | Load public problems from `public-dumps/main.json` |
+| `pnpm sync-main-dump` | Export public problems from DB to the dump file |
+
+## Tech stack
+
+| Layer | Technologies |
+|---|---|
+| **App** | [Next.js](https://nextjs.org/) (Pages Router), React 19, TypeScript |
+| **UI** | MUI v7, Emotion |
+| **State** | Redux Toolkit (UI), TanStack Query via tRPC (server data) |
+| **API** | tRPC (primary), GraphQL + Apollo where used |
+| **Database** | PostgreSQL, Prisma |
+| **Auth** | NextAuth.js |
+| **Editor & runtime** | Monaco, Pyodide (Python in the browser) |
+| **3D** | Three.js, React Three Fiber |
+| **i18n** | typesafe-i18n |
+| **Tests** | Vitest, Testing Library |
+
+Architecture and conventions for contributors live in **[`.cursorrules`](.cursorrules)** and **[`.cursor/rules/`](.cursor/rules/)**.
+
+## 3D models
+
+3D assets live under [`blender/`](blender/) and are exported as `.glb` files. To generate a React component from a model:
 
 ```bash
 pnpm exec gltfjsx blender/logotype/binary_tree.glb -o src/3d-models/BinaryTree.tsx -TtD
 ```
 
-## Getting Started
+## Contributing
 
-1. Clone the repository:
-
-```
-git clone https://github.com/mkayander/dStruct.git
-```
-
-2. Install dependencies using pnpm:
-
-```
-pnpm install
-```
-
-3. Run the development server:
-
-```
-pnpm run dev
-```
-
-Visit http://localhost:3000 to access the application.
-
-## Environment Variables
-
-Create a .env file in the root directory based on the .env.example file. Fill in the necessary values for the following
-variables:
-
-```
-NODE_ENV=development
-
-# Prisma
-# DEV
-DATABASE_URL='mysql://your_dev_database_url'
-DIRECT_DATABASE_URL='mysql://your_dev_direct_database_url'
-
-# PROD
-#DATABASE_URL='mysql://your_prod_database_url'
-# DIRECT_DATABASE_URL='mysql://your_prod_direct_database_url'
-
-PRISMA_FIELD_ENCRYPTION_KEY=k1.aesgcm256.your_encryption_key
-
-# Next Auth
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
-
-# AWS
-ACCESS_KEY=your_aws_access_key
-SECRET_KEY=your_aws_secret_key
-BUCKET_NAME=your_s3_bucket_name
-NEXT_PUBLIC_BUCKET_BASE_URL=your_s3_bucket_base_url
-
-# Verifiable Credentials (VC) REST API
-KV_REST_API_READ_ONLY_TOKEN=your_kv_rest_api_read_only_token
-KV_REST_API_TOKEN=your_kv_rest_api_token
-KV_REST_API_URL=your_kv_rest_api_url
-KV_URL=your_kv_url
-```
-
-When adding additional env variables, update the schema in /env/schema.mjs accordingly.
-
-## Scripts
-
-- pnpm build: Build the Next.js application.
-- pnpm start: Start the production server.
-- pnpm test: Run Jest tests.
-- pnpm lint: Lint the code using ESLint.
-- pnpm prisma:generate: Generate Prisma client.
-- pnpm generate-graphql: Generate GraphQL types.
-
-## Contribution Guidelines
-
-Contributions to the project are welcome. Please follow the guidelines outlined in the CONTRIBUTING.md file.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md) before opening a pull request.
 
 ## License
 
-This project is licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0).
+[GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0) — Copyright (c) 2022-present Max Kayander.
