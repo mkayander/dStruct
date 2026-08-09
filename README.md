@@ -40,16 +40,16 @@ It is built for learners who want intuition, not just green checkmarks.
 
 ## Features
 
-| | |
-|---|---|
+|                                |                                                                                              |
+| ------------------------------ | -------------------------------------------------------------------------------------------- |
 | **Interactive visualizations** | 2D and 3D views of trees, graphs, arrays, and other structures that update as your code runs |
-| **In-browser code execution** | JavaScript and Python (via Pyodide) — no local interpreter setup required |
-| **Monaco editor** | Syntax highlighting, familiar editing experience |
-| **Step-by-step playback** | Pause, step forward/back, and adjust speed to follow the algorithm |
-| **Curated problems** | Public playground projects with multiple test cases |
-| **Daily challenge** | A rotating problem to practice on |
-| **Sign in & save progress** | Optional accounts via NextAuth (GitHub, Google) |
-| **Multilingual UI** | English plus additional locales via typesafe-i18n |
+| **In-browser code execution**  | JavaScript and Python (via Pyodide) — no local interpreter setup required                    |
+| **Monaco editor**              | Syntax highlighting, familiar editing experience                                             |
+| **Step-by-step playback**      | Pause, step forward/back, and adjust speed to follow the algorithm                           |
+| **Curated problems**           | Public playground projects with multiple test cases                                          |
+| **Daily challenge**            | A rotating problem to practice on                                                            |
+| **Sign in & save progress**    | Optional accounts via NextAuth (GitHub, Google)                                              |
+| **Multilingual UI**            | English plus additional locales via typesafe-i18n                                            |
 
 ## Quick start
 
@@ -105,43 +105,43 @@ For more detail (Cloud Agent setup, env vars, fonts, dump sync), see **[AGENTS.m
 
 Copy [`.env.example`](.env.example) to `.env`. For local development you mainly need:
 
-| Variable | Purpose |
-|---|---|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `PRISMA_FIELD_ENCRYPTION_KEY` | Any non-empty string for local dev |
-| `NEXTAUTH_SECRET` | Session secret (`openssl rand -base64 32`) |
-| `NEXTAUTH_URL` | App URL, e.g. `http://localhost:3000` |
+| Variable                      | Purpose                                    |
+| ----------------------------- | ------------------------------------------ |
+| `DATABASE_URL`                | PostgreSQL connection string               |
+| `PRISMA_FIELD_ENCRYPTION_KEY` | Any non-empty string for local dev         |
+| `NEXTAUTH_SECRET`             | Session secret (`openssl rand -base64 32`) |
+| `NEXTAUTH_URL`                | App URL, e.g. `http://localhost:3000`      |
 
 OAuth and AWS keys can stay as placeholders unless you are testing those flows. New variables must be added to [`src/env/schema.mjs`](src/env/schema.mjs).
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Development server |
-| `pnpm build` | Production build |
-| `pnpm start` | Run production server |
-| `pnpm test` | Vitest + Python harness tests |
-| `pnpm lint` | ESLint + TypeScript check |
-| `pnpm prisma:push` | Apply Prisma schema to the database |
-| `pnpm prisma:generate` | Regenerate Prisma client |
-| `pnpm loadMainDump` | Load public problems from `public-dumps/main.json` |
-| `pnpm sync-main-dump` | Export public problems from DB to the dump file |
+| Command                | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| `pnpm dev`             | Development server                                 |
+| `pnpm build`           | Production build                                   |
+| `pnpm start`           | Run production server                              |
+| `pnpm test`            | Vitest + Python harness tests                      |
+| `pnpm lint`            | ESLint + TypeScript check                          |
+| `pnpm prisma:push`     | Apply Prisma schema to the database                |
+| `pnpm prisma:generate` | Regenerate Prisma client                           |
+| `pnpm loadMainDump`    | Load public problems from `public-dumps/main.json` |
+| `pnpm sync-main-dump`  | Export public problems from DB to the dump file    |
 
 ## Tech stack
 
-| Layer | Technologies |
-|---|---|
-| **App** | [Next.js](https://nextjs.org/) (Pages Router), React 19, TypeScript |
-| **UI** | MUI v9, Emotion |
-| **State** | Redux Toolkit (UI), TanStack Query via tRPC (server data) |
-| **API** | tRPC (primary), GraphQL + Apollo where used |
-| **Database** | PostgreSQL, Prisma |
-| **Auth** | NextAuth.js |
-| **Editor & runtime** | Monaco, Pyodide (Python in the browser) |
-| **3D** | Three.js, React Three Fiber |
-| **i18n** | typesafe-i18n |
-| **Tests** | Vitest, Testing Library |
+| Layer                | Technologies                                                        |
+| -------------------- | ------------------------------------------------------------------- |
+| **App**              | [Next.js](https://nextjs.org/) (Pages Router), React 19, TypeScript |
+| **UI**               | MUI v9, Emotion                                                     |
+| **State**            | Redux Toolkit (UI), TanStack Query via tRPC (server data)           |
+| **API**              | tRPC (primary), GraphQL + Apollo where used                         |
+| **Database**         | PostgreSQL, Prisma                                                  |
+| **Auth**             | NextAuth.js                                                         |
+| **Editor & runtime** | Monaco, Pyodide (Python in the browser)                             |
+| **3D**               | Three.js, React Three Fiber                                         |
+| **i18n**             | typesafe-i18n                                                       |
+| **Tests**            | Vitest, Testing Library                                             |
 
 Architecture and conventions for contributors live in **[`.cursorrules`](.cursorrules)** and **[`.cursor/rules/`](.cursor/rules/)**.
 
