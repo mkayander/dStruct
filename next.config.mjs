@@ -7,10 +7,37 @@ void (
   !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"))
 );
 
+/** Keep in sync with `src/i18n/i18n-util.ts` `locales`. */
+const i18nLocales = [
+  "ar",
+  "be",
+  "de",
+  "en",
+  "es",
+  "fr",
+  "hi",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "nl",
+  "pl",
+  "pt",
+  "ru",
+  "sr",
+  "tr",
+  "uk",
+  "vi",
+  "zh",
+];
+
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  // TODO(Instant Nav): enable after root layout avoids blocking `headers()` under Cache Components.
+  // cacheComponents: true,
+  // partialPrefetching: true,
   // Bundled docs: `node_modules/next/dist/docs/02-pages/04-api-reference/04-config/01-next-config-js/poweredByHeader.md`
   poweredByHeader: false,
   // Bundled docs: `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/reactCompiler.md`
@@ -32,6 +59,7 @@ const config = {
     ],
   },
   transpilePackages: [
+    "@mui/material-nextjs",
     "@apollo/client",
     "@hello-pangea/dnd",
     "@monaco-editor/react",
@@ -57,28 +85,7 @@ const config = {
     "zod",
   ],
   i18n: {
-    locales: [
-      "ar",
-      "be",
-      "de",
-      "en",
-      "es",
-      "fr",
-      "hi",
-      "id",
-      "it",
-      "ja",
-      "ko",
-      "nl",
-      "pl",
-      "pt",
-      "ru",
-      "sr",
-      "tr",
-      "uk",
-      "vi",
-      "zh",
-    ],
+    locales: i18nLocales,
     defaultLocale: "en",
     localeDetection: false,
   },

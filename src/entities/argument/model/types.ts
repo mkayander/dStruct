@@ -1,9 +1,7 @@
 import type { ArgumentType } from "./argumentObject";
 
 export type ArgumentTreeType =
-  | ArgumentType.BINARY_TREE
-  | ArgumentType.GRAPH
-  | ArgumentType.LINKED_LIST;
+  ArgumentType.BINARY_TREE | ArgumentType.GRAPH | ArgumentType.LINKED_LIST;
 
 export type ArgumentArrayType =
   | ArgumentType.ARRAY

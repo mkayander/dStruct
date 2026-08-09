@@ -45,8 +45,7 @@ export type ThanosParticle = {
 };
 
 export type ThanosDisintegrateOrigin =
-  | { x: number; y: number }
-  | { clientX: number; clientY: number };
+  { x: number; y: number } | { clientX: number; clientY: number };
 
 export type ThanosDisintegrateOptions = {
   /** Pixel stride when sampling the captured surface. */

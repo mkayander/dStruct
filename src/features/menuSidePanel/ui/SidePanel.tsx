@@ -13,24 +13,36 @@ import {
   ListSubheader,
   MenuItem,
   Select,
-  type SelectChangeEvent,
   SwipeableDrawer,
   Typography,
   useTheme,
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
+import { useRouter as useAppRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
 import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
+import { localeBareHomePath } from "#/i18n/localeBareHomePath";
+import { parseSelectLocaleValue } from "#/i18n/parseSelectLocaleValue";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
-import { useI18nContext } from "#/shared/hooks";
+import { useI18nContext, usePagesRouterCompat } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
+
+/** App Router only — mounted when Pages compat router is absent. */
+const AppLocaleHomeRedirect: React.FC<{ locale: Locales }> = ({ locale }) => {
+  const appRouter = useAppRouter();
+
+  useEffect(() => {
+    appRouter.push(localeBareHomePath(locale));
+  }, [appRouter, locale]);
+
+  return null;
+};
 
 type NavItemProps = {
   title: string;
@@ -55,8 +67,11 @@ type SidePanelProps = {
 };
 
 export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
-  const router = useRouter();
-  const { LL } = useI18nContext();
+  const pagesRouter = usePagesRouterCompat();
+  const [appLocaleRedirect, setAppLocaleRedirect] = useState<Locales | null>(
+    null,
+  );
+  const { LL, locale: activeLocale } = useI18nContext();
   const theme = useTheme();
   const session = useSession();
   const cookieConsent = useOptionalCookieConsentContext();
@@ -66,88 +81,110 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
     setIsOpen(false);
   };
 
-  const handleChangeLocale = async (event: SelectChangeEvent<Locales>) => {
-    const newLocale = event.target.value as Locales;
-    if (newLocale !== router.locale) {
-      setStoredLocale(newLocale);
-      await loadLocaleAsync(newLocale);
-      void router.push(router.asPath, undefined, { locale: newLocale });
+  const handleChangeLocale = async (newLocale: Locales) => {
+    const currentLocale = pagesRouter?.locale ?? activeLocale;
+    if (newLocale === currentLocale) {
+      return;
     }
+    setStoredLocale(newLocale);
+    await loadLocaleAsync(newLocale);
+    if (pagesRouter) {
+      void pagesRouter.push(pagesRouter.asPath, undefined, {
+        locale: newLocale,
+      });
+      return;
+    }
+    // App Router marketing pilot: defer navigation to child (no Pages `useRouter`).
+    setAppLocaleRedirect(newLocale);
   };
 
   return (
-    <SwipeableDrawer
-      anchor="right"
-      open={isOpen}
-      onOpen={() => setIsOpen(true)}
-      onClose={() => setIsOpen(false)}
-      slotProps={{
-        paper: {
-          sx: {
-            background: alpha(theme.appDesign.surfaceHigh, 0.88),
-            backdropFilter: "blur(20px)",
-            borderLeft: `1px solid ${alpha(theme.appDesign.outline, 0.16)}`,
+    <>
+      {!pagesRouter && appLocaleRedirect ? (
+        <AppLocaleHomeRedirect locale={appLocaleRedirect} />
+      ) : null}
+      <SwipeableDrawer
+        anchor="right"
+        open={isOpen}
+        onOpen={() => setIsOpen(true)}
+        onClose={() => setIsOpen(false)}
+        slotProps={{
+          paper: {
+            sx: {
+              background: alpha(theme.appDesign.surfaceHigh, 0.88),
+              backdropFilter: "blur(20px)",
+              borderLeft: `1px solid ${alpha(theme.appDesign.outline, 0.16)}`,
+            },
           },
-        },
-      }}
-    >
-      <Box
-        role="presentation"
-        sx={{
-          minWidth: "22vw",
         }}
       >
-        <List
-          subheader={
-            <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>
-          }
+        <Box
+          role="presentation"
+          sx={{
+            minWidth: "22vw",
+          }}
         >
-          <Link href={`/profile/${session.data?.user.id ?? ""}`}>
-            <NavItem title={LL.PROFILE()} />
-          </Link>
-          <NavItem title="GitHub" href={GITHUB_URL} />
-          <NavItem title={LL.FEEDBACK()} href={`${GITHUB_URL}/issues`} />
-          <NavItem title={LL.LOGOUT()} onClick={() => signOut()} />
-        </List>
+          <List
+            subheader={
+              <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>
+            }
+          >
+            <Link href={`/profile/${session.data?.user.id ?? ""}`}>
+              <NavItem title={LL.PROFILE()} />
+            </Link>
+            <NavItem title="GitHub" href={GITHUB_URL} />
+            <NavItem title={LL.FEEDBACK()} href={`${GITHUB_URL}/issues`} />
+            <NavItem title={LL.LOGOUT()} onClick={() => signOut()} />
+          </List>
 
-        <Divider />
+          <Divider />
 
-        <List
-          subheader={
-            <ListSubheader disableSticky>{LL.SETTINGS()}</ListSubheader>
-          }
-        >
-          <ListItem>
-            <ListItemIcon>
-              <Translate />
-            </ListItemIcon>
-            <FormControl fullWidth>
-              <InputLabel id="side-panel-language-label">
-                {LL.LANGUAGE()}
-              </InputLabel>
-              <Select
-                labelId="side-panel-language-label"
-                label={LL.LANGUAGE()}
-                value={(router.locale as Locales) ?? "en"}
-                onChange={handleChangeLocale}
-              >
-                {localesForLanguagePicker.map((locale) => (
-                  <MenuItem key={locale} value={locale}>
-                    <Typography>{localeLabels[locale]}</Typography>
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </ListItem>
-          <NavItem title={LL.PRIVACY_POLICY()} href="/privacy" />
-          {cookieConsent ? (
-            <NavItem
-              title={LL.COOKIE_SETTINGS_LINK()}
-              onClick={handleOpenCookieSettings}
-            />
-          ) : null}
-        </List>
-      </Box>
-    </SwipeableDrawer>
+          <List
+            subheader={
+              <ListSubheader disableSticky>{LL.SETTINGS()}</ListSubheader>
+            }
+          >
+            <ListItem>
+              <ListItemIcon>
+                <Translate />
+              </ListItemIcon>
+              <FormControl fullWidth>
+                <InputLabel id="side-panel-language-label">
+                  {LL.LANGUAGE()}
+                </InputLabel>
+                <Select
+                  labelId="side-panel-language-label"
+                  label={LL.LANGUAGE()}
+                  value={
+                    (pagesRouter?.locale as Locales) ?? activeLocale ?? "en"
+                  }
+                  onChange={(event) => {
+                    const newLocale = parseSelectLocaleValue(
+                      String(event.target.value),
+                    );
+                    if (newLocale) {
+                      void handleChangeLocale(newLocale);
+                    }
+                  }}
+                >
+                  {localesForLanguagePicker.map((localeOption) => (
+                    <MenuItem key={localeOption} value={localeOption}>
+                      <Typography>{localeLabels[localeOption]}</Typography>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </ListItem>
+            <NavItem title={LL.PRIVACY_POLICY()} href="/privacy" />
+            {cookieConsent ? (
+              <NavItem
+                title={LL.COOKIE_SETTINGS_LINK()}
+                onClick={handleOpenCookieSettings}
+              />
+            ) : null}
+          </List>
+        </Box>
+      </SwipeableDrawer>
+    </>
   );
 };

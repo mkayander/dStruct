@@ -82,10 +82,7 @@ const bottomToTopMask: MaskStrategyGenerator = (cols, rows) => {
 };
 
 type CornerDirection =
-  | "left-top"
-  | "left-bottom"
-  | "right-top"
-  | "right-bottom";
+  "left-top" | "left-bottom" | "right-top" | "right-bottom";
 
 const createDiagonalMask =
   (corner: CornerDirection): MaskStrategyGenerator =>

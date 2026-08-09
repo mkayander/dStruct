@@ -27,7 +27,6 @@ import {
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React, { type MouseEvent, useState } from "react";
 
@@ -37,8 +36,8 @@ import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
 import { useMobilePlaygroundView } from "#/features/playground/hooks/useMobilePlaygroundView";
 import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { appFontStackDisplay } from "#/shared/fonts/fontVariables";
+import { useI18nContext, useRoutePathname } from "#/shared/hooks";
 import { useProfileImageUploader } from "#/shared/hooks";
-import { useI18nContext } from "#/shared/hooks";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { getImageUrl } from "#/shared/lib";
@@ -97,8 +96,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
   toolbarVariant = "dense",
   position = "sticky",
 }) => {
-  const router = useRouter();
-  const currentPath = router.pathname;
+  const currentPath = useRoutePathname();
   const theme = useTheme();
   const isMobileLayout = useMobileLayout();
   const useCompactNav = useMediaQuery(theme.breakpoints.down("lg"));

@@ -1,5 +1,8 @@
-import { useRouter } from "next/router";
+"use client";
+
 import { startTransition, useCallback, useEffect, useState } from "react";
+
+import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
 
 export type SearchParamOptions<T extends string = string> = {
   defaultValue: T;
@@ -24,7 +27,8 @@ const getParamFromRouter = (
 };
 
 /**
- * React hook to read and update a single search param.
+ * React hook to read and update a single search param (Pages Router).
+ * Under App Router (no Pages router), keeps React state only — no URL sync.
  *
  * @param param The search param to read and update.
  * @param options Options to customize the behavior of the hook.
@@ -38,8 +42,11 @@ export const useSearchParam = <T extends string = string>(
   },
 ) => {
   const { defaultValue, validate } = options;
-  const router = useRouter();
+  const router = usePagesRouterCompat();
   const [state, setState] = useState<T | "">(() => {
+    if (!router) {
+      return defaultValue;
+    }
     const initialValue = getParamFromRouter(param, router.query);
     if (validate(initialValue)) {
       return initialValue;
@@ -49,6 +56,9 @@ export const useSearchParam = <T extends string = string>(
   });
 
   useEffect(() => {
+    if (!router) {
+      return;
+    }
     const { query } = router;
     const paramValue = query[param];
     if (Array.isArray(paramValue)) {
@@ -71,6 +81,9 @@ export const useSearchParam = <T extends string = string>(
       if (value !== "" && !validate(value)) return;
 
       setState(value);
+      if (!router) {
+        return;
+      }
       const {
         asPath,
         query: { slug: _slugQuery, ...newQuery },

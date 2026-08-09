@@ -8,6 +8,15 @@ const mockReplace = vi.fn();
 
 let mockQuery: Record<string, string | string[] | undefined> = {};
 
+vi.mock("next/compat/router", () => ({
+  useRouter: () => ({
+    asPath: "/playground",
+    query: mockQuery,
+    push: mockPush,
+    replace: mockReplace,
+  }),
+}));
+
 vi.mock("next/router", () => ({
   useRouter: () => ({
     asPath: "/playground",

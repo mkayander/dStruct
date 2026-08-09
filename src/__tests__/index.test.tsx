@@ -4,13 +4,14 @@ import { Provider as ReduxProvider } from "react-redux";
 import { vi } from "vitest";
 
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
+import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
 import { mockUseSearchParam } from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
 import en from "#/i18n/en/index";
 import type { Translation } from "#/i18n/i18n-types";
-import DashboardPage from "#/pages/index";
 import { withNextTRPC } from "#/shared/lib/trpc-test-decorator";
+import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { makeStore } from "#/store/makeStore";
 
@@ -28,12 +29,11 @@ vi.mock("next-auth/react", () => {
     __esModule: true,
     ...originalModule,
     useSession: vi.fn(() => {
-      return { data: mockSession, status: "authenticated" }; // return type is [] in v3 but changed to {} in v4
+      return { data: mockSession, status: "authenticated" };
     }),
   };
 });
 
-// Setup mocks at top level (vi.mock() must be hoisted)
 vi.mock("#/shared/hooks", async (importOriginal) => {
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const actual = await importOriginal<typeof import("#/shared/hooks")>();
@@ -65,17 +65,17 @@ const i18n = {
   translations: { en: en as Translation },
 } as const;
 
-const canonicalUrl = "https://dstruct.pro/";
-
-describe("DashboardPage", () => {
+describe("MarketingHomeView", () => {
   it("renders a CTA button", () => {
     render(
       <ReduxProvider store={store}>
         <MockedProvider mocks={mocks} addTypename={false}>
           <StateThemeProvider>
-            <ProjectBrowserProvider>
-              <DashboardPage i18n={i18n} canonicalUrl={canonicalUrl} />
-            </ProjectBrowserProvider>
+            <I18nProvider i18n={i18n}>
+              <ProjectBrowserProvider>
+                <MarketingHomeView />
+              </ProjectBrowserProvider>
+            </I18nProvider>
           </StateThemeProvider>
         </MockedProvider>
       </ReduxProvider>,
