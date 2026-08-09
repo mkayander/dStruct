@@ -1,25 +1,17 @@
-import { ApolloProvider } from "@apollo/client";
 import type { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
-import { SnackbarProvider } from "notistack";
 import React from "react";
 import "symbol-observable";
 
 import { CookieConsentRoot } from "#/features/cookieConsent/ui/CookieConsentRoot";
 import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
-import { apolloClient } from "#/graphql/apolloClient";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import { EmotionCacheProvider } from "#/shared/emotion/EmotionCacheContext";
 // `_document` is server-only; importing fonts here registers @font-face + CSS vars in the client bundle.
 import "#/shared/fonts/appFonts";
-import { TrpcProvider } from "#/shared/trpc/TrpcProvider";
-import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
+import { AppShellProviders } from "#/shared/ui/providers/AppShellProviders";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
-import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
-import { isSnackbarClosable } from "#/shared/ui/snackbarClosability";
-import { ReduxProvider } from "#/store/provider";
 import type { SsrDeviceType } from "#/themes";
 
 import "#/styles/globals.css";
@@ -35,41 +27,19 @@ type MyAppProps = {
 const MyApp: React.FC<AppProps<MyAppProps>> = ({ Component, pageProps }) => {
   return (
     <EmotionCacheProvider>
-      <TrpcProvider>
-        <ReduxProvider>
-          <SessionProvider session={pageProps.session}>
-            <ApolloProvider client={apolloClient}>
-              <StateThemeProvider ssrDeviceType={pageProps.ssrDeviceType}>
-                <SnackbarProvider
-                  maxSnack={4}
-                  action={(snackbarKey) =>
-                    isSnackbarClosable(snackbarKey) ? (
-                      <SnackbarCloseButton snackbarKey={snackbarKey} />
-                    ) : null
-                  }
-                  classes={{
-                    containerAnchorOriginBottomLeft:
-                      "snackbar-mobile-bottom-margin",
-                    containerAnchorOriginBottomCenter:
-                      "snackbar-mobile-bottom-margin",
-                    containerAnchorOriginBottomRight:
-                      "snackbar-mobile-bottom-margin",
-                  }}
-                >
-                  <I18nProvider i18n={pageProps.i18n}>
-                    <CookieConsentRoot>
-                      <ProjectBrowserProvider>
-                        <Component {...pageProps} />
-                        <ProjectBrowser />
-                      </ProjectBrowserProvider>
-                    </CookieConsentRoot>
-                  </I18nProvider>
-                </SnackbarProvider>
-              </StateThemeProvider>
-            </ApolloProvider>
-          </SessionProvider>
-        </ReduxProvider>
-      </TrpcProvider>
+      <AppShellProviders
+        session={pageProps.session}
+        ssrDeviceType={pageProps.ssrDeviceType}
+      >
+        <I18nProvider i18n={pageProps.i18n}>
+          <CookieConsentRoot>
+            <ProjectBrowserProvider>
+              <Component {...pageProps} />
+              <ProjectBrowser />
+            </ProjectBrowserProvider>
+          </CookieConsentRoot>
+        </I18nProvider>
+      </AppShellProviders>
     </EmotionCacheProvider>
   );
 };

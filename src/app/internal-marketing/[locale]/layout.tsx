@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
-import { authOptions } from "#/pages/api/auth/[...nextauth]";
+import { authOptions } from "#/server/auth/authOptions";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 

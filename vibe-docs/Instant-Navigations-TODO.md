@@ -9,9 +9,9 @@
 
 ## Phase 1 — 16.3.x on Vercel
 
-- [x] Tried `next@16.3.0` — local OK; Vercel preview `/api/*` → `/en/404`
-- [x] **Pinned back to `next@16.2.12`** so previews + App Router pilot can be verified
-- [ ] Re-try latest 16.3.x when adapter-vercel i18n API fix is in a release that works on Turbopack previews
+- [x] Tried `next@16.3.0` — local OK; Vercel preview `/api/*` → `/en/404` (2026-08, pre-adapter fix)
+- [x] **Pinned to `next@16.2.12`** until pilot + API routing verified on previews
+- [x] Re-try `next@16.3.0` on branch `cursor/instant-nav-phase1-8f0a` (await Vercel preview smoke)
 - [ ] Preview smoke green on 16.3.x before enabling Instant Nav flags
 
 ## Phase 2 — App Router pilot
@@ -29,6 +29,8 @@
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
 - [ ] `unstable_instant` on pilot routes (blocked until `cacheComponents`)
 - [x] Remove unused `@trpc/next` dependency
+- [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
+- [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
 
 ## Phase 3+ — Playground / full migration
 
