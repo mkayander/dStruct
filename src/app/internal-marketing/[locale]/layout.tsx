@@ -5,23 +5,19 @@ import { notFound } from "next/navigation";
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
-import { localeBareHomePath } from "#/i18n/localeBareHomePath";
 import { authOptions } from "#/pages/api/auth/[...nextauth]";
 import {
-  absoluteUrlFromPathname,
-  DEFAULT_OG_IMAGE_URL,
   DEFAULT_SITE_DESCRIPTION,
-  SITE_HOSTNAME,
   truncateMetaDescription,
 } from "#/shared/lib/seo";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
+import { internalMarketingPilotMetadata } from "#/app/internal-marketing/internalMarketingPilotMetadata";
 
 const homeTitle = "dStruct — visualize LeetCode solutions";
 
-export function generateStaticParams(): { locale: Locales }[] {
-  return locales.map((locale) => ({ locale }));
-}
+/** Pilot routes are noindex; skip build-time SSG (daily page SSR can hang on data hooks). */
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -30,42 +26,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
   if (!locales.includes(localeParam as Locales)) {
-    return { title: homeTitle };
+    return { title: homeTitle, robots: { index: false, follow: false } };
   }
   const locale = localeParam as Locales;
-  const canonicalUrl = absoluteUrlFromPathname(localeBareHomePath(locale));
-  const metaDescription = truncateMetaDescription(DEFAULT_SITE_DESCRIPTION);
 
-  return {
+  return internalMarketingPilotMetadata({
+    locale,
+    pagePath: "/",
     title: homeTitle,
-    description: metaDescription,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      siteName: "dStruct",
-      title: homeTitle,
-      type: "website",
-      url: canonicalUrl,
-      description: metaDescription,
-      images: [
-        {
-          url: DEFAULT_OG_IMAGE_URL,
-          width: 1200,
-          height: 630,
-          alt: "dStruct — LeetCode solution visualizer",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: homeTitle,
-      description: metaDescription,
-      images: [DEFAULT_OG_IMAGE_URL],
-    },
-    other: {
-      "twitter:domain": SITE_HOSTNAME,
-      "twitter:url": canonicalUrl,
-    },
-  };
+    description: truncateMetaDescription(DEFAULT_SITE_DESCRIPTION),
+  });
 }
 
 export default async function InternalMarketingLocaleLayout({
