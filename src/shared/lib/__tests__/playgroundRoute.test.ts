@@ -5,6 +5,7 @@ import {
   internalMarketingPlaygroundBasePath,
   parsePlaygroundPathname,
   PLAYGROUND_PUBLIC_BASE_PATH,
+  remapPlaygroundPathToBase,
 } from "#/shared/lib/playgroundRoute";
 
 describe("playgroundRoute", () => {
@@ -54,5 +55,31 @@ describe("playgroundRoute", () => {
     expect(
       buildPlaygroundPath(PLAYGROUND_PUBLIC_BASE_PATH, ["foo", "bar"]),
     ).toBe("/playground/foo/bar");
+  });
+
+  it("omits empty slug segments", () => {
+    expect(
+      buildPlaygroundPath(PLAYGROUND_PUBLIC_BASE_PATH, ["foo", "", "bar"]),
+    ).toBe("/playground/foo/bar");
+    expect(
+      buildPlaygroundPath(PLAYGROUND_PUBLIC_BASE_PATH, ["foo", "case", ""]),
+    ).toBe("/playground/foo/case");
+  });
+
+  it("remaps stored paths onto a different base (pilot vs public)", () => {
+    const pilotBase = internalMarketingPlaygroundBasePath("de");
+    expect(
+      remapPlaygroundPathToBase("/playground/invert-binary-tree", pilotBase),
+    ).toBe("/internal-marketing/de/playground/invert-binary-tree");
+    expect(
+      remapPlaygroundPathToBase(
+        "/internal-marketing/en/playground/foo/bar",
+        PLAYGROUND_PUBLIC_BASE_PATH,
+      ),
+    ).toBe("/playground/foo/bar");
+    expect(remapPlaygroundPathToBase("/playground", pilotBase)).toBeNull();
+    expect(
+      remapPlaygroundPathToBase("/playground/[[...slug]]", pilotBase),
+    ).toBeNull();
   });
 });

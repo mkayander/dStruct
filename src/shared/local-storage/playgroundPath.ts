@@ -2,6 +2,7 @@ import { createStringStorage } from "#/shared/browser-storage";
 import {
   parsePlaygroundPathname,
   PLAYGROUND_PUBLIC_BASE_PATH,
+  remapPlaygroundPathToBase,
 } from "#/shared/lib/playgroundRoute";
 
 export const PLAYGROUND_BASE_PATH = PLAYGROUND_PUBLIC_BASE_PATH;
@@ -34,13 +35,17 @@ export const isValidLastPlaygroundPath = (path: string | null): boolean => {
 };
 
 /**
- * Returns the path if it can be restored (valid + project slug is not a Next.js catch-all).
- * Returns null otherwise.
+ * Returns a restorable path for the current playground base (public or pilot).
+ * Slug segments are preserved; only the prefix is remapped when `targetBasePath` is set.
  */
 export const getRestorablePlaygroundPath = (
   path: string | null,
+  targetBasePath?: string,
 ): string | null => {
   if (!isValidLastPlaygroundPath(path)) return null;
+  if (targetBasePath) {
+    return remapPlaygroundPathToBase(path!, targetBasePath);
+  }
   const parsed = parsePlaygroundPathname(path!);
   const projectSlug = parsed?.slug[0];
   return projectSlug?.startsWith("[[") ? null : path;

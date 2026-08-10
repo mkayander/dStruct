@@ -54,6 +54,13 @@ describe("playgroundPath", () => {
       expect(getRestorablePlaygroundPath(path)).toBe(path);
     });
 
+    it("remaps slug segments when targetBasePath is provided", () => {
+      const path = "/playground/some-project";
+      expect(
+        getRestorablePlaygroundPath(path, "/internal-marketing/de/playground"),
+      ).toBe("/internal-marketing/de/playground/some-project");
+    });
+
     it("returns null when path is invalid", () => {
       expect(getRestorablePlaygroundPath(null)).toBe(null);
       expect(getRestorablePlaygroundPath("")).toBe(null);

@@ -21,19 +21,9 @@ export const usePlaygroundSlugs = () => {
   const route = usePlaygroundRoute();
 
   useEffect(() => {
-    if (!route) {
+    if (!route?.slug[0]) {
       return;
     }
-    const parsed = parsePlaygroundPathname(route.pathname);
-    if (!parsed) {
-      return;
-    }
-
-    const projectSlug = parsed.slug[0];
-    if (!projectSlug) {
-      return;
-    }
-
     setLastPlaygroundPath(route.pathname);
   }, [route]);
 
@@ -68,7 +58,7 @@ export const usePlaygroundSlugs = () => {
         removeLastPlaygroundPath();
       }
       const pathToRestore = isInitial
-        ? getRestorablePlaygroundPath(lastPath)
+        ? getRestorablePlaygroundPath(lastPath, basePath)
         : null;
 
       if (pathToRestore) {
@@ -88,10 +78,13 @@ export const usePlaygroundSlugs = () => {
 
       if (slug === caseSlug) return;
 
-      return navigateTo(
-        buildPlaygroundPath(basePath, [projectSlug, slug, solutionSlug ?? ""]),
-        { replace: !caseSlug },
-      );
+      const caseSegments = solutionSlug
+        ? [projectSlug, slug, solutionSlug]
+        : [projectSlug, slug];
+
+      return navigateTo(buildPlaygroundPath(basePath, caseSegments), {
+        replace: !caseSlug,
+      });
     };
 
     const setSolution = (slug: string) => {

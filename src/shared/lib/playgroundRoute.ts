@@ -51,10 +51,26 @@ export function parsePlaygroundPathname(
   return null;
 }
 
-/** Builds a playground path under the given base (public or pilot). */
+/** Builds a playground path under the given base (public or pilot). Empty segments are omitted. */
 export function buildPlaygroundPath(basePath: string, slug: string[]): string {
-  if (slug.length === 0) {
+  const segments = slug.filter((segment) => segment.length > 0);
+  if (segments.length === 0) {
     return basePath;
   }
-  return `${basePath}/${slug.join("/")}`;
+  return `${basePath}/${segments.join("/")}`;
+}
+
+/**
+ * Remaps slug segments from a stored playground path onto `targetBasePath`.
+ * Used when restoring last project on pilot vs public routes.
+ */
+export function remapPlaygroundPathToBase(
+  path: string,
+  targetBasePath: string,
+): string | null {
+  const parsed = parsePlaygroundPathname(path);
+  if (!parsed?.slug[0] || parsed.slug[0].startsWith("[[")) {
+    return null;
+  }
+  return buildPlaygroundPath(targetBasePath, parsed.slug);
 }
