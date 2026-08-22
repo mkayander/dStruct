@@ -1,3 +1,10 @@
+# [1.384.0](https://github.com/mkayander/dStruct/compare/v1.383.0...v1.384.0) (2026-08-22)
+
+
+### Features
+
+* **app:** add public app/[lang] routes for locale migration L1 ([#172](https://github.com/mkayander/dStruct/issues/172)) ([5b2c777](https://github.com/mkayander/dStruct/commit/5b2c7776a9fb0941a2b2cdaefc83c1be2f45fedf))
+
 # [1.383.0](https://github.com/mkayander/dStruct/compare/v1.382.0...v1.383.0) (2026-08-22)
 
 
