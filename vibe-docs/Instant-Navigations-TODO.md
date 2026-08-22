@@ -5,7 +5,7 @@
 - [x] `AGENTS.md` bundled-docs block
 - [x] `CLAUDE.md` with `@AGENTS.md`
 - [x] `AGENTS.md` — Instant Nav doc paths + Pages Router guardrail
-- [ ] Optional `.mcp.json` for `next-devtools-mcp`
+- [x] Optional `.mcp.json` for `next-devtools-mcp`
 
 ## Phase 1 — 16.3.x on Vercel
 
@@ -42,5 +42,7 @@
 - [x] Profile App route shell (`/internal-marketing/[locale]/profile/[userId]`)
 - [x] `ProfilePageView` shared by Pages + App pilot
 - [x] `useProfileUserId` bridge for App vs Pages route param
-- [ ] Remove `i18n` from `next.config.mjs`
-- [ ] `@next/playwright` `instant()` tests
+- [x] Playwright pilot smoke e2e (`e2e/pilot-routes.spec.ts`, `e2e/api-smoke.spec.ts`)
+- [x] `pnpm preview-smoke` script for Vercel merge-gate checks
+- [ ] `@next/playwright` `instant()` tests (blocked: `cacheComponents` + `unstable_instant` + 16.3.x)
+- [ ] Remove `i18n` from `next.config.mjs` (locale migration epic)
