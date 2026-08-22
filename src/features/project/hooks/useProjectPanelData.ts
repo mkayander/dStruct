@@ -2,7 +2,6 @@
 
 import { TRPCClientError } from "@trpc/client";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import {
@@ -10,6 +9,8 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
+import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
+import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
@@ -20,7 +21,12 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 export const useProjectPanelData = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const pagesRouter = usePagesRouterCompat();
+  const playgroundRoute = usePlaygroundRoute();
+
+  const isRouteReady = pagesRouter
+    ? pagesRouter.isReady
+    : playgroundRoute !== null;
 
   const {
     projectSlug = "",
@@ -86,14 +92,15 @@ export const useProjectPanelData = () => {
     session.data,
   ]);
 
+  // On landing with no slug, open the first public project once route + brief list are ready.
   useEffect(() => {
-    if (allBrief.data?.length && router.isReady && !projectSlug) {
+    if (allBrief.data?.length && isRouteReady && !projectSlug) {
       const firstProject = allBrief.data[0];
       if (firstProject) {
         setProject(firstProject.slug, true);
       }
     }
-  }, [allBrief.data, router.isReady, projectSlug, setProject]);
+  }, [allBrief.data, isRouteReady, projectSlug, setProject]);
 
   return {
     session,

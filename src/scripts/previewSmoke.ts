@@ -5,11 +5,16 @@
  * Usage:
  *   PLAYWRIGHT_BASE_URL=https://your-preview.vercel.app pnpm preview-smoke
  *   pnpm preview-smoke   # defaults to http://localhost:3000
+ *
+ * Protected previews: set VERCEL_AUTOMATION_BYPASS_SECRET (same as CI e2e workflow).
  */
+import { vercelProtectionBypassHeaders } from "#/shared/lib/vercelPreviewHeaders";
 
 const baseURL = (
   process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000"
 ).replace(/\/$/, "");
+
+const previewRequestHeaders = vercelProtectionBypassHeaders();
 
 const expectVercelMatchedPath =
   process.env.PLAYWRIGHT_EXPECT_MATCHED_PATH === "true" ||
@@ -25,7 +30,10 @@ type SmokeResult = {
 async function fetchStatus(path: string): Promise<SmokeResult> {
   const url = `${baseURL}${path}`;
   try {
-    const response = await fetch(url, { redirect: "follow" });
+    const response = await fetch(url, {
+      redirect: "follow",
+      headers: previewRequestHeaders,
+    });
     return { path, status: response.status, ok: response.ok };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -39,7 +47,10 @@ async function fetchApiGate(
 ): Promise<SmokeResult> {
   const url = `${baseURL}${path}`;
   try {
-    const response = await fetch(url, { redirect: "follow" });
+    const response = await fetch(url, {
+      redirect: "follow",
+      headers: previewRequestHeaders,
+    });
     const matched = response.headers.get("x-matched-path");
     const ok =
       response.ok && (!expectVercelMatchedPath || matched === matchedPath);

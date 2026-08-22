@@ -44,5 +44,6 @@
 - [x] `useProfileUserId` bridge for App vs Pages route param
 - [x] Playwright pilot smoke e2e (`e2e/pilot-routes.spec.ts`, `e2e/api-smoke.spec.ts`)
 - [x] `pnpm preview-smoke` script for Vercel merge-gate checks
+- [x] GitHub Actions e2e on Vercel preview (`.github/workflows/e2e-preview.yml`, `deployment_status`)
 - [ ] `@next/playwright` `instant()` tests (blocked: `cacheComponents` + `unstable_instant` + 16.3.x)
 - [ ] Remove `i18n` from `next.config.mjs` (locale migration epic)
