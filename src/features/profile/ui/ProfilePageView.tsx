@@ -1,0 +1,153 @@
+"use client";
+
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import React from "react";
+
+import { LeetCodeStats } from "#/features/profile/ui/LeetCodeStats";
+import { UserSettings } from "#/features/profile/ui/UserSettings";
+import { useGetUserProfileQuery } from "#/graphql/generated";
+import { useI18nContext } from "#/shared/hooks";
+import { useProfileUserId } from "#/shared/hooks/useProfileUserId";
+import { MainLayout } from "#/shared/ui/templates/MainLayout";
+
+/** Profile dashboard content. Shared by Pages `/profile/[userId]` and App pilot. */
+export const ProfilePageView: React.FC = () => {
+  const { LL } = useI18nContext();
+  const routeUserId = useProfileUserId();
+  const session = useSession();
+  const leetCodeUsername = session.data?.user.leetCodeUsername;
+  const username = session.data?.user.name;
+
+  const sessionUserId = session.data?.user?.id;
+  const isOwnProfile = Boolean(
+    routeUserId && sessionUserId && routeUserId === sessionUserId,
+  );
+
+  const userProfileQueryResult = useGetUserProfileQuery({
+    variables: {
+      username: leetCodeUsername || "",
+    },
+    skip: !leetCodeUsername,
+  });
+
+  const renderAuthStatusSection = () => {
+    if (session.status === "loading") {
+      return (
+        <Box sx={{ mb: 8, textAlign: "center" }}>
+          <CircularProgress />
+        </Box>
+      );
+    }
+
+    if (session.status === "authenticated" && sessionUserId) {
+      if (isOwnProfile) {
+        return null;
+      }
+      return (
+        <Box sx={{ mb: 8, textAlign: "center" }}>
+          <Link href={`/profile/${sessionUserId}`}>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                px: 4,
+                py: 1.5,
+              }}
+            >
+              {LL.HOME_OPEN_PROFILE()}
+            </Button>
+          </Link>
+        </Box>
+      );
+    }
+
+    if (session.status === "authenticated") {
+      return (
+        <Box sx={{ mb: 8, textAlign: "center" }}>
+          <Alert severity="warning" sx={{ maxWidth: 480, mx: "auto" }}>
+            {LL.HOME_PROFILE_LINK_UNAVAILABLE()}
+          </Alert>
+        </Box>
+      );
+    }
+
+    return (
+      <Box sx={{ mb: 8, textAlign: "center" }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            color: "text.primary",
+            mb: 2,
+          }}
+        >
+          {LL.HOME_AUTH_HEADLINE_SIGNED_OUT()}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "text.secondary",
+            maxWidth: 640,
+            mx: "auto",
+            mb: 1.5,
+            lineHeight: 1.65,
+          }}
+        >
+          {LL.HOME_AUTH_BODY_SIGNED_OUT()}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.secondary",
+            maxWidth: 560,
+            mx: "auto",
+            mb: 4,
+            opacity: 0.9,
+          }}
+        >
+          {LL.HOME_AUTH_VISUALIZATION_NOTE()}
+        </Typography>
+      </Box>
+    );
+  };
+
+  return (
+    <MainLayout>
+      <Container>
+        {renderAuthStatusSection()}
+        {session.status !== "loading" ? (
+          <>
+            <Typography
+              variant="h5"
+              sx={{
+                my: 3,
+              }}
+            >
+              {LL.USER_DASHBOARD({
+                name: leetCodeUsername || username || "User",
+              })}
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <UserSettings />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <LeetCodeStats userProfile={userProfileQueryResult} />
+              </Grid>
+            </Grid>
+          </>
+        ) : null}
+      </Container>
+    </MainLayout>
+  );
+};
