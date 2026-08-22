@@ -26,10 +26,7 @@ export async function generateMetadata({
   }));
 }
 
-/**
- * Instant Nav pilot (App Router). Public home remains Pages `pages/index`
- * until locale routing leaves `next.config` `i18n`.
- */
+/** Instant Nav pilot (App Router). Public home is `app/(default-locale)` / `app/[lang]`. */
 export default function InternalMarketingHomePage() {
   return <MarketingHomeView />;
 }

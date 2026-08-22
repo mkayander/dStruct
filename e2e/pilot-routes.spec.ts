@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
+
 /**
  * Smoke tests for `/internal-marketing/[locale]/*` App Router pilots.
  *
@@ -76,7 +78,11 @@ test.describe("internal-marketing pilot routes", () => {
 
   test("pilot home footer links to public privacy page", async ({ page }) => {
     await page.goto("/internal-marketing/en");
-    await page.getByRole("link", { name: /privacy policy/i }).click();
-    await expect(page).toHaveURL(/\/privacy$/);
+    await dismissCookieBannerIfVisible(page);
+    const privacyLink = page
+      .getByRole("contentinfo")
+      .getByRole("link", { name: /privacy policy/i });
+    await privacyLink.scrollIntoViewIfNeeded();
+    await Promise.all([page.waitForURL(/\/privacy$/), privacyLink.click()]);
   });
 });

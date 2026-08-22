@@ -17,9 +17,10 @@
 
 ## Phase 1b — Locale migration (see `Locale-Migration-Design.md`)
 
-- [x] `app/[lang]/` public routes (mirror internal-marketing pilots) — PR branch `cursor/locale-migration-l1-8f0a`
-- [ ] Rewrites/redirects from Pages to App (L2)
-- [ ] Remove `i18n` from `next.config.mjs` (after L3–L4 in locale design)
+- [x] `app/[lang]/` public routes (mirror internal-marketing pilots) — merged #172
+- [x] Rewrites/redirects from Pages to App (L2) — `app/(default-locale)/` at unprefixed URLs
+- [x] Remove default-locale Pages marketing (`index`, `privacy`, `daily`, `playground`, `profile`) — L3 partial
+- [x] Remove `i18n` from `next.config.mjs` (required once Pages marketing deleted — L2/L4)
 
 ## Phase 2 — App Router pilot
 
@@ -27,12 +28,12 @@
 - [x] `src/app/layout.tsx` + `internal-marketing/[locale]/` pilot
 - [x] `MarketingHomeView` shared by Pages home + App pilot
 - [x] Dual-router shell (`next/compat/router`) so App pilot does not throw
-- [x] Public `/` / `/{locale}` stay on Pages `pages/index` (Pages `i18n` cannot rewrite bare locales into App routes)
+- [x] Public `/` served from App `(default-locale)` (Pages marketing removed L2/L3)
 - [x] `proxy.ts`: `/api/config` + locale header for direct `/internal-marketing/*`
 - [x] App layout metadata (viewport, icons, Material Icons)
 - [x] `robots: noindex` on pilot routes (`internalMarketingPilotMetadata` + layout default)
 - [x] Extend pilot to `/internal-marketing/[locale]/privacy` and `/daily`
-- [ ] Public cutover of home to App (blocked on removing `next.config` `i18n`)
+- [x] Public cutover of home to App (L2 `(default-locale)/`; pilot `/internal-marketing` until L3b)
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
 - [ ] `unstable_instant` on pilot routes (blocked until `cacheComponents`)
 - [x] Remove unused `@trpc/next` dependency

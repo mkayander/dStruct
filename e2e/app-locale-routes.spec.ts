@@ -3,8 +3,8 @@ import { expect, test } from "@playwright/test";
 /**
  * Smoke tests for public `app/[lang]/*` routes (locale migration L1).
  *
- * URLs use an explicit locale prefix (`/en`, `/de/...`). Unprefixed `/` and
- * `/privacy` remain Pages Router until L2/L3 cutover.
+ * Explicit `/en/*` URLs redirect to unprefixed canonicals in L2; see
+ * `e2e/locale-migration-l2.spec.ts` for unprefixed `/` and `/privacy`.
  */
 test.describe("app/[lang] public routes", () => {
   test("en home is indexable with public canonical", async ({ page }) => {

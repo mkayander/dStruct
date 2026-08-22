@@ -33,6 +33,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={htmlDir} className={fontVariableClassNames}>
       <head>
+        {/* Parity with `pages/_document.tsx` — Dark Reader must see this literal empty meta. */}
+        <meta name="darkreader-lock" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

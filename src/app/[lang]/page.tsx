@@ -24,8 +24,7 @@ export async function generateMetadata({
 }
 
 /**
- * App Router home at `/{lang}` (e.g. `/en`, `/de`).
- * Default-locale public `/` remains Pages until locale migration L2/L3.
+ * App Router home at `/{lang}` (e.g. `/de`). Default-locale `/` uses `(default-locale)`.
  */
 export default function LangHomePage() {
   return <MarketingHomeView />;

@@ -63,22 +63,27 @@ Locale list: keep **`src/i18n/i18n-util.ts`** as source of truth; `generateStati
 
 **Do not** remove `i18n` from config yet.
 
-### L2 — Rewrites / default locale
+### L2 — Default-locale App cutover (no rewrites)
 
-1. `next.config` rewrites: `/` → `/en` App home (or default locale) when ready.
-2. Redirect duplicate Pages URLs to App (308) per route.
-3. Playwright: public App routes + API smoke on preview.
+Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewrites to `/en` loop**. L2 instead adds App route group `(default-locale)/` at unprefixed paths; App Router takes precedence over duplicate Pages files.
 
-### L3 — Remove Pages marketing
+1. `app/(default-locale)/` — home, privacy, daily, playground, profile (`baseLocale` layout).
+2. Extend `proxy.ts` locale header for unprefixed marketing paths.
+3. Playwright: unprefixed URLs + existing `app/[lang]` + API smoke.
+4. Pages marketing files stay until L3 (unused for default-locale traffic).
 
-1. Delete `pages/index.tsx`, `pages/privacy.tsx`, `pages/daily.tsx` (or stub redirects).
+**Do not** remove `i18n` from config yet.
+
+### L3 — Remove Pages marketing (default locale done in L2)
+
+1. ~~Delete `pages/index.tsx`, `pages/privacy.tsx`, `pages/daily.tsx`~~ (done with L2 — Next.js forbids duplicate App/Pages paths).
 2. Remove `/internal-marketing/*` App pilot (or 301 → public App).
 
 ### L4 — Playground + profile on App only
 
 1. Move public traffic to `app/[lang]/playground` + `profile` (already prototyped).
 2. Delete Pages `playground` / `profile` after parity tests.
-3. **`i18n` block removed** from `next.config.mjs`.
+3. **`i18n` block removed** from `next.config.mjs` (required for `app/[lang]` after Pages marketing deleted).
 
 ### L5 — Instant Nav flags
 

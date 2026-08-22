@@ -69,6 +69,7 @@ const pagePaths = [
   "/",
   "/de",
   "/privacy",
+  "/daily",
   "/playground",
   "/profile/smoke-user",
   "/internal-marketing/en",

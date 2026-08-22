@@ -1,8 +1,7 @@
 "use client";
 
 /**
- * Marketing home UI. Public `/` uses Pages `pages/index`; App Router
- * `internal-marketing/[locale]` reuses this for the Instant Nav pilot.
+ * Marketing home UI. Public `/` and `app/[lang]` reuse this; internal-marketing pilot too.
  */
 import { useState } from "react";
 
