@@ -1,7 +1,11 @@
+import { locales } from "#/i18n/i18n-util";
+
 /** Public Pages Router playground prefix (canonical URLs). */
 export const PLAYGROUND_PUBLIC_BASE_PATH = "/playground";
 
 const INTERNAL_MARKETING_PREFIX = "/internal-marketing";
+
+const localeCodeSet = new Set<string>(locales);
 
 export type ParsedPlaygroundRoute = {
   basePath: string;
@@ -13,8 +17,14 @@ export function internalMarketingPlaygroundBasePath(locale: string): string {
   return `${INTERNAL_MARKETING_PREFIX}/${locale}/playground`;
 }
 
+/** App Router public base: `/{lang}/playground` (L1 locale migration). */
+export function appLocalePlaygroundBasePath(lang: string): string {
+  return `/${lang}/playground`;
+}
+
 /**
- * Parses `/playground/...` or `/internal-marketing/{locale}/playground/...`.
+ * Parses `/playground/...`, `/internal-marketing/{locale}/playground/...`,
+ * or `/{lang}/playground/...` when `lang` is a known locale.
  */
 export function parsePlaygroundPathname(
   pathname: string,
@@ -44,6 +54,19 @@ export function parsePlaygroundPathname(
       : [];
     return {
       basePath: internalMarketingPlaygroundBasePath(locale),
+      slug,
+    };
+  }
+
+  const appLocaleMatch = pathOnly.match(/^\/([^/]+)\/playground(?:\/(.*))?$/);
+  if (appLocaleMatch && localeCodeSet.has(appLocaleMatch[1] ?? "")) {
+    const lang = appLocaleMatch[1] ?? "";
+    const slugPart = appLocaleMatch[2];
+    const slug = slugPart
+      ? slugPart.split("/").filter((segment) => segment.length > 0)
+      : [];
+    return {
+      basePath: appLocalePlaygroundBasePath(lang),
       slug,
     };
   }

@@ -77,6 +77,12 @@ const pagePaths = [
   "/internal-marketing/en/playground",
   "/internal-marketing/en/playground/invert-binary-tree",
   "/internal-marketing/en/profile/smoke-user",
+  "/en",
+  "/en/privacy",
+  "/en/daily",
+  "/en/playground",
+  "/de/playground/invert-binary-tree",
+  "/en/profile/smoke-user",
 ];
 
 const apiChecks: Array<{ path: string; matchedPath: string }> = [
