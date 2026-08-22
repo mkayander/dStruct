@@ -85,6 +85,42 @@ const config = {
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
+  async redirects() {
+    return [
+      // L3b: retire `/internal-marketing/*` App pilot → public App routes (308).
+      {
+        source: "/internal-marketing/en",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/internal-marketing/en/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+      {
+        source: "/internal-marketing/:locale",
+        destination: "/:locale",
+        permanent: true,
+      },
+      {
+        source: "/internal-marketing/:locale/:path*",
+        destination: "/:locale/:path*",
+        permanent: true,
+      },
+      // SEO: dedupe default-locale `/en/*` vs unprefixed URLs.
+      {
+        source: "/en",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/en/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  },
   turbopack: {
     rules: {
       "*.txt": {

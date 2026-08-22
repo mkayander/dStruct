@@ -12,15 +12,14 @@ Remove `i18n` from `next.config.mjs` and serve user-facing marketing + app route
 
 ---
 
-## Current state (post #168–#171)
+## Current state (post L1–L3b)
 
 | URL | Router | Notes |
 |-----|--------|--------|
-| `/`, `/{locale}` | Pages `index.tsx` | `next.config` `i18n` |
-| `/privacy`, `/daily` | Pages SSG | same |
-| `/playground/[[...slug]]`, `/profile/[userId]` | Pages SSR | same |
-| `/internal-marketing/[locale]/*` | App pilot | **noindex**, canonical → public URL |
-| `/api/*` | Pages API | must stay routable under `i18n` on Vercel |
+| `/`, `/privacy`, `/daily`, `/playground`, `/profile/*` | App `(default-locale)/` | default locale (en), indexable |
+| `/{locale}`, `/{locale}/*` | App `[lang]/` | non-default locales, indexable |
+| `/internal-marketing/*`, `/en/*` | **308 redirect** | L3b → public App routes |
+| `/api/*` | Pages API | unchanged |
 
 Shared views already exist: `MarketingHomeView`, `PrivacyPageView`, `DailyPageView`, `PlaygroundPageView`, `ProfilePageView`.
 
@@ -28,15 +27,13 @@ Dual-router bridges: `usePlaygroundRoute`, `useProfileUserId`, `usePagesRouterCo
 
 ---
 
-## Why not flip `i18n` off yet
+## Why not flip `i18n` off yet (historical)
 
-Pages `i18n` and App `[lang]` **conflict** if both own locale prefixes. Removing `i18n` before App public routes exist breaks `/de`, `/fr`, … and SEO.
-
-Pilot lives under `/internal-marketing/` so public Pages routes stay canonical until cutover.
+Pages `i18n` and App `[lang]` **conflicted** if both owned locale prefixes. The pilot lived under `/internal-marketing/` until L3b; **`i18n` was removed in L2/L4** once Pages marketing was deleted.
 
 ---
 
-## Target routing
+## Target routing (achieved)
 
 ```
 app/[lang]/layout.tsx          # Providers, lang from params / proxy header
@@ -76,14 +73,20 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 
 ### L3 — Remove Pages marketing (default locale done in L2)
 
-1. ~~Delete `pages/index.tsx`, `pages/privacy.tsx`, `pages/daily.tsx`~~ (done with L2 — Next.js forbids duplicate App/Pages paths).
-2. Remove `/internal-marketing/*` App pilot (or 301 → public App).
+1. ~~Delete `pages/index.tsx`, `pages/privacy.tsx`, `pages/daily.tsx`~~ (done with L2).
+2. ~~Remove `/internal-marketing/*` App pilot~~ — **L3b**: 308 redirects + delete pilot tree.
+
+### L3b — Retire internal-marketing pilot
+
+1. `next.config` 308 redirects: `/internal-marketing/*` → public App; `/en/*` → unprefixed.
+2. Delete `src/app/internal-marketing/`.
+3. Update `proxy.ts`, `playgroundRoute.ts`, e2e, `preview-smoke`.
 
 ### L4 — Playground + profile on App only
 
-1. Move public traffic to `app/[lang]/playground` + `profile` (already prototyped).
-2. Delete Pages `playground` / `profile` after parity tests.
-3. **`i18n` block removed** from `next.config.mjs` (required for `app/[lang]` after Pages marketing deleted).
+1. Move public traffic to `app/[lang]/playground` + `profile` (done in L1/L2).
+2. ~~Delete Pages `playground` / `profile`~~ (done L2).
+3. ~~**`i18n` block removed** from `next.config.mjs`~~ (done L2).
 
 ### L5 — Instant Nav flags
 
@@ -119,5 +122,5 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 
 - `vibe-docs/Instant-Navigations-Design.md`
 - `vibe-docs/Instant-Navigations-TODO.md`
-- `src/proxy.ts` — locale header for App pilot
-- `src/app/internal-marketing/` — current pilot implementation
+- `src/proxy.ts` — locale header for App Router paths
+- ~~`src/app/internal-marketing/`~~ — removed L3b (308 redirects to public App)
