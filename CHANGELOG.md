@@ -1,3 +1,10 @@
+# [1.385.0](https://github.com/mkayander/dStruct/compare/v1.384.0...v1.385.0) (2026-08-22)
+
+
+### Features
+
+* **app:** locale migration L2 — default-locale App cutover ([#173](https://github.com/mkayander/dStruct/issues/173)) ([7d3da8d](https://github.com/mkayander/dStruct/commit/7d3da8dfcbb68692789b49d558c0396b5c7688f7))
+
 # [1.384.0](https://github.com/mkayander/dStruct/compare/v1.383.0...v1.384.0) (2026-08-22)
 
 
