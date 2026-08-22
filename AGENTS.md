@@ -90,6 +90,8 @@ Refer to `package.json` scripts. Summary of most-used:
 - **Sync public dump from DB**: `pnpm sync-main-dump` (with `DATABASE_URL` set; exports `isPublic` projects to `public-dumps/main.json`)
 - **Lint**: `pnpm lint` (runs ESLint + TypeScript `--noEmit`)
 - **Tests**: `pnpm test` or `pnpm test:ci` (both run Vitest once); `pnpm test:watch` for watch mode
+- **E2E (Playwright)**: `pnpm test:e2e` — local run starts `pnpm dev` + Postgres; set `PLAYWRIGHT_BASE_URL` to hit a remote preview (skips dev server). CI runs automatically on each successful Vercel preview via `.github/workflows/e2e-preview.yml` (`deployment_status` → `PLAYWRIGHT_EXPECT_MATCHED_PATH=true`).
+- **Preview smoke (CLI)**: `PLAYWRIGHT_BASE_URL=https://<preview>.vercel.app PLAYWRIGHT_EXPECT_MATCHED_PATH=true pnpm preview-smoke` — fast merge-gate (HTTP status + API `x-matched-path`). Protected previews: set `VERCEL_AUTOMATION_BYPASS_SECRET` (same GitHub secret as CI e2e; Vercel → Deployment Protection → Protection Bypass for Automation).
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)
 - **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`). **CI**: run `pnpm run ci:init` after `pnpm install` (same as postinstall). **Vercel**: `vercel.json` runs `pnpm run ensure-generated-from-install` after install when gitignored `src/graphql/generated` may be missing from cache.
 

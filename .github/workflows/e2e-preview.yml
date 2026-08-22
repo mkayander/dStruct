@@ -1,0 +1,112 @@
+# Playwright e2e against each successful Vercel preview deployment.
+# Triggered by Vercel's GitHub `deployment_status` event (no URL polling).
+#
+# Requires repo secret: VERCEL_AUTOMATION_BYPASS_SECRET (Vercel → Deployment Protection
+# → Protection Bypass for Automation) when preview deployments are protected.
+
+name: E2E (Vercel preview)
+
+env:
+  HUSKY: 0
+  SKIP_ENV_VALIDATION: true
+  PRISMA_FIELD_ENCRYPTION_KEY: ${{ secrets.PRISMA_FIELD_ENCRYPTION_KEY }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+on:
+  deployment_status:
+
+jobs:
+  e2e:
+    if: >
+      github.event.deployment_status.state == 'success' &&
+      (github.event.deployment.environment == 'Preview' ||
+        github.event.deployment.environment == 'preview') &&
+      contains(github.event.deployment_status.environment_url, 'vercel.app')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout deployed ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment_status.deployment.ref }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Init workspace (postinstall)
+        run: pnpm run ci:init
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Playwright system deps (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+
+      - name: Wait for preview to respond
+        env:
+          PREVIEW_URL: ${{ github.event.deployment_status.environment_url }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          bypass_header=()
+          if [ -n "${VERCEL_AUTOMATION_BYPASS_SECRET}" ]; then
+            bypass_header=(-H "x-vercel-protection-bypass: ${VERCEL_AUTOMATION_BYPASS_SECRET}")
+          fi
+          for attempt in $(seq 1 36); do
+            if curl -sf -o /dev/null "${bypass_header[@]}" "${PREVIEW_URL}/"; then
+              echo "Preview ready: ${PREVIEW_URL}"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Preview did not respond within 3 minutes: ${PREVIEW_URL}"
+          exit 1
+
+      - name: Run Playwright against preview
+        env:
+          CI: "true"
+          PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          PLAYWRIGHT_EXPECT_MATCHED_PATH: "true"
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: pnpm test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.event.deployment_status.deployment.sha }}
+          path: playwright-report/
+          retention-days: 14
