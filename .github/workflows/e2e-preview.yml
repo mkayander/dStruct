@@ -3,6 +3,8 @@
 #
 # Requires repo secret: VERCEL_AUTOMATION_BYPASS_SECRET (Vercel → Deployment Protection
 # → Protection Bypass for Automation) when preview deployments are protected.
+#
+# Actions use Node.js 24 runtimes (actions/*@v6+ / @v7) — see GitHub changelog 2025-09-19.
 
 name: E2E (Vercel preview)
 
@@ -27,17 +29,18 @@ jobs:
 
     steps:
       - name: Checkout deployed ref
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.deployment_status.deployment.ref }}
 
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: ".nvmrc"
-
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
+          package-manager-cache: false
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -45,7 +48,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         name: Setup pnpm cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
@@ -61,7 +64,7 @@ jobs:
 
       - name: Cache Playwright browsers
         id: playwright-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
@@ -105,7 +108,7 @@ jobs:
 
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-${{ github.event.deployment.sha || github.sha }}
           path: playwright-report/
