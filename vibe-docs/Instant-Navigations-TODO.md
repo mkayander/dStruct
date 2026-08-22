@@ -39,6 +39,8 @@
 - [x] Playground App route shell (`/internal-marketing/[locale]/playground/[[...slug]]`)
 - [x] `PlaygroundPageView` shared by Pages + App pilot
 - [x] `usePlaygroundRoute` bridge for slug navigation under App Router
-- [ ] Profile migration
+- [x] Profile App route shell (`/internal-marketing/[locale]/profile/[userId]`)
+- [x] `ProfilePageView` shared by Pages + App pilot
+- [x] `useProfileUserId` bridge for App vs Pages route param
 - [ ] Remove `i18n` from `next.config.mjs`
 - [ ] `@next/playwright` `instant()` tests
