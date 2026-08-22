@@ -1,3 +1,10 @@
+# [1.383.0](https://github.com/mkayander/dStruct/compare/v1.382.0...v1.383.0) (2026-08-22)
+
+
+### Features
+
+* **app:** add profile App Router pilot shell (Phase 3) ([#168](https://github.com/mkayander/dStruct/issues/168)) ([30ac818](https://github.com/mkayander/dStruct/commit/30ac81848d81b8059cab818851f3c3fd54ce8a3f))
+
 # [1.382.0](https://github.com/mkayander/dStruct/compare/v1.381.0...v1.382.0) (2026-08-22)
 
 
