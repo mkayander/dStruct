@@ -5,7 +5,8 @@ import { useCallback, useEffect, useMemo } from "react";
 import { callstackSlice } from "#/features/callstack/model/callstackSlice";
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { useHasMounted, usePrevious } from "#/shared/hooks";
-import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
+import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
+import { buildPlaygroundPath } from "#/shared/lib/playgroundRoute";
 import {
   getLastPlaygroundPath,
   isValidLastPlaygroundPath,
@@ -25,22 +26,19 @@ export type { PlaygroundView } from "./usePlaygroundViewParam";
  *
  * - **Implicit code with a slug**: if `view` is absent, shallow `replace` adds `?view=code`.
  * - **Tab changes**: shallow `router.replace` (no extra history entries per tab tap).
- * - Under App Router (no Pages router): returns browse defaults; no URL sync.
+ * - Under App Router pilot: uses {@link usePlaygroundRoute} for slug + `?view=` sync.
  */
 export const useMobilePlaygroundView = () => {
-  const router = usePagesRouterCompat();
+  const route = usePlaygroundRoute();
   const dispatch = useAppDispatch();
   const hasMounted = useHasMounted();
 
   const { view, setView } = usePlaygroundViewParam();
 
-  const hasProjectSlug = useMemo(() => {
-    if (!router) {
-      return false;
-    }
-    const slugs = router.query.slug;
-    return Array.isArray(slugs) && slugs.length > 0;
-  }, [router]);
+  const hasProjectSlug = useMemo(
+    () => route !== null && route.slug.length > 0,
+    [route],
+  );
 
   const currentView: PlaygroundView = useMemo(() => {
     if (view && isPlaygroundView(view)) {
@@ -66,12 +64,12 @@ export const useMobilePlaygroundView = () => {
   // With a project slug, default UI is Code; mirror that in the URL when `view` is omitted
   // (e.g. "Try it out", shared links, or `/playground/foo` without query).
   useEffect(() => {
-    if (!router?.isReady) return;
+    if (route?.basePath === undefined) return;
     if (!hasProjectSlug) return;
     if (view !== "") return;
 
     setView("code", { replace: true });
-  }, [router?.isReady, hasProjectSlug, view, setView, router]);
+  }, [hasProjectSlug, view, setView, route?.basePath]);
 
   const navigateTo = useCallback(
     (targetView: PlaygroundView, pathName?: string) => {
@@ -83,14 +81,17 @@ export const useMobilePlaygroundView = () => {
   const goToBrowse = useCallback(() => navigateTo("browse"), [navigateTo]);
   const goToCode = useCallback(
     (projectSlug?: string) => {
-      const pathName = projectSlug ? `/playground/${projectSlug}` : undefined;
+      const pathName =
+        projectSlug && route
+          ? buildPlaygroundPath(route.basePath, [projectSlug])
+          : undefined;
 
       if (projectSlug) {
         dispatch(projectSlice.actions.loadStart());
       }
       navigateTo("code", pathName);
     },
-    [dispatch, navigateTo],
+    [dispatch, navigateTo, route],
   );
   const goToResults = useCallback(() => navigateTo("results"), [navigateTo]);
 

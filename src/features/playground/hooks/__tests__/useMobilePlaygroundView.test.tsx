@@ -13,6 +13,16 @@ vi.mock("next/compat/router", () => ({
   useRouter: vi.fn(),
 }));
 
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/playground",
+  useParams: () => ({}),
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 vi.mock("#/shared/hooks/useHasMounted", () => ({
   useHasMounted: () => true,
 }));

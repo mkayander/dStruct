@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  useRouter as useAppRouter,
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
 import { startTransition, useCallback, useEffect, useState } from "react";
 
 import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
@@ -28,7 +33,7 @@ const getParamFromRouter = (
 
 /**
  * React hook to read and update a single search param (Pages Router).
- * Under App Router (no Pages router), keeps React state only — no URL sync.
+ * Under App Router (no Pages router), syncs via `next/navigation` search params.
  *
  * @param param The search param to read and update.
  * @param options Options to customize the behavior of the hook.
@@ -43,11 +48,19 @@ export const useSearchParam = <T extends string = string>(
 ) => {
   const { defaultValue, validate } = options;
   const router = usePagesRouterCompat();
+  const pathname = usePathname();
+  const appRouter = useAppRouter();
+  const searchParams = useSearchParams();
   const [state, setState] = useState<T | "">(() => {
-    if (!router) {
+    if (router) {
+      const initialValue = getParamFromRouter(param, router.query);
+      if (validate(initialValue)) {
+        return initialValue;
+      }
       return defaultValue;
     }
-    const initialValue = getParamFromRouter(param, router.query);
+
+    const initialValue = searchParams?.get(param) ?? undefined;
     if (validate(initialValue)) {
       return initialValue;
     }
@@ -56,55 +69,81 @@ export const useSearchParam = <T extends string = string>(
   });
 
   useEffect(() => {
-    if (!router) {
-      return;
-    }
-    const { query } = router;
-    const paramValue = query[param];
-    if (Array.isArray(paramValue)) {
-      console.error(
-        `useSearchParam: param ${param} is an array. This is not supported.`,
-      );
+    if (router) {
+      const { query } = router;
+      const paramValue = query[param];
+      if (Array.isArray(paramValue)) {
+        console.error(
+          `useSearchParam: param ${param} is an array. This is not supported.`,
+        );
+        return;
+      }
+
+      if (validate(paramValue)) {
+        startTransition(() => {
+          setState(paramValue);
+        });
+      }
       return;
     }
 
+    const paramValue = searchParams?.get(param) ?? undefined;
     if (validate(paramValue)) {
       startTransition(() => {
         setState(paramValue);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router, param]);
+  }, [router, param, searchParams]);
 
   const updateParam = useCallback(
     (value: string, options: SearchParamUpdateOptions = {}) => {
       if (value !== "" && !validate(value)) return;
 
       setState(value);
-      if (!router) {
+      if (router) {
+        const {
+          asPath,
+          query: { slug: _slugQuery, ...newQuery },
+        } = router;
+        if (value === "") {
+          delete newQuery[param];
+        } else {
+          newQuery[param] = value;
+        }
+
+        const currentPathname = asPath.split("?")[0];
+
+        void router[options.replace ? "replace" : "push"](
+          { pathname: options.pathName || currentPathname, query: newQuery },
+          undefined,
+          {
+            shallow: true,
+          },
+        );
         return;
       }
-      const {
-        asPath,
-        query: { slug: _slugQuery, ...newQuery },
-      } = router;
-      if (value === "") {
-        delete newQuery[param];
-      } else {
-        newQuery[param] = value;
+
+      if (!pathname) {
+        return;
       }
 
-      const currentPathname = asPath.split("?")[0];
-
-      void router[options.replace ? "replace" : "push"](
-        { pathname: options.pathName || currentPathname, query: newQuery },
-        undefined,
-        {
-          shallow: true,
-        },
-      );
+      const nextParams = new URLSearchParams(searchParams?.toString());
+      if (value === "") {
+        nextParams.delete(param);
+      } else {
+        nextParams.set(param, value);
+      }
+      const queryString = nextParams.toString();
+      const targetPath = options.pathName ?? pathname;
+      const href = queryString ? `${targetPath}?${queryString}` : targetPath;
+      if (options.replace) {
+        void appRouter.replace(href, { scroll: false });
+      } else {
+        void appRouter.push(href, { scroll: false });
+      }
     },
-    [validate, router, param],
+    [appRouter, param, pathname, router, searchParams, validate],
   );
 
   return [state, updateParam] as const;
