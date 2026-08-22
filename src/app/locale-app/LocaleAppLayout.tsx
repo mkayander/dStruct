@@ -8,7 +8,7 @@ import { authOptions } from "#/server/auth/authOptions";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 
-/** Shared App Router locale layout for `app/[lang]` and internal-marketing pilot. */
+/** Shared App Router locale layout for `app/[lang]`. */
 export async function LocaleAppLayout({
   children,
   localeParam,

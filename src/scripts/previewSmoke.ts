@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * Vercel/preview merge-gate smoke checks (API routing + pilot routes).
+ * Vercel/preview merge-gate smoke checks (API routing + public App routes).
  *
  * Usage:
  *   PLAYWRIGHT_BASE_URL=https://your-preview.vercel.app pnpm preview-smoke
@@ -72,18 +72,15 @@ const pagePaths = [
   "/daily",
   "/playground",
   "/profile/smoke-user",
+  "/de/playground/invert-binary-tree",
+  // L3b legacy URLs — should 308 then 200 after redirect follow.
   "/internal-marketing/en",
   "/internal-marketing/en/privacy",
-  "/internal-marketing/en/daily",
-  "/internal-marketing/en/playground",
+  "/internal-marketing/de/daily",
   "/internal-marketing/en/playground/invert-binary-tree",
   "/internal-marketing/en/profile/smoke-user",
-  "/en",
   "/en/privacy",
-  "/en/daily",
   "/en/playground",
-  "/de/playground/invert-binary-tree",
-  "/en/profile/smoke-user",
 ];
 
 const apiChecks: Array<{ path: string; matchedPath: string }> = [

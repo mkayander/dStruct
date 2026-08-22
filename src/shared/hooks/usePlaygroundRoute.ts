@@ -29,8 +29,8 @@ export type PlaygroundRouteContext = {
 };
 
 /**
- * Unified playground route state for Pages (`/playground`) and App pilot
- * (`/internal-marketing/[locale]/playground`).
+ * Unified playground route state for App Router public paths
+ * (`/playground`, `/{lang}/playground`, and legacy pilot bookmarks).
  */
 export const usePlaygroundRoute = (): PlaygroundRouteContext | null => {
   const pagesRouter = usePagesRouterCompat();

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Marketing home UI. Public `/` and `app/[lang]` reuse this; internal-marketing pilot too.
+ * Marketing home UI. Public `/` and `app/[lang]` reuse this.
  */
 import { useState } from "react";
 

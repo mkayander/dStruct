@@ -19,7 +19,7 @@ export { appDocumentMetadata as metadata, appDocumentViewport as viewport };
 
 /**
  * Minimal root shell for App Router only. Locale comes from {@link APP_ROUTER_LOCALE_HEADER}
- * (set in proxy for direct `/internal-marketing/[locale]` visits).
+ * (set in proxy for App Router locale paths).
  */
 export default async function RootLayout({
   children,

@@ -26,7 +26,7 @@ Cursor rules to apply (see each file for full wording):
 
 ### Instant Navigations (Next.js 16.3) — not on Pages Router yet
 
-dStruct is **mostly Pages Router** (`src/pages/`). An **App Router pilot** lives under `src/app/internal-marketing/[locale]/` (home, privacy, daily; noindex). **Instant Navigations** (`cacheComponents`, `partialPrefetching`, `'use cache'`, `unstable_instant`, Instant Insights) requires broader App Router migration. Do not enable `cacheComponents` or add `'use cache'` under `src/pages/`.
+dStruct public marketing and app routes live on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public routes (L3b). **Instant Navigations** (`cacheComponents`, `partialPrefetching`, `'use cache'`, `unstable_instant`, Instant Insights) requires resolving root `headers()` blockers. Do not enable `cacheComponents` or add `'use cache'` under `src/pages/`.
 
 Before implementing Instant Navigations, read:
 
