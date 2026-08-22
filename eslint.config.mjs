@@ -125,9 +125,10 @@ const eslintConfig = [
       },
     },
   },
-  // Testing Library rules for test files only
+  // Testing Library rules for Vitest/RTL test files (not Playwright e2e)
   {
     files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+    ignores: ["e2e/**"],
     plugins: {
       "testing-library": testingLibrary,
     },
