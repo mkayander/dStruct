@@ -13,6 +13,12 @@
 - [x] Re-tried on PR #165 preview (2026-08-09) — **same regression** (`x-matched-path: /en/404`)
 - [x] **Stay on `next@16.2.12`** until Vercel + Pages `i18n` API routing is fixed
 - [ ] Preview smoke green on 16.3.x before enabling Instant Nav flags
+- [ ] Retrying **`next@16.3.2`** (PR branch) — local lint/test/build OK; **Vercel preview smoke + e2e** is merge gate
+
+## Phase 1b — Locale migration (see `Locale-Migration-Design.md`)
+
+- [ ] `app/[lang]/` public routes (mirror internal-marketing pilots)
+- [ ] Remove `i18n` from `next.config.mjs` (after L3–L4 in locale design)
 
 ## Phase 2 — App Router pilot
 
@@ -46,4 +52,4 @@
 - [x] `pnpm preview-smoke` script for Vercel merge-gate checks
 - [x] GitHub Actions e2e on Vercel preview (`.github/workflows/e2e-preview.yml`, `deployment_status`)
 - [ ] `@next/playwright` `instant()` tests (blocked: `cacheComponents` + `unstable_instant` + 16.3.x)
-- [ ] Remove `i18n` from `next.config.mjs` (locale migration epic)
+- [ ] Locale migration epic — **`vibe-docs/Locale-Migration-Design.md`**
