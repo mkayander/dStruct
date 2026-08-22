@@ -10,7 +10,8 @@ export const appDocumentViewport: Viewport = {
 
 export const appDocumentMetadata: Metadata = {
   other: {
-    "darkreader-lock": "",
+    // `darkreader-lock` is rendered as a literal `<meta name="darkreader-lock" />` in
+    // `app/layout.tsx` — Metadata `other` skips empty-string values (see e2e head-tag smoke).
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",

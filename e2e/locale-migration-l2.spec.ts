@@ -11,6 +11,11 @@ test.describe("locale migration L2 public URLs", () => {
     await page.goto("/");
     await expect(page).toHaveTitle(/dStruct/);
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    await expect(page.locator('meta[name="darkreader-lock"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+      "content",
+      "#121212",
+    );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
       "https://dstruct.pro/",
