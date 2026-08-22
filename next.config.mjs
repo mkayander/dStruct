@@ -7,30 +7,6 @@ void (
   !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"))
 );
 
-/** Keep in sync with `src/i18n/i18n-util.ts` `locales`. */
-const i18nLocales = [
-  "ar",
-  "be",
-  "de",
-  "en",
-  "es",
-  "fr",
-  "hi",
-  "id",
-  "it",
-  "ja",
-  "ko",
-  "nl",
-  "pl",
-  "pt",
-  "ru",
-  "sr",
-  "tr",
-  "uk",
-  "vi",
-  "zh",
-];
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -84,11 +60,6 @@ const config = {
     "three",
     "zod",
   ],
-  i18n: {
-    locales: i18nLocales,
-    defaultLocale: "en",
-    localeDetection: false,
-  },
   images: {
     remotePatterns: [
       {

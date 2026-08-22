@@ -1,7 +1,8 @@
 import { getAll } from "@vercel/edge-config";
 import { type NextRequest, NextResponse } from "next/server";
 
-import { locales } from "#/i18n/i18n-util";
+import { baseLocale, locales } from "#/i18n/i18n-util";
+import { isDefaultLocalePublicMarketingPath } from "#/i18n/localeMigrationRouting";
 import { APP_ROUTER_LOCALE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
 
 const localeSet = new Set<string>(locales);
@@ -27,9 +28,9 @@ function localeFromPathname(pathname: string): string | null {
  *
  * - Serves `/api/config` from Edge Config.
  * - Sets {@link APP_ROUTER_LOCALE_HEADER} for App Router locale paths
- *   (`/internal-marketing/[locale]/*` pilot and `/[lang]/*` L1 shell).
+ *   (`/internal-marketing/[locale]/*`, `/[lang]/*`, and L2 unprefixed default-locale marketing).
  *
- * Public `/` and unprefixed `/privacy` stay on Pages until locale migration L2/L3.
+ * Unprefixed `/`, `/privacy`, … are App `(default-locale)` routes (L2).
  */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -48,6 +49,12 @@ export async function proxy(request: NextRequest) {
     }
   }
 
+  if (isDefaultLocalePublicMarketingPath(pathname)) {
+    return NextResponse.next({
+      request: { headers: withLocaleHeader(request, baseLocale) },
+    });
+  }
+
   const locale = localeFromPathname(pathname);
   if (locale) {
     return NextResponse.next({
@@ -61,6 +68,11 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/config",
+    "/",
+    "/privacy",
+    "/daily",
+    "/playground/:path*",
+    "/profile/:path*",
     {
       source: "/internal-marketing/:path*",
       locale: false,
