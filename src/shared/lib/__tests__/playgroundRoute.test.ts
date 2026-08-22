@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  appLocalePlaygroundBasePath,
   buildPlaygroundPath,
   internalMarketingPlaygroundBasePath,
   parsePlaygroundPathname,
@@ -42,10 +43,25 @@ describe("playgroundRoute", () => {
     });
   });
 
+  it("parses app/[lang] playground paths", () => {
+    const basePath = appLocalePlaygroundBasePath("en");
+    expect(parsePlaygroundPathname("/en/playground")).toEqual({
+      basePath,
+      slug: [],
+    });
+    expect(
+      parsePlaygroundPathname("/de/playground/invert-binary-tree"),
+    ).toEqual({
+      basePath: appLocalePlaygroundBasePath("de"),
+      slug: ["invert-binary-tree"],
+    });
+  });
+
   it("returns null for non-playground paths", () => {
     expect(parsePlaygroundPathname("/")).toBeNull();
     expect(parsePlaygroundPathname("/privacy")).toBeNull();
     expect(parsePlaygroundPathname("/internal-marketing/en")).toBeNull();
+    expect(parsePlaygroundPathname("/not-a-locale/playground")).toBeNull();
   });
 
   it("builds paths from base + slug segments", () => {

@@ -14,16 +14,22 @@ function withLocaleHeader(request: NextRequest, locale: string): Headers {
   return requestHeaders;
 }
 
+function localeFromPathname(pathname: string): string | null {
+  const segment = pathname.split("/").filter(Boolean)[0];
+  if (segment && localeSet.has(segment)) {
+    return segment;
+  }
+  return null;
+}
+
 /**
  * Next.js 16+ request proxy (replaces `middleware.ts`).
  *
  * - Serves `/api/config` from Edge Config.
- * - Sets {@link APP_ROUTER_LOCALE_HEADER} for direct App marketing visits
- *   (`/internal-marketing/[locale]` Instant Nav pilot).
+ * - Sets {@link APP_ROUTER_LOCALE_HEADER} for App Router locale paths
+ *   (`/internal-marketing/[locale]/*` pilot and `/[lang]/*` L1 shell).
  *
- * Public `/` and bare `/{locale}` stay on Pages `pages/index` until locale
- * routing leaves `next.config` `i18n` (middleware rewrites into App routes
- * 404 for non-default locales under Pages i18n).
+ * Public `/` and unprefixed `/privacy` stay on Pages until locale migration L2/L3.
  */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -42,6 +48,13 @@ export async function proxy(request: NextRequest) {
     }
   }
 
+  const locale = localeFromPathname(pathname);
+  if (locale) {
+    return NextResponse.next({
+      request: { headers: withLocaleHeader(request, locale) },
+    });
+  }
+
   return NextResponse.next();
 }
 
@@ -50,6 +63,14 @@ export const config = {
     "/api/config",
     {
       source: "/internal-marketing/:path*",
+      locale: false,
+    },
+    {
+      source: "/:locale",
+      locale: false,
+    },
+    {
+      source: "/:locale/:path*",
       locale: false,
     },
   ],

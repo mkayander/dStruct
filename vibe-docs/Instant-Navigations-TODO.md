@@ -12,12 +12,13 @@
 - [x] Tried `next@16.3.0` — local OK; Vercel preview `/api/*` → `/en/404` (2026-08, pre-adapter fix)
 - [x] Re-tried on PR #165 preview (2026-08-09) — **same regression** (`x-matched-path: /en/404`)
 - [x] **Stay on `next@16.2.12`** until Vercel + Pages `i18n` API routing is fixed
-- [ ] Preview smoke green on 16.3.x before enabling Instant Nav flags
-- [ ] Retrying **`next@16.3.2`** (PR branch) — local lint/test/build OK; **Vercel preview smoke + e2e** is merge gate
+- [x] Preview smoke green on 16.3.x before enabling Instant Nav flags (merged PR #171 — `next@16.3.2`)
+- [x] **`next@16.3.2`** on main — Vercel preview smoke + e2e passed merge gate
 
 ## Phase 1b — Locale migration (see `Locale-Migration-Design.md`)
 
-- [ ] `app/[lang]/` public routes (mirror internal-marketing pilots)
+- [x] `app/[lang]/` public routes (mirror internal-marketing pilots) — PR branch `cursor/locale-migration-l1-8f0a`
+- [ ] Rewrites/redirects from Pages to App (L2)
 - [ ] Remove `i18n` from `next.config.mjs` (after L3–L4 in locale design)
 
 ## Phase 2 — App Router pilot
