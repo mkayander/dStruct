@@ -1,3 +1,10 @@
+# [1.382.0](https://github.com/mkayander/dStruct/compare/v1.381.0...v1.382.0) (2026-08-22)
+
+
+### Features
+
+* **app:** playground App Router pilot shell (Phase 3) ([#167](https://github.com/mkayander/dStruct/issues/167)) ([4df023d](https://github.com/mkayander/dStruct/commit/4df023d9e51e6c4a350f65f85068375029207df4))
+
 # [1.381.0](https://github.com/mkayander/dStruct/compare/v1.380.0...v1.381.0) (2026-08-09)
 
 
