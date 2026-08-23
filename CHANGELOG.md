@@ -1,3 +1,10 @@
+# [1.386.0](https://github.com/mkayander/dStruct/compare/v1.385.0...v1.386.0) (2026-08-23)
+
+
+### Features
+
+* **app:** locale migration L3b — retire internal-marketing pilot ([#174](https://github.com/mkayander/dStruct/issues/174)) ([3adfd15](https://github.com/mkayander/dStruct/commit/3adfd15d8ddcac380c14493aed2833032e21dd74))
+
 # [1.385.0](https://github.com/mkayander/dStruct/compare/v1.384.0...v1.385.0) (2026-08-22)
 
 
