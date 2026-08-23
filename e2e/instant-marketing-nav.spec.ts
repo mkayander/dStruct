@@ -15,7 +15,9 @@ test.describe("instant marketing navigations (L5)", () => {
     await dismissCookieBannerIfVisible(page);
   });
 
-  test("privacy is instant on client navigation from home", async ({ page }) => {
+  test("privacy is instant on client navigation from home", async ({
+    page,
+  }) => {
     await instant(page, async () => {
       await page.getByRole("link", { name: /privacy policy/i }).click();
       await page.waitForURL((url) => url.pathname === "/privacy");
