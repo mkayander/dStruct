@@ -4,6 +4,16 @@ import { expect, test } from "@playwright/test";
  * L3b: legacy `/internal-marketing/*` and duplicate `/en/*` URLs 308 to public App routes.
  */
 test.describe("locale migration L3b legacy redirects", () => {
+  test("legacy URLs respond with 308 permanent redirect", async ({
+    request,
+  }) => {
+    const response = await request.get("/internal-marketing/en/privacy", {
+      maxRedirects: 0,
+    });
+    expect(response.status()).toBe(308);
+    expect(response.headers().location).toBe("/privacy");
+  });
+
   test("internal-marketing en home redirects to /", async ({ page }) => {
     const response = await page.goto("/internal-marketing/en");
     expect(response?.status()).toBeLessThan(400);

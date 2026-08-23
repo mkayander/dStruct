@@ -32,11 +32,9 @@
 - [x] Public `/` served from App `(default-locale)` (Pages marketing removed L2/L3)
 - [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
-- [x] `robots: noindex` on pilot routes (`internalMarketingPilotMetadata` + layout default)
-- [x] Extend pilot to `/internal-marketing/[locale]/privacy` and `/daily`
-- [x] Public cutover of home to App (L2 `(default-locale)/`)
+- [x] ~~Pilot noindex metadata~~ (removed with L3b internal-marketing pilot)
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
-- [ ] `unstable_instant` on pilot routes (blocked until `cacheComponents`)
+- [ ] `unstable_instant` on marketing routes (blocked until `cacheComponents`)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
 - [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`

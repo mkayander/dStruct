@@ -3,26 +3,26 @@ import { expect, test } from "@playwright/test";
 /**
  * Smoke tests for public `app/[lang]/*` routes (locale migration L1).
  *
- * Explicit `/en/*` URLs redirect to unprefixed canonicals in L2; see
- * `e2e/locale-migration-l2.spec.ts` for unprefixed `/` and `/privacy`.
+ * Default locale (`en`) is served from `(default-locale)/` at unprefixed URLs;
+ * see `e2e/locale-migration-l2.spec.ts` and `e2e/locale-migration-l3b.spec.ts`.
  */
-test.describe("app/[lang] public routes", () => {
-  test("en home is indexable with public canonical", async ({ page }) => {
-    await page.goto("/en");
+test.describe("app/[lang] public routes (non-default locales)", () => {
+  test("de home is indexable with locale canonical", async ({ page }) => {
+    await page.goto("/de");
     await expect(page).toHaveTitle(/dStruct/);
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://dstruct.pro/",
+      "https://dstruct.pro/de",
     );
   });
 
-  test("en privacy is indexable with public canonical", async ({ page }) => {
-    await page.goto("/en/privacy");
+  test("de privacy is indexable with locale canonical", async ({ page }) => {
+    await page.goto("/de/privacy");
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://dstruct.pro/privacy",
+      "https://dstruct.pro/de/privacy",
     );
   });
 
@@ -35,29 +35,29 @@ test.describe("app/[lang] public routes", () => {
     );
   });
 
-  test("en playground landing is indexable with public canonical", async ({
+  test("de playground landing is indexable with locale canonical", async ({
     page,
   }) => {
-    await page.goto("/en/playground");
+    await page.goto("/de/playground");
     await expect(page).toHaveTitle(/Playground/i);
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://dstruct.pro/playground",
+      "https://dstruct.pro/de/playground",
     );
   });
 
-  test("en profile is noindex with public canonical", async ({ page }) => {
+  test("de profile is noindex with locale canonical", async ({ page }) => {
     const userId = "e2e-app-lang-user";
-    await page.goto(`/en/profile/${userId}`);
-    await expect(page).toHaveTitle(/Profile/i);
+    await page.goto(`/de/profile/${userId}`);
+    await expect(page).toHaveTitle(/Profil|Profile/i);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       "content",
       /noindex/i,
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      `https://dstruct.pro/profile/${userId}`,
+      `https://dstruct.pro/de/profile/${userId}`,
     );
   });
 });

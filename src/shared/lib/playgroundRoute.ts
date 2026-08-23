@@ -69,7 +69,7 @@ export function parsePlaygroundPathname(
       ? slugPart.split("/").filter((segment) => segment.length > 0)
       : [];
     return {
-      basePath: appLocalePlaygroundBasePath(lang),
+      basePath: playgroundBasePathForLocale(lang),
       slug,
     };
   }
@@ -77,7 +77,7 @@ export function parsePlaygroundPathname(
   return null;
 }
 
-/** Builds a playground path under the given base (public or pilot). Empty segments are omitted. */
+/** Builds a playground path under the given base. Empty segments are omitted. */
 export function buildPlaygroundPath(basePath: string, slug: string[]): string {
   const segments = slug.filter((segment) => segment.length > 0);
   if (segments.length === 0) {

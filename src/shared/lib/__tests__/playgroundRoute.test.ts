@@ -43,9 +43,8 @@ describe("playgroundRoute", () => {
   });
 
   it("parses app/[lang] playground paths", () => {
-    const basePath = appLocalePlaygroundBasePath("en");
     expect(parsePlaygroundPathname("/en/playground")).toEqual({
-      basePath,
+      basePath: PLAYGROUND_PUBLIC_BASE_PATH,
       slug: [],
     });
     expect(
@@ -94,6 +93,12 @@ describe("playgroundRoute", () => {
     expect(
       remapPlaygroundPathToBase(
         "/internal-marketing/en/playground/foo/bar",
+        PLAYGROUND_PUBLIC_BASE_PATH,
+      ),
+    ).toBe("/playground/foo/bar");
+    expect(
+      remapPlaygroundPathToBase(
+        "/en/playground/foo/bar",
         PLAYGROUND_PUBLIC_BASE_PATH,
       ),
     ).toBe("/playground/foo/bar");
