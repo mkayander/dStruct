@@ -1,3 +1,10 @@
+# [1.387.0](https://github.com/mkayander/dStruct/compare/v1.386.0...v1.387.0) (2026-08-23)
+
+
+### Features
+
+* **app:** playground SSR device hints + L5 Cache Components prep ([#175](https://github.com/mkayander/dStruct/issues/175)) ([bfba2ca](https://github.com/mkayander/dStruct/commit/bfba2ca9d952172aa5e6b9b289c852f8ca2621ad))
+
 # [1.386.0](https://github.com/mkayander/dStruct/compare/v1.385.0...v1.386.0) (2026-08-23)
 
 
