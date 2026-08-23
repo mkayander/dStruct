@@ -42,6 +42,9 @@
 ## Phase 3 — Instant Nav / Cache Components (L5 in progress)
 
 - [x] **`cacheComponents` + `partialPrefetching`** enabled (incremental — `instant = false` on runtime segments)
-- [ ] Remove `instant = false` from marketing routes (cache session/i18n or Suspense-split root `headers()`)
-- [ ] `unstable_instant` on marketing routes
-- [ ] `@next/playwright` `instant()` tests
+- [x] Suspense-split root `headers()` locale read (removed root `instant = false`)
+- [x] `'use cache'` on `loadI18nForLocale` + metadata translations; Suspense-wrap session/device in `LocaleAppLayout`
+- [x] `instant = true` on marketing pages (`/`, `/privacy`, `/daily`); `instant = false` on playground/profile
+- [x] `@next/playwright` `instant()` tests for marketing client navigations
+- [ ] Initial page-load instant shell (hard navigation) — metadata/body still stream after root Suspense
+- [ ] Playground/profile instant adoption (optional)

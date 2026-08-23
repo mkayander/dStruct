@@ -5,6 +5,9 @@ import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicPageMetadataFromTranslation } from "#/app/locale-app/publicPageMetadataFromTranslation";
 
+/** Marketing privacy — instant client navigations to sibling routes (L5). */
+export const instant = true;
+
 export async function generateMetadata(): Promise<Metadata> {
   return publicPageMetadataFromTranslation(
     baseLocale,
