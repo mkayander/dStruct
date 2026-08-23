@@ -1,11 +1,13 @@
 import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
 import { authOptions } from "#/server/auth/authOptions";
-import type { SsrDeviceType } from "#/themes";
+import { APP_ROUTER_SSR_DEVICE_TYPE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
+import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 
@@ -13,11 +15,9 @@ import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 export async function LocaleAppLayout({
   children,
   localeParam,
-  ssrDeviceType,
 }: {
   children: React.ReactNode;
   localeParam: string;
-  ssrDeviceType?: SsrDeviceType;
 }) {
   if (!locales.includes(localeParam as Locales)) {
     notFound();
@@ -25,6 +25,10 @@ export async function LocaleAppLayout({
   const locale = localeParam as Locales;
   const session = await getServerSession(authOptions);
   const i18n = await loadI18nForLocale(locale);
+  const headerList = await headers();
+  const ssrDeviceType = parseSsrDeviceTypeHeader(
+    headerList.get(APP_ROUTER_SSR_DEVICE_TYPE_HEADER),
+  );
 
   return (
     <AppRootLayoutClient

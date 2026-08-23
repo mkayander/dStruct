@@ -23,4 +23,12 @@ test.describe("API routes", () => {
       expect(trpcResponse.headers()["x-matched-path"]).toBe("/api/trpc/[trpc]");
     }
   });
+
+  test("playground sets Accept-CH for SSR device hints", async ({
+    request,
+  }) => {
+    const response = await request.get("/playground");
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["accept-ch"]).toContain("Sec-CH-UA-Mobile");
+  });
 });

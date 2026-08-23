@@ -78,6 +78,16 @@ export const resolveSsrDeviceType = (
   return "desktop";
 };
 
+/** Parses proxy-set {@link APP_ROUTER_SSR_DEVICE_TYPE_HEADER} for playground SSR theme. */
+export const parseSsrDeviceTypeHeader = (
+  value: string | null,
+): SsrDeviceType | undefined => {
+  if (value === "mobile" || value === "desktop") {
+    return value;
+  }
+  return undefined;
+};
+
 export const setDeviceHintResponseHeaders = (res?: ServerResponse) => {
   if (!res) return;
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   applyDeviceHintResponseHeaders,
+  parseSsrDeviceTypeHeader,
   resolveSsrDeviceType,
 } from "#/shared/lib/ssrDevice";
 
@@ -21,6 +22,18 @@ describe("ssrDevice", () => {
 
     it("defaults to desktop when hints are absent", () => {
       expect(resolveSsrDeviceType(new Headers())).toBe("desktop");
+    });
+  });
+
+  describe("parseSsrDeviceTypeHeader", () => {
+    it("returns mobile or desktop when valid", () => {
+      expect(parseSsrDeviceTypeHeader("mobile")).toBe("mobile");
+      expect(parseSsrDeviceTypeHeader("desktop")).toBe("desktop");
+    });
+
+    it("returns undefined for missing or invalid values", () => {
+      expect(parseSsrDeviceTypeHeader(null)).toBeUndefined();
+      expect(parseSsrDeviceTypeHeader("tablet")).toBeUndefined();
     });
   });
 

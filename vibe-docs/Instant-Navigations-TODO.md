@@ -23,8 +23,6 @@
 - [x] Remove `i18n` from `next.config.mjs` — L2
 - [x] Retire `/internal-marketing/*` pilot (L3b redirects + delete tree)
 
-- [x] Retire `/internal-marketing/*` pilot (L3b redirects + delete tree)
-
 ## Phase 2 — App Router shell (locale migration complete)
 
 - [x] `TrpcProvider` + `AppRootLayoutClient`
@@ -34,7 +32,7 @@
 - [x] Public `/` served from App `(default-locale)`
 - [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
-- [x] Playground SSR device hints on App routes (`playground/layout.tsx` + proxy `Accept-CH`)
+- [x] Playground SSR device hints via proxy header + `Accept-CH` (single shared App shell)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
 - [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
