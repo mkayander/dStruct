@@ -19,23 +19,22 @@
 
 - [x] `app/[lang]/` public routes (mirror internal-marketing pilots) — merged #172
 - [x] Rewrites/redirects from Pages to App (L2) — `app/(default-locale)/` at unprefixed URLs
-- [x] Remove default-locale Pages marketing (`index`, `privacy`, `daily`, `playground`, `profile`) — L3 partial
-- [x] Remove `i18n` from `next.config.mjs` (required once Pages marketing deleted — L2/L4)
+- [x] Remove default-locale Pages marketing — L2/L3
+- [x] Remove `i18n` from `next.config.mjs` — L2
+- [x] Retire `/internal-marketing/*` pilot (L3b redirects + delete tree)
 
 ## Phase 2 — App Router pilot
 
 - [x] `TrpcProvider` + `AppRootLayoutClient`
-- [x] `src/app/layout.tsx` + `internal-marketing/[locale]/` pilot
+- [x] `src/app/layout.tsx` + public App locale routes
 - [x] `MarketingHomeView` shared by Pages home + App pilot
 - [x] Dual-router shell (`next/compat/router`) so App pilot does not throw
 - [x] Public `/` served from App `(default-locale)` (Pages marketing removed L2/L3)
-- [x] `proxy.ts`: `/api/config` + locale header for direct `/internal-marketing/*`
+- [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
-- [x] `robots: noindex` on pilot routes (`internalMarketingPilotMetadata` + layout default)
-- [x] Extend pilot to `/internal-marketing/[locale]/privacy` and `/daily`
-- [x] Public cutover of home to App (L2 `(default-locale)/`; pilot `/internal-marketing` until L3b)
+- [x] ~~Pilot noindex metadata~~ (removed with L3b internal-marketing pilot)
 - [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
-- [ ] `unstable_instant` on pilot routes (blocked until `cacheComponents`)
+- [ ] `unstable_instant` on marketing routes (blocked until `cacheComponents`)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
 - [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
@@ -44,13 +43,13 @@
 
 ## Phase 3+ — Playground / full migration
 
-- [x] Playground App route shell (`/internal-marketing/[locale]/playground/[[...slug]]`)
+- [x] Playground App route shell (`app/[lang]/playground`, `(default-locale)/playground`)
 - [x] `PlaygroundPageView` shared by Pages + App pilot
 - [x] `usePlaygroundRoute` bridge for slug navigation under App Router
-- [x] Profile App route shell (`/internal-marketing/[locale]/profile/[userId]`)
+- [x] Profile App route shell (`app/[lang]/profile`, `(default-locale)/profile`)
 - [x] `ProfilePageView` shared by Pages + App pilot
 - [x] `useProfileUserId` bridge for App vs Pages route param
-- [x] Playwright pilot smoke e2e (`e2e/pilot-routes.spec.ts`, `e2e/api-smoke.spec.ts`)
+- [x] Playwright locale migration e2e (`e2e/locale-migration-l*.spec.ts`, `e2e/api-smoke.spec.ts`)
 - [x] `pnpm preview-smoke` script for Vercel merge-gate checks
 - [x] GitHub Actions e2e on Vercel preview (`.github/workflows/e2e-preview.yml`, `deployment_status`)
 - [ ] `@next/playwright` `instant()` tests (blocked: `cacheComponents` + `unstable_instant` + 16.3.x)

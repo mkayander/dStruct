@@ -1,9 +1,7 @@
-import { locales } from "#/i18n/i18n-util";
+import { baseLocale, locales } from "#/i18n/i18n-util";
 
 /** Public Pages Router playground prefix (canonical URLs). */
 export const PLAYGROUND_PUBLIC_BASE_PATH = "/playground";
-
-const INTERNAL_MARKETING_PREFIX = "/internal-marketing";
 
 const localeCodeSet = new Set<string>(locales);
 
@@ -12,19 +10,24 @@ export type ParsedPlaygroundRoute = {
   slug: string[];
 };
 
-/** App Router pilot base for a locale segment. */
-export function internalMarketingPlaygroundBasePath(locale: string): string {
-  return `${INTERNAL_MARKETING_PREFIX}/${locale}/playground`;
-}
-
 /** App Router public base: `/{lang}/playground` (L1 locale migration). */
 export function appLocalePlaygroundBasePath(lang: string): string {
   return `/${lang}/playground`;
 }
 
+/** Canonical playground base for a locale (unprefixed for default locale). */
+export function playgroundBasePathForLocale(locale: string): string {
+  if (locale === baseLocale) {
+    return PLAYGROUND_PUBLIC_BASE_PATH;
+  }
+  return appLocalePlaygroundBasePath(locale);
+}
+
 /**
- * Parses `/playground/...`, `/internal-marketing/{locale}/playground/...`,
+ * Parses `/playground/...`, legacy `/internal-marketing/{locale}/playground/...`,
  * or `/{lang}/playground/...` when `lang` is a known locale.
+ *
+ * Legacy pilot paths normalize to public bases (bookmarks / localStorage).
  */
 export function parsePlaygroundPathname(
   pathname: string,
@@ -43,17 +46,17 @@ export function parsePlaygroundPathname(
     return { basePath: PLAYGROUND_PUBLIC_BASE_PATH, slug };
   }
 
-  const pilotMatch = pathOnly.match(
+  const legacyPilotMatch = pathOnly.match(
     /^\/internal-marketing\/([^/]+)\/playground(?:\/(.*))?$/,
   );
-  if (pilotMatch) {
-    const locale = pilotMatch[1] ?? "";
-    const slugPart = pilotMatch[2];
+  if (legacyPilotMatch) {
+    const locale = legacyPilotMatch[1] ?? "";
+    const slugPart = legacyPilotMatch[2];
     const slug = slugPart
       ? slugPart.split("/").filter((segment) => segment.length > 0)
       : [];
     return {
-      basePath: internalMarketingPlaygroundBasePath(locale),
+      basePath: playgroundBasePathForLocale(locale),
       slug,
     };
   }
@@ -66,7 +69,7 @@ export function parsePlaygroundPathname(
       ? slugPart.split("/").filter((segment) => segment.length > 0)
       : [];
     return {
-      basePath: appLocalePlaygroundBasePath(lang),
+      basePath: playgroundBasePathForLocale(lang),
       slug,
     };
   }
@@ -74,7 +77,7 @@ export function parsePlaygroundPathname(
   return null;
 }
 
-/** Builds a playground path under the given base (public or pilot). Empty segments are omitted. */
+/** Builds a playground path under the given base. Empty segments are omitted. */
 export function buildPlaygroundPath(basePath: string, slug: string[]): string {
   const segments = slug.filter((segment) => segment.length > 0);
   if (segments.length === 0) {
@@ -85,7 +88,7 @@ export function buildPlaygroundPath(basePath: string, slug: string[]): string {
 
 /**
  * Remaps slug segments from a stored playground path onto `targetBasePath`.
- * Used when restoring last project on pilot vs public routes.
+ * Used when restoring last project across public vs locale-prefixed routes.
  */
 export function remapPlaygroundPathToBase(
   path: string,

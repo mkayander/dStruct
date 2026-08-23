@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import {
   appLocalePlaygroundBasePath,
   buildPlaygroundPath,
-  internalMarketingPlaygroundBasePath,
   parsePlaygroundPathname,
   PLAYGROUND_PUBLIC_BASE_PATH,
+  playgroundBasePathForLocale,
   remapPlaygroundPathToBase,
 } from "#/shared/lib/playgroundRoute";
 
@@ -25,12 +25,11 @@ describe("playgroundRoute", () => {
     });
   });
 
-  it("parses internal-marketing pilot playground paths", () => {
-    const basePath = internalMarketingPlaygroundBasePath("de");
+  it("normalizes legacy internal-marketing pilot paths to public bases", () => {
     expect(
-      parsePlaygroundPathname("/internal-marketing/de/playground"),
+      parsePlaygroundPathname("/internal-marketing/en/playground"),
     ).toEqual({
-      basePath,
+      basePath: PLAYGROUND_PUBLIC_BASE_PATH,
       slug: [],
     });
     expect(
@@ -38,15 +37,14 @@ describe("playgroundRoute", () => {
         "/internal-marketing/de/playground/invert-binary-tree",
       ),
     ).toEqual({
-      basePath,
+      basePath: appLocalePlaygroundBasePath("de"),
       slug: ["invert-binary-tree"],
     });
   });
 
   it("parses app/[lang] playground paths", () => {
-    const basePath = appLocalePlaygroundBasePath("en");
     expect(parsePlaygroundPathname("/en/playground")).toEqual({
-      basePath,
+      basePath: PLAYGROUND_PUBLIC_BASE_PATH,
       slug: [],
     });
     expect(
@@ -82,20 +80,31 @@ describe("playgroundRoute", () => {
     ).toBe("/playground/foo/case");
   });
 
-  it("remaps stored paths onto a different base (pilot vs public)", () => {
-    const pilotBase = internalMarketingPlaygroundBasePath("de");
+  it("playgroundBasePathForLocale uses unprefixed path for default locale", () => {
+    expect(playgroundBasePathForLocale("en")).toBe(PLAYGROUND_PUBLIC_BASE_PATH);
+    expect(playgroundBasePathForLocale("de")).toBe("/de/playground");
+  });
+
+  it("remaps stored paths onto a different base (legacy pilot vs public)", () => {
+    const deBase = appLocalePlaygroundBasePath("de");
     expect(
-      remapPlaygroundPathToBase("/playground/invert-binary-tree", pilotBase),
-    ).toBe("/internal-marketing/de/playground/invert-binary-tree");
+      remapPlaygroundPathToBase("/playground/invert-binary-tree", deBase),
+    ).toBe("/de/playground/invert-binary-tree");
     expect(
       remapPlaygroundPathToBase(
         "/internal-marketing/en/playground/foo/bar",
         PLAYGROUND_PUBLIC_BASE_PATH,
       ),
     ).toBe("/playground/foo/bar");
-    expect(remapPlaygroundPathToBase("/playground", pilotBase)).toBeNull();
     expect(
-      remapPlaygroundPathToBase("/playground/[[...slug]]", pilotBase),
+      remapPlaygroundPathToBase(
+        "/en/playground/foo/bar",
+        PLAYGROUND_PUBLIC_BASE_PATH,
+      ),
+    ).toBe("/playground/foo/bar");
+    expect(remapPlaygroundPathToBase("/playground", deBase)).toBeNull();
+    expect(
+      remapPlaygroundPathToBase("/playground/[[...slug]]", deBase),
     ).toBeNull();
   });
 });
