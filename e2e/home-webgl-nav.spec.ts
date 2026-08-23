@@ -1,8 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
+import {
+  clickFooterPrivacyPolicyLink,
+  dismissCookieBannerIfVisible,
+} from "./helpers/dismissCookieBanner";
 import {
   collectWebGlContextLostMessages,
+  forceLoseActiveLandingWebGLContexts,
   waitForActiveLandingWebGLCanvases,
 } from "./helpers/landingWebGLCanvases";
 
@@ -18,7 +22,7 @@ test.describe("home landing WebGL canvases", () => {
     await dismissCookieBannerIfVisible(page);
     await waitForActiveLandingWebGLCanvases(page);
 
-    await page.getByRole("link", { name: /privacy policy/i }).click();
+    await clickFooterPrivacyPolicyLink(page);
     await page.waitForURL((url) => url.pathname === "/privacy");
 
     await page
@@ -37,28 +41,16 @@ test.describe("home landing WebGL canvases", () => {
   }) => {
     await page.goto("/");
     await dismissCookieBannerIfVisible(page);
-    await waitForActiveLandingWebGLCanvases(page);
-
-    const lostCount = await page.evaluate(() => {
-      let lost = 0;
-      for (const canvas of document.querySelectorAll("canvas")) {
-        if (!(canvas instanceof HTMLCanvasElement)) {
-          continue;
-        }
-        const context =
-          canvas.getContext("webgl2") ?? canvas.getContext("webgl");
-        const extension = context?.getExtension("WEBGL_lose_context");
-        if (extension) {
-          extension.loseContext();
-          lost += 1;
-        }
-      }
-      return lost;
+    // Python decor lives below the fold; scroll so both models mount WebGL canvases.
+    await page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
     });
+    await waitForActiveLandingWebGLCanvases(page, 2, 30_000);
 
-    expect(lostCount).toBeGreaterThanOrEqual(1);
+    const lostCount = await forceLoseActiveLandingWebGLContexts(page);
+    expect(lostCount).toBeGreaterThanOrEqual(2);
 
-    const recovered = await waitForActiveLandingWebGLCanvases(page);
+    const recovered = await waitForActiveLandingWebGLCanvases(page, 2, 30_000);
     expect(recovered.length).toBeGreaterThanOrEqual(2);
   });
 });

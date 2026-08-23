@@ -1,7 +1,11 @@
 import { instant } from "@next/playwright";
 import { expect, test } from "@playwright/test";
 
-import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
+import {
+  clickFooterPrivacyPolicyLink,
+  dismissCookieBannerIfVisible,
+} from "./helpers/dismissCookieBanner";
+import { waitForActiveLandingWebGLCanvases } from "./helpers/landingWebGLCanvases";
 
 /**
  * L5: marketing pages use `instant = true`; client navigations between them are validated.
@@ -19,7 +23,7 @@ test.describe("instant marketing navigations (L5)", () => {
     page,
   }) => {
     await instant(page, async () => {
-      await page.getByRole("link", { name: /privacy policy/i }).click();
+      await clickFooterPrivacyPolicyLink(page);
       await page.waitForURL((url) => url.pathname === "/privacy");
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
         "Privacy Policy",
@@ -55,5 +59,6 @@ test.describe("instant marketing navigations (L5)", () => {
         "Your code, frame by frame.",
       );
     });
+    await waitForActiveLandingWebGLCanvases(page);
   });
 });

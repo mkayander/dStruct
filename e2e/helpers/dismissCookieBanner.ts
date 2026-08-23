@@ -14,3 +14,11 @@ export async function dismissCookieBannerIfVisible(page: Page): Promise<void> {
     .waitFor({ state: "hidden", timeout: 15_000 })
     .catch(() => undefined);
 }
+
+/** Footer privacy link (avoids cookie-banner duplicate when banner is still open). */
+export async function clickFooterPrivacyPolicyLink(page: Page): Promise<void> {
+  await page
+    .getByRole("contentinfo")
+    .getByRole("link", { name: /privacy policy/i })
+    .click();
+}

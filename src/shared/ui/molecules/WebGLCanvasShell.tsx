@@ -21,13 +21,17 @@ const WebGLCanvasShellInner: React.FC<WebGLCanvasShellInnerProps> = ({
   const disposeRendererRef = useRef<(() => void) | undefined>(undefined);
   const detachContextRecoveryRef = useRef<(() => void) | undefined>(undefined);
 
+  // Defer mount one frame; reset on cleanup so Cache Components / Activity
+  // hide-show cycles recreate the canvas after gl.dispose().
   useEffect(() => {
-    const frameId = window.requestAnimationFrame(() => {
+    let frameId = 0;
+    frameId = window.requestAnimationFrame(() => {
       setIsReady(true);
     });
 
     return () => {
       window.cancelAnimationFrame(frameId);
+      setIsReady(false);
       detachContextRecoveryRef.current?.();
       detachContextRecoveryRef.current = undefined;
       disposeWebGLRenderer(disposeRendererRef.current);
@@ -76,7 +80,11 @@ export const WebGLCanvasShell: React.FC<WebGLCanvasShellProps> = (props) => {
       key={canvasKey}
       {...props}
       onContextLost={() => {
-        setCanvasKey((previousKey) => previousKey + 1);
+        // Defer remount one frame so gl.dispose() from the lost context can finish
+        // before R3F allocates a replacement (avoids flaky dual-canvas recovery).
+        window.requestAnimationFrame(() => {
+          setCanvasKey((previousKey) => previousKey + 1);
+        });
       }}
     />
   );
