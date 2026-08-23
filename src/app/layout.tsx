@@ -1,32 +1,27 @@
-import { Suspense } from "react";
-
 import "#/shared/fonts/appFonts";
 import {
   appDocumentMetadata,
   appDocumentViewport,
 } from "#/shared/lib/appDocumentMetadata";
 
-import { RootHtmlShell, RootHtmlShellFallback } from "#/app/RootHtmlShell";
+import { RootHtmlShell } from "#/app/RootHtmlShell";
 import "#/styles/globals.css";
 
 import "overlayscrollbars/overlayscrollbars.css";
 
 export { appDocumentMetadata as metadata, appDocumentViewport as viewport };
 
+/** Root reads request locale header — opts out of page-level instant validation (L5). */
+export const instant = false;
+
 /**
  * Minimal root shell for App Router only. Locale for `<html lang>` comes from
- * {@link APP_ROUTER_LOCALE_HEADER} via {@link RootHtmlShell} (Suspense-split, L5).
+ * {@link APP_ROUTER_LOCALE_HEADER} (set in proxy for App Router locale paths).
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <Suspense
-      fallback={<RootHtmlShellFallback>{children}</RootHtmlShellFallback>}
-    >
-      <RootHtmlShell>{children}</RootHtmlShell>
-    </Suspense>
-  );
+  return <RootHtmlShell>{children}</RootHtmlShell>;
 }

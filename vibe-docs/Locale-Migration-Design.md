@@ -91,8 +91,8 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 ### L5 — Instant Nav flags (in progress)
 
 1. ~~Enable `cacheComponents`, `partialPrefetching`~~ — enabled.
-2. ~~Suspense-split root `headers()` locale read~~ — `RootHtmlShell` + removed root `instant = false`.
-3. ~~Cache i18n + Suspense-wrap session/device in locale layouts~~ — `'use cache'` on translations; `instant = true` on marketing pages.
+2. ~~Root `headers()` locale read~~ — direct read in `RootHtmlShell` with root `instant = false` (correct RTL; no Suspense fallback flash).
+3. ~~Single provider mount + cached i18n~~ — one `AppRootLayoutClient`; `'use cache'` on translations; locale layouts `instant = false`.
 4. ~~`@next/playwright` `instant()` tests~~ — marketing client navigations (`e2e/instant-marketing-nav.spec.ts`).
 5. Initial page-load instant shell (hard navigation) — follow-up.
 6. Playground/profile instant adoption — optional.

@@ -1,12 +1,15 @@
+import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
 import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
+import { authOptions } from "#/server/auth/authOptions";
+import { APP_ROUTER_SSR_DEVICE_TYPE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
+import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 
-import { LocaleAppLayoutRuntime } from "#/app/locale-app/LocaleAppLayoutRuntime";
-import { LocaleAppLayoutShell } from "#/app/locale-app/LocaleAppLayoutShell";
+import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
 
 /** Shared App Router locale layout for `app/[lang]` and `(default-locale)`. */
 export async function LocaleAppLayout({
@@ -20,19 +23,23 @@ export async function LocaleAppLayout({
     notFound();
   }
   const locale = localeParam as Locales;
-  const i18n = await loadI18nForLocale(locale);
+  const [i18n, session, headerList] = await Promise.all([
+    loadI18nForLocale(locale),
+    getServerSession(authOptions),
+    headers(),
+  ]);
+  const ssrDeviceType = parseSsrDeviceTypeHeader(
+    headerList.get(APP_ROUTER_SSR_DEVICE_TYPE_HEADER),
+  );
 
   return (
-    <Suspense
-      fallback={
-        <LocaleAppLayoutShell locale={locale} i18n={i18n}>
-          {children}
-        </LocaleAppLayoutShell>
-      }
+    <AppRootLayoutClient
+      session={session}
+      i18n={i18n}
+      locale={locale}
+      ssrDeviceType={ssrDeviceType}
     >
-      <LocaleAppLayoutRuntime locale={locale} i18n={i18n}>
-        {children}
-      </LocaleAppLayoutRuntime>
-    </Suspense>
+      {children}
+    </AppRootLayoutClient>
   );
 }

@@ -11,26 +11,7 @@ type RootHtmlShellProps = {
   children: ReactNode;
 };
 
-/** Static fallback while request locale header resolves (L5 Suspense split). */
-export function RootHtmlShellFallback({ children }: RootHtmlShellProps) {
-  return (
-    <html lang="en" dir="ltr" className={fontVariableClassNames}>
-      <head>
-        <meta name="darkreader-lock" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="stylesheet" href={materialIconsStylesheetHref} />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-
-/** Reads proxy locale header for `<html lang>` / `dir` (runtime — wrapped in Suspense). */
+/** Reads proxy locale header for `<html lang>` / `dir` (request-time). */
 export async function RootHtmlShell({ children }: RootHtmlShellProps) {
   const headerList = await headers();
   const locale = (headerList.get(APP_ROUTER_LOCALE_HEADER) ?? "en") as Locales;

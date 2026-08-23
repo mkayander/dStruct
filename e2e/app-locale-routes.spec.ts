@@ -17,6 +17,14 @@ test.describe("app/[lang] public routes (non-default locales)", () => {
     );
   });
 
+  test("ar home sets rtl document direction from proxy locale header", async ({
+    page,
+  }) => {
+    await page.goto("/ar");
+    await expect(page.locator("html")).toHaveAttribute("lang", "ar");
+    await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  });
+
   test("de privacy is indexable with locale canonical", async ({ page }) => {
     await page.goto("/de/privacy");
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
