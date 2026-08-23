@@ -1,7 +1,7 @@
 import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
 
-/** Locale marketing + app shell under `app/[lang]` (L1; Pages `i18n` still canonical for unprefixed `en` URLs). */
-export const dynamic = "force-dynamic";
+/** Locale shell uses session/i18n loaders — opt out until cached (L5). */
+export const instant = false;
 
 export default async function LangLayout({
   children,
