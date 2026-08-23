@@ -17,6 +17,9 @@ import "overlayscrollbars/overlayscrollbars.css";
 
 export { appDocumentMetadata as metadata, appDocumentViewport as viewport };
 
+/** Root reads request locale header — opt out of instant validation until Suspense split (L5). */
+export const instant = false;
+
 /**
  * Minimal root shell for App Router only. Locale comes from {@link APP_ROUTER_LOCALE_HEADER}
  * (set in proxy for App Router locale paths).

@@ -14,12 +14,14 @@ import { type I18nProps } from "#/i18n/getI18nProps";
 import type { Locales } from "#/i18n/i18n-types";
 import { AppShellProviders } from "#/shared/ui/providers/AppShellProviders";
 import { AppRouterI18nProvider } from "#/shared/ui/providers/I18nProvider";
+import type { SsrDeviceType } from "#/themes";
 
 type AppRootLayoutClientProps = {
   children: ReactNode;
   i18n: I18nProps;
   session: Session | null;
   locale: Locales;
+  ssrDeviceType?: SsrDeviceType;
 };
 
 /**
@@ -30,10 +32,11 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
   i18n,
   session,
   locale,
+  ssrDeviceType,
 }) => {
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
-      <AppShellProviders session={session}>
+      <AppShellProviders session={session} ssrDeviceType={ssrDeviceType}>
         <AppRouterI18nProvider locale={locale} i18n={i18n}>
           <CookieConsentRoot>
             <ProjectBrowserProvider>

@@ -1,14 +1,8 @@
-import { baseLocale } from "#/i18n/i18n-util";
-
-import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
-
-/** Default-locale (`en`) public App shell at unprefixed URLs (L2). */
-export const dynamic = "force-dynamic";
-
-export default async function DefaultLocaleLayout({
+/** Passthrough; locale shells live in `(marketing)` and `playground` segment layouts. */
+export default function DefaultLocaleRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <LocaleAppLayout localeParam={baseLocale}>{children}</LocaleAppLayout>;
+  return children;
 }

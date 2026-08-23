@@ -23,34 +23,27 @@
 - [x] Remove `i18n` from `next.config.mjs` — L2
 - [x] Retire `/internal-marketing/*` pilot (L3b redirects + delete tree)
 
-## Phase 2 — App Router pilot
+- [x] Retire `/internal-marketing/*` pilot (L3b redirects + delete tree)
+
+## Phase 2 — App Router shell (locale migration complete)
 
 - [x] `TrpcProvider` + `AppRootLayoutClient`
 - [x] `src/app/layout.tsx` + public App locale routes
-- [x] `MarketingHomeView` shared by Pages home + App pilot
-- [x] Dual-router shell (`next/compat/router`) so App pilot does not throw
-- [x] Public `/` served from App `(default-locale)` (Pages marketing removed L2/L3)
+- [x] `MarketingHomeView` shared by App marketing routes
+- [x] Dual-router shell (`next/compat/router`)
+- [x] Public `/` served from App `(default-locale)`
 - [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
-- [x] ~~Pilot noindex metadata~~ (removed with L3b internal-marketing pilot)
-- [ ] `cacheComponents` / `partialPrefetching` (blocked: root `headers()` + need 16.3)
-- [ ] `unstable_instant` on marketing routes (blocked until `cacheComponents`)
+- [x] Playground SSR device hints on App routes (`playground/layout.tsx` + proxy `Accept-CH`)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
 - [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
-- [x] SSR i18n preload for playground + profile (`loadI18nServerProps` / `withI18nServerSideProps`)
+- [x] SSR i18n preload for playground + profile
 - [x] Localized SEO titles/descriptions for home, playground landing, profile
 
-## Phase 3+ — Playground / full migration
+## Phase 3 — Instant Nav / Cache Components (L5 in progress)
 
-- [x] Playground App route shell (`app/[lang]/playground`, `(default-locale)/playground`)
-- [x] `PlaygroundPageView` shared by Pages + App pilot
-- [x] `usePlaygroundRoute` bridge for slug navigation under App Router
-- [x] Profile App route shell (`app/[lang]/profile`, `(default-locale)/profile`)
-- [x] `ProfilePageView` shared by Pages + App pilot
-- [x] `useProfileUserId` bridge for App vs Pages route param
-- [x] Playwright locale migration e2e (`e2e/locale-migration-l*.spec.ts`, `e2e/api-smoke.spec.ts`)
-- [x] `pnpm preview-smoke` script for Vercel merge-gate checks
-- [x] GitHub Actions e2e on Vercel preview (`.github/workflows/e2e-preview.yml`, `deployment_status`)
-- [ ] `@next/playwright` `instant()` tests (blocked: `cacheComponents` + `unstable_instant` + 16.3.x)
-- [ ] Locale migration epic — **`vibe-docs/Locale-Migration-Design.md`**
+- [x] **`cacheComponents` + `partialPrefetching`** enabled (incremental — `instant = false` on runtime segments)
+- [ ] Remove `instant = false` from marketing routes (cache session/i18n or Suspense-split root `headers()`)
+- [ ] `unstable_instant` on marketing routes
+- [ ] `@next/playwright` `instant()` tests

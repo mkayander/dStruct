@@ -88,11 +88,12 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 2. ~~Delete Pages `playground` / `profile`~~ (done L2).
 3. ~~**`i18n` block removed** from `next.config.mjs`~~ (done L2).
 
-### L5 — Instant Nav flags
+### L5 — Instant Nav flags (in progress)
 
-1. Resolve root `headers()` / Cache Components blockers in `app/layout.tsx`.
-2. Enable `cacheComponents`, `partialPrefetching`, `unstable_instant` on marketing routes.
-3. Add `@next/playwright` `instant()` tests.
+1. ~~Enable `cacheComponents`, `partialPrefetching`~~ — enabled with `instant = false` on runtime segments.
+2. Resolve root `headers()` / Cache Components blockers in `app/layout.tsx` (Suspense split or `'use cache: private'`).
+3. Remove `instant = false` from marketing routes; add `unstable_instant` where validated.
+4. Add `@next/playwright` `instant()` tests.
 
 ---
 

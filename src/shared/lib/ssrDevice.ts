@@ -91,3 +91,22 @@ export const setDeviceHintResponseHeaders = (res?: ServerResponse) => {
     mergeHeaderList(res.getHeader("Vary"), ["User-Agent", "Sec-CH-UA-Mobile"]),
   );
 };
+
+/** Edge/proxy variant — merge device-hint response headers onto a NextResponse. */
+export const applyDeviceHintResponseHeaders = (response: {
+  headers: Headers;
+}) => {
+  response.headers.set(
+    "Accept-CH",
+    mergeHeaderList(response.headers.get("Accept-CH") ?? undefined, [
+      "Sec-CH-UA-Mobile",
+    ]),
+  );
+  response.headers.set(
+    "Vary",
+    mergeHeaderList(response.headers.get("Vary") ?? undefined, [
+      "User-Agent",
+      "Sec-CH-UA-Mobile",
+    ]),
+  );
+};

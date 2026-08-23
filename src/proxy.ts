@@ -4,6 +4,8 @@ import { type NextRequest, NextResponse } from "next/server";
 import { baseLocale, locales } from "#/i18n/i18n-util";
 import { isDefaultLocalePublicMarketingPath } from "#/i18n/localeMigrationRouting";
 import { APP_ROUTER_LOCALE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
+import { parsePlaygroundPathname } from "#/shared/lib/playgroundRoute";
+import { applyDeviceHintResponseHeaders } from "#/shared/lib/ssrDevice";
 
 const localeSet = new Set<string>(locales);
 
@@ -21,12 +23,27 @@ function localeFromPathname(pathname: string): string | null {
   return null;
 }
 
+function nextWithLocaleHeader(
+  request: NextRequest,
+  locale: string,
+  pathname: string,
+): NextResponse {
+  const response = NextResponse.next({
+    request: { headers: withLocaleHeader(request, locale) },
+  });
+  if (parsePlaygroundPathname(pathname)) {
+    applyDeviceHintResponseHeaders(response);
+  }
+  return response;
+}
+
 /**
  * Next.js 16+ request proxy (replaces `middleware.ts`).
  *
  * - Serves `/api/config` from Edge Config.
  * - Sets {@link APP_ROUTER_LOCALE_HEADER} for App Router locale paths
  *   (`/[lang]/*` and L2 unprefixed default-locale marketing).
+ * - Sets `Accept-CH` / `Vary` on playground paths for SSR device hints.
  *
  * Unprefixed `/`, `/privacy`, … are App `(default-locale)` routes (L2).
  */
@@ -39,16 +56,12 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isDefaultLocalePublicMarketingPath(pathname)) {
-    return NextResponse.next({
-      request: { headers: withLocaleHeader(request, baseLocale) },
-    });
+    return nextWithLocaleHeader(request, baseLocale, pathname);
   }
 
   const locale = localeFromPathname(pathname);
   if (locale) {
-    return NextResponse.next({
-      request: { headers: withLocaleHeader(request, locale) },
-    });
+    return nextWithLocaleHeader(request, locale, pathname);
   }
 
   return NextResponse.next();
