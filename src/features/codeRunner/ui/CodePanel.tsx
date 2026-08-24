@@ -128,6 +128,13 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const store = useAppStore();
   const playbackDecorationsRef = useRef<string[]>([]);
 
+  const handleMonacoUnmount = useCallback(() => {
+    playbackDecorationsRef.current = [];
+    setMonacoInstance(null);
+    setEditorInstance(null);
+    setTextModel(null);
+  }, []);
+
   const selectedProject = api.project.getBySlug.useQuery(projectSlug || "", {
     enabled: Boolean(projectSlug),
   });
@@ -570,6 +577,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
               setMonacoInstance={setMonacoInstance}
               setEditorInstance={setEditorInstance}
               setTextModel={setTextModel}
+              onEditorUnmount={handleMonacoUnmount}
             />
             <Stack
               spacing={1}
