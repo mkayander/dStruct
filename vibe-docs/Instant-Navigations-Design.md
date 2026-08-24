@@ -199,6 +199,21 @@ flowchart TD
 
 ---
 
+## Heavy client lifecycle (Activity / `cacheComponents`)
+
+Visited routes can stay mounted in hidden Activity boundaries. Heavy clients must **defer mount one frame**, **dispose on hide/unmount**, and **clear parent refs** so show cycles recreate cleanly.
+
+| Runtime | Shell / hook | Route |
+|---------|----------------|-------|
+| R3F WebGL | `WebGLCanvasShell` + `useDeferredClientMount` | Home (`instant=true`) |
+| Monaco | `CodeRunner` shell + `onEditorUnmount` | Playground |
+| Pyodide worker | `pythonRunner.release()` via `usePlaygroundRuntimeRelease` | Playground |
+| Shared primitive | `useDeferredClientMount(onCleanup?)` | Reuse for future widgets |
+
+E2e: `home-webgl-nav`, `playground-monaco-nav`, `home-hero-preview-nav`.
+
+---
+
 ## References
 
 - [Next.js 16.3 blog](https://nextjs.org/blog/next-16-3)

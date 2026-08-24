@@ -340,7 +340,7 @@ class PythonRunner {
     });
   }
 
-  /** Terminate the worker and release resources. */
+  /** Terminate the worker and release resources. Terminal — use {@link release} for Activity cycles. */
   dispose(): void {
     this.state = "disposed";
     this.initPromise = null;
@@ -348,6 +348,18 @@ class PythonRunner {
       this.worker.terminate();
       this.worker = null;
     }
+  }
+
+  /**
+   * Terminate worker and reset to idle so `init()` can warm a fresh worker after
+   * playground Activity hide/show or client navigation away from `/playground`.
+   */
+  release(): void {
+    if (this.state === "disposed") {
+      return;
+    }
+    this.onProgressRef.current = null;
+    this.resetWorker();
   }
 
   /** Whether the runner has a warm, ready-to-use worker. */

@@ -2,8 +2,9 @@ import type { EditorProps, Monaco } from "@monaco-editor/react";
 import { Box, Skeleton, useColorScheme } from "@mui/material";
 import type { editor } from "monaco-editor";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
+import { useDeferredClientMount } from "#/shared/hooks/useDeferredClientMount";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
@@ -34,22 +35,7 @@ const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
 }) => {
   const { mode } = useColorScheme();
   const isMobile = useMobileLayout();
-  const [isReady, setIsReady] = useState(false);
-
-  // Defer mount one frame; reset on cleanup so Cache Components / Activity
-  // hide-show cycles recreate Monaco after @monaco-editor/react disposes on unmount.
-  useEffect(() => {
-    let frameId = 0;
-    frameId = window.requestAnimationFrame(() => {
-      setIsReady(true);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      setIsReady(false);
-      onEditorUnmount?.();
-    };
-  }, [onEditorUnmount]);
+  const isReady = useDeferredClientMount(onEditorUnmount);
 
   const resolvedHeight =
     typeof height === "number" ? `calc(${height}px - 6vh)` : height;

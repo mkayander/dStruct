@@ -4,12 +4,14 @@ import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
 import {
   clickAppBarHomeLink,
   collectMonacoRuntimeErrors,
+  collectPythonRunnerRuntimeErrors,
   waitForPlaygroundMonacoEditor,
 } from "./helpers/playgroundMonacoEditor";
 
-const PLAYGROUND_CODE_URL = "/playground/invert-binary-tree?view=code";
+const PLAYGROUND_PYTHON_URL =
+  "/playground/invert-binary-tree?view=code&language=python";
 
-test.describe("playground Monaco editor navigation", () => {
+test.describe("playground runtime navigation", () => {
   test.describe.configure({ mode: "serial" });
 
   test("remounts Monaco after home and playground navigations", async ({
@@ -40,7 +42,7 @@ test.describe("playground Monaco editor navigation", () => {
       await dismissCookieBannerIfVisible(page);
     }
 
-    await page.goto(PLAYGROUND_CODE_URL);
+    await page.goto("/playground/invert-binary-tree?view=code");
     await dismissCookieBannerIfVisible(page);
     await waitForPlaygroundMonacoEditor(page);
 
@@ -48,5 +50,32 @@ test.describe("playground Monaco editor navigation", () => {
       page.locator(".monaco-editor .view-lines").first(),
     ).toBeVisible();
     expect(monacoErrors).toEqual([]);
+  });
+
+  test("releases Pyodide worker after leaving playground with Python selected", async ({
+    page,
+  }) => {
+    test.setTimeout(120_000);
+
+    const runtimeErrors = [
+      ...collectMonacoRuntimeErrors(page),
+      ...collectPythonRunnerRuntimeErrors(page),
+    ];
+
+    await page.goto(PLAYGROUND_PYTHON_URL);
+    await dismissCookieBannerIfVisible(page);
+    await waitForPlaygroundMonacoEditor(page);
+
+    await clickAppBarHomeLink(page);
+    await page.waitForURL((url) => url.pathname === "/", { timeout: 30_000 });
+
+    await page.goto(PLAYGROUND_PYTHON_URL);
+    await dismissCookieBannerIfVisible(page);
+    await waitForPlaygroundMonacoEditor(page);
+
+    await expect(
+      page.locator(".monaco-editor .view-lines").first(),
+    ).toBeVisible();
+    expect(runtimeErrors).toEqual([]);
   });
 });

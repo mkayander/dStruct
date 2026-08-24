@@ -1,7 +1,7 @@
 "use client";
 
 import { useSnackbar } from "notistack";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { generate } from "short-uuid";
 
@@ -105,6 +105,13 @@ export const useCodeExecution = (
         dispatch(benchmarkSlice.actions.setProgress({ current, total }));
       }),
     [dispatch],
+  );
+
+  useEffect(
+    () => () => {
+      throttledBenchmarkProgress.cancel();
+    },
+    [throttledBenchmarkProgress],
   );
 
   // Handles execution errors and updates Redux store accordingly

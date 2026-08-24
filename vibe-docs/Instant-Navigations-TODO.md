@@ -46,5 +46,8 @@
 - [x] `'use cache'` on `loadI18nForLocale` + metadata translations; single `AppRootLayoutClient` (no Suspense provider swap)
 - [x] `instant = true` on marketing pages (`/`, `/privacy`, `/daily`); `instant = false` on playground/profile
 - [x] `@next/playwright` `instant()` tests for marketing client navigations
+- [x] Activity lifecycle shells: `WebGLCanvasShell`, `CodeRunner`, shared `useDeferredClientMount`
+- [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
+- [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
 - [ ] Initial page-load instant shell (hard navigation) — follow-up
 - [ ] Playground/profile instant adoption (optional)

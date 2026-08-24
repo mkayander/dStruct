@@ -42,6 +42,32 @@ export function collectMonacoRuntimeErrors(page: Page): string[] {
   return messages;
 }
 
+export function collectPythonRunnerRuntimeErrors(page: Page): string[] {
+  const messages: string[] = [];
+
+  const maybeCollect = (text: string) => {
+    if (
+      /pythonrunner has been disposed/i.test(text) ||
+      /worker crashed/i.test(text) ||
+      /pyodide/i.test(text)
+    ) {
+      messages.push(text);
+    }
+  };
+
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      maybeCollect(message.text());
+    }
+  });
+
+  page.on("pageerror", (error) => {
+    maybeCollect(error.message);
+  });
+
+  return messages;
+}
+
 /** Brand link back to marketing home. */
 export async function clickAppBarHomeLink(page: Page): Promise<void> {
   await page

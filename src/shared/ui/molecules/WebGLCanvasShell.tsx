@@ -1,8 +1,9 @@
 "use client";
 
 import { Canvas, type CanvasProps } from "@react-three/fiber";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
+import { useDeferredClientMount } from "#/shared/hooks/useDeferredClientMount";
 import {
   attachWebGLContextRecovery,
   disposeWebGLRenderer,
@@ -17,27 +18,17 @@ const WebGLCanvasShellInner: React.FC<WebGLCanvasShellInnerProps> = ({
   onCreated,
   ...canvasProps
 }) => {
-  const [isReady, setIsReady] = useState(false);
   const disposeRendererRef = useRef<(() => void) | undefined>(undefined);
   const detachContextRecoveryRef = useRef<(() => void) | undefined>(undefined);
 
-  // Defer mount one frame; reset on cleanup so Cache Components / Activity
-  // hide-show cycles recreate the canvas after gl.dispose().
-  useEffect(() => {
-    let frameId = 0;
-    frameId = window.requestAnimationFrame(() => {
-      setIsReady(true);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      setIsReady(false);
-      detachContextRecoveryRef.current?.();
-      detachContextRecoveryRef.current = undefined;
-      disposeWebGLRenderer(disposeRendererRef.current);
-      disposeRendererRef.current = undefined;
-    };
+  const onShellCleanup = useCallback(() => {
+    detachContextRecoveryRef.current?.();
+    detachContextRecoveryRef.current = undefined;
+    disposeWebGLRenderer(disposeRendererRef.current);
+    disposeRendererRef.current = undefined;
   }, []);
+
+  const isReady = useDeferredClientMount(onShellCleanup);
 
   if (!isReady) {
     return null;

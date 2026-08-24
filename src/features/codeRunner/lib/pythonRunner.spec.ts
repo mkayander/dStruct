@@ -95,4 +95,18 @@ describe("PythonRunner.formatCode", () => {
 
     runner.dispose();
   });
+
+  it("release resets worker so init can warm again after Activity hide", async () => {
+    const runner = new PythonRunner();
+    await runner.init({ workerFactory: () => new MockPythonWorker() });
+    expect(runner.isReady).toBe(true);
+
+    runner.release();
+    expect(runner.isReady).toBe(false);
+
+    await runner.init({ workerFactory: () => new MockPythonWorker() });
+    expect(runner.isReady).toBe(true);
+
+    runner.dispose();
+  });
 });
