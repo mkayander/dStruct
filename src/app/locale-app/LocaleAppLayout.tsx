@@ -23,9 +23,11 @@ export async function LocaleAppLayout({
     notFound();
   }
   const locale = localeParam as Locales;
-  const session = await getServerSession(authOptions);
-  const i18n = await loadI18nForLocale(locale);
-  const headerList = await headers();
+  const [i18n, session, headerList] = await Promise.all([
+    loadI18nForLocale(locale),
+    getServerSession(authOptions),
+    headers(),
+  ]);
   const ssrDeviceType = parseSsrDeviceTypeHeader(
     headerList.get(APP_ROUTER_SSR_DEVICE_TYPE_HEADER),
   );

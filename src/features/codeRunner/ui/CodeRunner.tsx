@@ -2,8 +2,10 @@ import type { EditorProps, Monaco } from "@monaco-editor/react";
 import { Box, Skeleton, useColorScheme } from "@mui/material";
 import type { editor } from "monaco-editor";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useCallback, useRef } from "react";
 
+import "#/features/codeRunner/lib/configureMonacoLoader";
+import { useDeferredClientMount } from "#/shared/hooks/useDeferredClientMount";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
@@ -18,9 +20,14 @@ type CodeRunnerProps = EditorProps & {
     React.SetStateAction<editor.IStandaloneCodeEditor | null>
   >;
   setTextModel: React.Dispatch<React.SetStateAction<editor.ITextModel | null>>;
+  /** Clears parent-held Monaco refs when the shell unmounts or Activity hides the route. */
+  onEditorUnmount?: () => void;
 };
 
-export const CodeRunner: React.FC<CodeRunnerProps> = ({
+type MonacoEditorShellInnerProps = CodeRunnerProps;
+
+const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
+  onEditorUnmount,
   setMonacoInstance,
   setEditorInstance,
   setTextModel,
@@ -29,6 +36,22 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
 }) => {
   const { mode } = useColorScheme();
   const isMobile = useMobileLayout();
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+
+  const disposeEditor = useCallback(() => {
+    editorRef.current?.dispose();
+    editorRef.current = null;
+  }, []);
+
+  const onShellCleanup = useCallback(() => {
+    disposeEditor();
+    onEditorUnmount?.();
+  }, [disposeEditor, onEditorUnmount]);
+
+  const { isReady, mountKey } = useDeferredClientMount(onShellCleanup);
+
+  const resolvedHeight =
+    typeof height === "number" ? `calc(${height}px - 6vh)` : height;
 
   return (
     <Box
@@ -37,47 +60,64 @@ export const CodeRunner: React.FC<CodeRunnerProps> = ({
         height: height === "100%" ? "100%" : undefined,
       }}
     >
-      <MonacoEditor
-        theme={mode === "dark" ? "app-dark" : "vs-light"}
-        options={{
-          fontSize: 13,
-          minimap: { enabled: false },
-          tabSize: 2,
-          fixedOverflowWidgets: true,
-          lineNumbersMinChars: 3,
-          lineDecorationsWidth: 6,
-          folding: !isMobile,
-          stickyScroll: { enabled: false },
-          wordWrap: "on",
-        }}
-        {...restProps}
-        height={typeof height === "number" ? `calc(${height}px - 6vh)` : height}
-        onMount={(editor, monaco) => {
-          const model = editor.getModel();
+      {!isReady ? (
+        <Skeleton
+          variant="rectangular"
+          height={resolvedHeight ?? "400px"}
+          sx={{ width: "100%" }}
+        />
+      ) : (
+        <MonacoEditor
+          key={mountKey}
+          theme={mode === "dark" ? "app-dark" : "vs-light"}
+          options={{
+            fontSize: 13,
+            minimap: { enabled: false },
+            tabSize: 2,
+            fixedOverflowWidgets: true,
+            lineNumbersMinChars: 3,
+            lineDecorationsWidth: 6,
+            folding: !isMobile,
+            stickyScroll: { enabled: false },
+            wordWrap: "on",
+          }}
+          {...restProps}
+          height={resolvedHeight}
+          onMount={(mountedEditor, monaco) => {
+            const model = mountedEditor.getModel();
 
-          if (!model) {
-            console.error("No model found");
-            return;
-          }
+            if (!model) {
+              console.error("No model found");
+              return;
+            }
 
-          setEditorInstance?.(editor);
-          setMonacoInstance?.(monaco);
-          setTextModel(model);
+            editorRef.current = mountedEditor;
+            setEditorInstance?.(mountedEditor);
+            setMonacoInstance?.(monaco);
+            setTextModel(model);
 
-          monaco.editor.defineTheme("app-dark", {
-            base: "vs-dark",
-            inherit: true,
-            rules: [],
-            colors: {
-              "editor.background": "#00000000",
-              focusBorder: "#00000000",
-            },
-          });
+            monaco.editor.defineTheme("app-dark", {
+              base: "vs-dark",
+              inherit: true,
+              rules: [],
+              colors: {
+                "editor.background": "#00000000",
+                focusBorder: "#00000000",
+              },
+            });
 
-          // set app-dark theme
-          monaco.editor.setTheme("app-dark");
-        }}
-      />
+            monaco.editor.setTheme("app-dark");
+          }}
+        />
+      )}
     </Box>
   );
+};
+
+/**
+ * Monaco wrapper for the playground code panel.
+ * Defers mount one frame, disposes on Activity hide/unmount, and clears parent refs.
+ */
+export const CodeRunner: React.FC<CodeRunnerProps> = (props) => {
+  return <MonacoEditorShellInner {...props} />;
 };

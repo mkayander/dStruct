@@ -8,6 +8,7 @@ import { MainAppBar } from "#/features/appBar/ui/MainAppBar";
 import { CodePanel } from "#/features/codeRunner/ui/CodePanel";
 import { OutputPanel } from "#/features/output/ui/OutputPanel";
 import { PlaygroundViewProvider } from "#/features/playground/context/PlaygroundViewContext";
+import { usePlaygroundRuntimeRelease } from "#/features/playground/hooks/usePlaygroundRuntimeRelease";
 import { MobilePlayground } from "#/features/playground/ui/MobilePlayground";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
@@ -47,6 +48,8 @@ const DesktopWrapper: React.FC<DesktopWrapperProps> = ({
 export const PlaygroundPageView: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMobileLayout();
+
+  usePlaygroundRuntimeRelease();
 
   const { data = {} } = useAppConfig();
 

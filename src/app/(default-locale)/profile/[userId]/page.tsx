@@ -6,6 +6,9 @@ import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicPageMetadataFromTranslation } from "#/app/locale-app/publicPageMetadataFromTranslation";
 
+/** Profile — user-specific SSR; defer instant validation (L5). */
+export const instant = false;
+
 export async function generateMetadata({
   params,
 }: {

@@ -122,6 +122,7 @@
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@graphql-codegen/typescript-react-apollo": "^4.4.1",
     "@next/eslint-plugin-next": "16.3.2",
+    "@next/playwright": "16.3.2",
     "@playwright/test": "1.51.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",

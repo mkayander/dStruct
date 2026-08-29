@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 
 import type { Locales, Translation } from "#/i18n/i18n-types";
 import { importLocaleAsync } from "#/i18n/i18n-util.async";
@@ -10,6 +11,12 @@ type PublicPageCopy = {
   description: string;
 };
 
+async function loadTranslationCached(locale: Locales): Promise<Translation> {
+  "use cache";
+  cacheLife("max");
+  return importLocaleAsync(locale);
+}
+
 /** Server-only SEO metadata for `app/[lang]/*` using locale dictionaries. */
 export async function publicPageMetadataFromTranslation(
   locale: Locales,
@@ -17,7 +24,7 @@ export async function publicPageMetadataFromTranslation(
   pickCopy: (translation: Translation) => PublicPageCopy,
   options?: { indexable?: boolean },
 ): Promise<Metadata> {
-  const translation = await importLocaleAsync(locale);
+  const translation = await loadTranslationCached(locale);
   const { title, description } = pickCopy(translation);
 
   return publicAppMetadata({

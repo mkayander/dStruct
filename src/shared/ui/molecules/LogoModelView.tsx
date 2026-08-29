@@ -1,11 +1,11 @@
 import { useTheme } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
 import React from "react";
 import { type OrbitControls as ThreeOrbitControls } from "three-stdlib";
 
 import { useMobileLayout } from "#/shared/hooks";
 import { OrbitModelCanvasTouchScroll } from "#/shared/ui/molecules/OrbitModelCanvasTouchScroll";
+import { WebGLCanvasShell } from "#/shared/ui/molecules/WebGLCanvasShell";
 
 import { BinaryTreeModel } from "#/3d-models/BinaryTreeModel";
 
@@ -32,12 +32,9 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
   const pointerEventsDisabled = isMobile || !interactive;
 
   return (
-    <Canvas
+    <WebGLCanvasShell
       camera={{ position: cameraPosition, fov: cameraFov }}
       gl={{ alpha: true, antialias: true }}
-      onCreated={({ gl }) => {
-        gl.setClearColor("#000000", 0);
-      }}
       style={{
         background: "transparent",
         ...(pointerEventsDisabled ? { pointerEvents: "none" } : {}),
@@ -76,6 +73,6 @@ export const LogoModelView: React.FC<LogoModelViewProps> = ({
         dampingFactor={0.005}
       />
       <OrbitModelCanvasTouchScroll active={pointerEventsDisabled} />
-    </Canvas>
+    </WebGLCanvasShell>
   );
 };

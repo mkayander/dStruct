@@ -83,6 +83,60 @@ class MockPythonWorker
   }
 }
 
+class HangingInitWorker
+  extends EventTarget
+  implements
+    Pick<
+      Worker,
+      "postMessage" | "terminate" | "addEventListener" | "removeEventListener"
+    >
+{
+  onerror: Worker["onerror"] = null;
+  onmessage: Worker["onmessage"] = null;
+  onmessageerror: Worker["onmessageerror"] = null;
+
+  postMessage(_msg: PythonWorkerInMessage) {
+    // Deliberately never responds — simulates slow Pyodide init.
+  }
+
+  terminate() {}
+
+  addEventListener(
+    type: string,
+    callback: EventListenerOrEventListenerObject | null,
+    options?: AddEventListenerOptions | boolean,
+  ): void {
+    super.addEventListener(type, callback, options);
+  }
+
+  removeEventListener(
+    type: string,
+    callback: EventListenerOrEventListenerObject | null,
+    options?: EventListenerOptions | boolean,
+  ): void {
+    super.removeEventListener(type, callback, options);
+  }
+}
+
+describe("PythonRunner.release", () => {
+  it("rejects in-flight init when playground Activity hides", async () => {
+    const runner = new PythonRunner();
+    const initPromise = runner.init({
+      workerFactory: () => new HangingInitWorker(),
+    });
+
+    runner.release();
+
+    await expect(initPromise).rejects.toThrow(/released/i);
+    expect(runner.isReady).toBe(false);
+
+    await runner.init({ workerFactory: () => new MockPythonWorker() });
+    expect(runner.isReady).toBe(true);
+
+    runner.dispose();
+  });
+});
+
 describe("PythonRunner.formatCode", () => {
   it("returns formatted source from worker FORMAT_RESULT", async () => {
     const runner = new PythonRunner();
@@ -92,6 +146,20 @@ describe("PythonRunner.formatCode", () => {
 
     expect(error).toBeNull();
     expect(formatted).toBe("x = 1\n# fmt");
+
+    runner.dispose();
+  });
+
+  it("release resets worker so init can warm again after Activity hide", async () => {
+    const runner = new PythonRunner();
+    await runner.init({ workerFactory: () => new MockPythonWorker() });
+    expect(runner.isReady).toBe(true);
+
+    runner.release();
+    expect(runner.isReady).toBe(false);
+
+    await runner.init({ workerFactory: () => new MockPythonWorker() });
+    expect(runner.isReady).toBe(true);
 
     runner.dispose();
   });

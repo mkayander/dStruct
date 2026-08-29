@@ -42,6 +42,12 @@
 ## Phase 3 — Instant Nav / Cache Components (L5 in progress)
 
 - [x] **`cacheComponents` + `partialPrefetching`** enabled (incremental — `instant = false` on runtime segments)
-- [ ] Remove `instant = false` from marketing routes (cache session/i18n or Suspense-split root `headers()`)
-- [ ] `unstable_instant` on marketing routes
-- [ ] `@next/playwright` `instant()` tests
+- [x] Suspense-split root `headers()` locale read → direct read + root `instant = false` (correct RTL, no en/ltr fallback)
+- [x] `'use cache'` on `loadI18nForLocale` + metadata translations; single `AppRootLayoutClient` (no Suspense provider swap)
+- [x] `instant = true` on marketing pages (`/`, `/privacy`, `/daily`); `instant = false` on playground/profile
+- [x] `@next/playwright` `instant()` tests for marketing client navigations
+- [x] Activity lifecycle shells: `WebGLCanvasShell`, `CodeRunner`, shared `useDeferredClientMount`
+- [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
+- [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
+- [ ] Initial page-load instant shell (hard navigation) — follow-up
+- [ ] Playground/profile instant adoption (optional)

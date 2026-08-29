@@ -47,6 +47,8 @@ class PythonRunner {
   /** Serializes run(), formatCode(), and any future worker RPCs. */
   private operationGate: Promise<void> = Promise.resolve();
 
+  private pendingInitReject: ((error: Error) => void) | null = null;
+
   constructor(indexURL?: string) {
     this.indexURL = indexURL;
   }
@@ -80,8 +82,11 @@ class PythonRunner {
     this.state = "initializing";
     this.worker = (options?.workerFactory?.() ?? createWorker()) as Worker;
     this.onProgressRef.current = options?.onProgress ?? null;
+    const initWorker = this.worker;
 
     return new Promise<void>((resolve, reject) => {
+      this.pendingInitReject = reject;
+
       const onMessage = (event: MessageEvent<PythonWorkerOutMessage>) => {
         const data = event.data;
         if (data.type === "PROGRESS") {
@@ -90,6 +95,10 @@ class PythonRunner {
         }
         if (data.type === "READY") {
           cleanup();
+          if (this.worker !== initWorker) {
+            reject(new Error("PythonRunner init superseded"));
+            return;
+          }
           this.state = "ready";
           resolve();
         } else if (data.type === "ERROR" && data.requestId === "__init__") {
@@ -113,6 +122,7 @@ class PythonRunner {
         this.worker?.removeEventListener("message", onMessage);
         this.worker?.removeEventListener("error", onError);
         this.initPromise = null;
+        this.pendingInitReject = null;
       };
 
       this.worker!.addEventListener("message", onMessage);
@@ -340,7 +350,7 @@ class PythonRunner {
     });
   }
 
-  /** Terminate the worker and release resources. */
+  /** Terminate the worker and release resources. Terminal — use {@link release} for Activity cycles. */
   dispose(): void {
     this.state = "disposed";
     this.initPromise = null;
@@ -348,6 +358,22 @@ class PythonRunner {
       this.worker.terminate();
       this.worker = null;
     }
+  }
+
+  /**
+   * Terminate worker and reset to idle so `init()` can warm a fresh worker after
+   * playground Activity hide/show or client navigation away from `/playground`.
+   */
+  release(): void {
+    if (this.state === "disposed") {
+      return;
+    }
+    this.onProgressRef.current = null;
+    if (this.state === "initializing" && this.pendingInitReject) {
+      this.pendingInitReject(new Error("PythonRunner released"));
+      this.pendingInitReject = null;
+    }
+    this.resetWorker();
   }
 
   /** Whether the runner has a warm, ready-to-use worker. */
