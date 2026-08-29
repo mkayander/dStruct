@@ -1,3 +1,10 @@
+# [1.388.0](https://github.com/mkayander/dStruct/compare/v1.387.0...v1.388.0) (2026-08-29)
+
+
+### Features
+
+* **app:** L5 instant marketing navigations ([#176](https://github.com/mkayander/dStruct/issues/176)) ([86976aa](https://github.com/mkayander/dStruct/commit/86976aa95b5d2fab1705007f7f729b72aada25f6))
+
 # [1.387.0](https://github.com/mkayander/dStruct/compare/v1.386.0...v1.387.0) (2026-08-23)
 
 
