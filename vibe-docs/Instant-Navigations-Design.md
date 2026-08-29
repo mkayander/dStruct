@@ -210,7 +210,7 @@ Visited routes can stay mounted in hidden Activity boundaries. Heavy clients mus
 | Pyodide worker | `pythonRunner.release()` via `usePlaygroundRuntimeRelease` | Playground |
 | Shared primitive | `useDeferredClientMount(onCleanup?)` | Reuse for future widgets |
 
-E2e: `home-webgl-nav`, `playground-monaco-nav`, `home-hero-preview-nav`.
+Hard navigation (L5): production PPR shell validated by `instant-marketing-hard-nav` e2e (skips under `next dev`); `DocumentLocaleSync` keeps `lang`/`dir` aligned after hydration.
 
 ---
 
