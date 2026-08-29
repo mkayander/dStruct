@@ -38,6 +38,7 @@ export const usePythonCodeRunner = () => {
           }
         },
       })
+      .catch(() => undefined)
       .finally(() => {
         if (cancelled) return;
 

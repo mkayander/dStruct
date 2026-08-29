@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 /**
  * Defers client-only mount one frame; resets `isReady` on cleanup so Cache
@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
  */
 export function useDeferredClientMount(onCleanup?: () => void): boolean {
   const [isReady, setIsReady] = useState(false);
+  const onCleanupRef = useRef(onCleanup);
+
+  useLayoutEffect(() => {
+    onCleanupRef.current = onCleanup;
+  });
 
   useEffect(() => {
     let frameId = 0;
@@ -15,10 +20,10 @@ export function useDeferredClientMount(onCleanup?: () => void): boolean {
 
     return () => {
       window.cancelAnimationFrame(frameId);
-      onCleanup?.();
+      onCleanupRef.current?.();
       setIsReady(false);
     };
-  }, [onCleanup]);
+  }, []);
 
   return isReady;
 }

@@ -48,8 +48,9 @@ export function collectPythonRunnerRuntimeErrors(page: Page): string[] {
   const maybeCollect = (text: string) => {
     if (
       /pythonrunner has been disposed/i.test(text) ||
-      /worker crashed/i.test(text) ||
-      /pyodide/i.test(text)
+      /pythonrunner init superseded/i.test(text) ||
+      /pythonrunner released/i.test(text) ||
+      /worker crashed/i.test(text)
     ) {
       messages.push(text);
     }
