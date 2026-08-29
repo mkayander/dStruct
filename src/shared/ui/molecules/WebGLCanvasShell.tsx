@@ -28,7 +28,7 @@ const WebGLCanvasShellInner: React.FC<WebGLCanvasShellInnerProps> = ({
     disposeRendererRef.current = undefined;
   }, []);
 
-  const isReady = useDeferredClientMount(onShellCleanup);
+  const { isReady } = useDeferredClientMount(onShellCleanup);
 
   if (!isReady) {
     return null;

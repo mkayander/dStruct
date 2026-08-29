@@ -2,8 +2,9 @@ import type { EditorProps, Monaco } from "@monaco-editor/react";
 import { Box, Skeleton, useColorScheme } from "@mui/material";
 import type { editor } from "monaco-editor";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useCallback, useRef } from "react";
 
+import "#/features/codeRunner/lib/configureMonacoLoader";
 import { useDeferredClientMount } from "#/shared/hooks/useDeferredClientMount";
 import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 
@@ -35,7 +36,19 @@ const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
 }) => {
   const { mode } = useColorScheme();
   const isMobile = useMobileLayout();
-  const isReady = useDeferredClientMount(onEditorUnmount);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+
+  const disposeEditor = useCallback(() => {
+    editorRef.current?.dispose();
+    editorRef.current = null;
+  }, []);
+
+  const onShellCleanup = useCallback(() => {
+    disposeEditor();
+    onEditorUnmount?.();
+  }, [disposeEditor, onEditorUnmount]);
+
+  const { isReady, mountKey } = useDeferredClientMount(onShellCleanup);
 
   const resolvedHeight =
     typeof height === "number" ? `calc(${height}px - 6vh)` : height;
@@ -55,6 +68,7 @@ const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
         />
       ) : (
         <MonacoEditor
+          key={mountKey}
           theme={mode === "dark" ? "app-dark" : "vs-light"}
           options={{
             fontSize: 13,
@@ -77,6 +91,7 @@ const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
               return;
             }
 
+            editorRef.current = mountedEditor;
             setEditorInstance?.(mountedEditor);
             setMonacoInstance?.(monaco);
             setTextModel(model);

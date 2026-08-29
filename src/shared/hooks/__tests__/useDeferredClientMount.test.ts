@@ -13,8 +13,9 @@ describe("useDeferredClientMount", () => {
     const { result } = renderHook(() => useDeferredClientMount());
 
     await waitFor(() => {
-      expect(result.current).toBe(true);
+      expect(result.current.isReady).toBe(true);
     });
+    expect(result.current.mountKey).toBe(1);
   });
 
   it("does not re-run mount effect when callback identity changes", async () => {
