@@ -1,27 +1,12 @@
 import { instant } from "@next/playwright";
-import { type APIRequestContext, expect, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
-
-/** Instant MPA mode includes prerendered marketing copy only with a production PPR shell. */
-async function hasProductionInstantShell(
-  request: APIRequestContext,
-  path: string,
-  expectedSnippet: string,
-): Promise<boolean> {
-  const response = await request.get(path, {
-    headers: { cookie: "next-instant-navigation-testing=1" },
-  });
-  if (!response.ok()) {
-    return false;
-  }
-  const html = await response.text();
-  return html.includes(expectedSnippet);
-}
+import { hasProductionInstantShell } from "./helpers/instantNavigationShell";
 
 /**
  * L5: hard navigation (MPA reload) instant shell for default-locale marketing.
- * Skips under `next dev` (instant MPA bails to CSR); runs on production / preview builds.
+ * Skips under `next dev` (instant MPA CSR-bails); runs on production / preview builds.
  */
 test.describe("instant marketing hard navigation (L5)", () => {
   test.describe.configure({ mode: "serial" });
