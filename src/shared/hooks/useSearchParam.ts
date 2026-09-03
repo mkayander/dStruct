@@ -46,12 +46,14 @@ export const useSearchParam = <T extends string = string>(
 
   useEffect(() => {
     const paramValue = searchParams?.get(param) ?? undefined;
-    if (validate(paramValue)) {
-      startTransition(() => {
+    startTransition(() => {
+      if (validate(paramValue)) {
         setState(paramValue);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        return;
+      }
+      setState(defaultValue);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- URL is source of truth; options are stable for a given hook call site
   }, [param, searchParams]);
 
   const updateParam = useCallback(

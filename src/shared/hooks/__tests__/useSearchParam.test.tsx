@@ -62,6 +62,21 @@ describe("useSearchParam", () => {
     });
   });
 
+  it("resets to defaultValue when the param is removed from the URL", async () => {
+    mockSearchParams = new URLSearchParams("view=browse");
+
+    const { result, rerender } = renderHook(() => useSearchParam("view"));
+
+    expect(result.current[0]).toBe("browse");
+
+    mockSearchParams = new URLSearchParams();
+    rerender();
+
+    await waitFor(() => {
+      expect(result.current[0]).toBe("");
+    });
+  });
+
   it("updateParam pushes an href with the updated query string", async () => {
     mockSearchParams = new URLSearchParams("view=list");
 

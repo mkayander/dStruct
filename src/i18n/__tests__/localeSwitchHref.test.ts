@@ -31,4 +31,10 @@ describe("localeSwitchHref", () => {
   it("drops locale prefix when switching to default locale", () => {
     expect(localeSwitchHref("/de/daily", "", "en")).toBe("/daily");
   });
+
+  it("preserves profile paths across locales", () => {
+    expect(
+      localeSwitchHref("/profile/user-1", "", "ja"),
+    ).toBe("/ja/profile/user-1");
+  });
 });

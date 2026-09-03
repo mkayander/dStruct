@@ -85,6 +85,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
       newLocale,
     );
     appRouter.push(href);
+    setIsOpen(false);
   };
 
   return (
