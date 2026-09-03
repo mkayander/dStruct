@@ -27,18 +27,18 @@ type AppRootLayoutClientProps = {
 };
 
 /**
- * App Router provider shell. Shares {@link AppShellProviders} with Pages `_app`.
+ * App Router provider shell.
  */
 export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
   children,
   i18n,
   session,
   locale,
-  ssrDeviceType,
+  ssrDeviceType = "desktop",
 }) => {
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
-      <RuntimeDeviceHintProvider>
+      <RuntimeDeviceHintProvider initialSsrDeviceType={ssrDeviceType}>
         <AppShellProviders session={session} ssrDeviceType={ssrDeviceType}>
           <I18nProvider locale={locale} i18n={i18n}>
             <CookieConsentRoot>

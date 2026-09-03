@@ -35,7 +35,7 @@ const obsidianTokens = {
 } as const;
 
 const getViewportWidth = (deviceType: SsrDeviceType) =>
-  deviceType === "mobile" ? 375 : 1024;
+  deviceType === "mobile" ? 375 : 1280;
 
 const parseCssPx = (value: string | undefined) => {
   if (!value) return undefined;
@@ -67,8 +67,14 @@ const queryMatchesViewport = (query: string, viewportWidth: number) => {
   return true;
 };
 
+/** @internal Exported for SSR media-query unit tests. */
+export const ssrMediaQueryMatches = (
+  query: string,
+  deviceType: SsrDeviceType,
+): boolean => queryMatchesViewport(query, getViewportWidth(deviceType));
+
 const createSsrMatchMedia = (deviceType: SsrDeviceType) => (query: string) => ({
-  matches: queryMatchesViewport(query, getViewportWidth(deviceType)),
+  matches: ssrMediaQueryMatches(query, deviceType),
 });
 
 /** MUI dark mode uses a #266798 autofill inset; transparent avoids the blue wash with any surface. */

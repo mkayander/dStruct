@@ -22,7 +22,7 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 | `src/shared/ui/providers/StateThemeProvider.tsx` | Accepts `ssrDeviceType`, creates theme via `createCustomTheme(ssrDeviceType)`.                                                                                                                                            |
 | `src/pages/playground/[[...slug]].tsx`           | Uses `getServerSideProps` to resolve `ssrDeviceType` from `req.headers`, calls `setDeviceHintResponseHeaders(res)`, passes `ssrDeviceType` into page props → `_app` → `StateThemeProvider`.                               |
 | `src/app/(default-locale)/layout.tsx`             | Shared `LocaleAppLayout` for all unprefixed App routes (single provider tree).                                                                                                                                            |
-| `src/app/locale-app/LocaleAppLayout.tsx`          | Reads proxy-set `x-dstruct-ssr-device-type` on playground requests → `AppShellProviders`.                                                                                                                                   |
+| `src/app/locale-app/LocaleAppLayout.tsx`          | Reads proxy-set `x-dstruct-ssr-device-type` (playground) via `headers()` and passes `ssrDeviceType` into `AppRootLayoutClient` for first-paint MUI breakpoints. |
 | `src/proxy.ts`                                    | Sets `x-dstruct-ssr-device-type`, `Accept-CH`, and `Vary` on playground paths.                                                                                                                                            |
 | `src/pages/_app.tsx`                             | Passes `pageProps.ssrDeviceType` into `StateThemeProvider`. No `getInitialProps` — device hint is page-scoped.                                                                                                            |
 
@@ -65,7 +65,7 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 MUI's `ssrMatchMedia` receives a function `(query) => ({ matches: boolean })`. Our implementation:
 
 - Parses `min-width` and `max-width` in px from the query string.
-- Uses viewport width 375 for mobile, 1024 for desktop.
+- Uses viewport width 375 for mobile, 1280 for desktop (must be ≥ MUI `lg` / 1200px so `down("lg")` header nav is full width on desktop SSR).
 - Returns `false` for unsupported query types (orientation, feature queries) to avoid false positives and hydration mismatch.
 
 ## Architecture Decisions
