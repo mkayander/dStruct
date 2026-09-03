@@ -1,3 +1,10 @@
+# [1.391.0](https://github.com/mkayander/dStruct/compare/v1.390.0...v1.391.0) (2026-09-03)
+
+
+### Features
+
+* **app:** migrate API routes to App Router (P7–P8) ([#182](https://github.com/mkayander/dStruct/issues/182)) ([f25c7cd](https://github.com/mkayander/dStruct/commit/f25c7cd1edae0a7ff6b320d3f42979b02f5c7daf))
+
 # [1.390.0](https://github.com/mkayander/dStruct/compare/v1.389.0...v1.390.0) (2026-09-03)
 
 
