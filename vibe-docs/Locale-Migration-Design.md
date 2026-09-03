@@ -88,15 +88,15 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 2. ~~Delete Pages `playground` / `profile`~~ (done L2).
 3. ~~**`i18n` block removed** from `next.config.mjs`~~ (done L2).
 
-### L5 — Instant Nav flags (in progress)
+### L5 — Instant Nav flags (complete)
 
 1. ~~Enable `cacheComponents`, `partialPrefetching`~~ — enabled.
 2. ~~Root `headers()` locale read~~ — direct read in `RootHtmlShell` with root `instant = false` (correct RTL; no Suspense fallback flash).
 3. ~~Single provider mount + cached i18n~~ — one `AppRootLayoutClient`; `'use cache'` on translations; locale layouts `instant = false`.
 4. ~~`@next/playwright` `instant()` tests~~ — marketing client navigations (`e2e/instant-marketing-nav.spec.ts`).
 5. ~~Initial page-load instant shell (hard navigation)~~ — `instant-marketing-hard-nav` e2e (prod/preview PPR; skips in dev).
-6. Session / device hints in Suspense for fuller marketing shell — optional follow-up.
-7. Playground/profile instant adoption — optional.
+6. ~~Session / device hints in Suspense~~ — `LocaleAppLayout` loads cached i18n only; `LocaleAppRuntimeHints` streams proxy device hint; session via client `SessionProvider` fetch.
+7. ~~Playground instant adoption~~ — `instant = true` on playground pages with Suspense skeleton; profile stays `instant = false` (user-specific).
 
 ---
 
