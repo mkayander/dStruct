@@ -6,6 +6,7 @@ import {
   dismissCookieBannerIfVisible,
 } from "./helpers/dismissCookieBanner";
 import { waitForActiveLandingWebGLCanvases } from "./helpers/landingWebGLCanvases";
+import { clickAppBarHomeLink } from "./helpers/playgroundMonacoEditor";
 
 /**
  * L5: marketing pages use `instant = true`; client navigations between them are validated.
@@ -50,10 +51,7 @@ test.describe("instant marketing navigations (L5)", () => {
     await dismissCookieBannerIfVisible(page);
 
     await instant(page, async () => {
-      await page
-        .getByRole("link", { name: /dstruct/i })
-        .first()
-        .click();
+      await clickAppBarHomeLink(page);
       await page.waitForURL((url) => url.pathname === "/");
       await expect(page.getByRole("heading", { level: 1 })).toContainText(
         "Your code, frame by frame.",

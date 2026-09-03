@@ -49,5 +49,6 @@
 - [x] Activity lifecycle shells: `WebGLCanvasShell`, `CodeRunner`, shared `useDeferredClientMount`
 - [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
 - [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
-- [ ] Initial page-load instant shell (hard navigation) — follow-up
+- [x] Initial page-load instant shell (hard navigation) — `e2e/instant-marketing-hard-nav.spec.ts` (prod/preview PPR; skips in dev)
+- [ ] Session / device hints in Suspense for fuller marketing instant shell — follow-up
 - [ ] Playground/profile instant adoption (optional)
