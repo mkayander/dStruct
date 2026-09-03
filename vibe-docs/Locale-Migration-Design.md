@@ -19,11 +19,11 @@ Remove `i18n` from `next.config.mjs` and serve user-facing marketing + app route
 | `/`, `/privacy`, `/daily`, `/playground`, `/profile/*` | App `(default-locale)/` | default locale (en), indexable |
 | `/{locale}`, `/{locale}/*` | App `[lang]/` | non-default locales, indexable |
 | `/internal-marketing/*`, `/en/*` | **308 redirect** | L3b → public App routes |
-| `/api/*` | Pages API | unchanged |
+| `/api/*` | App Route Handlers | P7 (P8 removed `pages/api`) |
 
 Shared views already exist: `MarketingHomeView`, `PrivacyPageView`, `DailyPageView`, `PlaygroundPageView`, `ProfilePageView`.
 
-Dual-router bridges: `usePlaygroundRoute`, `useProfileUserId`, `usePagesRouterCompat`, `useSearchParam`.
+App-native route hooks: `usePlaygroundRoute`, `useProfileUserId`, `useSearchParam`, `useRoutePathname` (`next/navigation` only; P9).
 
 ---
 

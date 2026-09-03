@@ -13,7 +13,7 @@ import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/Pro
 import { type I18nProps } from "#/i18n/getI18nProps";
 import type { Locales } from "#/i18n/i18n-types";
 import { AppShellProviders } from "#/shared/ui/providers/AppShellProviders";
-import { AppRouterI18nProvider } from "#/shared/ui/providers/I18nProvider";
+import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import type { SsrDeviceType } from "#/themes";
 
 import { RuntimeDeviceHintProvider } from "#/app/locale-app/RuntimeDeviceHintContext";
@@ -40,7 +40,7 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
     <AppRouterCacheProvider options={{ key: "css" }}>
       <RuntimeDeviceHintProvider>
         <AppShellProviders session={session} ssrDeviceType={ssrDeviceType}>
-          <AppRouterI18nProvider locale={locale} i18n={i18n}>
+          <I18nProvider locale={locale} i18n={i18n}>
             <CookieConsentRoot>
               <ProjectBrowserProvider>
                 {children}
@@ -49,7 +49,7 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
                 <SpeedInsights />
               </ProjectBrowserProvider>
             </CookieConsentRoot>
-          </AppRouterI18nProvider>
+          </I18nProvider>
         </AppShellProviders>
       </RuntimeDeviceHintProvider>
     </AppRouterCacheProvider>

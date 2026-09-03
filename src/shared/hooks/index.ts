@@ -5,7 +5,6 @@ export { useI18nContext } from "./useI18nContext";
 export { useMobileLayout } from "./useMobileLayout";
 export { useNodeAnimations } from "./useNodeAnimations";
 export { useNodeColors } from "./useNodeColors";
-export { usePagesRouterCompat } from "./usePagesRouterCompat";
 export { usePlaygroundSlugs } from "./usePlaygroundSlugs";
 export { usePrevious } from "./usePrevious";
 export { useProfileImageUploader } from "./useProfileImageUploader";

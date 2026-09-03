@@ -25,8 +25,8 @@ export type { PlaygroundView } from "./usePlaygroundViewParam";
  * Manages the mobile playground phase via the `?view=` query parameter.
  *
  * - **Implicit code with a slug**: if `view` is absent, shallow `replace` adds `?view=code`.
- * - **Tab changes**: shallow `router.replace` (no extra history entries per tab tap).
- * - Under App Router pilot: uses {@link usePlaygroundRoute} for slug + `?view=` sync.
+ * - **Tab changes**: `router.replace` (no extra history entries per tab tap).
+ * - Uses {@link usePlaygroundRoute} for slug + `?view=` sync.
  */
 export const useMobilePlaygroundView = () => {
   const route = usePlaygroundRoute();

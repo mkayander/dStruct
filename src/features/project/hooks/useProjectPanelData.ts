@@ -9,7 +9,6 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
-import { usePagesRouterCompat } from "#/shared/hooks/usePagesRouterCompat";
 import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
@@ -21,12 +20,9 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 export const useProjectPanelData = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
-  const pagesRouter = usePagesRouterCompat();
   const playgroundRoute = usePlaygroundRoute();
 
-  const isRouteReady = pagesRouter
-    ? pagesRouter.isReady
-    : playgroundRoute !== null;
+  const isRouteReady = playgroundRoute !== null;
 
   const {
     projectSlug = "",

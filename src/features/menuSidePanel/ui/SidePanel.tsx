@@ -19,30 +19,23 @@ import {
 } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter as useAppRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import {
+  useRouter as useAppRouter,
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
+import React from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
 import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
-import { localeBareHomePath } from "#/i18n/localeBareHomePath";
+import { localeSwitchHref } from "#/i18n/localeSwitchHref";
 import { parseSelectLocaleValue } from "#/i18n/parseSelectLocaleValue";
 import { setStoredLocale } from "#/shared/browser-storage/localeStorage";
-import { useI18nContext, usePagesRouterCompat } from "#/shared/hooks";
+import { useI18nContext } from "#/shared/hooks";
 
 import { GITHUB_URL } from "#/constants";
-
-/** App Router only — mounted when Pages compat router is absent. */
-const AppLocaleHomeRedirect: React.FC<{ locale: Locales }> = ({ locale }) => {
-  const appRouter = useAppRouter();
-
-  useEffect(() => {
-    appRouter.push(localeBareHomePath(locale));
-  }, [appRouter, locale]);
-
-  return null;
-};
 
 type NavItemProps = {
   title: string;
@@ -67,10 +60,9 @@ type SidePanelProps = {
 };
 
 export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
-  const pagesRouter = usePagesRouterCompat();
-  const [appLocaleRedirect, setAppLocaleRedirect] = useState<Locales | null>(
-    null,
-  );
+  const appRouter = useAppRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { LL, locale: activeLocale } = useI18nContext();
   const theme = useTheme();
   const session = useSession();
@@ -82,27 +74,22 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   };
 
   const handleChangeLocale = async (newLocale: Locales) => {
-    const currentLocale = pagesRouter?.locale ?? activeLocale;
-    if (newLocale === currentLocale) {
+    if (newLocale === activeLocale) {
       return;
     }
     setStoredLocale(newLocale);
     await loadLocaleAsync(newLocale);
-    if (pagesRouter) {
-      void pagesRouter.push(pagesRouter.asPath, undefined, {
-        locale: newLocale,
-      });
-      return;
-    }
-    // App Router marketing pilot: defer navigation to child (no Pages `useRouter`).
-    setAppLocaleRedirect(newLocale);
+    const href = localeSwitchHref(
+      pathname ?? "/",
+      searchParams.toString(),
+      newLocale,
+    );
+    appRouter.push(href);
+    setIsOpen(false);
   };
 
   return (
     <>
-      {!pagesRouter && appLocaleRedirect ? (
-        <AppLocaleHomeRedirect locale={appLocaleRedirect} />
-      ) : null}
       <SwipeableDrawer
         anchor="right"
         open={isOpen}
@@ -155,9 +142,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
                 <Select
                   labelId="side-panel-language-label"
                   label={LL.LANGUAGE()}
-                  value={
-                    (pagesRouter?.locale as Locales) ?? activeLocale ?? "en"
-                  }
+                  value={activeLocale ?? "en"}
                   onChange={(event) => {
                     const newLocale = parseSelectLocaleValue(
                       String(event.target.value),
