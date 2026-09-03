@@ -1,3 +1,10 @@
+# [1.389.0](https://github.com/mkayander/dStruct/compare/v1.388.0...v1.389.0) (2026-09-03)
+
+
+### Features
+
+* **app:** L5 Suspense device hints + playground instant adoption ([#179](https://github.com/mkayander/dStruct/issues/179)) ([cc40278](https://github.com/mkayander/dStruct/commit/cc40278b50c6c36e05c2567c1d0bd44043be5646))
+
 # [1.388.0](https://github.com/mkayander/dStruct/compare/v1.387.0...v1.388.0) (2026-08-29)
 
 
