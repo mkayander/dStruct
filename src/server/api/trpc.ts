@@ -5,7 +5,7 @@ import type { AnyClientTypes } from "@trpc/server/unstable-core-do-not-import";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import type { createTRPCContext } from "./context";
+import type { TRPCContext } from "./context";
 
 /**
  * 1. CONTEXT
@@ -23,7 +23,7 @@ import type { createTRPCContext } from "./context";
  * errors on the backend.
  */
 
-const trpc = initTRPC.context<typeof createTRPCContext>().create({
+const trpc = initTRPC.context<TRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
     return {

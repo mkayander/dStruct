@@ -1,18 +1,16 @@
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
+import { getServerSession } from "next-auth";
 import { type Session } from "next-auth";
 
-import { getServerAuthSession } from "../auth/get-server-auth-session";
+import { authOptions } from "#/server/auth/authOptions";
+
 import { db } from "../db/client";
 
 type CreateContextOptions = {
   session: Session | null;
 };
 
-/** Use this helper for:
- * - testing, so we don't have to mock Next.js req/res
- * - trpc's `createSSGHelpers` where we don't have req/res
- * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
- **/
+/** Use this helper for testing and `createCaller` without a Request. */
 export const createInnerTRPCContext = async (opts: CreateContextOptions) => {
   return {
     session: opts.session,
@@ -20,17 +18,15 @@ export const createInnerTRPCContext = async (opts: CreateContextOptions) => {
   };
 };
 
-/**
- * This is the actual context you'll use in your router
- * @link https://trpc.io/docs/context
- **/
-export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts;
+export type TRPCContext = Awaited<ReturnType<typeof createInnerTRPCContext>>;
 
-  // Get the session from the server using the getServerSession wrapper function
-  const session = await getServerAuthSession({ req, res });
+/** App Router fetch adapter — session from NextAuth via route cookies. */
+export const createTRPCFetchContext = async (
+  _opts: FetchCreateContextFnOptions,
+): Promise<TRPCContext> => {
+  const session = await getServerSession(authOptions);
 
-  return await createInnerTRPCContext({
+  return createInnerTRPCContext({
     session,
   });
 };
