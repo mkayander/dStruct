@@ -2,7 +2,7 @@ import { baseLocale } from "#/i18n/i18n-util";
 
 import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
 
-/** Locale shell reads session/headers — opts out; marketing pages opt in below (L5). */
+/** Locale shell — cached i18n only; session/device stream via Suspense (L5). */
 export const instant = false;
 
 /** Default-locale (`en`) public App shell at unprefixed URLs (L2). */

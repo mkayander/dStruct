@@ -1,6 +1,6 @@
 import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
 
-/** Locale shell reads session/headers — opts out; marketing pages opt in below (L5). */
+/** Locale shell — cached i18n only; session/device stream via Suspense (L5). */
 export const instant = false;
 
 export default async function LangLayout({

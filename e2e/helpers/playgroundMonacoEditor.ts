@@ -71,20 +71,33 @@ export function collectPythonRunnerRuntimeErrors(page: Page): string[] {
 
 /**
  * Brand link back to marketing home.
- * Targets the visible banner link — Cache Components / Activity can leave hidden
+ * Targets a visible banner link — Cache Components / Activity can leave hidden
  * route trees (with their own app bars) in the DOM. DOM `.click()` avoids MUI
  * Typography intercepting Playwright pointer events on the nested `<h6>`.
  */
 export async function clickAppBarHomeLink(page: Page): Promise<void> {
-  const homeLink = page
+  const homeLinks = page
     .getByRole("banner")
     .getByRole("link", { name: /dstruct/i })
-    .locator("visible=true")
-    .last();
+    .locator("visible=true");
 
-  await homeLink.scrollIntoViewIfNeeded();
-  await expect(homeLink).toBeVisible({ timeout: 15_000 });
-  await homeLink.evaluate((element) => {
-    (element as HTMLAnchorElement).click();
-  });
+  const linkCount = await homeLinks.count();
+  if (linkCount === 0) {
+    throw new Error("No visible app bar home link found");
+  }
+
+  for (let linkIndex = linkCount - 1; linkIndex >= 0; linkIndex -= 1) {
+    const homeLink = homeLinks.nth(linkIndex);
+    const isVisible = await homeLink.isVisible().catch(() => false);
+    if (!isVisible) {
+      continue;
+    }
+
+    await homeLink.evaluate((element) => {
+      (element as HTMLAnchorElement).click();
+    });
+    return;
+  }
+
+  throw new Error("No clickable visible app bar home link found");
 }

@@ -39,7 +39,7 @@
 - [x] SSR i18n preload for playground + profile
 - [x] Localized SEO titles/descriptions for home, playground landing, profile
 
-## Phase 3 — Instant Nav / Cache Components (L5 in progress)
+## Phase 3 — Instant Nav / Cache Components (L5 complete)
 
 - [x] **`cacheComponents` + `partialPrefetching`** enabled (incremental — `instant = false` on runtime segments)
 - [x] Suspense-split root `headers()` locale read → direct read + root `instant = false` (correct RTL, no en/ltr fallback)
@@ -50,5 +50,5 @@
 - [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
 - [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
 - [x] Initial page-load instant shell (hard navigation) — `e2e/instant-marketing-hard-nav.spec.ts` (prod/preview PPR; skips in dev)
-- [ ] Session / device hints in Suspense for fuller marketing instant shell — follow-up
-- [ ] Playground/profile instant adoption (optional)
+- [x] Session / device hints in Suspense — cached i18n-only locale layout; device hint streams via `LocaleAppRuntimeHints`; session client-fetched
+- [x] Playground instant adoption — `instant = true` on playground routes + `e2e/instant-playground-nav.spec.ts`
