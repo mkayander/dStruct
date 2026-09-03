@@ -28,14 +28,14 @@
 - [x] `TrpcProvider` + `AppRootLayoutClient`
 - [x] `src/app/layout.tsx` + public App locale routes
 - [x] `MarketingHomeView` shared by App marketing routes
-- [x] Dual-router shell (`next/compat/router`)
+- [x] Dual-router shell (`next/compat/router`) — removed in P9
 - [x] Public `/` served from App `(default-locale)`
 - [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
 - [x] Playground SSR device hints via proxy header + `Accept-CH` (single shared App shell)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
-- [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
+- [x] Extract `AppShellProviders` for `AppRootLayoutClient`
 - [x] SSR i18n preload for playground + profile
 - [x] Localized SEO titles/descriptions for home, playground landing, profile
 

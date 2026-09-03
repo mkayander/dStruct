@@ -17,8 +17,6 @@ import { makeStore } from "#/store/makeStore";
 
 const store = makeStore();
 
-vi.mock("next/router", () => vi.importActual("next-router-mock"));
-
 vi.mock("next-auth/react", () => {
   const originalModule = vi.importActual("next-auth/react");
   const mockSession = {
@@ -71,7 +69,7 @@ describe("MarketingHomeView", () => {
       <ReduxProvider store={store}>
         <MockedProvider mocks={mocks} addTypename={false}>
           <StateThemeProvider>
-            <I18nProvider i18n={i18n}>
+            <I18nProvider locale="en" i18n={i18n}>
               <ProjectBrowserProvider>
                 <MarketingHomeView />
               </ProjectBrowserProvider>

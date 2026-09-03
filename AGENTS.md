@@ -28,7 +28,7 @@ Cursor rules to apply (see each file for full wording):
 
 dStruct is **100% App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled. Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public App routes (L3b).
 
-API routes live under **`src/app/api/*/route.ts`**. Remaining cleanup: **P9** compat router (`vibe-docs/Instant-Navigations-TODO.md`).
+API routes live under **`src/app/api/*/route.ts`**. Optional polish: **P10** (`vibe-docs/Instant-Navigations-TODO.md`).
 
 Before implementing Instant Navigations, read:
 
