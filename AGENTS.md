@@ -24,9 +24,13 @@ Cursor rules to apply (see each file for full wording):
 
 **Project rules:** See **`.cursorrules`** for stack, architecture, tRPC/Redux boundaries, styling (MUI + Emotion, no Tailwind), testing conventions, and feature workflow. **`.cursor/rules/*.mdc`** adds always-on style rules (React hook imports, type imports, `useEffect` comments).
 
-### Instant Navigations (Next.js 16.3) — not on Pages Router yet
+### Instant Navigations (Next.js 16.3)
 
-dStruct public marketing and app routes live on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public routes (L3b). **Instant Navigations** (`cacheComponents`, `partialPrefetching`, `'use cache'`, `unstable_instant`, Instant Insights) requires resolving root `headers()` blockers. Do not enable `cacheComponents` or add `'use cache'` under `src/pages/`.
+dStruct **user-facing routes** are on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). **`cacheComponents` + `partialPrefetching`** are enabled on App routes. Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public App routes (L3b).
+
+**Still on Pages Router (interim):** `/api/*`, `/sitemap.xml`, vestigial `_app` / `_document`. Finish line: **`vibe-docs/App-Router-Migration-Plan.md`**.
+
+Do not add `'use cache'` or `instant` under `src/pages/` (Pages Router does not support Cache Components).
 
 Before implementing Instant Navigations, read:
 
