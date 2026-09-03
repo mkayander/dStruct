@@ -16,6 +16,8 @@ import { AppShellProviders } from "#/shared/ui/providers/AppShellProviders";
 import { AppRouterI18nProvider } from "#/shared/ui/providers/I18nProvider";
 import type { SsrDeviceType } from "#/themes";
 
+import { RuntimeDeviceHintProvider } from "#/app/locale-app/RuntimeDeviceHintContext";
+
 type AppRootLayoutClientProps = {
   children: ReactNode;
   i18n: I18nProps;
@@ -36,18 +38,20 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
 }) => {
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
-      <AppShellProviders session={session} ssrDeviceType={ssrDeviceType}>
-        <AppRouterI18nProvider locale={locale} i18n={i18n}>
-          <CookieConsentRoot>
-            <ProjectBrowserProvider>
-              {children}
-              <ProjectBrowser />
-              <Analytics />
-              <SpeedInsights />
-            </ProjectBrowserProvider>
-          </CookieConsentRoot>
-        </AppRouterI18nProvider>
-      </AppShellProviders>
+      <RuntimeDeviceHintProvider>
+        <AppShellProviders session={session} ssrDeviceType={ssrDeviceType}>
+          <AppRouterI18nProvider locale={locale} i18n={i18n}>
+            <CookieConsentRoot>
+              <ProjectBrowserProvider>
+                {children}
+                <ProjectBrowser />
+                <Analytics />
+                <SpeedInsights />
+              </ProjectBrowserProvider>
+            </CookieConsentRoot>
+          </AppRouterI18nProvider>
+        </AppShellProviders>
+      </RuntimeDeviceHintProvider>
     </AppRouterCacheProvider>
   );
 };
