@@ -1,6 +1,4 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { useRouter } from "next/compat/router";
-import type { NextRouter } from "next/router";
 import React from "react";
 import { Provider } from "react-redux";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -9,18 +7,21 @@ import { makeStore } from "#/store/makeStore";
 
 import { useMobilePlaygroundView } from "../useMobilePlaygroundView";
 
-vi.mock("next/compat/router", () => ({
-  useRouter: vi.fn(),
-}));
+const mockPush = vi.fn();
+const mockReplace = vi.fn();
+
+let mockPathname = "/playground";
+let mockParams: Record<string, string | string[] | undefined> = {};
+let mockSearchParams = new URLSearchParams();
 
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/playground",
-  useParams: () => ({}),
+  usePathname: () => mockPathname,
+  useParams: () => mockParams,
   useRouter: () => ({
-    push: vi.fn(),
-    replace: vi.fn(),
+    push: mockPush,
+    replace: mockReplace,
   }),
-  useSearchParams: () => new URLSearchParams(),
+  useSearchParams: () => mockSearchParams,
 }));
 
 vi.mock("#/shared/hooks/useHasMounted", () => ({
@@ -32,45 +33,18 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   <Provider store={store}>{children}</Provider>
 );
 
-const mockPush = vi.fn();
-const mockReplace = vi.fn();
-
-const createMockRouter = (overrides: Partial<NextRouter> = {}): NextRouter => ({
-  pathname: "/playground/[[...slug]]",
-  query: {},
-  asPath: "/playground",
-  basePath: "",
-  route: "/playground/[[...slug]]",
-  isReady: true,
-  isLocaleDomain: false,
-  isPreview: false,
-  push: mockPush,
-  replace: mockReplace,
-  reload: vi.fn(),
-  back: vi.fn(),
-  forward: vi.fn(),
-  prefetch: vi.fn().mockResolvedValue(undefined),
-  beforePopState: vi.fn(),
-  events: { on: vi.fn(), off: vi.fn(), emit: vi.fn() },
-  isFallback: false,
-  locale: undefined,
-  locales: undefined,
-  defaultLocale: undefined,
-  domainLocales: undefined,
-  ...overrides,
-});
-
 describe("useMobilePlaygroundView", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
+    mockPathname = "/playground";
+    mockParams = {};
+    mockSearchParams = new URLSearchParams();
   });
 
   describe("currentView resolution", () => {
     it("returns explicit ?view= param when it is a valid view", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: { view: "results" } }),
-      );
+      mockSearchParams = new URLSearchParams("view=results");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -79,9 +53,7 @@ describe("useMobilePlaygroundView", () => {
     });
 
     it("ignores invalid ?view= param and falls back", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: { view: "invalid" } }),
-      );
+      mockSearchParams = new URLSearchParams("view=invalid");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -90,9 +62,8 @@ describe("useMobilePlaygroundView", () => {
     });
 
     it('returns "code" when a project slug is present', () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: { slug: ["invert-binary-tree"] } }),
-      );
+      mockPathname = "/playground/invert-binary-tree";
+      mockParams = { slug: ["invert-binary-tree"] };
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -101,11 +72,9 @@ describe("useMobilePlaygroundView", () => {
     });
 
     it("explicit ?view= overrides project slug default", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["some-project"], view: "browse" },
-        }),
-      );
+      mockPathname = "/playground/some-project";
+      mockParams = { slug: ["some-project"] };
+      mockSearchParams = new URLSearchParams("view=browse");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -115,7 +84,6 @@ describe("useMobilePlaygroundView", () => {
 
     it('returns "code" when localStorage has a last project path', () => {
       localStorage.setItem("lastPlaygroundPath", "/playground/some-project");
-      vi.mocked(useRouter).mockReturnValue(createMockRouter({ query: {} }));
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -125,7 +93,6 @@ describe("useMobilePlaygroundView", () => {
 
     it('returns "browse" when localStorage path has no project slug segment', () => {
       localStorage.setItem("lastPlaygroundPath", "/playground/");
-      vi.mocked(useRouter).mockReturnValue(createMockRouter({ query: {} }));
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -134,55 +101,17 @@ describe("useMobilePlaygroundView", () => {
     });
 
     it('returns "browse" when no slug, no param, no localStorage', () => {
-      vi.mocked(useRouter).mockReturnValue(createMockRouter({ query: {} }));
-
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
       });
       expect(result.current.currentView).toBe("browse");
     });
-
-    it("uses localStorage when router is not ready (view comes from router.query)", () => {
-      Object.defineProperty(window, "location", {
-        value: { search: "?view=browse" },
-        writable: true,
-      });
-      localStorage.setItem("lastPlaygroundPath", "/playground/some-project");
-
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: {}, isReady: false }),
-      );
-
-      const { result } = renderHook(() => useMobilePlaygroundView(), {
-        wrapper,
-      });
-      // Implementation uses router.query, not window.location; empty query + valid localStorage => "code"
-      expect(result.current.currentView).toBe("code");
-    });
-
-    it("falls back to localStorage when router is not ready and no ?view= in URL", () => {
-      Object.defineProperty(window, "location", {
-        value: { search: "" },
-        writable: true,
-      });
-      localStorage.setItem("lastPlaygroundPath", "/playground/some-project");
-
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: {}, isReady: false }),
-      );
-
-      const { result } = renderHook(() => useMobilePlaygroundView(), {
-        wrapper,
-      });
-      expect(result.current.currentView).toBe("code");
-    });
   });
 
   describe("hasProjectSlug", () => {
     it("returns true when slug array is non-empty", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: { slug: ["project-a", "case-b"] } }),
-      );
+      mockPathname = "/playground/project-a/case-b";
+      mockParams = { slug: ["project-a", "case-b"] };
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -191,19 +120,6 @@ describe("useMobilePlaygroundView", () => {
     });
 
     it("returns false when slug array is empty", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({ query: { slug: [] } }),
-      );
-
-      const { result } = renderHook(() => useMobilePlaygroundView(), {
-        wrapper,
-      });
-      expect(result.current.hasProjectSlug).toBe(false);
-    });
-
-    it("returns false when slug is not in the query", () => {
-      vi.mocked(useRouter).mockReturnValue(createMockRouter({ query: {} }));
-
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
       });
@@ -213,13 +129,8 @@ describe("useMobilePlaygroundView", () => {
 
   describe("implicit view param sync", () => {
     it("replaces URL with ?view=code when a project slug is present but view is omitted", async () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["project-a"] },
-          asPath: "/playground/project-a",
-          isReady: true,
-        }),
-      );
+      mockPathname = "/playground/project-a";
+      mockParams = { slug: ["project-a"] };
 
       renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -227,24 +138,16 @@ describe("useMobilePlaygroundView", () => {
 
       await waitFor(() => {
         expect(mockReplace).toHaveBeenCalledWith(
-          {
-            pathname: "/playground/project-a",
-            query: { view: "code" },
-          },
-          undefined,
-          { shallow: true },
+          "/playground/project-a?view=code",
+          { scroll: false },
         );
       });
     });
 
     it("does not sync when view is already set", async () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["project-a"], view: "browse" },
-          asPath: "/playground/project-a?view=browse",
-          isReady: true,
-        }),
-      );
+      mockPathname = "/playground/project-a";
+      mockParams = { slug: ["project-a"] };
+      mockSearchParams = new URLSearchParams("view=browse");
 
       renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -260,12 +163,9 @@ describe("useMobilePlaygroundView", () => {
 
   describe("navigateTo", () => {
     it("goToResults replaces ?view=results when on code", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["project-a"], view: "code" },
-          asPath: "/playground/project-a?view=code",
-        }),
-      );
+      mockPathname = "/playground/project-a";
+      mockParams = { slug: ["project-a"] };
+      mockSearchParams = new URLSearchParams("view=code");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -274,22 +174,17 @@ describe("useMobilePlaygroundView", () => {
         result.current.goToResults();
       });
 
-      const route = {
-        pathname: "/playground/project-a",
-        query: { view: "results" },
-      };
-      const opts = { shallow: true };
-      expect(mockReplace).toHaveBeenCalledWith(route, undefined, opts);
+      expect(mockReplace).toHaveBeenCalledWith(
+        "/playground/project-a?view=results",
+        { scroll: false },
+      );
       expect(mockPush).not.toHaveBeenCalled();
     });
 
     it("goToCode replaces ?view=code when on results", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["project-a"], view: "results" },
-          asPath: "/playground/project-a",
-        }),
-      );
+      mockPathname = "/playground/project-a";
+      mockParams = { slug: ["project-a"] };
+      mockSearchParams = new URLSearchParams("view=results");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -298,22 +193,17 @@ describe("useMobilePlaygroundView", () => {
         result.current.goToCode();
       });
 
-      const route = {
-        pathname: "/playground/project-a",
-        query: { view: "code" },
-      };
-      const opts = { shallow: true };
-      expect(mockReplace).toHaveBeenCalledWith(route, undefined, opts);
+      expect(mockReplace).toHaveBeenCalledWith(
+        "/playground/project-a?view=code",
+        { scroll: false },
+      );
       expect(mockPush).not.toHaveBeenCalled();
     });
 
     it("goToBrowse replaces ?view=browse", () => {
-      vi.mocked(useRouter).mockReturnValue(
-        createMockRouter({
-          query: { slug: ["project-a"], view: "code" },
-          asPath: "/playground/project-a?view=code",
-        }),
-      );
+      mockPathname = "/playground/project-a";
+      mockParams = { slug: ["project-a"] };
+      mockSearchParams = new URLSearchParams("view=code");
 
       const { result } = renderHook(() => useMobilePlaygroundView(), {
         wrapper,
@@ -323,12 +213,8 @@ describe("useMobilePlaygroundView", () => {
       });
 
       expect(mockReplace).toHaveBeenCalledWith(
-        {
-          pathname: "/playground/project-a",
-          query: { view: "browse" },
-        },
-        undefined,
-        { shallow: true },
+        "/playground/project-a?view=browse",
+        { scroll: false },
       );
       expect(mockPush).not.toHaveBeenCalled();
     });

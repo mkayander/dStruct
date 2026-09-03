@@ -6,45 +6,27 @@ import { useSearchParam } from "#/shared/hooks/useSearchParam";
 const mockPush = vi.fn();
 const mockReplace = vi.fn();
 
-let mockQuery: Record<string, string | string[] | undefined> = {};
-
-vi.mock("next/compat/router", () => ({
-  useRouter: () => ({
-    asPath: "/playground",
-    query: mockQuery,
-    push: mockPush,
-    replace: mockReplace,
-  }),
-}));
+let mockSearchParams = new URLSearchParams();
 
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/playground",
+  usePathname: () => "/playground/two-sum",
   useParams: () => ({}),
   useRouter: () => ({
     push: mockPush,
     replace: mockReplace,
   }),
-  useSearchParams: () => new URLSearchParams(),
-}));
-
-vi.mock("next/router", () => ({
-  useRouter: () => ({
-    asPath: "/playground",
-    query: mockQuery,
-    push: mockPush,
-    replace: mockReplace,
-  }),
+  useSearchParams: () => mockSearchParams,
 }));
 
 describe("useSearchParam", () => {
   beforeEach(() => {
-    mockQuery = {};
+    mockSearchParams = new URLSearchParams();
     mockPush.mockReset();
     mockReplace.mockReset();
   });
 
-  it("initializes from router.query when the param is valid", () => {
-    mockQuery = { view: "browse" };
+  it("initializes from search params when the param is valid", () => {
+    mockSearchParams = new URLSearchParams("view=browse");
 
     const { result } = renderHook(() => useSearchParam("view"));
 
@@ -52,7 +34,7 @@ describe("useSearchParam", () => {
   });
 
   it("falls back to defaultValue when the param is missing or invalid", () => {
-    mockQuery = { view: "grid" };
+    mockSearchParams = new URLSearchParams("view=grid");
 
     const { result } = renderHook(() =>
       useSearchParam("view", {
@@ -65,14 +47,14 @@ describe("useSearchParam", () => {
     expect(result.current[0]).toBe("list");
   });
 
-  it("syncs local state when router.query changes", async () => {
-    mockQuery = { view: "list" };
+  it("syncs local state when search params change", async () => {
+    mockSearchParams = new URLSearchParams("view=list");
 
     const { result, rerender } = renderHook(() => useSearchParam("view"));
 
     expect(result.current[0]).toBe("list");
 
-    mockQuery = { view: "browse" };
+    mockSearchParams = new URLSearchParams("view=browse");
     rerender();
 
     await waitFor(() => {
@@ -80,16 +62,8 @@ describe("useSearchParam", () => {
     });
   });
 
-  it("updateParam pushes a shallow route without the playground slug query key", async () => {
-    mockQuery = { slug: "two-sum", view: "list" };
-    mockPush.mockImplementation((route) => {
-      if (typeof route === "object" && route.query) {
-        mockQuery = route.query as Record<
-          string,
-          string | string[] | undefined
-        >;
-      }
-    });
+  it("updateParam pushes an href with the updated query string", async () => {
+    mockSearchParams = new URLSearchParams("view=list");
 
     const { result } = renderHook(() => useSearchParam("view"));
 
@@ -97,11 +71,9 @@ describe("useSearchParam", () => {
       result.current[1]("browse");
     });
 
-    expect(mockPush).toHaveBeenCalledWith(
-      { pathname: "/playground", query: { view: "browse" } },
-      undefined,
-      { shallow: true },
-    );
+    expect(mockPush).toHaveBeenCalledWith("/playground/two-sum?view=browse", {
+      scroll: false,
+    });
 
     await waitFor(() => {
       expect(result.current[0]).toBe("browse");
@@ -116,9 +88,24 @@ describe("useSearchParam", () => {
     });
 
     expect(mockReplace).toHaveBeenCalledWith(
-      { pathname: "/playground", query: { view: "browse" } },
-      undefined,
-      { shallow: true },
+      "/playground/two-sum?view=browse",
+      { scroll: false },
+    );
+  });
+
+  it("updateParam with pathName targets a custom pathname", () => {
+    const { result } = renderHook(() => useSearchParam("view"));
+
+    act(() => {
+      result.current[1]("code", {
+        replace: true,
+        pathName: "/playground/project-a",
+      });
+    });
+
+    expect(mockReplace).toHaveBeenCalledWith(
+      "/playground/project-a?view=code",
+      { scroll: false },
     );
   });
 });

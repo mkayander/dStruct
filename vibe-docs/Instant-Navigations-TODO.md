@@ -58,5 +58,5 @@
 - [x] **P6** — `app/sitemap.ts` (replace `pages/sitemap.xml.ts`)
 - [x] **P7** — `app/api/*` Route Handlers (upload-url, ext, graphql, tRPC, NextAuth)
 - [x] **P8** — Delete `_app`, `_document`, `pages/`; remove Pages tRPC session wrapper
-- [ ] **P9** — Drop `next/compat/router`; App-native hooks only
+- [x] **P9** — Drop `next/compat/router`; App-native hooks only
 - [ ] **P10** — Optional: `generateStaticParams` for `[lang]`, profile instant, route dedupe
