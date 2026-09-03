@@ -1,3 +1,10 @@
+# [1.390.0](https://github.com/mkayander/dStruct/compare/v1.389.0...v1.390.0) (2026-09-03)
+
+
+### Features
+
+* **app:** migrate sitemap to App Router (P6) ([#181](https://github.com/mkayander/dStruct/issues/181)) ([f442d27](https://github.com/mkayander/dStruct/commit/f442d27b4daaa08df2ca0debd18078d0b1b10c4b))
+
 # [1.389.0](https://github.com/mkayander/dStruct/compare/v1.388.0...v1.389.0) (2026-09-03)
 
 
