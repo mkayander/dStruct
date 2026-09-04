@@ -57,6 +57,7 @@ describe("SidePanel", () => {
   it("links profile to the authenticated user id", () => {
     vi.mocked(useSession).mockReturnValue({
       data: {
+        expires: "2099-01-01T00:00:00.000Z",
         user: {
           id: "user-abc",
           name: "Test User",
