@@ -20,8 +20,10 @@ export const RuntimeDeviceHintContext =
 
 export const RuntimeDeviceHintProvider: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
-  const [ssrDeviceType, setSsrDeviceType] = useState<SsrDeviceType>("desktop");
+  initialSsrDeviceType?: SsrDeviceType;
+}> = ({ children, initialSsrDeviceType = "desktop" }) => {
+  const [ssrDeviceType, setSsrDeviceType] =
+    useState<SsrDeviceType>(initialSsrDeviceType);
 
   const applySsrDeviceType = useCallback(
     (deviceType: SsrDeviceType | undefined) => {
