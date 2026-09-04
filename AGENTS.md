@@ -26,11 +26,9 @@ Cursor rules to apply (see each file for full wording):
 
 ### Instant Navigations (Next.js 16.3)
 
-dStruct **user-facing routes** are on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). **`cacheComponents` + `partialPrefetching`** are enabled on App routes. Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public App routes (L3b).
+dStruct is **100% App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled. Legacy `/internal-marketing/*` and `/en/*` URLs **308 redirect** to public App routes (L3b).
 
-**Still on Pages Router (interim):** `/api/*`, `/sitemap.xml`, vestigial `_app` / `_document`. Finish line: **`vibe-docs/App-Router-Migration-Plan.md`**.
-
-Do not add `'use cache'` or `instant` under `src/pages/` (Pages Router does not support Cache Components).
+API routes live under **`src/app/api/*/route.ts`**. Optional polish: **P10** (`vibe-docs/App-Router-Migration-Plan.md`, `vibe-docs/Instant-Navigations-TODO.md`).
 
 Before implementing Instant Navigations, read:
 
@@ -94,9 +92,9 @@ Refer to `package.json` scripts. Summary of most-used:
 - **Prisma generate**: `pnpm prisma:generate` (auto-run by `postinstall`)
 - **GraphQL codegen**: `pnpm generate-graphql` (auto-run by `postinstall`). **CI**: run `pnpm run ci:init` after `pnpm install` (same as postinstall). **Vercel**: `vercel.json` runs `pnpm run ensure-generated-from-install` after install when gitignored `src/graphql/generated` may be missing from cache.
 
-### Fonts (Pages Router)
+### Fonts
 
-- **App UI:** Inter (body / default MUI typography) and Space Grotesk (headings `h1`–`h4`, `subtitle2`, app bar wordmark) load via **`next/font/google`** in `src/shared/fonts/appFonts.ts`. `pages/_document.tsx` sets `className={fontVariableClassNames}` on `<Html>` (so variables inherit to `body`). **`pages/_app.tsx` must import `#/shared/fonts/appFonts`** as well — `_document` is server-only, so without that import the client bundle never gets the `@font-face` / variable rules and `var(--font-app-*)` stays undefined. **Do not** add a duplicate Google Fonts stylesheet for those families.
+- **App UI:** Inter (body / default MUI typography) and Space Grotesk (headings `h1`–`h4`, `subtitle2`, app bar wordmark) load via **`next/font/google`** in `src/shared/fonts/appFonts.ts`. **`src/app/RootHtmlShell.tsx`** sets `className={fontVariableClassNames}` on `<html>`. **`src/app/layout.tsx`** must import `#/shared/fonts/appFonts`** so the client bundle gets `@font-face` / variable rules. **Do not** add a duplicate Google Fonts stylesheet for those families.
 - **Stacks:** use `appFontStackSans` / `appFontStackDisplay` from `src/shared/fonts/fontVariables.ts` in theme or `sx` so names stay aligned with the loader. In `appFonts.ts`, the `next/font` `variable` option must stay **string literals** (Turbopack does not accept imported constants there).
 - **Material Icons** still use the Google Fonts icon stylesheet in `_document.tsx` (separate from text fonts).
 - **Code samples** (e.g. landing preview) intentionally use a **monospace** stack, not Inter.

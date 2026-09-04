@@ -8,8 +8,8 @@ import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayo
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
 
-/** Playground — heavy client app; defer instant validation (L5). */
-export const instant = false;
+/** Playground shell — instant with Suspense fallback skeleton (L5). */
+export const instant = true;
 
 export async function generateMetadata({
   params,

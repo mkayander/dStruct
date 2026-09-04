@@ -28,14 +28,14 @@
 - [x] `TrpcProvider` + `AppRootLayoutClient`
 - [x] `src/app/layout.tsx` + public App locale routes
 - [x] `MarketingHomeView` shared by App marketing routes
-- [x] Dual-router shell (`next/compat/router`)
+- [x] Dual-router shell (`next/compat/router`) — removed in P9
 - [x] Public `/` served from App `(default-locale)`
 - [x] `proxy.ts`: `/api/config` + locale header for App Router paths
 - [x] App layout metadata (viewport, icons, Material Icons)
 - [x] Playground SSR device hints via proxy header + `Accept-CH` (single shared App shell)
 - [x] Remove unused `@trpc/next` dependency
 - [x] Extract `authOptions` to `src/server/auth/authOptions.ts`
-- [x] Extract `AppShellProviders` shared by `_app` and `AppRootLayoutClient`
+- [x] Extract `AppShellProviders` for `AppRootLayoutClient`
 - [x] SSR i18n preload for playground + profile
 - [x] Localized SEO titles/descriptions for home, playground landing, profile
 
@@ -50,15 +50,13 @@
 - [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
 - [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
 - [x] Initial page-load instant shell (hard navigation) — `e2e/instant-marketing-hard-nav.spec.ts` (prod/preview PPR; skips in dev)
-- [ ] Session / device hints in Suspense — follow-up (PR #179)
-- [ ] Playground instant adoption — follow-up (PR #179)
+- [x] Session / device hints in Suspense — cached i18n-only locale layout; device hint streams via `LocaleAppRuntimeHints`; session client-fetched
+- [x] Playground instant adoption — `instant = true` on playground routes + `e2e/instant-playground-nav.spec.ts`
 
-## Phase 4 — Full App Router (see `App-Router-Migration-Plan.md`)
+## Phase 4 — Full App Router (P6–P10)
 
-UI + locale + Instant Nav are done. Remaining work deletes `src/pages/` and compat-router bridges.
-
-- [ ] **P6** — `app/sitemap.ts` (replace `pages/sitemap.xml.ts`)
-- [ ] **P7** — `app/api/*` Route Handlers (upload-url → ext → graphql → tRPC → NextAuth)
-- [ ] **P8** — Delete `_app`, `_document`, empty `pages/`; remove Pages-only i18n helpers
-- [ ] **P9** — Drop `next/compat/router`; App-native hooks only
+- [x] **P6** — `app/sitemap.ts` (replace `pages/sitemap.xml.ts`)
+- [x] **P7** — `app/api/*` Route Handlers (upload-url, ext, graphql, tRPC, NextAuth)
+- [x] **P8** — Delete `_app`, `_document`, `pages/`; remove Pages tRPC session wrapper
+- [x] **P9** — Drop `next/compat/router`; App-native hooks only
 - [ ] **P10** — Optional: `generateStaticParams` for `[lang]`, profile instant, route dedupe

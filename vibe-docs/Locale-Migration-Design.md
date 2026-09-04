@@ -19,11 +19,11 @@ Remove `i18n` from `next.config.mjs` and serve user-facing marketing + app route
 | `/`, `/privacy`, `/daily`, `/playground`, `/profile/*` | App `(default-locale)/` | default locale (en), indexable |
 | `/{locale}`, `/{locale}/*` | App `[lang]/` | non-default locales, indexable |
 | `/internal-marketing/*`, `/en/*` | **308 redirect** | L3b → public App routes |
-| `/api/*`, `/sitemap.xml` | Pages (interim) | See **App-Router-Migration-Plan.md** P6–P7 |
+| `/api/*` | App Route Handlers | P7 (P8 removed `pages/api`) |
 
 Shared views: `MarketingHomeView`, `PrivacyPageView`, `DailyPageView`, `PlaygroundPageView`, `ProfilePageView`.
 
-Dual-router bridges (remove in P9): `usePlaygroundRoute`, `useProfileUserId`, `usePagesRouterCompat`, `useSearchParam`.
+App-native route hooks: `usePlaygroundRoute`, `useProfileUserId`, `useSearchParam`, `useRoutePathname` (`next/navigation` only; P9).
 
 ---
 
@@ -42,7 +42,7 @@ app/[lang]/privacy/page.tsx
 app/[lang]/daily/page.tsx
 app/[lang]/playground/[[...slug]]/page.tsx
 app/[lang]/profile/[userId]/page.tsx
-pages/api/*                    # unchanged (interim)
+app/api/*/route.ts             # Route Handlers (P7)
 ```
 
 Locale list: keep **`src/i18n/i18n-util.ts`** as source of truth; `generateStaticParams` for `[lang]`.
@@ -76,7 +76,19 @@ App-only playground/profile; **`i18n` removed** from `next.config.mjs`.
 
 </details>
 
-**Next:** **`vibe-docs/App-Router-Migration-Plan.md`** (P6–P10) — sitemap, API Route Handlers, delete `pages/`, drop compat router.
+1. Move public traffic to `app/[lang]/playground` + `profile` (done in L1/L2).
+2. ~~Delete Pages `playground` / `profile`~~ (done L2).
+3. ~~**`i18n` block removed** from `next.config.mjs`~~ (done L2).
+
+### L5 — Instant Nav flags (complete)
+
+1. ~~Enable `cacheComponents`, `partialPrefetching`~~ — enabled.
+2. ~~Root `headers()` locale read~~ — direct read in `RootHtmlShell` with root `instant = false` (correct RTL; no Suspense fallback flash).
+3. ~~Single provider mount + cached i18n~~ — one `AppRootLayoutClient`; `'use cache'` on translations; locale layouts `instant = false`.
+4. ~~`@next/playwright` `instant()` tests~~ — marketing client navigations (`e2e/instant-marketing-nav.spec.ts`).
+5. ~~Initial page-load instant shell (hard navigation)~~ — `instant-marketing-hard-nav` e2e (prod/preview PPR; skips in dev).
+6. ~~Session / device hints in Suspense~~ — `LocaleAppLayout` loads cached i18n only; `LocaleAppRuntimeHints` streams proxy device hint; session via client `SessionProvider` fetch.
+7. ~~Playground instant adoption~~ — `instant = true` on playground pages with Suspense skeleton; profile stays `instant = false` (user-specific).
 
 ---
 
@@ -104,7 +116,7 @@ App-only playground/profile; **`i18n` removed** from `next.config.mjs`.
 
 ## References
 
-- `vibe-docs/App-Router-Migration-Plan.md` — **P6–P10:** finish migration (API, sitemap, delete `pages/`)
+- `vibe-docs/App-Router-Migration-Plan.md` — **P6–P9 complete**; P10 optional polish
 - `vibe-docs/Instant-Navigations-Design.md`
 - `vibe-docs/Instant-Navigations-TODO.md`
 - `src/proxy.ts` — locale header for App Router paths
