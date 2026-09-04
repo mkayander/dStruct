@@ -2,15 +2,18 @@
 
 ## Executive summary
 
-**Instant Navigations** (Cache Components, Partial Prefetching, Instant Insights, Navigation Inspector, Playwright `instant()`) is an **App Router–only** opt-in feature set. dStruct today is **100% Pages Router** (`src/pages/`) with **20-locale `i18n` in `next.config.mjs`**, heavy client state (Redux, tRPC, Apollo), and a **playground** route that is almost entirely client-driven.
+**Instant Navigations** (Cache Components, Partial Prefetching, Instant Insights, Navigation Inspector, Playwright `instant()`) is an **App Router–only** opt-in feature set.
 
-**Overall implementation difficulty: 9/10** (very hard) for full adoption; **2/10** for agent-native DX and general 16.3 wins that do not require Instant Navigations.
+**Current state (2026-09):** All **user-facing routes** live on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing and playground pages export `instant = true` where validated. **Pages Router remains only for** `/api/*`, `/sitemap.xml`, and vestigial `_app` / `_document` — see **`vibe-docs/App-Router-Migration-Plan.md`** for the finish line.
 
-| Track | What you get | Blockers |
-|-------|----------------|----------|
-| **A. Agent-native DX** | Version-matched bundled docs in `AGENTS.md` | None — already partially done on 16.2.12 |
-| **B. 16.3 platform wins** | Less dev RAM, faster builds, prefetch inlining, faster SSR | Vercel preview **i18n + `/api/*`** routing was broken on 16.3.0; retry when fix is in deployed Next (see [adapter-vercel#81](https://github.com/nextjs/adapter-vercel/pull/81)) |
-| **C. Instant Navigations** | SPA-like shells, devtools, `'use cache'`, `unstable_instant` | Requires **App Router** + **`cacheComponents`** + migration off Pages `i18n` config |
+**Overall difficulty:** Locale + Instant Nav pilot — **done**. Remaining full-App migration (API + sitemap + compat cleanup) — **4/10** (incremental, well-bounded).
+
+| Track | What you get | Status |
+|-------|----------------|--------|
+| **A. Agent-native DX** | Bundled docs in `AGENTS.md` | Done |
+| **B. 16.3 platform** | Build cache, prefetch inlining | On `next@16.3.2`; preview smoke green |
+| **C. Instant Navigations** | PPR shells, `instant()`, e2e | Done on App marketing + playground |
+| **D. Full App Router** | Delete `src/pages/`, drop compat router | **P6–P9** in App-Router-Migration-Plan |
 
 ---
 
@@ -51,42 +54,21 @@ Patterns:
 
 ## Current dStruct routing map
 
-| Route | Data | Instant Nav fit |
-|-------|------|-----------------|
-| `/` (`index.tsx`) | `getStaticProps` + i18n | **Good first App Router pilot** — mostly static marketing UI |
-| `/privacy`, `/daily` | `getStaticProps` + i18n | Good pilots |
-| `/profile/[userId]` | `getServerSideProps` | Medium — needs Suspense around user-specific blocks |
-| `/playground/[[...slug]]` | `getServerSideProps` + heavy client app | **Poor early target** — Redux/tRPC/Monaco; benefit is mostly shell around chrome |
-| `/api/*` | API routes | Unchanged; stay on Pages API (or migrate later) |
+| Route | Router | Data / notes |
+|-------|--------|----------------|
+| `/`, `/privacy`, `/daily` | App `(default-locale)/` + `[lang]/` | Cached i18n; `instant = true` |
+| `/playground/[[...slug]]` | App | Client-heavy; `instant = true` + Suspense skeleton |
+| `/profile/[userId]` | App | Client view; `instant = false` |
+| `/api/*` | **Pages API** (interim) | tRPC, NextAuth, GraphQL proxy, upload, extension |
+| `/sitemap.xml` | **Pages** (interim) | DB-backed; migrate to `app/sitemap.ts` (P6) |
 
-**Provider tree today** (`_app.tsx`): Emotion → Redux → NextAuth → Apollo → MUI theme → notistack → i18n → cookie consent → project browser overlay → page.
-
-App Router equivalent needs a **client `Providers` boundary** in `app/layout.tsx` (or per-segment layouts).
+**Provider tree (App):** `AppRouterCacheProvider` → `AppShellProviders` → `AppRouterI18nProvider` → page views. Pages `_app.tsx` is vestigial once API routes migrate.
 
 ---
 
-## i18n conflict (critical)
+## i18n (resolved)
 
-Pages Router uses `next.config.mjs` → `i18n: { locales, defaultLocale }`. That drives locale prefixes (`/en/...`, `/de/...`) and `getStaticProps` locale context.
-
-**App Router does not use that config.** Standard pattern:
-
-```
-app/[lang]/layout.tsx
-app/[lang]/page.tsx
-app/[lang]/privacy/page.tsx
-...
-```
-
-Use **`next/root-params`** (`import { lang } from 'next/root-params'`) in Server Components instead of prop-drilling locale.
-
-**Migration implication:** You cannot enable Instant Navigations on App routes while keeping Pages `i18n` as the source of truth without duplicate locale routing. Plan either:
-
-1. **Big-bang locale segment** — add `app/[lang]/...`, remove `i18n` from config once all user-facing routes move; or
-2. **English-only App pilot** — `app/(marketing)/page.tsx` without `[lang]` first (loses localized home until phase 2); or
-3. **Stay on Pages** for all routes until a dedicated i18n migration epic.
-
-Recommendation: **phase 2** below uses `app/[lang]/` for marketing pages only, with rewrites/redirects from existing `/en` URLs during transition.
+Pages `i18n` in `next.config.mjs` was **removed in L2**. Locales are **`app/[lang]/`** + **`(default-locale)/`** with `proxy.ts` setting `APP_ROUTER_LOCALE_HEADER`. typesafe-i18n: server `loadI18nForLocale` (`'use cache'`) + client `AppRouterI18nProvider`.
 
 ---
 

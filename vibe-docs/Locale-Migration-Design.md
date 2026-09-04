@@ -12,7 +12,7 @@ Remove `i18n` from `next.config.mjs` and serve user-facing marketing + app route
 
 ---
 
-## Current state (post L1–L3b)
+## Current state (complete)
 
 | URL | Router | Notes |
 |-----|--------|--------|
@@ -21,7 +21,7 @@ Remove `i18n` from `next.config.mjs` and serve user-facing marketing + app route
 | `/internal-marketing/*`, `/en/*` | **308 redirect** | L3b → public App routes |
 | `/api/*` | App Route Handlers | P7 (P8 removed `pages/api`) |
 
-Shared views already exist: `MarketingHomeView`, `PrivacyPageView`, `DailyPageView`, `PlaygroundPageView`, `ProfilePageView`.
+Shared views: `MarketingHomeView`, `PrivacyPageView`, `DailyPageView`, `PlaygroundPageView`, `ProfilePageView`.
 
 App-native route hooks: `usePlaygroundRoute`, `useProfileUserId`, `useSearchParam`, `useRoutePathname` (`next/navigation` only; P9).
 
@@ -42,47 +42,39 @@ app/[lang]/privacy/page.tsx
 app/[lang]/daily/page.tsx
 app/[lang]/playground/[[...slug]]/page.tsx
 app/[lang]/profile/[userId]/page.tsx
-pages/api/*                    # unchanged (interim)
+app/api/*/route.ts             # Route Handlers (P7)
 ```
 
 Locale list: keep **`src/i18n/i18n-util.ts`** as source of truth; `generateStaticParams` for `[lang]`.
 
 ---
 
-## Phased cutover
+## Phased cutover (L1–L5) — complete
 
-### L1 — Public App shell (noindex pilot → public path)
+<details>
+<summary>L1–L5 step checklist (archived)</summary>
 
-1. Add `src/app/[lang]/` mirroring `internal-marketing/[locale]/` (reuse page modules + metadata helpers).
-2. Extend `proxy.ts` to set `APP_ROUTER_LOCALE_HEADER` for `/{locale}` marketing paths once safe (or use param only).
-3. **`robots: index`** + real canonicals on new public App routes (remove pilot noindex).
-4. Keep Pages routes **live**; compare SEO metadata and e2e smoke.
+### L1 — Public App shell
 
-**Do not** remove `i18n` from config yet.
+Add `app/[lang]/`; proxy locale header; indexable metadata; Pages routes kept for comparison.
 
-### L2 — Default-locale App cutover (no rewrites)
+### L2 — Default-locale cutover
 
-Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewrites to `/en` loop**. L2 instead adds App route group `(default-locale)/` at unprefixed paths; App Router takes precedence over duplicate Pages files.
+`app/(default-locale)/` at unprefixed URLs; proxy header for `/`, `/privacy`, etc.
 
-1. `app/(default-locale)/` — home, privacy, daily, playground, profile (`baseLocale` layout).
-2. Extend `proxy.ts` locale header for unprefixed marketing paths.
-3. Playwright: unprefixed URLs + existing `app/[lang]` + API smoke.
-4. Pages marketing files stay until L3 (unused for default-locale traffic).
+### L3 / L3b — Remove Pages marketing
 
-**Do not** remove `i18n` from config yet.
+Delete Pages marketing files; 308 redirects from `/internal-marketing/*` and `/en/*`; delete pilot tree.
 
-### L3 — Remove Pages marketing (default locale done in L2)
+### L4 — Playground + profile on App
 
-1. ~~Delete `pages/index.tsx`, `pages/privacy.tsx`, `pages/daily.tsx`~~ (done with L2).
-2. ~~Remove `/internal-marketing/*` App pilot~~ — **L3b**: 308 redirects + delete pilot tree.
+App-only playground/profile; **`i18n` removed** from `next.config.mjs`.
 
-### L3b — Retire internal-marketing pilot
+### L5 — Instant Nav
 
-1. `next.config` 308 redirects: `/internal-marketing/*` → public App; `/en/*` → unprefixed.
-2. Delete `src/app/internal-marketing/`.
-3. Update `proxy.ts`, `playgroundRoute.ts`, e2e, `preview-smoke`.
+`cacheComponents`, marketing + playground `instant = true`, e2e (`instant-marketing-nav`, hard-nav, playground-nav), Suspense device hints.
 
-### L4 — Playground + profile on App only
+</details>
 
 1. Move public traffic to `app/[lang]/playground` + `profile` (done in L1/L2).
 2. ~~Delete Pages `playground` / `profile`~~ (done L2).
@@ -124,7 +116,7 @@ Pages `i18n` auto-redirects `/en/*` → unprefixed URLs, so **`next.config` rewr
 
 ## References
 
+- `vibe-docs/App-Router-Migration-Plan.md` — **P6–P9 complete**; P10 optional polish
 - `vibe-docs/Instant-Navigations-Design.md`
 - `vibe-docs/Instant-Navigations-TODO.md`
 - `src/proxy.ts` — locale header for App Router paths
-- ~~`src/app/internal-marketing/`~~ — removed L3b (308 redirects to public App)
