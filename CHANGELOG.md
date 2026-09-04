@@ -1,3 +1,10 @@
+## [1.391.1](https://github.com/mkayander/dStruct/compare/v1.391.0...v1.391.1) (2026-09-04)
+
+
+### Bug Fixes
+
+* **ssr:** render desktop header nav on first paint ([#184](https://github.com/mkayander/dStruct/issues/184)) ([4beb11e](https://github.com/mkayander/dStruct/commit/4beb11e436dc45823af83de8569fcb84b2cba8e0))
+
 # [1.391.0](https://github.com/mkayander/dStruct/compare/v1.390.0...v1.391.0) (2026-09-03)
 
 
