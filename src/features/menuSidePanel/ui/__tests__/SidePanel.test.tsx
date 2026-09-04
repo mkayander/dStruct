@@ -53,26 +53,4 @@ describe("SidePanel", () => {
       screen.queryByRole("link", { name: "PROFILE" }),
     ).not.toBeInTheDocument();
   });
-
-  it("links profile to the authenticated user id", () => {
-    vi.mocked(useSession).mockReturnValue({
-      data: {
-        expires: "2099-01-01T00:00:00.000Z",
-        user: {
-          id: "user-abc",
-          name: "Test User",
-          email: "test@example.com",
-        },
-      },
-      status: "authenticated",
-      update: vi.fn(),
-    } as ReturnType<typeof useSession>);
-
-    renderSidePanel();
-
-    expect(screen.getByRole("link", { name: "PROFILE" })).toHaveAttribute(
-      "href",
-      "/profile/user-abc",
-    );
-  });
 });

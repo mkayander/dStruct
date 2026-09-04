@@ -27,6 +27,7 @@ import {
 import React from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
+import { sidePanelProfileHref } from "#/features/menuSidePanel/lib/sidePanelProfileHref";
 import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
@@ -69,8 +70,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const cookieConsent = useOptionalCookieConsentContext();
 
   const profileHref =
-    session.status === "authenticated" && session.data?.user?.id
-      ? `/profile/${session.data.user.id}`
+    session.status === "authenticated"
+      ? sidePanelProfileHref(session.data)
       : null;
 
   const handleOpenCookieSettings = () => {
