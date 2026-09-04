@@ -5,6 +5,7 @@ import {
   clickAppBarHomeLink,
   collectMonacoRuntimeErrors,
   collectPythonRunnerRuntimeErrors,
+  visiblePlaygroundMonacoEditor,
   waitForPlaygroundMonacoEditor,
 } from "./helpers/playgroundMonacoEditor";
 
@@ -46,9 +47,7 @@ test.describe("playground runtime navigation", () => {
     await dismissCookieBannerIfVisible(page);
     await waitForPlaygroundMonacoEditor(page);
 
-    await expect(
-      page.locator(".monaco-editor .view-lines").first(),
-    ).toBeVisible();
+    await expect(visiblePlaygroundMonacoEditor(page)).toBeVisible();
     expect(monacoErrors).toEqual([]);
   });
 
@@ -73,9 +72,7 @@ test.describe("playground runtime navigation", () => {
     await dismissCookieBannerIfVisible(page);
     await waitForPlaygroundMonacoEditor(page);
 
-    await expect(
-      page.locator(".monaco-editor .view-lines").first(),
-    ).toBeVisible();
+    await expect(visiblePlaygroundMonacoEditor(page)).toBeVisible();
     expect(runtimeErrors).toEqual([]);
   });
 });

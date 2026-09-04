@@ -1,12 +1,21 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
+
+/** Visible Monaco shell — Activity can leave hidden route trees in the DOM. */
+export function visiblePlaygroundMonacoEditor(page: Page): Locator {
+  return page
+    .getByTestId("playground-monaco-editor")
+    .locator("visible=true")
+    .first();
+}
 
 /** Playground code panel uses Monaco (desktop split layout and mobile code view). */
 export async function waitForPlaygroundMonacoEditor(
   page: Page,
   timeoutMs = 30_000,
 ): Promise<void> {
-  const editorLines = page.locator(".monaco-editor .view-lines").first();
-  await expect(editorLines).toBeVisible({ timeout: timeoutMs });
+  await expect(visiblePlaygroundMonacoEditor(page)).toBeVisible({
+    timeout: timeoutMs,
+  });
 }
 
 export function collectMonacoRuntimeErrors(page: Page): string[] {
@@ -71,14 +80,13 @@ export function collectPythonRunnerRuntimeErrors(page: Page): string[] {
 
 /**
  * Brand link back to marketing home.
- * Targets a visible banner link — Cache Components / Activity can leave hidden
+ * Targets the app bar home link — Cache Components / Activity can leave hidden
  * route trees (with their own app bars) in the DOM. DOM `.click()` avoids MUI
  * Typography intercepting Playwright pointer events on the nested `<h6>`.
  */
 export async function clickAppBarHomeLink(page: Page): Promise<void> {
   const homeLinks = page
-    .getByRole("banner")
-    .getByRole("link", { name: /dstruct/i })
+    .getByTestId("app-bar-home-link")
     .locator("visible=true");
 
   const linkCount = await homeLinks.count();

@@ -4,16 +4,16 @@
 
 **Instant Navigations** (Cache Components, Partial Prefetching, Instant Insights, Navigation Inspector, Playwright `instant()`) is an **App Router–only** opt-in feature set.
 
-**Current state (2026-09):** All **user-facing routes** live on **App Router** (`src/app/(default-locale)/`, `src/app/[lang]/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing and playground pages export `instant = true` where validated. **Pages Router remains only for** `/api/*`, `/sitemap.xml`, and vestigial `_app` / `_document` — see **`vibe-docs/App-Router-Migration-Plan.md`** for the finish line.
+**Current state (2026-09):** All routes are on **App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing, playground, and profile pages export `instant = true` where validated. **Pages Router is fully retired** (P6–P9) — see **`vibe-docs/App-Router-Migration-Plan.md`**.
 
-**Overall difficulty:** Locale + Instant Nav pilot — **done**. Remaining full-App migration (API + sitemap + compat cleanup) — **4/10** (incremental, well-bounded).
+**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. Optional P10 polish (route dedupe, SSR session stream) — **2/10**.
 
 | Track | What you get | Status |
 |-------|----------------|--------|
 | **A. Agent-native DX** | Bundled docs in `AGENTS.md` | Done |
 | **B. 16.3 platform** | Build cache, prefetch inlining | On `next@16.3.2`; preview smoke green |
 | **C. Instant Navigations** | PPR shells, `instant()`, e2e | Done on App marketing + playground |
-| **D. Full App Router** | Delete `src/pages/`, drop compat router | **P6–P9** in App-Router-Migration-Plan |
+| **D. Full App Router** | Delete `src/pages/`, drop compat router | **Done** (P6–P9) |
 
 ---
 
@@ -58,17 +58,17 @@ Patterns:
 |-------|--------|----------------|
 | `/`, `/privacy`, `/daily` | App `(default-locale)/` + `[lang]/` | Cached i18n; `instant = true` |
 | `/playground/[[...slug]]` | App | Client-heavy; `instant = true` + Suspense skeleton |
-| `/profile/[userId]` | App | Client view; `instant = false` |
-| `/api/*` | **Pages API** (interim) | tRPC, NextAuth, GraphQL proxy, upload, extension |
-| `/sitemap.xml` | **Pages** (interim) | DB-backed; migrate to `app/sitemap.ts` (P6) |
+| `/profile/[userId]` | App | Client view; `instant = true` + Suspense skeleton (P10) |
+| `/api/*` | App Route Handlers | tRPC, NextAuth, GraphQL proxy, upload, extension (P7) |
+| `/sitemap.xml` | `app/sitemap.ts` | DB-backed (P6) |
 
-**Provider tree (App):** `AppRouterCacheProvider` → `AppShellProviders` → `AppRouterI18nProvider` → page views. Pages `_app.tsx` is vestigial once API routes migrate.
+**Provider tree (App):** `AppRouterCacheProvider` → `AppShellProviders` → `I18nProvider` → page views.
 
 ---
 
 ## i18n (resolved)
 
-Pages `i18n` in `next.config.mjs` was **removed in L2**. Locales are **`app/[lang]/`** + **`(default-locale)/`** with `proxy.ts` setting `APP_ROUTER_LOCALE_HEADER`. typesafe-i18n: server `loadI18nForLocale` (`'use cache'`) + client `AppRouterI18nProvider`.
+Pages `i18n` in `next.config.mjs` was **removed in L2**. Locales are **`app/[lang]/`** + **`(default-locale)/`** with `proxy.ts` setting `APP_ROUTER_LOCALE_HEADER`. typesafe-i18n: server `loadI18nForLocale` (`'use cache'`) + client `I18nProvider`.
 
 ---
 
@@ -129,7 +129,7 @@ Scope: **home, privacy, daily** under `src/app/[lang]/`.
 
 ---
 
-## Architecture (target end state)
+## Architecture (current)
 
 ```mermaid
 flowchart TD
@@ -139,11 +139,9 @@ flowchart TD
     Privacy["privacy/page.tsx"]
     Daily["daily/page.tsx"]
     PlaygroundApp["playground/[[...slug]]/page.tsx"]
-  end
-
-  subgraph pagesRouter [Pages Router - legacy until migrated]
-    API["pages/api/*"]
-    MaybePlayground["pages/playground - interim"]
+    ProfileApp["profile/[userId]/page.tsx"]
+    API["app/api/* Route Handlers"]
+    Sitemap["app/sitemap.ts"]
   end
 
   Providers["Client Providers"]
@@ -154,7 +152,9 @@ flowchart TD
   Providers --> Privacy
   Providers --> Daily
   Providers --> PlaygroundApp
+  Providers --> ProfileApp
   PlaygroundApp --> Features
+  ProfileApp --> Features
   API --> Features
 ```
 

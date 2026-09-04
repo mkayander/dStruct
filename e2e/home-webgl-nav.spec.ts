@@ -9,6 +9,7 @@ import {
   forceLoseActiveLandingWebGLContexts,
   waitForActiveLandingWebGLCanvases,
 } from "./helpers/landingWebGLCanvases";
+import { clickAppBarHomeLink } from "./helpers/playgroundMonacoEditor";
 
 test.describe("home landing WebGL canvases", () => {
   test.describe.configure({ mode: "serial" });
@@ -25,10 +26,7 @@ test.describe("home landing WebGL canvases", () => {
     await clickFooterPrivacyPolicyLink(page);
     await page.waitForURL((url) => url.pathname === "/privacy");
 
-    await page
-      .getByRole("link", { name: /dstruct/i })
-      .first()
-      .click();
+    await clickAppBarHomeLink(page);
     await page.waitForURL((url) => url.pathname === "/");
 
     const activeCanvases = await waitForActiveLandingWebGLCanvases(page);

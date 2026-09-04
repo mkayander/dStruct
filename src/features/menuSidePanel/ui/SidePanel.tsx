@@ -27,6 +27,7 @@ import {
 import React from "react";
 
 import { useOptionalCookieConsentContext } from "#/features/cookieConsent/context/CookieConsentContext";
+import { sidePanelProfileHref } from "#/features/menuSidePanel/lib/sidePanelProfileHref";
 import type { Locales } from "#/i18n/i18n-types";
 import { loadLocaleAsync } from "#/i18n/i18n-util.async";
 import { localeLabels, localesForLanguagePicker } from "#/i18n/labels";
@@ -67,6 +68,11 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const theme = useTheme();
   const session = useSession();
   const cookieConsent = useOptionalCookieConsentContext();
+
+  const profileHref =
+    session.status === "authenticated"
+      ? sidePanelProfileHref(session.data)
+      : null;
 
   const handleOpenCookieSettings = () => {
     cookieConsent?.openCookieSettings();
@@ -116,9 +122,11 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>
             }
           >
-            <Link href={`/profile/${session.data?.user.id ?? ""}`}>
-              <NavItem title={LL.PROFILE()} />
-            </Link>
+            {profileHref ? (
+              <Link href={profileHref}>
+                <NavItem title={LL.PROFILE()} />
+              </Link>
+            ) : null}
             <NavItem title="GitHub" href={GITHUB_URL} />
             <NavItem title={LL.FEEDBACK()} href={`${GITHUB_URL}/issues`} />
             <NavItem title={LL.LOGOUT()} onClick={() => signOut()} />

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
-import { ProfilePageView } from "#/features/profile/ui/ProfilePageView";
+import { ProfilePageGate } from "#/features/profile/ui/ProfilePageGate";
+import { ProfilePageSkeleton } from "#/features/profile/ui/ProfilePageSkeleton";
 import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicPageMetadataFromTranslation } from "#/app/locale-app/publicPageMetadataFromTranslation";
 
-/** Profile — user-specific SSR; defer instant validation (L5). */
-export const instant = false;
+/** Profile — instant shell with Suspense fallback; user data client-fetched (P10). */
+export const instant = true;
 
 export async function generateMetadata({
   params,
@@ -31,15 +32,14 @@ export async function generateMetadata({
   );
 }
 
-export default async function DefaultLocaleProfilePage({
+export default function DefaultLocaleProfilePage({
   params,
 }: {
   params: Promise<{ userId: string }>;
 }) {
-  const { userId } = await params;
-  if (!userId.trim()) {
-    notFound();
-  }
-
-  return <ProfilePageView />;
+  return (
+    <Suspense fallback={<ProfilePageSkeleton />}>
+      <ProfilePageGate params={params} />
+    </Suspense>
+  );
 }

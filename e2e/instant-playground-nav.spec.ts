@@ -2,7 +2,10 @@ import { instant } from "@next/playwright";
 import { expect, test } from "@playwright/test";
 
 import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
-import { waitForPlaygroundMonacoEditor } from "./helpers/playgroundMonacoEditor";
+import {
+  visiblePlaygroundMonacoEditor,
+  waitForPlaygroundMonacoEditor,
+} from "./helpers/playgroundMonacoEditor";
 
 /**
  * L5: playground opts into `instant = true` with Suspense skeleton fallback.
@@ -28,8 +31,6 @@ test.describe("instant playground navigation (L5)", () => {
     });
 
     await waitForPlaygroundMonacoEditor(page);
-    await expect(
-      page.locator(".monaco-editor .view-lines").first(),
-    ).toBeVisible();
+    await expect(visiblePlaygroundMonacoEditor(page)).toBeVisible();
   });
 });

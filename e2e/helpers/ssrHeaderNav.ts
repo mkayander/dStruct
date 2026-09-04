@@ -7,24 +7,30 @@ export const DESKTOP_USER_AGENT =
 export const MOBILE_USER_AGENT =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-/** Hamburger nav in {@link MainAppBar} when `useCompactNav` is true. */
-export const COMPACT_APP_BAR_NAV_MARKER = 'aria-controls="menu-appbar"';
+export const APP_BAR_TEST_ID = "app-bar";
+export const APP_BAR_COMPACT_NAV_TEST_ID = "app-bar-compact-nav";
+export const APP_BAR_NAV_PLAYGROUND_TEST_ID = "app-bar-nav-playground";
+export const APP_BAR_NAV_DAILY_TEST_ID = "app-bar-nav-daily";
 
 export function extractAppBarHtml(html: string): string | null {
-  const match = html.match(/<header[^>]*MuiAppBar-root[\s\S]*?<\/header>/);
+  const match = html.match(
+    new RegExp(
+      `<header[^>]*data-testid="${APP_BAR_TEST_ID}"[\\s\\S]*?</header>`,
+    ),
+  );
   return match?.[0] ?? null;
 }
 
 export function appBarHtmlHasDesktopNav(appBarHtml: string): boolean {
   return (
-    appBarHtml.includes('href="/playground"') &&
-    appBarHtml.includes('href="/daily"') &&
-    !appBarHtml.includes(COMPACT_APP_BAR_NAV_MARKER)
+    appBarHtml.includes(`data-testid="${APP_BAR_NAV_PLAYGROUND_TEST_ID}"`) &&
+    appBarHtml.includes(`data-testid="${APP_BAR_NAV_DAILY_TEST_ID}"`) &&
+    !appBarHtml.includes(`data-testid="${APP_BAR_COMPACT_NAV_TEST_ID}"`)
   );
 }
 
 export function appBarHtmlHasCompactNav(appBarHtml: string): boolean {
-  return appBarHtml.includes(COMPACT_APP_BAR_NAV_MARKER);
+  return appBarHtml.includes(`data-testid="${APP_BAR_COMPACT_NAV_TEST_ID}"`);
 }
 
 export async function fetchDocumentHtml(
