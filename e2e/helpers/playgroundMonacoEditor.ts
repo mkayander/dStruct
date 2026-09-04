@@ -2,7 +2,10 @@ import { expect, type Locator, type Page } from "@playwright/test";
 
 /** Visible Monaco shell — Activity can leave hidden route trees in the DOM. */
 export function visiblePlaygroundMonacoEditor(page: Page): Locator {
-  return page.getByTestId("playground-monaco-editor").locator("visible=true").first();
+  return page
+    .getByTestId("playground-monaco-editor")
+    .locator("visible=true")
+    .first();
 }
 
 /** Playground code panel uses Monaco (desktop split layout and mobile code view). */
