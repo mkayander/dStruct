@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import React, { Suspense } from "react";
 
+import { ProfilePageSkeleton } from "#/features/profile/ui/ProfilePageSkeleton";
 import { ProfilePageView } from "#/features/profile/ui/ProfilePageView";
 import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicPageMetadataFromTranslation } from "#/app/locale-app/publicPageMetadataFromTranslation";
 
-/** Profile — user-specific SSR; defer instant validation (L5). */
-export const instant = false;
+/** Profile — instant shell with Suspense fallback; user data client-fetched (P10). */
+export const instant = true;
 
 export async function generateMetadata({
   params,
@@ -41,5 +43,9 @@ export default async function DefaultLocaleProfilePage({
     notFound();
   }
 
-  return <ProfilePageView />;
+  return (
+    <Suspense fallback={<ProfilePageSkeleton />}>
+      <ProfilePageView />
+    </Suspense>
+  );
 }

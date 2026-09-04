@@ -59,4 +59,5 @@
 - [x] **P7** — `app/api/*` Route Handlers (upload-url, ext, graphql, tRPC, NextAuth)
 - [x] **P8** — Delete `_app`, `_document`, `pages/`; remove Pages tRPC session wrapper
 - [x] **P9** — Drop `next/compat/router`; App-native hooks only
-- [ ] **P10** — Optional: `generateStaticParams` for `[lang]`, profile instant, route dedupe
+- [x] **P10 (core)** — `generateStaticParams` for `[lang]`; profile `instant = true`; SSR device hint sync (PR #184)
+- [ ] **P10 (optional)** — Route-tree dedupe; stream SSR session into `SessionProvider`

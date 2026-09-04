@@ -15,7 +15,7 @@
 | `next/compat/router` bridges | Removed | **Done** (P9) |
 | `src/pages/` | Deleted | **Done** (P8) |
 
-**Remaining:** optional **P10** hardening (see below).
+**Remaining:** optional **P10** follow-ups (route dedupe, SSR session stream) — see table below.
 
 ---
 
@@ -59,14 +59,14 @@ Removed `usePagesRouterCompat` and compat fallbacks. Hooks use `next/navigation`
 
 ## P10 — Optional hardening (post-100% App)
 
-Not required for migration completion; improves maintainability:
-
-- **`generateStaticParams` for `[lang]`** — explicit locale static params (today relies on PPR + proxy).
-- **Dedupe route trees** — `(default-locale)/` vs `[lang]/` share page modules (already mostly true); consider single `[lang]` with `baseLocale` rewrite only if bundle/size warrants it.
-- **Profile `instant = true`** — Suspense around user-specific blocks (session already client-fetched).
-- **Stream SSR session into `SessionProvider`** — optional; avoids signed-in app bar flash without blocking cached locale layout.
-- **SSR device hint on first paint** — pass `x-dstruct-ssr-device-type` synchronously in `LocaleAppLayout` (see PR #184) instead of streaming via `LocaleAppRuntimeHints`.
-- **Update stale docs** — keep design docs in sync when architecture changes.
+| Item | Status |
+|------|--------|
+| **`generateStaticParams` for `[lang]`** | **Done** — `generateLangStaticParams()` (non-`en` locales; `en` uses `(default-locale)/`) |
+| **Profile `instant = true`** | **Done** — Suspense + `ProfilePageSkeleton`; `e2e/instant-profile-nav.spec.ts` |
+| **SSR device hint on first paint** | **Done** — PR #184 (`LocaleAppLayout` reads proxy header synchronously) |
+| **Update stale docs** | **Done** — this plan + Instant Nav design/TODO |
+| **Dedupe route trees** | Optional — `(default-locale)/` vs `[lang]/` share views; collapse only if maintenance cost warrants |
+| **Stream SSR session into `SessionProvider`** | Optional — reduces signed-in app bar skeleton flash without blocking cached locale shell |
 
 ---
 
