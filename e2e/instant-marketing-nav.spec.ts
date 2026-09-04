@@ -1,7 +1,10 @@
 import { instant } from "@next/playwright";
 import { expect, test } from "@playwright/test";
 
-import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
+import {
+  clickFooterPrivacyPolicyLink,
+  dismissCookieBannerIfVisible,
+} from "./helpers/dismissCookieBanner";
 import { waitForActiveLandingWebGLCanvases } from "./helpers/landingWebGLCanvases";
 import { clickAppBarHomeLink } from "./helpers/playgroundMonacoEditor";
 import { APP_BAR_NAV_DAILY_TEST_ID } from "./helpers/ssrHeaderNav";
