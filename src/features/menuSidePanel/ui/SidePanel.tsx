@@ -68,6 +68,11 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
   const session = useSession();
   const cookieConsent = useOptionalCookieConsentContext();
 
+  const profileHref =
+    session.status === "authenticated" && session.data?.user?.id
+      ? `/profile/${session.data.user.id}`
+      : null;
+
   const handleOpenCookieSettings = () => {
     cookieConsent?.openCookieSettings();
     setIsOpen(false);
@@ -116,9 +121,11 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, setIsOpen }) => {
               <ListSubheader disableSticky>{LL.MAIN_MENU()}</ListSubheader>
             }
           >
-            <Link href={`/profile/${session.data?.user.id ?? ""}`}>
-              <NavItem title={LL.PROFILE()} />
-            </Link>
+            {profileHref ? (
+              <Link href={profileHref}>
+                <NavItem title={LL.PROFILE()} />
+              </Link>
+            ) : null}
             <NavItem title="GitHub" href={GITHUB_URL} />
             <NavItem title={LL.FEEDBACK()} href={`${GITHUB_URL}/issues`} />
             <NavItem title={LL.LOGOUT()} onClick={() => signOut()} />
