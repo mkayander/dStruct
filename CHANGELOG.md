@@ -1,3 +1,10 @@
+# [1.392.0](https://github.com/mkayander/dStruct/compare/v1.391.1...v1.392.0) (2026-09-04)
+
+
+### Features
+
+* **p10:** App Router hardening — generateStaticParams + profile instant ([#185](https://github.com/mkayander/dStruct/issues/185)) ([0728748](https://github.com/mkayander/dStruct/commit/0728748473b2cd64aea4845d2b62e7ff484e2c82))
+
 ## [1.391.1](https://github.com/mkayander/dStruct/compare/v1.391.0...v1.391.1) (2026-09-04)
 
 
