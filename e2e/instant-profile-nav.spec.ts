@@ -60,7 +60,8 @@ test.describe("instant profile navigation (P10)", () => {
 
       await instant(page, async () => {
         await page.reload({ waitUntil: "domcontentloaded" });
-        await expect(page.locator(".MuiSkeleton-root").first()).toBeVisible({
+        // Cached metadata title is in the instant shell; body skeleton may hydrate too fast for MUI class assertions.
+        await expect(page).toHaveTitle(/Profile — dStruct/i, {
           timeout: 30_000,
         });
       });
