@@ -63,7 +63,9 @@ test.describe("instant profile navigation (P10)", () => {
 
       await instant(page, async () => {
         await page.reload({ waitUntil: "domcontentloaded" });
-        await expect(page.getByTestId("profile-page-skeleton")).toBeVisible({
+        // Cached document title is in the PPR instant shell; Suspense skeleton body
+        // can hydrate before instant() observes it on preview/production.
+        await expect(page).toHaveTitle(/Profile — dStruct/i, {
           timeout: 30_000,
         });
       });
