@@ -4,8 +4,12 @@ import { expect, test } from "@playwright/test";
 import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
 import { hasProductionInstantShell } from "./helpers/instantNavigationShell";
 
+const profileHeadingPattern = /sign in|dashboard|profil|save progress/i;
+
 /**
  * P10: profile opts into `instant = true` with Suspense skeleton fallback.
+ * Match playground instant e2e: validate navigation inside `instant()`; deferred
+ * client UI (session-driven copy) after the instant callback completes.
  */
 test.describe("instant profile navigation (P10)", () => {
   test("profile is instant on client back navigation from playground", async ({
@@ -27,11 +31,12 @@ test.describe("instant profile navigation (P10)", () => {
       await page.waitForURL((url) =>
         url.pathname.endsWith(`/profile/${userId}`),
       );
-      await expect(page.getByRole("heading", { level: 4 })).toContainText(
-        /sign in|dashboard|profil|save progress/i,
-        { timeout: 30_000 },
-      );
     });
+
+    await expect(page.getByRole("heading", { level: 4 })).toContainText(
+      profileHeadingPattern,
+      { timeout: 30_000 },
+    );
   });
 
   test.describe("hard navigation (production PPR shell)", () => {
@@ -55,11 +60,15 @@ test.describe("instant profile navigation (P10)", () => {
 
       await instant(page, async () => {
         await page.reload({ waitUntil: "domcontentloaded" });
-        await expect(page.getByRole("heading", { level: 4 })).toContainText(
-          /sign in|dashboard|profil|save progress/i,
-          { timeout: 30_000 },
-        );
+        await expect(page.locator(".MuiSkeleton-root").first()).toBeVisible({
+          timeout: 30_000,
+        });
       });
+
+      await expect(page.getByRole("heading", { level: 4 })).toContainText(
+        profileHeadingPattern,
+        { timeout: 30_000 },
+      );
     });
   });
 });
