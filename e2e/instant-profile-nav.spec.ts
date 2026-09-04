@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 
 import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
 import { hasProductionInstantShell } from "./helpers/instantNavigationShell";
+import { APP_BAR_NAV_PLAYGROUND_TEST_ID } from "./helpers/ssrHeaderNav";
 
 const profileHeadingPattern = /sign in|dashboard|profil|save progress/i;
 
@@ -21,9 +22,11 @@ test.describe("instant profile navigation (P10)", () => {
 
     await page.goto(`/profile/${userId}`);
     await dismissCookieBannerIfVisible(page);
-    await expect(page.getByRole("link", { name: "Playground" })).toBeVisible();
+    await expect(
+      page.getByTestId(APP_BAR_NAV_PLAYGROUND_TEST_ID),
+    ).toBeVisible();
 
-    await page.getByRole("link", { name: "Playground" }).click();
+    await page.getByTestId(APP_BAR_NAV_PLAYGROUND_TEST_ID).click();
     await page.waitForURL((url) => url.pathname.startsWith("/playground"));
 
     await instant(page, async () => {
@@ -33,7 +36,7 @@ test.describe("instant profile navigation (P10)", () => {
       );
     });
 
-    await expect(page.getByRole("heading", { level: 4 })).toContainText(
+    await expect(page.getByTestId("profile-auth-heading")).toContainText(
       profileHeadingPattern,
       { timeout: 30_000 },
     );
@@ -60,13 +63,12 @@ test.describe("instant profile navigation (P10)", () => {
 
       await instant(page, async () => {
         await page.reload({ waitUntil: "domcontentloaded" });
-        // Cached metadata title is in the instant shell; body skeleton may hydrate too fast for MUI class assertions.
-        await expect(page).toHaveTitle(/Profile — dStruct/i, {
+        await expect(page.getByTestId("profile-page-skeleton")).toBeVisible({
           timeout: 30_000,
         });
       });
 
-      await expect(page.getByRole("heading", { level: 4 })).toContainText(
+      await expect(page.getByTestId("profile-auth-heading")).toContainText(
         profileHeadingPattern,
         { timeout: 30_000 },
       );

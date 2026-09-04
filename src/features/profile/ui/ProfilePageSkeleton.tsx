@@ -3,7 +3,11 @@ import React from "react";
 
 /** Instant-nav fallback while profile client view hydrates (P10). Server-safe — no MainLayout/Footer. */
 export const ProfilePageSkeleton: React.FC = () => (
-  <Box component="main" sx={{ minHeight: "85vh" }}>
+  <Box
+    component="main"
+    data-testid="profile-page-skeleton"
+    sx={{ minHeight: "85vh" }}
+  >
     <Container>
       <Box sx={{ mb: 8, display: "flex", justifyContent: "center" }}>
         <Skeleton variant="rounded" width={280} height={48} animation="wave" />

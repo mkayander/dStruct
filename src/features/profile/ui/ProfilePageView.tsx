@@ -85,6 +85,7 @@ export const ProfilePageView: React.FC = () => {
       <Box sx={{ mb: 8, textAlign: "center" }}>
         <Typography
           variant="h4"
+          data-testid="profile-auth-heading"
           sx={{
             fontWeight: "bold",
             color: "text.primary",

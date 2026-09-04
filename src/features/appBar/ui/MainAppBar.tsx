@@ -59,6 +59,7 @@ const LogoBrand: React.FC<{
   <MuiLink
     component={Link}
     href="/"
+    data-testid="app-bar-home-link"
     sx={{
       display: "flex",
       alignItems: "center",
@@ -159,6 +160,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
     <>
       <SidePanel isOpen={isSidePanelOpen} setIsOpen={setIsSidePanelOpen} />
       <AppBar
+        data-testid="app-bar"
         position={position}
         elevation={0}
         variant={appBarVariant}
@@ -197,6 +199,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                   aria-label={LL.CURRENT_USER_ACCOUNT()}
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
+                  data-testid="app-bar-compact-nav"
                   onClick={handleOpenNavMenu}
                   color="inherit"
                 >
@@ -251,6 +254,11 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                     key={page.href}
                     component={Link}
                     href={page.href}
+                    data-testid={
+                      page.href === "/playground"
+                        ? "app-bar-nav-playground"
+                        : "app-bar-nav-daily"
+                    }
                     color="inherit"
                     sx={{
                       backgroundColor:

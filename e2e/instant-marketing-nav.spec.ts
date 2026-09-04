@@ -1,12 +1,10 @@
 import { instant } from "@next/playwright";
 import { expect, test } from "@playwright/test";
 
-import {
-  clickFooterPrivacyPolicyLink,
-  dismissCookieBannerIfVisible,
-} from "./helpers/dismissCookieBanner";
+import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
 import { waitForActiveLandingWebGLCanvases } from "./helpers/landingWebGLCanvases";
 import { clickAppBarHomeLink } from "./helpers/playgroundMonacoEditor";
+import { APP_BAR_NAV_DAILY_TEST_ID } from "./helpers/ssrHeaderNav";
 
 /**
  * L5: marketing pages use `instant = true`; client navigations between them are validated.
@@ -36,7 +34,7 @@ test.describe("instant marketing navigations (L5)", () => {
     page,
   }) => {
     await instant(page, async () => {
-      await page.getByRole("link", { name: /daily problem/i }).click();
+      await page.getByTestId(APP_BAR_NAV_DAILY_TEST_ID).click();
       await page.waitForURL((url) => url.pathname === "/daily");
       await expect(page.getByRole("heading", { level: 4 })).toContainText(
         "Not sure what to solve?",

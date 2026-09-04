@@ -2,9 +2,11 @@ import { expect, test } from "@playwright/test";
 
 import { dismissCookieBannerIfVisible } from "./helpers/dismissCookieBanner";
 import {
+  APP_BAR_COMPACT_NAV_TEST_ID,
+  APP_BAR_NAV_DAILY_TEST_ID,
+  APP_BAR_NAV_PLAYGROUND_TEST_ID,
   appBarHtmlHasCompactNav,
   appBarHtmlHasDesktopNav,
-  COMPACT_APP_BAR_NAV_MARKER,
   DESKTOP_USER_AGENT,
   extractAppBarHtml,
   fetchDocumentHtml,
@@ -42,12 +44,10 @@ test.describe("SSR app bar navigation", () => {
     await page.goto("/playground", { waitUntil: "domcontentloaded" });
     await dismissCookieBannerIfVisible(page);
 
-    await expect(page.getByRole("link", { name: "Playground" })).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Daily problem" }),
+      page.getByTestId(APP_BAR_NAV_PLAYGROUND_TEST_ID),
     ).toBeVisible();
-    await expect(page.locator(`[${COMPACT_APP_BAR_NAV_MARKER}]`)).toHaveCount(
-      0,
-    );
+    await expect(page.getByTestId(APP_BAR_NAV_DAILY_TEST_ID)).toBeVisible();
+    await expect(page.getByTestId(APP_BAR_COMPACT_NAV_TEST_ID)).toHaveCount(0);
   });
 });

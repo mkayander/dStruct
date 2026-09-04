@@ -62,53 +62,56 @@ const MonacoEditorShellInner: React.FC<MonacoEditorShellInnerProps> = ({
     >
       {!isReady ? (
         <Skeleton
+          data-testid="playground-monaco-editor-loading"
           variant="rectangular"
           height={resolvedHeight ?? "400px"}
           sx={{ width: "100%" }}
         />
       ) : (
-        <MonacoEditor
-          key={mountKey}
-          theme={mode === "dark" ? "app-dark" : "vs-light"}
-          options={{
-            fontSize: 13,
-            minimap: { enabled: false },
-            tabSize: 2,
-            fixedOverflowWidgets: true,
-            lineNumbersMinChars: 3,
-            lineDecorationsWidth: 6,
-            folding: !isMobile,
-            stickyScroll: { enabled: false },
-            wordWrap: "on",
-          }}
-          {...restProps}
-          height={resolvedHeight}
-          onMount={(mountedEditor, monaco) => {
-            const model = mountedEditor.getModel();
+        <Box data-testid="playground-monaco-editor" sx={{ height: "100%" }}>
+          <MonacoEditor
+            key={mountKey}
+            theme={mode === "dark" ? "app-dark" : "vs-light"}
+            options={{
+              fontSize: 13,
+              minimap: { enabled: false },
+              tabSize: 2,
+              fixedOverflowWidgets: true,
+              lineNumbersMinChars: 3,
+              lineDecorationsWidth: 6,
+              folding: !isMobile,
+              stickyScroll: { enabled: false },
+              wordWrap: "on",
+            }}
+            {...restProps}
+            height={resolvedHeight}
+            onMount={(mountedEditor, monaco) => {
+              const model = mountedEditor.getModel();
 
-            if (!model) {
-              console.error("No model found");
-              return;
-            }
+              if (!model) {
+                console.error("No model found");
+                return;
+              }
 
-            editorRef.current = mountedEditor;
-            setEditorInstance?.(mountedEditor);
-            setMonacoInstance?.(monaco);
-            setTextModel(model);
+              editorRef.current = mountedEditor;
+              setEditorInstance?.(mountedEditor);
+              setMonacoInstance?.(monaco);
+              setTextModel(model);
 
-            monaco.editor.defineTheme("app-dark", {
-              base: "vs-dark",
-              inherit: true,
-              rules: [],
-              colors: {
-                "editor.background": "#00000000",
-                focusBorder: "#00000000",
-              },
-            });
+              monaco.editor.defineTheme("app-dark", {
+                base: "vs-dark",
+                inherit: true,
+                rules: [],
+                colors: {
+                  "editor.background": "#00000000",
+                  focusBorder: "#00000000",
+                },
+              });
 
-            monaco.editor.setTheme("app-dark");
-          }}
-        />
+              monaco.editor.setTheme("app-dark");
+            }}
+          />
+        </Box>
       )}
     </Box>
   );
