@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { ProfilePageGate } from "#/features/profile/ui/ProfilePageGate";
 import { ProfilePageSkeleton } from "#/features/profile/ui/ProfilePageSkeleton";
-import { ProfilePageView } from "#/features/profile/ui/ProfilePageView";
 import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicPageMetadataFromTranslation } from "#/app/locale-app/publicPageMetadataFromTranslation";
@@ -33,19 +32,14 @@ export async function generateMetadata({
   );
 }
 
-export default async function DefaultLocaleProfilePage({
+export default function DefaultLocaleProfilePage({
   params,
 }: {
   params: Promise<{ userId: string }>;
 }) {
-  const { userId } = await params;
-  if (!userId.trim()) {
-    notFound();
-  }
-
   return (
     <Suspense fallback={<ProfilePageSkeleton />}>
-      <ProfilePageView />
+      <ProfilePageGate params={params} />
     </Suspense>
   );
 }
