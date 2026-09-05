@@ -66,7 +66,7 @@ Removed `usePagesRouterCompat` and compat fallbacks. Hooks use `next/navigation`
 | **SSR device hint on first paint** | **Done** — PR #184 (`LocaleAppLayout` reads proxy header synchronously) |
 | **Update stale docs** | **Done** — this plan + Instant Nav design/TODO |
 | **Dedupe route trees** | **Done** — shared `locale-app/pages/*` modules; route files re-export |
-| **Stream SSR session into `SessionProvider`** | **Done** — `ServerSessionBoundary` + `SessionGate` in Suspense (mounts provider with server session; next-auth v4 safe) |
+| **Stream SSR session into `SessionProvider`** | **Done** — `getServerSession` in `LocaleAppLayout` + single `SessionGate` mount (next-auth v4 safe; no Suspense remount) |
 
 ---
 

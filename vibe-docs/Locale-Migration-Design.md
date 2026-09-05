@@ -87,7 +87,7 @@ App-only playground/profile; **`i18n` removed** from `next.config.mjs`.
 3. ~~Single provider mount + cached i18n~~ — one `AppRootLayoutClient`; `'use cache'` on translations; locale layouts `instant = false`.
 4. ~~`@next/playwright` `instant()` tests~~ — marketing client navigations (`e2e/instant-marketing-nav.spec.ts`).
 5. ~~Initial page-load instant shell (hard navigation)~~ — `instant-marketing-hard-nav` e2e (prod/preview PPR; skips in dev).
-6. ~~Session / device hints~~ — `LocaleAppLayout` passes proxy `ssrDeviceType` into the theme; session via `ServerSessionBoundary` → `SessionGate` inside Suspense (P10; next-auth v4 mounts provider once with server session).
+6. ~~Session / device hints~~ — `LocaleAppLayout` passes proxy `ssrDeviceType` into the theme; session via `getServerSession` → `SessionGate` (P10; next-auth v4 single mount).
 7. ~~Playground + profile instant adoption~~ — `instant = true` with Suspense skeletons; `e2e/instant-playground-nav.spec.ts`, `e2e/instant-profile-nav.spec.ts` (P10).
 
 ---

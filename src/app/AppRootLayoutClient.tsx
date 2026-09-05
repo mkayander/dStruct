@@ -24,7 +24,7 @@ type AppRootLayoutClientProps = {
 };
 
 /**
- * App Router provider shell (locale i18n + device hint stay outside session Suspense).
+ * App Router provider shell (locale i18n + device hint stay outside SessionGate).
  */
 export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
   children,

@@ -6,7 +6,7 @@
 
 **Current state (2026-09):** All routes are on **App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing, playground, and profile pages export `instant = true` where validated. **Pages Router is fully retired** (P6–P9) — see **`vibe-docs/App-Router-Migration-Plan.md`**.
 
-**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. P10 polish (route dedupe, SSR session stream) — **done**.
+**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. P10 polish (route dedupe, SSR session in layout) — **done**.
 
 | Track | What you get | Status |
 |-------|----------------|--------|
@@ -62,7 +62,7 @@ Patterns:
 | `/api/*` | App Route Handlers | tRPC, NextAuth, GraphQL proxy, upload, extension (P7) |
 | `/sitemap.xml` | `app/sitemap.ts` | DB-backed (P6) |
 
-**Provider tree (App):** `AppRouterCacheProvider` → `RuntimeDeviceHintProvider` → `AppShellProviders` → `I18nProvider` → `SessionGate` (via `ServerSessionBoundary` Suspense) → page views.
+**Provider tree (App):** `AppRouterCacheProvider` → `RuntimeDeviceHintProvider` → `AppShellProviders` → `I18nProvider` → `SessionGate` (server session from layout) → page views.
 
 ---
 
@@ -116,7 +116,7 @@ All items below are **done** — kept as historical context. See **`vibe-docs/In
 ### Phase 4 — Full App Router (P6–P10)
 
 - [x] API Route Handlers, `app/sitemap.ts`, delete `src/pages/`, drop compat router
-- [x] P10: `generateStaticParams`, SSR device hint, route dedupe, SSR session stream
+- [x] P10: `generateStaticParams`, SSR device hint, route dedupe, SSR session in layout
 
 **Success criteria met:** Instant Insights green on marketing/playground navigations; no Pages Router tree; preview API routes match correctly.
 
@@ -158,7 +158,7 @@ flowchart TD
 | Risk | Mitigation |
 |------|------------|
 | Vercel i18n API regression on 16.3 | Gate on preview smoke tests; stay on 16.2.12 until green |
-| Duplicate providers / hydration mismatch | Single `AppRootLayoutClient` + `AppShellProviders`; `SessionGate` in Suspense |
+| Duplicate providers / hydration mismatch | Single `AppRootLayoutClient` + `AppShellProviders`; one `SessionGate` mount in layout |
 | typesafe-i18n in Server Components | Server `loadI18nForLocale` (`'use cache'`) + client `I18nProvider` |
 | tRPC Pages `api.withTRPC` | `TrpcProvider` in App shell (client hooks only) |
 | SEO / canonical URLs | `publicPageMetadataFromTranslation` + `publicAppMetadata` in App routes |

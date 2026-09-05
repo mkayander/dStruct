@@ -12,8 +12,8 @@ type SessionGateProps = {
 
 /**
  * Mounts next-auth SessionProvider with the server-resolved session on first paint.
- * next-auth v4 reads `session` only in the provider's initial state — do not rely on
- * later prop updates; wrap in Suspense and remount via ServerSessionBoundary instead.
+ * next-auth v4 reads `session` only in the provider's initial state — resolve session
+ * in the layout and mount this gate once (no Suspense swap that would remount pages).
  */
 export const SessionGate: React.FC<SessionGateProps> = ({
   session,
