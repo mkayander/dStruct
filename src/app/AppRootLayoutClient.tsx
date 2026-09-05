@@ -7,7 +7,6 @@ import React, { type ReactNode } from "react";
 import "symbol-observable";
 
 import { CookieConsentRoot } from "#/features/cookieConsent/ui/CookieConsentRoot";
-import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import type { Locales } from "#/i18n/i18n-types";
@@ -16,7 +15,6 @@ import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import type { SsrDeviceType } from "#/themes";
 
 import { RuntimeDeviceHintProvider } from "#/app/locale-app/RuntimeDeviceHintContext";
-import { StreamingSessionRoot } from "#/app/locale-app/streamingSession/StreamingSessionRoot";
 
 type AppRootLayoutClientProps = {
   children: ReactNode;
@@ -26,7 +24,7 @@ type AppRootLayoutClientProps = {
 };
 
 /**
- * App Router provider shell.
+ * App Router provider shell (locale i18n + device hint stay outside session Suspense).
  */
 export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
   children,
@@ -36,22 +34,19 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
 }) => {
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
-      <StreamingSessionRoot>
-        <RuntimeDeviceHintProvider initialSsrDeviceType={ssrDeviceType}>
-          <AppShellProviders ssrDeviceType={ssrDeviceType}>
-            <I18nProvider locale={locale} i18n={i18n}>
-              <CookieConsentRoot>
-                <ProjectBrowserProvider>
-                  {children}
-                  <ProjectBrowser />
-                  <Analytics />
-                  <SpeedInsights />
-                </ProjectBrowserProvider>
-              </CookieConsentRoot>
-            </I18nProvider>
-          </AppShellProviders>
-        </RuntimeDeviceHintProvider>
-      </StreamingSessionRoot>
+      <RuntimeDeviceHintProvider initialSsrDeviceType={ssrDeviceType}>
+        <AppShellProviders ssrDeviceType={ssrDeviceType}>
+          <I18nProvider locale={locale} i18n={i18n}>
+            <CookieConsentRoot>
+              <ProjectBrowserProvider>
+                {children}
+                <Analytics />
+                <SpeedInsights />
+              </ProjectBrowserProvider>
+            </CookieConsentRoot>
+          </I18nProvider>
+        </AppShellProviders>
+      </RuntimeDeviceHintProvider>
     </AppRouterCacheProvider>
   );
 };

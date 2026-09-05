@@ -1,4 +1,5 @@
 import { PrivacyPageView } from "#/features/privacy/ui/PrivacyPageView";
+import type { Translation } from "#/i18n/i18n-types";
 
 import {
   createDefaultLocaleRouteMetadata,
@@ -8,10 +9,7 @@ import {
 /** Marketing privacy — instant client navigations to sibling routes (L5). */
 export const instant = true;
 
-const pickPrivacyCopy = (translation: {
-  PRIVACY_PAGE_TITLE: string;
-  PRIVACY_INTRO: string;
-}) => ({
+const pickPrivacyCopy = (translation: Translation) => ({
   title: `${translation.PRIVACY_PAGE_TITLE} — dStruct`,
   description: translation.PRIVACY_INTRO,
 });

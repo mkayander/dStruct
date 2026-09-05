@@ -7,7 +7,7 @@ import { baseLocale } from "#/i18n/i18n-util";
 import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
-import { resolveLangParam } from "#/app/locale-app/resolveLangParam";
+import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
 
 /** Playground shell — instant with Suspense fallback skeleton (L5). */
 export const instant = true;
@@ -40,10 +40,8 @@ export async function generateLangPlaygroundMetadata({
 }: {
   params: Promise<{ lang: string; slug?: string[] }>;
 }): Promise<Metadata> {
-  const { slug, ...langParams } = await params;
-  const locale = await resolveLangParam(
-    Promise.resolve({ lang: langParams.lang }),
-  );
+  const { lang: langParam, slug } = await params;
+  const locale = resolveLangParamSync(langParam);
   if (!locale) {
     return {};
   }

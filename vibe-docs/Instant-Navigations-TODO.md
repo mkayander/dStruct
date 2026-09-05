@@ -50,7 +50,7 @@
 - [x] E2e: landing WebGL recovery, playground Monaco nav, Pyodide `release()` on playground leave, hero preview after instant nav
 - [x] `pythonRunner.release()` on playground Activity hide; benchmark RAF throttle cancel on unmount
 - [x] Initial page-load instant shell (hard navigation) — `e2e/instant-marketing-hard-nav.spec.ts` (prod/preview PPR; skips in dev)
-- [x] Session / device hints — `LocaleAppLayout` reads proxy device header into theme on first paint; session streams via Suspense (P10)
+- [x] Session / device hints — `LocaleAppLayout` reads proxy device header into theme on first paint; session via `ServerSessionBoundary` Suspense + `SessionGate` (P10)
 - [x] Playground instant adoption — `instant = true` on playground routes + `e2e/instant-playground-nav.spec.ts`
 
 ## Phase 4 — Full App Router (P6–P10)

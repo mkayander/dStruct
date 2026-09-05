@@ -3,19 +3,16 @@ import { Suspense } from "react";
 
 import { ProfilePageGate } from "#/features/profile/ui/ProfilePageGate";
 import { ProfilePageSkeleton } from "#/features/profile/ui/ProfilePageSkeleton";
-import type { Locales } from "#/i18n/i18n-types";
+import type { Locales, Translation } from "#/i18n/i18n-types";
 import { baseLocale } from "#/i18n/i18n-util";
 
 import { publicRouteMetadataForLocale } from "#/app/locale-app/createLocaleRouteMetadata";
-import { resolveLangParam } from "#/app/locale-app/resolveLangParam";
+import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
 
 /** Profile — instant shell with Suspense fallback; user data client-fetched (P10). */
 export const instant = true;
 
-const pickProfileCopy = (translation: {
-  PROFILE: string;
-  SITE_SEO_DESCRIPTION: string;
-}) => ({
+const pickProfileCopy = (translation: Translation) => ({
   title: `${translation.PROFILE} — dStruct`,
   description: translation.SITE_SEO_DESCRIPTION,
 });
@@ -52,7 +49,7 @@ export async function generateLangProfileMetadata({
   params: Promise<{ lang: string; userId: string }>;
 }): Promise<Metadata> {
   const { lang: langParam, userId } = await params;
-  const locale = await resolveLangParam(Promise.resolve({ lang: langParam }));
+  const locale = resolveLangParamSync(langParam);
   if (!locale) {
     return {};
   }
@@ -60,7 +57,7 @@ export async function generateLangProfileMetadata({
 }
 
 type ProfilePageProps = {
-  params: Promise<{ userId: string }>;
+  params: Promise<{ userId: string; lang?: string }>;
 };
 
 export function ProfilePage({ params }: ProfilePageProps) {

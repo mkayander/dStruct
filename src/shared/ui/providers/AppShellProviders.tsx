@@ -19,7 +19,7 @@ type AppShellProvidersProps = {
 
 /**
  * Shared client provider stack for App Router layouts.
- * SessionProvider lives in StreamingSessionRoot (P10 session stream).
+ * SessionProvider is mounted in SessionGate (inside LocaleAppLayout Suspense).
  */
 export const AppShellProviders: React.FC<AppShellProvidersProps> = ({
   children,

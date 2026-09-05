@@ -10,7 +10,9 @@ import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 import type { SsrDeviceType } from "#/themes";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
-import { ServerSessionStream } from "#/app/locale-app/streamingSession/ServerSessionStream";
+import { LocaleAppPageShell } from "#/app/locale-app/LocaleAppPageShell";
+import { ServerSessionBoundary } from "#/app/locale-app/streamingSession/ServerSessionBoundary";
+import { SessionGate } from "#/app/locale-app/streamingSession/SessionGate";
 
 /** Shared App Router locale layout for `app/[lang]` and `(default-locale)`. */
 export async function LocaleAppLayout({
@@ -38,10 +40,17 @@ export async function LocaleAppLayout({
       locale={locale}
       ssrDeviceType={ssrDeviceType}
     >
-      <Suspense fallback={null}>
-        <ServerSessionStream />
+      <Suspense
+        fallback={
+          <SessionGate session={undefined}>
+            <LocaleAppPageShell>{children}</LocaleAppPageShell>
+          </SessionGate>
+        }
+      >
+        <ServerSessionBoundary>
+          <LocaleAppPageShell>{children}</LocaleAppPageShell>
+        </ServerSessionBoundary>
       </Suspense>
-      {children}
     </AppRootLayoutClient>
   );
 }

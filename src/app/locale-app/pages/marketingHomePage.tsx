@@ -1,4 +1,5 @@
 import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
+import type { Translation } from "#/i18n/i18n-types";
 
 import {
   createDefaultLocaleRouteMetadata,
@@ -8,10 +9,7 @@ import {
 /** Marketing home — instant client navigations to sibling routes (L5). */
 export const instant = true;
 
-const pickHomeCopy = (translation: {
-  SITE_SEO_TITLE: string;
-  SITE_SEO_DESCRIPTION: string;
-}) => ({
+const pickHomeCopy = (translation: Translation) => ({
   title: translation.SITE_SEO_TITLE,
   description: translation.SITE_SEO_DESCRIPTION,
 });

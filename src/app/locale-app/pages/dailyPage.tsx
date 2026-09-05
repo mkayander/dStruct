@@ -1,4 +1,5 @@
 import { DailyPageView } from "#/features/homePage/ui/DailyPageView";
+import type { Translation } from "#/i18n/i18n-types";
 
 import {
   createDefaultLocaleRouteMetadata,
@@ -8,10 +9,7 @@ import {
 /** Marketing daily — instant client navigations to sibling routes (L5). */
 export const instant = true;
 
-const pickDailyCopy = (translation: {
-  HOME_DAILY_SECTION_TITLE: string;
-  HOME_DAILY_SECTION_LEAD: string;
-}) => ({
+const pickDailyCopy = (translation: Translation) => ({
   title: `${translation.HOME_DAILY_SECTION_TITLE} — dStruct`,
   description: `${translation.HOME_DAILY_SECTION_TITLE}. ${translation.HOME_DAILY_SECTION_LEAD}`,
 });
