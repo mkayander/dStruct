@@ -1,0 +1,69 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const mockAllBrief = vi.fn();
+const mockGetBySlug = vi.fn();
+const mockGetCaseBySlug = vi.fn();
+
+vi.mock("#/server/auth/authOptions", () => ({
+  authOptions: {},
+}));
+
+vi.mock("#/server/api/root", () => ({
+  createCaller: () => ({
+    project: {
+      allBrief: mockAllBrief,
+      getBySlug: mockGetBySlug,
+      getCaseBySlug: mockGetCaseBySlug,
+    },
+  }),
+}));
+
+vi.mock("#/server/api/context", () => ({
+  createInnerTRPCContext: async (opts: unknown) => opts,
+}));
+
+vi.mock("next-auth", () => ({
+  getServerSession: vi.fn().mockResolvedValue(null),
+}));
+
+describe("getPlaygroundInitialData", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockAllBrief.mockResolvedValue([{ id: "1", slug: "demo", title: "Demo" }]);
+    mockGetBySlug.mockResolvedValue({
+      id: "proj-1",
+      slug: "two-sum",
+      title: "Two Sum",
+    });
+    mockGetCaseBySlug.mockResolvedValue({
+      id: "case-1",
+      slug: "case-a",
+      projectId: "proj-1",
+    });
+  });
+
+  it("returns allBrief only when no slug is provided", async () => {
+    const { getPlaygroundInitialData } =
+      await import("#/server/playground/getPlaygroundInitialData");
+    const result = await getPlaygroundInitialData();
+
+    expect(result.allBrief).toHaveLength(1);
+    expect(result.projectBySlug).toBeNull();
+    expect(result.caseBySlug).toBeNull();
+    expect(mockGetBySlug).not.toHaveBeenCalled();
+  });
+
+  it("prefetches project and case when slugs are provided", async () => {
+    const { getPlaygroundInitialData } =
+      await import("#/server/playground/getPlaygroundInitialData");
+    const result = await getPlaygroundInitialData("two-sum", "case-a");
+
+    expect(mockGetBySlug).toHaveBeenCalledWith("two-sum");
+    expect(mockGetCaseBySlug).toHaveBeenCalledWith({
+      projectId: "proj-1",
+      slug: "case-a",
+    });
+    expect(result.projectBySlug?.slug).toBe("two-sum");
+    expect(result.caseBySlug?.slug).toBe("case-a");
+  });
+});

@@ -1,15 +1,11 @@
-"use client";
+import type { ReactNode } from "react";
 
-import React, { type ReactNode } from "react";
-
-import { ProjectBrowser } from "#/features/project/ui/ProjectBrowser/ProjectBrowser";
+import { ProjectBrowserOverlay } from "#/app/locale-app/ProjectBrowserOverlay";
 
 /** Page tree + global overlays that require SessionProvider (inside SessionGate). */
-export const LocaleAppPageShell: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => (
+export const LocaleAppPageShell = ({ children }: { children: ReactNode }) => (
   <>
     {children}
-    <ProjectBrowser />
+    <ProjectBrowserOverlay />
   </>
 );

@@ -4,6 +4,7 @@ import { TRPCClientError } from "@trpc/client";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
+import { usePlaygroundInitialData } from "#/features/playground/context/PlaygroundInitialDataContext";
 import {
   projectSlice,
   selectIsEditable,
@@ -31,11 +32,19 @@ export const useProjectPanelData = () => {
     clearSlugs,
   } = usePlaygroundSlugs();
 
-  const allBrief = api.project.allBrief.useQuery();
+  const serverInitialData = usePlaygroundInitialData();
+
+  const allBrief = api.project.allBrief.useQuery(undefined, {
+    initialData: serverInitialData?.allBrief,
+  });
   const isEditable = useAppSelector(selectIsEditable);
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
+    initialData:
+      serverInitialData?.projectBySlug?.slug === projectSlug
+        ? serverInitialData.projectBySlug
+        : undefined,
     retry(failureCount, error) {
       if (error instanceof TRPCClientError && error.data.code === "NOT_FOUND") {
         return false;
@@ -58,7 +67,14 @@ export const useProjectPanelData = () => {
 
   const selectedCase = api.project.getCaseBySlug.useQuery(
     { projectId: selectedProject.data?.id || "", slug: caseSlug },
-    { enabled: Boolean(selectedProject.data?.id && caseSlug) },
+    {
+      enabled: Boolean(selectedProject.data?.id && caseSlug),
+      initialData:
+        serverInitialData?.caseBySlug?.slug === caseSlug &&
+        serverInitialData.projectBySlug?.id === selectedProject.data?.id
+          ? serverInitialData.caseBySlug
+          : undefined,
+    },
   );
 
   useEffect(() => {
