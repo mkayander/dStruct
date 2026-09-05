@@ -1,6 +1,6 @@
 # Mobile Playground Architecture
 
-The playground page (`src/pages/playground/[[...slug]].tsx`) renders a completely different layout on mobile vs desktop. Desktop uses a four-panel split layout (`SplitPanelsLayout`). Mobile uses a three-phase single-view design managed by `MobilePlayground`.
+The playground page (`src/features/playground/ui/PlaygroundPageView.tsx`, mounted from App Router `src/app/locale-app/pages/playgroundPage.tsx`) renders a completely different layout on mobile vs desktop. Desktop uses a four-panel split layout (`SplitPanelsLayout`). Mobile uses a three-phase single-view design managed by `MobilePlayground`.
 
 ## Three-Phase View System
 
@@ -116,7 +116,8 @@ Fixed bottom bar (thumb-friendly) with three full-width tabs:
 
 | File                                                       | Purpose                                                        |
 | ---------------------------------------------------------- | -------------------------------------------------------------- |
-| `src/pages/playground/[[...slug]].tsx`                     | Page component; renders `MobilePlayground` or `DesktopWrapper` |
+| `src/app/locale-app/pages/playgroundPage.tsx`              | App Router route module (metadata + `PlaygroundPageView`)      |
+| `src/features/playground/ui/PlaygroundPageView.tsx`        | Client page; renders `MobilePlayground` or desktop split layout |
 | `src/features/playground/ui/MobilePlayground.tsx`          | Keep-alive container for all three mobile views                |
 | `src/features/playground/hooks/useMobilePlaygroundView.ts` | View state management via `?view=` query param                 |
 | `src/features/playground/ui/MobileBrowseView.tsx`          | Project browser with search/filter/pagination                  |

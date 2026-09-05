@@ -10,7 +10,7 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 
 1. **CSS-first responsiveness** — Use responsive `sx` breakpoints (`{ xs: ..., sm: ... }`) instead of conditional React trees where possible.
 2. **SSR device hint** — For pages that must branch structurally (e.g. playground mobile vs desktop), derive a coarse device guess from request headers and pass it into the theme so `useMediaQuery` matches on first paint.
-3. **Scoped SSR** — Apply device detection only where needed (e.g. playground `getServerSideProps`), not globally in `_app`, to avoid opting out of static optimization for the whole app.
+3. **Scoped SSR** — Apply device detection only on playground paths via `proxy.ts` + `LocaleAppLayout`, not globally, so marketing routes stay cache-friendly.
 
 ## Key Files
 
@@ -20,11 +20,11 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 | `src/shared/lib/ssrDevice.ts`                    | `resolveSsrDeviceType(headers)` — parses `Sec-CH-UA-Mobile` and `User-Agent` to return `"mobile"` or `"desktop"`. `setDeviceHintResponseHeaders(res)` — sets `Accept-CH`, merges `Vary` for caching correctness.          |
 | `src/themes.ts`                                  | `createCustomTheme(deviceType)` — injects `MuiUseMediaQuery.defaultProps.ssrMatchMedia` so media queries resolve correctly during SSR. `queryMatchesViewport` returns `false` for unsupported query types (conservative). |
 | `src/shared/ui/providers/StateThemeProvider.tsx` | Accepts `ssrDeviceType`, creates theme via `createCustomTheme(ssrDeviceType)`.                                                                                                                                            |
-| `src/pages/playground/[[...slug]].tsx`           | Uses `getServerSideProps` to resolve `ssrDeviceType` from `req.headers`, calls `setDeviceHintResponseHeaders(res)`, passes `ssrDeviceType` into page props → `_app` → `StateThemeProvider`.                               |
+| `src/app/locale-app/pages/playgroundPage.tsx`     | App Router playground route module (shared by `(default-locale)/` and `[lang]/`).                                                                                                                                       |
+| `src/features/playground/ui/PlaygroundPageView.tsx` | Client page; branches `MobilePlayground` vs desktop `SplitPanelsLayout` via `useMobileLayout`.                                                                                                                          |
 | `src/app/(default-locale)/layout.tsx`             | Shared `LocaleAppLayout` for all unprefixed App routes (single provider tree).                                                                                                                                            |
 | `src/app/locale-app/LocaleAppLayout.tsx`          | Reads proxy-set `x-dstruct-ssr-device-type` (playground) via `headers()` and passes `ssrDeviceType` into `AppRootLayoutClient` for first-paint MUI breakpoints. |
 | `src/proxy.ts`                                    | Sets `x-dstruct-ssr-device-type`, `Accept-CH`, and `Vary` on playground paths.                                                                                                                                            |
-| `src/pages/_app.tsx`                             | Passes `pageProps.ssrDeviceType` into `StateThemeProvider`. No `getInitialProps` — device hint is page-scoped.                                                                                                            |
 
 ## Header Strategy
 
@@ -49,14 +49,14 @@ This doc describes how dStruct mitigates SSR flicker on mobile and the CSS-first
 
 ### Components Using CSS-First (No `useMobileLayout`)
 
-- `src/pages/index.tsx` — Hero clipPath, typography, button widths, stack direction
+- `src/app/locale-app/pages/marketingHomePage.tsx` — Hero clipPath, typography, button widths, stack direction
 - `src/features/codeRunner/ui/CodePanel.tsx` — Tab panel flex, editor wrapper layout, editor height
 - `src/features/codeRunner/ui/SolutionModal.tsx` — Stack direction for complexity fields
 - `src/features/project/ui/ProjectBrowser/ProjectBrowser.tsx` — Drawer paper width (`{ xs: "100%", md: "800px" }`)
 
 ### Components Still Using `useMobileLayout`
 
-- `src/pages/playground/[[...slug]].tsx` — Mobile vs desktop layout branch (MobilePlayground vs SplitPanelsLayout)
+- `src/features/playground/ui/PlaygroundPageView.tsx` — Mobile vs desktop layout branch (MobilePlayground vs SplitPanelsLayout)
 - `src/features/appBar/ui/MainAppBar.tsx` — Mobile playground toolbar vs desktop toolbar
 - `src/features/codeRunner/ui/CodeRunner.tsx` — Monaco `folding` option
 
@@ -70,9 +70,9 @@ MUI's `ssrMatchMedia` receives a function `(query) => ({ matches: boolean })`. O
 
 ## Architecture Decisions
 
-### Why page-scoped `getServerSideProps` instead of `_app.getInitialProps`?
+### Why playground-scoped device hint instead of global layout?
 
-`getInitialProps` in `_app` opts the entire app out of Automatic Static Optimization. Moving device detection to the playground page keeps SSR only where it matters for flicker and preserves static optimization for other routes.
+Device detection runs only on playground paths (`proxy.ts` sets `x-dstruct-ssr-device-type`; `LocaleAppLayout` reads it). Marketing and other routes skip the hint so Instant Nav / `'use cache'` stay effective.
 
 ### Why not fully CSS-first for the playground?
 
@@ -86,7 +86,7 @@ Monaco's folding behavior affects mobile UX (less clutter on small screens). The
 
 - **Device detection is heuristic.** `User-Agent` and `Sec-CH-UA-Mobile` indicate device type, not viewport size. A tablet in landscape may be treated as desktop.
 - **First request may lack client hints.** Browsers send `Sec-CH-UA-Mobile` by default in Chromium, but older or non-Chromium browsers may only provide `User-Agent`.
-- **Playground is always dynamic.** Because it uses `getServerSideProps`, it is never statically generated. Other pages (e.g. `/`) remain static.
+- **Playground uses runtime device headers.** The proxy + layout read request headers for the device hint; marketing routes remain statically cacheable with `'use cache'`.
 
 ## Verification
 

@@ -116,7 +116,7 @@ App-only playground/profile; **`i18n` removed** from `next.config.mjs`.
 
 ## References
 
-- `vibe-docs/App-Router-Migration-Plan.md` — **P6–P9 complete**; P10 optional polish
+- `vibe-docs/App-Router-Migration-Plan.md` — **P6–P10 complete**
 - `vibe-docs/Instant-Navigations-Design.md`
 - `vibe-docs/Instant-Navigations-TODO.md`
 - `src/proxy.ts` — locale header for App Router paths

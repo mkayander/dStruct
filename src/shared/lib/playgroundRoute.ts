@@ -1,6 +1,6 @@
 import { baseLocale, locales } from "#/i18n/i18n-util";
 
-/** Public Pages Router playground prefix (canonical URLs). */
+/** Public App Router playground prefix (canonical URLs). */
 export const PLAYGROUND_PUBLIC_BASE_PATH = "/playground";
 
 const localeCodeSet = new Set<string>(locales);
