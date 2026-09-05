@@ -1,8 +1,6 @@
 "use client";
 
 import { ApolloProvider } from "@apollo/client";
-import type { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { SnackbarProvider } from "notistack";
 import React, { type ReactNode } from "react";
 
@@ -16,45 +14,39 @@ import type { SsrDeviceType } from "#/themes";
 
 type AppShellProvidersProps = {
   children: ReactNode;
-  session: Session | null;
   ssrDeviceType?: SsrDeviceType;
 };
 
 /**
- * Shared client provider stack for Pages `_app` and App Router layouts.
- * Locale/i18n and router-specific cache wrappers stay outside this tree.
+ * Shared client provider stack for App Router layouts.
+ * SessionProvider is mounted in SessionGate (inside LocaleAppLayout).
  */
 export const AppShellProviders: React.FC<AppShellProvidersProps> = ({
   children,
-  session,
   ssrDeviceType,
 }) => (
   <TrpcProvider>
     <ReduxProvider>
-      <SessionProvider session={session}>
-        <ApolloProvider client={apolloClient}>
-          <StateThemeProvider ssrDeviceType={ssrDeviceType}>
-            <SnackbarProvider
-              maxSnack={4}
-              action={(snackbarKey) =>
-                isSnackbarClosable(snackbarKey) ? (
-                  <SnackbarCloseButton snackbarKey={snackbarKey} />
-                ) : null
-              }
-              classes={{
-                containerAnchorOriginBottomLeft:
-                  "snackbar-mobile-bottom-margin",
-                containerAnchorOriginBottomCenter:
-                  "snackbar-mobile-bottom-margin",
-                containerAnchorOriginBottomRight:
-                  "snackbar-mobile-bottom-margin",
-              }}
-            >
-              {children}
-            </SnackbarProvider>
-          </StateThemeProvider>
-        </ApolloProvider>
-      </SessionProvider>
+      <ApolloProvider client={apolloClient}>
+        <StateThemeProvider ssrDeviceType={ssrDeviceType}>
+          <SnackbarProvider
+            maxSnack={4}
+            action={(snackbarKey) =>
+              isSnackbarClosable(snackbarKey) ? (
+                <SnackbarCloseButton snackbarKey={snackbarKey} />
+              ) : null
+            }
+            classes={{
+              containerAnchorOriginBottomLeft: "snackbar-mobile-bottom-margin",
+              containerAnchorOriginBottomCenter:
+                "snackbar-mobile-bottom-margin",
+              containerAnchorOriginBottomRight: "snackbar-mobile-bottom-margin",
+            }}
+          >
+            {children}
+          </SnackbarProvider>
+        </StateThemeProvider>
+      </ApolloProvider>
     </ReduxProvider>
   </TrpcProvider>
 );

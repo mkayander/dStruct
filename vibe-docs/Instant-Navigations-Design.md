@@ -6,7 +6,7 @@
 
 **Current state (2026-09):** All routes are on **App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing, playground, and profile pages export `instant = true` where validated. **Pages Router is fully retired** (P6–P9) — see **`vibe-docs/App-Router-Migration-Plan.md`**.
 
-**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. Optional P10 polish (route dedupe, SSR session stream) — **2/10**.
+**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. P10 polish (route dedupe, SSR session in layout) — **done**.
 
 | Track | What you get | Status |
 |-------|----------------|--------|
@@ -62,7 +62,7 @@ Patterns:
 | `/api/*` | App Route Handlers | tRPC, NextAuth, GraphQL proxy, upload, extension (P7) |
 | `/sitemap.xml` | `app/sitemap.ts` | DB-backed (P6) |
 
-**Provider tree (App):** `AppRouterCacheProvider` → `AppShellProviders` → `I18nProvider` → page views.
+**Provider tree (App):** `AppRouterCacheProvider` → `RuntimeDeviceHintProvider` → `AppShellProviders` → `I18nProvider` → `SessionGate` (server session from layout) → page views.
 
 ---
 
@@ -86,46 +86,39 @@ Webpack production build is **not** a viable workaround today (`sanitize-html` /
 
 ---
 
-## Recommended phases
+## Completed migration (Phases 0–4 + P6–P10)
 
-### Phase 0 — Agent-native DX (now, no router change)
+All items below are **done** — kept as historical context. See **`vibe-docs/Instant-Navigations-TODO.md`** for the checklist.
 
-- [x] `AGENTS.md` with bundled-docs block (16.2+).
-- [ ] `CLAUDE.md` → `@AGENTS.md`.
-- [ ] Extend `AGENTS.md` with Instant Nav / Cache Components doc paths and **“dStruct is Pages Router until Phase 1”** guardrail.
-- [ ] Optional: [Next.js DevTools MCP](https://github.com/vercel/next-devtools-mcp) in `.mcp.json` for upgrade/migration prompts.
+### Phase 0 — Agent-native DX
 
-**No user-visible nav change.**
+- [x] `AGENTS.md` with bundled-docs block
+- [x] `CLAUDE.md` → `@AGENTS.md`
+- [x] Instant Nav / Cache Components doc paths in `AGENTS.md` (App Router guardrails)
+- [x] Optional `.mcp.json` for Next.js DevTools MCP
 
-### Phase 1 — Re-upgrade to 16.3.x + verify Vercel
+### Phase 1 — 16.3.x on Vercel
 
-- Bump `next` to latest 16.3.x on `cursor/update-nextjs-react-8f0a` (or follow-up branch).
-- Smoke-test preview API routes and playground.
-- Ship general 16.3 wins (memory, build cache, prefetch inlining) **without** `cacheComponents`.
+- [x] `next@16.3.2`; preview smoke + e2e green (`PLAYWRIGHT_EXPECT_MATCHED_PATH`)
 
-### Phase 2 — App Router pilot (marketing + i18n segment)
+### Phase 2 — App Router locale shell
 
-Scope: **home, privacy, daily** under `src/app/[lang]/`.
+- [x] `app/[lang]/` + `(default-locale)/` for marketing routes
+- [x] `proxy.ts` locale header; `loadI18nForLocale` with `'use cache'`
+- [x] `cacheComponents` + `partialPrefetching` enabled
 
-1. Add `src/app/[lang]/layout.tsx` with shared `Providers` (extract from `_app.tsx`).
-2. Port static marketing pages; map `getI18nPropsWithCanonical` → Server Component + `lang()` from `next/root-params`.
-3. Keep `src/pages/playground`, `profile`, APIs on Pages Router (coexistence supported).
-4. Enable `cacheComponents: true` **only after** first App routes build clean in dev (expect Cache Components errors guiding Suspense/`use cache` fixes).
-5. Add `unstable_instant` on pilot routes; turn on `instantNavigationDevToolsToggle` in dev.
+### Phase 3 — Playground + profile on App Router
 
-**Success:** Instant Insights shows green navigations between `/en`, `/en/privacy`, `/en/daily`; Pages playground still works.
+- [x] `app/.../playground/[[...slug]]` with `instant = true` + Suspense skeleton
+- [x] `app/.../profile/[userId]` with `instant = true` + Suspense skeleton (P10)
+- [x] Activity lifecycle shells (Monaco, WebGL, Pyodide)
 
-### Phase 3 — Playground shell (optional, high effort)
+### Phase 4 — Full App Router (P6–P10)
 
-- Introduce `app/[lang]/playground/[[...slug]]/page.tsx` that renders a **thin Server shell** (app bar, SEO) + existing client `Playground` feature module inside `<Suspense>`.
-- tRPC/Redux stay client-side; cache only static chrome and project list skeletons where safe.
-- Revisit URL state / project browser integration with App Router navigation.
+- [x] API Route Handlers, `app/sitemap.ts`, delete `src/pages/`, drop compat router
+- [x] P10: `generateStaticParams`, SSR device hint, route dedupe, SSR session in layout
 
-### Phase 4 — Profile, sitemap, deprecate Pages
-
-- Migrate `profile/[userId]`, `sitemap.xml`.
-- Remove `i18n` from `next.config.mjs` when no Pages user routes remain.
-- Add Playwright `instant()` tests for marketing navigations.
+**Success criteria met:** Instant Insights green on marketing/playground navigations; no Pages Router tree; preview API routes match correctly.
 
 ---
 
@@ -165,19 +158,19 @@ flowchart TD
 | Risk | Mitigation |
 |------|------------|
 | Vercel i18n API regression on 16.3 | Gate on preview smoke tests; stay on 16.2.12 until green |
-| Duplicate providers / hydration mismatch | Single `Providers.tsx`; match `_app` order; test Emotion cache |
-| typesafe-i18n in Server Components | Keep client `I18nProvider` for interactive UI; pass `LL` or use server-side locale loaders consistently |
-| tRPC `api.withTRPC` is Pages-oriented | Use existing `api` hooks in client components; add RSC tRPC only if needed later |
-| SEO / canonical URLs | Preserve `getI18nPropsWithCanonical` behavior in App metadata API |
+| Duplicate providers / hydration mismatch | Single `AppRootLayoutClient` + `AppShellProviders`; one `SessionGate` mount in layout |
+| typesafe-i18n in Server Components | Server `loadI18nForLocale` (`'use cache'`) + client `I18nProvider` |
+| tRPC Pages `api.withTRPC` | `TrpcProvider` in App shell (client hooks only) |
+| SEO / canonical URLs | `publicPageMetadataFromTranslation` + `publicAppMetadata` in App routes |
 | Build time × 20 locales | `generateStaticParams` for `[lang]`; cache aggressively with `'use cache'` |
 
 ---
 
-## What we are **not** doing in Phase 0–1
+## Historical constraints (resolved)
 
-- Enabling `cacheComponents` on Pages Router (unsupported).
-- Removing Pages `i18n` before App `[lang]` routes exist.
-- Rewriting playground data layer to Server Components.
+- ~~Enabling `cacheComponents` on Pages Router~~ — Pages Router retired (P8).
+- ~~Removing Pages `i18n` before App `[lang]` routes~~ — L2 complete.
+- Playground data layer remains client-heavy by design (Suspense shells + Activity lifecycle).
 
 ---
 

@@ -132,7 +132,7 @@ OAuth and AWS keys can stay as placeholders unless you are testing those flows. 
 
 | Layer                | Technologies                                                        |
 | -------------------- | ------------------------------------------------------------------- |
-| **App**              | [Next.js](https://nextjs.org/) (Pages Router), React 19, TypeScript |
+| **App**              | [Next.js](https://nextjs.org/) (App Router), React 19, TypeScript |
 | **UI**               | MUI v9, Emotion                                                     |
 | **State**            | Redux Toolkit (UI), TanStack Query via tRPC (server data)           |
 | **API**              | tRPC (primary), GraphQL + Apollo where used                         |

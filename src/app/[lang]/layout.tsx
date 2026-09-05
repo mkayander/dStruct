@@ -1,7 +1,7 @@
 import { generateLangStaticParams } from "#/app/locale-app/generateLangStaticParams";
 import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
 
-/** Locale shell — cached i18n + synchronous SSR device hint; session client-fetched. */
+/** Locale shell — cached i18n + synchronous SSR device hint; session streams via Suspense (P10). */
 export const instant = false;
 
 export function generateStaticParams() {

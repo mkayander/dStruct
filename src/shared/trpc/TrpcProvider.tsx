@@ -6,7 +6,7 @@ import { type ReactNode, useState } from "react";
 import { trpc, trpcClientConfig } from "#/shared/api";
 
 /**
- * tRPC + TanStack Query for both Pages Router (`_app`) and App Router (`app/layout`).
+ * tRPC + TanStack Query for App Router (`AppRootLayoutClient` / `AppShellProviders`).
  * Mirrors the former `api.withTRPC` wrapper (ssr: false).
  */
 export const TrpcProvider: React.FC<{ children: ReactNode }> = ({
