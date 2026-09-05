@@ -6,7 +6,7 @@
 
 **Current state (2026-09):** All routes are on **App Router** (`src/app/`). **`cacheComponents` + `partialPrefetching`** are enabled; marketing, playground, and profile pages export `instant = true` where validated. **Pages Router is fully retired** (P6–P9) — see **`vibe-docs/App-Router-Migration-Plan.md`**.
 
-**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. Optional P10 polish (route dedupe, SSR session stream) — **2/10**.
+**Overall difficulty:** Locale + Instant Nav + full App migration — **done**. P10 polish (route dedupe, SSR session stream) — **done**.
 
 | Track | What you get | Status |
 |-------|----------------|--------|

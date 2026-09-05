@@ -2,7 +2,7 @@ import { baseLocale } from "#/i18n/i18n-util";
 
 import { LocaleAppLayout } from "#/app/locale-app/LocaleAppLayout";
 
-/** Locale shell — cached i18n + synchronous SSR device hint; session client-fetched. */
+/** Locale shell — cached i18n + synchronous SSR device hint; session streams via Suspense (P10). */
 export const instant = false;
 
 /** Default-locale (`en`) public App shell at unprefixed URLs (L2). */

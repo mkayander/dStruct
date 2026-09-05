@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import type { Locales } from "#/i18n/i18n-types";
 import { locales } from "#/i18n/i18n-util";
@@ -9,6 +10,7 @@ import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 import type { SsrDeviceType } from "#/themes";
 
 import { AppRootLayoutClient } from "#/app/AppRootLayoutClient";
+import { ServerSessionStream } from "#/app/locale-app/streamingSession/ServerSessionStream";
 
 /** Shared App Router locale layout for `app/[lang]` and `(default-locale)`. */
 export async function LocaleAppLayout({
@@ -32,11 +34,13 @@ export async function LocaleAppLayout({
 
   return (
     <AppRootLayoutClient
-      session={null}
       i18n={i18n}
       locale={locale}
       ssrDeviceType={ssrDeviceType}
     >
+      <Suspense fallback={null}>
+        <ServerSessionStream />
+      </Suspense>
       {children}
     </AppRootLayoutClient>
   );

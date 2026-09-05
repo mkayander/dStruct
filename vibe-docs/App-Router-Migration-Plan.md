@@ -15,7 +15,7 @@
 | `next/compat/router` bridges | Removed | **Done** (P9) |
 | `src/pages/` | Deleted | **Done** (P8) |
 
-**Remaining:** optional **P10** follow-ups (route dedupe, SSR session stream) — see table below.
+**Remaining:** none — P10 optional follow-ups complete.
 
 ---
 
@@ -65,8 +65,8 @@ Removed `usePagesRouterCompat` and compat fallbacks. Hooks use `next/navigation`
 | **Profile `instant = true`** | **Done** — Suspense + `ProfilePageSkeleton`; `e2e/instant-profile-nav.spec.ts` |
 | **SSR device hint on first paint** | **Done** — PR #184 (`LocaleAppLayout` reads proxy header synchronously) |
 | **Update stale docs** | **Done** — this plan + Instant Nav design/TODO |
-| **Dedupe route trees** | Optional — `(default-locale)/` vs `[lang]/` share views; collapse only if maintenance cost warrants |
-| **Stream SSR session into `SessionProvider`** | Optional — reduces signed-in app bar skeleton flash without blocking cached locale shell |
+| **Dedupe route trees** | **Done** — shared `locale-app/pages/*` modules; route files re-export |
+| **Stream SSR session into `SessionProvider`** | **Done** — `ServerSessionStream` + `StreamingSessionRoot` (Suspense, no shell block) |
 
 ---
 
