@@ -44,7 +44,9 @@ export const usePlaygroundSlugs = () => {
     const { basePath, navigateTo } = route;
 
     const setProject = (slug?: string, isInitial?: boolean) => {
-      dispatch(projectSlice.actions.loadStart());
+      if (!isInitial) {
+        dispatch(projectSlice.actions.loadStart());
+      }
       if (!slug) {
         return navigateTo(basePath, {
           replace: true,

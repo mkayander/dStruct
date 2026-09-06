@@ -8,6 +8,7 @@ import { OutputPanel } from "#/features/output/ui/OutputPanel";
 import { PlaygroundViewProvider } from "#/features/playground/context/PlaygroundViewContext";
 import { usePlaygroundMobileLayout } from "#/features/playground/hooks/usePlaygroundMobileLayout";
 import { MobilePlayground } from "#/features/playground/ui/MobilePlayground";
+import { PlaygroundPanelsGate } from "#/features/playground/ui/PlaygroundPanelsGate";
 import { ProjectPanel } from "#/features/project/ui/ProjectPanel";
 import { TreeViewPanel } from "#/features/treeViewer/ui/TreeViewPanel";
 import { useAppConfig } from "#/shared/hooks";
@@ -21,19 +22,21 @@ export const PlaygroundPageView: React.FC = () => {
 
   return (
     <ConfigContext.Provider value={data}>
-      {isMobile ? (
-        <PlaygroundViewProvider>
-          <MobilePlayground />
-        </PlaygroundViewProvider>
-      ) : (
-        <SplitPanelsLayoutClient
-          component="main"
-          TopLeft={ProjectPanel}
-          BottomLeft={CodePanel}
-          TopRight={TreeViewPanel}
-          BottomRight={OutputPanel}
-        />
-      )}
+      <PlaygroundPanelsGate>
+        {isMobile ? (
+          <PlaygroundViewProvider>
+            <MobilePlayground />
+          </PlaygroundViewProvider>
+        ) : (
+          <SplitPanelsLayoutClient
+            component="main"
+            TopLeft={ProjectPanel}
+            BottomLeft={CodePanel}
+            TopRight={TreeViewPanel}
+            BottomRight={OutputPanel}
+          />
+        )}
+      </PlaygroundPanelsGate>
     </ConfigContext.Provider>
   );
 };
