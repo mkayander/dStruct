@@ -22,12 +22,9 @@ vi.mock("#/shared/hooks/usePlaygroundRoute", () => ({
   usePlaygroundRoute: () => mockUsePlaygroundRoute(),
 }));
 
-vi.mock(
-  "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout",
-  () => ({
-    SplitPanelsLayout: () => null,
-  }),
-);
+vi.mock("#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout", () => ({
+  SplitPanelsLayout: () => null,
+}));
 
 describe("usePlaygroundPanelsReady", () => {
   beforeEach(() => {
@@ -45,9 +42,7 @@ describe("usePlaygroundPanelsReady", () => {
     const store = makeStore();
 
     const { result } = renderHook(() => usePlaygroundPanelsReady(), {
-      wrapper: ({ children }) => (
-        <Provider store={store}>{children}</Provider>
-      ),
+      wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });
 
     expect(result.current).toBe(false);
@@ -71,9 +66,7 @@ describe("usePlaygroundPanelsReady", () => {
     const store = makeStore();
 
     const { result } = renderHook(() => usePlaygroundPanelsReady(), {
-      wrapper: ({ children }) => (
-        <Provider store={store}>{children}</Provider>
-      ),
+      wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });
 
     expect(result.current).toBe(true);
