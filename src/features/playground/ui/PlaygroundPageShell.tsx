@@ -13,7 +13,7 @@ type PlaygroundPageShellProps = {
 
 /**
  * Shared chrome for playground routes: scroll container, background, and app bar.
- * Used by the live page and route `loading.tsx` so instant navigations keep the header.
+ * Rendered from playground `layout.tsx` so it persists across loading → page swaps.
  */
 export const PlaygroundPageShell: React.FC<PlaygroundPageShellProps> = ({
   children,
