@@ -4,13 +4,8 @@ import { useEffect, useMemo } from "react";
 
 import { projectSlice } from "#/features/project/model/projectSlice";
 import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
+import { buildPlaygroundPath } from "#/shared/lib/playgroundRoute";
 import {
-  buildPlaygroundPath,
-  parsePlaygroundPathname,
-} from "#/shared/lib/playgroundRoute";
-import {
-  getLastPlaygroundPath,
-  getRestorablePlaygroundPath,
   removeLastPlaygroundPath,
   setLastPlaygroundPath,
 } from "#/shared/local-storage/playgroundPath";
@@ -43,28 +38,13 @@ export const usePlaygroundSlugs = () => {
     const [projectSlug, caseSlug, solutionSlug] = route.slug;
     const { basePath, navigateTo } = route;
 
-    const setProject = (slug?: string, isInitial?: boolean) => {
-      if (!isInitial) {
-        dispatch(projectSlice.actions.loadStart());
-      }
+    const setProject = (slug?: string) => {
+      dispatch(projectSlice.actions.loadStart());
       if (!slug) {
         return navigateTo(basePath, {
           replace: true,
           omitView: true,
         });
-      }
-
-      const lastPath = getLastPlaygroundPath();
-      const lastParsed = lastPath ? parsePlaygroundPathname(lastPath) : null;
-      if (lastPath && !lastParsed) {
-        removeLastPlaygroundPath();
-      }
-      const pathToRestore = isInitial
-        ? getRestorablePlaygroundPath(lastPath, basePath)
-        : null;
-
-      if (pathToRestore) {
-        return navigateTo(pathToRestore, { replace: true, omitView: true });
       }
 
       return navigateTo(buildPlaygroundPath(basePath, [slug]), {

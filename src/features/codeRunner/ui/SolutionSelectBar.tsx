@@ -2,7 +2,7 @@
 
 import type { OnDragEndResponder } from "@hello-pangea/dnd";
 import type { StackProps } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { SolutionModal } from "#/features/codeRunner/ui/SolutionModal";
 import { selectIsEditable } from "#/features/project/model/projectSlice";
@@ -14,7 +14,7 @@ import { api } from "#/shared/api";
 import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppSelector } from "#/store/hooks";
 
 type SolutionBrief = Pick<
   PlaygroundSolution,
@@ -35,13 +35,10 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
 
   const {
     projectSlug = "",
-    caseSlug = "",
     solutionSlug = "",
     setSolution,
   } = usePlaygroundSlugs();
   const solutions = selectedProject.data?.solutions;
-
-  const dispatch = useAppDispatch();
 
   const trpcUtils = api.useUtils();
 
@@ -93,16 +90,6 @@ export const SolutionSelectBar: React.FC<SolutionSelectBarProps> = ({
     deleteSolution.isPending;
 
   const isEditable = useAppSelector(selectIsEditable);
-
-  useEffect(() => {
-    if (solutionSlug || !selectedProject.data || !caseSlug) return;
-
-    const firstSolutionSlug = selectedProject.data.solutions[0]?.slug;
-
-    if (firstSolutionSlug) {
-      setSolution(firstSolutionSlug);
-    }
-  }, [solutionSlug, selectedProject.data, dispatch, setSolution, caseSlug]);
 
   const handleSolutionClick = (solution: SolutionBrief) => {
     void setSolution(solution.slug);

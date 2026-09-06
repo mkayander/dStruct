@@ -10,7 +10,6 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
-import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
@@ -21,22 +20,11 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 export const useProjectPanelData = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
-  const playgroundRoute = usePlaygroundRoute();
 
-  const isRouteReady = playgroundRoute !== null;
-
-  const {
-    projectSlug = "",
-    caseSlug = "",
-    setProject,
-    clearSlugs,
-  } = usePlaygroundSlugs();
+  const { projectSlug = "", caseSlug = "", clearSlugs } = usePlaygroundSlugs();
 
   const serverInitialData = usePlaygroundInitialData();
 
-  const allBrief = api.project.allBrief.useQuery(undefined, {
-    initialData: serverInitialData?.allBrief,
-  });
   const isEditable = useAppSelector(selectIsEditable);
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
@@ -104,17 +92,7 @@ export const useProjectPanelData = () => {
     session.data,
   ]);
 
-  // On landing with no slug, open the first public project once route + brief list are ready.
-  useEffect(() => {
-    if (allBrief.data?.length && isRouteReady && !projectSlug) {
-      const firstProject = allBrief.data[0];
-      if (firstProject) {
-        setProject(firstProject.slug, true);
-      }
-    }
-  }, [allBrief.data, isRouteReady, projectSlug, setProject]);
-
-  // Unblock the loading gate when case/solution auto-selection cannot proceed.
+  // Unblock the loading gate when case/solution selection cannot proceed.
   useEffect(() => {
     if (!selectedProject.data || selectedProject.isLoading) {
       return;

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { connection } from "next/server";
 
 import { PlaygroundInitialDataProvider } from "#/features/playground/context/PlaygroundInitialDataContext";
@@ -6,6 +8,9 @@ import { resolvePlaygroundPageSeo } from "#/features/playground/lib/resolvePlayg
 import { PlaygroundPageView } from "#/features/playground/ui/PlaygroundPageView";
 import { baseLocale } from "#/i18n/i18n-util";
 import { getPlaygroundInitialData } from "#/server/playground/getPlaygroundInitialData";
+import { resolveCanonicalPlaygroundRedirect } from "#/server/playground/resolveCanonicalPlaygroundRedirect";
+import { LAST_PLAYGROUND_PATH_COOKIE } from "#/shared/lib/playgroundLastPathCookie";
+import { playgroundBasePathForLocale } from "#/shared/lib/playgroundRoute";
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
 import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
@@ -65,9 +70,34 @@ type PlaygroundPageProps = {
 
 export async function PlaygroundPage({ params }: PlaygroundPageProps) {
   await connection();
-  const { slug } = await params;
-  const [projectSlug, caseSlug] = slug ?? [];
-  const initialData = await getPlaygroundInitialData(projectSlug, caseSlug);
+  const { slug, lang: langParam } = await params;
+  const locale = langParam
+    ? (resolveLangParamSync(langParam) ?? baseLocale)
+    : baseLocale;
+  const basePath = playgroundBasePathForLocale(locale);
+  const cookieStore = await cookies();
+  const rawLastPathCookie =
+    cookieStore.get(LAST_PLAYGROUND_PATH_COOKIE)?.value ?? null;
+  const lastPathCookie = rawLastPathCookie
+    ? decodeURIComponent(rawLastPathCookie)
+    : null;
+
+  const redirectPath = await resolveCanonicalPlaygroundRedirect({
+    basePath,
+    slug: slug ?? [],
+    lastPathCookie,
+  });
+
+  if (redirectPath) {
+    redirect(redirectPath);
+  }
+
+  const [projectSlug, caseSlug, solutionSlug] = slug ?? [];
+  const initialData = await getPlaygroundInitialData(
+    projectSlug,
+    caseSlug,
+    solutionSlug,
+  );
 
   return (
     <PlaygroundInitialDataProvider initialData={initialData}>

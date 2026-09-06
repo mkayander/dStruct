@@ -3,7 +3,7 @@
 import type { OnDragEndResponder } from "@hello-pangea/dnd";
 import type { StackProps } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { selectIsEditable } from "#/features/project/model/projectSlice";
 import { DraggableSelectBarList } from "#/features/selectBar/ui/DraggableSelectBarList";
@@ -14,7 +14,7 @@ import { api } from "#/shared/api";
 import type { RouterOutputs } from "#/shared/api";
 import { usePlaygroundSlugs } from "#/shared/hooks";
 import { useI18nContext } from "#/shared/hooks";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { useAppSelector } from "#/store/hooks";
 
 import { CaseModal } from "./CaseModal";
 
@@ -32,7 +32,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
   ...restProps
 }) => {
   const { LL } = useI18nContext();
-  const dispatch = useAppDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -94,16 +93,6 @@ export const TestCaseSelectBar: React.FC<TestCaseSelectBarProps> = ({
     selectedProject.isLoading || addCase.isPending || deleteCase.isPending;
 
   const isEditable = useAppSelector(selectIsEditable);
-
-  useEffect(() => {
-    if (caseSlug || !selectedProject.data) return;
-
-    const firstCaseSlug = selectedProject.data.cases[0]?.slug;
-
-    if (firstCaseSlug) {
-      setCase(firstCaseSlug);
-    }
-  }, [caseSlug, selectedProject.data, dispatch, setCase]);
 
   const handleCaseClick = (testCase: TestCaseBrief) => {
     void setCase(testCase.slug);

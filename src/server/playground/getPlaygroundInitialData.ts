@@ -10,11 +10,12 @@ export type PlaygroundInitialData = {
   allBrief: RouterOutputs["project"]["allBrief"];
   projectBySlug: RouterOutputs["project"]["getBySlug"] | null;
   caseBySlug: RouterOutputs["project"]["getCaseBySlug"] | null;
+  solutionBySlug: RouterOutputs["project"]["getSolutionBySlug"] | null;
 };
 
-type ProjectBySlug = RouterOutputs["project"]["getBySlug"];
+export type ProjectBySlug = RouterOutputs["project"]["getBySlug"];
 
-async function loadProjectBySlug(
+export async function loadProjectBySlug(
   caller: ReturnType<typeof createCaller>,
   projectSlug: string,
 ): Promise<ProjectBySlug | null> {
@@ -28,13 +29,32 @@ async function loadProjectBySlug(
   }
 }
 
+async function loadSolutionBySlug(
+  caller: ReturnType<typeof createCaller>,
+  projectId: string,
+  solutionSlug: string,
+): Promise<RouterOutputs["project"]["getSolutionBySlug"] | null> {
+  try {
+    return await caller.project.getSolutionBySlug({
+      projectId,
+      slug: solutionSlug,
+    });
+  } catch (error) {
+    if (error instanceof TRPCError && error.code === "NOT_FOUND") {
+      return null;
+    }
+    throw error;
+  }
+}
+
 /**
- * Server-prefetch public playground lists and the active project/case for RSC pages.
+ * Server-prefetch public playground lists and the active project/case/solution for RSC pages.
  * Hydrates client tRPC queries via {@link PlaygroundInitialDataProvider}.
  */
 export async function getPlaygroundInitialData(
   projectSlug?: string,
   caseSlug?: string,
+  solutionSlug?: string,
 ): Promise<PlaygroundInitialData> {
   const session = await getServerSession(authOptions);
   const caller = createCaller(
@@ -45,7 +65,12 @@ export async function getPlaygroundInitialData(
 
   if (!projectSlug) {
     const allBrief = await caller.project.allBrief();
-    return { allBrief, projectBySlug: null, caseBySlug: null };
+    return {
+      allBrief,
+      projectBySlug: null,
+      caseBySlug: null,
+      solutionBySlug: null,
+    };
   }
 
   const [allBrief, projectBySlug] = await Promise.all([
@@ -54,24 +79,47 @@ export async function getPlaygroundInitialData(
   ]);
 
   if (!projectBySlug) {
-    return { allBrief, projectBySlug: null, caseBySlug: null };
+    return {
+      allBrief,
+      projectBySlug: null,
+      caseBySlug: null,
+      solutionBySlug: null,
+    };
   }
 
   if (!caseSlug) {
-    return { allBrief, projectBySlug, caseBySlug: null };
+    return {
+      allBrief,
+      projectBySlug,
+      caseBySlug: null,
+      solutionBySlug: null,
+    };
   }
 
+  let caseBySlug: RouterOutputs["project"]["getCaseBySlug"] | null = null;
+
   try {
-    const caseBySlug = await caller.project.getCaseBySlug({
+    caseBySlug = await caller.project.getCaseBySlug({
       projectId: projectBySlug.id,
       slug: caseSlug,
     });
-
-    return { allBrief, projectBySlug, caseBySlug };
   } catch (caseError) {
     if (caseError instanceof TRPCError && caseError.code === "NOT_FOUND") {
-      return { allBrief, projectBySlug, caseBySlug: null };
+      caseBySlug = null;
+    } else {
+      throw caseError;
     }
-    throw caseError;
   }
+
+  if (!solutionSlug) {
+    return { allBrief, projectBySlug, caseBySlug, solutionBySlug: null };
+  }
+
+  const solutionBySlug = await loadSolutionBySlug(
+    caller,
+    projectBySlug.id,
+    solutionSlug,
+  );
+
+  return { allBrief, projectBySlug, caseBySlug, solutionBySlug };
 }

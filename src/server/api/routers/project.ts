@@ -818,14 +818,27 @@ export const projectRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) => {
-      const solution = await ctx.db.playgroundSolution.findUniqueOrThrow({
-        where: {
-          projectId_slug: input,
-        },
-        include: {
-          project: { select: { category: true } },
-        },
-      });
+      const solution = await ctx.db.playgroundSolution
+        .findUniqueOrThrow({
+          where: {
+            projectId_slug: input,
+          },
+          include: {
+            project: { select: { category: true } },
+          },
+        })
+        .catch((error: unknown) => {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+          ) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: `Solution "${input.slug}" not found.`,
+            });
+          }
+          throw error;
+        });
       const { project, ...rest } = solution;
       const mergedCode = getMergedCodeContent(project.category, {
         code: rest.code,

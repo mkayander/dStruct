@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mockAllBrief = vi.fn();
 const mockGetBySlug = vi.fn();
 const mockGetCaseBySlug = vi.fn();
+const mockGetSolutionBySlug = vi.fn();
 
 vi.mock("#/server/auth/authOptions", () => ({
   authOptions: {},
@@ -15,6 +16,7 @@ vi.mock("#/server/api/root", () => ({
       allBrief: mockAllBrief,
       getBySlug: mockGetBySlug,
       getCaseBySlug: mockGetCaseBySlug,
+      getSolutionBySlug: mockGetSolutionBySlug,
     },
   }),
 }));
@@ -41,6 +43,13 @@ describe("getPlaygroundInitialData", () => {
       slug: "case-a",
       projectId: "proj-1",
     });
+    mockGetSolutionBySlug.mockResolvedValue({
+      id: "solution-1",
+      slug: "solution-a",
+      projectId: "proj-1",
+      code: "",
+      pythonCode: "",
+    });
   });
 
   it("returns allBrief only when no slug is provided", async () => {
@@ -51,6 +60,7 @@ describe("getPlaygroundInitialData", () => {
     expect(result.allBrief).toHaveLength(1);
     expect(result.projectBySlug).toBeNull();
     expect(result.caseBySlug).toBeNull();
+    expect(result.solutionBySlug).toBeNull();
     expect(mockGetBySlug).not.toHaveBeenCalled();
   });
 
@@ -66,6 +76,23 @@ describe("getPlaygroundInitialData", () => {
     });
     expect(result.projectBySlug?.slug).toBe("two-sum");
     expect(result.caseBySlug?.slug).toBe("case-a");
+    expect(result.solutionBySlug).toBeNull();
+  });
+
+  it("prefetches solution when solution slug is provided", async () => {
+    const { getPlaygroundInitialData } =
+      await import("#/server/playground/getPlaygroundInitialData");
+    const result = await getPlaygroundInitialData(
+      "two-sum",
+      "case-a",
+      "solution-a",
+    );
+
+    expect(mockGetSolutionBySlug).toHaveBeenCalledWith({
+      projectId: "proj-1",
+      slug: "solution-a",
+    });
+    expect(result.solutionBySlug?.slug).toBe("solution-a");
   });
 
   it("keeps project prefetch when case slug is invalid", async () => {
@@ -93,5 +120,6 @@ describe("getPlaygroundInitialData", () => {
     expect(result.allBrief).toHaveLength(1);
     expect(result.projectBySlug).toBeNull();
     expect(result.caseBySlug).toBeNull();
+    expect(result.solutionBySlug).toBeNull();
   });
 });
