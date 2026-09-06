@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockAllBrief = vi.fn();
@@ -65,5 +66,18 @@ describe("getPlaygroundInitialData", () => {
     });
     expect(result.projectBySlug?.slug).toBe("two-sum");
     expect(result.caseBySlug?.slug).toBe("case-a");
+  });
+
+  it("keeps project prefetch when case slug is invalid", async () => {
+    mockGetCaseBySlug.mockRejectedValue(
+      new TRPCError({ code: "NOT_FOUND", message: "Case not found." }),
+    );
+
+    const { getPlaygroundInitialData } =
+      await import("#/server/playground/getPlaygroundInitialData");
+    const result = await getPlaygroundInitialData("two-sum", "missing-case");
+
+    expect(result.projectBySlug?.slug).toBe("two-sum");
+    expect(result.caseBySlug).toBeNull();
   });
 });

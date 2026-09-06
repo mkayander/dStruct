@@ -628,11 +628,24 @@ export const projectRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) =>
-      ctx.db.playgroundTestCase.findUniqueOrThrow({
-        where: {
-          projectId_slug: input,
-        },
-      }),
+      ctx.db.playgroundTestCase
+        .findUniqueOrThrow({
+          where: {
+            projectId_slug: input,
+          },
+        })
+        .catch((error: unknown) => {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+          ) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: `Case "${input.slug}" not found.`,
+            });
+          }
+          throw error;
+        }),
     ),
 
   addCase: projectOwnerProcedure

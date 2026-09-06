@@ -40,12 +40,19 @@ export async function getPlaygroundInitialData(
       return { allBrief, projectBySlug, caseBySlug: null };
     }
 
-    const caseBySlug = await caller.project.getCaseBySlug({
-      projectId: projectBySlug.id,
-      slug: caseSlug,
-    });
+    try {
+      const caseBySlug = await caller.project.getCaseBySlug({
+        projectId: projectBySlug.id,
+        slug: caseSlug,
+      });
 
-    return { allBrief, projectBySlug, caseBySlug };
+      return { allBrief, projectBySlug, caseBySlug };
+    } catch (caseError) {
+      if (caseError instanceof TRPCError && caseError.code === "NOT_FOUND") {
+        return { allBrief, projectBySlug, caseBySlug: null };
+      }
+      throw caseError;
+    }
   } catch (error) {
     if (error instanceof TRPCError && error.code === "NOT_FOUND") {
       return { allBrief, projectBySlug: null, caseBySlug: null };
