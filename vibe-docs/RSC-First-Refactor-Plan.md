@@ -23,7 +23,13 @@
 | `startTransition` on playground slug navigations | Small | Done |
 | `loading.tsx` for `/daily` | Small | Done |
 | Remove redundant playground `<Suspense>` (use `loading.tsx`) | Small | Done |
-| Cached anonymous `allBrief` in server prefetch | Medium | Planned |
+| Cached anonymous `allBrief` in server prefetch | Medium | Done |
+| Server canonical playground redirect (project/case/solution) | Medium | Done |
+| Apollo scoped to daily/profile only (not playground) | Medium | Done |
+| Daily + profile GraphQL server prefetch | Medium | Done |
+| `loading.tsx` for marketing `/` and `/privacy` | Small | Done |
+| ProjectBrowser scoped to playground layout | Medium | Done |
+| Mobile `?view=code` in server canonical redirect | Small | Done |
 
 ---
 
@@ -32,7 +38,7 @@
 | Item | Effort | Notes |
 |------|--------|-------|
 | Split `MarketingHomeView` into RSC sections + client islands | Medium | Hero copy, FAQ, sections as server; 3D preview + scroll hooks client |
-| `DailyPageView` shell as RSC | Medium | Server-fetch daily question; client island for interactive bits |
+| `DailyPageView` shell as RSC | Medium | Server prefetch done; interactive bits remain client |
 | Remove duplicate locale loads in page modules | Small | Prefer `loadI18nForLocale` / layout-passed `LL` everywhere |
 
 **Success criteria:** `/` and `/daily` ship meaningful HTML without waiting for client hydration; WebGL/Monaco remain client-only.
@@ -77,7 +83,7 @@ flowchart TB
   end
 
   Base[Base providers: theme, Redux, tRPC, session]
-  Apollo[Apollo — app routes only]
+  Apollo[Apollo — daily/profile routes only]
 
   Base --> marketing
   Base --> Apollo

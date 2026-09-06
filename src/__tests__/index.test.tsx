@@ -6,7 +6,6 @@ import { vi } from "vitest";
 import { LANDING_PRIMARY_PLAYGROUND_HREF } from "#/features/homePage/lib/landingPlaygroundDemos";
 import { MarketingHomeView } from "#/features/homePage/ui/MarketingHomeView";
 import { mockUseSearchParam } from "#/features/project/ui/ProjectBrowser/__tests__/testUtils";
-import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { QuestionOfTodayDocument } from "#/graphql/generated";
 import en from "#/i18n/en/index";
 import type { Translation } from "#/i18n/i18n-types";
@@ -14,6 +13,8 @@ import { withNextTRPC } from "#/shared/lib/trpc-test-decorator";
 import { I18nProvider } from "#/shared/ui/providers/I18nProvider";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
 import { makeStore } from "#/store/makeStore";
+
+import { RuntimeDeviceHintProvider } from "#/app/locale-app/RuntimeDeviceHintContext";
 
 const store = makeStore();
 
@@ -68,13 +69,13 @@ describe("MarketingHomeView", () => {
     render(
       <ReduxProvider store={store}>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <StateThemeProvider>
-            <I18nProvider locale="en" i18n={i18n}>
-              <ProjectBrowserProvider>
+          <RuntimeDeviceHintProvider initialSsrDeviceType="desktop">
+            <StateThemeProvider>
+              <I18nProvider locale="en" i18n={i18n}>
                 <MarketingHomeView />
-              </ProjectBrowserProvider>
-            </I18nProvider>
-          </StateThemeProvider>
+              </I18nProvider>
+            </StateThemeProvider>
+          </RuntimeDeviceHintProvider>
         </MockedProvider>
       </ReduxProvider>,
       { wrapper: withNextTRPC },
