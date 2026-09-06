@@ -1,5 +1,3 @@
-import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
+import { PlaygroundPageLoading } from "#/features/playground/ui/PlaygroundPageLoading";
 
-export default function PlaygroundLoading() {
-  return <SplitPanelsLayoutSkeleton />;
-}
+export default PlaygroundPageLoading;
