@@ -114,6 +114,28 @@ export const useProjectPanelData = () => {
     }
   }, [allBrief.data, isRouteReady, projectSlug, setProject]);
 
+  // Unblock the loading gate when case/solution auto-selection cannot proceed.
+  useEffect(() => {
+    if (!selectedProject.data || selectedProject.isLoading) {
+      return;
+    }
+
+    const { cases, solutions } = selectedProject.data;
+
+    if (cases.length === 0) {
+      dispatch(projectSlice.actions.loadFinish());
+      return;
+    }
+
+    if (!caseSlug) {
+      return;
+    }
+
+    if (solutions.length === 0) {
+      dispatch(projectSlice.actions.loadFinish());
+    }
+  }, [caseSlug, dispatch, selectedProject.data, selectedProject.isLoading]);
+
   return {
     session,
     isEditable,

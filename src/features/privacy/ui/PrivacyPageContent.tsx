@@ -27,11 +27,13 @@ const PrivacyParagraph: React.FC<{ children: React.ReactNode }> = ({
 
 type PrivacyPageContentProps = {
   LL: TranslationFunctions;
+  homePath: string;
 };
 
 /** Server-rendered privacy policy body (passed into {@link PrivacyPageShell}). */
 export const PrivacyPageContent: React.FC<PrivacyPageContentProps> = ({
   LL,
+  homePath,
 }) => (
   <Container maxWidth="md" sx={{ py: 4 }}>
     <Typography variant="h4" component="h1" gutterBottom>
@@ -112,7 +114,7 @@ export const PrivacyPageContent: React.FC<PrivacyPageContentProps> = ({
     </PrivacySection>
 
     <Typography variant="body2" color="text.secondary" sx={{ mt: 4 }}>
-      <Link href="/" style={{ color: "inherit" }}>
+      <Link href={homePath} style={{ color: "inherit" }}>
         {LL.DASHBOARD()}
       </Link>
     </Typography>

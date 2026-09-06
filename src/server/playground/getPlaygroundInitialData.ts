@@ -12,6 +12,22 @@ export type PlaygroundInitialData = {
   caseBySlug: RouterOutputs["project"]["getCaseBySlug"] | null;
 };
 
+type ProjectBySlug = RouterOutputs["project"]["getBySlug"];
+
+async function loadProjectBySlug(
+  caller: ReturnType<typeof createCaller>,
+  projectSlug: string,
+): Promise<ProjectBySlug | null> {
+  try {
+    return await caller.project.getBySlug(projectSlug);
+  } catch (error) {
+    if (error instanceof TRPCError && error.code === "NOT_FOUND") {
+      return null;
+    }
+    throw error;
+  }
+}
+
 /**
  * Server-prefetch public playground lists and the active project/case for RSC pages.
  * Hydrates client tRPC queries via {@link PlaygroundInitialDataProvider}.
@@ -27,36 +43,35 @@ export async function getPlaygroundInitialData(
     }),
   );
 
-  const allBrief = await caller.project.allBrief();
-
   if (!projectSlug) {
+    const allBrief = await caller.project.allBrief();
     return { allBrief, projectBySlug: null, caseBySlug: null };
   }
 
-  try {
-    const projectBySlug = await caller.project.getBySlug(projectSlug);
+  const [allBrief, projectBySlug] = await Promise.all([
+    caller.project.allBrief(),
+    loadProjectBySlug(caller, projectSlug),
+  ]);
 
-    if (!caseSlug) {
+  if (!projectBySlug) {
+    return { allBrief, projectBySlug: null, caseBySlug: null };
+  }
+
+  if (!caseSlug) {
+    return { allBrief, projectBySlug, caseBySlug: null };
+  }
+
+  try {
+    const caseBySlug = await caller.project.getCaseBySlug({
+      projectId: projectBySlug.id,
+      slug: caseSlug,
+    });
+
+    return { allBrief, projectBySlug, caseBySlug };
+  } catch (caseError) {
+    if (caseError instanceof TRPCError && caseError.code === "NOT_FOUND") {
       return { allBrief, projectBySlug, caseBySlug: null };
     }
-
-    try {
-      const caseBySlug = await caller.project.getCaseBySlug({
-        projectId: projectBySlug.id,
-        slug: caseSlug,
-      });
-
-      return { allBrief, projectBySlug, caseBySlug };
-    } catch (caseError) {
-      if (caseError instanceof TRPCError && caseError.code === "NOT_FOUND") {
-        return { allBrief, projectBySlug, caseBySlug: null };
-      }
-      throw caseError;
-    }
-  } catch (error) {
-    if (error instanceof TRPCError && error.code === "NOT_FOUND") {
-      return { allBrief, projectBySlug: null, caseBySlug: null };
-    }
-    throw error;
+    throw caseError;
   }
 }

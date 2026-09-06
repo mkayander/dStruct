@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 
 import { usePyodideProgressSnackbar } from "#/features/codeRunner/hooks/usePyodideProgressSnackbar";
@@ -17,6 +19,7 @@ export const usePlaygroundPyodideWarmup = (): void => {
 
   usePyodideProgressSnackbar();
 
+  // Preload Pyodide when entering the playground segment; progress drives the snackbar.
   useEffect(() => {
     if (pythonRunner.isReady) return;
 

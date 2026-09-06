@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { usePlaygroundMobileLayout } from "#/features/playground/hooks/usePlaygroundMobileLayout";
 import { selectIsInitialized } from "#/features/project/model/projectSlice";
 import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
+import { prefetchSplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout";
 import { useAppSelector } from "#/store/hooks";
 
 /**
@@ -18,6 +19,7 @@ export const usePlaygroundPanelsReady = (): boolean => {
   const projectSlug = route?.slug[0] ?? "";
   const [splitLayoutReady, setSplitLayoutReady] = useState(false);
 
+  // Desktop: wait for the shared split-layout prefetch started in playground layout.
   useEffect(() => {
     if (isMobile) {
       return;
@@ -25,13 +27,11 @@ export const usePlaygroundPanelsReady = (): boolean => {
 
     let cancelled = false;
 
-    void import("#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout").then(
-      () => {
-        if (!cancelled) {
-          setSplitLayoutReady(true);
-        }
-      },
-    );
+    void prefetchSplitPanelsLayout().then(() => {
+      if (!cancelled) {
+        setSplitLayoutReady(true);
+      }
+    });
 
     return () => {
       cancelled = true;

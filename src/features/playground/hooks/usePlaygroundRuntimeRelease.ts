@@ -1,3 +1,5 @@
+"use client";
+
 import { useLayoutEffect } from "react";
 
 import { pythonRunner } from "#/features/codeRunner/lib/pythonRunner";

@@ -52,10 +52,11 @@ export async function PrivacyPage({ params }: PrivacyPageProps = {}) {
     throw new Error(`Missing translations for locale: ${locale}`);
   }
   const LL = createTranslationFunctions(locale, translation);
+  const homePath = locale === baseLocale ? "/" : `/${locale}`;
 
   return (
     <PrivacyPageShell>
-      <PrivacyPageContent LL={LL} />
+      <PrivacyPageContent LL={LL} homePath={homePath} />
     </PrivacyPageShell>
   );
 }

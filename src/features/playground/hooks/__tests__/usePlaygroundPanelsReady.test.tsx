@@ -22,9 +22,12 @@ vi.mock("#/shared/hooks/usePlaygroundRoute", () => ({
   usePlaygroundRoute: () => mockUsePlaygroundRoute(),
 }));
 
-vi.mock("#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout", () => ({
-  SplitPanelsLayout: () => null,
-}));
+vi.mock(
+  "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout",
+  () => ({
+    prefetchSplitPanelsLayout: vi.fn(() => Promise.resolve({})),
+  }),
+);
 
 describe("usePlaygroundPanelsReady", () => {
   beforeEach(() => {

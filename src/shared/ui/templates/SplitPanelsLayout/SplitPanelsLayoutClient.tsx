@@ -3,13 +3,14 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
+import { prefetchSplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout";
 import type { SplitPanelsLayoutProps } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout";
 
 const SplitPanelsLayout = dynamic(
   () =>
-    import("#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayout").then(
-      (module) => ({ default: module.SplitPanelsLayout }),
-    ),
+    prefetchSplitPanelsLayout().then((module) => ({
+      default: module.SplitPanelsLayout,
+    })),
   { ssr: false },
 );
 
