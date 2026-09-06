@@ -36,19 +36,32 @@ async function queryPublicProjectsBrief(): Promise<PublicProjectsBrief> {
   const newProjectMarginMs = await getNewProjectMarginMs();
 
   return projects.map((project) => ({
-    ...project,
+    id: project.id,
+    createdAt: project.createdAt,
+    slug: project.slug,
+    title: project.title,
+    category: project.category,
+    difficulty: project.difficulty,
+    author: project.author
+      ? {
+          id: project.author.id,
+          name: project.author.name,
+          bucketImage: project.author.bucketImage,
+        }
+      : null,
     isNew: calculateIsNew(project.createdAt, newProjectMarginMs),
   }));
 }
 
 /**
- * Cached anonymous project list for server redirects and prefetch.
- * Authenticated users still get personal projects via live tRPC `allBrief`.
+ * Cached anonymous project list for server-only redirects (not client props).
+ * `'use cache'` results must be plain objects — strip cache metadata before return.
  */
 export async function loadCachedPublicProjectsBrief(): Promise<PublicProjectsBrief> {
   "use cache";
   cacheLife("hours");
   cacheTag(PUBLIC_PROJECTS_BRIEF_CACHE_TAG);
 
-  return queryPublicProjectsBrief();
+  const brief = await queryPublicProjectsBrief();
+  return JSON.parse(JSON.stringify(brief)) as PublicProjectsBrief;
 }

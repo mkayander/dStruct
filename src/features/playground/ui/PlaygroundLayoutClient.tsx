@@ -2,6 +2,7 @@
 
 import React, { type ReactNode, useEffect } from "react";
 
+import { useClientCanonicalPlaygroundRedirect } from "#/features/playground/hooks/useClientCanonicalPlaygroundRedirect";
 import { usePlaygroundPyodideWarmup } from "#/features/playground/hooks/usePlaygroundPyodideWarmup";
 import { usePlaygroundRuntimeRelease } from "#/features/playground/hooks/usePlaygroundRuntimeRelease";
 import { usePlaygroundSlugLoadingSync } from "#/features/playground/hooks/usePlaygroundSlugLoadingSync";
@@ -9,6 +10,7 @@ import { PlaygroundPageShell } from "#/features/playground/ui/PlaygroundPageShel
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { prefetchSplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout";
 
+import { ApolloHydrationProvider } from "#/app/locale-app/ApolloHydrationProvider";
 import { ProjectBrowserOverlay } from "#/app/locale-app/ProjectBrowserOverlay";
 
 type PlaygroundLayoutClientProps = {
@@ -24,6 +26,7 @@ export const PlaygroundLayoutClient: React.FC<PlaygroundLayoutClientProps> = ({
 }) => {
   usePlaygroundRuntimeRelease();
   usePlaygroundPyodideWarmup();
+  useClientCanonicalPlaygroundRedirect();
   usePlaygroundSlugLoadingSync();
 
   // Prefetch split layout chunk while route loading skeleton is visible.
@@ -32,9 +35,11 @@ export const PlaygroundLayoutClient: React.FC<PlaygroundLayoutClientProps> = ({
   }, []);
 
   return (
-    <ProjectBrowserProvider>
-      <PlaygroundPageShell>{children}</PlaygroundPageShell>
-      <ProjectBrowserOverlay />
-    </ProjectBrowserProvider>
+    <ApolloHydrationProvider initialCache={null}>
+      <ProjectBrowserProvider>
+        <PlaygroundPageShell>{children}</PlaygroundPageShell>
+        <ProjectBrowserOverlay />
+      </ProjectBrowserProvider>
+    </ApolloHydrationProvider>
   );
 };

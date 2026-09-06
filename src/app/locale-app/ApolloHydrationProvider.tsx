@@ -11,8 +11,8 @@ type ApolloHydrationProviderProps = {
 };
 
 /**
- * Route-scoped Apollo client with server-extracted cache for GraphQL routes
- * (daily, profile). Playground uses tRPC only.
+ * Route-scoped Apollo client with optional server-extracted cache (daily, profile).
+ * Playground mounts with `initialCache={null}` for {@link ProjectModal} LeetCode import only.
  */
 export const ApolloHydrationProvider: React.FC<
   ApolloHydrationProviderProps

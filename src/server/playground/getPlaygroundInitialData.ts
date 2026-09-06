@@ -6,8 +6,6 @@ import { createCaller } from "#/server/api/root";
 import { authOptions } from "#/server/auth/authOptions";
 import type { RouterOutputs } from "#/shared/api";
 
-import { loadCachedPublicProjectsBrief } from "./loadCachedPublicProjectsBrief";
-
 export type PlaygroundInitialData = {
   allBrief: RouterOutputs["project"]["allBrief"];
   projectBySlug: RouterOutputs["project"]["getBySlug"] | null;
@@ -49,20 +47,11 @@ async function loadSolutionBySlug(
   }
 }
 
-async function loadProjectsBrief(
-  caller: ReturnType<typeof createCaller>,
-  userId?: string,
-): Promise<RouterOutputs["project"]["allBrief"]> {
-  if (userId) {
-    return caller.project.allBrief();
-  }
-
-  return loadCachedPublicProjectsBrief();
-}
-
 /**
  * Server-prefetch public playground lists and the active project/case/solution for RSC pages.
  * Hydrates client tRPC queries via {@link PlaygroundInitialDataProvider}.
+ *
+ * Uses live tRPC `allBrief` (not `'use cache'`) so props stay plain objects for the client.
  */
 export async function getPlaygroundInitialData(
   projectSlug?: string,
@@ -75,10 +64,9 @@ export async function getPlaygroundInitialData(
       session,
     }),
   );
-  const userId = session?.user?.id;
 
   if (!projectSlug) {
-    const allBrief = await loadProjectsBrief(caller, userId);
+    const allBrief = await caller.project.allBrief();
     return {
       allBrief,
       projectBySlug: null,
@@ -88,7 +76,7 @@ export async function getPlaygroundInitialData(
   }
 
   const [allBrief, projectBySlug] = await Promise.all([
-    loadProjectsBrief(caller, userId),
+    caller.project.allBrief(),
     loadProjectBySlug(caller, projectSlug),
   ]);
 

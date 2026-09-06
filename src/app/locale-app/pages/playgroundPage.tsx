@@ -9,6 +9,7 @@ import { PlaygroundPageView } from "#/features/playground/ui/PlaygroundPageView"
 import { baseLocale } from "#/i18n/i18n-util";
 import { getPlaygroundInitialData } from "#/server/playground/getPlaygroundInitialData";
 import { resolveCanonicalPlaygroundRedirect } from "#/server/playground/resolveCanonicalPlaygroundRedirect";
+import { serializePlaygroundInitialData } from "#/server/playground/serializePlaygroundInitialData";
 import { APP_ROUTER_SSR_DEVICE_TYPE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
 import { LAST_PLAYGROUND_PATH_COOKIE } from "#/shared/lib/playgroundLastPathCookie";
 import { playgroundBasePathForLocale } from "#/shared/lib/playgroundRoute";
@@ -108,10 +109,8 @@ export async function PlaygroundPage({
   }
 
   const [projectSlug, caseSlug, solutionSlug] = slug ?? [];
-  const initialData = await getPlaygroundInitialData(
-    projectSlug,
-    caseSlug,
-    solutionSlug,
+  const initialData = serializePlaygroundInitialData(
+    await getPlaygroundInitialData(projectSlug, caseSlug, solutionSlug),
   );
 
   return (

@@ -6,6 +6,7 @@ import {
   visiblePlaygroundMonacoEditor,
   waitForPlaygroundMonacoEditor,
 } from "./helpers/playgroundMonacoEditor";
+import { isInvertBinaryTreeCanonicalPath } from "./helpers/playgroundRoute";
 
 /**
  * L5: playground opts into `instant = true` with Suspense skeleton fallback.
@@ -24,13 +25,12 @@ test.describe("instant playground navigation (L5)", () => {
 
     await instant(page, async () => {
       await page.getByTestId("cta-to-playground").click();
-      await page.waitForURL(
-        (url) =>
-          url.pathname.startsWith("/playground/invert-binary-tree/") &&
-          url.pathname.split("/").length >= 5,
-        { timeout: 30_000 },
-      );
     });
+
+    await page.waitForURL(
+      (url) => isInvertBinaryTreeCanonicalPath(url.pathname),
+      { timeout: 30_000 },
+    );
 
     await waitForPlaygroundMonacoEditor(page);
     await expect(visiblePlaygroundMonacoEditor(page)).toBeVisible();

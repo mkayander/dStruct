@@ -5,11 +5,6 @@ const mockAllBrief = vi.fn();
 const mockGetBySlug = vi.fn();
 const mockGetCaseBySlug = vi.fn();
 const mockGetSolutionBySlug = vi.fn();
-const mockLoadCachedPublicProjectsBrief = vi.fn();
-
-vi.mock("#/server/playground/loadCachedPublicProjectsBrief", () => ({
-  loadCachedPublicProjectsBrief: () => mockLoadCachedPublicProjectsBrief(),
-}));
 
 vi.mock("#/server/auth/authOptions", () => ({
   authOptions: {},
@@ -37,9 +32,6 @@ vi.mock("next-auth", () => ({
 describe("getPlaygroundInitialData", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockLoadCachedPublicProjectsBrief.mockResolvedValue([
-      { id: "1", slug: "demo", title: "Demo" },
-    ]);
     mockAllBrief.mockResolvedValue([{ id: "1", slug: "demo", title: "Demo" }]);
     mockGetBySlug.mockResolvedValue({
       id: "proj-1",
