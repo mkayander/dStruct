@@ -1,3 +1,4 @@
+import { loadProjectSeoFieldsForSession } from "#/features/playground/lib/loadProjectSeoFieldsForSession";
 import { loadPublicProjectSeoFields } from "#/features/playground/lib/loadPublicProjectSeoFields";
 import { createTranslationFunctions } from "#/i18n/createTranslationFunctions";
 import type { Locales } from "#/i18n/i18n-types";
@@ -24,7 +25,9 @@ export async function resolvePlaygroundPageSeo(
   let pageDescription: string = LL.SITE_SEO_DESCRIPTION();
 
   if (slugStr) {
-    const project = await loadPublicProjectSeoFields(slugStr);
+    const project =
+      (await loadPublicProjectSeoFields(slugStr)) ??
+      (await loadProjectSeoFieldsForSession(slugStr));
     if (project) {
       pageTitle = `${project.title} | dStruct`;
       pageDescription = project.description?.trim()

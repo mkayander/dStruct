@@ -80,4 +80,18 @@ describe("getPlaygroundInitialData", () => {
     expect(result.projectBySlug?.slug).toBe("two-sum");
     expect(result.caseBySlug).toBeNull();
   });
+
+  it("returns null project when project slug is invalid", async () => {
+    mockGetBySlug.mockRejectedValue(
+      new TRPCError({ code: "NOT_FOUND", message: "Project not found." }),
+    );
+
+    const { getPlaygroundInitialData } =
+      await import("#/server/playground/getPlaygroundInitialData");
+    const result = await getPlaygroundInitialData("missing-project");
+
+    expect(result.allBrief).toHaveLength(1);
+    expect(result.projectBySlug).toBeNull();
+    expect(result.caseBySlug).toBeNull();
+  });
 });

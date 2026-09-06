@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
-import React, { Suspense } from "react";
 
 import { PlaygroundInitialDataProvider } from "#/features/playground/context/PlaygroundInitialDataContext";
 import { resolvePlaygroundPageSeo } from "#/features/playground/lib/resolvePlaygroundPageSeo";
 import { PlaygroundPageView } from "#/features/playground/ui/PlaygroundPageView";
 import { baseLocale } from "#/i18n/i18n-util";
 import { getPlaygroundInitialData } from "#/server/playground/getPlaygroundInitialData";
-import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
 import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
 
-/** Playground shell — instant with Suspense fallback; public data prefetched on server. */
+/** Playground — instant shell; public data prefetched on server; fallback via loading.tsx. */
 export const instant = true;
-
-const PlaygroundFallback: React.FC = () => <SplitPanelsLayoutSkeleton />;
 
 export async function generateDefaultLocalePlaygroundMetadata({
   params,
@@ -74,10 +70,8 @@ export async function PlaygroundPage({ params }: PlaygroundPageProps) {
   const initialData = await getPlaygroundInitialData(projectSlug, caseSlug);
 
   return (
-    <Suspense fallback={<PlaygroundFallback />}>
-      <PlaygroundInitialDataProvider initialData={initialData}>
-        <PlaygroundPageView />
-      </PlaygroundInitialDataProvider>
-    </Suspense>
+    <PlaygroundInitialDataProvider initialData={initialData}>
+      <PlaygroundPageView />
+    </PlaygroundInitialDataProvider>
   );
 }

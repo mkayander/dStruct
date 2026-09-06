@@ -1,25 +1,23 @@
 import { cacheLife, cacheTag } from "next/cache";
 
-import { db } from "#/server/db/client";
+import { playgroundProjectSeoCacheTag } from "#/features/playground/lib/playgroundProjectSeoCache";
+import {
+  type PublicProjectSeoFields,
+  queryPublicProjectSeoFields,
+} from "#/features/playground/lib/queryPublicProjectSeoFields";
 
-export type PublicProjectSeoFields = {
-  title: string;
-  description: string | null;
-};
+export type { PublicProjectSeoFields };
 
 /**
  * Cached public project fields for playground `<title>` / meta description.
- * Invalidated when admin edits ship `revalidateTag('playground-project-seo:*')`.
+ * Invalidated via {@link revalidatePlaygroundProjectSeo} on project mutations.
  */
 export async function loadPublicProjectSeoFields(
   slug: string,
 ): Promise<PublicProjectSeoFields | null> {
   "use cache";
   cacheLife("hours");
-  cacheTag(`playground-project-seo:${slug}`);
+  cacheTag(playgroundProjectSeoCacheTag(slug));
 
-  return db.playgroundProject.findUnique({
-    where: { slug, isPublic: true },
-    select: { title: true, description: true },
-  });
+  return queryPublicProjectSeoFields(slug);
 }

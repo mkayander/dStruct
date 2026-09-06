@@ -13,17 +13,17 @@
 
 ---
 
-## Phase 2 — Cache + navigation polish (in progress)
+## Phase 2 — Cache + navigation polish (mostly done)
 
-| Item | Effort | Notes |
-|------|--------|-------|
-| `'use cache'` on public playground SEO DB reads | Small | `resolvePlaygroundPageSeo` — cache per slug |
-| `startTransition` on playground slug navigations | Small | `usePlaygroundRoute.navigateTo` |
-| `loading.tsx` for `/daily` | Small | Reuse daily skeleton or simple pulse |
-| Cached anonymous `allBrief` in server prefetch | Medium | `'use cache'` when `session === null` only |
-| `cacheTag` + `revalidateTag` on project admin mutations | Medium | Wire tRPC `update` / `delete` to invalidate |
-
-**Success criteria:** Playground metadata and anonymous project list hit build/request cache; slug changes feel non-blocking under Instant Nav.
+| Item | Effort | Status |
+|------|--------|--------|
+| `'use cache'` on public playground SEO DB reads | Small | Done |
+| `revalidateTag` on project admin mutations | Medium | Done |
+| Session-aware private project SEO metadata | Medium | Done |
+| `startTransition` on playground slug navigations | Small | Done |
+| `loading.tsx` for `/daily` | Small | Done |
+| Remove redundant playground `<Suspense>` (use `loading.tsx`) | Small | Done |
+| Cached anonymous `allBrief` in server prefetch | Medium | Planned |
 
 ---
 
