@@ -46,6 +46,10 @@ vi.mock("#/shared/hooks/useMobileLayout", () => ({
   useMobileLayout: () => true,
 }));
 
+vi.mock("#/features/playground/hooks/usePlaygroundMobileLayout", () => ({
+  usePlaygroundMobileLayout: () => true,
+}));
+
 vi.mock("#/features/playground/hooks/useMobilePlaygroundView", () => ({
   useMobilePlaygroundView: () => ({
     currentView: "code" as const,
@@ -54,7 +58,7 @@ vi.mock("#/features/playground/hooks/useMobilePlaygroundView", () => ({
 
 const mockOpenBrowser = vi.fn();
 vi.mock("#/features/project/ui/ProjectBrowser/ProjectBrowserContext", () => ({
-  useProjectBrowserContext: () => ({
+  useOptionalProjectBrowserContext: () => ({
     openBrowser: mockOpenBrowser,
   }),
 }));

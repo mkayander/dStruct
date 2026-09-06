@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
 
@@ -9,8 +9,10 @@ import { PlaygroundPageView } from "#/features/playground/ui/PlaygroundPageView"
 import { baseLocale } from "#/i18n/i18n-util";
 import { getPlaygroundInitialData } from "#/server/playground/getPlaygroundInitialData";
 import { resolveCanonicalPlaygroundRedirect } from "#/server/playground/resolveCanonicalPlaygroundRedirect";
+import { APP_ROUTER_SSR_DEVICE_TYPE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
 import { LAST_PLAYGROUND_PATH_COOKIE } from "#/shared/lib/playgroundLastPathCookie";
 import { playgroundBasePathForLocale } from "#/shared/lib/playgroundRoute";
+import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
 import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
@@ -66,11 +68,16 @@ export async function generateLangPlaygroundMetadata({
 
 type PlaygroundPageProps = {
   params: Promise<{ slug?: string[]; lang?: string }>;
+  searchParams: Promise<{ view?: string }>;
 };
 
-export async function PlaygroundPage({ params }: PlaygroundPageProps) {
+export async function PlaygroundPage({
+  params,
+  searchParams,
+}: PlaygroundPageProps) {
   await connection();
   const { slug, lang: langParam } = await params;
+  const { view: viewParam } = await searchParams;
   const locale = langParam
     ? (resolveLangParamSync(langParam) ?? baseLocale)
     : baseLocale;
@@ -82,10 +89,18 @@ export async function PlaygroundPage({ params }: PlaygroundPageProps) {
     ? decodeURIComponent(rawLastPathCookie)
     : null;
 
+  const headerList = await headers();
+  const ssrDeviceType =
+    parseSsrDeviceTypeHeader(
+      headerList.get(APP_ROUTER_SSR_DEVICE_TYPE_HEADER),
+    ) ?? "desktop";
+
   const redirectPath = await resolveCanonicalPlaygroundRedirect({
     basePath,
     slug: slug ?? [],
     lastPathCookie,
+    ssrDeviceType,
+    viewParam,
   });
 
   if (redirectPath) {

@@ -10,6 +10,7 @@ import {
   selectIsEditable,
 } from "#/features/project/model/projectSlice";
 import { usePlaygroundSlugs } from "#/shared/hooks";
+import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
 import { api } from "#/shared/lib";
 import { useAppDispatch, useAppSelector } from "#/store/hooks";
 
@@ -22,6 +23,7 @@ export const useProjectPanelData = () => {
   const dispatch = useAppDispatch();
 
   const { projectSlug = "", caseSlug = "", clearSlugs } = usePlaygroundSlugs();
+  const route = usePlaygroundRoute();
 
   const serverInitialData = usePlaygroundInitialData();
 
@@ -68,7 +70,11 @@ export const useProjectPanelData = () => {
   useEffect(() => {
     if (selectedProject.error) {
       console.error("selectedProject.error: ", selectedProject.error);
-      clearSlugs();
+      if (route) {
+        route.navigateTo(route.basePath, { omitView: true });
+      } else {
+        clearSlugs();
+      }
       return;
     }
     if (!selectedProject.data || !session.data) {
@@ -87,6 +93,7 @@ export const useProjectPanelData = () => {
     clearSlugs,
     dispatch,
     isEditable,
+    route,
     selectedProject.data,
     selectedProject.error,
     session.data,

@@ -25,7 +25,9 @@ test.describe("instant playground navigation (L5)", () => {
     await instant(page, async () => {
       await page.getByTestId("cta-to-playground").click();
       await page.waitForURL(
-        (url) => url.pathname === "/playground/invert-binary-tree",
+        (url) =>
+          url.pathname.startsWith("/playground/invert-binary-tree/") &&
+          url.pathname.split("/").length >= 5,
         { timeout: 30_000 },
       );
     });

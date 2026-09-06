@@ -13,8 +13,10 @@ import {
   buildPlaygroundPath,
   parsePlaygroundPathname,
 } from "#/shared/lib/playgroundRoute";
+import type { SsrDeviceType } from "#/themes";
 
 import { loadProjectBySlug } from "./getPlaygroundInitialData";
+import { loadCachedPublicProjectsBrief } from "./loadCachedPublicProjectsBrief";
 
 type ProjectBySlug = RouterOutputs["project"]["getBySlug"];
 
@@ -58,7 +60,7 @@ async function resolveProjectSlug(
     }
   }
 
-  const allBrief = await caller.project.allBrief();
+  const allBrief = await loadCachedPublicProjectsBrief();
   const firstProjectSlug = allBrief[0]?.slug;
   if (!firstProjectSlug) {
     return null;
@@ -71,16 +73,37 @@ export type ResolveCanonicalPlaygroundRedirectInput = {
   basePath: string;
   slug: string[];
   lastPathCookie: string | null;
+  ssrDeviceType?: SsrDeviceType;
+  viewParam?: string | null;
 };
 
 /**
  * Returns a canonical playground pathname when URL segments are incomplete,
  * or null when the current path already matches the canonical slug.
  */
+function appendMobileViewQuery(
+  path: string,
+  canonicalSlug: string[],
+  ssrDeviceType: SsrDeviceType | undefined,
+  viewParam: string | null | undefined,
+): string {
+  if (ssrDeviceType !== "mobile" || canonicalSlug.length === 0) {
+    return path;
+  }
+
+  if (viewParam) {
+    return path;
+  }
+
+  return `${path}?view=code`;
+}
+
 export async function resolveCanonicalPlaygroundRedirect({
   basePath,
   slug,
   lastPathCookie,
+  ssrDeviceType,
+  viewParam,
 }: ResolveCanonicalPlaygroundRedirectInput): Promise<string | null> {
   const caller = await createPlaygroundCaller();
   const project = await resolveProjectSlug(
@@ -117,5 +140,6 @@ export async function resolveCanonicalPlaygroundRedirect({
     return null;
   }
 
-  return buildPlaygroundPath(basePath, canonicalSlug);
+  const path = buildPlaygroundPath(basePath, canonicalSlug);
+  return appendMobileViewQuery(path, canonicalSlug, ssrDeviceType, viewParam);
 }

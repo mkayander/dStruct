@@ -1,11 +1,6 @@
 import type { ReactNode } from "react";
 
-import { ProjectBrowserOverlay } from "#/app/locale-app/ProjectBrowserOverlay";
-
-/** Page tree + global overlays that require SessionProvider (inside SessionGate). */
+/** Page tree inside SessionGate (playground overlays live in playground layout). */
 export const LocaleAppPageShell = ({ children }: { children: ReactNode }) => (
-  <>
-    {children}
-    <ProjectBrowserOverlay />
-  </>
+  <>{children}</>
 );

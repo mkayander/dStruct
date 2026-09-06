@@ -27,6 +27,7 @@ import {
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import React, { type MouseEvent, useState } from "react";
 
@@ -34,12 +35,12 @@ import { MOBILE_APPBAR_HEIGHT } from "#/features/appBar/constants";
 import { selectIsAppBarScrolled } from "#/features/appBar/model/appBarSlice";
 import { SidePanel } from "#/features/menuSidePanel/ui/SidePanel";
 import { useMobilePlaygroundView } from "#/features/playground/hooks/useMobilePlaygroundView";
-import { useProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
+import { usePlaygroundMobileLayout } from "#/features/playground/hooks/usePlaygroundMobileLayout";
+import { useOptionalProjectBrowserContext } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { appFontStackDisplay } from "#/shared/fonts/fontVariables";
 import { useI18nContext, useRoutePathname } from "#/shared/hooks";
 import { useProfileImageUploader } from "#/shared/hooks";
 import { useHasMounted } from "#/shared/hooks/useHasMounted";
-import { useMobileLayout } from "#/shared/hooks/useMobileLayout";
 import { getImageUrl } from "#/shared/lib";
 import { useAppSelector } from "#/store/hooks";
 
@@ -99,22 +100,23 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 }) => {
   const currentPath = useRoutePathname();
   const theme = useTheme();
-  const isMobileLayout = useMobileLayout();
+  const isPlaygroundMobileLayout = usePlaygroundMobileLayout();
   const useCompactNav = useMediaQuery(theme.breakpoints.down("lg"));
   const { LL } = useI18nContext();
   const { enqueueSnackbar } = useSnackbar();
   const hasMounted = useHasMounted();
+  const router = useRouter();
 
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const { openBrowser } = useProjectBrowserContext();
+  const projectBrowser = useOptionalProjectBrowserContext();
   const { currentView } = useMobilePlaygroundView();
 
   const isScrolled = useAppSelector(selectIsAppBarScrolled);
   const session = useSession();
 
   const isPlayground = currentPath.startsWith("/playground");
-  const useMobilePlayground = isMobileLayout && isPlayground;
+  const useMobilePlayground = isPlayground && isPlaygroundMobileLayout;
 
   const pages = [
     {
@@ -151,6 +153,15 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
 
   const handleOpenUserMenu = () => {
     setIsSidePanelOpen(true);
+  };
+
+  const handleOpenProjectBrowser = () => {
+    if (projectBrowser) {
+      projectBrowser.openBrowser();
+      return;
+    }
+
+    router.push("/playground?view=browse");
   };
 
   const toolbarHeight = useMobilePlayground ? MOBILE_APPBAR_HEIGHT : 56;
@@ -298,7 +309,7 @@ export const MainAppBar: React.FC<MainAppBarProps> = ({
                 <Tooltip title={LL.PROJECT_BROWSER()} arrow>
                   <IconButton
                     size={isCompact ? "small" : "medium"}
-                    onClick={openBrowser}
+                    onClick={handleOpenProjectBrowser}
                     color="inherit"
                     aria-label={LL.PROJECT_BROWSER()}
                   >

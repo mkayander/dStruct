@@ -6,7 +6,10 @@ import { usePlaygroundPyodideWarmup } from "#/features/playground/hooks/usePlayg
 import { usePlaygroundRuntimeRelease } from "#/features/playground/hooks/usePlaygroundRuntimeRelease";
 import { usePlaygroundSlugLoadingSync } from "#/features/playground/hooks/usePlaygroundSlugLoadingSync";
 import { PlaygroundPageShell } from "#/features/playground/ui/PlaygroundPageShell";
+import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { prefetchSplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout";
+
+import { ProjectBrowserOverlay } from "#/app/locale-app/ProjectBrowserOverlay";
 
 type PlaygroundLayoutClientProps = {
   children: ReactNode;
@@ -28,5 +31,10 @@ export const PlaygroundLayoutClient: React.FC<PlaygroundLayoutClientProps> = ({
     void prefetchSplitPanelsLayout();
   }, []);
 
-  return <PlaygroundPageShell>{children}</PlaygroundPageShell>;
+  return (
+    <ProjectBrowserProvider>
+      <PlaygroundPageShell>{children}</PlaygroundPageShell>
+      <ProjectBrowserOverlay />
+    </ProjectBrowserProvider>
+  );
 };

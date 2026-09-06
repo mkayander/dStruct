@@ -7,7 +7,6 @@ import React, { type ReactNode } from "react";
 import "symbol-observable";
 
 import { CookieConsentRoot } from "#/features/cookieConsent/ui/CookieConsentRoot";
-import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { type I18nProps } from "#/i18n/getI18nProps";
 import type { Locales } from "#/i18n/i18n-types";
 import { AppShellProviders } from "#/shared/ui/providers/AppShellProviders";
@@ -38,11 +37,9 @@ export const AppRootLayoutClient: React.FC<AppRootLayoutClientProps> = ({
         <AppShellProviders ssrDeviceType={ssrDeviceType}>
           <I18nProvider locale={locale} i18n={i18n}>
             <CookieConsentRoot>
-              <ProjectBrowserProvider>
-                {children}
-                <Analytics />
-                <SpeedInsights />
-              </ProjectBrowserProvider>
+              {children}
+              <Analytics />
+              <SpeedInsights />
             </CookieConsentRoot>
           </I18nProvider>
         </AppShellProviders>

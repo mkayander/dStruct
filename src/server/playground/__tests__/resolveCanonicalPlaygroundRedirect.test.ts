@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockAllBrief = vi.fn();
 const mockGetBySlug = vi.fn();
+const mockLoadCachedPublicProjectsBrief = vi.fn();
 
 vi.mock("#/server/auth/authOptions", () => ({
   authOptions: {},
@@ -20,6 +21,10 @@ vi.mock("#/server/api/context", () => ({
   createInnerTRPCContext: async (opts: unknown) => opts,
 }));
 
+vi.mock("#/server/playground/loadCachedPublicProjectsBrief", () => ({
+  loadCachedPublicProjectsBrief: () => mockLoadCachedPublicProjectsBrief(),
+}));
+
 vi.mock("next-auth", () => ({
   getServerSession: vi.fn().mockResolvedValue(null),
 }));
@@ -27,6 +32,9 @@ vi.mock("next-auth", () => ({
 describe("resolveCanonicalPlaygroundRedirect", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockLoadCachedPublicProjectsBrief.mockResolvedValue([
+      { id: "1", slug: "two-sum", title: "Two Sum" },
+    ]);
     mockAllBrief.mockResolvedValue([
       { id: "1", slug: "two-sum", title: "Two Sum" },
     ]);
@@ -49,6 +57,7 @@ describe("resolveCanonicalPlaygroundRedirect", () => {
     });
 
     expect(redirectPath).toBe("/playground/two-sum/case-1/solution-1");
+    expect(mockLoadCachedPublicProjectsBrief).toHaveBeenCalled();
   });
 
   it("restores the last path from cookie when landing on bare /playground", async () => {
@@ -82,5 +91,21 @@ describe("resolveCanonicalPlaygroundRedirect", () => {
     });
 
     expect(redirectPath).toBeNull();
+  });
+
+  it("appends ?view=code on mobile when canonicalizing a project path", async () => {
+    const { resolveCanonicalPlaygroundRedirect } =
+      await import("#/server/playground/resolveCanonicalPlaygroundRedirect");
+
+    const redirectPath = await resolveCanonicalPlaygroundRedirect({
+      basePath: "/playground",
+      slug: ["two-sum"],
+      lastPathCookie: null,
+      ssrDeviceType: "mobile",
+    });
+
+    expect(redirectPath).toBe(
+      "/playground/two-sum/case-1/solution-1?view=code",
+    );
   });
 });
