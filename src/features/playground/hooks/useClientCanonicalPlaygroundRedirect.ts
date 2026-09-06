@@ -31,7 +31,12 @@ export const useClientCanonicalPlaygroundRedirect = (): void => {
   });
 
   useEffect(() => {
-    if (!route || !routeProjectSlug || !projectQuery.data || redirectingRef.current) {
+    if (
+      !route ||
+      !routeProjectSlug ||
+      !projectQuery.data ||
+      redirectingRef.current
+    ) {
       return;
     }
 
@@ -50,5 +55,5 @@ export const useClientCanonicalPlaygroundRedirect = (): void => {
     route.navigateTo(buildPlaygroundPath(route.basePath, canonicalSlug), {
       replace: true,
     });
-  }, [projectQuery.data, route]);
+  }, [projectQuery.data, route, routeProjectSlug]);
 };
