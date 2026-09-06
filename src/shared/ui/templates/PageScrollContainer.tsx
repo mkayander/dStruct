@@ -6,11 +6,8 @@ import {
 import type { OverlayScrollbarsComponentProps } from "overlayscrollbars-react";
 import React, { type Ref } from "react";
 
-import {
-  appBarSlice,
-  selectIsAppBarScrolled,
-} from "#/features/appBar/model/appBarSlice";
-import { useAppDispatch, useAppSelector } from "#/store/hooks";
+import { appBarSlice } from "#/features/appBar/model/appBarSlice";
+import { useAppDispatch } from "#/store/hooks";
 
 const assignViewportRef = (
   viewportRef: Ref<HTMLDivElement | null> | undefined,
@@ -55,7 +52,6 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const isScrolled = useAppSelector(selectIsAppBarScrolled);
 
   const overlayScrollbarsRef = (
     instance: OverlayScrollbarsComponentRef<"div"> | null,
@@ -91,10 +87,7 @@ export const PageScrollContainer: React.FC<PageScrollContainerProps> = ({
           isPage
             ? {
                 scroll: (_, ev) => {
-                  if (
-                    ev.target instanceof Element &&
-                    ev.target.scrollTop > 0 !== isScrolled
-                  ) {
+                  if (ev.target instanceof Element) {
                     dispatch(
                       appBarSlice.actions.setIsScrolled(
                         ev.target.scrollTop > 0,

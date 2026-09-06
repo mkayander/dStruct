@@ -30,7 +30,7 @@ type PrivacyPageContentProps = {
   homePath: string;
 };
 
-/** Server-rendered privacy policy body (passed into {@link PrivacyPageShell}). */
+/** Server-rendered privacy policy body (marketing layout supplies client chrome). */
 export const PrivacyPageContent: React.FC<PrivacyPageContentProps> = ({
   LL,
   homePath,

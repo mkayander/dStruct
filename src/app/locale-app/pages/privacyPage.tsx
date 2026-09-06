@@ -1,5 +1,4 @@
 import { PrivacyPageContent } from "#/features/privacy/ui/PrivacyPageContent";
-import { PrivacyPageShell } from "#/features/privacy/ui/PrivacyPageShell";
 import { createTranslationFunctions } from "#/i18n/createTranslationFunctions";
 import type { Locales, Translation } from "#/i18n/i18n-types";
 import { baseLocale } from "#/i18n/i18n-util";
@@ -54,9 +53,5 @@ export async function PrivacyPage({ params }: PrivacyPageProps = {}) {
   const LL = createTranslationFunctions(locale, translation);
   const homePath = locale === baseLocale ? "/" : `/${locale}`;
 
-  return (
-    <PrivacyPageShell>
-      <PrivacyPageContent LL={LL} homePath={homePath} />
-    </PrivacyPageShell>
-  );
+  return <PrivacyPageContent LL={LL} homePath={homePath} />;
 }
