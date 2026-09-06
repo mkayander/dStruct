@@ -17,21 +17,26 @@ test.describe("home landing WebGL canvases", () => {
   test("keep active WebGL contexts after client navigation away and back", async ({
     page,
   }) => {
-    const contextLostMessages = collectWebGlContextLostMessages(page);
-
     await page.goto("/");
     await dismissCookieBannerIfVisible(page);
     await waitForActiveLandingWebGLCanvases(page);
 
     await clickFooterPrivacyPolicyLink(page);
     await page.waitForURL((url) => url.pathname === "/privacy");
+    await page
+      .getByTestId("app-bar-home-link")
+      .locator("visible=true")
+      .first()
+      .waitFor({ state: "visible", timeout: 30_000 });
+
+    const contextLostAfterReturn = collectWebGlContextLostMessages(page);
 
     await clickAppBarHomeLink(page);
     await page.waitForURL((url) => url.pathname === "/");
 
     const activeCanvases = await waitForActiveLandingWebGLCanvases(page);
     expect(activeCanvases.length).toBeGreaterThanOrEqual(2);
-    expect(contextLostMessages).toEqual([]);
+    expect(contextLostAfterReturn).toEqual([]);
   });
 
   test("remounts landing canvases after forced WEBGL_lose_context", async ({

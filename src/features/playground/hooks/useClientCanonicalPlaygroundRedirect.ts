@@ -21,19 +21,17 @@ export const useClientCanonicalPlaygroundRedirect = (): void => {
   const redirectingRef = useRef(false);
 
   const routeProjectSlug = route?.slug[0] ?? "";
-  const fallbackProjectSlug = serverInitialData?.allBrief[0]?.slug ?? "";
-  const queryProjectSlug = routeProjectSlug || fallbackProjectSlug;
 
-  const projectQuery = api.project.getBySlug.useQuery(queryProjectSlug, {
-    enabled: Boolean(route && queryProjectSlug),
+  const projectQuery = api.project.getBySlug.useQuery(routeProjectSlug, {
+    enabled: Boolean(route && routeProjectSlug),
     initialData:
-      serverInitialData?.projectBySlug?.slug === queryProjectSlug
+      serverInitialData?.projectBySlug?.slug === routeProjectSlug
         ? serverInitialData.projectBySlug
         : undefined,
   });
 
   useEffect(() => {
-    if (!route || !projectQuery.data || redirectingRef.current) {
+    if (!route || !routeProjectSlug || !projectQuery.data || redirectingRef.current) {
       return;
     }
 
