@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { ProfilePageGate } from "#/features/profile/ui/ProfilePageGate";
 import { ProfilePageSkeleton } from "#/features/profile/ui/ProfilePageSkeleton";
+import { ProfilePageView } from "#/features/profile/ui/ProfilePageView";
 import type { Locales, Translation } from "#/i18n/i18n-types";
 import { baseLocale } from "#/i18n/i18n-util";
+import { authOptions } from "#/server/auth/authOptions";
+import { getProfileInitialData } from "#/server/profile/getProfileInitialData";
 
+import { ApolloHydrationProvider } from "#/app/locale-app/ApolloHydrationProvider";
 import { publicRouteMetadataForLocale } from "#/app/locale-app/createLocaleRouteMetadata";
 import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
 
-/** Profile — instant shell with Suspense fallback; user data client-fetched (P10). */
+/** Profile — instant shell with Suspense fallback; user data prefetched when possible. */
 export const instant = true;
 
 const pickProfileCopy = (translation: Translation) => ({
@@ -60,10 +66,39 @@ type ProfilePageProps = {
   params: Promise<{ userId: string; lang?: string }>;
 };
 
+/** Server gate: validate `userId` and prefetch LeetCode profile when session allows. */
+async function ProfilePageContent({
+  params,
+}: {
+  params: Promise<{ userId: string }>;
+}) {
+  const { userId } = await params;
+  if (!userId.trim()) {
+    notFound();
+  }
+
+  const [session, cookieStore] = await Promise.all([
+    getServerSession(authOptions),
+    cookies(),
+  ]);
+  const leetCodeUsername = session?.user?.leetCodeUsername;
+  const leetCodeSession = cookieStore.get("LEETCODE_SESSION")?.value ?? null;
+  const initialCache = await getProfileInitialData(
+    leetCodeUsername,
+    leetCodeSession,
+  );
+
+  return (
+    <ApolloHydrationProvider initialCache={initialCache}>
+      <ProfilePageView />
+    </ApolloHydrationProvider>
+  );
+}
+
 export function ProfilePage({ params }: ProfilePageProps) {
   return (
     <Suspense fallback={<ProfilePageSkeleton />}>
-      <ProfilePageGate params={params} />
+      <ProfilePageContent params={params} />
     </Suspense>
   );
 }

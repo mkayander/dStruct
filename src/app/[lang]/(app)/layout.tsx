@@ -1,10 +1,8 @@
-import { InteractiveDataProviders } from "#/app/locale-app/InteractiveDataProviders";
-
-/** Apollo GraphQL for daily, playground, and profile (not marketing routes). */
-export default function LangInteractiveLayout({
+/** App routes under `(app)` — Apollo mounts on daily/profile segment layouts only. */
+export default function LangAppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <InteractiveDataProviders>{children}</InteractiveDataProviders>;
+  return children;
 }

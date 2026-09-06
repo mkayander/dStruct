@@ -1,6 +1,8 @@
 import { DailyPageView } from "#/features/homePage/ui/DailyPageView";
 import type { Translation } from "#/i18n/i18n-types";
+import { getDailyInitialData } from "#/server/daily/getDailyInitialData";
 
+import { ApolloHydrationProvider } from "#/app/locale-app/ApolloHydrationProvider";
 import {
   createDefaultLocaleRouteMetadata,
   createLangRouteMetadata,
@@ -22,6 +24,12 @@ export const generateLangDailyMetadata = createLangRouteMetadata(
   pickDailyCopy,
 );
 
-export function DailyPage() {
-  return <DailyPageView />;
+export async function DailyPage() {
+  const initialCache = await getDailyInitialData();
+
+  return (
+    <ApolloHydrationProvider initialCache={initialCache}>
+      <DailyPageView />
+    </ApolloHydrationProvider>
+  );
 }

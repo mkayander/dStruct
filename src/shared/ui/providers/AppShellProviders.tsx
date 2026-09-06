@@ -17,7 +17,7 @@ type AppShellProvidersProps = {
 
 /**
  * Base client providers for all App Router layouts.
- * Apollo mounts in {@link InteractiveDataProviders} on data routes only.
+ * Apollo mounts per-route via {@link ApolloHydrationProvider} on daily/profile pages.
  * SessionProvider is mounted in SessionGate (inside LocaleAppLayout).
  */
 export const AppShellProviders: React.FC<AppShellProvidersProps> = ({
