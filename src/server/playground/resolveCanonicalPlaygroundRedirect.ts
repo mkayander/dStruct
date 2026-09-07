@@ -102,12 +102,11 @@ export async function resolveCanonicalPlaygroundRedirect({
   ssrDeviceType,
   viewParam,
 }: ResolveCanonicalPlaygroundRedirectInput): Promise<string | null> {
-  const restoredPath = getRestorablePlaygroundPath(lastPathCookie, basePath);
-
-  // Bare `/playground` stays indexable for SEO; only restore when a valid cookie exists.
-  if (slug.length === 0 && !restoredPath) {
+  if (viewParam === "browse") {
     return null;
   }
+
+  const restoredPath = getRestorablePlaygroundPath(lastPathCookie, basePath);
 
   const caller = await createPlaygroundCaller();
   const project = await resolveProjectSlug(

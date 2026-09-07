@@ -2,7 +2,6 @@
 
 import React, { type ReactNode, useEffect } from "react";
 
-import { useBarePlaygroundBrowseLanding } from "#/features/playground/hooks/useBarePlaygroundBrowseLanding";
 import { useClientCanonicalPlaygroundRedirect } from "#/features/playground/hooks/useClientCanonicalPlaygroundRedirect";
 import { usePlaygroundPyodideWarmup } from "#/features/playground/hooks/usePlaygroundPyodideWarmup";
 import { usePlaygroundRuntimeRelease } from "#/features/playground/hooks/usePlaygroundRuntimeRelease";
@@ -23,7 +22,6 @@ const PlaygroundRouteEffects: React.FC = () => {
   usePlaygroundPyodideWarmup();
   useClientCanonicalPlaygroundRedirect();
   usePlaygroundSlugLoadingSync();
-  useBarePlaygroundBrowseLanding();
 
   useEffect(() => {
     void prefetchSplitPanelsLayout();

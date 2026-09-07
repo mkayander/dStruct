@@ -6,13 +6,16 @@ import { useEffect, useRef } from "react";
 import { usePlaygroundInitialData } from "#/features/playground/context/PlaygroundInitialDataContext";
 import { usePlaygroundMobileLayout } from "#/features/playground/hooks/usePlaygroundMobileLayout";
 import { api } from "#/shared/api";
+import { useHasMounted } from "#/shared/hooks";
 import { usePlaygroundRoute } from "#/shared/hooks/usePlaygroundRoute";
 import { appendPlaygroundMobileViewQuery } from "#/shared/lib/appendPlaygroundMobileViewQuery";
 import {
   buildCanonicalPlaygroundSlug,
   playgroundSlugKey,
 } from "#/shared/lib/buildCanonicalPlaygroundSlug";
+import { getRestorablePlaygroundPath } from "#/shared/lib/playgroundLastPath";
 import { buildPlaygroundPath } from "#/shared/lib/playgroundRoute";
+import { getLastPlaygroundPath } from "#/shared/local-storage/playgroundPath";
 
 /**
  * Mirrors server canonical redirects for client navigations (instant nav, <Link>).
@@ -23,11 +26,17 @@ export const useClientCanonicalPlaygroundRedirect = (): void => {
   const searchParams = useSearchParams();
   const isMobile = usePlaygroundMobileLayout();
   const serverInitialData = usePlaygroundInitialData();
+  const hasMounted = useHasMounted();
   const redirectingRef = useRef(false);
 
   const routeProjectSlug = route?.slug[0] ?? "";
   const viewParam = searchParams?.get("view") ?? null;
   const routePath = route?.pathname ?? "";
+
+  const allBriefQuery = api.project.allBrief.useQuery(undefined, {
+    initialData: serverInitialData?.allBrief,
+    enabled: Boolean(route && !routeProjectSlug && viewParam !== "browse"),
+  });
 
   const projectQuery = api.project.getBySlug.useQuery(routeProjectSlug, {
     enabled: Boolean(route && routeProjectSlug),
@@ -40,6 +49,58 @@ export const useClientCanonicalPlaygroundRedirect = (): void => {
   useEffect(() => {
     redirectingRef.current = false;
   }, [routePath]);
+
+  // Bare `/playground`: restore last visit or first public project (mirror server redirect).
+  useEffect(() => {
+    if (
+      !route ||
+      routeProjectSlug ||
+      viewParam === "browse" ||
+      redirectingRef.current ||
+      !hasMounted
+    ) {
+      return;
+    }
+
+    const restoredPath = getRestorablePlaygroundPath(
+      getLastPlaygroundPath(),
+      route.basePath,
+    );
+    if (restoredPath) {
+      const restoredTarget = appendPlaygroundMobileViewQuery(restoredPath, {
+        isMobile,
+        hasViewParam: Boolean(viewParam),
+        hasCanonicalSlug: true,
+      });
+      if (restoredTarget !== routePath) {
+        redirectingRef.current = true;
+        route.navigateTo(restoredTarget, { replace: true });
+      }
+      return;
+    }
+
+    const firstProjectSlug = allBriefQuery.data?.[0]?.slug;
+    if (!firstProjectSlug) {
+      return;
+    }
+
+    redirectingRef.current = true;
+    const targetPath = buildPlaygroundPath(route.basePath, [firstProjectSlug]);
+    const pathWithMobileView = appendPlaygroundMobileViewQuery(targetPath, {
+      isMobile,
+      hasViewParam: Boolean(viewParam),
+      hasCanonicalSlug: true,
+    });
+    route.navigateTo(pathWithMobileView, { replace: true });
+  }, [
+    allBriefQuery.data,
+    hasMounted,
+    isMobile,
+    route,
+    routePath,
+    routeProjectSlug,
+    viewParam,
+  ]);
 
   useEffect(() => {
     if (

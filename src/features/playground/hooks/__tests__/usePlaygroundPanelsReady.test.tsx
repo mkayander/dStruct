@@ -75,7 +75,7 @@ describe("usePlaygroundPanelsReady", () => {
     expect(result.current).toBe(true);
   });
 
-  it("returns true on desktop bare /playground after split layout loads", async () => {
+  it("returns false on desktop bare /playground until a project slug is present", async () => {
     mockUsePlaygroundRoute.mockReturnValue({
       basePath: "/playground",
       slug: [],
@@ -90,7 +90,7 @@ describe("usePlaygroundPanelsReady", () => {
     });
 
     await vi.waitFor(() => {
-      expect(result.current).toBe(true);
+      expect(result.current).toBe(false);
     });
   });
 });
