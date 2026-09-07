@@ -1,5 +1,9 @@
+import { Suspense } from "react";
+
 import { DailyApolloIsland } from "#/features/homePage/ui/DailyApolloIsland";
+import { DailyInteractiveSkeleton } from "#/features/homePage/ui/DailyInteractiveSkeleton";
 import { DailyPageContent } from "#/features/homePage/ui/DailyPageContent";
+import { DailyPageSkeleton } from "#/features/homePage/ui/DailyPageSkeleton";
 import { getServerTranslationFunctions } from "#/i18n/getServerTranslationFunctions";
 import type { Translation } from "#/i18n/i18n-types";
 
@@ -29,13 +33,23 @@ type DailyPageProps = {
   params?: Promise<{ lang?: string }>;
 };
 
-export async function DailyPage({ params }: DailyPageProps = {}) {
+async function DailyPageWithShell({ params }: DailyPageProps) {
   const locale = await resolvePageLocale(params);
   const LL = await getServerTranslationFunctions(locale);
 
   return (
     <DailyPageContent LL={LL}>
-      <DailyApolloIsland />
+      <Suspense fallback={<DailyInteractiveSkeleton />}>
+        <DailyApolloIsland />
+      </Suspense>
     </DailyPageContent>
+  );
+}
+
+export function DailyPage({ params }: DailyPageProps = {}) {
+  return (
+    <Suspense fallback={<DailyPageSkeleton />}>
+      <DailyPageWithShell params={params} />
+    </Suspense>
   );
 }
