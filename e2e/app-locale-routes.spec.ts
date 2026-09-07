@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { hasCanonicalPlaygroundSlugPath } from "./helpers/playgroundRoute";
+
 /**
  * Smoke tests for public `app/[lang]/*` routes (locale migration L1).
  *
@@ -48,12 +50,10 @@ test.describe("app/[lang] public routes (non-default locales)", () => {
   }) => {
     await page.goto("/de/playground");
     await page.waitForURL(
-      (url) =>
-        url.pathname.startsWith("/de/playground/") &&
-        url.pathname.split("/").filter(Boolean).length >= 4,
+      (url) => hasCanonicalPlaygroundSlugPath(url.pathname),
       { timeout: 30_000 },
     );
-    await expect(page).toHaveTitle(/Playground/i);
+    await expect(page).toHaveTitle(/\| dStruct$/);
   });
 
   test("de profile is noindex with locale canonical", async ({ page }) => {
