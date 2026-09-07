@@ -11,7 +11,6 @@ import { PlaygroundPageShell } from "#/features/playground/ui/PlaygroundPageShel
 import { ProjectBrowserProvider } from "#/features/project/ui/ProjectBrowser/ProjectBrowserContext";
 import { prefetchSplitPanelsLayout } from "#/shared/ui/templates/SplitPanelsLayout/prefetchSplitPanelsLayout";
 
-import { ApolloHydrationProvider } from "#/app/locale-app/ApolloHydrationProvider";
 import { ProjectBrowserOverlay } from "#/app/locale-app/ProjectBrowserOverlay";
 
 type PlaygroundLayoutClientProps = {
@@ -40,12 +39,10 @@ export const PlaygroundLayoutClient: React.FC<PlaygroundLayoutClientProps> = ({
   children,
 }) => {
   return (
-    <ApolloHydrationProvider initialCache={null}>
-      <ProjectBrowserProvider>
-        <PlaygroundRouteEffects />
-        <PlaygroundPageShell>{children}</PlaygroundPageShell>
-        <ProjectBrowserOverlay />
-      </ProjectBrowserProvider>
-    </ApolloHydrationProvider>
+    <ProjectBrowserProvider>
+      <PlaygroundRouteEffects />
+      <PlaygroundPageShell>{children}</PlaygroundPageShell>
+      <ProjectBrowserOverlay />
+    </ProjectBrowserProvider>
   );
 };

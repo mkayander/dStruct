@@ -18,7 +18,6 @@ import { UserSettings } from "#/features/profile/ui/UserSettings";
 import { useGetUserProfileQuery } from "#/graphql/generated";
 import { useI18nContext } from "#/shared/hooks";
 import { useProfileUserId } from "#/shared/hooks/useProfileUserId";
-import { MainLayout } from "#/shared/ui/templates/MainLayout";
 
 /** Profile dashboard content. Shared by Pages `/profile/[userId]` and App pilot. */
 export const ProfilePageView: React.FC = () => {
@@ -123,32 +122,30 @@ export const ProfilePageView: React.FC = () => {
   };
 
   return (
-    <MainLayout>
-      <Container>
-        {renderAuthStatusSection()}
-        {session.status !== "loading" ? (
-          <>
-            <Typography
-              variant="h5"
-              sx={{
-                my: 3,
-              }}
-            >
-              {LL.USER_DASHBOARD({
-                name: leetCodeUsername || username || "User",
-              })}
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid size={{ xs: 12, md: 6 }}>
-                <UserSettings />
-              </Grid>
-              <Grid size={{ xs: 12, md: 6 }}>
-                <LeetCodeStats userProfile={userProfileQueryResult} />
-              </Grid>
+    <Container>
+      {renderAuthStatusSection()}
+      {session.status !== "loading" ? (
+        <>
+          <Typography
+            variant="h5"
+            sx={{
+              my: 3,
+            }}
+          >
+            {LL.USER_DASHBOARD({
+              name: leetCodeUsername || username || "User",
+            })}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <UserSettings />
             </Grid>
-          </>
-        ) : null}
-      </Container>
-    </MainLayout>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <LeetCodeStats userProfile={userProfileQueryResult} />
+            </Grid>
+          </Grid>
+        </>
+      ) : null}
+    </Container>
   );
 };

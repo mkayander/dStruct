@@ -1,8 +1,12 @@
-/** Profile route — Apollo client is created in profile page with server prefetch. */
+import type { ReactNode } from "react";
+
+import { AppChromeLayoutClient } from "#/features/appChrome/ui/AppChromeLayoutClient";
+
+/** Persistent chrome for profile — Apollo prefetch stays in {@link ProfilePage}. */
 export default function DefaultLocaleProfileLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  return children;
+  return <AppChromeLayoutClient>{children}</AppChromeLayoutClient>;
 }

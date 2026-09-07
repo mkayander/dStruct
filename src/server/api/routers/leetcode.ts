@@ -1,8 +1,27 @@
 import { z } from "zod";
 
-import { createTRPCRouter, protectedProcedure } from "#/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "#/server/api/trpc";
+import { fetchLeetCodeQuestionMetadata } from "#/server/leetcode/fetchLeetCodeQuestionMetadata";
 
 export const leetcodeRouter = createTRPCRouter({
+  getQuestionMetadata: publicProcedure
+    .input(
+      z.object({
+        titleSlug: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const metadata = await fetchLeetCodeQuestionMetadata(input.titleSlug);
+      if (!metadata) {
+        return null;
+      }
+      return metadata;
+    }),
+
   linkUser: protectedProcedure
     .input(
       z.object({
