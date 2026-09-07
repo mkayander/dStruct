@@ -1,3 +1,10 @@
+## [1.392.1](https://github.com/mkayander/dStruct/compare/v1.392.0...v1.392.1) (2026-09-07)
+
+
+### Bug Fixes
+
+* **playground:** redirect bare /playground to default project ([#189](https://github.com/mkayander/dStruct/issues/189)) ([594e084](https://github.com/mkayander/dStruct/commit/594e08437b1ba08eda3a117640895ddc7be08f92))
+
 # [1.392.0](https://github.com/mkayander/dStruct/compare/v1.391.1...v1.392.0) (2026-09-04)
 
 
