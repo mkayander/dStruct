@@ -43,7 +43,9 @@ test.describe("app/[lang] public routes (non-default locales)", () => {
     );
   });
 
-  test("de playground redirects to a canonical project path", async ({ page }) => {
+  test("de playground redirects to a canonical project path", async ({
+    page,
+  }) => {
     await page.goto("/de/playground");
     await page.waitForURL(
       (url) =>
