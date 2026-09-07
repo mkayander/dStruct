@@ -2,6 +2,7 @@
 
 import React, { type ReactNode, useEffect } from "react";
 
+import { useBarePlaygroundBrowseLanding } from "#/features/playground/hooks/useBarePlaygroundBrowseLanding";
 import { useClientCanonicalPlaygroundRedirect } from "#/features/playground/hooks/useClientCanonicalPlaygroundRedirect";
 import { usePlaygroundPyodideWarmup } from "#/features/playground/hooks/usePlaygroundPyodideWarmup";
 import { usePlaygroundRuntimeRelease } from "#/features/playground/hooks/usePlaygroundRuntimeRelease";
@@ -17,6 +18,20 @@ type PlaygroundLayoutClientProps = {
   children: ReactNode;
 };
 
+const PlaygroundRouteEffects: React.FC = () => {
+  usePlaygroundRuntimeRelease();
+  usePlaygroundPyodideWarmup();
+  useClientCanonicalPlaygroundRedirect();
+  usePlaygroundSlugLoadingSync();
+  useBarePlaygroundBrowseLanding();
+
+  useEffect(() => {
+    void prefetchSplitPanelsLayout();
+  }, []);
+
+  return null;
+};
+
 /**
  * Persistent playground segment chrome — survives loading.tsx → page swaps
  * so instant navigations do not remount the header or restart Pyodide.
@@ -24,19 +39,10 @@ type PlaygroundLayoutClientProps = {
 export const PlaygroundLayoutClient: React.FC<PlaygroundLayoutClientProps> = ({
   children,
 }) => {
-  usePlaygroundRuntimeRelease();
-  usePlaygroundPyodideWarmup();
-  useClientCanonicalPlaygroundRedirect();
-  usePlaygroundSlugLoadingSync();
-
-  // Prefetch split layout chunk while route loading skeleton is visible.
-  useEffect(() => {
-    void prefetchSplitPanelsLayout();
-  }, []);
-
   return (
     <ApolloHydrationProvider initialCache={null}>
       <ProjectBrowserProvider>
+        <PlaygroundRouteEffects />
         <PlaygroundPageShell>{children}</PlaygroundPageShell>
         <ProjectBrowserOverlay />
       </ProjectBrowserProvider>

@@ -1,8 +1,12 @@
-/** Daily route — Apollo client is created in {@link DailyPage} with server prefetch. */
+import type { ReactNode } from "react";
+
+import { AppChromeLayoutClient } from "#/features/appChrome/ui/AppChromeLayoutClient";
+
+/** Persistent chrome for daily — Apollo prefetch stays in {@link DailyPage}. */
 export default function DefaultLocaleDailyLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  return children;
+  return <AppChromeLayoutClient>{children}</AppChromeLayoutClient>;
 }

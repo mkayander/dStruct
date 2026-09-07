@@ -17,7 +17,7 @@ import {
   getDefaultCodeSnippets,
   getMergedCodeContent,
 } from "#/features/codeRunner/lib/getDefaultCodeSnippets";
-import { revalidatePlaygroundProjectSeo } from "#/features/playground/lib/playgroundProjectSeoCache";
+import { revalidatePublicPlaygroundProject } from "#/features/playground/lib/playgroundProjectSeoCache";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -565,7 +565,7 @@ export const projectRouter = createTRPCRouter({
         });
 
       if (created.isPublic) {
-        revalidatePlaygroundProjectSeo(created.slug);
+        revalidatePublicPlaygroundProject(created.slug);
       }
 
       return created;
@@ -612,7 +612,7 @@ export const projectRouter = createTRPCRouter({
         });
 
       if (existing?.isPublic || updated.isPublic) {
-        revalidatePlaygroundProjectSeo(existing?.slug ?? updated.slug);
+        revalidatePublicPlaygroundProject(existing?.slug ?? updated.slug);
       }
       if (
         data.slug &&
@@ -620,7 +620,7 @@ export const projectRouter = createTRPCRouter({
         data.slug !== existing.slug &&
         updated.isPublic
       ) {
-        revalidatePlaygroundProjectSeo(data.slug);
+        revalidatePublicPlaygroundProject(data.slug);
       }
 
       return updated;
@@ -646,7 +646,7 @@ export const projectRouter = createTRPCRouter({
       });
 
       if (existing?.isPublic) {
-        revalidatePlaygroundProjectSeo(existing.slug);
+        revalidatePublicPlaygroundProject(existing.slug);
       }
 
       return deleted;
@@ -666,7 +666,7 @@ export const projectRouter = createTRPCRouter({
     });
 
     for (const project of projects) {
-      revalidatePlaygroundProjectSeo(project.slug);
+      revalidatePublicPlaygroundProject(project.slug);
     }
 
     return result;

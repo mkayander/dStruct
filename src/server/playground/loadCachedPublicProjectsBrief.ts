@@ -4,11 +4,11 @@ import {
   calculateIsNew,
   getNewProjectMarginMs,
 } from "#/entities/projectEntity/lib/calculateIsNew";
+import { PUBLIC_PROJECTS_BRIEF_CACHE_TAG } from "#/features/playground/lib/playgroundCacheTags";
 import { db } from "#/server/db/client";
 import type { RouterOutputs } from "#/shared/api";
 
-export const PUBLIC_PROJECTS_BRIEF_CACHE_TAG =
-  "playground-public-projects-brief";
+export { PUBLIC_PROJECTS_BRIEF_CACHE_TAG };
 
 type PublicProjectsBrief = RouterOutputs["project"]["allBrief"];
 

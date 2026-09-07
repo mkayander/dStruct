@@ -4,6 +4,7 @@ import { createInnerTRPCContext } from "#/server/api/context";
 import { createCaller } from "#/server/api/root";
 import { authOptions } from "#/server/auth/authOptions";
 import type { RouterOutputs } from "#/shared/api";
+import { appendPlaygroundMobileViewQuery } from "#/shared/lib/appendPlaygroundMobileViewQuery";
 import {
   buildCanonicalPlaygroundSlug,
   playgroundSlugKey,
@@ -87,15 +88,11 @@ function appendMobileViewQuery(
   ssrDeviceType: SsrDeviceType | undefined,
   viewParam: string | null | undefined,
 ): string {
-  if (ssrDeviceType !== "mobile" || canonicalSlug.length === 0) {
-    return path;
-  }
-
-  if (viewParam) {
-    return path;
-  }
-
-  return `${path}?view=code`;
+  return appendPlaygroundMobileViewQuery(path, {
+    isMobile: ssrDeviceType === "mobile",
+    hasViewParam: Boolean(viewParam),
+    hasCanonicalSlug: canonicalSlug.length > 0,
+  });
 }
 
 export async function resolveCanonicalPlaygroundRedirect({

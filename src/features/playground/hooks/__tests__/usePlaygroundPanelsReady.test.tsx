@@ -74,4 +74,23 @@ describe("usePlaygroundPanelsReady", () => {
 
     expect(result.current).toBe(true);
   });
+
+  it("returns true on desktop bare /playground after split layout loads", async () => {
+    mockUsePlaygroundRoute.mockReturnValue({
+      basePath: "/playground",
+      slug: [],
+      pathname: "/playground",
+      navigateTo: vi.fn(),
+    });
+
+    const store = makeStore();
+
+    const { result } = renderHook(() => usePlaygroundPanelsReady(), {
+      wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
+    });
+
+    await vi.waitFor(() => {
+      expect(result.current).toBe(true);
+    });
+  });
 });
