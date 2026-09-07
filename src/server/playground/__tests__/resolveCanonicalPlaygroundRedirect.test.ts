@@ -46,7 +46,7 @@ describe("resolveCanonicalPlaygroundRedirect", () => {
     });
   });
 
-  it("keeps bare /playground indexable when there is no last-visit cookie", async () => {
+  it("redirects bare /playground to the first public project when there is no last-visit cookie", async () => {
     const { resolveCanonicalPlaygroundRedirect } =
       await import("#/server/playground/resolveCanonicalPlaygroundRedirect");
 
@@ -54,6 +54,21 @@ describe("resolveCanonicalPlaygroundRedirect", () => {
       basePath: "/playground",
       slug: [],
       lastPathCookie: null,
+    });
+
+    expect(redirectPath).toBe("/playground/two-sum/case-1/solution-1");
+    expect(mockLoadCachedPublicProjectsBrief).toHaveBeenCalled();
+  });
+
+  it("keeps bare /playground when view=browse is set", async () => {
+    const { resolveCanonicalPlaygroundRedirect } =
+      await import("#/server/playground/resolveCanonicalPlaygroundRedirect");
+
+    const redirectPath = await resolveCanonicalPlaygroundRedirect({
+      basePath: "/playground",
+      slug: [],
+      lastPathCookie: null,
+      viewParam: "browse",
     });
 
     expect(redirectPath).toBeNull();

@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { hasCanonicalPlaygroundSlugPath } from "./helpers/playgroundRoute";
+
 /**
  * L3b: legacy `/internal-marketing/*` and duplicate `/en/*` URLs 308 to public App routes.
  */
@@ -43,12 +45,15 @@ test.describe("locale migration L3b legacy redirects", () => {
     );
   });
 
-  test("internal-marketing en playground redirects to /playground", async ({
+  test("internal-marketing en playground redirects to canonical playground project", async ({
     page,
   }) => {
     await page.goto("/internal-marketing/en/playground");
-    await expect(page).toHaveURL(/\/playground$/);
-    await expect(page).toHaveTitle(/Playground/i);
+    await page.waitForURL(
+      (url) => hasCanonicalPlaygroundSlugPath(url.pathname),
+      { timeout: 30_000 },
+    );
+    await expect(page).toHaveTitle(/\| dStruct$/);
   });
 
   test("internal-marketing en profile redirects to /profile/:userId", async ({

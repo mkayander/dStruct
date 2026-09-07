@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { hasCanonicalPlaygroundSlugPath } from "./helpers/playgroundRoute";
+
 /**
  * Smoke tests for public `app/[lang]/*` routes (locale migration L1).
  *
@@ -43,16 +45,15 @@ test.describe("app/[lang] public routes (non-default locales)", () => {
     );
   });
 
-  test("de playground landing is indexable with locale canonical", async ({
+  test("de playground redirects to a canonical project path", async ({
     page,
   }) => {
     await page.goto("/de/playground");
-    await expect(page).toHaveTitle(/Playground/i);
-    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-      "href",
-      "https://dstruct.pro/de/playground",
+    await page.waitForURL(
+      (url) => hasCanonicalPlaygroundSlugPath(url.pathname),
+      { timeout: 30_000 },
     );
+    await expect(page).toHaveTitle(/\| dStruct$/);
   });
 
   test("de profile is noindex with locale canonical", async ({ page }) => {

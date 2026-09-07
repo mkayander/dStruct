@@ -51,12 +51,8 @@ export const usePlaygroundPanelsReady = (): boolean => {
       return isInitialized;
     }
 
-    if (!splitLayoutReady) {
+    if (!splitLayoutReady || !projectSlug) {
       return false;
-    }
-
-    if (!projectSlug) {
-      return true;
     }
 
     return isInitialized;
