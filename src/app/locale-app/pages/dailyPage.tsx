@@ -1,17 +1,12 @@
-import { Suspense } from "react";
-
-import { DailyApolloIsland } from "#/features/homePage/ui/DailyApolloIsland";
-import { DailyInteractiveSkeleton } from "#/features/homePage/ui/DailyInteractiveSkeleton";
-import { DailyPageContent } from "#/features/homePage/ui/DailyPageContent";
-import { DailyPageSkeleton } from "#/features/homePage/ui/DailyPageSkeleton";
-import { getServerTranslationFunctions } from "#/i18n/getServerTranslationFunctions";
+import { DailyPageView } from "#/features/homePage/ui/DailyPageView";
 import type { Translation } from "#/i18n/i18n-types";
+import { getDailyInitialData } from "#/server/daily/getDailyInitialData";
 
+import { ApolloHydrationProvider } from "#/app/locale-app/ApolloHydrationProvider";
 import {
   createDefaultLocaleRouteMetadata,
   createLangRouteMetadata,
 } from "#/app/locale-app/createLocaleRouteMetadata";
-import { resolvePageLocale } from "#/app/locale-app/resolvePageLocale";
 
 /** Marketing daily — instant client navigations to sibling routes (L5). */
 export const instant = true;
@@ -29,27 +24,12 @@ export const generateLangDailyMetadata = createLangRouteMetadata(
   pickDailyCopy,
 );
 
-type DailyPageProps = {
-  params?: Promise<{ lang?: string }>;
-};
-
-async function DailyPageWithShell({ params }: DailyPageProps) {
-  const locale = await resolvePageLocale(params);
-  const LL = await getServerTranslationFunctions(locale);
+export async function DailyPage() {
+  const initialCache = await getDailyInitialData();
 
   return (
-    <DailyPageContent LL={LL}>
-      <Suspense fallback={<DailyInteractiveSkeleton />}>
-        <DailyApolloIsland />
-      </Suspense>
-    </DailyPageContent>
-  );
-}
-
-export function DailyPage({ params }: DailyPageProps = {}) {
-  return (
-    <Suspense fallback={<DailyPageSkeleton />}>
-      <DailyPageWithShell params={params} />
-    </Suspense>
+    <ApolloHydrationProvider initialCache={initialCache}>
+      <DailyPageView />
+    </ApolloHydrationProvider>
   );
 }
