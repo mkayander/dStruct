@@ -30,7 +30,6 @@ import { categoryLabels } from "#/entities/category/model/categoryLabels";
 import { getDifficultyValue } from "#/entities/difficulty/lib/getDifficultyValue";
 import { difficultyLabels } from "#/entities/difficulty/model/difficultyLabels";
 import { projectSlice } from "#/features/project/model/projectSlice";
-import { useQuestionTitleLazyQuery } from "#/graphql/generated";
 import {
   ProjectCategory,
   ProjectDifficulty,
@@ -88,10 +87,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const [problemFetchStatus, setProblemFetchStatus] = useState(
     ProblemFetchStatus.IDLE,
   );
-  const [getQuestionTitle, { loading: isQuestionLoading }] =
-    useQuestionTitleLazyQuery({
-      returnPartialData: true,
-    });
 
   const prevEditMode = usePrevious(isEditMode);
 
@@ -106,6 +101,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const createProject = api.project.create.useMutation();
   const editProject = api.project.update.useMutation();
   const deleteProject = api.project.delete.useMutation();
+  const fetchLeetCodeQuestion = api.leetcode.getQuestionMetadata.useMutation();
   const trpcUtils = api.useUtils();
 
   const { setProject, clearSlugs } = usePlaygroundSlugs();
@@ -250,18 +246,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         return;
       }
 
-      const { data } = await getQuestionTitle({
-        variables: {
-          titleSlug,
-        },
+      const question = await fetchLeetCodeQuestion.mutateAsync({
+        titleSlug,
       });
-      if (!data) return;
+      if (!question) {
+        setProblemFetchStatus(ProblemFetchStatus.ERROR);
+        enqueueSnackbar("Failed to fetch problem data!", {
+          variant: "error",
+        });
+        return;
+      }
 
       void formik.setValues({
         ...formik.values,
-        projectName: data.question.title,
-        projectSlug: data.question.titleSlug,
-        projectDifficulty: getDifficultyValue(data.question.difficulty),
+        projectName: question.title,
+        projectSlug: question.titleSlug,
+        projectDifficulty: getDifficultyValue(question.difficulty),
       });
       setProblemFetchStatus(ProblemFetchStatus.SUCCESS);
       enqueueSnackbar("Problem data was successfully fetched 🎉", {
@@ -440,7 +440,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 >
                   <span>
                     <Button
-                      loading={isQuestionLoading}
+                      loading={fetchLeetCodeQuestion.isPending}
                       disabled={Boolean(
                         !formik.values.projectLcLink ||
                         formik.errors.projectLcLink,
