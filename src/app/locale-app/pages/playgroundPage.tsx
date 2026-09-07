@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import React, { Suspense } from "react";
+import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { connection } from "next/server";
 
+import { PlaygroundInitialDataProvider } from "#/features/playground/context/PlaygroundInitialDataContext";
 import { resolvePlaygroundPageSeo } from "#/features/playground/lib/resolvePlaygroundPageSeo";
 import { PlaygroundPageView } from "#/features/playground/ui/PlaygroundPageView";
 import { baseLocale } from "#/i18n/i18n-util";
-import { SplitPanelsLayoutSkeleton } from "#/shared/ui/templates/SplitPanelsLayout/SplitPanelsLayoutSkeleton";
+import { getPlaygroundInitialData } from "#/server/playground/getPlaygroundInitialData";
+import { resolveCanonicalPlaygroundRedirect } from "#/server/playground/resolveCanonicalPlaygroundRedirect";
+import { serializePlaygroundInitialData } from "#/server/playground/serializePlaygroundInitialData";
+import { APP_ROUTER_SSR_DEVICE_TYPE_HEADER } from "#/shared/lib/appRouterLocaleHeader";
+import { LAST_PLAYGROUND_PATH_COOKIE } from "#/shared/lib/playgroundLastPathCookie";
+import { playgroundBasePathForLocale } from "#/shared/lib/playgroundRoute";
+import { parseSsrDeviceTypeHeader } from "#/shared/lib/ssrDevice";
 
 import { publicAppMetadata } from "#/app/locale-app/publicAppMetadata";
 import { resolveLangParamSync } from "#/app/locale-app/resolveLangParam";
 
-/** Playground shell — instant with Suspense fallback skeleton (L5). */
+/** Playground — instant shell; public data prefetched on server; fallback via loading.tsx. */
 export const instant = true;
-
-const PlaygroundFallback: React.FC = () => <SplitPanelsLayoutSkeleton />;
 
 export async function generateDefaultLocalePlaygroundMetadata({
   params,
@@ -60,10 +67,55 @@ export async function generateLangPlaygroundMetadata({
   });
 }
 
-export function PlaygroundPage() {
+type PlaygroundPageProps = {
+  params: Promise<{ slug?: string[]; lang?: string }>;
+  searchParams: Promise<{ view?: string }>;
+};
+
+export async function PlaygroundPage({
+  params,
+  searchParams,
+}: PlaygroundPageProps) {
+  await connection();
+  const { slug, lang: langParam } = await params;
+  const { view: viewParam } = await searchParams;
+  const locale = langParam
+    ? (resolveLangParamSync(langParam) ?? baseLocale)
+    : baseLocale;
+  const basePath = playgroundBasePathForLocale(locale);
+  const cookieStore = await cookies();
+  const rawLastPathCookie =
+    cookieStore.get(LAST_PLAYGROUND_PATH_COOKIE)?.value ?? null;
+  const lastPathCookie = rawLastPathCookie
+    ? decodeURIComponent(rawLastPathCookie)
+    : null;
+
+  const headerList = await headers();
+  const ssrDeviceType =
+    parseSsrDeviceTypeHeader(
+      headerList.get(APP_ROUTER_SSR_DEVICE_TYPE_HEADER),
+    ) ?? "desktop";
+
+  const redirectPath = await resolveCanonicalPlaygroundRedirect({
+    basePath,
+    slug: slug ?? [],
+    lastPathCookie,
+    ssrDeviceType,
+    viewParam,
+  });
+
+  if (redirectPath) {
+    redirect(redirectPath);
+  }
+
+  const [projectSlug, caseSlug, solutionSlug] = slug ?? [];
+  const initialData = serializePlaygroundInitialData(
+    await getPlaygroundInitialData(projectSlug, caseSlug, solutionSlug),
+  );
+
   return (
-    <Suspense fallback={<PlaygroundFallback />}>
+    <PlaygroundInitialDataProvider initialData={initialData}>
       <PlaygroundPageView />
-    </Suspense>
+    </PlaygroundInitialDataProvider>
   );
 }

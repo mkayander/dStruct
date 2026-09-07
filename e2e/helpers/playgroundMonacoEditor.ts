@@ -89,6 +89,8 @@ export async function clickAppBarHomeLink(page: Page): Promise<void> {
     .getByTestId("app-bar-home-link")
     .locator("visible=true");
 
+  await homeLinks.first().waitFor({ state: "visible", timeout: 30_000 });
+
   const linkCount = await homeLinks.count();
   if (linkCount === 0) {
     throw new Error("No visible app bar home link found");

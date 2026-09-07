@@ -49,6 +49,7 @@ import {
   EditorStateIcon,
 } from "#/features/codeRunner/ui/EditorStateIcon";
 import { SolutionSelectBar } from "#/features/codeRunner/ui/SolutionSelectBar";
+import { usePlaygroundInitialData } from "#/features/playground/context/PlaygroundInitialDataContext";
 import {
   projectSlice,
   selectIsEditable,
@@ -121,6 +122,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({
   const saveTimeoutControllerRef = useRef(createLatestOnlyTimeoutController());
 
   const { projectSlug = "", solutionSlug = "" } = usePlaygroundSlugs();
+  const serverInitialData = usePlaygroundInitialData();
   const isEditable = useAppSelector(selectIsEditable);
   const isEditingNodes = useAppSelector(selectIsEditingNodes);
   const error = useAppSelector(selectCallstackError);
@@ -145,6 +147,11 @@ export const CodePanel: React.FC<CodePanelProps> = ({
     },
     {
       enabled: Boolean(selectedProject.data?.id && solutionSlug),
+      initialData:
+        serverInitialData?.solutionBySlug?.slug === solutionSlug &&
+        serverInitialData.projectBySlug?.id === selectedProject.data?.id
+          ? serverInitialData.solutionBySlug
+          : undefined,
     },
   );
 

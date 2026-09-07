@@ -8,9 +8,12 @@ import {
   visiblePlaygroundMonacoEditor,
   waitForPlaygroundMonacoEditor,
 } from "./helpers/playgroundMonacoEditor";
+import {
+  INVERT_BINARY_TREE_CANONICAL_PATH,
+  isInvertBinaryTreeCanonicalPath,
+} from "./helpers/playgroundRoute";
 
-const PLAYGROUND_PYTHON_URL =
-  "/playground/invert-binary-tree?view=code&language=python";
+const PLAYGROUND_PYTHON_URL = `${INVERT_BINARY_TREE_CANONICAL_PATH}?view=code&language=python`;
 
 test.describe("playground runtime navigation", () => {
   test.describe.configure({ mode: "serial" });
@@ -31,7 +34,7 @@ test.describe("playground runtime navigation", () => {
     for (let roundIndex = 0; roundIndex < 3; roundIndex += 1) {
       await page.getByTestId("cta-to-playground").click();
       await page.waitForURL(
-        (url) => url.pathname === "/playground/invert-binary-tree",
+        (url) => isInvertBinaryTreeCanonicalPath(url.pathname),
         { timeout: 30_000 },
       );
       await waitForPlaygroundMonacoEditor(page);
@@ -43,7 +46,7 @@ test.describe("playground runtime navigation", () => {
       await dismissCookieBannerIfVisible(page);
     }
 
-    await page.goto("/playground/invert-binary-tree?view=code");
+    await page.goto(`${INVERT_BINARY_TREE_CANONICAL_PATH}?view=code`);
     await dismissCookieBannerIfVisible(page);
     await waitForPlaygroundMonacoEditor(page);
 

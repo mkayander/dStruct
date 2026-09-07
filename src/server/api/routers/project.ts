@@ -17,6 +17,7 @@ import {
   getDefaultCodeSnippets,
   getMergedCodeContent,
 } from "#/features/codeRunner/lib/getDefaultCodeSnippets";
+import { revalidatePublicPlaygroundProject } from "#/features/playground/lib/playgroundProjectSeoCache";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -525,8 +526,8 @@ export const projectRouter = createTRPCRouter({
         isExample: z.boolean().optional(),
       }),
     )
-    .mutation(async ({ input: data, ctx }) =>
-      ctx.db.playgroundProject
+    .mutation(async ({ input: data, ctx }) => {
+      const created = await ctx.db.playgroundProject
         .create({
           data: {
             ...data,
@@ -561,8 +562,14 @@ export const projectRouter = createTRPCRouter({
             });
           }
           throw error;
-        }),
-    ),
+        });
+
+      if (created.isPublic) {
+        revalidatePublicPlaygroundProject(created.slug);
+      }
+
+      return created;
+    }),
 
   update: projectOwnerProcedure
     .input(
@@ -578,23 +585,46 @@ export const projectRouter = createTRPCRouter({
         isExample: z.boolean().optional(),
       }),
     )
-    .mutation(async ({ input: { projectId: id, ...data }, ctx }) =>
-      ctx.db.playgroundProject
+    .mutation(async ({ input: { projectId: id, ...data }, ctx }) => {
+      const existing = await ctx.db.playgroundProject.findUnique({
+        where: { id },
+        select: { slug: true, isPublic: true },
+      });
+
+      const updated = await ctx.db.playgroundProject
         .update({
           where: {
             id,
           },
           data,
         })
-        .catch((error: any) => {
-          if (error.code === "P2002") {
+        .catch((error: unknown) => {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2002"
+          ) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "You already have a project with this name.",
             });
-          } else throw error;
-        }),
-    ),
+          }
+          throw error;
+        });
+
+      if (existing?.isPublic || updated.isPublic) {
+        revalidatePublicPlaygroundProject(existing?.slug ?? updated.slug);
+      }
+      if (
+        data.slug &&
+        existing &&
+        data.slug !== existing.slug &&
+        updated.isPublic
+      ) {
+        revalidatePublicPlaygroundProject(data.slug);
+      }
+
+      return updated;
+    }),
 
   delete: projectOwnerProcedure
     .input(
@@ -603,22 +633,44 @@ export const projectRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input: { projectId }, ctx }) => {
+      const existing = await ctx.db.playgroundProject.findUnique({
+        where: { id: projectId },
+        select: { slug: true, isPublic: true },
+      });
+
       void clearProjectEntities(projectId);
-      return ctx.db.playgroundProject.delete({
+      const deleted = await ctx.db.playgroundProject.delete({
         where: {
           id: projectId,
         },
       });
+
+      if (existing?.isPublic) {
+        revalidatePublicPlaygroundProject(existing.slug);
+      }
+
+      return deleted;
     }),
 
   // Delete all personal projects
-  deleteAll: protectedProcedure.mutation(async ({ ctx }) =>
-    ctx.db.playgroundProject.deleteMany({
+  deleteAll: protectedProcedure.mutation(async ({ ctx }) => {
+    const projects = await ctx.db.playgroundProject.findMany({
+      where: { userId: ctx.session.user.id, isPublic: true },
+      select: { slug: true },
+    });
+
+    const result = await ctx.db.playgroundProject.deleteMany({
       where: {
         userId: ctx.session.user.id,
       },
-    }),
-  ),
+    });
+
+    for (const project of projects) {
+      revalidatePublicPlaygroundProject(project.slug);
+    }
+
+    return result;
+  }),
 
   getCaseBySlug: publicProcedure
     .input(
@@ -628,11 +680,24 @@ export const projectRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) =>
-      ctx.db.playgroundTestCase.findUniqueOrThrow({
-        where: {
-          projectId_slug: input,
-        },
-      }),
+      ctx.db.playgroundTestCase
+        .findUniqueOrThrow({
+          where: {
+            projectId_slug: input,
+          },
+        })
+        .catch((error: unknown) => {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+          ) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: `Case "${input.slug}" not found.`,
+            });
+          }
+          throw error;
+        }),
     ),
 
   addCase: projectOwnerProcedure
@@ -753,14 +818,27 @@ export const projectRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) => {
-      const solution = await ctx.db.playgroundSolution.findUniqueOrThrow({
-        where: {
-          projectId_slug: input,
-        },
-        include: {
-          project: { select: { category: true } },
-        },
-      });
+      const solution = await ctx.db.playgroundSolution
+        .findUniqueOrThrow({
+          where: {
+            projectId_slug: input,
+          },
+          include: {
+            project: { select: { category: true } },
+          },
+        })
+        .catch((error: unknown) => {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+          ) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: `Solution "${input.slug}" not found.`,
+            });
+          }
+          throw error;
+        });
       const { project, ...rest } = solution;
       const mergedCode = getMergedCodeContent(project.category, {
         code: rest.code,

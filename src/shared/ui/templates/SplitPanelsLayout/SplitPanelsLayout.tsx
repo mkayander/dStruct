@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { Group, Panel, type PanelProps } from "react-resizable-panels";
 
+import { PLAYGROUND_DESKTOP_APP_BAR_HEIGHT } from "#/features/appBar/constants";
 import { ResizeHandle } from "#/shared/ui/atoms/ResizeHandle";
 
 export type SplitPanelsLayoutProps = {
@@ -52,7 +53,7 @@ export const SplitPanelsLayout: React.FC<SplitPanelsLayoutProps> = ({
     <Box
       component={component}
       sx={{
-        height: "calc(100vh - 57px)",
+        height: `calc(100vh - ${PLAYGROUND_DESKTOP_APP_BAR_HEIGHT}px)`,
         width: "100vw",
         px: 1,
         pb: 1,

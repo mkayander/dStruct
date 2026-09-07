@@ -1,10 +1,8 @@
 "use client";
 
-import { ApolloProvider } from "@apollo/client";
 import { SnackbarProvider } from "notistack";
 import React, { type ReactNode } from "react";
 
-import { apolloClient } from "#/graphql/apolloClient";
 import { TrpcProvider } from "#/shared/trpc/TrpcProvider";
 import { SnackbarCloseButton } from "#/shared/ui/atoms/SnackbarCloseButton";
 import { StateThemeProvider } from "#/shared/ui/providers/StateThemeProvider";
@@ -18,7 +16,8 @@ type AppShellProvidersProps = {
 };
 
 /**
- * Shared client provider stack for App Router layouts.
+ * Base client providers for all App Router layouts.
+ * Apollo mounts per-route via {@link ApolloHydrationProvider} on daily/profile pages.
  * SessionProvider is mounted in SessionGate (inside LocaleAppLayout).
  */
 export const AppShellProviders: React.FC<AppShellProvidersProps> = ({
@@ -27,26 +26,23 @@ export const AppShellProviders: React.FC<AppShellProvidersProps> = ({
 }) => (
   <TrpcProvider>
     <ReduxProvider>
-      <ApolloProvider client={apolloClient}>
-        <StateThemeProvider ssrDeviceType={ssrDeviceType}>
-          <SnackbarProvider
-            maxSnack={4}
-            action={(snackbarKey) =>
-              isSnackbarClosable(snackbarKey) ? (
-                <SnackbarCloseButton snackbarKey={snackbarKey} />
-              ) : null
-            }
-            classes={{
-              containerAnchorOriginBottomLeft: "snackbar-mobile-bottom-margin",
-              containerAnchorOriginBottomCenter:
-                "snackbar-mobile-bottom-margin",
-              containerAnchorOriginBottomRight: "snackbar-mobile-bottom-margin",
-            }}
-          >
-            {children}
-          </SnackbarProvider>
-        </StateThemeProvider>
-      </ApolloProvider>
+      <StateThemeProvider ssrDeviceType={ssrDeviceType}>
+        <SnackbarProvider
+          maxSnack={4}
+          action={(snackbarKey) =>
+            isSnackbarClosable(snackbarKey) ? (
+              <SnackbarCloseButton snackbarKey={snackbarKey} />
+            ) : null
+          }
+          classes={{
+            containerAnchorOriginBottomLeft: "snackbar-mobile-bottom-margin",
+            containerAnchorOriginBottomCenter: "snackbar-mobile-bottom-margin",
+            containerAnchorOriginBottomRight: "snackbar-mobile-bottom-margin",
+          }}
+        >
+          {children}
+        </SnackbarProvider>
+      </StateThemeProvider>
     </ReduxProvider>
   </TrpcProvider>
 );

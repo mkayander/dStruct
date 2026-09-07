@@ -6,7 +6,7 @@ import {
   usePathname,
   useSearchParams,
 } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { startTransition, useCallback, useMemo } from "react";
 
 import { parsePlaygroundPathname } from "#/shared/lib/playgroundRoute";
 
@@ -64,11 +64,13 @@ export const usePlaygroundRoute = (): PlaygroundRouteContext | null => {
       options?: PlaygroundNavigateOptions,
     ) => {
       const href = `${targetPath}${buildAppQuerySuffix(options?.omitView)}`;
-      if (options?.replace) {
-        void appRouter.replace(href, { scroll: false });
-        return;
-      }
-      void appRouter.push(href, { scroll: false });
+      startTransition(() => {
+        if (options?.replace) {
+          void appRouter.replace(href, { scroll: false });
+          return;
+        }
+        void appRouter.push(href, { scroll: false });
+      });
     };
 
     return {

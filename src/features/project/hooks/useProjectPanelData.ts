@@ -4,6 +4,7 @@ import { TRPCClientError } from "@trpc/client";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
+import { usePlaygroundInitialData } from "#/features/playground/context/PlaygroundInitialDataContext";
 import {
   projectSlice,
   selectIsEditable,
@@ -20,22 +21,20 @@ import { useAppDispatch, useAppSelector } from "#/store/hooks";
 export const useProjectPanelData = () => {
   const session = useSession();
   const dispatch = useAppDispatch();
-  const playgroundRoute = usePlaygroundRoute();
 
-  const isRouteReady = playgroundRoute !== null;
+  const { projectSlug = "", caseSlug = "", clearSlugs } = usePlaygroundSlugs();
+  const route = usePlaygroundRoute();
 
-  const {
-    projectSlug = "",
-    caseSlug = "",
-    setProject,
-    clearSlugs,
-  } = usePlaygroundSlugs();
+  const serverInitialData = usePlaygroundInitialData();
 
-  const allBrief = api.project.allBrief.useQuery();
   const isEditable = useAppSelector(selectIsEditable);
 
   const selectedProject = api.project.getBySlug.useQuery(projectSlug, {
     enabled: Boolean(projectSlug),
+    initialData:
+      serverInitialData?.projectBySlug?.slug === projectSlug
+        ? serverInitialData.projectBySlug
+        : undefined,
     retry(failureCount, error) {
       if (error instanceof TRPCClientError && error.data.code === "NOT_FOUND") {
         return false;
@@ -58,13 +57,24 @@ export const useProjectPanelData = () => {
 
   const selectedCase = api.project.getCaseBySlug.useQuery(
     { projectId: selectedProject.data?.id || "", slug: caseSlug },
-    { enabled: Boolean(selectedProject.data?.id && caseSlug) },
+    {
+      enabled: Boolean(selectedProject.data?.id && caseSlug),
+      initialData:
+        serverInitialData?.caseBySlug?.slug === caseSlug &&
+        serverInitialData.projectBySlug?.id === selectedProject.data?.id
+          ? serverInitialData.caseBySlug
+          : undefined,
+    },
   );
 
   useEffect(() => {
     if (selectedProject.error) {
       console.error("selectedProject.error: ", selectedProject.error);
-      clearSlugs();
+      if (route) {
+        route.navigateTo(route.basePath, { omitView: true });
+      } else {
+        clearSlugs();
+      }
       return;
     }
     if (!selectedProject.data || !session.data) {
@@ -83,20 +93,33 @@ export const useProjectPanelData = () => {
     clearSlugs,
     dispatch,
     isEditable,
+    route,
     selectedProject.data,
     selectedProject.error,
     session.data,
   ]);
 
-  // On landing with no slug, open the first public project once route + brief list are ready.
+  // Unblock the loading gate when case/solution selection cannot proceed.
   useEffect(() => {
-    if (allBrief.data?.length && isRouteReady && !projectSlug) {
-      const firstProject = allBrief.data[0];
-      if (firstProject) {
-        setProject(firstProject.slug, true);
-      }
+    if (!selectedProject.data || selectedProject.isLoading) {
+      return;
     }
-  }, [allBrief.data, isRouteReady, projectSlug, setProject]);
+
+    const { cases, solutions } = selectedProject.data;
+
+    if (cases.length === 0) {
+      dispatch(projectSlice.actions.loadFinish());
+      return;
+    }
+
+    if (!caseSlug) {
+      return;
+    }
+
+    if (solutions.length === 0) {
+      dispatch(projectSlice.actions.loadFinish());
+    }
+  }, [caseSlug, dispatch, selectedProject.data, selectedProject.isLoading]);
 
   return {
     session,

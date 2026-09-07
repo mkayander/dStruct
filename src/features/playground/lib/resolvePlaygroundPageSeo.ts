@@ -1,7 +1,8 @@
+import { loadProjectSeoFieldsForSession } from "#/features/playground/lib/loadProjectSeoFieldsForSession";
+import { loadPublicProjectSeoFields } from "#/features/playground/lib/loadPublicProjectSeoFields";
 import { createTranslationFunctions } from "#/i18n/createTranslationFunctions";
 import type { Locales } from "#/i18n/i18n-types";
-import { importLocaleAsync } from "#/i18n/i18n-util.async";
-import { db } from "#/server/db/client";
+import { loadI18nForLocale } from "#/i18n/loadI18nForLocale";
 
 export type PlaygroundPageSeo = {
   pageTitle: string;
@@ -13,17 +14,20 @@ export async function resolvePlaygroundPageSeo(
   locale: Locales,
   slugStr?: string,
 ): Promise<PlaygroundPageSeo> {
-  const translation = await importLocaleAsync(locale);
+  const { translations } = await loadI18nForLocale(locale);
+  const translation = translations[locale];
+  if (!translation) {
+    throw new Error(`Missing translations for locale: ${locale}`);
+  }
   const LL = createTranslationFunctions(locale, translation);
 
   let pageTitle: string = LL.PLAYGROUND_SEO_TITLE();
   let pageDescription: string = LL.SITE_SEO_DESCRIPTION();
 
   if (slugStr) {
-    const project = await db.playgroundProject.findUnique({
-      where: { slug: slugStr },
-      select: { title: true, description: true },
-    });
+    const project =
+      (await loadPublicProjectSeoFields(slugStr)) ??
+      (await loadProjectSeoFieldsForSession(slugStr));
     if (project) {
       pageTitle = `${project.title} | dStruct`;
       pageDescription = project.description?.trim()

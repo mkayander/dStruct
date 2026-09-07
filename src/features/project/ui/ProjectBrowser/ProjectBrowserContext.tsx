@@ -266,7 +266,7 @@ const ProjectBrowserContext = createContext<ProjectBrowserContextValue | null>(
  * const { isOpen, openBrowser, searchQuery, setSearchQuery } = useProjectBrowserContext();
  */
 export const useProjectBrowserContext = (): ProjectBrowserContextValue => {
-  const context = useContext(ProjectBrowserContext);
+  const context = useOptionalProjectBrowserContext();
   if (!context) {
     throw new Error(
       "useProjectBrowserContext must be used within ProjectBrowserProvider",
@@ -275,6 +275,10 @@ export const useProjectBrowserContext = (): ProjectBrowserContextValue => {
 
   return context;
 };
+
+/** Returns null outside playground {@link ProjectBrowserProvider}. */
+export const useOptionalProjectBrowserContext =
+  (): ProjectBrowserContextValue | null => useContext(ProjectBrowserContext);
 
 type ProjectBrowserProviderProps = {
   children: ReactNode;

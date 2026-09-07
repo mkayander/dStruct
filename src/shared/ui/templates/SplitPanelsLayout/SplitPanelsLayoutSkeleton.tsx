@@ -1,6 +1,8 @@
 import { Box, Skeleton } from "@mui/material";
 import React from "react";
 
+import { PLAYGROUND_DESKTOP_APP_BAR_HEIGHT } from "#/features/appBar/constants";
+
 function PanelSkeleton({ flex }: { flex: string }) {
   return (
     <Skeleton
@@ -44,7 +46,7 @@ export const SplitPanelsLayoutSkeleton: React.FC = () => {
     <Box
       component="main"
       sx={{
-        height: "calc(100vh - 57px)",
+        height: `calc(100vh - ${PLAYGROUND_DESKTOP_APP_BAR_HEIGHT}px)`,
         width: "100vw",
         px: 1,
         pb: 1,

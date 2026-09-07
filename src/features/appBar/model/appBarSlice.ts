@@ -30,10 +30,15 @@ export const appBarSlice = createSlice({
   name: "APP_BAR",
   initialState,
   reducers: {
-    setIsScrolled: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      isScrolled: action.payload,
-    }),
+    setIsScrolled: (state, action: PayloadAction<boolean>) => {
+      if (state.isScrolled === action.payload) {
+        return state;
+      }
+      return {
+        ...state,
+        isScrolled: action.payload,
+      };
+    },
     setIsLightMode: (state, action: PayloadAction<boolean>) => ({
       ...state,
       isLightMode: action.payload,
