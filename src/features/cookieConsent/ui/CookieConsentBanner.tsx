@@ -24,7 +24,7 @@ type CookieConsentBannerProps = {
   onAcceptAll: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onRejectNonEssential: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  /** Visual surface used by optional dismiss effects (e.g. Thanos disintegrate). */
+  /** Visual surface used by optional dismiss effects (e.g. DOM disintegrate). */
   surfaceRef?: React.Ref<HTMLDivElement>;
 };
 
@@ -95,10 +95,15 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
           sx={{
             alignItems: { xs: "stretch", sm: "center" },
             justifyContent: "space-between",
-            pr: isSettingsView ? 4 : 0,
           }}
         >
-          <Box sx={{ minWidth: 0 }}>
+          <Box
+            sx={{
+              minWidth: 0,
+              // Reserve space for the overlaid close control without narrowing buttons.
+              pr: isSettingsView ? 5 : 0,
+            }}
+          >
             <Typography
               id="cookie-consent-title"
               variant="subtitle2"
