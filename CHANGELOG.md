@@ -1,3 +1,10 @@
+## [1.392.2](https://github.com/mkayander/dStruct/compare/v1.392.1...v1.392.2) (2026-09-20)
+
+
+### Bug Fixes
+
+* **daily:** revert RSC shell to fix React [#412](https://github.com/mkayander/dStruct/issues/412) on instant nav ([#190](https://github.com/mkayander/dStruct/issues/190)) ([305db6f](https://github.com/mkayander/dStruct/commit/305db6ffa0316053fba935e6e1c5baf158add0e9))
+
 ## [1.392.1](https://github.com/mkayander/dStruct/compare/v1.392.0...v1.392.1) (2026-09-07)
 
 
