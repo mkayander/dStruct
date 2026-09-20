@@ -6,31 +6,43 @@ import {
   QuestionOfTodayDocument,
 } from "#/graphql/generated";
 
+const DAILY_PREFETCH_TIMEOUT_MS = 10_000;
+
+async function fetchDailyInitialData(): Promise<NormalizedCacheObject | null> {
+  const client = createApolloClient({ ssr: true });
+
+  const todayResult = await client.query({
+    query: QuestionOfTodayDocument,
+    fetchPolicy: "no-cache",
+  });
+
+  const titleSlug =
+    todayResult.data.activeDailyCodingChallengeQuestion?.question?.titleSlug;
+
+  if (titleSlug) {
+    await client.query({
+      query: QuestionDataDocument,
+      variables: { titleSlug },
+      fetchPolicy: "no-cache",
+    });
+  }
+
+  return client.cache.extract();
+}
+
 /**
  * Prefetch today's LeetCode daily question for RSC + Apollo cache hydration.
  * Returns null when upstream GraphQL is unavailable (client hooks refetch).
  */
 export async function getDailyInitialData(): Promise<NormalizedCacheObject | null> {
-  const client = createApolloClient({ ssr: true });
-
   try {
-    const todayResult = await client.query({
-      query: QuestionOfTodayDocument,
-      fetchPolicy: "no-cache",
-    });
-
-    const titleSlug =
-      todayResult.data.activeDailyCodingChallengeQuestion?.question?.titleSlug;
-
-    if (titleSlug) {
-      await client.query({
-        query: QuestionDataDocument,
-        variables: { titleSlug },
-        fetchPolicy: "no-cache",
-      });
-    }
-
-    return client.cache.extract();
+    const result = await Promise.race([
+      fetchDailyInitialData(),
+      new Promise<null>((resolve) => {
+        setTimeout(() => resolve(null), DAILY_PREFETCH_TIMEOUT_MS);
+      }),
+    ]);
+    return result;
   } catch (error) {
     console.warn(
       "getDailyInitialData: LeetCode GraphQL prefetch failed",
