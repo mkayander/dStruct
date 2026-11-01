@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SnackbarProvider } from "notistack";
 import type * as Notistack from "notistack";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import type * as SharedHooks from "#/shared/hooks";
@@ -125,6 +126,54 @@ describe("CookieConsentBannerWithDismissEffect", () => {
     expect(onBeginDismiss).not.toHaveBeenCalled();
     expect(disintegrateMock).not.toHaveBeenCalled();
     expect(onCompleteDismiss).not.toHaveBeenCalled();
+  });
+
+  it("keeps settings view frozen while close dismiss animation is pending", async () => {
+    disintegrateMock.mockClear();
+    const user = userEvent.setup();
+
+    const SettingsCloseHarness = () => {
+      const [isSettingsView, setIsSettingsView] = useState(true);
+
+      return (
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider>
+            <CookieConsentBannerWithDismissEffect
+              isSettingsView={isSettingsView}
+              onAcceptAll={vi.fn(() => true)}
+              onRejectNonEssential={vi.fn()}
+              onClose={() => {
+                setIsSettingsView(false);
+              }}
+              onBeginDismiss={vi.fn()}
+              onCompleteDismiss={vi.fn()}
+            />
+          </SnackbarProvider>
+        </ThemeProvider>
+      );
+    };
+
+    render(<SettingsCloseHarness />);
+
+    await user.click(
+      screen.getByRole("button", { name: "COOKIE_SETTINGS_CLOSE" }),
+    );
+
+    expect(screen.getByText("COOKIE_SETTINGS_TITLE")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "COOKIE_SETTINGS_CLOSE" }),
+    ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(disintegrateMock).toHaveBeenCalledTimes(1);
+    });
+
+    resolveDisintegrate?.();
+    await waitFor(() => {
+      expect(
+        screen.queryByText("COOKIE_SETTINGS_TITLE"),
+      ).not.toBeInTheDocument();
+    });
   });
 
   it("still completes dismiss and shows a warning when the animation fails", async () => {
