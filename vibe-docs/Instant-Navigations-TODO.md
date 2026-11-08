@@ -14,6 +14,7 @@
 - [x] **Stay on `next@16.2.12`** until Vercel + Pages `i18n` API routing is fixed
 - [x] Preview smoke green on 16.3.x before enabling Instant Nav flags (merged PR #171 — `next@16.3.2`)
 - [x] **`next@16.3.2`** on main — Vercel preview smoke + e2e passed merge gate
+- [x] **`next@16.4.3`** on PR #196 — Vercel preview e2e green (security CVEs; supersedes stale Dependabot PRs)
 
 ## Phase 1b — Locale migration (see `Locale-Migration-Design.md`)
 

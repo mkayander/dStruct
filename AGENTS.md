@@ -37,7 +37,7 @@ Before implementing Instant Navigations, read:
 - `node_modules/next/dist/docs/01-app/02-guides/migrating-to-cache-components.md`
 - `node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/cacheComponents.md`
 
-**16.3 on Vercel:** stay on the pinned `next` version in `package.json` until preview `/api/*` routes return correct `x-matched-path` (not `/en/404`). See design doc Phase 1.
+**Next on Vercel:** keep `next`, `@next/eslint-plugin-next`, and `@next/playwright` on the same minor. Before bumping past the pinned version in `package.json`, run preview smoke / e2e with `PLAYWRIGHT_EXPECT_MATCHED_PATH=true` so `/api/*` does not return `x-matched-path: /en/404` (see design doc Phase 1). Security patches within a validated minor (e.g. **16.4.x** after PR #196) are fine when CI e2e is green.
 
 **Pilot order when migrating:** marketing routes (`/`, `/privacy`, `/daily`) under `app/[lang]/` before `/playground`.
 
